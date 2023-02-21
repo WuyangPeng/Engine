@@ -12,7 +12,7 @@
 
 #include "System/SystemOutput/Fwd/SystemOutputFlagsFwd.h"
 #include "System/Windows/Using/WindowsUsing.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 #include <random>
 #include <vector>

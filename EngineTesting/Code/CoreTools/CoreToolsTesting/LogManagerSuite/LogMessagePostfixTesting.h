@@ -11,13 +11,20 @@
 #define CORE_TOOLS_LOG_MANAGER_SUITE_LOG_MESSAGE_POSTFIX_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class LogMessagePostfixTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(LogMessagePostfixTesting);
+        using ClassType = LogMessagePostfixTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit LogMessagePostfixTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

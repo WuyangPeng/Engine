@@ -11,13 +11,20 @@
 #define CORE_TOOLS_STATE_MACHINE_SUITE_STATE_ENTITY_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class StateEntityTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(StateEntityTesting);
+        using ClassType = StateEntityTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit StateEntityTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

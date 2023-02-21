@@ -1,21 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:23)
+///	引擎测试版本：0.9.0.2 (2023/02/16 20:54)
 
 #include "NameMacro.h"
 #include "NameMacroImpl.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::make_shared;
-using std::string;
-
-CoreTools::NameMacro::NameMacro(const string& name)
-    : ParentType{ name }, impl{ 0 }
+CoreTools::NameMacro::NameMacro(const std::string& name)
+    : ParentType{ name }, impl{ ImplCreateUseDefaultConstruction::Default }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -26,14 +24,14 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, NameMacro)
 
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(CoreTools, NameMacro)
 
-CoreTools::NameMacro::NameMacroSharedPtr CoreTools::NameMacro::Create(const string& name)
+CoreTools::NameMacro::NameMacroSharedPtr CoreTools::NameMacro::Create(const std::string& name)
 {
-    return make_shared<ClassType>(name);
+    return std::make_shared<ClassType>(name);
 }
 
 CoreTools::ObjectInterfaceSharedPtr CoreTools::NameMacro::CloneObject() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return make_shared<ClassType>(*this);
+    return std::make_shared<ClassType>(*this);
 }

@@ -76,7 +76,7 @@ bool Rendering::TestIntersection(const Bound<T>& lhsBound,
 }
 
 template <typename T>
-bool Rendering::Approximate(const Bound<T>& lhs, const Bound<T>& rhs, const float epsilon) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+bool Rendering::Approximate(const Bound<T>& lhs, const Bound<T>& rhs, const float epsilon) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     if (Approximate(lhs.GetCenter(), rhs.GetCenter(), epsilon) && Mathematics::Math<T>::Approximate(lhs.GetRadius(), rhs.GetRadius(), epsilon))
         return true;

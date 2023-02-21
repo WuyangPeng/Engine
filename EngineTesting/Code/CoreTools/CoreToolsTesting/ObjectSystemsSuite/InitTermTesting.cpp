@@ -10,12 +10,22 @@
 #include "InitTermTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 bool CoreTools::InitTermTesting::terminateCall{ false };
 bool CoreTools::InitTermTesting::initializeCall{ false };
 bool CoreTools::InitTermTesting::testBegin{ false };
+CoreTools::InitTermTesting::InitTermTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, InitTermTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, InitTermTesting)
+
+void CoreTools::InitTermTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::InitTermTesting::MainTest()
 {

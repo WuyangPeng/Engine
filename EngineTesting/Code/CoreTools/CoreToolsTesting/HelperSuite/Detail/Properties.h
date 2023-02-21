@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:15)
+///	引擎测试版本：0.9.0.2 (2023/02/16 20:47)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_PROPERTIES_H
 #define CORE_TOOLS_HELPER_SUITE_PROPERTIES_H
@@ -44,11 +44,11 @@ namespace CoreTools
         void SetValue5(const std::string& value);
 
     public:
-        NODISCARD const std::string GetValue2() const;
+        NODISCARD std::string GetValue2() const;
         NODISCARD const std::string& GetValue6() const noexcept;
         void SetValue7(const std::string& value);
-        NODISCARD const std::string GetValue7() const;
-        NODISCARD const std::string GetValue8() const;
+        NODISCARD std::string GetValue7() const;
+        NODISCARD std::string GetValue8() const;
         void SetValue8(const std::string& value);
 
         TCRE_METHOD_PROPERTY_GET(int, const int&, ClassType, GetValue0, Value0, true);

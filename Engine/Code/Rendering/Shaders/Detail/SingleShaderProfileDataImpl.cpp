@@ -116,10 +116,10 @@ int Rendering::SingleShaderProfileDataImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(baseRegisters);
+    auto size = CoreTools::GetStreamSize(baseRegisters);
 
-    size += CORE_TOOLS_STREAM_SIZE(textureUnits);
-    size += CORE_TOOLS_STREAM_SIZE(programs);
+    size += CoreTools::GetStreamSize(textureUnits);
+    size += CoreTools::GetStreamSize(programs);
 
     return size;
 }

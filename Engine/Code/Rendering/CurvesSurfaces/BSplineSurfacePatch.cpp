@@ -336,37 +336,37 @@ int Rendering::BSplineSurfacePatch::GetStreamingSize() const
     const auto degree0 = patch->GetDegree(0);
     const auto degree1 = patch->GetDegree(1);
     constexpr auto loop0 = false;
-    size += CORE_TOOLS_STREAM_SIZE(numCtrlPoints0);
-    size += CORE_TOOLS_STREAM_SIZE(numCtrlPoints1);
-    size += CORE_TOOLS_STREAM_SIZE(degree0);
-    size += CORE_TOOLS_STREAM_SIZE(degree1);
-    size += 2 * CORE_TOOLS_STREAM_SIZE(loop0);  // loop0, loop1
+    size += CoreTools::GetStreamSize(numCtrlPoints0);
+    size += CoreTools::GetStreamSize(numCtrlPoints1);
+    size += CoreTools::GetStreamSize(degree0);
+    size += CoreTools::GetStreamSize(degree1);
+    size += 2 * CoreTools::GetStreamSize(loop0);  // loop0, loop1
 
     switch (constructor)
     {
         case 1:
         {
-            size += 2 * CORE_TOOLS_STREAM_SIZE(loop0);  // open0, open1
+            size += 2 * CoreTools::GetStreamSize(loop0);  // open0, open1
         }
         break;
         case 2:
         {
-            size += CORE_TOOLS_STREAM_SIZE(loop0);  // open0
+            size += CoreTools::GetStreamSize(loop0);  // open0
 
-            size += (numCtrlPoints1 - degree1 - 1) * CORE_TOOLS_STREAM_SIZE(float{});  // knot1[]
+            size += (numCtrlPoints1 - degree1 - 1) * CoreTools::GetStreamSize(float{});  // knot1[]
         }
         break;
         case 3:
         {
-            size += (numCtrlPoints0 - degree0 - 1) * CORE_TOOLS_STREAM_SIZE(float{});  // knot0[]
+            size += (numCtrlPoints0 - degree0 - 1) * CoreTools::GetStreamSize(float{});  // knot0[]
 
-            size += CORE_TOOLS_STREAM_SIZE(loop0);  // open1
+            size += CoreTools::GetStreamSize(loop0);  // open1
         }
         break;
         case 4:
         {
-            size += (numCtrlPoints0 - degree0 - 1) * CORE_TOOLS_STREAM_SIZE(float{});  // knot0[]
-            size += (numCtrlPoints1 - degree1 - 1) * CORE_TOOLS_STREAM_SIZE(float{});  // knot1[]
+            size += (numCtrlPoints0 - degree0 - 1) * CoreTools::GetStreamSize(float{});  // knot0[]
+            size += (numCtrlPoints1 - degree1 - 1) * CoreTools::GetStreamSize(float{});  // knot1[]
         }
         break;
         default:

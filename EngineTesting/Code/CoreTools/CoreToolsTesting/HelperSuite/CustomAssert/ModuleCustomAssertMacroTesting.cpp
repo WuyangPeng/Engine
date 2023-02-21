@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 ///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
 ///
 ///	±Í◊º£∫std:c++20
-///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/19 11:22)
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.9.0.2 (2023/02/19 20:07)
 
 #include "ModuleCustomAssertMacroTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -16,7 +16,7 @@
 CoreTools::ModuleCustomAssertMacroTesting::ModuleCustomAssertMacroTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ModuleCustomAssertMacroTesting)
@@ -79,24 +79,24 @@ void CoreTools::ModuleCustomAssertMacroTesting::LevelTest()
 
 void CoreTools::ModuleCustomAssertMacroTesting::ConstexprTest() noexcept
 {
-    static_assert(SYSTEM_ASSERT_LEVEL == g_SystemAssert);
-    static_assert(CORE_TOOLS_ASSERT_LEVEL == g_CoreToolsAssert);
-    static_assert(NETWORK_ASSERT_LEVEL == g_NetworkAssert);
-    static_assert(DATABASE_ASSERT_LEVEL == g_DatabaseAssert);
-    static_assert(SCRIPT_ASSERT_LEVEL == g_ScriptAssert);
-    static_assert(MATHEMATICS_ASSERT_LEVEL == g_MathematicsAssert);
-    static_assert(SOUND_EFFECT_ASSERT_LEVEL == g_SoundEffectAssert);
-    static_assert(INPUT_OUTPUT_ASSERT_LEVEL == g_InputoOutputAssert);
-    static_assert(RESOURCE_MANAGER_ASSERT_LEVEL == g_ResourceManagerAssert);
-    static_assert(RENDERING_ASSERT_LEVEL == g_RenderingAssert);
-    static_assert(PHYSICS_ASSERT_LEVEL == g_PhysicsAssert);
-    static_assert(IMAGICS_ASSERT_LEVEL == g_ImagicsAssert);
-    static_assert(ANIMATION_ASSERT_LEVEL == g_AnimationAssert);
-    static_assert(ARTIFICIAL_INTELLEGENCE_ASSERT_LEVEL == g_ArtificialIntellegenceAssert);
-    static_assert(USER_INTERFACE_ASSERT_LEVEL == g_UserInterfaceAssert);
-    static_assert(ASSIST_TOOLS_ASSERT_LEVEL == g_AssistToolsAssert);
-    static_assert(FRAMEWORK_ASSERT_LEVEL == g_FrameworkAssert);
-    static_assert(USER_ASSERT_LEVEL == g_UserAssert);
+    static_assert(SYSTEM_ASSERT_LEVEL == gSystemAssert);
+    static_assert(CORE_TOOLS_ASSERT_LEVEL == gCoreToolsAssert);
+    static_assert(NETWORK_ASSERT_LEVEL == gNetworkAssert);
+    static_assert(DATABASE_ASSERT_LEVEL == gDatabaseAssert);
+    static_assert(SCRIPT_ASSERT_LEVEL == gScriptAssert);
+    static_assert(MATHEMATICS_ASSERT_LEVEL == gMathematicsAssert);
+    static_assert(SOUND_EFFECT_ASSERT_LEVEL == gSoundEffectAssert);
+    static_assert(INPUT_OUTPUT_ASSERT_LEVEL == gInputoOutputAssert);
+    static_assert(RESOURCE_MANAGER_ASSERT_LEVEL == gResourceManagerAssert);
+    static_assert(RENDERING_ASSERT_LEVEL == gRenderingAssert);
+    static_assert(PHYSICS_ASSERT_LEVEL == gPhysicsAssert);
+    static_assert(IMAGICS_ASSERT_LEVEL == gImagicsAssert);
+    static_assert(ANIMATION_ASSERT_LEVEL == gAnimationAssert);
+    static_assert(ARTIFICIAL_INTELLEGENCE_ASSERT_LEVEL == gArtificialIntellegenceAssert);
+    static_assert(USER_INTERFACE_ASSERT_LEVEL == gUserInterfaceAssert);
+    static_assert(ASSIST_TOOLS_ASSERT_LEVEL == gAssistToolsAssert);
+    static_assert(FRAMEWORK_ASSERT_LEVEL == gFrameworkAssert);
+    static_assert(USER_ASSERT_LEVEL == gUserAssert);
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::SystemTest()
@@ -115,6 +115,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::SystemTest()
 
     SYSTEM_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     SYSTEM_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    SYSTEM_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    SYSTEM_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::CoreToolsTest()
@@ -133,6 +136,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::CoreToolsTest()
 
     CORE_TOOLS_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     CORE_TOOLS_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    CORE_TOOLS_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    CORE_TOOLS_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::NetworkTest()
@@ -151,6 +157,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::NetworkTest()
 
     NETWORK_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     NETWORK_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    NETWORK_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    NETWORK_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::DatabaseTest()
@@ -169,6 +178,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::DatabaseTest()
 
     DATABASE_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     DATABASE_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    DATABASE_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    DATABASE_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::ScriptTest()
@@ -187,6 +199,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::ScriptTest()
 
     SCRIPT_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     SCRIPT_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    SCRIPT_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    SCRIPT_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::MathematicsTest()
@@ -205,6 +220,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::MathematicsTest()
 
     MATHEMATICS_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     MATHEMATICS_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    MATHEMATICS_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    MATHEMATICS_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::SoundEffectTest()
@@ -223,6 +241,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::SoundEffectTest()
 
     SOUND_EFFECT_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     SOUND_EFFECT_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    SOUND_EFFECT_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    SOUND_EFFECT_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::InputOutputTest()
@@ -241,6 +262,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::InputOutputTest()
 
     INPUT_OUTPUT_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     INPUT_OUTPUT_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    INPUT_OUTPUT_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    INPUT_OUTPUT_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::ResourceManagerTest()
@@ -259,6 +283,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::ResourceManagerTest()
 
     RESOURCE_MANAGER_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     RESOURCE_MANAGER_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    RESOURCE_MANAGER_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    RESOURCE_MANAGER_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::RenderingTest()
@@ -277,6 +304,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::RenderingTest()
 
     RENDERING_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     RENDERING_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    RENDERING_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    RENDERING_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::PhysicsTest()
@@ -295,6 +325,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::PhysicsTest()
 
     PHYSICS_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     PHYSICS_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    PHYSICS_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    PHYSICS_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::ImagicsTest()
@@ -313,6 +346,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::ImagicsTest()
 
     IMAGICS_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     IMAGICS_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    IMAGICS_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    IMAGICS_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::AnimationTest()
@@ -331,6 +367,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::AnimationTest()
 
     ANIMATION_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     ANIMATION_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    ANIMATION_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    ANIMATION_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::ArtificialIntellegenceTest()
@@ -349,6 +388,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::ArtificialIntellegenceTest()
 
     ARTIFICIAL_INTELLEGENCE_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     ARTIFICIAL_INTELLEGENCE_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    ARTIFICIAL_INTELLEGENCE_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    ARTIFICIAL_INTELLEGENCE_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::UserInterfaceTest()
@@ -367,6 +409,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::UserInterfaceTest()
 
     USER_INTERFACE_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     USER_INTERFACE_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    USER_INTERFACE_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    USER_INTERFACE_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::AssistToolsTest()
@@ -385,6 +430,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::AssistToolsTest()
 
     ASSIST_TOOLS_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     ASSIST_TOOLS_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    ASSIST_TOOLS_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    ASSIST_TOOLS_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::FrameworkTest()
@@ -403,6 +451,9 @@ void CoreTools::ModuleCustomAssertMacroTesting::FrameworkTest()
 
     FRAMEWORK_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     FRAMEWORK_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    FRAMEWORK_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    FRAMEWORK_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }
 
 void CoreTools::ModuleCustomAssertMacroTesting::UserTest()
@@ -421,4 +472,7 @@ void CoreTools::ModuleCustomAssertMacroTesting::UserTest()
 
     USER_ASSERTION_4(true, "∂œ—‘≤‚ ‘£°");
     USER_ASSERTION_USE_FUNCTION_DESCRIBED_4(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
+
+    USER_ASSERTION_DEBUG(true, "∂œ—‘≤‚ ‘£°");
+    USER_ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(true, CORE_TOOLS_FUNCTION_DESCRIBED, "∂œ—‘≤‚ ‘£°");
 }

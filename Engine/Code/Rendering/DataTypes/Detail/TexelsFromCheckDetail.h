@@ -45,7 +45,7 @@ size_t Rendering::TexelsFromCheck<Format>::GetOutTexelsLength() const noexcept
 }
 
 template <Rendering::TextureFormat Format>
-void Rendering::TexelsFromCheck<Format>::CheckInTexels() noexcept(g_Assert < 1 || g_RenderingAssert < 1)
+void Rendering::TexelsFromCheck<Format>::CheckInTexels() noexcept(gAssert < 1 || gRenderingAssert < 1)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -53,7 +53,7 @@ void Rendering::TexelsFromCheck<Format>::CheckInTexels() noexcept(g_Assert < 1 |
 }
 
 template <Rendering::TextureFormat Format>
-void Rendering::TexelsFromCheck<Format>::CheckOutTexels(MAYBE_UNUSED size_t outTexelsSize) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::TexelsFromCheck<Format>::CheckOutTexels(MAYBE_UNUSED size_t outTexelsSize) noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_1;
 

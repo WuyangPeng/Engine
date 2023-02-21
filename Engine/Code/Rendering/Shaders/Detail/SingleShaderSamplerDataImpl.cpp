@@ -162,14 +162,14 @@ int Rendering::SingleShaderSamplerDataImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(samplerName);
+    auto size = CoreTools::GetStreamSize(samplerName);
 
-    size += CORE_TOOLS_STREAM_SIZE(samplerType);
-    size += CORE_TOOLS_STREAM_SIZE(filter);
-    size += CORE_TOOLS_STREAM_SIZE(coordinates.at(0)) * samplerCoordinateSize;
-    size += CORE_TOOLS_STREAM_SIZE(lodBias);
-    size += CORE_TOOLS_STREAM_SIZE(anisotropy);
-    size += CORE_TOOLS_STREAM_SIZE(borderColor);
+    size += CoreTools::GetStreamSize(samplerType);
+    size += CoreTools::GetStreamSize(filter);
+    size += CoreTools::GetStreamSize(coordinates.at(0)) * samplerCoordinateSize;
+    size += CoreTools::GetStreamSize(lodBias);
+    size += CoreTools::GetStreamSize(anisotropy);
+    size += CoreTools::GetStreamSize(borderColor);
 
     return size;
 }

@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::Vector2OrthonormalBasis<Real>::Vector2OrthonormalBasis(const Vector2& nonzeroVector, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Vector2OrthonormalBasis<Real>::Vector2OrthonormalBasis(const Vector2& nonzeroVector, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : uVector{ nonzeroVector }, vVector{}, epsilon{ epsilon }
 {
     MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(epsilon), "输入必须是非零向量！");
@@ -28,7 +28,7 @@ Mathematics::Vector2OrthonormalBasis<Real>::Vector2OrthonormalBasis(const Vector
 }
 
 template <typename Real>
-void Mathematics::Vector2OrthonormalBasis<Real>::Generate() noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Vector2OrthonormalBasis<Real>::Generate() noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     uVector.Normalize(epsilon);
     vVector = Vector2Tools::GetPerp(uVector);

@@ -13,8 +13,19 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/Object.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::OutTopLevelTesting::OutTopLevelTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, OutTopLevelTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, OutTopLevelTesting)
+
+void CoreTools::OutTopLevelTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::OutTopLevelTesting::MainTest()
 {

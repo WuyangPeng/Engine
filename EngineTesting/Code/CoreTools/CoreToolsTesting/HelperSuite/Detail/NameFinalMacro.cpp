@@ -1,20 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:23)
+///	引擎测试版本：0.9.0.2 (2023/02/13 23:06)
 
 #include "NameFinalMacro.h"
 #include "TestingObject.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::make_shared;
-using std::string;
-
-CoreTools::NameFinalMacro::NameFinalMacro(const string& name)
+CoreTools::NameFinalMacro::NameFinalMacro(const std::string& name)
     : ParentType{ name }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -26,46 +23,42 @@ CoreTools::ObjectInterfaceSharedPtr CoreTools::NameFinalMacro::CloneObject() con
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return make_shared<ClassType>(*this);
+    return std::make_shared<ClassType>(*this);
 }
 
-CoreTools::ObjectSharedPtr CoreTools::NameFinalMacro::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr CoreTools::NameFinalMacro::GetObjectByName(const std::string& name)
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return make_shared<TestingObject>(name);
+    return std::make_shared<TestingObject>(name);
 }
 
-CoreTools::NameFinalMacro::ObjectSharedPtrContainer CoreTools::NameFinalMacro::GetAllObjectsByName(const string& name)
+CoreTools::NameFinalMacro::ObjectSharedPtrContainer CoreTools::NameFinalMacro::GetAllObjectsByName(const std::string& name)
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-    ObjectSharedPtrContainer result{};
-
-    result.emplace_back(make_shared<TestingObject>(name));
+    ObjectSharedPtrContainer result{ std::make_shared<TestingObject>(name) };
 
     return result;
 }
 
-CoreTools::ConstObjectSharedPtr CoreTools::NameFinalMacro::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr CoreTools::NameFinalMacro::GetConstObjectByName(const std::string& name) const
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return make_shared<TestingObject>(name);
+    return std::make_shared<TestingObject>(name);
 }
 
-CoreTools::NameFinalMacro::ConstObjectSharedPtrContainer CoreTools::NameFinalMacro::GetAllConstObjectsByName(const string& name) const
+CoreTools::NameFinalMacro::ConstObjectSharedPtrContainer CoreTools::NameFinalMacro::GetAllConstObjectsByName(const std::string& name) const
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    ConstObjectSharedPtrContainer result{};
-
-    result.emplace_back(make_shared<TestingObject>(name));
+    ConstObjectSharedPtrContainer result{ std::make_shared<TestingObject>(name) };
 
     return result;
 }
 
-CoreTools::NameMacro::NameMacroSharedPtr CoreTools::NameFinalMacro::Create(const string& name)
+CoreTools::NameMacro::NameMacroSharedPtr CoreTools::NameFinalMacro::Create(const std::string& name)
 {
-    return make_shared<ClassType>(name);
+    return std::make_shared<ClassType>(name);
 }

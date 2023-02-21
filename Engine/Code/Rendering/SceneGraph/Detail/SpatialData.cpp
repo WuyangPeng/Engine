@@ -163,10 +163,10 @@ int Rendering::SpatialData::GetStreamingSize() const noexcept
 
     auto size = RENDERING_STREAM_SIZE(localTransform);
     size += RENDERING_STREAM_SIZE(worldTransform);
-    size += CORE_TOOLS_STREAM_SIZE(worldTransformIsCurrent);
+    size += CoreTools::GetStreamSize(worldTransformIsCurrent);
     size += RENDERING_STREAM_SIZE(worldBound);
-    size += CORE_TOOLS_STREAM_SIZE(worldBoundIsCurrent);
-    size += CORE_TOOLS_STREAM_SIZE(culling);
+    size += CoreTools::GetStreamSize(worldBoundIsCurrent);
+    size += CoreTools::GetStreamSize(culling);
 
     return size;
 }

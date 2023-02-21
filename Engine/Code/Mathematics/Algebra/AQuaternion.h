@@ -66,7 +66,7 @@ namespace Mathematics
         explicit AQuaternion(const Matrix& matrix);
 
         // 通过轴-角的旋转构造四元数
-        AQuaternion(const AVector& axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        AQuaternion(const AVector& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -90,36 +90,36 @@ namespace Mathematics
         AQuaternion& operator+=(const AQuaternion& rhs) noexcept;
         AQuaternion& operator-=(const AQuaternion& rhs) noexcept;
         AQuaternion& operator*=(Real scalar) noexcept;
-        AQuaternion& operator/=(Real scalar) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        AQuaternion& operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 四元数，矩阵和轴——角之间的转换。
         void FromRotationMatrix(const Matrix& matrix);
         NODISCARD Matrix ToRotationMatrix() const noexcept;
-        void FromAxisAngle(const AVector& axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        NODISCARD AVector ToAxis() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        void FromAxisAngle(const AVector& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD AVector ToAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD Real ToAngle() const noexcept;
 
         // 4-tuple的长度
-        NODISCARD Real Length() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD Real Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 4-tuple的长度的平方
         NODISCARD Real SquaredLength() const noexcept;
 
-        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 适用于非零四元数
-        NODISCARD AQuaternion Inverse() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD AQuaternion Inverse() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 取负数在 x, y, 和 z 上
         NODISCARD AQuaternion Conjugate() const noexcept;
 
         // 适用于四元数 w = 0
-        NODISCARD AQuaternion Exp() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD AQuaternion Exp() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 适用于单位长度四元数
         NODISCARD AQuaternion Log() const noexcept;
 
-        NODISCARD bool IsNormalize(Real epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD bool IsNormalize(Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 由四元数旋转向量。
         NODISCARD AVector Rotate(const AVector& vector) const noexcept;

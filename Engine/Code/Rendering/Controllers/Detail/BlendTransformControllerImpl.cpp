@@ -63,12 +63,12 @@ int Rendering::BlendTransformControllerImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(firstController);
-    size += CORE_TOOLS_STREAM_SIZE(secondController);
-    size += CORE_TOOLS_STREAM_SIZE(weight);
-    size += CORE_TOOLS_STREAM_SIZE(rotationScaleMatrices);
-    size += CORE_TOOLS_STREAM_SIZE(geometricRotation);
-    size += CORE_TOOLS_STREAM_SIZE(geometricScale);
+    auto size = CoreTools::GetStreamSize(firstController);
+    size += CoreTools::GetStreamSize(secondController);
+    size += CoreTools::GetStreamSize(weight);
+    size += CoreTools::GetStreamSize(rotationScaleMatrices);
+    size += CoreTools::GetStreamSize(geometricRotation);
+    size += CoreTools::GetStreamSize(geometricScale);
 
     return size;
 }

@@ -16,7 +16,7 @@
 #include "Vector4Tools.h"
 
 template <typename Real>
-bool Mathematics::Vector4Tools<Real>::Approximate(const Vector4& lhs, const Vector4& rhs, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+bool Mathematics::Vector4Tools<Real>::Approximate(const Vector4& lhs, const Vector4& rhs, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= epsilon, "epsilon必须大于或等于0！");
 
@@ -43,7 +43,7 @@ Real Mathematics::Vector4Tools<Real>::GetRobustLength(const Vector4& vector)
 }
 
 template <typename Real>
-Real Mathematics::Vector4Tools<Real>::GetLength(const Vector4& vector) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Vector4Tools<Real>::GetLength(const Vector4& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     return Math::Sqrt(GetLengthSquared(vector));
 }
@@ -58,7 +58,7 @@ Real Mathematics::Vector4Tools<Real>::GetLengthSquared(const Vector4& vector) no
 }
 
 template <typename Real>
-Real Mathematics::Vector4Tools<Real>::Distance(const Vector4& lhs, const Vector4& rhs) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Vector4Tools<Real>::Distance(const Vector4& lhs, const Vector4& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     return Math::Sqrt(DistanceSquared(lhs, rhs));
 }
@@ -107,7 +107,7 @@ typename Mathematics::Vector4Tools<Real>::Vector4 Mathematics::Vector4Tools<Real
 }
 
 template <typename Real>
-Real Mathematics::Vector4Tools<Real>::GetVectorIncludedAngle(const Vector4& lhs, const Vector4& rhs) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Vector4Tools<Real>::GetVectorIncludedAngle(const Vector4& lhs, const Vector4& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     return Math::ACos(DotProduct(lhs, rhs) / (GetLength(lhs) * GetLength(rhs)));
 }

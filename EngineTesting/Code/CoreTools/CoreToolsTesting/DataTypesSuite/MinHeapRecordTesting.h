@@ -11,13 +11,20 @@
 #define CORE_TOOLS_DATA_TYPES_SUITE_MIN_HEAP_RECORD_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class MinHeapRecordTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MinHeapRecordTesting);
+        using ClassType = MinHeapRecordTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit MinHeapRecordTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

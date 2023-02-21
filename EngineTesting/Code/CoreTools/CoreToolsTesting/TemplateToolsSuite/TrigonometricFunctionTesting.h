@@ -11,14 +11,20 @@
 #define CORE_TOOLS_TEMPLATE_TOOLS_SUITE_TRIGONOMETRIC_FUNCTION_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class TrigonometricFunctionTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(TrigonometricFunctionTesting);
+        using ClassType = TrigonometricFunctionTesting;
+        using ParentType = UnitTest;
 
+    public:
+        explicit TrigonometricFunctionTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
     private:
         void MainTest();
         void RecursiveVsNonrecursiveTest();

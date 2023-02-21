@@ -11,13 +11,20 @@
 #define CONCURRENT_TOOLS_TIME_SUITE_SECOND_TIMER_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class SecondTimerTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(SecondTimerTesting);
+        using ClassType = SecondTimerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit SecondTimerTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

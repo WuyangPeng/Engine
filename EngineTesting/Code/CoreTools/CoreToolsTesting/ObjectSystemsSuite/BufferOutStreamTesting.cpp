@@ -18,12 +18,23 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::pair;
 using std::string;
 using namespace std::literals;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, BufferOutStreamTesting)
+CoreTools::BufferOutStreamTesting::BufferOutStreamTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, BufferOutStreamTesting)
+
+void CoreTools::BufferOutStreamTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::BufferOutStreamTesting::MainTest() noexcept
 {

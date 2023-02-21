@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 1:04)
+///	标准：std:c++20
+///	引擎版本：0.9.0.2 (2023/02/19 20:03)
 
 #ifndef CORE_TOOLS_HELPER_INPUT_OUTPUT_CUSTOM_ASSERT_MACRO_H
 #define CORE_TOOLS_HELPER_INPUT_OUTPUT_CUSTOM_ASSERT_MACRO_H
@@ -13,14 +13,18 @@
 #include "CoreTools/Contract/AssertionDetail.h"
 
 #if defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
+
     #define INPUT_OUTPUT_ASSERT_LEVEL 0
+
 #endif  // OPEN_IMPORTANT_EXCPTION_ASSERT
 
 #if !defined(INPUT_OUTPUT_ASSERT_LEVEL)
+
     #define INPUT_OUTPUT_ASSERT_LEVEL 4
+
 #endif  // INPUT_OUTPUT_ASSERT_LEVEL
 
-constexpr auto g_InputoOutputAssert = INPUT_OUTPUT_ASSERT_LEVEL;
+constexpr auto gInputoOutputAssert = INPUT_OUTPUT_ASSERT_LEVEL;
 
 static_assert(INPUT_OUTPUT_ASSERT_LEVEL <= ASSERT_LEVEL, "Input Output assert level definition error.");
 

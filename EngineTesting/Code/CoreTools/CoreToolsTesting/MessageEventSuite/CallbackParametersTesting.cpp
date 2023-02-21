@@ -12,12 +12,23 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/CallbackParametersDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 using std::string;
 using std::wstring;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(CoreTools, CallbackParameters)
+CoreTools::CallbackParametersTesting::CallbackParametersTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CallbackParametersTesting)
+
+void CoreTools::CallbackParametersTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::CallbackParametersTesting::MainTest()
 {
@@ -29,7 +40,7 @@ void CoreTools::CallbackParametersTesting::MainTest()
 
 void CoreTools::CallbackParametersTesting::BuiltInTest()
 {
-    TestingType callbackParameters{ 0 };
+    CallbackParameters callbackParameters{ 0 };
 
     constexpr bool firstValue{ true };
     constexpr int8_t secondValue{ 2 };
@@ -84,7 +95,7 @@ void CoreTools::CallbackParametersTesting::ParametersInterfaceTest()
     constexpr auto testValue = 5;
 
     auto smartPointer = Parameters::Create(testValue);
-    TestingType callbackParameters{ 0 };
+    CallbackParameters callbackParameters{ 0 };
 
     callbackParameters.SetValue(0, *smartPointer);
 
@@ -105,7 +116,7 @@ void CoreTools::CallbackParametersTesting::ParametersInterfaceTest()
 
 void CoreTools::CallbackParametersTesting::InvalidParametersTest()
 {
-    TestingType callbackParameters{ 0 };
+    CallbackParameters callbackParameters{ 0 };
 
     constexpr bool firstValue{ true };
 
@@ -116,7 +127,7 @@ void CoreTools::CallbackParametersTesting::InvalidParametersTest()
 
 void CoreTools::CallbackParametersTesting::InvalidTypeTest()
 {
-    TestingType callbackParameters{ 0 };
+    CallbackParameters callbackParameters{ 0 };
 
     constexpr bool firstValue{ true };
 

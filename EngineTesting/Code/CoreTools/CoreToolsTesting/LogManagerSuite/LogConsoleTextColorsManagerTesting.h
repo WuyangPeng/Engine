@@ -11,13 +11,20 @@
 #define CORE_TOOLS_LOG_MANAGER_SUITE_LOG_CONSOLE_TEXT_COLORS_MANAGER_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class LogConsoleTextColorsManagerTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(LogConsoleTextColorsManagerTesting);
+        using ClassType = LogConsoleTextColorsManagerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit LogConsoleTextColorsManagerTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

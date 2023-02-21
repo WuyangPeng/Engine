@@ -18,7 +18,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::QuaternionFactor<Real>::QuaternionFactor(const Quaternion& quaternion, QuaternionFactorFlags flag) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::QuaternionFactor<Real>::QuaternionFactor(const Quaternion& quaternion, QuaternionFactorFlags flag) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : quaternion{ quaternion }, sinX{}, cosX{}, sinY{}, cosY{}, sinZ{}, cosZ{}
 {
     switch (flag)
@@ -108,7 +108,7 @@ Real Mathematics::QuaternionFactor<Real>::GetCosZ() const noexcept
 }
 
 template <typename Real>
-void Mathematics::QuaternionFactor<Real>::FactorXYZ() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+void Mathematics::QuaternionFactor<Real>::FactorXYZ() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     const auto a = quaternion.GetW() * quaternion.GetX() - quaternion.GetY() * quaternion.GetZ();
     const auto b = Math::GetRational(1, 2) * (quaternion.GetW() * quaternion.GetW() - quaternion.GetX() * quaternion.GetX() - quaternion.GetY() * quaternion.GetY() + quaternion.GetZ() * quaternion.GetZ());
@@ -175,7 +175,7 @@ void Mathematics::QuaternionFactor<Real>::FactorXYZ() noexcept(g_Assert < 3 || g
 }
 
 template <typename Real>
-void Mathematics::QuaternionFactor<Real>::FactorXZY() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+void Mathematics::QuaternionFactor<Real>::FactorXZY() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     quaternion = Quaternion{ quaternion.GetW(), quaternion.GetX(), quaternion.GetZ(), -quaternion.GetY() };
 
@@ -189,7 +189,7 @@ void Mathematics::QuaternionFactor<Real>::FactorXZY() noexcept(g_Assert < 3 || g
 }
 
 template <typename Real>
-void Mathematics::QuaternionFactor<Real>::FactorYZX() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+void Mathematics::QuaternionFactor<Real>::FactorYZX() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     quaternion = Quaternion{ quaternion.GetW(), -quaternion.GetY(), quaternion.GetZ(), -quaternion.GetX() };
 
@@ -207,7 +207,7 @@ void Mathematics::QuaternionFactor<Real>::FactorYZX() noexcept(g_Assert < 3 || g
 }
 
 template <typename Real>
-void Mathematics::QuaternionFactor<Real>::FactorYXZ() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+void Mathematics::QuaternionFactor<Real>::FactorYXZ() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     quaternion = Quaternion{ quaternion.GetW(), -quaternion.GetY(), quaternion.GetX(), quaternion.GetZ() };
 
@@ -221,7 +221,7 @@ void Mathematics::QuaternionFactor<Real>::FactorYXZ() noexcept(g_Assert < 3 || g
 }
 
 template <typename Real>
-void Mathematics::QuaternionFactor<Real>::FactorZXY() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+void Mathematics::QuaternionFactor<Real>::FactorZXY() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     quaternion = Quaternion{ quaternion.GetW(), -quaternion.GetZ(), quaternion.GetX(), -quaternion.GetY() };
 
@@ -239,7 +239,7 @@ void Mathematics::QuaternionFactor<Real>::FactorZXY() noexcept(g_Assert < 3 || g
 }
 
 template <typename Real>
-void Mathematics::QuaternionFactor<Real>::FactorZYX() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+void Mathematics::QuaternionFactor<Real>::FactorZYX() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     quaternion = Quaternion{ quaternion.GetW(), quaternion.GetZ(), -quaternion.GetY(), quaternion.GetX() };
 

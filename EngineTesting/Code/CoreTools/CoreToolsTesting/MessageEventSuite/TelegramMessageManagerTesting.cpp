@@ -13,8 +13,19 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/EntityManagerDetail.h"
 #include "CoreTools/MessageEvent/TelegramMessageManagerDetail.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::TelegramMessageManagerTesting::TelegramMessageManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, TelegramMessageManagerTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, TelegramMessageManagerTesting)
+
+void CoreTools::TelegramMessageManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::TelegramMessageManagerTesting::MainTest()
 {

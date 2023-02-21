@@ -135,7 +135,7 @@ int Rendering::TextureCubeArray::GetStreamingSize() const
 
     size += impl->GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(numCubes);
+    size += CoreTools::GetStreamSize(numCubes);
 
     return size;
 }

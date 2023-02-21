@@ -11,13 +11,20 @@
 #define CORE_TOOLS_TEMPLATE_TOOLS_SUITE_FACTORIAL_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class FactorialTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(FactorialTesting);
+        using ClassType = FactorialTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit FactorialTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

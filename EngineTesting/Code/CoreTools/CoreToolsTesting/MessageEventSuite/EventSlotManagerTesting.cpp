@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/EventSlotDetail.h"
 #include "CoreTools/MessageEvent/EventSlotManagerDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 
 namespace CoreTools
@@ -23,7 +23,18 @@ namespace CoreTools
     using TestingType = EventSlotManager<EventSlotType>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, EventSlotManagerTesting)
+CoreTools::EventSlotManagerTesting::EventSlotManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, EventSlotManagerTesting)
+
+void CoreTools::EventSlotManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::EventSlotManagerTesting::MainTest()
 {

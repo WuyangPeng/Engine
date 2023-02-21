@@ -71,7 +71,7 @@ int Network::MessageContainer<E, T>::GetStreamingSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return CORE_TOOLS_STREAM_SIZE(message);
+    return CoreTools::GetStreamSize(message);
 }
 
 template <typename E, typename T>

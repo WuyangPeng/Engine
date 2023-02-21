@@ -15,7 +15,7 @@
 #include "CoreTools/MessageEvent/EventSlotDetail.h"
 #include "CoreTools/MessageEvent/EventSlotManagerDetail.h"
 #include "CoreTools/MessageEvent/MessageManagerDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 
 namespace CoreTools
@@ -24,7 +24,18 @@ namespace CoreTools
     using TestingType = MessageManager<EventSlotType>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, MessageManagerTesting)
+CoreTools::MessageManagerTesting::MessageManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, MessageManagerTesting)
+
+void CoreTools::MessageManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::MessageManagerTesting::MainTest()
 {

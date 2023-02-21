@@ -170,11 +170,11 @@ int Rendering::ParticlesImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(int{});
+    auto size = CoreTools::GetStreamSize(int{});
     size += boost::numeric_cast<int>(MATHEMATICS_STREAM_SIZE(positions.at(0)) * positions.size());
-    size += boost::numeric_cast<int>(CORE_TOOLS_STREAM_SIZE(sizes.at(0)) * sizes.size());
-    size += CORE_TOOLS_STREAM_SIZE(sizeAdjust);
-    size += CORE_TOOLS_STREAM_SIZE(numActive);
+    size += boost::numeric_cast<int>(CoreTools::GetStreamSize(sizes.at(0)) * sizes.size());
+    size += CoreTools::GetStreamSize(sizeAdjust);
+    size += CoreTools::GetStreamSize(numActive);
 
     return size;
 }

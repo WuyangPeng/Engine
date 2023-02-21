@@ -61,18 +61,18 @@ int Rendering::IKJointImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = numAxis * CORE_TOOLS_STREAM_SIZE(allowTranslation.at(0));
-    size += numAxis * CORE_TOOLS_STREAM_SIZE(minTranslation.at(0));
-    size += numAxis * CORE_TOOLS_STREAM_SIZE(maxTranslation.at(0));
-    size += numAxis * CORE_TOOLS_STREAM_SIZE(allowRotation.at(0));
-    size += numAxis * CORE_TOOLS_STREAM_SIZE(minRotation.at(0));
-    size += numAxis * CORE_TOOLS_STREAM_SIZE(maxRotation.at(0));
-    size += CORE_TOOLS_STREAM_SIZE(object);
-    size += CORE_TOOLS_STREAM_SIZE(boost::numeric_cast<int32_t>(goals.size()));
+    auto size = numAxis * CoreTools::GetStreamSize(allowTranslation.at(0));
+    size += numAxis * CoreTools::GetStreamSize(minTranslation.at(0));
+    size += numAxis * CoreTools::GetStreamSize(maxTranslation.at(0));
+    size += numAxis * CoreTools::GetStreamSize(allowRotation.at(0));
+    size += numAxis * CoreTools::GetStreamSize(minRotation.at(0));
+    size += numAxis * CoreTools::GetStreamSize(maxRotation.at(0));
+    size += CoreTools::GetStreamSize(object);
+    size += CoreTools::GetStreamSize(boost::numeric_cast<int32_t>(goals.size()));
 
     if (!goals.empty())
     {
-        size += boost::numeric_cast<int32_t>(goals.size() * CORE_TOOLS_STREAM_SIZE(goals.at(0)));
+        size += boost::numeric_cast<int32_t>(goals.size() * CoreTools::GetStreamSize(goals.at(0)));
     }
 
     return size;
@@ -239,7 +239,7 @@ void Rendering::IKJointImpl::UpdateWorldTransform()
     }
 }
 
-void Rendering::IKJointImpl::UpdateWorldRotateAndTranslate() noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::IKJointImpl::UpdateWorldRotateAndTranslate() noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_9;
 

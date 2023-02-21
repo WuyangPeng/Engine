@@ -54,15 +54,15 @@ int Rendering::IKControllerImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(iterations);
-    size += CORE_TOOLS_STREAM_SIZE(orderEndToRoot);
+    auto size = CoreTools::GetStreamSize(iterations);
+    size += CoreTools::GetStreamSize(orderEndToRoot);
 
     auto jointSize = boost::numeric_cast<int>(joints.size());
-    size += CORE_TOOLS_STREAM_SIZE(jointSize);
+    size += CoreTools::GetStreamSize(jointSize);
 
     if (0 < jointSize)
     {
-        size += jointSize * CORE_TOOLS_STREAM_SIZE(joints.at(0));
+        size += jointSize * CoreTools::GetStreamSize(joints.at(0));
     }
 
     return size;

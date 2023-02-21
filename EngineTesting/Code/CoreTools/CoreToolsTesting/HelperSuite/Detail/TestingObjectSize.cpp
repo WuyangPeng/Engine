@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:24)
+///	引擎测试版本：0.9.0.2 (2023/02/16 20:58)
 
 #include "TestingObjectSize.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -14,15 +14,12 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-using std::make_shared;
-using std::string;
-
 CORE_TOOLS_RTTI_DEFINE(CoreTools, TestingObjectSize);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, TestingObjectSize);
 CORE_TOOLS_FACTORY_DEFINE(CoreTools, TestingObjectSize);
 
 CoreTools::TestingObjectSize::TestingObjectSize(int value)
-    : ParentType{ "" }, testValue{ value }
+    : ParentType{ "TestingObjectSize" }, testValue{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -33,12 +30,12 @@ int CoreTools::TestingObjectSize::GetStreamingSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return ParentType::GetStreamingSize() + CORE_TOOLS_STREAM_SIZE(GetTestValue());
+    return ParentType::GetStreamingSize() + GetStreamSize(GetTestValue());
 }
 
 CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(CoreTools, TestingObjectSize)
 
-void CoreTools::TestingObjectSize::Link(CoreTools::ObjectLink& source)
+void CoreTools::TestingObjectSize::Link(ObjectLink& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -93,10 +90,12 @@ int CoreTools::TestingObjectSize::GetTestValue() const noexcept
 
 CoreTools::ObjectInterfaceSharedPtr CoreTools::TestingObjectSize::CloneObject() const
 {
-    return make_shared<ClassType>(*this);
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return std::make_shared<ClassType>(*this);
 }
 
 CoreTools::TestingObjectSize::ObjectSharedPtr CoreTools::TestingObjectSize::Create(int value)
 {
-    return make_shared<ClassType>(value);
+    return std::make_shared<ClassType>(value);
 }

@@ -50,17 +50,17 @@ namespace Mathematics
         void Find();
 
         // 动态查找功能的支持函数。
-        NODISCARD static Real GetVertexIntersection(Real diffX, Real diffY, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ, Real radiusSqr) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real GetVertexIntersection(Real diffX, Real diffY, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ, Real radiusSqr) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        NODISCARD static Real GetEdgeIntersection(Real diffX, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotZ, Real velocitySqr, Real radiusSqr) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real GetEdgeIntersection(Real diffX, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotZ, Real velocitySqr, Real radiusSqr) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        NODISCARD int FindFaceRegionIntersection(Real extentX, Real extentY, Real extentZ, Real centerDiffDotX, Real centerDiffDotY, Real centerDiffDotZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ, bool aboveFace) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD int FindFaceRegionIntersection(Real extentX, Real extentY, Real extentZ, Real centerDiffDotX, Real centerDiffDotY, Real centerDiffDotZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ, bool aboveFace) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        NODISCARD int FindJustEdgeIntersection(Real centerDiffDotY, Real extentX, Real extentY, Real extentZ, Real diffX, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD int FindJustEdgeIntersection(Real centerDiffDotY, Real extentX, Real extentY, Real extentZ, Real diffX, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        NODISCARD int FindEdgeRegionIntersection(Real extentX, Real extentY, Real extentZ, Real centerDiffDotX, Real centerDiffDotY, Real centerDiffDotZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ, bool aboveEdge) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD int FindEdgeRegionIntersection(Real extentX, Real extentY, Real extentZ, Real centerDiffDotX, Real centerDiffDotY, Real centerDiffDotZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ, bool aboveEdge) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        NODISCARD int FindVertexRegionIntersection(Real extentX, Real extentY, Real extentZ, Real centerDiffDotX, Real centerDiffDotY, Real centerDiffDotZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD int FindVertexRegionIntersection(Real extentX, Real extentY, Real extentZ, Real centerDiffDotX, Real centerDiffDotY, Real centerDiffDotZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:
         Box3 box;

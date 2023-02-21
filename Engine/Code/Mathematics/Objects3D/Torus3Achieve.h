@@ -51,7 +51,7 @@ Real Mathematics::Torus3<Real>::GetInnerRadius() const noexcept
 }
 
 template <typename Real>
-Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetPosition(Real s, Real t) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetPosition(Real s, Real t) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= s && s <= Math::GetValue(1) && Math::GetValue(0) <= t && t <= Math::GetValue(1), "s和t必须在0和1之间");
@@ -68,7 +68,7 @@ Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetPosition(Real s, Real t
 }
 
 template <typename Real>
-Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetNormal(Real s, Real t) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetNormal(Real s, Real t) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= s && s <= Math::GetValue(1) && Math::GetValue(0) <= t && t <= Math::GetValue(1), "s和t必须在0和1之间");
@@ -87,7 +87,7 @@ Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetNormal(Real s, Real t) 
 }
 
 template <typename Real>
-Mathematics::Torus3Parameters<Real> Mathematics::Torus3<Real>::GetParameters(const Vector3& position) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Mathematics::Torus3Parameters<Real> Mathematics::Torus3<Real>::GetParameters(const Vector3& position) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -76,7 +76,7 @@ typename Mathematics::BrentsMethod<Real, UserDataType>::Function Mathematics::Br
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::BrentsMethod<Real, UserDataType>::SetMaxIterations(int newMaxIterations) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::BrentsMethod<Real, UserDataType>::SetMaxIterations(int newMaxIterations) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
     MATHEMATICS_ASSERTION_1(1 <= newMaxIterations, "无效 maxIterations。\n");
@@ -93,7 +93,7 @@ int Mathematics::BrentsMethod<Real, UserDataType>::GetMaxIterations() const noex
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::BrentsMethod<Real, UserDataType>::SetNegativeFTolerance(Real newNegativeFTolerance) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::BrentsMethod<Real, UserDataType>::SetNegativeFTolerance(Real newNegativeFTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
     MATHEMATICS_ASSERTION_1(newNegativeFTolerance <= Math::GetValue(0), "无效 negativeFTolerance。\n");
@@ -110,7 +110,7 @@ Real Mathematics::BrentsMethod<Real, UserDataType>::GetNegativeFTolerance() cons
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::BrentsMethod<Real, UserDataType>::SetPositiveFTolerance(Real newPositiveFTolerance) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::BrentsMethod<Real, UserDataType>::SetPositiveFTolerance(Real newPositiveFTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
     MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= positiveFTolerance, "无效 positiveFTolerance。\n");
@@ -127,7 +127,7 @@ Real Mathematics::BrentsMethod<Real, UserDataType>::GetPositiveFTolerance() cons
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::BrentsMethod<Real, UserDataType>::SetStepXTolerance(Real newStepXTolerance) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::BrentsMethod<Real, UserDataType>::SetStepXTolerance(Real newStepXTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
     MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= newStepXTolerance, "无效 stepXTolerance。\n");
@@ -144,7 +144,7 @@ Real Mathematics::BrentsMethod<Real, UserDataType>::GetStepXTolerance() const no
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::BrentsMethod<Real, UserDataType>::SetConvXTolerance(Real newConvXTolerance) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::BrentsMethod<Real, UserDataType>::SetConvXTolerance(Real newConvXTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
     MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= newConvXTolerance, "无效 convXTolerance。\n");

@@ -32,7 +32,7 @@ namespace Rendering
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void Enable() noexcept(g_Assert < 3 || g_MathematicsAssert < 3) override;
+        void Enable() noexcept(gAssert < 3 || gMathematicsAssert < 3) override;
 
     private:
         PackageType impl;

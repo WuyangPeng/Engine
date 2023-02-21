@@ -41,7 +41,7 @@ namespace Mathematics
         // 从IEEE32位区间在[0,1]的浮点数F，
         // 快速转换为区间在[0,2^P-1]的一个32位整数I，
         // 输入“scaledFloat”是F，输入“power”是P和函数的返回值是I。
-        NODISCARD static int32_t ScaledFloatToInt(float scaledFloat, int power) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static int32_t ScaledFloatToInt(float scaledFloat, int power) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD static int GetLeadingBit(uint32_t value);
         NODISCARD static int GetLeadingBit(int32_t value);

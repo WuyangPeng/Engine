@@ -84,8 +84,8 @@ int Rendering::SingleShaderConstantsDataImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(name);
-    size += CORE_TOOLS_STREAM_SIZE(numRegistersUsed);
+    auto size = CoreTools::GetStreamSize(name);
+    size += CoreTools::GetStreamSize(numRegistersUsed);
 
     return size;
 }

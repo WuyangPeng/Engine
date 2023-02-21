@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:12)
+///	引擎测试版本：0.9.0.2 (2023/02/06 13:05)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_ASSERT_TEST_EXCEPTION_THROW_TESTING_H
 #define CORE_TOOLS_HELPER_SUITE_ASSERT_TEST_EXCEPTION_THROW_TESTING_H
@@ -25,40 +25,56 @@ namespace CoreTools
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
+    protected:
+        void PrintTipsMessage() override;
+
     private:
         void DoRunUnitTest() final;
         void MainTest();
 
         void AssertTrueFailureThrowExceptionTest();
         void AssertFalseFailureThrowExceptionTest();
+
         void AssertEqualFailureThrowExceptionTest();
         void AssertEqualDoNotUseMessageFailureThrowExceptionTest();
         void AssertEnumEqualFailureThrowExceptionTest();
-        void AssertSignedEqualFailureThrowExceptionTest();
+        void AssertSignedEnumEqualFailureThrowExceptionTest();
         void AssertThreeEqualFailureThrowExceptionTest();
         void AssertFloatingPointCompleteEquallFailureThrowExceptionTest();
+
         void AssertUnequalFailureThrowExceptionTest();
         void AssertUnequalDoNotUseMessageFailureThrowExceptionTest();
         void AssertEnumUnequalFailureThrowExceptionTest();
-        void AssertSignedUnequalFailureThrowExceptionTest();
+        void AssertSignedEnumUnequalFailureThrowExceptionTest();
         void AssertFloatingPointCompleteUnequalFailureThrowExceptionTest();
+
         void AssertApproximateFailureThrowExceptionTest();
         void AssertApproximateUseFunctionFailureThrowExceptionTest();
+        void AssertApproximateFloatZeroFailureThrowExceptionTest();
+        void AssertApproximateDoubleZeroFailureThrowExceptionTest();
+
         void AssertLessFailureThrowExceptionTest();
         void AssertEnumLessFailureThrowExceptionTest();
         void AssertSignedEnumLessFailureThrowExceptionTest();
+
         void AssertLessEqualFailureThrowExceptionTest();
         void AssertEnumLessEqualFailureThrowExceptionTest();
         void AssertSignedEnumLessEqualFailureThrowExceptionTest();
+
         void AssertGreaterFailureThrowExceptionTest();
         void AssertEnumGreaterFailureThrowExceptionTest();
         void AssertSignedEnumGreaterFailureThrowExceptionTest();
+
         void AssertGreaterEqualFailureThrowExceptionTest();
-        void AssertEnumLessGreaterEqualFailureThrowExceptionTest();
+        void AssertEnumGreaterEqualFailureThrowExceptionTest();
         void AssertSignedEnumGreaterEqualFailureThrowExceptionTest();
+
         void AssertEqualNullptrFailureThrowExceptionTest();
         void AssertUnequalNullptrFailureThrowExceptionTest();
+
         void AssertRangeFailureThrowExceptionTest();
+
+        void TestEnd();
 
         NODISCARD static bool Approximate(float lhs, float rhs, float epsilon) noexcept;
 

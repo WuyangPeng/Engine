@@ -35,7 +35,7 @@ namespace Rendering
         CLASS_INVARIANT_DECLARE;
 
         void MakeIdentity() noexcept;
-        void MakeUnitScale(const Matrix& rotate) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void MakeUnitScale(const Matrix& rotate) noexcept(gAssert < 2 || gRenderingAssert < 2);
 
         NODISCARD bool IsIdentity() const noexcept;
         NODISCARD bool IsRotationOrScaleMatrix() const noexcept;
@@ -44,8 +44,8 @@ namespace Rendering
         void SetRotate(const Matrix& rotate, const APoint& scale) noexcept;
         void SetMatrix(const Matrix& matrix) noexcept;
         void SetTranslate(const APoint& translate) noexcept;
-        void SetScale(const Matrix& rotate, const APoint& scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
-        void SetUniformScale(const Matrix& rotate, Real scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void SetScale(const Matrix& rotate, const APoint& scale) noexcept(gAssert < 2 || gRenderingAssert < 2);
+        void SetUniformScale(const Matrix& rotate, Real scale) noexcept(gAssert < 2 || gRenderingAssert < 2);
 
         NODISCARD Matrix GetMatrix() const noexcept;
 

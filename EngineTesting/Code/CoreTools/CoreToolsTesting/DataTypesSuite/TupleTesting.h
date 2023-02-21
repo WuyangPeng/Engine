@@ -11,13 +11,20 @@
 #define CORE_TOOLS_DATA_TYPES_SUITE_TUPLE_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class TupleTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(TupleTesting);
+        using ClassType = TupleTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit TupleTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

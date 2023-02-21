@@ -42,15 +42,15 @@ int Rendering::VisualPassImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(vertexShader);
+    auto size = CoreTools::GetStreamSize(vertexShader);
 
-    size += CORE_TOOLS_STREAM_SIZE(pixelShader);
-    size += CORE_TOOLS_STREAM_SIZE(alphaState);
-    size += CORE_TOOLS_STREAM_SIZE(cullState);
-    size += CORE_TOOLS_STREAM_SIZE(depthState);
-    size += CORE_TOOLS_STREAM_SIZE(offsetState);
-    size += CORE_TOOLS_STREAM_SIZE(stencilState);
-    size += CORE_TOOLS_STREAM_SIZE(wireState);
+    size += CoreTools::GetStreamSize(pixelShader);
+    size += CoreTools::GetStreamSize(alphaState);
+    size += CoreTools::GetStreamSize(cullState);
+    size += CoreTools::GetStreamSize(depthState);
+    size += CoreTools::GetStreamSize(offsetState);
+    size += CoreTools::GetStreamSize(stencilState);
+    size += CoreTools::GetStreamSize(wireState);
 
     return size;
 }

@@ -14,7 +14,7 @@
 
 #include <gsl/util>
 
-int32_t Mathematics::BitHacks::ScaledFloatToInt(float scaledFloat, int power) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+int32_t Mathematics::BitHacks::ScaledFloatToInt(float scaledFloat, int power) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(0 <= scaledFloat && scaledFloat <= 1, "value的区间为[0,1]。");
     MATHEMATICS_ASSERTION_3(0 <= power && power <= 24, "power的区间为[0,24]。");

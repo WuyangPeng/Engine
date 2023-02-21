@@ -10,7 +10,7 @@
 #ifndef SYSTEM_TIME_SUITE_SYSTEM_PAUSE_TESTING_H
 #define SYSTEM_TIME_SUITE_SYSTEM_PAUSE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace System
 {

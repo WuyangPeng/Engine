@@ -11,10 +11,22 @@
 #include "Detail/PropertyExternal.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, PropertyExternalTesting)
+CoreTools::PropertyExternalTesting::PropertyExternalTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, PropertyExternalTesting)
+
+void CoreTools::PropertyExternalTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
+
 
 void CoreTools::PropertyExternalTesting::MainTest()
 {

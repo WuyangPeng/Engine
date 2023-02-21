@@ -14,9 +14,13 @@
 				  AssertTestApproximateTesting、
 				  AssertTestNullptrTesting、
 				  AssertTestRangeTesting。
-（3） 断言异常宏：AssertExceptionMacroTesting。
-（4） 类不变式宏：ClassInvariantMacroTesting、ModuleClassInvariantMacroTesting。
-（5） 断言宏：CustomAssertMacroTesting、ModuleCustomAssertMacroTesting。
+（3） 断言异常宏：AssertTestExceptionThrowTesting、
+				  AssertThrowExceptionTesting、
+				  AssertExecuteLoopNotThrowTesting。
+（4） 类不变式宏：ClassInvariantMacroTesting、
+			      ModuleClassInvariantMacroTesting。
+（5） 断言宏：CustomAssertMacroTesting、
+			  ModuleCustomAssertMacroTesting。
 （6） 导出宏：ExportMacroTesting、
 			  ModuleExportMacroTesting、
 			  CopyModuleExportMacroTesting、
@@ -39,7 +43,9 @@
 				  MemberFunctionStaticAssertMacroTesting、
 				  CopyMemberFunctionStaticAssertMacroTesting。
 （11）内存宏：MemoryMacroTesting。
-（12）运行时类型识别宏：RttiMacroBaseTesting、RttiMacroTesting、RttiMacroFinalTesting。
+（12）运行时类型识别宏：RttiMacroBaseTesting、
+					    RttiMacroTesting、
+						RttiMacroFinalTesting。
 （13）单例宏：SingletonMacroTesting。
 （14）名字宏：NameMacroTesting。
 （15）字节流宏：StreamSizeMacroTesting、
@@ -50,13 +56,15 @@
 				TestingObjectPtrTesting、
 				TestingObjectSizeTesting、
 				TestingObjectTesting。
-（16）单元测试宏：UnitTestSuiteMacroCompleteTesting、UnitTestSuiteMacroCompleteUseTestingTypeTesting、UnitTestSuiteMacroTesting。
+（16）单元测试宏：UnitTestSuiteMacroTesting。
 （17）智能指针宏：SharedPtrMacroTesting。
-（18）异常宏：ExceptionMacroTesting。 
+（18）异常宏：ExceptionMacroTesting、
+			  ExceptionCatchMacroTesting。 
 （19）属性宏：PropertiesMacroTesting。
 （20）用户宏：UserMacroTesting。
 （21）while循环安全计数器宏：SafetyLimitMacroTesting。
 （22）获取数值所需的位：GetRequiredBitsTesting。
+（23）哈希组合：HashCombineTesting。
  
 ----------------------------
 2.   ContractSuite 
@@ -92,7 +100,8 @@
 对字符串模块的单元测试，包括：
 （1）格式化错误消息：FormatErrorMessageTesting。
 （2）字符串转换：StringConversionTesting。
-（3）忽略大小写的字符类：CaseInsensitiveStringTesting、CaseInsensitiveStringIOStreamTesting。 
+（3）忽略大小写的字符类：CaseInsensitiveStringTesting、
+						 CaseInsensitiveStringIOStreamTesting。 
 
 ----------------------------
 5.   ExceptionSuite 
@@ -107,7 +116,8 @@
 
 对控制台模块的单元测试，包括：
 （1）控制台实例：ConsoleTesting。
-（2）控制台颜色：ConsoleColorsTesting、ConsoleTextColorsManagerTesting。
+（2）控制台颜色：ConsoleColorsTesting、
+				 ConsoleTextColorsManagerTesting。
 （3）控制台创建：ConsoleAllocTesting。
 
 ----------------------------
@@ -132,25 +142,42 @@
 8.	 FileManagerSuite 
 
 对文件管理模块的单元测试，包括：
-（1）字节序：ByteSwapperTesting、ByteSwapTesting、TypeAliaserTesting、EndianTesting。
+（1）字节序：ByteSwapperTesting、
+			 ByteSwapTesting、
+			 TypeAliaserTesting、
+			 EndianTesting。
 （2）文件缓冲区：FileBufferTesting。
-（3）C文件管理：CWriteFileManagerTesting、CReadFileManagerTesting、CFileManagerTesting。
-（4）C++文件管理：OFStreamManagerTesting、IFStreamManagerTesting。
+（3）C文件管理：CWriteFileManagerTesting、
+			    CReadFileManagerTesting、
+				CFileManagerTesting。
+（4）C++文件管理：OFStreamManagerTesting、
+				  IFStreamManagerTesting。
 （5）删除文件工具：DeleteFileToolsTesting。
 （6）复制文件工具：CopyFileToolsTesting。
-（7）Handle文件管理：WriteFileHandleTesting、ReadFileHandleTesting、ReadAndWriteFileHandleTesting、FileHandleHelperTesting、FileHandleTesting。
-（8）文件管理：WriteFileManagerTesting、ReadFileManagerTesting、FileManagerHelperTesting。
+（7）Handle文件管理：WriteFileHandleTesting、
+					 ReadFileHandleTesting、
+					 ReadAndWriteFileHandleTesting、
+					 FileHandleHelperTesting、
+					 FileHandleTesting。
+（8）文件管理：WriteFileManagerTesting、
+			   ReadFileManagerTesting、
+			   FileManagerHelperTesting。
 （9）目录管理：DirectoryTesting。
-（10）缓冲区IO：ReadBufferIOTesting、WriteBufferIOTesting。
-（11）环境变量：EnvironmentTesting、EnvironmentVariableTesting。
-（12）文件读取存入异步管理：FileAsynchronousParameterTesting、FileEventTesting、FileAsynchronousTesting。
+（10）缓冲区IO：ReadBufferIOTesting、
+				WriteBufferIOTesting。
+（11）环境变量：EnvironmentTesting、
+				EnvironmentVariableTesting。
+（12）文件读取存入异步管理：FileAsynchronousParameterTesting、
+						    FileEventTesting、
+							FileAsynchronousTesting。
 （13）随机文件名：GenerateRandomNameTesting。
 
 ----------------------------
 9.  TextParsingSuite 
 
 对文本解析模块的单元测试，包括：
-（1）简易zip管理：ZipEntryTesting、ZipArchiveTesting。
+（1）简易zip管理：ZipEntryTesting、
+				  ZipArchiveTesting。
 （2）简易csv管理：SimpleCSVExceptionTesting、
 				  XmlDataTesting、
 				  XmlFileTesting、
@@ -197,7 +224,8 @@
 				  QuerySheetRelsTargetTesting、
 				  QuerySharedStringsTesting、
 				  QueryXmlDataTesting。
-（5）Excel转csv功能： ExcelConversionCSVTesting、BatchConversionCSVTesting。
+（5）Excel转csv功能： ExcelConversionCSVTesting、
+					  BatchConversionCSVTesting。
 （6）csv解析：CSVTypeConversionTesting、
 			  CSVHeadTesting、
 			  CSVRowTesting、
@@ -219,9 +247,12 @@
 对日志管理模块的单元测试，包括：
 （1）日志过滤器：LogFilterManagerTesting。
 （2）日志等级管理：LogLevelManagerTesting。
-（3）日志消息：LogMessagePostfixTesting、LogMessagePrefixTesting、LogMessageTesting。
+（3）日志消息：LogMessagePostfixTesting、
+			   LogMessagePrefixTesting、
+			   LogMessageTesting。
 （4）日志控制台颜色管理：LogConsoleTextColorsManagerTesting。
-（5）附加器：AppenderManagerTesting、AppenderTesting。
+（5）附加器：AppenderManagerTesting、
+			 AppenderTesting。
 （6）日志记录器：LoggerTesting。
 （7）日志文件名：LogFileNameTesting。
 （8）日志IO管理：LogAppenderIOManagerTesting。
@@ -233,14 +264,22 @@
 对数据类型模块的单元测试，包括：
 （1）元组：TupleTesting。
 （2）表：TableTesting。
-（3）最小堆：MinHeapRecordIndexTesting、MinHeapRecordStoredManagerTesting、MinHeapRecordStoredTesting、MinHeapRecordTesting、MinHeapTesting。
+（3）最小堆：MinHeapRecordIndexTesting、
+			 MinHeapRecordStoredManagerTesting、
+			 MinHeapRecordStoredTesting、
+			 MinHeapRecordTesting、
+			 MinHeapTesting。
 
 ----------------------------
 12.	 MemoryToolsSuite 
 
 对内存工具模块的单元测试，包括：
 （1）堆分配：HeapAllocateTesting。
-（2）内存管理：：BufferStreamTesting、BufferTesting、DefaultMemoryTesting、MemoryManagerTesting、MemoryTesting。
+（2）内存管理：：BufferStreamTesting、
+				 BufferTesting、
+				 DefaultMemoryTesting、
+				 MemoryManagerTesting、
+				 MemoryTesting。
 （3）智能指针管理：SmartPointerTesting。
 （4）MD5：MD5ContextTesting、MD5Testing。
 （5）随机数：RandomTesting。
@@ -263,7 +302,11 @@
 					  InTopLevelTesting、
 					  StreamSizeTesting、
 					  StreamTesting。
-（5） 对象系统管理器：ObjectLinkTesting、ObjectManagerTesting、ObjectRegisterTesting、ObjectTesting、OutTopLevelTesting。
+（5） 对象系统管理器：ObjectLinkTesting、
+					  ObjectManagerTesting、
+					  ObjectRegisterTesting、
+					  ObjectTesting、
+					  OutTopLevelTesting。
 （6） 对象系统类型转换：TypeCastingTesting。
 
 ----------------------------
@@ -271,7 +314,8 @@
 
 对时间模块的单元测试，包括：
 （1）时间：DeltaTimeManagerTesting。
-（2）计时器：SecondTimerTesting、MillisecondTimerTesting。
+（2）计时器：SecondTimerTesting、
+			 MillisecondTimerTesting。
 （3）定制时间器：CustomTimeTesting。
 
 ----------------------------
@@ -301,7 +345,9 @@
 （6） 指针比较：PtrCompareTesting。
 （7） IfThenElse。
 （8） 数学函数：SqrtTesting、Pow3Testing。
-（9） 转换：ExplicitCastTesting、LiteralCastTesting、ReferenceCastTesting。
+（9） 转换：ExplicitCastTesting、
+			LiteralCastTesting、
+			ReferenceCastTesting。
 （10）自增自减：IncrementScopeTesting、ValueScopeTesting。
 （11）真实地址：RealAddressTesting。
 （12）Tiny：TinyTesting。
@@ -391,13 +437,15 @@
 28.	 StateMachineManagerSuite 
 
 对状态机模块的单元测试，包括：
-（1） 状态机管理器：StateEntityTesting、StateMachineTesting。
+（1） 状态机管理器：StateEntityTesting、
+					StateMachineTesting。
 
 ----------------------------
 29.  NetworkSuite 
 
 对网络模块的单元测试，包括：
-（1） 下载文件：DownloadingFilesTesting、DownloadingFilesEventTesting。
+（1） 下载文件：DownloadingFilesTesting、
+				DownloadingFilesEventTesting。
 
 ----------------------------
 30.  ZlibSuite 
@@ -410,5 +458,11 @@
 
 对freetype模块的单元测试，包括：
 （1）freetype。
+
+----------------------------
+32.  CoroutineSuite 
+
+对协程模块的单元测试，包括：
+（1）协程。
 
 ----------------------------

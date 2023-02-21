@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:25)
+///	引擎测试版本：0.9.0.2 (2023/02/18 10:52)
 
 #include "ExceptionCatchMacroTesting.h"
+#include "System/Time/DeltaTime.h"
 #include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -70,4 +71,11 @@ void CoreTools::ExceptionCatchMacroTesting::Catch3Test()
         THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常，并被捕获。"));
     }
     EXCEPTION_WINDOWS_ENTRY_POINT_CATCH
+}
+
+void CoreTools::ExceptionCatchMacroTesting::PrintTipsMessage()
+{
+    GetStream() << "这个测试会触发失败断言，请按否取消。\n";
+
+    System::SystemPause();
 }

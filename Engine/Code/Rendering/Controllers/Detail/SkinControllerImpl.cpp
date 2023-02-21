@@ -184,12 +184,12 @@ int Rendering::SkinControllerImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto result = CORE_TOOLS_STREAM_SIZE(numVertices);
-    result += CORE_TOOLS_STREAM_SIZE(numBones);
+    auto result = CoreTools::GetStreamSize(numVertices);
+    result += CoreTools::GetStreamSize(numBones);
 
     result += numBones * RENDERING_STREAM_SIZE(bones.at(0));
     result += size * MATHEMATICS_STREAM_SIZE(weights.at(0));
-    result += size * CORE_TOOLS_STREAM_SIZE(offsets.at(0));
+    result += size * CoreTools::GetStreamSize(offsets.at(0));
 
     return result;
 }

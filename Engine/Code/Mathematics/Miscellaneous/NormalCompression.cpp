@@ -19,14 +19,14 @@ static constexpr auto gsB = static_cast<double>(temp1);
 static constexpr auto gsB2 = gsB * gsB;
 static constexpr auto temp2 = (gsN - 1);
 
-auto getGSFactor() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+auto getGSFactor() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     static auto value = temp2 * Mathematics::MathD::Sqrt(0.5);
 
     return value;
 }
 
-auto getInvFactor() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+auto getInvFactor() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     static auto value = 1.0 / getGSFactor();
 

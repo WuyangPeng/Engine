@@ -83,9 +83,9 @@ int Rendering::SingleShaderBaseDataImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(name);
-    size += CORE_TOOLS_STREAM_SIZE(variableType);
-    size += CORE_TOOLS_STREAM_SIZE(semantic);
+    auto size = CoreTools::GetStreamSize(name);
+    size += CoreTools::GetStreamSize(variableType);
+    size += CoreTools::GetStreamSize(semantic);
 
     return size;
 }

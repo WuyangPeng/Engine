@@ -79,7 +79,7 @@ namespace Mathematics
     using Segment3D = Segment3<double>;
 
     template <typename Real>
-    NODISCARD bool Approximate(const Segment3<Real>& lhs, const Segment3<Real>& rhs, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+    NODISCARD bool Approximate(const Segment3<Real>& lhs, const Segment3<Real>& rhs, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
     // µ÷ÊÔÊä³ö
     template <typename Real>

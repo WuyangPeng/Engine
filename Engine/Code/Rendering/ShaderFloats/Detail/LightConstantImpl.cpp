@@ -61,7 +61,7 @@ int Rendering::LightConstantImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return CORE_TOOLS_STREAM_SIZE(light);
+    return CoreTools::GetStreamSize(light);
 }
 
 CoreTools::ObjectSharedPtr Rendering::LightConstantImpl::GetObjectByName(const string& name)

@@ -22,8 +22,19 @@
 #include "CoreTools/ObjectSystems/ObjectLink.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegister.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::ObjectManagerTesting::ObjectManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, ObjectManagerTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ObjectManagerTesting)
+
+void CoreTools::ObjectManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::ObjectManagerTesting::MainTest()
 {

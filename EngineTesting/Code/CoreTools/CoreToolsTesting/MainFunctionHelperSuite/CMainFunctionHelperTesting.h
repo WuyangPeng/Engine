@@ -11,13 +11,20 @@
 #define CORE_TOOLS_MAIN_FUNCTION_HELPER_SUITE_C_MAIN_FUNCTION_HELPER_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class CMainFunctionHelperTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(CMainFunctionHelperTesting);
+        using ClassType = CMainFunctionHelperTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit CMainFunctionHelperTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest() noexcept;

@@ -58,12 +58,11 @@ namespace CoreTools
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
-    CORE_TOOLS_STREAM_REGISTER(Object);
+    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(Object);
 
 #include STSTEM_WARNING_POP
 
-    using ObjectSharedPtr = Object::ObjectSharedPtr;
-    using ConstObjectSharedPtr = Object::ConstObjectSharedPtr;
+    CORE_TOOLS_SHARED_PTR_DECLARE(Object);
 }
 
 #endif  // CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_H

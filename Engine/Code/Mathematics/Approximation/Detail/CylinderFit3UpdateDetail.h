@@ -65,7 +65,7 @@ void Mathematics::CylinderFit3Update<Real>::CalculateUpdateData()
 
 // private
 template <typename Real>
-void Mathematics::CylinderFit3Update<Real>::UpdateInverseRadiusSqrare() noexcept(g_Assert < 2 || g_MathematicsAssert < 2)
+void Mathematics::CylinderFit3Update<Real>::UpdateInverseRadiusSqrare() noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
     auto deltaCrossAxisLengthSquaredSum = Math::GetValue(0);
     auto deltaCrossAxisLengthQuarticSum = Math::GetValue(0);

@@ -11,13 +11,20 @@
 #define CORE_TOOLS_TEMPLATE_TOOLS_SUITE_FIBONACCI_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class FibonacciTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(FibonacciTesting);
+        using ClassType = FibonacciTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit FibonacciTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

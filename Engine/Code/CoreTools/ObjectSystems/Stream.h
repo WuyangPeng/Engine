@@ -42,10 +42,10 @@ namespace CoreTools
             auto padding = 0;
             if (0 < length)
             {
-                padding = (length % g_DefaultSize);
+                padding = (length % gDefaultSize);
                 if (0 < padding)
                 {
-                    padding = g_DefaultSize - padding;
+                    padding = gDefaultSize - padding;
                 }
             }
 

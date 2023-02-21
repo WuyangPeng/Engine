@@ -13,13 +13,20 @@
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 
 #include <string>
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class MethodPropertyTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MethodPropertyTesting);
+        using ClassType = MethodPropertyTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit MethodPropertyTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

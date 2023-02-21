@@ -41,9 +41,9 @@ namespace CoreTools
 
     private:
         // 禁止调用以下成员函数
-        size_t WriteToFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED const void* data) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4) final;
-        bool PutCharacter(MAYBE_UNUSED int character) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4) final;
-        bool PutString(MAYBE_UNUSED const std::string& str) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4) final;
+        size_t WriteToFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED const void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4) final;
+        bool PutCharacter(MAYBE_UNUSED int character) noexcept(gAssert < 4 || gCoreToolsAssert < 4) final;
+        bool PutString(MAYBE_UNUSED const std::string& str) noexcept(gAssert < 4 || gCoreToolsAssert < 4) final;
     };
 }
 

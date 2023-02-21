@@ -12,6 +12,7 @@
 #include "MemberLayoutImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
 Rendering::MemberLayoutImpl::MemberLayoutImpl(const std::string& name, int offset, int numElements)
     : name{ name }, offset{ offset }, numElements{ numElements }
@@ -46,10 +47,10 @@ int Rendering::MemberLayoutImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(name);
+    auto size = CoreTools::GetStreamSize(name);
 
-    size += CORE_TOOLS_STREAM_SIZE(offset);
-    size += CORE_TOOLS_STREAM_SIZE(numElements);
+    size += CoreTools::GetStreamSize(offset);
+    size += CoreTools::GetStreamSize(numElements);
 
     return size;
 }

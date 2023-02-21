@@ -13,13 +13,20 @@
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 
 #include <string>
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class StaticPropertyExternalTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(StaticPropertyExternalTesting);
+        using ClassType = StaticPropertyExternalTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit StaticPropertyExternalTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

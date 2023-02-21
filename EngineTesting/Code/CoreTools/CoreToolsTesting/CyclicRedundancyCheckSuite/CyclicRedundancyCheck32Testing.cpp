@@ -13,12 +13,23 @@
 #include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckHandle.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <array>
 
 using std::array;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, CyclicRedundancyCheck32Testing)
+CoreTools::CyclicRedundancyCheck32Testing::CyclicRedundancyCheck32Testing(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CyclicRedundancyCheck32Testing)
+
+void CoreTools::CyclicRedundancyCheck32Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::CyclicRedundancyCheck32Testing::MainTest()
 {

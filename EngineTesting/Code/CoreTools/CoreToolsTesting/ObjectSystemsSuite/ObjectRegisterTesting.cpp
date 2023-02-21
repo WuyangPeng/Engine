@@ -14,12 +14,23 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/Object.h"
 #include "CoreTools/ObjectSystems/ObjectRegister.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <vector>
 
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, ObjectRegisterTesting)
+CoreTools::ObjectRegisterTesting::ObjectRegisterTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ObjectRegisterTesting)
+
+void CoreTools::ObjectRegisterTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::ObjectRegisterTesting::MainTest()
 {

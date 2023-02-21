@@ -17,14 +17,25 @@
 #include "CoreTools/ObjectSystems/FileInStream.h"
 #include "CoreTools/ObjectSystems/FileOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <algorithm>
 
 using std::min;
 using std::string;
 using namespace std::literals;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, FileInStreamTesting)
+CoreTools::FileInStreamTesting::FileInStreamTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, FileInStreamTesting)
+
+void CoreTools::FileInStreamTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::FileInStreamTesting::MainTest()
 {

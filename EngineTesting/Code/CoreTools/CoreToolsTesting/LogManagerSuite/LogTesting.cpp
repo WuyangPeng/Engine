@@ -13,11 +13,23 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/LogManager/Appender.h"
 #include "CoreTools/Time/CustomTime.h"
-
+#include "CoreTools/LogManager/Log.h"
+#include "CoreTools/Helper/LogMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using namespace std::literals;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, LogTesting)
+CoreTools::LogTesting::LogTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, LogTesting)
+
+void CoreTools::LogTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 void CoreTools::LogTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LoadConfigurationTest);

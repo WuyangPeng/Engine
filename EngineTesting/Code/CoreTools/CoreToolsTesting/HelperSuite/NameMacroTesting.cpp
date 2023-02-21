@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:38)
+///	引擎测试版本：0.9.0.2 (2023/02/13 22:56)
 
 #include "NameMacroTesting.h"
 #include "Detail/NameFinalMacro.h"
@@ -16,11 +16,8 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::make_shared;
-using std::string;
-
 CoreTools::NameMacroTesting::NameMacroTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream }, name{ "name" }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -46,65 +43,86 @@ void CoreTools::NameMacroTesting::MainTest()
 void CoreTools::NameMacroTesting::BaseTest()
 {
     NameMacroBase nameMacroBase{};
-    string name{ "name" };
 
-    auto result = nameMacroBase.GetObjectByName(name);
+    const auto result = nameMacroBase.GetObjectByName(name);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(result, "查找对象失败。");
+    ASSERT_FALSE(result->IsNullObject());
     ASSERT_EQUAL(result->GetName(), name);
 
-    auto constResult = nameMacroBase.GetConstObjectByName(name);
+    const auto constResult = nameMacroBase.GetConstObjectByName(name);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(constResult, "查找对象失败。");
+    ASSERT_FALSE(constResult->IsNullObject());
     ASSERT_EQUAL(constResult->GetName(), name);
 
-    auto container = nameMacroBase.GetAllObjectsByName(name);
+    const auto container = nameMacroBase.GetAllObjectsByName(name);
     ASSERT_FALSE_FAILURE_THROW(container.empty(), "查找对象失败。");
-    ASSERT_EQUAL(container.at(0)->GetName(), name);
+    for (const auto object : container)
+    {
+        ASSERT_EQUAL(object->GetName(), name);
+    }
 
-    auto constContainer = nameMacroBase.GetAllConstObjectsByName(name);
+    const auto constContainer = nameMacroBase.GetAllConstObjectsByName(name);
     ASSERT_FALSE_FAILURE_THROW(constContainer.empty(), "查找对象失败。");
-    ASSERT_EQUAL(constContainer.at(0)->GetName(), name);
+    for (const auto object : constContainer)
+    {
+        ASSERT_EQUAL(object->GetName(), name);
+    }
 }
 
 void CoreTools::NameMacroTesting::ImplTest()
 {
-    string name{ "name" };
-    auto nameMacro = NameMacro::Create(name);
+    const auto nameMacro = NameMacro::Create(name);
 
-    auto result = nameMacro->GetObjectByName(name);
+    const auto result = nameMacro->GetObjectByName(name);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(result, "查找对象失败。");
+    ASSERT_FALSE(result->IsNullObject());
     ASSERT_EQUAL(result->GetName(), name);
 
-    auto constResult = nameMacro->GetConstObjectByName(name);
+    const auto constResult = nameMacro->GetConstObjectByName(name);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(constResult, "查找对象失败。");
+    ASSERT_FALSE(constResult->IsNullObject());
     ASSERT_EQUAL(constResult->GetName(), name);
 
-    auto container = nameMacro->GetAllObjectsByName(name);
+    const auto container = nameMacro->GetAllObjectsByName(name);
     ASSERT_FALSE_FAILURE_THROW(container.empty(), "查找对象失败。");
-    ASSERT_EQUAL(container.at(0)->GetName(), name);
+    for (const auto object : container)
+    {
+        ASSERT_EQUAL(object->GetName(), name);
+    }
 
-    auto constContainer = nameMacro->GetAllConstObjectsByName(name);
+    const auto constContainer = nameMacro->GetAllConstObjectsByName(name);
     ASSERT_FALSE_FAILURE_THROW(constContainer.empty(), "查找对象失败。");
-    ASSERT_EQUAL(constContainer.at(0)->GetName(), name);
+    for (const auto object : constContainer)
+    {
+        ASSERT_EQUAL(object->GetName(), name);
+    }
 }
 
 void CoreTools::NameMacroTesting::FinalTest()
 {
-    string name{ "name" };
-    auto nameFinalMacro = NameFinalMacro::Create(name);
+    const auto nameFinalMacro = NameFinalMacro::Create(name);
 
-    auto result = nameFinalMacro->GetObjectByName(name);
+    const auto result = nameFinalMacro->GetObjectByName(name);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(result, "查找对象失败。");
+    ASSERT_FALSE(result->IsNullObject());
     ASSERT_EQUAL(result->GetName(), name);
 
-    auto constResult = nameFinalMacro->GetConstObjectByName(name);
+    const auto constResult = nameFinalMacro->GetConstObjectByName(name);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(constResult, "查找对象失败。");
+    ASSERT_FALSE(constResult->IsNullObject());
     ASSERT_EQUAL(constResult->GetName(), name);
 
-    auto container = nameFinalMacro->GetAllObjectsByName(name);
+    const auto container = nameFinalMacro->GetAllObjectsByName(name);
     ASSERT_FALSE_FAILURE_THROW(container.empty(), "查找对象失败。");
-    ASSERT_EQUAL(container.at(0)->GetName(), name);
+    for (const auto object : container)
+    {
+        ASSERT_EQUAL(object->GetName(), name);
+    }
 
-    auto constContainer = nameFinalMacro->GetAllConstObjectsByName(name);
+    const auto constContainer = nameFinalMacro->GetAllConstObjectsByName(name);
     ASSERT_FALSE_FAILURE_THROW(constContainer.empty(), "查找对象失败。");
-    ASSERT_EQUAL(constContainer.at(0)->GetName(), name);
+    for (const auto object : constContainer)
+    {
+        ASSERT_EQUAL(object->GetName(), name);
+    }
 }

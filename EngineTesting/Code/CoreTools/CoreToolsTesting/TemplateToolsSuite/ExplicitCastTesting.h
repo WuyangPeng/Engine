@@ -14,13 +14,20 @@
 #include "CoreTools/TemplateTools/ExplicitCast.h"
 
 #include <string>
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class ExplicitCastTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ExplicitCastTesting);
+        using ClassType = ExplicitCastTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit ExplicitCastTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

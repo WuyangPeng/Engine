@@ -10,7 +10,7 @@
 #ifndef CORE_TOOLS_MESSAGE_EVENT_SUITE_EVENT_PRIORITY_FLAGS_H
 #define CORE_TOOLS_MESSAGE_EVENT_SUITE_EVENT_PRIORITY_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 #include <iostream>
 
@@ -22,8 +22,6 @@ namespace CoreTools
         Medium,
         High,
     };
-
-    ENUM_LEFT_SHIFTABLE_OPERATOR_DEFINE(EventPriority);
 }
 
 #endif  // CORE_TOOLS_MESSAGE_EVENT_SUITE_EVENT_PRIORITY_FLAGS_H

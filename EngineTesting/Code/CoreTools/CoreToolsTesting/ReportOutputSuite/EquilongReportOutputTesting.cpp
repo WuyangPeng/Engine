@@ -12,11 +12,23 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ReportOutput/EquilongReportOutput.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::string;
 using namespace std::literals;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, EquilongReportOutputTesting)
+
+CoreTools::EquilongReportOutputTesting::EquilongReportOutputTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, EquilongReportOutputTesting)
+
+void CoreTools::EquilongReportOutputTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::EquilongReportOutputTesting::MainTest()
 {

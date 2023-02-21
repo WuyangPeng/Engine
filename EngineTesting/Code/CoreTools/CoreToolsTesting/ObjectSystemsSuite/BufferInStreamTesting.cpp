@@ -18,8 +18,19 @@
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::BufferInStreamTesting::BufferInStreamTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, BufferInStreamTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, BufferInStreamTesting)
+
+void CoreTools::BufferInStreamTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::BufferInStreamTesting::MainTest()
 {

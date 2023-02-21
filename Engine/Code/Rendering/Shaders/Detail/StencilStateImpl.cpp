@@ -66,15 +66,15 @@ int Rendering::StencilStateImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(enabledState);
+    auto size = CoreTools::GetStreamSize(enabledState);
 
-    size += CORE_TOOLS_STREAM_SIZE(compareState);
-    size += CORE_TOOLS_STREAM_SIZE(referenceState);
-    size += CORE_TOOLS_STREAM_SIZE(maskState);
-    size += CORE_TOOLS_STREAM_SIZE(writeMaskState);
-    size += CORE_TOOLS_STREAM_SIZE(onFailState);
-    size += CORE_TOOLS_STREAM_SIZE(onZFailState);
-    size += CORE_TOOLS_STREAM_SIZE(onZPassState);
+    size += CoreTools::GetStreamSize(compareState);
+    size += CoreTools::GetStreamSize(referenceState);
+    size += CoreTools::GetStreamSize(maskState);
+    size += CoreTools::GetStreamSize(writeMaskState);
+    size += CoreTools::GetStreamSize(onFailState);
+    size += CoreTools::GetStreamSize(onZFailState);
+    size += CoreTools::GetStreamSize(onZPassState);
 
     return size;
 }

@@ -35,50 +35,50 @@ namespace Mathematics
         // 输入必须在范围[0,pi/2]
 
         // 1.0e-3精度
-        NODISCARD static Real FastSinRoughCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastSinRoughCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         // 1.0e-6精度（float）、1.0e-8精度（double）
-        NODISCARD static Real FastSinPreciseCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastSinPreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         // 1.0e-7精度（float）、1.0e-10精度（double）
-        NODISCARD static Real FastSinMorePreciseCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastSinMorePreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 输入必须在范围[0,pi/2]
 
         // 1.0e-2精度
-        NODISCARD static Real FastCosRoughCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastCosRoughCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         // 1.0e-7精度（float）、1.0e-8精度（double）
-        NODISCARD static Real FastCosPreciseCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastCosPreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         // 1.0e-7精度（float）、1.0e-10精度（double）
-        NODISCARD static Real FastCosMorePreciseCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastCosMorePreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 输入必须在范围[0,pi/4]
 
         // 1.0e-3精度
-        NODISCARD static Real FastTanRoughCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastTanRoughCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         // 1.0e-7精度
-        NODISCARD static Real FastTanPreciseCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastTanPreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         // 1.0e-7精度（float）、1.0e-10精度（double）
-        NODISCARD static Real FastTanMorePreciseCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastTanMorePreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 输入必须在范围[0,1]
 
         // 1.0e-4精度
-        NODISCARD static Real FastInvSinRoughCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastInvSinRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         // 1.0e-6精度（float）、1.0e-7精度（double）
-        NODISCARD static Real FastInvSinPreciseCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastInvSinPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 输入必须在范围 [0,1]
 
         // 1.0e-4精度
-        NODISCARD static Real FastInvCosRoughCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastInvCosRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         // 1.0e-6精度（float）、1.0e-7精度（double）
-        NODISCARD static Real FastInvCosPreciseCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastInvCosPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 输入必须在范围 [-1,1]
 
         // 1.0e-4精度
-        NODISCARD static Real FastInvTanRoughCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastInvTanRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         // 1.0e-7精度
-        NODISCARD static Real FastInvTanPreciseCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FastInvTanPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
     };
 
     using FastTrigonometricF = FastTrigonometric<float>;

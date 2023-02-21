@@ -12,6 +12,7 @@
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include <string>
 
 namespace CoreTools
@@ -19,7 +20,13 @@ namespace CoreTools
     class PropertiesBaseTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(PropertiesBaseTesting);
+        using ClassType = PropertiesBaseTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit PropertiesBaseTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

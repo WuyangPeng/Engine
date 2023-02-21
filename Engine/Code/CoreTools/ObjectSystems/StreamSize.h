@@ -45,7 +45,7 @@ namespace CoreTools
 
         NODISCARD constexpr static int GetStreamSize() noexcept
         {
-            return g_ObjectSize;
+            return gObjectSize;
         }
     };
 
@@ -59,7 +59,7 @@ namespace CoreTools
 
         NODISCARD constexpr static int GetStreamSize() noexcept
         {
-            return g_ObjectSize;
+            return gObjectSize;
         }
     };
 
@@ -76,7 +76,7 @@ namespace CoreTools
 
         NODISCARD constexpr static int GetStreamSize() noexcept
         {
-            return g_ObjectSize;
+            return gObjectSize;
         }
     };
 
@@ -90,7 +90,7 @@ namespace CoreTools
 
         NODISCARD constexpr static int GetStreamSize() noexcept
         {
-            return g_ObjectSize;
+            return gObjectSize;
         }
     };
 
@@ -104,7 +104,7 @@ namespace CoreTools
 
         NODISCARD constexpr static int GetStreamSize() noexcept
         {
-            return g_ObjectSize;
+            return gObjectSize;
         }
     };
 
@@ -119,7 +119,7 @@ namespace CoreTools
 
         NODISCARD constexpr static int GetStreamSize() noexcept
         {
-            return g_DefaultSize;
+            return gDefaultSize;
         }
     };
 
@@ -186,17 +186,17 @@ namespace CoreTools
         {
             if (value.empty())
             {
-                return g_DefaultSize;
+                return gDefaultSize;
             }
             else
             {
-                return boost::numeric_cast<int>(g_DefaultSize + value.size() * StreamSize<T>::GetStreamSize());
+                return boost::numeric_cast<int>(gDefaultSize + value.size() * StreamSize<T>::GetStreamSize());
             }
         }
 
         NODISCARD static int GetStreamSize() noexcept
         {
-            return g_DefaultSize;
+            return gDefaultSize;
         }
     };
 
@@ -207,17 +207,17 @@ namespace CoreTools
         {
             if (value.empty())
             {
-                return g_DefaultSize;
+                return gDefaultSize;
             }
             else
             {
-                return boost::numeric_cast<int>(g_DefaultSize + value.size() * StreamSize<T>::GetStreamSize());
+                return boost::numeric_cast<int>(gDefaultSize + value.size() * StreamSize<T>::GetStreamSize());
             }
         }
 
         NODISCARD static int GetStreamSize() noexcept
         {
-            return g_DefaultSize;
+            return gDefaultSize;
         }
     };
 
@@ -228,17 +228,17 @@ namespace CoreTools
         {
             if (value.empty())
             {
-                return g_DefaultSize;
+                return gDefaultSize;
             }
             else
             {
-                return boost::numeric_cast<int>(g_DefaultSize + value.size() * StreamSize<std::shared_ptr<T>>::GetStreamSize());
+                return boost::numeric_cast<int>(gDefaultSize + value.size() * StreamSize<std::shared_ptr<T>>::GetStreamSize());
             }
         }
 
         NODISCARD static int GetStreamSize() noexcept
         {
-            return g_DefaultSize;
+            return gDefaultSize;
         }
     };
 
@@ -249,17 +249,17 @@ namespace CoreTools
         {
             if (value.empty())
             {
-                return g_DefaultSize;
+                return gDefaultSize;
             }
             else
             {
-                return boost::numeric_cast<int>(g_DefaultSize + value.size() * StreamSize<std::weak_ptr<T>>::GetStreamSize());
+                return boost::numeric_cast<int>(gDefaultSize + value.size() * StreamSize<std::weak_ptr<T>>::GetStreamSize());
             }
         }
 
         NODISCARD static int GetStreamSize() noexcept
         {
-            return g_DefaultSize;
+            return gDefaultSize;
         }
     };
 
@@ -270,17 +270,17 @@ namespace CoreTools
         {
             if (value.empty())
             {
-                return g_DefaultSize;
+                return gDefaultSize;
             }
             else
             {
-                return boost::numeric_cast<int>(g_DefaultSize + value.size() * StreamSize<std::unique_ptr<T>>::GetStreamSize());
+                return boost::numeric_cast<int>(gDefaultSize + value.size() * StreamSize<std::unique_ptr<T>>::GetStreamSize());
             }
         }
 
         NODISCARD static int GetStreamSize() noexcept
         {
-            return g_DefaultSize;
+            return gDefaultSize;
         }
     };
 
@@ -291,11 +291,11 @@ namespace CoreTools
         {
             if (value.empty())
             {
-                return g_DefaultSize;
+                return gDefaultSize;
             }
             else
             {
-                auto size = g_DefaultSize;
+                auto size = gDefaultSize;
                 for (const auto& single : value)
                 {
                     size += StreamSize<const char*>::GetStreamSize(single);
@@ -306,7 +306,7 @@ namespace CoreTools
 
         NODISCARD static int GetStreamSize() noexcept
         {
-            return g_DefaultSize;
+            return gDefaultSize;
         }
     };
 
@@ -317,11 +317,11 @@ namespace CoreTools
         {
             if (value.empty())
             {
-                return g_DefaultSize;
+                return gDefaultSize;
             }
             else
             {
-                auto size = g_DefaultSize;
+                auto size = gDefaultSize;
                 for (const auto& single : value)
                 {
                     size += StreamSize<T>::GetStreamSize(single);
@@ -332,7 +332,7 @@ namespace CoreTools
 
         NODISCARD static int GetStreamSize() noexcept
         {
-            return g_DefaultSize;
+            return gDefaultSize;
         }
     };
 
@@ -343,11 +343,11 @@ namespace CoreTools
         {
             if (value.empty())
             {
-                return g_DefaultSize;
+                return gDefaultSize;
             }
             else
             {
-                auto size = g_DefaultSize;
+                auto size = gDefaultSize;
                 for (const auto& single : value)
                 {
                     size += StreamSize<std::string>::GetStreamSize(single);
@@ -358,7 +358,7 @@ namespace CoreTools
 
         NODISCARD static int GetStreamSize() noexcept
         {
-            return g_DefaultSize;
+            return gDefaultSize;
         }
     };
 

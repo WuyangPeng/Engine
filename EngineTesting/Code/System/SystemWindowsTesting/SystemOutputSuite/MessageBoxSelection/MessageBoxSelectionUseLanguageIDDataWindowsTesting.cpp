@@ -15,6 +15,7 @@
 #include "System/SystemOutput/MessageBoxSelection.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::MessageBoxSelectionUseLanguageIDDataWindowsTesting::MessageBoxSelectionUseLanguageIDDataWindowsTesting(const OStreamShared& stream, WindowsHWnd hwnd)
     : ParentType{ stream },

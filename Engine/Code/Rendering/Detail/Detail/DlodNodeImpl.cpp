@@ -87,14 +87,14 @@ int Rendering::DlodNodeImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(modelLodCenter);
+    auto size = CoreTools::GetStreamSize(modelLodCenter);
 
-    size += CORE_TOOLS_STREAM_SIZE(worldLodCenter);
-    size += CORE_TOOLS_STREAM_SIZE(numLevelsOfDetail);
-    size += CORE_TOOLS_STREAM_SIZE(modelMinDistance);
-    size += CORE_TOOLS_STREAM_SIZE(modelMaxDistance);
-    size += CORE_TOOLS_STREAM_SIZE(worldMinDistance);
-    size += CORE_TOOLS_STREAM_SIZE(worldMaxDistance);
+    size += CoreTools::GetStreamSize(worldLodCenter);
+    size += CoreTools::GetStreamSize(numLevelsOfDetail);
+    size += CoreTools::GetStreamSize(modelMinDistance);
+    size += CoreTools::GetStreamSize(modelMaxDistance);
+    size += CoreTools::GetStreamSize(worldMinDistance);
+    size += CoreTools::GetStreamSize(worldMaxDistance);
 
     return size;
 }

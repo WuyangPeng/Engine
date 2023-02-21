@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 0:58)
+///	标准：std:c++20
+///	引擎版本：0.9.0.2 (2023/02/05 18:06)
 
 // 单元测试类所需要的测试断言宏
 #ifndef CORE_TOOLS_HELPER_ASSERT_TEST_MACRO_H
@@ -101,12 +101,6 @@
     ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_DETAIL((lhs), (rhs), (message), (true))
 
 // assert approximate
-#define ASSERT_APPROXIMATE_FLOAT_ZERO(test) \
-    ASSERT_APPROXIMATE((test), (0.0f), (Mathematics::MathF::GetZeroTolerance()))
-
-#define ASSERT_APPROXIMATE_DOUBLE_ZERO(test) \
-    ASSERT_APPROXIMATE((test), (0.0), (Mathematics::MathD::GetZeroTolerance()))
-
 #define ASSERT_APPROXIMATE(lhs, rhs, epsilon) \
     ASSERT_APPROXIMATE_DETAIL((lhs), (rhs), (epsilon), (""), (false))
 
@@ -115,6 +109,24 @@
 
 #define ASSERT_APPROXIMATE_FAILURE_THROW(lhs, rhs, epsilon, message) \
     ASSERT_APPROXIMATE_DETAIL((lhs), (rhs), (epsilon), (message), (true))
+
+#define ASSERT_APPROXIMATE_FLOAT_ZERO(test) \
+    ASSERT_APPROXIMATE((test), (0.0f), (Mathematics::MathF::GetZeroTolerance()))
+
+#define ASSERT_APPROXIMATE_DOUBLE_ZERO(test) \
+    ASSERT_APPROXIMATE((test), (0.0), (Mathematics::MathD::GetZeroTolerance()))
+
+#define ASSERT_APPROXIMATE_FLOAT_ZERO_USE_MESSAGE(test, message) \
+    ASSERT_APPROXIMATE_USE_MESSAGE((test), (0.0f), (Mathematics::MathF::GetZeroTolerance()), (message))
+
+#define ASSERT_APPROXIMATE_DOUBLE_ZERO_USE_MESSAGE(test, message) \
+    ASSERT_APPROXIMATE_USE_MESSAGE((test), (0.0), (Mathematics::MathD::GetZeroTolerance()), (message))
+
+#define ASSERT_APPROXIMATE_FLOAT_ZERO_FAILURE_THROW(test, message) \
+    ASSERT_APPROXIMATE_FAILURE_THROW((test), (0.0f), (Mathematics::MathF::GetZeroTolerance()), (message))
+
+#define ASSERT_APPROXIMATE_DOUBLE_ZERO_FAILURE_THROW(test, message) \
+    ASSERT_APPROXIMATE_FAILURE_THROW((test), (0.0), (Mathematics::MathD::GetZeroTolerance()), (message))
 
 #define ASSERT_APPROXIMATE_USE_FUNCTION(function, lhs, rhs, epsilon) \
     ASSERT_APPROXIMATE_USE_FUNCTION_DETAIL((function), (lhs), (rhs), (epsilon), (""), (false))

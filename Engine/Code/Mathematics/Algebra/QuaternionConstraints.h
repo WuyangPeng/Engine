@@ -36,7 +36,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD bool IsValid(Real x, Real y) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD bool IsValid(Real x, Real y) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD Real GetCosMinAngle() const noexcept;
         NODISCARD Real GetSinMinAngle() const noexcept;

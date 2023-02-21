@@ -247,7 +247,7 @@ void Mathematics::Box3<Real>::Set(const Vector3& newCenter,
 }
 
 template <typename Real>
-bool Mathematics::Approximate(const Box3<Real>& lhs, const Box3<Real>& rhs, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+bool Mathematics::Approximate(const Box3<Real>& lhs, const Box3<Real>& rhs, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     return Vector3Tools<Real>::Approximate(lhs.GetCenter(), rhs.GetCenter(), epsilon) &&
            Vector3Tools<Real>::Approximate(lhs.GetAxis0(), rhs.GetAxis0(), epsilon) &&

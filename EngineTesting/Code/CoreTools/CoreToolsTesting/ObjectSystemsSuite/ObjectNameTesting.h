@@ -11,13 +11,20 @@
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_NAME_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class ObjectNameTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ObjectNameTesting);
+        using ClassType = ObjectNameTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit ObjectNameTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

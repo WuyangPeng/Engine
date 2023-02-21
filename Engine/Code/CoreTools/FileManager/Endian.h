@@ -29,25 +29,25 @@ namespace CoreTools
 
     public:
         // 测试机器的字节顺序是否是big endian。
-        NODISCARD static bool IsBigEndian() noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        NODISCARD static bool IsBigEndian() noexcept(gAssert < 0 || gCoreToolsAssert < 0);
 
         // 测试机器的字节顺序是否是little endian。
-        NODISCARD static bool IsLittleEndian() noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        NODISCARD static bool IsLittleEndian() noexcept(gAssert < 0 || gCoreToolsAssert < 0);
 
         // 交换字节顺序
-        static void Swap2ByteOrder(void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
-        static void Swap2ByteOrder(size_t itemsNumber, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
-        static void Swap4ByteOrder(void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
-        static void Swap4ByteOrder(size_t itemsNumber, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
-        static void Swap8ByteOrder(void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
-        static void Swap8ByteOrder(size_t itemsNumber, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        static void Swap2ByteOrder(void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
+        static void Swap2ByteOrder(size_t itemsNumber, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
+        static void Swap4ByteOrder(void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
+        static void Swap4ByteOrder(size_t itemsNumber, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
+        static void Swap8ByteOrder(void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
+        static void Swap8ByteOrder(size_t itemsNumber, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
 
-        static void SwapByteOrder(size_t itemSize, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
-        static void SwapByteOrder(size_t itemSize, size_t itemsNumber, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        static void SwapByteOrder(size_t itemSize, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
+        static void SwapByteOrder(size_t itemSize, size_t itemsNumber, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
 
-        static void Swap2ByteOrderToTarget(size_t itemsNumber, const uint16_t* source, uint16_t* target) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
-        static void Swap4ByteOrderToTarget(size_t itemsNumber, const uint32_t* source, uint32_t* target) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
-        static void Swap8ByteOrderToTarget(size_t itemsNumber, const uint64_t* source, uint64_t* target) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        static void Swap2ByteOrderToTarget(size_t itemsNumber, const uint16_t* source, uint16_t* target) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
+        static void Swap4ByteOrderToTarget(size_t itemsNumber, const uint32_t* source, uint32_t* target) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
+        static void Swap8ByteOrderToTarget(size_t itemsNumber, const uint64_t* source, uint64_t* target) noexcept(gAssert < 0 || gCoreToolsAssert < 0);
     };
 }
 

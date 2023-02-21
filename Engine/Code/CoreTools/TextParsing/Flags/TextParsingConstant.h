@@ -92,7 +92,7 @@ namespace CoreTools
         constexpr System::StringView g_IOStreamInclude{ SYSTEM_TEXT("#include <iostream>\n") };
         constexpr System::StringView g_UnorderedMap{ SYSTEM_TEXT("#include <unordered_map>\n") };
 
-        constexpr System::StringView g_EnumMacro{ SYSTEM_TEXT("#include \"System/Helper/EnumMacro.h\"\n") };
+        constexpr System::StringView g_EnumMacro{ SYSTEM_TEXT("#include \"System/Helper/EnumOperator.h\"\n") };
         constexpr System::StringView g_UnicodeUsing{ SYSTEM_TEXT("#include \"System/Helper/UnicodeUsing.h\"\n") };
         constexpr System::StringView g_LogMacroMacro{ SYSTEM_TEXT("#include \"CoreTools/Helper/LogMacro.h\"\n") };
         constexpr System::StringView g_CoreToolsHeadFile{ SYSTEM_TEXT("#include \"CoreTools/CoreToolsDll.h\"\n") };

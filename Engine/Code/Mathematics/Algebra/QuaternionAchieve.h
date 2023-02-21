@@ -85,7 +85,7 @@ void Mathematics::Quaternion<Real>::FromRotationMatrix(const Matrix3& matrix)
 }
 
 template <typename Real>
-Mathematics::Quaternion<Real>::Quaternion(const Vector3& axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Quaternion<Real>::Quaternion(const Vector3& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : m_W{}, m_X{}, m_Y{}, m_Z{}
 {
     MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
@@ -96,7 +96,7 @@ Mathematics::Quaternion<Real>::Quaternion(const Vector3& axis, Real angle) noexc
 }
 
 template <typename Real>
-void Mathematics::Quaternion<Real>::FromAxisAngle(const Vector3& axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Quaternion<Real>::FromAxisAngle(const Vector3& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
@@ -303,7 +303,7 @@ Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>::operator*=(Real sc
 }
 
 template <typename Real>
-Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>::operator/=(Real scalar) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>::operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -424,7 +424,7 @@ typename Mathematics::Quaternion<Real>::Matrix3Extract Mathematics::Quaternion<R
 }
 
 template <typename Real>
-Real Mathematics::Quaternion<Real>::Length() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Quaternion<Real>::Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -440,7 +440,7 @@ Real Mathematics::Quaternion<Real>::SquaredLength() const noexcept
 }
 
 template <typename Real>
-void Mathematics::Quaternion<Real>::Normalize(Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Quaternion<Real>::Normalize(Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -465,7 +465,7 @@ void Mathematics::Quaternion<Real>::Normalize(Real epsilon) noexcept(g_Assert < 
 }
 
 template <typename Real>
-Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Inverse() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Inverse() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -492,7 +492,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Conjugate() const n
 }
 
 template <typename Real>
-Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Exp() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Exp() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
     MATHEMATICS_ASSERTION_1(Math::FAbs(m_W) <= Math::GetZeroTolerance(), "四元数w必须等于0！");
@@ -723,7 +723,7 @@ void Mathematics::Quaternion<Real>::SlerpExtraSpins(Real t, const Quaternion& qu
 }
 
 template <typename Real>
-bool Mathematics::Quaternion<Real>::IsNormalize(Real epsilon) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+bool Mathematics::Quaternion<Real>::IsNormalize(Real epsilon) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -924,7 +924,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosest(Quaterni
 }
 
 template <typename Real>
-Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXY() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXY() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -973,7 +973,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXY() cons
 }
 
 template <typename Real>
-Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestYX() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestYX() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1047,7 +1047,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZY() cons
 }
 
 template <typename Real>
-typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorXYZ() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorXYZ() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1055,7 +1055,7 @@ typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion
 }
 
 template <typename Real>
-typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorXZY() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorXZY() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1063,7 +1063,7 @@ typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion
 }
 
 template <typename Real>
-typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorYZX() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorYZX() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1071,7 +1071,7 @@ typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion
 }
 
 template <typename Real>
-typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorYXZ() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorYXZ() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1079,7 +1079,7 @@ typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion
 }
 
 template <typename Real>
-typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorZXY() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorZXY() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -1087,7 +1087,7 @@ typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion
 }
 
 template <typename Real>
-typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorZYX() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorZYX() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

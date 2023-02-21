@@ -11,13 +11,20 @@
 #define CORE_TOOLS_MAIN_FUNCTION_HELPER_SUITE_DLL_FUNCTION_HELPER_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class DllFunctionHelperTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DllFunctionHelperTesting);
+        using ClassType = DllFunctionHelperTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit DllFunctionHelperTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

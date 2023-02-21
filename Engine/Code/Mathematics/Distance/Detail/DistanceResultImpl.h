@@ -42,7 +42,7 @@ namespace Mathematics
         NODISCARD Vector GetRhsClosestPoint() const;
 
         void SetDistance(Real newDistance) noexcept;
-        void SetSqrtDistance(Real newDistance) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        void SetSqrtDistance(Real newDistance) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD virtual Real GetContactTime() const noexcept;
         NODISCARD virtual Vector GetLhsClosestPoint(int index) const;

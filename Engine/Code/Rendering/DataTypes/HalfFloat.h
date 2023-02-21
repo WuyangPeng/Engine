@@ -111,7 +111,7 @@ namespace Rendering
     NODISCARD bool RENDERING_DEFAULT_DECLARE operator==(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
     NODISCARD bool RENDERING_DEFAULT_DECLARE operator<(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
 
-    NODISCARD bool RENDERING_DEFAULT_DECLARE Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon = Mathematics::MathF::GetZeroTolerance()) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+    NODISCARD bool RENDERING_DEFAULT_DECLARE Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon = Mathematics::MathF::GetZeroTolerance()) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     RENDERING_DEFAULT_DECLARE std::ostream& operator<<(std::ostream& outFile, const HalfFloat& halfFloat);
 

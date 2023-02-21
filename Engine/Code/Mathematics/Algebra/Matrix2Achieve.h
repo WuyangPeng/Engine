@@ -259,7 +259,7 @@ Mathematics::Matrix2<Real>& Mathematics::Matrix2<Real>::operator*=(Real scalar) 
 }
 
 template <typename Real>
-Mathematics::Matrix2<Real>& Mathematics::Matrix2<Real>::operator/=(Real scalar) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Matrix2<Real>& Mathematics::Matrix2<Real>::operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -361,7 +361,7 @@ Real Mathematics::Matrix2<Real>::Determinant() const noexcept
 }
 
 template <typename Real>
-Real Mathematics::Matrix2<Real>::ExtractAngle() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Real Mathematics::Matrix2<Real>::ExtractAngle() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -409,7 +409,7 @@ void Mathematics::Matrix2<Real>::Orthonormalize()
 }
 
 template <typename Real>
-typename Mathematics::Matrix2<Real>::Matrix2EigenDecomposition Mathematics::Matrix2<Real>::EigenDecomposition(const Real epsilon) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+typename Mathematics::Matrix2<Real>::Matrix2EigenDecomposition Mathematics::Matrix2<Real>::EigenDecomposition(const Real epsilon) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
     MATHEMATICS_ASSERTION_1(Math::FAbs(GetValue<0, 1>() - GetValue<1, 0>()) <= epsilon, "¾ØÕó±ØÐëÊÇ¶Ô³Æ¾ØÕó¡£");

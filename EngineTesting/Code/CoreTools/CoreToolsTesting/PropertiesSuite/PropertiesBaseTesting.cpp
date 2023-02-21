@@ -11,8 +11,19 @@
 #include "Detail/PropertiesBase.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::PropertiesBaseTesting::PropertiesBaseTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, PropertiesBaseTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, PropertiesBaseTesting)
+
+void CoreTools::PropertiesBaseTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::PropertiesBaseTesting::MainTest()
 {

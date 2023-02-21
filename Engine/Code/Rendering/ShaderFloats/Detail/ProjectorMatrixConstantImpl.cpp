@@ -69,8 +69,8 @@ int Rendering::ProjectorMatrixConstantImpl::GetStreamingSize() const noexcept
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     auto size = ParentType::GetStreamingSize();
-    size += CORE_TOOLS_STREAM_SIZE(biased);
-    size += CORE_TOOLS_STREAM_SIZE(biasScaleMatrixIndex);
+    size += CoreTools::GetStreamSize(biased);
+    size += CoreTools::GetStreamSize(biasScaleMatrixIndex);
 
     return size;
 }

@@ -484,21 +484,21 @@ int Rendering::CurveMesh::GetStreamingSize() const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     auto size = ParentType::GetStreamingSize();
-    size += CORE_TOOLS_STREAM_SIZE(numFullVertices);
-    size += CORE_TOOLS_STREAM_SIZE(numSegments);
-    size += CORE_TOOLS_STREAM_SIZE(level);
-    size += CORE_TOOLS_STREAM_SIZE(allowDynamicChange);
-    size += CORE_TOOLS_STREAM_SIZE(origVBuffer);
-    size += CORE_TOOLS_STREAM_SIZE(origParams);
+    size += CoreTools::GetStreamSize(numFullVertices);
+    size += CoreTools::GetStreamSize(numSegments);
+    size += CoreTools::GetStreamSize(level);
+    size += CoreTools::GetStreamSize(allowDynamicChange);
+    size += CoreTools::GetStreamSize(origVBuffer);
+    size += CoreTools::GetStreamSize(origParams);
 
     if (!segments.empty())
     {
-        size += numSegments * CORE_TOOLS_STREAM_SIZE(segments.at(0));
+        size += numSegments * CoreTools::GetStreamSize(segments.at(0));
     }
 
     if (!cInfo.empty())
     {
-        size += numFullVertices * CORE_TOOLS_STREAM_SIZE(cInfo.at(0).segment);
+        size += numFullVertices * CoreTools::GetStreamSize(cInfo.at(0).segment);
         size += numFullVertices * sizeof(cInfo[0].param);
     }
 

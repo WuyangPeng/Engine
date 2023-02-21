@@ -13,10 +13,21 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/ExplicitCastDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, ExplicitCastTesting)
+CoreTools::ExplicitCastTesting::ExplicitCastTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ExplicitCastTesting)
+
+void CoreTools::ExplicitCastTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::ExplicitCastTesting::MainTest()
 {

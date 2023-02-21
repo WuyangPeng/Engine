@@ -1,18 +1,15 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:23)
+///	引擎测试版本：0.9.0.2 (2023/02/13 22:59)
 
 #include "NameMacroBase.h"
 #include "TestingObject.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
-using std::make_shared;
-using std::string;
 
 CoreTools::NameMacroBase::NameMacroBase() noexcept
 {
@@ -21,38 +18,34 @@ CoreTools::NameMacroBase::NameMacroBase() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, NameMacroBase)
 
-CoreTools::ObjectSharedPtr CoreTools::NameMacroBase::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr CoreTools::NameMacroBase::GetObjectByName(const std::string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return make_shared<TestingObject>(name);
+    return std::make_shared<TestingObject>(name);
 }
 
-CoreTools::NameMacroBase::ObjectSharedPtrContainer CoreTools::NameMacroBase::GetAllObjectsByName(const string& name)
+CoreTools::NameMacroBase::ObjectSharedPtrContainer CoreTools::NameMacroBase::GetAllObjectsByName(const std::string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    ObjectSharedPtrContainer result{};
-
-    result.emplace_back(make_shared<TestingObject>(name));
+    ObjectSharedPtrContainer result{ std::make_shared<TestingObject>(name) };
 
     return result;
 }
 
-CoreTools::ConstObjectSharedPtr CoreTools::NameMacroBase::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr CoreTools::NameMacroBase::GetConstObjectByName(const std::string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return make_shared<TestingObject>(name);
+    return std::make_shared<TestingObject>(name);
 }
 
-CoreTools::NameMacroBase::ConstObjectSharedPtrContainer CoreTools::NameMacroBase::GetAllConstObjectsByName(const string& name) const
+CoreTools::NameMacroBase::ConstObjectSharedPtrContainer CoreTools::NameMacroBase::GetAllConstObjectsByName(const std::string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    ConstObjectSharedPtrContainer result{};
-
-    result.emplace_back(make_shared<TestingObject>(name));
+    ConstObjectSharedPtrContainer result{ std::make_shared<TestingObject>(name) };
 
     return result;
 }

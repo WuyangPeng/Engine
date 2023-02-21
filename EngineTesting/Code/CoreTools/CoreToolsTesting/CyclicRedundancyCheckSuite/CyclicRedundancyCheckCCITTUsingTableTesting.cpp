@@ -8,18 +8,29 @@
 ///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/19 14:20)
 
 #include "CyclicRedundancyCheckCCITTUsingTableTesting.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckCCITT.h"
 #include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckCCITTUsingTable.h"
 #include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckHandle.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <array>
 
 using std::array;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, CyclicRedundancyCheckCCITTUsingTableTesting)
+CoreTools::CyclicRedundancyCheckCCITTUsingTableTesting::CyclicRedundancyCheckCCITTUsingTableTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CyclicRedundancyCheckCCITTUsingTableTesting)
+
+void CoreTools::CyclicRedundancyCheckCCITTUsingTableTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::CyclicRedundancyCheckCCITTUsingTableTesting::MainTest()
 {

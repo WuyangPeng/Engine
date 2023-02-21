@@ -61,7 +61,7 @@ int Rendering::ProjectorConstantImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return CORE_TOOLS_STREAM_SIZE(projector);
+    return CoreTools::GetStreamSize(projector);
 }
 
 CoreTools::ObjectSharedPtr Rendering::ProjectorConstantImpl::GetObjectByName(const string& name)

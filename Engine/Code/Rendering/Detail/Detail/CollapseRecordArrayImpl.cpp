@@ -82,7 +82,7 @@ int Rendering::CollapseRecordArrayImpl::GetStreamingSize() const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     auto numRecords = boost::numeric_cast<int>(collapseRecord.size());
-    auto size = CORE_TOOLS_STREAM_SIZE(numRecords);
+    auto size = CoreTools::GetStreamSize(numRecords);
 
     for (const auto& record : collapseRecord)
     {

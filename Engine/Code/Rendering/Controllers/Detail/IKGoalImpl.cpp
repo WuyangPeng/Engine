@@ -41,9 +41,9 @@ int Rendering::IKGoalImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(weight);
-    size += CORE_TOOLS_STREAM_SIZE(goalTarget);
-    size += CORE_TOOLS_STREAM_SIZE(effector);
+    auto size = CoreTools::GetStreamSize(weight);
+    size += CoreTools::GetStreamSize(goalTarget);
+    size += CoreTools::GetStreamSize(effector);
 
     return size;
 }

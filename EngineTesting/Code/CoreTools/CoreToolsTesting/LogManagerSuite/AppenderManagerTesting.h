@@ -11,13 +11,20 @@
 #define CORE_TOOLS_LOG_MANAGER_SUITE_LOGGER_MANAGER_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class AppenderManagerTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(AppenderManagerTesting);
+        using ClassType = AppenderManagerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit AppenderManagerTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

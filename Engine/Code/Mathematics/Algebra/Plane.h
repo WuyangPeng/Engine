@@ -72,7 +72,7 @@ namespace Mathematics
         // 访问单个组件。
         void SetConstant(T constant) noexcept;
         void SetEpsilon(T newEpsilon) noexcept;
-        void SetNormal(const AVector& normal) noexcept(g_Assert < 2 || g_MathematicsAssert < 2);
+        void SetNormal(const AVector& normal) noexcept(gAssert < 2 || gMathematicsAssert < 2);
         NODISCARD T GetConstant() const noexcept;
         NODISCARD T GetEpsilon() const noexcept;
         NODISCARD AVector GetNormal() const noexcept;

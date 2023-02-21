@@ -178,15 +178,15 @@ int Rendering::BlendStateTarget::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(enable);
+    auto size = CoreTools::GetStreamSize(enable);
 
-    size += CORE_TOOLS_STREAM_SIZE(sourceColor);
-    size += CORE_TOOLS_STREAM_SIZE(destinationColor);
-    size += CORE_TOOLS_STREAM_SIZE(operationColor);
-    size += CORE_TOOLS_STREAM_SIZE(sourceAlpha);
-    size += CORE_TOOLS_STREAM_SIZE(destinationAlpha);
-    size += CORE_TOOLS_STREAM_SIZE(operationAlpha);
-    size += CORE_TOOLS_STREAM_SIZE(mask);
+    size += CoreTools::GetStreamSize(sourceColor);
+    size += CoreTools::GetStreamSize(destinationColor);
+    size += CoreTools::GetStreamSize(operationColor);
+    size += CoreTools::GetStreamSize(sourceAlpha);
+    size += CoreTools::GetStreamSize(destinationAlpha);
+    size += CoreTools::GetStreamSize(operationAlpha);
+    size += CoreTools::GetStreamSize(mask);
 
     return size;
 }

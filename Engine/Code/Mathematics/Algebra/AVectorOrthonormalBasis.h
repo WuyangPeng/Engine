@@ -41,8 +41,8 @@ namespace Mathematics
 
     private:
         void Generate();
-        void GenerateOnXOrZIsMax() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        void GenerateOnYOrZIsMax() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        void GenerateOnXOrZIsMax() noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        void GenerateOnYOrZIsMax() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:
         bool isUnit;

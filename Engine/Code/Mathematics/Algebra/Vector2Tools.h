@@ -40,12 +40,12 @@ namespace Mathematics
         using ContainerType = std::vector<Vector2>;
 
     public:
-        NODISCARD static bool Approximate(const Vector2& lhs, const Vector2& rhs, const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD static bool Approximate(const Vector2& lhs, const Vector2& rhs, const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD static Real GetRobustLength(const Vector2& vector);
-        NODISCARD static Real GetLength(const Vector2& vector) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real GetLength(const Vector2& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD static Real GetLengthSquared(const Vector2& vector) noexcept;
-        NODISCARD static Real Distance(const Vector2& lhs, const Vector2& rhs) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real Distance(const Vector2& lhs, const Vector2& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD static Real DistanceSquared(const Vector2& lhs, const Vector2& rhs) noexcept;
         NODISCARD static Real DotProduct(const Vector2& lhs, const Vector2& rhs) noexcept;
 
@@ -54,14 +54,14 @@ namespace Mathematics
 
         NODISCARD static Vector2 ParallelVectorLhsToRhs(const Vector2& lhs, const Vector2& rhs, const Real epsilon = Math::GetZeroTolerance());
         NODISCARD static Vector2 ApeakVectorLhsToRhs(const Vector2& lhs, const Vector2& rhs, const Real epsilon = Math::GetZeroTolerance());
-        NODISCARD static Real GetVectorIncludedAngle(const Vector2& lhs, const Vector2& rhs) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real GetVectorIncludedAngle(const Vector2& lhs, const Vector2& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 垂直线相关
         // 返回 (y,-x).
         NODISCARD static Vector2 GetPerp(const Vector2& vector) noexcept;
 
         // 返回 (y,-x) / sqrt(x * x + y * y).
-        NODISCARD static Vector2 GetUnitPerp(const Vector2& vector, const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD static Vector2 GetUnitPerp(const Vector2& vector, const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 返回 DotPerp((lhs.x,lhs.y),(rhs.x,rhs.y)) = lhs.x * rhs.y - lhs.y * rhs.x.
         NODISCARD static Real DotPerp(const Vector2& lhs, const Vector2& rhs) noexcept;
@@ -77,7 +77,7 @@ namespace Mathematics
         // 返回值是一个标准正交基{U，V}。
         // 返回的V为通过此函数正则化的nonzeroVector。
         // 如果你已知V是单位长度，使用U = GetPerp(V)。
-        NODISCARD static Vector2OrthonormalBasis GenerateOrthonormalBasis(const Vector2& nonzeroVector, const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD static Vector2OrthonormalBasis GenerateOrthonormalBasis(const Vector2& nonzeroVector, const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD static Vector3 LiftHomogeneous(const Vector2& vector, Real last) noexcept;
         NODISCARD static Vector3 Lift(const Vector2& vector, int inject, Real value);

@@ -48,7 +48,7 @@ int Rendering::VisualEffectImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return program->GetStreamingSize() + CORE_TOOLS_STREAM_SIZE(pvwMatrixConstant);
+    return program->GetStreamingSize() + CoreTools::GetStreamSize(pvwMatrixConstant);
 }
 
 void Rendering::VisualEffectImpl::Save(BufferTarget& target) const

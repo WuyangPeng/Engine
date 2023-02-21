@@ -45,7 +45,7 @@ int Rendering::Projector::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(DepthType{});
+    size += CoreTools::GetStreamSize(DepthType{});
 
     return size;
 }

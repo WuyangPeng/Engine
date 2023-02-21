@@ -61,7 +61,7 @@ int Rendering::MaterialConstantImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return CORE_TOOLS_STREAM_SIZE(material);
+    return CoreTools::GetStreamSize(material);
 }
 
 CoreTools::ObjectSharedPtr Rendering::MaterialConstantImpl::GetObjectByName(const string& name)

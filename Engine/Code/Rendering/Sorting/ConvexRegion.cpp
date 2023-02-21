@@ -200,8 +200,8 @@ int Rendering::ConvexRegion::GetStreamingSize() const
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     auto size = ParentType::GetStreamingSize();
-    size += CORE_TOOLS_STREAM_SIZE(numPortals);
-    size += numPortals * CORE_TOOLS_STREAM_SIZE(portals.at(0));
+    size += CoreTools::GetStreamSize(numPortals);
+    size += numPortals * CoreTools::GetStreamSize(portals.at(0));
     return size;
 }
 

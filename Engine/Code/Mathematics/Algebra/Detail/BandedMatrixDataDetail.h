@@ -13,7 +13,7 @@
 #include "BandedMatrixData.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/StreamMacro.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
 #include <gsl/util>
 
@@ -112,7 +112,7 @@ void Mathematics::BandedMatrixData<Real>::ResetSize(int newSize, int bandsNumber
 }
 
 template <typename Real>
-int Mathematics::BandedMatrixData<Real>::GetBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+int Mathematics::BandedMatrixData<Real>::GetBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
     MATHEMATICS_ASSERTION_1(0 <= index && index < GetBandsNumber(), "无效索引在 GetBandMax\n");

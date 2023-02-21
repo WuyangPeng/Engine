@@ -42,10 +42,10 @@ namespace Mathematics
         using ContainerType = std::vector<Vector3>;
 
     public:
-        NODISCARD static bool Approximate(const Vector3& lhs, const Vector3& rhs, const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD static bool Approximate(const Vector3& lhs, const Vector3& rhs, const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD static Real GetRobustLength(const Vector3& vector);
-        NODISCARD static Real GetLength(const Vector3& vector) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real GetLength(const Vector3& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD static Real GetLengthSquared(const Vector3& vector) noexcept;
         NODISCARD static Real DotProduct(const Vector3& lhs, const Vector3& rhs) noexcept;
 
@@ -55,9 +55,9 @@ namespace Mathematics
         // 您将需要更改的矢量符号（替换每个组件值c为-c）。
         NODISCARD static Vector3 CrossProduct(const Vector3& lhs, const Vector3& rhs) noexcept;
         NODISCARD static Vector3 CrossProductWithReduceMultiplication(const Vector3& lhs, const Vector3& rhs) noexcept;
-        NODISCARD static Vector3 UnitCrossProduct(const Vector3& lhs, const Vector3& rhs, const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD static Vector3 UnitCrossProduct(const Vector3& lhs, const Vector3& rhs, const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        NODISCARD static Real Distance(const Vector3& lhs, const Vector3& rhs) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real Distance(const Vector3& lhs, const Vector3& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD static Real DistanceSquared(const Vector3& lhs, const Vector3& rhs) noexcept;
         NODISCARD static Vector3 ParallelVectorLhsToRhs(const Vector3& lhs, const Vector3& rhs, const Real epsilon = Math::GetZeroTolerance());
         NODISCARD static Vector3 ApeakVectorLhsToRhs(const Vector3& lhs, const Vector3& rhs, const Real epsilon = Math::GetZeroTolerance());
@@ -65,9 +65,9 @@ namespace Mathematics
         NODISCARD static Vector3 RefractionVector(const Vector3& ray, const Vector3& normal, Real consistencyRatio);
         NODISCARD static Vector3 FeatheringOutZAxes(const Vector3& vector, Function function);
         NODISCARD static Vector3 TwistZAxes(const Vector3& vector, Function function);
-        NODISCARD static Vector3 BendYAxes(const Vector3& vector, Real curvatureRadius, Real bendCenter, Real bendAreaMin, Real bendAreaMax) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD static Vector3 BendYAxes(const Vector3& vector, Real curvatureRadius, Real bendCenter, Real bendAreaMin, Real bendAreaMax) noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD static Real ScalarTripleProduct(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2) noexcept;
-        NODISCARD static Real GetVectorIncludedAngle(const Vector3& lhs, const Vector3& rhs) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real GetVectorIncludedAngle(const Vector3& lhs, const Vector3& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 计算点的轴对齐包围盒。
         NODISCARD static AxesAlignBoundingBox3D ComputeExtremes(const ContainerType& vectors);

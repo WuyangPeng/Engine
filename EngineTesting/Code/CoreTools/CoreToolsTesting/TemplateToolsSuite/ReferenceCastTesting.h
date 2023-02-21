@@ -11,13 +11,20 @@
 #define CORE_TOOLS_TEMPLATE_TOOLS_SUITE_REFERENCE_CAST_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class ReferenceCastTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ReferenceCastTesting);
+        using ClassType = ReferenceCastTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit ReferenceCastTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

@@ -366,6 +366,8 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsImport.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsLib.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsNoImport.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Coroutine\Coroutine.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Coroutine\CoroutineFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck16.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck32.h" />

@@ -39,13 +39,13 @@ namespace Mathematics
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         // 对于导数逼近。
-        void SetDifferenceStep(Real newDifferenceStep) noexcept(g_Assert < 2 || g_MathematicsAssert < 2);
+        void SetDifferenceStep(Real newDifferenceStep) noexcept(gAssert < 2 || gMathematicsAssert < 2);
         NODISCARD Real GetDifferenceStep() const noexcept;
 
-        void SetMaximumIterations(int newMaximumIterations) noexcept(g_Assert < 2 || g_MathematicsAssert < 2);
+        void SetMaximumIterations(int newMaximumIterations) noexcept(gAssert < 2 || gMathematicsAssert < 2);
         NODISCARD int GetMaximumIterations() const noexcept;
 
-        void SetZeroThreshold(Real newZeroThreshold) noexcept(g_Assert < 2 || g_MathematicsAssert < 2);
+        void SetZeroThreshold(Real newZeroThreshold) noexcept(gAssert < 2 || gMathematicsAssert < 2);
         NODISCARD Real GetZeroThreshold() const noexcept;
 
         // 静态距离查询。

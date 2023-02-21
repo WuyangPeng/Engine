@@ -56,12 +56,12 @@ namespace Mathematics
         VariableLengthVector& operator+=(const VariableLengthVector& rhs);
         VariableLengthVector& operator-=(const VariableLengthVector& rhs);
         VariableLengthVector& operator*=(Real scalar) noexcept;
-        VariableLengthVector& operator/=(Real scalar) noexcept(g_MathematicsAssert < 0);
+        VariableLengthVector& operator/=(Real scalar) noexcept(gMathematicsAssert < 0);
 
         // ÏòÁ¿ÔËËã
-        NODISCARD Real Length() const noexcept(g_MathematicsAssert < 2);
-        NODISCARD Real SquaredLength() const noexcept(g_MathematicsAssert < 2);
-        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(g_MathematicsAssert < 2);
+        NODISCARD Real Length() const noexcept(gMathematicsAssert < 2);
+        NODISCARD Real SquaredLength() const noexcept(gMathematicsAssert < 2);
+        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gMathematicsAssert < 2);
 
         NODISCARD ContainerType GetContainer() const;
         void SetContainer(const ContainerType& newContainer);

@@ -11,13 +11,20 @@
 #define CORE_TOOLS_DATA_TYPES_SUITE_MIN_HEAP_RECORD_STORED_MANAGER_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class MinHeapRecordStoredManagerTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MinHeapRecordStoredManagerTesting);
+        using ClassType = MinHeapRecordStoredManagerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit MinHeapRecordStoredManagerTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

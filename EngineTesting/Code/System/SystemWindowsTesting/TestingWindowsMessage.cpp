@@ -11,6 +11,7 @@
 #include "TestingWindowsMessage.h"
 #include "System/Windows/WindowsCreate.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
+#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 #include "Framework/WindowProcess/WindowMessageUnitTestSuiteDetail.h"
 

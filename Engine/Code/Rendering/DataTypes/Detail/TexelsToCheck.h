@@ -30,7 +30,7 @@ namespace Rendering
 
         NODISCARD size_t GetOutTexelsLength() const noexcept;
 
-        void CheckOutTexels(MAYBE_UNUSED size_t outTexelsSize) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void CheckOutTexels(MAYBE_UNUSED size_t outTexelsSize) noexcept(gAssert < 2 || gRenderingAssert < 2);
 
     private:
         static constexpr auto step = ColourTextureFormatTraits<Format>::step;

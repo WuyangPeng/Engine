@@ -94,10 +94,10 @@ int Rendering::VertexFormatAttribute::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(dataFormatType);
-    size += CORE_TOOLS_STREAM_SIZE(semantic);
-    size += CORE_TOOLS_STREAM_SIZE(usageIndex);
-    size += CORE_TOOLS_STREAM_SIZE(offset);
+    auto size = CoreTools::GetStreamSize(dataFormatType);
+    size += CoreTools::GetStreamSize(semantic);
+    size += CoreTools::GetStreamSize(usageIndex);
+    size += CoreTools::GetStreamSize(offset);
 
     return size;
 }

@@ -246,8 +246,8 @@ int Rendering::PlanarReflectionEffect::GetStreamingSize() const
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     auto size = ParentType::GetStreamingSize();
-    size += CORE_TOOLS_STREAM_SIZE(numPlanes);
-    size += numPlanes * CORE_TOOLS_STREAM_SIZE(reflectances.at(0));
+    size += CoreTools::GetStreamSize(numPlanes);
+    size += numPlanes * CoreTools::GetStreamSize(reflectances.at(0));
     size += numPlanes * RENDERING_STREAM_SIZE(planes.at(0));
     return size;
 }

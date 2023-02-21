@@ -104,7 +104,7 @@
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingWin32DebugLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingStaticWin32DebugLibs.props" />
@@ -114,7 +114,7 @@
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingWin32ReleaseLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingStaticWin32ReleaseLibs.props" />
@@ -124,7 +124,7 @@
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingX64DebugLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingStaticX64DebugLibs.props" />
@@ -134,7 +134,7 @@
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingX64ReleaseLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingStaticX64ReleaseLibs.props" />
@@ -176,24 +176,24 @@
       <AdditionalLibraryDirectories>$(AssistWin32DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
-xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -208,24 +208,24 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
       <AdditionalLibraryDirectories>$(AssistStaticWin32DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
-xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -244,24 +244,24 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
       <AdditionalLibraryDirectories>$(AssistWin32ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
-xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -280,24 +280,24 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
       <AdditionalLibraryDirectories>$(AssistStaticWin32ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
-xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -312,24 +312,24 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
       <AdditionalLibraryDirectories>$(AssistX64DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
-xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -344,24 +344,24 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
       <AdditionalLibraryDirectories>$(AssistStaticX64DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
-xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -380,24 +380,24 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
       <AdditionalLibraryDirectories>$(AssistX64ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
-xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -416,24 +416,24 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
       <AdditionalLibraryDirectories>$(AssistStaticX64ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
-xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
-xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -531,6 +531,9 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\IFStreamManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\OFStreamManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FreetypeSuite\FreetypeSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertExecuteLoopNotThrowTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertNotThrowExceptionTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertThrowExceptionTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestApproximateTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestConditionTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestExceptionThrowTesting.h" />
@@ -550,19 +553,31 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PureVirtual.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PureVirtualFinal.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\StreamObject.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestHash.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestHashKey.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\UnitTestSuiteAddTestMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\UnitTestSuiteMacroCompleteUseTestingType.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Exception\ExceptionCatchMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Exception\ExceptionMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyModuleExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyModuleExportMacroTestingDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyUnsharedExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyUnsharedExportMacroTestingDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\DelayCopyUnsharedExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\DelayCopyUnsharedExportMacroTestingDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ExportMacroTestingDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ModuleExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ModuleExportMacroTestingDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\NonCopyExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\NonCopyExportMacroTestingDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\PerformanceUnsharedExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\PerformanceUnsharedExportMacroTestingDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\SharedExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\SharedExportMacroTestingDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\GetRequiredBitsTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\HashCombineTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\HelperSuiteFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogConsoleMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogDefaultMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogEngineMacroTesting.h" />
@@ -577,11 +592,11 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DebugStreamMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DefaultTestingNoObjectPtrTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DefaultTestingObjectPtrTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\StreamSizeMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingNoObjectPtrTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectPtrTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectSizeTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroTestingDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogAppenderIOManagerTesting.h" />
@@ -595,7 +610,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessagePrefixTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessageTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertExceptionMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\ClassInvariant\ClassInvariantMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\AbstractObject.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\ClassInvariantStubMacroTesting.h" />
@@ -628,8 +642,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SingletonMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SharedPtrMacroTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteUseTestingTypeTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UserMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\CMainFunctionHelperTesting.h" />
@@ -1210,6 +1222,9 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\GenerateRandomNameTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\IFStreamManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\OFStreamManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertExecuteLoopNotThrowTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertNotThrowExceptionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertThrowExceptionTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestApproximateTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestConditionTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestExceptionThrowTesting.cpp" />
@@ -1228,6 +1243,8 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameFinalMacro.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PureVirtualFinal.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\StreamObject.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestHash.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestHashKey.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\UnitTestSuiteAddTestMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\UnitTestSuiteMacroCompleteUseTestingType.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Exception\ExceptionCatchMacroTesting.cpp" />
@@ -1241,6 +1258,7 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\PerformanceUnsharedExportMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\SharedExportMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\GetRequiredBitsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\HashCombineTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogConsoleMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogDefaultMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogEngineMacroTesting.cpp" />
@@ -1255,7 +1273,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DebugStreamMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DefaultTestingNoObjectPtrTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DefaultTestingObjectPtrTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\StreamSizeMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingNoObjectPtrTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectPtrTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectSizeTesting.cpp" />
@@ -1272,7 +1289,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessagePrefixTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessageTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertExceptionMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\ClassInvariant\ClassInvariantMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\AbstractObject.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\ClassInvariantStubMacroTesting.cpp" />
@@ -1301,8 +1317,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SingletonMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SharedPtrMacroTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteUseTestingTypeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UserMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\CMainFunctionHelperTesting.cpp" />

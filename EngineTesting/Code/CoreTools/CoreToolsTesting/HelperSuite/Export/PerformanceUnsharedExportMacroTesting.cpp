@@ -1,15 +1,13 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:29)
+///	引擎测试版本：0.9.0.2 (2023/02/11 23:35)
 
-#include "PerformanceUnsharedExportMacroTesting.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/Helper/AssertMacro.h"
+#include "PerformanceUnsharedExportMacroTestingDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -46,157 +44,21 @@ void CoreTools::PerformanceUnsharedExportMacroTesting::DoRunUnitTest()
 
 void CoreTools::PerformanceUnsharedExportMacroTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(ExportPerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CoreToolsPerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(NetworkPerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DatabasePerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ScriptPerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MathematicsPerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(SoundEffectPerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(InputOutputPerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ResourceManagerPerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(RenderingPerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(PhysicsPerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ImagicsPerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(AnimationPerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ArtificialIntellegencePerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(UserInterfacePerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(AssistToolsPerformanceUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(FrameworkPerformanceUnsharedTest);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::ExportPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    CoreTools::ExportPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::CoreToolsPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    CoreTools::CoreToolsPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::NetworkPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    Network::NetworkPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::DatabasePerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    Database::DatabasePerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::ScriptPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    Script::ScriptPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::MathematicsPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    Mathematics::MathematicsPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::SoundEffectPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    SoundEffect::SoundEffectPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::InputOutputPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    InputOutput::InputOutputPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::ResourceManagerPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    ResourceManager::ResourceManagerPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::RenderingPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    Rendering::RenderingPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::PhysicsPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    Physics::PhysicsPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::ImagicsPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    Imagics::ImagicsPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::AnimationPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    Animation::AnimationPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::ArtificialIntellegencePerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    ArtificialIntellegence::ArtificialIntellegencePerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::UserInterfacePerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    UserInterface::UserInterfacePerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::AssistToolsPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    AssistTools::AssistToolsPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::PerformanceUnsharedExportMacroTesting::FrameworkPerformanceUnsharedTest()
-{
-    constexpr auto count = 10;
-    Framework::FrameworkPerformanceUnsharedMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<ExportPerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<CoreToolsPerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<Network::NetworkPerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<Database::DatabasePerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<Script::ScriptPerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<Mathematics::MathematicsPerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<SoundEffect::SoundEffectPerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<InputOutput::InputOutputPerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<ResourceManager::ResourceManagerPerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<Rendering::RenderingPerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<Physics::PhysicsPerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<Imagics::ImagicsPerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<Animation::AnimationPerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<ArtificialIntellegence::ArtificialIntellegencePerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<UserInterface::UserInterfacePerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<AssistTools::AssistToolsPerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<Framework::FrameworkPerformanceUnsharedMacro>);
 }

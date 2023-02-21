@@ -10,14 +10,20 @@
 #ifndef CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_SUITE_CYCLIC_REDUNDANCY_CHECKCCITT_USING_TABLE_TESTING_H
 #define CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_SUITE_CYCLIC_REDUNDANCY_CHECKCCITT_USING_TABLE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class CyclicRedundancyCheckCCITTUsingTableTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(CyclicRedundancyCheckCCITTUsingTableTesting);
+        using ClassType = CyclicRedundancyCheckCCITTUsingTableTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit CyclicRedundancyCheckCCITTUsingTableTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

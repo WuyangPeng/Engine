@@ -87,10 +87,10 @@ namespace Mathematics
         void SetX(Real x) noexcept;
         void SetY(Real y) noexcept;
         void SetZ(Real z) noexcept;
-        void Normalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void RobustNormalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void Normalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void RobustNormalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        NODISCARD bool IsNormalize(const Real epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD bool IsNormalize(const Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD Vector3 operator-() const noexcept;
         NODISCARD const Real& operator[](int index) const;
@@ -101,7 +101,7 @@ namespace Mathematics
         Vector3& operator+=(const Vector3& rhs) noexcept;
         Vector3& operator-=(const Vector3& rhs) noexcept;
         Vector3& operator*=(Real rhs) noexcept;
-        Vector3& operator/=(Real rhs) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        Vector3& operator/=(Real rhs) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // ÌØÊâVector3
         // (0,0,0)

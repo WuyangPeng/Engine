@@ -20,7 +20,7 @@
 
 using std::swap;
 
-bool CoreTools::Endian::IsLittleEndian() noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+bool CoreTools::Endian::IsLittleEndian() noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     static constexpr auto one = 1;
 
@@ -44,17 +44,17 @@ bool CoreTools::Endian::IsLittleEndian() noexcept(g_Assert < 0 || g_CoreToolsAss
     return isLittleEndian;
 }
 
-bool CoreTools::Endian::IsBigEndian() noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+bool CoreTools::Endian::IsBigEndian() noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     return !IsLittleEndian();
 }
 
-void CoreTools::Endian::Swap2ByteOrder(void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+void CoreTools::Endian::Swap2ByteOrder(void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     SwapByteOrder(2, data);
 }
 
-void CoreTools::Endian::Swap2ByteOrder(size_t itemsNumber, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+void CoreTools::Endian::Swap2ByteOrder(size_t itemsNumber, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     if (data != nullptr && 0 < itemsNumber)
     {
@@ -66,12 +66,12 @@ void CoreTools::Endian::Swap2ByteOrder(size_t itemsNumber, void* data) noexcept(
     }
 }
 
-void CoreTools::Endian::Swap4ByteOrder(void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+void CoreTools::Endian::Swap4ByteOrder(void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     SwapByteOrder(4, data);
 }
 
-void CoreTools::Endian::Swap4ByteOrder(size_t itemsNumber, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+void CoreTools::Endian::Swap4ByteOrder(size_t itemsNumber, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     if (data != nullptr && 0 < itemsNumber)
     {
@@ -83,12 +83,12 @@ void CoreTools::Endian::Swap4ByteOrder(size_t itemsNumber, void* data) noexcept(
     }
 }
 
-void CoreTools::Endian::Swap8ByteOrder(void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+void CoreTools::Endian::Swap8ByteOrder(void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     SwapByteOrder(8, data);
 }
 
-void CoreTools::Endian::Swap8ByteOrder(size_t itemsNumber, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+void CoreTools::Endian::Swap8ByteOrder(size_t itemsNumber, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     if (data != nullptr && 0 < itemsNumber)
     {
@@ -100,7 +100,7 @@ void CoreTools::Endian::Swap8ByteOrder(size_t itemsNumber, void* data) noexcept(
     }
 }
 
-void CoreTools::Endian::SwapByteOrder(size_t itemSize, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+void CoreTools::Endian::SwapByteOrder(size_t itemSize, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     CORE_TOOLS_ASSERTION_0(data != nullptr, "指针无效！");
     CORE_TOOLS_ASSERTION_2(itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为2，4或8\n");
@@ -115,7 +115,7 @@ void CoreTools::Endian::SwapByteOrder(size_t itemSize, void* data) noexcept(g_As
     }
 }
 
-void CoreTools::Endian::SwapByteOrder(size_t itemSize, size_t itemsNumber, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+void CoreTools::Endian::SwapByteOrder(size_t itemSize, size_t itemsNumber, void* data) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     CORE_TOOLS_ASSERTION_0(data != nullptr, "指针无效！");
     CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber必须大于零！");
@@ -129,7 +129,7 @@ void CoreTools::Endian::SwapByteOrder(size_t itemSize, size_t itemsNumber, void*
     }
 }
 
-void CoreTools::Endian::Swap2ByteOrderToTarget(size_t itemsNumber, const uint16_t* source, uint16_t* target) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+void CoreTools::Endian::Swap2ByteOrderToTarget(size_t itemsNumber, const uint16_t* source, uint16_t* target) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber必须大于零！");
     CORE_TOOLS_ASSERTION_0(source != nullptr, "指针无效！");
@@ -140,7 +140,7 @@ void CoreTools::Endian::Swap2ByteOrderToTarget(size_t itemsNumber, const uint16_
     Endian::Swap2ByteOrder(itemsNumber, target);
 }
 
-void CoreTools::Endian::Swap4ByteOrderToTarget(size_t itemsNumber, const uint32_t* source, uint32_t* target) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+void CoreTools::Endian::Swap4ByteOrderToTarget(size_t itemsNumber, const uint32_t* source, uint32_t* target) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber必须大于零！");
     CORE_TOOLS_ASSERTION_0(source != nullptr, "指针无效！");
@@ -151,7 +151,7 @@ void CoreTools::Endian::Swap4ByteOrderToTarget(size_t itemsNumber, const uint32_
     Endian::Swap4ByteOrder(itemsNumber, target);
 }
 
-void CoreTools::Endian::Swap8ByteOrderToTarget(size_t itemsNumber, const uint64_t* source, uint64_t* target) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+void CoreTools::Endian::Swap8ByteOrderToTarget(size_t itemsNumber, const uint64_t* source, uint64_t* target) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     CORE_TOOLS_ASSERTION_2(0 < itemsNumber, "itemsNumber必须大于零！");
     CORE_TOOLS_ASSERTION_0(source != nullptr, "指针无效！");

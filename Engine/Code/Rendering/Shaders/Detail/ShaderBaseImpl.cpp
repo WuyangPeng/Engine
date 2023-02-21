@@ -269,7 +269,7 @@ int Rendering::ShaderBaseImpl::GetStreamingSize() const
     size += output.GetStreamingSize();
     size += constants.GetStreamingSize();
     size += sampler.GetStreamingSize();
-    size += CORE_TOOLS_STREAM_SIZE(profile);
+    size += CoreTools::GetStreamSize(profile);
 
     return size;
 }

@@ -12,13 +12,20 @@
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/TemplateTools/ParamType.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class ParamTypeTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ParamTypeTesting);
+        using ClassType = ParamTypeTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit ParamTypeTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

@@ -11,13 +11,20 @@
 #define CORE_TOOLS_LOG_MANAGER_SUITE_LOGGER_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class LoggerTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(LoggerTesting);
+        using ClassType = LoggerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit LoggerTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

@@ -18,6 +18,7 @@
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
+using System::operator++;
 using namespace std::literals;
 using std::vector;
 

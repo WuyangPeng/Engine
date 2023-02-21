@@ -46,7 +46,7 @@ bool Mathematics::QuaternionConstraints<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::QuaternionConstraints<Real>::IsValid(Real x, Real y) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+bool Mathematics::QuaternionConstraints<Real>::IsValid(Real x, Real y) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_1(Math::Approximate(Math::Sqrt(x * x + y * y), Math::GetValue(1)), "(x,y)必须是单位长度！");

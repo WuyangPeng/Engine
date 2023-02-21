@@ -66,13 +66,13 @@ int CoreTools::Object::GetStreamingSize() const
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     // RTTI名
-    int size = CORE_TOOLS_STREAM_SIZE(GetRttiType().GetName());
+    int size = CoreTools::GetStreamSize(GetRttiType().GetName());
 
     // UniqueID
-    size += CORE_TOOLS_STREAM_SIZE(this);
+    size += CoreTools::GetStreamSize(this);
 
     // 对象名
-    size += CORE_TOOLS_STREAM_SIZE(objectName.GetName());
+    size += CoreTools::GetStreamSize(objectName.GetName());
 
     return size;
 }

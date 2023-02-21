@@ -145,11 +145,11 @@ int Rendering::CollapseRecordImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(recordVKeep);
-    size += CORE_TOOLS_STREAM_SIZE(recordVThrow);
-    size += CORE_TOOLS_STREAM_SIZE(numVertices);
-    size += CORE_TOOLS_STREAM_SIZE(numTriangles);
-    size += CORE_TOOLS_STREAM_SIZE(indices);
+    auto size = CoreTools::GetStreamSize(recordVKeep);
+    size += CoreTools::GetStreamSize(recordVThrow);
+    size += CoreTools::GetStreamSize(numVertices);
+    size += CoreTools::GetStreamSize(numTriangles);
+    size += CoreTools::GetStreamSize(indices);
 
     return size;
 }

@@ -106,10 +106,10 @@ int Rendering::IndexBuffer::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(primitiveType);
-    size += CORE_TOOLS_STREAM_SIZE(numPrimitives);
-    size += CORE_TOOLS_STREAM_SIZE(numActivePrimitives);
-    size += CORE_TOOLS_STREAM_SIZE(firstPrimitive);
+    size += CoreTools::GetStreamSize(primitiveType);
+    size += CoreTools::GetStreamSize(numPrimitives);
+    size += CoreTools::GetStreamSize(numActivePrimitives);
+    size += CoreTools::GetStreamSize(firstPrimitive);
 
     return size;
 }

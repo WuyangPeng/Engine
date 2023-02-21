@@ -48,9 +48,9 @@ int Rendering::DepthStateImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(enabled);
-    size += CORE_TOOLS_STREAM_SIZE(writable);
-    size += CORE_TOOLS_STREAM_SIZE(compare);
+    auto size = CoreTools::GetStreamSize(enabled);
+    size += CoreTools::GetStreamSize(writable);
+    size += CoreTools::GetStreamSize(compare);
 
     return size;
 }

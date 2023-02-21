@@ -42,7 +42,7 @@ namespace Rendering
         // Joint¸üÐÂ¡£
         NODISCARD AVector GetAxis(MatrixRotationAxis axisIndex) const;
         void UpdateWorldTransform();
-        void UpdateWorldRotateAndTranslate() noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void UpdateWorldRotateAndTranslate() noexcept(gAssert < 2 || gRenderingAssert < 2);
         NODISCARD bool UpdateLocalTranslate(MatrixRotationAxis axisIndex);
         NODISCARD bool UpdateLocalRotate(MatrixRotationAxis axisIndex);
 
@@ -64,7 +64,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
-    CORE_TOOLS_STREAM_REGISTER(IKJoint);
+    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(IKJoint);
 
 #include STSTEM_WARNING_POP
 

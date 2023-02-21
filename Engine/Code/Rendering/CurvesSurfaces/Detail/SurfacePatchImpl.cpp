@@ -66,11 +66,11 @@ int Rendering::SurfacePatchImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(uMin);
-    size += CORE_TOOLS_STREAM_SIZE(uMax);
-    size += CORE_TOOLS_STREAM_SIZE(vMin);
-    size += CORE_TOOLS_STREAM_SIZE(vMax);
-    size += CORE_TOOLS_STREAM_SIZE(rectangular);
+    auto size = CoreTools::GetStreamSize(uMin);
+    size += CoreTools::GetStreamSize(uMax);
+    size += CoreTools::GetStreamSize(vMin);
+    size += CoreTools::GetStreamSize(vMax);
+    size += CoreTools::GetStreamSize(rectangular);
 
     return size;
 }

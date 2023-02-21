@@ -38,7 +38,7 @@ namespace CoreTools
         NODISCARD static const CharType* find(const CharType* first, size_t count, CharType character) noexcept;
 
     private:
-        NODISCARD static int DoCompare(const CharType* lhs, const CharType* rhs, size_t count) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2);
+        NODISCARD static int DoCompare(const CharType* lhs, const CharType* rhs, size_t count) noexcept(gAssert < 2 || gCoreToolsAssert < 2);
     };
 
     using CaseInsensitiveCStringTraits = CaseInsensitiveStringTraits<char>;

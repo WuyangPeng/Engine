@@ -12,9 +12,20 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/LogManager/LogMessagePostfix.h"
+#include "CoreTools/LogManager/Flags/LogManagerFlags.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::LogMessagePostfixTesting::LogMessagePostfixTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, LogMessagePostfixTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, LogMessagePostfixTesting)
 
+void CoreTools::LogMessagePostfixTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 void CoreTools::LogMessagePostfixTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(PostfixFunctionDescribedTest);

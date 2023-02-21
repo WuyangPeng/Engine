@@ -156,7 +156,7 @@ Mathematics::Box2<Real> Mathematics::Box2<Real>::GetMove(Real t, const Vector2& 
 }
 
 template <typename Real>
-bool Mathematics::Approximate(const Box2<Real>& lhs, const Box2<Real>& rhs, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+bool Mathematics::Approximate(const Box2<Real>& lhs, const Box2<Real>& rhs, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     return Vector2Tools<Real>::Approximate(lhs.GetCenter(), rhs.GetCenter(), epsilon) &&
            Vector2Tools<Real>::Approximate(lhs.GetAxis0(), rhs.GetAxis0(), epsilon) &&

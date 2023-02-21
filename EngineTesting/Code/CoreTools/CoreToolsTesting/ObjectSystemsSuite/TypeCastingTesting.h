@@ -11,13 +11,20 @@
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_TYPE_CASTING_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class TypeCastingTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(TypeCastingTesting);
+        using ClassType = TypeCastingTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit TypeCastingTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

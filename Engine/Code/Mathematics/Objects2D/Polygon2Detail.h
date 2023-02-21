@@ -75,7 +75,7 @@ void Mathematics::Polygon2<Real>::SetVertex(int index, const Vector2& vertex)
 }
 
 template <typename Real>
-typename Mathematics::Polygon2<Real>::Vector2 Mathematics::Polygon2<Real>::ComputeVertexAverage() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+typename Mathematics::Polygon2<Real>::Vector2 Mathematics::Polygon2<Real>::ComputeVertexAverage() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

@@ -14,6 +14,7 @@
 #include "InitTermRegisterFactory.h"
 #include "ObjectInterface.h"
 #include "ObjectManager.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
@@ -24,9 +25,11 @@ CoreTools::ObjectInterface::ObjectInterface() noexcept
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::ObjectInterface::ObjectInterface(MAYBE_UNUSED LoadConstructor value) noexcept
+CoreTools::ObjectInterface::ObjectInterface(LoadConstructor loadConstructor) noexcept
     : uniqueID{ 0 }
 {
+    System::UnusedFunction(loadConstructor);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 

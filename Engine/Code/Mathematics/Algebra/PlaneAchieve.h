@@ -138,7 +138,7 @@ T& Mathematics::Plane<T>::operator[](int index)
 }
 
 template <typename T>
-void Mathematics::Plane<T>::SetNormal(const AVector& normal) noexcept(g_Assert < 2 || g_MathematicsAssert < 2)
+void Mathematics::Plane<T>::SetNormal(const AVector& normal) noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 

@@ -12,13 +12,20 @@
 
 #include "CoreTools/Helper/InitializeTerminatorMacro.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class InitTermTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(InitTermTesting);
+        using ClassType = InitTermTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit InitTermTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

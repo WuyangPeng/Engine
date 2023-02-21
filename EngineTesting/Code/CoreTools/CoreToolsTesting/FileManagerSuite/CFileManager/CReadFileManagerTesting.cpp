@@ -135,5 +135,5 @@ void CoreTools::CReadFileManagerTesting::PositionTest()
     manager.Rewind();
     ASSERT_EQUAL(0, manager.GetPosition());
 
-    ASSERT_TRUE(manager.Setvbuf(System::FileSetvBuf::IOFBF, 256));
+    ASSERT_TRUE(manager.Setvbuf(System::FileSetVBuffer::IOFBF, 256));
 }

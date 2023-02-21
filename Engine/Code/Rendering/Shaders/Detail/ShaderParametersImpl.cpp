@@ -123,10 +123,10 @@ int Rendering::ShaderParametersImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(shader);
+    auto size = CoreTools::GetStreamSize(shader);
 
-    size += CORE_TOOLS_STREAM_SIZE(constants);
-    size += CORE_TOOLS_STREAM_SIZE(textures);
+    size += CoreTools::GetStreamSize(constants);
+    size += CoreTools::GetStreamSize(textures);
 
     return size;
 }

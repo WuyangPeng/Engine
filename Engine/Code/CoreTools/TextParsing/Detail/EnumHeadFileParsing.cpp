@@ -195,19 +195,7 @@ System::String CoreTools::EnumHeadFileParsing::GenerateEnumOperator() const
 
     const auto element = Parsing::GetSplitComma(column);
 
-    auto content = GenerateEnumOperator(SYSTEM_TEXT("addable"s), element, SYSTEM_TEXT("ENUM_ADDABLE_OPERATOR_DEFINE"s));
-
-    content += GenerateEnumOperator(SYSTEM_TEXT("subtractable"s), element, SYSTEM_TEXT("ENUM_SUBTRACTABLE_OPERATOR_DEFINE"s));
-    content += GenerateEnumOperator(SYSTEM_TEXT("multiplication"s), element, SYSTEM_TEXT("ENUM_MULTIPLICATION_OPERATOR_DEFINE"s));
-    content += GenerateEnumOperator(SYSTEM_TEXT("negate"s), element, SYSTEM_TEXT("ENUM_NEGATE_OPERATOR_DEFINE"s));
-    content += GenerateEnumOperator(SYSTEM_TEXT("incrementable"s), element, SYSTEM_TEXT("ENUM_INCREMENTABLE_OPERATOR_DEFINE"s));
-    content += GenerateEnumOperator(SYSTEM_TEXT("decrementable"s), element, SYSTEM_TEXT("ENUM_DECREMENTABLE_OPERATOR_DEFINE"s));
-    content += GenerateEnumOperator(SYSTEM_TEXT("andable"s), element, SYSTEM_TEXT("ENUM_ANDABLE_OPERATOR_DEFINE"s));
-    content += GenerateEnumOperator(SYSTEM_TEXT("orable"s), element, SYSTEM_TEXT("ENUM_ORABLE_OPERATOR_DEFINE"s));
-    content += GenerateEnumOperator(SYSTEM_TEXT("xorable"s), element, SYSTEM_TEXT("ENUM_XORABLE_OPERATOR_DEFINE"s));
-    content += GenerateEnumIOStreamOperator(element);
-
-    content += GenerateFunctionEndBrackets();
+    auto content = GenerateFunctionEndBrackets();
     content += TextParsing::g_NewlineCharacter;
 
     return content;

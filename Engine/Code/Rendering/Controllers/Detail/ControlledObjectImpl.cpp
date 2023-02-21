@@ -265,14 +265,14 @@ int Rendering::ControlledObjectImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(int32_t{});
+    auto size = CoreTools::GetStreamSize(int32_t{});
 
     if (!controllers.empty())
     {
-        size += boost::numeric_cast<int32_t>(CORE_TOOLS_STREAM_SIZE(controllers.at(0)) * controllers.size());
+        size += boost::numeric_cast<int32_t>(CoreTools::GetStreamSize(controllers.at(0)) * controllers.size());
     }
 
-    size += CORE_TOOLS_STREAM_SIZE(object);
+    size += CoreTools::GetStreamSize(object);
 
     return size;
 }

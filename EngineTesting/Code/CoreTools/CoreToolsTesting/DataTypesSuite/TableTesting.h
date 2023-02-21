@@ -11,13 +11,20 @@
 #define CORE_TOOLS_DATA_TYPES_SUITE_TABLE_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class TableTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(TableTesting);
+        using ClassType = TableTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit TableTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

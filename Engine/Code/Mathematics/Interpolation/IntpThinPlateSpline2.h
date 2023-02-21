@@ -37,7 +37,7 @@ namespace Mathematics
 
         NODISCARD Real operator()(Real x, Real y);
 
-        NODISCARD static Real Kernel(Real t) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real Kernel(Real t) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:
         bool initialized;

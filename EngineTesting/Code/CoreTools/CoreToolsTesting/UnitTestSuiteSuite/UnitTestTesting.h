@@ -11,13 +11,20 @@
 #define CONCURRENT_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class UnitTestTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(UnitTestTesting);
+        using ClassType = UnitTestTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit UnitTestTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

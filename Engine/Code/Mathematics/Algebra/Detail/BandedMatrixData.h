@@ -45,7 +45,7 @@ namespace Mathematics
 
         // ÏÂÈı½Ç
         // GetBand(index):  0 <= index < bandMax
-        NODISCARD int GetBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD int GetBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD ContainerType GetBand(int index) const;
         void SetBand(int index, const ContainerType& band);

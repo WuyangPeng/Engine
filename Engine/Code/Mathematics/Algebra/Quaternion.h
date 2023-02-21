@@ -77,7 +77,7 @@ namespace Mathematics
         explicit Quaternion(const Matrix3& matrix);
 
         // 通过轴-角的旋转构造四元数
-        Quaternion(const Vector3& axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        Quaternion(const Vector3& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 通过指定的列旋转矩阵构造四元数。
         explicit Quaternion(const ContainerType& rotationColumn);
@@ -104,26 +104,26 @@ namespace Mathematics
         Quaternion& operator+=(const Quaternion& rhs) noexcept;
         Quaternion& operator-=(const Quaternion& rhs) noexcept;
         Quaternion& operator*=(Real scalar) noexcept;
-        Quaternion& operator/=(Real scalar) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        Quaternion& operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 四元数，矩阵和轴——角之间的转换。
         void FromRotationMatrix(const Matrix3& matrix);
         NODISCARD Matrix3 ToRotationMatrix() const noexcept;
         void FromRotationColumnVector3(const ContainerType& rotationColumn);
         NODISCARD ContainerType ToRotationColumnVector3() const;
-        void FromAxisAngle(const Vector3& axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void FromAxisAngle(const Vector3& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD Vector3 ToAxis() const;
         NODISCARD Real ToAngle() const noexcept;
         NODISCARD Matrix3Extract ToAngleAxis() const;
 
-        NODISCARD Real Length() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);  // 4-tuple的长度
+        NODISCARD Real Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3);  // 4-tuple的长度
         NODISCARD Real SquaredLength() const noexcept;  // 4-tuple的长度的平方
-        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        NODISCARD Quaternion Inverse() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);  // 适用于非零四元数
+        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        NODISCARD Quaternion Inverse() const noexcept(gAssert < 1 || gMathematicsAssert < 1);  // 适用于非零四元数
         NODISCARD Quaternion Conjugate() const noexcept;  // 取负数在 x, y, 和 z 上
-        NODISCARD Quaternion Exp() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);  // 适用于四元数 w = 0
+        NODISCARD Quaternion Exp() const noexcept(gAssert < 1 || gMathematicsAssert < 1);  // 适用于四元数 w = 0
         NODISCARD Quaternion Log() const noexcept;  // 适用于单位长度四元数
-        NODISCARD bool IsNormalize(Real epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD bool IsNormalize(Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 由四元数旋转向量。
         NODISCARD Vector3 Rotate(const Vector3& vector) const noexcept;
@@ -177,10 +177,10 @@ namespace Mathematics
         NODISCARD Quaternion GetClosestZ() const;
 
         // 距离最近的四元数形式 (cx + sx * i) * (cy + sy * j).
-        NODISCARD Quaternion GetClosestXY() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD Quaternion GetClosestXY() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 距离最近的四元数形式 (cy + sy * j) * (cx + sx * i).
-        NODISCARD Quaternion GetClosestYX() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD Quaternion GetClosestYX() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 距离最近的四元数形式 (cz + sz * k) * (cx + sx * i).
         NODISCARD Quaternion GetClosestZX() const;
@@ -195,22 +195,22 @@ namespace Mathematics
         NODISCARD Quaternion GetClosestZY() const;
 
         // 系数为 (cx + sx * i) * (cy + sy * j) * (cz + sz * k).
-        NODISCARD QuaternionFactor FactorXYZ() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD QuaternionFactor FactorXYZ() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 系数为  (cx + sx * i) * (cz + sz * k) * (cy + sy * j).
-        NODISCARD QuaternionFactor FactorXZY() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD QuaternionFactor FactorXZY() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 系数为  (cy + sy * j) * (cz + sz * k) * (cx + sx * i).
-        NODISCARD QuaternionFactor FactorYZX() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD QuaternionFactor FactorYZX() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 系数为  (cy + sy * j) * (cx + sx * i) * (cz + sz * k).
-        NODISCARD QuaternionFactor FactorYXZ() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD QuaternionFactor FactorYXZ() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 系数为 (cz + sz * k) * (cx + sx * i) * (cy + sy * j).
-        NODISCARD QuaternionFactor FactorZXY() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD QuaternionFactor FactorZXY() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 系数为  (cz + sz * k) * (cy + sy * j) * (cx + sx * i).
-        NODISCARD QuaternionFactor FactorZYX() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD QuaternionFactor FactorZYX() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 距离最近的约束四元数形式为 (cx + sx * i).
         NODISCARD Quaternion GetClosestX(const QuaternionConstraints& xCon) const;

@@ -193,11 +193,11 @@ int Rendering::VisualData::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    int size = CORE_TOOLS_STREAM_SIZE(visualPrimitiveType);
+    int size = CoreTools::GetStreamSize(visualPrimitiveType);
 
-    size += CORE_TOOLS_STREAM_SIZE(vertexFormat);
-    size += CORE_TOOLS_STREAM_SIZE(vertexBuffer);
-    size += CORE_TOOLS_STREAM_SIZE(indexBuffer);
+    size += CoreTools::GetStreamSize(vertexFormat);
+    size += CoreTools::GetStreamSize(vertexBuffer);
+    size += CoreTools::GetStreamSize(indexBuffer);
 
     return size;
 }

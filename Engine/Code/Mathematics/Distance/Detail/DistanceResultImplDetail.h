@@ -112,7 +112,7 @@ void Mathematics::DistanceResultImpl<Real, Vector>::SetDistance(Real newDistance
 }
 
 template <typename Real, typename Vector>
-void Mathematics::DistanceResultImpl<Real, Vector>::SetSqrtDistance(Real newDistance) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+void Mathematics::DistanceResultImpl<Real, Vector>::SetSqrtDistance(Real newDistance) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 

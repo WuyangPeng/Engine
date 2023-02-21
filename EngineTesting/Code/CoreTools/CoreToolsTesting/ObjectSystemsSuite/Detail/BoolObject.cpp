@@ -95,14 +95,14 @@ int CoreTools::BoolObject::GetStreamingSize() const
     auto size = ParentType::GetStreamingSize();
 
     // WriteBool
-    size += CORE_TOOLS_STREAM_SIZE(boolValue);
+    size += CoreTools::GetStreamSize(boolValue);
 
     // WriteBoolWithNumber
     size += sizeof(int32_t);
-    size += bufferSize * CORE_TOOLS_STREAM_SIZE(boolValue);
+    size += bufferSize * CoreTools::GetStreamSize(boolValue);
 
     // WriteBoolWithoutNumber
-    size += bufferSize * CORE_TOOLS_STREAM_SIZE(boolValue);
+    size += bufferSize * CoreTools::GetStreamSize(boolValue);
 
     return size;
 }

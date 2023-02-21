@@ -80,7 +80,7 @@ int Rendering::Polypoint::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(pointsCount);
+    size += CoreTools::GetStreamSize(pointsCount);
 
     return size;
 }

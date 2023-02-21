@@ -18,7 +18,7 @@
 #include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/LogManager/Logger.h"
 #include "CoreTools/Time/CustomTime.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::ostream;
 using namespace std::literals;
 

@@ -28,14 +28,7 @@ using namespace std::literals;
 using std::make_shared;
 using std::string;
 using std::vector;
-
-namespace CoreTools
-{
-    namespace SimpleCSV
-    {
-        ENUM_INCREMENTABLE_OPERATOR_DEFINE(RelationshipType)
-    }
-}
+using System::operator++;
 
 CoreTools::RelationshipItemTesting::RelationshipItemTesting(const OStreamShared& stream)
     : ParentType{ stream }

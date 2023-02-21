@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 0:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.2 (2023/02/19 21:05)
 
 #ifndef CORE_TOOLS_HELPER_SAFETY_LIMIT_MACRO_H
 #define CORE_TOOLS_HELPER_SAFETY_LIMIT_MACRO_H
@@ -14,10 +14,10 @@
 
 namespace CoreTools
 {
-    constexpr auto g_SafetyLimit100 = 100;
-    constexpr auto g_SafetyLimit1000 = 1000;
-    constexpr auto g_SafetyLimit10000 = 10000;
-    constexpr auto g_SafetyLimit100000 = 100000;
+    constexpr auto gSafetyLimit100 = 100;
+    constexpr auto gSafetyLimit1000 = 1000;
+    constexpr auto gSafetyLimit10000 = 10000;
+    constexpr auto gSafetyLimit100000 = 100000;
 }
 
 #ifdef CORE_TOOLS_USE_SAFETY_LIMIT
@@ -27,7 +27,7 @@ namespace CoreTools
             auto safetyCounter = 0;                                                             \
             while (expression)                                                                  \
             {                                                                                   \
-                if (SYSTEM_CONCATENATOR(CoreTools::g_SafetyLimit, maxCounter) <= safetyCounter) \
+                if (SYSTEM_CONCATENATOR(CoreTools::gSafetyLimit, maxCounter) <= safetyCounter) \
                 {                                                                               \
                     THROW_EXCEPTION(SYSTEM_TEXT("内部错误：违反安全计数器。"s));                \
                 }

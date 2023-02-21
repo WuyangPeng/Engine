@@ -843,7 +843,7 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::DiagonalTimes(const APoint&
 }
 
 template <typename Real>
-void Mathematics::Matrix<Real>::Orthonormalize() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+void Mathematics::Matrix<Real>::Orthonormalize() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

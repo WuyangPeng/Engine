@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastSinRoughCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastSinRoughCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
@@ -32,7 +32,7 @@ Real Mathematics::FastTrigonometric<Real>::FastSinRoughCalculation(Real angle) n
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastSinPreciseCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastSinPreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
@@ -55,7 +55,7 @@ Real Mathematics::FastTrigonometric<Real>::FastSinPreciseCalculation(Real angle)
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastSinMorePreciseCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastSinMorePreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
@@ -87,7 +87,7 @@ Real Mathematics::FastTrigonometric<Real>::FastSinMorePreciseCalculation(Real an
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastCosRoughCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastCosRoughCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
@@ -103,7 +103,7 @@ Real Mathematics::FastTrigonometric<Real>::FastCosRoughCalculation(Real angle) n
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastCosPreciseCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastCosPreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
@@ -125,7 +125,7 @@ Real Mathematics::FastTrigonometric<Real>::FastCosPreciseCalculation(Real angle)
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastCosMorePreciseCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastCosMorePreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetHalfPI(), "输入值必须在范围[0,pi/2]！\n");
 
@@ -158,7 +158,7 @@ Real Mathematics::FastTrigonometric<Real>::FastCosMorePreciseCalculation(Real an
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastTanRoughCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastTanRoughCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetQuarterPI(), "输入值必须在范围[0,pi/4]！\n");
 
@@ -175,7 +175,7 @@ Real Mathematics::FastTrigonometric<Real>::FastTanRoughCalculation(Real angle) n
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastTanPreciseCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastTanPreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetQuarterPI(), "输入值必须在范围[0,pi/4]！\n");
 
@@ -200,7 +200,7 @@ Real Mathematics::FastTrigonometric<Real>::FastTanPreciseCalculation(Real angle)
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastTanMorePreciseCalculation(Real angle) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastTanMorePreciseCalculation(Real angle) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= angle && angle <= Math::GetQuarterPI(), "输入值必须在范围[0,pi/4]！\n");
 
@@ -208,7 +208,7 @@ Real Mathematics::FastTrigonometric<Real>::FastTanMorePreciseCalculation(Real an
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastInvSinRoughCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastInvSinRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(1), "输入值必须在范围[0,1]！\n");
 
@@ -228,7 +228,7 @@ Real Mathematics::FastTrigonometric<Real>::FastInvSinRoughCalculation(Real value
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastInvSinPreciseCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastInvSinPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(1), "输入值必须在范围[0,1]！\n");
 
@@ -256,7 +256,7 @@ Real Mathematics::FastTrigonometric<Real>::FastInvSinPreciseCalculation(Real val
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastInvCosRoughCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastInvCosRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(1), "输入值必须在范围[0,1]！\n");
 
@@ -275,7 +275,7 @@ Real Mathematics::FastTrigonometric<Real>::FastInvCosRoughCalculation(Real value
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastInvCosPreciseCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastInvCosPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(1), "输入值必须在范围[0,1]！\n");
 
@@ -302,7 +302,7 @@ Real Mathematics::FastTrigonometric<Real>::FastInvCosPreciseCalculation(Real val
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastInvTanRoughCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastInvTanRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(-1) <= value && value <= Math::GetValue(1), "输入值必须在范围[-1,1]！\n");
 
@@ -323,7 +323,7 @@ Real Mathematics::FastTrigonometric<Real>::FastInvTanRoughCalculation(Real value
 }
 
 template <typename Real>
-Real Mathematics::FastTrigonometric<Real>::FastInvTanPreciseCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastTrigonometric<Real>::FastInvTanPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(-1) <= value && value <= Math::GetValue(1), "输入值必须在范围[-1,1]！\n");
 

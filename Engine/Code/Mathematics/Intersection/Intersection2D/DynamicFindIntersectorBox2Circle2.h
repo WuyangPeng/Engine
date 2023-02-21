@@ -62,9 +62,9 @@ namespace Mathematics
         void Find();
 
         // 支持动态查找。 如果对象最初相交，则两个函数都返回-1；如果没有相交，则返回0；如果它们在某个正时相交，则返回+1。
-        NODISCARD RegionInfo TestVertexRegion(Real centerDotX, Real centerDotY, Real velocityDotX, Real velocityDotY, Real extent0, Real extent1) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD RegionInfo TestVertexRegion(Real centerDotX, Real centerDotY, Real velocityDotX, Real velocityDotY, Real extent0, Real extent1) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        NODISCARD RegionInfo TestEdgeRegion(Real centerDotX, Real centerDotY, Real velocityDotX, Real velocityDotY, Real extent0, Real extent1) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD RegionInfo TestEdgeRegion(Real centerDotX, Real centerDotY, Real velocityDotX, Real velocityDotY, Real extent0, Real extent1) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:
         // 要相交的对象。

@@ -235,8 +235,8 @@ int Rendering::ShaderFloatImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(data);
-    size += CORE_TOOLS_STREAM_SIZE(allowUpdater);
+    auto size = CoreTools::GetStreamSize(data);
+    size += CoreTools::GetStreamSize(allowUpdater);
 
     return size;
 }

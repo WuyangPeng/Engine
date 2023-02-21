@@ -14,8 +14,8 @@
 
 namespace CoreTools
 {
-    static constexpr auto g_DefaultSize = 4;
-    static constexpr auto g_ObjectSize = 8;
+    static constexpr auto gDefaultSize = 4;
+    static constexpr auto gObjectSize = 8;
 }
 
 #endif  // CORE_TOOLS_OBJECT_SYSTEMS_STREAM_CONSTANT_H

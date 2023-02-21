@@ -201,7 +201,7 @@ Mathematics::Matrix4<Real>& Mathematics::Matrix4<Real>::operator*=(Real scalar) 
 }
 
 template <typename Real>
-Mathematics::Matrix4<Real>& Mathematics::Matrix4<Real>::operator/=(Real scalar) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Matrix4<Real>& Mathematics::Matrix4<Real>::operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -395,7 +395,7 @@ Real Mathematics::Matrix4<Real>::Determinant() const noexcept
 }
 
 template <typename Real>
-void Mathematics::Matrix4<Real>::MakeObliqueProjection(const Vector3& normal, const Vector3& origin, const Vector3& direction) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix4<Real>::MakeObliqueProjection(const Vector3& normal, const Vector3& origin, const Vector3& direction) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(normal.IsNormalize() && direction.IsNormalize(), "normal和direction必须是单位向量！");
@@ -470,7 +470,7 @@ void Mathematics::Matrix4<Real>::MakePerspectiveProjection(const Vector3& normal
 }
 
 template <typename Real>
-void Mathematics::Matrix4<Real>::MakeReflection(const Vector3& normal, const Vector3& origin) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix4<Real>::MakeReflection(const Vector3& normal, const Vector3& origin) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(normal.IsNormalize(), "normal必须是单位向量！");
@@ -602,7 +602,7 @@ void Mathematics::Matrix4<Real>::MakeOrthoMatrix44(Real left, Real right, Real b
 
 // 创建使用3个基本规范化向量的方向矩阵
 template <typename Real>
-void Mathematics::Matrix4<Real>::MakeOrthoNormalMatrix44(const Vector3& xDirection, const Vector3& yDirection, const Vector3& zDirection) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix4<Real>::MakeOrthoNormalMatrix44(const Vector3& xDirection, const Vector3& yDirection, const Vector3& zDirection) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(xDirection.IsNormalize() && yDirection.IsNormalize() && zDirection.IsNormalize(), "xDirection、yDirection和zDirection不是单位向量！");

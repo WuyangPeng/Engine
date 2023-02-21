@@ -15,6 +15,7 @@
 #include "System/OpenGL/OpenGLBase.h"
 #include "System/OpenGL/OpenGLBuffers.h"
 #include "System/OpenGL/OpenGLTextures.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 
 #include <array>
 

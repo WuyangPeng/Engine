@@ -42,7 +42,7 @@ int CoreTools::CaseInsensitiveStringTraits<CharT>::compare(const CharType* lhs, 
 
 // private
 template <typename CharT>
-int CoreTools::CaseInsensitiveStringTraits<CharT>::DoCompare(const CharType* lhs, const CharType* rhs, size_t count) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
+int CoreTools::CaseInsensitiveStringTraits<CharT>::DoCompare(const CharType* lhs, const CharType* rhs, size_t count) noexcept(gAssert < 2 || gCoreToolsAssert < 2)
 {
     for (auto i = 0u; i < count; ++i)
     {

@@ -26,7 +26,7 @@ CoreTools::Singleton<T, mutexCreate>::Singleton() noexcept
 }
 
 template <typename T, CoreTools::MutexCreate mutexCreate>
-void CoreTools::Singleton<T, mutexCreate>::InitSingleton() noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
+void CoreTools::Singleton<T, mutexCreate>::InitSingleton() noexcept(gAssert < 2 || gCoreToolsAssert < 2)
 {
     CORE_TOOLS_ASSERTION_2(singleton == nullptr, "单例%s重复初始化！", typeid(T).name());
 
@@ -45,7 +45,7 @@ CoreTools::Singleton<T, mutexCreate>::~Singleton() noexcept
 }
 
 template <typename T, CoreTools::MutexCreate mutexCreate>
-void CoreTools::Singleton<T, mutexCreate>::DeleteSingleton() noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
+void CoreTools::Singleton<T, mutexCreate>::DeleteSingleton() noexcept(gAssert < 2 || gCoreToolsAssert < 2)
 {
     CORE_TOOLS_ASSERTION_2(singleton != nullptr, "单例%s重复删除！", typeid(T).name());
 
@@ -67,7 +67,7 @@ typename CoreTools::Singleton<T, mutexCreate>::PointType CoreTools::Singleton<T,
 }
 
 template <typename T, CoreTools::MutexCreate mutexCreate>
-void CoreTools::Singleton<T, mutexCreate>::CheckSingleton() noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+void CoreTools::Singleton<T, mutexCreate>::CheckSingleton() noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     CORE_TOOLS_ASSERTION_0(singleton != nullptr, "单例%s指针为空！", typeid(T).name());
 }

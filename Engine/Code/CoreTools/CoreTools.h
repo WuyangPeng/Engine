@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/14 14:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.2 (2023/02/05 14:44)
 
 #ifndef CORE_TOOLS_H
 #define CORE_TOOLS_H
@@ -15,6 +15,7 @@
 #include "Command/Command.h"
 #include "Console/Console.h"
 #include "Contract/Contract.h"
+#include "Coroutine/Coroutine.h"
 #include "CyclicRedundancyCheck/CyclicRedundancyCheck.h"
 #include "DataTypes/DataTypes.h"
 #include "EngineConfiguration/EngineConfiguration.h"

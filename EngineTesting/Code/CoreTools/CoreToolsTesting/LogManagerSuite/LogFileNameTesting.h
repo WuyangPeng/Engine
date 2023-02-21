@@ -11,13 +11,20 @@
 #define CORE_TOOLS_LOG_MANAGER_SUITE_LOG_FILE_NAME_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class LogFileNameTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(LogFileNameTesting);
+        using ClassType = LogFileNameTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit LogFileNameTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

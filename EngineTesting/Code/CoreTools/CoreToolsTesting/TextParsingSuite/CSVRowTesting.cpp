@@ -27,6 +27,7 @@
 
 #include <map>
 
+using System::operator++;
 using namespace std::literals;
 using std::deque;
 using std::map;

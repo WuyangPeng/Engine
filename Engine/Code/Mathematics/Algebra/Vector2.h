@@ -83,10 +83,10 @@ namespace Mathematics
         void SetCoordinate(Real x, Real y) noexcept;
         void SetX(Real x) noexcept;
         void SetY(Real y) noexcept;
-        void Normalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void RobustNormalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void Normalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void RobustNormalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        NODISCARD bool IsNormalize(const Real epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD bool IsNormalize(const Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD const Real& operator[](int index) const;
         NODISCARD Real& operator[](int index);
@@ -98,7 +98,7 @@ namespace Mathematics
         Vector2& operator-=(const Vector2& rhs) noexcept;
 
         Vector2& operator*=(Real rhs) noexcept;
-        Vector2& operator/=(Real rhs) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        Vector2& operator/=(Real rhs) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // ÌØÊâVector2
         // (0,0)

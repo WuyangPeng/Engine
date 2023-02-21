@@ -45,7 +45,7 @@ size_t Rendering::TexelsToCheck<Format>::GetOutTexelsLength() const noexcept
 }
 
 template <Rendering::TextureFormat Format>
-void Rendering::TexelsToCheck<Format>::CheckOutTexels(MAYBE_UNUSED size_t outTexelsSize) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::TexelsToCheck<Format>::CheckOutTexels(MAYBE_UNUSED size_t outTexelsSize) noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_1;
 

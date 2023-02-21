@@ -11,8 +11,20 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/Pow3.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::Pow3Testing::Pow3Testing(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, Pow3Testing)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, Pow3Testing)
+
+void CoreTools::Pow3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
+
 
 void CoreTools::Pow3Testing::MainTest()
 {

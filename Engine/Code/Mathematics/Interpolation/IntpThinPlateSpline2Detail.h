@@ -278,7 +278,7 @@ Real Mathematics::IntpThinPlateSpline2<Real>::operator()(Real x, Real y)
 }
 
 template <typename Real>
-Real Mathematics::IntpThinPlateSpline2<Real>::Kernel(Real t) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::IntpThinPlateSpline2<Real>::Kernel(Real t) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

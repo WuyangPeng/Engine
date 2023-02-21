@@ -10,8 +10,19 @@
 #include "RttiTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::RttiTesting::RttiTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, RttiTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, RttiTesting)
+
+void CoreTools::RttiTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 CORE_TOOLS_RTTI_DEFINE(CoreTools, RttiTesting);
 

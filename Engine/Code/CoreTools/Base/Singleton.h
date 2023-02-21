@@ -48,9 +48,9 @@ namespace CoreTools
         Singleton& operator=(Singleton&& rhs) noexcept = delete;
 
     private:
-        void InitSingleton() noexcept(g_Assert < 2 || g_CoreToolsAssert < 2);
-        void DeleteSingleton() noexcept(g_Assert < 2 || g_CoreToolsAssert < 2);
-        static void CheckSingleton() noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        void InitSingleton() noexcept(gAssert < 2 || gCoreToolsAssert < 2);
+        void DeleteSingleton() noexcept(gAssert < 2 || gCoreToolsAssert < 2);
+        static void CheckSingleton() noexcept(gAssert < 0 || gCoreToolsAssert < 0);
 
     private:
         static PointType singleton;

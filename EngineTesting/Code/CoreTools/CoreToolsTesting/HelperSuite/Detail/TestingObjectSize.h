@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:16)
+///	引擎测试版本：0.9.0.2 (2023/02/16 20:49)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_TESTING_OBJECT_SIZE_H
 #define CORE_TOOLS_HELPER_SUITE_TESTING_OBJECT_SIZE_H
@@ -41,7 +41,7 @@ namespace CoreTools
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
-    CORE_TOOLS_STREAM_REGISTER(TestingObjectSize);
+    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(TestingObjectSize);
 
 #include STSTEM_WARNING_POP
 

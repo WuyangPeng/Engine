@@ -92,14 +92,14 @@ int CoreTools::EnumObject::GetStreamingSize() const
     auto size = ParentType::GetStreamingSize();
 
     // WriteEnum
-    size += CORE_TOOLS_STREAM_SIZE(enumValue);
+    size += CoreTools::GetStreamSize(enumValue);
 
     // WriteEnumWithNumber
     size += sizeof(int32_t);
-    size += bufferSize * CORE_TOOLS_STREAM_SIZE(enumValue);
+    size += bufferSize * CoreTools::GetStreamSize(enumValue);
 
     // WriteEnumWithoutNumber
-    size += bufferSize * CORE_TOOLS_STREAM_SIZE(enumValue);
+    size += bufferSize * CoreTools::GetStreamSize(enumValue);
 
     return size;
 }

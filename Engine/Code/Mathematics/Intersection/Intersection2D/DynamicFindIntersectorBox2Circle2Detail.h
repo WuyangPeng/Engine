@@ -185,7 +185,7 @@ void Mathematics::DynamicFindIntersectorBox2Circle2<Real>::Find()
 }
 
 template <typename Real>
-typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathematics::DynamicFindIntersectorBox2Circle2<Real>::TestVertexRegion(Real centerDotX, Real centerDotY, Real velocityDotX, Real velocityDotY, Real extent0, Real extent1) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathematics::DynamicFindIntersectorBox2Circle2<Real>::TestVertexRegion(Real centerDotX, Real centerDotY, Real velocityDotX, Real velocityDotY, Real extent0, Real extent1) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     auto dx = centerDotX + extent0;
     auto dy = centerDotY + extent1;
@@ -309,7 +309,7 @@ typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathem
 }
 
 template <typename Real>
-typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathematics::DynamicFindIntersectorBox2Circle2<Real>::TestEdgeRegion(Real centerDotX, Real centerDotY, Real velocityDotX, Real velocityDotY, Real extent0, Real extent1) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+typename Mathematics::DynamicFindIntersectorBox2Circle2<Real>::RegionInfo Mathematics::DynamicFindIntersectorBox2Circle2<Real>::TestEdgeRegion(Real centerDotX, Real centerDotY, Real velocityDotX, Real velocityDotY, Real extent0, Real extent1) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     auto indexX = Math::GetValue(0);
     auto indexY = Math::GetValue(0);

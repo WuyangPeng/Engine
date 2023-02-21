@@ -113,7 +113,7 @@ namespace Mathematics
         Matrix2& operator+=(const Matrix2& rhs) noexcept;
         Matrix2& operator-=(const Matrix2& rhs) noexcept;
         Matrix2& operator*=(Real scalar) noexcept;
-        Matrix2& operator/=(Real scalar) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        Matrix2& operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // lhs^T * M * rhs
         NODISCARD Real QuadraticForm(const Vector2& lhs, const Vector2& rhs) const noexcept;
@@ -135,7 +135,7 @@ namespace Mathematics
         // 矩阵必须是一个旋转矩阵，下面函数才有效。
         // Orthonormalize函数使用Gram-Schmidt正交化施加到所述旋转矩阵。
         // 角度必须为弧度，而不是度数。
-        NODISCARD Real ExtractAngle() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD Real ExtractAngle() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         void Orthonormalize();
 
         // 矩阵必须是对称矩阵。
@@ -143,7 +143,7 @@ namespace Mathematics
         // D = diag(d0,d1)是一个对角矩阵，这里对角线项为d0和d1。
         // 特征向量u[i]对应的特征向量d[i]。特征值排序为d0 <= d1。
         // 返回值的第一部分为rotation，第二部分为diagonal。
-        NODISCARD Matrix2EigenDecomposition EigenDecomposition(const Real epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD Matrix2EigenDecomposition EigenDecomposition(const Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 特殊矩阵。
         NODISCARD static constexpr Matrix2 GetZero()

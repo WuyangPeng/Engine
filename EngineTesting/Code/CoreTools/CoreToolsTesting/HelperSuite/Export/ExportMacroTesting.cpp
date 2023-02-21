@@ -1,13 +1,13 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:26)
+///	引擎测试版本：0.9.0.2 (2023/02/11 15:31)
 
-#include "ExportMacroTesting.h"
+#include "ExportMacroTestingDetail.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -29,7 +29,7 @@
 CoreTools::ExportMacroTesting::ExportMacroTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ExportMacroTesting)
@@ -46,19 +46,19 @@ void CoreTools::ExportMacroTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(ExportSharedImplMacroSharedTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ExportNonCopyImplMacroTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ExportPerformanceUnsharedImplMacroTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ExportCopyUnsharedImplMacroTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ExportDelayCopyUnsharedImplMacroTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyExportTest<ExportTest::ExportCopyUnsharedImplMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyExportTest<ExportTest::ExportDelayCopyUnsharedImplMacro>);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ExportImplMacroTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ExportCopyImplMacroTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyExportTest<ExportCopyImplMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(ExportConstImplMacroTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CopyUnsharedMacroTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CopyUnsharedUseCloneMacroTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyExportTest<ExportTest::CopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyExportTest<ExportTest::CopyUnsharedUseCloneMacro>);
 }
 
 void CoreTools::ExportMacroTesting::ExportSharedPtrMacroTest()
 {
-    ExportTest::ExportSharedPtrMacro macro{ CoreTools::DisableNotThrow::Disable };
+    const auto macro = ExportTest::ExportSharedPtrMacro::Create();
 }
 
 void CoreTools::ExportMacroTesting::ExportUniquePtrMacroTest() noexcept
@@ -83,106 +83,31 @@ void CoreTools::ExportMacroTesting::ExportSharedImplMacroSharedTest()
 
 void CoreTools::ExportMacroTesting::ExportNonCopyImplMacroTest()
 {
-    const ExportTest::ExportNonCopyImplMacro macro{ CoreTools::DisableNotThrow::Disable };
+    const auto macro = ExportTest::ExportNonCopyImplMacro::Create();
 }
 
 void CoreTools::ExportMacroTesting::ExportPerformanceUnsharedImplMacroTest()
 {
     constexpr auto count = 10;
-    ExportTest::ExportPerformanceUnsharedImplMacro lhsMacro{ count };
+    ExportTest::ExportPerformanceUnsharedImplMacro original{ count };
 
-    auto rhsMacro = lhsMacro;
+    auto copy = original;
 
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::ExportMacroTesting::ExportCopyUnsharedImplMacroTest()
-{
-    constexpr auto count = 10;
-    ExportTest::ExportCopyUnsharedImplMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::ExportMacroTesting::ExportDelayCopyUnsharedImplMacroTest()
-{
-    constexpr auto count = 10;
-    ExportTest::ExportDelayCopyUnsharedImplMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
+    ASSERT_EQUAL(copy.GetCount(), count);
 }
 
 void CoreTools::ExportMacroTesting::ExportImplMacroTest()
 {
     constexpr auto count = 10;
-    CoreTools::ExportImplMacro macro{ count };
+    ExportImplMacro macro{ count };
 
     ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ExportMacroTesting::ExportCopyImplMacroTest()
-{
-    constexpr auto count = 10;
-    CoreTools::ExportCopyImplMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
 }
 
 void CoreTools::ExportMacroTesting::ExportConstImplMacroTest()
 {
     constexpr auto count = 10;
-    CoreTools::ExportConstImplMacro macro{ count };
+    ExportConstImplMacro macro{ count };
 
     ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ExportMacroTesting::CopyUnsharedMacroTest()
-{
-    constexpr auto count = 10;
-    ExportTest::CopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::ExportMacroTesting::CopyUnsharedUseCloneMacroTest()
-{
-    constexpr auto count = 10;
-    ExportTest::CopyUnsharedUseCloneMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
 }

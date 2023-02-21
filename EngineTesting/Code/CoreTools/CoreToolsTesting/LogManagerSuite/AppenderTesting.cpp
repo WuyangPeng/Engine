@@ -18,7 +18,7 @@
 #include "CoreTools/LogManager/Appender.h"
 #include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/Time/CustomTime.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <iostream>
 
 using std::ostream;

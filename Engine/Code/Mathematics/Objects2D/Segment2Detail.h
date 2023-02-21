@@ -19,7 +19,7 @@
 #endif  //  !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_SEGMENT2_ACHIEVE)
 
 template <typename Real>
-bool Mathematics::Approximate(const Segment2<Real>& lhs, const Segment2<Real>& rhs, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+bool Mathematics::Approximate(const Segment2<Real>& lhs, const Segment2<Real>& rhs, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     return Vector2Tools<Real>::Approximate(lhs.GetCenterPoint(), rhs.GetCenterPoint(), epsilon) &&
            Vector2Tools<Real>::Approximate(lhs.GetDirection(), rhs.GetDirection(), epsilon) &&

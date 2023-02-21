@@ -14,8 +14,20 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/Time/MillisecondTimer.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, MillisecondTimerTesting)
+CoreTools::MillisecondTimerTesting::MillisecondTimerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, MillisecondTimerTesting)
+
+void CoreTools::MillisecondTimerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::MillisecondTimerTesting::MainTest()
 {

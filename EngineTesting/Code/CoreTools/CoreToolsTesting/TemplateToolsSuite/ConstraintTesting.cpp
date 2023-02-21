@@ -16,10 +16,21 @@
 #include "CoreTools/TemplateTools/MustBeSameSize.h"
 #include "CoreTools/TemplateTools/MustBeSubscriptable.h"
 #include "CoreTools/TemplateTools/MustHaveBase.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, ConstraintTesting)
+CoreTools::ConstraintTesting::ConstraintTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ConstraintTesting)
+
+void CoreTools::ConstraintTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::ConstraintTesting::MainTest()
 {

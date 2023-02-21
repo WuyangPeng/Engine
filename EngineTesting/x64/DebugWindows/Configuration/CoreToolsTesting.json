@@ -1,7 +1,6 @@
 {
   "helperSuite": {
     "FunctionDescribedMacroTesting": 1,
-    "AssertExceptionMacroTesting": 1,
     "InitializeTerminatorMacroTesting": 1,
     "MainFunctionMacroTesting": 1,
     "MemoryMacroTesting": 1,
@@ -11,7 +10,14 @@
     "PropertiesMacroTesting": 1,
     "UserMacroTesting": 1,
     "SafetyLimitMacroTesting": 1,
-    "GetRequiredBitsTesting": 1
+    "GetRequiredBitsTesting": 1,
+    "HashCombineTesting": 1
+  },
+
+  "assertExceptionMacroSuite": {
+    "AssertNotThrowExceptionTesting": 1,
+    "AssertThrowExceptionTesting": 1,
+    "AssertExecuteLoopNotThrowTesting": 100
   },
 
   "assertTestMacroSuite": {
@@ -68,7 +74,6 @@
   },
 
   "streamMacroSuite": {
-    "StreamSizeMacroTesting": 1,
     "DebugStreamMacroTesting": 1,
     "DefaultTestingNoObjectPtrTesting": 1,
     "DefaultTestingObjectPtrTesting": 1,
@@ -79,9 +84,7 @@
   },
 
   "unitTestSuiteMacroSuite": {
-    "UnitTestSuiteMacroTesting": 1,
-    "UnitTestSuiteMacroCompleteTesting": 1,
-    "UnitTestSuiteMacroCompleteUseTestingTypeTesting": 1
+    "UnitTestSuiteMacroTesting": 1
   },
 
   "exceptionMacroSuite": {

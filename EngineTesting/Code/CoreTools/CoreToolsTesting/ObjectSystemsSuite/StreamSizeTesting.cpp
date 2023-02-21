@@ -9,19 +9,49 @@
 
 #include "StreamSizeTesting.h"
 #include "Detail/StreamSizeTestingEnum.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/ObjectInterface.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "../HelperSuite/Detail/TestingObject.h"
+#include "../HelperSuite/Detail/MacroTestEnum.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+using std::make_shared;
 using std::string;
+using std::vector;
+using namespace std::literals;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, StreamSizeTesting)
+CoreTools::StreamSizeTesting::StreamSizeTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, StreamSizeTesting)
+
+void CoreTools::StreamSizeTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::StreamSizeTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(StreamSizeTest);
+
+    ObjectManager::Create();
+
+    ASSERT_NOT_THROW_EXCEPTION_0(Int16StreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PtrStreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedPtrStreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(BoolStreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(EnumStreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(StringStreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ConstCharStreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(VectorStreamTest);
+
+    ObjectManager::Destroy();
 }
 
 void CoreTools::StreamSizeTesting::StreamSizeTest()
@@ -57,4 +87,60 @@ void CoreTools::StreamSizeTesting::StreamSizeTest()
     string testString{ "TestString" };
     ASSERT_EQUAL(GetStreamSize(testString), boost::numeric_cast<int>(Stream::GetStreamingSize(testString)));
     ASSERT_EQUAL(GetStreamSize(testString.c_str()), boost::numeric_cast<int>(Stream::GetStreamingSize(testString)));
+}
+
+void CoreTools::StreamSizeTesting::Int16StreamTest()
+{
+    constexpr int16_t value{ 0 };
+
+    ASSERT_EQUAL(CoreTools::GetStreamSize(value), boost::numeric_cast<int>(sizeof(int16_t)));
+}
+
+void CoreTools::StreamSizeTesting::PtrStreamTest()
+{
+    int* ptr{ nullptr };
+
+    ASSERT_EQUAL(CoreTools::GetStreamSize(ptr), gObjectSize);
+}
+
+void CoreTools::StreamSizeTesting::SharedPtrStreamTest()
+{
+    TestingObjectSharedPtr testingObject{};
+
+    ASSERT_EQUAL(CoreTools::GetStreamSize(testingObject), gObjectSize);
+}
+
+void CoreTools::StreamSizeTesting::BoolStreamTest()
+{
+    constexpr auto value = false;
+
+    ASSERT_EQUAL(CoreTools::GetStreamSize(value), gDefaultSize);
+}
+
+void CoreTools::StreamSizeTesting::EnumStreamTest()
+{
+    constexpr auto macroTestEnum = MacroTestEnum::One;
+
+    ASSERT_EQUAL(CoreTools::GetStreamSize(macroTestEnum), boost::numeric_cast<int>(sizeof(MacroTestEnum)));
+}
+
+void CoreTools::StreamSizeTesting::StringStreamTest()
+{
+    auto value = "value"s;
+
+    ASSERT_EQUAL(CoreTools::GetStreamSize(value), Stream::GetStreamingSize(value));
+}
+
+void CoreTools::StreamSizeTesting::ConstCharStreamTest()
+{
+    const char* value{ "value" };
+
+    ASSERT_EQUAL(CoreTools::GetStreamSize(value), Stream::GetStreamingSize(value));
+}
+
+void CoreTools::StreamSizeTesting::VectorStreamTest()
+{
+    vector<int> value(9);
+
+    ASSERT_EQUAL(CoreTools::GetStreamSize(value), boost::numeric_cast<int>(gDefaultSize + value.size() * sizeof(int)));
 }

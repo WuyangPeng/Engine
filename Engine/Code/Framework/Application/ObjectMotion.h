@@ -48,7 +48,7 @@ namespace Framework
 
         void SetBeginTrack(float xTrack, float yTrack) noexcept;
         void SetEndTrack(float xTrack, float yTrack) noexcept;
-        void SetSaveRotate() noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void SetSaveRotate() noexcept(gAssert < 2 || gRenderingAssert < 2);
 
         NODISCARD Transform GetMotionObjectLocalTransform() const noexcept;
 

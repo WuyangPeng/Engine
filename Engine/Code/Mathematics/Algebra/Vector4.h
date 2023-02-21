@@ -89,9 +89,9 @@ namespace Mathematics
         void SetY(Real y) noexcept;
         void SetZ(Real z) noexcept;
         void SetW(Real w) noexcept;
-        void Normalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void RobustNormalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void ProjectionNormalization(const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void Normalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void RobustNormalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void ProjectionNormalization(const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD const Vector4 operator-() const noexcept;
         NODISCARD const Real& operator[](int index) const;
@@ -102,7 +102,7 @@ namespace Mathematics
         Vector4& operator+=(const Vector4& rhs) noexcept;
         Vector4& operator-=(const Vector4& rhs) noexcept;
         Vector4& operator*=(Real rhs) noexcept;
-        Vector4& operator/=(Real rhs) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        Vector4& operator/=(Real rhs) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // ÌØÊâVector4
 

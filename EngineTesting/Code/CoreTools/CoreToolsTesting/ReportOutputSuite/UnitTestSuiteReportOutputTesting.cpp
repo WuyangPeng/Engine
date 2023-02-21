@@ -13,12 +13,23 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ReportOutput/UnitTestSuiteReportOutput.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 using std::string;
 using namespace std::literals;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, UnitTestSuiteReportOutputTesting)
+CoreTools::UnitTestSuiteReportOutputTesting::UnitTestSuiteReportOutputTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, UnitTestSuiteReportOutputTesting)
+
+void CoreTools::UnitTestSuiteReportOutputTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::UnitTestSuiteReportOutputTesting::MainTest()
 {

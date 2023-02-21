@@ -69,7 +69,7 @@ int Rendering::TextureBuffer::GetStreamingSize() const
 
     size += impl->GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(format);
+    size += CoreTools::GetStreamSize(format);
 
     return size;
 }

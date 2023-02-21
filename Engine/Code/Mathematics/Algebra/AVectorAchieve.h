@@ -197,7 +197,7 @@ Mathematics::AVector<T>& Mathematics::AVector<T>::operator/=(T scalar)
 }
 
 template <typename T>
-T Mathematics::AVector<T>::Length() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+T Mathematics::AVector<T>::Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -232,7 +232,7 @@ void Mathematics::AVector<T>::Normalize(const T epsilon)
 }
 
 template <typename T>
-bool Mathematics::AVector<T>::IsZero(const T epsilon) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+bool Mathematics::AVector<T>::IsZero(const T epsilon) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -249,7 +249,7 @@ bool Mathematics::AVector<T>::IsZero(const T epsilon) const noexcept(g_Assert < 
 }
 
 template <typename T>
-bool Mathematics::AVector<T>::IsNormalize(const T epsilon) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+bool Mathematics::AVector<T>::IsNormalize(const T epsilon) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

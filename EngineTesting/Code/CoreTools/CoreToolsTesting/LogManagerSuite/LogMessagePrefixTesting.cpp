@@ -13,9 +13,20 @@
 #include "CoreTools/LogManager/LogFilterManager.h"
 #include "CoreTools/LogManager/LogLevelManager.h"
 #include "CoreTools/LogManager/LogMessagePrefix.h"
+#include "CoreTools/LogManager/Flags/LogManagerFlags.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::LogMessagePrefixTesting::LogMessagePrefixTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, LogMessagePrefixTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, LogMessagePrefixTesting)
 
+void CoreTools::LogMessagePrefixTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 void CoreTools::LogMessagePrefixTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(TimestampTest);

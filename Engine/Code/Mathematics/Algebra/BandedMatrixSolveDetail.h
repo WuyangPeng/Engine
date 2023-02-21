@@ -129,7 +129,7 @@ int Mathematics::BandedMatrixSolve<Real>::GetStreamSize() const
     MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
     auto size = input.GetStreamSize();
-    size += CORE_TOOLS_STREAM_SIZE(epsilon);
+    size += CoreTools::GetStreamSize(epsilon);
 
     return size;
 }
@@ -163,7 +163,7 @@ void Mathematics::BandedMatrixSolve<Real>::ResetSize(int size, int lowerBandsNum
 }
 
 template <typename Real>
-int Mathematics::BandedMatrixSolve<Real>::GetLowerBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+int Mathematics::BandedMatrixSolve<Real>::GetLowerBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_6;
 
@@ -203,7 +203,7 @@ void Mathematics::BandedMatrixSolve<Real>::SetLowerBand(int index, const Contain
 }
 
 template <typename Real>
-int Mathematics::BandedMatrixSolve<Real>::GetUpperBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+int Mathematics::BandedMatrixSolve<Real>::GetUpperBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_6;
 

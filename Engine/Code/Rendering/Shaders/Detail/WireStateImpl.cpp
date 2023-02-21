@@ -43,7 +43,7 @@ int Rendering::WireStateImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto size = CORE_TOOLS_STREAM_SIZE(enabled);
+    const auto size = CoreTools::GetStreamSize(enabled);
 
     return size;
 }

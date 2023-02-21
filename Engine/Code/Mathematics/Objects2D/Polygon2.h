@@ -53,7 +53,7 @@ namespace Mathematics
         virtual void SetVertex(int index, const Vector2& vertex);
 
         // 计算关于所述多边形的各种信息。
-        NODISCARD Vector2 ComputeVertexAverage() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD Vector2 ComputeVertexAverage() const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD Real ComputePerimeterLength() const;
         NODISCARD Real ComputeArea() const;
 

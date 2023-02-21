@@ -58,10 +58,10 @@ int Rendering::ClodMeshImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(currentRecord);
+    auto size = CoreTools::GetStreamSize(currentRecord);
 
-    size += CORE_TOOLS_STREAM_SIZE(targetRecord);
-    size += CORE_TOOLS_STREAM_SIZE(recordArray);
+    size += CoreTools::GetStreamSize(targetRecord);
+    size += CoreTools::GetStreamSize(recordArray);
 
     return size;
 }

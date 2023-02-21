@@ -195,14 +195,14 @@ int Rendering::VertexFormatImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(numAttributes);
+    auto size = CoreTools::GetStreamSize(numAttributes);
 
     for (auto i = 0; i < numAttributes; ++i)
     {
         size += elements.at(i).GetStreamingSize();
     }
 
-    size += CORE_TOOLS_STREAM_SIZE(stride);
+    size += CoreTools::GetStreamSize(stride);
 
     return size;
 }

@@ -49,7 +49,7 @@ int Rendering::FloatArrayImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return CORE_TOOLS_STREAM_SIZE(elements);
+    return CoreTools::GetStreamSize(elements);
 }
 
 int Rendering::FloatArrayImpl::GetNumElements() const

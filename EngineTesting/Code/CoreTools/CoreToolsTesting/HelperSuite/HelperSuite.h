@@ -1,16 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:20)
+///	引擎测试版本：0.9.0.2 (2023/02/05 15:11)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_H
 #define CORE_TOOLS_HELPER_SUITE_H
 
-#include "AssertExceptionMacroTesting.h"
+#include "AssertException/AssertExecuteLoopNotThrowTesting.h"
+#include "AssertException/AssertNotThrowExceptionTesting.h"
+#include "AssertException/AssertThrowExceptionTesting.h"
 #include "AssertTest/AssertTestApproximateTesting.h"
 #include "AssertTest/AssertTestConditionTesting.h"
 #include "AssertTest/AssertTestExceptionThrowTesting.h"
@@ -33,6 +35,7 @@
 #include "Export/SharedExportMacroTesting.h"
 #include "FunctionDescribedMacroTesting.h"
 #include "GetRequiredBitsTesting.h"
+#include "HashCombineTesting.h"
 #include "InitializeTerminatorMacroTesting.h"
 #include "Log/LogConsoleMacroTesting.h"
 #include "Log/LogDefaultMacroTesting.h"
@@ -58,13 +61,10 @@
 #include "Stream/DebugStreamMacroTesting.h"
 #include "Stream/DefaultTestingNoObjectPtrTesting.h"
 #include "Stream/DefaultTestingObjectPtrTesting.h"
-#include "Stream/StreamSizeMacroTesting.h"
 #include "Stream/TestingNoObjectPtrTesting.h"
 #include "Stream/TestingObjectPtrTesting.h"
 #include "Stream/TestingObjectSizeTesting.h"
 #include "Stream/TestingObjectTesting.h"
-#include "UnitTestSuite/UnitTestSuiteMacroCompleteTesting.h"
-#include "UnitTestSuite/UnitTestSuiteMacroCompleteUseTestingTypeTesting.h"
 #include "UnitTestSuite/UnitTestSuiteMacroTesting.h"
 #include "UserMacroTesting.h"
 

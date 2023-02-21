@@ -44,7 +44,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
-    CORE_TOOLS_STREAM_REGISTER(ProjectionViewMatrixConstant);
+    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(ProjectionViewMatrixConstant);
 
 #include STSTEM_WARNING_POP
 

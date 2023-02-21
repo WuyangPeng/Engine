@@ -190,7 +190,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 }
 
 template <typename Real>
-Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator/=(Real scalar) noexcept(g_MathematicsAssert < 0)
+Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator/=(Real scalar) noexcept(gMathematicsAssert < 0)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -215,7 +215,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 }
 
 template <typename Real>
-Real Mathematics::VariableLengthVector<Real>::Length() const noexcept(g_MathematicsAssert < 2)
+Real Mathematics::VariableLengthVector<Real>::Length() const noexcept(gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -223,7 +223,7 @@ Real Mathematics::VariableLengthVector<Real>::Length() const noexcept(g_Mathemat
 }
 
 template <typename Real>
-Real Mathematics::VariableLengthVector<Real>::SquaredLength() const noexcept(g_MathematicsAssert < 2)
+Real Mathematics::VariableLengthVector<Real>::SquaredLength() const noexcept(gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -240,7 +240,7 @@ Real Mathematics::VariableLengthVector<Real>::SquaredLength() const noexcept(g_M
 }
 
 template <typename Real>
-void Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon) noexcept(g_MathematicsAssert < 2)
+void Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon) noexcept(gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

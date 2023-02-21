@@ -11,13 +11,20 @@
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_FILE_OUT_STREAM_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class FileOutStreamTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(FileOutStreamTesting);
+        using ClassType = FileOutStreamTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit FileOutStreamTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         NODISCARD std::string GetTopLevelContent() const;

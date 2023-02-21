@@ -1,14 +1,15 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:22)
+///	引擎测试版本：0.9.0.2 (2023/02/16 20:50)
 
 #include "DefaultTestingNoObjectPtr.h"
 #include "TestingNoObjectPtrImpl.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -17,24 +18,23 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-using std::make_shared;
-using std::string;
-
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, DefaultTestingNoObjectPtr);
 
 CORE_TOOLS_RTTI_DEFINE(CoreTools, DefaultTestingNoObjectPtr);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, DefaultTestingNoObjectPtr);
 CORE_TOOLS_FACTORY_DEFINE(CoreTools, DefaultTestingNoObjectPtr);
 
-CoreTools::DefaultTestingNoObjectPtr::DefaultTestingNoObjectPtr(const string& name)
+CoreTools::DefaultTestingNoObjectPtr::DefaultTestingNoObjectPtr(const std::string& name, LoadConstructor loadConstructor)
     : ParentType{ name }, impl{ ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(loadConstructor);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::DefaultTestingNoObjectPtr::ObjectSharedPtr CoreTools::DefaultTestingNoObjectPtr::Create(const string& name)
+CoreTools::DefaultTestingNoObjectPtr::ObjectSharedPtr CoreTools::DefaultTestingNoObjectPtr::Create(const std::string& name)
 {
-    return make_shared<ClassType>(name);
+    return std::make_shared<ClassType>(name, LoadConstructor::ConstructorLoader);
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, DefaultTestingNoObjectPtr);
@@ -43,5 +43,5 @@ CORE_TOOLS_IMPL_NON_OBJECT_PTR_DEFAULT_STREAM(CoreTools, DefaultTestingNoObjectP
 
 CoreTools::ObjectInterfaceSharedPtr CoreTools::DefaultTestingNoObjectPtr::CloneObject() const
 {
-    return make_shared<ClassType>(*this);
+    return std::make_shared<ClassType>(*this);
 }

@@ -20,8 +20,19 @@
 #include "CoreTools/MessageEvent/EntityManagerDetail.h"
 #include "CoreTools/StateMachineManager/StateDetail.h"
 #include "CoreTools/StateMachineManager/StateMachineBaseDetail.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::StateEntityTesting::StateEntityTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, StateEntityTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, StateEntityTesting)
+
+void CoreTools::StateEntityTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::StateEntityTesting::MainTest()
 {

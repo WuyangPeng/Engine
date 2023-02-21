@@ -92,7 +92,7 @@ int Rendering::TextureDepthStencil::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(shaderInput);
+    size += CoreTools::GetStreamSize(shaderInput);
 
     return size;
 }

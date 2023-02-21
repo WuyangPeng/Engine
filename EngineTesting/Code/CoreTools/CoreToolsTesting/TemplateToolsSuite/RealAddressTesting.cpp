@@ -13,8 +13,19 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/RealAddressDetail.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::RealAddressTesting::RealAddressTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, RealAddressTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, RealAddressTesting)
+
+void CoreTools::RealAddressTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::RealAddressTesting::MainTest()
 {

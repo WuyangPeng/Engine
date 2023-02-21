@@ -476,8 +476,8 @@ int Rendering::Portal::GetStreamingSize() const
     size += sizeof(numVertices);
     size += numVertices * sizeof(modelVertices[0]);
     size += sizeof(modelPlane);
-    size += CORE_TOOLS_STREAM_SIZE(open);
-    size += CORE_TOOLS_STREAM_SIZE(adjacentRegion);
+    size += CoreTools::GetStreamSize(open);
+    size += CoreTools::GetStreamSize(adjacentRegion);
 
     return size;
 }

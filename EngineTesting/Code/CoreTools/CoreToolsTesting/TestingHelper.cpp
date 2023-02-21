@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 11:55)
+///	引擎测试版本：0.9.0.2 (2023/02/05 15:09)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -59,14 +59,13 @@ void CoreTools::TestingHelper::InitSuite()
     AddFreetypeSuite();
 }
 
-// private
 void CoreTools::TestingHelper::AddHelperSuite()
 {
     auto helperSuite = GenerateSuite("帮助");
 
     ADD_TEST(helperSuite, FunctionDescribedMacroTesting);
+    helperSuite.AddSuite(GetAssertExceptionMacroSuite());
     helperSuite.AddSuite(GetAssertTestMacroSuite());
-    ADD_TEST(helperSuite, AssertExceptionMacroTesting);
     helperSuite.AddSuite(GetClassInvariantMacroSuite());
     helperSuite.AddSuite(GetCustomAssertMacroSuite());
     helperSuite.AddSuite(GetExportMacroSuite());
@@ -86,8 +85,20 @@ void CoreTools::TestingHelper::AddHelperSuite()
     ADD_TEST(helperSuite, UserMacroTesting);
     ADD_TEST(helperSuite, SafetyLimitMacroTesting);
     ADD_TEST(helperSuite, GetRequiredBitsTesting);
+    ADD_TEST(helperSuite, HashCombineTesting);
 
     AddSuite(helperSuite);
+}
+
+CoreTools::Suite CoreTools::TestingHelper::GetAssertExceptionMacroSuite()
+{
+    auto assertExceptionMacroSuite = GenerateSuite("断言异常测试");
+
+    ADD_TEST(assertExceptionMacroSuite, AssertNotThrowExceptionTesting);
+    ADD_TEST(assertExceptionMacroSuite, AssertThrowExceptionTesting);
+    ADD_TEST(assertExceptionMacroSuite, AssertExecuteLoopNotThrowTesting);
+
+    return assertExceptionMacroSuite;
 }
 
 CoreTools::Suite CoreTools::TestingHelper::GetAssertTestMacroSuite()
@@ -104,7 +115,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetAssertTestMacroSuite()
     return assertTestMacroSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetClassInvariantMacroSuite()
 {
     auto classInvariantMacroSuite = GenerateSuite("类不变式宏");
@@ -115,7 +125,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetClassInvariantMacroSuite()
     return classInvariantMacroSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetCustomAssertMacroSuite()
 {
     auto customAssertMacroSuite = GenerateSuite("断言宏");
@@ -126,7 +135,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetCustomAssertMacroSuite()
     return customAssertMacroSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetExportMacroSuite()
 {
     auto exportMacroSuite = GenerateSuite("导出宏");
@@ -143,7 +151,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetExportMacroSuite()
     return exportMacroSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetLogMacroSuite()
 {
     auto logMacroSuite = GenerateSuite("日志宏");
@@ -158,7 +165,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetLogMacroSuite()
     return logMacroSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetMemberFunctionMacroSuite()
 {
     auto memberFunctionMacroSuite = GenerateSuite("成员函数宏");
@@ -172,7 +178,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetMemberFunctionMacroSuite()
     return memberFunctionMacroSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetRttiMacroSuite()
 {
     auto rttiMacroSuite = GenerateSuite("Rtti宏");
@@ -184,12 +189,10 @@ CoreTools::Suite CoreTools::TestingHelper::GetRttiMacroSuite()
     return rttiMacroSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetStreamMacroSuite()
 {
     auto streamMacroSuite = GenerateSuite("字节流宏");
 
-    ADD_TEST(streamMacroSuite, StreamSizeMacroTesting);
     ADD_TEST(streamMacroSuite, DebugStreamMacroTesting);
     ADD_TEST(streamMacroSuite, DefaultTestingNoObjectPtrTesting);
     ADD_TEST(streamMacroSuite, DefaultTestingObjectPtrTesting);
@@ -201,19 +204,15 @@ CoreTools::Suite CoreTools::TestingHelper::GetStreamMacroSuite()
     return streamMacroSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetUnitTestSuiteMacroSuite()
 {
     auto unitTestSuiteMacroSuite = GenerateSuite("UnitTestSuite宏");
 
-    ADD_TEST(unitTestSuiteMacroSuite, UnitTestSuiteMacroCompleteTesting);
-    ADD_TEST(unitTestSuiteMacroSuite, UnitTestSuiteMacroCompleteUseTestingTypeTesting);
     ADD_TEST_USE_PARAMETER_1(unitTestSuiteMacroSuite, UnitTestSuiteMacroTesting, IsPrintRun());
 
     return unitTestSuiteMacroSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetExceptionMacroSuite()
 {
     auto exceptionMacroSuite = GenerateSuite("异常宏");
@@ -224,7 +223,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetExceptionMacroSuite()
     return exceptionMacroSuite;
 }
 
-// private
 void CoreTools::TestingHelper::AddContractSuite()
 {
     auto contractSuite = GenerateSuite("契约");
@@ -254,7 +252,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetImplSuite()
     return implSuite;
 }
 
-// private
 void CoreTools::TestingHelper::AddBaseSuite()
 {
     auto baseSuite = GenerateSuite("基础");
@@ -269,7 +266,6 @@ void CoreTools::TestingHelper::AddBaseSuite()
     AddSuite(baseSuite);
 }
 
-// private
 void CoreTools::TestingHelper::AddCharacterStringSuite()
 {
     auto characterStringSuite = GenerateSuite("字符串类");
@@ -291,7 +287,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetCaseInsensitiveStringSuite()
     return caseInsensitiveStringSuite;
 }
 
-// private
 void CoreTools::TestingHelper::AddExceptionSuite()
 {
     auto exceptionSuite = GenerateSuite("异常库");
@@ -302,7 +297,6 @@ void CoreTools::TestingHelper::AddExceptionSuite()
     AddSuite(exceptionSuite);
 }
 
-// private
 void CoreTools::TestingHelper::AddConsoleSuite()
 {
     auto consoleSuite = GenerateSuite("控制台库");
@@ -315,7 +309,6 @@ void CoreTools::TestingHelper::AddConsoleSuite()
     AddSuite(consoleSuite);
 }
 
-// private
 void CoreTools::TestingHelper::AddThreadingSuite()
 {
     auto threadingSuite = GenerateSuite("线程库");
@@ -337,7 +330,6 @@ void CoreTools::TestingHelper::AddThreadingSuite()
     AddSuite(threadingSuite);
 }
 
-// private
 void CoreTools::TestingHelper::AddFileManagerSuite()
 {
     auto fileManagerSuite = GenerateSuite("文件管理库");
@@ -359,7 +351,6 @@ void CoreTools::TestingHelper::AddFileManagerSuite()
     AddSuite(fileManagerSuite);
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetEndianSuite()
 {
     auto endianSuite = GenerateSuite("字节序");
@@ -372,7 +363,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetEndianSuite()
     return endianSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetCFileManagerSuite()
 {
     auto cFileManagerSuite = GenerateSuite("C文件管理");
@@ -384,7 +374,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetCFileManagerSuite()
     return cFileManagerSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetStreamManagerSuite()
 {
     auto streamManagerSuite = GenerateSuite("C++文件管理");
@@ -395,7 +384,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetStreamManagerSuite()
     return streamManagerSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetFileSuite()
 {
     auto fileSuite = GenerateSuite("文件管理");
@@ -407,7 +395,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetFileSuite()
     return fileSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetFileHandleSuite()
 {
     auto fileHandleSuite = GenerateSuite("文件句柄管理");
@@ -421,7 +408,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetFileHandleSuite()
     return fileHandleSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetBufferIOSuite()
 {
     auto bufferIOSuite = GenerateSuite("缓冲区IO");
@@ -432,7 +418,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetBufferIOSuite()
     return bufferIOSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetEnvironmentSuite()
 {
     auto environmentSuite = GenerateSuite("缓冲区IO");
@@ -443,7 +428,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetEnvironmentSuite()
     return environmentSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetFileAsynchronousSuite()
 {
     auto fileAsynchronousSuite = GenerateSuite("文件异步管理");
@@ -481,7 +465,6 @@ void CoreTools::TestingHelper::AddTextParsingSuite()
     AddSuite(textParsingSuite);
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetSimpleZipSuite()
 {
     auto SimpleZipSuite = GenerateSuite("简易Zip");
@@ -492,7 +475,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetSimpleZipSuite()
     return SimpleZipSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetSimpleCSVSuite()
 {
     auto simpleCSVSuite = GenerateSuite("简易Csv");
@@ -530,7 +512,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetSimpleCSVSuite()
     return simpleCSVSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetCommandSuite()
 {
     auto simpleCSVCommandSuite = GenerateSuite("Csv命令");
@@ -549,7 +530,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetCommandSuite()
     return simpleCSVCommandSuite;
 }
 
-// private
 CoreTools::Suite CoreTools::TestingHelper::GetQuerySuite()
 {
     auto querySuite = GenerateSuite("Csv查询");
@@ -567,7 +547,6 @@ CoreTools::Suite CoreTools::TestingHelper::GetQuerySuite()
     return querySuite;
 }
 
-// private
 void CoreTools::TestingHelper::AddLogManagerSuite()
 {
     auto logManagerSuite = GenerateSuite("日志管理库");
@@ -588,7 +567,6 @@ void CoreTools::TestingHelper::AddLogManagerSuite()
     AddSuite(logManagerSuite);
 }
 
-// private
 void CoreTools::TestingHelper::AddDataTypesSuite()
 {
     auto dataTypesSuite = GenerateSuite("数据类型库");
@@ -604,7 +582,6 @@ void CoreTools::TestingHelper::AddDataTypesSuite()
     AddSuite(dataTypesSuite);
 }
 
-// private
 void CoreTools::TestingHelper::AddMemoryToolsSuite()
 {
     auto memoryToolsSuite = GenerateSuite("内存工具库");
@@ -614,7 +591,6 @@ void CoreTools::TestingHelper::AddMemoryToolsSuite()
     AddSuite(memoryToolsSuite);
 }
 
-// private
 void CoreTools::TestingHelper::AddObjectSystemSuite()
 {
     auto objectSystemsSuite = GenerateSuite("对象系统库");
@@ -642,7 +618,6 @@ void CoreTools::TestingHelper::AddObjectSystemSuite()
     AddSuite(objectSystemsSuite);
 }
 
-// private
 void CoreTools::TestingHelper::AddTimeSuite()
 {
     auto timeSuite = GenerateSuite("时间库");
@@ -655,7 +630,6 @@ void CoreTools::TestingHelper::AddTimeSuite()
     AddSuite(timeSuite);
 }
 
-// private
 void CoreTools::TestingHelper::AddReportOutputSuite()
 {
     auto reportOutputSuite = GenerateSuite("报告输出库");
@@ -667,7 +641,6 @@ void CoreTools::TestingHelper::AddReportOutputSuite()
     AddSuite(reportOutputSuite);
 }
 
-// private
 void CoreTools::TestingHelper::AddUnitTestSuite()
 {
     auto unitTestSuite = GenerateSuite("单元测试库");
@@ -678,7 +651,6 @@ void CoreTools::TestingHelper::AddUnitTestSuite()
     AddSuite(unitTestSuite);
 }
 
-// private
 void CoreTools::TestingHelper::AddTemplateToolsSuite()
 {
     auto templateToolsSuite = GenerateSuite("模板工具库");
@@ -702,7 +674,6 @@ void CoreTools::TestingHelper::AddTemplateToolsSuite()
     AddSuite(templateToolsSuite);
 }
 
-// private
 void CoreTools::TestingHelper::AddCommandSuite()
 {
     auto commandSuite = GenerateSuite("命令行库");
@@ -714,7 +685,6 @@ void CoreTools::TestingHelper::AddCommandSuite()
     AddSuite(commandSuite);
 }
 
-// private
 void CoreTools::TestingHelper::AddMainFunctionHelperSuite()
 {
     auto mainFunctionHelperSuite = GenerateSuite("主函数帮助库");

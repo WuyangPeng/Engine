@@ -11,13 +11,21 @@
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_STREAM_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class StreamTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(StreamTesting);
+        using ClassType = StreamTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit StreamTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
 
     private:
         void MainTest();

@@ -32,7 +32,7 @@ namespace Mathematics
         using Math = Math<Real>;
 
     public:
-        QuaternionFactor(const Quaternion& quaternion, QuaternionFactorFlags flag) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        QuaternionFactor(const Quaternion& quaternion, QuaternionFactorFlags flag) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -45,22 +45,22 @@ namespace Mathematics
 
     private:
         // 系数为 (cx + sx * i) * (cy + sy * j) * (cz + sz * k).
-        void FactorXYZ() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        void FactorXYZ() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 系数为 (cx + sx * i) * (cz + sz * k) * (cy + sy * j).
-        void FactorXZY() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        void FactorXZY() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 系数为 (cy + sy * j) * (cz + sz * k) * (cx + sx * i).
-        void FactorYZX() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        void FactorYZX() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 系数为 (cy + sy * j) * (cx + sx * i) * (cz + sz * k).
-        void FactorYXZ() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        void FactorYXZ() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 系数为 (cz + sz * k) * (cx + sx * i) * (cy + sy * j).
-        void FactorZXY() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        void FactorZXY() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 系数为 (cz + sz * k) * (cy + sy * j) * (cx + sx * i).
-        void FactorZYX() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        void FactorZYX() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:
         Quaternion quaternion;

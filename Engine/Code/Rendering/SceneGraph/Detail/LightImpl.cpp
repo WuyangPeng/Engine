@@ -321,19 +321,19 @@ int Rendering::LightImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(lightType);
+    auto size = CoreTools::GetStreamSize(lightType);
 
     size += RENDERING_STREAM_SIZE(ambient);
     size += RENDERING_STREAM_SIZE(diffuse);
     size += RENDERING_STREAM_SIZE(specular);
-    size += CORE_TOOLS_STREAM_SIZE(constant);
-    size += CORE_TOOLS_STREAM_SIZE(linear);
-    size += CORE_TOOLS_STREAM_SIZE(quadratic);
-    size += CORE_TOOLS_STREAM_SIZE(intensity);
-    size += CORE_TOOLS_STREAM_SIZE(angle);
-    size += CORE_TOOLS_STREAM_SIZE(cosAngle);
-    size += CORE_TOOLS_STREAM_SIZE(sinAngle);
-    size += CORE_TOOLS_STREAM_SIZE(exponent);
+    size += CoreTools::GetStreamSize(constant);
+    size += CoreTools::GetStreamSize(linear);
+    size += CoreTools::GetStreamSize(quadratic);
+    size += CoreTools::GetStreamSize(intensity);
+    size += CoreTools::GetStreamSize(angle);
+    size += CoreTools::GetStreamSize(cosAngle);
+    size += CoreTools::GetStreamSize(sinAngle);
+    size += CoreTools::GetStreamSize(exponent);
     size += MATHEMATICS_STREAM_SIZE(position);
     size += MATHEMATICS_STREAM_SIZE(directionVector);
     size += MATHEMATICS_STREAM_SIZE(upVector);

@@ -18,7 +18,7 @@
 #include "CoreTools/ObjectSystems/NullObject.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/ObjectSystems/Stream.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <vector>
 
 using std::string;
@@ -35,7 +35,18 @@ namespace CoreTools
     const auto gFileName = SYSTEM_TEXT("FileOutStream.txt"s);
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, FileOutStreamTesting)
+CoreTools::FileOutStreamTesting::FileOutStreamTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, FileOutStreamTesting)
+
+void CoreTools::FileOutStreamTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::FileOutStreamTesting::MainTest()
 {

@@ -1,16 +1,15 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:23)
+///	引擎测试版本：0.9.0.2 (2023/02/12 21:16)
 
 #include "MemberFunctionNoexceptMacroImpl.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
-using std::string;
 
 CoreTools::MemberFunctionNoexceptMacroImpl::MemberFunctionNoexceptMacroImpl() noexcept
 {
@@ -24,19 +23,25 @@ void CoreTools::MemberFunctionNoexceptMacroImpl::ConstMemberFunction() const noe
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 }
 
-void CoreTools::MemberFunctionNoexceptMacroImpl::ConstMemberFunction(MAYBE_UNUSED int value) const noexcept
+void CoreTools::MemberFunctionNoexceptMacroImpl::ConstMemberFunction(int value) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(value);
 }
 
-void CoreTools::MemberFunctionNoexceptMacroImpl::ConstMemberFunction(MAYBE_UNUSED const string& character) const noexcept
+void CoreTools::MemberFunctionNoexceptMacroImpl::ConstMemberFunction(const std::string& character) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(character);
 }
 
-void CoreTools::MemberFunctionNoexceptMacroImpl::ConstMemberFunction(MAYBE_UNUSED const string* character) const noexcept
+void CoreTools::MemberFunctionNoexceptMacroImpl::ConstMemberFunction(const std::string* character) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(character);
 }
 
 void CoreTools::MemberFunctionNoexceptMacroImpl::NonConstCopyMemberFunction() noexcept
@@ -44,17 +49,23 @@ void CoreTools::MemberFunctionNoexceptMacroImpl::NonConstCopyMemberFunction() no
     CORE_TOOLS_CLASS_IS_VALID_9;
 }
 
-void CoreTools::MemberFunctionNoexceptMacroImpl::NonConstCopyMemberFunction(MAYBE_UNUSED int value) noexcept
+void CoreTools::MemberFunctionNoexceptMacroImpl::NonConstCopyMemberFunction(int value) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(value);
 }
 
-void CoreTools::MemberFunctionNoexceptMacroImpl::NonConstCopyMemberFunction(MAYBE_UNUSED const string& character) noexcept
+void CoreTools::MemberFunctionNoexceptMacroImpl::NonConstCopyMemberFunction(const std::string& character) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(character);
 }
 
-void CoreTools::MemberFunctionNoexceptMacroImpl::NonConstCopyMemberFunction(MAYBE_UNUSED const string* character) noexcept
+void CoreTools::MemberFunctionNoexceptMacroImpl::NonConstCopyMemberFunction(const std::string* character) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(character);
 }

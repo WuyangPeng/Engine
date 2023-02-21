@@ -11,13 +11,20 @@
 #define CONCURRENT_TOOLS_TIME_SUITE_CUSTOM_TIME_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class CustomTimeTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(CustomTimeTesting);
+        using ClassType = CustomTimeTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit CustomTimeTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

@@ -12,13 +12,20 @@
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/ObjectSystems/Object.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class ObjectManagerTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ObjectManagerTesting);
+        using ClassType = ObjectManagerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit ObjectManagerTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

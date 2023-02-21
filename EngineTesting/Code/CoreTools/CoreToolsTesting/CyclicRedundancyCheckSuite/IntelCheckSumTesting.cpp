@@ -12,12 +12,23 @@
 #include "CoreTools/CyclicRedundancyCheck/IntelCheckSum.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <array>
 
 using std::array;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, IntelCheckSumTesting)
+CoreTools::IntelCheckSumTesting::IntelCheckSumTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, IntelCheckSumTesting)
+
+void CoreTools::IntelCheckSumTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::IntelCheckSumTesting::MainTest()
 {

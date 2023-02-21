@@ -56,10 +56,10 @@ string CoreTools::BufferSource::ReadString()
     if (0 < length)
     {
         // 字符串被写入为4字节的倍数。
-        auto padding = (length % g_DefaultSize);
+        auto padding = (length % gDefaultSize);
         if (0 < padding)
         {
-            padding = g_DefaultSize - padding;
+            padding = gDefaultSize - padding;
         }
 
         string datum = source.GetText(length);

@@ -12,13 +12,20 @@
 
 #include "CoreTools/Helper/RttiMacro.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class RttiTestingBase : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(RttiTestingBase);
+        using ClassType = RttiTestingBase;
+        using ParentType = UnitTest;
+
+    public:
+        explicit RttiTestingBase(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_RTTI_DECLARE;
 

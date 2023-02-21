@@ -34,17 +34,17 @@ namespace Mathematics
         using Math = typename ParentType::Math;
 
     public:
-        StaticTestIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        StaticTestIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD Plane3 GetPlane() const noexcept;
         NODISCARD Cylinder3 GetCylinder() const noexcept;
 
-        NODISCARD bool CylinderIsCulled() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD bool CylinderIsCulled() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:
-        void Test() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        void Test() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:
         Plane3 plane;

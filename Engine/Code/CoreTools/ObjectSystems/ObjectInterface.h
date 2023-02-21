@@ -79,7 +79,7 @@ namespace CoreTools
             ConstructorLoader
         };
 
-        explicit ObjectInterface(MAYBE_UNUSED LoadConstructor value) noexcept;
+        explicit ObjectInterface(LoadConstructor loadConstructor) noexcept;
 
     private:
         int64_t uniqueID;
@@ -91,7 +91,7 @@ namespace CoreTools
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
-    CORE_TOOLS_STREAM_REGISTER(ObjectInterface);
+    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(ObjectInterface);
 
 #include STSTEM_WARNING_POP
 }

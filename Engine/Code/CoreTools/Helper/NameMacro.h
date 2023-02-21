@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 0:53)
+///	标准：std:c++20
+///	引擎版本：0.9.0.2 (2023/02/19 21:05)
 
 #ifndef CORE_TOOLS_HELPER_NAME_MACRO_H
 #define CORE_TOOLS_HELPER_NAME_MACRO_H
@@ -15,7 +15,6 @@
 #include <vector>
 
 #define CORE_TOOLS_NAMES_DECLARE                                                                \
-public:                                                                                         \
     using ObjectSharedPtrContainer = std::vector<ObjectSharedPtr>;                              \
     using ConstObjectSharedPtrContainer = std::vector<ConstObjectSharedPtr>;                    \
     NODISCARD virtual ObjectSharedPtr GetObjectByName(const std::string& name);                 \
@@ -35,12 +34,14 @@ public:                                                                         
     NODISCARD ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const final; \
     NODISCARD ConstObjectSharedPtrContainer GetAllConstObjectsByName(const std::string& name) const final
 
-#define CORE_TOOLS_NAMES_IMPL_DECLARE                                                              \
-    using ObjectSharedPtrContainer = std::vector<CoreTools::ObjectSharedPtr>;                      \
-    using ConstObjectSharedPtrContainer = std::vector<CoreTools::ConstObjectSharedPtr>;            \
-    NODISCARD CoreTools::ObjectSharedPtr GetObjectByName(const std::string& name);                 \
-    NODISCARD ObjectSharedPtrContainer GetAllObjectsByName(const std::string& name);               \
-    NODISCARD CoreTools::ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const; \
+#define CORE_TOOLS_NAMES_IMPL_DECLARE                                                   \
+    using ObjectSharedPtr = CoreTools::ObjectSharedPtr;                                 \
+    using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;                       \
+    using ObjectSharedPtrContainer = std::vector<ObjectSharedPtr>;                      \
+    using ConstObjectSharedPtrContainer = std::vector<ConstObjectSharedPtr>;            \
+    NODISCARD ObjectSharedPtr GetObjectByName(const std::string& name);                 \
+    NODISCARD ObjectSharedPtrContainer GetAllObjectsByName(const std::string& name);    \
+    NODISCARD ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const; \
     NODISCARD ConstObjectSharedPtrContainer GetAllConstObjectsByName(const std::string& name) const
 
 #define CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(namespaceName, className)                                                                    \
@@ -48,7 +49,7 @@ public:                                                                         
     {                                                                                                                                         \
         CLASS_IS_VALID_0;                                                                                                                     \
         const auto found = ParentType::GetObjectByName(name);                                                                                 \
-        if (found != nullptr)                                                                                                                 \
+        if (!found->IsNullObject())                                                                                                           \
         {                                                                                                                                     \
             return found;                                                                                                                     \
         }                                                                                                                                     \
@@ -69,7 +70,7 @@ public:                                                                         
     {                                                                                                                                         \
         CLASS_IS_VALID_CONST_0;                                                                                                               \
         const auto found = ParentType::GetConstObjectByName(name);                                                                            \
-        if (found != nullptr)                                                                                                                 \
+        if (!found->IsNullObject())                                                                                                           \
         {                                                                                                                                     \
             return found;                                                                                                                     \
         }                                                                                                                                     \

@@ -1,36 +1,31 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 0:49)
+///	标准：std:c++20
+///	引擎版本：0.9.0.2 (2023/02/13 23:21)
 
 #ifndef CORE_TOOLS_HELPER_STREAM_MACRO_H
 #define CORE_TOOLS_HELPER_STREAM_MACRO_H
 
 #include "ExceptionMacro.h"
 #include "InitializeTerminatorMacro.h"
-#include "MemberFunctionMacro.h"
 #include "CoreTools/Contract/Assertion.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/InitTermRegisterFactory.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-
-// CORE_TOOLS_STREAM_SIZE宏被流系统使用。
-#define CORE_TOOLS_STREAM_SIZE(value) CoreTools::GetStreamSize(value)
 
 #if defined(CORE_TOOLS_USE_ASSERT) && 2 <= ASSERT_LEVEL
 
     #define CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source) \
         const auto beginLoad = source.GetBytesRead()
 
-    #define CORE_TOOLS_END_DEBUG_STREAM_LOAD(source)                                                 \
-        const auto endLoad = source.GetBytesRead();                                                  \
-        const auto usedLoad = endLoad - beginLoad + CORE_TOOLS_STREAM_SIZE(GetRttiType().GetName()); \
-        const auto usedReported = ClassType::GetStreamingSize();                                     \
+    #define CORE_TOOLS_END_DEBUG_STREAM_LOAD(source)                                                   \
+        const auto endLoad = source.GetBytesRead();                                                    \
+        const auto usedLoad = endLoad - beginLoad + CoreTools::GetStreamSize(GetRttiType().GetName()); \
+        const auto usedReported = ClassType::GetStreamingSize();                                       \
         ASSERTION_2(usedLoad == usedReported, "读取不匹配的字节数：读取 = %d，所需 = %d\n", usedLoad, usedReported)
 
     #define CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target) \
@@ -51,12 +46,12 @@
 
 #endif  // defined(CORE_TOOLS_USE_ASSERT) && 2 <= USER_ASSERT_LEVEL
 
-#define CORE_TOOLS_OBJECT_FACTORY_DECLARE(className) \
-public:                                              \
-    explicit className(LoadConstructor value);       \
-                                                     \
-public:                                              \
-    CORE_TOOLS_INITIALIZE_TERMINATE_DECLARE(false);  \
+#define CORE_TOOLS_OBJECT_FACTORY_DECLARE(className)     \
+public:                                                  \
+    explicit className(LoadConstructor loadConstructor); \
+                                                         \
+public:                                                  \
+    CORE_TOOLS_INITIALIZE_TERMINATE_DECLARE(false);      \
     NODISCARD static CoreTools::ObjectInterfaceSharedPtr Factory(CoreTools::BufferSource& source)
 
 #define CORE_TOOLS_OBJECT_STREAM_OVERRIDE_DECLARE                                 \
@@ -78,16 +73,13 @@ public:                                              \
         THROW_EXCEPTION(SYSTEM_TEXT("抽象类没有工厂！\n"s));                                        \
     }
 
-#define CORE_TOOLS_FACTORY_DEFINE(namespaceName, className)                                                            \
-    CoreTools::ObjectInterfaceSharedPtr namespaceName::className::Factory(CoreTools::BufferSource& source)             \
-    {                                                                                                                  \
-        CoreTools::ObjectInterfaceSharedPtr object{ std::make_shared<className>(LoadConstructor::ConstructorLoader) }; \
-        object->Load(source);                                                                                          \
-        return object;                                                                                                 \
+#define CORE_TOOLS_FACTORY_DEFINE(namespaceName, className)                                                \
+    CoreTools::ObjectInterfaceSharedPtr namespaceName::className::Factory(CoreTools::BufferSource& source) \
+    {                                                                                                      \
+        auto object = std::make_shared<className>(LoadConstructor::ConstructorLoader);                     \
+        object->Load(source);                                                                              \
+        return object;                                                                                     \
     }
-
-#define CORE_TOOLS_STREAM_REGISTER(className) \
-    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(className)
 
 #define CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(namespaceName, className)         \
     CORE_TOOLS_INITIALIZE_TERMINATE_DEFINE(namespaceName, className)              \
@@ -101,8 +93,8 @@ public:                                              \
     }
 
 #define CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(namespaceName, className) \
-    namespaceName::className::className(LoadConstructor value)                      \
-        : ParentType{ value }                                                       \
+    namespaceName::className::className(LoadConstructor loadConstructor)            \
+        : ParentType{ loadConstructor }                                             \
     {                                                                               \
         SELF_CLASS_IS_VALID_0;                                                      \
     }

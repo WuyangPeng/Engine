@@ -12,13 +12,20 @@
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class ObjectLinkTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ObjectLinkTesting);
+        using ClassType = ObjectLinkTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit ObjectLinkTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

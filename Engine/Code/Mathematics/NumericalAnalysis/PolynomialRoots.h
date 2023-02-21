@@ -86,7 +86,7 @@ namespace Mathematics
         NODISCARD Real GetBound(Real constant, Real once, Real secondary, Real thrice);
 
         // 解 thrice * r^3 + once * r = constant ，其中thrice > 0和once > 0，这个方程永远都只有一个实数根。
-        NODISCARD Real SpecialCubic(Real thrice, Real once, Real constant) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD Real SpecialCubic(Real thrice, Real once, Real constant) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 四次方程: quartic * x^4 + thrice * x^3 + secondary * x^2 + once * x + constant = 0
         NODISCARD bool FindAlgebraic(Real constant, Real once, Real secondary, Real thrice, Real quartic);

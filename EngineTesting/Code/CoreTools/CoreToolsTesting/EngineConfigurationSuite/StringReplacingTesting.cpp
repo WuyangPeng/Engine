@@ -11,8 +11,19 @@
 #include "CoreTools/EngineConfiguration/StringReplacing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::StringReplacingTesting::StringReplacingTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(CoreTools, StringReplacing)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, StringReplacingTesting)
+
+void CoreTools::StringReplacingTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::StringReplacingTesting::MainTest()
 {
@@ -21,7 +32,7 @@ void CoreTools::StringReplacingTesting::MainTest()
 
 void CoreTools::StringReplacingTesting::StringReplacingTest()
 {
-    TestingType stringReplacing{ "Configuration/StringReplacing.json" };
+    StringReplacing stringReplacing{ "Configuration/StringReplacing.json" };
 
     ASSERT_EQUAL(stringReplacing.GetReplacing(SYSTEM_TEXT("V1")), System::String(SYSTEM_TEXT("Temp1")));
     ASSERT_EQUAL(stringReplacing.GetReplacing(SYSTEM_TEXT("V2")), System::String(SYSTEM_TEXT("Temp2")));

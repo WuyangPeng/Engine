@@ -11,7 +11,8 @@
 #include "Detail/TestEnum.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::ostream;
 using std::string;
 

@@ -36,18 +36,18 @@ namespace Mathematics
         using ContainerType = std::vector<Vector4>;
 
     public:
-        NODISCARD static bool Approximate(const Vector4& lhs, const Vector4& rhs, const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD static bool Approximate(const Vector4& lhs, const Vector4& rhs, const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD static Real GetRobustLength(const Vector4& vector);
-        NODISCARD static Real GetLength(const Vector4& vector) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real GetLength(const Vector4& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD static Real GetLengthSquared(const Vector4& vector) noexcept;
-        NODISCARD static Real Distance(const Vector4& lhs, const Vector4& rhs) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real Distance(const Vector4& lhs, const Vector4& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD static Real DistanceSquared(const Vector4& lhs, const Vector4& rhs) noexcept;
         NODISCARD static Real DotProduct(const Vector4& lhs, const Vector4& rhs) noexcept;
 
         NODISCARD static Vector4 ParallelVectorLhsToRhs(const Vector4& lhs, const Vector4& rhs, const Real epsilon = Math::GetZeroTolerance());
         NODISCARD static Vector4 ApeakVectorLhsToRhs(const Vector4& lhs, const Vector4& rhs, const Real epsilon = Math::GetZeroTolerance());
-        NODISCARD static Real GetVectorIncludedAngle(const Vector4& lhs, const Vector4& rhs) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real GetVectorIncludedAngle(const Vector4& lhs, const Vector4& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 计算点的轴对齐包围盒。
         NODISCARD static AxesAlignBoundingBox4D ComputeExtremes(const ContainerType& vectors);

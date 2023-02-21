@@ -62,14 +62,14 @@ void CoreTools::ReadFileHandleImpl::Read(size_t itemSize, size_t itemsNumber, vo
     ReadFromFile(itemSize, itemsNumber, data);
 }
 
-void CoreTools::ReadFileHandleImpl::WriteToFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED const void* data) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+void CoreTools::ReadFileHandleImpl::WriteToFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED const void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     CORE_TOOLS_ASSERTION_4(false, "ReadFileHandleImpl½ûÖ¹µ÷ÓÃWriteToFile£¡");
 }
 
-void CoreTools::ReadFileHandleImpl::AppendToFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED const void* data) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+void CoreTools::ReadFileHandleImpl::AppendToFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED const void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

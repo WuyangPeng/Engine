@@ -1,22 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:14)
+///	引擎测试版本：0.9.0.2 (2023/02/16 20:43)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_DEFAULT_TESTING_NO_OBJECT_PTR_H
 #define CORE_TOOLS_HELPER_SUITE_DEFAULT_TESTING_NO_OBJECT_PTR_H
 
 #include "AbstractObject.h"
+#include "CoreTools/CoreToolsTesting/HelperSuite/HelperSuiteFwd.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 
 namespace CoreTools
 {
-    class TestingNoObjectPtrImpl;
-
     class DefaultTestingNoObjectPtr : public AbstractObject
     {
     public:
@@ -26,7 +25,7 @@ namespace CoreTools
         using ObjectSharedPtr = std::shared_ptr<ClassType>;
 
     public:
-        explicit DefaultTestingNoObjectPtr(const std::string& name);
+        DefaultTestingNoObjectPtr(const std::string& name, LoadConstructor loadConstructor);
 
         NODISCARD static ObjectSharedPtr Create(const std::string& name);
 
@@ -43,7 +42,7 @@ namespace CoreTools
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
-    CORE_TOOLS_STREAM_REGISTER(DefaultTestingNoObjectPtr);
+    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(DefaultTestingNoObjectPtr);
 
 #include STSTEM_WARNING_POP
 

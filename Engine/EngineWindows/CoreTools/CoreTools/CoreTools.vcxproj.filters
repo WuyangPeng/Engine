@@ -451,6 +451,9 @@
     <Filter Include="TextParsing 模板文件\Detail\CSV">
       <UniqueIdentifier>{f6696ff5-13e2-4a3b-8613-f50149444cf2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Coroutine 头文件">
+      <UniqueIdentifier>{f42cee76-6f48-4f66-9eff-c888c136c252}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsImport.h">
@@ -2951,6 +2954,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\NullObject.h">
       <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Coroutine\Coroutine.h">
+      <Filter>Coroutine 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Coroutine\CoroutineFwd.h">
+      <Filter>Coroutine 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

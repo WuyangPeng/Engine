@@ -11,10 +11,21 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/ValueScopeDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, ValueScopeTesting)
+CoreTools::ValueScopeTesting::ValueScopeTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ValueScopeTesting)
+
+void CoreTools::ValueScopeTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::ValueScopeTesting::MainTest()
 {

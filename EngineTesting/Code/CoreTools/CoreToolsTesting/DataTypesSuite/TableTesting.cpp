@@ -11,12 +11,23 @@
 #include "CoreTools/DataTypes/TableDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <string>
 
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, TableTesting)
+CoreTools::TableTesting::TableTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, TableTesting)
+
+void CoreTools::TableTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::TableTesting::MainTest()
 {

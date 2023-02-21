@@ -28,14 +28,7 @@
 using namespace std::literals;
 using std::make_shared;
 using std::string;
-
-namespace CoreTools
-{
-    namespace SimpleCSV
-    {
-        ENUM_INCREMENTABLE_OPERATOR_DEFINE(ContentType)
-    }
-}
+using System::operator++;
 
 CoreTools::ContentItemTesting::ContentItemTesting(const OStreamShared& stream)
     : ParentType{ stream }

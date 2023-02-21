@@ -113,12 +113,12 @@ int Rendering::VisualEffectInstanceImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(visualEffect);
+    auto size = CoreTools::GetStreamSize(visualEffect);
 
-    size += CORE_TOOLS_STREAM_SIZE(techniqueIndex);
-    size += CORE_TOOLS_STREAM_SIZE(numPasses);
-    size += CORE_TOOLS_STREAM_SIZE(vertexParameters);
-    size += CORE_TOOLS_STREAM_SIZE(pixelParameters);
+    size += CoreTools::GetStreamSize(techniqueIndex);
+    size += CoreTools::GetStreamSize(numPasses);
+    size += CoreTools::GetStreamSize(vertexParameters);
+    size += CoreTools::GetStreamSize(pixelParameters);
 
     return size;
 }

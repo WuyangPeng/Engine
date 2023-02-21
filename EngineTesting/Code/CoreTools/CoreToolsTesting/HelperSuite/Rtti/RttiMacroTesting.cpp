@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:35)
+///	引擎测试版本：0.9.0.2 (2023/02/13 20:07)
 
 #include "RttiMacroTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -34,17 +34,24 @@ void CoreTools::RttiMacroTesting::MainTest()
 
 void CoreTools::RttiMacroTesting::RttiTest()
 {
-    ASSERT_EQUAL("CoreTools.RttiMacroTesting", GetRttiType().GetName());
-    ASSERT_EQUAL("CoreTools.RttiMacroBaseTesting", ParentType::GetRttiType().GetName());
+    ASSERT_EQUAL(GetRttiName(), GetRttiType().GetName());
+    ASSERT_EQUAL(GetBaseRttiName(), ParentType::GetRttiType().GetName());
     ASSERT_TRUE(GetRttiType().IsExactly(ClassType::GetRttiType()));
     ASSERT_FALSE(GetRttiType().IsExactly(ParentType::GetRttiType()));
     ASSERT_TRUE(GetRttiType().IsDerived(ParentType::GetRttiType()));
     ASSERT_FALSE(ParentType::GetRttiType().IsExactly(GetRttiType()));
 
-    ASSERT_EQUAL("CoreTools.RttiMacroTesting", GetCurrentRttiType().GetName());
-    ASSERT_EQUAL("CoreTools.RttiMacroBaseTesting", ParentType::GetCurrentRttiType().GetName());
+    ASSERT_EQUAL(GetRttiName(), GetCurrentRttiType().GetName());
+    ASSERT_EQUAL(GetBaseRttiName(), ParentType::GetCurrentRttiType().GetName());
     ASSERT_TRUE(GetCurrentRttiType().IsExactly(ClassType::GetRttiType()));
     ASSERT_FALSE(GetCurrentRttiType().IsExactly(ParentType::GetRttiType()));
     ASSERT_TRUE(GetCurrentRttiType().IsDerived(ParentType::GetRttiType()));
     ASSERT_FALSE(ParentType::GetRttiType().IsExactly(GetCurrentRttiType()));
+}
+
+const char* CoreTools::RttiMacroTesting::GetRttiName() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return "CoreTools.RttiMacroTesting";
 }

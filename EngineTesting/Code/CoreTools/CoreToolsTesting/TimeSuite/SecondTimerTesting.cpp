@@ -14,8 +14,19 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/Time/SecondTimer.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::SecondTimerTesting::SecondTimerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, SecondTimerTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, SecondTimerTesting)
+
+void CoreTools::SecondTimerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::SecondTimerTesting::MainTest()
 {

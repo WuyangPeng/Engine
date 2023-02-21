@@ -62,7 +62,7 @@ void CoreTools::WriteFileHandleImpl::Write(size_t itemSize, size_t itemsNumber, 
     WriteToFile(itemSize, itemsNumber, data);
 }
 
-void CoreTools::WriteFileHandleImpl::ReadFromFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED void* data) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+void CoreTools::WriteFileHandleImpl::ReadFromFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

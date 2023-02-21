@@ -205,12 +205,12 @@ int Rendering::TerrainPage::GetStreamingSize() const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     auto size = ParentType::GetStreamingSize();
-    size += CORE_TOOLS_STREAM_SIZE(pageSize);
-    size += pageSize * pageSize * CORE_TOOLS_STREAM_SIZE(heights.at(0));
-    size += CORE_TOOLS_STREAM_SIZE(origin);
-    size += CORE_TOOLS_STREAM_SIZE(minElevation);
-    size += CORE_TOOLS_STREAM_SIZE(maxElevation);
-    size += CORE_TOOLS_STREAM_SIZE(spacing);
+    size += CoreTools::GetStreamSize(pageSize);
+    size += pageSize * pageSize * CoreTools::GetStreamSize(heights.at(0));
+    size += CoreTools::GetStreamSize(origin);
+    size += CoreTools::GetStreamSize(minElevation);
+    size += CoreTools::GetStreamSize(maxElevation);
+    size += CoreTools::GetStreamSize(spacing);
     return size;
 }
 

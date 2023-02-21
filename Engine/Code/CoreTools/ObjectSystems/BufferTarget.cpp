@@ -34,7 +34,7 @@ void CoreTools::BufferTarget::Write(const bool datum)
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     const uint32_t value{ datum ? 0xFFFFFFFFu : 0u };
-    Write(CORE_TOOLS_STREAM_SIZE(value), &value);
+    Write(CoreTools::GetStreamSize(value), &value);
 }
 
 void CoreTools::BufferTarget::Write(const char* datum)
@@ -56,11 +56,11 @@ void CoreTools::BufferTarget::Write(const string& datum)
         Write(sizeof(char), length, datum.c_str());
 
         // 字符串被写入为4字节的倍数。
-        array<char, g_DefaultSize> zero{};
-        auto padding = length % g_DefaultSize;
+        array<char, gDefaultSize> zero{};
+        auto padding = length % gDefaultSize;
         if (0 < padding)
         {
-            padding = g_DefaultSize - padding;
+            padding = gDefaultSize - padding;
             Write(CoreTools::GetStreamSize<char>(), padding, zero.data());
         }
     }

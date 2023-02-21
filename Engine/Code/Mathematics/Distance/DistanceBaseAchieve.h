@@ -52,7 +52,7 @@ bool Mathematics::DistanceBase<Real, Vector>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename Vector>
-void Mathematics::DistanceBase<Real, Vector>::SetDifferenceStep(Real newDifferenceStep) noexcept(g_Assert < 2 || g_MathematicsAssert < 2)
+void Mathematics::DistanceBase<Real, Vector>::SetDifferenceStep(Real newDifferenceStep) noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
     MATHEMATICS_ASSERTION_2(Math::GetValue(0) < newDifferenceStep, "无效的相差步进值\n");
@@ -70,7 +70,7 @@ Real Mathematics::DistanceBase<Real, Vector>::GetDifferenceStep() const noexcept
 }
 
 template <typename Real, typename Vector>
-void Mathematics::DistanceBase<Real, Vector>::SetMaximumIterations(int newMaximumIterations) noexcept(g_Assert < 2 || g_MathematicsAssert < 2)
+void Mathematics::DistanceBase<Real, Vector>::SetMaximumIterations(int newMaximumIterations) noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
     MATHEMATICS_ASSERTION_2(0 < newMaximumIterations, "无效的最大迭代次数\n");
@@ -79,7 +79,7 @@ void Mathematics::DistanceBase<Real, Vector>::SetMaximumIterations(int newMaximu
 }
 
 template <typename Real, typename Vector>
-void Mathematics::DistanceBase<Real, Vector>::SetZeroThreshold(Real newZeroThreshold) noexcept(g_Assert < 2 || g_MathematicsAssert < 2)
+void Mathematics::DistanceBase<Real, Vector>::SetZeroThreshold(Real newZeroThreshold) noexcept(gAssert < 2 || gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
     MATHEMATICS_ASSERTION_2(Math::GetValue(0) <= newZeroThreshold, "无效的临界值\n");

@@ -99,7 +99,7 @@ int Rendering::ShaderConstantsDataImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(int32_t());
+    auto size = CoreTools::GetStreamSize(int32_t());
     for (const auto& data : singleShaderConstantsData)
     {
         size += data.GetStreamingSize();

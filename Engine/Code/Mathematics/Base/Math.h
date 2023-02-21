@@ -41,24 +41,24 @@ namespace Mathematics
         NODISCARD static Real Ceil(Real value) noexcept;
         NODISCARD static Real FAbs(Real value) noexcept;
         NODISCARD static Real Floor(Real value) noexcept;
-        NODISCARD static Real FMod(Real x, Real y) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real FMod(Real x, Real y) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD static NumericalValueSymbol Sign(Real value) noexcept;
 
-        NODISCARD static Real Log(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        NODISCARD static Real Log2(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        NODISCARD static Real Log10(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real Log(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real Log2(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real Log10(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        NODISCARD static Real Exp(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        NODISCARD static Real Pow(Real base, Real exponent) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real Exp(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real Pow(Real base, Real exponent) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD static Real Square(Real value) noexcept;
 
         /// @brief  计算浮点数的平方根。
         /// @pre    value >= 0。
         /// @post   Fabs(result * result - value) <= GetZeroTolerance()。
-        NODISCARD static Real Sqrt(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real Sqrt(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
-        NODISCARD static Real InvSqrt(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        NODISCARD static Real CubeRoot(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real InvSqrt(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real CubeRoot(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 截断输入值为特定的范围[min,max]
         NODISCARD static Real Clamp(Real value, Real minValue, Real maxValue) noexcept;
@@ -66,25 +66,25 @@ namespace Mathematics
         // 截断输入值为[0,1].
         NODISCARD static Real Saturate(Real value) noexcept;
 
-        NODISCARD static bool Approximate(Real lhs, Real rhs, const Real zeroTolerance = GetZeroTolerance()) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static bool Approximate(Real lhs, Real rhs, const Real zeroTolerance = GetZeroTolerance()) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // equalDigit需要比较的尾数位（float最大为23位、double最大为52位）
-        NODISCARD static bool FloatingPointEqual(Real lhs, Real rhs, int equalDigit) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static bool FloatingPointEqual(Real lhs, Real rhs, int equalDigit) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD static Real GetNumericalRoundOffNonnegative(Real value) noexcept;
         NODISCARD static Real GetNumericalRoundOff(Real value, Real minValue, Real maxValue) noexcept;
 
     public:
         // 公用常数。
-        NODISCARD static Real GetExponent() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        NODISCARD static Real GetLN2() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        NODISCARD static Real GetLN10() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        NODISCARD static Real GetInverseLN2() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        NODISCARD static Real GetInverseLN10() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        NODISCARD static Real GetSqrt2() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        NODISCARD static Real GetInverseSqrt2() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        NODISCARD static Real GetSqrt3() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        NODISCARD static Real GetInverseSqrt3() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real GetExponent() noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real GetLN2() noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real GetLN10() noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real GetInverseLN2() noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real GetInverseLN10() noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real GetSqrt2() noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real GetInverseSqrt2() noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real GetSqrt3() noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD static Real GetInverseSqrt3() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD static constexpr Real GetValue(int value) noexcept
         {

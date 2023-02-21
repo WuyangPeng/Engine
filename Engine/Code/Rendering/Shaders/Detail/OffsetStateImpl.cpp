@@ -52,11 +52,11 @@ int Rendering::OffsetStateImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(fillEnabled);
-    size += CORE_TOOLS_STREAM_SIZE(lineEnabled);
-    size += CORE_TOOLS_STREAM_SIZE(pointEnabled);
-    size += CORE_TOOLS_STREAM_SIZE(scale);
-    size += CORE_TOOLS_STREAM_SIZE(bias);
+    auto size = CoreTools::GetStreamSize(fillEnabled);
+    size += CoreTools::GetStreamSize(lineEnabled);
+    size += CoreTools::GetStreamSize(pointEnabled);
+    size += CoreTools::GetStreamSize(scale);
+    size += CoreTools::GetStreamSize(bias);
 
     return size;
 }

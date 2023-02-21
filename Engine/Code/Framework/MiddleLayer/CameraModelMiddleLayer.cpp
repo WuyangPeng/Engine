@@ -146,7 +146,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, Rotat
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetTrackBallDow, bool, void);
 
-void Framework::CameraModelMiddleLayer::SetSaveRotate() noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Framework::CameraModelMiddleLayer::SetSaveRotate() noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 

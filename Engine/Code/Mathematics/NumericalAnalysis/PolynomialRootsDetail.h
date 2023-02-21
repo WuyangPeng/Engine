@@ -763,7 +763,7 @@ void Mathematics::PolynomialRoots<Real>::ScaleColomn(int column, Real scale, Var
 }
 
 template <typename Real>
-Real Mathematics::PolynomialRoots<Real>::SpecialCubic(Real thrice, Real once, Real constant) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::PolynomialRoots<Real>::SpecialCubic(Real thrice, Real once, Real constant) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 

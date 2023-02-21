@@ -36,8 +36,8 @@ namespace Rendering
 
         void SetTranslate(const APoint& translate) noexcept;
         void SetRotate(const Matrix& rotate) noexcept;
-        void SetUniformScale(float scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
-        void SetScale(const APoint& scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void SetUniformScale(float scale) noexcept(gAssert < 2 || gRenderingAssert < 2);
+        void SetScale(const APoint& scale) noexcept(gAssert < 2 || gRenderingAssert < 2);
         void SetMatrix(const Matrix& matrix) noexcept;
 
         NODISCARD int GetStreamingSize() const noexcept;

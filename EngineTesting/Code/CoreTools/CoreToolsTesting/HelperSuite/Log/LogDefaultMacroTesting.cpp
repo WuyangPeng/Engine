@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:29)
+///	引擎测试版本：0.9.0.2 (2023/02/12 15:54)
 
 #include "LogDefaultMacroTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -16,7 +16,7 @@
 CoreTools::LogDefaultMacroTesting::LogDefaultMacroTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, LogDefaultMacroTesting)
@@ -35,11 +35,9 @@ void CoreTools::LogDefaultMacroTesting::DefaultLogTest() noexcept
 {
     LOG_SINGLETON_APPENDER(Info, CoreTools)
         << SYSTEM_TEXT("测试LogMacro，这条日志会写入已配置的日志文件和控制台。")
-        << CoreTools::LogAppenderIOManageSign::Refresh;
+        << LogAppenderIOManageSign::Refresh;
 
-    const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
-
-    LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(Info, CoreTools, functionDescribed)
+    LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(Info, CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED)
         << SYSTEM_TEXT("测试LogMacro，这条日志会写入已配置的日志文件和控制台。")
-        << CoreTools::LogAppenderIOManageSign::Refresh;
+        << LogAppenderIOManageSign::Refresh;
 }

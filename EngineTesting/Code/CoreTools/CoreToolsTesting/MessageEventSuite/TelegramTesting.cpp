@@ -11,8 +11,19 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/TelegramDetail.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::TelegramTesting::TelegramTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, TelegramTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, TelegramTesting)
+
+void CoreTools::TelegramTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 namespace CoreTools
 {

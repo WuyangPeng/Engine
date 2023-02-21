@@ -181,7 +181,7 @@ Real Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::GetVertexIntersection
                                                                                  Real relativeVelocityDotX,
                                                                                  Real relativeVelocityDotY,
                                                                                  Real relativeVelocityDotZ,
-                                                                                 Real radiusSqr) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+                                                                                 Real radiusSqr) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     /// 查找直线P = Dt（其中P = (dx, dy, dz)和 D = (vx, vy, vz)与radius^ 2 rsqr的球体之间的3D线球交点的时间。
     /// 注意：仅在实际上存在交叉点时才有效。
@@ -199,7 +199,7 @@ Real Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::GetEdgeIntersection(R
                                                                                Real relativeVelocityDotX,
                                                                                Real relativeVelocityDotZ,
                                                                                Real velocitySqr,
-                                                                               Real radiusSqr) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+                                                                               Real radiusSqr) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     /// 查找线P = Dt（其中P = (dx,dz)和D = (vx, vz)）与radius^ 2 rsqr的圆之间的二维线圆交点的时间。
     /// 注意：仅在实际上存在交叉点时才有效。
@@ -220,7 +220,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindFaceRegionIntersec
                                                                                      Real relativeVelocityDotX,
                                                                                      Real relativeVelocityDotY,
                                                                                      Real relativeVelocityDotZ,
-                                                                                     bool aboveFace) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+                                                                                     bool aboveFace) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     /// 返回面+Z上方区域中的球何时以及是否与面+Z或其任何顶点或边缘相交。
     /// 当x和y坐标在x和y范围内时，aboveFace的输入为true。
@@ -360,7 +360,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindJustEdgeIntersecti
                                                                                    Real diffZ,
                                                                                    Real relativeVelocityDotX,
                                                                                    Real relativeVelocityDotY,
-                                                                                   Real relativeVelocityDotZ) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+                                                                                   Real relativeVelocityDotZ) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     /// 查找远离y方向的边的点dx和dz的交点。 球体在cy点处，边缘在ex点处。 检查速度朝向的边缘和顶点。
 
@@ -428,7 +428,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindEdgeRegionIntersec
                                                                                      Real relativeVelocityDotX,
                                                                                      Real relativeVelocityDotY,
                                                                                      Real relativeVelocityDotZ,
-                                                                                     bool aboveEdge) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+                                                                                     bool aboveEdge) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     /// 假设球心在x和z平面上方的区域中。 当y坐标在y范围内时，上边的输入为true。
     /// 如果不是，该函数仍将起作用，但是该函数必须为false，以避免某些检查假设y在范围内。
@@ -512,7 +512,7 @@ int Mathematics::DynamicFindIntersectorBox3Sphere3<Real>::FindVertexRegionInters
                                                                                        Real centerDiffDotZ,
                                                                                        Real relativeVelocityDotX,
                                                                                        Real relativeVelocityDotY,
-                                                                                       Real relativeVelocityDotZ) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+                                                                                       Real relativeVelocityDotZ) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     /// 假设球体位于顶点 +ex, +ey, +ez上方。
     auto diffX = centerDiffDotX - extentX;

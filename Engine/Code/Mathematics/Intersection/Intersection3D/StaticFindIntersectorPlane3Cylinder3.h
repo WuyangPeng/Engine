@@ -46,7 +46,7 @@ namespace Mathematics
         NODISCARD Cylinder3 GetCylinder() const noexcept;
 
         // 剔除支持。 视锥台被认为位于平面的正侧。 如果圆柱体位于平面的负侧，则将其剔除。
-        NODISCARD bool CylinderIsCulled() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD bool CylinderIsCulled() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // *无限*圆柱体和平面的交集。
         enum class CylinderPlaneIntersection

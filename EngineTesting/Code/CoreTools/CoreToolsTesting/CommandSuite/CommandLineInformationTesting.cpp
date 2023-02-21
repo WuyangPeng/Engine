@@ -12,14 +12,25 @@
 #include "CoreTools/Command/CommandLineInformation.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <vector>
 
 using std::make_pair;
 using std::string;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, CommandLineInformationTesting)
+CoreTools::CommandLineInformationTesting::CommandLineInformationTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CommandLineInformationTesting)
+
+void CoreTools::CommandLineInformationTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::CommandLineInformationTesting::MainTest()
 {

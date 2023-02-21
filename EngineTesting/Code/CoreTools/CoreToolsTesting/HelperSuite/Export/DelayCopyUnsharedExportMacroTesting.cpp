@@ -1,15 +1,13 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:25)
+///	引擎测试版本：0.9.0.2 (2023/02/11 14:22)
 
-#include "DelayCopyUnsharedExportMacroTesting.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/Helper/AssertMacro.h"
+#include "DelayCopyUnsharedExportMacroTestingDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -34,7 +32,7 @@
 CoreTools::DelayCopyUnsharedExportMacroTesting::DelayCopyUnsharedExportMacroTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, DelayCopyUnsharedExportMacroTesting)
@@ -46,276 +44,21 @@ void CoreTools::DelayCopyUnsharedExportMacroTesting::DoRunUnitTest()
 
 void CoreTools::DelayCopyUnsharedExportMacroTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(ExportDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CoreToolsDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(NetworkDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DatabaseDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ScriptDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MathematicsDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(SoundEffectDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(InputOutputDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ResourceManagerDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(RenderingDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(PhysicsDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ImagicsDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(AnimationDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ArtificialIntellegenceDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(UserInterfaceDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(AssistToolsDelayCopyUnsharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(FrameworkDelayCopyUnsharedTest);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::ExportDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    CoreTools::ExportDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::CoreToolsDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    CoreTools::CoreToolsDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::NetworkDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    Network::NetworkDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::DatabaseDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    Database::DatabaseDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::ScriptDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    Script::ScriptDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::MathematicsDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    Mathematics::MathematicsDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::SoundEffectDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    SoundEffect::SoundEffectDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::InputOutputDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    InputOutput::InputOutputDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::ResourceManagerDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    ResourceManager::ResourceManagerDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::RenderingDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    Rendering::RenderingDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::PhysicsDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    Physics::PhysicsDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::ImagicsDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    Imagics::ImagicsDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::AnimationDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    Animation::AnimationDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::ArtificialIntellegenceDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    ArtificialIntellegence::ArtificialIntellegenceDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::UserInterfaceDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    UserInterface::UserInterfaceDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::AssistToolsDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    AssistTools::AssistToolsDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::DelayCopyUnsharedExportMacroTesting::FrameworkDelayCopyUnsharedTest()
-{
-    constexpr auto count = 10;
-    Framework::FrameworkDelayCopyUnsharedMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<ExportDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<CoreToolsDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<Network::NetworkDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<Database::DatabaseDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<Script::ScriptDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<Mathematics::MathematicsDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<SoundEffect::SoundEffectDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<InputOutput::InputOutputDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<ResourceManager::ResourceManagerDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<Rendering::RenderingDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<Physics::PhysicsDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<Imagics::ImagicsDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<Animation::AnimationDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<ArtificialIntellegence::ArtificialIntellegenceDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<UserInterface::UserInterfaceDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<AssistTools::AssistToolsDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<Framework::FrameworkDelayCopyUnsharedMacro>);
 }

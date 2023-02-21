@@ -1,15 +1,13 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:26)
+///	引擎测试版本：0.9.0.2 (2023/02/11 22:50)
 
-#include "ModuleExportMacroTesting.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/Helper/AssertMacro.h"
+#include "ModuleExportMacroTestingDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -33,7 +31,7 @@
 CoreTools::ModuleExportMacroTesting::ModuleExportMacroTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ModuleExportMacroTesting)
@@ -45,156 +43,44 @@ void CoreTools::ModuleExportMacroTesting::DoRunUnitTest()
 
 void CoreTools::ModuleExportMacroTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(CoreToolsExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(NetworkExportTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<CoreToolsTestExportMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<Network::NetworkTestExportMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(DatabaseExportTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ScriptExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MathematicsExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(SoundEffectExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(InputOutputExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ResourceManagerExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(RenderingExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(PhysicsExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ImagicsExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(AnimationExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ArtificialIntellegenceExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(UserInterfaceExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(AssistToolsExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(FrameworkExportTest);
-}
-
-void CoreTools::ModuleExportMacroTesting::CoreToolsExportTest()
-{
-    constexpr auto count = 10;
-    CoreTools::CoreToolsTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ModuleExportMacroTesting::NetworkExportTest()
-{
-    constexpr auto count = 10;
-    Network::NetworkTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<Mathematics::MathematicsTestExportMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<SoundEffect::SoundEffectTestExportMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<InputOutput::InputOutputTestExportMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<ResourceManager::ResourceManagerTestExportMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<Rendering::RenderingTestExportMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<Physics::PhysicsTestExportMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<Imagics::ImagicsTestExportMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<Animation::AnimationTestExportMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<ArtificialIntellegence::ArtificialIntellegenceTestExportMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<UserInterface::UserInterfaceTestExportMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<AssistTools::AssistToolsTestExportMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<Framework::FrameworkTestExportMacro>);
 }
 
 void CoreTools::ModuleExportMacroTesting::DatabaseExportTest()
 {
     constexpr auto count = 10;
-    Database::DatabaseTestExportMacro lhsMacro{ count };
+    Database::DatabaseTestExportMacro original{ count };
 
-    ASSERT_EQUAL(lhsMacro.GetCount(), count);
+    ASSERT_EQUAL(original.GetCount(), count);
 
-    auto rhsMacro = lhsMacro;
+    const auto copy = original;
 
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
+    ASSERT_EQUAL(copy.GetCount(), count);
 }
 
 void CoreTools::ModuleExportMacroTesting::ScriptExportTest()
 {
     constexpr auto count = 10;
-    Script::ScriptTestExportMacro lhsMacro{ count };
+    Script::ScriptTestExportMacro original{ count };
 
-    ASSERT_EQUAL(lhsMacro.GetCount(), count);
+    ASSERT_EQUAL(original.GetCount(), count);
 
-    auto rhsMacro = lhsMacro;
+    const auto copy = original;
 
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::ModuleExportMacroTesting::MathematicsExportTest()
-{
-    constexpr auto count = 10;
-    Mathematics::MathematicsTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ModuleExportMacroTesting::SoundEffectExportTest()
-{
-    constexpr auto count = 10;
-    SoundEffect::SoundEffectTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ModuleExportMacroTesting::InputOutputExportTest()
-{
-    constexpr auto count = 10;
-    InputOutput::InputOutputTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ModuleExportMacroTesting::ResourceManagerExportTest()
-{
-    constexpr auto count = 10;
-    ResourceManager::ResourceManagerTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ModuleExportMacroTesting::RenderingExportTest()
-{
-    constexpr auto count = 10;
-    Rendering::RenderingTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ModuleExportMacroTesting::PhysicsExportTest()
-{
-    constexpr auto count = 10;
-    Physics::PhysicsTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ModuleExportMacroTesting::ImagicsExportTest()
-{
-    constexpr auto count = 10;
-    Imagics::ImagicsTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ModuleExportMacroTesting::AnimationExportTest()
-{
-    constexpr auto count = 10;
-    Animation::AnimationTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ModuleExportMacroTesting::ArtificialIntellegenceExportTest()
-{
-    constexpr auto count = 10;
-    ArtificialIntellegence::ArtificialIntellegenceTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ModuleExportMacroTesting::UserInterfaceExportTest()
-{
-    constexpr auto count = 10;
-    UserInterface::UserInterfaceTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ModuleExportMacroTesting::AssistToolsExportTest()
-{
-    constexpr auto count = 10;
-    AssistTools::AssistToolsTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
-}
-
-void CoreTools::ModuleExportMacroTesting::FrameworkExportTest()
-{
-    constexpr auto count = 10;
-    Framework::FrameworkTestExportMacro macro{ count };
-
-    ASSERT_EQUAL(macro.GetCount(), count);
+    ASSERT_EQUAL(copy.GetCount(), count);
 }

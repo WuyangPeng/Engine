@@ -118,10 +118,10 @@ int Rendering::VisualProgramImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(vertexShader);
+    auto size = CoreTools::GetStreamSize(vertexShader);
 
-    size += CORE_TOOLS_STREAM_SIZE(pixelShader);
-    size += CORE_TOOLS_STREAM_SIZE(geometryShader);
+    size += CoreTools::GetStreamSize(pixelShader);
+    size += CoreTools::GetStreamSize(geometryShader);
 
     return size;
 }

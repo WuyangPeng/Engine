@@ -48,10 +48,10 @@ namespace CoreTools
 
     private:
         // 禁止调用以下成员函数
-        size_t ReadFromFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED void* data) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4) final;
-        int GetCharacter() noexcept(g_Assert < 4 || g_CoreToolsAssert < 4) final;
-        bool UnGetCharacter(MAYBE_UNUSED int character) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4) final;
-        std::string GetString(MAYBE_UNUSED int count) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4) final;
+        size_t ReadFromFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4) final;
+        int GetCharacter() noexcept(gAssert < 4 || gCoreToolsAssert < 4) final;
+        bool UnGetCharacter(MAYBE_UNUSED int character) noexcept(gAssert < 4 || gCoreToolsAssert < 4) final;
+        std::string GetString(MAYBE_UNUSED int count) noexcept(gAssert < 4 || gCoreToolsAssert < 4) final;
     };
 }
 

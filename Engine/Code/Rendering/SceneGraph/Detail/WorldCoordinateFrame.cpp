@@ -192,7 +192,7 @@ int Rendering::WorldCoordinateFrame::GetStreamingSize() const noexcept
     size += MATHEMATICS_STREAM_SIZE(worldUpVector);
     size += MATHEMATICS_STREAM_SIZE(worldRightVector);
 
-    size += CORE_TOOLS_STREAM_SIZE(epsilon);
+    size += CoreTools::GetStreamSize(epsilon);
 
     return size;
 }

@@ -154,7 +154,7 @@ void Mathematics::Vector4<Real>::SetW(Real w) noexcept
 }
 
 template <typename Real>
-void Mathematics::Vector4<Real>::Normalize(const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Vector4<Real>::Normalize(const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -173,7 +173,7 @@ void Mathematics::Vector4<Real>::Normalize(const Real epsilon) noexcept(g_Assert
 }
 
 template <typename Real>
-void Mathematics::Vector4<Real>::RobustNormalize(const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Vector4<Real>::RobustNormalize(const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -191,7 +191,7 @@ void Mathematics::Vector4<Real>::RobustNormalize(const Real epsilon) noexcept(g_
 }
 
 template <typename Real>
-void Mathematics::Vector4<Real>::ProjectionNormalization(const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Vector4<Real>::ProjectionNormalization(const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -304,7 +304,7 @@ Mathematics::Vector4<Real>& Mathematics::Vector4<Real>::operator*=(Real rhs) noe
 }
 
 template <typename Real>
-Mathematics::Vector4<Real>& Mathematics::Vector4<Real>::operator/=(Real rhs) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Vector4<Real>& Mathematics::Vector4<Real>::operator/=(Real rhs) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

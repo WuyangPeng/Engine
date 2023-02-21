@@ -144,15 +144,15 @@ int Rendering::ShaderProfileDataImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles));
+    auto size = CoreTools::GetStreamSize(System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles));
 
     for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
     {
         size += shaderProfileData.at(i).GetStreamingSize();
     }
 
-    size += CORE_TOOLS_STREAM_SIZE(numConstants);
-    size += CORE_TOOLS_STREAM_SIZE(numSamplers);
+    size += CoreTools::GetStreamSize(numConstants);
+    size += CoreTools::GetStreamSize(numSamplers);
 
     return size;
 }

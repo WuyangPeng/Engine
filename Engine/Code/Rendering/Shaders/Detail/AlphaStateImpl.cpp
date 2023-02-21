@@ -169,12 +169,12 @@ int Rendering::AlphaStateImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(blendEnabled);
-    size += CORE_TOOLS_STREAM_SIZE(sourceBlend);
-    size += CORE_TOOLS_STREAM_SIZE(destinationBlend);
-    size += CORE_TOOLS_STREAM_SIZE(compareEnabled);
-    size += CORE_TOOLS_STREAM_SIZE(compare);
-    size += CORE_TOOLS_STREAM_SIZE(reference);
+    auto size = CoreTools::GetStreamSize(blendEnabled);
+    size += CoreTools::GetStreamSize(sourceBlend);
+    size += CoreTools::GetStreamSize(destinationBlend);
+    size += CoreTools::GetStreamSize(compareEnabled);
+    size += CoreTools::GetStreamSize(compare);
+    size += CoreTools::GetStreamSize(reference);
     size += RENDERING_STREAM_SIZE(constantColor);
 
     return size;

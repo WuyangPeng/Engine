@@ -318,9 +318,9 @@ int Rendering::DrawTargetImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(renderTargetTextures);
+    auto size = CoreTools::GetStreamSize(renderTargetTextures);
 
-    size += CORE_TOOLS_STREAM_SIZE(depthStencilTexture);
+    size += CoreTools::GetStreamSize(depthStencilTexture);
 
     return size;
 }

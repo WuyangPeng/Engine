@@ -13,13 +13,20 @@
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 
 #include <string>
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class PropertyOffsetTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(PropertyOffsetTesting);
+        using ClassType = PropertyOffsetTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit PropertyOffsetTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

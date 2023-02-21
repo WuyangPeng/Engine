@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
 template <typename Real>
-Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMoreRoughCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMoreRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
 
@@ -35,7 +35,7 @@ Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMoreRoughCalculation(Rea
 }
 
 template <typename Real>
-Real Mathematics::FastNegativeExp<Real>::FastNegativeExpRoughCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastNegativeExp<Real>::FastNegativeExpRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
 
@@ -57,7 +57,7 @@ Real Mathematics::FastNegativeExp<Real>::FastNegativeExpRoughCalculation(Real va
 }
 
 template <typename Real>
-Real Mathematics::FastNegativeExp<Real>::FastNegativeExpPreciseCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastNegativeExp<Real>::FastNegativeExpPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
 
@@ -82,7 +82,7 @@ Real Mathematics::FastNegativeExp<Real>::FastNegativeExpPreciseCalculation(Real 
 }
 
 template <typename Real>
-Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMorePreciseCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMorePreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
 

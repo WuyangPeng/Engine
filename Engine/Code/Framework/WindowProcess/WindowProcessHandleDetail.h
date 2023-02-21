@@ -63,8 +63,6 @@ typename Framework::WindowProcessHandle<WindowMessage>::WindowsProcess Framework
 template <typename WindowMessage>
 typename Framework::WindowProcessHandle<WindowMessage>::DisplayFunction Framework::WindowProcessHandle<WindowMessage>::GetFunction() noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
-
     return WINDOW_PROCESS_MANAGER_SINGLETON.GetFunction();
 }
 

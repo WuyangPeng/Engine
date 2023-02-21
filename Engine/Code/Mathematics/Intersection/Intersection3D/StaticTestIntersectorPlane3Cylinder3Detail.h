@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>::StaticTestIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>::StaticTestIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon) noexcept(gAssert < 3 || gMathematicsAssert < 3)
     : ParentType{ epsilon }, plane{ plane }, cylinder{ cylinder }
 {
     Test();
@@ -52,7 +52,7 @@ Mathematics::Cylinder3<Real> Mathematics::StaticTestIntersectorPlane3Cylinder3<R
 }
 
 template <typename Real>
-void Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>::Test() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+void Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>::Test() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     const auto sDist = plane.DistanceTo(cylinder.GetAxis().GetOrigin());
     const auto absNdW = Math::FAbs(Vector3Tools::DotProduct(plane.GetNormal(), cylinder.GetAxis().GetDirection()));
@@ -70,7 +70,7 @@ void Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>::Test() noexcept(g_
 }
 
 template <typename Real>
-bool Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>::CylinderIsCulled() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+bool Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>::CylinderIsCulled() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

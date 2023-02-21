@@ -17,7 +17,7 @@
 #include <cmath>
 
 template <typename Real>
-Real Mathematics::Math<Real>::GetExponent() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::GetExponent() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     static const auto exponent = Log(maxReal);
 
@@ -25,7 +25,7 @@ Real Mathematics::Math<Real>::GetExponent() noexcept(g_Assert < 3 || g_Mathemati
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::GetLN2() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::GetLN2() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     static const auto ln2 = Log(GetValue(2));
 
@@ -33,7 +33,7 @@ Real Mathematics::Math<Real>::GetLN2() noexcept(g_Assert < 3 || g_MathematicsAss
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::GetLN10() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::GetLN10() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     static const auto ln10 = Log(GetValue(10));
 
@@ -41,7 +41,7 @@ Real Mathematics::Math<Real>::GetLN10() noexcept(g_Assert < 3 || g_MathematicsAs
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::GetInverseLN2() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::GetInverseLN2() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     static const auto inverseLN2 = GetValue(1) / GetLN2();
 
@@ -49,7 +49,7 @@ Real Mathematics::Math<Real>::GetInverseLN2() noexcept(g_Assert < 3 || g_Mathema
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::GetInverseLN10() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::GetInverseLN10() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     static const auto inverseLN10 = GetValue(1) / GetLN10();
 
@@ -57,7 +57,7 @@ Real Mathematics::Math<Real>::GetInverseLN10() noexcept(g_Assert < 3 || g_Mathem
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::GetSqrt2() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::GetSqrt2() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     static const auto sqrt2 = Sqrt(GetValue(2));
 
@@ -65,7 +65,7 @@ Real Mathematics::Math<Real>::GetSqrt2() noexcept(g_Assert < 3 || g_MathematicsA
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::GetInverseSqrt2() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::GetInverseSqrt2() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     static const auto inverseSqrt2 = GetValue(1) / GetSqrt2();
 
@@ -73,7 +73,7 @@ Real Mathematics::Math<Real>::GetInverseSqrt2() noexcept(g_Assert < 3 || g_Mathe
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::GetSqrt3() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::GetSqrt3() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     static const auto sqrt3 = Sqrt(GetValue(3));
 
@@ -81,7 +81,7 @@ Real Mathematics::Math<Real>::GetSqrt3() noexcept(g_Assert < 3 || g_MathematicsA
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::GetInverseSqrt3() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::GetInverseSqrt3() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     static const auto inverseSqrt3 = GetValue(1) / GetSqrt3();
 
@@ -167,7 +167,7 @@ Real Mathematics::Math<Real>::Floor(Real value) noexcept
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::FMod(Real x, Real y) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::FMod(Real x, Real y) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(GetZeroTolerance() < FAbs(y), "输入值为0！\n");
 
@@ -186,7 +186,7 @@ Mathematics::NumericalValueSymbol Mathematics::Math<Real>::Sign(Real value) noex
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::Log(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::Log(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(GetValue(0) < value, "Log的输入值为非正数！\n");
 
@@ -194,7 +194,7 @@ Real Mathematics::Math<Real>::Log(Real value) noexcept(g_Assert < 3 || g_Mathema
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::Log2(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::Log2(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(GetValue(0) < value, "Log2的输入值为非正数！\n");
 
@@ -202,7 +202,7 @@ Real Mathematics::Math<Real>::Log2(Real value) noexcept(g_Assert < 3 || g_Mathem
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::Log10(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::Log10(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(GetValue(0) < value, "Log10的输入值为非正数！\n");
 
@@ -210,7 +210,7 @@ Real Mathematics::Math<Real>::Log10(Real value) noexcept(g_Assert < 3 || g_Mathe
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::Exp(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::Exp(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(value <= GetExponent(), "输入值过大导致exp()计算溢出！\n");
 
@@ -218,7 +218,7 @@ Real Mathematics::Math<Real>::Exp(Real value) noexcept(g_Assert < 3 || g_Mathema
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::Pow(Real base, Real exponent) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::Pow(Real base, Real exponent) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(GetValue(0) <= base, "Pow中base不允许为负数！\n");
     MATHEMATICS_ASSERTION_3(GetZeroTolerance() < FAbs(base) || GetZeroTolerance() < exponent, "0的非正数次方不存在！\n");
@@ -233,7 +233,7 @@ Real Mathematics::Math<Real>::Square(Real value) noexcept
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::Sqrt(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::Sqrt(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(GetValue(0) <= value, "Sqrt的输入值不允许为负数！\n");
 
@@ -241,7 +241,7 @@ Real Mathematics::Math<Real>::Sqrt(Real value) noexcept(g_Assert < 3 || g_Mathem
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::InvSqrt(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::InvSqrt(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(GetValue(0) < value, "InvSqrt中除数必须大于0！\n");
 
@@ -249,7 +249,7 @@ Real Mathematics::Math<Real>::InvSqrt(Real value) noexcept(g_Assert < 3 || g_Mat
 }
 
 template <typename Real>
-Real Mathematics::Math<Real>::CubeRoot(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Math<Real>::CubeRoot(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     if (value < GetValue(0))
         return -Pow(-value, GetRational(1, 3));
@@ -280,7 +280,7 @@ Real Mathematics::Math<Real>::Saturate(Real value) noexcept
 }
 
 template <typename Real>
-bool Mathematics::Math<Real>::Approximate(Real lhs, Real rhs, const Real zeroTolerance) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+bool Mathematics::Math<Real>::Approximate(Real lhs, Real rhs, const Real zeroTolerance) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(GetValue(0) <= zeroTolerance, "epsilon必须大于0！");
 
@@ -291,7 +291,7 @@ bool Mathematics::Math<Real>::Approximate(Real lhs, Real rhs, const Real zeroTol
 }
 
 template <typename Real>
-bool Mathematics::Math<Real>::FloatingPointEqual(Real lhs, Real rhs, int equalDigit) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+bool Mathematics::Math<Real>::FloatingPointEqual(Real lhs, Real rhs, int equalDigit) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(0 < equalDigit && equalDigit <= IntegerTraits<Real>::TraitsType::exponentShifting, "equalDigit必须大于0！");
 

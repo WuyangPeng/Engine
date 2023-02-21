@@ -277,13 +277,13 @@ int Rendering::ResourceImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(numElements);
+    auto size = CoreTools::GetStreamSize(numElements);
 
-    size += CORE_TOOLS_STREAM_SIZE(elementSize);
-    size += CORE_TOOLS_STREAM_SIZE(usage);
-    size += CORE_TOOLS_STREAM_SIZE(copy);
-    size += CORE_TOOLS_STREAM_SIZE(offset);
-    size += CORE_TOOLS_STREAM_SIZE(numActiveElements);
+    size += CoreTools::GetStreamSize(elementSize);
+    size += CoreTools::GetStreamSize(usage);
+    size += CoreTools::GetStreamSize(copy);
+    size += CoreTools::GetStreamSize(offset);
+    size += CoreTools::GetStreamSize(numActiveElements);
 
     size += boost::numeric_cast<int>(storage.size()) * CoreTools::GetStreamSize<char>();
 

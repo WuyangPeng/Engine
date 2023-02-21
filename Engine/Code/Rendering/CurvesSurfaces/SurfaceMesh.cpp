@@ -684,23 +684,23 @@ int Rendering::SurfaceMesh::GetStreamingSize() const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     auto size = ParentType::GetStreamingSize();
-    size += CORE_TOOLS_STREAM_SIZE(numFullVertices);
-    size += CORE_TOOLS_STREAM_SIZE(numPatches);
-    size += CORE_TOOLS_STREAM_SIZE(level);
-    size += CORE_TOOLS_STREAM_SIZE(allowDynamicChange);
-    size += CORE_TOOLS_STREAM_SIZE(origVBuffer);
-    size += CORE_TOOLS_STREAM_SIZE(origIBuffer);
-    size += CORE_TOOLS_STREAM_SIZE(origParams);
+    size += CoreTools::GetStreamSize(numFullVertices);
+    size += CoreTools::GetStreamSize(numPatches);
+    size += CoreTools::GetStreamSize(level);
+    size += CoreTools::GetStreamSize(allowDynamicChange);
+    size += CoreTools::GetStreamSize(origVBuffer);
+    size += CoreTools::GetStreamSize(origIBuffer);
+    size += CoreTools::GetStreamSize(origParams);
 
     if (!patches.empty())
     {
-        size += numPatches * CORE_TOOLS_STREAM_SIZE(patches.at(0));
+        size += numPatches * CoreTools::GetStreamSize(patches.at(0));
     }
 
     if (!sInfo.empty())
     {
-        size += numFullVertices * CORE_TOOLS_STREAM_SIZE(sInfo.at(0).patch);
-        size += numFullVertices * CORE_TOOLS_STREAM_SIZE(sInfo.at(0).param);
+        size += numFullVertices * CoreTools::GetStreamSize(sInfo.at(0).patch);
+        size += numFullVertices * CoreTools::GetStreamSize(sInfo.at(0).param);
     }
 
     return size;

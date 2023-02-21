@@ -23,7 +23,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-bool Mathematics::Vector3Tools<Real>::Approximate(const Vector3& lhs, const Vector3& rhs, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+bool Mathematics::Vector3Tools<Real>::Approximate(const Vector3& lhs, const Vector3& rhs, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= epsilon, "epsilon必须大于或等于0！");
 
@@ -49,7 +49,7 @@ Real Mathematics::Vector3Tools<Real>::GetRobustLength(const Vector3& vector)
 }
 
 template <typename Real>
-Real Mathematics::Vector3Tools<Real>::GetLength(const Vector3& vector) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Vector3Tools<Real>::GetLength(const Vector3& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     return Math::Sqrt(GetLengthSquared(vector));
 }
@@ -88,7 +88,7 @@ typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real
 }
 
 template <typename Real>
-typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::UnitCrossProduct(const Vector3& lhs, const Vector3& rhs, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::UnitCrossProduct(const Vector3& lhs, const Vector3& rhs, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     auto cross = CrossProduct(lhs, rhs);
     cross.Normalize(epsilon);
@@ -97,7 +97,7 @@ typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real
 }
 
 template <typename Real>
-Real Mathematics::Vector3Tools<Real>::Distance(const Vector3& lhs, const Vector3& rhs) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Vector3Tools<Real>::Distance(const Vector3& lhs, const Vector3& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     return Math::Sqrt(DistanceSquared(lhs, rhs));
 }
@@ -187,7 +187,7 @@ typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real
 }
 
 template <typename Real>
-typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::BendYAxes(const Vector3& vector, Real curvatureRadius, Real bendCenter, Real bendAreaMin, Real bendAreaMax) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+typename Mathematics::Vector3Tools<Real>::Vector3 Mathematics::Vector3Tools<Real>::BendYAxes(const Vector3& vector, Real curvatureRadius, Real bendCenter, Real bendAreaMin, Real bendAreaMax) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_ASSERTION_1(bendAreaMin <= bendAreaMax, "bendAreaMin值必须小于或等于bendAreaMax！");
 
@@ -232,7 +232,7 @@ Real Mathematics::Vector3Tools<Real>::ScalarTripleProduct(const Vector3& vector0
 }
 
 template <typename Real>
-Real Mathematics::Vector3Tools<Real>::GetVectorIncludedAngle(const Vector3& lhs, const Vector3& rhs) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Vector3Tools<Real>::GetVectorIncludedAngle(const Vector3& lhs, const Vector3& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     return Math::ACos(DotProduct(lhs, rhs) / (GetLength(lhs) * GetLength(rhs)));
 }

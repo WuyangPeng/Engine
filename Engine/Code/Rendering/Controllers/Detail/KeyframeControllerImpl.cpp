@@ -121,29 +121,29 @@ int Rendering::KeyframeControllerImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(numCommonTimes);
+    auto size = CoreTools::GetStreamSize(numCommonTimes);
 
     if (0 < numCommonTimes)
     {
-        size += numCommonTimes * CORE_TOOLS_STREAM_SIZE(commonTimes.at(0));
-        size += CORE_TOOLS_STREAM_SIZE(numTranslations);
+        size += numCommonTimes * CoreTools::GetStreamSize(commonTimes.at(0));
+        size += CoreTools::GetStreamSize(numTranslations);
         size += numTranslations * MATHEMATICS_STREAM_SIZE(translations.at(0));
-        size += CORE_TOOLS_STREAM_SIZE(numRotations);
+        size += CoreTools::GetStreamSize(numRotations);
         size += numRotations * MATHEMATICS_STREAM_SIZE(rotations.at(0));
-        size += CORE_TOOLS_STREAM_SIZE(numScales);
-        size += numScales * CORE_TOOLS_STREAM_SIZE(scales.at(0));
+        size += CoreTools::GetStreamSize(numScales);
+        size += numScales * CoreTools::GetStreamSize(scales.at(0));
     }
     else
     {
-        size += CORE_TOOLS_STREAM_SIZE(numTranslations);
-        size += numTranslations * CORE_TOOLS_STREAM_SIZE(translationTimes.at(0));
+        size += CoreTools::GetStreamSize(numTranslations);
+        size += numTranslations * CoreTools::GetStreamSize(translationTimes.at(0));
         size += numTranslations * MATHEMATICS_STREAM_SIZE(translations.at(0));
-        size += CORE_TOOLS_STREAM_SIZE(numRotations);
-        size += numRotations * CORE_TOOLS_STREAM_SIZE(rotationTimes.at(0));
+        size += CoreTools::GetStreamSize(numRotations);
+        size += numRotations * CoreTools::GetStreamSize(rotationTimes.at(0));
         size += numRotations * MATHEMATICS_STREAM_SIZE(rotations.at(0));
-        size += CORE_TOOLS_STREAM_SIZE(numScales);
-        size += numScales * CORE_TOOLS_STREAM_SIZE(scaleTimes.at(0));
-        size += numScales * CORE_TOOLS_STREAM_SIZE(scales.at(0));
+        size += CoreTools::GetStreamSize(numScales);
+        size += numScales * CoreTools::GetStreamSize(scaleTimes.at(0));
+        size += numScales * CoreTools::GetStreamSize(scales.at(0));
     }
 
     return size;

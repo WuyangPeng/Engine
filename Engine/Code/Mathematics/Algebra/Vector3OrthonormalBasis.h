@@ -32,7 +32,7 @@ namespace Mathematics
         using Math = Math<Real>;
 
     public:
-        explicit Vector3OrthonormalBasis(const Vector3& nonzeroVector, bool isUnit, const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        explicit Vector3OrthonormalBasis(const Vector3& nonzeroVector, bool isUnit, const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -41,9 +41,9 @@ namespace Mathematics
         NODISCARD const Vector3 GetWVector() const noexcept;
 
     private:
-        void Generate() noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void GenerateOnXOrZIsMax() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        void GenerateOnYOrZIsMax() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        void Generate() noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void GenerateOnXOrZIsMax() noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        void GenerateOnYOrZIsMax() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
     private:
         bool isUnit;

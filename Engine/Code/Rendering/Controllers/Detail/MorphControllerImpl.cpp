@@ -198,13 +198,13 @@ int Rendering::MorphControllerImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(numVertices);
+    auto size = CoreTools::GetStreamSize(numVertices);
 
-    size += CORE_TOOLS_STREAM_SIZE(numTargets);
-    size += CORE_TOOLS_STREAM_SIZE(numKeys);
+    size += CoreTools::GetStreamSize(numTargets);
+    size += CoreTools::GetStreamSize(numKeys);
     size += boost::numeric_cast<int>(vertices.size() * MATHEMATICS_STREAM_SIZE(vertices.at(0)));
-    size += numKeys * CORE_TOOLS_STREAM_SIZE(times.at(0));
-    size += boost::numeric_cast<int>(weights.size() * CORE_TOOLS_STREAM_SIZE(weights.at(0)));
+    size += numKeys * CoreTools::GetStreamSize(times.at(0));
+    size += boost::numeric_cast<int>(weights.size() * CoreTools::GetStreamSize(weights.at(0)));
 
     return size;
 }

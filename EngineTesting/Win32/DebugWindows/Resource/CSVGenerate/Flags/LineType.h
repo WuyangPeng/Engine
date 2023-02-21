@@ -12,7 +12,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVRow.h"
 
@@ -31,19 +31,6 @@ namespace CSVConfigure
     NODISCARD System::String EnumCastString(LineType type);
     NODISCARD System::String GetEnumDescribe(LineType type);
 
-    ENUM_ADDABLE_OPERATOR_DEFINE(LineType);
-    ENUM_SUBTRACTABLE_OPERATOR_DEFINE(LineType);
-    ENUM_MULTIPLICATION_OPERATOR_DEFINE(LineType);
-    ENUM_NEGATE_OPERATOR_DEFINE(LineType);
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(LineType);
-    ENUM_DECREMENTABLE_OPERATOR_DEFINE(LineType);
-    ENUM_ANDABLE_OPERATOR_DEFINE(LineType);
-    ENUM_ORABLE_OPERATOR_DEFINE(LineType);
-    ENUM_XORABLE_OPERATOR_DEFINE(LineType);
-    ENUM_LEFT_SHIFTABLE_OPERATOR_DEFINE(LineType);
-    ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE(LineType);
-    ENUM_LEFT_SHIFTABLE_OPERATOR_WCHAR_DEFINE(LineType);
-    ENUM_RIGHT_SHIFTABLE_OPERATOR_WCHAR_DEFINE(LineType);
 }
 
 template <>

@@ -11,19 +11,35 @@
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_STREAM_SIZE_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class StreamSizeTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(StreamSizeTesting);
+        using ClassType = StreamSizeTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit StreamSizeTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();
         void StreamSizeTest();
 
         void DoRunUnitTest() override;
+
+        void Int16StreamTest();
+        void PtrStreamTest();
+        void SharedPtrStreamTest();
+        void BoolStreamTest();
+        void EnumStreamTest();
+        void StringStreamTest();
+        void ConstCharStreamTest();
+        void VectorStreamTest();
     };
 }
 

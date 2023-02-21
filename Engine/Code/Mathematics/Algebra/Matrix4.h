@@ -110,7 +110,7 @@ namespace Mathematics
         Matrix4& operator+=(const Matrix4& rhs) noexcept;
         Matrix4& operator-=(const Matrix4& rhs) noexcept;
         Matrix4& operator*=(Real scalar) noexcept;
-        Matrix4& operator/=(Real scalar) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        Matrix4& operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // lhs^T * M * rhs
         NODISCARD Real QuadraticForm(const Vector4& lhs, const Vector4& rhs) const noexcept;
@@ -131,17 +131,17 @@ namespace Mathematics
 
         // 投影矩阵到一个指定的平面
         // （包含“原点”和单位长度的“向量”）。
-        void MakeObliqueProjection(const Vector3& normal, const Vector3& origin, const Vector3& direction) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void MakeObliqueProjection(const Vector3& normal, const Vector3& origin, const Vector3& direction) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         void MakePerspectiveProjection(const Vector3& normal, const Vector3& origin, const Vector3& eye);
 
         // 通过指定的平面反射矩阵。
-        void MakeReflection(const Vector3& normal, const Vector3& origin) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void MakeReflection(const Vector3& normal, const Vector3& origin) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         void MakeFrustumMatrix44(Real left, Real right, Real bottom, Real top, Real nearDistance, Real farDistance) noexcept;
         void MakePerspectiveMatrix44(Real fieldOfViewY, Real aspect, Real nearDistance, Real farDistance) noexcept;
         void MakeOrthoMatrix44(Real left, Real right, Real bottom, Real top, Real nearDistance, Real farDistance) noexcept;
-        void MakeOrthoNormalMatrix44(const Vector3& xDirection, const Vector3& yDirection, const Vector3& zDirection) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void MakeOrthoNormalMatrix44(const Vector3& xDirection, const Vector3& yDirection, const Vector3& zDirection) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD const ArrayType GetCoordinate() const noexcept;
         void Set(const ArrayType& coordinate);

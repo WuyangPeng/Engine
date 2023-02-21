@@ -127,8 +127,8 @@ int Rendering::Polysegment::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(numSegments);
-    size += CORE_TOOLS_STREAM_SIZE(contiguous);
+    size += CoreTools::GetStreamSize(numSegments);
+    size += CoreTools::GetStreamSize(contiguous);
 
     return size;
 }

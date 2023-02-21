@@ -92,7 +92,7 @@ int Rendering::Bound<T>::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return MATHEMATICS_STREAM_SIZE(center) + CORE_TOOLS_STREAM_SIZE(radius);
+    return MATHEMATICS_STREAM_SIZE(center) + CoreTools::GetStreamSize(radius);
 }
 
 template <typename T>
@@ -178,7 +178,7 @@ void Rendering::Bound<T>::ComputeFromData(int numElements, int stride, SpanConst
 
     std::vector<APoint> aPoint{};
 
-    const auto difference = stride - CORE_TOOLS_STREAM_SIZE(radius) * APoint::aPointSize;
+    const auto difference = stride - CoreTools::GetStreamSize(radius) * APoint::aPointSize;
 
     if (difference < 0)
     {
@@ -272,7 +272,7 @@ bool Rendering::Bound<T>::TestIntersection(const APoint& origin, const AVector& 
 
 // private
 template <typename T>
-bool Rendering::Bound<T>::TestLineIntersection(const APoint& origin, const AVector& direction, [[maybe_unused]] T tMax) const noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+bool Rendering::Bound<T>::TestLineIntersection(const APoint& origin, const AVector& direction, [[maybe_unused]] T tMax) const noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_ASSERTION_2(Math::Approximate(tMax, Math::maxReal), "tmax对线必须是无穷大。\n");
 
@@ -287,7 +287,7 @@ bool Rendering::Bound<T>::TestLineIntersection(const APoint& origin, const AVect
 
 // private
 template <typename T>
-bool Rendering::Bound<T>::TestRayIntersection(const APoint& origin, const AVector& direction, [[maybe_unused]] T tMin) const noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+bool Rendering::Bound<T>::TestRayIntersection(const APoint& origin, const AVector& direction, [[maybe_unused]] T tMin) const noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_ASSERTION_2(Math::Approximate(tMin, Math::GetValue(0)), "tmin在射线中必须是零。\n");
 

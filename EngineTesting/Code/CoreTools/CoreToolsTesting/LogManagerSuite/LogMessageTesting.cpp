@@ -12,11 +12,22 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/LogManager/LogMessage.h"
-
+#include "CoreTools/LogManager/Flags/LogManagerFlags.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using namespace std::literals;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, LogMessageTesting)
+CoreTools::LogMessageTesting::LogMessageTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, LogMessageTesting)
+
+void CoreTools::LogMessageTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 void CoreTools::LogMessageTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LogLevelTest);

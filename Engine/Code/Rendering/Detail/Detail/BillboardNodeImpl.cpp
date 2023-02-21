@@ -39,7 +39,7 @@ int Rendering::BillboardNodeImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto size = CORE_TOOLS_STREAM_SIZE(camera);
+    const auto size = CoreTools::GetStreamSize(camera);
 
     return size;
 }

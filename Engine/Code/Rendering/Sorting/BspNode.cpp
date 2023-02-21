@@ -274,8 +274,8 @@ int Rendering::BspNode::GetStreamingSize() const
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     auto size = ParentType::GetStreamingSize();
-    size += CORE_TOOLS_STREAM_SIZE(modelPlane);
-    size += CORE_TOOLS_STREAM_SIZE(worldPlane);
+    size += CoreTools::GetStreamSize(modelPlane);
+    size += CoreTools::GetStreamSize(worldPlane);
     return size;
 }
 

@@ -133,7 +133,7 @@ size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap8ByteOrder(size_t itemsN
 
 #endif  // SYSTEM_BIG_ENDIAN
 
-size_t CoreTools::CWriteFileManagerImpl::ReadFromFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED void* data) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+size_t CoreTools::CWriteFileManagerImpl::ReadFromFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -142,7 +142,7 @@ size_t CoreTools::CWriteFileManagerImpl::ReadFromFile(MAYBE_UNUSED size_t itemSi
     return 0;
 }
 
-int CoreTools::CWriteFileManagerImpl::GetCharacter() noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+int CoreTools::CWriteFileManagerImpl::GetCharacter() noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -151,7 +151,7 @@ int CoreTools::CWriteFileManagerImpl::GetCharacter() noexcept(g_Assert < 4 || g_
     return System::gCFileError;
 }
 
-bool CoreTools::CWriteFileManagerImpl::UnGetCharacter(MAYBE_UNUSED int character) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+bool CoreTools::CWriteFileManagerImpl::UnGetCharacter(MAYBE_UNUSED int character) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -160,7 +160,7 @@ bool CoreTools::CWriteFileManagerImpl::UnGetCharacter(MAYBE_UNUSED int character
     return false;
 }
 
-string CoreTools::CWriteFileManagerImpl::GetString(MAYBE_UNUSED int count) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+string CoreTools::CWriteFileManagerImpl::GetString(MAYBE_UNUSED int count) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

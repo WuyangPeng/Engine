@@ -195,7 +195,7 @@ int Rendering::CurveSegment::GetStreamingSize() const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     auto size = ParentType::GetStreamingSize();
-    size += CORE_TOOLS_STREAM_SIZE(uMin);
-    size += CORE_TOOLS_STREAM_SIZE(uMax);
+    size += CoreTools::GetStreamSize(uMin);
+    size += CoreTools::GetStreamSize(uMax);
     return size;
 }

@@ -50,7 +50,7 @@ void CoreTools::BufferTargetImpl::WriteUniqueID(const ConstObjectInterfaceShared
 
     const auto uniqueID = objectRegister->GetUniqueID(object);
 
-    Write(CORE_TOOLS_STREAM_SIZE(uniqueID), &uniqueID);
+    Write(CoreTools::GetStreamSize(uniqueID), &uniqueID);
 }
 
 CoreTools::ConstFileBufferSharedPtr CoreTools::BufferTargetImpl::GetFileBuffer() const noexcept

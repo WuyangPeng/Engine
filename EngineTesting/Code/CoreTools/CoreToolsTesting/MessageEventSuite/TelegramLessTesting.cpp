@@ -12,14 +12,25 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/TelegramDetail.h"
 #include "CoreTools/MessageEvent/TelegramLessDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 namespace CoreTools
 {
     using TestingType = TelegramLess<int>;
     using TelegramType = Telegram<int>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, TelegramLessTesting)
+CoreTools::TelegramLessTesting::TelegramLessTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, TelegramLessTesting)
+
+void CoreTools::TelegramLessTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::TelegramLessTesting::MainTest()
 {

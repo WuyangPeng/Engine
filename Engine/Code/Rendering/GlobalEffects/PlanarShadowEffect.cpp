@@ -353,8 +353,8 @@ int Rendering::PlanarShadowEffect::GetStreamingSize() const
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     auto size = GlobalEffect::GetStreamingSize();
-    size += CORE_TOOLS_STREAM_SIZE(numPlanes);
-    size += numPlanes * CORE_TOOLS_STREAM_SIZE(shadowCaster);
+    size += CoreTools::GetStreamSize(numPlanes);
+    size += numPlanes * CoreTools::GetStreamSize(shadowCaster);
     size += numPlanes * RENDERING_STREAM_SIZE(planes.at(0));
     size += numPlanes * RENDERING_STREAM_SIZE(projectors.at(0));
     size += RENDERING_STREAM_SIZE(shadowCaster);

@@ -10,6 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "GLSLProgramFactory.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/OpenGL/Flags/OpenGLProgramFlags.h"
 #include "System/OpenGL/Flags/OpenGLShaderFlags.h"
 #include "System/OpenGL/OpenGLProgram.h"

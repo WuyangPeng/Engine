@@ -11,9 +11,22 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/LogManager/LogLevelManager.h"
+#include "CoreTools/LogManager/Flags/LogManagerFlags.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+using System::operator++;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, LogLevelManagerTesting)
+CoreTools::LogLevelManagerTesting::LogLevelManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, LogLevelManagerTesting)
+
+void CoreTools::LogLevelManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 void CoreTools::LogLevelManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ValidTest);

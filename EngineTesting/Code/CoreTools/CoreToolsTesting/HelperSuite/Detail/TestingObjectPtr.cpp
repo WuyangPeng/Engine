@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:24)
+///	引擎测试版本：0.9.0.2 (2023/02/16 20:58)
 
 #include "TestingNoObjectPtrImpl.h"
 #include "TestingObjectPtr.h"
@@ -16,24 +16,21 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-using std::make_shared;
-using std::string;
-
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, TestingObjectPtr);
 
 CORE_TOOLS_RTTI_DEFINE(CoreTools, TestingObjectPtr);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, TestingObjectPtr);
 CORE_TOOLS_FACTORY_DEFINE(CoreTools, TestingObjectPtr);
 
-CoreTools::TestingObjectPtr::TestingObjectPtr(const string& name)
+CoreTools::TestingObjectPtr::TestingObjectPtr(const std::string& name)
     : ParentType{ name }, impl{ ImplCreateUseDefaultConstruction::Default }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::TestingObjectPtr::ObjectSharedPtr CoreTools::TestingObjectPtr::Create(const string& name)
+CoreTools::TestingObjectPtr::ObjectSharedPtr CoreTools::TestingObjectPtr::Create(const std::string& name)
 {
-    return make_shared<ClassType>(name);
+    return std::make_shared<ClassType>(name);
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, TestingObjectPtr);
@@ -48,5 +45,7 @@ CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(CoreTools, TestingObjectPtr);
 
 CoreTools::ObjectInterfaceSharedPtr CoreTools::TestingObjectPtr::CloneObject() const
 {
-    return make_shared<ClassType>(*this);
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return std::make_shared<ClassType>(*this);
 }

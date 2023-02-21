@@ -11,13 +11,21 @@
 #define LOG_MANAGER_LOG_APPENDER_IO_MANAGER_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "CoreTools/LogManager/AppenderManager.h"
 
 namespace CoreTools
 {
     class LogAppenderIOManagerTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(LogAppenderIOManagerTesting);
+        using ClassType = LogAppenderIOManagerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit LogAppenderIOManagerTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

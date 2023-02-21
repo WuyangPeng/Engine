@@ -48,14 +48,14 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformControll
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController, SetMatrix, Matrix, void)
 
-void Rendering::TransformController::SetUniformScale(float scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::TransformController::SetUniformScale(float scale) noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetUniformScale(scale);
 }
 
-void Rendering::TransformController::SetScale(const APoint& scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::TransformController::SetScale(const APoint& scale) noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_1;
 

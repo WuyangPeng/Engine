@@ -1,15 +1,13 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:25)
+///	引擎测试版本：0.9.0.2 (2023/02/11 0:02)
 
-#include "CopyModuleExportMacroTesting.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/Helper/AssertMacro.h"
+#include "CopyModuleExportMacroTestingDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -33,7 +31,7 @@
 CoreTools::CopyModuleExportMacroTesting::CopyModuleExportMacroTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CopyModuleExportMacroTesting)
@@ -45,260 +43,20 @@ void CoreTools::CopyModuleExportMacroTesting::DoRunUnitTest()
 
 void CoreTools::CopyModuleExportMacroTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(CoreToolsCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(NetworkCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DatabaseCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ScriptCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MathematicsCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(SoundEffectCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(InputOutputCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ResourceManagerCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(RenderingCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(PhysicsCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ImagicsCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(AnimationCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ArtificialIntellegenceCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(UserInterfaceCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(AssistToolsCopyExportTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(FrameworkCopyExportTest);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::CoreToolsCopyExportTest()
-{
-    constexpr auto count = 10;
-    CoreTools::CoreToolsTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::NetworkCopyExportTest()
-{
-    constexpr auto count = 10;
-    Network::NetworkTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::DatabaseCopyExportTest()
-{
-    constexpr auto count = 10;
-    Database::DatabaseTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::ScriptCopyExportTest()
-{
-    constexpr auto count = 10;
-    Script::ScriptTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::MathematicsCopyExportTest()
-{
-    constexpr auto count = 10;
-    Mathematics::MathematicsTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::SoundEffectCopyExportTest()
-{
-    constexpr auto count = 10;
-    SoundEffect::SoundEffectTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::InputOutputCopyExportTest()
-{
-    constexpr auto count = 10;
-    InputOutput::InputOutputTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::ResourceManagerCopyExportTest()
-{
-    constexpr auto count = 10;
-    ResourceManager::ResourceManagerTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::RenderingCopyExportTest()
-{
-    constexpr auto count = 10;
-    Rendering::RenderingTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::PhysicsCopyExportTest()
-{
-    constexpr auto count = 10;
-    Physics::PhysicsTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::ImagicsCopyExportTest()
-{
-    constexpr auto count = 10;
-    Imagics::ImagicsTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::AnimationCopyExportTest()
-{
-    constexpr auto count = 10;
-    Animation::AnimationTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::ArtificialIntellegenceCopyExportTest()
-{
-    constexpr auto count = 10;
-    ArtificialIntellegence::ArtificialIntellegenceTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::UserInterfaceCopyExportTest()
-{
-    constexpr auto count = 10;
-    UserInterface::UserInterfaceTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::AssistToolsCopyExportTest()
-{
-    constexpr auto count = 10;
-    AssistTools::AssistToolsTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-}
-
-void CoreTools::CopyModuleExportMacroTesting::FrameworkCopyExportTest()
-{
-    constexpr auto count = 10;
-    Framework::FrameworkTestExportCopyMacro lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<CoreToolsTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<Network::NetworkTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<Database::DatabaseTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<Script::ScriptTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<Mathematics::MathematicsTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<SoundEffect::SoundEffectTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<InputOutput::InputOutputTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<ResourceManager::ResourceManagerTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<Rendering::RenderingTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<Physics::PhysicsTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<Imagics::ImagicsTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<Animation::AnimationTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<ArtificialIntellegence::ArtificialIntellegenceTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<UserInterface::UserInterfaceTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<AssistTools::AssistToolsTestExportCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyModuleExportTest<Framework::FrameworkTestExportCopyMacro>);
 }

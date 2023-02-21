@@ -8,19 +8,27 @@
 ///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/19 11:11)
 
 #include "LogFilterManagerTesting.h"
+#include "System/Helper/EnumOperator.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/LogManager/LogFilterManager.h"
-
+#include "CoreTools/LogManager/Flags/LogManagerFlags.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using namespace std::literals;
+using System::operator++;
 
-namespace CoreTools
+CoreTools::LogFilterManagerTesting::LogFilterManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
 {
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(LogFilter);
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, LogFilterManagerTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, LogFilterManagerTesting)
 
+void CoreTools::LogFilterManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 void CoreTools::LogFilterManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ValidTest);

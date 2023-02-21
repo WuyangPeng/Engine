@@ -220,12 +220,12 @@ int Rendering::ControllerImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(controllerRepeat);
-    size += CORE_TOOLS_STREAM_SIZE(controllerMinTime);
-    size += CORE_TOOLS_STREAM_SIZE(controllerMaxTime);
-    size += CORE_TOOLS_STREAM_SIZE(controllerPhase);
-    size += CORE_TOOLS_STREAM_SIZE(controllerFrequency);
-    size += CORE_TOOLS_STREAM_SIZE(controllerActive);
+    auto size = CoreTools::GetStreamSize(controllerRepeat);
+    size += CoreTools::GetStreamSize(controllerMinTime);
+    size += CoreTools::GetStreamSize(controllerMaxTime);
+    size += CoreTools::GetStreamSize(controllerPhase);
+    size += CoreTools::GetStreamSize(controllerFrequency);
+    size += CoreTools::GetStreamSize(controllerActive);
 
     return size;
 }

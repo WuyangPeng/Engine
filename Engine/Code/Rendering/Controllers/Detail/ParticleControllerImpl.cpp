@@ -189,16 +189,16 @@ int Rendering::ParticleControllerImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(systemLinearSpeed);
+    auto size = CoreTools::GetStreamSize(systemLinearSpeed);
 
-    size += CORE_TOOLS_STREAM_SIZE(systemAngularSpeed);
+    size += CoreTools::GetStreamSize(systemAngularSpeed);
     size += MATHEMATICS_STREAM_SIZE(systemLinearAxis);
     size += MATHEMATICS_STREAM_SIZE(systemAngularAxis);
-    size += CORE_TOOLS_STREAM_SIZE(systemSizeChange);
-    size += CORE_TOOLS_STREAM_SIZE(numParticles);
-    size += numParticles * CORE_TOOLS_STREAM_SIZE(particleLinearSpeeds.at(0));
+    size += CoreTools::GetStreamSize(systemSizeChange);
+    size += CoreTools::GetStreamSize(numParticles);
+    size += numParticles * CoreTools::GetStreamSize(particleLinearSpeeds.at(0));
     size += numParticles * MATHEMATICS_STREAM_SIZE(particleLinearAxes.at(0));
-    size += numParticles * CORE_TOOLS_STREAM_SIZE(particleSizeChanges.at(0));
+    size += numParticles * CoreTools::GetStreamSize(particleSizeChanges.at(0));
 
     return size;
 }

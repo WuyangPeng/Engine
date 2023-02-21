@@ -96,7 +96,7 @@ void Mathematics::AQuaternion<Real>::FromRotationMatrix(const Matrix& matrix)
 }
 
 template <typename Real>
-Mathematics::AQuaternion<Real>::AQuaternion(const AVector& axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::AQuaternion<Real>::AQuaternion(const AVector& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : m_W{}, m_X{}, m_Y{}, m_Z{}
 {
     MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
@@ -107,7 +107,7 @@ Mathematics::AQuaternion<Real>::AQuaternion(const AVector& axis, Real angle) noe
 }
 
 template <typename Real>
-void Mathematics::AQuaternion<Real>::FromAxisAngle(const AVector& axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::AQuaternion<Real>::FromAxisAngle(const AVector& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
@@ -287,7 +287,7 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator*=(Real 
 }
 
 template <typename Real>
-Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator/=(Real scalar) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -351,7 +351,7 @@ typename Mathematics::AQuaternion<Real>::Matrix Mathematics::AQuaternion<Real>::
 }
 
 template <typename Real>
-typename Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>::ToAxis() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+typename Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>::ToAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -391,7 +391,7 @@ Real Mathematics ::AQuaternion<Real>::ToAngle() const noexcept
 }
 
 template <typename Real>
-Real Mathematics::AQuaternion<Real>::Length() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::AQuaternion<Real>::Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -407,7 +407,7 @@ Real Mathematics::AQuaternion<Real>::SquaredLength() const noexcept
 }
 
 template <typename Real>
-void Mathematics::AQuaternion<Real>::Normalize(Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::AQuaternion<Real>::Normalize(Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -432,7 +432,7 @@ void Mathematics::AQuaternion<Real>::Normalize(Real epsilon) noexcept(g_Assert <
 }
 
 template <typename Real>
-bool Mathematics::AQuaternion<Real>::IsNormalize(Real epsilon) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+bool Mathematics::AQuaternion<Real>::IsNormalize(Real epsilon) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -449,7 +449,7 @@ bool Mathematics::AQuaternion<Real>::IsNormalize(Real epsilon) const noexcept(g_
 }
 
 template <typename Real>
-Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Inverse() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Inverse() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -476,7 +476,7 @@ Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Conjugate() const
 }
 
 template <typename Real>
-Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Exp() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Exp() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
     MATHEMATICS_ASSERTION_1(Math::FAbs(m_W) <= Math::GetZeroTolerance(), "四元数w必须等于0！");

@@ -11,13 +11,20 @@
 #define CORE_TOOLS_REPORT_OUTPUT_SUITE_EQUILONG_REPORT_OUTPUT_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class EquilongReportOutputTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(EquilongReportOutputTesting);
+        using ClassType = EquilongReportOutputTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit EquilongReportOutputTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

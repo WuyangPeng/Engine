@@ -9,10 +9,21 @@
 
 #include "CMainFunctionTestingHelperTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, CMainFunctionTestingHelperTesting)
+CoreTools::CMainFunctionTestingHelperTesting::CMainFunctionTestingHelperTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CMainFunctionTestingHelperTesting)
+
+void CoreTools::CMainFunctionTestingHelperTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::CMainFunctionTestingHelperTesting::MainTest() noexcept
 {

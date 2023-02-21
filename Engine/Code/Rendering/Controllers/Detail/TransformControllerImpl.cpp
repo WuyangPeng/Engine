@@ -70,14 +70,14 @@ void Rendering::TransformControllerImpl::SetRotate(const Matrix& rotate) noexcep
     localTransform.SetRotate(rotate);
 }
 
-void Rendering::TransformControllerImpl::SetUniformScale(float scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::TransformControllerImpl::SetUniformScale(float scale) noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     localTransform.SetUniformScale(scale);
 }
 
-void Rendering::TransformControllerImpl::SetScale(const APoint& scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::TransformControllerImpl::SetScale(const APoint& scale) noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_9;
 

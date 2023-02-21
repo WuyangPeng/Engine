@@ -21,7 +21,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-bool Mathematics::Vector2Tools<Real>::Approximate(const Vector2& lhs, const Vector2& rhs, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+bool Mathematics::Vector2Tools<Real>::Approximate(const Vector2& lhs, const Vector2& rhs, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= epsilon, "epsilon必须大于或等于0！");
 
@@ -29,7 +29,7 @@ bool Mathematics::Vector2Tools<Real>::Approximate(const Vector2& lhs, const Vect
 }
 
 template <typename Real>
-Real Mathematics::Vector2Tools<Real>::GetLength(const Vector2& vector) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Vector2Tools<Real>::GetLength(const Vector2& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     return Math::Sqrt(GetLengthSquared(vector));
 }
@@ -57,7 +57,7 @@ Real Mathematics::Vector2Tools<Real>::GetLengthSquared(const Vector2& vector) no
 }
 
 template <typename Real>
-Real Mathematics::Vector2Tools<Real>::Distance(const Vector2& lhs, const Vector2& rhs) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Vector2Tools<Real>::Distance(const Vector2& lhs, const Vector2& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     return Math::Sqrt(DistanceSquared(lhs, rhs));
 }
@@ -109,7 +109,7 @@ Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::ApeakVectorLhsToRhs(
 }
 
 template <typename Real>
-Real Mathematics::Vector2Tools<Real>::GetVectorIncludedAngle(const Vector2& lhs, const Vector2& rhs) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Vector2Tools<Real>::GetVectorIncludedAngle(const Vector2& lhs, const Vector2& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     return Math::ACos(DotProduct(lhs, rhs) / (GetLength(lhs) * GetLength(rhs)));
 }
@@ -121,7 +121,7 @@ Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::GetPerp(const Vector
 }
 
 template <typename Real>
-Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::GetUnitPerp(const Vector2& vector, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Vector2<Real> Mathematics::Vector2Tools<Real>::GetUnitPerp(const Vector2& vector, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     auto perp = GetPerp(vector);
     perp.Normalize(epsilon);
@@ -174,7 +174,7 @@ typename Mathematics::Vector2Tools<Real>::Vector2Orthonormalize Mathematics::Vec
 }
 
 template <typename Real>
-typename Mathematics::Vector2Tools<Real>::Vector2OrthonormalBasis Mathematics::Vector2Tools<Real>::GenerateOrthonormalBasis(const Vector2& nonzeroVector, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+typename Mathematics::Vector2Tools<Real>::Vector2OrthonormalBasis Mathematics::Vector2Tools<Real>::GenerateOrthonormalBasis(const Vector2& nonzeroVector, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     return Vector2OrthonormalBasis{ nonzeroVector, epsilon };
 }

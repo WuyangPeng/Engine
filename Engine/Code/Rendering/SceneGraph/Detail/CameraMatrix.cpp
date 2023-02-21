@@ -469,11 +469,11 @@ int Rendering::CameraMatrix::GetStreamingSize() const noexcept
     size += cameraFrustum.GetStreamingSize();
 
     size += MATHEMATICS_STREAM_SIZE(preViewMatrix);
-    size += CORE_TOOLS_STREAM_SIZE(preViewIsIdentity);
+    size += CoreTools::GetStreamSize(preViewIsIdentity);
     size += MATHEMATICS_STREAM_SIZE(postProjectionMatrix);
-    size += CORE_TOOLS_STREAM_SIZE(postProjectionIsIdentity);
+    size += CoreTools::GetStreamSize(postProjectionIsIdentity);
 
-    size += CORE_TOOLS_STREAM_SIZE(epsilon);
+    size += CoreTools::GetStreamSize(epsilon);
 
     return size;
 }

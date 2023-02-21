@@ -11,10 +11,20 @@
 #include "Detail/MethodProperty.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::string;
+CoreTools::MethodPropertyTesting::MethodPropertyTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, MethodPropertyTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, MethodPropertyTesting)
+
+void CoreTools::MethodPropertyTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::MethodPropertyTesting::MainTest()
 {

@@ -484,6 +484,18 @@
     <Filter Include="资源文件\JsonGenerate">
       <UniqueIdentifier>{9a1e5203-d1f8-4841-a07f-a6c5c32aba8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HelperSuite 头文件\AssertException">
+      <UniqueIdentifier>{eee1b147-a10d-4e87-ad60-242f62de5c4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\AssertException">
+      <UniqueIdentifier>{ee7df59c-51a2-42b5-991c-6913e06c21cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 模板文件\Export">
+      <UniqueIdentifier>{82f1bc36-73cd-49b8-b4e9-94510a901549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 模板文件\UnitTestSuite">
+      <UniqueIdentifier>{6fdb17ef-7f2f-4d9e-ac78-aaea51512bce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\BaseSuite.h">
@@ -822,19 +834,10 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroTesting.h">
       <Filter>HelperSuite 头文件\Rtti</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteUseTestingTypeTesting.h">
-      <Filter>HelperSuite 头文件\UnitTestSuite</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroTesting.h">
       <Filter>HelperSuite 头文件\UnitTestSuite</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteTesting.h">
-      <Filter>HelperSuite 头文件\UnitTestSuite</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UserMacroTesting.h">
-      <Filter>HelperSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertExceptionMacroTesting.h">
       <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\FunctionDescribedMacroTesting.h">
@@ -1265,9 +1268,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameFinalMacro.h">
       <Filter>HelperSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\StreamSizeMacroTesting.h">
-      <Filter>HelperSuite 头文件\Stream</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\StreamObject.h">
       <Filter>HelperSuite 头文件\Detail</Filter>
@@ -1770,6 +1770,54 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryToolsSuite.h">
       <Filter>MemoryToolsSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertExecuteLoopNotThrowTesting.h">
+      <Filter>HelperSuite 头文件\AssertException</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertNotThrowExceptionTesting.h">
+      <Filter>HelperSuite 头文件\AssertException</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertThrowExceptionTesting.h">
+      <Filter>HelperSuite 头文件\AssertException</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyModuleExportMacroTestingDetail.h">
+      <Filter>HelperSuite 模板文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyUnsharedExportMacroTestingDetail.h">
+      <Filter>HelperSuite 模板文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\DelayCopyUnsharedExportMacroTestingDetail.h">
+      <Filter>HelperSuite 模板文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ExportMacroTestingDetail.h">
+      <Filter>HelperSuite 模板文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ModuleExportMacroTestingDetail.h">
+      <Filter>HelperSuite 模板文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\NonCopyExportMacroTestingDetail.h">
+      <Filter>HelperSuite 模板文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\PerformanceUnsharedExportMacroTestingDetail.h">
+      <Filter>HelperSuite 模板文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\SharedExportMacroTestingDetail.h">
+      <Filter>HelperSuite 模板文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\HelperSuiteFwd.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroTestingDetail.h">
+      <Filter>HelperSuite 模板文件\UnitTestSuite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\HashCombineTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestHashKey.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestHash.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
@@ -1841,17 +1889,8 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroTesting.cpp">
       <Filter>HelperSuite 源文件\Rtti</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteTesting.cpp">
-      <Filter>HelperSuite 源文件\UnitTestSuite</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteUseTestingTypeTesting.cpp">
-      <Filter>HelperSuite 源文件\UnitTestSuite</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroTesting.cpp">
       <Filter>HelperSuite 源文件\UnitTestSuite</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertExceptionMacroTesting.cpp">
-      <Filter>HelperSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\FunctionDescribedMacroTesting.cpp">
       <Filter>HelperSuite 源文件</Filter>
@@ -2429,9 +2468,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameFinalMacro.cpp">
       <Filter>HelperSuite 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\StreamSizeMacroTesting.cpp">
-      <Filter>HelperSuite 源文件\Stream</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\StreamObject.cpp">
       <Filter>HelperSuite 源文件\Detail</Filter>
     </ClCompile>
@@ -2893,6 +2929,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\HeapAllocateTesting.cpp">
       <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertExecuteLoopNotThrowTesting.cpp">
+      <Filter>HelperSuite 源文件\AssertException</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertNotThrowExceptionTesting.cpp">
+      <Filter>HelperSuite 源文件\AssertException</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertException\AssertThrowExceptionTesting.cpp">
+      <Filter>HelperSuite 源文件\AssertException</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\HashCombineTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestHash.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestHashKey.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

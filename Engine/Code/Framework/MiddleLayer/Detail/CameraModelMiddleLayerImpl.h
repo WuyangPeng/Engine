@@ -83,7 +83,7 @@ namespace Framework
         void SetEndTrack(float xTrack, float yTrack) noexcept;
         void RotateTrackBall();
         void SetTrackBallDow(bool value) noexcept;
-        void SetSaveRotate() noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void SetSaveRotate() noexcept(gAssert < 2 || gRenderingAssert < 2);
         void SetDoRoll(NumericalValueSymbol doRoll) noexcept;
         void SetDoYaw(NumericalValueSymbol doYaw) noexcept;
         void SetDoPitch(NumericalValueSymbol doPitch) noexcept;

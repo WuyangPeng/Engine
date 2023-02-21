@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:24)
+///	引擎测试版本：0.9.0.2 (2023/02/15 21:17)
 
 #include "StreamObject.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
@@ -18,16 +19,15 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-using std::make_shared;
-using std::string;
-
 CORE_TOOLS_RTTI_DEFINE(CoreTools, StreamObject);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, StreamObject);
 CORE_TOOLS_FACTORY_DEFINE(CoreTools, StreamObject);
 
-CoreTools::StreamObject::StreamObject(const string& name)
+CoreTools::StreamObject::StreamObject(const std::string& name, LoadConstructor loadConstructor)
     : ParentType{ name }, boolValue{ false }
 {
+    System::UnusedFunction(loadConstructor);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
@@ -45,7 +45,7 @@ int CoreTools::StreamObject::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(boolValue);
+    size += CoreTools::GetStreamSize(boolValue);
 
     return size;
 }
@@ -101,7 +101,7 @@ CoreTools::ObjectInterfaceSharedPtr CoreTools::StreamObject::CloneObject() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return make_shared<ClassType>(*this);
+    return std::make_shared<ClassType>(*this);
 }
 
 bool CoreTools::StreamObject::GetBoolValue() const noexcept
@@ -111,7 +111,7 @@ bool CoreTools::StreamObject::GetBoolValue() const noexcept
     return boolValue;
 }
 
-CoreTools::StreamObject::StreamObjectSharedPtr CoreTools::StreamObject::Create(const string& name)
+CoreTools::StreamObject::StreamObjectSharedPtr CoreTools::StreamObject::Create(const std::string& name)
 {
-    return make_shared<ClassType>(name);
+    return std::make_shared<ClassType>(name, LoadConstructor::ConstructorLoader);
 }

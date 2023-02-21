@@ -168,9 +168,9 @@ int Rendering::CameraFrustum::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = System::EnumCastUnderlying(ViewFrustum::Quantity) * CORE_TOOLS_STREAM_SIZE(frustum.at(0));
+    auto size = System::EnumCastUnderlying(ViewFrustum::Quantity) * CoreTools::GetStreamSize(frustum.at(0));
 
-    size += CORE_TOOLS_STREAM_SIZE(isPerspective);
+    size += CoreTools::GetStreamSize(isPerspective);
 
     return size;
 }

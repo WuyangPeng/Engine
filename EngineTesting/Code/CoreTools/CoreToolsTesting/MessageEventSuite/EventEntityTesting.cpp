@@ -12,8 +12,19 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/EntityManagerDetail.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::EventEntityTesting::EventEntityTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, EventEntityTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, EventEntityTesting)
+
+void CoreTools::EventEntityTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::EventEntityTesting::MainTest()
 {

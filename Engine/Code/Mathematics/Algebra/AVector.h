@@ -76,11 +76,11 @@ namespace Mathematics
         AVector& operator/=(T scalar);
 
         // œÚ¡ø‘ÀÀ„°£
-        NODISCARD T Length() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD T Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD T SquaredLength() const noexcept;
         void Normalize(const T epsilon = Math::GetZeroTolerance());
-        NODISCARD bool IsZero(const T epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        NODISCARD bool IsNormalize(const T epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD bool IsZero(const T epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD bool IsNormalize(const T epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD ArrayType GetCoordinate() const noexcept;
         void Set(const ArrayType& coordinate) noexcept;

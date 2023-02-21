@@ -14,10 +14,21 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "CoreTools/MessageEvent/EventSlotDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, EventSlotTesting)
+CoreTools::EventSlotTesting::EventSlotTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, EventSlotTesting)
+
+void CoreTools::EventSlotTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 namespace CoreTools
 {

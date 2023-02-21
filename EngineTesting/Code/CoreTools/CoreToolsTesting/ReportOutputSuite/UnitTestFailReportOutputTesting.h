@@ -11,13 +11,20 @@
 #define CORE_TOOLS_REPORT_OUTPUT_SUITE_UNIT_TEST_FAIL_REPORT_OUTPUT_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class UnitTestFailReportOutputTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(UnitTestFailReportOutputTesting);
+        using ClassType = UnitTestFailReportOutputTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit UnitTestFailReportOutputTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

@@ -16,10 +16,21 @@
 #include "CoreTools/TemplateTools/RecursiveSine.h"
 #include "CoreTools/TemplateTools/TrigonometricFunction.h"
 #include "Mathematics/Base/MathDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <cmath>
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, TrigonometricFunctionTesting)
+CoreTools::TrigonometricFunctionTesting::TrigonometricFunctionTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, TrigonometricFunctionTesting)
+
+void CoreTools::TrigonometricFunctionTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::TrigonometricFunctionTesting::MainTest()
 {

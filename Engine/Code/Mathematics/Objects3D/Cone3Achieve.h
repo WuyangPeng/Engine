@@ -18,7 +18,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::Cone3<Real>::Cone3(const Vector3& vertex, const Vector3& axis, const Real angle, const Real height, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Cone3<Real>::Cone3(const Vector3& vertex, const Vector3& axis, const Real angle, const Real height, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : vertex{ vertex },
       axis{ axis },
       cosAngle{ Math::Cos(angle) },

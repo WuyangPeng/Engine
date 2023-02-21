@@ -196,7 +196,7 @@ bool Rendering::operator<(const HalfFloat& lhs, const HalfFloat& rhs) noexcept
         return false;
 }
 
-bool Rendering::Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+bool Rendering::Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     if (Mathematics::MathF::Approximate(lhs.ToFloat(), rhs.ToFloat(), epsilon))
         return true;

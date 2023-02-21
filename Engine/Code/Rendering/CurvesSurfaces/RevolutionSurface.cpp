@@ -379,13 +379,13 @@ int Rendering::RevolutionSurface::GetStreamingSize() const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     auto size = ParentType::GetStreamingSize();
-    size += CORE_TOOLS_STREAM_SIZE(xCenter);
-    size += CORE_TOOLS_STREAM_SIZE(topology);
-    size += CORE_TOOLS_STREAM_SIZE(numCurveSamples);
-    size += CORE_TOOLS_STREAM_SIZE(numRadialSamples);
-    size += (numRadialSamples + 1) * CORE_TOOLS_STREAM_SIZE(sin.at(0));
-    size += (numRadialSamples + 1) * CORE_TOOLS_STREAM_SIZE(cos.at(0));
-    size += CORE_TOOLS_STREAM_SIZE(sampleByArcLength);
+    size += CoreTools::GetStreamSize(xCenter);
+    size += CoreTools::GetStreamSize(topology);
+    size += CoreTools::GetStreamSize(numCurveSamples);
+    size += CoreTools::GetStreamSize(numRadialSamples);
+    size += (numRadialSamples + 1) * CoreTools::GetStreamSize(sin.at(0));
+    size += (numRadialSamples + 1) * CoreTools::GetStreamSize(cos.at(0));
+    size += CoreTools::GetStreamSize(sampleByArcLength);
     return size;
 }
 

@@ -1,21 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:21)
+///	引擎测试版本：0.9.0.2 (2023/02/06 13:05)
 
 #include "AssertTestExceptionThrowTesting.h"
+#include "System/Time/DeltaTime.h"
 #include "CoreTools/CoreToolsTesting/HelperSuite/Detail/MacroTestEnum.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
-
-using std::string;
 
 CoreTools::AssertTestExceptionThrowTesting::AssertTestExceptionThrowTesting(const OStreamShared& stream)
     : ParentType{ stream }, failedNumber{ 0 }
@@ -36,32 +35,44 @@ void CoreTools::AssertTestExceptionThrowTesting::MainTest()
 
     ASSERT_THROW_EXCEPTION_0(AssertTrueFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertFalseFailureThrowExceptionTest);
+
     ASSERT_THROW_EXCEPTION_0(AssertEqualFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertEqualDoNotUseMessageFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertEnumEqualFailureThrowExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(AssertSignedEqualFailureThrowExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(AssertSignedEnumEqualFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertFloatingPointCompleteEquallFailureThrowExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(AssertThreeEqualFailureThrowExceptionTest);
+
     ASSERT_THROW_EXCEPTION_0(AssertUnequalFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertUnequalDoNotUseMessageFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertEnumUnequalFailureThrowExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(AssertSignedUnequalFailureThrowExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(AssertSignedEnumUnequalFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertFloatingPointCompleteUnequalFailureThrowExceptionTest);
+
     ASSERT_THROW_EXCEPTION_0(AssertApproximateFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertApproximateUseFunctionFailureThrowExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(AssertApproximateFloatZeroFailureThrowExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(AssertApproximateDoubleZeroFailureThrowExceptionTest);
+
     ASSERT_THROW_EXCEPTION_0(AssertLessFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertEnumLessFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertSignedEnumLessFailureThrowExceptionTest);
+
     ASSERT_THROW_EXCEPTION_0(AssertLessEqualFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertEnumLessEqualFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertSignedEnumLessEqualFailureThrowExceptionTest);
+
     ASSERT_THROW_EXCEPTION_0(AssertGreaterFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertEnumGreaterFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertSignedEnumGreaterFailureThrowExceptionTest);
+
     ASSERT_THROW_EXCEPTION_0(AssertGreaterEqualFailureThrowExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(AssertEnumLessGreaterEqualFailureThrowExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(AssertEnumGreaterEqualFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertSignedEnumGreaterEqualFailureThrowExceptionTest);
+
     ASSERT_THROW_EXCEPTION_0(AssertEqualNullptrFailureThrowExceptionTest);
     ASSERT_THROW_EXCEPTION_0(AssertUnequalNullptrFailureThrowExceptionTest);
+
     ASSERT_THROW_EXCEPTION_0(AssertRangeFailureThrowExceptionTest);
 
     const auto testFailedNumber = GetFailedNumber();
@@ -71,6 +82,8 @@ void CoreTools::AssertTestExceptionThrowTesting::MainTest()
 
     ASSERT_EQUAL(failedNumber, testFailedNumber);
     ASSERT_EQUAL(0, testErrorNumber);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(TestEnd);
 }
 
 bool CoreTools::AssertTestExceptionThrowTesting::Approximate(float lhs, float rhs, float epsilon) noexcept
@@ -126,7 +139,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumEqualFailureThrowExce
     ASSERT_ENUM_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_ENUM_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
-void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEqualFailureThrowExceptionTest()
+void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumEqualFailureThrowExceptionTest()
 {
     ++failedNumber;
 
@@ -189,7 +202,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEnumUnequalFailureThrowEx
     ASSERT_ENUM_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_UNENUM_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
-void CoreTools::AssertTestExceptionThrowTesting::AssertSignedUnequalFailureThrowExceptionTest()
+void CoreTools::AssertTestExceptionThrowTesting::AssertSignedEnumUnequalFailureThrowExceptionTest()
 {
     ++failedNumber;
 
@@ -217,6 +230,24 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertApproximateFailureThrowEx
     constexpr auto rhsExpression = 20.1f;
 
     ASSERT_APPROXIMATE_FAILURE_THROW(lhsExpression, rhsExpression, 1e-6f, "测试ASSERT_APPROXIMATE未通过的情况抛出异常。存在一个正常的测试失败！");
+}
+
+void CoreTools::AssertTestExceptionThrowTesting::AssertApproximateFloatZeroFailureThrowExceptionTest()
+{
+    ++failedNumber;
+
+    constexpr auto expression = 10.0f;
+
+    ASSERT_APPROXIMATE_FLOAT_ZERO_FAILURE_THROW(expression, "测试ASSERT_APPROXIMATE_FLOAT_ZERO未通过的情况抛出异常。存在一个正常的测试失败！");
+}
+
+void CoreTools::AssertTestExceptionThrowTesting::AssertApproximateDoubleZeroFailureThrowExceptionTest()
+{
+    ++failedNumber;
+
+    constexpr auto expression = 11.0;
+
+    ASSERT_APPROXIMATE_DOUBLE_ZERO_FAILURE_THROW(expression, "测试ASSERT_APPROXIMATE_DOUBLE_ZERO未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertApproximateUseFunctionFailureThrowExceptionTest()
@@ -329,7 +360,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertGreaterEqualFailureThrowE
     ASSERT_GREATER_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_GREATER_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
-void CoreTools::AssertTestExceptionThrowTesting::AssertEnumLessGreaterEqualFailureThrowExceptionTest()
+void CoreTools::AssertTestExceptionThrowTesting::AssertEnumGreaterEqualFailureThrowExceptionTest()
 {
     ++failedNumber;
 
@@ -377,4 +408,18 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertRangeFailureThrowExceptio
     constexpr auto rhsExpression = 2;
 
     ASSERT_RANGE_FAILURE_THROW(mhsExpression, lhsExpression, rhsExpression, "测试ASSERT_RANGE未通过的情况抛出异常。存在一个正常的测试失败！");
+}
+
+void CoreTools::AssertTestExceptionThrowTesting::PrintTipsMessage()
+{
+    GetStream() << "这个测试会出现一些正常的测试失败。\n";
+
+    System::SystemPause();
+}
+
+void CoreTools::AssertTestExceptionThrowTesting::TestEnd()
+{
+    GetStream() << "测试结束，验证测试失败是否正确。\n";
+
+    System::SystemPause();
 }

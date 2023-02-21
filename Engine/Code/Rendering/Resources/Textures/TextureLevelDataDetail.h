@@ -309,26 +309,26 @@ int Rendering::TextureLevelData<NumDimensions>::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(numItems);
+    auto size = CoreTools::GetStreamSize(numItems);
 
     for (auto& value : levelDimension)
     {
-        size += CORE_TOOLS_STREAM_SIZE(value);
+        size += CoreTools::GetStreamSize(value);
     }
 
-    size += CORE_TOOLS_STREAM_SIZE(levelNumBytes);
+    size += CoreTools::GetStreamSize(levelNumBytes);
 
     const auto elementsNumber = boost::numeric_cast<int32_t>(levelOffsets.size());
 
-    size += CORE_TOOLS_STREAM_SIZE(elementsNumber);
+    size += CoreTools::GetStreamSize(elementsNumber);
 
     for (const auto& levelOffset : levelOffsets)
     {
-        size += CORE_TOOLS_STREAM_SIZE(levelOffset);
+        size += CoreTools::GetStreamSize(levelOffset);
     }
 
-    size += CORE_TOOLS_STREAM_SIZE(hasMipmaps);
-    size += CORE_TOOLS_STREAM_SIZE(autogenerateMipmaps);
+    size += CoreTools::GetStreamSize(hasMipmaps);
+    size += CoreTools::GetStreamSize(autogenerateMipmaps);
 
     return size;
 }

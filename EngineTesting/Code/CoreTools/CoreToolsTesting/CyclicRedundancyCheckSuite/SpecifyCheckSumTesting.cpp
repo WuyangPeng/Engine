@@ -13,12 +13,23 @@
 #include "CoreTools/CyclicRedundancyCheck/SpecifyCheckSum.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <array>
 
 using std::array;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, SpecifyCheckSumTesting)
+CoreTools::SpecifyCheckSumTesting::SpecifyCheckSumTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, SpecifyCheckSumTesting)
+
+void CoreTools::SpecifyCheckSumTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::SpecifyCheckSumTesting::MainTest()
 {
@@ -33,7 +44,7 @@ void CoreTools::SpecifyCheckSumTesting::SumTest()
 
     const SpecifyCheckSum firstSevenModElevenCheckSum{ buff.data(), boost::numeric_cast<int>(buff.size()), SpecifyCheckSumPowers::Seven, 11 };
 
-    ASSERT_RANGE(firstSevenModElevenCheckSum.GetOriginalCheckSum(), 0, 9); 
+    ASSERT_RANGE(firstSevenModElevenCheckSum.GetOriginalCheckSum(), 0, 9);
     ASSERT_LESS_EQUAL(0, firstSevenModElevenCheckSum.GetCollisions());
 
     const SpecifyCheckSum secondSevenModElevenCheckSum{ buff.data(), boost::numeric_cast<int>(buff.size()), SpecifyCheckSumPowers::Nine, 26 };

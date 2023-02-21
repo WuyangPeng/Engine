@@ -56,7 +56,7 @@ void Rendering::Transform<Real>::MakeIdentity() noexcept
 }
 
 template <typename Real>
-void Rendering::Transform<Real>::MakeUnitScale() noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::Transform<Real>::MakeUnitScale() noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -128,7 +128,7 @@ void Rendering::Transform<Real>::SetTranslate(const APoint& aTranslate) noexcept
 }
 
 template <typename Real>
-void Rendering::Transform<Real>::SetScale(const APoint& aScale) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::Transform<Real>::SetScale(const APoint& aScale) noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_2(Approximate(aScale, APoint{}, Math::GetZeroTolerance()), "scale不能为零。\n");
@@ -141,7 +141,7 @@ void Rendering::Transform<Real>::SetScale(const APoint& aScale) noexcept(g_Asser
 }
 
 template <typename Real>
-void Rendering::Transform<Real>::SetUniformScale(Real aScale) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::Transform<Real>::SetUniformScale(Real aScale) noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -153,7 +153,7 @@ void Rendering::Transform<Real>::SetUniformScale(Real aScale) noexcept(g_Assert 
 }
 
 template <typename Real>
-typename Rendering::Transform<Real>::Matrix Rendering::Transform<Real>::GetRotate() const noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+typename Rendering::Transform<Real>::Matrix Rendering::Transform<Real>::GetRotate() const noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_2(transformMatrix.IsRotationOrScaleMatrix(), "Matrix不是旋转矩阵\n");
@@ -178,7 +178,7 @@ typename Rendering::Transform<Real>::APoint Rendering::Transform<Real>::GetTrans
 }
 
 template <typename Real>
-typename Rendering::Transform<Real>::APoint Rendering::Transform<Real>::GetScale() const noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+typename Rendering::Transform<Real>::APoint Rendering::Transform<Real>::GetScale() const noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(transformMatrix.IsRotationOrScaleMatrix(), "Matrix不是旋转矩阵\n");
@@ -187,7 +187,7 @@ typename Rendering::Transform<Real>::APoint Rendering::Transform<Real>::GetScale
 }
 
 template <typename Real>
-Real Rendering::Transform<Real>::GetUniformScale() const noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+Real Rendering::Transform<Real>::GetUniformScale() const noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(transformMatrix.IsRotationOrScaleMatrix(), "Matrix不是旋转矩阵\n");
@@ -375,7 +375,7 @@ int Rendering::Transform<Real>::GetStreamingSize() const noexcept
     const auto isRotationOrScaleMatrix = transformMatrix.IsRotationOrScaleMatrix();
     const auto isUniformScale = transformMatrix.IsUniformScale();
 
-    auto size = CORE_TOOLS_STREAM_SIZE(isIdentity) + CORE_TOOLS_STREAM_SIZE(isRotationOrScaleMatrix) + CORE_TOOLS_STREAM_SIZE(isUniformScale);
+    auto size = CoreTools::GetStreamSize(isIdentity) + CoreTools::GetStreamSize(isRotationOrScaleMatrix) + CoreTools::GetStreamSize(isUniformScale);
 
     if (isIdentity)
     {
@@ -386,7 +386,7 @@ int Rendering::Transform<Real>::GetStreamingSize() const noexcept
         if (isUniformScale)
         {
             size += MATHEMATICS_STREAM_SIZE(rotationOrGeneralMatrix);
-            size += CORE_TOOLS_STREAM_SIZE(scale.GetX());
+            size += CoreTools::GetStreamSize(scale.GetX());
             size += MATHEMATICS_STREAM_SIZE(translate);
 
             return size;

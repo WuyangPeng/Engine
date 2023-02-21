@@ -11,13 +11,20 @@
 #define CORE_TOOLS_COMMAND_SUITE_COMMAND_ARGUMENT_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class CommandArgumentTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(CommandArgumentTesting);
+        using ClassType = CommandArgumentTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit CommandArgumentTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

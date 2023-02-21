@@ -36,7 +36,7 @@ int Rendering::VisualTechniqueImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return CORE_TOOLS_STREAM_SIZE(passes);
+    return CoreTools::GetStreamSize(passes);
 }
 
 void Rendering::VisualTechniqueImpl::Save(CoreTools::BufferTarget& target) const

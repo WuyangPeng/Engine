@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 0:57)
+///	标准：std:c++20
+///	引擎版本：0.9.0.2 (2023/02/07 0:56)
 
 #ifndef CORE_TOOLS_HELPER_EXPORT_MACRO_H
 #define CORE_TOOLS_HELPER_EXPORT_MACRO_H
@@ -60,6 +60,7 @@
 
 #endif  // BUILDING_STATIC
 
+// Export
 #define CORE_TOOLS_EXPORT(implClassName, type) \
     EXPORT_##type(CoreTools, implClassName, CORE_TOOLS_DEFAULT_DECLARE)
 
@@ -108,6 +109,7 @@
 #define FRAMEWORK_EXPORT(implClassName, type) \
     EXPORT_##type(Framework, implClassName, FRAMEWORK_DEFAULT_DECLARE)
 
+// Copy Export
 #define CORE_TOOLS_COPY_EXPORT(className, implClassName, type) \
     EXPORT_##type(CoreTools, className, implClassName, CORE_TOOLS_DEFAULT_DECLARE)
 
@@ -156,6 +158,7 @@
 #define FRAMEWORK_COPY_EXPORT(className, implClassName, type) \
     EXPORT_##type(Framework, className, implClassName, FRAMEWORK_DEFAULT_DECLARE)
 
+// Export Unique
 #define CORE_TOOLS_EXPORT_UNIQUE_PTR(implClassName) \
     EXPORT_UNIQUE_PTR(CoreTools, implClassName, CORE_TOOLS_DEFAULT_DECLARE)
 
@@ -204,6 +207,7 @@
 #define FRAMEWORK_EXPORT_UNIQUE_PTR(implClassName) \
     EXPORT_UNIQUE_PTR(Framework, implClassName, FRAMEWORK_DEFAULT_DECLARE)
 
+// Export Impl
 #define EXPORT_IMPL(implClassName, namespaceName, classShareType) \
     namespaceName##_EXPORT(implClassName, SHARED_PTR);            \
     namespaceName##_EXPORT(implClassName, classShareType)
@@ -216,10 +220,12 @@
     namespaceName##_EXPORT(implClassName, CONST_SHARED_PTR);            \
     namespaceName##_EXPORT(implClassName, classShareType)
 
+// Type Declare
 #define TYPE_DECLARE(className)  \
     using ClassType = className; \
     using ImplType = SYSTEM_CONCATENATOR(className, Impl)
 
+// Clone
 #define COPY_UNSHARED_CLONE_SELF_DECLARE \
     NODISCARD static SharedPtr Clone(const ImplType& impl)
 

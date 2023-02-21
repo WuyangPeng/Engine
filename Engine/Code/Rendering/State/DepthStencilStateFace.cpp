@@ -108,11 +108,11 @@ int Rendering::DepthStencilStateFace::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(fail);
+    auto size = CoreTools::GetStreamSize(fail);
 
-    size += CORE_TOOLS_STREAM_SIZE(depthFail);
-    size += CORE_TOOLS_STREAM_SIZE(pass);
-    size += CORE_TOOLS_STREAM_SIZE(comparison);
+    size += CoreTools::GetStreamSize(depthFail);
+    size += CoreTools::GetStreamSize(pass);
+    size += CoreTools::GetStreamSize(comparison);
 
     return size;
 }

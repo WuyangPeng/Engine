@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 ///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
 ///
 ///	±Í◊º£∫std:c++20
-///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/19 11:21)
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.9.0.2 (2023/02/06 11:25)
 
 #include "AssertTestOperatorTesting.h"
 #include "CoreTools/CoreToolsTesting/HelperSuite/Detail/MacroTestEnum.h"
@@ -212,6 +212,7 @@ void CoreTools::AssertTestOperatorTesting::AssertFloatingPointCompleteOperatorTe
     constexpr auto rhsExpression = 20.1f;
 
     ASSERT_FLOATING_POINT_COMPLETE_EQUAL(lhsExpression, lhsExpression);
+    ASSERT_FLOATING_POINT_COMPLETE_EQUAL(rhsExpression, rhsExpression);
     ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL(lhsExpression, rhsExpression);
 }
 
@@ -221,6 +222,7 @@ void CoreTools::AssertTestOperatorTesting::AssertFloatingPointCompleteOperatorMe
     constexpr auto rhsExpression = 20.1f;
 
     ASSERT_FLOATING_POINT_COMPLETE_EQUAL_USE_MESSAGE(lhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_USE_MESSAGE(rhsExpression, rhsExpression, "≤‚ ‘");
     ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_USE_MESSAGE(lhsExpression, rhsExpression, "≤‚ ‘");
 }
 
@@ -230,5 +232,6 @@ void CoreTools::AssertTestOperatorTesting::AssertFloatingPointCompleteOperatorFa
     constexpr auto rhsExpression = 20.1f;
 
     ASSERT_FLOATING_POINT_COMPLETE_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_FLOATING_POINT_COMPLETE_EQUAL_FAILURE_THROW(rhsExpression, rhsExpression, "≤‚ ‘");
     ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "≤‚ ‘");
 }

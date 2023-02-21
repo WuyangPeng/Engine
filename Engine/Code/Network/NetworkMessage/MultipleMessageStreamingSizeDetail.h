@@ -43,7 +43,7 @@ int Network::MultipleMessageStreamingSize<Index, Network::MultipleMessageContain
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     const auto value = container.GetValue<System::UnderlyingCastEnum<E>(Index - 1)>();
-    return ParentType::GetStreamingSize(container) + CORE_TOOLS_STREAM_SIZE(value);
+    return ParentType::GetStreamingSize(container) + CoreTools::GetStreamSize(value);
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
@@ -69,7 +69,7 @@ int Network::MultipleMessageStreamingSize<1, Network::MultipleMessageContainer<E
 
     const auto value = container.GetValue<System::UnderlyingCastEnum<E>(0)>();
 
-    return CORE_TOOLS_STREAM_SIZE(value);
+    return CoreTools::GetStreamSize(value);
 }
 
 #endif  // NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_STREAMING_SIZE_DETAIL_H

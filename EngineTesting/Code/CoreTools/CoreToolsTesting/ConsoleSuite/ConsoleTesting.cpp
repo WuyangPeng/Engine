@@ -42,7 +42,7 @@ void CoreTools::ConsoleTesting::InputHandleTest()
     auto handle = console.GetHandle();
 
     ASSERT_UNEQUAL_NULL_PTR(handle);
-    ASSERT_UNEQUAL(handle, System::gInvalidHandleValue);
+    ASSERT_UNEQUAL(handle, System::invalidHandleValue);
 }
 
 void CoreTools::ConsoleTesting::OutputHandleTest()
@@ -52,7 +52,7 @@ void CoreTools::ConsoleTesting::OutputHandleTest()
     auto handle = console.GetHandle();
 
     ASSERT_UNEQUAL_NULL_PTR(handle);
-    ASSERT_UNEQUAL(handle, System::gInvalidHandleValue);
+    ASSERT_UNEQUAL(handle, System::invalidHandleValue);
 }
 
 void CoreTools::ConsoleTesting::ErrorHandleTest()
@@ -62,5 +62,5 @@ void CoreTools::ConsoleTesting::ErrorHandleTest()
     auto handle = console.GetHandle();
 
     ASSERT_UNEQUAL_NULL_PTR(handle);
-    ASSERT_UNEQUAL(handle, System::gInvalidHandleValue);
+    ASSERT_UNEQUAL(handle, System::invalidHandleValue);
 }

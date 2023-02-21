@@ -12,11 +12,22 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/EntityManager.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 using std::shared_ptr;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, BaseEntityTesting)
+CoreTools::BaseEntityTesting::BaseEntityTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, BaseEntityTesting)
+
+void CoreTools::BaseEntityTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::BaseEntityTesting::MainTest()
 {

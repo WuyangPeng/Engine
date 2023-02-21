@@ -13,7 +13,7 @@
 #include "BufferSource.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/StreamMacro.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
 #include <type_traits>
 
@@ -273,7 +273,7 @@ void CoreTools::BufferSource::Read(T& datum)
 
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    source.Read(CORE_TOOLS_STREAM_SIZE(datum), &datum);
+    source.Read(CoreTools::GetStreamSize(datum), &datum);
 }
 
 template <typename T>
@@ -312,7 +312,7 @@ void CoreTools::BufferSource::ReadContainer(int elementsNumber, std::vector<T>& 
 
     if (0 < elementsNumber)
     {
-        source.Read(CORE_TOOLS_STREAM_SIZE(elementsNumber), elementsNumber, container.data());
+        source.Read(CoreTools::GetStreamSize(elementsNumber), elementsNumber, container.data());
     }
 }
 
@@ -481,7 +481,7 @@ void CoreTools::BufferSource::ReadEnumContainer(int elementsNumber, std::vector<
 
     if (0 < elementsNumber)
     {
-        source.Read(CORE_TOOLS_STREAM_SIZE(elementsNumber), elementsNumber, container.data());
+        source.Read(CoreTools::GetStreamSize(elementsNumber), elementsNumber, container.data());
     }
 }
 
@@ -669,7 +669,7 @@ void CoreTools::BufferSource::ReadObjectAssociated(T& datum)
     static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     datum.object.reset();
-    source.Read(CORE_TOOLS_STREAM_SIZE(datum.associated), &datum.associated);
+    source.Read(CoreTools::GetStreamSize(datum.associated), &datum.associated);
 }
 
 template <typename T>

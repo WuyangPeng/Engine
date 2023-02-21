@@ -31,15 +31,15 @@ namespace Mathematics
     public:
         // 产生范围在[0,1]的随机数。
         // 随机数生成器可以通过调用UnitRandom先设置一个正数的种子。
-        NODISCARD static Real UnitRandom(uint32_t seed = 0) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real UnitRandom(uint32_t seed = 0) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 产生范围在[-1,1]的随机数。
         // 随机数生成器可以通过调用UnitRandom先设置一个正数的种子。
-        NODISCARD static Real SymmetricRandom(uint32_t seed = 0) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real SymmetricRandom(uint32_t seed = 0) noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 产生范围在[min,max]的随机数。
         // 随机数生成器可以通过调用UnitRandom先设置一个正数的种子。
-        NODISCARD static Real IntervalRandom(Real min, Real max, uint32_t seed = 0) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real IntervalRandom(Real min, Real max, uint32_t seed = 0) noexcept(gAssert < 3 || gMathematicsAssert < 3);
     };
 
     using RandomF = Random<float>;

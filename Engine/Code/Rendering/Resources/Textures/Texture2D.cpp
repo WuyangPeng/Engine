@@ -135,7 +135,7 @@ int Rendering::Texture2D::GetStreamingSize() const
 
     size += impl->GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(shared);
+    size += CoreTools::GetStreamSize(shared);
 
     return size;
 }

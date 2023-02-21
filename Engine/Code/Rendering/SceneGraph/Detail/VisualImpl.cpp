@@ -205,7 +205,7 @@ int Rendering::VisualImpl::GetStreamingSize() const noexcept
     auto size = visualData.GetStreamingSize();
 
     size += RENDERING_STREAM_SIZE(modelBound);
-    size += CORE_TOOLS_STREAM_SIZE(effect);
+    size += CoreTools::GetStreamSize(effect);
 
     return size;
 }

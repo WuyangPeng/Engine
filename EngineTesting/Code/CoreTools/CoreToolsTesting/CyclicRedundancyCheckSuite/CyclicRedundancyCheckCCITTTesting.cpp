@@ -12,12 +12,23 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <array>
 
 using std::array;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, CyclicRedundancyCheckCCITTTesting)
+CoreTools::CyclicRedundancyCheckCCITTTesting::CyclicRedundancyCheckCCITTTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CyclicRedundancyCheckCCITTTesting)
+
+void CoreTools::CyclicRedundancyCheckCCITTTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::CyclicRedundancyCheckCCITTTesting::MainTest()
 {

@@ -44,7 +44,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
-    CORE_TOOLS_STREAM_REGISTER(CameraWorldDirectionVectorConstant);
+    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(CameraWorldDirectionVectorConstant);
 
 #include STSTEM_WARNING_POP
 

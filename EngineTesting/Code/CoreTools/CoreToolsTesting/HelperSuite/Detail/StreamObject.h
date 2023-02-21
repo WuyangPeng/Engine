@@ -1,16 +1,15 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:16)
+///	引擎测试版本：0.9.0.2 (2023/02/15 21:17)
 
-#ifndef CORE_TOOLS_OBJECT_SYSTEMS_SUITE_STREAM_OBJECT_H
-#define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_STREAM_OBJECT_H
+#ifndef CORE_TOOLS_HELPER_SUITE_STREAM_OBJECT_H
+#define CORE_TOOLS_HELPER_SUITE_STREAM_OBJECT_H
 
-#include "CoreTools/CoreToolsDll.h"
 #include "CoreTools/ObjectSystems/Object.h"
 
 namespace CoreTools
@@ -23,7 +22,7 @@ namespace CoreTools
         using StreamObjectSharedPtr = std::shared_ptr<ClassType>;
 
     public:
-        explicit StreamObject(const std::string& name);
+        StreamObject(const std::string& name, LoadConstructor loadConstructor);
 
         NODISCARD static StreamObjectSharedPtr Create(const std::string& name);
 
@@ -42,11 +41,11 @@ namespace CoreTools
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 
-    CORE_TOOLS_STREAM_REGISTER(StreamObject);
+    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(StreamObject);
 
 #include STSTEM_WARNING_POP
 
     CORE_TOOLS_SHARED_PTR_DECLARE(StreamObject);
 }
 
-#endif  // CORE_TOOLS_OBJECT_SYSTEMS_SUITE_STREAM_OBJECT_H
+#endif  // CORE_TOOLS_HELPER_SUITE_STREAM_OBJECT_H

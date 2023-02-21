@@ -347,18 +347,18 @@ int Rendering::BoxSurface::GetStreamingSize() const
     const auto numUCtrlPoints = volume->GetNumCtrlPoints(0);
     const auto numVCtrlPoints = volume->GetNumCtrlPoints(1);
     const auto numWCtrlPoints = volume->GetNumCtrlPoints(2);
-    size += CORE_TOOLS_STREAM_SIZE(numUCtrlPoints);
-    size += CORE_TOOLS_STREAM_SIZE(numVCtrlPoints);
-    size += CORE_TOOLS_STREAM_SIZE(numWCtrlPoints);
-    size += CORE_TOOLS_STREAM_SIZE(int{});  // uDegree
-    size += CORE_TOOLS_STREAM_SIZE(int{});  // vDegree
-    size += CORE_TOOLS_STREAM_SIZE(int{});  // wDegree
-    size += numUCtrlPoints * numVCtrlPoints * numWCtrlPoints * CORE_TOOLS_STREAM_SIZE(Mathematics::Vector3F{});
+    size += CoreTools::GetStreamSize(numUCtrlPoints);
+    size += CoreTools::GetStreamSize(numVCtrlPoints);
+    size += CoreTools::GetStreamSize(numWCtrlPoints);
+    size += CoreTools::GetStreamSize(int{});  // uDegree
+    size += CoreTools::GetStreamSize(int{});  // vDegree
+    size += CoreTools::GetStreamSize(int{});  // wDegree
+    size += numUCtrlPoints * numVCtrlPoints * numWCtrlPoints * CoreTools::GetStreamSize(Mathematics::Vector3F{});
 
-    size += CORE_TOOLS_STREAM_SIZE(numUSamples);
-    size += CORE_TOOLS_STREAM_SIZE(numVSamples);
-    size += CORE_TOOLS_STREAM_SIZE(numWSamples);
-    size += CORE_TOOLS_STREAM_SIZE(doSort);
+    size += CoreTools::GetStreamSize(numUSamples);
+    size += CoreTools::GetStreamSize(numVSamples);
+    size += CoreTools::GetStreamSize(numWSamples);
+    size += CoreTools::GetStreamSize(doSort);
 
     return size;
 }

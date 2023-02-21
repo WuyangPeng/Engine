@@ -525,18 +525,18 @@ int Rendering::TerrainBase::GetStreamingSize() const
 
     auto streamingSize = ParentType::GetStreamingSize();
 
-    streamingSize += CORE_TOOLS_STREAM_SIZE(mode);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(numRows);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(numCols);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(streamingSize);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(minElevation);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(maxElevation);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(spacing);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(cameraRow);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(cameraCol);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(vFormat);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(camera);
-    streamingSize += numRows * numCols * CORE_TOOLS_STREAM_SIZE(pages.at(0).at(0));
+    streamingSize += CoreTools::GetStreamSize(mode);
+    streamingSize += CoreTools::GetStreamSize(numRows);
+    streamingSize += CoreTools::GetStreamSize(numCols);
+    streamingSize += CoreTools::GetStreamSize(streamingSize);
+    streamingSize += CoreTools::GetStreamSize(minElevation);
+    streamingSize += CoreTools::GetStreamSize(maxElevation);
+    streamingSize += CoreTools::GetStreamSize(spacing);
+    streamingSize += CoreTools::GetStreamSize(cameraRow);
+    streamingSize += CoreTools::GetStreamSize(cameraCol);
+    streamingSize += CoreTools::GetStreamSize(vFormat);
+    streamingSize += CoreTools::GetStreamSize(camera);
+    streamingSize += numRows * numCols * CoreTools::GetStreamSize(pages.at(0).at(0));
     return streamingSize;
 }
 

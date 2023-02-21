@@ -74,7 +74,7 @@ int Network::MessageInterface::GetStreamingSize() const
     CoreTools::DisableNoexcept();
 
     // ÏûÏ¢ºÅ
-    const auto size = CORE_TOOLS_STREAM_SIZE(m_MessageID);
+    const auto size = CoreTools::GetStreamSize(m_MessageID);
 
     return size;
 }

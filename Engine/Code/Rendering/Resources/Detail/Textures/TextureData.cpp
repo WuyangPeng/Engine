@@ -89,9 +89,9 @@ int Rendering::TextureData::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(format);
+    auto size = CoreTools::GetStreamSize(format);
 
-    size += CORE_TOOLS_STREAM_SIZE(numLevels);
+    size += CoreTools::GetStreamSize(numLevels);
 
     return size;
 }

@@ -83,7 +83,7 @@ int Rendering::GraphicsObject::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(graphicsObjectType);
+    size += CoreTools::GetStreamSize(graphicsObjectType);
 
     return size;
 }

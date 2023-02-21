@@ -395,13 +395,13 @@ int Rendering::TubeSurface::GetStreamingSize() const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     auto size = ParentType::GetStreamingSize();
-    size += CORE_TOOLS_STREAM_SIZE(numMedialSamples);
-    size += CORE_TOOLS_STREAM_SIZE(numSliceSamples);
-    size += CORE_TOOLS_STREAM_SIZE(upVector);
-    size += CORE_TOOLS_STREAM_SIZE(sin);
-    size += CORE_TOOLS_STREAM_SIZE(cos);
-    size += CORE_TOOLS_STREAM_SIZE(closed);
-    size += CORE_TOOLS_STREAM_SIZE(sampleByArcLength);
+    size += CoreTools::GetStreamSize(numMedialSamples);
+    size += CoreTools::GetStreamSize(numSliceSamples);
+    size += CoreTools::GetStreamSize(upVector);
+    size += CoreTools::GetStreamSize(sin);
+    size += CoreTools::GetStreamSize(cos);
+    size += CoreTools::GetStreamSize(closed);
+    size += CoreTools::GetStreamSize(sampleByArcLength);
     return size;
 }
 

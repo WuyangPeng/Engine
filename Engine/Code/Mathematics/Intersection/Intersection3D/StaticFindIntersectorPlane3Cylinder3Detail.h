@@ -130,7 +130,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::Find()
 }
 
 template <typename Real>
-bool Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::CylinderIsCulled() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+bool Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>::CylinderIsCulled() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     // 计算圆柱体上点的符号距离Dot(N,X) - d的极值。 这些是
     //   min = (Dot(N,C)-d) - r*sqrt(1-Dot(N,W)^2) - (h/2)*|Dot(N,W)|

@@ -19,14 +19,25 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <vector>
 
 using std::make_shared;
 using std::string;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, BufferTargetTesting)
+CoreTools::BufferTargetTesting::BufferTargetTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, BufferTargetTesting)
+
+void CoreTools::BufferTargetTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::BufferTargetTesting::MainTest() noexcept
 {

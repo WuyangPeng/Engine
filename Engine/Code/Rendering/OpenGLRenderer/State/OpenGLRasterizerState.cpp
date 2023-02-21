@@ -29,7 +29,7 @@ Rendering::OpenGLRasterizerState::OpenGLRasterizerState(const RasterizerStateSha
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, OpenGLRasterizerState)
 
-void Rendering::OpenGLRasterizerState::Enable() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+void Rendering::OpenGLRasterizerState::Enable() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     RENDERING_CLASS_IS_VALID_9;
 

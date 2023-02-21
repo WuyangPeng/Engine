@@ -142,7 +142,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint, IsAllowTranslation, Ma
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint, IsAllowRotation, MatrixRotationAxis, bool)
 
-void Rendering::IKJoint::UpdateWorldRotateAndTranslate() noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::IKJoint::UpdateWorldRotateAndTranslate() noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_1;
 

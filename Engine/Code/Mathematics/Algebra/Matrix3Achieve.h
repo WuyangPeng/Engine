@@ -115,7 +115,7 @@ Mathematics::Matrix3<Real>::Matrix3(const Vector3& axis, Real angle) noexcept
 }
 
 template <typename Real>
-Mathematics::Matrix3<Real>::Matrix3(MatrixRotationAxis axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Matrix3<Real>::Matrix3(MatrixRotationAxis axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : m_X{}, m_Y{}, m_Z{}
 {
     MakeRotation(axis, angle);
@@ -203,7 +203,7 @@ void Mathematics::Matrix3<Real>::MakeRotation(const Vector3& axis, Real angle) n
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeRotation(MatrixRotationAxis axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeRotation(MatrixRotationAxis axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -360,7 +360,7 @@ Mathematics::Matrix3<Real>& Mathematics::Matrix3<Real>::operator*=(Real scalar) 
 }
 
 template <typename Real>
-Mathematics::Matrix3<Real>& Mathematics::Matrix3<Real>::operator/=(Real scalar) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Matrix3<Real>& Mathematics::Matrix3<Real>::operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -748,7 +748,7 @@ typename Mathematics::Matrix3<Real>::Matrix3EigenDecomposition Mathematics::Matr
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEuler(const Euler& euler) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEuler(const Euler& euler) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -796,7 +796,7 @@ void Mathematics::Matrix3<Real>::MakeEuler(const Euler& euler) noexcept(g_Assert
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEulerXYZ(Real xAngle, Real yAngle, Real zAngle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEulerXYZ(Real xAngle, Real yAngle, Real zAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -808,7 +808,7 @@ void Mathematics::Matrix3<Real>::MakeEulerXYZ(Real xAngle, Real yAngle, Real zAn
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEulerXZY(Real xAngle, Real zAngle, Real yAngle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEulerXZY(Real xAngle, Real zAngle, Real yAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -820,7 +820,7 @@ void Mathematics::Matrix3<Real>::MakeEulerXZY(Real xAngle, Real zAngle, Real yAn
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEulerYXZ(Real yAngle, Real xAngle, Real zAngle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEulerYXZ(Real yAngle, Real xAngle, Real zAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -832,7 +832,7 @@ void Mathematics::Matrix3<Real>::MakeEulerYXZ(Real yAngle, Real xAngle, Real zAn
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEulerYZX(Real yAngle, Real zAngle, Real xAngle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEulerYZX(Real yAngle, Real zAngle, Real xAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -844,7 +844,7 @@ void Mathematics::Matrix3<Real>::MakeEulerYZX(Real yAngle, Real zAngle, Real xAn
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEulerZXY(Real zAngle, Real xAngle, Real yAngle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEulerZXY(Real zAngle, Real xAngle, Real yAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -856,7 +856,7 @@ void Mathematics::Matrix3<Real>::MakeEulerZXY(Real zAngle, Real xAngle, Real yAn
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEulerZYX(Real zAngle, Real yAngle, Real xAngle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEulerZYX(Real zAngle, Real yAngle, Real xAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -868,7 +868,7 @@ void Mathematics::Matrix3<Real>::MakeEulerZYX(Real zAngle, Real yAngle, Real xAn
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEulerXYX(Real x0Angle, Real yAngle, Real x1Angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEulerXYX(Real x0Angle, Real yAngle, Real x1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -880,7 +880,7 @@ void Mathematics::Matrix3<Real>::MakeEulerXYX(Real x0Angle, Real yAngle, Real x1
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEulerXZX(Real x0Angle, Real zAngle, Real x1Angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEulerXZX(Real x0Angle, Real zAngle, Real x1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -892,7 +892,7 @@ void Mathematics::Matrix3<Real>::MakeEulerXZX(Real x0Angle, Real zAngle, Real x1
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEulerYXY(Real y0Angle, Real xAngle, Real y1Angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEulerYXY(Real y0Angle, Real xAngle, Real y1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -904,7 +904,7 @@ void Mathematics::Matrix3<Real>::MakeEulerYXY(Real y0Angle, Real xAngle, Real y1
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEulerYZY(Real y0Angle, Real zAngle, Real y1Angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEulerYZY(Real y0Angle, Real zAngle, Real y1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -916,7 +916,7 @@ void Mathematics::Matrix3<Real>::MakeEulerYZY(Real y0Angle, Real zAngle, Real y1
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEulerZXZ(Real z0Angle, Real xAngle, Real z1Angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEulerZXZ(Real z0Angle, Real xAngle, Real z1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -928,7 +928,7 @@ void Mathematics::Matrix3<Real>::MakeEulerZXZ(Real z0Angle, Real xAngle, Real z1
 }
 
 template <typename Real>
-void Mathematics::Matrix3<Real>::MakeEulerZYZ(Real z0Angle, Real yAngle, Real z1Angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix3<Real>::MakeEulerZYZ(Real z0Angle, Real yAngle, Real z1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

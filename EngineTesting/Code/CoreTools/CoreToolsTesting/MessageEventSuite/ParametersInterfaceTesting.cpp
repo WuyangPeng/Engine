@@ -10,13 +10,24 @@
 #include "ParametersInterfaceTesting.h"
 #include "Detail/Parameters.h"
 #include "CoreTools/Helper/AssertMacro.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/ParametersInterface.h"
 
 using std::make_shared;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(CoreTools, ParametersInterface)
+CoreTools::ParametersInterfaceTesting::ParametersInterfaceTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ParametersInterfaceTesting)
+
+void CoreTools::ParametersInterfaceTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::ParametersInterfaceTesting::MainTest()
 {
@@ -26,8 +37,8 @@ void CoreTools::ParametersInterfaceTesting::MainTest()
 
 void CoreTools::ParametersInterfaceTesting::CloneTest()
 {
-    TestingType parametersInterface;
-    ParametersInterfaceSharedPtr smartPointer{ make_shared<TestingType>(parametersInterface) };
+    ParametersInterface parametersInterface;
+    ParametersInterfaceSharedPtr smartPointer{ make_shared<ParametersInterface>(parametersInterface) };
     auto cloneSmartPointer = smartPointer->Clone();
 
     ASSERT_UNEQUAL_NULL_PTR(smartPointer);

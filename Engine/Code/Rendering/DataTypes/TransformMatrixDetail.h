@@ -38,7 +38,7 @@ void Rendering::TransformMatrix<Real>::MakeIdentity() noexcept
 }
 
 template <typename Real>
-void Rendering::TransformMatrix<Real>::MakeUnitScale(const Matrix& rotate) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::TransformMatrix<Real>::MakeUnitScale(const Matrix& rotate) noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -150,7 +150,7 @@ void Rendering::TransformMatrix<Real>::SetTranslate(const APoint& translate) noe
 }
 
 template <typename Real>
-void Rendering::TransformMatrix<Real>::SetScale(const Matrix& rotate, const APoint& scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::TransformMatrix<Real>::SetScale(const Matrix& rotate, const APoint& scale) noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_2(isRotationOrScaleMatrix, "Matrix不是旋转矩阵。\n");
@@ -162,7 +162,7 @@ void Rendering::TransformMatrix<Real>::SetScale(const Matrix& rotate, const APoi
 }
 
 template <typename Real>
-void Rendering::TransformMatrix<Real>::SetUniformScale(const Matrix& rotate, Real scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::TransformMatrix<Real>::SetUniformScale(const Matrix& rotate, Real scale) noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_2(isRotationOrScaleMatrix, "Matrix不是旋转矩阵。\n");
@@ -184,7 +184,7 @@ typename Rendering::TransformMatrix<Real>::Matrix Rendering::TransformMatrix<Rea
 template <typename Real>
 int Rendering::TransformMatrix<Real>::GetStreamingSize() const noexcept
 {
-    return MATHEMATICS_STREAM_SIZE(transformMatrix) + CORE_TOOLS_STREAM_SIZE(isIdentity) + CORE_TOOLS_STREAM_SIZE(isRotationOrScaleMatrix) + CORE_TOOLS_STREAM_SIZE(isUniformScale);
+    return MATHEMATICS_STREAM_SIZE(transformMatrix) + CoreTools::GetStreamSize(isIdentity) + CoreTools::GetStreamSize(isRotationOrScaleMatrix) + CoreTools::GetStreamSize(isUniformScale);
 }
 
 #endif  // RENDERING_DATA_TYPES_TRANSFORM_MATRIX_DETAIL_H

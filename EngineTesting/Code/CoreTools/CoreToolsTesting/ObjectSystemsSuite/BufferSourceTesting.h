@@ -12,13 +12,20 @@
 
 #include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
     class BufferSourceTesting : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(BufferSourceTesting);
+        using ClassType = BufferSourceTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit BufferSourceTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest() noexcept;

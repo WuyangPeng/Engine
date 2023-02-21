@@ -47,7 +47,7 @@ namespace Mathematics
 
     private:
         void CalculateUpdateData();
-        void UpdateInverseRadiusSqrare() noexcept(g_Assert < 2 || g_MathematicsAssert < 2);
+        void UpdateInverseRadiusSqrare() noexcept(gAssert < 2 || gMathematicsAssert < 2);
         void UpdateDirection();
         void UpdateCenter();
 

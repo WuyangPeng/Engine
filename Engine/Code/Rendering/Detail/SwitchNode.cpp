@@ -91,7 +91,7 @@ int Rendering::SwitchNode::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(activeChild);
+    size += CoreTools::GetStreamSize(activeChild);
 
     return size;
 }

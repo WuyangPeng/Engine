@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 0:57)
+///	标准：std:c++20
+///	引擎版本：0.9.0.2 (2023/02/19 19:55)
 
 #ifndef CORE_TOOLS_HELPER_CUSTOM_ASSERT_MACRO_H
 #define CORE_TOOLS_HELPER_CUSTOM_ASSERT_MACRO_H
@@ -16,13 +16,17 @@
 #if defined(OPEN_ASSERT) || defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
 
     #if defined(SYSTEM_PLATFORM_WIN32) && defined(TCRE_USE_MSVC)
+
         #define CORE_TOOLS_USE_ASSERT
+
     #endif  // defined(WIN32) && defined(TCRE_USE_MSVC)
 
 #endif  // defined(OPEN_ASSERT) || defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
 
 #if defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
+
     #define ASSERT_LEVEL 0
+
 #endif  // OPEN_IMPORTANT_EXCPTION_ASSERT
 
 // 0：非常重要的断言。断言失败会导致程序崩溃。
@@ -31,7 +35,9 @@
 // 3：不重要的断言。断言失败会导致显示或计算错误。
 // 4：可以忽略的断言。断言失败会导致数值精度不足。
 #if !defined(ASSERT_LEVEL)
+
     #define ASSERT_LEVEL 4
+
 #endif  // ASSERT_LEVEL
 
 #ifdef CORE_TOOLS_USE_ASSERT
@@ -42,7 +48,7 @@
     #define ASSERTION_USE_FUNCTION_DESCRIBED(condition, functionDescribed, format, ...) \
         CoreTools::Assertion{ (condition), (functionDescribed), (format), __VA_ARGS__ };
 
-constexpr auto g_Assert = ASSERT_LEVEL;
+constexpr auto gAssert = ASSERT_LEVEL;
 
 #else  // !CORE_TOOLS_USE_ASSERT
 
@@ -50,13 +56,13 @@ constexpr auto g_Assert = ASSERT_LEVEL;
     #define ASSERTION(condition, format, ...) (static_cast<void>(0))
     #define ASSERTION_USE_FUNCTION_DESCRIBED(condition, functionDescribed, format, ...) (static_cast<void>(0))
 
-constexpr auto g_Assert = -1;
+constexpr auto gAssert = -1;
 
 #endif  // CORE_TOOLS_USE_ASSERT
 
 #if defined(_DEBUG) && defined(CORE_TOOLS_USE_ASSERT) && 0 <= ASSERT_LEVEL
 
-constexpr auto g_AssertDebug = true;
+constexpr auto gAssertDebug = true;
 
     #define ASSERTION_DEBUG(condition, format, ...) \
         ASSERTION(condition, format, __VA_ARGS__)
@@ -65,7 +71,7 @@ constexpr auto g_AssertDebug = true;
 
 #else  // !defined(_DEBUG) || defined(CORE_TOOLS_USE_ASSERT) || ASSERT_LEVEL < 0
 
-constexpr auto g_AssertDebug = false;
+constexpr auto gAssertDebug = false;
 
     #define ASSERTION_DEBUG(condition, format, ...) (static_cast<void>(0))
     #define ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition, functionDescribed, format, ...) (static_cast<void>(0))

@@ -229,14 +229,14 @@ int Rendering::PointControllerImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(systemLinearSpeed);
+    auto size = CoreTools::GetStreamSize(systemLinearSpeed);
 
-    size += CORE_TOOLS_STREAM_SIZE(systemAngularSpeed);
+    size += CoreTools::GetStreamSize(systemAngularSpeed);
     size += MATHEMATICS_STREAM_SIZE(systemLinearAxis);
     size += MATHEMATICS_STREAM_SIZE(systemAngularAxis);
-    size += CORE_TOOLS_STREAM_SIZE(numPoints);
-    size += numPoints * CORE_TOOLS_STREAM_SIZE(pointLinearSpeeds.at(0));
-    size += numPoints * CORE_TOOLS_STREAM_SIZE(pointAngularSpeeds.at(0));
+    size += CoreTools::GetStreamSize(numPoints);
+    size += numPoints * CoreTools::GetStreamSize(pointLinearSpeeds.at(0));
+    size += numPoints * CoreTools::GetStreamSize(pointAngularSpeeds.at(0));
     size += numPoints * MATHEMATICS_STREAM_SIZE(pointLinearAxes.at(0));
     size += numPoints * MATHEMATICS_STREAM_SIZE(pointAngularAxes.at(0));
 

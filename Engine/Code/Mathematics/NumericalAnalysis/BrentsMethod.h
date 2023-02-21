@@ -71,15 +71,15 @@ namespace Mathematics
 
         void SetFunction(Function newFunction);
         NODISCARD Function GetFunction() const noexcept;
-        void SetMaxIterations(int newMaxIterations) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void SetMaxIterations(int newMaxIterations) noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD int GetMaxIterations() const noexcept;
-        void SetNegativeFTolerance(Real newNegativeFTolerance) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void SetNegativeFTolerance(Real newNegativeFTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD Real GetNegativeFTolerance() const noexcept;
-        void SetPositiveFTolerance(Real newPositiveFTolerance) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void SetPositiveFTolerance(Real newPositiveFTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD Real GetPositiveFTolerance() const noexcept;
-        void SetStepXTolerance(Real newStepXTolerance) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void SetStepXTolerance(Real newStepXTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD Real GetStepXTolerance() const noexcept;
-        void SetConvXTolerance(Real newConvXTolerance) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void SetConvXTolerance(Real newConvXTolerance) noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD Real GetConvXTolerance() const noexcept;
         void SetUserData(const UserDataType* newUserData) noexcept;
         NODISCARD const UserDataType* GetUserData() const noexcept;

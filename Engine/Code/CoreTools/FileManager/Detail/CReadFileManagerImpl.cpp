@@ -77,7 +77,7 @@ void CoreTools::CReadFileManagerImpl::Read(size_t itemSize, size_t itemsNumber, 
 #endif  // SYSTEM_BIG_ENDIAN
 }
 
-size_t CoreTools::CReadFileManagerImpl::WriteToFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED const void* data) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+size_t CoreTools::CReadFileManagerImpl::WriteToFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED const void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -86,7 +86,7 @@ size_t CoreTools::CReadFileManagerImpl::WriteToFile(MAYBE_UNUSED size_t itemSize
     return 0;
 }
 
-bool CoreTools::CReadFileManagerImpl::PutCharacter(MAYBE_UNUSED int character) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+bool CoreTools::CReadFileManagerImpl::PutCharacter(MAYBE_UNUSED int character) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -95,7 +95,7 @@ bool CoreTools::CReadFileManagerImpl::PutCharacter(MAYBE_UNUSED int character) n
     return false;
 }
 
-bool CoreTools::CReadFileManagerImpl::PutString(MAYBE_UNUSED const string& str) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+bool CoreTools::CReadFileManagerImpl::PutString(MAYBE_UNUSED const string& str) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

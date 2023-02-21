@@ -110,7 +110,7 @@ void Mathematics::Vector2<Real>::SetY(Real y) noexcept
 }
 
 template <typename Real>
-void Mathematics::Vector2<Real>::Normalize(const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Vector2<Real>::Normalize(const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -137,7 +137,7 @@ Real Mathematics::Vector2<Real>::GetMaxAbsComp() const noexcept
 }
 
 template <typename Real>
-void Mathematics::Vector2<Real>::RobustNormalize(const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Vector2<Real>::RobustNormalize(const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -155,7 +155,7 @@ void Mathematics::Vector2<Real>::RobustNormalize(const Real epsilon) noexcept(g_
 }
 
 template <typename Real>
-bool Mathematics::Vector2<Real>::IsNormalize(const Real epsilon) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+bool Mathematics::Vector2<Real>::IsNormalize(const Real epsilon) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -251,7 +251,7 @@ Mathematics::Vector2<Real>& Mathematics::Vector2<Real>::operator*=(Real rhs) noe
 }
 
 template <typename Real>
-Mathematics::Vector2<Real>& Mathematics::Vector2<Real>::operator/=(Real rhs) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Vector2<Real>& Mathematics::Vector2<Real>::operator/=(Real rhs) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 

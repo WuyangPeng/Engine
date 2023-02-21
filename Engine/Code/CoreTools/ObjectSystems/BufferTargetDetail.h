@@ -100,7 +100,7 @@ void CoreTools::BufferTarget::Write(T datum)
 
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    Write(CORE_TOOLS_STREAM_SIZE(datum), &datum);
+    Write(CoreTools::GetStreamSize(datum), &datum);
 }
 
 template <typename T>
@@ -149,7 +149,7 @@ void CoreTools::BufferTarget::WriteEnum(const T datum)
 
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    Write(CORE_TOOLS_STREAM_SIZE(datum), &datum);
+    Write(CoreTools::GetStreamSize(datum), &datum);
 }
 
 template <typename T>

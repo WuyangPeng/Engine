@@ -114,7 +114,7 @@ namespace Mathematics
         // 创建一个旋转矩阵（角度为正->逆时针方向）
         // angle必须为弧度，不是角度。
         Matrix3(const Vector3& axis, Real angle) noexcept;
-        Matrix3(MatrixRotationAxis axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        Matrix3(MatrixRotationAxis axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // 创建一个张量积 U * V^T
         Matrix3(const Vector3& vector0, const Vector3& vector1) noexcept;
@@ -126,7 +126,7 @@ namespace Mathematics
         void MakeIdentity() noexcept;
         void MakeDiagonal(Real member00, Real member11, Real member22) noexcept;
         void MakeRotation(const Vector3& axis, Real angle) noexcept;
-        void MakeRotation(MatrixRotationAxis axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void MakeRotation(MatrixRotationAxis axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
         void MakeTensorProduct(const Vector3& vector0, const Vector3& vector1) noexcept;
 
         NODISCARD const Vector3& operator[](int row) const;
@@ -144,7 +144,7 @@ namespace Mathematics
         Matrix3& operator+=(const Matrix3& rhs) noexcept;
         Matrix3& operator-=(const Matrix3& rhs) noexcept;
         Matrix3& operator*=(Real scalar) noexcept;
-        Matrix3& operator/=(Real scalar) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        Matrix3& operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         // lhs^T * M * rhs
         NODISCARD Real QuadraticForm(const Vector3& lhs, const Vector3& rhs) const noexcept;
@@ -182,20 +182,20 @@ namespace Mathematics
         NODISCARD Matrix3EigenDecomposition EigenDecomposition(const Real epsilon = Math::GetZeroTolerance()) const;
 
         // 从欧拉角创建旋转矩阵
-        void MakeEulerXYZ(Real xAngle, Real yAngle, Real zAngle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void MakeEulerXZY(Real xAngle, Real zAngle, Real yAngle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void MakeEulerYXZ(Real yAngle, Real xAngle, Real zAngle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void MakeEulerYZX(Real yAngle, Real zAngle, Real xAngle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void MakeEulerZXY(Real zAngle, Real xAngle, Real yAngle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void MakeEulerZYX(Real zAngle, Real yAngle, Real xAngle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void MakeEulerXYX(Real x0Angle, Real yAngle, Real x1Angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void MakeEulerXZX(Real x0Angle, Real zAngle, Real x1Angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void MakeEulerYXY(Real y0Angle, Real xAngle, Real y1Angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void MakeEulerYZY(Real y0Angle, Real zAngle, Real y1Angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void MakeEulerZXZ(Real z0Angle, Real xAngle, Real z1Angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void MakeEulerZYZ(Real z0Angle, Real yAngle, Real z1Angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void MakeEulerXYZ(Real xAngle, Real yAngle, Real zAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeEulerXZY(Real xAngle, Real zAngle, Real yAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeEulerYXZ(Real yAngle, Real xAngle, Real zAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeEulerYZX(Real yAngle, Real zAngle, Real xAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeEulerZXY(Real zAngle, Real xAngle, Real yAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeEulerZYX(Real zAngle, Real yAngle, Real xAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeEulerXYX(Real x0Angle, Real yAngle, Real x1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeEulerXZX(Real x0Angle, Real zAngle, Real x1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeEulerYXY(Real y0Angle, Real xAngle, Real y1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeEulerYZY(Real y0Angle, Real zAngle, Real y1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeEulerZXZ(Real z0Angle, Real xAngle, Real z1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void MakeEulerZYZ(Real z0Angle, Real yAngle, Real z1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        void MakeEuler(const Euler& euler) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void MakeEuler(const Euler& euler) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         /// 返回值顺序为xAngle、yAngle、zAngle
         /// 且在指定的范围内：

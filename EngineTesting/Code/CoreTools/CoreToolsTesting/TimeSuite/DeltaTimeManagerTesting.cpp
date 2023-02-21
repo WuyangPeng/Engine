@@ -13,9 +13,19 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/Time/DeltaTimeManager.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+CoreTools::DeltaTimeManagerTesting::DeltaTimeManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, DeltaTimeManagerTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, DeltaTimeManagerTesting)
 
+void CoreTools::DeltaTimeManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 void CoreTools::DeltaTimeManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(TimeTest);

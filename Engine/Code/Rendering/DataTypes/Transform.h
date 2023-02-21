@@ -50,7 +50,7 @@ namespace Rendering
         void MakeIdentity() noexcept;
 
         // 设置转换的缩放值为1。
-        void MakeUnitScale() noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void MakeUnitScale() noexcept(gAssert < 2 || gRenderingAssert < 2);
 
         // 转换结构的提示。
         NODISCARD bool IsIdentity() const noexcept;  // I
@@ -70,13 +70,13 @@ namespace Rendering
         void SetRotate(const Matrix& rotate) noexcept;
         void SetMatrix(const Matrix& matrix) noexcept;
         void SetTranslate(const APoint& aTranslate) noexcept;
-        void SetScale(const APoint& aScale) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
-        void SetUniformScale(Real aScale) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
-        NODISCARD Matrix GetRotate() const noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void SetScale(const APoint& aScale) noexcept(gAssert < 2 || gRenderingAssert < 2);
+        void SetUniformScale(Real aScale) noexcept(gAssert < 2 || gRenderingAssert < 2);
+        NODISCARD Matrix GetRotate() const noexcept(gAssert < 2 || gRenderingAssert < 2);
         NODISCARD Matrix GetMatrix() const noexcept;
         NODISCARD APoint GetTranslate() const noexcept;
-        NODISCARD APoint GetScale() const noexcept(g_Assert < 2 || g_RenderingAssert < 2);
-        NODISCARD Real GetUniformScale() const noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        NODISCARD APoint GetScale() const noexcept(gAssert < 2 || gRenderingAssert < 2);
+        NODISCARD Real GetUniformScale() const noexcept(gAssert < 2 || gRenderingAssert < 2);
 
         // 对于M = R * S，S的绝对值的最大值被返回。
         // 对于普通M，返回最大的row绝对值和，这是最大规模的转换的合理测量。

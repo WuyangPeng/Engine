@@ -32,7 +32,7 @@ namespace Mathematics
         using Vector2Tools = Vector2Tools<Real>;
 
     public:
-        explicit Vector2OrthonormalBasis(const Vector2& nonzeroVector, const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        explicit Vector2OrthonormalBasis(const Vector2& nonzeroVector, const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -40,7 +40,7 @@ namespace Mathematics
         NODISCARD Vector2 GetVVector() const noexcept;
 
     private:
-        void Generate() noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        void Generate() noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
     private:
         Vector2 uVector;

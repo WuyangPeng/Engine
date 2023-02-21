@@ -63,14 +63,14 @@ namespace Mathematics
 
         // 下三角
         // GetLowerBand(index):  0 <= index < LowerBandMax
-        NODISCARD int GetLowerBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD int GetLowerBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD ContainerType GetLowerBand(int index) const;
         void SetLowerBand(int index, const ContainerType& lowerBand);
         void SetLowerBandZero();
 
         // 上三角
         // GetUupperBand(index):  0 <= index < UpperBandMax
-        NODISCARD int GetUpperBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD int GetUpperBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD ContainerType GetUpperBand(int index) const;
         void SetUpperBand(int index, const ContainerType& upperBand);
         void SetUpperBandZero();

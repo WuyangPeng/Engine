@@ -402,11 +402,11 @@ int Rendering::NodeImpl::GetStreamingSize() const
 
     auto numChildren = boost::numeric_cast<int32_t>(spatialChild.size());
 
-    auto size = CORE_TOOLS_STREAM_SIZE(numChildren);
+    auto size = CoreTools::GetStreamSize(numChildren);
 
     if (0 < numChildren)
     {
-        size += numChildren * CORE_TOOLS_STREAM_SIZE(spatialChild.at(0));
+        size += numChildren * CoreTools::GetStreamSize(spatialChild.at(0));
     }
 
     return size;

@@ -174,14 +174,14 @@ int Rendering::ShaderDataImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(object);
+    auto size = CoreTools::GetStreamSize(object);
 
-    size += CORE_TOOLS_STREAM_SIZE(type);
-    size += CORE_TOOLS_STREAM_SIZE(name);
-    size += CORE_TOOLS_STREAM_SIZE(bindPoint);
-    size += CORE_TOOLS_STREAM_SIZE(numBytes);
-    size += CORE_TOOLS_STREAM_SIZE(extra);
-    size += CORE_TOOLS_STREAM_SIZE(isGpuWritable);
+    size += CoreTools::GetStreamSize(type);
+    size += CoreTools::GetStreamSize(name);
+    size += CoreTools::GetStreamSize(bindPoint);
+    size += CoreTools::GetStreamSize(numBytes);
+    size += CoreTools::GetStreamSize(extra);
+    size += CoreTools::GetStreamSize(isGpuWritable);
 
     return size;
 }

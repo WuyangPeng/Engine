@@ -255,7 +255,7 @@ namespace Mathematics
         NODISCARD Matrix DiagonalTimes(const APoint& diagonal) const noexcept;  // D * M
 
         // 适用于左上3x3的块
-        void Orthonormalize() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        void Orthonormalize() noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         // 计算一个二次型。
         // p0^T * M * p1

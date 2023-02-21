@@ -16,7 +16,7 @@
 #include <algorithm>
 
 template <typename Real>
-Real Mathematics::Random<Real>::UnitRandom(uint32_t seed) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Random<Real>::UnitRandom(uint32_t seed) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     if (0 < seed)
     {
@@ -31,7 +31,7 @@ Real Mathematics::Random<Real>::UnitRandom(uint32_t seed) noexcept(g_Assert < 3 
 }
 
 template <typename Real>
-Real Mathematics::Random<Real>::SymmetricRandom(uint32_t seed) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Random<Real>::SymmetricRandom(uint32_t seed) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     auto ratio = (Math::GetValue(2) * UnitRandom(seed)) - Math::GetValue(1);
 
@@ -41,7 +41,7 @@ Real Mathematics::Random<Real>::SymmetricRandom(uint32_t seed) noexcept(g_Assert
 }
 
 template <typename Real>
-Real Mathematics::Random<Real>::IntervalRandom(Real min, Real max, uint32_t seed) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Real Mathematics::Random<Real>::IntervalRandom(Real min, Real max, uint32_t seed) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(min <= max, "设定的最小值大于最大值");
 

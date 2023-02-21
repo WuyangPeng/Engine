@@ -86,7 +86,7 @@ int Mathematics::BandedMatrix<Real>::GetStreamSize() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return CORE_TOOLS_STREAM_SIZE(diagonalBandContainer) + lowerBandData.GetStreamSize() + upperBandData.GetStreamSize();
+    return CoreTools::GetStreamSize(diagonalBandContainer) + lowerBandData.GetStreamSize() + upperBandData.GetStreamSize();
 }
 
 template <typename Real>
@@ -127,7 +127,7 @@ void Mathematics::BandedMatrix<Real>::SetLowerBandZero()
 }
 
 template <typename Real>
-int Mathematics::BandedMatrix<Real>::GetLowerBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+int Mathematics::BandedMatrix<Real>::GetLowerBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -143,7 +143,7 @@ typename Mathematics::BandedMatrix<Real>::ContainerType Mathematics::BandedMatri
 }
 
 template <typename Real>
-int Mathematics::BandedMatrix<Real>::GetUpperBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+int Mathematics::BandedMatrix<Real>::GetUpperBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

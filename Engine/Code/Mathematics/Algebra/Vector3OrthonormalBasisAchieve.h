@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::Vector3OrthonormalBasis<Real>::Vector3OrthonormalBasis(const Vector3& nonzeroVector, bool isUnit, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Vector3OrthonormalBasis<Real>::Vector3OrthonormalBasis(const Vector3& nonzeroVector, bool isUnit, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : isUnit{ isUnit }, uVector{}, vVector{}, wVector{ nonzeroVector }, epsilon{ epsilon }
 {
     MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(epsilon), "输入必须是非零向量！");
@@ -28,7 +28,7 @@ Mathematics::Vector3OrthonormalBasis<Real>::Vector3OrthonormalBasis(const Vector
 }
 
 template <typename Real>
-void Mathematics::Vector3OrthonormalBasis<Real>::Generate() noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Vector3OrthonormalBasis<Real>::Generate() noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     if (!isUnit)
     {
@@ -46,7 +46,7 @@ void Mathematics::Vector3OrthonormalBasis<Real>::Generate() noexcept(g_Assert < 
 }
 
 template <typename Real>
-void Mathematics::Vector3OrthonormalBasis<Real>::GenerateOnXOrZIsMax() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+void Mathematics::Vector3OrthonormalBasis<Real>::GenerateOnXOrZIsMax() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     // unitVector.x或unitVector.z是大小最大的组成部分，交换他们
     auto invLength = Math::InvSqrt(wVector.GetX() * wVector.GetX() + wVector.GetZ() * wVector.GetZ());
@@ -57,7 +57,7 @@ void Mathematics::Vector3OrthonormalBasis<Real>::GenerateOnXOrZIsMax() noexcept(
 }
 
 template <typename Real>
-void Mathematics::Vector3OrthonormalBasis<Real>::GenerateOnYOrZIsMax() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+void Mathematics::Vector3OrthonormalBasis<Real>::GenerateOnYOrZIsMax() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     // unitVector.y或unitVector.z是大小最大的组成部分，交换他们
     auto invLength = Math::InvSqrt(wVector.GetY() * wVector.GetY() + wVector.GetZ() * wVector.GetZ());
