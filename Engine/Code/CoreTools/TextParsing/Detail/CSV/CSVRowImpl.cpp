@@ -132,7 +132,7 @@ System::String CoreTools::CSVRowImpl::GetString(const String& field) const
     const auto iter = rowType.find(field);
     if (iter != rowType.cend())
     {
-        return StringConversion::UTF8ConversionStandard(iter->second);
+        return StringConversion::Utf8ConversionStandard(iter->second);
     }
     else
     {

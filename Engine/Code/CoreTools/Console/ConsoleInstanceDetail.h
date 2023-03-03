@@ -1,17 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/11 14:54)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 15:22)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_DETAIL_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_DETAIL_H
 
 #include "ConsoleInstance.h"
 #include "System/Console/ConsoleHandle.h"
+#include "System/Helper/Tools.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
@@ -22,9 +24,11 @@ CoreTools::ConsoleInstance<Handle> CoreTools::ConsoleInstance<Handle>::Create()
 }
 
 template <CoreTools::StandardHandle Handle>
-CoreTools::ConsoleInstance<Handle>::ConsoleInstance(MAYBE_UNUSED DisableNotThrow disableNotThrow)
+CoreTools::ConsoleInstance<Handle>::ConsoleInstance(DisableNotThrow disableNotThrow)
     : handle{ System::GetStandardHandle(Handle) }
 {
+    System::UnusedFunction(disableNotThrow);
+
     if (!System::IsHandleValid(handle))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("获取标准设备的句柄失败。"s));
@@ -47,7 +51,7 @@ bool CoreTools::ConsoleInstance<Handle>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <CoreTools::StandardHandle Handle>
-typename CoreTools::ConsoleInstance<Handle>::ConsoleHandle CoreTools::ConsoleInstance<Handle>::GetHandle() noexcept
+typename CoreTools::ConsoleInstance<Handle>::ConsoleHandle CoreTools::ConsoleInstance<Handle>::GetHandle() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

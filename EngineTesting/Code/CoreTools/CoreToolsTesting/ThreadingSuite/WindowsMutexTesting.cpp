@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:05)
+///	引擎测试版本：0.9.0.3 (2023/03/02 09:16)
 
 #include "WindowsMutexTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 CoreTools::WindowsMutexTesting::WindowsMutexTesting(const OStreamShared& stream)
-    : ParentType{ stream }, windowsMutex0{ MutexCreate::UseDefault }, windowsMutex1{ MutexCreate::UseDefault }
+    : ParentType{ stream }, windowsMutex{ MutexCreate::UseDefault }, windowsDllMutex{ MutexCreate::UseDefault }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -30,8 +30,8 @@ void CoreTools::WindowsMutexTesting::DoRunUnitTest()
 void CoreTools::WindowsMutexTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(RecursionTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MultithreadingLockingSuccessTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MultithreadingLockingFailureTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MultiThreadingLockingSuccessTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MultiThreadingLockingFailureTest);
 }
 
 // 递归测试
@@ -42,23 +42,23 @@ void CoreTools::WindowsMutexTesting::RecursionTest()
 
 void CoreTools::WindowsMutexTesting::CreateRecursionTestHolder()
 {
-    ScopedMutex holder1{ windowsMutex0 };
-    TryScopedMutex holder2{ windowsMutex0 };
+    ScopedMutex holder1{ windowsMutex };
+    const TryScopedMutex holder2{ windowsMutex };
 
     ASSERT_TRUE(holder2.IsSuccess());
 
-    ScopedMutex holder3{ windowsMutex0 };
+    ScopedMutex holder3{ windowsMutex };
 }
 
 // 多线程锁成功测试
-void CoreTools::WindowsMutexTesting::MultithreadingLockingSuccessTest()
+void CoreTools::WindowsMutexTesting::MultiThreadingLockingSuccessTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateLockingSuccessThread);
 }
 
 void CoreTools::WindowsMutexTesting::CreateLockingSuccessThread()
 {
-    CreateThread(&ClassType::MultithreadingSuccessCallBack);
+    CreateThread(&ClassType::MultiThreadingSuccessCallBack);
 }
 
 void CoreTools::WindowsMutexTesting::CreateThread(Function function)
@@ -73,14 +73,14 @@ void CoreTools::WindowsMutexTesting::CreateThread(Function function)
     }
 }
 
-void CoreTools::WindowsMutexTesting::MultithreadingSuccessCallBack()
+void CoreTools::WindowsMutexTesting::MultiThreadingSuccessCallBack()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(StaticValueTest);
 }
 
 void CoreTools::WindowsMutexTesting::StaticValueTest()
 {
-    ScopedMutex holderFirst{ windowsMutex0 };
+    ScopedMutex holderFirst{ windowsMutex };
 
     constexpr auto original = 0;
     static auto testValue = original;
@@ -107,23 +107,23 @@ void CoreTools::WindowsMutexTesting::StaticValueTest()
 }
 
 // 多线程锁失败测试
-void CoreTools::WindowsMutexTesting::MultithreadingLockingFailureTest()
+void CoreTools::WindowsMutexTesting::MultiThreadingLockingFailureTest()
 {
-    windowsMutex1.Initialize();
+    windowsDllMutex.Initialize();
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateLockingFailureThread);
 
-    windowsMutex1.Delete();
+    windowsDllMutex.Delete();
 }
 
 void CoreTools::WindowsMutexTesting::CreateLockingFailureThread()
 {
-    ScopedMutex holder{ windowsMutex1 };
+    ScopedMutex holder{ windowsDllMutex };
 
-    CreateThread(&ClassType::MultithreadingFailureCallBack);
+    CreateThread(&ClassType::MultiThreadingFailureCallBack);
 }
 
-void CoreTools::WindowsMutexTesting::MultithreadingFailureCallBack()
+void CoreTools::WindowsMutexTesting::MultiThreadingFailureCallBack()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateFailureCallBackHolder);
 }
@@ -135,7 +135,7 @@ void CoreTools::WindowsMutexTesting::CreateFailureCallBackHolder()
 
 void CoreTools::WindowsMutexTesting::TryLockFailureTest()
 {
-    TryScopedMutex holder{ windowsMutex1 };
+    const TryScopedMutex holder{ windowsDllMutex };
 
     ASSERT_FALSE(holder.IsSuccess());
 }

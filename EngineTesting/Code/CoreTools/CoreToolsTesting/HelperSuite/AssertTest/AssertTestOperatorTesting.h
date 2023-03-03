@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class AssertTestOperatorTesting final : public CoreTools::UnitTest
+    class AssertTestOperatorTesting final : public UnitTest
     {
     public:
         using ClassType = AssertTestOperatorTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void AssertOperatorTest();

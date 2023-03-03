@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:09)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/27 15:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,21 +17,17 @@
 
 #include <gsl/narrow>
 
-using std::string;
-using std::wstring;
-
-CoreTools::MultiByteConversionWideChar::MultiByteConversionWideChar(const string& character, bool isUTF8)
+CoreTools::MultiByteConversionWideChar::MultiByteConversionWideChar(const std::string& character, bool isUtf8)
     : source{ character.begin(), character.end() },
       target{},
       lengthOfWideCharString{ 0 },
-      isUTF8{ isUTF8 }
+      isUtf8{ isUtf8 }
 {
     Conversion();
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 void CoreTools::MultiByteConversionWideChar::Conversion()
 {
     FillNullChar();
@@ -39,35 +35,30 @@ void CoreTools::MultiByteConversionWideChar::Conversion()
     FinishConversion();
 }
 
-// private
 void CoreTools::MultiByteConversionWideChar::FillNullChar()
 {
     source.emplace_back('\0');
 }
 
-// private
 void CoreTools::MultiByteConversionWideChar::CreateTarget()
 {
-    const auto length = GetConversionLength();
-
-    if (0 < length)
+    if (const auto length = GetConversionLength(); 0 < length)
     {
         target.resize(length);
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Multi Byte 转换为 Wide Char 失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("Multi Byte 转换为 Wide Char 失败！"s))
     }
 }
 
-// private
 int CoreTools::MultiByteConversionWideChar::GetConversionLength()
 {
     const auto destSize = boost::numeric_cast<int>(source.size());
     const auto targetSize = boost::numeric_cast<int>(target.size());
     const auto wideChar = target.empty() ? nullptr : target.data();
 
-    if (isUTF8)
+    if (isUtf8)
     {
         return System::UTF8ConversionWideChar(source.data(), destSize, wideChar, targetSize);
     }
@@ -77,14 +68,13 @@ int CoreTools::MultiByteConversionWideChar::GetConversionLength()
     }
 }
 
-// private
 void CoreTools::MultiByteConversionWideChar::FinishConversion()
 {
     lengthOfWideCharString = GetConversionLength();
 
     if (lengthOfWideCharString <= 0 || boost::numeric_cast<int>(target.size()) < lengthOfWideCharString)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Multi Byte 转换为 Wide Char 失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("Multi Byte 转换为 Wide Char 失败！"s))
     }
 }
 
@@ -104,14 +94,14 @@ bool CoreTools::MultiByteConversionWideChar::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-const wstring CoreTools::MultiByteConversionWideChar::GetWideCharRepresentation() const
+std::wstring CoreTools::MultiByteConversionWideChar::GetWideCharRepresentation() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
-    return wstring{ target.data(), target.data() + lengthOfWideCharString - 1 };
+    return std::wstring{ target.data(), target.data() + lengthOfWideCharString - 1 };
 
 #include STSTEM_WARNING_POP
 }

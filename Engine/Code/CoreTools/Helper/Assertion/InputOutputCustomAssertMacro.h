@@ -12,11 +12,11 @@
 
 #include "CoreTools/Contract/AssertionDetail.h"
 
-#if defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
+#if defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
 
     #define INPUT_OUTPUT_ASSERT_LEVEL 0
 
-#endif  // OPEN_IMPORTANT_EXCPTION_ASSERT
+#endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 
 #if !defined(INPUT_OUTPUT_ASSERT_LEVEL)
 
@@ -24,7 +24,7 @@
 
 #endif  // INPUT_OUTPUT_ASSERT_LEVEL
 
-constexpr auto gInputoOutputAssert = INPUT_OUTPUT_ASSERT_LEVEL;
+constexpr auto gInputOutputAssert = INPUT_OUTPUT_ASSERT_LEVEL;
 
 static_assert(INPUT_OUTPUT_ASSERT_LEVEL <= ASSERT_LEVEL, "Input Output assert level definition error.");
 

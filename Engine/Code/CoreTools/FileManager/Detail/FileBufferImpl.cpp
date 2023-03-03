@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:42)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -85,7 +85,7 @@ char* CoreTools::FileBufferImpl::GetBuffer(int index)
     return NON_CONST_MEMBER_CALL_CONST_MEMBER_USE_PARAMETER(char*, GetBuffer, index);
 }
 
-void CoreTools::FileBufferImpl::CopyBuffer(BufferTypeConstIter begin, BufferTypeConstIter end)
+void CoreTools::FileBufferImpl::CopyBuffer(const BufferTypeConstIter& begin, const BufferTypeConstIter& end)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

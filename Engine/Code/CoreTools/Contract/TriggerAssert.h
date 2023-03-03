@@ -1,20 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 18:33)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 13:35)
 
 #ifndef CORE_TOOLS_CONTRACT_TRIGGER_ASSERT_H
 #define CORE_TOOLS_CONTRACT_TRIGGER_ASSERT_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "ContractFwd.h"
 #include "System/SystemOutput/Fwd/SystemOutputFlagsFwd.h"
 #include "CoreTools/Helper/CustomAssertMacro.h"
+#include "CoreTools/Contract/ContractFwd.h"
 
 #include <boost/format/format_fwd.hpp>
 
@@ -24,8 +24,8 @@ namespace CoreTools
     {
     public:
         using ClassType = TriggerAssert;
-        using DialogBoxCommand = System::DialogBoxCommand;
         using Format = boost::format;
+        using DialogBoxCommand = System::DialogBoxCommand;
 
     public:
         template <typename... Types>
@@ -44,18 +44,18 @@ namespace CoreTools
         void Process(const FunctionDescribed& functionDescribed, const Format& format);
 
         NODISCARD std::string GenerateMessagePrefix(const FunctionDescribed& functionDescribed);
-        NODISCARD std::string GenerateMessagePrefix(const FunctionDescribed& functionDescribed, const std::string& triggerAssertCheckMessage);
+        NODISCARD static std::string GenerateMessagePrefix(const FunctionDescribed& functionDescribed, const std::string& triggerAssertCheckMessage);
 
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
 
-        void WriteToOutputDebug(const std::string& message) noexcept;
+        static void WriteToOutputDebug(const std::string& message) noexcept;
 
 #endif  // CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
 
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_MESSAGE_BOX
 
-        void JudgeUserSelection(const std::string& message);
-        void JudgeSelection(DialogBoxCommand selection, const std::string& message);
+        void JudgeUserSelection(const std::string& message) const;
+        void JudgeSelection(DialogBoxCommand selection, const std::string& message) const;
         NODISCARD static std::string GetMessageBoxTitle();
 
 #endif  // CORE_TOOLS_USE_ASSERT_WRITE_TO_MESSAGE_BOX

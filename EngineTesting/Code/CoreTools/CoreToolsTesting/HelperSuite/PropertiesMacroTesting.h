@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class PropertiesMacroTesting final : public CoreTools::UnitTest
+    class PropertiesMacroTesting final : public UnitTest
     {
     public:
         using ClassType = PropertiesMacroTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void PropertiesFriendTest();

@@ -10,7 +10,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CSVGenerateHead.h"
-#include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
@@ -230,7 +230,7 @@ CoreTools::CSVGenerateHead::MappingType CoreTools::CSVGenerateHead::GetMappingHe
             const auto mapping = csvHead.GetMapping(index);
             if (!mapping.empty())
             {
-                local.emplace(StringConversion::ToFirstLetterUpper(mapping) + TextParsing::g_Container.data());
+                local.emplace(StringUtility::ToFirstLetterUpper(mapping) + TextParsing::g_Container.data());
             }
         }
     }

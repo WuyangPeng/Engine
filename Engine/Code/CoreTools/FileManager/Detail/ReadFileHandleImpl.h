@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 23:32)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 09:51)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_READ_FILE_HANDLE_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_READ_FILE_HANDLE_IMPL_H
@@ -29,15 +29,15 @@ namespace CoreTools
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD int GetFileByteSize() const final;
+        NODISCARD int GetFileByteSize() const override;
 
-        void Read(size_t itemSize, void* data) final;
-        void Read(size_t itemSize, size_t itemsNumber, void* data) final;
+        void Read(size_t itemSize, void* data) override;
+        void Read(size_t itemSize, size_t itemsNumber, void* data) override;
 
     private:
         // 禁止调用以下成员函数
-        void WriteToFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED const void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4) final;
-        void AppendToFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED const void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4) final;
+        void WriteToFile(size_t itemSize, size_t itemsNumber, const void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4) override;
+        void AppendToFile(size_t itemSize, size_t itemsNumber, const void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4) override;
     };
 }
 

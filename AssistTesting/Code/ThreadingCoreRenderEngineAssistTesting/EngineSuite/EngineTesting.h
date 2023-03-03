@@ -10,7 +10,7 @@
 #ifndef THREADING_CORE_RENDER_ENGINE_ASSIST_TESTING_ENGINE_TESTING_H
 #define THREADING_CORE_RENDER_ENGINE_ASSIST_TESTING_ENGINE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Framework/Application/EngineTestingName.h"
 
 namespace ThreadingCoreRenderEngineAssist

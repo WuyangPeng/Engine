@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class HashCombineTesting final : public CoreTools::UnitTest
+    class HashCombineTesting final : public UnitTest
     {
     public:
         using ClassType = HashCombineTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void HashCombineTest();

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/13 20:05)
+///	引擎测试版本：0.9.0.3 (2023/02/23 10:18)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_RTTI_MACRO_FINAL_TESTING_H
 #define CORE_TOOLS_HELPER_SUITE_RTTI_MACRO_FINAL_TESTING_H
@@ -26,10 +26,10 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
-        void MainTest();
+        void DoRunUnitTest() override;
+        void MainTest() override;
 
-        void RttiTest();
+        void RttiTest() override;
 
         CORE_TOOLS_RTTI_FINAL_DECLARE;
     };

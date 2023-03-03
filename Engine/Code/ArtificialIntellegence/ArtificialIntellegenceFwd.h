@@ -4,8 +4,8 @@
 // 
 // ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 10:06)
 
-#ifndef ARTIFICIAL_INTELLEGENCE_FWD_H
-#define ARTIFICIAL_INTELLEGENCE_FWD_H
+#ifndef ARTIFICIAL_INTELLIGENCE_FWD_H
+#define ARTIFICIAL_INTELLIGENCE_FWD_H
 
 #include "Helper/HelperFwd.h"
 #include "Miscellaneous/MiscellaneousFwd.h"
@@ -15,4 +15,4 @@
 #include "GeneticAlgorithm/GeneticAlgorithmFwd.h"
 #include "NeuralNetwork/NeuralNetworkFwd.h"
 
-#endif // ARTIFICIAL_INTELLEGENCE_FWD_H
+#endif // ARTIFICIAL_INTELLIGENCE_FWD_H

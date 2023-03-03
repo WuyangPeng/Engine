@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:43)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,7 +24,7 @@ CoreTools::FileHandleImpl::FileHandleImpl(const String& fileName, FileHandleDesi
 {
     if (!System::IsFileHandleValid(file))
     {
-        THROW_EXCEPTION((Error::Format{ SYSTEM_TEXT("打开文件“%1%”失败！"s) } % fileName).str());
+        THROW_EXCEPTION((Error::Format{ SYSTEM_TEXT("打开文件“%1%”失败！"s) } % fileName).str())
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -60,15 +60,13 @@ uint64_t CoreTools::FileHandleImpl::GetFileLength() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    uint64_t size{};
-
-    if (System::GetFileLength(file, size))
+    if (uint64_t size{}; System::GetFileLength(file, size))
     {
         return size;
     }
     else
     {
-        THROW_WINDOWS_EXCEPTION;
+        THROW_WINDOWS_EXCEPTION
     }
 }
 
@@ -80,11 +78,11 @@ void CoreTools::FileHandleImpl::ReadFromFile(size_t itemSize, size_t itemsNumber
     CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "准备写入的数据无效！");
 
     System::WindowsDWord in{ 0 };
-    auto readNumber = boost::numeric_cast<System::WindowsDWord>(itemSize * itemsNumber);
 
-    if (!System::ReadSystemFile(file, data, readNumber, &in) || in != readNumber)
+    if (const auto readNumber = boost::numeric_cast<System::WindowsDWord>(itemSize * itemsNumber);
+        !System::ReadSystemFile(file, data, readNumber, &in) || in != readNumber)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("读入文件数据错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("读入文件数据错误！"s))
     }
 }
 
@@ -96,11 +94,11 @@ void CoreTools::FileHandleImpl::WriteToFile(size_t itemSize, size_t itemsNumber,
     CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "准备读取的数据无效！");
 
     System::WindowsDWord out{ 0 };
-    auto writeNumber = boost::numeric_cast<System::WindowsDWord>(itemSize * itemsNumber);
 
-    if (!System::WriteSystemFile(file, data, writeNumber, &out) || out != writeNumber)
+    if (const auto writeNumber = boost::numeric_cast<System::WindowsDWord>(itemSize * itemsNumber);
+        !System::WriteSystemFile(file, data, writeNumber, &out) || out != writeNumber)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("数据写入文件错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("数据写入文件错误！"s))
     }
 }
 
@@ -112,10 +110,10 @@ void CoreTools::FileHandleImpl::AppendToFile(size_t itemSize, size_t itemsNumber
     CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "准备读取的数据无效！");
 
     System::WindowsDWord out{ 0 };
-    auto writeNumber = boost::numeric_cast<System::WindowsDWord>(itemSize * itemsNumber);
 
-    if (!System::AppendSystemFile(file, data, writeNumber, &out) || out != writeNumber)
+    if (const auto writeNumber = boost::numeric_cast<System::WindowsDWord>(itemSize * itemsNumber);
+        !System::AppendSystemFile(file, data, writeNumber, &out) || out != writeNumber)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("数据写入文件错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("数据写入文件错误！"s))
     }
 }

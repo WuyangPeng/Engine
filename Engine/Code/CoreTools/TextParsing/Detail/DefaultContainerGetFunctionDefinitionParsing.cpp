@@ -11,6 +11,7 @@
 
 #include "DefaultContainerGetFunctionDefinitionParsing.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
@@ -29,7 +30,7 @@ System::String CoreTools::DefaultContainerGetFunctionDefinitionParsing::Generate
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto csvHead = GetCSVHead();
-    const auto lowerClassName = StringConversion::ToFirstLetterLower(csvHead.GetCSVClassName());
+    const auto lowerClassName = StringUtility::ToFirstLetterLower(csvHead.GetCSVClassName());
 
     auto content = GenerateGetFirstDefinition(lowerClassName);
 

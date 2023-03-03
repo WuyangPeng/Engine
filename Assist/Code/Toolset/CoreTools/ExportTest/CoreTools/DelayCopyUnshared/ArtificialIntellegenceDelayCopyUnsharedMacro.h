@@ -7,19 +7,19 @@
 ///	标准：std:c++20
 ///	引擎辅助版本：0.9.0.2 (2023/02/07 16:23)
 
-#ifndef EXPORT_TEST_ARTIFICIAL_INTELLEGENCE_DELAY_COPY_UNSHARED_MACRO_H
-#define EXPORT_TEST_ARTIFICIAL_INTELLEGENCE_DELAY_COPY_UNSHARED_MACRO_H
+#ifndef EXPORT_TEST_ARTIFICIAL_INTELLIGENCE_DELAY_COPY_UNSHARED_MACRO_H
+#define EXPORT_TEST_ARTIFICIAL_INTELLIGENCE_DELAY_COPY_UNSHARED_MACRO_H
 
 #include "ArtificialIntellegence/ArtificialIntellegenceDll.h"
 
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 
-ARTIFICIAL_INTELLEGENCE_DELAY_COPY_UNSHARED_EXPORT_IMPL(ArtificialIntellegenceDelayCopyUnsharedMacro, ArtificialIntellegenceDelayCopyUnsharedMacroImpl);
+ARTIFICIAL_INTELLIGENCE_DELAY_COPY_UNSHARED_EXPORT_IMPL(ArtificialIntellegenceDelayCopyUnsharedMacro, ArtificialIntellegenceDelayCopyUnsharedMacroImpl);
 
 namespace ArtificialIntellegence
 {
-    class ARTIFICIAL_INTELLEGENCE_DEFAULT_DECLARE ArtificialIntellegenceDelayCopyUnsharedMacro final
+    class ARTIFICIAL_INTELLIGENCE_DEFAULT_DECLARE ArtificialIntellegenceDelayCopyUnsharedMacro final
     {
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(ArtificialIntellegenceDelayCopyUnsharedMacro);
@@ -39,4 +39,4 @@ namespace ArtificialIntellegence
     };
 }
 
-#endif  // EXPORT_TEST_ARTIFICIAL_INTELLEGENCE_DELAY_COPY_UNSHARED_MACRO_H
+#endif  // EXPORT_TEST_ARTIFICIAL_INTELLIGENCE_DELAY_COPY_UNSHARED_MACRO_H

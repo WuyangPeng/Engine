@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 18:32)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 13:49)
 
 #ifndef CORE_TOOLS_CONTRACT_PERFORMANCE_UNSHARED_IMPL_H
 #define CORE_TOOLS_CONTRACT_PERFORMANCE_UNSHARED_IMPL_H
@@ -23,7 +23,7 @@ namespace CoreTools
     {
     public:
         using ClassType = PerformanceUnsharedImpl<T>;
-        using ClassShareType = CoreTools::PerformanceUnsharedClasses;
+        using ClassShareType = PerformanceUnsharedClasses;
         using ConstSharedPtr = std::shared_ptr<const T>;
 
     public:
@@ -33,10 +33,10 @@ namespace CoreTools
         explicit PerformanceUnsharedImpl(Type&& arg, Types&&... args);
 
         template <typename... Types>
-        explicit PerformanceUnsharedImpl(MAYBE_UNUSED ImplCreateUseFactory implCreateType, Types&&... args);
+        explicit PerformanceUnsharedImpl(ImplCreateUseFactory implCreateType, Types&&... args);
 
         template <typename... Types>
-        explicit PerformanceUnsharedImpl(MAYBE_UNUSED ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args);
+        explicit PerformanceUnsharedImpl(ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args);
 
         CLASS_INVARIANT_DECLARE;
 

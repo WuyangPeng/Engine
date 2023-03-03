@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:31)
+///	引擎测试版本：0.9.0.3 (2023/02/23 14:25)
 
 #include "CheckInvariantTesting.h"
 #include "CoreTools/Contract/CheckInvariantDetail.h"
@@ -39,19 +39,19 @@ void CoreTools::CheckInvariantTesting::DoRunUnitTest()
 
 void CoreTools::CheckInvariantTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(OnlyPreconditionsTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(OnlyPostconditionsTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OnlyPreConditionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OnlyPostConditionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FullyTest);
 }
 
-void CoreTools::CheckInvariantTesting::OnlyPreconditionsTest() noexcept
+void CoreTools::CheckInvariantTesting::OnlyPreConditionTest() noexcept
 {
-    TestingType checkInvariant{ *this, CORE_TOOLS_FUNCTION_DESCRIBED, CheckInvariantConditions::OnlyPreconditions };
+    TestingType checkInvariant{ *this, CORE_TOOLS_FUNCTION_DESCRIBED, CheckInvariantConditions::OnlyPreCondition };
 }
 
-void CoreTools::CheckInvariantTesting::OnlyPostconditionsTest() noexcept
+void CoreTools::CheckInvariantTesting::OnlyPostConditionTest() noexcept
 {
-    TestingType checkInvariant{ *this, CORE_TOOLS_FUNCTION_DESCRIBED, CheckInvariantConditions::OnlyPostconditions };
+    TestingType checkInvariant{ *this, CORE_TOOLS_FUNCTION_DESCRIBED, CheckInvariantConditions::OnlyPostCondition };
 }
 
 void CoreTools::CheckInvariantTesting::FullyTest() noexcept

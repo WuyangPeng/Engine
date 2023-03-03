@@ -10,8 +10,8 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ObjectManagerImpl.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
-#include "CoreTools/Base/UniqueIDManager.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
+#include "CoreTools/Base/UniqueIdManager.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"

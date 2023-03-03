@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:43)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,13 +25,11 @@ void CoreTools::ReadFileAsynchronous::AsynchronousExecution(const FileAsynchrono
 {
     const auto fileName = fileAsynchronousParameter.GetFileName();
 
-    auto fileBuffer = FileManagerHelper::LoadFromFile(fileName, fileAsynchronousParameter.IsBinaryFile());
+    const auto fileBuffer = FileManagerHelper::LoadFromFile(fileName, fileAsynchronousParameter.IsBinaryFile());
 
-    auto event = fileAsynchronousParameter.GetEvent();
+    const auto event = fileAsynchronousParameter.GetEvent();
 
-    auto eventSharedPtr = event.lock();
-
-    if (eventSharedPtr)
+    if (const auto eventSharedPtr = event.lock(); eventSharedPtr)
     {
         eventSharedPtr->EventFunction(fileAsynchronousParameter, fileBuffer);
     }

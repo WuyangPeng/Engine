@@ -1,23 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:42)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "OFStreamManagerImpl.h"
 #include "OFStreamSeekManager.h"
-#include "System/FileManager/CFile.h"
 #include "System/Helper/PragmaWarning.h"
 #include "System/Helper/PragmaWarning/Format.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::locale;
 using namespace std::literals;
 
 CoreTools::OFStreamManagerImpl::OFStreamManagerImpl(const String& fileName, bool addition)
@@ -29,13 +27,12 @@ CoreTools::OFStreamManagerImpl::OFStreamManagerImpl(const String& fileName, bool
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("文件名为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("文件名为空！"s))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 void CoreTools::OFStreamManagerImpl::OpenFile(bool addition)
 {
     OFileStream::openmode mode{ OFileStream::out };
@@ -53,6 +50,7 @@ void CoreTools::OFStreamManagerImpl::OpenFile(bool addition)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::OFStreamManagerImpl::IsValid() const noexcept
 {
     try
@@ -67,9 +65,10 @@ bool CoreTools::OFStreamManagerImpl::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-CoreTools::OFStreamManagerImpl::PosType CoreTools::OFStreamManagerImpl::GetOFStreamSize() const
+CoreTools::OFStreamManagerImpl::PosType CoreTools::OFStreamManagerImpl::GetStreamSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -79,7 +78,7 @@ CoreTools::OFStreamManagerImpl::PosType CoreTools::OFStreamManagerImpl::GetOFStr
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26492)
 
-    auto thisImpl = const_cast<OFStreamManagerImpl*>(this);
+    const auto thisImpl = const_cast<OFStreamManagerImpl*>(this);
 
 #include STSTEM_WARNING_POP
 
@@ -87,15 +86,12 @@ CoreTools::OFStreamManagerImpl::PosType CoreTools::OFStreamManagerImpl::GetOFStr
 
     thisImpl->SeekEnd();
 
-    const auto endPosition = thisImpl->oStream.tellp();
-
-    if (endPosition != errorPosition)
+    if (const auto endPosition = thisImpl->oStream.tellp(); endPosition != errorPosition)
         return endPosition;
     else
         return 0;
 }
 
-// private
 void CoreTools::OFStreamManagerImpl::SeekEnd()
 {
     oStream.seekp(0, OFileStream::end);
@@ -116,7 +112,7 @@ void CoreTools::OFStreamManagerImpl::SetSimplifiedChinese()
 
 #if !defined(TCRE_USE_GCC)
 
-    locale chs{ "chs" };
+    const std::locale chs{ "chs" };
 
     oStream.imbue(chs);
 

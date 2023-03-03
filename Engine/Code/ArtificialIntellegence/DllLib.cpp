@@ -26,11 +26,11 @@
 #include "Physics/PhysicsLib.h"
 #include "Imagics/ImagicsLib.h"
 
-#ifndef BUILDING_ARTIFICIAL_INTELLEGENCE_STATIC
+#ifndef BUILDING_ARTIFICIAL_INTELLIGENCE_STATIC
 
 	#include "DllLib.h"
 
-#else // BUILDING_ARTIFICIAL_INTELLEGENCE_STATIC
+#else // BUILDING_ARTIFICIAL_INTELLIGENCE_STATIC
 
 	namespace ArtificialIntellegence
 	{
@@ -40,4 +40,4 @@
 		}
 	}
 
-#endif // !BUILDING_ARTIFICIAL_INTELLEGENCE_STATIC
+#endif // !BUILDING_ARTIFICIAL_INTELLIGENCE_STATIC

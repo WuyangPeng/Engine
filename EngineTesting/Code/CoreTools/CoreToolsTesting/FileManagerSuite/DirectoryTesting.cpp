@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 12:00)
+///	引擎测试版本：0.9.0.3 (2023/03/03 09:39)
 
 #include "DirectoryTesting.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
@@ -18,8 +18,6 @@
 #include <array>
 #include <string>
 
-using std::array;
-using std::string;
 using namespace std::literals;
 
 CoreTools::DirectoryTesting::DirectoryTesting(const OStreamShared& stream)
@@ -42,15 +40,14 @@ void CoreTools::DirectoryTesting::MainTest()
 
 void CoreTools::DirectoryTesting::DirectoryTest()
 {
-    array<System::TChar, System::gMaxPath> systemCurrentDirectory{};
+    std::array<System::TChar, System::gMaxPath> systemCurrentDirectory{};
     auto result = System::GetSystemCurrentDirectory(System::gMaxPath, systemCurrentDirectory.data());
     ASSERT_LESS(0u, result);
     System::String oldDirectoryName{ systemCurrentDirectory.data() };
     boost::algorithm::replace_all(oldDirectoryName, SYSTEM_TEXT("\\"), SYSTEM_TEXT("/"));
 
-    auto directoryName = oldDirectoryName + SYSTEM_TEXT("/Resource"s);
-
     {
+        const auto directoryName = oldDirectoryName + SYSTEM_TEXT("/Resource"s);
         Directory directory{ directoryName };
 
         systemCurrentDirectory.fill(0);

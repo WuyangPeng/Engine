@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:33)
+///	引擎测试版本：0.9.0.3 (2023/03/01 15:44)
 
 #include "ConsoleTesting.h"
 #include "System/Console/Flags/ConsoleHandleFlags.h"
@@ -37,9 +37,9 @@ void CoreTools::ConsoleTesting::MainTest()
 
 void CoreTools::ConsoleTesting::InputHandleTest()
 {
-    ConsoleInstance<StandardHandle::Input> console = ConsoleInstance<StandardHandle::Input>::Create();
+    const auto console = ConsoleInstance<StandardHandle::Input>::Create();
 
-    auto handle = console.GetHandle();
+    const auto handle = console.GetHandle();
 
     ASSERT_UNEQUAL_NULL_PTR(handle);
     ASSERT_UNEQUAL(handle, System::invalidHandleValue);
@@ -47,9 +47,9 @@ void CoreTools::ConsoleTesting::InputHandleTest()
 
 void CoreTools::ConsoleTesting::OutputHandleTest()
 {
-    ConsoleInstance<StandardHandle::Output> console = ConsoleInstance<StandardHandle::Output>::Create();
+    const auto console = ConsoleInstance<StandardHandle::Output>::Create();
 
-    auto handle = console.GetHandle();
+    const auto handle = console.GetHandle();
 
     ASSERT_UNEQUAL_NULL_PTR(handle);
     ASSERT_UNEQUAL(handle, System::invalidHandleValue);
@@ -57,9 +57,9 @@ void CoreTools::ConsoleTesting::OutputHandleTest()
 
 void CoreTools::ConsoleTesting::ErrorHandleTest()
 {
-    ConsoleInstance<StandardHandle::Error> console = ConsoleInstance<StandardHandle::Error>::Create();
+    const auto console = ConsoleInstance<StandardHandle::Error>::Create();
 
-    auto handle = console.GetHandle();
+    const auto handle = console.GetHandle();
 
     ASSERT_UNEQUAL_NULL_PTR(handle);
     ASSERT_UNEQUAL(handle, System::invalidHandleValue);

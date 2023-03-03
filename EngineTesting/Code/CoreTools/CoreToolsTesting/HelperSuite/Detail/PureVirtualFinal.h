@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class PureVirtualFinal : public PureVirtual
+    class PureVirtualFinal final : public PureVirtual
     {
     public:
         using ClassType = PureVirtualFinal;

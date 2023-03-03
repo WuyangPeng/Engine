@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class MemberFunctionNoexceptMacroTesting final : public CoreTools::UnitTest
+    class MemberFunctionNoexceptMacroTesting final : public UnitTest
     {
     public:
         using ClassType = MemberFunctionNoexceptMacroTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void ConstMemberFunctionTest();

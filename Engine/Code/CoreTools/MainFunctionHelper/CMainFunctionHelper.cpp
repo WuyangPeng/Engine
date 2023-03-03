@@ -11,7 +11,7 @@
 
 #include "CMainFunctionHelper.h"
 #include "System/Time/DeltaTime.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/Command/CommandHandle.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -147,7 +147,7 @@ void CoreTools::CMainFunctionHelper::InitSingleton()
 // private
 void CoreTools::CMainFunctionHelper::InitUniqueIDManager()
 {
-    UniqueIDManager::Create(UniqueIDSelect::Max);
+    UniqueIdManager::Create(UniqueIdSelect::Max);
 
     schedule = ScheduleType::UniqueIDManager;
 }
@@ -214,7 +214,7 @@ void CoreTools::CMainFunctionHelper::DestroyUniqueIDManager() noexcept
 {
     if (ScheduleType::UniqueIDManager <= schedule)
     {
-        UniqueIDManager::Destroy();
+        UniqueIdManager::Destroy();
     }
 }
 

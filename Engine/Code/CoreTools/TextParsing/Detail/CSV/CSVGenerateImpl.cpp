@@ -14,6 +14,7 @@
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Exception/Error.h"
 #include "CoreTools/FileManager/FileManagerHelper.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
@@ -78,7 +79,7 @@ System::String CoreTools::CSVGenerateImpl::GenerateHeaderGuard() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto headerGuard = StringConversion::ToUpperMacro(csvHead.GetNameSpace() + GetCSVClassName() + GetFileSuffix());
+    const auto headerGuard = StringUtility::ToUpperMacro(csvHead.GetNameSpace() + GetCSVClassName() + GetFileSuffix());
 
     String content{ TextParsing::g_Ifndef };
 
@@ -111,7 +112,7 @@ System::String CoreTools::CSVGenerateImpl::GenerateHeaderGuardEndif() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto headerGuard = StringConversion::ToUpperMacro(csvHead.GetNameSpace() + GetCSVClassName() + GetFileSuffix());
+    const auto headerGuard = StringUtility::ToUpperMacro(csvHead.GetNameSpace() + GetCSVClassName() + GetFileSuffix());
 
     String content{ TextParsing::g_Endif };
 

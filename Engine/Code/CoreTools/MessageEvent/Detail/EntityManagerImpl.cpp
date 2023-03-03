@@ -10,8 +10,8 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "EntityManagerImpl.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
-#include "CoreTools/Base/UniqueIDManager.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
+#include "CoreTools/Base/UniqueIdManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/MessageEvent/BaseEntity.h"

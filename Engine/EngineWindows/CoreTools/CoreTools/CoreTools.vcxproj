@@ -284,8 +284,8 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Base\Base.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\BaseFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\Detail\LoadingLibraryImpl.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIDManagerImpl.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Base\Flags\UniqueIDSelectFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIdManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Flags\UniqueIdSelect.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\LoadingLibrary.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\Singleton.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\SingletonDetail.h" />
@@ -293,7 +293,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Base\SpanIteratorDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\StaticSingleton.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\StaticSingletonDetail.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIDManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIdManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIDManagerDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Base\Version.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CaseInsensitiveString.h" />
@@ -536,7 +536,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogMessagePostfix.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogMessagePrefix.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\AnimationCustomAssertMacro.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\ArtificialIntellegenceCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\ArtificialIntelligenceCustomAssertMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\AssistToolsCustomAssertMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\CoreToolsCustomAssertMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\DatabaseCustomAssertMacro.h" />
@@ -555,7 +555,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\AssertMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariantMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\AnimationClassInvariantMacro.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\ArtificialIntellegenceClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\ArtificialIntelligenceClassInvariantMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\AssistToolsClassInvariantMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\CoreToolsClassInvariantMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\DatabaseClassInvariantMacro.h" />
@@ -1119,7 +1119,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\Base\Detail\LoadingLibraryImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIDManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIdManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Base\LoadingLibrary.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Base\UniqueIDManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Base\Version.cpp" />

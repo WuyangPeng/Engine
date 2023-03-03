@@ -7,14 +7,14 @@
 ///	标准：std:c++20
 ///	引擎辅助版本：0.9.0.2 (2023/02/07 16:46)
 
-#ifndef EXPORT_TEST_ARTIFICIAL_INTELLEGENCE_TEST_EXPORT_MACRO_IMPL_H
-#define EXPORT_TEST_ARTIFICIAL_INTELLEGENCE_TEST_EXPORT_MACRO_IMPL_H
+#ifndef EXPORT_TEST_ARTIFICIAL_INTELLIGENCE_TEST_EXPORT_MACRO_IMPL_H
+#define EXPORT_TEST_ARTIFICIAL_INTELLIGENCE_TEST_EXPORT_MACRO_IMPL_H
 
 #include "ArtificialIntellegence/ArtificialIntellegenceDll.h"
 
 namespace ArtificialIntellegence
 {
-    class ARTIFICIAL_INTELLEGENCE_HIDDEN_DECLARE ArtificialIntellegenceTestExportMacroImpl final
+    class ARTIFICIAL_INTELLIGENCE_HIDDEN_DECLARE ArtificialIntellegenceTestExportMacroImpl final
     {
     public:
         using ClassType = ArtificialIntellegenceTestExportMacroImpl;
@@ -32,4 +32,4 @@ namespace ArtificialIntellegence
     };
 }
 
-#endif  // EXPORT_TEST_ARTIFICIAL_INTELLEGENCE_TEST_EXPORT_MACRO_IMPL_H
+#endif  // EXPORT_TEST_ARTIFICIAL_INTELLIGENCE_TEST_EXPORT_MACRO_IMPL_H

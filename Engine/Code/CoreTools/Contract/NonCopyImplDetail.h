@@ -11,6 +11,7 @@
 #define CORE_TOOLS_CONTRACT_NON_COPY_IMPL_DETAIL_H
 
 #include "NonCopyImpl.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
@@ -24,17 +25,21 @@ CoreTools::NonCopyImpl<T>::NonCopyImpl(Type&& arg, Types&&... args)
 
 template <typename T>
 template <typename... Types>
-CoreTools::NonCopyImpl<T>::NonCopyImpl(MAYBE_UNUSED ImplCreateUseFactory implCreateType, Types&&... args)
+CoreTools::NonCopyImpl<T>::NonCopyImpl(ImplCreateUseFactory implCreateType, Types&&... args)
     : impl{ T::FactoryType::Create(std::forward<Types>(args)...) }
 {
+    System::UnusedFunction(implCreateType);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename T>
 template <typename... Types>
-CoreTools::NonCopyImpl<T>::NonCopyImpl(MAYBE_UNUSED ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args)
+CoreTools::NonCopyImpl<T>::NonCopyImpl(ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args)
     : impl{ std::make_shared<T>() }
 {
+    System::UnusedFunction(implCreateDefaultType);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 

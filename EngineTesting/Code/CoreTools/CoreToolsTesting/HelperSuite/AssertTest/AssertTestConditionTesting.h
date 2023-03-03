@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class AssertTestConditionTesting final : public CoreTools::UnitTest
+    class AssertTestConditionTesting final : public UnitTest
     {
     public:
         using ClassType = AssertTestConditionTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void AssertConditionTest();

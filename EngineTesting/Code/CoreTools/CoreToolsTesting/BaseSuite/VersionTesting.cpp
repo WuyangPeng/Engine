@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:44)
+///	引擎测试版本：0.9.0.3 (2023/02/23 16:44)
 
 #include "ThreadingCoreRenderEngineTesting/Version.h"
 #include "VersionTesting.h"
@@ -13,8 +13,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using std::string;
 
 CoreTools::VersionTesting::VersionTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -40,7 +38,7 @@ void CoreTools::VersionTesting::MainTest()
 void CoreTools::VersionTesting::GetTCREFullVersionTest() noexcept
 {
     static_assert(Version::GetTCREFullVersion() == gTCREVersion);
-    static_assert(Version::GetTCREFullVersion() >= g_TCRETestingVersion);
+    static_assert(Version::GetTCREFullVersion() >= gTCRETestingVersion);
 }
 
 void CoreTools::VersionTesting::GetVersionTest()
@@ -54,11 +52,11 @@ void CoreTools::VersionTesting::GetVersionTest()
 
 void CoreTools::VersionTesting::GetTestingVersionTest()
 {
-    ASSERT_LESS_EQUAL(0, Version::GetMajor(g_TCRETestingVersion));
-    ASSERT_LESS_EQUAL(0, Version::GetMinor(g_TCRETestingVersion));
-    ASSERT_LESS_EQUAL(0, Version::GetBuild(g_TCRETestingVersion));
-    ASSERT_LESS_EQUAL(0, Version::GetRevision(g_TCRETestingVersion));
-    ASSERT_LESS_EQUAL(7u, Version::GetVersion(g_TCRETestingVersion).size());
+    ASSERT_LESS_EQUAL(0, Version::GetMajor(gTCRETestingVersion));
+    ASSERT_LESS_EQUAL(0, Version::GetMinor(gTCRETestingVersion));
+    ASSERT_LESS_EQUAL(0, Version::GetBuild(gTCRETestingVersion));
+    ASSERT_LESS_EQUAL(0, Version::GetRevision(gTCRETestingVersion));
+    ASSERT_LESS_EQUAL(7u, Version::GetVersion(gTCRETestingVersion).size());
 }
 
 void CoreTools::VersionTesting::IsAtLeastTest()

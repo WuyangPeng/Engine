@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 18:33)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 13:49)
 
 #ifndef CORE_TOOLS_CONTRACT_SHARED_IMPL_H
 #define CORE_TOOLS_CONTRACT_SHARED_IMPL_H
@@ -24,7 +24,7 @@ namespace CoreTools
     {
     public:
         using ClassType = SharedImpl<T>;
-        using ClassShareType = CoreTools::ShareClasses;
+        using ClassShareType = ShareClasses;
         using SharedPtr = std::shared_ptr<T>;
         using ConstSharedPtr = std::shared_ptr<const T>;
 
@@ -35,10 +35,10 @@ namespace CoreTools
         explicit SharedImpl(Type&& arg, Types&&... args);
 
         template <typename... Types>
-        explicit SharedImpl(MAYBE_UNUSED ImplCreateUseFactory ImplCreateType, Types&&... args);
+        explicit SharedImpl(ImplCreateUseFactory implCreateType, Types&&... args);
 
         template <typename... Types>
-        explicit SharedImpl(MAYBE_UNUSED ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args);
+        explicit SharedImpl(ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args);
 
         CLASS_INVARIANT_DECLARE;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/18 18:15)
+///	引擎测试版本：0.9.0.3 (2023/02/23 8:52)
 
 #include "HashCombineTesting.h"
 #include "Detail/TestHash.h"
@@ -42,11 +42,11 @@ void CoreTools::HashCombineTesting::HashCombineTest()
     const TestHashKey testHashKey{ "TestHashKey1" };
     container.emplace(testHashKey, 1);
 
-    ASSERT_EQUAL(container.size(), 1);
+    ASSERT_EQUAL(container.size(), 1u);
 
     container.emplace(TestHashKey{ "TestHashKey2" }, 2);
 
-    ASSERT_EQUAL(container.size(), 2);
+    ASSERT_EQUAL(container.size(), 2u);
 
     auto iter = container.find(testHashKey);
 
@@ -56,7 +56,7 @@ void CoreTools::HashCombineTesting::HashCombineTest()
 
     container.erase(testHashKey);
 
-    ASSERT_EQUAL(container.size(), 1);
+    ASSERT_EQUAL(container.size(), 1u);
 
     iter = container.find(testHashKey);
 

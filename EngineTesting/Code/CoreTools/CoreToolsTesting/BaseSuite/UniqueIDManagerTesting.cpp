@@ -1,88 +1,88 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:44)
+///	引擎测试版本：0.9.0.3 (2023/02/23 16:43)
 
-#include "UniqueIDManagerTesting.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
-#include "CoreTools/Base/UniqueIDManagerDetail.h"
+#include "UniqueIdManagerTesting.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
+#include "CoreTools/Base/UniqueIdManagerDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-CoreTools::UniqueIDManagerTesting::UniqueIDManagerTesting(const OStreamShared& stream)
+CoreTools::UniqueIdManagerTesting::UniqueIdManagerTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, UniqueIDManagerTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, UniqueIdManagerTesting)
 
-void CoreTools::UniqueIDManagerTesting::DoRunUnitTest()
+void CoreTools::UniqueIdManagerTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void CoreTools::UniqueIDManagerTesting::MainTest()
+void CoreTools::UniqueIdManagerTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(UniqueIDManagerTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(SetUniqueIDTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(UniqueIdManagerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetUniqueIdTest);
 }
 
-void CoreTools::UniqueIDManagerTesting::UniqueIDManagerTest()
+void CoreTools::UniqueIdManagerTesting::UniqueIdManagerTest()
 {
-    const auto defaultUniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextDefaultUniqueID();
-    ASSERT_LESS(0, defaultUniqueID);
+    const auto defaultUniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextDefaultUniqueId();
+    ASSERT_LESS(0, defaultUniqueId);
 
-    ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextDefaultUniqueID(), defaultUniqueID + 1);
+    ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextDefaultUniqueId(), defaultUniqueId + 1);
 
-    auto uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(0);
-    ASSERT_LESS(0, uniqueID);
+    auto uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(0);
+    ASSERT_LESS(0, uniqueId);
 
-    ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(0), uniqueID + 1);
+    ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(0), uniqueId + 1);
 
-    uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(1);
-    ASSERT_LESS(0, uniqueID);
+    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(1);
+    ASSERT_LESS(0, uniqueId);
 
-    ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(1), uniqueID + 1);
+    ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(1), uniqueId + 1);
 
-    uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Entity);
-    ASSERT_LESS(0, uniqueID);
+    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Entity);
+    ASSERT_LESS(0, uniqueId);
 
-    ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Entity), uniqueID + 1);
+    ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Entity), uniqueId + 1);
 }
 
-void CoreTools::UniqueIDManagerTesting::SetUniqueIDTest()
+void CoreTools::UniqueIdManagerTesting::SetUniqueIdTest()
 {
-    auto uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(0);
-    ASSERT_LESS(0, uniqueID);
+    auto uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(0);
+    ASSERT_LESS(0, uniqueId);
 
-    auto initUniqueID = uniqueID + 100;
-    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueID(0, initUniqueID);
+    auto initUniqueId = uniqueId + 100;
+    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(0, initUniqueId);
 
-    uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(0);
-    ASSERT_EQUAL(uniqueID, initUniqueID + 1);
+    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(0);
+    ASSERT_EQUAL(uniqueId, initUniqueId + 1);
 
-    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueID(0, 99);
+    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(0, 99);
 
-    uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(0);
-    ASSERT_EQUAL(uniqueID, initUniqueID + 2);
+    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(0);
+    ASSERT_EQUAL(uniqueId, initUniqueId + 2);
 
-    uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Entity);
-    ASSERT_LESS(0, uniqueID);
+    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Entity);
+    ASSERT_LESS(0, uniqueId);
 
-    initUniqueID = uniqueID + 110;
-    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueID(UniqueIDSelect::Entity, initUniqueID);
+    initUniqueId = uniqueId + 110;
+    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(UniqueIdSelect::Entity, initUniqueId);
 
-    uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Entity);
-    ASSERT_EQUAL(uniqueID, initUniqueID + 1);
+    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Entity);
+    ASSERT_EQUAL(uniqueId, initUniqueId + 1);
 
-    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueID(UniqueIDSelect::Entity, 105);
+    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(UniqueIdSelect::Entity, 105);
 
-    uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Entity);
-    ASSERT_EQUAL(uniqueID, initUniqueID + 2);
+    uniqueId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Entity);
+    ASSERT_EQUAL(uniqueId, initUniqueId + 2);
 }

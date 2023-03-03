@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:59)
+///	引擎测试版本：0.9.0.3 (2023/03/03 09:52)
 
 #include "FileAsynchronousTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -23,9 +23,6 @@
 #include <string>
 #include <vector>
 
-using std::make_shared;
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 CoreTools::FileAsynchronousTesting::FileAsynchronousTesting(const OStreamShared& stream)
@@ -38,19 +35,19 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, FileAsynchronousTesting)
 
 void CoreTools::FileAsynchronousTesting::DoRunUnitTest()
 {
+    FileAsynchronous::Create();
+
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+
+    FileAsynchronous::Destroy();
 }
 
 void CoreTools::FileAsynchronousTesting::MainTest()
 {
-    FileAsynchronous::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(ClearFile);
     ASSERT_NOT_THROW_EXCEPTION_0(RegisteredWriteFileTest);
     ASSERT_NOT_THROW_EXCEPTION_0(RegisteredWriteFileByEventTest);
     ASSERT_NOT_THROW_EXCEPTION_0(RegisteredReadFileTest);
-
-    FileAsynchronous::Destroy();
 }
 
 void CoreTools::FileAsynchronousTesting::ClearFile()
@@ -116,7 +113,7 @@ System::String CoreTools::FileAsynchronousTesting::GetFileName()
     return SYSTEM_TEXT("Resource/FileAsynchronousTesting/FileAsynchronousText.txt"s);
 }
 
-string CoreTools::FileAsynchronousTesting::GetContent()
+std::string CoreTools::FileAsynchronousTesting::GetContent()
 {
     return "FileAsynchronous Testing Text"s;
 }
@@ -145,27 +142,27 @@ void CoreTools::FileAsynchronousTesting::ReadEventFunction(const FileAsynchronou
     ASSERT_EQUAL_FAILURE_THROW(fileBuffer.GetSize(), (GetContent().size() + sizeof(size_t)) * 2, "文件读取内容错误。");
 
     const auto content = GetContent();
-    ReadBufferIO readBuffer{ make_shared<FileBuffer>(fileBuffer) };
+    ReadBufferIO readBuffer{ std::make_shared<FileBuffer>(fileBuffer) };
 
     size_t size{ 0 };
     readBuffer.Read(sizeof(decltype(size)), &size);
 
     ASSERT_EQUAL(size, content.size());
 
-    vector<char> buffer0(size);
+    std::vector<char> buffer0(size);
     readBuffer.Read(sizeof(char), size, buffer0.data());
 
-    string bufferContent0{ buffer0.begin(), buffer0.end() };
+    const std::string bufferContent0{ buffer0.begin(), buffer0.end() };
 
     ASSERT_EQUAL(bufferContent0, content);
 
     readBuffer.Read(sizeof(decltype(size)), &size);
     ASSERT_EQUAL(size, content.size());
 
-    vector<char> buffer1(size);
+    std::vector<char> buffer1(size);
     readBuffer.Read(sizeof(char), size, buffer1.data());
 
-    string bufferContent1{ buffer1.begin(), buffer1.end() };
+    const std::string bufferContent1{ buffer1.begin(), buffer1.end() };
 
     ASSERT_EQUAL(bufferContent1, content);
 }
@@ -185,20 +182,20 @@ void CoreTools::FileAsynchronousTesting::WriteEventFunction(const FileAsynchrono
 
     ASSERT_EQUAL(size, content.size());
 
-    vector<char> buffer0(size);
+    std::vector<char> buffer0(size);
     readFileManager.Read(sizeof(char), size, buffer0.data());
 
-    string bufferContent0{ buffer0.begin(), buffer0.end() };
+    const std::string bufferContent0{ buffer0.begin(), buffer0.end() };
 
     ASSERT_EQUAL(bufferContent0, content);
 
     readFileManager.Read(sizeof(decltype(size)), &size);
     ASSERT_EQUAL(size, content.size());
 
-    vector<char> buffer1(size);
+    std::vector<char> buffer1(size);
     readFileManager.Read(sizeof(char), size, buffer1.data());
 
-    string bufferContent1{ buffer1.begin(), buffer1.end() };
+    const std::string bufferContent1{ buffer1.begin(), buffer1.end() };
 
     ASSERT_EQUAL(bufferContent1, content);
 }

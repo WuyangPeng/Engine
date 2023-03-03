@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:58)
+///	引擎测试版本：0.9.0.3 (2023/03/02 11:31)
 
 #include "EndianTesting.h"
 #include "CoreTools/FileManager/Endian.h"
@@ -15,9 +15,6 @@
 
 #include <array>
 #include <vector>
-
-using std::array;
-using std::vector;
 
 CoreTools::EndianTesting::EndianTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -58,7 +55,7 @@ void CoreTools::EndianTesting::ByteOrderTest()
 void CoreTools::EndianTesting::Swap2ByteOrderTest()
 {
     constexpr auto arraySize = 5;
-    array<uint16_t, arraySize> value{ 0x1234, 0x5678, 0x9012, 0x3456, 0x7890 };
+    std::array<uint16_t, arraySize> value{ 0x1234, 0x5678, 0x9012, 0x3456, 0x7890 };
 
     Endian::Swap2ByteOrder(value.data());
     ASSERT_EQUAL(value.at(0), uint16_t{ 0x3412 });
@@ -80,7 +77,7 @@ void CoreTools::EndianTesting::Swap2ByteOrderTest()
     ASSERT_EQUAL(value.at(3), uint16_t{ 0x3456 });
     ASSERT_EQUAL(value.at(4), uint16_t{ 0x7890 });
 
-    vector<uint16_t> target(arraySize);
+    std::vector<uint16_t> target(arraySize);
     Endian::Swap2ByteOrderToTarget(arraySize, value.data(), target.data());
     ASSERT_EQUAL(target.at(0), uint16_t{ 0x3412 });
     ASSERT_EQUAL(target.at(1), uint16_t{ 0x7856 });
@@ -97,7 +94,7 @@ void CoreTools::EndianTesting::Swap2ByteOrderTest()
 void CoreTools::EndianTesting::Swap4ByteOrderTest()
 {
     constexpr auto arraySize = 4;
-    array<uint32_t, arraySize> value{ 0x12345678, 0x56789012, 0x90123456, 0x34567890 };
+    std::array<uint32_t, arraySize> value{ 0x12345678, 0x56789012, 0x90123456, 0x34567890 };
 
     Endian::Swap4ByteOrder(value.data());
     ASSERT_EQUAL(value.at(0), 0x78563412u);
@@ -117,7 +114,7 @@ void CoreTools::EndianTesting::Swap4ByteOrderTest()
     ASSERT_EQUAL(value.at(2), 0x90123456u);
     ASSERT_EQUAL(value.at(3), 0x34567890u);
 
-    vector<uint32_t> target(arraySize);
+    std::vector<uint32_t> target(arraySize);
     Endian::Swap4ByteOrderToTarget(arraySize, value.data(), target.data());
     ASSERT_EQUAL(target.at(0), 0x78563412u);
     ASSERT_EQUAL(target.at(1), 0x12907856u);
@@ -132,7 +129,7 @@ void CoreTools::EndianTesting::Swap4ByteOrderTest()
 void CoreTools::EndianTesting::Swap8ByteOrderTest()
 {
     constexpr auto arraySize = 3;
-    array<uint64_t, arraySize> value{ 0x1234567890123456, 0x5678901234567890, 0x9012345678901234 };
+    std::array<uint64_t, arraySize> value{ 0x1234567890123456, 0x5678901234567890, 0x9012345678901234 };
 
     Endian::Swap8ByteOrder(value.data());
     ASSERT_EQUAL(value.at(0), 0x5634129078563412u);
@@ -150,7 +147,7 @@ void CoreTools::EndianTesting::Swap8ByteOrderTest()
     ASSERT_EQUAL(value.at(1), 0x5678901234567890u);
     ASSERT_EQUAL(value.at(2), 0x9012345678901234u);
 
-    vector<uint64_t> target(arraySize);
+    std::vector<uint64_t> target(arraySize);
     Endian::Swap8ByteOrderToTarget(arraySize, value.data(), target.data());
     ASSERT_EQUAL(target.at(0), 0x5634129078563412u);
     ASSERT_EQUAL(target.at(1), 0x9078563412907856u);

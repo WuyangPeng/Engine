@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class NameMacroTesting final : public CoreTools::UnitTest
+    class NameMacroTesting final : public UnitTest
     {
     public:
         using ClassType = NameMacroTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void BaseTest();

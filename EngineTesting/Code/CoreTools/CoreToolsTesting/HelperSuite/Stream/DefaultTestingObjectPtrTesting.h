@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class DefaultTestingObjectPtrTesting final : public CoreTools::UnitTest
+    class DefaultTestingObjectPtrTesting final : public UnitTest
     {
     public:
         using ClassType = DefaultTestingObjectPtrTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void SaveStreamTest();

@@ -12,6 +12,7 @@
 #include "JsonGenerateImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Exception/Error.h"
 #include "CoreTools/FileManager/FileManagerHelper.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
@@ -103,7 +104,7 @@ System::String CoreTools::JsonGenerateImpl::GenerateHeaderGuard() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto headerGuard = StringConversion::ToUpperMacro(jsonHead.GetNameSpace() + GetJsonClassName() + GetFileSuffix());
+    const auto headerGuard = StringUtility::ToUpperMacro(jsonHead.GetNameSpace() + GetJsonClassName() + GetFileSuffix());
 
     auto content = SYSTEM_TEXT("#ifndef "s);
     content += headerGuard;
@@ -162,7 +163,7 @@ System::String CoreTools::JsonGenerateImpl::GenerateHeaderGuardEndif() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto headerGuard = StringConversion::ToUpperMacro(jsonHead.GetNameSpace() + GetJsonClassName() + GetFileSuffix());
+    const auto headerGuard = StringUtility::ToUpperMacro(jsonHead.GetNameSpace() + GetJsonClassName() + GetFileSuffix());
 
     auto content = SYSTEM_TEXT("#endif  // "s);
     content += headerGuard;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 14:54)
 
 #ifndef CORE_TOOLS_BASE_STATIC_SINGLETON_H
 #define CORE_TOOLS_BASE_STATIC_SINGLETON_H
@@ -17,15 +17,15 @@
 
 namespace CoreTools
 {
-    template <typename T, MutexCreate mutexCreate = MutexCreate::UseOriginalStdRecursive>
+    template <typename T, MutexCreate MutexCreate = MutexCreate::UseOriginalStdRecursive>
     class StaticSingleton
     {
     public:
-        using ClassType = StaticSingleton<T, mutexCreate>;
+        using ClassType = StaticSingleton<T, MutexCreate>;
         using ValueType = T;
         using PointType = ValueType*;
         using ReferenceType = ValueType&;
-        using MutexType = typename MutexTraits<mutexCreate>::MutexType;
+        using MutexType = typename MutexTraits<MutexCreate>::MutexType;
 
     public:
         NODISCARD static ReferenceType GetSingleton() noexcept;
@@ -37,7 +37,7 @@ namespace CoreTools
             Init,
         };
 
-        explicit StaticSingleton(MAYBE_UNUSED SingletonCreate singletonCreate) noexcept;
+        explicit StaticSingleton(SingletonCreate singletonCreate) noexcept;
         ~StaticSingleton() noexcept = default;
         NODISCARD static MutexType& GetMutex();
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 15:58)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,8 +13,6 @@
 #include "Detail/LoadingLibraryImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::string;
 
 CoreTools::LoadingLibrary::LoadingLibrary(const String& fileName, LoadLibraryType flags)
     : impl{ fileName, flags }
@@ -25,4 +23,4 @@ CoreTools::LoadingLibrary::LoadingLibrary(const String& fileName, LoadLibraryTyp
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, LoadingLibrary)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, LoadingLibrary, GetLoadedModule, CoreTools::LoadingLibrary::DynamicLinkModule)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, LoadingLibrary, GetProcessAddress, string, CoreTools::LoadingLibrary::DynamicLinkProcess)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, LoadingLibrary, GetProcessAddress, std::string, CoreTools::LoadingLibrary::DynamicLinkProcess)

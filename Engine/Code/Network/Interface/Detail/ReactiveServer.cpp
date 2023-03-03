@@ -12,7 +12,7 @@
 #include "ReactiveServer.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Network/SocketPrototypes.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -102,7 +102,7 @@ bool Network::ReactiveServer::HandleConnections(SocketManager& socketManager)
         {
             masterHandleSet.SetBit(sockStream->GetACEHandle());
 
-            const auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
+            const auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
             socketManager.InsertSocket(socketID);
 
             bufferSendStream.Insert(socketID, sockStream->GetACEHandle(), strategy.GetBufferSize(), strategy.GetParserStrategy(), strategy.GetEncryptedCompressionStrategy());

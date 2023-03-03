@@ -1,14 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 12:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 13:30)
 
 #ifndef CORE_TOOLS_EXCEPTION_ERROR_IMPL_H
 #define CORE_TOOLS_EXCEPTION_ERROR_IMPL_H
+
+#include "CoreTools/CoreToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Contract/FunctionDescribed.h"
@@ -26,7 +28,7 @@ namespace CoreTools
         using FactoryType = ErrorFactory;
 
     public:
-        ErrorImpl(const FunctionDescribed& functionDescribed, const String& message);
+        ErrorImpl(const FunctionDescribed& functionDescribed, String message) noexcept;
         virtual ~ErrorImpl() noexcept = 0;
         ErrorImpl(const ErrorImpl& rhs) = default;
         ErrorImpl& operator=(const ErrorImpl& rhs) = default;
@@ -40,7 +42,7 @@ namespace CoreTools
         NODISCARD int GetLine() const noexcept;
         NODISCARD const FunctionDescribed& GetFunctionDescribed() const noexcept;
 
-        NODISCARD virtual const String GetError() const;
+        NODISCARD virtual String GetError() const;
 
     private:
         FunctionDescribed functionDescribed;

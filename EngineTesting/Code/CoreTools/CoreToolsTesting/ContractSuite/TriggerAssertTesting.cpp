@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:32)
+///	引擎测试版本：0.9.0.3 (2023/02/23 14:20)
 
 #include "TriggerAssertTesting.h"
 #include "CoreTools/Contract/Flags/CheckInvariantFlags.h"
@@ -14,7 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::string;
 using namespace std::literals;
 
 CoreTools::TriggerAssertTesting::TriggerAssertTesting(const OStreamShared& stream)
@@ -34,15 +33,15 @@ void CoreTools::TriggerAssertTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(TriggerInvariantTest);
 
-#ifdef OPEN_IMPORTANT_EXCPTION_ASSERT
+#ifdef OPEN_IMPORTANT_EXCEPTION_ASSERT
 
     ASSERT_THROW_EXCEPTION_0(TriggerAssertionTest);
 
-#else  // !OPEN_IMPORTANT_EXCPTION_ASSERT
+#else  // !OPEN_IMPORTANT_EXCEPTION_ASSERT
 
     ASSERT_NOT_THROW_EXCEPTION_0(TriggerAssertionTest);
 
-#endif  // OPEN_IMPORTANT_EXCPTION_ASSERT
+#endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 }
 
 void CoreTools::TriggerAssertTesting::TriggerInvariantTest()

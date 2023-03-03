@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:33)
+///	引擎测试版本：0.9.0.3 (2023/03/01 15:49)
 
 #include "ConsoleTextColorsManagerTesting.h"
 #include "System/Console/Flags/ConsoleHandleFlags.h"
@@ -13,8 +13,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using std::cerr;
 
 CoreTools::ConsoleTextColorsManagerTesting::ConsoleTextColorsManagerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -39,8 +37,8 @@ void CoreTools::ConsoleTextColorsManagerTesting::ConsoleTextColorsManageTest()
     {
         ConsoleTextColorsManager<StandardHandle::Error> manager{ TextColour::Yellow, false };
 
-        cerr << "这条信息在控制台中显示为黄色。\n";
+        std::cerr << "这条信息在控制台中显示为黄色。\n";
     }
 
-    cerr << "这条信息在控制台中显示为白色。\n";
+    std::cerr << "这条信息在控制台中显示为白色。\n";
 }

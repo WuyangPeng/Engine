@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:07)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/27 15:24)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_WIDE_CHAR_CONVERSION_MULTI_BYTE_H
 #define CORE_TOOLS_CHARACTER_STRING_WIDE_CHAR_CONVERSION_MULTI_BYTE_H
@@ -17,20 +17,20 @@
 #include <string>
 #include <vector>
 
+// 宽字符串转换为多字节字符串
 namespace CoreTools
 {
-    // 宽字符串转换为多字节字符串
     class CORE_TOOLS_HIDDEN_DECLARE WideCharConversionMultiByte final
     {
     public:
         using ClassType = WideCharConversionMultiByte;
 
     public:
-        explicit WideCharConversionMultiByte(const std::wstring& character, bool isUTF8);
+        explicit WideCharConversionMultiByte(const std::wstring& character, bool isUtf8);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD const std::string GetMultiByteRepresentation() const;
+        NODISCARD std::string GetMultiByteRepresentation() const;
 
     private:
         using WCharContainer = std::vector<wchar_t>;
@@ -47,7 +47,7 @@ namespace CoreTools
         WCharContainer source;
         CharContainer target;
         int lengthOfMultiByteString;
-        bool isUTF8;
+        bool isUtf8;
     };
 }
 

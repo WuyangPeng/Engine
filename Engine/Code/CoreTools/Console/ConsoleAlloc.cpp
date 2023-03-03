@@ -1,23 +1,23 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/11 14:33)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 15:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ConsoleAlloc.h"
 #include "System/Console/ConsoleCreate.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 #include <string>
 
-using std::string;
 using namespace std::literals;
 
 CoreTools::ConsoleAlloc CoreTools::ConsoleAlloc::Create()
@@ -25,9 +25,11 @@ CoreTools::ConsoleAlloc CoreTools::ConsoleAlloc::Create()
     return ConsoleAlloc{ DisableNotThrow::Disable };
 }
 
-CoreTools::ConsoleAlloc::ConsoleAlloc(MAYBE_UNUSED DisableNotThrow disableNotThrow)
+CoreTools::ConsoleAlloc::ConsoleAlloc(DisableNotThrow disableNotThrow)
     : out{ nullptr }, in{ nullptr }, error{ nullptr }
 {
+    System::UnusedFunction(disableNotThrow);
+
     OpenConsole();
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -51,11 +53,9 @@ bool CoreTools::ConsoleAlloc::IsValid() const noexcept
 
 void CoreTools::ConsoleAlloc::OpenConsole()
 {
-    const auto allocSuccess = System::AllocConsole();
-
-    if (!allocSuccess)
+    if (const auto allocSuccess = System::AllocConsole(); !allocSuccess)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("控制台创建错误。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("控制台创建错误。"s))
     }
 
     ReOpenConsole();
@@ -75,7 +75,7 @@ void CoreTools::ConsoleAlloc::ReOpenConsole()
     {
         CloseConsole();
 
-        THROW_EXCEPTION(SYSTEM_TEXT("重定位控制台错误。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("重定位控制台错误。"s))
     }
 }
 
@@ -95,13 +95,10 @@ void CoreTools::ConsoleAlloc::CloseConsole() const noexcept
 
 void CoreTools::ConsoleAlloc::CloseConsole(FILE* file) noexcept
 {
-    if (file != nullptr)
+    if (file != nullptr && !System::CloseConsole(file))
     {
-        if (!System::CloseConsole(file))
-        {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-                << SYSTEM_TEXT("释放控制台文件描述符错误。")
-                << LOG_SINGLETON_TRIGGER_ASSERT;
-        }
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
+            << SYSTEM_TEXT("释放控制台文件描述符错误。")
+            << LOG_SINGLETON_TRIGGER_ASSERT;
     }
 }

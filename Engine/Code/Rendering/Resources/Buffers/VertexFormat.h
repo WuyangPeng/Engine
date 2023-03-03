@@ -40,7 +40,7 @@ namespace Rendering
     public:
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VertexFormat)
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VertexFormat);
 
         NODISCARD static VertexFormatSharedPtr Create();
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:41)
+///	引擎测试版本：0.9.0.3 (2023/02/28 14:01)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_SUITE_STRING_CONVERSION_TESTING_H
 #define CORE_TOOLS_CHARACTER_STRING_SUITE_STRING_CONVERSION_TESTING_H
@@ -26,11 +26,12 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void MultiByteConversionWideCharTest();
         void WideCharConversionMultiByteTest();
+
         void StandardConversionWideCharTest();
         void StandardConversionMultiByteTest();
         void MultiByteConversionStandardTest();
@@ -42,14 +43,13 @@ namespace CoreTools
 
         void StandardConversionCFileStringTest();
 
-        void UTF8ConversionWideCharTest();
-        void UTF8ConversionStandardTest();
-        void UTF8ConversionMultiByteTest();
-        void WideCharUTF8ConversionStandardTest();
+        void Utf8ConversionWideCharTest();
+        void Utf8ConversionStandardTest();
+        void Utf8ConversionMultiByteTest();
+        void WideCharUtf8ConversionStandardTest();
 
-        void ToFirstLetterUpperTest();
-        void ToFirstLetterLowerTest();
-        void ToUpperMacroTest();
+        void WideCharUtf8ConversionStandardEnglishTest();
+        void WideCharUtf8ConversionStandardChineseTest();
     };
 }
 

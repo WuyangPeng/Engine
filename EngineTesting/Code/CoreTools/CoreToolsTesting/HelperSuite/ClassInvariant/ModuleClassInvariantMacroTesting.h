@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void LevelTest();
@@ -45,7 +45,7 @@ namespace CoreTools
         void PhysicsValidTest() noexcept;
         void ImagicsValidTest() noexcept;
         void AnimationValidTest() noexcept;
-        void ArtificialIntellegenceValidTest() noexcept;
+        void ArtificialIntelligenceValidTest() noexcept;
         void UserInterfaceValidTest() noexcept;
         void AssistToolsValidTest() noexcept;
         void FrameworkValidTest() noexcept;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 12:00)
+///	引擎测试版本：0.9.0.3 (2023/03/03 09:37)
 
 #include "FileManagerHelperTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -18,10 +18,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include <string>
-#include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 System::String CoreTools::FileManagerHelperTesting::GetFileManagerHelperName()
@@ -29,7 +26,7 @@ System::String CoreTools::FileManagerHelperTesting::GetFileManagerHelperName()
     return SYSTEM_TEXT("Resource/FileManagerTesting/FileManagerHelperTestingText.txt"s);
 }
 
-string CoreTools::FileManagerHelperTesting::GetFileManagerHelperContent()
+std::string CoreTools::FileManagerHelperTesting::GetFileManagerHelperContent()
 {
     return "FileManagerHelper Testing Text"s;
 }
@@ -64,7 +61,7 @@ void CoreTools::FileManagerHelperTesting::LoadFromFileTest(bool binaryFile)
 {
     auto buffer = FileManagerHelper::LoadFromFile(GetFileManagerHelperName(), binaryFile);
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     ASSERT_EQUAL(bufferContent, GetFileManagerHelperContent());
 }
@@ -78,7 +75,7 @@ void CoreTools::FileManagerHelperTesting::AppendToFileTest(bool binaryFile)
 
     auto buffer = FileManagerHelper::LoadFromFile(fileName, binaryFile);
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     content += GetFileManagerHelperContent();
 
@@ -87,14 +84,14 @@ void CoreTools::FileManagerHelperTesting::AppendToFileTest(bool binaryFile)
 
 void CoreTools::FileManagerHelperTesting::SaveIntoFileTest(bool binaryFile)
 {
-    auto content = GetFileManagerHelperContent();
+    const auto content = GetFileManagerHelperContent();
     const auto fileName = GetFileManagerHelperName();
 
     FileManagerHelper::SaveIntoFile(fileName, binaryFile, boost::numeric_cast<int>(content.size()), content.c_str());
 
     auto buffer = FileManagerHelper::LoadFromFile(fileName, binaryFile);
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     ASSERT_EQUAL(bufferContent, content);
 }

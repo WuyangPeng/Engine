@@ -1,12 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:31)
-///	引擎版本：0.7.2.2 (2021/08/26 20:47)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 15:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -70,15 +69,13 @@ CoreTools::LoadingLibraryImpl::DynamicLinkProcess CoreTools::LoadingLibraryImpl:
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto process = System::GetProcessAddress(library, processName.c_str());
-
-    if (process != nullptr)
+    if (const auto process = System::GetProcessAddress(library, processName.c_str()); process != nullptr)
     {
         return process;
     }
     else
     {
         const auto errorMessage = SYSTEM_TEXT("获取函数（"s) + StringConversion::MultiByteConversionStandard(processName) + SYSTEM_TEXT("）地址失败失败。"s);
-        THROW_EXCEPTION(errorMessage);
+        THROW_EXCEPTION(errorMessage)
     }
 }

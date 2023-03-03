@@ -97,8 +97,8 @@
 #define ANIMATION_EXPORT(implClassName, type) \
     EXPORT_##type(Animation, implClassName, ANIMATION_DEFAULT_DECLARE)
 
-#define ARTIFICIAL_INTELLEGENCE_EXPORT(implClassName, type) \
-    EXPORT_##type(ArtificialIntellegence, implClassName, ARTIFICIAL_INTELLEGENCE_DEFAULT_DECLARE)
+#define ARTIFICIAL_INTELLIGENCE_EXPORT(implClassName, type) \
+    EXPORT_##type(ArtificialIntellegence, implClassName, ARTIFICIAL_INTELLIGENCE_DEFAULT_DECLARE)
 
 #define USER_INTERFACE_EXPORT(implClassName, type) \
     EXPORT_##type(UserInterface, implClassName, USER_INTERFACE_DEFAULT_DECLARE)
@@ -146,8 +146,8 @@
 #define ANIMATION_COPY_EXPORT(className, implClassName, type) \
     EXPORT_##type(Animation, className, implClassName, ANIMATION_DEFAULT_DECLARE)
 
-#define ARTIFICIAL_INTELLEGENCE_COPY_EXPORT(className, implClassName, type) \
-    EXPORT_##type(ArtificialIntellegence, className, implClassName, ARTIFICIAL_INTELLEGENCE_DEFAULT_DECLARE)
+#define ARTIFICIAL_INTELLIGENCE_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(ArtificialIntellegence, className, implClassName, ARTIFICIAL_INTELLIGENCE_DEFAULT_DECLARE)
 
 #define USER_INTERFACE_COPY_EXPORT(className, implClassName, type) \
     EXPORT_##type(UserInterface, className, implClassName, USER_INTERFACE_DEFAULT_DECLARE)
@@ -195,8 +195,8 @@
 #define ANIMATION_EXPORT_UNIQUE_PTR(implClassName) \
     EXPORT_UNIQUE_PTR(Animation, implClassName, ANIMATION_DEFAULT_DECLARE)
 
-#define ARTIFICIAL_INTELLEGENCE_EXPORT_UNIQUE_PTR(implClassName) \
-    EXPORT_UNIQUE_PTR(ArtificialIntellegence, implClassName, ARTIFICIAL_INTELLEGENCE_DEFAULT_DECLARE)
+#define ARTIFICIAL_INTELLIGENCE_EXPORT_UNIQUE_PTR(implClassName) \
+    EXPORT_UNIQUE_PTR(ArtificialIntellegence, implClassName, ARTIFICIAL_INTELLIGENCE_DEFAULT_DECLARE)
 
 #define USER_INTERFACE_EXPORT_UNIQUE_PTR(implClassName) \
     EXPORT_UNIQUE_PTR(UserInterface, implClassName, USER_INTERFACE_DEFAULT_DECLARE)

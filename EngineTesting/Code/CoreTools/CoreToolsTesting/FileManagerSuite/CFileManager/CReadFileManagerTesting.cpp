@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:58)
+///	引擎测试版本：0.9.0.3 (2023/03/03 09:07)
 
 #include "CReadFileManagerTesting.h"
 #include "System/FileManager/Flags/CFileFlags.h"
@@ -19,8 +19,6 @@
 #include <string>
 #include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 CoreTools::CReadFileManagerTesting::CReadFileManagerTesting(const OStreamShared& stream)
@@ -66,10 +64,10 @@ void CoreTools::CReadFileManagerTesting::CReadFileManagerTest()
 
     ASSERT_EQUAL(size, cFileManagerContent.size());
 
-    vector<char> buffer(size);
+    std::vector<char> buffer(size);
     manager.Read(sizeof(char), size, buffer.data());
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     ASSERT_EQUAL(bufferContent, cFileManagerContent);
 }
@@ -79,7 +77,7 @@ System::String CoreTools::CReadFileManagerTesting::GetFileName()
     return SYSTEM_TEXT("Resource/CFileManagerTesting/CReadFileManagerTestingText.txt"s);
 }
 
-string CoreTools::CReadFileManagerTesting::GetFileManagerContent()
+std::string CoreTools::CReadFileManagerTesting::GetFileManagerContent()
 {
     return "CFileManager Testing Text"s;
 }
@@ -87,7 +85,7 @@ string CoreTools::CReadFileManagerTesting::GetFileManagerContent()
 void CoreTools::CReadFileManagerTesting::GetFileByteSizeTest()
 {
     const auto cFileManagerContent = GetFileManagerContent();
-    CReadFileManager manager{ GetFileName() };
+    const CReadFileManager manager{ GetFileName() };
 
     const auto size = cFileManagerContent.size();
 
@@ -110,7 +108,7 @@ void CoreTools::CReadFileManagerTesting::GetCharacterTest()
     const auto content = manager.GetString(boost::numeric_cast<int>(size + 1));
     ASSERT_EQUAL(content, cFileManagerContent);
 
-    ASSERT_FALSE(manager.IsEOF());
+    ASSERT_FALSE(manager.IsEof());
     ASSERT_TRUE(manager.Flush());
 }
 
@@ -135,5 +133,5 @@ void CoreTools::CReadFileManagerTesting::PositionTest()
     manager.Rewind();
     ASSERT_EQUAL(0, manager.GetPosition());
 
-    ASSERT_TRUE(manager.Setvbuf(System::FileSetVBuffer::IOFBF, 256));
+    ASSERT_TRUE(manager.SetVBuffer(System::FileSetVBuffer::IOFBF, 256));
 }

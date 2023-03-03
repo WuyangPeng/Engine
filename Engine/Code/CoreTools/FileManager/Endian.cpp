@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:46)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:58)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,8 +17,6 @@
 
 #include <gsl/span>
 #include <algorithm>
-
-using std::swap;
 
 bool CoreTools::Endian::IsLittleEndian() noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
@@ -58,8 +56,7 @@ void CoreTools::Endian::Swap2ByteOrder(size_t itemsNumber, void* data) noexcept(
 {
     if (data != nullptr && 0 < itemsNumber)
     {
-        const gsl::span bytes{ static_cast<uint16_t*>(data), itemsNumber };
-        for (auto& value : bytes)
+        for (const gsl::span bytes{ static_cast<uint16_t*>(data), itemsNumber }; auto& value : bytes)
         {
             Swap2ByteOrder(&value);
         }
@@ -75,8 +72,7 @@ void CoreTools::Endian::Swap4ByteOrder(size_t itemsNumber, void* data) noexcept(
 {
     if (data != nullptr && 0 < itemsNumber)
     {
-        const gsl::span bytes{ static_cast<uint32_t*>(data), itemsNumber };
-        for (auto& value : bytes)
+        for (const gsl::span bytes{ static_cast<uint32_t*>(data), itemsNumber }; auto& value : bytes)
         {
             Swap4ByteOrder(&value);
         }
@@ -92,8 +88,7 @@ void CoreTools::Endian::Swap8ByteOrder(size_t itemsNumber, void* data) noexcept(
 {
     if (data != nullptr && 0 < itemsNumber)
     {
-        const gsl::span bytes{ static_cast<uint64_t*>(data), itemsNumber };
-        for (auto& value : bytes)
+        for (const gsl::span bytes{ static_cast<uint64_t*>(data), itemsNumber }; auto& value : bytes)
         {
             Swap8ByteOrder(&value);
         }
@@ -111,7 +106,7 @@ void CoreTools::Endian::SwapByteOrder(size_t itemSize, void* data) noexcept(gAss
 
     for (size_t begin{ 0u }; begin < halfSize; ++begin)
     {
-        swap(bytes[begin], bytes[itemSize - begin - 1]);
+        std::swap(bytes[begin], bytes[itemSize - begin - 1]);
     }
 }
 
@@ -137,7 +132,7 @@ void CoreTools::Endian::Swap2ByteOrderToTarget(size_t itemsNumber, const uint16_
 
     System::MemoryCopy(target, source, boost::numeric_cast<uint32_t>(itemsNumber * sizeof(uint16_t)));
 
-    Endian::Swap2ByteOrder(itemsNumber, target);
+    Swap2ByteOrder(itemsNumber, target);
 }
 
 void CoreTools::Endian::Swap4ByteOrderToTarget(size_t itemsNumber, const uint32_t* source, uint32_t* target) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
@@ -148,7 +143,7 @@ void CoreTools::Endian::Swap4ByteOrderToTarget(size_t itemsNumber, const uint32_
 
     System::MemoryCopy(target, source, boost::numeric_cast<uint32_t>(itemsNumber * sizeof(uint32_t)));
 
-    Endian::Swap4ByteOrder(itemsNumber, target);
+    Swap4ByteOrder(itemsNumber, target);
 }
 
 void CoreTools::Endian::Swap8ByteOrderToTarget(size_t itemsNumber, const uint64_t* source, uint64_t* target) noexcept(gAssert < 0 || gCoreToolsAssert < 0)
@@ -159,5 +154,5 @@ void CoreTools::Endian::Swap8ByteOrderToTarget(size_t itemsNumber, const uint64_
 
     System::MemoryCopy(target, source, boost::numeric_cast<uint32_t>(itemsNumber * sizeof(uint64_t)));
 
-    Endian::Swap8ByteOrder(itemsNumber, target);
+    Swap8ByteOrder(itemsNumber, target);
 }

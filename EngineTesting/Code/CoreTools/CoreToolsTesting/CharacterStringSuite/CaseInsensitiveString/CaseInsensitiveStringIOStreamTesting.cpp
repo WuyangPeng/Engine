@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:41)
+///	引擎测试版本：0.9.0.3 (2023/02/28 15:49)
 
 #include "CaseInsensitiveStringIOStreamTesting.h"
 #include "CoreTools/CharacterString/CaseInsensitiveStringDetail.h"
@@ -33,9 +33,9 @@ void CoreTools::CaseInsensitiveStringIOStreamTesting::MainTest()
 
 void CoreTools::CaseInsensitiveStringIOStreamTesting::StreamTest()
 {
-    CaseInsensitiveString string0{ "stRinG" };
+    const CaseInsensitiveString string0{ "stRinG" };
     GetStream() << string0 << "\n";
 
-    CaseInsensitiveWString string1{ L"STRiNG" };
+    const CaseInsensitiveWString string1{ L"STRiNG" };
     GetStream() << string1 << "\n";
 }

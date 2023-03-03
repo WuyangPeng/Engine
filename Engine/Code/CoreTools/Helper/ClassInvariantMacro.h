@@ -42,11 +42,11 @@
 #if defined(OPEN_CLASS_INVARIANT)
 
     #define CLASS_IS_VALID \
-        CoreTools::CheckInvariant<ClassType>{ (*this), (CORE_TOOLS_FUNCTION_DESCRIBED) };
+        CoreTools::CheckInvariant<ClassType>{ (*this), (CORE_TOOLS_FUNCTION_DESCRIBED) }
     #define CLASS_IS_VALID_CONST \
-        CoreTools::CheckInvariant<ClassType>{ (*this), (CORE_TOOLS_FUNCTION_DESCRIBED), (CoreTools::CheckInvariantConditions::OnlyPostconditions) };
+        CoreTools::CheckInvariant<ClassType>{ (*this), (CORE_TOOLS_FUNCTION_DESCRIBED), (CoreTools::CheckInvariantConditions::OnlyPostCondition) }
     #define SELF_CLASS_IS_VALID \
-        CoreTools::CheckInvariant<ClassType>{ (*this), (CORE_TOOLS_FUNCTION_DESCRIBED), (CoreTools::CheckInvariantConditions::OnlyPreconditions) };
+        CoreTools::CheckInvariant<ClassType>{ (*this), (CORE_TOOLS_FUNCTION_DESCRIBED), (CoreTools::CheckInvariantConditions::OnlyPreCondition) }
 
 #else  // !OPEN_CLASS_INVARIANT
 
@@ -58,9 +58,9 @@
 
 // 0：运行时间为常量，且非常重要的不变式。
 // 1：运行时间为常量的普通不变式。
-// 2：运行时间为logn的不变式。
+// 2：运行时间为log(n)的不变式。
 // 3：运行时间为n的不变式。
-// 4：运行时间为nlogn的不变式。
+// 4：运行时间为n log(n)的不变式。
 // 5：运行时间为n平方的不变式。
 // 6：运行时间超过n平方的不变式。
 // 7：内部类不变式，运行时间为常量的不变式。

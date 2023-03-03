@@ -51,7 +51,7 @@ void CoreTools::SimpleCSV::SimpleCSVException::ThrowError(const FunctionDescribe
     ThrowError(functionDescribed, errorCode, StringConversion::MultiByteConversionStandard(message));
 }
 
-const System::String CoreTools::SimpleCSV::SimpleCSVException::GetErrorCodeDescribed() const
+System::String CoreTools::SimpleCSV::SimpleCSVException::GetErrorCodeDescribed() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

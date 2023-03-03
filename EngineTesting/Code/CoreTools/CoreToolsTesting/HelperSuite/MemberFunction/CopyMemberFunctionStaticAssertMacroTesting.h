@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class CopyMemberFunctionStaticAssertMacroTesting final : public CoreTools::UnitTest
+    class CopyMemberFunctionStaticAssertMacroTesting final : public UnitTest
     {
     public:
         using ClassType = CopyMemberFunctionStaticAssertMacroTesting;
@@ -27,7 +27,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void NonConstMemberFunctionTest() noexcept;

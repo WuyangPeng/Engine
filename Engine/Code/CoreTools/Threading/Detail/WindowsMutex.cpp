@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/18 12:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 17:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -31,7 +31,7 @@ void CoreTools::WindowsMutex::Initialize()
 
     if (mutex == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("初始化Mutex失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("初始化Mutex失败。"s))
     }
 }
 
@@ -53,7 +53,7 @@ void CoreTools::WindowsMutex::Enter()
 
     if (!System::WaitForSystemMutex(mutex))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("进入Mutex失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("进入Mutex失败。"s))
     }
 
     // 结果:
@@ -79,8 +79,7 @@ bool CoreTools::WindowsMutex::TryEnter() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    const auto result = System::WaitForSystemMutex(mutex, 0);
-    if (result == System::MutexWaitReturn::Object0)
+    if (const auto result = System::WaitForSystemMutex(mutex, 0); result == System::MutexWaitReturn::Object0)
         return true;
     else
         return false;

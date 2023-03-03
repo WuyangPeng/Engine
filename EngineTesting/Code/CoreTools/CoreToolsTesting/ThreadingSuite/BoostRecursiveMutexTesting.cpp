@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:02)
+///	引擎测试版本：0.9.0.3 (2023/03/02 09:11)
 
 #include "BoostRecursiveMutexTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 CoreTools::BoostRecursiveMutexTesting::BoostRecursiveMutexTesting(const OStreamShared& stream)
-    : ParentType{ stream }, boostMutex0{ MutexCreate::UseBoostRecursive }, boostMutex1{ MutexCreate::UseBoostRecursive }
+    : ParentType{ stream }, boostMutex{ MutexCreate::UseBoostRecursive }, boostDllMutex{ MutexCreate::UseBoostRecursive }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -30,8 +30,8 @@ void CoreTools::BoostRecursiveMutexTesting::DoRunUnitTest()
 void CoreTools::BoostRecursiveMutexTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(RecursionTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MultithreadingLockingSuccessTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MultithreadingLockingFailureTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MultiThreadingLockingSuccessTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MultiThreadingLockingFailureTest);
 }
 
 // 递归测试
@@ -42,23 +42,23 @@ void CoreTools::BoostRecursiveMutexTesting::RecursionTest()
 
 void CoreTools::BoostRecursiveMutexTesting::CreateRecursionTestHolder()
 {
-    ScopedMutex holder1{ boostMutex0 };
-    TryScopedMutex holder2{ boostMutex0 };
+    ScopedMutex holder1{ boostMutex };
+    const TryScopedMutex holder2{ boostMutex };
 
     ASSERT_TRUE(holder2.IsSuccess());
 
-    ScopedMutex holder3{ boostMutex0 };
+    ScopedMutex holder3{ boostMutex };
 }
 
 // 多线程锁成功测试
-void CoreTools::BoostRecursiveMutexTesting::MultithreadingLockingSuccessTest()
+void CoreTools::BoostRecursiveMutexTesting::MultiThreadingLockingSuccessTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateLockingSuccessThread);
 }
 
 void CoreTools::BoostRecursiveMutexTesting::CreateLockingSuccessThread()
 {
-    CreateThread(&ClassType::MultithreadingSuccessCallBack);
+    CreateThread(&ClassType::MultiThreadingSuccessCallBack);
 }
 
 void CoreTools::BoostRecursiveMutexTesting::CreateThread(Function function)
@@ -73,14 +73,14 @@ void CoreTools::BoostRecursiveMutexTesting::CreateThread(Function function)
     }
 }
 
-void CoreTools::BoostRecursiveMutexTesting::MultithreadingSuccessCallBack()
+void CoreTools::BoostRecursiveMutexTesting::MultiThreadingSuccessCallBack()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(StaticValueTest);
 }
 
 void CoreTools::BoostRecursiveMutexTesting::StaticValueTest()
 {
-    ScopedMutex holderFirst{ boostMutex0 };
+    ScopedMutex holderFirst{ boostMutex };
 
     constexpr auto original = 0;
     static auto testValue = original;
@@ -107,23 +107,23 @@ void CoreTools::BoostRecursiveMutexTesting::StaticValueTest()
 }
 
 // 多线程锁失败测试
-void CoreTools::BoostRecursiveMutexTesting::MultithreadingLockingFailureTest()
+void CoreTools::BoostRecursiveMutexTesting::MultiThreadingLockingFailureTest()
 {
-    boostMutex1.Initialize();
+    boostDllMutex.Initialize();
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateLockingFailureThread);
 
-    boostMutex1.Delete();
+    boostDllMutex.Delete();
 }
 
 void CoreTools::BoostRecursiveMutexTesting::CreateLockingFailureThread()
 {
-    ScopedMutex holder{ boostMutex1 };
+    ScopedMutex holder{ boostDllMutex };
 
-    CreateThread(&ClassType::MultithreadingFailureCallBack);
+    CreateThread(&ClassType::MultiThreadingFailureCallBack);
 }
 
-void CoreTools::BoostRecursiveMutexTesting::MultithreadingFailureCallBack()
+void CoreTools::BoostRecursiveMutexTesting::MultiThreadingFailureCallBack()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateFailureCallBackHolder);
 }
@@ -135,7 +135,7 @@ void CoreTools::BoostRecursiveMutexTesting::CreateFailureCallBackHolder()
 
 void CoreTools::BoostRecursiveMutexTesting::TryLockFailureTest()
 {
-    TryScopedMutex holder{ boostMutex1 };
+    const TryScopedMutex holder{ boostDllMutex };
 
     ASSERT_FALSE(holder.IsSuccess());
 }

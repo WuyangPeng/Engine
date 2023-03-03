@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:32)
+///	引擎测试版本：0.9.0.3 (2023/02/23 14:26)
 
 #include "NoexceptTesting.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -55,37 +56,45 @@ void CoreTools::NoexceptTesting::Function0()
     THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s));
 }
 
-void CoreTools::NoexceptTesting::Function1(MAYBE_UNUSED int parameter)
+void CoreTools::NoexceptTesting::Function1(int parameter)
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s));
+    System::UnusedFunction(parameter);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s))
 }
 
 int CoreTools::NoexceptTesting::Function2()
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s))
 }
 
-int CoreTools::NoexceptTesting::Function3(MAYBE_UNUSED int parameter)
+int CoreTools::NoexceptTesting::Function3(int parameter)
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s));
+    System::UnusedFunction(parameter);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s))
 }
 
 void CoreTools::NoexceptTesting::ConstFunction0() const
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s))
 }
 
-void CoreTools::NoexceptTesting::ConstFunction1(MAYBE_UNUSED int parameter) const
+void CoreTools::NoexceptTesting::ConstFunction1(int parameter) const
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s));
+    System::UnusedFunction(parameter);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s))
 }
 
 int CoreTools::NoexceptTesting::ConstFunction2() const
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s))
 }
 
-int CoreTools::NoexceptTesting::ConstFunction3(MAYBE_UNUSED int parameter) const
+int CoreTools::NoexceptTesting::ConstFunction3(int parameter) const
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s));
+    System::UnusedFunction(parameter);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("正确的抛出异常。"s))
 }

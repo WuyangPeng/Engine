@@ -11,7 +11,7 @@
 #define CORE_TOOLS_HELPER_MODULE_CUSTOM_ASSERT_MACRO_H
 
 #include "Assertion/AnimationCustomAssertMacro.h"
-#include "Assertion/ArtificialIntellegenceCustomAssertMacro.h"
+#include "Assertion/ArtificialIntelligenceCustomAssertMacro.h"
 #include "Assertion/AssistToolsCustomAssertMacro.h"
 #include "Assertion/CoreToolsCustomAssertMacro.h"
 #include "Assertion/DatabaseCustomAssertMacro.h"

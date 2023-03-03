@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:08)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/28 09:19)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_STRING_CONVERSION_H
 #define CORE_TOOLS_CHARACTER_STRING_STRING_CONVERSION_H
@@ -24,6 +24,7 @@ namespace CoreTools
     {
     public:
         using ClassType = StringConversion;
+
         using String = System::String;
         using CFileString = System::CFileString;
         using DynamicLinkString = System::DynamicLinkString;
@@ -43,17 +44,13 @@ namespace CoreTools
 
         NODISCARD static CFileString StandardConversionCFileString(const String& character);
 
-        NODISCARD static std::wstring UTF8ConversionWideChar(const std::string& character);
-        NODISCARD static std::string WideCharConversionUTF8(const std::wstring& character);
-        NODISCARD static String UTF8ConversionStandard(const std::string& character);
-        NODISCARD static String UTF8ConversionStandard(const std::wstring& character);
-        NODISCARD static std::string StandardConversionUTF8(const String& character);
-        NODISCARD static std::string UTF8ConversionMultiByte(const std::string& character);
-        NODISCARD static std::string MultiByteConversionUTF8(const std::string& character);
-
-        NODISCARD static String ToFirstLetterUpper(const String& character);
-        NODISCARD static String ToFirstLetterLower(const String& character);
-        NODISCARD static String ToUpperMacro(const String& character);
+        NODISCARD static std::wstring Utf8ConversionWideChar(const std::string& character);
+        NODISCARD static std::string WideCharConversionUtf8(const std::wstring& character);
+        NODISCARD static String Utf8ConversionStandard(const std::string& character);
+        NODISCARD static String Utf8ConversionStandard(const std::wstring& character);
+        NODISCARD static std::string StandardConversionUtf8(const String& character);
+        NODISCARD static std::string Utf8ConversionMultiByte(const std::string& character);
+        NODISCARD static std::string MultiByteConversionUtf8(const std::string& character);
     };
 }
 

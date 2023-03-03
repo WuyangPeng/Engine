@@ -1,20 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:57)
+///	引擎测试版本：0.9.0.3 (2023/03/03 09:12)
 
-#ifndef CORE_TOOLS_TESTING_IFSTREAM_MANAGER_TESTING_H
-#define CORE_TOOLS_TESTING_IFSTREAM_MANAGER_TESTING_H
+#ifndef CORE_TOOLS_TESTING_IF_STREAM_MANAGER_TESTING_H
+#define CORE_TOOLS_TESTING_IF_STREAM_MANAGER_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
-    class IFStreamManagerTesting final : public CoreTools::UnitTest
+    class IFStreamManagerTesting final : public UnitTest
     {
     public:
         using ClassType = IFStreamManagerTesting;
@@ -27,20 +27,19 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
     private:
         void IFStreamManagerSucceedTest();
         void IFStreamManagerBackupFileTest();
         void IFStreamManagerDeleteBackupFileTest();
-
-    private:
         static NODISCARD String GetIFStreamFileName();
         static NODISCARD String GetIFStreamFileContent();
 
+    private:
         System::String backupFile;
     };
 }
 
-#endif  // CORE_TOOLS_TESTING_IFSTREAM_MANAGER_TESTING_H
+#endif  // CORE_TOOLS_TESTING_IF_STREAM_MANAGER_TESTING_H

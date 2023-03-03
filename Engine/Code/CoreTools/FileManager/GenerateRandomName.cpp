@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:48)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 11:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,14 +14,12 @@
 
 #include <random>
 
-using std::string;
-using std::wstring;
 using namespace std::literals;
 
 template <typename T>
 T CoreTools::GenerateRandomName::GetName(int length, const T& letters, const T& extensionName)
 {
-    static_assert(std::is_same_v<T, string> || std::is_same_v<T, wstring>);
+    static_assert(std::is_same_v<T, std::string> || std::is_same_v<T, std::wstring>);
 
     std::random_device randomDevice{};
     std::default_random_engine generator{ randomDevice() };
@@ -36,14 +34,14 @@ T CoreTools::GenerateRandomName::GetName(int length, const T& letters, const T& 
     return result + extensionName;
 }
 
-string CoreTools::GenerateRandomName::GetName(int length, const string& extensionName)
+std::string CoreTools::GenerateRandomName::GetName(int length, const std::string& extensionName)
 {
     const auto letters = "abcdefghijklmnopqrstuvwxyz0123456789"s;
 
     return GetName(length, letters, "." + extensionName);
 }
 
-wstring CoreTools::GenerateRandomName::GetName(int length, const wstring& extensionName)
+std::wstring CoreTools::GenerateRandomName::GetName(int length, const std::wstring& extensionName)
 {
     const auto letters = L"abcdefghijklmnopqrstuvwxyz0123456789"s;
 

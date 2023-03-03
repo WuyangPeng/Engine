@@ -11,7 +11,7 @@
 
 #include "OnlySendingClient.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -51,7 +51,7 @@ uint64_t Network::OnlySendingClient::Connect()
 
     if (sockConnector.Connect(sockStream, sockAddress))
     {
-        return UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
+        return UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
     }
     else
     {
@@ -169,7 +169,7 @@ bool Network::OnlySendingClient::EventFunction(const CoreTools::CallbackParamete
             if (System::UnderlyingCastEnum<WrappersStrategy>(wrappersStrategy) == WrappersStrategy::ACE && result == 0)
             {
                 auto socket = GetSocketManagerSharedPtr();
-                const auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
+                const auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
                 socket->InsertSocket(socketID);
                 if (!socket->EventFunction(callbackParameters))
                 {

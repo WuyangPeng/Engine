@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:30)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 15:11)
 
 #ifndef CORE_TOOLS_BASE_UNIQUE_ID_MANAGER_H
 #define CORE_TOOLS_BASE_UNIQUE_ID_MANAGER_H
@@ -18,57 +18,57 @@
 
 #include <string>
 
-CORE_TOOLS_EXPORT_UNIQUE_PTR(UniqueIDManager);
-CORE_TOOLS_NON_COPY_EXPORT_IMPL(UniqueIDManagerImpl);
+CORE_TOOLS_EXPORT_UNIQUE_PTR(UniqueIdManager);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(UniqueIdManagerImpl);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE UniqueIDManager final : public CoreTools::Singleton<UniqueIDManager>
+    class CORE_TOOLS_DEFAULT_DECLARE UniqueIdManager final : public Singleton<UniqueIdManager>
     {
     public:
-        NON_COPY_TYPE_DECLARE(UniqueIDManager);
-        using ParentType = Singleton<UniqueIDManager>;
+        NON_COPY_TYPE_DECLARE(UniqueIdManager);
+        using ParentType = Singleton<UniqueIdManager>;
 
     private:
-        enum class UniqueIDManagerCreate
+        enum class UniqueIdManagerCreate
         {
             Init,
         };
 
     public:
-        explicit UniqueIDManager(int count, MAYBE_UNUSED UniqueIDManagerCreate uniqueIDManagerCreate);
+        explicit UniqueIdManager(int count, UniqueIdManagerCreate uniqueIdManagerCreate);
 
         static void Create(int count);
         static void Destroy() noexcept;
 
-        SINGLETON_GET_PTR_DECLARE(WindowProcessManager);
+        SINGLETON_GET_PTR_DECLARE(WindowProcessManager)
 
         CLASS_INVARIANT_DECLARE;
 
     public:
-        NODISCARD uint64_t NextUniqueID(int index);
-        NODISCARD uint64_t NextDefaultUniqueID();
+        NODISCARD uint64_t NextUniqueId(int index);
+        NODISCARD uint64_t NextDefaultUniqueId();
 
         template <typename E>
         static void Create(E count);
 
         template <typename E>
-        NODISCARD uint64_t NextUniqueID(E index);
+        NODISCARD uint64_t NextUniqueId(E index);
 
         template <typename E>
-        void SetUniqueID(E index, uint64_t latestIndex);
+        void SetUniqueId(E index, uint64_t latestIndex);
 
-        void SetUniqueID(int index, uint64_t latestIndex);
-
-    private:
-        using UniqueIDManagerUniquePtr = std::unique_ptr<UniqueIDManager>;
+        void SetUniqueId(int index, uint64_t latestIndex);
 
     private:
-        static UniqueIDManagerUniquePtr uniqueIDManager;
+        using UniqueIdManagerUniquePtr = std::unique_ptr<UniqueIdManager>;
+
+    private:
+        static UniqueIdManagerUniquePtr uniqueIdManager;
         PackageType impl;
     };
 }
 
-#define UNIQUE_ID_MANAGER_SINGLETON CoreTools::UniqueIDManager::GetSingleton()
+#define UNIQUE_ID_MANAGER_SINGLETON CoreTools::UniqueIdManager::GetSingleton()
 
 #endif  // CORE_TOOLS_BASE_UNIQUE_ID_MANAGER_H

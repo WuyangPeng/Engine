@@ -73,7 +73,6 @@ void CoreTools::TestingHelper::AddHelperSuite()
     ADD_TEST(helperSuite, InitializeTerminatorMacroTesting);
     ADD_TEST(helperSuite, MainFunctionMacroTesting);
     helperSuite.AddSuite(GetMemberFunctionMacroSuite());
-    ADD_TEST(helperSuite, MemoryMacroTesting);
     helperSuite.AddSuite(GetRttiMacroSuite());
     ADD_TEST(helperSuite, SingletonMacroTesting);
     ADD_TEST(helperSuite, NameMacroTesting);
@@ -257,7 +256,7 @@ void CoreTools::TestingHelper::AddBaseSuite()
     auto baseSuite = GenerateSuite("»ù´¡");
 
     ADD_TEST(baseSuite, SingletonTesting);
-    ADD_TEST(baseSuite, UniqueIDManagerTesting);
+    ADD_TEST(baseSuite, UniqueIdManagerTesting);
     ADD_TEST(baseSuite, VersionTesting);
     ADD_TEST(baseSuite, LoadingLibraryTesting);
     ADD_TEST(baseSuite, SpanIteratorTesting);
@@ -273,6 +272,7 @@ void CoreTools::TestingHelper::AddCharacterStringSuite()
     ADD_TEST(characterStringSuite, StringConversionTesting);
     ADD_TEST(characterStringSuite, FormatErrorMessageTesting);
     characterStringSuite.AddSuite(GetCaseInsensitiveStringSuite());
+    ADD_TEST(characterStringSuite, StringUtilityTesting);
 
     AddSuite(characterStringSuite);
 }

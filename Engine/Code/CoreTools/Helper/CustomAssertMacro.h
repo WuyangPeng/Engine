@@ -13,7 +13,7 @@
 #include "FunctionDescribedMacro.h"
 
 // 用来启用或禁用各种断言子系统的宏。目前断言系统只在Microsoft Visual Studio中实现。
-#if defined(OPEN_ASSERT) || defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
+#if defined(OPEN_ASSERT) || defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
 
     #if defined(SYSTEM_PLATFORM_WIN32) && defined(TCRE_USE_MSVC)
 
@@ -21,13 +21,13 @@
 
     #endif  // defined(WIN32) && defined(TCRE_USE_MSVC)
 
-#endif  // defined(OPEN_ASSERT) || defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
+#endif  // defined(OPEN_ASSERT) || defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
 
-#if defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
+#if defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
 
     #define ASSERT_LEVEL 0
 
-#endif  // OPEN_IMPORTANT_EXCPTION_ASSERT
+#endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 
 // 0：非常重要的断言。断言失败会导致程序崩溃。
 // 1：重要的断言。断言失败会导致程序抛出异常或内存泄露。

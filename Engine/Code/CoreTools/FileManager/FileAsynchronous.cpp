@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:46)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 11:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,13 +13,9 @@
 #include "Flags/BufferIOFlags.h"
 #include "Detail/FileAsynchronousFactory.h"
 #include "Detail/FileAsynchronousImpl.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
-#include <thread>
-
-using std::condition_variable;
-using std::make_unique;
 
 SINGLETON_GET_PTR_DEFINE(CoreTools, FileAsynchronous);
 
@@ -27,7 +23,7 @@ CoreTools::FileAsynchronous::FileAsynchronousUniquePtr CoreTools::FileAsynchrono
 
 void CoreTools::FileAsynchronous::Create()
 {
-    fileAsynchronous = make_unique<CoreTools::FileAsynchronous>(FileAsynchronousCreate::Init);
+    fileAsynchronous = std::make_unique<CoreTools::FileAsynchronous>(FileAsynchronousCreate::Init);
 }
 
 void CoreTools::FileAsynchronous::Destroy() noexcept
@@ -35,9 +31,11 @@ void CoreTools::FileAsynchronous::Destroy() noexcept
     fileAsynchronous.reset();
 }
 
-CoreTools::FileAsynchronous::FileAsynchronous(MAYBE_UNUSED FileAsynchronousCreate fileAsynchronousCreate)
+CoreTools::FileAsynchronous::FileAsynchronous(FileAsynchronousCreate fileAsynchronousCreate)
     : readImpl{ ImplCreateUseFactory::Default, BufferIO::Read }, writeImpl{ ImplCreateUseFactory::Default, BufferIO::Write }
 {
+    System::UnusedFunction(fileAsynchronousCreate);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:57)
+///	引擎测试版本：0.9.0.3 (2023/03/03 09:47)
 
 #include "ReadBufferIOTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -17,8 +17,6 @@
 
 #include <string>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 CoreTools::ReadBufferIOTesting::ReadBufferIOTesting(const OStreamShared& stream)
@@ -41,7 +39,7 @@ void CoreTools::ReadBufferIOTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(GetTextTest);
 }
 
-string CoreTools::ReadBufferIOTesting::GetBufferIOContent()
+std::string CoreTools::ReadBufferIOTesting::GetBufferIOContent()
 {
     return "BufferIO Testing Text"s;
 }
@@ -91,9 +89,9 @@ void CoreTools::ReadBufferIOTesting::ReadBufferIOReadTest()
 
     ASSERT_EQUAL(readBuffer.GetBytesProcessed(), boost::numeric_cast<int>(sizeof(decltype(size))));
 
-    vector<char> result(resultSize);
+    std::vector<char> result(resultSize);
     readBuffer.Read(sizeof(char), resultSize, result.data());
-    string testResult{ result.begin(), result.end() };
+    const std::string testResult{ result.begin(), result.end() };
     ASSERT_EQUAL(testResult, content);
 
     ASSERT_EQUAL(readBuffer.GetBytesProcessed(), readBuffer.GetBytesTotal());
@@ -121,6 +119,6 @@ void CoreTools::ReadBufferIOTesting::GetTextTest()
 
     ASSERT_EQUAL(readBuffer.GetBytesProcessed(), boost::numeric_cast<int>(sizeof(decltype(size))));
 
-    auto testResult = readBuffer.GetText(boost::numeric_cast<int>(resultSize));
+    const auto testResult = readBuffer.GetText(boost::numeric_cast<int>(resultSize));
     ASSERT_EQUAL(testResult, content);
 }

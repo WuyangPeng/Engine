@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 13:39)
+///	引擎测试版本：0.9.0.3 (2023/03/01 15:13)
 
 #include "GameErrorTesting.h"
 #include "Detail/GameErrorType.h"
@@ -38,11 +38,11 @@ void CoreTools::GameErrorTesting::MainTest()
 
 void CoreTools::GameErrorTesting::LastErrorTest()
 {
-    LastError lastError{};
+    const LastError lastError{};
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
     const auto message = SYSTEM_TEXT("message"s);
     constexpr auto gameErrorType = GameErrorType::Error;
-    GameError<GameErrorType> gameError{ functionDescribed, lastError, gameErrorType, message };
+    const GameError gameError{ functionDescribed, lastError, gameErrorType, message };
 
     ASSERT_EQUAL(functionDescribed.GetCurrentFunction(), gameError.GetCurrentFunction());
     ASSERT_EQUAL(functionDescribed.GetFileName(), gameError.GetFileName());
@@ -60,7 +60,7 @@ void CoreTools::GameErrorTesting::ComErrorTest()
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
     const auto message = SYSTEM_TEXT("message"s);
     constexpr auto gameErrorType = GameErrorType::Error;
-    GameError<GameErrorType> gameError{ functionDescribed, System::WindowError::EUnexpected, gameErrorType, message };
+    const GameError gameError{ functionDescribed, System::WindowError::EUnexpected, gameErrorType, message };
 
     ASSERT_EQUAL(functionDescribed.GetCurrentFunction(), gameError.GetCurrentFunction());
     ASSERT_EQUAL(functionDescribed.GetFileName(), gameError.GetFileName());

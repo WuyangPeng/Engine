@@ -10,7 +10,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "BaseGetFunctionDefinitionParsing.h"
-#include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
@@ -137,7 +137,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetRetur
     auto content = GenerateIndentation(1);
 
     content += TextParsing::g_ThrowException;
-    content += StringConversion::ToFirstLetterLower(csvHead.GetCSVClassName());
+    content += StringUtility::ToFirstLetterLower(csvHead.GetCSVClassName());
     content += endDescribe;
 
     return content;
@@ -348,7 +348,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
     content += TextParsing::g_SharedPtrConst;
     content += csvHead.GetNameSpace();
     content += TextParsing::g_DoubleColon;
-    content += StringConversion::ToFirstLetterUpper(mapping);
+    content += StringUtility::ToFirstLetterUpper(mapping);
     content += TextParsing::g_RightAngleBracket;
     content += TextParsing::g_Space;
     content += nameSpace;

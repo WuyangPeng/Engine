@@ -10,11 +10,11 @@
 #ifndef CORE_TOOLS_BASE_UNIQUEID_MANAGER_DETAIL_H
 #define CORE_TOOLS_BASE_UNIQUEID_MANAGER_DETAIL_H
 
-#include "UniqueIDManager.h"
+#include "UniqueIdManager.h"
 #include "System/Helper/EnumCast.h"
 
 template <typename E>
-void CoreTools::UniqueIDManager::Create(E count)
+void CoreTools::UniqueIdManager::Create(E count)
 {
     static_assert(std::is_enum_v<E>, "E must be an enum.");
 
@@ -24,7 +24,7 @@ void CoreTools::UniqueIDManager::Create(E count)
 }
 
 template <typename E>
-uint64_t CoreTools::UniqueIDManager::NextUniqueID(E index)
+uint64_t CoreTools::UniqueIdManager::NextUniqueId(E index)
 {
     static_assert(std::is_enum_v<E>, "E must be an enum.");
 
@@ -32,11 +32,11 @@ uint64_t CoreTools::UniqueIDManager::NextUniqueID(E index)
 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return NextUniqueID(System::EnumCastUnderlying<int>(index));
+    return NextUniqueId(System::EnumCastUnderlying<int>(index));
 }
 
 template <typename E>
-void CoreTools::UniqueIDManager::SetUniqueID(E index, uint64_t latestIndex)
+void CoreTools::UniqueIdManager::SetUniqueId(E index, uint64_t latestIndex)
 {
     static_assert(std::is_enum_v<E>, "E must be an enum.");
 
@@ -44,7 +44,7 @@ void CoreTools::UniqueIDManager::SetUniqueID(E index, uint64_t latestIndex)
 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return SetUniqueID(System::EnumCastUnderlying<int>(index), latestIndex);
+    return SetUniqueId(System::EnumCastUnderlying<int>(index), latestIndex);
 }
 
 #endif  // CORE_TOOLS_BASE_UNIQUEID_MANAGER_DETAIL_H

@@ -18,8 +18,8 @@
 #include "ObjectManager.h"
 #include "ObjectRegister.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
-#include "CoreTools/Base/UniqueIDManager.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
+#include "CoreTools/Base/UniqueIdManager.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -33,7 +33,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, Object);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(CoreTools, Object);
 
 CoreTools::Object::Object(const string& name)
-    : ParentType{ UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Object) }, objectName{ name }
+    : ParentType{ UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Object) }, objectName{ name }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

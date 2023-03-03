@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/18 1:19)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 16:28)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_IMPL_H
 #define CORE_TOOLS_THREADING_THREAD_IMPL_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "System/Threading/Using/CriticalSectionUsing.h"
 #include "System/Threading/Using/ThreadUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
@@ -36,23 +35,23 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ThreadingDWord GetThreadID() const noexcept;
-        NODISCARD ThreadHandle GetThreadHandle() noexcept;
+        NODISCARD ThreadingDWord GetThreadId() const noexcept;
+        NODISCARD ThreadHandle GetThreadHandle() const noexcept;
 
         // 启动和停止线程。
-        void Resume();
-        void Suspend();
+        void Resume() const;
+        void Suspend() const;
 
-        void Wait();
+        void Wait() const;
 
-        void SetThreadPriority(int priority);
+        void SetThreadPriority(int priority) const;
         NODISCARD int GetThreadPriority() const;
 
     private:
         static constexpr auto failResult = static_cast<ThreadingDWord>(-1);
 
     private:
-        ThreadingDWord threadID;
+        ThreadingDWord threadId;
         void* function;
         void* userData;
         int processorNumber;

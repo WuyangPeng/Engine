@@ -11,6 +11,7 @@
 #define CORE_TOOLS_CONTRACT_DELAY_COPY_UNSHARED_IMPL_DETAIL_H
 
 #include "DelayCopyUnsharedImpl.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
@@ -24,17 +25,21 @@ CoreTools::DelayCopyUnsharedImpl<Original, Package>::DelayCopyUnsharedImpl(Type&
 
 template <typename Original, typename Package>
 template <typename... Types>
-CoreTools::DelayCopyUnsharedImpl<Original, Package>::DelayCopyUnsharedImpl(MAYBE_UNUSED ImplCreateUseFactory implCreateType, Types&&... args)
+CoreTools::DelayCopyUnsharedImpl<Original, Package>::DelayCopyUnsharedImpl(ImplCreateUseFactory implCreateType, Types&&... args)
     : impl{ Package::FactoryType::Create(std::forward<Types>(args)...) }
 {
+    System::UnusedFunction(implCreateType);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Original, typename Package>
 template <typename... Types>
-CoreTools::DelayCopyUnsharedImpl<Original, Package>::DelayCopyUnsharedImpl(MAYBE_UNUSED ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args)
+CoreTools::DelayCopyUnsharedImpl<Original, Package>::DelayCopyUnsharedImpl(ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args)
     : impl{ std::make_shared<Package>() }
 {
+    System::UnusedFunction(implCreateDefaultType);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 

@@ -10,7 +10,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "FileNameParsing.h"
-#include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
@@ -103,10 +103,10 @@ System::String CoreTools::FileNameParsing::GetCSVClassName() const
 
     if (dotPosition == String::npos)
     {
-        return StringConversion::ToFirstLetterUpper(fileName);
+        return StringUtility::ToFirstLetterUpper(fileName);
     }
     else
     {
-        return StringConversion::ToFirstLetterUpper(fileName.substr(0, dotPosition));
+        return StringUtility::ToFirstLetterUpper(fileName.substr(0, dotPosition));
     }
 }

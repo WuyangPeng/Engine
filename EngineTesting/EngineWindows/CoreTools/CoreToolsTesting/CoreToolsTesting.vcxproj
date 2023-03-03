@@ -444,13 +444,14 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SingletonTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SpanIteratorTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\StaticSingletonTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIDManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIdManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\VersionTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringIOStreamTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CharacterStringSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\FormatErrorMessageTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringConversionTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringUtilityTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandArgumentTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandLineInformationTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandSuite.h" />
@@ -635,7 +636,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MainFunctionMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionNoexceptMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionMacroTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemoryMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\NameMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\PropertiesMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroBaseTesting.h" />
@@ -1146,12 +1146,13 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SingletonTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SpanIteratorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\StaticSingletonTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIDManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIdManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\VersionTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringIOStreamTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\FormatErrorMessageTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringConversionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringUtilityTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandArgumentTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandLineInformationTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandTesting.cpp" />
@@ -1310,7 +1311,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MainFunctionMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionNoexceptMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionMacroTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemoryMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\NameMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\PropertiesMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroBaseTesting.cpp" />

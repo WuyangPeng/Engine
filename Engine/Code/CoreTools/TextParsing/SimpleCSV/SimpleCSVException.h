@@ -37,7 +37,7 @@ namespace CoreTools
             [[noreturn]] static void ThrowError(const FunctionDescribed& functionDescribed, CSVExceptionType errorCode, const std::string& message);
 
         protected:
-            NODISCARD const String GetErrorCodeDescribed() const final;
+            NODISCARD String GetErrorCodeDescribed() const final;
         };
     }
 }

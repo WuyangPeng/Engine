@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:30)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 15:52)
 
 #ifndef CORE_TOOLS_BASE_VERSION_H
 #define CORE_TOOLS_BASE_VERSION_H
@@ -18,7 +18,7 @@
 
 namespace CoreTools
 {
-    constexpr auto g_MaxSubversion = 100;
+    constexpr auto gMaxSubversion = 100;
 
     /// @class Version
     /// @brief 访问引擎的版本信息。
@@ -35,7 +35,7 @@ namespace CoreTools
         /// @brief 具有相同名称但不同主版本号的程序集不可互换。例如，这适用于对产品的大量重写，这些重写使得无法实现向后兼容性。
         NODISCARD static constexpr int GetMajor(int version) noexcept
         {
-            return (version / (g_MaxSubversion * g_MaxSubversion * g_MaxSubversion)) % g_MaxSubversion;
+            return (version / (gMaxSubversion * gMaxSubversion * gMaxSubversion)) % gMaxSubversion;
         }
 
         NODISCARD static constexpr int GetMajor() noexcept
@@ -48,7 +48,7 @@ namespace CoreTools
         /// 例如，这适用于产品的修正版或完全向后兼容的新版本。
         NODISCARD static constexpr int GetMinor(int version) noexcept
         {
-            return (version / (g_MaxSubversion * g_MaxSubversion)) % g_MaxSubversion;
+            return (version / (gMaxSubversion * gMaxSubversion)) % gMaxSubversion;
         }
 
         NODISCARD static constexpr int GetMinor() noexcept
@@ -60,7 +60,7 @@ namespace CoreTools
         /// @brief 内部版本号的不同表示对相同源所作的重新编译。这适合于更改处理器、平台或编译器的情况。
         NODISCARD static constexpr int GetBuild(int version) noexcept
         {
-            return (version / g_MaxSubversion) % g_MaxSubversion;
+            return (version / gMaxSubversion) % gMaxSubversion;
         }
 
         NODISCARD static constexpr int GetBuild() noexcept
@@ -72,7 +72,7 @@ namespace CoreTools
         /// @brief 名称、主版本号和次版本号都相同但修订号不同的程序集应是完全可互换的。这适用于修复以前发布的程序集中的安全漏洞。
         NODISCARD static constexpr int GetRevision(int version) noexcept
         {
-            return version % g_MaxSubversion;
+            return version % gMaxSubversion;
         }
 
         NODISCARD static constexpr int GetRevision() noexcept

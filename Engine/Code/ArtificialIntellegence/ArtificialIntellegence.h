@@ -4,8 +4,8 @@
 // 
 // ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 10:06)
 
-#ifndef ARTIFICIAL_INTELLEGENCE_H
-#define ARTIFICIAL_INTELLEGENCE_H
+#ifndef ARTIFICIAL_INTELLIGENCE_H
+#define ARTIFICIAL_INTELLIGENCE_H
  
 #include "Helper/Helper.h" 
 #include "Miscellaneous/Miscellaneous.h"
@@ -15,4 +15,4 @@
 #include "GeneticAlgorithm/GeneticAlgorithm.h"
 #include "NeuralNetwork/NeuralNetwork.h"
 
-#endif // ARTIFICIAL_INTELLEGENCE_H
+#endif // ARTIFICIAL_INTELLIGENCE_H

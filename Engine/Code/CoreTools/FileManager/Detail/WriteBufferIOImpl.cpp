@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:44)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:54)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,10 +18,9 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 using namespace std::literals;
-using std::make_shared;
 
 CoreTools::WriteBufferIOImpl::WriteBufferIOImpl(int bufferSize)
-    : ParentType{}, buffer{ make_shared<FileBuffer>(bufferSize) }
+    : ParentType{}, buffer{ std::make_shared<FileBuffer>(bufferSize) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -66,8 +65,8 @@ uint32_t CoreTools::WriteBufferIOImpl::WriteToBuffer(size_t itemSize, size_t ite
     CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "准备读取的数据无效！");
     CORE_TOOLS_ASSERTION_2(GetBufferIOType() == BufferIO::Write, "缓冲区不支持写入！");
 
-    auto numberToCopy = boost::numeric_cast<int>(itemSize * itemsNumber);
-    auto nextBytesProcessed = GetBytesProcessed() + numberToCopy;
+    const auto numberToCopy = boost::numeric_cast<int>(itemSize * itemsNumber);
+    const auto nextBytesProcessed = GetBytesProcessed() + numberToCopy;
     if (nextBytesProcessed <= GetBytesTotal())
     {
         // 获得缓冲区当前指针位置。
@@ -89,7 +88,7 @@ uint32_t CoreTools::WriteBufferIOImpl::WriteToBuffer(size_t itemSize, size_t ite
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("要写入的字节数超过了缓冲区大小！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("要写入的字节数超过了缓冲区大小！"s))
     }
 }
 

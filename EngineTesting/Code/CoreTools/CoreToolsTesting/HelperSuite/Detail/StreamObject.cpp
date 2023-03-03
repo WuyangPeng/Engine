@@ -45,7 +45,7 @@ int CoreTools::StreamObject::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += CoreTools::GetStreamSize(boolValue);
+    size += GetStreamSize(boolValue);
 
     return size;
 }

@@ -12,6 +12,7 @@
 #include "VersionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 ThreadingCoreRenderEngineAssist::VersionTesting::VersionTesting(const OStreamShared& stream)
     : ParentType{ stream }

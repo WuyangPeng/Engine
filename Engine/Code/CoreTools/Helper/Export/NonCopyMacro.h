@@ -65,8 +65,8 @@
 #define ANIMATION_NON_COPY_EXPORT_IMPL(implClassName) \
     NON_COPY_EXPORT_IMPL(implClassName, ANIMATION)
 
-#define ARTIFICIAL_INTELLEGENCE_NON_COPY_EXPORT_IMPL(implClassName) \
-    NON_COPY_EXPORT_IMPL(implClassName, ARTIFICIAL_INTELLEGENCE)
+#define ARTIFICIAL_INTELLIGENCE_NON_COPY_EXPORT_IMPL(implClassName) \
+    NON_COPY_EXPORT_IMPL(implClassName, ARTIFICIAL_INTELLIGENCE)
 
 #define USER_INTERFACE_NON_COPY_EXPORT_IMPL(implClassName) \
     NON_COPY_EXPORT_IMPL(implClassName, USER_INTERFACE)
@@ -79,6 +79,6 @@
 
 #define NON_COPY_TYPE_DECLARE(className) \
     TYPE_DECLARE(className);             \
-    using PackageType = CoreTools::NonCopyImpl<ImplType>;
+    using PackageType = CoreTools::NonCopyImpl<ImplType>
 
 #endif  // CORE_TOOLS_HELPER_NON_COPY_MACRO_H

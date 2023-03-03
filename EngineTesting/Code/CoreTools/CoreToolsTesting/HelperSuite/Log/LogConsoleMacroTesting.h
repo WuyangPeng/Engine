@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class LogConsoleMacroTesting final : public CoreTools::UnitTest
+    class LogConsoleMacroTesting final : public UnitTest
     {
     public:
         using ClassType = LogConsoleMacroTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void ConsoleLogTest() noexcept;

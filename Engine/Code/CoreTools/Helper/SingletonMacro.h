@@ -51,9 +51,9 @@
     EXCEPTION_ALL_CATCH(filterType)
 
 #define SINGLETON_MUTEX_ENTER_MEMBER \
-    const std::unique_lock holder{ GetMutex() };
+    const std::unique_lock holder{ GetMutex() }
 
 #define SINGLETON_SCOPED_MUTEX_ENTER_MEMBER \
-    const CoreTools::ScopedMutex holder{ GetMutex() };
+    const CoreTools::ScopedMutex holder{ GetMutex() }
 
 #endif  // CORE_TOOLS_HELPER_SINGLETON_MACRO_H

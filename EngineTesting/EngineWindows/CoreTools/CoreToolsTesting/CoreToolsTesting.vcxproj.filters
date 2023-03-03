@@ -504,7 +504,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SingletonTesting.h">
       <Filter>BaseSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIDManagerTesting.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIdManagerTesting.h">
       <Filter>BaseSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CharacterStringSuite.h">
@@ -850,9 +850,6 @@
       <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MainFunctionMacroTesting.h">
-      <Filter>HelperSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemoryMacroTesting.h">
       <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\NameMacroTesting.h">
@@ -1818,6 +1815,9 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestHash.h">
       <Filter>HelperSuite 头文件\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringUtilityTesting.h">
+      <Filter>CharacterStringSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
@@ -1901,9 +1901,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MainFunctionMacroTesting.cpp">
       <Filter>HelperSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemoryMacroTesting.cpp">
-      <Filter>HelperSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\NameMacroTesting.cpp">
       <Filter>HelperSuite 源文件</Filter>
     </ClCompile>
@@ -1922,7 +1919,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SingletonTesting.cpp">
       <Filter>BaseSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIDManagerTesting.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIdManagerTesting.cpp">
       <Filter>BaseSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\Detail\SingletonSubclass.cpp">
@@ -2947,6 +2944,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestHashKey.cpp">
       <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringUtilityTesting.cpp">
+      <Filter>CharacterStringSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

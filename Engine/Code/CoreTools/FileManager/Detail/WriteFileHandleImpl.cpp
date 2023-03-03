@@ -1,21 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:44)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:55)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "WriteFileHandleImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-
-using boost::numeric_cast;
 
 CoreTools::WriteFileHandleImpl::WriteFileHandleImpl(const String& fileName, FileHandleCreationDisposition creation)
     : ParentType{ fileName, FileHandleDesiredAccess::Write, FileHandleShareMode::Prevents, creation }
@@ -39,7 +38,7 @@ int CoreTools::WriteFileHandleImpl::GetFileByteSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return numeric_cast<int>(ParentType::GetFileLength());
+    return boost::numeric_cast<int>(ParentType::GetFileLength());
 }
 
 void CoreTools::WriteFileHandleImpl::Write(size_t itemSize, const void* data)
@@ -62,9 +61,11 @@ void CoreTools::WriteFileHandleImpl::Write(size_t itemSize, size_t itemsNumber, 
     WriteToFile(itemSize, itemsNumber, data);
 }
 
-void CoreTools::WriteFileHandleImpl::ReadFromFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
+void CoreTools::WriteFileHandleImpl::ReadFromFile(size_t itemSize, size_t itemsNumber, void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     CORE_TOOLS_ASSERTION_4(false, "WriteFileHandleImpl禁止调用ReadFromFile！");
+
+    System::UnusedFunction(itemSize, itemsNumber, data);
 }

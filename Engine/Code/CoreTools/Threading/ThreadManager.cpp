@@ -1,24 +1,27 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/18 12:32)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 17:34)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ThreadManager.h"
 #include "Detail/ThreadManagerImpl.h"
+#include "System/Helper/Tools.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
-CoreTools::ThreadManager::ThreadManager(MAYBE_UNUSED DisableNotThrow disableNotThrow)
+CoreTools::ThreadManager::ThreadManager(DisableNotThrow disableNotThrow)
     : impl{ ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(disableNotThrow);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 

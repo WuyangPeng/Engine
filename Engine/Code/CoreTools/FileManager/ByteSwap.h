@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 23:34)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 09:58)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_BYTE_SWAP_H
 #define CORE_TOOLS_FILE_MANAGER_BYTE_SWAP_H
@@ -14,45 +14,45 @@
 
 namespace CoreTools
 {
-    constexpr auto g_ByteShiftStep = 16;
-    constexpr auto g_ByteShift2 = 8;
-    constexpr auto g_ByteShift4 = g_ByteShift2 + g_ByteShiftStep;
-    constexpr auto g_ByteShift6 = g_ByteShift4 + g_ByteShiftStep;
-    constexpr auto g_ByteShift8 = g_ByteShift6 + g_ByteShiftStep;
+    constexpr auto gByteShiftStep = 16;
+    constexpr auto gByteShift2 = 8;
+    constexpr auto gByteShift4 = gByteShift2 + gByteShiftStep;
+    constexpr auto gByteShift6 = gByteShift4 + gByteShiftStep;
+    constexpr auto gByteShift8 = gByteShift6 + gByteShiftStep;
 
-    constexpr auto g_ByteSwapMask0 = 0x000000FFu;
-    constexpr auto g_ByteSwapMask1 = g_ByteSwapMask0 << g_ByteShift2;
-    constexpr auto g_ByteSwapMask2 = g_ByteSwapMask1 << g_ByteShift2;
-    constexpr auto g_ByteSwapMask3 = g_ByteSwapMask2 << g_ByteShift2;
+    constexpr auto gByteSwapMask0 = 0x000000FFu;
+    constexpr auto gByteSwapMask1 = gByteSwapMask0 << gByteShift2;
+    constexpr auto gByteSwapMask2 = gByteSwapMask1 << gByteShift2;
+    constexpr auto gByteSwapMask3 = gByteSwapMask2 << gByteShift2;
 
-    constexpr auto g_ByteSwapMask4 = static_cast<uint64_t>(g_ByteSwapMask3) << g_ByteShift2;
-    constexpr auto g_ByteSwapMask5 = g_ByteSwapMask4 << g_ByteShift2;
-    constexpr auto g_ByteSwapMask6 = g_ByteSwapMask5 << g_ByteShift2;
-    constexpr auto g_ByteSwapMask7 = g_ByteSwapMask6 << g_ByteShift2;
+    constexpr auto gByteSwapMask4 = static_cast<uint64_t>(gByteSwapMask3) << gByteShift2;
+    constexpr auto gByteSwapMask5 = gByteSwapMask4 << gByteShift2;
+    constexpr auto gByteSwapMask6 = gByteSwapMask5 << gByteShift2;
+    constexpr auto gByteSwapMask7 = gByteSwapMask6 << gByteShift2;
 
     NODISCARD constexpr uint16_t ByteSwap2(uint16_t inData) noexcept
     {
-        return (inData >> g_ByteShift2) | (inData << g_ByteShift2);
+        return (inData >> gByteShift2) | (inData << gByteShift2);
     }
 
     NODISCARD constexpr uint32_t ByteSwap4(uint32_t inData) noexcept
     {
-        return ((inData >> g_ByteShift4) & g_ByteSwapMask0) |
-               ((inData >> g_ByteShift2) & g_ByteSwapMask1) |
-               ((inData << g_ByteShift2) & g_ByteSwapMask2) |
-               ((inData << g_ByteShift4) & g_ByteSwapMask3);
+        return ((inData >> gByteShift4) & gByteSwapMask0) |
+               ((inData >> gByteShift2) & gByteSwapMask1) |
+               ((inData << gByteShift2) & gByteSwapMask2) |
+               ((inData << gByteShift4) & gByteSwapMask3);
     }
 
     NODISCARD constexpr uint64_t ByteSwap8(uint64_t inData) noexcept
     {
-        return ((inData >> g_ByteShift8) & g_ByteSwapMask0) |
-               ((inData >> g_ByteShift6) & g_ByteSwapMask1) |
-               ((inData >> g_ByteShift4) & g_ByteSwapMask2) |
-               ((inData >> g_ByteShift2) & g_ByteSwapMask3) |
-               ((inData << g_ByteShift2) & g_ByteSwapMask4) |
-               ((inData << g_ByteShift4) & g_ByteSwapMask5) |
-               ((inData << g_ByteShift6) & g_ByteSwapMask6) |
-               ((inData << g_ByteShift8) & g_ByteSwapMask7);
+        return ((inData >> gByteShift8) & gByteSwapMask0) |
+               ((inData >> gByteShift6) & gByteSwapMask1) |
+               ((inData >> gByteShift4) & gByteSwapMask2) |
+               ((inData >> gByteShift2) & gByteSwapMask3) |
+               ((inData << gByteShift2) & gByteSwapMask4) |
+               ((inData << gByteShift4) & gByteSwapMask5) |
+               ((inData << gByteShift6) & gByteSwapMask6) |
+               ((inData << gByteShift8) & gByteSwapMask7);
     }
 }
 

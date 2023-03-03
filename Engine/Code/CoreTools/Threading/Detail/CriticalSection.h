@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/18 1:14)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 16:15)
 
 #ifndef CORE_TOOLS_THREADING_CRITICAL_SECTION_H
 #define CORE_TOOLS_THREADING_CRITICAL_SECTION_H
@@ -15,9 +15,9 @@
 #include "MutexImpl.h"
 #include "System/Threading/Using/CriticalSectionUsing.h"
 
+// 临界区类
 namespace CoreTools
 {
-    // 临界区类
     class CORE_TOOLS_HIDDEN_DECLARE CriticalSection final : public MutexImpl
     {
     public:
@@ -30,11 +30,11 @@ namespace CoreTools
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        void Initialize() final;
-        void Delete() noexcept final;
-        void Enter() noexcept final;
-        NODISCARD bool TryEnter() noexcept final;
-        void Leave() noexcept final;
+        void Initialize() override;
+        void Delete() noexcept override;
+        void Enter() noexcept override;
+        NODISCARD bool TryEnter() noexcept override;
+        void Leave() noexcept override;
 
     private:
         ThreadingCriticalSection criticalSection;

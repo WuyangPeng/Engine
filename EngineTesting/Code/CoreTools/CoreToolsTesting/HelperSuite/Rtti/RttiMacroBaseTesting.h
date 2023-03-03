@@ -33,9 +33,9 @@ namespace CoreTools
 
     private:
         void DoRunUnitTest() override;
-        void MainTest();
+        virtual void MainTest();
 
-        void RttiTest();
+        virtual void RttiTest();
     };
 }
 

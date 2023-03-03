@@ -15,6 +15,7 @@
 #include "System/Helper/PragmaWarning/LexicalCast.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/Flags/JsonFlags.h"
@@ -61,7 +62,7 @@ void CoreTools::JsonHeadImpl::ParsingNameSpace()
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-        nameSpace = StringConversion::ToFirstLetterUpper(pathSplit[pathSplit.size() - 2]);
+        nameSpace = StringUtility::ToFirstLetterUpper(pathSplit[pathSplit.size() - 2]);
 
 #include STSTEM_WARNING_POP
     }
@@ -69,7 +70,7 @@ void CoreTools::JsonHeadImpl::ParsingNameSpace()
     auto fileName = pathSplit.at(pathSplit.size() - 1);
     const auto poistion = fileName.find(TextParsing::g_Dot);
 
-    className = StringConversion::ToFirstLetterUpper(fileName.substr(0, poistion));
+    className = StringUtility::ToFirstLetterUpper(fileName.substr(0, poistion));
 }
 
 void CoreTools::JsonHeadImpl::ParsingJsonNode()

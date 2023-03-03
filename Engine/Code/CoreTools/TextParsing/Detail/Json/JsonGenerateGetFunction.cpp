@@ -10,7 +10,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "JsonGenerateGetFunction.h"
-#include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/JsonFlags.h"
@@ -39,7 +39,7 @@ System::String CoreTools::JsonGenerateGetFunction::GenerateContainerFunction() c
     {
         const auto jsonDataType = value->GetJsonDataType();
 
-        auto typeName = StringConversion::ToFirstLetterUpper(value->GetTypeName());
+        auto typeName = StringUtility::ToFirstLetterUpper(value->GetTypeName());
         if (typeName == SYSTEM_TEXT("Id"s))
         {
             typeName = SYSTEM_TEXT("ID"s);
@@ -241,7 +241,7 @@ System::String CoreTools::JsonGenerateGetFunction::GenerateContainerFunction(con
     {
         const auto jsonDataType = value->GetJsonDataType();
 
-        auto typeName = StringConversion::ToFirstLetterUpper(value->GetTypeName());
+        auto typeName = StringUtility::ToFirstLetterUpper(value->GetTypeName());
         if (typeName == SYSTEM_TEXT("Id"s))
         {
             typeName = SYSTEM_TEXT("ID"s);
@@ -359,7 +359,7 @@ System::String CoreTools::JsonGenerateGetFunction::GenerateContainerFunction(con
                 {
                     const auto innerJsonDataType = inner->GetJsonDataType();
 
-                    typeName = StringConversion::ToFirstLetterUpper(inner->GetTypeName());
+                    typeName = StringUtility::ToFirstLetterUpper(inner->GetTypeName());
                     if (typeName == SYSTEM_TEXT("Id"s))
                     {
                         typeName = SYSTEM_TEXT("ID"s);

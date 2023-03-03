@@ -49,7 +49,6 @@
 #include "MemberFunction/MemberFunctionMacroTesting.h"
 #include "MemberFunction/MemberFunctionNoexceptMacroTesting.h"
 #include "MemberFunction/MemberFunctionStaticAssertMacroTesting.h"
-#include "MemoryMacroTesting.h"
 #include "NameMacroTesting.h"
 #include "PropertiesMacroTesting.h"
 #include "Rtti/RttiMacroBaseTesting.h"

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:03)
+///	引擎测试版本：0.9.0.3 (2023/03/02 09:12)
 
 #include "CriticalSectionTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 CoreTools::CriticalSectionTesting::CriticalSectionTesting(const OStreamShared& stream)
-    : ParentType{ stream }, criticalSection0{ MutexCreate::UseCriticalSection }, criticalSection1{ MutexCreate::UseCriticalSection }
+    : ParentType{ stream }, dllCriticalSection{ MutexCreate::UseCriticalSection }, criticalSection{ MutexCreate::UseCriticalSection }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -30,43 +30,43 @@ void CoreTools::CriticalSectionTesting::DoRunUnitTest()
 void CoreTools::CriticalSectionTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(RecursionTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MultithreadingLockingSuccessTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MultithreadingLockingFailureTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MultiThreadingLockingSuccessTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MultiThreadingLockingFailureTest);
 }
 
 // 递归测试
 void CoreTools::CriticalSectionTesting::RecursionTest()
 {
-    criticalSection0.Initialize();
+    dllCriticalSection.Initialize();
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateRecursionTestHolder);
 
-    criticalSection0.Delete();
+    dllCriticalSection.Delete();
 }
 
 void CoreTools::CriticalSectionTesting::CreateRecursionTestHolder()
 {
-    ScopedMutex holder1{ criticalSection0 };
-    TryScopedMutex holder2{ criticalSection0 };
+    ScopedMutex holder1{ dllCriticalSection };
+    const TryScopedMutex holder2{ dllCriticalSection };
 
     ASSERT_TRUE(holder2.IsSuccess());
 
-    ScopedMutex holder3{ criticalSection0 };
+    ScopedMutex holder3{ dllCriticalSection };
 }
 
 // 多线程锁成功测试
-void CoreTools::CriticalSectionTesting::MultithreadingLockingSuccessTest()
+void CoreTools::CriticalSectionTesting::MultiThreadingLockingSuccessTest()
 {
-    criticalSection0.Initialize();
+    dllCriticalSection.Initialize();
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateLockingSuccessThread);
 
-    criticalSection0.Delete();
+    dllCriticalSection.Delete();
 }
 
 void CoreTools::CriticalSectionTesting::CreateLockingSuccessThread()
 {
-    ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, &ClassType::MultithreadingSuccessCallBack);
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, &ClassType::MultiThreadingSuccessCallBack);
 }
 
 void CoreTools::CriticalSectionTesting::CreateThread(Function function)
@@ -81,14 +81,14 @@ void CoreTools::CriticalSectionTesting::CreateThread(Function function)
     }
 }
 
-void CoreTools::CriticalSectionTesting::MultithreadingSuccessCallBack()
+void CoreTools::CriticalSectionTesting::MultiThreadingSuccessCallBack()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(StaticValueTest);
 }
 
 void CoreTools::CriticalSectionTesting::StaticValueTest()
 {
-    ScopedMutex holderFirst{ criticalSection0 };
+    ScopedMutex holderFirst{ dllCriticalSection };
 
     constexpr auto original = 0;
     static auto testValue = original;
@@ -115,19 +115,19 @@ void CoreTools::CriticalSectionTesting::StaticValueTest()
 }
 
 // 多线程锁失败测试
-void CoreTools::CriticalSectionTesting::MultithreadingLockingFailureTest()
+void CoreTools::CriticalSectionTesting::MultiThreadingLockingFailureTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateLockingFailureThread);
 }
 
 void CoreTools::CriticalSectionTesting::CreateLockingFailureThread()
 {
-    ScopedMutex holder(criticalSection1);
+    ScopedMutex holder(criticalSection);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, &ClassType::MultithreadingFailureCallBack);
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, &ClassType::MultiThreadingFailureCallBack);
 }
 
-void CoreTools::CriticalSectionTesting::MultithreadingFailureCallBack()
+void CoreTools::CriticalSectionTesting::MultiThreadingFailureCallBack()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateFailureCallBackHolder);
 }
@@ -139,7 +139,7 @@ void CoreTools::CriticalSectionTesting::CreateFailureCallBackHolder()
 
 void CoreTools::CriticalSectionTesting::TryLockFailureTest()
 {
-    TryScopedMutex holder(criticalSection1);
+    const TryScopedMutex holder(criticalSection);
 
     ASSERT_FALSE(holder.IsSuccess());
 }

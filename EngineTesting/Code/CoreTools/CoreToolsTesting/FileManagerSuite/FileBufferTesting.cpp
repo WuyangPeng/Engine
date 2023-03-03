@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 12:01)
+///	引擎测试版本：0.9.0.3 (2023/03/03 08:49)
 
 #include "FileBufferTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -14,9 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <vector>
-
-using std::vector;
+#include <gsl/util>
 
 CoreTools::FileBufferTesting::FileBufferTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -37,6 +35,7 @@ void CoreTools::FileBufferTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyTest);
     ASSERT_NOT_THROW_EXCEPTION_0(BufferTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ForEachTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyBufferTest);
 }
 
 void CoreTools::FileBufferTesting::ValueTest()
@@ -45,26 +44,31 @@ void CoreTools::FileBufferTesting::ValueTest()
 
     ASSERT_EQUAL(buffer.GetSize(), 10u);
 
-    auto beginPtr = buffer.GetBufferBegin();
+    const auto begin = buffer.GetBufferBegin();
 
-    ASSERT_UNEQUAL_NULL_PTR(beginPtr);
+    ASSERT_UNEQUAL_NULL_PTR(begin);
+}
+
+void CoreTools::FileBufferTesting::Init(FileBuffer& fileBuffer, int step) const
+{
+    for (auto i = 0u; i < fileBuffer.GetSize(); ++i)
+    {
+        *fileBuffer.GetBuffer(gsl::narrow_cast<int>(i)) = boost::numeric_cast<char>(i + step);
+    }
 }
 
 void CoreTools::FileBufferTesting::DelayCopyTest()
 {
     FileBuffer buffer0{ 11 };
-    auto beginPtr0 = buffer0.GetBufferBegin();
+    const auto beginPtr0 = buffer0.GetBufferBegin();
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(beginPtr0, "beginPtr0指针为空。");
 
-    for (auto i = 0u; i < buffer0.GetSize(); ++i)
-    {
-        *buffer0.GetBuffer(i) = boost::numeric_cast<char>(i);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_2(Init, buffer0, 0);
 
-    FileBuffer buffer1{ buffer0 };
+    const FileBuffer buffer1{ buffer0 };
     ASSERT_EQUAL(buffer1.GetSize(), buffer0.GetSize());
 
-    auto beginPtr1 = buffer1.GetConstBufferBegin();
+    const auto beginPtr1 = buffer1.GetConstBufferBegin();
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(beginPtr1, "beginPtr1指针为空。");
 
     // beginPtr0和beginPtr1依然指向同一个副本。
@@ -72,17 +76,14 @@ void CoreTools::FileBufferTesting::DelayCopyTest()
 
     FileBuffer buffer2{ buffer0 };
 
-    auto beginPtr2 = buffer2.GetBufferBegin();
+    const auto beginPtr2 = buffer2.GetBufferBegin();
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(beginPtr2, "beginPtr2指针为空。");
 
     // beginPtr2指向另一个副本。
     ASSERT_UNEQUAL(beginPtr0, beginPtr2);
     ASSERT_UNEQUAL(beginPtr1, beginPtr2);
 
-    for (auto i = 0u; i < buffer0.GetSize(); ++i)
-    {
-        *buffer2.GetBuffer(i) = boost::numeric_cast<char>(i + 100);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_2(Init, buffer2, 100);
 
     // beginPtr0和beginPtr1的值没有改变
 
@@ -97,10 +98,7 @@ void CoreTools::FileBufferTesting::BufferTest()
 {
     FileBuffer buffer0{ 11 };
 
-    for (auto i = 0u; i < buffer0.GetSize(); ++i)
-    {
-        *buffer0.GetBuffer(i) = boost::numeric_cast<char>(i);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_2(Init, buffer0, 0);
 
     const FileBuffer buffer1{ buffer0 };
     for (auto i = 0u; i < buffer0.GetSize(); ++i)
@@ -122,7 +120,27 @@ void CoreTools::FileBufferTesting::ForEachTest()
     }
 
     index = 0;
-    const FileBuffer buffer1{ buffer0 };
+
+    for (const FileBuffer buffer1{ buffer0 }; const auto& value : buffer1)
+    {
+        ASSERT_EQUAL(value, static_cast<char>(index));
+
+        ++index;
+    }
+}
+
+void CoreTools::FileBufferTesting::CopyBufferTest()
+{
+    FileBuffer buffer0{ 11 };
+    const auto beginPtr0 = buffer0.GetBufferBegin();
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(beginPtr0, "beginPtr0指针为空。");
+
+    ASSERT_NOT_THROW_EXCEPTION_2(Init, buffer0, 0);
+
+    FileBuffer buffer1{ 11 };
+    buffer1.CopyBuffer(buffer0.begin(), buffer0.end());
+
+    auto index = 0;
     for (const auto& value : buffer1)
     {
         ASSERT_EQUAL(value, static_cast<char>(index));

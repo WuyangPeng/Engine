@@ -11,6 +11,7 @@
 #define CORE_TOOLS_CONTRACT_SHARED_IMPL_DETAIL_H
 
 #include "SharedImpl.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
@@ -24,17 +25,21 @@ CoreTools::SharedImpl<T>::SharedImpl(Type&& arg, Types&&... args)
 
 template <typename T>
 template <typename... Types>
-CoreTools::SharedImpl<T>::SharedImpl(MAYBE_UNUSED ImplCreateUseFactory ImplCreateType, Types&&... args)
+CoreTools::SharedImpl<T>::SharedImpl(ImplCreateUseFactory implCreateType, Types&&... args)
     : impl{ T::FactoryType::Create(std::forward<Types>(args)...) }
 {
+    System::UnusedFunction(implCreateType);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename T>
 template <typename... Types>
-CoreTools::SharedImpl<T>::SharedImpl(MAYBE_UNUSED ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args)
+CoreTools::SharedImpl<T>::SharedImpl(ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args)
     : impl{ std::make_shared<T>() }
 {
+    System::UnusedFunction(implCreateDefaultType);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 

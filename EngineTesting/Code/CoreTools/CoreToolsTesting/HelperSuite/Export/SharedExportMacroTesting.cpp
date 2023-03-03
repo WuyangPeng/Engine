@@ -7,9 +7,8 @@
 ///	标准：std:c++20
 ///	引擎测试版本：0.9.0.2 (2023/02/12 0:05)
 
-#include "SharedExportMacroTesting.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/Helper/AssertMacro.h"
+#include "SharedExportMacroTestingDetail.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h" 
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -46,276 +45,21 @@ void CoreTools::SharedExportMacroTesting::DoRunUnitTest()
 
 void CoreTools::SharedExportMacroTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(ExportSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CoreToolsSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(NetworkSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DatabaseSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ScriptSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MathematicsSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(SoundEffectSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(InputOutputSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ResourceManagerSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(RenderingSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(PhysicsSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ImagicsSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(AnimationSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ArtificialIntellegenceSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(UserInterfaceSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(AssistToolsSharedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(FrameworkSharedTest);
-}
-
-void CoreTools::SharedExportMacroTesting::ExportSharedTest()
-{
-    constexpr auto count = 10;
-    CoreTools::ExportMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::CoreToolsSharedTest()
-{
-    constexpr auto count = 10;
-    CoreTools::CoreToolsMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::NetworkSharedTest()
-{
-    constexpr auto count = 10;
-    Network::NetworkMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::DatabaseSharedTest()
-{
-    constexpr auto count = 10;
-    Database::DatabaseMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::ScriptSharedTest()
-{
-    constexpr auto count = 10;
-    Script::ScriptMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::MathematicsSharedTest()
-{
-    constexpr auto count = 10;
-    Mathematics::MathematicsMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::SoundEffectSharedTest()
-{
-    constexpr auto count = 10;
-    SoundEffect::SoundEffectMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::InputOutputSharedTest()
-{
-    constexpr auto count = 10;
-    InputOutput::InputOutputMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::ResourceManagerSharedTest()
-{
-    constexpr auto count = 10;
-    ResourceManager::ResourceManagerMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::RenderingSharedTest()
-{
-    constexpr auto count = 10;
-    Rendering::RenderingMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::PhysicsSharedTest()
-{
-    constexpr auto count = 10;
-    Physics::PhysicsMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::ImagicsSharedTest()
-{
-    constexpr auto count = 10;
-    Imagics::ImagicsMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::AnimationSharedTest()
-{
-    constexpr auto count = 10;
-    Animation::AnimationMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::ArtificialIntellegenceSharedTest()
-{
-    constexpr auto count = 10;
-    ArtificialIntellegence::ArtificialIntellegenceMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::UserInterfaceSharedTest()
-{
-    constexpr auto count = 10;
-    UserInterface::UserInterfaceMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::AssistToolsSharedTest()
-{
-    constexpr auto count = 10;
-    AssistTools::AssistToolsMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
-}
-
-void CoreTools::SharedExportMacroTesting::FrameworkSharedTest()
-{
-    constexpr auto count = 10;
-    Framework::FrameworkMacroShared lhsMacro{ count };
-
-    auto rhsMacro = lhsMacro;
-
-    ASSERT_EQUAL(rhsMacro.GetCount(), count);
-
-    lhsMacro.SetCount(0);
-
-    ASSERT_EQUAL(lhsMacro.GetCount(), 0);
-    ASSERT_EQUAL(rhsMacro.GetCount(), 0);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<ExportMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<CoreToolsMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<Network::NetworkMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<Database::DatabaseMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<Script::ScriptMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<Mathematics::MathematicsMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<SoundEffect::SoundEffectMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<InputOutput::InputOutputMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<ResourceManager::ResourceManagerMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<Rendering::RenderingMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<Physics::PhysicsMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<Imagics::ImagicsMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<Animation::AnimationMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<ArtificialIntellegence::ArtificialIntellegenceMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<UserInterface::UserInterfaceMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<AssistTools::AssistToolsMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<Framework::FrameworkMacroShared>);
 }

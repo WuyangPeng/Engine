@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class CopyUnsharedExportMacroTesting final : public CoreTools::UnitTest
+    class CopyUnsharedExportMacroTesting final : public UnitTest
     {
     public:
         using ClassType = CopyUnsharedExportMacroTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         template <typename T>

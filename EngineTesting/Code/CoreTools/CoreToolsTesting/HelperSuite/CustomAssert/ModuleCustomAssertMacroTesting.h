@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class ModuleCustomAssertMacroTesting final : public CoreTools::UnitTest
+    class ModuleCustomAssertMacroTesting final : public UnitTest
     {
     public:
         using ClassType = ModuleCustomAssertMacroTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void AssertMacroTest();
@@ -46,7 +46,7 @@ namespace CoreTools
         void PhysicsTest();
         void ImagicsTest();
         void AnimationTest();
-        void ArtificialIntellegenceTest();
+        void ArtificialIntelligenceTest();
         void UserInterfaceTest();
         void AssistToolsTest();
         void FrameworkTest();

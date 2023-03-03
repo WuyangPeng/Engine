@@ -4,8 +4,8 @@
 // 
 // ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 10:07)
 
-#ifndef ARTIFICIAL_INTELLEGENCE_DLL_LIB_H
-#define ARTIFICIAL_INTELLEGENCE_DLL_LIB_H
+#ifndef ARTIFICIAL_INTELLIGENCE_DLL_LIB_H
+#define ARTIFICIAL_INTELLIGENCE_DLL_LIB_H
 
 #include "Helper/UserMacro.h"
 
@@ -17,4 +17,4 @@
 
 #include "System/SystemLib.h"
 
-#endif // ARTIFICIAL_INTELLEGENCE_DLL_LIB_H
+#endif // ARTIFICIAL_INTELLIGENCE_DLL_LIB_H

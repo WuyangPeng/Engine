@@ -1,14 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 12:32)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 13:30)
 
 #ifndef CORE_TOOLS_EXCEPTION_WINDOWS_ERROR_H
 #define CORE_TOOLS_EXCEPTION_WINDOWS_ERROR_H
+
+#include "CoreTools/CoreToolsDll.h"
 
 #include "ErrorImpl.h"
 #include "System/Windows/Fwd/WindowsFlagsFwd.h"
@@ -27,7 +29,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD const String GetError() const final;
+        NODISCARD String GetError() const override;
 
     private:
         WindowError lastError;

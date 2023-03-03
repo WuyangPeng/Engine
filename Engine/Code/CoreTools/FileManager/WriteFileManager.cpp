@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:50)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 11:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,9 +18,6 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include <array>
-
-using std::array;
-using std::string;
 
 CoreTools::WriteFileManager::WriteFileManager(const String& fileName, bool addition)
     : impl{ CoreTools::ImplCreateUseFactory::Default, fileName, addition }
@@ -46,24 +43,23 @@ void CoreTools::WriteFileManager::Write(size_t itemSize, size_t itemsNumber, con
     return impl->Write(itemSize, itemsNumber, data);
 }
 
-void CoreTools::WriteFileManager::SaveStdString(const string& name)
+void CoreTools::WriteFileManager::SaveStdString(const std::string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    constexpr auto alignedLength = 4;
-
-    auto length = boost::numeric_cast<int32_t>(name.size());
+    const auto length = boost::numeric_cast<int32_t>(name.size());
     Write(sizeof(int32_t), &length);
 
     if (0 < length)
     {
+        constexpr auto alignedLength = 4;
+
         Write(sizeof(char), length, name.c_str());
 
         // 字符串被写入四个字节的倍数。
-        auto padding = (length % alignedLength);
-        if (0 < padding)
+        if (auto padding = (length % alignedLength); 0 < padding)
         {
-            constexpr array<char, alignedLength> zero{};
+            constexpr std::array<char, alignedLength> zero{};
             padding = alignedLength - padding;
 
             Write(sizeof(char), padding, zero.data());

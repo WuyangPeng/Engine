@@ -11,6 +11,7 @@
 #define CORE_TOOLS_CONTRACT_PERFORMANCE_UNSHARED_IMPL_DETAIL_H
 
 #include "PerformanceUnsharedImpl.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename T>
@@ -23,17 +24,21 @@ CoreTools::PerformanceUnsharedImpl<T>::PerformanceUnsharedImpl(Type&& arg, Types
 
 template <typename T>
 template <typename... Types>
-CoreTools::PerformanceUnsharedImpl<T>::PerformanceUnsharedImpl(MAYBE_UNUSED ImplCreateUseFactory implCreateType, Types&&... args)
+CoreTools::PerformanceUnsharedImpl<T>::PerformanceUnsharedImpl(ImplCreateUseFactory implCreateType, Types&&... args)
     : impl{ T::FactoryType::Create(std::forward<Types>(args)...) }
 {
+    System::UnusedFunction(implCreateType);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename T>
 template <typename... Types>
-CoreTools::PerformanceUnsharedImpl<T>::PerformanceUnsharedImpl(MAYBE_UNUSED ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args)
+CoreTools::PerformanceUnsharedImpl<T>::PerformanceUnsharedImpl(ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args)
     : impl{ std::make_shared<T>() }
 {
+    System::UnusedFunction(implCreateDefaultType);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 

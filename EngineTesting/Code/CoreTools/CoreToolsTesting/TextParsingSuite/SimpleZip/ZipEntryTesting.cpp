@@ -13,8 +13,8 @@
 #include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Time/DeltaTime.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
-#include "CoreTools/Base/UniqueIDManager.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
+#include "CoreTools/Base/UniqueIdManager.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -53,7 +53,7 @@ void CoreTools::ZipEntryTesting::MainTest()
 
 void CoreTools::ZipEntryTesting::ZipEntryInfoTest()
 {
-    const auto fileIndex = boost::numeric_cast<mz_uint32>(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::ZipFile));
+    const auto fileIndex = boost::numeric_cast<mz_uint32>(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::ZipFile));
     const auto zipEntryInfo = GetZipEntryInfo(fileIndex);
 
     SimpleZip::ZipEntry zipEntry{ zipEntryInfo };
@@ -238,7 +238,7 @@ void CoreTools::ZipEntryTesting::WriterAddMemTest()
     mz_zip_writer_init_file(&archive, zipArchiveFileName.c_str(), 0);
 
     const auto data = "123456789"s;
-    const auto fileIndex = boost::numeric_cast<mz_uint32>(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::ZipFile));
+    const auto fileIndex = boost::numeric_cast<mz_uint32>(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::ZipFile));
     auto zipEntryInfo = GetZipEntryInfo(fileIndex);
     zipEntryInfo.m_comp_size = data.size();
 
@@ -261,7 +261,7 @@ void CoreTools::ZipEntryTesting::ReaderExtractFileToMemTest()
         THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(archive.m_last_error)));
     }
 
-    const auto fileIndex = boost::numeric_cast<mz_uint32>(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::ZipFile));
+    const auto fileIndex = boost::numeric_cast<mz_uint32>(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::ZipFile));
     const auto zipEntryInfo = GetZipEntryInfo(fileIndex);
 
     SimpleZip::ZipEntry zipEntry{ zipEntryInfo };

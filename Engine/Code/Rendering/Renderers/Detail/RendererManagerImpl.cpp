@@ -10,7 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "RendererManagerImpl.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -39,7 +39,7 @@ int64_t Rendering::RendererManagerImpl::Insert(const RendererSharedPtr& renderer
         }
     }
 
-    auto id = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Renderer);
+    auto id = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Renderer);
     renderers.emplace(id, renderer);
 
     return id;

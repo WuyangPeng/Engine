@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class CopyModuleExportMacroTesting final : public CoreTools::UnitTest
+    class CopyModuleExportMacroTesting final : public UnitTest
     {
     public:
         using ClassType = CopyModuleExportMacroTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         template <typename T>

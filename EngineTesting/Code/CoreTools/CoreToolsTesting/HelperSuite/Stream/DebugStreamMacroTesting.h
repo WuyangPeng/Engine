@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class DebugStreamMacroTesting final : public CoreTools::UnitTest
+    class DebugStreamMacroTesting final : public UnitTest
     {
     public:
         using ClassType = DebugStreamMacroTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void SaveStreamTest();

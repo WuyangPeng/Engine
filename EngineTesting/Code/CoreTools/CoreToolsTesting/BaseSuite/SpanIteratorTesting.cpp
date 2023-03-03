@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:43)
+///	引擎测试版本：0.9.0.3 (2023/02/23 16:40)
 
 #include "SpanIteratorTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -14,8 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::string;
-using std::vector;
+using namespace std::literals;
 
 CoreTools::SpanIteratorTesting::SpanIteratorTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -42,9 +41,9 @@ void CoreTools::SpanIteratorTesting::MainTest()
 
 void CoreTools::SpanIteratorTesting::BaseTest()
 {
-    vector<int> test{ 1, 2, 3, 4, 5, 6, 7 };
+    std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
 
-    using SpanIterator = SpanIterator<vector<int>::iterator>;
+    using SpanIterator = SpanIterator<std::vector<int>::iterator>;
 
     const SpanIterator span{ test.begin(), test.end() };
 
@@ -57,9 +56,9 @@ void CoreTools::SpanIteratorTesting::BaseTest()
 
 void CoreTools::SpanIteratorTesting::DereferenceTest()
 {
-    vector<string> test{ "1", "2", "3" };
+    std::vector test{ "1"s, "2"s, "3"s };
 
-    using SpanIterator = SpanIterator<vector<string>::iterator>;
+    using SpanIterator = SpanIterator<std::vector<std::string>::iterator>;
 
     const SpanIterator span{ test.begin(), test.end(), test.begin() };
 
@@ -69,9 +68,9 @@ void CoreTools::SpanIteratorTesting::DereferenceTest()
 
 void CoreTools::SpanIteratorTesting::StepTest()
 {
-    vector<int> test{ 1, 2, 3, 4, 5, 6, 7 };
+    std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
 
-    using SpanIterator = SpanIterator<vector<int>::iterator>;
+    using SpanIterator = SpanIterator<std::vector<int>::iterator>;
 
     SpanIterator span{ test.begin(), test.end(), test.begin() };
 
@@ -108,9 +107,9 @@ void CoreTools::SpanIteratorTesting::StepTest()
 
 void CoreTools::SpanIteratorTesting::IncreaseTest()
 {
-    vector<char> test(10);
+    std::vector<char> test(10);
 
-    using SpanIterator = SpanIterator<vector<char>::iterator>;
+    using SpanIterator = SpanIterator<std::vector<char>::iterator>;
 
     SpanIterator span{ test.begin(), test.end(), test.begin() };
     constexpr int32_t increase{ 5 };
@@ -124,9 +123,9 @@ void CoreTools::SpanIteratorTesting::IncreaseTest()
 
 void CoreTools::SpanIteratorTesting::SubtractionTest()
 {
-    vector<int> test{ 1, 2, 3, 4, 5, 6, 7 };
+    std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
 
-    using SpanIterator = SpanIterator<vector<int>::iterator>;
+    using SpanIterator = SpanIterator<std::vector<int>::iterator>;
 
     const SpanIterator span0{ test.begin(), test.end(), test.begin() };
     SpanIterator span1{ test.begin(), test.end(), test.begin() };
@@ -140,9 +139,9 @@ void CoreTools::SpanIteratorTesting::SubtractionTest()
 
 void CoreTools::SpanIteratorTesting::IterSwapTest()
 {
-    vector<int> test{ 1, 2, 3, 4, 5, 6, 7 };
+    std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
 
-    using SpanIterator = SpanIterator<vector<int>::iterator>;
+    using SpanIterator = SpanIterator<std::vector<int>::iterator>;
 
     const SpanIterator span0{ test.begin(), test.end(), test.begin() };
     SpanIterator span1{ test.begin(), test.end(), test.begin() };

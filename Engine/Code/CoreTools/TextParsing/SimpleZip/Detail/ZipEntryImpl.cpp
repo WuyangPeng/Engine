@@ -6,7 +6,7 @@
 ///
 ///	标准：std:c++17
 ///	引擎版本：0.8.0.0 (2021/12/19 22:37)
- 
+
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ZipEntryImpl.h"
@@ -14,7 +14,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Time/DeltaTime.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -29,7 +29,7 @@ CoreTools::SimpleZip::ZipEntryImpl::ZipEntryImpl(const ZipEntryInfo& info)
     : entryInfo{ info }, entryData{}, isModified{ false }
 {
     //  更新索引计数器。
-    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueID(UniqueIDSelect::ZipFile, info.m_file_index);
+    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueId(UniqueIdSelect::ZipFile, info.m_file_index);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -45,7 +45,7 @@ CoreTools::SimpleZip::ZipEntryInfo CoreTools::SimpleZip::ZipEntryImpl::CreateInf
 {
     ZipEntryInfo info{};
 
-    info.m_file_index = boost::numeric_cast<mz_uint32>(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::ZipFile));
+    info.m_file_index = boost::numeric_cast<mz_uint32>(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::ZipFile));
     info.m_time = System::GetTimeInSeconds();
     info.m_is_directory = (fileName.back() == TextParsing::g_ForwardSlash);
     info.m_is_encrypted = false;

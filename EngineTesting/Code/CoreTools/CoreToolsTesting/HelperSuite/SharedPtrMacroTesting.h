@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class SharedPtrMacroTesting final : public CoreTools::UnitTest
+    class SharedPtrMacroTesting final : public UnitTest
     {
     public:
         using ClassType = SharedPtrMacroTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void MacroTest() noexcept;

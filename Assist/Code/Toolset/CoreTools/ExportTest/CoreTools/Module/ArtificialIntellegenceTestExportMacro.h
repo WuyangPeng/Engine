@@ -7,21 +7,21 @@
 ///	标准：std:c++20
 ///	引擎辅助版本：0.9.0.2 (2023/02/07 17:09)
 
-#ifndef EXPORT_TEST_ARTIFICIAL_INTELLEGENCE_TEST_EXPORT_MACRO_H
-#define EXPORT_TEST_ARTIFICIAL_INTELLEGENCE_TEST_EXPORT_MACRO_H
+#ifndef EXPORT_TEST_ARTIFICIAL_INTELLIGENCE_TEST_EXPORT_MACRO_H
+#define EXPORT_TEST_ARTIFICIAL_INTELLIGENCE_TEST_EXPORT_MACRO_H
 
 #include "ArtificialIntellegence/ArtificialIntellegenceDll.h"
 
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 
-EXPORT_SHARED_PTR(ArtificialIntellegence, ArtificialIntellegenceTestExportMacroImpl, ARTIFICIAL_INTELLEGENCE_DEFAULT_DECLARE);
-ARTIFICIAL_INTELLEGENCE_EXPORT(ArtificialIntellegenceTestExportMacroImpl, NON_COPY);
-ARTIFICIAL_INTELLEGENCE_EXPORT_UNIQUE_PTR(ArtificialIntellegenceTestExportMacro);
+EXPORT_SHARED_PTR(ArtificialIntellegence, ArtificialIntellegenceTestExportMacroImpl, ARTIFICIAL_INTELLIGENCE_DEFAULT_DECLARE);
+ARTIFICIAL_INTELLIGENCE_EXPORT(ArtificialIntellegenceTestExportMacroImpl, NON_COPY);
+ARTIFICIAL_INTELLIGENCE_EXPORT_UNIQUE_PTR(ArtificialIntellegenceTestExportMacro);
 
 namespace ArtificialIntellegence
 {
-    class ARTIFICIAL_INTELLEGENCE_DEFAULT_DECLARE ArtificialIntellegenceTestExportMacro final
+    class ARTIFICIAL_INTELLIGENCE_DEFAULT_DECLARE ArtificialIntellegenceTestExportMacro final
     {
     public:
         NON_COPY_TYPE_DECLARE(ArtificialIntellegenceTestExportMacro);
@@ -39,4 +39,4 @@ namespace ArtificialIntellegence
     };
 }
 
-#endif  // EXPORT_TEST_ARTIFICIAL_INTELLEGENCE_TEST_EXPORT_MACRO_H
+#endif  // EXPORT_TEST_ARTIFICIAL_INTELLIGENCE_TEST_EXPORT_MACRO_H

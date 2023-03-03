@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class ExportMacroTesting final : public CoreTools::UnitTest
+    class ExportMacroTesting final : public UnitTest
     {
     public:
         using ClassType = ExportMacroTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void ExportSharedPtrMacroTest();

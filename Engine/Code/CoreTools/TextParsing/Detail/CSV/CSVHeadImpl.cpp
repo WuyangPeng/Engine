@@ -13,6 +13,7 @@
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -118,7 +119,7 @@ void CoreTools::CSVHeadImpl::ParsingEnumTypeName(CSVDataType type, const String&
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-            enumTypeName.emplace_back(StringConversion::ToFirstLetterUpper(enumType[1]));
+            enumTypeName.emplace_back(StringUtility::ToFirstLetterUpper(enumType[1]));
 
 #include STSTEM_WARNING_POP
         }
@@ -141,7 +142,7 @@ void CoreTools::CSVHeadImpl::ParsingVariableName()
     const auto column = Parsing::GetSplitComma(content);
     for (const auto& value : column)
     {
-        variableName.emplace_back(StringConversion::ToFirstLetterLower(value));
+        variableName.emplace_back(StringUtility::ToFirstLetterLower(value));
     }
 }
 
@@ -474,7 +475,7 @@ System::String CoreTools::CSVHeadImpl::GetUpperVariableName(int index) const
         return TextParsing::g_IDCapital.data();
     }
 
-    return StringConversion::ToFirstLetterUpper(upperVariableName);
+    return StringUtility::ToFirstLetterUpper(upperVariableName);
 }
 
 System::String CoreTools::CSVHeadImpl::GetFunctionVariableName(int index) const

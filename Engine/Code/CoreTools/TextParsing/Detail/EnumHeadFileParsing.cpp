@@ -75,7 +75,7 @@ System::String CoreTools::EnumHeadFileParsing::GetEnumVariableContent(const Stri
     auto name = result.at(nameIndex);
     boost::algorithm::trim_if(name, boost::is_any_of(TextParsing::g_QuotationMarks));
 
-    auto describe = StringConversion::UTF8ConversionStandard(result.at(describeIndex));
+    auto describe = StringConversion::Utf8ConversionStandard(result.at(describeIndex));
     boost::algorithm::trim_if(describe, boost::is_any_of(TextParsing::g_QuotationMarks));
 
     return GetEnumVariableContent(name, id, describe);

@@ -49,14 +49,14 @@ void CoreTools::AssertThrowExceptionTesting::AssertExceptionMacroTest()
 
 void CoreTools::AssertThrowExceptionTesting::AssertThrowExceptionTest()
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("测试异常被正确抛出！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("测试异常被正确抛出！"s))
 }
 
 void CoreTools::AssertThrowExceptionTesting::AssertThrowExceptionTestWithParameter(int aParameter)
 {
     ASSERT_EQUAL(aParameter, parameter0);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("测试异常被正确抛出！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("测试异常被正确抛出！"s))
 }
 
 void CoreTools::AssertThrowExceptionTesting::AssertThrowExceptionTestWith2Parameter(int aParameter0, int aParameter1)
@@ -64,7 +64,7 @@ void CoreTools::AssertThrowExceptionTesting::AssertThrowExceptionTestWith2Parame
     ASSERT_EQUAL(aParameter0, parameter0);
     ASSERT_EQUAL(aParameter1, parameter1);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("测试异常被正确抛出！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("测试异常被正确抛出！"s))
 }
 
 void CoreTools::AssertThrowExceptionTesting::AssertThrowExceptionTestWith3Parameter(int aParameter0, int aParameter1, int aParameter2)
@@ -73,5 +73,5 @@ void CoreTools::AssertThrowExceptionTesting::AssertThrowExceptionTestWith3Parame
     ASSERT_EQUAL(aParameter1, parameter1);
     ASSERT_EQUAL(aParameter2, parameter2);
 
-    THROW_EXCEPTION(SYSTEM_TEXT("测试异常被正确抛出！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("测试异常被正确抛出！"s))
 }

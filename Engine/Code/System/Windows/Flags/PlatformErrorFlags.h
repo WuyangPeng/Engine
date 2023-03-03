@@ -558,7 +558,6 @@ namespace System
         DeviceHardwareError = ERROR_DEVICE_HARDWARE_ERROR,
         InvalidAddress = ERROR_INVALID_ADDRESS,
         HasSystemCriticalFiles = ERROR_HAS_SYSTEM_CRITICAL_FILES,
-        VrfCfgAndIoEnabled = ERROR_VRF_CFG_AND_IO_ENABLED,
         PartitionTerminating = ERROR_PARTITION_TERMINATING,
         UserProfileLoad = ERROR_USER_PROFILE_LOAD,
         ArithmeticOverflow = ERROR_ARITHMETIC_OVERFLOW,

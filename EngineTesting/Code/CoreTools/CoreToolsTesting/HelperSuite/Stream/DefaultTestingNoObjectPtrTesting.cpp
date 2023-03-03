@@ -55,7 +55,7 @@ void CoreTools::DefaultTestingNoObjectPtrTesting::SaveStreamTest()
 
     BufferTarget target{ bufferSize, objectRegister };
 
-    ConstObjectAssociated<DefaultTestingNoObjectPtr> constObjectAssociated{ streamObject, 1 };
+    const ConstObjectAssociated<DefaultTestingNoObjectPtr> constObjectAssociated{ streamObject, 1 };
     ASSERT_LESS(0, objectRegister->Register(constObjectAssociated));
 
     streamObject->Save(target);
@@ -63,7 +63,7 @@ void CoreTools::DefaultTestingNoObjectPtrTesting::SaveStreamTest()
 
 void CoreTools::DefaultTestingNoObjectPtrTesting::LoadStreamTest()
 {
-    auto streamObject = DefaultTestingNoObjectPtr::Create("name"s);
+    const auto streamObject = DefaultTestingNoObjectPtr::Create("name"s);
 
     const auto fileBuffer = std::make_shared<FileBuffer>(bufferSize);
 
@@ -74,9 +74,9 @@ void CoreTools::DefaultTestingNoObjectPtrTesting::LoadStreamTest()
 
 void CoreTools::DefaultTestingNoObjectPtrTesting::LinkStreamTest()
 {
-    auto streamObject = DefaultTestingNoObjectPtr::Create("name"s);
+    const auto streamObject = DefaultTestingNoObjectPtr::Create("name"s);
 
-    auto link = ObjectLink::Create();
+    const auto link = ObjectLink::Create();
 
     streamObject->PostLink();
     streamObject->Link(*link);

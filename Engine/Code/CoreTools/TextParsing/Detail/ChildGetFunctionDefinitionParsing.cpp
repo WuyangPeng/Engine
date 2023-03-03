@@ -11,6 +11,7 @@
 
 #include "ChildGetFunctionDefinitionParsing.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
@@ -367,7 +368,7 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunction
     if (!mapping.empty())
     {
         auto variableName = csvHead.GetVariableName(index);
-        auto upperVariableName = StringConversion::ToFirstLetterUpper(variableName);
+        auto upperVariableName = StringUtility::ToFirstLetterUpper(variableName);
 
         auto content = GenerateGetFunctionArrayMapping(upperVariableName, mapping);
 
@@ -392,7 +393,7 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunction
     content += TextParsing::g_SharedPtrConst;
     content += nameSpace;
     content += TextParsing::g_DoubleColon;
-    content += StringConversion::ToFirstLetterUpper(mapping);
+    content += StringUtility::ToFirstLetterUpper(mapping);
     content += TextParsing::g_RightAngleBracket;
     content += TextParsing::g_Space;
     content += nameSpace;
@@ -414,7 +415,7 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunction
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto upperMapping = StringConversion::ToFirstLetterUpper(mapping);
+    const auto upperMapping = StringUtility::ToFirstLetterUpper(mapping);
 
     auto content = GenerateFunctionBeginBrackets();
 

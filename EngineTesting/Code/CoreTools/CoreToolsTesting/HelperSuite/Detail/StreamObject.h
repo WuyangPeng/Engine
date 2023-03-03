@@ -30,7 +30,7 @@ namespace CoreTools
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(StreamObject);
 
-        NODISCARD ObjectInterfaceSharedPtr CloneObject() const final;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
         NODISCARD bool GetBoolValue() const noexcept;
 

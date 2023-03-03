@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:37)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,20 +13,20 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-CoreTools::FileAsynchronousParameterImpl::FileAsynchronousParameterImpl(const String& fileName, bool binaryFile, const FileEventInterfaceSharedPtr& event)
-    : FileAsynchronousParameterImpl{ fileName, binaryFile, event, FileBufferSharedPtr{}, false }
+CoreTools::FileAsynchronousParameterImpl::FileAsynchronousParameterImpl(String fileName, bool binaryFile, const FileEventInterfaceSharedPtr& event) noexcept
+    : FileAsynchronousParameterImpl{ std::move(fileName), binaryFile, event, FileBufferSharedPtr{}, false }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::FileAsynchronousParameterImpl::FileAsynchronousParameterImpl(const String& fileName, bool binaryFile, const ConstFileBufferSharedPtr& fileBuffer, bool append)
-    : FileAsynchronousParameterImpl{ fileName, binaryFile, FileEventInterfaceSharedPtr{}, fileBuffer, append }
+CoreTools::FileAsynchronousParameterImpl::FileAsynchronousParameterImpl(String fileName, bool binaryFile, ConstFileBufferSharedPtr fileBuffer, bool append) noexcept
+    : FileAsynchronousParameterImpl{ std::move(fileName), binaryFile, FileEventInterfaceSharedPtr{}, std::move(fileBuffer), append }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::FileAsynchronousParameterImpl::FileAsynchronousParameterImpl(const String& fileName, bool binaryFile, const FileEventInterfaceSharedPtr& event, const ConstFileBufferSharedPtr& fileBuffer, bool append)
-    : fileName{ fileName }, binaryFile{ binaryFile }, event{ event }, fileBuffer{ fileBuffer }, append{ append }
+CoreTools::FileAsynchronousParameterImpl::FileAsynchronousParameterImpl(String fileName, bool binaryFile, const FileEventInterfaceSharedPtr& event, ConstFileBufferSharedPtr fileBuffer, bool append) noexcept
+    : fileName{ std::move(fileName) }, binaryFile{ binaryFile }, event{ event }, fileBuffer{ std::move(fileBuffer) }, append{ append }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -60,7 +60,7 @@ CoreTools::ConstFileBufferSharedPtr CoreTools::FileAsynchronousParameterImpl::Ge
 
     if (!fileBuffer)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("文件缓存区未赋值。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("文件缓存区未赋值。"))
     }
 
     return fileBuffer;

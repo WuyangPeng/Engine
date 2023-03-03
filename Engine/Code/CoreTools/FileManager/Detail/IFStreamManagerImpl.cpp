@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:41)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:45)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,7 +19,6 @@
 
 #include <sstream>
 
-using std::locale;
 using namespace std::literals;
 
 CoreTools::IFStreamManagerImpl::IFStreamManagerImpl(const String& fileName)
@@ -65,18 +64,17 @@ System::String CoreTools::IFStreamManagerImpl::BackupFile() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("备份文件失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("备份文件失败！"s))
     }
 
     return newName;
 }
 
-// private
 System::String CoreTools::IFStreamManagerImpl::GetBackupName() const
 {
     String newName{ fileName };
 
-    const String dot{ SYSTEM_TEXT("."s) };
+    const auto dot = SYSTEM_TEXT("."s);
 
     const auto nowTime = boost::posix_time::second_clock::local_time();
 
@@ -88,7 +86,6 @@ System::String CoreTools::IFStreamManagerImpl::GetBackupName() const
     return newName;
 }
 
-// priavte
 void CoreTools::IFStreamManagerImpl::CopyContentToStream(OStream* stream) const
 {
     CORE_TOOLS_ASSERTION_0(stream != nullptr, "指针无效");
@@ -96,13 +93,13 @@ void CoreTools::IFStreamManagerImpl::CopyContentToStream(OStream* stream) const
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
 
-    auto thisImpl = const_cast<IFStreamManagerImpl*>(this);
+    const auto thisImpl = const_cast<IFStreamManagerImpl*>(this);
 
 #include STSTEM_WARNING_POP
 
     IFStreamSeekManager manager{ thisImpl->iStream };
 
-    auto loc = iStream.getloc();
+    const auto loc = iStream.getloc();
 
     stream->imbue(loc);
 
@@ -133,7 +130,7 @@ void CoreTools::IFStreamManagerImpl::SetSimplifiedChinese()
 
 #if !defined(TCRE_USE_GCC)
 
-    locale chs{ "chs" };
+    const std::locale chs{ "chs" };
 
     iStream.imbue(chs);
 

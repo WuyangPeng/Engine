@@ -12,11 +12,11 @@
 
 #include "CoreTools/Contract/AssertionDetail.h"
 
-#if defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
+#if defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
 
     #define IMAGICS_ASSERT_LEVEL 0
 
-#endif  // OPEN_IMPORTANT_EXCPTION_ASSERT
+#endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 
 #if !defined(IMAGICS_ASSERT_LEVEL)
 

@@ -12,6 +12,7 @@
 #include "CoreTools/Base/Version.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite//UnitTestDetail.h"
 
 namespace ThreadingCoreRenderEngine
 {

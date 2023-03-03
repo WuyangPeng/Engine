@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 13:38)
+///	引擎测试版本：0.9.0.3 (2023/03/01 15:03)
 
 #include "ErrorTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -45,11 +45,11 @@ void CoreTools::ErrorTesting::NormalErrorTest()
 {
     const auto errorDescription = SYSTEM_TEXT("错误"s);
 
-    System::SetPlatformLastError(System::WindowError::Success);
+    SetPlatformLastError(System::WindowError::Success);
 
-    LastError lastError{};
+    const LastError lastError{};
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
-    Error normalError{ functionDescribed, lastError, errorDescription };
+    const Error normalError{ functionDescribed, lastError, errorDescription };
 
     ASSERT_EQUAL(functionDescribed.GetCurrentFunction(), normalError.GetCurrentFunction());
     ASSERT_EQUAL(functionDescribed.GetFileName(), normalError.GetFileName());
@@ -64,11 +64,11 @@ void CoreTools::ErrorTesting::WindowsErrorTest()
 {
     const auto errorDescription = SYSTEM_TEXT("环境不正确。"s);
 
-    System::SetPlatformLastError(System::WindowError::BadEnvironment);
+    SetPlatformLastError(System::WindowError::BadEnvironment);
 
-    LastError lastError{};
+    const LastError lastError{};
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
-    Error windowsError{ functionDescribed, lastError, System::String() };
+    const Error windowsError{ functionDescribed, lastError, System::String() };
     auto windowsErrorString = windowsError.GetError();
 
     ASSERT_EQUAL(functionDescribed.GetCurrentFunction(), windowsError.GetCurrentFunction());
@@ -87,12 +87,12 @@ void CoreTools::ErrorTesting::OpenFileErrorTest()
     format % SYSTEM_TEXT("系统找不到指定的文件 ");
     format % fileName;
 
-    System::SetPlatformLastError(System::WindowError::FileNotFound);
+    SetPlatformLastError(System::WindowError::FileNotFound);
 
-    LastError lastError{};
+    const LastError lastError{};
 
-    Error openFileError{ CORE_TOOLS_FUNCTION_DESCRIBED, lastError, fileName };
-    auto openFileErrorString = openFileError.GetError();
+    const Error openFileError{ CORE_TOOLS_FUNCTION_DESCRIBED, lastError, fileName };
+    const auto openFileErrorString = openFileError.GetError();
 
     ASSERT_EQUAL(openFileErrorString.find(format.str()), System::String::npos);
 }
@@ -101,7 +101,7 @@ void CoreTools::ErrorTesting::ComErrorTest()
 {
     const auto errorDescription = SYSTEM_TEXT("灾难性故障"s);
 
-    Error comError{ CORE_TOOLS_FUNCTION_DESCRIBED, System::WindowError::EUnexpected, SYSTEM_TEXT(""s) };
+    const Error comError{ CORE_TOOLS_FUNCTION_DESCRIBED, System::WindowError::EUnexpected, SYSTEM_TEXT(""s) };
 
     auto comErrorString = comError.GetError();
 
@@ -110,7 +110,7 @@ void CoreTools::ErrorTesting::ComErrorTest()
 
 void CoreTools::ErrorTesting::ThrowExceptionTest()
 {
-    System::SetPlatformLastError(System::WindowError::BadLength);
+    SetPlatformLastError(System::WindowError::BadLength);
 
     THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("这里测试抛出异常。")).str());
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:59)
+///	引擎测试版本：0.9.0.3 (2023/03/03 09:28)
 
 #include "ReadAndWriteFileHandleTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -18,8 +18,6 @@
 #include <string>
 #include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 CoreTools::ReadAndWriteFileHandleTesting::ReadAndWriteFileHandleTesting(const OStreamShared& stream)
@@ -70,10 +68,10 @@ void CoreTools::ReadAndWriteFileHandleTesting::ReadFileHandleTest()
 
     ASSERT_EQUAL(size, content.size());
 
-    vector<char> buffer(size);
+    std::vector<char> buffer(size);
     manager.Read(sizeof(char), size, buffer.data());
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     ASSERT_EQUAL(bufferContent, content);
 }
@@ -83,14 +81,14 @@ System::String CoreTools::ReadAndWriteFileHandleTesting::GetFileHandleName()
     return SYSTEM_TEXT("Resource/FileHandleTesting/ReadAndWriteFileHandleTestingText.txt"s);
 }
 
-string CoreTools::ReadAndWriteFileHandleTesting::GetFileHandleContent()
+std::string CoreTools::ReadAndWriteFileHandleTesting::GetFileHandleContent()
 {
     return "FileHandle Testing Text"s;
 }
 
 void CoreTools::ReadAndWriteFileHandleTesting::GetFileByteSizeTest()
 {
-    ReadAndWriteFileHandle handle{ GetFileHandleName() };
+    const ReadAndWriteFileHandle handle{ GetFileHandleName() };
 
     ASSERT_EQUAL(handle.GetFileLength(), GetFileHandleContent().size() + sizeof(size_t));
 }

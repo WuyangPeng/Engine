@@ -11,6 +11,7 @@
 #define CORE_TOOLS_TEMPLATE_TOOLS_REAL_ADDRESS_DETAIL_H
 
 #include "RealAddress.h"
+#include "System/Helper/PragmaWarning.h"
 
 template <typename T>
 T* CoreTools::GetAddress(T& t) noexcept

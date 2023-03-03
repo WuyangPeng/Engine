@@ -13,9 +13,9 @@
 #include "UserMacro.h"
 #include "CoreTools/Helper/Assertion/UserCustomAssertMacro.h"
 
-#if defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
+#if defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
     #define SYSTEM_EXAMPLE_ASSERT_LEVEL 0
-#endif  // OPEN_IMPORTANT_EXCPTION_ASSERT
+#endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 
 #if !defined(SYSTEM_EXAMPLE_ASSERT_LEVEL)
     #define SYSTEM_EXAMPLE_ASSERT_LEVEL 4

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:58)
+///	引擎测试版本：0.9.0.3 (2023/03/03 09:05)
 
 #include "CFileManagerTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -18,10 +18,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include <string>
-#include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 System::String CoreTools::CFileManagerTesting::GetDirectory()
@@ -41,7 +38,7 @@ System::String CoreTools::CFileManagerTesting::GetFileManagerHelperFileName()
     return fileName;
 }
 
-string CoreTools::CFileManagerTesting::GetFileManagerContent()
+std::string CoreTools::CFileManagerTesting::GetFileManagerContent()
 {
     return "CFileManagerHelper Testing Text"s;
 }
@@ -56,7 +53,13 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CFileManagerTesting)
 
 void CoreTools::CFileManagerTesting::DoRunUnitTest()
 {
+    Environment::Create();
+
+    ASSERT_TRUE(ENVIRONMENT_SINGLETON.InsertDirectory(GetDirectory()));
+
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+
+    Environment::Destroy();
 }
 
 void CoreTools::CFileManagerTesting::MainTest()
@@ -67,10 +70,6 @@ void CoreTools::CFileManagerTesting::MainTest()
 // CFileManageHelp测试
 void CoreTools::CFileManagerTesting::CFileManagerHelperTest()
 {
-    Environment::Create();
-
-    ASSERT_TRUE(ENVIRONMENT_SINGLETON.InsertDirectory(GetDirectory()));
-
     ASSERT_NOT_THROW_EXCEPTION_1(SaveIntoFileTest, false);
     ASSERT_NOT_THROW_EXCEPTION_1(LoadFromFileTest, true);
     ASSERT_NOT_THROW_EXCEPTION_1(LoadFromFileUseEnvironmentTest, true);
@@ -80,15 +79,13 @@ void CoreTools::CFileManagerTesting::CFileManagerHelperTest()
     ASSERT_NOT_THROW_EXCEPTION_1(LoadFromFileUseEnvironmentTest, false);
     ASSERT_NOT_THROW_EXCEPTION_1(AppendToFileTest, false);
     ASSERT_NOT_THROW_EXCEPTION_1(SaveIntoFileTest, true);
-
-    Environment::Destroy();
 }
 
 void CoreTools::CFileManagerTesting::LoadFromFileTest(bool binaryFile)
 {
     auto buffer = CFileManagerHelper::LoadFromFile(GetFileManagerHelperFileName(), binaryFile);
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     ASSERT_EQUAL(bufferContent, GetFileManagerContent());
 }
@@ -97,7 +94,7 @@ void CoreTools::CFileManagerTesting::LoadFromFileUseEnvironmentTest(bool binaryF
 {
     auto buffer = CFileManagerHelper::LoadFromFileUseEnvironment(GetFileName(), binaryFile);
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     ASSERT_EQUAL(bufferContent, GetFileManagerContent());
 }
@@ -110,7 +107,7 @@ void CoreTools::CFileManagerTesting::AppendToFileTest(bool binaryFile)
 
     auto buffer = CFileManagerHelper::LoadFromFile(GetFileManagerHelperFileName(), binaryFile);
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     content += GetFileManagerContent();
 
@@ -119,13 +116,13 @@ void CoreTools::CFileManagerTesting::AppendToFileTest(bool binaryFile)
 
 void CoreTools::CFileManagerTesting::SaveIntoFileTest(bool binaryFile)
 {
-    auto content = GetFileManagerContent();
+    const auto content = GetFileManagerContent();
 
     CFileManagerHelper::SaveIntoFile(GetFileManagerHelperFileName(), binaryFile, boost::numeric_cast<int>(content.size()), content.c_str());
 
     auto buffer = CFileManagerHelper::LoadFromFile(GetFileManagerHelperFileName(), binaryFile);
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     ASSERT_EQUAL(bufferContent, content);
 }

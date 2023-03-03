@@ -11,6 +11,7 @@
 
 #include "DefaultContainerMemberParsing.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
@@ -33,7 +34,7 @@ System::String CoreTools::DefaultContainerMemberParsing::GenerateMember() const
     content += GenerateIndentation(1);
     content += TextParsing::g_Container;
     content += TextParsing::g_Space;
-    content += StringConversion::ToFirstLetterLower(GetCSVClassName());
+    content += StringUtility::ToFirstLetterLower(GetCSVClassName());
     content += TextParsing::g_SemicolonNewline;
 
     content += GenerateIndentation();

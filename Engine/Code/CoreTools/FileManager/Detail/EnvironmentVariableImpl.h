@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 16:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 09:44)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_ENVIRONMENT_VARIABLE_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_ENVIRONMENT_VARIABLE_IMPL_H
@@ -16,13 +16,14 @@
 
 #include <string>
 
+// 获取字符串对应的环境变量。
 namespace CoreTools
 {
-    // 获取字符串对应的环境变量。
     class CORE_TOOLS_HIDDEN_DECLARE EnvironmentVariableImpl final
     {
     public:
         using ClassType = EnvironmentVariableImpl;
+
         using TChar = System::TChar;
         using String = System::String;
 

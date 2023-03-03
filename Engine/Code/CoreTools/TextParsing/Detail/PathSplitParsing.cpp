@@ -12,6 +12,7 @@
 #include "PathSplitParsing.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
@@ -52,7 +53,7 @@ void CoreTools::PathSplitParsing::ParsingNameSpace(const SplitContainer& splitCo
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-        nameSpace = StringConversion::ToFirstLetterUpper(splitContainer[splitContainer.size() - 2]);
+        nameSpace = StringUtility::ToFirstLetterUpper(splitContainer[splitContainer.size() - 2]);
 
 #include STSTEM_WARNING_POP
     }
@@ -69,7 +70,7 @@ void CoreTools::PathSplitParsing::ParsingClassName(const SplitContainer& splitCo
         const auto& lastName = splitContainer.back();
         const auto poistion = lastName.find(TextParsing::g_Dot);
 
-        className = StringConversion::ToFirstLetterUpper(lastName.substr(0, poistion));
+        className = StringUtility::ToFirstLetterUpper(lastName.substr(0, poistion));
     }
     else
     {

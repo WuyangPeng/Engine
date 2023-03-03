@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 ///	ÁªÏµ×÷Õß£º94458936@qq.com
 ///
 ///	±ê×¼£ºstd:c++20
-///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.8 (2022/05/19 14:42)
+///	ÒýÇæ²âÊÔ°æ±¾£º0.9.0.3 (2023/02/28 14:12)
 
 #include "StringConversionTesting.h"
 #include "CoreTools/CharacterString/StringConversion.h"
@@ -13,8 +13,6 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::string;
-using std::wstring;
 using namespace std::literals;
 
 CoreTools::StringConversionTesting::StringConversionTesting(const OStreamShared& stream)
@@ -34,6 +32,7 @@ void CoreTools::StringConversionTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MultiByteConversionWideCharTest);
     ASSERT_NOT_THROW_EXCEPTION_0(WideCharConversionMultiByteTest);
+
     ASSERT_NOT_THROW_EXCEPTION_0(StandardConversionWideCharTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StandardConversionMultiByteTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MultiByteConversionStandardTest);
@@ -45,14 +44,10 @@ void CoreTools::StringConversionTesting::MainTest()
 
     ASSERT_NOT_THROW_EXCEPTION_0(StandardConversionCFileStringTest);
 
-    ASSERT_NOT_THROW_EXCEPTION_0(UTF8ConversionWideCharTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(UTF8ConversionStandardTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(UTF8ConversionMultiByteTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(WideCharUTF8ConversionStandardTest);
-
-    ASSERT_NOT_THROW_EXCEPTION_0(ToFirstLetterUpperTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ToFirstLetterLowerTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ToUpperMacroTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(Utf8ConversionWideCharTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(Utf8ConversionStandardTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(Utf8ConversionMultiByteTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(WideCharUtf8ConversionStandardTest);
 }
 
 void CoreTools::StringConversionTesting::MultiByteConversionWideCharTest()
@@ -165,87 +160,73 @@ void CoreTools::StringConversionTesting::StandardConversionCFileStringTest()
     ASSERT_EQUAL(cFile1, SYSTEM_FILE_TEXT("±ê×¼×Ö·û´®×ª»»ÎªCFile×Ö·û´®"s));
 }
 
-void CoreTools::StringConversionTesting::UTF8ConversionWideCharTest()
+void CoreTools::StringConversionTesting::Utf8ConversionWideCharTest()
 {
     const auto original0 = L"Converted WideChar to UTF8"s;
-    const auto multiByte0 = StringConversion::WideCharConversionUTF8(original0);
-    const auto wideChar0 = StringConversion::UTF8ConversionWideChar(multiByte0);
+    const auto multiByte0 = StringConversion::WideCharConversionUtf8(original0);
+    const auto wideChar0 = StringConversion::Utf8ConversionWideChar(multiByte0);
     ASSERT_EQUAL(wideChar0, original0);
 
     const auto original1 = L"WideChar×Ö·û´®×ª»»ÎªUTF8×Ö·û´®"s;
-    const auto multiByte1 = StringConversion::WideCharConversionUTF8(original1);
-    const auto wideChar1 = StringConversion::UTF8ConversionWideChar(multiByte1);
+    const auto multiByte1 = StringConversion::WideCharConversionUtf8(original1);
+    const auto wideChar1 = StringConversion::Utf8ConversionWideChar(multiByte1);
     ASSERT_EQUAL(wideChar1, original1);
 }
 
-void CoreTools::StringConversionTesting::UTF8ConversionStandardTest()
+void CoreTools::StringConversionTesting::Utf8ConversionStandardTest()
 {
     const auto original0 = SYSTEM_TEXT("Converted Standard to UTF8"s);
-    const auto multiByte0 = StringConversion::StandardConversionUTF8(original0);
-    const auto standard0 = StringConversion::UTF8ConversionStandard(multiByte0);
+    const auto multiByte0 = StringConversion::StandardConversionUtf8(original0);
+    const auto standard0 = StringConversion::Utf8ConversionStandard(multiByte0);
     ASSERT_EQUAL(standard0, original0);
 
     const auto original1 = SYSTEM_TEXT("±ê×¼×Ö·û´®×ª»»ÎªUTF8×Ö·û´®"s);
-    const auto multiByte1 = StringConversion::StandardConversionUTF8(original1);
-    const auto standard1 = StringConversion::UTF8ConversionStandard(multiByte1);
+    const auto multiByte1 = StringConversion::StandardConversionUtf8(original1);
+    const auto standard1 = StringConversion::Utf8ConversionStandard(multiByte1);
     ASSERT_EQUAL(standard1, original1);
 }
 
-void CoreTools::StringConversionTesting::UTF8ConversionMultiByteTest()
+void CoreTools::StringConversionTesting::Utf8ConversionMultiByteTest()
 {
     const auto original0 = "Converted MultiByte to UTF8"s;
-    const auto uft0 = StringConversion::MultiByteConversionUTF8(original0);
-    const auto multiByte0 = StringConversion::UTF8ConversionMultiByte(uft0);
+    const auto uft0 = StringConversion::MultiByteConversionUtf8(original0);
+    const auto multiByte0 = StringConversion::Utf8ConversionMultiByte(uft0);
     ASSERT_EQUAL(multiByte0, original0);
 
     const auto original1 = "MultiByte×Ö·û´®×ª»»ÎªUTF8×Ö·û´®"s;
-    const auto uft1 = StringConversion::MultiByteConversionUTF8(original1);
-    const auto multiByte1 = StringConversion::UTF8ConversionMultiByte(uft1);
+    const auto uft1 = StringConversion::MultiByteConversionUtf8(original1);
+    const auto multiByte1 = StringConversion::Utf8ConversionMultiByte(uft1);
     ASSERT_EQUAL(multiByte1, original1);
 }
 
-void CoreTools::StringConversionTesting::WideCharUTF8ConversionStandardTest()
+void CoreTools::StringConversionTesting::WideCharUtf8ConversionStandardTest()
 {
-    const auto original0 = "Converted WideCharUTF8 to Standard"s;
-    const auto uft0 = StringConversion::MultiByteConversionUTF8(original0);
-    wstring wideCharuft0{};
-    for (auto c : uft0)
+    ASSERT_NOT_THROW_EXCEPTION_0(WideCharUtf8ConversionStandardEnglishTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(WideCharUtf8ConversionStandardChineseTest);
+}
+
+void CoreTools::StringConversionTesting::WideCharUtf8ConversionStandardEnglishTest()
+{
+    const auto original = "Converted WideCharUTF8 to Standard"s;
+    const auto uft8 = StringConversion::MultiByteConversionUtf8(original);
+    std::wstring wideCharUft8{};
+    for (const auto c : uft8)
     {
-        wideCharuft0 += c;
+        wideCharUft8 += c;
     }
-    const auto standard0 = StringConversion::UTF8ConversionStandard(wideCharuft0);
-    ASSERT_EQUAL(standard0, SYSTEM_TEXT("Converted WideCharUTF8 to Standard"s));
+    const auto standard = StringConversion::Utf8ConversionStandard(wideCharUft8);
+    ASSERT_EQUAL(standard, SYSTEM_TEXT("Converted WideCharUTF8 to Standard"s));
+}
 
-    const auto original1 = "WideCharUTF8×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s;
-    const auto uft1 = StringConversion::MultiByteConversionUTF8(original1);
-    wstring wideCharuft1{};
-    for (auto c : uft1)
+void CoreTools::StringConversionTesting::WideCharUtf8ConversionStandardChineseTest()
+{
+    const auto original = "WideCharUTF8×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s;
+    const auto uft8 = StringConversion::MultiByteConversionUtf8(original);
+    std::wstring wideCharUft8{};
+    for (const auto c : uft8)
     {
-        wideCharuft1 += c;
+        wideCharUft8 += c;
     }
-    const auto standard1 = StringConversion::UTF8ConversionStandard(wideCharuft1);
-    ASSERT_EQUAL(standard1, SYSTEM_TEXT("WideCharUTF8×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s));
-}
-
-void CoreTools::StringConversionTesting::ToFirstLetterUpperTest()
-{
-    ASSERT_EQUAL(StringConversion::ToFirstLetterUpper(SYSTEM_TEXT("AuAu"s)), SYSTEM_TEXT("AuAu"s));
-    ASSERT_EQUAL(StringConversion::ToFirstLetterUpper(SYSTEM_TEXT("auAu"s)), SYSTEM_TEXT("AuAu"s));
-    ASSERT_EQUAL(StringConversion::ToFirstLetterUpper(SYSTEM_TEXT(" auAu"s)), SYSTEM_TEXT(" auAu"s));
-}
-
-void CoreTools::StringConversionTesting::ToFirstLetterLowerTest()
-{
-    ASSERT_EQUAL(StringConversion::ToFirstLetterLower(SYSTEM_TEXT("AuAu"s)), SYSTEM_TEXT("auAu"s));
-    ASSERT_EQUAL(StringConversion::ToFirstLetterLower(SYSTEM_TEXT("auAu"s)), SYSTEM_TEXT("auAu"s));
-    ASSERT_EQUAL(StringConversion::ToFirstLetterLower(SYSTEM_TEXT(" AuAu"s)), SYSTEM_TEXT(" AuAu"s));
-}
-
-void CoreTools::StringConversionTesting::ToUpperMacroTest()
-{
-    ASSERT_EQUAL(StringConversion::ToUpperMacro(SYSTEM_TEXT("AuAu"s)), SYSTEM_TEXT("AU_AU"s));
-    ASSERT_EQUAL(StringConversion::ToUpperMacro(SYSTEM_TEXT("auAu"s)), SYSTEM_TEXT("AU_AU"s));
-    ASSERT_EQUAL(StringConversion::ToUpperMacro(SYSTEM_TEXT(" AuAu"s)), SYSTEM_TEXT("AU_AU"s));
-    ASSERT_EQUAL(StringConversion::ToUpperMacro(SYSTEM_TEXT(" Au_Au"s)), SYSTEM_TEXT("AU__AU"s));
-    ASSERT_EQUAL(StringConversion::ToUpperMacro(SYSTEM_TEXT("Au_uu"s)), SYSTEM_TEXT("AU_UU"s));
+    const auto standard = StringConversion::Utf8ConversionStandard(wideCharUft8);
+    ASSERT_EQUAL(standard, SYSTEM_TEXT("WideCharUTF8×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s));
 }

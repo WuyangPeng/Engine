@@ -11,6 +11,7 @@
 
 #include "ChildGetFunctionParsing.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
@@ -157,7 +158,7 @@ System::String CoreTools::ChildGetFunctionParsing::GenerateMapping(int index, co
 
     content += TextParsing::g_Nodiscard;
     content += TextParsing::g_SharedPtrConst;
-    content += StringConversion::ToFirstLetterUpper(mapping);
+    content += StringUtility::ToFirstLetterUpper(mapping);
     content += TextParsing::g_RightAngleBracket;
     content += TextParsing::g_Space;
     content += TextParsing::g_Get;

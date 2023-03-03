@@ -50,7 +50,7 @@ System::String CoreTools::ChildMemberParsing::GenerateMember() const
     {
         const auto actualType = csvHead.GetActualType(index);
         const auto variableName = csvHead.GetVariableName(index);
-        const auto annotation = StringConversion::UTF8ConversionStandard(csvHead.GetAnnotation(index));
+        const auto annotation = StringConversion::Utf8ConversionStandard(csvHead.GetAnnotation(index));
 
         content += GenerateIndentation(1);
         content += actualType;

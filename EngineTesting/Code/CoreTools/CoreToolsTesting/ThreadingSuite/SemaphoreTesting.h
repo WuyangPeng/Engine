@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 15:54)
+///	引擎测试版本：0.9.0.3 (2023/03/01 18:06)
 
 #ifndef CORE_TOOLS_THREADING_SUITE_SEMAPHORE_TESTING_H
 #define CORE_TOOLS_THREADING_SUITE_SEMAPHORE_TESTING_H
@@ -27,12 +27,12 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void CreateThread();
         void ReadThread();
-        void WirteThread();
+        void WriteThread();
 
     private:
         static constexpr auto threadSize = 4;

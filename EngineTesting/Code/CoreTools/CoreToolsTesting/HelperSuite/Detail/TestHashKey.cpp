@@ -11,8 +11,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/HashCombine.h"
 
-CoreTools::TestHashKey::TestHashKey(const std::string& name)
-    : name{ name }, buffer{ 5.0f }, key{ 2 }
+CoreTools::TestHashKey::TestHashKey(std::string name) noexcept
+    : name{ std::move(name) }, buffer{ 5 }, key{ 2 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

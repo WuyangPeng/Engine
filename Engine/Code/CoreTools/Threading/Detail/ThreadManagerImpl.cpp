@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/18 12:25)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 17:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,9 +20,6 @@
 #include <algorithm>
 #include <functional>
 
-using std::make_shared;
-using std::mem_fn;
-
 CoreTools::ThreadManagerImpl::ThreadManagerImpl() noexcept
     : thread{}, threadHandle{}
 {
@@ -35,7 +32,7 @@ void CoreTools::ThreadManagerImpl::AddThread(void* function, void* userData, int
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto threadImpl = make_shared<ThreadImpl>(function, userData, processorNumber, stackSize);
+    auto threadImpl = std::make_shared<ThreadImpl>(function, userData, processorNumber, stackSize);
 
     thread.emplace_back(threadImpl);
     threadHandle.emplace_back(threadImpl->GetThreadHandle());
@@ -45,7 +42,7 @@ void CoreTools::ThreadManagerImpl::AddThreadUsePriority(void* function, void* us
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto threadImpl = make_shared<ThreadImpl>(function, userData, processorNumber, stackSize);
+    auto threadImpl = std::make_shared<ThreadImpl>(function, userData, processorNumber, stackSize);
     threadImpl->SetThreadPriority(priority);
 
     thread.emplace_back(threadImpl);
@@ -56,25 +53,24 @@ void CoreTools::ThreadManagerImpl::Resume()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    for_each(thread.begin(), thread.end(), mem_fn(&ThreadImpl::Resume));
+    std::ranges::for_each(thread, std::mem_fn(&ThreadImpl::Resume));
 }
 
 void CoreTools::ThreadManagerImpl::Suspend()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    for_each(thread.begin(), thread.end(), mem_fn(&ThreadImpl::Suspend));
+    std::ranges::for_each(thread, std::mem_fn(&ThreadImpl::Suspend));
 }
 
 void CoreTools::ThreadManagerImpl::Wait()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    const auto result = System::WaitForSystemThread(boost::numeric_cast<int>(threadHandle.size()), threadHandle.data(), true, EnumCastUnderlying(System::MutexWait::Infinite));
-
-    if (result == System::MutexWaitReturn::Failed)
+    if (const auto result = System::WaitForSystemThread(boost::numeric_cast<int>(threadHandle.size()), threadHandle.data(), true, EnumCastUnderlying(System::MutexWait::Infinite));
+        result == System::MutexWaitReturn::Failed)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("等待线程失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("等待线程失败！"s))
     }
 
     thread.clear();

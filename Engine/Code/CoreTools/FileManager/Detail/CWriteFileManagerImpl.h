@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 14:42)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 09:40)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_C_WRITE_FILE_MANAGER_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_C_WRITE_FILE_MANAGER_IMPL_H
@@ -16,9 +16,9 @@
 #include "WriteFileManagerInterface.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
+// 一个提示传递给_tfopen_s表示从磁盘顺序存取，以优化缓存。调用子程序ReadFromFile将产生错误。
 namespace CoreTools
 {
-    // 一个提示传递给_tfopen_s表示从磁盘顺序存取，以优化缓存。调用子程序ReadFromFile将产生错误。
     class CORE_TOOLS_HIDDEN_DECLARE CWriteFileManagerImpl final : public CFileManagerImpl, public WriteFileManagerInterface
     {
     public:
@@ -32,11 +32,11 @@ namespace CoreTools
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD int GetFileByteSize() const final;
+        NODISCARD int GetFileByteSize() const override;
 
         // 当且仅当写入的字节数等于data的大小，操作是成功的。否则抛出Error异常。
-        void Write(size_t itemSize, const void* data) final;
-        void Write(size_t itemSize, size_t itemsNumber, const void* data) final;
+        void Write(size_t itemSize, const void* data) override;
+        void Write(size_t itemSize, size_t itemsNumber, const void* data) override;
 
 #ifdef SYSTEM_BIG_ENDIAN
     private:
@@ -48,10 +48,10 @@ namespace CoreTools
 
     private:
         // 禁止调用以下成员函数
-        size_t ReadFromFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4) final;
-        int GetCharacter() noexcept(gAssert < 4 || gCoreToolsAssert < 4) final;
-        bool UnGetCharacter(MAYBE_UNUSED int character) noexcept(gAssert < 4 || gCoreToolsAssert < 4) final;
-        std::string GetString(MAYBE_UNUSED int count) noexcept(gAssert < 4 || gCoreToolsAssert < 4) final;
+        size_t ReadFromFile(size_t itemSize, size_t itemsNumber, void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4) override;
+        int GetCharacter() noexcept(gAssert < 4 || gCoreToolsAssert < 4) override;
+        bool UnGetCharacter(int character) noexcept(gAssert < 4 || gCoreToolsAssert < 4) override;
+        std::string GetString(int count) noexcept(gAssert < 4 || gCoreToolsAssert < 4) override;
     };
 }
 

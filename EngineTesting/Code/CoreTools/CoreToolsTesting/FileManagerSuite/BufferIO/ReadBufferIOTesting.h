@@ -7,12 +7,10 @@
 ///	标准：std:c++20
 ///	引擎测试版本：0.8.0.8 (2022/05/19 11:51)
 
-#ifndef CORE_TOOLS_TESTING_READ_BUFFERIO_TESTING_H
-#define CORE_TOOLS_TESTING_READ_BUFFERIO_TESTING_H
+#ifndef CORE_TOOLS_TESTING_READ_BUFFER_IO_TESTING_H
+#define CORE_TOOLS_TESTING_READ_BUFFER_IO_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <vector>
 
 namespace CoreTools
 {
@@ -29,7 +27,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void ReadBufferIOBasisTest();
@@ -40,4 +38,4 @@ namespace CoreTools
     };
 }
 
-#endif  // CORE_TOOLS_TESTING_READ_BUFFERIO_TESTING_H
+#endif  // CORE_TOOLS_TESTING_READ_BUFFER_IO_TESTING_H

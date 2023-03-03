@@ -12,6 +12,7 @@
 #include "JsonGenerateGetFunctionDefinition.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/JsonFlags.h"
@@ -50,13 +51,13 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDetailDefin
             content += TextParsing::g_DoubleColon;
             content += jsonHead.GetJsonClassName();
             content += SYSTEM_TEXT("Container::Const");
-            content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+            content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
             content += SYSTEM_TEXT("SharedPtr ");
             content += nameSpace;
             content += TextParsing::g_DoubleColon;
             content += jsonHead.GetJsonClassName();
             content += SYSTEM_TEXT("Container::GetFirst");
-            content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+            content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
             content += SYSTEM_TEXT("(Function function) const\n");
             content += TextParsing::g_FunctionBeginBrackets;
             content += TextParsing::g_Indentation;
@@ -65,15 +66,15 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDetailDefin
 
             content += TextParsing::g_Indentation;
             content += SYSTEM_TEXT("const auto iter = std::find_if("s);
-            content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+            content += StringUtility::ToFirstLetterLower(value->GetTypeName());
             content += SYSTEM_TEXT(".cbegin(), "s);
-            content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+            content += StringUtility::ToFirstLetterLower(value->GetTypeName());
             content += SYSTEM_TEXT(".cend(), function);\n"s);
             content += TextParsing::g_NewlineCharacter;
 
             content += TextParsing::g_Indentation;
             content += SYSTEM_TEXT("if (iter != "s);
-            content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+            content += StringUtility::ToFirstLetterLower(value->GetTypeName());
             content += SYSTEM_TEXT(".cend())\n"s);
             content += TextParsing::g_Indentation;
             content += TextParsing::g_FunctionBeginBrackets;
@@ -86,9 +87,9 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDetailDefin
             content += TextParsing::g_NewlineCharacter;
             content += TextParsing::g_Indentation;
             content += SYSTEM_TEXT("THROW_EXCEPTION(SYSTEM_TEXT(\""s);
-            content += StringConversion::ToFirstLetterLower(jsonHead.GetJsonClassName());
+            content += StringUtility::ToFirstLetterLower(jsonHead.GetJsonClassName());
             content += SYSTEM_TEXT("表");
-            content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+            content += StringUtility::ToFirstLetterLower(value->GetTypeName());
             content += SYSTEM_TEXT("字段未找到满足条件的配置信息。\"s));\n"s);
             content += TextParsing::g_FunctionEndBrackets;
 
@@ -99,13 +100,13 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDetailDefin
             content += TextParsing::g_DoubleColon;
             content += jsonHead.GetJsonClassName();
             content += SYSTEM_TEXT("Container::");
-            content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+            content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
             content += SYSTEM_TEXT("Container ");
             content += nameSpace;
             content += TextParsing::g_DoubleColon;
             content += jsonHead.GetJsonClassName();
             content += SYSTEM_TEXT("Container::Get");
-            content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+            content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
             content += SYSTEM_TEXT("(Function function) const\n");
             content += TextParsing::g_FunctionBeginBrackets;
             content += TextParsing::g_Indentation;
@@ -113,12 +114,12 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDetailDefin
             content += TextParsing::g_NewlineCharacter;
 
             content += TextParsing::g_Indentation;
-            content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+            content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
             content += SYSTEM_TEXT("Container result{};\n"s);
             content += TextParsing::g_NewlineCharacter;
             content += TextParsing::g_Indentation;
             content += SYSTEM_TEXT("for (const auto& value : "s);
-            content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+            content += StringUtility::ToFirstLetterLower(value->GetTypeName());
             content += SYSTEM_TEXT(")\n"s);
 
             content += TextParsing::g_Indentation;
@@ -167,17 +168,17 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDetailDefin
         content += TextParsing::g_DoubleColon;
         content += jsonHead.GetJsonClassName();
         content += TextParsing::g_DoubleColon;
-        content += StringConversion::ToFirstLetterUpper(className);
+        content += StringUtility::ToFirstLetterUpper(className);
         content += SYSTEM_TEXT("::Const");
-        content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+        content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
         content += SYSTEM_TEXT("SharedPtr ");
         content += nameSpace;
         content += TextParsing::g_DoubleColon;
         content += jsonHead.GetJsonClassName();
         content += TextParsing::g_DoubleColon;
-        content += StringConversion::ToFirstLetterUpper(className);
+        content += StringUtility::ToFirstLetterUpper(className);
         content += SYSTEM_TEXT("::GetFirst");
-        content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+        content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
         content += SYSTEM_TEXT("(Function function) const\n");
         content += TextParsing::g_FunctionBeginBrackets;
         content += TextParsing::g_Indentation;
@@ -186,15 +187,15 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDetailDefin
 
         content += TextParsing::g_Indentation;
         content += SYSTEM_TEXT("const auto iter = std::find_if("s);
-        content += StringConversion::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
         content += SYSTEM_TEXT(".cbegin(), "s);
-        content += StringConversion::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
         content += SYSTEM_TEXT(".cend(), function);\n"s);
         content += TextParsing::g_NewlineCharacter;
 
         content += TextParsing::g_Indentation;
         content += SYSTEM_TEXT("if (iter != "s);
-        content += StringConversion::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
         content += SYSTEM_TEXT(".cend())\n"s);
         content += TextParsing::g_Indentation;
         content += TextParsing::g_FunctionBeginBrackets;
@@ -207,9 +208,9 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDetailDefin
         content += TextParsing::g_NewlineCharacter;
         content += TextParsing::g_Indentation;
         content += SYSTEM_TEXT("THROW_EXCEPTION(SYSTEM_TEXT(\""s);
-        content += StringConversion::ToFirstLetterLower(jsonHead.GetJsonClassName());
+        content += StringUtility::ToFirstLetterLower(jsonHead.GetJsonClassName());
         content += SYSTEM_TEXT("表");
-        content += StringConversion::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
         content += SYSTEM_TEXT("字段未找到满足条件的配置信息。\"s));\n"s);
         content += TextParsing::g_FunctionEndBrackets;
 
@@ -220,17 +221,17 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDetailDefin
         content += TextParsing::g_DoubleColon;
         content += jsonHead.GetJsonClassName();
         content += TextParsing::g_DoubleColon;
-        content += StringConversion::ToFirstLetterUpper(className);
+        content += StringUtility::ToFirstLetterUpper(className);
         content += TextParsing::g_DoubleColon;
-        content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+        content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
         content += SYSTEM_TEXT("Container ");
         content += nameSpace;
         content += TextParsing::g_DoubleColon;
         content += jsonHead.GetJsonClassName();
         content += TextParsing::g_DoubleColon;
-        content += StringConversion::ToFirstLetterUpper(className);
+        content += StringUtility::ToFirstLetterUpper(className);
         content += SYSTEM_TEXT("::Get");
-        content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+        content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
         content += SYSTEM_TEXT("(Function function) const\n");
         content += TextParsing::g_FunctionBeginBrackets;
         content += TextParsing::g_Indentation;
@@ -238,12 +239,12 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDetailDefin
         content += TextParsing::g_NewlineCharacter;
 
         content += TextParsing::g_Indentation;
-        content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+        content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
         content += SYSTEM_TEXT("Container result{};\n"s);
         content += TextParsing::g_NewlineCharacter;
         content += TextParsing::g_Indentation;
         content += SYSTEM_TEXT("for (const auto& value : "s);
-        content += StringConversion::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
         content += SYSTEM_TEXT(")\n"s);
 
         content += TextParsing::g_Indentation;
@@ -284,7 +285,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
     {
         const auto jsonDataType = value->GetJsonDataType();
 
-        auto typeName = StringConversion::ToFirstLetterUpper(value->GetTypeName());
+        auto typeName = StringUtility::ToFirstLetterUpper(value->GetTypeName());
         if (typeName == SYSTEM_TEXT("Id"s))
         {
             typeName = SYSTEM_TEXT("ID"s);
@@ -307,7 +308,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -329,7 +330,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -351,7 +352,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -373,7 +374,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -395,7 +396,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -419,7 +420,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -453,7 +454,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -473,7 +474,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return boost::numeric_cast<int>("s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".size());\n"s);
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -496,7 +497,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".begin();\n"s);
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -519,7 +520,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".end();\n"s);
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -548,7 +549,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".at(0);\n"s);
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -583,19 +584,19 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("const auto iter = lower_bound("s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".cbegin(), "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".cend(), make_shared<"s);
-                content += StringConversion::ToFirstLetterUpper(jsonHead.GetJsonClassName());
+                content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(">(id), function);\n"s);
                 content += TextParsing::g_NewlineCharacter;
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("if (iter != "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".cend() && (*iter)->GetID() == id)\n"s);
 
                 content += TextParsing::g_Indentation;
@@ -617,9 +618,9 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("THROW_EXCEPTION(SYSTEM_TEXT(\""s);
-                content += StringConversion::ToFirstLetterLower(jsonHead.GetJsonClassName());
+                content += StringUtility::ToFirstLetterLower(jsonHead.GetJsonClassName());
                 content += SYSTEM_TEXT("表"s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT("datas字段未找到id = \"s) + System::ToString(id) + SYSTEM_TEXT(\"的配置信息。\"s));\n"s);
 
                 content += TextParsing::g_Indentation;
@@ -645,7 +646,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -685,7 +686,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
     {
         const auto jsonDataType = value->GetJsonDataType();
 
-        auto typeName = StringConversion::ToFirstLetterUpper(value->GetTypeName());
+        auto typeName = StringUtility::ToFirstLetterUpper(value->GetTypeName());
         if (typeName == SYSTEM_TEXT("Id"s))
         {
             typeName = SYSTEM_TEXT("ID"s);
@@ -698,7 +699,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
                 content += SYSTEM_TEXT("System::String "s);
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::Get"s);
                 content += typeName;
                 content += SYSTEM_TEXT("() const\n"s);
@@ -710,7 +711,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -722,7 +723,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
                 content += SYSTEM_TEXT("bool "s);
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::Is"s);
                 content += typeName;
                 content += SYSTEM_TEXT("() const noexcept\n"s);
@@ -734,7 +735,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -746,7 +747,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
                 content += SYSTEM_TEXT("int "s);
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::Get"s);
                 content += typeName;
                 content += SYSTEM_TEXT("() const noexcept\n"s);
@@ -758,7 +759,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -770,7 +771,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
                 content += SYSTEM_TEXT("int64_t "s);
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::Get"s);
                 content += typeName;
                 content += SYSTEM_TEXT("() const noexcept\n"s);
@@ -782,7 +783,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -794,7 +795,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
                 content += SYSTEM_TEXT("double "s);
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::Get"s);
                 content += typeName;
                 content += SYSTEM_TEXT("() const noexcept\n"s);
@@ -806,7 +807,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -817,14 +818,14 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
             {
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += TextParsing::g_DoubleColon;
                 content += SYSTEM_TEXT("Const"s);
                 content += typeName;
                 content += SYSTEM_TEXT("SharedPtr "s);
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::Get"s);
                 content += typeName;
                 content += SYSTEM_TEXT("() const noexcept\n"s);
@@ -836,7 +837,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -855,7 +856,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
             {
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += TextParsing::g_DoubleColon;
                 content += typeName;
                 content += TextParsing::g_Space;
@@ -872,7 +873,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -881,7 +882,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
                 content += SYSTEM_TEXT("int "s);
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::Get"s);
                 content += typeName;
                 content += SYSTEM_TEXT("Size() const\n"s);
@@ -894,7 +895,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return boost::numeric_cast<int>("s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".size());\n"s);
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -902,13 +903,13 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::"s);
                 content += typeName;
                 content += SYSTEM_TEXT("ConstIter "s);
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::Get"s);
                 content += typeName;
                 content += SYSTEM_TEXT("Begin() const\n"s);
@@ -921,7 +922,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".begin();\n"s);
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -929,13 +930,13 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::"s);
                 content += typeName;
                 content += SYSTEM_TEXT("ConstIter "s);
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::Get"s);
                 content += typeName;
                 content += SYSTEM_TEXT("End() const\n"s);
@@ -948,7 +949,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".end();\n"s);
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -960,7 +961,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
             {
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::"s);
                 content += SYSTEM_TEXT("Const"s);
                 content += typeName;
@@ -968,7 +969,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
                 content += SYSTEM_TEXT("SharedPtr "s);
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::GetFirst"s);
                 content += typeName;
                 content += SYSTEM_TEXT("() const\n"s);
@@ -981,7 +982,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".at(0);\n"s);
 
                 content += TextParsing::g_FunctionEndBrackets;
@@ -989,14 +990,14 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::"s);
                 content += SYSTEM_TEXT("Const"s);
                 content += typeName;
                 content += SYSTEM_TEXT("SharedPtr "s);
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::Get"s);
                 content += typeName;
                 content += SYSTEM_TEXT("(int id) const\n"s);
@@ -1020,19 +1021,19 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("const auto iter = lower_bound("s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".cbegin(), "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".cend(), make_shared<"s);
-                content += StringConversion::ToFirstLetterUpper(jsonHead.GetJsonClassName());
+                content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(">(id), function);\n"s);
                 content += TextParsing::g_NewlineCharacter;
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("if (iter != "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT(".cend() && (*iter)->GetID() == id)\n"s);
 
                 content += TextParsing::g_Indentation;
@@ -1054,9 +1055,9 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("THROW_EXCEPTION(SYSTEM_TEXT(\""s);
-                content += StringConversion::ToFirstLetterLower(jsonHead.GetJsonClassName());
+                content += StringUtility::ToFirstLetterLower(jsonHead.GetJsonClassName());
                 content += SYSTEM_TEXT("表"s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += SYSTEM_TEXT("字段未找到id = \"s) + System::ToString(id) + SYSTEM_TEXT(\"的配置信息。\"s));\n"s);
 
                 content += TextParsing::g_Indentation;
@@ -1067,13 +1068,13 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::"s);
                 content += typeName;
                 content += SYSTEM_TEXT("Container "s);
                 content += jsonHead.GetCompleteClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
                 content += SYSTEM_TEXT("::Get"s);
                 content += typeName;
                 content += SYSTEM_TEXT("Container() const\n"s);
@@ -1086,7 +1087,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDefinition(
 
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("return "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
 
                 content += TextParsing::g_FunctionEndBrackets;

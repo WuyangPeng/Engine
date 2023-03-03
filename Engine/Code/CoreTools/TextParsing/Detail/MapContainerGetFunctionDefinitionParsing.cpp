@@ -11,6 +11,7 @@
 
 #include "MapContainerGetFunctionDefinitionParsing.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
@@ -30,7 +31,7 @@ System::String CoreTools::MapContainerGetFunctionDefinitionParsing::GenerateGetF
 
     const auto csvHead = GetCSVHead();
 
-    const auto lowerClassName = StringConversion::ToFirstLetterLower(csvHead.GetCSVClassName());
+    const auto lowerClassName = StringUtility::ToFirstLetterLower(csvHead.GetCSVClassName());
 
     auto content = GenerateGetMapFirstDefinition(lowerClassName);
 

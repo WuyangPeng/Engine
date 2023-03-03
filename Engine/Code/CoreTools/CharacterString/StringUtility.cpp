@@ -1,83 +1,81 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:10)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/27 15:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "StringUtility.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
+#include <gsl/util>
 #include <algorithm>
 #include <iterator>
 #include <locale>
 
-using std::string;
-using std::wstring;
-
-wstring CoreTools::StringUtility::ConvertNarrowToWide(const string& input)
+std::wstring CoreTools::StringUtility::ConvertNarrowToWide(const std::string& input)
 {
-    wstring output{};
+    std::wstring output{};
 
-    std::transform(input.begin(), input.end(), std::back_inserter(output),
-                   [](char c) {
-                       return static_cast<wchar_t>(c);
-                   });
+    std::ranges::transform(input.begin(), input.end(), std::back_inserter(output),
+                           [](const char c) {
+                               return static_cast<wchar_t>(c);
+                           });
 
     return output;
 }
 
-string CoreTools::StringUtility::ConvertWideToNarrow(const wstring& input)
+std::string CoreTools::StringUtility::ConvertWideToNarrow(const std::wstring& input)
 {
     std::string output{};
 
-    std::transform(input.begin(), input.end(), std::back_inserter(output),
-                   [](wchar_t c) {
-                       return boost::numeric_cast<char>(c);
-                   });
+    std::ranges::transform(input.begin(), input.end(), std::back_inserter(output),
+                           [](const wchar_t c) {
+                               return boost::numeric_cast<char>(c);
+                           });
 
     return output;
 }
 
-string CoreTools::StringUtility::ToLower(const string& input)
+std::string CoreTools::StringUtility::ToLower(const std::string& input)
 {
-    string output{};
+    std::string output{};
 
     const std::locale locale{};
-    std::transform(input.begin(), input.end(), std::back_inserter(output),
-                   [locale](char c) {
-                       return std::tolower(c, locale);
-                   });
+    std::ranges::transform(input.begin(), input.end(), std::back_inserter(output),
+                           [locale](const char c) {
+                               return std::tolower(c, locale);
+                           });
 
     return output;
 }
 
-string CoreTools::StringUtility::ToUpper(const string& input)
+std::string CoreTools::StringUtility::ToUpper(const std::string& input)
 {
-    string output{};
+    std::string output{};
 
     const std::locale locale{};
-    std::transform(input.begin(), input.end(), std::back_inserter(output),
-                   [locale](char c) {
-                       return std::toupper(c, locale);
-                   });
+    std::ranges::transform(input.begin(), input.end(), std::back_inserter(output),
+                           [locale](const char c) {
+                               return std::toupper(c, locale);
+                           });
 
     return output;
 }
 
-CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetTokens(const string& input, const string& whiteSpace)
+CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetTokens(const std::string& input, const std::string& whiteSpace)
 {
     TokensType tokens{};
-    string tokenString{ input };
+    std::string tokenString{ input };
 
     while (!tokenString.empty())
     {
         const auto begin = tokenString.find_first_not_of(whiteSpace);
-        if (begin == string::npos)
+        if (begin == std::string::npos)
         {
             break;
         }
@@ -87,10 +85,9 @@ CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetTokens(const s
             tokenString = tokenString.substr(begin);
         }
 
-        const auto end = tokenString.find_first_of(whiteSpace);
-        if (end != string::npos)
+        if (const auto end = tokenString.find_first_of(whiteSpace); end != std::string::npos)
         {
-            auto token = tokenString.substr(0, end);
+            const auto token = tokenString.substr(0, end);
             tokens.emplace_back(token);
             tokenString = tokenString.substr(end);
         }
@@ -104,19 +101,19 @@ CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetTokens(const s
     return tokens;
 }
 
-CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetTextTokens(const string& input)
+CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetTextTokens(const std::string& input)
 {
     static const auto whiteSpace = [] {
-        string result{};
+        std::string result{};
 
         for (auto i = 0; i <= 32; ++i)
         {
-            result += boost::numeric_cast<char>(i);
+            result += gsl::narrow_cast<char>(i);
         }
 
         for (auto i = 127; i < 255; ++i)
         {
-            result += boost::numeric_cast<char>(i);
+            result += gsl::narrow_cast<char>(i);
         }
 
         return result;
@@ -125,14 +122,14 @@ CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetTextTokens(con
     return GetTokens(input, whiteSpace);
 }
 
-CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetAdvancedTextTokens(const string& input)
+CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetAdvancedTextTokens(const std::string& input)
 {
     static const auto whiteSpace = [] {
-        string result{};
+        std::string result{};
 
         for (auto i = 0; i <= 32; ++i)
         {
-            result += boost::numeric_cast<char>(i);
+            result += gsl::narrow_cast<char>(i);
         }
 
         result += '\x7F';
@@ -141,4 +138,68 @@ CoreTools::StringUtility::TokensType CoreTools::StringUtility::GetAdvancedTextTo
     }();
 
     return GetTokens(input, whiteSpace);
+}
+
+System::String CoreTools::StringUtility::ToFirstLetterUpper(const String& character)
+{
+    auto result = character;
+
+    if (result.empty())
+    {
+        return result;
+    }
+
+    const std::locale locale{};
+    result.at(0) = std::toupper(result.at(0), locale);
+
+    return result;
+}
+
+System::String CoreTools::StringUtility::ToFirstLetterLower(const String& character)
+{
+    auto result = character;
+
+    if (result.empty())
+    {
+        return result;
+    }
+
+    const std::locale locale{};
+    result.at(0) = std::tolower(result.at(0), locale);
+
+    return result;
+}
+
+System::String CoreTools::StringUtility::ToUpperMacro(const String& character)
+{
+    String result{};
+
+    const std::locale locale{};
+
+    auto firstChar = true;
+    for (const auto value : character)
+    {
+        if (value == SYSTEM_TEXT(' '))
+        {
+            continue;
+        }
+
+        if (!firstChar && std::isupper(value, locale))
+        {
+            result += SYSTEM_TEXT('_');
+            result += value;
+        }
+        else if (value == SYSTEM_TEXT('.'))
+        {
+            result += SYSTEM_TEXT('_');
+        }
+        else
+        {
+            result += std::toupper(value, locale);
+        }
+
+        firstChar = false;
+    }
+
+    return result;
 }

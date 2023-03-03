@@ -7,14 +7,14 @@
 ///	标准：std:c++20
 ///	引擎辅助版本：0.9.0.2 (2023/02/07 16:41)
 
-#ifndef EXPORT_TEST_ARTIFICIAL_INTELLEGENCE_DELAY_COPY_UNSHARED_MACRO_IMPL_H
-#define EXPORT_TEST_ARTIFICIAL_INTELLEGENCE_DELAY_COPY_UNSHARED_MACRO_IMPL_H
+#ifndef EXPORT_TEST_ARTIFICIAL_INTELLIGENCE_DELAY_COPY_UNSHARED_MACRO_IMPL_H
+#define EXPORT_TEST_ARTIFICIAL_INTELLIGENCE_DELAY_COPY_UNSHARED_MACRO_IMPL_H
 
 #include "ArtificialIntellegence/ArtificialIntellegenceDll.h"
 
 namespace ArtificialIntellegence
 {
-    class ARTIFICIAL_INTELLEGENCE_HIDDEN_DECLARE ArtificialIntellegenceDelayCopyUnsharedMacroImpl final
+    class ARTIFICIAL_INTELLIGENCE_HIDDEN_DECLARE ArtificialIntellegenceDelayCopyUnsharedMacroImpl final
     {
     public:
         using ClassType = ArtificialIntellegenceDelayCopyUnsharedMacroImpl;
@@ -32,4 +32,4 @@ namespace ArtificialIntellegence
     };
 }
 
-#endif  // EXPORT_TEST_ARTIFICIAL_INTELLEGENCE_DELAY_COPY_UNSHARED_MACRO_IMPL_H
+#endif  // EXPORT_TEST_ARTIFICIAL_INTELLIGENCE_DELAY_COPY_UNSHARED_MACRO_IMPL_H

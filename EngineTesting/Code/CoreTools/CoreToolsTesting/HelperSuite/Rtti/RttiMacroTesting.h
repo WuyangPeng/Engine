@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/13 20:06)
+///	引擎测试版本：0.9.0.3 (2023/02/23 10:18)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_RTTI_MACRO_TESTING_H
 #define CORE_TOOLS_HELPER_SUITE_RTTI_MACRO_TESTING_H
@@ -31,9 +31,9 @@ namespace CoreTools
 
     private:
         void DoRunUnitTest() override;
-        void MainTest();
+        void MainTest() override;
 
-        void RttiTest();
+        void RttiTest() override;
     };
 }
 

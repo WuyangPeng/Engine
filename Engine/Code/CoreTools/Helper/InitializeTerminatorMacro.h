@@ -15,7 +15,7 @@
 #define CORE_TOOLS_INITIALIZE_TERMINATE_DECLARE(isExcept) \
     NODISCARD static bool RegisterFactory();              \
     static void InitializeFactory() noexcept(isExcept);   \
-    static void TerminateFactory() noexcept(isExcept);
+    static void TerminateFactory() noexcept(isExcept)
 
 #define CORE_TOOLS_INITIALIZE_TERMINATE_DEFINE(namespaceName, className)                                                        \
     bool namespaceName::className::RegisterFactory()                                                                            \

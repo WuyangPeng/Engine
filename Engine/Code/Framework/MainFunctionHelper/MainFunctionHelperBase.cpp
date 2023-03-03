@@ -14,7 +14,7 @@
 #include "Flags/MainFunctionSchedule.h"
 #include "Detail/DirectoryDefaultName.h"
 #include "Detail/MainFunctionHelperBaseImpl.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Contract/Noexcept.h"
@@ -130,7 +130,7 @@ void Framework::MainFunctionHelperBase::DoMainFunctionHelperInit(const Environme
 // private
 void Framework::MainFunctionHelperBase::InitUniqueIDManager()
 {
-    CoreTools::UniqueIDManager::Create(CoreTools::UniqueIDSelect::Max);
+    CoreTools::UniqueIdManager::Create(CoreTools::UniqueIdSelect::Max);
     mainFunctionSchedule = MainFunctionSchedule::UniqueID;
 }
 
@@ -210,7 +210,7 @@ void Framework::MainFunctionHelperBase::DestroyUniqueIDManager() noexcept
 {
     if (MainFunctionSchedule::UniqueID <= mainFunctionSchedule)
     {
-        CoreTools::UniqueIDManager::Destroy();
+        CoreTools::UniqueIdManager::Destroy();
         mainFunctionSchedule = MainFunctionSchedule::Failure;
     }
 }

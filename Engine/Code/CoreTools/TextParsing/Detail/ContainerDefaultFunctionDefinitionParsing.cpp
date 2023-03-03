@@ -16,6 +16,7 @@
 #include "UniqueContainerDefaultFunctionDefinitionParsing.h"
 #include "VectorContainerDefaultFunctionDefinitionParsing.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
@@ -54,7 +55,7 @@ CoreTools::ContainerDefaultFunctionDefinitionParsing::ContainerDefaultFunctionDe
 }
 
 CoreTools::ContainerDefaultFunctionDefinitionParsing::ContainerDefaultFunctionDefinitionParsing(const CSVHead& csvHead, const String& className)
-    : ParentType{ csvHead, className }, lowerClassName{ StringConversion::ToFirstLetterLower(csvHead.GetCSVClassName()) }
+    : ParentType{ csvHead, className }, lowerClassName{ StringUtility::ToFirstLetterLower(csvHead.GetCSVClassName()) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

@@ -1,16 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:38)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:31)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CWriteFileManagerImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/FileManager/Endian.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -18,8 +19,6 @@
 
 #include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 CoreTools::CWriteFileManagerImpl::CWriteFileManagerImpl(const String& fileName, bool addition)
@@ -98,10 +97,9 @@ size_t CoreTools::CWriteFileManagerImpl::WriteToFileWithBigEndian(size_t itemSiz
     }
 }
 
-// private
 size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap2ByteOrder(size_t itemsNumber, const void* data)
 {
-    vector<uint16_t> target(itemsNumber);
+    std::vector<uint16_t> target(itemsNumber);
     auto bytes = static_cast<const uint16_t*>(data);
 
     Endian::Swap2ByteOrderToTarget(boost::numeric_cast<int>(itemsNumber), bytes, target.data());
@@ -109,10 +107,9 @@ size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap2ByteOrder(size_t itemsN
     return WriteToFile(sizeof(uint16_t), itemsNumber, target.data());
 }
 
-// private
 size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap4ByteOrder(size_t itemsNumber, const void* data)
 {
-    vector<uint32_t> target(itemsNumber);
+    std::vector<uint32_t> target(itemsNumber);
     auto bytes = static_cast<const uint32_t*>(data);
 
     Endian::Swap4ByteOrderToTarget(boost::numeric_cast<int>(itemsNumber), bytes, target.data());
@@ -120,10 +117,9 @@ size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap4ByteOrder(size_t itemsN
     return WriteToFile(sizeof(uint32_t), itemsNumber, target.data());
 }
 
-// private
 size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap8ByteOrder(size_t itemsNumber, const void* data)
 {
-    vector<uint64_t> target(itemsNumber);
+    std::vector<uint64_t> target(itemsNumber);
     auto bytes = static_cast<const uint64_t*>(data);
 
     Endian::Swap8ByteOrderToTarget(boost::numeric_cast<int>(itemsNumber), bytes, target.data());
@@ -133,9 +129,11 @@ size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap8ByteOrder(size_t itemsN
 
 #endif  // SYSTEM_BIG_ENDIAN
 
-size_t CoreTools::CWriteFileManagerImpl::ReadFromFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
+size_t CoreTools::CWriteFileManagerImpl::ReadFromFile(size_t itemSize, size_t itemsNumber, void* data) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
+
+    System::UnusedFunction(itemSize, itemsNumber, data);
 
     CORE_TOOLS_ASSERTION_4(false, "CWriteFileManageImpl禁止调用ReadFromFile！");
 
@@ -151,20 +149,24 @@ int CoreTools::CWriteFileManagerImpl::GetCharacter() noexcept(gAssert < 4 || gCo
     return System::gCFileError;
 }
 
-bool CoreTools::CWriteFileManagerImpl::UnGetCharacter(MAYBE_UNUSED int character) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
+bool CoreTools::CWriteFileManagerImpl::UnGetCharacter(int character) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
+
+    System::UnusedFunction(character);
 
     CORE_TOOLS_ASSERTION_4(false, "CWriteFileManageImpl禁止调用UnGetCharacter！");
 
     return false;
 }
 
-string CoreTools::CWriteFileManagerImpl::GetString(MAYBE_UNUSED int count) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
+std::string CoreTools::CWriteFileManagerImpl::GetString(int count) noexcept(gAssert < 4 || gCoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
+    System::UnusedFunction(count);
+
     CORE_TOOLS_ASSERTION_4(false, "CWriteFileManageImpl禁止调用GetString！");
 
-    return string{};
+    return std::string{};
 }

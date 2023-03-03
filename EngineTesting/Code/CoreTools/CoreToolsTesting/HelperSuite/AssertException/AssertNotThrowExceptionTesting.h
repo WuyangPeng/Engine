@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class AssertNotThrowExceptionTesting final : public CoreTools::UnitTest
+    class AssertNotThrowExceptionTesting final : public UnitTest
     {
     public:
         using ClassType = AssertNotThrowExceptionTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void AssertExceptionMacroTest();

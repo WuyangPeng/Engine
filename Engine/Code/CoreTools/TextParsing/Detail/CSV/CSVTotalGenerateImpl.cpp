@@ -13,6 +13,7 @@
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Exception/Error.h"
 #include "CoreTools/FileManager/FileManagerHelper.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
@@ -104,7 +105,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateHeaderGuard() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto headerGuard = StringConversion::ToUpperMacro(nameSpace + GetFileSuffix());
+    const auto headerGuard = StringUtility::ToUpperMacro(nameSpace + GetFileSuffix());
 
     String content{ TextParsing::g_Ifndef };
 
@@ -124,7 +125,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerHeaderGuard() c
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto headerGuard = StringConversion::ToUpperMacro(nameSpace + nameSpace + GetFileSuffix());
+    const auto headerGuard = StringUtility::ToUpperMacro(nameSpace + nameSpace + GetFileSuffix());
 
     String content{ TextParsing::g_Ifndef };
 
@@ -144,7 +145,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateHeaderGuardEndif() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto headerGuard = StringConversion::ToUpperMacro(nameSpace + GetFileSuffix());
+    const auto headerGuard = StringUtility::ToUpperMacro(nameSpace + GetFileSuffix());
 
     String content{ TextParsing::g_Endif };
 
@@ -575,7 +576,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerFunctionDefinit
 
         content += TextParsing::g_Indentation;
         content += SYSTEM_TEXT("return ");
-        content += StringConversion::ToFirstLetterLower(value);
+        content += StringUtility::ToFirstLetterLower(value);
         content += SYSTEM_TEXT("Container;\n");
 
         content += SYSTEM_TEXT("}\n");
@@ -618,7 +619,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerDefaultFunction
             content += SYSTEM_TEXT("      "s);
         }
 
-        content += StringConversion::ToFirstLetterLower(value) + SYSTEM_TEXT("Container{}");
+        content += StringUtility::ToFirstLetterLower(value) + SYSTEM_TEXT("Container{}");
 
         if (index != boost::numeric_cast<int>(dataType.size()) - 1)
         {
@@ -719,7 +720,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerDefaultFunction
         content += TextParsing::g_Indentation;
         content += TextParsing::g_Indentation;
         content += TextParsing::g_Indentation;
-        content += StringConversion::ToFirstLetterLower(value);
+        content += StringUtility::ToFirstLetterLower(value);
         content += SYSTEM_TEXT("Container = make_shared<"s);
         content += value;
         content += SYSTEM_TEXT("Container>(csvContent);\n"s);
@@ -747,7 +748,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerDefaultFunction
     {
         content += TextParsing::g_Indentation;
         content += SYSTEM_TEXT("if (!");
-        content += StringConversion::ToFirstLetterLower(value);
+        content += StringUtility::ToFirstLetterLower(value);
         content += SYSTEM_TEXT("Container)\n"s);
 
         content += TextParsing::g_Indentation;
@@ -756,7 +757,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerDefaultFunction
         content += TextParsing::g_Indentation;
         content += TextParsing::g_Indentation;
         content += SYSTEM_TEXT("THROW_EXCEPTION(SYSTEM_TEXT(\""s);
-        content += StringConversion::ToFirstLetterLower(value);
+        content += StringUtility::ToFirstLetterLower(value);
         content += SYSTEM_TEXT("±í²»´æÔÚ\"s));\n"s);
 
         content += TextParsing::g_Indentation;
@@ -789,7 +790,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerDefaultFunction
             content += SYSTEM_TEXT("        "s);
         }
 
-        content += StringConversion::ToFirstLetterLower(value);
+        content += StringUtility::ToFirstLetterLower(value);
         content += SYSTEM_TEXT("Container"s);
 
         if (index == boost::numeric_cast<int>(dataType.size()) - 1)
@@ -861,7 +862,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerMember() const
         content += SYSTEM_TEXT("std::shared_ptr<const "s);
         content += value;
         content += SYSTEM_TEXT("Container> ");
-        content += StringConversion::ToFirstLetterLower(value);
+        content += StringUtility::ToFirstLetterLower(value);
         content += SYSTEM_TEXT("Container;\n");
     }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:49)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 11:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,9 +18,6 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include <vector>
-
-using std::string;
-using std::vector;
 
 CoreTools::ReadFileManager::ReadFileManager(const String& fileName)
     : impl{ CoreTools::ImplCreateUseFactory::Default, fileName }
@@ -46,7 +43,7 @@ void CoreTools::ReadFileManager::Read(size_t itemSize, size_t itemsNumber, void*
     return impl->Read(itemSize, itemsNumber, data);
 }
 
-const string CoreTools::ReadFileManager::LoadStdString()
+std::string CoreTools::ReadFileManager::LoadStdString()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -57,7 +54,7 @@ const string CoreTools::ReadFileManager::LoadStdString()
     Read(sizeof(int32_t), &length);
     if (length <= 0)
     {
-        return string{};
+        return std::string{};
     }
 
     auto padding = (length % alignedLength);
@@ -67,8 +64,8 @@ const string CoreTools::ReadFileManager::LoadStdString()
     }
 
     const auto numBytes = length + padding;
-    vector<char> text(numBytes);
+    std::vector<char> text(numBytes);
     Read(sizeof(char), numBytes, text.data());
 
-    return string{ text.data(), boost::numeric_cast<size_t>(length) };
+    return std::string{ text.data(), boost::numeric_cast<size_t>(length) };
 }

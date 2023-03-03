@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/18 12:18)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 16:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,7 +22,7 @@ CoreTools::SemaphoreImpl::SemaphoreImpl(int initialCount, int maximumCount)
 {
     if (!System::IsSystemSemaphoreValid(handle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("初始化信号量失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("初始化信号量失败！"s))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -61,7 +61,7 @@ void CoreTools::SemaphoreImpl::Release(int releaseCount)
 
     if (!System::ReleaseSystemSemaphore(handle, releaseCount, nullptr))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("释放信号量失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("释放信号量失败！"s))
     }
 }
 
@@ -71,7 +71,7 @@ void CoreTools::SemaphoreImpl::Wait()
 
     if (!System::WaitForSystemSemaphore(handle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("进入信号量失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("进入信号量失败！"s))
     }
 
     --currentCount;

@@ -10,26 +10,26 @@
 #include "ArtificialIntellegence/ArtificialIntellegenceExport.h"
 
 #include "ArtificialIntellegenceTestExportCopyMacroImpl.h"
-#include "CoreTools/Helper/ClassInvariant/ArtificialIntellegenceClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/ArtificialIntelligenceClassInvariantMacro.h"
 
 ArtificialIntellegence::ArtificialIntellegenceTestExportCopyMacroImpl::ArtificialIntellegenceTestExportCopyMacroImpl(int count) noexcept
     : count{ count }
 {
-    ARTIFICIAL_INTELLEGENCE_SELF_CLASS_IS_VALID_9;
+    ARTIFICIAL_INTELLIGENCE_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(ArtificialIntellegence, ArtificialIntellegenceTestExportCopyMacroImpl)
 
 int ArtificialIntellegence::ArtificialIntellegenceTestExportCopyMacroImpl::GetCount() const noexcept
 {
-    ARTIFICIAL_INTELLEGENCE_CLASS_IS_VALID_CONST_9;
+    ARTIFICIAL_INTELLIGENCE_CLASS_IS_VALID_CONST_9;
 
     return count;
 }
 
 void ArtificialIntellegence::ArtificialIntellegenceTestExportCopyMacroImpl::SetCount(int aCount) noexcept
 {
-    ARTIFICIAL_INTELLEGENCE_CLASS_IS_VALID_9;
+    ARTIFICIAL_INTELLIGENCE_CLASS_IS_VALID_9;
 
     count = aCount;
 }

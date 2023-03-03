@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 23:35)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:05)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_ENVIRONMENT_H
 #define CORE_TOOLS_FILE_MANAGER_ENVIRONMENT_H
@@ -14,8 +14,7 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include "CoreTools/Helper/SingletonMacro.h"
-#include "CoreTools/Threading/ThreadingFwd.h"
+#include "CoreTools/Helper/SingletonMacro.h" 
 
 CORE_TOOLS_EXPORT_UNIQUE_PTR(Environment);
 CORE_TOOLS_NON_COPY_EXPORT_IMPL(EnvironmentImpl);
@@ -36,12 +35,12 @@ namespace CoreTools
         };
 
     public:
-        explicit Environment(MAYBE_UNUSED EnvironmentCreate environmentCreate);
+        explicit Environment(EnvironmentCreate environmentCreate);
 
         static void Create();
         static void Destroy() noexcept;
 
-        SINGLETON_GET_PTR_DECLARE(Environment);
+        SINGLETON_GET_PTR_DECLARE(Environment)
 
         CLASS_INVARIANT_DECLARE;
 

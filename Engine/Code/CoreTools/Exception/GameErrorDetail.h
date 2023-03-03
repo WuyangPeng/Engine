@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 12:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 13:32)
 
 #ifndef CORE_TOOLS_EXCEPTION_GAME_ERROR_DETAIL_H
 #define CORE_TOOLS_EXCEPTION_GAME_ERROR_DETAIL_H
 
 #include "GameError.h"
 #include "CoreTools/CharacterString/StringConversion.h"
-#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename E>
@@ -48,7 +47,7 @@ E CoreTools::GameError<E>::GetErrorCode() const noexcept
 }
 
 template <typename E>
-const System::String CoreTools::GameError<E>::GetError() const
+System::String CoreTools::GameError<E>::GetError() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -65,7 +64,7 @@ const System::String CoreTools::GameError<E>::GetError() const
 }
 
 template <typename E>
-const System::String CoreTools::GameError<E>::GetErrorCodeDescribed() const
+System::String CoreTools::GameError<E>::GetErrorCodeDescribed() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -79,7 +78,7 @@ const System::String CoreTools::GameError<E>::GetErrorCodeDescribed() const
 
         return SYSTEM_TEXT("异常名："s) + errorName + SYSTEM_TEXT("，"s) + errorCodeDescribed + SYSTEM_TEXT("，"s);
     }
-    EXCEPTION_ENGINE_EXCEPTION_CATCH(CoreTools);
+    EXCEPTION_ENGINE_EXCEPTION_CATCH(CoreTools)
 
     return errorCodeDescribed;
 }

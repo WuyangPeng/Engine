@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 12:00)
+///	引擎测试版本：0.9.0.3 (2023/03/03 09:38)
 
 #include "ReadFileManagerTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -20,8 +20,6 @@
 #include <string>
 #include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 CoreTools::ReadFileManagerTesting::ReadFileManagerTesting(const OStreamShared& stream)
@@ -68,10 +66,10 @@ void CoreTools::ReadFileManagerTesting::ReadFileManagerTest()
 
     ASSERT_EQUAL(size, content.size());
 
-    vector<char> buffer(size);
+    std::vector<char> buffer(size);
     manager.Read(sizeof(char), size, buffer.data());
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     ASSERT_EQUAL(bufferContent, content);
 
@@ -81,7 +79,7 @@ void CoreTools::ReadFileManagerTesting::ReadFileManagerTest()
 
 void CoreTools::ReadFileManagerTesting::GetFileByteSizeTest()
 {
-    ReadFileManager manager{ GetFileName() };
+    const ReadFileManager manager{ GetFileName() };
     const auto fineContent = GetFileContent();
 
     ASSERT_EQUAL(manager.GetFileByteSize(), boost::numeric_cast<int>(fineContent.size() + sizeof(size_t) + CoreTools::GetStreamSize(fineContent)));

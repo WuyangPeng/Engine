@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:08)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/27 10:42)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_CASE_INSENSITIVE_STRING_H
 #define CORE_TOOLS_CHARACTER_STRING_CASE_INSENSITIVE_STRING_H
@@ -27,6 +27,7 @@ namespace CoreTools
     public:
         using ClassType = CaseInsensitiveStringTraits<CharT>;
         using ParentType = std::char_traits<CharT>;
+
         using CharType = typename ParentType::char_type;
 
     public:
@@ -38,7 +39,8 @@ namespace CoreTools
         NODISCARD static const CharType* find(const CharType* first, size_t count, CharType character) noexcept;
 
     private:
-        NODISCARD static int DoCompare(const CharType* lhs, const CharType* rhs, size_t count) noexcept(gAssert < 2 || gCoreToolsAssert < 2);
+        NODISCARD static int Compare(const CharType* lhs, const CharType* rhs) noexcept;
+        NODISCARD static int ToLower(const CharType* value) noexcept;
     };
 
     using CaseInsensitiveCStringTraits = CaseInsensitiveStringTraits<char>;

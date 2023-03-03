@@ -48,11 +48,11 @@ void CoreTools::DebugStreamMacroTesting::SaveStreamTest()
 {
     const auto streamObject = StreamObject::Create("name"s);
 
-    auto objectRegister = ObjectRegister::Create();
+    const auto objectRegister = ObjectRegister::Create();
 
     BufferTarget target{ bufferSize, objectRegister };
 
-    ConstObjectAssociated<StreamObject> constObjectAssociated{ streamObject, 1 };
+    const ConstObjectAssociated<StreamObject> constObjectAssociated{ streamObject, 1 };
     ASSERT_LESS(0, objectRegister->Register(constObjectAssociated));
 
     streamObject->Save(target);
@@ -60,7 +60,7 @@ void CoreTools::DebugStreamMacroTesting::SaveStreamTest()
 
 void CoreTools::DebugStreamMacroTesting::LoadStreamTest()
 {
-    auto streamObject = StreamObject::Create("name"s);
+    const auto streamObject = StreamObject::Create("name"s);
 
     const auto fileBuffer = std::make_shared<FileBuffer>(bufferSize);
 

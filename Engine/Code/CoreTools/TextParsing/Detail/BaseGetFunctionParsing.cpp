@@ -10,7 +10,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "BaseGetFunctionParsing.h"
-#include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
@@ -93,7 +93,7 @@ System::String CoreTools::BaseGetFunctionParsing::GenerateMapping(int index, con
     auto content = GenerateIndentation();
     content += TextParsing::g_NodiscardVirtual;
     content += TextParsing::g_SharedPtrConst;
-    content += StringConversion::ToFirstLetterUpper(mapping);
+    content += StringUtility::ToFirstLetterUpper(mapping);
     content += TextParsing::g_RightAngleBracket;
     content += TextParsing::g_Space;
     content += TextParsing::g_Get;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:39)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:33)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,7 +20,7 @@
 using namespace std::literals;
 
 CoreTools::EnvironmentImpl::EnvironmentImpl() noexcept
-    : directories{}, m_ConfigurationPath{}
+    : directories{}, configurationPath{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -38,9 +38,7 @@ bool CoreTools::EnvironmentImpl::InsertDirectory(const String& directory)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    const auto returnValue = directories.insert(directory);
-
-    return returnValue.second;
+    return directories.insert(directory).second;
 }
 
 bool CoreTools::EnvironmentImpl::EraseDirectory(const String& directory)
@@ -85,18 +83,16 @@ System::String CoreTools::EnvironmentImpl::GetPath(const String& fileName, const
 {
     for (const auto& path : directories)
     {
-        auto decorated = path + fileName;
-        if (IsFileInPathExist(decorated, attributes))
+        if (auto decorated = path + fileName; IsFileInPathExist(decorated, attributes))
         {
             return decorated;
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("未找符合条件的文件名！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("未找符合条件的文件名！"s))
 }
 
-// private
-bool CoreTools::EnvironmentImpl::IsFileInPathExist(const String& decorated, const String& attributes) const
+bool CoreTools::EnvironmentImpl::IsFileInPathExist(const String& decorated, const String& attributes)
 {
     FILE* file{ nullptr };
 
@@ -105,9 +101,7 @@ bool CoreTools::EnvironmentImpl::IsFileInPathExist(const String& decorated, cons
 
     if (System::OpenCFile(file, decoratedConversion, attributesConversion))
     {
-        const auto result = System::CloseCFile(file);
-
-        if (!result)
+        if (const auto result = System::CloseCFile(file); !result)
         {
             LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
                 << SYSTEM_TEXT("文件")
@@ -124,16 +118,16 @@ bool CoreTools::EnvironmentImpl::IsFileInPathExist(const String& decorated, cons
     }
 }
 
-void CoreTools::EnvironmentImpl::SetConfigurationPath(const String& configurationPath)
+void CoreTools::EnvironmentImpl::SetConfigurationPath(const String& aConfigurationPath)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_ConfigurationPath = configurationPath;
+    configurationPath = aConfigurationPath;
 }
 
 const System::String CoreTools::EnvironmentImpl::GetConfigurationPath() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_ConfigurationPath;
+    return configurationPath;
 }

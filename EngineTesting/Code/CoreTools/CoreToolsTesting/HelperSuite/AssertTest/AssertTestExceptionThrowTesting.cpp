@@ -385,7 +385,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEqualNullptrFailureThrowE
     ++failedNumber;
 
     auto value = 0;
-    auto ptr = &value;
+    const auto ptr = &value;
 
     ASSERT_EQUAL_NULL_PTR_FAILURE_THROW(ptr, "测试ASSERT_EQUAL_NULL_PTR未通过的情况抛出异常。存在一个正常的测试失败！");
 }

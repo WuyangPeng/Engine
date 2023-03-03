@@ -64,7 +64,7 @@ void CoreTools::ModuleExportMacroTesting::MainTest()
 void CoreTools::ModuleExportMacroTesting::DatabaseExportTest()
 {
     constexpr auto count = 10;
-    Database::DatabaseTestExportMacro original{ count };
+    const Database::DatabaseTestExportMacro original{ count };
 
     ASSERT_EQUAL(original.GetCount(), count);
 
@@ -76,7 +76,7 @@ void CoreTools::ModuleExportMacroTesting::DatabaseExportTest()
 void CoreTools::ModuleExportMacroTesting::ScriptExportTest()
 {
     constexpr auto count = 10;
-    Script::ScriptTestExportMacro original{ count };
+    const Script::ScriptTestExportMacro original{ count };
 
     ASSERT_EQUAL(original.GetCount(), count);
 

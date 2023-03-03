@@ -95,7 +95,7 @@ void CoreTools::AppenderFile::DoWrite(const LogMessage& message, const LogMessag
 // private
 bool CoreTools::AppenderFile::IsExceedMaxSize(PosType increaseSize)
 {
-    const auto fileSize = streamManager->GetOFStreamSize();
+    const auto fileSize = streamManager->GetStreamSize();
 
     return (maxFileSize < fileSize + increaseSize);
 }

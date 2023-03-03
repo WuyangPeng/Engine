@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class SafetyLimitMacroTesting final : public CoreTools::UnitTest
+    class SafetyLimitMacroTesting final : public UnitTest
     {
     public:
         using ClassType = SafetyLimitMacroTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void MacroTest();

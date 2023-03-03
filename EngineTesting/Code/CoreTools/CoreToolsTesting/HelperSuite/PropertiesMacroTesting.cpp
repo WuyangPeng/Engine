@@ -54,14 +54,14 @@ void CoreTools::PropertiesMacroTesting::PropertiesFriendTest()
 
 void CoreTools::PropertiesMacroTesting::PropertiesValue0Test()
 {
-    Properties properties{};
+    const Properties properties{};
 
     ASSERT_EQUAL(properties.Value0, 1);
 }
 
 void CoreTools::PropertiesMacroTesting::PropertiesValue1Test()
 {
-    Properties properties{};
+    const Properties properties{};
 
     ASSERT_EQUAL(properties.Value1, 1);
 }

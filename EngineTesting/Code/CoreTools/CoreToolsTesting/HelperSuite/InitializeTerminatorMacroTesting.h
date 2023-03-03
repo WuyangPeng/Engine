@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class InitializeTerminatorMacroTesting final : public CoreTools::UnitTest
+    class InitializeTerminatorMacroTesting final : public UnitTest
     {
     public:
         using ClassType = InitializeTerminatorMacroTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void InitTermTest();

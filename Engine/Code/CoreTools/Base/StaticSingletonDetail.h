@@ -1,40 +1,42 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:23)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 14:55)
 
 #ifndef CORE_TOOLS_BASE_STATIC_SINGLETON_DETAIL_H
 #define CORE_TOOLS_BASE_STATIC_SINGLETON_DETAIL_H
 
 #include "StaticSingleton.h"
+#include "System/Helper/Tools.h"
 
-template <typename T, CoreTools::MutexCreate mutexCreate>
-CoreTools::StaticSingleton<T, mutexCreate>::StaticSingleton(MAYBE_UNUSED SingletonCreate singletonCreate) noexcept
+template <typename T, CoreTools::MutexCreate MutexCreate>
+CoreTools::StaticSingleton<T, MutexCreate>::StaticSingleton(SingletonCreate singletonCreate) noexcept
 {
+    System::UnusedFunction(singletonCreate);
 }
 
-template <typename T, CoreTools::MutexCreate mutexCreate>
-typename CoreTools::StaticSingleton<T, mutexCreate>::ReferenceType CoreTools::StaticSingleton<T, mutexCreate>::GetSingleton() noexcept
+template <typename T, CoreTools::MutexCreate MutexCreate>
+typename CoreTools::StaticSingleton<T, MutexCreate>::ReferenceType CoreTools::StaticSingleton<T, MutexCreate>::GetSingleton() noexcept
 {
     static T singleton{ SingletonCreate::Init };
 
     return singleton;
 }
 
-template <typename T, CoreTools::MutexCreate mutexCreate>
-typename CoreTools::StaticSingleton<T, mutexCreate>::PointType CoreTools::StaticSingleton<T, mutexCreate>::GetSingletonPtr() noexcept
+template <typename T, CoreTools::MutexCreate MutexCreate>
+typename CoreTools::StaticSingleton<T, MutexCreate>::PointType CoreTools::StaticSingleton<T, MutexCreate>::GetSingletonPtr() noexcept
 {
     return &GetSingleton();
 }
 
-template <typename T, CoreTools::MutexCreate mutexCreate>
-typename CoreTools::StaticSingleton<T, mutexCreate>::MutexType& CoreTools::StaticSingleton<T, mutexCreate>::GetMutex()
+template <typename T, CoreTools::MutexCreate MutexCreate>
+typename CoreTools::StaticSingleton<T, MutexCreate>::MutexType& CoreTools::StaticSingleton<T, MutexCreate>::GetMutex()
 {
-    if constexpr (mutexCreate == MutexCreate::UseOriginalStd || mutexCreate == MutexCreate::UseOriginalStdRecursive)
+    if constexpr (MutexCreate == MutexCreate::UseOriginalStd || MutexCreate == MutexCreate::UseOriginalStdRecursive)
     {
         static MutexType mutex{};
 
@@ -42,7 +44,7 @@ typename CoreTools::StaticSingleton<T, mutexCreate>::MutexType& CoreTools::Stati
     }
     else
     {
-        static MutexType mutex{ mutexCreate };
+        static MutexType mutex{ MutexCreate };
 
         return mutex;
     }

@@ -35,7 +35,7 @@ void CoreTools::ExceptionMacroTesting::MainTest()
 
 void CoreTools::ExceptionMacroTesting::ThrowErrorTest()
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常。"));
+    THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常。"))
 }
 
 void CoreTools::ExceptionMacroTesting::ThrowWindowsErrorTest()
@@ -45,5 +45,5 @@ void CoreTools::ExceptionMacroTesting::ThrowWindowsErrorTest()
 
 void CoreTools::ExceptionMacroTesting::ThrowComErrorTest()
 {
-    THROW_LAST_ERROR_EXCEPTION(System::WindowError::EUnexpected, SYSTEM_TEXT("这里测试抛出COM异常。"));
+    THROW_LAST_ERROR_EXCEPTION(System::WindowError::EUnexpected, SYSTEM_TEXT("这里测试抛出COM异常。"))
 }

@@ -11,7 +11,7 @@
 
 #include "CSV/CSVGenerateHelper.h"
 #include "CSVRowDefaultFunctionDefinitionParsing.h"
-#include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
@@ -104,7 +104,7 @@ System::String CoreTools::CSVRowDefaultFunctionDefinitionParsing::GenerateMember
 
     auto getFunctionName = csvHead.GetFunctionName(index);
     auto variableName = csvHead.GetVariableName(index);
-    auto lowerVariableName = StringConversion::ToFirstLetterLower(variableName);
+    auto lowerVariableName = StringUtility::ToFirstLetterLower(variableName);
 
     String content{};
     if (csvPoistionType != CSVPoistionType::Begin)

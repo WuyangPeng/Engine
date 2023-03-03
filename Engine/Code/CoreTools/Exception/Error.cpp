@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 12:33)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 13:58)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,8 +16,6 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::string;
 
 CoreTools::Error::Error(const FunctionDescribed& functionDescribed, const LastError& lastError, const String& message)
     : impl{ ImplCreateUseFactory::Default, functionDescribed, lastError, message }
@@ -33,7 +31,7 @@ CoreTools::Error::Error(const FunctionDescribed& functionDescribed, WindowError 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Error)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Error, GetError, const System::String)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Error, GetError, System::String)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Error, GetCurrentFunction, const char*)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Error, GetFileName, const char*)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Error, GetLine, int)

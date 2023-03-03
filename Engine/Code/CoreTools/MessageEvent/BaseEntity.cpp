@@ -12,14 +12,14 @@
 #include "BaseEntity.h"
 #include "EntityManager.h"
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
-#include "CoreTools/Base/UniqueIDManager.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
+#include "CoreTools/Base/UniqueIdManager.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 CoreTools::BaseEntity::BaseEntity(MAYBE_UNUSED DisableNotThrow dDisableNotThrow)
-    : entityID{ UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Entity) }
+    : entityID{ UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Entity) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

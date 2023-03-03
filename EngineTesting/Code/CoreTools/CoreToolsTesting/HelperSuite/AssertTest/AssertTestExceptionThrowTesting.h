@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class AssertTestExceptionThrowTesting final : public CoreTools::UnitTest
+    class AssertTestExceptionThrowTesting final : public UnitTest
     {
     public:
         using ClassType = AssertTestExceptionThrowTesting;
@@ -29,7 +29,7 @@ namespace CoreTools
         void PrintTipsMessage() override;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void AssertTrueFailureThrowExceptionTest();

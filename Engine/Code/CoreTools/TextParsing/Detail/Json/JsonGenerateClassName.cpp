@@ -10,7 +10,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "JsonGenerateClassName.h"
-#include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/JsonFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
@@ -57,7 +57,7 @@ System::String CoreTools::JsonGenerateClassName::GenerateContainerClassName(cons
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto className = StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+    const auto className = StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
 
     String content{ TextParsing::g_Indentation };
     content += TextParsing::g_Indentation;
@@ -100,11 +100,11 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing() const
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using Const"s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const "s);
                 content += jsonHead.GetJsonClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(">;\n"s);
             }
             break;
@@ -113,15 +113,15 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing() const
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(" = std::vector<System::String>;\n"s);
 
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("::const_iterator;\n"s);
             }
             break;
@@ -130,15 +130,15 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing() const
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(" = std::deque<bool>;\n"s);
 
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("::const_iterator;\n"s);
             }
             break;
@@ -147,15 +147,15 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing() const
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(" = std::vector<int>;\n"s);
 
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("::const_iterator;\n"s);
             }
             break;
@@ -164,15 +164,15 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing() const
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(" = std::vector<int64_t>;\n"s);
 
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("::const_iterator;\n"s);
             }
             break;
@@ -181,15 +181,15 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing() const
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(" = std::vector<double>;\n"s);
 
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("::const_iterator;\n"s);
             }
             break;
@@ -198,19 +198,19 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing() const
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using Const"s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const "s);
                 content += jsonHead.GetJsonClassName();
                 content += TextParsing::g_DoubleColon;
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(">;\n"s);
 
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("Container = std::vector<Const"s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("SharedPtr>;\n"s);
             }
             break;
@@ -240,16 +240,16 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing(const JsonNode& j
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(" = std::vector<System::String>;\n"s);
 
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("::const_iterator;\n"s);
             }
             break;
@@ -259,16 +259,16 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing(const JsonNode& j
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(" = std::deque<bool>;\n"s);
 
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("::const_iterator;\n"s);
             }
             break;
@@ -278,16 +278,16 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing(const JsonNode& j
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(" = std::vector<int>;\n"s);
 
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("::const_iterator;\n"s);
             }
             break;
@@ -297,16 +297,16 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing(const JsonNode& j
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(" = std::vector<int64_t>;\n"s);
 
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("::const_iterator;\n"s);
             }
             break;
@@ -316,16 +316,16 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing(const JsonNode& j
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT(" = std::vector<double>;\n"s);
 
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("using "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("::const_iterator;\n"s);
             }
             break;
@@ -345,9 +345,9 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing(const JsonNode& j
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
                             content += SYSTEM_TEXT("using Const"s);
-                            content += StringConversion::ToFirstLetterUpper(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
                             content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const "s);
-                            content += StringConversion::ToFirstLetterUpper(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
                             content += SYSTEM_TEXT(">;\n"s);
                         }
                         break;
@@ -357,18 +357,18 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing(const JsonNode& j
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
                             content += SYSTEM_TEXT("using Const"s);
-                            content += StringConversion::ToFirstLetterUpper(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
                             content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const "s);
-                            content += StringConversion::ToFirstLetterUpper(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
                             content += SYSTEM_TEXT(">;\n"s);
 
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
                             content += SYSTEM_TEXT("using "s);
-                            content += StringConversion::ToFirstLetterUpper(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
                             content += SYSTEM_TEXT("Container = std::vector<Const"s);
-                            content += StringConversion::ToFirstLetterUpper(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
                             content += SYSTEM_TEXT("SharedPtr>;\n"s);
                         }
                         break;

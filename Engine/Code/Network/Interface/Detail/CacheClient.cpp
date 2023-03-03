@@ -11,7 +11,7 @@
 
 #include "CacheClient.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
 #include "CoreTools/Base/UniqueIDManager.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
@@ -54,7 +54,7 @@ uint64_t Network::CacheClient::Connect()
     auto address = make_shared<SockAddress>(strategy.GetIP(), strategy.GetPort(), strategy);
     if (socket && sockConnector.Connect(sockStream, address))
     {
-        m_SocketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
+        m_SocketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
         socket->InsertSocket(m_SocketID);
 
         return m_SocketID;
@@ -200,7 +200,7 @@ bool Network::CacheClient::EventFunction(const CoreTools::CallbackParameters& ca
             const auto result = callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPoisition::Error));
             if (result == 0)
             {
-                m_SocketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
+                m_SocketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
                 socket->InsertSocket(m_SocketID);
                 if (!socket->EventFunction(callbackParameters))
                 {

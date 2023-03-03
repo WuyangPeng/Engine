@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:07)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/27 10:38)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_IMPL_H
 #define CORE_TOOLS_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_IMPL_H
@@ -27,6 +27,8 @@ namespace CoreTools
     {
     public:
         using ClassType = FormatErrorMessageImpl;
+
+        using String = System::String;
         using WindowError = System::WindowError;
 
     public:
@@ -40,7 +42,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD System::String GetErrorMessage() const;
+        NODISCARD String GetErrorMessage() const;
 
     private:
         using Local = System::WindowsHLocal;
@@ -53,8 +55,9 @@ namespace CoreTools
         void AgainInitMessage() noexcept;
         void InitNetworkMessage(ConstDynamicLinkModule module) noexcept;
         void LoadedModuleSucceed(ConstDynamicLinkModule module) noexcept;
-        void LoadedModuleFailure() noexcept;
         void ReleaseMemory() noexcept;
+
+        static void LoadedModuleFailure() noexcept;
 
     private:
         WindowError lastError;

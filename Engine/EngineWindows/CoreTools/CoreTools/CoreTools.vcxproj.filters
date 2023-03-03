@@ -483,7 +483,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Base\Singleton.h">
       <Filter>Base 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIDManager.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIdManager.h">
       <Filter>Base 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Base\Base.h">
@@ -1071,7 +1071,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\AnimationCustomAssertMacro.h">
       <Filter>Helper 头文件\Assertion</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\ArtificialIntellegenceCustomAssertMacro.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\ArtificialIntelligenceCustomAssertMacro.h">
       <Filter>Helper 头文件\Assertion</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\AssistToolsCustomAssertMacro.h">
@@ -1125,7 +1125,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\AnimationClassInvariantMacro.h">
       <Filter>Helper 头文件\ClassInvariant</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\ArtificialIntellegenceClassInvariantMacro.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\ArtificialIntelligenceClassInvariantMacro.h">
       <Filter>Helper 头文件\ClassInvariant</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\UnitTest\AssertExceptionMacro.h">
@@ -1839,7 +1839,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestDetail.h">
       <Filter>UnitTestSuite 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIDManagerImpl.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIdManagerImpl.h">
       <Filter>Base 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Base\UniqueIDManagerDetail.h">
@@ -1848,7 +1848,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Flags\LogManagerFlags.h">
       <Filter>LogManager 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Base\Flags\UniqueIDSelectFlags.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\Base\Flags\UniqueIdSelect.h">
       <Filter>Base 头文件\Flags</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Properties\PropertyDetail.h">
@@ -3578,7 +3578,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestStream.cpp">
       <Filter>UnitTestSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIDManagerImpl.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\Base\Detail\UniqueIdManagerImpl.cpp">
       <Filter>Base 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\ParametersInterface.cpp">

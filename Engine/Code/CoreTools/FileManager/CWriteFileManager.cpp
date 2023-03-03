@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:46)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,8 +13,6 @@
 #include "Detail/CWriteFileManagerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::string;
 
 CoreTools::CWriteFileManager::CWriteFileManager(const String& fileName, bool addition)
     : impl{ fileName, addition }
@@ -41,8 +39,8 @@ void CoreTools::CWriteFileManager::Write(size_t itemSize, size_t itemsNumber, co
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CWriteFileManager, GetFileByteSize, uint32_t);
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, CWriteFileManager, PutCharacter, int, bool);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CWriteFileManager, PutString, string, bool);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CWriteFileManager, IsEOF, bool);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CWriteFileManager, PutString, std::string, bool);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CWriteFileManager, IsEof, bool);
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CWriteFileManager, Flush, bool);
 
 bool CoreTools::CWriteFileManager::Seek(long offset, FileSeek whence) noexcept
@@ -57,9 +55,9 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(CoreTools, CWriteFileManager,
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CWriteFileManager, Tell, long);
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CWriteFileManager, Rewind, void);
 
-bool CoreTools::CWriteFileManager::Setvbuf(FileSetvBuf type, size_t size) noexcept
+bool CoreTools::CWriteFileManager::SetVBuffer(FileSetVBuffer type, size_t size) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return impl->Setvbuf(type, size);
+    return impl->SetVBuffer(type, size);
 }

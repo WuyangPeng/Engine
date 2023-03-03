@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:43)
+///	引擎测试版本：0.9.0.3 (2023/02/23 16:39)
 
 #include "LoadingLibraryTesting.h"
 #include "System/DynamicLink/Flags/LoadLibraryFlags.h"
@@ -31,19 +31,19 @@ void CoreTools::LoadingLibraryTesting::DoRunUnitTest()
 
 void CoreTools::LoadingLibraryTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(LoadingNetmsgDllTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(LoadingNetMessageDllTest);
     ASSERT_THROW_EXCEPTION_0(LoadingErrorDllTest);
     ASSERT_NOT_THROW_EXCEPTION_0(GetProcAddressTest);
     ASSERT_THROW_EXCEPTION_0(GetProcAddressErrorTest);
 }
 
-void CoreTools::LoadingLibraryTesting::LoadingNetmsgDllTest()
+void CoreTools::LoadingLibraryTesting::LoadingNetMessageDllTest()
 {
-    const auto netmsgDll = SYSTEM_TEXT("netmsg.dll"s);
+    const auto netMessageDll = SYSTEM_TEXT("netmsg.dll"s);
 
-    LoadingLibrary library0{ netmsgDll, System::LoadLibraryType::DontResolveDllReferences };
+    LoadingLibrary library0{ netMessageDll, System::LoadLibraryType::DontResolveDllReferences };
 
-    LoadingLibrary library1{ netmsgDll, System::LoadLibraryType::DontResolveDllReferences };
+    LoadingLibrary library1{ netMessageDll, System::LoadLibraryType::DontResolveDllReferences };
 
     ASSERT_EQUAL(library0.GetLoadedModule(), library1.GetLoadedModule());
     ASSERT_UNEQUAL_NULL_PTR(library0.GetLoadedModule());

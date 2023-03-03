@@ -1,16 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 18:23)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 13:44)
 
 #ifndef CORE_TOOLS_CONTRACT_COPY_UNSHARED_IMPL_DETAIL_H
 #define CORE_TOOLS_CONTRACT_COPY_UNSHARED_IMPL_DETAIL_H
 
 #include "CopyUnsharedImpl.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
@@ -24,17 +25,21 @@ CoreTools::CopyUnsharedImpl<Original, Package>::CopyUnsharedImpl(Type&& arg, Typ
 
 template <typename Original, typename Package>
 template <typename... Types>
-CoreTools::CopyUnsharedImpl<Original, Package>::CopyUnsharedImpl(MAYBE_UNUSED ImplCreateUseFactory implCreateType, Types&&... args)
+CoreTools::CopyUnsharedImpl<Original, Package>::CopyUnsharedImpl(ImplCreateUseFactory implCreateType, Types&&... args)
     : impl{ Package::FactoryType::Create(std::forward<Types>(args)...) }
 {
+    System::UnusedFunction(implCreateType);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Original, typename Package>
 template <typename... Types>
-CoreTools::CopyUnsharedImpl<Original, Package>::CopyUnsharedImpl(MAYBE_UNUSED ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args)
+CoreTools::CopyUnsharedImpl<Original, Package>::CopyUnsharedImpl(ImplCreateUseDefaultConstruction implCreateDefaultType, Types&&... args)
     : impl{ std::make_shared<Package>() }
 {
+    System::UnusedFunction(implCreateDefaultType);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 

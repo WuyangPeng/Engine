@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:59)
+///	引擎测试版本：0.9.0.3 (2023/03/03 09:48)
 
 #include "EnvironmentTesting.h"
 #include "CoreTools/FileManager/Environment.h"
@@ -26,7 +26,11 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, EnvironmentTesting)
 
 void CoreTools::EnvironmentTesting::DoRunUnitTest()
 {
+    Environment::Create();
+
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+
+    Environment::Destroy();
 }
 
 System::String CoreTools::EnvironmentTesting::GetEnvironmentFileName()
@@ -41,8 +45,6 @@ System::String CoreTools::EnvironmentTesting::GetEnvironmentPathFileName()
 
 void CoreTools::EnvironmentTesting::MainTest()
 {
-    Environment::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(InsertDirectoryTest);
     ASSERT_NOT_THROW_EXCEPTION_0(GetPathReadingSucceedTest);
     ASSERT_NOT_THROW_EXCEPTION_0(GetPathWritingSucceedTest);
@@ -55,8 +57,6 @@ void CoreTools::EnvironmentTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(EraseDirectoryTest);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ConfigurationPathTest);
-
-    Environment::Destroy();
 }
 
 void CoreTools::EnvironmentTesting::InsertDirectoryTest()
@@ -120,7 +120,7 @@ void CoreTools::EnvironmentTesting::ConfigurationPathTest()
 {
     ASSERT_TRUE(ENVIRONMENT_SINGLETON.GetConfigurationPath().empty());
 
-    auto configurationPath = SYSTEM_TEXT("Confing"s);
+    const auto configurationPath = SYSTEM_TEXT("Confing"s);
 
     ENVIRONMENT_SINGLETON.SetConfigurationPath(configurationPath);
 

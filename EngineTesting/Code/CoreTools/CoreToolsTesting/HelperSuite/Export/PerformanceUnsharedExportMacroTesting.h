@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class PerformanceUnsharedExportMacroTesting final : public CoreTools::UnitTest
+    class PerformanceUnsharedExportMacroTesting final : public UnitTest
     {
     public:
         using ClassType = PerformanceUnsharedExportMacroTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         template <typename T>

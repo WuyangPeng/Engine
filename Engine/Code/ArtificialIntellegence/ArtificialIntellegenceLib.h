@@ -4,14 +4,14 @@
 // 
 // ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 10:06)
 
-#ifndef ARTIFICIAL_INTELLEGENCE_LIB_H
-#define ARTIFICIAL_INTELLEGENCE_LIB_H
+#ifndef ARTIFICIAL_INTELLIGENCE_LIB_H
+#define ARTIFICIAL_INTELLIGENCE_LIB_H
 
 #include "Helper/UserMacro.h" 
 
 #if defined(TCRE_USE_MSVC) 
 
-	#ifndef BUILDING_ARTIFICIAL_INTELLEGENCE_STATIC
+	#ifndef BUILDING_ARTIFICIAL_INTELLIGENCE_STATIC
 
 		#ifdef _DEBUG 
 			#pragma comment(lib,"ArtificialIntellegenceD.lib")
@@ -19,7 +19,7 @@
 			#pragma comment(lib,"ArtificialIntellegence.lib")
 		#endif // _DEBUG
 
-	#else // !BUILDING_ARTIFICIAL_INTELLEGENCE_STATIC
+	#else // !BUILDING_ARTIFICIAL_INTELLIGENCE_STATIC
 
 		#include "DllLib.h"
 		#include "System/SystemLib.h"
@@ -31,8 +31,8 @@
 			#pragma comment(lib,"ArtificialIntellegenceStatic.lib")
 		#endif // _DEBUG
 
-	#endif // BUILDING_ARTIFICIAL_INTELLEGENCE_STATIC
+	#endif // BUILDING_ARTIFICIAL_INTELLIGENCE_STATIC
 
 #endif // TCRE_USE_MSVC  
  
-#endif // ARTIFICIAL_INTELLEGENCE_LIB_H
+#endif // ARTIFICIAL_INTELLIGENCE_LIB_H

@@ -11,7 +11,7 @@
 
 #include "IterativeServer.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
+#include "CoreTools/Base/Flags/UniqueIdSelect.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
@@ -62,7 +62,7 @@ bool Network::IterativeServer::HandleConnections(SocketManager& socketManager)
 
     if (sockAcceptor.Accept(*sockStream, sockAddress))
     {
-        const auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Network);
+        const auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
         socketManager.InsertSocket(socketID);
 
         if (!sockStream->EnableNonBlock())

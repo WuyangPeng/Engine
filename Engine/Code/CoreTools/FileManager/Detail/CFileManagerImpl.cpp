@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 23:45)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:28)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -28,7 +28,6 @@ CoreTools::CFileManagerImpl::CFileManagerImpl(const String& fileName, const Stri
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 void CoreTools::CFileManagerImpl::Open()
 {
     if (!System::OpenCFile(file, StringConversion::StandardConversionCFileString(fileName), StringConversion::StandardConversionCFileString(mode)))
@@ -44,8 +43,7 @@ CoreTools::CFileManagerImpl::~CFileManagerImpl() noexcept
     Close();
 }
 
-// private
-void CoreTools::CFileManagerImpl::Close() noexcept
+void CoreTools::CFileManagerImpl::Close() const noexcept
 {
     if (!System::CloseCFile(file))
     {
@@ -106,7 +104,7 @@ int CoreTools::CFileManagerImpl::GetCharacter()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CoreTools::DisableNoexcept();
+    DisableNoexcept();
 
     return System::GetCharacter(file);
 }
@@ -115,7 +113,7 @@ bool CoreTools::CFileManagerImpl::UnGetCharacter(int character)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CoreTools::DisableNoexcept();
+    DisableNoexcept();
 
     return System::UnGetCharacter(file, character);
 }
@@ -124,7 +122,7 @@ bool CoreTools::CFileManagerImpl::PutCharacter(int character)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CoreTools::DisableNoexcept();
+    DisableNoexcept();
 
     return System::PutCharacter(file, character);
 }
@@ -133,7 +131,7 @@ bool CoreTools::CFileManagerImpl::PutString(const string& str)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    CoreTools::DisableNoexcept();
+    DisableNoexcept();
 
     return System::PutString(file, str.c_str());
 }
@@ -145,7 +143,7 @@ string CoreTools::CFileManagerImpl::GetString(int count)
     return System::GetString(file, count);
 }
 
-bool CoreTools::CFileManagerImpl::IsEOF() noexcept
+bool CoreTools::CFileManagerImpl::IsEof() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -170,17 +168,15 @@ CoreTools::CFileManagerImpl::PosType CoreTools::CFileManagerImpl::GetPosition()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto position = System::GetPosition(file);
-
     constexpr PosType errorPosition{ -1 };
 
-    if (position != errorPosition)
+    if (const auto position = System::GetPosition(file); position != errorPosition)
     {
         return position;
     }
     else
     {
-        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("获取文件“%1%”的位置失败！"s)) % fileName).str());
+        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("获取文件“%1%”的位置失败！"s)) % fileName).str())
     }
 }
 
@@ -205,7 +201,7 @@ void CoreTools::CFileManagerImpl::Rewind() noexcept
     return System::Rewind(file);
 }
 
-bool CoreTools::CFileManagerImpl::Setvbuf(FileSetvBuf type, size_t size) noexcept
+bool CoreTools::CFileManagerImpl::SetVBuffer(FileSetVBuf type, size_t size) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

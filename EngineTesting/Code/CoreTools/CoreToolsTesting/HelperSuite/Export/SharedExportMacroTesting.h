@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class SharedExportMacroTesting final : public CoreTools::UnitTest
+    class SharedExportMacroTesting final : public UnitTest
     {
     public:
         using ClassType = SharedExportMacroTesting;
@@ -26,29 +26,11 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         template <typename T>
         void SharedExportTest();
-
-        void ExportSharedTest();
-        void CoreToolsSharedTest();
-        void NetworkSharedTest();
-        void DatabaseSharedTest();
-        void ScriptSharedTest();
-        void MathematicsSharedTest();
-        void SoundEffectSharedTest();
-        void InputOutputSharedTest();
-        void ResourceManagerSharedTest();
-        void RenderingSharedTest();
-        void PhysicsSharedTest();
-        void ImagicsSharedTest();
-        void AnimationSharedTest();
-        void ArtificialIntellegenceSharedTest();
-        void UserInterfaceSharedTest();
-        void AssistToolsSharedTest();
-        void FrameworkSharedTest();
     };
 }
 

@@ -99,7 +99,7 @@ void CoreTools::ExportMacroTesting::ExportPerformanceUnsharedImplMacroTest()
 void CoreTools::ExportMacroTesting::ExportImplMacroTest()
 {
     constexpr auto count = 10;
-    ExportImplMacro macro{ count };
+    const ExportImplMacro macro{ count };
 
     ASSERT_EQUAL(macro.GetCount(), count);
 }
@@ -107,7 +107,7 @@ void CoreTools::ExportMacroTesting::ExportImplMacroTest()
 void CoreTools::ExportMacroTesting::ExportConstImplMacroTest()
 {
     constexpr auto count = 10;
-    ExportConstImplMacro macro{ count };
+    const ExportConstImplMacro macro{ count };
 
     ASSERT_EQUAL(macro.GetCount(), count);
 }

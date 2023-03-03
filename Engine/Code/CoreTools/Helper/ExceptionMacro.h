@@ -52,8 +52,8 @@
             << error                                     \
             << LOG_SINGLETON_TRIGGER_ASSERT;             \
     }
-
-#define EXCEPTION_UNKOWN_CATCH(filterType)               \
+ 
+#define EXCEPTION_UNKNOWN_CATCH(filterType)               \
     catch (...)                                          \
     {                                                    \
         LOG_SINGLETON_ENGINE_APPENDER(Fatal, filterType) \
@@ -64,7 +64,7 @@
 #define EXCEPTION_ALL_CATCH(filterType)          \
     EXCEPTION_ENGINE_EXCEPTION_CATCH(filterType) \
     EXCEPTION_STD_EXCEPTION_CATCH(filterType)    \
-    EXCEPTION_UNKOWN_CATCH(filterType)
+    EXCEPTION_UNKNOWN_CATCH(filterType)
 
 #define EXCEPTION_ENTRY_POINT_CATCH                    \
     catch (const CoreTools::Error& error)              \

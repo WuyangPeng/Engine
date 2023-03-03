@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/18 12:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 17:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -29,22 +29,22 @@ void CoreTools::ThreadMutex::Initialize()
 
     // 成功 = 0
     // 错误 = ENOMEM
-    if (System::PthreadMutexAttributeInit(&mutex.attribute) != System::PthreadResult::Successful)
+    if (PthreadMutexAttributeInit(&mutex.attribute) != System::PthreadResult::Successful)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrInit初始化Mutex失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrInit初始化Mutex失败。"s))
     }
 
     // 成功 = 0
-    if (System::PthreadMutexAttributeSetType(&mutex.attribute) != System::PthreadResult::Successful)
+    if (PthreadMutexAttributeSetType(&mutex.attribute) != System::PthreadResult::Successful)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrSettype初始化Mutex失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexattrSettype初始化Mutex失败。"s))
     }
 
     // 成功 = 0
     // 错误 = EAGAIN, ENOMEM, EPERM, EBUSY, EINVAL
-    if (System::PthreadMutexInit(&mutex.attribute, &mutex.mutex) != System::PthreadResult::Successful)
+    if (PthreadMutexInit(&mutex.attribute, &mutex.mutex) != System::PthreadResult::Successful)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexInit初始化Mutex失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("PthreadMutexInit初始化Mutex失败。"s))
     }
 }
 
@@ -63,7 +63,7 @@ void CoreTools::ThreadMutex::Delete() noexcept
 
     // 成功 = 0
     // 错误 = EBUSY, EINVAL
-    if (System::PthreadMutexAttributeDestroy(&mutex.attribute) != System::PthreadResult::Successful)
+    if (PthreadMutexAttributeDestroy(&mutex.attribute) != System::PthreadResult::Successful)
     {
         LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
             << SYSTEM_TEXT("PthreadMutexattrDestroy销毁Mutex失败")
@@ -79,7 +79,7 @@ void CoreTools::ThreadMutex::Enter()
     // 错误 = EINVAL, EDEADLK
     if (System::PthreadMutexLock(&mutex.mutex) != System::PthreadResult::Successful)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("进入Mutex失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("进入Mutex失败。"s))
     }
 }
 

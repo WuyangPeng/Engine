@@ -1,17 +1,15 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:30)
+///	引擎测试版本：0.9.0.3 (2023/02/23 14:16)
 
 #include "Impl.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
-using std::make_shared;
 
 CoreTools::Impl::Impl() noexcept
     : Impl{ 0 }
@@ -55,10 +53,10 @@ size_t CoreTools::Impl::GetAddress() const noexcept
 
 CoreTools::Impl::ImplSharedPtr CoreTools::Impl::Create(int count)
 {
-    return make_shared<ClassType>(count);
+    return std::make_shared<ClassType>(count);
 }
 
 CoreTools::Impl::ImplSharedPtr CoreTools::Impl::Create()
 {
-    return make_shared<ClassType>();
+    return std::make_shared<ClassType>();
 }

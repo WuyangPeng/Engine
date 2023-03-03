@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:59)
+///	引擎测试版本：0.9.0.3 (2023/03/03 09:19)
 
 #include "FileHandleHelperTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -15,10 +15,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include <string>
-#include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 System::String CoreTools::FileHandleHelperTesting::GetFileHandleHelperName()
@@ -26,7 +23,7 @@ System::String CoreTools::FileHandleHelperTesting::GetFileHandleHelperName()
     return SYSTEM_TEXT("Resource/FileHandleTesting/FileHandleHelperTestingText.txt"s);
 }
 
-string CoreTools::FileHandleHelperTesting::GetFileHandleHelperContent()
+std::string CoreTools::FileHandleHelperTesting::GetFileHandleHelperContent()
 {
     return "FileHandleHelp Testing Text"s;
 }
@@ -56,7 +53,7 @@ void CoreTools::FileHandleHelperTesting::LoadFromFileTest()
 {
     auto buffer = FileHandleHelper::LoadFromFile(GetFileHandleHelperName());
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     ASSERT_EQUAL(bufferContent, GetFileHandleHelperContent());
 }
@@ -64,13 +61,13 @@ void CoreTools::FileHandleHelperTesting::LoadFromFileTest()
 void CoreTools::FileHandleHelperTesting::AppendToFileTest()
 {
     auto content = GetFileHandleHelperContent();
-    auto fileHandleHelperName = GetFileHandleHelperName();
+    const auto fileHandleHelperName = GetFileHandleHelperName();
 
     FileHandleHelper::AppendToFile(fileHandleHelperName, boost::numeric_cast<int>(content.size()), content.c_str());
 
     auto buffer = FileHandleHelper::LoadFromFile(fileHandleHelperName);
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     content += GetFileHandleHelperContent();
 
@@ -79,14 +76,14 @@ void CoreTools::FileHandleHelperTesting::AppendToFileTest()
 
 void CoreTools::FileHandleHelperTesting::SaveIntoFileTest()
 {
-    auto content = GetFileHandleHelperContent();
-    auto fileHandleHelperName = GetFileHandleHelperName();
+    const auto content = GetFileHandleHelperContent();
+    const auto fileHandleHelperName = GetFileHandleHelperName();
 
     FileHandleHelper::SaveIntoFile(fileHandleHelperName, boost::numeric_cast<int>(content.size()), content.c_str());
 
     auto buffer = FileHandleHelper::LoadFromFile(fileHandleHelperName);
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     ASSERT_EQUAL(bufferContent, content);
 }

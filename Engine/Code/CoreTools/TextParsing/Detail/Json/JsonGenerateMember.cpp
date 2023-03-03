@@ -11,6 +11,7 @@
 
 #include "JsonGenerateMember.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/JsonFlags.h"
@@ -46,7 +47,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember() const
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("System::String "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -55,7 +56,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember() const
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("bool "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -64,7 +65,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember() const
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("int "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -73,7 +74,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember() const
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("int64_t "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -82,7 +83,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember() const
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("double "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -91,9 +92,9 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember() const
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("Const"s);
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("SharedPtr "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -109,9 +110,9 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember() const
             {
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += TextParsing::g_Space;
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -120,9 +121,9 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember() const
             {
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += SYSTEM_TEXT("Container "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -158,7 +159,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("System::String "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -168,7 +169,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("bool "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -178,7 +179,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("int "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -188,7 +189,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("int64_t "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -198,7 +199,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += SYSTEM_TEXT("double "s);
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -216,9 +217,9 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
                 content += TextParsing::g_Indentation;
-                content += StringConversion::ToFirstLetterUpper(value->GetTypeName());
+                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
                 content += TextParsing::g_Space;
-                content += StringConversion::ToFirstLetterLower(value->GetTypeName());
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
                 content += TextParsing::g_SemicolonNewline;
             }
             break;
@@ -239,7 +240,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
                             content += SYSTEM_TEXT("System::String "s);
-                            content += StringConversion::ToFirstLetterLower(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterLower(inner->GetTypeName());
                             content += TextParsing::g_SemicolonNewline;
                         }
                         break;
@@ -249,7 +250,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
                             content += SYSTEM_TEXT("bool "s);
-                            content += StringConversion::ToFirstLetterLower(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterLower(inner->GetTypeName());
                             content += TextParsing::g_SemicolonNewline;
                         }
                         break;
@@ -259,7 +260,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
                             content += SYSTEM_TEXT("int "s);
-                            content += StringConversion::ToFirstLetterLower(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterLower(inner->GetTypeName());
                             content += TextParsing::g_SemicolonNewline;
                         }
                         break;
@@ -269,7 +270,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
                             content += SYSTEM_TEXT("int64_t "s);
-                            content += StringConversion::ToFirstLetterLower(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterLower(inner->GetTypeName());
                             content += TextParsing::g_SemicolonNewline;
                         }
                         break;
@@ -279,7 +280,7 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
                             content += SYSTEM_TEXT("double "s);
-                            content += StringConversion::ToFirstLetterLower(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterLower(inner->GetTypeName());
                             content += TextParsing::g_SemicolonNewline;
                         }
                         break;
@@ -289,9 +290,9 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
                             content += SYSTEM_TEXT("Const"s);
-                            content += StringConversion::ToFirstLetterUpper(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
                             content += SYSTEM_TEXT("SharedPtr "s);
-                            content += StringConversion::ToFirstLetterLower(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterLower(inner->GetTypeName());
                             content += TextParsing::g_SemicolonNewline;
                         }
                         break;
@@ -308,9 +309,9 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
-                            content += StringConversion::ToFirstLetterUpper(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
                             content += TextParsing::g_Space;
-                            content += StringConversion::ToFirstLetterLower(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterLower(inner->GetTypeName());
                             content += TextParsing::g_SemicolonNewline;
                         }
                         break;
@@ -320,9 +321,9 @@ System::String CoreTools::JsonGenerateMember::GenerateContainerMember(const Json
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
                             content += TextParsing::g_Indentation;
-                            content += StringConversion::ToFirstLetterUpper(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
                             content += SYSTEM_TEXT("Container "s);
-                            content += StringConversion::ToFirstLetterLower(inner->GetTypeName());
+                            content += StringUtility::ToFirstLetterLower(inner->GetTypeName());
                             content += TextParsing::g_SemicolonNewline;
                         }
                         break;

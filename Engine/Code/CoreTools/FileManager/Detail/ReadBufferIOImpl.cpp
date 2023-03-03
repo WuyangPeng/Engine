@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 1:43)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/02 10:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -65,12 +65,12 @@ int CoreTools::ReadBufferIOImpl::ReadFromBuffer(size_t itemSize, size_t itemsNum
     CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "准备写入的数据无效！");
     CORE_TOOLS_ASSERTION_2(GetBufferIOType() == BufferIO::Read, "缓冲区不支持读取！");
 
-    auto numberToCopy = boost::numeric_cast<int>(itemSize * itemsNumber);
-    auto nextBytesProcessed = GetBytesProcessed() + numberToCopy;
+    const auto numberToCopy = boost::numeric_cast<int>(itemSize * itemsNumber);
+    const auto nextBytesProcessed = GetBytesProcessed() + numberToCopy;
     if (nextBytesProcessed <= GetBytesTotal())
     {
         // 获得缓冲区当前指针位置。
-        auto source = buffer->GetBuffer(GetBytesProcessed());
+        const auto source = buffer->GetBuffer(GetBytesProcessed());
 
         SetBytesProcessed(nextBytesProcessed);
 
@@ -89,7 +89,7 @@ int CoreTools::ReadBufferIOImpl::ReadFromBuffer(size_t itemSize, size_t itemsNum
     }
     else
     {
-        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("要读取的字节数%1%超过了缓冲区大小%2%！原字节数为：%3%")) % numberToCopy % GetBytesTotal() % GetBytesProcessed()).str());
+        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("要读取的字节数%1%超过了缓冲区大小%2%！原字节数为：%3%")) % numberToCopy % GetBytesTotal() % GetBytesProcessed()).str())
     }
 }
 
@@ -97,18 +97,16 @@ std::string CoreTools::ReadBufferIOImpl::GetText(int length) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    const auto nextProcessed = boost::numeric_cast<size_t>(GetBytesProcessed() + length);
-
-    if (nextProcessed <= buffer->GetSize())
+    if (const auto nextProcessed = boost::numeric_cast<size_t>(GetBytesProcessed() + length); nextProcessed <= buffer->GetSize())
     {
-        auto text = buffer->GetBuffer(GetBytesProcessed());
+        const auto text = buffer->GetBuffer(GetBytesProcessed());
         std::string datum{ text, boost::numeric_cast<size_t>(length) };
 
         return datum;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("要读取的字节数超过了缓冲区大小！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("要读取的字节数超过了缓冲区大小！"s))
     }
 }
 

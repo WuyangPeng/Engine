@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 18:22)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 13:41)
 
 #ifndef CORE_TOOLS_CONTRACT_CHECK_INVARIANT_DETAIL_H
 #define CORE_TOOLS_CONTRACT_CHECK_INVARIANT_DETAIL_H
@@ -18,7 +18,7 @@ template <typename T>
 CoreTools::CheckInvariant<T>::CheckInvariant(ConstReference master, const FunctionDescribed& functionDescribed, CheckInvariantConditions conditions) noexcept
     : master{ master }, functionDescribed{ functionDescribed }, conditions{ conditions }
 {
-    if (conditions != CheckInvariantConditions::OnlyPostconditions)
+    if (conditions != CheckInvariantConditions::OnlyPostCondition)
     {
         using namespace std::literals;
 
@@ -29,7 +29,7 @@ CoreTools::CheckInvariant<T>::CheckInvariant(ConstReference master, const Functi
 template <typename T>
 CoreTools::CheckInvariant<T>::~CheckInvariant() noexcept
 {
-    if (conditions != CheckInvariantConditions::OnlyPreconditions)
+    if (conditions != CheckInvariantConditions::OnlyPreCondition)
     {
         using namespace std::literals;
 

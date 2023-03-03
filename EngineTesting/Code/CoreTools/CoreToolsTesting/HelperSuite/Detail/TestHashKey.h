@@ -23,7 +23,7 @@ namespace CoreTools
         using ClassType = TestHashKey;
 
     public:
-        explicit TestHashKey(const std::string& name);
+        explicit TestHashKey(std::string name) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -32,7 +32,7 @@ namespace CoreTools
 
     private:
         std::string name;
-        float buffer;
+        int64_t buffer;
         int key;
     };
 }

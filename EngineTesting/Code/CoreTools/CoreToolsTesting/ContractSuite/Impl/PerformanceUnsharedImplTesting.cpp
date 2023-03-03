@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 ///	ÁªÏµ×÷Õß£º94458936@qq.com
 ///
 ///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.8.0.8 (2022/05/19 14:31)
+///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.3 (2023/02/23 14:36)
 
 #include "PerformanceUnsharedImplTesting.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
@@ -41,7 +41,7 @@ void CoreTools::PerformanceUnsharedImplTesting::DefaultTest()
 
     ASSERT_EQUAL((*performanceUnsharedImpl0).GetCount(), count);
 
-    auto performanceUnsharedImpl1 = performanceUnsharedImpl0;
+    const auto performanceUnsharedImpl1 = performanceUnsharedImpl0;
 
     ASSERT_EQUAL(performanceUnsharedImpl1->GetCount(), count);
     ASSERT_EQUAL(performanceUnsharedImpl0->GetAddress(), performanceUnsharedImpl1->GetAddress());
@@ -60,11 +60,11 @@ void CoreTools::PerformanceUnsharedImplTesting::DefaultTest()
 void CoreTools::PerformanceUnsharedImplTesting::UseFactoryTest()
 {
     constexpr auto count = 12;
-    TestingType performanceUnsharedImpl0{ ImplCreateUseFactory::Default, count };
+    const TestingType performanceUnsharedImpl0{ ImplCreateUseFactory::Default, count };
 
     ASSERT_EQUAL(performanceUnsharedImpl0->GetCount(), count);
 
-    auto performanceUnsharedImpl1 = performanceUnsharedImpl0;
+    const auto performanceUnsharedImpl1 = performanceUnsharedImpl0;
 
     ASSERT_EQUAL(performanceUnsharedImpl1->GetCount(), count);
     ASSERT_EQUAL(performanceUnsharedImpl0->GetAddress(), performanceUnsharedImpl1->GetAddress());
@@ -72,11 +72,11 @@ void CoreTools::PerformanceUnsharedImplTesting::UseFactoryTest()
 
 void CoreTools::PerformanceUnsharedImplTesting::UseUseDefaultConstructionTest()
 {
-    TestingType performanceUnsharedImpl0{ ImplCreateUseDefaultConstruction::Default };
+    const TestingType performanceUnsharedImpl0{ ImplCreateUseDefaultConstruction::Default };
 
     ASSERT_EQUAL(performanceUnsharedImpl0->GetCount(), 0);
 
-    auto performanceUnsharedImpl1 = performanceUnsharedImpl0;
+    const auto performanceUnsharedImpl1 = performanceUnsharedImpl0;
 
     ASSERT_EQUAL(performanceUnsharedImpl1->GetCount(), 0);
     ASSERT_EQUAL(performanceUnsharedImpl0->GetAddress(), performanceUnsharedImpl1->GetAddress());

@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class TestingObjectSizeTesting final : public CoreTools::UnitTest
+    class TestingObjectSizeTesting final : public UnitTest
     {
     public:
         using ClassType = TestingObjectSizeTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void SaveStreamTest();

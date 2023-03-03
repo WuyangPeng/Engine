@@ -14,7 +14,7 @@
 
 namespace CoreTools
 {
-    class LogTriggerAssertMacroTesting final : public CoreTools::UnitTest
+    class LogTriggerAssertMacroTesting final : public UnitTest
     {
     public:
         using ClassType = LogTriggerAssertMacroTesting;
@@ -29,7 +29,7 @@ namespace CoreTools
         void PrintTipsMessage() override;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void TriggerAssertTest() noexcept;

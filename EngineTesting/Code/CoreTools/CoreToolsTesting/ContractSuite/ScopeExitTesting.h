@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:30)
+///	引擎测试版本：0.9.0.3 (2023/02/23 14:19)
 
 #ifndef CORE_TOOLS_CONTRACT_SUITE_SCOPE_EXIT_TESTING_H
 #define CORE_TOOLS_CONTRACT_SUITE_SCOPE_EXIT_TESTING_H
@@ -29,7 +29,7 @@ namespace CoreTools
         using FunctionType = void (*)();
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void ScopeExitTest();

@@ -42,13 +42,12 @@
 				  CallConstMemberFunctionMacroTesting、
 				  MemberFunctionStaticAssertMacroTesting、
 				  CopyMemberFunctionStaticAssertMacroTesting。
-（11）内存宏：MemoryMacroTesting。
-（12）运行时类型识别宏：RttiMacroBaseTesting、
+（11）运行时类型识别宏：RttiMacroBaseTesting、
 					    RttiMacroTesting、
 						RttiMacroFinalTesting。
-（13）单例宏：SingletonMacroTesting。
-（14）名字宏：NameMacroTesting。
-（15）字节流宏：StreamSizeMacroTesting、
+（12）单例宏：SingletonMacroTesting。
+（13）名字宏：NameMacroTesting。
+（14）字节流宏：StreamSizeMacroTesting、
 				DebugStreamMacroTesting、
 				DefaultTestingNoObjectPtrTesting、
 				DefaultTestingObjectPtrTesting、
@@ -56,15 +55,15 @@
 				TestingObjectPtrTesting、
 				TestingObjectSizeTesting、
 				TestingObjectTesting。
-（16）单元测试宏：UnitTestSuiteMacroTesting。
-（17）智能指针宏：SharedPtrMacroTesting。
-（18）异常宏：ExceptionMacroTesting、
+（15）单元测试宏：UnitTestSuiteMacroTesting。
+（16）智能指针宏：SharedPtrMacroTesting。
+（17）异常宏：ExceptionMacroTesting、
 			  ExceptionCatchMacroTesting。 
-（19）属性宏：PropertiesMacroTesting。
-（20）用户宏：UserMacroTesting。
-（21）while循环安全计数器宏：SafetyLimitMacroTesting。
-（22）获取数值所需的位：GetRequiredBitsTesting。
-（23）哈希组合：HashCombineTesting。
+（18）属性宏：PropertiesMacroTesting。
+（19）用户宏：UserMacroTesting。
+（20）while循环安全计数器宏：SafetyLimitMacroTesting。
+（21）获取数值所需的位：GetRequiredBitsTesting。
+（22）哈希组合：HashCombineTesting。
  
 ----------------------------
 2.   ContractSuite 
@@ -88,7 +87,7 @@
 
 对基本功能模块的单元测试，包括：
 （1）单例基类：SingletonTesting。
-（2）唯一ID管理：UniqueIDManagerTesting。
+（2）唯一ID管理：UniqueIdManagerTesting。
 （3）版本信息：VersionTesting。
 （4）动态链接库：LoadingLibraryTesting。
 （5）跨度迭代器：SpanIteratorTesting。
@@ -102,6 +101,7 @@
 （2）字符串转换：StringConversionTesting。
 （3）忽略大小写的字符类：CaseInsensitiveStringTesting、
 						 CaseInsensitiveStringIOStreamTesting。 
+（4）字符串工具：StringUtilityTesting。
 
 ----------------------------
 5.   ExceptionSuite 

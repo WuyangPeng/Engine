@@ -1,21 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:31)
+///	引擎测试版本：0.9.0.3 (2023/02/23 14:34)
 
 #include "DelayCopyUnsharedImplTesting.h"
-#include "CoreTools/Contract/DelayCopyUnsharedImplDetail.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/CoreToolsTesting/ContractSuite/Detail/DelayCopyUnshared.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using std::make_shared;
 
 CoreTools::DelayCopyUnsharedImplTesting::DelayCopyUnsharedImplTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -44,7 +41,7 @@ void CoreTools::DelayCopyUnsharedImplTesting::DefaultTest()
 
     ASSERT_EQUAL(delayCopyUnsharedImpl0.GetDereferenceCount(), count);
 
-    auto delayCopyUnsharedImpl1 = delayCopyUnsharedImpl0;
+    const auto delayCopyUnsharedImpl1 = delayCopyUnsharedImpl0;
 
     ASSERT_EQUAL(delayCopyUnsharedImpl1.GetCount(), count);
     ASSERT_EQUAL(delayCopyUnsharedImpl0.GetAddress(), delayCopyUnsharedImpl1.GetAddress());
@@ -73,7 +70,7 @@ void CoreTools::DelayCopyUnsharedImplTesting::UseFactoryTest()
 
     ASSERT_EQUAL(delayCopyUnsharedImpl0.GetCount(), count);
 
-    auto delayCopyUnsharedImpl1 = delayCopyUnsharedImpl0;
+    const auto delayCopyUnsharedImpl1 = delayCopyUnsharedImpl0;
 
     ASSERT_EQUAL(delayCopyUnsharedImpl1.GetCount(), count);
     ASSERT_EQUAL(delayCopyUnsharedImpl0.GetAddress(), delayCopyUnsharedImpl1.GetAddress());
@@ -91,7 +88,7 @@ void CoreTools::DelayCopyUnsharedImplTesting::UseUseDefaultConstructionTest()
 
     ASSERT_EQUAL(delayCopyUnsharedImpl0.GetCount(), 0);
 
-    auto delayCopyUnsharedImpl1 = delayCopyUnsharedImpl0;
+    const auto delayCopyUnsharedImpl1 = delayCopyUnsharedImpl0;
 
     ASSERT_EQUAL(delayCopyUnsharedImpl1.GetCount(), 0);
     ASSERT_EQUAL(delayCopyUnsharedImpl0.GetAddress(), delayCopyUnsharedImpl1.GetAddress());

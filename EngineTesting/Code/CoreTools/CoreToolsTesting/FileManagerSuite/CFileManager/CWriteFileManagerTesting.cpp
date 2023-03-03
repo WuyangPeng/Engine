@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:58)
+///	引擎测试版本：0.9.0.3 (2023/03/03 09:09)
 
 #include "CWriteFileManagerTesting.h"
 #include "System/FileManager/Flags/CFileFlags.h"
@@ -19,8 +19,6 @@
 #include <string>
 #include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 CoreTools::CWriteFileManagerTesting::CWriteFileManagerTesting(const OStreamShared& stream)
@@ -67,10 +65,10 @@ void CoreTools::CWriteFileManagerTesting::WriteResultTest()
 
     ASSERT_EQUAL(size, cFileManagerContent.size());
 
-    vector<char> buffer(size);
+    std::vector<char> buffer(size);
     manager.Read(sizeof(char), size, buffer.data());
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     ASSERT_EQUAL(bufferContent, cFileManagerContent);
 }
@@ -80,7 +78,7 @@ System::String CoreTools::CWriteFileManagerTesting::GetFileName()
     return SYSTEM_TEXT("Resource/CFileManagerTesting/CWriteFileManagerTestingText.txt"s);
 }
 
-string CoreTools::CWriteFileManagerTesting::GetFileManagerContent()
+std::string CoreTools::CWriteFileManagerTesting::GetFileManagerContent()
 {
     return "CFileManager Testing Text"s;
 }
@@ -88,7 +86,7 @@ string CoreTools::CWriteFileManagerTesting::GetFileManagerContent()
 void CoreTools::CWriteFileManagerTesting::GetFileByteSizeTest()
 {
     const auto cFileManagerContent = GetFileManagerContent();
-    CWriteFileManager manager{ GetFileName(), true };
+    const CWriteFileManager manager{ GetFileName(), true };
 
     const auto size = cFileManagerContent.size();
 
@@ -102,7 +100,7 @@ void CoreTools::CWriteFileManagerTesting::PutTest()
 
     ASSERT_TRUE(manager.PutCharacter('a'));
     ASSERT_TRUE(manager.PutString(cFileManagerContent));
-    ASSERT_FALSE(manager.IsEOF());
+    ASSERT_FALSE(manager.IsEof());
     ASSERT_TRUE(manager.Flush());
 }
 
@@ -119,10 +117,10 @@ void CoreTools::CWriteFileManagerTesting::PutWriteResultTest()
     cFileManagerContent += 'a';
     cFileManagerContent += GetFileManagerContent();
 
-    vector<char> buffer(cFileManagerContent.size());
+    std::vector<char> buffer(cFileManagerContent.size());
     manager.Read(sizeof(char), buffer.size(), buffer.data());
 
-    string bufferContent{ buffer.begin(), buffer.end() };
+    const std::string bufferContent{ buffer.begin(), buffer.end() };
 
     ASSERT_EQUAL(bufferContent, cFileManagerContent);
 }
@@ -148,5 +146,5 @@ void CoreTools::CWriteFileManagerTesting::PositionTest()
     manager.Rewind();
     ASSERT_EQUAL(0, manager.GetPosition());
 
-    ASSERT_TRUE(manager.Setvbuf(System::FileSetVBuffer::IOFBF, 256));
+    ASSERT_TRUE(manager.SetVBuffer(System::FileSetVBuffer::IOFBF, 256));
 }

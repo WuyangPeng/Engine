@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/18 1:20)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 17:30)
 
 #ifndef CORE_TOOLS_THREADING_DLL_MUTEX_H
 #define CORE_TOOLS_THREADING_DLL_MUTEX_H
@@ -30,9 +30,9 @@ namespace CoreTools
         explicit DllMutex(MutexCreate mutexCreate);
         virtual ~DllMutex() noexcept = default;
         DllMutex(const DllMutex& rhs) = delete;
-        virtual DllMutex& operator=(const DllMutex& rhs) = delete;
+        DllMutex& operator=(const DllMutex& rhs) = delete;
         DllMutex(DllMutex&& rhs) noexcept;
-        virtual DllMutex& operator=(DllMutex&& rhs) noexcept;
+        DllMutex& operator=(DllMutex&& rhs) noexcept;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

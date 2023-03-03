@@ -11,7 +11,7 @@
 #define CORE_TOOLS_HELPER_MODULE_CLASS_INVARIANT_MACRO_H
 
 #include "ClassInvariant/AnimationClassInvariantMacro.h"
-#include "ClassInvariant/ArtificialIntellegenceClassInvariantMacro.h"
+#include "ClassInvariant/ArtificialIntelligenceClassInvariantMacro.h"
 #include "ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "ClassInvariant/DatabaseClassInvariantMacro.h"

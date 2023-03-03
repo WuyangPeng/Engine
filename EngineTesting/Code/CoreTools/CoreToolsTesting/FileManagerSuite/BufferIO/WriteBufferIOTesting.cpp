@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:58)
+///	引擎测试版本：0.9.0.3 (2023/03/03 09:47)
 
 #include "WriteBufferIOTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -17,11 +17,9 @@
 
 #include <string>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
-string CoreTools::WriteBufferIOTesting::GetBufferIOContent()
+std::string CoreTools::WriteBufferIOTesting::GetBufferIOContent()
 {
     return "BufferIO Testing Text"s;
 }
@@ -86,8 +84,8 @@ void CoreTools::WriteBufferIOTesting::WriteBufferIOWriteTest()
     readBuffer.Read(sizeof(decltype(size)), &resultSize);
     ASSERT_EQUAL(size, resultSize);
 
-    vector<char> result(resultSize);
+    std::vector<char> result(resultSize);
     readBuffer.Read(sizeof(char), resultSize, result.data());
-    string testResult{ result.begin(), result.end() };
+    const std::string testResult{ result.begin(), result.end() };
     ASSERT_EQUAL(testResult, content);
 }

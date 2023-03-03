@@ -13,12 +13,10 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::string;
-
 CoreTools::AssertExecuteLoopNotThrowTesting::AssertExecuteLoopNotThrowTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, AssertExecuteLoopNotThrowTesting)

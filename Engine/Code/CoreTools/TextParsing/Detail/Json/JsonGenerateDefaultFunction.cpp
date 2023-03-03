@@ -10,7 +10,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "JsonGenerateDefaultFunction.h"
-#include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/JsonFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
@@ -55,7 +55,7 @@ System::String CoreTools::JsonGenerateDefaultFunction::GenerateContainerDefaultF
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto className = StringConversion::ToFirstLetterUpper(jsonNode.GetTypeName());
+    const auto className = StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
 
     String content{ TextParsing::g_Indentation };
 

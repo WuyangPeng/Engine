@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 12:33)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/03/01 13:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,8 +16,6 @@
 #include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "CoreTools/Exception/LastError.h"
 
-using std::make_shared;
-
 // static
 CoreTools::ErrorFactory::ErrorImplSharedPtr CoreTools::ErrorFactory::Create(const FunctionDescribed& functionDescribed, const LastError& lastError, const String& message)
 {
@@ -27,12 +25,12 @@ CoreTools::ErrorFactory::ErrorImplSharedPtr CoreTools::ErrorFactory::Create(cons
 // static
 CoreTools::ErrorFactory::ErrorImplSharedPtr CoreTools::ErrorFactory::Create(const FunctionDescribed& functionDescribed, WindowError lastError, const String& message)
 {
-    switch (lastError)
+    if (lastError == WindowError::Success)
     {
-        case WindowError::Success:
-            return make_shared<NormalError>(functionDescribed, message);
-
-        default:
-            return make_shared<WindowsError>(functionDescribed, lastError, message);
+        return std::make_shared<NormalError>(functionDescribed, message);
+    }
+    else
+    {
+        return std::make_shared<WindowsError>(functionDescribed, lastError, message);
     }
 }

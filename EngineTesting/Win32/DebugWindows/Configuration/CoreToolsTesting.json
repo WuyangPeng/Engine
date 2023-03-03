@@ -1,17 +1,22 @@
 {
   "helperSuite": {
     "FunctionDescribedMacroTesting": 1,
-    "AssertExceptionMacroTesting": 1,
     "InitializeTerminatorMacroTesting": 1,
     "MainFunctionMacroTesting": 1,
-    "MemoryMacroTesting": 1,
     "SingletonMacroTesting": 1,
     "NameMacroTesting": 1,
     "SharedPtrMacroTesting": 1,
     "PropertiesMacroTesting": 1,
     "UserMacroTesting": 1,
     "SafetyLimitMacroTesting": 1,
-    "GetRequiredBitsTesting": 1
+    "GetRequiredBitsTesting": 1,
+    "HashCombineTesting": 1
+  },
+
+  "assertExceptionMacroSuite": {
+    "AssertNotThrowExceptionTesting": 1,
+    "AssertThrowExceptionTesting": 1,
+    "AssertExecuteLoopNotThrowTesting": 100
   },
 
   "assertTestMacroSuite": {
@@ -68,7 +73,6 @@
   },
 
   "streamMacroSuite": {
-    "StreamSizeMacroTesting": 1,
     "DebugStreamMacroTesting": 1,
     "DefaultTestingNoObjectPtrTesting": 1,
     "DefaultTestingObjectPtrTesting": 1,
@@ -79,9 +83,7 @@
   },
 
   "unitTestSuiteMacroSuite": {
-    "UnitTestSuiteMacroTesting": 1,
-    "UnitTestSuiteMacroCompleteTesting": 1,
-    "UnitTestSuiteMacroCompleteUseTestingTypeTesting": 1
+    "UnitTestSuiteMacroTesting": 1
   },
 
   "exceptionMacroSuite": {
@@ -109,7 +111,7 @@
 
   "baseSuite": {
     "SingletonTesting": 1,
-    "UniqueIDManagerTesting": 1,
+    "UniqueIdManagerTesting": 1,
     "VersionTesting": 1,
     "LoadingLibraryTesting": 1,
     "SpanIteratorTesting": 1,
@@ -118,12 +120,13 @@
 
   "characterStringSuite": {
     "StringConversionTesting": 1,
-    "FormatErrorMessageTesting": 1
+    "FormatErrorMessageTesting": 1,
+    "StringUtilityTesting": 1
   },
 
   "caseInsensitiveStringSuite": {
     "CaseInsensitiveStringTesting": 1,
-    "CaseInsensitiveStringIOStreamTesting": 0
+    "CaseInsensitiveStringIOStreamTesting": 1
   },
 
   "exceptionSuite": {
@@ -134,8 +137,8 @@
 
   "consoleSuite": {
     "ConsoleTesting": 1,
-    "ConsoleColorsTesting": 0,
-    "ConsoleTextColorsManagerTesting": 0,
+    "ConsoleColorsTesting": 1,
+    "ConsoleTextColorsManagerTesting": 1,
     "ConsoleAllocTesting": 1
   },
 

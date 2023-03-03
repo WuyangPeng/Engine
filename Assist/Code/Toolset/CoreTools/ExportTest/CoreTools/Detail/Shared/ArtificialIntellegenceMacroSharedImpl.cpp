@@ -10,26 +10,26 @@
 #include "ArtificialIntellegence/ArtificialIntellegenceExport.h"
 
 #include "ArtificialIntellegenceMacroSharedImpl.h"
-#include "CoreTools/Helper/ClassInvariant/ArtificialIntellegenceClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/ArtificialIntelligenceClassInvariantMacro.h"
 
 ArtificialIntellegence::ArtificialIntellegenceMacroSharedImpl::ArtificialIntellegenceMacroSharedImpl(int count) noexcept
     : count{ count }
 {
-    ARTIFICIAL_INTELLEGENCE_SELF_CLASS_IS_VALID_9;
+    ARTIFICIAL_INTELLIGENCE_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(ArtificialIntellegence, ArtificialIntellegenceMacroSharedImpl)
 
 int ArtificialIntellegence::ArtificialIntellegenceMacroSharedImpl::GetCount() const noexcept
 {
-    ARTIFICIAL_INTELLEGENCE_CLASS_IS_VALID_CONST_9;
+    ARTIFICIAL_INTELLIGENCE_CLASS_IS_VALID_CONST_9;
 
     return count;
 }
 
 void ArtificialIntellegence::ArtificialIntellegenceMacroSharedImpl::SetCount(int aCount) noexcept
 {
-    ARTIFICIAL_INTELLEGENCE_CLASS_IS_VALID_9;
+    ARTIFICIAL_INTELLIGENCE_CLASS_IS_VALID_9;
 
     count = aCount;
 }

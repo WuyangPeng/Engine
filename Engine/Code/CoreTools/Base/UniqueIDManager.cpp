@@ -1,76 +1,75 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 15:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "UniqueIDManagerDetail.h"
-#include "Flags/UniqueIDSelectFlags.h"
-#include "Detail/UniqueIDManagerImpl.h"
+#include "Flags/UniqueIdSelect.h"
+#include "Detail/UniqueIdManagerImpl.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 
 #include <memory>
 
-using std::make_shared;
-using std::make_unique;
-using std::string;
-
 SINGLETON_GET_PTR_DEFINE(CoreTools, UniqueIDManager);
 
-CoreTools::UniqueIDManager::UniqueIDManagerUniquePtr CoreTools::UniqueIDManager::uniqueIDManager{};
+CoreTools::UniqueIdManager::UniqueIdManagerUniquePtr CoreTools::UniqueIdManager::uniqueIdManager{};
 
-void CoreTools::UniqueIDManager::Create(int count)
+void CoreTools::UniqueIdManager::Create(int count)
 {
-    if (uniqueIDManager != nullptr)
+    if (uniqueIdManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("重复初始化UniqueIDManager。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("重复初始化UniqueIDManager。"))
     }
 
-    uniqueIDManager = make_unique<CoreTools::UniqueIDManager>(count, UniqueIDManagerCreate::Init);
+    uniqueIdManager = std::make_unique<UniqueIdManager>(count, UniqueIdManagerCreate::Init);
 }
 
-void CoreTools::UniqueIDManager::Destroy() noexcept
+void CoreTools::UniqueIdManager::Destroy() noexcept
 {
-    uniqueIDManager.reset();
+    uniqueIdManager.reset();
 }
 
-CoreTools::UniqueIDManager::UniqueIDManager(int count, MAYBE_UNUSED UniqueIDManagerCreate uniqueIDManagerCreate)
+CoreTools::UniqueIdManager::UniqueIdManager(int count, UniqueIdManagerCreate uniqueIdManagerCreate)
     : impl{ count }
 {
+    System::UnusedFunction(uniqueIdManagerCreate);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(CoreTools, UniqueIDManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, UniqueIdManager)
 
-uint64_t CoreTools::UniqueIDManager::NextDefaultUniqueID()
+uint64_t CoreTools::UniqueIdManager::NextDefaultUniqueId()
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return NextUniqueID(UniqueIDSelect::Default);
+    return NextUniqueId(UniqueIdSelect::Default);
 }
 
-uint64_t CoreTools::UniqueIDManager::NextUniqueID(int index)
+uint64_t CoreTools::UniqueIdManager::NextUniqueId(int index)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return impl->NextUniqueID(index);
+    return impl->NextUniqueId(index);
 }
 
-void CoreTools::UniqueIDManager::SetUniqueID(int index, uint64_t latestIndex)
+void CoreTools::UniqueIdManager::SetUniqueId(int index, uint64_t latestIndex)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return impl->SetUniqueID(index, latestIndex);
+    return impl->SetUniqueId(index, latestIndex);
 }

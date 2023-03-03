@@ -7,14 +7,14 @@
 ///	标准：std:c++20
 ///	引擎测试版本：0.9.0.2 (2023/02/06 11:40)
 
-#ifndef CORE_TOOLS_HELPER_SUITE_ASSERT_TEST_NULLPTR_TESTINGG_H
-#define CORE_TOOLS_HELPER_SUITE_ASSERT_TEST_NULLPTR_TESTINGG_H
+#ifndef CORE_TOOLS_HELPER_SUITE_ASSERT_TEST_NULLPTR_TESTING_H
+#define CORE_TOOLS_HELPER_SUITE_ASSERT_TEST_NULLPTR_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
-    class AssertTestNullptrTesting final : public CoreTools::UnitTest
+    class AssertTestNullptrTesting final : public UnitTest
     {
     public:
         using ClassType = AssertTestNullptrTesting;
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
         void AssertNullptrTest();
@@ -35,4 +35,4 @@ namespace CoreTools
     };
 }
 
-#endif  // CORE_TOOLS_HELPER_SUITE_ASSERT_TEST_NULLPTR_TESTINGG_H
+#endif  // CORE_TOOLS_HELPER_SUITE_ASSERT_TEST_NULLPTR_TESTING_H

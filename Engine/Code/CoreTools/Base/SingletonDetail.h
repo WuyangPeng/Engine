@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:21)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 14:50)
 
 #ifndef CORE_TOOLS_BASE_SINGLETON_DETAIL_H
 #define CORE_TOOLS_BASE_SINGLETON_DETAIL_H
@@ -16,17 +16,17 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
-template <typename T, CoreTools::MutexCreate mutexCreate>
-typename CoreTools::Singleton<T, mutexCreate>::PointType CoreTools::Singleton<T, mutexCreate>::singleton{ nullptr };
+template <typename T, CoreTools::MutexCreate MutexCreate>
+typename CoreTools::Singleton<T, MutexCreate>::PointType CoreTools::Singleton<T, MutexCreate>::singleton{ nullptr };
 
-template <typename T, CoreTools::MutexCreate mutexCreate>
-CoreTools::Singleton<T, mutexCreate>::Singleton() noexcept
+template <typename T, CoreTools::MutexCreate MutexCreate>
+CoreTools::Singleton<T, MutexCreate>::Singleton() noexcept
 {
     CoreTools::NoexceptNoReturn(*this, &ClassType::InitSingleton);
 }
 
-template <typename T, CoreTools::MutexCreate mutexCreate>
-void CoreTools::Singleton<T, mutexCreate>::InitSingleton() noexcept(gAssert < 2 || gCoreToolsAssert < 2)
+template <typename T, CoreTools::MutexCreate MutexCreate>
+void CoreTools::Singleton<T, MutexCreate>::InitSingleton() noexcept(gAssert < 2 || gCoreToolsAssert < 2)
 {
     CORE_TOOLS_ASSERTION_2(singleton == nullptr, "单例%s重复初始化！", typeid(T).name());
 
@@ -38,44 +38,44 @@ void CoreTools::Singleton<T, mutexCreate>::InitSingleton() noexcept(gAssert < 2 
 #include STSTEM_WARNING_POP
 }
 
-template <typename T, CoreTools::MutexCreate mutexCreate>
-CoreTools::Singleton<T, mutexCreate>::~Singleton() noexcept
+template <typename T, CoreTools::MutexCreate MutexCreate>
+CoreTools::Singleton<T, MutexCreate>::~Singleton() noexcept
 {
     CoreTools::NoexceptNoReturn(*this, &ClassType::DeleteSingleton);
 }
 
-template <typename T, CoreTools::MutexCreate mutexCreate>
-void CoreTools::Singleton<T, mutexCreate>::DeleteSingleton() noexcept(gAssert < 2 || gCoreToolsAssert < 2)
+template <typename T, CoreTools::MutexCreate MutexCreate>
+void CoreTools::Singleton<T, MutexCreate>::DeleteSingleton() const noexcept(gAssert < 2 || gCoreToolsAssert < 2)
 {
     CORE_TOOLS_ASSERTION_2(singleton != nullptr, "单例%s重复删除！", typeid(T).name());
 
     singleton = nullptr;
 }
 
-template <typename T, CoreTools::MutexCreate mutexCreate>
-typename CoreTools::Singleton<T, mutexCreate>::ReferenceType CoreTools::Singleton<T, mutexCreate>::GetSingleton() noexcept
+template <typename T, CoreTools::MutexCreate MutexCreate>
+typename CoreTools::Singleton<T, MutexCreate>::ReferenceType CoreTools::Singleton<T, MutexCreate>::GetSingleton() noexcept
 {
     return *GetSingletonPtr();
 }
 
-template <typename T, CoreTools::MutexCreate mutexCreate>
-typename CoreTools::Singleton<T, mutexCreate>::PointType CoreTools::Singleton<T, mutexCreate>::GetSingletonPtr() noexcept
+template <typename T, CoreTools::MutexCreate MutexCreate>
+typename CoreTools::Singleton<T, MutexCreate>::PointType CoreTools::Singleton<T, MutexCreate>::GetSingletonPtr() noexcept
 {
     System::NoexceptNoReturn(&ClassType::CheckSingleton);
 
     return singleton;
 }
 
-template <typename T, CoreTools::MutexCreate mutexCreate>
-void CoreTools::Singleton<T, mutexCreate>::CheckSingleton() noexcept(gAssert < 0 || gCoreToolsAssert < 0)
+template <typename T, CoreTools::MutexCreate MutexCreate>
+void CoreTools::Singleton<T, MutexCreate>::CheckSingleton() noexcept(gAssert < 0 || gCoreToolsAssert < 0)
 {
     CORE_TOOLS_ASSERTION_0(singleton != nullptr, "单例%s指针为空！", typeid(T).name());
 }
 
-template <typename T, CoreTools::MutexCreate mutexCreate>
-typename CoreTools::Singleton<T, mutexCreate>::MutexType& CoreTools::Singleton<T, mutexCreate>::GetMutex()
+template <typename T, CoreTools::MutexCreate MutexCreate>
+typename CoreTools::Singleton<T, MutexCreate>::MutexType& CoreTools::Singleton<T, MutexCreate>::GetMutex()
 {
-    if constexpr (mutexCreate == MutexCreate::UseOriginalStd || mutexCreate == MutexCreate::UseOriginalStdRecursive)
+    if constexpr (MutexCreate == MutexCreate::UseOriginalStd || MutexCreate == MutexCreate::UseOriginalStdRecursive)
     {
         static MutexType mutex{};
 
@@ -83,7 +83,7 @@ typename CoreTools::Singleton<T, mutexCreate>::MutexType& CoreTools::Singleton<T
     }
     else
     {
-        static MutexType mutex{ mutexCreate };
+        static MutexType mutex{ MutexCreate };
 
         return mutex;
     }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.3 (2023/02/23 15:53)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,17 +13,14 @@
 #include "System/CharacterString/FormatStringDetail.h"
 #include "System/Helper/PragmaWarning/Format.h"
 
-using boost::format;
-using std::string;
-
-string CoreTools::Version::GetVersion()
+std::string CoreTools::Version::GetVersion()
 {
     return GetVersion(GetTCREFullVersion());
 }
 
 std::string CoreTools::Version::GetVersion(int version)
 {
-    format versionFormat{ "%d.%d.%d.%d" };
+    boost::format versionFormat{ "%d.%d.%d.%d" };
     versionFormat % GetMajor(version) % GetMinor(version) % GetBuild(version) % GetRevision(version);
 
     return versionFormat.str();
