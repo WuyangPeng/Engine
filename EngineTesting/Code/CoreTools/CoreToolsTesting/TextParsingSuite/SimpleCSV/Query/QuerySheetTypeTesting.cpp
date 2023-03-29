@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:33)
+///	引擎测试版本：0.9.0.4 (2023/03/07 11:23)
 
 #include "QuerySheetTypeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -36,15 +36,15 @@ void CoreTools::QuerySheetTypeTesting::MainTest()
 
 void CoreTools::QuerySheetTypeTesting::QuerySheetTypeTest()
 {
-    auto sheetID = "sheetID"s;
+    const auto sheetId = "sheetId"s;
     constexpr auto sheetType = SimpleCSV::ContentType::Chart;
-    SimpleCSV::QuerySheetType querySheetType0{ sheetID, sheetType };
+    const SimpleCSV::QuerySheetType querySheetType0{ sheetId, sheetType };
 
-    ASSERT_EQUAL(sheetID, querySheetType0.GetSheetID());
+    ASSERT_EQUAL(sheetId, querySheetType0.GetSheetId());
     ASSERT_ENUM_EQUAL(sheetType, querySheetType0.GetSheetType());
 
-    SimpleCSV::QuerySheetType querySheetType1{ sheetID };
+    const SimpleCSV::QuerySheetType querySheetType1{ sheetId };
 
-    ASSERT_EQUAL(sheetID, querySheetType1.GetSheetID());
+    ASSERT_EQUAL(sheetId, querySheetType1.GetSheetId());
     ASSERT_ENUM_EQUAL(querySheetType1.GetSheetType(), SimpleCSV::ContentType::Workbook);
 }

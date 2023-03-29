@@ -97,12 +97,7 @@ void Network::BufferReceiveStreamImpl::ReadMessage(MessageSource& messageSource,
     }
     catch (const CoreTools::Error& error)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, Network)
-            << error
-            << SYSTEM_TEXT("£¨")
-            << messageType
-            << SYSTEM_TEXT("£©")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Error, Network, error, SYSTEM_TEXT("£¨"), messageType, SYSTEM_TEXT("£©"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

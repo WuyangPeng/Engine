@@ -33,11 +33,7 @@ void CoreTools::LogDefaultMacroTesting::MainTest()
 
 void CoreTools::LogDefaultMacroTesting::DefaultLogTest() noexcept
 {
-    LOG_SINGLETON_APPENDER(Info, CoreTools)
-        << SYSTEM_TEXT("测试LogMacro，这条日志会写入已配置的日志文件和控制台。")
-        << LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_APPENDER(Info, CoreTools, SYSTEM_TEXT("测试LogMacro，这条日志会写入已配置的日志文件和控制台。"));
 
-    LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(Info, CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED)
-        << SYSTEM_TEXT("测试LogMacro，这条日志会写入已配置的日志文件和控制台。")
-        << LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_APPENDER_USE_FUNCTION_DESCRIBED(Info, CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, SYSTEM_TEXT("测试LogMacro，这条日志会写入已配置的日志文件和控制台。"));
 }

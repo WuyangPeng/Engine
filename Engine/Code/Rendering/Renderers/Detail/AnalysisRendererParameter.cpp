@@ -65,9 +65,7 @@ void Rendering::AnalysisRendererParameter::AnalysisRendererType()
     {
         rendererParameter->SetRendererType(RendererTypes::Default);
 
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering)
-            << SYSTEM_TEXT("初始化渲染器类型失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("初始化渲染器类型失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -76,8 +74,8 @@ void Rendering::AnalysisRendererParameter::AnalysisRendererTexture()
 {
     textureTree = mainTree.get_child("Texture");
 
-    const auto colorFormat = System::UnderlyingCastEnum<DataFormatType>((textureTree.get("ColorFormat",System::EnumCastUnderlying(DataFormatType::R32G32B32A32Float))));
-    const auto depthStencilFormat =System::UnderlyingCastEnum<DataFormatType>( (textureTree.get("DepthStencilFormat", System::EnumCastUnderlying(DataFormatType::D24UNormS8UInt))));
+    const auto colorFormat = System::UnderlyingCastEnum<DataFormatType>((textureTree.get("ColorFormat", System::EnumCastUnderlying(DataFormatType::R32G32B32A32Float))));
+    const auto depthStencilFormat = System::UnderlyingCastEnum<DataFormatType>((textureTree.get("DepthStencilFormat", System::EnumCastUnderlying(DataFormatType::D24UNormS8UInt))));
     const auto numMultisamples = textureTree.get("MultisamplesNumber", 0);
 
     if (DataFormatType::Unknown < colorFormat &&
@@ -92,9 +90,7 @@ void Rendering::AnalysisRendererParameter::AnalysisRendererTexture()
     {
         rendererParameter->SetTextureFormat(DataFormatType::R32G32B32A32Float, DataFormatType::D24UNormS8UInt, 0);
 
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering)
-            << SYSTEM_TEXT("初始化渲染器纹理格式失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("初始化渲染器纹理格式失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -123,9 +119,7 @@ void Rendering::AnalysisRendererParameter::AnalysisRendererClearColor()
     {
         rendererParameter->SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering)
-            << SYSTEM_TEXT("初始化渲染器清除颜色失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("初始化渲染器清除颜色失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -149,9 +143,7 @@ void Rendering::AnalysisRendererParameter::AnalysisWindowParameter()
     {
         rendererParameter->SetWindowParameter(windowTitle, 800, 600, x, y, allowResize);
 
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering)
-            << SYSTEM_TEXT("初始化窗口参数失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("初始化窗口参数失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

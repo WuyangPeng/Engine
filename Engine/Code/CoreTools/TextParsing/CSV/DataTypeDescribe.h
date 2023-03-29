@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/18 21:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/14 09:18)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_DATA_TYPE_DESCRIBE_H
 #define CORE_TOOLS_TEXT_PARSING_DATA_TYPE_DESCRIBE_H
@@ -39,32 +39,32 @@ namespace CoreTools
         {
         }
 
-        constexpr CSVDataType GetCsvDataType() const noexcept
+        NODISCARD constexpr CSVDataType GetCsvDataType() const noexcept
         {
             return csvDataType;
         }
 
-        constexpr StringView GetDescribe() const noexcept
+        NODISCARD constexpr StringView GetDescribe() const noexcept
         {
             return describe;
         }
 
-        constexpr StringView GetActualType() const noexcept
+        NODISCARD constexpr StringView GetActualType() const noexcept
         {
             return actualType;
         }
 
-        constexpr StringView GetFunctionName() const noexcept
+        NODISCARD constexpr StringView GetFunctionName() const noexcept
         {
             return functionName;
         }
 
-        constexpr StringView GetValueType() const noexcept
+        NODISCARD constexpr StringView GetValueType() const noexcept
         {
             return valueType;
         }
 
-        constexpr StringView GetBaseReturnDescribe() const noexcept
+        NODISCARD constexpr StringView GetBaseReturnDescribe() const noexcept
         {
             return baseReturnDescribe;
         }

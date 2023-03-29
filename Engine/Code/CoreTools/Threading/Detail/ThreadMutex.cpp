@@ -56,18 +56,14 @@ void CoreTools::ThreadMutex::Delete() noexcept
     // ´íÎó = EINVAL
     if (System::PthreadMutexDestroy(&mutex.mutex) != System::PthreadResult::Successful)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-            << SYSTEM_TEXT("PthreadMutexDestroyÏú»ÙMutexÊ§°Ü")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("PthreadMutexDestroyÏú»ÙMutexÊ§°Ü"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     // ³É¹¦ = 0
     // ´íÎó = EBUSY, EINVAL
     if (PthreadMutexAttributeDestroy(&mutex.attribute) != System::PthreadResult::Successful)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-            << SYSTEM_TEXT("PthreadMutexattrDestroyÏú»ÙMutexÊ§°Ü")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("PthreadMutexattrDestroyÏú»ÙMutexÊ§°Ü"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -91,9 +87,7 @@ void CoreTools::ThreadMutex::Leave() noexcept
     // ´íÎó = EINVAL, EPERM
     if (System::PthreadMutexUnlock(&mutex.mutex) != System::PthreadResult::Successful)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-            << SYSTEM_TEXT("Àë¿ªMutexÊ§°Ü")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("Àë¿ªMutexÊ§°Ü"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

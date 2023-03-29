@@ -5,13 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/02/23 15:11)
+///	引擎版本：0.9.0.4 (2023/03/17 19:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "UniqueIdManagerImpl.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 CoreTools::UniqueIdManagerImpl::UniqueIdManagerImpl(int count)
     : uniqueId(count)
@@ -31,18 +32,21 @@ bool CoreTools::UniqueIdManagerImpl::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-uint64_t CoreTools::UniqueIdManagerImpl::NextUniqueId(int index)
+int64_t CoreTools::UniqueIdManagerImpl::NextUniqueId(int index)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     auto& currentUniqueId = uniqueId.at(index);
 
-    CORE_TOOLS_ASSERTION_3(currentUniqueId < currentUniqueId + 1, "数值溢出。");
+    if (currentUniqueId + 1 <= 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("数值溢出"))
+    }
 
     return ++currentUniqueId;
 }
 
-void CoreTools::UniqueIdManagerImpl::SetUniqueId(int index, uint64_t latestIndex)
+void CoreTools::UniqueIdManagerImpl::SetUniqueId(int index, int64_t latestIndex)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

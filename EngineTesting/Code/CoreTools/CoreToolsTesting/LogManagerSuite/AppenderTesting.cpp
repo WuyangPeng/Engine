@@ -81,29 +81,35 @@ void CoreTools::AppenderTesting::ConsoleTest()
     ASSERT_ENUM_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
     ASSERT_ENUM_EQUAL(appender.GetAppenderType(), AppenderType::Console);
 
-    LogMessage traceMessage{ LogLevel::Trace, LogFilter::CoreTools, gConsoleTraceMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage traceMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    traceMessage << gConsoleTraceMessage;
     appender.Write(traceMessage);
 
-    LogMessage debugMessage{ LogLevel::Debug, LogFilter::Framework, gConsoleDebugMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage debugMessage{ LogLevel::Debug, LogFilter::Framework, CORE_TOOLS_FUNCTION_DESCRIBED };
+    debugMessage << gConsoleDebugMessage;
     appender.Write(debugMessage);
 
-    LogMessage infoMessage{ LogLevel::Info, LogFilter::Mathematics, gConsoleInfoMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage infoMessage{ LogLevel::Info, LogFilter::Mathematics, CORE_TOOLS_FUNCTION_DESCRIBED };
+    infoMessage << gConsoleInfoMessage;
     appender.Write(infoMessage);
 
-    LogMessage warnMessage{ LogLevel::Warn, LogFilter::Rendering, gConsoleWarnMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage warnMessage{ LogLevel::Warn, LogFilter::Rendering, CORE_TOOLS_FUNCTION_DESCRIBED };
+    warnMessage << gConsoleWarnMessage;
     appender.Write(warnMessage);
 
-    LogMessage errorMessage{ LogLevel::Error, LogFilter::Physics, gConsoleErrorMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage errorMessage{ LogLevel::Error, LogFilter::Physics, CORE_TOOLS_FUNCTION_DESCRIBED };
+    errorMessage << gConsoleErrorMessage;
     appender.Write(errorMessage);
 
-    LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::System, gConsoleFatalMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::System, CORE_TOOLS_FUNCTION_DESCRIBED };
+    fatalMessage << gConsoleFatalMessage;
     appender.Write(fatalMessage);
 
     ASSERT_TRUE(appender.GetDirectory().empty());
     ASSERT_TRUE(appender.GetExtensionName().empty());
     ASSERT_EQUAL(appender.GetMaxFileSize(), 0);
     ASSERT_FALSE(appender.IsBackup());
-    appender.Reload();
+
     ASSERT_TRUE(appender.IsDefault());
     appender.SetIsDefault(false);
     ASSERT_FALSE(appender.IsDefault());
@@ -128,29 +134,35 @@ void CoreTools::AppenderTesting::FileLogTest()
     ASSERT_ENUM_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
     ASSERT_ENUM_EQUAL(appender.GetAppenderType(), AppenderType::File);
 
-    LogMessage traceMessage{ LogLevel::Trace, LogFilter::CoreTools, gFileTraceMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage traceMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    traceMessage << gFileTraceMessage;
     appender.Write(traceMessage);
 
-    LogMessage debugMessage{ LogLevel::Debug, LogFilter::System, gFileDebugMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage debugMessage{ LogLevel::Debug, LogFilter::System, CORE_TOOLS_FUNCTION_DESCRIBED };
+    debugMessage << gFileDebugMessage;
     appender.Write(debugMessage);
 
-    LogMessage infoMessage{ LogLevel::Info, LogFilter::SoundEffect, gFileInfoMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage infoMessage{ LogLevel::Info, LogFilter::SoundEffect, CORE_TOOLS_FUNCTION_DESCRIBED };
+    infoMessage << gFileInfoMessage;
     appender.Write(infoMessage);
 
-    LogMessage warnMessage{ LogLevel::Warn, LogFilter::Physics, gFileWarnMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage warnMessage{ LogLevel::Warn, LogFilter::Physics, CORE_TOOLS_FUNCTION_DESCRIBED };
+    warnMessage << gFileWarnMessage;
     appender.Write(warnMessage);
 
-    LogMessage errorMessage{ LogLevel::Error, LogFilter::Rendering, gFileErrorMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage errorMessage{ LogLevel::Error, LogFilter::Rendering, CORE_TOOLS_FUNCTION_DESCRIBED };
+    errorMessage << gFileErrorMessage;
     appender.Write(errorMessage);
 
-    LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::Framework, gFileFatalMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::Framework, CORE_TOOLS_FUNCTION_DESCRIBED };
+    fatalMessage << gFileFatalMessage;
     appender.Write(fatalMessage);
 
     ASSERT_EQUAL(appender.GetDirectory(), gAppenderTestingPathName);
     ASSERT_EQUAL(appender.GetExtensionName(), gExtensionName);
     ASSERT_EQUAL(appender.GetMaxFileSize(), maxFileSize);
     ASSERT_TRUE(appender.IsBackup());
-    appender.Reload();
+ 
     ASSERT_TRUE(appender.IsDefault());
     appender.SetIsDefault(false);
     ASSERT_FALSE(appender.IsDefault());
@@ -176,7 +188,8 @@ void CoreTools::AppenderTesting::BackupFileTest()
 
     backupFileName = GetBackupFileName();
 
-    LogMessage backupMessage(LogLevel::Trace, LogFilter::CoreTools, gBackupMessage, CORE_TOOLS_FUNCTION_DESCRIBED);
+    LogMessage backupMessage(LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED);
+    backupMessage << gBackupMessage;
     appender.Write(backupMessage);
 }
 
@@ -247,29 +260,35 @@ void CoreTools::AppenderTesting::FileConfigurationTest()
     ASSERT_ENUM_EQUAL(appender.GetLogLevel(), LogLevel::Trace);
     ASSERT_ENUM_EQUAL(appender.GetAppenderType(), AppenderType::FileConfiguration);
 
-    LogMessage traceMessage{ LogLevel::Trace, LogFilter::CoreTools, gFileTraceMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage traceMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    traceMessage << gFileTraceMessage;
     appender.Write(traceMessage);
 
-    LogMessage debugMessage{ LogLevel::Debug, LogFilter::System, gFileDebugMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage debugMessage{ LogLevel::Debug, LogFilter::System, CORE_TOOLS_FUNCTION_DESCRIBED };
+    debugMessage << gFileDebugMessage;
     appender.Write(debugMessage);
 
-    LogMessage infoMessage{ LogLevel::Info, LogFilter::SoundEffect, gFileInfoMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage infoMessage{ LogLevel::Info, LogFilter::SoundEffect, CORE_TOOLS_FUNCTION_DESCRIBED };
+    infoMessage << gFileInfoMessage;
     appender.Write(infoMessage);
 
-    LogMessage warnMessage{ LogLevel::Warn, LogFilter::Physics, gFileWarnMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage warnMessage{ LogLevel::Warn, LogFilter::Physics, CORE_TOOLS_FUNCTION_DESCRIBED };
+    warnMessage << gFileWarnMessage;
     appender.Write(warnMessage);
 
-    LogMessage errorMessage{ LogLevel::Error, LogFilter::Rendering, gFileErrorMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage errorMessage{ LogLevel::Error, LogFilter::Rendering, CORE_TOOLS_FUNCTION_DESCRIBED };
+    errorMessage << gFileErrorMessage;
     appender.Write(errorMessage);
 
-    LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::Framework, gFileFatalMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::Framework, CORE_TOOLS_FUNCTION_DESCRIBED };
+    fatalMessage << gFileFatalMessage;
     appender.Write(fatalMessage);
 
     ASSERT_EQUAL(appender.GetDirectory(), gAppenderTestingPathName);
     ASSERT_EQUAL(appender.GetExtensionName(), gExtensionName);
     ASSERT_EQUAL(appender.GetMaxFileSize(), maxFileSize);
     ASSERT_TRUE(appender.IsBackup());
-    appender.Reload();
+ 
     ASSERT_TRUE(appender.IsDefault());
     appender.SetIsDefault(false);
     ASSERT_FALSE(appender.IsDefault());

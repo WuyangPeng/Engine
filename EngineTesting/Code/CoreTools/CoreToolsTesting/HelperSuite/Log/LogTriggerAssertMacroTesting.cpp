@@ -34,9 +34,7 @@ void CoreTools::LogTriggerAssertMacroTesting::MainTest()
 
 void CoreTools::LogTriggerAssertMacroTesting::TriggerAssertTest() noexcept
 {
-    LOG_SINGLETON_APPENDER(Info, CoreTools)
-        << SYSTEM_TEXT("测试LogMacro，这条日志会触发断言，请按“否”取消。")
-        << LOG_SINGLETON_TRIGGER_ASSERT;
+    LOG_SINGLETON_APPENDER(Info, CoreTools, SYSTEM_TEXT("测试LogMacro，这条日志会触发断言，请按“否”取消。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 }
 
 void CoreTools::LogTriggerAssertMacroTesting::PrintTipsMessage()

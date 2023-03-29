@@ -83,12 +83,7 @@ void CoreTools::BufferInStreamImpl::CreateObject(bool isTopLevel, const string& 
     catch (const Error& error)
     {
         // 请确定您已经添加CORE_TOOLS_REGISTER_STREAM(someclass)到每一个'someclass'的头文件中。这个宏会对每个类注册工厂函数。
-        LOG_SINGLETON_ENGINE_APPENDER(Fatal, CoreTools)
-            << error 
-            << SYSTEM_TEXT("（")
-            << name
-            << SYSTEM_TEXT("）")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Fatal, CoreTools, error, SYSTEM_TEXT("（"), name, SYSTEM_TEXT("）"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

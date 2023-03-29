@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/02/27 10:39)
+///	引擎版本：0.9.0.4 (2023/03/18 14:37)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -59,19 +59,13 @@ void CoreTools::FormatErrorMessageImpl::LoadedModuleSucceed(ConstDynamicLinkModu
 {
     if (!System::FormatErrorMessage(errorMessage, module, lastError))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-            << SYSTEM_TEXT("获取错误代码‘")
-            << EnumCastUnderlying(lastError)
-            << SYSTEM_TEXT("’的文字描述失败。")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("获取错误代码‘"), EnumCastUnderlying(lastError), SYSTEM_TEXT("’的文字描述失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
 void CoreTools::FormatErrorMessageImpl::LoadedModuleFailure() noexcept
 {
-    LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-        << SYSTEM_TEXT("打开netmsg.dll失败")
-        << LOG_SINGLETON_TRIGGER_ASSERT;
+    LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("打开netmsg.dll失败"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 }
 
 CoreTools::FormatErrorMessageImpl::~FormatErrorMessageImpl() noexcept
@@ -85,9 +79,7 @@ void CoreTools::FormatErrorMessageImpl::ReleaseMemory() noexcept
 {
     if (errorMessage != nullptr && !System::LocalMemoryFree(errorMessage))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-            << SYSTEM_TEXT("释放指定的本地内存对象失败。")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("释放指定的本地内存对象失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);          
     }
 }
 

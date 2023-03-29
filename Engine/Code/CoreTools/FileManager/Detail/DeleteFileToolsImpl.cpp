@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/03/02 10:32)
+///	引擎版本：0.9.0.4 (2023/03/23 15:36)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -27,11 +27,7 @@ CoreTools::DeleteFileToolsImpl::~DeleteFileToolsImpl() noexcept
 
     if (!deleted && !System::RemoveSystemFile(fileName))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-            << SYSTEM_TEXT("删除文件")
-            << fileName
-            << SYSTEM_TEXT("失败")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("删除文件"), fileName, SYSTEM_TEXT("失败"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:31)
+///	引擎测试版本：0.9.0.4 (2023/03/07 11:23)
 
 #include "QuerySheetRelsTargetTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -35,15 +35,15 @@ void CoreTools::QuerySheetRelsTargetTesting::MainTest()
 
 void CoreTools::QuerySheetRelsTargetTesting::QuerySheetRelsTargetTest()
 {
-    auto sheetID = "sheetID"s;
-    auto sheetTarget = "sheetTarget"s;
-    SimpleCSV::QuerySheetRelsTarget querySheetRelsTarget0{ sheetID, sheetTarget };
+    const auto sheetId = "sheetId"s;
+    const auto sheetTarget = "sheetTarget"s;
+    const SimpleCSV::QuerySheetRelsTarget querySheetRelsTarget0{ sheetId, sheetTarget };
 
-    ASSERT_EQUAL(sheetID, querySheetRelsTarget0.GetSheetID());
+    ASSERT_EQUAL(sheetId, querySheetRelsTarget0.GetSheetId());
     ASSERT_EQUAL(sheetTarget, querySheetRelsTarget0.GetSheetTarget());
 
-    SimpleCSV::QuerySheetRelsTarget querySheetRelsTarget1{ sheetID };
+    const SimpleCSV::QuerySheetRelsTarget querySheetRelsTarget1{ sheetId };
 
-    ASSERT_EQUAL(sheetID, querySheetRelsTarget1.GetSheetID());
+    ASSERT_EQUAL(sheetId, querySheetRelsTarget1.GetSheetId());
     ASSERT_TRUE(querySheetRelsTarget1.GetSheetTarget().empty());
 }

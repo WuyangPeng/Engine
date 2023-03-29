@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/03/02 09:40)
+///	引擎版本：0.9.0.4 (2023/03/23 15:22)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_C_WRITE_FILE_MANAGER_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_C_WRITE_FILE_MANAGER_IMPL_H
@@ -39,11 +39,13 @@ namespace CoreTools
         void Write(size_t itemSize, size_t itemsNumber, const void* data) override;
 
 #ifdef SYSTEM_BIG_ENDIAN
+
     private:
         NODISCARD size_t WriteToFileWithBigEndian(size_t itemSize, size_t itemsNumber, const void* data);
         NODISCARD size_t WriteToFileSwap2ByteOrder(size_t itemsNumber, const void* data);
         NODISCARD size_t WriteToFileSwap4ByteOrder(size_t itemsNumber, const void* data);
         NODISCARD size_t WriteToFileSwap8ByteOrder(size_t itemsNumber, const void* data);
+
 #endif  // SYSTEM_BIG_ENDIAN
 
     private:

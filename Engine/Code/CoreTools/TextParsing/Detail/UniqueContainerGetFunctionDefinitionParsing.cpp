@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:34)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -50,21 +50,21 @@ System::String CoreTools::UniqueContainerGetFunctionDefinitionParsing::GenerateG
     const auto containerClassName = GetCSVClassName();
 
     auto content = nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += containerClassName;
-    content += TextParsing::g_DoubleColonConst;
+    content += TextParsing::gDoubleColonConst;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_SharedPtr;
-    content += TextParsing::g_Space;
+    content += TextParsing::gSharedPtr;
+    content += TextParsing::gSpace;
     content += nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += containerClassName;
-    content += TextParsing::g_DoubleColon;
-    content += TextParsing::g_Get;
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gGet;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_FunctionConst;
-    content += TextParsing::g_Noexcept;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gFunctionConst;
+    content += TextParsing::gNoexcept;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -75,15 +75,15 @@ System::String CoreTools::UniqueContainerGetFunctionDefinitionParsing::GenerateR
 
     auto content = GenerateFunctionBeginBrackets();
     content += GenerateUserClassIsValidConst9(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Return;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gReturn;
     content += lowerClassName;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gSemicolonNewline;
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

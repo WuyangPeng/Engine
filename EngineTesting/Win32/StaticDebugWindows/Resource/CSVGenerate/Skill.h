@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #ifndef C_S_V_CONFIGURE_SKILL_H
@@ -31,9 +31,9 @@ namespace CSVConfigure
 
         NODISCARD int GetKey() const noexcept override;
 
-        NODISCARD int GetID() const noexcept override;
+        NODISCARD int GetId() const noexcept override;
 
-        NODISCARD int GetNextID() const noexcept override;
+        NODISCARD int GetNextId() const noexcept override;
 
         NODISCARD int GetReward() const noexcept override;
 
@@ -49,8 +49,8 @@ namespace CSVConfigure
         }
 
     private:
-        int id;  // ID
-        int nextID;  // 下一关ID
+        int id;  // Id
+        int nextId;  // 下一级Id
         int reward;  // 过关奖励
         System::String skillName;  // 技能名称
         VectorType vectorType;  // 向量类型

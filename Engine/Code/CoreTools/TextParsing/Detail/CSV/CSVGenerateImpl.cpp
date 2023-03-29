@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 20:18)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 17:43)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,8 +24,6 @@
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-using std::set;
-using std::vector;
 using namespace std::literals;
 
 CoreTools::CSVGenerateImpl::CSVGenerateImpl(const CSVHead& csvHead) noexcept
@@ -54,22 +52,22 @@ void CoreTools::CSVGenerateImpl::GenerateFile(const String& directory) const
     }
 }
 
-System::String CoreTools::CSVGenerateImpl::GenerateCopyright() const
+System::String CoreTools::CSVGenerateImpl::GenerateCopyright()
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     auto content = SYSTEM_TEXT("/// Copyright (c) 2010-\n"s);
 
     content += SYSTEM_TEXT("/// Threading Core Render Engine\n"s);
-    content += TextParsing::g_Annotation;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gAnnotation;
+    content += TextParsing::gNewlineCharacter;
 
     content += SYSTEM_TEXT("/// 作者：彭武阳，彭晔恩，彭晔泽\n"s);
     content += SYSTEM_TEXT("/// 联系作者：94458936@qq.com\n"s);
-    content += TextParsing::g_Annotation;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gAnnotation;
+    content += TextParsing::gNewlineCharacter;
 
-    content += SYSTEM_TEXT("/// 标准：std:c++17\n"s);
+    content += SYSTEM_TEXT("/// 标准：std:c++20\n"s);
     content += SYSTEM_TEXT("/// 自动生成\n"s);
 
     return content;
@@ -81,16 +79,16 @@ System::String CoreTools::CSVGenerateImpl::GenerateHeaderGuard() const
 
     const auto headerGuard = StringUtility::ToUpperMacro(csvHead.GetNameSpace() + GetCSVClassName() + GetFileSuffix());
 
-    String content{ TextParsing::g_Ifndef };
+    String content{ TextParsing::gIfndef };
 
     content += headerGuard;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::g_Define;
+    content += TextParsing::gDefine;
     content += headerGuard;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -99,11 +97,11 @@ System::String CoreTools::CSVGenerateImpl::GenerateNameSpace() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    String content{ TextParsing::g_Namespace };
+    String content{ TextParsing::gNamespace };
 
     content += csvHead.GetNameSpace();
-    content += TextParsing::g_NewlineCharacter;
-    content += TextParsing::g_FunctionBeginBrackets;
+    content += TextParsing::gNewlineCharacter;
+    content += TextParsing::gFunctionBeginBrackets;
 
     return content;
 }
@@ -114,10 +112,10 @@ System::String CoreTools::CSVGenerateImpl::GenerateHeaderGuardEndif() const
 
     const auto headerGuard = StringUtility::ToUpperMacro(csvHead.GetNameSpace() + GetCSVClassName() + GetFileSuffix());
 
-    String content{ TextParsing::g_Endif };
+    String content{ TextParsing::gEndif };
 
     content += headerGuard;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -135,9 +133,7 @@ System::String CoreTools::CSVGenerateImpl::GetKeyTypeDescribe() const
     }
     else
     {
-        const auto result = csvHead.GetKeyName();
-
-        for (const auto& value : result)
+        for (const auto result = csvHead.GetKeyName(); const auto& value : result)
         {
             if (csvHead.GetDataType(value) == CSVDataType::Int64)
             {
@@ -156,7 +152,7 @@ System::String CoreTools::CSVGenerateImpl::GetCSVClassName() const
     return csvHead.GetCSVClassName();
 }
 
-System::String CoreTools::CSVGenerateImpl::GetOldContent(const String& fileName) const
+System::String CoreTools::CSVGenerateImpl::GetOldContent(const String& fileName)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -168,7 +164,7 @@ System::String CoreTools::CSVGenerateImpl::GetOldContent(const String& fileName)
 
         return iFStreamManager.GetFileContent();
     }
-    catch (const CoreTools::Error&)
+    catch (const Error&)
     {
         // 文件不存在是正常的。
         return String{};

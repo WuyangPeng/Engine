@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:28)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 13:56)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,8 +17,6 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
-
-using std::string;
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools::SimpleCSV, SharedStrings)
 
@@ -35,17 +33,17 @@ CoreTools::SimpleCSV::SharedStrings::SharedStrings(const XmlDataSharedPtr& xmlDa
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools::SimpleCSV, SharedStrings)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, SharedStrings, GetStringIndex, string, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, SharedStrings, IsStringExists, string, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, SharedStrings, GetStringIndex, std::string, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, SharedStrings, IsStringExists, std::string, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, SharedStrings, IsStringExists, int, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, SharedStrings, GetString, int, const string&)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, SharedStrings, GetString, int, const std::string&)
 
-int CoreTools::SimpleCSV::SharedStrings::AppendString(const string& str)
+int CoreTools::SimpleCSV::SharedStrings::AppendString(const std::string& str)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     auto textNode = GetXmlDocument()->document_element().append_child("si").append_child("t");
-    if (str.front() == TextParsing::g_Space || str.back() == TextParsing::g_Space)
+    if (str.front() == TextParsing::gSpace || str.back() == TextParsing::gSpace)
     {
         textNode.append_attribute("xml:space").set_value("preserve");
     }
@@ -71,6 +69,6 @@ void CoreTools::SimpleCSV::SharedStrings::ClearString(int index)
     }
     else
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, SYSTEM_TEXT("索引越界！"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, SYSTEM_TEXT("索引越界！"s))
     }
 }

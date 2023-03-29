@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:47)
+///	引擎测试版本：0.9.0.4 (2023/03/10 10:17)
 
 #include "CSVHeadTesting.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
@@ -20,7 +20,6 @@
 
 using System::operator++;
 using namespace std::literals;
-using std::vector;
 
 CoreTools::CSVHeadTesting::CSVHeadTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -50,12 +49,12 @@ CoreTools::CSVHeadTesting::FileContent CoreTools::CSVHeadTesting::ReadFile()
 {
     FileContent fileContent{};
 
-    IFStreamManager streamManager{ SYSTEM_TEXT("Resource/CSVTesting/CSVHead/CSVHeadTesting.csv"s) };
+    const IFStreamManager streamManager{ SYSTEM_TEXT("Resource/CSVTesting/CSVHead/CSVHeadTesting.csv"s) };
 
     const auto content = streamManager.GetFileContent();
 
-    vector<String> row{};
-    boost::algorithm::split(row, content, boost::is_any_of(SYSTEM_TEXT("\r\n")), boost::token_compress_on);
+    std::vector<String> row{};
+    split(row, content, boost::is_any_of(SYSTEM_TEXT("\r\n")), boost::token_compress_on);
 
     auto csvType = CSVType::Format;
     for (const auto& value : row)

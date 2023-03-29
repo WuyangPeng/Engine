@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:25)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 11:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,8 +15,6 @@
 #include "System/Helper/PragmaWarning/PugiXml.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::string;
-
 CoreTools::SimpleCSV::AppProperties::AppProperties(const XmlDataSharedPtr& xmlData)
     : ParentType{ xmlData }
 {
@@ -25,11 +23,11 @@ CoreTools::SimpleCSV::AppProperties::AppProperties(const XmlDataSharedPtr& xmlDa
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools::SimpleCSV, AppProperties)
 
-void CoreTools::SimpleCSV::AppProperties::AppendSheetName(const string& sheetName)
+void CoreTools::SimpleCSV::AppProperties::AppendSheetName(const std::string& sheetName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto xmlDocument = GetXmlDocument();
+    const auto xmlDocument = GetXmlDocument();
     const auto documentElement = xmlDocument->document_element();
 
     const auto theNode = GetSheetNames(documentElement).append_child("vt:lpstr");
@@ -38,14 +36,13 @@ void CoreTools::SimpleCSV::AppProperties::AppendSheetName(const string& sheetNam
     sheetCount.set_value(sheetCount.as_uint() + 1);
 }
 
-void CoreTools::SimpleCSV::AppProperties::DeleteSheetName(const string& title)
+void CoreTools::SimpleCSV::AppProperties::DeleteSheetName(const std::string& title)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto xmlDocument = GetXmlDocument();
-    const auto documentElement = xmlDocument->document_element();
+    const auto xmlDocument = GetXmlDocument();
 
-    for (const auto& iter : GetSheetNames(documentElement).children())
+    for (const auto documentElement = xmlDocument->document_element(); const auto& iter : GetSheetNames(documentElement).children())
     {
         if (iter.child_value() == title)
         {
@@ -57,14 +54,13 @@ void CoreTools::SimpleCSV::AppProperties::DeleteSheetName(const string& title)
     }
 }
 
-void CoreTools::SimpleCSV::AppProperties::SetSheetName(const string& oldTitle, const string& newTitle)
+void CoreTools::SimpleCSV::AppProperties::SetSheetName(const std::string& oldTitle, const std::string& newTitle)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto xmlDocument = GetXmlDocument();
-    const auto documentElement = xmlDocument->document_element();
+    const auto xmlDocument = GetXmlDocument();
 
-    for (const auto& iter : GetSheetNames(documentElement).children())
+    for (const auto documentElement = xmlDocument->document_element(); const auto& iter : GetSheetNames(documentElement).children())
     {
         if (iter.child_value() == oldTitle)
         {
@@ -74,49 +70,46 @@ void CoreTools::SimpleCSV::AppProperties::SetSheetName(const string& oldTitle, c
     }
 }
 
-void CoreTools::SimpleCSV::AppProperties::SetProperty(const string& name, const std::string& value)
+void CoreTools::SimpleCSV::AppProperties::SetProperty(const std::string& name, const std::string& value)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto xmlDocument = GetXmlDocument();
+    const auto xmlDocument = GetXmlDocument();
 
-    const auto property = xmlDocument->first_child().child(name.c_str());
-    if (!property)
+    auto property = xmlDocument->first_child().child(name.c_str());
+    if (property == nullptr)
     {
-        xmlDocument->first_child().append_child(name.c_str());
+        property = xmlDocument->first_child().append_child(name.c_str());
     }
 
     property.text().set(value.c_str());
 }
 
-string CoreTools::SimpleCSV::AppProperties::GetProperty(const string& name) const
+std::string CoreTools::SimpleCSV::AppProperties::GetProperty(const std::string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto xmlDocument = GetXmlDocument();
+    const auto xmlDocument = GetXmlDocument();
 
-    const auto property = xmlDocument->first_child().child(name.c_str());
-    if (!property)
+    auto property = xmlDocument->first_child().child(name.c_str());
+    if (property == nullptr)
     {
-        xmlDocument->first_child().append_child(name.c_str());
+        property = xmlDocument->first_child().append_child(name.c_str());
     }
 
     return property.text().get();
 }
 
-void CoreTools::SimpleCSV::AppProperties::DeleteProperty(const string& name)
+void CoreTools::SimpleCSV::AppProperties::DeleteProperty(const std::string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto xmlDocument = GetXmlDocument();
+    const auto xmlDocument = GetXmlDocument();
 
-    const auto property = xmlDocument->first_child().child(name.c_str());
-    if (!property)
+    if (const auto property = xmlDocument->first_child().child(name.c_str()); property != nullptr)
     {
-        return;
+        xmlDocument->first_child().remove_child(property);
     }
-
-    xmlDocument->first_child().remove_child(property);
 }
 
 CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::AppProperties::GetSheetNames(const XMLNode& docNode)

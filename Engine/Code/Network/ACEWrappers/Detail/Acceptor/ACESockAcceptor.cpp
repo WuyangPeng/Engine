@@ -123,9 +123,7 @@ void Network::ACESockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventI
 
         if (!eventInterface->EventFunction(callbackParameters))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                << SYSTEM_TEXT("事件回调执行失败！")
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("事件回调执行失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }
@@ -151,9 +149,7 @@ void Network::ACESockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventI
 
         if (!eventInterface->EventFunction(callbackParameters))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                << SYSTEM_TEXT("事件回调执行失败！")
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("事件回调执行失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }

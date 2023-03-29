@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #ifndef C_S_V_CONFIGURE_EQUIP_H
@@ -31,9 +31,9 @@ namespace CSVConfigure
 
         NODISCARD int GetKey() const noexcept override;
 
-        NODISCARD int GetID() const noexcept override;
+        NODISCARD int GetId() const noexcept override;
 
-        NODISCARD int GetNextID() const noexcept override;
+        NODISCARD int GetNextId() const noexcept override;
 
         NODISCARD int GetReward() const noexcept override;
 
@@ -49,18 +49,18 @@ namespace CSVConfigure
         NODISCARD std::deque<bool>::const_iterator GetMaskBegin() const noexcept override;
         NODISCARD std::deque<bool>::const_iterator GetMaskEnd() const noexcept override;
 
-        NODISCARD int GetHeroID() const noexcept override;
-        NODISCARD std::shared_ptr<const Hero> GetHeroID(const CSVConfigureContainer& csvContainer) const override;
+        NODISCARD int GetHeroId() const noexcept override;
+        NODISCARD std::shared_ptr<const Hero> GetHeroId(const CSVConfigureContainer& csvContainer) const override;
 
     private:
-        int id;  // ID
-        int nextID;  // 下一关ID
+        int id;  // Id
+        int nextId;  // 下一关ID
         int reward;  // 过关奖励
         System::String equipName;  // 装备名称
         System::TChar logo;  // 标识
         CoreTools::Vector3 position;  // 位置
         std::deque<bool> mask;  // 掩码
-        int heroID;  // 英雄ID
+        int heroId;  // 英雄Id
     };
 }
 

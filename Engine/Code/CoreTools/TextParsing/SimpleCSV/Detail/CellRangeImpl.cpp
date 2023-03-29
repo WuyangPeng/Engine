@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 21:21)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/07 15:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,7 +23,7 @@ CoreTools::SimpleCSV::CellRangeImpl::CellRangeImpl(const ConstXMLDocumentSharedP
 {
     if (bottomRight < topLeft)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, SYSTEM_TEXT("cell 范围无效。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, SYSTEM_TEXT("cell 范围无效。"s))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -53,7 +53,7 @@ CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr CoreTools::SimpleCSV::CellRangeI
 
     if (!documentSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s))
     }
 
     return documentSharedPtr;
@@ -65,7 +65,7 @@ CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::CellRangeImpl::GetDataNode()
 
     if (document.expired())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s))
     }
 
     return dataNode;
@@ -93,7 +93,7 @@ CoreTools::SimpleCSV::CellRangeImpl::SharedStringsSharedPtr CoreTools::SimpleCSV
 
     if (!sharedStringsSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("sharedStrings已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("sharedStrings已被释放。"s))
     }
 
     return sharedStringsSharedPtr;

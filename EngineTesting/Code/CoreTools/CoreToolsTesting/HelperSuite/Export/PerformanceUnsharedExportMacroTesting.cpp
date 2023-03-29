@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/PerformanceUnshared/AnimationPerformanceUnsharedMacro.h"
-#include "Toolset/CoreTools/ExportTest/CoreTools/PerformanceUnshared/ArtificialIntellegencePerformanceUnsharedMacro.h"
+#include "Toolset/CoreTools/ExportTest/CoreTools/PerformanceUnshared/ArtificialIntelligencePerformanceUnsharedMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/PerformanceUnshared/AssistToolsPerformanceUnsharedMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/PerformanceUnshared/CoreToolsPerformanceUnsharedMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/PerformanceUnshared/DatabasePerformanceUnsharedMacro.h"
@@ -57,7 +57,7 @@ void CoreTools::PerformanceUnsharedExportMacroTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<Physics::PhysicsPerformanceUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<Imagics::ImagicsPerformanceUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<Animation::AnimationPerformanceUnsharedMacro>);
-    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<ArtificialIntellegence::ArtificialIntellegencePerformanceUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<ArtificialIntelligence::ArtificialIntelligencePerformanceUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<UserInterface::UserInterfacePerformanceUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<AssistTools::AssistToolsPerformanceUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(PerformanceUnsharedExportTest<Framework::FrameworkPerformanceUnsharedMacro>);

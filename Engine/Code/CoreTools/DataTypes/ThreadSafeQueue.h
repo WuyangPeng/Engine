@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 18:03)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/23 14:35)
 
 #ifndef CORE_TOOLS_DATA_TYPE_THREAD_SAFE_QUEUE_H
 #define CORE_TOOLS_DATA_TYPE_THREAD_SAFE_QUEUE_H
@@ -43,11 +43,14 @@ namespace CoreTools
         NODISCARD PopResultType Pop();
 
     private:
-        NODISCARD std::queue<Element> GetThreadSafeQueue() const;
+        using ElementType = std::queue<Element>;
+
+    private:
+        NODISCARD ElementType GetThreadSafeQueue() const;
 
     private:
         size_t maxNumElements;
-        std::queue<Element> queue;
+        ElementType queue;
         mutable std::mutex mutex;
     };
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 19:51)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 10:16)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_PROPERTIES_H
 #define CORE_TOOLS_TEXT_PARSING_PROPERTIES_H
@@ -16,26 +16,23 @@
 
 #include <string>
 
-namespace CoreTools
+namespace CoreTools::SimpleCSV
 {
-    namespace SimpleCSV
+    class CORE_TOOLS_DEFAULT_DECLARE Properties final : public XmlFile
     {
-        class CORE_TOOLS_DEFAULT_DECLARE Properties final : public XmlFile
-        {
-        public:
-            using ClassType = Properties;
-            using ParentType = XmlFile;
+    public:
+        using ClassType = Properties;
+        using ParentType = XmlFile;
 
-        public:
-            explicit Properties(const XmlDataSharedPtr& xmlData);
+    public:
+        explicit Properties(const XmlDataSharedPtr& xmlData);
 
-            CLASS_INVARIANT_FINAL_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-            void SetProperty(const std::string& name, const std::string& value);
-            NODISCARD std::string GetProperty(const std::string& name) const;
-            void DeleteProperty(const std::string& name);
-        };
-    }
+        void SetProperty(const std::string& name, const std::string& value);
+        NODISCARD std::string GetProperty(const std::string& name) const;
+        void DeleteProperty(const std::string& name);
+    };
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_PROPERTIES_H

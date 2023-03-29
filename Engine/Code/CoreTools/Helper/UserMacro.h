@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.2 (2023/02/18 18:11)
+///	引擎版本：0.9.0.4 (2023/03/23 15:49)
 
 #ifndef CORE_TOOLS_HELPER_USER_MACRO_H
 #define CORE_TOOLS_HELPER_USER_MACRO_H
@@ -24,8 +24,8 @@
 
 #define CLOSE_CORE_TOOLS_MAX (((CORE_TOOLS_ClOSE_END) << 1) - 1)
 
-// 编译测试（默认为0，最大值为0x1F）
-#define COMPILE_CORE_TOOLS_CLOSE 0x10
+// 编译测试（默认为0x10，最大值为0x1F）
+#define COMPILE_CORE_TOOLS_CLOSE 0x00
 
 static_assert(0 <= COMPILE_CORE_TOOLS_CLOSE, "COMPILE_CORE_TOOLS_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_CORE_TOOLS_CLOSE <= CLOSE_CORE_TOOLS_MAX, "COMPILE_CORE_TOOLS_CLOSE Must be less than or equal CLOSE_CORE_TOOLS_MAX.");

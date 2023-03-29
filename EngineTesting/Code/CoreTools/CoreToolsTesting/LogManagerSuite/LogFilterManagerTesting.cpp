@@ -56,7 +56,7 @@ void CoreTools::LogFilterManagerTesting::GetLogFilterTypeTest()
     ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Rendering"s)), LogFilter::Rendering);
     ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Physics"s)), LogFilter::Physics);
     ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Imagics"s)), LogFilter::Imagics);
-    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("ArtificialIntellegence"s)), LogFilter::ArtificialIntellegence);
+    ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("ArtificialIntelligence"s)), LogFilter::ArtificialIntelligence);
     ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("UserInterface"s)), LogFilter::UserInterface);
     ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("AssistTools"s)), LogFilter::AssistTools);
     ASSERT_ENUM_EQUAL(LogFilterManager::GetLogFilterType(SYSTEM_TEXT("Framework"s)), LogFilter::Framework);

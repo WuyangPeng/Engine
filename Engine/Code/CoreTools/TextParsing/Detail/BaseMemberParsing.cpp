@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:53)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:31)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -28,16 +28,16 @@ System::String CoreTools::BaseMemberParsing::GenerateBaseMember() const
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_Private;
+    content += TextParsing::gPrivate;
 
     content += GenerateIndentation(1);
-    content += TextParsing::g_IntKey;
+    content += TextParsing::gIntKey;
 
     content += GenerateIndentation();
-    content += TextParsing::g_ClassEndBrackets;
+    content += TextParsing::gClassEndBrackets;
     content += GenerateFunctionEndBrackets(-1);
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

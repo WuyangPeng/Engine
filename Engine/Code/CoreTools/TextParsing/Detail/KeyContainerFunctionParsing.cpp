@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:25)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:08)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -47,12 +47,12 @@ System::String CoreTools::KeyContainerFunctionParsing::GenerateGetKey() const
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_NodiscardConst;
+    content += TextParsing::gNodiscardConst;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_Base;
-    content += TextParsing::g_GetSharedPtr;
+    content += TextParsing::gBase;
+    content += TextParsing::gGetSharedPtr;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_LeftBrackets;
+    content += TextParsing::gLeftBrackets;
 
     content += GenerateGetKeyName();
 
@@ -64,7 +64,7 @@ System::String CoreTools::KeyContainerFunctionParsing::GenerateGetKeyName() cons
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto csvHead = GetCSVHead();
-    auto result = csvHead.GetKeyName();
+    const auto result = csvHead.GetKeyName();
 
     String content{};
 
@@ -72,18 +72,18 @@ System::String CoreTools::KeyContainerFunctionParsing::GenerateGetKeyName() cons
     for (const auto& value : result)
     {
         content += CSVTypeConversion::GetActualType(csvHead.GetDataType(value));
-        content += TextParsing::g_Space;
+        content += TextParsing::gSpace;
         content += value;
 
         ++index;
         if (index != result.size())
         {
-            content += TextParsing::g_Comma;
-            content += TextParsing::g_Space;
+            content += TextParsing::gComma;
+            content += TextParsing::gSpace;
         }
     }
 
-    content += TextParsing::g_ConstSemicolonNewline;
+    content += TextParsing::gConstSemicolonNewline;
 
     return content;
 }

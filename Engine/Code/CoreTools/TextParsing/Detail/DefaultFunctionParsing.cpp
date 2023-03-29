@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:58)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:43)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -28,8 +28,8 @@ System::String CoreTools::DefaultFunctionParsing::GenerateDefaultConstructor() c
     auto content = GenerateIndentation(1);
 
     content += className;
-    content += TextParsing::g_Brackets;
-    content += TextParsing::g_NoexceptDefault;
+    content += TextParsing::gBrackets;
+    content += TextParsing::gNoexceptDefault;
 
     return content;
 }
@@ -40,10 +40,10 @@ System::String CoreTools::DefaultFunctionParsing::GenerateKeyConstructor() const
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Explicit;
+    content += TextParsing::gExplicit;
     content += className;
-    content += TextParsing::g_Key;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gKey;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -54,10 +54,10 @@ System::String CoreTools::DefaultFunctionParsing::GenerateCSVRowConstructor() co
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Explicit;
+    content += TextParsing::gExplicit;
     content += className;
-    content += TextParsing::g_CSVRow;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gCSVRow;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -68,10 +68,10 @@ System::String CoreTools::DefaultFunctionParsing::GenerateCSVContentConstructor(
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Explicit;
+    content += TextParsing::gExplicit;
     content += className;
-    content += TextParsing::g_CSVContent;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gCSVContent;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -82,10 +82,10 @@ System::String CoreTools::DefaultFunctionParsing::GenerateDestructor() const
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_VirtualDestructor;
+    content += TextParsing::gVirtualDestructor;
     content += className;
-    content += TextParsing::g_Brackets;
-    content += TextParsing::g_NoexceptDefault;
+    content += TextParsing::gBrackets;
+    content += TextParsing::gNoexceptDefault;
 
     return content;
 }
@@ -97,11 +97,11 @@ System::String CoreTools::DefaultFunctionParsing::GenerateCopyConstructor() cons
     auto content = GenerateIndentation(1);
 
     content += className;
-    content += TextParsing::g_LeftBrackets;
-    content += TextParsing::g_Const;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gConst;
     content += className;
-    content += TextParsing::g_RhsCopy;
-    content += TextParsing::g_NoexceptDefault;
+    content += TextParsing::gRhsCopy;
+    content += TextParsing::gNoexceptDefault;
 
     return content;
 }
@@ -113,11 +113,11 @@ System::String CoreTools::DefaultFunctionParsing::GenerateCopyAssignment() const
     auto content = GenerateIndentation(1);
 
     content += className;
-    content += TextParsing::g_CopyAssignment;
-    content += TextParsing::g_Const;
+    content += TextParsing::gCopyAssignment;
+    content += TextParsing::gConst;
     content += className;
-    content += TextParsing::g_RhsCopy;
-    content += TextParsing::g_NoexceptDefault;
+    content += TextParsing::gRhsCopy;
+    content += TextParsing::gNoexceptDefault;
 
     return content;
 }
@@ -129,10 +129,10 @@ System::String CoreTools::DefaultFunctionParsing::GenerateMoveConstructor() cons
     auto content = GenerateIndentation(1);
 
     content += className;
-    content += TextParsing::g_LeftBrackets;
+    content += TextParsing::gLeftBrackets;
     content += className;
-    content += TextParsing::g_RhsMove;
-    content += TextParsing::g_NoexceptDefault;
+    content += TextParsing::gRhsMove;
+    content += TextParsing::gNoexceptDefault;
 
     return content;
 }
@@ -144,10 +144,10 @@ System::String CoreTools::DefaultFunctionParsing::GenerateMoveAssignment() const
     auto content = GenerateIndentation(1);
 
     content += className;
-    content += TextParsing::g_CopyAssignment;
+    content += TextParsing::gCopyAssignment;
     content += className;
-    content += TextParsing::g_RhsMove;
-    content += TextParsing::g_NoexceptDefault;
+    content += TextParsing::gRhsMove;
+    content += TextParsing::gNoexceptDefault;
 
     return content;
 }
@@ -158,8 +158,8 @@ System::String CoreTools::DefaultFunctionParsing::GenerateClassInvariantDeclare(
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_ClassInvariantDeclare;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gClassInvariantDeclare;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -170,8 +170,8 @@ System::String CoreTools::DefaultFunctionParsing::GenerateClassInvariantVirtualD
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_ClassInvariantVirtualDeclare;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gClassInvariantVirtualDeclare;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -182,8 +182,8 @@ System::String CoreTools::DefaultFunctionParsing::GenerateClassInvariantFinalDec
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_ClassInvariantFinalDeclare;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gClassInvariantFinalDeclare;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

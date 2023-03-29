@@ -54,9 +54,7 @@ void CoreTools::BufferOutStreamImpl::Register()
         const auto uniqueID = object->Register(*objectRegister);
         if (uniqueID == 0)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-                << SYSTEM_TEXT("uniqueID == 0")
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("uniqueID == 0"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }

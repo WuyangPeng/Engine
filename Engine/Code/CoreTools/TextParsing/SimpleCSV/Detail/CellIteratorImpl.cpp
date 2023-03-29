@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 21:21)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/07 14:31)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -75,9 +75,7 @@ CoreTools::SimpleCSV::CellIteratorImpl& CoreTools::SimpleCSV::CellIteratorImpl::
 
     CheckDocument();
 
-    auto nextCellReference = GetNextCellReference();
-
-    if (nextCellReference <= bottomRight)
+    if (const auto nextCellReference = GetNextCellReference(); nextCellReference <= bottomRight)
     {
         AddCurrentCell(nextCellReference);
     }
@@ -136,8 +134,7 @@ int CoreTools::SimpleCSV::CellIteratorImpl::Distance(const CellIteratorImpl& las
 
 void CoreTools::SimpleCSV::CellIteratorImpl::AddCurrentCell(const CellReference& nextCellReference)
 {
-    const auto cellReference = currentCell->GetCellReference();
-    if (nextCellReference.GetRow() == cellReference.GetRow())
+    if (const auto cellReference = currentCell->GetCellReference(); nextCellReference.GetRow() == cellReference.GetRow())
     {
         AddSameRowCurrentCell(nextCellReference);
     }
@@ -147,26 +144,26 @@ void CoreTools::SimpleCSV::CellIteratorImpl::AddCurrentCell(const CellReference&
     }
     else
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, "发生了内部错误"s);
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, "发生了内部错误"s)
     }
 }
 
-void CoreTools::SimpleCSV::CellIteratorImpl::CheckDocument()
+void CoreTools::SimpleCSV::CellIteratorImpl::CheckDocument() const
 {
     if (document.expired())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document 已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document 已被释放。"s))
     }
 }
 
 void CoreTools::SimpleCSV::CellIteratorImpl::SetCurrentCell(const XMLNode& dataNode)
 {
-    auto documentSharedPtr = document.lock();
-    auto sharedStringsSharedPtr = sharedStrings.lock();
+    const auto documentSharedPtr = document.lock();
+    const auto sharedStringsSharedPtr = sharedStrings.lock();
 
     if (!documentSharedPtr || !sharedStringsSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或sharedStrings已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或sharedStrings已被释放。"s))
     }
 
     currentCell = Cell::CreateCell(documentSharedPtr, dataNode, sharedStringsSharedPtr);
@@ -177,10 +174,10 @@ void CoreTools::SimpleCSV::CellIteratorImpl::AddSameRowCurrentCell(const CellRef
     const auto xmlNode = currentCell->GetXMLNode();
     auto nextNode = xmlNode.next_sibling();
 
-    if (!nextNode || CellReference{ nextNode.attribute(TextParsing::g_AttributeR.data()).value() } != nextCellReference)
+    if (!nextNode || CellReference{ nextNode.attribute(TextParsing::gAttributeR.data()).value() } != nextCellReference)
     {
-        nextNode = xmlNode.parent().insert_child_after(TextParsing::g_ChildC.data(), xmlNode);
-        nextNode.append_attribute(TextParsing::g_AttributeR.data()).set_value(nextCellReference.GetAddress().c_str());
+        nextNode = xmlNode.parent().insert_child_after(TextParsing::gChildC.data(), xmlNode);
+        nextNode.append_attribute(TextParsing::gAttributeR.data()).set_value(nextCellReference.GetAddress().c_str());
     }
 
     SetCurrentCell(nextNode);
@@ -192,10 +189,10 @@ void CoreTools::SimpleCSV::CellIteratorImpl::AddNextRowCurrentCell(const CellRef
     const auto xmlNodeParent = xmlNode.parent();
     auto nextNodeParent = xmlNodeParent.next_sibling();
 
-    if (!nextNodeParent || nextNodeParent.attribute(TextParsing::g_AttributeR.data()).as_int() != nextCellReference.GetRow())
+    if (!nextNodeParent || nextNodeParent.attribute(TextParsing::gAttributeR.data()).as_int() != nextCellReference.GetRow())
     {
         nextNodeParent = xmlNodeParent.parent().insert_child_after("row", xmlNodeParent);
-        nextNodeParent.append_attribute(TextParsing::g_AttributeR.data()).set_value(nextCellReference.GetRow());
+        nextNodeParent.append_attribute(TextParsing::gAttributeR.data()).set_value(nextCellReference.GetRow());
     }
 
     SetCurrentCell(GetCellNode(nextNodeParent, nextCellReference.GetColumn()));

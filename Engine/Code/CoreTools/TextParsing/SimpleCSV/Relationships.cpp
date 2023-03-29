@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:27)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 13:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,13 +13,12 @@
 
 #include "Document.h"
 #include "Relationships.h"
+#include "Flags/RelationshipFlags.h"
 #include "System/Helper/PragmaWarning/PugiXml.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
 #include <algorithm>
-
-using std::string;
 
 CoreTools::SimpleCSV::Relationships::Relationships(const XmlDataSharedPtr& xmlData)
     : ParentType{ xmlData }
@@ -29,22 +28,22 @@ CoreTools::SimpleCSV::Relationships::Relationships(const XmlDataSharedPtr& xmlDa
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools::SimpleCSV, Relationships)
 
-CoreTools::SimpleCSV::RelationshipItem CoreTools::SimpleCSV::Relationships::GetRelationshipByID(const string& id) const
+CoreTools::SimpleCSV::RelationshipItem CoreTools::SimpleCSV::Relationships::GetRelationshipByID(const std::string& id) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto xmlDocument = GetXmlDocument();
+    const auto xmlDocument = GetXmlDocument();
 
-    return RelationshipItem{ xmlDocument, xmlDocument->document_element().find_child_by_attribute(TextParsing::g_ID.data(), id.c_str()) };
+    return RelationshipItem{ xmlDocument, xmlDocument->document_element().find_child_by_attribute(TextParsing::gId.data(), id.c_str()) };
 }
 
 CoreTools::SimpleCSV::RelationshipItem CoreTools::SimpleCSV::Relationships::GetRelationshipByTarget(const std::string& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto xmlDocument = GetXmlDocument();
+    const auto xmlDocument = GetXmlDocument();
 
-    return RelationshipItem{ xmlDocument, xmlDocument->document_element().find_child_by_attribute(TextParsing::g_Target.data(), target.c_str()) };
+    return RelationshipItem{ xmlDocument, xmlDocument->document_element().find_child_by_attribute(TextParsing::gTarget.data(), target.c_str()) };
 }
 
 CoreTools::SimpleCSV::Relationships::RelationshipItemContainer CoreTools::SimpleCSV::Relationships::GetRelationships() const
@@ -62,35 +61,35 @@ CoreTools::SimpleCSV::Relationships::RelationshipItemContainer CoreTools::Simple
     return result;
 }
 
-void CoreTools::SimpleCSV::Relationships::DeleteRelationship(const string& relID)
+void CoreTools::SimpleCSV::Relationships::DeleteRelationship(const std::string& relId)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto xmlDocument = GetXmlDocument();
+    const auto xmlDocument = GetXmlDocument();
 
-    xmlDocument->document_element().remove_child(xmlDocument->document_element().find_child_by_attribute(TextParsing::g_ID.data(), relID.c_str()));
+    xmlDocument->document_element().remove_child(xmlDocument->document_element().find_child_by_attribute(TextParsing::gId.data(), relId.c_str()));
 }
 
 void CoreTools::SimpleCSV::Relationships::DeleteRelationship(const RelationshipItem& item)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    DeleteRelationship(item.GetID());
+    DeleteRelationship(item.GetId());
 }
 
-int CoreTools::SimpleCSV::Relationships::GetNewRelsID(XMLNode relationshipsNode)
+int CoreTools::SimpleCSV::Relationships::GetNewRelsId(XMLNode relationshipsNode)
 {
     constexpr auto idBeginIndex = 3;
 
     const auto children = relationshipsNode.children();
-    const auto iter = std::max_element(children.begin(),
-                                       children.end(),
-                                       [&](const auto& lhs, const auto& rhs) {
-                                           return stoi(string{ lhs.attribute(TextParsing::g_ID.data()).value() }.substr(idBeginIndex)) < stoi(string{ rhs.attribute(TextParsing::g_ID.data()).value() }.substr(idBeginIndex));
-                                       });
-    if (iter != children.end())
+
+    if (const auto iter = std::ranges::max_element(children,
+                                                   [&](const auto& lhs, const auto& rhs) {
+                                                       return stoi(std::string{ lhs.attribute(TextParsing::gId.data()).value() }.substr(idBeginIndex)) < stoi(std::string{ rhs.attribute(TextParsing::gId.data()).value() }.substr(idBeginIndex));
+                                                   });
+        iter != children.end())
     {
-        return stoi(string{ iter->attribute(TextParsing::g_ID.data()).value() }.substr(idBeginIndex)) + 1;
+        return std::stoi(std::string{ iter->attribute(TextParsing::gId.data()).value() }.substr(idBeginIndex)) + 1;
     }
     else
     {
@@ -98,20 +97,20 @@ int CoreTools::SimpleCSV::Relationships::GetNewRelsID(XMLNode relationshipsNode)
     }
 }
 
-CoreTools::SimpleCSV::RelationshipItem CoreTools::SimpleCSV::Relationships::AddRelationship(RelationshipType type, const string& target)
+CoreTools::SimpleCSV::RelationshipItem CoreTools::SimpleCSV::Relationships::AddRelationship(RelationshipType type, const std::string& target)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto xmlDocument = GetXmlDocument();
+    const auto xmlDocument = GetXmlDocument();
 
-    auto typeString = RelationshipItem::GetStringFromType(type);
+    const auto typeString = RelationshipItem::GetStringFromType(type);
 
-    auto id = "rId" + std::to_string(GetNewRelsID(xmlDocument->document_element()));
+    const auto id = "rId" + std::to_string(GetNewRelsId(xmlDocument->document_element()));
 
     auto node = xmlDocument->document_element().append_child("Relationship");
-    node.append_attribute(TextParsing::g_ID.data()).set_value(id.c_str());
+    node.append_attribute(TextParsing::gId.data()).set_value(id.c_str());
     node.append_attribute("Type").set_value(typeString.c_str());
-    node.append_attribute(TextParsing::g_Target.data()).set_value(target.c_str());
+    node.append_attribute(TextParsing::gTarget.data()).set_value(target.c_str());
 
     if (type == RelationshipType::ExternalLinkPath)
     {
@@ -121,16 +120,16 @@ CoreTools::SimpleCSV::RelationshipItem CoreTools::SimpleCSV::Relationships::AddR
     return RelationshipItem{ xmlDocument, node };
 }
 
-bool CoreTools::SimpleCSV::Relationships::IsTargetExists(const string& target) const
+bool CoreTools::SimpleCSV::Relationships::IsTargetExists(const std::string& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetXmlDocument()->document_element().find_child_by_attribute(TextParsing::g_Target.data(), target.c_str()) != nullptr;
+    return GetXmlDocument()->document_element().find_child_by_attribute(TextParsing::gTarget.data(), target.c_str()) != nullptr;
 }
 
-bool CoreTools::SimpleCSV::Relationships::IsIDExists(const string& id) const
+bool CoreTools::SimpleCSV::Relationships::IsIdExists(const std::string& id) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetXmlDocument()->document_element().find_child_by_attribute(TextParsing::g_ID.data(), id.c_str()) != nullptr;
+    return GetXmlDocument()->document_element().find_child_by_attribute(TextParsing::gId.data(), id.c_str()) != nullptr;
 }

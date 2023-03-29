@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 13:35)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:20)
 
-#ifndef CORE_TOOLS_TEXT_PARSING_GET_FUNCTION_PARSING_H
-#define CORE_TOOLS_TEXT_PARSING_GET_FUNCTION_PARSING_H
+#ifndef CORE_TOOLS_TEXT_PARSING_STRING_CAST_ENUM_DEFINITION_PARSING_H
+#define CORE_TOOLS_TEXT_PARSING_STRING_CAST_ENUM_DEFINITION_PARSING_H
 
 #include "CoreTools/CoreToolsDll.h"
 
@@ -17,27 +17,28 @@
 
 namespace CoreTools
 {
-    class CORE_TOOLS_HIDDEN_DECLARE StringCastEnumDefinitionParsing : public Parsing
+    class CORE_TOOLS_HIDDEN_DECLARE StringCastEnumDefinitionParsing final : public Parsing
     {
     public:
         using ClassType = StringCastEnumDefinitionParsing;
         using ParentType = Parsing;
 
     public:
-        StringCastEnumDefinitionParsing(const CSVHead& csvHead, const String& className);
+        StringCastEnumDefinitionParsing(CSVHead csvHead, String className) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD String GenerateStringCastEnumDefinition() const;
+        NODISCARD String GenerateStringCastEnumFunction() const;
 
     private:
-        NODISCARD String GenerateStringCastEnum() const;
+        NODISCARD String GenerateStringCastEnum(bool isDefinition) const;
         NODISCARD String GenerateDescribe() const;
 
     private:
         String className;
-        CSVHead m_CSVHead;
+        CSVHead head;
     };
 }
 
-#endif  // CORE_TOOLS_TEXT_PARSING_GET_FUNCTION_PARSING_H
+#endif  // CORE_TOOLS_TEXT_PARSING_STRING_CAST_ENUM_DEFINITION_PARSING_H

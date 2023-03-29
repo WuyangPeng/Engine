@@ -927,9 +927,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\OutputConsoleTextColorsManager.h">
       <Filter>LogManager 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAppenderIOManagerImplDetail.h">
-      <Filter>LogManager 模板文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogManagerFwd.h">
       <Filter>LogManager 头文件</Filter>
     </ClInclude>
@@ -2268,7 +2265,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandSetSheetIndexImpl.h">
       <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandAddChartsheetImpl.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandAddChartSheetImpl.h">
       <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandAddWorksheetImpl.h">
@@ -2283,7 +2280,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySharedStringsImpl.h">
       <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIDImpl.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIdImpl.h">
       <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIndexImpl.h">
@@ -2292,7 +2289,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetNameImpl.h">
       <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsIDImpl.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsIdImpl.h">
       <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsTargetImpl.h">
@@ -2415,7 +2412,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\DocumentImpl.h">
       <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandAddChartsheet.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandAddChartSheet.h">
       <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandAddSharedStrings.h">
@@ -2448,7 +2445,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySharedStrings.h">
       <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetID.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetId.h">
       <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetIndex.h">
@@ -2457,7 +2454,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetName.h">
       <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsID.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsId.h">
       <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsTarget.h">
@@ -2960,6 +2957,51 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Coroutine\CoroutineFwd.h">
       <Filter>Coroutine 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\Json\JsonTotalGenerateContainerHeadFile.h">
+      <Filter>TextParsing 头文件\Detail\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\Json\JsonTotalGenerateContainerSourceFile.h">
+      <Filter>TextParsing 头文件\Detail\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\Json\JsonTotalGenerateFactory.h">
+      <Filter>TextParsing 头文件\Detail\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\Json\JsonTotalGenerateFwdHeadFile.h">
+      <Filter>TextParsing 头文件\Detail\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\Json\JsonTotalGenerateHeadFile.h">
+      <Filter>TextParsing 头文件\Detail\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\Json\JsonTotalGenerateImpl.h">
+      <Filter>TextParsing 头文件\Detail\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonTotalGenerate.h">
+      <Filter>TextParsing 头文件\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogHelper.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogHelperDetail.h">
+      <Filter>LogManager 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\PrintLogMessage.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessageFactory.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\NullLogMessage.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\PrintFileNameLogMessage.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\AsynchronousParameterBase.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\OStreamAsynchronousParameter.h">
+      <Filter>LogManager 头文件\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3776,7 +3818,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandAddWorksheetImpl.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandAddChartsheetImpl.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandAddChartSheetImpl.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandDeleteSheetImpl.cpp">
@@ -3797,10 +3839,10 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetTypeImpl.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIDImpl.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIdImpl.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsIDImpl.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsIdImpl.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsTargetImpl.cpp">
@@ -3893,7 +3935,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\DocumentImpl.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetID.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetId.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetIndex.cpp">
@@ -3902,7 +3944,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetName.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsID.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsId.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsTarget.cpp">
@@ -3917,7 +3959,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QueryXmlData.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandAddChartsheet.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandAddChartSheet.cpp">
       <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandAddWorksheet.cpp">
@@ -4345,6 +4387,48 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\NullObject.cpp">
       <Filter>ObjectSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\Json\JsonTotalGenerateContainerHeadFile.cpp">
+      <Filter>TextParsing 源文件\Detail\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\Json\JsonTotalGenerateContainerSourceFile.cpp">
+      <Filter>TextParsing 源文件\Detail\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\Json\JsonTotalGenerateFactory.cpp">
+      <Filter>TextParsing 源文件\Detail\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\Json\JsonTotalGenerateFwdHeadFile.cpp">
+      <Filter>TextParsing 源文件\Detail\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\Json\JsonTotalGenerateHeadFile.cpp">
+      <Filter>TextParsing 源文件\Detail\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\Json\JsonTotalGenerateImpl.cpp">
+      <Filter>TextParsing 源文件\Detail\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Json\JsonTotalGenerate.cpp">
+      <Filter>TextParsing 源文件\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogHelper.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogMessageFactory.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\NullLogMessage.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\PrintLogMessage.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\PrintFileNameLogMessage.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AsynchronousParameterBase.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\OStreamAsynchronousParameter.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

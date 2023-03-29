@@ -1,50 +1,48 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 21:19)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 16:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "QuerySheetVisibilityImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::string;
-
-CoreTools::SimpleCSV::QuerySheetVisibilityImpl::QuerySheetVisibilityImpl(const string& sheetID)
-    : sheetID{ sheetID }, m_SheetVisibility{}
+CoreTools::SimpleCSV::QuerySheetVisibilityImpl::QuerySheetVisibilityImpl(std::string sheetId) noexcept
+    : sheetId{ std::move(sheetId) }, sheetVisibility{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::SimpleCSV::QuerySheetVisibilityImpl::QuerySheetVisibilityImpl(const string& sheetID, const string& sheetVisibility)
-    : sheetID{ sheetID }, m_SheetVisibility{ sheetVisibility }
+CoreTools::SimpleCSV::QuerySheetVisibilityImpl::QuerySheetVisibilityImpl(std::string sheetId, std::string sheetVisibility) noexcept
+    : sheetId{ std::move(sheetId) }, sheetVisibility{ std::move(sheetVisibility) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, QuerySheetVisibilityImpl)
 
-string CoreTools::SimpleCSV::QuerySheetVisibilityImpl::GetSheetID() const
+std::string CoreTools::SimpleCSV::QuerySheetVisibilityImpl::GetSheetId() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return sheetID;
+    return sheetId;
 }
 
-string CoreTools::SimpleCSV::QuerySheetVisibilityImpl::GetSheetVisibility() const
+std::string CoreTools::SimpleCSV::QuerySheetVisibilityImpl::GetSheetVisibility() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_SheetVisibility;
+    return sheetVisibility;
 }
 
-void CoreTools::SimpleCSV::QuerySheetVisibilityImpl::SetSheetVisibility(const string& sheetVisibility)
+void CoreTools::SimpleCSV::QuerySheetVisibilityImpl::SetSheetVisibility(const std::string& aSheetVisibility)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_SheetVisibility = sheetVisibility;
+    sheetVisibility = aSheetVisibility;
 }

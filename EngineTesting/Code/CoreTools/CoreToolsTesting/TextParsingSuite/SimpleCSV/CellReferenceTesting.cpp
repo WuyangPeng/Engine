@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:40)
+///	引擎测试版本：0.9.0.4 (2023/03/08 15:50)
 
 #include "CellReferenceTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -18,8 +18,6 @@
 #include <charconv>
 
 using namespace std::literals;
-using std::string;
-using std::uniform_int_distribution;
 
 CoreTools::CellReferenceTesting::CellReferenceTesting(const OStreamShared& stream)
     : ParentType{ stream },
@@ -47,7 +45,7 @@ void CoreTools::CellReferenceTesting::MainTest()
 
 void CoreTools::CellReferenceTesting::CellAddressTest()
 {
-    SimpleCSV::CellReference cellReference{ "A1"s };
+    const SimpleCSV::CellReference cellReference{ "A1"s };
 
     ASSERT_EQUAL(cellReference.GetColumn(), 1);
     ASSERT_EQUAL(cellReference.GetRow(), 1);
@@ -56,7 +54,7 @@ void CoreTools::CellReferenceTesting::CellAddressTest()
 
 bool CoreTools::CellReferenceTesting::RowTest()
 {
-    const std::uniform_int_distribution<> randomDistribution{ 1, SimpleCSV::g_MaxRows };
+    const std::uniform_int_distribution<> randomDistribution{ 1, SimpleCSV::gMaxRows };
     auto row = randomDistribution(randomEngine);
     SimpleCSV::CellReference cellReference0{ row, 500 };
 
@@ -65,7 +63,7 @@ bool CoreTools::CellReferenceTesting::RowTest()
 
     ASSERT_EQUAL(cellReference0.GetAddress(), "SF" + std::to_string(row));
 
-    SimpleCSV::CellReference cellReference1{ cellReference0.GetAddress() };
+    const SimpleCSV::CellReference cellReference1{ cellReference0.GetAddress() };
     ASSERT_EQUAL(cellReference0, cellReference1);
 
     row = randomDistribution(randomEngine);
@@ -79,7 +77,7 @@ void CoreTools::CellReferenceTesting::OneLetterColumnTest()
 {
     for (auto column = 1; column <= alphabetSize; ++column)
     {
-        const string address{ boost::numeric_cast<char>(column + 'A' - 1) };
+        const std::string address{ boost::numeric_cast<char>(column + 'A' - 1) };
         SimpleCSV::CellReference cellReference0{ 100, address };
 
         ASSERT_EQUAL(cellReference0.GetColumn(), column);
@@ -103,15 +101,15 @@ bool CoreTools::CellReferenceTesting::TwoLetterRowTest()
     const std::uniform_int_distribution<> randomDistribution{ 1, alphabetSize };
     const auto column0 = randomDistribution(randomEngine);
     const auto column1 = randomDistribution(randomEngine);
-    const auto address = string{ boost::numeric_cast<char>(column0 + 'A' - 1) } + string{ boost::numeric_cast<char>(column1 + 'A' - 1) };
-    SimpleCSV::CellReference cellReference0{ 105, address };
+    const auto address = std::string{ boost::numeric_cast<char>(column0 + 'A' - 1) } + std::string{ boost::numeric_cast<char>(column1 + 'A' - 1) };
+    const SimpleCSV::CellReference cellReference0{ 105, address };
 
     ASSERT_EQUAL(cellReference0.GetColumn(), column0 * alphabetSize + column1);
     ASSERT_EQUAL(cellReference0.GetRow(), 105);
 
     ASSERT_EQUAL(cellReference0.GetAddress(), address + "105");
 
-    SimpleCSV::CellReference cellReference1{ 105, cellReference0.GetColumn() };
+    const SimpleCSV::CellReference cellReference1{ 105, cellReference0.GetColumn() };
     ASSERT_EQUAL(cellReference0, cellReference1);
 
     SimpleCSV::CellReference cellReference2{ cellReference0.GetAddress() };
@@ -130,15 +128,15 @@ bool CoreTools::CellReferenceTesting::ThreeLetterRowTest()
     const auto column0 = randomDistribution(randomEngine);
     const auto column1 = randomDistribution(randomEngine);
     const auto column2 = randomDistribution(randomEngine);
-    const auto address = string{ boost::numeric_cast<char>(column0 + 'A' - 1) } + string{ boost::numeric_cast<char>(column1 + 'A' - 1) } + string{ boost::numeric_cast<char>(column2 + 'A' - 1) };
-    SimpleCSV::CellReference cellReference0{ 1051, address };
+    const auto address = std::string{ boost::numeric_cast<char>(column0 + 'A' - 1) } + std::string{ boost::numeric_cast<char>(column1 + 'A' - 1) } + std::string{ boost::numeric_cast<char>(column2 + 'A' - 1) };
+    const SimpleCSV::CellReference cellReference0{ 1051, address };
 
     ASSERT_EQUAL(cellReference0.GetColumn(), column0 * alphabetSize * alphabetSize + column1 * alphabetSize + column2);
     ASSERT_EQUAL(cellReference0.GetRow(), 1051);
 
     ASSERT_EQUAL(cellReference0.GetAddress(), address + "1051");
 
-    SimpleCSV::CellReference cellReference1{ 1051, cellReference0.GetColumn() };
+    const SimpleCSV::CellReference cellReference1{ 1051, cellReference0.GetColumn() };
     ASSERT_EQUAL(cellReference0, cellReference1);
 
     SimpleCSV::CellReference cellReference2{ cellReference0.GetAddress() };
@@ -157,8 +155,8 @@ bool CoreTools::CellReferenceTesting::ThreeLetterRowTest()
 
 void CoreTools::CellReferenceTesting::OperatorTest()
 {
-    SimpleCSV::CellReference cellReference0{ "A1"s };
-    SimpleCSV::CellReference cellReference1{ "A2"s };
+    const SimpleCSV::CellReference cellReference0{ "A1"s };
+    const SimpleCSV::CellReference cellReference1{ "A2"s };
 
     ASSERT_FALSE(cellReference0 < cellReference0);
     ASSERT_FALSE(cellReference1 < cellReference1);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 22:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 16:11)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,16 +13,13 @@
 #include "Detail/LogFileNameImpl.h"
 #include "System/SystemOutput/OutputDebugString.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::make_shared;
 
 CoreTools::LogFileName::LogFileName(const System::TChar* fileName) noexcept
     : impl{}
 {
     try
     {
-        impl = make_shared<ImplType>(fileName);
+        impl = std::make_shared<ImplType>(fileName);
     }
     catch (...)
     {

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 18:08)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/22 19:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -30,7 +30,9 @@ void CoreTools::CyclicRedundancyCheck16::Calculation(const char* data, int lengt
         {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+
             const auto value = data[i];
+
 #include STSTEM_WARNING_POP
 
             // 低4位
@@ -38,7 +40,7 @@ void CoreTools::CyclicRedundancyCheck16::Calculation(const char* data, int lengt
             cyclicRedundancyCheck = (cyclicRedundancyCheck >> 4) & 0x0FFF;
             cyclicRedundancyCheck = cyclicRedundancyCheck ^ lower ^ CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table(value & 0xF);
 
-            // 高四位
+            // 高4位
             const auto upper = CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table(cyclicRedundancyCheck & 0xF);
             cyclicRedundancyCheck = (cyclicRedundancyCheck >> 4) & 0x0FFF;
             cyclicRedundancyCheck = cyclicRedundancyCheck ^ upper ^ CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table((value >> 4) & 0xF);

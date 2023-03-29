@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:54)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:33)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,8 +15,8 @@
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::ChildMemberParsing::ChildMemberParsing(const CSVHead& csvHead) noexcept
-    : ParentType{ 1 }, csvHead{ csvHead }
+CoreTools::ChildMemberParsing::ChildMemberParsing(CSVHead csvHead) noexcept
+    : ParentType{ 1 }, csvHead{ std::move(csvHead) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -29,14 +29,14 @@ System::String CoreTools::ChildMemberParsing::GenerateChildMember() const
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_Private;
+    content += TextParsing::gPrivate;
 
     content += GenerateMember();
 
     content += GenerateIndentation();
-    content += TextParsing::g_ClassEndBrackets;
-    content += TextParsing::g_FunctionEndBrackets;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gClassEndBrackets;
+    content += TextParsing::gFunctionEndBrackets;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -55,11 +55,11 @@ System::String CoreTools::ChildMemberParsing::GenerateMember() const
         content += GenerateIndentation(1);
         content += actualType;
 
-        content += TextParsing::g_Space;
+        content += TextParsing::gSpace;
         content += variableName;
-        content += TextParsing::g_SemicolonAnnotation;
+        content += TextParsing::gSemicolonAnnotation;
         content += annotation;
-        content += TextParsing::g_NewlineCharacter;
+        content += TextParsing::gNewlineCharacter;
     }
 
     return content;

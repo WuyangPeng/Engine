@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 16:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/22 19:18)
 
 #ifndef CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_CCITT_TABLE_H
 #define CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_CCITT_TABLE_H
@@ -62,13 +62,14 @@ namespace CoreTools
 
     private:
         static constexpr auto tableSize = 256;
+        using TableType = std::array<uint16_t, tableSize>;
 
     private:
         void Calculate() noexcept;
         NODISCARD static uint16_t CalculateCCITT(uint32_t index) noexcept;
 
     private:
-        std::array<uint16_t, tableSize> table;
+        TableType table;
     };
 }
 

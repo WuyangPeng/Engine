@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:53)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:31)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -39,7 +39,7 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateCheckingFun
     }
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -48,14 +48,14 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateChecking() 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    String content{ TextParsing::g_Void };
+    String content{ TextParsing::gVoid };
 
     content += GetNameSpace();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += GetCSVClassName();
-    content += TextParsing::g_DoubleColon;
-    content += TextParsing::g_Checking;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gCheckingConst; 
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -68,13 +68,11 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateCheckingMem
 
     const auto csvHead = GetCSVHead();
 
-    const auto scope = csvHead.GetScope(index);
-
-    if (!scope.empty())
+    if (const auto scope = csvHead.GetScope(index); !scope.empty())
     {
         if (isBegin)
         {
-            content += TextParsing::g_NewlineCharacter;
+            content += TextParsing::gNewlineCharacter;
         }
 
         content += GenerateCheckingMemberScopeExpression(csvHead.GetScopeExpression(index));
@@ -111,13 +109,13 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateIsValid() c
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    String content{ TextParsing::g_Bool };
+    String content{ TextParsing::gBool };
 
     content += GetNameSpace();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += GetCSVClassName();
-    content += TextParsing::g_DoubleColon;
-    content += TextParsing::g_IsValid;
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gIsValid;
 
     return content;
 }
@@ -128,9 +126,9 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateThrowExcept
 
     auto content = GenerateIndentation(2);
 
-    content += TextParsing::g_ThrowException;
+    content += TextParsing::gThrowException;
     content += variableName;
-    content += SYSTEM_TEXT(" 数据校验失败。\"s));\n"s);
+    content += SYSTEM_TEXT(" 数据校验失败。\"s))\n"s);
 
     return content;
 }
@@ -160,7 +158,7 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateIsValidAchi
         content += GenerateIsValidMember(index, index == 0);
     }
 
-    content += TextParsing::g_RightBracket;
+    content += TextParsing::gRightBracket;
 
     constexpr auto indentation = 1;
 
@@ -185,13 +183,11 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateIsValidMemb
 
     const auto csvHead = GetCSVHead();
 
-    const auto scope = csvHead.GetScope(index);
-
-    if (!scope.empty())
+    if (const auto scope = csvHead.GetScope(index); !scope.empty())
     {
         if (isBegin)
         {
-            content += TextParsing::g_AndNewline;
+            content += TextParsing::gAndNewline;
         }
 
         content += GenerateIsValidMemberScopeExpression(csvHead.GetScopeExpression(index));
@@ -206,9 +202,9 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateIsValidMemb
 
     auto content = GenerateIndentation(2);
 
-    content += TextParsing::g_LeftBrackets;
+    content += TextParsing::gLeftBrackets;
     content += scopeExpression;
-    content += TextParsing::g_RightBrackets;
+    content += TextParsing::gRightBrackets;
 
     return content;
 }

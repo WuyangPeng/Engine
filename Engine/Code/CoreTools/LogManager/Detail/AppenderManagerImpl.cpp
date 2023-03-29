@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 22:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 15:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -29,14 +29,14 @@ bool CoreTools::AppenderManagerImpl::InsertLogger(const Logger& logger)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return loggers.insert({ logger.GetLogFilterType(), logger }).second;
+    return loggers.emplace(logger.GetLogFilterType(), logger).second;
 }
 
 bool CoreTools::AppenderManagerImpl::RemoveLogger(LogFilter logFilter)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return (loggers.erase(logFilter) != 0);
+    return loggers.erase(logFilter) != 0;
 }
 
 bool CoreTools::AppenderManagerImpl::InsertAppender(const String& name, const Appender& appender)
@@ -48,7 +48,7 @@ bool CoreTools::AppenderManagerImpl::InsertAppender(const String& name, const Ap
         minLogLevel = std::min(minLogLevel, appender.GetLogLevel());
     }
 
-    return appenders.insert({ name, appender }).second;
+    return appenders.emplace(name, appender).second;
 }
 
 bool CoreTools::AppenderManagerImpl::InsertConsoleAppender(const Appender& appender)
@@ -73,13 +73,11 @@ void CoreTools::AppenderManagerImpl::Clear() noexcept
     appenders.clear();
 }
 
-void CoreTools::AppenderManagerImpl::Write(const LogMessage& message)
+void CoreTools::AppenderManagerImpl::Write(const LogMessage& message) const
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto level = GetLogLevelType(message);
-
-    if (level != LogLevel::Disabled && level <= message.GetLogLevel() && !message.GetMessageDescribe().empty())
+    if (const auto level = GetLogLevelType(message); level != LogLevel::Disabled && level <= message.GetLogLevel() && !message.GetMessageDescribe().empty())
     {
         DoWrite(message);
     }
@@ -89,9 +87,7 @@ void CoreTools::AppenderManagerImpl::Write(const String& name, const LogMessage&
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto level = GetLogLevelType(message);
-
-    if (level != LogLevel::Disabled && level <= message.GetLogLevel() && !message.GetMessageDescribe().empty() && GetDefaultAppenderName() != name)
+    if (const auto level = GetLogLevelType(message); level != LogLevel::Disabled && level <= message.GetLogLevel() && !message.GetMessageDescribe().empty() && GetDefaultAppenderName() != name)
     {
         DoWrite(name, message);
     }
@@ -104,12 +100,9 @@ void CoreTools::AppenderManagerImpl::WriteToConsole(const LogMessage& message)
     Write(GetConsoleAppenderName(), message);
 }
 
-// private
 CoreTools::LogLevel CoreTools::AppenderManagerImpl::GetLogLevelType(const LogMessage& message) const
 {
-    const auto iter = loggers.find(message.GetLogFilterType());
-
-    if (iter != loggers.cend())
+    if (const auto iter = loggers.find(message.GetLogFilterType()); iter != loggers.cend())
         return iter->second.GetLogLevel();
     else
         return LogLevel::Disabled;
@@ -117,16 +110,13 @@ CoreTools::LogLevel CoreTools::AppenderManagerImpl::GetLogLevelType(const LogMes
 
 CoreTools::LogLevel CoreTools::AppenderManagerImpl::GetMinLogLevelType(LogFilter logFilter) const
 {
-    const auto iter = loggers.find(logFilter);
-
-    if (iter != loggers.cend())
+    if (const auto iter = loggers.find(logFilter); iter != loggers.cend())
         return std::min(minLogLevel, iter->second.GetLogLevel());
     else
         return LogLevel::Disabled;
 }
 
-// private
-void CoreTools::AppenderManagerImpl::DoWrite(const LogMessage& message)
+void CoreTools::AppenderManagerImpl::DoWrite(const LogMessage& message) const
 {
     for (auto& value : appenders)
     {
@@ -139,9 +129,7 @@ void CoreTools::AppenderManagerImpl::DoWrite(const LogMessage& message)
 
 void CoreTools::AppenderManagerImpl::DoWrite(const System::String& name, const LogMessage& message)
 {
-    const auto iter = appenders.find(name);
-
-    if (iter != appenders.cend())
+    if (const auto iter = appenders.find(name); iter != appenders.cend())
     {
         iter->second.Write(message);
     }
@@ -151,26 +139,14 @@ void CoreTools::AppenderManagerImpl::DoWrite(const System::String& name, const L
     }
 }
 
-void CoreTools::AppenderManagerImpl::ReloadAppenderFile()
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    for (auto& value : appenders)
-    {
-        value.second.Reload();
-    }
-}
-
-// static
-const System::String CoreTools::AppenderManagerImpl::GetConsoleAppenderName()
+System::String CoreTools::AppenderManagerImpl::GetConsoleAppenderName()
 {
     static const auto console = SYSTEM_TEXT("Console"s);
 
     return console;
 }
 
-// static
-const System::String CoreTools::AppenderManagerImpl::GetDefaultAppenderName()
+System::String CoreTools::AppenderManagerImpl::GetDefaultAppenderName()
 {
     static const auto defaultAppender = SYSTEM_TEXT("Default"s);
 
@@ -181,9 +157,7 @@ bool CoreTools::AppenderManagerImpl::IsAppenderExist(const String& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    const auto iter = appenders.find(name);
-
-    if (iter != appenders.cend())
+    if (const auto iter = appenders.find(name); iter != appenders.cend())
         return true;
     else
         return false;
@@ -191,9 +165,7 @@ bool CoreTools::AppenderManagerImpl::IsAppenderExist(const String& name) const
 
 bool CoreTools::AppenderManagerImpl::CreateFileAppender(const String& fileName)
 {
-    const auto iter = appenders.find(GetDefaultAppenderName());
-
-    if (iter != appenders.cend())
+    if (const auto iter = appenders.find(GetDefaultAppenderName()); iter != appenders.cend())
     {
         const auto& appender = iter->second;
 

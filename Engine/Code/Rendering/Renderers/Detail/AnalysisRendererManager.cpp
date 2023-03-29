@@ -54,9 +54,7 @@ void Rendering::AnalysisRendererManager::Analysis()
         RendererParameter rendererParameter{ fileName };
         renderer = std::make_shared<Rendering::Renderer>(EnvironmentParameter::Create(), rendererParameter);
 
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-            << SYSTEM_TEXT("初始化渲染器类型失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("初始化渲染器类型失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     renderer->Init();
@@ -97,9 +95,7 @@ void Rendering::AnalysisRendererManager::AnalysisRendererTexture()
         rendererBasis.SetDataFormat(Rendering::DataFormatType::R8G8B8A8Typeless, Rendering::DataFormatType::D32Float);
         rendererBasis.SetMultisamplesNumber(0);
 
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-            << SYSTEM_TEXT("初始化渲染器纹理格式失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("初始化渲染器纹理格式失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

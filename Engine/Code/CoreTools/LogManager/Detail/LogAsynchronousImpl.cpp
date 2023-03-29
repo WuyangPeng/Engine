@@ -1,15 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/06 21:50)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 15:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "LogAsynchronousImpl.h"
+#include "OStreamAsynchronousParameter.h"
+#include "System/SystemOutput/SystemOutput.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
@@ -27,7 +29,7 @@ void CoreTools::LogAsynchronousImpl::Registered(const LogMessage& message, const
 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    logContainer.emplace_back(message, appenderManager);
+    logContainer.emplace_back(std::make_shared<LogAsynchronousParameter>(message, appenderManager));
 
     conditionVariable.notify_one();
 }
@@ -38,16 +40,27 @@ void CoreTools::LogAsynchronousImpl::Registered(const String& fileName, const Lo
 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    logContainer.emplace_back(fileName, message, appenderManager);
+    logContainer.emplace_back(std::make_shared<LogAsynchronousParameter>(fileName, message, appenderManager));
 
     conditionVariable.notify_one();
 }
 
-CoreTools::LogAsynchronousParameter CoreTools::LogAsynchronousImpl::ExtractNextLog() noexcept
+void CoreTools::LogAsynchronousImpl::Registered(const OStreamShared& streamShared, const std::string& message, LogLevel logLevel)
+{
+    std::lock_guard lockGuard{ mutex };
+
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    logContainer.emplace_back(std::make_shared<OStreamAsynchronousParameter>(streamShared, message, logLevel));
+
+    conditionVariable.notify_one();
+}
+
+CoreTools::LogAsynchronousImpl::LogAsynchronousParameterBaseSharedPtr CoreTools::LogAsynchronousImpl::ExtractNextLog() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    const auto logParameter = logContainer.front();
+    auto logParameter = logContainer.front();
 
     logContainer.pop_front();
 
@@ -104,12 +117,15 @@ void CoreTools::LogAsynchronousImpl::Execution()
 {
     while (!logContainer.empty())
     {
-        EXCEPTION_TRY
+        try
         {
-            auto logAsynchronousParameter = ExtractNextLog();
+            const auto logAsynchronousParameter = ExtractNextLog();
 
-            logAsynchronousParameter.Write();
+            logAsynchronousParameter->Write();
         }
-        EXCEPTION_ALL_CATCH(CoreTools)
+        catch (...)
+        {
+            System::OutputDebugStringWithTChar(SYSTEM_TEXT("日志写入错误"));
+        }
     }
 }

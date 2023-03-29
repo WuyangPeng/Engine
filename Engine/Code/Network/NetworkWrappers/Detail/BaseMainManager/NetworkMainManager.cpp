@@ -60,8 +60,6 @@ void Network::NetworkMainManager::Release() noexcept
 
     if (cleanup != System::WinSockCleanupReturn::Successful)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, Network)
-            << SYSTEM_TEXT("Ïú»ÙWinSockÊ§°Ü£¡")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Error, Network, SYSTEM_TEXT("Ïú»ÙWinSockÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/26 0:16)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/29 13:47)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_MESSAGE_TELEGRAM_MANAGER_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_MESSAGE_TELEGRAM_MANAGER_DETAIL_H
@@ -35,35 +35,35 @@ bool CoreTools::TelegramMessageManager<EventType>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename EventType>
-bool CoreTools::TelegramMessageManager<EventType>::RegisterAllEvent(uint64_t entityID)
+bool CoreTools::TelegramMessageManager<EventType>::RegisterAllEvent(int64_t entityId)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return registerContainer.insert(entityID).second;
+    return registerContainer.insert(entityId).second;
 }
 
 template <typename EventType>
-bool CoreTools::TelegramMessageManager<EventType>::UnregisterAllEvent(uint64_t entityID)
+bool CoreTools::TelegramMessageManager<EventType>::UnRegisterAllEvent(int64_t entityId)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return registerContainer.erase(entityID) != 0;
+    return registerContainer.erase(entityId) != 0;
 }
 
 template <typename EventType>
-bool CoreTools::TelegramMessageManager<EventType>::Register(EventType eventType, uint64_t entityID)
+bool CoreTools::TelegramMessageManager<EventType>::Register(EventType eventType, int64_t entityId)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return eventRegisterContainer[eventType].insert(entityID).second;
+    return eventRegisterContainer[eventType].insert(entityId).second;
 }
 
 template <typename EventType>
-bool CoreTools::TelegramMessageManager<EventType>::Unregister(EventType eventType, uint64_t entityID)
+bool CoreTools::TelegramMessageManager<EventType>::UnRegister(EventType eventType, int64_t entityId)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return eventRegisterContainer[eventType].erase(entityID) != 0;
+    return eventRegisterContainer[eventType].erase(entityId) != 0;
 }
 
 template <typename EventType>
@@ -106,8 +106,7 @@ void CoreTools::TelegramMessageManager<EventType>::DispatchDelayEvent(int64_t cu
     {
         if (iter->GetDispatchMillisecondTime() <= currentTime)
         {
-            auto receiver = iter->GetReceiver();
-            if (receiver.empty())
+            if (auto receiver = iter->GetReceiver(); receiver.empty())
             {
                 DisposeAllEvent(*iter);
             }
@@ -128,14 +127,13 @@ void CoreTools::TelegramMessageManager<EventType>::DispatchDelayEvent(int64_t cu
 template <typename EventType>
 void CoreTools::TelegramMessageManager<EventType>::DisposeEvent(const Telegram& telegram)
 {
-    auto receiver = telegram.GetReceiver();
-    for (auto id : receiver)
+    for (auto receiver = telegram.GetReceiver(); auto id : receiver)
     {
         EXCEPTION_TRY
         {
             const auto& container = eventRegisterContainer[telegram.GetMessageType()];
 
-            if (registerContainer.find(id) != registerContainer.cend() || container.find(id) != container.cend())
+            if (registerContainer.contains(id) || container.contains(id))
             {
                 DisposeEvent(id, telegram);
             }
@@ -160,24 +158,19 @@ void CoreTools::TelegramMessageManager<EventType>::DisposeAllEvent(const Telegra
         }
         catch (const CoreTools::Error& error)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-                << error
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }
 
 template <typename EventType>
-void CoreTools::TelegramMessageManager<EventType>::DisposeEvent(uint64_t entityID, const Telegram& telegram)
+void CoreTools::TelegramMessageManager<EventType>::DisposeEvent(int64_t entityId, const Telegram& telegram)
 {
-    auto entity = ENTITY_MANAGER_SINGLETON.GetEntity(entityID);
+    const auto entity = ENTITY_MANAGER_SINGLETON.GetEntity(entityId);
 
-    auto eventEntity = boost::polymorphic_pointer_downcast<EventEntity>(entity);
-
-    if (!eventEntity->EventFunction(telegram))
+    if (auto eventEntity = boost::polymorphic_pointer_downcast<EventEntity>(entity); !eventEntity->EventFunction(telegram))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-            << SYSTEM_TEXT("EventFunction 失败");
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("EventFunction 失败"));
     }
 }
 

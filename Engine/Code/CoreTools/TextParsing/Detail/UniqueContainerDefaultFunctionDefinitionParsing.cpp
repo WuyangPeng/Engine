@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -48,7 +48,7 @@ System::String CoreTools::UniqueContainerDefaultFunctionDefinitionParsing::Gener
     content += GenerateContainerZero();
 
     content += GenerateFunctionEndBrackets(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -59,7 +59,7 @@ System::String CoreTools::UniqueContainerDefaultFunctionDefinitionParsing::Gener
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_SizeZero;
+    content += TextParsing::gSizeZero;
 
     return content;
 }
@@ -70,9 +70,9 @@ System::String CoreTools::UniqueContainerDefaultFunctionDefinitionParsing::Gener
 
     auto content = GenerateIndentation(2);
 
-    content += TextParsing::g_ThrowException;
+    content += TextParsing::gThrowException;
     content += GetLowerClassName();
-    content += TextParsing::g_ContainerZero;
+    content += TextParsing::gContainerZero;
 
     return content;
 }
@@ -86,11 +86,11 @@ System::String CoreTools::UniqueContainerDefaultFunctionDefinitionParsing::Gener
     content += GenerateFunctionBeginBrackets(1);
 
     content += GenerateWarnLog(2);
-    content += GenerateRepeatKey(3, TextParsing::g_NotUnique);
-    content += GenerateLogAssert(3);
+    content += GenerateRepeatKey(0, TextParsing::gNotUnique);
+    content += GenerateLogAssert(0);
 
     content += GenerateFunctionEndBrackets(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -101,7 +101,7 @@ System::String CoreTools::UniqueContainerDefaultFunctionDefinitionParsing::Gener
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_SizeGreaterOne;
+    content += TextParsing::gSizeGreaterOne;
 
     return content;
 }
@@ -112,7 +112,7 @@ System::String CoreTools::UniqueContainerDefaultFunctionDefinitionParsing::Gener
 
     auto content = GenerateCSVRowZeroInit();
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += GenerateMakeShared();
 
@@ -125,7 +125,7 @@ System::String CoreTools::UniqueContainerDefaultFunctionDefinitionParsing::Gener
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_CSVRowZeroInit;
+    content += TextParsing::gCSVRowZeroInit;
 
     return content;
 }
@@ -134,14 +134,14 @@ System::String CoreTools::UniqueContainerDefaultFunctionDefinitionParsing::Gener
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto csvHead = GetCSVHead();
+    const auto csvHead = GetCSVHead();
 
     auto content = GenerateIndentation(1);
 
     content += GetLowerClassName();
-    content += TextParsing::g_MakeShared;
+    content += TextParsing::gMakeShared;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_CSVRowParameter;
+    content += TextParsing::gCSVRowParameter;
 
     return content;
 }

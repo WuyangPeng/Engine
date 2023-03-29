@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:27)
+///	引擎测试版本：0.9.0.4 (2023/03/07 11:11)
 
 #include "CommandSetSheetColorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -35,12 +35,12 @@ void CoreTools::CommandSetSheetColorTesting::MainTest()
 
 void CoreTools::CommandSetSheetColorTesting::CommandSetSheetColorTest()
 {
-    auto sheetID = "sheetID"s;
-    auto sheetName = "sheetName"s;
-    auto sheetColor = "sheetColor"s;
-    SimpleCSV::CommandSetSheetColor commandSetSheetColor{ sheetID, sheetName, sheetColor };
+    const auto sheetId = "sheetId"s;
+    const auto sheetName = "sheetName"s;
+    const auto sheetColor = "sheetColor"s;
+    const SimpleCSV::CommandSetSheetColor commandSetSheetColor{ sheetId, sheetName, sheetColor };
 
-    ASSERT_EQUAL(sheetID, commandSetSheetColor.GetSheetID());
+    ASSERT_EQUAL(sheetId, commandSetSheetColor.GetSheetId());
     ASSERT_EQUAL(sheetName, commandSetSheetColor.GetSheetName());
     ASSERT_EQUAL(sheetColor, commandSetSheetColor.GetSheetColor());
 }

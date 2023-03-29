@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 16:23)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 14:48)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_IMPL_H
@@ -15,6 +15,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/LogManager/AppenderManager.h"
 #include "CoreTools/LogManager/LogAppenderIOManager.h"
+#include "CoreTools/LogManager/LogManagerInternalFwd.h"
 
 #include <map>
 
@@ -29,22 +30,13 @@ namespace CoreTools
     public:
         explicit LogImpl(DisableNotThrow disableNotThrow);
 
-#ifdef OPEN_CLASS_INVARIANT
         CLASS_INVARIANT_DECLARE;
-        bool DisabledIsNotExist() const;
-#endif  // OPEN_CLASS_INVARIANT
 
-        void InsertAppender(const String& name, const Appender& appender);
-        void RemoveAppender(const String& name);
-        void LoadConfiguration(const std::string& fileName);
-        void ReloadAppenderFile();
+        void LoadConfiguration(const AnalysisAppenderManager& analysis) noexcept;
 
-        LogAppenderIOManager& OutTrace() noexcept;
-        LogAppenderIOManager& OutDebug() noexcept;
-        LogAppenderIOManager& OutInfo() noexcept;
-        LogAppenderIOManager& OutWarn() noexcept;
-        LogAppenderIOManager& OutError() noexcept;
-        LogAppenderIOManager& OutFatal() noexcept;
+        NODISCARD LogLevel GetMinLogLevelType(LogFilter filter) const;
+
+        void Write(const LogMessage& logMessage);
 
     private:
         using LogAppenderIOManagerSharedPtr = std::shared_ptr<LogAppenderIOManager>;
@@ -54,12 +46,11 @@ namespace CoreTools
     private:
         void InitIOManager();
         void ResetIOManager() noexcept;
-        LogAppenderIOManager& Find(LogLevel type) noexcept;
+        NODISCARD LogAppenderIOManager& Find(LogLevel type);
 
     private:
         AppenderManagerSharedPtr appenderManager;
         LogAppenderIOManagerContainer logAppenderIOManagerContainer;
-        LogAppenderIOManager errorLogAppenderIOManager;
     };
 }
 

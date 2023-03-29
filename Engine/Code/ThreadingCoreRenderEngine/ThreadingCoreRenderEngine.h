@@ -27,7 +27,7 @@
 #include "Imagics/Imagics.h"
 
 #include "Animation/Animation.h"
-#include "ArtificialIntellegence/ArtificialIntellegence.h"
+#include "ArtificialIntelligence/ArtificialIntelligence.h"
 #include "UserInterface/UserInterface.h"
 
 #include "AssistTools/AssistTools.h"

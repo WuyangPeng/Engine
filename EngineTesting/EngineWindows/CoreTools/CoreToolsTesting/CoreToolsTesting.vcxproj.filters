@@ -1509,7 +1509,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandSetSheetVisibilityTesting.h">
       <Filter>TextParsingSuite 头文件\SimpleCSV\Command</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandAddChartsheetTesting.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandAddChartSheetTesting.h">
       <Filter>TextParsingSuite 头文件\SimpleCSV\Command</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandAddSharedStringsTesting.h">
@@ -1524,7 +1524,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetIndexTesting.h">
       <Filter>TextParsingSuite 头文件\SimpleCSV\Query</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetRelsIDTesting.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetRelsIdTesting.h">
       <Filter>TextParsingSuite 头文件\SimpleCSV\Query</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetRelsTargetTesting.h">
@@ -1542,7 +1542,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySharedStringsTesting.h">
       <Filter>TextParsingSuite 头文件\SimpleCSV\Query</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetIDTesting.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetIdTesting.h">
       <Filter>TextParsingSuite 头文件\SimpleCSV\Query</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\XmlDataTesting.h">
@@ -1740,18 +1740,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonGenerateTesting.h">
       <Filter>TextParsingSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\DungonMonsters.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\DungonMonstersDetail.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\DungonParts.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\JsonGenerate\DungonPartsDetail.h">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonRowTesting.h">
       <Filter>TextParsingSuite 头文件</Filter>
     </ClInclude>
@@ -1817,6 +1805,45 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringUtilityTesting.h">
       <Filter>CharacterStringSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVDataTesting.h">
+      <Filter>TextParsingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonTotalGenerateTesting.h">
+      <Filter>TextParsingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\JsonConfigure.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\JsonConfigureContainer.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\JsonConfigureFwd.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\Monsters.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\MonstersDetail.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\Parts.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\PartsDetail.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\Road.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\RoadDetail.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\RunScenes.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\RunScenesDetail.h">
+      <Filter>资源文件\JsonGenerate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2678,7 +2705,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\SimpleCSVExceptionTesting.cpp">
       <Filter>TextParsingSuite 源文件\SimpleCSV</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandAddChartsheetTesting.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandAddChartSheetTesting.cpp">
       <Filter>TextParsingSuite 源文件\SimpleCSV\Command</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandAddSharedStringsTesting.cpp">
@@ -2714,13 +2741,13 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySharedStringsTesting.cpp">
       <Filter>TextParsingSuite 源文件\SimpleCSV\Query</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetIDTesting.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetIdTesting.cpp">
       <Filter>TextParsingSuite 源文件\SimpleCSV\Query</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetIndexTesting.cpp">
       <Filter>TextParsingSuite 源文件\SimpleCSV\Query</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetRelsIDTesting.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetRelsIdTesting.cpp">
       <Filter>TextParsingSuite 源文件\SimpleCSV\Query</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetRelsTargetTesting.cpp">
@@ -2909,12 +2936,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonGenerateTesting.cpp">
       <Filter>TextParsingSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\JsonGenerate\DungonMonsters.cpp">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource\JsonGenerate\DungonParts.cpp">
-      <Filter>资源文件\JsonGenerate</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonRowTesting.cpp">
       <Filter>TextParsingSuite 源文件</Filter>
     </ClCompile>
@@ -2947,6 +2968,27 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringUtilityTesting.cpp">
       <Filter>CharacterStringSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVDataTesting.cpp">
+      <Filter>TextParsingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonTotalGenerateTesting.cpp">
+      <Filter>TextParsingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\JsonGenerate\JsonConfigureContainer.cpp">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\JsonGenerate\Monsters.cpp">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\JsonGenerate\Parts.cpp">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\JsonGenerate\Road.cpp">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\JsonGenerate\RunScenes.cpp">
+      <Filter>资源文件\JsonGenerate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3135,19 +3177,16 @@
     <None Include="Resource\JsonTesting\Log.json">
       <Filter>资源文件\JsonTesting</Filter>
     </None>
-    <None Include="Resource\JsonConfigure\Dungons.json">
-      <Filter>资源文件\JsonConfigure</Filter>
-    </None>
-    <None Include="Resource\JsonConfigure\Elements.json">
+    <None Include="Resource\JsonConfigure\Road.json">
       <Filter>资源文件\JsonConfigure</Filter>
     </None>
     <None Include="Resource\JsonConfigure\RunScenes.json">
       <Filter>资源文件\JsonConfigure</Filter>
     </None>
-    <None Include="Resource\JsonConfigure\DungonMonsters.json">
+    <None Include="Resource\JsonConfigure\Monsters.json">
       <Filter>资源文件\JsonConfigure</Filter>
     </None>
-    <None Include="Resource\JsonConfigure\DungonParts.json">
+    <None Include="Resource\JsonConfigure\Parts.json">
       <Filter>资源文件\JsonConfigure</Filter>
     </None>
   </ItemGroup>

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:03)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 18:09)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,7 +23,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CSVTotalGenerateFwdHeadFile)
 
 System::String CoreTools::CSVTotalGenerateFwdHeadFile::GetFileSuffix() const
 {
-    return TextParsing::g_FwdHeadFileExtensionName.data();
+    return TextParsing::gFwdHeadFileExtensionName.data();
 }
 
 System::String CoreTools::CSVTotalGenerateFwdHeadFile::GetContent() const

@@ -1,42 +1,44 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/06 21:37)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 15:21)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_ASYNCHRONOUS_PARAMETER_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_ASYNCHRONOUS_PARAMETER_H
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "AsynchronousParameterBase.h"
 #include "CoreTools/LogManager/LogManagerFwd.h"
 #include "CoreTools/LogManager/LogMessage.h"
 
 namespace CoreTools
 {
-    class CORE_TOOLS_HIDDEN_DECLARE LogAsynchronousParameter
+    class CORE_TOOLS_HIDDEN_DECLARE LogAsynchronousParameter final : public AsynchronousParameterBase
     {
     public:
         using ClassType = LogAsynchronousParameter;
+        using ParentType = AsynchronousParameterBase;
+
         using String = System::String;
-        using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>;
-        using AppenderManagerWeakPtr = std::weak_ptr<AppenderManager>;
+        using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>; 
 
     public:
-        LogAsynchronousParameter(const LogMessage& message, const AppenderManagerSharedPtr& appenderManager) noexcept;
-        LogAsynchronousParameter(const String& fileName, const LogMessage& message, const AppenderManagerSharedPtr& appenderManager);
+        LogAsynchronousParameter(LogMessage message, AppenderManagerSharedPtr appenderManager) noexcept;
+        LogAsynchronousParameter(String fileName, LogMessage message, AppenderManagerSharedPtr appenderManager) noexcept;
 
-        CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void Write() const;
+        void Write() override;
 
     private:
         String fileName;
         LogMessage message;
-        AppenderManagerWeakPtr appenderManager;
+        AppenderManagerSharedPtr appenderManager;
     };
 }
 

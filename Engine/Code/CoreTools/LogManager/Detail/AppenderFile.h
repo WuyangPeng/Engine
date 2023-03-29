@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/05 0:13)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 14:58)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_FILE_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_FILE_H
@@ -13,7 +13,6 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "AppenderImpl.h"
-#include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/FileManager/FileManagerFwd.h"
 
 #include <string>
@@ -33,29 +32,27 @@ namespace CoreTools
                      LogLevel logLevel,
                      int maxFileSize,
                      bool backup,
-                     const String& extensionName);
+                     String extensionName);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD AppenderType GetAppenderType() const noexcept final;
+        NODISCARD AppenderType GetAppenderType() const noexcept override;
 
-        NODISCARD const AppenderImplSharedPtr Clone() const final;
+        NODISCARD const AppenderImplSharedPtr Clone() const override;
 
-        void Reload() final;
-
-        NODISCARD String GetDirectory() const final;
-        NODISCARD String GetExtensionName() const final;
-        NODISCARD int GetMaxFileSize() const noexcept final;
-        NODISCARD bool IsBackup() const noexcept final;
+        NODISCARD String GetDirectory() const override;
+        NODISCARD String GetExtensionName() const override;
+        NODISCARD int GetMaxFileSize() const noexcept override;
+        NODISCARD bool IsBackup() const noexcept override;
 
     private:
         using OStreamManagerPtr = std::shared_ptr<OFStreamManager>;
 
     private:
-        NODISCARD bool IsExceedMaxSize(PosType increaseSize);
-        void BackupFile();
+        NODISCARD bool IsExceedMaxSize(const OFStreamManager& stream, PosType increaseSize) const;
+        void BackupFile(const String& fullName) const;
 
-        void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) final;
+        void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) const override;
 
         NODISCARD static String GetPrefixName(const String& directory, const String& fileName);
         NODISCARD static String GetFullName(const String& prefixName, const String& extensionName);
@@ -67,10 +64,8 @@ namespace CoreTools
         String directory;
         String prefixName;
         String extensionName;
-        String fullName;
         int maxFileSize;
         bool backup;
-        OStreamManagerPtr streamManager;
     };
 }
 

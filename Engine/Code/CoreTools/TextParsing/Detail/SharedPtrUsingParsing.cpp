@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:28)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:16)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,29 +25,25 @@ CoreTools::SharedPtrUsingParsing::SharedPtrUsingParsingUniquePtr CoreTools::Shar
     {
         case CSVFormatType::TreeMap:
         {
-            return std::make_unique<MapSharedPtrUsingParsing>(indentationCount, className, keyTypeDescribe, TextParsing::g_OriginalMap);
+            return std::make_unique<MapSharedPtrUsingParsing>(indentationCount, className, keyTypeDescribe, TextParsing::gOriginalMap);
         }
-        break;
         case CSVFormatType::HashMap:
         {
-            return std::make_unique<MapSharedPtrUsingParsing>(indentationCount, className, keyTypeDescribe, TextParsing::g_OriginalUnorderedMap);
+            return std::make_unique<MapSharedPtrUsingParsing>(indentationCount, className, keyTypeDescribe, TextParsing::gOriginalUnorderedMap);
         }
-        break;
         case CSVFormatType::Unique:
         {
             return std::make_unique<UniqueSharedPtrUsingParsing>(indentationCount, className);
         }
-        break;
         default:
         {
             return std::make_unique<DefaultSharedPtrUsingParsing>(indentationCount, className);
         }
-        break;
     }
 }
 
-CoreTools::SharedPtrUsingParsing::SharedPtrUsingParsing(int indentationCount, const String& className)
-    : ParentType{ indentationCount }, className{ className }
+CoreTools::SharedPtrUsingParsing::SharedPtrUsingParsing(int indentationCount, String className) noexcept
+    : ParentType{ indentationCount }, className{ std::move(className) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -66,7 +62,7 @@ System::String CoreTools::SharedPtrUsingParsing::GenerateSharedPtr(StringView su
     content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const "s);
     content += className;
     content += suffix;
-    content += TextParsing::g_RightAngleBracketSemicolonNewline;
+    content += TextParsing::gRightAngleBracketSemicolonNewline;
 
     return content;
 }
@@ -80,8 +76,8 @@ System::String CoreTools::SharedPtrUsingParsing::GenerateSharedPtrContainer(Stri
     content += SYSTEM_TEXT("using Container = std::vector<Const"s);
     content += className;
     content += suffix;
-    content += TextParsing::g_SharedPtr;
-    content += TextParsing::g_RightAngleBracketSemicolonNewline;
+    content += TextParsing::gSharedPtr;
+    content += TextParsing::gRightAngleBracketSemicolonNewline;
 
     return content;
 }
@@ -92,12 +88,12 @@ System::String CoreTools::SharedPtrUsingParsing::GenerateSharedPtrMappingContain
 
     content += SYSTEM_TEXT("using MappingContainer = std::"s);
     content += mappingName;
-    content += TextParsing::g_LeftAngleBracket;
+    content += TextParsing::gLeftAngleBracket;
     content += keyTypeDescribe;
     content += SYSTEM_TEXT(", Const"s);
     content += className;
-    content += TextParsing::g_SharedPtr;
-    content += TextParsing::g_RightAngleBracketSemicolonNewline;
+    content += TextParsing::gSharedPtr;
+    content += TextParsing::gRightAngleBracketSemicolonNewline;
 
     return content;
 }

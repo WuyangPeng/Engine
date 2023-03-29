@@ -36,5 +36,5 @@ void ThreadingCoreRenderEngine::VersionTesting::MainTest()
 {
     TestingType version{};
 
-    ASSERT_GREATER_EQUAL(version.GetTCREFullVersion(), g_TCRETestingVersion);
+    ASSERT_GREATER_EQUAL(version.GetTCREFullVersion(), gTCRETestingVersion);
 }

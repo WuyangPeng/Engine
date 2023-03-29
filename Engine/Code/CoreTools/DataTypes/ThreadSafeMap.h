@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 16:05)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/23 14:35)
 
 #ifndef CORE_TOOLS_DATA_TYPE_THREAD_SAFE_MAP_H
 #define CORE_TOOLS_DATA_TYPE_THREAD_SAFE_MAP_H
@@ -47,10 +47,13 @@ namespace CoreTools
         NODISCARD std::vector<Value> GatherAll() const;
 
     private:
-        NODISCARD std::map<Key, Value> GetThreadSafeMap() const;
+        using ContainerType = std::map<Key, Value>;
 
     private:
-        std::map<Key, Value> threadSafeMap;
+        NODISCARD ContainerType GetThreadSafeMap() const;
+
+    private:
+        ContainerType threadSafeMap;
         mutable std::mutex mutex;
     };
 }

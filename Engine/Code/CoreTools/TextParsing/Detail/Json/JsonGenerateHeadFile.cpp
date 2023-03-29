@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:44)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/10 14:00)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -38,14 +38,14 @@ System::String CoreTools::JsonGenerateHeadFile::GetSuffix() const noexcept
 
 System::String CoreTools::JsonGenerateHeadFile::GetFilePrefix() const
 {
-    return String{ TextParsing::g_ForwardSlash };
+    return String{ TextParsing::gForwardSlash };
 }
 
 System::String CoreTools::JsonGenerateHeadFile::GetFileSuffix() const
 {
     auto result = GetSuffix();
 
-    result += TextParsing::g_HeadFileExtensionName;
+    result += TextParsing::gHeadFileExtensionName;
 
     return result;
 }
@@ -56,7 +56,7 @@ System::String CoreTools::JsonGenerateHeadFile::GetContent() const
 
     const auto head = GetJsonHead();
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
     content += GenerateHeaderGuard();
 
     JsonGenerateHead jsonGenerateHead{ head };
@@ -67,7 +67,7 @@ System::String CoreTools::JsonGenerateHeadFile::GetContent() const
     JsonGenerateClassName jsonGenerateClassName{ head };
     content += jsonGenerateClassName.GenerateContainerClassName();
     content += jsonGenerateClassName.GenerateUsing();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     JsonGenerateDefaultFunction jsonGenerateDefaultFunction{ head };
     content += jsonGenerateDefaultFunction.GenerateContainerDefaultFunction();
@@ -96,8 +96,8 @@ System::String CoreTools::JsonGenerateHeadFile::GetContent() const
         content += GenerateInnerNameSpaceEnd();
     }
 
-    content += TextParsing::g_FunctionEndBrackets;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gFunctionEndBrackets;
+    content += TextParsing::gNewlineCharacter;
 
     content += GenerateHeaderGuardEndif();
 
@@ -126,27 +126,21 @@ System::String CoreTools::JsonGenerateHeadFile::GetContent(const JsonNode& jsonN
 {
     String content{};
 
-    const auto className = jsonNode.GetTypeName();
-
-    if (className.empty())
+    if (const auto className = jsonNode.GetTypeName(); className.empty())
     {
         return content;
     }
 
+    content += JsonGenerateClassName::GenerateContainerClassName(jsonNode);
+    content += JsonGenerateClassName::GenerateUsing(jsonNode);
+    content += TextParsing::gNewlineCharacter;
+
+    content += JsonGenerateDefaultFunction::GenerateContainerDefaultFunction(jsonNode);
+
+    content += JsonGenerateGetFunction::GenerateContainerFunction(jsonNode);
+
     const auto head = GetJsonHead();
-
-    JsonGenerateClassName jsonGenerateClassName{ head };
-    content += jsonGenerateClassName.GenerateContainerClassName(jsonNode);
-    content += jsonGenerateClassName.GenerateUsing(jsonNode);
-    content += TextParsing::g_NewlineCharacter;
-
-    JsonGenerateDefaultFunction jsonGenerateDefaultFunction{ head };
-    content += jsonGenerateDefaultFunction.GenerateContainerDefaultFunction(jsonNode);
-
-    JsonGenerateGetFunction jsonGenerateGetFunction{ head };
-    content += jsonGenerateGetFunction.GenerateContainerFunction(jsonNode);
-
-    JsonGenerateMember jsonGenerateMember{ head };
+    const JsonGenerateMember jsonGenerateMember{ head };
     content += jsonGenerateMember.GenerateContainerMember(jsonNode);
 
     return content;

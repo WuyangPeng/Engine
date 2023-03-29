@@ -11,10 +11,10 @@
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/LogManager/Appender.h"
-#include "CoreTools/Time/CustomTime.h"
-#include "CoreTools/LogManager/Log.h"
 #include "CoreTools/Helper/LogMacro.h"
+#include "CoreTools/LogManager/Appender.h"
+#include "CoreTools/LogManager/Log.h"
+#include "CoreTools/Time/CustomTime.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using namespace std::literals;
 
@@ -44,29 +44,17 @@ void CoreTools::LogTesting::LoadConfigurationTest()
 
 void CoreTools::LogTesting::OutTest() noexcept
 {
-    LOG_SINGLETON_APPENDER(Trace, CoreTools)
-        << SYSTEM_TEXT("日志跟踪信息测试")
-        << LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_APPENDER(Trace, CoreTools, SYSTEM_TEXT("日志跟踪信息测试"));
 
-    LOG_SINGLETON_APPENDER(Debug, CoreTools)
-        << SYSTEM_TEXT("日志调试信息测试")
-        << LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_APPENDER(Debug, CoreTools, SYSTEM_TEXT("日志调试信息测试"));
 
-    LOG_SINGLETON_APPENDER(Info, CoreTools)
-        << SYSTEM_TEXT("日志一般信息测试")
-        << LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_APPENDER(Info, CoreTools, SYSTEM_TEXT("日志一般信息测试"));
 
-    LOG_SINGLETON_APPENDER(Warn, CoreTools)
-        << SYSTEM_TEXT("日志警告信息测试")
-        << LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_APPENDER(Warn, CoreTools, SYSTEM_TEXT("日志警告信息测试"));
 
-    LOG_SINGLETON_APPENDER(Error, CoreTools)
-        << SYSTEM_TEXT("日志错误信息测试")
-        << LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_APPENDER(Error, CoreTools, SYSTEM_TEXT("日志错误信息测试"));
 
-    LOG_SINGLETON_APPENDER(Fatal, CoreTools)
-        << SYSTEM_TEXT("日志致命错误信息测试")
-        << LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_APPENDER(Fatal, CoreTools, SYSTEM_TEXT("日志致命错误信息测试"));
 }
 
 void CoreTools::LogTesting::AppenderTest()
@@ -80,8 +68,4 @@ void CoreTools::LogTesting::AppenderTest()
     DeleteFileTools file{ name };
 
     Appender appender{ SYSTEM_TEXT("Log"s), testName, AppenderPrint::All, LogLevel::Trace, 100000, true, extensionName };
-
-    LOG_SINGLETON.InsertAppender(testName, appender);
-    LOG_SINGLETON.RemoveAppender(testName);
-    LOG_SINGLETON.ReloadAppenderFile();
 }

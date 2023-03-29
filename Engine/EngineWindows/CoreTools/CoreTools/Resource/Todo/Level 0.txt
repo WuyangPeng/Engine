@@ -1,9 +1,9 @@
 TODO Level 0
  
-0.9.0.3
+0.9.0.4
 
 1.  （Helper）将游戏中对类不变式和断言的宏改成USER_CLASS_IS_VALID、USER_CLASS_IS_VALID和USER_ASSERTION相关。 
-2.  （Base）使用UniqueIDManager来管理唯一ID，替换原先的ID。
+2.  （Base）使用UniqueIDManager来管理唯一id，替换原先的id。
 3.  （Base）单例在静态库和动态库混用时产生问题，引擎静态链接游戏动态链接时，Game dll增加创建引擎单例函数，由exe调用。
 		    引擎动态链接游戏静态链接时，Game dll增加创建游戏单例函数，由exe调用。
 4.	（DataTypes）实现一个无锁数据结构。

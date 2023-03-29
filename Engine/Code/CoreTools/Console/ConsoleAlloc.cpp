@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/03/01 15:29)
+///	引擎版本：0.9.0.4 (2023/03/22 10:45)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -87,9 +87,7 @@ void CoreTools::ConsoleAlloc::CloseConsole() const noexcept
 
     if (!System::FreeConsole())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-            << SYSTEM_TEXT("关闭控制台错误。")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("关闭控制台错误。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -97,8 +95,6 @@ void CoreTools::ConsoleAlloc::CloseConsole(FILE* file) noexcept
 {
     if (file != nullptr && !System::CloseConsole(file))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-            << SYSTEM_TEXT("释放控制台文件描述符错误。")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("释放控制台文件描述符错误。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:26)
+///	引擎测试版本：0.9.0.4 (2023/03/07 11:11)
 
 #include "CommandCloneSheetTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -35,10 +35,10 @@ void CoreTools::CommandCloneSheetTesting::MainTest()
 
 void CoreTools::CommandCloneSheetTesting::CommandCloneSheetTest()
 {
-    auto sheetID = "sheetID"s;
-    auto cloneName = "cloneName"s;
-    SimpleCSV::CommandCloneSheet commandCloneSheet{ sheetID, cloneName };
+    const auto sheetID = "sheetID"s;
+    const auto cloneName = "cloneName"s;
+    const SimpleCSV::CommandCloneSheet commandCloneSheet{ sheetID, cloneName };
 
-    ASSERT_EQUAL(sheetID, commandCloneSheet.GetSheetID());
+    ASSERT_EQUAL(sheetID, commandCloneSheet.GetSheetId());
     ASSERT_EQUAL(cloneName, commandCloneSheet.GetCloneName());
 }

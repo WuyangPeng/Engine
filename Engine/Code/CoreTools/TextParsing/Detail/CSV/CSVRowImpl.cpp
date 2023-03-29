@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 20:23)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 18:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -26,11 +26,8 @@
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-using std::deque;
-using std::vector;
-
-CoreTools::CSVRowImpl::CSVRowImpl(const CSVHead& csvHead, const String& rowContent)
-    : csvHead{ csvHead }, rowContent{ rowContent }, rowType{}
+CoreTools::CSVRowImpl::CSVRowImpl(CSVHead csvHead, String rowContent)
+    : csvHead{ std::move(csvHead) }, rowContent{ std::move(rowContent) }, rowType{}
 {
     RowParsing();
 
@@ -39,7 +36,7 @@ CoreTools::CSVRowImpl::CSVRowImpl(const CSVHead& csvHead, const String& rowConte
 
 void CoreTools::CSVRowImpl::RowParsing()
 {
-    if (rowContent.find(TextParsing::g_StringComma) != String::npos)
+    if (rowContent.find(TextParsing::gStringComma) != String::npos)
     {
         StringExistCommaParsing();
     }
@@ -58,7 +55,7 @@ void CoreTools::CSVRowImpl::StringNotExistCommaParsing()
     {
         if (csvHead.GetDataType(index) == CSVDataType::String)
         {
-            boost::algorithm::trim_if(value, boost::algorithm::is_any_of(TextParsing::g_QuotationMarks));
+            boost::algorithm::trim_if(value, boost::algorithm::is_any_of(TextParsing::gQuotationMarks));
         }
 
         if (value.empty())
@@ -77,19 +74,19 @@ void CoreTools::CSVRowImpl::StringExistCommaParsing()
     size_t lastLocation{ 0u };
     auto index = 0;
 
-    for (auto location = rowContent.find(TextParsing::g_Comma); location != String::npos; location = rowContent.find(TextParsing::g_Comma, lastLocation))
+    for (auto location = rowContent.find(TextParsing::gComma); location != String::npos; location = rowContent.find(TextParsing::gComma, lastLocation))
     {
         lastCache += rowContent.substr(lastLocation, location - lastLocation);
-        if (!lastCache.empty() && lastCache.back() == TextParsing::g_BackSlash)
+        if (!lastCache.empty() && lastCache.back() == TextParsing::gBackSlash)
         {
-            lastCache += TextParsing::g_Comma;
+            lastCache += TextParsing::gComma;
         }
         else
         {
             if (csvHead.GetDataType(index) == CSVDataType::String)
             {
-                boost::algorithm::trim_if(lastCache, boost::algorithm::is_any_of(TextParsing::g_QuotationMarks));
-                boost::replace_all(lastCache, TextParsing::g_StringComma, TextParsing::g_Comma);
+                boost::algorithm::trim_if(lastCache, boost::algorithm::is_any_of(TextParsing::gQuotationMarks));
+                boost::replace_all(lastCache, TextParsing::gStringComma, TextParsing::gComma);
             }
 
             if (lastCache.empty())
@@ -105,8 +102,7 @@ void CoreTools::CSVRowImpl::StringExistCommaParsing()
         lastLocation = location + 1;
     }
 
-    auto remaining = rowContent.substr(lastLocation);
-    if (remaining.empty())
+    if (auto remaining = rowContent.substr(lastLocation); remaining.empty())
     {
         rowType.emplace(csvHead.GetVariableName(index), csvHead.GetDefaultValue(index));
     }
@@ -129,8 +125,7 @@ System::String CoreTools::CSVRowImpl::GetString(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = rowType.find(field);
-    if (iter != rowType.cend())
+    if (const auto iter = rowType.find(field); iter != rowType.cend())
     {
         return StringConversion::Utf8ConversionStandard(iter->second);
     }
@@ -144,22 +139,19 @@ bool CoreTools::CSVRowImpl::GetBool(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = rowType.find(field);
-    if (iter != rowType.cend())
+    if (const auto iter = rowType.find(field); iter != rowType.cend())
     {
-        const auto& result = iter->second;
-
-        if (result.empty() || result == TextParsing::g_False)
+        if (const auto& result = iter->second; result.empty() || result == TextParsing::gFalse)
         {
             return false;
         }
-        else if (result == TextParsing::g_True)
+        else if (result == TextParsing::gTrue)
         {
             return true;
         }
         else
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("bool 值不合法。\n"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("bool 值不合法。\n"s))
         }
     }
     else
@@ -172,11 +164,9 @@ System::TChar CoreTools::CSVRowImpl::GetChar(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = rowType.find(field);
-    if (iter != rowType.cend())
+    if (const auto iter = rowType.find(field); iter != rowType.cend())
     {
-        const auto& result = iter->second;
-        if (result.empty())
+        if (const auto& result = iter->second; result.empty())
         {
             return SYSTEM_TEXT('\0');
         }
@@ -216,8 +206,7 @@ System::String CoreTools::CSVRowImpl::GetEnumString(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = rowType.find(field);
-    if (iter != rowType.cend())
+    if (const auto iter = rowType.find(field); iter != rowType.cend())
     {
         return iter->second;
     }
@@ -231,13 +220,11 @@ CoreTools::CSVRowImpl::VectorType CoreTools::CSVRowImpl::GetVectorType(const Str
 {
     VectorType vectorType{};
 
-    const auto iter = rowType.find(field);
-    if (iter != rowType.cend())
+    if (const auto iter = rowType.find(field); iter != rowType.cend())
     {
-        const auto& result = iter->second;
-        if (!result.empty())
+        if (const auto& result = iter->second; !result.empty())
         {
-            boost::algorithm::split(vectorType, result, boost::is_any_of(TextParsing::g_Or), boost::token_compress_on);
+            split(vectorType, result, boost::is_any_of(TextParsing::gOr), boost::token_compress_on);
         }
     }
 
@@ -248,17 +235,10 @@ CoreTools::Vector2 CoreTools::CSVRowImpl::GetVector2(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto column = GetVectorType(field);
-
-    if (2 <= column.size())
+    if (const auto column = GetVectorType(field); 2 <= column.size())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        return Vector2{ boost::lexical_cast<double>(column[0]),
-                        boost::lexical_cast<double>(column[1]) };
-
-#include STSTEM_WARNING_POP
+        return Vector2{ boost::lexical_cast<double>(column.at(0)),
+                        boost::lexical_cast<double>(column.at(1)) };
     }
 
     return Vector2{};
@@ -268,18 +248,11 @@ CoreTools::Vector3 CoreTools::CSVRowImpl::GetVector3(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto column = GetVectorType(field);
-
-    if (3 <= column.size())
+    if (const auto column = GetVectorType(field); 3 <= column.size())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        return Vector3{ boost::lexical_cast<double>(column[0]),
-                        boost::lexical_cast<double>(column[1]),
-                        boost::lexical_cast<double>(column[2]) };
-
-#include STSTEM_WARNING_POP
+        return Vector3{ boost::lexical_cast<double>(column.at(0)),
+                        boost::lexical_cast<double>(column.at(1)),
+                        boost::lexical_cast<double>(column.at(2)) };
     }
 
     return Vector3{};
@@ -289,19 +262,12 @@ CoreTools::Vector4 CoreTools::CSVRowImpl::GetVector4(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto column = GetVectorType(field);
-
-    if (4 <= column.size())
+    if (const auto column = GetVectorType(field); 4 <= column.size())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        return Vector4{ boost::lexical_cast<double>(column[0]),
-                        boost::lexical_cast<double>(column[1]),
-                        boost::lexical_cast<double>(column[2]),
-                        boost::lexical_cast<double>(column[3]) };
-
-#include STSTEM_WARNING_POP
+        return Vector4{ boost::lexical_cast<double>(column.at(0)),
+                        boost::lexical_cast<double>(column.at(1)),
+                        boost::lexical_cast<double>(column.at(2)),
+                        boost::lexical_cast<double>(column.at(3)) };
     }
 
     return Vector4{};
@@ -311,17 +277,10 @@ CoreTools::IntVector2 CoreTools::CSVRowImpl::GetIntVector2(const String& field) 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto column = GetVectorType(field);
-
-    if (2 <= column.size())
+    if (const auto column = GetVectorType(field); 2 <= column.size())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        return IntVector2{ boost::lexical_cast<int>(column[0]),
-                           boost::lexical_cast<int>(column[1]) };
-
-#include STSTEM_WARNING_POP
+        return IntVector2{ boost::lexical_cast<int>(column.at(0)),
+                           boost::lexical_cast<int>(column.at(1)) };
     }
 
     return IntVector2{};
@@ -331,18 +290,11 @@ CoreTools::IntVector3 CoreTools::CSVRowImpl::GetIntVector3(const String& field) 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto column = GetVectorType(field);
-
-    if (3 <= column.size())
+    if (const auto column = GetVectorType(field); 3 <= column.size())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        return IntVector3{ boost::lexical_cast<int>(column[0]),
-                           boost::lexical_cast<int>(column[1]),
-                           boost::lexical_cast<int>(column[2]) };
-
-#include STSTEM_WARNING_POP
+        return IntVector3{ boost::lexical_cast<int>(column.at(0)),
+                           boost::lexical_cast<int>(column.at(1)),
+                           boost::lexical_cast<int>(column.at(2)) };
     }
 
     return IntVector3{};
@@ -352,19 +304,12 @@ CoreTools::IntVector4 CoreTools::CSVRowImpl::GetIntVector4(const String& field) 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto column = GetVectorType(field);
-
-    if (4 <= column.size())
+    if (const auto column = GetVectorType(field); 4 <= column.size())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        return IntVector4{ boost::lexical_cast<int>(column[0]),
-                           boost::lexical_cast<int>(column[1]),
-                           boost::lexical_cast<int>(column[2]),
-                           boost::lexical_cast<int>(column[3]) };
-
-#include STSTEM_WARNING_POP
+        return IntVector4{ boost::lexical_cast<int>(column.at(0)),
+                           boost::lexical_cast<int>(column.at(1)),
+                           boost::lexical_cast<int>(column.at(2)),
+                           boost::lexical_cast<int>(column.at(3)) };
     }
 
     return IntVector4{};
@@ -374,14 +319,11 @@ CoreTools::CSVRowImpl::ArrayType CoreTools::CSVRowImpl::GetArrayType(const Strin
 {
     ArrayType arrayType{};
 
-    const auto iter = rowType.find(field);
-    if (iter != rowType.cend())
+    if (const auto iter = rowType.find(field); iter != rowType.cend())
     {
-        const auto& result = iter->second;
-
-        if (!result.empty())
+        if (const auto& result = iter->second; !result.empty())
         {
-            boost::algorithm::split(arrayType, result, boost::is_any_of(TextParsing::g_And), boost::token_compress_on);
+            split(arrayType, result, boost::is_any_of(TextParsing::gAnd), boost::token_compress_on);
         }
     }
 
@@ -394,21 +336,19 @@ CoreTools::CSVRowImpl::BoolContainer CoreTools::CSVRowImpl::GetBoolArray(const S
 
     BoolContainer result{};
 
-    const auto column = GetArrayType(field);
-
-    for (const auto& value : column)
+    for (const auto column = GetArrayType(field); const auto& value : column)
     {
-        if (value.empty() || value == TextParsing::g_False)
+        if (value.empty() || value == TextParsing::gFalse)
         {
             result.emplace_back(false);
         }
-        else if (value == TextParsing::g_True)
+        else if (value == TextParsing::gTrue)
         {
             result.emplace_back(true);
         }
         else
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("bool 值不合法。\n"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("bool 值不合法。\n"s))
         }
     }
 
@@ -421,9 +361,7 @@ CoreTools::CSVRowImpl::CharContainer CoreTools::CSVRowImpl::GetCharArray(const S
 
     CharContainer result{};
 
-    const auto column = GetArrayType(field);
-
-    for (const auto& value : column)
+    for (const auto column = GetArrayType(field); const auto& value : column)
     {
         if (value.empty())
         {
@@ -466,11 +404,11 @@ CoreTools::CSVRowImpl::StringContainer CoreTools::CSVRowImpl::GetEnumStringArray
     return GetArrayType(field);
 }
 
-CoreTools::CSVRowImpl::VectorType CoreTools::CSVRowImpl::GetSplit(const String& column) const
+CoreTools::CSVRowImpl::VectorType CoreTools::CSVRowImpl::GetSplit(const String& column)
 {
     VectorType result{};
 
-    boost::algorithm::split(result, column, boost::is_any_of(TextParsing::g_Or), boost::token_compress_on);
+    split(result, column, boost::is_any_of(TextParsing::gOr), boost::token_compress_on);
 
     return result;
 }
@@ -481,9 +419,7 @@ CoreTools::CSVRowImpl::Vector2Container CoreTools::CSVRowImpl::GetVector2Array(c
 
     Vector2Container result{};
 
-    const auto column = GetArrayType(field);
-
-    for (const auto& value : column)
+    for (const auto column = GetArrayType(field); const auto& value : column)
     {
         const auto& single = GetSplit(value);
 
@@ -499,9 +435,7 @@ CoreTools::CSVRowImpl::Vector3Container CoreTools::CSVRowImpl::GetVector3Array(c
 
     Vector3Container result{};
 
-    const auto column = GetArrayType(field);
-
-    for (const auto& value : column)
+    for (const auto column = GetArrayType(field); const auto& value : column)
     {
         const auto& single = GetSplit(value);
 
@@ -517,9 +451,7 @@ CoreTools::CSVRowImpl::Vector4Container CoreTools::CSVRowImpl::GetVector4Array(c
 
     Vector4Container result{};
 
-    const auto column = GetArrayType(field);
-
-    for (const auto& value : column)
+    for (const auto column = GetArrayType(field); const auto& value : column)
     {
         const auto& single = GetSplit(value);
 
@@ -538,9 +470,7 @@ CoreTools::CSVRowImpl::IntVector2Container CoreTools::CSVRowImpl::GetIntVector2A
 
     IntVector2Container result{};
 
-    const auto column = GetArrayType(field);
-
-    for (const auto& value : column)
+    for (const auto column = GetArrayType(field); const auto& value : column)
     {
         const auto& single = GetSplit(value);
 
@@ -556,9 +486,8 @@ CoreTools::CSVRowImpl::IntVector3Container CoreTools::CSVRowImpl::GetIntVector3A
 
     IntVector3Container result{};
 
-    const auto column = GetArrayType(field);
-
-    for (const auto& value : column)
+    for (const auto column = GetArrayType(field);
+         const auto& value : column)
     {
         const auto& single = GetSplit(value);
 
@@ -574,9 +503,7 @@ CoreTools::CSVRowImpl::IntVector4Container CoreTools::CSVRowImpl::GetIntVector4A
 
     IntVector4Container result{};
 
-    const auto column = GetArrayType(field);
-
-    for (const auto& value : column)
+    for (const auto column = GetArrayType(field); const auto& value : column)
     {
         const auto& single = GetSplit(value);
 

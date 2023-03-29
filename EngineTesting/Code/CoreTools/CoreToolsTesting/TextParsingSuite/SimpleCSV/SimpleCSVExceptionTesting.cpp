@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:43)
+///	引擎测试版本：0.9.0.4 (2023/03/08 16:38)
 
 #include "SimpleCSVExceptionTesting.h"
 #include "System/Windows/Flags/PlatformErrorFlags.h"
@@ -63,11 +63,11 @@ void CoreTools::SimpleCSVExceptionTesting::ThrowSimpleCSVLastErrorExceptionMulti
 
 void CoreTools::SimpleCSVExceptionTesting::SimpleCSVExceptionTest()
 {
-    LastError lastError{};
+    const LastError lastError{};
     const auto errorMessage = SYSTEM_TEXT("测试抛出CSV异常。"s);
     constexpr auto csvType = SimpleCSV::CSVExceptionType::CellAddress;
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
-    SimpleCSV::SimpleCSVException simpleCSVException{ functionDescribed, lastError, csvType, errorMessage };
+    const SimpleCSV::SimpleCSVException simpleCSVException{ functionDescribed, lastError, csvType, errorMessage };
 
     ASSERT_UNEQUAL(simpleCSVException.GetError().find(errorMessage), System::String::npos);
     ASSERT_ENUM_EQUAL(csvType, simpleCSVException.GetErrorCode());
@@ -80,7 +80,7 @@ void CoreTools::SimpleCSVExceptionTesting::SimpleCSVLastErrorExceptionTest()
     constexpr auto csvType = SimpleCSV::CSVExceptionType::CellAddress;
     const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
     constexpr auto lastError = System::WindowError::NoAccess;
-    SimpleCSV::SimpleCSVException simpleCSVException{ functionDescribed, lastError, csvType, errorMessage };
+    const SimpleCSV::SimpleCSVException simpleCSVException{ functionDescribed, lastError, csvType, errorMessage };
 
     ASSERT_UNEQUAL(simpleCSVException.GetError().find(errorMessage), System::String::npos);
     ASSERT_ENUM_EQUAL(csvType, simpleCSVException.GetErrorCode());

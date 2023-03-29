@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:58)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:43)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,7 +19,7 @@
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
 CoreTools::DefaultFunctionDefinitionParsing::DefaultFunctionDefinitionParsing(const CSVHead& csvHead, const String& className)
-    : ParentType{ 0 }, m_CSVHead{ csvHead }, className{ className }
+    : ParentType{ 0 }, head{ csvHead }, className{ className }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -30,14 +30,14 @@ System::String CoreTools::DefaultFunctionDefinitionParsing::GenerateConstructor(
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = m_CSVHead.GetNameSpace();
+    auto content = head.GetNameSpace();
 
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += className;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += className;
     content += parameter;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -46,13 +46,13 @@ System::String CoreTools::DefaultFunctionDefinitionParsing::GenerateClassInvaria
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    String content{ TextParsing::g_ClassInvariantStubDefine };
+    String content{ TextParsing::gClassInvariantStubDefine };
 
-    content += m_CSVHead.GetNameSpace();
-    content += TextParsing::g_Comma;
-    content += TextParsing::g_Space;
+    content += head.GetNameSpace();
+    content += TextParsing::gComma;
+    content += TextParsing::gSpace;
     content += className;
-    content += TextParsing::g_RightBracket;
+    content += TextParsing::gRightBracket;
 
     return content;
 }
@@ -61,21 +61,21 @@ CoreTools::CSVHead CoreTools::DefaultFunctionDefinitionParsing::GetCSVHead() con
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CSVHead;
+    return head;
 }
 
 int CoreTools::DefaultFunctionDefinitionParsing::GetCSVHeadCount() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CSVHead.GetCount();
+    return head.GetCount();
 }
 
 bool CoreTools::DefaultFunctionDefinitionParsing::HasCSVHeadScope() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CSVHead.HasScope();
+    return head.HasScope();
 }
 
 System::String CoreTools::DefaultFunctionDefinitionParsing::GetCSVClassName() const
@@ -89,5 +89,5 @@ System::String CoreTools::DefaultFunctionDefinitionParsing::GetNameSpace() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CSVHead.GetNameSpace();
+    return head.GetNameSpace();
 }

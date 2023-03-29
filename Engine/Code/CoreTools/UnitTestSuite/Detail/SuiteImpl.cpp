@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/LogManager/LogAsynchronous.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 #include <algorithm>
@@ -163,5 +164,5 @@ void CoreTools::SuiteImpl::PrintRunUnitTest()
 
     const auto runSuite = "正在运行测试套件 \""s + GetName() + "\"。\n"s;
 
-    GetStream() << runSuite;
+    LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), runSuite);
 }

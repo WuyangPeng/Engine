@@ -54,9 +54,7 @@ void Rendering::RendererDataImpl::LoadConfiguration(const std::string& fileName)
     }
     catch (const ptree_error& error)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-            << error.what()
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

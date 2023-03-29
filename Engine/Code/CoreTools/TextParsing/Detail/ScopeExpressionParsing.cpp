@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:28)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,12 +16,12 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::ScopeExpressionParsing::ScopeExpressionParsing(const String& scopeExpression, const String& variableNameExpression)
-    : scopeExpression{ scopeExpression }, variableNameExpression{ variableNameExpression }
+CoreTools::ScopeExpressionParsing::ScopeExpressionParsing(const String& scopeExpression, String variableNameExpression)
+    : scopeExpression{ scopeExpression }, variableNameExpression{ std::move(variableNameExpression) }
 {
     if (scopeExpression.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("范围表达式为空。\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("范围表达式为空。\n"s))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -49,67 +49,61 @@ System::String CoreTools::ScopeExpressionParsing::Parsing() const
 
     const auto scopeExpressionResult = GetScopeExpressionResult();
 
-    const auto firstChar = scopeExpression.front();
-
-    switch (firstChar)
+    switch (const auto firstChar = scopeExpression.front(); firstChar)
     {
-        case TextParsing::g_LeftSquareBrackets:
+        case TextParsing::gLeftSquareBrackets:
         {
             return GetClosedInterval(scopeExpressionResult);
         }
-        break;
-        case TextParsing::g_LeftBrackets:
+        case TextParsing::gLeftBrackets:
         {
             return GetOpenInterval(scopeExpressionResult);
         }
-        break;
-        case TextParsing::g_RightAngleBracket:
+        case TextParsing::gRightAngleBracket:
         {
             return GetGreater(scopeExpressionResult);
         }
-        break;
-        case TextParsing::g_LeftAngleBracket:
+        case TextParsing::gLeftAngleBracket:
         {
             return GetLess(scopeExpressionResult);
         }
-        break;
         default:
         {
             return String{};
         }
-        break;
     }
 }
 
 CoreTools::ScopeExpressionParsing::SplitType CoreTools::ScopeExpressionParsing::GetScopeExpressionResult() const
 {
     SplitType scopeExpressionResult{};
-    boost::algorithm::split(scopeExpressionResult, scopeExpression, boost::is_any_of(TextParsing::g_ScopeExpressionSplit), boost::token_compress_on);
+    split(scopeExpressionResult, scopeExpression, boost::is_any_of(TextParsing::gScopeExpressionSplit), boost::token_compress_on);
 
-    scopeExpressionResult.erase(std::remove(scopeExpressionResult.begin(), scopeExpressionResult.end(), String{}),
-                                scopeExpressionResult.end());
+    const auto result = std::ranges::remove(scopeExpressionResult, String{});
+
+    scopeExpressionResult.erase(result.begin(), result.end());
 
     return scopeExpressionResult;
 }
 
 System::String CoreTools::ScopeExpressionParsing::GetClosedInterval(const SplitType& scopeExpressionResult) const
 {
-    return GetInterval(scopeExpressionResult, TextParsing::g_LessEqual);
+    return GetInterval(scopeExpressionResult, TextParsing::gLessEqual);
 }
 
 System::String CoreTools::ScopeExpressionParsing::GetOpenInterval(const SplitType& scopeExpressionResult) const
 {
-    return GetInterval(scopeExpressionResult, TextParsing::g_Less);
+    return GetInterval(scopeExpressionResult, TextParsing::gLess);
 }
 
 System::String CoreTools::ScopeExpressionParsing::GetInterval(const SplitType& scopeExpressionResult, const StringView& compare) const
 {
-    String result{ TextParsing::g_LeftBrackets };
+    String result{ TextParsing::gLeftBrackets };
 
     result += scopeExpressionResult.at(0);
     result += compare;
     result += variableNameExpression;
-    result += TextParsing::g_ExpressionAnd;
+    result += TextParsing::gExpressionAnd;
 
     result += GetEndInterval(scopeExpressionResult);
 
@@ -124,13 +118,13 @@ System::String CoreTools::ScopeExpressionParsing::GetGreater(const SplitType& sc
 
     result += scopeExpressionResult.at(0);
 
-    if (nextChar == TextParsing::g_equalSignChar)
+    if (nextChar == TextParsing::gEqualSignChar)
     {
-        result += TextParsing::g_GreaterEqual;
+        result += TextParsing::gGreaterEqual;
     }
     else
     {
-        result += TextParsing::g_Greater;
+        result += TextParsing::gGreater;
     }
 
     result += variableNameExpression;
@@ -146,13 +140,13 @@ System::String CoreTools::ScopeExpressionParsing::GetLess(const SplitType& scope
 
     result += scopeExpressionResult.at(0);
 
-    if (nextChar == TextParsing::g_equalSignChar)
+    if (nextChar == TextParsing::gEqualSignChar)
     {
-        result += TextParsing::g_LessEqual;
+        result += TextParsing::gLessEqual;
     }
     else
     {
-        result += TextParsing::g_Less;
+        result += TextParsing::gLess;
     }
 
     result += variableNameExpression;
@@ -164,20 +158,19 @@ System::String CoreTools::ScopeExpressionParsing::GetEndInterval(const SplitType
 {
     String result{};
 
-    const auto lastChar = scopeExpression.back();
-    if (lastChar == TextParsing::g_RightSquareBrackets)
+    if (const auto lastChar = scopeExpression.back(); lastChar == TextParsing::gRightSquareBrackets)
     {
         result += variableNameExpression;
-        result += TextParsing::g_LessEqual;
+        result += TextParsing::gLessEqual;
         result += scopeExpressionResult.at(1);
-        result += TextParsing::g_RightBrackets;
+        result += TextParsing::gRightBrackets;
     }
-    else if (lastChar == TextParsing::g_RightBrackets)
+    else if (lastChar == TextParsing::gRightBrackets)
     {
         result += variableNameExpression;
-        result += TextParsing::g_Less;
+        result += TextParsing::gLess;
         result += scopeExpressionResult.at(1);
-        result += TextParsing::g_RightBrackets;
+        result += TextParsing::gRightBrackets;
     }
 
     return result;

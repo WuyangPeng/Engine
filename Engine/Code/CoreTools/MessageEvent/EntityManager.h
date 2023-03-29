@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/26 13:04)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/29 13:35)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_H
 #define CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_H
@@ -26,7 +26,7 @@ CORE_TOOLS_NON_COPY_EXPORT_IMPL(EntityManagerImpl);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE EntityManager final : public CoreTools::Singleton<EntityManager>
+    class CORE_TOOLS_DEFAULT_DECLARE EntityManager final : public Singleton<EntityManager>
     {
     public:
         NON_COPY_TYPE_DECLARE(EntityManager);
@@ -40,19 +40,19 @@ namespace CoreTools
         };
 
     public:
-        explicit EntityManager(MAYBE_UNUSED EntityManagerCreate entityManagerCreate);
+        explicit EntityManager(EntityManagerCreate entityManagerCreate);
 
         static void Create();
         static void Destroy() noexcept;
 
-        SINGLETON_GET_PTR_DECLARE(EntityManager);
+        SINGLETON_GET_PTR_DECLARE(EntityManager)
 
         CLASS_INVARIANT_DECLARE;
 
     public:
         NODISCARD bool Register(const EntitySharedPtr& entity);
-        NODISCARD bool Unregister(uint64_t entityID);
-        NODISCARD EntitySharedPtr GetEntity(uint64_t entityID) const;
+        NODISCARD bool UnRegister(int64_t entityId);
+        NODISCARD EntitySharedPtr GetEntity(int64_t entityId) const;
 
         template <typename EntityType, typename ResultType = EntityType, typename... Args>
         NODISCARD std::shared_ptr<ResultType> MakeEntity(Args&&... args);

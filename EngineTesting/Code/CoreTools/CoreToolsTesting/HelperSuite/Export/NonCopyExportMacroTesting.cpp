@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/NonCopy/AnimationNonCopyMacro.h"
-#include "Toolset/CoreTools/ExportTest/CoreTools/NonCopy/ArtificialIntellegenceNonCopyMacro.h"
+#include "Toolset/CoreTools/ExportTest/CoreTools/NonCopy/ArtificialIntelligenceNonCopyMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/NonCopy/AssistToolsNonCopyMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/NonCopy/CoreToolsNonCopyMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/NonCopy/DatabaseNonCopyMacro.h"
@@ -57,7 +57,7 @@ void CoreTools::NonCopyExportMacroTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(NonCopyExportTest<Physics::PhysicsNonCopyMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(NonCopyExportTest<Imagics::ImagicsNonCopyMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(NonCopyExportTest<Animation::AnimationNonCopyMacro>);
-    ASSERT_NOT_THROW_EXCEPTION_0(NonCopyExportTest<ArtificialIntellegence::ArtificialIntellegenceNonCopyMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(NonCopyExportTest<ArtificialIntelligence::ArtificialIntelligenceNonCopyMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(NonCopyExportTest<UserInterface::UserInterfaceNonCopyMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(NonCopyExportTest<AssistTools::AssistToolsNonCopyMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(NonCopyExportTest<Framework::FrameworkNonCopyMacro>);

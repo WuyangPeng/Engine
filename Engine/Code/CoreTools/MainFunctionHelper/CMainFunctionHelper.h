@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/29 22:12)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 16:37)
 
 #ifndef CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_HELPER_H
 #define CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_HELPER_H
@@ -47,7 +47,7 @@ namespace CoreTools
 
     private:
         void InitSingleton();
-        void InitUniqueIDManager();
+        void InitUniqueIdManager();
         void InitLog();
         void GenerateStream();
         void InitStreamLocale();
@@ -55,7 +55,7 @@ namespace CoreTools
         void DestroySingleton() noexcept;
         void DestroyStream() noexcept;
         void DestroyLog() noexcept;
-        void DestroyUniqueIDManager() noexcept;
+        void DestroyUniqueIdManager() noexcept;
 
         NODISCARD virtual int DoRun() = 0;
 
@@ -63,7 +63,7 @@ namespace CoreTools
         enum class ScheduleType
         {
             Failure = 0,
-            UniqueIDManager = 1,
+            UniqueIdManager = 1,
             Log = 2,
             Max = 3,
         };

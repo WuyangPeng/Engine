@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:23)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,27 +16,26 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-using std::vector;
 using namespace std::literals;
 
-CoreTools::EnumHeadFileParsing::EnumHeadFileParsing(const CSVHead& csvHead, const CSVContent& csvContent, const String& className)
-    : ParentType{ 0 }, csvHead{ csvHead }, csvContent{ csvContent }, className{ className }
+CoreTools::EnumHeadFileParsing::EnumHeadFileParsing(CSVHead csvHead, CSVContent csvContent, String className) noexcept
+    : ParentType{ 0 }, csvHead{ std::move(csvHead) }, csvContent{ std::move(csvContent) }, className{ std::move(className) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, EnumHeadFileParsing)
 
-System::String CoreTools::EnumHeadFileParsing::GenerateIOStreamHead() const
+System::String CoreTools::EnumHeadFileParsing::GenerateIoStreamHead() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     String content{};
 
-    if (HasIOStreamOperator())
+    if (HasIoStreamOperator())
     {
-        content += TextParsing::g_IOStreamInclude;
-        content += TextParsing::g_NewlineCharacter;
+        content += TextParsing::gIoStreamInclude;
+        content += TextParsing::gNewlineCharacter;
     }
 
     return content;
@@ -46,9 +45,9 @@ System::String CoreTools::EnumHeadFileParsing::GenerateEnumContent() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto idIndex = csvHead.GetDataIndex(TextParsing::g_EnumIDDescribe);
-    const auto nameIndex = csvHead.GetDataIndex(TextParsing::g_EnumNameDescribe);
-    const auto describeIndex = csvHead.GetDataIndex(TextParsing::g_EnumDescribe);
+    const auto idIndex = csvHead.GetDataIndex(TextParsing::gEnumIdDescribe);
+    const auto nameIndex = csvHead.GetDataIndex(TextParsing::gEnumNameDescribe);
+    const auto describeIndex = csvHead.GetDataIndex(TextParsing::gEnumDescribe);
 
     String content{};
 
@@ -61,7 +60,7 @@ System::String CoreTools::EnumHeadFileParsing::GenerateEnumContent() const
     }
 
     content += GenerateClassEndBrackets(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -70,13 +69,13 @@ System::String CoreTools::EnumHeadFileParsing::GetEnumVariableContent(const Stri
 {
     const auto result = Parsing::GetSplitComma(column);
 
-    auto id = result.at(idIndex);
+    const auto& id = result.at(idIndex);
 
     auto name = result.at(nameIndex);
-    boost::algorithm::trim_if(name, boost::is_any_of(TextParsing::g_QuotationMarks));
+    trim_if(name, boost::is_any_of(TextParsing::gQuotationMarks));
 
     auto describe = StringConversion::Utf8ConversionStandard(result.at(describeIndex));
-    boost::algorithm::trim_if(describe, boost::is_any_of(TextParsing::g_QuotationMarks));
+    trim_if(describe, boost::is_any_of(TextParsing::gQuotationMarks));
 
     return GetEnumVariableContent(name, id, describe);
 }
@@ -86,37 +85,37 @@ System::String CoreTools::EnumHeadFileParsing::GetEnumVariableContent(const Stri
     auto content = GenerateIndentation(2);
 
     content += name;
-    content += TextParsing::g_Space;
-    content += TextParsing::g_equalSign;
-    content += TextParsing::g_Space;
+    content += TextParsing::gSpace;
+    content += TextParsing::gEqualSign;
+    content += TextParsing::gSpace;
     content += id;
-    content += TextParsing::g_Comma;
-    content += TextParsing::g_Space;
-    content += TextParsing::g_Space;
-    content += TextParsing::g_DoubleForwardSlash;
-    content += TextParsing::g_Space;
+    content += TextParsing::gComma;
+    content += TextParsing::gSpace;
+    content += TextParsing::gSpace;
+    content += TextParsing::gDoubleForwardSlash;
+    content += TextParsing::gSpace;
     content += describe;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
 
-bool CoreTools::EnumHeadFileParsing::HasIOStreamOperator() const
+bool CoreTools::EnumHeadFileParsing::HasIoStreamOperator() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (csvHead.HasDataField(TextParsing::g_IOStream))
+    if (csvHead.HasDataField(TextParsing::gIoStream))
     {
         const auto column = csvContent.GetContent(0);
-        const auto index = csvHead.GetDataIndex(TextParsing::g_IOStream);
+        const auto index = csvHead.GetDataIndex(TextParsing::gIoStream);
 
-        return HasIOStreamOperator(index, column);
+        return HasIoStreamOperator(index, column);
     }
 
     return false;
 }
 
-bool CoreTools::EnumHeadFileParsing::HasIOStreamOperator(int index, const String& column) const
+bool CoreTools::EnumHeadFileParsing::HasIoStreamOperator(int index, const String& column) const
 {
     const auto result = Parsing::GetSplitComma(column);
 
@@ -125,12 +124,7 @@ bool CoreTools::EnumHeadFileParsing::HasIOStreamOperator(int index, const String
 
 bool CoreTools::EnumHeadFileParsing::IsOperatorTrue(const SplitType& result, int index) const
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-    return index < 0 || boost::numeric_cast<int>(result.size()) <= index || result[index] != TextParsing::g_False;
-
-#include STSTEM_WARNING_POP
+    return index < 0 || boost::numeric_cast<int>(result.size()) <= index || result.at(index) != TextParsing::gFalse;
 }
 
 System::String CoreTools::EnumHeadFileParsing::GenerateEnumOperator(const String& field, const SplitType& element, const String& operatorDescribe) const
@@ -141,9 +135,7 @@ System::String CoreTools::EnumHeadFileParsing::GenerateEnumOperator(const String
 
     if (csvHead.HasDataField(field))
     {
-        const auto index = csvHead.GetDataIndex(field);
-
-        if (IsOperatorTrue(element, index))
+        if (const auto index = csvHead.GetDataIndex(field); IsOperatorTrue(element, index))
         {
             content += GenerateOperatorDescribe(operatorDescribe);
         }
@@ -157,25 +149,23 @@ CoreTools::Parsing::String CoreTools::EnumHeadFileParsing::GenerateOperatorDescr
     auto content = GenerateIndentation(1);
 
     content += operatorDescribe;
-    content += TextParsing::g_LeftBrackets;
+    content += TextParsing::gLeftBrackets;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_RightBrackets;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
 
-System::String CoreTools::EnumHeadFileParsing::GenerateEnumIOStreamOperator(const SplitType& element) const
+System::String CoreTools::EnumHeadFileParsing::GenerateEnumIoStreamOperator(const SplitType& element) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     String content{};
 
-    if (csvHead.HasDataField(TextParsing::g_IOStream))
+    if (csvHead.HasDataField(TextParsing::gIoStream))
     {
-        const auto index = csvHead.GetDataIndex(TextParsing::g_IOStream);
-
-        if (IsOperatorTrue(element, index))
+        if (const auto index = csvHead.GetDataIndex(TextParsing::gIoStream); IsOperatorTrue(element, index))
         {
             content += GenerateOperatorDescribe(SYSTEM_TEXT("ENUM_LEFT_SHIFTABLE_OPERATOR_DEFINE"s));
             content += GenerateOperatorDescribe(SYSTEM_TEXT("ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE"s));
@@ -196,7 +186,7 @@ System::String CoreTools::EnumHeadFileParsing::GenerateEnumOperator() const
     const auto element = Parsing::GetSplitComma(column);
 
     auto content = GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -210,7 +200,7 @@ System::String CoreTools::EnumHeadFileParsing::GenerateEnumFunction() const
     content += GenerateEnumCastString();
     content += GenerateGetEnumDescribe();
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -219,13 +209,13 @@ System::String CoreTools::EnumHeadFileParsing::GenerateStringCast() const
 {
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Nodiscard;
+    content += TextParsing::gNodiscard;
     content += className;
-    content += TextParsing::g_Space;
-    content += TextParsing::g_StringCast;
+    content += TextParsing::gSpace;
+    content += TextParsing::gStringCast;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_Describe;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gDescribe;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -234,13 +224,13 @@ System::String CoreTools::EnumHeadFileParsing::GenerateEnumCastString() const
 {
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Nodiscard;
-    content += TextParsing::g_SystemString;
-    content += TextParsing::g_Space;
-    content += TextParsing::g_EnumCastString;
+    content += TextParsing::gNodiscard;
+    content += TextParsing::gSystemString;
+    content += TextParsing::gSpace;
+    content += TextParsing::gEnumCastString;
     content += className;
-    content += TextParsing::g_TypeEnd;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gTypeEnd;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -249,13 +239,13 @@ System::String CoreTools::EnumHeadFileParsing::GenerateGetEnumDescribe() const
 {
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Nodiscard;
-    content += TextParsing::g_SystemString;
-    content += TextParsing::g_Space;
-    content += TextParsing::g_GetEnumDescribe;
+    content += TextParsing::gNodiscard;
+    content += TextParsing::gSystemString;
+    content += TextParsing::gSpace;
+    content += TextParsing::gGetEnumDescribe;
     content += className;
-    content += TextParsing::g_TypeEnd;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gTypeEnd;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 11:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,12 +13,11 @@
 #include "CellValueProxy.h"
 #include "SimpleCSVException.h"
 #include "Detail/CellValueImplDetail.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::ostream;
-using std::string;
+#include "CoreTools/TextParsing/SimpleCSV/Flags/ValueTypeFlags.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools::SimpleCSV, CellValue)
 
@@ -46,20 +45,22 @@ CoreTools::SimpleCSV::CellValue::CellValue(double value)
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::SimpleCSV::CellValue::CellValue(const string& value)
+CoreTools::SimpleCSV::CellValue::CellValue(const std::string& value)
     : impl{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::SimpleCSV::CellValue::CellValue(MAYBE_UNUSED DisableNotThrow disableNotThrow)
+CoreTools::SimpleCSV::CellValue::CellValue(DisableNotThrow disableNotThrow)
     : impl{ ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(disableNotThrow);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::SimpleCSV::CellValue::CellValue(const char* value)
-    : CellValue{ string{ value } }
+    : CellValue{ std::string{ value } }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -87,17 +88,17 @@ double CoreTools::SimpleCSV::CellValue::GetDouble() const
     return impl->Get<double>();
 }
 
-string CoreTools::SimpleCSV::CellValue::GetString() const
+std::string CoreTools::SimpleCSV::CellValue::GetString() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return impl->Get<string>();
+    return impl->Get<std::string>();
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellValue, Clear, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellValue, SetError, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools::SimpleCSV, CellValue, GetType, CoreTools::SimpleCSV::ValueType)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellValue, GetTypeAsString, string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellValue, GetTypeAsString, std::string)
 
 bool CoreTools::SimpleCSV::CellValue::IsEqual(const CellValue& rhs) const noexcept
 {
@@ -136,7 +137,7 @@ bool CoreTools::SimpleCSV::operator<(const CellValue& lhs, const CellValue& rhs)
     return lhs.IsLess(rhs);
 }
 
-ostream& CoreTools::SimpleCSV::operator<<(ostream& os, const CellValue& value)
+std::ostream& CoreTools::SimpleCSV::operator<<(std::ostream& os, const CellValue& value)
 {
     switch (value.GetType())
     {
@@ -149,7 +150,7 @@ ostream& CoreTools::SimpleCSV::operator<<(ostream& os, const CellValue& value)
         case ValueType::Float:
             return os << value.Get<double>();
         case ValueType::String:
-            return os << value.Get<string>();
+            return os << value.Get<std::string>();
         default:
             return os << "";
     }

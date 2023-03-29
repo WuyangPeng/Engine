@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:27)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -29,7 +29,7 @@ System::String CoreTools::Parsing::GenerateIndentation(int addIndentationCount) 
 
     for (auto i = 0; i < indentationCount + addIndentationCount; ++i)
     {
-        content += TextParsing::g_Indentation;
+        content += TextParsing::gIndentation;
     }
 
     return content;
@@ -41,7 +41,7 @@ System::String CoreTools::Parsing::GenerateFunctionBeginBrackets(int addIndentat
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_FunctionBeginBrackets;
+    content += TextParsing::gFunctionBeginBrackets;
 
     return content;
 }
@@ -52,7 +52,7 @@ System::String CoreTools::Parsing::GenerateFunctionEndBrackets(int addIndentatio
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_FunctionEndBrackets;
+    content += TextParsing::gFunctionEndBrackets;
 
     return content;
 }
@@ -63,7 +63,7 @@ System::String CoreTools::Parsing::GeneratePublic() const
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_Public;
+    content += TextParsing::gPublic;
 
     return content;
 }
@@ -74,7 +74,7 @@ System::String CoreTools::Parsing::GenerateUserSelfClassIsValid9(int addIndentat
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_UserSelfClassIsValid9;
+    content += TextParsing::gUserSelfClassIsValid9;
 
     return content;
 }
@@ -85,7 +85,7 @@ System::String CoreTools::Parsing::GenerateUserSelfClassIsValid1(int addIndentat
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_UserSelfClassIsValid1;
+    content += TextParsing::gUserSelfClassIsValid1;
 
     return content;
 }
@@ -96,7 +96,7 @@ System::String CoreTools::Parsing::GenerateUserClassIsValidConst9(int addIndenta
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_UserClassIsValidConst9;
+    content += TextParsing::gUserClassIsValidConst9;
 
     return content;
 }
@@ -107,7 +107,7 @@ System::String CoreTools::Parsing::GenerateUserClassIsValidConst1(int addIndenta
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_UserClassIsValidConst1;
+    content += TextParsing::gUserClassIsValidConst1;
 
     return content;
 }
@@ -118,8 +118,8 @@ System::String CoreTools::Parsing::GenerateOpenClassInvariant() const
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_OpenClassInvariant;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gOpenClassInvariant;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -130,8 +130,8 @@ System::String CoreTools::Parsing::GenerateOpenClassInvariantEndif() const
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_NewlineCharacter;
-    content += TextParsing::g_OpenClassInvariantEndif;
+    content += TextParsing::gNewlineCharacter;
+    content += TextParsing::gOpenClassInvariantEndif;
 
     return content;
 }
@@ -142,7 +142,7 @@ System::String CoreTools::Parsing::GenerateParentTypeIsValid(int addIndentationC
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_ParentTypeIsValid;
+    content += TextParsing::gParentTypeIsValid;
 
     return content;
 }
@@ -153,7 +153,7 @@ System::String CoreTools::Parsing::GenerateReturnTrue(int addIndentationCount) c
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_ReturnTrue;
+    content += TextParsing::gReturnTrue;
 
     return content;
 }
@@ -164,7 +164,7 @@ System::String CoreTools::Parsing::GenerateReturnFalse(int addIndentationCount) 
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_ReturnFalse;
+    content += TextParsing::gReturnFalse;
 
     return content;
 }
@@ -175,7 +175,7 @@ System::String CoreTools::Parsing::GenerateElse(int addIndentationCount) const
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_Else;
+    content += TextParsing::gElse;
 
     return content;
 }
@@ -186,7 +186,7 @@ System::String CoreTools::Parsing::GenerateClassEndBrackets(int addIndentationCo
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_ClassEndBrackets;
+    content += TextParsing::gClassEndBrackets;
 
     return content;
 }
@@ -195,7 +195,7 @@ CoreTools::Parsing::SplitType CoreTools::Parsing::GetSplitComma(const String& co
 {
     SplitType result{};
 
-    boost::algorithm::split(result, column, boost::is_any_of(TextParsing::g_Comma), boost::token_compress_off);
+    split(result, column, boost::is_any_of(TextParsing::gComma), boost::token_compress_off);
 
     return result;
 }
@@ -206,7 +206,7 @@ System::String CoreTools::Parsing::GenerateReturnIterSecond() const
 
     auto content = GenerateIndentation(2);
 
-    content += TextParsing::g_ReturnIterSecond;
+    content += TextParsing::gReturnIterSecond;
 
     return content;
 }

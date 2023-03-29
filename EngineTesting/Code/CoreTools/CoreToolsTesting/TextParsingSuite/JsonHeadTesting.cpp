@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:49)
+///	引擎测试版本：0.9.0.4 (2023/03/10 14:22)
 
 #include "JsonHeadTesting.h"
 #include "CoreTools/CharacterString/StringConversion.h"
@@ -18,7 +18,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 using namespace std::literals;
-using std::vector;
 
 CoreTools::JsonHeadTesting::JsonHeadTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -40,7 +39,7 @@ void CoreTools::JsonHeadTesting::MainTest()
 
 void CoreTools::JsonHeadTesting::JsonHeadTest()
 {
-    JsonHead jsonHead{ SYSTEM_TEXT("Resource/JsonTesting/Log.json") };
+    const JsonHead jsonHead{ SYSTEM_TEXT("Resource/JsonTesting/Log.json") };
 
     ASSERT_EQUAL(jsonHead.GetNameSpace(), SYSTEM_TEXT("JsonTesting"s));
     ASSERT_EQUAL(jsonHead.GetJsonClassName(), SYSTEM_TEXT("Log"s));

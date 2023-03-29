@@ -41,27 +41,19 @@ void Network::ExecutorWorkGuardContext::Run()
         }
         catch (const Error& error)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                << error
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
         catch (const system_error& error)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                << error.what()
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
         catch (const exception& error)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                << error.what()
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
         catch (...)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                << "Î´Öª´íÎó\n"
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, "Î´Öª´íÎó\n", CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }

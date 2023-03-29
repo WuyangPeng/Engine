@@ -29,9 +29,7 @@ void Framework::WindowHBrush::CheckUpHBrush() noexcept
     {
         hBrush = System::GetSystemStockObject(WindowsBrushTypes::WhiteBrush);
 
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework)
-            << SYSTEM_TEXT("¼ÓÔØ±³¾°»­Ë¢Ê§°Ü£¡")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework, SYSTEM_TEXT("¼ÓÔØ±³¾°»­Ë¢Ê§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

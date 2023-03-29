@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 20:15)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 17:05)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -40,7 +40,7 @@ System::String CoreTools::CSVGenerateClassName::GenerateParentClassName() const
     content += classNameParsing.GeneratePublic();
     content += classNameParsing.GenerateClassType();
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -59,7 +59,7 @@ System::String CoreTools::CSVGenerateClassName::GenerateChildClassName() const
     content += classNameParsing.GenerateClassType();
     content += classNameParsing.GenerateParentType();
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -77,7 +77,7 @@ System::String CoreTools::CSVGenerateClassName::GenerateClassName() const
     content += classNameParsing.GeneratePublic();
     content += classNameParsing.GenerateClassType();
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -97,7 +97,7 @@ System::String CoreTools::CSVGenerateClassName::GenerateContainerClassName(const
 
     content += GenerateSharedPtrUsing(keyTypeDescribe);
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -107,7 +107,7 @@ System::String CoreTools::CSVGenerateClassName::GenerateSharedPtrUsing(const Str
     constexpr auto indentationCount = 2;
     const auto csvFormatType = csvHead.GetCSVFormatType();
 
-    auto sharedPtrUsingParsing = SharedPtrUsingParsing::Create(csvFormatType, indentationCount, csvHead.GetCSVClassName(), keyTypeDescribe);
+    const auto sharedPtrUsingParsing = SharedPtrUsingParsing::Create(csvFormatType, indentationCount, csvHead.GetCSVClassName(), keyTypeDescribe);
 
     return sharedPtrUsingParsing->GenerateSharedPtrUsing();
 }

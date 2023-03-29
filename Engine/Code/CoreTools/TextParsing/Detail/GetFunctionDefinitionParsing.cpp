@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:25)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,8 +14,8 @@
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::GetFunctionDefinitionParsing::GetFunctionDefinitionParsing(const CSVHead& csvHead, const String& className, const String& keyTypeDescribe)
-    : ParentType{ 0 }, m_CSVHead{ csvHead }, className{ className }, keyTypeDescribe{ keyTypeDescribe }
+CoreTools::GetFunctionDefinitionParsing::GetFunctionDefinitionParsing(CSVHead csvHead, String className, String keyTypeDescribe) noexcept
+    : ParentType{ 0 }, className{ std::move(className) }, keyTypeDescribe{ std::move(keyTypeDescribe) }, head{ std::move(csvHead) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -40,14 +40,14 @@ CoreTools::CSVHead CoreTools::GetFunctionDefinitionParsing::GetCSVHead() const n
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CSVHead;
+    return head;
 }
 
 int CoreTools::GetFunctionDefinitionParsing::GetCSVHeadCount() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CSVHead.GetCount();
+    return head.GetCount();
 }
 
 System::String CoreTools::GetFunctionDefinitionParsing::GenerateReturnKey(int addIndentationCount) const
@@ -56,7 +56,7 @@ System::String CoreTools::GetFunctionDefinitionParsing::GenerateReturnKey(int ad
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_ReturnKey;
+    content += TextParsing::gReturnKey;
 
     return content;
 }
@@ -69,13 +69,13 @@ System::String CoreTools::GetFunctionDefinitionParsing::GenerateGetFunctionArray
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_Int;
+    content += TextParsing::gInt;
     content += csvHead.GetNameSpace();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += GetCSVClassName();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += functionVariableName;
-    content += TextParsing::g_CountConst;
+    content += TextParsing::gCountConst;
 
     return content;
 }
@@ -87,11 +87,11 @@ System::String CoreTools::GetFunctionDefinitionParsing::GenerateGetFunctionArray
     const auto csvHead = GetCSVHead();
 
     auto content = actualType;
-    content += TextParsing::g_ConstIterator;
+    content += TextParsing::gConstIterator;
     content += csvHead.GetNameSpace();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += GetCSVClassName();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += functionVariableName;
     content += endDescribe;
 
@@ -104,7 +104,7 @@ System::String CoreTools::GetFunctionDefinitionParsing::GenerateLambdaFunctionRe
 
     auto content = GenerateIndentation(2);
 
-    content += TextParsing::g_ReturnIter;
+    content += TextParsing::gReturnIter;
 
     return content;
 }

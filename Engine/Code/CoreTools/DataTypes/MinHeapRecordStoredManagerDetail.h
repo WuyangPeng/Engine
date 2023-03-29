@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 16:36)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/23 11:16)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_STORED_MANAGER_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_STORED_MANAGER_DETAIL_H
@@ -16,14 +16,14 @@
 
 template <typename Generator, typename Scalar>
 CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::MinHeapRecordStoredManager(int maxElements, Scalar initialValue)
-    : recordStoreds{ maxElements, initialValue }, recordIndexes{ maxElements }
+    : recordStored{ maxElements, initialValue }, recordIndexes{ maxElements }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_8;
 }
 
 template <typename Generator, typename Scalar>
 CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::MinHeapRecordStoredManager(int newMaxElements, const MinHeapRecordStoredManager& oldRecordStoredManage)
-    : recordStoreds{ newMaxElements, oldRecordStoredManage.recordStoreds }, recordIndexes{ newMaxElements, oldRecordStoredManage.recordIndexes }
+    : recordStored{ newMaxElements, oldRecordStoredManage.recordStored }, recordIndexes{ newMaxElements, oldRecordStoredManage.recordIndexes }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_8;
 }
@@ -35,7 +35,7 @@ bool CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::IsValid() const n
 {
     try
     {
-        if (recordStoreds.GetMaxElements() == recordIndexes.GetMaxElements() && IndexIsValid())
+        if (recordStored.GetMaxElements() == recordIndexes.GetMaxElements() && IndexIsValid())
         {
             return true;
         }
@@ -55,11 +55,11 @@ bool CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::IsValid() const n
 template <typename Generator, typename Scalar>
 bool CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::IndexIsValid() const
 {
-    const auto maxElements = recordStoreds.GetMaxElements();
+    const auto maxElements = recordStored.GetMaxElements();
 
     for (auto index = 0; index < maxElements; ++index)
     {
-        if (recordStoreds.GetUniqueIndex(recordIndexes.GetHeapIndex(index)) != index)
+        if (recordStored.GetUniqueIndex(recordIndexes.GetHeapIndex(index)) != index)
         {
             return false;
         }
@@ -81,7 +81,7 @@ int CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::GetMaxElements() c
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_8;
 
-    return recordStoreds.GetMaxElements();
+    return recordStored.GetMaxElements();
 }
 
 template <typename Generator, typename Scalar>
@@ -89,7 +89,7 @@ Scalar CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::GetValueByUniqu
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_8;
 
-    return recordStoreds.GetValue(recordIndexes.GetHeapIndex(uniqueIndex));
+    return recordStored.GetValue(recordIndexes.GetHeapIndex(uniqueIndex));
 }
 
 template <typename Generator, typename Scalar>
@@ -97,7 +97,7 @@ Generator CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::GetGenerator
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_8;
 
-    return recordStoreds.GetGenerator(recordIndexes.GetHeapIndex(uniqueIndex));
+    return recordStored.GetGenerator(recordIndexes.GetHeapIndex(uniqueIndex));
 }
 
 template <typename Generator, typename Scalar>
@@ -113,7 +113,7 @@ int CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::GetUniqueIndex(int
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_8;
 
-    return recordStoreds.GetUniqueIndex(heapIndex);
+    return recordStored.GetUniqueIndex(heapIndex);
 }
 
 template <typename Generator, typename Scalar>
@@ -121,7 +121,7 @@ Scalar CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::GetValueByHeapI
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_8;
 
-    return recordStoreds.GetValue(heapIndex);
+    return recordStored.GetValue(heapIndex);
 }
 
 template <typename Generator, typename Scalar>
@@ -129,7 +129,7 @@ Generator CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::GetGenerator
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_8;
 
-    return recordStoreds.GetGenerator(heapIndex);
+    return recordStored.GetGenerator(heapIndex);
 }
 
 template <typename Generator, typename Scalar>
@@ -137,7 +137,7 @@ void CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::SetValueByUniqueI
 {
     CORE_TOOLS_CLASS_IS_VALID_8;
 
-    recordStoreds.SetValue(recordIndexes.GetHeapIndex(uniqueIndex), value);
+    recordStored.SetValue(recordIndexes.GetHeapIndex(uniqueIndex), value);
 }
 
 template <typename Generator, typename Scalar>
@@ -145,7 +145,7 @@ void CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::SetGeneratorByUni
 {
     CORE_TOOLS_CLASS_IS_VALID_8;
 
-    recordStoreds.SetGenerator(recordIndexes.GetHeapIndex(uniqueIndex), generator);
+    recordStored.SetGenerator(recordIndexes.GetHeapIndex(uniqueIndex), generator);
 }
 
 template <typename Generator, typename Scalar>
@@ -153,7 +153,7 @@ void CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::SetValueByHeapInd
 {
     CORE_TOOLS_CLASS_IS_VALID_8;
 
-    recordStoreds.SetValue(heapIndex, value);
+    recordStored.SetValue(heapIndex, value);
 }
 
 template <typename Generator, typename Scalar>
@@ -161,7 +161,7 @@ void CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::SetGeneratorByHea
 {
     CORE_TOOLS_CLASS_IS_VALID_8;
 
-    recordStoreds.SetGenerator(heapIndex, generator);
+    recordStored.SetGenerator(heapIndex, generator);
 }
 
 template <typename Generator, typename Scalar>
@@ -169,10 +169,10 @@ void CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::ChangeValue(int l
 {
     CORE_TOOLS_CLASS_IS_VALID_8;
 
-    const auto lhsUniqueIndex = recordStoreds.GetUniqueIndex(lhsHeapIndex);
-    const auto rhsUniqueIndex = recordStoreds.GetUniqueIndex(rhsHeapIndex);
+    const auto lhsUniqueIndex = recordStored.GetUniqueIndex(lhsHeapIndex);
+    const auto rhsUniqueIndex = recordStored.GetUniqueIndex(rhsHeapIndex);
 
-    recordStoreds.ChangeValue(lhsHeapIndex, rhsHeapIndex);
+    recordStored.ChangeValue(lhsHeapIndex, rhsHeapIndex);
     recordIndexes.ChangeIndex(lhsUniqueIndex, rhsUniqueIndex);
 }
 
@@ -181,7 +181,7 @@ void CoreTools::MinHeapRecordStoredManager<Generator, Scalar>::GrowBy(int newMax
 {
     CORE_TOOLS_CLASS_IS_VALID_8;
 
-    recordStoreds.GrowBy(newMaxElements);
+    recordStored.GrowBy(newMaxElements);
     recordIndexes.GrowBy(newMaxElements);
 }
 

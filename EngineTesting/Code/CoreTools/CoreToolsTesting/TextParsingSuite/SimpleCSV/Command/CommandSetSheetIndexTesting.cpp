@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:27)
+///	引擎测试版本：0.9.0.4 (2023/03/07 11:11)
 
 #include "CommandSetSheetIndexTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -35,10 +35,10 @@ void CoreTools::CommandSetSheetIndexTesting::MainTest()
 
 void CoreTools::CommandSetSheetIndexTesting::CommandSetSheetIndexTest()
 {
-    auto sheetID = "sheetID"s;
+    const auto sheetId = "sheetId"s;
     constexpr auto sheetIndex = 1;
-    SimpleCSV::CommandSetSheetIndex commandSetSheetIndex{ sheetID, sheetIndex };
+    const SimpleCSV::CommandSetSheetIndex commandSetSheetIndex{ sheetId, sheetIndex };
 
-    ASSERT_EQUAL(sheetID, commandSetSheetIndex.GetSheetID());
+    ASSERT_EQUAL(sheetId, commandSetSheetIndex.GetSheetId());
     ASSERT_EQUAL(sheetIndex, commandSetSheetIndex.GetSheetIndex());
 }

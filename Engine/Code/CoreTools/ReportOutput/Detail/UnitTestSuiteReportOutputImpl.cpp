@@ -12,10 +12,12 @@
 #include "UnitTestSuiteReportOutputImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
+#include "CoreTools/LogManager/LogAsynchronous.h"
 #include "CoreTools/LogManager/LogConsoleTextColorsManager.h"
 #include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 
 #include <iomanip>
+#include <sstream>
 
 using std::left;
 using std::make_shared;
@@ -54,12 +56,16 @@ void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestResult(int passedNumber,
 
     const auto manager = GetLogConsoleTextColorsManager(failedNumber, errorNumber);
 
-    GetStream() << setw(characterWidth) << right << "Í¨¹ý£º"
-                << setw(characterWidth) << left << passedNumber
-                << setw(characterWidth) << right << "Ê§°Ü: "
-                << setw(characterWidth) << left << failedNumber
-                << setw(characterWidth) << right << "´íÎó: "
-                << setw(characterWidth) << left << errorNumber;
+    std::stringstream ss{};
+
+    ss << setw(characterWidth) << right << "Í¨¹ý£º"
+       << setw(characterWidth) << left << passedNumber
+       << setw(characterWidth) << right << "Ê§°Ü: "
+       << setw(characterWidth) << left << failedNumber
+       << setw(characterWidth) << right << "´íÎó: "
+       << setw(characterWidth) << left << errorNumber;
+
+    LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), ss.str());
 }
 
 CoreTools::UnitTestSuiteReportOutputImpl::LogConsoleTextColorsManagerSharedPtr CoreTools::UnitTestSuiteReportOutputImpl::GetLogConsoleTextColorsManager(int failedNumber, int errorNumber)

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:25)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 09:42)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,8 +16,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 #include "CoreTools/TextParsing/SimpleCSV/XmlData.h"
-
-using std::string;
 
 /// 构造函数以父XLDocument和文件路径作为输入创建一个新对象，
 /// 可选输入是带有XML数据的std::string。
@@ -35,7 +33,7 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, XmlFileImpl)
 /// 在PugiXML中调用load_string方法时，标志 'parse_ws_pcdata' 与默认标志一起传递。 这将启用空白字符的解析。
 /// 如果不设置，只有空格的Excel单元格将作为空字符串返回，这不是我们想要的。
 /// 缺点是输入xml文件中的\\n 和\\t等空白字符可能会扰乱解析。
-void CoreTools::SimpleCSV::XmlFileImpl::SetXmlData(const string& data)
+void CoreTools::SimpleCSV::XmlFileImpl::SetXmlData(const std::string& data)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -43,18 +41,18 @@ void CoreTools::SimpleCSV::XmlFileImpl::SetXmlData(const string& data)
 }
 
 // 此方法将底层XML数据作为std::string检索。
-string CoreTools::SimpleCSV::XmlFileImpl::GetXmlData() const
+std::string CoreTools::SimpleCSV::XmlFileImpl::GetXmlData() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return GetXmlDataSharedPtr()->GetRawData();
 }
 
-string CoreTools::SimpleCSV::XmlFileImpl::GetRelationshipID() const
+std::string CoreTools::SimpleCSV::XmlFileImpl::GetRelationshipId() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetXmlDataSharedPtr()->GetXmlID();
+    return GetXmlDataSharedPtr()->GetXmlId();
 }
 
 CoreTools::SimpleCSV::XmlFileImpl::DocumentSharedPtr CoreTools::SimpleCSV::XmlFileImpl::GetParentDocument()
@@ -76,7 +74,7 @@ CoreTools::SimpleCSV::XmlFileImpl::ConstDocumentSharedPtr CoreTools::SimpleCSV::
     auto documentSharedPtr = document.lock();
     if (documentSharedPtr == nullptr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s))
     }
 
     return documentSharedPtr;
@@ -115,7 +113,7 @@ CoreTools::SimpleCSV::XmlFileImpl::ConstXmlDataSharedPtr CoreTools::SimpleCSV::X
     auto xmlDataSharedPtr = xmlData.lock();
     if (xmlDataSharedPtr == nullptr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("xmlData已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("xmlData已被释放。"s))
     }
 
     return xmlDataSharedPtr;
@@ -125,12 +123,12 @@ CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::XmlFileImpl::GetSheetData() 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetXmlDocument()->first_child().child(TextParsing::g_SheetData.data());
+    return GetXmlDocument()->first_child().child(TextParsing::gSheetData.data());
 }
 
 CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::XmlFileImpl::GetFirstChildColumns() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetXmlDocument()->first_child().child(TextParsing::g_Columns.data());
+    return GetXmlDocument()->first_child().child(TextParsing::gColumns.data());
 }

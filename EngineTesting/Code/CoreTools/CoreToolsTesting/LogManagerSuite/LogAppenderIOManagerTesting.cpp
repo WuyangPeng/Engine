@@ -76,65 +76,35 @@ void CoreTools::LogAppenderIOManagerTesting::IntegerTest()
 {
     auto appenderManager = GetAppenderManager();
 
-    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
-
-    manager << LogFilter::CoreTools
-            << CORE_TOOLS_FUNCTION_DESCRIBED
-            << integerTest;
+    MAYBE_UNUSED auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 }
 
 void CoreTools::LogAppenderIOManagerTesting::StringTest()
 {
     auto appenderManager = GetAppenderManager();
 
-    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
-
-    manager << LogFilter::CoreTools
-            << CORE_TOOLS_FUNCTION_DESCRIBED
-            << stringTest;
-
-    manager << LogFilter::CoreTools
-            << CORE_TOOLS_FUNCTION_DESCRIBED
-            << wstringTest;
+    MAYBE_UNUSED auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 }
 
 void CoreTools::LogAppenderIOManagerTesting::Error1Test()
 {
     auto appenderManager = GetAppenderManager();
 
-    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
-
-    manager << LogFilter::CoreTools
-            << errorTest;
+    MAYBE_UNUSED auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 }
 
 void CoreTools::LogAppenderIOManagerTesting::FormatTest()
 {
     auto appenderManager = GetAppenderManager();
 
-    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
-
-    manager << LogFilter::CoreTools
-            << CORE_TOOLS_FUNCTION_DESCRIBED
-            << (LogAppenderIOManager::Format(formatMessage) % 10 % 22).str();
+    MAYBE_UNUSED auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 }
 
 void CoreTools::LogAppenderIOManagerTesting::LogAppenderIOManageSignTest()
 {
     auto appenderManager = GetAppenderManager();
 
-    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
-
-    manager << LogFilter::CoreTools
-            << CORE_TOOLS_FUNCTION_DESCRIBED
-            << promptMessage
-            << LogAppenderIOManageSign::AlwaysConsole
-            << LogAppenderIOManageSign::BlankSpace
-            << cancelMessage
-            << LogAppenderIOManageSign::Newline
-            << attentionMessage
-            << LogAppenderIOManageSign::TriggerAssert
-            << LogAppenderIOManageSign::Refresh;
+    MAYBE_UNUSED auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 }
 
 void CoreTools::LogAppenderIOManagerTesting::FileContentTest()

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 13:32)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 10:53)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,7 +15,6 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::string;
 using namespace std::literals;
 
 CoreTools::CommandArgumentContainer::CommandArgumentContainer(int argumentsNumber)
@@ -33,7 +32,7 @@ bool CoreTools::CommandArgumentContainer::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-void CoreTools::CommandArgumentContainer::AddArgument(int index, const string& argumentsName, const string& argumentsValue)
+void CoreTools::CommandArgumentContainer::AddArgument(int index, const std::string& argumentsName, const std::string& argumentsValue)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
     CORE_TOOLS_ASSERTION_0(0 < index && index < argumentsNumber, "索引错误！");
@@ -42,7 +41,7 @@ void CoreTools::CommandArgumentContainer::AddArgument(int index, const string& a
     commandArgument.insert({ argumentsName, argument });
 }
 
-void CoreTools::CommandArgumentContainer::AddArgument(int index, const string& argumentsName)
+void CoreTools::CommandArgumentContainer::AddArgument(int index, const std::string& argumentsName)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
     CORE_TOOLS_ASSERTION_0(0 < index && index < argumentsNumber, "索引错误！");
@@ -58,14 +57,14 @@ int CoreTools::CommandArgumentContainer::GetArgumentsNumber() const noexcept
     return argumentsNumber;
 }
 
-bool CoreTools::CommandArgumentContainer::IsUsed(const string& argumentsName) const
+bool CoreTools::CommandArgumentContainer::IsUsed(const std::string& argumentsName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return Find(argumentsName, &CommandArgument::IsUsed);
 }
 
-void CoreTools::CommandArgumentContainer::SetUsed(const string& argumentsName)
+void CoreTools::CommandArgumentContainer::SetUsed(const std::string& argumentsName)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -79,81 +78,81 @@ void CoreTools::CommandArgumentContainer::SetUsed(const string& argumentsName)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("未找到命令行索引！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到命令行索引！"s))
     }
 }
 
-int CoreTools::CommandArgumentContainer::GetIndex(const string& argumentsName) const
+int CoreTools::CommandArgumentContainer::GetIndex(const std::string& argumentsName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return Find(argumentsName, &CommandArgument::GetIndex);
 }
 
-int CoreTools::CommandArgumentContainer::GetInteger(const string& argumentsName) const
+int CoreTools::CommandArgumentContainer::GetInteger(const std::string& argumentsName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return Find(argumentsName, &CommandArgument::GetInteger);
 }
 
-float CoreTools::CommandArgumentContainer::GetFloat(const string& argumentsName) const
+float CoreTools::CommandArgumentContainer::GetFloat(const std::string& argumentsName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return Find(argumentsName, &CommandArgument::GetFloat);
 }
 
-double CoreTools::CommandArgumentContainer::GetDouble(const string& argumentsName) const
+double CoreTools::CommandArgumentContainer::GetDouble(const std::string& argumentsName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return Find(argumentsName, &CommandArgument::GetDouble);
 }
 
-const string CoreTools::CommandArgumentContainer::GetString(const string& argumentsName) const
+const std::string CoreTools::CommandArgumentContainer::GetString(const std::string& argumentsName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return Find(argumentsName, &CommandArgument::GetString);
 }
 
-bool CoreTools::CommandArgumentContainer::IsInteger(const string& argumentsName) const
+bool CoreTools::CommandArgumentContainer::IsInteger(const std::string& argumentsName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return Find(argumentsName, &CommandArgument::IsInteger);
 }
 
-bool CoreTools::CommandArgumentContainer::IsFloat(const string& argumentsName) const
+bool CoreTools::CommandArgumentContainer::IsFloat(const std::string& argumentsName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return Find(argumentsName, &CommandArgument::IsFloat);
 }
 
-bool CoreTools::CommandArgumentContainer::IsDouble(const string& argumentsName) const
+bool CoreTools::CommandArgumentContainer::IsDouble(const std::string& argumentsName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return Find(argumentsName, &CommandArgument::IsDouble);
 }
 
-bool CoreTools::CommandArgumentContainer::IsString(const string& argumentsName) const
+bool CoreTools::CommandArgumentContainer::IsString(const std::string& argumentsName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return Find(argumentsName, &CommandArgument::IsString);
 }
 
-bool CoreTools::CommandArgumentContainer::IsExist(const string& argumentsName) const
+bool CoreTools::CommandArgumentContainer::IsExist(const std::string& argumentsName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return commandArgument.find(argumentsName) != commandArgument.cend();
+    return commandArgument.contains(argumentsName);
 }
 
-void CoreTools::CommandArgumentContainer::AddEndArgumentValue(const string& argumentsValue)
+void CoreTools::CommandArgumentContainer::AddEndArgumentValue(const std::string& argumentsValue)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -168,24 +167,23 @@ void CoreTools::CommandArgumentContainer::AddEndArgumentValue(const string& argu
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("命令行不允许以字符串打头！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("命令行不允许以字符串打头！"s))
     }
 }
 
-const string CoreTools::CommandArgumentContainer::ExcessArguments() const
+std::string CoreTools::CommandArgumentContainer::ExcessArguments() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     for (const auto& value : commandArgument)
     {
-        const auto& argument = value.second;
-        if (!argument.IsUsed())
+        if (const auto& argument = value.second; !argument.IsUsed())
         {
             return argument.GetName();
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("命令行没有未处理的参数！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("命令行没有未处理的参数！"s))
 }
 
 int CoreTools::CommandArgumentContainer::GetExcessArgumentsCount() const noexcept
@@ -196,8 +194,7 @@ int CoreTools::CommandArgumentContainer::GetExcessArgumentsCount() const noexcep
 
     for (const auto& value : commandArgument)
     {
-        const auto& argument = value.second;
-        if (!argument.IsUsed())
+        if (const auto& argument = value.second; !argument.IsUsed())
         {
             ++count;
         }

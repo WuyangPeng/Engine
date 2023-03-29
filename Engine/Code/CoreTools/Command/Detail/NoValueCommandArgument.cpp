@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 13:47)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 11:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,10 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::make_shared;
-using std::string;
-
-CoreTools::NoValueCommandArgument::NoValueCommandArgument(int index, const string& name)
+CoreTools::NoValueCommandArgument::NoValueCommandArgument(int index, const std::string& name)
     : ParentType{ index, name }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -29,28 +26,28 @@ int CoreTools::NoValueCommandArgument::GetInteger() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是整数！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是整数！"s))
 }
 
 float CoreTools::NoValueCommandArgument::GetFloat() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是浮点数！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是浮点数！"s))
 }
 
 double CoreTools::NoValueCommandArgument::GetDouble() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是浮点数！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是浮点数！"s))
 }
 
-const string CoreTools::NoValueCommandArgument::GetString() const
+std::string CoreTools::NoValueCommandArgument::GetString() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是字符串！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument不是字符串！"s))
 }
 
 bool CoreTools::NoValueCommandArgument::IsInteger() const noexcept
@@ -92,12 +89,14 @@ CoreTools::NoValueCommandArgument::CommandArgumentSharedPtr CoreTools::NoValueCo
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return make_shared<NoValueCommandArgument>(*this);
+    return std::make_shared<NoValueCommandArgument>(*this);
 }
 
-void CoreTools::NoValueCommandArgument::AddArgumentValue(MAYBE_UNUSED const string& value)
+void CoreTools::NoValueCommandArgument::AddArgumentValue(const std::string& value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument没有值！"s));
+    System::UnusedFunction(value);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("NoValueCommandArgument没有值！"s))
 }

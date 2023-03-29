@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/02/23 15:4)
+///	引擎版本：0.9.0.4 (2023/03/17 19:46)
 
 #ifndef CORE_TOOLS_BASE_SPAN_ITERATOR_H
 #define CORE_TOOLS_BASE_SPAN_ITERATOR_H
@@ -24,8 +24,8 @@ namespace CoreTools
 
         using ValueType = typename Iter::value_type;
         using DifferenceType = typename Iter::difference_type;
-        using ConstPointerType = typename const Iter::value_type*;
-        using ConstReferenceType = typename const Iter::value_type&;
+        using ConstPointerType = const typename Iter::value_type*;
+        using ConstReferenceType = const typename Iter::value_type&;
 
     public:
         SpanIterator(Iter begin, Iter end) noexcept;

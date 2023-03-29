@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.2 (2023/02/07 0:56)
+///	引擎版本：0.9.0.4 (2023/03/23 15:47)
 
 #ifndef CORE_TOOLS_HELPER_EXPORT_MACRO_H
 #define CORE_TOOLS_HELPER_EXPORT_MACRO_H
@@ -98,7 +98,7 @@
     EXPORT_##type(Animation, implClassName, ANIMATION_DEFAULT_DECLARE)
 
 #define ARTIFICIAL_INTELLIGENCE_EXPORT(implClassName, type) \
-    EXPORT_##type(ArtificialIntellegence, implClassName, ARTIFICIAL_INTELLIGENCE_DEFAULT_DECLARE)
+    EXPORT_##type(ArtificialIntelligence, implClassName, ARTIFICIAL_INTELLIGENCE_DEFAULT_DECLARE)
 
 #define USER_INTERFACE_EXPORT(implClassName, type) \
     EXPORT_##type(UserInterface, implClassName, USER_INTERFACE_DEFAULT_DECLARE)
@@ -147,7 +147,7 @@
     EXPORT_##type(Animation, className, implClassName, ANIMATION_DEFAULT_DECLARE)
 
 #define ARTIFICIAL_INTELLIGENCE_COPY_EXPORT(className, implClassName, type) \
-    EXPORT_##type(ArtificialIntellegence, className, implClassName, ARTIFICIAL_INTELLIGENCE_DEFAULT_DECLARE)
+    EXPORT_##type(ArtificialIntelligence, className, implClassName, ARTIFICIAL_INTELLIGENCE_DEFAULT_DECLARE)
 
 #define USER_INTERFACE_COPY_EXPORT(className, implClassName, type) \
     EXPORT_##type(UserInterface, className, implClassName, USER_INTERFACE_DEFAULT_DECLARE)
@@ -196,7 +196,7 @@
     EXPORT_UNIQUE_PTR(Animation, implClassName, ANIMATION_DEFAULT_DECLARE)
 
 #define ARTIFICIAL_INTELLIGENCE_EXPORT_UNIQUE_PTR(implClassName) \
-    EXPORT_UNIQUE_PTR(ArtificialIntellegence, implClassName, ARTIFICIAL_INTELLIGENCE_DEFAULT_DECLARE)
+    EXPORT_UNIQUE_PTR(ArtificialIntelligence, implClassName, ARTIFICIAL_INTELLIGENCE_DEFAULT_DECLARE)
 
 #define USER_INTERFACE_EXPORT_UNIQUE_PTR(implClassName) \
     EXPORT_UNIQUE_PTR(UserInterface, implClassName, USER_INTERFACE_DEFAULT_DECLARE)

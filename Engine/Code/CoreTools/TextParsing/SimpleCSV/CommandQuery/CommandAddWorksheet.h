@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 19:07)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 16:39)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_COMMAND_ADD_WORKSHEET_H
 #define CORE_TOOLS_TEXT_PARSING_COMMAND_ADD_WORKSHEET_H
@@ -20,27 +20,24 @@
 template class CORE_TOOLS_DEFAULT_DECLARE std::shared_ptr<const CoreTools::SimpleCSV::CommandAddWorksheetImpl>;
 template class CORE_TOOLS_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<CoreTools::SimpleCSV::CommandAddWorksheetImpl>;
 
-namespace CoreTools
+namespace CoreTools::SimpleCSV
 {
-    namespace SimpleCSV
+    class CORE_TOOLS_DEFAULT_DECLARE CommandAddWorksheet final
     {
-        class CORE_TOOLS_DEFAULT_DECLARE CommandAddWorksheet final
-        {
-        public:
-            PERFORMANCE_UNSHARED_TYPE_DECLARE(CommandAddWorksheet);
+    public:
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(CommandAddWorksheet);
 
-        public:
-            CommandAddWorksheet(const std::string& sheetName, const std::string& sheetPath);
+    public:
+        CommandAddWorksheet(const std::string& sheetName, const std::string& sheetPath);
 
-            CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-            NODISCARD std::string GetSheetName() const;
-            NODISCARD std::string GetSheetPath() const;
+        NODISCARD std::string GetSheetName() const;
+        NODISCARD std::string GetSheetPath() const;
 
-        private:
-            PackageType impl;
-        };
-    }
+    private:
+        PackageType impl;
+    };
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_COMMAND_ADD_WORKSHEET_H

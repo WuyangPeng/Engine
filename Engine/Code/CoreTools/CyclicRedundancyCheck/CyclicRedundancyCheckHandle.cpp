@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 18:11)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/22 19:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,16 +16,13 @@
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "CoreTools/Threading/Mutex.h"
 
-using std::make_shared;
-using std::make_unique;
-
 SINGLETON_GET_PTR_DEFINE(CoreTools, CyclicRedundancyCheckHandle);
 
 CoreTools::CyclicRedundancyCheckHandle::CyclicRedundancyCheckHandleUniquePtr CoreTools::CyclicRedundancyCheckHandle::cyclicRedundancyCheckHandle{};
 
 void CoreTools::CyclicRedundancyCheckHandle::Create()
 {
-    cyclicRedundancyCheckHandle = make_unique<CoreTools::CyclicRedundancyCheckHandle>(CyclicRedundancyCheckHandleCreate::Init);
+    cyclicRedundancyCheckHandle = std::make_unique<CoreTools::CyclicRedundancyCheckHandle>(CyclicRedundancyCheckHandleCreate::Init);
 }
 
 void CoreTools::CyclicRedundancyCheckHandle::Destroy() noexcept
@@ -33,9 +30,11 @@ void CoreTools::CyclicRedundancyCheckHandle::Destroy() noexcept
     cyclicRedundancyCheckHandle.reset();
 }
 
-CoreTools::CyclicRedundancyCheckHandle::CyclicRedundancyCheckHandle(MAYBE_UNUSED CyclicRedundancyCheckHandleCreate cyclicRedundancyCheckHandleCreate)
+CoreTools::CyclicRedundancyCheckHandle::CyclicRedundancyCheckHandle(CyclicRedundancyCheckHandleCreate cyclicRedundancyCheckHandleCreate)
     : impl{ ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(cyclicRedundancyCheckHandleCreate);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 

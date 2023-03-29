@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:23)
+///	引擎测试版本：0.9.0.4 (2023/03/03 17:15)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_H
@@ -13,6 +13,7 @@
 #include "BatchConversionCSVTesting.h"
 #include "CSVConfigureTesting.h"
 #include "CSVContentTesting.h"
+#include "CSVDataTesting.h"
 #include "CSVGenerateTesting.h"
 #include "CSVHeadTesting.h"
 #include "CSVRowTesting.h"
@@ -26,6 +27,7 @@
 #include "JsonNodeContainerTesting.h"
 #include "JsonNodeTesting.h"
 #include "JsonRowTesting.h"
+#include "JsonTotalGenerateTesting.h"
 #include "SimpleCSV/AppPropertiesTesting.h"
 #include "SimpleCSV/CellIteratorTesting.h"
 #include "SimpleCSV/CellRangeTesting.h"
@@ -35,7 +37,7 @@
 #include "SimpleCSV/CellValueTesting.h"
 #include "SimpleCSV/ColorTesting.h"
 #include "SimpleCSV/ColumnTesting.h"
-#include "SimpleCSV/Command/CommandAddChartsheetTesting.h"
+#include "SimpleCSV/Command/CommandAddChartSheetTesting.h"
 #include "SimpleCSV/Command/CommandAddSharedStringsTesting.h"
 #include "SimpleCSV/Command/CommandAddWorksheetTesting.h"
 #include "SimpleCSV/Command/CommandCloneSheetTesting.h"
@@ -50,10 +52,10 @@
 #include "SimpleCSV/DocumentTesting.h"
 #include "SimpleCSV/PropertiesTesting.h"
 #include "SimpleCSV/Query/QuerySharedStringsTesting.h"
-#include "SimpleCSV/Query/QuerySheetIDTesting.h"
+#include "SimpleCSV/Query/QuerySheetIdTesting.h"
 #include "SimpleCSV/Query/QuerySheetIndexTesting.h"
 #include "SimpleCSV/Query/QuerySheetNameTesting.h"
-#include "SimpleCSV/Query/QuerySheetRelsIDTesting.h"
+#include "SimpleCSV/Query/QuerySheetRelsIdTesting.h"
 #include "SimpleCSV/Query/QuerySheetRelsTargetTesting.h"
 #include "SimpleCSV/Query/QuerySheetTypeTesting.h"
 #include "SimpleCSV/Query/QuerySheetVisibilityTesting.h"

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 21:19)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 16:34)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,23 +14,21 @@
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
-using std::string;
-
-CoreTools::SimpleCSV::QueryXmlDataImpl::QueryXmlDataImpl(const string& xmlPath)
-    : xmlPath{ xmlPath }, m_XmlData{}
+CoreTools::SimpleCSV::QueryXmlDataImpl::QueryXmlDataImpl(std::string xmlPath) noexcept
+    : xmlPath{ xmlPath }, xmlData{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::SimpleCSV::QueryXmlDataImpl::QueryXmlDataImpl(const string& xmlPath, const XmlDataSharedPtr& xmlData)
-    : xmlPath{ xmlPath }, m_XmlData{ xmlData }
+CoreTools::SimpleCSV::QueryXmlDataImpl::QueryXmlDataImpl(std::string xmlPath, const XmlDataSharedPtr& xmlData) noexcept
+    : xmlPath{ xmlPath }, xmlData{ xmlData }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, QueryXmlDataImpl)
 
-string CoreTools::SimpleCSV::QueryXmlDataImpl::GetXmlPath() const
+std::string CoreTools::SimpleCSV::QueryXmlDataImpl::GetXmlPath() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -41,20 +39,19 @@ CoreTools::SimpleCSV::QueryXmlDataImpl::XmlDataSharedPtr CoreTools::SimpleCSV::Q
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto xmlData = m_XmlData.lock();
-    if (xmlData)
+    if (auto xmlDataSharedPtr = xmlData.lock(); xmlDataSharedPtr != nullptr)
     {
-        return xmlData;
+        return xmlDataSharedPtr;
     }
     else
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("指针已释放！"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("指针已释放！"s))
     }
 }
 
-void CoreTools::SimpleCSV::QueryXmlDataImpl::SetXmlData(const XmlDataSharedPtr& xmlData) noexcept
+void CoreTools::SimpleCSV::QueryXmlDataImpl::SetXmlData(const XmlDataSharedPtr& aXmlData) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_XmlData = xmlData;
+    xmlData = aXmlData;
 }

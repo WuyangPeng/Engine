@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:27)
+///	引擎测试版本：0.9.0.4 (2023/03/07 11:12)
 
 #include "CommandSetSheetVisibilityTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -35,12 +35,12 @@ void CoreTools::CommandSetSheetVisibilityTesting::MainTest()
 
 void CoreTools::CommandSetSheetVisibilityTesting::CommandSetSheetVisibilityTest()
 {
-    auto sheetID = "sheetID"s;
-    auto sheetName = "sheetName"s;
-    auto sheetVisibility = "sheetVisibility"s;
-    SimpleCSV::CommandSetSheetVisibility commandSetSheetVisibility{ sheetID, sheetName, sheetVisibility };
+    const auto sheetId = "sheetId"s;
+    const auto sheetName = "sheetName"s;
+    const auto sheetVisibility = "sheetVisibility"s;
+    const SimpleCSV::CommandSetSheetVisibility commandSetSheetVisibility{ sheetId, sheetName, sheetVisibility };
 
-    ASSERT_EQUAL(sheetID, commandSetSheetVisibility.GetSheetID());
+    ASSERT_EQUAL(sheetId, commandSetSheetVisibility.GetSheetId());
     ASSERT_EQUAL(sheetName, commandSetSheetVisibility.GetSheetName());
     ASSERT_EQUAL(sheetVisibility, commandSetSheetVisibility.GetSheetVisibility());
 }

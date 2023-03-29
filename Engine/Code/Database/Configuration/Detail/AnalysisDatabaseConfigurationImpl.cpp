@@ -56,12 +56,7 @@ void Database::AnalysisDatabaseConfigurationImpl::AnalysisMain()
         }
         catch (const CoreTools::Error& error)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Database)
-                << SYSTEM_TEXT("数据库策略")
-                << ptree.first
-                << SYSTEM_TEXT("配置值错误：")
-                << error
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Database, SYSTEM_TEXT("数据库策略"), ptree.first, SYSTEM_TEXT("配置值错误："), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }

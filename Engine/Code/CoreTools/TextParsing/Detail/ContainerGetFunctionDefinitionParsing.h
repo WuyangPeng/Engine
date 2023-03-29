@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 13:17)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 18:13)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CONTAINER_GET_FUNCTION_DEFINITION_PARSING_H
 #define CORE_TOOLS_TEXT_PARSING_CONTAINER_GET_FUNCTION_DEFINITION_PARSING_H
@@ -42,7 +42,7 @@ namespace CoreTools
         NODISCARD String GenerateLambdaFunctionThrowException(const String& lowerClassName) const;
 
     private:
-        NODISCARD String GenerateGetFirstFunction() const;
+        NODISCARD virtual String GenerateGetFirstFunction() const;
         NODISCARD String GenerateGetReturnFirst(const String& lowerClassName) const;
         NODISCARD String GenerateGetContainerFunction(const StringView& containerName) const;
         NODISCARD String GenerateReturnContainer(const String& lowerClassName) const;

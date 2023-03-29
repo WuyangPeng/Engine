@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:36)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 14:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,17 +15,15 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/SimpleZip/ZipEntry.h"
 
-using std::string;
-
-CoreTools::SimpleZip::ZipWriter::ZipWriter(const string& archivePath)
-    : archivePath{ archivePath }, archive{}, isClose{ false }
+CoreTools::SimpleZip::ZipWriter::ZipWriter(std::string archivePath) noexcept
+    : archivePath{ std::move(archivePath) }, archive{}, isClose{ false }
 {
     Init();
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::SimpleZip::ZipWriter::~ZipWriter()
+CoreTools::SimpleZip::ZipWriter::~ZipWriter() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
@@ -54,21 +52,21 @@ void CoreTools::SimpleZip::ZipWriter::Close() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleZip, ZipWriter)
 
-void CoreTools::SimpleZip::ZipWriter::ValidateFileArchive()
+void CoreTools::SimpleZip::ZipWriter::ValidateFileArchive() const
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26812)
 
-    mz_zip_error errordata{};
+    mz_zip_error errorData{};
 
 #include STSTEM_WARNING_POP
 
     // 验证临时文件
-    if (!mz_zip_validate_file_archive(archivePath.c_str(), 0, &errordata))
+    if (!mz_zip_validate_file_archive(archivePath.c_str(), 0, &errorData))
     {
-        THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(errordata)));
+        THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(errorData)))
     }
 }
 
@@ -78,25 +76,26 @@ void CoreTools::SimpleZip::ZipWriter::AddZipEntry(const ZipEntry& zipEntry, mz_z
 
     if (isClose)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("文件已关闭。\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("文件已关闭。\n"s))
     }
 
     if (zipEntry.IsDirectory())
     {
         return;
     }
+
     if (!zipEntry.IsModified())
     {
         if (!mz_zip_writer_add_from_zip_reader(&archive, readArchive, zipEntry.GetIndex()))
         {
-            THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(archive.m_last_error)));
+            THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(archive.m_last_error)))
         }
     }
     else
     {
         if (!zipEntry.WriterAddMem(&archive))
         {
-            THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(archive.m_last_error)));
+            THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(archive.m_last_error)))
         }
     }
 }

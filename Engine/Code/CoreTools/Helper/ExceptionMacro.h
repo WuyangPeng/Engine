@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.2 (2023/02/18 10:48)
+///	引擎版本：0.9.0.4 (2023/03/23 15:47)
 
 #ifndef CORE_TOOLS_HELPER_EXCEPTION_MACRO_H
 #define CORE_TOOLS_HELPER_EXCEPTION_MACRO_H
@@ -37,28 +37,22 @@
 
 #define EXCEPTION_TRY try
 
-#define EXCEPTION_ENGINE_EXCEPTION_CATCH(filterType)     \
-    catch (const CoreTools::Error& error)                \
-    {                                                    \
-        LOG_SINGLETON_ENGINE_APPENDER(Error, filterType) \
-            << error                                     \
-            << LOG_SINGLETON_TRIGGER_ASSERT;             \
+#define EXCEPTION_ENGINE_EXCEPTION_CATCH(filterType)                                                                \
+    catch (const CoreTools::Error& error)                                                                           \
+    {                                                                                                               \
+        LOG_SINGLETON_ENGINE_APPENDER(Error, filterType, error, CoreTools::LogAppenderIOManageSign::TriggerAssert); \
     }
 
-#define EXCEPTION_STD_EXCEPTION_CATCH(filterType)        \
-    catch (const std::exception& error)                  \
-    {                                                    \
-        LOG_SINGLETON_ENGINE_APPENDER(Error, filterType) \
-            << error                                     \
-            << LOG_SINGLETON_TRIGGER_ASSERT;             \
+#define EXCEPTION_STD_EXCEPTION_CATCH(filterType)                                                                   \
+    catch (const std::exception& error)                                                                             \
+    {                                                                                                               \
+        LOG_SINGLETON_ENGINE_APPENDER(Error, filterType, error, CoreTools::LogAppenderIOManageSign::TriggerAssert); \
     }
- 
-#define EXCEPTION_UNKNOWN_CATCH(filterType)               \
-    catch (...)                                          \
-    {                                                    \
-        LOG_SINGLETON_ENGINE_APPENDER(Fatal, filterType) \
-            << SYSTEM_TEXT("未知错误。")                 \
-            << LOG_SINGLETON_TRIGGER_ASSERT;             \
+
+#define EXCEPTION_UNKNOWN_CATCH(filterType)                                                                                             \
+    catch (...)                                                                                                                         \
+    {                                                                                                                                   \
+        LOG_SINGLETON_ENGINE_APPENDER(Fatal, filterType, SYSTEM_TEXT("未知错误。"), CoreTools::LogAppenderIOManageSign::TriggerAssert); \
     }
 
 #define EXCEPTION_ALL_CATCH(filterType)          \

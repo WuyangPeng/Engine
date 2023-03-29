@@ -11,6 +11,7 @@
 
 #include "ReportOutput.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/LogManager/LogAsynchronous.h"
 #include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 
 using std::string;
@@ -27,21 +28,21 @@ void CoreTools::ReportOutput::PrintString(const string& characterString)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    streamShared << characterString;
+    LOG_ASYNCHRONOUS_SINGLETON.Registered(streamShared, characterString);
 }
 
 void CoreTools::ReportOutput::PrintNewLine()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    streamShared << '\n';
+    LOG_ASYNCHRONOUS_SINGLETON.Registered(streamShared, "\n");
 }
 
 void CoreTools::ReportOutput::PrintNumber(int number)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    streamShared << number;
+    LOG_ASYNCHRONOUS_SINGLETON.Registered(streamShared, std::to_string(number));
 }
 
 // protected

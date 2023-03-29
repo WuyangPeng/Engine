@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:35)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/10 14:17)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -35,3 +35,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, JsonRow, GetBoolArray, String,
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, JsonRow, GetIntArray, String, CoreTools::JsonRow::IntContainer)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, JsonRow, GetInt64Array, String, CoreTools::JsonRow::Int64Container)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, JsonRow, GetDoubleArray, String, CoreTools::JsonRow::DoubleContainer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, JsonRow, GetStringArray, String, CoreTools::JsonRow::StringContainer)
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, JsonRow, GetJsonRowContainer, String, CoreTools::JsonRow::JsonRowContainer)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, JsonRow, GetJsonRow, String, CoreTools::JsonRow)

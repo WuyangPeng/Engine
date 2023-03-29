@@ -37,9 +37,7 @@ Rendering::Colour<T>::Colour(const Colour<RhsType>& colour)
     }
     catch (const boost::bad_numeric_cast& error)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Debug, Rendering)
-            << error
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Debug, Rendering, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
         THROW_EXCEPTION(SYSTEM_TEXT("颜色数据转换失败。"s));
     }
@@ -61,9 +59,7 @@ Rendering::Colour<T>& Rendering::Colour<T>::operator=(const Colour<RhsType>& col
     }
     catch (const boost::bad_numeric_cast& error)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Debug, Rendering)
-            << error
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Debug, Rendering, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
         THROW_EXCEPTION(SYSTEM_TEXT("颜色数据转换失败。"s));
     }

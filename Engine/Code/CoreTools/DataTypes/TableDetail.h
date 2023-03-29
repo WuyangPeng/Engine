@@ -148,13 +148,7 @@ void CoreTools::Table<Rows, Columns, Type>::SetRow(int row, const ColumnTuple& t
     auto index = Columns * row;
     for (auto column = 0; column < Columns; ++column)
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-        entry[index] = tuple[column];
-
-#include STSTEM_WARNING_POP
+        entry.at(index) = tuple[column];
 
         ++index;
     }
@@ -170,13 +164,7 @@ typename CoreTools::Table<Rows, Columns, Type>::ColumnTuple CoreTools::Table<Row
     auto index = Columns * row;
     for (auto column = 0; column < Columns; ++column)
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-        result[column] = entry[index];
-
-#include STSTEM_WARNING_POP
+        result[column] = entry.at(index);
 
         ++index;
     }
@@ -192,13 +180,7 @@ void CoreTools::Table<Rows, Columns, Type>::SetColumn(int column, const RowTuple
     auto index = column;
     for (auto row = 0; row < Rows; ++row)
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-        entry[index] = tuple[row];
-
-#include STSTEM_WARNING_POP
+        entry.at(index) = tuple[row];
 
         index += Columns;
     }
@@ -214,13 +196,7 @@ typename CoreTools::Table<Rows, Columns, Type>::RowTuple CoreTools::Table<Rows, 
     auto index = column;
     for (auto row = 0; row < Rows; ++row)
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-        result[row] = entry[index];
-
-#include STSTEM_WARNING_POP
+        result[row] = entry.at(index);
 
         index += Columns;
     }

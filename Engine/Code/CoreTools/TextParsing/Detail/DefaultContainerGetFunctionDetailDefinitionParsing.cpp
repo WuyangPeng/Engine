@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:57)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:43)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -30,12 +30,12 @@ System::String CoreTools::DefaultContainerGetFunctionDetailDefinitionParsing::Ge
 
     auto content = GenerateIndentation(2);
 
-    content += TextParsing::g_IfFunction;
+    content += TextParsing::gIfFunction;
 
     content += GenerateFunctionBeginBrackets(2);
 
     content += GenerateIndentation(3);
-    content += TextParsing::g_ResultEmplaceBack;
+    content += TextParsing::gResultEmplaceBack;
 
     content += GenerateFunctionEndBrackets(2);
 
@@ -51,7 +51,7 @@ System::String CoreTools::DefaultContainerGetFunctionDetailDefinitionParsing::Ge
     content += GenerateFunctionBeginBrackets(1);
     content += GenerateLambdaFunctionReturnIter();
     content += GenerateFunctionEndBrackets(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += GenerateThrowException(lowerClassName);
 
@@ -69,23 +69,23 @@ System::String CoreTools::DefaultContainerGetFunctionDetailDefinitionParsing::Ge
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_FunctionTemplate;
+    content += TextParsing::gFunctionTemplate;
     content += nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += csvClassName;
-    content += TextParsing::g_Container;
-    content += TextParsing::g_DoubleColonConst;
+    content += TextParsing::gContainer;
+    content += TextParsing::gDoubleColonConst;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_Base;
-    content += TextParsing::g_SharedPtr;
-    content += TextParsing::g_Space;
+    content += TextParsing::gBase;
+    content += TextParsing::gSharedPtr;
+    content += TextParsing::gSpace;
     content += nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += csvClassName;
-    content += TextParsing::g_Container;
-    content += TextParsing::g_GetFirst;
+    content += TextParsing::gContainer;
+    content += TextParsing::gGetFirst;
     content += csvClassName;
-    content += TextParsing::g_FunctionParameterConst;
+    content += TextParsing::gFunctionParameterConst;
 
     return content;
 }

@@ -20,6 +20,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/LogManager/LogAsynchronous.h"
 #include "CoreTools/LogManager/LogConsoleTextColorsManager.h"
 
 #include <iomanip>
@@ -245,78 +246,49 @@ string CoreTools::UnitTest::GetName() const
 // protected
 void CoreTools::UnitTest::AssertExceptionInfoLog(const Error& error, const string& errorMessage)
 {
-    LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
-        << GetCorrectThrowExceptionDescribe()
-        << errorMessage
-        << " "
-        << error
-        << LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools, GetCorrectThrowExceptionDescribe(), errorMessage, " ", error);
 
     ErrorTest(true, error.GetFunctionDescribed(), GetCorrectThrowExceptionDescribe());
 }
 
 void CoreTools::UnitTest::AssertExceptionInfoLog(const exception& error, const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Info, CoreTools, functionDescribed)
-        << GetCorrectThrowExceptionDescribe()
-        << errorMessage
-        << " "
-        << error.what()
-        << LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Info, CoreTools, functionDescribed, GetCorrectThrowExceptionDescribe(), errorMessage, " ", error);
 
     ErrorTest(true, functionDescribed, GetCorrectThrowExceptionDescribe());
 }
 
 void CoreTools::UnitTest::AssertExceptionInfoLog(const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Warn, CoreTools, functionDescribed)
-        << GetCorrectThrowExceptionDescribe()
-        << errorMessage
-        << LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Warn, CoreTools, functionDescribed, GetCorrectThrowExceptionDescribe(), errorMessage);
 
     ErrorTest(true, functionDescribed, GetCorrectThrowExceptionDescribe());
 }
 
 void CoreTools::UnitTest::AssertExceptionErrorLog(const Error& error, const string& errorMessage)
 {
-    LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-        << GetErrorThrowExceptionDescribe()
-        << errorMessage
-        << " "
-        << error
-        << LOG_SINGLETON_TRIGGER_ASSERT;
+    LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, GetErrorThrowExceptionDescribe(), errorMessage, " ", error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
     ErrorTest(false, error.GetFunctionDescribed(), GetErrorThrowExceptionDescribe());
 }
 
 void CoreTools::UnitTest::AssertExceptionErrorLog(const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Error, CoreTools, functionDescribed)
-        << GetErrorNothrowExceptionDescribe()
-        << errorMessage
-        << LOG_SINGLETON_TRIGGER_ASSERT;
+    LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Error, CoreTools, functionDescribed, GetErrorNothrowExceptionDescribe(), errorMessage, CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
     ErrorTest(false, functionDescribed, GetErrorNothrowExceptionDescribe());
 }
 
 void CoreTools::UnitTest::AssertExceptionFatalLog(const exception& error, const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Error, CoreTools, functionDescribed)
-        << GetErrorThrowExceptionDescribe()
-        << errorMessage
-        << " "
-        << error.what()
-        << LOG_SINGLETON_TRIGGER_ASSERT;
+    LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Error, CoreTools, functionDescribed, GetErrorThrowExceptionDescribe(), errorMessage, " ", error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
     ErrorTest(false, functionDescribed, GetErrorThrowExceptionDescribe());
 }
 
 void CoreTools::UnitTest::AssertExceptionFatalLog(const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Fatal, CoreTools, functionDescribed)
-        << GetErrorThrowExceptionDescribe()
-        << errorMessage
-        << LOG_SINGLETON_TRIGGER_ASSERT;
+    LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Fatal, CoreTools, functionDescribed, GetErrorThrowExceptionDescribe(), errorMessage, CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
     ErrorTest(false, functionDescribed, GetErrorThrowExceptionDescribe());
 }
@@ -419,7 +391,7 @@ void CoreTools::UnitTest::PrintRunUnitTest()
 {
     auto runUnitTest = "正在运行测试 \""s + GetName() + "\"。\n"s;
 
-    GetStream() << runUnitTest;
+    LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), runUnitTest);
 
     PrintTipsMessage();
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 13:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/03 17:09)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_H
 #define CORE_TOOLS_TEXT_PARSING_H
@@ -24,6 +24,7 @@
 #include "Json/JsonNode.h"
 #include "Json/JsonNodeContainer.h"
 #include "Json/JsonRow.h"
+#include "Json/JsonTotalGenerate.h"
 #include "SimpleCSV/AppProperties.h"
 #include "SimpleCSV/Cell.h"
 #include "SimpleCSV/CellIterator.h"
@@ -33,7 +34,7 @@
 #include "SimpleCSV/CellValueProxy.h"
 #include "SimpleCSV/Color.h"
 #include "SimpleCSV/Column.h"
-#include "SimpleCSV/CommandQuery/CommandAddChartsheet.h"
+#include "SimpleCSV/CommandQuery/CommandAddChartSheet.h"
 #include "SimpleCSV/CommandQuery/CommandAddSharedStrings.h"
 #include "SimpleCSV/CommandQuery/CommandAddWorksheet.h"
 #include "SimpleCSV/CommandQuery/CommandCloneSheet.h"
@@ -44,10 +45,10 @@
 #include "SimpleCSV/CommandQuery/CommandSetSheetName.h"
 #include "SimpleCSV/CommandQuery/CommandSetSheetVisibility.h"
 #include "SimpleCSV/CommandQuery/QuerySharedStrings.h"
-#include "SimpleCSV/CommandQuery/QuerySheetID.h"
+#include "SimpleCSV/CommandQuery/QuerySheetId.h"
 #include "SimpleCSV/CommandQuery/QuerySheetIndex.h"
 #include "SimpleCSV/CommandQuery/QuerySheetName.h"
-#include "SimpleCSV/CommandQuery/QuerySheetRelsID.h"
+#include "SimpleCSV/CommandQuery/QuerySheetRelsId.h"
 #include "SimpleCSV/CommandQuery/QuerySheetRelsTarget.h"
 #include "SimpleCSV/CommandQuery/QuerySheetType.h"
 #include "SimpleCSV/CommandQuery/QuerySheetVisibility.h"

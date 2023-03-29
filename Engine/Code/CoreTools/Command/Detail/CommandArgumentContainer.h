@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 11:11)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 09:40)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_CONTAINER_H
 #define CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_CONTAINER_H
@@ -52,7 +52,7 @@ namespace CoreTools
         NODISCARD bool IsExist(const std::string& argumentsName) const;
 
         // 返回第一个未处理参数的名字。
-        NODISCARD const std::string ExcessArguments() const;
+        NODISCARD std::string ExcessArguments() const;
         NODISCARD int GetExcessArgumentsCount() const noexcept;
 
     private:

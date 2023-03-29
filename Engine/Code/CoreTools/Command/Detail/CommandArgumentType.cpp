@@ -1,20 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 13:39)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 11:18)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CommandArgumentType.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::string;
-
-CoreTools::CommandArgumentType::CommandArgumentType(string argument) noexcept
+CoreTools::CommandArgumentType::CommandArgumentType(std::string argument) noexcept
     : argument{ std::move(argument) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -38,8 +36,7 @@ bool CoreTools::CommandArgumentType::IsDigit() const
 
     if (!argument.empty())
     {
-        const auto firstArgument = argument.at(0);
-        if (firstArgument != '-' && isdigit(static_cast<int>(firstArgument)))
+        if (const auto firstArgument = argument.at(0); firstArgument != '-' && isdigit(static_cast<int>(firstArgument)))
         {
             return true;
         }

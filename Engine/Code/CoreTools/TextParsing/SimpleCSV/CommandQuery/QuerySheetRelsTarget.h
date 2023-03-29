@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 19:09)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 16:59)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_QUERY_SHEET_RELS_TARGET_H
 #define CORE_TOOLS_TEXT_PARSING_QUERY_SHEET_RELS_TARGET_H
@@ -20,28 +20,25 @@
 template class CORE_TOOLS_DEFAULT_DECLARE std::shared_ptr<const CoreTools::SimpleCSV::QuerySheetRelsTargetImpl>;
 template class CORE_TOOLS_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<CoreTools::SimpleCSV::QuerySheetRelsTargetImpl>;
 
-namespace CoreTools
+namespace CoreTools::SimpleCSV
 {
-    namespace SimpleCSV
+    class CORE_TOOLS_DEFAULT_DECLARE QuerySheetRelsTarget final
     {
-        class CORE_TOOLS_DEFAULT_DECLARE QuerySheetRelsTarget final
-        {
-        public:
-            PERFORMANCE_UNSHARED_TYPE_DECLARE(QuerySheetRelsTarget);
+    public:
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(QuerySheetRelsTarget);
 
-        public:
-            explicit QuerySheetRelsTarget(const std::string& sheetID);
-            QuerySheetRelsTarget(const std::string& sheetID, const std::string& sheetTarget);
+    public:
+        explicit QuerySheetRelsTarget(const std::string& sheetId);
+        QuerySheetRelsTarget(const std::string& sheetId, const std::string& sheetTarget);
 
-            CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-            NODISCARD std::string GetSheetID() const;
-            NODISCARD std::string GetSheetTarget() const;
+        NODISCARD std::string GetSheetId() const;
+        NODISCARD std::string GetSheetTarget() const;
 
-        private:
-            PackageType impl;
-        };
-    }
+    private:
+        PackageType impl;
+    };
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_QUERY_SHEET_RELS_TARGET_H

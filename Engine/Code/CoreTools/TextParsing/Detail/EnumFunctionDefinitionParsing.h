@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 13:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:12)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ENUM_FUNCTION_DEFINITION_PARSING_H
 #define CORE_TOOLS_TEXT_PARSING_ENUM_FUNCTION_DEFINITION_PARSING_H
@@ -27,7 +27,7 @@ namespace CoreTools
         using StringView = System::StringView;
 
     public:
-        EnumFunctionDefinitionParsing(const CSVHead& csvHead, const CSVContent& csvContent, const String& className, int nameIndex);
+        EnumFunctionDefinitionParsing(CSVHead csvHead, CSVContent csvContent, String className, int nameIndex) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -38,7 +38,7 @@ namespace CoreTools
         NODISCARD CSVContent GetCSVContent() const noexcept;
         NODISCARD int GetNameIndex() const noexcept;
 
-        NODISCARD String GetColumn(const String& describe, const String& space, CSVPoistionType csvPoistionType) const;
+        NODISCARD static String GetColumn(const String& describe, const String& space, CSVPositionType csvPositionType);
         NODISCARD String GetFindFunctionDefinition(const StringView& variable) const;
 
     private:
@@ -52,8 +52,8 @@ namespace CoreTools
         NODISCARD String GenerateTypeDescribeNotFind() const;
 
     private:
-        CSVHead m_CsvHead;
-        CSVContent m_CsvContent;
+        CSVHead head;
+        CSVContent csvContent;
         String className;
         int nameIndex;
     };

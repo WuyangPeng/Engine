@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #include "CSVConfigureContainer.h"
@@ -19,13 +19,13 @@ using namespace std::literals;
 CSVConfigure::Equip::Equip(const CoreTools::CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
-      nextID{ csvRow.GetInt(SYSTEM_TEXT("nextID"s)) },
+      nextId{ csvRow.GetInt(SYSTEM_TEXT("nextId"s)) },
       reward{ csvRow.GetInt(SYSTEM_TEXT("reward"s)) },
       equipName{ csvRow.GetString(SYSTEM_TEXT("equipName"s)) },
       logo{ csvRow.GetChar(SYSTEM_TEXT("logo"s)) },
       position{ csvRow.GetVector3(SYSTEM_TEXT("position"s)) },
       mask{ csvRow.GetBoolArray(SYSTEM_TEXT("mask"s)) },
-      heroID{ csvRow.GetInt(SYSTEM_TEXT("heroID"s)) }
+      heroId{ csvRow.GetInt(SYSTEM_TEXT("heroId"s)) }
 {
     USER_SELF_CLASS_IS_VALID_9;
 }
@@ -39,18 +39,18 @@ int CSVConfigure::Equip::GetKey() const noexcept
     return id;
 }
 
-int CSVConfigure::Equip::GetID() const noexcept
+int CSVConfigure::Equip::GetId() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return id;
 }
 
-int CSVConfigure::Equip::GetNextID() const noexcept
+int CSVConfigure::Equip::GetNextId() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return nextID;
+    return nextId;
 }
 
 int CSVConfigure::Equip::GetReward() const noexcept
@@ -116,17 +116,17 @@ std::deque<bool>::const_iterator CSVConfigure::Equip::GetMaskEnd() const noexcep
     return mask.cend();
 }
 
-int CSVConfigure::Equip::GetHeroID() const noexcept
+int CSVConfigure::Equip::GetHeroId() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return heroID;
+    return heroId;
 }
 
-std::shared_ptr<const CSVConfigure::Hero> CSVConfigure::Equip::GetHeroID(const CSVConfigureContainer& csvContainer) const
+std::shared_ptr<const CSVConfigure::Hero> CSVConfigure::Equip::GetHeroId(const CSVConfigureContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return csvContainer.GetHeroContainer()->GetHero(heroID);
+    return csvContainer.GetHeroContainer()->GetHero(heroId);
 }
 

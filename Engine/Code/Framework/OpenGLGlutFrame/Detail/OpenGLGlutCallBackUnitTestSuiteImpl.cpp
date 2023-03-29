@@ -91,20 +91,18 @@ void Framework::OpenGLGlutCallBackUnitTestSuiteImpl::AddTest(const string& suite
         }
         else if (testLoopCount < 0)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-                << SYSTEM_TEXT("²âÊÔ")
-                << testName
-                << SYSTEM_TEXT("Î´ÅäÖÃ£¡ÔÚ²âÊÔÌ×¼þ£º")
-                << suite.GetName()
-                << SYSTEM_TEXT("¡£")
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools,
+                                          SYSTEM_TEXT("²âÊÔ"),
+                                          testName,
+                                          SYSTEM_TEXT("Î´ÅäÖÃ£¡ÔÚ²âÊÔÌ×¼þ£º"),
+                                          suite.GetName(),
+                                          SYSTEM_TEXT("¡£"),
+                                          CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
     catch (const CoreTools::Error& error)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-            << error
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

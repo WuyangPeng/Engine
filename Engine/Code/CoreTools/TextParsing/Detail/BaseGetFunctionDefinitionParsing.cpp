@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -48,11 +48,11 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateGetKeyDefini
     content += GenerateFunctionBeginBrackets();
 
     content += GenerateUserClassIsValidConst9(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
     content += GenerateReturnKey(1);
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -64,13 +64,13 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateGetKeyConst(
     const auto csvHead = GetCSVHead();
 
     auto content = GetKeyTypeDescribe();
-    content += TextParsing::g_Space;
+    content += TextParsing::gSpace;
     content += csvHead.GetNameSpace();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += GetCSVClassName();
-    content += TextParsing::g_DoubleColon;
-    content += TextParsing::g_GetKeyConst;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gGetKeyConst;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -83,18 +83,18 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
     const auto actualType = csvHead.GetActualTypeByNameSpace(index);
 
     auto content = GenerateVariableFunction(index, actualType);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += GenerateFunctionBeginBrackets();
 
     content += GenerateUserClassIsValidConst9(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     const auto dataType = csvHead.GetDataType(index);
     content += GenerateBaseGetFunctionReturnDefinition(dataType, actualType);
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += GenerateBaseGetFunctionArrayDefinition(index);
     content += GenerateBaseGetFunctionMappingDefinition(index);
@@ -107,22 +107,21 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateVariableFunc
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto csvHead = GetCSVHead();
-    auto functionVariableName = csvHead.GetFunctionVariableName(index);
+    const auto functionVariableName = csvHead.GetFunctionVariableName(index);
 
     auto content = actualType;
 
-    content += TextParsing::g_Space;
+    content += TextParsing::gSpace;
     content += csvHead.GetNameSpace();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += GetCSVClassName();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += functionVariableName;
-    content += TextParsing::g_FunctionConst;
+    content += TextParsing::gFunctionConst;
 
-    const auto dataType = csvHead.GetDataType(index);
-    if (CSVDataType::Bool <= dataType && dataType <= CSVDataType::IntVector4)
+    if (const auto dataType = csvHead.GetDataType(index); CSVDataType::Bool <= dataType && dataType <= CSVDataType::IntVector4)
     {
-        content += TextParsing::g_Noexcept;
+        content += TextParsing::gNoexcept;
     }
 
     return content;
@@ -136,7 +135,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetRetur
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_ThrowException;
+    content += TextParsing::gThrowException;
     content += StringUtility::ToFirstLetterLower(csvHead.GetCSVClassName());
     content += endDescribe;
 
@@ -151,10 +150,10 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetEnumR
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Return;
+    content += TextParsing::gReturn;
     content += actualType;
-    content += TextParsing::g_Init;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gInit;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -167,7 +166,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
 
     if (dataType == CSVDataType::String)
     {
-        return GenerateBaseGetReturnDefinition(TextParsing::g_BaseNotGetString);
+        return GenerateBaseGetReturnDefinition(TextParsing::gBaseNotGetString);
     }
     else if (dataType == CSVDataType::Enum)
     {
@@ -175,7 +174,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
     }
     else if (CSVDataType::BoolArray <= dataType)
     {
-        return GenerateBaseGetReturnDefinition(TextParsing::g_BaseNotGetArray);
+        return GenerateBaseGetReturnDefinition(TextParsing::gBaseNotGetArray);
     }
     else
     {
@@ -201,12 +200,12 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
     auto content = GenerateFunctionBeginBrackets();
 
     content += GenerateUserClassIsValidConst9(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
-    content += GenerateBaseGetReturnDefinition(TextParsing::g_BaseNotGetArray);
+    content += GenerateBaseGetReturnDefinition(TextParsing::gBaseNotGetArray);
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -229,13 +228,13 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
     const auto csvHead = GetCSVHead();
 
     auto content = valueType;
-    content += TextParsing::g_Space;
+    content += TextParsing::gSpace;
     content += csvHead.GetNameSpace();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += GetCSVClassName();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += functionVariableName;
-    content += TextParsing::g_MaybeUnusedIndexParameterConst;
+    content += TextParsing::gMaybeUnusedIndexParameterConst;
 
     return content;
 }
@@ -255,7 +254,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = GenerateGetFunctionArrayConstIterator(actualType, functionVariableName, TextParsing::g_BeginFunctionConst);
+    auto content = GenerateGetFunctionArrayConstIterator(actualType, functionVariableName, TextParsing::gBeginFunctionConst);
 
     content += GenerateBaseGetFunctionArrayBody();
 
@@ -266,7 +265,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = GenerateGetFunctionArrayConstIterator(actualType, functionVariableName, TextParsing::g_EndFunctionConst);
+    auto content = GenerateGetFunctionArrayConstIterator(actualType, functionVariableName, TextParsing::gEndFunctionConst);
 
     content += GenerateBaseGetFunctionArrayBody();
 
@@ -279,9 +278,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
 
     const auto csvHead = GetCSVHead();
 
-    const auto dataType = csvHead.GetDataType(index);
-
-    if (CSVDataType::BoolArray <= dataType)
+    if (const auto dataType = csvHead.GetDataType(index); CSVDataType::BoolArray <= dataType)
     {
         const auto actualType = csvHead.GetActualTypeByNameSpace(index);
         const auto functionVariableName = csvHead.GetFunctionVariableName(index);
@@ -304,12 +301,12 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
     auto content = GenerateFunctionBeginBrackets();
 
     content += GenerateUserClassIsValidConst9(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
-    content += GenerateBaseGetReturnDefinition(TextParsing::g_BaseNotGetMapping);
+    content += GenerateBaseGetReturnDefinition(TextParsing::gBaseNotGetMapping);
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -320,10 +317,9 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
 
     const auto csvHead = GetCSVHead();
 
-    const auto mapping = csvHead.GetMapping(index);
-    if (!mapping.empty())
+    if (const auto mapping = csvHead.GetMapping(index); !mapping.empty())
     {
-        auto upperVariableName = csvHead.GetUpperVariableName(index);
+        const auto upperVariableName = csvHead.GetUpperVariableName(index);
 
         auto content = GenerateBaseGetFunctionArrayMapping(upperVariableName, mapping);
 
@@ -345,22 +341,22 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_SharedPtrConst;
+    content += TextParsing::gSharedPtrConst;
     content += csvHead.GetNameSpace();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += StringUtility::ToFirstLetterUpper(mapping);
-    content += TextParsing::g_RightAngleBracket;
-    content += TextParsing::g_Space;
+    content += TextParsing::gRightAngleBracket;
+    content += TextParsing::gSpace;
     content += nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += GetCSVClassName();
-    content += TextParsing::g_DoubleColon;
-    content += TextParsing::g_Get;
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gGet;
     content += upperVariableName;
-    content += TextParsing::g_MaybeUnusedConst;
+    content += TextParsing::gMaybeUnusedConst;
     content += nameSpace;
-    content += TextParsing::g_ContainerParameter;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gContainerParameter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:25)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:03)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -28,10 +28,10 @@ CoreTools::FormatTypeParsing::FormatTypeParsing(const String& formatTypeContent)
 
 void CoreTools::FormatTypeParsing::Parsing(const String& formatTypeContent)
 {
-    const auto commaPoistion = formatTypeContent.find(TextParsing::g_Comma);
-    const auto equalSignPoistion = formatTypeContent.find(TextParsing::g_equalSign);
+    const auto commaPosition = formatTypeContent.find(TextParsing::gComma);
+    const auto equalSignPosition = formatTypeContent.find(TextParsing::gEqualSign);
 
-    auto column = formatTypeContent.substr(0, commaPoistion < equalSignPoistion ? commaPoistion : equalSignPoistion);
+    auto column = formatTypeContent.substr(0, commaPosition < equalSignPosition ? commaPosition : equalSignPosition);
     boost::algorithm::trim(column);
 
     if (!column.empty())
@@ -40,7 +40,7 @@ void CoreTools::FormatTypeParsing::Parsing(const String& formatTypeContent)
 
         if (formatType == CSVFormatType::Ignore)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("CSV格式类型不能为Ignore。"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("CSV格式类型不能为Ignore。"s))
         }
     }
 }

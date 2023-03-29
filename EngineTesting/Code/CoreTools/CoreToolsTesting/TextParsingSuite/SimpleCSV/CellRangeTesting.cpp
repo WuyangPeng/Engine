@@ -1,19 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:34)
+///	引擎测试版本：0.9.0.4 (2023/03/08 15:47)
 
 #include "CellRangeTesting.h"
+#include "System/Helper/PragmaWarning/PugiXml.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/Cell.h"
 #include "CoreTools/TextParsing/SimpleCSV/CellRange.h"
 #include "CoreTools/TextParsing/SimpleCSV/CellReference.h"
-#include "CoreTools/TextParsing/SimpleCSV/CellValueProxy.h"
 #include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/ValueTypeFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/Worksheet.h"
@@ -21,8 +21,6 @@
 #include "Mathematics/Base/MathDetail.h"
 
 using namespace std::literals;
-using std::string;
-using std::stringstream;
 
 CoreTools::CellRangeTesting::CellRangeTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -45,12 +43,12 @@ void CoreTools::CellRangeTesting::MainTest()
 
 void CoreTools::CellRangeTesting::CellRangeTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
-    auto worksheetNames = workbook.GetWorksheetNames();
-    auto worksheetName = worksheetNames.at(0);
-    auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
+    const auto worksheet = workbook.GetWorksheet(worksheetName);
 
     auto cellRange = worksheet.GetRange();
 
@@ -59,11 +57,11 @@ void CoreTools::CellRangeTesting::CellRangeTest()
 
     ASSERT_UNEQUAL_NULL_PTR(cellRange.GetDocument());
 
-    auto topLeft = cellRange.GetTopLeft();
+    const auto topLeft = cellRange.GetTopLeft();
     ASSERT_EQUAL(topLeft.GetRow(), 1);
     ASSERT_EQUAL(topLeft.GetColumn(), 1);
 
-    auto bottomRight = cellRange.GetBottomRight();
+    const auto bottomRight = cellRange.GetBottomRight();
     ASSERT_EQUAL(bottomRight.GetRow(), 10);
     ASSERT_EQUAL(bottomRight.GetColumn(), 8);
 
@@ -76,12 +74,12 @@ void CoreTools::CellRangeTesting::CellRangeTest()
 
 void CoreTools::CellRangeTesting::CellRangeIteratorTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
-    auto worksheetNames = workbook.GetWorksheetNames();
-    auto worksheetName = worksheetNames.at(0);
-    auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
+    const auto worksheet = workbook.GetWorksheet(worksheetName);
 
     auto cellRange = worksheet.GetRange();
 

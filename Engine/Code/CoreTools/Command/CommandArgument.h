@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 11:48)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 09:44)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_H
 #define CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_H
@@ -33,12 +33,12 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD int GetIndex() const noexcept;
-        NODISCARD const std::string GetName() const;
+        NODISCARD std::string GetName() const;
 
         NODISCARD int GetInteger() const;
         NODISCARD float GetFloat() const;
         NODISCARD double GetDouble() const;
-        NODISCARD const std::string GetString() const;
+        NODISCARD std::string GetString() const;
 
         NODISCARD bool IsInteger() const noexcept;
         NODISCARD bool IsFloat() const noexcept;

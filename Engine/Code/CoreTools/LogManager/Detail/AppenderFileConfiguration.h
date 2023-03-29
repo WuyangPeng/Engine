@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/06 0:15)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 15:00)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_FILE_CONFIGURATION_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_FILE_CONFIGURATION_H
@@ -15,7 +15,6 @@
 #include "AppenderImpl.h"
 #include "System/Helper/UnicodeUsing.h"
 
-#include <fstream>
 #include <string>
 
 namespace CoreTools
@@ -27,26 +26,26 @@ namespace CoreTools
         using ParentType = AppenderImpl;
 
     public:
-        AppenderFileConfiguration(const String& directory,
+        AppenderFileConfiguration(String directory,
                                   AppenderPrint appenderFlags,
                                   LogLevel logLevel,
                                   int maxFileSize,
                                   bool backup,
-                                  const String& extensionName);
+                                  String extensionName) noexcept;
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD AppenderType GetAppenderType() const noexcept final;
+        NODISCARD AppenderType GetAppenderType() const noexcept override;
 
-        NODISCARD const AppenderImplSharedPtr Clone() const final;
+        NODISCARD const AppenderImplSharedPtr Clone() const override;
 
-        NODISCARD String GetDirectory() const final;
-        NODISCARD String GetExtensionName() const final;
-        NODISCARD int GetMaxFileSize() const noexcept final;
-        NODISCARD bool IsBackup() const noexcept final;
+        NODISCARD String GetDirectory() const override;
+        NODISCARD String GetExtensionName() const override;
+        NODISCARD int GetMaxFileSize() const noexcept override;
+        NODISCARD bool IsBackup() const noexcept override;
 
     private:
-        void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) noexcept final;
+        void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) const noexcept override;
 
     private:
         String directory;

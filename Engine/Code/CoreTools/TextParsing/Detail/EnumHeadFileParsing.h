@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 13:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:15)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ENUM_HEAD_FILE_PARSING_H
 #define CORE_TOOLS_TEXT_PARSING_ENUM_HEAD_FILE_PARSING_H
@@ -15,7 +15,6 @@
 #include "Parsing.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
-#include "CoreTools/TextParsing/TextParsingFwd.h"
 
 namespace CoreTools
 {
@@ -26,11 +25,11 @@ namespace CoreTools
         using ParentType = Parsing;
 
     public:
-        EnumHeadFileParsing(const CSVHead& csvHead, const CSVContent& csvContent, const String& className);
+        EnumHeadFileParsing(CSVHead csvHead, CSVContent csvContent, String className) noexcept;
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD String GenerateIOStreamHead() const;
+        NODISCARD String GenerateIoStreamHead() const;
         NODISCARD String GenerateEnumContent() const;
 
         NODISCARD String GenerateEnumOperator() const;
@@ -40,8 +39,8 @@ namespace CoreTools
         using SplitType = std::vector<String>;
 
     private:
-        NODISCARD bool HasIOStreamOperator() const;
-        NODISCARD bool HasIOStreamOperator(int index, const String& column) const;
+        NODISCARD bool HasIoStreamOperator() const;
+        NODISCARD bool HasIoStreamOperator(int index, const String& column) const;
         NODISCARD bool IsOperatorTrue(const SplitType& result, int index) const;
 
         NODISCARD String GetEnumVariableContent(const String& column, int idIndex, int nameIndex, int describeIndex) const;
@@ -49,7 +48,7 @@ namespace CoreTools
 
         NODISCARD String GenerateEnumOperator(const String& field, const SplitType& element, const String& operatorDescribe) const;
         NODISCARD String GenerateOperatorDescribe(const String& operatorDescribe) const;
-        NODISCARD String GenerateEnumIOStreamOperator(const SplitType& element) const;
+        NODISCARD String GenerateEnumIoStreamOperator(const SplitType& element) const;
 
         NODISCARD String GenerateStringCast() const;
         NODISCARD String GenerateEnumCastString() const;

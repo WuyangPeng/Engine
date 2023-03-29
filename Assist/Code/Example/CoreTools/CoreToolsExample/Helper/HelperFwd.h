@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.2 (2023/02/05 15:00)
+///	引擎辅助版本：0.9.0.4 (2023/03/14 15:49)
 
 #ifndef CORE_TOOLS_EXAMPLE_HELPER_FWD_H
 #define CORE_TOOLS_EXAMPLE_HELPER_FWD_H

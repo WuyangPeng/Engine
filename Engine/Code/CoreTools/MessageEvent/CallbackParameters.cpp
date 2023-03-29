@@ -1,23 +1,18 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/26 18:30)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/29 13:55)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CallbackParameters.h"
 #include "Detail/CallbackParametersImplDetail.h"
-#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::make_shared;
-using std::string;
-using std::wstring;
 
 CoreTools::CallbackParameters::CallbackParameters(int count)
     : impl{ count }
@@ -200,32 +195,32 @@ void CoreTools::CallbackParameters::SetValue(int index, int8_t value)
     return impl->SetValue(index, value);
 }
 
-void CoreTools::CallbackParameters::SetValue(int index, const string& value)
+void CoreTools::CallbackParameters::SetValue(int index, const std::string& value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     return impl->SetValue(index, value);
 }
 
-void CoreTools::CallbackParameters::SetValue(int index, const wstring& value)
+void CoreTools::CallbackParameters::SetValue(int index, const std::wstring& value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     return impl->SetValue(index, value);
 }
 
-string CoreTools::CallbackParameters::GetStringValue(int index) const
+std::string CoreTools::CallbackParameters::GetStringValue(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetValue<string>(index);
+    return impl->GetValue<std::string>(index);
 }
 
-wstring CoreTools::CallbackParameters::GetWStringValue(int index) const
+std::wstring CoreTools::CallbackParameters::GetWStringValue(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetValue<wstring>(index);
+    return impl->GetValue<std::wstring>(index);
 }
 
 System::String CoreTools::CallbackParameters::GetTStringValue(int index) const

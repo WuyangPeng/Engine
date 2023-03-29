@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:59)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:46)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,8 +17,8 @@
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::EnumFunctionDefinitionParsing::EnumFunctionDefinitionParsing(const CSVHead& csvHead, const CSVContent& csvContent, const String& className, int nameIndex)
-    : ParentType{ 0 }, m_CsvHead{ csvHead }, m_CsvContent{ csvContent }, className{ className }, nameIndex{ nameIndex }
+CoreTools::EnumFunctionDefinitionParsing::EnumFunctionDefinitionParsing(CSVHead csvHead, CSVContent csvContent, String className, int nameIndex) noexcept
+    : ParentType{ 0 }, head{ std::move(csvHead) }, csvContent{ std::move(csvContent) }, className{ std::move(className) }, nameIndex{ nameIndex }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -36,14 +36,14 @@ System::String CoreTools::EnumFunctionDefinitionParsing::GenerateEnumFunctionDef
     const auto typeDescribe = GenerateDescribe();
     content += typeDescribe;
 
-    String space(typeDescribe.size(), TextParsing::g_Space);
+    const String space(typeDescribe.size(), TextParsing::gSpace);
     content += GenerateColumn(space);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += GenerateFindFunctionDefinition();
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -52,14 +52,14 @@ CoreTools::CSVHead CoreTools::EnumFunctionDefinitionParsing::GetCSVHead() const 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CsvHead;
+    return head;
 }
 
 CoreTools::CSVContent CoreTools::EnumFunctionDefinitionParsing::GetCSVContent() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CsvContent;
+    return csvContent;
 }
 
 int CoreTools::EnumFunctionDefinitionParsing::GetNameIndex() const noexcept
@@ -69,28 +69,28 @@ int CoreTools::EnumFunctionDefinitionParsing::GetNameIndex() const noexcept
     return nameIndex;
 }
 
-System::String CoreTools::EnumFunctionDefinitionParsing::GetColumn(const String& describe, const String& space, CSVPoistionType csvPoistionType) const
+System::String CoreTools::EnumFunctionDefinitionParsing::GetColumn(const String& describe, const String& space, CSVPositionType csvPositionType)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     String content{};
 
-    if (csvPoistionType != CSVPoistionType::Begin)
+    if (csvPositionType != CSVPositionType::Begin)
     {
         content += space;
     }
 
     content += describe;
 
-    if (csvPoistionType != CSVPoistionType::End)
+    if (csvPositionType != CSVPositionType::End)
     {
-        content += TextParsing::g_Comma;
-        content += TextParsing::g_NewlineCharacter;
+        content += TextParsing::gComma;
+        content += TextParsing::gNewlineCharacter;
     }
     else
     {
-        content += TextParsing::g_Space;
-        content += TextParsing::g_ClassEndBrackets;
+        content += TextParsing::gSpace;
+        content += TextParsing::gClassEndBrackets;
     }
 
     return content;
@@ -123,11 +123,11 @@ System::String CoreTools::EnumFunctionDefinitionParsing::GenerateFindTypeDescrib
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_FindTypeDescribe;
+    content += TextParsing::gFindTypeDescribe;
     content += variable;
-    content += TextParsing::g_RightBrackets;
-    content += TextParsing::g_SemicolonNewline;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gSemicolonNewline;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -138,7 +138,7 @@ System::String CoreTools::EnumFunctionDefinitionParsing::GenerateIterTypeDescrib
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_IterTypeDescribe;
+    content += TextParsing::gIterTypeDescribe;
 
     return content;
 }
@@ -149,8 +149,8 @@ System::String CoreTools::EnumFunctionDefinitionParsing::GenerateTypeDescribeNot
 
     auto content = GenerateIndentation(2);
 
-    content += TextParsing::g_ThrowException;
-    content += TextParsing::g_TypeDescribeNotFind;
+    content += TextParsing::gThrowException;
+    content += TextParsing::gTypeDescribeNotFind;
 
     return content;
 }

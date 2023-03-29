@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #include "SystemConstant.h"
@@ -17,8 +17,6 @@
 #include "CoreTools/TextParsing/CSV/CSVRow.h"
 
 #include <algorithm>
-
-using std::make_shared;
 
 CSVConfigure::SystemConstantContainer::SystemConstantContainer(const CoreTools::CSVContent& csvContent)
     : systemConstant{}
@@ -33,19 +31,17 @@ void CSVConfigure::SystemConstantContainer::Parsing(const CoreTools::CSVContent&
     const auto size = csvContent.GetCount();
     if (size == 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("systemConstant表为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("systemConstant表为空。"s))
     }
 
     if (1 < size)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User)
-            << SYSTEM_TEXT("systemConstant表不是唯一的")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("systemConstant表不是唯一的"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(0) };
 
-    systemConstant = make_shared<SystemConstant>(csvRow);
+    systemConstant = std::make_shared<SystemConstant>(csvRow);
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, SystemConstantContainer)

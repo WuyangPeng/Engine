@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:24)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,7 +20,6 @@
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-using std::vector;
 using namespace std::literals;
 
 CoreTools::FormatParsing::FormatParsing(const FileContent& fileContent)
@@ -37,9 +36,8 @@ CoreTools::FormatParsing::FormatParsing(const FileContent& fileContent)
 void CoreTools::FormatParsing::Parsing(const FileContent& fileContent)
 {
     constexpr auto index = System::EnumCastUnderlying(CSVType::Format) - 1;
-    const auto& formatContent = fileContent.at(index);
 
-    if (!formatContent.empty())
+    if (const auto& formatContent = fileContent.at(index); !formatContent.empty())
     {
         Parsing(formatContent);
     }
@@ -75,24 +73,24 @@ void CoreTools::FormatParsing::EmplaceBackEmpty(bool isScope, bool isMapping, bo
     }
 }
 
-CoreTools::FormatParsing::Element CoreTools::FormatParsing::GetElement(const String& column) const
+CoreTools::FormatParsing::Element CoreTools::FormatParsing::GetElement(const String& column)
 {
     Element element{};
-    boost::algorithm::split(element, column, boost::is_any_of(TextParsing::g_Or), boost::token_compress_off);
+    split(element, column, boost::is_any_of(TextParsing::gOr), boost::token_compress_off);
 
     return element;
 }
 
-bool CoreTools::FormatParsing::IsInterval(const String& single) const noexcept
+bool CoreTools::FormatParsing::IsInterval(const String& single) noexcept
 {
-    if (single.find(TextParsing::g_LeftSquareBrackets) != String::npos ||
-        single.find(TextParsing::g_RightSquareBrackets) != String::npos ||
-        single.find(TextParsing::g_LeftBrackets) != String::npos ||
-        single.find(TextParsing::g_RightBrackets) != String::npos ||
-        single.find(TextParsing::g_LeftAngleBracket) != String::npos ||
-        single.find(TextParsing::g_RightAngleBracket) != String::npos ||
-        single.find(TextParsing::g_LeftBigParantheses) != String::npos ||
-        single.find(TextParsing::g_RightBigParantheses) != String::npos)
+    if (single.find(TextParsing::gLeftSquareBrackets) != String::npos ||
+        single.find(TextParsing::gRightSquareBrackets) != String::npos ||
+        single.find(TextParsing::gLeftBrackets) != String::npos ||
+        single.find(TextParsing::gRightBrackets) != String::npos ||
+        single.find(TextParsing::gLeftAngleBracket) != String::npos ||
+        single.find(TextParsing::gRightAngleBracket) != String::npos ||
+        single.find(TextParsing::gLeftBrace) != String::npos ||
+        single.find(TextParsing::gRightBrace) != String::npos)
     {
         return true;
     }
@@ -115,7 +113,7 @@ void CoreTools::FormatParsing::ParsingColumn(const String& column, bool firstInd
             ParsingScope(isScope, single);
             isScope = true;
         }
-        else if (single.find(TextParsing::g_equalSign) != String::npos)
+        else if (single.find(TextParsing::gEqualSign) != String::npos)
         {
             ParsingDefaultValue(isDefaultValue, firstIndex, single);
             isDefaultValue = true;
@@ -138,10 +136,10 @@ void CoreTools::FormatParsing::ParsingScope(bool isScope, const String& single)
     }
 }
 
-CoreTools::FormatParsing::Element CoreTools::FormatParsing::SplitEqualSign(const String& single) const
+CoreTools::FormatParsing::Element CoreTools::FormatParsing::SplitEqualSign(const String& single)
 {
     Element element{};
-    boost::algorithm::split(element, single, boost::is_any_of(TextParsing::g_equalSign), boost::token_compress_off);
+    split(element, single, boost::is_any_of(TextParsing::gEqualSign), boost::token_compress_off);
 
     return element;
 }
@@ -150,16 +148,9 @@ void CoreTools::FormatParsing::ParsingDefaultValue(bool isDefaultValue, bool fir
 {
     if (!isDefaultValue)
     {
-        const auto element = SplitEqualSign(single);
-
-        if (1 < element.size())
+        if (const auto element = SplitEqualSign(single); 1 < element.size())
         {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-            defaultValue.emplace_back(element[1]);
-
-#include STSTEM_WARNING_POP
+            defaultValue.emplace_back(element.at(1));
         }
     }
 
@@ -188,16 +179,9 @@ void CoreTools::FormatParsing::ParsingMapping(bool isMapping, bool firstIndex, c
 
 void CoreTools::FormatParsing::ParsingKey(const String& single)
 {
-    const auto firstKey = SplitEqualSign(single);
-
-    if (1 < firstKey.size())
+    if (const auto firstKey = SplitEqualSign(single); 1 < firstKey.size())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        key = firstKey[1];
-
-#include STSTEM_WARNING_POP
+        key = firstKey.at(1);
     }
 }
 
@@ -230,12 +214,7 @@ System::String CoreTools::FormatParsing::GetMapping(int index) const
 
     if (0 <= index && index < boost::numeric_cast<int>(mapping.size()))
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        return mapping[index];
-
-#include STSTEM_WARNING_POP
+        return mapping.at(index);
     }
 
     return String{};
@@ -245,15 +224,9 @@ bool CoreTools::FormatParsing::HasMapping() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    for (const auto& value : mapping)
-    {
-        if (!value.empty())
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return std::ranges::any_of(mapping, [](const auto& value) {
+        return !value.empty();
+    });
 }
 
 System::String CoreTools::FormatParsing::GetScope(int index) const
@@ -262,12 +235,7 @@ System::String CoreTools::FormatParsing::GetScope(int index) const
 
     if (0 <= index && index < boost::numeric_cast<int>(scope.size()))
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        return scope[index];
-
-#include STSTEM_WARNING_POP
+        return scope.at(index);
     }
 
     return String{};
@@ -277,15 +245,9 @@ bool CoreTools::FormatParsing::HasScope() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    for (const auto& value : scope)
-    {
-        if (!value.empty())
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return std::ranges::any_of(scope, [](const auto& value) {
+        return !value.empty();
+    });
 }
 
 System::String CoreTools::FormatParsing::GetDefaultValue(int index) const
@@ -294,12 +256,7 @@ System::String CoreTools::FormatParsing::GetDefaultValue(int index) const
 
     if (0 <= index && index < boost::numeric_cast<int>(defaultValue.size()))
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        return defaultValue[index];
-
-#include STSTEM_WARNING_POP
+        return defaultValue.at(index);
     }
 
     return String{};

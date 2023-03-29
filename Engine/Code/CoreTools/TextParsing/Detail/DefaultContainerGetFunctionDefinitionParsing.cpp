@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:57)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:42)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -36,7 +36,7 @@ System::String CoreTools::DefaultContainerGetFunctionDefinitionParsing::Generate
 
     content += GenerateGetDefinition(lowerClassName);
 
-    content += GenerateGetContainerDefinition(lowerClassName, TextParsing::g_Container);
+    content += GenerateGetContainerDefinition(lowerClassName, TextParsing::gContainer);
 
     return content;
 }
@@ -50,14 +50,14 @@ System::String CoreTools::DefaultContainerGetFunctionDefinitionParsing::Generate
     content += GenerateFunctionBeginBrackets();
 
     content += GenerateUserClassIsValidConst9(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += GenerateLambdaFunctionInit();
     content += GenerateLambdaFunctionFind(lowerClassName);
     content += GenerateLambdaFunctionResult(lowerClassName);
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -72,22 +72,22 @@ System::String CoreTools::DefaultContainerGetFunctionDefinitionParsing::Generate
     const auto containerClassName = GetCSVClassName();
 
     auto content = nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += containerClassName;
-    content += TextParsing::g_DoubleColonConst;
+    content += TextParsing::gDoubleColonConst;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_Base;
-    content += TextParsing::g_SharedPtr;
-    content += TextParsing::g_Space;
+    content += TextParsing::gBase;
+    content += TextParsing::gSharedPtr;
+    content += TextParsing::gSpace;
     content += nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += containerClassName;
-    content += TextParsing::g_DoubleColon;
-    content += TextParsing::g_Get;
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gGet;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_LeftBrackets;
+    content += TextParsing::gLeftBrackets;
     content += GetKeyTypeDescribe();
-    content += TextParsing::g_KeyConstFunction;
+    content += TextParsing::gKeyConstFunction;
 
     return content;
 }

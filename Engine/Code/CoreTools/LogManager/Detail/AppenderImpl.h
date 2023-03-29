@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/06 0:18)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 15:00)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_IMPL_H
@@ -26,10 +26,11 @@ namespace CoreTools
     {
     public:
         using ClassType = AppenderImpl;
+        using FactoryType = AppenderFactory;
+
         using AppenderImplSharedPtr = std::shared_ptr<ClassType>;
         using String = System::String;
         using PosType = System::OFileStream::pos_type;
-        using FactoryType = AppenderFactory;
 
     public:
         explicit AppenderImpl(AppenderPrint appenderFlags, LogLevel logLevel = LogLevel::Disabled) noexcept;
@@ -48,9 +49,7 @@ namespace CoreTools
         NODISCARD AppenderPrint GetFlags() const noexcept;
 
         void SetLogLevel(LogLevel level) noexcept;
-        void Write(const LogMessage& message);
-
-        virtual void Reload();
+        void Write(const LogMessage& message) const;
 
         NODISCARD virtual AppenderType GetAppenderType() const noexcept = 0;
 
@@ -63,7 +62,7 @@ namespace CoreTools
         void SetIsDefault(bool isDefault) noexcept;
 
     private:
-        virtual void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) = 0;
+        virtual void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) const = 0;
 
     private:
         AppenderPrint appenderFlags;

@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #ifndef C_S_V_CONFIGURE_SCENE_CONTAINER_DETAIL_H
@@ -27,7 +27,7 @@ CSVConfigure::SceneContainer::ConstSceneSharedPtr CSVConfigure::SceneContainer::
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("scene表未找到满足条件的配置信息。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("scene表未找到满足条件的配置信息。"s))
 }
 
 template <typename Function>

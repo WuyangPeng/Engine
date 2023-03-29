@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 13:39)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/10 14:16)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_JSON_ROW_H
 #define CORE_TOOLS_TEXT_PARSING_JSON_ROW_H
@@ -35,6 +35,7 @@ namespace CoreTools
         using DoubleContainer = std::vector<double>;
         using StringContainer = std::vector<String>;
         using BasicTree = boost::property_tree::basic_ptree<String, String>;
+        using JsonRowContainer = std::vector<JsonRow>;
 
     public:
         explicit JsonRow(const BasicTree& basicTree);
@@ -53,6 +54,10 @@ namespace CoreTools
         NODISCARD IntContainer GetIntArray(const String& field) const;
         NODISCARD Int64Container GetInt64Array(const String& field) const;
         NODISCARD DoubleContainer GetDoubleArray(const String& field) const;
+        NODISCARD StringContainer GetStringArray(const String& field) const;
+
+        NODISCARD JsonRowContainer GetJsonRowContainer(const String& field) const;
+        NODISCARD JsonRow GetJsonRow(const String& field) const;
 
     private:
         PackageType impl;

@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #include "Chapter.h"
@@ -15,8 +15,6 @@
 #include "CoreTools/TextParsing/CSV/CSVRow.h"
 
 #include <algorithm>
-
-using std::make_shared;
 
 CSVConfigure::ChapterContainer::ChapterContainer(const CoreTools::CSVContent& csvContent)
     : chapter{}
@@ -33,24 +31,22 @@ void CSVConfigure::ChapterContainer::Parsing(const CoreTools::CSVContent& csvCon
     {
         CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
 
-        chapter.emplace_back(make_shared<Chapter>(csvRow));
+        chapter.emplace_back(std::make_shared<Chapter>(csvRow));
     }
 
-    std::sort(chapter.begin(), chapter.end(), [](const auto& lhs, const auto& rhs) noexcept {
+    std::ranges::sort(chapter, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
 
-    auto iter = unique(chapter.begin(), chapter.end(), [](const auto& lhs, const auto& rhs) noexcept {
+    auto iter = std::ranges::unique(chapter, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() == (*rhs).GetKey();
     });
 
-    if (iter != chapter.cend())
+    if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User)
-            << SYSTEM_TEXT("chapter表存在重复主键。")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("chapter表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
-        chapter.erase(iter, chapter.end());
+        chapter.erase(iter.begin(), iter.end());
     }
 }
 
@@ -71,7 +67,7 @@ CSVConfigure::ChapterContainer::ConstChapterBaseSharedPtr CSVConfigure::ChapterC
         return (*lhs).GetKey() < (*rhs).GetKey();
     };
 
-    const auto iter = lower_bound(chapter.begin(), chapter.end(), make_shared<ChapterBase>(key), function);
+    const auto iter = std::ranges::lower_bound(chapter, std::make_shared<ChapterBase>(key), function);
 
     if (iter != chapter.cend() && (*iter)->GetKey() == key)
     {
@@ -79,7 +75,7 @@ CSVConfigure::ChapterContainer::ConstChapterBaseSharedPtr CSVConfigure::ChapterC
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("chapter表未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("chapter表未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s))
     }
 }
 

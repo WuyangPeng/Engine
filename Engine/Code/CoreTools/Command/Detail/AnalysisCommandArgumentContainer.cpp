@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 11:57)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 10:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,12 +19,8 @@
 
 #include <gsl/util>
 
-using std::make_pair;
-using std::make_shared;
-using std::string;
-
 CoreTools::AnalysisCommandArgumentContainer::AnalysisCommandArgumentContainer(int argumentsNumber, char** arguments)
-    : argumentContainer{}, commandArgumentContainer{ make_shared<CommandArgumentContainer>(argumentsNumber) }
+    : argumentContainer{}, commandArgumentContainer{ std::make_shared<CommandArgumentContainer>(argumentsNumber) }
 {
     Init(arguments);
     AddCommandArguments();
@@ -46,7 +42,7 @@ void CoreTools::AnalysisCommandArgumentContainer::Init(const char* const* argume
 
             if (arguments[i] != nullptr)
             {
-                string argument{ arguments[i] != nullptr ? arguments[i] : "" };
+                std::string argument{ arguments[i] != nullptr ? arguments[i] : "" };
 
                 argumentContainer.emplace_back(argument);
             }
@@ -68,13 +64,13 @@ CoreTools::AnalysisCommandArgumentContainer::AnalysisCommandArgumentContainer(co
 // private
 void CoreTools::AnalysisCommandArgumentContainer::Init(const char* commandLine)
 {
-    string trimCommandLine{ commandLine };
+    std::string trimCommandLine{ commandLine };
     boost::algorithm::trim(trimCommandLine);
-    boost::algorithm::split(argumentContainer, trimCommandLine, boost::is_any_of(" \t"), boost::token_compress_on);
+    split(argumentContainer, trimCommandLine, boost::is_any_of(" \t"), boost::token_compress_on);
 
     auto argumentsNumber = boost::numeric_cast<int>(argumentContainer.size());
 
-    commandArgumentContainer = make_shared<CommandArgumentContainer>(argumentsNumber);
+    commandArgumentContainer = std::make_shared<CommandArgumentContainer>(argumentsNumber);
 }
 
 // private
@@ -85,9 +81,7 @@ void CoreTools::AnalysisCommandArgumentContainer::AddCommandArguments()
     const auto argumentsNumber = boost::numeric_cast<int>(argumentContainer.size());
     while (index < argumentsNumber)
     {
-        const auto argumentsType = GetArgumentsType(index);
-
-        switch (argumentsType)
+        switch (const auto argumentsType = GetArgumentsType(index); argumentsType)
         {
             case ArgumentsType::FullArgument:
                 AddArgumentValue(index);
@@ -107,13 +101,11 @@ void CoreTools::AnalysisCommandArgumentContainer::AddCommandArguments()
     }
 }
 
-CoreTools::AnalysisCommandArgumentContainer::ArgumentsType CoreTools::AnalysisCommandArgumentContainer::GetArgumentsType(int index)
+CoreTools::AnalysisCommandArgumentContainer::ArgumentsType CoreTools::AnalysisCommandArgumentContainer::GetArgumentsType(int index) const
 {
     const auto& argumentsName = argumentContainer.at(index);
 
-    const CommandArgumentType argumentsNameType{ argumentsName };
-
-    if (argumentsNameType.IsArgumentsName())
+    if (const CommandArgumentType argumentsNameType{ argumentsName }; argumentsNameType.IsArgumentsName())
     {
         return GetNextArgumentsType(index);
     }
@@ -123,19 +115,15 @@ CoreTools::AnalysisCommandArgumentContainer::ArgumentsType CoreTools::AnalysisCo
     }
 }
 
-CoreTools::AnalysisCommandArgumentContainer::ArgumentsType CoreTools::AnalysisCommandArgumentContainer::GetNextArgumentsType(int index)
+CoreTools::AnalysisCommandArgumentContainer::ArgumentsType CoreTools::AnalysisCommandArgumentContainer::GetNextArgumentsType(int index) const
 {
     const auto argumentsNumber = boost::numeric_cast<int>(argumentContainer.size());
 
-    const auto nextIndex = index + 1;
-
-    if (nextIndex < argumentsNumber)
+    if (const auto nextIndex = index + 1; nextIndex < argumentsNumber)
     {
         const auto& argumentsValue = argumentContainer.at(nextIndex);
 
-        const CommandArgumentType argumentsValueType{ argumentsValue };
-
-        if (!argumentsValueType.IsArgumentsName())
+        if (const CommandArgumentType argumentsValueType{ argumentsValue }; !argumentsValueType.IsArgumentsName())
         {
             return ArgumentsType::FullArgument;
         }
@@ -161,9 +149,7 @@ void CoreTools::AnalysisCommandArgumentContainer::AddNoValueArgument(int index)
 {
     const auto& arguments = argumentContainer.at(index);
 
-    const CommandArgumentType commandArgumentType{ arguments };
-
-    if (commandArgumentType.IsArgumentsName())
+    if (const CommandArgumentType commandArgumentType{ arguments }; commandArgumentType.IsArgumentsName())
     {
         const auto argumentsName = arguments.substr(1, arguments.size() - 1);
         commandArgumentContainer->AddArgument(index, argumentsName);
@@ -178,6 +164,7 @@ void CoreTools::AnalysisCommandArgumentContainer::AddEndArgumentValue(int index)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::AnalysisCommandArgumentContainer::IsValid() const noexcept
 {
     if (commandArgumentContainer != nullptr && commandArgumentContainer->GetArgumentsNumber() == gsl::narrow_cast<int>(argumentContainer.size()))
@@ -189,6 +176,7 @@ bool CoreTools::AnalysisCommandArgumentContainer::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 CoreTools::AnalysisCommandArgumentContainer::CommandArgumentContainerSharedPtr CoreTools::AnalysisCommandArgumentContainer::GetCommandArgumentContainer() const noexcept

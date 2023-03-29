@@ -49,9 +49,7 @@ void Network::BoostSockStreamHelper::EventSendFunction(const ErrorCodeType& erro
 
     if (!eventInterface->EventFunction(callbackParameters))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-            << SYSTEM_TEXT("事件回调执行失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("事件回调执行失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     PrintSuccessLog(asynchronousSendSuccess.data(), addressData, bytesTransferred);
@@ -76,9 +74,7 @@ void Network::BoostSockStreamHelper::EventReceiveFunction(const ErrorCodeType& e
 
     if (!eventInterface->EventFunction(callbackParameters))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-            << SYSTEM_TEXT("事件回调执行失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("事件回调执行失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     PrintSuccessLog(asynchronousReceiveSuccess.data(), addressData, bytesTransferred);
@@ -90,13 +86,6 @@ void Network::BoostSockStreamHelper::PrintSuccessLog(const String& prefix, const
 {
     if (0 < bytesTransferred)
     {
-        LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Trace, Network, g_BoostLogName.data())
-            << prefix
-            << addressData.GetAddress()
-            << port.data()
-            << addressData.GetPort()
-            << g_BytesTransferred.data()
-            << bytesTransferred
-            << CoreTools::LogAppenderIOManageSign::Refresh;
+        LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Trace, Network, g_BoostLogName.data(), prefix, addressData.GetAddress(), port.data(), addressData.GetPort(), g_BytesTransferred.data(), bytesTransferred, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }

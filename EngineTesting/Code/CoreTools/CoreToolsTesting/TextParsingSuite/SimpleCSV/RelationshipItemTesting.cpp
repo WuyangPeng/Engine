@@ -1,33 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:42)
+///	引擎测试版本：0.9.0.4 (2023/03/08 16:26)
 
 #include "RelationshipItemTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/Cell.h"
-#include "CoreTools/TextParsing/SimpleCSV/CellReference.h"
-#include "CoreTools/TextParsing/SimpleCSV/ContentItem.h"
 #include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/PropertyFlags.h"
-#include "CoreTools/TextParsing/SimpleCSV/Flags/SheetFlags.h"
-#include "CoreTools/TextParsing/SimpleCSV/Flags/ValueTypeFlags.h"
+#include "CoreTools/TextParsing/SimpleCSV/Flags/RelationshipFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/Row.h"
-#include "CoreTools/TextParsing/SimpleCSV/RowDataIterator.h"
-#include "CoreTools/TextParsing/SimpleCSV/RowDataRange.h"
-#include "CoreTools/TextParsing/SimpleCSV/Worksheet.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 
 using namespace std::literals;
-using std::make_shared;
-using std::string;
-using std::vector;
 using System::operator++;
 
 CoreTools::RelationshipItemTesting::RelationshipItemTesting(const OStreamShared& stream)
@@ -53,13 +44,11 @@ void CoreTools::RelationshipItemTesting::RelationshipItemTest()
 {
     auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
-    auto data = make_shared<SimpleCSV::XmlData>(document, "xl/_rels/workbook.xml.rels");
+    const auto data = make_shared<SimpleCSV::XmlData>(document, "xl/_rels/workbook.xml.rels");
 
-    SimpleCSV::Relationships relationships{ data };
-
-    for (const auto& relationshipItem : relationships.GetRelationships())
+    for (const SimpleCSV::Relationships relationships{ data }; const auto& relationshipItem : relationships.GetRelationships())
     {
-        ASSERT_EQUAL(relationshipItem.GetID(), relationships.GetRelationshipByID(relationshipItem.GetID()).GetID());
+        ASSERT_EQUAL(relationshipItem.GetId(), relationships.GetRelationshipByID(relationshipItem.GetId()).GetId());
         ASSERT_EQUAL(relationshipItem.GetTarget(), relationships.GetRelationshipByTarget(relationshipItem.GetTarget()).GetTarget());
 
         ASSERT_ENUM_EQUAL(SimpleCSV::RelationshipItem::GetTypeFromString(SimpleCSV::RelationshipItem::GetStringFromType(relationshipItem.GetType())), relationshipItem.GetType());

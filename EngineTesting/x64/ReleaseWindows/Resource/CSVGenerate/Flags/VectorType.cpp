@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #include "VectorType.h"
@@ -13,14 +13,13 @@
 
 #include <map>
 
-using std::map;
 using namespace std::literals;
 
 CSVConfigure::VectorType CSVConfigure::StringCastVectorType(const System::String& describe)
 {
-    static map<System::String, VectorType> typeDescribe{ { SYSTEM_TEXT("Two"s), VectorType::Two },
-                                                         { SYSTEM_TEXT("Three"s), VectorType::Three },
-                                                         { SYSTEM_TEXT("Four"s), VectorType::Four } };
+    static std::map<System::String, VectorType> typeDescribe{ { SYSTEM_TEXT("Two"s), VectorType::Two },
+                                                              { SYSTEM_TEXT("Three"s), VectorType::Three },
+                                                              { SYSTEM_TEXT("Four"s), VectorType::Four } };
 
     const auto iter = typeDescribe.find(describe);
 
@@ -30,15 +29,15 @@ CSVConfigure::VectorType CSVConfigure::StringCastVectorType(const System::String
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("未找到对应的类型。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到对应的类型。"s))
     }
 }
 
 System::String CSVConfigure::EnumCastString(VectorType type)
 {
-    static map<VectorType, System::String> typeDescribe{ { VectorType::Two, SYSTEM_TEXT("Two"s) },
-                                                         { VectorType::Three, SYSTEM_TEXT("Three"s) },
-                                                         { VectorType::Four, SYSTEM_TEXT("Four"s) } };
+    static std::map<VectorType, System::String> typeDescribe{ { VectorType::Two, SYSTEM_TEXT("Two"s) },
+                                                              { VectorType::Three, SYSTEM_TEXT("Three"s) },
+                                                              { VectorType::Four, SYSTEM_TEXT("Four"s) } };
 
     const auto iter = typeDescribe.find(type);
 
@@ -48,15 +47,15 @@ System::String CSVConfigure::EnumCastString(VectorType type)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("未找到对应的类型。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到对应的类型。"s))
     }
 }
 
 System::String CSVConfigure::GetEnumDescribe(VectorType type)
 {
-    static map<VectorType, System::String> typeDescribe{ { VectorType::Two, SYSTEM_TEXT("二维"s) },
-                                                         { VectorType::Three, SYSTEM_TEXT("三维"s) },
-                                                         { VectorType::Four, SYSTEM_TEXT("四维"s) } };
+    static std::map<VectorType, System::String> typeDescribe{ { VectorType::Two, SYSTEM_TEXT("二维"s) },
+                                                              { VectorType::Three, SYSTEM_TEXT("三维"s) },
+                                                              { VectorType::Four, SYSTEM_TEXT("四维"s) } };
 
     const auto iter = typeDescribe.find(type);
 
@@ -66,7 +65,15 @@ System::String CSVConfigure::GetEnumDescribe(VectorType type)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("未找到对应的类型。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到对应的类型。"s))
     }
+}
+
+template <>
+CSVConfigure::VectorType CoreTools::CSVRow::StringCastEnum<CSVConfigure::VectorType>(const String& describe) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return CSVConfigure::StringCastVectorType(describe);
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/03/01 15:22)
+///	引擎版本：0.9.0.4 (2023/03/22 10:42)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_DETAIL_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_DETAIL_H
@@ -31,7 +31,7 @@ CoreTools::ConsoleInstance<Handle>::ConsoleInstance(DisableNotThrow disableNotTh
 
     if (!System::IsHandleValid(handle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("获取标准设备的句柄失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("获取标准设备的句柄失败。"s))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;

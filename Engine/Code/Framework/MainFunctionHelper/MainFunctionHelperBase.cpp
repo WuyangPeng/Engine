@@ -24,6 +24,8 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 
+#include <iostream>
+
 using std::make_shared;
 using std::move;
 using namespace std::literals;

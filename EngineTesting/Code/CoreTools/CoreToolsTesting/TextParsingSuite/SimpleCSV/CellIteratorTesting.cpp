@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:34)
+///	引擎测试版本：0.9.0.4 (2023/03/08 15:44)
 
 #include "CellIteratorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -21,8 +21,6 @@
 #include "Mathematics/Base/MathDetail.h"
 
 using namespace std::literals;
-using std::string;
-using std::stringstream;
 
 CoreTools::CellIteratorTesting::CellIteratorTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -45,12 +43,12 @@ void CoreTools::CellIteratorTesting::MainTest()
 
 void CoreTools::CellIteratorTesting::CellRangeIteratorTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
-    auto worksheetNames = workbook.GetWorksheetNames();
-    auto worksheetName = worksheetNames.at(0);
-    auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
+    const auto worksheet = workbook.GetWorksheet(worksheetName);
 
     auto cellRange = worksheet.GetRange();
 
@@ -86,12 +84,12 @@ void CoreTools::CellIteratorTesting::CellRangeIteratorTest()
 
 void CoreTools::CellIteratorTesting::SuffixIteratorTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
-    auto worksheetNames = workbook.GetWorksheetNames();
-    auto worksheetName = worksheetNames.at(0);
-    auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
+    const auto worksheet = workbook.GetWorksheet(worksheetName);
 
     auto cellRange = worksheet.GetRange();
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/18 21:27)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/14 09:10)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_VALUE_DETAIL_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_VALUE_DETAIL_H
@@ -13,11 +13,10 @@
 #include "CellValue.h"
 #include "SimpleCSVException.h"
 #include "Flags/CSVExceptionFlags.h"
-#include "Flags/ValueTypeFlags.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-template <typename T, typename std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
+template <typename T, std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
 CoreTools::SimpleCSV::CellValue& CoreTools::SimpleCSV::CellValue::operator=(T rhs)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -29,8 +28,7 @@ CoreTools::SimpleCSV::CellValue& CoreTools::SimpleCSV::CellValue::operator=(T rh
     return *this;
 }
 
-template <typename T,
-          typename std::enable_if_t<std::is_same_v<T, CoreTools::SimpleCSV::CellValue> || CoreTools::TextParsing::cellValueCondition<T>>*>
+template <typename T, std::enable_if_t<std::is_same_v<T, CoreTools::SimpleCSV::CellValue> || CoreTools::TextParsing::cellValueCondition<T>>*>
 void CoreTools::SimpleCSV::CellValue::Set(T rhs) noexcept(std::is_same_v<T, CellValue>)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -38,7 +36,7 @@ void CoreTools::SimpleCSV::CellValue::Set(T rhs) noexcept(std::is_same_v<T, Cell
     *this = rhs;
 }
 
-template <typename T, typename std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
+template <typename T, std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
 T CoreTools::SimpleCSV::CellValue::Get() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
@@ -68,11 +66,11 @@ T CoreTools::SimpleCSV::CellValue::Get() const
     }
     catch (const std::bad_variant_access&)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::ValueType, SYSTEM_TEXT("CellValue 对象不包含请求的类型。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::ValueType, SYSTEM_TEXT("CellValue 对象不包含请求的类型。"s))
     }
 }
 
-template <typename T, typename std::enable_if<CoreTools::TextParsing::cellValueCondition<T>>::type*>
+template <typename T, std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
 CoreTools::SimpleCSV::CellValue::operator T() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;

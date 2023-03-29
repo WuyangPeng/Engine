@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 19:22)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 15:54)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_QUERY_XML_DATA_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_QUERY_XML_DATA_IMPL_H
@@ -17,34 +17,31 @@
 #include <memory>
 #include <string>
 
-namespace CoreTools
+namespace CoreTools::SimpleCSV
 {
-    namespace SimpleCSV
+    class CORE_TOOLS_HIDDEN_DECLARE QueryXmlDataImpl final
     {
-        class CORE_TOOLS_HIDDEN_DECLARE QueryXmlDataImpl final
-        {
-        public:
-            using ClassType = QueryXmlDataImpl;
-            using XmlDataSharedPtr = std::shared_ptr<XmlData>;
+    public:
+        using ClassType = QueryXmlDataImpl;
+        using XmlDataSharedPtr = std::shared_ptr<XmlData>;
 
-        public:
-            explicit QueryXmlDataImpl(const std::string& xmlPath);
-            QueryXmlDataImpl(const std::string& xmlPath, const XmlDataSharedPtr& xmlData);
+    public:
+        explicit QueryXmlDataImpl(std::string xmlPath) noexcept;
+        QueryXmlDataImpl(std::string xmlPath, const XmlDataSharedPtr& xmlData) noexcept;
 
-            CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-            NODISCARD std::string GetXmlPath() const;
-            NODISCARD XmlDataSharedPtr GetXmlData() const;
-            void SetXmlData(const XmlDataSharedPtr& xmlData) noexcept;
+        NODISCARD std::string GetXmlPath() const;
+        NODISCARD XmlDataSharedPtr GetXmlData() const;
+        void SetXmlData(const XmlDataSharedPtr& aXmlData) noexcept;
 
-        private:
-            using XmlDataWeakPtr = std::weak_ptr<XmlData>;
+    private:
+        using XmlDataWeakPtr = std::weak_ptr<XmlData>;
 
-        private:
-            std::string xmlPath;
-            XmlDataWeakPtr m_XmlData;
-        };
-    }
+    private:
+        std::string xmlPath;
+        XmlDataWeakPtr xmlData;
+    };
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_QUERY_XML_DATA_IMPL_H

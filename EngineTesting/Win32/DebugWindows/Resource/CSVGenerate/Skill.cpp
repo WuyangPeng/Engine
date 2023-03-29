@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #include "Skill.h"
@@ -16,7 +16,7 @@ using namespace std::literals;
 CSVConfigure::Skill::Skill(const CoreTools::CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
-      nextID{ csvRow.GetInt(SYSTEM_TEXT("nextID"s)) },
+      nextId{ csvRow.GetInt(SYSTEM_TEXT("nextId"s)) },
       reward{ csvRow.GetInt(SYSTEM_TEXT("reward"s)) },
       skillName{ csvRow.GetString(SYSTEM_TEXT("skillName"s)) },
       vectorType{ csvRow.GetEnum<VectorType>(SYSTEM_TEXT("vectorType"s)) },
@@ -34,18 +34,18 @@ int CSVConfigure::Skill::GetKey() const noexcept
     return  id * 100 + reward;
 }
 
-int CSVConfigure::Skill::GetID() const noexcept
+int CSVConfigure::Skill::GetId() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return id;
 }
 
-int CSVConfigure::Skill::GetNextID() const noexcept
+int CSVConfigure::Skill::GetNextId() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return nextID;
+    return nextId;
 }
 
 int CSVConfigure::Skill::GetReward() const noexcept

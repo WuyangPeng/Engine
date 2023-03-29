@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #include "Skill.h"
@@ -15,8 +15,6 @@
 #include "CoreTools/TextParsing/CSV/CSVRow.h"
 
 #include <algorithm>
-
-using std::make_shared;
 
 CSVConfigure::SkillContainer::SkillContainer(const CoreTools::CSVContent& csvContent)
     : skill{}
@@ -33,24 +31,22 @@ void CSVConfigure::SkillContainer::Parsing(const CoreTools::CSVContent& csvConte
     {
         CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
 
-        skill.emplace_back(make_shared<Skill>(csvRow));
+        skill.emplace_back(std::make_shared<Skill>(csvRow));
     }
 
-    std::sort(skill.begin(), skill.end(), [](const auto& lhs, const auto& rhs) noexcept {
+    std::ranges::sort(skill, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
 
-    auto iter = unique(skill.begin(), skill.end(), [](const auto& lhs, const auto& rhs) noexcept {
+    auto iter = std::ranges::unique(skill, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() == (*rhs).GetKey();
     });
 
-    if (iter != skill.cend())
+    if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User)
-            << SYSTEM_TEXT("skill表存在重复主键。")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("skill表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 
-        skill.erase(iter, skill.end());
+        skill.erase(iter.begin(), iter.end());
     }
 }
 
@@ -78,7 +74,7 @@ CSVConfigure::SkillContainer::ConstSkillBaseSharedPtr CSVConfigure::SkillContain
         return (*lhs).GetKey() < (*rhs).GetKey();
     };
 
-    const auto iter = lower_bound(skill.begin(), skill.end(), make_shared<SkillBase>(key), function);
+    const auto iter = std::ranges::lower_bound(skill, std::make_shared<SkillBase>(key), function);
 
     if (iter != skill.cend() && (*iter)->GetKey() == key)
     {
@@ -86,7 +82,7 @@ CSVConfigure::SkillContainer::ConstSkillBaseSharedPtr CSVConfigure::SkillContain
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("skill表未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("skill表未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s))
     }
 }
 

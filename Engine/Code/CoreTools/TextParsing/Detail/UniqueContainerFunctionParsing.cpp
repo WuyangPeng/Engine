@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:33)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -30,12 +30,12 @@ System::String CoreTools::UniqueContainerFunctionParsing::GenerateGetFunction() 
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_NodiscardConst;
+    content += TextParsing::gNodiscardConst;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_GetSharedPtr;
+    content += TextParsing::gGetSharedPtr;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_ConstNoexcept;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gConstNoexcept;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

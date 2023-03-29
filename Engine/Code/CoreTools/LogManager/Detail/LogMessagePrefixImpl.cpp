@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 22:42)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 16:02)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -27,7 +27,6 @@ CoreTools::LogMessagePrefixImpl::LogMessagePrefixImpl(AppenderPrint appenderFlag
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 void CoreTools::LogMessagePrefixImpl::GeneratePrefix()
 {
     if (level != LogLevel::Disabled)
@@ -38,7 +37,6 @@ void CoreTools::LogMessagePrefixImpl::GeneratePrefix()
     }
 }
 
-// private
 void CoreTools::LogMessagePrefixImpl::GenerateTimestampPrefix()
 {
     if (AppenderPrintFlagsExist::IsExist(appenderPrint, AppenderPrint::PrefixTimestamp))
@@ -49,7 +47,6 @@ void CoreTools::LogMessagePrefixImpl::GenerateTimestampPrefix()
     }
 }
 
-// private
 void CoreTools::LogMessagePrefixImpl::GenerateLogLevelPrefix()
 {
     if (AppenderPrintFlagsExist::IsExist(appenderPrint, AppenderPrint::PrefixLogLevel))
@@ -58,7 +55,6 @@ void CoreTools::LogMessagePrefixImpl::GenerateLogLevelPrefix()
     }
 }
 
-// private
 void CoreTools::LogMessagePrefixImpl::GenerateLogFilterPrefix()
 {
     if (AppenderPrintFlagsExist::IsExist(appenderPrint, AppenderPrint::PrefixLogFilterType))

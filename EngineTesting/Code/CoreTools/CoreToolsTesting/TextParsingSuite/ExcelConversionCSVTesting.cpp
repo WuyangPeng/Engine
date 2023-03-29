@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:49)
+///	引擎测试版本：0.9.0.4 (2023/03/10 10:23)
 
 #include "ExcelConversionCSVTesting.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
@@ -48,8 +48,8 @@ void CoreTools::ExcelConversionCSVTesting::ExcelConversionCSVUseOpenXLSXTest()
 
 void CoreTools::ExcelConversionCSVTesting::VerifyTest()
 {
-    IFStreamManager readFileManager0{ SYSTEM_TEXT("Resource/CSVTesting/ExcelConversionCSVTesting.csv") };
-    IFStreamManager readFileManager1{ SYSTEM_TEXT("Resource/CSVTesting/ExcelConversionCSVTesting1.csv") };
+    const IFStreamManager readFileManager0{ SYSTEM_TEXT("Resource/CSVTesting/ExcelConversionCSVTesting.csv") };
+    const IFStreamManager readFileManager1{ SYSTEM_TEXT("Resource/CSVTesting/ExcelConversionCSVTesting1.csv") };
 
     ASSERT_EQUAL(readFileManager0.GetFileContent(), readFileManager1.GetFileContent());
     ASSERT_FALSE(readFileManager0.GetFileContent().empty());

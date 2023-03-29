@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 13:39)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/10 14:14)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_JSON_GENERATE_H
 #define CORE_TOOLS_TEXT_PARSING_JSON_GENERATE_H
@@ -27,7 +27,7 @@ namespace CoreTools
         using String = System::String;
 
     public:
-        explicit JsonGenerate(const JsonHead& jsonHead, JsonGenerateType jsonGenerateType);
+        JsonGenerate(const JsonHead& jsonHead, JsonGenerateType jsonGenerateType);
 
         CLASS_INVARIANT_DECLARE;
 

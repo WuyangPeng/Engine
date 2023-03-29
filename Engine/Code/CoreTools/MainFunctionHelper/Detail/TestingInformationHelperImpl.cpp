@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/29 22:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 16:40)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,12 +14,13 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::string;
 using namespace std::literals;
 
-CoreTools::TestingInformationHelperImpl::TestingInformationHelperImpl(MAYBE_UNUSED DisableNotThrow disableNotThrow)
+CoreTools::TestingInformationHelperImpl::TestingInformationHelperImpl(DisableNotThrow disableNotThrow)
     : testingInformation{}, file{}, isPrintRun{ false }, randomSeed{ 0 }
 {
+    System::UnusedFunction(disableNotThrow);
+
     Analysis();
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -41,8 +42,7 @@ void CoreTools::TestingInformationHelperImpl::AnalysisFile()
 
     for (const auto& ptree : mainTree)
     {
-        auto isOpen = ptree.second.get_value(0);
-        if (isOpen != 0)
+        if (const auto isOpen = ptree.second.get_value(0); isOpen != 0)
         {
             file.emplace_back(ptree.first);
         }
@@ -72,8 +72,7 @@ void CoreTools::TestingInformationHelperImpl::AnalysisInformation(Tree& tree)
 
 void CoreTools::TestingInformationHelperImpl::AnalysisTestingInformation()
 {
-    EnvironmentVariable printRunEnvironmentVariable{ SYSTEM_TEXT("PrintRun"s) };
-    if (printRunEnvironmentVariable.GetVariable() != SYSTEM_TEXT("0"s))
+    if (const EnvironmentVariable printRunEnvironmentVariable{ SYSTEM_TEXT("PrintRun"s) }; printRunEnvironmentVariable.GetVariable() != SYSTEM_TEXT("0"s))
     {
         isPrintRun = true;
     }
@@ -82,12 +81,12 @@ void CoreTools::TestingInformationHelperImpl::AnalysisTestingInformation()
         isPrintRun = false;
     }
 
-    EnvironmentVariable randomSeedEnvironmentVariable{ SYSTEM_TEXT("RandomSeed"s) };
+    const EnvironmentVariable randomSeedEnvironmentVariable{ SYSTEM_TEXT("RandomSeed"s) };
 
     randomSeed = std::stoi(randomSeedEnvironmentVariable.GetVariable());
 }
 
-int CoreTools::TestingInformationHelperImpl::GetLoopCount(const string& suiteName, const string& testingName) const
+int CoreTools::TestingInformationHelperImpl::GetLoopCount(const std::string& suiteName, const std::string& testingName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

@@ -1,23 +1,18 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:27)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 13:54)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "RowDataProxyDetail.h"
-#include "Flags/CSVExceptionFlags.h"
 #include "Detail/RowDataProxyImpl.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::deque;
-using std::list;
-using std::vector;
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools::SimpleCSV, RowDataProxy)
 
@@ -76,16 +71,16 @@ CoreTools::SimpleCSV::RowDataProxy::operator CellValueContainer() const
     return GetValues();
 }
 
-CoreTools::SimpleCSV::RowDataProxy::operator deque<CoreTools::SimpleCSV::CellValue>() const
+CoreTools::SimpleCSV::RowDataProxy::operator std::deque<CoreTools::SimpleCSV::CellValue>() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return ConvertContainer<deque<CellValue>>();
+    return ConvertContainer<std::deque<CellValue>>();
 }
 
-CoreTools::SimpleCSV::RowDataProxy::operator list<CoreTools::SimpleCSV::CellValue>() const
+CoreTools::SimpleCSV::RowDataProxy::operator std::list<CoreTools::SimpleCSV::CellValue>() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return ConvertContainer<list<CellValue>>();
+    return ConvertContainer<std::list<CellValue>>();
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:08)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -37,7 +37,7 @@ System::String CoreTools::KeyContainerGetFunctionDefinitionParsing::GenerateGetF
 
     content += GenerateGetKeyDefinition();
     content += GenerateGetDefinition(lowerClassName);
-    content += GenerateGetContainerDefinition(lowerClassName, TextParsing::g_Container);
+    content += GenerateGetContainerDefinition(lowerClassName, TextParsing::gContainer);
 
     return content;
 }
@@ -56,12 +56,12 @@ System::String CoreTools::KeyContainerGetFunctionDefinitionParsing::GenerateGetK
     content += GenerateFunctionBeginBrackets();
 
     content += GenerateUserClassIsValidConst9(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
-    content += GeneratReturnGenerateKey();
+    content += GenerateReturnGenerateKey();
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -76,18 +76,18 @@ System::String CoreTools::KeyContainerGetFunctionDefinitionParsing::GenerateGetK
     const auto containerClassName = GetCSVClassName();
 
     auto content = nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += containerClassName;
-    content += TextParsing::g_DoubleColonConst;
+    content += TextParsing::gDoubleColonConst;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_Base;
-    content += TextParsing::g_SharedPtr;
-    content += TextParsing::g_Space;
+    content += TextParsing::gBase;
+    content += TextParsing::gSharedPtr;
+    content += TextParsing::gSpace;
     content += nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += containerClassName;
-    content += TextParsing::g_DoubleColon;
-    content += TextParsing::g_Get;
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gGet;
     content += csvHead.GetCSVClassName();
 
     content += GenerateGetKeyFunctionList();
@@ -99,7 +99,7 @@ System::String CoreTools::KeyContainerGetFunctionDefinitionParsing::GenerateGetK
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    String content{ TextParsing::g_LeftBrackets };
+    String content{ TextParsing::gLeftBrackets };
 
     const auto csvHead = GetCSVHead();
     const auto result = csvHead.GetKeyName();
@@ -108,23 +108,23 @@ System::String CoreTools::KeyContainerGetFunctionDefinitionParsing::GenerateGetK
     for (const auto& value : result)
     {
         content += CSVTypeConversion::GetActualType(csvHead.GetDataType(value));
-        content += TextParsing::g_Space;
+        content += TextParsing::gSpace;
         content += value;
 
         ++index;
         if (index != result.size())
         {
-            content += TextParsing::g_Comma;
-            content += TextParsing::g_Space;
+            content += TextParsing::gComma;
+            content += TextParsing::gSpace;
         }
     }
 
-    content += TextParsing::g_ConstNewline;
+    content += TextParsing::gConstNewline;
 
     return content;
 }
 
-System::String CoreTools::KeyContainerGetFunctionDefinitionParsing::GeneratReturnGenerateKey() const
+System::String CoreTools::KeyContainerGetFunctionDefinitionParsing::GenerateReturnGenerateKey() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -135,12 +135,12 @@ System::String CoreTools::KeyContainerGetFunctionDefinitionParsing::GeneratRetur
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Return;
-    content += TextParsing::g_Get;
+    content += TextParsing::gReturn;
+    content += TextParsing::gGet;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_LeftBrackets;
+    content += TextParsing::gLeftBrackets;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_DoubleColonGenerateKey;
+    content += TextParsing::gDoubleColonGenerateKey;
 
     content += GenerateGetKeyFunctionCall();
 
@@ -151,26 +151,26 @@ System::String CoreTools::KeyContainerGetFunctionDefinitionParsing::GenerateGetK
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    String content{ TextParsing::g_LeftBrackets };
+    String content{ TextParsing::gLeftBrackets };
 
     auto index = 0u;
     const auto csvHead = GetCSVHead();
-    const auto result = csvHead.GetKeyName();
-    for (const auto& value : result)
+
+    for (const auto result = csvHead.GetKeyName(); const auto& value : result)
     {
         content += value;
 
         ++index;
         if (index != result.size())
         {
-            content += TextParsing::g_Comma;
-            content += TextParsing::g_Space;
+            content += TextParsing::gComma;
+            content += TextParsing::gSpace;
         }
     }
 
-    content += TextParsing::g_RightBrackets;
-    content += TextParsing::g_RightBrackets;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -184,14 +184,14 @@ System::String CoreTools::KeyContainerGetFunctionDefinitionParsing::GenerateGetD
     content += GenerateFunctionBeginBrackets();
 
     content += GenerateUserClassIsValidConst9(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += GenerateLambdaFunctionInit();
     content += GenerateLambdaFunctionFind(lowerClassName);
     content += GenerateLambdaFunctionResult(lowerClassName);
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -206,22 +206,22 @@ System::String CoreTools::KeyContainerGetFunctionDefinitionParsing::GenerateGetF
     const auto containerClassName = GetCSVClassName();
 
     auto content = nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += containerClassName;
-    content += TextParsing::g_DoubleColonConst;
+    content += TextParsing::gDoubleColonConst;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_Base;
-    content += TextParsing::g_SharedPtr;
-    content += TextParsing::g_Space;
+    content += TextParsing::gBase;
+    content += TextParsing::gSharedPtr;
+    content += TextParsing::gSpace;
     content += nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += containerClassName;
-    content += TextParsing::g_DoubleColon;
-    content += TextParsing::g_Get;
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gGet;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_LeftBrackets;
+    content += TextParsing::gLeftBrackets;
     content += GetKeyTypeDescribe();
-    content += TextParsing::g_KeyConstFunction;
+    content += TextParsing::gKeyConstFunction;
 
     return content;
 }

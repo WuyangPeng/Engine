@@ -50,7 +50,7 @@ void CoreTools::TelegramMessageManagerTesting::AllEventTest()
 
     TelegramMessageManager<> telegramMessageManager(5);
 
-    MAYBE_UNUSED auto value = telegramMessageManager.RegisterAllEvent(entity->GetEntityID());
+    MAYBE_UNUSED auto value = telegramMessageManager.RegisterAllEvent(entity->GetEntityId());
 
     // 只会产生一次事件
     telegramMessageManager.CallEvent(telegram);
@@ -63,7 +63,7 @@ void CoreTools::TelegramMessageManagerTesting::AllEventTest()
 
     ASSERT_EQUAL(entity->GetValue(), 11);
 
-    value = telegramMessageManager.UnregisterAllEvent(entity->GetEntityID());
+    value = telegramMessageManager.UnRegisterAllEvent(entity->GetEntityId());
 
     telegramMessageManager.CallEvent(telegram);
 
@@ -81,11 +81,11 @@ void CoreTools::TelegramMessageManagerTesting::SpecifiedEventTest()
     CallbackParameters callbackParameters{ 0 };
     callbackParameters.SetValue(0, 10);
 
-    Telegram<> firstTelegram{ 1, entity->GetEntityID(), 3, 2, callbackParameters };
+    Telegram<> firstTelegram{ 1, entity->GetEntityId(), 3, 2, callbackParameters };
 
     TelegramMessageManager<> telegramMessageManager(5);
 
-    MAYBE_UNUSED auto value = telegramMessageManager.Register(3, entity->GetEntityID());
+    MAYBE_UNUSED auto value = telegramMessageManager.Register(3, entity->GetEntityId());
 
     // 只会产生一次事件
     telegramMessageManager.CallEvent(firstTelegram);
@@ -98,7 +98,7 @@ void CoreTools::TelegramMessageManagerTesting::SpecifiedEventTest()
 
     ASSERT_EQUAL(entity->GetValue(), 11);
 
-    Telegram<> secondTelegram{ 1, entity->GetEntityID() + 1, 3, 2, callbackParameters };
+    Telegram<> secondTelegram{ 1, entity->GetEntityId() + 1, 3, 2, callbackParameters };
 
     telegramMessageManager.CallEvent(secondTelegram);
 
@@ -106,7 +106,7 @@ void CoreTools::TelegramMessageManagerTesting::SpecifiedEventTest()
 
     ASSERT_EQUAL(entity->GetValue(), 11);
 
-    Telegram<> thirdTelegram{ 1, entity->GetEntityID(), 3, 8, callbackParameters };
+    Telegram<> thirdTelegram{ 1, entity->GetEntityId(), 3, 8, callbackParameters };
 
     telegramMessageManager.CallEventImmediately(9, thirdTelegram);
 
@@ -119,7 +119,7 @@ void CoreTools::TelegramMessageManagerTesting::SpecifiedEventTest()
 
     ASSERT_EQUAL(entity->GetValue(), 41);
 
-    value = telegramMessageManager.Unregister(3, entity->GetEntityID());
+    value = telegramMessageManager.UnRegister(3, entity->GetEntityId());
 
     telegramMessageManager.CallEvent(firstTelegram);
 

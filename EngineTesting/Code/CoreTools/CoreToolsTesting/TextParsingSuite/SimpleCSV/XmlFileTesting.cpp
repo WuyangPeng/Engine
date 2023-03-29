@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:44)
+///	引擎测试版本：0.9.0.4 (2023/03/08 16:46)
 
 #include "XmlFileTesting.h"
 #include "CoreTools/CoreToolsTesting/TextParsingSuite/SimpleCSV/Detail/XmlFileTest.h"
@@ -17,7 +17,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 using namespace std::literals;
-using std::make_shared;
 
 CoreTools::XmlFileTesting::XmlFileTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -41,10 +40,10 @@ void CoreTools::XmlFileTesting::MainTest()
 void CoreTools::XmlFileTesting::DefaultXmlFileTest()
 {
     auto xmlPath = "[Content_Types].xml"s;
-    auto xmlID = "[Content_Types].xml"s;
-    constexpr auto contentType = SimpleCSV::ContentType::Chartsheet;
+    const auto xmlId = "[Content_Types].xml"s;
+    constexpr auto contentType = SimpleCSV::ContentType::ChartSheet;
     auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-    auto xmlData = make_shared<SimpleCSV::XmlData>(document, xmlPath, xmlID, contentType);
+    const auto xmlData = make_shared<SimpleCSV::XmlData>(document, xmlPath, xmlId, contentType);
 
     XmlFileTest xmlFileTest{ xmlData };
 
@@ -53,7 +52,7 @@ void CoreTools::XmlFileTesting::DefaultXmlFileTest()
     auto rawData0 = xmlFileTest.GetXmlDataByXmlFile();
     ASSERT_UNEQUAL(rawData0.find("ContentType"s), System::String::npos);
 
-    ASSERT_EQUAL(xmlFileTest.GetRelationshipIDByXmlFile(), xmlID);
+    ASSERT_EQUAL(xmlFileTest.GetRelationshipIdByXmlFile(), xmlId);
     xmlFileTest.SetXmlDataByXmlFile(document->ExtractXmlFromArchive("_rels/.rels"s));
     rawData0 = xmlFileTest.GetXmlDataByXmlFile();
     ASSERT_UNEQUAL(rawData0.find("Relationships"s), System::String::npos);
@@ -62,10 +61,10 @@ void CoreTools::XmlFileTesting::DefaultXmlFileTest()
 void CoreTools::XmlFileTesting::ConstXmlFileTest()
 {
     auto xmlPath = "[Content_Types].xml"s;
-    auto xmlID = "[Content_Types].xml"s;
-    constexpr auto contentType = SimpleCSV::ContentType::Chartsheet;
+    const auto xmlId = "[Content_Types].xml"s;
+    constexpr auto contentType = SimpleCSV::ContentType::ChartSheet;
     auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-    auto xmlData = make_shared<SimpleCSV::XmlData>(document, xmlPath, xmlID, contentType);
+    const auto xmlData = make_shared<SimpleCSV::XmlData>(document, xmlPath, xmlId, contentType);
 
     const XmlFileTest xmlFileTest{ xmlData };
 
@@ -74,5 +73,5 @@ void CoreTools::XmlFileTesting::ConstXmlFileTest()
     auto rawData0 = xmlFileTest.GetXmlDataByXmlFile();
     ASSERT_UNEQUAL(rawData0.find("ContentType"s), System::String::npos);
 
-    ASSERT_EQUAL(xmlFileTest.GetRelationshipIDByXmlFile(), xmlID);
+    ASSERT_EQUAL(xmlFileTest.GetRelationshipIdByXmlFile(), xmlId);
 }

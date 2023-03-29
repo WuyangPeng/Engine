@@ -87,9 +87,7 @@ void Network::ACEIovecSockStream::AsyncSend(const EventInterfaceSharedPtr& event
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
     if (!eventInterface->EventFunction(callbackParameters))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-            << SYSTEM_TEXT("事件回调执行失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("事件回调执行失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

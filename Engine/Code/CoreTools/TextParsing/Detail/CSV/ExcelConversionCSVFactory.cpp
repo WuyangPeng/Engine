@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:21)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 18:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,19 +14,18 @@
 #include "SimpleCSVConversion.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::make_shared;
-using std::string;
-
-CoreTools::ExcelConversionCSVFactory::ExcelConversionCSVSharedPtr CoreTools::ExcelConversionCSVFactory::Create(const string& xlsxFileName, const String& csvFileName, MAYBE_UNUSED bool useOpenXLSX)
+CoreTools::ExcelConversionCSVFactory::ExcelConversionCSVSharedPtr CoreTools::ExcelConversionCSVFactory::Create(const std::string& xlsxFileName, const String& csvFileName, bool useOpenXlsx)
 {
 #ifdef CORE_TOOLS_USE_OPENXLSX
 
-    if (useOpenXLSX)
+    if (useOpenXlsx)
         return make_shared<OpenXLSXConversion>(xlsxFileName, csvFileName);
     else
         return make_shared<SimpleCSVConversion>(xlsxFileName, csvFileName);
 
 #else  // !CORE_TOOLS_USE_OPENXLSX
+
+    System::UnusedFunction(useOpenXlsx);
 
     return make_shared<SimpleCSVConversion>(xlsxFileName, csvFileName);
 

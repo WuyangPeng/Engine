@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/02/27 15:28)
+///	引擎版本：0.9.0.4 (2023/03/18 14:37)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_STRING_UTILITY_H
 #define CORE_TOOLS_CHARACTER_STRING_STRING_UTILITY_H

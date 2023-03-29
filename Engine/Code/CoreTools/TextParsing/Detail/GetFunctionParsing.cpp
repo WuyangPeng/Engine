@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:25)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:05)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,8 +16,8 @@
 
 using namespace std::literals;
 
-CoreTools::GetFunctionParsing::GetFunctionParsing(const CSVHead& csvHead, const String& keyTypeDescribe)
-    : ParentType{ 2 }, m_CSVHead{ csvHead }, keyTypeDescribe{ keyTypeDescribe }
+CoreTools::GetFunctionParsing::GetFunctionParsing(CSVHead csvHead, String keyTypeDescribe) noexcept
+    : ParentType{ 2 }, keyTypeDescribe{ std::move(keyTypeDescribe) }, head{ std::move(csvHead) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -35,14 +35,14 @@ CoreTools::CSVHead CoreTools::GetFunctionParsing::GetCSVHead() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CSVHead;
+    return head;
 }
 
 int CoreTools::GetFunctionParsing::GetCSVHeadCount() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CSVHead.GetCount();
+    return head.GetCount();
 }
 
 System::String CoreTools::GetFunctionParsing::GenerateGetKeyFunction() const
@@ -54,7 +54,7 @@ System::String CoreTools::GetFunctionParsing::GenerateGetKeyFunction() const
     content += GenerateFunctionBeginBrackets();
     content += GenerateReturnKey();
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -65,15 +65,15 @@ System::String CoreTools::GetFunctionParsing::GenerateKeyFunctionStatement() con
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_Nodiscard;
-    content += TextParsing::g_ConstexprStatic;
+    content += TextParsing::gNodiscard;
+    content += TextParsing::gConstexprStatic;
     content += GetKeyTypeDescribe();
-    content += TextParsing::g_GenerateKey;
+    content += TextParsing::gGenerateKey;
 
     content += GenerateKeyParameter();
-    content += TextParsing::g_RightBrackets;
-    content += TextParsing::g_Noexcept;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gNoexcept;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -86,9 +86,9 @@ System::String CoreTools::GetFunctionParsing::GenerateReturnKey() const
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Return;
+    content += TextParsing::gReturn;
     content += csvHead.GetKey();
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -106,14 +106,14 @@ System::String CoreTools::GetFunctionParsing::GenerateKeyParameter() const
     for (const auto& value : result)
     {
         content += CSVTypeConversion::GetActualType(csvHead.GetDataType(value));
-        content += TextParsing::g_Space;
+        content += TextParsing::gSpace;
         content += value;
 
         ++index;
         if (index != result.size())
         {
-            content += TextParsing::g_Comma;
-            content += TextParsing::g_Space;
+            content += TextParsing::gComma;
+            content += TextParsing::gSpace;
         }
     }
 
@@ -127,7 +127,7 @@ System::String CoreTools::GetFunctionParsing::GenerateCountFunction(const String
     auto content = GenerateIndentation();
 
     content += beginDescribe;
-    content += TextParsing::g_Int;
+    content += TextParsing::gInt;
     content += functionVariableName;
     content += endDescribe;
 
@@ -142,7 +142,7 @@ System::String CoreTools::GetFunctionParsing::GenerateGetValueFunction(const Str
 
     content += beginDescribe;
     content += valueType;
-    content += TextParsing::g_Space;
+    content += TextParsing::gSpace;
     content += functionVariableName;
     content += endDescribe;
 
@@ -157,7 +157,7 @@ System::String CoreTools::GetFunctionParsing::GenerateBeginIterFunction(const St
 
     content += beginDescribe;
     content += actualType;
-    content += TextParsing::g_ConstIterator;
+    content += TextParsing::gConstIterator;
     content += functionVariableName;
     content += endDescribe;
 
@@ -172,7 +172,7 @@ System::String CoreTools::GetFunctionParsing::GenerateEndIterFunction(const Stri
 
     content += beginDescribe;
     content += actualType;
-    content += TextParsing::g_ConstIterator;
+    content += TextParsing::gConstIterator;
     content += functionVariableName;
     content += endDescribe;
 

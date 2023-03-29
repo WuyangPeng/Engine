@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 19:32)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/07 13:37)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_ITERATOR_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_ITERATOR_IMPL_H
@@ -19,61 +19,59 @@
 
 #include <memory>
 
-namespace CoreTools
+namespace CoreTools::SimpleCSV
 {
-    namespace SimpleCSV
+    class CORE_TOOLS_HIDDEN_DECLARE CellIteratorImpl final
     {
-        class CORE_TOOLS_HIDDEN_DECLARE CellIteratorImpl final
-        {
-        public:
-            using ClassType = CellIteratorImpl;
-            using ValueType = Cell;
-            using DifferenceType = int64_t;
-            using PointerType = Cell*;
-            using ReferenceType = Cell&;
-            using SharedStringsSharedPtr = std::shared_ptr<SharedStrings>;
-            using CellSharedPtr = std::shared_ptr<Cell>;
+    public:
+        using ClassType = CellIteratorImpl;
 
-        public:
-            CellIteratorImpl(const ConstXMLDocumentSharedPtr& document, const SharedStringsSharedPtr& sharedStrings, const CellRange& cellRange, IteratorLocation location);
+        using ValueType = Cell;
+        using DifferenceType = int64_t;
+        using PointerType = Cell*;
+        using ReferenceType = Cell&;
+        using SharedStringsSharedPtr = std::shared_ptr<SharedStrings>;
+        using CellSharedPtr = std::shared_ptr<Cell>;
 
-            CLASS_INVARIANT_DECLARE;
+    public:
+        CellIteratorImpl(const ConstXMLDocumentSharedPtr& document, const SharedStringsSharedPtr& sharedStrings, const CellRange& cellRange, IteratorLocation location);
 
-            CellIteratorImpl& operator++();
-            CellIteratorImpl operator++(int);
+        CLASS_INVARIANT_DECLARE;
 
-            NODISCARD ReferenceType operator*() noexcept;
-            NODISCARD PointerType operator->() noexcept;
+        CellIteratorImpl& operator++();
+        CellIteratorImpl operator++(int);
 
-            NODISCARD bool IsSame(const CellIteratorImpl& rhs) const;
-            NODISCARD int Distance(const CellIteratorImpl& last) const;
+        NODISCARD ReferenceType operator*() noexcept;
+        NODISCARD PointerType operator->() noexcept;
 
-        private:
-            using SharedStringsWeakPtr = std::weak_ptr<SharedStrings>;
+        NODISCARD bool IsSame(const CellIteratorImpl& rhs) const;
+        NODISCARD int Distance(const CellIteratorImpl& last) const;
 
-        private:
-            NODISCARD static CellSharedPtr GetCurrentCell(const ConstXMLDocumentSharedPtr& document,
-                                                          const SharedStringsSharedPtr& sharedStrings,
-                                                          const XMLNode& dataNode,
-                                                          const CellReference& topLeft,
-                                                          IteratorLocation location);
+    private:
+        using SharedStringsWeakPtr = std::weak_ptr<SharedStrings>;
 
-            NODISCARD CellReference GetNextCellReference() const;
-            void AddCurrentCell(const CellReference& nextCellReference);
-            void AddSameRowCurrentCell(const CellReference& nextCellReference);
-            void AddNextRowCurrentCell(const CellReference& nextCellReference);
+    private:
+        NODISCARD static CellSharedPtr GetCurrentCell(const ConstXMLDocumentSharedPtr& document,
+                                                      const SharedStringsSharedPtr& sharedStrings,
+                                                      const XMLNode& dataNode,
+                                                      const CellReference& topLeft,
+                                                      IteratorLocation location);
 
-            void CheckDocument();
-            void SetCurrentCell(const XMLNode& dataNode);
+        NODISCARD CellReference GetNextCellReference() const;
+        void AddCurrentCell(const CellReference& nextCellReference);
+        void AddSameRowCurrentCell(const CellReference& nextCellReference);
+        void AddNextRowCurrentCell(const CellReference& nextCellReference);
 
-        private:
-            ConstXMLDocumentWeakPtr document;
-            CellReference topLeft;
-            CellReference bottomRight;
-            CellSharedPtr currentCell;
-            SharedStringsWeakPtr sharedStrings;
-        };
-    }
+        void CheckDocument() const;
+        void SetCurrentCell(const XMLNode& dataNode);
+
+    private:
+        ConstXMLDocumentWeakPtr document;
+        CellReference topLeft;
+        CellReference bottomRight;
+        CellSharedPtr currentCell;
+        SharedStringsWeakPtr sharedStrings;
+    };
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_CELL_ITERATOR_IMPL_H

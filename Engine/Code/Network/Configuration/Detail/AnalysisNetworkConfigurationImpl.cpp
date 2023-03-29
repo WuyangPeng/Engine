@@ -55,12 +55,7 @@ void Network::AnalysisNetworkConfigurationImpl::AnalysisMain()
         }
         catch (const CoreTools::Error& error)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                << SYSTEM_TEXT("ÍøÂç²ßÂÔ")
-                << ptree.first
-                << SYSTEM_TEXT("ÅäÖÃÖµ´íÎó£º")
-                << error
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÍøÂç²ßÂÔ"), ptree.first, SYSTEM_TEXT("ÅäÖÃÖµ´íÎó£º"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }

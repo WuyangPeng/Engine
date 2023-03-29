@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 13:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/03 17:09)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_FWD_H
 #define CORE_TOOLS_TEXT_PARSING_FWD_H
@@ -37,7 +37,7 @@ namespace CoreTools
         class CommandResetCalcChain;
         class CommandAddSharedStrings;
         class CommandAddWorksheet;
-        class CommandAddChartsheet;
+        class CommandAddChartSheet;
         class CommandDeleteSheet;
         class CommandCloneSheet;
 
@@ -45,8 +45,8 @@ namespace CoreTools
         class QuerySheetIndex;
         class QuerySheetVisibility;
         class QuerySheetType;
-        class QuerySheetID;
-        class QuerySheetRelsID;
+        class QuerySheetId;
+        class QuerySheetRelsId;
         class QuerySheetRelsTarget;
         class QuerySharedStrings;
         class QueryXmlData;
@@ -86,7 +86,7 @@ namespace CoreTools
     enum class CSVDataType;
     enum class CSVGenerateType;
     enum class CSVTotalGenerateType;
-    enum class CSVPoistionType;
+    enum class CSVPositionType;
 
     class Vector2;
     class Vector3;
@@ -116,6 +116,7 @@ namespace CoreTools
 
     class JsonGenerate;
     class JsonRow;
+    class JsonTotalGenerate;
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_FWD_H

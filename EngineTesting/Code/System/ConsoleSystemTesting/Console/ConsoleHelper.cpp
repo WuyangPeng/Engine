@@ -33,9 +33,7 @@ void ConsoleSystemTesting::ConsoleHelper::AllocConsole() noexcept
     {
         isSuccess = false;
 
-        LOG_SINGLETON_APPENDER(Error, User)
-            << SYSTEM_TEXT("创建控制台失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_APPENDER(Error, User, SYSTEM_TEXT("创建控制台失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -51,9 +49,7 @@ void ConsoleSystemTesting::ConsoleHelper::FreeConsole() noexcept
 {
     if (!DoFreeConsole())
     {
-        LOG_SINGLETON_APPENDER(Error, User)
-            << SYSTEM_TEXT("销毁控制台失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_APPENDER(Error, User, SYSTEM_TEXT("销毁控制台失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/06 23:09)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 15:01)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_MANAGER_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_MANAGER_IMPL_H
@@ -44,14 +44,12 @@ namespace CoreTools
         NODISCARD bool RemoveAppender(const String& name);
         void Clear() noexcept;
 
-        void Write(const LogMessage& message);
+        void Write(const LogMessage& message) const;
         void Write(const String& name, const LogMessage& message);
         void WriteToConsole(const LogMessage& message);
 
-        void ReloadAppenderFile();
-
-        NODISCARD static const String GetConsoleAppenderName();
-        NODISCARD static const String GetDefaultAppenderName();
+        NODISCARD static String GetConsoleAppenderName();
+        NODISCARD static String GetDefaultAppenderName();
 
         NODISCARD LogLevel GetMinLogLevelType(LogFilter logFilter) const;
 
@@ -61,7 +59,7 @@ namespace CoreTools
 
     private:
         NODISCARD LogLevel GetLogLevelType(const LogMessage& message) const;
-        void DoWrite(const LogMessage& message);
+        void DoWrite(const LogMessage& message) const;
         void DoWrite(const String& name, const LogMessage& message);
         NODISCARD bool CreateFileAppender(const String& fileName);
 

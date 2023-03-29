@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 18:13)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/22 19:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,12 +15,11 @@
 
 #include <array>
 
-using std::array;
 using namespace std::literals;
 
 int CoreTools::SevenModElevenCheckSum::GetPowers(int index)
 {
-    static array<int, powersSize> powers{ 1, 7, 49, 343, 2401, 16807, 117649, 823543, 5764801, 40353607 };
+    static std::array powers{ 1, 7, 49, 343, 2401, 16807, 117649, 823543, 5764801, 40353607 };
 
     return powers.at(index);
 }
@@ -42,17 +41,16 @@ int CoreTools::SevenModElevenCheckSum::GetCheckSum() const noexcept
     return checkSum;
 }
 
-// private
 void CoreTools::SevenModElevenCheckSum::Calculation(const char* data, int length)
 {
     if (data == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("data指针为空\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("data指针为空\n"s))
     }
 
     if (powersSize < length)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("数字不能超过10位数\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("数字不能超过10位数\n"s))
     }
 
     auto sum = 0;
@@ -64,9 +62,9 @@ void CoreTools::SevenModElevenCheckSum::Calculation(const char* data, int length
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
-        if (!isdigit(static_cast<int>(data[i - 1])))
+        if (!isdigit(data[i - 1]))
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("无效数字\n"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("无效数字\n"s))
         }
 
         // 将数字字符转换为数字

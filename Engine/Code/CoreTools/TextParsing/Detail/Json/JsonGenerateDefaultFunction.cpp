@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:41)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/14 14:50)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,8 +18,8 @@
 
 using namespace std::literals;
 
-CoreTools::JsonGenerateDefaultFunction::JsonGenerateDefaultFunction(const JsonHead& jsonHead) noexcept
-    : jsonHead{ jsonHead }
+CoreTools::JsonGenerateDefaultFunction::JsonGenerateDefaultFunction(JsonHead jsonHead) noexcept
+    : jsonHead{ std::move(jsonHead) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -32,59 +32,59 @@ System::String CoreTools::JsonGenerateDefaultFunction::GenerateContainerDefaultF
 
     const auto className = jsonHead.GetJsonClassName();
 
-    String content{ TextParsing::g_Indentation };
+    String content{ TextParsing::gIndentation };
 
-    content += TextParsing::g_Public;
+    content += TextParsing::gPublic;
 
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Indentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
     content += SYSTEM_TEXT("explicit "s);
     content += className;
     content += SYSTEM_TEXT("Container(const CoreTools::JsonRow& jsonRow);\n"s);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_ClassInvariantDeclare;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gClassInvariantDeclare;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
 
-System::String CoreTools::JsonGenerateDefaultFunction::GenerateContainerDefaultFunction(const JsonNode& jsonNode) const
+System::String CoreTools::JsonGenerateDefaultFunction::GenerateContainerDefaultFunction(const JsonNode& jsonNode)  
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto className = StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
 
-    String content{ TextParsing::g_Indentation };
+    String content{ TextParsing::gIndentation };
 
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Public;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gPublic;
 
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Indentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
     content += SYSTEM_TEXT("explicit "s);
     content += className;
     content += SYSTEM_TEXT("(const CoreTools::JsonRow& jsonRow);\n"s);
 
     if (jsonNode.GetJsonDataType() == JsonDataType::NestedArray)
     {
-        content += TextParsing::g_Indentation;
-        content += TextParsing::g_Indentation;
-        content += TextParsing::g_Indentation;
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
         content += SYSTEM_TEXT("explicit "s);
         content += className;
-        content += SYSTEM_TEXT("(int id);\n"s);
+        content += SYSTEM_TEXT("(int id) noexcept;\n"s);
     }
 
-    content += TextParsing::g_NewlineCharacter;
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_ClassInvariantDeclare;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gClassInvariantDeclare;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

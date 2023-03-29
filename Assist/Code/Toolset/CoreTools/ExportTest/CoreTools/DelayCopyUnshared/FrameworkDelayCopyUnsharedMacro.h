@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.2 (2023/02/07 16:24)
+///	引擎辅助版本：0.9.0.4 (2023/03/17 15:29)
 
 #ifndef EXPORT_TEST_FRAMEWORK_DELAY_COPY_UNSHARED_MACRO_H
 #define EXPORT_TEST_FRAMEWORK_DELAY_COPY_UNSHARED_MACRO_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:50)
+///	引擎测试版本：0.9.0.4 (2023/03/10 14:23)
 
 #include "JsonNodeContainerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -16,8 +16,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 using namespace std::literals;
-using std::make_shared;
-using std::vector;
 
 CoreTools::JsonNodeContainerTesting::JsonNodeContainerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -49,7 +47,7 @@ void CoreTools::JsonNodeContainerTesting::IsEmptyTest()
     ASSERT_TRUE(jsonNodeContainer.IsEmpty());
     ASSERT_ENUM_EQUAL(jsonNodeContainer.GetJsonDataType(SYSTEM_TEXT("Key"s)), JsonDataType::Null);
 
-    auto jsonNode = make_shared<JsonNode>(SYSTEM_TEXT("Key"s), JsonDataType::Bool);
+    const auto jsonNode = make_shared<JsonNode>(SYSTEM_TEXT("Key"s), JsonDataType::Bool);
     jsonNodeContainer.AddJsonNode(jsonNode);
     ASSERT_FALSE(jsonNodeContainer.IsEmpty());
     ASSERT_ENUM_EQUAL(jsonNodeContainer.GetJsonDataType(SYSTEM_TEXT("Key"s)), JsonDataType::Bool);
@@ -64,7 +62,7 @@ void CoreTools::JsonNodeContainerTesting::IsEmptyTest()
 void CoreTools::JsonNodeContainerTesting::AddJsonNodeTest()
 {
     auto jsonNodeContainer = JsonNodeContainer::Create();
-    auto jsonNode = make_shared<JsonNode>(SYSTEM_TEXT("Key"s), JsonDataType::Bool);
+    const auto jsonNode = make_shared<JsonNode>(SYSTEM_TEXT("Key"s), JsonDataType::Bool);
     jsonNodeContainer.AddJsonNode(jsonNode);
 
     for (const auto& value : jsonNodeContainer)
@@ -85,7 +83,7 @@ void CoreTools::JsonNodeContainerTesting::SetNewJsonDataTypeTest()
 {
     auto jsonNodeContainer = JsonNodeContainer::Create();
 
-    auto jsonNode = make_shared<JsonNode>(SYSTEM_TEXT("Key"s), JsonDataType::Bool);
+    const auto jsonNode = make_shared<JsonNode>(SYSTEM_TEXT("Key"s), JsonDataType::Bool);
     jsonNodeContainer.AddJsonNode(jsonNode);
     ASSERT_ENUM_EQUAL(jsonNodeContainer.GetJsonDataType(SYSTEM_TEXT("Key"s)), JsonDataType::Bool);
 
@@ -97,10 +95,10 @@ void CoreTools::JsonNodeContainerTesting::SetNewJsonNodeContainerTest()
 {
     auto jsonNodeContainer0 = JsonNodeContainer::Create();
 
-    auto jsonNode0 = make_shared<JsonNode>(SYSTEM_TEXT("Key0"s), JsonDataType::Bool);
+    const auto jsonNode0 = make_shared<JsonNode>(SYSTEM_TEXT("Key0"s), JsonDataType::Bool);
     jsonNodeContainer0.AddJsonNode(jsonNode0);
 
-    auto jsonNode1 = make_shared<JsonNode>(SYSTEM_TEXT("Key1"s), JsonDataType::Bool);
+    const auto jsonNode1 = make_shared<JsonNode>(SYSTEM_TEXT("Key1"s), JsonDataType::Bool);
     jsonNodeContainer0.AddJsonNode(jsonNode1);
 
     JsonNode jsonNode2{ SYSTEM_TEXT("Container"s), JsonDataType::Nested };
@@ -108,7 +106,7 @@ void CoreTools::JsonNodeContainerTesting::SetNewJsonNodeContainerTest()
 
     auto jsonNodeContainer1 = JsonNodeContainer::Create();
 
-    auto jsonNode3 = make_shared<JsonNode>(SYSTEM_TEXT("NewKey"s), JsonDataType::Bool);
+    const auto jsonNode3 = make_shared<JsonNode>(SYSTEM_TEXT("NewKey"s), JsonDataType::Bool);
     jsonNodeContainer1.AddJsonNode(jsonNode3);
 
     jsonNode2.SetNewJsonNodeContainer(jsonNodeContainer1);

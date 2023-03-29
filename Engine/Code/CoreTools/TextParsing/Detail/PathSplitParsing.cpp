@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:28)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,8 +17,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::PathSplitParsing::PathSplitParsing(const String& path)
-    : path{ path }, nameSpace{}, className{}
+CoreTools::PathSplitParsing::PathSplitParsing(String path)  
+    : path{ std::move(path) }, nameSpace{}, className{}
 {
     Parsing();
 
@@ -28,7 +28,7 @@ CoreTools::PathSplitParsing::PathSplitParsing(const String& path)
 CoreTools::PathSplitParsing::SplitContainer CoreTools::PathSplitParsing::SplitPath() const
 {
     SplitContainer pathSplit{};
-    boost::algorithm::split(pathSplit, path, boost::is_any_of(TextParsing::g_FileSplit), boost::token_compress_on);
+    split(pathSplit, path, boost::is_any_of(TextParsing::gFileSplit), boost::token_compress_on);
 
     return pathSplit;
 }
@@ -37,7 +37,7 @@ void CoreTools::PathSplitParsing::Parsing()
 {
     if (path.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("文件名为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("文件名为空。"s))
     }
 
     const auto pathSplit = SplitPath();
@@ -50,16 +50,11 @@ void CoreTools::PathSplitParsing::ParsingNameSpace(const SplitContainer& splitCo
 {
     if (1 < splitContainer.size())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        nameSpace = StringUtility::ToFirstLetterUpper(splitContainer[splitContainer.size() - 2]);
-
-#include STSTEM_WARNING_POP
+        nameSpace = StringUtility::ToFirstLetterUpper(splitContainer.at(splitContainer.size() - 2));
     }
     else
     {
-        nameSpace = TextParsing::g_CSVNameSpace;
+        nameSpace = TextParsing::gCSVNameSpace;
     }
 }
 
@@ -68,13 +63,13 @@ void CoreTools::PathSplitParsing::ParsingClassName(const SplitContainer& splitCo
     if (!splitContainer.empty())
     {
         const auto& lastName = splitContainer.back();
-        const auto poistion = lastName.find(TextParsing::g_Dot);
+        const auto position = lastName.find(TextParsing::gDot);
 
-        className = StringUtility::ToFirstLetterUpper(lastName.substr(0, poistion));
+        className = StringUtility::ToFirstLetterUpper(lastName.substr(0, position));
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("文件名为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("文件名为空。"s))
     }
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:24)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 09:33)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,31 +18,31 @@
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
 CoreTools::SimpleCSV::RowImpl::RowImpl(const ConstXMLDocumentSharedPtr& document, const RowSharedPtr& row, const XMLNode& rowNode, const SharedStringsSharedPtr& sharedStrings)
-    : m_Document{ document }, m_RowNode{ rowNode }, m_SharedStrings{ sharedStrings }, m_RowDataProxy{ document, row, rowNode }
+    : document{ document }, rowNode{ rowNode }, sharedStrings{ sharedStrings }, rowDataProxy{ document, row, rowNode }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::SimpleCSV::RowImpl::RowImpl(const ConstXMLDocumentSharedPtr& document)
-    : m_Document{ document }, m_RowNode{}, m_SharedStrings{}, m_RowDataProxy{ DisableNotThrow::Disable }
+    : document{ document }, rowNode{}, sharedStrings{}, rowDataProxy{ DisableNotThrow::Disable }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-void CoreTools::SimpleCSV::RowImpl::Init(const RowSharedPtr& row, const XMLNode& rowNode, const SharedStringsSharedPtr& sharedStrings)
+void CoreTools::SimpleCSV::RowImpl::Init(const RowSharedPtr& row, const XMLNode& aRowNode, const SharedStringsSharedPtr& aSharedStrings)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto documentSharedPtr = m_Document.lock();
+    const auto documentSharedPtr = document.lock();
 
     if (!documentSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s))
     }
 
-    m_RowNode = rowNode;
-    m_SharedStrings = sharedStrings;
-    m_RowDataProxy = RowDataProxy{ documentSharedPtr, row, rowNode };
+    rowNode = aRowNode;
+    sharedStrings = aSharedStrings;
+    rowDataProxy = RowDataProxy{ documentSharedPtr, row, aRowNode };
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, RowImpl);
@@ -94,9 +94,7 @@ void CoreTools::SimpleCSV::RowImpl::SetDescent(double descent)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto node = GetRowNode();
-
-    if (!node.attribute("x14ac:dyDescent"))
+    if (auto node = GetRowNode(); !node.attribute("x14ac:dyDescent"))
     {
         node.append_attribute("x14ac:dyDescent") = descent;
     }
@@ -119,9 +117,7 @@ void CoreTools::SimpleCSV::RowImpl::SetHidden(bool state)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto node = GetRowNode();
-
-    if (!node.attribute("hidden"))
+    if (auto node = GetRowNode(); !node.attribute("hidden"))
     {
         node.append_attribute("hidden") = state ? 1 : 0;
     }
@@ -144,9 +140,7 @@ int CoreTools::SimpleCSV::RowImpl::GetCellCount() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto node = GetRowNode();
-
-    if (!node.last_child())
+    if (const auto node = GetRowNode(); !node.last_child())
     {
         return 0;
     }
@@ -167,75 +161,75 @@ const CoreTools::SimpleCSV::RowDataProxy& CoreTools::SimpleCSV::RowImpl::GetValu
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_RowDataProxy;
+    return rowDataProxy;
 }
 
 CoreTools::SimpleCSV::RowDataRange CoreTools::SimpleCSV::RowImpl::GetCells() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto documentSharedPtr = m_Document.lock();
-    auto sharedStringsSharedPtr = m_SharedStrings.lock();
+    const auto documentSharedPtr = document.lock();
+    const auto sharedStringsSharedPtr = sharedStrings.lock();
 
     if (!documentSharedPtr || !sharedStringsSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或sharedStrings已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或sharedStrings已被释放。"s))
     }
 
-    return RowDataRange{ documentSharedPtr, m_RowNode, 1, CellReference{ m_RowNode.last_child().attribute("r").value() }.GetColumn(), sharedStringsSharedPtr };
+    return RowDataRange{ documentSharedPtr, rowNode, 1, CellReference{ rowNode.last_child().attribute("r").value() }.GetColumn(), sharedStringsSharedPtr };
 }
 
 CoreTools::SimpleCSV::RowDataRange CoreTools::SimpleCSV::RowImpl::GetCells(int cellCount) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto documentSharedPtr = m_Document.lock();
-    auto sharedStringsSharedPtr = m_SharedStrings.lock();
+    const auto documentSharedPtr = document.lock();
+    const auto sharedStringsSharedPtr = sharedStrings.lock();
 
     if (!documentSharedPtr || !sharedStringsSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或sharedStrings已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或sharedStrings已被释放。"s))
     }
 
-    return RowDataRange{ documentSharedPtr, m_RowNode, 1, cellCount, sharedStringsSharedPtr };
+    return RowDataRange{ documentSharedPtr, rowNode, 1, cellCount, sharedStringsSharedPtr };
 }
 
 CoreTools::SimpleCSV::RowDataRange CoreTools::SimpleCSV::RowImpl::GetCells(int firstCell, int lastCell) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto documentSharedPtr = m_Document.lock();
-    auto sharedStringsSharedPtr = m_SharedStrings.lock();
+    const auto documentSharedPtr = document.lock();
+    const auto sharedStringsSharedPtr = sharedStrings.lock();
 
     if (!documentSharedPtr || !sharedStringsSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或sharedStrings已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或sharedStrings已被释放。"s))
     }
 
-    return RowDataRange{ documentSharedPtr, m_RowNode, firstCell, lastCell, sharedStringsSharedPtr };
+    return RowDataRange{ documentSharedPtr, rowNode, firstCell, lastCell, sharedStringsSharedPtr };
 }
 
 CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::RowImpl::GetRowNode() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (m_Document.expired())
+    if (document.expired())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s))
     }
 
-    return m_RowNode;
+    return rowNode;
 }
 
 CoreTools::SimpleCSV::RowImpl::SharedStringsSharedPtr CoreTools::SimpleCSV::RowImpl::GetSharedStrings()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto sharedStringsSharedPtr = m_SharedStrings.lock();
+    auto sharedStringsSharedPtr = sharedStrings.lock();
 
     if (!sharedStringsSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("dsharedStrings已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("dsharedStrings已被释放。"s))
     }
 
     return sharedStringsSharedPtr;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 20:12)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 17:02)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -28,8 +28,7 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, BatchConversionCSVImpl)
 
 void CoreTools::BatchConversionCSVImpl::ExecutionFile(const String& nativeFileName, const String& outputDirectory)
 {
-    const auto outputFile = GetOutputFile(nativeFileName, outputDirectory);
-    if (!outputFile.empty())
+    if (const auto outputFile = GetOutputFile(nativeFileName, outputDirectory); !outputFile.empty())
     {
         ExcelConversionCSV excelConversionCSV{ StringConversion::StandardConversionMultiByte(nativeFileName), outputFile, false };
     }
@@ -37,16 +36,16 @@ void CoreTools::BatchConversionCSVImpl::ExecutionFile(const String& nativeFileNa
 
 System::String CoreTools::BatchConversionCSVImpl::GetOutputFile(const String& nativeFileName, const String& outputDirectory)
 {
-    if (nativeFileName.find(TextParsing::g_XlsxExtension) != nativeFileName.size() - TextParsing::g_XlsxExtension.size())
+    if (nativeFileName.find(TextParsing::gXlsxExtension) != nativeFileName.size() - TextParsing::gXlsxExtension.size())
     {
         return String{};
     }
 
-    FileNameParsing fileNameParsing{ nativeFileName };
+    const FileNameParsing fileNameParsing{ nativeFileName };
 
     auto output = fileNameParsing.GetWithSlashFileName();
 
-    boost::algorithm::replace_last(output, TextParsing::g_XlsxExtension, TextParsing::g_CsvExtension);
+    boost::algorithm::replace_last(output, TextParsing::gXlsxExtension, TextParsing::gCsvExtension);
 
     return outputDirectory + output;
 }

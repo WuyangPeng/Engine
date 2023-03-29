@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 13:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 11:31)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ZIP_ENTRY_H
 #define CORE_TOOLS_TEXT_PARSING_ZIP_ENTRY_H
@@ -22,54 +22,51 @@
 template class CORE_TOOLS_DEFAULT_DECLARE std::shared_ptr<CoreTools::SimpleZip::ZipEntryImpl>;
 template class CORE_TOOLS_DEFAULT_DECLARE CoreTools::DelayCopyUnsharedImpl<CoreTools::SimpleZip::ZipEntry, CoreTools::SimpleZip::ZipEntryImpl>;
 
-namespace CoreTools
+namespace CoreTools::SimpleZip
 {
-    namespace SimpleZip
+    class CORE_TOOLS_DEFAULT_DECLARE ZipEntry final
     {
-        class CORE_TOOLS_DEFAULT_DECLARE ZipEntry final
-        {
-        public:
-            DELAY_COPY_UNSHARED_TYPE_DECLARE(ZipEntry);
+    public:
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(ZipEntry);
 
-        public:
-            explicit ZipEntry(const ZipEntryInfo& info);
-            ZipEntry(const std::string& name, const ZipEntryData& data);
-            ZipEntry(const std::string& name, const std::string& data);
+    public:
+        explicit ZipEntry(const ZipEntryInfo& info);
+        ZipEntry(const std::string& name, const ZipEntryData& data);
+        ZipEntry(const std::string& name, const std::string& data);
 
-            CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-            NODISCARD ZipEntryData GetEntryData() const;
-            NODISCARD size_t GetEntrySize() const noexcept;
-            NODISCARD bool IsEntryDataEmpty() const noexcept;
+        NODISCARD ZipEntryData GetEntryData() const;
+        NODISCARD size_t GetEntrySize() const noexcept;
+        NODISCARD bool IsEntryDataEmpty() const noexcept;
 
-            NODISCARD std::string GetDataAsString() const;
-            void SetData(const std::string& data);
-            void SetData(const ZipEntryData& data);
+        NODISCARD std::string GetDataAsString() const;
+        void SetData(const std::string& data);
+        void SetData(const ZipEntryData& data);
 
-            NODISCARD std::string GetFileName() const;
-            void SetFileName(const std::string& name);
+        NODISCARD std::string GetFileName() const;
+        void SetFileName(const std::string& name);
 
-            NODISCARD uint32_t GetIndex() const noexcept;
-            NODISCARD uint64_t GetCompressedSize() const noexcept;
-            NODISCARD uint64_t GetUncompressedSize() const noexcept;
-            NODISCARD bool IsDirectory() const noexcept;
-            NODISCARD bool IsEncrypted() const noexcept;
-            NODISCARD bool IsSupported() const noexcept;
-            NODISCARD std::string GetComment() const;
-            NODISCARD time_t GetTime() const noexcept;
+        NODISCARD uint32_t GetIndex() const noexcept;
+        NODISCARD uint64_t GetCompressedSize() const noexcept;
+        NODISCARD uint64_t GetUncompressedSize() const noexcept;
+        NODISCARD bool IsDirectory() const noexcept;
+        NODISCARD bool IsEncrypted() const noexcept;
+        NODISCARD bool IsSupported() const noexcept;
+        NODISCARD std::string GetComment() const;
+        NODISCARD time_t GetTime() const noexcept;
 
-            NODISCARD ZipEntryInfo GetZipEntryInfo() const noexcept;
-            void ResizeZipEntryData(int uncompressedSize);
+        NODISCARD ZipEntryInfo GetZipEntryInfo() const noexcept;
+        void ResizeZipEntryData(int uncompressedSize);
 
-            NODISCARD bool IsModified() const noexcept;
+        NODISCARD bool IsModified() const noexcept;
 
-            void ReaderExtractFileToMem(mz_zip_archive* archive, const std::string& name);
-            NODISCARD bool WriterAddMem(mz_zip_archive* archive) const;
+        void ReaderExtractFileToMem(mz_zip_archive* archive, const std::string& name);
+        NODISCARD bool WriterAddMem(mz_zip_archive* archive) const;
 
-        private:
-            PackageType impl;
-        };
-    }
+    private:
+        PackageType impl;
+    };
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_ZIP_ENTRY_H

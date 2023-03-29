@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 14:23)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/17 19:32)
 
 #ifndef CORE_TOOLS_BASE_UNIQUEID_MANAGER_DETAIL_H
 #define CORE_TOOLS_BASE_UNIQUEID_MANAGER_DETAIL_H
@@ -24,7 +24,7 @@ void CoreTools::UniqueIdManager::Create(E count)
 }
 
 template <typename E>
-uint64_t CoreTools::UniqueIdManager::NextUniqueId(E index)
+int64_t CoreTools::UniqueIdManager::NextUniqueId(E index)
 {
     static_assert(std::is_enum_v<E>, "E must be an enum.");
 
@@ -36,7 +36,7 @@ uint64_t CoreTools::UniqueIdManager::NextUniqueId(E index)
 }
 
 template <typename E>
-void CoreTools::UniqueIdManager::SetUniqueId(E index, uint64_t latestIndex)
+void CoreTools::UniqueIdManager::SetUniqueId(E index, int64_t latestIndex)
 {
     static_assert(std::is_enum_v<E>, "E must be an enum.");
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 21:30)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 16:41)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,11 +21,6 @@
 #include <iostream>
 #include <stdexcept>
 
-using std::cerr;
-using std::cout;
-using std::exception;
-using std::ofstream;
-using std::ostream;
 using namespace std::literals;
 
 CoreTools::CMainFunctionHelper::CMainFunctionHelper(int argc, char** argv)
@@ -39,20 +34,20 @@ CoreTools::CMainFunctionHelper::CMainFunctionHelper(int argc, char** argv)
     {
         CERR << error.GetError() << SYSTEM_TEXT('\n');
     }
-    catch (const exception& error)
+    catch (const std::exception& error)
     {
-        cerr << error.what() << '\n';
+        std::cerr << error.what() << '\n';
     }
     catch (...)
     {
-        cerr << "未知错误\n";
+        std::cerr << "未知错误\n";
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::CMainFunctionHelper::CMainFunctionHelper(CMainFunctionHelper&& rhs) noexcept
-    : argc{ rhs.argc }, argv{ std::move(rhs.argv) }, stream{ std::move(rhs.stream) }, schedule{ rhs.schedule }
+    : argc{ rhs.argc }, argv{ rhs.argv }, stream{ std::move(rhs.stream) }, schedule{ rhs.schedule }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -64,7 +59,7 @@ CoreTools::CMainFunctionHelper& CoreTools::CMainFunctionHelper::operator=(CMainF
     if (this != &rhs)
     {
         argc = rhs.argc;
-        argv = std::move(rhs.argv);
+        argv = rhs.argv;
         stream = std::move(rhs.stream);
         schedule = rhs.schedule;
     }
@@ -135,24 +130,21 @@ int CoreTools::CMainFunctionHelper::Run() noexcept
     return -1;
 }
 
-// private
 void CoreTools::CMainFunctionHelper::InitSingleton()
 {
-    InitUniqueIDManager();
+    InitUniqueIdManager();
     InitLog();
     GenerateStream();
     InitStreamLocale();
 }
 
-// private
-void CoreTools::CMainFunctionHelper::InitUniqueIDManager()
+void CoreTools::CMainFunctionHelper::InitUniqueIdManager()
 {
     UniqueIdManager::Create(UniqueIdSelect::Max);
 
-    schedule = ScheduleType::UniqueIDManager;
+    schedule = ScheduleType::UniqueIdManager;
 }
 
-// private
 void CoreTools::CMainFunctionHelper::InitLog()
 {
     Log::Create();
@@ -161,7 +153,6 @@ void CoreTools::CMainFunctionHelper::InitLog()
     schedule = ScheduleType::Log;
 }
 
-// private
 void CoreTools::CMainFunctionHelper::GenerateStream()
 {
     if (argc == 2)
@@ -175,7 +166,7 @@ void CoreTools::CMainFunctionHelper::GenerateStream()
     }
     else if (2 < argc)
     {
-        CommandHandle command{ argc, argv };
+        const CommandHandle command{ argc, argv };
 
         stream = OStreamShared{ command.GetFileName() };
     }
@@ -187,20 +178,17 @@ void CoreTools::CMainFunctionHelper::GenerateStream()
     schedule = ScheduleType::Max;
 }
 
-// private
 void CoreTools::CMainFunctionHelper::DestroySingleton() noexcept
 {
     DestroyStream();
     DestroyLog();
-    DestroyUniqueIDManager();
+    DestroyUniqueIdManager();
 }
 
-// private
 void CoreTools::CMainFunctionHelper::DestroyStream() noexcept
 {
 }
 
-// private
 void CoreTools::CMainFunctionHelper::DestroyLog() noexcept
 {
     if (ScheduleType::Log <= schedule)
@@ -209,10 +197,9 @@ void CoreTools::CMainFunctionHelper::DestroyLog() noexcept
     }
 }
 
-// private
-void CoreTools::CMainFunctionHelper::DestroyUniqueIDManager() noexcept
+void CoreTools::CMainFunctionHelper::DestroyUniqueIdManager() noexcept
 {
-    if (ScheduleType::UniqueIDManager <= schedule)
+    if (ScheduleType::UniqueIdManager <= schedule)
     {
         UniqueIdManager::Destroy();
     }
@@ -225,7 +212,7 @@ void CoreTools::CMainFunctionHelper::SystemPause() noexcept
 
 void CoreTools::CMainFunctionHelper::InitStreamLocale()
 {
-    std::locale nullLocale{ ""s };
+    const std::locale nullLocale{ ""s };
 
     COUT.imbue(nullLocale);
     CIN.imbue(nullLocale);

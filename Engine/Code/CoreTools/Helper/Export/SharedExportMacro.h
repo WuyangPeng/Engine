@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.2 (2023/02/19 21:02)
+///	引擎版本：0.9.0.4 (2023/03/23 15:46)
 
 #ifndef CORE_TOOLS_HELPER_SHARED_EXPORT_MACRO_H
 #define CORE_TOOLS_HELPER_SHARED_EXPORT_MACRO_H
@@ -79,6 +79,6 @@
 
 #define SHARED_TYPE_DECLARE(className) \
     TYPE_DECLARE(className);           \
-    using PackageType = CoreTools::SharedImpl<ImplType>;
+    using PackageType = CoreTools::SharedImpl<ImplType>
 
 #endif  // CORE_TOOLS_HELPER_SHARED_EXPORT_MACRO_H

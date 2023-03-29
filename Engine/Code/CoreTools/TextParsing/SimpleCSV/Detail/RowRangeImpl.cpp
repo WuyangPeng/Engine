@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:24)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 09:35)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,9 +13,7 @@
 #include "Utilities.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/Cell.h"
-#include "CoreTools/TextParsing/SimpleCSV/CellRange.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
-#include "CoreTools/TextParsing/SimpleCSV/Flags/IteratorFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
 CoreTools::SimpleCSV::RowRangeImpl::RowRangeImpl(const ConstXMLDocumentSharedPtr& document, const XMLNode& dataNode, int first, int last, const SharedStringsSharedPtr& sharedStrings) noexcept
@@ -57,7 +55,7 @@ CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::RowRangeImpl::GetDataNode() 
 
     if (document.expired())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s))
     }
 
     return dataNode;
@@ -71,13 +69,13 @@ CoreTools::SimpleCSV::RowRangeImpl::SharedStringsSharedPtr CoreTools::SimpleCSV:
 
     if (!sharedStringsSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("sharedStrings已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("sharedStrings已被释放。"s))
     }
 
     return sharedStringsSharedPtr;
 }
 
-CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr CoreTools::SimpleCSV::RowRangeImpl::GetDocument()
+CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr CoreTools::SimpleCSV::RowRangeImpl::GetDocument() const
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -85,7 +83,7 @@ CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr CoreTools::SimpleCSV::RowRangeIm
 
     if (!documentSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s))
     }
 
     return documentSharedPtr;

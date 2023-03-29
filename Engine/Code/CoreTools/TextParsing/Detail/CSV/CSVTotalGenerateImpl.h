@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 11:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 11:08)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_TOTAL_GENERATE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_TOTAL_GENERATE_IMPL_H
@@ -30,7 +30,7 @@ namespace CoreTools
         using CSVHeadContainer = std::vector<CSVHead>;
 
     public:
-        explicit CSVTotalGenerateImpl(const String& nameSpace, const CSVHeadContainer& csvHeadContainer);
+        CSVTotalGenerateImpl(String nameSpace, CSVHeadContainer csvHeadContainer) noexcept;
         virtual ~CSVTotalGenerateImpl() noexcept = default;
         CSVTotalGenerateImpl(const CSVTotalGenerateImpl& rhs) = default;
         CSVTotalGenerateImpl& operator=(const CSVTotalGenerateImpl& rhs) = default;
@@ -42,14 +42,15 @@ namespace CoreTools
         virtual void GenerateFile(const String& directory) const;
 
     protected:
-        NODISCARD String GenerateCopyright() const;
-        NODISCARD String GenerateNewLine() const;
+        NODISCARD static String GenerateCopyright();
+        NODISCARD static String GenerateNewLine();
+        NODISCARD static String GenerateFwdHead();
+
         NODISCARD String GenerateHeaderGuard() const;
         NODISCARD String GenerateContainerHeaderGuard() const;
         NODISCARD String GenerateHeaderGuardEndif() const;
 
-        NODISCARD String GenerateHead() const;
-        NODISCARD String GenerateFwdHead() const;
+        NODISCARD String GenerateHead() const;   
         NODISCARD String GenerateContainerHead() const;
         NODISCARD String GenerateContainerSourceHead() const;
         NODISCARD String GenerateNameSpace() const;
@@ -66,13 +67,13 @@ namespace CoreTools
         using DataType = std::map<String, CSVHead>;
 
     private:
-        NODISCARD String GetOldContent(const String& fileName) const;
+        NODISCARD static String GetOldContent(const String& fileName);
 
-        NODISCARD String GenerateEnumHead(const EnumType& enumType) const;
-        NODISCARD String GenerateDataHead(const DataType& dataType) const;
+        NODISCARD static String GenerateEnumHead(const EnumType& enumType);
+        NODISCARD static String GenerateDataHead(const DataType& dataType);
 
-        NODISCARD String GenerateEnumFwd(const EnumType& enumType) const;
-        NODISCARD String GenerateDataFwd(const DataType& dataType) const;
+        NODISCARD static String GenerateEnumFwd(const EnumType& enumType);
+        NODISCARD static String GenerateDataFwd(const DataType& dataType);
 
         NODISCARD virtual String GetFileSuffix() const = 0;
         NODISCARD virtual String GetContent() const = 0;

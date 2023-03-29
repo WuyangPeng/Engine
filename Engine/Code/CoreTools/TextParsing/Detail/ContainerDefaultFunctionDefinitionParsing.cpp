@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:55)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:35)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,32 +25,27 @@
 
 CoreTools::ContainerDefaultFunctionDefinitionParsing::ContainerDefaultFunctionDefinitionParsingSharedPtr CoreTools::ContainerDefaultFunctionDefinitionParsing::Create(const CSVHead& csvHead, const String& className)
 {
-    const auto csvFormatType = csvHead.GetCSVFormatType();
-
-    switch (csvFormatType)
+    switch (const auto csvFormatType = csvHead.GetCSVFormatType(); csvFormatType)
     {
         case CSVFormatType::Vector:
         {
             return std::make_shared<VectorContainerDefaultFunctionDefinitionParsing>(csvHead, className);
         }
-        break;
         case CSVFormatType::TreeMap:
             FALLTHROUGH;
         case CSVFormatType::HashMap:
         {
             return std::make_shared<MapContainerDefaultFunctionDefinitionParsing>(csvHead, className);
         }
-        break;
         case CSVFormatType::Unique:
         {
             return std::make_shared<UniqueContainerDefaultFunctionDefinitionParsing>(csvHead, className);
         }
-        break;
+
         default:
         {
             return std::make_shared<DefaultContainerDefaultFunctionDefinitionParsing>(csvHead, className);
         }
-        break;
     }
 }
 
@@ -66,7 +61,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateCon
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = GenerateConstructor(TextParsing::g_CSVContent);
+    auto content = GenerateConstructor(TextParsing::gCSVContent);
 
     content += GenerateContainerMember();
 
@@ -76,7 +71,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateCon
     content += GenerateUserSelfClassIsValid9(1);
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -95,7 +90,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateCon
     content += GenerateContainerAddDataDefinition();
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -106,11 +101,11 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateCon
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Colon;
-    content += TextParsing::g_Space;
+    content += TextParsing::gColon;
+    content += TextParsing::gSpace;
     content += lowerClassName;
-    content += TextParsing::g_Init;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gInit;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -121,8 +116,8 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateCon
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_ParsingContent;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gParsingContent;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -133,15 +128,15 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateCon
 
     const auto csvHead = GetCSVHead();
 
-    String content{ TextParsing::g_Void };
+    String content{ TextParsing::gVoid };
 
     content += csvHead.GetNameSpace();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += GetCSVClassName();
-    content += TextParsing::g_DoubleColon;
-    content += TextParsing::g_Parsing;
-    content += TextParsing::g_CSVContent;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gParsing;
+    content += TextParsing::gCSVContent;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -152,7 +147,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateCon
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_ContentSize;
+    content += TextParsing::gContentSize;
 
     return content;
 }
@@ -163,7 +158,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateLoo
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Loop;
+    content += TextParsing::gLoop;
 
     return content;
 }
@@ -174,8 +169,8 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateCSV
 
     auto content = GenerateIndentation(2);
 
-    content += TextParsing::g_CSVRowInit;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gCSVRowInit;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -189,9 +184,9 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateEmp
     const auto csvHead = GetCSVHead();
 
     content += lowerClassName;
-    content += TextParsing::g_EmplaceBack;
+    content += TextParsing::gEmplaceBack;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_CSVRowCall;
+    content += TextParsing::gCSVRowCall;
 
     return content;
 }
@@ -202,11 +197,9 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateSor
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Sort;
+    content += TextParsing::gSort;
     content += lowerClassName;
-    content += TextParsing::g_Begin;
-    content += lowerClassName;
-    content += TextParsing::g_Function;
+    content += SYSTEM_TEXT(", [](const auto& lhs, const auto& rhs) noexcept {\n");
 
     return content;
 }
@@ -217,7 +210,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateRet
 
     auto content = GenerateIndentation(2);
 
-    content += TextParsing::g_ReturnKeyLess;
+    content += TextParsing::gReturnKeyLess;
 
     return content;
 }
@@ -228,7 +221,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateRet
 
     auto content = GenerateIndentation(2);
 
-    content += TextParsing::g_ReturnKeyEqual;
+    content += TextParsing::gReturnKeyEqual;
 
     return content;
 }
@@ -239,7 +232,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateLam
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_LambdaEnd;
+    content += TextParsing::gLambdaEnd;
 
     return content;
 }
@@ -250,11 +243,9 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateUni
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Unique;
+    content += TextParsing::gUnique;
     content += lowerClassName;
-    content += TextParsing::g_Begin;
-    content += lowerClassName;
-    content += TextParsing::g_Function;
+    content += SYSTEM_TEXT(", [](const auto& lhs, const auto& rhs) noexcept {\n");
 
     return content;
 }
@@ -265,9 +256,8 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateIfI
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_IfIter;
-    content += lowerClassName;
-    content += TextParsing::g_CEnd;
+    content += TextParsing::gIfIterBegin;
+    content += SYSTEM_TEXT("iter.end())\n");
 
     return content;
 }
@@ -278,7 +268,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateWar
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_WarnLog;
+    content += TextParsing::gWarnLog;
 
     return content;
 }
@@ -289,7 +279,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateRep
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_LogSystemTextBegin;
+    content += SYSTEM_TEXT(" SYSTEM_TEXT(\"");
     content += lowerClassName;
     content += repeatKey;
 
@@ -302,7 +292,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateLog
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::g_LogAssert;
+    content += SYSTEM_TEXT(", CoreTools::LogAppenderIOManageSign::TriggerAssert);\n");
 
     return content;
 }
@@ -314,9 +304,9 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateEra
     auto content = GenerateIndentation(2);
 
     content += lowerClassName;
-    content += TextParsing::g_EraseIter;
-    content += lowerClassName;
-    content += TextParsing::g_End;
+    content += TextParsing::gEraseIterBegin;
+    content += SYSTEM_TEXT("iter");
+    content += TextParsing::gEnd;
 
     return content;
 }
@@ -338,7 +328,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateIni
     content += GenerateEmplaceBack();
 
     content += GenerateFunctionEndBrackets(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

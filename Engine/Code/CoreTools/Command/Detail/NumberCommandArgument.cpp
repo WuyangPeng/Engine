@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 13:47)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 11:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,11 +15,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::make_shared;
-using std::string;
-
-CoreTools::NumberCommandArgument::NumberCommandArgument(int index, const string& name, const string& value)
-    : ParentType{ index, name }, m_Value{ value }
+CoreTools::NumberCommandArgument::NumberCommandArgument(int index, const std::string& name, const std::string& value)
+    : ParentType{ index, name }, value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -30,28 +27,28 @@ int CoreTools::NumberCommandArgument::GetInteger() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return boost::lexical_cast<int>(m_Value);
+    return boost::lexical_cast<int>(value);
 }
 
 float CoreTools::NumberCommandArgument::GetFloat() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return boost::lexical_cast<float>(m_Value);
+    return boost::lexical_cast<float>(value);
 }
 
 double CoreTools::NumberCommandArgument::GetDouble() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return boost::lexical_cast<double>(m_Value);
+    return boost::lexical_cast<double>(value);
 }
 
-const string CoreTools::NumberCommandArgument::GetString() const
+std::string CoreTools::NumberCommandArgument::GetString() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NumberCommandArgument不是字符串！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("NumberCommandArgument不是字符串！"s))
 }
 
 bool CoreTools::NumberCommandArgument::IsInteger() const noexcept
@@ -93,12 +90,14 @@ CoreTools::NumberCommandArgument::CommandArgumentSharedPtr CoreTools::NumberComm
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return make_shared<NumberCommandArgument>(*this);
+    return std::make_shared<NumberCommandArgument>(*this);
 }
 
-void CoreTools::NumberCommandArgument::AddArgumentValue(MAYBE_UNUSED const string& value)
+void CoreTools::NumberCommandArgument::AddArgumentValue(const std::string& aValue)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("NumberCommandArgument不能添加值！"s));
+    System::UnusedFunction(aValue);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("NumberCommandArgument不能添加值！"s))
 }

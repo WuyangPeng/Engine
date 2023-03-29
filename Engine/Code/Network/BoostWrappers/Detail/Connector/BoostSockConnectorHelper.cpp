@@ -45,9 +45,7 @@ void Network::BoostSockConnectorHelper::EventFunction(const ErrorCodeType& error
 
     if (!eventInterface->EventFunction(callbackParameters))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-            << SYSTEM_TEXT("事件回调执行失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("事件回调执行失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     PrintConnectorSuccessLog(asynchronousConnectorSuccess.data(), addressData);
@@ -57,20 +55,10 @@ void Network::BoostSockConnectorHelper::EventFunction(const ErrorCodeType& error
 
 void Network::BoostSockConnectorHelper::PrintConnectorLog(const String& prefix, const AddressData& addressData)
 {
-    LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Trace, Network, g_BoostLogName.data())
-        << prefix
-        << addressData.GetAddress()
-        << port.data()
-        << addressData.GetPort()
-        << CoreTools::LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Trace, Network, g_BoostLogName.data(), prefix, addressData.GetAddress(), port.data(), addressData.GetPort(), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 }
 
 void Network::BoostSockConnectorHelper::PrintConnectorSuccessLog(const String& prefix, const AddressData& addressData)
 {
-    LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Info, Network, g_BoostLogName.data())
-        << prefix
-        << addressData.GetAddress()
-        << port.data()
-        << addressData.GetPort()
-        << CoreTools::LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Info, Network, g_BoostLogName.data(), prefix, addressData.GetAddress(), port.data(), addressData.GetPort(), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 }

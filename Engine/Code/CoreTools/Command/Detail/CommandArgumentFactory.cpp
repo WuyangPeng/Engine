@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 13:35)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 11:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,15 +17,11 @@
 #include "StringCommandArgument.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::make_shared;
-using std::string;
 using namespace std::literals;
 
-CoreTools::CommandArgumentFactory::CommandArgumentSharedPtr CoreTools::CommandArgumentFactory::Create(int index, const string& arguments, const string& value)
+CoreTools::CommandArgumentFactory::CommandArgumentSharedPtr CoreTools::CommandArgumentFactory::Create(int index, const std::string& arguments, const std::string& value)
 {
-    const CommandArgumentType valueType{ value };
-
-    if (valueType.IsDigit())
+    if (const CommandArgumentType valueType{ value }; valueType.IsDigit())
     {
         return make_shared<NumberCommandArgument>(index, arguments, value);
     }
@@ -35,11 +31,11 @@ CoreTools::CommandArgumentFactory::CommandArgumentSharedPtr CoreTools::CommandAr
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("命令行参数无效！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("命令行参数无效！"s))
     }
 }
 
-CoreTools::CommandArgumentFactory::CommandArgumentSharedPtr CoreTools::CommandArgumentFactory::Create(int index, const string& arguments)
+CoreTools::CommandArgumentFactory::CommandArgumentSharedPtr CoreTools::CommandArgumentFactory::Create(int index, const std::string& arguments)
 {
     return make_shared<NoValueCommandArgument>(index, arguments);
 }

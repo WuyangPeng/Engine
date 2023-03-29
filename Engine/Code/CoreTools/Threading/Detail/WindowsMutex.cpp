@@ -41,9 +41,7 @@ void CoreTools::WindowsMutex::Delete() noexcept
 
     if (!System::CloseSystemMutex(mutex))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-            << SYSTEM_TEXT("Ïú»ÙMutexÊ§°Ü")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("Ïú»ÙMutexÊ§°Ü"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -69,9 +67,7 @@ void CoreTools::WindowsMutex::Leave() noexcept
 
     if (!System::ReleaseSystemMutex(mutex))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-            << SYSTEM_TEXT("ÊÍ·Å»¥³âÌåÊ§°Ü")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("ÊÍ·Å»¥³âÌåÊ§°Ü"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

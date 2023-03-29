@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/26 0:14)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/29 13:47)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_DETAIL_H
@@ -16,43 +16,43 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename EventType>
-CoreTools::Telegram<EventType>::Telegram(uint64_t sender, uint64_t receiver, EventType message, int64_t dispatchMillisecondTime)
-    : sender{ sender }, m_Receiver{ receiver }, message{ message }, dispatchMillisecondTime{ dispatchMillisecondTime }, callbackParameters{ 0 }
+CoreTools::Telegram<EventType>::Telegram(int64_t sender, int64_t receiver, EventType message, int64_t dispatchMillisecondTime)
+    : sender{ sender }, receiver{ receiver }, message{ message }, dispatchMillisecondTime{ dispatchMillisecondTime }, callbackParameters{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename EventType>
-CoreTools::Telegram<EventType>::Telegram(uint64_t sender, uint64_t receiver, EventType message, int64_t dispatchMillisecondTime, const CallbackParameters& callbackParameters)
-    : sender{ sender }, m_Receiver{ receiver }, message{ message }, dispatchMillisecondTime{ dispatchMillisecondTime }, callbackParameters{ callbackParameters }
+CoreTools::Telegram<EventType>::Telegram(int64_t sender, int64_t receiver, EventType message, int64_t dispatchMillisecondTime, const CallbackParameters& callbackParameters)
+    : sender{ sender }, receiver{ receiver }, message{ message }, dispatchMillisecondTime{ dispatchMillisecondTime }, callbackParameters{ callbackParameters }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename EventType>
-CoreTools::Telegram<EventType>::Telegram(uint64_t sender, EventType message, int64_t dispatchMillisecondTime)
-    : sender{ sender }, m_Receiver{}, message{ message }, dispatchMillisecondTime{ dispatchMillisecondTime }, callbackParameters{ 0 }
+CoreTools::Telegram<EventType>::Telegram(int64_t sender, EventType message, int64_t dispatchMillisecondTime)
+    : sender{ sender }, receiver{}, message{ message }, dispatchMillisecondTime{ dispatchMillisecondTime }, callbackParameters{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename EventType>
-CoreTools::Telegram<EventType>::Telegram(uint64_t sender, EventType message, int64_t dispatchMillisecondTime, const CallbackParameters& callbackParameters) noexcept
-    : sender{ sender }, m_Receiver{}, message{ message }, dispatchMillisecondTime{ dispatchMillisecondTime }, callbackParameters{ callbackParameters }
+CoreTools::Telegram<EventType>::Telegram(int64_t sender, EventType message, int64_t dispatchMillisecondTime, const CallbackParameters& callbackParameters) noexcept
+    : sender{ sender }, receiver{}, message{ message }, dispatchMillisecondTime{ dispatchMillisecondTime }, callbackParameters{ callbackParameters }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename EventType>
-CoreTools::Telegram<EventType>::Telegram(uint64_t sender, const ReceiverInfo& receiver, EventType message, int64_t dispatchMillisecondTime)
-    : sender{ sender }, m_Receiver{ receiver }, message{ message }, dispatchMillisecondTime{ dispatchMillisecondTime }, callbackParameters{ 0 }
+CoreTools::Telegram<EventType>::Telegram(int64_t sender, const ReceiverInfo& receiver, EventType message, int64_t dispatchMillisecondTime)
+    : sender{ sender }, receiver{ receiver }, message{ message }, dispatchMillisecondTime{ dispatchMillisecondTime }, callbackParameters{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename EventType>
-CoreTools::Telegram<EventType>::Telegram(uint64_t sender, const ReceiverInfo& receiver, EventType message, int64_t dispatchMillisecondTime, const CallbackParameters& callbackParameters)
-    : sender{ sender }, m_Receiver{ receiver }, message{ message }, dispatchMillisecondTime{ dispatchMillisecondTime }, callbackParameters{ callbackParameters }
+CoreTools::Telegram<EventType>::Telegram(int64_t sender, const ReceiverInfo& receiver, EventType message, int64_t dispatchMillisecondTime, const CallbackParameters& callbackParameters)
+    : sender{ sender }, receiver{ receiver }, message{ message }, dispatchMillisecondTime{ dispatchMillisecondTime }, callbackParameters{ callbackParameters }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -68,7 +68,7 @@ bool CoreTools::Telegram<EventType>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename EventType>
-uint64_t CoreTools::Telegram<EventType>::GetSender() const noexcept
+int64_t CoreTools::Telegram<EventType>::GetSender() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -80,7 +80,7 @@ typename CoreTools::Telegram<EventType>::ReceiverInfo CoreTools::Telegram<EventT
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Receiver;
+    return receiver;
 }
 
 template <typename EventType>
@@ -108,11 +108,11 @@ CoreTools::CallbackParameters CoreTools::Telegram<EventType>::GetCallbackParamet
 }
 
 template <typename EventType>
-void CoreTools::Telegram<EventType>::AddReceiver(uint64_t receiver)
+void CoreTools::Telegram<EventType>::AddReceiver(int64_t aReceiver)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Receiver.emplace_back(receiver);
+    receiver.emplace_back(aReceiver);
 }
 
 #endif  // CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_DETAIL_H

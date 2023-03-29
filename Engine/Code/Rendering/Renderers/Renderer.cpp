@@ -78,9 +78,7 @@ Rendering::Renderer::~Renderer() noexcept
     {
         if (!RENDERER_MANAGE_SINGLETON.Erase(rendererID))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Error, Rendering)
-                << SYSTEM_TEXT("Renderer没有调用Init。")
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Error, Rendering, SYSTEM_TEXT("Renderer没有调用Init。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
     EXCEPTION_ALL_CATCH(Rendering)

@@ -1,49 +1,49 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:28)
+///	引擎测试版本：0.9.0.4 (2023/03/07 11:21)
 
-#include "QuerySheetIDTesting.h"
+#include "QuerySheetIdTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetID.h"
+#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetId.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 using namespace std::literals;
 
-CoreTools::QuerySheetIDTesting::QuerySheetIDTesting(const OStreamShared& stream)
+CoreTools::QuerySheetIdTesting::QuerySheetIdTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, QuerySheetIDTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, QuerySheetIdTesting)
 
-void CoreTools::QuerySheetIDTesting::DoRunUnitTest()
+void CoreTools::QuerySheetIdTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void CoreTools::QuerySheetIDTesting::MainTest()
+void CoreTools::QuerySheetIdTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetIDTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuerySheetIdTest);
 }
 
-void CoreTools::QuerySheetIDTesting::QuerySheetIDTest()
+void CoreTools::QuerySheetIdTesting::QuerySheetIdTest()
 {
-    auto sheetID = "sheetID"s;
-    auto sheetName = "sheetName"s;
-    SimpleCSV::QuerySheetID querySheetID0{ sheetName, sheetID };
+    const auto sheetId = "sheetId"s;
+    const auto sheetName = "sheetName"s;
+    const SimpleCSV::QuerySheetId querySheetId0{ sheetName, sheetId };
 
-    ASSERT_EQUAL(sheetID, querySheetID0.GetSheetID());
-    ASSERT_EQUAL(sheetName, querySheetID0.GetSheetName());
+    ASSERT_EQUAL(sheetId, querySheetId0.GetSheetId());
+    ASSERT_EQUAL(sheetName, querySheetId0.GetSheetName());
 
-    SimpleCSV::QuerySheetID querySheetID1{ sheetName };
+    const SimpleCSV::QuerySheetId querySheetId1{ sheetName };
 
-    ASSERT_TRUE(querySheetID1.GetSheetID().empty());
-    ASSERT_EQUAL(sheetName, querySheetID1.GetSheetName());
+    ASSERT_TRUE(querySheetId1.GetSheetId().empty());
+    ASSERT_EQUAL(sheetName, querySheetId1.GetSheetName());
 }

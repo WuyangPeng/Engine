@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 14:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,13 +15,12 @@
 #include "Flags/SheetFlags.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/PugiXml.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandAddWorksheet.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandCloneSheet.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandDeleteSheet.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySharedStrings.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelsID.h"
+#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelsId.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetRelsTarget.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetType.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QueryXmlData.h"
@@ -30,8 +29,6 @@
 #include <iterator>
 #include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 CoreTools::SimpleCSV::Workbook::Workbook(const XmlDataSharedPtr& xmlData)
@@ -46,25 +43,25 @@ CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Workbook::GetSheetsNode() co
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetXmlDocument()->document_element().child(TextParsing::g_Sheets.data());
+    return GetXmlDocument()->document_element().child(TextParsing::gSheets.data());
 }
 
-CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSV::Workbook::GetSheet(const string& sheetName)
+CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSV::Workbook::GetSheet(const std::string& sheetName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    const auto attribute = GetSheetsNode().find_child_by_attribute(TextParsing::g_Name.data(), sheetName.c_str());
+    const auto attribute = GetSheetsNode().find_child_by_attribute(TextParsing::gName.data(), sheetName.c_str());
 
     if (attribute == nullptr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "表 \""s + sheetName + "\" 不存在。"s);
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "表 \""s + sheetName + "\" 不存在。"s)
     }
 
-    auto xmlID = attribute.attribute(TextParsing::g_RID.data()).value();
+    const auto xmlId = attribute.attribute(TextParsing::gRId.data()).value();
 
-    auto parentDocument = GetParentDocument();
-    auto xmlPath = parentDocument->ExecuteQuery(QuerySheetRelsTarget{ xmlID }).GetSheetTarget();
-    return Worksheet{ parentDocument->ExecuteQuery(QueryXmlData{ TextParsing::g_X1.data() + xmlPath }).GetXmlData() };
+    const auto parentDocument = GetParentDocument();
+    const auto xmlPath = parentDocument->ExecuteQuery(QuerySheetRelsTarget{ xmlId }).GetSheetTarget();
+    return Worksheet{ parentDocument->ExecuteQuery(QueryXmlData{ TextParsing::gX1.data() + xmlPath }).GetXmlData() };
 }
 
 CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSV::Workbook::GetSheet(int index)
@@ -73,24 +70,24 @@ CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSV::Workbook::GetSheet(int ind
 
     if (index < 1 || GetSheetCount() < index)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "工作表索引超出范围。"s);
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "工作表索引超出范围。"s)
     }
 
     const auto sheetsNode = GetSheetsNode();
-    vector<XMLNode> xmlNode{ sheetsNode.begin(), sheetsNode.end() };
+    const XMLNodeContainer xmlNode{ sheetsNode.begin(), sheetsNode.end() };
     const auto previousIndex = index - 1;
 
-    return GetSheet(xmlNode.at(previousIndex).attribute(TextParsing::g_Name.data()).as_string());
+    return GetSheet(xmlNode.at(previousIndex).attribute(TextParsing::gName.data()).as_string());
 }
 
-CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSV::Workbook::GetWorksheet(const string& sheetName)
+CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSV::Workbook::GetWorksheet(const std::string& sheetName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     return GetSheet(sheetName);
 }
 
-CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSV::Workbook::GetChartsheet(const string& sheetName)
+CoreTools::SimpleCSV::Worksheet CoreTools::SimpleCSV::Workbook::GetChartSheet(const std::string& sheetName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -111,68 +108,67 @@ CoreTools::SimpleCSV::Workbook::SharedStringsSharedPtr CoreTools::SimpleCSV::Wor
     return GetParentDocument()->ExecuteQuery(QuerySharedStrings::Create()).GetSharedStrings();
 }
 
-void CoreTools::SimpleCSV::Workbook::DeleteSheet(const string& sheetName)
+void CoreTools::SimpleCSV::Workbook::DeleteSheet(const std::string& sheetName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     auto xmlDocument = GetXmlDocument();
-    auto parentDocument = GetParentDocument();
+    const auto parentDocument = GetParentDocument();
     auto node = GetSheetsNode();
 
-    auto sheetID = node.find_child_by_attribute(TextParsing::g_Name.data(), sheetName.c_str()).attribute(TextParsing::g_RID.data()).value();
+    const auto sheetId = node.find_child_by_attribute(TextParsing::gName.data(), sheetName.c_str()).attribute(TextParsing::gRId.data()).value();
 
-    auto sheetType = parentDocument->ExecuteQuery(QuerySheetType{ GetRelationshipID() }).GetSheetType();
+    const auto sheetType = parentDocument->ExecuteQuery(QuerySheetType{ GetRelationshipId() }).GetSheetType();
 
     const auto sheetsNode = node.children();
-    const auto worksheetCount = std::count_if(sheetsNode.begin(), sheetsNode.end(), [&](const auto& item) {
-        return parentDocument->ExecuteQuery(QuerySheetType{ item.attribute(TextParsing::g_RID.data()).value() }).GetSheetType() == ContentType::Worksheet;
-    });
 
-    if (worksheetCount == 1 && sheetType == ContentType::Worksheet)
+    if (const auto worksheetCount = std::ranges::count_if(sheetsNode, [&](const auto& item) {
+            return parentDocument->ExecuteQuery(QuerySheetType{ item.attribute(TextParsing::gRId.data()).value() }).GetSheetType() == ContentType::Worksheet;
+        });
+        worksheetCount == 1 && sheetType == ContentType::Worksheet)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "无效操作。工作簿中必须至少有一张工作表。"s);
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "无效操作。工作簿中必须至少有一张工作表。"s)
     }
 
-    parentDocument->ExecuteCommand(CommandDeleteSheet{ sheetID, sheetName });
-    node.remove_child(node.find_child_by_attribute(TextParsing::g_Name.data(), sheetName.c_str()));
+    parentDocument->ExecuteCommand(CommandDeleteSheet{ sheetId, sheetName });
+    node.remove_child(node.find_child_by_attribute(TextParsing::gName.data(), sheetName.c_str()));
 }
 
-void CoreTools::SimpleCSV::Workbook::AddWorksheet(const string& sheetName)
+void CoreTools::SimpleCSV::Workbook::AddWorksheet(const std::string& sheetName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (GetXmlDocument()->document_element().child(TextParsing::g_Sheets.data()).find_child_by_attribute(TextParsing::g_Name.data(), sheetName.c_str()))
+    if (GetXmlDocument()->document_element().child(TextParsing::gSheets.data()).find_child_by_attribute(TextParsing::gName.data(), sheetName.c_str()))
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "工作表名字 \""s + sheetName + "\" 已经存在。"s);
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "工作表名字 \""s + sheetName + "\" 已经存在。"s)
     }
 
-    const auto internalID = CreateInternalSheetID();
+    const auto internalId = CreateInternalSheetId();
 
-    GetParentDocument()->ExecuteCommand(CommandAddWorksheet{ sheetName, TextParsing::g_Worksheets.data() + std::to_string(internalID) + TextParsing::g_XML.data() });
-    PrepareSheetMetadata(sheetName, internalID);
+    GetParentDocument()->ExecuteCommand(CommandAddWorksheet{ sheetName, TextParsing::gWorksheets.data() + std::to_string(internalId) + TextParsing::gXML.data() });
+    PrepareSheetMetadata(sheetName, internalId);
 }
 
-void CoreTools::SimpleCSV::Workbook::CloneSheet(const string& existingName, const string& newName)
+void CoreTools::SimpleCSV::Workbook::CloneSheet(const std::string& existingName, const std::string& newName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    GetParentDocument()->ExecuteCommand(CommandCloneSheet{ GetSheetID(existingName), newName });
+    GetParentDocument()->ExecuteCommand(CommandCloneSheet{ GetSheetId(existingName), newName });
 }
 
-int CoreTools::SimpleCSV::Workbook::CreateInternalSheetID()
+int CoreTools::SimpleCSV::Workbook::CreateInternalSheetId()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    const auto children = GetXmlDocument()->document_element().child(TextParsing::g_Sheets.data()).children();
-    const auto iter = std::max_element(children.begin(),
-                                       children.end(),
-                                       [](const auto& lhs, const auto& rhs) {
-                                           return lhs.attribute(TextParsing::g_SheetID.data()).as_uint() < rhs.attribute(TextParsing::g_SheetID.data()).as_uint();
-                                       });
+    const auto children = GetXmlDocument()->document_element().child(TextParsing::gSheets.data()).children();
 
-    if (iter != children.end())
+    if (const auto iter = std::ranges::max_element(children,
+                                                   [](const auto& lhs, const auto& rhs) {
+                                                       return lhs.attribute(TextParsing::gSheetId.data()).as_uint() < rhs.attribute(TextParsing::gSheetId.data()).as_uint();
+                                                   });
+        iter != children.end())
     {
-        return iter->attribute(TextParsing::g_SheetID.data()).as_int() + 1;
+        return iter->attribute(TextParsing::gSheetId.data()).as_int() + 1;
     }
     else
     {
@@ -180,76 +176,75 @@ int CoreTools::SimpleCSV::Workbook::CreateInternalSheetID()
     }
 }
 
-string CoreTools::SimpleCSV::Workbook::GetSheetID(const string& sheetName)
+std::string CoreTools::SimpleCSV::Workbook::GetSheetId(const std::string& sheetName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return GetXmlDocument()->document_element().child(TextParsing::g_Sheets.data()).find_child_by_attribute(TextParsing::g_Name.data(), sheetName.c_str()).attribute(TextParsing::g_RID.data()).value();
+    return GetXmlDocument()->document_element().child(TextParsing::gSheets.data()).find_child_by_attribute(TextParsing::gName.data(), sheetName.c_str()).attribute(TextParsing::gRId.data()).value();
 }
 
-string CoreTools::SimpleCSV::Workbook::GetSheetName(const string& sheetID) const
+std::string CoreTools::SimpleCSV::Workbook::GetSheetName(const std::string& sheetId) const
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return GetXmlDocument()->document_element().child(TextParsing::g_Sheets.data()).find_child_by_attribute(TextParsing::g_RID.data(), sheetID.c_str()).attribute(TextParsing::g_Name.data()).value();
+    return GetXmlDocument()->document_element().child(TextParsing::gSheets.data()).find_child_by_attribute(TextParsing::gRId.data(), sheetId.c_str()).attribute(TextParsing::gName.data()).value();
 }
 
-string CoreTools::SimpleCSV::Workbook::GetSheetVisibility(const string& sheetID) const
+std::string CoreTools::SimpleCSV::Workbook::GetSheetVisibility(const std::string& sheetId) const
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return GetXmlDocument()->document_element().child(TextParsing::g_Sheets.data()).find_child_by_attribute(TextParsing::g_RID.data(), sheetID.c_str()).attribute(TextParsing::g_State.data()).value();
+    return GetXmlDocument()->document_element().child(TextParsing::gSheets.data()).find_child_by_attribute(TextParsing::gRId.data(), sheetId.c_str()).attribute(TextParsing::gState.data()).value();
 }
 
-void CoreTools::SimpleCSV::Workbook::PrepareSheetMetadata(const string& sheetName, int internalID)
+void CoreTools::SimpleCSV::Workbook::PrepareSheetMetadata(const std::string& sheetName, int internalId)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto node = GetSheetsNode().append_child(TextParsing::g_Sheet.data());
+    auto node = GetSheetsNode().append_child(TextParsing::gSheet.data());
 
-    auto sheetPath = TextParsing::g_Worksheets.data() + std::to_string(internalID) + TextParsing::g_XML.data();
-    node.append_attribute(TextParsing::g_Name.data()) = sheetName.c_str();
-    node.append_attribute(TextParsing::g_SheetID.data()) = std::to_string(internalID).c_str();
-    node.append_attribute(TextParsing::g_RID.data()) = GetParentDocument()->ExecuteQuery(QuerySheetRelsID{ sheetPath }).GetSheetID().c_str();
+    const auto sheetPath = TextParsing::gWorksheets.data() + std::to_string(internalId) + TextParsing::gXML.data();
+    node.append_attribute(TextParsing::gName.data()) = sheetName.c_str();
+    node.append_attribute(TextParsing::gSheetId.data()) = std::to_string(internalId).c_str();
+    node.append_attribute(TextParsing::gRId.data()) = GetParentDocument()->ExecuteQuery(QuerySheetRelsId{ sheetPath }).GetSheetId().c_str();
 }
 
-void CoreTools::SimpleCSV::Workbook::SetSheetName(const string& sheetRID, const string& newName)
+void CoreTools::SimpleCSV::Workbook::SetSheetName(const std::string& sheetRId, const std::string& newName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto sheetName = GetXmlDocument()->document_element().child(TextParsing::g_Sheets.data()).find_child_by_attribute(TextParsing::g_RID.data(), sheetRID.c_str()).attribute(TextParsing::g_Name.data());
+    auto sheetName = GetXmlDocument()->document_element().child(TextParsing::gSheets.data()).find_child_by_attribute(TextParsing::gRId.data(), sheetRId.c_str()).attribute(TextParsing::gName.data());
 
     UpdateSheetReferences(sheetName.value(), newName);
     sheetName.set_value(newName.c_str());
 }
 
-void CoreTools::SimpleCSV::Workbook::SetSheetVisibility(const string& sheetRID, const string& state)
+void CoreTools::SimpleCSV::Workbook::SetSheetVisibility(const std::string& sheetRId, const std::string& state)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto stateAttribute = GetXmlDocument()->document_element().child(TextParsing::g_Sheets.data()).find_child_by_attribute(TextParsing::g_RID.data(), sheetRID.c_str()).attribute(TextParsing::g_State.data());
+    auto stateAttribute = GetXmlDocument()->document_element().child(TextParsing::gSheets.data()).find_child_by_attribute(TextParsing::gRId.data(), sheetRId.c_str()).attribute(TextParsing::gState.data());
     if (!stateAttribute)
     {
-        stateAttribute = GetXmlDocument()->document_element().child(TextParsing::g_Sheets.data()).find_child_by_attribute(TextParsing::g_RID.data(), sheetRID.c_str()).append_attribute(TextParsing::g_State.data());
+        stateAttribute = GetXmlDocument()->document_element().child(TextParsing::gSheets.data()).find_child_by_attribute(TextParsing::gRId.data(), sheetRId.c_str()).append_attribute(TextParsing::gState.data());
     }
 
     stateAttribute.set_value(state.c_str());
 }
 
-void CoreTools::SimpleCSV::Workbook::SetSheetIndex(const string& sheetName, int index)
+void CoreTools::SimpleCSV::Workbook::SetSheetIndex(const std::string& sheetName, int index)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto xmlDocument = GetXmlDocument();
+    const auto xmlDocument = GetXmlDocument();
 
-    const auto children = xmlDocument->document_element().child(TextParsing::g_Sheets.data()).children();
-    const auto iter = std::find_if(children.begin(),
-                                   children.end(),
-                                   [&](const auto& item) {
-                                       return sheetName == item.attribute(TextParsing::g_Name.data()).value();
-                                   });
+    const auto children = xmlDocument->document_element().child(TextParsing::gSheets.data()).children();
 
-    if (index == std::distance(children.begin(), iter) + 1)
+    if (const auto iter = std::ranges::find_if(children,
+                                               [&](const auto& item) {
+                                                   return sheetName == item.attribute(TextParsing::gName.data()).value();
+                                               });
+        index == std::distance(children.begin(), iter) + 1)
     {
         return;
     }
@@ -258,50 +253,50 @@ void CoreTools::SimpleCSV::Workbook::SetSheetIndex(const string& sheetName, int 
 
     if (index <= 1)
     {
-        node.prepend_move(node.find_child_by_attribute(TextParsing::g_Name.data(), sheetName.c_str()));
+        node.prepend_move(node.find_child_by_attribute(TextParsing::gName.data(), sheetName.c_str()));
     }
     else if (GetSheetCount() <= index)
     {
-        node.append_move(node.find_child_by_attribute(TextParsing::g_Name.data(), sheetName.c_str()));
+        node.append_move(node.find_child_by_attribute(TextParsing::gName.data(), sheetName.c_str()));
     }
     else
     {
         const auto sheets = node.children();
-        vector<XMLNode> vec{ sheets.begin(), sheets.end() };
+        const XMLNodeContainer vec{ sheets.begin(), sheets.end() };
 
         const auto previousIndex = index - 1;
-        auto existingSheet = vec.at(previousIndex);
+        const auto existingSheet = vec.at(previousIndex);
         if (GetIndexOfSheet(sheetName) < index)
         {
-            node.insert_move_after(node.find_child_by_attribute(TextParsing::g_Name.data(), sheetName.c_str()), existingSheet);
+            node.insert_move_after(node.find_child_by_attribute(TextParsing::gName.data(), sheetName.c_str()), existingSheet);
         }
         else if (index < GetIndexOfSheet(sheetName))
         {
-            node.insert_move_before(node.find_child_by_attribute(TextParsing::g_Name.data(), sheetName.c_str()), existingSheet);
+            node.insert_move_before(node.find_child_by_attribute(TextParsing::gName.data(), sheetName.c_str()), existingSheet);
         }
     }
 
-    for (const auto& definedName : xmlDocument->document_element().child(TextParsing::g_DefinedNames.data()).children())
+    for (const auto& definedName : xmlDocument->document_element().child(TextParsing::gDefinedNames.data()).children())
     {
-        definedName.attribute(TextParsing::g_LocalSheetID.data()).set_value(GetIndexOfSheet(sheetName) - 1);
+        definedName.attribute(TextParsing::gLocalSheetId.data()).set_value(GetIndexOfSheet(sheetName) - 1);
     }
 }
 
-int CoreTools::SimpleCSV::Workbook::GetIndexOfSheet(const string& sheetName) const
+int CoreTools::SimpleCSV::Workbook::GetIndexOfSheet(const std::string& sheetName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     auto index = 1;
     for (const auto& sheet : GetSheetsNode().children())
     {
-        if (sheetName == sheet.attribute(TextParsing::g_Name.data()).value())
+        if (sheetName == sheet.attribute(TextParsing::gName.data()).value())
         {
             return index;
         }
         index++;
     }
 
-    THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "工作表不存在。"s);
+    THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "工作表不存在。"s)
 }
 
 CoreTools::SimpleCSV::SheetType CoreTools::SimpleCSV::Workbook::GetTypeOfSheet(const std::string& sheetName) const
@@ -310,13 +305,13 @@ CoreTools::SimpleCSV::SheetType CoreTools::SimpleCSV::Workbook::GetTypeOfSheet(c
 
     if (!IsSheetExists(sheetName))
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "工作表 \""s + sheetName + "\" 不存在。"s);
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "工作表 \""s + sheetName + "\" 不存在。"s)
     }
 
     if (IsWorksheetExists(sheetName))
         return SheetType::Worksheet;
     else
-        return SheetType::Chartsheet;
+        return SheetType::ChartSheet;
 }
 
 CoreTools::SimpleCSV::SheetType CoreTools::SimpleCSV::Workbook::GetTypeOfSheet(int index) const
@@ -324,10 +319,10 @@ CoreTools::SimpleCSV::SheetType CoreTools::SimpleCSV::Workbook::GetTypeOfSheet(i
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto sheets = GetSheetsNode();
-    vector<XMLNode> vec{ sheets.begin(), sheets.end() };
+    const XMLNodeContainer vec{ sheets.begin(), sheets.end() };
 
     const auto previousIndex = index - 1;
-    const auto name = vec.at(previousIndex).attribute(TextParsing::g_Name.data()).as_string();
+    const auto name = vec.at(previousIndex).attribute(TextParsing::gName.data()).as_string();
     return GetTypeOfSheet(name);
 }
 
@@ -347,22 +342,22 @@ int CoreTools::SimpleCSV::Workbook::GetWorksheetCount() const
     return boost::numeric_cast<int>(GetWorksheetNames().size());
 }
 
-int CoreTools::SimpleCSV::Workbook::GetChartsheetCount() const
+int CoreTools::SimpleCSV::Workbook::GetChartSheetCount() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(GetChartsheetNames().size());
+    return boost::numeric_cast<int>(GetChartSheetNames().size());
 }
 
 CoreTools::SimpleCSV::Workbook::SheetNamesType CoreTools::SimpleCSV::Workbook::GetSheetNames() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    vector<string> results{};
+    SheetNamesType results{};
 
     for (const auto& item : GetSheetsNode().children())
     {
-        results.emplace_back(item.attribute(TextParsing::g_Name.data()).value());
+        results.emplace_back(item.attribute(TextParsing::gName.data()).value());
     }
 
     return results;
@@ -372,30 +367,30 @@ CoreTools::SimpleCSV::Workbook::SheetNamesType CoreTools::SimpleCSV::Workbook::G
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    vector<string> results{};
+    SheetNamesType results{};
 
     for (const auto& item : GetSheetsNode().children())
     {
-        if (GetParentDocument()->ExecuteQuery(QuerySheetType{ item.attribute(TextParsing::g_RID.data()).value() }).GetSheetType() == ContentType::Worksheet)
+        if (GetParentDocument()->ExecuteQuery(QuerySheetType{ item.attribute(TextParsing::gRId.data()).value() }).GetSheetType() == ContentType::Worksheet)
         {
-            results.emplace_back(item.attribute(TextParsing::g_Name.data()).value());
+            results.emplace_back(item.attribute(TextParsing::gName.data()).value());
         }
     }
 
     return results;
 }
 
-CoreTools::SimpleCSV::Workbook::SheetNamesType CoreTools::SimpleCSV::Workbook::GetChartsheetNames() const
+CoreTools::SimpleCSV::Workbook::SheetNamesType CoreTools::SimpleCSV::Workbook::GetChartSheetNames() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    vector<string> results;
+    SheetNamesType results;
 
     for (const auto& item : GetSheetsNode().children())
     {
-        if (GetParentDocument()->ExecuteQuery(QuerySheetType{ item.attribute(TextParsing::g_RID.data()).value() }).GetSheetType() == ContentType::Chartsheet)
+        if (GetParentDocument()->ExecuteQuery(QuerySheetType{ item.attribute(TextParsing::gRId.data()).value() }).GetSheetType() == ContentType::ChartSheet)
         {
-            results.emplace_back(item.attribute(TextParsing::g_Name.data()).value());
+            results.emplace_back(item.attribute(TextParsing::gName.data()).value());
         }
     }
 
@@ -406,7 +401,7 @@ bool CoreTools::SimpleCSV::Workbook::IsSheetExists(const std::string& sheetName)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return IsChartsheetExists(sheetName) || IsWorksheetExists(sheetName);
+    return IsChartSheetExists(sheetName) || IsWorksheetExists(sheetName);
 }
 
 bool CoreTools::SimpleCSV::Workbook::IsWorksheetExists(const std::string& sheetName) const
@@ -415,27 +410,27 @@ bool CoreTools::SimpleCSV::Workbook::IsWorksheetExists(const std::string& sheetN
 
     auto wksNames = GetWorksheetNames();
 
-    return std::find(wksNames.begin(), wksNames.end(), sheetName) != wksNames.end();
+    return std::ranges::find(wksNames, sheetName) != wksNames.end();
 }
 
-bool CoreTools::SimpleCSV::Workbook::IsChartsheetExists(const std::string& sheetName) const
+bool CoreTools::SimpleCSV::Workbook::IsChartSheetExists(const std::string& sheetName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto chsNames = GetChartsheetNames();
+    auto chsNames = GetChartSheetNames();
 
-    return std::find(chsNames.begin(), chsNames.end(), sheetName) != chsNames.end();
+    return std::ranges::find(chsNames, sheetName) != chsNames.end();
 }
 
-void CoreTools::SimpleCSV::Workbook::UpdateSheetReferences(string oldName, string newName)
+void CoreTools::SimpleCSV::Workbook::UpdateSheetReferences(std::string oldName, std::string newName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (oldName.find(TextParsing::g_Space) != std::string::npos)
+    if (oldName.find(TextParsing::gSpace) != std::string::npos)
     {
         oldName = "\'" + oldName + "\'";
     }
-    if (newName.find(TextParsing::g_Space) != std::string::npos)
+    if (newName.find(TextParsing::gSpace) != std::string::npos)
     {
         newName = "\'" + newName + "\'";
     }
@@ -443,13 +438,13 @@ void CoreTools::SimpleCSV::Workbook::UpdateSheetReferences(string oldName, strin
     oldName += '!';
     newName += '!';
 
-    for (const auto& definedName : GetXmlDocument()->document_element().child(TextParsing::g_DefinedNames.data()).children())
+    for (const auto& definedName : GetXmlDocument()->document_element().child(TextParsing::gDefinedNames.data()).children())
     {
-        string formula{ definedName.text().get() };
+        std::string formula{ definedName.text().get() };
 
-        if (formula.find('[') == string::npos && formula.find(']') == string::npos)
+        if (formula.find('[') == std::string::npos && formula.find(']') == std::string::npos)
         {
-            while (formula.find(oldName) != string::npos)
+            while (formula.find(oldName) != std::string::npos)
             {
                 formula.replace(formula.find(oldName), oldName.length(), newName);
             }

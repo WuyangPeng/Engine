@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/29 22:14)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 16:38)
 
 #ifndef CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_TESTING_HELPER_H
 #define CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_TESTING_HELPER_H
@@ -44,25 +44,25 @@ namespace CoreTools
         using SuiteSharedPtr = std::shared_ptr<Suite>;
 
     protected:
-        void AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest);
+        void AddTest(const std::string& suiteName, Suite& aSuite, const std::string& testName, const UnitTestSharedPtr& unitTest);
 
         NODISCARD bool IsPrintRun() const noexcept;
 
         NODISCARD int RunSuite();
 
-        void AddSuite(const Suite& suite);
+        void AddSuite(const Suite& aSuite);
 
         template <typename TestType, typename... Types>
-        void AddTest(Suite& suite, const std::string& suiteName, const std::string& testName, Types&&... args);
+        void AddTest(Suite& aSuite, const std::string& suiteName, const std::string& testName, Types&&... args);
 
-        NODISCARD Suite GenerateSuite(const std::string& name);
+        NODISCARD Suite GenerateSuite(const std::string& name) const;
 
     private:
         NODISCARD int DoRun() override;
 
     private:
         TestingInformationHelper testingInformationHelper;
-        Suite m_Suite;
+        Suite suite;
     };
 }
 

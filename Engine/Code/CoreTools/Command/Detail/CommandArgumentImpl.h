@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 11:27)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 09:40)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_IMPL_H
 #define CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_IMPL_H
@@ -42,7 +42,7 @@ namespace CoreTools
         NODISCARD virtual int GetInteger() const = 0;
         NODISCARD virtual float GetFloat() const = 0;
         NODISCARD virtual double GetDouble() const = 0;
-        NODISCARD virtual const std::string GetString() const = 0;
+        NODISCARD virtual std::string GetString() const = 0;
 
         NODISCARD virtual bool IsInteger() const noexcept = 0;
         NODISCARD virtual bool IsFloat() const noexcept = 0;

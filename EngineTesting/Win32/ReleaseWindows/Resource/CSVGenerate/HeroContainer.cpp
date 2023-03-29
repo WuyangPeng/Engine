@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #include "Hero.h"
@@ -15,8 +15,6 @@
 #include "CoreTools/TextParsing/CSV/CSVRow.h"
 
 #include <algorithm>
-
-using std::make_shared;
 
 CSVConfigure::HeroContainer::HeroContainer(const CoreTools::CSVContent& csvContent)
     : hero{}
@@ -33,15 +31,12 @@ void CSVConfigure::HeroContainer::Parsing(const CoreTools::CSVContent& csvConten
     {
         CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
 
-        auto heroBase = make_shared<Hero>(csvRow);
+        auto heroBase = std::make_shared<Hero>(csvRow);
 
         if (!hero.emplace(heroBase->GetKey(), heroBase).second)
         {
 
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, User)
-                << SYSTEM_TEXT("hero表存在重复主键：")
-                << heroBase->GetKey()
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("hero表存在重复主键："), heroBase->GetKey(), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }
@@ -54,7 +49,7 @@ CSVConfigure::HeroContainer::ConstHeroSharedPtr CSVConfigure::HeroContainer::Get
 
     if (hero.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("hero表为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("hero表为空。"s))
     }
     else
     {
@@ -74,7 +69,7 @@ CSVConfigure::HeroContainer::ConstHeroSharedPtr CSVConfigure::HeroContainer::Get
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("hero表未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("hero表未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s))
     }
 }
 

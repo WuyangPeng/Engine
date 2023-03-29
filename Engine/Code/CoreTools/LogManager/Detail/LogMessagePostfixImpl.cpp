@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 22:42)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 16:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,15 +19,14 @@
 
 using namespace std::literals;
 
-CoreTools::LogMessagePostfixImpl::LogMessagePostfixImpl(AppenderPrint appenderFlags, LogLevel level, const FunctionDescribed& functionDescribed)
-    : postfix{}, appenderFlags{ appenderFlags }, level{ level }, functionDescribed{ functionDescribed }
+CoreTools::LogMessagePostfixImpl::LogMessagePostfixImpl(AppenderPrint appenderPrint, LogLevel level, const FunctionDescribed& functionDescribed)
+    : postfix{}, appenderPrint{ appenderPrint }, level{ level }, functionDescribed{ functionDescribed }
 {
     GeneratePostfix();
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 void CoreTools::LogMessagePostfixImpl::GeneratePostfix()
 {
     if (level != LogLevel::Disabled)
@@ -36,10 +35,9 @@ void CoreTools::LogMessagePostfixImpl::GeneratePostfix()
     }
 }
 
-// private
 void CoreTools::LogMessagePostfixImpl::GenerateFunctionDescribedPostfix()
 {
-    if (AppenderPrintFlagsExist::IsExist(appenderFlags, AppenderPrint::PostfixFunctionDescribed))
+    if (AppenderPrintFlagsExist::IsExist(appenderPrint, AppenderPrint::PostfixFunctionDescribed))
     {
         boost::format format{ "【文件：%1%，函数：%2%（第%3%行）。】\n"s };
 

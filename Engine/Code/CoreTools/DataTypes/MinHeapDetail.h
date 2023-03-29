@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 16:38)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/23 11:17)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_DETAIL_H
@@ -50,8 +50,7 @@ bool CoreTools::MinHeap<Generator, Scalar>::IsValid(int startIndex, int finalInd
     // 索引为HeapIndex
     for (auto child = startIndex; child <= finalIndex; ++child)
     {
-        const auto parent = (child - 1) / 2;
-        if (startIndex < parent)
+        if (const auto parent = (child - 1) / 2; startIndex < parent)
         {
             if (IsStoredValueLess(child, parent))
             {
@@ -84,14 +83,11 @@ void CoreTools::MinHeap<Generator, Scalar>::PrintMinHeapInLog() const
            << SYSTEM_TEXT("\n");
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
-        << os.str();
+    LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools, os.str());
 
     recordStoredManager.PrintIndexInLog();
-
-    LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
-        << LogAppenderIOManageSign::Refresh;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 // private
@@ -256,8 +252,7 @@ void CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInRemove()
         if (child < last - 1)
         {
             // 如果有必要，选择最小值的child与parent交换。
-            const auto childRight = child + 1;
-            if (IsStoredValueLess(childRight, child))
+            if (const auto childRight = child + 1; IsStoredValueLess(childRight, child))
             {
                 child = childRight;
             }
@@ -298,7 +293,7 @@ int CoreTools::MinHeap<Generator, Scalar>::Update(int uniqueIndex, Scalar value)
     CORE_TOOLS_CLASS_IS_VALID_3;
 
     // 只有MinHeap才可以更新记录。
-    auto scalar = recordStoredManager.GetValueByUniqueIndex(uniqueIndex);
+    const auto scalar = recordStoredManager.GetValueByUniqueIndex(uniqueIndex);
     const auto heapIndex = recordStoredManager.GetHeapIndex(uniqueIndex);
 
     CORE_TOOLS_ASSERTION_2(0 <= heapIndex && heapIndex < elementsNumber, "无效索引\n");
@@ -328,8 +323,7 @@ int CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInUpdateLargerValue
         if (child < elementsNumber - 1)
         {
             // 两个child的存在。
-            const auto childRight = child + 1;
-            if (IsStoredValueLessEqual(child, childRight))
+            if (const auto childRight = child + 1; IsStoredValueLessEqual(child, childRight))
                 maxChild = child;
             else
                 maxChild = childRight;
@@ -370,9 +364,7 @@ int CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInUpdateSmallerValu
     while (0 < child)
     {
         // 一个parent存在。
-        const auto parent = (child - 1) / 2;
-
-        if (recordStoredManager.GetValueByHeapIndex(parent) <= value)
+        if (const auto parent = (child - 1) / 2; recordStoredManager.GetValueByHeapIndex(parent) <= value)
         {
             // 新的值是在正确的位置，已恢复树为一个堆。
             break;

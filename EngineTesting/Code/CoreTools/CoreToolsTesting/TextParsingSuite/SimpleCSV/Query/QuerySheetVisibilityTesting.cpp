@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:33)
+///	引擎测试版本：0.9.0.4 (2023/03/07 11:23)
 
 #include "QuerySheetVisibilityTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -35,15 +35,15 @@ void CoreTools::QuerySheetVisibilityTesting::MainTest()
 
 void CoreTools::QuerySheetVisibilityTesting::QuerySheetVisibilityTest()
 {
-    auto sheetID = "sheetID"s;
-    auto sheetVisibility = "sheetVisibility"s;
-    SimpleCSV::QuerySheetVisibility querySheetVisibility0{ sheetID, sheetVisibility };
+    const auto sheetId = "sheetId"s;
+    const auto sheetVisibility = "sheetVisibility"s;
+    const SimpleCSV::QuerySheetVisibility querySheetVisibility0{ sheetId, sheetVisibility };
 
-    ASSERT_EQUAL(sheetID, querySheetVisibility0.GetSheetID());
+    ASSERT_EQUAL(sheetId, querySheetVisibility0.GetSheetId());
     ASSERT_EQUAL(sheetVisibility, querySheetVisibility0.GetSheetVisibility());
 
-    SimpleCSV::QuerySheetVisibility querySheetVisibility1{ sheetID };
+    const SimpleCSV::QuerySheetVisibility querySheetVisibility1{ sheetId };
 
-    ASSERT_EQUAL(sheetID, querySheetVisibility1.GetSheetID());
+    ASSERT_EQUAL(sheetId, querySheetVisibility1.GetSheetId());
     ASSERT_TRUE(querySheetVisibility1.GetSheetVisibility().empty());
 }

@@ -1,20 +1,17 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/26 0:14)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/29 13:47)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_MESSAGE_MANAGER_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_MESSAGE_MANAGER_DETAIL_H
 
 #include "MessageManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/LogMacro.h"
-
-#include <vector>
 
 template <typename EventSlot, typename EventType>
 CoreTools::MessageManager<EventSlot, EventType>::MessageManager() noexcept
@@ -42,7 +39,7 @@ uint64_t CoreTools::MessageManager<EventSlot, EventType>::Registered(MessageMana
 }
 
 template <typename EventSlot, typename EventType>
-void CoreTools::MessageManager<EventSlot, EventType>::Unregistered(MessageManagerEventType eventType, uint64_t index)
+void CoreTools::MessageManager<EventSlot, EventType>::Unregistered(MessageManagerEventType eventType, int64_t index)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -66,7 +63,7 @@ void CoreTools::MessageManager<EventSlot, EventType>::CallEventUnordered(Message
 }
 
 template <typename EventSlot, typename EventType>
-void CoreTools::MessageManager<EventSlot, EventType>::DelayCallEvent(MessageManagerEventType eventType, const CallbackParameters& callbackParameters, uint32_t delayTime)
+void CoreTools::MessageManager<EventSlot, EventType>::DelayCallEvent(MessageManagerEventType eventType, const CallbackParameters& callbackParameters, int32_t delayTime)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -74,7 +71,7 @@ void CoreTools::MessageManager<EventSlot, EventType>::DelayCallEvent(MessageMana
 }
 
 template <typename EventSlot, typename EventType>
-void CoreTools::MessageManager<EventSlot, EventType>::DelayCallEventUnordered(MessageManagerEventType eventType, const CallbackParameters& callbackParameters, uint32_t delayTime)
+void CoreTools::MessageManager<EventSlot, EventType>::DelayCallEventUnordered(MessageManagerEventType eventType, const CallbackParameters& callbackParameters, int32_t delayTime)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -82,7 +79,7 @@ void CoreTools::MessageManager<EventSlot, EventType>::DelayCallEventUnordered(Me
 }
 
 template <typename EventSlot, typename EventType>
-void CoreTools::MessageManager<EventSlot, EventType>::DispatchDelayEvent(uint64_t currentTime)
+void CoreTools::MessageManager<EventSlot, EventType>::DispatchDelayEvent(int64_t currentTime)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

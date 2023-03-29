@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 13:50)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 11:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,11 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::make_shared;
-using std::string;
-
-CoreTools::StringCommandArgument::StringCommandArgument(int index, const string& name, const string& value)
-    : ParentType{ index, name }, m_String{ value }
+CoreTools::StringCommandArgument::StringCommandArgument(int index, const std::string& name, std::string value)
+    : ParentType{ index, name }, value{ std::move(value) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -29,28 +26,28 @@ int CoreTools::StringCommandArgument::GetInteger() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("StringCommandArgument不是整数！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("StringCommandArgument不是整数！"s))
 }
 
 float CoreTools::StringCommandArgument::GetFloat() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("StringCommandArgument不是浮点数！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("StringCommandArgument不是浮点数！"s))
 }
 
 double CoreTools::StringCommandArgument::GetDouble() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("StringCommandArgument不是浮点数！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("StringCommandArgument不是浮点数！"s))
 }
 
-const string CoreTools::StringCommandArgument::GetString() const
+std::string CoreTools::StringCommandArgument::GetString() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_String;
+    return value;
 }
 
 bool CoreTools::StringCommandArgument::IsInteger() const noexcept
@@ -92,13 +89,13 @@ CoreTools::StringCommandArgument::CommandArgumentSharedPtr CoreTools::StringComm
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return make_shared<StringCommandArgument>(*this);
+    return std::make_shared<StringCommandArgument>(*this);
 }
 
-void CoreTools::StringCommandArgument::AddArgumentValue(const string& value)
+void CoreTools::StringCommandArgument::AddArgumentValue(const std::string& aValue)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_String += " ";
-    m_String += value;
+    value += " ";
+    value += aValue;
 }

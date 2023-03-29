@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 16:48)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/22 19:18)
 
 #ifndef CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_32_TABLE_H
 #define CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_32_TABLE_H
@@ -95,7 +95,7 @@ namespace CoreTools
     private:
         void Calculate() noexcept;
 
-        NODISCARD constexpr static uint32_t Calculate32(uint32_t index) noexcept
+        NODISCARD constexpr static uint32_t Calculate32(const uint32_t index) noexcept
         {
             auto value = index;
             constexpr auto bitSize = 8;
@@ -113,9 +113,10 @@ namespace CoreTools
 
     private:
         static constexpr auto tableSize = 256;
+        using TableType = std::array<uint32_t, tableSize>;
 
     private:
-        std::array<uint32_t, tableSize> table;
+        TableType table;
     };
 }
 

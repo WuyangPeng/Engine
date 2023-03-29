@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/02/23 15:5)
+///	引擎版本：0.9.0.4 (2023/03/17 19:29)
 
 #ifndef CORE_TOOLS_BASE_SPAN_ITERATOR_DETAIL_H
 #define CORE_TOOLS_BASE_SPAN_ITERATOR_DETAIL_H
@@ -59,7 +59,7 @@ typename CoreTools::SpanIterator<Iter>::ConstReferenceType CoreTools::SpanIterat
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("迭代器无效。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("迭代器无效。"s))
     }
 }
 
@@ -78,7 +78,7 @@ CoreTools::SpanIterator<Iter>& CoreTools::SpanIterator<Iter>::operator++()
 
     if (end <= current)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("迭代器增加时越界。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("迭代器增加时越界。"s))
     }
 
     ++current;
@@ -104,7 +104,7 @@ CoreTools::SpanIterator<Iter>& CoreTools::SpanIterator<Iter>::operator--()
 
     if (current <= begin)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("迭代器减少时越界。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("迭代器减少时越界。"s))
     }
 
     --current;
@@ -133,12 +133,12 @@ CoreTools::SpanIterator<Iter>& CoreTools::SpanIterator<Iter>::operator+=(const i
 
     if (step > 0 && end - current < step)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("迭代器增加时越界。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("迭代器增加时越界。"s))
     }
 
     if (step < 0 && current - begin < -step)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("迭代器减少时越界。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("迭代器减少时越界。"s))
     }
 
     current += step;
@@ -198,7 +198,7 @@ const T& CoreTools::SpanIterator<Iter>::ReinterpretCast() const
     const auto remainingCount = GetRemainingCount();
     if (remainingCount * sizeof(ValueType) < sizeof(T))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("迭代器长度不足"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("迭代器长度不足"s))
     }
 
 #include STSTEM_WARNING_PUSH
@@ -258,7 +258,7 @@ typename Iter::difference_type CoreTools::operator-(const SpanIterator<Iter>& lh
         return lhs.GetCurrent() - rhs.GetCurrent();
     }
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("迭代器起始位置不相同。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("迭代器起始位置不相同。"s))
     }
 }
 

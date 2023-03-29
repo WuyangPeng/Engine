@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 19:32)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/07 11:28)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_IMPL_H
@@ -21,57 +21,55 @@
 #include <memory>
 #include <string>
 
-namespace CoreTools
+// 封装电子表格单元格的属性和行为的实现类。
+namespace CoreTools::SimpleCSV
 {
-    namespace SimpleCSV
+    class CORE_TOOLS_HIDDEN_DECLARE CellImpl final
     {
-        // 封装电子表格单元格的属性和行为的实现类。
-        class CORE_TOOLS_HIDDEN_DECLARE CellImpl final
-        {
-        public:
-            using ClassType = CellImpl;
-            using SharedStringsSharedPtr = std::shared_ptr<SharedStrings>;
-            using CellSharedPtr = std::shared_ptr<Cell>;
+    public:
+        using ClassType = CellImpl;
 
-        public:
-            explicit CellImpl(MAYBE_UNUSED DisableNotThrow disableNotThrow);
-            CellImpl(const CellSharedPtr& cell, const ConstXMLDocumentSharedPtr& document, const XMLNode& cellNode, const SharedStringsSharedPtr& sharedStrings);
+        using SharedStringsSharedPtr = std::shared_ptr<SharedStrings>;
+        using CellSharedPtr = std::shared_ptr<Cell>;
 
-            CLASS_INVARIANT_DECLARE;
+    public:
+        explicit CellImpl(DisableNotThrow disableNotThrow);
+        CellImpl(const ConstXMLDocumentSharedPtr& document, const XMLNode& cellNode, const SharedStringsSharedPtr& sharedStrings);
 
-            void Init(const CellSharedPtr& cell, const ConstXMLDocumentSharedPtr& document, const XMLNode& cellNode, const SharedStringsSharedPtr& sharedStrings);
+        CLASS_INVARIANT_DECLARE;
 
-            NODISCARD explicit operator bool() const;
+        void Init(const CellSharedPtr& cell);
 
-            NODISCARD CellValueProxy& GetValue() noexcept;
-            NODISCARD const CellValueProxy& GetValue() const noexcept;
-            NODISCARD CellReference GetCellReference() const;
+        NODISCARD explicit operator bool() const;
 
-            NODISCARD bool HasFormula() const;
-            NODISCARD std::string GetFormula() const;
-            void SetFormula(const std::string& newFormula);
+        NODISCARD CellValueProxy& GetValue() noexcept;
+        NODISCARD const CellValueProxy& GetValue() const noexcept;
+        NODISCARD CellReference GetCellReference() const;
 
-            NODISCARD bool IsSame(const CellImpl& rhs) const;
+        NODISCARD bool HasFormula() const;
+        NODISCARD std::string GetFormula() const;
+        void SetFormula(const std::string& newFormula);
 
-            NODISCARD SharedStringsSharedPtr GetSharedStrings() const;
-            NODISCARD XMLNode GetXMLNode() const;
+        NODISCARD bool IsSame(const CellImpl& rhs) const;
 
-        private:
-            using SharedStringsWeakPtr = std::weak_ptr<SharedStrings>;
+        NODISCARD SharedStringsSharedPtr GetSharedStrings() const;
+        NODISCARD XMLNode GetXMLNode() const;
 
-        private:
-            void CheckDocument() const;
-            NODISCARD XMLNode GetFormulaNode() const;
-            NODISCARD XMLNode AppendFormulaChild();
+    private:
+        using SharedStringsWeakPtr = std::weak_ptr<SharedStrings>;
 
-        private:
-            ConstXMLDocumentWeakPtr m_Document;
-            XMLNode m_CellNode;
-            SharedStringsWeakPtr m_SharedStrings;
-            CellValueProxy m_ValueProxy;
-            bool isNull;
-        };
-    }
+    private:
+        void CheckDocument() const;
+        NODISCARD XMLNode GetFormulaNode() const;
+        NODISCARD XMLNode AppendFormulaChild();
+
+    private:
+        ConstXMLDocumentWeakPtr document;
+        XMLNode cellNode;
+        SharedStringsWeakPtr sharedStrings;
+        CellValueProxy valueProxy;
+        bool isNull;
+    };
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_CELL_IMPL_H

@@ -39,9 +39,7 @@ void Framework::WindowHIcon::CheckUpHIcon() noexcept
     {
         hIcon = System::LoadSystemIcon(nullptr, System::gApplication);
 
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework)
-            << SYSTEM_TEXT("¼ÓÔØÍ¼±êÊ§°Ü£¡")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework, SYSTEM_TEXT("¼ÓÔØÍ¼±êÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

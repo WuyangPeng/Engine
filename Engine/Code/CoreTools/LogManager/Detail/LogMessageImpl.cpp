@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 22:42)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 15:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,8 +15,8 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-CoreTools::LogMessageImpl::LogMessageImpl(LogLevel level, LogFilter filter, const String& message, const FunctionDescribed& functionDescribed)
-    : logLevel{ level }, filter{ filter }, message{ message }, functionDescribed{ functionDescribed }
+CoreTools::LogMessageImpl::LogMessageImpl(LogLevel level, LogFilter filter, const FunctionDescribed& functionDescribed) noexcept
+    : logLevel{ level }, filter{ filter }, message{}, functionDescribed{ functionDescribed }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -56,4 +56,18 @@ CoreTools::FunctionDescribed CoreTools::LogMessageImpl::GetFunctionDescribed() c
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return functionDescribed;
+}
+
+void CoreTools::LogMessageImpl::AddMessage(const String& value)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    message += value;
+}
+
+void CoreTools::LogMessageImpl::SetFunctionDescribed(const FunctionDescribed& aFunctionDescribed) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    functionDescribed = aFunctionDescribed;
 }

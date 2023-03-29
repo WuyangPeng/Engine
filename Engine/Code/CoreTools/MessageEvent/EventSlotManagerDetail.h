@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/26 0:03)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/29 13:46)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_MANAGER_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_MANAGER_DETAIL_H
@@ -35,7 +35,7 @@ bool CoreTools::EventSlotManager<EventSlot>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename EventSlot>
-uint64_t CoreTools::EventSlotManager<EventSlot>::Registered(const SubclassSharedPtr& subclass, EventSlotPriorityType priority, CallbackMemberFunction callbackMemberFunction)
+int64_t CoreTools::EventSlotManager<EventSlot>::Registered(const SubclassSharedPtr& subclass, EventSlotPriorityType priority, CallbackMemberFunction callbackMemberFunction)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -49,7 +49,7 @@ uint64_t CoreTools::EventSlotManager<EventSlot>::Registered(const SubclassShared
 }
 
 template <typename EventSlot>
-void CoreTools::EventSlotManager<EventSlot>::Unregistered(uint64_t index)
+void CoreTools::EventSlotManager<EventSlot>::Unregistered(int64_t index)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -76,15 +76,13 @@ void CoreTools::EventSlotManager<EventSlot>::CallEvent(const CallbackParameters&
             const auto result = slot(callbackParameters);
             if (!result)
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-                    << SYSTEM_TEXT("CallEvent 失败");
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("CallEvent 失败"));
             }
         }
         EXCEPTION_ENGINE_EXCEPTION_CATCH(CoreTools);
     });
 }
 
-// private
 template <typename EventSlot>
 void CoreTools::EventSlotManager<EventSlot>::Reorder()
 {
@@ -113,14 +111,13 @@ void CoreTools::EventSlotManager<EventSlot>::CallEventUnordered(const CallbackPa
         const auto result = (slot.second)(callbackParameters);
         if (!result)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-                << SYSTEM_TEXT("CallEvent 失败");
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("CallEvent 失败"));
         }
     }
 }
 
 template <typename EventSlot>
-void CoreTools::EventSlotManager<EventSlot>::DelayCallEventUnordered(const CallbackParameters& callbackParameters, uint32_t delayTime)
+void CoreTools::EventSlotManager<EventSlot>::DelayCallEventUnordered(const CallbackParameters& callbackParameters, int32_t delayTime)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -128,7 +125,7 @@ void CoreTools::EventSlotManager<EventSlot>::DelayCallEventUnordered(const Callb
 }
 
 template <typename EventSlot>
-void CoreTools::EventSlotManager<EventSlot>::DelayCallEvent(const CallbackParameters& callbackParameters, uint32_t delayTime)
+void CoreTools::EventSlotManager<EventSlot>::DelayCallEvent(const CallbackParameters& callbackParameters, int32_t delayTime)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -136,7 +133,7 @@ void CoreTools::EventSlotManager<EventSlot>::DelayCallEvent(const CallbackParame
 }
 
 template <typename EventSlot>
-void CoreTools::EventSlotManager<EventSlot>::DispatchDelayEvent(uint64_t currentTime)
+void CoreTools::EventSlotManager<EventSlot>::DispatchDelayEvent(int64_t currentTime)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -145,7 +142,7 @@ void CoreTools::EventSlotManager<EventSlot>::DispatchDelayEvent(uint64_t current
 }
 
 template <typename EventSlot>
-void CoreTools::EventSlotManager<EventSlot>::CallEvent(uint64_t currentTime)
+void CoreTools::EventSlotManager<EventSlot>::CallEvent(int64_t currentTime)
 {
     for (auto iter = relationDelayContainer.begin(); iter != relationDelayContainer.end();)
     {
@@ -166,7 +163,7 @@ void CoreTools::EventSlotManager<EventSlot>::CallEvent(uint64_t currentTime)
 }
 
 template <typename EventSlot>
-void CoreTools::EventSlotManager<EventSlot>::CallEventUnordered(uint64_t currentTime)
+void CoreTools::EventSlotManager<EventSlot>::CallEventUnordered(int64_t currentTime)
 {
     for (auto iter = unorderedDelayContainer.begin(); iter != unorderedDelayContainer.end();)
     {

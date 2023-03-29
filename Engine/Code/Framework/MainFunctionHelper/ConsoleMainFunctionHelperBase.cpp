@@ -16,6 +16,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
+#include <iostream>
+
 using std::make_shared;
 
 Framework::ConsoleMainFunctionHelperBase::ConsoleMainFunctionHelperBase(int argc, char** argv, const String& consoleTitle, const EnvironmentDirectory& environmentDirectory)

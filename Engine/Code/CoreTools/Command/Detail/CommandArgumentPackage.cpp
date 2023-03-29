@@ -1,21 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 13:36)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 11:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CommandArgumentPackage.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::string;
-
-CoreTools::CommandArgumentPackage::CommandArgumentPackage(int index, const std::string& name)
-    : index{ index }, name{ name }, used{ false }
+CoreTools::CommandArgumentPackage::CommandArgumentPackage(int index, std::string name) noexcept
+    : index{ index }, name{ std::move(name) }, used{ false }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -36,7 +34,7 @@ int CoreTools::CommandArgumentPackage::GetIndex() const noexcept
     return index;
 }
 
-string CoreTools::CommandArgumentPackage::GetName() const
+std::string CoreTools::CommandArgumentPackage::GetName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

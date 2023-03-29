@@ -445,6 +445,7 @@ void CoreTools::TestingHelper::AddTextParsingSuite()
 
     textParsingSuite.AddSuite(GetSimpleZipSuite());
     textParsingSuite.AddSuite(GetSimpleCSVSuite());
+    ADD_TEST(textParsingSuite, CSVDataTesting);
     ADD_TEST(textParsingSuite, ExcelConversionCSVTesting);
     ADD_TEST(textParsingSuite, BatchConversionCSVTesting);
     ADD_TEST(textParsingSuite, CSVTypeConversionTesting);
@@ -461,6 +462,7 @@ void CoreTools::TestingHelper::AddTextParsingSuite()
     ADD_TEST(textParsingSuite, JsonGenerateTesting);
     ADD_TEST(textParsingSuite, JsonRowTesting);
     ADD_TEST(textParsingSuite, JsonConfigureTesting);
+    ADD_TEST(textParsingSuite, JsonTotalGenerateTesting);
 
     AddSuite(textParsingSuite);
 }
@@ -523,7 +525,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetCommandSuite()
     ADD_TEST(simpleCSVCommandSuite, CommandResetCalcChainTesting);
     ADD_TEST(simpleCSVCommandSuite, CommandAddSharedStringsTesting);
     ADD_TEST(simpleCSVCommandSuite, CommandAddWorksheetTesting);
-    ADD_TEST(simpleCSVCommandSuite, CommandAddChartsheetTesting);
+    ADD_TEST(simpleCSVCommandSuite, CommandAddChartSheetTesting);
     ADD_TEST(simpleCSVCommandSuite, CommandDeleteSheetTesting);
     ADD_TEST(simpleCSVCommandSuite, CommandCloneSheetTesting);
 
@@ -538,8 +540,8 @@ CoreTools::Suite CoreTools::TestingHelper::GetQuerySuite()
     ADD_TEST(querySuite, QuerySheetIndexTesting);
     ADD_TEST(querySuite, QuerySheetVisibilityTesting);
     ADD_TEST(querySuite, QuerySheetTypeTesting);
-    ADD_TEST(querySuite, QuerySheetIDTesting);
-    ADD_TEST(querySuite, QuerySheetRelsIDTesting);
+    ADD_TEST(querySuite, QuerySheetIdTesting);
+    ADD_TEST(querySuite, QuerySheetRelsIdTesting);
     ADD_TEST(querySuite, QuerySheetRelsTargetTesting);
     ADD_TEST(querySuite, QuerySharedStringsTesting);
     ADD_TEST(querySuite, QueryXmlDataTesting);

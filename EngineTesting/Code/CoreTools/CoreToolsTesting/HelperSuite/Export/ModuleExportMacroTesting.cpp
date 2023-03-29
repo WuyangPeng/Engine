@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Module/AnimationTestExportMacro.h"
-#include "Toolset/CoreTools/ExportTest/CoreTools/Module/ArtificialIntellegenceTestExportMacro.h"
+#include "Toolset/CoreTools/ExportTest/CoreTools/Module/ArtificialIntelligenceTestExportMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Module/AssistToolsTestExportMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Module/CoreToolsTestExportMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Module/DatabaseTestExportMacro.h"
@@ -55,7 +55,7 @@ void CoreTools::ModuleExportMacroTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<Physics::PhysicsTestExportMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<Imagics::ImagicsTestExportMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<Animation::AnimationTestExportMacro>);
-    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<ArtificialIntellegence::ArtificialIntellegenceTestExportMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<ArtificialIntelligence::ArtificialIntelligenceTestExportMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<UserInterface::UserInterfaceTestExportMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<AssistTools::AssistToolsTestExportMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(ModuleExportTest<Framework::FrameworkTestExportMacro>);

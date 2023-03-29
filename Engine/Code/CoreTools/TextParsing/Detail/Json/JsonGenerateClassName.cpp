@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:39)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/14 14:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,8 +19,8 @@
 
 using namespace std::literals;
 
-CoreTools::JsonGenerateClassName::JsonGenerateClassName(const JsonHead& jsonHead) noexcept
-    : jsonHead{ jsonHead }
+CoreTools::JsonGenerateClassName::JsonGenerateClassName(JsonHead jsonHead) noexcept
+    : jsonHead{ std::move(jsonHead) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -31,54 +31,56 @@ System::String CoreTools::JsonGenerateClassName::GenerateContainerClassName() co
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto className = jsonHead.GetJsonClassName() + SYSTEM_TEXT("Container"s);
+    const auto className = jsonHead.GetJsonClassName() + TextParsing::gContainer.data();
 
-    String content{ TextParsing::g_Indentation };
-    content += TextParsing::g_Class;
+    String content{ TextParsing::gIndentation };
+    content += TextParsing::gClass;
     content += className;
-    content += SYSTEM_TEXT(" final\n"s);
+    content += TextParsing::gFinal;
+    content += TextParsing::gNewline;
 
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_FunctionBeginBrackets;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gFunctionBeginBrackets;
 
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Public;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gPublic;
 
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_ClassType;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gClassType;
     content += className;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
 
-System::String CoreTools::JsonGenerateClassName::GenerateContainerClassName(const JsonNode& jsonNode) const
+System::String CoreTools::JsonGenerateClassName::GenerateContainerClassName(const JsonNode& jsonNode)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto className = StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
 
-    String content{ TextParsing::g_Indentation };
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Class;
+    String content{ TextParsing::gIndentation };
+    content += TextParsing::gIndentation;
+    content += TextParsing::gClass;
     content += className;
-    content += SYSTEM_TEXT(" final\n"s);
+    content += TextParsing::gFinal;
+    content += TextParsing::gNewline;
 
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_FunctionBeginBrackets;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gFunctionBeginBrackets;
 
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Public;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gPublic;
 
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_ClassType;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gClassType;
     content += className;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -91,127 +93,43 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing() const
 
     for (const auto& value : jsonHead)
     {
-        const auto jsonDataType = value->GetJsonDataType();
+        constexpr auto indentationCount = 2;
 
-        switch (jsonDataType)
+        switch (const auto jsonDataType = value->GetJsonDataType(); jsonDataType)
         {
-            case JsonDataType::Nested:
-            {
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using Const"s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const "s);
-                content += jsonHead.GetJsonClassName();
-                content += TextParsing::g_DoubleColon;
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(">;\n"s);
-            }
-            break;
             case JsonDataType::StringArray:
             {
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(" = std::vector<System::String>;\n"s);
-
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("::const_iterator;\n"s);
+                content += GenerateStringArrayUsing(*value, indentationCount);
             }
             break;
             case JsonDataType::BoolArray:
             {
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(" = std::deque<bool>;\n"s);
-
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("::const_iterator;\n"s);
+                content += GenerateBoolArrayUsing(*value, indentationCount);
             }
             break;
             case JsonDataType::IntArray:
             {
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(" = std::vector<int>;\n"s);
-
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("::const_iterator;\n"s);
+                content += GenerateIntArrayUsing(*value, indentationCount);
             }
             break;
             case JsonDataType::Int64Array:
             {
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(" = std::vector<int64_t>;\n"s);
-
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("::const_iterator;\n"s);
+                content += GenerateInt64ArrayUsing(*value, indentationCount);
             }
             break;
             case JsonDataType::DoubleArray:
             {
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(" = std::vector<double>;\n"s);
-
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("::const_iterator;\n"s);
+                content += GenerateDoubleArrayUsing(*value, indentationCount);
+            }
+            break;
+            case JsonDataType::Nested:
+            {
+                content += GenerateNestedUsing(*value, indentationCount, jsonHead.GetJsonClassName() + TextParsing::gDoubleColon.data());
             }
             break;
             case JsonDataType::NestedArray:
             {
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using Const"s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const "s);
-                content += jsonHead.GetJsonClassName();
-                content += TextParsing::g_DoubleColon;
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(">;\n"s);
-
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("Container = std::vector<Const"s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("SharedPtr>;\n"s);
+                content += GenerateNestedArrayUsing(*value, indentationCount, jsonHead.GetJsonClassName() + TextParsing::gDoubleColon.data());
             }
             break;
             default:
@@ -222,7 +140,7 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing() const
     return content;
 }
 
-System::String CoreTools::JsonGenerateClassName::GenerateUsing(const JsonNode& jsonNode) const
+System::String CoreTools::JsonGenerateClassName::GenerateUsing(const JsonNode& jsonNode)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -230,103 +148,33 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing(const JsonNode& j
 
     for (const auto& value : jsonNode.GetJsonNodeContainer())
     {
-        const auto jsonDataType = value->GetJsonDataType();
+        constexpr auto indentationCount = 3;
 
-        switch (jsonDataType)
+        switch (const auto jsonDataType = value->GetJsonDataType(); jsonDataType)
         {
             case JsonDataType::StringArray:
             {
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(" = std::vector<System::String>;\n"s);
-
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("::const_iterator;\n"s);
+                content += GenerateStringArrayUsing(*value, indentationCount);
             }
             break;
             case JsonDataType::BoolArray:
             {
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(" = std::deque<bool>;\n"s);
-
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("::const_iterator;\n"s);
+                content += GenerateBoolArrayUsing(*value, indentationCount);
             }
             break;
             case JsonDataType::IntArray:
             {
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(" = std::vector<int>;\n"s);
-
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("::const_iterator;\n"s);
+                content += GenerateIntArrayUsing(*value, indentationCount);
             }
             break;
             case JsonDataType::Int64Array:
             {
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(" = std::vector<int64_t>;\n"s);
-
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("::const_iterator;\n"s);
+                content += GenerateInt64ArrayUsing(*value, indentationCount);
             }
             break;
             case JsonDataType::DoubleArray:
             {
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(" = std::vector<double>;\n"s);
-
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += TextParsing::g_Indentation;
-                content += SYSTEM_TEXT("using "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("ConstIter = "s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT("::const_iterator;\n"s);
+                content += GenerateDoubleArrayUsing(*value, indentationCount);
             }
             break;
             case JsonDataType::Nested:
@@ -335,41 +183,16 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing(const JsonNode& j
             {
                 for (const auto& inner : value->GetJsonNodeContainer())
                 {
-                    const auto innerJsonDataType = inner->GetJsonDataType();
-
-                    switch (innerJsonDataType)
+                    switch (const auto innerJsonDataType = inner->GetJsonDataType(); innerJsonDataType)
                     {
                         case JsonDataType::Nested:
                         {
-                            content += TextParsing::g_Indentation;
-                            content += TextParsing::g_Indentation;
-                            content += TextParsing::g_Indentation;
-                            content += SYSTEM_TEXT("using Const"s);
-                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
-                            content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const "s);
-                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
-                            content += SYSTEM_TEXT(">;\n"s);
+                            content += GenerateNestedUsing(*inner, indentationCount);
                         }
                         break;
                         case JsonDataType::NestedArray:
                         {
-                            content += TextParsing::g_Indentation;
-                            content += TextParsing::g_Indentation;
-                            content += TextParsing::g_Indentation;
-                            content += SYSTEM_TEXT("using Const"s);
-                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
-                            content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const "s);
-                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
-                            content += SYSTEM_TEXT(">;\n"s);
-
-                            content += TextParsing::g_Indentation;
-                            content += TextParsing::g_Indentation;
-                            content += TextParsing::g_Indentation;
-                            content += SYSTEM_TEXT("using "s);
-                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
-                            content += SYSTEM_TEXT("Container = std::vector<Const"s);
-                            content += StringUtility::ToFirstLetterUpper(inner->GetTypeName());
-                            content += SYSTEM_TEXT("SharedPtr>;\n"s);
+                            content += GenerateNestedArrayUsing(*inner, indentationCount);
                         }
                         break;
                         default:
@@ -378,11 +201,101 @@ System::String CoreTools::JsonGenerateClassName::GenerateUsing(const JsonNode& j
                 }
             }
             break;
-                break;
             default:
                 break;
         }
     }
+
+    return content;
+}
+
+System::String CoreTools::JsonGenerateClassName::GenerateStringArrayUsing(const JsonNode& jsonNode, int indentationCount)
+{
+    return GenerateArrayUsing(jsonNode, indentationCount, SYSTEM_TEXT(" = std::vector<System::String>;\n"s));
+}
+
+System::String CoreTools::JsonGenerateClassName::GenerateBoolArrayUsing(const JsonNode& jsonNode, int indentationCount)
+{
+    return GenerateArrayUsing(jsonNode, indentationCount, SYSTEM_TEXT(" = std::deque<bool>;\n"s));
+}
+
+System::String CoreTools::JsonGenerateClassName::GenerateIntArrayUsing(const JsonNode& jsonNode, int indentationCount)
+{
+    return GenerateArrayUsing(jsonNode, indentationCount, SYSTEM_TEXT(" = std::vector<int>;\n"s));
+}
+
+System::String CoreTools::JsonGenerateClassName::GenerateInt64ArrayUsing(const JsonNode& jsonNode, int indentationCount)
+{
+    return GenerateArrayUsing(jsonNode, indentationCount, SYSTEM_TEXT(" = std::vector<int64_t>;\n"s));
+}
+
+System::String CoreTools::JsonGenerateClassName::GenerateDoubleArrayUsing(const JsonNode& jsonNode, int indentationCount)
+{
+    return GenerateArrayUsing(jsonNode, indentationCount, SYSTEM_TEXT(" = std::vector<double>;\n"s));
+}
+
+CoreTools::JsonGenerateClassName::String CoreTools::JsonGenerateClassName::GenerateNestedUsing(const JsonNode& jsonNode, int indentationCount, const String& jsonClassName)
+{
+    String content{};
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += SYSTEM_TEXT("using Const"s);
+    content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
+    content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const "s);
+
+    content += jsonClassName;
+
+    content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
+    content += SYSTEM_TEXT(">;\n"s);
+
+    return content;
+}
+
+CoreTools::JsonGenerateClassName::String CoreTools::JsonGenerateClassName::GenerateNestedArrayUsing(const JsonNode& jsonNode, int indentationCount, const String& jsonClassName)
+{
+    auto content = GenerateNestedUsing(jsonNode, indentationCount, jsonClassName);
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += SYSTEM_TEXT("using "s);
+    content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
+    content += SYSTEM_TEXT("Container = std::vector<Const"s);
+    content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
+    content += SYSTEM_TEXT("SharedPtr>;\n"s);
+
+    return content;
+}
+
+System::String CoreTools::JsonGenerateClassName::GenerateArrayUsing(const JsonNode& jsonNode, int indentationCount, const String& usingDefinition)
+{
+    String content{};
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += SYSTEM_TEXT("using "s);
+    content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
+    content += usingDefinition;
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += SYSTEM_TEXT("using "s);
+    content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
+    content += SYSTEM_TEXT("ConstIter = "s);
+    content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
+    content += SYSTEM_TEXT("::const_iterator;\n"s);
 
     return content;
 }

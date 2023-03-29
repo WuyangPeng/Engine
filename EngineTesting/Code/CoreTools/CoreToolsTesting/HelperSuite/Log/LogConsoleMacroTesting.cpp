@@ -33,11 +33,7 @@ void CoreTools::LogConsoleMacroTesting::MainTest()
 
 void CoreTools::LogConsoleMacroTesting::ConsoleLogTest() noexcept
 {
-    LOG_SINGLETON_CONSOLE_APPENDER(Info, CoreTools)
-        << SYSTEM_TEXT("测试LogMacro，这条日志会写入控制台。")
-        << LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_CONSOLE_APPENDER(Info, CoreTools, SYSTEM_TEXT("测试LogMacro，这条日志会写入控制台。"));
 
-    LOG_SINGLETON_CONSOLE_APPENDER_USE_FUNCTION_DESCRIBED(Info, CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED)
-        << SYSTEM_TEXT("测试LogMacro，这条日志会写入控制台。")
-        << LogAppenderIOManageSign::Refresh;
+    LOG_SINGLETON_CONSOLE_APPENDER_USE_FUNCTION_DESCRIBED(Info, CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED, SYSTEM_TEXT("测试LogMacro，这条日志会写入控制台。"));
 }

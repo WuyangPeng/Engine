@@ -11,8 +11,8 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
+#include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using namespace std::literals;
 
@@ -37,14 +37,16 @@ void CoreTools::LogMessageTesting::MainTest()
 
 void CoreTools::LogMessageTesting::LogLevelTest()
 {
-    LogMessage message{ LogLevel::Error, LogFilter::CoreTools, SYSTEM_TEXT("Å×³öÒì³££¡"), CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage message{ LogLevel::Error, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    message << SYSTEM_TEXT("Å×³öÒì³££¡");
 
     ASSERT_ENUM_EQUAL(message.GetLogLevel(), LogLevel::Error);
 }
 
 void CoreTools::LogMessageTesting::LogFilterTest()
 {
-    LogMessage message{ LogLevel::Fatal, LogFilter::Rendering, SYSTEM_TEXT("Í¼ÏñäÖÈ¾Ê§°Ü£¡"), CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage message{ LogLevel::Fatal, LogFilter::Rendering, CORE_TOOLS_FUNCTION_DESCRIBED };
+    message << SYSTEM_TEXT("Í¼ÏñäÖÈ¾Ê§°Ü£¡");
 
     ASSERT_ENUM_EQUAL(message.GetLogFilterType(), LogFilter::Rendering);
 }
@@ -53,7 +55,8 @@ void CoreTools::LogMessageTesting::MessageTest()
 {
     auto error = SYSTEM_TEXT("Á¬½Ó²»ÉÏÍøÂç£¡"s);
 
-    LogMessage message{ LogLevel::Warn, LogFilter::Network, error, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage message{ LogLevel::Warn, LogFilter::Network, CORE_TOOLS_FUNCTION_DESCRIBED };
+    message << error;
 
     ASSERT_EQUAL(message.GetMessageDescribe(), error);
     ASSERT_EQUAL(message.GetMessageSize(), boost::numeric_cast<int>(error.size()));

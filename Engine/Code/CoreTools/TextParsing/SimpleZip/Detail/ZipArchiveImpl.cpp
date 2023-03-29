@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:37)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 11:38)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -26,10 +26,6 @@
 
 #include <fstream>
 
-using std::ifstream;
-using std::make_shared;
-using std::ofstream;
-using std::string;
 using namespace std::literals;
 
 CoreTools::SimpleZip::ZipArchiveImpl::ZipArchiveImpl() noexcept
@@ -38,8 +34,8 @@ CoreTools::SimpleZip::ZipArchiveImpl::ZipArchiveImpl() noexcept
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::SimpleZip::ZipArchiveImpl::ZipArchiveImpl(const string& fileName, bool isCreate)
-    : archivePath{ fileName }, zipReader{}, zipEntries{}
+CoreTools::SimpleZip::ZipArchiveImpl::ZipArchiveImpl(std::string fileName, bool isCreate)
+    : archivePath{ std::move(fileName) }, zipReader{}, zipEntries{}
 {
     Init(isCreate);
 
@@ -58,8 +54,8 @@ void CoreTools::SimpleZip::ZipArchiveImpl::Init(bool isCreate)
     }
 }
 
-CoreTools::SimpleZip::ZipArchiveImpl::ZipArchiveImpl(const string& fileName)
-    : archivePath{ fileName }, zipReader{}, zipEntries{}
+CoreTools::SimpleZip::ZipArchiveImpl::ZipArchiveImpl(std::string fileName)
+    : archivePath{ std::move(fileName) }, zipReader{}, zipEntries{}
 {
     Init();
 
@@ -81,7 +77,9 @@ CoreTools::SimpleZip::ZipArchiveImpl::~ZipArchiveImpl() noexcept
 }
 
 CoreTools::SimpleZip::ZipArchiveImpl::ZipArchiveImpl(ZipArchiveImpl&& rhs) noexcept
-    : archivePath{ std::move(rhs.archivePath) }, zipReader{ std::move(rhs.zipReader) }, zipEntries{ std::move(rhs.zipEntries) }
+    : archivePath{ std::move(rhs.archivePath) },
+      zipReader{ std::move(rhs.zipReader) },
+      zipEntries{ std::move(rhs.zipEntries) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -130,9 +128,10 @@ void CoreTools::SimpleZip::ZipArchiveImpl::DeleteSameEntries()
         return lhs.GetFileName() == rhs.GetFileName();
     };
 
-    std::reverse(zipEntries.begin(), zipEntries.end());
-    zipEntries.erase(std::unique(zipEntries.begin(), zipEntries.end(), isEqual), zipEntries.end());
-    std::reverse(zipEntries.begin(), zipEntries.end());
+    std::ranges::reverse(zipEntries);
+    const auto result = std::ranges::unique(zipEntries.begin(), zipEntries.end(), isEqual);
+    zipEntries.erase(result.begin(), result.end());
+    std::ranges::reverse(zipEntries);
 }
 
 void CoreTools::SimpleZip::ZipArchiveImpl::AddFolderEntries()
@@ -140,8 +139,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::AddFolderEntries()
     // 如果文件夹条目不存在，则添加它们
     for (const auto& entry : GetEntryNames(false, true))
     {
-        const auto position = entry.rfind(TextParsing::g_ForwardSlash);
-        if (position != std::string::npos)
+        if (const auto position = entry.rfind(TextParsing::gForwardSlash); position != std::string::npos)
         {
             AddEntry(entry.substr(0, position + 1), "");
         }
@@ -166,11 +164,7 @@ CoreTools::SimpleZip::ZipArchiveImpl::EntryNamesType CoreTools::SimpleZip::ZipAr
     // 遍历存档中的所有条目
     for (const auto& item : zipEntries)
     {
-        if (includeDirs && item.IsDirectory())
-        {
-            result.emplace_back(item.GetFileName());
-        }
-        else if (includeFiles && !item.IsDirectory())
+        if ((includeDirs && item.IsDirectory()) || (includeFiles && !item.IsDirectory()))
         {
             result.emplace_back(item.GetFileName());
         }
@@ -183,11 +177,11 @@ void CoreTools::SimpleZip::ZipArchiveImpl::CheckZipReader() const
 {
     if (!zipReader)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("文件未开启！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("文件未开启！"s))
     }
 }
 
-CoreTools::SimpleZip::ZipArchiveImpl::EntryNamesType CoreTools::SimpleZip::ZipArchiveImpl::GetEntryNamesInDir(const string& dir, bool includeDirs, bool includeFiles) const
+CoreTools::SimpleZip::ZipArchiveImpl::EntryNamesType CoreTools::SimpleZip::ZipArchiveImpl::GetEntryNamesInDir(const std::string& dir, bool includeDirs, bool includeFiles) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -200,31 +194,31 @@ CoreTools::SimpleZip::ZipArchiveImpl::EntryNamesType CoreTools::SimpleZip::ZipAr
     if (!dir.empty())
     {
         auto conditionDir = dir;
-        if (conditionDir.back() != TextParsing::g_ForwardSlash)
+        if (conditionDir.back() != TextParsing::gForwardSlash)
         {
-            conditionDir += TextParsing::g_ForwardSlash;
+            conditionDir += TextParsing::gForwardSlash;
         }
 
-        result.erase(std::remove_if(result.begin(),
-                                    result.end(),
-                                    [&](const auto& fileName) {
-                                        return fileName == conditionDir || fileName.substr(0, conditionDir.size()) != conditionDir;
-                                    }),
-                     result.end());
+        const auto ranges = std::ranges::remove_if(result,
+                                                   [&](const auto& fileName) {
+                                                       return fileName == conditionDir || fileName.substr(0, conditionDir.size()) != conditionDir;
+                                                   });
+
+        result.erase(ranges.begin(), ranges.end());
     }
 
-    const auto count = std::count(dir.cbegin(), dir.cend(), TextParsing::g_ForwardSlash);
-    const auto rootDepth = (dir.empty() ? 1 : (dir.back() == TextParsing::g_ForwardSlash ? count + 1 : count + 2));
+    const auto count = std::ranges::count(dir, TextParsing::gForwardSlash);
+    const auto rootDepth = (dir.empty() ? 1 : (dir.back() == TextParsing::gForwardSlash ? count + 1 : count + 2));
+
+    const auto ranges = std::ranges::remove_if(result,
+                                               [&](const auto& fileName) {
+                                                   const auto subFolderDepth = std::ranges::count(fileName, TextParsing::gForwardSlash);
+
+                                                   return (rootDepth < subFolderDepth) || (subFolderDepth == rootDepth && fileName.back() != TextParsing::gForwardSlash);
+                                               });
 
     // 确保只包含一级子目录。
-    result.erase(std::remove_if(result.begin(),
-                                result.end(),
-                                [&](const auto& fileName) {
-                                    const auto subFolderDepth = std::count(fileName.cbegin(), fileName.cend(), TextParsing::g_ForwardSlash);
-
-                                    return (rootDepth < subFolderDepth) || (subFolderDepth == rootDepth && fileName.back() != TextParsing::g_ForwardSlash);
-                                }),
-                 result.end());
+    result.erase(ranges.begin(), ranges.end());
 
     return result;
 }
@@ -238,11 +232,8 @@ CoreTools::SimpleZip::ZipArchiveImpl::ZipEntryMetaDataType CoreTools::SimpleZip:
     ZipEntryMetaDataType result{};
     for (const auto& item : zipEntries)
     {
-        if (includeDirs && item.IsDirectory())
-        {
-            result.emplace_back(item.GetZipEntryInfo());
-        }
-        else if (includeFiles && !item.IsDirectory())
+        if ((includeDirs && item.IsDirectory()) ||
+            (includeFiles && !item.IsDirectory()))
         {
             result.emplace_back(item.GetZipEntryInfo());
         }
@@ -251,7 +242,7 @@ CoreTools::SimpleZip::ZipArchiveImpl::ZipEntryMetaDataType CoreTools::SimpleZip:
     return result;
 }
 
-CoreTools::SimpleZip::ZipArchiveImpl::ZipEntryMetaDataType CoreTools::SimpleZip::ZipArchiveImpl::GetMetaDataInDir(const string& dir, bool includeDirs, bool includeFiles) const
+CoreTools::SimpleZip::ZipArchiveImpl::ZipEntryMetaDataType CoreTools::SimpleZip::ZipArchiveImpl::GetMetaDataInDir(const std::string& dir, bool includeDirs, bool includeFiles) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -265,11 +256,8 @@ CoreTools::SimpleZip::ZipArchiveImpl::ZipEntryMetaDataType CoreTools::SimpleZip:
             continue;
         }
 
-        if (includeDirs && item.IsDirectory())
-        {
-            result.emplace_back(item.GetZipEntryInfo());
-        }
-        else if (includeFiles && !item.IsDirectory())
+        if ((includeDirs && item.IsDirectory()) ||
+            (includeFiles && !item.IsDirectory()))
         {
             result.emplace_back(item.GetZipEntryInfo());
         }
@@ -287,7 +275,7 @@ int CoreTools::SimpleZip::ZipArchiveImpl::GetNumEntries(bool includeDirs, bool i
     return boost::numeric_cast<int>(GetEntryNames(includeDirs, includeFiles).size());
 }
 
-int CoreTools::SimpleZip::ZipArchiveImpl::GetNumEntriesInDir(const string& dir, bool includeDirs, bool includeFiles) const
+int CoreTools::SimpleZip::ZipArchiveImpl::GetNumEntriesInDir(const std::string& dir, bool includeDirs, bool includeFiles) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -296,17 +284,17 @@ int CoreTools::SimpleZip::ZipArchiveImpl::GetNumEntriesInDir(const string& dir, 
     return boost::numeric_cast<int>(GetEntryNamesInDir(dir, includeDirs, includeFiles).size());
 }
 
-bool CoreTools::SimpleZip::ZipArchiveImpl::HasEntry(const string& entryName) const
+bool CoreTools::SimpleZip::ZipArchiveImpl::HasEntry(const std::string& entryName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     CheckZipReader();
 
-    auto result = GetEntryNames(true, true);
-    return std::find(result.cbegin(), result.cend(), entryName) != result.cend();
+    const auto result = GetEntryNames(true, true);
+    return std::ranges::find(result, entryName) != result.cend();
 }
 
-void CoreTools::SimpleZip::ZipArchiveImpl::Save(const string& fileName)
+void CoreTools::SimpleZip::ZipArchiveImpl::Save(const std::string& fileName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -319,7 +307,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::Save(const string& fileName)
     }
 
     // 生成与当前文件路径相同的随机文件名
-    auto randomFileName = GetRandomFileName(saveFileName);
+    const auto randomFileName = GetRandomFileName(saveFileName);
 
     // 准备一个随机文件名的临时存档文件；
     ZipWriter zipWriter{ randomFileName };
@@ -336,14 +324,14 @@ void CoreTools::SimpleZip::ZipArchiveImpl::Save(const string& fileName)
     MoveZipFile(saveFileName, randomFileName);
 }
 
-string CoreTools::SimpleZip::ZipArchiveImpl::GetRandomFileName(const string& saveFileName) const
+std::string CoreTools::SimpleZip::ZipArchiveImpl::GetRandomFileName(const std::string& saveFileName) const
 {
-    const auto position = saveFileName.rfind(TextParsing::g_ForwardSlash);
+    const auto position = saveFileName.rfind(TextParsing::gForwardSlash);
 
     constexpr auto randomNameLength = 20;
     const auto suffix = "tmp"s;
 
-    if (position != string::npos)
+    if (position != std::string::npos)
     {
         return saveFileName.substr(0, position + 1) + GenerateRandomName::GetName(randomNameLength, suffix);
     }
@@ -353,9 +341,9 @@ string CoreTools::SimpleZip::ZipArchiveImpl::GetRandomFileName(const string& sav
     }
 }
 
-void CoreTools::SimpleZip::ZipArchiveImpl::MoveZipFile(const string& saveFileName, const string& randomFileName)
+void CoreTools::SimpleZip::ZipArchiveImpl::MoveZipFile(const std::string& saveFileName, const std::string& randomFileName)
 {
-    auto oldFileName = archivePath;
+    const auto oldFileName = archivePath;
     Close();
 
     EXCEPTION_TRY
@@ -364,43 +352,43 @@ void CoreTools::SimpleZip::ZipArchiveImpl::MoveZipFile(const string& saveFileNam
 
         if (!System::MoveSystemFile(StringConversion::MultiByteConversionStandard(randomFileName), StringConversion::MultiByteConversionStandard(saveFileName)))
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("移动文件失败。"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("移动文件失败。"s))
         }
     }
-    EXCEPTION_ALL_CATCH(CoreTools);
+    EXCEPTION_ALL_CATCH(CoreTools)
 
     archivePath = oldFileName;
     Open();
 }
 
-void CoreTools::SimpleZip::ZipArchiveImpl::DeleteEntry(const string& name)
+void CoreTools::SimpleZip::ZipArchiveImpl::DeleteEntry(const std::string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     CheckZipReader();
 
-    zipEntries.erase(std::remove_if(zipEntries.begin(),
-                                    zipEntries.end(),
-                                    [&](const auto& entry) {
-                                        return name == entry.GetFileName();
-                                    }),
-                     zipEntries.end());
+    const auto ranges = std::ranges::remove_if(zipEntries,
+                                               [&](const auto& entry) {
+                                                   return name == entry.GetFileName();
+                                               });
+
+    zipEntries.erase(ranges.begin(), ranges.end());
 }
 
-CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::GetEntry(const string& name)
+CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::GetEntry(const std::string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     CheckZipReader();
 
     // 查找 ZipEntry 对象。
-    auto result = std::find_if(zipEntries.begin(), zipEntries.end(), [&](const auto& entry) {
+    const auto result = std::ranges::find_if(zipEntries, [&](const auto& entry) {
         return name == entry.GetFileName();
     });
 
     if (result == zipEntries.cend())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("具有指定名称的条目！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("具有指定名称的条目！"s))
     }
 
     // 如果尚未从存档中提取数据（即m_EntryData为空），则将数据从存档中提取到ZipEntry对象。
@@ -416,7 +404,7 @@ CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::GetEntry(co
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26812)
 
-        THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(zipReader->GetArchive()->m_last_error)));
+        THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(mz_zip_get_error_string(zipReader->GetArchive()->m_last_error)))
 
 #include STSTEM_WARNING_POP
     }
@@ -431,19 +419,18 @@ void CoreTools::SimpleZip::ZipArchiveImpl::ExtractEntry(const std::string& name,
 
     CheckZipReader();
 
-    auto entry = GetEntry(name);
-
-    /// 如果条目是目录，则将该目录创建为dest的子目录
-    if (entry.IsDirectory())
+    if (const auto entry = GetEntry(name); entry.IsDirectory())
     {
+        /// 如果条目是目录，则将该目录创建为dest的子目录
         MAYBE_UNUSED const auto result = System::CreateFileDirectory(StringConversion::MultiByteConversionStandard(dest + entry.GetFileName()), nullptr);
     }
-    // 如果条目是文件，则将条目数据流式传输到文件。
+
     else
     {
-        ofstream output{ dest + string{ TextParsing::g_ForwardSlash } + entry.GetFileName(), std::ios::binary };
+        /// 如果条目是文件，则将条目数据流式传输到文件。
+        std::ofstream output{ dest + std::string{ TextParsing::gForwardSlash } + entry.GetFileName(), std::ios::binary };
 
-        for (auto ch : entry.GetEntryData())
+        for (const auto ch : entry.GetEntryData())
         {
             output << boost::numeric_cast<uint8_t>(ch);
         }
@@ -451,7 +438,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::ExtractEntry(const std::string& name,
     }
 }
 
-CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntry(const string& name, const ZipEntryData& data)
+CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntry(const std::string& name, const ZipEntryData& data)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -460,17 +447,17 @@ CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntry(co
     return AddEntryImpl(name, data);
 }
 
-CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntry(const string& name, const string& data)
+CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntry(const std::string& name, const std::string& data)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     CheckZipReader();
 
-    ZipEntryData stringData{ data.cbegin(), data.cend() };
+    const ZipEntryData stringData{ data.cbegin(), data.cend() };
     return AddEntryImpl(name, stringData);
 }
 
-CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntry(const string& name, const ZipEntry& entry)
+CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntry(const std::string& name, const ZipEntry& entry)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -479,20 +466,19 @@ CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntry(co
     return AddEntryImpl(name, entry.GetEntryData());
 }
 
-CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntryImpl(const string& name, const ZipEntryData& data)
+CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntryImpl(const std::string& name, const ZipEntryData& data)
 {
     CheckZipReader();
 
     // 确保所有文件夹和子文件夹在存档中都有一个条目
     auto folders = GetEntryNames(true, false);
 
-    for (auto pos = name.find(TextParsing::g_ForwardSlash, 0); pos != string::npos; pos = name.find(TextParsing::g_ForwardSlash, pos))
+    for (auto pos = name.find(TextParsing::gForwardSlash, 0); pos != std::string::npos; pos = name.find(TextParsing::gForwardSlash, pos))
     {
         ++pos;
-        auto folder = name.substr(0, pos);
 
         // 如果文件夹未在存档中注册，请添加它。
-        if (std::find(folders.cbegin(), folders.cend(), folder) == folders.cend())
+        if (auto folder = name.substr(0, pos); std::ranges::find(folders, folder) == folders.cend())
         {
             zipEntries.emplace_back(folder, "");
             folders.emplace_back(folder);
@@ -500,7 +486,7 @@ CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntryImp
     }
 
     // 检查存档中是否已存在具有给定名称的条目。
-    auto result = std::find_if(zipEntries.begin(), zipEntries.end(), [&](const auto& entry) {
+    const auto result = std::ranges::find_if(zipEntries, [&](const auto& entry) {
         return name == entry.GetFileName();
     });
 

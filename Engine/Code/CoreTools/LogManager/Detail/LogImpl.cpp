@@ -1,37 +1,33 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 22:38)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 14:48)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "AnalysisAppenderManager.h"
 #include "LogImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/LogMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/LogManager/Appender.h"
-#include "CoreTools/LogManager/LogFilterManager.h"
-#include "CoreTools/LogManager/Logger.h"
+#include "CoreTools/LogManager/LogMessage.h"
 
 using System::operator++;
 
-using boost::property_tree::ptree_error;
-using std::make_shared;
-using std::string;
-
-CoreTools::LogImpl::LogImpl(MAYBE_UNUSED DisableNotThrow disableNotThrow)
-    : appenderManager{ AppenderManager::Create() }, logAppenderIOManagerContainer{}, errorLogAppenderIOManager{ LogAppenderIOManager::Create() }
+CoreTools::LogImpl::LogImpl(DisableNotThrow disableNotThrow)
+    : appenderManager{ AppenderManager::Create() }, logAppenderIOManagerContainer{}
 {
+    System::UnusedFunction(disableNotThrow);
+
     InitIOManager();
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 void CoreTools::LogImpl::InitIOManager()
 {
     for (auto logLevelType = LogLevel::Trace; logLevelType < LogLevel::MaxLogLevels; ++logLevelType)
@@ -52,139 +48,49 @@ void CoreTools::LogImpl::ResetIOManager() noexcept
 
 bool CoreTools::LogImpl::IsValid() const noexcept
 {
-    try
+    if (appenderManager != nullptr)
     {
-        if (appenderManager != nullptr && DisabledIsNotExist())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return true;
     }
-    catch (...)
+    else
     {
         return false;
     }
 }
 
-bool CoreTools::LogImpl::DisabledIsNotExist() const
-{
-    return logAppenderIOManagerContainer.find(LogLevel::Disabled) == logAppenderIOManagerContainer.cend();
-}
-
 #endif  // OPEN_CLASS_INVARIANT
 
-void CoreTools::LogImpl::InsertAppender(const String& name, const Appender& appender)
+void CoreTools::LogImpl::LoadConfiguration(const AnalysisAppenderManager& analysis) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (!appenderManager->InsertAppender(name, appender))
+    appenderManager = analysis.GetAppenderManager();
+
+    ResetIOManager();
+}
+
+CoreTools::LogAppenderIOManager& CoreTools::LogImpl::Find(LogLevel type)
+{
+    if (const auto iter = logAppenderIOManagerContainer.find(type); iter != logAppenderIOManagerContainer.cend())
     {
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("InsertAppender失败。"));
+        return *iter->second;
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("日志库出现了错误,找不到对应的Appender。"))
     }
 }
 
-void CoreTools::LogImpl::RemoveAppender(const String& name)
+CoreTools::LogLevel CoreTools::LogImpl::GetMinLogLevelType(LogFilter filter) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return appenderManager->GetMinLogLevelType(filter);
+}
+
+void CoreTools::LogImpl::Write(const LogMessage& logMessage)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (!appenderManager->RemoveAppender(name))
-    {
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("RemoveAppender失败。"));
-    }
-}
-
-void CoreTools::LogImpl::LoadConfiguration(const string& fileName)
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    try
-    {
-        const AnalysisAppenderManager analysis{ fileName };
-
-        appenderManager = analysis.GetAppenderManager();
-
-        ResetIOManager();
-    }
-    catch (const ptree_error& error)
-    {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-            << error.what()
-            << LOG_SINGLETON_TRIGGER_ASSERT;
-    }
-}
-
-CoreTools::LogAppenderIOManager& CoreTools::LogImpl::OutTrace() noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    return Find(LogLevel::Trace);
-}
-
-CoreTools::LogAppenderIOManager& CoreTools::LogImpl::OutDebug() noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    return Find(LogLevel::Debug);
-}
-
-CoreTools::LogAppenderIOManager& CoreTools::LogImpl::OutInfo() noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    return Find(LogLevel::Info);
-}
-
-CoreTools::LogAppenderIOManager& CoreTools::LogImpl::OutWarn() noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    return Find(LogLevel::Warn);
-}
-
-CoreTools::LogAppenderIOManager& CoreTools::LogImpl::OutError() noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    return Find(LogLevel::Error);
-}
-
-CoreTools::LogAppenderIOManager& CoreTools::LogImpl::OutFatal() noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    return Find(LogLevel::Fatal);
-}
-
-// private
-CoreTools::LogAppenderIOManager& CoreTools::LogImpl::Find(LogLevel type) noexcept
-{
-    try
-    {
-        const auto iter = logAppenderIOManagerContainer.find(type);
-
-        if (iter != logAppenderIOManagerContainer.cend())
-        {
-            return *iter->second;
-        }
-        else
-        {
-            CORE_TOOLS_ASSERTION_2(false, "日志库出现了错误,找不到对应的Appender。");
-        }
-    }
-    catch (...)
-    {
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("Find LogAppenderIOManager失败。"));
-    }
-
-    return errorLogAppenderIOManager;
-}
-
-void CoreTools::LogImpl::ReloadAppenderFile()
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    appenderManager->ReloadAppenderFile();
+    Find(logMessage.GetLogLevel()) << logMessage;
 }

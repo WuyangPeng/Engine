@@ -1,24 +1,18 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/26 18:32)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/29 13:56)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "../Contract/Flags/ImplFlags.h"
 #include "EntityManager.h"
 #include "Detail/EntityManagerImpl.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Threading/Mutex.h"
-#include "CoreTools/Threading/ScopedMutex.h"
-
-using std::make_shared;
-using std::make_unique;
 
 SINGLETON_GET_PTR_DEFINE(CoreTools, EntityManager);
 
@@ -26,7 +20,7 @@ CoreTools::EntityManager::EntityManagerUniquePtr CoreTools::EntityManager::entit
 
 void CoreTools::EntityManager::Create()
 {
-    entityManager = make_unique<CoreTools::EntityManager>(EntityManagerCreate::Init);
+    entityManager = std::make_unique<CoreTools::EntityManager>(EntityManagerCreate::Init);
 }
 
 void CoreTools::EntityManager::Destroy() noexcept
@@ -34,9 +28,11 @@ void CoreTools::EntityManager::Destroy() noexcept
     entityManager.reset();
 }
 
-CoreTools::EntityManager::EntityManager(MAYBE_UNUSED EntityManagerCreate entityManagerCreate)
+CoreTools::EntityManager::EntityManager(EntityManagerCreate entityManagerCreate)
     : impl{ ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(entityManagerCreate);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
@@ -49,18 +45,18 @@ bool CoreTools::EntityManager::Register(const EntitySharedPtr& entity)
     return impl->Register(entity);
 }
 
-bool CoreTools::EntityManager::Unregister(uint64_t entityID)
+bool CoreTools::EntityManager::UnRegister(int64_t entityId)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    return impl->Unregister(entityID);
+    return impl->UnRegister(entityId);
 }
 
-CoreTools::EntityManager::EntitySharedPtr CoreTools::EntityManager::GetEntity(uint64_t entityID) const
+CoreTools::EntityManager::EntitySharedPtr CoreTools::EntityManager::GetEntity(int64_t entityId) const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetEntity(entityID);
+    return impl->GetEntity(entityId);
 }

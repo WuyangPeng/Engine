@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 22:43)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 14:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,12 +18,9 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/LogManager/Detail/AnalysisAppenderManager.h"
 #include "CoreTools/Threading/Mutex.h"
 #include "CoreTools/Threading/ScopedMutex.h"
-
-using std::make_shared;
-using std::make_unique;
-using std::string;
 
 SINGLETON_GET_PTR_DEFINE(CoreTools, Log);
 
@@ -35,7 +32,7 @@ void CoreTools::Log::Create()
 
     LOG_ASYNCHRONOUS_SINGLETON.Run();
 
-    log = make_unique<CoreTools::Log>(LogCreate::Init);
+    log = std::make_unique<Log>(LogCreate::Init);
 }
 
 void CoreTools::Log::Destroy() noexcept
@@ -51,134 +48,43 @@ void CoreTools::Log::Destroy() noexcept
     LogAsynchronous::Destroy();
 }
 
-CoreTools::Log::Log(MAYBE_UNUSED LogCreate logCreate)
-    : impl{ DisableNotThrow::Disable }, errorLogAppenderIOManager{ LogAppenderIOManager::Create() }
+CoreTools::Log::Log(LogCreate logCreate)
+    : impl{ DisableNotThrow::Disable }
 {
+    System::UnusedFunction(logCreate);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Log)
 
-void CoreTools::Log::InsertAppender(const String& name, const Appender& appenderPtr)
+void CoreTools::Log::LoadConfiguration(const std::string& fileName)
+{
+    try
+    {
+        // 从文件读取数据的操作不需要加锁处理。
+        const AnalysisAppenderManager analysis{ fileName };
+
+        SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
+
+        return impl->LoadConfiguration(analysis);
+    }
+    catch (const boost::property_tree::ptree_error& error)
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
+    }
+}
+
+CoreTools::LogLevel CoreTools::Log::GetMinLogLevelType(LogFilter filter) const
 {
     SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
 
-    return impl->InsertAppender(name, appenderPtr);
+    return impl->GetMinLogLevelType(filter);
 }
 
-void CoreTools::Log::RemoveAppender(const String& name)
+void CoreTools::Log::Write(const LogMessage& logMessage)
 {
     SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
 
-    return impl->RemoveAppender(name);
-}
-
-void CoreTools::Log::LoadConfiguration(const string& fileName)
-{
-    SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
-
-    return impl->LoadConfiguration(fileName);
-}
-
-CoreTools::LogAppenderIOManager& CoreTools::Log::OutTrace() noexcept
-{
-    try
-    {
-        SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
-
-        return impl->OutTrace();
-    }
-    catch (...)
-    {
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutTrace抛出异常"));
-    }
-
-    return errorLogAppenderIOManager;
-}
-
-CoreTools::LogAppenderIOManager& CoreTools::Log::OutDebug() noexcept
-{
-    try
-    {
-        SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
-
-        return impl->OutDebug();
-    }
-    catch (...)
-    {
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutDebug抛出异常"));
-    }
-
-    return errorLogAppenderIOManager;
-}
-
-CoreTools::LogAppenderIOManager& CoreTools::Log::OutInfo() noexcept
-{
-    try
-    {
-        SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
-
-        return impl->OutInfo();
-    }
-    catch (...)
-    {
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutInfo抛出异常"));
-    }
-
-    return errorLogAppenderIOManager;
-}
-
-CoreTools::LogAppenderIOManager& CoreTools::Log::OutWarn() noexcept
-{
-    try
-    {
-        SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
-
-        return impl->OutWarn();
-    }
-    catch (...)
-    {
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutWarn抛出异常"));
-    }
-
-    return errorLogAppenderIOManager;
-}
-
-CoreTools::LogAppenderIOManager& CoreTools::Log::OutError() noexcept
-{
-    try
-    {
-        SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
-
-        return impl->OutError();
-    }
-    catch (...)
-    {
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutError抛出异常"));
-    }
-
-    return errorLogAppenderIOManager;
-}
-
-CoreTools::LogAppenderIOManager& CoreTools::Log::OutFatal() noexcept
-{
-    try
-    {
-        SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
-
-        return impl->OutFatal();
-    }
-    catch (...)
-    {
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutFatal抛出异常"));
-    }
-
-    return errorLogAppenderIOManager;
-}
-
-void CoreTools::Log::ReloadAppenderFile()
-{
-    SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
-
-    return impl->ReloadAppenderFile();
+    impl->Write(logMessage);
 }

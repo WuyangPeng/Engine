@@ -1,19 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 22:38)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 15:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "LogFileNameImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-CoreTools::LogFileNameImpl::LogFileNameImpl(const String& fileName)
-    : fileName{ fileName }
+CoreTools::LogFileNameImpl::LogFileNameImpl(String fileName) noexcept
+    : fileName{ std::move(fileName) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

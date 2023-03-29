@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 11:06)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 09:35)
 
 #ifndef CORE_TOOLS_COMMAND_MAIN_COMMAND_ARGUMENT_CONTAINER_H
 #define CORE_TOOLS_COMMAND_MAIN_COMMAND_ARGUMENT_CONTAINER_H
@@ -54,8 +54,8 @@ namespace CoreTools
         void AddNoValueArgument(int index);
         void AddEndArgumentValue(int index);
 
-        NODISCARD ArgumentsType GetArgumentsType(int index);
-        NODISCARD ArgumentsType GetNextArgumentsType(int index);
+        NODISCARD ArgumentsType GetArgumentsType(int index) const;
+        NODISCARD ArgumentsType GetNextArgumentsType(int index) const;
 
     private:
         // 索引0为程序名。

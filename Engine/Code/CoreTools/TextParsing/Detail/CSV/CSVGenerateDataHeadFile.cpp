@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 20:15)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 17:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -33,14 +33,14 @@ System::String CoreTools::CSVGenerateDataHeadFile::GetSuffix() const noexcept
 
 System::String CoreTools::CSVGenerateDataHeadFile::GetFilePrefix() const
 {
-    return String{ TextParsing::g_ForwardSlash };
+    return String{ TextParsing::gForwardSlash };
 }
 
 System::String CoreTools::CSVGenerateDataHeadFile::GetFileSuffix() const
 {
     auto result = GetSuffix();
 
-    result += TextParsing::g_HeadFileExtensionName;
+    result += TextParsing::gHeadFileExtensionName;
 
     return result;
 }
@@ -49,7 +49,7 @@ System::String CoreTools::CSVGenerateDataHeadFile::GetContent() const
 {
     auto content = GenerateCopyright();
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
     content += GenerateHeaderGuard();
 
     CSVGenerateHead csvGenerateHead{ GetCSVHead(), GetSuffix() };
@@ -58,16 +58,16 @@ System::String CoreTools::CSVGenerateDataHeadFile::GetContent() const
 
     content += GenerateNameSpace();
 
-    CSVGenerateClassName csvGenerateClassName{ GetCSVHead(), GetSuffix() };
+    const CSVGenerateClassName csvGenerateClassName{ GetCSVHead(), GetSuffix() };
     content += csvGenerateClassName.GenerateClassName();
 
-    CSVGenerateDefaultFunction csvGenerateDefaultFunction{ GetCSVHead(), GetSuffix() };
+    const CSVGenerateDefaultFunction csvGenerateDefaultFunction{ GetCSVHead(), GetSuffix() };
     content += csvGenerateDefaultFunction.GenerateDefaultFunction();
 
-    CSVGenerateGetFunction csvGenerateGetFunction{ GetCSVHead(), GetKeyTypeDescribe() };
+    const CSVGenerateGetFunction csvGenerateGetFunction{ GetCSVHead(), GetKeyTypeDescribe() };
     content += csvGenerateGetFunction.GenerateGetFunction();
 
-    CSVGenerateMember csvGenerateMember{ GetCSVHead(), GetKeyTypeDescribe() };
+    const CSVGenerateMember csvGenerateMember{ GetCSVHead(), GetKeyTypeDescribe() };
     content += csvGenerateMember.GenerateChildMember();
 
     content += GenerateHeaderGuardEndif();

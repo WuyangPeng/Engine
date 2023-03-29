@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:53)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:30)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -44,11 +44,11 @@ System::String CoreTools::BaseGetFunctionParsing::GenerateFunctionVariableNameBe
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_NodiscardVirtual;
+    content += TextParsing::gNodiscardVirtual;
     content += actualType;
-    content += TextParsing::g_Space;
+    content += TextParsing::gSpace;
     content += functionVariableName;
-    content += TextParsing::g_FunctionConst;
+    content += TextParsing::gFunctionConst;
 
     return content;
 }
@@ -61,10 +61,10 @@ System::String CoreTools::BaseGetFunctionParsing::GenerateFunctionVariableName(C
 
     if (CSVDataType::Bool <= dataType && dataType <= CSVDataType::IntVector4)
     {
-        content += TextParsing::g_Noexcept;
+        content += TextParsing::gNoexcept;
     }
 
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -73,11 +73,11 @@ System::String CoreTools::BaseGetFunctionParsing::GenerateArray(const String& ac
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = GenerateCountFunction(functionVariableName, TextParsing::g_NodiscardVirtual, TextParsing::g_CountFunction);
+    auto content = GenerateCountFunction(functionVariableName, TextParsing::gNodiscardVirtual, TextParsing::gCountFunction);
 
-    content += GenerateGetValueFunction(valueType, functionVariableName, TextParsing::g_NodiscardVirtual, TextParsing::g_MaybeUnusedIndexParameter);
-    content += GenerateBeginIterFunction(actualType, functionVariableName, TextParsing::g_NodiscardVirtual, TextParsing::g_BeginFunction);
-    content += GenerateEndIterFunction(actualType, functionVariableName, TextParsing::g_NodiscardVirtual, TextParsing::g_EndFunction);
+    content += GenerateGetValueFunction(valueType, functionVariableName, TextParsing::gNodiscardVirtual, TextParsing::gMaybeUnusedIndexParameter);
+    content += GenerateBeginIterFunction(actualType, functionVariableName, TextParsing::gNodiscardVirtual, TextParsing::gBeginFunction);
+    content += GenerateEndIterFunction(actualType, functionVariableName, TextParsing::gNodiscardVirtual, TextParsing::gEndFunction);
 
     return content;
 }
@@ -91,17 +91,17 @@ System::String CoreTools::BaseGetFunctionParsing::GenerateMapping(int index, con
     const auto upperVariableName = csvHead.GetUpperVariableName(index);
 
     auto content = GenerateIndentation();
-    content += TextParsing::g_NodiscardVirtual;
-    content += TextParsing::g_SharedPtrConst;
+    content += TextParsing::gNodiscardVirtual;
+    content += TextParsing::gSharedPtrConst;
     content += StringUtility::ToFirstLetterUpper(mapping);
-    content += TextParsing::g_RightAngleBracket;
-    content += TextParsing::g_Space;
-    content += TextParsing::g_Get;
+    content += TextParsing::gRightAngleBracket;
+    content += TextParsing::gSpace;
+    content += TextParsing::gGet;
     content += upperVariableName;
-    content += TextParsing::g_MaybeUnusedConst;
+    content += TextParsing::gMaybeUnusedConst;
     content += csvHead.GetNameSpace();
-    content += TextParsing::g_ContainerParameter;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gContainerParameter;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -124,13 +124,12 @@ System::String CoreTools::BaseGetFunctionParsing::GenerateBaseGetFunction(int in
         content += GenerateArray(actualType, valueType, functionVariableName);
     }
 
-    const auto mapping = csvHead.GetMapping(index);
-    if (!mapping.empty())
+    if (const auto mapping = csvHead.GetMapping(index); !mapping.empty())
     {
         content += GenerateMapping(index, mapping);
     }
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -141,13 +140,13 @@ System::String CoreTools::BaseGetFunctionParsing::GenerateGetKey() const
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_NodiscardVirtual;
+    content += TextParsing::gNodiscardVirtual;
     content += GetKeyTypeDescribe();
-    content += TextParsing::g_Space;
-    content += TextParsing::g_GetKeyConst;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gSpace;
+    content += TextParsing::gGetKeyConst;
+    content += TextParsing::gSemicolonNewline;
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

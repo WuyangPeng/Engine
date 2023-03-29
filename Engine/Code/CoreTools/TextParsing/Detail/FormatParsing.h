@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 13:32)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:16)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_FORMAT_PARSING_H
 #define CORE_TOOLS_TEXT_PARSING_FORMAT_PARSING_H
@@ -13,7 +13,6 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/TextParsing/TextParsingFwd.h"
 
 namespace CoreTools
 {
@@ -53,9 +52,9 @@ namespace CoreTools
         void ParsingScope(bool isScope, const String& single);
         void ParsingKey(const String& single);
 
-        NODISCARD Element GetElement(const String& column) const;
-        NODISCARD Element SplitEqualSign(const String& single) const;
-        NODISCARD bool IsInterval(const String& single) const noexcept;
+        NODISCARD static Element GetElement(const String& column);
+        NODISCARD static Element SplitEqualSign(const String& single);
+        NODISCARD static bool IsInterval(const String& single) noexcept;
 
     private:
         String key;

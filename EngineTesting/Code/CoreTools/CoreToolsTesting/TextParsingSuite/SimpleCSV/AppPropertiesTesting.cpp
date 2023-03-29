@@ -1,34 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:34)
+///	引擎测试版本：0.9.0.4 (2023/03/08 14:41)
 
 #include "AppPropertiesTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/Cell.h"
-#include "CoreTools/TextParsing/SimpleCSV/CellReference.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandAddWorksheet.h"
 #include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/PropertyFlags.h"
-#include "CoreTools/TextParsing/SimpleCSV/Flags/SheetFlags.h"
-#include "CoreTools/TextParsing/SimpleCSV/Flags/ValueTypeFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/Row.h"
-#include "CoreTools/TextParsing/SimpleCSV/RowDataIterator.h"
-#include "CoreTools/TextParsing/SimpleCSV/RowDataRange.h"
-#include "CoreTools/TextParsing/SimpleCSV/RowRange.h"
 #include "CoreTools/TextParsing/SimpleCSV/Worksheet.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 
 using namespace std::literals;
-using std::string;
-using std::stringstream;
-using std::vector;
 
 CoreTools::AppPropertiesTesting::AppPropertiesTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -48,11 +38,12 @@ void CoreTools::AppPropertiesTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AppendSheetNameTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DeleteSheetNameTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SetSheetNameTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PropertyTest);
 }
 
 void CoreTools::AppPropertiesTesting::AppendSheetNameTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
     auto worksheetNames = workbook.GetWorksheetNames();
@@ -69,7 +60,7 @@ void CoreTools::AppPropertiesTesting::AppendSheetNameTest()
 
 void CoreTools::AppPropertiesTesting::DeleteSheetNameTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
     auto worksheetNames = workbook.GetWorksheetNames();
@@ -86,11 +77,11 @@ void CoreTools::AppPropertiesTesting::DeleteSheetNameTest()
 
 void CoreTools::AppPropertiesTesting::SetSheetNameTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
-    auto worksheetNames = workbook.GetWorksheetNames();
-    auto worksheetName = worksheetNames.at(0);
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
     auto worksheet = workbook.GetWorksheet(worksheetName);
 
     worksheet.SetName("sheetName"s);
@@ -99,7 +90,7 @@ void CoreTools::AppPropertiesTesting::SetSheetNameTest()
 
 void CoreTools::AppPropertiesTesting::PropertyTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     document->SetProperty(SimpleCSV::Property::Company, "TCRE"s);
 

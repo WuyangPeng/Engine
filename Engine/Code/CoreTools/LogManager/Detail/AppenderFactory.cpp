@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 22:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 14:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,15 +15,12 @@
 #include "AppenderFileConfiguration.h"
 #include "AppenderImpl.h"
 
-using std::make_shared;
-
-// static
-CoreTools::AppenderFactory::AppenderImplSharedPtr CoreTools::AppenderFactory::Create(AppenderPrint appenderFlags, LogLevel logLevel)
+CoreTools::AppenderFactory::AppenderImplSharedPtr CoreTools::AppenderFactory::Create(AppenderPrint appenderFlags,
+                                                                                     LogLevel logLevel)
 {
-    return make_shared<AppenderConsole>(appenderFlags, logLevel);
+    return std::make_shared<AppenderConsole>(appenderFlags, logLevel);
 }
 
-// static
 CoreTools::AppenderFactory::AppenderImplSharedPtr CoreTools::AppenderFactory::Create(const String& directory,
                                                                                      const String& fileName,
                                                                                      AppenderPrint appenderFlags,

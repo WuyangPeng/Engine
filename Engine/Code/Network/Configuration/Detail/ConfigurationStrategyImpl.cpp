@@ -179,9 +179,7 @@ int Network::ConfigurationStrategyImpl::GetBufferSize() const
     }
     catch (...)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-            << SYSTEM_TEXT("BufferSizeÎ´ÅäÖÃ¡£")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("BufferSizeÎ´ÅäÖÃ¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     constexpr auto defaultBufferSize = 1024;

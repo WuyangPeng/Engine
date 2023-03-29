@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.2 (2023/02/18 18:29)
+///	引擎版本：0.9.0.4 (2023/03/23 15:47)
 
 #ifndef CORE_TOOLS_HELPER_GET_REQUIRED_BITS_H
 #define CORE_TOOLS_HELPER_GET_REQUIRED_BITS_H

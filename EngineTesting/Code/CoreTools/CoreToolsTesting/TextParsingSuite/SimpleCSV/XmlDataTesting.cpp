@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:44)
+///	引擎测试版本：0.9.0.4 (2023/03/08 16:46)
 
 #include "XmlDataTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -38,18 +38,18 @@ void CoreTools::XmlDataTesting::MainTest()
 
 void CoreTools::XmlDataTesting::XmlDataTest()
 {
-    auto xmlPath = "[Content_Types].xml"s;
-    auto xmlID = "[Content_Types].xml"s;
-    constexpr auto contentType = SimpleCSV::ContentType::Chartsheet;
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-    SimpleCSV::XmlData xmlData{ document, xmlPath, xmlID, contentType };
+    const auto xmlPath = "[Content_Types].xml"s;
+    const auto xmlId = "[Content_Types].xml"s;
+    constexpr auto contentType = SimpleCSV::ContentType::ChartSheet;
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    SimpleCSV::XmlData xmlData{ document, xmlPath, xmlId, contentType };
 
     ASSERT_EQUAL(xmlData.GetParentDocument().lock(), document);
 
     auto rawData0 = xmlData.GetRawData();
     ASSERT_UNEQUAL(rawData0.find("ContentType"s), System::String::npos);
     ASSERT_UNEQUAL_NULL_PTR(xmlData.GetXmlDocument());
-    ASSERT_EQUAL(xmlData.GetXmlID(), xmlID);
+    ASSERT_EQUAL(xmlData.GetXmlId(), xmlId);
     ASSERT_EQUAL(xmlData.GetXmlPath(), xmlPath);
     ASSERT_ENUM_EQUAL(xmlData.GetXmlType(), contentType);
     xmlData.SetRawData(document->ExtractXmlFromArchive("_rels/.rels"s));
@@ -59,16 +59,16 @@ void CoreTools::XmlDataTesting::XmlDataTest()
 
 void CoreTools::XmlDataTesting::ConstXmlDataTest()
 {
-    auto xmlPath = "[Content_Types].xml"s;
-    auto xmlID = "[Content_Types].xml"s;
-    constexpr auto contentType = SimpleCSV::ContentType::Chartsheet;
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-    const SimpleCSV::XmlData xmlData{ document, xmlPath, xmlID, contentType };
+    const auto xmlPath = "[Content_Types].xml"s;
+    const auto xmlId = "[Content_Types].xml"s;
+    constexpr auto contentType = SimpleCSV::ContentType::ChartSheet;
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const SimpleCSV::XmlData xmlData{ document, xmlPath, xmlId, contentType };
 
     const auto rawData1 = xmlData.GetRawData();
     ASSERT_UNEQUAL(rawData1.find("ContentType"s), System::String::npos);
     ASSERT_UNEQUAL_NULL_PTR(xmlData.GetXmlDocument());
-    ASSERT_EQUAL(xmlData.GetXmlID(), xmlID);
+    ASSERT_EQUAL(xmlData.GetXmlId(), xmlId);
     ASSERT_EQUAL(xmlData.GetXmlPath(), xmlPath);
     ASSERT_ENUM_EQUAL(xmlData.GetXmlType(), contentType);
 }

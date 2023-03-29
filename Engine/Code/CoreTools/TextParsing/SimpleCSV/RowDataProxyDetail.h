@@ -1,32 +1,32 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/18 21:28)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/14 09:10)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ROW_DATA_PROXY_DETAIL_H
 #define CORE_TOOLS_TEXT_PARSING_ROW_DATA_PROXY_DETAIL_H
 
+#include "Cell.h"
 #include "CellValueProxy.h"
 #include "Constants.h"
 #include "RowDataProxy.h"
+#include "RowDataRange.h"
 #include "SimpleCSVException.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 
-template <typename T,
-          typename std::enable_if_t<!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> &&
-                                        CoreTools::TextParsing::RowDataProxyConditionType<T>::value,
-                                    T>*>
+template <typename T, std::enable_if_t<!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<T>::value, T>*>
 CoreTools::SimpleCSV::RowDataProxy& CoreTools::SimpleCSV::RowDataProxy::operator=(const T& rhs)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (g_MaxColumns < rhs.size())
+    if (gMaxColumns < rhs.size())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Overflow, SYSTEM_TEXT("容器大小超过最大列数。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Overflow, SYSTEM_TEXT("容器大小超过最大列数。"s))
     }
 
     if (!rhs.empty())
@@ -44,10 +44,7 @@ CoreTools::SimpleCSV::RowDataProxy& CoreTools::SimpleCSV::RowDataProxy::operator
     return *this;
 }
 
-template <typename T,
-          typename std::enable_if_t<!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> &&
-                                        CoreTools::TextParsing::RowDataProxyConditionType<T>::value,
-                                    T>*>
+template <typename T, std::enable_if_t<!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<T>::value, T>*>
 void CoreTools::SimpleCSV::RowDataProxy::SetCellValue(const T& rhs)
 {
     auto size = boost::numeric_cast<int>(rhs.size());
@@ -60,27 +57,26 @@ void CoreTools::SimpleCSV::RowDataProxy::SetCellValue(const T& rhs)
     }
 }
 
-template <typename T,
-          typename std::enable_if_t<!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> &&
-                                        CoreTools::TextParsing::RowDataProxyConditionType<T>::value,
-                                    T>*>
+template <typename T, std::enable_if_t<!std::is_same_v<T, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<T>::value, T>*>
 void CoreTools::SimpleCSV::RowDataProxy::SetContainer(const T& rhs)
 {
     RowDataRange range{ GetDocument(), GetRowNode(), 1, boost::numeric_cast<int>(rhs.size()), GetSharedStrings() };
 
     auto target = range.begin();
-    auto source = rhs.begin();
-
-    for (; source != rhs.end() && target != range.end(); ++source, ++target)
+    for (const auto& source : rhs)
     {
-        target->GetValue() = *source;
-    } 
+        if (target == range.end())
+        {
+            break;
+        }
+
+        target->GetValue() = source;
+
+        ++target;
+    }
 }
 
-template <typename Container,
-          typename std::enable_if_t<!std::is_same_v<Container, CoreTools::SimpleCSV::RowDataProxy> &&
-                                        CoreTools::TextParsing::RowDataProxyConditionType<Container>::value,
-                                    Container>*>
+template <typename Container, std::enable_if_t<!std::is_same_v<Container, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<Container>::value, Container>*>
 CoreTools::SimpleCSV::RowDataProxy::operator Container() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
@@ -88,16 +84,12 @@ CoreTools::SimpleCSV::RowDataProxy::operator Container() const
     return ConvertContainer<Container>();
 }
 
-template <typename Container,
-          typename std::enable_if_t<!std::is_same_v<Container, CoreTools::SimpleCSV::RowDataProxy> &&
-                                        CoreTools::TextParsing::RowDataProxyConditionType<Container>::value,
-                                    Container>*>
+template <typename Container, std::enable_if_t<!std::is_same_v<Container, CoreTools::SimpleCSV::RowDataProxy> && CoreTools::TextParsing::RowDataProxyConditionType<Container>::value, Container>*>
 Container CoreTools::SimpleCSV::RowDataProxy::ConvertContainer() const
 {
     Container container{};
 
-    auto iter = std::inserter(container, container.end());
-    for (const auto& value : GetValues())
+    for (auto iter = std::inserter(container, container.end()); const auto& value : GetValues())
     {
         if constexpr (std::is_same_v<typename Container::value_type, CellValue>)
         {

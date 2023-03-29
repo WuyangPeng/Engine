@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/03/02 10:33)
+///	引擎版本：0.9.0.4 (2023/03/23 15:36)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -78,7 +78,6 @@ System::String CoreTools::EnvironmentImpl::GetPathReadingAndWriting(const String
     return GetPath(fileName, SYSTEM_TEXT("r+"s));
 }
 
-// private
 System::String CoreTools::EnvironmentImpl::GetPath(const String& fileName, const String& attributes) const
 {
     for (const auto& path : directories)
@@ -103,11 +102,7 @@ bool CoreTools::EnvironmentImpl::IsFileInPathExist(const String& decorated, cons
     {
         if (const auto result = System::CloseCFile(file); !result)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-                << SYSTEM_TEXT("文件")
-                << decorated
-                << SYSTEM_TEXT("关闭失败！")
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("文件"), decorated, SYSTEM_TEXT("关闭失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
 
         return true;

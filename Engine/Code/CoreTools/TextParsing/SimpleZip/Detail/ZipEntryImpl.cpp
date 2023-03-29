@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:37)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 14:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,12 +18,9 @@
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
 #include <gsl/span>
-
-using std::string;
 
 CoreTools::SimpleZip::ZipEntryImpl::ZipEntryImpl(const ZipEntryInfo& info)
     : entryInfo{ info }, entryData{}, isModified{ false }
@@ -34,36 +31,36 @@ CoreTools::SimpleZip::ZipEntryImpl::ZipEntryImpl(const ZipEntryInfo& info)
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::SimpleZip::ZipEntryImpl::ZipEntryImpl(const string& name, const ZipEntryData& data)
-    : entryInfo{ CreateInfo(name) }, entryData{ data }, isModified{ true }
+CoreTools::SimpleZip::ZipEntryImpl::ZipEntryImpl(const std::string& name, ZipEntryData data)
+    : entryInfo{ CreateInfo(name) }, entryData{ std::move(data) }, isModified{ true }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 // private
-CoreTools::SimpleZip::ZipEntryInfo CoreTools::SimpleZip::ZipEntryImpl::CreateInfo(const string& fileName)
+CoreTools::SimpleZip::ZipEntryInfo CoreTools::SimpleZip::ZipEntryImpl::CreateInfo(const std::string& fileName)
 {
     ZipEntryInfo info{};
 
     info.m_file_index = boost::numeric_cast<mz_uint32>(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::ZipFile));
     info.m_time = System::GetTimeInSeconds();
-    info.m_is_directory = (fileName.back() == TextParsing::g_ForwardSlash);
+    info.m_is_directory = (fileName.back() == TextParsing::gForwardSlash);
     info.m_is_encrypted = false;
     info.m_is_supported = true;
 
     if (MZ_ZIP_MAX_ARCHIVE_FILENAME_SIZE <= fileName.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("复制文件名失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("复制文件名失败。"s))
     }
 
-    const gsl::span<char, MZ_ZIP_MAX_ARCHIVE_FILENAME_SIZE> span{ info.m_filename };
+    const gsl::span span{ info.m_filename };
 
-    std::copy(fileName.cbegin(), fileName.cend(), span.begin());
+    const auto result = std::ranges ::copy(fileName, span.begin());
 
     return info;
 }
 
-CoreTools::SimpleZip::ZipEntryImpl::ZipEntryImpl(const string& name, const string& data)
+CoreTools::SimpleZip::ZipEntryImpl::ZipEntryImpl(const std::string& name, const std::string& data)
     : entryInfo{ CreateInfo(name) }, entryData{ data.begin(), data.end() }, isModified{ true }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -92,14 +89,14 @@ bool CoreTools::SimpleZip::ZipEntryImpl::IsEntryDataEmpty() const noexcept
     return entryData.empty();
 }
 
-string CoreTools::SimpleZip::ZipEntryImpl::GetDataAsString() const
+std::string CoreTools::SimpleZip::ZipEntryImpl::GetDataAsString() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return string{ entryData.begin(), entryData.end() };
+    return std::string{ entryData.begin(), entryData.end() };
 }
 
-void CoreTools::SimpleZip::ZipEntryImpl::SetData(const string& data)
+void CoreTools::SimpleZip::ZipEntryImpl::SetData(const std::string& data)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -116,31 +113,31 @@ void CoreTools::SimpleZip::ZipEntryImpl::SetData(const ZipEntryData& data)
     isModified = true;
 }
 
-string CoreTools::SimpleZip::ZipEntryImpl::GetFileName() const
+std::string CoreTools::SimpleZip::ZipEntryImpl::GetFileName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26485)
 
-    return string{ entryInfo.m_filename };
+    return std::string{ entryInfo.m_filename };
 
 #include STSTEM_WARNING_POP
 }
 
-void CoreTools::SimpleZip::ZipEntryImpl::SetFileName(const string& name)
+void CoreTools::SimpleZip::ZipEntryImpl::SetFileName(const std::string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     if (MZ_ZIP_MAX_ARCHIVE_FILENAME_SIZE <= name.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("复制文件名失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("复制文件名失败。"s))
     }
 
-    const gsl::span<char, MZ_ZIP_MAX_ARCHIVE_FILENAME_SIZE> span{ entryInfo.m_filename };
+    const gsl::span span{ entryInfo.m_filename };
 
-    std::fill(std::begin(entryInfo.m_filename), std::end(entryInfo.m_filename), '\0');
-    std::copy(name.cbegin(), name.cend(), span.begin());
+    std::ranges::fill(entryInfo.m_filename, '\0');
+    const auto result = std::ranges::copy(name, span.begin());
 }
 
 uint32_t CoreTools::SimpleZip::ZipEntryImpl::GetIndex() const noexcept
@@ -185,14 +182,14 @@ bool CoreTools::SimpleZip::ZipEntryImpl::IsSupported() const noexcept
     return entryInfo.m_is_supported;
 }
 
-string CoreTools::SimpleZip::ZipEntryImpl::GetComment() const
+std::string CoreTools::SimpleZip::ZipEntryImpl::GetComment() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26485)
 
-    return string{ entryInfo.m_comment };
+    return std::string{ entryInfo.m_comment };
 
 #include STSTEM_WARNING_POP
 }
@@ -225,7 +222,7 @@ void CoreTools::SimpleZip::ZipEntryImpl::ResizeZipEntryData(int uncompressedSize
     entryData.resize(uncompressedSize);
 }
 
-void CoreTools::SimpleZip::ZipEntryImpl::ReaderExtractFileToMem(mz_zip_archive* archive, const string& name) noexcept
+void CoreTools::SimpleZip::ZipEntryImpl::ReaderExtractFileToMem(mz_zip_archive* archive, const std::string& name) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

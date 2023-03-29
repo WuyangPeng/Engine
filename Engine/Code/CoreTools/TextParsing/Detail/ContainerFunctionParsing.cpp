@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:55)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:36)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,9 +22,7 @@
 
 CoreTools::ContainerFunctionParsing::ContainerFunctionParsingUniquePtr CoreTools::ContainerFunctionParsing::Create(const CSVHead& csvHead, const String& keyTypeDescribe)
 {
-    const CSVFormatType csvFormatType = csvHead.GetCSVFormatType();
-
-    switch (csvFormatType)
+    switch (const CSVFormatType csvFormatType = csvHead.GetCSVFormatType(); csvFormatType)
     {
         case CSVFormatType::Vector:
         {
@@ -51,8 +49,8 @@ CoreTools::ContainerFunctionParsing::ContainerFunctionParsingUniquePtr CoreTools
     }
 }
 
-CoreTools::ContainerFunctionParsing::ContainerFunctionParsing(const CSVHead& csvHead, const String& keyTypeDescribe)
-    : ParentType{ 2 }, m_CSVHead{ csvHead }, keyTypeDescribe{ keyTypeDescribe }
+CoreTools::ContainerFunctionParsing::ContainerFunctionParsing(CSVHead csvHead, String keyTypeDescribe) noexcept
+    : ParentType{ 2 }, keyTypeDescribe{ std::move(keyTypeDescribe) }, head{ std::move(csvHead) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -64,11 +62,11 @@ System::String CoreTools::ContainerFunctionParsing::GenerateParsing() const
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     auto content = GenerateIndentation(-1);
-    content += TextParsing::g_Private;
+    content += TextParsing::gPrivate;
 
     content += GenerateIndentation();
-    content += TextParsing::g_ParsingFunction;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gParsingFunction;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -77,7 +75,7 @@ CoreTools::CSVHead CoreTools::ContainerFunctionParsing::GetCSVHead() const noexc
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CSVHead;
+    return head;
 }
 
 System::String CoreTools::ContainerFunctionParsing::GetKeyTypeDescribe() const
@@ -93,13 +91,13 @@ System::String CoreTools::ContainerFunctionParsing::GenerateBaseGetFirst() const
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_NodiscardConst;
-    content += m_CSVHead.GetCSVClassName();
-    content += TextParsing::g_Base;
-    content += TextParsing::g_GetFirstSharedPtr;
-    content += m_CSVHead.GetCSVClassName();
-    content += TextParsing::g_FunctionConst;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gNodiscardConst;
+    content += head.GetCSVClassName();
+    content += TextParsing::gBase;
+    content += TextParsing::gGetFirstSharedPtr;
+    content += head.GetCSVClassName();
+    content += TextParsing::gFunctionConst;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -109,8 +107,8 @@ System::String CoreTools::ContainerFunctionParsing::GenerateGetContainer() const
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     auto content = GenerateIndentation();
-    content += TextParsing::g_GetContainerConst;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gGetContainerConst;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -122,16 +120,16 @@ System::String CoreTools::ContainerFunctionParsing::GenerateBaseGetFirstTemplate
     const auto csvHead = GetCSVHead();
 
     auto content = GenerateIndentation();
-    content += TextParsing::g_FunctionTemplate;
+    content += TextParsing::gFunctionTemplate;
 
     content += GenerateIndentation();
-    content += TextParsing::g_NodiscardConst;
+    content += TextParsing::gNodiscardConst;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_Base;
-    content += TextParsing::g_GetFirstSharedPtr;
+    content += TextParsing::gBase;
+    content += TextParsing::gGetFirstSharedPtr;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_FunctionParameter;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gFunctionParameter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -143,13 +141,13 @@ System::String CoreTools::ContainerFunctionParsing::GenerateBaseGetTemplate() co
     const auto csvHead = GetCSVHead();
 
     auto content = GenerateIndentation();
-    content += TextParsing::g_FunctionTemplate;
+    content += TextParsing::gFunctionTemplate;
 
     content += GenerateIndentation();
-    content += TextParsing::g_GetContainer;
+    content += TextParsing::gGetContainer;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_FunctionParameter;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gFunctionParameter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -161,14 +159,14 @@ System::String CoreTools::ContainerFunctionParsing::GenerateBaseGet() const
     const auto csvHead = GetCSVHead();
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_NodiscardConst;
+    content += TextParsing::gNodiscardConst;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_Base;
-    content += TextParsing::g_GetSharedPtr;
+    content += TextParsing::gBase;
+    content += TextParsing::gGetSharedPtr;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_LeftBrackets;
+    content += TextParsing::gLeftBrackets;
     content += GetKeyTypeDescribe();
-    content += TextParsing::g_KeyConst;
+    content += TextParsing::gKeyConst;
 
     return content;
 }

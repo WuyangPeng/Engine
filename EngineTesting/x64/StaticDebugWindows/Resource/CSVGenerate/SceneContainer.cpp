@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #include "Scene.h"
@@ -15,8 +15,6 @@
 #include "CoreTools/TextParsing/CSV/CSVRow.h"
 
 #include <algorithm>
-
-using std::make_shared;
 
 CSVConfigure::SceneContainer::SceneContainer(const CoreTools::CSVContent& csvContent)
     : scene{}
@@ -33,15 +31,12 @@ void CSVConfigure::SceneContainer::Parsing(const CoreTools::CSVContent& csvConte
     {
         CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
 
-        auto sceneBase = make_shared<Scene>(csvRow);
+        auto sceneBase = std::make_shared<Scene>(csvRow);
 
         if (!scene.emplace(sceneBase->GetKey(), sceneBase).second)
         {
 
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, User)
-                << SYSTEM_TEXT("scene表存在重复主键：")
-                << sceneBase->GetKey()
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("scene表存在重复主键："), sceneBase->GetKey(), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }
@@ -54,7 +49,7 @@ CSVConfigure::SceneContainer::ConstSceneSharedPtr CSVConfigure::SceneContainer::
 
     if (scene.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("scene表为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("scene表为空。"s))
     }
     else
     {
@@ -74,7 +69,7 @@ CSVConfigure::SceneContainer::ConstSceneSharedPtr CSVConfigure::SceneContainer::
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("scene表未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("scene表未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s))
     }
 }
 

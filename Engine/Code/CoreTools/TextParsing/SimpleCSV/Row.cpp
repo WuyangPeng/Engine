@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:27)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 13:53)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,14 +14,12 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::make_shared;
-
 CoreTools::SimpleCSV::Row::RowSharedPtr CoreTools::SimpleCSV::Row::CreateRow(const ConstXMLDocumentSharedPtr& document)
 {
     return make_shared<Row>(document, RowCreate::Init);
 }
 
-CoreTools::SimpleCSV::Row::RowSharedPtr CoreTools::SimpleCSV::Row::CreateRow(const ConstXMLDocumentSharedPtr& document, const XMLNode& rowNode, SharedStringsSharedPtr sharedStrings)
+CoreTools::SimpleCSV::Row::RowSharedPtr CoreTools::SimpleCSV::Row::CreateRow(const ConstXMLDocumentSharedPtr& document, const XMLNode& rowNode, const SharedStringsSharedPtr& sharedStrings)
 {
     auto row = CreateRow(document);
     row->impl->Init(row, rowNode, sharedStrings);
@@ -29,9 +27,11 @@ CoreTools::SimpleCSV::Row::RowSharedPtr CoreTools::SimpleCSV::Row::CreateRow(con
     return row;
 }
 
-CoreTools::SimpleCSV::Row::Row(const ConstXMLDocumentSharedPtr& document, MAYBE_UNUSED RowCreate cellCreate)
+CoreTools::SimpleCSV::Row::Row(const ConstXMLDocumentSharedPtr& document, RowCreate cellCreate)
     : impl{ document }
 {
+    System::UnusedFunction(cellCreate);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 

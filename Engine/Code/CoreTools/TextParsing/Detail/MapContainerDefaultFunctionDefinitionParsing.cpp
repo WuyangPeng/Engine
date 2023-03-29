@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:09)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,6 +16,8 @@
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
+
+using namespace std::literals;
 
 CoreTools::MapContainerDefaultFunctionDefinitionParsing::MapContainerDefaultFunctionDefinitionParsing(const CSVHead& csvHead, const String& className)
     : ParentType{ csvHead, className }
@@ -48,12 +50,12 @@ System::String CoreTools::MapContainerDefaultFunctionDefinitionParsing::Generate
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     auto content = GenerateFunctionBeginBrackets(2);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += GenerateWarnLog(3);
-    content += GenerateRepeatKey(4, TextParsing::g_RepeatKeyHint);
+    content += GenerateRepeatKey(0, TextParsing::gRepeatKeyHint);
     content += GenerateGetKey();
-    content += GenerateLogAssert(4);
+    content += GenerateLogAssert(0);
 
     content += GenerateFunctionEndBrackets(2);
 
@@ -68,13 +70,13 @@ System::String CoreTools::MapContainerDefaultFunctionDefinitionParsing::Generate
 
     const auto csvHead = GetCSVHead();
 
-    content += TextParsing::g_Auto;
+    content += TextParsing::gAuto;
     content += GetLowerClassName();
-    content += TextParsing::g_Base;
-    content += TextParsing::g_MakeShared;
+    content += TextParsing::gBase;
+    content += TextParsing::gMakeShared;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_CSVRowParameter;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gCSVRowParameter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -87,15 +89,15 @@ System::String CoreTools::MapContainerDefaultFunctionDefinitionParsing::Generate
 
     const auto name = GetLowerClassName();
 
-    content += TextParsing::g_IfNot;
+    content += TextParsing::gIfNot;
     content += name;
-    content += TextParsing::g_Emplace;
+    content += TextParsing::gEmplace;
     content += name;
-    content += TextParsing::g_BaseGetKey;
-    content += TextParsing::g_Comma;
-    content += TextParsing::g_Space;
+    content += TextParsing::gBaseGetKey;
+    content += TextParsing::gComma;
+    content += TextParsing::gSpace;
     content += name;
-    content += TextParsing::g_BaseSecond;
+    content += TextParsing::gBaseSecond;
 
     return content;
 }
@@ -104,12 +106,10 @@ System::String CoreTools::MapContainerDefaultFunctionDefinitionParsing::Generate
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = GenerateIndentation(4);
+    auto content = SYSTEM_TEXT(", "s);
 
-    content += TextParsing::g_Left;
     content += GetLowerClassName();
-    content += TextParsing::g_BaseGetKey;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gBaseGetKey;
 
     return content;
 }

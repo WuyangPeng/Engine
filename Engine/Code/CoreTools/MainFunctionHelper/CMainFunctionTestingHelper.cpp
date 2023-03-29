@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/29 22:30)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 16:43)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,22 +17,20 @@
 #include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
-using std::string;
-
 CoreTools::CMainFunctionTestingHelper::CMainFunctionTestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv }, testingInformationHelper{ TestingInformationHelper::Create() }, m_Suite{ string{}, GetStreamShared(), IsPrintRun() }
+    : ParentType{ argc, argv }, testingInformationHelper{ TestingInformationHelper::Create() }, suite{ std::string{}, GetStreamShared(), IsPrintRun() }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::CMainFunctionTestingHelper::CMainFunctionTestingHelper(int argc, char** argv, const string& suiteName)
-    : ParentType{ argc, argv }, testingInformationHelper{ TestingInformationHelper::Create() }, m_Suite{ suiteName, GetStreamShared(), IsPrintRun() }
+CoreTools::CMainFunctionTestingHelper::CMainFunctionTestingHelper(int argc, char** argv, const std::string& suiteName)
+    : ParentType{ argc, argv }, testingInformationHelper{ TestingInformationHelper::Create() }, suite{ suiteName, GetStreamShared(), IsPrintRun() }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::CMainFunctionTestingHelper::CMainFunctionTestingHelper(CMainFunctionTestingHelper&& rhs) noexcept
-    : ParentType{ std::move(rhs) }, testingInformationHelper{ std::move(rhs.testingInformationHelper) }, m_Suite{ std::move(rhs.m_Suite) }
+    : ParentType{ std::move(rhs) }, testingInformationHelper{ std::move(rhs.testingInformationHelper) }, suite{ std::move(rhs.suite) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -43,10 +41,10 @@ CoreTools::CMainFunctionTestingHelper& CoreTools::CMainFunctionTestingHelper::op
 
     if (this != &rhs)
     {
-        ParentType::operator=(std::move(rhs));
-
         testingInformationHelper = std::move(rhs.testingInformationHelper);
-        m_Suite = std::move(rhs.m_Suite);
+        suite = std::move(rhs.suite);
+
+        ParentType::operator=(std::move(rhs));
     }
 
     return *this;
@@ -59,24 +57,20 @@ CoreTools::CMainFunctionTestingHelper::~CMainFunctionTestingHelper()
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CMainFunctionTestingHelper)
 
-void CoreTools::CMainFunctionTestingHelper::AddTest(const string& suiteName, Suite& suite, const string& testName, const UnitTestSharedPtr& unitTest)
+void CoreTools::CMainFunctionTestingHelper::AddTest(const std::string& suiteName, Suite& aSuite, const std::string& testName, const UnitTestSharedPtr& unitTest)
 {
     try
     {
-        const auto testLoopCount = testingInformationHelper.GetLoopCount(suiteName, testName);
-
-        if (0 < testLoopCount)
+        if (const auto testLoopCount = testingInformationHelper.GetLoopCount(suiteName, testName); 0 < testLoopCount)
         {
             unitTest->SetTestLoopCount(testLoopCount);
             unitTest->SetRandomSeed(testingInformationHelper.GetRandomSeed());
-            suite.AddTest(unitTest);
+            aSuite.AddTest(unitTest);
         }
     }
     catch (const Error& error)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-            << error
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -89,17 +83,17 @@ bool CoreTools::CMainFunctionTestingHelper::IsPrintRun() const noexcept
 
 int CoreTools::CMainFunctionTestingHelper::RunSuite()
 {
-    m_Suite.RunUnitTest();
+    suite.RunUnitTest();
     SystemPause();
-    m_Suite.PrintReport();
+    suite.PrintReport();
     SystemPause();
 
-    return m_Suite.GetFailedNumber();
+    return suite.GetFailedNumber();
 }
 
-void CoreTools::CMainFunctionTestingHelper::AddSuite(const Suite& suite)
+void CoreTools::CMainFunctionTestingHelper::AddSuite(const Suite& aSuite)
 {
-    m_Suite.AddSuite(suite);
+    suite.AddSuite(aSuite);
 }
 
 int CoreTools::CMainFunctionTestingHelper::DoRun()
@@ -107,7 +101,7 @@ int CoreTools::CMainFunctionTestingHelper::DoRun()
     return RunSuite();
 }
 
-CoreTools::Suite CoreTools::CMainFunctionTestingHelper::GenerateSuite(const string& name)
+CoreTools::Suite CoreTools::CMainFunctionTestingHelper::GenerateSuite(const std::string& name) const
 {
     return Suite{ name, GetStreamShared(), IsPrintRun() };
 }

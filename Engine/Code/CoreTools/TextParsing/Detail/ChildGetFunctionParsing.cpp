@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:54)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:33)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -70,13 +70,12 @@ System::String CoreTools::ChildGetFunctionParsing::GenerateChildGetFunction(int 
         content += GenerateArray(actualType, valueType, functionVariableName);
     }
 
-    const auto mapping = csvHead.GetMapping(index);
-    if (!mapping.empty())
+    if (const auto mapping = csvHead.GetMapping(index); !mapping.empty())
     {
         content += GenerateMapping(index, mapping);
     }
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -87,11 +86,11 @@ System::String CoreTools::ChildGetFunctionParsing::GenerateGetKey() const
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_Nodiscard;
+    content += TextParsing::gNodiscard;
     content += GetKeyTypeDescribe();
-    content += TextParsing::g_GetKeyConstOverride;
+    content += TextParsing::gGetKeyConstOverride;
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -101,13 +100,13 @@ System::String CoreTools::ChildGetFunctionParsing::GenerateChecking() const
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     auto content = GenerateIndentation(-1);
-    content += TextParsing::g_Private;
+    content += TextParsing::gPrivate;
 
     content += GenerateIndentation();
-    content += TextParsing::g_Void;
-    content += TextParsing::g_Checking;
-    content += TextParsing::g_SemicolonNewline;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gVoid;
+    content += TextParsing::gCheckingConst;
+    content += TextParsing::gSemicolonNewline;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -118,18 +117,18 @@ System::String CoreTools::ChildGetFunctionParsing::GenerateFunctionVariableName(
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_Nodiscard;
+    content += TextParsing::gNodiscard;
     content += actualType;
-    content += TextParsing::g_Space;
+    content += TextParsing::gSpace;
     content += functionVariableName;
-    content += TextParsing::g_FunctionConst;
+    content += TextParsing::gFunctionConst;
 
     if (CSVDataType::Bool <= dataType && dataType <= CSVDataType::IntVector4)
     {
-        content += TextParsing::g_Noexcept;
+        content += TextParsing::gNoexcept;
     }
 
-    content += TextParsing::g_Override;
+    content += TextParsing::gOverride;
 
     return content;
 }
@@ -138,11 +137,11 @@ System::String CoreTools::ChildGetFunctionParsing::GenerateArray(const String& a
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = GenerateCountFunction(functionVariableName, TextParsing::g_Nodiscard, TextParsing::g_CountOverrideFunction);
+    auto content = GenerateCountFunction(functionVariableName, TextParsing::gNodiscard, TextParsing::gCountOverrideFunction);
 
-    content += GenerateGetValueFunction(valueType, functionVariableName, TextParsing::g_Nodiscard, TextParsing::g_IndexParameterOverride);
-    content += GenerateBeginIterFunction(actualType, functionVariableName, TextParsing::g_Nodiscard, TextParsing::g_BeginOverrideFunction);
-    content += GenerateEndIterFunction(actualType, functionVariableName, TextParsing::g_Nodiscard, TextParsing::g_EndOverrideFunction);
+    content += GenerateGetValueFunction(valueType, functionVariableName, TextParsing::gNodiscard, TextParsing::gIndexParameterOverride);
+    content += GenerateBeginIterFunction(actualType, functionVariableName, TextParsing::gNodiscard, TextParsing::gBeginOverrideFunction);
+    content += GenerateEndIterFunction(actualType, functionVariableName, TextParsing::gNodiscard, TextParsing::gEndOverrideFunction);
 
     return content;
 }
@@ -152,22 +151,22 @@ System::String CoreTools::ChildGetFunctionParsing::GenerateMapping(int index, co
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto csvHead = GetCSVHead();
-    auto upperVariableName = csvHead.GetUpperVariableName(index);
+    const auto upperVariableName = csvHead.GetUpperVariableName(index);
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_Nodiscard;
-    content += TextParsing::g_SharedPtrConst;
+    content += TextParsing::gNodiscard;
+    content += TextParsing::gSharedPtrConst;
     content += StringUtility::ToFirstLetterUpper(mapping);
-    content += TextParsing::g_RightAngleBracket;
-    content += TextParsing::g_Space;
-    content += TextParsing::g_Get;
+    content += TextParsing::gRightAngleBracket;
+    content += TextParsing::gSpace;
+    content += TextParsing::gGet;
     content += upperVariableName;
-    content += TextParsing::g_LeftBrackets;
-    content += TextParsing::g_Const;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gConst;
     content += csvHead.GetNameSpace();
-    content += TextParsing::g_ContainerParameter;
-    content += TextParsing::g_Override;
+    content += TextParsing::gContainerParameter;
+    content += TextParsing::gOverride;
 
     return content;
 }

@@ -14,8 +14,11 @@
 #include "System/Helper/PragmaWarning/Timer.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
+#include "CoreTools/LogManager/LogAsynchronous.h"
 #include "CoreTools/LogManager/LogConsoleTextColorsManager.h"
 #include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
+
+#include <sstream>
 
 using std::right;
 using std::setw;
@@ -37,7 +40,11 @@ void CoreTools::TimeReportOutput::PrintCurrentTime()
     auto nowTime = boost::posix_time::second_clock::local_time();
     auto formattingTime = timeDescribe + "时间："s + boost::posix_time::to_simple_string(nowTime);
 
-    GetStream() << setw(GetBorderLineLength()) << right << formattingTime;
+    std::stringstream ss{};
+
+    ss << setw(GetBorderLineLength()) << right << formattingTime;
+
+    LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), ss.str());
 }
 
 void CoreTools::TimeReportOutput::PrintCostTime(const CpuTimer& cpuTime)
@@ -59,8 +66,7 @@ void CoreTools::TimeReportOutput::PrintCostTime(const CpuTimer& cpuTime)
         logLevel = LogLevel::Warn;
     }
 
-    LogConsoleTextColorsManager manager{ GetStream(), logLevel };
-
     const auto costTime = timeDescribe + "时间：\n"s + cpuTime.format();
-    PrintString(costTime);
+
+    LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), costTime, logLevel);
 }

@@ -1,17 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 22:27)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 14:58)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "AppenderFile.h"
 #include "System/FileManager/FileTools.h"
-#include "System/SystemOutput/OutputDebugString.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/FileManager/OFStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -20,7 +19,6 @@
 #include "CoreTools/LogManager/LogMessagePrefix.h"
 #include "CoreTools/Time/CustomTime.h"
 
-using std::make_shared;
 using namespace std::literals;
 
 CoreTools::AppenderFile::AppenderFile(const String& directory,
@@ -29,32 +27,31 @@ CoreTools::AppenderFile::AppenderFile(const String& directory,
                                       LogLevel logLevel,
                                       int maxFileSize,
                                       bool backup,
-                                      const String& extensionName)
+                                      String extensionName)
     : ParentType{ appenderFlags, logLevel },
       directory{ directory },
       prefixName{ GetPrefixName(directory, fileName) },
-      extensionName{ extensionName },
-      fullName{ GetFullName(prefixName, extensionName) },
+      extensionName{ std::move(extensionName) },
       maxFileSize{ maxFileSize },
-      backup{ backup },
-      streamManager{}
+      backup{ backup }
 {
     Init(directory);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 void CoreTools::AppenderFile::Init(const String& newDirectory)
 {
     NewDirectory(newDirectory);
 
-    streamManager = make_shared<OFStreamManager>(fullName, true);
+    const auto fullName = GetFullName(prefixName, extensionName);
+    auto streamManager = make_shared<OFStreamManager>(fullName, true);
     streamManager->SetSimplifiedChinese();
 
-    if (IsExceedMaxSize(0))
+    if (IsExceedMaxSize(*streamManager, 0))
     {
-        BackupFile();
+        streamManager.reset();
+        BackupFile(fullName);
     }
 }
 
@@ -62,7 +59,7 @@ void CoreTools::AppenderFile::Init(const String& newDirectory)
 
 bool CoreTools::AppenderFile::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && 0 < maxFileSize && streamManager != nullptr)
+    if (ParentType::IsValid() && 0 < maxFileSize)
         return true;
     else
         return false;
@@ -77,56 +74,53 @@ CoreTools::AppenderType CoreTools::AppenderFile::GetAppenderType() const noexcep
     return AppenderType::File;
 }
 
-// private
-void CoreTools::AppenderFile::DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix)
+void CoreTools::AppenderFile::DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) const
 {
+    const auto fullName = GetFullName(prefixName, extensionName);
+
+    auto streamManager = make_shared<OFStreamManager>(fullName, true);
+    streamManager->SetSimplifiedChinese();
+
     const auto messageDescribe = message.GetMessageDescribe();
 
-    const auto fullMessage = prefix.GetPrefix() + messageDescribe + postfix.GetPostfix();
-
-    if (IsExceedMaxSize(fullMessage.size()))
+    if (const auto fullMessage = prefix.GetPrefix() + messageDescribe + postfix.GetPostfix();
+        IsExceedMaxSize(*streamManager, fullMessage.size()))
     {
-        BackupFile();
-    }
+        streamManager.reset();
+        BackupFile(fullName);
 
-    *streamManager << fullMessage;
+        OFStreamManager newStreamManager{ fullName, false };
+        newStreamManager.SetSimplifiedChinese();
+
+        newStreamManager << fullMessage;
+    }
+    else
+    {
+        *streamManager << fullMessage;
+    }
 }
 
-// private
-bool CoreTools::AppenderFile::IsExceedMaxSize(PosType increaseSize)
+bool CoreTools::AppenderFile::IsExceedMaxSize(const OFStreamManager& stream, PosType increaseSize) const
 {
-    const auto fileSize = streamManager->GetStreamSize();
+    const auto fileSize = stream.GetStreamSize();
 
     return (maxFileSize < fileSize + increaseSize);
 }
 
-// private
-void CoreTools::AppenderFile::BackupFile()
+void CoreTools::AppenderFile::BackupFile(const String& fullName) const
 {
     if (backup)
     {
-        const CoreTools::IFStreamManager manager{ fullName };
+        const IFStreamManager manager{ fullName };
         MAYBE_UNUSED const auto name = manager.BackupFile();
     }
-
-    streamManager = make_shared<OFStreamManager>(fullName, false);
-    streamManager->SetSimplifiedChinese();
 }
 
 const CoreTools::AppenderFile::AppenderImplSharedPtr CoreTools::AppenderFile::Clone() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return make_shared<ClassType>(*this);
-}
-
-void CoreTools::AppenderFile::Reload()
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    fullName = GetFullName(prefixName, extensionName);
-
-    streamManager = make_shared<OFStreamManager>(fullName, true);
+    return std::make_shared<ClassType>(*this);
 }
 
 System::String CoreTools::AppenderFile::GetFullName(const String& prefixName, const String& extensionName)

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 19:36)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/07 13:57)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ROW_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_ROW_IMPL_H
@@ -18,53 +18,50 @@
 #include "CoreTools/TextParsing/SimpleCSV/XmlParser.h"
 #include "CoreTools/TextParsing/TextParsingFwd.h"
 
-namespace CoreTools
+namespace CoreTools::SimpleCSV
 {
-    namespace SimpleCSV
+    class CORE_TOOLS_HIDDEN_DECLARE RowImpl final
     {
-        class CORE_TOOLS_HIDDEN_DECLARE RowImpl final
-        {
-        public:
-            using ClassType = RowImpl;
-            using SharedStringsSharedPtr = std::shared_ptr<SharedStrings>;
-            using RowSharedPtr = std::shared_ptr<Row>;
+    public:
+        using ClassType = RowImpl;
+        using SharedStringsSharedPtr = std::shared_ptr<SharedStrings>;
+        using RowSharedPtr = std::shared_ptr<Row>;
 
-        public:
-            explicit RowImpl(const ConstXMLDocumentSharedPtr& document);
-            RowImpl(const ConstXMLDocumentSharedPtr& document, const RowSharedPtr& row, const XMLNode& rowNode, const SharedStringsSharedPtr& sharedStrings);
+    public:
+        explicit RowImpl(const ConstXMLDocumentSharedPtr& document);
+        RowImpl(const ConstXMLDocumentSharedPtr& document, const RowSharedPtr& row, const XMLNode& rowNode, const SharedStringsSharedPtr& sharedStrings);
 
-            CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-            void Init(const RowSharedPtr& row, const XMLNode& rowNode, const SharedStringsSharedPtr& sharedStrings);
+        void Init(const RowSharedPtr& row, const XMLNode& aRowNode, const SharedStringsSharedPtr& aSharedStrings);
 
-            NODISCARD double GetHeight() const;
-            void SetHeight(double height);
-            NODISCARD double GetDescent() const;
-            void SetDescent(double descent);
-            NODISCARD bool IsHidden() const;
-            void SetHidden(bool state);
-            NODISCARD int GetRowNumber() const;
-            NODISCARD int GetCellCount() const;
-            NODISCARD RowDataProxy& GetValues() noexcept;
-            NODISCARD const RowDataProxy& GetValues() const noexcept;
-            NODISCARD RowDataRange GetCells() const;
-            NODISCARD RowDataRange GetCells(int cellCount) const;
-            NODISCARD RowDataRange GetCells(int firstCell, int lastCell) const;
-            NODISCARD XMLNode GetRowNode() const;
-            NODISCARD SharedStringsSharedPtr GetSharedStrings();
-            NODISCARD bool IsSame(const RowImpl& rhs) const;
-            NODISCARD bool IsLess(const RowImpl& rhs) const;
+        NODISCARD double GetHeight() const;
+        void SetHeight(double height);
+        NODISCARD double GetDescent() const;
+        void SetDescent(double descent);
+        NODISCARD bool IsHidden() const;
+        void SetHidden(bool state);
+        NODISCARD int GetRowNumber() const;
+        NODISCARD int GetCellCount() const;
+        NODISCARD RowDataProxy& GetValues() noexcept;
+        NODISCARD const RowDataProxy& GetValues() const noexcept;
+        NODISCARD RowDataRange GetCells() const;
+        NODISCARD RowDataRange GetCells(int cellCount) const;
+        NODISCARD RowDataRange GetCells(int firstCell, int lastCell) const;
+        NODISCARD XMLNode GetRowNode() const;
+        NODISCARD SharedStringsSharedPtr GetSharedStrings();
+        NODISCARD bool IsSame(const RowImpl& rhs) const;
+        NODISCARD bool IsLess(const RowImpl& rhs) const;
 
-        private:
-            using SharedStringsWeakPtr = std::weak_ptr<SharedStrings>;
+    private:
+        using SharedStringsWeakPtr = std::weak_ptr<SharedStrings>;
 
-        private:
-            ConstXMLDocumentWeakPtr m_Document;
-            XMLNode m_RowNode;
-            SharedStringsWeakPtr m_SharedStrings;
-            RowDataProxy m_RowDataProxy;
-        };
-    }
+    private:
+        ConstXMLDocumentWeakPtr document;
+        XMLNode rowNode;
+        SharedStringsWeakPtr sharedStrings;
+        RowDataProxy rowDataProxy;
+    };
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_ROW_IMPL_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:24)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 09:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,9 +13,7 @@
 #include "Utilities.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/Cell.h"
-#include "CoreTools/TextParsing/SimpleCSV/CellRange.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
-#include "CoreTools/TextParsing/SimpleCSV/Flags/IteratorFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
 CoreTools::SimpleCSV::RowDataRangeImpl::RowDataRangeImpl(const ConstXMLDocumentSharedPtr& document, const XMLNode& rowNode, int firstColumn, int lastColumn, const SharedStringsSharedPtr& sharedStrings)
@@ -27,7 +25,7 @@ CoreTools::SimpleCSV::RowDataRangeImpl::RowDataRangeImpl(const ConstXMLDocumentS
 {
     if (lastColumn < firstColumn)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Overflow, "lastColumn小于firstColumn。"s);
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Overflow, "lastColumn小于firstColumn。"s)
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -43,7 +41,7 @@ CoreTools::SimpleCSV::RowDataRangeImpl::SharedStringsSharedPtr CoreTools::Simple
 
     if (!sharedStringsSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("sharedStrings已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("sharedStrings已被释放。"s))
     }
 
     return sharedStringsSharedPtr;
@@ -55,7 +53,7 @@ CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::RowDataRangeImpl::GetRowNode
 
     if (document.expired())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s))
     }
 
     return rowNode;
@@ -90,7 +88,7 @@ CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr CoreTools::SimpleCSV::RowDataRan
 
     if (!documentSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s))
     }
 
     return documentSharedPtr;

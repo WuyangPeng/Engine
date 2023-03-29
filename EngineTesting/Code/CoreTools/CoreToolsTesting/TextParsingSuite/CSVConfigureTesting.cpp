@@ -1,20 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:46)
+///	引擎测试版本：0.9.0.4 (2023/03/10 10:14)
 
 #include "CSVConfigureTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/BatchConversionCSV.h"
-#include "CoreTools/TextParsing/CSV/CSVContent.h"
-#include "CoreTools/TextParsing/CSV/CSVGenerate.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
-#include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Toolset/CoreTools/CSVConfigure/CSVConfigure/CSVConfigureContainer.h"
 #include "Toolset/CoreTools/CSVConfigure/CSVConfigure/Chapter.h"
@@ -64,7 +61,7 @@ void CoreTools::CSVConfigureTesting::CreateCSV()
 
 void CoreTools::CSVConfigureTesting::CSVConfigureContainerTest()
 {
-    CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
+    const CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
 
     ASSERT_UNEQUAL_NULL_PTR(csvConfigureContainer.GetChapterContainer());
     ASSERT_UNEQUAL_NULL_PTR(csvConfigureContainer.GetEquipContainer());
@@ -76,9 +73,9 @@ void CoreTools::CSVConfigureTesting::CSVConfigureContainerTest()
 
 void CoreTools::CSVConfigureTesting::ChapterContainerTest()
 {
-    CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
+    const CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
 
-    auto chapterContainer = csvConfigureContainer.GetChapterContainer();
+    const auto chapterContainer = csvConfigureContainer.GetChapterContainer();
 
     auto firstChapter = chapterContainer->GetFirstChapter();
     ASSERT_UNEQUAL_NULL_PTR(firstChapter);
@@ -93,7 +90,7 @@ void CoreTools::CSVConfigureTesting::ChapterContainerTest()
         ASSERT_EQUAL(chapter->GetKey(), i);
     }
 
-    auto container = chapterContainer->GetContainer();
+    const auto container = chapterContainer->GetContainer();
     ASSERT_EQUAL(container.size(), 6u);
 
     for (const auto& chapter : container)
@@ -111,7 +108,7 @@ void CoreTools::CSVConfigureTesting::ChapterContainerTest()
     ASSERT_UNEQUAL_NULL_PTR(firstChapter);
     ASSERT_EQUAL(firstChapter->GetKey(), 10002);
 
-    auto chapter = chapterContainer->GetChapter([](const auto& value) noexcept {
+    const auto chapter = chapterContainer->GetChapter([](const auto& value) noexcept {
         if (10001 < value->GetKey() && value->GetKey() < 10004)
             return true;
         else
@@ -122,9 +119,9 @@ void CoreTools::CSVConfigureTesting::ChapterContainerTest()
 
 void CoreTools::CSVConfigureTesting::EquipContainerTest()
 {
-    CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
+    const CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
 
-    auto equipContainer = csvConfigureContainer.GetEquipContainer();
+    const auto equipContainer = csvConfigureContainer.GetEquipContainer();
 
     for (auto i = 10001; i < 10007; ++i)
     {
@@ -133,11 +130,11 @@ void CoreTools::CSVConfigureTesting::EquipContainerTest()
         ASSERT_EQUAL(equip.size(), 1u);
         ASSERT_EQUAL(equip.at(0)->GetKey(), i);
 
-        auto firstEquip = equipContainer->GetFirstEquip(i);
+        const auto firstEquip = equipContainer->GetFirstEquip(i);
         ASSERT_EQUAL(firstEquip->GetKey(), i);
     }
 
-    auto container = equipContainer->GetContainer();
+    const auto container = equipContainer->GetContainer();
     ASSERT_EQUAL(container.size(), 6u);
 
     for (const auto& equip : container)
@@ -145,7 +142,7 @@ void CoreTools::CSVConfigureTesting::EquipContainerTest()
         ASSERT_UNEQUAL_NULL_PTR(equip);
     }
 
-    auto firstEquip = equipContainer->GetFirstEquip([](const auto& value) noexcept {
+    const auto firstEquip = equipContainer->GetFirstEquip([](const auto& value) noexcept {
         if (10001 < value->GetKey() && value->GetKey() < 10004)
             return true;
         else
@@ -155,7 +152,7 @@ void CoreTools::CSVConfigureTesting::EquipContainerTest()
     ASSERT_UNEQUAL_NULL_PTR(firstEquip);
     ASSERT_EQUAL(firstEquip->GetKey(), 10002);
 
-    auto equip = equipContainer->GetEquip([](const auto& value) noexcept {
+    const auto equip = equipContainer->GetEquip([](const auto& value) noexcept {
         if (10001 < value->GetKey() && value->GetKey() < 10004)
             return true;
         else
@@ -166,9 +163,9 @@ void CoreTools::CSVConfigureTesting::EquipContainerTest()
 
 void CoreTools::CSVConfigureTesting::HeroContainerTest()
 {
-    CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
+    const CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
 
-    auto heroContainer = csvConfigureContainer.GetHeroContainer();
+    const auto heroContainer = csvConfigureContainer.GetHeroContainer();
 
     auto firstHero = heroContainer->GetFirstHero();
     ASSERT_UNEQUAL_NULL_PTR(firstHero);
@@ -183,7 +180,7 @@ void CoreTools::CSVConfigureTesting::HeroContainerTest()
         ASSERT_EQUAL(hero->GetKey(), i);
     }
 
-    auto container = heroContainer->GetContainer();
+    const auto container = heroContainer->GetContainer();
     ASSERT_EQUAL(container.size(), 6u);
 
     for (const auto& hero : container)
@@ -201,7 +198,7 @@ void CoreTools::CSVConfigureTesting::HeroContainerTest()
     ASSERT_UNEQUAL_NULL_PTR(firstHero);
     ASSERT_EQUAL(firstHero->GetKey(), 10002);
 
-    auto hero = heroContainer->GetHero([](const auto& value) noexcept {
+    const auto hero = heroContainer->GetHero([](const auto& value) noexcept {
         if (10001 < value->GetKey() && value->GetKey() < 10004)
             return true;
         else
@@ -212,9 +209,9 @@ void CoreTools::CSVConfigureTesting::HeroContainerTest()
 
 void CoreTools::CSVConfigureTesting::SceneContainerTest()
 {
-    CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
+    const CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
 
-    auto sceneContainer = csvConfigureContainer.GetSceneContainer();
+    const auto sceneContainer = csvConfigureContainer.GetSceneContainer();
 
     auto firstScene = sceneContainer->GetFirstScene();
     ASSERT_UNEQUAL_NULL_PTR(firstScene);
@@ -229,7 +226,7 @@ void CoreTools::CSVConfigureTesting::SceneContainerTest()
         ASSERT_EQUAL(scene->GetKey(), i);
     }
 
-    auto container = sceneContainer->GetContainer();
+    const auto container = sceneContainer->GetContainer();
     ASSERT_EQUAL(container.size(), 6u);
 
     for (const auto& scene : container)
@@ -247,7 +244,7 @@ void CoreTools::CSVConfigureTesting::SceneContainerTest()
     ASSERT_UNEQUAL_NULL_PTR(firstScene);
     ASSERT_EQUAL(firstScene->GetKey(), 10002);
 
-    auto scene = sceneContainer->GetScene([](const auto& value) noexcept {
+    const auto scene = sceneContainer->GetScene([](const auto& value) noexcept {
         if (10001 < value->GetKey() && value->GetKey() < 10004)
             return true;
         else
@@ -258,9 +255,9 @@ void CoreTools::CSVConfigureTesting::SceneContainerTest()
 
 void CoreTools::CSVConfigureTesting::SkillContainerTest()
 {
-    CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
+    const CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
 
-    auto skillContainer = csvConfigureContainer.GetSkillContainer();
+    const auto skillContainer = csvConfigureContainer.GetSkillContainer();
 
     auto firstSkill = skillContainer->GetFirstSkill();
     ASSERT_UNEQUAL_NULL_PTR(firstSkill);
@@ -278,7 +275,7 @@ void CoreTools::CSVConfigureTesting::SkillContainerTest()
         ++reward;
     }
 
-    auto container = skillContainer->GetContainer();
+    const auto container = skillContainer->GetContainer();
     ASSERT_EQUAL(container.size(), 6u);
 
     for (const auto& skill : container)
@@ -287,17 +284,17 @@ void CoreTools::CSVConfigureTesting::SkillContainerTest()
     }
 
     firstSkill = skillContainer->GetFirstSkill([](const auto& value) noexcept {
-        if (10001 < value->GetID() && value->GetID() < 10004)
+        if (10001 < value->GetId() && value->GetId() < 10004)
             return true;
         else
             return false;
     });
 
     ASSERT_UNEQUAL_NULL_PTR(firstSkill);
-    ASSERT_EQUAL(firstSkill->GetID(), 10002);
+    ASSERT_EQUAL(firstSkill->GetId(), 10002);
 
-    auto skill = skillContainer->GetSkill([](const auto& value) noexcept {
-        if (10001 < value->GetID() && value->GetID() < 10004)
+    const auto skill = skillContainer->GetSkill([](const auto& value) noexcept {
+        if (10001 < value->GetId() && value->GetId() < 10004)
             return true;
         else
             return false;
@@ -307,11 +304,11 @@ void CoreTools::CSVConfigureTesting::SkillContainerTest()
 
 void CoreTools::CSVConfigureTesting::SystemConstantContainerTest()
 {
-    CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
+    const CSVConfigure::CSVConfigureContainer csvConfigureContainer{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
 
-    auto systemConstantContainer = csvConfigureContainer.GetSystemConstantContainer();
+    const auto systemConstantContainer = csvConfigureContainer.GetSystemConstantContainer();
 
-    auto systemConstant = systemConstantContainer->GetSystemConstant();
+    const auto systemConstant = systemConstantContainer->GetSystemConstant();
     ASSERT_UNEQUAL_NULL_PTR(systemConstant);
 
     ASSERT_EQUAL(systemConstant->GetKey(), 10001);

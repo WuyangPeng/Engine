@@ -44,5 +44,5 @@ void CoreTools::BaseEntityTesting::BaseTest()
 
     entity->Register();
 
-    ASSERT_LESS(0, entity->GetEntityID());
+    ASSERT_LESS(0, entity->GetEntityId());
 }

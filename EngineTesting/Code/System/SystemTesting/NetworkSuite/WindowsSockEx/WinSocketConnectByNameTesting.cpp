@@ -113,6 +113,6 @@ void System::WinSocketConnectByNameTesting::RecvTest(WinSocket socketHandle)
 
     } while (0 < result);
 
-    GetStream() << "收到的数据为：" << CoreTools::StringConversion::UTF8ConversionMultiByte(data) << "\n";
+    GetStream() << "收到的数据为：" << CoreTools::StringConversion::Utf8ConversionMultiByte(data) << "\n";
     ASSERT_FALSE(data.empty());
 }

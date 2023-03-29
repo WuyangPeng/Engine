@@ -76,10 +76,7 @@ void Mathematics::PolynomialFit2<Real>::Calculate(const Samples& xSamples, const
     {
         solveSucceed = false;
 
-        LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
-            << SYSTEM_TEXT("求解线性系统失败\n")
-            << error
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools, SYSTEM_TEXT("求解线性系统失败\n"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

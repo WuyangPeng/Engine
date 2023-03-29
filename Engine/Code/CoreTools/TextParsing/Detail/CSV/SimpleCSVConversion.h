@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 11:53)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 11:12)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SIMPLE_CSV_CONVERSION_H
 #define CORE_TOOLS_TEXT_PARSING_SIMPLE_CSV_CONVERSION_H
@@ -37,13 +37,13 @@ namespace CoreTools
         void Conversion();
 
         void ObtainRelated(const SimpleCSV::Worksheet& xlWorksheet);
-        NODISCARD std::string GetContent(bool isFirstPage, const SimpleCSV::Worksheet& xlWorksheet);
-        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, const SimpleCSV::Row& xlRow);
-        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, int columnIndex, const SimpleCSV::CellValue& xlCellValue);
-        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, int columnIndex, const std::string& column);
-        NODISCARD bool IsIgnore(const SimpleCSV::Worksheet& xlWorksheet);
+        NODISCARD std::string GetContent(bool isFirstPage, const SimpleCSV::Worksheet& xlWorksheet) const;
+        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, const SimpleCSV::Row& xlRow) const;
+        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, int columnIndex, const SimpleCSV::CellValue& xlCellValue) const;
+        NODISCARD std::string GetContent(bool isFirstPage, int rowIndex, int columnIndex, const std::string& column) const;
+        NODISCARD bool IsIgnore(const SimpleCSV::Worksheet& xlWorksheet) const;
 
-        void SaveIntoFile(const std::string& content);
+        void SaveIntoFile(const std::string& content) const;
 
     private:
         using IndexContainer = std::set<int>;

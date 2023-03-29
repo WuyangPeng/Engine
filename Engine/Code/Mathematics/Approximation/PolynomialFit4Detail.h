@@ -107,10 +107,7 @@ void Mathematics::PolynomialFit4<Real>::Calculate(const Samples& xSamples,
     {
         solveSucceed = false;
 
-        LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
-            << SYSTEM_TEXT("求解线性系统失败\n")
-            << error
-            << CoreTools::LogAppenderIOManageSign::Refresh;
+        LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools, SYSTEM_TEXT("求解线性系统失败\n"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

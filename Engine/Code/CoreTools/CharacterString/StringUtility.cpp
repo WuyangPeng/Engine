@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/02/27 15:29)
+///	引擎版本：0.9.0.4 (2023/03/18 14:38)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,7 +21,7 @@ std::wstring CoreTools::StringUtility::ConvertNarrowToWide(const std::string& in
 {
     std::wstring output{};
 
-    std::ranges::transform(input.begin(), input.end(), std::back_inserter(output),
+    std::ranges::transform(input, std::back_inserter(output),
                            [](const char c) {
                                return static_cast<wchar_t>(c);
                            });
@@ -33,7 +33,7 @@ std::string CoreTools::StringUtility::ConvertWideToNarrow(const std::wstring& in
 {
     std::string output{};
 
-    std::ranges::transform(input.begin(), input.end(), std::back_inserter(output),
+    std::ranges::transform(input, std::back_inserter(output),
                            [](const wchar_t c) {
                                return boost::numeric_cast<char>(c);
                            });
@@ -46,7 +46,7 @@ std::string CoreTools::StringUtility::ToLower(const std::string& input)
     std::string output{};
 
     const std::locale locale{};
-    std::ranges::transform(input.begin(), input.end(), std::back_inserter(output),
+    std::ranges::transform(input, std::back_inserter(output),
                            [locale](const char c) {
                                return std::tolower(c, locale);
                            });
@@ -59,7 +59,7 @@ std::string CoreTools::StringUtility::ToUpper(const std::string& input)
     std::string output{};
 
     const std::locale locale{};
-    std::ranges::transform(input.begin(), input.end(), std::back_inserter(output),
+    std::ranges::transform(input, std::back_inserter(output),
                            [locale](const char c) {
                                return std::toupper(c, locale);
                            });

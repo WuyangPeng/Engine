@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 20:16)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 17:31)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -40,7 +40,7 @@ System::String CoreTools::CSVGenerateDefaultFunction::GenerateBaseDefaultFunctio
     content += defaultFunctionParsing.GenerateDefaultConstructor();
     content += defaultFunctionParsing.GenerateKeyConstructor();
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += defaultFunctionParsing.GenerateDestructor();
     content += defaultFunctionParsing.GenerateCopyConstructor();
@@ -48,7 +48,7 @@ System::String CoreTools::CSVGenerateDefaultFunction::GenerateBaseDefaultFunctio
     content += defaultFunctionParsing.GenerateMoveConstructor();
     content += defaultFunctionParsing.GenerateMoveAssignment();
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += defaultFunctionParsing.GenerateClassInvariantVirtualDeclare();
 
@@ -67,7 +67,7 @@ System::String CoreTools::CSVGenerateDefaultFunction::GenerateChildDefaultFuncti
     auto content = defaultFunctionParsing.GeneratePublic();
 
     content += defaultFunctionParsing.GenerateCSVRowConstructor();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += defaultFunctionParsing.GenerateClassInvariantFinalDeclare();
 
@@ -86,7 +86,7 @@ System::String CoreTools::CSVGenerateDefaultFunction::GenerateDefaultFunction() 
     auto content = defaultFunctionParsing.GeneratePublic();
 
     content += defaultFunctionParsing.GenerateCSVRowConstructor();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += defaultFunctionParsing.GenerateClassInvariantDeclare();
 
@@ -105,9 +105,10 @@ System::String CoreTools::CSVGenerateDefaultFunction::GenerateContainerDefaultFu
     auto content = defaultFunctionParsing.GeneratePublic();
 
     content += defaultFunctionParsing.GenerateCSVContentConstructor();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += defaultFunctionParsing.GenerateClassInvariantDeclare();
 
     return content;
 }
+

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:56)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:39)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,9 +20,7 @@
 
 CoreTools::ContainerMemberParsing::ContainerMemberParsingSharedPtr CoreTools::ContainerMemberParsing::Create(const CSVHead& csvHead)
 {
-    const CSVFormatType csvFormatType = csvHead.GetCSVFormatType();
-
-    switch (csvFormatType)
+    switch (const CSVFormatType csvFormatType = csvHead.GetCSVFormatType(); csvFormatType)
     {
         case CSVFormatType::TreeMap:
             FALLTHROUGH;
@@ -41,8 +39,8 @@ CoreTools::ContainerMemberParsing::ContainerMemberParsingSharedPtr CoreTools::Co
     }
 }
 
-CoreTools::ContainerMemberParsing::ContainerMemberParsing(const CSVHead& csvHead) noexcept
-    : ParentType{ 1 }, m_CSVHead{ csvHead }
+CoreTools::ContainerMemberParsing::ContainerMemberParsing(CSVHead csvHead) noexcept
+    : ParentType{ 1 }, head{ std::move(csvHead) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -53,12 +51,12 @@ CoreTools::CSVHead CoreTools::ContainerMemberParsing::GetCSVHead() const noexcep
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CSVHead;
+    return head;
 }
 
 System::String CoreTools::ContainerMemberParsing::GetCSVClassName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CSVHead.GetCSVClassName();
+    return head.GetCSVClassName();
 }

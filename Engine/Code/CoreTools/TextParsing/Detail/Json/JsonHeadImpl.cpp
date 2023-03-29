@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:49)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/10 14:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,12 +24,10 @@
 
 #include <regex>
 
-using std::make_shared;
-using std::vector;
 using namespace std::literals;
 
-CoreTools::JsonHeadImpl::JsonHeadImpl(const String& path)
-    : path{ path }, nameSpace{}, className{}, jsonNodeContainer{ JsonNodeContainer::Create() }
+CoreTools::JsonHeadImpl::JsonHeadImpl(String path)
+    : path{ std::move(path) }, nameSpace{}, className{}, jsonNodeContainer{ JsonNodeContainer::Create() }
 {
     Init();
 
@@ -40,7 +38,7 @@ void CoreTools::JsonHeadImpl::Init()
 {
     if (path.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("文件名为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("文件名为空。"s))
     }
 
     Parsing();
@@ -54,23 +52,18 @@ void CoreTools::JsonHeadImpl::Parsing()
 
 void CoreTools::JsonHeadImpl::ParsingNameSpace()
 {
-    vector<String> pathSplit{};
-    boost::algorithm::split(pathSplit, path, boost::is_any_of(TextParsing::g_FileSplit), boost::token_compress_on);
+    std::vector<String> pathSplit{};
+    split(pathSplit, path, boost::is_any_of(TextParsing::gFileSplit), boost::token_compress_on);
 
     if (1 < pathSplit.size())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        nameSpace = StringUtility::ToFirstLetterUpper(pathSplit[pathSplit.size() - 2]);
-
-#include STSTEM_WARNING_POP
+        nameSpace = StringUtility::ToFirstLetterUpper(pathSplit.at(pathSplit.size() - 2));
     }
 
     auto fileName = pathSplit.at(pathSplit.size() - 1);
-    const auto poistion = fileName.find(TextParsing::g_Dot);
+    const auto position = fileName.find(TextParsing::gDot);
 
-    className = StringUtility::ToFirstLetterUpper(fileName.substr(0, poistion));
+    className = StringUtility::ToFirstLetterUpper(fileName.substr(0, position));
 }
 
 void CoreTools::JsonHeadImpl::ParsingJsonNode()
@@ -85,23 +78,20 @@ CoreTools::JsonNodeContainer CoreTools::JsonHeadImpl::ParsingJsonNode(const Basi
 {
     auto container = JsonNodeContainer::Create();
 
-    for (const auto& tree : basicTree)
+    for (const auto& [key, value] : basicTree)
     {
-        const auto key = tree.first;
-        const auto& value = tree.second;
-
         if (key.empty() && value.empty())
         {
-            auto JsonNode = GetArrayJsonNode(key, value);
+            const auto jsonNode = GetArrayJsonNode(key, value);
 
-            container.SetJsonDataType(JsonNode->GetJsonDataType());
+            container.SetJsonDataType(jsonNode->GetJsonDataType());
         }
         else
         {
             if (value.empty())
             {
-                const auto jsonDataType = container.GetJsonDataType(key);
-                if (jsonDataType == JsonDataType::Null)
+                if (const auto jsonDataType = container.GetJsonDataType(key);
+                    jsonDataType == JsonDataType::Null)
                 {
                     auto jsonData = value.get_value<>(String{});
 
@@ -111,19 +101,19 @@ CoreTools::JsonNodeContainer CoreTools::JsonHeadImpl::ParsingJsonNode(const Basi
                 {
                     auto jsonData = value.get_value<>(String{});
 
-                    auto jsonNode = GetJsonNode(key, jsonData);
+                    const auto jsonNode = GetJsonNode(key, jsonData);
 
                     container.SetNewJsonDataType(key, jsonNode->GetJsonDataType());
                 }
             }
             else
             {
-                const auto jsonDataType = container.GetJsonDataType(key);
-                if (jsonDataType == JsonDataType::Null)
+                if (const auto jsonDataType = container.GetJsonDataType(key); jsonDataType == JsonDataType::Null)
                 {
                     auto result = ParsingJsonNode(value);
-                    const auto resultJsonDataType = result.GetJsonDataType();
-                    if (resultJsonDataType == JsonDataType::Nested || resultJsonDataType == JsonDataType::NestedArray)
+
+                    if (const auto resultJsonDataType = result.GetJsonDataType();
+                        resultJsonDataType == JsonDataType::Nested || resultJsonDataType == JsonDataType::NestedArray)
                     {
                         auto jsonNode = make_shared<JsonNode>(key, resultJsonDataType);
 
@@ -151,7 +141,7 @@ CoreTools::JsonNodeContainer CoreTools::JsonHeadImpl::ParsingJsonNode(const Basi
 
 CoreTools::JsonHeadImpl::JsonNodeSharedPtr CoreTools::JsonHeadImpl::GetArrayJsonNode(const String& key, const BasicTree& value) const
 {
-    auto jsonData = value.get_value<>(String{});
+    const auto jsonData = value.get_value<>(String{});
 
     return GetJsonNode(key, jsonData);
 }
@@ -191,15 +181,15 @@ bool CoreTools::JsonHeadImpl::IsInt(const String& jsonData) const
         return false;
     }
 
-    auto value = boost::lexical_cast<int64_t>(jsonData);
+    const auto value = boost::lexical_cast<int64_t>(jsonData);
 
     return std::numeric_limits<int>::min() <= value && value <= std::numeric_limits<int>::max();
 }
 
 bool CoreTools::JsonHeadImpl::IsInt64(const String& jsonData) const
 {
-    auto pattern = SYSTEM_TEXT("[-+]?[0-9]+"s);
-    System::Regex regex{ pattern };
+    const auto pattern = SYSTEM_TEXT("[-+]?[0-9]+"s);
+    const System::Regex regex{ pattern };
 
     return std::regex_match(jsonData, regex);
 }
@@ -208,15 +198,15 @@ bool CoreTools::JsonHeadImpl::IsDouble(const String& jsonData) const
 {
     if (jsonData.find(SYSTEM_TEXT('e')) != String::npos || jsonData.find(SYSTEM_TEXT('E')) != String::npos)
     {
-        auto pattern = SYSTEM_TEXT("[-+]?[0-9]*.+[0-9]+[eE]+[-+]?[0-9]+[fF]?"s);
-        System::Regex regex{ pattern };
+        const auto pattern = SYSTEM_TEXT("[-+]?[0-9]*.+[0-9]+[eE]+[-+]?[0-9]+[fF]?"s);
+        const System::Regex regex{ pattern };
 
         return std::regex_match(jsonData, regex);
     }
     else
     {
-        auto pattern = SYSTEM_TEXT("[-+]?[0-9]*.+[0-9]+[fF]?"s);
-        System::Regex regex{ pattern };
+        const auto pattern = SYSTEM_TEXT("[-+]?[0-9]*.+[0-9]+[fF]?"s);
+        const System::Regex regex{ pattern };
 
         return std::regex_match(jsonData, regex);
     }
@@ -258,7 +248,7 @@ System::String CoreTools::JsonHeadImpl::GetCompleteClassName() const
 
     auto completeClassName = nameSpace;
 
-    completeClassName += TextParsing::g_DoubleColon;
+    completeClassName += TextParsing::gDoubleColon;
     completeClassName += className;
 
     return completeClassName;

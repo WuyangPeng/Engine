@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:58)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:45)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -33,15 +33,15 @@ System::String CoreTools::EnumDescribeParsing::GenerateHeader() const
 
     const auto csvHead = GetCSVHead();
 
-    String content{ TextParsing::g_SystemString };
+    String content{ TextParsing::gSystemString };
 
-    content += TextParsing::g_Space;
+    content += TextParsing::gSpace;
     content += csvHead.GetNameSpace();
-    content += TextParsing::g_DoubleColon;
-    content += TextParsing::g_GetEnumDescribe;
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gGetEnumDescribe;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_TypeEnd;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gTypeEnd;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -54,12 +54,12 @@ System::String CoreTools::EnumDescribeParsing::GenerateDescribe() const
 
     auto typeDescribe = GenerateIndentation(1);
 
-    typeDescribe += TextParsing::g_StaticMapBegin;
+    typeDescribe += TextParsing::gStaticMapBegin;
     typeDescribe += csvHead.GetCSVClassName();
-    typeDescribe += TextParsing::g_Comma;
-    typeDescribe += TextParsing::g_Space;
-    typeDescribe += TextParsing::g_SystemString;
-    typeDescribe += TextParsing::g_TypeDescribe;
+    typeDescribe += TextParsing::gComma;
+    typeDescribe += TextParsing::gSpace;
+    typeDescribe += TextParsing::gSystemString;
+    typeDescribe += TextParsing::gTypeDescribe;
 
     return typeDescribe;
 }
@@ -68,43 +68,43 @@ System::String CoreTools::EnumDescribeParsing::GenerateColumn(const String& spac
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto csvContent = GetCSVContent();
+    const auto content = GetCSVContent();
 
-    String content{};
+    String result{};
 
-    const auto size = csvContent.GetCount();
+    const auto size = content.GetCount();
     for (auto index = 0; index < size; ++index)
     {
-        const auto column = csvContent.GetContent(index);
+        const auto column = content.GetContent(index);
 
-        const auto csvPoistionType = GetPoistionType(index, size);
+        const auto csvPositionType = GetPositionType(index, size);
 
-        content += GetEnumDescribeColumn(column, space, csvPoistionType);
+        result += GetEnumDescribeColumn(column, space, csvPositionType);
     }
 
-    return content;
+    return result;
 }
 
 System::String CoreTools::EnumDescribeParsing::GenerateFindFunctionDefinition() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetFindFunctionDefinition(TextParsing::g_Type);
+    return GetFindFunctionDefinition(TextParsing::gType);
 }
 
-System::String CoreTools::EnumDescribeParsing::GetEnumDescribeColumn(const String& column, const String& space, CSVPoistionType csvPoistionType) const
+System::String CoreTools::EnumDescribeParsing::GetEnumDescribeColumn(const String& column, const String& space, CSVPositionType csvPositionType) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto result = Parsing::GetSplitComma(column);
 
     auto name = result.at(GetNameIndex());
-    boost::algorithm::trim_if(name, boost::is_any_of(TextParsing::g_QuotationMarks));
+    trim_if(name, boost::is_any_of(TextParsing::gQuotationMarks));
 
     auto describe = StringConversion::Utf8ConversionStandard(result.at(describeIndex));
-    boost::algorithm::trim_if(describe, boost::is_any_of(TextParsing::g_QuotationMarks));
+    trim_if(describe, boost::is_any_of(TextParsing::gQuotationMarks));
 
-    return GetColumn(GetEnumDescribeColumn(name, describe), space, csvPoistionType);
+    return GetColumn(GetEnumDescribeColumn(name, describe), space, csvPositionType);
 }
 
 System::String CoreTools::EnumDescribeParsing::GetEnumDescribeColumn(const String& name, const String& describe) const
@@ -113,16 +113,16 @@ System::String CoreTools::EnumDescribeParsing::GetEnumDescribeColumn(const Strin
 
     const auto csvHead = GetCSVHead();
 
-    String content{ TextParsing::g_LeftBigParantheses };
+    String content{ TextParsing::gLeftBrace };
 
-    content += TextParsing::g_Space;
+    content += TextParsing::gSpace;
 
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += name;
-    content += TextParsing::g_SystemTextValue;
+    content += TextParsing::gSystemTextValue;
     content += describe;
-    content += TextParsing::g_SystemTextInitEnd;
+    content += TextParsing::gSystemTextInitEnd;
 
     return content;
 }

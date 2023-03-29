@@ -23,7 +23,7 @@
 #include "Physics/Helper/UserMacro.h"
 #include "Imagics/Helper/UserMacro.h"
 #include "Animation/Helper/UserMacro.h"
-#include "ArtificialIntellegence/Helper/UserMacro.h"
+#include "ArtificialIntelligence/Helper/UserMacro.h"
 #include "UserInterface/Helper/UserMacro.h"
 #include "AssistTools/Helper/UserMacro.h"
 

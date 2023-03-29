@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 13:33)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:17)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_GET_FUNCTION_PARSING_H
 #define CORE_TOOLS_TEXT_PARSING_GET_FUNCTION_PARSING_H
@@ -24,7 +24,7 @@ namespace CoreTools
         using ParentType = Parsing;
 
     public:
-        GetFunctionParsing(const CSVHead& csvHead, const String& keyTypeDescribe);
+        GetFunctionParsing(CSVHead csvHead, String keyTypeDescribe) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -49,7 +49,7 @@ namespace CoreTools
 
     private:
         String keyTypeDescribe;
-        CSVHead m_CSVHead;
+        CSVHead head;
     };
 }
 

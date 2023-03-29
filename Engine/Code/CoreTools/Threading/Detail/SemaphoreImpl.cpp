@@ -34,9 +34,7 @@ CoreTools::SemaphoreImpl::~SemaphoreImpl() noexcept
 
     if (!System::CloseSystemSemaphore(handle))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-            << SYSTEM_TEXT("销毁信号量失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("销毁信号量失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

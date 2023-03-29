@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:23)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/10 08:56)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,16 +17,12 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/FileManager/FileManagerHelper.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
-#include "CoreTools/TextParsing/Flags/CSVFlags.h"
 
 #ifdef CORE_TOOLS_USE_OPENXLSX
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
-CoreTools::OpenXLSXDocument::OpenXLSXDocument(const string& xlsxFileName)
+CoreTools::OpenXLSXDocument::OpenXLSXDocument(const std::string& xlsxFileName)
     : xlsxFileName{ xlsxFileName }, document{}, worksheetNames{}
 {
     Init();
@@ -50,7 +46,7 @@ void CoreTools::OpenXLSXDocument::Init()
 {
     document.open(xlsxFileName);
 
-    auto xlWorkbook = document.workbook();
+    const auto xlWorkbook = document.workbook();
     worksheetNames = xlWorkbook.worksheetNames();
 }
 
@@ -58,7 +54,7 @@ OpenXLSX::XLWorksheet CoreTools::OpenXLSXDocument::GetFirstXLWorksheet()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    auto worksheetName = worksheetNames.at(0);
+    const auto worksheetName = worksheetNames.at(0);
 
     auto xlWorkbook = document.workbook();
     auto xlWorksheet = xlWorkbook.worksheet(worksheetName);

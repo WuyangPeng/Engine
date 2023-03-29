@@ -76,9 +76,7 @@ void Network::OnlySendingClient::Send(MAYBE_UNUSED uint64_t socketID, const Mess
 
     if (GetConfigurationStrategy().GetSocketSendMessage() == SocketSendMessage::Cache)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-            << SYSTEM_TEXT("当前客户端策略不支持缓存数据。")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("当前客户端策略不支持缓存数据。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     if (bufferSendStream.Insert(message))
@@ -95,9 +93,7 @@ void Network::OnlySendingClient::AsyncSend(uint64_t socketID, const MessageInter
 {
     if (GetConfigurationStrategy().GetSocketSendMessage() == SocketSendMessage::Cache)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-            << SYSTEM_TEXT("当前客户端策略不支持缓存数据。")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("当前客户端策略不支持缓存数据。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     if (bufferSendStream.Insert(message))
@@ -142,18 +138,14 @@ void Network::OnlySendingClient::Receive() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-        << SYSTEM_TEXT("当前客户端策略不支持接收数据。")
-        << LOG_SINGLETON_TRIGGER_ASSERT;
+    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("当前客户端策略不支持接收数据。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 }
 
 void Network::OnlySendingClient::AsyncReceive() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-        << SYSTEM_TEXT("当前客户端策略不支持接收数据。")
-        << LOG_SINGLETON_TRIGGER_ASSERT;
+    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("当前客户端策略不支持接收数据。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
 }
 
 bool Network::OnlySendingClient::EventFunction(const CoreTools::CallbackParameters& callbackParameters)
@@ -173,9 +165,7 @@ bool Network::OnlySendingClient::EventFunction(const CoreTools::CallbackParamete
                 socket->InsertSocket(socketID);
                 if (!socket->EventFunction(callbackParameters))
                 {
-                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                        << SYSTEM_TEXT("消息事件触发失败。")
-                        << LOG_SINGLETON_TRIGGER_ASSERT;
+                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("消息事件触发失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
                 }
 
                 return true;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:47)
+///	引擎测试版本：0.9.0.4 (2023/03/10 10:16)
 
 #include "CSVGenerateTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -59,147 +59,147 @@ void CoreTools::CSVGenerateTesting::CreateCSV()
 
 void CoreTools::CSVGenerateTesting::CSVGenerateBaseHeadTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
-    auto csvHead = csvContent.GetCSVHead();
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
+    const auto csvHead = csvContent.GetCSVHead();
 
-    CSVGenerate csvGenerate{ csvHead, CSVGenerateType::BaseHead };
+    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::BaseHead };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateChildHeadTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
-    auto csvHead = csvContent.GetCSVHead();
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
+    const auto csvHead = csvContent.GetCSVHead();
 
-    CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ChildHead };
+    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ChildHead };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateContainerHeadTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
-    auto csvHead = csvContent.GetCSVHead();
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
+    const auto csvHead = csvContent.GetCSVHead();
 
-    CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ContainerHead };
+    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ContainerHead };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateContainerDetailHeadTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
-    auto csvHead = csvContent.GetCSVHead();
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
+    const auto csvHead = csvContent.GetCSVHead();
 
-    CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ContainerDetailHead };
+    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ContainerDetailHead };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateBaseSourceTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
-    auto csvHead = csvContent.GetCSVHead();
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
+    const auto csvHead = csvContent.GetCSVHead();
 
-    CSVGenerate csvGenerate{ csvHead, CSVGenerateType::BaseSource };
+    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::BaseSource };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateChildSourceTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
-    auto csvHead = csvContent.GetCSVHead();
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
+    const auto csvHead = csvContent.GetCSVHead();
 
-    CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ChildSource };
+    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ChildSource };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateContainerSourceTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
-    auto csvHead = csvContent.GetCSVHead();
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Chapter.csv"s) };
+    const auto csvHead = csvContent.GetCSVHead();
 
-    CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ContainerSource };
+    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::ContainerSource };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalVectorTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Equip.csv"s) };
-    auto csvHead = csvContent.GetCSVHead();
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Equip.csv"s) };
+    const auto csvHead = csvContent.GetCSVHead();
 
-    CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
+    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalTreeMapTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Hero.csv"s) };
-    auto csvHead = csvContent.GetCSVHead();
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Hero.csv"s) };
+    const auto csvHead = csvContent.GetCSVHead();
 
-    CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
+    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalHashMapTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Scene.csv"s) };
-    auto csvHead = csvContent.GetCSVHead();
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Scene.csv"s) };
+    const auto csvHead = csvContent.GetCSVHead();
 
-    CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
+    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalKeyTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Skill.csv"s) };
-    auto csvHead = csvContent.GetCSVHead();
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/Skill.csv"s) };
+    const auto csvHead = csvContent.GetCSVHead();
 
-    CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
+    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalEnumHeadTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/VectorType.csv"s) };
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/VectorType.csv"s) };
 
-    CSVGenerate csvGenerate{ csvContent, CSVGenerateType::EnumHead };
+    const CSVGenerate csvGenerate{ csvContent, CSVGenerateType::EnumHead };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalEnumSourceTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/VectorType.csv"s) };
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/VectorType.csv"s) };
 
-    CSVGenerate csvGenerate{ csvContent, CSVGenerateType::EnumSource };
+    const CSVGenerate csvGenerate{ csvContent, CSVGenerateType::EnumSource };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalEnumTotalTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/LineType.csv"s) };
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/LineType.csv"s) };
 
-    CSVGenerate csvGenerate{ csvContent, CSVGenerateType::EnumTotal };
+    const CSVGenerate csvGenerate{ csvContent, CSVGenerateType::EnumTotal };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVGenerateTesting::CSVGenerateTotalUniqueTest()
 {
-    CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/SystemConstant.csv"s) };
-    auto csvHead = csvContent.GetCSVHead();
+    const CSVContent csvContent{ SYSTEM_TEXT("Resource/CSVConfigure/SystemConstant.csv"s) };
+    const auto csvHead = csvContent.GetCSVHead();
 
-    CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
+    const CSVGenerate csvGenerate{ csvHead, CSVGenerateType::Total };
 
     csvGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }

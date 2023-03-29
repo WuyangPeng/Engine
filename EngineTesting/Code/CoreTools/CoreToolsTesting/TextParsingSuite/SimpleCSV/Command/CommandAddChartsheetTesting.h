@@ -1,36 +1,36 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:10)
+///	引擎测试版本：0.9.0.4 (2023/03/06 18:27)
 
-#ifndef CORE_TOOLS_TEXT_PARSING_SUITE_COMMAND_ADD_CHARTSHEET_TESTING_H
-#define CORE_TOOLS_TEXT_PARSING_SUITE_COMMAND_ADD_CHARTSHEET_TESTING_H
+#ifndef CORE_TOOLS_TEXT_PARSING_SUITE_COMMAND_ADD_CHART_SHEET_TESTING_H
+#define CORE_TOOLS_TEXT_PARSING_SUITE_COMMAND_ADD_CHART_SHEET_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
-    class CommandAddChartsheetTesting final : public UnitTest
+    class CommandAddChartSheetTesting final : public UnitTest
     {
     public:
-        using ClassType = CommandAddChartsheetTesting;
+        using ClassType = CommandAddChartSheetTesting;
         using ParentType = UnitTest;
 
     public:
-        explicit CommandAddChartsheetTesting(const OStreamShared& stream);
+        explicit CommandAddChartSheetTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest();
 
-        void CommandAddChartsheetTest();
+        void CommandAddChartSheetTest();
     };
 }
 
-#endif  // CORE_TOOLS_TEXT_PARSING_SUITE_COMMAND_ADD_CHARTSHEET_TESTING_H
+#endif  // CORE_TOOLS_TEXT_PARSING_SUITE_COMMAND_ADD_CHART_SHEET_TESTING_H

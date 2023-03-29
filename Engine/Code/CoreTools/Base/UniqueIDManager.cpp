@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/02/23 15:51)
+///	引擎版本：0.9.0.4 (2023/03/17 19:50)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -47,7 +47,7 @@ CoreTools::UniqueIdManager::UniqueIdManager(int count, UniqueIdManagerCreate uni
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, UniqueIdManager)
 
-uint64_t CoreTools::UniqueIdManager::NextDefaultUniqueId()
+int64_t CoreTools::UniqueIdManager::NextDefaultUniqueId()
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -56,7 +56,7 @@ uint64_t CoreTools::UniqueIdManager::NextDefaultUniqueId()
     return NextUniqueId(UniqueIdSelect::Default);
 }
 
-uint64_t CoreTools::UniqueIdManager::NextUniqueId(int index)
+int64_t CoreTools::UniqueIdManager::NextUniqueId(int index)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -65,7 +65,7 @@ uint64_t CoreTools::UniqueIdManager::NextUniqueId(int index)
     return impl->NextUniqueId(index);
 }
 
-void CoreTools::UniqueIdManager::SetUniqueId(int index, uint64_t latestIndex)
+void CoreTools::UniqueIdManager::SetUniqueId(int index, int64_t latestIndex)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:43)
+///	引擎测试版本：0.9.0.4 (2023/03/08 16:37)
 
 #include "SharedStringsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -16,7 +16,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 using namespace std::literals;
-using std::make_shared;
 
 CoreTools::SharedStringsTesting::SharedStringsTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -39,10 +38,10 @@ void CoreTools::SharedStringsTesting::MainTest()
 void CoreTools::SharedStringsTesting::SharedStringsTest()
 {
     auto xmlPath = "xl/sharedStrings.xml"s;
-    auto xmlID = "xl/sharedStrings.xml"s;
-    constexpr auto contentType = SimpleCSV::ContentType::Chartsheet;
+    auto xmlId = "xl/sharedStrings.xml"s;
+    constexpr auto contentType = SimpleCSV::ContentType::ChartSheet;
     auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-    auto xmlData = make_shared<SimpleCSV::XmlData>(document, xmlPath, xmlID, contentType);
+    const auto xmlData = make_shared<SimpleCSV::XmlData>(document, xmlPath, xmlId, contentType);
 
     SimpleCSV::SharedStrings sharedStrings{ xmlData };
 
@@ -50,10 +49,10 @@ void CoreTools::SharedStringsTesting::SharedStringsTest()
     ASSERT_TRUE(sharedStrings.IsStringExists("bool"));
     ASSERT_LESS_EQUAL(0, sharedStrings.GetStringIndex("bool"));
 
-    auto value = sharedStrings.GetString(10);
+    const auto value = sharedStrings.GetString(10);
     ASSERT_EQUAL(10, sharedStrings.GetStringIndex(value));
 
-    auto index = sharedStrings.AppendString("sharedStrings");
+    const auto index = sharedStrings.AppendString("sharedStrings");
     ASSERT_LESS(0, index);
     ASSERT_EQUAL(index, sharedStrings.GetStringIndex("sharedStrings"));
     ASSERT_EQUAL("sharedStrings", sharedStrings.GetString(index));

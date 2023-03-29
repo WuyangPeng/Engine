@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 19:35)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/07 13:49)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CONTENT_ITEM_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CONTENT_ITEM_IMPL_H
@@ -19,39 +19,36 @@
 #include <map>
 #include <string>
 
-namespace CoreTools
+namespace CoreTools::SimpleCSV
 {
-    namespace SimpleCSV
+    class CORE_TOOLS_HIDDEN_DECLARE ContentItemImpl final
     {
-        class CORE_TOOLS_HIDDEN_DECLARE ContentItemImpl final
-        {
-        public:
-            using ClassType = ContentItemImpl;
+    public:
+        using ClassType = ContentItemImpl;
 
-        public:
-            explicit ContentItemImpl(const ConstXMLDocumentSharedPtr& document, const XMLNode& node) noexcept;
+    public:
+        explicit ContentItemImpl(const ConstXMLDocumentSharedPtr& document, const XMLNode& node) noexcept;
 
-            CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-            NODISCARD ContentType GetType() const;
-            NODISCARD std::string GetPath() const;
+        NODISCARD ContentType GetType() const;
+        NODISCARD std::string GetPath() const;
 
-            NODISCARD static ContentType GetTypeFromString(const std::string& typeString);
-            NODISCARD static std::string GetStringFromType(ContentType type);
+        NODISCARD static ContentType GetTypeFromString(const std::string& typeString);
+        NODISCARD static std::string GetStringFromType(ContentType type);
 
-        private:
-            using StringFromTypeContent = std::map<ContentType, std::string>;
-            using TypeFromStringContent = std::map<std::string, ContentType>;
+    private:
+        using StringFromTypeContent = std::map<ContentType, std::string>;
+        using TypeFromStringContent = std::map<std::string, ContentType>;
 
-        private:
-            NODISCARD static StringFromTypeContent GetStringFromTypeContent();
-            NODISCARD static TypeFromStringContent GetTypeFromStringContent();
+    private:
+        NODISCARD static StringFromTypeContent GetStringFromTypeContent();
+        NODISCARD static TypeFromStringContent GetTypeFromStringContent();
 
-        private:
-            ConstXMLDocumentWeakPtr document;
-            XMLNode contentNode;
-        };
-    }
+    private:
+        ConstXMLDocumentWeakPtr document;
+        XMLNode contentNode;
+    };
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_CONTENT_ITEM_IMPL_H

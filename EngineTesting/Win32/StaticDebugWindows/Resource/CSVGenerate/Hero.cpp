@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #include "Hero.h"
@@ -16,7 +16,7 @@ using namespace std::literals;
 
 CSVConfigure::Hero::Hero(const CoreTools::CSVRow& csvRow)
     : id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
-      nextID{ csvRow.GetInt(SYSTEM_TEXT("nextID"s)) },
+      nextId{ csvRow.GetInt(SYSTEM_TEXT("nextId"s)) },
       reward{ csvRow.GetInt(SYSTEM_TEXT("reward"s)) },
       heroName{ csvRow.GetString(SYSTEM_TEXT("heroName"s)) },
       uniqueIdentifier{ csvRow.GetInt64(SYSTEM_TEXT("uniqueIdentifier"s)) },
@@ -35,18 +35,18 @@ int CSVConfigure::Hero::GetKey() const noexcept
     return id;
 }
 
-int CSVConfigure::Hero::GetID() const noexcept
+int CSVConfigure::Hero::GetId() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return id;
 }
 
-int CSVConfigure::Hero::GetNextID() const noexcept
+int CSVConfigure::Hero::GetNextId() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return nextID;
+    return nextId;
 }
 
 int CSVConfigure::Hero::GetReward() const noexcept

@@ -1,18 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 21:30)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 16:04)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_MANAGER_FLAGS_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_MANAGER_FLAGS_H
 
 #include "System/Helper/EnumOperator.h"
-
-#include <iostream>
 
 namespace CoreTools
 {
@@ -31,7 +29,7 @@ namespace CoreTools
         Physics,  // 物理
         Imagics,  // 图像分析
         Animation,  // 动画
-        ArtificialIntellegence,  // 人工智能
+        ArtificialIntelligence,  // 人工智能
         UserInterface,  // 界面
         AssistTools,  // 辅助工具
         Framework,  // 框架
@@ -72,12 +70,9 @@ namespace CoreTools
 
     enum class LogAppenderIOManageSign
     {
-        BlankSpace,  // 空格
-        Newline,  // 换行
-        Refresh,  // 刷新
         TriggerAssert,  // 触发断言
         AlwaysConsole,  // 总是输出至控制台
-    };    
+    };
 }
 
 #endif  // CORE_TOOLS_LOG_MANAGER_LOG_MANAGER_FLAGS_H

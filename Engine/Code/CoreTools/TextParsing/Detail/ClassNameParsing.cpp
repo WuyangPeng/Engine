@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:54)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:34)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,8 +13,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::ClassNameParsing::ClassNameParsing(int indentationCount, const String& className)
-    : ParentType{ indentationCount }, className{ className }
+CoreTools::ClassNameParsing::ClassNameParsing(int indentationCount, String className) noexcept
+    : ParentType{ indentationCount }, className{ std::move(className) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -27,9 +27,9 @@ System::String CoreTools::ClassNameParsing::GenerateParentClassName() const
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_Class;
+    content += TextParsing::gClass;
     content += className;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -40,9 +40,9 @@ System::String CoreTools::ClassNameParsing::GenerateClassType() const
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_ClassType;
+    content += TextParsing::gClassType;
     content += className;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -53,12 +53,12 @@ System::String CoreTools::ClassNameParsing::GenerateChildClassName() const
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_Class;
+    content += TextParsing::gClass;
     content += className;
-    content += TextParsing::g_FinalInherit;
+    content += TextParsing::gFinalInherit;
     content += className;
-    content += TextParsing::g_Base;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gBase;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -69,10 +69,10 @@ System::String CoreTools::ClassNameParsing::GenerateParentType() const
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_ParentType;
+    content += TextParsing::gParentType;
     content += className;
-    content += TextParsing::g_Base;
-    content += TextParsing::g_SemicolonNewline;
+    content += TextParsing::gBase;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }
@@ -83,10 +83,10 @@ System::String CoreTools::ClassNameParsing::GenerateClassName() const
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_Class;
+    content += TextParsing::gClass;
     content += className;
-    content += TextParsing::g_Final;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gFinal;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -97,9 +97,9 @@ System::String CoreTools::ClassNameParsing::GenerateEnumClassName() const
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::g_EnumClass;
+    content += TextParsing::gEnumClass;
     content += className;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

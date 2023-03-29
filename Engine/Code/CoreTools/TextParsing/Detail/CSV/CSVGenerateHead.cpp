@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 20:18)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 17:38)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,11 +15,8 @@
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-using std::pair;
-using std::vector;
-
-CoreTools::CSVGenerateHead::CSVGenerateHead(const CSVHead& csvHead, const String& suffix)
-    : csvHead{ csvHead }, suffix{ suffix }
+CoreTools::CSVGenerateHead::CSVGenerateHead(CSVHead csvHead, String suffix) noexcept
+    : csvHead{ std::move(csvHead) }, suffix{ std::move(suffix) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -32,7 +29,7 @@ System::String CoreTools::CSVGenerateHead::GenerateCoreToolsHead() const
 
     auto content = GenerateCoreToolsShareHead();
 
-    content += TextParsing::g_UnicodeUsing;
+    content += TextParsing::gUnicodeUsing;
 
     return content;
 }
@@ -43,41 +40,41 @@ System::String CoreTools::CSVGenerateHead::GenerateCoreToolsChildHead() const
 
     auto content = GenerateCoreToolsShareHead();
 
-    content += TextParsing::g_IncludePrefix;
+    content += TextParsing::gIncludePrefix;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_Base;
-    content += TextParsing::g_HeadFileSuffix;
+    content += TextParsing::gBase;
+    content += TextParsing::gHeadFileSuffix;
 
-    content += TextParsing::g_UnicodeUsing;
+    content += TextParsing::gUnicodeUsing;
 
     return content;
 }
 
 System::String CoreTools::CSVGenerateHead::GenerateCoreToolsShareHead() const
 {
-    String content{ TextParsing::g_CoreToolsHeadFile };
-    content += TextParsing::g_NewlineCharacter;
+    String content{ TextParsing::gCoreToolsHeadFile };
+    content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::g_IncludePrefix;
+    content += TextParsing::gIncludePrefix;
     content += csvHead.GetNameSpace();
-    content += TextParsing::g_Fwd;
-    content += TextParsing::g_HeadFileSuffix;
+    content += TextParsing::gFwd;
+    content += TextParsing::gHeadFileSuffix;
 
     return content;
 }
 
 System::String CoreTools::CSVGenerateHead::GenerateVectorHeadContent() const
 {
-    using CSVDataTypeIndex = pair<CSVDataType, CSVDataType>;
-    using HeadContent = pair<CSVDataTypeIndex, System::StringView>;
-    using HeadContentContainer = vector<HeadContent>;
+    using CSVDataTypeIndex = std::pair<CSVDataType, CSVDataType>;
+    using HeadContent = std::pair<CSVDataTypeIndex, System::StringView>;
+    using HeadContentContainer = std::vector<HeadContent>;
 
-    static const HeadContentContainer head{ { { CSVDataType::IntVector2, CSVDataType::IntVector2Array }, TextParsing::g_IncludeIntVector2 },
-                                            { { CSVDataType::IntVector3, CSVDataType::IntVector3Array }, TextParsing::g_IncludeIntVector3 },
-                                            { { CSVDataType::IntVector4, CSVDataType::IntVector4Array }, TextParsing::g_IncludeIntVector4 },
-                                            { { CSVDataType::Vector2, CSVDataType::Vector2Array }, TextParsing::g_IncludeVector2 },
-                                            { { CSVDataType::Vector3, CSVDataType::Vector3Array }, TextParsing::g_IncludeVector3 },
-                                            { { CSVDataType::Vector4, CSVDataType::Vector4Array }, TextParsing::g_IncludeVector4 } };
+    static const HeadContentContainer head{ { { CSVDataType::IntVector2, CSVDataType::IntVector2Array }, TextParsing::gIncludeIntVector2 },
+                                            { { CSVDataType::IntVector3, CSVDataType::IntVector3Array }, TextParsing::gIncludeIntVector3 },
+                                            { { CSVDataType::IntVector4, CSVDataType::IntVector4Array }, TextParsing::gIncludeIntVector4 },
+                                            { { CSVDataType::Vector2, CSVDataType::Vector2Array }, TextParsing::gIncludeVector2 },
+                                            { { CSVDataType::Vector3, CSVDataType::Vector3Array }, TextParsing::gIncludeVector3 },
+                                            { { CSVDataType::Vector4, CSVDataType::Vector4Array }, TextParsing::gIncludeVector4 } };
 
     String content{};
 
@@ -98,26 +95,26 @@ System::String CoreTools::CSVGenerateHead::GenerateVectorHead() const
 
     auto content = GenerateVectorHeadContent();
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     if (csvHead.HasDataType(CSVDataType::BoolArray))
     {
-        content += TextParsing::g_Deque;
+        content += TextParsing::gDeque;
     }
 
     if (csvHead.HasMapping())
     {
-        content += TextParsing::g_Memory;
+        content += TextParsing::gMemory;
     }
 
     if (csvHead.HasVectorArrayDataType())
     {
-        content += TextParsing::g_Vector;
+        content += TextParsing::gVector;
     }
 
     if (csvHead.HasArrayDataType())
     {
-        content += TextParsing::g_NewlineCharacter;
+        content += TextParsing::gNewlineCharacter;
     }
 
     return content;
@@ -125,67 +122,67 @@ System::String CoreTools::CSVGenerateHead::GenerateVectorHead() const
 
 System::String CoreTools::CSVGenerateHead::GenerateContainerHead() const
 {
-    String content{ TextParsing::g_NewlineCharacter };
+    String content{ TextParsing::gNewlineCharacter };
 
     if (csvHead.GetCSVFormatType() == CSVFormatType::TreeMap)
     {
-        content += TextParsing::g_Map;
+        content += TextParsing::gMap;
     }
 
-    content += TextParsing::g_Memory;
+    content += TextParsing::gMemory;
 
     if (csvHead.GetCSVFormatType() == CSVFormatType::HashMap)
     {
-        content += TextParsing::g_UnorderedMap;
+        content += TextParsing::gUnorderedMap;
     }
 
-    content += TextParsing::g_Vector;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gVector;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
 
 System::String CoreTools::CSVGenerateHead::GenerateContainerDetailHead() const
 {
-    String content{ TextParsing::g_IncludePrefix };
+    String content{ TextParsing::gIncludePrefix };
 
     content += csvHead.GetCSVClassName();
     content += suffix;
-    content += TextParsing::g_HeadFileSuffix;
+    content += TextParsing::gHeadFileSuffix;
 
-    content += TextParsing::g_UserClassInvariantMacro;
-    content += TextParsing::g_ExceptionMacro;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gUserClassInvariantMacro;
+    content += TextParsing::gExceptionMacro;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
 
 System::String CoreTools::CSVGenerateHead::GenerateBaseSourceHead() const
 {
-    String content{ TextParsing::g_IncludePrefix };
+    String content{ TextParsing::gIncludePrefix };
 
     content += csvHead.GetCSVClassName();
     content += suffix;
-    content += TextParsing::g_HeadFileSuffix;
+    content += TextParsing::gHeadFileSuffix;
 
-    content += TextParsing::g_UserClassInvariantMacro;
-    content += TextParsing::g_ExceptionMacro;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gUserClassInvariantMacro;
+    content += TextParsing::gExceptionMacro;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
 
 System::String CoreTools::CSVGenerateHead::GenerateSourceHeadMappingHead() const
 {
-    auto mappingHead = GetMappingHead();
+    const auto mappingHead = GetMappingHead();
 
     String content{};
 
     for (const auto& value : mappingHead)
     {
-        content += TextParsing::g_IncludePrefix;
+        content += TextParsing::gIncludePrefix;
         content += value;
-        content += TextParsing::g_HeadFileSuffix;
+        content += TextParsing::gHeadFileSuffix;
     }
 
     return content;
@@ -197,21 +194,21 @@ System::String CoreTools::CSVGenerateHead::GenerateSourceHead() const
 
     if (csvHead.HasArrayDataType())
     {
-        content += TextParsing::g_NumericCast;
+        content += TextParsing::gNumericCast;
     }
 
-    content += TextParsing::g_UserClassInvariantMacro;
+    content += TextParsing::gUserClassInvariantMacro;
 
     if (csvHead.HasScope())
     {
-        content += TextParsing::g_ExceptionMacro;
+        content += TextParsing::gExceptionMacro;
     }
 
-    content += TextParsing::g_CSVRowDetail;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gCSVRowDetail;
+    content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::g_UsingNamespaceLiterals;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gUsingNamespaceLiterals;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -222,15 +219,14 @@ CoreTools::CSVGenerateHead::MappingType CoreTools::CSVGenerateHead::GetMappingHe
 
     if (csvHead.HasMapping())
     {
-        local.emplace(csvHead.GetNameSpace() + TextParsing::g_Container.data());
+        local.emplace(csvHead.GetNameSpace() + TextParsing::gContainer.data());
 
         const auto count = csvHead.GetCount();
         for (auto index = 0; index < count; ++index)
         {
-            const auto mapping = csvHead.GetMapping(index);
-            if (!mapping.empty())
+            if (const auto mapping = csvHead.GetMapping(index); !mapping.empty())
             {
-                local.emplace(StringUtility::ToFirstLetterUpper(mapping) + TextParsing::g_Container.data());
+                local.emplace(StringUtility::ToFirstLetterUpper(mapping) + TextParsing::gContainer.data());
             }
         }
     }
@@ -244,36 +240,33 @@ System::String CoreTools::CSVGenerateHead::GenerateContainerSourceHead() const
 
     const auto className = csvHead.GetCSVClassName();
 
-    String content{ TextParsing::g_IncludePrefix };
+    String content{ TextParsing::gIncludePrefix };
     content += className;
-    content += TextParsing::g_HeadFileSuffix;
+    content += TextParsing::gHeadFileSuffix;
 
-    content += TextParsing::g_IncludePrefix;
+    content += TextParsing::gIncludePrefix;
     content += className;
     content += suffix;
 
     if (csvHead.GetCSVFormatType() == CSVFormatType::Unique)
     {
-        content += TextParsing::g_HeadFileSuffix;
-        content += TextParsing::g_UserClassInvariantMacro;
-        content += TextParsing::g_ExceptionMacro;
+        content += TextParsing::gHeadFileSuffix;
+        content += TextParsing::gUserClassInvariantMacro;
+        content += TextParsing::gExceptionMacro;
     }
     else
     {
-        content += TextParsing::g_HeadDetailFileSuffix;
+        content += TextParsing::gHeadDetailFileSuffix;
     }
 
-    content += TextParsing::g_LogMacroMacro;
-    content += TextParsing::g_IncludeCSVContent;
-    content += TextParsing::g_IncludeCSVHead;
-    content += TextParsing::g_IncludeCSVRow;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gLogMacroMacro;
+    content += TextParsing::gIncludeCSVContent;
+    content += TextParsing::gIncludeCSVHead;
+    content += TextParsing::gIncludeCSVRow;
+    content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::g_Algorithm;
-    content += TextParsing::g_NewlineCharacter;
-
-    content += TextParsing::g_UsingMakeShared;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gAlgorithm;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -284,34 +277,32 @@ System::String CoreTools::CSVGenerateHead::GenerateEnumSourceHead() const
 
     const auto className = csvHead.GetCSVClassName() + suffix;
 
-    String content{ TextParsing::g_IncludePrefix };
+    String content{ TextParsing::gIncludePrefix };
     content += className;
-    content += TextParsing::g_HeadFileSuffix;
+    content += TextParsing::gHeadFileSuffix;
 
-    content += TextParsing::g_UserClassInvariantMacro;
-    content += TextParsing::g_ExceptionMacro;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gUserClassInvariantMacro;
+    content += TextParsing::gExceptionMacro;
+    content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::g_Map;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gMap;
+    content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::g_UsingMap;
-    content += TextParsing::g_UsingNamespaceLiterals;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gUsingNamespaceLiterals;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
 
-System::String CoreTools::CSVGenerateHead::GenerateEnumHead() const
+System::String CoreTools::CSVGenerateHead::GenerateEnumHead()
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    String content{ TextParsing::g_CoreToolsHeadFile };
-    content += TextParsing::g_NewlineCharacter;
+    String content{ TextParsing::gCoreToolsHeadFile };
+    content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::g_EnumMacro;
-    content += TextParsing::g_CoreToolsClassInvariantMacro;
-    content += TextParsing::g_IncludeCSVRow;
+    content += TextParsing::gEnumMacro;
+    content += TextParsing::gIncludeCSVRow;
 
     return content;
 }

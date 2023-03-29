@@ -1,45 +1,43 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 21:17)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 17:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "QuerySheetRelsID.h"
+#include "QuerySheetRelsId.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/TextParsing/SimpleCSV/Detail/CommandQuery/QuerySheetRelsIDImpl.h"
+#include "CoreTools/TextParsing/SimpleCSV/Detail/CommandQuery/QuerySheetRelsIdImpl.h"
 
-using std::string;
-
-CoreTools::SimpleCSV::QuerySheetRelsID::QuerySheetRelsID(const string& sheetPath)
+CoreTools::SimpleCSV::QuerySheetRelsId::QuerySheetRelsId(const std::string& sheetPath)
     : impl{ sheetPath }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::SimpleCSV::QuerySheetRelsID::QuerySheetRelsID(const string& sheetPath, const string& sheetID)
-    : impl{ sheetPath, sheetID }
+CoreTools::SimpleCSV::QuerySheetRelsId::QuerySheetRelsId(const std::string& sheetPath, const std::string& sheetId)
+    : impl{ sheetPath, sheetId }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, QuerySheetRelsID)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, QuerySheetRelsId)
 
-string CoreTools::SimpleCSV::QuerySheetRelsID::GetSheetPath() const
+std::string CoreTools::SimpleCSV::QuerySheetRelsId::GetSheetPath() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetSheetPath();
 }
 
-string CoreTools::SimpleCSV::QuerySheetRelsID::GetSheetID() const
+std::string CoreTools::SimpleCSV::QuerySheetRelsId::GetSheetId() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return impl->GetSheetID();
+    return impl->GetSheetId();
 }

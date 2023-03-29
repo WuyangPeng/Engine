@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/03/02 09:49)
+///	引擎版本：0.9.0.4 (2023/03/23 15:23)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_OF_STREAM_SEEK_MANAGER_H
 #define CORE_TOOLS_FILE_MANAGER_OF_STREAM_SEEK_MANAGER_H

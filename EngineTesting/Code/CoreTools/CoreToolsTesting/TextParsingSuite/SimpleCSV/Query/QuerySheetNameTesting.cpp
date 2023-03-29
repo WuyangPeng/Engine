@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:28)
+///	引擎测试版本：0.9.0.4 (2023/03/07 11:22)
 
 #include "QuerySheetNameTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -35,15 +35,15 @@ void CoreTools::QuerySheetNameTesting::MainTest()
 
 void CoreTools::QuerySheetNameTesting::QuerySheetNameTest()
 {
-    auto sheetID = "sheetID"s;
-    auto sheetName = "sheetName"s;
-    SimpleCSV::QuerySheetName querySheetName0{ sheetID, sheetName };
+    const auto sheetId = "sheetId"s;
+    const auto sheetName = "sheetName"s;
+    const SimpleCSV::QuerySheetName querySheetName0{ sheetId, sheetName };
 
-    ASSERT_EQUAL(sheetID, querySheetName0.GetSheetID());
+    ASSERT_EQUAL(sheetId, querySheetName0.GetSheetId());
     ASSERT_EQUAL(sheetName, querySheetName0.GetSheetName());
 
-    SimpleCSV::QuerySheetName querySheetName1{ sheetID };
+    const SimpleCSV::QuerySheetName querySheetName1{ sheetId };
 
-    ASSERT_EQUAL(sheetID, querySheetName1.GetSheetID());
+    ASSERT_EQUAL(sheetId, querySheetName1.GetSheetId());
     ASSERT_TRUE(querySheetName1.GetSheetName().empty());
 }

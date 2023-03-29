@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/03/01 15:25)
+///	引擎版本：0.9.0.4 (2023/03/22 10:42)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_COLORS_DETAIL_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_COLORS_DETAIL_H
@@ -50,9 +50,10 @@ void CoreTools::ConsoleColors<Handle>::ResetColor()
     constexpr auto defaultTextColor = TextColour::White;
     constexpr auto defaultBackgroundColor = BackgroundColour::Black;
 
-    if (auto handle = console.GetHandle(); !System::SetSystemConsoleTextAttribute(handle, defaultTextColor, defaultBackgroundColor, System::ConsoleCommon::Default))
+    if (auto handle = console.GetHandle();
+        !System::SetSystemConsoleTextAttribute(handle, defaultTextColor, defaultBackgroundColor, System::ConsoleCommon::Default))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("初始化控制台颜色失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("初始化控制台颜色失败。"s))
     }
     else
     {
@@ -66,9 +67,10 @@ void CoreTools::ConsoleColors<Handle>::SetTextColor(TextColour aTextColor)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (auto handle = console.GetHandle(); !System::SetSystemConsoleTextAttribute(handle, aTextColor, backgroundColor, System::ConsoleCommon::Default))
+    if (auto handle = console.GetHandle();
+        !System::SetSystemConsoleTextAttribute(handle, aTextColor, backgroundColor, System::ConsoleCommon::Default))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("设置控制台文本颜色失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("设置控制台文本颜色失败。"s))
     }
     else
     {
@@ -90,7 +92,8 @@ void CoreTools::ConsoleColors<Handle>::SetBackgroundColor(BackgroundColour aBack
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (auto handle = console.GetHandle(); !System::SetSystemConsoleTextAttribute(handle, textColor, aBackgroundColor, System::ConsoleCommon::Default))
+    if (auto handle = console.GetHandle();
+        !System::SetSystemConsoleTextAttribute(handle, textColor, aBackgroundColor, System::ConsoleCommon::Default))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("设置控制台背景颜色失败。"s));
     }

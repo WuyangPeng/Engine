@@ -5,15 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/02/23 14:54)
+///	引擎版本：0.9.0.4 (2023/03/17 19:47)
 
 #ifndef CORE_TOOLS_BASE_STATIC_SINGLETON_H
 #define CORE_TOOLS_BASE_STATIC_SINGLETON_H
 
 #include "CoreTools/Threading/Flags/MutexFlags.h"
 #include "CoreTools/Threading/Flags/MutexTraits.h"
-
-#include <mutex>
 
 namespace CoreTools
 {

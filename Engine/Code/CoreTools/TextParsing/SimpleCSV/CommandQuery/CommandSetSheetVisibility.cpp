@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 21:16)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 17:03)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,31 +14,29 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/Detail/CommandQuery/CommandSetSheetVisibilityImpl.h"
 
-using std::string;
-
-CoreTools::SimpleCSV::CommandSetSheetVisibility::CommandSetSheetVisibility(const string& sheetID, const string& sheetName, const string& sheetVisibility)
-    : impl{ sheetID, sheetName, sheetVisibility }
+CoreTools::SimpleCSV::CommandSetSheetVisibility::CommandSetSheetVisibility(const std::string& sheetId, const std::string& sheetName, const std::string& sheetVisibility)
+    : impl{ sheetId, sheetName, sheetVisibility }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, CommandSetSheetVisibility)
 
-string CoreTools::SimpleCSV::CommandSetSheetVisibility::GetSheetID() const
+std::string CoreTools::SimpleCSV::CommandSetSheetVisibility::GetSheetId() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return impl->GetSheetID();
+    return impl->GetSheetId();
 }
 
-string CoreTools::SimpleCSV::CommandSetSheetVisibility::GetSheetName() const
+std::string CoreTools::SimpleCSV::CommandSetSheetVisibility::GetSheetName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return impl->GetSheetName();
 }
 
-string CoreTools::SimpleCSV::CommandSetSheetVisibility::GetSheetVisibility() const
+std::string CoreTools::SimpleCSV::CommandSetSheetVisibility::GetSheetVisibility() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

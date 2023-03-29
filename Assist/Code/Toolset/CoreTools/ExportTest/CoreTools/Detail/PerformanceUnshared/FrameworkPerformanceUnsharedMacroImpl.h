@@ -5,14 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.2 (2023/02/07 16:53)
+///	引擎辅助版本：0.9.0.4 (2023/03/17 14:45)
 
 #ifndef EXPORT_TEST_FRAMEWORK_PERFORMANCE_UNSHARED_MACRO_IMPL_H
 #define EXPORT_TEST_FRAMEWORK_PERFORMANCE_UNSHARED_MACRO_IMPL_H
 
 #include "Framework/FrameworkDll.h"
-
-#include <memory>
 
 namespace Framework
 {
@@ -26,7 +24,7 @@ namespace Framework
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD int GetCount() const noexcept; 
+        NODISCARD int GetCount() const noexcept;
 
     private:
         int count;

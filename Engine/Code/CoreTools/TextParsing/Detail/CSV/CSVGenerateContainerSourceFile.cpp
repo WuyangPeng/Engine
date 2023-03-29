@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 20:15)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 17:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -26,19 +26,19 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CSVGenerateContainerSourceFile
 
 System::String CoreTools::CSVGenerateContainerSourceFile::GetSuffix() const
 {
-    return String{ TextParsing::g_Container };
+    return String{ TextParsing::gContainer };
 }
 
 System::String CoreTools::CSVGenerateContainerSourceFile::GetFilePrefix() const
 {
-    return String{ TextParsing::g_ForwardSlash };
+    return String{ TextParsing::gForwardSlash };
 }
 
 System::String CoreTools::CSVGenerateContainerSourceFile::GetFileSuffix() const
 {
     auto result = GetSuffix();
 
-    result += TextParsing::g_SourceFileExtensionName;
+    result += TextParsing::gSourceFileExtensionName;
 
     return result;
 }
@@ -47,15 +47,15 @@ System::String CoreTools::CSVGenerateContainerSourceFile::GetContent() const
 {
     auto content = GenerateCopyright();
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
-    CSVGenerateHead csvGenerateHead{ GetCSVHead(), GetSuffix() };
+    const CSVGenerateHead csvGenerateHead{ GetCSVHead(), GetSuffix() };
     content += csvGenerateHead.GenerateContainerSourceHead();
 
-    CSVGenerateDefaultFunctionDefinition csvGenerateDefaultFunctionDefinition{ GetCSVHead(), GetSuffix() };
+    const CSVGenerateDefaultFunctionDefinition csvGenerateDefaultFunctionDefinition{ GetCSVHead(), GetSuffix() };
     content += csvGenerateDefaultFunctionDefinition.GenerateContainerDefaultFunctionDefinition();
 
-    CSVGenerateGetFunctionDefinition csvGenerateGetFunctionDefinition{ GetCSVHead(), GetSuffix() };
+    const CSVGenerateGetFunctionDefinition csvGenerateGetFunctionDefinition{ GetCSVHead(), GetSuffix() };
     content += csvGenerateGetFunctionDefinition.GenerateContainerFunctionDefinition(GetKeyTypeDescribe());
 
     return content;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/18 21:27)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/14 09:09)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_XML_CELL_VALUE_IMPL_DETAIL_H
 #define CORE_TOOLS_TEXT_PARSING_XML_CELL_VALUE_IMPL_DETAIL_H
@@ -13,9 +13,10 @@
 #include "CellValueImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
-template <typename T, typename std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
+template <typename T, std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
 CoreTools::SimpleCSV::CellValueImpl& CoreTools::SimpleCSV::CellValueImpl::operator=(T rhs)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -27,7 +28,7 @@ CoreTools::SimpleCSV::CellValueImpl& CoreTools::SimpleCSV::CellValueImpl::operat
     return *this;
 }
 
-template <typename T, typename std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
+template <typename T, std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
 void CoreTools::SimpleCSV::CellValueImpl::Set(T rhs)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -35,7 +36,7 @@ void CoreTools::SimpleCSV::CellValueImpl::Set(T rhs)
     *this = rhs;
 }
 
-template <typename T, typename std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
+template <typename T, std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
 T CoreTools::SimpleCSV::CellValueImpl::Get() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
@@ -44,28 +45,28 @@ T CoreTools::SimpleCSV::CellValueImpl::Get() const
     {
         if constexpr (std::is_same_v<T, bool>)
         {
-            return std::get<bool>(m_Value);
+            return std::get<bool>(cellValue);
         }
         else if constexpr (std::is_integral_v<T>)
         {
-            return boost::numeric_cast<T>(std::get<int64_t>(m_Value));
+            return boost::numeric_cast<T>(std::get<int64_t>(cellValue));
         }
         else if constexpr (std::is_floating_point_v<T>)
         {
-            return boost::numeric_cast<T>(std::get<double>(m_Value));
+            return boost::numeric_cast<T>(std::get<double>(cellValue));
         }
         else if constexpr (std::is_same_v<T, std::string>)
         {
-            return std::get<std::string>(m_Value);
+            return std::get<std::string>(cellValue);
         }
         else if constexpr (std::is_constructible_v<T, char*>)
         {
-            return std::get<std::string>(m_Value).c_str();
+            return std::get<std::string>(cellValue).c_str();
         }
     }
     catch (const std::bad_variant_access&)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::ValueType, SYSTEM_TEXT("CellValue 对象不包含请求的类型。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::ValueType, SYSTEM_TEXT("CellValue 对象不包含请求的类型。"s))
     }
 }
 

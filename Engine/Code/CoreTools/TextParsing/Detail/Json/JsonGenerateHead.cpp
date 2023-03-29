@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:44)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/10 14:00)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,7 +15,6 @@
 #include "CoreTools/TextParsing/Flags/JsonFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-using std::vector;
 using namespace std::literals;
 
 CoreTools::JsonGenerateHead::JsonGenerateHead(const JsonHead& jsonHead) noexcept
@@ -30,46 +29,46 @@ System::String CoreTools::JsonGenerateHead::GenerateCoreToolsHead() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    String content{ TextParsing::g_CoreToolsHeadFile };
-    content += TextParsing::g_NewlineCharacter;
+    String content{ TextParsing::gCoreToolsHeadFile };
+    content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::g_IncludePrefix;
+    content += TextParsing::gIncludePrefix;
     content += jsonHead.GetNameSpace();
     content += SYSTEM_TEXT("Fwd.h\"\n"s);
 
-    content += TextParsing::g_UnicodeUsing;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gUnicodeUsing;
+    content += TextParsing::gNewlineCharacter;
 
     if (jsonHead.HasBoolArray())
     {
-        content += TextParsing::g_Deque;
+        content += TextParsing::gDeque;
     }
 
     if (jsonHead.HasNested())
     {
-        content += TextParsing::g_Memory;
+        content += TextParsing::gMemory;
     }
 
     if (jsonHead.HasArray())
     {
-        content += TextParsing::g_Vector;
+        content += TextParsing::gVector;
     }
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
 
 System::String CoreTools::JsonGenerateHead::GenerateContainerDetailHead() const
 {
-    String content{ TextParsing::g_IncludePrefix };
+    String content{ TextParsing::gIncludePrefix };
 
     content += jsonHead.GetJsonClassName();
-    content += TextParsing::g_HeadFileSuffix;
+    content += TextParsing::gHeadFileSuffix;
 
-    content += TextParsing::g_UserClassInvariantMacro;
-    content += TextParsing::g_ExceptionMacro;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gUserClassInvariantMacro;
+    content += TextParsing::gExceptionMacro;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -80,22 +79,21 @@ System::String CoreTools::JsonGenerateHead::GenerateContainerSourceHead() const
 
     const auto className = jsonHead.GetJsonClassName();
 
-    auto content = TextParsing::g_IncludePrefix.data() + className + TextParsing::g_HeadFileSuffix.data();
+    auto content = TextParsing::gIncludePrefix.data() + className + TextParsing::gHeadFileSuffix.data();
 
     content += SYSTEM_TEXT("#include \"System/Helper/PragmaWarning/NumericCast.h\"\n"s);
-    content += TextParsing::g_UserClassInvariantMacro;
-    content += TextParsing::g_ExceptionMacro;
+    content += TextParsing::gUserClassInvariantMacro;
+    content += TextParsing::gExceptionMacro;
     content += SYSTEM_TEXT("#include \"CoreTools/Helper/LogMacro.h\"\n"s);
     content += SYSTEM_TEXT("#include \"CoreTools/TextParsing/Json/JsonHead.h\"\n"s);
     content += SYSTEM_TEXT("#include \"CoreTools/TextParsing/Json/JsonRow.h\"\n"s);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += SYSTEM_TEXT("#include <algorithm>\n"s);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
-    content += SYSTEM_TEXT("using std::make_shared;\n"s);
     content += SYSTEM_TEXT("using namespace std::literals;\n"s);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

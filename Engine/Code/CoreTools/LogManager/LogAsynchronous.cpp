@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 22:51)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 16:08)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,15 +14,13 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::make_unique;
-
 SINGLETON_GET_PTR_DEFINE(CoreTools, LogAsynchronous);
 
 CoreTools::LogAsynchronous::LogAsynchronousUniquePtr CoreTools::LogAsynchronous::logAsynchronous{};
 
 void CoreTools::LogAsynchronous::Create()
 {
-    logAsynchronous = make_unique<CoreTools::LogAsynchronous>(LogAsynchronousCreate::Init);
+    logAsynchronous = std::make_unique<CoreTools::LogAsynchronous>(LogAsynchronousCreate::Init);
 }
 
 void CoreTools::LogAsynchronous::Destroy() noexcept
@@ -30,9 +28,11 @@ void CoreTools::LogAsynchronous::Destroy() noexcept
     logAsynchronous.reset();
 }
 
-CoreTools::LogAsynchronous::LogAsynchronous(MAYBE_UNUSED LogAsynchronousCreate logAsynchronousCreate)
+CoreTools::LogAsynchronous::LogAsynchronous(LogAsynchronousCreate logAsynchronousCreate)
     : impl{ ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(logAsynchronousCreate);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
@@ -54,6 +54,15 @@ void CoreTools::LogAsynchronous::Registered(const String& fileName, const LogMes
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     impl->Registered(fileName, message, appenderManager);
+}
+
+void CoreTools::LogAsynchronous::Registered(const OStreamShared& streamShared, const std::string& message, LogLevel logLevel)
+{
+    SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
+
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    impl->Registered(streamShared, message, logLevel);
 }
 
 void CoreTools::LogAsynchronous::Run()

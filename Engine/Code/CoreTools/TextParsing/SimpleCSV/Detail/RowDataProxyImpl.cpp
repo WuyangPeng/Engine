@@ -1,35 +1,36 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:23)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/14 10:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "RowDataProxyImpl.h"
 #include "Utilities.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 #include "CoreTools/TextParsing/SimpleCSV/Cell.h"
+#include "CoreTools/TextParsing/SimpleCSV/CellReference.h"
 #include "CoreTools/TextParsing/SimpleCSV/CellValueProxyDetail.h"
 #include "CoreTools/TextParsing/SimpleCSV/Constants.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
-#include "CoreTools/TextParsing/SimpleCSV/Flags/IteratorFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/Row.h"
 #include "CoreTools/TextParsing/SimpleCSV/RowDataRange.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
 #include <gsl/util>
 
-using std::vector;
-
-CoreTools::SimpleCSV::RowDataProxyImpl::RowDataProxyImpl(MAYBE_UNUSED DisableNotThrow disableNotThrow)
+CoreTools::SimpleCSV::RowDataProxyImpl::RowDataProxyImpl(DisableNotThrow disableNotThrow)
     : document{}, row{}, rowNode{}
 {
+    System::UnusedFunction(disableNotThrow);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
@@ -45,12 +46,12 @@ CoreTools::SimpleCSV::RowDataProxyImpl& CoreTools::SimpleCSV::RowDataProxyImpl::
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto documentSharedPtr = document.lock();
-    auto rowSharedPtr = row.lock();
+    const auto documentSharedPtr = document.lock();
+    const auto rowSharedPtr = row.lock();
 
     if (!documentSharedPtr || !rowSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或row已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或row已被释放。"s))
     }
 
     auto columnSize = boost::numeric_cast<int>(values.size());
@@ -59,10 +60,10 @@ CoreTools::SimpleCSV::RowDataProxyImpl& CoreTools::SimpleCSV::RowDataProxyImpl::
     XMLNode curNode{};
     for (auto iter = values.rbegin(); iter != values.rend(); ++iter)
     {
-        curNode = rowNode.prepend_child(TextParsing::g_ChildC.data());
+        curNode = rowNode.prepend_child(TextParsing::gChildC.data());
         CellReference cellReference{ rowSharedPtr->GetRowNumber(), columnSize };
-        curNode.append_attribute(TextParsing::g_AttributeR.data()).set_value(cellReference.GetAddress().c_str());
-        auto cell = Cell::CreateCell(documentSharedPtr, curNode, rowSharedPtr->GetSharedStrings());
+        curNode.append_attribute(TextParsing::gAttributeR.data()).set_value(cellReference.GetAddress().c_str());
+        const auto cell = Cell::CreateCell(documentSharedPtr, curNode, rowSharedPtr->GetSharedStrings());
 
         cell->GetValue() = *iter;
         --columnSize;
@@ -75,16 +76,16 @@ CoreTools::SimpleCSV::RowDataProxyImpl& CoreTools::SimpleCSV::RowDataProxyImpl::
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (g_MaxColumns < values.size())
+    if (gMaxColumns < values.size())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Overflow, "容器大小超过最大列数。\n"s);
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Overflow, "容器大小超过最大列数。\n"s)
     }
 
-    auto documentSharedPtr = document.lock();
+    const auto documentSharedPtr = document.lock();
 
     if (!documentSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s))
     }
 
     if (values.empty())
@@ -94,19 +95,17 @@ CoreTools::SimpleCSV::RowDataProxyImpl& CoreTools::SimpleCSV::RowDataProxyImpl::
 
     RowDataRange range{ documentSharedPtr, rowNode, 1, boost::numeric_cast<int>(values.size()), GetSharedStrings() };
 
-    auto target = range.begin();
     auto source = values.begin();
 
-    while (true)
+    for (auto& target : range)
     {
-        target->GetValue() = gsl::narrow_cast<bool>(*source);
-        ++source;
-        if (source == values.end() || target == range.end())
+        if (source == values.end())
         {
             break;
         }
+        target.GetValue() = gsl::narrow_cast<bool>(*source);
 
-        ++target;
+        ++source;
     }
 
     return *this;
@@ -116,22 +115,22 @@ CoreTools::SimpleCSV::RowDataProxyImpl::CellValueContainer CoreTools::SimpleCSV:
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto documentSharedPtr = document.lock();
-    auto rowSharedPtr = row.lock();
+    const auto documentSharedPtr = document.lock();
+    const auto rowSharedPtr = row.lock();
 
     if (!documentSharedPtr || !rowSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或row已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或row已被释放。"s))
     }
 
-    auto numCells = (rowNode.last_child() == XMLNode{} ? 0 : CellReference{ rowNode.last_child().attribute(TextParsing::g_AttributeR.data()).value() }.GetColumn());
+    const auto numCells = (rowNode.last_child() == XMLNode{} ? 0 : CellReference{ rowNode.last_child().attribute(TextParsing::gAttributeR.data()).value() }.GetColumn());
     CellValueContainer result{ boost::numeric_cast<size_t>(numCells), CellValue::CreateDefault() };
 
     if (0 < numCells)
     {
         for (const auto& node : rowNode.children())
         {
-            const auto index = CellReference{ node.attribute(TextParsing::g_AttributeR.data()).value() }.GetColumn() - 1;
+            const auto index = CellReference{ node.attribute(TextParsing::gAttributeR.data()).value() }.GetColumn() - 1;
             result.at(index) = Cell::CreateCell(documentSharedPtr, node, rowSharedPtr->GetSharedStrings())->GetValue().GetValue();
         }
     }
@@ -143,11 +142,11 @@ CoreTools::SimpleCSV::RowDataProxyImpl::SharedStringsSharedPtr CoreTools::Simple
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto rowSharedPtr = row.lock();
+    const auto rowSharedPtr = row.lock();
 
     if (!rowSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("row已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("row已被释放。"s))
     }
 
     return rowSharedPtr->GetSharedStrings();
@@ -159,12 +158,10 @@ void CoreTools::SimpleCSV::RowDataProxyImpl::DeleteCellValues(int count)
 
     auto xmlNode = GetRowNode();
 
-    vector<XMLNode> toBeDeleted{};
+    std::vector<XMLNode> toBeDeleted{};
     for (auto cellNode : xmlNode.children())
     {
-        CellReference cellReference{ cellNode.attribute(TextParsing::g_AttributeR.data()).value() };
-
-        if (cellReference.GetColumn() <= count)
+        if (CellReference cellReference{ cellNode.attribute(TextParsing::gAttributeR.data()).value() }; cellReference.GetColumn() <= count)
         {
             toBeDeleted.emplace_back(cellNode);
         }
@@ -180,16 +177,16 @@ void CoreTools::SimpleCSV::RowDataProxyImpl::PrependCellValue(const CellValue& v
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto documentSharedPtr = document.lock();
-    auto rowSharedPtr = row.lock();
+    const auto documentSharedPtr = document.lock();
+    const auto rowSharedPtr = row.lock();
 
     if (!documentSharedPtr || !rowSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或row已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或row已被释放。"s))
     }
 
-    auto curNode = rowNode.prepend_child(TextParsing::g_ChildC.data());
-    curNode.append_attribute(TextParsing::g_AttributeR.data()).set_value(CellReference{ rowSharedPtr->GetRowNumber(), column }.GetAddress().c_str());
+    auto curNode = rowNode.prepend_child(TextParsing::gChildC.data());
+    curNode.append_attribute(TextParsing::gAttributeR.data()).set_value(CellReference{ rowSharedPtr->GetRowNumber(), column }.GetAddress().c_str());
     Cell::CreateCell(documentSharedPtr, curNode, GetSharedStrings())->GetValue() = value;
 }
 
@@ -199,7 +196,7 @@ CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::RowDataProxyImpl::GetRowNode
 
     if (document.expired())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document已被释放。"s))
     }
 
     return rowNode;
@@ -222,7 +219,7 @@ CoreTools::SimpleCSV::ConstXMLDocumentSharedPtr CoreTools::SimpleCSV::RowDataPro
 
     if (!documentSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document 已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document 已被释放。"s))
     }
 
     return documentSharedPtr;

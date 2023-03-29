@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 13:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 11:30)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ZIP_ARCHIVE_H
 #define CORE_TOOLS_TEXT_PARSING_ZIP_ARCHIVE_H
@@ -21,36 +21,37 @@
 template class CORE_TOOLS_DEFAULT_DECLARE std::shared_ptr<CoreTools::SimpleZip::ZipArchiveImpl>;
 template class CORE_TOOLS_DEFAULT_DECLARE CoreTools::NonCopyImpl<CoreTools::SimpleZip::ZipArchiveImpl>;
 
-namespace CoreTools
+namespace CoreTools::SimpleZip
 {
-    namespace SimpleZip
+    class CORE_TOOLS_DEFAULT_DECLARE ZipArchive final
     {
-        class CORE_TOOLS_DEFAULT_DECLARE ZipArchive final
-        {
-        public:
-            NON_COPY_TYPE_DECLARE(ZipArchive);
+    public:
+        NON_COPY_TYPE_DECLARE(ZipArchive);
 
-        public:
-            explicit ZipArchive(MAYBE_UNUSED DisableNotThrow disableNotThrow);
-            explicit ZipArchive(const std::string& fileName);
-            ZipArchive(const std::string& fileName, bool isCreate);
+    public:
+        NODISCARD static ZipArchive Create();
 
-            CLASS_INVARIANT_DECLARE;
+        explicit ZipArchive(const std::string& fileName);
+        ZipArchive(const std::string& fileName, bool isCreate);
 
-            void Save(const std::string& path = std::string{});
+        CLASS_INVARIANT_DECLARE;
 
-            void AddEntry(const std::string& name, const std::string& data);
+        void Save(const std::string& path = std::string{});
 
-            void DeleteEntry(const std::string& entryName);
+        void AddEntry(const std::string& name, const std::string& data);
 
-            NODISCARD std::string GetEntry(const std::string& name);
+        void DeleteEntry(const std::string& entryName);
 
-            NODISCARD bool HasEntry(const std::string& entryName);
+        NODISCARD std::string GetEntry(const std::string& name);
 
-        private:
-            PackageType impl;
-        };
-    }
+        NODISCARD bool HasEntry(const std::string& entryName);
+
+    private:
+        explicit ZipArchive(DisableNotThrow disableNotThrow);
+
+    private:
+        PackageType impl;
+    };
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_ZIP_ARCHIVE_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:33)
+///	引擎测试版本：0.9.0.4 (2023/03/07 11:24)
 
 #include "QueryXmlDataTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -37,23 +37,23 @@ void CoreTools::QueryXmlDataTesting::MainTest()
 
 void CoreTools::QueryXmlDataTesting::QueryXmlDataTest()
 {
-    auto xmlPath = "xmlPath"s;
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
-    auto xmlData = std::make_shared<SimpleCSV::XmlData>(document, "[Content_Types].xml");
-    SimpleCSV::QueryXmlData querySheetName0{ xmlPath, xmlData };
+    const auto xmlPath = "xmlPath"s;
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto xmlData = std::make_shared<SimpleCSV::XmlData>(document, "[Content_Types].xml");
+    const SimpleCSV::QueryXmlData querySheetName0{ xmlPath, xmlData };
 
     ASSERT_EQUAL(xmlPath, querySheetName0.GetXmlPath());
     ASSERT_EQUAL(xmlData, querySheetName0.GetXmlData());
 
-    SimpleCSV::QueryXmlData querySheetName1{ xmlPath };
+    const SimpleCSV::QueryXmlData querySheetName1{ xmlPath };
 
     ASSERT_EQUAL(xmlPath, querySheetName1.GetXmlPath());
 }
 
 void CoreTools::QueryXmlDataTesting::ExceptionTest()
 {
-    auto xmlPath = "xmlPath"s;
-    SimpleCSV::QueryXmlData querySheetName{ xmlPath };
+    const auto xmlPath = "xmlPath"s;
+    const SimpleCSV::QueryXmlData querySheetName{ xmlPath };
 
     ASSERT_FALSE(querySheetName.GetXmlData());
 }

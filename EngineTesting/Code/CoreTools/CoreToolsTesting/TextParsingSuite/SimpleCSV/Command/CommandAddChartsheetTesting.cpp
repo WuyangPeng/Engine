@@ -1,44 +1,44 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:24)
+///	引擎测试版本：0.9.0.4 (2023/03/07 11:11)
 
-#include "CommandAddChartsheetTesting.h"
+#include "CommandAddChartSheetTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandAddChartsheet.h"
+#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandAddChartSheet.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 using namespace std::literals;
 
-CoreTools::CommandAddChartsheetTesting::CommandAddChartsheetTesting(const OStreamShared& stream)
+CoreTools::CommandAddChartSheetTesting::CommandAddChartSheetTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CommandAddChartsheetTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CommandAddChartSheetTesting)
 
-void CoreTools::CommandAddChartsheetTesting::DoRunUnitTest()
+void CoreTools::CommandAddChartSheetTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void CoreTools::CommandAddChartsheetTesting::MainTest()
+void CoreTools::CommandAddChartSheetTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(CommandAddChartsheetTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CommandAddChartSheetTest);
 }
 
-void CoreTools::CommandAddChartsheetTesting::CommandAddChartsheetTest()
+void CoreTools::CommandAddChartSheetTesting::CommandAddChartSheetTest()
 {
     constexpr auto sheetIndex = 1;
-    auto sheetName = "sheetName"s;
-    SimpleCSV::CommandAddChartsheet commandAddChartsheet{ sheetName, sheetIndex };
+    const auto sheetName = "sheetName"s;
+    const SimpleCSV::CommandAddChartSheet commandAddChartSheet{ sheetName, sheetIndex };
 
-    ASSERT_EQUAL(sheetIndex, commandAddChartsheet.GetSheetIndex());
-    ASSERT_EQUAL(sheetName, commandAddChartsheet.GetSheetName());
+    ASSERT_EQUAL(sheetIndex, commandAddChartSheet.GetSheetIndex());
+    ASSERT_EQUAL(sheetName, commandAddChartSheet.GetSheetName());
 }

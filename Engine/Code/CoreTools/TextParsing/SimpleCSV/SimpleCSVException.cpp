@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:28)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 13:59)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -36,7 +36,7 @@ void CoreTools::SimpleCSV::SimpleCSVException::ThrowError(const FunctionDescribe
 
 void CoreTools::SimpleCSV::SimpleCSVException::ThrowError(const FunctionDescribed& functionDescribed, CSVExceptionType errorCode, const String& message)
 {
-    LastError lastError{};
+    const LastError lastError{};
 
     throw ClassType{ functionDescribed, lastError, errorCode, message };
 }
@@ -57,29 +57,27 @@ System::String CoreTools::SimpleCSV::SimpleCSVException::GetErrorCodeDescribed()
 
     auto errorCodeDescribed = ParentType::GetErrorCodeDescribed();
 
-    const auto code = GetErrorCode();
-
-    switch (code)
+    switch (const auto code = GetErrorCode(); code)
     {
-        case CoreTools::SimpleCSV::CSVExceptionType::Overflow:
+        case CSVExceptionType::Overflow:
             errorCodeDescribed += SYSTEM_TEXT("（Overflow 溢出）, "sv);
             break;
-        case CoreTools::SimpleCSV::CSVExceptionType::ValueType:
+        case CSVExceptionType::ValueType:
             errorCodeDescribed += SYSTEM_TEXT("（ValueType 值类型）, "sv);
             break;
-        case CoreTools::SimpleCSV::CSVExceptionType::CellAddress:
+        case CSVExceptionType::CellAddress:
             errorCodeDescribed += SYSTEM_TEXT("（CellAddress 单元地址）, "sv);
             break;
-        case CoreTools::SimpleCSV::CSVExceptionType::Input:
+        case CSVExceptionType::Input:
             errorCodeDescribed += SYSTEM_TEXT("（Input 输入）, "sv);
             break;
-        case CoreTools::SimpleCSV::CSVExceptionType::Internal:
+        case CSVExceptionType::Internal:
             errorCodeDescribed += SYSTEM_TEXT("（Internal 内部的）, "sv);
             break;
-        case CoreTools::SimpleCSV::CSVExceptionType::Property:
+        case CSVExceptionType::Property:
             errorCodeDescribed += SYSTEM_TEXT("（Property 属性）, "sv);
             break;
-        case CoreTools::SimpleCSV::CSVExceptionType::Sheet:
+        case CSVExceptionType::Sheet:
             errorCodeDescribed += SYSTEM_TEXT("（Sheet 工作表）, "sv);
             break;
         default:

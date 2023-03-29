@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/26 0:15)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/29 13:47)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_DETAIL_H
@@ -18,7 +18,7 @@
 
 template <typename EventType>
 CoreTools::TelegramLess<EventType>::TelegramLess(int64_t difference) noexcept
-    : m_Difference{ difference < 0 ? -difference : difference }
+    : difference{ difference < 0 ? -difference : difference }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -28,7 +28,7 @@ CoreTools::TelegramLess<EventType>::TelegramLess(int64_t difference) noexcept
 template <typename EventType>
 bool CoreTools::TelegramLess<EventType>::IsValid() const noexcept
 {
-    if (0 <= m_Difference)
+    if (0 <= difference)
         return true;
     else
         return false;
@@ -43,11 +43,11 @@ bool CoreTools::TelegramLess<EventType>::operator()(const Telegram& lhs, const T
 
     const auto lhsDispatchMillisecondTime = lhs.GetDispatchMillisecondTime();
     const auto rhsDispatchMillisecondTime = rhs.GetDispatchMillisecondTime();
-    const auto difference = lhsDispatchMillisecondTime - rhsDispatchMillisecondTime;
+    const auto differenceTime = lhsDispatchMillisecondTime - rhsDispatchMillisecondTime;
 
-    if (-m_Difference <= difference && difference <= m_Difference)
+    if (-difference <= differenceTime && differenceTime <= difference)
     {
-        return DonotCompareTime(lhs, rhs);
+        return DoNotCompareTime(lhs, rhs);
     }
     else
     {
@@ -56,12 +56,12 @@ bool CoreTools::TelegramLess<EventType>::operator()(const Telegram& lhs, const T
         else if (rhsDispatchMillisecondTime < lhsDispatchMillisecondTime)
             return false;
         else
-            return DonotCompareTime(lhs, rhs);
+            return DoNotCompareTime(lhs, rhs);
     }
 }
 
 template <typename EventType>
-bool CoreTools::TelegramLess<EventType>::DonotCompareTime(const Telegram& lhs, const Telegram& rhs) const
+bool CoreTools::TelegramLess<EventType>::DoNotCompareTime(const Telegram& lhs, const Telegram& rhs) const
 {
     if (lhs.GetMessageType() < rhs.GetMessageType())
         return true;

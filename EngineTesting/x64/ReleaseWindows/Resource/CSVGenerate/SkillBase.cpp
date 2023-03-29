@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #include "SkillBase.h"
@@ -26,14 +26,14 @@ int CSVConfigure::SkillBase::GetKey() const noexcept
     return key;
 }
 
-int CSVConfigure::SkillBase::GetID() const noexcept
+int CSVConfigure::SkillBase::GetId() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return 0;
 }
 
-int CSVConfigure::SkillBase::GetNextID() const noexcept
+int CSVConfigure::SkillBase::GetNextId() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -51,7 +51,7 @@ System::String CSVConfigure::SkillBase::GetSkillName() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("skill表基类不允许获取字符串。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("skill表基类不允许获取字符串。"s))
 }
 
 CSVConfigure::VectorType CSVConfigure::SkillBase::GetVectorType() const noexcept

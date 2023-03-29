@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #include "Equip.h"
@@ -15,8 +15,6 @@
 #include "CoreTools/TextParsing/CSV/CSVRow.h"
 
 #include <algorithm>
-
-using std::make_shared;
 
 CSVConfigure::EquipContainer::EquipContainer(const CoreTools::CSVContent& csvContent)
     : equip{}
@@ -33,10 +31,10 @@ void CSVConfigure::EquipContainer::Parsing(const CoreTools::CSVContent& csvConte
     {
         CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
 
-        equip.emplace_back(make_shared<Equip>(csvRow));
+        equip.emplace_back(std::make_shared<Equip>(csvRow));
     }
 
-    std::sort(equip.begin(), equip.end(), [](const auto& lhs, const auto& rhs) noexcept {
+    std::ranges::sort(equip, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
 }
@@ -51,7 +49,7 @@ CSVConfigure::EquipContainer::ConstEquipBaseSharedPtr CSVConfigure::EquipContain
         return (*lhs).GetKey() < (*rhs).GetKey();
     };
 
-    const auto range = equal_range(equip.begin(), equip.end(), make_shared<EquipBase>(key), function);
+    const auto range = equal_range(equip.begin(), equip.end(), std::make_shared<EquipBase>(key), function);
 
     if (range.first != equip.cend())
     {
@@ -59,7 +57,7 @@ CSVConfigure::EquipContainer::ConstEquipBaseSharedPtr CSVConfigure::EquipContain
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("equip表未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("equip表未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s))
     }
 }
 
@@ -71,7 +69,7 @@ CSVConfigure::EquipContainer::Container CSVConfigure::EquipContainer::GetEquip(i
         return (*lhs).GetKey() < (*rhs).GetKey();
     };
 
-    const auto range = equal_range(equip.begin(), equip.end(), make_shared<EquipBase>(key), function);
+    const auto range = equal_range(equip.begin(), equip.end(), std::make_shared<EquipBase>(key), function);
 
     return Container{ range.first, range.second };
 }

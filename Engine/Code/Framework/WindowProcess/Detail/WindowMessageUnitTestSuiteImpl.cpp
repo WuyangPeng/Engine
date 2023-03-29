@@ -114,13 +114,14 @@ void Framework::WindowMessageUnitTestSuiteImpl::AddTest(const string& suiteName,
     }
     else if (testLoopCount < 0)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-            << SYSTEM_TEXT("²âÊÔ"s)
-            << testName
-            << SYSTEM_TEXT("Î´ÅäÖÃ£¡ÔÚ²âÊÔÌ×¼þ£º"s)
-            << suite.GetName()
-            << SYSTEM_TEXT("¡£"s)
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn,
+                                      CoreTools,
+                                      SYSTEM_TEXT("²âÊÔ"s),
+                                      testName,
+                                      SYSTEM_TEXT("Î´ÅäÖÃ£¡ÔÚ²âÊÔÌ×¼þ£º"s),
+                                      suite.GetName(),
+                                      SYSTEM_TEXT("¡£"s),
+                                      CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

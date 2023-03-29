@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Shared/AnimationMacroShared.h"
-#include "Toolset/CoreTools/ExportTest/CoreTools/Shared/ArtificialIntellegenceMacroShared.h"
+#include "Toolset/CoreTools/ExportTest/CoreTools/Shared/ArtificialIntelligenceMacroShared.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Shared/AssistToolsMacroShared.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Shared/CoreToolsMacroShared.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Shared/DatabaseMacroShared.h"
@@ -58,7 +58,7 @@ void CoreTools::SharedExportMacroTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<Physics::PhysicsMacroShared>);
     ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<Imagics::ImagicsMacroShared>);
     ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<Animation::AnimationMacroShared>);
-    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<ArtificialIntellegence::ArtificialIntellegenceMacroShared>);
+    ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<ArtificialIntelligence::ArtificialIntelligenceMacroShared>);
     ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<UserInterface::UserInterfaceMacroShared>);
     ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<AssistTools::AssistToolsMacroShared>);
     ASSERT_NOT_THROW_EXCEPTION_0(SharedExportTest<Framework::FrameworkMacroShared>);

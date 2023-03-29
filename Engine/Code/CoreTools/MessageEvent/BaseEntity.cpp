@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/26 18:30)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/29 13:54)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,9 +18,11 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-CoreTools::BaseEntity::BaseEntity(MAYBE_UNUSED DisableNotThrow dDisableNotThrow)
-    : entityID{ UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Entity) }
+CoreTools::BaseEntity::BaseEntity(DisableNotThrow disableNotThrow)
+    : entityId{ UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(UniqueIdSelect::Entity) }
 {
+    System::UnusedFunction(disableNotThrow);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
@@ -28,13 +30,9 @@ CoreTools::BaseEntity::~BaseEntity() noexcept
 {
     EXCEPTION_TRY
     {
-        if (!ENTITY_MANAGER_SINGLETON.Unregister(entityID))
+        if (!ENTITY_MANAGER_SINGLETON.UnRegister(entityId))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-                << SYSTEM_TEXT("注销EntityID = ")
-                << entityID
-                << SYSTEM_TEXT(" 失败。")
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("注销EntityID = "), entityId, SYSTEM_TEXT(" 失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
     EXCEPTION_ALL_CATCH(CoreTools)
@@ -44,18 +42,18 @@ CoreTools::BaseEntity::~BaseEntity() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, BaseEntity)
 
-uint64_t CoreTools::BaseEntity::GetEntityID() const noexcept
+int64_t CoreTools::BaseEntity::GetEntityId() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return entityID;
+    return entityId;
 }
 
 void CoreTools::BaseEntity::Register()
 {
     if (!ENTITY_MANAGER_SINGLETON.Register(shared_from_this()))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("重复注册Entity"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("重复注册Entity"s))
     }
     else
     {
@@ -65,5 +63,5 @@ void CoreTools::BaseEntity::Register()
 
 void CoreTools::BaseEntity::DoRegister()
 {
-    CoreTools::DisableNoexcept();
+    DisableNoexcept();
 }

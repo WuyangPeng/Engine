@@ -1,6 +1,6 @@
 TODO Level 1
  
-0.9.0.3
+0.9.0.4
 
 1.  （Contract）类不变式对Debug版出现了性能问题，目前通过类不变式级别宏进行开启或关闭。 
 2.  （DataTypes）对MinHeap进行性能优化。

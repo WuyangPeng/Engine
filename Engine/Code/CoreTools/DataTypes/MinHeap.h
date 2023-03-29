@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 14:49)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/23 11:17)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_H
@@ -35,10 +35,12 @@ namespace CoreTools
         MinHeap(int maxElements, int growBy, Scalar initialValue = Scalar{});
 
 #ifdef OPEN_CLASS_INVARIANT
+
         // 前两个函数检查记录数组确实形成一个堆。最后一个函数打印堆到一个日志中。
         CLASS_INVARIANT_DECLARE;
         NODISCARD bool IsValid(int startIndex, int finalIndex) const;
         void PrintMinHeapInLog() const;
+
 #endif  // OPEN_CLASS_INVARIANT
 
         NODISCARD int GetMaxElements() const;

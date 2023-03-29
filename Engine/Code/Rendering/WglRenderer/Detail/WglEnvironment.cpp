@@ -47,16 +47,12 @@ void Rendering::WglEnvironment::Release() noexcept
         {
             if (!System::MakeWglCurrent(device, nullptr))
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering)
-                    << SYSTEM_TEXT("WglMakeCurrentÊ§°Ü£¡")
-                    << LOG_SINGLETON_TRIGGER_ASSERT;
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("WglMakeCurrentÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
 
             if (!System::DeleteWglContext(immediate))
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering)
-                    << SYSTEM_TEXT("WglDeleteContextÊ§°Ü£¡")
-                    << LOG_SINGLETON_TRIGGER_ASSERT;
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("WglDeleteContextÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
 
             immediate = nullptr;
@@ -64,9 +60,7 @@ void Rendering::WglEnvironment::Release() noexcept
 
         if (!System::ReleaseSystemDC(handle, device))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering)
-                << SYSTEM_TEXT("ÊÍ·ÅÉè±¸ÉÏÏÂÎÄÊ§°Ü£¡")
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Rendering, SYSTEM_TEXT("ÊÍ·ÅÉè±¸ÉÏÏÂÎÄÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
 
         device = nullptr;

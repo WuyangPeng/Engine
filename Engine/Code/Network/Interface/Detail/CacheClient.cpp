@@ -88,9 +88,7 @@ void Network::CacheClient::Send(uint64_t socketID, const MessageInterfaceSharedP
 
                 if (!bufferSendStream.Insert(message))
                 {
-                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                        << SYSTEM_TEXT("消息包长度过长，包被丢弃。")
-                        << LOG_SINGLETON_TRIGGER_ASSERT;
+                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("消息包长度过长，包被丢弃。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
                 }
             }
         }
@@ -113,9 +111,7 @@ void Network::CacheClient::AsyncSend(uint64_t socketID, const MessageInterfaceSh
 
             if (!bufferSendStream.Insert(message))
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                    << SYSTEM_TEXT("消息包长度过长，包被丢弃。")
-                    << LOG_SINGLETON_TRIGGER_ASSERT;
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("消息包长度过长，包被丢弃。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
         }
     }
@@ -166,9 +162,7 @@ void Network::CacheClient::Receive()
     }
     catch (const CoreTools::Error& error)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-            << error
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -204,9 +198,7 @@ bool Network::CacheClient::EventFunction(const CoreTools::CallbackParameters& ca
                 socket->InsertSocket(m_SocketID);
                 if (!socket->EventFunction(callbackParameters))
                 {
-                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                        << SYSTEM_TEXT("事件触发失败。")
-                        << LOG_SINGLETON_TRIGGER_ASSERT;
+                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("事件触发失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
                 }
 
                 return true;
@@ -222,9 +214,7 @@ bool Network::CacheClient::EventFunction(const CoreTools::CallbackParameters& ca
 
             if (!socket->EventFunction(callbackParameters))
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                    << SYSTEM_TEXT("事件触发失败。")
-                    << LOG_SINGLETON_TRIGGER_ASSERT;
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("事件触发失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
 
             return true;

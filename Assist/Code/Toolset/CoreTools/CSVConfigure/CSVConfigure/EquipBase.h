@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #ifndef C_S_V_CONFIGURE_EQUIP_BASE_H
@@ -40,9 +40,9 @@ namespace CSVConfigure
 
         NODISCARD virtual int GetKey() const noexcept;
 
-        NODISCARD virtual int GetID() const noexcept;
+        NODISCARD virtual int GetId() const noexcept;
 
-        NODISCARD virtual int GetNextID() const noexcept;
+        NODISCARD virtual int GetNextId() const noexcept;
 
         NODISCARD virtual int GetReward() const noexcept;
 
@@ -58,8 +58,8 @@ namespace CSVConfigure
         NODISCARD virtual std::deque<bool>::const_iterator GetMaskBegin() const;
         NODISCARD virtual std::deque<bool>::const_iterator GetMaskEnd() const;
 
-        NODISCARD virtual int GetHeroID() const noexcept;
-        NODISCARD virtual std::shared_ptr<const Hero> GetHeroID(MAYBE_UNUSED const CSVConfigureContainer& csvContainer) const;
+        NODISCARD virtual int GetHeroId() const noexcept;
+        NODISCARD virtual std::shared_ptr<const Hero> GetHeroId(MAYBE_UNUSED const CSVConfigureContainer& csvContainer) const;
 
     private:
         int key{};

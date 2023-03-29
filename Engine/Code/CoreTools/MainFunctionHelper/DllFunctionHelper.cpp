@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/29 22:30)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 16:44)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,8 +20,6 @@
 
 #include <stdexcept>
 
-using std::runtime_error;
-using std::string;
 using namespace std::literals;
 
 void CoreTools::DllFunctionHelper::InitializeMutex(DllMutex* mutex)
@@ -34,9 +32,9 @@ void CoreTools::DllFunctionHelper::InitializeMutex(DllMutex* mutex)
     }
     catch (const Error& error)
     {
-        JudgeUserSelectionWithTChar(error.GetError().c_str());
+        JudgeUserSelectionWithTChar(error.GetError());
     }
-    catch (const runtime_error& error)
+    catch (const std::runtime_error& error)
     {
         JudgeUserSelectionWithChar(error.what());
     }
@@ -86,7 +84,7 @@ void CoreTools::DllFunctionHelper::JudgeSelection(System::DialogBoxCommand selec
     }
 }
 
-void CoreTools::DllFunctionHelper::JudgeUserSelectionWithChar(const string& message) noexcept
+void CoreTools::DllFunctionHelper::JudgeUserSelectionWithChar(const std::string& message) noexcept
 {
     const auto type = System::MessageBoxSelectionWithChar(message.c_str(), "错误");
 

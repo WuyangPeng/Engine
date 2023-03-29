@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:50)
+///	引擎测试版本：0.9.0.4 (2023/03/10 14:23)
 
 #include "JsonNodeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -15,8 +15,6 @@
 #include "CoreTools/TextParsing/Json/JsonNodeContainer.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::make_shared;
-using std::vector;
 using namespace std::literals;
 
 CoreTools::JsonNodeTesting::JsonNodeTesting(const OStreamShared& stream)
@@ -55,13 +53,13 @@ void CoreTools::JsonNodeTesting::JsonNodeTest()
 void CoreTools::JsonNodeTesting::JsonNodeContainerTest()
 {
     auto jsonNodeContainer0 = JsonNodeContainer::Create();
-    auto jsonNode0 = make_shared<JsonNode>(SYSTEM_TEXT("Key"s), JsonDataType::Bool);
+    const auto jsonNode0 = make_shared<JsonNode>(SYSTEM_TEXT("Key"s), JsonDataType::Bool);
     jsonNodeContainer0.AddJsonNode(jsonNode0);
 
     JsonNode jsonNode1{ SYSTEM_TEXT("Container"), JsonDataType::Nested };
     jsonNode1.SetNewJsonNodeContainer(jsonNodeContainer0);
 
-    auto jsonNodeContainer1 = jsonNode1.GetJsonNodeContainer();
+    const auto jsonNodeContainer1 = jsonNode1.GetJsonNodeContainer();
 
     ASSERT_ENUM_EQUAL(jsonNodeContainer1.GetJsonDataType(SYSTEM_TEXT("Key"s)), JsonDataType::Bool);
 }

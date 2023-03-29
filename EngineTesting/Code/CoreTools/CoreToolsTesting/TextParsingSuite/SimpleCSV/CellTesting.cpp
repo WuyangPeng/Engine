@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:41)
+///	引擎版本：0.9.0.4 (2023/03/08 15:32)
 
 #include "CellTesting.h"
+#include "System/Helper/PragmaWarning/PugiXml.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/Cell.h"
@@ -20,8 +21,6 @@
 #include "Mathematics/Base/MathDetail.h"
 
 using namespace std::literals;
-using std::string;
-using std::stringstream;
 
 CoreTools::CellTesting::CellTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -47,17 +46,17 @@ void CoreTools::CellTesting::MainTest()
 
 void CoreTools::CellTesting::EqualTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
-    auto worksheetNames = workbook.GetWorksheetNames();
-    auto worksheetName = worksheetNames.at(0);
-    auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
+    const auto worksheet = workbook.GetWorksheet(worksheetName);
 
-    auto cell0 = worksheet.GetCell(1, 1);
+    const auto cell0 = worksheet.GetCell(1, 1);
     ASSERT_TRUE(static_cast<bool>(*cell0));
 
-    auto cell1 = SimpleCSV::Cell::CreateCell(worksheet.GetRange().GetDocument(), cell0->GetXMLNode(), cell0->GetSharedStrings());
+    const auto cell1 = SimpleCSV::Cell::CreateCell(worksheet.GetRange().GetDocument(), cell0->GetXMLNode(), cell0->GetSharedStrings());
     ASSERT_TRUE(static_cast<bool>(*cell1));
 
     ASSERT_TRUE(*cell0 == *cell1);
@@ -68,7 +67,7 @@ void CoreTools::CellTesting::EqualTest()
     ASSERT_FALSE(*cell0 != *cell0);
     ASSERT_FALSE(*cell1 != *cell1);
 
-    auto cell2 = worksheet.GetCell(1, 2);
+    const auto cell2 = worksheet.GetCell(1, 2);
     ASSERT_TRUE(static_cast<bool>(*cell2));
 
     ASSERT_FALSE(*cell0 == *cell2);
@@ -77,11 +76,11 @@ void CoreTools::CellTesting::EqualTest()
 
 void CoreTools::CellTesting::CreateEmptyTest()
 {
-    auto cell0 = SimpleCSV::Cell::CreateCell();
+    const auto cell0 = SimpleCSV::Cell::CreateCell();
 
     ASSERT_FALSE(static_cast<bool>(*cell0));
 
-    auto cell1 = SimpleCSV::Cell::CreateCell();
+    const auto cell1 = SimpleCSV::Cell::CreateCell();
 
     ASSERT_FALSE(static_cast<bool>(*cell1));
 
@@ -90,14 +89,14 @@ void CoreTools::CellTesting::CreateEmptyTest()
 
 void CoreTools::CellTesting::FormulaTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
-    auto worksheetNames = workbook.GetWorksheetNames();
-    auto worksheetName = worksheetNames.at(0);
-    auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
+    const auto worksheet = workbook.GetWorksheet(worksheetName);
 
-    auto cell = worksheet.GetCell(1, 1);
+    const auto cell = worksheet.GetCell(1, 1);
 
     ASSERT_FALSE(cell->HasFormula());
 
@@ -109,15 +108,15 @@ void CoreTools::CellTesting::FormulaTest()
 
 void CoreTools::CellTesting::CellReferenceTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
-    auto worksheetNames = workbook.GetWorksheetNames();
-    auto worksheetName = worksheetNames.at(0);
-    auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
+    const auto worksheet = workbook.GetWorksheet(worksheetName);
 
-    auto cell = worksheet.GetCell(1, 5);
-    auto cellReference = cell->GetCellReference();
+    const auto cell = worksheet.GetCell(1, 5);
+    const auto cellReference = cell->GetCellReference();
 
     ASSERT_EQUAL(cellReference.GetRow(), 1);
     ASSERT_EQUAL(cellReference.GetColumn(), 5);
@@ -125,16 +124,16 @@ void CoreTools::CellTesting::CellReferenceTest()
 
 void CoreTools::CellTesting::CellValueProxyTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
-    auto worksheetNames = workbook.GetWorksheetNames();
-    auto worksheetName = worksheetNames.at(0);
-    auto worksheet = workbook.GetWorksheet(worksheetName);
+    const auto worksheetNames = workbook.GetWorksheetNames();
+    const auto& worksheetName = worksheetNames.at(0);
+    const auto worksheet = workbook.GetWorksheet(worksheetName);
 
-    auto cell = worksheet.GetCell(6, 1);
+    const auto cell = worksheet.GetCell(6, 1);
 
-    auto valueProxy = cell->GetValue();
+    const auto valueProxy = cell->GetValue();
 
     ASSERT_ENUM_EQUAL(valueProxy.GetType(), SimpleCSV::ValueType::Integer);
 }

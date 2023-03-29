@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:50)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/10 14:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,7 +16,7 @@
 #include "CoreTools/TextParsing/Json/JsonNode.h"
 
 CoreTools::JsonNodeImpl::JsonNodeImpl(const String& typeName, JsonDataType jsonDataType)
-    : typeName{ typeName }, m_JsonDataType{ jsonDataType }, m_JsonNodeContainer{ JsonNodeContainer::Create() }
+    : typeName{ typeName }, dataType{ jsonDataType }, nodeContainer{ JsonNodeContainer::Create() }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -27,7 +27,7 @@ void CoreTools::JsonNodeImpl::AddJsonNode(const JsonNodeContainer& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_JsonNodeContainer.AddJsonNode(container);
+    nodeContainer.AddJsonNode(container);
 }
 
 CoreTools::JsonNodeImpl::String CoreTools::JsonNodeImpl::GetTypeName() const
@@ -41,7 +41,7 @@ CoreTools::JsonDataType CoreTools::JsonNodeImpl::GetJsonDataType() const noexcep
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_JsonDataType;
+    return dataType;
 }
 
 void CoreTools::JsonNodeImpl::SetNewJsonDataType(JsonDataType jsonDataType) noexcept
@@ -52,115 +52,115 @@ void CoreTools::JsonNodeImpl::SetNewJsonDataType(JsonDataType jsonDataType) noex
     {
         case JsonDataType::String:
         {
-            m_JsonDataType = JsonDataType::String;
+            dataType = JsonDataType::String;
         }
         break;
         case JsonDataType::StringArray:
         {
-            m_JsonDataType = JsonDataType::StringArray;
+            dataType = JsonDataType::StringArray;
         }
         break;
         case JsonDataType::Bool:
         {
-            if (m_JsonDataType == JsonDataType::Bool)
+            if (dataType == JsonDataType::Bool)
             {
-                m_JsonDataType = JsonDataType::Bool;
+                dataType = JsonDataType::Bool;
             }
             else
             {
-                m_JsonDataType = JsonDataType::String;
+                dataType = JsonDataType::String;
             }
         }
         break;
         case JsonDataType::BoolArray:
         {
-            if (m_JsonDataType == JsonDataType::BoolArray)
+            if (dataType == JsonDataType::BoolArray)
             {
-                m_JsonDataType = JsonDataType::BoolArray;
+                dataType = JsonDataType::BoolArray;
             }
             else
             {
-                m_JsonDataType = JsonDataType::StringArray;
+                dataType = JsonDataType::StringArray;
             }
         }
         break;
         case JsonDataType::Int:
         {
-            if (m_JsonDataType == JsonDataType::Int)
+            if (dataType == JsonDataType::Int)
             {
-                m_JsonDataType = JsonDataType::Int;
+                dataType = JsonDataType::Int;
             }
-            else if (m_JsonDataType == JsonDataType::Int64)
+            else if (dataType == JsonDataType::Int64)
             {
-                m_JsonDataType = JsonDataType::Int64;
+                dataType = JsonDataType::Int64;
             }
             else
             {
-                m_JsonDataType = JsonDataType::String;
+                dataType = JsonDataType::String;
             }
         }
         break;
         case JsonDataType::IntArray:
         {
-            if (m_JsonDataType == JsonDataType::IntArray)
+            if (dataType == JsonDataType::IntArray)
             {
-                m_JsonDataType = JsonDataType::IntArray;
+                dataType = JsonDataType::IntArray;
             }
-            else if (m_JsonDataType == JsonDataType::Int64Array)
+            else if (dataType == JsonDataType::Int64Array)
             {
-                m_JsonDataType = JsonDataType::Int64Array;
+                dataType = JsonDataType::Int64Array;
             }
             else
             {
-                m_JsonDataType = JsonDataType::StringArray;
+                dataType = JsonDataType::StringArray;
             }
         }
         break;
         case JsonDataType::Int64:
         {
-            if (m_JsonDataType == JsonDataType::Int || m_JsonDataType == JsonDataType::Int64)
+            if (dataType == JsonDataType::Int || dataType == JsonDataType::Int64)
             {
-                m_JsonDataType = JsonDataType::Int64;
+                dataType = JsonDataType::Int64;
             }
             else
             {
-                m_JsonDataType = JsonDataType::String;
+                dataType = JsonDataType::String;
             }
         }
         break;
         case JsonDataType::Int64Array:
         {
-            if (m_JsonDataType == JsonDataType::IntArray || m_JsonDataType == JsonDataType::Int64Array)
+            if (dataType == JsonDataType::IntArray || dataType == JsonDataType::Int64Array)
             {
-                m_JsonDataType = JsonDataType::Int64Array;
+                dataType = JsonDataType::Int64Array;
             }
             else
             {
-                m_JsonDataType = JsonDataType::StringArray;
+                dataType = JsonDataType::StringArray;
             }
         }
         break;
         case JsonDataType::Double:
         {
-            if (m_JsonDataType == JsonDataType::Double)
+            if (dataType == JsonDataType::Double)
             {
-                m_JsonDataType = JsonDataType::Double;
+                dataType = JsonDataType::Double;
             }
             else
             {
-                m_JsonDataType = JsonDataType::String;
+                dataType = JsonDataType::String;
             }
         }
         break;
         case JsonDataType::DoubleArray:
         {
-            if (m_JsonDataType == JsonDataType::DoubleArray)
+            if (dataType == JsonDataType::DoubleArray)
             {
-                m_JsonDataType = JsonDataType::DoubleArray;
+                dataType = JsonDataType::DoubleArray;
             }
             else
             {
-                m_JsonDataType = JsonDataType::StringArray;
+                dataType = JsonDataType::StringArray;
             }
         }
         break;
@@ -173,27 +173,26 @@ void CoreTools::JsonNodeImpl::SetNewJsonNodeContainer(const JsonNodeContainer& j
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (m_JsonDataType != JsonDataType::Nested && m_JsonDataType != JsonDataType::NestedArray)
+    if (dataType != JsonDataType::Nested && dataType != JsonDataType::NestedArray)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("类型不一致！\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("类型不一致！\n"s))
     }
 
     for (const auto& jsonNode : jsonNodeContainer)
     {
-        if (m_JsonNodeContainer.GetJsonDataType(jsonNode->GetTypeName()) == JsonDataType::Null)
+        if (nodeContainer.GetJsonDataType(jsonNode->GetTypeName()) == JsonDataType::Null)
         {
-            m_JsonNodeContainer.AddJsonNode(jsonNode);
+            nodeContainer.AddJsonNode(jsonNode);
         }
         else
         {
-            auto container = jsonNode->GetJsonNodeContainer();
-            if (container.IsEmpty())
+            if (auto container = jsonNode->GetJsonNodeContainer(); container.IsEmpty())
             {
-                m_JsonNodeContainer.SetNewJsonDataType(jsonNode->GetTypeName(), jsonNode->GetJsonDataType());
+                nodeContainer.SetNewJsonDataType(jsonNode->GetTypeName(), jsonNode->GetJsonDataType());
             }
             else
             {
-                m_JsonNodeContainer.SetNewJsonNodeContainer(jsonNode->GetTypeName(), container);
+                nodeContainer.SetNewJsonNodeContainer(jsonNode->GetTypeName(), container);
             }
         }
     }
@@ -203,29 +202,29 @@ CoreTools::JsonNodeContainer CoreTools::JsonNodeImpl::GetJsonNodeContainer() con
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_JsonNodeContainer;
+    return nodeContainer;
 }
 
 bool CoreTools::JsonNodeImpl::HasArray() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (JsonDataType::StringArray <= m_JsonDataType && m_JsonDataType <= JsonDataType::DoubleArray)
+    if (JsonDataType::StringArray <= dataType && dataType <= JsonDataType::DoubleArray)
     {
         return true;
     }
 
-    return m_JsonNodeContainer.HasArray();
+    return nodeContainer.HasArray();
 }
 
 bool CoreTools::JsonNodeImpl::HasBoolArray() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (m_JsonDataType == JsonDataType::BoolArray)
+    if (dataType == JsonDataType::BoolArray)
     {
         return true;
     }
 
-    return m_JsonNodeContainer.HasBoolArray();
+    return nodeContainer.HasBoolArray();
 }

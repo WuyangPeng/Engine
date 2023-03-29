@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 13:53)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 11:36)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,8 +13,6 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-
-using std::string;
 
 CoreTools::CommandHandle::CommandHandle(int argumentsNumber, char** arguments)
     : commandLineInformation{ argumentsNumber, arguments },
@@ -42,7 +40,7 @@ CoreTools::CommandHandle::CommandHandle(const char* commandLine)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CommandHandle)
 
-string CoreTools::CommandHandle::ExcessArguments() const
+std::string CoreTools::CommandHandle::ExcessArguments() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -89,14 +87,14 @@ CoreTools::CommandHandle& CoreTools::CommandHandle::SetSupValue(double value) no
     return *this;
 }
 
-bool CoreTools::CommandHandle::GetBoolean(const string& name) const
+bool CoreTools::CommandHandle::GetBoolean(const std::string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return commandLineInformation.GetBoolean(name);
 }
 
-int CoreTools::CommandHandle::GetInteger(const string& name) const
+int CoreTools::CommandHandle::GetInteger(const std::string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -104,13 +102,13 @@ int CoreTools::CommandHandle::GetInteger(const string& name) const
 
     if (IsArgumentOutOfRange(value))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("参数超出范围！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("参数超出范围！"s))
     }
 
     return value;
 }
 
-float CoreTools::CommandHandle::GetFloat(const string& name) const
+float CoreTools::CommandHandle::GetFloat(const std::string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -118,13 +116,13 @@ float CoreTools::CommandHandle::GetFloat(const string& name) const
 
     if (IsArgumentOutOfRange(value))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("参数超出范围！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("参数超出范围！"s))
     }
 
     return value;
 }
 
-double CoreTools::CommandHandle::GetDouble(const string& name) const
+double CoreTools::CommandHandle::GetDouble(const std::string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -132,20 +130,20 @@ double CoreTools::CommandHandle::GetDouble(const string& name) const
 
     if (IsArgumentOutOfRange(value))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("参数超出范围！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("参数超出范围！"s))
     }
 
     return value;
 }
 
-string CoreTools::CommandHandle::GetString(const string& name) const
+std::string CoreTools::CommandHandle::GetString(const std::string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return commandLineInformation.GetString(name);
 }
 
-string CoreTools::CommandHandle::GetFileName() const
+std::string CoreTools::CommandHandle::GetFileName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -184,7 +182,7 @@ void CoreTools::CommandHandle::SetFileNameUsed()
     return commandLineInformation.SetFileNameUsed();
 }
 
-void CoreTools::CommandHandle::SetUsed(const string& argumentsName)
+void CoreTools::CommandHandle::SetUsed(const std::string& argumentsName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

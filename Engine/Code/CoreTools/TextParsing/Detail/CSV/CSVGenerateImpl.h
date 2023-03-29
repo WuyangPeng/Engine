@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 11:50)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 11:06)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_GENERATE_IMPL_H
@@ -38,12 +38,13 @@ namespace CoreTools
         virtual void GenerateFile(const String& directory) const;
 
     protected:
+        NODISCARD static String GenerateCopyright();
+        NODISCARD static String GetOldContent(const String& fileName);
+
         NODISCARD String GetCSVClassName() const;
-        NODISCARD String GetOldContent(const String& fileName) const;
         NODISCARD CSVFormatType GetCSVFormatType() const noexcept;
         NODISCARD CSVHead GetCSVHead() const noexcept;
 
-        NODISCARD String GenerateCopyright() const;
         NODISCARD String GenerateHeaderGuard() const;
         NODISCARD String GenerateNameSpace() const;
         NODISCARD String GenerateHeaderGuardEndif() const;

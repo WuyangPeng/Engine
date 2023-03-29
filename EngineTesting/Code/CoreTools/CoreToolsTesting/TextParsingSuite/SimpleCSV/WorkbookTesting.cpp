@@ -1,32 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:44)
+///	引擎测试版本：0.9.0.4 (2023/03/08 16:38)
 
 #include "WorkbookTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/Cell.h"
-#include "CoreTools/TextParsing/SimpleCSV/CellReference.h"
 #include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/SheetFlags.h"
-#include "CoreTools/TextParsing/SimpleCSV/Flags/ValueTypeFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/Row.h"
-#include "CoreTools/TextParsing/SimpleCSV/RowDataIterator.h"
-#include "CoreTools/TextParsing/SimpleCSV/RowDataRange.h"
-#include "CoreTools/TextParsing/SimpleCSV/RowRange.h"
 #include "CoreTools/TextParsing/SimpleCSV/Worksheet.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 
 using namespace std::literals;
-using std::string;
-using std::stringstream;
-using std::vector;
 
 CoreTools::WorkbookTesting::WorkbookTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -54,15 +46,15 @@ void CoreTools::WorkbookTesting::MainTest()
 
 void CoreTools::WorkbookTesting::GetWorksheetTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
     auto worksheetNames = workbook.GetWorksheetNames();
-    auto worksheetName = worksheetNames.at(0);
-    auto worksheet0 = workbook.GetSheet(worksheetName);
-    auto worksheet1 = workbook.GetSheet(1);
-    auto worksheet2 = workbook.GetWorksheet(worksheetName);
-    auto worksheet3 = workbook.GetChartsheet(worksheetName);
+    const auto& worksheetName = worksheetNames.at(0);
+    const auto worksheet0 = workbook.GetSheet(worksheetName);
+    const auto worksheet1 = workbook.GetSheet(1);
+    const auto worksheet2 = workbook.GetWorksheet(worksheetName);
+    const auto worksheet3 = workbook.GetChartSheet(worksheetName);
 
     ASSERT_EQUAL(worksheet0.GetColumnCount(), worksheet1.GetColumnCount());
     ASSERT_EQUAL(worksheet0.GetRowCount(), worksheet1.GetRowCount());
@@ -98,53 +90,53 @@ void CoreTools::WorkbookTesting::GetWorksheetTest()
 
 void CoreTools::WorkbookTesting::WorksheetIndexTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
-    auto worksheetNames = workbook.GetWorksheetNames();
-    auto worksheetName = worksheetNames.at(0);
-    auto worksheet0 = workbook.GetSheet(1);
+    const auto worksheetNames = workbook.GetWorksheetNames();
+
+    const auto worksheet0 = workbook.GetSheet(1);
 
     workbook.SetSheetIndex("Sheet1"s, 6);
-    auto worksheet1 = workbook.GetSheet(3);
+    const auto worksheet1 = workbook.GetSheet(3);
     ASSERT_EQUAL(worksheet0.GetColumnCount(), worksheet1.GetColumnCount());
     ASSERT_EQUAL(worksheet0.GetRowCount(), worksheet1.GetRowCount());
     ASSERT_EQUAL(workbook.GetIndexOfSheet("Sheet1"s), 3);
 
-    auto worksheet2 = workbook.GetSheet(1);
+    const auto worksheet2 = workbook.GetSheet(1);
     ASSERT_UNEQUAL(worksheet0.GetRowCount(), worksheet2.GetRowCount());
 
     workbook.SetSheetIndex("Sheet1"s, 2);
-    auto worksheet3 = workbook.GetSheet(2);
+    const auto worksheet3 = workbook.GetSheet(2);
     ASSERT_EQUAL(worksheet0.GetColumnCount(), worksheet3.GetColumnCount());
     ASSERT_EQUAL(worksheet0.GetRowCount(), worksheet3.GetRowCount());
     ASSERT_EQUAL(workbook.GetIndexOfSheet("Sheet1"s), 2);
 
-    auto worksheet4 = workbook.GetSheet(3);
+    const auto worksheet4 = workbook.GetSheet(3);
     ASSERT_UNEQUAL(worksheet0.GetRowCount(), worksheet4.GetRowCount());
 
     workbook.SetSheetIndex("Sheet1"s, 1);
-    auto worksheet5 = workbook.GetSheet(1);
+    const auto worksheet5 = workbook.GetSheet(1);
     ASSERT_EQUAL(worksheet0.GetColumnCount(), worksheet5.GetColumnCount());
     ASSERT_EQUAL(worksheet0.GetRowCount(), worksheet5.GetRowCount());
     ASSERT_EQUAL(workbook.GetIndexOfSheet("Sheet1"s), 1);
 
-    auto worksheet6 = workbook.GetSheet(2);
+    const auto worksheet6 = workbook.GetSheet(2);
     ASSERT_UNEQUAL(worksheet0.GetRowCount(), worksheet6.GetRowCount());
 
     workbook.SetSheetIndex("Sheet1"s, 2);
-    auto worksheet7 = workbook.GetSheet(2);
+    const auto worksheet7 = workbook.GetSheet(2);
     ASSERT_EQUAL(worksheet0.GetColumnCount(), worksheet7.GetColumnCount());
     ASSERT_EQUAL(worksheet0.GetRowCount(), worksheet7.GetRowCount());
 
-    auto worksheet8 = workbook.GetSheet(1);
+    const auto worksheet8 = workbook.GetSheet(1);
     ASSERT_UNEQUAL(worksheet0.GetRowCount(), worksheet8.GetRowCount());
     ASSERT_EQUAL(workbook.GetIndexOfSheet("Sheet1"s), 2);
 }
 
 void CoreTools::WorkbookTesting::TypeTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
     const auto count = workbook.GetWorksheetCount();
@@ -157,42 +149,42 @@ void CoreTools::WorkbookTesting::TypeTest()
     }
 
     ASSERT_EQUAL(workbook.GetSheetCount(), count);
-    ASSERT_EQUAL(workbook.GetChartsheetCount(), 0);
+    ASSERT_EQUAL(workbook.GetChartSheetCount(), 0);
 }
 
 void CoreTools::WorkbookTesting::SheetNamesTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
-    auto worksheetNames = workbook.GetWorksheetNames();
-    for (const auto& name : worksheetNames)
+
+    for (const auto& worksheetNames = workbook.GetWorksheetNames(); const auto& name : worksheetNames)
     {
-        auto worksheet = workbook.GetChartsheet(name);
+        auto worksheet = workbook.GetChartSheet(name);
         ASSERT_EQUAL(worksheet.GetName(), name);
     }
 
     ASSERT_EQUAL(workbook.GetWorksheetNames(), workbook.GetSheetNames());
-    ASSERT_TRUE(workbook.GetChartsheetNames().empty());
+    ASSERT_TRUE(workbook.GetChartSheetNames().empty());
 }
 
 void CoreTools::WorkbookTesting::ExistsTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
-    auto workbook = document->GetWorkbook();
-    auto worksheetNames = workbook.GetWorksheetNames();
-    for (const auto& name : worksheetNames)
+    const auto workbook = document->GetWorkbook();
+
+    for (const auto worksheetNames = workbook.GetWorksheetNames(); const auto& name : worksheetNames)
     {
         ASSERT_TRUE(workbook.IsSheetExists(name));
         ASSERT_TRUE(workbook.IsWorksheetExists(name));
-        ASSERT_FALSE(workbook.IsChartsheetExists(name));
+        ASSERT_FALSE(workbook.IsChartSheetExists(name));
     }
 }
 
 void CoreTools::WorkbookTesting::SharedStringTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
 
@@ -202,7 +194,7 @@ void CoreTools::WorkbookTesting::SharedStringTest()
 
 void CoreTools::WorkbookTesting::SetSheetNameTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
     workbook.SetSheetName("Sheet1"s, "Sheet4"s);
@@ -212,16 +204,16 @@ void CoreTools::WorkbookTesting::SetSheetNameTest()
 
 void CoreTools::WorkbookTesting::SheetIDTest()
 {
-    auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
+    const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 
     auto workbook = document->GetWorkbook();
 
-    auto sheetID = workbook.GetSheetID("Sheet1"s);
+    const auto sheetId = workbook.GetSheetId("Sheet1"s);
 
-    ASSERT_EQUAL(workbook.GetSheetName(sheetID), "Sheet1"s);
-    ASSERT_EQUAL(workbook.GetSheetVisibility(sheetID), ""s);
+    ASSERT_EQUAL(workbook.GetSheetName(sheetId), "Sheet1"s);
+    ASSERT_EQUAL(workbook.GetSheetVisibility(sheetId), ""s);
 
-    ASSERT_EQUAL(workbook.CreateInternalSheetID(), 4);
+    ASSERT_EQUAL(workbook.CreateInternalSheetId(), 4);
 
-    workbook.PrepareSheetMetadata("Sheet4"s, workbook.CreateInternalSheetID());
+    workbook.PrepareSheetMetadata("Sheet4"s, workbook.CreateInternalSheetId());
 }

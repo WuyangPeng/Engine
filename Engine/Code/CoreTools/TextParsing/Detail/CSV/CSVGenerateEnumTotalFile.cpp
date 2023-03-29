@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 20:17)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 17:36)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -54,9 +54,9 @@ void CoreTools::CSVGenerateEnumTotalFile::GenerateFile(const String& directory) 
 
     CSVGenerateEnumHeadFile csvGenerateEnumHeadFile{ csvContent };
 
-    auto result = std::async(&CSVGenerateEnumHeadFile::GenerateFile, csvGenerateEnumHeadFile, directory);
+    const auto result = std::async(&CSVGenerateEnumHeadFile::GenerateFile, csvGenerateEnumHeadFile, directory);
 
-    CSVGenerateEnumSourceFile csvGenerateEnumSourceFile{ csvContent };
+    const CSVGenerateEnumSourceFile csvGenerateEnumSourceFile{ csvContent };
     csvGenerateEnumSourceFile.GenerateFile(directory);
 
     result.wait();

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 11:47)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 09:42)
 
 #ifndef CORE_TOOLS_COMMAND_NUMBER_COMMAND_ARGUMENT_H
 #define CORE_TOOLS_COMMAND_NUMBER_COMMAND_ARGUMENT_H
@@ -27,23 +27,23 @@ namespace CoreTools
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD int GetInteger() const final;
-        NODISCARD float GetFloat() const final;
-        NODISCARD double GetDouble() const final;
-        NODISCARD const std::string GetString() const final;
+        NODISCARD int GetInteger() const override;
+        NODISCARD float GetFloat() const override;
+        NODISCARD double GetDouble() const override;
+        NODISCARD std::string GetString() const override;
 
-        NODISCARD bool IsInteger() const noexcept final;
-        NODISCARD bool IsFloat() const noexcept final;
-        NODISCARD bool IsDouble() const noexcept final;
-        NODISCARD bool IsString() const noexcept final;
-        NODISCARD bool IsNoValue() const noexcept final;
+        NODISCARD bool IsInteger() const noexcept override;
+        NODISCARD bool IsFloat() const noexcept override;
+        NODISCARD bool IsDouble() const noexcept override;
+        NODISCARD bool IsString() const noexcept override;
+        NODISCARD bool IsNoValue() const noexcept override;
 
-        NODISCARD CommandArgumentSharedPtr Clone() const final;
+        NODISCARD CommandArgumentSharedPtr Clone() const override;
 
-        void AddArgumentValue(MAYBE_UNUSED const std::string& value) final;
+        void AddArgumentValue(const std::string& aValue) override;
 
     private:
-        std::string m_Value;
+        std::string value;
     };
 }
 

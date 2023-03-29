@@ -994,7 +994,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float2& datum)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
     using ValueType = Mathematics::Float1::TupleType;
-    constexpr auto dimension = Mathematics::Float2::TupleDimension;
+    constexpr auto dimension = Mathematics::Float2::tupleDimension;
 
     for (auto i = 0; i < dimension; ++i)
     {
@@ -1021,7 +1021,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float3& datum)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
     using ValueType = Mathematics::Float3::TupleType;
-    constexpr auto dimension = Mathematics::Float3::TupleDimension;
+    constexpr auto dimension = Mathematics::Float3::tupleDimension;
 
     for (auto i = 0; i < dimension; ++i)
     {
@@ -1048,7 +1048,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float4& datum)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
     using ValueType = Mathematics::Float4::TupleType;
-    constexpr auto dimension = Mathematics::Float4::TupleDimension;
+    constexpr auto dimension = Mathematics::Float4::tupleDimension;
 
     for (auto i = 0; i < dimension; ++i)
     {

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 21:18)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 16:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,10 +14,8 @@
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
-using std::string;
-
 CoreTools::SimpleCSV::QuerySharedStringsImpl::QuerySharedStringsImpl(const SharedStringsSharedPtr& sharedStrings) noexcept
-    : m_SharedStrings{ sharedStrings }
+    : sharedStrings{ sharedStrings }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -28,20 +26,19 @@ CoreTools::SimpleCSV::QuerySharedStringsImpl::SharedStringsSharedPtr CoreTools::
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto sharedStringsSharedPtr = m_SharedStrings.lock();
-    if (sharedStringsSharedPtr)
+    if (auto sharedStringsSharedPtr = sharedStrings.lock(); sharedStringsSharedPtr != nullptr)
     {
         return sharedStringsSharedPtr;
     }
     else
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("指针已释放！"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("指针已释放！"s))
     }
 }
 
-void CoreTools::SimpleCSV::QuerySharedStringsImpl::SetSharedStrings(const SharedStringsSharedPtr& sharedStrings) noexcept
+void CoreTools::SimpleCSV::QuerySharedStringsImpl::SetSharedStrings(const SharedStringsSharedPtr& aSharedStrings) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_SharedStrings = sharedStrings;
+    sharedStrings = aSharedStrings;
 }

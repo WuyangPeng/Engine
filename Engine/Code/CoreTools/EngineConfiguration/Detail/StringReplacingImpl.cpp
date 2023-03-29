@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/09 12:35)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/23 15:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,9 +13,7 @@
 #include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::string;
-
-CoreTools::StringReplacingImpl::StringReplacingImpl(const string& configurationFileName)
+CoreTools::StringReplacingImpl::StringReplacingImpl(const std::string& configurationFileName)
     : replacing{}
 {
     InitReplacing(configurationFileName);
@@ -23,7 +21,7 @@ CoreTools::StringReplacingImpl::StringReplacingImpl(const string& configurationF
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-void CoreTools::StringReplacingImpl::InitReplacing(const string& configurationFileName)
+void CoreTools::StringReplacingImpl::InitReplacing(const std::string& configurationFileName)
 {
     boost::property_tree::basic_ptree<System::String, System::String> mainTree;
 
@@ -37,13 +35,11 @@ void CoreTools::StringReplacingImpl::InitReplacing(const string& configurationFi
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, StringReplacingImpl)
 
-const System::String CoreTools::StringReplacingImpl::GetReplacing(const String& original) const
+System::String CoreTools::StringReplacingImpl::GetReplacing(const String& original) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = replacing.find(original);
-
-    if (iter != replacing.cend())
+    if (const auto iter = replacing.find(original); iter != replacing.cend())
         return iter->second;
     else
         return String{};

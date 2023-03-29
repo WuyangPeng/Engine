@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/03/02 10:45)
+///	引擎版本：0.9.0.4 (2023/03/23 15:37)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -55,7 +55,7 @@ System::String CoreTools::IFStreamManagerImpl::BackupFile() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    auto newName = GetBackupName();
+    const auto newName = GetBackupName();
     System::OFileStream os{ newName, System::OFileStream::app };
 
     if (os)

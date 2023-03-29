@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #ifndef C_S_V_CONFIGURE_SKILL_CONTAINER_DETAIL_H
@@ -19,14 +19,14 @@ CSVConfigure::SkillContainer::ConstSkillBaseSharedPtr CSVConfigure::SkillContain
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = std::find_if(skill.cbegin(), skill.cend(), function);
+    const auto iter = std::ranges::find_if(skill, function);
 
     if (iter != skill.cend())
     {
         return *iter;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("skill表未找到满足条件的配置信息。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("skill表未找到满足条件的配置信息。"s))
 }
 
 template <typename Function>

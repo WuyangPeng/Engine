@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 20:12)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 17:03)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,8 +22,6 @@
 
 #include <vector>
 
-using std::vector;
-
 CoreTools::CSVContentImpl::CSVContentImpl(const String& fileName)
     : fileName{ fileName }, fileContent{}
 {
@@ -34,15 +32,15 @@ CoreTools::CSVContentImpl::CSVContentImpl(const String& fileName)
 
 void CoreTools::CSVContentImpl::Parsing()
 {
-    IFStreamManager streamManager{ fileName };
+    const IFStreamManager streamManager{ fileName };
 
     const auto content = streamManager.GetFileContent();
 
-    boost::algorithm::split(fileContent, content, boost::is_any_of(TextParsing::g_Newline), boost::token_compress_on);
+    split(fileContent, content, boost::is_any_of(TextParsing::gNewline), boost::token_compress_on);
 
     if (fileContent.size() < fileHeaderSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("csv文件头不合法。\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("csv文件头不合法。\n"s))
     }
 }
 
@@ -62,11 +60,11 @@ CoreTools::CSVHead CoreTools::CSVContentImpl::GetCSVHead() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    SpanIterator<FileContent::const_iterator> spanIterator{ fileContent.cbegin(), fileContent.cend() };
+    SpanIterator spanIterator{ fileContent.cbegin(), fileContent.cend() };
 
     spanIterator += System::EnumCastUnderlying(CSVType::VariableName);
 
-    FileContent content{ fileContent.cbegin(), spanIterator.GetCurrent() };
+    const FileContent content{ fileContent.cbegin(), spanIterator.GetCurrent() };
 
     return CSVHead{ fileName, content };
 }
@@ -89,7 +87,7 @@ System::String CoreTools::CSVContentImpl::GetCSVClassName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    FileNameParsing fileNameParsing{ fileName };
+    const FileNameParsing fileNameParsing{ fileName };
 
     return fileNameParsing.GetCSVClassName();
 }

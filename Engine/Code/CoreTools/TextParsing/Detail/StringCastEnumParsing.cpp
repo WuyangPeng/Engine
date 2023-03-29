@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -33,13 +33,13 @@ System::String CoreTools::StringCastEnumParsing::GenerateHeader() const
 
     auto content = csvHead.GetCompleteClassName();
 
-    content += TextParsing::g_Space;
+    content += TextParsing::gSpace;
     content += csvHead.GetNameSpace();
-    content += TextParsing::g_DoubleColon;
-    content += TextParsing::g_StringCast;
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gStringCast;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_Describe;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gDescribe;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -52,9 +52,9 @@ System::String CoreTools::StringCastEnumParsing::GenerateDescribe() const
 
     auto typeDescribe = GenerateIndentation(1);
 
-    typeDescribe += TextParsing::g_StringKeyMap;
+    typeDescribe += TextParsing::gStringKeyMap;
     typeDescribe += csvHead.GetCSVClassName();
-    typeDescribe += TextParsing::g_TypeDescribe;
+    typeDescribe += TextParsing::gTypeDescribe;
 
     return typeDescribe;
 }
@@ -63,33 +63,33 @@ System::String CoreTools::StringCastEnumParsing::GenerateColumn(const String& sp
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    String content{};
+    String result{};
 
-    const auto csvContent = GetCSVContent();
+    const auto content = GetCSVContent();
 
-    const auto size = csvContent.GetCount();
+    const auto size = content.GetCount();
     for (auto index = 0; index < size; ++index)
     {
-        const auto column = csvContent.GetContent(index);
+        const auto column = content.GetContent(index);
 
-        const auto csvPoistionType = GetPoistionType(index, size);
+        const auto csvPositionType = GetPositionType(index, size);
 
-        content += GetStringCastEnumColumn(column, space, csvPoistionType);
+        result += GetStringCastEnumColumn(column, space, csvPositionType);
     }
 
-    return content;
+    return result;
 }
 
-System::String CoreTools::StringCastEnumParsing::GetStringCastEnumColumn(const String& column, const String& space, CSVPoistionType csvPoistionType) const
+System::String CoreTools::StringCastEnumParsing::GetStringCastEnumColumn(const String& column, const String& space, CSVPositionType csvPositionType) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto result = Parsing::GetSplitComma(column);
 
     auto name = result.at(GetNameIndex());
-    boost::algorithm::trim_if(name, boost::is_any_of(TextParsing::g_QuotationMarks));
+    trim_if(name, boost::is_any_of(TextParsing::gQuotationMarks));
 
-    return GetColumn(GetStringCastEnumColumn(name), space, csvPoistionType);
+    return GetColumn(GetStringCastEnumColumn(name), space, csvPositionType);
 }
 
 System::String CoreTools::StringCastEnumParsing::GetStringCastEnumColumn(const String& name) const
@@ -98,15 +98,15 @@ System::String CoreTools::StringCastEnumParsing::GetStringCastEnumColumn(const S
 
     const auto csvHead = GetCSVHead();
 
-    String content{ TextParsing::g_InitSystemTextBegin };
+    String content{ TextParsing::gInitSystemTextBegin };
 
     content += name;
-    content += TextParsing::g_InitSystemTextEnd;
+    content += TextParsing::gInitSystemTextEnd;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += name;
-    content += TextParsing::g_Space;
-    content += TextParsing::g_RightBigParantheses;
+    content += TextParsing::gSpace;
+    content += TextParsing::gRightBrace;
 
     return content;
 }
@@ -115,5 +115,5 @@ System::String CoreTools::StringCastEnumParsing::GenerateFindFunctionDefinition(
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetFindFunctionDefinition(TextParsing::g_EnumDescribe);
+    return GetFindFunctionDefinition(TextParsing::gEnumDescribe);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 20:20)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 17:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -56,9 +56,7 @@ void CoreTools::CSVGenerateTotalFile::GenerateFile(const String& directory) cons
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto csvFormatType = GetCSVFormatType();
-
-    switch (csvFormatType)
+    switch (const auto csvFormatType = GetCSVFormatType(); csvFormatType)
     {
         case CSVFormatType::TreeMap:
             FALLTHROUGH;
@@ -98,34 +96,34 @@ void CoreTools::CSVGenerateTotalFile::GenerateFile(const Container& container, c
 
 void CoreTools::CSVGenerateTotalFile::GenerateDefaultFile(const String& directory) const
 {
-    Container container{ std::make_shared<CSVGenerateBaseHeadFile>(GetCSVHead()),
-                         std::make_shared<CSVGenerateBaseSourceFile>(GetCSVHead()),
-                         std::make_shared<CSVGenerateChildHeadFile>(GetCSVHead()),
-                         std::make_shared<CSVGenerateChildSourceFile>(GetCSVHead()),
-                         std::make_shared<CSVGenerateContainerHeadFile>(GetCSVHead()),
-                         std::make_shared<CSVGenerateContainerDetailHeadFile>(GetCSVHead()),
-                         std::make_shared<CSVGenerateContainerSourceFile>(GetCSVHead()) };
+    const Container container{ std::make_shared<CSVGenerateBaseHeadFile>(GetCSVHead()),
+                               std::make_shared<CSVGenerateBaseSourceFile>(GetCSVHead()),
+                               std::make_shared<CSVGenerateChildHeadFile>(GetCSVHead()),
+                               std::make_shared<CSVGenerateChildSourceFile>(GetCSVHead()),
+                               std::make_shared<CSVGenerateContainerHeadFile>(GetCSVHead()),
+                               std::make_shared<CSVGenerateContainerDetailHeadFile>(GetCSVHead()),
+                               std::make_shared<CSVGenerateContainerSourceFile>(GetCSVHead()) };
 
     GenerateFile(container, directory);
 }
 
 void CoreTools::CSVGenerateTotalFile::GenerateMapFile(const String& directory) const
 {
-    Container container{ std::make_shared<CSVGenerateDataHeadFile>(GetCSVHead()),
-                         std::make_shared<CSVGenerateDataSourceFile>(GetCSVHead()),
-                         std::make_shared<CSVGenerateContainerHeadFile>(GetCSVHead()),
-                         std::make_shared<CSVGenerateContainerDetailHeadFile>(GetCSVHead()),
-                         std::make_shared<CSVGenerateContainerSourceFile>(GetCSVHead()) };
+    const Container container{ std::make_shared<CSVGenerateDataHeadFile>(GetCSVHead()),
+                               std::make_shared<CSVGenerateDataSourceFile>(GetCSVHead()),
+                               std::make_shared<CSVGenerateContainerHeadFile>(GetCSVHead()),
+                               std::make_shared<CSVGenerateContainerDetailHeadFile>(GetCSVHead()),
+                               std::make_shared<CSVGenerateContainerSourceFile>(GetCSVHead()) };
 
     GenerateFile(container, directory);
 }
 
 void CoreTools::CSVGenerateTotalFile::GenerateUniqueFile(const String& directory) const
 {
-    Container container{ std::make_shared<CSVGenerateDataHeadFile>(GetCSVHead()),
-                         std::make_shared<CSVGenerateDataSourceFile>(GetCSVHead()),
-                         std::make_shared<CSVGenerateContainerHeadFile>(GetCSVHead()),
-                         std::make_shared<CSVGenerateContainerSourceFile>(GetCSVHead()) };
+    const Container container{ std::make_shared<CSVGenerateDataHeadFile>(GetCSVHead()),
+                               std::make_shared<CSVGenerateDataSourceFile>(GetCSVHead()),
+                               std::make_shared<CSVGenerateContainerHeadFile>(GetCSVHead()),
+                               std::make_shared<CSVGenerateContainerSourceFile>(GetCSVHead()) };
 
     GenerateFile(container, directory);
 }

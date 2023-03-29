@@ -13,6 +13,7 @@
 
 #include "Toolset/CoreTools/CSVConfigure/CSVConfigureLib.h"
 #include "Toolset/CoreTools/ExportTest/ExportTestLib.h"
+#include "Toolset/CoreTools/JsonConfigure/JsonConfigureLib.h"
 
 #if defined(TCRE_USE_MSVC)
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/06 21:45)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 15:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,35 +13,40 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/LogManager/AppenderManager.h"
 
-CoreTools::LogAsynchronousParameter::LogAsynchronousParameter(const LogMessage& message, const AppenderManagerSharedPtr& appenderManager) noexcept
-    : fileName{}, message{ message }, appenderManager{ appenderManager }
+CoreTools::LogAsynchronousParameter::LogAsynchronousParameter(LogMessage message, AppenderManagerSharedPtr appenderManager) noexcept
+    : ParentType{}, fileName{}, message{ std::move(message) }, appenderManager{ std::move(appenderManager) }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::LogAsynchronousParameter::LogAsynchronousParameter(const String& fileName, const LogMessage& message, const AppenderManagerSharedPtr& appenderManager)
-    : fileName{ fileName }, message{ message }, appenderManager{ appenderManager }
+CoreTools::LogAsynchronousParameter::LogAsynchronousParameter(String fileName, LogMessage message, AppenderManagerSharedPtr appenderManager) noexcept
+    : ParentType{}, fileName{ std::move(fileName) }, message{ std::move(message) }, appenderManager{ std::move(appenderManager) }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(CoreTools, LogAsynchronousParameter)
+#ifdef OPEN_CLASS_INVARIANT
 
-void CoreTools::LogAsynchronousParameter::Write() const
+bool CoreTools::LogAsynchronousParameter::IsValid() const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    if (ParentType::IsValid() && appenderManager != nullptr)
+        return true;
+    else
+        return false;
+}
 
-    const auto appenderManagerSharedPtr = appenderManager.lock();
+#endif  // OPEN_CLASS_INVARIANT
 
-    if (appenderManagerSharedPtr)
+void CoreTools::LogAsynchronousParameter::Write()
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    if (fileName.empty())
     {
-        if (fileName.empty())
-        {
-            appenderManagerSharedPtr->Write(message);
-        }
-        else
-        {
-            appenderManagerSharedPtr->Write(fileName, message);
-        }
+        appenderManager->Write(message);
+    }
+    else
+    {
+        appenderManager->Write(fileName, message);
     }
 }

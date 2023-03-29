@@ -5,18 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.2 (2023/02/12 18:35)
+///	引擎辅助版本：0.9.0.4 (2023/03/15 19:07)
 
-#ifndef DLL_MAIN_FUCTION_H
-#define DLL_MAIN_FUCTION_H
+#ifndef DLL_MAIN_FUNCTION_H
+#define DLL_MAIN_FUNCTION_H
 
 #include "System/Helper/ExportMacro.h"
 
-namespace DllManfuction
+namespace DllManFunction
 {
-    class TCRE_SYMBOL_EXPORT DllManfuction final
+    class TCRE_SYMBOL_EXPORT DllManFunction final
     {
     };
 }
 
-#endif  // DLL_MAIN_FUCTION_H
+#endif  // DLL_MAIN_FUNCTION_H

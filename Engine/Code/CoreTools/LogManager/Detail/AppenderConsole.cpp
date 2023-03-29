@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 22:25)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 14:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,15 +18,12 @@
 
 #include <iostream>
 
-using std::locale;
-using std::make_shared;
-
 CoreTools::AppenderConsole::AppenderConsole(AppenderPrint appenderFlags, LogLevel logLevel)
     : ParentType{ appenderFlags, logLevel }
 {
 #ifndef TCRE_USE_GCC
 
-    const locale chs{ "chs" };
+    const std::locale chs{ "chs" };
     COUT.imbue(chs);
 
 #endif  // TCRE_USE_GCC
@@ -43,7 +40,7 @@ CoreTools::AppenderType CoreTools::AppenderConsole::GetAppenderType() const noex
     return AppenderType::Console;
 }
 
-void CoreTools::AppenderConsole::DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix)
+void CoreTools::AppenderConsole::DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) const
 {
     const LogConsoleTextColorsManager manager{ message.GetLogLevel() };
 
@@ -64,5 +61,5 @@ const CoreTools::AppenderConsole::AppenderImplSharedPtr CoreTools::AppenderConso
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return make_shared<ClassType>(*this);
+    return std::make_shared<ClassType>(*this);
 }

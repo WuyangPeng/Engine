@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 22:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 15:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,9 +15,7 @@
 #include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/LogManager/LogMessagePostfix.h"
 #include "CoreTools/LogManager/LogMessagePrefix.h"
-#include "CoreTools/Threading/ScopedMutex.h"
 
-using std::make_shared;
 using namespace std::literals;
 
 CoreTools::AppenderImpl::AppenderImpl(AppenderPrint appenderFlags, LogLevel logLevel) noexcept
@@ -49,7 +47,7 @@ void CoreTools::AppenderImpl::SetLogLevel(LogLevel level) noexcept
     logLevel = level;
 }
 
-void CoreTools::AppenderImpl::Write(const LogMessage& message)
+void CoreTools::AppenderImpl::Write(const LogMessage& message) const
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -60,13 +58,6 @@ void CoreTools::AppenderImpl::Write(const LogMessage& message)
 
         DoWrite(message, prefix, postfix);
     }
-}
-
-void CoreTools::AppenderImpl::Reload()
-{
-    CORE_TOOLS_CLASS_IS_VALID_9;
-
-    CoreTools::DisableNoexcept();
 }
 
 System::String CoreTools::AppenderImpl::GetDirectory() const

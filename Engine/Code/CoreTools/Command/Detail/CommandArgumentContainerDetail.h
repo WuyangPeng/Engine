@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 11:06)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 09:34)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_CONTAINER_DETAIL_H
 #define CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_CONTAINER_DETAIL_H
@@ -18,9 +18,7 @@ R CoreTools::CommandArgumentContainer::Find(const std::string& argumentsName, R 
 {
     if (function != nullptr)
     {
-        const auto iter = commandArgument.find(argumentsName);
-
-        if (iter != commandArgument.cend())
+        if (const auto iter = commandArgument.find(argumentsName); iter != commandArgument.cend())
         {
             const auto& argument = iter->second;
 
@@ -28,7 +26,7 @@ R CoreTools::CommandArgumentContainer::Find(const std::string& argumentsName, R 
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("未找到命令行索引！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("未找到命令行索引！"s))
 }
 
 #endif  // CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_CONTAINER_DETAIL_H

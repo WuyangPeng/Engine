@@ -39,9 +39,7 @@ void Framework::WindowHCursor::CheckUpHCursor() noexcept
     {
         hCursor = System::LoadSystemCursor(nullptr, System::gArrow);
 
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework)
-            << SYSTEM_TEXT("加载光标失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework, SYSTEM_TEXT("加载光标失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

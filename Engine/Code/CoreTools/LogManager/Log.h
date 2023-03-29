@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/07 21:36)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 14:13)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_H
@@ -22,9 +22,14 @@
 CORE_TOOLS_EXPORT_UNIQUE_PTR(Log);
 CORE_TOOLS_NON_COPY_EXPORT_IMPL(LogImpl);
 
+/// 日志库
+/// Log类是一个单例，会使用锁保证线程安全。
+/// 日志写入线程只存在一个，日志消息队列有锁保护，写入操作保证单线程。
+/// LoadConfiguration函数会重置AppenderManager，但由于写入日志线程保存的AppenderManager可能是旧的，可以保证线程安全。
+/// 写入日志时有可能会对AppenderManager进行修改，但因为在同一线程处理，所以可以保证线程安全。
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE Log final : public CoreTools::Singleton<Log, MutexCreate::UseStdRecursive>
+    class CORE_TOOLS_DEFAULT_DECLARE Log final : public Singleton<Log, MutexCreate::UseStdRecursive>
     {
     public:
         NON_COPY_TYPE_DECLARE(Log);
@@ -38,26 +43,20 @@ namespace CoreTools
         };
 
     public:
-        explicit Log(MAYBE_UNUSED LogCreate logCreate);
+        explicit Log(LogCreate logCreate);
 
         static void Create();
         static void Destroy() noexcept;
 
-        SINGLETON_GET_PTR_DECLARE(Log);
+        SINGLETON_GET_PTR_DECLARE(Log)
 
         CLASS_INVARIANT_DECLARE;
 
-        void InsertAppender(const String& name, const Appender& appenderPtr);
-        void RemoveAppender(const String& name);
         void LoadConfiguration(const std::string& fileName);
-        void ReloadAppenderFile();
 
-        LogAppenderIOManager& OutTrace() noexcept;
-        LogAppenderIOManager& OutDebug() noexcept;
-        LogAppenderIOManager& OutInfo() noexcept;
-        LogAppenderIOManager& OutWarn() noexcept;
-        LogAppenderIOManager& OutError() noexcept;
-        LogAppenderIOManager& OutFatal() noexcept;
+        NODISCARD LogLevel GetMinLogLevelType(LogFilter filter) const;
+
+        void Write(const LogMessage& logMessage);
 
     private:
         using LogUniquePtr = std::unique_ptr<Log>;
@@ -65,7 +64,6 @@ namespace CoreTools
     private:
         static LogUniquePtr log;
         PackageType impl;
-        LogAppenderIOManager errorLogAppenderIOManager;
     };
 }
 

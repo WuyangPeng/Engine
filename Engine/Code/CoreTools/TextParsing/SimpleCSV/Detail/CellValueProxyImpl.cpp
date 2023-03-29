@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 21:23)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/07 16:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,7 +21,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/SharedStrings.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
-using std::string;
 using namespace std::literals;
 
 CoreTools::SimpleCSV::CellValueProxyImpl::CellValueProxyImpl() noexcept
@@ -38,27 +37,25 @@ CoreTools::SimpleCSV::CellValueProxyImpl::CellValueProxyImpl(const CellSharedPtr
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, CellValueProxyImpl)
 
-// private
 CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::CellValueProxyImpl::GetXMLNode() const
 {
-    auto cellSharedPtr = cell.lock();
+    const auto cellSharedPtr = cell.lock();
 
     if (!cellSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cell已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cell已被释放。"s))
     }
 
-    auto cellNode = cellSharedPtr->GetXMLNode();
+    const auto cellNode = cellSharedPtr->GetXMLNode();
 
     if (cellNode.empty())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cellNode无效！"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cellNode无效！"s))
     }
 
     return cellNode;
 }
 
-// private
 CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::CellValueProxyImpl::AppendAttributeT()
 {
     auto cellNode = GetXMLNode();
@@ -93,20 +90,19 @@ void CoreTools::SimpleCSV::CellValueProxyImpl::SetError()
     cellNode.remove_child("v");
 }
 
-// private
-string CoreTools::SimpleCSV::CellValueProxyImpl::GetAttributeValue() const
+std::string CoreTools::SimpleCSV::CellValueProxyImpl::GetAttributeValue() const
 {
     const auto cellNode = GetXMLNode();
 
     const auto attribute = cellNode.attribute("t");
-    auto attributeValue = attribute.value();
-    if (attributeValue != nullptr)
+
+    if (const auto attributeValue = attribute.value(); attributeValue != nullptr)
     {
         return attributeValue;
     }
     else
     {
-        return string{};
+        return std::string{};
     }
 }
 
@@ -116,9 +112,8 @@ CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetTyp
 
     const auto cellNode = GetXMLNode();
     const auto node = cellNode.child("v");
-    const auto attributeValue = GetAttributeValue();
 
-    if (attributeValue.empty() && !node)
+    if (const auto attributeValue = GetAttributeValue(); attributeValue.empty() && !node)
     {
         return ValueType::Empty;
     }
@@ -134,8 +129,7 @@ CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetTyp
     return ValueType::Error;
 }
 
-// private
-CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetStringType(const string attributeValue) const
+CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetStringType(const std::string& attributeValue)
 {
     if (attributeValue == "s")
     {
@@ -159,11 +153,9 @@ CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetStr
     }
 }
 
-// private
-CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetNumberType(const XMLNode& node) const
+CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetNumberType(const XMLNode& node)
 {
-    string numberString{ node.text().get() };
-    if (numberString.find('.') != string::npos || numberString.find("E-") != string::npos || numberString.find("e-") != string::npos)
+    if (const std::string numberString{ node.text().get() }; numberString.find('.') != std::string::npos || numberString.find("E-") != std::string::npos || numberString.find("e-") != std::string::npos)
     {
         return ValueType::Float;
     }
@@ -173,7 +165,7 @@ CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueProxyImpl::GetNum
     }
 }
 
-string CoreTools::SimpleCSV::CellValueProxyImpl::GetTypeAsString() const
+std::string CoreTools::SimpleCSV::CellValueProxyImpl::GetTypeAsString() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -194,7 +186,6 @@ string CoreTools::SimpleCSV::CellValueProxyImpl::GetTypeAsString() const
     }
 }
 
-// private
 CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::CellValueProxyImpl::AppendChildV()
 {
     auto cellNode = GetXMLNode();
@@ -244,7 +235,7 @@ void CoreTools::SimpleCSV::CellValueProxyImpl::SetFloat(double numberValue)
     child.remove_attribute(child.attribute("xml:space"));
 }
 
-void CoreTools::SimpleCSV::CellValueProxyImpl::SetString(const string& stringValue)
+void CoreTools::SimpleCSV::CellValueProxyImpl::SetString(const std::string& stringValue)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -253,14 +244,14 @@ void CoreTools::SimpleCSV::CellValueProxyImpl::SetString(const string& stringVal
 
     cellNode.attribute("t").set_value("s");
 
-    auto cellSharedPtr = cell.lock();
+    const auto cellSharedPtr = cell.lock();
 
     if (!cellSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cell已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cell已被释放。"s))
     }
 
-    auto sharedStrings = cellSharedPtr->GetSharedStrings();
+    const auto sharedStrings = cellSharedPtr->GetSharedStrings();
 
     const auto index = (sharedStrings->IsStringExists(stringValue) ? sharedStrings->GetStringIndex(stringValue) : sharedStrings->AppendString(stringValue));
 
@@ -289,18 +280,16 @@ CoreTools::SimpleCSV::CellValue CoreTools::SimpleCSV::CellValueProxyImpl::GetVal
         }
         case ValueType::String:
         {
-            auto cellSharedPtr = cell.lock();
+            const auto cellSharedPtr = cell.lock();
 
             if (!cellSharedPtr)
             {
-                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cell已被释放。"s));
+                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("cell已被释放。"s))
             }
 
-            const auto attributeValue = GetAttributeValue();
-
-            if (attributeValue == "s")
+            if (const auto attributeValue = GetAttributeValue(); attributeValue == "s")
             {
-                auto sharedStrings = cellSharedPtr->GetSharedStrings();
+                const auto sharedStrings = cellSharedPtr->GetSharedStrings();
 
                 return CellValue{ sharedStrings->GetString(cellNode.child("v").text().as_int()) };
             }
@@ -310,7 +299,7 @@ CoreTools::SimpleCSV::CellValue CoreTools::SimpleCSV::CellValueProxyImpl::GetVal
             }
             else
             {
-                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, "未知的字符串类型。"s);
+                THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, "未知的字符串类型。"s)
             }
         }
         case ValueType::Boolean:

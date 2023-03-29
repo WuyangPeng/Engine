@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/06 21:37)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 15:18)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_ASYNCHRONOUS_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_ASYNCHRONOUS_IMPL_H
@@ -14,6 +14,7 @@
 
 #include "CoreTools/LogManager/Detail/LogAsynchronousParameter.h"
 #include "CoreTools/LogManager/LogManagerFwd.h"
+#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 #include <deque>
 #include <mutex>
@@ -40,16 +41,18 @@ namespace CoreTools
 
         void Registered(const LogMessage& message, const AppenderManagerSharedPtr& appenderManager);
         void Registered(const String& fileName, const LogMessage& message, const AppenderManagerSharedPtr& appenderManager);
+        void Registered(const OStreamShared& streamShared, const std::string& message, LogLevel logLevel);
 
         void SetThread();
         void Stop();
         void Join();
 
     private:
-        using LogContainer = std::deque<LogAsynchronousParameter>;
+        using LogAsynchronousParameterBaseSharedPtr = std::shared_ptr<AsynchronousParameterBase>;
+        using LogContainer = std::deque<LogAsynchronousParameterBaseSharedPtr>;
 
     private:
-        NODISCARD LogAsynchronousParameter ExtractNextLog() noexcept;
+        NODISCARD LogAsynchronousParameterBaseSharedPtr ExtractNextLog() noexcept;
 
         void WaitThread();
         void Execution();

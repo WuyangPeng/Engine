@@ -37,9 +37,7 @@ Rendering::RendererParameter::PackageType Rendering::RendererParameter::CreateRe
     }
     catch (const boost::property_tree::ptree_error& error)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-            << error
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     return PackageType{ RendererTypes::Default };

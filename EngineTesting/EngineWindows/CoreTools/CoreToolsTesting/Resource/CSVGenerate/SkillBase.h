@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #ifndef C_S_V_CONFIGURE_SKILL_BASE_H
@@ -37,9 +37,9 @@ namespace CSVConfigure
 
         NODISCARD virtual int GetKey() const noexcept;
 
-        NODISCARD virtual int GetID() const noexcept;
+        NODISCARD virtual int GetId() const noexcept;
 
-        NODISCARD virtual int GetNextID() const noexcept;
+        NODISCARD virtual int GetNextId() const noexcept;
 
         NODISCARD virtual int GetReward() const noexcept;
 

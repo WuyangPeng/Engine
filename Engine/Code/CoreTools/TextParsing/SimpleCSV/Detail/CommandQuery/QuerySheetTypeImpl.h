@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 19:21)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 15:51)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_QUERY_SHEET_TYPE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_QUERY_SHEET_TYPE_IMPL_H
@@ -16,30 +16,27 @@
 
 #include <string>
 
-namespace CoreTools
+namespace CoreTools::SimpleCSV
 {
-    namespace SimpleCSV
+    class CORE_TOOLS_HIDDEN_DECLARE QuerySheetTypeImpl final
     {
-        class CORE_TOOLS_HIDDEN_DECLARE QuerySheetTypeImpl final
-        {
-        public:
-            using ClassType = QuerySheetTypeImpl;
+    public:
+        using ClassType = QuerySheetTypeImpl;
 
-        public:
-            explicit QuerySheetTypeImpl(const std::string& sheetID);
-            QuerySheetTypeImpl(const std::string& sheetID, ContentType sheetType);
+    public:
+        explicit QuerySheetTypeImpl(std::string sheetId) noexcept;
+        QuerySheetTypeImpl(std::string sheetId, ContentType sheetType) noexcept;
 
-            CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-            NODISCARD std::string GetSheetID() const;
-            NODISCARD ContentType GetSheetType() const noexcept;
-            void SetSheetType(ContentType sheetType) noexcept;
+        NODISCARD std::string GetSheetId() const;
+        NODISCARD ContentType GetSheetType() const noexcept;
+        void SetSheetType(ContentType aSheetType) noexcept;
 
-        private:
-            std::string sheetID;
-            ContentType m_SheetType;
-        };
-    }
+    private:
+        std::string sheetId;
+        ContentType sheetType;
+    };
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_QUERY_SHEET_TYPE_IMPL_H

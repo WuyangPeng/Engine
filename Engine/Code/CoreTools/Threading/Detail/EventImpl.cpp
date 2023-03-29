@@ -46,9 +46,7 @@ CoreTools::EventImpl::~EventImpl() noexcept
 
     if (!System::CloseSystemEvent(handle))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-            << SYSTEM_TEXT("销毁事件对象失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("销毁事件对象失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

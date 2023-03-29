@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 13:50)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/21 11:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,17 +16,15 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::string;
-
 COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(CoreTools, CommandArgument)
 
-CoreTools::CommandArgument::CommandArgument(int index, const string& arguments, const string& value)
+CoreTools::CommandArgument::CommandArgument(int index, const std::string& arguments, const std::string& value)
     : impl{ ImplCreateUseFactory::Default, index, arguments, value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::CommandArgument::CommandArgument(int index, const string& arguments)
+CoreTools::CommandArgument::CommandArgument(int index, const std::string& arguments)
     : impl{ ImplCreateUseFactory::Default, index, arguments }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -35,11 +33,11 @@ CoreTools::CommandArgument::CommandArgument(int index, const string& arguments)
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CommandArgument)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, GetIndex, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetName, const string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetName, std::string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetInteger, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetFloat, float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetDouble, double)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetString, const string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetString, std::string)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsInteger, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsFloat, bool)
@@ -51,7 +49,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsUsed,
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, SetUsed, void)
 
-void CoreTools::CommandArgument::AddEndArgumentValue(const string& value)
+void CoreTools::CommandArgument::AddEndArgumentValue(const std::string& value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -61,7 +59,7 @@ void CoreTools::CommandArgument::AddEndArgumentValue(const string& value)
     if (iter->IsNoValue())
     {
         const auto index = iter->GetIndex();
-        auto arguments = iter->GetName();
+        const auto arguments = iter->GetName();
 
         impl = PackageType{ ImplCreateUseFactory::Default, index, arguments, value };
     }

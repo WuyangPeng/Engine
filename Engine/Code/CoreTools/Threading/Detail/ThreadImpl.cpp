@@ -40,11 +40,7 @@ CoreTools::ThreadImpl::~ThreadImpl() noexcept
 
     if (!System::CloseSystemThread(thread))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
-            << SYSTEM_TEXT("释放线程")
-            << gsl::narrow_cast<int>(threadId)
-            << SYSTEM_TEXT("失败。")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("释放线程"), gsl::narrow_cast<int>(threadId), SYSTEM_TEXT("失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

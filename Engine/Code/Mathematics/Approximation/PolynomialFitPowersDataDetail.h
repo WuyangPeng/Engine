@@ -141,10 +141,7 @@ void Mathematics::PolynomialFitPowersData<Real, S>::Solve(const VariableMatrix& 
     {
         m_Solved = false;
 
-        LOG_SINGLETON_APPENDER(Info, CoreTools)
-            << SYSTEM_TEXT("求解线性系统失败\n")
-            << error
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_APPENDER(Info, CoreTools, SYSTEM_TEXT("求解线性系统失败\n"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 

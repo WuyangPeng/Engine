@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:28)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 13:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,8 +15,6 @@
 #include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/SheetFlags.h"
 
-using std::string;
-
 CoreTools::SimpleCSV::SheetBase::SheetBase(const XmlDataSharedPtr& xmlData)
     : ParentType{ xmlData }
 {
@@ -25,20 +23,20 @@ CoreTools::SimpleCSV::SheetBase::SheetBase(const XmlDataSharedPtr& xmlData)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools::SimpleCSV, SheetBase)
 
-string CoreTools::SimpleCSV::SheetBase::GetName() const
+std::string CoreTools::SimpleCSV::SheetBase::GetName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const QuerySheetName querySheetName{ GetRelationshipID() };
+    const QuerySheetName querySheetName{ GetRelationshipId() };
 
     return GetParentDocument()->ExecuteQuery(querySheetName).GetSheetName();
 }
 
-void CoreTools::SimpleCSV::SheetBase::SetName(const string& sheetName)
+void CoreTools::SimpleCSV::SheetBase::SetName(const std::string& sheetName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    CommandSetSheetName commandSetSheetName{ GetRelationshipID(), GetName(), sheetName };
+    const CommandSetSheetName commandSetSheetName{ GetRelationshipId(), GetName(), sheetName };
 
     GetParentDocument()->ExecuteCommand(commandSetSheetName);
 }

@@ -1,16 +1,12 @@
 TODO Level 6
  
-0.9.0.3
+0.9.0.4
 
-1.  （MemoryTools）重构类Memory的实现。
-2.  （MemoryTools）内存库使用地址做键值，可能会导致错误。
-3.  （MemoryTools）修改MD5类，使其更加安全。  
-4.  （MemoryTools）内存模块使用atomic增加引用计数，而不是锁。
-5.  （ModuleInitializerTerminator）增加一个需要加载模块配置类，对配置进行读取。 
-6.  （ModuleInitializerTerminator）增加一个模块自动加载及终止类。
-7.  （ModuleInitializerTerminator）终止已加载的模块，并加载新的模块。	
-8.  （SyntacticParser）增加语法分析器。 
-9.  （PerformanceProfiler）增加性能剖析器。
-10. （PerformanceProfiler）增加统计采集类。
-11. （PerformanceProfiler）在框架各个循环监测各模块使用的时间。 
-12. （EngineConfiguration）增加引擎配置类。 
+1.  （ModuleInitializerTerminator）增加一个需要加载模块配置类，对配置进行读取。 
+2.  （ModuleInitializerTerminator）增加一个模块自动加载及终止类。
+3.  （ModuleInitializerTerminator）终止已加载的模块，并加载新的模块。	
+4.  （SyntacticParser）增加语法分析器。 
+5.  （PerformanceProfiler）增加性能剖析器。
+6.  （PerformanceProfiler）增加统计采集类。
+7.  （PerformanceProfiler）在框架各个循环监测各模块使用的时间。 
+8.  （EngineConfiguration）增加引擎配置类。 

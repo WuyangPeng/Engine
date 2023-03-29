@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.2 (2023/02/19 21:05)
+///	引擎版本：0.9.0.4 (2023/03/23 15:48)
 
 #ifndef CORE_TOOLS_HELPER_SAFETY_LIMIT_MACRO_H
 #define CORE_TOOLS_HELPER_SAFETY_LIMIT_MACRO_H
@@ -22,14 +22,14 @@ namespace CoreTools
 
 #ifdef CORE_TOOLS_USE_SAFETY_LIMIT
 
-    #define SAFETY_WHILE_BEGIN(expression, maxCounter)                                          \
-        {                                                                                       \
-            auto safetyCounter = 0;                                                             \
-            while (expression)                                                                  \
-            {                                                                                   \
+    #define SAFETY_WHILE_BEGIN(expression, maxCounter)                                         \
+        {                                                                                      \
+            auto safetyCounter = 0;                                                            \
+            while (expression)                                                                 \
+            {                                                                                  \
                 if (SYSTEM_CONCATENATOR(CoreTools::gSafetyLimit, maxCounter) <= safetyCounter) \
-                {                                                                               \
-                    THROW_EXCEPTION(SYSTEM_TEXT("内部错误：违反安全计数器。"s));                \
+                {                                                                              \
+                    THROW_EXCEPTION(SYSTEM_TEXT("内部错误：违反安全计数器。"s))                \
                 }
 
     #define SAFETY_WHILE_END \

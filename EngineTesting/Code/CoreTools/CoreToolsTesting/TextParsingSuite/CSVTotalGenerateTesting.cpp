@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:49)
+///	引擎测试版本：0.9.0.4 (2023/03/10 10:21)
 
 #include "CSVTotalGenerateTesting.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
@@ -21,7 +21,6 @@
 #include <filesystem>
 
 using namespace std::literals;
-using std::vector;
 
 CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -52,7 +51,7 @@ void CoreTools::CSVTotalGenerateTesting::CreateCSV()
 
 void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateHeadTest()
 {
-    std::filesystem::path path{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
+    const std::filesystem::path path{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
 
     CSVTotalGenerate::CSVHeadContainer container{};
 
@@ -70,14 +69,14 @@ void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateHeadTest()
         container.emplace_back(csvContent.GetCSVHead());
     }
 
-    CSVTotalGenerate csvTotalGenerate{ SYSTEM_TEXT("CSVConfigure"s), container, CSVTotalGenerateType::Head };
+    const CSVTotalGenerate csvTotalGenerate{ SYSTEM_TEXT("CSVConfigure"s), container, CSVTotalGenerateType::Head };
 
     csvTotalGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateFwdHeadTest()
 {
-    std::filesystem::path path{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
+    const std::filesystem::path path{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
 
     CSVTotalGenerate::CSVHeadContainer container{};
 
@@ -95,14 +94,14 @@ void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateFwdHeadTest()
         container.emplace_back(csvContent.GetCSVHead());
     }
 
-    CSVTotalGenerate csvTotalGenerate{ SYSTEM_TEXT("CSVConfigure"s), container, CSVTotalGenerateType::FwdHead };
+    const CSVTotalGenerate csvTotalGenerate{ SYSTEM_TEXT("CSVConfigure"s), container, CSVTotalGenerateType::FwdHead };
 
     csvTotalGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateContainerHeadTest()
 {
-    std::filesystem::path path{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
+    const std::filesystem::path path{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
 
     CSVTotalGenerate::CSVHeadContainer container{};
 
@@ -120,14 +119,14 @@ void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateContainerHeadTest()
         container.emplace_back(csvContent.GetCSVHead());
     }
 
-    CSVTotalGenerate csvTotalGenerate{ SYSTEM_TEXT("CSVConfigure"s), container, CSVTotalGenerateType::ContainerHead };
+    const CSVTotalGenerate csvTotalGenerate{ SYSTEM_TEXT("CSVConfigure"s), container, CSVTotalGenerateType::ContainerHead };
 
     csvTotalGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }
 
 void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateContainerSourceTest()
 {
-    std::filesystem::path path{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
+    const std::filesystem::path path{ SYSTEM_TEXT("Resource/CSVConfigure"s) };
 
     CSVTotalGenerate::CSVHeadContainer container{};
 
@@ -145,7 +144,7 @@ void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateContainerSourceTest()
         container.emplace_back(csvContent.GetCSVHead());
     }
 
-    CSVTotalGenerate csvTotalGenerate{ SYSTEM_TEXT("CSVConfigure"s), container, CSVTotalGenerateType::ContainerSource };
+    const CSVTotalGenerate csvTotalGenerate{ SYSTEM_TEXT("CSVConfigure"s), container, CSVTotalGenerateType::ContainerSource };
 
     csvTotalGenerate.GenerateFile(SYSTEM_TEXT("Resource/CSVGenerate"s));
 }

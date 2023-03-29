@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 16:05)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/23 14:27)
 
 #ifndef CORE_TOOLS_DATA_TYPE_THREAD_SAFE_MAP_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_THREAD_SAFE_MAP_DETAIL_H
@@ -93,7 +93,7 @@ bool CoreTools::ThreadSafeMap<Key, Value>::Exists(KeyParamType key) const
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return threadSafeMap.find(key) != threadSafeMap.cend();
+    return threadSafeMap.contains(key);
 }
 
 template <typename Key, typename Value>
@@ -133,14 +133,13 @@ Value CoreTools::ThreadSafeMap<Key, Value>::Get(KeyParamType key) const
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = threadSafeMap.find(key);
-    if (iter != threadSafeMap.end())
+    if (const auto iter = threadSafeMap.find(key); iter != threadSafeMap.end())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("未找到指定元素。\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到指定元素。\n"s))
     }
 }
 

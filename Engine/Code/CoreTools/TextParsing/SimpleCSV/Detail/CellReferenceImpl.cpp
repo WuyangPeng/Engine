@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 21:22)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/07 15:59)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,17 +16,15 @@
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
-#include <array> 
+#include <array>
 
-using std::array;
-using std::string;
 using namespace std::literals;
 
 constexpr auto alphabetSize = 26;
 constexpr auto asciiOffset = 'A' - 1;
 
-CoreTools::SimpleCSV::CellReferenceImpl::CellReferenceImpl(const string& cellAddress)
-    : m_Row{ 1 }, m_Column{ 1 }, m_CellAddress{ "A1"s }
+CoreTools::SimpleCSV::CellReferenceImpl::CellReferenceImpl(const std::string& cellAddress)
+    : row{ 1 }, column{ 1 }, cellAddress{ TextParsing::gDefaultCellAddress }
 {
     if (!cellAddress.empty())
     {
@@ -37,13 +35,13 @@ CoreTools::SimpleCSV::CellReferenceImpl::CellReferenceImpl(const string& cellAdd
 }
 
 CoreTools::SimpleCSV::CellReferenceImpl::CellReferenceImpl(int row, int column)
-    : m_Row{ row }, m_Column{ column }, m_CellAddress{ GetColumnAsString(column) + GetRowAsString(row) }
+    : row{ row }, column{ column }, cellAddress{ GetColumnAsString(column) + GetRowAsString(row) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::SimpleCSV::CellReferenceImpl::CellReferenceImpl(int row, const string& column)
-    : m_Row{ row }, m_Column(GetColumnAsNumber(column)), m_CellAddress(column + GetRowAsString(row))
+CoreTools::SimpleCSV::CellReferenceImpl::CellReferenceImpl(int row, const std::string& column)
+    : row{ row }, column(GetColumnAsNumber(column)), cellAddress(column + GetRowAsString(row))
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -52,7 +50,7 @@ CoreTools::SimpleCSV::CellReferenceImpl::CellReferenceImpl(int row, const string
 
 bool CoreTools::SimpleCSV::CellReferenceImpl::IsValid() const noexcept
 {
-    if (0 < m_Row && 0 < m_Column && !m_CellAddress.empty())
+    if (0 < row && 0 < column && !cellAddress.empty())
         return true;
     else
         return false;
@@ -64,48 +62,48 @@ int CoreTools::SimpleCSV::CellReferenceImpl::GetRow() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Row;
+    return row;
 }
 
 // 设置CellReference对象的行。如果数字大于16384（最大值），该行设置为 16384。
-void CoreTools::SimpleCSV::CellReferenceImpl::SetRow(int row)
+void CoreTools::SimpleCSV::CellReferenceImpl::SetRow(int aRow)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_Row = GetInScope(row, 1, g_MaxRows);
-    m_CellAddress = GetColumnAsString(m_Column) + GetRowAsString(m_Row);
+    row = GetInScope(aRow, 1, gMaxRows);
+    cellAddress = GetColumnAsString(column) + GetRowAsString(row);
 }
 
 int CoreTools::SimpleCSV::CellReferenceImpl::GetColumn() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Column;
+    return column;
 }
 
 // 设置CellReference对象的列。如果数字大于1048576（最大值），该列设置为1048576。
-void CoreTools::SimpleCSV::CellReferenceImpl::SetColumn(int column)
+void CoreTools::SimpleCSV::CellReferenceImpl::SetColumn(int aColumn)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_Column = GetInScope(column, 1, g_MaxColumns);
-    m_CellAddress = GetColumnAsString(m_Column) + GetRowAsString(m_Row);
+    column = GetInScope(aColumn, 1, gMaxColumns);
+    cellAddress = GetColumnAsString(column) + GetRowAsString(row);
 }
 
-void CoreTools::SimpleCSV::CellReferenceImpl::SetRowAndColumn(int row, int column)
+void CoreTools::SimpleCSV::CellReferenceImpl::SetRowAndColumn(int aRow, int aColumn)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_Row = GetInScope(row, 1, g_MaxRows);
-    m_Column = GetInScope(column, 1, g_MaxColumns);
-    m_CellAddress = GetColumnAsString(m_Column) + GetRowAsString(m_Row);
+    row = GetInScope(aRow, 1, gMaxRows);
+    column = GetInScope(aColumn, 1, gMaxColumns);
+    cellAddress = GetColumnAsString(column) + GetRowAsString(row);
 }
 
-string CoreTools::SimpleCSV::CellReferenceImpl::GetAddress() const
+std::string CoreTools::SimpleCSV::CellReferenceImpl::GetAddress() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_CellAddress;
+    return cellAddress;
 }
 
 int CoreTools::SimpleCSV::CellReferenceImpl::GetInScope(int value, int minValue, int maxValue) noexcept
@@ -120,66 +118,66 @@ int CoreTools::SimpleCSV::CellReferenceImpl::GetInScope(int value, int minValue,
 
 /// 设置CellReference对象的地址，例如 'B2'。
 /// 检查行和列是否小于或等于Excel允许的最大行数和列数。
-void CoreTools::SimpleCSV::CellReferenceImpl::SetAddress(const string& address)
+void CoreTools::SimpleCSV::CellReferenceImpl::SetAddress(const std::string& address)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     const auto coordinates = GetCoordinatesFromAddress(address);
 
-    m_Row = coordinates.first;
-    m_Column = coordinates.second;
-    m_CellAddress = GetColumnAsString(m_Column) + GetRowAsString(m_Row);
+    row = coordinates.first;
+    column = coordinates.second;
+    cellAddress = GetColumnAsString(column) + GetRowAsString(row);
 }
 
-string CoreTools::SimpleCSV::CellReferenceImpl::GetRowAsString(int row)
+std::string CoreTools::SimpleCSV::CellReferenceImpl::GetRowAsString(int aRow)
 {
-    if (row <= 0)
+    if (aRow <= 0)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, SYSTEM_TEXT("行数小于或等于0。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, SYSTEM_TEXT("行数小于或等于0。"s))
     }
 
-    return std::to_string(row);
+    return std::to_string(aRow);
 }
 
-int CoreTools::SimpleCSV::CellReferenceImpl::GetRowAsNumber(const string& row)
+int CoreTools::SimpleCSV::CellReferenceImpl::GetRowAsNumber(const std::string& aRow)
 {
-    return boost::numeric_cast<int>(stoul(row));
+    return boost::numeric_cast<int>(stoul(aRow));
 }
 
-string CoreTools::SimpleCSV::CellReferenceImpl::GetColumnAsString(int column)
+std::string CoreTools::SimpleCSV::CellReferenceImpl::GetColumnAsString(int aColumn)
 {
-    string result{};
+    std::string result{};
 
     // 如果列名中有一个字母：
-    if (column <= alphabetSize)
+    if (aColumn <= alphabetSize)
     {
-        result += boost::numeric_cast<char>(column + asciiOffset);
+        result += boost::numeric_cast<char>(aColumn + asciiOffset);
     }
     // 如果列名中有两个字母：
-    else if (column > alphabetSize && column <= alphabetSize * (alphabetSize + 1))
+    else if (aColumn > alphabetSize && aColumn <= alphabetSize * (alphabetSize + 1))
     {
-        result += boost::numeric_cast<char>((column - (alphabetSize + 1)) / alphabetSize + asciiOffset + 1);
-        result += boost::numeric_cast<char>((column - (alphabetSize + 1)) % alphabetSize + asciiOffset + 1);
+        result += boost::numeric_cast<char>((aColumn - (alphabetSize + 1)) / alphabetSize + asciiOffset + 1);
+        result += boost::numeric_cast<char>((aColumn - (alphabetSize + 1)) % alphabetSize + asciiOffset + 1);
     }
     // 如果列名中有三个字母：
     else
     {
         constexpr auto step = (alphabetSize * (alphabetSize + 1)) + 1;
 
-        result += boost::numeric_cast<char>((column - step) / (alphabetSize * alphabetSize) + asciiOffset + 1);
-        result += boost::numeric_cast<char>(((column - step) / alphabetSize) % alphabetSize + asciiOffset + 1);
-        result += boost::numeric_cast<char>((column - step) % alphabetSize + asciiOffset + 1);
+        result += boost::numeric_cast<char>((aColumn - step) / (alphabetSize * alphabetSize) + asciiOffset + 1);
+        result += boost::numeric_cast<char>(((aColumn - step) / alphabetSize) % alphabetSize + asciiOffset + 1);
+        result += boost::numeric_cast<char>((aColumn - step) % alphabetSize + asciiOffset + 1);
     }
 
     return result;
 }
 
-int CoreTools::SimpleCSV::CellReferenceImpl::GetColumnAsNumber(const string& column)
+int CoreTools::SimpleCSV::CellReferenceImpl::GetColumnAsNumber(const std::string& aColumn)
 {
     auto result = 0;
 
     auto pow = 0;
-    for (auto iter = column.rbegin(); iter != column.rend(); ++iter)
+    for (auto iter = aColumn.rbegin(); iter != aColumn.rend(); ++iter)
     {
         const auto number = *iter - asciiOffset;
         result += boost::numeric_cast<int>(number * std::pow(alphabetSize, pow));
@@ -189,10 +187,10 @@ int CoreTools::SimpleCSV::CellReferenceImpl::GetColumnAsNumber(const string& col
     return result;
 }
 
-CoreTools::SimpleCSV::CellReferenceImpl::Coordinates CoreTools::SimpleCSV::CellReferenceImpl::GetCoordinatesFromAddress(const string& address)
+CoreTools::SimpleCSV::CellReferenceImpl::Coordinates CoreTools::SimpleCSV::CellReferenceImpl::GetCoordinatesFromAddress(const std::string& address)
 {
     auto letterCount = 0u;
-    for (auto letter : address)
+    for (const auto letter : address)
     {
         constexpr auto letterBegin = 'A' + 0;
         constexpr auto numberEnd = '9' + 0;

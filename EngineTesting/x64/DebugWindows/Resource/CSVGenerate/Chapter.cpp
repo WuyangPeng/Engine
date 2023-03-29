@@ -4,7 +4,7 @@
 /// 作者：彭武阳，彭晔恩，彭晔泽
 /// 联系作者：94458936@qq.com
 ///
-/// 标准：std:c++17
+/// 标准：std:c++20
 /// 自动生成
 
 #include "Chapter.h"
@@ -17,7 +17,7 @@ using namespace std::literals;
 CSVConfigure::Chapter::Chapter(const CoreTools::CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
-      nextID{ csvRow.GetInt(SYSTEM_TEXT("nextID"s)) },
+      nextId{ csvRow.GetInt(SYSTEM_TEXT("nextId"s)) },
       reward{ csvRow.GetInt(SYSTEM_TEXT("reward"s)) },
       chapterName{ csvRow.GetString(SYSTEM_TEXT("chapterName"s)) },
       isMain{ csvRow.GetBool(SYSTEM_TEXT("isMain"s)) },
@@ -29,11 +29,11 @@ CSVConfigure::Chapter::Chapter(const CoreTools::CSVRow& csvRow)
     USER_SELF_CLASS_IS_VALID_1;
 }
 
-void CSVConfigure::Chapter::Checking()
+void CSVConfigure::Chapter::Checking() const
 {
     if (!((1 <= reward) && (reward < 5)))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("reward 数据校验失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("reward 数据校验失败。"s))
     }
 }
 
@@ -61,18 +61,18 @@ int CSVConfigure::Chapter::GetKey() const noexcept
     return id;
 }
 
-int CSVConfigure::Chapter::GetID() const noexcept
+int CSVConfigure::Chapter::GetId() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return id;
 }
 
-int CSVConfigure::Chapter::GetNextID() const noexcept
+int CSVConfigure::Chapter::GetNextId() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
-    return nextID;
+    return nextId;
 }
 
 int CSVConfigure::Chapter::GetReward() const noexcept

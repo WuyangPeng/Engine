@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/CopyUnshared/AnimationCopyUnsharedMacro.h"
-#include "Toolset/CoreTools/ExportTest/CoreTools/CopyUnshared/ArtificialIntellegenceCopyUnsharedMacro.h"
+#include "Toolset/CoreTools/ExportTest/CoreTools/CopyUnshared/ArtificialIntelligenceCopyUnsharedMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/CopyUnshared/AssistToolsCopyUnsharedMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/CopyUnshared/CoreToolsCopyUnsharedMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/CopyUnshared/DatabaseCopyUnsharedMacro.h"
@@ -57,7 +57,7 @@ void CoreTools::CopyUnsharedExportMacroTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CopyUnsharedExportTest<Physics::PhysicsCopyUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyUnsharedExportTest<Imagics::ImagicsCopyUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyUnsharedExportTest<Animation::AnimationCopyUnsharedMacro>);
-    ASSERT_NOT_THROW_EXCEPTION_0(CopyUnsharedExportTest<ArtificialIntellegence::ArtificialIntellegenceCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyUnsharedExportTest<ArtificialIntelligence::ArtificialIntelligenceCopyUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyUnsharedExportTest<UserInterface::UserInterfaceCopyUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyUnsharedExportTest<AssistTools::AssistToolsCopyUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyUnsharedExportTest<Framework::FrameworkCopyUnsharedMacro>);

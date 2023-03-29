@@ -1,21 +1,19 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:42)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/10 13:56)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "JsonGenerateClassName.h"
 #include "JsonGenerateDefaultFunction.h"
 #include "JsonGenerateDetailHeadFile.h"
-#include "JsonGenerateGetFunction.h"
 #include "JsonGenerateGetFunctionDefinition.h"
 #include "JsonGenerateHead.h"
-#include "JsonGenerateMember.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/JsonFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
@@ -39,14 +37,14 @@ System::String CoreTools::JsonGenerateDetailHeadFile::GetSuffix() const noexcept
 
 System::String CoreTools::JsonGenerateDetailHeadFile::GetFilePrefix() const
 {
-    return String{ TextParsing::g_ForwardSlash };
+    return String{ TextParsing::gForwardSlash };
 }
 
 System::String CoreTools::JsonGenerateDetailHeadFile::GetFileSuffix() const
 {
     auto result = GetSuffix();
 
-    result += TextParsing::g_DetailHeadFileExtensionName;
+    result += TextParsing::gDetailHeadFileExtensionName;
 
     return result;
 }
@@ -57,7 +55,7 @@ System::String CoreTools::JsonGenerateDetailHeadFile::GetContent() const
 
     const auto head = GetJsonHead();
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
     content += GenerateHeaderGuard();
 
     const JsonGenerateHead jsonGenerateHead{ head };
@@ -102,9 +100,7 @@ System::String CoreTools::JsonGenerateDetailHeadFile::GetContent(const String& c
 {
     String content{};
 
-    const auto typeName = jsonNode.GetTypeName();
-
-    if (typeName.empty())
+    if (const auto typeName = jsonNode.GetTypeName(); typeName.empty())
     {
         return content;
     }

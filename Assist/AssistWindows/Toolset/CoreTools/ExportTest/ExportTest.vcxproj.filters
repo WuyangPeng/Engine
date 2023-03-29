@@ -177,7 +177,7 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\AnimationTestExportMacroImpl.h">
       <Filter>CoreTools 头文件\Detail\Module</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ArtificialIntellegenceTestExportMacroImpl.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ArtificialIntelligenceTestExportMacroImpl.h">
       <Filter>CoreTools 头文件\Detail\Module</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\AssistToolsTestExportMacroImpl.h">
@@ -243,7 +243,7 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportUniquePtrMacro.h">
       <Filter>CoreTools 头文件\Export</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ArtificialIntellegenceTestExportMacro.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ArtificialIntelligenceTestExportMacro.h">
       <Filter>CoreTools 头文件\Module</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\AssistToolsTestExportMacro.h">
@@ -294,7 +294,7 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\AnimationTestExportCopyMacroImpl.h">
       <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ArtificialIntellegenceTestExportCopyMacroImpl.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ArtificialIntelligenceTestExportCopyMacroImpl.h">
       <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\AssistToolsTestExportCopyMacroImpl.h">
@@ -369,7 +369,7 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\AnimationTestExportCopyMacro.h">
       <Filter>CoreTools 头文件\CopyModule</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ArtificialIntellegenceTestExportCopyMacro.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ArtificialIntelligenceTestExportCopyMacro.h">
       <Filter>CoreTools 头文件\CopyModule</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\AssistToolsTestExportCopyMacro.h">
@@ -459,7 +459,7 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\AnimationCopyUnsharedMacroImpl.h">
       <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ArtificialIntellegenceCopyUnsharedMacroImpl.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ArtificialIntelligenceCopyUnsharedMacroImpl.h">
       <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\AssistToolsCopyUnsharedMacroImpl.h">
@@ -507,7 +507,7 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\AnimationDelayCopyUnsharedMacroImpl.h">
       <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ArtificialIntellegenceDelayCopyUnsharedMacroImpl.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ArtificialIntelligenceDelayCopyUnsharedMacroImpl.h">
       <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\AssistToolsDelayCopyUnsharedMacroImpl.h">
@@ -555,13 +555,13 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\AnimationNonCopyMacroImpl.h">
       <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ArtificialIntellegenceNonCopyMacroImpl.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ArtificialIntelligenceNonCopyMacroImpl.h">
       <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\AssistToolsNonCopyMacroImpl.h">
       <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ArtificialIntellegencePerformanceUnsharedMacroImpl.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ArtificialIntelligencePerformanceUnsharedMacroImpl.h">
       <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\AssistToolsPerformanceUnsharedMacroImpl.h">
@@ -609,7 +609,7 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\AnimationPerformanceUnsharedMacroImpl.h">
       <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ArtificialIntellegenceMacroSharedImpl.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ArtificialIntelligenceMacroSharedImpl.h">
       <Filter>CoreTools 头文件\Detail\Shared</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\AssistToolsMacroSharedImpl.h">
@@ -696,7 +696,7 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\AnimationCopyUnsharedMacro.h">
       <Filter>CoreTools 头文件\CopyUnshared</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ArtificialIntellegenceCopyUnsharedMacro.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ArtificialIntelligenceCopyUnsharedMacro.h">
       <Filter>CoreTools 头文件\CopyUnshared</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\AssistToolsCopyUnsharedMacro.h">
@@ -756,7 +756,7 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\AnimationDelayCopyUnsharedMacro.h">
       <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ArtificialIntellegenceDelayCopyUnsharedMacro.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ArtificialIntelligenceDelayCopyUnsharedMacro.h">
       <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ExportDelayCopyUnsharedMacroImpl.h">
@@ -804,7 +804,7 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\AnimationNonCopyMacro.h">
       <Filter>CoreTools 头文件\NonCopy</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ArtificialIntellegenceNonCopyMacro.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ArtificialIntelligenceNonCopyMacro.h">
       <Filter>CoreTools 头文件\NonCopy</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\AssistToolsNonCopyMacro.h">
@@ -861,7 +861,7 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\AnimationPerformanceUnsharedMacro.h">
       <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ArtificialIntellegencePerformanceUnsharedMacro.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ArtificialIntelligencePerformanceUnsharedMacro.h">
       <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\AssistToolsPerformanceUnsharedMacro.h">
@@ -876,7 +876,7 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\AnimationMacroShared.h">
       <Filter>CoreTools 头文件\Shared</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ArtificialIntellegenceMacroShared.h">
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ArtificialIntelligenceMacroShared.h">
       <Filter>CoreTools 头文件\Shared</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\AssistToolsMacroShared.h">
@@ -962,7 +962,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\AnimationTestExportMacroImpl.cpp">
       <Filter>CoreTools 源文件\Detail\Module</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ArtificialIntellegenceTestExportMacroImpl.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ArtificialIntelligenceTestExportMacroImpl.cpp">
       <Filter>CoreTools 源文件\Detail\Module</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\AssistToolsTestExportMacroImpl.cpp">
@@ -1031,7 +1031,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\AnimationTestExportMacro.cpp">
       <Filter>CoreTools 源文件\Module</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ArtificialIntellegenceTestExportMacro.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ArtificialIntelligenceTestExportMacro.cpp">
       <Filter>CoreTools 源文件\Module</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\AssistToolsTestExportMacro.cpp">
@@ -1079,7 +1079,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\AnimationTestExportCopyMacroImpl.cpp">
       <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ArtificialIntellegenceTestExportCopyMacroImpl.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ArtificialIntelligenceTestExportCopyMacroImpl.cpp">
       <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\AssistToolsTestExportCopyMacroImpl.cpp">
@@ -1127,7 +1127,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\AnimationTestExportCopyMacro.cpp">
       <Filter>CoreTools 源文件\CopyModule</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ArtificialIntellegenceTestExportCopyMacro.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ArtificialIntelligenceTestExportCopyMacro.cpp">
       <Filter>CoreTools 源文件\CopyModule</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\AssistToolsTestExportCopyMacro.cpp">
@@ -1205,7 +1205,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\AnimationCopyUnsharedMacroImpl.cpp">
       <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ArtificialIntellegenceCopyUnsharedMacroImpl.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ArtificialIntelligenceCopyUnsharedMacroImpl.cpp">
       <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\AssistToolsCopyUnsharedMacroImpl.cpp">
@@ -1253,7 +1253,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\AnimationDelayCopyUnsharedMacroImpl.cpp">
       <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ArtificialIntellegenceDelayCopyUnsharedMacroImpl.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ArtificialIntelligenceDelayCopyUnsharedMacroImpl.cpp">
       <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\AssistToolsDelayCopyUnsharedMacroImpl.cpp">
@@ -1301,7 +1301,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\AnimationNonCopyMacroImpl.cpp">
       <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ArtificialIntellegenceNonCopyMacroImpl.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ArtificialIntelligenceNonCopyMacroImpl.cpp">
       <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\AssistToolsNonCopyMacroImpl.cpp">
@@ -1349,7 +1349,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\AnimationPerformanceUnsharedMacroImpl.cpp">
       <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ArtificialIntellegencePerformanceUnsharedMacroImpl.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ArtificialIntelligencePerformanceUnsharedMacroImpl.cpp">
       <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\AssistToolsPerformanceUnsharedMacroImpl.cpp">
@@ -1397,7 +1397,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\AnimationMacroSharedImpl.cpp">
       <Filter>CoreTools 源文件\Detail\Shared</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ArtificialIntellegenceMacroSharedImpl.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ArtificialIntelligenceMacroSharedImpl.cpp">
       <Filter>CoreTools 源文件\Detail\Shared</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\AssistToolsMacroSharedImpl.cpp">
@@ -1445,7 +1445,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\AnimationCopyUnsharedMacro.cpp">
       <Filter>CoreTools 源文件\CopyUnshared</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ArtificialIntellegenceCopyUnsharedMacro.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ArtificialIntelligenceCopyUnsharedMacro.cpp">
       <Filter>CoreTools 源文件\CopyUnshared</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\AssistToolsCopyUnsharedMacro.cpp">
@@ -1499,7 +1499,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\AnimationDelayCopyUnsharedMacro.cpp">
       <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ArtificialIntellegenceDelayCopyUnsharedMacro.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ArtificialIntelligenceDelayCopyUnsharedMacro.cpp">
       <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\AssistToolsDelayCopyUnsharedMacro.cpp">
@@ -1553,7 +1553,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\AnimationNonCopyMacro.cpp">
       <Filter>CoreTools 源文件\NonCopy</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ArtificialIntellegenceNonCopyMacro.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ArtificialIntelligenceNonCopyMacro.cpp">
       <Filter>CoreTools 源文件\NonCopy</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\AssistToolsNonCopyMacro.cpp">
@@ -1607,7 +1607,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\AnimationPerformanceUnsharedMacro.cpp">
       <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ArtificialIntellegencePerformanceUnsharedMacro.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ArtificialIntelligencePerformanceUnsharedMacro.cpp">
       <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\AssistToolsPerformanceUnsharedMacro.cpp">
@@ -1661,7 +1661,7 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\AnimationMacroShared.cpp">
       <Filter>CoreTools 源文件\Shared</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ArtificialIntellegenceMacroShared.cpp">
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ArtificialIntelligenceMacroShared.cpp">
       <Filter>CoreTools 源文件\Shared</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\AssistToolsMacroShared.cpp">

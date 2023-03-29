@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:44)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/10 14:02)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,11 +21,10 @@
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 #include "CoreTools/TextParsing/Json/JsonHead.h"
 
-using std::vector;
 using namespace std::literals;
 
-CoreTools::JsonGenerateImpl::JsonGenerateImpl(const JsonHead& jsonHead) noexcept
-    : jsonHead{ jsonHead }
+CoreTools::JsonGenerateImpl::JsonGenerateImpl(JsonHead jsonHead) noexcept
+    : jsonHead{ std::move(jsonHead) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -57,7 +56,7 @@ System::String CoreTools::JsonGenerateImpl::GetJsonClassName() const
     return jsonHead.GetJsonClassName();
 }
 
-System::String CoreTools::JsonGenerateImpl::GetOldContent(const String& fileName) const
+System::String CoreTools::JsonGenerateImpl::GetOldContent(const String& fileName)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -69,7 +68,7 @@ System::String CoreTools::JsonGenerateImpl::GetOldContent(const String& fileName
 
         return iFStreamManager.GetFileContent();
     }
-    catch (const CoreTools::Error&)
+    catch (const Error&)
     {
         // 文件不存在是正常的。
         return String{};
@@ -83,10 +82,8 @@ CoreTools::JsonHead CoreTools::JsonGenerateImpl::GetJsonHead() const noexcept
     return jsonHead;
 }
 
-System::String CoreTools::JsonGenerateImpl::GenerateCopyright() const
+System::String CoreTools::JsonGenerateImpl::GenerateCopyright()
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
     auto content = SYSTEM_TEXT("/// Copyright (c) 2010-\n"s);
 
     content += SYSTEM_TEXT("/// Threading Core Render Engine\n"s);
@@ -94,7 +91,7 @@ System::String CoreTools::JsonGenerateImpl::GenerateCopyright() const
     content += SYSTEM_TEXT("/// 作者：彭武阳，彭晔恩，彭晔泽\n"s);
     content += SYSTEM_TEXT("/// 联系作者：94458936@qq.com\n"s);
     content += SYSTEM_TEXT("///\n"s);
-    content += SYSTEM_TEXT("/// 标准：std:c++17\n"s);
+    content += SYSTEM_TEXT("/// 标准：std:c++20\n"s);
     content += SYSTEM_TEXT("/// 自动生成\n"s);
 
     return content;
@@ -108,12 +105,12 @@ System::String CoreTools::JsonGenerateImpl::GenerateHeaderGuard() const
 
     auto content = SYSTEM_TEXT("#ifndef "s);
     content += headerGuard;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += SYSTEM_TEXT("#define "s);
     content += headerGuard;
-    content += TextParsing::g_NewlineCharacter;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -125,8 +122,8 @@ System::String CoreTools::JsonGenerateImpl::GenerateNameSpace() const
     auto content = SYSTEM_TEXT("namespace "s);
 
     content += jsonHead.GetNameSpace();
-    content += TextParsing::g_NewlineCharacter;
-    content += TextParsing::g_FunctionBeginBrackets;
+    content += TextParsing::gNewlineCharacter;
+    content += TextParsing::gFunctionBeginBrackets;
 
     return content;
 }
@@ -135,26 +132,24 @@ System::String CoreTools::JsonGenerateImpl::GenerateInnerNameSpaceBegin() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    String content{ TextParsing::g_Indentation };
+    String content{ TextParsing::gIndentation };
 
     content += SYSTEM_TEXT("namespace "s);
 
     content += jsonHead.GetJsonClassName();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::g_Indentation;
-    content += TextParsing::g_FunctionBeginBrackets;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gFunctionBeginBrackets;
 
     return content;
 }
 
-System::String CoreTools::JsonGenerateImpl::GenerateInnerNameSpaceEnd() const
+System::String CoreTools::JsonGenerateImpl::GenerateInnerNameSpaceEnd()
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    String content{ TextParsing::gIndentation };
 
-    String content{ TextParsing::g_Indentation };
-
-    content += TextParsing::g_FunctionEndBrackets;
+    content += TextParsing::gFunctionEndBrackets;
 
     return content;
 }
@@ -167,7 +162,7 @@ System::String CoreTools::JsonGenerateImpl::GenerateHeaderGuardEndif() const
 
     auto content = SYSTEM_TEXT("#endif  // "s);
     content += headerGuard;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

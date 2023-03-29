@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:48)
+///	引擎测试版本：0.9.0.4 (2023/03/10 10:18)
 
 #include "CSVRowTesting.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
@@ -29,53 +29,48 @@
 
 using System::operator++;
 using namespace std::literals;
-using std::deque;
-using std::map;
-using std::vector;
 
 template <>
 CoreTools::CSVDataType CoreTools::CSVRow::StringCastEnum<CoreTools::CSVDataType>(const String& describe) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    static map<String, CSVDataType> typeDescribe{ { SYSTEM_TEXT("String"s), CSVDataType::String },
-                                                  { SYSTEM_TEXT("Bool"s), CSVDataType::Bool },
-                                                  { SYSTEM_TEXT("Char"s), CSVDataType::Char },
-                                                  { SYSTEM_TEXT("Int"s), CSVDataType::Int },
-                                                  { SYSTEM_TEXT("Int64"s), CSVDataType::Int64 },
-                                                  { SYSTEM_TEXT("Double"s), CSVDataType::Double },
-                                                  { SYSTEM_TEXT("Enum"s), CSVDataType::Enum },
-                                                  { SYSTEM_TEXT("Bit"s), CSVDataType::Bit },
-                                                  { SYSTEM_TEXT("Vector2"s), CSVDataType::Vector2 },
-                                                  { SYSTEM_TEXT("Vector3"s), CSVDataType::Vector3 },
-                                                  { SYSTEM_TEXT("Vector4"s), CSVDataType::Vector4 },
-                                                  { SYSTEM_TEXT("IntVector2"s), CSVDataType::IntVector2 },
-                                                  { SYSTEM_TEXT("IntVector3"s), CSVDataType::IntVector3 },
-                                                  { SYSTEM_TEXT("IntVector4"s), CSVDataType::IntVector4 },
+    static std::map<String, CSVDataType> typeDescribe{ { SYSTEM_TEXT("String"s), CSVDataType::String },
+                                                       { SYSTEM_TEXT("Bool"s), CSVDataType::Bool },
+                                                       { SYSTEM_TEXT("Char"s), CSVDataType::Char },
+                                                       { SYSTEM_TEXT("Int"s), CSVDataType::Int },
+                                                       { SYSTEM_TEXT("Int64"s), CSVDataType::Int64 },
+                                                       { SYSTEM_TEXT("Double"s), CSVDataType::Double },
+                                                       { SYSTEM_TEXT("Enum"s), CSVDataType::Enum },
+                                                       { SYSTEM_TEXT("Bit"s), CSVDataType::Bit },
+                                                       { SYSTEM_TEXT("Vector2"s), CSVDataType::Vector2 },
+                                                       { SYSTEM_TEXT("Vector3"s), CSVDataType::Vector3 },
+                                                       { SYSTEM_TEXT("Vector4"s), CSVDataType::Vector4 },
+                                                       { SYSTEM_TEXT("IntVector2"s), CSVDataType::IntVector2 },
+                                                       { SYSTEM_TEXT("IntVector3"s), CSVDataType::IntVector3 },
+                                                       { SYSTEM_TEXT("IntVector4"s), CSVDataType::IntVector4 },
 
-                                                  { SYSTEM_TEXT("BoolArray"s), CSVDataType::BoolArray },
-                                                  { SYSTEM_TEXT("CharArray"s), CSVDataType::CharArray },
-                                                  { SYSTEM_TEXT("IntArray"s), CSVDataType::IntArray },
-                                                  { SYSTEM_TEXT("Int64Array"s), CSVDataType::Int64Array },
-                                                  { SYSTEM_TEXT("DoubleArray"s), CSVDataType::DoubleArray },
-                                                  { SYSTEM_TEXT("EnumArray"s), CSVDataType::EnumArray },
-                                                  { SYSTEM_TEXT("BitArray"s), CSVDataType::BitArray },
-                                                  { SYSTEM_TEXT("Vector2Array"s), CSVDataType::Vector2Array },
-                                                  { SYSTEM_TEXT("Vector3Array"s), CSVDataType::Vector3Array },
-                                                  { SYSTEM_TEXT("Vector4Array"s), CSVDataType::Vector4Array },
-                                                  { SYSTEM_TEXT("IntVector2Array"s), CSVDataType::IntVector2Array },
-                                                  { SYSTEM_TEXT("IntVector3Array"s), CSVDataType::IntVector3Array },
-                                                  { SYSTEM_TEXT("IntVector4Array"s), CSVDataType::IntVector4Array } };
+                                                       { SYSTEM_TEXT("BoolArray"s), CSVDataType::BoolArray },
+                                                       { SYSTEM_TEXT("CharArray"s), CSVDataType::CharArray },
+                                                       { SYSTEM_TEXT("IntArray"s), CSVDataType::IntArray },
+                                                       { SYSTEM_TEXT("Int64Array"s), CSVDataType::Int64Array },
+                                                       { SYSTEM_TEXT("DoubleArray"s), CSVDataType::DoubleArray },
+                                                       { SYSTEM_TEXT("EnumArray"s), CSVDataType::EnumArray },
+                                                       { SYSTEM_TEXT("BitArray"s), CSVDataType::BitArray },
+                                                       { SYSTEM_TEXT("Vector2Array"s), CSVDataType::Vector2Array },
+                                                       { SYSTEM_TEXT("Vector3Array"s), CSVDataType::Vector3Array },
+                                                       { SYSTEM_TEXT("Vector4Array"s), CSVDataType::Vector4Array },
+                                                       { SYSTEM_TEXT("IntVector2Array"s), CSVDataType::IntVector2Array },
+                                                       { SYSTEM_TEXT("IntVector3Array"s), CSVDataType::IntVector3Array },
+                                                       { SYSTEM_TEXT("IntVector4Array"s), CSVDataType::IntVector4Array } };
 
-    const auto iter = typeDescribe.find(describe);
-
-    if (iter != typeDescribe.cend())
+    if (const auto iter = typeDescribe.find(describe); iter != typeDescribe.cend())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("未找到对应的类型。\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到对应的类型。\n"s))
     }
 }
 
@@ -105,16 +100,16 @@ void CoreTools::CSVRowTesting::CreateCSV()
 
 CoreTools::CSVHead CoreTools::CSVRowTesting::ReadFile()
 {
-    using FileContent = vector<String>;
+    using FileContent = std::vector<String>;
 
     FileContent fileContent{};
 
-    IFStreamManager streamManager{ SYSTEM_TEXT("Resource/CSVTesting/CSVHead/CSVHeadTesting.csv"s) };
+    const IFStreamManager streamManager{ SYSTEM_TEXT("Resource/CSVTesting/CSVHead/CSVHeadTesting.csv"s) };
 
     const auto content = streamManager.GetFileContent();
 
-    vector<String> row{};
-    boost::algorithm::split(row, content, boost::is_any_of(SYSTEM_TEXT("\r\n")), boost::token_compress_on);
+    std::vector<String> row{};
+    split(row, content, boost::is_any_of(SYSTEM_TEXT("\r\n")), boost::token_compress_on);
 
     auto csvType = CSVType::Format;
     for (const auto& value : row)
@@ -139,7 +134,7 @@ CoreTools::CSVHead CoreTools::CSVRowTesting::ReadFile()
 
 void CoreTools::CSVRowTesting::CSVRow0Test()
 {
-    CSVRow csvRow{ ReadFile(), rowContent0 };
+    const CSVRow csvRow{ ReadFile(), rowContent0 };
 
     ASSERT_EQUAL(csvRow.GetCount(), 27);
 
@@ -179,18 +174,18 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetZ(), 4);
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetW(), 7);
 
-    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test13"s)), (vector<int>{ 10001, 14, 66 }));
-    ASSERT_EQUAL(csvRow.GetBoolArray(SYSTEM_TEXT("test14"s)), (deque<bool>{ true, false }));
-    ASSERT_EQUAL(csvRow.GetCharArray(SYSTEM_TEXT("test15"s)), (vector<System::TChar>{ SYSTEM_TEXT('a'), SYSTEM_TEXT('i') }));
+    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test13"s)), (std::vector<int>{ 10001, 14, 66 }));
+    ASSERT_EQUAL(csvRow.GetBoolArray(SYSTEM_TEXT("test14"s)), (std::deque<bool>{ true, false }));
+    ASSERT_EQUAL(csvRow.GetCharArray(SYSTEM_TEXT("test15"s)), (std::vector<System::TChar>{ SYSTEM_TEXT('a'), SYSTEM_TEXT('i') }));
 
     const auto doubleArray = csvRow.GetDoubleArray(SYSTEM_TEXT("test16"s));
     ASSERT_EQUAL(doubleArray.size(), 2u);
     ASSERT_APPROXIMATE(doubleArray.at(0), 1.1, Mathematics::MathD::epsilon);
     ASSERT_APPROXIMATE(doubleArray.at(1), 1.1, Mathematics::MathD::epsilon);
 
-    ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (vector<int64_t>{ 10001 }));
-    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (vector<int>{ 7, 2 }));
-    ASSERT_EQUAL(csvRow.GetEnumArray<CSVDataType>(SYSTEM_TEXT("test19"s)), (vector<CSVDataType>{ CSVDataType::String, CSVDataType::Vector2 }));
+    ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (std::vector<int64_t>{ 10001 }));
+    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (std::vector<int>{ 7, 2 }));
+    ASSERT_EQUAL(csvRow.GetEnumArray<CSVDataType>(SYSTEM_TEXT("test19"s)), (std::vector<CSVDataType>{ CSVDataType::String, CSVDataType::Vector2 }));
 
     const auto vector2Array = csvRow.GetVector2Array(SYSTEM_TEXT("test20"s));
     ASSERT_EQUAL(vector2Array.size(), 2u);
@@ -227,7 +222,7 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
 
 void CoreTools::CSVRowTesting::CSVRow1Test()
 {
-    CSVRow csvRow{ ReadFile(), rowContent1 };
+    const CSVRow csvRow{ ReadFile(), rowContent1 };
 
     ASSERT_EQUAL(csvRow.GetCount(), 27);
 
@@ -267,17 +262,17 @@ void CoreTools::CSVRowTesting::CSVRow1Test()
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetZ(), 4);
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetW(), 6);
 
-    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test13"s)), (vector<int>{ 10002, 55, 4 }));
-    ASSERT_EQUAL(csvRow.GetBoolArray(SYSTEM_TEXT("test14"s)), (deque<bool>{ true }));
-    ASSERT_EQUAL(csvRow.GetCharArray(SYSTEM_TEXT("test15"s)), (vector<System::TChar>{ SYSTEM_TEXT('b') }));
+    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test13"s)), (std::vector{ 10002, 55, 4 }));
+    ASSERT_EQUAL(csvRow.GetBoolArray(SYSTEM_TEXT("test14"s)), (std::deque{ true }));
+    ASSERT_EQUAL(csvRow.GetCharArray(SYSTEM_TEXT("test15"s)), (std::vector{ SYSTEM_TEXT('b') }));
 
     const auto doubleArray = csvRow.GetDoubleArray(SYSTEM_TEXT("test16"s));
     ASSERT_EQUAL(doubleArray.size(), 1u);
     ASSERT_APPROXIMATE(doubleArray.at(0), 1.2, Mathematics::MathD::epsilon);
 
-    ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (vector<int64_t>{ 10002 }));
-    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (vector<int>{ 3 }));
-    ASSERT_EQUAL(csvRow.GetEnumArray<CSVDataType>(SYSTEM_TEXT("test19"s)), (vector<CSVDataType>{ CSVDataType::Char }));
+    ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (std::vector<int64_t>{ 10002 }));
+    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (std::vector{ 3 }));
+    ASSERT_EQUAL(csvRow.GetEnumArray<CSVDataType>(SYSTEM_TEXT("test19"s)), (std::vector{ CSVDataType::Char }));
 
     const auto vector2Array = csvRow.GetVector2Array(SYSTEM_TEXT("test20"s));
     ASSERT_EQUAL(vector2Array.size(), 1u);

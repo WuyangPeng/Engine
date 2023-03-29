@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/26 18:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/29 13:54)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -28,34 +28,33 @@ bool CoreTools::EntityManagerImpl::Register(const EntitySharedPtr& entity)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return container.insert({ entity->GetEntityID(), entity }).second;
+    return container.insert({ entity->GetEntityId(), entity }).second;
 }
 
-bool CoreTools::EntityManagerImpl::Unregister(uint64_t entityID)
+bool CoreTools::EntityManagerImpl::UnRegister(int64_t entityId)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return container.erase(entityID) != 0;
+    return container.erase(entityId) != 0;
 }
 
-CoreTools::EntityManagerImpl::EntitySharedPtr CoreTools::EntityManagerImpl::GetEntity(uint64_t entityID) const
+CoreTools::EntityManagerImpl::EntitySharedPtr CoreTools::EntityManagerImpl::GetEntity(int64_t entityId) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto entity = container.find(entityID);
-    if (entity != container.cend())
+    if (const auto entity = container.find(entityId); entity != container.cend())
     {
         auto ptr = entity->second.lock();
 
         if (!ptr)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("Entity已释放。"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("Entity已释放。"s))
         }
 
         return ptr;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Entity不存在。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("Entity不存在。"s))
     }
 }

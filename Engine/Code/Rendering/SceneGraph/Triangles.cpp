@@ -289,9 +289,7 @@ Rendering::PickRecordContainer Rendering::Triangles::ExecuteRecursive(const APoi
             }
             catch (const CoreTools::Error& error)
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-                    << error
-                    << LOG_SINGLETON_TRIGGER_ASSERT;
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
         }
     }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:45)
+///	引擎测试版本：0.9.0.4 (2023/03/06 14:19)
 
 #include "ZipEntryTesting.h"
 #include "System/CharacterString/FormatString.h"
@@ -20,12 +20,10 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/TextParsing/CSV/ExcelConversionCSV.h"
 #include "CoreTools/TextParsing/SimpleZip/ZipArchive.h"
 #include "CoreTools/TextParsing/SimpleZip/ZipEntry.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::string;
 using namespace std::literals;
 
 CoreTools::ZipEntryTesting::ZipEntryTesting(const OStreamShared& stream)
@@ -58,10 +56,10 @@ void CoreTools::ZipEntryTesting::ZipEntryInfoTest()
 
     SimpleZip::ZipEntry zipEntry{ zipEntryInfo };
 
-    auto zipEntryData = zipEntry.GetEntryData();
+    const auto zipEntryData = zipEntry.GetEntryData();
     ASSERT_TRUE(zipEntryData.empty());
 
-    auto dataAsString = zipEntry.GetDataAsString();
+    const auto dataAsString = zipEntry.GetDataAsString();
     ASSERT_TRUE(dataAsString.empty());
 
     ASSERT_EQUAL(fileIndex, zipEntry.GetIndex());
@@ -121,30 +119,22 @@ CoreTools::SimpleZip::ZipEntryInfo CoreTools::ZipEntryTesting::GetZipEntryInfo(m
     zipEntryInfo.m_is_encrypted = false;
     zipEntryInfo.m_is_supported = true;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26485)
-
-    if (!(System::Strcpy(zipEntryInfo.m_filename, System::GetArraySize(zipEntryInfo.m_filename) * sizeof(char), "ZipEntryInfo.zip") &&
-          System::Strcpy(zipEntryInfo.m_comment, System::GetArraySize(zipEntryInfo.m_comment) * sizeof(char), "comment")))
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("复制文件名和清空内容失败。"s));
-    }
-
-#include STSTEM_WARNING_POP
+    std::ranges::copy("ZipEntryInfo.zip", std::begin(zipEntryInfo.m_filename));
+    std::ranges::copy("comment", std::begin(zipEntryInfo.m_comment));
 
     return zipEntryInfo;
 }
 
 void CoreTools::ZipEntryTesting::ZipEntryDataTest()
 {
-    SimpleZip::ZipEntryData originalZipEntryData{ '1', '2' };
+    const SimpleZip::ZipEntryData originalZipEntryData{ '1', '2' };
     SimpleZip::ZipEntry zipEntry{ "ZipEntryInfo.zip", originalZipEntryData };
 
-    auto zipEntryData = zipEntry.GetEntryData();
+    const auto zipEntryData = zipEntry.GetEntryData();
     ASSERT_FALSE(zipEntryData.empty());
     ASSERT_EQUAL(zipEntryData, originalZipEntryData);
 
-    auto dataAsString = zipEntry.GetDataAsString();
+    const auto dataAsString = zipEntry.GetDataAsString();
     ASSERT_FALSE(dataAsString.empty());
     ASSERT_EQUAL(dataAsString.size(), 2u);
 
@@ -187,11 +177,11 @@ void CoreTools::ZipEntryTesting::StringDataTest()
 {
     SimpleZip::ZipEntry zipEntry{ "ZipEntryInfo.zip", "12"s };
 
-    auto zipEntryData = zipEntry.GetEntryData();
+    const auto zipEntryData = zipEntry.GetEntryData();
     ASSERT_FALSE(zipEntryData.empty());
     ASSERT_EQUAL(zipEntryData.size(), 2u);
 
-    auto dataAsString = zipEntry.GetDataAsString();
+    const auto dataAsString = zipEntry.GetDataAsString();
     ASSERT_FALSE(dataAsString.empty());
     ASSERT_EQUAL(dataAsString.size(), 2u);
 
@@ -275,7 +265,7 @@ void CoreTools::ZipEntryTesting::ReaderExtractFileToMemTest()
     mz_zip_reader_end(&archive);
 }
 
-string CoreTools::ZipEntryTesting::GetZipArchiveFileName()
+std::string CoreTools::ZipEntryTesting::GetZipArchiveFileName()
 {
     return "Resource/SimpleZipTesting/ZipEntry.zip";
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 16:49)
+///	引擎测试版本：0.9.0.4 (2023/03/10 14:22)
 
 #include "JsonGenerateTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -15,8 +15,6 @@
 #include "CoreTools/TextParsing/Json/JsonHead.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::make_shared;
-using std::vector;
 using namespace std::literals;
 
 CoreTools::JsonGenerateTesting::JsonGenerateTesting(const OStreamShared& stream)
@@ -34,44 +32,65 @@ void CoreTools::JsonGenerateTesting::DoRunUnitTest()
 
 void CoreTools::JsonGenerateTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(CSVGenerateHeadTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CSVGenerateDetailHeadTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CSVGenerateSourceTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CSVGenerateTotalTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(JsonGenerateHeadTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(JsonGenerateDetailHeadTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(JsonGenerateSourceTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(JsonGenerateTotalTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(JsonGenerateTotalRoadTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(JsonGenerateTotalRunScenesTest);
 }
 
-void CoreTools::JsonGenerateTesting::CSVGenerateHeadTest()
+void CoreTools::JsonGenerateTesting::JsonGenerateHeadTest()
 {
-    JsonHead jsonHead{ SYSTEM_TEXT("Resource/JsonConfigure/DungonMonsters.json"s) };
+    const JsonHead jsonHead{ SYSTEM_TEXT("Resource/JsonConfigure/Monsters.json"s) };
 
-    JsonGenerate jsonGenerate{ jsonHead, JsonGenerateType::Head };
+    const JsonGenerate jsonGenerate{ jsonHead, JsonGenerateType::Head };
 
     jsonGenerate.GenerateFile(SYSTEM_TEXT("Resource/JsonGenerate"s));
 }
 
-void CoreTools::JsonGenerateTesting::CSVGenerateDetailHeadTest()
+void CoreTools::JsonGenerateTesting::JsonGenerateDetailHeadTest()
 {
-    JsonHead jsonHead{ SYSTEM_TEXT("Resource/JsonConfigure/DungonMonsters.json"s) };
+    const JsonHead jsonHead{ SYSTEM_TEXT("Resource/JsonConfigure/Monsters.json"s) };
 
-    JsonGenerate jsonGenerate{ jsonHead, JsonGenerateType::DetailHead };
+    const JsonGenerate jsonGenerate{ jsonHead, JsonGenerateType::DetailHead };
 
     jsonGenerate.GenerateFile(SYSTEM_TEXT("Resource/JsonGenerate"s));
 }
 
-void CoreTools::JsonGenerateTesting::CSVGenerateSourceTest()
+void CoreTools::JsonGenerateTesting::JsonGenerateSourceTest()
 {
-    JsonHead jsonHead{ SYSTEM_TEXT("Resource/JsonConfigure/DungonMonsters.json"s) };
+    const JsonHead jsonHead{ SYSTEM_TEXT("Resource/JsonConfigure/Monsters.json"s) };
 
-    JsonGenerate jsonGenerate{ jsonHead, JsonGenerateType::Source };
+    const JsonGenerate jsonGenerate{ jsonHead, JsonGenerateType::Source };
 
     jsonGenerate.GenerateFile(SYSTEM_TEXT("Resource/JsonGenerate"s));
 }
 
-void CoreTools::JsonGenerateTesting::CSVGenerateTotalTest()
+void CoreTools::JsonGenerateTesting::JsonGenerateTotalTest()
 {
-    JsonHead jsonHead{ SYSTEM_TEXT("Resource/JsonConfigure/DungonParts.json"s) };
+    const JsonHead jsonHead{ SYSTEM_TEXT("Resource/JsonConfigure/Parts.json"s) };
 
-    JsonGenerate jsonGenerate{ jsonHead, JsonGenerateType::Total };
+    const JsonGenerate jsonGenerate{ jsonHead, JsonGenerateType::Total };
+
+    jsonGenerate.GenerateFile(SYSTEM_TEXT("Resource/JsonGenerate"s));
+}
+
+void CoreTools::JsonGenerateTesting::JsonGenerateTotalRoadTest()
+{
+    const JsonHead jsonHead{ SYSTEM_TEXT("Resource/JsonConfigure/Road.json"s) };
+
+    const JsonGenerate jsonGenerate{ jsonHead, JsonGenerateType::Total };
+
+    jsonGenerate.GenerateFile(SYSTEM_TEXT("Resource/JsonGenerate"s));
+}
+
+void CoreTools::JsonGenerateTesting::JsonGenerateTotalRunScenesTest()
+{
+    const JsonHead jsonHead{ SYSTEM_TEXT("Resource/JsonConfigure/RunScenes.json"s) };
+
+    const JsonGenerate jsonGenerate{ jsonHead, JsonGenerateType::Total };
 
     jsonGenerate.GenerateFile(SYSTEM_TEXT("Resource/JsonGenerate"s));
 }

@@ -314,7 +314,7 @@ struct CoreTools::StreamSize<Mathematics::Float1>
 {
     NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED const Mathematics::Float1& value) noexcept
     {
-        return StreamSize<float>::GetStreamSize() * Mathematics::Float1::TupleDimension;
+        return StreamSize<float>::GetStreamSize() * Mathematics::Float1::tupleDimension;
     }
 };
 
@@ -323,7 +323,7 @@ struct CoreTools::StreamSize<Mathematics::Float2>
 {
     NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED const Mathematics::Float2& value) noexcept
     {
-        return StreamSize<float>::GetStreamSize() * Mathematics::Float2::TupleDimension;
+        return StreamSize<float>::GetStreamSize() * Mathematics::Float2::tupleDimension;
     }
 };
 
@@ -332,7 +332,7 @@ struct CoreTools::StreamSize<Mathematics::Float3>
 {
     NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED const Mathematics::Float3& value) noexcept
     {
-        return StreamSize<float>::GetStreamSize() * Mathematics::Float3::TupleDimension;
+        return StreamSize<float>::GetStreamSize() * Mathematics::Float3::tupleDimension;
     }
 };
 
@@ -341,7 +341,7 @@ struct CoreTools::StreamSize<Mathematics::Float4>
 {
     NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED const Mathematics::Float4& value) noexcept
     {
-        return StreamSize<float>::GetStreamSize() * Mathematics::Float4::TupleDimension;
+        return StreamSize<float>::GetStreamSize() * Mathematics::Float4::tupleDimension;
     }
 };
 

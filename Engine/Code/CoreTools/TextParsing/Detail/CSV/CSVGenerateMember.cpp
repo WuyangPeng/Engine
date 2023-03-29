@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 20:19)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 17:45)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,15 +16,15 @@
 #include "CoreTools/TextParsing/Detail/ContainerMemberParsing.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::CSVGenerateMember::CSVGenerateMember(const CSVHead& csvHead, const String& suffix)
-    : csvHead{ csvHead }, suffix{ suffix }
+CoreTools::CSVGenerateMember::CSVGenerateMember(CSVHead csvHead, String suffix) noexcept
+    : csvHead{ std::move(csvHead) }, suffix{ std::move(suffix) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CSVGenerateMember)
 
-System::String CoreTools::CSVGenerateMember::GenerateBaseMember() const
+System::String CoreTools::CSVGenerateMember::GenerateBaseMember()
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

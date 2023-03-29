@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 19:10)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/06 15:08)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_QUERY_SHARED_STRINGS_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_QUERY_SHARED_STRINGS_IMPL_H
@@ -15,34 +15,30 @@
 #include "CoreTools/TextParsing/TextParsingFwd.h"
 
 #include <memory>
-#include <string>
 
-namespace CoreTools
+namespace CoreTools::SimpleCSV
 {
-    namespace SimpleCSV
+    class CORE_TOOLS_HIDDEN_DECLARE QuerySharedStringsImpl final
     {
-        class CORE_TOOLS_HIDDEN_DECLARE QuerySharedStringsImpl final
-        {
-        public:
-            using ClassType = QuerySharedStringsImpl;
-            using SharedStringsSharedPtr = std::shared_ptr<SharedStrings>;
+    public:
+        using ClassType = QuerySharedStringsImpl;
+        using SharedStringsSharedPtr = std::shared_ptr<SharedStrings>;
 
-        public:
-            QuerySharedStringsImpl() noexcept = default;
-            explicit QuerySharedStringsImpl(const SharedStringsSharedPtr& sharedStrings) noexcept;
+    public:
+        QuerySharedStringsImpl() noexcept = default;
+        explicit QuerySharedStringsImpl(const SharedStringsSharedPtr& sharedStrings) noexcept;
 
-            CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-            NODISCARD SharedStringsSharedPtr GetSharedStrings() const;
-            void SetSharedStrings(const SharedStringsSharedPtr& sharedStrings) noexcept;
+        NODISCARD SharedStringsSharedPtr GetSharedStrings() const;
+        void SetSharedStrings(const SharedStringsSharedPtr& aSharedStrings) noexcept;
 
-        private:
-            using SharedStringsWeakPtr = std::weak_ptr<SharedStrings>;
+    private:
+        using SharedStringsWeakPtr = std::weak_ptr<SharedStrings>;
 
-        private:
-            SharedStringsWeakPtr m_SharedStrings;
-        };
-    }
+    private:
+        SharedStringsWeakPtr sharedStrings;
+    };
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_QUERY_SHARED_STRINGS_IMPL_H

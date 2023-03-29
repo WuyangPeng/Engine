@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/03/02 10:28)
+///	引擎版本：0.9.0.4 (2023/03/23 15:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,8 +17,6 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-
-using std::string;
 
 CoreTools::CFileManagerImpl::CFileManagerImpl(const String& fileName, const String& mode)
     : file{ nullptr }, fileName{ fileName }, mode{ mode }
@@ -47,11 +45,7 @@ void CoreTools::CFileManagerImpl::Close() const noexcept
 {
     if (!System::CloseCFile(file))
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-            << SYSTEM_TEXT("关闭文件")
-            << fileName
-            << SYSTEM_TEXT("失败！")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("关闭文件"), fileName, SYSTEM_TEXT("失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -127,7 +121,7 @@ bool CoreTools::CFileManagerImpl::PutCharacter(int character)
     return System::PutCharacter(file, character);
 }
 
-bool CoreTools::CFileManagerImpl::PutString(const string& str)
+bool CoreTools::CFileManagerImpl::PutString(const std::string& str)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -136,7 +130,7 @@ bool CoreTools::CFileManagerImpl::PutString(const string& str)
     return System::PutString(file, str.c_str());
 }
 
-string CoreTools::CFileManagerImpl::GetString(int count)
+std::string CoreTools::CFileManagerImpl::GetString(int count)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

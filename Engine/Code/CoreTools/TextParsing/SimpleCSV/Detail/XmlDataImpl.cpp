@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:25)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 09:40)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,13 +16,10 @@
 
 #include <sstream>
 
-using std::ostringstream;
-using std::string;
-
-CoreTools::SimpleCSV::XmlDataImpl::XmlDataImpl(const DocumentSharedPtr& parentDocument, const string& xmlPath, const string& xmlID, ContentType xmlType)
+CoreTools::SimpleCSV::XmlDataImpl::XmlDataImpl(const DocumentSharedPtr& parentDocument, const std::string& xmlPath, std::string xmlId, ContentType xmlType)
     : parentDocument{ parentDocument },
       xmlPath{ xmlPath },
-      xmlID{ xmlID },
+      xmlId{ std::move(xmlId) },
       xmlType{ xmlType },
       xmlDocument{ std::make_shared<XMLDocument>() }
 {
@@ -38,8 +35,8 @@ CoreTools::SimpleCSV::XmlDataImpl::XmlDataImpl(const DocumentSharedPtr& parentDo
 CoreTools::SimpleCSV::XmlDataImpl::XmlDataImpl(XmlDataImpl&& rhs) noexcept
     : parentDocument{ std::move(rhs.parentDocument) },
       xmlPath{ std::move(rhs.xmlPath) },
-      xmlID{ std::move(rhs.xmlID) },
-      xmlType{ std::move(rhs.xmlType) },
+      xmlId{ std::move(rhs.xmlId) },
+      xmlType{ rhs.xmlType },
       xmlDocument{ std::move(rhs.xmlDocument) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -49,12 +46,12 @@ CoreTools::SimpleCSV::XmlDataImpl& CoreTools::SimpleCSV::XmlDataImpl::operator=(
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-     if (this != &rhs)
+    if (this != &rhs)
     {
         parentDocument = std::move(rhs.parentDocument);
         xmlPath = std::move(rhs.xmlPath);
-        xmlID = std::move(rhs.xmlID);
-        xmlType = std::move(rhs.xmlType);
+        xmlId = std::move(rhs.xmlId);
+        xmlType = rhs.xmlType;
         xmlDocument = std::move(rhs.xmlDocument);
     }
 
@@ -77,7 +74,7 @@ bool CoreTools::SimpleCSV::XmlDataImpl::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-void CoreTools::SimpleCSV::XmlDataImpl::SetRawData(const string& data)
+void CoreTools::SimpleCSV::XmlDataImpl::SetRawData(const std::string& data)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -88,7 +85,7 @@ std::string CoreTools::SimpleCSV::XmlDataImpl::GetRawData() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    ostringstream os{};
+    std::ostringstream os{};
     xmlDocument->save(os, "", pugi::format_raw);
 
     return os.str();
@@ -101,18 +98,18 @@ CoreTools::SimpleCSV::XmlDataImpl::DocumentWeakPtr CoreTools::SimpleCSV::XmlData
     return parentDocument;
 }
 
-string CoreTools::SimpleCSV::XmlDataImpl::GetXmlPath() const
+std::string CoreTools::SimpleCSV::XmlDataImpl::GetXmlPath() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return xmlPath;
 }
 
-string CoreTools::SimpleCSV::XmlDataImpl::GetXmlID() const
+std::string CoreTools::SimpleCSV::XmlDataImpl::GetXmlId() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return xmlID;
+    return xmlId;
 }
 
 CoreTools::SimpleCSV::ContentType CoreTools::SimpleCSV::XmlDataImpl::GetXmlType() const noexcept

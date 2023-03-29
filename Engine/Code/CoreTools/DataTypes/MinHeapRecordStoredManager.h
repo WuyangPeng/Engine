@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 16:04)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/23 11:16)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_STORED_MANAGER_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_STORED_MANAGER_H
@@ -34,9 +34,11 @@ namespace CoreTools
         MinHeapRecordStoredManager(int newMaxElements, const MinHeapRecordStoredManager& oldRecordStoredManage);
 
 #ifdef OPEN_CLASS_INVARIANT
+
         CLASS_INVARIANT_DECLARE;
         NODISCARD bool IndexIsValid() const;
         void PrintIndexInLog() const noexcept;
+
 #endif  // OPEN_CLASS_INVARIANT
 
         NODISCARD int GetMaxElements() const;
@@ -64,7 +66,7 @@ namespace CoreTools
 
     private:
         // 这个两级的系统避免了大量的分配和释放的发生，如果Records的每个元素都被单独的分配/释放。
-        RecordStoredType recordStoreds;
+        RecordStoredType recordStored;
         RecordIndexType recordIndexes;
     };
 }

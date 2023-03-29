@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/DelayCopyUnshared/AnimationDelayCopyUnsharedMacro.h"
-#include "Toolset/CoreTools/ExportTest/CoreTools/DelayCopyUnshared/ArtificialIntellegenceDelayCopyUnsharedMacro.h"
+#include "Toolset/CoreTools/ExportTest/CoreTools/DelayCopyUnshared/ArtificialIntelligenceDelayCopyUnsharedMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/DelayCopyUnshared/AssistToolsDelayCopyUnsharedMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/DelayCopyUnshared/CoreToolsDelayCopyUnsharedMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/DelayCopyUnshared/DatabaseDelayCopyUnsharedMacro.h"
@@ -57,7 +57,7 @@ void CoreTools::DelayCopyUnsharedExportMacroTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<Physics::PhysicsDelayCopyUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<Imagics::ImagicsDelayCopyUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<Animation::AnimationDelayCopyUnsharedMacro>);
-    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<ArtificialIntellegence::ArtificialIntellegenceDelayCopyUnsharedMacro>);
+    ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<ArtificialIntelligence::ArtificialIntelligenceDelayCopyUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<UserInterface::UserInterfaceDelayCopyUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<AssistTools::AssistToolsDelayCopyUnsharedMacro>);
     ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyUnsharedExportTest<Framework::FrameworkDelayCopyUnsharedMacro>);

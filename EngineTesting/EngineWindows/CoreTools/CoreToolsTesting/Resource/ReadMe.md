@@ -226,7 +226,8 @@
 				  QueryXmlDataTesting。
 （5）Excel转csv功能： ExcelConversionCSVTesting、
 					  BatchConversionCSVTesting。
-（6）csv解析：CSVTypeConversionTesting、
+（6）csv解析：CSVDataTesting、
+			  CSVTypeConversionTesting、
 			  CSVHeadTesting、
 			  CSVRowTesting、
 			  CSVContentTesting、
@@ -275,16 +276,16 @@
 
 对内存工具模块的单元测试，包括：
 （1）堆分配：HeapAllocateTesting。
-（2）内存管理：：BufferStreamTesting、
+（2）指针比较：SmartPointerTesting、
+			   SubclassSmartPointerTesting。
+（3）多维数组：MD5ContextTesting、MD5Testing。
+（4）内存管理：：BufferStreamTesting、
 				 BufferTesting、
 				 DefaultMemoryTesting、
 				 MemoryManagerTesting、
 				 MemoryTesting。
-（3）智能指针管理：SmartPointerTesting。
-（4）MD5：MD5ContextTesting、MD5Testing。
 （5）随机数：RandomTesting。
-（6）内存池：BufferPoolTesting、PoolTesting。
-（7）子类智能指针管理：SubclassSmartPointerTesting。
+（6）内存池：BufferPoolTesting、PoolTesting。 
 
 ----------------------------
 13.	 ObjectSystemsSuite 

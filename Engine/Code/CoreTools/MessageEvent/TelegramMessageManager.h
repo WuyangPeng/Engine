@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/26 18:22)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/29 13:40)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_MESSAGE_MANAGER_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_MESSAGE_MANAGER_H
@@ -46,15 +46,15 @@ namespace CoreTools
 
         void DispatchDelayEvent(int64_t currentTime);
 
-        NODISCARD bool RegisterAllEvent(uint64_t entityID);
-        NODISCARD bool UnregisterAllEvent(uint64_t entityID);
+        NODISCARD bool RegisterAllEvent(int64_t entityId);
+        NODISCARD bool UnRegisterAllEvent(int64_t entityId);
 
-        NODISCARD bool Register(EventType eventType, uint64_t entityID);
-        NODISCARD bool Unregister(EventType eventType, uint64_t entityID);
+        NODISCARD bool Register(EventType eventType, int64_t entityId);
+        NODISCARD bool UnRegister(EventType eventType, int64_t entityId);
 
     private:
         using EventContainer = std::set<Telegram, TelegramLess>;
-        using RegisterContainer = std::set<uint64_t>;
+        using RegisterContainer = std::set<int64_t>;
         using EventRegisterContainer = std::map<EventType, RegisterContainer>;
         using EventEntity = EventEntity<EventType>;
         using EventEntityPtr = std::shared_ptr<EventEntity>;
@@ -62,7 +62,7 @@ namespace CoreTools
     private:
         void DisposeEvent(const Telegram& telegram);
         void DisposeAllEvent(const Telegram& telegram);
-        void DisposeEvent(uint64_t entityID, const Telegram& telegram);
+        void DisposeEvent(int64_t entityId, const Telegram& telegram);
 
     private:
         TelegramLess telegramLess;

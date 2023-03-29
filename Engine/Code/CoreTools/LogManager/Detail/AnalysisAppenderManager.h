@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/06 0:09)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/28 14:53)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_ANALYSIS_APPENDER_MANAGER_H
 #define CORE_TOOLS_LOG_MANAGER_ANALYSIS_APPENDER_MANAGER_H
@@ -27,7 +27,7 @@ namespace CoreTools
         using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>;
 
     public:
-        explicit AnalysisAppenderManager(const std::string& fileName);
+        explicit AnalysisAppenderManager(std::string fileName);
 
         CLASS_INVARIANT_DECLARE;
 

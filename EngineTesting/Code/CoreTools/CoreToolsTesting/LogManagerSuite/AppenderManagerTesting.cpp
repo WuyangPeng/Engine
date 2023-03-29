@@ -74,11 +74,11 @@ void CoreTools::AppenderManagerTesting::LoggerSucceedTest()
     auto manager = AppenderManager::Create();
 
     ASSERT_TRUE(manager->InsertLogger(Logger(LogFilter::CoreTools, LogLevel::Debug)));
-    ASSERT_TRUE(manager->InsertLogger(Logger(LogFilter::ArtificialIntellegence, LogLevel::Error)));
+    ASSERT_TRUE(manager->InsertLogger(Logger(LogFilter::ArtificialIntelligence, LogLevel::Error)));
     ASSERT_TRUE(manager->InsertLogger(Logger(LogFilter::Framework, LogLevel::Info)));
 
     ASSERT_TRUE(manager->RemoveLogger(LogFilter::CoreTools));
-    ASSERT_TRUE(manager->RemoveLogger(LogFilter::ArtificialIntellegence));
+    ASSERT_TRUE(manager->RemoveLogger(LogFilter::ArtificialIntelligence));
     ASSERT_TRUE(manager->RemoveLogger(LogFilter::Framework));
 }
 
@@ -152,7 +152,8 @@ void CoreTools::AppenderManagerTesting::WriteMessageToFileTest()
     ASSERT_TRUE(manager->InsertLogger(firstLogger));
     ASSERT_TRUE(manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender));
 
-    LogMessage traceMessage(LogLevel::Trace, LogFilter::CoreTools, gTraceMessage, CORE_TOOLS_FUNCTION_DESCRIBED);
+    LogMessage traceMessage(LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED);
+    traceMessage << gTraceMessage;
 
     // 这条消息被写入g_AppenderManagerTestingFileName
     manager->Write(traceMessage);
@@ -160,12 +161,14 @@ void CoreTools::AppenderManagerTesting::WriteMessageToFileTest()
     Logger secondLogger(LogFilter::System, LogLevel::Info);
     ASSERT_TRUE(manager->InsertLogger(secondLogger));
 
-    LogMessage debugMessage{ LogLevel::Debug, LogFilter::System, gDebugMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage debugMessage{ LogLevel::Debug, LogFilter::System, CORE_TOOLS_FUNCTION_DESCRIBED };
+    debugMessage << gDebugMessage;
 
     // 这条消息没有被写入g_AppenderManagerTestingFileName
     manager->Write(debugMessage);
 
-    LogMessage infoMessage{ LogLevel::Info, LogFilter::CoreTools, gInfoMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage infoMessage{ LogLevel::Info, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    infoMessage << gInfoMessage;
 
     // 这条消息被写入g_AppenderManagerTestingFileName
     manager->Write(infoMessage);
@@ -174,12 +177,14 @@ void CoreTools::AppenderManagerTesting::WriteMessageToFileTest()
     ASSERT_TRUE(manager->RemoveAppender(SYSTEM_TEXT("FileAppender"s)));
     ASSERT_TRUE(manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender));
 
-    LogMessage warnMessage{ LogLevel::Warn, LogFilter::CoreTools, gWarnMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage warnMessage{ LogLevel::Warn, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    warnMessage << gWarnMessage;
 
     // 这条消息没有被写入g_AppenderManagerTestingFileName
     manager->Write(warnMessage);
 
-    LogMessage errorMessage{ LogLevel::Error, LogFilter::CoreTools, gErrorMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage errorMessage{ LogLevel::Error, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    errorMessage << gErrorMessage;
 
     // 这条消息被写入g_AppenderManagerTestingFileName
     manager->Write(errorMessage);

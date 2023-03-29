@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/10 18:13)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/22 19:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,20 +18,18 @@
 
 #include <array>
 
-using std::array;
-using std::swap;
 using namespace std::literals;
 
 int CoreTools::SpecifyCheckSum::GetSevenPowers(int index)
 {
-    static array<int, sm_PowersSize> sevenPowers{ 1, 7, 49, 343, 2401, 16807, 117649, 823543, 5764801, 40353607 };
+    static std::array sevenPowers{ 1, 7, 49, 343, 2401, 16807, 117649, 823543, 5764801, 40353607 };
 
     return sevenPowers.at(index);
 }
 
 int CoreTools::SpecifyCheckSum::GetNinePowers(int index)
 {
-    static array<int, sm_PowersSize> ninePowers{ 1, 9, 81, 729, 6561, 59049, 531441, 4782969, 43046721, 387420489 };
+    static std::array ninePowers{ 1, 9, 81, 729, 6561, 59049, 531441, 4782969, 43046721, 387420489 };
 
     return ninePowers.at(index);
 }
@@ -63,12 +61,12 @@ int CoreTools::SpecifyCheckSum::GetCollisions() const noexcept
 // private
 void CoreTools::SpecifyCheckSum::Calculation(const char* data, int length)
 {
-    if (sm_PowersSize < length)
+    if (powersSize < length)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("数字不能超过10位数\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("数字不能超过10位数\n"s))
     }
 
-    array<char, sm_PowersSize> buffer{};
+    std::array<char, powersSize> buffer{};
 
     // 获得原始数字的校验和
     originalCheckSum = GetCheckSum(data, length);
@@ -80,44 +78,23 @@ void CoreTools::SpecifyCheckSum::Calculation(const char* data, int length)
     for (auto index = 0; index < length - 1; ++index)
     {
         // 是否有转置可能？如果两位数相同，则不能转置; 所以跳过这些，否则他们会产生虚假的碰撞。
-
         const auto nextIndex = index + 1;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-        if (buffer[index] == buffer[nextIndex])
+        if (buffer.at(index) == buffer.at(nextIndex))
             continue;
 
-#include STSTEM_WARNING_PUSH
-
-            // 否则，做转置
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-        swap(buffer[nextIndex], buffer[index]);
-
-#include STSTEM_WARNING_PUSH
+        // 否则，做转置
+        std::swap(buffer.at(nextIndex), buffer.at(index));
 
         // 得到校验和
-
-        const auto transpositionCheckSum = GetCheckSum(buffer.data(), boost::numeric_cast<uint32_t>(buffer.size()));
-
-        if (transpositionCheckSum == originalCheckSum)
+        if (const auto transpositionCheckSum = GetCheckSum(buffer.data(), boost::numeric_cast<int>(buffer.size())); transpositionCheckSum == originalCheckSum)
         {
             ++collisions;
         }
 
         // 现在撤消这个转置
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
 
-        swap(buffer[nextIndex], buffer[index]);
-
-#include STSTEM_WARNING_PUSH
+        std::swap(buffer.at(nextIndex), buffer.at(index));
     }
 }
 
@@ -125,7 +102,7 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length)
 {
     if (data == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("data指针为空\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("data指针为空\n"s))
     }
 
     using Function = int (*)(int index);
@@ -142,17 +119,17 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("只能选择7或9次幂\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("只能选择7或9次幂\n"s))
     }
 
     if (function == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("powers指针为空\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("powers指针为空\n"s))
     }
 
-    if (sm_PowersSize < length)
+    if (powersSize < length)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("数字不能超过10位数\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("数字不能超过10位数\n"s))
     }
 
     int64_t sum{};
@@ -164,9 +141,9 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length)
 #include SYSTEM_WARNING_DISABLE(26481)
 
         // 判断是否是数字
-        if (!isdigit(static_cast<int>(data[i - 1])))
+        if (!isdigit(data[i - 1]))
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("无效数字\n"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("无效数字\n"s))
         }
 
         // 将数字字符转换为数字
@@ -186,7 +163,7 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length)
 
     if (mod != 11 && mod != 26 && mod != 10)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("模数值错误\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("模数值错误\n"s))
     }
 
     if (mod == 11 && sum == 10)

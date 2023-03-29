@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 22:27)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 10:09)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -36,7 +36,7 @@ System::String CoreTools::MapContainerGetFunctionDefinitionParsing::GenerateGetF
     auto content = GenerateGetMapFirstDefinition(lowerClassName);
 
     content += GenerateGetMapDefinition(lowerClassName);
-    content += GenerateGetContainerDefinition(lowerClassName, TextParsing::g_MappingContainer);
+    content += GenerateGetContainerDefinition(lowerClassName, TextParsing::gMappingContainer);
 
     return content;
 }
@@ -51,19 +51,19 @@ System::String CoreTools::MapContainerGetFunctionDefinitionParsing::GenerateGetF
     const auto containerClassName = GetCSVClassName();
 
     auto content = nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += containerClassName;
-    content += TextParsing::g_DoubleColonConst;
+    content += TextParsing::gDoubleColonConst;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_SharedPtr;
-    content += TextParsing::g_Space;
+    content += TextParsing::gSharedPtr;
+    content += TextParsing::gSpace;
     content += nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += containerClassName;
-    content += TextParsing::g_GetFirst;
+    content += TextParsing::gGetFirst;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_FunctionConst;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gFunctionConst;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -77,12 +77,12 @@ System::String CoreTools::MapContainerGetFunctionDefinitionParsing::GenerateGetM
     content += GenerateFunctionBeginBrackets();
 
     content += GenerateUserClassIsValidConst9(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += GenerateGetMapReturnFirst(lowerClassName);
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -112,9 +112,9 @@ System::String CoreTools::MapContainerGetFunctionDefinitionParsing::GenerateIfEm
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_If;
+    content += TextParsing::gIf;
     content += lowerClassName;
-    content += TextParsing::g_Empty;
+    content += TextParsing::gEmpty;
 
     return content;
 }
@@ -125,9 +125,9 @@ System::String CoreTools::MapContainerGetFunctionDefinitionParsing::GenerateThro
 
     auto content = GenerateIndentation(2);
 
-    content += TextParsing::g_ThrowException;
+    content += TextParsing::gThrowException;
     content += lowerClassName;
-    content += TextParsing::g_ContainerZero;
+    content += TextParsing::gContainerZero;
 
     return content;
 }
@@ -138,9 +138,9 @@ System::String CoreTools::MapContainerGetFunctionDefinitionParsing::GenerateRetu
 
     auto content = GenerateIndentation(2);
 
-    content += TextParsing::g_Return;
+    content += TextParsing::gReturn;
     content += lowerClassName;
-    content += TextParsing::g_BeginSecond;
+    content += TextParsing::gBeginSecond;
 
     return content;
 }
@@ -163,12 +163,12 @@ System::String CoreTools::MapContainerGetFunctionDefinitionParsing::GenerateMapF
     auto content = GenerateFunctionBeginBrackets();
 
     content += GenerateUserClassIsValidConst9(1);
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     content += GenerateMapFindDefinition(lowerClassName);
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -203,21 +203,21 @@ System::String CoreTools::MapContainerGetFunctionDefinitionParsing::GenerateGetF
     const auto containerClassName = GetCSVClassName();
 
     auto content = nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += containerClassName;
-    content += TextParsing::g_DoubleColonConst;
+    content += TextParsing::gDoubleColonConst;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_SharedPtr;
-    content += TextParsing::g_Space;
+    content += TextParsing::gSharedPtr;
+    content += TextParsing::gSpace;
     content += nameSpace;
-    content += TextParsing::g_DoubleColon;
+    content += TextParsing::gDoubleColon;
     content += containerClassName;
-    content += TextParsing::g_DoubleColon;
-    content += TextParsing::g_Get;
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gGet;
     content += csvHead.GetCSVClassName();
-    content += TextParsing::g_LeftBrackets;
+    content += TextParsing::gLeftBrackets;
     content += GetKeyTypeDescribe();
-    content += TextParsing::g_KeyConstFunction;
+    content += TextParsing::gKeyConstFunction;
 
     return content;
 }
@@ -228,10 +228,10 @@ System::String CoreTools::MapContainerGetFunctionDefinitionParsing::GenerateIter
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_ConstAutoIter;
+    content += TextParsing::gConstAutoIter;
     content += lowerClassName;
-    content += TextParsing::g_FindKey;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gFindKey;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -242,9 +242,9 @@ System::String CoreTools::MapContainerGetFunctionDefinitionParsing::GenerateFind
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_IfIter;
+    content += TextParsing::gIfIter;
     content += lowerClassName;
-    content += TextParsing::g_CEnd;
+    content += TextParsing::gCEnd;
 
     return content;
 }

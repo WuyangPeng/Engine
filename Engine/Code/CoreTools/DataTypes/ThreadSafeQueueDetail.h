@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/12 18:06)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/23 14:28)
 
 #ifndef CORE_TOOLS_DATA_TYPE_THREAD_SAFE_QUEUE_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_THREAD_SAFE_QUEUE_DETAIL_H
@@ -115,10 +115,12 @@ bool CoreTools::ThreadSafeQueue<Element>::Push(ParamType element)
     if (queue.size() < maxNumElements)
     {
         queue.emplace(element);
+
+        return true;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("容器已满。\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("容器已满。\n"s))
     }
 }
 

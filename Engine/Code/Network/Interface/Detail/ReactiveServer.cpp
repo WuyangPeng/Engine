@@ -62,9 +62,7 @@ Network::ReactiveServer::~ReactiveServer() noexcept
             sockStream->SetACEHandle(stream.second->GetACEHandle());
             if (!sockStream->CloseHandle())
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                    << SYSTEM_TEXT("¹Ø±Õ¾ä±úÊ§°Ü¡£")
-                    << LOG_SINGLETON_TRIGGER_ASSERT;
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("¹Ø±Õ¾ä±úÊ§°Ü¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
         }
     }
@@ -143,9 +141,7 @@ bool Network::ReactiveServer::HandleData(const SocketManagerSharedPtr& socketMan
                 masterHandleSet.ClearBit(handle);
                 if (!sockStream->CloseHandle())
                 {
-                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                        << SYSTEM_TEXT("¹Ø±Õ¾ä±úÊ§°Ü¡£")
-                        << LOG_SINGLETON_TRIGGER_ASSERT;
+                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("¹Ø±Õ¾ä±úÊ§°Ü¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
                 }
                 bufferSendStream.Erase(container->GetSocketID());
             }
@@ -155,9 +151,7 @@ bool Network::ReactiveServer::HandleData(const SocketManagerSharedPtr& socketMan
             masterHandleSet.ClearBit(handle);
             if (!sockStream->CloseHandle())
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                    << SYSTEM_TEXT("¹Ø±Õ¾ä±úÊ§°Ü¡£")
-                    << LOG_SINGLETON_TRIGGER_ASSERT;
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("¹Ø±Õ¾ä±úÊ§°Ü¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
             bufferSendStream.Erase(container->GetSocketID());
         }
@@ -183,9 +177,7 @@ void Network::ReactiveServer::Send(uint64_t socketID, const MessageInterfaceShar
         {
             if (!ImmediatelySend(socketID))
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                    << SYSTEM_TEXT("ÏûÏ¢·¢ËÍÊ§°Ü¡£")
-                    << LOG_SINGLETON_TRIGGER_ASSERT;
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÏûÏ¢·¢ËÍÊ§°Ü¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
         }
     }
@@ -193,25 +185,19 @@ void Network::ReactiveServer::Send(uint64_t socketID, const MessageInterfaceShar
     {
         if (!ImmediatelySend(socketID))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                << SYSTEM_TEXT("ÏûÏ¢·¢ËÍÊ§°Ü¡£")
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÏûÏ¢·¢ËÍÊ§°Ü¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
 
         if (!container->Insert(message))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                << SYSTEM_TEXT("ÏûÏ¢·¢ËÍÊ§°Ü¡£")
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÏûÏ¢·¢ËÍÊ§°Ü¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
 
         if (strategy.GetSocketSendMessage() == SocketSendMessage::Immediately)
         {
             if (!ImmediatelySend(socketID))
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                    << SYSTEM_TEXT("ÏûÏ¢·¢ËÍÊ§°Ü¡£")
-                    << LOG_SINGLETON_TRIGGER_ASSERT;
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÏûÏ¢·¢ËÍÊ§°Ü¡£"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
         }
     }

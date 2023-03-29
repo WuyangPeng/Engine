@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/02/23 13:36)
+///	引擎版本：0.9.0.4 (2023/03/22 14:42)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -49,7 +49,7 @@ void CoreTools::TriggerAssert::Process(const FunctionDescribed& functionDescribe
 #endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 }
 
-std::string CoreTools::TriggerAssert::GenerateMessagePrefix(const FunctionDescribed& functionDescribed)
+std::string CoreTools::TriggerAssert::GenerateMessagePrefix(const FunctionDescribed& functionDescribed) const
 {
     if (triggerAssertCheck == TriggerAssertCheck::Invariant)
     {
@@ -116,7 +116,7 @@ void CoreTools::TriggerAssert::JudgeSelection(DialogBoxCommand selection, const 
             if (triggerAssertCheck == TriggerAssertCheck::Assertion)
             {
                 // 拋出异常。
-                THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(message));
+                THROW_EXCEPTION(StringConversion::MultiByteConversionStandard(message))
             }
             else
             {

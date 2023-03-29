@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:56)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 09:40)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -29,14 +29,14 @@ System::String CoreTools::CSVRowDefaultFunctionDefinitionParsing::GenerateCSVRow
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = GenerateConstructor(TextParsing::g_CSVRow);
+    auto content = GenerateConstructor(TextParsing::gCSVRow);
 
     content += GenerateParentMember();
 
     const auto count = GetCSVHeadCount();
     for (auto index = 0; index < count; ++index)
     {
-        content += GenerateMemberDefinition(index, (index == count - 1) ? CSVPoistionType::End : CSVPoistionType::Middle);
+        content += GenerateMemberDefinition(index, (index == count - 1) ? CSVPositionType::End : CSVPositionType::Middle);
     }
 
     content += GenerateCSVRowConstructorDefinitionContent();
@@ -48,14 +48,14 @@ System::String CoreTools::CSVRowDefaultFunctionDefinitionParsing::GenerateCSVRow
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = GenerateConstructor(TextParsing::g_CSVRow);
+    auto content = GenerateConstructor(TextParsing::gCSVRow);
 
     content += GenerateMemberColon();
 
     const auto count = GetCSVHeadCount();
     for (auto index = 0; index < count; ++index)
     {
-        content += GenerateMemberDefinition(index, GetPoistionType(index, count));
+        content += GenerateMemberDefinition(index, GetPositionType(index, count));
     }
 
     content += GenerateCSVRowConstructorDefinitionContent();
@@ -80,7 +80,7 @@ System::String CoreTools::CSVRowDefaultFunctionDefinitionParsing::GenerateCSVRow
     }
 
     content += GenerateFunctionEndBrackets();
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -91,41 +91,41 @@ System::String CoreTools::CSVRowDefaultFunctionDefinitionParsing::GenerateParent
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_ParentTypeMember;
+    content += TextParsing::gParentTypeMember;
 
     return content;
 }
 
-System::String CoreTools::CSVRowDefaultFunctionDefinitionParsing::GenerateMemberDefinition(int index, CSVPoistionType csvPoistionType) const
+System::String CoreTools::CSVRowDefaultFunctionDefinitionParsing::GenerateMemberDefinition(int index, CSVPositionType csvPositionType) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto csvHead = GetCSVHead();
 
-    auto getFunctionName = csvHead.GetFunctionName(index);
-    auto variableName = csvHead.GetVariableName(index);
-    auto lowerVariableName = StringUtility::ToFirstLetterLower(variableName);
+    const auto getFunctionName = csvHead.GetFunctionName(index);
+    const auto variableName = csvHead.GetVariableName(index);
+    const auto lowerVariableName = StringUtility::ToFirstLetterLower(variableName);
 
     String content{};
-    if (csvPoistionType != CSVPoistionType::Begin)
+    if (csvPositionType != CSVPositionType::Begin)
     {
-        content += TextParsing::g_MemberIndentation;
+        content += TextParsing::gMemberIndentation;
     }
 
     content += lowerVariableName;
-    content += TextParsing::g_CsvRowVariable;
+    content += TextParsing::gCsvRowVariable;
     content += getFunctionName;
-    content += TextParsing::g_SystemTextBegin;
+    content += TextParsing::gSystemTextBegin;
     content += lowerVariableName;
-    content += TextParsing::g_SystemTextEnd;
-    content += TextParsing::g_RightBigParantheses;
+    content += TextParsing::gSystemTextEnd;
+    content += TextParsing::gRightBrace;
 
-    if (csvPoistionType != CSVPoistionType::End)
+    if (csvPositionType != CSVPositionType::End)
     {
-        content += TextParsing::g_Comma;
+        content += TextParsing::gComma;
     }
 
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -136,9 +136,9 @@ System::String CoreTools::CSVRowDefaultFunctionDefinitionParsing::GenerateChecki
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Checking;
-    content += TextParsing::g_SemicolonNewline;
-    content += TextParsing::g_NewlineCharacter;
+    content += TextParsing::gChecking;
+    content += TextParsing::gSemicolonNewline;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -149,8 +149,8 @@ System::String CoreTools::CSVRowDefaultFunctionDefinitionParsing::GenerateMember
 
     auto content = GenerateIndentation(1);
 
-    content += TextParsing::g_Colon;
-    content += TextParsing::g_Space;
+    content += TextParsing::gColon;
+    content += TextParsing::gSpace;
 
     return content;
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 11:51)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/09 11:07)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_ROW_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_ROW_IMPL_H
@@ -42,7 +42,7 @@ namespace CoreTools
         using IntVector4Container = std::vector<IntVector4>;
 
     public:
-        CSVRowImpl(const CSVHead& csvHead, const String& rowContent);
+        CSVRowImpl(CSVHead csvHead, String rowContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -87,7 +87,8 @@ namespace CoreTools
 
         NODISCARD VectorType GetVectorType(const String& field) const;
         NODISCARD ArrayType GetArrayType(const String& field) const;
-        NODISCARD VectorType GetSplit(const String& column) const;
+
+        NODISCARD static VectorType GetSplit(const String& column);
 
         template <typename T>
         NODISCARD T GetValue(const String& field) const;

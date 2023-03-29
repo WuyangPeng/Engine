@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/19 21:49)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/10 14:11)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,7 +17,7 @@
 #include "CoreTools/TextParsing/Json/JsonNode.h"
 
 CoreTools::JsonNodeContainerImpl::JsonNodeContainerImpl() noexcept
-    : m_JsonNodeContainer{}, m_JsonDataType{ JsonDataType::Nested }
+    : nodeContainer{}, dataType{ JsonDataType::Nested }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -30,16 +30,16 @@ void CoreTools::JsonNodeContainerImpl::AddJsonNode(const JsonNodeContainer& cont
 
     for (const auto& value : container)
     {
-        m_JsonNodeContainer.emplace_back(value);
+        nodeContainer.emplace_back(value);
     }
 
     if (IsNestedArray())
     {
-        m_JsonDataType = JsonDataType::NestedArray;
+        dataType = JsonDataType::NestedArray;
     }
     else if (!IsEmpty())
     {
-        m_JsonDataType = JsonDataType::Nested;
+        dataType = JsonDataType::Nested;
     }
 }
 
@@ -47,15 +47,15 @@ void CoreTools::JsonNodeContainerImpl::AddJsonNode(const JsonNodeSharedPtr& json
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_JsonNodeContainer.emplace_back(jsonNode);
+    nodeContainer.emplace_back(jsonNode);
 
     if (IsNestedArray())
     {
-        m_JsonDataType = JsonDataType::NestedArray;
+        dataType = JsonDataType::NestedArray;
     }
     else
     {
-        m_JsonDataType = JsonDataType::Nested;
+        dataType = JsonDataType::Nested;
     }
 }
 
@@ -63,7 +63,7 @@ CoreTools::JsonDataType CoreTools::JsonNodeContainerImpl::GetJsonDataType(const 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    for (const auto& value : m_JsonNodeContainer)
+    for (const auto& value : nodeContainer)
     {
         if (value->GetTypeName() == key)
         {
@@ -78,14 +78,14 @@ CoreTools::JsonDataType CoreTools::JsonNodeContainerImpl::GetJsonDataType() cons
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_JsonDataType;
+    return dataType;
 }
 
 void CoreTools::JsonNodeContainerImpl::SetNewJsonDataType(const String& key, JsonDataType jsonDataType)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    for (const auto& value : m_JsonNodeContainer)
+    for (const auto& value : nodeContainer)
     {
         if (value->GetTypeName() == key)
         {
@@ -99,7 +99,7 @@ void CoreTools::JsonNodeContainerImpl::SetNewJsonNodeContainer(const String& key
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    for (const auto& value : m_JsonNodeContainer)
+    for (const auto& value : nodeContainer)
     {
         if (value->GetTypeName() == key)
         {
@@ -113,35 +113,35 @@ CoreTools::JsonNodeContainerImpl::ContainerConstIter CoreTools::JsonNodeContaine
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_JsonNodeContainer.begin();
+    return nodeContainer.begin();
 }
 
 CoreTools::JsonNodeContainerImpl::ContainerIter CoreTools::JsonNodeContainerImpl::begin() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_JsonNodeContainer.begin();
+    return nodeContainer.begin();
 }
 
 CoreTools::JsonNodeContainerImpl::ContainerConstIter CoreTools::JsonNodeContainerImpl::end() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_JsonNodeContainer.end();
+    return nodeContainer.end();
 }
 
 CoreTools::JsonNodeContainerImpl::ContainerIter CoreTools::JsonNodeContainerImpl::end() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_JsonNodeContainer.end();
+    return nodeContainer.end();
 }
 
 bool CoreTools::JsonNodeContainerImpl::IsEmpty() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_JsonNodeContainer.empty();
+    return nodeContainer.empty();
 }
 
 void CoreTools::JsonNodeContainerImpl::SetJsonDataType(JsonDataType jsonDataType) noexcept
@@ -154,58 +154,58 @@ void CoreTools::JsonNodeContainerImpl::SetJsonDataType(JsonDataType jsonDataType
         {
             case JsonDataType::String:
             {
-                m_JsonDataType = JsonDataType::StringArray;
+                dataType = JsonDataType::StringArray;
             }
             break;
             case JsonDataType::Bool:
             {
-                if (m_JsonDataType == JsonDataType::BoolArray || m_JsonDataType == JsonDataType::Nested)
+                if (dataType == JsonDataType::BoolArray || dataType == JsonDataType::Nested)
                 {
-                    m_JsonDataType = JsonDataType::BoolArray;
+                    dataType = JsonDataType::BoolArray;
                 }
                 else
                 {
-                    m_JsonDataType = JsonDataType::StringArray;
+                    dataType = JsonDataType::StringArray;
                 }
             }
             break;
             case JsonDataType::Int:
             {
-                if (m_JsonDataType == JsonDataType::IntArray || m_JsonDataType == JsonDataType::Nested)
+                if (dataType == JsonDataType::IntArray || dataType == JsonDataType::Nested)
                 {
-                    m_JsonDataType = JsonDataType::IntArray;
+                    dataType = JsonDataType::IntArray;
                 }
-                else if (m_JsonDataType == JsonDataType::Int64Array)
+                else if (dataType == JsonDataType::Int64Array)
                 {
-                    m_JsonDataType = JsonDataType::Int64Array;
+                    dataType = JsonDataType::Int64Array;
                 }
                 else
                 {
-                    m_JsonDataType = JsonDataType::StringArray;
+                    dataType = JsonDataType::StringArray;
                 }
             }
             break;
             case JsonDataType::Int64:
             {
-                if (m_JsonDataType == JsonDataType::IntArray || m_JsonDataType == JsonDataType::Int64Array || m_JsonDataType == JsonDataType::Nested)
+                if (dataType == JsonDataType::IntArray || dataType == JsonDataType::Int64Array || dataType == JsonDataType::Nested)
                 {
-                    m_JsonDataType = JsonDataType::Int64Array;
+                    dataType = JsonDataType::Int64Array;
                 }
                 else
                 {
-                    m_JsonDataType = JsonDataType::StringArray;
+                    dataType = JsonDataType::StringArray;
                 }
             }
             break;
             case JsonDataType::Double:
             {
-                if (m_JsonDataType == JsonDataType::DoubleArray || m_JsonDataType == JsonDataType::Nested)
+                if (dataType == JsonDataType::DoubleArray || dataType == JsonDataType::Nested)
                 {
-                    m_JsonDataType = JsonDataType::DoubleArray;
+                    dataType = JsonDataType::DoubleArray;
                 }
                 else
                 {
-                    m_JsonDataType = JsonDataType::StringArray;
+                    dataType = JsonDataType::StringArray;
                 }
             }
             break;
@@ -217,11 +217,10 @@ void CoreTools::JsonNodeContainerImpl::SetJsonDataType(JsonDataType jsonDataType
 
 bool CoreTools::JsonNodeContainerImpl::IsNestedArray() const
 {
-    if (m_JsonNodeContainer.size() == 1)
+    if (nodeContainer.size() == 1)
     {
-        const auto& value = m_JsonNodeContainer.back();
-
-        if (value->GetTypeName().empty() &&
+        if (const auto& value = nodeContainer.back();
+            value->GetTypeName().empty() &&
             value->GetJsonDataType() == JsonDataType::Nested)
         {
             return true;
@@ -235,7 +234,7 @@ bool CoreTools::JsonNodeContainerImpl::HasNested() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (m_JsonDataType == JsonDataType::Nested || m_JsonDataType == JsonDataType::NestedArray)
+    if (dataType == JsonDataType::Nested || dataType == JsonDataType::NestedArray)
         return true;
     else
         return false;
@@ -245,45 +244,33 @@ bool CoreTools::JsonNodeContainerImpl::HasArray() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (JsonDataType::StringArray <= m_JsonDataType && m_JsonDataType <= JsonDataType::DoubleArray)
+    if (JsonDataType::StringArray <= dataType && dataType <= JsonDataType::DoubleArray)
     {
         return true;
     }
 
-    for (const auto& value : m_JsonNodeContainer)
-    {
-        if (value->HasArray())
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return std::ranges::any_of(nodeContainer, [](const auto& value) noexcept {
+        return value->HasArray();
+    });
 }
 
 bool CoreTools::JsonNodeContainerImpl::HasBoolArray() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (m_JsonDataType == JsonDataType::BoolArray)
+    if (dataType == JsonDataType::BoolArray)
     {
         return true;
     }
 
-    for (const auto& value : m_JsonNodeContainer)
-    {
-        if (value->HasBoolArray())
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return std::ranges::any_of(nodeContainer, [](const auto& value) noexcept {
+        return value->HasBoolArray();
+    });
 }
 
 int CoreTools::JsonNodeContainerImpl::GetSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_JsonNodeContainer.size());
+    return boost::numeric_cast<int>(nodeContainer.size());
 }

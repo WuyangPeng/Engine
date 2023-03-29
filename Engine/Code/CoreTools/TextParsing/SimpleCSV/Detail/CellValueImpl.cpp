@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 21:23)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/07 16:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,35 +14,34 @@
 #include "CoreTools/TextParsing/SimpleCSV/CellValueProxy.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/ValueTypeFlags.h"
 
-using std::string;
 using namespace std::literals;
 
 CoreTools::SimpleCSV::CellValueImpl::CellValueImpl() noexcept
-    : m_Value{ string{} }, m_Type{ ValueType::Empty }
+    : cellValue{ std::string{} }, cellType{ ValueType::Empty }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::SimpleCSV::CellValueImpl::CellValueImpl(bool value) noexcept
-    : m_Value{ value }, m_Type{ ValueType::Boolean }
+    : cellValue{ value }, cellType{ ValueType::Boolean }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::SimpleCSV::CellValueImpl::CellValueImpl(int64_t value) noexcept
-    : m_Value{ value }, m_Type{ ValueType::Integer }
+    : cellValue{ value }, cellType{ ValueType::Integer }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::SimpleCSV::CellValueImpl::CellValueImpl(double value) noexcept
-    : m_Value{ value }, m_Type{ ValueType::Float }
+    : cellValue{ value }, cellType{ ValueType::Float }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::SimpleCSV::CellValueImpl::CellValueImpl(const string& value)
-    : m_Value{ value }, m_Type{ ValueType::String }
+CoreTools::SimpleCSV::CellValueImpl::CellValueImpl(const std::string& value)
+    : cellValue{ value }, cellType{ ValueType::String }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -59,26 +58,26 @@ void CoreTools::SimpleCSV::CellValueImpl::Clear() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Type = ValueType::Empty;
-    m_Value = string{};
+    cellType = ValueType::Empty;
+    cellValue = std::string{};
 }
 
 void CoreTools::SimpleCSV::CellValueImpl::SetError() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Type = ValueType::Error;
-    m_Value = string{};
+    cellType = ValueType::Error;
+    cellValue = std::string{};
 }
 
 CoreTools::SimpleCSV::ValueType CoreTools::SimpleCSV::CellValueImpl::GetType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Type;
+    return cellType;
 }
 
-string CoreTools::SimpleCSV::CellValueImpl::GetTypeAsString() const
+std::string CoreTools::SimpleCSV::CellValueImpl::GetTypeAsString() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -103,12 +102,12 @@ bool CoreTools::SimpleCSV::CellValueImpl::IsEqual(const CellValueImpl& rhs) cons
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Value == rhs.m_Value;
+    return cellValue == rhs.cellValue;
 }
 
 bool CoreTools::SimpleCSV::CellValueImpl::IsLess(const CellValueImpl& rhs) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Value < rhs.m_Value;
+    return cellValue < rhs.cellValue;
 }

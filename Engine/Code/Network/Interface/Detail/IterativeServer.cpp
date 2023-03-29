@@ -38,9 +38,7 @@ Network::IterativeServer::IterativeServer(const SocketManagerSharedPtr& socketMa
 {
     if (!sockAcceptor.EnableNonBlock())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-            << SYSTEM_TEXT("ÉèÖÃ·Ç×èÈûÊ§°Ü£¡")
-            << LOG_SINGLETON_TRIGGER_ASSERT;
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÉèÖÃ·Ç×èÈûÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -67,9 +65,7 @@ bool Network::IterativeServer::HandleConnections(SocketManager& socketManager)
 
         if (!sockStream->EnableNonBlock())
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                << SYSTEM_TEXT("ÉèÖÃ·Ç×èÈûÊ§°Ü£¡")
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("ÉèÖÃ·Ç×èÈûÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
 
         StreamContainer container{ strategy, sockStream };
@@ -83,9 +79,7 @@ bool Network::IterativeServer::HandleConnections(SocketManager& socketManager)
 
         if (!socketManager.EventFunction(callbackParameters))
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                << SYSTEM_TEXT("»Øµ÷º¯ÊýÖ´ÐÐ´íÎó£¡")
-                << LOG_SINGLETON_TRIGGER_ASSERT;
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("»Øµ÷º¯ÊýÖ´ÐÐ´íÎó£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 
@@ -114,9 +108,7 @@ bool Network::IterativeServer::HandleData(const SocketManagerSharedPtr& socketMa
             {
                 if (!sockStream->CloseHandle())
                 {
-                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                        << SYSTEM_TEXT("¹Ø±Õ¾ä±úÊ§°Ü£¡")
-                        << LOG_SINGLETON_TRIGGER_ASSERT;
+                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("¹Ø±Õ¾ä±úÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
                 }
                 socketManager->RemoveSocket(iter->first);
                 streamContainer.erase(iter++);
@@ -130,9 +122,7 @@ bool Network::IterativeServer::HandleData(const SocketManagerSharedPtr& socketMa
         {
             if (!sockStream->CloseHandle())
             {
-                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
-                    << SYSTEM_TEXT("¹Ø±Õ¾ä±úÊ§°Ü£¡")
-                    << LOG_SINGLETON_TRIGGER_ASSERT;
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("¹Ø±Õ¾ä±úÊ§°Ü£¡"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
 
             socketManager->RemoveSocket(iter->first);

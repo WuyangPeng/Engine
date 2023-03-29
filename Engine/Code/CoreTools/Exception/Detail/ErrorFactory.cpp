@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/03/01 13:32)
+///	引擎版本：0.9.0.4 (2023/03/23 15:03)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,13 +16,11 @@
 #include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "CoreTools/Exception/LastError.h"
 
-// static
 CoreTools::ErrorFactory::ErrorImplSharedPtr CoreTools::ErrorFactory::Create(const FunctionDescribed& functionDescribed, const LastError& lastError, const String& message)
 {
     return Create(functionDescribed, lastError.GetLastError(), message);
 }
 
-// static
 CoreTools::ErrorFactory::ErrorImplSharedPtr CoreTools::ErrorFactory::Create(const FunctionDescribed& functionDescribed, WindowError lastError, const String& message)
 {
     if (lastError == WindowError::Success)

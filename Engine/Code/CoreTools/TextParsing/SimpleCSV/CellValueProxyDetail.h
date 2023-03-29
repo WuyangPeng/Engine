@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/18 21:27)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/14 09:10)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_VALUE_PROXY_DETAIL_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_VALUE_PROXY_DETAIL_H
@@ -16,9 +16,7 @@
 #include "Flags/ValueTypeFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-template <typename T,
-          typename std::enable_if_t<CoreTools::TextParsing::cellValueProxyCondition<T> ||
-                                    std::is_same_v<std::decay_t<T>, CoreTools::SimpleCSV::CellValue>>*>
+template <typename T, std::enable_if_t<CoreTools::TextParsing::cellValueProxyCondition<T> || std::is_same_v<std::decay_t<T>, CoreTools::SimpleCSV::CellValue>>*>
 CoreTools::SimpleCSV::CellValueProxy& CoreTools::SimpleCSV::CellValueProxy::operator=(T&& rhs)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -57,9 +55,7 @@ CoreTools::SimpleCSV::CellValueProxy& CoreTools::SimpleCSV::CellValueProxy::oper
     return *this;
 }
 
-template <typename T,
-          typename std::enable_if_t<CoreTools::TextParsing::cellValueProxyCondition<T> ||
-                                    std::is_same_v<std::decay_t<T>, CoreTools::SimpleCSV::CellValue>>*>
+template <typename T, std::enable_if_t<CoreTools::TextParsing::cellValueProxyCondition<T> || std::is_same_v<std::decay_t<T>, CoreTools::SimpleCSV::CellValue>>*>
 void CoreTools::SimpleCSV::CellValueProxy::Set(T&& rhs)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -67,7 +63,7 @@ void CoreTools::SimpleCSV::CellValueProxy::Set(T&& rhs)
     *this = std::forward<T>(rhs);
 }
 
-template <typename T, typename std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
+template <typename T, std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
 T CoreTools::SimpleCSV::CellValueProxy::Get() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;

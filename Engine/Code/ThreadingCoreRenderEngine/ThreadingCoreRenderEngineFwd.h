@@ -27,7 +27,7 @@
 #include "Imagics/ImagicsFwd.h"
 
 #include "Animation/AnimationFwd.h"
-#include "ArtificialIntellegence/ArtificialIntellegenceFwd.h"
+#include "ArtificialIntelligence/ArtificialIntelligenceFwd.h"
 #include "UserInterface/UserInterfaceFwd.h"
 
 #include "AssistTools/AssistToolsFwd.h"

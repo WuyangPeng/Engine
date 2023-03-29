@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 14:17)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,8 +14,6 @@
 #include "System/Helper/PragmaWarning/PugiXml.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::string;
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools::SimpleCSV, XmlFile)
 
@@ -27,11 +25,11 @@ CoreTools::SimpleCSV::XmlFile::XmlFile(const XmlDataSharedPtr& xmlData)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools::SimpleCSV, XmlFile)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetXmlData, string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetXmlData, std::string)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, XmlFile, SetXmlData, string, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, XmlFile, SetXmlData, std::string, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetRelationshipID, string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetRelationshipId, std::string)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetParentDocument, CoreTools::SimpleCSV::XmlFile::DocumentSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, XmlFile, GetParentDocument, CoreTools::SimpleCSV::XmlFile::ConstDocumentSharedPtr)

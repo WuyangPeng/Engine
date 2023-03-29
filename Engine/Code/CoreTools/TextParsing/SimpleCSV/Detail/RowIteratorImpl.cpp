@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/20 22:24)
+///	标准：std:c++20
+///	引擎版本：0.9.0.4 (2023/03/08 09:35)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,7 +14,6 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/Cell.h"
-#include "CoreTools/TextParsing/SimpleCSV/CellRange.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/IteratorFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/Row.h"
@@ -38,12 +37,12 @@ CoreTools::SimpleCSV::RowIteratorImpl& CoreTools::SimpleCSV::RowIteratorImpl::op
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto documentSharedPtr = document.lock();
-    auto sharedStringsSharedPtr = sharedStrings.lock();
+    const auto documentSharedPtr = document.lock();
+    const auto sharedStringsSharedPtr = sharedStrings.lock();
 
     if (!documentSharedPtr || !sharedStringsSharedPtr)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或sharedStrings已被释放。"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("document或sharedStrings已被释放。"s))
     }
 
     const auto rowNumber = currentRow->GetRowNumber() + 1;
