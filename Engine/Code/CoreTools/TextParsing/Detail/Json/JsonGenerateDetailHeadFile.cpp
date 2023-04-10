@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/10 13:56)
+///	引擎版本：0.9.0.5 (2023/04/04 17:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,8 +19,6 @@
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 #include "CoreTools/TextParsing/Json/JsonNode.h"
 #include "CoreTools/TextParsing/Json/JsonNodeContainer.h"
-
-using namespace std::literals;
 
 CoreTools::JsonGenerateDetailHeadFile::JsonGenerateDetailHeadFile(const JsonHead& jsonHead) noexcept
     : ParentType{ jsonHead }
@@ -51,7 +49,7 @@ System::String CoreTools::JsonGenerateDetailHeadFile::GetFileSuffix() const
 
 System::String CoreTools::JsonGenerateDetailHeadFile::GetContent() const
 {
-    auto content = GenerateCopyright();
+    String content{ TextParsing::gCopyright };
 
     const auto head = GetJsonHead();
 

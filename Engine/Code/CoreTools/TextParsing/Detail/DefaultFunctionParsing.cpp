@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 09:43)
+///	引擎版本：0.9.0.5 (2023/04/04 16:53)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -41,8 +41,9 @@ System::String CoreTools::DefaultFunctionParsing::GenerateKeyConstructor() const
     auto content = GenerateIndentation(1);
 
     content += TextParsing::gExplicit;
+    content += TextParsing::gSpace;
     content += className;
-    content += TextParsing::gKey;
+    content += TextParsing::gKeyNoexcept;
     content += TextParsing::gSemicolonNewline;
 
     return content;
@@ -55,6 +56,7 @@ System::String CoreTools::DefaultFunctionParsing::GenerateCSVRowConstructor() co
     auto content = GenerateIndentation(1);
 
     content += TextParsing::gExplicit;
+    content += TextParsing::gSpace;
     content += className;
     content += TextParsing::gCSVRow;
     content += TextParsing::gSemicolonNewline;
@@ -69,6 +71,7 @@ System::String CoreTools::DefaultFunctionParsing::GenerateCSVContentConstructor(
     auto content = GenerateIndentation(1);
 
     content += TextParsing::gExplicit;
+    content += TextParsing::gSpace;
     content += className;
     content += TextParsing::gCSVContent;
     content += TextParsing::gSemicolonNewline;
@@ -98,7 +101,8 @@ System::String CoreTools::DefaultFunctionParsing::GenerateCopyConstructor() cons
 
     content += className;
     content += TextParsing::gLeftBrackets;
-    content += TextParsing::gConst;
+    content += TextParsing::gSmallConst;
+    content += TextParsing::gSpace;
     content += className;
     content += TextParsing::gRhsCopy;
     content += TextParsing::gNoexceptDefault;
@@ -114,7 +118,8 @@ System::String CoreTools::DefaultFunctionParsing::GenerateCopyAssignment() const
 
     content += className;
     content += TextParsing::gCopyAssignment;
-    content += TextParsing::gConst;
+    content += TextParsing::gSmallConst;
+    content += TextParsing::gSpace;
     content += className;
     content += TextParsing::gRhsCopy;
     content += TextParsing::gNoexceptDefault;

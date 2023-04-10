@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/10 14:13)
+///	引擎版本：0.9.0.5 (2023/04/04 17:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,8 +17,6 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/Json/JsonRow.h"
-
-using namespace std::literals;
 
 CoreTools::JsonRowImpl::JsonRowImpl(const BasicTree& basicTree)
     : basicTree{ basicTree }
@@ -155,7 +153,7 @@ CoreTools::JsonRowImpl::StringContainer CoreTools::JsonRowImpl::GetStringArray(c
 
     for (const auto& value : basicTree.get_child(field))
     {
-        result.emplace_back(value.second.get_value(SYSTEM_TEXT(""s)));
+        result.emplace_back(value.second.get_value(String{}));
     }
 
     return result;

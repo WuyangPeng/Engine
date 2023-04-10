@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 23:07)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/30 17:12)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -39,13 +39,7 @@ void CoreTools::InitTermContainer::AddExecuteFunction(ExecuteFunction function)
 
     if (numFunction < maxElements)
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-        executeFunction[numFunction++] = function;
-
-#include STSTEM_WARNING_POP
+        executeFunction.at(numFunction++) = function;
     }
     else
     {
@@ -58,10 +52,10 @@ void CoreTools::InitTermContainer::Execute()
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     // 无法保证function()调用不抛出异常，编译器误报。
-    CoreTools::DisableNoexcept();
+    DisableNoexcept();
 
     auto index = 0;
-    for (auto function : executeFunction)
+    for (const auto function : executeFunction)
     {
         if (index < numFunction)
         {

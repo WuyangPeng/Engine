@@ -1,13 +1,12 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/14 19:08)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/04/03 17:39)
 
-// 单元测试类。UnitTest为外部接口基类，子类要运行的测试在DoRunUnitTest函数中运行。
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_H
 
@@ -20,13 +19,13 @@
 #include "CoreTools/Exception/ExceptionFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include <iostream>
 #include <string>
 #include <type_traits>
 
 EXPORT_SHARED_PTR(CoreTools, CpuTimerData, CORE_TOOLS_DEFAULT_DECLARE);
 EXPORT_SHARED_PTR(CoreTools, UnitTestData, CORE_TOOLS_DEFAULT_DECLARE);
 
+// 单元测试类。UnitTest为外部接口基类，子类要运行的测试在DoRunUnitTest函数中运行。
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE UnitTest : public UnitTestComposite
@@ -225,21 +224,28 @@ namespace CoreTools
                                                 const std::string& errorMessage = std::string{},
                                                 bool failureThrow = false);
 
-        void AssertEqual(const std::wstring& lhs,
-                         const std::wstring& rhs,
+        template <typename LhsType, typename RhsType>
+        requires std::is_constructible_v<LhsType, std::wstring> && std::is_constructible_v<RhsType, std::wstring>
+        void AssertEqual(const LhsType& lhs,
+                         const RhsType& rhs,
                          const FunctionDescribed& functionDescribed,
                          const std::string& errorMessage = std::string{},
                          bool failureThrow = false);
-        void AssertEqual(const char* lhs,
-                         const char* rhs,
+
+        template <typename T>
+        static constexpr auto isString = std::is_same_v<std::decay_t<T>, std::string> || std::is_same_v<std::decay_t<T>, const char*>;
+
+        // clang-format off
+        template <typename LhsType, typename RhsType>
+        requires std::is_same_v<std::decay_t<LhsType>, std::string> || std::is_same_v<std::decay_t<LhsType>, const char*> &&
+            std::is_same_v<std::decay_t<RhsType>, std::string> || std::is_same_v<std::decay_t<RhsType>, const char*>
+        void AssertEqual(const LhsType& lhs,
+                         const RhsType& rhs,
                          const FunctionDescribed& functionDescribed,
                          const std::string& errorMessage = std::string{},
                          bool failureThrow = false);
-        void AssertEqual(const wchar_t* lhs,
-                         const wchar_t* rhs,
-                         const FunctionDescribed& functionDescribed,
-                         const std::string& errorMessage = std::string{},
-                         bool failureThrow = false);
+        // clang-format on
+
         void AssertEqual(wchar_t lhs,
                          wchar_t rhs,
                          const FunctionDescribed& functionDescribed,

@@ -12,10 +12,11 @@
 
 #include "UserMacro.h"
 #include "CoreTools/Contract/Assertion.h"
+#include "CoreTools/Helper/CustomAssertMacro.h"
 
-#if defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
+#if defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
     #define MAIL_ASSERT_LEVEL 0
-#endif  // OPEN_IMPORTANT_EXCPTION_ASSERT
+#endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 
 #if !defined(MAIL_ASSERT_LEVEL)
     #define MAIL_ASSERT_LEVEL 4

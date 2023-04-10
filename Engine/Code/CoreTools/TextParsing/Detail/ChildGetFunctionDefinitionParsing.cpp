@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 09:32)
+///	引擎版本：0.9.0.5 (2023/04/04 17:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -83,6 +83,7 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateReturnGetKe
 
     auto content = GenerateIndentation(1);
     content += TextParsing::gReturn;
+    content += TextParsing::gSpace;
 
     if (const auto csvHead = GetCSVHead(); csvHead.GetCSVFormatType() == CSVFormatType::Key)
     {
@@ -137,6 +138,7 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateVariableFun
 
     if (const auto dataType = csvHead.GetDataType(index); CSVDataType::Bool <= dataType && dataType <= CSVDataType::IntVector4)
     {
+        content += TextParsing::gSpace;
         content += TextParsing::gNoexcept;
     }
 
@@ -150,6 +152,7 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetVariable
     auto content = GenerateIndentation(1);
 
     content += TextParsing::gReturn;
+    content += TextParsing::gSpace;
     content += variableName;
     content += TextParsing::gSemicolonNewline;
 
@@ -289,6 +292,7 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateReturnVaria
     auto content = GenerateIndentation(1);
 
     content += TextParsing::gReturn;
+    content += TextParsing::gSpace;
     content += variableName;
     content += TextParsing::gAtIndex;
 
@@ -325,6 +329,7 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateReturnIter(
     auto content = GenerateIndentation(1);
 
     content += TextParsing::gReturn;
+    content += TextParsing::gSpace;
     content += variableName;
     content += endDescribe;
 
@@ -398,7 +403,8 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunction
     content += TextParsing::gGet;
     content += upperVariableName;
     content += TextParsing::gLeftBrackets;
-    content += TextParsing::gConst;
+    content += TextParsing::gSmallConst;
+    content += TextParsing::gSpace;
     content += nameSpace;
     content += TextParsing::gContainerParameter;
     content += TextParsing::gNewlineCharacter;

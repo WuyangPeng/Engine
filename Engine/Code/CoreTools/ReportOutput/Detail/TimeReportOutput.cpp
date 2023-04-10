@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/21 18:19)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,13 +20,10 @@
 
 #include <sstream>
 
-using std::right;
-using std::setw;
-using std::string;
 using namespace std::literals;
 
-CoreTools::TimeReportOutput::TimeReportOutput(const string& timeDescribe, int borderLineLength, const OStreamShared& streamShared)
-    : EquilongReportOutputImpl{ borderLineLength, streamShared }, timeDescribe{ timeDescribe }
+CoreTools::TimeReportOutput::TimeReportOutput(std::string timeDescribe, int borderLineLength, const OStreamShared& streamShared) noexcept
+    : EquidistantReportOutputImpl{ borderLineLength, streamShared }, timeDescribe{ std::move(timeDescribe) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -37,12 +34,12 @@ void CoreTools::TimeReportOutput::PrintCurrentTime()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    auto nowTime = boost::posix_time::second_clock::local_time();
-    auto formattingTime = timeDescribe + "时间："s + boost::posix_time::to_simple_string(nowTime);
+    const auto nowTime = boost::posix_time::second_clock::local_time();
+    const auto formattingTime = timeDescribe + "时间："s + to_simple_string(nowTime);
 
     std::stringstream ss{};
 
-    ss << setw(GetBorderLineLength()) << right << formattingTime;
+    ss << std::setw(GetBorderLineLength()) << std::right << formattingTime;
 
     LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), ss.str());
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 10:10)
+///	引擎版本：0.9.0.5 (2023/04/04 16:50)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -176,6 +176,7 @@ System::String CoreTools::Parsing::GenerateElse(int addIndentationCount) const
     auto content = GenerateIndentation(addIndentationCount);
 
     content += TextParsing::gElse;
+    content += TextParsing::gNewline;
 
     return content;
 }

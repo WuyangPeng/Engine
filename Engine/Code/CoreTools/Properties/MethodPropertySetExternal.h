@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 17:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 14:41)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_EXTERNAL_H
@@ -22,14 +22,14 @@ namespace CoreTools
 
     template <typename Reference,  // 引用类型
               typename Container,  // 封闭类
-              ptrdiff_t (*FO)(),  // 指针函数提供容器内偏移属性
-              void (Container::*FS)(Reference)>  // 指针到一个成员函数设置R
+              ptrdiff_t (*FunctionOffset)(),  // 指针函数提供容器内偏移属性
+              void (Container::*FunctionSet)(Reference)>  // 指针到一个成员函数设置R
     class MethodPropertySetExternal final
     {
     public:
         using ReferenceType = Reference;
         using ContainerType = Container;
-        using ClassType = MethodPropertySetExternal<ReferenceType, ContainerType, FO, FS>;
+        using ClassType = MethodPropertySetExternal<ReferenceType, ContainerType, FunctionOffset, FunctionSet>;
 
     public:
         CLASS_INVARIANT_DECLARE;

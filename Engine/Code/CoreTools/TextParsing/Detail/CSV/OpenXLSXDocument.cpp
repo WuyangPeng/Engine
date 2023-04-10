@@ -5,22 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/10 08:56)
+///	引擎版本：0.9.0.5 (2023/04/04 17:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "OpenXLSXDocument.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
-#include "System/Helper/PragmaWarning/LexicalCast.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
-#include "CoreTools/FileManager/FileManagerHelper.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 #ifdef CORE_TOOLS_USE_OPENXLSX
-
-using namespace std::literals;
 
 CoreTools::OpenXLSXDocument::OpenXLSXDocument(const std::string& xlsxFileName)
     : xlsxFileName{ xlsxFileName }, document{}, worksheetNames{}

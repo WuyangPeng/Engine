@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 23:01)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/30 16:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,8 +16,6 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::string;
-
 CoreTools::ObjectManagerImpl::ObjectManagerImpl() noexcept
     : factories{}
 {
@@ -26,29 +24,28 @@ CoreTools::ObjectManagerImpl::ObjectManagerImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ObjectManagerImpl)
 
-CoreTools::ObjectManagerImpl::FactoryFunction CoreTools::ObjectManagerImpl::Find(const string& name) const
+CoreTools::ObjectManagerImpl::FactoryFunction CoreTools::ObjectManagerImpl::Find(const std::string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = factories.find(name);
-    if (iter != factories.cend())
+    if (const auto iter = factories.find(name); iter != factories.cend())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的工厂函数！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的工厂函数！"s))
     }
 }
 
-void CoreTools::ObjectManagerImpl::Insert(const string& name, FactoryFunction function)
+void CoreTools::ObjectManagerImpl::Insert(const std::string& name, FactoryFunction function)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    factories.insert({ name, function });
+    factories.emplace(name, function);
 }
 
-void CoreTools::ObjectManagerImpl::Remove(const string& name)
+void CoreTools::ObjectManagerImpl::Remove(const std::string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 10:13)
+///	引擎版本：0.9.0.5 (2023/04/04 16:50)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -114,11 +114,9 @@ System::String CoreTools::ScopeExpressionParsing::GetGreater(const SplitType& sc
 {
     String result{};
 
-    const auto nextChar = scopeExpression.at(1);
-
     result += scopeExpressionResult.at(0);
 
-    if (nextChar == TextParsing::gEqualSignChar)
+    if (scopeExpression.find(TextParsing::gEqualSign) == 1)
     {
         result += TextParsing::gGreaterEqual;
     }
@@ -136,11 +134,9 @@ System::String CoreTools::ScopeExpressionParsing::GetLess(const SplitType& scope
 {
     String result{};
 
-    const auto nextChar = scopeExpression.at(1);
-
     result += scopeExpressionResult.at(0);
 
-    if (nextChar == TextParsing::gEqualSignChar)
+    if (scopeExpression.find(TextParsing::gEqualSign) == 1)
     {
         result += TextParsing::gLessEqual;
     }
@@ -158,7 +154,8 @@ System::String CoreTools::ScopeExpressionParsing::GetEndInterval(const SplitType
 {
     String result{};
 
-    if (const auto lastChar = scopeExpression.back(); lastChar == TextParsing::gRightSquareBrackets)
+    if (const auto lastChar = scopeExpression.back();
+        lastChar == TextParsing::gRightSquareBrackets)
     {
         result += variableNameExpression;
         result += TextParsing::gLessEqual;

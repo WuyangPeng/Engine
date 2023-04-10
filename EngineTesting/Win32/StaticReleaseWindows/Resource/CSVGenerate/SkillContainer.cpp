@@ -38,7 +38,7 @@ void CSVConfigure::SkillContainer::Parsing(const CoreTools::CSVContent& csvConte
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
 
-    auto iter = std::ranges::unique(skill, [](const auto& lhs, const auto& rhs) noexcept {
+    const auto iter = std::ranges::unique(skill, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() == (*rhs).GetKey();
     });
 

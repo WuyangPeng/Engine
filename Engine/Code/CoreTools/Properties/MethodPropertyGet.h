@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/22 18:38)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 14:28)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_H
@@ -20,15 +20,15 @@ namespace CoreTools
     template <typename Value,  // 实际属性值类型
               typename ConstReference,  // 引用类型
               typename Container,  // 封闭类
-              ptrdiff_t (*FO)(),  // 指针函数提供容器内偏移属性
-              ConstReference (Container::*FG)() const>  // 指向返回R的const成员函数的指针
+              ptrdiff_t (*FunctionOffset)(),  // 指针函数提供容器内偏移属性
+              ConstReference (Container::*FunctionGet)() const>  // 指向返回R的const成员函数的指针
     class MethodPropertyGet final
     {
     public:
         using ValueType = Value;
         using ConstReferenceType = ConstReference;
         using ContainerType = Container;
-        using ClassType = MethodPropertyGet<ValueType, ConstReferenceType, ContainerType, FO, FG>;
+        using ClassType = MethodPropertyGet<ValueType, ConstReferenceType, ContainerType, FunctionOffset, FunctionGet>;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -48,7 +48,7 @@ namespace CoreTools
         NODISCARD operator ConstReferenceType() const noexcept;
 
     private:
-        ValueType m_Value;
+        ValueType value;
     };
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/06 11:38)
+///	引擎版本：0.9.0.5 (2023/04/04 15:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -124,7 +124,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::Open()
 void CoreTools::SimpleZip::ZipArchiveImpl::DeleteSameEntries()
 {
     // 删除具有相同名称的条目。 将保留最新条目。
-    const auto isEqual = [](const auto& lhs, const auto& rhs) {
+    constexpr auto isEqual = [](const auto& lhs, const auto& rhs) {
         return lhs.GetFileName() == rhs.GetFileName();
     };
 
@@ -191,6 +191,27 @@ CoreTools::SimpleZip::ZipArchiveImpl::EntryNamesType CoreTools::SimpleZip::ZipAr
     auto result = GetEntryNames(includeDirs, includeFiles);
 
     // 删除不在相关目录中的所有条目，以及根目录本身。
+    GetEntryNames(dir, result);
+
+    const auto count = std::ranges::count(dir, TextParsing::gForwardSlash);
+    const auto rootDepth = (dir.empty() ? 1 : (dir.back() == TextParsing::gForwardSlash ? count + 1 : count + 2));
+
+    constexpr auto removeEntryNames = [&](const auto& fileName) {
+        const auto subFolderDepth = std::ranges::count(fileName, TextParsing::gForwardSlash);
+
+        return (rootDepth < subFolderDepth) || (subFolderDepth == rootDepth && fileName.back() != TextParsing::gForwardSlash);
+    };
+
+    const auto ranges = std::ranges::remove_if(result, removeEntryNames);
+
+    // 确保只包含一级子目录。
+    result.erase(ranges.begin(), ranges.end());
+
+    return result;
+}
+
+void CoreTools::SimpleZip::ZipArchiveImpl::GetEntryNames(const std::string& dir, EntryNamesType& result)
+{
     if (!dir.empty())
     {
         auto conditionDir = dir;
@@ -199,28 +220,14 @@ CoreTools::SimpleZip::ZipArchiveImpl::EntryNamesType CoreTools::SimpleZip::ZipAr
             conditionDir += TextParsing::gForwardSlash;
         }
 
-        const auto ranges = std::ranges::remove_if(result,
-                                                   [&](const auto& fileName) {
-                                                       return fileName == conditionDir || fileName.substr(0, conditionDir.size()) != conditionDir;
-                                                   });
+        constexpr auto removeEntryNames = [&](const auto& fileName) {
+            return fileName == conditionDir || fileName.substr(0, conditionDir.size()) != conditionDir;
+        };
+
+        const auto ranges = std::ranges::remove_if(result, removeEntryNames);
 
         result.erase(ranges.begin(), ranges.end());
     }
-
-    const auto count = std::ranges::count(dir, TextParsing::gForwardSlash);
-    const auto rootDepth = (dir.empty() ? 1 : (dir.back() == TextParsing::gForwardSlash ? count + 1 : count + 2));
-
-    const auto ranges = std::ranges::remove_if(result,
-                                               [&](const auto& fileName) {
-                                                   const auto subFolderDepth = std::ranges::count(fileName, TextParsing::gForwardSlash);
-
-                                                   return (rootDepth < subFolderDepth) || (subFolderDepth == rootDepth && fileName.back() != TextParsing::gForwardSlash);
-                                               });
-
-    // 确保只包含一级子目录。
-    result.erase(ranges.begin(), ranges.end());
-
-    return result;
 }
 
 CoreTools::SimpleZip::ZipArchiveImpl::ZipEntryMetaDataType CoreTools::SimpleZip::ZipArchiveImpl::GetMetaData(bool includeDirs, bool includeFiles) const

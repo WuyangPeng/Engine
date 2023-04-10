@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/08 13:51)
+///	引擎版本：0.9.0.5 (2023/04/04 15:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -83,10 +83,11 @@ int CoreTools::SimpleCSV::Relationships::GetNewRelsId(XMLNode relationshipsNode)
 
     const auto children = relationshipsNode.children();
 
-    if (const auto iter = std::ranges::max_element(children,
-                                                   [&](const auto& lhs, const auto& rhs) {
-                                                       return stoi(std::string{ lhs.attribute(TextParsing::gId.data()).value() }.substr(idBeginIndex)) < stoi(std::string{ rhs.attribute(TextParsing::gId.data()).value() }.substr(idBeginIndex));
-                                                   });
+    constexpr auto maxElement = [&](const auto& lhs, const auto& rhs) {
+        return stoi(std::string{ lhs.attribute(TextParsing::gId.data()).value() }.substr(idBeginIndex)) < stoi(std::string{ rhs.attribute(TextParsing::gId.data()).value() }.substr(idBeginIndex));
+    };
+
+    if (const auto iter = std::ranges::max_element(children, maxElement);
         iter != children.end())
     {
         return std::stoi(std::string{ iter->attribute(TextParsing::gId.data()).value() }.substr(idBeginIndex)) + 1;

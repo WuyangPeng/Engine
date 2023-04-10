@@ -1,13 +1,12 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/14 18:49)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/04/03 17:37)
 
-// 单元测试套件类。SuiteImpl为内部接口类，可增加或删除单元测试，并获取测试的结果。
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_SUITE_IMPL_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_SUITE_IMPL_H
 
@@ -15,10 +14,10 @@
 
 #include "CoreTools/UnitTestSuite/UnitTestComposite.h"
 
-#include <iostream>
 #include <string>
 #include <vector>
 
+// 单元测试套件类。SuiteImpl为内部接口类，可增加或删除单元测试，并获取测试的结果。
 namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE SuiteImpl final : public UnitTestComposite
@@ -33,22 +32,24 @@ namespace CoreTools
         CLASS_INVARIANT_FINAL_DECLARE;
 
 #ifdef OPEN_CLASS_INVARIANT
+
         NODISCARD bool IsUnitTestValid() const noexcept;
+
 #endif  // OPEN_CLASS_INVARIANT
 
-        void PrintReport() final;
-        void ResetTestData() final;
+        void PrintReport() override;
+        void ResetTestData() override;
 
-        NODISCARD int GetPassedNumber() const noexcept final;
-        NODISCARD int GetFailedNumber() const noexcept final;
-        NODISCARD int GetErrorNumber() const noexcept final;
-        NODISCARD std::string GetName() const final;
+        NODISCARD int GetPassedNumber() const noexcept override;
+        NODISCARD int GetFailedNumber() const noexcept override;
+        NODISCARD int GetErrorNumber() const noexcept override;
+        NODISCARD std::string GetName() const override;
 
-        void ClearUnitTestCollection() noexcept final;
-        void AddUnitTest(const UnitTestCompositeSharedPtr& unitTest) final;
-        void RunUnitTest() final;
+        void ClearUnitTestCollection() noexcept override;
+        void AddUnitTest(const UnitTestCompositeSharedPtr& unitTest) override;
+        void RunUnitTest() override;
 
-        void PrintRunUnitTest() final;
+        void PrintRunUnitTest() override;
 
     private:
         using UnitTestContainer = std::vector<UnitTestCompositeSharedPtr>;

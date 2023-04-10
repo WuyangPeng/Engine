@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 10:16)
+///	引擎版本：0.9.0.5 (2023/04/04 16:37)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,19 +17,17 @@
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-using namespace std::literals;
-
 CoreTools::SharedPtrUsingParsing::SharedPtrUsingParsingUniquePtr CoreTools::SharedPtrUsingParsing::Create(CSVFormatType csvFormatType, int indentationCount, const String& className, const String& keyTypeDescribe)
 {
     switch (csvFormatType)
     {
         case CSVFormatType::TreeMap:
         {
-            return std::make_unique<MapSharedPtrUsingParsing>(indentationCount, className, keyTypeDescribe, TextParsing::gOriginalMap);
+            return std::make_unique<MapSharedPtrUsingParsing>(indentationCount, className, keyTypeDescribe, TextParsing::gMap);
         }
         case CSVFormatType::HashMap:
         {
-            return std::make_unique<MapSharedPtrUsingParsing>(indentationCount, className, keyTypeDescribe, TextParsing::gOriginalUnorderedMap);
+            return std::make_unique<MapSharedPtrUsingParsing>(indentationCount, className, keyTypeDescribe, TextParsing::gUnorderedMap);
         }
         case CSVFormatType::Unique:
         {
@@ -56,10 +54,10 @@ System::String CoreTools::SharedPtrUsingParsing::GenerateSharedPtr(StringView su
 
     auto content = GenerateIndentation();
 
-    content += SYSTEM_TEXT("using Const"s);
+    content += TextParsing::gUsingConst;
     content += className;
     content += suffix;
-    content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const "s);
+    content += TextParsing::gSharedPtrEqualTo;
     content += className;
     content += suffix;
     content += TextParsing::gRightAngleBracketSemicolonNewline;
@@ -73,7 +71,9 @@ System::String CoreTools::SharedPtrUsingParsing::GenerateSharedPtrContainer(Stri
 
     auto content = GenerateIndentation();
 
-    content += SYSTEM_TEXT("using Container = std::vector<Const"s);
+    content += TextParsing::gUsing;
+    content += TextParsing::gSpace;
+    content += TextParsing::gContainerEqualTo;
     content += className;
     content += suffix;
     content += TextParsing::gSharedPtr;
@@ -86,11 +86,13 @@ System::String CoreTools::SharedPtrUsingParsing::GenerateSharedPtrMappingContain
 {
     auto content = GenerateIndentation();
 
-    content += SYSTEM_TEXT("using MappingContainer = std::"s);
+    content += TextParsing::gMappingContainerEqualTo;
     content += mappingName;
     content += TextParsing::gLeftAngleBracket;
     content += keyTypeDescribe;
-    content += SYSTEM_TEXT(", Const"s);
+    content += TextParsing::gComma;
+    content += TextParsing::gSpace;
+    content += TextParsing::gCapitalConst;
     content += className;
     content += TextParsing::gSharedPtr;
     content += TextParsing::gRightAngleBracketSemicolonNewline;

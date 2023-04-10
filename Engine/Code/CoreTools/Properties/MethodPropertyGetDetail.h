@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 18:13)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:04)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_DETAIL_H
@@ -14,34 +14,34 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-template <typename Value, typename ConstReference, typename Container, ptrdiff_t (*FO)(), ConstReference (Container::*FG)() const>
-CoreTools::MethodPropertyGet<Value, ConstReference, Container, FO, FG>::MethodPropertyGet() noexcept
-    : m_Value{}
+template <typename Value, typename ConstReference, typename Container, ptrdiff_t (*FunctionOffset)(), ConstReference (Container::*FunctionGet)() const>
+CoreTools::MethodPropertyGet<Value, ConstReference, Container, FunctionOffset, FunctionGet>::MethodPropertyGet() noexcept
+    : value{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-template <typename Value, typename ConstReference, typename Container, ptrdiff_t (*FO)(), ConstReference (Container::*FG)() const>
-CoreTools::MethodPropertyGet<Value, ConstReference, Container, FO, FG>::MethodPropertyGet(ConstReferenceType value)
-    : m_Value{ value }
+template <typename Value, typename ConstReference, typename Container, ptrdiff_t (*FunctionOffset)(), ConstReference (Container::*FunctionGet)() const>
+CoreTools::MethodPropertyGet<Value, ConstReference, Container, FunctionOffset, FunctionGet>::MethodPropertyGet(ConstReferenceType value)
+    : value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <typename Value, typename ConstReference, typename Container, ptrdiff_t (*FO)(), ConstReference (Container::*FG)() const>
-bool CoreTools::MethodPropertyGet<Value, ConstReference, Container, FO, FG>::IsValid() const noexcept
+template <typename Value, typename ConstReference, typename Container, ptrdiff_t (*FunctionOffset)(), ConstReference (Container::*FunctionGet)() const>
+bool CoreTools::MethodPropertyGet<Value, ConstReference, Container, FunctionOffset, FunctionGet>::IsValid() const noexcept
 {
     return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
-template <typename Value, typename ConstReference, typename Container, ptrdiff_t (*FO)(), ConstReference (Container::*FG)() const>
-CoreTools::MethodPropertyGet<Value, ConstReference, Container, FO, FG>::operator ConstReferenceType() const noexcept
+template <typename Value, typename ConstReference, typename Container, ptrdiff_t (*FunctionOffset)(), ConstReference (Container::*FunctionGet)() const>
+CoreTools::MethodPropertyGet<Value, ConstReference, Container, FunctionOffset, FunctionGet>::operator ConstReferenceType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto offset = (*FO)();
+    const auto offset = (*FunctionOffset)();
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
@@ -52,7 +52,7 @@ CoreTools::MethodPropertyGet<Value, ConstReference, Container, FO, FG>::operator
 
 #include STSTEM_WARNING_POP
 
-    return (thisPtr->*FG)();
+    return (thisPtr->*FunctionGet)();
 }
 
 #endif  // CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_DETAIL_H

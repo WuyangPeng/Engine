@@ -36,11 +36,11 @@ void CoreTools::InitializeTerminatorMacroTesting::InitTermTest()
     ASSERT_TRUE(gInitializeTerminatorStreamRegistered);
     ASSERT_FALSE(InitializeTerminator::IsRegister());
 
-    InitTerm::ExecuteInitializers();
+    InitTerm::ExecuteInitializer();
     ASSERT_TRUE(InitializeTerminator::IsRegister());
     ASSERT_TRUE(gInitializeTerminatorStreamRegistered);
 
-    InitTerm::ExecuteTerminators();
+    InitTerm::ExecuteTerminator();
     ASSERT_FALSE(InitializeTerminator::IsRegister());
     ASSERT_TRUE(gInitializeTerminatorStreamRegistered);
 }

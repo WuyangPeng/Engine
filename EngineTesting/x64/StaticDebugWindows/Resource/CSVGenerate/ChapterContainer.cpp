@@ -38,7 +38,7 @@ void CSVConfigure::ChapterContainer::Parsing(const CoreTools::CSVContent& csvCon
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
 
-    auto iter = std::ranges::unique(chapter, [](const auto& lhs, const auto& rhs) noexcept {
+    const auto iter = std::ranges::unique(chapter, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() == (*rhs).GetKey();
     });
 

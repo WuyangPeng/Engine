@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/08 14:01)
+///	引擎版本：0.9.0.5 (2023/04/04 15:05)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -122,9 +122,11 @@ void CoreTools::SimpleCSV::Workbook::DeleteSheet(const std::string& sheetName)
 
     const auto sheetsNode = node.children();
 
-    if (const auto worksheetCount = std::ranges::count_if(sheetsNode, [&](const auto& item) {
-            return parentDocument->ExecuteQuery(QuerySheetType{ item.attribute(TextParsing::gRId.data()).value() }).GetSheetType() == ContentType::Worksheet;
-        });
+    constexpr auto countFunction = [&](const auto& item) {
+        return parentDocument->ExecuteQuery(QuerySheetType{ item.attribute(TextParsing::gRId.data()).value() }).GetSheetType() == ContentType::Worksheet;
+    };
+
+    if (const auto worksheetCount = std::ranges::count_if(sheetsNode, countFunction);
         worksheetCount == 1 && sheetType == ContentType::Worksheet)
     {
         THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, "无效操作。工作簿中必须至少有一张工作表。"s)
@@ -162,10 +164,11 @@ int CoreTools::SimpleCSV::Workbook::CreateInternalSheetId()
 
     const auto children = GetXmlDocument()->document_element().child(TextParsing::gSheets.data()).children();
 
-    if (const auto iter = std::ranges::max_element(children,
-                                                   [](const auto& lhs, const auto& rhs) {
-                                                       return lhs.attribute(TextParsing::gSheetId.data()).as_uint() < rhs.attribute(TextParsing::gSheetId.data()).as_uint();
-                                                   });
+    constexpr auto maxElement = [](const auto& lhs, const auto& rhs) {
+        return lhs.attribute(TextParsing::gSheetId.data()).as_uint() < rhs.attribute(TextParsing::gSheetId.data()).as_uint();
+    };
+
+    if (const auto iter = std::ranges::max_element(children, maxElement);
         iter != children.end())
     {
         return iter->attribute(TextParsing::gSheetId.data()).as_int() + 1;
@@ -240,10 +243,11 @@ void CoreTools::SimpleCSV::Workbook::SetSheetIndex(const std::string& sheetName,
 
     const auto children = xmlDocument->document_element().child(TextParsing::gSheets.data()).children();
 
-    if (const auto iter = std::ranges::find_if(children,
-                                               [&](const auto& item) {
-                                                   return sheetName == item.attribute(TextParsing::gName.data()).value();
-                                               });
+    const auto equation = [&](const auto& item) {
+        return sheetName == item.attribute(TextParsing::gName.data()).value();
+    };
+
+    if (const auto iter = std::ranges::find_if(children, equation);
         index == std::distance(children.begin(), iter) + 1)
     {
         return;
@@ -262,10 +266,10 @@ void CoreTools::SimpleCSV::Workbook::SetSheetIndex(const std::string& sheetName,
     else
     {
         const auto sheets = node.children();
-        const XMLNodeContainer vec{ sheets.begin(), sheets.end() };
+        const XMLNodeContainer xmlNodeContainer{ sheets.begin(), sheets.end() };
 
         const auto previousIndex = index - 1;
-        const auto existingSheet = vec.at(previousIndex);
+        const auto existingSheet = xmlNodeContainer.at(previousIndex);
         if (GetIndexOfSheet(sheetName) < index)
         {
             node.insert_move_after(node.find_child_by_attribute(TextParsing::gName.data(), sheetName.c_str()), existingSheet);

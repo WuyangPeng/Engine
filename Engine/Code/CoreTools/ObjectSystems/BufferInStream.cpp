@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 23:06)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/30 17:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,4 +22,4 @@ CoreTools::BufferInStream::BufferInStream(const ConstFileBufferSharedPtr& buffer
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, BufferInStream)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferInStream, GetTopLevel, const CoreTools::InTopLevel)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferInStream, GetTopLevel, CoreTools::InTopLevel)

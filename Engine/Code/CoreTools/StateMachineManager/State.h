@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/21 15:56)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:53)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_H
 #define CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_H
@@ -43,7 +43,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        void Enter(EntityTypeSharedPtr entity);
+        void Enter(EntityTypeSharedPtr aEntity);
 
         NODISCARD virtual StateSharedPtr Execute(int64_t timeInterval) = 0;
 
@@ -67,7 +67,7 @@ namespace CoreTools
         virtual void DoEnter() = 0;
 
     private:
-        EntityTypeWeakPtr m_Entity;
+        EntityTypeWeakPtr entity;
     };
 }
 

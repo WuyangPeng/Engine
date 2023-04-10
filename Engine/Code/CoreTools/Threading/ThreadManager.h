@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.3 (2023/03/01 17:32)
+///	引擎版本：0.9.0.5 (2023/03/31 16:38)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_MANAGER_H
 #define CORE_TOOLS_THREADING_THREAD_MANAGER_H
@@ -30,7 +30,7 @@ namespace CoreTools
         NODISCARD static ThreadManager Create();
 
     private:
-        explicit ThreadManager(MAYBE_UNUSED DisableNotThrow disableNotThrow);
+        explicit ThreadManager(DisableNotThrow disableNotThrow);
 
     public:
         CLASS_INVARIANT_DECLARE;

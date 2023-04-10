@@ -36,4 +36,12 @@ xcopy "../.clang-format" "%RiseOfHistoryTestingInclude%/../" /F /Y
 xcopy "../.gitignore" "%RiseOfHistoryTestingInclude%/../" /F /Y
 xcopy "DelDoxygenFile.bat" "%RiseOfHistoryTestingInclude%/../Bat/" /F /Y 
 
+xcopy "../.clang-format" "%MillenniumHistoryInclude%/../" /F /Y
+xcopy "../.gitignore" "%MillenniumHistoryInclude%/../" /F /Y
+xcopy "DelDoxygenFile.bat" "%MillenniumHistoryInclude%/../Bat/" /F /Y 
+
+xcopy "../.clang-format" "%MillenniumHistoryTestingInclude%/../" /F /Y
+xcopy "../.gitignore" "%MillenniumHistoryTestingInclude%/../" /F /Y
+xcopy "DelDoxygenFile.bat" "%MillenniumHistoryTestingInclude%/../Bat/" /F /Y 
+
 pause

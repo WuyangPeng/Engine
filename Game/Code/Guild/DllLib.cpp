@@ -12,17 +12,15 @@
 
 #ifndef BUILDING_GUILD_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // !BUILDING_GUILD_STATIC
+#else  // !BUILDING_GUILD_STATIC
 
-	namespace Guild
-	{
-		void StaticDllLib()
-		{
+namespace Guild
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_GUILD_STATIC
-	
+#endif  // !BUILDING_GUILD_STATIC

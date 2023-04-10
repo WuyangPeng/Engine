@@ -21,7 +21,7 @@ namespace System
     }
 
     template <typename... T>
-    void UnusedFunction(MAYBE_UNUSED T&&... value) noexcept
+    constexpr void UnusedFunction(MAYBE_UNUSED T&&... value) noexcept
     {
     }
 }

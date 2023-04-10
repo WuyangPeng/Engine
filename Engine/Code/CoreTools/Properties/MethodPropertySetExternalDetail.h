@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 18:45)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:34)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_EXTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_EXTERNAL_DETAIL_H
@@ -13,12 +13,12 @@
 #include "MethodPropertySetExternal.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-template <typename Reference, typename Container, ptrdiff_t (*FO)(), void (Container::*FS)(Reference)>
-CoreTools::MethodPropertySetExternal<Reference, Container, FO, FS>& CoreTools::MethodPropertySetExternal<Reference, Container, FO, FS>::operator=(ReferenceType value) noexcept
+template <typename Reference, typename Container, ptrdiff_t (*FunctionOffset)(), void (Container::*FunctionSet)(Reference)>
+CoreTools::MethodPropertySetExternal<Reference, Container, FunctionOffset, FunctionSet>& CoreTools::MethodPropertySetExternal<Reference, Container, FunctionOffset, FunctionSet>::operator=(ReferenceType value) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto offset = (*FO)();
+    const auto offset = (*FunctionOffset)();
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -30,7 +30,7 @@ CoreTools::MethodPropertySetExternal<Reference, Container, FO, FS>& CoreTools::M
 
     if (thisPtr != nullptr)
     {
-        (thisPtr->*FS)(value);
+        (thisPtr->*FunctionSet)(value);
     }
 
     return *this;
@@ -38,8 +38,8 @@ CoreTools::MethodPropertySetExternal<Reference, Container, FO, FS>& CoreTools::M
 
 #ifdef OPEN_CLASS_INVARIANT
 
-template <typename Reference, typename Container, ptrdiff_t (*FO)(), void (Container::*FS)(Reference)>
-bool CoreTools::MethodPropertySetExternal<Reference, Container, FO, FS>::IsValid() const noexcept
+template <typename Reference, typename Container, ptrdiff_t (*FunctionOffset)(), void (Container::*FunctionSet)(Reference)>
+bool CoreTools::MethodPropertySetExternal<Reference, Container, FunctionOffset, FunctionSet>::IsValid() const noexcept
 {
     return true;
 }

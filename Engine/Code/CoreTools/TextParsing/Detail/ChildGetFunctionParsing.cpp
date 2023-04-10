@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 09:33)
+///	引擎版本：0.9.0.5 (2023/04/04 17:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,8 +16,6 @@
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
-
-using namespace std::literals;
 
 CoreTools::ChildGetFunctionParsing::ChildGetFunctionParsing(const CSVHead& csvHead, const String& keyTypeDescribe)
     : ParentType{ csvHead, keyTypeDescribe }
@@ -104,6 +102,7 @@ System::String CoreTools::ChildGetFunctionParsing::GenerateChecking() const
 
     content += GenerateIndentation();
     content += TextParsing::gVoid;
+    content += TextParsing::gSpace;
     content += TextParsing::gCheckingConst;
     content += TextParsing::gSemicolonNewline;
     content += TextParsing::gNewlineCharacter;
@@ -125,6 +124,7 @@ System::String CoreTools::ChildGetFunctionParsing::GenerateFunctionVariableName(
 
     if (CSVDataType::Bool <= dataType && dataType <= CSVDataType::IntVector4)
     {
+        content += TextParsing::gSpace;
         content += TextParsing::gNoexcept;
     }
 
@@ -163,7 +163,8 @@ System::String CoreTools::ChildGetFunctionParsing::GenerateMapping(int index, co
     content += TextParsing::gGet;
     content += upperVariableName;
     content += TextParsing::gLeftBrackets;
-    content += TextParsing::gConst;
+    content += TextParsing::gSmallConst;
+    content += TextParsing::gSpace;
     content += csvHead.GetNameSpace();
     content += TextParsing::gContainerParameter;
     content += TextParsing::gOverride;

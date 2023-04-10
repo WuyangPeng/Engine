@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/14 21:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/04/03 17:40)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,21 +14,14 @@
 
 #include <fstream>
 
-using std::cerr;
-using std::cout;
-using std::make_shared;
-using std::ofstream;
-using std::ostream;
-using std::string;
-
 CoreTools::OStreamImpl::OStreamImpl(bool isCout) noexcept
     : stream{}, isCout{ isCout }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::OStreamImpl::OStreamImpl(const string& fileName)
-    : stream{ make_shared<ofstream>(fileName, ofstream::out | ofstream::app) }, isCout{ false }
+CoreTools::OStreamImpl::OStreamImpl(const std::string& fileName)
+    : stream{ make_shared<std::ofstream>(fileName, std::ofstream::out | std::ofstream::app) }, isCout{ false }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -54,14 +47,14 @@ CoreTools::OStreamImpl& CoreTools::OStreamImpl::operator=(OStreamImpl&& rhs) noe
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, OStreamImpl)
 
-ostream& CoreTools::OStreamImpl::GetStream() noexcept
+std::ostream& CoreTools::OStreamImpl::GetStream() noexcept
 {
     if (stream)
         return *stream;
     else if (isCout)
-        return cout;
+        return std::cout;
     else
-        return cerr;
+        return std::cerr;
 }
 
 bool CoreTools::OStreamImpl::IsCout() const noexcept

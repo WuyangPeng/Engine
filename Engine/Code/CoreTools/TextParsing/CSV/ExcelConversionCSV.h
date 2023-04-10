@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/10 09:06)
+///	引擎版本：0.9.0.5 (2023/04/03 20:01)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_EXCEL_CONVERSION_CSV_H
 #define CORE_TOOLS_TEXT_PARSING_EXCEL_CONVERSION_CSV_H
@@ -23,6 +23,7 @@ namespace CoreTools
     {
     public:
         NON_COPY_TYPE_DECLARE(ExcelConversionCSV);
+
         using String = System::String;
 
     public:

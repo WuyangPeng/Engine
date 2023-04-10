@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 09:15)
+///	引擎版本：0.9.0.5 (2023/04/03 20:09)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ENUM_HEAD_FILE_PARSING_H
 #define CORE_TOOLS_TEXT_PARSING_ENUM_HEAD_FILE_PARSING_H
@@ -48,7 +48,6 @@ namespace CoreTools
 
         NODISCARD String GenerateEnumOperator(const String& field, const SplitType& element, const String& operatorDescribe) const;
         NODISCARD String GenerateOperatorDescribe(const String& operatorDescribe) const;
-        NODISCARD String GenerateEnumIoStreamOperator(const SplitType& element) const;
 
         NODISCARD String GenerateStringCast() const;
         NODISCARD String GenerateEnumCastString() const;

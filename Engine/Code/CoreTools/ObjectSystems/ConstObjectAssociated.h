@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 15:33)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/29 16:27)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_CONST_OBJECT_ASSOCIATED_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_CONST_OBJECT_ASSOCIATED_H
@@ -30,7 +30,7 @@ namespace CoreTools
         {
         }
 
-        ConstObjectAssociated(const ConstObjectSharedPtr& object, uint64_t associated) noexcept
+        ConstObjectAssociated(const ConstObjectSharedPtr& object, int64_t associated) noexcept
             : object{ object }, associated{ associated }
         {
         }
@@ -41,7 +41,7 @@ namespace CoreTools
         }
 
         ConstObjectSharedPtr object;
-        uint64_t associated;
+        int64_t associated;
     };
 
     using ConstObjectInterfaceAssociated = ConstObjectAssociated<ObjectInterface>;

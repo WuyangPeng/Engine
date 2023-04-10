@@ -191,4 +191,5 @@ StatementMacros:
   - QT_REQUIRE_VERSION
 TabWidth: 8
 UseCRLF : true
-UseTab: Never
+UseTab: Never 
+RequiresClausePosition: SingleLine 

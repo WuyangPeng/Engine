@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/05 15:09)
+///	引擎测试版本：0.9.0.5 (2023/04/04 17:30)
 
 #ifndef CORE_TOOLS_TESTING_TESTING_HELPER_H
 #define CORE_TOOLS_TESTING_TESTING_HELPER_H
@@ -95,7 +95,8 @@ namespace CoreTools
         void AddStateMachineSuite();
         void AddNetworkSuite();
         void AddZlibSuite();
-        void AddFreetypeSuite();
+        void AddFreeTypeSuite();
+        void AddCoroutineSuite();
     };
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.0 (2022/08/07 0:02)
+///	引擎版本：0.9.0.5 (2023/03/30 17:15)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,21 +20,21 @@
 #include "CoreTools/Helper/MainFunctionMacro.h"
 
 CoreTools::ObjectInterface::ObjectInterface() noexcept
-    : uniqueID{ 0 }
+    : uniqueId{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::ObjectInterface::ObjectInterface(LoadConstructor loadConstructor) noexcept
-    : uniqueID{ 0 }
+    : uniqueId{ 0 }
 {
     System::UnusedFunction(loadConstructor);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::ObjectInterface::ObjectInterface(int64_t uniqueID) noexcept
-    : uniqueID{ uniqueID }
+CoreTools::ObjectInterface::ObjectInterface(int64_t uniqueId) noexcept
+    : uniqueId{ uniqueId }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -64,18 +64,18 @@ void CoreTools::ObjectInterface::TerminateFactory()
     OBJECT_MANAGER_SINGLETON.Remove(GetCurrentRttiType().GetName());
 }
 
-int64_t CoreTools::ObjectInterface::GetUniqueID() const noexcept
+int64_t CoreTools::ObjectInterface::GetUniqueId() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return uniqueID;
+    return uniqueId;
 }
 
-void CoreTools::ObjectInterface::SetUniqueID(int64_t aUniqueID) noexcept
+void CoreTools::ObjectInterface::SetUniqueId(int64_t aUniqueId) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    uniqueID = aUniqueID;
+    uniqueId = aUniqueId;
 }
 
 bool CoreTools::ObjectInterface::IsExactly(const Rtti& type) const noexcept

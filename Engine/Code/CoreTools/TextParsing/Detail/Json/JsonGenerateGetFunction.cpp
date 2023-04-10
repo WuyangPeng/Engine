@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/10 13:57)
+///	引擎版本：0.9.0.5 (2023/04/08 13:50)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,15 +18,231 @@
 #include "CoreTools/TextParsing/Json/JsonNode.h"
 #include "CoreTools/TextParsing/Json/JsonNodeContainer.h"
 
-using namespace std::literals;
-
-CoreTools::JsonGenerateGetFunction::JsonGenerateGetFunction(const JsonHead& jsonHead) noexcept
-    : jsonHead{ jsonHead }
+CoreTools::JsonGenerateGetFunction::JsonGenerateGetFunction(JsonHead jsonHead) noexcept
+    : jsonHead{ std::move(jsonHead) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, JsonGenerateGetFunction)
+
+CoreTools::JsonGenerateGetFunction::String CoreTools::JsonGenerateGetFunction::GenerateContainerGetFunction(int indentationCount, const String& typeName, const String& getDescribe, const StringView& endDescribe)
+{
+    String content{};
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += getDescribe;
+    content += typeName;
+    content += endDescribe;
+    content += TextParsing::gNewlineCharacter;
+
+    return content;
+}
+
+CoreTools::JsonGenerateGetFunction::String CoreTools::JsonGenerateGetFunction::GenerateEndDescribe()
+{
+    String content{ TextParsing::gLeftBrackets };
+
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gSpace;
+    content += TextParsing::gSmallConst;
+    content += TextParsing::gSemicolonNewline;
+
+    return content;
+}
+
+CoreTools::JsonGenerateGetFunction::String CoreTools::JsonGenerateGetFunction::GenerateGetDescribe(const StringView& typeName)
+{
+    String content{ TextParsing::gNodiscard };
+
+    content += typeName;
+    content += TextParsing::gSpace;
+    content += TextParsing::gGet;
+
+    return content;
+}
+
+CoreTools::JsonGenerateGetFunction::String CoreTools::JsonGenerateGetFunction::GenerateIsDescribe(const StringView& typeName)
+{
+    String content{ TextParsing::gNodiscard };
+
+    content += typeName;
+    content += TextParsing::gSpace;
+    content += TextParsing::gIs;
+
+    return content;
+}
+
+CoreTools::JsonGenerateGetFunction::String CoreTools::JsonGenerateGetFunction::GenerateNestedGetDescribe(const StringView& typeName)
+{
+    String content{};
+
+    content += TextParsing::gNodiscard;
+    content += TextParsing::gCapitalConst;
+    content += typeName;
+    content += TextParsing::gSharedPtr;
+    content += TextParsing::gSpace;
+    content += TextParsing::gGet;
+
+    return content;
+}
+
+CoreTools::JsonGenerateGetFunction::String CoreTools::JsonGenerateGetFunction::GenerateContainerArrayGetFunction(int indentationCount, const String& typeName)
+{
+    String content{};
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += TextParsing::gNodiscard;
+    content += typeName;
+    content += TextParsing::gSpace;
+    content += TextParsing::gGet;
+    content += typeName;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gConstSemicolonNewline;
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += TextParsing::gNodiscard;
+    content += TextParsing::gInt;
+    content += TextParsing::gSpace;
+    content += TextParsing::gGet;
+    content += typeName;
+    content += TextParsing::gSize;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gConstSemicolonNewline;
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += TextParsing::gNodiscard;
+    content += typeName;
+    content += TextParsing::gConstIter;
+    content += TextParsing::gSpace;
+    content += TextParsing::gGet;
+    content += typeName;
+    content += TextParsing::gBeginNoexceptFunction;
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += TextParsing::gNodiscard;
+    content += typeName;
+    content += TextParsing::gConstIter;
+    content += TextParsing::gSpace;
+    content += TextParsing::gGet;
+    content += typeName;
+    content += TextParsing::gEndNoexceptFunction;
+
+    content += TextParsing::gNewlineCharacter;
+
+    return content;
+}
+
+CoreTools::JsonGenerateGetFunction::String CoreTools::JsonGenerateGetFunction::GenerateContainerNestedArrayGetFunction(int indentationCount, const String& typeName)
+{
+    String content{};
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += TextParsing::gNodiscardConst;
+    content += typeName;
+    content += TextParsing::gGetFirstSharedPtr;
+    content += typeName;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gConstSemicolonNewline;
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += TextParsing::gNodiscardConst;
+    content += typeName;
+    content += TextParsing::gGetSharedPtr;
+    content += typeName;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gInt;
+    content += TextParsing::gKeyConst;
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += TextParsing::gNodiscard;
+    content += typeName;
+    content += TextParsing::gContainer;
+    content += TextParsing::gSpace;
+    content += TextParsing::gGet;
+    content += typeName;
+    content += TextParsing::gContainer;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gConstSemicolonNewline;
+
+    content += TextParsing::gNewlineCharacter;
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += TextParsing::gFunctionTemplate;
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += TextParsing::gNodiscardConst;
+    content += typeName;
+    content += TextParsing::gGetFirstSharedPtr;
+    content += typeName;
+    content += TextParsing::gFunctionParameter;
+
+    content += TextParsing::gNewlineCharacter;
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += TextParsing::gFunctionTemplate;
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
+        content += TextParsing::gIndentation;
+    }
+
+    content += TextParsing::gNodiscard;
+    content += typeName;
+    content += TextParsing::gContainer;
+    content += TextParsing::gSpace;
+    content += TextParsing::gGet;
+    content += typeName;
+    content += TextParsing::gFunctionParameter;
+
+    content += TextParsing::gNewlineCharacter;
+
+    return content;
+}
 
 System::String CoreTools::JsonGenerateGetFunction::GenerateContainerFunction() const
 {
@@ -38,68 +254,39 @@ System::String CoreTools::JsonGenerateGetFunction::GenerateContainerFunction() c
     {
         auto typeName = StringUtility::ToFirstLetterUpper(value->GetTypeName());
 
-        switch (const auto jsonDataType = value->GetJsonDataType(); jsonDataType)
+        constexpr auto indentationCount = 2;
+
+        switch (const auto jsonDataType = value->GetJsonDataType();
+                jsonDataType)
         {
             case JsonDataType::String:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD System::String Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const;\n"s);
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateGetDescribe(TextParsing::gSystemString), GenerateEndDescribe());
             }
             break;
             case JsonDataType::Bool:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD bool Is"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const noexcept;\n"s);
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateIsDescribe(TextParsing::gBool), TextParsing::gConstNoexcept);
             }
             break;
             case JsonDataType::Int:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD int Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const noexcept;\n"s);
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateGetDescribe(TextParsing::gInt), TextParsing::gConstNoexcept);
             }
             break;
             case JsonDataType::Int64:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD int64_t Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const noexcept;\n"s);
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateGetDescribe(TextParsing::gInt64), TextParsing::gConstNoexcept);
             }
             break;
             case JsonDataType::Double:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD double Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const noexcept;\n"s);
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateGetDescribe(TextParsing::gDouble), TextParsing::gConstNoexcept);
             }
             break;
             case JsonDataType::Nested:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD Const"s);
-                content += typeName;
-                content += SYSTEM_TEXT("SharedPtr Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const noexcept;\n"s);
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateNestedGetDescribe(typeName), TextParsing::gConstNoexcept);
             }
             break;
             case JsonDataType::StringArray:
@@ -112,95 +299,13 @@ System::String CoreTools::JsonGenerateGetFunction::GenerateContainerFunction() c
                 FALLTHROUGH;
             case JsonDataType::DoubleArray:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD "s);
-                content += typeName;
-                content += SYSTEM_TEXT(" Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const;\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD int Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("Size() const;\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD "s);
-                content += typeName;
-                content += SYSTEM_TEXT("ConstIter Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("Begin() const noexcept;\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD "s);
-                content += typeName;
-                content += SYSTEM_TEXT("ConstIter Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("End() const noexcept;\n"s);
-
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerArrayGetFunction(indentationCount, typeName);
             }
             break;
 
             case JsonDataType::NestedArray:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD Const"s);
-                content += typeName;
-                content += SYSTEM_TEXT("SharedPtr GetFirst"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const;\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD Const"s);
-                content += typeName;
-                content += SYSTEM_TEXT("SharedPtr Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("(int key) const;\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD "s);
-                content += typeName;
-                content += SYSTEM_TEXT("Container Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("Container() const;\n"s);
-
-                content += TextParsing::gNewlineCharacter;
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("template <typename Function>\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD Const"s);
-                content += typeName;
-                content += SYSTEM_TEXT("SharedPtr GetFirst"s);
-                content += typeName;
-                content += SYSTEM_TEXT("(Function function) const;\n"s);
-
-                content += TextParsing::gNewlineCharacter;
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("template <typename Function>\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD "s);
-                content += typeName;
-                content += SYSTEM_TEXT("Container Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("(Function function) const;\n"s);
-
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerNestedArrayGetFunction(indentationCount, typeName);
             }
             break;
             default:
@@ -210,13 +315,101 @@ System::String CoreTools::JsonGenerateGetFunction::GenerateContainerFunction() c
 
     if (jsonHead.HasNested())
     {
-        content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("private:\n"s);
+        content += GenerateParsingFunction(1);
+    }
 
+    return content;
+}
+
+System::String CoreTools::JsonGenerateGetFunction::GenerateParsingFunction(int indentationCount)
+{
+    String content{};
+
+    for (auto i = 0; i < indentationCount; ++i)
+    {
         content += TextParsing::gIndentation;
+    }
+
+    content += TextParsing::gPrivate;
+
+    for (auto i = 0; i < indentationCount + 1; ++i)
+    {
         content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("void Parsing(const CoreTools::JsonRow& jsonRow);\n"s);
-        content += TextParsing::gNewlineCharacter;
+    }
+
+    content += TextParsing::gVoid;
+    content += TextParsing::gSpace;
+    content += TextParsing::gParsing;
+    content += TextParsing::gJsonRowParameter;
+    content += TextParsing::gSemicolonNewline;
+
+    content += TextParsing::gNewlineCharacter;
+
+    return content;
+}
+
+System::String CoreTools::JsonGenerateGetFunction::GenerateNestedArrayFunction(int indentationCount, const JsonNode& jsonNode, bool& hasNested)
+{
+    String content{};
+    for (const auto& inner : jsonNode.GetJsonNodeContainer())
+    {
+        const auto innerJsonDataType = inner->GetJsonDataType();
+
+        const auto typeName = StringUtility::ToFirstLetterUpper(inner->GetTypeName());
+
+        switch (innerJsonDataType)
+        {
+            case JsonDataType::String:
+            {
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateGetDescribe(TextParsing::gSystemString), GenerateEndDescribe());
+            }
+            break;
+            case JsonDataType::Bool:
+            {
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateIsDescribe(TextParsing::gBool), TextParsing::gConstNoexcept);
+            }
+            break;
+            case JsonDataType::Int:
+            {
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateGetDescribe(TextParsing::gInt), TextParsing::gConstNoexcept);
+            }
+            break;
+            case JsonDataType::Int64:
+            {
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateGetDescribe(TextParsing::gInt64), TextParsing::gConstNoexcept);
+            }
+            break;
+            case JsonDataType::Double:
+            {
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateGetDescribe(TextParsing::gDouble), TextParsing::gConstNoexcept);
+            }
+            break;
+            case JsonDataType::StringArray:
+                FALLTHROUGH;
+            case JsonDataType::BoolArray:
+                FALLTHROUGH;
+            case JsonDataType::IntArray:
+                FALLTHROUGH;
+            case JsonDataType::Int64Array:
+                FALLTHROUGH;
+            case JsonDataType::DoubleArray:
+            {
+                content += GenerateContainerArrayGetFunction(indentationCount, typeName);
+            }
+            break;
+            case JsonDataType::Nested:
+            {
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateNestedGetDescribe(typeName), TextParsing::gConstNoexcept);
+            }
+            break;
+            case JsonDataType::NestedArray:
+            {
+                hasNested = true;
+
+                content += GenerateContainerNestedArrayGetFunction(indentationCount, typeName);
+            }
+            break;
+        }
     }
 
     return content;
@@ -234,61 +427,33 @@ System::String CoreTools::JsonGenerateGetFunction::GenerateContainerFunction(con
     {
         auto typeName = StringUtility::ToFirstLetterUpper(value->GetTypeName());
 
+        constexpr auto indentationCount = 3;
+
         switch (const auto jsonDataType = value->GetJsonDataType(); jsonDataType)
         {
             case JsonDataType::String:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD System::String Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const;\n"s);
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateGetDescribe(TextParsing::gSystemString), GenerateEndDescribe());
             }
             break;
             case JsonDataType::Bool:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD bool Is"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const noexcept;\n"s);
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateIsDescribe(TextParsing::gBool), TextParsing::gConstNoexcept);
             }
             break;
             case JsonDataType::Int:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD int Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const noexcept;\n"s);
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateGetDescribe(TextParsing::gInt), TextParsing::gConstNoexcept);
             }
             break;
             case JsonDataType::Int64:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD int64_t Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const noexcept;\n"s);
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateGetDescribe(TextParsing::gInt64), TextParsing::gConstNoexcept);
             }
             break;
             case JsonDataType::Double:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD double Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const noexcept;\n"s);
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerGetFunction(indentationCount, typeName, GenerateGetDescribe(TextParsing::gDouble), TextParsing::gConstNoexcept);
             }
             break;
             case JsonDataType::StringArray:
@@ -301,238 +466,14 @@ System::String CoreTools::JsonGenerateGetFunction::GenerateContainerFunction(con
                 FALLTHROUGH;
             case JsonDataType::DoubleArray:
             {
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD "s);
-                content += typeName;
-                content += SYSTEM_TEXT(" Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("() const;\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD int Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("Size() const;\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD "s);
-                content += typeName;
-                content += SYSTEM_TEXT("ConstIter Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("Begin() const noexcept;\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("NODISCARD "s);
-                content += typeName;
-                content += SYSTEM_TEXT("ConstIter Get"s);
-                content += typeName;
-                content += SYSTEM_TEXT("End() const noexcept;\n"s);
-
-                content += TextParsing::gNewlineCharacter;
+                content += GenerateContainerArrayGetFunction(indentationCount, typeName);
             }
             break;
             case JsonDataType::Nested:
                 FALLTHROUGH;
             case JsonDataType::NestedArray:
             {
-                for (const auto& inner : value->GetJsonNodeContainer())
-                {
-                    const auto innerJsonDataType = inner->GetJsonDataType();
-
-                    typeName = StringUtility::ToFirstLetterUpper(inner->GetTypeName());
-
-                    switch (innerJsonDataType)
-                    {
-                        case JsonDataType::String:
-                        {
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD System::String Get"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("() const;\n"s);
-                            content += TextParsing::gNewlineCharacter;
-                        }
-                        break;
-                        case JsonDataType::Bool:
-                        {
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD bool Is"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("() const noexcept;\n"s);
-                            content += TextParsing::gNewlineCharacter;
-                        }
-                        break;
-                        case JsonDataType::Int:
-                        {
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD int Get"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("() const noexcept;\n"s);
-                            content += TextParsing::gNewlineCharacter;
-                        }
-                        break;
-                        case JsonDataType::Int64:
-                        {
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD int64_t Get"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("() const noexcept;\n"s);
-                            content += TextParsing::gNewlineCharacter;
-                        }
-                        break;
-                        case JsonDataType::Double:
-                        {
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD double Get"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("() const noexcept;\n"s);
-                            content += TextParsing::gNewlineCharacter;
-                        }
-                        break;
-                        case JsonDataType::StringArray:
-                            FALLTHROUGH;
-                        case JsonDataType::BoolArray:
-                            FALLTHROUGH;
-                        case JsonDataType::IntArray:
-                            FALLTHROUGH;
-                        case JsonDataType::Int64Array:
-                            FALLTHROUGH;
-                        case JsonDataType::DoubleArray:
-                        {
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD "s);
-                            content += typeName;
-                            content += SYSTEM_TEXT(" Get"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("() const;\n"s);
-
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD int Get"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("Size() const;\n"s);
-
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD "s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("ConstIter Get"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("Begin() const noexcept;\n"s);
-
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD "s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("ConstIter Get"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("End() const noexcept;\n"s);
-
-                            content += TextParsing::gNewlineCharacter;
-                        }
-                        break;
-                        case JsonDataType::Nested:
-                        {
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD Const"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("SharedPtr Get"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("() const noexcept;\n"s);
-                            content += TextParsing::gNewlineCharacter;
-                        }
-                        break;
-                        case JsonDataType::NestedArray:
-                        {
-                            hasNested = true;
-
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD Const"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("SharedPtr GetFirst"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("() const;\n"s);
-
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD Const"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("SharedPtr Get"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("(int key) const;\n"s);
-
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD "s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("Container Get"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("Container() const;\n"s);
-
-                            content += TextParsing::gNewlineCharacter;
-
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("template <typename Function>\n"s);
-
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD Const"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("SharedPtr GetFirst"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("(Function function) const;\n"s);
-
-                            content += TextParsing::gNewlineCharacter;
-
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("template <typename Function>\n"s);
-
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += TextParsing::gIndentation;
-                            content += SYSTEM_TEXT("NODISCARD "s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("Container Get"s);
-                            content += typeName;
-                            content += SYSTEM_TEXT("(Function function) const;\n"s);
-
-                            content += TextParsing::gNewlineCharacter;
-                        }
-                        break;
-                    }
-                }
+                content += GenerateNestedArrayFunction(indentationCount, *value, hasNested);
             }
             break;
             default:
@@ -542,15 +483,7 @@ System::String CoreTools::JsonGenerateGetFunction::GenerateContainerFunction(con
 
     if (hasNested)
     {
-        content += TextParsing::gIndentation;
-        content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("private:\n"s);
-
-        content += TextParsing::gIndentation;
-        content += TextParsing::gIndentation;
-        content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("void Parsing(const CoreTools::JsonRow& jsonRow);\n"s);
-        content += TextParsing::gNewlineCharacter;
+        content += GenerateParsingFunction(2);
     }
 
     return content;

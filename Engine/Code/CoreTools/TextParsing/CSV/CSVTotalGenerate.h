@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/10 09:05)
+///	引擎版本：0.9.0.5 (2023/04/03 20:01)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_TOTAL_GENERATE_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_TOTAL_GENERATE_H
@@ -26,6 +26,7 @@ namespace CoreTools
     {
     public:
         PERFORMANCE_UNSHARED_TYPE_DECLARE(CSVTotalGenerate);
+
         using String = System::String;
         using CSVHeadContainer = std::vector<CSVHead>;
 

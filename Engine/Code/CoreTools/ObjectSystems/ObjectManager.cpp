@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 23:11)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/30 17:16)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,13 +14,6 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Threading/Mutex.h"
-#include "CoreTools/Threading/ScopedMutex.h"
-
-using std::make_shared;
-using std::make_unique;
-using std::string;
 
 SINGLETON_GET_PTR_DEFINE(CoreTools, ObjectManager);
 
@@ -28,7 +21,7 @@ CoreTools::ObjectManager::ObjectManagerUniquePtr CoreTools::ObjectManager::objec
 
 void CoreTools::ObjectManager::Create()
 {
-    objectManager = make_unique<CoreTools::ObjectManager>(ObjectManagerCreate::Init);
+    objectManager = std::make_unique<ObjectManager>(ObjectManagerCreate::Init);
 }
 
 void CoreTools::ObjectManager::Destroy() noexcept
@@ -36,15 +29,17 @@ void CoreTools::ObjectManager::Destroy() noexcept
     objectManager.reset();
 }
 
-CoreTools::ObjectManager::ObjectManager(MAYBE_UNUSED ObjectManagerCreate objectManagerCreate)
+CoreTools::ObjectManager::ObjectManager(ObjectManagerCreate objectManagerCreate)
     : impl{ ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(objectManagerCreate);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ObjectManager)
 
-CoreTools::ObjectManager::FactoryFunction CoreTools::ObjectManager::Find(const string& name) const
+CoreTools::ObjectManager::FactoryFunction CoreTools::ObjectManager::Find(const std::string& name) const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -53,14 +48,14 @@ CoreTools::ObjectManager::FactoryFunction CoreTools::ObjectManager::Find(const s
     return impl->Find(name);
 }
 
-void CoreTools::ObjectManager::Insert(const string& name, FactoryFunction function)
+void CoreTools::ObjectManager::Insert(const std::string& name, FactoryFunction function)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     return impl->Insert(name, function);
 }
 
-void CoreTools::ObjectManager::Remove(const string& name)
+void CoreTools::ObjectManager::Remove(const std::string& name)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 

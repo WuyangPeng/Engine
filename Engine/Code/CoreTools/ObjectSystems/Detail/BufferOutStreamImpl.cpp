@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 22:42)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/30 16:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,48 +19,39 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/Stream.h"
 
-using std::make_shared;
-using std::string;
-
-CoreTools::BufferOutStreamImpl::BufferOutStreamImpl(const OutTopLevel& topLevel)
-    : topLevel{ topLevel }, objectRegister{ ObjectRegister::Create() }, buffer{}, target{}
+CoreTools::BufferOutStreamImpl::BufferOutStreamImpl(OutTopLevel topLevel)
+    : topLevel{ std::move(topLevel) }, objectRegister{ ObjectRegister::Create() }, buffer{}, target{}
 {
     GenerateBuffer();
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 void CoreTools::BufferOutStreamImpl::GenerateBuffer()
 {
     Register();
 
-    const auto bufferSize = GetBufferSize();
-
-    if (0 < bufferSize)
+    if (const auto bufferSize = GetBufferSize(); 0 < bufferSize)
     {
         ResetBufferSize(bufferSize);
         SaveToBuffer();
     }
 }
 
-// private
 void CoreTools::BufferOutStreamImpl::Register()
 {
     // 创建唯一对象集合在对象图中。
     // 使我们可以创建用于写入缓冲区所需的数据流的字节数的确切大小。
     for (const auto& object : topLevel)
     {
-        const auto uniqueID = object->Register(*objectRegister);
-        if (uniqueID == 0)
+        if (const auto uniqueID = object->Register(*objectRegister); uniqueID == 0)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("uniqueID == 0"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("uniqueId == 0"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }
 
-// private
-int CoreTools::BufferOutStreamImpl::GetBufferSize()
+int CoreTools::BufferOutStreamImpl::GetBufferSize() const
 {
     auto bufferSize = 0;
 
@@ -76,20 +67,18 @@ int CoreTools::BufferOutStreamImpl::GetBufferSize()
     return bufferSize;
 }
 
-// private
 void CoreTools::BufferOutStreamImpl::ResetBufferSize(int bufferSize)
 {
     CORE_TOOLS_ASSERTION_0(0 < bufferSize, "缓冲区大小小于或等于0！");
 
     // 创建对象将要被写入的缓冲区。
-    buffer = make_shared<FileBuffer>(bufferSize);
+    buffer = std::make_shared<FileBuffer>(bufferSize);
     target = make_shared<BufferTarget>(bufferSize, objectRegister);
 }
 
 void CoreTools::BufferOutStreamImpl::SaveToBuffer()
 {
     // 保存对象到目标缓冲区。
-
     for (const auto& value : *objectRegister)
     {
         if (topLevel.IsTopLevel(value.object))

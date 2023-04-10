@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 18:09)
+///	引擎版本：0.9.0.5 (2023/04/07 10:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,8 +23,6 @@
 
 #include <map>
 #include <set>
-
-using namespace std::literals;
 
 CoreTools::CSVTotalGenerateImpl::CSVTotalGenerateImpl(String nameSpace, CSVHeadContainer csvHeadContainer) noexcept
     : nameSpace{ std::move(nameSpace) }, csvHeadContainer{ std::move(csvHeadContainer) }
@@ -70,27 +68,6 @@ System::String CoreTools::CSVTotalGenerateImpl::GetOldContent(const String& file
     }
 }
 
-System::String CoreTools::CSVTotalGenerateImpl::GenerateCopyright()
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    auto content = SYSTEM_TEXT("/// Copyright (c) 2010-\n"s);
-
-    content += SYSTEM_TEXT("/// Threading Core Render Engine\n"s);
-    content += TextParsing::gAnnotation;
-    content += TextParsing::gNewlineCharacter;
-
-    content += SYSTEM_TEXT("/// 作者：彭武阳，彭晔恩，彭晔泽\n"s);
-    content += SYSTEM_TEXT("/// 联系作者：94458936@qq.com\n"s);
-    content += TextParsing::gAnnotation;
-    content += TextParsing::gNewlineCharacter;
-
-    content += SYSTEM_TEXT("/// 标准：std:c++20\n"s);
-    content += SYSTEM_TEXT("/// 自动生成\n"s);
-
-    return content;
-}
-
 System::String CoreTools::CSVTotalGenerateImpl::GenerateNewLine()
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
@@ -102,9 +79,9 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateHeaderGuard() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto headerGuard = StringUtility::ToUpperMacro(nameSpace + GetFileSuffix());
-
     String content{ TextParsing::gIfndef };
+
+    const auto headerGuard = StringUtility::ToUpperMacro(nameSpace + GetFileSuffix());
 
     content += headerGuard;
     content += TextParsing::gNewlineCharacter;
@@ -122,9 +99,9 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerHeaderGuard() c
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto headerGuard = StringUtility::ToUpperMacro(nameSpace + nameSpace + GetFileSuffix());
-
     String content{ TextParsing::gIfndef };
+
+    const auto headerGuard = StringUtility::ToUpperMacro(nameSpace + nameSpace + GetFileSuffix());
 
     content += headerGuard;
     content += TextParsing::gNewlineCharacter;
@@ -142,9 +119,9 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateHeaderGuardEndif() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto headerGuard = StringUtility::ToUpperMacro(nameSpace + GetFileSuffix());
-
     String content{ TextParsing::gEndif };
+
+    const auto headerGuard = StringUtility::ToUpperMacro(nameSpace + GetFileSuffix());
 
     content += headerGuard;
     content += TextParsing::gNewlineCharacter;
@@ -275,7 +252,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerHead() const
     content += TextParsing::gUnicodeUsing;
     content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::gMemory;
+    content += TextParsing::gMemoryInclude;
     content += TextParsing::gNewlineCharacter;
 
     return content;
@@ -292,7 +269,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerSourceHead() co
     content += TextParsing::gHeadFileSuffix;
     content += TextParsing::gNewlineCharacter;
 
-    std::set<String> dataType{};
+    EnumType dataType{};
 
     for (const auto& value : csvHeadContainer)
     {
@@ -312,10 +289,10 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerSourceHead() co
 
     content += TextParsing::gUserClassInvariantMacro;
     content += TextParsing::gExceptionMacro;
-    content += TextParsing::gIncludeCSVContent; 
+    content += TextParsing::gIncludeCSVContent;
     content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::gFilesystem;
+    content += TextParsing::gFilesystemInclude;
     content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gUsingNamespaceLiterals;
@@ -330,6 +307,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateNameSpace() const
 
     String content{ TextParsing::gNamespace };
 
+    content += TextParsing::gSpace;
     content += nameSpace;
     content += TextParsing::gNewlineCharacter;
     content += TextParsing::gFunctionBeginBrackets;
@@ -365,6 +343,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateDataFwd(const DataType& 
     {
         content += TextParsing::gIndentation;
         content += TextParsing::gClass;
+        content += TextParsing::gSpace;
         content += value.first;
         content += TextParsing::gSemicolonNewline;
 
@@ -374,6 +353,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateDataFwd(const DataType& 
         {
             content += TextParsing::gIndentation;
             content += TextParsing::gClass;
+            content += TextParsing::gSpace;
             content += value.first;
             content += TextParsing::gBase;
             content += TextParsing::gSemicolonNewline;
@@ -381,6 +361,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateDataFwd(const DataType& 
 
         content += TextParsing::gIndentation;
         content += TextParsing::gClass;
+        content += TextParsing::gSpace;
         content += value.first;
         content += TextParsing::gContainer;
         content += TextParsing::gSemicolonNewline;
@@ -420,6 +401,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateFwd() const
 
     content += TextParsing::gIndentation;
     content += TextParsing::gClass;
+    content += TextParsing::gSpace;
     content += nameSpace;
     content += TextParsing::gContainer;
     content += TextParsing::gSemicolonNewline;
@@ -439,7 +421,9 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerClassName() con
     String content{ TextParsing::gIndentation };
 
     content += TextParsing::gClass;
+    content += TextParsing::gSpace;
     content += className;
+    content += TextParsing::gSpace;
     content += TextParsing::gFinal;
     content += TextParsing::gNewlineCharacter;
 
@@ -471,14 +455,15 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerDefaultFunction
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("explicit "s);
+    content += TextParsing::gExplicit;
+    content += TextParsing::gSpace;
     content += className;
-    content += SYSTEM_TEXT("(const System::String& directory);\n"s);
+    content += TextParsing::gDirectoryParameter;
     content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("CLASS_INVARIANT_DECLARE;\n"s);
+    content += TextParsing::gClassInvariantDeclare;
     content += TextParsing::gNewlineCharacter;
 
     return content;
@@ -492,7 +477,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerFunction() cons
 
     String content{};
 
-    std::set<String> dataType{};
+    EnumType dataType{};
 
     for (const auto& value : csvHeadContainer)
     {
@@ -506,24 +491,33 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerFunction() cons
     {
         content += TextParsing::gIndentation;
         content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("NODISCARD std::shared_ptr<const "s);
+        content += TextParsing::gNodiscard;
+        content += TextParsing::gSharedPtrConst;
         content += value;
-        content += SYSTEM_TEXT("Container> Get");
+        content += TextParsing::gContainer;
+        content += TextParsing::gRightAngleBracket;
+        content += TextParsing::gSpace;
+        content += TextParsing::gGet;
         content += value;
-        content += SYSTEM_TEXT("Container() const noexcept;\n");
+        content += TextParsing::gContainer;
+        content += TextParsing::gConstNoexcept;
     }
 
     content += TextParsing::gNewlineCharacter;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("private:\n"s);
+    content += TextParsing::gPrivate;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("void Parsing(const System::String& directory);\n"s);
+    content += TextParsing::gVoid;
+    content += TextParsing::gSpace;
+    content += TextParsing::gParsing;
+    content += TextParsing::gStringDirectory;
+    content += TextParsing::gSemicolonNewline;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("void Verify() const;\n"s);
+    content += TextParsing::gVerifyConst;
     content += TextParsing::gNewlineCharacter;
 
     return content;
@@ -537,7 +531,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerFunctionDefinit
 
     String content{};
 
-    std::set<String> dataType{};
+    EnumType dataType{};
 
     for (const auto& value : csvHeadContainer)
     {
@@ -549,145 +543,133 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerFunctionDefinit
 
     for (const auto& value : dataType)
     {
-        content += SYSTEM_TEXT("std::shared_ptr<const ");
+        content += TextParsing::gSharedPtrConst;
         content += nameSpace;
-        content += SYSTEM_TEXT("::");
+        content += TextParsing::gDoubleColon;
         content += value;
-        content += SYSTEM_TEXT("Container> ");
+        content += TextParsing::gContainer;
+        content += TextParsing::gRightAngleBracket;
+        content += TextParsing::gSpace;
 
         content += nameSpace;
-        content += SYSTEM_TEXT("::");
+        content += TextParsing::gDoubleColon;
         content += className;
-        content += SYSTEM_TEXT("::Get");
+        content += TextParsing::gDoubleColon;
+        content += TextParsing::gGet;
         content += value;
-        content += SYSTEM_TEXT("Container() const noexcept\n");
+        content += TextParsing::gContainer;
+        content += TextParsing::gBrackets;
+        content += TextParsing::gSmallConst;
+        content += TextParsing::gSpace;
+        content += TextParsing::gNoexcept;
+        content += TextParsing::gNewlineCharacter;
 
-        content += SYSTEM_TEXT("{\n");
+        content += TextParsing::gFunctionBeginBrackets;
 
         content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("USER_CLASS_IS_VALID_CONST_1;\n");
+        content += TextParsing::gUserClassIsValidConst1;
         content += TextParsing::gNewlineCharacter;
 
         content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("return ");
+        content += TextParsing::gReturn;
+        content += TextParsing::gSpace;
         content += StringUtility::ToFirstLetterLower(value);
-        content += SYSTEM_TEXT("Container;\n");
+        content += TextParsing::gContainer;
+        content += TextParsing::gSemicolonNewline;
 
-        content += SYSTEM_TEXT("}\n");
+        content += TextParsing::gFunctionEndBrackets;
         content += TextParsing::gNewlineCharacter;
     }
 
     return content;
 }
 
-System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerDefaultFunctionDefinition() const
+System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerDefaultFunctionMemberListDefinition(const EnumType& dataType) const
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    const auto className = nameSpace + TextParsing::gContainer.data();
-
-    auto content = nameSpace;
-    content += SYSTEM_TEXT("::"s);
-    content += className;
-    content += SYSTEM_TEXT("::"s);
-    content += className;
-    content += SYSTEM_TEXT("(const System::String& directory)\n"s);
-
-    content += SYSTEM_TEXT("    : "s);
-
-    std::set<String> dataType{};
-
-    for (const auto& value : csvHeadContainer)
-    {
-        if (value.GetCSVFormatType() != CSVFormatType::Enum)
-        {
-            dataType.emplace(value.GetCSVClassName());
-        }
-    }
-
     auto index = 0;
+    String content{};
     for (const auto& value : dataType)
     {
         if (index != 0)
         {
-            content += SYSTEM_TEXT("      "s);
+            content += TextParsing::gMemberIndentation;
         }
 
-        content += StringUtility::ToFirstLetterLower(value) + SYSTEM_TEXT("Container{}");
+        content += StringUtility::ToFirstLetterLower(value);
+        content += TextParsing::gContainer;
+        content += TextParsing::gInit;
 
         if (index != boost::numeric_cast<int>(dataType.size()) - 1)
         {
-            content += SYSTEM_TEXT(","s);
+            content += TextParsing::gComma;
         }
 
-        content += SYSTEM_TEXT("\n"s);
+        content += TextParsing::gNewline;
 
         ++index;
     }
 
-    content += SYSTEM_TEXT("{\n"s);
+    return content;
+}
 
-    content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("Parsing(directory);\n"s);
+System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerParsingDefinition(const String& className, const EnumType& dataType) const
+{
+    String content{};
 
-    content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("Verify();\n"s);
-    content += SYSTEM_TEXT("\n"s);
-
-    content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("USER_SELF_CLASS_IS_VALID_1;\n"s);
-    content += SYSTEM_TEXT("}\n"s);
-    content += SYSTEM_TEXT("\n"s);
-
-    content += SYSTEM_TEXT("void "s);
+    content += TextParsing::gVoid;
+    content += TextParsing::gSpace;
     content += nameSpace;
-    content += SYSTEM_TEXT("::"s);
+    content += TextParsing::gDoubleColon;
     content += className;
-    content += SYSTEM_TEXT("::Parsing(const System::String& directory)\n"s);
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gParsing;
+    content += TextParsing::gStringDirectory;
+    content += TextParsing::gNewline;
 
-    content += SYSTEM_TEXT("{\n"s);
+    content += TextParsing::gFunctionBeginBrackets;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("const std::filesystem::path path{ directory };\n"s);
-    content += SYSTEM_TEXT("\n"s);
-
-    content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("for (const auto& inputPath : std::filesystem::directory_iterator(path))\n"s);
-
-    content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("{\n"s);
+    content += TextParsing::gFilesystemPath;
+    content += TextParsing::gNewline;
 
     content += TextParsing::gIndentation;
+    content += TextParsing::gDirectoryIterator;
+
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("auto fileName = inputPath.path().native();\n"s);
-    content += SYSTEM_TEXT("\n"s);
+    content += TextParsing::gFunctionBeginBrackets;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("if (fileName.find(SYSTEM_TEXT(\".csv\"s)) != (fileName.size() - 4))\n"s);
+    content += TextParsing::gPathNative;
+    content += TextParsing::gNewline;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("{\n"s);
+    content += TextParsing::gFileNameFind;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gFunctionBeginBrackets;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("continue;\n"s);
+    content += TextParsing::gContinue;
+    content += TextParsing::gSemicolonNewline;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("}\n"s);
-    content += SYSTEM_TEXT("\n"s);
+    content += TextParsing::gFunctionEndBrackets;
+    content += TextParsing::gNewline;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("CoreTools::CSVContent csvContent{ fileName };\n"s);
-    content += SYSTEM_TEXT("\n"s);
+    content += TextParsing::gCSVContentInit;
+    content += TextParsing::gNewline;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("const auto csvClassName = csvContent.GetCSVClassName();\n"s);
-    content += SYSTEM_TEXT("\n"s);
+    content += TextParsing::gGetCSVClassName;
+    content += TextParsing::gNewline;
 
     auto firstData = true;
     for (const auto& value : dataType)
@@ -701,87 +683,123 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerDefaultFunction
         {
             content += TextParsing::gIndentation;
             content += TextParsing::gIndentation;
-            content += SYSTEM_TEXT("else "s);
+            content += TextParsing::gElse;
+            content += TextParsing::gSpace;
         }
-        content += SYSTEM_TEXT("if (csvClassName == SYSTEM_TEXT(\"");
+        content += TextParsing::gCsvClassNameEquation;
         content += value;
-        content += SYSTEM_TEXT("\"s))\n"s);
+        content += TextParsing::gSystemTextEndNewline;
 
         content += TextParsing::gIndentation;
         content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("{\n"s);
+        content += TextParsing::gFunctionBeginBrackets;
 
         content += TextParsing::gIndentation;
         content += TextParsing::gIndentation;
         content += TextParsing::gIndentation;
         content += StringUtility::ToFirstLetterLower(value);
-        content += SYSTEM_TEXT("Container = std::make_shared<"s);
+        content += TextParsing::gContainer;
+        content += TextParsing::gSpace;
+        content += TextParsing::gEqualSign;
+        content += TextParsing::gSpace;
+        content += TextParsing::gMakeShared;
+        content += TextParsing::gLeftAngleBracket;
         content += value;
-        content += SYSTEM_TEXT("Container>(csvContent);\n"s);
+        content += TextParsing::gContainer;
+        content += TextParsing::gRightAngleBracket;
+        content += TextParsing::gLeftBrackets;
+        content += TextParsing::gCsvContent;
+        content += TextParsing::gRightBrackets;
+        content += TextParsing::gSemicolonNewline;
 
         content += TextParsing::gIndentation;
         content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("}\n"s);
+        content += TextParsing::gFunctionEndBrackets;
 
         firstData = false;
     }
 
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("}\n"s);
-    content += SYSTEM_TEXT("}\n"s);
-    content += SYSTEM_TEXT("\n"s);
+    content += TextParsing::gFunctionEndBrackets;
+    content += TextParsing::gFunctionEndBrackets;
+    content += TextParsing::gNewline;
 
-    content += SYSTEM_TEXT("void "s);
+    return content;
+}
+
+System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerVerifyDefinition(const String& className, const EnumType& dataType) const
+{
+    String content{};
+
+    content += TextParsing::gVoid;
+    content += TextParsing::gSpace;
     content += nameSpace;
-    content += SYSTEM_TEXT("::"s);
+    content += TextParsing::gDoubleColon;
     content += className;
-    content += SYSTEM_TEXT("::Verify() const\n"s);
-    content += SYSTEM_TEXT("{\n"s);
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gVerify;
+    content += TextParsing::gBrackets;
+    content += TextParsing::gSmallConst;
+    content += TextParsing::gNewline;
+    content += TextParsing::gFunctionBeginBrackets;
 
     for (const auto& value : dataType)
     {
         content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("if (!");
+        content += TextParsing::gIfNot;
         content += StringUtility::ToFirstLetterLower(value);
-        content += SYSTEM_TEXT("Container)\n"s);
+        content += TextParsing::gContainer;
+        content += TextParsing::gRightBrackets;
+        content += TextParsing::gNewline;
 
         content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("{\n"s);
+        content += TextParsing::gFunctionBeginBrackets;
 
         content += TextParsing::gIndentation;
         content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("THROW_EXCEPTION(SYSTEM_TEXT(\""s);
+        content += TextParsing::gThrowException;
         content += StringUtility::ToFirstLetterLower(value);
-        content += SYSTEM_TEXT("表不存在。\"s))\n"s);
+        content += TextParsing::gNotExistent;
 
         content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("}\n"s);
+        content += TextParsing::gFunctionEndBrackets;
 
-        content += SYSTEM_TEXT("\n"s);
+        content += TextParsing::gNewline;
     }
 
-    content += SYSTEM_TEXT("}\n"s);
-    content += SYSTEM_TEXT("\n"s);
+    content += TextParsing::gFunctionEndBrackets;
+    content += TextParsing::gNewline;
 
-    content += SYSTEM_TEXT("#ifdef OPEN_CLASS_INVARIANT\n"s);
-    content += SYSTEM_TEXT("\n"s);
+    return content;
+}
 
-    content += SYSTEM_TEXT("bool "s);
+System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerIsValidDefinition(const String& className, const EnumType& dataType) const
+{
+    String content{};
+
+    content += TextParsing::gOpenClassInvariant;
+    content += TextParsing::gNewline;
+
+    content += TextParsing::gBool;
+    content += TextParsing::gSpace;
     content += nameSpace;
-    content += SYSTEM_TEXT("::"s);
+    content += TextParsing::gDoubleColon;
     content += className;
-    content += SYSTEM_TEXT("::IsValid() const noexcept\n"s);
-    content += SYSTEM_TEXT("{\n"s);
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gIsValid;
+    content += TextParsing::gFunctionBeginBrackets;
 
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("if ("s);
+    content += TextParsing::gIf;
 
-    index = 0;
+    int index = 0;
     for (const auto& value : dataType)
     {
         if (index != 0)
         {
-            content += SYSTEM_TEXT("        "s);
+            content += TextParsing::gMemberIndentation;
+            content += TextParsing::gSpace;
+            content += TextParsing::gSpace;
         }
 
         content += StringUtility::ToFirstLetterLower(value);
@@ -789,43 +807,103 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerDefaultFunction
 
         if (index == boost::numeric_cast<int>(dataType.size()) - 1)
         {
-            content += SYSTEM_TEXT(")\n"s);
+            content += TextParsing::gRightBrackets;
+            content += TextParsing::gNewline;
         }
         else
         {
-            content += SYSTEM_TEXT(" &&\n"s);
+            content += TextParsing::gAndNewline;
         }
 
         ++index;
     }
 
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("{\n"s);
+    content += TextParsing::gFunctionBeginBrackets;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("return true;\n"s);
+    content += TextParsing::gReturnTrue;
 
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("}\n"s);
+    content += TextParsing::gFunctionEndBrackets;
 
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("else\n"s);
+    content += TextParsing::gElse;
+    content += TextParsing::gNewline;
 
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("{\n"s);
+    content += TextParsing::gFunctionBeginBrackets;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("return false;\n"s);
+    content += TextParsing::gReturnFalse;
 
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("}\n"s);
+    content += TextParsing::gFunctionEndBrackets;
 
-    content += SYSTEM_TEXT("}\n"s);
-    content += SYSTEM_TEXT("\n"s);
-    content += SYSTEM_TEXT("#endif  // OPEN_CLASS_INVARIANT\n"s);
-    content += SYSTEM_TEXT("\n"s);
+    content += TextParsing::gFunctionEndBrackets;
+    content += TextParsing::gNewline;
+    content += TextParsing::gOpenClassInvariantEndif;
+    content += TextParsing::gNewline;
+
+    return content;
+}
+
+System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerDefaultFunctionDefinition() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    const auto className = nameSpace + TextParsing::gContainer.data();
+
+    auto content = nameSpace;
+    content += TextParsing::gDoubleColon;
+    content += className;
+    content += TextParsing::gDoubleColon;
+    content += className;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gDirectory;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gNewline;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gColon;
+    content += TextParsing::gSpace;
+
+    EnumType dataType{};
+
+    for (const auto& value : csvHeadContainer)
+    {
+        if (value.GetCSVFormatType() != CSVFormatType::Enum)
+        {
+            dataType.emplace(value.GetCSVClassName());
+        }
+    }
+
+    content += GenerateContainerDefaultFunctionMemberListDefinition(dataType);
+
+    content += TextParsing::gFunctionBeginBrackets;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gParsingDirectoryCall;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gVerify;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gSemicolonNewline;
+    content += TextParsing::gNewline;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gUserSelfClassIsValid1;
+    content += TextParsing::gFunctionEndBrackets;
+    content += TextParsing::gNewline;
+
+    content += GenerateContainerParsingDefinition(className, dataType);
+
+    content += GenerateContainerVerifyDefinition(className, dataType);
+
+    content += GenerateContainerIsValidDefinition(className, dataType);
 
     return content;
 }
@@ -837,9 +915,9 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerMember() const
     const auto className = nameSpace + TextParsing::gContainer.data();
 
     String content{ TextParsing::gIndentation };
-    content += SYSTEM_TEXT("private:\n"s);
+    content += TextParsing::gPrivate;
 
-    std::set<String> dataType{};
+    EnumType dataType{};
 
     for (const auto& value : csvHeadContainer)
     {
@@ -853,17 +931,20 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerMember() const
     {
         content += TextParsing::gIndentation;
         content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("std::shared_ptr<const "s);
+        content += TextParsing::gSharedPtrConst;
         content += value;
-        content += SYSTEM_TEXT("Container> ");
+        content += TextParsing::gContainer;
+        content += TextParsing::gRightAngleBracket;
+        content += TextParsing::gSpace;
         content += StringUtility::ToFirstLetterLower(value);
-        content += SYSTEM_TEXT("Container;\n");
+        content += TextParsing::gContainer;
+        content += TextParsing::gSemicolonNewline;
     }
 
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("};\n"s);
-    content += SYSTEM_TEXT("}\n"s);
-    content += SYSTEM_TEXT("\n"s);
+    content += TextParsing::gClassEndBrackets;
+    content += TextParsing::gFunctionEndBrackets;
+    content += TextParsing::gNewline;
 
     return content;
 }

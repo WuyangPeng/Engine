@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/16 21:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/04/03 17:08)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,7 +21,7 @@ CoreTools::DeltaTimeManagerImpl::DeltaTimeManagerImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, DeltaTimeManagerImpl);
 
-uint64_t CoreTools::DeltaTimeManagerImpl::GetElapsedTimeInMicroseconds() const noexcept
+int64_t CoreTools::DeltaTimeManagerImpl::GetElapsedTimeInMicroseconds() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -31,10 +31,10 @@ uint64_t CoreTools::DeltaTimeManagerImpl::GetElapsedTimeInMicroseconds() const n
 
     const auto deltaTime = result - initial;
 
-    return System::GetTimeInMicroseconds(deltaTime);
+    return GetTimeInMicroseconds(deltaTime);
 }
 
-uint64_t CoreTools::DeltaTimeManagerImpl::GetElapsedTimeInSeconds() const noexcept
+int64_t CoreTools::DeltaTimeManagerImpl::GetElapsedTimeInSeconds() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -44,7 +44,7 @@ uint64_t CoreTools::DeltaTimeManagerImpl::GetElapsedTimeInSeconds() const noexce
 
     const auto deltaTime = result - initial;
 
-    return System::GetTimeInSeconds(deltaTime);
+    return GetTimeInSeconds(deltaTime);
 }
 
 void CoreTools::DeltaTimeManagerImpl::ResetCurrentTime() noexcept
@@ -56,20 +56,20 @@ void CoreTools::DeltaTimeManagerImpl::ResetCurrentTime() noexcept
     initial = currentTime.GetDeltaTimeValueData();
 }
 
-uint64_t CoreTools::DeltaTimeManagerImpl::GetNowTimeInMicroseconds() const noexcept
+int64_t CoreTools::DeltaTimeManagerImpl::GetNowTimeInMicroseconds() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const System::CurrentDeltaTime currentTime{};
 
-    return System::GetTimeInMicroseconds(currentTime.GetDeltaTimeValueData());
+    return GetTimeInMicroseconds(currentTime.GetDeltaTimeValueData());
 }
 
-uint64_t CoreTools::DeltaTimeManagerImpl::GetNowTimeInSeconds() const noexcept
+int64_t CoreTools::DeltaTimeManagerImpl::GetNowTimeInSeconds() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const System::CurrentDeltaTime currentTime{};
 
-    return System::GetTimeInSeconds(currentTime.GetDeltaTimeValueData());
+    return GetTimeInSeconds(currentTime.GetDeltaTimeValueData());
 }

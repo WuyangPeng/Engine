@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 18:30)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:04)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_SET_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_SET_DETAIL_H
@@ -17,11 +17,11 @@ template <typename Value,
           typename GetReference,
           typename SetReference,
           typename Container,
-          ptrdiff_t (*FO)(),
-          GetReference (Container::*FG)() const,
-          void (Container::*FS)(SetReference)>
-CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FO, FG, FS>::MethodPropertyGetSet() noexcept
-    : m_Value{}
+          ptrdiff_t (*FunctionOffset)(),
+          GetReference (Container::*FunctionGet)() const,
+          void (Container::*FunctionSet)(SetReference)>
+CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FunctionOffset, FunctionGet, FunctionSet>::MethodPropertyGetSet() noexcept
+    : value{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -30,11 +30,11 @@ template <typename Value,
           typename GetReference,
           typename SetReference,
           typename Container,
-          ptrdiff_t (*FO)(),
-          GetReference (Container::*FG)() const,
-          void (Container::*FS)(SetReference)>
-CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FO, FG, FS>::MethodPropertyGetSet(SetReferenceType value)
-    : m_Value{ value }
+          ptrdiff_t (*FunctionOffset)(),
+          GetReference (Container::*FunctionGet)() const,
+          void (Container::*FunctionSet)(SetReference)>
+CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FunctionOffset, FunctionGet, FunctionSet>::MethodPropertyGetSet(SetReferenceType value)
+    : value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -44,10 +44,10 @@ template <typename Value,
           typename GetReference,
           typename SetReference,
           typename Container,
-          ptrdiff_t (*FO)(),
-          GetReference (Container::*FG)() const,
-          void (Container::*FS)(SetReference)>
-bool CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FO, FG, FS>::IsValid() const noexcept
+          ptrdiff_t (*FunctionOffset)(),
+          GetReference (Container::*FunctionGet)() const,
+          void (Container::*FunctionSet)(SetReference)>
+bool CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FunctionOffset, FunctionGet, FunctionSet>::IsValid() const noexcept
 {
     return true;
 }
@@ -57,14 +57,14 @@ template <typename Value,
           typename GetReference,
           typename SetReference,
           typename Container,
-          ptrdiff_t (*FO)(),
-          GetReference (Container::*FG)() const,
-          void (Container::*FS)(SetReference)>
-CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FO, FG, FS>::operator GetReferenceType() const noexcept
+          ptrdiff_t (*FunctionOffset)(),
+          GetReference (Container::*FunctionGet)() const,
+          void (Container::*FunctionSet)(SetReference)>
+CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FunctionOffset, FunctionGet, FunctionSet>::operator GetReferenceType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto offset = (*FO)();
+    const auto offset = (*FunctionOffset)();
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
@@ -75,21 +75,21 @@ CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FO
 
 #include STSTEM_WARNING_POP
 
-    return (thisPtr->*FG)();
+    return (thisPtr->*FunctionGet)();
 }
 
 template <typename Value,
           typename GetReference,
           typename SetReference,
           typename Container,
-          ptrdiff_t (*FO)(),
-          GetReference (Container::*FG)() const,
-          void (Container::*FS)(SetReference)>
-CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FO, FG, FS>& CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FO, FG, FS>::operator=(SetReferenceType value) noexcept
+          ptrdiff_t (*FunctionOffset)(),
+          GetReference (Container::*FunctionGet)() const,
+          void (Container::*FunctionSet)(SetReference)>
+CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FunctionOffset, FunctionGet, FunctionSet>& CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FunctionOffset, FunctionGet, FunctionSet>::operator=(SetReferenceType aValue) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto offset = (*FO)();
+    const auto offset = (*FunctionOffset)();
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -101,7 +101,7 @@ CoreTools::MethodPropertyGetSet<Value, GetReference, SetReference, Container, FO
 
     if (thisPtr != nullptr)
     {
-        (thisPtr->*FS)(value);
+        (thisPtr->*FunctionSet)(aValue);
     }
 
     return *this;

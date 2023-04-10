@@ -1497,7 +1497,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Properties\StaticPropertySetExternal.h">
       <Filter>Properties 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\EquilongReportOutputImpl.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\EquidistantReportOutputImpl.h">
       <Filter>ReportOutput 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\ReportOutput.h">
@@ -1512,7 +1512,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\Detail\UnitTestSuiteReportOutputImpl.h">
       <Filter>ReportOutput 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\EquilongReportOutput.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\EquidistantReportOutput.h">
       <Filter>ReportOutput 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\ReportOutput\ReportOutput.h">
@@ -1602,13 +1602,13 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustHaveBase.h">
       <Filter>TemplateTools 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\NonrecursiveCosine.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\NonRecursiveCosine.h">
       <Filter>TemplateTools 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\NonrecursiveSine.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\NonRecursiveSine.h">
       <Filter>TemplateTools 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\NonrecursiveTangent.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\NonRecursiveTangent.h">
       <Filter>TemplateTools 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ParamType.h">
@@ -3003,6 +3003,54 @@
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\OStreamAsynchronousParameter.h">
       <Filter>LogManager 头文件\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\LexicoArray2.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\LexicoArray2Detail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\AtomicMinMax.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\AtomicMinMaxDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ContainerAdapter.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\ContainerAdapterDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\RawIterators.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\RawIteratorsDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\RawPtrCompare.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Lattice.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\LatticeDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\TypeTraits.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MultiArray.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MultiArrayDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MultiArrayAdapter.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MultiArrayAdapterDetail.h">
+      <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -3482,13 +3530,13 @@
     <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\UnitTestSuiteReportOutputImpl.cpp">
       <Filter>ReportOutput 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\EquilongReportOutputImpl.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\EquidistantReportOutputImpl.cpp">
       <Filter>ReportOutput 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\Detail\ReportOutput.cpp">
       <Filter>ReportOutput 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\EquilongReportOutput.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\EquidistantReportOutput.cpp">
       <Filter>ReportOutput 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\ReportOutput\UnitTestFailReportOutput.cpp">

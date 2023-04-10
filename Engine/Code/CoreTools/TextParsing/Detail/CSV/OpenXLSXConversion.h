@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 11:11)
+///	引擎版本：0.9.0.5 (2023/04/03 20:04)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_OPEN_XLSX_CONVERSION_H
 #define CORE_TOOLS_TEXT_PARSING_OPEN_XLSX_CONVERSION_H
@@ -40,7 +40,7 @@ namespace CoreTools
         using String = System::String;
 
     public:
-        OpenXLSXConversion(const std::string& xlsxFileName, const String& csvFileName);
+        OpenXLSXConversion(const std::string& xlsxFileName, String csvFileName);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -69,6 +69,6 @@ namespace CoreTools
     };
 }
 
-#endif // CORE_TOOLS_USE_OPENXLSX
+#endif  // CORE_TOOLS_USE_OPENXLSX
 
 #endif  // CORE_TOOLS_TEXT_PARSING_OPEN_XLSX_CONVERSION_H`

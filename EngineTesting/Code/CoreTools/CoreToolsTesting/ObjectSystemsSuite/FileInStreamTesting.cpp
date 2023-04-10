@@ -39,11 +39,11 @@ void CoreTools::FileInStreamTesting::DoRunUnitTest()
 
 void CoreTools::FileInStreamTesting::MainTest()
 {
-    InitTerm::ExecuteInitializers();
+    InitTerm::ExecuteInitializer();
 
     ASSERT_NOT_THROW_EXCEPTION_0(FileStreamTest);
 
-    InitTerm::ExecuteTerminators();
+    InitTerm::ExecuteTerminator();
 }
 
 void CoreTools::FileInStreamTesting::FileStreamTest() noexcept

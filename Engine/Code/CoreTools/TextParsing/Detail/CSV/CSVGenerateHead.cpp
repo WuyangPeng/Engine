@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 17:38)
+///	引擎版本：0.9.0.5 (2023/04/04 17:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -99,17 +99,17 @@ System::String CoreTools::CSVGenerateHead::GenerateVectorHead() const
 
     if (csvHead.HasDataType(CSVDataType::BoolArray))
     {
-        content += TextParsing::gDeque;
+        content += TextParsing::gDequeInclude;
     }
 
     if (csvHead.HasMapping())
     {
-        content += TextParsing::gMemory;
+        content += TextParsing::gMemoryInclude;
     }
 
     if (csvHead.HasVectorArrayDataType())
     {
-        content += TextParsing::gVector;
+        content += TextParsing::gVectorInclude;
     }
 
     if (csvHead.HasArrayDataType())
@@ -126,17 +126,17 @@ System::String CoreTools::CSVGenerateHead::GenerateContainerHead() const
 
     if (csvHead.GetCSVFormatType() == CSVFormatType::TreeMap)
     {
-        content += TextParsing::gMap;
+        content += TextParsing::gMapInclude;
     }
 
-    content += TextParsing::gMemory;
+    content += TextParsing::gMemoryInclude;
 
     if (csvHead.GetCSVFormatType() == CSVFormatType::HashMap)
     {
-        content += TextParsing::gUnorderedMap;
+        content += TextParsing::gUnorderedMapInclude;
     }
 
-    content += TextParsing::gVector;
+    content += TextParsing::gVectorInclude;
     content += TextParsing::gNewlineCharacter;
 
     return content;
@@ -259,13 +259,13 @@ System::String CoreTools::CSVGenerateHead::GenerateContainerSourceHead() const
         content += TextParsing::gHeadDetailFileSuffix;
     }
 
-    content += TextParsing::gLogMacroMacro;
+    content += TextParsing::gLogMacro;
     content += TextParsing::gIncludeCSVContent;
     content += TextParsing::gIncludeCSVHead;
     content += TextParsing::gIncludeCSVRow;
     content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::gAlgorithm;
+    content += TextParsing::gAlgorithmInclude;
     content += TextParsing::gNewlineCharacter;
 
     return content;
@@ -285,7 +285,7 @@ System::String CoreTools::CSVGenerateHead::GenerateEnumSourceHead() const
     content += TextParsing::gExceptionMacro;
     content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::gMap;
+    content += TextParsing::gMapInclude;
     content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gUsingNamespaceLiterals;

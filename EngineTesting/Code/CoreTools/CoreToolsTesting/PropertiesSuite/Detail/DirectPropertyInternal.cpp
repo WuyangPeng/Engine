@@ -33,5 +33,5 @@ std::string CoreTools::DirectPropertyInternal::GetValue() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return setType.m_Value;
+    return setType.value;
 }

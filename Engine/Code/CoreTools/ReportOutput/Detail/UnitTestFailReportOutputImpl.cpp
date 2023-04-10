@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/21 18:20)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:50)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,11 +13,10 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 
-using std::string;
 using namespace std::literals;
 
-CoreTools::UnitTestFailReportOutputImpl::UnitTestFailReportOutputImpl(const string& failClassName, const string& fileName, int lineNumber, const string& errorMessage, const OStreamShared& streamShared)
-    : ParentType{ streamShared }, failClassName{ failClassName }, fileName{ fileName }, lineNumber{ lineNumber }, errorMessage{ errorMessage }
+CoreTools::UnitTestFailReportOutputImpl::UnitTestFailReportOutputImpl(std::string failClassName, std::string fileName, int lineNumber, std::string errorMessage, const OStreamShared& streamShared) noexcept
+    : ParentType{ streamShared }, failClassName{ std::move(failClassName) }, fileName{ std::move(fileName) }, lineNumber{ lineNumber }, errorMessage{ std::move(errorMessage) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

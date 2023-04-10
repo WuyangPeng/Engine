@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/21 15:35)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 16:20)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_TINY_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_TINY_H
@@ -296,189 +296,186 @@ namespace CoreTools
     };
 }
 
-namespace boost
+namespace boost::mpl
 {
-    namespace mpl
+    template <typename Tiny, typename Pos>
+    struct next<CoreTools::TinyIterator<Tiny, Pos>>
     {
-        template <typename Tiny, typename Pos>
-        struct next<CoreTools::TinyIterator<Tiny, Pos>>
-        {
-            using ClassType = next<CoreTools::TinyIterator<Tiny, Pos>>;
-            static_assert(boost::mpl::greater<typename size<Tiny>::type, Pos>::value, "next is error.");
+        using ClassType = next<CoreTools::TinyIterator<Tiny, Pos>>;
+        static_assert(boost::mpl::greater<typename size<Tiny>::type, Pos>::value, "next is error.");
 
-            using type = CoreTools::TinyIterator<Tiny, typename boost::mpl::next<Pos>::type>;
+        using type = CoreTools::TinyIterator<Tiny, typename boost::mpl::next<Pos>::type>;
+    };
+
+    template <typename Tiny, typename Pos>
+    struct prior<CoreTools::TinyIterator<Tiny, Pos>>
+    {
+        using ClassType = prior<CoreTools::TinyIterator<Tiny, Pos>>;
+        static_assert(boost::mpl::greater<Pos, CoreTools::TinyZero>::value, "prior is error.");
+
+        using type = CoreTools::TinyIterator<Tiny, typename boost::mpl::prior<Pos>::type>;
+    };
+
+    template <>
+    struct at_impl<CoreTools::TinyTag>
+    {
+        template <typename Tiny, typename N>
+        struct apply : CoreTools::TinyAt<Tiny, N::value>
+        {
+            using ClassType = apply<Tiny, N>;
+            static_assert(boost::mpl::greater<typename size<Tiny>::type, N>::value, "at_impl is error.");
+        };
+    };
+
+    template <typename Tiny, typename Pos>
+    struct deref<CoreTools::TinyIterator<Tiny, Pos>> : at<Tiny, Pos>
+    {
+        using ClassType = deref<CoreTools::TinyIterator<Tiny, Pos>>;
+        using ParentType = at<Tiny, Pos>;
+    };
+
+    template <typename Tiny, typename Pos, typename N>
+    struct advance<CoreTools::TinyIterator<Tiny, Pos>, N>
+    {
+        using NewPos = typename boost::mpl::plus<Pos, N>::type;
+        using ClassType = advance<CoreTools::TinyIterator<Tiny, Pos>>;
+
+        static_assert(boost::mpl::greater<typename size<Tiny>::type, NewPos>::value, "advance is error.");
+
+        static_assert(boost::mpl::greater<NewPos, boost::mpl::int_<-1>>::value, "advance is error.");
+
+        using type = CoreTools::TinyIterator<Tiny, NewPos>;
+    };
+
+    template <typename Tiny, typename Pos1, typename Pos2>
+    struct advance<CoreTools::TinyIterator<Tiny, Pos1>, CoreTools::TinyIterator<Tiny, Pos2>> : boost::mpl::minus<Pos2, Pos1>
+    {
+        using ClassType = advance<CoreTools::TinyIterator<Tiny, Pos1>, CoreTools::TinyIterator<Tiny, Pos2>>;
+    };
+
+    template <>
+    struct begin_impl<CoreTools::TinyTag>
+    {
+        template <typename Tiny>
+        struct apply
+        {
+            using type = CoreTools::TinyIterator<Tiny, CoreTools::TinyZero>;
+        };
+    };
+
+    template <>
+    struct end_impl<CoreTools::TinyTag>
+    {
+        template <typename Tiny>
+        struct apply
+        {
+            using ClassType = apply<Tiny>;
+            using type = CoreTools::TinyIterator<Tiny, typename CoreTools::TinySize<typename Tiny::ClassT0, typename Tiny::ClassT1, typename Tiny::ClassT2>::type>;
+        };
+    };
+
+    template <>
+    struct size_impl<CoreTools::TinyTag>
+    {
+        template <typename Tiny>
+        struct apply : CoreTools::TinySize<typename Tiny::ClassT0, typename Tiny::ClassT1, typename Tiny::ClassT2>
+        {
+            using ClassType = apply<Tiny>;
+        };
+    };
+
+    template <>
+    struct clear_impl<CoreTools::TinyTag>
+    {
+        template <typename TinyType>
+        struct apply : CoreTools::Tiny<>
+        {
+            using ClassType = apply<Tiny>;
+        };
+    };
+
+    template <>
+    struct push_front_impl<CoreTools::TinyTag>
+    {
+        template <typename TinyType, typename T>
+        struct apply : CoreTools::Tiny<T, typename TinyType::ClassT0, typename TinyType::ClassT1>
+        {
+            using ClassType = apply<TinyType, T>;
+            using ParentType = CoreTools::Tiny<T, typename TinyType::ClassT0, typename TinyType::ClassT1>;
+            static_assert(boost::mpl::less<typename size<TinyType>::type, CoreTools::TinyThree>::value, "push_front_impl is error");
+        };
+    };
+
+    template <>
+    struct push_back_impl<CoreTools::TinyTag>
+    {
+        template <typename TinyType, typename T>
+        struct apply : CoreTools::TinyInsert<TinyType, T, size<TinyType>::value>
+        {
+            using ClassType = apply<TinyType, T>;
+            using ParentType = CoreTools::TinyInsert<TinyType, T, size<TinyType>::value>;
+        };
+    };
+
+    template <>
+    struct insert_impl<CoreTools::TinyTag>
+    {
+        template <typename TinyType, typename Pos, typename T>
+        struct apply;
+
+        template <typename TinyType, typename Pos, typename T>
+        struct apply<TinyType, CoreTools::TinyIterator<TinyType, Pos>, T> : CoreTools::TinyInsert<TinyType, T, Pos::value>
+        {
+            using ClassType = apply<TinyType, CoreTools::TinyIterator<TinyType, Pos>, T>;
+            using ParentType = CoreTools::TinyInsert<TinyType, T, Pos::value>;
+        };
+    };
+
+    template <>
+    struct pop_front_impl<CoreTools::TinyTag>
+    {
+        template <typename T>
+        struct apply : CoreTools::CheckNotEmpty<T>,
+                       CoreTools::TinyPopFront<typename T::ClassT0, typename T::ClassT1, typename T::ClassT2>
+        {
+            using ClassType = apply<T>;
+            using ParentType = CoreTools::TinyPopFront<typename T::ClassT0, typename T::ClassT1, typename T::ClassT2>;
+        };
+    };
+
+    template <>
+    struct pop_back_impl<CoreTools::TinyTag>
+    {
+        template <typename T>
+        struct apply : CoreTools::CheckNotEmpty<T>,
+                       CoreTools::TinyPopBack<typename T::ClassT0, typename T::ClassT1, typename T::ClassT2>
+        {
+            using ClassType = apply<T>;
+            using ParentType = CoreTools::TinyPopBack<typename T::ClassT0, typename T::ClassT1, typename T::ClassT2>;
+        };
+    };
+
+    template <>
+    struct erase_impl<CoreTools::TinyTag>
+    {
+        template <typename TinyType, typename First, typename Last>
+        struct apply;
+
+        template <typename TinyType, typename First, typename Last>
+        struct apply<TinyType, CoreTools::TinyIterator<TinyType, First>, Last> : CoreTools::TinyErase<TinyType, First::value>
+        {
+            using ClassType = apply<TinyType, CoreTools::TinyIterator<TinyType, First>, Last>;
+            using ParentType = CoreTools::TinyErase<TinyType, First::value>;
+            static_assert(CoreTools::TinyHasItem<TinyType, First>::type::value, "erase_impl is error.");
         };
 
-        template <typename Tiny, typename Pos>
-        struct prior<CoreTools::TinyIterator<Tiny, Pos>>
+        template <typename TinyType, typename First, typename Last>
+        struct apply<TinyType, CoreTools::TinyIterator<TinyType, First>, CoreTools::TinyIterator<TinyType, Last>> : CoreTools::TinyEraseRange<TinyType, First::value, Last::value>
         {
-            using ClassType = prior<CoreTools::TinyIterator<Tiny, Pos>>;
-            static_assert(boost::mpl::greater<Pos, CoreTools::TinyZero>::value, "prior is error.");
-
-            using type = CoreTools::TinyIterator<Tiny, typename boost::mpl::prior<Pos>::type>;
+            using ClassType = apply<TinyType, CoreTools::TinyIterator<TinyType, First>, CoreTools::TinyIterator<TinyType, Last>>;
+            using ParentType = CoreTools::TinyEraseRange<TinyType, First::value, Last::value>;
         };
-
-        template <>
-        struct at_impl<CoreTools::TinyTag>
-        {
-            template <typename Tiny, typename N>
-            struct apply : CoreTools::TinyAt<Tiny, N::value>
-            {
-                using ClassType = apply<Tiny, N>;
-                static_assert(boost::mpl::greater<typename size<Tiny>::type, N>::value, "at_impl is error.");
-            };
-        };
-
-        template <typename Tiny, typename Pos>
-        struct deref<CoreTools::TinyIterator<Tiny, Pos>> : at<Tiny, Pos>
-        {
-            using ClassType = deref<CoreTools::TinyIterator<Tiny, Pos>>;
-            using ParentType = at<Tiny, Pos>;
-        };
-
-        template <typename Tiny, typename Pos, typename N>
-        struct advance<CoreTools::TinyIterator<Tiny, Pos>, N>
-        {
-            using NewPos = typename boost::mpl::plus<Pos, N>::type;
-            using ClassType = advance<CoreTools::TinyIterator<Tiny, Pos>>;
-
-            static_assert(boost::mpl::greater<typename size<Tiny>::type, NewPos>::value, "advance is error.");
-
-            static_assert(boost::mpl::greater<NewPos, boost::mpl::int_<-1>>::value, "advance is error.");
-
-            using type = CoreTools::TinyIterator<Tiny, NewPos>;
-        };
-
-        template <typename Tiny, typename Pos1, typename Pos2>
-        struct advance<CoreTools::TinyIterator<Tiny, Pos1>, CoreTools::TinyIterator<Tiny, Pos2>> : boost::mpl::minus<Pos2, Pos1>
-        {
-            using ClassType = advance<CoreTools::TinyIterator<Tiny, Pos1>, CoreTools::TinyIterator<Tiny, Pos2>>;
-        };
-
-        template <>
-        struct begin_impl<CoreTools::TinyTag>
-        {
-            template <typename Tiny>
-            struct apply
-            {
-                using type = CoreTools::TinyIterator<Tiny, CoreTools::TinyZero>;
-            };
-        };
-
-        template <>
-        struct end_impl<CoreTools::TinyTag>
-        {
-            template <typename Tiny>
-            struct apply
-            {
-                using ClassType = apply<Tiny>;
-                using type = CoreTools::TinyIterator<Tiny, typename CoreTools::TinySize<typename Tiny::ClassT0, typename Tiny::ClassT1, typename Tiny::ClassT2>::type>;
-            };
-        };
-
-        template <>
-        struct size_impl<CoreTools::TinyTag>
-        {
-            template <typename Tiny>
-            struct apply : CoreTools::TinySize<typename Tiny::ClassT0, typename Tiny::ClassT1, typename Tiny::ClassT2>
-            {
-                using ClassType = apply<Tiny>;
-            };
-        };
-
-        template <>
-        struct clear_impl<CoreTools::TinyTag>
-        {
-            template <typename TinyType>
-            struct apply : CoreTools::Tiny<>
-            {
-                using ClassType = apply<Tiny>;
-            };
-        };
-
-        template <>
-        struct push_front_impl<CoreTools::TinyTag>
-        {
-            template <typename TinyType, typename T>
-            struct apply : CoreTools::Tiny<T, typename TinyType::ClassT0, typename TinyType::ClassT1>
-            {
-                using ClassType = apply<TinyType, T>;
-                using ParentType = CoreTools::Tiny<T, typename TinyType::ClassT0, typename TinyType::ClassT1>;
-                static_assert(boost::mpl::less<typename size<TinyType>::type, CoreTools::TinyThree>::value, "push_front_impl is error");
-            };
-        };
-
-        template <>
-        struct push_back_impl<CoreTools::TinyTag>
-        {
-            template <typename TinyType, typename T>
-            struct apply : CoreTools::TinyInsert<TinyType, T, size<TinyType>::value>
-            {
-                using ClassType = apply<TinyType, T>;
-                using ParentType = CoreTools::TinyInsert<TinyType, T, size<TinyType>::value>;
-            };
-        };
-
-        template <>
-        struct insert_impl<CoreTools::TinyTag>
-        {
-            template <typename TinyType, typename Pos, typename T>
-            struct apply;
-
-            template <typename TinyType, typename Pos, typename T>
-            struct apply<TinyType, CoreTools::TinyIterator<TinyType, Pos>, T> : CoreTools::TinyInsert<TinyType, T, Pos::value>
-            {
-                using ClassType = apply<TinyType, CoreTools::TinyIterator<TinyType, Pos>, T>;
-                using ParentType = CoreTools::TinyInsert<TinyType, T, Pos::value>;
-            };
-        };
-
-        template <>
-        struct pop_front_impl<CoreTools::TinyTag>
-        {
-            template <typename T>
-            struct apply : CoreTools::CheckNotEmpty<T>,
-                           CoreTools::TinyPopFront<typename T::ClassT0, typename T::ClassT1, typename T::ClassT2>
-            {
-                using ClassType = apply<T>;
-                using ParentType = CoreTools::TinyPopFront<typename T::ClassT0, typename T::ClassT1, typename T::ClassT2>;
-            };
-        };
-
-        template <>
-        struct pop_back_impl<CoreTools::TinyTag>
-        {
-            template <typename T>
-            struct apply : CoreTools::CheckNotEmpty<T>,
-                           CoreTools::TinyPopBack<typename T::ClassT0, typename T::ClassT1, typename T::ClassT2>
-            {
-                using ClassType = apply<T>;
-                using ParentType = CoreTools::TinyPopBack<typename T::ClassT0, typename T::ClassT1, typename T::ClassT2>;
-            };
-        };
-
-        template <>
-        struct erase_impl<CoreTools::TinyTag>
-        {
-            template <typename TinyType, typename First, typename Last>
-            struct apply;
-
-            template <typename TinyType, typename First, typename Last>
-            struct apply<TinyType, CoreTools::TinyIterator<TinyType, First>, Last> : CoreTools::TinyErase<TinyType, First::value>
-            {
-                using ClassType = apply<TinyType, CoreTools::TinyIterator<TinyType, First>, Last>;
-                using ParentType = CoreTools::TinyErase<TinyType, First::value>;
-                static_assert(CoreTools::TinyHasItem<TinyType, First>::type::value, "erase_impl is error.");
-            };
-
-            template <typename TinyType, typename First, typename Last>
-            struct apply<TinyType, CoreTools::TinyIterator<TinyType, First>, CoreTools::TinyIterator<TinyType, Last>> : CoreTools::TinyEraseRange<TinyType, First::value, Last::value>
-            {
-                using ClassType = apply<TinyType, CoreTools::TinyIterator<TinyType, First>, CoreTools::TinyIterator<TinyType, Last>>;
-                using ParentType = CoreTools::TinyEraseRange<TinyType, First::value, Last::value>;
-            };
-        };
-    }
+    };
 }
 
 #endif  //  CORE_TOOLS_TEMPLATE_TOOLS_TINY_H

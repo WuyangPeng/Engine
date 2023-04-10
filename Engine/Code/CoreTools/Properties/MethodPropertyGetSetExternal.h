@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 11:51)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 14:35)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_SET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_SET_EXTERNAL_H
@@ -24,16 +24,16 @@ namespace CoreTools
     template <typename GetReference,
               typename SetReference,
               typename Container,
-              ptrdiff_t (*FO)(),
-              GetReference (Container::*FG)() const,
-              void (Container::*FS)(SetReference)>
+              ptrdiff_t (*FunctionOffset)(),
+              GetReference (Container::*FunctionGet)() const,
+              void (Container::*FunctionSet)(SetReference)>
     class MethodPropertyGetSetExternal final
     {
     public:
         using GetReferenceType = GetReference;
         using SetReferenceType = SetReference;
         using ContainerType = Container;
-        using ClassType = MethodPropertyGetSetExternal<GetReferenceType, SetReferenceType, ContainerType, FO, FG, FS>;
+        using ClassType = MethodPropertyGetSetExternal<GetReferenceType, SetReferenceType, ContainerType, FunctionOffset, FunctionGet, FunctionSet>;
 
         MethodPropertyGetSetExternal() noexcept = default;
         ~MethodPropertyGetSetExternal() noexcept = default;

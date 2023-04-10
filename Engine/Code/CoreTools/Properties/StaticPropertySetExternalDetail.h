@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 18:59)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:39)
 
 #ifndef CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_SET_EXTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_SET_EXTERNAL_DETAIL_H
@@ -15,20 +15,20 @@
 
 #ifdef OPEN_CLASS_INVARIANT
 
-template <typename Reference, void (*PF)(Reference)>
-bool CoreTools::StaticPropertySetExternal<Reference, PF>::IsValid() const noexcept
+template <typename Reference, void (*PropertyFunction)(Reference)>
+bool CoreTools::StaticPropertySetExternal<Reference, PropertyFunction>::IsValid() const noexcept
 {
     return true;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
 
-template <typename Reference, void (*PF)(Reference)>
-CoreTools::StaticPropertySetExternal<Reference, PF>& CoreTools::StaticPropertySetExternal<Reference, PF>::operator=(ReferenceType value)
+template <typename Reference, void (*PropertyFunction)(Reference)>
+CoreTools::StaticPropertySetExternal<Reference, PropertyFunction>& CoreTools::StaticPropertySetExternal<Reference, PropertyFunction>::operator=(ReferenceType value)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    (*PF)(value);
+    (*PropertyFunction)(value);
 
     return *this;
 }

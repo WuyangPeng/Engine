@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/08 11:27)
+///	引擎版本：0.9.0.5 (2023/04/04 15:08)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -63,7 +63,7 @@ void CoreTools::SimpleCSV::Color::Set(const std::string& hexCode)
 
     if (8 < hexCode.size())
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, SYSTEM_TEXT("无效颜色值"s));
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Input, SYSTEM_TEXT("无效颜色值"s))
     }
 
     const auto hexCodeAlpha = hexCode.substr(0, 2);

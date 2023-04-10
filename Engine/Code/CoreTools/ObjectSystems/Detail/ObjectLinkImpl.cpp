@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 23:01)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/30 16:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -39,15 +39,13 @@ CoreTools::ObjectInterfaceSharedPtr CoreTools::ObjectLinkImpl::GetObjectInterfac
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    const auto iter = linked.find(uniqueID);
-
-    if (iter != linked.cend())
+    if (const auto iter = linked.find(uniqueID); iter != linked.cend())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("准备读取的object指针没有链接！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("准备读取的object指针没有链接！"s))
     }
 }
 
@@ -58,11 +56,11 @@ int CoreTools::ObjectLinkImpl::GetOrderedSize() const
     return boost::numeric_cast<int>(ordered.size());
 }
 
-void CoreTools::ObjectLinkImpl::Insert(uint64_t uniqueID, const ObjectInterfaceSharedPtr& object)
+void CoreTools::ObjectLinkImpl::Insert(int64_t uniqueId, const ObjectInterfaceSharedPtr& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    linked.insert({ uniqueID, object });
+    linked.emplace(uniqueId, object);
     ordered.emplace_back(object);
 }
 
@@ -70,8 +68,8 @@ void CoreTools::ObjectLinkImpl::Sort()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    sort(ordered.begin(), ordered.end(), [](const auto& lhs, const auto& rhs) noexcept {
-        return lhs->GetUniqueID() < rhs->GetUniqueID();
+    std::ranges::sort(ordered, [](const auto& lhs, const auto& rhs) noexcept {
+        return lhs->GetUniqueId() < rhs->GetUniqueId();
     });
 }
 

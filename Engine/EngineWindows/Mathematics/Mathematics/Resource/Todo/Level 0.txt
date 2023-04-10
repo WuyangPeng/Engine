@@ -1,5 +1,6 @@
 TODO Level 0
  
-0.8.0.2
+0.8.0.5
 
 1.  （Rational）ConversionInteger的uint64_t存在溢出的问题。
+2.  （Rational）增加SortPointsOnCircle类（LowLevel）。

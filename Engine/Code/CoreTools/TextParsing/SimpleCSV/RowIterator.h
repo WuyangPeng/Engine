@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/08 10:28)
+///	引擎版本：0.9.0.5 (2023/04/03 20:18)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ROW_ITERATOR_H
 #define CORE_TOOLS_TEXT_PARSING_ROW_ITERATOR_H

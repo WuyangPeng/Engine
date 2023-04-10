@@ -159,7 +159,7 @@ JsonConfigure::MonstersContainer::ConstDataSharedPtr JsonConfigure::MonstersCont
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("monsters表datadatas字段未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("monsters表data字段未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s))
     }
 }
 

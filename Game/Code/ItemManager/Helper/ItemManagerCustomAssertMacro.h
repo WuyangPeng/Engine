@@ -12,10 +12,11 @@
 
 #include "UserMacro.h"
 #include "CoreTools/Contract/Assertion.h"
+#include "CoreTools/Helper/CustomAssertMacro.h"
 
-#if defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
+#if defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
     #define ITEM_MANAGER_ASSERT_LEVEL 0
-#endif  // OPEN_IMPORTANT_EXCPTION_ASSERT
+#endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 
 #if !defined(ITEM_MANAGER_ASSERT_LEVEL)
     #define ITEM_MANAGER_ASSERT_LEVEL 4

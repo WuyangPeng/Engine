@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 22:59)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/30 16:56)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -44,13 +44,13 @@ int CoreTools::BufferTargetImpl::GetBytesWritten() const noexcept
     return target.GetBytesProcessed();
 }
 
-void CoreTools::BufferTargetImpl::WriteUniqueID(const ConstObjectInterfaceSharedPtr& object)
+void CoreTools::BufferTargetImpl::WriteUniqueId(const ConstObjectInterfaceSharedPtr& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    const auto uniqueID = objectRegister->GetUniqueID(object);
+    const auto uniqueId = objectRegister->GetUniqueId(object);
 
-    Write(CoreTools::GetStreamSize(uniqueID), &uniqueID);
+    Write(CoreTools::GetStreamSize(uniqueId), &uniqueId);
 }
 
 CoreTools::ConstFileBufferSharedPtr CoreTools::BufferTargetImpl::GetFileBuffer() const noexcept

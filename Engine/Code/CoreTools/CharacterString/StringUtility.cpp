@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/18 14:38)
+///	引擎版本：0.9.0.5 (2023/04/10 17:28)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,8 +22,10 @@ std::wstring CoreTools::StringUtility::ConvertNarrowToWide(const std::string& in
     std::wstring output{};
 
     std::ranges::transform(input, std::back_inserter(output),
-                           [](const char c) {
-                               return static_cast<wchar_t>(c);
+                           [](const char c) noexcept {
+                               const auto converted = std::btowc(c);
+
+                               return (converted != WEOF ? static_cast<wchar_t>(c) : L' ');
                            });
 
     return output;
@@ -35,7 +37,9 @@ std::string CoreTools::StringUtility::ConvertWideToNarrow(const std::wstring& in
 
     std::ranges::transform(input, std::back_inserter(output),
                            [](const wchar_t c) {
-                               return boost::numeric_cast<char>(c);
+                               const auto converted = std::wctob(c);
+
+                               return (converted != EOF ? boost::numeric_cast<char>(c) : ' ');
                            });
 
     return output;

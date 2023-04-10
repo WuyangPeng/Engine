@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/08 14:12)
+///	引擎版本：0.9.0.5 (2023/04/04 15:05)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -62,53 +62,69 @@ CoreTools::SimpleCSV::Worksheet::CellSharedPtr CoreTools::SimpleCSV::Worksheet::
 
 CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNode(int rowNumber, int columnNumber) const
 {
-    auto rowNode = GetRowNode(GetSheetData(), rowNumber);
+    const auto rowNode = GetRowNode(GetSheetData(), rowNumber);
 
-    if (const auto rowNodeColumnNumber = GetColumnNumber(rowNode); rowNodeColumnNumber == 0 || rowNodeColumnNumber < columnNumber)
+    if (const auto rowNodeColumnNumber = GetColumnNumber(rowNode);
+        rowNodeColumnNumber == 0 || rowNodeColumnNumber < columnNumber)
     {
-        const CellReference cellRef{ rowNumber, columnNumber };
-
-        auto cellNode = rowNode.append_child(TextParsing::gChildC.data());
-        cellNode.append_attribute(TextParsing::gAttributeR.data()).set_value(cellRef.GetAddress().c_str());
-
-        return rowNode.last_child();
+        return GetCellNodeInColumnNumber(rowNumber, columnNumber, rowNode);
     }
     else if (rowNodeColumnNumber - columnNumber < columnNumber)
     {
-        auto cellNode = rowNode.last_child();
-        while (columnNumber < CellReference::GetColumn(GetAttributeR(cellNode)))
-        {
-            cellNode = cellNode.previous_sibling();
-        }
-
-        if (CellReference::GetColumn(GetAttributeR(cellNode)) < columnNumber)
-        {
-            const CellReference cellRef{ rowNumber, columnNumber };
-
-            cellNode = rowNode.insert_child_after(TextParsing::gChildC.data(), cellNode);
-            cellNode.append_attribute(TextParsing::gAttributeR.data()).set_value(cellRef.GetAddress().c_str());
-        }
-
-        return cellNode;
+        return GetCellNodeInTwoColumnNumber(rowNumber, columnNumber, rowNode);
     }
     else
     {
-        auto cellNode = rowNode.first_child();
-        while (CellReference::GetColumn(GetAttributeR(cellNode)) < columnNumber)
-        {
-            cellNode = cellNode.next_sibling();
-        }
-
-        if (columnNumber < CellReference::GetColumn(GetAttributeR(cellNode)))
-        {
-            const CellReference cellRef{ rowNumber, columnNumber };
-
-            cellNode = rowNode.insert_child_before(TextParsing::gChildC.data(), cellNode);
-            cellNode.append_attribute(TextParsing::gAttributeR.data()).set_value(cellRef.GetAddress().c_str());
-        }
-
-        return cellNode;
+        return GetCellNodeGreaterTwoColumnNumber(rowNumber, columnNumber, rowNode);
     }
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNodeInColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode) const
+{
+    const CellReference cellRef{ rowNumber, columnNumber };
+
+    auto cellNode = rowNode.append_child(TextParsing::gChildC.data());
+    cellNode.append_attribute(TextParsing::gAttributeR.data()).set_value(cellRef.GetAddress().c_str());
+
+    return rowNode.last_child();
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNodeInTwoColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode) const
+{
+    auto cellNode = rowNode.last_child();
+    while (columnNumber < CellReference::GetColumn(GetAttributeR(cellNode)))
+    {
+        cellNode = cellNode.previous_sibling();
+    }
+
+    if (CellReference::GetColumn(GetAttributeR(cellNode)) < columnNumber)
+    {
+        const CellReference cellRef{ rowNumber, columnNumber };
+
+        cellNode = rowNode.insert_child_after(TextParsing::gChildC.data(), cellNode);
+        cellNode.append_attribute(TextParsing::gAttributeR.data()).set_value(cellRef.GetAddress().c_str());
+    }
+
+    return cellNode;
+}
+
+CoreTools::SimpleCSV::XMLNode CoreTools::SimpleCSV::Worksheet::GetCellNodeGreaterTwoColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode) const
+{
+    auto cellNode = rowNode.first_child();
+    while (CellReference::GetColumn(GetAttributeR(cellNode)) < columnNumber)
+    {
+        cellNode = cellNode.next_sibling();
+    }
+
+    if (columnNumber < CellReference::GetColumn(GetAttributeR(cellNode)))
+    {
+        const CellReference cellRef{ rowNumber, columnNumber };
+
+        cellNode = rowNode.insert_child_before(TextParsing::gChildC.data(), cellNode);
+        cellNode.append_attribute(TextParsing::gAttributeR.data()).set_value(cellRef.GetAddress().c_str());
+    }
+
+    return cellNode;
 }
 
 CoreTools::SimpleCSV::CellRange CoreTools::SimpleCSV::Worksheet::GetRange() const
@@ -362,30 +378,36 @@ void CoreTools::SimpleCSV::Worksheet::Init()
         dimensionNode.set_value(dimensions.substr(position + 1).c_str());
     }
 
-    if (auto colsNode = xmlDocument->first_child().child(TextParsing::gColumns.data()); colsNode.type() != pugi::node_null)
+    if (const auto colsNode = xmlDocument->first_child().child(TextParsing::gColumns.data());
+        colsNode.type() != pugi::node_null)
     {
-        auto currentNode = colsNode.first_child();
-        while (currentNode != nullptr)
+        Init(colsNode);
+    }
+}
+
+void CoreTools::SimpleCSV::Worksheet::Init(XMLNode colsNode)
+{
+    auto currentNode = colsNode.first_child();
+    while (currentNode != nullptr)
+    {
+        const auto min = GetAttributeMin(currentNode);
+        const auto max = GetAttributeMax(currentNode);
+        if (min != max)
         {
-            const auto min = GetAttributeMin(currentNode);
-            const auto max = GetAttributeMax(currentNode);
-            if (min != max)
+            currentNode.attribute(TextParsing::gMin.data()).set_value(max);
+            for (auto i = min; i < max; ++i)
             {
-                currentNode.attribute(TextParsing::gMin.data()).set_value(max);
-                for (auto i = min; i < max; ++i)
+                auto newNode = colsNode.insert_child_before(TextParsing::gColumn.data(), currentNode);
+                auto attr = currentNode.first_attribute();
+                while (attr != nullptr)
                 {
-                    auto newNode = colsNode.insert_child_before(TextParsing::gColumn.data(), currentNode);
-                    auto attr = currentNode.first_attribute();
-                    while (attr != nullptr)
-                    {
-                        newNode.append_attribute(attr.name()) = attr.value();
-                        attr = attr.next_attribute();
-                    }
-                    newNode.attribute(TextParsing::gMin.data()) = i;
-                    newNode.attribute(TextParsing::gMax.data()) = i;
+                    newNode.append_attribute(attr.name()) = attr.value();
+                    attr = attr.next_attribute();
                 }
+                newNode.attribute(TextParsing::gMin.data()) = i;
+                newNode.attribute(TextParsing::gMax.data()) = i;
             }
-            currentNode = currentNode.next_sibling();
         }
+        currentNode = currentNode.next_sibling();
     }
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 09:24)
+///	引擎版本：0.9.0.5 (2023/04/04 17:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -121,6 +121,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateVariableFunc
 
     if (const auto dataType = csvHead.GetDataType(index); CSVDataType::Bool <= dataType && dataType <= CSVDataType::IntVector4)
     {
+        content += TextParsing::gSpace;
         content += TextParsing::gNoexcept;
     }
 
@@ -151,6 +152,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetEnumR
     auto content = GenerateIndentation(1);
 
     content += TextParsing::gReturn;
+    content += TextParsing::gSpace;
     content += actualType;
     content += TextParsing::gInit;
     content += TextParsing::gSemicolonNewline;

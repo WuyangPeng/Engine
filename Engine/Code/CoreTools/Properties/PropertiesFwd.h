@@ -1,82 +1,140 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 17:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 14:43)
 
 #ifndef CORE_TOOLS_PROPERTIES_FWD_H
 #define CORE_TOOLS_PROPERTIES_FWD_H
 
 namespace CoreTools
 {
-    template <typename Value, typename ConstReference>
+    template <typename Value,
+              typename ConstReference>
     class SimplePropertyGetExternal;
 
-    template <typename Value, typename Reference>
+    template <typename Value,
+              typename Reference>
     class SimplePropertySetExternal;
 
-    template <typename T, typename ConstReference, ConstReference (T::*PF)() const>
+    template <typename T,
+              typename ConstReference,
+              ConstReference (T::*PropertyFunction)() const>
     class PropertyGetExternal;
 
-    template <typename T, typename Reference, void (T::*PF)(Reference)>
+    template <typename T,
+              typename Reference,
+              void (T::*PropertyFunction)(Reference)>
     class PropertySetExternal;
 
-    template <typename T, typename GetReference, GetReference (T::*FG)(void) const,
-              typename SetReference, void (T::*FS)(SetReference)>
+    template <typename T,
+              typename GetReference,
+              GetReference (T::*PropertyGet)() const,
+              typename SetReference,
+              void (T::*PropertySet)(SetReference)>
     class PropertyGetSetExternal;
 
-    template <typename ConstReference, ConstReference (*PF)()>
+    template <typename ConstReference,
+              ConstReference (*PropertyFunction)()>
     class StaticPropertyGetExternal;
 
-    template <typename Reference, void (*PF)(Reference)>
+    template <typename Reference,
+              void (*PropertyFunction)(Reference)>
     class StaticPropertySetExternal;
 
-    template <typename GetReference, typename SetReference, GetReference (*FG)(void), void (*FS)(SetReference)>
+    template <typename GetReference,
+              typename SetReference,
+              GetReference (*PropertyGet)(),
+              void (*PropertySet)(SetReference)>
     class StaticPropertyGetSetExternal;
 
-    template <typename Value, typename Reference, typename Container>
+    template <typename Value,
+              typename Reference,
+              typename Container>
     class DirectPropertyGetInternal;
 
-    template <typename Value, typename Reference, typename Container>
+    template <typename Value,
+              typename Reference,
+              typename Container>
     class DirectPropertySetInternal;
 
-    template <typename T, typename ConstReference, ConstReference (T::*PF)() const, ptrdiff_t (*FO)()>
+    template <typename T,
+              typename ConstReference,
+              ConstReference (T::*PropertyFunction)() const,
+              ptrdiff_t (*FunctionOffset)()>
     class PropertyGetExternalOffset;
 
-    template <typename T, typename V, typename Reference, Reference (T::*PF)() const, ptrdiff_t (*FO)()>
+    template <typename T,
+              typename V,
+              typename Reference,
+              Reference (T::*PropertyFunction)() const,
+              ptrdiff_t (*FunctionOffset)()>
     class PropertyGetInternalOffset;
 
-    template <typename Value, typename ConstReference, typename Container, ptrdiff_t (*FO)(), ConstReference (Container::*FG)() const>
+    template <typename Value,
+              typename ConstReference,
+              typename Container,
+              ptrdiff_t (*FunctionOffset)(),
+              ConstReference (Container::*FunctionGet)() const>
     class MethodPropertyGet;
 
-    template <typename Value, typename Reference, typename Container, ptrdiff_t (*FO)(), void (Container::*FS)(Reference)>
+    template <typename Value,
+              typename Reference,
+              typename Container,
+              ptrdiff_t (*FunctionOffset)(),
+              void (Container::*FunctionSet)(Reference)>
     class MethodPropertySet;
 
-    template <typename Value, typename GetReference, typename SetReference, typename Container,
-              ptrdiff_t (*FO)(), GetReference (Container::*FG)() const, void (Container::*FS)(SetReference)>
+    template <typename Value,
+              typename GetReference,
+              typename SetReference,
+              typename Container,
+              ptrdiff_t (*FunctionOffset)(),
+              GetReference (Container::*FunctionGet)() const,
+              void (Container::*FunctionSet)(SetReference)>
     class MethodPropertyGetSet;
 
-    template <typename ConstReference, typename Container, ptrdiff_t (*FO)(), ConstReference (Container::*FG)() const>
+    template <typename ConstReference,
+              typename Container,
+              ptrdiff_t (*FunctionOffset)(),
+              ConstReference (Container::*FunctionGet)() const>
     class MethodPropertyGetExternal;
 
-    template <typename Reference, typename Container, ptrdiff_t (*FO)(), void (Container::*FS)(Reference)>
+    template <typename Reference,
+              typename Container,
+              ptrdiff_t (*FunctionOffset)(),
+              void (Container::*FunctionSet)(Reference)>
     class MethodPropertySetExternal;
 
-    template <typename GetReference, typename SetReference, typename Container,
-              ptrdiff_t (*FO)(), GetReference (Container::*FG)() const, void (Container::*FS)(SetReference)>
+    template <typename GetReference,
+              typename SetReference,
+              typename Container,
+              ptrdiff_t (*FunctionOffset)(),
+              GetReference (Container::*FunctionGet)() const,
+              void (Container::*FunctionSet)(SetReference)>
     class MethodPropertyGetSetExternal;
 
-    template <typename V, typename GetReference, typename SetReference, typename Container,
-              GetReference (*FG)(void), void (*FS)(SetReference)>
+    template <typename V,
+              typename GetReference,
+              typename SetReference,
+              typename Container,
+              GetReference (*FunctionGet)(),
+              void (*FunctionSet)(SetReference)>
     class StaticPropertyGetSet;
 
-    template <typename ID, typename T>
+    template <typename Id,
+              typename T>
     class PropertyBase;
 
-    template <typename ID, typename T, typename V, typename R, void (T::*FS)(R), R (T::*FG)() const>
+    template <typename Id,
+              typename T,
+              typename V,
+              typename R,
+              void (T::*FunctionSet)(R),
+              R (T::*FunctionGet)() const>
     class Property;
 }
 

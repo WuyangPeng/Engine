@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 18:08)
+///	引擎版本：0.9.0.5 (2023/04/04 17:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -28,7 +28,7 @@ System::String CoreTools::JsonTotalGenerateContainerHeadFile::GetFileSuffix() co
 
 System::String CoreTools::JsonTotalGenerateContainerHeadFile::GetContent() const
 {
-    auto content = GenerateCopyright();
+    String content{ TextParsing::gCopyright };
 
     content += GenerateNewLine();
     content += GenerateContainerHeaderGuard();

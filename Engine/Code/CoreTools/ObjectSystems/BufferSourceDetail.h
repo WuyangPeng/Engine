@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 23:13)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/29 16:55)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_DETAIL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_DETAIL_H
@@ -312,7 +312,7 @@ void CoreTools::BufferSource::ReadContainer(int elementsNumber, std::vector<T>& 
 
     if (0 < elementsNumber)
     {
-        source.Read(CoreTools::GetStreamSize(elementsNumber), elementsNumber, container.data());
+        source.Read(GetStreamSize(elementsNumber), elementsNumber, container.data());
     }
 }
 
@@ -481,7 +481,7 @@ void CoreTools::BufferSource::ReadEnumContainer(int elementsNumber, std::vector<
 
     if (0 < elementsNumber)
     {
-        source.Read(CoreTools::GetStreamSize(elementsNumber), elementsNumber, container.data());
+        source.Read(GetStreamSize(elementsNumber), elementsNumber, container.data());
     }
 }
 
@@ -610,7 +610,7 @@ T CoreTools::BufferSource::ReadObjectAssociated()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "T::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename T::ObjectType>, "T::ObjectType is not base of ObjectInterface");
 
     T datum{};
 
@@ -625,7 +625,7 @@ T CoreTools::BufferSource::ReadObjectAssociatedContainerWithNumber(int elementsN
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     T result{};
 
@@ -643,7 +643,7 @@ T CoreTools::BufferSource::ReadObjectAssociatedContainerWithoutNumber()
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -656,7 +656,7 @@ std::array<T, Size> CoreTools::BufferSource::ReadObjectAssociatedContainer()
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     return ReadObjectAssociatedContainerWithNumber<std::array<T, Size>>(Size);
 }
@@ -666,7 +666,7 @@ void CoreTools::BufferSource::ReadObjectAssociated(T& datum)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     datum.object.reset();
     source.Read(CoreTools::GetStreamSize(datum.associated), &datum.associated);
@@ -678,7 +678,7 @@ void CoreTools::BufferSource::ReadObjectAssociatedContainer(int elementsNumber, 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -692,7 +692,7 @@ void CoreTools::BufferSource::ReadObjectAssociatedContainer(int elementsNumber, 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -706,7 +706,7 @@ void CoreTools::BufferSource::ReadObjectAssociatedContainer(T& container)
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -719,7 +719,7 @@ void CoreTools::BufferSource::ReadObjectAssociatedContainer(std::array<T, Size>&
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     ReadObjectAssociatedContainer(Size, container);
 }

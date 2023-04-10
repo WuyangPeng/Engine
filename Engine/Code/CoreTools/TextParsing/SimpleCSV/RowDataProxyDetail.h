@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/14 09:10)
+///	引擎版本：0.9.0.5 (2023/04/03 19:59)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ROW_DATA_PROXY_DETAIL_H
 #define CORE_TOOLS_TEXT_PARSING_ROW_DATA_PROXY_DETAIL_H
 
 #include "Cell.h"
-#include "CellValueProxy.h"
 #include "Constants.h"
 #include "RowDataProxy.h"
 #include "RowDataRange.h"
@@ -62,8 +61,8 @@ void CoreTools::SimpleCSV::RowDataProxy::SetContainer(const T& rhs)
 {
     RowDataRange range{ GetDocument(), GetRowNode(), 1, boost::numeric_cast<int>(rhs.size()), GetSharedStrings() };
 
-    auto target = range.begin();
-    for (const auto& source : rhs)
+    for (auto target = range.begin();
+         const auto& source : rhs)
     {
         if (target == range.end())
         {
@@ -89,7 +88,8 @@ Container CoreTools::SimpleCSV::RowDataProxy::ConvertContainer() const
 {
     Container container{};
 
-    for (auto iter = std::inserter(container, container.end()); const auto& value : GetValues())
+    for (auto iter = std::inserter(container, container.end());
+         const auto& value : GetValues())
     {
         if constexpr (std::is_same_v<typename Container::value_type, CellValue>)
         {

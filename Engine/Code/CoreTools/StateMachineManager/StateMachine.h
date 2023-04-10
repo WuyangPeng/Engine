@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/21 16:12)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:57)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_H
 #define CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_H
@@ -34,13 +34,13 @@ namespace CoreTools
 
     public:
         template <typename EventType>
-        NODISCARD StateType CallNoTransition(StateType state, const EventType& eventType);
+        NODISCARD StateType CallNoTransition(StateType aState, const EventType& eventType);
 
         template <typename EventType>
         NODISCARD StateType ProcessEvent(const EventType& eventType);
 
         template <typename EventType>
-        NODISCARD StateType NoTransition(StateType state, const EventType& eventType) noexcept;
+        NODISCARD StateType NoTransition(StateType aState, const EventType& eventType) noexcept;
 
         NODISCARD StateType GetStateType() const noexcept;
 
@@ -48,11 +48,11 @@ namespace CoreTools
         void SetStateType(StateType stateType) noexcept;
 
     private:
-        StateType m_State;
+        StateType state;
     };
 }
 
-// 使用StateMachiner的方式：
+// 使用StateMachine的方式：
 
 // 第一步：定义下列的类：
 // struct Play { };

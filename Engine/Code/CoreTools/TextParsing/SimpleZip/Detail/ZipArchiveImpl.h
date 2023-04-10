@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/06 11:16)
+///	引擎版本：0.9.0.5 (2023/04/03 20:14)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ZIP_ARCHIVE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_ZIP_ARCHIVE_IMPL_H
@@ -96,6 +96,8 @@ namespace CoreTools::SimpleZip
         ZipEntry AddEntryImpl(const std::string& name, const ZipEntryData& data);
 
         NODISCARD std::string GetRandomFileName(const std::string& saveFileName) const;
+
+        static void GetEntryNames(const std::string& dir, EntryNamesType& result);
 
     private:
         using ZipEntryType = std::vector<ZipEntry>;

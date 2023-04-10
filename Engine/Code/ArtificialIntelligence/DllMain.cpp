@@ -4,9 +4,9 @@
 // 
 // ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 10:07)
 
-#include "ArtificialIntellegence/ArtificialIntellegenceExport.h"
+#include "ArtificialIntelligence/ArtificialIntelligenceExport.h"
 
-#include "ArtificialIntellegence/ArtificialIntellegenceFwd.h" 
+#include "ArtificialIntelligence/ArtificialIntelligenceFwd.h" 
 
 #include "CoreTools/Helper/MainFunctionMacro.h"
 

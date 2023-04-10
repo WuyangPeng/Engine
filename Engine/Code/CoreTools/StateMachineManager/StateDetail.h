@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/21 16:16)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 16:00)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_DETAIL_H
 #define CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_DETAIL_H
@@ -16,7 +16,7 @@
 
 template <typename EventType>
 CoreTools::State<EventType>::State() noexcept
-    : m_Entity{}
+    : entity{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -32,11 +32,11 @@ bool CoreTools::State<EventType>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename EntityType>
-void CoreTools::State<EntityType>::Enter(EntityTypeSharedPtr entity)
+void CoreTools::State<EntityType>::Enter(EntityTypeSharedPtr aEntity)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Entity = entity;
+    entity = aEntity;
 
     DoEnter();
 }
@@ -46,15 +46,13 @@ typename CoreTools::State<EntityType>::EntityTypeSharedPtr CoreTools::State<Enti
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto entity = m_Entity.lock();
-
-    if (entity)
+    if (const auto entitySharedPtr = entity.lock(); entitySharedPtr)
     {
-        return entity;
+        return entitySharedPtr;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("实体已释放"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("实体已释放"s))
     }
 }
 
@@ -66,10 +64,9 @@ typename CoreTools::State<EntityType>::StateSharedPtr CoreTools::State<EntityTyp
     return GetOwner()->GetPossiblePreviousState();
 }
 
-// static
 template <typename EventType>
 template <typename StateType, typename ResultType, typename... Args>
-static std::shared_ptr<ResultType> CoreTools::State<EventType>::MakeState(Args&&... args)
+std::shared_ptr<ResultType> CoreTools::State<EventType>::MakeState(Args&&... args)
 {
     return std::make_shared<StateType>(args...);
 }
@@ -83,7 +80,7 @@ const CoreTools::Rtti& CoreTools::State<EntityType>::GetRttiType() const noexcep
 template <typename EntityType>
 const CoreTools::Rtti& CoreTools::State<EntityType>::GetCurrentRttiType() noexcept
 {
-    static const CoreTools::Rtti rtti{ "CoreTools.State<EntityType>", nullptr };
+    static const Rtti rtti{ "CoreTools.State<EntityType>", nullptr };
 
     return rtti;
 }

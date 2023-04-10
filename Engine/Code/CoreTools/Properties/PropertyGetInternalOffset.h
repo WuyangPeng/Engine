@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 18:02)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 14:54)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_GET_INTERNAL_OFFSET_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_GET_INTERNAL_OFFSET_H
@@ -23,12 +23,12 @@
 
 namespace CoreTools
 {
-    template <typename T, typename V, typename Reference, Reference (T::*PF)() const, ptrdiff_t (*FO)()>
+    template <typename T, typename V, typename Reference, Reference (T::*PropertyFunction)() const, ptrdiff_t (*FunctionOffset)()>
     class PropertyGetInternalOffset final
     {
     public:
         using ReferenceType = Reference;
-        using ClassType = PropertyGetInternalOffset<T, V, ReferenceType, PF, FO>;
+        using ClassType = PropertyGetInternalOffset<T, V, ReferenceType, PropertyFunction, FunctionOffset>;
 
     public:
         CLASS_INVARIANT_DECLARE;
@@ -36,8 +36,8 @@ namespace CoreTools
     private:
         explicit PropertyGetInternalOffset(ReferenceType value);
 
-        PropertyGetInternalOffset& operator=(ReferenceType value);
-        void SetValue(ReferenceType value);
+        PropertyGetInternalOffset& operator=(ReferenceType aValue);
+        void SetValue(ReferenceType aValue);
         NODISCARD ReferenceType GetValue() const;
 
         TCRE_DECLARE_TEMPLATE_PARAM_AS_FRIEND(T);

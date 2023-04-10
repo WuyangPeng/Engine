@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 09:47)
+///	引擎版本：0.9.0.5 (2023/04/04 16:53)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,8 +15,6 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
-
-using namespace std::literals;
 
 CoreTools::EnumHeadFileParsing::EnumHeadFileParsing(CSVHead csvHead, CSVContent csvContent, String className) noexcept
     : ParentType{ 0 }, csvHead{ std::move(csvHead) }, csvContent{ std::move(csvContent) }, className{ std::move(className) }
@@ -45,8 +43,8 @@ System::String CoreTools::EnumHeadFileParsing::GenerateEnumContent() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto idIndex = csvHead.GetDataIndex(TextParsing::gEnumIdDescribe);
-    const auto nameIndex = csvHead.GetDataIndex(TextParsing::gEnumNameDescribe);
+    const auto idIndex = csvHead.GetDataIndex(TextParsing::gIdSmall);
+    const auto nameIndex = csvHead.GetDataIndex(TextParsing::gEnumName);
     const auto describeIndex = csvHead.GetDataIndex(TextParsing::gEnumDescribe);
 
     String content{};
@@ -153,26 +151,6 @@ CoreTools::Parsing::String CoreTools::EnumHeadFileParsing::GenerateOperatorDescr
     content += csvHead.GetCSVClassName();
     content += TextParsing::gRightBrackets;
     content += TextParsing::gSemicolonNewline;
-
-    return content;
-}
-
-System::String CoreTools::EnumHeadFileParsing::GenerateEnumIoStreamOperator(const SplitType& element) const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    String content{};
-
-    if (csvHead.HasDataField(TextParsing::gIoStream))
-    {
-        if (const auto index = csvHead.GetDataIndex(TextParsing::gIoStream); IsOperatorTrue(element, index))
-        {
-            content += GenerateOperatorDescribe(SYSTEM_TEXT("ENUM_LEFT_SHIFTABLE_OPERATOR_DEFINE"s));
-            content += GenerateOperatorDescribe(SYSTEM_TEXT("ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE"s));
-            content += GenerateOperatorDescribe(SYSTEM_TEXT("ENUM_LEFT_SHIFTABLE_OPERATOR_WCHAR_DEFINE"s));
-            content += GenerateOperatorDescribe(SYSTEM_TEXT("ENUM_RIGHT_SHIFTABLE_OPERATOR_WCHAR_DEFINE"s));
-        }
-    }
 
     return content;
 }

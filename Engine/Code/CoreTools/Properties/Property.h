@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 17:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 14:44)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_H
@@ -17,12 +17,12 @@
 namespace CoreTools
 {
     // 需要通过宏TCRE_DECLARE_PROPERTY来声明属性
-    template <typename ID, typename T, typename V, typename R, void (T::*FS)(R), R (T::*FG)() const>
-    class Property : PropertyBase<ID, T>
+    template <typename Id, typename T, typename V, typename R, void (T::*FunctionSet)(R), R (T::*FunctionGet)() const>
+    class Property final : PropertyBase<Id, T>
     {
     public:
-        using ParentType = PropertyBase<ID, T>;
-        using ClassType = Property<ID, T, V, R, FS, FG>;
+        using ParentType = PropertyBase<Id, T>;
+        using ClassType = Property<Id, T, V, R, FunctionSet, FunctionGet>;
 
     public:
         Property() noexcept;
@@ -30,11 +30,11 @@ namespace CoreTools
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        Property& operator=(R value) noexcept;
+        Property& operator=(R aValue) noexcept;
         NODISCARD operator R() const noexcept;
 
     public:
-        V m_Value;
+        V value;
     };
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 09:31)
+///	引擎版本：0.9.0.5 (2023/04/04 17:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,8 +13,6 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
-
-using namespace std::literals;
 
 CoreTools::CheckingFunctionDefinitionParsing::CheckingFunctionDefinitionParsing(const CSVHead& csvHead, const String& className)
     : ParentType{ csvHead, className }
@@ -50,11 +48,12 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateChecking() 
 
     String content{ TextParsing::gVoid };
 
+    content += TextParsing::gSpace;
     content += GetNameSpace();
     content += TextParsing::gDoubleColon;
     content += GetCSVClassName();
     content += TextParsing::gDoubleColon;
-    content += TextParsing::gCheckingConst; 
+    content += TextParsing::gCheckingConst;
     content += TextParsing::gNewlineCharacter;
 
     return content;
@@ -111,6 +110,7 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateIsValid() c
 
     String content{ TextParsing::gBool };
 
+    content += TextParsing::gSpace;
     content += GetNameSpace();
     content += TextParsing::gDoubleColon;
     content += GetCSVClassName();
@@ -128,7 +128,7 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateThrowExcept
 
     content += TextParsing::gThrowException;
     content += variableName;
-    content += SYSTEM_TEXT(" 数据校验失败。\"s))\n"s);
+    content += TextParsing::gDataVerificationFailed;
 
     return content;
 }
@@ -139,9 +139,12 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateCheckingMem
 
     auto content = GenerateIndentation(1);
 
-    content += SYSTEM_TEXT("if (!(");
+    content += TextParsing::gIfNot;
+    content += TextParsing::gLeftBrackets;
     content += scopeExpression;
-    content += SYSTEM_TEXT("))\n"s);
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gNewline;
 
     return content;
 }
@@ -158,7 +161,8 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateIsValidAchi
         content += GenerateIsValidMember(index, index == 0);
     }
 
-    content += TextParsing::gRightBracket;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gNewline;
 
     constexpr auto indentation = 1;
 

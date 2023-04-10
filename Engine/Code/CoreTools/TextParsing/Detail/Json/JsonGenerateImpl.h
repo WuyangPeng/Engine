@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/10 13:38)
+///	引擎版本：0.9.0.5 (2023/04/03 20:05)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_JSON_GENERATE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_JSON_GENERATE_IMPL_H
@@ -42,7 +42,6 @@ namespace CoreTools
         NODISCARD static String GetOldContent(const String& fileName);
         NODISCARD JsonHead GetJsonHead() const noexcept;
 
-        NODISCARD static String GenerateCopyright();
         NODISCARD String GenerateHeaderGuard() const;
         NODISCARD String GenerateNameSpace() const;
         NODISCARD String GenerateInnerNameSpaceBegin() const;

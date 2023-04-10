@@ -1,31 +1,32 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/21 16:58)
-
-// 将信息输出至指定的ostream。TimeReportOutput为内部接口子类。实现输出当前时间和指定时间的功能。
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:46)
 
 #ifndef CORE_TOOLS_REPORT_OUTPUT_TIME_REPORT_OUTPUT_H
 #define CORE_TOOLS_REPORT_OUTPUT_TIME_REPORT_OUTPUT_H
 
-#include "EquilongReportOutputImpl.h"
+#include "EquidistantReportOutputImpl.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteInternalFwd.h"
 
+/// 将信息输出至指定的stream。
+/// TimeReportOutput为内部接口子类。
+/// 实现输出当前时间和指定时间的功能。
 namespace CoreTools
 {
-    class CORE_TOOLS_HIDDEN_DECLARE TimeReportOutput : public EquilongReportOutputImpl
+    class CORE_TOOLS_HIDDEN_DECLARE TimeReportOutput : public EquidistantReportOutputImpl
     {
     public:
         using ClassType = TimeReportOutput;
-        using ParentType = EquilongReportOutputImpl;
+        using ParentType = EquidistantReportOutputImpl;
         using CpuTimer = boost::timer::cpu_timer;
 
     public:
-        TimeReportOutput(const std::string& timeDescribe, int borderLineLength, const OStreamShared& streamShared);
+        TimeReportOutput(std::string timeDescribe, int borderLineLength, const OStreamShared& streamShared) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

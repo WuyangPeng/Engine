@@ -476,6 +476,7 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\NoexceptTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\ScopeExitTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\TriggerAssertTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CoroutineSuite\CoroutineSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck16Testing.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck32Testing.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTTesting.h" />

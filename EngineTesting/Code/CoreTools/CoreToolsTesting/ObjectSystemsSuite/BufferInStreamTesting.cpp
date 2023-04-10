@@ -34,7 +34,7 @@ void CoreTools::BufferInStreamTesting::DoRunUnitTest()
 
 void CoreTools::BufferInStreamTesting::MainTest()
 {
-    InitTerm::ExecuteInitializers();
+    InitTerm::ExecuteInitializer();
 
-    InitTerm::ExecuteTerminators();
+    InitTerm::ExecuteTerminator();
 }

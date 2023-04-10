@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/14 09:09)
+///	引擎版本：0.9.0.5 (2023/04/03 19:58)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_ROW_IMPL_DETAIL_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_ROW_IMPL_DETAIL_H
@@ -37,7 +37,8 @@ std::vector<T> CoreTools::CSVRowImpl::GetValueArray(const String& field) const
 
     std::vector<T> result{};
 
-    for (const auto column = GetArrayType(field); const auto& value : column)
+    for (const auto column = GetArrayType(field);
+         const auto& value : column)
     {
         if (value.empty())
         {

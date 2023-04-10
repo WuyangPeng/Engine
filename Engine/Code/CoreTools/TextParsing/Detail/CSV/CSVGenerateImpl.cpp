@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 17:43)
+///	引擎版本：0.9.0.5 (2023/04/04 17:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,8 +23,6 @@
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
-
-using namespace std::literals;
 
 CoreTools::CSVGenerateImpl::CSVGenerateImpl(const CSVHead& csvHead) noexcept
     : csvHead{ csvHead }
@@ -50,27 +48,6 @@ void CoreTools::CSVGenerateImpl::GenerateFile(const String& directory) const
 
         FileManagerHelper::SaveIntoFile(fileName, true, boost::numeric_cast<int>(result.size()), result.c_str());
     }
-}
-
-System::String CoreTools::CSVGenerateImpl::GenerateCopyright()
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    auto content = SYSTEM_TEXT("/// Copyright (c) 2010-\n"s);
-
-    content += SYSTEM_TEXT("/// Threading Core Render Engine\n"s);
-    content += TextParsing::gAnnotation;
-    content += TextParsing::gNewlineCharacter;
-
-    content += SYSTEM_TEXT("/// 作者：彭武阳，彭晔恩，彭晔泽\n"s);
-    content += SYSTEM_TEXT("/// 联系作者：94458936@qq.com\n"s);
-    content += TextParsing::gAnnotation;
-    content += TextParsing::gNewlineCharacter;
-
-    content += SYSTEM_TEXT("/// 标准：std:c++20\n"s);
-    content += SYSTEM_TEXT("/// 自动生成\n"s);
-
-    return content;
 }
 
 System::String CoreTools::CSVGenerateImpl::GenerateHeaderGuard() const
@@ -99,6 +76,7 @@ System::String CoreTools::CSVGenerateImpl::GenerateNameSpace() const
 
     String content{ TextParsing::gNamespace };
 
+    content += TextParsing::gSpace;
     content += csvHead.GetNameSpace();
     content += TextParsing::gNewlineCharacter;
     content += TextParsing::gFunctionBeginBrackets;

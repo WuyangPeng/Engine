@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/10 13:53)
+///	引擎版本：0.9.0.5 (2023/04/07 16:45)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,8 +21,6 @@
 #include "CoreTools/TextParsing/Json/JsonNode.h"
 #include "CoreTools/TextParsing/Json/JsonNodeContainer.h"
 
-using namespace std::literals;
-
 CoreTools::JsonGenerateDefaultFunctionDefinition::JsonGenerateDefaultFunctionDefinition(JsonHead jsonHead) noexcept
     : jsonHead{ std::move(jsonHead) }
 {
@@ -31,22 +29,40 @@ CoreTools::JsonGenerateDefaultFunctionDefinition::JsonGenerateDefaultFunctionDef
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, JsonGenerateDefaultFunctionDefinition)
 
-System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinition() const
+System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateJsonRowGetDefinition(const JsonNode& jsonNode, const StringView& jsonRowGet)
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    String content{};
 
-    const auto nameSpace = jsonHead.GetNameSpace();
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += jsonRowGet;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gSystemTextEnd;
+    content += TextParsing::gRightBrace;
 
-    auto content = nameSpace;
-    content += TextParsing::gDoubleColon;
-    content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
-    content += SYSTEM_TEXT("Container::"s);
-    content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
-    content += SYSTEM_TEXT("Container(const CoreTools::JsonRow& jsonRow)\n"s);
+    return content;
+}
 
-    content += TextParsing::gIndentation;
-    content += TextParsing::gColon;
+System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateJsonRowGetNestedDefinition(const JsonNode& jsonNode)
+{
+    String content{};
+
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gLeftBrace;
     content += TextParsing::gSpace;
+    content += TextParsing::gMakeShared;
+    content += TextParsing::gLeftAngleBracket;
+    content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
+    content += TextParsing::gGetJsonRow;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gGetNestedEnd;
+    content += TextParsing::gRightBrace;
+
+    return content;
+}
+
+System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateMemberListDefinition() const
+{
+    String content{};
 
     auto index = 0;
     for (const auto& value : jsonHead)
@@ -55,98 +71,63 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinit
         {
             case JsonDataType::String:
             {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetString(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetString);
             }
             break;
             case JsonDataType::Bool:
             {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetBool(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetBool);
             }
             break;
             case JsonDataType::Int:
             {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetInt(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetInt);
             }
             break;
             case JsonDataType::Int64:
             {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetInt64(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetInt64);
             }
             break;
             case JsonDataType::Double:
             {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetDouble(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetDouble);
             }
             break;
             case JsonDataType::Nested:
             {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ std::make_shared<"s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(">(jsonRow.GetJsonRow(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s))) }"s);
+                content += GenerateJsonRowGetNestedDefinition(*value);
             }
             break;
             case JsonDataType::StringArray:
             {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetStringArray(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetStringArray);
             }
             break;
             case JsonDataType::BoolArray:
             {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetBoolArray(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetBoolArray);
             }
             break;
             case JsonDataType::IntArray:
             {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetIntArray(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetIntArray);
             }
             break;
             case JsonDataType::Int64Array:
             {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetInt64Array(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetInt64Array);
             }
             break;
             case JsonDataType::DoubleArray:
             {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetDoubleArray(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetDoubleArray);
             }
             break;
             case JsonDataType::NestedArray:
             {
                 content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{}"s);
+                content += TextParsing::gInit;
             }
             break;
             default:
@@ -168,27 +149,170 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinit
         }
     }
 
-    content += TextParsing::gFunctionBeginBrackets;
+    return content;
+}
 
-    if (jsonHead.HasNested())
-    {
-        content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("Parsing(jsonRow);\n"s);
-        content += TextParsing::gNewlineCharacter;
-    }
+System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateParsingNestedArrayDefinition(const JsonNode& jsonNode) const
+{
+    String content{};
 
     content += TextParsing::gIndentation;
-    content += TextParsing::gUserSelfClassIsValid9;
-    content += TextParsing::gFunctionEndBrackets;
+    content += TextParsing::gSmallConst;
+    content += TextParsing::gSpace;
+    content += TextParsing::gAuto;
+    content += TextParsing::gSpace;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gGetJsonRowContainer;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gGetJsonRowContainerEnd;
+
     content += TextParsing::gNewlineCharacter;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gForLoop;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gRow;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gNewline;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gFunctionBeginBrackets;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gEmplaceBack;
+    content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
+    content += TextParsing::gDoubleColon;
+    content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
+    content += TextParsing::gValue;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gFunctionEndBrackets;
+
+    content += TextParsing::gNewlineCharacter;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gSort;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gFunction;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gGetIdLessReturn;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gLambdaEnd;
+
+    content += TextParsing::gNewlineCharacter;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gSmallConst;
+    content += TextParsing::gSpace;
+    content += TextParsing::gAuto;
+    content += TextParsing::gSpace;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gCapitalIter;
+
+    content += TextParsing::gSpace;
+    content += TextParsing::gEqualSign;
+    content += TextParsing::gSpace;
+    content += TextParsing::gRangesUnique;
+    content += TextParsing::gLeftBrackets;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gFunction;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gGetIdEqualReturn;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gLambdaEnd;
+
+    content += TextParsing::gNewlineCharacter;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIf;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gCapitalIter;
+    content += TextParsing::gDot;
+    content += TextParsing::gBegin;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gSpace;
+    content += TextParsing::gNotEqualSign;
+    content += TextParsing::gSpace;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gCapitalIter;
+    content += TextParsing::gDot;
+    content += TextParsing::gEnd;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gNewline;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gFunctionBeginBrackets;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gWarnLog;
+
+    content += TextParsing::gSystemText;
+    content += StringUtility::ToFirstLetterLower(jsonHead.GetJsonClassName());
+    content += TextParsing::gDataSheet;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gRepeatFieldHint;
+
+    content += TextParsing::gLogAssert;
+
+    content += TextParsing::gNewlineCharacter;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gDot;
+    content += TextParsing::gErase;
+    content += TextParsing::gLeftBrackets;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gCapitalIter;
+    content += TextParsing::gDot;
+    content += TextParsing::gBegin;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gComma;
+    content += TextParsing::gSpace;
+    content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+    content += TextParsing::gCapitalIter;
+    content += TextParsing::gDot;
+    content += TextParsing::gEnd;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gSemicolonNewline;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gFunctionEndBrackets;
+
+    return content;
+}
+
+System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateParsingDefinition(const String& nameSpace) const
+{
+    String content{};
 
     if (jsonHead.HasNested())
     {
-        content += SYSTEM_TEXT("void "s);
+        content += TextParsing::gVoid;
+        content += TextParsing::gSpace;
         content += nameSpace;
         content += TextParsing::gDoubleColon;
         content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
-        content += SYSTEM_TEXT("Container::Parsing(const CoreTools::JsonRow& jsonRow)\n"s);
+        content += TextParsing::gContainer;
+        content += TextParsing::gDoubleColon;
+        content += TextParsing::gParsing;
+        content += TextParsing::gJsonRowParameter;
+        content += TextParsing::gNewline;
 
         content += TextParsing::gFunctionBeginBrackets;
 
@@ -196,104 +320,7 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinit
         {
             if (const auto jsonDataType = value->GetJsonDataType(); jsonDataType == JsonDataType::NestedArray)
             {
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("const auto "s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Row = jsonRow.GetJsonRowContainer(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s));\n"s);
-
-                content += TextParsing::gNewlineCharacter;
-
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("for (const auto& value : "s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Row)\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gFunctionBeginBrackets;
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT(".emplace_back(std::make_shared<"s);
-                content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
-                content += TextParsing::gDoubleColon;
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(">(value));\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gFunctionEndBrackets;
-
-                content += TextParsing::gNewlineCharacter;
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gSort;
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT(", [](const auto& lhs, const auto& rhs) noexcept {\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("return (*lhs).GetId() < (*rhs).GetId();\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gLambdaEnd;
-
-                content += TextParsing::gNewlineCharacter;
-
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("const auto "s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Iter = std::ranges::unique("s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT(", [](const auto& lhs, const auto& rhs) noexcept {\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("return (*lhs).GetId() == (*rhs).GetId();\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gLambdaEnd;
-
-                content += TextParsing::gNewlineCharacter;
-
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("if ("s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Iter.begin() != "s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Iter.end())\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gFunctionBeginBrackets;
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("LOG_SINGLETON_ENGINE_APPENDER(Warn, User, ");
-
-                content += SYSTEM_TEXT("SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(jsonHead.GetJsonClassName());
-                content += SYSTEM_TEXT("表"s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("字段存在重复主键。\")"s);
-
-                content += SYSTEM_TEXT(", CoreTools::LogAppenderIOManageSign::TriggerAssert"s);
-
-                content += SYSTEM_TEXT(");\n"s);
-
-                content += TextParsing::gNewlineCharacter;
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT(".erase("s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Iter.begin(), "s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Iter.end());\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gFunctionEndBrackets;
+                content += GenerateParsingNestedArrayDefinition(*value);
             }
         }
 
@@ -301,179 +328,38 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinit
         content += TextParsing::gNewlineCharacter;
     }
 
-    content += SYSTEM_TEXT("CLASS_INVARIANT_STUB_DEFINE("s);
-    content += nameSpace;
-    content += SYSTEM_TEXT(", "s);
-    content += jsonHead.GetJsonClassName();
-    content += SYSTEM_TEXT("Container)\n"s);
-
-    content += TextParsing::gNewlineCharacter;
-
     return content;
 }
 
-System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinition(const JsonNode& jsonNode) const
+System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinition() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto nameSpace = jsonHead.GetNameSpace();
 
     auto content = nameSpace;
+
     content += TextParsing::gDoubleColon;
     content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
+    content += TextParsing::gContainer;
     content += TextParsing::gDoubleColon;
-    content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
-    content += TextParsing::gDoubleColon;
-    content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
-    content += SYSTEM_TEXT("(const CoreTools::JsonRow& jsonRow)\n"s);
+    content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
+    content += TextParsing::gContainer;
+    content += TextParsing::gJsonRowParameter;
+    content += TextParsing::gNewline;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gColon;
     content += TextParsing::gSpace;
 
-    auto container = JsonNodeContainer::Create();
-    for (const auto& value : jsonNode.GetJsonNodeContainer())
-    {
-        if (const auto jsonDataType = value->GetJsonDataType(); jsonDataType == JsonDataType::Nested || jsonDataType == JsonDataType::NestedArray)
-        {
-            container.AddJsonNode(value->GetJsonNodeContainer());
-        }
-        else if (!value->GetTypeName().empty())
-        {
-            container.AddJsonNode(value);
-        }
-    }
-
-    bool hasNestedArray = false;
-
-    auto index = 0;
-    for (const auto& value : container)
-    {
-        switch (const auto jsonDataType = value->GetJsonDataType(); jsonDataType)
-        {
-            case JsonDataType::String:
-            {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetString(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
-            }
-            break;
-            case JsonDataType::Bool:
-            {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetBool(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
-            }
-            break;
-            case JsonDataType::Int:
-            {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetInt(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
-            }
-            break;
-            case JsonDataType::Int64:
-            {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetInt64(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
-            }
-            break;
-            case JsonDataType::Double:
-            {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetDouble(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
-            }
-            break;
-            case JsonDataType::StringArray:
-            {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetStringArray(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
-            }
-            break;
-            case JsonDataType::BoolArray:
-            {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetBoolArray(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
-            }
-            break;
-            case JsonDataType::IntArray:
-            {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetIntArray(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
-            }
-            break;
-            case JsonDataType::Int64Array:
-            {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetInt64Array(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
-            }
-            break;
-            case JsonDataType::DoubleArray:
-            {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ jsonRow.GetDoubleArray(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s)) }"s);
-            }
-            break;
-            case JsonDataType::Nested:
-            {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ std::make_shared<"s);
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(">(jsonRow.GetJsonRow(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s))) }"s);
-            }
-            break;
-            case JsonDataType::NestedArray:
-            {
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{}"s);
-
-                hasNestedArray = true;
-            }
-            break;
-            default:
-                break;
-        }
-
-        ++index;
-        if (index == container.GetSize())
-        {
-            content += TextParsing::gNewlineCharacter;
-        }
-        else
-        {
-            content += TextParsing::gComma;
-            content += TextParsing::gNewlineCharacter;
-            content += TextParsing::gIndentation;
-            content += TextParsing::gSpace;
-            content += TextParsing::gSpace;
-        }
-    }
+    content += GenerateMemberListDefinition();
 
     content += TextParsing::gFunctionBeginBrackets;
 
-    if (hasNestedArray)
+    if (jsonHead.HasNested())
     {
         content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("Parsing(jsonRow);\n"s);
+        content += TextParsing::gParsingJsonRow;
         content += TextParsing::gNewlineCharacter;
     }
 
@@ -482,126 +368,25 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinit
     content += TextParsing::gFunctionEndBrackets;
     content += TextParsing::gNewlineCharacter;
 
-    if (hasNestedArray)
-    {
-        content += SYSTEM_TEXT("void "s);
-        content += nameSpace;
-        content += TextParsing::gDoubleColon;
-        content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
-        content += TextParsing::gDoubleColon;
-        content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
-        content += SYSTEM_TEXT("::Parsing(const CoreTools::JsonRow& jsonRow)\n"s);
+    content += GenerateParsingDefinition(nameSpace);
 
-        content += TextParsing::gFunctionBeginBrackets;
+    content += TextParsing::gClassInvariantStubDefine;
+    content += nameSpace;
+    content += TextParsing::gComma;
+    content += TextParsing::gSpace;
+    content += jsonHead.GetJsonClassName();
+    content += TextParsing::gContainer;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gNewline;
 
-        for (const auto& value : container)
-        {
-            if (const auto jsonDataType = value->GetJsonDataType(); jsonDataType == JsonDataType::NestedArray)
-            {
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("const auto "s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Row = jsonRow.GetJsonRowContainer(SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("\"s));\n"s);
+    content += TextParsing::gNewlineCharacter;
 
-                content += TextParsing::gNewlineCharacter;
+    return content;
+}
 
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("for (const auto& value : "s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Row)\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gFunctionBeginBrackets;
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT(".emplace_back(std::make_shared<"s);
-                content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
-                content += TextParsing::gDoubleColon;
-                content += StringUtility::ToFirstLetterUpper(value->GetTypeName());
-                content += SYSTEM_TEXT(">(value));\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gFunctionEndBrackets;
-
-                content += TextParsing::gNewlineCharacter;
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gSort;
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT(", [](const auto& lhs, const auto& rhs) noexcept {\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("return (*lhs).GetId() < (*rhs).GetId();\n"s);
-
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("});\n"s);
-
-                content += TextParsing::gNewlineCharacter;
-
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("const auto "s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Iter = std::ranges::unique("s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT(", [](const auto& lhs, const auto& rhs) noexcept {\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("return (*lhs).GetId() == (*rhs).GetId();\n"s);
-
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("});\n"s);
-
-                content += TextParsing::gNewlineCharacter;
-
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("if ("s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Iter.begin() != "s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Iter.end())\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gFunctionBeginBrackets;
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += SYSTEM_TEXT("LOG_SINGLETON_ENGINE_APPENDER(Warn, User, ");
-
-                content += SYSTEM_TEXT("SYSTEM_TEXT(\""s);
-                content += StringUtility::ToFirstLetterLower(jsonHead.GetJsonClassName());
-                content += SYSTEM_TEXT("表"s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("字段存在重复主键。\")"s);
-
-                content += SYSTEM_TEXT(", CoreTools::LogAppenderIOManageSign::TriggerAssert"s);
-
-                content += SYSTEM_TEXT(");\n"s);
-
-                content += TextParsing::gNewlineCharacter;
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gIndentation;
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT(".erase("s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Iter.begin(), "s);
-                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("Iter.end());\n"s);
-
-                content += TextParsing::gIndentation;
-                content += TextParsing::gFunctionEndBrackets;
-            }
-        }
-
-        content += TextParsing::gFunctionEndBrackets;
-        content += TextParsing::gNewlineCharacter;
-    }
+System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateIdConstructorDefinition(const JsonNode& jsonNode, const String& nameSpace, const JsonNodeContainer& container) const
+{
+    String content{};
 
     if (jsonNode.GetJsonDataType() == JsonDataType::NestedArray)
     {
@@ -612,24 +397,35 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinit
         content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
         content += TextParsing::gDoubleColon;
         content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
-        content += SYSTEM_TEXT("(int id) noexcept\n"s);
+        content += TextParsing::gLeftBrackets;
+        content += TextParsing::gInt;
+        content += TextParsing::gSpace;
+        content += TextParsing::gIdSmall;
+        content += TextParsing::gRightBrackets;
+        content += TextParsing::gSpace;
+        content += TextParsing::gNoexcept;
+        content += TextParsing::gNewline;
 
         content += TextParsing::gIndentation;
         content += TextParsing::gColon;
         content += TextParsing::gSpace;
 
-        index = 0;
+        auto index = 0;
         for (const auto& value : container)
         {
-            if (value->GetTypeName() == SYSTEM_TEXT("id"s))
+            if (value->GetTypeName() == TextParsing::gIdSmall)
             {
                 content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{ id }"s);
+                content += TextParsing::gLeftBrace;
+                content += TextParsing::gSpace;
+                content += TextParsing::gIdSmall;
+                content += TextParsing::gSpace;
+                content += TextParsing::gRightBrace;
             }
             else
             {
                 content += StringUtility::ToFirstLetterLower(value->GetTypeName());
-                content += SYSTEM_TEXT("{}"s);
+                content += TextParsing::gInit;
             }
 
             ++index;
@@ -655,13 +451,349 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinit
         content += TextParsing::gNewlineCharacter;
     }
 
-    content += SYSTEM_TEXT("CLASS_INVARIANT_STUB_DEFINE("s);
+    return content;
+}
+
+System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateParsingDefinition(const JsonNode& jsonNode) const
+{
+    String content{};
+
+    if (const auto jsonDataType = jsonNode.GetJsonDataType();
+        jsonDataType == JsonDataType::NestedArray)
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gSmallConst;
+        content += TextParsing::gSpace;
+        content += TextParsing::gAuto;
+        content += TextParsing::gSpace;
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += TextParsing::gGetJsonRowContainer;
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += TextParsing::gGetJsonRowContainerEnd;
+
+        content += TextParsing::gNewlineCharacter;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gForLoop;
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += TextParsing::gRow;
+        content += TextParsing::gRightBrackets;
+        content += TextParsing::gNewline;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gFunctionBeginBrackets;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += TextParsing::gEmplaceBack;
+        content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
+        content += TextParsing::gDoubleColon;
+        content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
+        content += TextParsing::gValue;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gFunctionEndBrackets;
+
+        content += TextParsing::gNewlineCharacter;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gSort;
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += TextParsing::gFunction;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += TextParsing::gGetIdLessReturn;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gLambdaEnd;
+
+        content += TextParsing::gNewlineCharacter;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gSmallConst;
+        content += TextParsing::gSpace;
+        content += TextParsing::gAuto;
+        content += TextParsing::gSpace;
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += TextParsing::gCapitalIter;
+
+        content += TextParsing::gSpace;
+        content += TextParsing::gEqualSign;
+        content += TextParsing::gSpace;
+        content += TextParsing::gRangesUnique;
+        content += TextParsing::gLeftBrackets;
+
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += TextParsing::gFunction;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += TextParsing::gGetIdEqualReturn;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gLambdaEnd;
+
+        content += TextParsing::gNewlineCharacter;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIf;
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += TextParsing::gCapitalIter;
+        content += TextParsing::gDot;
+        content += TextParsing::gBegin;
+        content += TextParsing::gLeftBrackets;
+        content += TextParsing::gRightBrackets;
+        content += TextParsing::gSpace;
+        content += TextParsing::gNotEqualSign;
+        content += TextParsing::gSpace;
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += TextParsing::gCapitalIter;
+        content += TextParsing::gDot;
+        content += TextParsing::gEnd;
+        content += TextParsing::gLeftBrackets;
+        content += TextParsing::gRightBrackets;
+        content += TextParsing::gRightBrackets;
+        content += TextParsing::gNewline;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gFunctionBeginBrackets;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += TextParsing::gWarnLog;
+
+        content += TextParsing::gSystemText;
+        content += StringUtility::ToFirstLetterLower(jsonHead.GetJsonClassName());
+        content += TextParsing::gDataSheet;
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += TextParsing::gRepeatFieldHint;
+
+        content += TextParsing::gLogAssert;
+
+        content += TextParsing::gNewlineCharacter;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += TextParsing::gDot;
+        content += TextParsing::gErase;
+        content += TextParsing::gLeftBrackets;
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += TextParsing::gCapitalIter;
+        content += TextParsing::gDot;
+        content += TextParsing::gBegin;
+        content += TextParsing::gLeftBrackets;
+        content += TextParsing::gRightBrackets;
+        content += TextParsing::gComma;
+        content += TextParsing::gSpace;
+        content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
+        content += TextParsing::gCapitalIter;
+        content += TextParsing::gDot;
+        content += TextParsing::gEnd;
+        content += TextParsing::gLeftBrackets;
+        content += TextParsing::gRightBrackets;
+        content += TextParsing::gRightBrackets;
+        content += TextParsing::gSemicolonNewline;
+
+        content += TextParsing::gIndentation;
+        content += TextParsing::gFunctionEndBrackets;
+    }
+
+    return content;
+}
+
+System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateNestedArrayDefinition(const JsonNode& jsonNode, const String& nameSpace, const JsonNodeContainer& container, bool hasNestedArray) const
+{
+    String content{};
+
+    if (hasNestedArray)
+    {
+        content += TextParsing::gVoid;
+        content += TextParsing::gSpace;
+        content += nameSpace;
+        content += TextParsing::gDoubleColon;
+        content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
+        content += TextParsing::gDoubleColon;
+        content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
+        content += TextParsing::gDoubleColon;
+        content += TextParsing::gParsing;
+        content += TextParsing::gJsonRowParameter;
+        content += TextParsing::gNewline;
+
+        content += TextParsing::gFunctionBeginBrackets;
+
+        for (const auto& value : container)
+        {
+            content += GenerateParsingDefinition(*value);
+        }
+
+        content += TextParsing::gFunctionEndBrackets;
+        content += TextParsing::gNewlineCharacter;
+    }
+
+    content += GenerateIdConstructorDefinition(jsonNode, nameSpace, container);
+
+    return content;
+}
+
+System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateJsonRowDefinition(const JsonNodeContainer& container, bool& hasNestedArray)
+{
+    String content{};
+
+    auto index = 0;
+    for (const auto& value : container)
+    {
+        switch (const auto jsonDataType = value->GetJsonDataType(); jsonDataType)
+        {
+            case JsonDataType::String:
+            {
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetString);
+            }
+            break;
+            case JsonDataType::Bool:
+            {
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetBool);
+            }
+            break;
+            case JsonDataType::Int:
+            {
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetInt);
+            }
+            break;
+            case JsonDataType::Int64:
+            {
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetInt64);
+            }
+            break;
+            case JsonDataType::Double:
+            {
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetDouble);
+            }
+            break;
+            case JsonDataType::StringArray:
+            {
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetStringArray);
+            }
+            break;
+            case JsonDataType::BoolArray:
+            {
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetBoolArray);
+            }
+            break;
+            case JsonDataType::IntArray:
+            {
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetIntArray);
+            }
+            break;
+            case JsonDataType::Int64Array:
+            {
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetInt64Array);
+            }
+            break;
+            case JsonDataType::DoubleArray:
+            {
+                content += GenerateJsonRowGetDefinition(*value, TextParsing::gJsonRowGetDoubleArray);
+            }
+            break;
+            case JsonDataType::Nested:
+            {
+                content += GenerateJsonRowGetNestedDefinition(*value);
+            }
+            break;
+            case JsonDataType::NestedArray:
+            {
+                content += StringUtility::ToFirstLetterLower(value->GetTypeName());
+                content += TextParsing::gInit;
+
+                hasNestedArray = true;
+            }
+            break;
+            default:
+                break;
+        }
+
+        ++index;
+        if (index == container.GetSize())
+        {
+            content += TextParsing::gNewlineCharacter;
+        }
+        else
+        {
+            content += TextParsing::gComma;
+            content += TextParsing::gNewlineCharacter;
+            content += TextParsing::gIndentation;
+            content += TextParsing::gSpace;
+            content += TextParsing::gSpace;
+        }
+    }
+
+    return content;
+}
+
+System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinition(const JsonNode& jsonNode) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    const auto nameSpace = jsonHead.GetNameSpace();
+
+    auto content = nameSpace;
+    content += TextParsing::gDoubleColon;
+    content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
+    content += TextParsing::gDoubleColon;
+    content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
+    content += TextParsing::gDoubleColon;
+    content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
+    content += TextParsing::gJsonRowParameter;
+    content += TextParsing::gNewline;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gColon;
+    content += TextParsing::gSpace;
+
+    auto container = JsonNodeContainer::Create();
+    for (const auto& value : jsonNode.GetJsonNodeContainer())
+    {
+        if (const auto jsonDataType = value->GetJsonDataType(); jsonDataType == JsonDataType::Nested || jsonDataType == JsonDataType::NestedArray)
+        {
+            container.AddJsonNode(value->GetJsonNodeContainer());
+        }
+        else if (!value->GetTypeName().empty())
+        {
+            container.AddJsonNode(value);
+        }
+    }
+
+    bool hasNestedArray = false;
+
+    content += GenerateJsonRowDefinition(container, hasNestedArray);
+
+    content += TextParsing::gFunctionBeginBrackets;
+
+    if (hasNestedArray)
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gParsingJsonRow;
+        content += TextParsing::gNewlineCharacter;
+    }
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gUserSelfClassIsValid9;
+    content += TextParsing::gFunctionEndBrackets;
+    content += TextParsing::gNewlineCharacter;
+
+    content += GenerateNestedArrayDefinition(jsonNode, nameSpace, container, hasNestedArray);
+
+    content += TextParsing::gClassInvariantStubDefine;
     content += nameSpace;
     content += TextParsing::gDoubleColon;
     content += jsonHead.GetJsonClassName();
-    content += SYSTEM_TEXT(", "s);
+    content += TextParsing::gComma;
+    content += TextParsing::gSpace;
     content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
-    content += SYSTEM_TEXT(")\n"s);
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gNewline;
 
     content += TextParsing::gNewlineCharacter;
 

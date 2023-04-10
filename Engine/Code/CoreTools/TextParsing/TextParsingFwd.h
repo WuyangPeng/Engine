@@ -5,82 +5,82 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/03 17:09)
+///	引擎版本：0.9.0.5 (2023/04/03 20:12)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_FWD_H
 #define CORE_TOOLS_TEXT_PARSING_FWD_H
 
+namespace CoreTools::SimpleZip
+{
+    class ZipEntry;
+    class ZipArchive;
+}
+
+namespace CoreTools::SimpleCSV
+{
+    enum class CSVExceptionType;
+    enum class ContentType;
+    enum class SheetState;
+    enum class ValueType;
+    enum class IteratorDirection;
+    enum class IteratorLocation;
+    enum class RelationshipType;
+    enum class SheetType;
+    enum class Property;
+
+    class CommandSetSheetName;
+    class CommandSetSheetVisibility;
+    class CommandSetSheetColor;
+    class CommandSetSheetIndex;
+    class CommandResetCalcChain;
+    class CommandAddSharedStrings;
+    class CommandAddWorksheet;
+    class CommandAddChartSheet;
+    class CommandDeleteSheet;
+    class CommandCloneSheet;
+
+    class QuerySheetName;
+    class QuerySheetIndex;
+    class QuerySheetVisibility;
+    class QuerySheetType;
+    class QuerySheetId;
+    class QuerySheetRelsId;
+    class QuerySheetRelsTarget;
+    class QuerySharedStrings;
+    class QueryXmlData;
+
+    class SimpleCSVException;
+    class XmlData;
+    class XmlFile;
+    class SharedStrings;
+    class Color;
+    class CellValueProxy;
+    class CellValue;
+    class CellReference;
+    class Cell;
+    class CellRange;
+    class CellIterator;
+    class Column;
+    class RowDataIterator;
+    class RowDataRange;
+    class RowRange;
+    class RowIterator;
+    class Row;
+    class RowDataProxy;
+    class SheetBase;
+    class Worksheet;
+    class AppProperties;
+    class Properties;
+    class ContentItem;
+    class ContentTypes;
+    class RelationshipItem;
+    class Relationships;
+    class Workbook;
+    class Document;
+}
+
 namespace CoreTools
 {
-    namespace SimpleZip
-    {
-        class ZipEntry;
-        class ZipArchive;
-    }
-
-    namespace SimpleCSV
-    {
-        enum class CSVExceptionType;
-        enum class ContentType;
-        enum class SheetState;
-        enum class ValueType;
-        enum class IteratorDirection;
-        enum class IteratorLocation;
-        enum class RelationshipType;
-        enum class SheetType;
-        enum class Property;
-
-        class CommandSetSheetName;
-        class CommandSetSheetVisibility;
-        class CommandSetSheetColor;
-        class CommandSetSheetIndex;
-        class CommandResetCalcChain;
-        class CommandAddSharedStrings;
-        class CommandAddWorksheet;
-        class CommandAddChartSheet;
-        class CommandDeleteSheet;
-        class CommandCloneSheet;
-
-        class QuerySheetName;
-        class QuerySheetIndex;
-        class QuerySheetVisibility;
-        class QuerySheetType;
-        class QuerySheetId;
-        class QuerySheetRelsId;
-        class QuerySheetRelsTarget;
-        class QuerySharedStrings;
-        class QueryXmlData;
-
-        class SimpleCSVException;
-        class XmlData;
-        class XmlFile;
-        class SharedStrings;
-        class Color;
-        class CellValueProxy;
-        class CellValue;
-        class CellReference;
-        class Cell;
-        class CellRange;
-        class CellIterator;
-        class Column;
-        class RowDataIterator;
-        class RowDataRange;
-        class RowRange;
-        class RowIterator;
-        class Row;
-        class RowDataProxy;
-        class SheetBase;
-        class Worksheet;
-        class AppProperties;
-        class Properties;
-        class ContentItem;
-        class ContentTypes;
-        class RelationshipItem;
-        class Relationships;
-        class Workbook;
-        class Document;
-    }
-
     enum class CSVType;
     enum class CSVFormatType;
     enum class CSVDataType;

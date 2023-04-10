@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/14 14:50)
+///	引擎版本：0.9.0.5 (2023/04/04 17:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,8 +15,6 @@
 #include "CoreTools/TextParsing/Flags/JsonFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 #include "CoreTools/TextParsing/Json/JsonNode.h"
-
-using namespace std::literals;
 
 CoreTools::JsonGenerateDefaultFunction::JsonGenerateDefaultFunction(JsonHead jsonHead) noexcept
     : jsonHead{ std::move(jsonHead) }
@@ -38,9 +36,12 @@ System::String CoreTools::JsonGenerateDefaultFunction::GenerateContainerDefaultF
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("explicit "s);
+    content += TextParsing::gExplicit;
+    content += TextParsing::gSpace;
     content += className;
-    content += SYSTEM_TEXT("Container(const CoreTools::JsonRow& jsonRow);\n"s);
+    content += TextParsing::gContainer;
+    content += TextParsing::gJsonRowParameter;
+    content += TextParsing::gSemicolonNewline;
     content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
@@ -51,7 +52,7 @@ System::String CoreTools::JsonGenerateDefaultFunction::GenerateContainerDefaultF
     return content;
 }
 
-System::String CoreTools::JsonGenerateDefaultFunction::GenerateContainerDefaultFunction(const JsonNode& jsonNode)  
+System::String CoreTools::JsonGenerateDefaultFunction::GenerateContainerDefaultFunction(const JsonNode& jsonNode)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -65,18 +66,28 @@ System::String CoreTools::JsonGenerateDefaultFunction::GenerateContainerDefaultF
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("explicit "s);
+    content += TextParsing::gExplicit;
+    content += TextParsing::gSpace;
     content += className;
-    content += SYSTEM_TEXT("(const CoreTools::JsonRow& jsonRow);\n"s);
+    content += TextParsing::gJsonRowParameter;
+    content += TextParsing::gSemicolonNewline;
 
     if (jsonNode.GetJsonDataType() == JsonDataType::NestedArray)
     {
         content += TextParsing::gIndentation;
         content += TextParsing::gIndentation;
         content += TextParsing::gIndentation;
-        content += SYSTEM_TEXT("explicit "s);
+        content += TextParsing::gExplicit;
+        content += TextParsing::gSpace;
         content += className;
-        content += SYSTEM_TEXT("(int id) noexcept;\n"s);
+        content += TextParsing::gLeftBrackets;
+        content += TextParsing::gInt;
+        content += TextParsing::gSpace;
+        content += TextParsing::gIdSmall;
+        content += TextParsing::gRightBrackets;
+        content += TextParsing::gSpace;
+        content += TextParsing::gNoexcept;
+        content += TextParsing::gSemicolonNewline;
     }
 
     content += TextParsing::gNewlineCharacter;

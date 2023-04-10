@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 23:07)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/30 17:09)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,10 +16,6 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::array;
-using std::make_shared;
-using std::string;
 
 CoreTools::BufferTarget::BufferTarget(int bufferSize, const ConstObjectRegisterSharedPtr& objectRegister)
     : impl{ bufferSize, objectRegister }
@@ -41,14 +37,14 @@ void CoreTools::BufferTarget::Write(const char* datum)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    Write(string{ datum });
+    Write(std::string{ datum });
 }
 
-void CoreTools::BufferTarget::Write(const string& datum)
+void CoreTools::BufferTarget::Write(const std::string& datum)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto length = boost::numeric_cast<int32_t>(datum.length());
+    const auto length = boost::numeric_cast<int32_t>(datum.length());
     Write(length);
 
     if (0 < length)
@@ -56,9 +52,9 @@ void CoreTools::BufferTarget::Write(const string& datum)
         Write(sizeof(char), length, datum.c_str());
 
         // 字符串被写入为4字节的倍数。
-        array<char, gDefaultSize> zero{};
-        auto padding = length % gDefaultSize;
-        if (0 < padding)
+        constexpr std::array<char, gDefaultSize> zero{};
+
+        if (auto padding = length % gDefaultSize; 0 < padding)
         {
             padding = gDefaultSize - padding;
             Write(CoreTools::GetStreamSize<char>(), padding, zero.data());
@@ -66,7 +62,7 @@ void CoreTools::BufferTarget::Write(const string& datum)
     }
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, BufferTarget, WriteUniqueID, ConstObjectInterfaceSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, BufferTarget, WriteUniqueId, ConstObjectInterfaceSharedPtr, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferTarget, GetBytesWritten, int)
 
 void CoreTools::BufferTarget::Write(size_t itemSize, const void* data)

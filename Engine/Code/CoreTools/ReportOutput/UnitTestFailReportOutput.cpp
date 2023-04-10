@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/21 18:20)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,9 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::string;
-
-CoreTools::UnitTestFailReportOutput::UnitTestFailReportOutput(const string& failClassName, const string& fileName, int lineNumber, const string& errorMessage, const OStreamShared& streamShared)
+CoreTools::UnitTestFailReportOutput::UnitTestFailReportOutput(const std::string& failClassName, const std::string& fileName, int lineNumber, const std::string& errorMessage, const OStreamShared& streamShared)
     : impl{ failClassName, fileName, lineNumber, errorMessage, streamShared }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;

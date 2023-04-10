@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 09:45)
+///	引擎版本：0.9.0.5 (2023/04/04 16:53)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,8 +16,6 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
-
-using namespace std::literals;
 
 CoreTools::EnumDescribeParsing::EnumDescribeParsing(const CSVHead& csvHead, const CSVContent& csvContent, const String& className, int nameIndex, int describeIndex)
     : ParentType{ csvHead, csvContent, className, nameIndex }, describeIndex{ describeIndex }

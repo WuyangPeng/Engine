@@ -496,6 +496,12 @@
     <Filter Include="HelperSuite 模板文件\UnitTestSuite">
       <UniqueIdentifier>{6fdb17ef-7f2f-4d9e-ac78-aaea51512bce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CoroutineSuite 头文件">
+      <UniqueIdentifier>{0e45e068-a775-4235-9a8d-c7c3cb6a1de9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoroutineSuite 源文件">
+      <UniqueIdentifier>{e1b20191-c643-422b-bb43-5d1f1f6427c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\BaseSuite.h">
@@ -1844,6 +1850,9 @@
     </ClInclude>
     <ClInclude Include="Resource\JsonGenerate\RunScenesDetail.h">
       <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CoroutineSuite\CoroutineSuite.h">
+      <Filter>CoroutineSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

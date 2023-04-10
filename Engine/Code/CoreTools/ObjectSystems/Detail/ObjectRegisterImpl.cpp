@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 23:03)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/30 17:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,21 +23,19 @@ CoreTools::ObjectRegisterImpl::ObjectRegisterImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ObjectRegisterImpl)
 
-int64_t CoreTools::ObjectRegisterImpl::GetUniqueID(const ConstObjectInterfaceSharedPtr& object) const
+int64_t CoreTools::ObjectRegisterImpl::GetUniqueId(const ConstObjectInterfaceSharedPtr& object) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     const auto& container = registered.get<UniqueObject>();
 
-    const auto iter = container.find(object);
-
-    if (iter != container.cend())
+    if (const auto iter = container.find(object); iter != container.cend())
     {
         return iter->associated;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("object指针没有注册！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("object指针没有注册！"s))
     }
 }
 
@@ -66,9 +64,7 @@ int64_t CoreTools::ObjectRegisterImpl::RegisterRoot(const ConstObjectInterfaceSh
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto& container = registered.get<UniqueObject>();
-
-    if (container.find(object) == container.cend())
+    if (const auto& container = registered.get<UniqueObject>(); container.find(object) == container.cend())
     {
         // 这是对象第一次在图表对象中遇到。
         // 我们需要使加载——连接器系统正常工作写入一个唯一的标识符到磁盘。最简单的就是写对象的地址，
@@ -81,11 +77,11 @@ int64_t CoreTools::ObjectRegisterImpl::RegisterRoot(const ConstObjectInterfaceSh
         // 一个解决办法是指定一个“虚拟地址”到每个对象，因为它被注册。最简单的就是使用“ordered”对象的索引。
         // 为了避免零地址和零指数之间的混淆，我们使用索引是数组的索引加一。
 
-        auto uniqueID = registered.size() + 1;
+        const auto uniqueId = registered.size() + 1;
 
-        registered.emplace_back(object, uniqueID);
+        registered.emplace_back(object, uniqueId);
 
-        return uniqueID;
+        return uniqueId;
     }
     else
     {

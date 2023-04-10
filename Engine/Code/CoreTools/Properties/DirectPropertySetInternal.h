@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/22 18:19)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 14:27)
 
 #ifndef CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_SET_INTERNAL_H
 #define CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_SET_INTERNAL_H
@@ -32,21 +32,23 @@ namespace CoreTools
     private:
         explicit DirectPropertySetInternal(ReferenceType value);
 
+    public:
         ~DirectPropertySetInternal() noexcept = default;
         DirectPropertySetInternal(const DirectPropertySetInternal& rhs) noexcept = delete;
         DirectPropertySetInternal& operator=(const DirectPropertySetInternal& rhs) noexcept = delete;
         DirectPropertySetInternal(DirectPropertySetInternal&& rhs) noexcept = delete;
         DirectPropertySetInternal& operator=(DirectPropertySetInternal&& rhs) noexcept = delete;
 
+    private:
         NODISCARD operator ReferenceType() const;
 
         TCRE_DECLARE_TEMPLATE_PARAM_AS_FRIEND(ContainerType);
 
     public:
-        DirectPropertySetInternal& operator=(ReferenceType value);
+        DirectPropertySetInternal& operator=(ReferenceType aValue);
 
     private:
-        ValueType m_Value;
+        ValueType value;
     };
 }
 

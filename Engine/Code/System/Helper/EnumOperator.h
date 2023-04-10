@@ -22,7 +22,7 @@ namespace System
     template <typename E>
     NODISCARD auto& ReinterpretCast(E& enumerator) noexcept requires std::is_enum_v<E>
     {
-        using UnderlyingType = std::underlying_type<E>::type;
+        using UnderlyingType = std::underlying_type_t<E>;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
@@ -33,19 +33,19 @@ namespace System
     }
 
     template <typename E>
-    NODISCARD constexpr E operator+(E lhs, typename std::underlying_type<E>::type rhs) noexcept requires std::is_enum_v<E>
+    NODISCARD constexpr E operator+(E lhs, std::underlying_type_t<E> rhs) noexcept requires std::is_enum_v<E>
     {
         return System::UnderlyingCastEnum<E>(System::EnumCastUnderlying(lhs) + rhs);
     }
 
     template <typename E>
-    NODISCARD constexpr E operator+(typename std::underlying_type<E>::type lhs, E rhs) noexcept requires std::is_enum_v<E>
+    NODISCARD constexpr E operator+(std::underlying_type_t<E> lhs, E rhs) noexcept requires std::is_enum_v<E>
     {
         return rhs + lhs;
     }
 
     template <typename E>
-    E& operator+=(E& lhs, typename std::underlying_type<E>::type rhs) noexcept requires std::is_enum_v<E>
+    E& operator+=(E& lhs, std::underlying_type_t<E> rhs) noexcept requires std::is_enum_v<E>
     {
         lhs = lhs + rhs;
 
@@ -53,13 +53,13 @@ namespace System
     }
 
     template <typename E>
-    NODISCARD constexpr E operator-(E lhs, typename std::underlying_type<E>::type rhs) noexcept requires std::is_enum_v<E>
+    NODISCARD constexpr E operator-(E lhs, std::underlying_type_t<E> rhs) noexcept requires std::is_enum_v<E>
     {
         return System::UnderlyingCastEnum<E>(System::EnumCastUnderlying(lhs) - rhs);
     }
 
     template <typename E>
-    E& operator-=(E& lhs, typename std::underlying_type<E>::type rhs) noexcept requires std::is_enum_v<E>
+    E& operator-=(E& lhs, std::underlying_type_t<E> rhs) noexcept requires std::is_enum_v<E>
     {
         lhs = lhs - rhs;
 

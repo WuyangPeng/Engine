@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 18:21)
+///	引擎版本：0.9.0.5 (2023/04/04 17:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,8 +24,8 @@
 
 using namespace std::literals;
 
-CoreTools::OpenXLSXConversion::OpenXLSXConversion(const std::string& xlsxFileName, const String& csvFileName)
-    : ParentType{}, document{ xlsxFileName }, csvFileName{ csvFileName }, exclude{}, stringField{}, bitField{}, bitArrayField{}
+CoreTools::OpenXLSXConversion::OpenXLSXConversion(const std::string& xlsxFileName, String csvFileName)
+    : ParentType{}, document{ xlsxFileName }, csvFileName{ std::move(csvFileName) }, exclude{}, stringField{}, bitField{}, bitArrayField{}
 {
     Conversion();
 

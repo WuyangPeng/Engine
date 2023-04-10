@@ -146,7 +146,7 @@ void Framework::MainFunctionHelperBase::InitLog(const EnvironmentDirectory& envi
 
 void Framework::MainFunctionHelperBase::InitInitTerm()
 {
-    CoreTools::InitTerm::ExecuteInitializers();
+    CoreTools::InitTerm::ExecuteInitializer();
     mainFunctionSchedule = MainFunctionSchedule::InitTerm;
 }
 
@@ -194,7 +194,7 @@ void Framework::MainFunctionHelperBase::DestroyInitTerm()
 {
     if (MainFunctionSchedule::InitTerm <= mainFunctionSchedule)
     {
-        CoreTools::InitTerm::ExecuteTerminators();
+        CoreTools::InitTerm::ExecuteTerminator();
         mainFunctionSchedule = MainFunctionSchedule::Log;
     }
 }

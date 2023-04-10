@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/16 21:51)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/04/03 17:08)
 
 #ifndef CORE_TOOLS_TIME_SECOND_TIMER_H
 #define CORE_TOOLS_TIME_SECOND_TIMER_H
@@ -26,20 +26,20 @@ namespace CoreTools
         DELAY_COPY_UNSHARED_TYPE_DECLARE(SecondTimer);
 
     public:
-        explicit SecondTimer(uint64_t second);
+        explicit SecondTimer(int64_t second);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD uint64_t GetRemain() const noexcept;
-        NODISCARD uint64_t GetElapsedTime() const noexcept;
+        NODISCARD int64_t GetRemain() const noexcept;
+        NODISCARD int64_t GetElapsedTime() const noexcept;
         NODISCARD bool IsElapsed() const noexcept;
-        NODISCARD uint64_t GetNowTime() const noexcept;
+        NODISCARD int64_t GetNowTime() const noexcept;
 
-        void ReTiming(uint64_t second);
+        void ReTiming(int64_t aSecond);
 
     private:
         PackageType impl;
-        uint64_t m_Second;
+        int64_t second;
     };
 }
 

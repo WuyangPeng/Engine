@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 10:22)
+///	引擎版本：0.9.0.5 (2023/04/04 16:36)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -101,7 +101,12 @@ System::String CoreTools::VectorContainerGetFunctionDefinitionParsing::GenerateE
 
     content += TextParsing::gEqualRange;
     content += lowerClassName;
+    content += TextParsing::gDot;
     content += TextParsing::gBegin;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gComma;
+    content += TextParsing::gSpace;
     content += lowerClassName;
     content += TextParsing::gEndMakeShared;
     content += csvHead.GetCSVClassName();

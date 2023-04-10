@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 17:05)
+///	引擎版本：0.9.0.5 (2023/04/04 17:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,8 +17,6 @@
 #include "CSVGenerateMember.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
-
-using namespace std::literals;
 
 CoreTools::CSVGenerateChildHeadFile::CSVGenerateChildHeadFile(const CSVHead& csvHead) noexcept
     : ParentType{ csvHead }
@@ -49,7 +47,7 @@ System::String CoreTools::CSVGenerateChildHeadFile::GetFileSuffix() const
 
 System::String CoreTools::CSVGenerateChildHeadFile::GetContent() const
 {
-    auto content = GenerateCopyright();
+    String content{ TextParsing::gCopyright };
 
     content += TextParsing::gNewlineCharacter;
     content += GenerateHeaderGuard();

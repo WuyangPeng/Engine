@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 23:07)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/30 17:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "BufferInStream.h"
 #include "FileInStream.h"
 #include "OutTopLevel.h"
-#include "Stream.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Base/Version.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -23,9 +22,6 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-using std::make_shared;
-using std::string;
-
 CoreTools::FileInStream::FileInStream(const String& fileName)
     : inTopLevel{ InTopLevel::Create() }
 {
@@ -34,7 +30,6 @@ CoreTools::FileInStream::FileInStream(const String& fileName)
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 void CoreTools::FileInStream::Load(const System::String& fileName)
 {
     ReadFileManager manager{ fileName };
@@ -42,28 +37,28 @@ void CoreTools::FileInStream::Load(const System::String& fileName)
     const auto readSize = manager.GetFileByteSize();
 
     // 获取该文件的版本。
-    auto version = Version::GetVersion();
+    const auto version = Version::GetVersion();
 
     const auto length = version.length();
     if (readSize < boost::numeric_cast<int>(length + 1))
     {
-        THROW_EXCEPTION(fileName + SYSTEM_TEXT("版本字符串不存在或者存储的版本字符串不够大"s));
+        THROW_EXCEPTION(fileName + SYSTEM_TEXT("版本字符串不存在或者存储的版本字符串不够大"s))
     }
 
-    auto bufferInformation = std::make_shared<FileBuffer>(boost::numeric_cast<size_t>(readSize));
+    const auto bufferInformation = std::make_shared<FileBuffer>(boost::numeric_cast<size_t>(readSize));
 
     manager.Read(CoreTools::GetStreamSize<char>(), bufferInformation->GetSize(), bufferInformation->GetBufferBegin());
 
-    string fileVersion{ bufferInformation->GetBufferBegin(), length };
+    const std::string fileVersion{ bufferInformation->GetBufferBegin(), length };
 
     // 比较所需的文件版本。
     if (fileVersion != version)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("版本字符串不匹配！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("版本字符串不匹配！"s))
     }
 
     // 从缓冲区重构场景图。
-    BufferInStream stream{ bufferInformation, boost::numeric_cast<int>(length) };
+    const BufferInStream stream{ bufferInformation, boost::numeric_cast<int>(length) };
 
     inTopLevel = stream.GetTopLevel();
 }

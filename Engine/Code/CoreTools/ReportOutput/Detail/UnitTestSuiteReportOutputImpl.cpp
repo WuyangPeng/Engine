@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/21 18:20)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,14 +19,9 @@
 #include <iomanip>
 #include <sstream>
 
-using std::left;
-using std::make_shared;
-using std::right;
-using std::setw;
-using std::string;
 using namespace std::literals;
 
-CoreTools::UnitTestSuiteReportOutputImpl::UnitTestSuiteReportOutputImpl(const string& timeDescribe, int borderLineLength, const OStreamShared& streamShared)
+CoreTools::UnitTestSuiteReportOutputImpl::UnitTestSuiteReportOutputImpl(const std::string& timeDescribe, int borderLineLength, const OStreamShared& streamShared)
     : ParentType{ timeDescribe, borderLineLength, streamShared }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -34,7 +29,7 @@ CoreTools::UnitTestSuiteReportOutputImpl::UnitTestSuiteReportOutputImpl(const st
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, UnitTestSuiteReportOutputImpl)
 
-void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestName(const string& testName)
+void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestName(const std::string& testName)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -42,7 +37,7 @@ void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestName(const string& testN
     PrintString(characterString);
 }
 
-void CoreTools::UnitTestSuiteReportOutputImpl::PrintSuiteName(const string& suiteName)
+void CoreTools::UnitTestSuiteReportOutputImpl::PrintSuiteName(const std::string& suiteName)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -58,12 +53,12 @@ void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestResult(int passedNumber,
 
     std::stringstream ss{};
 
-    ss << setw(characterWidth) << right << "通过："
-       << setw(characterWidth) << left << passedNumber
-       << setw(characterWidth) << right << "失败: "
-       << setw(characterWidth) << left << failedNumber
-       << setw(characterWidth) << right << "错误: "
-       << setw(characterWidth) << left << errorNumber;
+    ss << std::setw(characterWidth) << std::right << "通过："
+       << std::setw(characterWidth) << std::left << passedNumber
+       << std::setw(characterWidth) << std::right << "失败: "
+       << std::setw(characterWidth) << std::left << failedNumber
+       << std::setw(characterWidth) << std::right << "错误: "
+       << std::setw(characterWidth) << std::left << errorNumber;
 
     LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), ss.str());
 }
@@ -71,9 +66,9 @@ void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestResult(int passedNumber,
 CoreTools::UnitTestSuiteReportOutputImpl::LogConsoleTextColorsManagerSharedPtr CoreTools::UnitTestSuiteReportOutputImpl::GetLogConsoleTextColorsManager(int failedNumber, int errorNumber)
 {
     if (0 < errorNumber)
-        return make_shared<LogConsoleTextColorsManager>(GetStream(), LogLevel::Fatal);
+        return std::make_shared<LogConsoleTextColorsManager>(GetStream(), LogLevel::Fatal);
     else if (0 < failedNumber)
-        return make_shared<LogConsoleTextColorsManager>(GetStream(), LogLevel::Error);
+        return std::make_shared<LogConsoleTextColorsManager>(GetStream(), LogLevel::Error);
     else
         return nullptr;
 }

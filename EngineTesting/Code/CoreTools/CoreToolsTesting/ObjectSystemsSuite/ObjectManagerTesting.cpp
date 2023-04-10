@@ -38,13 +38,13 @@ void CoreTools::ObjectManagerTesting::DoRunUnitTest()
 
 void CoreTools::ObjectManagerTesting::MainTest()
 {
-    InitTerm::ExecuteInitializers();
+    InitTerm::ExecuteInitializer();
 
     ASSERT_NOT_THROW_EXCEPTION_0(SucceedTest);
     ASSERT_THROW_EXCEPTION_0(ExceptionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(InsertTest);
 
-    InitTerm::ExecuteTerminators();
+    InitTerm::ExecuteTerminator();
 }
 
 void CoreTools::ObjectManagerTesting::SucceedTest()

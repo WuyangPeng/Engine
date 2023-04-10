@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 10:04)
+///	引擎版本：0.9.0.5 (2023/04/04 16:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -70,6 +70,7 @@ System::String CoreTools::GetFunctionDefinitionParsing::GenerateGetFunctionArray
     auto content = GenerateIndentation();
 
     content += TextParsing::gInt;
+    content += TextParsing::gSpace;
     content += csvHead.GetNameSpace();
     content += TextParsing::gDoubleColon;
     content += GetCSVClassName();
@@ -88,6 +89,7 @@ System::String CoreTools::GetFunctionDefinitionParsing::GenerateGetFunctionArray
 
     auto content = actualType;
     content += TextParsing::gConstIterator;
+    content += TextParsing::gSpace;
     content += csvHead.GetNameSpace();
     content += TextParsing::gDoubleColon;
     content += GetCSVClassName();

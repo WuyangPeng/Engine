@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 23:25)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/29 17:34)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_DETAIL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_DETAIL_H
@@ -14,8 +14,6 @@
 #include "StreamSize.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/StreamMacro.h"
 
 #include <type_traits>
 
@@ -27,7 +25,7 @@ void CoreTools::BufferTarget::WriteBoolContainerWithNumber(const T& objects)
     using ValueType = typename T::value_type;
     static_assert(std::is_same_v<ValueType, bool>, "ValueType is not bool");
 
-    auto size = boost::numeric_cast<int32_t>(objects.size());
+    const auto size = boost::numeric_cast<int32_t>(objects.size());
 
     Write(size);
 
@@ -64,7 +62,7 @@ void CoreTools::BufferTarget::WriteStringContainerWithNumber(const T& objects)
     using ValueType = typename T::value_type;
     static_assert(std::is_same_v<ValueType, std::string>, "ValueType is not string");
 
-    auto size = boost::numeric_cast<int32_t>(objects.size());
+    const auto size = boost::numeric_cast<int32_t>(objects.size());
 
     Write(size);
 
@@ -111,7 +109,7 @@ void CoreTools::BufferTarget::WriteContainerWithNumber(const T& objects)
     using ValueType = typename T::value_type;
     static_assert(std::is_arithmetic_v<ValueType>, "ValueType is not arithmetic");
 
-    auto size = boost::numeric_cast<int32_t>(objects.size());
+    const auto size = boost::numeric_cast<int32_t>(objects.size());
 
     Write(size);
 
@@ -160,7 +158,7 @@ void CoreTools::BufferTarget::WriteEnumContainerWithNumber(const T& objects)
     using ValueType = typename T::value_type;
     static_assert(std::is_enum_v<ValueType>, "ValueType is not enum");
 
-    auto size = boost::numeric_cast<int32_t>(objects.size());
+    const auto size = boost::numeric_cast<int32_t>(objects.size());
 
     Write(size);
 
@@ -196,7 +194,7 @@ void CoreTools::BufferTarget::WriteAggregateContainerWithNumber(const T& objects
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto size = boost::numeric_cast<int32_t>(objects.size());
+    const auto size = boost::numeric_cast<int32_t>(objects.size());
 
     Write(size);
 
@@ -227,15 +225,15 @@ void CoreTools::BufferTarget::WriteObjectAssociated(const T& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     if (object.object != nullptr)
     {
-        WriteUniqueID(object.object);
+        WriteUniqueId(object.object);
     }
     else
     {
-        Write(uint64_t{ 0 });
+        Write(int64_t{ 0 });
     }
 }
 
@@ -244,15 +242,15 @@ void CoreTools::BufferTarget::WriteWeakObjectAssociated(const T& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     if (object.object.lock() != nullptr)
     {
-        WriteUniqueID(object.object.lock());
+        WriteUniqueId(object.object.lock());
     }
     else
     {
-        Write(uint64_t{ 0 });
+        Write(int64_t{ 0 });
     }
 }
 
@@ -262,7 +260,7 @@ void CoreTools::BufferTarget::WriteObjectAssociatedContainerWithNumber(const T& 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     auto size = boost::numeric_cast<int32_t>(objects.size());
 
@@ -277,7 +275,7 @@ void CoreTools::BufferTarget::WriteObjectAssociatedContainerWithoutNumber(const 
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     for (const auto& object : objects)
     {
@@ -291,7 +289,7 @@ void CoreTools::BufferTarget::WriteObjectAssociatedContainer(const std::array<T,
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     WriteObjectAssociatedContainerWithoutNumber(objects);
 }

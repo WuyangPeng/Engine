@@ -77,7 +77,7 @@ JsonConfigure::PartsContainer::ConstDataSharedPtr JsonConfigure::PartsContainer:
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("parts表datadatas字段未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s))
+        THROW_EXCEPTION(SYSTEM_TEXT("parts表data字段未找到key = "s) + System::ToString(key) + SYSTEM_TEXT("的配置信息。"s))
     }
 }
 

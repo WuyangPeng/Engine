@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 09:52)
+///	引擎版本：0.9.0.5 (2023/04/04 16:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,8 +19,6 @@
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
-
-using namespace std::literals;
 
 CoreTools::FormatParsing::FormatParsing(const FileContent& fileContent)
     : key{},
@@ -59,17 +57,17 @@ void CoreTools::FormatParsing::EmplaceBackEmpty(bool isScope, bool isMapping, bo
 {
     if (!isScope)
     {
-        scope.emplace_back(SYSTEM_TEXT(""s));
+        scope.emplace_back(String{});
     }
 
     if (!isMapping)
     {
-        mapping.emplace_back(SYSTEM_TEXT(""s));
+        mapping.emplace_back(String{});
     }
 
     if (!isDefaultValue)
     {
-        defaultValue.emplace_back(SYSTEM_TEXT(""s));
+        defaultValue.emplace_back(String{});
     }
 }
 
@@ -168,7 +166,7 @@ void CoreTools::FormatParsing::ParsingMapping(bool isMapping, bool firstIndex, c
         {
             ParsingKey(single);
 
-            mapping.emplace_back(SYSTEM_TEXT(""s));
+            mapping.emplace_back(String{});
         }
         else
         {

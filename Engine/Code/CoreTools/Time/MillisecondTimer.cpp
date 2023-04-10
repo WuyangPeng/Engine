@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/16 21:57)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/04/03 17:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,8 +17,8 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, MillisecondTimer)
 
-CoreTools::MillisecondTimer::MillisecondTimer(uint64_t millisecond)
-    : impl{ ImplCreateUseDefaultConstruction::Default }, m_Millisecond{ millisecond }
+CoreTools::MillisecondTimer::MillisecondTimer(int64_t millisecond)
+    : impl{ ImplCreateUseDefaultConstruction::Default }, millisecond{ millisecond }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -27,7 +27,7 @@ CoreTools::MillisecondTimer::MillisecondTimer(uint64_t millisecond)
 
 bool CoreTools::MillisecondTimer::IsValid() const noexcept
 {
-    if (0 <= m_Millisecond)
+    if (0 <= millisecond)
         return true;
     else
         return false;
@@ -35,19 +35,17 @@ bool CoreTools::MillisecondTimer::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-uint64_t CoreTools::MillisecondTimer::GetRemain() const noexcept
+int64_t CoreTools::MillisecondTimer::GetRemain() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    const auto elapsedTime = GetElapsedTime();
-
-    if (elapsedTime <= m_Millisecond)
-        return m_Millisecond - elapsedTime;
+    if (const auto elapsedTime = GetElapsedTime(); elapsedTime <= millisecond)
+        return millisecond - elapsedTime;
     else
         return 0;
 }
 
-uint64_t CoreTools::MillisecondTimer::GetElapsedTime() const noexcept
+int64_t CoreTools::MillisecondTimer::GetElapsedTime() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -58,25 +56,23 @@ bool CoreTools::MillisecondTimer::IsElapsed() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    const auto elapsedTime = GetElapsedTime();
-
-    if (m_Millisecond <= elapsedTime)
+    if (const auto elapsedTime = GetElapsedTime(); millisecond <= elapsedTime)
         return true;
     else
         return false;
 }
 
-uint64_t CoreTools::MillisecondTimer::GetNowTime() const noexcept
+int64_t CoreTools::MillisecondTimer::GetNowTime() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return impl->GetNowTimeInMicroseconds() / System::gMillisecond;
 }
 
-void CoreTools::MillisecondTimer::ReTiming(uint64_t millisecond)
+void CoreTools::MillisecondTimer::ReTiming(int64_t aMillisecond)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     impl->ResetCurrentTime();
-    m_Millisecond = millisecond;
+    millisecond = aMillisecond;
 }

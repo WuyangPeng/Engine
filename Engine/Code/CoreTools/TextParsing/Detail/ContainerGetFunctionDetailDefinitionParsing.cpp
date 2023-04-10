@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 09:38)
+///	引擎版本：0.9.0.5 (2023/04/04 16:54)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -36,11 +36,11 @@ CoreTools::ContainerGetFunctionDetailDefinitionParsing::ContainerGetFunctionDeta
         case CSVFormatType::HashMap:
         {
             return std::make_shared<MapContainerGetFunctionDetailDefinitionParsing>(csvHead, className);
-        }  
+        }
         default:
         {
             return std::make_shared<DefaultContainerGetFunctionDetailDefinitionParsing>(csvHead, className);
-        }   
+        }
     }
 }
 
@@ -186,7 +186,8 @@ System::String CoreTools::ContainerGetFunctionDetailDefinitionParsing::GenerateL
 
     content += TextParsing::gForLoop;
     content += lowerClassName;
-    content += TextParsing::gRightBracket;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gNewline;
 
     return content;
 }

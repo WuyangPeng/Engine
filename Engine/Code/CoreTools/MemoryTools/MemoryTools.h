@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/29 10:37)
+///	引擎版本：0.9.0.5 (2023/04/10 10:35)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_H
 #define CORE_TOOLS_MEMORY_TOOLS_H
@@ -13,8 +13,16 @@
 #include "Array2Detail.h"
 #include "Array3Detail.h"
 #include "Array4Detail.h"
+#include "AtomicMinMaxDetail.h"
+#include "ContainerAdapterDetail.h"
 #include "HeapAllocateDetail.h"
+#include "LatticeDetail.h"
+#include "LexicoArray2Detail.h"
+#include "MultiArrayAdapterDetail.h"
+#include "MultiArrayDetail.h"
+#include "RawPtrCompare.h"
 #include "SharedPtrCompare.h"
+#include "TypeTraits.h"
 #include "WeakPtrCompare.h"
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_H

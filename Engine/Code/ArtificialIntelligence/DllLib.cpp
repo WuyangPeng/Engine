@@ -17,9 +17,9 @@
 // 6.  GeneticAlgorithm（遗传算法）
 // 7.  NeuralNetwork（神经网络）
 
-#include "ArtificialIntellegence/ArtificialIntellegenceExport.h"
+#include "ArtificialIntelligence/ArtificialIntelligenceExport.h"
 
-#include "ArtificialIntellegence/ArtificialIntellegence.h"
+#include "ArtificialIntelligence/ArtificialIntelligence.h"
 
 #include "CoreTools/CoreToolsLib.h"
 #include "Mathematics/MathematicsLib.h"

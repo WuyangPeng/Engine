@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 09:50)
+///	引擎版本：0.9.0.5 (2023/04/04 16:53)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -32,7 +32,7 @@ System::String CoreTools::EnumHeadSourceParsing::GenerateEnumFunctionDefinition(
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto nameIndex = csvHead.GetDataIndex(TextParsing::gEnumNameDescribe);
+    const auto nameIndex = csvHead.GetDataIndex(TextParsing::gEnumName);
     const auto describeIndex = csvHead.GetDataIndex(TextParsing::gEnumDescribe);
 
     const StringCastEnumParsing stringCastEnumParsing{ csvHead, csvContent, className, nameIndex };

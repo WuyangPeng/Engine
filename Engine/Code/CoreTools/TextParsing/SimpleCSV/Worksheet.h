@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/08 10:48)
+///	引擎版本：0.9.0.5 (2023/04/03 20:18)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_WORKSHEET_H
 #define CORE_TOOLS_TEXT_PARSING_WORKSHEET_H
@@ -54,6 +54,8 @@ namespace CoreTools::SimpleCSV
     private:
         void Init();
 
+        void Init(XMLNode colsNode);
+
         static void SetTabColor(const XMLDocument& xmlDocument, const Color& color);
         NODISCARD static Color GetTabColor(const XMLDocument& xmlDocument);
         NODISCARD static XMLNode CreateTabColor(const XMLDocument& xmlDocument);
@@ -61,6 +63,9 @@ namespace CoreTools::SimpleCSV
         NODISCARD static bool TabIsSelected(const XMLDocument& xmlDocument);
 
         NODISCARD XMLNode GetCellNode(int rowNumber, int columnNumber) const;
+        NODISCARD XMLNode GetCellNodeInColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode) const;
+        NODISCARD XMLNode GetCellNodeInTwoColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode) const;
+        NODISCARD XMLNode GetCellNodeGreaterTwoColumnNumber(int rowNumber, int columnNumber, XMLNode rowNode) const;
     };
 }
 

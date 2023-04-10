@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 23:00)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/30 16:56)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -29,7 +29,7 @@ bool CoreTools::InTopLevelImpl::IsTopLevel(const ObjectInterfaceSharedPtr& objec
 
     const auto& container = topLevel.get<UniqueObject>();
 
-    return container.find(object) != container.cend();
+    return container.contains(object);
 }
 
 int CoreTools::InTopLevelImpl::GetTopLevelSize() const
@@ -45,7 +45,7 @@ void CoreTools::InTopLevelImpl::Insert(const ObjectInterfaceSharedPtr& object)
 
     if (!topLevel.emplace_back(object).second)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("一个object指针只可以被插入一次！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("一个object指针只可以被插入一次！"s))
     }
 }
 

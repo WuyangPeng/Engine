@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 18:59)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:39)
 
 #ifndef CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_SET_EXTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_SET_EXTERNAL_DETAIL_H
@@ -15,28 +15,28 @@
 
 #ifdef OPEN_CLASS_INVARIANT
 
-template <typename GetReference, typename SetReference, GetReference (*FG)(void), void (*FS)(SetReference)>
-bool CoreTools::StaticPropertyGetSetExternal<GetReference, SetReference, FG, FS>::IsValid() const noexcept
+template <typename GetReference, typename SetReference, GetReference (*PropertyGet)(), void (*PropertySet)(SetReference)>
+bool CoreTools::StaticPropertyGetSetExternal<GetReference, SetReference, PropertyGet, PropertySet>::IsValid() const noexcept
 {
     return true;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
 
-template <typename GetReference, typename SetReference, GetReference (*FG)(void), void (*FS)(SetReference)>
-CoreTools::StaticPropertyGetSetExternal<GetReference, SetReference, FG, FS>::operator GetReferenceType() const noexcept
+template <typename GetReference, typename SetReference, GetReference (*PropertyGet)(), void (*PropertySet)(SetReference)>
+CoreTools::StaticPropertyGetSetExternal<GetReference, SetReference, PropertyGet, PropertySet>::operator GetReferenceType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return (*FG)();
+    return (*PropertyGet)();
 }
 
-template <typename GetReference, typename SetReference, GetReference (*FG)(void), void (*FS)(SetReference)>
-CoreTools::StaticPropertyGetSetExternal<GetReference, SetReference, FG, FS>& CoreTools::StaticPropertyGetSetExternal<GetReference, SetReference, FG, FS>::operator=(SetReferenceType value)
+template <typename GetReference, typename SetReference, GetReference (*PropertyGet)(), void (*PropertySet)(SetReference)>
+CoreTools::StaticPropertyGetSetExternal<GetReference, SetReference, PropertyGet, PropertySet>& CoreTools::StaticPropertyGetSetExternal<GetReference, SetReference, PropertyGet, PropertySet>::operator=(SetReferenceType value)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    (*FS)(value);
+    (*PropertySet)(value);
 
     return *this;
 }

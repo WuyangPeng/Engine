@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 17:47)
+///	引擎版本：0.9.0.5 (2023/04/04 17:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,8 +23,6 @@
 #include "CoreTools/TextParsing/Detail/ScopeExpressionParsing.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
-
-using namespace std::literals;
 
 CoreTools::CSVHeadImpl::CSVHeadImpl(const String& path, const FileContent& fileContent)
     : pathSplitParsing{ path },
@@ -121,7 +119,7 @@ void CoreTools::CSVHeadImpl::ParsingEnumTypeName(CSVDataType type, const String&
     }
     else
     {
-        enumTypeName.emplace_back(SYSTEM_TEXT(""s));
+        enumTypeName.emplace_back(String{});
     }
 }
 
@@ -438,7 +436,7 @@ System::String CoreTools::CSVHeadImpl::GetUpperVariableName(int index) const
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     const auto upperVariableName = GetVariableName(index);
-    if (upperVariableName == TextParsing::gEnumIdDescribe)
+    if (upperVariableName == TextParsing::gIdSmall)
     {
         return TextParsing::gIdCapital.data();
     }

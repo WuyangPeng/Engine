@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/14 21:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/04/03 17:41)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,13 +20,9 @@
 #include <algorithm>
 #include <functional>
 
-using std::for_each;
-using std::ostream;
-using std::string;
-using std::vector;
 using namespace std::literals;
 
-CoreTools::SuiteImpl::SuiteImpl(const string& name, const OStreamShared& streamShared, bool printRunUnitTest)
+CoreTools::SuiteImpl::SuiteImpl(const std::string& name, const OStreamShared& streamShared, bool printRunUnitTest)
     : ParentType{ streamShared }, suiteName{ name }, unitTestCollection{}, printRunUnitTest{ printRunUnitTest }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_3;
@@ -107,7 +103,7 @@ void CoreTools::SuiteImpl::PrintReport()
 
     manager.PrintCoreToolsHeader();
 
-    for_each(unitTestCollection.begin(), unitTestCollection.end(), std::mem_fn(&UnitTestComposite::PrintReport));
+    std::ranges::for_each(unitTestCollection, std::mem_fn(&UnitTestComposite::PrintReport));
 
     manager.PrintSuiteName();
     manager.PrintSuiteResult();
@@ -125,7 +121,7 @@ void CoreTools::SuiteImpl::ResetTestData()
 {
     CORE_TOOLS_CLASS_IS_VALID_3;
 
-    for_each(unitTestCollection.begin(), unitTestCollection.end(), std::mem_fn(&UnitTestComposite::ResetTestData));
+    std::ranges::for_each(unitTestCollection, std::mem_fn(&UnitTestComposite::ResetTestData));
 }
 
 void CoreTools::SuiteImpl::AddUnitTest(const UnitTestCompositeSharedPtr& unitTest)
@@ -137,7 +133,7 @@ void CoreTools::SuiteImpl::AddUnitTest(const UnitTestCompositeSharedPtr& unitTes
     unitTest->ResetTestData();
 }
 
-string CoreTools::SuiteImpl::GetName() const
+std::string CoreTools::SuiteImpl::GetName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
@@ -148,7 +144,7 @@ void CoreTools::SuiteImpl::RunUnitTest()
 {
     CORE_TOOLS_CLASS_IS_VALID_3;
 
-    for_each(unitTestCollection.begin(), unitTestCollection.end(), [printRunUnitTest = printRunUnitTest](auto& unitTest) {
+    std::ranges::for_each(unitTestCollection, [printRunUnitTest = printRunUnitTest](auto& unitTest) {
         if (printRunUnitTest)
         {
             unitTest->PrintRunUnitTest();

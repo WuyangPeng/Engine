@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/22 18:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 14:30)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_EXTERNAL_H
@@ -22,14 +22,14 @@ namespace CoreTools
     // 然后使用引用类型，容器类型，成员函数和偏移函数对模板进行参数化。
     template <typename ConstReference,  // 引用类型
               typename Container,  // 封闭类
-              ptrdiff_t (*FO)(),  // 指针函数提供容器内偏移属性
-              ConstReference (Container::*FG)() const>  // 指针指向一个const成员函数返回CR
+              ptrdiff_t (*FunctionOffset)(),  // 指针函数提供容器内偏移属性
+              ConstReference (Container::*FunctionGet)() const>  // 指针指向一个const成员函数返回CR
     class MethodPropertyGetExternal final
     {
     public:
         using ConstReferenceType = ConstReference;
         using ContainerType = Container;
-        using ClassType = MethodPropertyGetExternal<ConstReferenceType, ContainerType, FO, FG>;
+        using ClassType = MethodPropertyGetExternal<ConstReferenceType, ContainerType, FunctionOffset, FunctionGet>;
 
         MethodPropertyGetExternal() noexcept = default;
         ~MethodPropertyGetExternal() noexcept = default;

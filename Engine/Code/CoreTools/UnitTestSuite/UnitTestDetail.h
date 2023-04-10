@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/14 14:59)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/04/03 17:24)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_DETAIL_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_DETAIL_H
@@ -13,6 +13,7 @@
 #include "UnitTest.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning/TypeTraits.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -23,15 +24,12 @@
 #include <sstream>
 #include <type_traits>
 
-// protected
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     static_assert(boost::has_equal_to<LhsType, RhsType, bool>::value, "LhsType and RhsType has equal to bool.");
 
-    const auto condition = (lhs == rhs);
-
-    if (condition)
+    if (const auto condition = (lhs == rhs); condition)
     {
         AssertTrue();
     }
@@ -54,14 +52,12 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, co
     }
 }
 
-// protected
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertEnumEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     AssertEqual(System::EnumCastUnderlying(lhs), System::EnumCastUnderlying(rhs), functionDescribed, errorMessage, failureThrow);
 }
 
-// protected
 template <typename LhsType, typename MhsType, typename RhsType>
 void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const MhsType& mhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
@@ -70,9 +66,8 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const MhsType& mhs, co
 
     const auto lhsCondition = (lhs == mhs);
     const auto rhsCondition = (rhs == mhs);
-    const auto condition = lhsCondition && rhsCondition;
 
-    if (condition)
+    if (const auto condition = lhsCondition && rhsCondition; condition)
     {
         AssertTrue();
     }
@@ -100,15 +95,12 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const MhsType& mhs, co
     }
 }
 
-// protected
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertUnequal(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     static_assert(boost::has_not_equal_to<LhsType, RhsType, bool>::value, "LhsType and RhsType has not equal to bool.");
 
-    const auto condition = (lhs != rhs);
-
-    if (condition)
+    if (const auto condition = (lhs != rhs); condition)
     {
         AssertTrue();
     }
@@ -131,14 +123,12 @@ void CoreTools::UnitTest::AssertUnequal(const LhsType& lhs, const RhsType& rhs, 
     }
 }
 
-// protected
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertEnumUnequal(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     AssertUnequal(System::EnumCastUnderlying(lhs), System::EnumCastUnderlying(rhs), functionDescribed, errorMessage, failureThrow);
 }
 
-// protected
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertApproximate(const LhsType& lhs, const RhsType& rhs, const std::common_type_t<LhsType, RhsType>& epsilon, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
@@ -149,9 +139,8 @@ void CoreTools::UnitTest::AssertApproximate(const LhsType& lhs, const RhsType& r
     static_assert(boost::has_less_equal<EpsilonType, double, bool>::value, "EpsilonType and double has less equal bool.");
 
     const EpsilonType difference{ abs(lhs - rhs) };
-    const auto condition = (difference <= epsilon);
 
-    if (condition)
+    if (const auto condition = (difference <= epsilon); condition)
     {
         AssertTrue();
     }
@@ -174,13 +163,10 @@ void CoreTools::UnitTest::AssertApproximate(const LhsType& lhs, const RhsType& r
     }
 }
 
-// protected
 template <typename Function, typename LhsType, typename RhsType, typename EpsilonType>
 void CoreTools::UnitTest::AssertApproximateUseFunction(Function function, const LhsType& lhs, const RhsType& rhs, const EpsilonType& epsilon, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    const auto condition = function(lhs, rhs, epsilon);
-
-    if (condition)
+    if (const auto condition = function(lhs, rhs, epsilon); condition)
     {
         AssertTrue();
     }
@@ -203,16 +189,13 @@ void CoreTools::UnitTest::AssertApproximateUseFunction(Function function, const 
     }
 }
 
-// protected
 template <typename PtrType>
 void CoreTools::UnitTest::AssertEqualNullPtr(const PtrType& ptr, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     // 为了支持智能指针，不使用
     // static_assert(std::is_pointer_v<PtrType>, "PtrType is pointer.");
 
-    const auto condition = (ptr == nullptr);
-
-    if (condition)
+    if (const auto condition = (ptr == nullptr); condition)
     {
         AssertTrue();
     }
@@ -228,16 +211,13 @@ void CoreTools::UnitTest::AssertEqualNullPtr(const PtrType& ptr, const FunctionD
     }
 }
 
-// protected
 template <typename PtrType>
 void CoreTools::UnitTest::AssertUnequalNullPtr(const PtrType& ptr, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     // 为了支持智能指针，不使用
     // static_assert(std::is_pointer_v<PtrType>, "PtrType is pointer.");
 
-    const auto condition = ptr != nullptr;
-
-    if (condition)
+    if (const auto condition = (ptr != nullptr); condition)
     {
         AssertTrue();
     }
@@ -253,16 +233,13 @@ void CoreTools::UnitTest::AssertUnequalNullPtr(const PtrType& ptr, const Functio
     }
 }
 
-// protected
 template <typename TestType, typename RangeType>
 void CoreTools::UnitTest::AssertRange(const TestType& test, const RangeType& lhs, const RangeType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     static_assert(boost::has_less_equal<RangeType, TestType, bool>::value, "RangeType and TestType has less equal bool.");
     static_assert(boost::has_less_equal<TestType, RangeType, bool>::value, "TestType and RangeType has less equal bool.");
 
-    const auto condition = (lhs <= test && test <= rhs);
-
-    if (condition)
+    if (const auto condition = (lhs <= test && test <= rhs); condition)
     {
         AssertTrue();
     }
@@ -285,15 +262,12 @@ void CoreTools::UnitTest::AssertRange(const TestType& test, const RangeType& lhs
     }
 }
 
-// protected
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertLess(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     static_assert(boost::has_less<LhsType, RhsType, bool>::value, "RangeType and TestType has less equal bool.");
 
-    const auto condition = (lhs < rhs);
-
-    if (condition)
+    if (const auto condition = (lhs < rhs); condition)
     {
         AssertTrue();
     }
@@ -316,22 +290,18 @@ void CoreTools::UnitTest::AssertLess(const LhsType& lhs, const RhsType& rhs, con
     }
 }
 
-// protected
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertEnumLess(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     AssertLess(System::EnumCastUnderlying(lhs), System::EnumCastUnderlying(rhs), functionDescribed, errorMessage, failureThrow);
 }
 
-// protected
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertLessEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     static_assert(boost::has_less_equal<LhsType, RhsType, bool>::value, "RangeType and TestType has less equal bool.");
 
-    const auto condition = (lhs <= rhs);
-
-    if (condition)
+    if (const auto condition = (lhs <= rhs); condition)
     {
         AssertTrue();
     }
@@ -354,22 +324,18 @@ void CoreTools::UnitTest::AssertLessEqual(const LhsType& lhs, const RhsType& rhs
     }
 }
 
-// protected
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertEnumLessEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     AssertLessEqual(System::EnumCastUnderlying(lhs), System::EnumCastUnderlying(rhs), functionDescribed, errorMessage, failureThrow);
 }
 
-// protected
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertGreater(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     static_assert(boost::has_greater<LhsType, RhsType, bool>::value, "RangeType and TestType has less equal bool.");
 
-    const auto condition = lhs > rhs;
-
-    if (condition)
+    if (const auto condition = lhs > rhs; condition)
     {
         AssertTrue();
     }
@@ -392,22 +358,18 @@ void CoreTools::UnitTest::AssertGreater(const LhsType& lhs, const RhsType& rhs, 
     }
 }
 
-// protected
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertEnumGreater(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     AssertGreater(System::EnumCastUnderlying(lhs), System::EnumCastUnderlying(rhs), functionDescribed, errorMessage, failureThrow);
 }
 
-// protected
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertGreaterEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     static_assert(boost::has_greater_equal<LhsType, RhsType, bool>::value, "RangeType and TestType has less equal bool.");
 
-    const auto condition = lhs >= rhs;
-
-    if (condition)
+    if (const auto condition = lhs >= rhs; condition)
     {
         AssertTrue();
     }
@@ -436,6 +398,49 @@ void CoreTools::UnitTest::AssertEnumGreaterEqual(const LhsType& lhs, const RhsTy
     AssertGreaterEqual(System::EnumCastUnderlying(lhs), System::EnumCastUnderlying(rhs), functionDescribed, errorMessage, failureThrow);
 }
 
+template <typename LhsType, typename RhsType>
+requires std::is_constructible_v<LhsType, std::wstring> && std::is_constructible_v<RhsType, std::wstring>
+void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
+{
+    if (const auto condition = (lhs == rhs); condition)
+    {
+        AssertTrue();
+    }
+    else
+    {
+        std::stringstream stream{};
+
+        stream << StringConversion::WideCharConversionMultiByte(lhs) << "不等于" << StringConversion::WideCharConversionMultiByte(rhs);
+
+        const auto described = GetAssertDescribed(stream.str(), errorMessage);
+
+        AssertTest(condition, functionDescribed, described, failureThrow);
+    }
+}
+
+// clang-format off
+template <typename LhsType, typename RhsType>
+requires std::is_same_v<std::decay_t<LhsType>, std::string> || std::is_same_v<std::decay_t<LhsType>,const char*> &&
+    std::is_same_v<std::decay_t<RhsType>, std::string> || std::is_same_v<std::decay_t<RhsType>, const char*>
+void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
+{
+    if (const auto condition = (lhs == rhs); condition)
+    {
+        AssertTrue();
+    }
+    else
+    {
+        std::stringstream stream{};
+
+        stream << std::string{ lhs } << "不等于" << std::string{ rhs };
+
+        const auto described = GetAssertDescribed(stream.str(), errorMessage);
+
+        AssertTest(condition, functionDescribed, described, failureThrow);
+    }
+}
+// clang-format on
+
 template <typename TestClass, typename Function, typename... Types>
 void CoreTools::UnitTest::AssertNotThrowException(TestClass* test, Function function, const FunctionDescribed& functionDescribed, const std::string& errorMessage, Types&&... args)
 {
@@ -462,7 +467,6 @@ void CoreTools::UnitTest::AssertNotThrowException(TestClass* test, Function func
     }
 }
 
-// protected
 template <typename TestClass, typename Function, typename... Types>
 void CoreTools::UnitTest::AssertThrowException(TestClass* test, Function function, const FunctionDescribed& functionDescribed, const std::string& errorMessage, Types&&... args)
 {
@@ -495,8 +499,7 @@ void CoreTools::UnitTest::ExecuteLoopTesting(TestClass* test, Function function)
     static_assert(std::is_member_function_pointer_v<Function>, "Function is member function pointer.");
     static_assert(std::is_base_of_v<UnitTest, TestClass>, "UnitTest is base of TestClass.");
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         if (!(test->*function)())
         {

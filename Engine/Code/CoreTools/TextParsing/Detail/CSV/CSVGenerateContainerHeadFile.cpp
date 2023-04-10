@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 17:28)
+///	引擎版本：0.9.0.5 (2023/04/04 17:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -47,7 +47,7 @@ System::String CoreTools::CSVGenerateContainerHeadFile::GetFileSuffix() const
 
 System::String CoreTools::CSVGenerateContainerHeadFile::GetContent() const
 {
-    auto content = GenerateCopyright();
+    String content{ TextParsing::gCopyright };
 
     content += TextParsing::gNewlineCharacter;
     content += GenerateHeaderGuard();

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 18:06)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 14:55)
 
 #ifndef CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_SET_H
 #define CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_SET_H
@@ -18,8 +18,8 @@ namespace CoreTools
               typename GetReference,
               typename SetReference,
               typename Container,
-              GetReference (*FG)(void),
-              void (*FS)(SetReference)>
+              GetReference (*PropertyGet)(),
+              void (*PropertySet)(SetReference)>
     class StaticPropertyGetSet final
     {
     public:
@@ -27,7 +27,7 @@ namespace CoreTools
         using GetReferenceType = GetReference;
         using SetReferenceType = SetReference;
         using ContainerType = Container;
-        using ClassType = StaticPropertyGetSet<ValueType, GetReferenceType, SetReferenceType, ContainerType, FG, FS>;
+        using ClassType = StaticPropertyGetSet<ValueType, GetReferenceType, SetReferenceType, ContainerType, PropertyGet, PropertySet>;
 
     public:
         StaticPropertyGetSet() noexcept;
@@ -43,10 +43,10 @@ namespace CoreTools
 
     public:
         NODISCARD operator GetReferenceType() const noexcept;
-        StaticPropertyGetSet& operator=(SetReferenceType value);
+        StaticPropertyGetSet& operator=(SetReferenceType aValue);
 
     private:
-        ValueType m_Value;
+        ValueType value;
     };
 }
 

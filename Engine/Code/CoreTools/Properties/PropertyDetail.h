@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 18:46)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:34)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_DETAIL_H
@@ -14,44 +14,49 @@
 #include "PropertyBaseDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-template <typename ID, typename T, typename V, typename R, void (T::*FS)(R), R (T::*FG)() const>
-CoreTools::Property<ID, T, V, R, FS, FG>::Property() noexcept
-    : m_Value{}
+template <typename Id, typename T, typename V, typename R, void (T::*FunctionSet)(R), R (T::*FunctionGet)() const>
+CoreTools::Property<Id, T, V, R, FunctionSet, FunctionGet>::Property() noexcept
+    : value{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-template <typename ID, typename T, typename V, typename R, void (T::*FS)(R), R (T::*FG)() const>
-CoreTools::Property<ID, T, V, R, FS, FG>::Property(V value)
-    : ParentType{}, m_Value{ value }
+template <typename Id, typename T, typename V, typename R, void (T::*FunctionSet)(R), R (T::*FunctionGet)() const>
+CoreTools::Property<Id, T, V, R, FunctionSet, FunctionGet>::Property(V value)
+    : ParentType{}, value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <typename ID, typename T, typename V, typename R, void (T::*FS)(R), R (T::*FG)() const>
-bool CoreTools::Property<ID, T, V, R, FS, FG>::IsValid() const noexcept
+template <typename Id, typename T, typename V, typename R, void (T::*FunctionSet)(R), R (T::*FunctionGet)() const>
+bool CoreTools::Property<Id, T, V, R, FunctionSet, FunctionGet>::IsValid() const noexcept
 {
     return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
-template <typename ID, typename T, typename V, typename R, void (T::*FS)(R), R (T::*FG)() const>
-CoreTools::Property<ID, T, V, R, FS, FG>& CoreTools::Property<ID, T, V, R, FS, FG>::operator=(R value) noexcept
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+
+template <typename Id, typename T, typename V, typename R, void (T::*FunctionSet)(R), R (T::*FunctionGet)() const>
+CoreTools::Property<Id, T, V, R, FunctionSet, FunctionGet>& CoreTools::Property<Id, T, V, R, FunctionSet, FunctionGet>::operator=(R aValue) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    (ParentType::Holder()->*FS)(value);
+    (ParentType::Holder()->*FunctionSet)(aValue);
 
     return *this;
 }
 
-template <typename ID, typename T, typename V, typename R, void (T::*FS)(R), R (T::*FG)() const>
-CoreTools::Property<ID, T, V, R, FS, FG>::operator R() const noexcept
+#include STSTEM_WARNING_POP
+
+template <typename Id, typename T, typename V, typename R, void (T::*FunctionSet)(R), R (T::*FunctionGet)() const>
+CoreTools::Property<Id, T, V, R, FunctionSet, FunctionGet>::operator R() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return (ParentType::Holder()->*FG)();
+    return (ParentType::Holder()->*FunctionGet)();
 }
 
 #endif  // CORE_TOOLS_PROPERTIES_PROPERTY_DETAIL_H

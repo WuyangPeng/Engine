@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/10 14:00)
+///	引擎版本：0.9.0.5 (2023/04/08 17:05)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,10 +15,8 @@
 #include "CoreTools/TextParsing/Flags/JsonFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-using namespace std::literals;
-
-CoreTools::JsonGenerateHead::JsonGenerateHead(const JsonHead& jsonHead) noexcept
-    : jsonHead{ jsonHead }
+CoreTools::JsonGenerateHead::JsonGenerateHead(JsonHead jsonHead) noexcept
+    : jsonHead{ std::move(jsonHead) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -34,24 +32,26 @@ System::String CoreTools::JsonGenerateHead::GenerateCoreToolsHead() const
 
     content += TextParsing::gIncludePrefix;
     content += jsonHead.GetNameSpace();
-    content += SYSTEM_TEXT("Fwd.h\"\n"s);
+    content += TextParsing::gFwdHeadFileExtensionName;
+    content += TextParsing::gQuotationMarks;
+    content += TextParsing::gNewline;
 
     content += TextParsing::gUnicodeUsing;
     content += TextParsing::gNewlineCharacter;
 
     if (jsonHead.HasBoolArray())
     {
-        content += TextParsing::gDeque;
+        content += TextParsing::gDequeInclude;
     }
 
     if (jsonHead.HasNested())
     {
-        content += TextParsing::gMemory;
+        content += TextParsing::gMemoryInclude;
     }
 
     if (jsonHead.HasArray())
     {
-        content += TextParsing::gVector;
+        content += TextParsing::gVectorInclude;
     }
 
     content += TextParsing::gNewlineCharacter;
@@ -79,20 +79,23 @@ System::String CoreTools::JsonGenerateHead::GenerateContainerSourceHead() const
 
     const auto className = jsonHead.GetJsonClassName();
 
-    auto content = TextParsing::gIncludePrefix.data() + className + TextParsing::gHeadFileSuffix.data();
+    String content{ TextParsing::gIncludePrefix };
 
-    content += SYSTEM_TEXT("#include \"System/Helper/PragmaWarning/NumericCast.h\"\n"s);
+    content += className;
+    content += TextParsing::gHeadFileSuffix;
+
+    content += TextParsing::gNumericCast;
     content += TextParsing::gUserClassInvariantMacro;
     content += TextParsing::gExceptionMacro;
-    content += SYSTEM_TEXT("#include \"CoreTools/Helper/LogMacro.h\"\n"s);
-    content += SYSTEM_TEXT("#include \"CoreTools/TextParsing/Json/JsonHead.h\"\n"s);
-    content += SYSTEM_TEXT("#include \"CoreTools/TextParsing/Json/JsonRow.h\"\n"s);
+    content += TextParsing::gLogMacro;
+    content += TextParsing::gIncludeJsonHead;
+    content += TextParsing::gIncludeJsonRow;
     content += TextParsing::gNewlineCharacter;
 
-    content += SYSTEM_TEXT("#include <algorithm>\n"s);
+    content += TextParsing::gAlgorithmInclude;
     content += TextParsing::gNewlineCharacter;
 
-    content += SYSTEM_TEXT("using namespace std::literals;\n"s);
+    content += TextParsing::gUsingNamespaceLiterals;
     content += TextParsing::gNewlineCharacter;
 
     return content;

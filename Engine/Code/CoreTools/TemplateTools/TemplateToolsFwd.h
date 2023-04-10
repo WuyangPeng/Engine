@@ -47,13 +47,13 @@ namespace CoreTools
     struct RecursiveSine;
 
     template <double& Radian>
-    struct NonrecursiveSine;
+    struct NonRecursiveSine;
 
     template <double& Radian>
-    struct NonrecursiveCosine;
+    struct NonRecursiveCosine;
 
     template <double& Radian>
-    struct NonrecursiveTangent;
+    struct NonRecursiveTangent;
 
     namespace TrigonometricFunction
     {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 10:05)
+///	引擎版本：0.9.0.5 (2023/04/04 16:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,8 +13,6 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
-
-using namespace std::literals;
 
 CoreTools::GetFunctionParsing::GetFunctionParsing(CSVHead csvHead, String keyTypeDescribe) noexcept
     : ParentType{ 2 }, keyTypeDescribe{ std::move(keyTypeDescribe) }, head{ std::move(csvHead) }
@@ -72,6 +70,7 @@ System::String CoreTools::GetFunctionParsing::GenerateKeyFunctionStatement() con
 
     content += GenerateKeyParameter();
     content += TextParsing::gRightBrackets;
+    content += TextParsing::gSpace;
     content += TextParsing::gNoexcept;
     content += TextParsing::gNewlineCharacter;
 
@@ -87,6 +86,7 @@ System::String CoreTools::GetFunctionParsing::GenerateReturnKey() const
     auto content = GenerateIndentation(1);
 
     content += TextParsing::gReturn;
+    content += TextParsing::gSpace;
     content += csvHead.GetKey();
     content += TextParsing::gSemicolonNewline;
 
@@ -128,6 +128,7 @@ System::String CoreTools::GetFunctionParsing::GenerateCountFunction(const String
 
     content += beginDescribe;
     content += TextParsing::gInt;
+    content += TextParsing::gSpace;
     content += functionVariableName;
     content += endDescribe;
 
@@ -158,6 +159,7 @@ System::String CoreTools::GetFunctionParsing::GenerateBeginIterFunction(const St
     content += beginDescribe;
     content += actualType;
     content += TextParsing::gConstIterator;
+    content += TextParsing::gSpace;
     content += functionVariableName;
     content += endDescribe;
 
@@ -173,6 +175,7 @@ System::String CoreTools::GetFunctionParsing::GenerateEndIterFunction(const Stri
     content += beginDescribe;
     content += actualType;
     content += TextParsing::gConstIterator;
+    content += TextParsing::gSpace;
     content += functionVariableName;
     content += endDescribe;
 

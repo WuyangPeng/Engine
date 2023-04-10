@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/21 14:48)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 16:10)
 
-// 约束：两个类大小必须相等，可能依赖于硬件架构或编译器。
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_MUST_BE_SAME_SIZE_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_MUST_BE_SAME_SIZE_H
 
 #include "CoreTools/CoreToolsDll.h"
 
+// 约束：两个类大小必须相等，可能依赖于硬件架构或编译器。
 namespace CoreTools
 {
     template <typename T>
@@ -50,9 +50,9 @@ namespace CoreTools
     private:
         constexpr static void Constranints() noexcept
         {
-            constexpr auto T1NotSameSizeAsT2 = static_cast<uint32_t>(static_cast<int>(SizeOf<T1>::Value) == static_cast<int>(SizeOf<T2>::Value));
+            constexpr auto t1NotSameSizeAsT2 = static_cast<uint32_t>(static_cast<int>(SizeOf<T1>::Value) == static_cast<int>(SizeOf<T2>::Value));
 
-            MAYBE_UNUSED const int i[T1NotSameSizeAsT2]{};
+            MAYBE_UNUSED const int i[t1NotSameSizeAsT2]{};
         }
     };
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 18:42)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:05)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_DETAIL_H
@@ -13,41 +13,41 @@
 #include "MethodPropertySet.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-template <typename Value, typename Reference, typename Container, ptrdiff_t (*FO)(), void (Container::*FS)(Reference)>
-CoreTools::MethodPropertySet<Value, Reference, Container, FO, FS>::MethodPropertySet() noexcept
-    : m_Value{}
+template <typename Value, typename Reference, typename Container, ptrdiff_t (*FunctionOffset)(), void (Container::*FunctionSet)(Reference)>
+CoreTools::MethodPropertySet<Value, Reference, Container, FunctionOffset, FunctionSet>::MethodPropertySet() noexcept
+    : value{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-template <typename Value, typename Reference, typename Container, ptrdiff_t (*FO)(), void (Container::*FS)(Reference)>
-CoreTools::MethodPropertySet<Value, Reference, Container, FO, FS>::MethodPropertySet(ReferenceType value)
-    : m_Value{ value }
+template <typename Value, typename Reference, typename Container, ptrdiff_t (*FunctionOffset)(), void (Container::*FunctionSet)(Reference)>
+CoreTools::MethodPropertySet<Value, Reference, Container, FunctionOffset, FunctionSet>::MethodPropertySet(ReferenceType value)
+    : value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 
-template <typename Value, typename Reference, typename Container, ptrdiff_t (*FO)(), void (Container::*FS)(Reference)>
-bool CoreTools::MethodPropertySet<Value, Reference, Container, FO, FS>::IsValid() const noexcept
+template <typename Value, typename Reference, typename Container, ptrdiff_t (*FunctionOffset)(), void (Container::*FunctionSet)(Reference)>
+bool CoreTools::MethodPropertySet<Value, Reference, Container, FunctionOffset, FunctionSet>::IsValid() const noexcept
 {
     return true;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
 
-template <typename Value, typename Reference, typename Container, ptrdiff_t (*FO)(), void (Container::*FS)(Reference)>
-CoreTools::MethodPropertySet<Value, Reference, Container, FO, FS>& CoreTools::MethodPropertySet<Value, Reference, Container, FO, FS>::operator=(ReferenceType value) noexcept
+template <typename Value, typename Reference, typename Container, ptrdiff_t (*FunctionOffset)(), void (Container::*FunctionSet)(Reference)>
+CoreTools::MethodPropertySet<Value, Reference, Container, FunctionOffset, FunctionSet>& CoreTools::MethodPropertySet<Value, Reference, Container, FunctionOffset, FunctionSet>::operator=(ReferenceType aValue) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto offset = (*FO)();
+    const auto offset = (*FunctionOffset)();
 
 #include STSTEM_WARNING_PUSH
- 
+
 #include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26481) 
+#include SYSTEM_WARNING_DISABLE(26481)
 
     auto thisPtr = reinterpret_cast<ContainerType*>(reinterpret_cast<uint8_t*>(this) - offset);
 
@@ -55,7 +55,7 @@ CoreTools::MethodPropertySet<Value, Reference, Container, FO, FS>& CoreTools::Me
 
     if (thisPtr != nullptr)
     {
-        (thisPtr->*FS)(value);
+        (thisPtr->*FunctionSet)(aValue);
     }
 
     return *this;

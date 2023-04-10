@@ -1,44 +1,42 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 23:03)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/30 16:58)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ObjectNameImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::string;
-
-CoreTools::ObjectNameImpl::ObjectNameImpl(const string& name)
-    : m_Name{ name }
+CoreTools::ObjectNameImpl::ObjectNameImpl(std::string name) noexcept
+    : name{ std::move(name) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ObjectNameImpl)
 
-string CoreTools::ObjectNameImpl::GetName() const
+std::string CoreTools::ObjectNameImpl::GetName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Name;
+    return name;
 }
 
-bool CoreTools::ObjectNameImpl::IsExactly(const ObjectNameImpl& name) const noexcept
+bool CoreTools::ObjectNameImpl::IsExactly(const ObjectNameImpl& aName) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Name == name.m_Name;
+    return name == aName.name;
 }
 
-void CoreTools::ObjectNameImpl::SetName(const string& name)
+void CoreTools::ObjectNameImpl::SetName(const std::string& aName)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Name = name;
+    name = aName;
 }

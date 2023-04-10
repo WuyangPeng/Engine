@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/14 21:38)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/04/03 17:46)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,13 +17,13 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 CoreTools::UnitTestComposite::UnitTestComposite(const OStreamShared& streamShared) noexcept
-    : ParentType{ streamShared }, InterfaceType{}, m_TestLoopCount{ 0 }, m_RandomSeed{ 0 }
+    : ParentType{ streamShared }, InterfaceType{}, testLoopCount{ 0 }, randomSeed{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::UnitTestComposite::UnitTestComposite(UnitTestComposite&& rhs) noexcept
-    : ParentType{ std::move(rhs) }, InterfaceType{ std::move(rhs) }, m_TestLoopCount{ rhs.m_TestLoopCount }, m_RandomSeed{ rhs.m_RandomSeed }
+    : ParentType{ std::move(rhs) }, InterfaceType{ std::move(rhs) }, testLoopCount{ rhs.testLoopCount }, randomSeed{ rhs.randomSeed }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -34,66 +34,72 @@ CoreTools::UnitTestComposite& CoreTools::UnitTestComposite::operator=(UnitTestCo
 
     if (this != &rhs)
     {
+        testLoopCount = rhs.testLoopCount;
+        randomSeed = rhs.randomSeed;
+
         ParentType::operator=(std::move(rhs));
-        InterfaceType::operator=(std::move(rhs));
-        m_TestLoopCount = rhs.m_TestLoopCount;
-        m_RandomSeed = rhs.m_RandomSeed;
     }
 
     return *this;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::UnitTestComposite::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && 0 <= m_TestLoopCount)
+    if (ParentType::IsValid() && 0 <= testLoopCount)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 void CoreTools::UnitTestComposite::ClearUnitTestCollection()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("禁止调用UnitTestComposite::ClearUnitTestCollection()！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("禁止调用UnitTestComposite::ClearUnitTestCollection()！"s))
 }
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26418)
-void CoreTools::UnitTestComposite::AddUnitTest(MAYBE_UNUSED const UnitTestCompositeSharedPtr& unitTest)
+
+void CoreTools::UnitTestComposite::AddUnitTest(const UnitTestCompositeSharedPtr& unitTest)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("禁止调用UnitTestComposite::AddUnitTest()！"s));
+    System::UnusedFunction(unitTest);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("禁止调用UnitTestComposite::AddUnitTest()！"s))
 }
+
 #include STSTEM_WARNING_POP
 
 int CoreTools::UnitTestComposite::GetTestLoopCount() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_TestLoopCount;
+    return testLoopCount;
 }
 
-void CoreTools::UnitTestComposite::SetTestLoopCount(int testLoopCount) noexcept
+void CoreTools::UnitTestComposite::SetTestLoopCount(int aTestLoopCount) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_TestLoopCount = testLoopCount;
+    testLoopCount = aTestLoopCount;
 }
 
-void CoreTools::UnitTestComposite::SetRandomSeed(int randomSeed) noexcept
+void CoreTools::UnitTestComposite::SetRandomSeed(int aRandomSeed) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_RandomSeed = randomSeed;
+    randomSeed = aRandomSeed;
 }
 
 int CoreTools::UnitTestComposite::GetRandomSeed() const noexcept
 {
-    return m_RandomSeed + System::GetEngineeringOffsetValue();
+    return randomSeed + System::GetEngineeringOffsetValue();
 }
 
 uint32_t CoreTools::UnitTestComposite::GetEngineRandomSeed() const

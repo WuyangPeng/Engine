@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 15:06)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/29 16:27)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_H
@@ -27,7 +27,7 @@ namespace CoreTools
     {
     public:
         using ClassType = BufferSource;
-        using ClassShareType = CoreTools::NonCopyClasses;
+        using ClassShareType = NonCopyClasses;
 
     public:
         explicit BufferSource(const ConstFileBufferSharedPtr& fileBuffer);
@@ -225,7 +225,7 @@ namespace CoreTools
         NODISCARD int GetBytesRead() const noexcept;
         NODISCARD int GetBytesTotal() const;
         void IncrementBytesProcessed(int bytesNumber);
-        void ReadUniqueID(ObjectInterface& object);
+        void ReadUniqueId(ObjectInterface& object);
 
     private:
         NODISCARD int32_t GetElementsNumber();

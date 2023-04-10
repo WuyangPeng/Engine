@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 18:01)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 14:47)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_GET_EXTERNAL_OFFSET_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_GET_EXTERNAL_OFFSET_H
@@ -21,12 +21,12 @@
 
 namespace CoreTools
 {
-    template <typename T, typename ConstReference, ConstReference (T::*PF)() const, ptrdiff_t (*FO)()>
+    template <typename T, typename ConstReference, ConstReference (T::*PropertyFunction)() const, ptrdiff_t (*FunctionOffset)()>
     class PropertyGetExternalOffset final
     {
     public:
         using ConstReferenceType = ConstReference;
-        using ClassType = PropertyGetExternalOffset<T, ConstReferenceType, PF, FO>;
+        using ClassType = PropertyGetExternalOffset<T, ConstReferenceType, PropertyFunction, FunctionOffset>;
 
     public:
         CLASS_INVARIANT_DECLARE;

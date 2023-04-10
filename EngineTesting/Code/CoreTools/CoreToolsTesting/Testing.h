@@ -5,16 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/05 15:09)
+///	引擎测试版本：0.9.0.5 (2023/04/04 17:29)
 
 #ifndef CORE_TOOLS_TESTING_H
 #define CORE_TOOLS_TESTING_H
 
-#include "BaseSuite/BaseSuite.h" 
+#include "BaseSuite/BaseSuite.h"
 #include "CharacterStringSuite/CharacterStringSuite.h"
 #include "CommandSuite/CommandSuite.h"
 #include "ConsoleSuite/ConsoleSuite.h"
 #include "ContractSuite/ContractSuite.h"
+#include "CoroutineSuite/CoroutineSuite.h"
 #include "CyclicRedundancyCheckSuite/CyclicRedundancyCheckSuite.h"
 #include "DataTypesSuite/DataTypesSuite.h"
 #include "EngineConfigurationSuite/EngineConfigurationSuite.h"

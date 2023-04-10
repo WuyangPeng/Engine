@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/16 21:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/04/03 17:06)
 
 #ifndef CORE_TOOLS_TIME_DELTA_TIME_MANAGER_IMPL_H
 #define CORE_TOOLS_TIME_DELTA_TIME_MANAGER_IMPL_H
@@ -20,6 +20,7 @@ namespace CoreTools
     {
     public:
         using ClassType = DeltaTimeManagerImpl;
+        using DeltaTimeValueData = System::DeltaTimeValueData;
 
     public:
         DeltaTimeManagerImpl() noexcept;
@@ -27,13 +28,13 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD void ResetCurrentTime() noexcept;
-        NODISCARD uint64_t GetElapsedTimeInMicroseconds() const noexcept;
-        NODISCARD uint64_t GetElapsedTimeInSeconds() const noexcept;
-        NODISCARD uint64_t GetNowTimeInMicroseconds() const noexcept;
-        NODISCARD uint64_t GetNowTimeInSeconds() const noexcept;
+        NODISCARD int64_t GetElapsedTimeInMicroseconds() const noexcept;
+        NODISCARD int64_t GetElapsedTimeInSeconds() const noexcept;
+        NODISCARD int64_t GetNowTimeInMicroseconds() const noexcept;
+        NODISCARD int64_t GetNowTimeInSeconds() const noexcept;
 
     private:
-        System::DeltaTimeValueData initial;
+        DeltaTimeValueData initial;
     };
 }
 

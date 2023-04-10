@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/05 15:09)
+///	引擎测试版本：0.9.0.5 (2023/04/04 17:31)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -56,7 +56,8 @@ void CoreTools::TestingHelper::InitSuite()
     AddStateMachineSuite();
     AddNetworkSuite();
     AddZlibSuite();
-    AddFreetypeSuite();
+    AddFreeTypeSuite();
+    AddCoroutineSuite();
 }
 
 void CoreTools::TestingHelper::AddHelperSuite()
@@ -513,10 +514,10 @@ CoreTools::Suite CoreTools::TestingHelper::GetSimpleCSVSuite()
 
     return simpleCSVSuite;
 }
-
+ 
 CoreTools::Suite CoreTools::TestingHelper::GetCommandSuite()
 {
-    auto simpleCSVCommandSuite = GenerateSuite("Csv命令");
+    auto simpleCSVCommandSuite = GenerateSuite("csv命令");
 
     ADD_TEST(simpleCSVCommandSuite, CommandSetSheetNameTesting);
     ADD_TEST(simpleCSVCommandSuite, CommandSetSheetVisibilityTesting);
@@ -534,7 +535,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetCommandSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetQuerySuite()
 {
-    auto querySuite = GenerateSuite("Csv查询");
+    auto querySuite = GenerateSuite("csv查询");
 
     ADD_TEST(querySuite, QuerySheetNameTesting);
     ADD_TEST(querySuite, QuerySheetIndexTesting);
@@ -811,9 +812,16 @@ void CoreTools::TestingHelper::AddZlibSuite()
     AddSuite(zlibSuite);
 }
 
-void CoreTools::TestingHelper::AddFreetypeSuite()
+void CoreTools::TestingHelper::AddFreeTypeSuite()
 {
-    auto freetypeSuite = GenerateSuite("freetype");
+    auto freeTypeSuite = GenerateSuite("freeType");
 
-    AddSuite(freetypeSuite);
+    AddSuite(freeTypeSuite);
+}
+
+void CoreTools::TestingHelper::AddCoroutineSuite()
+{
+    auto coroutineSuite = GenerateSuite("协程");
+
+    AddSuite(coroutineSuite);
 }

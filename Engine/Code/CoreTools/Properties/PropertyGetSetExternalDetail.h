@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/23 18:54)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 15:38)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_GET_SET_EXTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_GET_SET_EXTERNAL_DETAIL_H
@@ -15,11 +15,11 @@
 
 template <typename T,
           typename GetReference,
-          GetReference (T::*FG)(void) const,
+          GetReference (T::*PropertyGet)() const,
           typename SetReference,
-          void (T::*FS)(SetReference)>
-CoreTools::PropertyGetSetExternal<T, GetReference, FG, SetReference, FS>::PropertyGetSetExternal(T& object) noexcept
-    : m_Object{ object }
+          void (T::*PropertySet)(SetReference)>
+CoreTools::PropertyGetSetExternal<T, GetReference, PropertyGet, SetReference, PropertySet>::PropertyGetSetExternal(T& object) noexcept
+    : object{ object }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -27,10 +27,10 @@ CoreTools::PropertyGetSetExternal<T, GetReference, FG, SetReference, FS>::Proper
 #ifdef OPEN_CLASS_INVARIANT
 template <typename T,
           typename GetReference,
-          GetReference (T::*FG)(void) const,
+          GetReference (T::*PropertyGet)() const,
           typename SetReference,
-          void (T::*FS)(SetReference)>
-bool CoreTools::PropertyGetSetExternal<T, GetReference, FG, SetReference, FS>::IsValid() const noexcept
+          void (T::*PropertySet)(SetReference)>
+bool CoreTools::PropertyGetSetExternal<T, GetReference, PropertyGet, SetReference, PropertySet>::IsValid() const noexcept
 {
     return true;
 }
@@ -38,26 +38,26 @@ bool CoreTools::PropertyGetSetExternal<T, GetReference, FG, SetReference, FS>::I
 
 template <typename T,
           typename GetReference,
-          GetReference (T::*FG)(void) const,
+          GetReference (T::*PropertyGet)() const,
           typename SetReference,
-          void (T::*FS)(SetReference)>
-CoreTools::PropertyGetSetExternal<T, GetReference, FG, SetReference, FS>::operator GetReferenceType() const noexcept
+          void (T::*PropertySet)(SetReference)>
+CoreTools::PropertyGetSetExternal<T, GetReference, PropertyGet, SetReference, PropertySet>::operator GetReferenceType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return (m_Object.*FG)();
+    return (object.*PropertyGet)();
 }
 
 template <typename T,
           typename GetReference,
-          GetReference (T::*FG)(void) const,
+          GetReference (T::*PropertyGet)() const,
           typename SetReference,
-          void (T::*FS)(SetReference)>
-CoreTools::PropertyGetSetExternal<T, GetReference, FG, SetReference, FS>& CoreTools::PropertyGetSetExternal<T, GetReference, FG, SetReference, FS>::operator=(SetReferenceType value) noexcept
+          void (T::*PropertySet)(SetReference)>
+CoreTools::PropertyGetSetExternal<T, GetReference, PropertyGet, SetReference, PropertySet>& CoreTools::PropertyGetSetExternal<T, GetReference, PropertyGet, SetReference, PropertySet>::operator=(SetReferenceType value) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    (m_Object.*FS)(value);
+    (object.*PropertySet)(value);
 
     return *this;
 }

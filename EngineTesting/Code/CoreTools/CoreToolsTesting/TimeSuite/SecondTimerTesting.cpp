@@ -35,12 +35,12 @@ void CoreTools::SecondTimerTesting::MainTest()
 
 void CoreTools::SecondTimerTesting::TimeTest()
 {
-    constexpr uint64_t seconds{ 2 };
+    constexpr int64_t seconds{ 2 };
     SecondTimer secondTimer{ seconds };
-    constexpr uint32_t epsilon{ 1 };
+    constexpr int32_t epsilon{ 1 };
 
     ASSERT_RANGE(secondTimer.GetRemain(), seconds - epsilon, seconds);
-    ASSERT_RANGE(secondTimer.GetElapsedTime(), 0u, epsilon);
+    ASSERT_RANGE(secondTimer.GetElapsedTime(), 0, epsilon);
     ASSERT_FALSE(secondTimer.IsElapsed());
 
     const auto nowTime = secondTimer.GetNowTime();
@@ -48,20 +48,20 @@ void CoreTools::SecondTimerTesting::TimeTest()
 
     System::SystemSleep(boost::numeric_cast<uint32_t>(seconds * System::gMillisecond));
 
-    ASSERT_RANGE(secondTimer.GetRemain(), 0u, epsilon);
+    ASSERT_RANGE(secondTimer.GetRemain(), 0, epsilon);
     ASSERT_RANGE(secondTimer.GetElapsedTime(), seconds, seconds + epsilon);
     ASSERT_TRUE(secondTimer.IsElapsed());
 
-    constexpr uint64_t fourSeconds{ seconds * 2 };
+    constexpr int64_t fourSeconds{ seconds * 2 };
     secondTimer.ReTiming(fourSeconds);
 
     ASSERT_RANGE(secondTimer.GetRemain(), fourSeconds - epsilon, fourSeconds);
-    ASSERT_RANGE(secondTimer.GetElapsedTime(), 0u, epsilon);
+    ASSERT_RANGE(secondTimer.GetElapsedTime(), 0, epsilon);
     ASSERT_FALSE(secondTimer.IsElapsed());
 
     System::SystemSleep(boost::numeric_cast<uint32_t>(fourSeconds * System::gMillisecond));
 
-    ASSERT_RANGE(secondTimer.GetRemain(), 0u, epsilon);
+    ASSERT_RANGE(secondTimer.GetRemain(), 0, epsilon);
     ASSERT_RANGE(secondTimer.GetElapsedTime(), fourSeconds, fourSeconds + epsilon);
     ASSERT_TRUE(secondTimer.IsElapsed());
 }

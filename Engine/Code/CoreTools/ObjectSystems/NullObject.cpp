@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.0 (2022/08/07 1:16)
+///	引擎版本：0.9.0.5 (2023/03/30 17:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,9 +18,11 @@ CORE_TOOLS_RTTI_DEFINE(CoreTools, NullObject);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, NullObject);
 CORE_TOOLS_FACTORY_DEFINE(CoreTools, NullObject);
 
-CoreTools::NullObject::NullObject(MAYBE_UNUSED DisableNotThrow disableNotThrow)
-    : ParentType{ "" }
+CoreTools::NullObject::NullObject(DisableNotThrow disableNotThrow)
+    : ParentType{ "NullObject" }
 {
+    System::UnusedFunction(disableNotThrow);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 

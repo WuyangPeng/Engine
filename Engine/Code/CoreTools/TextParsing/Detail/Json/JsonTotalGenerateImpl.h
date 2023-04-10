@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 11:08)
+///	引擎版本：0.9.0.5 (2023/04/03 20:06)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_JSON_TOTAL_GENERATE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_JSON_TOTAL_GENERATE_IMPL_H
@@ -42,7 +42,6 @@ namespace CoreTools
         virtual void GenerateFile(const String& directory) const;
 
     protected:
-        NODISCARD static String GenerateCopyright();
         NODISCARD static String GenerateNewLine();
         NODISCARD String GenerateHeaderGuard() const;
         NODISCARD String GenerateContainerHeaderGuard() const;
@@ -81,6 +80,8 @@ namespace CoreTools
         NODISCARD static ClassNameType GetClassNameType(const JsonNode& jsonNode);
         NODISCARD String GenerateInnerNameSpaceBegin(const JsonHead& jsonHead) const;
         NODISCARD String GenerateInnerNameSpaceEnd() const;
+
+        NODISCARD String GenerateContainerDefaultFunctionDefinition(const String& className, const EnumType& dataType) const;
 
     private:
         String nameSpace;

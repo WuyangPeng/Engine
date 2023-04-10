@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{2f17764f-e1cc-4258-ac95-8ef39d4a9e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{cf19820d-faff-4a5b-ad27-59c68960e702}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\AncientBooks">
+      <UniqueIdentifier>{ca539a0b-7a1b-4f7f-a104-253b14c698cc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Renderer.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\Book.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\Category.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\Character.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\Country.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\Emperor.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\Gather.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\Genus.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\ImperialCourt.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\ReignTitle.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\Source.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\Version.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServer\DatabaseGenerateServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServer\DatabaseGenerateServerHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServer\DatabaseGenerateServerMessage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServer\DatabaseGenerateServerHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServer\DatabaseGenerateServerLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServer\DatabaseGenerateServerMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServer\DatabaseGenerateServerMessage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

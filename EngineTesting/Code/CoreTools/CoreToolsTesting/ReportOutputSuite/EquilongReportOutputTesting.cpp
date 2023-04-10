@@ -11,7 +11,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/ReportOutput/EquilongReportOutput.h"
+#include "CoreTools/ReportOutput/EquidistantReportOutput.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::string;
 using namespace std::literals;
@@ -38,7 +38,7 @@ void CoreTools::EquilongReportOutputTesting::MainTest()
 void CoreTools::EquilongReportOutputTesting::ReportOutputTest()
 {
     const string characterContent{ "这里的文字被两行^包围，且与文字长度一致!"s };
-    EquilongReportOutput output{ boost::numeric_cast<int>(characterContent.size()), GetStream() };
+    EquidistantReportOutput output{ boost::numeric_cast<int>(characterContent.size()), GetStream() };
 
     output.PrintBorderLine('^');
     output.PrintNewLine();

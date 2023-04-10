@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/21 16:18)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/31 16:01)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_DEFAULT_STATE_MACHINE_BASE_DETAIL_H
 #define CORE_TOOLS_STATE_MACHINE_DEFAULT_STATE_MACHINE_BASE_DETAIL_H
@@ -68,7 +68,9 @@ typename CoreTools::StateMachineBase<EntityType, EventType>::StateSharedPtr Core
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26473)
+
     return std::const_pointer_cast<State>(static_cast<const ClassType*>(this)->GetPossiblePreviousState());
+
 #include STSTEM_WARNING_POP
 }
 
@@ -115,9 +117,7 @@ bool CoreTools::StateMachineBase<EntityType, EventType>::HandleMessage(const Tel
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    auto result = currentState->OnMessage(msg);
-
-    if (result.second)
+    if (const auto result = currentState->OnMessage(msg); result.second)
     {
         if (result.first != currentState)
         {
@@ -129,9 +129,7 @@ bool CoreTools::StateMachineBase<EntityType, EventType>::HandleMessage(const Tel
 
     if (globalState)
     {
-        auto globalResult = globalState->OnMessage(msg);
-
-        if (globalResult.second)
+        if (const auto globalResult = globalState->OnMessage(msg); globalResult.second)
         {
             if (globalResult.first != currentState)
             {
@@ -155,7 +153,7 @@ void CoreTools::StateMachineBase<EntityType, EventType>::Update(int64_t timeInte
         globalState->Execute(timeInterval);
     }
 
-    auto state = currentState->Execute(timeInterval);
+    const auto state = currentState->Execute(timeInterval);
 
     if (state != currentState)
     {
@@ -163,7 +161,6 @@ void CoreTools::StateMachineBase<EntityType, EventType>::Update(int64_t timeInte
     }
 }
 
-// private
 template <typename EntityType, typename EventType>
 void CoreTools::StateMachineBase<EntityType, EventType>::ChangeState(const StateSharedPtr& newState)
 {

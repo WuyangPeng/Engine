@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/10 14:02)
+///	引擎版本：0.9.0.5 (2023/04/04 17:26)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,8 +20,6 @@
 #include "CoreTools/TextParsing/Flags/JsonFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 #include "CoreTools/TextParsing/Json/JsonHead.h"
-
-using namespace std::literals;
 
 CoreTools::JsonGenerateImpl::JsonGenerateImpl(JsonHead jsonHead) noexcept
     : jsonHead{ std::move(jsonHead) }
@@ -82,32 +80,18 @@ CoreTools::JsonHead CoreTools::JsonGenerateImpl::GetJsonHead() const noexcept
     return jsonHead;
 }
 
-System::String CoreTools::JsonGenerateImpl::GenerateCopyright()
-{
-    auto content = SYSTEM_TEXT("/// Copyright (c) 2010-\n"s);
-
-    content += SYSTEM_TEXT("/// Threading Core Render Engine\n"s);
-    content += SYSTEM_TEXT("///\n"s);
-    content += SYSTEM_TEXT("/// 作者：彭武阳，彭晔恩，彭晔泽\n"s);
-    content += SYSTEM_TEXT("/// 联系作者：94458936@qq.com\n"s);
-    content += SYSTEM_TEXT("///\n"s);
-    content += SYSTEM_TEXT("/// 标准：std:c++20\n"s);
-    content += SYSTEM_TEXT("/// 自动生成\n"s);
-
-    return content;
-}
-
 System::String CoreTools::JsonGenerateImpl::GenerateHeaderGuard() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto headerGuard = StringUtility::ToUpperMacro(jsonHead.GetNameSpace() + GetJsonClassName() + GetFileSuffix());
 
-    auto content = SYSTEM_TEXT("#ifndef "s);
+    String content{ TextParsing::gIfndef };
+
     content += headerGuard;
     content += TextParsing::gNewlineCharacter;
 
-    content += SYSTEM_TEXT("#define "s);
+    content += TextParsing::gDefine;
     content += headerGuard;
     content += TextParsing::gNewlineCharacter;
     content += TextParsing::gNewlineCharacter;
@@ -119,8 +103,9 @@ System::String CoreTools::JsonGenerateImpl::GenerateNameSpace() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = SYSTEM_TEXT("namespace "s);
+    String content{ TextParsing::gNamespace };
 
+    content += TextParsing::gSpace;
     content += jsonHead.GetNameSpace();
     content += TextParsing::gNewlineCharacter;
     content += TextParsing::gFunctionBeginBrackets;
@@ -134,8 +119,8 @@ System::String CoreTools::JsonGenerateImpl::GenerateInnerNameSpaceBegin() const
 
     String content{ TextParsing::gIndentation };
 
-    content += SYSTEM_TEXT("namespace "s);
-
+    content += TextParsing::gNamespace;
+    content += TextParsing::gSpace;
     content += jsonHead.GetJsonClassName();
     content += TextParsing::gNewlineCharacter;
 
@@ -160,7 +145,8 @@ System::String CoreTools::JsonGenerateImpl::GenerateHeaderGuardEndif() const
 
     const auto headerGuard = StringUtility::ToUpperMacro(jsonHead.GetNameSpace() + GetJsonClassName() + GetFileSuffix());
 
-    auto content = SYSTEM_TEXT("#endif  // "s);
+    String content{ TextParsing::gEndif };
+
     content += headerGuard;
     content += TextParsing::gNewlineCharacter;
 

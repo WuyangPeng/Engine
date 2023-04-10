@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 09:35)
+///	引擎版本：0.9.0.5 (2023/04/04 16:59)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -130,6 +130,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateCon
 
     String content{ TextParsing::gVoid };
 
+    content += TextParsing::gSpace;
     content += csvHead.GetNameSpace();
     content += TextParsing::gDoubleColon;
     content += GetCSVClassName();
@@ -199,7 +200,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateSor
 
     content += TextParsing::gSort;
     content += lowerClassName;
-    content += SYSTEM_TEXT(", [](const auto& lhs, const auto& rhs) noexcept {\n");
+    content += TextParsing::gFunction;
 
     return content;
 }
@@ -245,7 +246,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateUni
 
     content += TextParsing::gUnique;
     content += lowerClassName;
-    content += SYSTEM_TEXT(", [](const auto& lhs, const auto& rhs) noexcept {\n");
+    content += TextParsing::gFunction;
 
     return content;
 }
@@ -257,7 +258,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateIfI
     auto content = GenerateIndentation(1);
 
     content += TextParsing::gIfIterBegin;
-    content += SYSTEM_TEXT("iter.end())\n");
+    content += TextParsing::gIterEnd;
 
     return content;
 }
@@ -279,7 +280,8 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateRep
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += SYSTEM_TEXT(" SYSTEM_TEXT(\"");
+    content += TextParsing::gSpace;
+    content += TextParsing::gSystemText;
     content += lowerClassName;
     content += repeatKey;
 
@@ -292,7 +294,7 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateLog
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += SYSTEM_TEXT(", CoreTools::LogAppenderIOManageSign::TriggerAssert);\n");
+    content += TextParsing::gLogAssert;
 
     return content;
 }
@@ -305,8 +307,13 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateEra
 
     content += lowerClassName;
     content += TextParsing::gEraseIterBegin;
-    content += SYSTEM_TEXT("iter");
+    content += TextParsing::gSmallIter;
+    content += TextParsing::gDot;
     content += TextParsing::gEnd;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gRightBrackets;
+    content += TextParsing::gSemicolonNewline;
 
     return content;
 }

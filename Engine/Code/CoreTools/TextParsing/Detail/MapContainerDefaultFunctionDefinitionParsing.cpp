@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/09 10:09)
+///	引擎版本：0.9.0.5 (2023/04/04 16:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,8 +16,6 @@
 #include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
-
-using namespace std::literals;
 
 CoreTools::MapContainerDefaultFunctionDefinitionParsing::MapContainerDefaultFunctionDefinitionParsing(const CSVHead& csvHead, const String& className)
     : ParentType{ csvHead, className }
@@ -71,9 +69,14 @@ System::String CoreTools::MapContainerDefaultFunctionDefinitionParsing::Generate
     const auto csvHead = GetCSVHead();
 
     content += TextParsing::gAuto;
+    content += TextParsing::gSpace;
     content += GetLowerClassName();
     content += TextParsing::gBase;
+    content += TextParsing::gSpace;
+    content += TextParsing::gEqualSign;
+    content += TextParsing::gSpace;
     content += TextParsing::gMakeShared;
+    content += TextParsing::gLeftAngleBracket;
     content += csvHead.GetCSVClassName();
     content += TextParsing::gCSVRowParameter;
     content += TextParsing::gNewlineCharacter;
@@ -106,8 +109,9 @@ System::String CoreTools::MapContainerDefaultFunctionDefinitionParsing::Generate
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = SYSTEM_TEXT(", "s);
+    String content{ TextParsing::gComma };
 
+    content += TextParsing::gSpace;
     content += GetLowerClassName();
     content += TextParsing::gBaseGetKey;
 

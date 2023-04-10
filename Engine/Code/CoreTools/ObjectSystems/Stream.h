@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 22:02)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/29 16:38)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_STREAM_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_STREAM_H
@@ -27,7 +27,7 @@ namespace CoreTools
     public:
         // 这个函数返回存储字符串所需的字节数。字符串长度首先作为一个int32被存储，后面跟着它的字符。
         // 该字符串用零填充，使总存储数使用四个字节的倍数。
-        template <typename T, typename std::enable_if_t<std::is_constructible_v<std::decay_t<T>, const char*>>* = nullptr>
+        template <typename T, std::enable_if_t<std::is_constructible_v<std::decay_t<T>, const char*>>* = nullptr>
         NODISCARD static int GetStreamingSize(T&& input)
         {
             auto length = boost::numeric_cast<int>(input.size());
@@ -37,7 +37,7 @@ namespace CoreTools
 
         NODISCARD static int GetStreamingSize(const char* input);
 
-        NODISCARD static constexpr int GetPadding(int length) noexcept
+        NODISCARD static constexpr int GetPadding(const int length) noexcept
         {
             auto padding = 0;
             if (0 < length)

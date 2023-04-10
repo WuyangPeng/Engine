@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/06 14:04)
+///	引擎版本：0.9.0.5 (2023/04/04 15:03)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -37,7 +37,6 @@ CoreTools::SimpleZip::ZipEntryImpl::ZipEntryImpl(const std::string& name, ZipEnt
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 CoreTools::SimpleZip::ZipEntryInfo CoreTools::SimpleZip::ZipEntryImpl::CreateInfo(const std::string& fileName)
 {
     ZipEntryInfo info{};

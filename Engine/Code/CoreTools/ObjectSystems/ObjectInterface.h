@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.0 (2022/08/07 0:00)
+///	引擎版本：0.9.0.5 (2023/03/29 16:35)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_INTERFACE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_INTERFACE_H
@@ -34,7 +34,7 @@ namespace CoreTools
 
     public:
         ObjectInterface() noexcept;
-        explicit ObjectInterface(int64_t uniqueID) noexcept;
+        explicit ObjectInterface(int64_t uniqueId) noexcept;
         virtual ~ObjectInterface() noexcept = default;
         ObjectInterface(const ObjectInterface& rhs) noexcept = default;
         ObjectInterface& operator=(const ObjectInterface& rhs) noexcept = default;
@@ -57,18 +57,18 @@ namespace CoreTools
         NODISCARD static bool RegisterFactory();
         static void InitializeFactory();
         static void TerminateFactory();
-        NODISCARD static ObjectInterfaceSharedPtr Factory(CoreTools::BufferSource& source);
+        NODISCARD static ObjectInterfaceSharedPtr Factory(BufferSource& source);
 
-        NODISCARD int64_t GetUniqueID() const noexcept;
-        void SetUniqueID(int64_t aUniqueID) noexcept;
+        NODISCARD int64_t GetUniqueId() const noexcept;
+        void SetUniqueId(int64_t aUniqueId) noexcept;
 
-        NODISCARD virtual int64_t Register(CoreTools::ObjectRegister& target) const = 0;
+        NODISCARD virtual int64_t Register(ObjectRegister& target) const = 0;
         NODISCARD virtual int GetStreamingSize() const = 0;
-        virtual void Save(CoreTools::BufferTarget& target) const = 0;
+        virtual void Save(BufferTarget& target) const = 0;
 
-        virtual void Link(CoreTools::ObjectLink& source) = 0;
+        virtual void Link(ObjectLink& source) = 0;
         virtual void PostLink() = 0;
-        virtual void Load(CoreTools::BufferSource& source) = 0;
+        virtual void Load(BufferSource& source) = 0;
 
         NODISCARD virtual ObjectInterfaceSharedPtr CloneObject() const = 0;
 
@@ -82,7 +82,7 @@ namespace CoreTools
         explicit ObjectInterface(LoadConstructor loadConstructor) noexcept;
 
     private:
-        int64_t uniqueID;
+        int64_t uniqueId;
     };
 
     using ObjectInterfaceSharedPtr = ObjectInterface::ObjectInterfaceSharedPtr;

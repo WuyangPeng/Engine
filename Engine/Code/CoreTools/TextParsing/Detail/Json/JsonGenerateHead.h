@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/10 13:38)
+///	引擎版本：0.9.0.5 (2023/04/03 20:05)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_JSON_GENERATE_HEAD_H
 #define CORE_TOOLS_TEXT_PARSING_JSON_GENERATE_HEAD_H
@@ -25,7 +25,7 @@ namespace CoreTools
         using String = System::String;
 
     public:
-        explicit JsonGenerateHead(const JsonHead& jsonHead) noexcept;
+        explicit JsonGenerateHead(JsonHead jsonHead) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

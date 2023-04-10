@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 22:02)
+///	标准：std:c++20
+///	引擎版本：0.9.0.5 (2023/03/29 16:39)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_STREAM_SIZE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_STREAM_SIZE_H
 
 #include "Stream.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 
 #include <type_traits>
@@ -23,8 +24,10 @@ namespace CoreTools
     template <typename T, typename Enable = void>
     struct StreamSize
     {
-        NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED T value) noexcept
+        NODISCARD constexpr static int GetStreamSize(T value) noexcept
         {
+            System::UnusedFunction(value);
+
             return GetStreamSize();
         }
 
@@ -36,10 +39,12 @@ namespace CoreTools
 
     // 一个独特的ID是一个无符号整数写入8个字节到磁盘上。
     template <typename T>
-    struct StreamSize<T, typename std::enable_if_t<std::is_pointer_v<T>>>
+    struct StreamSize<T, std::enable_if_t<std::is_pointer_v<T>>>
     {
-        NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED T value) noexcept
+        NODISCARD constexpr static int GetStreamSize(T value) noexcept
         {
+            System::UnusedFunction(value);
+
             return GetStreamSize();
         }
 
@@ -52,8 +57,10 @@ namespace CoreTools
     template <typename T>
     struct StreamSize<ObjectAssociated<T>>
     {
-        NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED const ObjectAssociated<T>& value) noexcept
+        NODISCARD constexpr static int GetStreamSize(const ObjectAssociated<T>& value) noexcept
         {
+            System::UnusedFunction(value);
+
             return GetStreamSize();
         }
 
@@ -68,9 +75,13 @@ namespace CoreTools
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26418)
-        NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED const std::shared_ptr<T>& value) noexcept
+
+        NODISCARD constexpr static int GetStreamSize(const std::shared_ptr<T>& value) noexcept
+
 #include STSTEM_WARNING_POP
         {
+            System::UnusedFunction(value);
+
             return GetStreamSize();
         }
 
@@ -83,8 +94,10 @@ namespace CoreTools
     template <typename T>
     struct StreamSize<std::weak_ptr<T>>
     {
-        NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED const std::weak_ptr<T>& value) noexcept
+        NODISCARD constexpr static int GetStreamSize(const std::weak_ptr<T>& value) noexcept
         {
+            System::UnusedFunction(value);
+
             return GetStreamSize();
         }
 
@@ -97,8 +110,10 @@ namespace CoreTools
     template <typename T>
     struct StreamSize<std::unique_ptr<T>>
     {
-        NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED const std::unique_ptr<T>& value) noexcept
+        NODISCARD constexpr static int GetStreamSize(const std::unique_ptr<T>& value) noexcept
         {
+            System::UnusedFunction(value);
+
             return GetStreamSize();
         }
 
@@ -112,8 +127,10 @@ namespace CoreTools
     template <>
     struct StreamSize<bool>
     {
-        NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED bool value) noexcept
+        NODISCARD constexpr static int GetStreamSize(bool value) noexcept
         {
+            System::UnusedFunction(value);
+
             return GetStreamSize();
         }
 
@@ -124,10 +141,12 @@ namespace CoreTools
     };
 
     template <typename T>
-    struct StreamSize<T, typename std::enable_if_t<std::is_enum_v<T>>>
+    struct StreamSize<T, std::enable_if_t<std::is_enum_v<T>>>
     {
-        NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED T value) noexcept
+        NODISCARD constexpr static int GetStreamSize(T value) noexcept
         {
+            System::UnusedFunction(value);
+
             return GetStreamSize();
         }
 
@@ -180,7 +199,7 @@ namespace CoreTools
     };
 
     template <typename T>
-    struct StreamSize<std::vector<T>, typename std::enable_if_t<std::is_arithmetic_v<T>>>
+    struct StreamSize<std::vector<T>, std::enable_if_t<std::is_arithmetic_v<T>>>
     {
         NODISCARD static int GetStreamSize(const std::vector<T>& value)
         {
@@ -201,7 +220,7 @@ namespace CoreTools
     };
 
     template <typename T>
-    struct StreamSize<std::vector<T>, typename std::enable_if_t<std::is_pointer_v<T>>>
+    struct StreamSize<std::vector<T>, std::enable_if_t<std::is_pointer_v<T>>>
     {
         NODISCARD static int GetStreamSize(const std::vector<T>& value)
         {
