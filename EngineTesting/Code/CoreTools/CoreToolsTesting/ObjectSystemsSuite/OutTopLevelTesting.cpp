@@ -1,19 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 15:43)
+///	引擎测试版本：0.9.0.6 (2023/04/24 15:19)
 
 #include "OutTopLevelTesting.h"
-#include "CoreTools/ObjectSystems/NullObject.h"
+#include "Detail/BoolObject.h"
+#include "Detail/EnumObject.h"
+#include "Detail/IntObject.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/NullObject.h"
 #include "CoreTools/ObjectSystems/Object.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 CoreTools::OutTopLevelTesting::OutTopLevelTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -32,6 +37,25 @@ void CoreTools::OutTopLevelTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(TopLevelTest);
 }
 
-void CoreTools::OutTopLevelTesting::TopLevelTest() noexcept
+void CoreTools::OutTopLevelTesting::TopLevelTest()
 {
+    auto outTopLevel = OutTopLevel::Create();
+
+    ASSERT_EQUAL(outTopLevel.GetTopLevelSize(), 0);
+
+    outTopLevel.Insert(std::make_shared<BoolObject>(DisableNotThrow::Disable));
+    outTopLevel.Insert(std::make_shared<EnumObject>(DisableNotThrow::Disable));
+    outTopLevel.Insert(std::make_shared<IntObject>(DisableNotThrow::Disable));
+
+    ASSERT_EQUAL(outTopLevel.GetTopLevelSize(), 3);
+
+    for (const auto& value : outTopLevel)
+    {
+        ASSERT_TRUE(outTopLevel.IsTopLevel(value));
+    }
+
+    for (auto& value : outTopLevel)
+    {
+        ASSERT_TRUE(outTopLevel.IsTopLevel(value));
+    }
 }

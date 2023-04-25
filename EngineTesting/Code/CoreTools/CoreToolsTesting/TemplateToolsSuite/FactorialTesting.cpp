@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 19:01)
+///	引擎测试版本：0.9.0.6 (2023/04/25 11:18)
 
 #include "FactorialTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/Factorial.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 CoreTools::FactorialTesting::FactorialTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -27,11 +28,11 @@ void CoreTools::FactorialTesting::DoRunUnitTest()
 
 void CoreTools::FactorialTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(RecursiveVsNonrecursiveTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(RecursiveVsNonRecursiveTest);
     ASSERT_NOT_THROW_EXCEPTION_0(TemplateVersionTest);
 }
 
-void CoreTools::FactorialTesting::RecursiveVsNonrecursiveTest()
+void CoreTools::FactorialTesting::RecursiveVsNonRecursiveTest()
 {
     for (auto index = 0; index < 10; ++index)
     {

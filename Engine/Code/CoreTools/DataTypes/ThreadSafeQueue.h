@@ -28,7 +28,7 @@ namespace CoreTools
         using PopResultType = std::pair<Element, bool>;
 
     public:
-        ThreadSafeQueue(size_t maxNumElements = 0) noexcept;
+        explicit ThreadSafeQueue(size_t maxNumElements = 0) noexcept;
         ~ThreadSafeQueue() = default;
         ThreadSafeQueue(const ThreadSafeQueue& rhs);
         ThreadSafeQueue& operator=(const ThreadSafeQueue& rhs);

@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 13:52)
+///	引擎测试版本：0.9.0.6 (2023/04/11 17:58)
 
 #include "MinHeapRecordIndexTesting.h"
 #include "CoreTools/DataTypes/MinHeapRecordIndex.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 CoreTools::MinHeapRecordIndexTesting::MinHeapRecordIndexTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -34,40 +35,40 @@ void CoreTools::MinHeapRecordIndexTesting::IndexTest()
 {
     constexpr auto recordIndexSize = 11;
 
-    MinHeapRecordIndex firstMinHeapRecordIndex{ recordIndexSize };
+    MinHeapRecordIndex minHeapRecordIndex0{ recordIndexSize };
 
-    ASSERT_EQUAL(firstMinHeapRecordIndex.GetMaxElements(), recordIndexSize);
+    ASSERT_EQUAL(minHeapRecordIndex0.GetMaxElements(), recordIndexSize);
 
     for (auto index = 0; index < recordIndexSize; ++index)
     {
-        ASSERT_EQUAL(firstMinHeapRecordIndex.GetHeapIndex(index), index);
+        ASSERT_EQUAL(minHeapRecordIndex0.GetHeapIndex(index), index);
     }
 
     for (auto index = 0; index < recordIndexSize / 2; ++index)
     {
-        firstMinHeapRecordIndex.ChangeIndex(index, recordIndexSize - index - 1);
+        minHeapRecordIndex0.ChangeIndex(index, recordIndexSize - index - 1);
     }
 
-    MinHeapRecordIndex secondMinHeapRecordIndex{ firstMinHeapRecordIndex };
+    const MinHeapRecordIndex minHeapRecordIndex1{ minHeapRecordIndex0 };
 
-    ASSERT_EQUAL(secondMinHeapRecordIndex.GetMaxElements(), recordIndexSize);
+    ASSERT_EQUAL(minHeapRecordIndex1.GetMaxElements(), recordIndexSize);
 
-    for (auto index = 0; index < firstMinHeapRecordIndex.GetMaxElements(); ++index)
+    for (auto index = 0; index < minHeapRecordIndex0.GetMaxElements(); ++index)
     {
-        ASSERT_EQUAL(firstMinHeapRecordIndex.GetHeapIndex(index), firstMinHeapRecordIndex.GetMaxElements() - index - 1);
+        ASSERT_EQUAL(minHeapRecordIndex0.GetHeapIndex(index), minHeapRecordIndex0.GetMaxElements() - index - 1);
     }
 
-    MinHeapRecordIndex thirdMinHeapRecordIndex{ recordIndexSize + 2, secondMinHeapRecordIndex };
+    const MinHeapRecordIndex minHeapRecordIndex2{ recordIndexSize + 2, minHeapRecordIndex1 };
 
-    ASSERT_EQUAL(thirdMinHeapRecordIndex.GetMaxElements(), recordIndexSize + 2);
+    ASSERT_EQUAL(minHeapRecordIndex2.GetMaxElements(), recordIndexSize + 2);
 
-    for (int index = 0; index < secondMinHeapRecordIndex.GetMaxElements(); ++index)
+    for (auto index = 0; index < minHeapRecordIndex1.GetMaxElements(); ++index)
     {
-        ASSERT_EQUAL(thirdMinHeapRecordIndex.GetHeapIndex(index), secondMinHeapRecordIndex.GetMaxElements() - index - 1);
+        ASSERT_EQUAL(minHeapRecordIndex2.GetHeapIndex(index), minHeapRecordIndex1.GetMaxElements() - index - 1);
     }
 
-    for (auto index = secondMinHeapRecordIndex.GetMaxElements(); index < thirdMinHeapRecordIndex.GetMaxElements(); ++index)
+    for (auto index = minHeapRecordIndex1.GetMaxElements(); index < minHeapRecordIndex2.GetMaxElements(); ++index)
     {
-        ASSERT_EQUAL(thirdMinHeapRecordIndex.GetHeapIndex(index), index);
+        ASSERT_EQUAL(minHeapRecordIndex2.GetHeapIndex(index), index);
     }
 }

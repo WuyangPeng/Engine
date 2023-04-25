@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/29 10:38)
+///	引擎版本：0.9.0.6 (2023/04/14 10:54)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_ARRAY4_H
 #define CORE_TOOLS_MEMORY_TOOLS_ARRAY4_H
@@ -23,26 +23,38 @@ namespace CoreTools
         using ClassType = Array4<T>;
 
     public:
-        Array4(size_t bound0, size_t bound1, size_t bound2, size_t bound3);
+        Array4(int bound0, int bound1, int bound2, int bound3);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD size_t GetBound0() const noexcept;
-        NODISCARD size_t GetBound1() const noexcept;
-        NODISCARD size_t GetBound2() const noexcept;
-        NODISCARD size_t GetBound3() const noexcept;
+        NODISCARD int GetBound0() const noexcept;
+        NODISCARD int GetBound1() const noexcept;
+        NODISCARD int GetBound2() const noexcept;
+        NODISCARD int GetBound3() const noexcept;
 
-        NODISCARD T** const* operator[](int cuboid) const noexcept;
-        NODISCARD T*** operator[](int cuboid) noexcept;
+        NODISCARD T** const* operator[](int cuboid) const;
+        NODISCARD T*** operator[](int cuboid);
 
     private:
         void SetPointers();
+        NODISCARD constexpr static int GetObjectSize(int bound0, int bound1) noexcept
+        {
+            return bound0 * bound1;
+        }
+        NODISCARD constexpr static int GetObjectSize(int bound0, int bound1, int bound2) noexcept
+        {
+            return bound0 * bound1 * bound2;
+        }
+        NODISCARD constexpr static int GetObjectSize(int bound0, int bound1, int bound2, int bound3) noexcept
+        {
+            return bound0 * bound1 * bound2 * bound3;
+        }
 
     private:
-        size_t bound0;
-        size_t bound1;
-        size_t bound2;
-        size_t bound3;
+        int bound0;
+        int bound1;
+        int bound2;
+        int bound3;
         std::vector<T> objects;
         std::vector<T*> indirect1;
         std::vector<T**> indirect2;

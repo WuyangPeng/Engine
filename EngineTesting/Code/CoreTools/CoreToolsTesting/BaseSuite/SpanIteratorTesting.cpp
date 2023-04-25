@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/02/23 16:40)
+///	引擎测试版本：0.9.0.6 (2023/04/10 19:17)
 
 #include "SpanIteratorTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -37,13 +37,12 @@ void CoreTools::SpanIteratorTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(IncreaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SubtractionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(IterSwapTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ConstTest);
 }
 
 void CoreTools::SpanIteratorTesting::BaseTest()
 {
     std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
-
-    using SpanIterator = SpanIterator<std::vector<int>::iterator>;
 
     const SpanIterator span{ test.begin(), test.end() };
 
@@ -58,8 +57,6 @@ void CoreTools::SpanIteratorTesting::DereferenceTest()
 {
     std::vector test{ "1"s, "2"s, "3"s };
 
-    using SpanIterator = SpanIterator<std::vector<std::string>::iterator>;
-
     const SpanIterator span{ test.begin(), test.end(), test.begin() };
 
     ASSERT_EQUAL(*span, test.at(0));
@@ -69,8 +66,6 @@ void CoreTools::SpanIteratorTesting::DereferenceTest()
 void CoreTools::SpanIteratorTesting::StepTest()
 {
     std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
-
-    using SpanIterator = SpanIterator<std::vector<int>::iterator>;
 
     SpanIterator span{ test.begin(), test.end(), test.begin() };
 
@@ -109,8 +104,6 @@ void CoreTools::SpanIteratorTesting::IncreaseTest()
 {
     std::vector<char> test(10);
 
-    using SpanIterator = SpanIterator<std::vector<char>::iterator>;
-
     SpanIterator span{ test.begin(), test.end(), test.begin() };
     constexpr int32_t increase{ 5 };
 
@@ -124,8 +117,6 @@ void CoreTools::SpanIteratorTesting::IncreaseTest()
 void CoreTools::SpanIteratorTesting::SubtractionTest()
 {
     std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
-
-    using SpanIterator = SpanIterator<std::vector<int>::iterator>;
 
     const SpanIterator span0{ test.begin(), test.end(), test.begin() };
     SpanIterator span1{ test.begin(), test.end(), test.begin() };
@@ -141,8 +132,6 @@ void CoreTools::SpanIteratorTesting::IterSwapTest()
 {
     std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
 
-    using SpanIterator = SpanIterator<std::vector<int>::iterator>;
-
     const SpanIterator span0{ test.begin(), test.end(), test.begin() };
     SpanIterator span1{ test.begin(), test.end(), test.begin() };
 
@@ -154,4 +143,17 @@ void CoreTools::SpanIteratorTesting::IterSwapTest()
 
     ASSERT_EQUAL(test.at(0), 6);
     ASSERT_EQUAL(test.at(5), 1);
+}
+
+void CoreTools::SpanIteratorTesting::ConstTest()
+{
+    const std::vector test{ 1, 2, 3, 4, 5, 6, 7 };
+
+    const SpanIterator span{ test.begin(), test.end() };
+
+    ASSERT_EQUAL(span.GetBegin(), test.begin());
+    ASSERT_EQUAL(span.GetEnd(), test.end());
+    ASSERT_EQUAL(span.GetCurrent(), test.begin());
+
+    ASSERT_EQUAL(span.GetRemainingCount(), boost::numeric_cast<int>(test.size()));
 }

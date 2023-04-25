@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 14:13)
+///	引擎测试版本：0.9.0.6 (2023/04/18 16:00)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_ENUM_OBJECT_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_ENUM_OBJECT_H
@@ -18,7 +18,7 @@
 // enum值对象，这个类用于演示Object使用enum值和enum值的数组。
 namespace CoreTools
 {
-    class EnumObject : public NullObject
+    class EnumObject final : public NullObject
     {
     public:
         using ClassType = EnumObject;

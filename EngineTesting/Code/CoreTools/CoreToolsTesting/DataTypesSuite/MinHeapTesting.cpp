@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 13:55)
+///	引擎测试版本：0.9.0.6 (2023/04/11 18:06)
 
 #include "MinHeapTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/DataTypes/MinHeapDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int_distribution;
-using std::uniform_real;
+#include <random>
 
 CoreTools::MinHeapTesting::MinHeapTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -46,8 +43,8 @@ void CoreTools::MinHeapTesting::IntegerTest()
     ASSERT_EQUAL(minHeap.GetGrowBy(), 5);
     ASSERT_EQUAL(minHeap.GetElementsNumber(), 0);
 
-    default_random_engine generator{ boost::numeric_cast<uint32_t>(GetRandomSeed()) };
-    const uniform_int_distribution<> randomDistribution{ 0, 10 };
+    std::default_random_engine generator{ boost::numeric_cast<uint32_t>(GetRandomSeed()) };
+    const std::uniform_int_distribution<> randomDistribution{ 0, 10 };
 
     for (auto i = 0; i < 12; ++i)
     {
@@ -60,7 +57,7 @@ void CoreTools::MinHeapTesting::IntegerTest()
     ASSERT_EQUAL(minHeap.GetGrowBy(), 5);
     ASSERT_EQUAL(minHeap.GetElementsNumber(), 12);
 
-    auto randomUpdateValue = randomDistribution(generator);
+    const auto randomUpdateValue = randomDistribution(generator);
     if (minHeap.IsUniqueIndexValid(5))
     {
         const auto newIndex = minHeap.Update(5, randomUpdateValue);
@@ -91,8 +88,8 @@ void CoreTools::MinHeapTesting::FloatTest()
     ASSERT_EQUAL(minHeap.GetGrowBy(), 3);
     ASSERT_EQUAL(minHeap.GetElementsNumber(), 0);
 
-    default_random_engine generator{ boost::numeric_cast<uint32_t>(GetRandomSeed()) };
-    const uniform_real<float> randomDistribution{ 0.0f, 10.0f };
+    std::default_random_engine generator{ boost::numeric_cast<uint32_t>(GetRandomSeed()) };
+    const std::uniform_real randomDistribution{ 0.0f, 10.0f };
 
     for (auto i = 0; i < 6; ++i)
     {
@@ -105,7 +102,7 @@ void CoreTools::MinHeapTesting::FloatTest()
     ASSERT_EQUAL(minHeap.GetGrowBy(), 3);
     ASSERT_EQUAL(minHeap.GetElementsNumber(), 6);
 
-    auto randomUpdateValue = randomDistribution(generator);
+    const auto randomUpdateValue = randomDistribution(generator);
     if (minHeap.IsUniqueIndexValid(2))
     {
         const auto newIndex = minHeap.Update(2, randomUpdateValue);

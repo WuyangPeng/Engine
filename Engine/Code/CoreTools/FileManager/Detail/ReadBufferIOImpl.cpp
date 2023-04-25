@@ -97,7 +97,7 @@ std::string CoreTools::ReadBufferIOImpl::GetText(int length) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto nextProcessed = boost::numeric_cast<size_t>(GetBytesProcessed() + length); nextProcessed <= buffer->GetSize())
+    if (const auto nextProcessed = GetBytesProcessed() + length; nextProcessed <= buffer->GetSize())
     {
         const auto text = buffer->GetBuffer(GetBytesProcessed());
         std::string datum{ text, boost::numeric_cast<size_t>(length) };

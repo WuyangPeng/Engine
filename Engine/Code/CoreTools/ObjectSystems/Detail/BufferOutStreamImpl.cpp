@@ -20,7 +20,7 @@
 #include "CoreTools/ObjectSystems/Stream.h"
 
 CoreTools::BufferOutStreamImpl::BufferOutStreamImpl(OutTopLevel topLevel)
-    : topLevel{ std::move(topLevel) }, objectRegister{ ObjectRegister::Create() }, buffer{}, target{}
+    : topLevel{ std::move(topLevel) }, objectRegister{ ObjectRegister::Create() }, target{}
 {
     GenerateBuffer();
 
@@ -44,7 +44,8 @@ void CoreTools::BufferOutStreamImpl::Register()
     // 使我们可以创建用于写入缓冲区所需的数据流的字节数的确切大小。
     for (const auto& object : topLevel)
     {
-        if (const auto uniqueID = object->Register(*objectRegister); uniqueID == 0)
+        if (const auto uniqueId = object->Register(*objectRegister);
+            uniqueId == 0)
         {
             LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools, SYSTEM_TEXT("uniqueId == 0"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
@@ -72,7 +73,6 @@ void CoreTools::BufferOutStreamImpl::ResetBufferSize(int bufferSize)
     CORE_TOOLS_ASSERTION_0(0 < bufferSize, "缓冲区大小小于或等于0！");
 
     // 创建对象将要被写入的缓冲区。
-    buffer = std::make_shared<FileBuffer>(bufferSize);
     target = make_shared<BufferTarget>(bufferSize, objectRegister);
 }
 
@@ -93,7 +93,7 @@ void CoreTools::BufferOutStreamImpl::SaveToBuffer()
 
 bool CoreTools::BufferOutStreamImpl::IsValid() const noexcept
 {
-    if (buffer != nullptr && target != nullptr)
+    if (target != nullptr)
         return true;
     else
         return false;
@@ -101,9 +101,9 @@ bool CoreTools::BufferOutStreamImpl::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-CoreTools::FileBufferSharedPtr CoreTools::BufferOutStreamImpl::GetBufferOutStreamInformation() const noexcept
+CoreTools::ConstFileBufferSharedPtr CoreTools::BufferOutStreamImpl::GetBufferOutStreamInformation() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return buffer;
+    return target->GetFileBuffer();
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/06 15:31)
+///	引擎测试版本：0.9.0.6 (2023/04/11 21:01)
 
 #include "ModuleClassInvariantMacroTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -833,7 +833,7 @@ void CoreTools::ModuleClassInvariantMacroTesting::UserValidTest() noexcept
 
     USER_CLASS_IS_VALID_1;
     USER_CLASS_IS_VALID_CONST_1;
-    SELF_CLASS_IS_VALID_1;
+    USER_SELF_CLASS_IS_VALID_1;
 
     USER_CLASS_IS_VALID_2;
     USER_CLASS_IS_VALID_CONST_2;

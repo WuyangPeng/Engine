@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 13:47)
+///	引擎测试版本：0.9.0.6 (2023/04/25 10:28)
 
 #include "StaticPropertyExternalTesting.h"
 #include "Detail/StaticPropertyExternal.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::string;
 
 CoreTools::StaticPropertyExternalTesting::StaticPropertyExternalTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -34,29 +33,29 @@ void CoreTools::StaticPropertyExternalTesting::MainTest()
 
 void CoreTools::StaticPropertyExternalTesting::GetSetTest()
 {
-    StaticPropertyExternal StaticPropertyExternal{};
+    StaticPropertyExternal staticPropertyExternal{};
 
-    string value{ StaticPropertyExternal.getExternalType };
+    std::string value{ staticPropertyExternal.getExternalType };
 
-    ASSERT_EQUAL(value, "");
+    ASSERT_TRUE(value.empty());
 
-    string setValue{ "set" };
+    const std::string setValue{ "set" };
 
-    StaticPropertyExternal.setExternalType = setValue;
+    staticPropertyExternal.setExternalType = setValue;
 
-    value = StaticPropertyExternal.getSetExternalType;
+    value = staticPropertyExternal.getSetExternalType;
 
     ASSERT_EQUAL(value, setValue);
 
-    StaticPropertyExternal.getSetExternalType = setValue + setValue;
+    staticPropertyExternal.getSetExternalType = setValue + setValue;
 
-    value = StaticPropertyExternal.getExternalType;
+    value = staticPropertyExternal.getExternalType;
 
     ASSERT_EQUAL(value, setValue + setValue);
 
-    StaticPropertyExternal.getSetType = setValue + setValue + setValue;
+    staticPropertyExternal.getSetType = setValue + setValue + setValue;
 
-    value = StaticPropertyExternal.getSetType;
+    value = staticPropertyExternal.getSetType;
 
     ASSERT_EQUAL(value, setValue + setValue + setValue);
 }

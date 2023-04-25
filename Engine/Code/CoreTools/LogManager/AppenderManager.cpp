@@ -38,8 +38,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, InsertLog
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, InsertConsoleAppender, Appender, bool)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, AppenderManager, RemoveLogger, LogFilter, bool)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, RemoveAppender, String, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, Write, LogMessage, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, WriteToConsole, LogMessage, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, Write, LogMessage, void) 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, AppenderManager, Clear, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, IsAppenderExist, String, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, AppenderManager, GetMinLogLevelType, LogFilter, CoreTools::LogLevel)
@@ -51,7 +50,7 @@ bool CoreTools::AppenderManager::InsertAppender(const String& name, const Append
     return impl->InsertAppender(name, appender);
 }
 
-void CoreTools::AppenderManager::Write(const String& name, const LogMessage& message)  
+void CoreTools::AppenderManager::Write(const String& name, const LogMessage& message)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

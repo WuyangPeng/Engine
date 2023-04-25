@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 15:44)
+///	引擎测试版本：0.9.0.6 (2023/04/24 15:33)
 
 #include "StreamTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/Stream.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::string;
 
 CoreTools::StreamTesting::StreamTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -34,7 +33,7 @@ void CoreTools::StreamTesting::MainTest()
 
 void CoreTools::StreamTesting::StreamTest()
 {
-    string testValue{ "TestValue" };
+    std::string testValue{ "TestValue" };
 
     const auto size = Stream::GetStreamingSize(testValue);
 

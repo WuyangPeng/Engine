@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/30 17:12)
+///	引擎版本：0.9.0.6 (2023/04/24 09:58)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -26,7 +26,7 @@ void CoreTools::InitTerm::AddInitializer(Initializer function)
 
 void CoreTools::InitTerm::ExecuteInitializer()
 {
-    SINGLETON_MUTEX_ENTER_GLOBAL(CoreTools);
+    SINGLETON_MUTEX_ENTER_GLOBAL(CoreTools)
 
     ObjectManager::Create();
 
@@ -40,7 +40,7 @@ void CoreTools::InitTerm::AddTerminator(Terminator function)
 
 void CoreTools::InitTerm::ExecuteTerminator()
 {
-    SINGLETON_MUTEX_ENTER_GLOBAL(CoreTools);
+    SINGLETON_MUTEX_ENTER_GLOBAL(CoreTools)
 
     GetTerminator().Execute();
 

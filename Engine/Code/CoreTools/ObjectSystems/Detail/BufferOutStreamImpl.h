@@ -35,7 +35,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD FileBufferSharedPtr GetBufferOutStreamInformation() const noexcept;
+        NODISCARD ConstFileBufferSharedPtr GetBufferOutStreamInformation() const noexcept;
 
     private:
         void GenerateBuffer();
@@ -51,7 +51,6 @@ namespace CoreTools
         // 存储objects，对顶层对象使用图的深度优先遍历。
         ObjectRegisterSharedPtr objectRegister;
 
-        FileBufferSharedPtr buffer;
         BufferTargetSharedPtr target;
     };
 }

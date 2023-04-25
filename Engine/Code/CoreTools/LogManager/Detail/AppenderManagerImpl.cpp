@@ -93,13 +93,6 @@ void CoreTools::AppenderManagerImpl::Write(const String& name, const LogMessage&
     }
 }
 
-void CoreTools::AppenderManagerImpl::WriteToConsole(const LogMessage& message)
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    Write(GetConsoleAppenderName(), message);
-}
-
 CoreTools::LogLevel CoreTools::AppenderManagerImpl::GetLogLevelType(const LogMessage& message) const
 {
     if (const auto iter = loggers.find(message.GetLogFilterType()); iter != loggers.cend())

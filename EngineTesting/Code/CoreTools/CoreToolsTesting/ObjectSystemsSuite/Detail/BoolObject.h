@@ -17,7 +17,7 @@
 
 namespace CoreTools
 {
-    class BoolObject : public NullObject
+    class BoolObject final : public NullObject
     {
     public:
         using ClassType = BoolObject;

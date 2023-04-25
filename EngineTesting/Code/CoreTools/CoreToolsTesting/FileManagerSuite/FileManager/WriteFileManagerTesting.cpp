@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/03/03 09:38)
+///	引擎测试版本：0.9.0.6 (2023/04/11 20:45)
 
 #include "WriteFileManagerTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -61,7 +61,7 @@ void CoreTools::WriteFileManagerTesting::WriteResultTest()
     const auto content = GetFileContent();
     ReadFileManager manager{ GetFileName() };
 
-    size_t size{ 0 };
+    size_t size{ 0u };
     manager.Read(sizeof(decltype(size)), &size);
 
     ASSERT_EQUAL(size, content.size());
@@ -79,7 +79,7 @@ void CoreTools::WriteFileManagerTesting::WriteResultTest()
 
 void CoreTools::WriteFileManagerTesting::GetFileByteSizeTest()
 {
-    WriteFileManager manager{ GetFileName(), true };
+    const WriteFileManager manager{ GetFileName(), true };
     const auto fineContent = GetFileContent();
 
     ASSERT_EQUAL(manager.GetFileByteSize(), boost::numeric_cast<int>(fineContent.size() + sizeof(size_t) + CoreTools::GetStreamSize(fineContent)));

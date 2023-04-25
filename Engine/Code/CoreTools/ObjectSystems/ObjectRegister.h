@@ -46,10 +46,10 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD int64_t GetUniqueId(const ConstObjectInterfaceSharedPtr& smartPointer) const;
+        NODISCARD int64_t GetUniqueId(const ConstObjectInterfaceSharedPtr& pointer) const;
         NODISCARD int GetOrderedSize() const;
 
-        NODISCARD int64_t RegisterRoot(const ConstObjectInterfaceSharedPtr& smartPointer);
+        NODISCARD int64_t RegisterRoot(const ConstObjectInterfaceSharedPtr& pointer);
 
         NODISCARD ConstRegisterContainerConstIter begin() const noexcept;
         NODISCARD ConstRegisterContainerConstIter end() const noexcept;

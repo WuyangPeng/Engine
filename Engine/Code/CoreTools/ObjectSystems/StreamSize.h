@@ -5,11 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/29 16:39)
+///	引擎版本：0.9.0.6 (2023/04/24 15:59)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_STREAM_SIZE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_STREAM_SIZE_H
 
+#include "ObjectType.h"
 #include "Stream.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/Tools.h"
@@ -37,80 +38,11 @@ namespace CoreTools
         }
     };
 
-    // 一个独特的ID是一个无符号整数写入8个字节到磁盘上。
+    // 一个独特的Id是一个有符号整数写入8个字节到磁盘上。
     template <typename T>
-    struct StreamSize<T, std::enable_if_t<std::is_pointer_v<T>>>
+    struct StreamSize<T, std::enable_if_t<IsObjectAssociated<T>::result>>
     {
-        NODISCARD constexpr static int GetStreamSize(T value) noexcept
-        {
-            System::UnusedFunction(value);
-
-            return GetStreamSize();
-        }
-
-        NODISCARD constexpr static int GetStreamSize() noexcept
-        {
-            return gObjectSize;
-        }
-    };
-
-    template <typename T>
-    struct StreamSize<ObjectAssociated<T>>
-    {
-        NODISCARD constexpr static int GetStreamSize(const ObjectAssociated<T>& value) noexcept
-        {
-            System::UnusedFunction(value);
-
-            return GetStreamSize();
-        }
-
-        NODISCARD constexpr static int GetStreamSize() noexcept
-        {
-            return gObjectSize;
-        }
-    };
-
-    template <typename T>
-    struct StreamSize<std::shared_ptr<T>>
-    {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26418)
-
-        NODISCARD constexpr static int GetStreamSize(const std::shared_ptr<T>& value) noexcept
-
-#include STSTEM_WARNING_POP
-        {
-            System::UnusedFunction(value);
-
-            return GetStreamSize();
-        }
-
-        NODISCARD constexpr static int GetStreamSize() noexcept
-        {
-            return gObjectSize;
-        }
-    };
-
-    template <typename T>
-    struct StreamSize<std::weak_ptr<T>>
-    {
-        NODISCARD constexpr static int GetStreamSize(const std::weak_ptr<T>& value) noexcept
-        {
-            System::UnusedFunction(value);
-
-            return GetStreamSize();
-        }
-
-        NODISCARD constexpr static int GetStreamSize() noexcept
-        {
-            return gObjectSize;
-        }
-    };
-
-    template <typename T>
-    struct StreamSize<std::unique_ptr<T>>
-    {
-        NODISCARD constexpr static int GetStreamSize(const std::unique_ptr<T>& value) noexcept
+        NODISCARD constexpr static int GetStreamSize(const T& value) noexcept
         {
             System::UnusedFunction(value);
 
@@ -156,10 +88,10 @@ namespace CoreTools
         }
     };
 
-    template <>
-    struct StreamSize<std::string>
+    template <typename T>
+    struct StreamSize<T, std::enable_if_t<IsString<T>::result>>
     {
-        NODISCARD static int GetStreamSize(const std::string& value)
+        NODISCARD static int GetStreamSize(const T& value)
         {
             return Stream::GetStreamingSize(value);
         }
@@ -167,34 +99,6 @@ namespace CoreTools
         NODISCARD static int GetStreamSize()
         {
             return GetStreamSize(std::string{});
-        }
-    };
-
-    template <>
-    struct StreamSize<std::string_view>
-    {
-        NODISCARD static int GetStreamSize(const std::string_view& value)
-        {
-            return Stream::GetStreamingSize(value);
-        }
-
-        NODISCARD static int GetStreamSize()
-        {
-            return GetStreamSize(std::string_view{});
-        }
-    };
-
-    template <>
-    struct StreamSize<const char*>
-    {
-        NODISCARD static int GetStreamSize(const char* value)
-        {
-            return Stream::GetStreamingSize(value);
-        }
-
-        NODISCARD static int GetStreamSize()
-        {
-            return StreamSize<std::string>::GetStreamSize();
         }
     };
 
@@ -220,7 +124,7 @@ namespace CoreTools
     };
 
     template <typename T>
-    struct StreamSize<std::vector<T>, std::enable_if_t<std::is_pointer_v<T>>>
+    struct StreamSize<std::vector<T>, std::enable_if_t<IsObjectAssociated<T>::result>>
     {
         NODISCARD static int GetStreamSize(const std::vector<T>& value)
         {
@@ -241,72 +145,9 @@ namespace CoreTools
     };
 
     template <typename T>
-    struct StreamSize<std::vector<std::shared_ptr<T>>>
+    struct StreamSize<std::vector<T>, std::enable_if_t<IsString<T>::result>>
     {
-        NODISCARD static int GetStreamSize(const std::vector<std::shared_ptr<T>>& value)
-        {
-            if (value.empty())
-            {
-                return gDefaultSize;
-            }
-            else
-            {
-                return boost::numeric_cast<int>(gDefaultSize + value.size() * StreamSize<std::shared_ptr<T>>::GetStreamSize());
-            }
-        }
-
-        NODISCARD static int GetStreamSize() noexcept
-        {
-            return gDefaultSize;
-        }
-    };
-
-    template <typename T>
-    struct StreamSize<std::vector<std::weak_ptr<T>>>
-    {
-        NODISCARD static int GetStreamSize(const std::vector<std::weak_ptr<T>>& value)
-        {
-            if (value.empty())
-            {
-                return gDefaultSize;
-            }
-            else
-            {
-                return boost::numeric_cast<int>(gDefaultSize + value.size() * StreamSize<std::weak_ptr<T>>::GetStreamSize());
-            }
-        }
-
-        NODISCARD static int GetStreamSize() noexcept
-        {
-            return gDefaultSize;
-        }
-    };
-
-    template <typename T>
-    struct StreamSize<std::vector<std::unique_ptr<T>>>
-    {
-        NODISCARD static int GetStreamSize(const std::vector<std::unique_ptr<T>>& value)
-        {
-            if (value.empty())
-            {
-                return gDefaultSize;
-            }
-            else
-            {
-                return boost::numeric_cast<int>(gDefaultSize + value.size() * StreamSize<std::unique_ptr<T>>::GetStreamSize());
-            }
-        }
-
-        NODISCARD static int GetStreamSize() noexcept
-        {
-            return gDefaultSize;
-        }
-    };
-
-    template <>
-    struct StreamSize<std::vector<const char*>>
-    {
-        NODISCARD static int GetStreamSize(const std::vector<const char*>& value)
+        NODISCARD static int GetStreamSize(const std::vector<T>& value)
         {
             if (value.empty())
             {
@@ -317,15 +158,15 @@ namespace CoreTools
                 auto size = gDefaultSize;
                 for (const auto& single : value)
                 {
-                    size += StreamSize<const char*>::GetStreamSize(single);
+                    size += StreamSize<T>::GetStreamSize(single);
                 }
                 return size;
             }
         }
 
-        NODISCARD static int GetStreamSize() noexcept
+        NODISCARD static int GetStreamSize()
         {
-            return gDefaultSize;
+            return GetStreamSize(std::string{});
         }
     };
 
@@ -355,36 +196,10 @@ namespace CoreTools
         }
     };
 
-    template <>
-    struct StreamSize<std::vector<std::string>>
-    {
-        NODISCARD static int GetStreamSize(const std::vector<std::string>& value)
-        {
-            if (value.empty())
-            {
-                return gDefaultSize;
-            }
-            else
-            {
-                auto size = gDefaultSize;
-                for (const auto& single : value)
-                {
-                    size += StreamSize<std::string>::GetStreamSize(single);
-                }
-                return size;
-            }
-        }
-
-        NODISCARD static int GetStreamSize() noexcept
-        {
-            return gDefaultSize;
-        }
-    };
-
     template <typename T>
-    NODISCARD int GetStreamSize(T value = T{}) noexcept(noexcept(StreamSize<T>::GetStreamSize(value)))
+    NODISCARD int GetStreamSize(const T& value = T{}) noexcept(noexcept(StreamSize<T>::GetStreamSize(value)))
     {
-        return StreamSize<T>::GetStreamSize(value);
+        return StreamSize<std::remove_cv_t<T>>::GetStreamSize(value);
     }
 }
 

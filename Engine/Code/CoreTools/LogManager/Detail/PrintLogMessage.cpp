@@ -33,6 +33,24 @@ CoreTools::LogMessageImpl::LogMessageImplSharedPtr CoreTools::PrintLogMessage::C
     return std::make_shared<ClassType>(*this);
 }
 
+CoreTools::LogMessageImpl& CoreTools::PrintLogMessage::operator<<(char value)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    AddMessage(StringConversion::MultiByteConversionStandard(std::string{ value }));
+
+    return *this;
+}
+
+CoreTools::LogMessageImpl& CoreTools::PrintLogMessage::operator<<(wchar_t value)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    AddMessage(StringConversion::WideCharConversionStandard(std::wstring{ value }));
+
+    return *this;
+}
+
 CoreTools::LogMessageImpl& CoreTools::PrintLogMessage::operator<<(const char* value)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -128,6 +146,15 @@ CoreTools::LogMessageImpl& CoreTools::PrintLogMessage::operator<<(const std::wst
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     AddMessage(StringConversion::WideCharConversionStandard(value));
+
+    return *this;
+}
+
+CoreTools::LogMessageImpl& CoreTools::PrintLogMessage::operator<<(const std::wstring_view& value)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    AddMessage(StringConversion::WideCharConversionStandard(value.data()));
 
     return *this;
 }

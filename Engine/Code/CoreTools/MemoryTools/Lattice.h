@@ -13,13 +13,15 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "TypeTraits.h"
+#include "System/Helper/PragmaWarning.h"
 
+#include <gsl/util>
+#include <array>
 #include <vector>
 
 namespace CoreTools
 {
-    template <bool OrderLToR, size_t... Sizes>
-    requires(1 <= sizeof...(Sizes))
+    template <bool OrderLToR, int... Sizes>
     class Lattice
     {
     public:
@@ -27,126 +29,140 @@ namespace CoreTools
 
     public:
         Lattice() noexcept = default;
+        virtual ~Lattice() noexcept = default;
+        Lattice(const Lattice& rhs) = default;
+        Lattice& operator=(const Lattice& rhs) = default;
+        Lattice(Lattice&& rhs) noexcept = default;
+        Lattice& operator=(Lattice&& rhs) noexcept = default;
 
-        CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        NODISCARD static constexpr size_t GetDimensions() noexcept
+        NODISCARD static constexpr int GetDimensions() noexcept
         {
             return sizeof...(Sizes);
         }
 
-        NODISCARD constexpr size_t GetSize(size_t dimension) const noexcept
+        NODISCARD constexpr int GetSize(int dimension) const noexcept
         {
-            std::array<size_t, sizeof...(Sizes)> sizes{};
+            std::array<int, sizeof...(Sizes)> sizes{};
 
             MetaAssignSize<0, Sizes...>(sizes.data());
 
-            return sizes[dimension];
+            return sizes.at(dimension);
         }
 
-        NODISCARD constexpr size_t GetSize() const noexcept
+        NODISCARD constexpr int GetSize() const noexcept
         {
             return MetaProduct<Sizes...>::value;
         }
 
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<Condition> = 0>
         requires(sizeof...(IndexTypes) == sizeof...(Sizes))
-        NODISCARD size_t GetIndex(IndexTypes... tuple) const noexcept;
+        NODISCARD int GetIndex(IndexTypes... tuple) const noexcept;
 
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<Condition> = 0>
-        NODISCARD size_t GetIndex(const std::array<size_t, sizeof...(Sizes)>& coordinate) const noexcept;
+        NODISCARD int GetIndex(const std::array<int, sizeof...(Sizes)>& coordinate) const noexcept;
 
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<Condition> = 0>
-        NODISCARD std::array<size_t, sizeof...(Sizes)> GetCoordinate(size_t index) const noexcept;
+        NODISCARD std::array<int, sizeof...(Sizes)> GetCoordinate(int index) const noexcept;
 
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<!Condition> = 0>
         requires(sizeof...(IndexTypes) == sizeof...(Sizes))
-        NODISCARD size_t GetIndex(IndexTypes... tuple) const noexcept;
+        NODISCARD int GetIndex(IndexTypes... tuple) const noexcept;
 
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<!Condition> = 0>
-        NODISCARD size_t GetIndex(const std::array<size_t, sizeof...(Sizes)>& coordinate) const noexcept;
+        NODISCARD int GetIndex(const std::array<int, sizeof...(Sizes)>& coordinate) const noexcept;
 
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<!Condition> = 0>
-        NODISCARD std::array<size_t, sizeof...(Sizes)> GetCoordinate(size_t index) const noexcept;
+        NODISCARD std::array<int, sizeof...(Sizes)> GetCoordinate(int index) const noexcept;
 
     private:
-        template <size_t I, size_t F, size_t... R>
+        template <int I, int F, int... R>
         struct MetaArgument
         {
             static const auto value = MetaArgument<I - 1, R...>::value;
         };
 
-        template <size_t F, size_t... R>
+        template <int F, int... R>
         struct MetaArgument<0, F, R...>
         {
             static const auto value = F;
         };
 
-        template <size_t I, size_t F, size_t... R>
-        constexpr void MetaAssignSize(size_t* sizes) const noexcept
+        template <int I, int F, int... R>
+        constexpr void MetaAssignSize(int* sizes) const noexcept
         {
-            sizes[I] = F;
-            MetaAssignSize<I + 1, R...>(sizes);
+            if (sizes != nullptr)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                sizes[I] = F;
+
+#include STSTEM_WARNING_POP
+
+                MetaAssignSize<I + 1, R...>(sizes);
+            }
         }
 
-        template <size_t NumElements>
-        constexpr void MetaAssignSize(size_t*) const noexcept
+        template <int NumElements>
+        constexpr void MetaAssignSize(int*) const noexcept
         {
         }
 
-        template <size_t...>
-        struct MetaProduct : std::integral_constant<size_t, 1>
+        template <int...>
+        struct MetaProduct : std::integral_constant<int, 1>
         {
         };
 
-        template <size_t F, size_t... R>
-        struct MetaProduct<F, R...> : std::integral_constant<size_t, F * MetaProduct<R...>::value>
+        template <int F, int... R>
+        struct MetaProduct<F, R...> : std::integral_constant<int, F * MetaProduct<R...>::value>
         {
         };
 
         template <typename First, typename... Successors>
-        NODISCARD constexpr size_t MetaGetIndexLToR(First first, Successors... successors) const noexcept requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
+        NODISCARD constexpr int MetaGetIndexLToR(First first, Successors... successors) const noexcept requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
         {
             constexpr auto size = MetaArgument<sizeof...(Sizes) - 1 - sizeof...(Successors), Sizes...>::value;
 
-            return static_cast<size_t>(first) + size * MetaGetIndexLToR(successors...);
+            return gsl::narrow_cast<int>(first) + size * MetaGetIndexLToR(successors...);
         }
 
         template <typename Last>
-        NODISCARD constexpr size_t MetaGetIndexLToR(Last last) const noexcept requires(std::is_integral_v<Last> && !std::is_same_v<Last, bool>)
+        NODISCARD constexpr int MetaGetIndexLToR(Last last) const noexcept requires(std::is_integral_v<Last> && !std::is_same_v<Last, bool>)
         {
-            return static_cast<size_t>(last);
+            return gsl::narrow_cast<int>(last);
         }
 
-        template <size_t NumDimensions = sizeof...(Sizes), TraitSelector<(NumDimensions > 1)> = 0>
-        NODISCARD size_t GetIndexLToR(const std::array<size_t, sizeof...(Sizes)>& coordinate) const noexcept;
+        template <int NumDimensions = sizeof...(Sizes), TraitSelector<(NumDimensions > 1)> = 0>
+        NODISCARD int GetIndexLToR(const std::array<int, sizeof...(Sizes)>& coordinate) const noexcept;
 
-        template <size_t NumDimensions = sizeof...(Sizes), TraitSelector<NumDimensions == 1> = 0>
-        NODISCARD size_t GetIndexLToR(const std::array<size_t, 1>& coordinate) const noexcept;
+        template <int NumDimensions = sizeof...(Sizes), TraitSelector<NumDimensions == 1> = 0>
+        NODISCARD int GetIndexLToR(const std::array<int, 1>& coordinate) const noexcept;
 
         template <typename Term, typename First, typename... Successors>
-        NODISCARD constexpr size_t MetaGetIndexRToL(Term t, First first, Successors... successors) const noexcept requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
+        NODISCARD constexpr int MetaGetIndexRToL(Term t, First first, Successors... successors) const noexcept requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
         {
             constexpr auto size = MetaArgument<sizeof...(Sizes) - sizeof...(Successors), Sizes...>::value;
 
-            return MetaGetIndexRToL(size * static_cast<size_t>(first + t), successors...);
+            return MetaGetIndexRToL(size * gsl::narrow_cast<int>(first + t), successors...);
         }
 
         template <typename Term, typename First>
-        NODISCARD constexpr size_t MetaGetIndexRToL(Term t, First first) const noexcept requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
+        NODISCARD constexpr int MetaGetIndexRToL(Term t, First first) const noexcept requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
         {
-            return static_cast<size_t>(first + t);
+            return gsl::narrow_cast<int>(first + t);
         }
 
-        template <size_t NumDimensions = sizeof...(Sizes), TraitSelector<(NumDimensions > 1)> = 0>
-        NODISCARD size_t GetIndexRToL(const std::array<size_t, sizeof...(Sizes)>& coordinate) const noexcept;
+        template <int NumDimensions = sizeof...(Sizes), TraitSelector<(NumDimensions > 1)> = 0>
+        NODISCARD int GetIndexRToL(const std::array<int, sizeof...(Sizes)>& coordinate) const noexcept;
 
-        template <size_t NumDimensions = sizeof...(Sizes), TraitSelector<NumDimensions == 1> = 0>
-        NODISCARD size_t GetIndexRToL(const std::array<size_t, 1>& coordinate) const noexcept;
+        template <int NumDimensions = sizeof...(Sizes), TraitSelector<NumDimensions == 1> = 0>
+        NODISCARD int GetIndexRToL(const std::array<int, 1>& coordinate) const noexcept;
 
     public:
-        static size_t constexpr numDimensions = sizeof...(Sizes);
-        static size_t constexpr numElements = MetaProduct<Sizes...>::value;
+        static int constexpr numDimensions = sizeof...(Sizes);
+        static int constexpr numElements = MetaProduct<Sizes...>::value;
     };
 
     template <bool OrderLToR>
@@ -154,43 +170,46 @@ namespace CoreTools
     {
     public:
         using ClassType = Lattice<OrderLToR>;
-        using SizeType = std::vector<size_t>;
+        using SizeType = std::vector<int>;
 
     public:
         Lattice() noexcept;
+        virtual ~Lattice() noexcept = default;
+        Lattice(const Lattice& rhs) = default;
+        Lattice& operator=(const Lattice& rhs) = default;
+        Lattice(Lattice&& rhs) noexcept = default;
+        Lattice& operator=(Lattice&& rhs) noexcept = default;
 
         explicit Lattice(const SizeType& sizes);
-        explicit Lattice(const std::initializer_list<size_t>& sizes);
+        explicit Lattice(const std::initializer_list<int>& sizes);
 
-        CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        void Reset(const SizeType& sizes);
-        void Reset(const std::initializer_list<size_t>& sizes);
+        virtual void Reset(const SizeType& aSizes);
+        virtual void Reset(const std::initializer_list<int>& aSizes);
 
-        NODISCARD size_t GetDimensions() const noexcept;
+        NODISCARD int GetDimensions() const;
 
-        NODISCARD size_t GetSize(size_t dimension) const;
-        NODISCARD size_t GetSize() const noexcept;
+        NODISCARD int GetSize(int dimension) const;
+        NODISCARD int GetSize() const noexcept;
 
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<Condition> = 0>
-        NODISCARD size_t GetIndex(IndexTypes... tuple) const;
+        NODISCARD int GetIndex(IndexTypes... tuple) const;
 
         template <bool Condition = OrderLToR, TraitSelector<Condition> = 0>
-        NODISCARD size_t GetIndex(const SizeType& coordinate) const;
+        NODISCARD int GetIndex(const SizeType& coordinate) const;
 
         template <typename... IndexTypes, bool Condition = OrderLToR, TraitSelector<!Condition> = 0>
-        NODISCARD size_t GetIndex(IndexTypes... tuple) const;
+        NODISCARD int GetIndex(IndexTypes... tuple) const;
 
         template <bool Condition = OrderLToR, TraitSelector<!Condition> = 0>
-        NODISCARD size_t GetIndex(const SizeType& coordinate) const;
+        NODISCARD int GetIndex(const SizeType& coordinate) const;
 
         template <bool Condition = OrderLToR, TraitSelector<Condition> = 0>
-        NODISCARD SizeType GetCoordinate(size_t index) const;
+        NODISCARD SizeType GetCoordinate(int index) const;
 
         template <bool Condition = OrderLToR, TraitSelector<!Condition> = 0>
-        NODISCARD SizeType GetCoordinate(size_t index) const;
-
-        NODISCARD std::strong_ordering operator<=>(const Lattice& rhs) const;
+        NODISCARD SizeType GetCoordinate(int index) const;
 
     private:
         template <typename Container>
@@ -198,26 +217,26 @@ namespace CoreTools
 
         template <typename First, typename... Successors>
         requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
-        NODISCARD size_t MetaGetIndexLToR(First first, Successors... successors) const;
+        NODISCARD int MetaGetIndexLToR(First first, Successors... successors) const;
 
         template <typename Last>
         requires(std::is_integral_v<Last> && !std::is_same_v<Last, bool>)
-        NODISCARD size_t MetaGetIndexLToR(Last last) const;
+        NODISCARD int MetaGetIndexLToR(Last last) const noexcept;
 
         template <typename Term, typename First, typename... Successors>
         requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
-        NODISCARD size_t MetaGetIndexRToL(Term t, First first, Successors... successors) const;
+        NODISCARD int MetaGetIndexRToL(Term t, First first, Successors... successors) const;
 
         template <typename Term, typename First>
         requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
-        NODISCARD size_t MetaGetIndexRToL(Term t, First first) const;
+        NODISCARD int MetaGetIndexRToL(Term t, First first) const noexcept;
 
         template <typename First>
         requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
-        NODISCARD size_t MetaGetIndexRToL(First first) const;
+        NODISCARD int MetaGetIndexRToL(First first) const;
 
     protected:
-        size_t numElements;
+        int numElements;
         SizeType sizes;
     };
 }

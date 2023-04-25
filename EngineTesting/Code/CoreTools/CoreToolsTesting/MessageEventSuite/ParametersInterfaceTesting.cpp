@@ -1,20 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 17:03)
+///	引擎测试版本：0.9.0.6 (2023/04/18 15:19)
 
 #include "ParametersInterfaceTesting.h"
 #include "Detail/Parameters.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/ParametersInterface.h"
-
-using std::make_shared;
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 CoreTools::ParametersInterfaceTesting::ParametersInterfaceTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -37,27 +35,27 @@ void CoreTools::ParametersInterfaceTesting::MainTest()
 
 void CoreTools::ParametersInterfaceTesting::CloneTest()
 {
-    ParametersInterface parametersInterface;
-    ParametersInterfaceSharedPtr smartPointer{ make_shared<ParametersInterface>(parametersInterface) };
-    auto cloneSmartPointer = smartPointer->Clone();
+    ParametersInterface parametersInterface{};
+    const auto pointer = make_shared<ParametersInterface>(parametersInterface);
+    const auto clonePointer = pointer->Clone();
 
-    ASSERT_UNEQUAL_NULL_PTR(smartPointer);
-    ASSERT_UNEQUAL_NULL_PTR(cloneSmartPointer);
+    ASSERT_UNEQUAL_NULL_PTR(pointer);
+    ASSERT_UNEQUAL_NULL_PTR(clonePointer);
 }
 
 void CoreTools::ParametersInterfaceTesting::SubclassTest()
 {
     auto testValue = 5;
 
-    ParametersSharedPtr smartPointer{ make_shared<Parameters>(testValue) };
-    auto cloneSmartPointer = smartPointer->Clone();
+    const auto pointer = std::make_shared<Parameters>(testValue);
+    const auto clonePointer = pointer->Clone();
 
-    ASSERT_UNEQUAL_NULL_PTR(smartPointer);
-    ASSERT_UNEQUAL_NULL_PTR(cloneSmartPointer);
+    ASSERT_UNEQUAL_NULL_PTR(pointer);
+    ASSERT_UNEQUAL_NULL_PTR(clonePointer);
 
-    ASSERT_EQUAL(smartPointer->GetValue(), testValue);
+    ASSERT_EQUAL(pointer->GetValue(), testValue);
 
-    smartPointer->SetValue(testValue + 1);
+    pointer->SetValue(testValue + 1);
 
-    ASSERT_EQUAL(smartPointer->GetValue(), testValue + 1);
+    ASSERT_EQUAL(pointer->GetValue(), testValue + 1);
 }

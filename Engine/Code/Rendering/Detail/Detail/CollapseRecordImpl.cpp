@@ -127,7 +127,7 @@ void Rendering::CollapseRecordImpl::Load(CoreTools::BufferSource& source)
     source.Read(recordVThrow);
     source.Read(numVertices);
     source.Read(numTriangles);
-    indices = source.ReadVectorWithoutNumber<int>();
+    indices = source.ReadVectorNotUseNumber<int>();
 }
 
 void Rendering::CollapseRecordImpl::Save(CoreTools::BufferTarget& target) const

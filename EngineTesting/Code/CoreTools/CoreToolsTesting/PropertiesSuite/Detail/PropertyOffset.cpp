@@ -1,21 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 13:44)
+///	引擎测试版本：0.9.0.6 (2023/04/25 10:12)
 
 #include "PropertyOffset.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::string;
-
-CoreTools::PropertyOffset::PropertyOffset(MAYBE_UNUSED DisableNotThrow disableNotThrow)
-    : offset{}, value{ "Value" }, internalOffset{ "Offset" }
+CoreTools::PropertyOffset::PropertyOffset(DisableNotThrow disableNotThrow)
+    : internalOffset{ "Offset" }, value{ "Value" }, offset{}
 {
+    System::UnusedFunction(disableNotThrow);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
@@ -25,13 +26,13 @@ ptrdiff_t CoreTools::PropertyOffset::GetOffset() noexcept
 {
     enum
     {
-        offset = offsetof(ClassType, offset)
+        Offset = offsetof(ClassType, offset)
     };
 
-    return offset;
+    return Offset;
 }
 
-const string& CoreTools::PropertyOffset::GetValue() const noexcept
+const std::string& CoreTools::PropertyOffset::GetValue() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

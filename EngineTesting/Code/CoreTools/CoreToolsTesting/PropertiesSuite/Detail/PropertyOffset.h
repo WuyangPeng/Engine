@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 11:36)
+///	引擎测试版本：0.9.0.6 (2023/04/25 10:08)
 
 #ifndef CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_EXTERNAL_H
@@ -20,6 +20,7 @@
 namespace CoreTools
 {
 #pragma pack(push, 1)
+
     class PropertyOffset
     {
     public:
@@ -27,7 +28,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        explicit PropertyOffset(MAYBE_UNUSED DisableNotThrow disableNotThrow);
+        explicit PropertyOffset(DisableNotThrow disableNotThrow);
 
         NODISCARD const std::string& GetInternalValue() const noexcept;
 
@@ -46,6 +47,7 @@ namespace CoreTools
     public:
         PropertyGetExternalOffset offset;
     };
+
 #pragma pack(pop)
 }
 

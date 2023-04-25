@@ -218,7 +218,7 @@ void Rendering::SkinControllerImpl::Load(CoreTools::BufferSource& source)
     offsets.resize(size);
 
     source.ReadObjectAssociatedContainer(numBones, bones);
-    weights = source.ReadVectorWithNumber<float>(size);
+    weights = source.ReadVectorUseNumber<float>(size);
     source.ReadAggregateContainer(size, offsets);
 }
 

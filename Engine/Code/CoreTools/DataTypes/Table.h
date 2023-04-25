@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 11:18)
+///	引擎版本：0.9.0.6 (2023/04/11 17:32)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TABLE_H
 #define CORE_TOOLS_DATA_TYPE_TABLE_H
@@ -18,8 +18,8 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "DataTypesFwd.h"
+#include "System/Helper/PragmaWarning/CallTraits.h"
 #include "System/Helper/PragmaWarning/Operators.h"
-#include "CoreTools/TemplateTools/ParamType.h"
 
 #include <array>
 
@@ -32,7 +32,7 @@ namespace CoreTools
         using ClassType = Table<Rows, Columns, Type>;
         using ColumnTuple = Tuple<Columns, Type>;
         using RowTuple = Tuple<Rows, Type>;
-        using ParamType = typename ParamType<Type>::type;
+        using ParamType = typename boost::call_traits<Type>::param_type;
 
         // 该数组存储为行主序。
         static constexpr auto elementNumber = Rows * Columns;
@@ -43,7 +43,10 @@ namespace CoreTools
     public:
         Table() noexcept;
 
-        Table(ParamType member00, ParamType member01, ParamType member10, ParamType member11) noexcept;
+        Table(ParamType member00,
+              ParamType member01,
+              ParamType member10,
+              ParamType member11) noexcept(std::is_arithmetic_v<Type>) requires(Rows == 2 && Columns == 2);
 
         Table(ParamType member00,
               ParamType member01,
@@ -53,7 +56,7 @@ namespace CoreTools
               ParamType member12,
               ParamType member20,
               ParamType member21,
-              ParamType member22) noexcept;
+              ParamType member22) noexcept(std::is_arithmetic_v<Type>) requires(Rows == 3 && Columns == 3);
 
         Table(ParamType member00,
               ParamType member01,
@@ -70,7 +73,7 @@ namespace CoreTools
               ParamType member30,
               ParamType member31,
               ParamType member32,
-              ParamType member33) noexcept;
+              ParamType member33) noexcept(std::is_arithmetic_v<Type>) requires(Rows == 4 && Columns == 4);
 
         CLASS_INVARIANT_DECLARE;
 

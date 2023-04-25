@@ -39,7 +39,7 @@ namespace CoreTools
         using LogConsoleTextColorsManagerSharedPtr = std::shared_ptr<LogConsoleTextColorsManager>;
 
     private:
-        NODISCARD LogConsoleTextColorsManagerSharedPtr GetLogConsoleTextColorsManager(int failedNumber, int errorNumber);
+        NODISCARD static LogLevel GetLogLevel(int failedNumber, int errorNumber) noexcept;
     };
 }
 

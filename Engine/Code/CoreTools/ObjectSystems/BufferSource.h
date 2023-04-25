@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/29 16:27)
+///	引擎版本：0.9.0.6 (2023/04/19 10:20)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_H
@@ -15,7 +15,6 @@
 #include "ObjectInterface.h"
 #include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/FileManager/ReadBufferIO.h"
-#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
 #include <array>
 #include <set>
@@ -55,15 +54,27 @@ namespace CoreTools
         template <typename T, int Size>
         void ReadAggregateContainer(std::array<T, Size>& container);
 
+        template <typename T>
+        NODISCARD T ReadAggregate();
+
+        template <typename T>
+        NODISCARD T ReadAggregateContainerUseNumber(int elementsNumber);
+
+        template <typename T>
+        NODISCARD T ReadAggregateContainerNotUseNumber();
+
+        template <typename T, int Size>
+        NODISCARD std::array<T, Size> ReadAggregateContainer();
+
         //  读取对象指针（uniqueID在磁盘上为[无效]内存指针）。
         template <typename T>
         NODISCARD T ReadObjectAssociated();
 
         template <typename T>
-        NODISCARD T ReadObjectAssociatedContainerWithNumber(int elementsNumber);
+        NODISCARD T ReadObjectAssociatedContainerUseNumber(int elementsNumber);
 
         template <typename T>
-        NODISCARD T ReadObjectAssociatedContainerWithoutNumber();
+        NODISCARD T ReadObjectAssociatedContainerNotUseNumber();
 
         template <typename T, int Size>
         NODISCARD std::array<T, Size> ReadObjectAssociatedContainer();
@@ -75,9 +86,6 @@ namespace CoreTools
         void ReadObjectAssociatedContainer(int elementsNumber, T& container);
 
         template <typename T>
-        void ReadObjectAssociatedContainer(int elementsNumber, std::set<T>& container);
-
-        template <typename T>
         void ReadObjectAssociatedContainer(T& container);
 
         template <typename T, int Size>
@@ -87,10 +95,10 @@ namespace CoreTools
         NODISCARD bool ReadBool();
 
         template <typename T>
-        NODISCARD T ReadBoolContainerWithNumber(int elementsNumber);
+        NODISCARD T ReadBoolContainerUseNumber(int elementsNumber);
 
         template <typename T>
-        NODISCARD T ReadBoolContainerWithoutNumber();
+        NODISCARD T ReadBoolContainerNotUseNumber();
 
         template <int Size>
         NODISCARD std::array<bool, Size> ReadBoolContainer();
@@ -112,10 +120,10 @@ namespace CoreTools
         NODISCARD std::string ReadString();
 
         template <typename T>
-        NODISCARD T ReadStringContainerWithNumber(int elementsNumber);
+        NODISCARD T ReadStringContainerUseNumber(int elementsNumber);
 
         template <typename T>
-        NODISCARD T ReadStringContainerWithoutNumber();
+        NODISCARD T ReadStringContainerNotUseNumber();
 
         template <int Size>
         NODISCARD std::array<std::string, Size> ReadStringContainer();
@@ -138,16 +146,16 @@ namespace CoreTools
         NODISCARD T Read();
 
         template <typename T>
-        NODISCARD T ReadContainerWithNumber(int elementsNumber);
+        NODISCARD T ReadContainerUseNumber(int elementsNumber);
 
         template <typename T>
-        NODISCARD std::vector<T> ReadVectorWithNumber(int elementsNumber);
+        NODISCARD std::vector<T> ReadVectorUseNumber(int elementsNumber);
 
         template <typename T>
-        NODISCARD T ReadContainerWithoutNumber();
+        NODISCARD T ReadContainerNotUseNumber();
 
         template <typename T>
-        NODISCARD std::vector<T> ReadVectorWithoutNumber();
+        NODISCARD std::vector<T> ReadVectorNotUseNumber();
 
         template <typename T, int Size>
         NODISCARD std::array<T, Size> ReadContainer();
@@ -175,16 +183,16 @@ namespace CoreTools
         NODISCARD T ReadEnum();
 
         template <typename T>
-        NODISCARD T ReadEnumContainerWithNumber(int elementsNumber);
+        NODISCARD T ReadEnumContainerUseNumber(int elementsNumber);
 
         template <typename T>
-        NODISCARD std::vector<T> ReadEnumVectorWithNumber(int elementsNumber);
+        NODISCARD std::vector<T> ReadEnumVectorUseNumber(int elementsNumber);
 
         template <typename T>
-        NODISCARD T ReadEnumContainerWithoutNumber();
+        NODISCARD T ReadEnumContainerNotUseNumber();
 
         template <typename T>
-        NODISCARD std::vector<T> ReadEnumVectorWithoutNumber();
+        NODISCARD std::vector<T> ReadEnumVectorNotUseNumber();
 
         template <typename T, int Size>
         NODISCARD std::array<T, Size> ReadEnumContainer();
@@ -206,20 +214,6 @@ namespace CoreTools
 
         template <typename T, int Size>
         void ReadEnumContainer(std::array<T, Size>& container);
-
-        // 这些模板函数是集合类型。
-
-        template <typename T>
-        NODISCARD T ReadAggregate();
-
-        template <typename T>
-        NODISCARD T ReadAggregateContainerWithNumber(int elementsNumber);
-
-        template <typename T>
-        NODISCARD T ReadAggregateContainerWithoutNumber();
-
-        template <typename T, int Size>
-        NODISCARD std::array<T, Size> ReadAggregateContainer();
 
         // 帮助函数
         NODISCARD int GetBytesRead() const noexcept;

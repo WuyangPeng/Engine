@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 19:05)
+///	引擎测试版本：0.9.0.6 (2023/04/25 13:47)
 
 #include "PtrCompareTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/PtrCompare.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
 
 CoreTools::PtrCompareTesting::PtrCompareTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -34,12 +33,12 @@ void CoreTools::PtrCompareTesting::MainTest()
 
 void CoreTools::PtrCompareTesting::PtrCompareTest()
 {
-    auto firstPtr = make_shared<int>(5);
-    auto secondPtr = make_shared<int>(-5);
+    const auto ptr0 = std::make_shared<int>(5);
+    const auto ptr1 = std::make_shared<int>(-5);
 
-    PtrLess<std::shared_ptr<int>> less;
-    PtrGreater<std::shared_ptr<int>> greater;
+    constexpr PtrLess<std::shared_ptr<int>> less{};
+    constexpr PtrGreater<std::shared_ptr<int>> greater{};
 
-    ASSERT_TRUE(less(secondPtr, firstPtr));
-    ASSERT_TRUE(greater(firstPtr, secondPtr));
+    ASSERT_TRUE(less(ptr1, ptr0));
+    ASSERT_TRUE(greater(ptr0, ptr1));
 }

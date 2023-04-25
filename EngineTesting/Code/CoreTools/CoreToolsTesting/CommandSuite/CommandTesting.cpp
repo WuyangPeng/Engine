@@ -1,19 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:36)
+///	引擎测试版本：0.9.0.6 (2023/04/11 15:18)
 
 #include "CommandTesting.h"
 #include "CoreTools/Command/Command.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_pair;
-using std::string;
+#include "Mathematics/Base/Math.h"
 
 CoreTools::CommandTesting::CommandTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -39,10 +38,7 @@ void CoreTools::CommandTesting::MainTest()
 
 void CoreTools::CommandTesting::SucceedTest()
 {
-    const char* commandLine{
-        "MyProgram -debug   -integer    51 -float 16.4 "
-        "-double 5.21     -string value -fileName filename"
-    };
+    const auto* commandLine = "MyProgram -debug -integer 51 -float 16.4 -double 5.21 -string value -fileName filename";
 
     CommandHandle command{ commandLine };
 
@@ -65,7 +61,7 @@ void CoreTools::CommandTesting::SucceedTest()
 
     excessArguments = command.ExcessArguments();
     ASSERT_EQUAL(excessArguments, "double");
-    ASSERT_APPROXIMATE(command.GetDouble(excessArguments), 5.21, 1e-10);
+    ASSERT_APPROXIMATE(command.GetDouble(excessArguments), 5.21, Mathematics::MathD::GetZeroTolerance());
     command.SetUsed(excessArguments);
 
     command.ClearBoundary();
@@ -87,7 +83,7 @@ void CoreTools::CommandTesting::SucceedTest()
 
     excessArguments = command.ExcessArguments();
     ASSERT_EQUAL(excessArguments, "float");
-    ASSERT_APPROXIMATE(command.GetFloat(excessArguments), 16.4f, 1e-8f);
+    ASSERT_APPROXIMATE(command.GetFloat(excessArguments), 16.4f, Mathematics::MathF::GetZeroTolerance());
     command.SetUsed(excessArguments);
 
     count = command.GetExcessArgumentsCount();
@@ -118,10 +114,7 @@ void CoreTools::CommandTesting::SucceedTest()
 
 void CoreTools::CommandTesting::SetMinValueExceptionTest()
 {
-    const char* commandLine{
-        "MyProgram -debug  -integer 51 -float 16.4 "
-        "-double 5.21 -string value   -fileName filename"
-    };
+    const auto* commandLine = "MyProgram -debug -integer 51 -float 16.4 -double 5.21 -string value -fileName filename";
 
     CommandHandle command{ commandLine };
 
@@ -132,10 +125,7 @@ void CoreTools::CommandTesting::SetMinValueExceptionTest()
 
 void CoreTools::CommandTesting::SetMaxValueExceptionTest()
 {
-    const char* commandLine{
-        "MyProgram -debug  -integer 51 -float 16.4 "
-        "-double 5.21 -string value -fileName filename"
-    };
+    const auto* commandLine = "MyProgram -debug -integer 51 -float 16.4 -double 5.21 -string value -fileName filename";
 
     CommandHandle command{ commandLine };
 
@@ -146,10 +136,7 @@ void CoreTools::CommandTesting::SetMaxValueExceptionTest()
 
 void CoreTools::CommandTesting::SetInfValueExceptionTest()
 {
-    const char* commandLine{
-        "MyProgram -debug -integer 51 -float 16.4 "
-        "-double 5.21 -string value -fileName filename"
-    };
+    const auto* commandLine = "MyProgram -debug -integer 51 -float 16.4 -double 5.21 -string value -fileName filename";
 
     CommandHandle command{ commandLine };
 
@@ -160,10 +147,7 @@ void CoreTools::CommandTesting::SetInfValueExceptionTest()
 
 void CoreTools::CommandTesting::SetSupValueExceptionTest()
 {
-    const char* commandLine{
-        "MyProgram -debug -integer 51 -float 16.4 "
-        "-double 5.21 -string value -fileName filename"
-    };
+    const auto* commandLine = "MyProgram -debug -integer 51 -float 16.4 -double 5.21 -string value -fileName filename";
 
     CommandHandle command{ commandLine };
 

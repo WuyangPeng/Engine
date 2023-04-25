@@ -235,16 +235,13 @@ namespace CoreTools
         template <typename T>
         static constexpr auto isString = std::is_same_v<std::decay_t<T>, std::string> || std::is_same_v<std::decay_t<T>, const char*>;
 
-        // clang-format off
         template <typename LhsType, typename RhsType>
-        requires std::is_same_v<std::decay_t<LhsType>, std::string> || std::is_same_v<std::decay_t<LhsType>, const char*> &&
-            std::is_same_v<std::decay_t<RhsType>, std::string> || std::is_same_v<std::decay_t<RhsType>, const char*>
+        requires std::is_same_v<std::decay_t<LhsType>, std::string> || std::is_same_v<std::decay_t<LhsType>, const char*> && std::is_same_v<std::decay_t<RhsType>, std::string> || std::is_same_v<std::decay_t<RhsType>, const char*>
         void AssertEqual(const LhsType& lhs,
                          const RhsType& rhs,
                          const FunctionDescribed& functionDescribed,
                          const std::string& errorMessage = std::string{},
                          bool failureThrow = false);
-        // clang-format on
 
         void AssertEqual(wchar_t lhs,
                          wchar_t rhs,

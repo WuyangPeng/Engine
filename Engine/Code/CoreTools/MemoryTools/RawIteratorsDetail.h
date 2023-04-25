@@ -14,16 +14,14 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-template <typename T>
-CoreTools::RawConstIterator<T>::RawConstIterator() noexcept
-    : master{ nullptr }
-{
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 
 template <typename T>
-CoreTools::RawConstIterator<T>::RawConstIterator(pointer pointer, size_t offset) noexcept
+CoreTools::RawConstIterator<T>::RawConstIterator(pointer pointer, int offset) noexcept
     : master{ pointer + offset }
+
+#include STSTEM_WARNING_POP
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -42,7 +40,7 @@ bool CoreTools::RawConstIterator<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-typename CoreTools::RawConstIterator<T>::reference CoreTools::RawConstIterator<T>::operator*() const
+typename CoreTools::RawConstIterator<T>::reference CoreTools::RawConstIterator<T>::operator*() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -66,61 +64,86 @@ typename CoreTools::RawConstIterator<T>::reference CoreTools::RawConstIterator<T
 }
 
 template <typename T>
-CoreTools::RawConstIterator<T>& CoreTools::RawConstIterator<T>::operator++()
+CoreTools::RawConstIterator<T>& CoreTools::RawConstIterator<T>::operator++() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     ++master;
+
+#include STSTEM_WARNING_POP
 
     return *this;
 }
 
 template <typename T>
-CoreTools::RawConstIterator<T> CoreTools::RawConstIterator<T>::operator++(int)
+CoreTools::RawConstIterator<T> CoreTools::RawConstIterator<T>::operator++(int) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     auto current = *this;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     ++master;
+
+#include STSTEM_WARNING_POP
 
     return current;
 }
 
 template <typename T>
-CoreTools::RawConstIterator<T>& CoreTools::RawConstIterator<T>::operator--()
+CoreTools::RawConstIterator<T>& CoreTools::RawConstIterator<T>::operator--() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     --master;
+
+#include STSTEM_WARNING_POP
 
     return *this;
 }
 
 template <typename T>
-CoreTools::RawConstIterator<T> CoreTools::RawConstIterator<T>::operator--(int)
+CoreTools::RawConstIterator<T> CoreTools::RawConstIterator<T>::operator--(int) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     auto current = *this;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     --master;
+
+#include STSTEM_WARNING_POP
 
     return current;
 }
 
 template <typename T>
-CoreTools::RawConstIterator<T>& CoreTools::RawConstIterator<T>::operator+=(ptrdiff_t offset)
+CoreTools::RawConstIterator<T>& CoreTools::RawConstIterator<T>::operator+=(ptrdiff_t offset) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 
     master += offset;
 
+#include STSTEM_WARNING_POP
+
     return *this;
 }
 
 template <typename T>
-CoreTools::RawConstIterator<T> CoreTools::RawConstIterator<T>::operator+(ptrdiff_t offset) const
+CoreTools::RawConstIterator<T> CoreTools::RawConstIterator<T>::operator+(ptrdiff_t offset) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -130,17 +153,22 @@ CoreTools::RawConstIterator<T> CoreTools::RawConstIterator<T>::operator+(ptrdiff
 }
 
 template <typename T>
-CoreTools::RawConstIterator<T>& CoreTools::RawConstIterator<T>::operator-=(ptrdiff_t offset)
+CoreTools::RawConstIterator<T>& CoreTools::RawConstIterator<T>::operator-=(ptrdiff_t offset) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     master -= offset;
+
+#include STSTEM_WARNING_POP
 
     return *this;
 }
 
 template <typename T>
-CoreTools::RawConstIterator<T> CoreTools::RawConstIterator<T>::operator-(ptrdiff_t offset) const
+CoreTools::RawConstIterator<T> CoreTools::RawConstIterator<T>::operator-(ptrdiff_t offset) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -150,7 +178,7 @@ CoreTools::RawConstIterator<T> CoreTools::RawConstIterator<T>::operator-(ptrdiff
 }
 
 template <typename T>
-ptrdiff_t CoreTools::RawConstIterator<T>::operator-(const RawConstIterator& rhs) const
+ptrdiff_t CoreTools::RawConstIterator<T>::operator-(const RawConstIterator& rhs) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -158,22 +186,23 @@ ptrdiff_t CoreTools::RawConstIterator<T>::operator-(const RawConstIterator& rhs)
 }
 
 template <typename T>
-std::strong_ordering CoreTools::RawConstIterator<T>::operator<=>(RawConstIterator const& rhs) const
+bool CoreTools::RawConstIterator<T>::operator==(const RawConstIterator& rhs) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return master <=> rhs.master;
+    return master == rhs.master;
 }
 
 template <typename T>
-CoreTools::RawIterator<T>::RawIterator() noexcept
-    : ParentType{}
+bool CoreTools::RawConstIterator<T>::operator<(const RawConstIterator& rhs) const noexcept
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return master < rhs.master;
 }
 
 template <typename T>
-CoreTools::RawIterator<T>::RawIterator(pointer pointer, size_t offset)
+CoreTools::RawIterator<T>::RawIterator(pointer pointer, int offset) noexcept
     : ParentType{ pointer, offset }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -189,13 +218,23 @@ bool CoreTools::RawIterator<T>::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+
 template <typename T>
-typename CoreTools::RawIterator<T>::reference CoreTools::RawIterator<T>::operator*()
+typename CoreTools::RawIterator<T>::reference CoreTools::RawIterator<T>::operator*() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26492)
+
     return const_cast<reference>(ParentType::operator*());
+
+#include STSTEM_WARNING_POP
 }
+
+#include STSTEM_WARNING_POP
 
 template <typename T>
 typename CoreTools::RawIterator<T>::pointer CoreTools::RawIterator<T>::operator->()
@@ -205,8 +244,11 @@ typename CoreTools::RawIterator<T>::pointer CoreTools::RawIterator<T>::operator-
     return const_cast<pointer>(ParentType::operator->());
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+
 template <typename T>
-CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator++()
+CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator++() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -216,7 +258,7 @@ CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator++()
 }
 
 template <typename T>
-CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator++(int32_t)
+CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator++(int) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -228,7 +270,7 @@ CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator++(int32_t)
 }
 
 template <typename T>
-CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator--()
+CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator--() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -238,7 +280,7 @@ CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator--()
 }
 
 template <typename T>
-CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator--(int32_t)
+CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator--(int) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -250,7 +292,7 @@ CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator--(int32_t)
 }
 
 template <typename T>
-CoreTools::RawIterator<T>& CoreTools::RawIterator<T>::operator+=(ptrdiff_t offset)
+CoreTools::RawIterator<T>& CoreTools::RawIterator<T>::operator+=(ptrdiff_t offset) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -260,7 +302,7 @@ CoreTools::RawIterator<T>& CoreTools::RawIterator<T>::operator+=(ptrdiff_t offse
 }
 
 template <typename T>
-CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator+(ptrdiff_t offset) const
+CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator+(ptrdiff_t offset) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -270,7 +312,7 @@ CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator+(ptrdiff_t offset)
 }
 
 template <typename T>
-CoreTools::RawIterator<T>& CoreTools::RawIterator<T>::operator-=(ptrdiff_t offset)
+CoreTools::RawIterator<T>& CoreTools::RawIterator<T>::operator-=(ptrdiff_t offset) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -280,7 +322,7 @@ CoreTools::RawIterator<T>& CoreTools::RawIterator<T>::operator-=(ptrdiff_t offse
 }
 
 template <typename T>
-CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator-(ptrdiff_t offset) const
+CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator-(ptrdiff_t offset) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -288,5 +330,7 @@ CoreTools::RawIterator<T> CoreTools::RawIterator<T>::operator-(ptrdiff_t offset)
 
     return current -= offset;
 }
+
+#include STSTEM_WARNING_POP
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_RAW_ITERATORS_DETAIL_H

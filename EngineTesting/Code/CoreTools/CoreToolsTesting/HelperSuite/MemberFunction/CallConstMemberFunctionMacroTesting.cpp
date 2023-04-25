@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/12 21:32)
+///	引擎测试版本：0.9.0.6 (2023/04/11 21:07)
 
 #include "CallConstMemberFunctionMacroTesting.h"
 #include "CoreTools/CoreToolsTesting/HelperSuite/Detail/CallConstMemberFunctionMacro.h"

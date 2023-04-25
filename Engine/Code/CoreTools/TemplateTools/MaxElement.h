@@ -19,7 +19,7 @@
 namespace CoreTools
 {
     template <typename T>
-    T MaxElement(std::initializer_list<T> element)
+    NODISCARD T MaxElement(std::initializer_list<T> element)
     {
         std::vector<T> maxSize{ element };
 

@@ -1,15 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:04)
+///	引擎测试版本：0.9.0.6 (2023/04/12 14:16)
 
 #include "AppenderTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
-#include "System/Helper/PragmaWarning/Gregorian.h"
 #include "System/Helper/PragmaWarning/PosixTime.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
@@ -19,9 +18,7 @@
 #include "CoreTools/LogManager/LogMessage.h"
 #include "CoreTools/Time/CustomTime.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <iostream>
 
-using std::ostream;
 using namespace std::literals;
 
 namespace
@@ -54,7 +51,7 @@ CoreTools::AppenderTesting::AppenderTesting(const OStreamShared& stream)
       appenderTestingFullName{ appenderTestingName + SYSTEM_TEXT("."s) + gExtensionName },
       backupFileName{}
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_0;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, AppenderTesting)
@@ -162,7 +159,7 @@ void CoreTools::AppenderTesting::FileLogTest()
     ASSERT_EQUAL(appender.GetExtensionName(), gExtensionName);
     ASSERT_EQUAL(appender.GetMaxFileSize(), maxFileSize);
     ASSERT_TRUE(appender.IsBackup());
- 
+
     ASSERT_TRUE(appender.IsDefault());
     appender.SetIsDefault(false);
     ASSERT_FALSE(appender.IsDefault());
@@ -170,9 +167,9 @@ void CoreTools::AppenderTesting::FileLogTest()
 
 void CoreTools::AppenderTesting::FileContentTest()
 {
-    IFStreamManager fileManager{ appenderTestingFullName };
+    const IFStreamManager fileManager{ appenderTestingFullName };
 
-    auto fileContent = fileManager.GetFileContent();
+    const auto fileContent = fileManager.GetFileContent();
 
     ASSERT_UNEQUAL(fileContent.find(gFileTraceMessage), System::String::npos);
     ASSERT_UNEQUAL(fileContent.find(gFileDebugMessage), System::String::npos);
@@ -184,7 +181,7 @@ void CoreTools::AppenderTesting::FileContentTest()
 
 void CoreTools::AppenderTesting::BackupFileTest()
 {
-    Appender appender{ gAppenderTestingPathName, gAppenderTestingFileName, AppenderPrint::All, LogLevel::Trace, 1, true, SYSTEM_TEXT("log"s) };
+    const Appender appender{ gAppenderTestingPathName, gAppenderTestingFileName, AppenderPrint::All, LogLevel::Trace, 1, true, SYSTEM_TEXT("log"s) };
 
     backupFileName = GetBackupFileName();
 
@@ -195,9 +192,9 @@ void CoreTools::AppenderTesting::BackupFileTest()
 
 void CoreTools::AppenderTesting::BackupFileContentTest()
 {
-    IFStreamManager fileManager{ appenderTestingFullName };
+    const IFStreamManager fileManager{ appenderTestingFullName };
 
-    auto fileContent = fileManager.GetFileContent();
+    const auto fileContent = fileManager.GetFileContent();
 
     ASSERT_UNEQUAL(fileContent.find(gBackupMessage), System::String::npos);
     ASSERT_EQUAL(fileContent.find(gFileTraceMessage), System::String::npos);
@@ -207,9 +204,9 @@ void CoreTools::AppenderTesting::BackupFileContentTest()
     ASSERT_EQUAL(fileContent.find(gFileErrorMessage), System::String::npos);
     ASSERT_EQUAL(fileContent.find(gFileFatalMessage), System::String::npos);
 
-    IFStreamManager backupFileManager{ backupFileName };
+    const IFStreamManager backupFileManager{ backupFileName };
 
-    auto backupFileContent = backupFileManager.GetFileContent();
+    const auto backupFileContent = backupFileManager.GetFileContent();
 
     ASSERT_UNEQUAL(backupFileContent.find(gFileTraceMessage), System::String::npos);
     ASSERT_UNEQUAL(backupFileContent.find(gFileDebugMessage), System::String::npos);
@@ -229,7 +226,7 @@ System::String CoreTools::AppenderTesting::GetBackupFileName()
 {
     System::String backupName{ appenderTestingName };
 
-    auto nowTime = boost::posix_time::second_clock::local_time();
+    const auto nowTime = boost::posix_time::second_clock::local_time();
 
     boost::basic_format<System::TChar> basicFormat{ SYSTEM_TEXT("(%1%)."s) };
     basicFormat % boost::posix_time::to_iso_string_type<System::TChar>(nowTime);
@@ -288,7 +285,7 @@ void CoreTools::AppenderTesting::FileConfigurationTest()
     ASSERT_EQUAL(appender.GetExtensionName(), gExtensionName);
     ASSERT_EQUAL(appender.GetMaxFileSize(), maxFileSize);
     ASSERT_TRUE(appender.IsBackup());
- 
+
     ASSERT_TRUE(appender.IsDefault());
     appender.SetIsDefault(false);
     ASSERT_FALSE(appender.IsDefault());

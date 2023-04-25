@@ -21,7 +21,7 @@ CoreTools::FileBuffer CoreTools::FileHandleHelper::LoadFromFile(const String& fi
 {
     ReadFileHandleImpl handle{ fileName };
 
-    const auto bufferSize = boost::numeric_cast<size_t>(handle.GetFileLength());
+    const auto bufferSize = boost::numeric_cast<int>(handle.GetFileLength());
     FileBuffer buffer{ bufferSize };
 
     handle.ReadFromFile(sizeof(char), buffer.GetSize(), buffer.GetBufferBegin());

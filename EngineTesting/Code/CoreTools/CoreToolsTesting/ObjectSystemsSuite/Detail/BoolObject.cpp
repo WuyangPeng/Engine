@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 13:51)
+///	引擎测试版本：0.9.0.6 (2023/04/18 16:02)
 
 #include "BoolObject.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
@@ -17,8 +17,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
-using std::swap;
 
 CORE_TOOLS_RTTI_DEFINE(CoreTools, BoolObject);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, BoolObject);
@@ -35,15 +33,14 @@ CoreTools::BoolObject::BoolObject(DisableNotThrow disableNotThrow)
     CORE_TOOLS_ASSERTION_1(IsLoadValidity(), "载入的数据出现错误！");
 }
 
-CoreTools::BoolObject::BoolObject(LoadConstructor value)
-    : ParentType{ value }, boolValue{ true }, boolArray0{}, boolArray1{}
+CoreTools::BoolObject::BoolObject(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, boolValue{ true }, boolArray0{}, boolArray1{}
 {
     AllocationArray1(true);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 void CoreTools::BoolObject::AllocationArray0(bool value)
 {
     for (auto i = 0; i < bufferSize; ++i)
@@ -52,7 +49,6 @@ void CoreTools::BoolObject::AllocationArray0(bool value)
     }
 }
 
-// private
 void CoreTools::BoolObject::AllocationArray1(bool value)
 {
     for (auto i = 0; i < bufferSize; ++i)
@@ -61,7 +57,6 @@ void CoreTools::BoolObject::AllocationArray1(bool value)
     }
 }
 
-// private
 bool CoreTools::BoolObject::IsLoadValidity() const
 {
     if (boolValue == true || boolArray0.empty() || boolArray1.empty())
@@ -95,14 +90,14 @@ int CoreTools::BoolObject::GetStreamingSize() const
     auto size = ParentType::GetStreamingSize();
 
     // WriteBool
-    size += CoreTools::GetStreamSize(boolValue);
+    size += GetStreamSize(boolValue);
 
     // WriteBoolWithNumber
     size += sizeof(int32_t);
-    size += bufferSize * CoreTools::GetStreamSize(boolValue);
+    size += bufferSize * GetStreamSize(boolValue);
 
     // WriteBoolWithoutNumber
-    size += bufferSize * CoreTools::GetStreamSize(boolValue);
+    size += bufferSize * GetStreamSize(boolValue);
 
     return size;
 }
@@ -152,8 +147,9 @@ void CoreTools::BoolObject::Load(BufferSource& source)
     ParentType::Load(source);
 
     boolValue = source.ReadBool();
-    auto size = source.Read<int32_t>();
-    if (0 < size)
+
+    if (const auto size = source.Read<int32_t>();
+        0 < size)
     {
         source.ReadBoolContainer(size, boolArray0);
         source.ReadBoolContainer(size, boolArray1);

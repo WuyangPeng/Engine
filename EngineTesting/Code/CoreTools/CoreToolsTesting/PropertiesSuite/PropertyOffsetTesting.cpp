@@ -11,9 +11,8 @@
 #include "Detail/PropertyOffset.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::string;
 
 CoreTools::PropertyOffsetTesting::PropertyOffsetTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -28,7 +27,6 @@ void CoreTools::PropertyOffsetTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-
 void CoreTools::PropertyOffsetTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(GetTest);
@@ -36,9 +34,9 @@ void CoreTools::PropertyOffsetTesting::MainTest()
 
 void CoreTools::PropertyOffsetTesting::GetTest()
 {
-    PropertyOffset propertyOffset{ DisableNotThrow::Disable };
+    const PropertyOffset propertyOffset{ DisableNotThrow::Disable };
 
-    string offset{ propertyOffset.offset };
+    const std::string offset{ propertyOffset.offset };
 
     ASSERT_EQUAL(offset, "Value");
     ASSERT_EQUAL(propertyOffset.GetInternalValue(), "Offset");

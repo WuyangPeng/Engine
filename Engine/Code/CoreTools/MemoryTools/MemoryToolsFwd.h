@@ -72,7 +72,7 @@ namespace CoreTools
     template <typename T>
     class RawIterator;
 
-    template <bool OrderLToR, size_t... Sizes>
+    template <bool OrderLToR, int... Sizes>
     class Lattice;
 
     template <typename T, bool OrderLToR, size_t... Sizes>

@@ -96,7 +96,7 @@ void Rendering::BufferLayout::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    layout = source.ReadAggregateContainerWithoutNumber<MemberLayoutContainer>();
+    layout = source.ReadAggregateContainerNotUseNumber<MemberLayoutContainer>();
 }
 
 void Rendering::BufferLayout::Save(CoreTools::BufferTarget& target) const

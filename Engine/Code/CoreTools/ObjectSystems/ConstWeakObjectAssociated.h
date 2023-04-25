@@ -24,8 +24,13 @@ namespace CoreTools
         using ObjectType = T;
         using ConstObjectWeakPtr = std::weak_ptr<const T>;
 
-        ConstWeakObjectAssociated(const ConstObjectWeakPtr& object, int64_t associated) noexcept
-            : object{ object }, associated{ associated }
+        ConstWeakObjectAssociated(ConstObjectWeakPtr object, int64_t associated) noexcept
+            : object{ std::move(object) }, associated{ associated }
+        {
+        }
+
+        explicit ConstWeakObjectAssociated(ConstObjectWeakPtr object) noexcept
+            : object{ std::move(object) }, associated{ 0 }
         {
         }
 

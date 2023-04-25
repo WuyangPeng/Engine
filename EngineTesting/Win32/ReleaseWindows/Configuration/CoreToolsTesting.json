@@ -235,7 +235,7 @@
     "JsonTotalGenerateTesting": 1
   },
 
-  "SimpleZipSuite": {
+  "simpleZipSuite": {
     "ZipEntryTesting": 1,
     "ZipArchiveTesting": 1
   },
@@ -307,33 +307,40 @@
     "AppenderManagerTesting": 1,
     "LogFileNameTesting": 1,
     "LogAppenderIOManagerTesting": 0,
-    "LogTesting": 1
+    "LogTesting": 1,
+    "LogAsynchronousTesting": 1,
+    "LogHelperTesting": 1
   },
 
   "dataTypesSuite": {
     "TupleTesting": 1,
+    "TupleLessTesting": 1,
     "TableTesting": 1,
     "MinHeapRecordTesting": 1,
     "MinHeapRecordStoredTesting": 1,
     "MinHeapRecordIndexTesting": 1,
     "MinHeapRecordStoredManagerTesting": 1,
-    "MinHeapTesting": 1
+    "MinHeapTesting": 1,
+    "ThreadSafeMapTesting": 1,
+    "ThreadSafeQueueTesting": 1
   },
 
   "memoryToolsSuite": {
+    "Array2Testing": 1,
+    "Array3Testing": 1,
+    "Array4Testing": 1,
+    "AtomicMinMaxTesting": 1,
+    "ContainerAdapterTesting": 1,
     "HeapAllocateTesting": 1,
-    "DefaultMemoryTesting": 1,
-    "MemoryTesting": 1,
-    "MemoryManagerTesting": 1,
-    "SmartPointerTesting": 1,
-    "MD5ContextTesting": 1,
-    "MD5Testing": 1,
-    "RandomTesting": 50,
-    "PoolTesting": 1,
-    "BufferPoolTesting": 1,
-    "BufferTesting": 1,
-    "BufferStreamTesting": 1,
-    "SubclassSmartPointerTesting": 1
+    "LatticeTesting": 1,
+    "LexicoArray2Testing": 1,
+    "MultiArrayAdapterTesting": 1,
+    "MultiArrayTesting": 1,
+    "RawIteratorsTesting": 1,
+    "RawPtrCompareTesting": 1,
+    "SharedPtrCompareTesting": 1,
+    "TypeTraitsTesting": 1,
+    "WeakPtrCompareTesting": 1
   },
 
   "objectSystemsSuite": {
@@ -355,7 +362,14 @@
     "FileInStreamTesting": 1,
     "ObjectTesting": 1,
     "ObjectManagerTesting": 1,
-    "TypeCastingTesting": 1
+    "ConstObjectAssociatedTesting": 1,
+    "ConstWeakObjectAssociatedTesting": 1,
+    "ObjectAssociatedTesting": 1,
+    "WeakObjectAssociatedTesting": 1,
+    "InitTermContainerTesting": 1,
+    "InitTermRegisterFactoryTesting": 1,
+    "NullObjectTesting": 1,
+    "ObjectInterfaceTesting": 1
   },
 
   "timeSuite": {
@@ -391,7 +405,10 @@
     "LiteralCastTesting": 1,
     "ReferenceCastTesting": 1,
     "ValueScopeTesting": 1,
-    "TinyTesting": 1
+    "TinyTesting": 1,
+    "IfThenElseTesting": 1,
+    "MaxElementTesting": 1,
+    "RangeIterationTesting": 1
   },
 
   "commandSuite": {
@@ -404,7 +421,8 @@
     "TestingInformationHelperTesting": 1,
     "CMainFunctionHelperTesting": 1,
     "DllFunctionHelperTesting": 1,
-    "CMainFunctionTestingHelperTesting": 1
+    "CMainFunctionTestingHelperTesting": 1,
+    "ExecuteDllMainTesting": 1
   },
 
   "handleManagerSuite": {

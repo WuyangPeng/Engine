@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 15:40)
+///	引擎测试版本：0.9.0.6 (2023/04/24 09:55)
 
 #include "FileOutStreamTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -14,24 +14,16 @@
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/FileInStream.h"
 #include "CoreTools/ObjectSystems/FileOutStream.h"
 #include "CoreTools/ObjectSystems/NullObject.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
-#include "CoreTools/ObjectSystems/Stream.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 namespace CoreTools
 {
-    const auto gTopLevel = "Top Level"s;
-    const string gThreeZeroSuffix(3, '\0');
-    const string gTwoZeroSuffix(2, '\0');
-    const string gOneZeroSuffix(1, '\0');
-
     const auto gFileName = SYSTEM_TEXT("FileOutStream.txt"s);
 }
 
@@ -45,65 +37,43 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, FileOutStreamTesting)
 
 void CoreTools::FileOutStreamTesting::DoRunUnitTest()
 {
+    InitTerm::ExecuteInitializer();
+
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+
+    InitTerm::ExecuteTerminator();
 }
 
 void CoreTools::FileOutStreamTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(WriteNullObjectTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(DeleteFileTest);
 }
 
-void CoreTools::FileOutStreamTesting::WriteNullObjectTest() noexcept
+void CoreTools::FileOutStreamTesting::WriteNullObjectTest()
 {
-}
+    OutTopLevel outTopLevel = OutTopLevel::Create();
 
-string CoreTools::FileOutStreamTesting::GetNullObjectContent(int uniqueID, const string& rttiTypeName) const
-{
-    string integerDescribe(8, '\0');
+    outTopLevel.Insert(Object::GetNullObject());
 
-    string nullObjectContent;
+    FileOutStream fileOutStream{ outTopLevel };
 
-    // RTTI 类型名
-    nullObjectContent += GetAligningString(rttiTypeName);
+    fileOutStream.Save(SYSTEM_TEXT("Resource/") + gFileName);
 
-    // UniqueID
-    integerDescribe.at(0) = boost::numeric_cast<char>(uniqueID);
-    nullObjectContent += integerDescribe;
+    const FileInStream fileInputStream{ SYSTEM_TEXT("Resource/") + gFileName };
 
-    return nullObjectContent;
-}
+    const auto inTopLevel = fileInputStream.GetInTopLevel();
 
-string CoreTools::FileOutStreamTesting::GetAligningString(const string& original) const
-{
-    string integerDescribe(4, '\0');
-    string aligning;
+    ASSERT_EQUAL_FAILURE_THROW(inTopLevel.GetTopLevelSize(), 1, "FileInStream is empty.");
 
-    integerDescribe.at(0) = boost::numeric_cast<char>(original.size());
-    aligning += integerDescribe + original;
-    const int padding = original.size() % 4;
-    switch (padding)
+    for (const auto& value : inTopLevel)
     {
-        case 1:
-            aligning += gThreeZeroSuffix;
-            break;
-        case 2:
-            aligning += gTwoZeroSuffix;
-            break;
-        case 3:
-            aligning += gOneZeroSuffix;
-            break;
-        default:
-            break;
+        ASSERT_EQUAL(value->GetRttiType().GetName(), NullObject::GetCurrentRttiType().GetName());
     }
-
-    return aligning;
 }
 
-string CoreTools::FileOutStreamTesting::GetTopLevelContent() const
+void CoreTools::FileOutStreamTesting::DeleteFileTest()
 {
-    string integerDescribe(4, '\0');
-
-    // “Top Level”字符串
-    integerDescribe.at(0) = boost::numeric_cast<char>(gTopLevel.size());
-    return integerDescribe + gTopLevel + gThreeZeroSuffix;
+    DeleteFileTools deleteFileTools{ SYSTEM_TEXT("Resource/") + gFileName };
 }

@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:10)
+///	引擎测试版本：0.9.0.6 (2023/04/12 15:10)
 
 #include "LogFileNameTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/LogManager/LogFileName.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 using namespace std::literals;
 
 CoreTools::LogFileNameTesting::LogFileNameTesting(const OStreamShared& stream)
@@ -33,9 +34,9 @@ void CoreTools::LogFileNameTesting::MainTest()
 
 void CoreTools::LogFileNameTesting::LogFileNameTest()
 {
-    auto name = SYSTEM_TEXT("LogFileName"s);
+    const auto name = SYSTEM_TEXT("LogFileName"s);
 
-    LogFileName logFileName{ name.c_str() };
+    const LogFileName logFileName{ name.c_str() };
 
     ASSERT_EQUAL(logFileName.GetFileName(), name);
 }

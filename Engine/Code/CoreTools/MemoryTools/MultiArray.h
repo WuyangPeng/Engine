@@ -12,11 +12,13 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "Lattice.h"
+
 #include <array>
 
 namespace CoreTools
 {
-    template <typename T, bool OrderLToR, size_t... Sizes>
+    template <typename T, bool OrderLToR, int... Sizes>
     class MultiArray : public Lattice<OrderLToR, Sizes...>
     {
     public:
@@ -26,13 +28,13 @@ namespace CoreTools
     public:
         MultiArray() noexcept;
 
-        CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD const T* GetData() const noexcept;
-        NODISCARD T* data() noexcept;
+        NODISCARD T* GetData() noexcept;
 
-        NODISCARD const T& operator[](size_t index) const;
-        NODISCARD T& operator[](size_t index);
+        NODISCARD const T& operator[](int index) const;
+        NODISCARD T& operator[](int index);
 
         void Fill(const T& value);
 
@@ -42,13 +44,11 @@ namespace CoreTools
         template <typename... IndexTypes>
         NODISCARD T& operator()(IndexTypes... tuple);
 
-        NODISCARD const T& operator()(const std::array<size_t, sizeof...(Sizes)>& coordinate) const;
-        NODISCARD T& operator()(const std::array<size_t, sizeof...(Sizes)>& coordinate);
-
-        NODISCARD std::strong_ordering operator<=>(const MultiArray& rhs) const;
+        NODISCARD const T& operator()(const std::array<int, sizeof...(Sizes)>& coordinate) const;
+        NODISCARD T& operator()(const std::array<int, sizeof...(Sizes)>& coordinate);
 
     private:
-        std::array<T, Lattice<OrderLToR, Sizes...>::NumElements> container;
+        std::array<T, Lattice<OrderLToR, Sizes...>::numElements> container;
     };
 
     template <typename T, bool OrderLToR>
@@ -57,24 +57,24 @@ namespace CoreTools
     public:
         using ClassType = MultiArray<T, OrderLToR>;
         using ParentType = Lattice<OrderLToR>;
-        using SizeType = std::vector<size_t>;
+        using SizeType = std::vector<int>;
 
     public:
         MultiArray() noexcept;
 
-        CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        MultiArray(const SizeType& sizes);
-        MultiArray(const std::initializer_list<size_t>& sizes);
+        explicit MultiArray(const SizeType& sizes);
+        explicit MultiArray(const std::initializer_list<int>& sizes);
 
-        void Reset(const SizeType& sizes);
-        void Reset(const std::initializer_list<size_t>& sizes);
+        void Reset(const SizeType& sizes) override;
+        void Reset(const std::initializer_list<int>& sizes) override;
 
         NODISCARD const T* GetData() const noexcept;
         NODISCARD T* GetData() noexcept;
 
-        NODISCARD const T& operator[](size_t index) const;
-        NODISCARD T& operator[](size_t index);
+        NODISCARD const T& operator[](int index) const;
+        NODISCARD T& operator[](int index);
 
         void Fill(const T& value);
 
@@ -85,8 +85,6 @@ namespace CoreTools
 
         NODISCARD const T& operator()(const SizeType& coordinate) const;
         NODISCARD T& operator()(const SizeType& coordinate);
-
-        NODISCARD std::strong_ordering operator<=>(const MultiArray& rhs) const;
 
     private:
         std::vector<T> container;

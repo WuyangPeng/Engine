@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/03/03 09:52)
+///	引擎测试版本：0.9.0.6 (2023/04/11 20:43)
 
 #include "FileAsynchronousTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -139,12 +139,12 @@ void CoreTools::FileAsynchronousTesting::ReadEventFunction(const FileAsynchronou
     ASSERT_EQUAL(fileAsynchronousParameter.GetEvent().lock(), shared_from_this());
     ASSERT_FALSE(fileAsynchronousParameter.IsAppend());
 
-    ASSERT_EQUAL_FAILURE_THROW(fileBuffer.GetSize(), (GetContent().size() + sizeof(size_t)) * 2, "文件读取内容错误。");
+    ASSERT_EQUAL_FAILURE_THROW(fileBuffer.GetSize(), boost::numeric_cast<int>((GetContent().size() + sizeof(size_t)) * 2), "文件读取内容错误。");
 
     const auto content = GetContent();
     ReadBufferIO readBuffer{ std::make_shared<FileBuffer>(fileBuffer) };
 
-    size_t size{ 0 };
+    size_t size{ 0u };
     readBuffer.Read(sizeof(decltype(size)), &size);
 
     ASSERT_EQUAL(size, content.size());
@@ -177,7 +177,7 @@ void CoreTools::FileAsynchronousTesting::WriteEventFunction(const FileAsynchrono
     const auto content = GetContent();
     ReadFileManager readFileManager{ GetFileName() };
 
-    size_t size{ 0 };
+    size_t size{ 0u };
     readFileManager.Read(sizeof(decltype(size)), &size);
 
     ASSERT_EQUAL(size, content.size());

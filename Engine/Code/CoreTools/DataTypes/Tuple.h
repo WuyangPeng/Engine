@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/23 14:36)
+///	引擎版本：0.9.0.6 (2023/04/11 17:32)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TUPLE_H
 #define CORE_TOOLS_DATA_TYPE_TUPLE_H
@@ -17,8 +17,8 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "System/Helper/PragmaWarning/CallTraits.h"
 #include "System/Helper/PragmaWarning/Operators.h"
-#include "CoreTools/TemplateTools/ParamType.h"
 
 #include <array>
 #include <iosfwd>
@@ -33,17 +33,17 @@ namespace CoreTools
         static constexpr auto tupleDimension = Dimension;
 
         using ClassType = Tuple<Dimension, Type>;
-        using ParamType = typename ParamType<Type>::type;
+        using ParamType = typename boost::call_traits<Type>::param_type;
         using ArrayType = std::array<Type, Dimension>;
         using ArrayTypeConstIter = typename ArrayType::const_iterator;
 
     public:
         Tuple() noexcept;
 
-        explicit Tuple(ParamType param0) noexcept(std::is_arithmetic_v<Type>);
-        Tuple(ParamType param0, ParamType param1) noexcept(std::is_arithmetic_v<Type>);
-        Tuple(ParamType param0, ParamType param1, ParamType param2) noexcept(std::is_arithmetic_v<Type>);
-        Tuple(ParamType param0, ParamType param1, ParamType param2, ParamType param3) noexcept(std::is_arithmetic_v<Type>);
+        explicit Tuple(ParamType param0) noexcept(std::is_arithmetic_v<Type>) requires(Dimension == 1);
+        Tuple(ParamType param0, ParamType param1) noexcept(std::is_arithmetic_v<Type>) requires(Dimension == 2);
+        Tuple(ParamType param0, ParamType param1, ParamType param2) noexcept(std::is_arithmetic_v<Type>) requires(Dimension == 3);
+        Tuple(ParamType param0, ParamType param1, ParamType param2, ParamType param3) noexcept(std::is_arithmetic_v<Type>) requires(Dimension == 4);
 
         CLASS_INVARIANT_DECLARE;
 

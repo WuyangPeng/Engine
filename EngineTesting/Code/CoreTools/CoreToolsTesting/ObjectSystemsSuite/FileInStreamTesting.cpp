@@ -1,16 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 15:40)
+///	引擎测试版本：0.9.0.6 (2023/04/24 09:54)
 
 #include "FileInStreamTesting.h"
 #include "Detail/BoolObject.h"
 #include "Detail/EnumObject.h"
 #include "Detail/IntObject.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
@@ -18,11 +19,13 @@
 #include "CoreTools/ObjectSystems/FileOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <algorithm>
 
-using std::min;
-using std::string;
 using namespace std::literals;
+
+namespace CoreTools
+{
+    const auto gFileName = SYSTEM_TEXT("FileInStream.txt"s);
+}
 
 CoreTools::FileInStreamTesting::FileInStreamTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -34,18 +37,61 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, FileInStreamTesting)
 
 void CoreTools::FileInStreamTesting::DoRunUnitTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-}
-
-void CoreTools::FileInStreamTesting::MainTest()
-{
     InitTerm::ExecuteInitializer();
 
-    ASSERT_NOT_THROW_EXCEPTION_0(FileStreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 
     InitTerm::ExecuteTerminator();
 }
 
-void CoreTools::FileInStreamTesting::FileStreamTest() noexcept
+void CoreTools::FileInStreamTesting::MainTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(FileStreamTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(DeleteFileTest);
+}
+
+void CoreTools::FileInStreamTesting::FileStreamTest()
+{
+    OutTopLevel outTopLevel = OutTopLevel::Create();
+
+    outTopLevel.Insert(std::make_shared<BoolObject>(DisableNotThrow::Disable));
+    outTopLevel.Insert(std::make_shared<EnumObject>(DisableNotThrow::Disable));
+    outTopLevel.Insert(std::make_shared<IntObject>(DisableNotThrow::Disable));
+
+    FileOutStream fileOutStream{ outTopLevel };
+
+    fileOutStream.Save(SYSTEM_TEXT("Resource/") + gFileName);
+
+    const FileInStream fileInputStream{ SYSTEM_TEXT("Resource/") + gFileName };
+
+    const auto inTopLevel = fileInputStream.GetInTopLevel();
+
+    ASSERT_EQUAL_FAILURE_THROW(inTopLevel.GetTopLevelSize(), 3, "FileInStream is empty.");
+
+    auto index = 0;
+    for (const auto& value : inTopLevel)
+    {
+        switch (index)
+        {
+            case 0:
+                ASSERT_EQUAL(value->GetRttiType().GetName(), BoolObject::GetCurrentRttiType().GetName());
+                break;
+            case 1:
+                ASSERT_EQUAL(value->GetRttiType().GetName(), EnumObject::GetCurrentRttiType().GetName());
+                break;
+            case 2:
+                ASSERT_EQUAL(value->GetRttiType().GetName(), IntObject::GetCurrentRttiType().GetName());
+                break;
+            default:
+                break;
+        }
+
+        ++index;
+    }
+}
+
+void CoreTools::FileInStreamTesting::DeleteFileTest()
+{
+    DeleteFileTools deleteFileTools{ SYSTEM_TEXT("Resource/") + gFileName };
 }

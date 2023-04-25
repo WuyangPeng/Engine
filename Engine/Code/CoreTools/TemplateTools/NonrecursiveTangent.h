@@ -17,16 +17,15 @@
 
 namespace CoreTools
 {
-    template <double& Radian>
     struct NonRecursiveTangent
     {
-        static constexpr double Tan() noexcept
+        static constexpr double Tan(const double radian) noexcept
         {
-            return NonRecursiveSine<Radian>::Sin() / NonRecursiveCosine<Radian>::Cos();
+            return NonRecursiveSine::Sin(radian) / NonRecursiveCosine::Cos(radian);
         }
     };
 }
 
-#define NON_RECURSIVE_TANGENT(r) CoreTools::NonrecursiveTangent<r>::Tan()
+#define NON_RECURSIVE_TANGENT(r) CoreTools::NonRecursiveTangent::Tan(r)
 
 #endif  // CORE_TOOLS_TEMPLATE_TOOLS_NON_RECURSIVE_TANGENT_H

@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 19:02)
+///	引擎测试版本：0.9.0.6 (2023/04/25 11:31)
 
 #include "LiteralCastTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/LiteralCastDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::string;
 
 CoreTools::LiteralCastTesting::LiteralCastTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -39,19 +38,19 @@ void CoreTools::LiteralCastTesting::CastTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-	s8 = LiteralCast<int8_t, 1000>();
+    s8 = LiteralCast<int8_t, 1000>();
 
 #endif  // 0
 
 #if 0  // 这里应该产生编译错误。
 
-	s8 = LiteralCast<int8_t, 10000000>();
+    s8 = LiteralCast<int8_t, 10000000>();
 
 #endif  // 0
 
 #if 0  // 这里应该产生编译错误。
 
-	s8 = LiteralCast<int8_t, 10000000000000LL>();
+    s8 = LiteralCast<int8_t, 10000000000000LL>();
 
 #endif  // 0
 
@@ -61,7 +60,7 @@ void CoreTools::LiteralCastTesting::CastTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-	s8 = LiteralCast<int8_t, 128>();
+    s8 = LiteralCast<int8_t, 128>();
 
 #endif  // 0
 
@@ -69,7 +68,7 @@ void CoreTools::LiteralCastTesting::CastTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-	s8 = LiteralCast<int8_t, -129>();
+    s8 = LiteralCast<int8_t, -129>();
 
 #endif  // 0
 
@@ -77,7 +76,7 @@ void CoreTools::LiteralCastTesting::CastTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-	u8 = LiteralCast<uint8_t, -1>();
+    u8 = LiteralCast<uint8_t, -1>();
 
 #endif  // 0
 
@@ -86,7 +85,7 @@ void CoreTools::LiteralCastTesting::CastTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-	u8 = LiteralCast<uint8_t, 256>();
+    u8 = LiteralCast<uint8_t, 256>();
 
 #endif  // 0
 
@@ -96,7 +95,7 @@ void CoreTools::LiteralCastTesting::CastTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-	u32 = LiteralCast<uint32_t, 10000000000000LL>();
+    u32 = LiteralCast<uint32_t, 10000000000000LL>();
 
 #endif  // 0
 

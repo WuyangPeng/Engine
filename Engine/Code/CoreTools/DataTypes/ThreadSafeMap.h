@@ -29,7 +29,7 @@ namespace CoreTools
         using ValueParamType = typename ParamType<Value>::type;
 
     public:
-        ThreadSafeMap() = default;
+        ThreadSafeMap() noexcept = default;
         ~ThreadSafeMap() noexcept = default;
         ThreadSafeMap(const ThreadSafeMap& rhs);
         ThreadSafeMap& operator=(const ThreadSafeMap& rhs);

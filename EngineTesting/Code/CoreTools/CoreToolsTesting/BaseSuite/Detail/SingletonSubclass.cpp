@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/02/23 16:36)
+///	引擎测试版本：0.9.0.6 (2023/04/10 18:16)
 
 #include "SingletonSubclass.h"
 #include "System/Helper/Tools.h"
@@ -28,7 +28,7 @@ void CoreTools::SingletonSubclass::Create()
 {
     if (singletonSubclass != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("重复初始化SingletonSubclass。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("重复初始化SingletonSubclass。"))
     }
 
     singletonSubclass = std::make_unique<SingletonSubclass>(SingletonSubclassCreate::Init);

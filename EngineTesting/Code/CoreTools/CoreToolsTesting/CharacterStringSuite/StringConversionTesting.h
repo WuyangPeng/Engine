@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/02/28 14:01)
+///	引擎测试版本：0.9.0.6 (2023/04/11 14:43)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_SUITE_STRING_CONVERSION_TESTING_H
 #define CORE_TOOLS_CHARACTER_STRING_SUITE_STRING_CONVERSION_TESTING_H
@@ -46,8 +46,8 @@ namespace CoreTools
         void Utf8ConversionWideCharTest();
         void Utf8ConversionStandardTest();
         void Utf8ConversionMultiByteTest();
-        void WideCharUtf8ConversionStandardTest();
 
+        void WideCharUtf8ConversionStandardTest();
         void WideCharUtf8ConversionStandardEnglishTest();
         void WideCharUtf8ConversionStandardChineseTest();
     };

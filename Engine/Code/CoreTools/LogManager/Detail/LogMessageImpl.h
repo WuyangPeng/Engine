@@ -50,6 +50,8 @@ namespace CoreTools
 
         NODISCARD virtual LogMessageImplSharedPtr Clone() const = 0;
 
+        virtual LogMessageImpl& operator<<(char value) = 0;
+        virtual LogMessageImpl& operator<<(wchar_t value) = 0;
         virtual LogMessageImpl& operator<<(const char* value) = 0;
         virtual LogMessageImpl& operator<<(const wchar_t* value) = 0;
         virtual LogMessageImpl& operator<<(int32_t value) = 0;
@@ -61,6 +63,7 @@ namespace CoreTools
         virtual LogMessageImpl& operator<<(const std::string& value) = 0;
         virtual LogMessageImpl& operator<<(const std::string_view& value) = 0;
         virtual LogMessageImpl& operator<<(const std::wstring& value) = 0;
+        virtual LogMessageImpl& operator<<(const std::wstring_view& value) = 0;
         virtual LogMessageImpl& operator<<(const Error& error) = 0;
         virtual LogMessageImpl& operator<<(const std::exception& error) = 0;
         virtual LogMessageImpl& operator<<(LogAppenderIOManageSign sign) = 0;

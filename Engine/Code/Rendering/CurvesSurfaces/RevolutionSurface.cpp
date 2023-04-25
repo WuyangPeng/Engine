@@ -325,8 +325,8 @@ void Rendering::RevolutionSurface::Load(CoreTools::BufferSource& source)
     source.ReadEnum(topology);
     source.Read(numCurveSamples);
     source.Read(numRadialSamples);
-    sin = source.ReadContainerWithNumber<std::vector<float>>(numRadialSamples + 1);
-    cos = source.ReadContainerWithNumber<std::vector<float>>(numRadialSamples + 1);
+    sin = source.ReadContainerUseNumber<std::vector<float>>(numRadialSamples + 1);
+    cos = source.ReadContainerUseNumber<std::vector<float>>(numRadialSamples + 1);
     sampleByArcLength = source.ReadBool();
 
     curve = nullptr;

@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/03/03 09:37)
+///	引擎测试版本：0.9.0.6 (2023/04/11 20:45)
 
 #include "FileManagerHelperTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/FileManager/FileManagerHelper.h"
-#include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -59,7 +58,7 @@ void CoreTools::FileManagerHelperTesting::MainTest()
 
 void CoreTools::FileManagerHelperTesting::LoadFromFileTest(bool binaryFile)
 {
-    auto buffer = FileManagerHelper::LoadFromFile(GetFileManagerHelperName(), binaryFile);
+    const auto buffer = FileManagerHelper::LoadFromFile(GetFileManagerHelperName(), binaryFile);
 
     const std::string bufferContent{ buffer.begin(), buffer.end() };
 
@@ -73,7 +72,7 @@ void CoreTools::FileManagerHelperTesting::AppendToFileTest(bool binaryFile)
 
     FileManagerHelper::AppendToFile(fileName, binaryFile, boost::numeric_cast<int>(content.size()), content.c_str());
 
-    auto buffer = FileManagerHelper::LoadFromFile(fileName, binaryFile);
+    const auto buffer = FileManagerHelper::LoadFromFile(fileName, binaryFile);
 
     const std::string bufferContent{ buffer.begin(), buffer.end() };
 
@@ -89,7 +88,7 @@ void CoreTools::FileManagerHelperTesting::SaveIntoFileTest(bool binaryFile)
 
     FileManagerHelper::SaveIntoFile(fileName, binaryFile, boost::numeric_cast<int>(content.size()), content.c_str());
 
-    auto buffer = FileManagerHelper::LoadFromFile(fileName, binaryFile);
+    const auto buffer = FileManagerHelper::LoadFromFile(fileName, binaryFile);
 
     const std::string bufferContent{ buffer.begin(), buffer.end() };
 

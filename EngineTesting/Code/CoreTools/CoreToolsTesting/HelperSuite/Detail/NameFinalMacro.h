@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/13 23:06)
+///	引擎测试版本：0.9.0.6 (2023/04/11 20:53)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_NAME_FINAL_MACRO_H
 #define CORE_TOOLS_HELPER_SUITE_NAME_FINAL_MACRO_H
@@ -29,7 +29,7 @@ namespace CoreTools
 
         CORE_TOOLS_NAMES_FINAL_DECLARE;
 
-        NODISCARD ObjectInterfaceSharedPtr CloneObject() const final;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
     };
 }
 

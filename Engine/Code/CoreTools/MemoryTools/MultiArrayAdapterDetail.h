@@ -10,31 +10,41 @@
 #ifndef CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_DETAIL_H
 
+#include "LatticeDetail.h"
 #include "MultiArrayAdapter.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-template <typename T, bool OrderLToR, size_t... Sizes>
+template <typename T, bool OrderLToR, int... Sizes>
 CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::MultiArrayAdapter(T* container)
-    : container{ container }
+    : ParentType{}, container{ container }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    if (container == nullptr)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("容器必须存在。"));
+    }
+
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 
-template <typename T, bool OrderLToR, size_t... Sizes>
+template <typename T, bool OrderLToR, int... Sizes>
 bool CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::IsValid() const noexcept
 {
-    return true;
+    if (ParentType::IsValid() && container != nullptr)
+        return true;
+    else
+        return false;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
 
-template <typename T, bool OrderLToR, size_t... Sizes>
+template <typename T, bool OrderLToR, int... Sizes>
 void CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::Reset(T* aContainer)
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
     if (aContainer == nullptr)
     {
@@ -44,125 +54,106 @@ void CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::Reset(T* aContainer)
     container = aContainer;
 }
 
-template <typename T, bool OrderLToR, size_t... Sizes>
+template <typename T, bool OrderLToR, int... Sizes>
 const T* CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::GetData() const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return container;
 }
 
-template <typename T, bool OrderLToR, size_t... Sizes>
+template <typename T, bool OrderLToR, int... Sizes>
 T* CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::GetData() noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
     return NON_CONST_MEMBER_CALL_CONST_MEMBER(T*, GetData);
 }
 
-template <typename T, bool OrderLToR, size_t... Sizes>
-const T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator[](size_t index) const
+template <typename T, bool OrderLToR, int... Sizes>
+const T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator[](int index) const
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     if (this->GetSize() <= index)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("索引无效。"));
     }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     return container[index];
+
+#include STSTEM_WARNING_POP
 }
 
-template <typename T, bool OrderLToR, size_t... Sizes>
-T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator[](size_t index)
+template <typename T, bool OrderLToR, int... Sizes>
+T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator[](int index)
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
     return OPERATOR_SQUARE_BRACKETS(T, index);
 }
 
-template <typename T, bool OrderLToR, size_t... Sizes>
-void CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::Fill(const T& value)
+template <typename T, bool OrderLToR, int... Sizes>
+void CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::Fill(const T& value) noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-    for (auto i = 0u; i < this->GetSize(); ++i)
+    for (auto i = 0; i < this->GetSize(); ++i)
     {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
         container[i] = value;
+
+#include STSTEM_WARNING_POP
     }
 }
 
-template <typename T, bool OrderLToR, size_t... Sizes>
+template <typename T, bool OrderLToR, int... Sizes>
 template <typename... IndexTypes>
-const T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(IndexTypes... tuple) const
+const T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(IndexTypes... tuple) const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return container[this->GetIndex(tuple...)];
 }
 
-template <typename T, bool OrderLToR, size_t... Sizes>
+template <typename T, bool OrderLToR, int... Sizes>
 template <typename... IndexTypes>
-T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(IndexTypes... tuple)
+T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(IndexTypes... tuple) noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 
     return container[this->GetIndex(tuple...)];
+
+#include STSTEM_WARNING_POP
 }
 
-template <typename T, bool OrderLToR, size_t... Sizes>
-const T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(const std::array<size_t, sizeof...(Sizes)>& coordinate) const
+template <typename T, bool OrderLToR, int... Sizes>
+const T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(const std::array<int, sizeof...(Sizes)>& coordinate) const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return container[this->GetIndex(coordinate)];
 }
 
-template <typename T, bool OrderLToR, size_t... Sizes>
-T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(const std::array<size_t, sizeof...(Sizes)>& coordinate)
+template <typename T, bool OrderLToR, int... Sizes>
+T& CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator()(const std::array<int, sizeof...(Sizes)>& coordinate) noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 
     return container[this->GetIndex(coordinate)];
-}
 
-template <typename T, bool OrderLToR, size_t... Sizes>
-std::strong_ordering CoreTools::MultiArrayAdapter<T, OrderLToR, Sizes...>::operator<=>(const MultiArrayAdapter& rhs) const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    if (container == nullptr && rhs.container == nullptr)
-    {
-        return std::strong_ordering::equivalent;
-    }
-    else if (container == nullptr && rhs.container != nullptr)
-    {
-        return std::strong_ordering::less;
-    }
-    else if (container != nullptr && rhs.container == nullptr)
-    {
-        return std::strong_ordering::greater;
-    }
-    else
-    {
-        for (size_t i = 0; i < this->GetSize() && i < rhs->GetSize(); ++i)
-        {
-            const auto result = container[i] <=> rhs.container[i];
-            if (result != std::strong_ordering::equivalent)
-            {
-                return result;
-            }
-        }
-
-        return this->GetSize() <=> rhs->GetSize();
-    }
-}
-
-template <typename T, bool OrderLToR>
-CoreTools::MultiArrayAdapter<T, OrderLToR>::MultiArrayAdapter() noexcept
-    : ParentType{}, container{ nullptr }
-{
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+#include STSTEM_WARNING_POP
 }
 
 template <typename T, bool OrderLToR>
@@ -182,7 +173,10 @@ CoreTools::MultiArrayAdapter<T, OrderLToR>::MultiArrayAdapter(const SizeType& si
 template <typename T, bool OrderLToR>
 bool CoreTools::MultiArrayAdapter<T, OrderLToR>::IsValid() const noexcept
 {
-    return true;
+    if (ParentType::IsValid() && container != nullptr)
+        return true;
+    else
+        return false;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
@@ -218,7 +212,7 @@ T* CoreTools::MultiArrayAdapter<T, OrderLToR>::GetData() noexcept
 }
 
 template <typename T, bool OrderLToR>
-const T& CoreTools::MultiArrayAdapter<T, OrderLToR>::operator[](size_t index) const
+const T& CoreTools::MultiArrayAdapter<T, OrderLToR>::operator[](int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -227,11 +221,16 @@ const T& CoreTools::MultiArrayAdapter<T, OrderLToR>::operator[](size_t index) co
         THROW_EXCEPTION(SYSTEM_TEXT("索引无效。"));
     }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     return container[index];
+
+#include STSTEM_WARNING_POP
 }
 
 template <typename T, bool OrderLToR>
-T& CoreTools::MultiArrayAdapter<T, OrderLToR>::operator[](size_t index)
+T& CoreTools::MultiArrayAdapter<T, OrderLToR>::operator[](int index)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -239,13 +238,18 @@ T& CoreTools::MultiArrayAdapter<T, OrderLToR>::operator[](size_t index)
 }
 
 template <typename T, bool OrderLToR>
-void CoreTools::MultiArrayAdapter<T, OrderLToR>::Fill(const T& value)
+void CoreTools::MultiArrayAdapter<T, OrderLToR>::Fill(const T& value) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    for (auto i = 0u; i < this->GetSize(); ++i)
+    for (auto i = 0; i < this->GetSize(); ++i)
     {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
         container[i] = value;
+
+#include STSTEM_WARNING_POP
     }
 }
 
@@ -264,7 +268,12 @@ T& CoreTools::MultiArrayAdapter<T, OrderLToR>::operator()(IndexTypes... tuple)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     return container[this->GetIndex(tuple...)];
+
+#include STSTEM_WARNING_POP
 }
 
 template <typename T, bool OrderLToR>
@@ -280,39 +289,12 @@ T& CoreTools::MultiArrayAdapter<T, OrderLToR>::operator()(const SizeType& coordi
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     return container[this->GetIndex(coordinate)];
-}
 
-template <typename T, bool OrderLToR>
-std::strong_ordering CoreTools::MultiArrayAdapter<T, OrderLToR>::operator<=>(const MultiArrayAdapter& rhs) const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    if (container == nullptr && rhs.container == nullptr)
-    {
-        return std::strong_ordering::equivalent;
-    }
-    else if (container == nullptr && rhs.container != nullptr)
-    {
-        return std::strong_ordering::less;
-    }
-    else if (container != nullptr && rhs.container == nullptr)
-    {
-        return std::strong_ordering::greater;
-    }
-    else
-    {
-        for (size_t i = 0; i < this->GetSize() && i < rhs->GetSize(); ++i)
-        {
-            const auto result = container[i] <=> rhs.container[i];
-            if (result != std::strong_ordering::equivalent)
-            {
-                return result;
-            }
-        }
-
-        return this->GetSize() <=> rhs->GetSize();
-    }
+#include STSTEM_WARNING_POP
 }
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_MULTI_ARRAY_ADAPTER_DETAIL_H

@@ -1,26 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 15:44)
+///	引擎测试版本：0.9.0.6 (2023/04/24 15:34)
 
 #include "StreamSizeTesting.h"
 #include "Detail/StreamSizeTestingEnum.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/CoreToolsTesting/HelperSuite/Detail/MacroTestEnum.h"
+#include "CoreTools/CoreToolsTesting/HelperSuite/Detail/TestingObject.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/ObjectInterface.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "../HelperSuite/Detail/TestingObject.h"
-#include "../HelperSuite/Detail/MacroTestEnum.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
-using std::string;
-using std::vector;
+
 using namespace std::literals;
 
 CoreTools::StreamSizeTesting::StreamSizeTesting(const OStreamShared& stream)
@@ -43,50 +41,46 @@ void CoreTools::StreamSizeTesting::MainTest()
     ObjectManager::Create();
 
     ASSERT_NOT_THROW_EXCEPTION_0(Int16StreamTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(PtrStreamTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(SharedPtrStreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ObjectAssociatedTest);
     ASSERT_NOT_THROW_EXCEPTION_0(BoolStreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(EnumStreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StringStreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ConstCharStreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(VectorStreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(VectorStringStreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(VectorConstCharStreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(VectorObjectAssociatedTest);
 
     ObjectManager::Destroy();
 }
 
 void CoreTools::StreamSizeTesting::StreamSizeTest()
 {
-    ASSERT_EQUAL(GetStreamSize(char{ 0 }), (int)sizeof(char));
-    ASSERT_EQUAL(GetStreamSize(short{ 0 }), (int)sizeof(short));
-    ASSERT_EQUAL(GetStreamSize(int{ 0 }), (int)sizeof(int));
-    ASSERT_EQUAL(GetStreamSize(long{ 0 }), (int)sizeof(long));
+    ASSERT_EQUAL(GetStreamSize(char{ 0 }), boost::numeric_cast<int>(sizeof(char)));
+    ASSERT_EQUAL(GetStreamSize(short{ 0 }), boost::numeric_cast<int>(sizeof(short)));
+    ASSERT_EQUAL(GetStreamSize(int{ 0 }), boost::numeric_cast<int>(sizeof(int)));
+    ASSERT_EQUAL(GetStreamSize(long{ 0 }), boost::numeric_cast<int>(sizeof(long)));
+    ASSERT_EQUAL(GetStreamSize(long long{ 0 }), boost::numeric_cast<int>(sizeof(long long)));
 
-    ASSERT_EQUAL(GetStreamSize(unsigned char{ 0 }), (int)sizeof(unsigned char));
-    ASSERT_EQUAL(GetStreamSize(unsigned short{ 0 }), (int)sizeof(unsigned short));
-    ASSERT_EQUAL(GetStreamSize(unsigned int{ 0 }), (int)sizeof(unsigned int));
-    ASSERT_EQUAL(GetStreamSize(unsigned long{ 0 }), (int)sizeof(unsigned long));
+    ASSERT_EQUAL(GetStreamSize(unsigned char{ 0 }), boost::numeric_cast<int>(sizeof(unsigned char)));
+    ASSERT_EQUAL(GetStreamSize(unsigned short{ 0 }), boost::numeric_cast<int>(sizeof(unsigned short)));
+    ASSERT_EQUAL(GetStreamSize(unsigned int{ 0 }), boost::numeric_cast<int>(sizeof(unsigned int)));
+    ASSERT_EQUAL(GetStreamSize(unsigned long{ 0 }), boost::numeric_cast<int>(sizeof(unsigned long)));
+    ASSERT_EQUAL(GetStreamSize(unsigned long long{ 0 }), boost::numeric_cast<int>(sizeof(unsigned long long)));
 
-    ASSERT_EQUAL(GetStreamSize(float{ 0.0f }), (int)sizeof(float));
-    ASSERT_EQUAL(GetStreamSize(double{ 0.0 }), (int)sizeof(double));
+    ASSERT_EQUAL(GetStreamSize(float{ 0.0f }), boost::numeric_cast<int>(sizeof(float)));
+    ASSERT_EQUAL(GetStreamSize(double{ 0.0 }), boost::numeric_cast<int>(sizeof(double)));
+    ASSERT_EQUAL(GetStreamSize(long double{ 0.0 }), boost::numeric_cast<int>(sizeof(long double)));
 
     ASSERT_EQUAL(GetStreamSize(bool{ false }), 4);
     ASSERT_EQUAL(GetStreamSize(StreamSizeTestingEnum::TestingEnum), 4);
 
-    ASSERT_EQUAL(GetStreamSize(static_cast<char*>(nullptr)), 8);
-    ASSERT_EQUAL(GetStreamSize(static_cast<short*>(nullptr)), 8);
-    ASSERT_EQUAL(GetStreamSize(static_cast<int*>(nullptr)), 8);
-    ASSERT_EQUAL(GetStreamSize(static_cast<long*>(nullptr)), 8);
-    ASSERT_EQUAL(GetStreamSize(static_cast<unsigned char*>(nullptr)), 8);
-    ASSERT_EQUAL(GetStreamSize(static_cast<unsigned short*>(nullptr)), 8);
-    ASSERT_EQUAL(GetStreamSize(static_cast<unsigned int*>(nullptr)), 8);
-    ASSERT_EQUAL(GetStreamSize(static_cast<unsigned long*>(nullptr)), 8);
-    ASSERT_EQUAL(GetStreamSize(static_cast<float*>(nullptr)), 8);
-    ASSERT_EQUAL(GetStreamSize(static_cast<double*>(nullptr)), 8);
-    ASSERT_EQUAL(GetStreamSize(std::shared_ptr<string>()), 8);
+    std::string testString{ "TestString" };
+    ASSERT_EQUAL(GetStreamSize(testString), Stream::GetStreamingSize(testString));
+    ASSERT_EQUAL(GetStreamSize(testString.c_str()), Stream::GetStreamingSize(testString));
 
-    string testString{ "TestString" };
-    ASSERT_EQUAL(GetStreamSize(testString), boost::numeric_cast<int>(Stream::GetStreamingSize(testString)));
-    ASSERT_EQUAL(GetStreamSize(testString.c_str()), boost::numeric_cast<int>(Stream::GetStreamingSize(testString)));
+    std::string_view testStringView{ "TestString" };
+    ASSERT_EQUAL(GetStreamSize(testStringView), Stream::GetStreamingSize(testStringView));
 }
 
 void CoreTools::StreamSizeTesting::Int16StreamTest()
@@ -96,18 +90,13 @@ void CoreTools::StreamSizeTesting::Int16StreamTest()
     ASSERT_EQUAL(CoreTools::GetStreamSize(value), boost::numeric_cast<int>(sizeof(int16_t)));
 }
 
-void CoreTools::StreamSizeTesting::PtrStreamTest()
+void CoreTools::StreamSizeTesting::ObjectAssociatedTest()
 {
-    int* ptr{ nullptr };
+    const TestingObjectSharedPtr testingObject{};
 
-    ASSERT_EQUAL(CoreTools::GetStreamSize(ptr), gObjectSize);
-}
+    const ObjectAssociated objectAssociated{ testingObject };
 
-void CoreTools::StreamSizeTesting::SharedPtrStreamTest()
-{
-    TestingObjectSharedPtr testingObject{};
-
-    ASSERT_EQUAL(CoreTools::GetStreamSize(testingObject), gObjectSize);
+    ASSERT_EQUAL(CoreTools::GetStreamSize(objectAssociated), gObjectSize);
 }
 
 void CoreTools::StreamSizeTesting::BoolStreamTest()
@@ -133,14 +122,36 @@ void CoreTools::StreamSizeTesting::StringStreamTest()
 
 void CoreTools::StreamSizeTesting::ConstCharStreamTest()
 {
-    const char* value{ "value" };
+    const auto* value = "value";
 
     ASSERT_EQUAL(CoreTools::GetStreamSize(value), Stream::GetStreamingSize(value));
 }
 
 void CoreTools::StreamSizeTesting::VectorStreamTest()
 {
-    vector<int> value(9);
+    const std::vector<int> value(9);
 
     ASSERT_EQUAL(CoreTools::GetStreamSize(value), boost::numeric_cast<int>(gDefaultSize + value.size() * sizeof(int)));
+}
+
+void CoreTools::StreamSizeTesting::VectorStringStreamTest()
+{
+    const std::vector<std::string> value{ "123", "4567", "poi12" };
+
+    ASSERT_EQUAL(CoreTools::GetStreamSize(value), gDefaultSize + Stream::GetStreamingSize("123") + Stream::GetStreamingSize("4567") + Stream::GetStreamingSize("poi12"));
+}
+
+void CoreTools::StreamSizeTesting::VectorConstCharStreamTest()
+{
+    const std::vector value{ "12", "4567", "poi12o" };
+
+    ASSERT_EQUAL(CoreTools::GetStreamSize(value), gDefaultSize + Stream::GetStreamingSize("123") + Stream::GetStreamingSize("4567") + Stream::GetStreamingSize("poi12"));
+}
+
+void CoreTools::StreamSizeTesting::VectorObjectAssociatedTest()
+{
+    const ObjectAssociated objectAssociated{ std::make_shared<TestingObject>("123") };
+    const std::vector result{ objectAssociated, objectAssociated, objectAssociated, objectAssociated };
+
+    ASSERT_EQUAL(CoreTools::GetStreamSize(result), boost::numeric_cast<int>(gObjectSize * result.size() + gDefaultSize));
 }

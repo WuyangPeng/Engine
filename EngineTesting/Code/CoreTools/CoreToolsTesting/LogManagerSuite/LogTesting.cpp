@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:12)
+///	引擎测试版本：0.9.0.6 (2023/04/12 17:11)
 
 #include "LogTesting.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
@@ -14,9 +14,19 @@
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/LogManager/Appender.h"
 #include "CoreTools/LogManager/Log.h"
-#include "CoreTools/Time/CustomTime.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 using namespace std::literals;
+
+namespace
+{
+    const auto gTraceMessage = SYSTEM_TEXT("traceMessage\n"s);
+    const auto gDebugMessage = SYSTEM_TEXT("debugMessage\n"s);
+    const auto gInfoMessage = SYSTEM_TEXT("infoMessage\n"s);
+    const auto gWarnMessage = SYSTEM_TEXT("warnMessage\n"s);
+    const auto gErrorMessage = SYSTEM_TEXT("errorMessage\n"s);
+    const auto gFatalMessage = SYSTEM_TEXT("fatalMessage\n"s);
+}
 
 CoreTools::LogTesting::LogTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -34,7 +44,8 @@ void CoreTools::LogTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LoadConfigurationTest);
     ASSERT_NOT_THROW_EXCEPTION_0(OutTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(AppenderTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MessageTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetMinLogLevelTypeTest);
 }
 
 void CoreTools::LogTesting::LoadConfigurationTest()
@@ -57,15 +68,42 @@ void CoreTools::LogTesting::OutTest() noexcept
     LOG_SINGLETON_APPENDER(Fatal, CoreTools, SYSTEM_TEXT("日志致命错误信息测试"));
 }
 
-void CoreTools::LogTesting::AppenderTest()
+void CoreTools::LogTesting::MessageTest()
 {
-    const auto testName = SYSTEM_TEXT("Test"s);
-    const auto pathName = SYSTEM_TEXT("Log/"s);
-    const auto extensionName = SYSTEM_TEXT("log"s);
+    LogMessage traceMessage(LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED);
+    traceMessage << gTraceMessage;
 
-    auto name = pathName + testName + SYSTEM_TEXT("("s) + CustomTime::GetSystemTimeDescribe() + SYSTEM_TEXT(")"s) + SYSTEM_TEXT("."s) + extensionName;
+    LOG_SINGLETON.Write(traceMessage);
 
-    DeleteFileTools file{ name };
+    LogMessage debugMessage{ LogLevel::Debug, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    debugMessage << gDebugMessage;
 
-    Appender appender{ SYSTEM_TEXT("Log"s), testName, AppenderPrint::All, LogLevel::Trace, 100000, true, extensionName };
+    LOG_SINGLETON.Write(debugMessage);
+
+    LogMessage infoMessage{ LogLevel::Info, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    infoMessage << gInfoMessage;
+
+    LOG_SINGLETON.Write(infoMessage);
+
+    LogMessage warnMessage{ LogLevel::Warn, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    warnMessage << gWarnMessage;
+
+    LOG_SINGLETON.Write(warnMessage);
+
+    LogMessage errorMessage{ LogLevel::Error, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    errorMessage << gErrorMessage;
+
+    LOG_SINGLETON.Write(errorMessage);
+
+    LogMessage fatalMessage{ LogLevel::Fatal, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+    fatalMessage << gFatalMessage;
+
+    LOG_SINGLETON.Write(fatalMessage);
+}
+
+void CoreTools::LogTesting::GetMinLogLevelTypeTest()
+{
+    const auto logLevel = LOG_SINGLETON.GetMinLogLevelType(LogFilter::CoreTools);
+
+    ASSERT_LESS(LogLevel::Disabled, logLevel);
 }

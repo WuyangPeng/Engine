@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 14:13)
+///	引擎测试版本：0.9.0.6 (2023/04/18 16:02)
 
 #include "EnumObject.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -32,7 +32,6 @@ CoreTools::EnumObject::EnumObject(DisableNotThrow disableNotThrow)
     CORE_TOOLS_ASSERTION_1(IsLoadValidity(), "载入的数据出现错误！");
 }
 
-// private
 bool CoreTools::EnumObject::IsLoadValidity() const
 {
     if (enumValue == EnumObjectEnum::Ten || enumArray0.empty() || enumArray1.empty())
@@ -47,15 +46,14 @@ bool CoreTools::EnumObject::IsLoadValidity() const
     return true;
 }
 
-CoreTools::EnumObject::EnumObject(LoadConstructor value)
-    : ParentType{ value }, enumValue{ EnumObjectEnum::Ten }, enumArray0{}, enumArray1{}
+CoreTools::EnumObject::EnumObject(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, enumValue{ EnumObjectEnum::Ten }, enumArray0{}, enumArray1{}
 {
     AllocationArray1(EnumObjectEnum::Ten);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 void CoreTools::EnumObject::AllocationArray0(EnumObjectEnum value)
 {
     for (auto i = 0; i < bufferSize; ++i)
@@ -64,7 +62,6 @@ void CoreTools::EnumObject::AllocationArray0(EnumObjectEnum value)
     }
 }
 
-// private
 void CoreTools::EnumObject::AllocationArray1(EnumObjectEnum value)
 {
     for (auto i = 0; i < bufferSize; ++i)
@@ -149,8 +146,9 @@ void CoreTools::EnumObject::Load(BufferSource& source)
     ParentType::Load(source);
 
     source.ReadEnum(enumValue);
-    auto size = source.Read<int32_t>();
-    if (0 < size)
+
+    if (const auto size = source.Read<int32_t>();
+        0 < size)
     {
         source.ReadEnumContainer(size, enumArray0);
         source.ReadEnumContainer(size, enumArray1);

@@ -1,18 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 17:03)
+///	引擎测试版本：0.9.0.6 (2023/04/18 15:27)
 
 #include "TelegramLessTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/TelegramDetail.h"
 #include "CoreTools/MessageEvent/TelegramLessDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 namespace CoreTools
 {
     using TestingType = TelegramLess<int>;
@@ -39,17 +40,17 @@ void CoreTools::TelegramLessTesting::MainTest()
 
 void CoreTools::TelegramLessTesting::LessTest()
 {
-    TelegramType lhs{ 1, 2, 10000 };
+    const TelegramType lhs{ 1, 2, 10000 };
 
-    TelegramType rhs{ 1, 2, 10002 };
+    const TelegramType rhs{ 1, 2, 10002 };
 
-    const TestingType firstTelegramLess{ 3 };
+    const TestingType telegramLess0{ 3 };
 
-    ASSERT_FALSE(firstTelegramLess(lhs, rhs));
-    ASSERT_FALSE(firstTelegramLess(rhs, lhs));
+    ASSERT_FALSE(telegramLess0(lhs, rhs));
+    ASSERT_FALSE(telegramLess0(rhs, lhs));
 
-    const TestingType secondTelegramLess{ 1 };
+    const TestingType telegramLess1{ 1 };
 
-    ASSERT_TRUE(secondTelegramLess(lhs, rhs));
-    ASSERT_FALSE(secondTelegramLess(rhs, lhs));
+    ASSERT_TRUE(telegramLess1(lhs, rhs));
+    ASSERT_FALSE(telegramLess1(rhs, lhs));
 }

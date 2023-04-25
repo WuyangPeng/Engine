@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 11:14)
+///	引擎测试版本：0.9.0.6 (2023/04/25 10:55)
 
 #include "PausedStates.h"
 #include "PlayingStates.h"
@@ -23,9 +23,11 @@ CoreTools::PlayingStates::PlayingStates() noexcept
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, PlayingStates)
 
-CoreTools::PlayingStates::StateSharedPtr CoreTools::PlayingStates::Execute([[maybe_unused]] int64_t timeInterval)
+CoreTools::PlayingStates::StateSharedPtr CoreTools::PlayingStates::Execute(int64_t timeInterval)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
+
+    System::UnusedFunction(timeInterval);
 
     return shared_from_this();
 }
@@ -46,11 +48,11 @@ CoreTools::State<CoreTools::PlayerEntity>::MessageResult CoreTools::PlayingState
         case States::Open:
             return { shared_from_this(), true };
         case States::Stopped:
-            return { State<PlayerEntity>::MakeState<StoppedStates>(), true };
+            return { ParentType::MakeState<StoppedStates>(), true };
         case States::Playing:
             return { shared_from_this(), true };
         case States::Paused:
-            return { State<PlayerEntity>::MakeState<PausedStates>(), true };
+            return { ParentType::MakeState<PausedStates>(), true };
         case States::Previous:
             return { GetPossiblePreviousState(), true };
         default:

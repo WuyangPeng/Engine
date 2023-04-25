@@ -139,10 +139,10 @@
     static_assert(std::is_same_v<ClassShareType::CopyConstructor, CoreTools::TrueType>, "CopyConstructor functions are forbidden")
 
 #define OPERATOR_SQUARE_BRACKETS(returnType, index) \
-    const_cast<returnType&>(static_cast<const ClassType&>(*this)[index]);
+    const_cast<returnType&>(static_cast<const ClassType&>(*this)[index])
 
 #define OPERATOR_SQUARE_BRACKETS_TO_POINTER(returnType, index) \
-    const_cast<returnType*>(static_cast<const ClassType&>(*this)[index]);
+    const_cast<returnType*>(static_cast<const ClassType&>(*this)[index])
 
 #define NON_CONST_MEMBER_CALL_CONST_MEMBER(returnType, function) \
     const_cast<returnType>(static_cast<const ClassType*>(this)->function())

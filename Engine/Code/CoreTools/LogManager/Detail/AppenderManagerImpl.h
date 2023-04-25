@@ -45,8 +45,7 @@ namespace CoreTools
         void Clear() noexcept;
 
         void Write(const LogMessage& message) const;
-        void Write(const String& name, const LogMessage& message);
-        void WriteToConsole(const LogMessage& message);
+        void Write(const String& name, const LogMessage& message); 
 
         NODISCARD static String GetConsoleAppenderName();
         NODISCARD static String GetDefaultAppenderName();

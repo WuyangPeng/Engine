@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 14:20)
+///	引擎测试版本：0.9.0.6 (2023/04/11 16:02)
 
 #include "CyclicRedundancyCheckCCITTUsingTableTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -13,11 +13,10 @@
 #include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckCCITTUsingTable.h"
 #include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckHandle.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <array>
 
-using std::array;
+#include <array>
 
 CoreTools::CyclicRedundancyCheckCCITTUsingTableTesting::CyclicRedundancyCheckCCITTUsingTableTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -43,25 +42,23 @@ void CoreTools::CyclicRedundancyCheckCCITTUsingTableTesting::MainTest()
 
 void CoreTools::CyclicRedundancyCheckCCITTUsingTableTesting::CCITTTest()
 {
-    constexpr auto bufferSize = 12;
+    std::array buff{ '8', '3', '1', '4', '7', '0', '2', '9', '6', '5', '7', '7' };
 
-    array<char, bufferSize> buff{ '8', '3', '1', '4', '7', '0', '2', '9', '6', '5', '7', '7' };
+    const CyclicRedundancyCheckCCITTUsingTable cyclicRedundancyCheckCCITT0{ buff.data(), boost::numeric_cast<int>(buff.size()) };
 
-    const CyclicRedundancyCheckCCITTUsingTable firstCyclicRedundancyCheckCCITT{ buff.data(), boost::numeric_cast<int>(buff.size()) };
-
-    const auto check1 = firstCyclicRedundancyCheckCCITT.GetCyclicRedundancyCheck();
+    const auto check0 = cyclicRedundancyCheckCCITT0.GetCyclicRedundancyCheck();
 
     buff.at(4) = '2';
 
-    const CyclicRedundancyCheckCCITTUsingTable secondCyclicRedundancyCheckCCITT{ buff.data(), boost::numeric_cast<int>(buff.size()) };
+    const CyclicRedundancyCheckCCITTUsingTable cyclicRedundancyCheckCCITT1{ buff.data(), boost::numeric_cast<int>(buff.size()) };
 
-    const auto check2 = secondCyclicRedundancyCheckCCITT.GetCyclicRedundancyCheck();
+    const auto check1 = cyclicRedundancyCheckCCITT1.GetCyclicRedundancyCheck();
 
-    ASSERT_UNEQUAL(check1, check2);
+    ASSERT_UNEQUAL(check0, check1);
 
-    const CyclicRedundancyCheckCCITT thirdCyclicRedundancyCheckCCITT{ buff.data(), boost::numeric_cast<int>(buff.size()) };
+    const CyclicRedundancyCheckCCITT cyclicRedundancyCheckCCITT2{ buff.data(), boost::numeric_cast<int>(buff.size()) };
 
-    const auto check3 = thirdCyclicRedundancyCheckCCITT.GetCyclicRedundancyCheck();
+    const auto check2 = cyclicRedundancyCheckCCITT2.GetCyclicRedundancyCheck();
 
-    ASSERT_EQUAL(check3, check2);
+    ASSERT_EQUAL(check2, check1);
 }

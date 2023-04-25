@@ -13,254 +13,199 @@
 #include "ContainerAdapter.h"
 #include "RawIteratorsDetail.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-template <typename T, size_t N>
-requires(N > 0) CoreTools::ContainerAdapter<T, N>::ContainerAdapter(T* elements, size_t numElements)
+template <typename T, int N>
+requires(N > 0) CoreTools::ContainerAdapter<T, N>::ContainerAdapter(T* elements, int numElements)
     : elements{ elements }
 {
     System::UnusedFunction(numElements);
-
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-#ifdef OPEN_CLASS_INVARIANT
-
-template <typename T, size_t N>
-requires(N > 0) bool CoreTools::ContainerAdapter<T, N>::IsValid() const noexcept
-{
-    return true;
-}
-
-#endif  // OPEN_CLASS_INVARIANT
-
-template <typename T, size_t N>
-requires(N > 0) void CoreTools::ContainerAdapter<T, N>::Reset(T* aElements, size_t numElements) noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_9;
-
-    System::UnusedFunction(numElements);
-
-    elements = aElements;
-}
-
-template <typename T, size_t N>
-requires(N > 0) T* CoreTools::ContainerAdapter<T, N>::GetData() noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_9;
-
-    return NON_CONST_MEMBER_CALL_CONST_MEMBER(T*, GetData);
-}
-
-template <typename T, size_t N>
-requires(N > 0) const T* CoreTools::ContainerAdapter<T, N>::GetData() const noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return elements;
-}
-
-template <typename T, size_t N>
-requires(N > 0) const T& CoreTools::ContainerAdapter<T, N>::operator[](size_t index) const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     if (elements == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
     }
+
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename T, int N>
+requires(N > 0) bool CoreTools::ContainerAdapter<T, N>::IsValid() const noexcept
+{
+    return elements != nullptr;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename T, int N>
+requires(N > 0) void CoreTools::ContainerAdapter<T, N>::Reset(T* aElements, int numElements)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    System::UnusedFunction(numElements);
+
+    if (aElements == nullptr)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
+    }
+
+    elements = aElements;
+}
+
+template <typename T, int N>
+requires(N > 0) T* CoreTools::ContainerAdapter<T, N>::GetData() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return NON_CONST_MEMBER_CALL_CONST_MEMBER(T*, GetData);
+}
+
+template <typename T, int N>
+requires(N > 0) const T* CoreTools::ContainerAdapter<T, N>::GetData() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return elements;
+}
+
+template <typename T, int N>
+requires(N > 0) const T& CoreTools::ContainerAdapter<T, N>::operator[](int index) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     if (N <= index)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("index索引越界"));
     }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     return elements[index];
+
+#include STSTEM_WARNING_POP
 }
 
-template <typename T, size_t N>
-requires(N > 0) T& CoreTools::ContainerAdapter<T, N>::operator[](size_t index)
+template <typename T, int N>
+requires(N > 0) T& CoreTools::ContainerAdapter<T, N>::operator[](int index)
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
     return OPERATOR_SQUARE_BRACKETS(T, index);
 }
 
-template <typename T, size_t N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::iterator CoreTools::ContainerAdapter<T, N>::begin()
+template <typename T, int N>
+requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::iterator CoreTools::ContainerAdapter<T, N>::begin() noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
     return iterator{ elements, 0 };
 }
 
-template <typename T, size_t N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::begin() const
+template <typename T, int N>
+requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::begin() const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return const_iterator{ elements, 0 };
 }
 
-template <typename T, size_t N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::iterator CoreTools::ContainerAdapter<T, N>::end()
+template <typename T, int N>
+requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::iterator CoreTools::ContainerAdapter<T, N>::end() noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
     return iterator{ elements, N };
 }
 
-template <typename T, size_t N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::end() const
+template <typename T, int N>
+requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::end() const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return const_iterator{ elements, N };
 }
 
-template <typename T, size_t N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::reverse_iterator CoreTools::ContainerAdapter<T, N>::rbegin()
+template <typename T, int N>
+requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::reverse_iterator CoreTools::ContainerAdapter<T, N>::rbegin() noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
     return reverse_iterator{ end() };
 }
 
-template <typename T, size_t N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::rbegin() const
+template <typename T, int N>
+requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::rbegin() const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return const_reverse_iterator{ end() };
 }
 
-template <typename T, size_t N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::reverse_iterator CoreTools::ContainerAdapter<T, N>::rend()
+template <typename T, int N>
+requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::reverse_iterator CoreTools::ContainerAdapter<T, N>::rend() noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
     return reverse_iterator{ begin() };
 }
 
-template <typename T, size_t N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::rend() const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
+template <typename T, int N>
+requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::rend() const noexcept
+{ 
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return const_reverse_iterator{ begin() };
 }
 
-template <typename T, size_t N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::cbegin() const
+template <typename T, int N>
+requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::cbegin() const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return begin();
 }
 
-template <typename T, size_t N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::cend() const
+template <typename T, int N>
+requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_iterator CoreTools::ContainerAdapter<T, N>::cend() const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return end();
 }
 
-template <typename T, size_t N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::crbegin() const
+template <typename T, int N>
+requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::crbegin() const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return rbegin();
 }
 
-template <typename T, size_t N>
-requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::crend() const
+template <typename T, int N>
+requires(N > 0) typename CoreTools::ContainerAdapter<T, N>::const_reverse_iterator CoreTools::ContainerAdapter<T, N>::crend() const noexcept
 {
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return rend();
 }
 
-template <typename T, size_t N>
+template <typename T, int N>
 requires(N > 0) void CoreTools::ContainerAdapter<T, N>::Fill(const T& value)
 {
-    CORE_TOOLS_CLASS_IS_VALID_9;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
     std::fill(begin(), end(), value);
 }
 
 template <typename T>
-CoreTools::ContainerAdapter<T>::ContainerAdapter(T* elements, size_t numElements)
+CoreTools::ContainerAdapter<T>::ContainerAdapter(T* elements, int numElements)
     : numElements{ numElements }, elements{ elements }
 {
-    if (numElements <= 0 && elements != nullptr ||
-        0 < numElements && elements == nullptr)
+    if (numElements <= 0 || elements == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("无效的元素状态。"));
     }
@@ -275,8 +220,6 @@ bool CoreTools::ContainerAdapter<T>::IsValid() const noexcept
 {
     if (0 < numElements && elements != nullptr)
         return true;
-    else if (numElements <= 0 && elements == nullptr)
-        return true;
     else
         return false;
 }
@@ -284,12 +227,11 @@ bool CoreTools::ContainerAdapter<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-void CoreTools::ContainerAdapter<T>::Reset(T* aElements, size_t aNumElements)
+void CoreTools::ContainerAdapter<T>::Reset(T* aElements, int aNumElements)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (aNumElements <= 0 && aElements != nullptr ||
-        0 < aNumElements && aElements == nullptr)
+    if (numElements <= 0 || elements == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("无效的元素状态。"));
     }
@@ -299,7 +241,7 @@ void CoreTools::ContainerAdapter<T>::Reset(T* aElements, size_t aNumElements)
 }
 
 template <typename T>
-size_t CoreTools::ContainerAdapter<T>::GetSize() const noexcept
+int CoreTools::ContainerAdapter<T>::GetSize() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -323,25 +265,25 @@ const T* CoreTools::ContainerAdapter<T>::GetData() const noexcept
 }
 
 template <typename T>
-const T& CoreTools::ContainerAdapter<T>::operator[](size_t index) const noexcept
+const T& CoreTools::ContainerAdapter<T>::operator[](int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
-
-    if (elements == nullptr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("elements 指针为空。"));
-    }
 
     if (numElements <= index)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("index索引越界"));
     }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     return elements[index];
+
+#include STSTEM_WARNING_POP
 }
 
 template <typename T>
-T& CoreTools::ContainerAdapter<T>::operator[](size_t index) noexcept
+T& CoreTools::ContainerAdapter<T>::operator[](int index)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -349,7 +291,7 @@ T& CoreTools::ContainerAdapter<T>::operator[](size_t index) noexcept
 }
 
 template <typename T>
-typename CoreTools::ContainerAdapter<T>::iterator CoreTools::ContainerAdapter<T>::begin()
+typename CoreTools::ContainerAdapter<T>::iterator CoreTools::ContainerAdapter<T>::begin() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -357,7 +299,7 @@ typename CoreTools::ContainerAdapter<T>::iterator CoreTools::ContainerAdapter<T>
 }
 
 template <typename T>
-typename CoreTools::ContainerAdapter<T>::const_iterator CoreTools::ContainerAdapter<T>::begin() const
+typename CoreTools::ContainerAdapter<T>::const_iterator CoreTools::ContainerAdapter<T>::begin() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -365,7 +307,7 @@ typename CoreTools::ContainerAdapter<T>::const_iterator CoreTools::ContainerAdap
 }
 
 template <typename T>
-typename CoreTools::ContainerAdapter<T>::iterator CoreTools::ContainerAdapter<T>::end()
+typename CoreTools::ContainerAdapter<T>::iterator CoreTools::ContainerAdapter<T>::end() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -373,7 +315,7 @@ typename CoreTools::ContainerAdapter<T>::iterator CoreTools::ContainerAdapter<T>
 }
 
 template <typename T>
-typename CoreTools::ContainerAdapter<T>::const_iterator CoreTools::ContainerAdapter<T>::end() const
+typename CoreTools::ContainerAdapter<T>::const_iterator CoreTools::ContainerAdapter<T>::end() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -381,7 +323,7 @@ typename CoreTools::ContainerAdapter<T>::const_iterator CoreTools::ContainerAdap
 }
 
 template <typename T>
-typename CoreTools::ContainerAdapter<T>::reverse_iterator CoreTools::ContainerAdapter<T>::rbegin()
+typename CoreTools::ContainerAdapter<T>::reverse_iterator CoreTools::ContainerAdapter<T>::rbegin() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -389,7 +331,7 @@ typename CoreTools::ContainerAdapter<T>::reverse_iterator CoreTools::ContainerAd
 }
 
 template <typename T>
-typename CoreTools::ContainerAdapter<T>::const_reverse_iterator CoreTools::ContainerAdapter<T>::rbegin() const
+typename CoreTools::ContainerAdapter<T>::const_reverse_iterator CoreTools::ContainerAdapter<T>::rbegin() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -397,7 +339,7 @@ typename CoreTools::ContainerAdapter<T>::const_reverse_iterator CoreTools::Conta
 }
 
 template <typename T>
-typename CoreTools::ContainerAdapter<T>::reverse_iterator CoreTools::ContainerAdapter<T>::rend()
+typename CoreTools::ContainerAdapter<T>::reverse_iterator CoreTools::ContainerAdapter<T>::rend() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -405,7 +347,7 @@ typename CoreTools::ContainerAdapter<T>::reverse_iterator CoreTools::ContainerAd
 }
 
 template <typename T>
-typename CoreTools::ContainerAdapter<T>::const_reverse_iterator CoreTools::ContainerAdapter<T>::rend() const
+typename CoreTools::ContainerAdapter<T>::const_reverse_iterator CoreTools::ContainerAdapter<T>::rend() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -413,7 +355,7 @@ typename CoreTools::ContainerAdapter<T>::const_reverse_iterator CoreTools::Conta
 }
 
 template <typename T>
-typename CoreTools::ContainerAdapter<T>::const_iterator CoreTools::ContainerAdapter<T>::cbegin() const
+typename CoreTools::ContainerAdapter<T>::const_iterator CoreTools::ContainerAdapter<T>::cbegin() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -421,7 +363,7 @@ typename CoreTools::ContainerAdapter<T>::const_iterator CoreTools::ContainerAdap
 }
 
 template <typename T>
-typename CoreTools::ContainerAdapter<T>::const_iterator CoreTools::ContainerAdapter<T>::cend() const
+typename CoreTools::ContainerAdapter<T>::const_iterator CoreTools::ContainerAdapter<T>::cend() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -429,7 +371,7 @@ typename CoreTools::ContainerAdapter<T>::const_iterator CoreTools::ContainerAdap
 }
 
 template <typename T>
-typename CoreTools::ContainerAdapter<T>::const_reverse_iterator CoreTools::ContainerAdapter<T>::crbegin() const
+typename CoreTools::ContainerAdapter<T>::const_reverse_iterator CoreTools::ContainerAdapter<T>::crbegin() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -437,7 +379,7 @@ typename CoreTools::ContainerAdapter<T>::const_reverse_iterator CoreTools::Conta
 }
 
 template <typename T>
-typename CoreTools::ContainerAdapter<T>::const_reverse_iterator CoreTools::ContainerAdapter<T>::crend() const
+typename CoreTools::ContainerAdapter<T>::const_reverse_iterator CoreTools::ContainerAdapter<T>::crend() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

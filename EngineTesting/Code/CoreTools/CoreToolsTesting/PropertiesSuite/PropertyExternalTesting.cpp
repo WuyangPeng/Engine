@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 13:46)
+///	引擎测试版本：0.9.0.6 (2023/04/25 10:27)
 
 #include "PropertyExternalTesting.h"
 #include "Detail/PropertyExternal.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::string;
 
 CoreTools::PropertyExternalTesting::PropertyExternalTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -27,7 +26,6 @@ void CoreTools::PropertyExternalTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-
 void CoreTools::PropertyExternalTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(GetSetTest);
@@ -37,11 +35,11 @@ void CoreTools::PropertyExternalTesting::GetSetTest()
 {
     PropertyExternal simplePropertyExternal{};
 
-    string value{ simplePropertyExternal.getType };
+    std::string value{ simplePropertyExternal.getType };
 
-    ASSERT_EQUAL(value, "");
+    ASSERT_TRUE(value.empty());
 
-    string setValue{ "set" };
+    const std::string setValue{ "set" };
 
     simplePropertyExternal.setType = setValue;
 

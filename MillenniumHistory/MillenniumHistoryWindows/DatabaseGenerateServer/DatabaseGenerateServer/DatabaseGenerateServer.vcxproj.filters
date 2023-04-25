@@ -72,6 +72,18 @@
     <None Include="Resource\AncientBooks\Version.xlsx">
       <Filter>资源文件\AncientBooks</Filter>
     </None>
+    <None Include="Resource\AncientBooks\Calendar.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\Year.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\SexagenaryCycle.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooks\Day.xlsx">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServer\DatabaseGenerateServer.h">

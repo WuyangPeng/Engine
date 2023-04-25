@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/03/03 09:05)
+///	引擎测试版本：0.9.0.6 (2023/04/11 20:39)
 
 #include "CFileManagerTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -67,7 +67,6 @@ void CoreTools::CFileManagerTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CFileManagerHelperTest);
 }
 
-// CFileManageHelp测试
 void CoreTools::CFileManagerTesting::CFileManagerHelperTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_1(SaveIntoFileTest, false);

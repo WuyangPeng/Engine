@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/02/23 16:39)
+///	引擎测试版本：0.9.0.6 (2023/04/10 19:15)
 
 #include "LoadingLibraryTesting.h"
 #include "System/DynamicLink/Flags/LoadLibraryFlags.h"
@@ -33,8 +33,8 @@ void CoreTools::LoadingLibraryTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LoadingNetMessageDllTest);
     ASSERT_THROW_EXCEPTION_0(LoadingErrorDllTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(GetProcAddressTest);
-    ASSERT_THROW_EXCEPTION_0(GetProcAddressErrorTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetProcessAddressTest);
+    ASSERT_THROW_EXCEPTION_0(GetProcessAddressErrorTest);
 }
 
 void CoreTools::LoadingLibraryTesting::LoadingNetMessageDllTest()
@@ -56,7 +56,7 @@ void CoreTools::LoadingLibraryTesting::LoadingErrorDllTest()
     LoadingLibrary library{ errorDll, System::LoadLibraryType::DontResolveDllReferences };
 }
 
-void CoreTools::LoadingLibraryTesting::GetProcAddressTest()
+void CoreTools::LoadingLibraryTesting::GetProcessAddressTest()
 {
     const auto kernel32Dll = SYSTEM_TEXT("Kernel32.dll"s);
 
@@ -66,7 +66,7 @@ void CoreTools::LoadingLibraryTesting::GetProcAddressTest()
     ASSERT_UNEQUAL_NULL_PTR(library.GetProcessAddress("GetLastError"));
 }
 
-void CoreTools::LoadingLibraryTesting::GetProcAddressErrorTest()
+void CoreTools::LoadingLibraryTesting::GetProcessAddressErrorTest()
 {
     const auto kernel32Dll = SYSTEM_TEXT("Kernel32.dll"s);
 

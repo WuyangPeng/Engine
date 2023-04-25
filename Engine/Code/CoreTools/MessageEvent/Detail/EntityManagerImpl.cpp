@@ -28,7 +28,7 @@ bool CoreTools::EntityManagerImpl::Register(const EntitySharedPtr& entity)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return container.insert({ entity->GetEntityId(), entity }).second;
+    return container.emplace(entity->GetEntityId(), entity).second;
 }
 
 bool CoreTools::EntityManagerImpl::UnRegister(int64_t entityId)

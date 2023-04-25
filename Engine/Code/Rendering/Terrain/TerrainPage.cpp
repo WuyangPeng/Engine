@@ -147,7 +147,7 @@ void Rendering::TerrainPage::Load(CoreTools::BufferSource& source)
 
     source.Read(pageSize);
 
-    heights = source.ReadContainerWithNumber<std::vector<uint16_t>>(pageSize * pageSize);
+    heights = source.ReadContainerUseNumber<std::vector<uint16_t>>(pageSize * pageSize);
     source.ReadAggregate(origin);
     source.Read(minElevation);
     source.Read(maxElevation);

@@ -32,7 +32,7 @@ namespace CoreTools
         NODISCARD static InTopLevel Create();
 
     private:
-        explicit InTopLevel(MAYBE_UNUSED DisableNotThrow disableNotThrow);
+        explicit InTopLevel(DisableNotThrow disableNotThrow);
 
     public:
         CLASS_INVARIANT_DECLARE;

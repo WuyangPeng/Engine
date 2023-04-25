@@ -1,21 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:02)
+///	引擎测试版本：0.9.0.6 (2023/04/12 17:17)
 
 #ifndef LOG_MANAGER_LOG_TESTING_H
 #define LOG_MANAGER_LOG_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
-    class LogTesting : public UnitTest
+    class LogTesting final : public UnitTest
     {
     public:
         using ClassType = LogTesting;
@@ -30,7 +29,8 @@ namespace CoreTools
         void MainTest();
         void LoadConfigurationTest();
         void OutTest() noexcept;
-        void AppenderTest();
+        void MessageTest();
+        void GetMinLogLevelTypeTest();
 
         void DoRunUnitTest() override;
     };

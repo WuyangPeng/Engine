@@ -27,7 +27,7 @@ namespace CoreTools
                                                            boost::is_stateless<T>,
                                                            boost::is_reference<T>>,
                                            boost::mpl::identity<T>,
-                                           boost::add_reference<T const>>
+                                           boost::add_reference<const T>>
     {
     };
 }

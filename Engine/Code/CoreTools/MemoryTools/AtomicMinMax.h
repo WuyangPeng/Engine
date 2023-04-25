@@ -15,10 +15,10 @@
 namespace CoreTools
 {
     template <typename T>
-    T AtomicMin(std::atomic<T>& atomic, const T& value);
+    T AtomicMin(std::atomic<T>& atomic, const T& value) noexcept;
 
     template <typename T>
-    T AtomicMax(std::atomic<T>& atomic, const T& value);
+    T AtomicMax(std::atomic<T>& atomic, const T& value) noexcept;
 }
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_ATOMIC_MIN_MAX_H

@@ -255,7 +255,7 @@ void Rendering::ResourceImpl::Load(CoreTools::BufferSource& source)
     source.Read(offset);
     source.Read(numActiveElements);
 
-    storage = source.ReadVectorWithNumber<char>(numBytes);
+    storage = source.ReadVectorUseNumber<char>(numBytes);
 }
 
 void Rendering::ResourceImpl::Save(CoreTools::BufferTarget& target) const

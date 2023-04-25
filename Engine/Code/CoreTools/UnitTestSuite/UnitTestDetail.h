@@ -418,10 +418,8 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, co
     }
 }
 
-// clang-format off
 template <typename LhsType, typename RhsType>
-requires std::is_same_v<std::decay_t<LhsType>, std::string> || std::is_same_v<std::decay_t<LhsType>,const char*> &&
-    std::is_same_v<std::decay_t<RhsType>, std::string> || std::is_same_v<std::decay_t<RhsType>, const char*>
+requires std::is_same_v<std::decay_t<LhsType>, std::string> || std::is_same_v<std::decay_t<LhsType>, const char*> && std::is_same_v<std::decay_t<RhsType>, std::string> || std::is_same_v<std::decay_t<RhsType>, const char*>
 void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     if (const auto condition = (lhs == rhs); condition)
@@ -439,7 +437,6 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, co
         AssertTest(condition, functionDescribed, described, failureThrow);
     }
 }
-// clang-format on
 
 template <typename TestClass, typename Function, typename... Types>
 void CoreTools::UnitTest::AssertNotThrowException(TestClass* test, Function function, const FunctionDescribed& functionDescribed, const std::string& errorMessage, Types&&... args)

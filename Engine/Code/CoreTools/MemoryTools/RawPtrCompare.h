@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.4 (2023/03/29 10:38)
+///	引擎版本：0.9.0.6 (2023/04/17 18:15)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_RAW_PTR_COMPARE_H
 #define CORE_TOOLS_MEMORY_TOOLS_RAW_PTR_COMPARE_H
@@ -19,16 +19,16 @@ namespace CoreTools
     template <typename T>
     struct RawPtrEqual final
     {
-        bool operator()(const std::shared_ptr<T>& lhs, const std::shared_ptr<T>& rhs) const
+        bool operator()(const RawConstIterator<T>& lhs, const RawConstIterator<T>& rhs) const noexcept
         {
-            return (lhs ? (rhs ? *lhs == *rhs : false) : !rhs);
+            return *lhs == *rhs;
         }
     };
 
     template <typename T>
     struct RawPtrUnequal final
     {
-        bool operator()(const std::shared_ptr<T>& lhs, const std::shared_ptr<T>& rhs) const
+        bool operator()(const RawConstIterator<T>& lhs, const RawConstIterator<T>& rhs) const noexcept
         {
             return !RawPtrEqual<T>()(lhs, rhs);
         }
@@ -37,16 +37,16 @@ namespace CoreTools
     template <typename T>
     struct RawPtrLess final
     {
-        bool operator()(const std::shared_ptr<T>& lhs, const std::shared_ptr<T>& rhs) const
+        bool operator()(const RawConstIterator<T>& lhs, const RawConstIterator<T>& rhs) const noexcept
         {
-            return (rhs ? (!lhs || *lhs < *rhs) : false);
+            return *lhs < *rhs;
         }
     };
 
     template <typename T>
     struct RawPtrLessEqual final
     {
-        bool operator()(const std::shared_ptr<T>& lhs, const std::shared_ptr<T>& rhs) const
+        bool operator()(const RawConstIterator<T>& lhs, const RawConstIterator<T>& rhs) const noexcept
         {
             return !RawPtrLess<T>()(rhs, lhs);
         }
@@ -55,7 +55,7 @@ namespace CoreTools
     template <typename T>
     struct RawPtrGreater final
     {
-        bool operator()(const std::shared_ptr<T>& lhs, const std::shared_ptr<T>& rhs) const
+        bool operator()(const RawConstIterator<T>& lhs, const RawConstIterator<T>& rhs) const noexcept
         {
             return RawPtrLess<T>()(rhs, lhs);
         }
@@ -64,7 +64,7 @@ namespace CoreTools
     template <typename T>
     struct RawPtrGreaterEqual final
     {
-        bool operator()(const std::shared_ptr<T>& lhs, const std::shared_ptr<T>& rhs) const
+        bool operator()(const RawConstIterator<T>& lhs, const RawConstIterator<T>& rhs) const noexcept
         {
             return !RawPtrLess<T>()(lhs, rhs);
         }

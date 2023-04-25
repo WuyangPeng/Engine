@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/13 23:00)
+///	引擎测试版本：0.9.0.6 (2023/04/11 20:52)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_ABSTRACT_OBJECT_H
 #define CORE_TOOLS_HELPER_SUITE_ABSTRACT_OBJECT_H

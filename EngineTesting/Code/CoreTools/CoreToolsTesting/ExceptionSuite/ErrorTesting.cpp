@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/03/01 15:03)
+///	引擎测试版本：0.9.0.6 (2023/04/11 19:34)
 
 #include "ErrorTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -112,10 +112,10 @@ void CoreTools::ErrorTesting::ThrowExceptionTest()
 {
     SetPlatformLastError(System::WindowError::BadLength);
 
-    THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("这里测试抛出异常。")).str());
+    THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("这里测试抛出异常。")).str())
 }
 
 void CoreTools::ErrorTesting::ThrowLastExceptionTest()
 {
-    THROW_LAST_ERROR_EXCEPTION(System::WindowError::FileNotFound, (Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("这里测试抛出异常。")).str());
+    THROW_LAST_ERROR_EXCEPTION(System::WindowError::FileNotFound, (Error::Format(SYSTEM_TEXT("%1% %2% %3%")) % 21 % 22 % SYSTEM_TEXT("这里测试抛出异常。")).str())
 }

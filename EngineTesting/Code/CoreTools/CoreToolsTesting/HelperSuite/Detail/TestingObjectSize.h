@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/16 20:49)
+///	引擎测试版本：0.9.0.6 (2023/04/11 20:56)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_TESTING_OBJECT_SIZE_H
 #define CORE_TOOLS_HELPER_SUITE_TESTING_OBJECT_SIZE_H

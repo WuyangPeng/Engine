@@ -46,6 +46,8 @@ namespace CoreTools
 
         NODISCARD bool IsDisabled() const noexcept;
 
+        LogMessage& operator<<(char value);
+        LogMessage& operator<<(wchar_t value);
         LogMessage& operator<<(const char* value);
         LogMessage& operator<<(const wchar_t* value);
         LogMessage& operator<<(int32_t value);
@@ -57,6 +59,7 @@ namespace CoreTools
         LogMessage& operator<<(const std::string& value);
         LogMessage& operator<<(const std::string_view& value);
         LogMessage& operator<<(const std::wstring& value);
+        LogMessage& operator<<(const std::wstring_view& value);
         LogMessage& operator<<(const Error& error);
         LogMessage& operator<<(const std::exception& error);
         LogMessage& operator<<(LogAppenderIOManageSign sign);

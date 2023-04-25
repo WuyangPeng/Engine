@@ -217,7 +217,7 @@ void Rendering::KeyframeControllerImpl::Load(CoreTools::BufferSource& source)
     if (0 < numCommonTimes)
     {
         commonTimes.resize(numCommonTimes);
-        commonTimes = source.ReadContainerWithNumber<std::vector<float>>(numCommonTimes);
+        commonTimes = source.ReadContainerUseNumber<std::vector<float>>(numCommonTimes);
 
         source.Read(numTranslations);
         translations.resize(numTranslations);

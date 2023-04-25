@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/03/03 08:49)
+///	引擎测试版本：0.9.0.6 (2023/04/11 20:46)
 
 #include "FileBufferTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -42,7 +42,7 @@ void CoreTools::FileBufferTesting::ValueTest()
 {
     FileBuffer buffer{ 10 };
 
-    ASSERT_EQUAL(buffer.GetSize(), 10u);
+    ASSERT_EQUAL(buffer.GetSize(), 10);
 
     const auto begin = buffer.GetBufferBegin();
 
@@ -51,9 +51,9 @@ void CoreTools::FileBufferTesting::ValueTest()
 
 void CoreTools::FileBufferTesting::Init(FileBuffer& fileBuffer, int step) const
 {
-    for (auto i = 0u; i < fileBuffer.GetSize(); ++i)
+    for (auto i = 0; i < fileBuffer.GetSize(); ++i)
     {
-        *fileBuffer.GetBuffer(gsl::narrow_cast<int>(i)) = boost::numeric_cast<char>(i + step);
+        *fileBuffer.GetBuffer(i) = boost::numeric_cast<char>(i + step);
     }
 }
 
@@ -87,7 +87,7 @@ void CoreTools::FileBufferTesting::DelayCopyTest()
 
     // beginPtr0和beginPtr1的值没有改变
 
-    for (auto i = 0u; i < buffer0.GetSize(); ++i)
+    for (auto i = 0; i < buffer0.GetSize(); ++i)
     {
         ASSERT_EQUAL(*buffer0.GetConstBuffer(i), *buffer1.GetConstBuffer(i));
         ASSERT_EQUAL(*buffer1.GetConstBuffer(i), boost::numeric_cast<char>(i));
@@ -101,7 +101,7 @@ void CoreTools::FileBufferTesting::BufferTest()
     ASSERT_NOT_THROW_EXCEPTION_2(Init, buffer0, 0);
 
     const FileBuffer buffer1{ buffer0 };
-    for (auto i = 0u; i < buffer0.GetSize(); ++i)
+    for (auto i = 0; i < buffer0.GetSize(); ++i)
     {
         ASSERT_EQUAL(*buffer0.GetConstBuffer(i), *buffer1.GetBuffer(i));
     }

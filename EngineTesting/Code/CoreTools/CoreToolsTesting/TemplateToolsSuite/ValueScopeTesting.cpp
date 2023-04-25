@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 19:09)
+///	引擎测试版本：0.9.0.6 (2023/04/25 13:58)
 
 #include "ValueScopeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/ValueScopeDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::string;
 
 CoreTools::ValueScopeTesting::ValueScopeTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -34,11 +33,21 @@ void CoreTools::ValueScopeTesting::MainTest()
 
 void CoreTools::ValueScopeTesting::CastTest()
 {
+    auto value0 = 313;
+
+    ASSERT_EQUAL(value0, 313);
+    {
+        ValueScope valueScope{ value0, 201 };
+
+        ASSERT_EQUAL(value0, 201);
+    }
+    ASSERT_EQUAL(value0, 313);
+
     auto value1 = 33;
 
     ASSERT_EQUAL(value1, 33);
     {
-        ValueScope<int> valueScope{ value1, 20 };
+        ValueScope valueScope{ value1, 20 };
 
         ASSERT_EQUAL(value1, 20);
     }
@@ -48,33 +57,33 @@ void CoreTools::ValueScopeTesting::CastTest()
 
     ASSERT_EQUAL(value2, 33);
     {
-        ValueScope<int> valueScope{ value2, 20, 10 };
+        ValueScope valueScope{ value2, 20, 10 };
 
         ASSERT_EQUAL(value2, 20);
     }
     ASSERT_EQUAL(value2, 10);
 
-    string value3{ "Original 1" };
+    std::string value3{ "Original 1" };
 
     ASSERT_EQUAL(value3, "Original 1");
     {
-        ValueScope<string> valueScope{ value3, "Rebel" };
+        ValueScope valueScope{ value3, "Rebel" };
 
         ASSERT_EQUAL(value3, "Rebel");
     }
     ASSERT_EQUAL(value3, "Original 1");
 
-    string value4{ "Original 2" };
+    std::string value4{ "Original 2" };
 
     ASSERT_EQUAL(value4, "Original 2");
     {
-        ValueScope<string> firstValueScope{ value4, "Matthew", "woz 'ere" };
+        ValueScope firstValueScope{ value4, "Matthew", "woz 'ere" };
 
         ASSERT_EQUAL(value4, "Matthew");
 
-        string sarah{ "Sarah" };
-        string isOut{ "is out" };
-        ValueScope<string> secondValueScope{ value4, sarah, isOut };
+        const std::string sarah{ "Sarah" };
+        const std::string isOut{ "is out" };
+        ValueScope secondValueScope{ value4, sarah, isOut };
 
         ASSERT_EQUAL(value4, "Sarah");
     }

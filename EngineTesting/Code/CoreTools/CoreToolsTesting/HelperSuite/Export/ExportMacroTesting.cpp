@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/11 15:31)
+///	引擎测试版本：0.9.0.6 (2023/04/11 21:05)
 
 #include "ExportMacroTestingDetail.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -71,7 +71,7 @@ void CoreTools::ExportMacroTesting::ExportSharedImplMacroSharedTest()
     constexpr auto count = 10;
     ExportTest::ExportSharedImplMacroShared lhsMacro{ count };
 
-    auto rhsMacro = lhsMacro;
+    const auto rhsMacro = lhsMacro;
 
     ASSERT_EQUAL(rhsMacro.GetCount(), count);
 
@@ -91,7 +91,7 @@ void CoreTools::ExportMacroTesting::ExportPerformanceUnsharedImplMacroTest()
     constexpr auto count = 10;
     ExportTest::ExportPerformanceUnsharedImplMacro original{ count };
 
-    auto copy = original;
+    const auto copy = original;
 
     ASSERT_EQUAL(copy.GetCount(), count);
 }

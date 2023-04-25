@@ -1,23 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 10:46)
+///	引擎测试版本：0.9.0.6 (2023/04/25 13:32)
 
 #include "TrigonometricFunctionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/NonRecursiveCosine.h"
 #include "CoreTools/TemplateTools/NonRecursiveSine.h"
 #include "CoreTools/TemplateTools/NonRecursiveTangent.h"
 #include "CoreTools/TemplateTools/RecursiveSine.h"
 #include "CoreTools/TemplateTools/TrigonometricFunction.h"
-#include "Mathematics/Base/MathDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <cmath>
+#include "Mathematics/Base/MathDetail.h"
 
 CoreTools::TrigonometricFunctionTesting::TrigonometricFunctionTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -34,22 +33,24 @@ void CoreTools::TrigonometricFunctionTesting::DoRunUnitTest()
 
 void CoreTools::TrigonometricFunctionTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(RecursiveVsNonrecursiveTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(NonrecursiveCorrectTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(RecursiveVsNonRecursiveTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NonRecursiveCorrectTest);
 }
 
-void CoreTools::TrigonometricFunctionTesting::RecursiveVsNonrecursiveTest()
+void CoreTools::TrigonometricFunctionTesting::RecursiveVsNonRecursiveTest()
 {
-    for (auto fRad = 0.0; fRad < 2 * Mathematics::MathD::GetPI(); fRad += 0.01)
+    for (auto rad = 0.0; rad < 2 * Mathematics::MathD::GetPI(); rad += 0.01)
     {
-        ASSERT_APPROXIMATE(TrigonometricFunction::RecursiveSine(fRad), TrigonometricFunction::NonRecursiveSine(fRad), 1e-4);
+        ASSERT_APPROXIMATE(TrigonometricFunction::RecursiveSine(rad), TrigonometricFunction::NonRecursiveSine(rad), 1e-04);
+        ASSERT_APPROXIMATE(NON_RECURSIVE_SINE(rad), TrigonometricFunction::NonRecursiveSine(rad), Mathematics::MathD::GetZeroTolerance());
     }
 }
 
-void CoreTools::TrigonometricFunctionTesting::NonrecursiveCorrectTest()
+void CoreTools::TrigonometricFunctionTesting::NonRecursiveCorrectTest()
 {
-    for (auto fRad = 0.0; fRad < 2 * Mathematics::MathD::GetPI(); fRad += 0.01)
+    for (auto rad = 0.0; rad < 2 * Mathematics::MathD::GetPI(); rad += 0.01)
     {
-        ASSERT_APPROXIMATE(sin(fRad), TrigonometricFunction::NonRecursiveSine(fRad), 1e-4);
+        ASSERT_APPROXIMATE(Mathematics::MathD::Sin(rad), TrigonometricFunction::NonRecursiveSine(rad), 1e-04);
+        ASSERT_APPROXIMATE(NON_RECURSIVE_COSINE(rad) * NON_RECURSIVE_TANGENT(rad), TrigonometricFunction::NonRecursiveSine(rad), Mathematics::MathD::GetZeroTolerance());
     }
 }

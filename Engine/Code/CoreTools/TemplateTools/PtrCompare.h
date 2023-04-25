@@ -19,7 +19,7 @@ namespace CoreTools
     class PtrLess
     {
     public:
-        NODISCARD bool operator()(T left, T right) noexcept
+        NODISCARD bool operator()(T left, T right) const noexcept
         {
             return ((*left) < (*right));
         }
@@ -29,7 +29,7 @@ namespace CoreTools
     class PtrGreater
     {
     public:
-        NODISCARD bool operator()(T left, T right) noexcept
+        NODISCARD bool operator()(T left, T right) const noexcept
         {
             return ((*right) < (*left));
         }

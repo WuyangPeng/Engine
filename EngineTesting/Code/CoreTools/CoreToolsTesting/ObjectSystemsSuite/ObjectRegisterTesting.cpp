@@ -1,23 +1,25 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 15:42)
+///	引擎测试版本：0.9.0.6 (2023/04/24 14:33)
 
 #include "ObjectRegisterTesting.h"
-#include "CoreTools/ObjectSystems/NullObject.h"
+#include "Detail/BoolObject.h"
+#include "Detail/EnumObject.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/NullObject.h"
 #include "CoreTools/ObjectSystems/Object.h"
-#include "CoreTools/ObjectSystems/ObjectRegister.h"
+#include "CoreTools/ObjectSystems/ObjectAssociated.h"
+#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
+#include "CoreTools/ObjectSystems/WeakObjectAssociated.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <vector>
-
-using std::vector;
 
 CoreTools::ObjectRegisterTesting::ObjectRegisterTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -34,34 +36,145 @@ void CoreTools::ObjectRegisterTesting::DoRunUnitTest()
 
 void CoreTools::ObjectRegisterTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(UniqueIDExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(UniqueIdExceptionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(RegisterRootSucceedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(RegisterObjectPtrSucceedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(RegisterObjectPtrArraySucceedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(RegisterObjectSmartPtrSucceedTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(RegisterObjectSmartPtrArraySucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(RegisterObjectSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(RegisterWeakObjectSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(RegisterObjectContainerSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(RegisterObjectArraySucceedTest);
 }
 
-void CoreTools::ObjectRegisterTesting::UniqueIDExceptionTest() noexcept
+void CoreTools::ObjectRegisterTesting::UniqueIdExceptionTest()
 {
+    const auto objectRegister = ObjectRegister::Create();
+
+    MAYBE_UNUSED const auto uniqueId = objectRegister->GetUniqueId(Object::GetNullObject());
 }
 
-void CoreTools::ObjectRegisterTesting::RegisterRootSucceedTest() noexcept
+void CoreTools::ObjectRegisterTesting::RegisterRootSucceedTest()
 {
+    const auto objectRegister = ObjectRegister::Create();
+
+    ASSERT_EQUAL(objectRegister->GetOrderedSize(), 0);
+
+    const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
+    ASSERT_EQUAL(objectRegister->RegisterRoot(boolObject), 1);
+
+    ASSERT_EQUAL(objectRegister->GetOrderedSize(), 1);
+
+    ASSERT_EQUAL(objectRegister->GetUniqueId(boolObject), 1);
 }
 
-void CoreTools::ObjectRegisterTesting::RegisterObjectPtrSucceedTest() noexcept
+void CoreTools::ObjectRegisterTesting::RegisterObjectSucceedTest()
 {
+    const auto objectRegister = ObjectRegister::Create();
+
+    ASSERT_EQUAL(objectRegister->GetOrderedSize(), 0);
+
+    const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
+    const ObjectAssociated<Object> objectAssociated{ boolObject };
+
+    ASSERT_EQUAL(objectRegister->Register(objectAssociated), 1);
+
+    ASSERT_EQUAL(objectRegister->GetOrderedSize(), 1);
+
+    for (const auto& value : *objectRegister)
+    {
+        ASSERT_EQUAL(value.object, boolObject);
+    }
 }
 
-void CoreTools::ObjectRegisterTesting::RegisterObjectPtrArraySucceedTest() noexcept
+void CoreTools::ObjectRegisterTesting::RegisterWeakObjectSucceedTest()
 {
+    const auto objectRegister = ObjectRegister::Create();
+
+    ASSERT_EQUAL(objectRegister->GetOrderedSize(), 0);
+
+    const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
+    const WeakObjectAssociated<Object> objectAssociated{ boolObject };
+
+    ASSERT_EQUAL(objectRegister->RegisterWeakPtr(objectAssociated), 1);
+
+    ASSERT_EQUAL(objectRegister->GetOrderedSize(), 1);
+
+    for (const auto& value : *objectRegister)
+    {
+        ASSERT_EQUAL(value.object, boolObject);
+    }
 }
 
-void CoreTools::ObjectRegisterTesting::RegisterObjectSmartPtrSucceedTest() noexcept
+void CoreTools::ObjectRegisterTesting::RegisterObjectContainerSucceedTest()
 {
+    const auto objectRegister = ObjectRegister::Create();
+
+    ASSERT_EQUAL(objectRegister->GetOrderedSize(), 0);
+
+    const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
+    const ObjectAssociated<Object> objectAssociated0{ boolObject };
+
+    const auto enumObject = std::make_shared<EnumObject>(DisableNotThrow::Disable);
+    const ObjectAssociated<Object> objectAssociated1{ enumObject };
+
+    const std::vector container{ objectAssociated0, objectAssociated1 };
+
+    objectRegister->RegisterContainer(container);
+
+    ASSERT_EQUAL(objectRegister->GetOrderedSize(), 2);
+
+    auto index = 0;
+    for (const auto& value : *objectRegister)
+    {
+        switch (index)
+        {
+            case 0:
+                ASSERT_EQUAL(value.object, boolObject);
+                break;
+            case 1:
+                ASSERT_EQUAL(value.object, enumObject);
+                break;
+
+            default:
+                break;
+        }
+
+        ++index;
+    }
 }
 
-void CoreTools::ObjectRegisterTesting::RegisterObjectSmartPtrArraySucceedTest() noexcept
+void CoreTools::ObjectRegisterTesting::RegisterObjectArraySucceedTest()
 {
+    const auto objectRegister = ObjectRegister::Create();
+
+    ASSERT_EQUAL(objectRegister->GetOrderedSize(), 0);
+
+    const auto boolObject = std::make_shared<BoolObject>(DisableNotThrow::Disable);
+    const ObjectAssociated<Object> objectAssociated0{ boolObject };
+
+    const auto enumObject = std::make_shared<EnumObject>(DisableNotThrow::Disable);
+    const ObjectAssociated<Object> objectAssociated1{ enumObject };
+
+    const std::array container{ objectAssociated0, objectAssociated1 };
+
+    objectRegister->RegisterContainer(container);
+
+    ASSERT_EQUAL(objectRegister->GetOrderedSize(), 2);
+
+    auto index = 0;
+    for (const auto& value : *objectRegister)
+    {
+        switch (index)
+        {
+            case 0:
+                ASSERT_EQUAL(value.object, boolObject);
+                break;
+            case 1:
+                ASSERT_EQUAL(value.object, enumObject);
+                break;
+
+            default:
+                break;
+        }
+
+        ++index;
+    }
 }

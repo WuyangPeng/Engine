@@ -29,6 +29,24 @@ CoreTools::LogMessageImpl::LogMessageImplSharedPtr CoreTools::NullLogMessage::Cl
     return std::make_shared<ClassType>(*this);
 }
 
+CoreTools::LogMessageImpl& CoreTools::NullLogMessage::operator<<(char value) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(value);
+
+    return *this;
+}
+
+CoreTools::LogMessageImpl& CoreTools::NullLogMessage::operator<<(wchar_t value) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(value);
+
+    return *this;
+}
+
 CoreTools::LogMessageImpl& CoreTools::NullLogMessage::operator<<(const char* value) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
@@ -120,6 +138,15 @@ CoreTools::LogMessageImpl& CoreTools::NullLogMessage::operator<<(const std::stri
 }
 
 CoreTools::LogMessageImpl& CoreTools::NullLogMessage::operator<<(const std::wstring& value) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(value);
+
+    return *this;
+}
+
+CoreTools::LogMessageImpl& CoreTools::NullLogMessage::operator<<(const std::wstring_view& value) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

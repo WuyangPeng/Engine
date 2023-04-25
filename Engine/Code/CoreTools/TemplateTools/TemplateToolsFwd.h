@@ -72,16 +72,16 @@ namespace CoreTools
     class IfThenElse;
 
     template <int N, int Low, int High>
-    class SqrtFirstAlgorithm;
+    class SqrtAlgorithm0;
 
     template <int N, int Low, int High>
-    class SqrtSecondAlgorithm;
+    class SqrtAlgorithm1;
 
     template <int N, int I>
-    class SqrtThirdAlgorithm;
+    class SqrtAlgorithm2;
 
     template <int N, int I>
-    class SqrtFourthAlgorithm;
+    class SqrtAlgorithm3;
 
     template <int N>
     class Pow3;

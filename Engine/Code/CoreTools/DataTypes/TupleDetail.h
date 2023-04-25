@@ -24,38 +24,30 @@ CoreTools::Tuple<Dimension, Type>::Tuple() noexcept
 }
 
 template <int Dimension, typename Type>
-CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0) noexcept(std::is_arithmetic_v<Type>)
+CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0) noexcept(std::is_arithmetic_v<Type>) requires(Dimension == 1)
     : tuple{ param0 }
 {
-    static_assert(Dimension == 1, "Dimension == 1");
-
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <int Dimension, typename Type>
-CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1) noexcept(std::is_arithmetic_v<Type>)
+CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1) noexcept(std::is_arithmetic_v<Type>) requires(Dimension == 2)
     : tuple{ param0, param1 }
 {
-    static_assert(Dimension == 2, "Dimension == 2");
-
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <int Dimension, typename Type>
-CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1, ParamType param2) noexcept(std::is_arithmetic_v<Type>)
+CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1, ParamType param2) noexcept(std::is_arithmetic_v<Type>) requires(Dimension == 3)
     : tuple{ param0, param1, param2 }
 {
-    static_assert(Dimension == 3, "Dimension == 3");
-
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <int Dimension, typename Type>
-CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1, ParamType param2, ParamType param3) noexcept(std::is_arithmetic_v<Type>)
+CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1, ParamType param2, ParamType param3) noexcept(std::is_arithmetic_v<Type>) requires(Dimension == 4)
     : tuple{ param0, param1, param2, param3 }
 {
-    static_assert(Dimension == 4, "Dimension == 4");
-
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 

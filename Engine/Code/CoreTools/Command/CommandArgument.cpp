@@ -54,9 +54,8 @@ void CoreTools::CommandArgument::AddEndArgumentValue(const std::string& value)
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     // 由于重设了impl，不进行Copy调用。
-    const auto iter = impl.GetConstImpl();
-
-    if (iter->IsNoValue())
+    if (const auto iter = impl.GetConstImpl();
+        iter->IsNoValue())
     {
         const auto index = iter->GetIndex();
         const auto arguments = iter->GetName();

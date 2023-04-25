@@ -201,7 +201,6 @@ bool CoreTools::Object::IsNullObject() const noexcept
     return false;
 }
 
-// static
 const CoreTools::Object::ObjectSharedPtr& CoreTools::Object::GetNullObject()
 {
     static ObjectSharedPtr result{ std::make_shared<NullObject>(DisableNotThrow::Disable) };

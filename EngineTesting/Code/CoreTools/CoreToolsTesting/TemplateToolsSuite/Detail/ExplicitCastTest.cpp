@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 18:50)
+///	引擎测试版本：0.9.0.6 (2023/04/25 11:10)
 
 #include "ExplicitCastTest.h"
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "System/Helper/Tools.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/ExplicitCastDetail.h"
-
-using std::string;
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ExplicitCastTest)
 
@@ -23,23 +22,25 @@ CoreTools::ExplicitCastTest::operator CoreTools::ExplicitCast<int>() const noexc
     return integer;
 }
 
-CoreTools::ExplicitCastTest::operator CoreTools::ExplicitCast<const string&>() const noexcept
+CoreTools::ExplicitCastTest::operator CoreTools::ExplicitCast<const std::string&>() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return stringValue;
 }
 
-CoreTools::ExplicitCastTest::operator CoreTools::ExplicitCast<const string*>() const noexcept
+CoreTools::ExplicitCastTest::operator CoreTools::ExplicitCast<const std::string*>() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return &stringValue;
 }
 
-CoreTools::ExplicitCastTest::ExplicitCastTest(MAYBE_UNUSED DisableNotThrow disableNotThrow)
+CoreTools::ExplicitCastTest::ExplicitCastTest(DisableNotThrow disableNotThrow)
     : integer{ 1 }, stringValue{ "ss" }, shortValue{ 0 }
 {
+    System::UnusedFunction(disableNotThrow);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
@@ -47,9 +48,9 @@ CoreTools::ExplicitCastTest::ExplicitCastTest(MAYBE_UNUSED DisableNotThrow disab
 
 CoreTools::ExplicitCastTest::operator CoreTools::ExplicitCast<short*>()
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	return &shortValue;
+    return &shortValue;
 }
 
 #endif  // 0
@@ -58,9 +59,9 @@ CoreTools::ExplicitCastTest::operator CoreTools::ExplicitCast<short*>()
 
 CoreTools::ExplicitCastTest::operator CoreTools::ExplicitCast<short&>()
 {
-	CORE_TOOLS_CLASS_IS_VALID_9;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-	return shortValue;
+    return shortValue;
 }
 
 #endif  // 0

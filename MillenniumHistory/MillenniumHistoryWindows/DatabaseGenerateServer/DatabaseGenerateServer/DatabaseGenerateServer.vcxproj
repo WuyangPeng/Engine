@@ -615,16 +615,20 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Renderer.json" />
     <None Include="Resource\AncientBooks\Book.xlsx" />
+    <None Include="Resource\AncientBooks\Calendar.xlsx" />
     <None Include="Resource\AncientBooks\Category.xlsx" />
     <None Include="Resource\AncientBooks\Character.xlsx" />
     <None Include="Resource\AncientBooks\Country.xlsx" />
+    <None Include="Resource\AncientBooks\Day.xlsx" />
     <None Include="Resource\AncientBooks\Emperor.xlsx" />
     <None Include="Resource\AncientBooks\Gather.xlsx" />
     <None Include="Resource\AncientBooks\Genus.xlsx" />
     <None Include="Resource\AncientBooks\ImperialCourt.xlsx" />
     <None Include="Resource\AncientBooks\ReignTitle.xlsx" />
+    <None Include="Resource\AncientBooks\SexagenaryCycle.xlsx" />
     <None Include="Resource\AncientBooks\Source.xlsx" />
     <None Include="Resource\AncientBooks\Version.xlsx" />
+    <None Include="Resource\AncientBooks\Year.xlsx" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>

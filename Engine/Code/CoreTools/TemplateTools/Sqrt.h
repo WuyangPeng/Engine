@@ -18,7 +18,7 @@ namespace CoreTools
 {
     // 主模板计算sqrt(N)
     template <int N, int Low = 1, int High = N>
-    class SqrtFirstAlgorithm
+    class SqrtAlgorithm0
     {
     private:
         // 计算中点，取整
@@ -31,13 +31,13 @@ namespace CoreTools
         // 搜索一个不大的值在减半间隔
         enum
         {
-            Result = (N < Midpoint * Midpoint) ? (SqrtFirstAlgorithm<N, Low, Midpoint - 1>::Result) : (SqrtFirstAlgorithm<N, Midpoint, High>::Result)
+            Result = (N < Midpoint * Midpoint) ? (SqrtAlgorithm0<N, Low, Midpoint - 1>::Result) : (SqrtAlgorithm0<N, Midpoint, High>::Result)
         };
     };
 
     // 局部特化当Low 等于 High
     template <int N, int Midpoint>
-    class SqrtFirstAlgorithm<N, Midpoint, Midpoint>
+    class SqrtAlgorithm0<N, Midpoint, Midpoint>
     {
     public:
         enum
@@ -48,7 +48,7 @@ namespace CoreTools
 
     // 主模板对主要递归步骤
     template <int N, int Low = 1, int High = N>
-    class SqrtSecondAlgorithm
+    class SqrtAlgorithm1
     {
     private:
         // 计算中点，取整
@@ -58,18 +58,18 @@ namespace CoreTools
         };
 
         // 搜索一个不大的值在减半间隔
-        using SqrtSecondAlgorithmResult = typename IfThenElse<(N < Midpoint * Midpoint), SqrtSecondAlgorithm<N, Low, Midpoint - 1>, SqrtSecondAlgorithm<N, Midpoint, High>>::ResultType;
+        using SqrtAlgorithm1Result = typename IfThenElse<(N < Midpoint * Midpoint), SqrtAlgorithm1<N, Low, Midpoint - 1>, SqrtAlgorithm1<N, Midpoint, High>>::ResultType;
 
     public:
         enum
         {
-            Result = SqrtSecondAlgorithmResult::Result
+            Result = SqrtAlgorithm1Result::Result
         };
     };
 
     // 递归结束的偏特化
     template <int N, int Midpoint>
-    class SqrtSecondAlgorithm<N, Midpoint, Midpoint>
+    class SqrtAlgorithm1<N, Midpoint, Midpoint>
     {
     public:
         enum
@@ -80,18 +80,18 @@ namespace CoreTools
 
     // 主模板,通过迭代计算sqrt(N)
     template <int N, int I = 1>
-    class SqrtThirdAlgorithm
+    class SqrtAlgorithm2
     {
     public:
         enum
         {
-            Result = (I * I < N) ? (SqrtThirdAlgorithm<N, I + 1>::Result) : I
+            Result = (I * I < N) ? (SqrtAlgorithm2<N, I + 1>::Result) : I
         };
     };
 
     // 递归结束的偏特化
     template <int N>
-    class SqrtThirdAlgorithm<N, N>
+    class SqrtAlgorithm2<N, N>
     {
     public:
         enum
@@ -113,10 +113,10 @@ namespace CoreTools
 
     // 模板通过迭代计算sqrt(N)
     template <int N, int I = 1>
-    class SqrtFourthAlgorithm
+    class SqrtAlgorithm3
     {
     public:
-        using SqrtFourthAlgorithmResult = typename IfThenElse<(I * I < N), SqrtFourthAlgorithm<N, I + 1>, Value<I>>::ResultType;
+        using SqrtFourthAlgorithmResult = typename IfThenElse<(I * I < N), SqrtAlgorithm3<N, I + 1>, Value<I>>::ResultType;
 
         enum
         {

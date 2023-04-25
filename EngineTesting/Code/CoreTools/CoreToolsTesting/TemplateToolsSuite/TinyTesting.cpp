@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 19:08)
+///	引擎测试版本：0.9.0.6 (2023/04/25 14:03)
 
 #include "TinyTesting.h"
 #include "Detail/TinyTest.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/Tiny.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
@@ -34,7 +34,7 @@ void CoreTools::TinyTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(ClearTest);
     ASSERT_NOT_THROW_EXCEPTION_0(PushFrontTest);
     ASSERT_NOT_THROW_EXCEPTION_0(EmptyTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(InteratorTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(IteratorTest);
     ASSERT_NOT_THROW_EXCEPTION_0(EraseTest);
 }
 
@@ -91,7 +91,7 @@ void CoreTools::TinyTesting::PushBackTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-	using InvalidTiny = boost::mpl::push_back<Tiny3, int>::type;
+    using InvalidTiny = boost::mpl::push_back<Tiny3, int>::type;
 
 #endif  // 0
 
@@ -131,7 +131,7 @@ void CoreTools::TinyTesting::PushFrontTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-	using InvalidTiny = boost::mpl::push_front<Tiny3, int>::type;
+    using InvalidTiny = boost::mpl::push_front<Tiny3, int>::type;
 
 #endif  // 0
 
@@ -148,7 +148,7 @@ void CoreTools::TinyTesting::EmptyTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-	using invalidType0 = boost::mpl::at<Tiny0, TinyZero>::type;
+    using InvalidType0 = boost::mpl::at<Tiny0, TinyZero>::type;
 
 #endif  // 0
 
@@ -156,13 +156,13 @@ void CoreTools::TinyTesting::EmptyTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-	using invalidType1 = boost::mpl::next<Beg>::type;
+    using InvalidType1 = boost::mpl::next<Beg>::type;
 
 #endif  // 0
 
 #if 0  // 这里应该产生编译错误。
 
-	using invalidType2 = boost::mpl::deref<Beg>::type;
+    using InvalidType2 = boost::mpl::deref<Beg>::type;
 
 #endif  // 0
 
@@ -170,24 +170,24 @@ void CoreTools::TinyTesting::EmptyTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-	using invalidType3 = boost::mpl::prior<End>::type;
+    using InvalidType3 = boost::mpl::prior<End>::type;
 
 #endif  // 0
 
 #if 0  // 这里应该产生编译错误。
 
-	using invalidType4 = boost::mpl::advance<Beg, TinyOne>::type;
+    using InvalidType4 = boost::mpl::advance<Beg, TinyOne>::type;
 
 #endif  // 0
 
 #if 0  // 这里应该产生编译错误。
 
-	using invalidType5 = boost::mpl::advance<End, boost::mpl::int_<-1>>::type;
+    using InvalidType5 = boost::mpl::advance<End, boost::mpl::int_<-1>>::type;
 
 #endif  // 0
 }
 
-void CoreTools::TinyTesting::InteratorTest() noexcept
+void CoreTools::TinyTesting::IteratorTest() noexcept
 {
     using Tiny0 = Tiny<>;
     using Tiny1 = Tiny<int>;
@@ -216,7 +216,7 @@ void CoreTools::TinyTesting::InteratorTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-		using InvalidTinyIterator = boost::mpl::insert<TinyIterator5, TinyIterator6, bool>::type;
+        using InvalidTinyIterator = boost::mpl::insert<TinyIterator5, TinyIterator6, bool>::type;
 
 #endif  // 0
     }
@@ -246,7 +246,7 @@ void CoreTools::TinyTesting::InteratorTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-		using InvalidTinyIterator = boost::mpl::insert<TinyIterator1, TinyIterator2, char>::type;
+        using InvalidTinyIterator = boost::mpl::insert<TinyIterator1, TinyIterator2, char>::type;
 
 #endif  // 0
     }
@@ -259,9 +259,9 @@ void CoreTools::TinyTesting::InteratorTest() noexcept
         using Tiny6 = boost::mpl::pop_front<Tiny1>::type;
         BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny6, Tiny<>>::type::value));
 
-#if 0  // 这里应该产生编译错误。		
+#if 0  // 这里应该产生编译错误。
 
-		using InvalidType = boost::mpl::pop_front<Tiny0>::type;
+        using InvalidType = boost::mpl::pop_front<Tiny0>::type;
 
 #endif  // 0
     }
@@ -274,9 +274,9 @@ void CoreTools::TinyTesting::InteratorTest() noexcept
         using Tiny6 = boost::mpl::pop_back<Tiny1>::type;
         BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny6, Tiny<>>::type::value));
 
-#if 0  // 这里应该产生编译错误。	
+#if 0  // 这里应该产生编译错误。
 
-		using InvalidType = boost::mpl::pop_back<Tiny6>::type;
+        using InvalidType = boost::mpl::pop_back<Tiny6>::type;
 
 #endif  // 0
     }
@@ -322,7 +322,7 @@ void CoreTools::TinyTesting::EraseTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-		using Invalid = boost::mpl::erase<Tiny2, TinyIterator2>::type;
+        using Invalid = boost::mpl::erase<Tiny2, TinyIterator2>::type;
 
 #endif  // 0
     }
@@ -336,7 +336,7 @@ void CoreTools::TinyTesting::EraseTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-		using Invalid = boost::mpl::erase<Tiny1, TinyIterator1>::type;
+        using Invalid = boost::mpl::erase<Tiny1, TinyIterator1>::type;
 
 #endif  // 0
     }
@@ -346,7 +346,7 @@ void CoreTools::TinyTesting::EraseTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-		using Invalid = boost::mpl::erase<Tiny0, TinyIterator0>::type;
+        using Invalid = boost::mpl::erase<Tiny0, TinyIterator0>::type;
 
 #endif  // 0
     }
@@ -408,7 +408,7 @@ void CoreTools::TinyTesting::EraseTest() noexcept
 
 #if 0  // 这里应该产生编译错误。
 
-		using Invalid0 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator3>::type;
+        using Invalid0 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator3>::type;
 
 #endif  // 0
 
@@ -421,9 +421,9 @@ void CoreTools::TinyTesting::EraseTest() noexcept
 
 #endif  // 0
 
-#if 0  // 这里应该产生编译错误。	
+#if 0  // 这里应该产生编译错误。
 
-		using Invalid2 = boost::mpl::erase<Tiny2, TinyIterator2, TinyIterator3>::type;
+        using Invalid2 = boost::mpl::erase<Tiny2, TinyIterator2, TinyIterator3>::type;
 
 #endif  // 0
     }

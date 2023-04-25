@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.5 (2023/04/04 17:31)
+///	引擎测试版本：0.9.0.6 (2023/04/10 18:02)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -470,12 +470,12 @@ void CoreTools::TestingHelper::AddTextParsingSuite()
 
 CoreTools::Suite CoreTools::TestingHelper::GetSimpleZipSuite()
 {
-    auto SimpleZipSuite = GenerateSuite("简易Zip");
+    auto simpleZipSuite = GenerateSuite("简易Zip");
 
-    ADD_TEST(SimpleZipSuite, ZipEntryTesting);
-    ADD_TEST(SimpleZipSuite, ZipArchiveTesting);
+    ADD_TEST(simpleZipSuite, ZipEntryTesting);
+    ADD_TEST(simpleZipSuite, ZipArchiveTesting);
 
-    return SimpleZipSuite;
+    return simpleZipSuite;
 }
 
 CoreTools::Suite CoreTools::TestingHelper::GetSimpleCSVSuite()
@@ -514,7 +514,7 @@ CoreTools::Suite CoreTools::TestingHelper::GetSimpleCSVSuite()
 
     return simpleCSVSuite;
 }
- 
+
 CoreTools::Suite CoreTools::TestingHelper::GetCommandSuite()
 {
     auto simpleCSVCommandSuite = GenerateSuite("csv命令");
@@ -566,6 +566,8 @@ void CoreTools::TestingHelper::AddLogManagerSuite()
     ADD_TEST(logManagerSuite, LogFileNameTesting);
     ADD_TEST(logManagerSuite, LogAppenderIOManagerTesting);
     ADD_TEST(logManagerSuite, LogTesting);
+    ADD_TEST(logManagerSuite, LogAsynchronousTesting);
+    ADD_TEST(logManagerSuite, LogHelperTesting);
 
     AddSuite(logManagerSuite);
 }
@@ -575,12 +577,15 @@ void CoreTools::TestingHelper::AddDataTypesSuite()
     auto dataTypesSuite = GenerateSuite("数据类型库");
 
     ADD_TEST(dataTypesSuite, TupleTesting);
+    ADD_TEST(dataTypesSuite, TupleLessTesting);
     ADD_TEST(dataTypesSuite, TableTesting);
     ADD_TEST(dataTypesSuite, MinHeapRecordTesting);
     ADD_TEST(dataTypesSuite, MinHeapRecordStoredTesting);
     ADD_TEST(dataTypesSuite, MinHeapRecordIndexTesting);
     ADD_TEST(dataTypesSuite, MinHeapRecordStoredManagerTesting);
     ADD_TEST(dataTypesSuite, MinHeapTesting);
+    ADD_TEST(dataTypesSuite, ThreadSafeMapTesting);
+    ADD_TEST(dataTypesSuite, ThreadSafeQueueTesting);
 
     AddSuite(dataTypesSuite);
 }
@@ -589,7 +594,21 @@ void CoreTools::TestingHelper::AddMemoryToolsSuite()
 {
     auto memoryToolsSuite = GenerateSuite("内存工具库");
 
+    ADD_TEST(memoryToolsSuite, Array2Testing);
+    ADD_TEST(memoryToolsSuite, Array3Testing);
+    ADD_TEST(memoryToolsSuite, Array4Testing);
+    ADD_TEST(memoryToolsSuite, AtomicMinMaxTesting);
+    ADD_TEST(memoryToolsSuite, ContainerAdapterTesting);
     ADD_TEST(memoryToolsSuite, HeapAllocateTesting);
+    ADD_TEST(memoryToolsSuite, LatticeTesting);
+    ADD_TEST(memoryToolsSuite, LexicoArray2Testing);
+    ADD_TEST(memoryToolsSuite, MultiArrayAdapterTesting);
+    ADD_TEST(memoryToolsSuite, MultiArrayTesting);
+    ADD_TEST(memoryToolsSuite, RawIteratorsTesting);
+    ADD_TEST(memoryToolsSuite, RawPtrCompareTesting);
+    ADD_TEST(memoryToolsSuite, SharedPtrCompareTesting);
+    ADD_TEST(memoryToolsSuite, TypeTraitsTesting);
+    ADD_TEST(memoryToolsSuite, WeakPtrCompareTesting);
 
     AddSuite(memoryToolsSuite);
 }
@@ -616,7 +635,14 @@ void CoreTools::TestingHelper::AddObjectSystemSuite()
     ADD_TEST(objectSystemsSuite, FileInStreamTesting);
     ADD_TEST(objectSystemsSuite, ObjectTesting);
     ADD_TEST(objectSystemsSuite, ObjectManagerTesting);
-    ADD_TEST(objectSystemsSuite, TypeCastingTesting);
+    ADD_TEST(objectSystemsSuite, ConstObjectAssociatedTesting);
+    ADD_TEST(objectSystemsSuite, ConstWeakObjectAssociatedTesting);
+    ADD_TEST(objectSystemsSuite, ObjectAssociatedTesting);
+    ADD_TEST(objectSystemsSuite, WeakObjectAssociatedTesting);
+    ADD_TEST(objectSystemsSuite, InitTermContainerTesting);
+    ADD_TEST(objectSystemsSuite, InitTermRegisterFactoryTesting);
+    ADD_TEST(objectSystemsSuite, NullObjectTesting);
+    ADD_TEST(objectSystemsSuite, ObjectInterfaceTesting);
 
     AddSuite(objectSystemsSuite);
 }
@@ -673,6 +699,9 @@ void CoreTools::TestingHelper::AddTemplateToolsSuite()
     ADD_TEST(templateToolsSuite, ReferenceCastTesting);
     ADD_TEST(templateToolsSuite, ValueScopeTesting);
     ADD_TEST(templateToolsSuite, TinyTesting);
+    ADD_TEST(templateToolsSuite, IfThenElseTesting);
+    ADD_TEST(templateToolsSuite, MaxElementTesting);
+    ADD_TEST(templateToolsSuite, RangeIterationTesting);
 
     AddSuite(templateToolsSuite);
 }
@@ -696,6 +725,7 @@ void CoreTools::TestingHelper::AddMainFunctionHelperSuite()
     ADD_TEST(mainFunctionHelperSuite, CMainFunctionHelperTesting);
     ADD_TEST(mainFunctionHelperSuite, DllFunctionHelperTesting);
     ADD_TEST(mainFunctionHelperSuite, CMainFunctionTestingHelperTesting);
+    ADD_TEST(mainFunctionHelperSuite, ExecuteDllMainTesting);
 
     AddSuite(mainFunctionHelperSuite);
 }

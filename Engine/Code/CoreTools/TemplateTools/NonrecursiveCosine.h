@@ -14,17 +14,16 @@
 
 namespace CoreTools
 {
-    template <double& Radian>
     struct NonRecursiveCosine
     {
-        static constexpr double Cos() noexcept
+        static constexpr double Cos(const double radian) noexcept
         {
-            constexpr auto radianSquare = Radian * Radian;
+            const auto radianSquare = radian * radian;
             return (1.0 - radianSquare / 2.0 * (1.0 - radianSquare / 3.0 / 4.0 * (1.0 - radianSquare / 5.0 / 6.0 * (1.0 - radianSquare / 7.0 / 8.0 * (1.0 - radianSquare / 9.0 / 10.0 * (1.0 - radianSquare / 11.0 / 12.0 * (1.0 - radianSquare / 13.0 / 14.0 * (1.0 - radianSquare / 15.0 / 16.0 * (1.0 - radianSquare / 17.0 / 18.0 * (1.0 - radianSquare / 19.0 / 20.0 * (1.0 - radianSquare / 21.0 / 22.0)))))))))));
         }
     };
 }
 
-#define NON_RECURSIVE_COSINE(r) CoreTools::NonrecursiveCosine<r>::Cos()
+#define NON_RECURSIVE_COSINE(r) CoreTools::NonRecursiveCosine::Cos(r)
 
 #endif  // CORE_TOOLS_TEMPLATE_TOOLS_NON_RECURSIVE_COSINE_H

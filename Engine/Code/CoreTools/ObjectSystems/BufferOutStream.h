@@ -32,7 +32,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD FileBufferSharedPtr GetBufferOutStreamInformation() const noexcept;
+        NODISCARD ConstFileBufferSharedPtr GetBufferOutStreamInformation() const noexcept;
 
     private:
         PackageType impl;

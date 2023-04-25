@@ -41,7 +41,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        NODISCARD uint64_t Registered(MessageManagerEventType eventType, const SubclassSharedPtr& subclass, EventSlotPriorityType priority, CallbackMemberFunction callbackMemberFunction);
+        NODISCARD int64_t Registered(MessageManagerEventType eventType, const SubclassSharedPtr& subclass, EventSlotPriorityType priority, CallbackMemberFunction callbackMemberFunction);
         void Unregistered(MessageManagerEventType eventType, int64_t index);
         void CallEvent(MessageManagerEventType eventType, const CallbackParameters& callbackParameters);
         void DelayCallEvent(MessageManagerEventType eventType, const CallbackParameters& callbackParameters, int32_t delayTime);

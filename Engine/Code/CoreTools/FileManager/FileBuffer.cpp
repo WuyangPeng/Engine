@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-CoreTools::FileBuffer::FileBuffer(size_t count)
+CoreTools::FileBuffer::FileBuffer(int count)
     : impl{ count }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -29,7 +29,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, FileBuffer, GetBuffer, int,
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, FileBuffer, GetBufferBegin, char*)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, FileBuffer, GetBufferBegin, const char*)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, FileBuffer, GetSize, size_t)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, FileBuffer, GetSize, int)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, FileBuffer, begin, CoreTools::FileBuffer::BufferTypeIter)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, FileBuffer, begin, CoreTools::FileBuffer::BufferTypeConstIter)

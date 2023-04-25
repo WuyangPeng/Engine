@@ -24,22 +24,26 @@ namespace CoreTools
 
     public:
         Array2() noexcept;
-        Array2(size_t bound0, size_t bound1);
+        Array2(int bound0, int bound1);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD size_t GetBound0() const noexcept;
-        NODISCARD size_t GetBound1() const noexcept;
+        NODISCARD int GetBound0() const noexcept;
+        NODISCARD int GetBound1() const noexcept;
 
-        NODISCARD T const* operator[](int row) const noexcept;
-        NODISCARD T* operator[](int row) noexcept;
+        NODISCARD const T* operator[](int row) const;
+        NODISCARD T* operator[](int row);
 
     private:
         void SetPointers();
+        NODISCARD constexpr static int GetObjectSize(int bound0, int bound1) noexcept
+        {
+            return bound0 * bound1;
+        }
 
     private:
-        size_t bound0;
-        size_t bound1;
+        int bound0;
+        int bound1;
         std::vector<T> objects;
         std::vector<T*> indirect;
     };

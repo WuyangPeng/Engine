@@ -11,158 +11,150 @@
 #define CORE_TOOLS_MEMORY_TOOLS_LATTICE_DETAIL_H
 
 #include "Lattice.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #ifdef OPEN_CLASS_INVARIANT
 
-template <bool OrderLToR, size_t... Sizes>
-requires(1 <= sizeof...(Sizes)) bool CoreTools::Lattice<OrderLToR, Sizes...>::IsValid() const noexcept
+template <bool OrderLToR, int... Sizes>
+bool CoreTools::Lattice<OrderLToR, Sizes...>::IsValid() const noexcept
 {
     return true;
 }
 
 #endif  // OPEN_CLASS_INVARIANT
 
-template <bool OrderLToR, size_t... Sizes>
-requires(1 <= sizeof...(Sizes))
+template <bool OrderLToR, int... Sizes>
 template <typename... IndexTypes, bool Condition, CoreTools::TraitSelector<Condition>>
 requires(sizeof...(IndexTypes) == sizeof...(Sizes))
-size_t CoreTools::Lattice<OrderLToR, Sizes...>::GetIndex(IndexTypes... tuple) const noexcept
+int CoreTools::Lattice<OrderLToR, Sizes...>::GetIndex(IndexTypes... tuple) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return MetaGetIndexLToR(tuple...);
 }
 
-template <bool OrderLToR, size_t... Sizes>
-requires(1 <= sizeof...(Sizes))
+template <bool OrderLToR, int... Sizes>
 template <typename... IndexTypes, bool Condition, CoreTools::TraitSelector<Condition>>
-size_t CoreTools::Lattice<OrderLToR, Sizes...>::GetIndex(const std::array<size_t, sizeof...(Sizes)>& coordinate) const noexcept
+int CoreTools::Lattice<OrderLToR, Sizes...>::GetIndex(const std::array<int, sizeof...(Sizes)>& coordinate) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return GetIndexLToR(coordinate);
 }
 
-template <bool OrderLToR, size_t... Sizes>
-requires(1 <= sizeof...(Sizes))
+template <bool OrderLToR, int... Sizes>
 template <typename... IndexTypes, bool Condition, CoreTools::TraitSelector<Condition>>
-std::array<size_t, sizeof...(Sizes)> CoreTools::Lattice<OrderLToR, Sizes...>::GetCoordinate(size_t index) const noexcept
+std::array<int, sizeof...(Sizes)> CoreTools::Lattice<OrderLToR, Sizes...>::GetCoordinate(int index) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    std::array<size_t, sizeof...(Sizes)> tuple{};
+    std::array<int, sizeof...(Sizes)> tuple{};
 
     for (auto dimension = 0u; dimension < sizeof...(Sizes); ++dimension)
     {
         const auto bound = GetSize(dimension);
         const auto j = index;
         index /= bound;
-        tuple[dimension] = j - bound * index;
+        tuple.at(dimension) = j - bound * index;
     }
 
     return tuple;
 }
 
-template <bool OrderLToR, size_t... Sizes>
-requires(1 <= sizeof...(Sizes))
+template <bool OrderLToR, int... Sizes>
 template <typename... IndexTypes, bool Condition, CoreTools::TraitSelector<!Condition>>
 requires(sizeof...(IndexTypes) == sizeof...(Sizes))
-size_t CoreTools::Lattice<OrderLToR, Sizes...>::GetIndex(IndexTypes... tuple) const noexcept
+int CoreTools::Lattice<OrderLToR, Sizes...>::GetIndex(IndexTypes... tuple) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    using Type = typename std::tuple_element_t<0, std::tuple<IndexTypes...>>;
+    using Type = std::tuple_element_t<0, std::tuple<IndexTypes...>>;
 
-    return MetaGetIndexRToL(static_cast<Type>(0), tuple...);
+    return MetaGetIndexRToL(gsl::narrow_cast<Type>(0), tuple...);
 }
 
-template <bool OrderLToR, size_t... Sizes>
-requires(1 <= sizeof...(Sizes))
+template <bool OrderLToR, int... Sizes>
 template <typename... IndexTypes, bool Condition, CoreTools::TraitSelector<!Condition>>
-size_t CoreTools::Lattice<OrderLToR, Sizes...>::GetIndex(const std::array<size_t, sizeof...(Sizes)>& coordinate) const noexcept
+int CoreTools::Lattice<OrderLToR, Sizes...>::GetIndex(const std::array<int, sizeof...(Sizes)>& coordinate) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return GetIndexRToL(coordinate);
 }
 
-template <bool OrderLToR, size_t... Sizes>
-requires(1 <= sizeof...(Sizes))
+template <bool OrderLToR, int... Sizes>
 template <typename... IndexTypes, bool Condition, CoreTools::TraitSelector<!Condition>>
-std::array<size_t, sizeof...(Sizes)> CoreTools::Lattice<OrderLToR, Sizes...>::GetCoordinate(size_t index) const noexcept
+std::array<int, sizeof...(Sizes)> CoreTools::Lattice<OrderLToR, Sizes...>::GetCoordinate(int index) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    std::array<size_t, sizeof...(Sizes)> tuple{};
+    std::array<int, sizeof...(Sizes)> tuple{};
 
-    for (auto k = 0u, dimension = sizeof...(Sizes) - 1; k < sizeof...(Sizes); ++k, --dimension)
+    for (auto k = 0, dimension = gsl::narrow_cast<int>(sizeof...(Sizes) - 1); k < sizeof...(Sizes); ++k, --dimension)
     {
         const auto bound = GetSize(dimension);
-        auto j = index;
+        const auto j = index;
         index /= bound;
-        tuple[dimension] = j - bound * index;
+        tuple.at(dimension) = j - bound * index;
     }
 
     return tuple;
 }
 
-template <bool OrderLToR, size_t... Sizes>
-requires(1 <= sizeof...(Sizes))
-template <size_t NumDimensions, CoreTools::TraitSelector<(NumDimensions > 1)>>
-size_t CoreTools::Lattice<OrderLToR, Sizes...>::GetIndexLToR(const std::array<size_t, sizeof...(Sizes)>& coordinate) const noexcept
+template <bool OrderLToR, int... Sizes>
+template <int NumDimensions, CoreTools::TraitSelector<(NumDimensions > 1)>>
+int CoreTools::Lattice<OrderLToR, Sizes...>::GetIndexLToR(const std::array<int, sizeof...(Sizes)>& coordinate) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    std::array<size_t, sizeof...(Sizes)> sizes{};
+    std::array<int, sizeof...(Sizes)> sizes{};
 
     MetaAssignSize<0, Sizes...>(sizes.data());
     auto dimension = coordinate.size() - 1;
-    auto indexLToR = coordinate[dimension];
+    auto indexLToR = coordinate.at(dimension);
     --dimension;
     for (auto k = 1u; k < sizeof...(Sizes); ++k, --dimension)
     {
-        indexLToR = sizes[dimension] * indexLToR + coordinate[dimension];
+        indexLToR = sizes.at(dimension) * indexLToR + coordinate.at(dimension);
     }
 
     return indexLToR;
 }
 
-template <bool OrderLToR, size_t... Sizes>
-requires(1 <= sizeof...(Sizes))
-template <size_t NumDimensions, CoreTools::TraitSelector<NumDimensions == 1>>
-size_t CoreTools::Lattice<OrderLToR, Sizes...>::GetIndexLToR(const std::array<size_t, 1>& coordinate) const noexcept
+template <bool OrderLToR, int... Sizes>
+template <int NumDimensions, CoreTools::TraitSelector<NumDimensions == 1>>
+int CoreTools::Lattice<OrderLToR, Sizes...>::GetIndexLToR(const std::array<int, 1>& coordinate) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return coordinate[0];
 }
 
-template <bool OrderLToR, size_t... Sizes>
-requires(1 <= sizeof...(Sizes))
-template <size_t NumDimensions, CoreTools::TraitSelector<(NumDimensions > 1)>>
-size_t CoreTools::Lattice<OrderLToR, Sizes...>::GetIndexRToL(const std::array<size_t, sizeof...(Sizes)>& coordinate) const noexcept
+template <bool OrderLToR, int... Sizes>
+template <int NumDimensions, CoreTools::TraitSelector<(NumDimensions > 1)>>
+int CoreTools::Lattice<OrderLToR, Sizes...>::GetIndexRToL(const std::array<int, sizeof...(Sizes)>& coordinate) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    std::array<size_t, sizeof...(Sizes)> sizes{};
+    std::array<int, sizeof...(Sizes)> sizes{};
 
     MetaAssignSize<0, Sizes...>(sizes.data());
     auto dimension = 0u;
-    auto indexRtoL = coordinate[dimension];
+    auto indexRtoL = coordinate.at(dimension);
     for (++dimension; dimension < sizeof...(Sizes); ++dimension)
     {
-        indexRtoL = sizes[dimension] * indexRtoL + coordinate[dimension];
+        indexRtoL = sizes.at(dimension) * indexRtoL + coordinate.at(dimension);
     }
 
     return indexRtoL;
 }
 
-template <bool OrderLToR, size_t... Sizes>
-requires(1 <= sizeof...(Sizes))
-template <size_t NumDimensions, CoreTools::TraitSelector<NumDimensions == 1>>
-size_t CoreTools::Lattice<OrderLToR, Sizes...>::GetIndexRToL(const std::array<size_t, 1>& coordinate) const noexcept
+template <bool OrderLToR, int... Sizes>
+template <int NumDimensions, CoreTools::TraitSelector<NumDimensions == 1>>
+int CoreTools::Lattice<OrderLToR, Sizes...>::GetIndexRToL(const std::array<int, 1>& coordinate) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -188,7 +180,7 @@ CoreTools::Lattice<OrderLToR>::Lattice(const SizeType& sizes)
 }
 
 template <bool OrderLToR>
-CoreTools::Lattice<OrderLToR>::Lattice(const std::initializer_list<size_t>& sizes)
+CoreTools::Lattice<OrderLToR>::Lattice(const std::initializer_list<int>& sizes)
     : numElements{ 0 },
       sizes{}
 {
@@ -208,31 +200,31 @@ bool CoreTools::Lattice<OrderLToR>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <bool OrderLToR>
-void CoreTools::Lattice<OrderLToR>::Reset(const SizeType& sizes)
+void CoreTools::Lattice<OrderLToR>::Reset(const SizeType& aSizes)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    InternalReset(sizes);
+    InternalReset(aSizes);
 }
 
 template <bool OrderLToR>
-void CoreTools::Lattice<OrderLToR>::Reset(const std::initializer_list<size_t>& sizes)
+void CoreTools::Lattice<OrderLToR>::Reset(const std::initializer_list<int>& aSizes)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    InternalReset(sizes);
+    InternalReset(aSizes);
 }
 
 template <bool OrderLToR>
-size_t CoreTools::Lattice<OrderLToR>::GetDimensions() const noexcept
+int CoreTools::Lattice<OrderLToR>::GetDimensions() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return sizes.size();
+    return boost::numeric_cast<int>(sizes.size());
 }
 
 template <bool OrderLToR>
-size_t CoreTools::Lattice<OrderLToR>::GetSize(size_t dimension) const
+int CoreTools::Lattice<OrderLToR>::GetSize(int dimension) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -240,7 +232,7 @@ size_t CoreTools::Lattice<OrderLToR>::GetSize(size_t dimension) const
 }
 
 template <bool OrderLToR>
-size_t CoreTools::Lattice<OrderLToR>::GetSize() const noexcept
+int CoreTools::Lattice<OrderLToR>::GetSize() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -249,7 +241,7 @@ size_t CoreTools::Lattice<OrderLToR>::GetSize() const noexcept
 
 template <bool OrderLToR>
 template <typename... IndexTypes, bool Condition, CoreTools::TraitSelector<Condition>>
-size_t CoreTools::Lattice<OrderLToR>::GetIndex(IndexTypes... tuple) const
+int CoreTools::Lattice<OrderLToR>::GetIndex(IndexTypes... tuple) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -263,7 +255,7 @@ size_t CoreTools::Lattice<OrderLToR>::GetIndex(IndexTypes... tuple) const
 
 template <bool OrderLToR>
 template <bool Condition, CoreTools::TraitSelector<Condition>>
-size_t CoreTools::Lattice<OrderLToR>::GetIndex(const SizeType& coordinate) const
+int CoreTools::Lattice<OrderLToR>::GetIndex(const SizeType& coordinate) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -273,11 +265,11 @@ size_t CoreTools::Lattice<OrderLToR>::GetIndex(const SizeType& coordinate) const
     }
 
     auto dimension = coordinate.size() - 1;
-    auto indexLToR = coordinate[dimension];
+    auto indexLToR = coordinate.at(dimension);
     --dimension;
     for (auto k = 1u; k < coordinate.size(); ++k, --dimension)
     {
-        indexLToR = sizes[dimension] * indexLToR + coordinate[dimension];
+        indexLToR = sizes.at(dimension) * indexLToR + coordinate.at(dimension);
     }
 
     return indexLToR;
@@ -285,7 +277,7 @@ size_t CoreTools::Lattice<OrderLToR>::GetIndex(const SizeType& coordinate) const
 
 template <bool OrderLToR>
 template <typename... IndexTypes, bool Condition, CoreTools::TraitSelector<!Condition>>
-size_t CoreTools::Lattice<OrderLToR>::GetIndex(IndexTypes... tuple) const
+int CoreTools::Lattice<OrderLToR>::GetIndex(IndexTypes... tuple) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -296,12 +288,12 @@ size_t CoreTools::Lattice<OrderLToR>::GetIndex(IndexTypes... tuple) const
 
     using Type = std::tuple_element_t<0, std::tuple<IndexTypes...>>;
 
-    return MetaGetIndexRToL(static_cast<Type>(0), tuple...);
+    return MetaGetIndexRToL(gsl::narrow_cast<Type>(0), tuple...);
 }
 
 template <bool OrderLToR>
 template <bool Condition, CoreTools::TraitSelector<!Condition>>
-size_t CoreTools::Lattice<OrderLToR>::GetIndex(const SizeType& coordinate) const
+int CoreTools::Lattice<OrderLToR>::GetIndex(const SizeType& coordinate) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -311,10 +303,10 @@ size_t CoreTools::Lattice<OrderLToR>::GetIndex(const SizeType& coordinate) const
     }
 
     auto dimension = 0u;
-    auto indexRToL = coordinate[dimension];
+    auto indexRToL = coordinate.at(dimension);
     for (++dimension; dimension < coordinate.size(); ++dimension)
     {
-        indexRToL = sizes[dimension] * indexRToL + coordinate[dimension];
+        indexRToL = sizes.at(dimension) * indexRToL + coordinate.at(dimension);
     }
 
     return indexRToL;
@@ -322,19 +314,19 @@ size_t CoreTools::Lattice<OrderLToR>::GetIndex(const SizeType& coordinate) const
 
 template <bool OrderLToR>
 template <bool Condition, CoreTools::TraitSelector<Condition>>
-typename CoreTools::Lattice<OrderLToR>::SizeType CoreTools::Lattice<OrderLToR>::GetCoordinate(size_t index) const
+typename CoreTools::Lattice<OrderLToR>::SizeType CoreTools::Lattice<OrderLToR>::GetCoordinate(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto numDimensions = GetDimensions();
 
     SizeType tuple(numDimensions);
-    for (auto dimension = 0u; dimension < numDimensions; ++dimension)
+    for (auto dimension = 0; dimension < numDimensions; ++dimension)
     {
         const auto bound = GetSize(dimension);
         const auto j = index;
         index /= bound;
-        tuple[dimension] = j - bound * index;
+        tuple.at(dimension) = j - bound * index;
     }
 
     return tuple;
@@ -342,28 +334,20 @@ typename CoreTools::Lattice<OrderLToR>::SizeType CoreTools::Lattice<OrderLToR>::
 
 template <bool OrderLToR>
 template <bool Condition, CoreTools::TraitSelector<!Condition>>
-typename CoreTools::Lattice<OrderLToR>::SizeType CoreTools::Lattice<OrderLToR>::GetCoordinate(size_t index) const
+typename CoreTools::Lattice<OrderLToR>::SizeType CoreTools::Lattice<OrderLToR>::GetCoordinate(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto numDimensions = GetDimensions();
     SizeType tuple(numDimensions);
-    for (auto k = 0u, dimension = numDimensions - 1; k < numDimensions; ++k, --dimension)
+    for (auto k = 0, dimension = numDimensions - 1; k < numDimensions; ++k, --dimension)
     {
         const auto bound = GetSize(dimension);
         const auto j = index;
         index /= bound;
-        tuple[dimension] = j - bound * index;
+        tuple.at(dimension) = j - bound * index;
     }
     return tuple;
-}
-
-template <bool OrderLToR>
-std::strong_ordering CoreTools::Lattice<OrderLToR>::operator<=>(const Lattice& rhs) const
-{
-    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
-
-    return sizes <=> rhs.sizes;
 }
 
 template <bool OrderLToR>
@@ -372,14 +356,13 @@ void CoreTools::Lattice<OrderLToR>::InternalReset(const Container& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (container.empty())
+    if (container.size() == 0)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("ÈÝÆ÷´óÐ¡Îª¿Õ"));
     }
 
     numElements = 1;
-    sizes.resize(container.size());
-    auto dimension = 0u;
+
     for (const auto& size : container)
     {
         if (size <= 0)
@@ -388,60 +371,60 @@ void CoreTools::Lattice<OrderLToR>::InternalReset(const Container& container)
         }
 
         numElements *= size;
-        sizes[dimension++] = size;
+        sizes.emplace_back(size);
     }
 }
 
 template <bool OrderLToR>
 template <typename First, typename... Successors>
 requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
-size_t CoreTools::Lattice<OrderLToR>::MetaGetIndexLToR(First first, Successors... successors) const
+int CoreTools::Lattice<OrderLToR>::MetaGetIndexLToR(First first, Successors... successors) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return static_cast<size_t>(first) + sizes[sizes.size() - 1 - sizeof...(Successors)] * MetaGetIndexLToR(successors...);
+    return gsl::narrow_cast<int>(first) + sizes.at(sizes.size() - 1 - sizeof...(Successors)) * MetaGetIndexLToR(successors...);
 }
 
 template <bool OrderLToR>
 template <typename Last>
 requires(std::is_integral_v<Last> && !std::is_same_v<Last, bool>)
-size_t CoreTools::Lattice<OrderLToR>::MetaGetIndexLToR(Last last) const
+int CoreTools::Lattice<OrderLToR>::MetaGetIndexLToR(Last last) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return static_cast<size_t>(last);
+    return gsl::narrow_cast<int>(last);
 }
 
 template <bool OrderLToR>
 template <typename Term, typename First, typename... Successors>
 requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
-size_t CoreTools::Lattice<OrderLToR>::MetaGetIndexRToL(Term t, First first, Successors... successors) const
+int CoreTools::Lattice<OrderLToR>::MetaGetIndexRToL(Term t, First first, Successors... successors) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto size = sizes[sizes.size() - sizeof...(Successors)];
+    const auto size = sizes.at(sizes.size() - sizeof...(Successors));
 
-    return MetaGetIndexRToL(size * static_cast<size_t>(first + t), successors...);
+    return MetaGetIndexRToL(size * gsl::narrow_cast<int>(first + t), successors...);
 }
 
 template <bool OrderLToR>
 template <typename Term, typename First>
 requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
-size_t CoreTools::Lattice<OrderLToR>::MetaGetIndexRToL(Term t, First first) const
+int CoreTools::Lattice<OrderLToR>::MetaGetIndexRToL(Term t, First first) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return static_cast<size_t>(first + t);
+    return gsl::narrow_cast<int>(first + t);
 }
 
 template <bool OrderLToR>
 template <typename First>
 requires(std::is_integral_v<First> && !std::is_same_v<First, bool>)
-size_t CoreTools::Lattice<OrderLToR>::MetaGetIndexRToL(First first) const
+int CoreTools::Lattice<OrderLToR>::MetaGetIndexRToL(First first) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return static_cast<size_t>(first);
+    return static_cast<int>(first);
 }
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_LATTICE_DETAIL_H

@@ -1,20 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:11)
+///	引擎测试版本：0.9.0.6 (2023/04/12 15:55)
 
 #include "LogMessagePrefixTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 #include "CoreTools/LogManager/LogFilterManager.h"
 #include "CoreTools/LogManager/LogLevelManager.h"
 #include "CoreTools/LogManager/LogMessagePrefix.h"
-#include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 CoreTools::LogMessagePrefixTesting::LogMessagePrefixTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -37,11 +38,11 @@ void CoreTools::LogMessagePrefixTesting::MainTest()
 
 void CoreTools::LogMessagePrefixTesting::TimestampTest()
 {
-    LogMessagePrefix prefix{ AppenderPrint::PrefixTimestamp, LogLevel::Debug, LogFilter::System };
+    const LogMessagePrefix prefix{ AppenderPrint::PrefixTimestamp, LogLevel::Debug, LogFilter::System };
 
-    auto logLevelDescribe = LogLevelManager::GetLogLevelDescribe(LogLevel::Debug);
-    auto logFilterDescribe = LogFilterManager::GetLogFilterDescribe(LogFilter::System);
-    auto prefixDescribe = prefix.GetPrefix();
+    const auto logLevelDescribe = LogLevelManager::GetLogLevelDescribe(LogLevel::Debug);
+    const auto logFilterDescribe = LogFilterManager::GetLogFilterDescribe(LogFilter::System);
+    const auto prefixDescribe = prefix.GetPrefix();
 
     ASSERT_EQUAL(prefixDescribe.find(logLevelDescribe), System::String::npos);
     ASSERT_EQUAL(prefixDescribe.find(logFilterDescribe), System::String::npos);
@@ -51,11 +52,11 @@ void CoreTools::LogMessagePrefixTesting::TimestampTest()
 
 void CoreTools::LogMessagePrefixTesting::LogLevelTest()
 {
-    LogMessagePrefix prefix{ AppenderPrint::PrefixLogLevel, LogLevel::Error, LogFilter::Rendering };
+    const LogMessagePrefix prefix{ AppenderPrint::PrefixLogLevel, LogLevel::Error, LogFilter::Rendering };
 
-    auto logLevelDescribe = LogLevelManager::GetLogLevelDescribe(LogLevel::Error);
-    auto logFilterDescribe = LogFilterManager::GetLogFilterDescribe(LogFilter::Rendering);
-    auto prefixDescribe = prefix.GetPrefix();
+    const auto logLevelDescribe = LogLevelManager::GetLogLevelDescribe(LogLevel::Error);
+    const auto logFilterDescribe = LogFilterManager::GetLogFilterDescribe(LogFilter::Rendering);
+    const auto prefixDescribe = prefix.GetPrefix();
 
     ASSERT_UNEQUAL(prefixDescribe.find(logLevelDescribe), System::String::npos);
     ASSERT_EQUAL(prefixDescribe.find(logFilterDescribe), System::String::npos);
@@ -63,11 +64,11 @@ void CoreTools::LogMessagePrefixTesting::LogLevelTest()
 
 void CoreTools::LogMessagePrefixTesting::LogFilterTest()
 {
-    LogMessagePrefix prefix{ AppenderPrint::PrefixLogFilterType, LogLevel::Fatal, LogFilter::CoreTools };
+    const LogMessagePrefix prefix{ AppenderPrint::PrefixLogFilterType, LogLevel::Fatal, LogFilter::CoreTools };
 
-    auto logLevelDescribe = LogLevelManager::GetLogLevelDescribe(LogLevel::Fatal);
-    auto logFilterDescribe = LogFilterManager::GetLogFilterDescribe(LogFilter::CoreTools);
-    auto prefixDescribe = prefix.GetPrefix();
+    const auto logLevelDescribe = LogLevelManager::GetLogLevelDescribe(LogLevel::Fatal);
+    const auto logFilterDescribe = LogFilterManager::GetLogFilterDescribe(LogFilter::CoreTools);
+    const auto prefixDescribe = prefix.GetPrefix();
 
     ASSERT_EQUAL(prefixDescribe.find(logLevelDescribe), System::String::npos);
     ASSERT_UNEQUAL(prefixDescribe.find(logFilterDescribe), System::String::npos);
@@ -75,11 +76,11 @@ void CoreTools::LogMessagePrefixTesting::LogFilterTest()
 
 void CoreTools::LogMessagePrefixTesting::NoPrefixTest()
 {
-    LogMessagePrefix prefixNone{ AppenderPrint::None, LogLevel::Info, LogFilter::Network };
+    const LogMessagePrefix prefixNone{ AppenderPrint::None, LogLevel::Info, LogFilter::Network };
 
     ASSERT_EQUAL(0, prefixNone.GetPrefixSize());
 
-    LogMessagePrefix prefixDisabled{ AppenderPrint::PrefixLogFilterType, LogLevel::Disabled, LogFilter::Mathematics };
+    const LogMessagePrefix prefixDisabled{ AppenderPrint::PrefixLogFilterType, LogLevel::Disabled, LogFilter::Mathematics };
 
     ASSERT_EQUAL(0, prefixDisabled.GetPrefixSize());
 }

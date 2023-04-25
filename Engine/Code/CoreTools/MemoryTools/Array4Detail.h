@@ -11,17 +11,20 @@
 #define CORE_TOOLS_MEMORY_TOOLS_ARRAY4_DETAIL_H
 
 #include "Array4.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include <gsl/util>
+
 template <typename T>
-CoreTools::Array4<T>::Array4(size_t bound0, size_t bound1, size_t bound2, size_t bound3)
+CoreTools::Array4<T>::Array4(int bound0, int bound1, int bound2, int bound3)
     : bound0{ bound0 },
       bound1{ bound1 },
       bound2{ bound2 },
       bound3{ bound3 },
-      objects(bound0 * bound1 * bound2 * bound3),
-      indirect1(bound1 * bound2 * bound3),
-      indirect2(bound2 * bound3),
+      objects(GetObjectSize(bound0, bound1, bound2, bound3)),
+      indirect1(GetObjectSize(bound1, bound2, bound3)),
+      indirect2(GetObjectSize(bound2, bound3)),
       indirect3(bound3)
 {
     SetPointers();
@@ -32,20 +35,32 @@ CoreTools::Array4<T>::Array4(size_t bound0, size_t bound1, size_t bound2, size_t
 template <typename T>
 void CoreTools::Array4<T>::SetPointers()
 {
-    for (auto bound3Index = 0u; bound3Index < bound3; ++bound3Index)
+    for (auto bound3Index = 0; bound3Index < bound3; ++bound3Index)
     {
-        auto indirect2Index = bound2 * bound3Index;
-        indirect3[bound3Index] = &indirect2[indirect2Index];
+        const auto indirect2Index = bound2 * bound3Index;
+        indirect3.at(bound3Index) = &indirect2.at(indirect2Index);
 
-        for (auto bound2Index = 0u; bound2Index < bound2; ++bound2Index)
+        for (auto bound2Index = 0; bound2Index < bound2; ++bound2Index)
         {
-            auto indirect1Index = bound0 * (bound2Index + indirect2Index);
-            indirect3[bound3Index][bound2Index] = &indirect1[indirect1Index];
+            const auto indirect1Index = bound1 * (bound2Index + indirect2Index);
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+            indirect3.at(bound3Index)[bound2Index] = &indirect1.at(indirect1Index);
+
+#include STSTEM_WARNING_POP
 
             for (auto bound1Index = 0; bound1Index < bound1; ++bound1Index)
             {
-                auto objectsIndex = bound0 * (bound1Index + indirect1Index);
-                indirect3[bound3Index][bound2Index][bound1Index] = &objects[objectsIndex];
+                const auto objectsIndex = bound0 * (bound1Index + indirect1Index);
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indirect3.at(bound3Index)[bound2Index][bound1Index] = &objects.at(objectsIndex);
+
+#include STSTEM_WARNING_POP
             }
         }
     }
@@ -56,10 +71,10 @@ void CoreTools::Array4<T>::SetPointers()
 template <typename T>
 bool CoreTools::Array4<T>::IsValid() const noexcept
 {
-    if (objects.size() == bound0 * bound1 * bound2 * bound3 &&
-        indirect1.size() == bound1 * bound2 * bound3 &&
-        indirect2.size() == bound2 * bound3 &&
-        indirect3.size() == bound3)
+    if (gsl::narrow_cast<int>(objects.size()) == bound0 * bound1 * bound2 * bound3 &&
+        gsl::narrow_cast<int>(indirect1.size()) == bound1 * bound2 * bound3 &&
+        gsl::narrow_cast<int>(indirect2.size()) == bound2 * bound3 &&
+        gsl::narrow_cast<int>(indirect3.size()) == bound3)
     {
         return true;
     }
@@ -72,7 +87,7 @@ bool CoreTools::Array4<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-size_t CoreTools::Array4<T>::GetBound0() const noexcept
+int CoreTools::Array4<T>::GetBound0() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -80,7 +95,7 @@ size_t CoreTools::Array4<T>::GetBound0() const noexcept
 }
 
 template <typename T>
-size_t CoreTools::Array4<T>::GetBound1() const noexcept
+int CoreTools::Array4<T>::GetBound1() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -88,7 +103,7 @@ size_t CoreTools::Array4<T>::GetBound1() const noexcept
 }
 
 template <typename T>
-size_t CoreTools::Array4<T>::GetBound2() const noexcept
+int CoreTools::Array4<T>::GetBound2() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -96,7 +111,7 @@ size_t CoreTools::Array4<T>::GetBound2() const noexcept
 }
 
 template <typename T>
-size_t CoreTools::Array4<T>::GetBound3() const noexcept
+int CoreTools::Array4<T>::GetBound3() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -104,19 +119,19 @@ size_t CoreTools::Array4<T>::GetBound3() const noexcept
 }
 
 template <typename T>
-T** const* CoreTools::Array4<T>::operator[](int cuboid) const noexcept
+T** const* CoreTools::Array4<T>::operator[](int cuboid) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return indirect3[cuboid];
+    return indirect3.at(cuboid);
 }
 
 template <typename T>
-T*** CoreTools::Array4<T>::operator[](int cuboid) noexcept
+T*** CoreTools::Array4<T>::operator[](int cuboid)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return OPERATOR_SQUARE_BRACKETS_TO_POINTER(T***, cuboid);
+    return indirect3.at(cuboid);
 }
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_ARRAY3_DETAIL_H

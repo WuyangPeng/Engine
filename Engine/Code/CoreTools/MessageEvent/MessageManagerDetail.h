@@ -31,7 +31,7 @@ bool CoreTools::MessageManager<EventSlot, EventType>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename EventSlot, typename EventType>
-uint64_t CoreTools::MessageManager<EventSlot, EventType>::Registered(MessageManagerEventType eventType, const SubclassSharedPtr& subclass, EventSlotPriorityType priority, CallbackMemberFunction callbackMemberFunction)
+int64_t CoreTools::MessageManager<EventSlot, EventType>::Registered(MessageManagerEventType eventType, const SubclassSharedPtr& subclass, EventSlotPriorityType priority, CallbackMemberFunction callbackMemberFunction)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

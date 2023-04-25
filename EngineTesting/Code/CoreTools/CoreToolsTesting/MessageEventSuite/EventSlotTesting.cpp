@@ -1,21 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 17:03)
+///	引擎测试版本：0.9.0.6 (2023/04/18 13:49)
 
 #include "EventSlotTesting.h"
 #include "Flags/EventPriorityFlags.h"
 #include "Detail/EventSubclass.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "CoreTools/MessageEvent/EventSlotDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
 
 CoreTools::EventSlotTesting::EventSlotTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -46,12 +45,12 @@ void CoreTools::EventSlotTesting::SlotTest()
 {
     constexpr auto value = 5;
 
-    EventSubclassSharedPtr eventSubclass{ make_shared<EventSubclass>(value) };
+    auto eventSubclass = std::make_shared<EventSubclass>(value);
 
     ASSERT_UNEQUAL_NULL_PTR(eventSubclass);
     ASSERT_EQUAL(eventSubclass->GetValue(), value);
 
-    constexpr EventPriority eventPriority{ EventPriority::High };
+    constexpr auto eventPriority = EventPriority::High;
 
     TestingType eventSlot{ eventSubclass, eventPriority, &EventInterface::EventFunction };
 
@@ -73,18 +72,18 @@ void CoreTools::EventSlotTesting::OperatorTest()
 {
     constexpr auto value = 5;
 
-    EventSubclassSharedPtr eventSubclass{ make_shared<EventSubclass>(value) };
+    const auto eventSubclass = std::make_shared<EventSubclass>(value);
 
     ASSERT_UNEQUAL_NULL_PTR(eventSubclass);
     ASSERT_EQUAL(eventSubclass->GetValue(), value);
 
-    constexpr EventPriority highEventPriority{ EventPriority::High };
-    constexpr EventPriority lowEventPriority{ EventPriority::Low };
+    constexpr auto highEventPriority = EventPriority::High;
+    constexpr auto lowEventPriority = EventPriority::Low;
 
-    TestingType firstEventSlot{ eventSubclass, highEventPriority, &EventInterface::EventFunction };
-    TestingType secondEventSlot{ eventSubclass, lowEventPriority, &EventInterface::EventFunction };
+    const TestingType eventSlot0{ eventSubclass, highEventPriority, &EventInterface::EventFunction };
+    const TestingType eventSlot1{ eventSubclass, lowEventPriority, &EventInterface::EventFunction };
 
-    ASSERT_LESS(secondEventSlot, firstEventSlot);
+    ASSERT_LESS(eventSlot1, eventSlot0);
 }
 
 void CoreTools::EventSlotTesting::UInt64PriorityTest()
@@ -93,13 +92,13 @@ void CoreTools::EventSlotTesting::UInt64PriorityTest()
 
     constexpr auto value = 5;
 
-    EventSubclassSharedPtr eventSubclass{ make_shared<EventSubclass>(value) };
+    const auto eventSubclass = std::make_shared<EventSubclass>(value);
 
     ASSERT_UNEQUAL_NULL_PTR(eventSubclass);
     ASSERT_EQUAL(eventSubclass->GetValue(), value);
 
-    UInt64TestingType firstEventSlot{ eventSubclass, 2, &EventInterface::EventFunction };
-    UInt64TestingType secondEventSlot{ eventSubclass, 1, &EventInterface::EventFunction };
+    const UInt64TestingType eventSlot0{ eventSubclass, 2, &EventInterface::EventFunction };
+    const UInt64TestingType eventSlot1{ eventSubclass, 1, &EventInterface::EventFunction };
 
-    ASSERT_LESS(secondEventSlot, firstEventSlot);
+    ASSERT_LESS(eventSlot1, eventSlot0);
 }

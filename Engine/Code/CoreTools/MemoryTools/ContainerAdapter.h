@@ -16,10 +16,10 @@
 
 namespace CoreTools
 {
-    template <typename T, size_t...>
+    template <typename T, int...>
     class ContainerAdapter;
 
-    template <typename T, size_t N>
+    template <typename T, int N>
     requires(N > 0)
     class ContainerAdapter<T, N>
     {
@@ -27,7 +27,7 @@ namespace CoreTools
         using ClassType = ContainerAdapter<T, N>;
 
         using value_type = T;
-        using size_type = size_t;
+        using size_type = int;
         using difference_type = ptrdiff_t;
         using pointer = T*;
         using const_pointer = const T*;
@@ -39,7 +39,7 @@ namespace CoreTools
         using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
     public:
-        explicit ContainerAdapter(T* elements = nullptr, size_t numElements = 0);
+        explicit ContainerAdapter(T* elements, int numElements = 0);
 
         ~ContainerAdapter() noexcept = default;
 
@@ -51,9 +51,9 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        void Reset(T* aElements, size_t numElements = 0) noexcept;
+        void Reset(T* aElements, int numElements = 0);
 
-        NODISCARD static size_t constexpr GetSize() noexcept
+        NODISCARD static int constexpr GetSize() noexcept
         {
             return N;
         }
@@ -61,26 +61,26 @@ namespace CoreTools
         NODISCARD T* GetData() noexcept;
         NODISCARD const T* GetData() const noexcept;
 
-        NODISCARD const T& operator[](size_t index) const;
-        NODISCARD T& operator[](size_t index);
+        NODISCARD const T& operator[](int index) const;
+        NODISCARD T& operator[](int index);
 
-        NODISCARD iterator begin();
-        NODISCARD const_iterator begin() const;
+        NODISCARD iterator begin() noexcept;
+        NODISCARD const_iterator begin() const noexcept;
 
-        NODISCARD iterator end();
-        NODISCARD const_iterator end() const;
+        NODISCARD iterator end() noexcept;
+        NODISCARD const_iterator end() const noexcept;
 
-        NODISCARD reverse_iterator rbegin();
-        NODISCARD const_reverse_iterator rbegin() const;
+        NODISCARD reverse_iterator rbegin() noexcept;
+        NODISCARD const_reverse_iterator rbegin() const noexcept;
 
-        NODISCARD reverse_iterator rend();
-        NODISCARD const_reverse_iterator rend() const;
+        NODISCARD reverse_iterator rend() noexcept;
+        NODISCARD const_reverse_iterator rend() const noexcept;
 
-        NODISCARD const_iterator cbegin() const;
-        NODISCARD const_iterator cend() const;
+        NODISCARD const_iterator cbegin() const noexcept;
+        NODISCARD const_iterator cend() const noexcept;
 
-        NODISCARD const_reverse_iterator crbegin() const;
-        NODISCARD const_reverse_iterator crend() const;
+        NODISCARD const_reverse_iterator crbegin() const noexcept;
+        NODISCARD const_reverse_iterator crend() const noexcept;
 
         void Fill(const T& value);
 
@@ -95,7 +95,7 @@ namespace CoreTools
         using ClassType = ContainerAdapter<T>;
 
         using value_type = T;
-        using size_type = size_t;
+        using size_type = int;
         using difference_type = ptrdiff_t;
         using pointer = T*;
         using const_pointer = const T*;
@@ -107,7 +107,7 @@ namespace CoreTools
         using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
     public:
-        explicit ContainerAdapter(T* elements = nullptr, size_t numElements = 0);
+        explicit ContainerAdapter(T* elements, int numElements = 0);
 
         ~ContainerAdapter() noexcept = default;
 
@@ -118,37 +118,36 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        void Reset(T* aElements, size_t aNumElements);
+        void Reset(T* aElements, int aNumElements);
 
-        NODISCARD size_t GetSize() const noexcept;
+        NODISCARD int GetSize() const noexcept;
 
         NODISCARD T* GetData() noexcept;
-
         NODISCARD const T* GetData() const noexcept;
 
-        NODISCARD NODISCARD const T& operator[](size_t index) const noexcept;
-        NODISCARD T& operator[](size_t index) noexcept;
+        NODISCARD const T& operator[](int index) const;
+        NODISCARD T& operator[](int index);
 
-        NODISCARD iterator begin();
-        NODISCARD const_iterator begin() const;
+        NODISCARD iterator begin() noexcept;
+        NODISCARD const_iterator begin() const noexcept;
 
-        NODISCARD iterator end();
-        NODISCARD const_iterator end() const;
+        NODISCARD iterator end() noexcept;
+        NODISCARD const_iterator end() const noexcept;
 
-        NODISCARD reverse_iterator rbegin();
-        NODISCARD const_reverse_iterator rbegin() const;
+        NODISCARD reverse_iterator rbegin() noexcept;
+        NODISCARD const_reverse_iterator rbegin() const noexcept;
 
-        NODISCARD reverse_iterator rend();
-        NODISCARD const_reverse_iterator rend() const;
+        NODISCARD reverse_iterator rend() noexcept;
+        NODISCARD const_reverse_iterator rend() const noexcept;
 
-        NODISCARD const_iterator cbegin() const;
-        NODISCARD const_iterator cend() const;
+        NODISCARD const_iterator cbegin() const noexcept;
+        NODISCARD const_iterator cend() const noexcept;
 
-        NODISCARD const_reverse_iterator crbegin() const;
-        NODISCARD const_reverse_iterator crend() const;
+        NODISCARD const_reverse_iterator crbegin() const noexcept;
+        NODISCARD const_reverse_iterator crend() const noexcept;
 
     private:
-        size_t numElements;
+        int numElements;
         T* elements;
     };
 }

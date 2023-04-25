@@ -145,7 +145,7 @@ void Rendering::ParticlesImpl::Load(CoreTools::BufferSource& source)
     sizes.resize(size);
 
     source.ReadAggregateContainer(size, positions);
-    sizes = source.ReadVectorWithNumber<float>(size);
+    sizes = source.ReadVectorUseNumber<float>(size);
 
     source.Read(sizeAdjust);
     source.Read(numActive);

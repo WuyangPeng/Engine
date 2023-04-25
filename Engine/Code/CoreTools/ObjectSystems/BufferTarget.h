@@ -33,9 +33,11 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        // 函数写入数组有两种形式：WithNumber和WithoutNumber。
-        // 假设数组数量为elementsNumber，WithNumber表明写elementsNumber到缓冲区，WithoutNumber表示不写elementsNumber到缓冲区。
-        // array容器不写入数组的数量。
+        /// 函数写入数组有两种形式：WithNumber和WithoutNumber。
+        /// 假设数组数量为elementsNumber，
+        /// WithNumber表明写elementsNumber到缓冲区，
+        /// WithoutNumber表示不写elementsNumber到缓冲区。
+        /// array容器不写入数组的数量。
 
         // 这些模板函数是集合类型。该函数必须被特化，因为它没有提供一个默认的实现。
         template <typename T>
@@ -67,7 +69,7 @@ namespace CoreTools
         void WriteObjectAssociatedContainer(const std::array<T, Size>& objects);
 
         // 写入bool值为4字节。
-        void Write(const bool datum);
+        void Write(bool datum);
 
         template <typename T>
         void WriteBoolContainerWithNumber(const T& objects);
@@ -91,6 +93,9 @@ namespace CoreTools
         template <int Size>
         void WriteContainer(const std::array<std::string, Size>& objects);
 
+        template <int Size>
+        void WriteContainer(const std::array<const char*, Size>& objects);
+
         // 原生数据写入函数。
         template <typename T>
         void Write(T datum);
@@ -106,7 +111,7 @@ namespace CoreTools
 
         // 写入枚举值。
         template <typename T>
-        void WriteEnum(const T datum);
+        void WriteEnum(T datum);
 
         template <typename T>
         void WriteEnumContainerWithNumber(const T& objects);

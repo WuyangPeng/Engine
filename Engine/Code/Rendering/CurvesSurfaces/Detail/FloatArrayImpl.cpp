@@ -35,7 +35,7 @@ void Rendering::FloatArrayImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    elements = source.ReadVectorWithoutNumber<float>();
+    elements = source.ReadVectorNotUseNumber<float>();
 }
 
 void Rendering::FloatArrayImpl::Save(CoreTools::BufferTarget& target) const

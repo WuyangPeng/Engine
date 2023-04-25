@@ -22,4 +22,4 @@ CoreTools::BufferOutStream::BufferOutStream(const OutTopLevel& topLevel)
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, BufferOutStream)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferOutStream, GetBufferOutStreamInformation, CoreTools::FileBufferSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferOutStream, GetBufferOutStreamInformation, CoreTools::ConstFileBufferSharedPtr)

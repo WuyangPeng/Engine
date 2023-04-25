@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 11:09)
+///	引擎测试版本：0.9.0.6 (2023/04/12 14:19)
 
 #include "LogAppenderIOManagerTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -23,10 +23,7 @@
 #include "CoreTools/LogManager/Logger.h"
 #include "CoreTools/Time/CustomTime.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
-using std::ostream;
-using std::string;
-using std::wstring;
+
 using namespace std::literals;
 
 namespace
@@ -37,13 +34,11 @@ namespace
 
     constexpr auto integerTest = 3;
     const auto stringTest = "stringTest"s;
-    const auto wstringTest = L"wstringTest"s;
-    const CoreTools::Error errorTest{ CoreTools::FunctionDescribed("", __FILE__, __LINE__), System::WindowError::NoError, SYSTEM_TEXT("errorTest"s) };
+    const auto wStringTest = L"wstringTest"s;
+    const CoreTools::Error errorTest{ CoreTools::FunctionDescribed{ "", __FILE__, __LINE__ }, System::WindowError::NoError, SYSTEM_TEXT("errorTest"s) };
     const auto promptMessage = SYSTEM_TEXT("本次断言触发只是测试，并没有错误产生。"s);
     const auto cancelMessage = SYSTEM_TEXT("请点击“否”取消。"s);
     const auto attentionMessage = SYSTEM_TEXT("请注意断言文件名及行号是否显示正确！"s);
-    const auto formatMessage = SYSTEM_TEXT("格式化数字%1%%2%"s);
-    const auto formatResultMessage = SYSTEM_TEXT("格式化数字1022"s);
 }
 
 CoreTools::LogAppenderIOManagerTesting::LogAppenderIOManagerTesting(const OStreamShared& stream)
@@ -51,7 +46,7 @@ CoreTools::LogAppenderIOManagerTesting::LogAppenderIOManagerTesting(const OStrea
       logAppenderIOManagerTestingName{ gAppenderTestingPathName + gLogAppenderIOManageTestingFileName + SYSTEM_TEXT("("s) + CustomTime::GetSystemTimeDescribe() + SYSTEM_TEXT(")"s) },
       logAppenderIOManagerTestingFullName{ logAppenderIOManagerTestingName + SYSTEM_TEXT("."s) + gExtensionName }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_0;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, LogAppenderIOManagerTesting)
@@ -65,8 +60,7 @@ void CoreTools::LogAppenderIOManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(IntegerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StringTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(Error1Test);
-    ASSERT_NOT_THROW_EXCEPTION_0(FormatTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ExceptionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(LogAppenderIOManageSignTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FileContentTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DeleteFileTest);
@@ -74,37 +68,61 @@ void CoreTools::LogAppenderIOManagerTesting::MainTest()
 
 void CoreTools::LogAppenderIOManagerTesting::IntegerTest()
 {
-    auto appenderManager = GetAppenderManager();
+    const auto appenderManager = GetAppenderManager();
 
-    MAYBE_UNUSED auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
+    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
+
+    LogMessage logMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+
+    logMessage << integerTest;
+
+    manager << logMessage;
 }
 
 void CoreTools::LogAppenderIOManagerTesting::StringTest()
 {
-    auto appenderManager = GetAppenderManager();
+    const auto appenderManager = GetAppenderManager();
 
-    MAYBE_UNUSED auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
+    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
+
+    LogMessage logMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+
+    logMessage << stringTest
+               << wStringTest;
+
+    manager << logMessage;
 }
 
-void CoreTools::LogAppenderIOManagerTesting::Error1Test()
+void CoreTools::LogAppenderIOManagerTesting::ExceptionTest()
 {
-    auto appenderManager = GetAppenderManager();
+    const auto appenderManager = GetAppenderManager();
 
-    MAYBE_UNUSED auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
-}
+    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 
-void CoreTools::LogAppenderIOManagerTesting::FormatTest()
-{
-    auto appenderManager = GetAppenderManager();
+    LogMessage logMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
 
-    MAYBE_UNUSED auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
+    logMessage << errorTest;
+
+    manager << logMessage;
 }
 
 void CoreTools::LogAppenderIOManagerTesting::LogAppenderIOManageSignTest()
 {
-    auto appenderManager = GetAppenderManager();
+    const auto appenderManager = GetAppenderManager();
 
-    MAYBE_UNUSED auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
+    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
+
+    LogMessage logMessage{ LogLevel::Trace, LogFilter::CoreTools, CORE_TOOLS_FUNCTION_DESCRIBED };
+
+    logMessage << promptMessage
+               << LogAppenderIOManageSign::AlwaysConsole
+               << SYSTEM_TEXT(' ')
+               << cancelMessage
+               << SYSTEM_TEXT('\n')
+               << attentionMessage
+               << LogAppenderIOManageSign::TriggerAssert;
+
+    manager << logMessage;
 }
 
 void CoreTools::LogAppenderIOManagerTesting::FileContentTest()
@@ -116,9 +134,8 @@ void CoreTools::LogAppenderIOManagerTesting::FileContentTest()
 
     ASSERT_UNEQUAL(fileContent.find(System::ToString(integerTest)), System::String::npos);
     ASSERT_UNEQUAL(fileContent.find(StringConversion::MultiByteConversionStandard(stringTest)), System::String::npos);
-    ASSERT_UNEQUAL(fileContent.find(StringConversion::WideCharConversionStandard(wstringTest)), System::String::npos);
+    ASSERT_UNEQUAL(fileContent.find(StringConversion::WideCharConversionStandard(wStringTest)), System::String::npos);
     ASSERT_UNEQUAL(fileContent.find(errorTest.GetError()), System::String::npos);
-    ASSERT_UNEQUAL(fileContent.find(formatResultMessage), System::String::npos);
     ASSERT_UNEQUAL(fileContent.find(promptMessage + SYSTEM_TEXT(' ') + cancelMessage + SYSTEM_TEXT('\n') + attentionMessage), System::String::npos);
 }
 
@@ -129,9 +146,9 @@ void CoreTools::LogAppenderIOManagerTesting::DeleteFileTest()
 
 CoreTools::LogAppenderIOManagerTesting::AppenderManagerSharedPtr CoreTools::LogAppenderIOManagerTesting::GetAppenderManager()
 {
-    Appender appender{ SYSTEM_TEXT("Log"s), gLogAppenderIOManageTestingFileName, AppenderPrint::All, LogLevel::Trace, 100000, true, SYSTEM_TEXT("log"s) };
+    const Appender appender{ SYSTEM_TEXT("Log"s), gLogAppenderIOManageTestingFileName, AppenderPrint::All, LogLevel::Trace, 100000, true, SYSTEM_TEXT("log"s) };
 
-    Logger logger{ LogFilter::CoreTools, LogLevel::Trace };
+    const Logger logger{ LogFilter::CoreTools, LogLevel::Trace };
 
     auto manager = AppenderManager::Create();
 
@@ -139,4 +156,13 @@ CoreTools::LogAppenderIOManagerTesting::AppenderManagerSharedPtr CoreTools::LogA
     MAYBE_UNUSED auto value1 = manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender);
 
     return manager;
+}
+
+void CoreTools::LogAppenderIOManagerTesting::SetAppenderManagerTest()
+{
+    const auto appenderManager = GetAppenderManager();
+
+    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
+
+    manager.SetAppenderManager(appenderManager);
 }

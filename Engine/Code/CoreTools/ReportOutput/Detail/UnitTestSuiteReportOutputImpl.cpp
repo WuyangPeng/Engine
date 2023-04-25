@@ -49,7 +49,7 @@ void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestResult(int passedNumber,
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto manager = GetLogConsoleTextColorsManager(failedNumber, errorNumber);
+    const auto logLevel = GetLogLevel(failedNumber, errorNumber);
 
     std::stringstream ss{};
 
@@ -60,15 +60,15 @@ void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestResult(int passedNumber,
        << std::setw(characterWidth) << std::right << "´íÎó: "
        << std::setw(characterWidth) << std::left << errorNumber;
 
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), ss.str());
+    LOG_ASYNCHRONOUS_SINGLETON.Registered(GetStream(), ss.str(), logLevel);
 }
 
-CoreTools::UnitTestSuiteReportOutputImpl::LogConsoleTextColorsManagerSharedPtr CoreTools::UnitTestSuiteReportOutputImpl::GetLogConsoleTextColorsManager(int failedNumber, int errorNumber)
+CoreTools::LogLevel CoreTools::UnitTestSuiteReportOutputImpl::GetLogLevel(int failedNumber, int errorNumber) noexcept
 {
     if (0 < errorNumber)
-        return std::make_shared<LogConsoleTextColorsManager>(GetStream(), LogLevel::Fatal);
+        return LogLevel::Fatal;
     else if (0 < failedNumber)
-        return std::make_shared<LogConsoleTextColorsManager>(GetStream(), LogLevel::Error);
+        return LogLevel::Error;
     else
-        return nullptr;
+        return LogLevel::Trace;
 }

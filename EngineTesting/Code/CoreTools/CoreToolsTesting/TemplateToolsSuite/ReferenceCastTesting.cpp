@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 19:05)
+///	引擎测试版本：0.9.0.6 (2023/04/25 13:57)
 
 #include "ReferenceCastTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/ReferenceCastDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::string;
 
 CoreTools::ReferenceCastTesting::ReferenceCastTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -34,16 +33,16 @@ void CoreTools::ReferenceCastTesting::MainTest()
 
 void CoreTools::ReferenceCastTesting::CastTest()
 {
-    constexpr auto firstValue = 2;
+    constexpr auto value0 = 2;
 
-    ASSERT_EQUAL(ReferenceCast<int>(firstValue), firstValue);
+    ASSERT_EQUAL(ReferenceCast<int>(value0), value0);
 
-    string secondValue{ "secondValue" };
-    auto thirdValue = static_cast<string&>(ReferenceCast<string>(secondValue));
+    std::string value1{ "value1" };
+    auto value2 = static_cast<std::string&>(ReferenceCast{ value1 });
 
-    ASSERT_EQUAL(thirdValue, secondValue);
+    ASSERT_EQUAL(value2, value1);
 
-    string fourthValue{ ReferenceCast<string>(thirdValue) };
+    const std::string value3{ ReferenceCast{ value2 } };
 
-    ASSERT_EQUAL(thirdValue, fourthValue);
+    ASSERT_EQUAL(value2, value3);
 }

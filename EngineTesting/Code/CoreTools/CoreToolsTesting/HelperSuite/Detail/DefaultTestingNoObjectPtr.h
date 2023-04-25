@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/16 20:43)
+///	引擎测试版本：0.9.0.6 (2023/04/11 20:52)
 
 #ifndef CORE_TOOLS_HELPER_SUITE_DEFAULT_TESTING_NO_OBJECT_PTR_H
 #define CORE_TOOLS_HELPER_SUITE_DEFAULT_TESTING_NO_OBJECT_PTR_H
@@ -16,7 +16,7 @@
 
 namespace CoreTools
 {
-    class DefaultTestingNoObjectPtr : public AbstractObject
+    class DefaultTestingNoObjectPtr final : public AbstractObject
     {
     public:
         using DefaultTestingNoObjectPtrImpl = TestingNoObjectPtrImpl;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/03/03 09:19)
+///	引擎测试版本：0.9.0.6 (2023/04/11 20:44)
 
 #include "FileHandleHelperTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -65,7 +65,7 @@ void CoreTools::FileHandleHelperTesting::AppendToFileTest()
 
     FileHandleHelper::AppendToFile(fileHandleHelperName, boost::numeric_cast<int>(content.size()), content.c_str());
 
-    auto buffer = FileHandleHelper::LoadFromFile(fileHandleHelperName);
+    const auto buffer = FileHandleHelper::LoadFromFile(fileHandleHelperName);
 
     const std::string bufferContent{ buffer.begin(), buffer.end() };
 
@@ -81,7 +81,7 @@ void CoreTools::FileHandleHelperTesting::SaveIntoFileTest()
 
     FileHandleHelper::SaveIntoFile(fileHandleHelperName, boost::numeric_cast<int>(content.size()), content.c_str());
 
-    auto buffer = FileHandleHelper::LoadFromFile(fileHandleHelperName);
+    const auto buffer = FileHandleHelper::LoadFromFile(fileHandleHelperName);
 
     const std::string bufferContent{ buffer.begin(), buffer.end() };
 

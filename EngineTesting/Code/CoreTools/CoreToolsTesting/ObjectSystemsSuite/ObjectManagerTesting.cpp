@@ -1,28 +1,29 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 15:42)
+///	引擎测试版本：0.9.0.6 (2023/04/24 14:30)
 
 #include "ObjectManagerTesting.h"
 #include "Detail/BoolObject.h"
 #include "Detail/EnumObject.h"
 #include "Detail/ErrorObject.h"
 #include "Detail/IntObject.h"
-#include "CoreTools/ObjectSystems/NullObject.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
+#include "CoreTools/ObjectSystems/NullObject.h"
 #include "CoreTools/ObjectSystems/Object.h"
 #include "CoreTools/ObjectSystems/ObjectLink.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegister.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 CoreTools::ObjectManagerTesting::ObjectManagerTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {

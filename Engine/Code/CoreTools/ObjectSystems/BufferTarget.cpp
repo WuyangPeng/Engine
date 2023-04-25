@@ -25,12 +25,12 @@ CoreTools::BufferTarget::BufferTarget(int bufferSize, const ConstObjectRegisterS
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, BufferTarget)
 
-void CoreTools::BufferTarget::Write(const bool datum)
+void CoreTools::BufferTarget::Write(bool datum)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     const uint32_t value{ datum ? 0xFFFFFFFFu : 0u };
-    Write(CoreTools::GetStreamSize(value), &value);
+    Write(GetStreamSize(value), &value);
 }
 
 void CoreTools::BufferTarget::Write(const char* datum)

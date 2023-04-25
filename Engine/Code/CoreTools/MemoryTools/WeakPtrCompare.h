@@ -12,6 +12,8 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "SharedPtrCompare.h"
+
 #include <memory>
 
 namespace CoreTools
@@ -19,16 +21,18 @@ namespace CoreTools
     template <typename T>
     struct WeakPtrEqual final
     {
-        bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const
+        bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const noexcept
         {
-            return (lhs ? (rhs ? *lhs == *rhs : false) : !rhs);
+            auto lhsSharedPtr = lhs.lock();
+            auto rhsSharedPtr = rhs.lock();
+            return SharedPtrEqual<T>()(lhsSharedPtr, rhsSharedPtr);
         }
     };
 
     template <typename T>
     struct WeakPtrUnequal final
     {
-        bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const
+        bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const noexcept
         {
             return !WeakPtrEqual<T>()(lhs, rhs);
         }
@@ -37,16 +41,18 @@ namespace CoreTools
     template <typename T>
     struct WeakPtrLess final
     {
-        bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const
+        bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const noexcept
         {
-            return (rhs ? (!lhs || *lhs < *rhs) : false);
+            auto lhsSharedPtr = lhs.lock();
+            auto rhsSharedPtr = rhs.lock();
+            return SharedPtrLess<T>()(lhsSharedPtr, rhsSharedPtr);
         }
     };
 
     template <typename T>
     struct WeakPtrLessEqual final
     {
-        bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const
+        bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const noexcept
         {
             return !WeakPtrLess<T>()(rhs, lhs);
         }
@@ -55,7 +61,7 @@ namespace CoreTools
     template <typename T>
     struct WeakPtrGreater final
     {
-        bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const
+        bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const noexcept
         {
             return WeakPtrLess<T>()(rhs, lhs);
         }
@@ -64,7 +70,7 @@ namespace CoreTools
     template <typename T>
     struct WeakPtrGreaterEqual final
     {
-        bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const
+        bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const noexcept
         {
             return !WeakPtrLess<T>()(lhs, rhs);
         }

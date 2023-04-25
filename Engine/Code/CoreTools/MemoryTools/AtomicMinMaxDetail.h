@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename T>
-T CoreTools::AtomicMin(std::atomic<T>& atomic, const T& value)
+T CoreTools::AtomicMin(std::atomic<T>& atomic, const T& value) noexcept
 {
     T initial{};
     T min{};
@@ -30,7 +30,7 @@ T CoreTools::AtomicMin(std::atomic<T>& atomic, const T& value)
 }
 
 template <typename T>
-T CoreTools::AtomicMax(std::atomic<T>& atomic, const T& value)
+T CoreTools::AtomicMax(std::atomic<T>& atomic, const T& value) noexcept
 {
     T initial{};
     T max{};

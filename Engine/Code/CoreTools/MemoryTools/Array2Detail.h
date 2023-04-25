@@ -14,6 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
+#include <gsl/util>
+
 template <typename T>
 CoreTools::Array2<T>::Array2() noexcept
     : bound0{}, bound1{}, objects{}, indirect{}
@@ -22,8 +24,8 @@ CoreTools::Array2<T>::Array2() noexcept
 }
 
 template <typename T>
-CoreTools::Array2<T>::Array2(size_t bound0, size_t bound1)
-    : bound0{ bound0 }, bound1{ bound1 }, objects(bound0 * bound1), indirect(bound1)
+CoreTools::Array2<T>::Array2(int bound0, int bound1)
+    : bound0{ bound0 }, bound1{ bound1 }, objects(GetObjectSize(bound0, bound1)), indirect(bound1)
 {
     SetPointers();
 
@@ -33,10 +35,10 @@ CoreTools::Array2<T>::Array2(size_t bound0, size_t bound1)
 template <typename T>
 void CoreTools::Array2<T>::SetPointers()
 {
-    for (auto bound1Index = 0u; bound1Index < bound1; ++bound1Index)
+    for (auto bound1Index = 0; bound1Index < bound1; ++bound1Index)
     {
         const auto objectsIndex = bound0 * bound1Index;
-        indirect.at(bound1Index) = &objects.at(bound1Index);
+        indirect.at(bound1Index) = &objects.at(objectsIndex);
     }
 }
 
@@ -45,8 +47,8 @@ void CoreTools::Array2<T>::SetPointers()
 template <typename T>
 bool CoreTools::Array2<T>::IsValid() const noexcept
 {
-    if (objects.size() == bound0 * bound1 &&
-        indirect.size() == bound1)
+    if (gsl::narrow_cast<int>(objects.size()) == bound0 * bound1 &&
+        gsl::narrow_cast<int>(indirect.size()) == bound1)
     {
         return true;
     }
@@ -59,7 +61,7 @@ bool CoreTools::Array2<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-size_t CoreTools::Array2<T>::GetBound0() const noexcept
+int CoreTools::Array2<T>::GetBound0() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -67,7 +69,7 @@ size_t CoreTools::Array2<T>::GetBound0() const noexcept
 }
 
 template <typename T>
-size_t CoreTools::Array2<T>::GetBound1() const noexcept
+int CoreTools::Array2<T>::GetBound1() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -75,15 +77,15 @@ size_t CoreTools::Array2<T>::GetBound1() const noexcept
 }
 
 template <typename T>
-T const* CoreTools::Array2<T>::operator[](int row) const noexcept
+const T* CoreTools::Array2<T>::operator[](int row) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return indirect[row];
+    return indirect.at(row);
 }
 
 template <typename T>
-T* CoreTools::Array2<T>::operator[](int row) noexcept
+T* CoreTools::Array2<T>::operator[](int row)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

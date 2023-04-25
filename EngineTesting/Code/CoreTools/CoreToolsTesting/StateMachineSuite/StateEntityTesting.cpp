@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 11:15)
+///	引擎测试版本：0.9.0.6 (2023/04/25 10:56)
 
 #include "StateEntityTesting.h"
 #include "Detail/EmptyStates.h"
@@ -21,6 +21,7 @@
 #include "CoreTools/StateMachineManager/StateDetail.h"
 #include "CoreTools/StateMachineManager/StateMachineBaseDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 CoreTools::StateEntityTesting::StateEntityTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -45,55 +46,55 @@ void CoreTools::StateEntityTesting::MainTest()
 
 void CoreTools::StateEntityTesting::PlayerTest()
 {
-    auto currentState = State<PlayerEntity>::MakeState<EmptyStates>();
-    auto globalState = State<PlayerEntity>::MakeState<GlobalStates>();
-    auto playerEntity = ENTITY_MANAGER_SINGLETON.MakeEntity<PlayerEntity>(currentState, globalState);
+    auto currentState0 = State<PlayerEntity>::MakeState<EmptyStates>();
+    auto globalState0 = State<PlayerEntity>::MakeState<GlobalStates>();
+    auto playerEntity = ENTITY_MANAGER_SINGLETON.MakeEntity<PlayerEntity>(currentState0, globalState0);
 
-    auto secondCurrentState = playerEntity->GetCurrentState();
-    auto secondGlobalState = playerEntity->GetGlobalState();
+    auto currentState1 = playerEntity->GetCurrentState();
+    auto globalState1 = playerEntity->GetGlobalState();
 
-    ASSERT_TRUE(secondCurrentState->IsExactly(EmptyStates::GetCurrentRttiType()));
-    ASSERT_TRUE(secondGlobalState->IsExactly(GlobalStates::GetCurrentRttiType()));
+    ASSERT_TRUE(currentState1->IsExactly(EmptyStates::GetCurrentRttiType()));
+    ASSERT_TRUE(globalState1->IsExactly(GlobalStates::GetCurrentRttiType()));
 
-    Telegram<States> firstTelegram{ 1, States::Open, 0 };
+    Telegram telegram0{ 1, States::Open, 0 };
 
-    MAYBE_UNUSED const auto value0 = playerEntity->EventFunction(firstTelegram);
+    MAYBE_UNUSED const auto value0 = playerEntity->EventFunction(telegram0);
 
     ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(OpenStates::GetCurrentRttiType()));
 
-    Telegram<States> secondTelegram{ 1, States::Stopped, 0 };
+    Telegram telegram1{ 1, States::Stopped, 0 };
 
-    MAYBE_UNUSED const auto value1 = playerEntity->EventFunction(secondTelegram);
+    MAYBE_UNUSED const auto value1 = playerEntity->EventFunction(telegram1);
 
     ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(StoppedStates::GetCurrentRttiType()));
 
-    Telegram<States> thirdTelegram{ 1, States::Playing, 0 };
+    Telegram telegram2{ 1, States::Playing, 0 };
 
-    MAYBE_UNUSED const auto value2 = playerEntity->EventFunction(thirdTelegram);
+    MAYBE_UNUSED const auto value2 = playerEntity->EventFunction(telegram2);
 
     ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(PlayingStates::GetCurrentRttiType()));
 
-    Telegram<States> fourthTelegram{ 1, States::Paused, 0 };
+    Telegram telegram3{ 1, States::Paused, 0 };
 
-    MAYBE_UNUSED const auto value3 = playerEntity->EventFunction(fourthTelegram);
+    MAYBE_UNUSED const auto value3 = playerEntity->EventFunction(telegram3);
 
     ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(PausedStates::GetCurrentRttiType()));
 
-    Telegram<States> fifthTelegram{ 1, States::Stopped, 0 };
+    Telegram telegram4{ 1, States::Stopped, 0 };
 
-    MAYBE_UNUSED const auto value4 = playerEntity->EventFunction(fifthTelegram);
+    MAYBE_UNUSED const auto value4 = playerEntity->EventFunction(telegram4);
 
     ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(StoppedStates::GetCurrentRttiType()));
 
-    Telegram<States> sixthTelegram{ 1, States::Empty, 0 };
+    Telegram telegram5{ 1, States::Empty, 0 };
 
-    MAYBE_UNUSED const auto value5 = playerEntity->EventFunction(sixthTelegram);
+    MAYBE_UNUSED const auto value5 = playerEntity->EventFunction(telegram5);
 
     ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(EmptyStates::GetCurrentRttiType()));
 
-    Telegram<States> seventhTelegram{ 1, States::Previous, 0 };
+    Telegram telegram6{ 1, States::Previous, 0 };
 
-    MAYBE_UNUSED const auto value6 = playerEntity->EventFunction(seventhTelegram);
+    MAYBE_UNUSED const auto value6 = playerEntity->EventFunction(telegram6);
 
     ASSERT_TRUE(playerEntity->GetCurrentState()->IsExactly(StoppedStates::GetCurrentRttiType()));
 }

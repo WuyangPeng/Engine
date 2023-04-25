@@ -26,7 +26,7 @@ CoreTools::IFStreamManagerImpl::IFStreamManagerImpl(const String& fileName)
 {
     if (!iStream)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("打开文件"s) + fileName + SYSTEM_TEXT("失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("打开文件"s) + fileName + SYSTEM_TEXT("失败！"s))
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;

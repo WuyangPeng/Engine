@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 18:56)
+///	引擎测试版本：0.9.0.6 (2023/04/13 11:20)
 
 #include "TestingInformationHelperTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -13,6 +13,7 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MainFunctionHelper/TestingInformationHelper.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 CoreTools::TestingInformationHelperTesting::TestingInformationHelperTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -34,21 +35,21 @@ void CoreTools::TestingInformationHelperTesting::MainTest()
 
 void CoreTools::TestingInformationHelperTesting::InformationTest()
 {
-    auto testingInformationHelper = TestingInformationHelper::Create();
+    const auto testingInformationHelper = TestingInformationHelper::Create();
 
     ASSERT_LESS(0, testingInformationHelper.GetLoopCount("mainFunctionHelperSuite", "TestingInformationHelperTesting"));
 }
 
 void CoreTools::TestingInformationHelperTesting::SuiteExceptionTest()
 {
-    auto testingInformationHelper = TestingInformationHelper::Create();
+    const auto testingInformationHelper = TestingInformationHelper::Create();
 
     ASSERT_LESS(0, testingInformationHelper.GetLoopCount("errorSuite", "errorTesting"));
 }
 
 void CoreTools::TestingInformationHelperTesting::TestingExceptionTest()
 {
-    auto testingInformationHelper = TestingInformationHelper::Create();
+    const auto testingInformationHelper = TestingInformationHelper::Create();
 
     ASSERT_LESS(0, testingInformationHelper.GetLoopCount("mainFunctionHelperSuite", "errorTesting"));
 }

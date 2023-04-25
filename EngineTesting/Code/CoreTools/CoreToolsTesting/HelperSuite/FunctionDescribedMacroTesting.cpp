@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.2 (2023/02/05 15:12)
+///	引擎测试版本：0.9.0.6 (2023/04/11 21:08)
 
 #include "FunctionDescribedMacroTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -35,7 +35,7 @@ void CoreTools::FunctionDescribedMacroTesting::FunctionDescribedTest()
 {
     constexpr auto line = 38;
 
-    const FunctionDescribed functionDescribed{ CORE_TOOLS_FUNCTION_DESCRIBED };
+    const auto functionDescribed = CORE_TOOLS_FUNCTION_DESCRIBED;
 
     std::string currentFunction{ functionDescribed.GetCurrentFunction() };
     std::string fileName{ functionDescribed.GetFileName() };

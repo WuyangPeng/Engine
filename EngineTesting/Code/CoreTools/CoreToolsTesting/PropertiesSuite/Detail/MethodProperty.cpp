@@ -1,20 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 13:42)
+///	引擎测试版本：0.9.0.6 (2023/04/25 10:11)
 
 #include "MethodProperty.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-using std::string;
-
 CoreTools::MethodProperty::MethodProperty() noexcept
-    : firstValue{ 0 }, getType{}, setType{}, getSetType{}, getExternalType{}, setExternalType{}, getSetExternalType{}
+    : getType{}, setType{}, getSetType{}, getExternalType{}, setExternalType{}, getSetExternalType{}, value{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -31,18 +29,18 @@ ptrdiff_t CoreTools::MethodProperty::FirstValueSetOffset() noexcept
     return offsetof(ClassType, setType);
 }
 
-const int& CoreTools::MethodProperty::GetFirstValue() const noexcept
+const int& CoreTools::MethodProperty::GetValue() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return firstValue;
+    return value;
 }
 
-void CoreTools::MethodProperty::SetFirstValue(const int& value) noexcept
+void CoreTools::MethodProperty::SetValue(const int& aValue) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    firstValue = value;
+    value = aValue;
 }
 
 ptrdiff_t CoreTools::MethodProperty::FirstValueGetSetOffset() noexcept

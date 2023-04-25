@@ -10,11 +10,12 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "FileBufferImpl.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-CoreTools::FileBufferImpl::FileBufferImpl(size_t count)
+CoreTools::FileBufferImpl::FileBufferImpl(int count)
     : buffer(count)
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -36,11 +37,11 @@ char* CoreTools::FileBufferImpl::GetBufferBegin() noexcept
     return NON_CONST_MEMBER_CALL_CONST_MEMBER(char*, GetBufferBegin);
 }
 
-size_t CoreTools::FileBufferImpl::GetSize() const noexcept
+int CoreTools::FileBufferImpl::GetSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return buffer.size();
+    return boost::numeric_cast<int>(buffer.size());
 }
 
 CoreTools::FileBufferImpl::BufferTypeConstIter CoreTools::FileBufferImpl::begin() const noexcept

@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 13:54)
+///	引擎测试版本：0.9.0.6 (2023/04/11 18:05)
 
 #include "MinHeapRecordTesting.h"
 #include "CoreTools/DataTypes/MinHeapRecordDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 CoreTools::MinHeapRecordTesting::MinHeapRecordTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -56,7 +57,7 @@ void CoreTools::MinHeapRecordTesting::IntegerTest()
 
 void CoreTools::MinHeapRecordTesting::DoubleTest()
 {
-    const MinHeapRecord<int, double> minHeapRecord{ 1, 2, 5.0 };
+    const MinHeapRecord minHeapRecord{ 1, 2, 5.0 };
 
     ASSERT_APPROXIMATE(minHeapRecord.GetValue(), 5.0, 1.0e-10);
     ASSERT_EQUAL(minHeapRecord.GetUniqueIndex(), 1);

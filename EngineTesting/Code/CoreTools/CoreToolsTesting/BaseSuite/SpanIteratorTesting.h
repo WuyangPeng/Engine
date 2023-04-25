@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/02/23 16:38)
+///	引擎测试版本：0.9.0.6 (2023/04/10 19:17)
 
 #ifndef CORE_TOOLS_BASE_SUITE_SPAN_ITERATOR_TESTING_H
 #define CORE_TOOLS_BASE_SUITE_SPAN_ITERATOR_TESTING_H
@@ -35,6 +35,7 @@ namespace CoreTools
         void IncreaseTest();
         void SubtractionTest();
         void IterSwapTest();
+        void ConstTest();
     };
 }
 

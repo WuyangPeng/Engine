@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/03/01 15:13)
+///	引擎测试版本：0.9.0.6 (2023/04/11 19:34)
 
 #ifndef CORE_TOOLS_EXCEPTION_SUITE_GAME_ERROR_TESTING_H
 #define CORE_TOOLS_EXCEPTION_SUITE_GAME_ERROR_TESTING_H

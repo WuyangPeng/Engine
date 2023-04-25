@@ -1,19 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 17:03)
+///	引擎测试版本：0.9.0.6 (2023/04/18 13:15)
 
 #include "EventInterfaceTesting.h"
 #include "Detail/EventSubclass.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
 
 CoreTools::EventInterfaceTesting::EventInterfaceTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -37,13 +37,19 @@ void CoreTools::EventInterfaceTesting::EventSubclassTest()
 {
     constexpr auto value = 5;
 
-    EventInterfaceSharedPtr baseSmartPointer{ make_shared<EventSubclass>(value) };
+    const EventInterfaceSharedPtr basePointer{ std::make_shared<EventSubclass>(value) };
 
-    ASSERT_UNEQUAL_NULL_PTR(baseSmartPointer);
+    ASSERT_UNEQUAL_NULL_PTR(basePointer);
 
-    EventSubclassSharedPtr eventSubclass{ make_shared<EventSubclass>(value) };
+    const auto eventSubclass = std::make_shared<EventSubclass>(value);
 
     ASSERT_UNEQUAL_NULL_PTR(eventSubclass);
 
     ASSERT_EQUAL(eventSubclass->GetValue(), value);
+
+    CallbackParameters callbackParameters{ 1 };
+    callbackParameters.SetValue(0, 100);
+    ASSERT_TRUE(eventSubclass->EventFunction(callbackParameters));
+
+    ASSERT_EQUAL(eventSubclass->GetValue(), value + 100);
 }

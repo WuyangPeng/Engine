@@ -45,7 +45,7 @@ void CoreTools::FileInStream::Load(const System::String& fileName)
         THROW_EXCEPTION(fileName + SYSTEM_TEXT("版本字符串不存在或者存储的版本字符串不够大"s))
     }
 
-    const auto bufferInformation = std::make_shared<FileBuffer>(boost::numeric_cast<size_t>(readSize));
+    const auto bufferInformation = std::make_shared<FileBuffer>(readSize);
 
     manager.Read(CoreTools::GetStreamSize<char>(), bufferInformation->GetSize(), bufferInformation->GetBufferBegin());
 

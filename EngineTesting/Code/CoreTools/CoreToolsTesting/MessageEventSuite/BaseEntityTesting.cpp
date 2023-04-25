@@ -1,20 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 ///	ÁªÏµ×÷Õß£º94458936@qq.com
 ///
 ///	±ê×¼£ºstd:c++20
-///	ÒıÇæ²âÊÔ°æ±¾£º0.8.0.8 (2022/05/18 16:23)
+///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.6 (2023/04/18 11:33)
 
 #include "BaseEntityTesting.h"
 #include "Detail/Entity.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/EntityManager.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
-using std::shared_ptr;
 
 CoreTools::BaseEntityTesting::BaseEntityTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -40,7 +38,7 @@ void CoreTools::BaseEntityTesting::MainTest()
 
 void CoreTools::BaseEntityTesting::BaseTest()
 {
-    auto entity = Entity::Create(0);
+    const auto entity = Entity::Create(0);
 
     entity->Register();
 

@@ -29,6 +29,8 @@ namespace CoreTools
 
         NODISCARD LogMessageImplSharedPtr Clone() const override;
 
+        LogMessageImpl& operator<<(char value) noexcept override;
+        LogMessageImpl& operator<<(wchar_t value) noexcept override;
         LogMessageImpl& operator<<(const char* value) noexcept override;
         LogMessageImpl& operator<<(const wchar_t* value) noexcept override;
         LogMessageImpl& operator<<(int32_t value) noexcept override;
@@ -40,6 +42,7 @@ namespace CoreTools
         LogMessageImpl& operator<<(const std::string& value) noexcept override;
         LogMessageImpl& operator<<(const std::string_view& value) noexcept override;
         LogMessageImpl& operator<<(const std::wstring& value) noexcept override;
+        LogMessageImpl& operator<<(const std::wstring_view& value) noexcept override;
         LogMessageImpl& operator<<(const Error& error) noexcept override;
         LogMessageImpl& operator<<(const std::exception& error) noexcept override;
         LogMessageImpl& operator<<(LogAppenderIOManageSign sign) noexcept override;

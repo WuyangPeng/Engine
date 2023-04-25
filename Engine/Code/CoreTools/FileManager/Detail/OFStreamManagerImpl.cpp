@@ -45,7 +45,7 @@ void CoreTools::OFStreamManagerImpl::OpenFile(bool addition)
 
     if (!oStream)
     {
-        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("打开文件%1%失败！"s)) % fileName).str());
+        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("打开文件%1%失败！"s)) % fileName).str())
     }
 }
 

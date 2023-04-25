@@ -16,9 +16,11 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-CoreTools::InTopLevel::InTopLevel(MAYBE_UNUSED DisableNotThrow disableNotThrow)
+CoreTools::InTopLevel::InTopLevel(DisableNotThrow disableNotThrow)
     : impl{ ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(disableNotThrow);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 

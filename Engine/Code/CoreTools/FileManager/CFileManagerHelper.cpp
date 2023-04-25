@@ -28,10 +28,10 @@ CoreTools::FileBuffer CoreTools::CFileManagerHelper::LoadFromFile(const String& 
 
     CFileManagerImpl manager{ fileName, mode };
 
-    const auto bufferSize = boost::numeric_cast<size_t>(manager.GetFileLength());
+    const auto bufferSize = boost::numeric_cast<int>(manager.GetFileLength());
     FileBuffer buffer{ bufferSize };
 
-    if (const auto result = manager.ReadFromFile(sizeof(char), buffer.GetSize(), buffer.GetBufferBegin()); result != bufferSize)
+    if (const auto result = manager.ReadFromFile(sizeof(char), buffer.GetSize(), buffer.GetBufferBegin()); boost::numeric_cast<int>(result) != bufferSize)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("读取的文件大小不一致！"s))
     }
@@ -51,7 +51,7 @@ std::string CoreTools::CFileManagerHelper::LoadFromFile(const std::string& fileN
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("文件不存在。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("文件不存在。"s))
     }
 }
 

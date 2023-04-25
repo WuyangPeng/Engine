@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/03/03 09:47)
+///	引擎测试版本：0.9.0.6 (2023/04/11 19:44)
 
 #include "ReadBufferIOTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -83,13 +83,13 @@ void CoreTools::ReadBufferIOTesting::ReadBufferIOReadTest()
 
     ReadBufferIO readBuffer{ fileBuffer };
 
-    size_t resultSize = 0;
+    size_t resultSize{};
     readBuffer.Read(sizeof(decltype(size)), &resultSize);
     ASSERT_EQUAL(size, resultSize);
 
     ASSERT_EQUAL(readBuffer.GetBytesProcessed(), boost::numeric_cast<int>(sizeof(decltype(size))));
 
-    std::vector<char> result(resultSize);
+    BufferType result(resultSize);
     readBuffer.Read(sizeof(char), resultSize, result.data());
     const std::string testResult{ result.begin(), result.end() };
     ASSERT_EQUAL(testResult, content);
@@ -113,7 +113,7 @@ void CoreTools::ReadBufferIOTesting::GetTextTest()
 
     ReadBufferIO readBuffer{ fileBuffer };
 
-    size_t resultSize = 0;
+    size_t resultSize{};
     readBuffer.Read(sizeof(decltype(size)), &resultSize);
     ASSERT_EQUAL(size, resultSize);
 

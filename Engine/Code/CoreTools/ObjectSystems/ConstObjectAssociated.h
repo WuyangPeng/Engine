@@ -30,13 +30,13 @@ namespace CoreTools
         {
         }
 
-        ConstObjectAssociated(const ConstObjectSharedPtr& object, int64_t associated) noexcept
-            : object{ object }, associated{ associated }
+        ConstObjectAssociated(ConstObjectSharedPtr object, int64_t associated) noexcept
+            : object{ std::move(object) }, associated{ associated }
         {
         }
 
-        explicit ConstObjectAssociated(const ConstObjectSharedPtr& object) noexcept
-            : object{ object }, associated{ 0 }
+        explicit ConstObjectAssociated(ConstObjectSharedPtr object) noexcept
+            : object{ std::move(object) }, associated{ 0 }
         {
         }
 

@@ -12,9 +12,11 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "Lattice.h"
+
 namespace CoreTools
 {
-    template <typename T, bool OrderLToR, size_t... Sizes>
+    template <typename T, bool OrderLToR, int... Sizes>
     class MultiArrayAdapter : public Lattice<OrderLToR, Sizes...>
     {
     public:
@@ -22,7 +24,7 @@ namespace CoreTools
         using ParentType = Lattice<OrderLToR, Sizes...>;
 
     public:
-        explicit MultiArrayAdapter(T* container = nullptr);
+        explicit MultiArrayAdapter(T* container);
 
         ~MultiArrayAdapter() noexcept = default;
 
@@ -31,28 +33,26 @@ namespace CoreTools
         MultiArrayAdapter(MultiArrayAdapter&& rhs) noexcept = delete;
         MultiArrayAdapter& operator=(MultiArrayAdapter&& rhs) noexcept = delete;
 
-        CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void Reset(T* aContainer);
 
         NODISCARD const T* GetData() const noexcept;
         NODISCARD T* GetData() noexcept;
 
-        NODISCARD const T& operator[](size_t index) const;
-        NODISCARD T& operator[](size_t index);
+        NODISCARD const T& operator[](int index) const;
+        NODISCARD T& operator[](int index);
 
-        void Fill(const T& value);
-
-        template <typename... IndexTypes>
-        NODISCARD const T& operator()(IndexTypes... tuple) const;
+        void Fill(const T& value) noexcept;
 
         template <typename... IndexTypes>
-        NODISCARD T& operator()(IndexTypes... tuple);
+        NODISCARD const T& operator()(IndexTypes... tuple) const noexcept;
 
-        NODISCARD const T& operator()(const std::array<size_t, sizeof...(Sizes)>& coordinate) const;
-        NODISCARD T& operator()(const std::array<size_t, sizeof...(Sizes)>& coordinate);
+        template <typename... IndexTypes>
+        NODISCARD T& operator()(IndexTypes... tuple) noexcept;
 
-        NODISCARD std::strong_ordering operator<=>(const MultiArrayAdapter& rhs) const;
+        NODISCARD const T& operator()(const std::array<int, sizeof...(Sizes)>& coordinate) const noexcept;
+        NODISCARD T& operator()(const std::array<int, sizeof...(Sizes)>& coordinate) noexcept;
 
     private:
         T* container;
@@ -64,13 +64,12 @@ namespace CoreTools
     public:
         using ClassType = MultiArrayAdapter<T, OrderLToR>;
         using ParentType = Lattice<OrderLToR>;
-        using SizeType = std::vector<size_t>;
+        using SizeType = std::vector<int>;
 
     public:
-        MultiArrayAdapter() noexcept;
         MultiArrayAdapter(const SizeType& sizes, T* container);
 
-        CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void Reset(const SizeType& sizes, T* aContainer);
 
@@ -84,10 +83,10 @@ namespace CoreTools
         NODISCARD const T* GetData() const noexcept;
         NODISCARD T* GetData() noexcept;
 
-        NODISCARD const T& operator[](size_t index) const;
-        NODISCARD T& operator[](size_t index);
+        NODISCARD const T& operator[](int index) const;
+        NODISCARD T& operator[](int index);
 
-        void Fill(const T& value);
+        void Fill(const T& value) noexcept;
 
         template <typename... IndexTypes>
         NODISCARD const T& operator()(IndexTypes... tuple) const;
@@ -97,8 +96,6 @@ namespace CoreTools
 
         NODISCARD const T& operator()(const SizeType& coordinate) const;
         NODISCARD T& operator()(const SizeType& coordinate);
-
-        NODISCARD std::strong_ordering operator<=>(const MultiArrayAdapter& rhs) const;
 
     private:
         T* container;

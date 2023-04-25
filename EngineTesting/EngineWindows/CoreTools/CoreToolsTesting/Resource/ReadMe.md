@@ -257,42 +257,54 @@
 （6）日志记录器：LoggerTesting。
 （7）日志文件名：LogFileNameTesting。
 （8）日志IO管理：LogAppenderIOManagerTesting。
-（9）日志管理：LogTesting。
+（9）日志管理：LogTesting、
+			   LogAsynchronousTesting、
+			   LogHelperTesting。
 
 ----------------------------
 11.	 DataTypesSuite 
 
 对数据类型模块的单元测试，包括：
-（1）元组：TupleTesting。
+（1）元组：TupleTesting、
+		   TupleLessTesting。
 （2）表：TableTesting。
 （3）最小堆：MinHeapRecordIndexTesting、
 			 MinHeapRecordStoredManagerTesting、
 			 MinHeapRecordStoredTesting、
 			 MinHeapRecordTesting、
 			 MinHeapTesting。
+（4）线程安全容器：ThreadSafeMapTesting、
+				   ThreadSafeQueueTesting。
 
 ----------------------------
 12.	 MemoryToolsSuite 
 
 对内存工具模块的单元测试，包括：
 （1）堆分配：HeapAllocateTesting。
-（2）指针比较：SmartPointerTesting、
-			   SubclassSmartPointerTesting。
-（3）多维数组：MD5ContextTesting、MD5Testing。
-（4）内存管理：：BufferStreamTesting、
-				 BufferTesting、
-				 DefaultMemoryTesting、
-				 MemoryManagerTesting、
-				 MemoryTesting。
-（5）随机数：RandomTesting。
-（6）内存池：BufferPoolTesting、PoolTesting。 
+（2）指针比较：RawIteratorsTesting、
+			   RawPtrCompareTesting、
+			   SharedPtrCompareTesting、
+			   WeakPtrCompareTesting。
+（3）多维数组：AtomicMinMaxTesting、
+			   TypeTraitsTesting、
+			   Array2Testing、
+			   Array3Testing、
+			   Array4Testing、
+			   ContainerAdapterTesting、
+			   LatticeTesting、
+			   LexicoArray2Testing、
+			   MultiArrayTesting、
+			   MultiArrayAdapterTesting。
 
 ----------------------------
 13.	 ObjectSystemsSuite 
 
 对对象系统模块的单元测试，包括：
-（1） 初始终止器：InitTermTesting。
-（2） Rtti：RttiTesting、RttiTestingBase。
+（1） 初始终止器：InitTermTesting、
+				  InitTermContainerTesting、
+				  InitTermRegisterFactoryTesting。
+（2） Rtti：RttiTesting、
+		    RttiTestingBase。
 （3） 对象名字：ObjectNameTesting。
 （4） 对象系统文件流：BufferInStreamTesting、
 					  BufferOutStreamTesting、
@@ -307,8 +319,13 @@
 					  ObjectManagerTesting、
 					  ObjectRegisterTesting、
 					  ObjectTesting、
-					  OutTopLevelTesting。
-（6） 对象系统类型转换：TypeCastingTesting。
+					  OutTopLevelTesting、
+					  ConstObjectAssociatedTesting、
+					  ConstWeakObjectAssociatedTesting、
+					  ObjectAssociatedTesting、
+					  WeakObjectAssociatedTesting、
+					  NullObjectTesting、
+					  ObjectInterfaceTesting。
 
 ----------------------------
 14.	 TimeSuite 
@@ -343,13 +360,17 @@
 （3） 斐波那契数：FibonacciTesting。
 （4） 参数类型：ParamTypeTesting。
 （5） 三角函数：TrigonometricFunctionTesting。
-（6） 指针比较：PtrCompareTesting。
-（7） IfThenElse。
-（8） 数学函数：SqrtTesting、Pow3Testing。
+（6） 指针比较：PtrCompareTesting、
+				RangeIterationTesting。
+（7） IfThenElse：IfThenElseTesting。
+（8） 数学函数：SqrtTesting、
+			    Pow3Testing、
+				MaxElementTesting。
 （9） 转换：ExplicitCastTesting、
 			LiteralCastTesting、
 			ReferenceCastTesting。
-（10）自增自减：IncrementScopeTesting、ValueScopeTesting。
+（10）自增自减：IncrementScopeTesting、
+		        ValueScopeTesting。
 （11）真实地址：RealAddressTesting。
 （12）Tiny：TinyTesting。
 
@@ -401,12 +422,13 @@
 24.	 PropertiesSuite（属性）
 
 对属性模块的单元测试，包括：
-（1）只读属性。
-（2）只写属性。
-（3）读写属性。
-（4）静态变量只读属性。
-（5）静态变量只写属性。
-（6）静态变量读写属性。
+（1）属性：DirectPropertyInternalTesting、
+		   MethodPropertyTesting、
+		   PropertiesBaseTesting、
+		   PropertyExternalTesting、
+		   PropertyOffsetTesting、
+		   SimplePropertyExternalTesting、
+		   StaticPropertyExternalTesting。 
 
 ----------------------------
 25.	 CyclicRedundancyCheckSuite 
@@ -431,8 +453,18 @@
 27.	 MessageEventSuite 
 
 对消息事件模块的单元测试，包括：
-（1）实体消息。
-（2）类监听事件。
+（1）实体消息：ParametersInterfaceTesting、
+			   CallbackParametersTesting、
+			   EventInterfaceTesting、
+			   EventSlotTesting、
+			   EventSlotManagerTesting、
+			   MessageManagerTesting、
+			   TelegramTesting、
+			   TelegramLessTesting。 
+（2）类监听事件：BaseEntityTesting、
+				 EntityManagerTesting、
+				 EventEntityTesting、
+				 TelegramMessageManagerTesting。
 
 ----------------------------
 28.	 StateMachineManagerSuite 
@@ -445,8 +477,7 @@
 29.  NetworkSuite 
 
 对网络模块的单元测试，包括：
-（1） 下载文件：DownloadingFilesTesting、
-				DownloadingFilesEventTesting。
+（1） 网络。
 
 ----------------------------
 30.  ZlibSuite 

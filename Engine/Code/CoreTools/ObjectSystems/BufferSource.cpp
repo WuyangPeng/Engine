@@ -58,7 +58,7 @@ std::string CoreTools::BufferSource::ReadString()
             padding = gDefaultSize - padding;
         }
 
-        const auto datum = source.GetText(length);
+        auto datum = source.GetText(length);
 
         source.IncrementBytesProcessed(length + padding);
 
@@ -91,6 +91,8 @@ void CoreTools::BufferSource::ReadStringContainer(int elementsNumber, std::set<s
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
+    container.clear();
+
     for (auto i = 0; i < elementsNumber; ++i)
     {
         container.emplace(ReadString());
@@ -122,7 +124,7 @@ void CoreTools::BufferSource::ReadUniqueId(ObjectInterface& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    const auto uniqueId = Read<uint64_t>();
+    const auto uniqueId = Read<int64_t>();
     object.SetUniqueId(uniqueId);
 }
 

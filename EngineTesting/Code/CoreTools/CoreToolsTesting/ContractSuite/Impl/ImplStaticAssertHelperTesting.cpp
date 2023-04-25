@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/02/23 14:35)
+///	引擎测试版本：0.9.0.6 (2023/04/11 15:34)
 
 #include "ImplStaticAssertHelperTesting.h"
 #include "CoreTools/Contract/ImplStaticAssertHelper.h"
@@ -35,23 +35,23 @@ void CoreTools::ImplStaticAssertHelperTesting::MainTest()
 
 void CoreTools::ImplStaticAssertHelperTesting::StaticAssertTest() noexcept
 {
-    static_assert(std::is_same_v<CoreTools::TrueType, ShareClasses::NonConstMember>, "test static assert");
-    static_assert(std::is_same_v<CoreTools::FalseType, ShareClasses::NonConstCopyMember>, "test static assert");
-    static_assert(std::is_same_v<CoreTools::FalseType, ShareClasses::CopyConstructor>, "test static assert");
+    static_assert(std::is_same_v<TrueType, ShareClasses::NonConstMember>, "test static assert");
+    static_assert(std::is_same_v<FalseType, ShareClasses::NonConstCopyMember>, "test static assert");
+    static_assert(std::is_same_v<FalseType, ShareClasses::CopyConstructor>, "test static assert");
 
-    static_assert(std::is_same_v<CoreTools::FalseType, PerformanceUnsharedClasses::NonConstMember>, "test static assert");
-    static_assert(std::is_same_v<CoreTools::FalseType, PerformanceUnsharedClasses::NonConstCopyMember>, "test static assert");
-    static_assert(std::is_same_v<CoreTools::FalseType, PerformanceUnsharedClasses::CopyConstructor>, "test static assert");
+    static_assert(std::is_same_v<FalseType, PerformanceUnsharedClasses::NonConstMember>, "test static assert");
+    static_assert(std::is_same_v<FalseType, PerformanceUnsharedClasses::NonConstCopyMember>, "test static assert");
+    static_assert(std::is_same_v<FalseType, PerformanceUnsharedClasses::CopyConstructor>, "test static assert");
 
-    static_assert(std::is_same_v<CoreTools::TrueType, CopyUnsharedClasses::NonConstMember>, "test static assert");
-    static_assert(std::is_same_v<CoreTools::FalseType, CopyUnsharedClasses::NonConstCopyMember>, "test static assert");
-    static_assert(std::is_same_v<CoreTools::TrueType, CopyUnsharedClasses::CopyConstructor>, "test static assert");
+    static_assert(std::is_same_v<TrueType, CopyUnsharedClasses::NonConstMember>, "test static assert");
+    static_assert(std::is_same_v<FalseType, CopyUnsharedClasses::NonConstCopyMember>, "test static assert");
+    static_assert(std::is_same_v<TrueType, CopyUnsharedClasses::CopyConstructor>, "test static assert");
 
-    static_assert(std::is_same_v<CoreTools::FalseType, DelayCopyUnsharedClasses::NonConstMember>, "test static assert");
-    static_assert(std::is_same_v<CoreTools::TrueType, DelayCopyUnsharedClasses::NonConstCopyMember>, "test static assert");
-    static_assert(std::is_same_v<CoreTools::FalseType, DelayCopyUnsharedClasses::CopyConstructor>, "test static assert");
+    static_assert(std::is_same_v<FalseType, DelayCopyUnsharedClasses::NonConstMember>, "test static assert");
+    static_assert(std::is_same_v<TrueType, DelayCopyUnsharedClasses::NonConstCopyMember>, "test static assert");
+    static_assert(std::is_same_v<FalseType, DelayCopyUnsharedClasses::CopyConstructor>, "test static assert");
 
-    static_assert(std::is_same_v<CoreTools::TrueType, NonCopyClasses::NonConstMember>, "test static assert");
-    static_assert(std::is_same_v<CoreTools::FalseType, NonCopyClasses::NonConstCopyMember>, "test static assert");
-    static_assert(std::is_same_v<CoreTools::FalseType, NonCopyClasses::CopyConstructor>, "test static assert");
+    static_assert(std::is_same_v<TrueType, NonCopyClasses::NonConstMember>, "test static assert");
+    static_assert(std::is_same_v<FalseType, NonCopyClasses::NonConstCopyMember>, "test static assert");
+    static_assert(std::is_same_v<FalseType, NonCopyClasses::CopyConstructor>, "test static assert");
 }

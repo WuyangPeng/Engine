@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.5 (2023/04/04 17:33)
+///	引擎测试版本：0.9.0.6 (2023/04/10 18:02)
 
 #include "CoreTools/CoreToolsTesting/TestingHelper.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"

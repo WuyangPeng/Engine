@@ -1,27 +1,25 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 15:33)
+///	引擎测试版本：0.9.0.6 (2023/04/19 10:06)
 
 #include "BufferOutStreamTesting.h"
 #include "Detail/BoolObject.h"
 #include "Detail/EnumObject.h"
 #include "Detail/IntObject.h"
-#include "CoreTools/ObjectSystems/NullObject.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/FileManager/FileBuffer.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
+#include "CoreTools/ObjectSystems/NullObject.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::pair;
-using std::string;
-using namespace std::literals;
 
 CoreTools::BufferOutStreamTesting::BufferOutStreamTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -33,9 +31,34 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, BufferOutStreamTesting)
 
 void CoreTools::BufferOutStreamTesting::DoRunUnitTest()
 {
+    InitTerm::ExecuteInitializer();
+
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+
+    InitTerm::ExecuteTerminator();
 }
 
-void CoreTools::BufferOutStreamTesting::MainTest() noexcept
+void CoreTools::BufferOutStreamTesting::MainTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(BufferOutStreamTest);
+}
+
+void CoreTools::BufferOutStreamTesting::BufferOutStreamTest()
+{
+    auto outTopLevel = OutTopLevel::Create();
+
+    outTopLevel.Insert(std::make_shared<BoolObject>(DisableNotThrow::Disable));
+    outTopLevel.Insert(std::make_shared<EnumObject>(DisableNotThrow::Disable));
+    outTopLevel.Insert(std::make_shared<IntObject>(DisableNotThrow::Disable));
+    outTopLevel.Insert(std::make_shared<NullObject>(DisableNotThrow::Disable));
+
+    const BufferOutStream bufferOutStream{ outTopLevel };
+
+    const auto fileBuffer = bufferOutStream.GetBufferOutStreamInformation();
+
+    const BufferInStream bufferInStream{ fileBuffer };
+
+    const auto inTopLevel = bufferInStream.GetTopLevel();
+
+    ASSERT_EQUAL(inTopLevel.GetTopLevelSize(), 4);
 }

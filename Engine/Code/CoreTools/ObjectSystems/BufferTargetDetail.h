@@ -60,7 +60,7 @@ void CoreTools::BufferTarget::WriteStringContainerWithNumber(const T& objects)
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     using ValueType = typename T::value_type;
-    static_assert(std::is_same_v<ValueType, std::string>, "ValueType is not string");
+    static_assert(std::is_same_v<ValueType, std::string> || std::is_same_v<ValueType, const char*>, "ValueType is not string");
 
     const auto size = boost::numeric_cast<int32_t>(objects.size());
 
@@ -75,7 +75,7 @@ void CoreTools::BufferTarget::WriteStringContainerWithoutNumber(const T& objects
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     using ValueType = typename T::value_type;
-    static_assert(std::is_same_v<ValueType, std::string>, "ValueType is not string");
+    static_assert(std::is_same_v<ValueType, std::string> || std::is_same_v<ValueType, const char*>, "ValueType is not string");
 
     for (const auto& object : objects)
     {
@@ -85,6 +85,14 @@ void CoreTools::BufferTarget::WriteStringContainerWithoutNumber(const T& objects
 
 template <int Size>
 void CoreTools::BufferTarget::WriteContainer(const std::array<std::string, Size>& objects)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    WriteStringContainerWithoutNumber(objects);
+}
+
+template <int Size>
+void CoreTools::BufferTarget::WriteContainer(const std::array<const char*, Size>& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -141,7 +149,7 @@ void CoreTools::BufferTarget::WriteContainer(const std::array<T, Size>& objects)
 }
 
 template <typename T>
-void CoreTools::BufferTarget::WriteEnum(const T datum)
+void CoreTools::BufferTarget::WriteEnum(T datum)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -279,7 +287,7 @@ void CoreTools::BufferTarget::WriteObjectAssociatedContainerWithoutNumber(const 
 
     for (const auto& object : objects)
     {
-        Write(object.associated);
+        WriteUniqueId(object.object);
     }
 }
 
@@ -288,8 +296,7 @@ void CoreTools::BufferTarget::WriteObjectAssociatedContainer(const std::array<T,
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, typename ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, typename T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
     WriteObjectAssociatedContainerWithoutNumber(objects);
 }

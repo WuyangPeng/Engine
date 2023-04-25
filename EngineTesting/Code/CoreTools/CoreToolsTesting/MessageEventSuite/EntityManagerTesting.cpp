@@ -1,20 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 17:01)
+///	引擎测试版本：0.9.0.6 (2023/04/18 12:57)
 
 #include "EntityManagerTesting.h"
 #include "Detail/Entity.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/EntityManagerDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
-using std::shared_ptr;
 
 CoreTools::EntityManagerTesting::EntityManagerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -38,6 +36,28 @@ void CoreTools::EntityManagerTesting::MainTest()
     EntityManager::Destroy();
 }
 
-void CoreTools::EntityManagerTesting::ManagerTest() noexcept
+void CoreTools::EntityManagerTesting::ManagerTest()
 {
+    const auto entity = Entity::Create(0);
+
+    ASSERT_TRUE(ENTITY_MANAGER_SINGLETON.Register(entity));
+
+    const auto result = ENTITY_MANAGER_SINGLETON.GetEntity(entity->GetEntityId());
+
+    ASSERT_EQUAL(entity, result);
+
+    ASSERT_TRUE(ENTITY_MANAGER_SINGLETON.UnRegister(entity->GetEntityId()));
+    ASSERT_FALSE(ENTITY_MANAGER_SINGLETON.UnRegister(entity->GetEntityId()));
+
+    ASSERT_THROW_EXCEPTION_1(ManagerExceptionalTest, entity->GetEntityId());
+
+    ASSERT_TRUE(ENTITY_MANAGER_SINGLETON.Register(entity));
+
+    const auto makeEntity = ENTITY_MANAGER_SINGLETON.MakeEntity<Entity>(5);
+    ASSERT_EQUAL(makeEntity->GetValue(), 5);
+}
+
+void CoreTools::EntityManagerTesting::ManagerExceptionalTest(int64_t entityId)
+{
+    MAYBE_UNUSED const auto result = ENTITY_MANAGER_SINGLETON.GetEntity(entityId);
 }

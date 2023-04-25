@@ -29,14 +29,14 @@ namespace CoreTools
         using Container = std::vector<Real>;
 
     public:
-        LexicoArray2(int numRows, int numCols, Container& matrix);
+        LexicoArray2(int numRows, int numCols, Container& matrix) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD int GetNumRows() const noexcept;
         NODISCARD int GetNumCols() const noexcept;
-        NODISCARD Real& operator()(int32_t row, int32_t col);
-        NODISCARD const Real& operator()(int32_t row, int32_t col) const;
+        NODISCARD Real& operator()(int row, int col);
+        NODISCARD const Real& operator()(int row, int col) const;
 
     private:
         int numRows;
@@ -52,14 +52,14 @@ namespace CoreTools
         using Container = std::vector<Real>;
 
     public:
-        LexicoArray2(int numRows, int numCols, Container& matrix);
+        LexicoArray2(int numRows, int numCols, Container& matrix) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD int GetNumRows() const noexcept;
         NODISCARD int GetNumCols() const noexcept;
-        NODISCARD Real& operator()(int32_t row, int32_t col);
-        NODISCARD const Real& operator()(int32_t row, int32_t col) const;
+        NODISCARD Real& operator()(int row, int col);
+        NODISCARD const Real& operator()(int row, int col) const;
 
     private:
         int numRows;
@@ -75,14 +75,14 @@ namespace CoreTools
         using Container = std::vector<Real>;
 
     public:
-        LexicoArray2(Container& matrix);
+        LexicoArray2(Container& matrix) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD static int GetNumRows() noexcept;
         NODISCARD static int GetNumCols() noexcept;
-        NODISCARD Real& operator()(int32_t row, int32_t col);
-        NODISCARD const Real& operator()(int32_t row, int32_t col) const;
+        NODISCARD Real& operator()(int row, int col);
+        NODISCARD const Real& operator()(int row, int col) const;
 
     private:
         Container& matrix;
@@ -96,14 +96,14 @@ namespace CoreTools
         using Container = std::vector<Real>;
 
     public:
-        LexicoArray2(Container& matrix);
+        LexicoArray2(Container& matrix) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD static int GetNumRows() noexcept;
         NODISCARD static int GetNumCols() noexcept;
-        NODISCARD Real& operator()(int32_t row, int32_t col);
-        NODISCARD const Real& operator()(int32_t row, int32_t col) const;
+        NODISCARD Real& operator()(int row, int col);
+        NODISCARD const Real& operator()(int row, int col) const;
 
     private:
         Container& matrix;

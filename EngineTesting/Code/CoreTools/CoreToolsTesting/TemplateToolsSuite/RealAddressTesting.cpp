@@ -1,19 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 19:05)
+///	引擎测试版本：0.9.0.6 (2023/04/25 13:55)
 
 #include "RealAddressTesting.h"
 #include "Detail/RealAddressTest.h"
 #include "Detail/RealAddressTestAddress.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/RealAddressDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 CoreTools::RealAddressTesting::RealAddressTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -34,18 +35,18 @@ void CoreTools::RealAddressTesting::MainTest()
 
 void CoreTools::RealAddressTesting::AddressTest()
 {
-    RealAddressTest volatile firstRealAddressTest;
-    RealAddressTest const secondRealAddressTest;
-    RealAddressTest thirdRealAddressTest;
-    RealAddressTestAddress const realAddressTestAddress;
+    RealAddressTest volatile realAddressTest0{};
+    RealAddressTest const realAddressTest1{};
+    RealAddressTest realAddressTest2;
+    RealAddressTestAddress const realAddressTest3;
 
-    ASSERT_TRUE(&firstRealAddressTest == nullptr);
-    ASSERT_TRUE(&secondRealAddressTest == nullptr);
-    ASSERT_TRUE(&thirdRealAddressTest == nullptr);
-    ASSERT_UNEQUAL_NULL_PTR(&realAddressTestAddress);
+    ASSERT_TRUE(&realAddressTest0 == nullptr);
+    ASSERT_TRUE(&realAddressTest1 == nullptr);
+    ASSERT_TRUE(&realAddressTest2 == nullptr);
+    ASSERT_UNEQUAL_NULL_PTR(&realAddressTest3);
 
-    ASSERT_FALSE(GetAddress(firstRealAddressTest) == nullptr);
-    ASSERT_FALSE(GetAddress(secondRealAddressTest) == nullptr);
-    ASSERT_FALSE(GetAddress(thirdRealAddressTest) == nullptr);
-    ASSERT_UNEQUAL_NULL_PTR(GetAddress(realAddressTestAddress));
+    ASSERT_FALSE(GetAddress(realAddressTest0) == nullptr);
+    ASSERT_FALSE(GetAddress(realAddressTest1) == nullptr);
+    ASSERT_FALSE(GetAddress(realAddressTest2) == nullptr);
+    ASSERT_UNEQUAL_NULL_PTR(GetAddress(realAddressTest3));
 }

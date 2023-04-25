@@ -22,12 +22,9 @@ CoreTools::Table<Rows, Columns, Type>::Table() noexcept
 }
 
 template <int Rows, int Columns, typename Type>
-CoreTools::Table<Rows, Columns, Type>::Table(ParamType member00, ParamType member01, ParamType member10, ParamType member11) noexcept
+CoreTools::Table<Rows, Columns, Type>::Table(ParamType member00, ParamType member01, ParamType member10, ParamType member11) noexcept(std::is_arithmetic_v<Type>) requires(Rows == 2 && Columns == 2)
     : entry{ member00, member01, member10, member11 }
 {
-    static_assert(Rows == 2, "Rows == 2");
-    static_assert(Columns == 2, "Columns == 2");
-
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
@@ -40,12 +37,9 @@ CoreTools::Table<Rows, Columns, Type>::Table(ParamType member00,
                                              ParamType member12,
                                              ParamType member20,
                                              ParamType member21,
-                                             ParamType member22) noexcept
+                                             ParamType member22) noexcept(std::is_arithmetic_v<Type>) requires(Rows == 3 && Columns == 3)
     : entry{ member00, member01, member02, member10, member11, member12, member20, member21, member22 }
 {
-    static_assert(Rows == 3, "Rows == 3");
-    static_assert(Columns == 3, "Columns == 3");
-
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
@@ -65,7 +59,7 @@ CoreTools::Table<Rows, Columns, Type>::Table(ParamType member00,
                                              ParamType member30,
                                              ParamType member31,
                                              ParamType member32,
-                                             ParamType member33) noexcept
+                                             ParamType member33) noexcept(std::is_arithmetic_v<Type>) requires(Rows == 4 && Columns == 4)
     : entry{ member00,
              member01,
              member02,
@@ -83,9 +77,6 @@ CoreTools::Table<Rows, Columns, Type>::Table(ParamType member00,
              member32,
              member33 }
 {
-    static_assert(Rows == 4, "Rows == 4");
-    static_assert(Columns == 4, "Columns == 4");
-
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 

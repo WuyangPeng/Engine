@@ -1,23 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 18:56)
+///	引擎测试版本：0.9.0.6 (2023/04/25 11:13)
 
 #include "ConstraintTesting.h"
-
 #include "CoreTools/DataTypes/TupleDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/MustBePod.h"
 #include "CoreTools/TemplateTools/MustBeSameSize.h"
 #include "CoreTools/TemplateTools/MustBeSubscriptable.h"
 #include "CoreTools/TemplateTools/MustHaveBase.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::string;
 
 CoreTools::ConstraintTesting::ConstraintTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -57,7 +55,7 @@ void CoreTools::ConstraintTesting::MustBePodTest() noexcept
 #endif  // 0
 
     MAYBE_UNUSED const MustBePodOrVoid<float> floatMustBePodOrVoid{};
-    MAYBE_UNUSED const MustBePodOrVoid<void> voidMustBePodOrVoid{};
+    MAYBE_UNUSED constexpr MustBePodOrVoid<void> voidMustBePodOrVoid{};
 
 #if 0  // 这里应该产生编译错误。
 
@@ -81,7 +79,7 @@ void CoreTools::ConstraintTesting::MustBeSameSizeTest() noexcept
 void CoreTools::ConstraintTesting::MustBeSubscriptableTest() noexcept
 {
     MAYBE_UNUSED const MustBeSubscriptable<Tuple<3, int>> tupleMustBeSubscriptable{};
-    MAYBE_UNUSED const MustBeSubscriptable<string> stringMustBeSubscriptable{};
+    MAYBE_UNUSED const MustBeSubscriptable<std::string> stringMustBeSubscriptable{};
 
 #if 0  // 这里应该产生编译错误。
 
@@ -89,7 +87,7 @@ void CoreTools::ConstraintTesting::MustBeSubscriptableTest() noexcept
 
 #endif  // 0
 
-    MAYBE_UNUSED const MustBeSubscriptableAsDecayablePointer<string*> stringPtrMustBeSubscriptableAsDecayablePointer{};
+    MAYBE_UNUSED const MustBeSubscriptableAsDecayablePointer<std::string*> stringPtrMustBeSubscriptableAsDecayablePointer{};
 
 #if 0  // 这里应该产生编译错误。
 

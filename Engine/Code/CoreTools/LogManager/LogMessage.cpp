@@ -44,6 +44,24 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, LogMessage, GetFileName, System::
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, LogMessage, HasAlwaysConsole, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, LogMessage, HasTriggerAssert, bool)
 
+CoreTools::LogMessage& CoreTools::LogMessage::operator<<(char value)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    *impl << value;
+
+    return *this;
+}
+
+CoreTools::LogMessage& CoreTools::LogMessage::operator<<(wchar_t value)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    *impl << value;
+
+    return *this;
+}
+
 CoreTools::LogMessage& CoreTools::LogMessage::operator<<(const char* value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
@@ -135,6 +153,15 @@ CoreTools::LogMessage& CoreTools::LogMessage::operator<<(const std::string_view&
 }
 
 CoreTools::LogMessage& CoreTools::LogMessage::operator<<(const std::wstring& value)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    *impl << value;
+
+    return *this;
+}
+
+CoreTools::LogMessage& CoreTools::LogMessage::operator<<(const std::wstring_view& value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

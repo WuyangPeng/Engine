@@ -31,7 +31,7 @@ namespace CoreTools
         using BufferTypeConstIter = BufferType::const_iterator;
 
     public:
-        explicit FileBuffer(size_t count);
+        explicit FileBuffer(int count);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +43,7 @@ namespace CoreTools
         NODISCARD const char* GetBufferBegin() const noexcept;
         NODISCARD char* GetBufferBegin();
 
-        NODISCARD size_t GetSize() const noexcept;
+        NODISCARD int GetSize() const;
 
         NODISCARD BufferTypeConstIter begin() const noexcept;
         NODISCARD BufferTypeConstIter end() const noexcept;

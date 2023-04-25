@@ -12,12 +12,14 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "System/Helper/PragmaWarning/Operators.h"
+
 #include <iterator>
 
 namespace CoreTools
 {
     template <typename T>
-    class RawConstIterator
+    class RawConstIterator : private boost::totally_ordered<RawConstIterator<T>>
     {
     public:
         using ClassType = RawConstIterator<T>;
@@ -29,34 +31,34 @@ namespace CoreTools
         using reference = const T&;
 
     public:
-        RawConstIterator() noexcept;
-        explicit RawConstIterator(pointer pointer, size_t offset = 0) noexcept;
+        explicit RawConstIterator(pointer pointer, int offset = 0) noexcept;
         virtual ~RawConstIterator() noexcept = default;
         RawConstIterator(const RawConstIterator& rhs) = default;
         RawConstIterator& operator=(const RawConstIterator& rhs) = default;
         RawConstIterator(RawConstIterator&& rhs) noexcept = default;
         RawConstIterator& operator=(RawConstIterator&& rhs) noexcept = default;
 
-        CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        NODISCARD reference operator*() const;
+        NODISCARD reference operator*() const noexcept;
         NODISCARD pointer operator->() const;
         NODISCARD reference operator[](ptrdiff_t offset) const;
 
-        RawConstIterator& operator++();
-        RawConstIterator operator++(int);
-        RawConstIterator& operator--();
-        RawConstIterator operator--(int);
+        RawConstIterator& operator++() noexcept;
+        RawConstIterator operator++(int) noexcept;
+        RawConstIterator& operator--() noexcept;
+        RawConstIterator operator--(int) noexcept;
 
-        RawConstIterator& operator+=(ptrdiff_t offset);
-        NODISCARD RawConstIterator operator+(ptrdiff_t offset) const;
+        RawConstIterator& operator+=(ptrdiff_t offset) noexcept;
+        NODISCARD RawConstIterator operator+(ptrdiff_t offset) const noexcept;
 
-        RawConstIterator& operator-=(ptrdiff_t offset);
-        NODISCARD RawConstIterator operator-(ptrdiff_t offset) const;
+        RawConstIterator& operator-=(ptrdiff_t offset) noexcept;
+        NODISCARD RawConstIterator operator-(ptrdiff_t offset) const noexcept;
 
-        NODISCARD ptrdiff_t operator-(RawConstIterator const& rhs) const;
+        NODISCARD ptrdiff_t operator-(RawConstIterator const& rhs) const noexcept;
 
-        NODISCARD std::strong_ordering operator<=>(RawConstIterator const& rhs) const;
+        NODISCARD bool operator==(const RawConstIterator& rhs) const noexcept;
+        NODISCARD bool operator<(const RawConstIterator& rhs) const noexcept;
 
     private:
         pointer master;
@@ -76,25 +78,24 @@ namespace CoreTools
         using reference = T&;
 
     public:
-        RawIterator() noexcept;
-        explicit RawIterator(pointer pointer, size_t offset = 0);
+        explicit RawIterator(pointer pointer, int offset = 0) noexcept;
 
-        CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD reference operator*();
+        NODISCARD reference operator*() noexcept;
         NODISCARD pointer operator->();
 
-        RawIterator operator++();
-        RawIterator operator++(int32_t);
+        RawIterator operator++() noexcept;
+        RawIterator operator++(int) noexcept;
 
-        RawIterator operator--();
-        RawIterator operator--(int32_t);
+        RawIterator operator--() noexcept;
+        RawIterator operator--(int) noexcept;
 
-        RawIterator& operator+=(ptrdiff_t offset);
-        NODISCARD RawIterator operator+(ptrdiff_t offset) const;
+        RawIterator& operator+=(ptrdiff_t offset) noexcept;
+        NODISCARD RawIterator operator+(ptrdiff_t offset) const noexcept;
 
-        RawIterator& operator-=(ptrdiff_t offset);
-        NODISCARD RawIterator operator-(ptrdiff_t offset) const;
+        RawIterator& operator-=(ptrdiff_t offset) noexcept;
+        NODISCARD RawIterator operator-(ptrdiff_t offset) const noexcept;
     };
 
 }

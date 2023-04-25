@@ -5,10 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.3 (2023/02/28 14:12)
+///	引擎测试版本：0.9.0.6 (2023/04/11 14:43)
 
 #include "StringConversionTesting.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -209,11 +210,8 @@ void CoreTools::StringConversionTesting::WideCharUtf8ConversionStandardEnglishTe
 {
     const auto original = "Converted WideCharUTF8 to Standard"s;
     const auto uft8 = StringConversion::MultiByteConversionUtf8(original);
-    std::wstring wideCharUft8{};
-    for (const auto c : uft8)
-    {
-        wideCharUft8 += c;
-    }
+    const auto wideCharUft8 = StringUtility::ConvertNarrowToWide(uft8);
+
     const auto standard = StringConversion::Utf8ConversionStandard(wideCharUft8);
     ASSERT_EQUAL(standard, SYSTEM_TEXT("Converted WideCharUTF8 to Standard"s));
 }
@@ -222,11 +220,8 @@ void CoreTools::StringConversionTesting::WideCharUtf8ConversionStandardChineseTe
 {
     const auto original = "WideCharUTF8字符串转换为标准字符串"s;
     const auto uft8 = StringConversion::MultiByteConversionUtf8(original);
-    std::wstring wideCharUft8{};
-    for (const auto c : uft8)
-    {
-        wideCharUft8 += c;
-    }
+    const auto wideCharUft8 = StringUtility::ConvertNarrowToWide(uft8);
+
     const auto standard = StringConversion::Utf8ConversionStandard(wideCharUft8);
     ASSERT_EQUAL(standard, SYSTEM_TEXT("WideCharUTF8字符串转换为标准字符串"s));
 }

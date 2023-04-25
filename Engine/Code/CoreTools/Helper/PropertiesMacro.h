@@ -69,21 +69,21 @@
 
 #ifdef TCRE_USE_BORLANDC
 
-    #define TCRE_PROPERTY_READ(type, name, function) __property type name = { read = function };
-    #define TCRE_PROPERTY_WRITE(type, name, function) __property type name = { write = function };
-    #define TCRE_PROPERTY_READ_WRITE(type, name, getFunction, setFunction) __property type name = { read = getFunction, write = setFunction };
+    #define TCRE_PROPERTY_READ(type, name, function) __property type name = { read = function }
+    #define TCRE_PROPERTY_WRITE(type, name, function) __property type name = { write = function }
+    #define TCRE_PROPERTY_READ_WRITE(type, name, getFunction, setFunction) __property type name = { read = getFunction, write = setFunction }
 
 #elif defined(TCRE_USE_MSVC)
 
-    #define TCRE_PROPERTY_READ(type, name, function) __declspec(property(get = function)) type name;
-    #define TCRE_PROPERTY_WRITE(type, name, function) __declspec(property(put = function)) type name;
-    #define TCRE_PROPERTY_READ_WRITE(type, name, getFunction, setFunction) __declspec(property(get = getFunction, put = setFunction)) type name;
+    #define TCRE_PROPERTY_READ(type, name, function) __declspec(property(get = function)) type name
+    #define TCRE_PROPERTY_WRITE(type, name, function) __declspec(property(put = function)) type name
+    #define TCRE_PROPERTY_READ_WRITE(type, name, getFunction, setFunction) __declspec(property(get = getFunction, put = setFunction)) type name
 
 #else  // !TCRE_USE_BORLANDC && !TCRE_USE_MSVC
 
-    #define TCRE_PROPERTY_READ(type, name, function) CoreTools::PropertyGetExternal<type, const type&, function> name;
-    #define TCRE_PROPERTY_WRITE(type, name, function) CoreTools::PropertySetExternal<type, const type&, function> name;
-    #define TCRE_PROPERTY_READ_WRITE(type, name, getFunction, setFunction) CoreTools::PropertyGetSetExternal<type, const type&, getFunction, const type&, setFunction> name;
+    #define TCRE_PROPERTY_READ(type, name, function) CoreTools::PropertyGetExternal<type, const type&, function> name
+    #define TCRE_PROPERTY_WRITE(type, name, function) CoreTools::PropertySetExternal<type, const type&, function> name
+    #define TCRE_PROPERTY_READ_WRITE(type, name, getFunction, setFunction) CoreTools::PropertyGetSetExternal<type, const type&, getFunction, const type&, setFunction> name
 
 #endif  // TCRE_USE_BORLANDC
 

@@ -338,8 +338,8 @@ void Rendering::TubeSurface::Load(CoreTools::BufferSource& source)
     source.Read(numMedialSamples);
     source.Read(numSliceSamples);
     source.ReadAggregate(upVector);
-    sin = source.ReadContainerWithNumber<std::vector<float>>(numSliceSamples + 1);
-    cos = source.ReadContainerWithNumber<std::vector<float>>(numSliceSamples + 1);
+    sin = source.ReadContainerUseNumber<std::vector<float>>(numSliceSamples + 1);
+    cos = source.ReadContainerUseNumber<std::vector<float>>(numSliceSamples + 1);
 
     closed = source.ReadBool();
     sampleByArcLength = source.ReadBool();

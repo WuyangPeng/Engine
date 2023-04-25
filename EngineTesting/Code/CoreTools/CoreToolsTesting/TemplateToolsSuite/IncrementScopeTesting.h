@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 18:47)
+///	引擎测试版本：0.9.0.6 (2023/04/25 14:03)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_SUITE_INCREMENT_SCOPE_TESTING_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_SUITE_INCREMENT_SCOPE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
-
-#include <string>
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
-    class IncrementScopeTesting : public UnitTest
+    class IncrementScopeTesting final : public UnitTest
     {
     public:
         using ClassType = IncrementScopeTesting;

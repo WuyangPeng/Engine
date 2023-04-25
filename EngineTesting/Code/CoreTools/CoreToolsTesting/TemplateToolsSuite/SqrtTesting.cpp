@@ -1,19 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 19:05)
+///	引擎测试版本：0.9.0.6 (2023/04/25 14:00)
 
 #include "SqrtTesting.h"
-
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/Sqrt.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::string;
 
 CoreTools::SqrtTesting::SqrtTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -28,11 +26,9 @@ void CoreTools::SqrtTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-
 void CoreTools::SqrtTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SqrtTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(IfThenElseTest);
 }
 
 #include STSTEM_WARNING_PUSH
@@ -40,33 +36,27 @@ void CoreTools::SqrtTesting::MainTest()
 
 void CoreTools::SqrtTesting::SqrtTest()
 {
-    ASSERT_EQUAL(SqrtFirstAlgorithm<16>::Result, 4);
-    ASSERT_EQUAL(SqrtFirstAlgorithm<25>::Result, 5);
-    ASSERT_EQUAL(SqrtFirstAlgorithm<42>::Result, 6);
-    ASSERT_EQUAL(SqrtFirstAlgorithm<1>::Result, 1);
+    ASSERT_EQUAL(SqrtAlgorithm0<16>::Result, 4);
+    ASSERT_EQUAL(SqrtAlgorithm0<25>::Result, 5);
+    ASSERT_EQUAL(SqrtAlgorithm0<42>::Result, 6);
+    ASSERT_EQUAL(SqrtAlgorithm0<1>::Result, 1);
 
-    ASSERT_EQUAL(SqrtSecondAlgorithm<16>::Result, 4);
-    ASSERT_EQUAL(SqrtSecondAlgorithm<25>::Result, 5);
-    ASSERT_EQUAL(SqrtSecondAlgorithm<42>::Result, 6);
-    ASSERT_EQUAL(SqrtSecondAlgorithm<1>::Result, 1);
+    ASSERT_EQUAL(SqrtAlgorithm1<16>::Result, 4);
+    ASSERT_EQUAL(SqrtAlgorithm1<25>::Result, 5);
+    ASSERT_EQUAL(SqrtAlgorithm1<42>::Result, 6);
+    ASSERT_EQUAL(SqrtAlgorithm1<1>::Result, 1);
 
-    ASSERT_EQUAL(SqrtThirdAlgorithm<16>::Result, 4);
-    ASSERT_EQUAL(SqrtThirdAlgorithm<25>::Result, 5);
-    ASSERT_EQUAL(SqrtThirdAlgorithm<42>::Result, 7);
-    ASSERT_EQUAL(SqrtThirdAlgorithm<48>::Result, 7);
-    ASSERT_EQUAL(SqrtThirdAlgorithm<1>::Result, 1);
+    ASSERT_EQUAL(SqrtAlgorithm2<16>::Result, 4);
+    ASSERT_EQUAL(SqrtAlgorithm2<25>::Result, 5);
+    ASSERT_EQUAL(SqrtAlgorithm2<42>::Result, 7);
+    ASSERT_EQUAL(SqrtAlgorithm2<48>::Result, 7);
+    ASSERT_EQUAL(SqrtAlgorithm2<1>::Result, 1);
 
-    ASSERT_EQUAL(SqrtFourthAlgorithm<16>::Result, 4);
-    ASSERT_EQUAL(SqrtFourthAlgorithm<25>::Result, 5);
-    ASSERT_EQUAL(SqrtFourthAlgorithm<42>::Result, 7);
-    ASSERT_EQUAL(SqrtFourthAlgorithm<50>::Result, 8);
-    ASSERT_EQUAL(SqrtFourthAlgorithm<1>::Result, 1);
+    ASSERT_EQUAL(SqrtAlgorithm3<16>::Result, 4);
+    ASSERT_EQUAL(SqrtAlgorithm3<25>::Result, 5);
+    ASSERT_EQUAL(SqrtAlgorithm3<42>::Result, 7);
+    ASSERT_EQUAL(SqrtAlgorithm3<50>::Result, 8);
+    ASSERT_EQUAL(SqrtAlgorithm3<1>::Result, 1);
 }
 
 #include STSTEM_WARNING_POP
-
-void CoreTools::SqrtTesting::IfThenElseTest()
-{
-    MAYBE_UNUSED IfThenElse<true, int, string>::ResultType first{ 1 };
-    MAYBE_UNUSED IfThenElse<false, int, string>::ResultType second{ "second" };
-}

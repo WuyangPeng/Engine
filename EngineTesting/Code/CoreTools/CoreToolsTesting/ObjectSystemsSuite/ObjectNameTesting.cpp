@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 15:42)
+///	引擎测试版本：0.9.0.6 (2023/04/24 14:31)
 
 #include "ObjectNameTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/ObjectName.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::string;
 
 CoreTools::ObjectNameTesting::ObjectNameTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -34,24 +33,24 @@ void CoreTools::ObjectNameTesting::MainTest()
 
 void CoreTools::ObjectNameTesting::NameTest()
 {
-    string firstString{ "firstName" };
-    string secondString{ "secondString" };
+    const std::string string0{ "string0" };
+    const std::string string1{ "string1" };
 
-    ObjectName firstName{ firstString };
-    ObjectName secondName{ firstString };
-    ObjectName thirdName{ secondString };
+    const ObjectName objectName0{ string0 };
+    ObjectName objectName1{ string0 };
+    const ObjectName objectName2{ string1 };
 
-    ASSERT_EQUAL(firstString, firstName.GetName());
-    ASSERT_EQUAL(firstString, secondName.GetName());
-    ASSERT_EQUAL(secondString, thirdName.GetName());
-    ASSERT_TRUE(firstName.IsExactly(firstName));
-    ASSERT_TRUE(firstName.IsExactly(secondName));
-    ASSERT_FALSE(firstName.IsExactly(thirdName));
+    ASSERT_EQUAL(string0, objectName0.GetName());
+    ASSERT_EQUAL(string0, objectName1.GetName());
+    ASSERT_EQUAL(string1, objectName2.GetName());
+    ASSERT_TRUE(objectName0.IsExactly(objectName0));
+    ASSERT_TRUE(objectName0.IsExactly(objectName1));
+    ASSERT_FALSE(objectName0.IsExactly(objectName2));
 
-    secondName.SetName(secondString);
-    ASSERT_EQUAL(secondString, secondName.GetName());
+    objectName1.SetName(string1);
+    ASSERT_EQUAL(string1, objectName1.GetName());
 
-    ASSERT_FALSE(secondName.IsExactly(firstName));
-    ASSERT_TRUE(secondName.IsExactly(secondName));
-    ASSERT_TRUE(secondName.IsExactly(thirdName));
+    ASSERT_FALSE(objectName1.IsExactly(objectName0));
+    ASSERT_TRUE(objectName1.IsExactly(objectName1));
+    ASSERT_TRUE(objectName1.IsExactly(objectName2));
 }

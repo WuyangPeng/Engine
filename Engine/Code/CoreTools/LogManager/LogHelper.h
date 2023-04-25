@@ -30,13 +30,7 @@ namespace CoreTools
         LogHelper(LogLevel logLevel, LogFilter logFilter, const FunctionDescribed& functionDescribed, Types&&... arguments) noexcept;
 
         template <typename... Types>
-        LogHelper(LogLevel logLevel, LogFilter logFilter, const Error& error, Types&&... arguments) noexcept;
-
-        template <typename... Types>
         LogHelper(const LogFileName& fileName, LogLevel logLevel, LogFilter logFilter, const FunctionDescribed& functionDescribed, Types&&... arguments) noexcept;
-
-        template <typename... Types>
-        LogHelper(const LogFileName& fileName, LogLevel logLevel, LogFilter logFilter, const Error& error, Types&&... arguments) noexcept;
 
         LogHelper() noexcept = delete;
         ~LogHelper() noexcept = default;

@@ -294,7 +294,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableLengthVectorF& 
 
     using ValueType = Mathematics::VariableLengthVectorF::ContainerType::value_type;
 
-    auto container = ReadVectorWithoutNumber<ValueType>();
+    auto container = ReadVectorNotUseNumber<ValueType>();
 
     datum.SetContainer(container);
 }
@@ -314,7 +314,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableLengthVectorD& 
 
     using ValueType = Mathematics::VariableLengthVectorD::ContainerType::value_type;
 
-    auto container = ReadVectorWithoutNumber<ValueType>();
+    auto container = ReadVectorNotUseNumber<ValueType>();
 
     datum.SetContainer(container);
 }
@@ -392,7 +392,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::PolynomialF& datum)
 
     using ValueType = Mathematics::PolynomialF::ContainerType::value_type;
 
-    auto container = ReadVectorWithoutNumber<ValueType>();
+    auto container = ReadVectorNotUseNumber<ValueType>();
 
     datum.SetValue(container);
 }
@@ -412,7 +412,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::PolynomialD& datum)
 
     using ValueType = Mathematics::PolynomialD::ContainerType::value_type;
 
-    auto container = ReadVectorWithoutNumber<ValueType>();
+    auto container = ReadVectorNotUseNumber<ValueType>();
 
     datum.SetValue(container);
 }
@@ -602,7 +602,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableMatrixF& datum)
 
     const auto rowsNumber = Read<int32_t>();
     const auto columnsNumber = Read<int32_t>();
-    auto container = ReadVectorWithNumber<ValueType>(rowsNumber * columnsNumber);
+    auto container = ReadVectorUseNumber<ValueType>(rowsNumber * columnsNumber);
 
     datum.SetContainer(rowsNumber, columnsNumber, container);
 }
@@ -626,7 +626,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableMatrixD& datum)
 
     const auto rowsNumber = Read<int32_t>();
     const auto columnsNumber = Read<int32_t>();
-    auto container = ReadVectorWithNumber<ValueType>(rowsNumber * columnsNumber);
+    auto container = ReadVectorUseNumber<ValueType>(rowsNumber * columnsNumber);
 
     datum.SetContainer(rowsNumber, columnsNumber, container);
 }
@@ -654,20 +654,20 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixF& datum)
 
     datum.ResetSize(size, lowerBandsNumber, upperBandsNumber);
 
-    auto container = ReadVectorWithNumber<ValueType>(size);
+    auto container = ReadVectorUseNumber<ValueType>(size);
     datum.SetDiagonalBand(container);
 
     for (auto i = 0; i < lowerBandsNumber; ++i)
     {
         const auto lowerSize = size - 1 - i;
-        auto lowerBand = ReadVectorWithNumber<ValueType>(lowerSize);
+        auto lowerBand = ReadVectorUseNumber<ValueType>(lowerSize);
         datum.SetLowerBand(lowerSize, lowerBand);
     }
 
     for (auto i = 0; i < upperBandsNumber; ++i)
     {
         const auto upperSize = size - 1 - i;
-        auto upperBand = ReadVectorWithNumber<ValueType>(upperSize);
+        auto upperBand = ReadVectorUseNumber<ValueType>(upperSize);
         datum.SetLowerBand(upperSize, upperBand);
     }
 }
@@ -713,20 +713,20 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixD& datum)
 
     datum.ResetSize(size, lowerBandsNumber, upperBandsNumber);
 
-    auto container = ReadVectorWithNumber<ValueType>(size);
+    auto container = ReadVectorUseNumber<ValueType>(size);
     datum.SetDiagonalBand(container);
 
     for (auto i = 0; i < lowerBandsNumber; ++i)
     {
         const auto lowerSize = size - 1 - i;
-        auto lowerBand = ReadVectorWithNumber<ValueType>(lowerSize);
+        auto lowerBand = ReadVectorUseNumber<ValueType>(lowerSize);
         datum.SetLowerBand(lowerSize, lowerBand);
     }
 
     for (auto i = 0; i < upperBandsNumber; ++i)
     {
         const auto upperSize = size - 1 - i;
-        auto upperBand = ReadVectorWithNumber<ValueType>(upperSize);
+        auto upperBand = ReadVectorUseNumber<ValueType>(upperSize);
         datum.SetLowerBand(upperSize, upperBand);
     }
 }
@@ -773,20 +773,20 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixSolveF& dat
 
     datum.ResetSize(size, lowerBandsNumber, upperBandsNumber, epsilon);
 
-    auto container = ReadVectorWithNumber<ValueType>(size);
+    auto container = ReadVectorUseNumber<ValueType>(size);
     datum.SetDiagonalBand(container);
 
     for (auto i = 0; i < lowerBandsNumber; ++i)
     {
         const auto lowerSize = size - 1 - i;
-        auto lowerBand = ReadVectorWithNumber<ValueType>(lowerSize);
+        auto lowerBand = ReadVectorUseNumber<ValueType>(lowerSize);
         datum.SetLowerBand(lowerSize, lowerBand);
     }
 
     for (auto i = 0; i < upperBandsNumber; ++i)
     {
         const auto upperSize = size - 1 - i;
-        auto upperBand = ReadVectorWithNumber<ValueType>(upperSize);
+        auto upperBand = ReadVectorUseNumber<ValueType>(upperSize);
         datum.SetLowerBand(upperSize, upperBand);
     }
 }
@@ -834,20 +834,20 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixSolveD& dat
 
     datum.ResetSize(size, lowerBandsNumber, upperBandsNumber, epsilon);
 
-    auto container = ReadVectorWithNumber<ValueType>(size);
+    auto container = ReadVectorUseNumber<ValueType>(size);
     datum.SetDiagonalBand(container);
 
     for (auto i = 0; i < lowerBandsNumber; ++i)
     {
         const auto lowerSize = size - 1 - i;
-        auto lowerBand = ReadVectorWithNumber<ValueType>(lowerSize);
+        auto lowerBand = ReadVectorUseNumber<ValueType>(lowerSize);
         datum.SetLowerBand(lowerSize, lowerBand);
     }
 
     for (auto i = 0; i < upperBandsNumber; ++i)
     {
         const auto upperSize = size - 1 - i;
-        auto upperBand = ReadVectorWithNumber<ValueType>(upperSize);
+        auto upperBand = ReadVectorUseNumber<ValueType>(upperSize);
         datum.SetLowerBand(upperSize, upperBand);
     }
 }

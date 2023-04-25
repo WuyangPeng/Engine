@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/18 11:26)
+///	引擎测试版本：0.9.0.6 (2023/04/25 10:05)
 
 #ifndef CORE_TOOLS_PROPERTIES_SUITE_METHOD_PROPERTY_H
 #define CORE_TOOLS_PROPERTIES_SUITE_METHOD_PROPERTY_H
@@ -17,8 +17,6 @@
 #include "CoreTools/Properties/MethodPropertyGetSetExternalDetail.h"
 #include "CoreTools/Properties/MethodPropertySetDetail.h"
 #include "CoreTools/Properties/MethodPropertySetExternalDetail.h"
-
-#include <string>
 
 namespace CoreTools
 {
@@ -32,36 +30,36 @@ namespace CoreTools
         MethodProperty() noexcept;
 
     private:
-        NODISCARD const int& GetFirstValue() const noexcept;
-        void SetFirstValue(const int& value) noexcept;
+        NODISCARD const int& GetValue() const noexcept;
+        void SetValue(const int& aValue) noexcept;
 
     public:
         static ptrdiff_t FirstValueGetOffset() noexcept;
-        using MethodPropertyGet = MethodPropertyGet<int, const int&, ClassType, &ClassType::FirstValueGetOffset, &ClassType::GetFirstValue>;
+        using MethodPropertyGet = MethodPropertyGet<int, const int&, ClassType, &ClassType::FirstValueGetOffset, &ClassType::GetValue>;
         MethodPropertyGet getType;
 
         static ptrdiff_t FirstValueSetOffset() noexcept;
-        using MethodPropertySet = MethodPropertySet<int, const int&, ClassType, &ClassType::FirstValueSetOffset, &ClassType::SetFirstValue>;
+        using MethodPropertySet = MethodPropertySet<int, const int&, ClassType, &ClassType::FirstValueSetOffset, &ClassType::SetValue>;
         MethodPropertySet setType;
 
         static ptrdiff_t FirstValueGetSetOffset() noexcept;
-        using MethodPropertyGetSet = MethodPropertyGetSet<int, const int&, const int&, ClassType, &ClassType::FirstValueGetSetOffset, &ClassType::GetFirstValue, &ClassType::SetFirstValue>;
+        using MethodPropertyGetSet = MethodPropertyGetSet<int, const int&, const int&, ClassType, &ClassType::FirstValueGetSetOffset, &ClassType::GetValue, &ClassType::SetValue>;
         MethodPropertyGetSet getSetType;
 
         static ptrdiff_t FirstValueGetExternalOffset() noexcept;
-        using MethodPropertyGetExternal = MethodPropertyGetExternal<const int&, ClassType, &ClassType::FirstValueGetExternalOffset, &ClassType::GetFirstValue>;
+        using MethodPropertyGetExternal = MethodPropertyGetExternal<const int&, ClassType, &ClassType::FirstValueGetExternalOffset, &ClassType::GetValue>;
         MethodPropertyGetExternal getExternalType;
 
         static ptrdiff_t FirstValueSetExternalOffset() noexcept;
-        using MethodPropertySetExternal = MethodPropertySetExternal<const int&, ClassType, &ClassType::FirstValueSetExternalOffset, &ClassType::SetFirstValue>;
+        using MethodPropertySetExternal = MethodPropertySetExternal<const int&, ClassType, &ClassType::FirstValueSetExternalOffset, &ClassType::SetValue>;
         MethodPropertySetExternal setExternalType;
 
         static ptrdiff_t FirstValueGetSetExternalOffset() noexcept;
-        using MethodPropertyGetSetExternal = MethodPropertyGetSetExternal<const int&, const int&, ClassType, &ClassType::FirstValueGetSetExternalOffset, &ClassType::GetFirstValue, &ClassType::SetFirstValue>;
+        using MethodPropertyGetSetExternal = MethodPropertyGetSetExternal<const int&, const int&, ClassType, &ClassType::FirstValueGetSetExternalOffset, &ClassType::GetValue, &ClassType::SetValue>;
         MethodPropertyGetSetExternal getSetExternalType;
 
     private:
-        int firstValue;
+        int value;
     };
 }
 

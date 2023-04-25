@@ -172,7 +172,7 @@ void Rendering::BSplineSurfacePatch::Load(CoreTools::BufferSource& source)
         {
             open0 = source.ReadBool();
             numKnots1 = numCtrlPoints1 - degree1 - 1;
-            knot1 = source.ReadContainerWithNumber<std::vector<float>>(numKnots1);
+            knot1 = source.ReadContainerUseNumber<std::vector<float>>(numKnots1);
 
             patch = std::make_shared<Mathematics::BSplineRectangle<float>>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, open0, knot1.data());
         }
@@ -180,7 +180,7 @@ void Rendering::BSplineSurfacePatch::Load(CoreTools::BufferSource& source)
         case 3:
         {
             numKnots0 = numCtrlPoints0 - degree0 - 1;
-            knot0 = source.ReadContainerWithNumber<std::vector<float>>(numKnots0);
+            knot0 = source.ReadContainerUseNumber<std::vector<float>>(numKnots0);
 
             open1 = source.ReadBool();
 
@@ -190,9 +190,9 @@ void Rendering::BSplineSurfacePatch::Load(CoreTools::BufferSource& source)
         case 4:
         {
             numKnots0 = numCtrlPoints0 - degree0 - 1;
-            knot0 = source.ReadContainerWithNumber<std::vector<float>>(numKnots0);
+            knot0 = source.ReadContainerUseNumber<std::vector<float>>(numKnots0);
             numKnots1 = numCtrlPoints1 - degree1 - 1;
-            knot1 = source.ReadContainerWithNumber<std::vector<float>>(numKnots1);
+            knot1 = source.ReadContainerUseNumber<std::vector<float>>(numKnots1);
 
             patch = std::make_shared<Mathematics::BSplineRectangle<float>>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, knot0.data(), knot1.data());
         }

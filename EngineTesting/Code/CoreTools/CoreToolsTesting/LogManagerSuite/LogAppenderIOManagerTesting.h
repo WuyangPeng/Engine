@@ -1,26 +1,27 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 10:52)
+///	引擎测试版本：0.9.0.6 (2023/04/12 14:18)
 
 #ifndef LOG_MANAGER_LOG_APPENDER_IO_MANAGER_TESTING_H
 #define LOG_MANAGER_LOG_APPENDER_IO_MANAGER_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "CoreTools/LogManager/AppenderManager.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
-    class LogAppenderIOManagerTesting : public UnitTest
+    class LogAppenderIOManagerTesting final : public UnitTest
     {
     public:
         using ClassType = LogAppenderIOManagerTesting;
         using ParentType = UnitTest;
+
+        using String = System::String;
 
     public:
         explicit LogAppenderIOManagerTesting(const OStreamShared& stream);
@@ -31,11 +32,12 @@ namespace CoreTools
         void MainTest();
         void IntegerTest();
         void StringTest();
-        void Error1Test();
-        void FormatTest();
+        void ExceptionTest(); 
         void LogAppenderIOManageSignTest();
         void FileContentTest();
         void DeleteFileTest();
+
+        void SetAppenderManagerTest();
 
         void DoRunUnitTest() override;
 
@@ -43,11 +45,11 @@ namespace CoreTools
         using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>;
 
     private:
-        NODISCARD AppenderManagerSharedPtr GetAppenderManager();
+        NODISCARD static AppenderManagerSharedPtr GetAppenderManager();
 
     private:
-        System::String logAppenderIOManagerTestingName;
-        System::String logAppenderIOManagerTestingFullName;
+        String logAppenderIOManagerTestingName;
+        String logAppenderIOManagerTestingFullName;
     };
 }
 
