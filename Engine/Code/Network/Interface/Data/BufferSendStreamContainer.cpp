@@ -49,7 +49,7 @@ bool Network::BufferSendStreamContainer::IsEmpty() const noexcept
     return bufferSendStream.IsEmpty();
 }
 
-int Network::BufferSendStreamContainer::GetCurrentSize() const
+int Network::BufferSendStreamContainer::GetCurrentSize() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

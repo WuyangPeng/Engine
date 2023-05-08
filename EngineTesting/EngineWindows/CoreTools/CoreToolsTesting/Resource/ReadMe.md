@@ -240,7 +240,8 @@
 				JsonNodeTesting、
 				JsonGenerateTesting、
 				JsonRowTesting、
-				JsonConfigureTesting。 
+				JsonConfigureTesting、
+				JsonTotalGenerateTesting。 
 
 ----------------------------
 10.	 LogManagerSuite 
@@ -331,7 +332,8 @@
 14.	 TimeSuite 
 
 对时间模块的单元测试，包括：
-（1）时间：DeltaTimeManagerTesting。
+（1）时间：DeltaTimeManagerTesting、
+		   DateTesting。
 （2）计时器：SecondTimerTesting、
 			 MillisecondTimerTesting。
 （3）定制时间器：CustomTimeTesting。
@@ -348,7 +350,10 @@
 16.	 UnitTestSuiteSuite 
 
 对单元测试模块的单元测试，包括：
-（1） 单元测试：UnitTestTesting。
+（1） 单元测试：OStreamSharedTesting、
+				UnitTestTesting、
+				UnitTestCompositeTesting、
+				UnitTestStreamTesting。
 （2） 单元测试套件：SuiteTesting。
 
 ----------------------------

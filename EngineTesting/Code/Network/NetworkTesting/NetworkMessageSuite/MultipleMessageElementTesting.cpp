@@ -10,11 +10,11 @@
 #include "MultipleMessageElementTesting.h"
 #include "Flags/MultipleMessageType.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
 #include "Network/NetworkMessage/MultipleMessageContainer.h"
 #include "Network/NetworkMessage/MultipleMessageElement.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <string>
 
 using std::is_same_v;
@@ -34,7 +34,18 @@ namespace Network
                                                          MultipleMessageByteType::String>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MultipleMessageElementTesting)
+Network::MultipleMessageElementTesting::MultipleMessageElementTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MultipleMessageElementTesting)
+
+void Network::MultipleMessageElementTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::MultipleMessageElementTesting::MainTest()
 {
@@ -43,13 +54,13 @@ void Network::MultipleMessageElementTesting::MainTest()
 
 void Network::MultipleMessageElementTesting::BaseTest() noexcept
 {
-    static_assert(MultipleMessageElement<0, MultipleMessageType>::sm_ByteType == MultipleMessageByteType::Int8, "MultipleMessageElement int8 error");
-    static_assert(MultipleMessageElement<1, MultipleMessageType>::sm_ByteType == MultipleMessageByteType::Uint8, "MultipleMessageElement uint8 error");
-    static_assert(MultipleMessageElement<2, MultipleMessageType>::sm_ByteType == MultipleMessageByteType::Int16, "MultipleMessageElement int16 error");
-    static_assert(MultipleMessageElement<3, MultipleMessageType>::sm_ByteType == MultipleMessageByteType::Uint16, "MultipleMessageElement uint16 error");
-    static_assert(MultipleMessageElement<4, MultipleMessageType>::sm_ByteType == MultipleMessageByteType::Int32, "MultipleMessageElement int32 error");
-    static_assert(MultipleMessageElement<5, MultipleMessageType>::sm_ByteType == MultipleMessageByteType::Uint32, "MultipleMessageElement uint32 error");
-    static_assert(MultipleMessageElement<6, MultipleMessageType>::sm_ByteType == MultipleMessageByteType::Int64, "MultipleMessageElement int64 error");
-    static_assert(MultipleMessageElement<7, MultipleMessageType>::sm_ByteType == MultipleMessageByteType::Uint64, "MultipleMessageElement uint64 error");
-    static_assert(MultipleMessageElement<8, MultipleMessageType>::sm_ByteType == MultipleMessageByteType::String, "MultipleMessageElement string error");
+    static_assert(MultipleMessageElement<0, MultipleMessageType>::byteType == MultipleMessageByteType::Int8, "MultipleMessageElement int8 error");
+    static_assert(MultipleMessageElement<1, MultipleMessageType>::byteType == MultipleMessageByteType::Uint8, "MultipleMessageElement uint8 error");
+    static_assert(MultipleMessageElement<2, MultipleMessageType>::byteType == MultipleMessageByteType::Int16, "MultipleMessageElement int16 error");
+    static_assert(MultipleMessageElement<3, MultipleMessageType>::byteType == MultipleMessageByteType::Uint16, "MultipleMessageElement uint16 error");
+    static_assert(MultipleMessageElement<4, MultipleMessageType>::byteType == MultipleMessageByteType::Int32, "MultipleMessageElement int32 error");
+    static_assert(MultipleMessageElement<5, MultipleMessageType>::byteType == MultipleMessageByteType::Uint32, "MultipleMessageElement uint32 error");
+    static_assert(MultipleMessageElement<6, MultipleMessageType>::byteType == MultipleMessageByteType::Int64, "MultipleMessageElement int64 error");
+    static_assert(MultipleMessageElement<7, MultipleMessageType>::byteType == MultipleMessageByteType::Uint64, "MultipleMessageElement uint64 error");
+    static_assert(MultipleMessageElement<8, MultipleMessageType>::byteType == MultipleMessageByteType::String, "MultipleMessageElement string error");
 }

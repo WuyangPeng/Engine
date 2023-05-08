@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 22:34)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:04)
 
 #include "Network/NetworkExport.h"
 
@@ -25,22 +25,22 @@ CLASS_INVARIANT_STUB_DEFINE(Network, MessageTypeConditionImpl)
 
 Network::MessageTypeConditionImpl::ImplSharedPtr Network::MessageTypeConditionImpl::Create(const VersionType& version)
 {
-    return std::make_shared<Network::MessageTypeConditionSpecific>(version);
+    return std::make_shared<MessageTypeConditionSpecific>(version);
 }
 
 Network::MessageTypeConditionImpl::ImplSharedPtr Network::MessageTypeConditionImpl::Create()
 {
-    return std::make_shared<Network::MessageTypeConditionAll>();
+    return std::make_shared<MessageTypeConditionAll>();
 }
 
 Network::MessageTypeConditionImpl::ImplSharedPtr Network::MessageTypeConditionImpl::Create(VersionsCondition condition, int version)
 {
-    return std::make_shared<Network::MessageTypeConditionCompare>(condition, version);
+    return std::make_shared<MessageTypeConditionCompare>(condition, version);
 }
 
 Network::MessageTypeConditionImpl::ImplSharedPtr Network::MessageTypeConditionImpl::Create(int beginVersion, int endVersion)
 {
-    return std::make_shared<Network::MessageTypeConditionRange>(beginVersion, endVersion);
+    return std::make_shared<MessageTypeConditionRange>(beginVersion, endVersion);
 }
 
 bool Network::operator<(const MessageTypeConditionImpl& lhs, const MessageTypeConditionImpl& rhs)

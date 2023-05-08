@@ -10,18 +10,29 @@
 #include "StreamMacroTesting.h"
 #include "Detail/TestMessage.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageSource.h"
 #include "Network/NetworkMessage/MessageTarget.h"
-
 #include <array>
 
 using std::array;
 using std::make_shared;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, StreamMacroTesting)
+Network::StreamMacroTesting::StreamMacroTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, StreamMacroTesting)
+
+void Network::StreamMacroTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::StreamMacroTesting::MainTest()
 {
@@ -37,13 +48,11 @@ void Network::StreamMacroTesting::TestMessageTest()
 
     auto testMessage = make_shared<TestMessage>();
 
-#include STSTEM_WARNING_POP
-
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size1024, 0, ParserStrategy::LittleEndian) };
+#include STSTEM_WARNING_POP
+    MessageTarget messageTarget{ *buffer };
 
-    MessageTarget messageTarget{ buffer };
-
-    MessageSource messageSource{ buffer };
+    MessageSource messageSource{ *buffer };
 
     testMessage->Load(messageSource);
     testMessage->Save(messageTarget);

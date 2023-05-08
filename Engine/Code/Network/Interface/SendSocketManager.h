@@ -40,7 +40,7 @@ namespace Network
         void Send(const SocketData& socketData, uint64_t socketID, const MessageInterfaceSharedPtr& message);
 
         NODISCARD SendSocketSharedPtr GetSendSocket(const SocketData& socketData);
-        NODISCARD SocketManagerSharedPtr GetSocketManager() noexcept;
+        NODISCARD MessageEventManagerSharedPtr GetSocketManager() noexcept;
 
     private:
         PackageType impl;

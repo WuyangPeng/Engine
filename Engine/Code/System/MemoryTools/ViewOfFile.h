@@ -13,6 +13,7 @@
 #include "System/SystemDll.h"
 
 #include "Fwd/MemoryToolsFlagsFwd.h"
+#include "System/Helper/UnicodeUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
 // 文件映射系统。
@@ -23,10 +24,10 @@ namespace System
                                                                                FileMapProtection otherProtect,
                                                                                WindowsDWord maximumSizeHigh,
                                                                                WindowsDWord maximumSizeLow,
-                                                                               const wchar_t* name,
+                                                                               const TChar* name,
                                                                                bool* isExists) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseFileMapping(WindowsHandle fileMappingHandle) noexcept;
-    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE OpenSystemFileMapping(FileMapDesiredAccess desiredAccess, bool inheritHandle, const wchar_t* name) noexcept;
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE OpenSystemFileMapping(FileMapDesiredAccess desiredAccess, bool inheritHandle, const TChar* name) noexcept;
 
     MAYBE_NULLPTR WindowsVoidPtr SYSTEM_DEFAULT_DECLARE MapSystemViewOfFile(WindowsHandle fileMappingObject,
                                                                             FileMapDesiredAccess desiredAccess,

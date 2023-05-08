@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 10:41)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 11:38)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_ARRAY_BUFFER_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_ARRAY_BUFFER_H
@@ -19,11 +19,11 @@
 
 namespace Network
 {
-    template <BuffBlockSize buffBlockSize>
+    template <BuffBlockSize Size>
     class MessageArrayBuffer final : public MessageBufferImpl
     {
     public:
-        using ClassType = MessageArrayBuffer<buffBlockSize>;
+        using ClassType = MessageArrayBuffer<Size>;
         using ParentType = MessageBufferImpl;
 
     public:
@@ -31,18 +31,21 @@ namespace Network
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD const char* GetInitialBufferedPtr() const noexcept final;
-        NODISCARD char* GetInitialBufferedPtr() noexcept final;
+        NODISCARD const char* GetInitialBufferedPtr() const noexcept override;
+        NODISCARD char* GetInitialBufferedPtr() noexcept override;
 
-        NODISCARD ImplPtr Clone() const final;
+        NODISCARD ImplPtr Clone() const override;
 
-        NODISCARD BuffBlockSize GetBuffBlockSize() const noexcept final;
-        NODISCARD int GetSize() const noexcept final;
+        NODISCARD BuffBlockSize GetBuffBlockSize() const noexcept override;
+        NODISCARD int GetSize() const noexcept override;
 
-        NODISCARD ImplPtr Expansion(int count) const final;
+        NODISCARD ImplPtr Expansion(int count) const override;
 
     private:
-        std::array<char, System::EnumCastUnderlying(buffBlockSize)> buffer;
+        using BufferType = std::array<char, System::EnumCastUnderlying(Size)>;
+
+    private:
+        BufferType buffer;
     };
 }
 

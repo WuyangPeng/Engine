@@ -12,14 +12,25 @@
 #include "Detail/TestDoubleNullMessage.h"
 #include "Detail/TestNullMessage.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MessageManagerTesting)
+Network::MessageManagerTesting::MessageManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MessageManagerTesting)
+
+void Network::MessageManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::MessageManagerTesting::MainTest()
 {
@@ -30,32 +41,32 @@ void Network::MessageManagerTesting::MainTest()
 
 void Network::MessageManagerTesting::FullVersionTest()
 {
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.GetFullVersion(), g_TCRETestingVersion);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.GetFullVersion(), gTCRETestingVersion);
 
-    MESSAGE_MANAGER_SINGLETON.SetFullVersion(g_TCRETestingVersion - 1);
+    MESSAGE_MANAGER_SINGLETON.SetFullVersion(gTCRETestingVersion - 1);
 
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.GetFullVersion(), g_TCRETestingVersion - 1);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.GetFullVersion(), gTCRETestingVersion - 1);
 
-    MESSAGE_MANAGER_SINGLETON.SetFullVersion(g_TCRETestingVersion);
+    MESSAGE_MANAGER_SINGLETON.SetFullVersion(gTCRETestingVersion);
 
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.GetFullVersion(), g_TCRETestingVersion);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.GetFullVersion(), gTCRETestingVersion);
 }
 
 void Network::MessageManagerTesting::ManagerTest()
 {
     constexpr auto messageID = 6LL;
-    MessageTypeCondition messageTypeCondition1{ VersionsCondition::Equality, g_TCRETestingVersion };
-    MessageTypeCondition messageTypeCondition2{ VersionsCondition::Equality, g_TCRETestingVersion - 1 };
+    MessageTypeCondition messageTypeCondition1{ VersionsCondition::Equality, gTCRETestingVersion };
+    MessageTypeCondition messageTypeCondition2{ VersionsCondition::Equality, gTCRETestingVersion - 1 };
 
     MESSAGE_MANAGER_SINGLETON.Insert(messageID, messageTypeCondition1, TestNullMessage::Factory);
     MESSAGE_MANAGER_SINGLETON.Insert(messageID, messageTypeCondition2, TestDoubleNullMessage::Factory);
 
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageID, g_TCRETestingVersion), TestNullMessage::Factory);
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageID, g_TCRETestingVersion - 1), TestDoubleNullMessage::Factory);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageID, gTCRETestingVersion), TestNullMessage::Factory);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageID, gTCRETestingVersion - 1), TestDoubleNullMessage::Factory);
 
     MESSAGE_MANAGER_SINGLETON.Remove(messageID, messageTypeCondition1);
 
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageID, g_TCRETestingVersion - 1), TestDoubleNullMessage::Factory);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageID, gTCRETestingVersion - 1), TestDoubleNullMessage::Factory);
 
     MESSAGE_MANAGER_SINGLETON.Remove(messageID, messageTypeCondition2);
 }
@@ -63,11 +74,11 @@ void Network::MessageManagerTesting::ManagerTest()
 void Network::MessageManagerTesting::ExceptionTest()
 {
     constexpr auto messageID = 6LL;
-    MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition{ VersionsCondition::Equality, g_TCRETestingVersion }, TestNullMessage::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition{ VersionsCondition::Equality, gTCRETestingVersion }, TestNullMessage::Factory);
 
-    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageID, g_TCRETestingVersion), TestNullMessage::Factory);
+    ASSERT_EQUAL(MESSAGE_MANAGER_SINGLETON.Find(messageID, gTCRETestingVersion), TestNullMessage::Factory);
 
     MESSAGE_MANAGER_SINGLETON.Remove(messageID);
 
-    MAYBE_UNUSED auto value = MESSAGE_MANAGER_SINGLETON.Find(messageID, g_TCRETestingVersion);
+    MAYBE_UNUSED auto value = MESSAGE_MANAGER_SINGLETON.Find(messageID, gTCRETestingVersion);
 }

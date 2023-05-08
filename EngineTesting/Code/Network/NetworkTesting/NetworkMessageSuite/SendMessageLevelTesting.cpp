@@ -10,12 +10,23 @@
 #include "SendMessageLevelTesting.h"
 #include "Detail/TestNullMessage.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/NetworkMessage/SendMessageLevel.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, SendMessageLevel)
+Network::SendMessageLevelTesting::SendMessageLevelTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SendMessageLevelTesting)
+
+void Network::SendMessageLevelTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::SendMessageLevelTesting::MainTest()
 {
@@ -25,7 +36,7 @@ void Network::SendMessageLevelTesting::MainTest()
 void Network::SendMessageLevelTesting::SendMessageTest()
 {
     const auto bufferSize = 8 * GetTestLoopCount();
-    TestingType sendMessageLevel{ bufferSize };
+    SendMessageLevel sendMessageLevel{ bufferSize };
 
     ASSERT_EQUAL(sendMessageLevel.GetTopLevelSize(), 0);
     ASSERT_EQUAL(sendMessageLevel.GetCurrentSize(), 0);

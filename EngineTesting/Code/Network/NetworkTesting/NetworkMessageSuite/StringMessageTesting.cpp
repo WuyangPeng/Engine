@@ -12,8 +12,9 @@
 #include "Detail/TestIntMessage.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageManager.h"
@@ -21,11 +22,21 @@
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/StringMessageDetail.h"
-
 using std::make_shared;
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, StringMessageTesting)
+Network::StringMessageTesting::StringMessageTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, StringMessageTesting)
+
+void Network::StringMessageTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 namespace Network
 {
@@ -45,7 +56,7 @@ void Network::StringMessageTesting::RttiTest()
 {
     TestingType::StringType stringType{ "UserName", "UserInfo", "GuildName" };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(messageID, stringType) };
+    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(MessageHeadStrategy::Default, messageID, stringType) };
     TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(messageID) };
 
     ASSERT_TRUE(testMessage->IsExactly(TestingType::GetCurrentRttiType()));
@@ -68,24 +79,28 @@ void Network::StringMessageTesting::FactoryTest()
 {
     TestingType::StringType stringType{ "UserName", "UserInfo", "GuildName" };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(messageID, stringType) };
+    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(MessageHeadStrategy::Default, messageID, stringType) };
     ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 
     MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTarget messageTarget{ buffer };
-
+    MessageTarget messageTarget{ *buffer };
+#include STSTEM_WARNING_POP
     testMessage->Save(messageTarget);
 
-    MessageSource messageSource{ buffer };
+    MessageSource messageSource{ *buffer };
 
-    int64_t sourceMessageID{ 0 };
+    MessageHeadStrategy messageHeadStrategy{};
+    messageSource.ReadEnum(messageHeadStrategy);
+
+    int32_t sourceMessageID{ 0 };
     messageSource.Read(sourceMessageID);
 
     ASSERT_EQUAL(sourceMessageID, messageID);
 
-    auto factoryCreateMessage = TestingType::Factory(messageSource, messageID);
+    auto factoryCreateMessage = TestingType::Factory(messageSource, MessageHeadStrategy::Default, messageID);
     auto polymorphicMessage = boost::dynamic_pointer_cast<TestingType>(factoryCreateMessage);
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(polymorphicMessage, "消息类型错误！");
@@ -105,26 +120,30 @@ void Network::StringMessageTesting::StreamingTest()
 {
     TestingType::StringType stringType{ "UserName", "UserInfo", "GuildName" };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(messageID, stringType) };
+    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(MessageHeadStrategy::Default, messageID, stringType) };
     ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 
-    ASSERT_EQUAL(testMessage->GetStreamingSize(), CORE_TOOLS_STREAM_SIZE(messageID) + CORE_TOOLS_STREAM_SIZE(stringType));
+    ASSERT_EQUAL(testMessage->GetStreamingSize(), CoreTools::GetStreamSize(messageID) + CoreTools::GetStreamSize(stringType));
 
     MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTarget messageTarget{ buffer };
-
+    MessageTarget messageTarget{ *buffer };
+#include STSTEM_WARNING_POP
     testMessage->Save(messageTarget);
 
-    MessageSource messageSource{ buffer };
+    MessageSource messageSource{ *buffer };
 
-    int64_t sourceMessageID{ 0 };
+    MessageHeadStrategy messageHeadStrategy{};
+    messageSource.ReadEnum(messageHeadStrategy);
+
+    int32_t sourceMessageID{ 0 };
     messageSource.Read(sourceMessageID);
 
     ASSERT_EQUAL(sourceMessageID, messageID);
 
-    auto sourceTestStringMessage{ make_shared<TestingType>(messageID, TestingType::StringType{}) };
+    auto sourceTestStringMessage{ make_shared<TestingType>(MessageHeadStrategy::Default, messageID, TestingType::StringType{}) };
     ASSERT_TRUE(sourceTestStringMessage->IsExactlyTypeOf(sourceTestStringMessage));
 
     sourceTestStringMessage->Load(messageSource);
@@ -136,10 +155,10 @@ void Network::StringMessageTesting::MessageTest()
 {
     TestingType::StringType stringType{ "UserName", "UserInfo", "GuildName" };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(messageID, stringType) };
+    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(MessageHeadStrategy::Default, messageID, stringType) };
     ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 
-    ASSERT_EQUAL(testMessage->GetMessageID(), messageID);
-    ASSERT_EQUAL(testMessage->GetSubMessageID(), 0);
-    ASSERT_EQUAL(testMessage->GetFullMessageID(), messageID);
+    ASSERT_EQUAL(testMessage->GetMessageId(), messageID);
+    ASSERT_EQUAL(testMessage->GetSubMessageId(), 0);
+    ASSERT_EQUAL(testMessage->GetFullMessageId(), messageID);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 19:09)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 09:47) 
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CONTAINER_GROUP_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CONTAINER_GROUP_DETAIL_H
@@ -14,6 +14,7 @@
 #include "MultipleMessageContainerGroup.h"
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 Network::MultipleMessageContainerGroup<E, ByteType, Types...>::MultipleMessageContainerGroup() noexcept
     : group{}
 {
@@ -21,8 +22,9 @@ Network::MultipleMessageContainerGroup<E, ByteType, Types...>::MultipleMessageCo
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 Network::MultipleMessageContainerGroup<E, ByteType, Types...>::MultipleMessageContainerGroup(const GroupType& group)
-    : group(group)
+    : group{ group }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -30,7 +32,7 @@ Network::MultipleMessageContainerGroup<E, ByteType, Types...>::MultipleMessageCo
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-bool Network::MultipleMessageContainerGroup<E, ByteType, Types...>::IsValid() const noexcept
+requires(std::is_enum_v<E>) bool Network::MultipleMessageContainerGroup<E, ByteType, Types...>::IsValid() const noexcept
 {
     return true;
 }
@@ -38,6 +40,7 @@ bool Network::MultipleMessageContainerGroup<E, ByteType, Types...>::IsValid() co
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 void Network::MultipleMessageContainerGroup<E, ByteType, Types...>::Load(MessageSource& source)
 {
     NETWORK_CLASS_IS_VALID_9;
@@ -53,6 +56,7 @@ void Network::MultipleMessageContainerGroup<E, ByteType, Types...>::Load(Message
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 void Network::MultipleMessageContainerGroup<E, ByteType, Types...>::Save(MessageTarget& target) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
@@ -67,6 +71,7 @@ void Network::MultipleMessageContainerGroup<E, ByteType, Types...>::Save(Message
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 int Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GetStreamingSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
@@ -82,6 +87,7 @@ int Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GetStreamingS
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 int Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GetSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
@@ -90,7 +96,8 @@ int Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GetSize() con
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-const typename Network::MultipleMessageContainerGroup<E, ByteType, Types...>::MessageType Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GetValue(int index) const
+requires(std::is_enum_v<E>)
+typename Network::MultipleMessageContainerGroup<E, ByteType, Types...>::MessageType Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GetValue(int index) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -98,6 +105,7 @@ const typename Network::MultipleMessageContainerGroup<E, ByteType, Types...>::Me
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 typename Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GroupConstIter Network::MultipleMessageContainerGroup<E, ByteType, Types...>::begin() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
@@ -106,6 +114,7 @@ typename Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GroupCon
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 typename Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GroupConstIter Network::MultipleMessageContainerGroup<E, ByteType, Types...>::end() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;

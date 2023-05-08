@@ -11,7 +11,7 @@
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_ITERATIVE_SERVER_TESTING_H
 
 #include "Detail/TestSocketManager.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Network/Interface/Client.h"
 #include "Network/Interface/NetworkInternalFwd.h"
 
@@ -20,7 +20,13 @@ namespace Network
     class IterativeServerTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(IterativeServerTesting);
+        using ClassType = IterativeServerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit IterativeServerTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

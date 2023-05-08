@@ -9,16 +9,27 @@
 
 #include "MultipleMessageCastTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
 #include "Network/NetworkMessage/MultipleMessageCast.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <string>
 
 using std::is_same_v;
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MultipleMessageCastTesting)
+Network::MultipleMessageCastTesting::MultipleMessageCastTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MultipleMessageCastTesting)
+
+void Network::MultipleMessageCastTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::MultipleMessageCastTesting::MainTest()
 {

@@ -34,7 +34,7 @@ Network::HandleSetFactory::ImplTypeSharedPtr Network::HandleSetFactory::Create(c
     switch (wrappersStrategyFlag)
     {
 #ifdef NETWORK_USE_ACE
-        case WrappersStrategy::ACE:
+        case WrappersStrategy::Ace:
             return make_shared<SockACEHandleSet>();
 #endif  // NETWORK_USE_ACE
         default:

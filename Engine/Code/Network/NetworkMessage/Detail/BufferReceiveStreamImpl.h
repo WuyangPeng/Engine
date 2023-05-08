@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/17 15:33)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 13:32)
 
 #ifndef NETWORK_NETWORK_MESSAGE_BUFFER_RECEIVE_STREAM_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_BUFFER_RECEIVE_STREAM_IMPL_H
@@ -28,7 +28,7 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        void OnEvent(uint64_t socketID, const SocketManagerSharedPtr& socketManager);
+        void OnEvent(int64_t socketId, MessageEventManager& messageEventManager);
 
         // 如果读取未完成，需要继续解析
         NODISCARD bool IsFinish() const noexcept;
@@ -42,6 +42,8 @@ namespace Network
         void SpliceMessageSource(const MessageBufferSharedPtr& messageBuffer);
         void ReadMessage(MessageSource& messageSource, int fullVersion);
         void EncryptedCompression() noexcept;
+        void ReadMessageByDescribe(MessageSource& messageSource, int fullVersion, MessageHeadStrategy messageHeadStrategy);
+        void ReadMessageById(MessageSource& messageSource, int fullVersion, MessageHeadStrategy messageHeadStrategy);
 
     private:
         ReceiveMessageLevel topLevel;

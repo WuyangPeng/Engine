@@ -43,7 +43,7 @@ void CoreTools::MinHeapTesting::IntegerTest()
     ASSERT_EQUAL(minHeap.GetGrowBy(), 5);
     ASSERT_EQUAL(minHeap.GetElementsNumber(), 0);
 
-    std::default_random_engine generator{ boost::numeric_cast<uint32_t>(GetRandomSeed()) };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int_distribution<> randomDistribution{ 0, 10 };
 
     for (auto i = 0; i < 12; ++i)
@@ -88,7 +88,7 @@ void CoreTools::MinHeapTesting::FloatTest()
     ASSERT_EQUAL(minHeap.GetGrowBy(), 3);
     ASSERT_EQUAL(minHeap.GetElementsNumber(), 0);
 
-    std::default_random_engine generator{ boost::numeric_cast<uint32_t>(GetRandomSeed()) };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real randomDistribution{ 0.0f, 10.0f };
 
     for (auto i = 0; i < 6; ++i)

@@ -10,14 +10,14 @@
 #include "MultipleMessageStreamingLoadTesting.h"
 #include "Flags/MultipleMessageType.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
 #include "Network/NetworkMessage/MultipleMessageCast.h"
 #include "Network/NetworkMessage/MultipleMessageContainerDetail.h"
 #include "Network/NetworkMessage/MultipleMessageStreamingLoadDetail.h"
-
 #include <string>
 
 using std::make_shared;
@@ -39,7 +39,18 @@ namespace Network
     using TestingType = MultipleMessageStreamingLoad<MultipleMessageSize<MultipleMessageType>::value, MultipleMessageType>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MultipleMessageStreamingLoadTesting)
+Network::MultipleMessageStreamingLoadTesting::MultipleMessageStreamingLoadTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MultipleMessageStreamingLoadTesting)
+
+void Network::MultipleMessageStreamingLoadTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::MultipleMessageStreamingLoadTesting::MainTest()
 {
@@ -61,13 +72,15 @@ void Network::MultipleMessageStreamingLoadTesting::BaseTest()
     const string stringValue{ "string" };
 
     MultipleMessageType multipleMessageContainer{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTarget messageTarget{ buffer };
+#include STSTEM_WARNING_POP
+    MessageTarget messageTarget{ *buffer };
 
     multipleMessageContainer.Save(messageTarget);
 
-    MessageSource messageSource{ buffer };
+    MessageSource messageSource{ *buffer };
 
     TestingType multipleMessageStreamingLoad{};
 

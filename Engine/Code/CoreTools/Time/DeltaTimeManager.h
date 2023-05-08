@@ -33,10 +33,10 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
         void ResetCurrentTime();
-        NODISCARD uint64_t GetElapsedTimeInMicroseconds() const noexcept;
-        NODISCARD uint64_t GetElapsedTimeInSeconds() const noexcept;
-        NODISCARD uint64_t GetNowTimeInMicroseconds() const noexcept;
-        NODISCARD uint64_t GetNowTimeInSeconds() const noexcept;
+        NODISCARD int64_t GetElapsedTimeInMicroseconds() const noexcept;
+        NODISCARD int64_t GetElapsedTimeInSeconds() const noexcept;
+        NODISCARD int64_t GetNowTimeInMicroseconds() const noexcept;
+        NODISCARD int64_t GetNowTimeInSeconds() const noexcept;
 
     private:
         PackageType impl;

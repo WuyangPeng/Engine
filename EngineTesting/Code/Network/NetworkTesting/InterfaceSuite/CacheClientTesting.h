@@ -11,7 +11,7 @@
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_CACHE_CLIENT_TESTING_H
 
 #include "SingletonTesting.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Network/Interface/Server.h"
 #include "Network/NetworkMessage/NetworkMessageEvent.h"
 

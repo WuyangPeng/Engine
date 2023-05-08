@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.4 (2023/03/08 16:25)
+///	引擎测试版本：0.9.0.7 (2023/04/26 15:13)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_PROPERTIES_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_PROPERTIES_TESTING_H

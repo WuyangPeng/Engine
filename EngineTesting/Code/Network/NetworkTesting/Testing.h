@@ -11,10 +11,13 @@
 #define NETWORK_TESTING_H
 
 #include "ACEWrappersSuite/ACEWrappersSuite.h"
+#include "ActiveMQSuite/ActiveMQSuite.h"
 #include "BoostWrappersSuite/BoostWrappersSuite.h"
 #include "ConfigurationSuite/ConfigurationSuite.h"
 #include "HelperSuite/HelperSuite.h"
 #include "InterfaceSuite/InterfaceSuite.h"
+#include "MessageOrientedMiddlewareSuite/MessageOrientedMiddlewareSuite.h"
+#include "NatsSuite/NatsSuite.h"
 #include "NetworkMessageSuite/NetworkMessageSuite.h"
 #include "NetworkWrappersSuite/NetworkWrappersSuite.h"
 #include "OpensslSuite/OpensslSuite.h"

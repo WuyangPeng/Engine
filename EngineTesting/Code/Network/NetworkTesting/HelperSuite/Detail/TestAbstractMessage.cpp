@@ -11,12 +11,13 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 
 Network::TestAbstractMessage::TestAbstractMessage() noexcept
-    : ParentType{ 0 }
+    : ParentType{ MessageHeadStrategy::Default, 0 }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -31,8 +32,8 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, TestAbstractMessage);
 CORE_TOOLS_RTTI_DEFINE(Network, TestAbstractMessage);
 NETWORK_ABSTRACT_FACTORY_DEFINE(Network, TestAbstractMessage);
 
-Network::TestAbstractMessage::TestAbstractMessage(LoadConstructor value, int64_t messageID) noexcept
-    : ParentType{ value, messageID }
+Network::TestAbstractMessage::TestAbstractMessage(LoadConstructor value, MessageHeadStrategy messageHeadStrategy, int64_t messageID) noexcept
+    : ParentType{ value, messageHeadStrategy, messageID }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }

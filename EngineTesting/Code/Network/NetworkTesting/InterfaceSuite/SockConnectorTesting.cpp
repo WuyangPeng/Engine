@@ -10,11 +10,22 @@
 #include "SingletonTestingDetail.h"
 #include "SockConnectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Helper/UserMacro.h"
 #include "Network/Interface/SockConnector.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Network::SockConnectorTesting::SockConnectorTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, SockConnector)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SockConnectorTesting)
+
+void Network::SockConnectorTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::SockConnectorTesting::MainTest()
 {
@@ -41,17 +52,17 @@ void Network::SockConnectorTesting::NetworkTest()
 
 void Network::SockConnectorTesting::ACEConstructionTest()
 {
-    TestingType connector{ GetACEServerConfigurationStrategy() };
+    SockConnector connector{ GetACEServerConfigurationStrategy() };
 }
 
 void Network::SockConnectorTesting::BoostConstructionTest()
 {
-    TestingType connector{ GetBoostServerConfigurationStrategy() };
+    SockConnector connector{ GetBoostServerConfigurationStrategy() };
 }
 
 void Network::SockConnectorTesting::NetworkConstructionTest()
 {
-    TestingType connector{ GetNetworkServerConfigurationStrategy() };
+    SockConnector connector{ GetNetworkServerConfigurationStrategy() };
 }
 
 void Network::SockConnectorTesting::NullTest()
@@ -61,5 +72,5 @@ void Network::SockConnectorTesting::NullTest()
 
 void Network::SockConnectorTesting::NullConstructionTest()
 {
-    TestingType connector{ GetNullServerConfigurationStrategy() };
+    SockConnector connector{ GetNullServerConfigurationStrategy() };
 }

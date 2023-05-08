@@ -1,20 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/17 13:50)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/04/28 10:10)
 
 #include "Network/NetworkExport.h"
 
 #include "ConfigurationStrategyFactory.h"
 #include "ConfigurationStrategyImpl.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-
-using std::make_shared;
-using std::string;
 
 Network::ConfigurationStrategyFactory::ConfigurationStrategyFactory() noexcept
 {
@@ -23,40 +21,39 @@ Network::ConfigurationStrategyFactory::ConfigurationStrategyFactory() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ConfigurationStrategyFactory)
 
-// static
-const Network::ConfigurationStrategyFactory::ImplTypePtr Network::ConfigurationStrategyFactory::Create()
+Network::ConfigurationStrategyFactory::ImplTypePtr Network::ConfigurationStrategyFactory::Create()
 {
-    return make_shared<ImplType>();
+    return std::make_shared<ImplType>(CoreTools::DisableNotThrow::Disable);
 }
 
-const Network::ConfigurationStrategyFactory::ImplTypePtr Network::ConfigurationStrategyFactory::Create(WrappersStrategy wrappersStrategy,
-                                                                                                       ConnectStrategy connectStrategy,
-                                                                                                       ServerStrategy serverStrategy,
-                                                                                                       MessageStrategy messageStrategy,
-                                                                                                       ParserStrategy parserStrategy,
-                                                                                                       OpenSSLStrategy openSSLStrategy,
-                                                                                                       EncryptedCompressionStrategy encryptedCompressionStrategy,
-                                                                                                       const ConfigurationSubStrategy& subStrategy,
-                                                                                                       const ConfigurationParameter& configurationParameter,
-                                                                                                       SocketSendMessage socketSendMessage,
-                                                                                                       const string& ip,
-                                                                                                       int port)
+Network::ConfigurationStrategyFactory::ImplTypePtr Network::ConfigurationStrategyFactory::Create(WrappersStrategy wrappersStrategy,
+                                                                                                 ConnectStrategy connectStrategy,
+                                                                                                 ServerStrategy serverStrategy,
+                                                                                                 MessageStrategy messageStrategy,
+                                                                                                 ParserStrategy parserStrategy,
+                                                                                                 OpenSSLStrategy openSSLStrategy,
+                                                                                                 EncryptedCompressionStrategy encryptedCompressionStrategy,
+                                                                                                 const ConfigurationSubStrategy& subStrategy,
+                                                                                                 const ConfigurationParameter& configurationParameter,
+                                                                                                 SocketSendMessage socketSendMessage,
+                                                                                                 const std::string& host,
+                                                                                                 int port)
 {
-    return make_shared<ImplType>(wrappersStrategy, connectStrategy, serverStrategy, messageStrategy, parserStrategy, openSSLStrategy, encryptedCompressionStrategy, subStrategy, configurationParameter, socketSendMessage, ip, port);
+    return make_shared<ImplType>(wrappersStrategy, connectStrategy, serverStrategy, messageStrategy, parserStrategy, openSSLStrategy, encryptedCompressionStrategy, subStrategy, configurationParameter, socketSendMessage, host, port);
 }
 
-const Network::ConfigurationStrategyFactory::ImplTypePtr Network::ConfigurationStrategyFactory::Create(WrappersStrategy wrappersStrategy,
-                                                                                                       ConnectStrategy connectStrategy,
-                                                                                                       ClientStrategy clientStrategy,
-                                                                                                       MessageStrategy messageStrategy,
-                                                                                                       ParserStrategy parserStrategy,
-                                                                                                       OpenSSLStrategy openSSLStrategy,
-                                                                                                       EncryptedCompressionStrategy encryptedCompressionStrategy,
-                                                                                                       const ConfigurationSubStrategy& subStrategy,
-                                                                                                       const ConfigurationParameter& configurationParameter,
-                                                                                                       SocketSendMessage socketSendMessage,
-                                                                                                       const string& ip,
-                                                                                                       int port)
+Network::ConfigurationStrategyFactory::ImplTypePtr Network::ConfigurationStrategyFactory::Create(WrappersStrategy wrappersStrategy,
+                                                                                                 ConnectStrategy connectStrategy,
+                                                                                                 ClientStrategy clientStrategy,
+                                                                                                 MessageStrategy messageStrategy,
+                                                                                                 ParserStrategy parserStrategy,
+                                                                                                 OpenSSLStrategy openSSLStrategy,
+                                                                                                 EncryptedCompressionStrategy encryptedCompressionStrategy,
+                                                                                                 const ConfigurationSubStrategy& subStrategy,
+                                                                                                 const ConfigurationParameter& configurationParameter,
+                                                                                                 SocketSendMessage socketSendMessage,
+                                                                                                 const std::string& host,
+                                                                                                 int port)
 {
-    return make_shared<ImplType>(wrappersStrategy, connectStrategy, clientStrategy, messageStrategy, parserStrategy, openSSLStrategy, encryptedCompressionStrategy, subStrategy, configurationParameter, socketSendMessage, ip, port);
+    return std::make_shared<ImplType>(wrappersStrategy, connectStrategy, clientStrategy, messageStrategy, parserStrategy, openSSLStrategy, encryptedCompressionStrategy, subStrategy, configurationParameter, socketSendMessage, host, port);
 }

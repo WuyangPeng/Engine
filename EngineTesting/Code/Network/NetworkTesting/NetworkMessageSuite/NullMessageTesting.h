@@ -10,14 +10,20 @@
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_NULL_MESSAGE_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_NULL_MESSAGE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Network
 {
     class NullMessageTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(NullMessageTesting);
+        using ClassType = NullMessageTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit NullMessageTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

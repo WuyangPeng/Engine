@@ -1,38 +1,55 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 18:17)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/04 13:40)
 
 #ifndef NETWORK_NETWORK_MESSAGE_FWD_H
 #define NETWORK_NETWORK_MESSAGE_FWD_H
 
 #include "CoreTools/Helper/SharedPtrMacro.h"
 
+#include <google/protobuf/message.h>
 #include <memory>
 
 namespace Network
 {
+    enum class MessageEventPriority;
+    enum class SocketManagerEvent;
+    enum class SocketManagerPosition;
+
+    enum class BuffBlockSize;
+
+    enum class VersionsCondition;
+    enum class MultipleMessageByteType;
+
     class MessageInterface;
-    class DoubleMessage;
     class NullMessage;
     class NullDoubleMessage;
 
+    template <typename T>
+    requires(std::is_base_of_v<google::protobuf::Message, T>)
+    class ProtoBufMessage;
+
+    template <typename T>
+    class JsonMessage;
+
     template <typename E, typename T>
+    requires(std::is_enum_v<E>)
     class MessageContainer;
 
     template <typename E>
+    requires(std::is_enum_v<E>)
     class IntegerMessage;
 
     template <typename E>
+    requires(std::is_enum_v<E>)
     class StringMessage;
 
-    enum class MultipleMessageByteType;
-
-    template <MultipleMessageByteType byteType>
+    template <MultipleMessageByteType ByteType>
     struct MultipleMessageCast;
 
     template <int Index, typename MultipleType>
@@ -54,24 +71,19 @@ namespace Network
     class MultipleMessageStreamingLoad;
 
     template <typename E, MultipleMessageByteType ByteType, MultipleMessageByteType... Types>
+    requires(std::is_enum_v<E>)
     class MultipleMessageContainer;
 
     template <typename E, MultipleMessageByteType ByteType, MultipleMessageByteType... Types>
+    requires(std::is_enum_v<E>)
     class MultipleMessage;
 
-    template <typename E>
-    class IntegerDoubleMessage;
-
-    template <typename E>
-    class StringDoubleMessage;
-
-    template <typename E, MultipleMessageByteType ByteType, MultipleMessageByteType... Types>
-    class MultipleDoubleMessage;
-
     template <typename E, typename T>
+    requires(std::is_enum_v<E>)
     class MessageContainerGroup;
 
     template <typename E, MultipleMessageByteType ByteType, MultipleMessageByteType... Types>
+    requires(std::is_enum_v<E>)
     class MultipleMessageContainerGroup;
 
     class MessageInterfaceSharedPtrLess;
@@ -88,22 +100,12 @@ namespace Network
     class MessageTarget;
     class BufferSendStream;
     class BufferReceiveStream;
-    class SocketManager;
-
-    enum class MessageEventPriority;
-    enum class SocketManagerEvent;
-    enum class SocketManagerPoisition;
-
-    enum class BuffBlockSize;
-
-    enum class VersionsCondition;
-    enum class MultipleMessageByteType;
 
     CORE_TOOLS_SHARED_PTR_DECLARE(MessageInterface);
     CORE_TOOLS_SHARED_PTR_DECLARE(MessageSource);
     CORE_TOOLS_SHARED_PTR_DECLARE(MessageTarget);
     CORE_TOOLS_SHARED_PTR_DECLARE(MessageBuffer);
-    CORE_TOOLS_SHARED_PTR_DECLARE(SocketManager);
+    CORE_TOOLS_SHARED_PTR_DECLARE(MessageEventManager);
 
     CORE_TOOLS_SHARED_PTR_DECLARE(NetworkMessageEvent);
     CORE_TOOLS_WEAK_PTR_DECLARE(NetworkMessageEvent);

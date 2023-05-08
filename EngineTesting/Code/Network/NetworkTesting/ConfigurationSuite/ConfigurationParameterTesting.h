@@ -10,14 +10,20 @@
 #ifndef NETWORK_TESTING_CONFIGURATION_SUITE_CONFIGURATION_PARAMETER_TESTING_H
 #define NETWORK_TESTING_CONFIGURATION_SUITE_CONFIGURATION_PARAMETER_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Network
 {
     class ConfigurationParameterTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ConfigurationParameterTesting);
+        using ClassType = ConfigurationParameterTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit ConfigurationParameterTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

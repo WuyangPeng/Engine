@@ -10,12 +10,23 @@
 #include "ReceiveMessageLevelTesting.h"
 #include "Detail/TestNullMessage.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/NetworkMessage/ReceiveMessageLevel.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, ReceiveMessageLevel)
+Network::ReceiveMessageLevelTesting::ReceiveMessageLevelTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, ReceiveMessageLevelTesting)
+
+void Network::ReceiveMessageLevelTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::ReceiveMessageLevelTesting::MainTest()
 {
@@ -24,7 +35,7 @@ void Network::ReceiveMessageLevelTesting::MainTest()
 
 void Network::ReceiveMessageLevelTesting::ReceiveMessageTest()
 {
-    TestingType receiveMessageLevel = TestingType::Create();
+    ReceiveMessageLevel receiveMessageLevel = ReceiveMessageLevel::Create();
 
     ASSERT_EQUAL(receiveMessageLevel.GetTopLevelSize(), 0);
 

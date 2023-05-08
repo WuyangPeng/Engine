@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 19:28)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 13:33)
 
 #include "Network/NetworkExport.h"
 
@@ -15,12 +15,10 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+#include "Network/NetworkMessage/MessageEventManager.h"
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageSourceDetail.h"
-#include "Network/NetworkMessage/SocketManager.h"
-
-using std::make_shared;
-using std::string;
 
 Network::BufferReceiveStreamImpl::BufferReceiveStreamImpl(const MessageBufferSharedPtr& messageBuffer, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy)
     : topLevel{ ReceiveMessageLevel::Create() }, parserStrategy{ parserStrategy }, encryptedCompressionStrategy{ encryptedCompressionStrategy }, lastMessageBuffer{}
@@ -30,7 +28,6 @@ Network::BufferReceiveStreamImpl::BufferReceiveStreamImpl(const MessageBufferSha
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 void Network::BufferReceiveStreamImpl::AnalysisBuffer(const MessageBufferSharedPtr& messageBuffer)
 {
     try
@@ -51,7 +48,7 @@ void Network::BufferReceiveStreamImpl::EncryptedCompression() noexcept
 void Network::BufferReceiveStreamImpl::DoAnalysisBuffer(const MessageBufferSharedPtr& messageBuffer)
 {
     SpliceMessageSource(messageBuffer);
-    MessageSource messageSource{ lastMessageBuffer };
+    MessageSource messageSource{ *lastMessageBuffer };
 
     int32_t messageLength{ 0 };
     messageSource.Read(messageLength);
@@ -77,20 +74,48 @@ void Network::BufferReceiveStreamImpl::DoAnalysisBuffer(const MessageBufferShare
     lastMessageBuffer.reset();
 }
 
-void Network::BufferReceiveStreamImpl::ReadMessage(MessageSource& messageSource, int fullVersion)
+void Network::BufferReceiveStreamImpl::ReadMessageByDescribe(MessageSource& messageSource, int fullVersion, MessageHeadStrategy messageHeadStrategy)
 {
-    // 读取类型
-    int64_t messageType{ 0 };
-    messageSource.Read(messageType);
+    const auto messageDescribe = messageSource.ReadString();
 
     try
     {
-        auto factory = MESSAGE_MANAGER_SINGLETON.Find(messageType, fullVersion);
-
-        if (factory != nullptr)
+        if (const auto factory = MESSAGE_MANAGER_SINGLETON.Find(messageDescribe, fullVersion);
+            factory != nullptr)
         {
             // 从源缓冲器加载该对象。
-            const auto message = (*factory)(messageSource, messageType);
+            const auto message = (*factory)(messageSource, messageHeadStrategy, 0);
+
+            topLevel.Insert(message);
+        }
+    }
+    catch (const CoreTools::Error& error)
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Error, Network, error, SYSTEM_TEXT("（"), messageDescribe, SYSTEM_TEXT("）"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+    }
+}
+
+void Network::BufferReceiveStreamImpl::ReadMessageById(MessageSource& messageSource, int fullVersion, MessageHeadStrategy messageHeadStrategy)
+{
+    int64_t messageType{ 0 };
+    if (IsUseSubId(messageHeadStrategy))
+    {
+        messageSource.Read(messageType);
+    }
+    else
+    {
+        int32_t messageId{ 0 };
+        messageSource.Read(messageId);
+        messageType = messageId;
+    }
+
+    try
+    {
+        if (const auto factory = MESSAGE_MANAGER_SINGLETON.Find(messageType, fullVersion);
+            factory != nullptr)
+        {
+            // 从源缓冲器加载该对象。
+            const auto message = (*factory)(messageSource, messageHeadStrategy, messageType);
 
             topLevel.Insert(message);
         }
@@ -101,16 +126,30 @@ void Network::BufferReceiveStreamImpl::ReadMessage(MessageSource& messageSource,
     }
 }
 
-// private
+void Network::BufferReceiveStreamImpl::ReadMessage(MessageSource& messageSource, int fullVersion)
+{
+    // 读取类型
+    MessageHeadStrategy messageHeadStrategy{ 0 };
+    messageSource.ReadEnum(messageHeadStrategy);
+
+    if (IsUseDescribe(messageHeadStrategy))
+    {
+        ReadMessageByDescribe(messageSource, fullVersion, messageHeadStrategy);
+    }
+    else
+    {
+        ReadMessageById(messageSource, fullVersion, messageHeadStrategy);
+    }
+}
+
 void Network::BufferReceiveStreamImpl::SpliceMessageSource(const MessageBufferSharedPtr& messageBuffer)
 {
-    if (lastMessageBuffer)
+    if (lastMessageBuffer != nullptr)
     {
-        const auto messageLength = lastMessageBuffer->GetMessageLength();
-
-        if (messageLength < messageBuffer->GetCurrentWriteIndex() + lastMessageBuffer->GetCurrentWriteIndex())
+        if (const auto messageLength = lastMessageBuffer->GetMessageLength();
+            messageLength < messageBuffer->GetCurrentWriteIndex() + lastMessageBuffer->GetCurrentWriteIndex())
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("消息长度读取错误！"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("消息长度读取错误！"s))
         }
 
         lastMessageBuffer->PushBack(*messageBuffer);
@@ -121,11 +160,10 @@ void Network::BufferReceiveStreamImpl::SpliceMessageSource(const MessageBufferSh
     }
 }
 
-// private
 void Network::BufferReceiveStreamImpl::CopyToLastMessageSource()
 {
-    const auto messageLength = lastMessageBuffer->GetMessageLength();
-    if (lastMessageBuffer->GetSize() < messageLength)
+    if (const auto messageLength = lastMessageBuffer->GetMessageLength();
+        lastMessageBuffer->GetSize() < messageLength)
     {
         lastMessageBuffer = lastMessageBuffer->Expansion(messageLength);
     }
@@ -135,13 +173,11 @@ void Network::BufferReceiveStreamImpl::CopyToLastMessageSource()
 
 CLASS_INVARIANT_STUB_DEFINE(Network, BufferReceiveStreamImpl)
 
-void Network::BufferReceiveStreamImpl::OnEvent(uint64_t socketID, const SocketManagerSharedPtr& socketManager)
+void Network::BufferReceiveStreamImpl::OnEvent(int64_t socketId, MessageEventManager& messageEventManager)
 {
-    auto process = socketManager;
-
     for (const auto& value : topLevel)
     {
-        process->OnEvent(socketID, value->GetMessageID(), value);
+        messageEventManager.OnEvent(socketId, value->GetMessageId(), value);
     }
 }
 

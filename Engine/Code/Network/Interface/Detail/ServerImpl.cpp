@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Interface/BaseMainManager.h"
 
-Network::ServerImpl::ServerImpl(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy) noexcept
+Network::ServerImpl::ServerImpl(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy) noexcept
     : ParentType{}, configurationStrategy{ configurationStrategy }, m_SocketManager{ socketManager }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -40,7 +40,7 @@ bool Network::ServerImpl::RunServer()
            ImmediatelySend();
 }
 
-Network::SocketManagerSharedPtr Network::ServerImpl::GetSocketManagerSharedPtr()
+Network::MessageEventManagerSharedPtr Network::ServerImpl::GetSocketManagerSharedPtr()
 {
     NETWORK_CLASS_IS_VALID_9;
 

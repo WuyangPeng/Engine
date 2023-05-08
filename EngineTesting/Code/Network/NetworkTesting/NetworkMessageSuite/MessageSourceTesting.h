@@ -10,7 +10,7 @@
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_SOURCE_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_SOURCE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Network/Configuration/ConfigurationFwd.h"
 #include "Network/NetworkMessage/MessageSource.h"
 #include "Network/NetworkMessage/NetworkMessageInternalFwd.h"
@@ -23,8 +23,14 @@ namespace Network
     class MessageSourceTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MessageSourceTesting);
+        using ClassType = MessageSourceTesting;
+        using ParentType = UnitTest;
         using TestingType = MessageSource;
+
+    public:
+        explicit MessageSourceTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

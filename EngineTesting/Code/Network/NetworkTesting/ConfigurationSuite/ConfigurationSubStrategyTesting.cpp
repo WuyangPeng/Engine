@@ -9,11 +9,22 @@
 
 #include "ConfigurationSubStrategyTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Configuration/ConfigurationSubStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Network::ConfigurationSubStrategyTesting::ConfigurationSubStrategyTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, ConfigurationSubStrategy)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, ConfigurationSubStrategyTesting)
+
+void Network::ConfigurationSubStrategyTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::ConfigurationSubStrategyTesting::MainTest()
 {
@@ -22,7 +33,7 @@ void Network::ConfigurationSubStrategyTesting::MainTest()
 
 void Network::ConfigurationSubStrategyTesting::SubStrategyTest()
 {
-    TestingType configurationSubStrategy = TestingType::Create();
+    ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
 
     ASSERT_FALSE(configurationSubStrategy.IsExist(WrappersSubStrategy::MultiContext));
 

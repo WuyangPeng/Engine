@@ -40,7 +40,7 @@ Network::SockStreamFactory::ImplTypeSharedPtr Network::SockStreamFactory::Create
     switch (wrappersStrategyFlag)
     {
 #ifdef NETWORK_USE_ACE
-        case WrappersStrategy::ACE:
+        case WrappersStrategy::Ace:
         {
             if (configurationStrategy.GetMessageStrategy() == MessageStrategy::Iovec)
                 return make_shared<ACEIovecSockStream>();
@@ -63,7 +63,6 @@ Network::SockStreamFactory::ImplTypeSharedPtr Network::SockStreamFactory::Create
         case WrappersStrategy::Null:
             return make_shared<NullSockStream>();
 
-        case WrappersStrategy::Socket:
         case WrappersStrategy::Default:
         default:
             return make_shared<BoostSegmentationSockStream>(CoreTools::DisableNotThrow::Disable);

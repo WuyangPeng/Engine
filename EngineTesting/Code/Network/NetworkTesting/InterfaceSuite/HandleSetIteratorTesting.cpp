@@ -10,11 +10,22 @@
 #include "HandleSetIteratorTesting.h"
 #include "SingletonTestingDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Interface/HandleSet.h"
 #include "Network/Interface/HandleSetIterator.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Network::HandleSetIteratorTesting::HandleSetIteratorTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, HandleSetIterator)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, HandleSetIteratorTesting)
+
+void Network::HandleSetIteratorTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::HandleSetIteratorTesting::MainTest()
 {
@@ -50,44 +61,44 @@ void Network::HandleSetIteratorTesting::NullTest()
 
 void Network::HandleSetIteratorTesting::ACEConstructionTest()
 {
-    TestingType handleSetIterator{ GetACEServerConfigurationStrategy(), HandleSet(GetACEServerConfigurationStrategy()) };
+    HandleSetIterator handleSetIterator{ GetACEServerConfigurationStrategy(), HandleSet(GetACEServerConfigurationStrategy()) };
 }
 
 void Network::HandleSetIteratorTesting::BoostConstructionTest()
 {
-    TestingType handleSetIterator{ GetBoostServerConfigurationStrategy(), HandleSet(GetBoostServerConfigurationStrategy()) };
+    HandleSetIterator handleSetIterator{ GetBoostServerConfigurationStrategy(), HandleSet(GetBoostServerConfigurationStrategy()) };
 }
 
 void Network::HandleSetIteratorTesting::NetworkConstructionTest()
 {
-    TestingType handleSetIterator{ GetNetworkServerConfigurationStrategy(), HandleSet(GetNetworkServerConfigurationStrategy()) };
+    HandleSetIterator handleSetIterator{ GetNetworkServerConfigurationStrategy(), HandleSet(GetNetworkServerConfigurationStrategy()) };
 }
 
 void Network::HandleSetIteratorTesting::NullConstructionTest()
 {
-    TestingType handleSetIterator{ GetNullServerConfigurationStrategy(), HandleSet(GetNullServerConfigurationStrategy()) };
+    HandleSetIterator handleSetIterator{ GetNullServerConfigurationStrategy(), HandleSet(GetNullServerConfigurationStrategy()) };
 }
 
 void Network::HandleSetIteratorTesting::ACEOperatorTest()
 {
-    TestingType handleSetIterator{ GetACEServerConfigurationStrategy(), HandleSet(GetACEServerConfigurationStrategy()) };
+    HandleSetIterator handleSetIterator{ GetACEServerConfigurationStrategy(), HandleSet(GetACEServerConfigurationStrategy()) };
     MAYBE_UNUSED auto value = handleSetIterator.operator()();
 }
 
 void Network::HandleSetIteratorTesting::BoostOperatorExceptionTest()
 {
-    TestingType handleSetIterator{ GetBoostServerConfigurationStrategy(), HandleSet(GetBoostServerConfigurationStrategy()) };
+    HandleSetIterator handleSetIterator{ GetBoostServerConfigurationStrategy(), HandleSet(GetBoostServerConfigurationStrategy()) };
     MAYBE_UNUSED auto value = handleSetIterator.operator()();
 }
 
 void Network::HandleSetIteratorTesting::NetworkOperatorExceptionTest()
 {
-    TestingType handleSetIterator{ GetNetworkServerConfigurationStrategy(), HandleSet(GetNetworkServerConfigurationStrategy()) };
+    HandleSetIterator handleSetIterator{ GetNetworkServerConfigurationStrategy(), HandleSet(GetNetworkServerConfigurationStrategy()) };
     MAYBE_UNUSED auto value = handleSetIterator.operator()();
 }
 
 void Network::HandleSetIteratorTesting::NullOperatorExceptionTest()
 {
-    TestingType handleSetIterator{ GetNullServerConfigurationStrategy(), HandleSet(GetNullServerConfigurationStrategy()) };
+    HandleSetIterator handleSetIterator{ GetNullServerConfigurationStrategy(), HandleSet(GetNullServerConfigurationStrategy()) };
     MAYBE_UNUSED auto value = handleSetIterator.operator()();
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/19 10:25)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:06)
 
 #include "Network/NetworkExport.h"
 
@@ -17,16 +17,13 @@
 #include "CoreTools/Threading/Mutex.h"
 #include "CoreTools/Threading/ScopedMutex.h"
 
-using std::make_shared;
-using std::make_unique;
-
 SINGLETON_GET_PTR_DEFINE(CoreTools, EntityManager);
 
 Network::MessageManager::MessageManagerUniquePtr Network::MessageManager::messageManager{};
 
 void Network::MessageManager::Create()
 {
-    messageManager = make_unique<Network::MessageManager>(MessageManagerCreate::Init);
+    messageManager = std::make_unique<MessageManager>(MessageManagerCreate::Init);
 }
 
 void Network::MessageManager::Destroy() noexcept
@@ -34,48 +31,68 @@ void Network::MessageManager::Destroy() noexcept
     messageManager.reset();
 }
 
-Network::MessageManager::MessageManager(MAYBE_UNUSED MessageManagerCreate messageManagerCreate)
+Network::MessageManager::MessageManager(MessageManagerCreate messageManagerCreate)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(messageManagerCreate);
+
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, MessageManager)
 
-Network::MessageManager::FactoryFunction Network::MessageManager::Find(int64_t messageID, int version) const
+Network::MessageManager::FactoryFunction Network::MessageManager::Find(int64_t messageId, int version) const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return impl->Find(messageID, version);
+    return impl->Find(messageId, version);
 }
 
-void Network::MessageManager::Insert(int64_t messageID, const MessageTypeCondition& messageTypeCondition, FactoryFunction function)
+Network::MessageManager::FactoryFunction Network::MessageManager::Find(const std::string& messageDescribe, int version) const
+{
+    SINGLETON_MUTEX_ENTER_MEMBER;
+
+    NETWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->Find(messageDescribe, version);
+}
+
+void Network::MessageManager::Insert(int64_t messageId, const MessageTypeCondition& messageTypeCondition, FactoryFunction function)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     NETWORK_CLASS_IS_VALID_1;
 
-    return impl->Insert(messageID, messageTypeCondition, function);
+    return impl->Insert(messageId, messageTypeCondition, function);
 }
 
-void Network::MessageManager::Remove(int64_t messageID, const MessageTypeCondition& messageTypeCondition)
+void Network::MessageManager::Insert(const std::string& messageDescribe, const MessageTypeCondition& messageTypeCondition, FactoryFunction function)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     NETWORK_CLASS_IS_VALID_1;
 
-    return impl->Remove(messageID, messageTypeCondition);
+    return impl->Insert(messageDescribe, messageTypeCondition, function);
 }
 
-void Network::MessageManager::Remove(int64_t messageID)
+void Network::MessageManager::Remove(int64_t messageId, const MessageTypeCondition& messageTypeCondition)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     NETWORK_CLASS_IS_VALID_1;
 
-    return impl->Remove(messageID);
+    return impl->Remove(messageId, messageTypeCondition);
+}
+
+void Network::MessageManager::Remove(int64_t messageId)
+{
+    SINGLETON_MUTEX_ENTER_MEMBER;
+
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->Remove(messageId);
 }
 
 void Network::MessageManager::SetFullVersion(int fullVersion)

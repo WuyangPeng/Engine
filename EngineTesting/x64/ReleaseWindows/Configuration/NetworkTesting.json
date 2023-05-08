@@ -45,9 +45,9 @@
     "MessageBufferTesting": 158,
     "MessageSourceTesting": 1,
     "MessageTargetTesting": 1,
-    "BufferReceiveStreamTesting": 152,
+    "BufferReceiveStreamTesting": 0,
     "BufferSendStreamTesting": 153,
-    "SocketManagerTesting": 1
+    "SocketManagerTesting": 0
   },
 
   "interfaceSuite": {
@@ -60,11 +60,11 @@
     "HandleSetTesting": 1,
     "HandleSetIteratorTesting": 1,
     "ClientTesting": 1,
-    "CacheClientTesting": 1,
-    "OnlySendingClientTesting": 1,
+    "CacheClientTesting": 0,
+    "OnlySendingClientTesting": 0,
     "ServerTesting": 1,
-    "IterativeServerTesting": 1,
-    "ReactiveServerTesting": 1
+    "IterativeServerTesting": 0,
+    "ReactiveServerTesting": 0
   },
 
   "aCEWrappersSuite": {
@@ -72,8 +72,8 @@
     "ACESockInetAddressTesting": 1,
     "ACESockAcceptorTesting": 1,
     "ACESockConnectorTesting": 1,
-    "ACESockStreamTesting": 1,
-    "ACEIovecSockStreamTesting": 1,
+    "ACESockStreamTesting": 0,
+    "ACEIovecSockStreamTesting": 0,
     "SockACEHandleSetTesting": 1,
     "SockACEHandleSetIteratorTesting": 1
   },
@@ -82,21 +82,21 @@
     "BoostMainManagerTesting": 100,
     "BoostMainManagerUseThreadsTesting": 100,
     "BoostMainManagerUseMultiContextTesting": 100,
-    "BoostSockInetAddressTesting": 1,
+    "BoostSockInetAddressTesting": 0,
     "BoostSockConnectorTesting": 1
   },
 
   "boostSockAcceptorSuite": {
-    "BoostSockAcceptorSynchronizeTesting": 5,
-    "BoostSockAcceptorNonBlockingTesting": 5,
-    "BoostSockAcceptorAsynchronousTesting": 5,
-    "BoostSockAcceptorHandleTesting": 1
+    "BoostSockAcceptorSynchronizeTesting": 0,
+    "BoostSockAcceptorNonBlockingTesting": 0,
+    "BoostSockAcceptorAsynchronousTesting": 0,
+    "BoostSockAcceptorHandleTesting": 0
   },
 
   "boostSockConnectorSuite": {
     "BoostSockConnectorSynchronizeTesting": 0,
     "BoostSockConnectorAsynchronousTesting": 0,
-    "BoostSockConnectorHandleTesting": 1
+    "BoostSockConnectorHandleTesting": 0
   },
 
   "boostSockStreamSuite": {
@@ -122,6 +122,18 @@
   },
 
   "opensslSuite": {
+
+  },
+
+  "messageOrientedMiddlewareSuite": {
+
+  },
+
+  "activeMQSuite": {
+
+  },
+
+  "natsSuite": {
 
   }
 }

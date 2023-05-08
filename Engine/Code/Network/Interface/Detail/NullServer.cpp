@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Interface/BaseMainManager.h"
 
-Network::NullServer::NullServer(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy) noexcept
+Network::NullServer::NullServer(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy) noexcept
     : ParentType{ socketManager, configurationStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -33,12 +33,12 @@ bool Network::NullServer::WaitForMultipleEvents() noexcept
     return true;
 }
 
-bool Network::NullServer::HandleConnections(MAYBE_UNUSED SocketManager& socketManager) noexcept
+bool Network::NullServer::HandleConnections(MAYBE_UNUSED MessageEventManager& socketManager) noexcept
 {
     return true;
 }
 
-bool Network::NullServer::HandleData(MAYBE_UNUSED const SocketManagerSharedPtr& socketManager) noexcept
+bool Network::NullServer::HandleData(MAYBE_UNUSED const MessageEventManagerSharedPtr& socketManager) noexcept
 {
     return true;
 }

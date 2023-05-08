@@ -38,7 +38,7 @@ Network::SockAddressFactory::ImplTypeSharedPtr Network::SockAddressFactory::Crea
     switch (wrappersStrategyFlag)
     {
 #ifdef NETWORK_USE_ACE
-        case WrappersStrategy::ACE:
+        case WrappersStrategy::Ace:
             return make_shared<ACESockInetAddress>(hostName, port);
 #endif  // NETWORK_USE_ACE
         case WrappersStrategy::Boost:
@@ -47,7 +47,7 @@ Network::SockAddressFactory::ImplTypeSharedPtr Network::SockAddressFactory::Crea
             return make_shared<NetworkSockInetAddress>(hostName, port);
         case WrappersStrategy::Null:
             return make_shared<NullSockAddress>(hostName, port);
-        case WrappersStrategy::Socket:
+
         case WrappersStrategy::Default:
         default:
             return make_shared<BoostSockInetAddress>(hostName, port);
@@ -61,7 +61,7 @@ Network::SockAddressFactory::ImplTypeSharedPtr Network::SockAddressFactory::Crea
     switch (wrappersStrategyFlag)
     {
 #ifdef NETWORK_USE_ACE
-        case WrappersStrategy::ACE:
+        case WrappersStrategy::Ace:
             return make_shared<ACESockInetAddress>();
 #endif  // NETWORK_USE_ACE
         case WrappersStrategy::Boost:
@@ -70,7 +70,7 @@ Network::SockAddressFactory::ImplTypeSharedPtr Network::SockAddressFactory::Crea
             return make_shared<NetworkSockInetAddress>(CoreTools::DisableNotThrow::Disable);
         case WrappersStrategy::Null:
             return make_shared<NullSockAddress>(string{}, 0);
-        case WrappersStrategy::Socket:
+  
         case WrappersStrategy::Default:
         default:
             return make_shared<BoostSockInetAddress>();
@@ -84,7 +84,7 @@ Network::SockAddressFactory::ImplTypeSharedPtr Network::SockAddressFactory::Crea
     switch (wrappersStrategyFlag)
     {
 #ifdef NETWORK_USE_ACE
-        case WrappersStrategy::ACE:
+        case WrappersStrategy::Ace:
             return make_shared<ACESockInetAddress>(port);
 #endif  // NETWORK_USE_ACE
         case WrappersStrategy::Boost:
@@ -93,7 +93,7 @@ Network::SockAddressFactory::ImplTypeSharedPtr Network::SockAddressFactory::Crea
             return make_shared<NetworkSockInetAddress>(port);
         case WrappersStrategy::Null:
             return make_shared<NullSockAddress>(string{}, port);
-        case WrappersStrategy::Socket:
+ 
         case WrappersStrategy::Default:
         default:
             return make_shared<BoostSockInetAddress>(port);

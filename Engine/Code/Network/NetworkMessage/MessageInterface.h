@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 15:55)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/05 13:56)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_INTERFACE_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_INTERFACE_H
@@ -14,6 +14,7 @@
 
 #include "NetworkMessageInternalFwd.h"
 #include "CoreTools/Helper/RttiMacro.h"
+#include "Network/Configuration/ConfigurationFwd.h"
 #include "Network/Helper/StreamMacro.h"
 
 namespace Network
@@ -22,12 +23,13 @@ namespace Network
     {
     public:
         using ClassType = MessageInterface;
+
         CORE_TOOLS_SHARED_PTR_DECLARE(MessageInterface);
         using Rtti = CoreTools::Rtti;
-        using FactoryFunction = MessageInterfaceSharedPtr (*)(MessageSource& stream, int64_t messageID);
+        using FactoryFunction = MessageInterfaceSharedPtr (*)(MessageSource& stream, MessageHeadStrategy messageHeadStrategy, int64_t messageId);
 
     public:
-        explicit MessageInterface(int64_t messageID) noexcept;
+        MessageInterface(MessageHeadStrategy messageHeadStrategy, int64_t messageId) noexcept;
         virtual ~MessageInterface() noexcept = 0;
         MessageInterface(const MessageInterface& rhs) noexcept = default;
         MessageInterface& operator=(const MessageInterface& rhs) noexcept = default;
@@ -42,23 +44,27 @@ namespace Network
         NODISCARD bool IsExactlyTypeOf(const ConstMessageInterfaceSharedPtr& message) const noexcept;
         NODISCARD bool IsDerivedTypeOf(const ConstMessageInterfaceSharedPtr& message) const noexcept;
 
-        NODISCARD static MessageInterfaceSharedPtr Factory(MessageSource& source, int64_t messageID);
+        NODISCARD static MessageInterfaceSharedPtr Factory(MessageSource& source, MessageHeadStrategy messageHeadStrategy, int64_t messageId);
 
         NODISCARD virtual int GetStreamingSize() const;
         virtual void Save(MessageTarget& target) const;
         virtual void Load(MessageSource& source);
 
-        NODISCARD virtual int32_t GetMessageID() const;
-        NODISCARD virtual int32_t GetSubMessageID() const;
-        NODISCARD int64_t GetFullMessageID() const noexcept;
+        NODISCARD int GetBaseStreamingSize() const;
 
         // int32_t 总长度
         // int32_t 版本号
         // int64_t 时间戳
-        NODISCARD static constexpr int GetMessageHeadSize()
+        NODISCARD static consteval int GetMessageHeadSize() noexcept
         {
             return sizeof(int32_t) + sizeof(int32_t) + sizeof(int64_t);
         }
+
+        NODISCARD int32_t GetMessageId() const;
+        NODISCARD int32_t GetSubMessageId() const;
+        NODISCARD int64_t GetFullMessageId() const noexcept;
+
+        NODISCARD MessageHeadStrategy GetMessageHeadStrategy() const noexcept;
 
     protected:
         // 加载系统所使用的构造函数。
@@ -67,10 +73,19 @@ namespace Network
             ConstructorLoader
         };
 
-        MessageInterface(MAYBE_UNUSED LoadConstructor value, int64_t messageID) noexcept;
+        MessageInterface(LoadConstructor loadConstructor, MessageHeadStrategy messageHeadStrategy, int64_t messageId) noexcept;
+
+    protected:
+        NODISCARD bool IsUseProtoBuf() const noexcept;
+        NODISCARD bool IsUseJson() const noexcept;
 
     private:
-        int64_t m_MessageID;
+        static constexpr auto messageBytes = 32LL;
+        static constexpr auto maxMessageId = (1LL << messageBytes) - 1LL;
+
+    private:
+        MessageHeadStrategy messageHeadStrategy;
+        int64_t messageId;
     };
 
     using MessageInterfaceSharedPtr = MessageInterface::MessageInterfaceSharedPtr;

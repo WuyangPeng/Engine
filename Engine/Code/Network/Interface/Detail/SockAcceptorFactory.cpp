@@ -37,7 +37,7 @@ Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Cr
     switch (wrappersStrategyFlag)
     {
 #ifdef NETWORK_USE_ACE
-        case WrappersStrategy::ACE:
+        case WrappersStrategy::Ace:
             return make_shared<ACESockAcceptor>(port);
 #endif  // NETWORK_USE_ACE
 
@@ -50,7 +50,6 @@ Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Cr
         case WrappersStrategy::Null:
             return make_shared<NullSockAcceptor>();
 
-        case WrappersStrategy::Socket:
         case WrappersStrategy::Default:
         default:
             return make_shared<BoostSockAcceptor>(port);
@@ -65,7 +64,7 @@ Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Cr
     switch (wrappersStrategyFlag)
     {
 #ifdef NETWORK_USE_ACE
-        case WrappersStrategy::ACE:
+        case WrappersStrategy::Ace:
             return make_shared<ACESockAcceptor>(hostName, port);
 #endif  // NETWORK_USE_ACE
 
@@ -78,7 +77,6 @@ Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Cr
         case WrappersStrategy::Null:
             return make_shared<NullSockAcceptor>();
 
-        case WrappersStrategy::Socket:
         case WrappersStrategy::Default:
         default:
             return make_shared<BoostSockAcceptor>(hostName, port);
@@ -92,30 +90,29 @@ Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Cr
     switch (wrappersStrategyFlag)
     {
 #ifdef NETWORK_USE_ACE
-        case WrappersStrategy::ACE:
-            return make_shared<ACESockAcceptor>(configurationStrategy.GetIP(), configurationStrategy.GetPort());
+        case WrappersStrategy::Ace:
+            return make_shared<ACESockAcceptor>(configurationStrategy.GetHost(), configurationStrategy.GetPort());
 #endif  // NETWORK_USE_ACE
 
         case WrappersStrategy::Boost:
         {
-            if (configurationStrategy.GetIP().empty())
+            if (configurationStrategy.GetHost().empty())
             {
                 return make_shared<BoostSockAcceptor>(configurationStrategy.GetPort());
             }
             else
             {
-                return make_shared<BoostSockAcceptor>(configurationStrategy.GetIP(), configurationStrategy.GetPort());
+                return make_shared<BoostSockAcceptor>(configurationStrategy.GetHost(), configurationStrategy.GetPort());
             }
         }
         case WrappersStrategy::Network:
-            return make_shared<NetworkSockAcceptor>(configurationStrategy.GetIP(), configurationStrategy.GetPort());
+            return make_shared<NetworkSockAcceptor>(configurationStrategy.GetHost(), configurationStrategy.GetPort());
 
         case WrappersStrategy::Null:
             return make_shared<NullSockAcceptor>();
 
-        case WrappersStrategy::Socket:
         case WrappersStrategy::Default:
         default:
-            return make_shared<BoostSockAcceptor>(configurationStrategy.GetIP(), configurationStrategy.GetPort());
+            return make_shared<BoostSockAcceptor>(configurationStrategy.GetHost(), configurationStrategy.GetPort());
     }
 }

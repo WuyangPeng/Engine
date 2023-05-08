@@ -552,6 +552,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Pop.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PosixTime.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PropertyTree.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ProtoBuf.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PtrVector.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PugiXml.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Push.h" />

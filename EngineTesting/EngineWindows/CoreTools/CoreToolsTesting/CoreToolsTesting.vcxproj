@@ -872,12 +872,16 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\WindowsMutexTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\CustomTimeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DateTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DeltaTimeManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\MillisecondTimerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\SecondTimerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\TimeSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\Detail\TestEnum.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\OStreamSharedTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\SuiteTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestCompositeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestStreamTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestSuiteSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ZlibSuite\ZlibSuite.h" />
@@ -1626,10 +1630,14 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\WindowsMutexTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\CustomTimeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DateTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DeltaTimeManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\MillisecondTimerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\SecondTimerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\OStreamSharedTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\SuiteTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestCompositeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestStreamTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestTesting.cpp" />
     <ClCompile Include="Resource\CSVGenerate\Chapter.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

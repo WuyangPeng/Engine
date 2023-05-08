@@ -10,14 +10,20 @@
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MULTIPLE_MESSAGE_SIZE_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MULTIPLE_MESSAGE_SIZE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Network
 {
     class MultipleMessageSizeTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MultipleMessageSizeTesting);
+        using ClassType = MultipleMessageSizeTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit MultipleMessageSizeTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

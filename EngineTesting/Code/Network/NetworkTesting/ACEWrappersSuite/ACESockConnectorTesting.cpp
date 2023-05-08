@@ -17,13 +17,24 @@
 #include "Network/Interface/SockStream.h"
 #include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <thread>
 
 using std::make_shared;
 using std::thread;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, ACESockConnectorTesting)
+Network::ACESockConnectorTesting::ACESockConnectorTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, ACESockConnectorTesting)
+
+void Network::ACESockConnectorTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 namespace Network
 {
@@ -42,7 +53,7 @@ void Network::ACESockConnectorTesting::ConnectorTest()
 
     TestSocketManagerSharedPtr socketManager{ make_shared<TestSocketManager>(5) };
     SockStreamSharedPtr sockStream{ make_shared<SockStream>(clientConfigurationStrategy) };
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(clientConfigurationStrategy.GetIP(), clientConfigurationStrategy.GetPort(), clientConfigurationStrategy) };
+    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(clientConfigurationStrategy.GetHost(), clientConfigurationStrategy.GetPort(), clientConfigurationStrategy) };
 
     MAYBE_UNUSED const auto value = sockConnector.Connect(sockStream, sockAddress);
     sockConnector.AsyncConnect(socketManager, sockStream, sockAddress);

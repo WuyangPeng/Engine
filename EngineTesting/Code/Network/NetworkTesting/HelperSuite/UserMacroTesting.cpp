@@ -9,9 +9,20 @@
 
 #include "UserMacroTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Network::UserMacroTesting::UserMacroTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, UserMacroTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, UserMacroTesting)
+
+void Network::UserMacroTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::UserMacroTesting::MainTest() noexcept
 {

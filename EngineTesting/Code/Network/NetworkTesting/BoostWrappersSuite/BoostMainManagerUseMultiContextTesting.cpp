@@ -15,7 +15,7 @@
 #include "CoreTools/Threading/ScopedMutex.h"
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using boost::bind;
 using boost::ref;
 using std::mutex;

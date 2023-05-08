@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 22:35)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:27)
 
 #include "Network/NetworkExport.h"
 
@@ -13,8 +13,6 @@
 #include "PriorityMessageEventContainer.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-
-using std::make_shared;
 
 Network::MultiMessageEventContainerImpl::MultiMessageEventContainerImpl() noexcept
     : messageEventContainer{}
@@ -44,16 +42,16 @@ void Network::MultiMessageEventContainerImpl::Remove(const NetworkMessageEventSh
     messageEventContainer.erase(messageEvent);
 }
 
-void Network::MultiMessageEventContainerImpl::OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
+void Network::MultiMessageEventContainerImpl::OnEvent(uint64_t socketId, const ConstMessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
     for (const auto& messageEventWeakPtr : messageEventContainer)
     {
-        auto messageEventSharedPtr = messageEventWeakPtr.lock();
-        if (messageEventSharedPtr)
+        if (const auto messageEventSharedPtr = messageEventWeakPtr.lock();
+            messageEventSharedPtr != nullptr)
         {
-            messageEventSharedPtr->CallBackEvent(socketID, message);
+            messageEventSharedPtr->CallBackEvent(socketId, message);
         }
     }
 }
@@ -62,12 +60,12 @@ Network::MultiMessageEventContainerImpl::ImplPtr Network::MultiMessageEventConta
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    auto priorityMessageEventContainer = make_shared<PriorityMessageEventContainer>(CoreTools::DisableNotThrow::Disable);
+    auto priorityMessageEventContainer = std::make_shared<PriorityMessageEventContainer>(CoreTools::DisableNotThrow::Disable);
 
     for (const auto& messageEventWeakPtr : messageEventContainer)
     {
-        auto messageEventSharedPtr = messageEventWeakPtr.lock();
-        if (messageEventSharedPtr)
+        if (auto messageEventSharedPtr = messageEventWeakPtr.lock();
+            messageEventSharedPtr != nullptr)
         {
             priorityMessageEventContainer->Insert(messageEventSharedPtr, priority);
         }

@@ -10,10 +10,21 @@
 #include "HandleSetTesting.h"
 #include "SingletonTestingDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Interface/HandleSet.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Network::HandleSetTesting::HandleSetTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, HandleSet)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, HandleSetTesting)
+
+void Network::HandleSetTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::HandleSetTesting::MainTest()
 {
@@ -55,27 +66,27 @@ void Network::HandleSetTesting::NullTest()
 
 void Network::HandleSetTesting::ACEConstructionTest()
 {
-    TestingType handleSet{ GetACEServerConfigurationStrategy() };
+    HandleSet handleSet{ GetACEServerConfigurationStrategy() };
 }
 
 void Network::HandleSetTesting::BoostConstructionTest()
 {
-    TestingType handleSet{ GetBoostServerConfigurationStrategy() };
+    HandleSet handleSet{ GetBoostServerConfigurationStrategy() };
 }
 
 void Network::HandleSetTesting::NetworkConstructionTest()
 {
-    TestingType handleSet{ GetNetworkServerConfigurationStrategy() };
+    HandleSet handleSet{ GetNetworkServerConfigurationStrategy() };
 }
 
 void Network::HandleSetTesting::NullConstructionTest()
 {
-    TestingType handleSet{ GetNullServerConfigurationStrategy() };
+    HandleSet handleSet{ GetNullServerConfigurationStrategy() };
 }
 
 void Network::HandleSetTesting::ACEHandleTest()
 {
-    TestingType handleSet{ GetACEServerConfigurationStrategy() };
+    HandleSet handleSet{ GetACEServerConfigurationStrategy() };
 
     handleSet.SetBit(nullptr);
     MAYBE_UNUSED const auto maxSet = handleSet.GetMaxSet();
@@ -92,7 +103,7 @@ void Network::HandleSetTesting::ACEHandleTest()
 
 void Network::HandleSetTesting::BoostHandleTest()
 {
-    TestingType handleSet{ GetBoostServerConfigurationStrategy() };
+    HandleSet handleSet{ GetBoostServerConfigurationStrategy() };
 
     handleSet.SetBit(nullptr);
     MAYBE_UNUSED const auto maxSet = handleSet.GetMaxSet();
@@ -107,7 +118,7 @@ void Network::HandleSetTesting::BoostHandleTest()
 
 void Network::HandleSetTesting::NetworkHandleTest()
 {
-    TestingType handleSet{ GetNetworkServerConfigurationStrategy() };
+    HandleSet handleSet{ GetNetworkServerConfigurationStrategy() };
 
     handleSet.SetBit(nullptr);
     MAYBE_UNUSED const auto maxSet = handleSet.GetMaxSet();
@@ -122,7 +133,7 @@ void Network::HandleSetTesting::NetworkHandleTest()
 
 void Network::HandleSetTesting::NullHandleTest()
 {
-    TestingType handleSet{ GetNullServerConfigurationStrategy() };
+    HandleSet handleSet{ GetNullServerConfigurationStrategy() };
 
     handleSet.SetBit(nullptr);
     MAYBE_UNUSED const auto maxSet = handleSet.GetMaxSet();
@@ -137,36 +148,36 @@ void Network::HandleSetTesting::NullHandleTest()
 
 void Network::HandleSetTesting::BoostGetFdSetExceptionTest()
 {
-    TestingType handleSet{ GetBoostServerConfigurationStrategy() };
+    HandleSet handleSet{ GetBoostServerConfigurationStrategy() };
     MAYBE_UNUSED const auto* fdSet = handleSet.GetFdSet();
 }
 
 void Network::HandleSetTesting::NetworkGetFdSetExceptionTest()
 {
-    TestingType handleSet{ GetNetworkServerConfigurationStrategy() };
+    HandleSet handleSet{ GetNetworkServerConfigurationStrategy() };
     MAYBE_UNUSED const auto* fdSet = handleSet.GetFdSet();
 }
 
 void Network::HandleSetTesting::NullGetFdSetExceptionTest()
 {
-    TestingType handleSet{ GetNullServerConfigurationStrategy() };
+    HandleSet handleSet{ GetNullServerConfigurationStrategy() };
     MAYBE_UNUSED const auto* fdSet = handleSet.GetFdSet();
 }
 
 void Network::HandleSetTesting::BoostGetACEHandleSetExceptionTest()
 {
-    TestingType handleSet{ GetBoostServerConfigurationStrategy() };
+    HandleSet handleSet{ GetBoostServerConfigurationStrategy() };
     MAYBE_UNUSED const auto& aceHandleSet = handleSet.GetACEHandleSet();
 }
 
 void Network::HandleSetTesting::NetworkGetACEHandleSetExceptionTest()
 {
-    TestingType handleSet{ GetNetworkServerConfigurationStrategy() };
+    HandleSet handleSet{ GetNetworkServerConfigurationStrategy() };
     MAYBE_UNUSED const auto& aceHandleSet = handleSet.GetACEHandleSet();
 }
 
 void Network::HandleSetTesting::NullGetACEHandleSetExceptionTest()
 {
-    TestingType handleSet{ GetNullServerConfigurationStrategy() };
+    HandleSet handleSet{ GetNullServerConfigurationStrategy() };
     MAYBE_UNUSED const auto& aceHandleSet = handleSet.GetACEHandleSet();
 }

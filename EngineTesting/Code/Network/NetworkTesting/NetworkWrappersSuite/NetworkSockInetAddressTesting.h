@@ -10,7 +10,7 @@
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SOCK_NETWORK_INET_ADDRESS_TESTING_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SOCK_NETWORK_INET_ADDRESS_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTesting.h"
 
 namespace Network

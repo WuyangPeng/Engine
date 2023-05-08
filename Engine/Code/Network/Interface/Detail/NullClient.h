@@ -23,7 +23,7 @@ namespace Network
         using ParentType = ClientImpl;
 
     public:
-        NullClient(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager) noexcept;
+        NullClient(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager) noexcept;
 
         CLASS_INVARIANT_FINAL_DECLARE;
 

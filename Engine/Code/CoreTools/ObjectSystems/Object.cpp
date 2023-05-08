@@ -65,8 +65,8 @@ int CoreTools::Object::GetStreamingSize() const
     // RTTI名
     int size = GetStreamSize(GetRttiType().GetName());
 
-    // UniqueID
-    size += GetStreamSize(this);
+    // UniqueId
+    size += GetStreamSize<int64_t>();
 
     // 对象名
     size += GetStreamSize(objectName.GetName());

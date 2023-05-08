@@ -15,18 +15,18 @@
 using std::make_shared;
 
 Network::NullSocketManager::NullSocketManager(int64_t messageID)
-    : ParentType{ CoreTools::DisableNotThrow::Disable }, event{ make_shared<TestNetworkMessageEvent>() }, messageID{ messageID }
+    : ParentType{}, event{ make_shared<TestNetworkMessageEvent>() }, messageID{ messageID }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullSocketManager);
 
-void Network::NullSocketManager::InitEvent(uint64_t socketID)
+void Network::NullSocketManager::InitEvent(uint64_t socketID) noexcept
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    InsertEvent(socketID, messageID, event);
+    socketID;
 }
 
 bool Network::NullSocketManager::EventFunction(MAYBE_UNUSED const CallbackParameters& callbackParameters) noexcept

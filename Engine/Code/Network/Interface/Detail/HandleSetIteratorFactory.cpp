@@ -34,7 +34,7 @@ Network::HandleSetIteratorFactory::ImplTypeSharedPtr Network::HandleSetIteratorF
     switch (wrappersStrategyFlag)
     {
 #ifdef NETWORK_USE_ACE
-        case WrappersStrategy::ACE:
+        case WrappersStrategy::Ace:
             return make_shared<SockACEHandleSetIterator>(handleSet.GetACEHandleSet());
 #endif  // NETWORK_USE_ACE
         default:

@@ -167,8 +167,9 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PROTO_BUF_PRAGMA_WARNING;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(EngineTestingInclude)/Network/NetworkTesting/NetworkMessageSuite/Detail/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -176,14 +177,24 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/*.exe" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf/Proto" /F /Y
+</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PROTO_BUF_PRAGMA_WARNING;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(EngineTestingInclude)/Network/NetworkTesting/NetworkMessageSuite/Detail/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -191,14 +202,24 @@ xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Con
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/*.exe" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf/Proto" /F /Y
+</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PROTO_BUF_PRAGMA_WARNING;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(EngineTestingInclude)/Network/NetworkTesting/NetworkMessageSuite/Detail/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -206,14 +227,24 @@ xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Con
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/*.exe" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf/Proto" /F /Y
+</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PROTO_BUF_PRAGMA_WARNING;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(EngineTestingInclude)/Network/NetworkTesting/NetworkMessageSuite/Detail/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -221,16 +252,26 @@ xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Con
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/*.exe" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf/Proto" /F /Y
+</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PROTO_BUF_PRAGMA_WARNING;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(EngineTestingInclude)/Network/NetworkTesting/NetworkMessageSuite/Detail/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -240,16 +281,26 @@ xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Con
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/*.exe" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf/Proto" /F /Y
+</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PROTO_BUF_PRAGMA_WARNING;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(EngineTestingInclude)/Network/NetworkTesting/NetworkMessageSuite/Detail/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -259,16 +310,26 @@ xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Con
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/*.exe" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf/Proto" /F /Y
+</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PROTO_BUF_PRAGMA_WARNING;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(EngineTestingInclude)/Network/NetworkTesting/NetworkMessageSuite/Detail/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -278,16 +339,26 @@ xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Con
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/*.exe" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf/Proto" /F /Y
+</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PROTO_BUF_PRAGMA_WARNING;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(EngineTestingInclude)/Network/NetworkTesting/NetworkMessageSuite/Detail/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -297,8 +368,17 @@ xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Con
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/*.exe" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf" /F /Y
+xcopy "$(ProjectDir)/Resource/Protobuf/Proto/*.proto" "../../../$(Platform)/$(Configuration)Windows/Resource/Protobuf/Proto" /F /Y
+</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProtobufX64ReleaseLib)/protoc.exe" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "$(ProjectDir)/Resource/Protobuf/" /F /Y
+$(ProjectDir)/Resource/Protobuf/GenProtoBuf.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACEIovecSockStreamTesting.h" />
@@ -310,6 +390,7 @@ xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Con
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACEWrappersSuite.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\SockACEHandleSetIteratorTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\SockACEHandleSetTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ActiveMQSuite\ActiveMQSuite.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerUseMultiContextTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerUseThreadsTesting.h" />
@@ -362,9 +443,12 @@ xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Con
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockAddressTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockConnectorTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\MessageOrientedMiddlewareSuite\MessageOrientedMiddlewareSuite.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NatsSuite\NatsSuite.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\BufferReceiveStreamTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\BufferSendStreamTesting.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\NullSocketManager.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\Resource\Protobuf\Proto\Player.pb.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleIntMessage.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleNullMessage.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestIntMessage.h" />
@@ -478,6 +562,7 @@ xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Con
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\BufferReceiveStreamTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\BufferSendStreamTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\NullSocketManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\Resource\Protobuf\Proto\Player.pb.cc" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleIntMessage.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleNullMessage.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestIntMessage.cpp" />
@@ -545,6 +630,8 @@ xcopy "$(ProjectDir)/Configuration/NetworkTest.json" "../../../$(Platform)/$(Con
     <None Include="Configuration\NetworkTest.json" />
     <None Include="Configuration\NetworkTesting.json" />
     <None Include="Configuration\Testing.json" />
+    <None Include="Resource\Protobuf\GenProtoBuf.bat" />
+    <None Include="Resource\Protobuf\proto\Player.proto" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>

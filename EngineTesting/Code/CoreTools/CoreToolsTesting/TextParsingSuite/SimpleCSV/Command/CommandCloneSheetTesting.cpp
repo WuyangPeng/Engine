@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.4 (2023/03/07 11:11)
+///	引擎测试版本：0.9.0.7 (2023/04/26 17:07)
 
 #include "CommandCloneSheetTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -35,10 +35,10 @@ void CoreTools::CommandCloneSheetTesting::MainTest()
 
 void CoreTools::CommandCloneSheetTesting::CommandCloneSheetTest()
 {
-    const auto sheetID = "sheetID"s;
+    const auto sheetId = "sheetId"s;
     const auto cloneName = "cloneName"s;
-    const SimpleCSV::CommandCloneSheet commandCloneSheet{ sheetID, cloneName };
+    const SimpleCSV::CommandCloneSheet commandCloneSheet{ sheetId, cloneName };
 
-    ASSERT_EQUAL(sheetID, commandCloneSheet.GetSheetId());
+    ASSERT_EQUAL(sheetId, commandCloneSheet.GetSheetId());
     ASSERT_EQUAL(cloneName, commandCloneSheet.GetCloneName());
 }

@@ -9,9 +9,20 @@
 
 #include "NetworkUniqueIDManagerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Network::NetworkUniqueIDManagerTesting::NetworkUniqueIDManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, NetworkUniqueIDManagerTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NetworkUniqueIDManagerTesting)
+
+void Network::NetworkUniqueIDManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::NetworkUniqueIDManagerTesting::MainTest()
 {

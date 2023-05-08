@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 19:11)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 09:33)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_DETAIL_H
@@ -18,16 +18,18 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-Network::MultipleMessage<E, ByteType, Types...>::MultipleMessage(int64_t messageID, const MessageType& messageType)
-    : ParentType{ messageID }, message{ messageType }
+requires(std::is_enum_v<E>)
+Network::MultipleMessage<E, ByteType, Types...>::MultipleMessage(MessageHeadStrategy messageHeadStrategy, int64_t messageId, const MessageType& messageType)
+    : ParentType{ messageHeadStrategy, messageId }, message{ messageType }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 template <typename T, typename... OtherTypes>
-Network::MultipleMessage<E, ByteType, Types...>::MultipleMessage(int64_t messageID, T value, OtherTypes&&... otherValue)
-    : ParentType{ messageID }, message{ value, std::forward<OtherTypes>(otherValue)... }
+Network::MultipleMessage<E, ByteType, Types...>::MultipleMessage(MessageHeadStrategy messageHeadStrategy, int64_t messageId, T value, OtherTypes&&... otherValue)
+    : ParentType{ messageHeadStrategy, messageId }, message{ value, std::forward<OtherTypes>(otherValue)... }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -35,7 +37,7 @@ Network::MultipleMessage<E, ByteType, Types...>::MultipleMessage(int64_t message
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-bool Network::MultipleMessage<E, ByteType, Types...>::IsValid() const noexcept
+requires(std::is_enum_v<E>) bool Network::MultipleMessage<E, ByteType, Types...>::IsValid() const noexcept
 {
     if (ParentType::IsValid())
         return true;
@@ -46,12 +48,14 @@ bool Network::MultipleMessage<E, ByteType, Types...>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 const CoreTools::Rtti& Network::MultipleMessage<E, ByteType, Types...>::GetRttiType() const noexcept
 {
     return GetCurrentRttiType();
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 const CoreTools::Rtti& Network::MultipleMessage<E, ByteType, Types...>::GetCurrentRttiType() noexcept
 {
     static const auto rtti = CoreTools::Rtti{ typeid(ClassType).name(), &ParentType::GetCurrentRttiType() };
@@ -60,9 +64,10 @@ const CoreTools::Rtti& Network::MultipleMessage<E, ByteType, Types...>::GetCurre
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-Network::MessageInterfaceSharedPtr Network::MultipleMessage<E, ByteType, Types...>::Factory(MessageSource& source, int64_t messageID)
+requires(std::is_enum_v<E>)
+Network::MessageInterfaceSharedPtr Network::MultipleMessage<E, ByteType, Types...>::Factory(MessageSource& source, MessageHeadStrategy messageHeadStrategy, int64_t messageID)
 {
-    auto object = std::make_shared<ClassType>(LoadConstructor::ConstructorLoader, messageID);
+    auto object = std::make_shared<ClassType>(LoadConstructor::ConstructorLoader, messageHeadStrategy, messageID);
 
     object->Load(source);
 
@@ -70,13 +75,15 @@ Network::MessageInterfaceSharedPtr Network::MultipleMessage<E, ByteType, Types..
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-Network::MultipleMessage<E, ByteType, Types...>::MultipleMessage(LoadConstructor value, int64_t messageID) noexcept
-    : ParentType{ value, messageID }, message{}
+requires(std::is_enum_v<E>)
+Network::MultipleMessage<E, ByteType, Types...>::MultipleMessage(LoadConstructor value, MessageHeadStrategy messageHeadStrategy, int64_t messageID) noexcept
+    : ParentType{ value, messageHeadStrategy, messageID }, message{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 void Network::MultipleMessage<E, ByteType, Types...>::Load(MessageSource& source)
 {
     NETWORK_CLASS_IS_VALID_9;
@@ -91,6 +98,7 @@ void Network::MultipleMessage<E, ByteType, Types...>::Load(MessageSource& source
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 void Network::MultipleMessage<E, ByteType, Types...>::Save(MessageTarget& target) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
@@ -105,6 +113,7 @@ void Network::MultipleMessage<E, ByteType, Types...>::Save(MessageTarget& target
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 int Network::MultipleMessage<E, ByteType, Types...>::GetStreamingSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
@@ -113,6 +122,7 @@ int Network::MultipleMessage<E, ByteType, Types...>::GetStreamingSize() const
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 int Network::MultipleMessage<E, ByteType, Types...>::GetSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;

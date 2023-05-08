@@ -12,24 +12,35 @@
 #include "Detail/TestIntMessage.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
-#include "Network/NetworkMessage/IntegerDoubleMessageDetail.h"
+#include "Network/NetworkMessage/IntegerMessageDetail.h"
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
-
 using std::make_shared;
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, IntegerDoubleMessageTesting)
+Network::IntegerDoubleMessageTesting::IntegerDoubleMessageTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, IntegerDoubleMessageTesting)
+
+void Network::IntegerDoubleMessageTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 namespace Network
 {
-    using TestingType = IntegerDoubleMessage<IntegerMessageField>;
+    using TestingType = IntegerMessage<IntegerMessageField>;
     using TestingTypeSharedPtr = std::shared_ptr<TestingType>;
 }
 
@@ -45,7 +56,7 @@ void Network::IntegerDoubleMessageTesting::RttiTest()
 {
     TestingType::IntegerType integerType{ 100, 10, 1000, 2, 100 };
 
-    auto testMessage = make_shared<TestingType>(fullMessageID, integerType);
+    auto testMessage = make_shared<TestingType>(MessageHeadStrategy::Default, fullMessageID, integerType);
     auto testIntMessage = make_shared<TestIntMessage>(fullMessageID);
 
     ASSERT_TRUE(testMessage->IsExactly(TestingType::GetCurrentRttiType()));
@@ -71,23 +82,26 @@ void Network::IntegerDoubleMessageTesting::FactoryTest()
 {
     TestingType::IntegerType integerType{ 100, 10, 1000, 2, 100 };
 
-    auto testMessage = make_shared<TestingType>(fullMessageID, integerType);
+    auto testMessage = make_shared<TestingType>(MessageHeadStrategy::UseSubId, fullMessageID, integerType);
 
     MESSAGE_MANAGER_SINGLETON.Insert(fullMessageID, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
 
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    auto messageTarget = make_shared<MessageTarget>(buffer);
+    auto messageTarget = make_shared<MessageTarget>(*buffer);
 
     testMessage->Save(*messageTarget);
 
-    auto messageSource = make_shared<MessageSource>(buffer);
+    auto messageSource = make_shared<MessageSource>(*buffer);
+
+    MessageHeadStrategy messageHeadStrategy{};
+    messageSource->ReadEnum(messageHeadStrategy);
 
     int64_t sourceMessageID{ 0 };
     messageSource->Read(sourceMessageID);
 
     ASSERT_EQUAL(sourceMessageID, fullMessageID);
 
-    auto factoryCreateMessage = TestingType::Factory(*messageSource, fullMessageID);
+    auto factoryCreateMessage = TestingType::Factory(*messageSource, MessageHeadStrategy::UseSubId, fullMessageID);
     auto polymorphicMessage = boost::dynamic_pointer_cast<TestingType>(factoryCreateMessage);
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(polymorphicMessage, "消息类型错误！");
@@ -107,25 +121,28 @@ void Network::IntegerDoubleMessageTesting::StreamingTest()
 {
     TestingType::IntegerType integerType{ 100, 10, 1000, 2, 100 };
 
-    auto testMessage = make_shared<TestingType>(fullMessageID, integerType);
+    auto testMessage = make_shared<TestingType>(MessageHeadStrategy::UseSubId, fullMessageID, integerType);
 
-    ASSERT_EQUAL(testMessage->GetStreamingSize(), CORE_TOOLS_STREAM_SIZE(fullMessageID) + CORE_TOOLS_STREAM_SIZE(integerType));
+    ASSERT_EQUAL(testMessage->GetStreamingSize(), CoreTools::GetStreamSize(fullMessageID) + CoreTools::GetStreamSize(integerType) + 4);
 
     MESSAGE_MANAGER_SINGLETON.Insert(fullMessageID, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
 
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    auto messageTarget = make_shared<MessageTarget>(buffer);
+    auto messageTarget = make_shared<MessageTarget>(*buffer);
 
     testMessage->Save(*messageTarget);
 
-    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(buffer) };
+    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(*buffer) };
+
+    MessageHeadStrategy messageHeadStrategy{};
+    messageSource->ReadEnum(messageHeadStrategy);
 
     int64_t sourceMessageID{ 0 };
     messageSource->Read(sourceMessageID);
 
     ASSERT_EQUAL(sourceMessageID, fullMessageID);
 
-    auto sourceTestIntMessage{ make_shared<TestingType>(fullMessageID, TestingType::IntegerType{}) };
+    auto sourceTestIntMessage{ make_shared<TestingType>(MessageHeadStrategy::UseSubId, fullMessageID, TestingType::IntegerType{}) };
 
     sourceTestIntMessage->Load(*messageSource);
 
@@ -138,11 +155,11 @@ void Network::IntegerDoubleMessageTesting::MessageTest()
 {
     TestingType::IntegerType integerType{ 100, 10, 1000, 2, 100 };
 
-    auto testMessage = make_shared<TestingType>(fullMessageID, integerType);
+    auto testMessage = make_shared<TestingType>(MessageHeadStrategy::UseSubId, fullMessageID, integerType);
 
-    ASSERT_EQUAL(testMessage->GetMessageID(), messageID);
-    ASSERT_EQUAL(testMessage->GetSubMessageID(), subMessageID);
-    ASSERT_EQUAL(testMessage->GetFullMessageID(), fullMessageID);
+    ASSERT_EQUAL(testMessage->GetMessageId(), messageID);
+    ASSERT_EQUAL(testMessage->GetSubMessageId(), subMessageID);
+    ASSERT_EQUAL(testMessage->GetFullMessageId(), fullMessageID);
 
     ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 }

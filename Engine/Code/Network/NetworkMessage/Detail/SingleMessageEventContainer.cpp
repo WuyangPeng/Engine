@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 22:38)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:15)
 
 #include "Network/NetworkExport.h"
 
@@ -16,83 +16,82 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::make_shared;
-
 Network::SingleMessageEventContainer::SingleMessageEventContainer() noexcept
-    : ParentType{}, m_MessageEvent{}
+    : ParentType{}, messageEvent{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SingleMessageEventContainer)
 
-void Network::SingleMessageEventContainer::Insert(const NetworkMessageEventSharedPtr& messageEvent)
+void Network::SingleMessageEventContainer::Insert(const NetworkMessageEventSharedPtr& aMessageEvent)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    if (m_MessageEvent.lock())
+    if (messageEvent.lock())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("消息事件已存在！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("消息事件已存在！"s))
     }
 
-    m_MessageEvent = messageEvent;
+    messageEvent = aMessageEvent;
 }
 
-void Network::SingleMessageEventContainer::Remove(const NetworkMessageEventSharedPtr& messageEvent)
+void Network::SingleMessageEventContainer::Remove(const NetworkMessageEventSharedPtr& aMessageEvent)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    if (m_MessageEvent.lock() == messageEvent)
+    if (messageEvent.lock() == aMessageEvent)
     {
-        m_MessageEvent.reset();
+        messageEvent.reset();
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("消息事件不存在！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("消息事件不存在！"s))
     }
 }
 
-void Network::SingleMessageEventContainer::OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
+void Network::SingleMessageEventContainer::OnEvent(uint64_t socketId, const ConstMessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    auto messageEvent = m_MessageEvent.lock();
-
-    if (messageEvent)
+    if (const auto messageEventSharedPtr = messageEvent.lock();
+        messageEventSharedPtr != nullptr)
     {
-        messageEvent->CallBackEvent(socketID, message);
+        messageEventSharedPtr->CallBackEvent(socketId, message);
     }
 }
 
-void Network::SingleMessageEventContainer::Insert(const NetworkMessageEventSharedPtr& messageEvent, MAYBE_UNUSED MessageEventPriority priority)
+void Network::SingleMessageEventContainer::Insert(const NetworkMessageEventSharedPtr& aMessageEvent, MessageEventPriority priority)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    if (m_MessageEvent.lock())
+    System::UnusedFunction(priority);
+
+    if (messageEvent.lock())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("消息事件已存在！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("消息事件已存在！"s))
     }
 
-    m_MessageEvent = messageEvent;
+    messageEvent = aMessageEvent;
 }
 
 Network::SingleMessageEventContainer::ImplPtr Network::SingleMessageEventContainer::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return make_shared<ClassType>(*this);
+    return std::make_shared<ClassType>(*this);
 }
 
 Network::SingleMessageEventContainer::ImplPtr Network::SingleMessageEventContainer::CloneToMultiMessage() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    auto messageEvent = m_MessageEvent.lock();
-    auto multiMessageEventContainer = make_shared<MultiMessageEventContainer>(CoreTools::DisableNotThrow::Disable);
+    auto multiMessageEventContainer = std::make_shared<MultiMessageEventContainer>(CoreTools::DisableNotThrow::Disable);
 
-    if (messageEvent)
+    if (const auto messageEventSharedPtr = messageEvent.lock();
+        messageEventSharedPtr != nullptr)
     {
-        multiMessageEventContainer->Insert(messageEvent);
+        multiMessageEventContainer->Insert(messageEventSharedPtr);
     }
 
     return multiMessageEventContainer;
@@ -102,12 +101,12 @@ Network::SingleMessageEventContainer::ImplPtr Network::SingleMessageEventContain
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    auto messageEvent = m_MessageEvent.lock();
-    auto priorityMessageEventContainer = make_shared<PriorityMessageEventContainer>(CoreTools::DisableNotThrow::Disable);
+    auto priorityMessageEventContainer = std::make_shared<PriorityMessageEventContainer>(CoreTools::DisableNotThrow::Disable);
 
-    if (messageEvent)
+    if (const auto messageEventSharedPtr = messageEvent.lock();
+        messageEventSharedPtr != nullptr)
     {
-        priorityMessageEventContainer->Insert(messageEvent);
+        priorityMessageEventContainer->Insert(messageEventSharedPtr);
     }
 
     return priorityMessageEventContainer;
@@ -117,15 +116,17 @@ bool Network::SingleMessageEventContainer::IsCanInsert() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    if (!m_MessageEvent.lock())
+    if (!messageEvent.lock())
         return true;
     else
         return false;
 }
 
-bool Network::SingleMessageEventContainer::IsPrioritySame(MAYBE_UNUSED MessageEventPriority priority) const noexcept
+bool Network::SingleMessageEventContainer::IsPrioritySame(MessageEventPriority priority) const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(priority);
 
     return false;
 }

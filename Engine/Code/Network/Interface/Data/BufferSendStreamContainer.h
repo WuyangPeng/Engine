@@ -35,7 +35,7 @@ namespace Network
 
         NODISCARD bool IsEmpty() const noexcept;
 
-        NODISCARD int GetCurrentSize() const;
+        NODISCARD int GetCurrentSize() const noexcept;
 
         NODISCARD ACEHandle GetACEHandle() const noexcept;
         NODISCARD uint64_t GetSocketID() const noexcept;

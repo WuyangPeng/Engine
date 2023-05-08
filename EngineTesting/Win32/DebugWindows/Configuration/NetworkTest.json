@@ -1,6 +1,6 @@
 {
   "GameServer": {
-    "IP": "127.0.1.1",
+    "Host": "127.0.1.1",
     "Port": 8010,
     "Client": 0,
     "Server": 2,
@@ -12,21 +12,24 @@
     "Send": 0,
 
     "WrappersSub": {
+      "SendBufferSize": 1048576,
+      "ReceiveBufferSize": 1048576,
       "Threads": 3,
       "MultiContext": 2
     },
 
     "Parameter": {
-      "ServerID": 1,
-      "ServerID": 2,
-      "PlatformID": 1,
+      "ServerId": 1,
+      "ServerId": 2,
+      "PlatformId": 1,
+      "CellId": 1,
       "ServerName": "GameServer",
       "BufferSize": 100000
     }
   },
 
   "GameClient": {
-    "IP": "127.0.0.1",
+    "Host": "127.0.0.1",
     "Port": 8010,
     "Client": 2,
     "Server": 0,
@@ -41,8 +44,8 @@
     },
 
     "Parameter": {
-      "PlatformID": 1,
-      "PlatformID": 2,
+      "PlatformId": 1,
+      "PlatformId": 2,
       "ClientName": "GameClient",
       "BufferSize": 100000
     }

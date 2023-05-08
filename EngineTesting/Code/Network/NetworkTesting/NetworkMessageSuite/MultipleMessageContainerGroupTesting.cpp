@@ -10,7 +10,7 @@
 #include "MultipleMessageContainerGroupTesting.h"
 #include "Flags/MultipleMessageType.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
@@ -18,11 +18,22 @@
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 #include "Network/NetworkMessage/MultipleMessageContainer.h"
 #include "Network/NetworkMessage/MultipleMessageContainerGroupDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MultipleMessageContainerGroupTesting)
+Network::MultipleMessageContainerGroupTesting::MultipleMessageContainerGroupTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MultipleMessageContainerGroupTesting)
+
+void Network::MultipleMessageContainerGroupTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 namespace Network
 {
@@ -141,16 +152,16 @@ void Network::MultipleMessageContainerGroupTesting::StreamingTest()
     const auto streamSize = multipleMessageContainer1.GetStreamingSize() +
                             multipleMessageContainer2.GetStreamingSize() +
                             multipleMessageContainer1.GetStreamingSize() +
-                            CORE_TOOLS_STREAM_SIZE(int32_t{});
+                            CoreTools::GetStreamSize(int32_t{});
 
     ASSERT_EQUAL(multipleMessageContainerGroup.GetStreamingSize(), streamSize);
 
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(buffer) };
+    MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(*buffer) };
 
     multipleMessageContainerGroup.Save(*messageTarget);
 
-    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(buffer) };
+    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(*buffer) };
 
     TestingType resultMultipleMessageContainerGroup{};
 

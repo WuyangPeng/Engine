@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 22:34)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 11:39)
 
 #include "Network/NetworkExport.h"
 
@@ -17,8 +17,6 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
-
-using std::make_shared;
 
 Network::MessageVectorBuffer::MessageVectorBuffer(int count, ParserStrategy parserStrategy)
     : ParentType{ parserStrategy }, buffer(count)
@@ -69,7 +67,7 @@ Network::MessageVectorBuffer::ImplPtr Network::MessageVectorBuffer::Expansion(in
 
     if (count <= GetSize())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("扩容大小小于原容器大小"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("扩容大小小于原容器大小"s))
     }
 
     auto messageVectorBuffer = make_shared<ClassType>(*this);
@@ -79,7 +77,6 @@ Network::MessageVectorBuffer::ImplPtr Network::MessageVectorBuffer::Expansion(in
     return messageVectorBuffer;
 }
 
-// private
 void Network::MessageVectorBuffer::Resize(int count)
 {
     buffer.resize(count);

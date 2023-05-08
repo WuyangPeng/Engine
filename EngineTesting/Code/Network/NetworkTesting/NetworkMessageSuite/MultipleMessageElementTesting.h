@@ -10,14 +10,20 @@
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MULTIPLE_MESSAGE_ELEMENT_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MULTIPLE_MESSAGE_ELEMENT_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Network
 {
     class MultipleMessageElementTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MultipleMessageElementTesting);
+        using ClassType = MultipleMessageElementTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit MultipleMessageElementTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

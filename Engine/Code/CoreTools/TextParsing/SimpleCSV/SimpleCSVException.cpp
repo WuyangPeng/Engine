@@ -29,26 +29,28 @@ CoreTools::SimpleCSV::SimpleCSVException::SimpleCSVException(const FunctionDescr
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools::SimpleCSV, SimpleCSVException)
 
-void CoreTools::SimpleCSV::SimpleCSVException::ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, CSVExceptionType errorCode, const String& message)
+void CoreTools::SimpleCSV::SimpleCSVException::ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, CSVExceptionType errorCode, const std::wstring& message)
 {
-    throw ClassType{ functionDescribed, lastError, errorCode, message };
+    throw ClassType{ functionDescribed, lastError, errorCode, StringConversion::WideCharConversionStandard(message) };
 }
 
-void CoreTools::SimpleCSV::SimpleCSVException::ThrowError(const FunctionDescribed& functionDescribed, CSVExceptionType errorCode, const String& message)
+void CoreTools::SimpleCSV::SimpleCSVException::ThrowError(const FunctionDescribed& functionDescribed, CSVExceptionType errorCode, const std::wstring& message)
 {
     const LastError lastError{};
 
-    throw ClassType{ functionDescribed, lastError, errorCode, message };
+    throw ClassType{ functionDescribed, lastError, errorCode, StringConversion::WideCharConversionStandard(message) };
 }
 
 void CoreTools::SimpleCSV::SimpleCSVException::ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, CSVExceptionType errorCode, const std::string& message)
 {
-    ThrowError(functionDescribed, lastError, errorCode, StringConversion::MultiByteConversionStandard(message));
+    throw ClassType{ functionDescribed, lastError, errorCode, StringConversion::MultiByteConversionStandard(message) };
 }
 
 void CoreTools::SimpleCSV::SimpleCSVException::ThrowError(const FunctionDescribed& functionDescribed, CSVExceptionType errorCode, const std::string& message)
 {
-    ThrowError(functionDescribed, errorCode, StringConversion::MultiByteConversionStandard(message));
+    const LastError lastError{};
+
+    throw ClassType{ functionDescribed, lastError, errorCode, StringConversion::MultiByteConversionStandard(message) };
 }
 
 System::String CoreTools::SimpleCSV::SimpleCSVException::GetErrorCodeDescribed() const

@@ -12,15 +12,26 @@
 #include "Detail/TestNullMessage.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 #include "Network/NetworkMessage/MessageEventManager.h"
-
 using std::make_shared;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, MessageEventManager)
+Network::MessageEventManagerTesting::MessageEventManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-void Network::MessageEventManagerTesting::MainTest() noexcept
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MessageEventManagerTesting)
+
+void Network::MessageEventManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
+
+void Network::MessageEventManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SingleContainerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(PriorityContainerTest);
@@ -31,7 +42,7 @@ void Network::MessageEventManagerTesting::SingleContainerTest()
 {
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent{ make_shared<TestNetworkMessageEvent>() };
 
-    TestingType messageEventContainer = TestingType::Create();
+    MessageEventManager messageEventContainer = MessageEventManager::Create();
 
     constexpr int64_t messageID{ 6 };
 
@@ -41,11 +52,11 @@ void Network::MessageEventManagerTesting::SingleContainerTest()
 
     TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(messageID) };
 
-    messageEventContainer.OnEvent(messageID - 1, 1, testMessage);
+    messageEventContainer.OnEvent(1, messageID - 1, testMessage);
 
     ASSERT_EQUAL(testNetworkMessageEvent->GetValue(), 0);
 
-    messageEventContainer.OnEvent(messageID, 1, testMessage);
+    messageEventContainer.OnEvent(1, messageID, testMessage);
 
     ASSERT_EQUAL(testNetworkMessageEvent->GetValue(), boost::numeric_cast<int>(messageID));
 }
@@ -57,7 +68,7 @@ void Network::MessageEventManagerTesting::PriorityContainerTest()
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent1{ make_shared<TestNetworkMessageEvent>() };
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent2{ make_shared<TestNetworkMessageEvent>() };
 
-    TestingType messageEventContainer = TestingType::Create();
+    MessageEventManager messageEventContainer = MessageEventManager::Create();
 
     messageEventContainer.Insert(messageID, testNetworkMessageEvent1);
     messageEventContainer.Insert(messageID, testNetworkMessageEvent2, MessageEventPriority::Highest);
@@ -67,12 +78,12 @@ void Network::MessageEventManagerTesting::PriorityContainerTest()
 
     TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(messageID) };
 
-    messageEventContainer.OnEvent(messageID - 1, 1, testMessage);
+    messageEventContainer.OnEvent(1, messageID - 1, testMessage);
 
     ASSERT_EQUAL(testNetworkMessageEvent1->GetValue(), 0);
     ASSERT_EQUAL(testNetworkMessageEvent2->GetValue(), 0);
 
-    messageEventContainer.OnEvent(messageID, 1, testMessage);
+    messageEventContainer.OnEvent(1, messageID, testMessage);
 
     ASSERT_EQUAL(testNetworkMessageEvent1->GetValue(), boost::numeric_cast<int>(messageID));
     ASSERT_EQUAL(testNetworkMessageEvent2->GetValue(), boost::numeric_cast<int>(messageID));
@@ -87,7 +98,7 @@ void Network::MessageEventManagerTesting::MultiContainerTest()
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent1{ make_shared<TestNetworkMessageEvent>() };
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent2{ make_shared<TestNetworkMessageEvent>() };
 
-    TestingType messageEventContainer = TestingType::Create();
+    MessageEventManager messageEventContainer = MessageEventManager::Create();
 
     messageEventContainer.Insert(messageID, testNetworkMessageEvent1);
     messageEventContainer.Insert(messageID, testNetworkMessageEvent2);
@@ -97,12 +108,12 @@ void Network::MessageEventManagerTesting::MultiContainerTest()
 
     TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(messageID) };
 
-    messageEventContainer.OnEvent(messageID - 1, 1, testMessage);
+    messageEventContainer.OnEvent(1, messageID - 1, testMessage);
 
     ASSERT_EQUAL(testNetworkMessageEvent1->GetValue(), 0);
     ASSERT_EQUAL(testNetworkMessageEvent2->GetValue(), 0);
 
-    messageEventContainer.OnEvent(messageID, 1, testMessage);
+    messageEventContainer.OnEvent(1, messageID, testMessage);
 
     ASSERT_EQUAL(testNetworkMessageEvent1->GetValue(), boost::numeric_cast<int>(messageID));
     ASSERT_EQUAL(testNetworkMessageEvent2->GetValue(), boost::numeric_cast<int>(messageID));

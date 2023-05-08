@@ -10,9 +10,9 @@
 #include "BoostSockAcceptorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Interface/Client.h"
 #include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
-
 using std::make_shared;
 
 Network::BoostSockAcceptorTesting::BoostSockAcceptorTesting(const OStreamShared& stream)
@@ -30,14 +30,13 @@ void Network::BoostSockAcceptorTesting::ClientThread()
 
 void Network::BoostSockAcceptorTesting::DoClientThread()
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(GetMessageID()) };
 
     auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    ClientSharedPtr client{ make_shared<Client>(configurationStrategy, testSocketManager) };
+    ClientSharedPtr client{ make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())) };
 
 #include STSTEM_WARNING_POP
 

@@ -9,10 +9,21 @@
 
 #include "ConfigurationParameterTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Configuration/ConfigurationParameter.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Network::ConfigurationParameterTesting::ConfigurationParameterTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, ConfigurationParameter)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, ConfigurationParameterTesting)
+
+void Network::ConfigurationParameterTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::ConfigurationParameterTesting::MainTest()
 {
@@ -21,7 +32,7 @@ void Network::ConfigurationParameterTesting::MainTest()
 
 void Network::ConfigurationParameterTesting::ParameterTest()
 {
-    TestingType configurationParameter = TestingType::Create();
+    ConfigurationParameter configurationParameter = ConfigurationParameter::Create();
 
     configurationParameter.AddParameter(SYSTEM_TEXT("PlatformID"), SYSTEM_TEXT("3"));
 

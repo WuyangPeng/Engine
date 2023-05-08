@@ -1,19 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 14:20)
+///	引擎测试版本：0.9.0.7 (2023/04/25 16:37)
 
 #include "DeltaTimeManagerTesting.h"
 #include "System/Threading/SyncTools.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Time/DeltaTimeManager.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
+#include <Mathematics/Base/Math.h>
+
 CoreTools::DeltaTimeManagerTesting::DeltaTimeManagerTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -58,5 +61,5 @@ void CoreTools::DeltaTimeManagerTesting::TimeTest()
 
     time.ResetCurrentTime();
 
-    ASSERT_APPROXIMATE(time.GetElapsedTimeInMicroseconds(), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(time.GetElapsedTimeInMicroseconds(), 0.0, Mathematics::MathD::GetZeroTolerance());
 }

@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-Network::Server::Server(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
+Network::Server::Server(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
     : ParentType{}, impl{ CoreTools::ImplCreateUseFactory::Default, socketManager, configurationStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;

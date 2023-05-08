@@ -16,13 +16,24 @@
 #include "Network/Interface/SockStream.h"
 #include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <thread>
 
 using std::make_shared;
 using std::thread;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockAcceptorNonBlockingTesting)
+Network::BoostSockAcceptorNonBlockingTesting::BoostSockAcceptorNonBlockingTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostSockAcceptorNonBlockingTesting)
+
+void Network::BoostSockAcceptorNonBlockingTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::BoostSockAcceptorNonBlockingTesting::MainTest()
 {

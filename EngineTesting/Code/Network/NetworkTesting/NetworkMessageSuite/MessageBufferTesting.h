@@ -11,7 +11,7 @@
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_BUFFER_TESTING_H
 
 #include "Detail/TestNullMessage.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Network/NetworkMessage/NetworkMessageInternalFwd.h"
 
 namespace Network
@@ -19,28 +19,34 @@ namespace Network
     class MessageBufferTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MessageBufferTesting);
+        using ClassType = MessageBufferTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit MessageBufferTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();
 
         void InitTest();
-        void PushBackTest(int testLoopCount, ParserStrategy parserStrateg);
-        void ExpansionTest(int testLoopCount, ParserStrategy parserStrategy);
-        void CloneTest(int testLoopCount, ParserStrategy parserStrategy);
-        void ReadTest(int testLoopCount, ParserStrategy parserStrategy);
+        void PushBackTest(int aTestLoopCount, ParserStrategy parserStrateg);
+        void ExpansionTest(int aTestLoopCount, ParserStrategy parserStrategy);
+        void CloneTest(int aTestLoopCount, ParserStrategy parserStrategy);
+        void ReadTest(int aTestLoopCount, ParserStrategy parserStrategy);
         void WriteTest(ParserStrategy parserStrategy);
-        void BufferedTest(int testLoopCount, ParserStrategy parserStrategy);
-        void LengthTest(int testLoopCount, ParserStrategy parserStrategy);
+        void BufferedTest(int aTestLoopCount, ParserStrategy parserStrategy);
+        void LengthTest(int aTestLoopCount, ParserStrategy parserStrategy);
         void ExpansionExceptionTest(ParserStrategy parserStrategy);
         void CheckingMessageHeadSizeExceptionTest(ParserStrategy parserStrategy);
         void CheckingMessageContentSizeExceptionTest(ParserStrategy parserStrategy);
 
-        void LoopTest(int testLoopCount);
+        void LoopTest(int aTestLoopCount);
 
-        NODISCARD MessageBufferSharedPtr CreateSendMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const;
-        NODISCARD MessageBufferSharedPtr CreateAddMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const;
-        void AddBufferLength(int testLoopCount, MessageBuffer& messageBuffer);
+        NODISCARD MessageBufferSharedPtr CreateSendMessageBuffer(int aTestLoopCount, ParserStrategy parserStrategy) const;
+        NODISCARD MessageBufferSharedPtr CreateAddMessageBuffer(int aTestLoopCount, ParserStrategy parserStrategy) const;
+        void AddBufferLength(int aTestLoopCount, MessageBuffer& messageBuffer);
 
         void DoRunUnitTest() override;
 

@@ -655,6 +655,7 @@ void CoreTools::TestingHelper::AddTimeSuite()
     ADD_TEST(timeSuite, DeltaTimeManagerTesting);
     ADD_TEST(timeSuite, MillisecondTimerTesting);
     ADD_TEST(timeSuite, SecondTimerTesting);
+    ADD_TEST(timeSuite, DateTesting);
 
     AddSuite(timeSuite);
 }
@@ -674,7 +675,10 @@ void CoreTools::TestingHelper::AddUnitTestSuite()
 {
     auto unitTestSuite = GenerateSuite("µ¥Ôª²âÊÔ¿â");
 
+    ADD_TEST(unitTestSuite, OStreamSharedTesting);
     ADD_TEST(unitTestSuite, UnitTestTesting);
+    ADD_TEST(unitTestSuite, UnitTestCompositeTesting);
+    ADD_TEST(unitTestSuite, UnitTestStreamTesting);
     ADD_TEST(unitTestSuite, SuiteTesting);
 
     AddSuite(unitTestSuite);

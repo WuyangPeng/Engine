@@ -29,8 +29,8 @@ namespace CoreTools::SimpleCSV
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        [[noreturn]] static void ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, CSVExceptionType errorCode, const String& message);
-        [[noreturn]] static void ThrowError(const FunctionDescribed& functionDescribed, CSVExceptionType errorCode, const String& message);
+        [[noreturn]] static void ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, CSVExceptionType errorCode, const std::wstring& message);
+        [[noreturn]] static void ThrowError(const FunctionDescribed& functionDescribed, CSVExceptionType errorCode, const std::wstring& message);
         [[noreturn]] static void ThrowError(const FunctionDescribed& functionDescribed, WindowError lastError, CSVExceptionType errorCode, const std::string& message);
         [[noreturn]] static void ThrowError(const FunctionDescribed& functionDescribed, CSVExceptionType errorCode, const std::string& message);
 

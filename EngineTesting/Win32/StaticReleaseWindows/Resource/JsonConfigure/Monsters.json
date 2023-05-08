@@ -2,6 +2,7 @@
   "system": 5,
   "coreTools": 1,
   "network": "Console",
+  "boolTest": true,
 
   "test": [ 1, 2, 3 ],
 

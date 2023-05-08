@@ -19,7 +19,13 @@ namespace Network
     class ReactiveServerTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ReactiveServerTesting);
+        using ClassType = ReactiveServerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit ReactiveServerTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

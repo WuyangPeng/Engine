@@ -16,7 +16,7 @@
 #include "SendSocket.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "Network/NetworkMessage/MessageInterface.h"
-#include "Network/NetworkMessage/SocketManager.h"
+#include "Network/NetworkMessage/MessageEventManager.h"
 
 #include <string>
 
@@ -31,7 +31,7 @@ namespace Network
         using ParentType = SendSocket;
 
     public:
-        Client(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager);
+        Client(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

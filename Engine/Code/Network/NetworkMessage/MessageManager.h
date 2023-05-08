@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 16:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:05)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_MANAGER_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_MANAGER_H
@@ -40,7 +40,7 @@ namespace Network
         };
 
     public:
-        explicit MessageManager(MAYBE_UNUSED MessageManagerCreate messageManagerCreate);
+        explicit MessageManager(MessageManagerCreate messageManagerCreate);
 
         static void Create();
         static void Destroy() noexcept;
@@ -50,10 +50,13 @@ namespace Network
         CLASS_INVARIANT_DECLARE;
 
     public:
-        NODISCARD FactoryFunction Find(int64_t messageID, int version) const;
-        void Insert(int64_t messageID, const MessageTypeCondition& messageTypeCondition, FactoryFunction function);
-        void Remove(int64_t messageID, const MessageTypeCondition& messageTypeCondition);
-        void Remove(int64_t messageID);
+        NODISCARD FactoryFunction Find(int64_t messageId, int version) const;
+        NODISCARD FactoryFunction Find(const std::string& messageDescribe, int version) const;
+
+        void Insert(int64_t messageId, const MessageTypeCondition& messageTypeCondition, FactoryFunction function);
+        void Insert(const std::string& messageDescribe, const MessageTypeCondition& messageTypeCondition, FactoryFunction function);
+        void Remove(int64_t messageId, const MessageTypeCondition& messageTypeCondition);
+        void Remove(int64_t messageId);
 
         void SetFullVersion(int fullVersion);
         NODISCARD int GetFullVersion() const;

@@ -1,16 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 16:35)
+///	引擎测试版本：0.9.0.7 (2023/04/27 14:32)
 
 #include "Testing.h"
 #include "TestingHelper.h"
 #include "ThreadingCoreRenderEngineTesting/Version.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
@@ -41,19 +42,18 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, TestingHelper)
 void Network::TestingHelper::CreateSingleton()
 {
     MessageManager::Create();
-    MESSAGE_MANAGER_SINGLETON.SetFullVersion(g_TCRETestingVersion);
+    MESSAGE_MANAGER_SINGLETON.SetFullVersion(gTCRETestingVersion);
 
-    CoreTools::InitTerm::ExecuteInitializers();
+    CoreTools::InitTerm::ExecuteInitializer();
 }
 
 // private
 void Network::TestingHelper::DestroySingleton()
 {
-    CoreTools::InitTerm::ExecuteTerminators();
+    CoreTools::InitTerm::ExecuteTerminator();
     MessageManager::Destroy();
 }
 
-// private
 void Network::TestingHelper::InitSuite()
 {
     AddHelperSuite();
@@ -65,6 +65,9 @@ void Network::TestingHelper::InitSuite()
     AddNetworkWrappersSuite();
     AddSocketWrappersSuite();
     AddOpensslSuite();
+    AddMessageOrientedMiddlewareSuite();
+    AddActiveMQSuite();
+    AddNatsSuite();
 }
 
 void Network::TestingHelper::AddHelperSuite()
@@ -250,4 +253,25 @@ void Network::TestingHelper::AddOpensslSuite()
     auto opensslSuite = GenerateSuite("Openssl包装器");
 
     AddSuite(opensslSuite);
+}
+
+void Network::TestingHelper::AddMessageOrientedMiddlewareSuite()
+{
+    auto messageOrientedMiddlewareSuite = GenerateSuite("消息中间件");
+
+    AddSuite(messageOrientedMiddlewareSuite);
+}
+
+void Network::TestingHelper::AddActiveMQSuite()
+{
+    auto activeMQSuite = GenerateSuite("Active MQ");
+
+    AddSuite(activeMQSuite);
+}
+
+void Network::TestingHelper::AddNatsSuite()
+{
+    auto natsSuite = GenerateSuite("Nats");
+
+    AddSuite(natsSuite);
 }

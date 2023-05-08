@@ -14,8 +14,19 @@
 #include "Network/Interface/HandleSet.h"
 #include "Network/Interface/SockAcceptor.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Network::SockACEHandleSetTesting::SockACEHandleSetTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, SockACEHandleSetTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SockACEHandleSetTesting)
+
+void Network::SockACEHandleSetTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::SockACEHandleSetTesting::MainTest()
 {

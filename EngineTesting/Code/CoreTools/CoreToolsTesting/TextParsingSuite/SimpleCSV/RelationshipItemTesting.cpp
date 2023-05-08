@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.4 (2023/03/08 16:26)
+///	引擎测试版本：0.9.0.7 (2023/04/26 16:11)
 
 #include "RelationshipItemTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -18,8 +18,8 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 
-using namespace std::literals;
 using System::operator++;
+using namespace std::literals;
 
 CoreTools::RelationshipItemTesting::RelationshipItemTesting(const OStreamShared& stream)
     : ParentType{ stream }

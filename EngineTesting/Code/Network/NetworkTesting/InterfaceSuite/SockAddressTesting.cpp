@@ -10,11 +10,22 @@
 #include "SingletonTestingDetail.h"
 #include "SockAddressTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Helper/UserMacro.h"
 #include "Network/Interface/SockAddress.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Network::SockAddressTesting::SockAddressTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, SockAddress)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SockAddressTesting)
+
+void Network::SockAddressTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::SockAddressTesting::MainTest()
 {
@@ -50,115 +61,115 @@ void Network::SockAddressTesting::NetworkTest()
 
 void Network::SockAddressTesting::ACEConstructionTest()
 {
-    TestingType sockAddress1{ GetACEServerConfigurationStrategy() };
+    SockAddress sockAddress1{ GetACEServerConfigurationStrategy() };
     ASSERT_EQUAL(sockAddress1.GetAddress(), "0.0.0.0:0");
     ASSERT_EQUAL(sockAddress1.GetPort(), 0);
 
-    TestingType sockAddress2{ "127.0.0.1", 8010, GetACEServerConfigurationStrategy() };
+    SockAddress sockAddress2{ "127.0.0.1", 8010, GetACEServerConfigurationStrategy() };
     ASSERT_EQUAL(sockAddress2.GetAddress(), "127.0.0.1:8010");
     ASSERT_EQUAL(sockAddress2.GetPort(), 8010);
 
-    TestingType sockAddress3{ 8010, GetACEServerConfigurationStrategy() };
+    SockAddress sockAddress3{ 8010, GetACEServerConfigurationStrategy() };
     ASSERT_EQUAL(sockAddress3.GetAddress(), "0.0.0.0:8010");
     ASSERT_EQUAL(sockAddress3.GetPort(), 8010);
 }
 
 void Network::SockAddressTesting::BoostConstructionTest()
 {
-    TestingType sockAddress1{ GetBoostServerConfigurationStrategy() };
+    SockAddress sockAddress1{ GetBoostServerConfigurationStrategy() };
     ASSERT_EQUAL(sockAddress1.GetAddress(), "0.0.0.0:0");
     ASSERT_EQUAL(sockAddress1.GetPort(), 0);
 
-    TestingType sockAddress2{ "127.0.0.1", 8010, GetBoostServerConfigurationStrategy() };
+    SockAddress sockAddress2{ "127.0.0.1", 8010, GetBoostServerConfigurationStrategy() };
     ASSERT_EQUAL(sockAddress2.GetAddress(), "127.0.0.1:8010");
     ASSERT_EQUAL(sockAddress2.GetPort(), 8010);
 
-    TestingType sockAddress3{ 8010, GetBoostServerConfigurationStrategy() };
+    SockAddress sockAddress3{ 8010, GetBoostServerConfigurationStrategy() };
     ASSERT_EQUAL(sockAddress3.GetAddress(), "0.0.0.0:8010");
     ASSERT_EQUAL(sockAddress3.GetPort(), 8010);
 }
 
 void Network::SockAddressTesting::NetworkConstructionTest()
 {
-    TestingType sockAddress1{ GetNetworkServerConfigurationStrategy() };
+    SockAddress sockAddress1{ GetNetworkServerConfigurationStrategy() };
     ASSERT_EQUAL(sockAddress1.GetAddress(), "0.0.0.0:0");
     ASSERT_EQUAL(sockAddress1.GetPort(), 0);
 
-    TestingType sockAddress2{ "127.0.0.1", 8010, GetNetworkServerConfigurationStrategy() };
+    SockAddress sockAddress2{ "127.0.0.1", 8010, GetNetworkServerConfigurationStrategy() };
     ASSERT_EQUAL(sockAddress2.GetAddress(), "127.0.0.1:8010");
     ASSERT_EQUAL(sockAddress2.GetPort(), 8010);
 
-    TestingType sockAddress3{ 8010, GetNetworkServerConfigurationStrategy() };
+    SockAddress sockAddress3{ 8010, GetNetworkServerConfigurationStrategy() };
     ASSERT_EQUAL(sockAddress3.GetAddress(), "0.0.0.0:8010");
     ASSERT_EQUAL(sockAddress3.GetPort(), 8010);
 }
 
 void Network::SockAddressTesting::ACEGetACEInetAddressTest()
 {
-    const TestingType sockAddress1{ GetACEServerConfigurationStrategy() };
+    const SockAddress sockAddress1{ GetACEServerConfigurationStrategy() };
     MAYBE_UNUSED auto value0 = sockAddress1.GetACEInetAddress();
 
-    TestingType sockAddress2{ GetACEServerConfigurationStrategy() };
+    SockAddress sockAddress2{ GetACEServerConfigurationStrategy() };
     MAYBE_UNUSED auto value1 = sockAddress2.GetACEInetAddress();
 }
 
 void Network::SockAddressTesting::ACEGetBoostInetAddressExceptionTest()
 {
-    TestingType sockAddress1{ GetACEServerConfigurationStrategy() };
+    SockAddress sockAddress1{ GetACEServerConfigurationStrategy() };
 
     MAYBE_UNUSED const auto& value = sockAddress1.GetBoostInetAddress();
 }
 
 void Network::SockAddressTesting::ACEGetNetworkInetAddressExceptionTest()
 {
-    TestingType sockAddress1{ GetACEServerConfigurationStrategy() };
+    SockAddress sockAddress1{ GetACEServerConfigurationStrategy() };
 
     MAYBE_UNUSED const auto& value = sockAddress1.GetWinSockInetAddress();
 }
 
 void Network::SockAddressTesting::BoostGetACEInetAddressExceptionTest()
 {
-    TestingType sockAddress1{ GetBoostServerConfigurationStrategy() };
+    SockAddress sockAddress1{ GetBoostServerConfigurationStrategy() };
 
     MAYBE_UNUSED const auto& value = sockAddress1.GetACEInetAddress();
 }
 
 void Network::SockAddressTesting::BoostGetBoostInetAddressTest()
 {
-    const TestingType sockAddress1{ GetBoostServerConfigurationStrategy() };
+    const SockAddress sockAddress1{ GetBoostServerConfigurationStrategy() };
     MAYBE_UNUSED const auto& value0 = sockAddress1.GetBoostInetAddress();
 
-    TestingType sockAddress2{ GetBoostServerConfigurationStrategy() };
+    SockAddress sockAddress2{ GetBoostServerConfigurationStrategy() };
     MAYBE_UNUSED const auto& value1 = sockAddress2.GetBoostInetAddress();
 }
 
 void Network::SockAddressTesting::BoostGetNetworkInetAddressExceptionTest()
 {
-    TestingType sockAddress1{ GetBoostServerConfigurationStrategy() };
+    SockAddress sockAddress1{ GetBoostServerConfigurationStrategy() };
 
     MAYBE_UNUSED const auto& value = sockAddress1.GetWinSockInetAddress();
 }
 
 void Network::SockAddressTesting::NetworkGetACEInetAddressExceptionTest()
 {
-    TestingType sockAddress1{ GetNetworkServerConfigurationStrategy() };
+    SockAddress sockAddress1{ GetNetworkServerConfigurationStrategy() };
 
     MAYBE_UNUSED const auto value = sockAddress1.GetACEInetAddress();
 }
 
 void Network::SockAddressTesting::NetworkGetBoostInetAddressExceptionTest()
 {
-    TestingType sockAddress1{ GetNetworkServerConfigurationStrategy() };
+    SockAddress sockAddress1{ GetNetworkServerConfigurationStrategy() };
 
     MAYBE_UNUSED const auto& value = sockAddress1.GetBoostInetAddress();
 }
 
 void Network::SockAddressTesting::NetworkGetNetworkInetAddressTest()
 {
-    const TestingType sockAddress1{ GetNetworkServerConfigurationStrategy() };
+    const SockAddress sockAddress1{ GetNetworkServerConfigurationStrategy() };
     MAYBE_UNUSED const auto& value0 = sockAddress1.GetWinSockInetAddress();
 
-    TestingType sockAddress2{ GetNetworkServerConfigurationStrategy() };
+    SockAddress sockAddress2{ GetNetworkServerConfigurationStrategy() };
     MAYBE_UNUSED const auto& value1 = sockAddress2.GetWinSockInetAddress();
 }
 
@@ -172,36 +183,36 @@ void Network::SockAddressTesting::NullTest()
 
 void Network::SockAddressTesting::NullConstructionTest()
 {
-    TestingType sockAddress1{ GetNullServerConfigurationStrategy() };
+    SockAddress sockAddress1{ GetNullServerConfigurationStrategy() };
     ASSERT_EQUAL(sockAddress1.GetAddress(), "0.0.0.0:0");
     ASSERT_EQUAL(sockAddress1.GetPort(), 0);
 
-    TestingType sockAddress2{ "127.0.0.1", 8010, GetNullServerConfigurationStrategy() };
+    SockAddress sockAddress2{ "127.0.0.1", 8010, GetNullServerConfigurationStrategy() };
     ASSERT_EQUAL(sockAddress2.GetAddress(), "127.0.0.1:8010");
     ASSERT_EQUAL(sockAddress2.GetPort(), 8010);
 
-    TestingType sockAddress3{ 8010, GetNullServerConfigurationStrategy() };
+    SockAddress sockAddress3{ 8010, GetNullServerConfigurationStrategy() };
     ASSERT_EQUAL(sockAddress3.GetAddress(), "0.0.0.0:8010");
     ASSERT_EQUAL(sockAddress3.GetPort(), 8010);
 }
 
 void Network::SockAddressTesting::NullGetACEInetAddressExceptionTest()
 {
-    TestingType sockAddress1{ GetNullServerConfigurationStrategy() };
+    SockAddress sockAddress1{ GetNullServerConfigurationStrategy() };
 
     MAYBE_UNUSED auto value = sockAddress1.GetACEInetAddress();
 }
 
 void Network::SockAddressTesting::NullGetBoostInetAddressExceptionTest()
 {
-    TestingType sockAddress1{ GetNullServerConfigurationStrategy() };
+    SockAddress sockAddress1{ GetNullServerConfigurationStrategy() };
 
     MAYBE_UNUSED const auto& value = sockAddress1.GetBoostInetAddress();
 }
 
 void Network::SockAddressTesting::NullGetNetworkInetAddressExceptionTest()
 {
-    TestingType sockAddress1{ GetNullServerConfigurationStrategy() };
+    SockAddress sockAddress1{ GetNullServerConfigurationStrategy() };
 
     MAYBE_UNUSED const auto& value = sockAddress1.GetWinSockInetAddress();
 }

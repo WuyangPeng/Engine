@@ -117,9 +117,9 @@ void Network::ACESockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventI
     if (result == 0)
     {
         CoreTools::CallbackParameters callbackParameters{ 0 };
-        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncAcceptor));
-        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
-        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), result);
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncAcceptor));
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Ace));
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Error), result);
 
         if (!eventInterface->EventFunction(callbackParameters))
         {
@@ -143,9 +143,9 @@ void Network::ACESockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventI
     if (result == 0)
     {
         CoreTools::CallbackParameters callbackParameters{ 0 };
-        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncAcceptor));
-        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
-        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), result);
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncAcceptor));
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Ace));
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Error), result);
 
         if (!eventInterface->EventFunction(callbackParameters))
         {

@@ -349,6 +349,18 @@ void CoreTools::UnitTest::AssertEqual(wchar_t lhs, wchar_t rhs, const FunctionDe
     }
 }
 
+void CoreTools::UnitTest::AssertEqual(const SimpleCSV::CellValue& lhs, const SimpleCSV::CellValue& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
+{
+    if (const auto condition = (lhs == rhs); condition)
+    {
+        AssertTrue();
+    }
+    else
+    {
+        AssertTest(condition, functionDescribed, errorMessage, failureThrow);
+    }
+}
+
 void CoreTools::UnitTest::PrintRunUnitTest()
 {
     const auto runUnitTest = "正在运行测试 \""s + GetName() + "\"。\n"s;

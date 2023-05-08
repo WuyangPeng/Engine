@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 23:02)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 11:10)
 
 #include "Network/NetworkExport.h"
 
@@ -115,7 +115,7 @@ Network::MessageBuffer::MessageBufferSharedPtr Network::MessageBuffer::Expansion
 
     if (count <= GetSize())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("扩容大小小于原容器大小"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("扩容大小小于原容器大小"s))
     }
 
     auto messageVectorBuffer = std::make_shared<ClassType>(count, GetParserStrategy());

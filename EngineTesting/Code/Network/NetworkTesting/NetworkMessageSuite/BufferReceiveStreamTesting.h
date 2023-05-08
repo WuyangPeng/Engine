@@ -11,7 +11,7 @@
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_BUFFER_RECEIVE_STREAM_TESTING_H
 
 #include "Detail/TestNullMessage.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Network/NetworkMessage/NetworkMessageInternalFwd.h"
 
 namespace Network
@@ -19,19 +19,25 @@ namespace Network
     class BufferReceiveStreamTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(BufferReceiveStreamTesting);
+        using ClassType = BufferReceiveStreamTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit BufferReceiveStreamTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();
 
-        void ReceiveTest(int testLoopCount);
-        void FinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy);
-        void UnFinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy);
-        void CopyFinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy);
-        void CopyUnFinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy);
+        void ReceiveTest(int aTestLoopCount);
+        void FinishReceiveTest(int aTestLoopCount, ParserStrategy parserStrategy);
+        void UnFinishReceiveTest(int aTestLoopCount, ParserStrategy parserStrategy);
+        void CopyFinishReceiveTest(int aTestLoopCount, ParserStrategy parserStrategy);
+        void CopyUnFinishReceiveTest(int aTestLoopCount, ParserStrategy parserStrategy);
 
         NODISCARD MessageBufferSharedPtr CreateAddMessageBuffer(ParserStrategy parserStrategy) const;
-        NODISCARD MessageBufferSharedPtr CreateSendMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const;
+        NODISCARD MessageBufferSharedPtr CreateSendMessageBuffer(int aTestLoopCount, ParserStrategy parserStrategy) const;
         void AddBufferLength(MessageBuffer& messageBuffer);
 
         void DoRunUnitTest() override;

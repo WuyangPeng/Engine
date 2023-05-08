@@ -20,7 +20,7 @@
 #include "Network/Interface/HandleSetIterator.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageBuffer.h"
-#include "Network/NetworkMessage/SocketManager.h"
+#include "Network/NetworkMessage/MessageEventManager.h"
 
 #include <vector>
 
@@ -28,14 +28,14 @@ using std::make_pair;
 using std::make_shared;
 using std::vector;
 
-Network::ReactiveServer::ReactiveServer(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
+Network::ReactiveServer::ReactiveServer(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
     : ParentType{ socketManager, configurationStrategy },
       sockAcceptor{ configurationStrategy.GetPort(), configurationStrategy },
       sockStream{ make_shared<SockStream>(configurationStrategy) },
       bufferSendStream{},
       masterHandleSet{ configurationStrategy, sockAcceptor.GetACEHandle() },
       activeHandles{ configurationStrategy },
-      buffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy()))
+      buffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::ReceiveBufferSize), configurationStrategy.GetParserStrategy()))
 {
     Init();
 
@@ -91,8 +91,9 @@ bool Network::ReactiveServer::WaitForMultipleEvents()
     return true;
 }
 
-bool Network::ReactiveServer::HandleConnections(SocketManager& socketManager)
+bool Network::ReactiveServer::HandleConnections(MessageEventManager& socketManager)
 {
+    socketManager;
     if (activeHandles.IsSet(sockAcceptor.GetACEHandle()))
     {
         const auto strategy = GetConfigurationStrategy();
@@ -101,9 +102,9 @@ bool Network::ReactiveServer::HandleConnections(SocketManager& socketManager)
             masterHandleSet.SetBit(sockStream->GetACEHandle());
 
             const auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
-            socketManager.InsertSocket(socketID);
+           // socketManager.InsertSocket(socketID);
 
-            bufferSendStream.Insert(socketID, sockStream->GetACEHandle(), strategy.GetBufferSize(), strategy.GetParserStrategy(), strategy.GetEncryptedCompressionStrategy());
+            bufferSendStream.Insert(socketID, sockStream->GetACEHandle(), strategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::SendBufferSize), strategy.GetParserStrategy(), strategy.GetEncryptedCompressionStrategy());
         }
 
         activeHandles.ClearBit(sockAcceptor.GetACEHandle());
@@ -111,7 +112,7 @@ bool Network::ReactiveServer::HandleConnections(SocketManager& socketManager)
     return true;
 }
 
-bool Network::ReactiveServer::HandleData(const SocketManagerSharedPtr& socketManager)
+bool Network::ReactiveServer::HandleData(const MessageEventManagerSharedPtr& socketManager)
 {
     HandleSetIterator handleSetIterator{ GetConfigurationStrategy(), activeHandles };
 
@@ -133,7 +134,7 @@ bool Network::ReactiveServer::HandleData(const SocketManagerSharedPtr& socketMan
                 const auto strategy = GetConfigurationStrategy();
 
                 BufferReceiveStream bufferReceiveStream(buffer, strategy.GetParserStrategy(), strategy.GetEncryptedCompressionStrategy());
-                bufferReceiveStream.OnEvent(container->GetSocketID(), socketManager);
+                bufferReceiveStream.OnEvent(container->GetSocketID(), *socketManager);
                 buffer->ClearCurrentWriteIndex();
             }
             else

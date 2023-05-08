@@ -10,12 +10,12 @@
 #include "MultipleMessageInitValueTesting.h"
 #include "Flags/MultipleMessageType.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
 #include "Network/NetworkMessage/MultipleMessageCast.h"
 #include "Network/NetworkMessage/MultipleMessageContainerDetail.h"
 #include "Network/NetworkMessage/MultipleMessageInitValueDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <string>
 
 using std::string;
@@ -36,7 +36,18 @@ namespace Network
     using TestingType = MultipleMessageInitValue<MultipleMessageSize<MultipleMessageType>::value, MultipleMessageType>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MultipleMessageInitValueTesting)
+Network::MultipleMessageInitValueTesting::MultipleMessageInitValueTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MultipleMessageInitValueTesting)
+
+void Network::MultipleMessageInitValueTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::MultipleMessageInitValueTesting::MainTest()
 {

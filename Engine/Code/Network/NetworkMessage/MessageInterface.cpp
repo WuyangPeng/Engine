@@ -1,37 +1,38 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/19 10:17)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/05 13:56)
 
 #include "Network/NetworkExport.h"
 
 #include "MessageInterface.h"
 #include "MessageSourceDetail.h"
 #include "MessageTargetDetail.h"
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
-Network::MessageInterface::MessageInterface(int64_t messageID) noexcept
-    : m_MessageID{ messageID }
+Network::MessageInterface::MessageInterface(MessageHeadStrategy messageHeadStrategy, int64_t messageId) noexcept
+    : messageHeadStrategy{ messageHeadStrategy }, messageId{ messageId }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::MessageInterface::MessageInterface(MAYBE_UNUSED LoadConstructor value, int64_t messageID) noexcept
-    : m_MessageID{ messageID }
+Network::MessageInterface::~MessageInterface() noexcept
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::MessageInterface::~MessageInterface()
+Network::MessageInterface::MessageInterface(LoadConstructor loadConstructor, MessageHeadStrategy messageHeadStrategy, int64_t messageId) noexcept
+    : messageHeadStrategy{ messageHeadStrategy }, messageId{ messageId }
 {
+    System::UnusedFunction(loadConstructor);
+
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
@@ -71,12 +72,27 @@ int Network::MessageInterface::GetStreamingSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    CoreTools::DisableNoexcept();
+    return GetBaseStreamingSize();
+}
 
-    // 消息号
-    const auto size = CoreTools::GetStreamSize(m_MessageID);
+int Network::MessageInterface::GetBaseStreamingSize() const
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return size;
+    const auto messageHeadStrategySize = CoreTools::GetStreamSize(messageHeadStrategy);
+
+    if (IsUseSubId(messageHeadStrategy))
+    {
+        return messageHeadStrategySize + CoreTools::GetStreamSize(messageId);
+    }
+    else if (IsUseDescribe(messageHeadStrategy))
+    {
+        return messageHeadStrategySize + CoreTools::GetStreamSize(GetRttiType().GetName());
+    }
+    else
+    {
+        return messageHeadStrategySize + CoreTools::GetStreamSize(GetMessageId());
+    }
 }
 
 void Network::MessageInterface::Save(MessageTarget& target) const
@@ -85,10 +101,22 @@ void Network::MessageInterface::Save(MessageTarget& target) const
 
     NETWORK_BEGIN_STREAM_SAVE(target);
 
-    // 写入消息号
-    target.Write(m_MessageID);
+    target.WriteEnum(messageHeadStrategy);
 
-    NETWORK_END_STREAM_SAVE(target);
+    if (IsUseSubId(messageHeadStrategy))
+    {
+        target.Write(messageId);
+    }
+    else if (IsUseDescribe(messageHeadStrategy))
+    {
+        target.WriteString(GetRttiType().GetName());
+    }
+    else
+    {
+        target.Write(GetMessageId());
+    }
+
+    NETWORK_END_STREAM_SAVE(target)
 }
 
 void Network::MessageInterface::Load(MessageSource& source)
@@ -99,28 +127,76 @@ void Network::MessageInterface::Load(MessageSource& source)
 
     // 消息号已经在外层读取。
 
-    NETWORK_END_STREAM_LOAD(source);
+    NETWORK_END_STREAM_LOAD(source)
 }
 
-int32_t Network::MessageInterface::GetMessageID() const
+int32_t Network::MessageInterface::GetMessageId() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int32_t>(m_MessageID);
+    if (IsUseSubId(messageHeadStrategy))
+    {
+        return boost::numeric_cast<int32_t>(GetFullMessageId() >> messageBytes);
+    }
+    else if (IsUseDescribe(messageHeadStrategy))
+    {
+        return 0;
+    }
+    else
+    {
+        return boost::numeric_cast<int32_t>(GetFullMessageId());
+    }
 }
 
-int32_t Network::MessageInterface::GetSubMessageID() const
+int32_t Network::MessageInterface::GetSubMessageId() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    CoreTools::DisableNoexcept();
-
-    return 0;
+    if (IsUseSubId(messageHeadStrategy))
+    {
+        return boost::numeric_cast<int32_t>(GetFullMessageId() & maxMessageId);
+    }
+    else
+    {
+        return 0;
+    }
 }
 
-int64_t Network::MessageInterface::GetFullMessageID() const noexcept
+int64_t Network::MessageInterface::GetFullMessageId() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_MessageID;
+    if (IsUseDescribe(messageHeadStrategy))
+    {
+        return 0;
+    }
+    else
+    {
+        return messageId;
+    }
+}
+
+Network::MessageHeadStrategy Network::MessageInterface::GetMessageHeadStrategy() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    return messageHeadStrategy;
+}
+
+bool Network::MessageInterface::IsUseProtoBuf() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    using System::operator&;
+
+    return (messageHeadStrategy & MessageHeadStrategy::UseProtoBuf) != MessageHeadStrategy::Default;
+}
+
+bool Network::MessageInterface::IsUseJson() const noexcept
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    using System::operator&;
+
+    return (messageHeadStrategy & MessageHeadStrategy::UseJson) != MessageHeadStrategy::Default;
 }

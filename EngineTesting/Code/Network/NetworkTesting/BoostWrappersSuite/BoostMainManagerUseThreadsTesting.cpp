@@ -16,7 +16,7 @@
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
 #include "System/Helper/PragmaWarning/Bind.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using boost::bind;
 using std::atomic_int;
 using std::mutex;

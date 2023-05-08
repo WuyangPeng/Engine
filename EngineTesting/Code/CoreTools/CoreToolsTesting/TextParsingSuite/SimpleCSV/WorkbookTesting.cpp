@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.4 (2023/03/08 16:38)
+///	引擎测试版本：0.9.0.7 (2023/04/26 16:08)  
 
 #include "WorkbookTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -41,7 +41,7 @@ void CoreTools::WorkbookTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(SheetNamesTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ExistsTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SharedStringTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(SheetIDTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SheetIdTest);
 }
 
 void CoreTools::WorkbookTesting::GetWorksheetTest()
@@ -202,7 +202,7 @@ void CoreTools::WorkbookTesting::SetSheetNameTest()
     ASSERT_EQUAL(workbook.GetSheet(1).GetName(), "Sheet4"s);
 }
 
-void CoreTools::WorkbookTesting::SheetIDTest()
+void CoreTools::WorkbookTesting::SheetIdTest()
 {
     const auto document = SimpleCSV::Document::Open("Resource/CSVTesting/ExcelConversionCSVTesting.xlsx"s);
 

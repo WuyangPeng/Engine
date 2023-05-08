@@ -21,7 +21,7 @@ System::WindowsHandle System::CreateSystemFileMapping(WindowsHandle file,
                                                       FileMapProtection otherProtect,
                                                       WindowsDWord maximumSizeHigh,
                                                       WindowsDWord maximumSizeLow,
-                                                      const wchar_t* name,
+                                                      const TChar* name,
                                                       bool* isExists) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -49,7 +49,7 @@ System::WindowsHandle System::CreateSystemFileMapping(WindowsHandle file,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsHandle System::OpenSystemFileMapping(FileMapDesiredAccess desiredAccess, bool inheritHandle, const wchar_t* name) noexcept
+System::WindowsHandle System::OpenSystemFileMapping(FileMapDesiredAccess desiredAccess, bool inheritHandle, const TChar* name) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

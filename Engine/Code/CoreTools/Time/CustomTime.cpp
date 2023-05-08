@@ -37,7 +37,7 @@ System::String CoreTools::CustomTime::GetSystemTimeDescribe(const String& dateFo
     boost::basic_format format{ dateFormat };
 
     format % data.year();
-    format % data.month();
+    format % data.month().as_number();
     format % data.day();
 
     return format.str();

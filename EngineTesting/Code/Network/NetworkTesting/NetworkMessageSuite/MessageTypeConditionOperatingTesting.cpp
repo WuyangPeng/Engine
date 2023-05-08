@@ -10,14 +10,25 @@
 #include "MessageTypeConditionOperatingTesting.h"
 #include "ThreadingCoreRenderEngineTesting/Version.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/MessageTypeConditionOperating.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::set;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, MessageTypeConditionOperating)
+Network::MessageTypeConditionOperatingTesting::MessageTypeConditionOperatingTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MessageTypeConditionOperatingTesting)
+
+void Network::MessageTypeConditionOperatingTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::MessageTypeConditionOperatingTesting::MainTest()
 {
@@ -26,17 +37,17 @@ void Network::MessageTypeConditionOperatingTesting::MainTest()
 
 void Network::MessageTypeConditionOperatingTesting::OperatingTest()
 {
-    constexpr auto version = g_TCRETestingVersion - 4;
+    constexpr auto version = gTCRETestingVersion - 4;
     MessageTypeCondition messageTypeCondition1{ VersionsCondition::Greater, version };
-    MessageTypeCondition messageTypeCondition2{ VersionsCondition::GreaterEequal, version };
+    MessageTypeCondition messageTypeCondition2{ VersionsCondition::GreaterEqual, version };
     MessageTypeCondition messageTypeCondition3{ VersionsCondition::Equality, version };
-    MessageTypeCondition messageTypeCondition4{ VersionsCondition::LessEequal, version };
+    MessageTypeCondition messageTypeCondition4{ VersionsCondition::LessEqual, version };
     MessageTypeCondition messageTypeCondition5{ VersionsCondition::Less, version };
     MessageTypeCondition messageTypeCondition6{ version - 1, version + 1 };
     MessageTypeCondition messageTypeCondition7{ set<int>{ version - 2, version + 3 } };
     MessageTypeCondition messageTypeCondition8 = MessageTypeCondition::CreateNullCondition();
 
-    const TestingType messageTypeConditionOperating{};
+    const MessageTypeConditionOperating messageTypeConditionOperating{};
 
     ASSERT_FALSE(messageTypeConditionOperating(messageTypeCondition1, messageTypeCondition2));
     ASSERT_FALSE(messageTypeConditionOperating(messageTypeCondition2, messageTypeCondition3));

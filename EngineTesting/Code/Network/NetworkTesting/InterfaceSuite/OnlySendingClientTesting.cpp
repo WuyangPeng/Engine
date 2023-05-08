@@ -13,6 +13,7 @@
 #include "CoreTools/Base/Version.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/ConfigurationParameter.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/ConfigurationSubStrategy.h"
@@ -25,7 +26,6 @@
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/NullMessage.h"
-
 #include <thread>
 #include <vector>
 
@@ -109,12 +109,17 @@ void Network::OnlySendingClientTesting::NullTest()
     ASSERT_NOT_THROW_EXCEPTION_0(NullAsyncOnlySendingClientTest);
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
 void Network::OnlySendingClientTesting::ACEOnlySendingClientTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::ACE,
-                                                 ConnectStrategy::TCP,
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Ace,
+                                                 ConnectStrategy::Tcp,
                                                  ClientStrategy::OnlySending,
                                                  MessageStrategy::Iovec,
                                                  ParserStrategy::LittleEndian,
@@ -132,7 +137,7 @@ void Network::OnlySendingClientTesting::ACEOnlySendingClientTest()
     TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
-        clientContainer.push_back(make_shared<Client>(configurationStrategy, testSocketManager));
+        clientContainer.push_back(make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
     }
 
     for (auto& client : clientContainer)
@@ -150,7 +155,7 @@ void Network::OnlySendingClientTesting::ACEOnlySendingClientTest()
             ASSERT_UNEQUAL(i + 1, connectTime);
         }
 
-        client->Send(socketID, make_shared<NullMessage>(messageID));
+        client->Send(socketID, make_shared<NullMessage>(MessageHeadStrategy::Default, messageID));
 
         client.reset();
     }
@@ -161,9 +166,11 @@ void Network::OnlySendingClientTesting::ACEOnlySendingClientTest()
 void Network::OnlySendingClientTesting::ACEAsyncOnlySendingClientTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::ACE,
-                                                 ConnectStrategy::TCP,
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Ace,
+                                                 ConnectStrategy::Tcp,
                                                  ClientStrategy::OnlySending,
                                                  MessageStrategy::Default,
                                                  ParserStrategy::LittleEndian,
@@ -181,7 +188,7 @@ void Network::OnlySendingClientTesting::ACEAsyncOnlySendingClientTest()
     TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
-        clientContainer.push_back(make_shared<Client>(configurationStrategy, testSocketManager));
+        clientContainer.push_back(make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
     }
 
     int connectNum{ 1 };
@@ -203,7 +210,12 @@ void Network::OnlySendingClientTesting::ACEAsyncOnlySendingClientTest()
             ASSERT_UNEQUAL(i + 1, connectTime);
         }
 
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(messageID) };
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
+        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(MessageHeadStrategy::Default, messageID) };
+
+#include STSTEM_WARNING_POP
         client->AsyncSend(socketID, message);
 
         ++connectNum;
@@ -227,7 +239,7 @@ void Network::OnlySendingClientTesting::DoACEServerThread()
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)
 
-    auto server = make_shared<Server>(testSocketManager, configurationStrategy);
+    auto server = make_shared<Server>(std::make_shared<MessageEventManager>(MessageEventManager::Create()), configurationStrategy);
 
 #include STSTEM_WARNING_POP
 
@@ -250,9 +262,11 @@ void Network::OnlySendingClientTesting::DoACEServerThread()
 void Network::OnlySendingClientTesting::BoostOnlySendingClientTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Boost,
-                                                 ConnectStrategy::TCP,
+                                                 ConnectStrategy::Tcp,
                                                  ClientStrategy::OnlySending,
                                                  MessageStrategy::Default,
                                                  ParserStrategy::LittleEndian,
@@ -268,7 +282,7 @@ void Network::OnlySendingClientTesting::BoostOnlySendingClientTest()
     TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
-        clientContainer.push_back(make_shared<Client>(configurationStrategy, testSocketManager));
+        clientContainer.push_back(make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
     }
 
     thread firstTread{ &ClassType::BoostServerThread, this };
@@ -293,7 +307,7 @@ void Network::OnlySendingClientTesting::BoostOnlySendingClientTest()
         {
             try
             {
-                MessageInterfaceSharedPtr message{ make_shared<NullMessage>(messageID) };
+                MessageInterfaceSharedPtr message{ make_shared<NullMessage>(MessageHeadStrategy::Default, messageID) };
                 client->Send(socketID, message);
                 break;
             }
@@ -310,9 +324,11 @@ void Network::OnlySendingClientTesting::BoostOnlySendingClientTest()
 void Network::OnlySendingClientTesting::BoostAsyncOnlySendingClientTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Boost,
-                                                 ConnectStrategy::TCP,
+                                                 ConnectStrategy::Tcp,
                                                  ClientStrategy::OnlySending,
                                                  MessageStrategy::Default,
                                                  ParserStrategy::LittleEndian,
@@ -331,7 +347,7 @@ void Network::OnlySendingClientTesting::BoostAsyncOnlySendingClientTest()
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
-        clientContainer.push_back(make_shared<Client>(configurationStrategy, testSocketManager));
+        clientContainer.push_back(make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
     }
 
     int connectNum{ 1 };
@@ -349,7 +365,7 @@ void Network::OnlySendingClientTesting::BoostAsyncOnlySendingClientTest()
             }
         }
 
-        client->AsyncSend(socketID, make_shared<NullMessage>(messageID));
+        client->AsyncSend(socketID, make_shared<NullMessage>(MessageHeadStrategy::Default, messageID));
 
         ++connectNum;
     }
@@ -377,7 +393,7 @@ void Network::OnlySendingClientTesting::DoBoostServerThread()
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)
 
-        auto server = make_shared<Server>(testSocketManager, configurationStrategy);
+        auto server = make_shared<Server>(std::make_shared<MessageEventManager>(MessageEventManager::Create()), configurationStrategy);
 
 #include STSTEM_WARNING_POP
 
@@ -400,9 +416,11 @@ void Network::OnlySendingClientTesting::BoostRunServerThread()
 void Network::OnlySendingClientTesting::NullOnlySendingClientTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null,
-                                                 ConnectStrategy::TCP,
+                                                 ConnectStrategy::Tcp,
                                                  ClientStrategy::OnlySending,
                                                  MessageStrategy::Default,
                                                  ParserStrategy::LittleEndian,
@@ -418,7 +436,7 @@ void Network::OnlySendingClientTesting::NullOnlySendingClientTest()
     TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
-        clientContainer.push_back(make_shared<Client>(configurationStrategy, testSocketManager));
+        clientContainer.push_back(make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
     }
 
     thread firstTread{ &ClassType::NullServerThread, this };
@@ -438,7 +456,7 @@ void Network::OnlySendingClientTesting::NullOnlySendingClientTest()
             ASSERT_UNEQUAL(i + 1, connectTime);
         }
 
-        client->Send(socketID, make_shared<NullMessage>(messageID));
+        client->Send(socketID, make_shared<NullMessage>(MessageHeadStrategy::Default, messageID));
     }
 
     firstTread.join();
@@ -452,9 +470,11 @@ void Network::OnlySendingClientTesting::NullServerThread()
 void Network::OnlySendingClientTesting::NullAsyncOnlySendingClientTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null,
-                                                 ConnectStrategy::TCP,
+                                                 ConnectStrategy::Tcp,
                                                  ClientStrategy::OnlySending,
                                                  MessageStrategy::Default,
                                                  ParserStrategy::LittleEndian,
@@ -472,7 +492,7 @@ void Network::OnlySendingClientTesting::NullAsyncOnlySendingClientTest()
     TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
-        clientContainer.push_back(make_shared<Client>(configurationStrategy, testSocketManager));
+        clientContainer.push_back(make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
     }
 
     int connectNum{ 1 };
@@ -490,7 +510,7 @@ void Network::OnlySendingClientTesting::NullAsyncOnlySendingClientTest()
             }
         }
 
-        client->AsyncSend(socketID, make_shared<NullMessage>(messageID));
+        client->AsyncSend(socketID, make_shared<NullMessage>(MessageHeadStrategy::Default, messageID));
 
         ++connectNum;
     }
@@ -501,3 +521,5 @@ void Network::OnlySendingClientTesting::NullAsyncOnlySendingClientTest()
 void Network::OnlySendingClientTesting::DoNullServerThread() noexcept
 {
 }
+
+#include STSTEM_WARNING_POP

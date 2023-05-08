@@ -9,14 +9,26 @@
 
 #include "MessageInterfaceSharedPtrLessTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/MessageInterfaceSharedPtrLess.h"
 #include "Network/NetworkMessage/NullDoubleMessage.h"
 #include "Network/NetworkMessage/NullMessage.h"
-
 using std::make_shared;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, MessageInterfaceSharedPtrLess)
+Network::MessageInterfaceSharedPtrLessTesting::MessageInterfaceSharedPtrLessTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MessageInterfaceSharedPtrLessTesting)
+
+void Network::MessageInterfaceSharedPtrLessTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::MessageInterfaceSharedPtrLessTesting::MainTest()
 {
@@ -26,10 +38,10 @@ void Network::MessageInterfaceSharedPtrLessTesting::MainTest()
 
 void Network::MessageInterfaceSharedPtrLessTesting::LessTest()
 {
-    NullMessageSharedPtr lhsTestMessage{ make_shared<NullMessage>(5) };
-    NullMessageSharedPtr rhsTestMessage{ make_shared<NullMessage>(6) };
+    NullMessageSharedPtr lhsTestMessage{ make_shared<NullMessage>(MessageHeadStrategy::Default, 5) };
+    NullMessageSharedPtr rhsTestMessage{ make_shared<NullMessage>(MessageHeadStrategy::Default, 6) };
 
-    TestingType less{};
+    MessageInterfaceSharedPtrLess less{};
 
     ASSERT_TRUE(less(lhsTestMessage, rhsTestMessage));
 }
@@ -37,10 +49,10 @@ void Network::MessageInterfaceSharedPtrLessTesting::LessTest()
 void Network::MessageInterfaceSharedPtrLessTesting::DoubleMessageTest()
 {
     constexpr int64_t messageBytes{ 32LL };
-    NullDoubleMessageSharedPtr lhsTestMessage{ make_shared<NullDoubleMessage>((int64_t{ 6 } << messageBytes) + int64_t{ 5 }) };
-    NullDoubleMessageSharedPtr rhsTestMessage{ make_shared<NullDoubleMessage>((int64_t{ 6 } << messageBytes) + int64_t{ 6 }) };
+    NullDoubleMessageSharedPtr lhsTestMessage{ make_shared<NullDoubleMessage>(MessageHeadStrategy::UseSubId, (int64_t{ 6 } << messageBytes) + int64_t{ 5 }) };
+    NullDoubleMessageSharedPtr rhsTestMessage{ make_shared<NullDoubleMessage>(MessageHeadStrategy::UseSubId, (int64_t{ 6 } << messageBytes) + int64_t{ 6 }) };
 
-    TestingType less{};
+    MessageInterfaceSharedPtrLess less{};
 
     ASSERT_TRUE(less(lhsTestMessage, rhsTestMessage));
 }

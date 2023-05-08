@@ -399,10 +399,13 @@ void CoreTools::UnitTest::AssertEnumGreaterEqual(const LhsType& lhs, const RhsTy
 }
 
 template <typename LhsType, typename RhsType>
-requires std::is_constructible_v<LhsType, std::wstring> && std::is_constructible_v<RhsType, std::wstring>
+requires std::is_constructible_v<std::wstring, LhsType> && std::is_constructible_v<std::wstring, RhsType>
 void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    if (const auto condition = (lhs == rhs); condition)
+    const std::wstring lhsValue{ lhs };
+    const std::wstring rhsValue{ rhs };
+
+    if (const auto condition = (lhsValue == rhsValue); condition)
     {
         AssertTrue();
     }
@@ -410,7 +413,7 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, co
     {
         std::stringstream stream{};
 
-        stream << StringConversion::WideCharConversionMultiByte(lhs) << "不等于" << StringConversion::WideCharConversionMultiByte(rhs);
+        stream << StringConversion::WideCharConversionMultiByte(lhsValue) << "不等于" << StringConversion::WideCharConversionMultiByte(rhsValue);
 
         const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -419,10 +422,13 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, co
 }
 
 template <typename LhsType, typename RhsType>
-requires std::is_same_v<std::decay_t<LhsType>, std::string> || std::is_same_v<std::decay_t<LhsType>, const char*> && std::is_same_v<std::decay_t<RhsType>, std::string> || std::is_same_v<std::decay_t<RhsType>, const char*>
+requires(std::is_constructible_v<std::string, LhsType> && std::is_constructible_v<std::string, RhsType>)
 void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    if (const auto condition = (lhs == rhs); condition)
+    const std::string lhsValue{ lhs };
+    const std::string rhsValue{ rhs };
+
+    if (const auto condition = (lhsValue == rhsValue); condition)
     {
         AssertTrue();
     }
@@ -430,7 +436,7 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, co
     {
         std::stringstream stream{};
 
-        stream << std::string{ lhs } << "不等于" << std::string{ rhs };
+        stream << lhsValue << "不等于" << rhsValue;
 
         const auto described = GetAssertDescribed(stream.str(), errorMessage);
 

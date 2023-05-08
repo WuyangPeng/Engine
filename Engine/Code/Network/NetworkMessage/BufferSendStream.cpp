@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 23:01)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 13:41)
 
 #include "Network/NetworkExport.h"
 
@@ -33,5 +33,5 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, BufferSendStream, Insert, Me
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, BufferSendStream, Save, MessageBufferSharedPtr, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, BufferSendStream, Clear, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, BufferSendStream, IsEmpty, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, BufferSendStream, GetCurrentSize, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, BufferSendStream, GetCurrentSize, int)
 COPY_UNSHARED_CLONE_SELF_DEFINE(Network, BufferSendStream)

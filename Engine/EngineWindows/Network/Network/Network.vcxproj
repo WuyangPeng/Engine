@@ -311,7 +311,7 @@
     <ClCompile Include="..\..\..\Code\Network\Configuration\ConfigurationStrategy.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Configuration\ConfigurationSubStrategy.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\AnalysisNetworkConfigurationImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationIPPort.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationHostPort.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationParameterImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationStrategyFactory.cpp" />
     <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationStrategyImpl.cpp" />
@@ -370,7 +370,6 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\BufferSendStream.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\BufferReceiveStreamImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\BufferSendStreamImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\DoubleMessage.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageBufferFactory.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageBufferImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageEventContainerImpl.cpp" />
@@ -389,7 +388,6 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\ReceiveMessageLevelImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\SendMessageLevelImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\SingleMessageEventContainer.cpp" />
-    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\SocketManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageBuffer.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageEventContainer.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageEventManager.cpp" />
@@ -405,7 +403,6 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\NullMessage.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\ReceiveMessageLevel.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\SendMessageLevel.cpp" />
-    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\SocketManager.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkWrappers\Detail\Acceptor\NetworkSockAcceptor.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkWrappers\Detail\Address\NetworkSockInetAddress.cpp" />
     <ClCompile Include="..\..\..\Code\Network\NetworkWrappers\Detail\BaseMainManager\NetworkMainManager.cpp" />
@@ -425,6 +422,8 @@
     <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\Stream\ACEIovecSockStream.h" />
     <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\Stream\ACESockStream.h" />
     <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Using\ACEUsing.h" />
+    <ClInclude Include="..\..\..\Code\Network\ActiveMQ\ActiveMQ.h" />
+    <ClInclude Include="..\..\..\Code\Network\ActiveMQ\ActiveMQFwd.h" />
     <ClInclude Include="..\..\..\Code\Network\BoostWrappers\BoostWrappers.h" />
     <ClInclude Include="..\..\..\Code\Network\BoostWrappers\BoostWrappersFwd.h" />
     <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\Acceptor\BoostSockAcceptor.h" />
@@ -449,7 +448,7 @@
     <ClInclude Include="..\..\..\Code\Network\Configuration\ConfigurationStrategy.h" />
     <ClInclude Include="..\..\..\Code\Network\Configuration\ConfigurationSubStrategy.h" />
     <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\AnalysisNetworkConfigurationImpl.h" />
-    <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationIPPort.h" />
+    <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationHostPort.h" />
     <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationParameterImpl.h" />
     <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationStrategyFactory.h" />
     <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationStrategyImpl.h" />
@@ -512,6 +511,10 @@
     <ClInclude Include="..\..\..\Code\Network\Interface\SockConnector.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\SocketData.h" />
     <ClInclude Include="..\..\..\Code\Network\Interface\SockStream.h" />
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\MessageOrientedMiddleware.h" />
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\MessageOrientedMiddlewareFwd.h" />
+    <ClInclude Include="..\..\..\Code\Network\Nats\Nats.h" />
+    <ClInclude Include="..\..\..\Code\Network\Nats\NatsFwd.h" />
     <ClInclude Include="..\..\..\Code\Network\Network.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkDll.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkExport.h" />
@@ -522,7 +525,6 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\BufferSendStream.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\BufferReceiveStreamImpl.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\BufferSendStreamImpl.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\DoubleMessage.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageArrayBuffer.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageArrayBufferDetail.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageBufferFactory.h" />
@@ -543,14 +545,13 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\ReceiveMessageLevelImpl.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\SendMessageLevelImpl.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\SingleMessageEventContainer.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\SocketManagerImpl.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Flags\MessageEventFlags.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Flags\MessageLengthFlags.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Flags\MessageTypeFlags.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\IntegerDoubleMessage.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\IntegerDoubleMessageDetail.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\IntegerMessage.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\IntegerMessageDetail.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\JsonMessage.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\JsonMessageDetail.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageBuffer.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageContainer.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageContainerDetail.h" />
@@ -567,8 +568,6 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageTargetDetail.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageTypeCondition.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageTypeConditionOperating.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleDoubleMessage.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleDoubleMessageDetail.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessage.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageCast.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageContainer.h" />
@@ -592,11 +591,10 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\NetworkMessageInternalFwd.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\NullDoubleMessage.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\NullMessage.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\ProtoBufMessage.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\ProtoBufMessageDetail.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\ReceiveMessageLevel.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\SendMessageLevel.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\SocketManager.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\StringDoubleMessage.h" />
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\StringDoubleMessageDetail.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\StringMessage.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\StringMessageDetail.h" />
     <ClInclude Include="..\..\..\Code\Network\NetworkNoImport.h" />

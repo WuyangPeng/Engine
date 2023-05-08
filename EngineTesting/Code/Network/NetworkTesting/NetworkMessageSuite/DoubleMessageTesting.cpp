@@ -12,19 +12,30 @@
 #include "Detail/TestDoubleNullMessage.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
-
 using std::make_shared;
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, DoubleMessageTesting)
+Network::DoubleMessageTesting::DoubleMessageTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, DoubleMessageTesting)
+
+void Network::DoubleMessageTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::DoubleMessageTesting::MainTest()
 {
@@ -40,8 +51,8 @@ void Network::DoubleMessageTesting::RttiTest()
     auto testIntMessage = make_shared<TestDoubleIntMessage>(fullMessageID);
 
     ASSERT_TRUE(testMessage->IsExactly(TestDoubleNullMessage::GetCurrentRttiType()));
-    ASSERT_FALSE(testMessage->IsExactly(DoubleMessage::GetCurrentRttiType()));
-    ASSERT_TRUE(testMessage->IsDerived(DoubleMessage::GetCurrentRttiType()));
+    ASSERT_FALSE(testMessage->IsExactly(MessageInterface::GetCurrentRttiType()));
+    ASSERT_TRUE(testMessage->IsDerived(MessageInterface::GetCurrentRttiType()));
     ASSERT_FALSE(testMessage->IsDerived(TestDoubleIntMessage::GetCurrentRttiType()));
 
     ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
@@ -69,18 +80,21 @@ void Network::DoubleMessageTesting::FactoryTest()
     MESSAGE_MANAGER_SINGLETON.Insert(fullMessageID, MessageTypeCondition::CreateNullCondition(), TestDoubleIntMessage::Factory);
 
     auto buffer = make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian);
-    auto messageTarget = make_shared<MessageTarget>(buffer);
+    auto messageTarget = make_shared<MessageTarget>(*buffer);
 
     testIntMessage->Save(*messageTarget);
 
-    auto messageSource = make_shared<MessageSource>(buffer);
+    auto messageSource = make_shared<MessageSource>(*buffer);
+
+    MessageHeadStrategy messageHeadStrategy{};
+    messageSource->ReadEnum(messageHeadStrategy);
 
     int64_t sourceMessageID{ 0 };
     messageSource->Read(sourceMessageID);
 
     ASSERT_EQUAL(sourceMessageID, fullMessageID);
 
-    auto factoryCreateMessage = TestDoubleIntMessage::Factory(*messageSource, fullMessageID);
+    auto factoryCreateMessage = TestDoubleIntMessage::Factory(*messageSource, MessageHeadStrategy::UseSubId, fullMessageID);
     auto polymorphicMessage = boost::dynamic_pointer_cast<TestDoubleIntMessage>(factoryCreateMessage);
 
     ASSERT_EQUAL(polymorphicMessage->GetIntValue(), intValue);
@@ -94,18 +108,21 @@ void Network::DoubleMessageTesting::StreamingTest()
 
     auto testIntMessage = make_shared<TestDoubleIntMessage>(fullMessageID);
 
-    ASSERT_EQUAL(testIntMessage->GetStreamingSize(), CORE_TOOLS_STREAM_SIZE(fullMessageID) + CORE_TOOLS_STREAM_SIZE(intValue));
+    ASSERT_EQUAL(testIntMessage->GetStreamingSize(), CoreTools::GetStreamSize(fullMessageID) + 4 + CoreTools::GetStreamSize(intValue));
 
     testIntMessage->SetIntValue(intValue);
 
     MESSAGE_MANAGER_SINGLETON.Insert(fullMessageID, MessageTypeCondition::CreateNullCondition(), TestDoubleIntMessage::Factory);
 
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    auto messageTarget = make_shared<MessageTarget>(buffer);
+    auto messageTarget = make_shared<MessageTarget>(*buffer);
 
     testIntMessage->Save(*messageTarget);
 
-    auto messageSource = make_shared<MessageSource>(buffer);
+    auto messageSource = make_shared<MessageSource>(*buffer);
+
+    MessageHeadStrategy messageHeadStrategy{};
+    messageSource->ReadEnum(messageHeadStrategy);
 
     int64_t sourceMessageID{ 0 };
     messageSource->Read(sourceMessageID);
@@ -127,9 +144,9 @@ void Network::DoubleMessageTesting::MessageTest()
 {
     auto testMessage = make_shared<TestDoubleNullMessage>(fullMessageID);
 
-    ASSERT_EQUAL(testMessage->GetMessageID(), messageID);
-    ASSERT_EQUAL(testMessage->GetSubMessageID(), subMessageID);
-    ASSERT_EQUAL(testMessage->GetFullMessageID(), fullMessageID);
+    ASSERT_EQUAL(testMessage->GetMessageId(), messageID);
+    ASSERT_EQUAL(testMessage->GetSubMessageId(), subMessageID);
+    ASSERT_EQUAL(testMessage->GetFullMessageId(), fullMessageID);
 
     ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 }

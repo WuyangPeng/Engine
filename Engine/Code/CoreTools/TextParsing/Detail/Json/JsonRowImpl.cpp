@@ -58,7 +58,7 @@ int64_t CoreTools::JsonRowImpl::GetInt64(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return basicTree.get(field, 0);
+    return basicTree.get(field, 0L);
 }
 
 double CoreTools::JsonRowImpl::GetDouble(const String& field) const

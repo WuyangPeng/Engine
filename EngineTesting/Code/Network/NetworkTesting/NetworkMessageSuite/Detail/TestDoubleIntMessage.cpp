@@ -11,13 +11,14 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/Helper/StreamMacro.h"
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 
 Network::TestDoubleIntMessage::TestDoubleIntMessage(int64_t messageID) noexcept
-    : ParentType{ messageID }, mIntValue{ 0 }
+    : ParentType{ MessageHeadStrategy::UseSubId, messageID }, mIntValue{ 0 }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -27,8 +28,8 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, TestDoubleIntMessage);
 CORE_TOOLS_RTTI_DEFINE(Network, TestDoubleIntMessage);
 NETWORK_FACTORY_DEFINE(Network, TestDoubleIntMessage);
 
-Network::TestDoubleIntMessage::TestDoubleIntMessage(LoadConstructor value, int64_t messageID) noexcept
-    : ParentType{ value, messageID }, mIntValue{ 0 }
+Network::TestDoubleIntMessage::TestDoubleIntMessage(LoadConstructor value, MessageHeadStrategy messageHeadStrategy, int64_t messageID) noexcept
+    : ParentType{ value, messageHeadStrategy, messageID }, mIntValue{ 0 }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -63,7 +64,7 @@ int Network::TestDoubleIntMessage::GetStreamingSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return ParentType::GetStreamingSize() + CORE_TOOLS_STREAM_SIZE(mIntValue);
+    return ParentType::GetStreamingSize() + CoreTools::GetStreamSize(mIntValue);
 }
 
 int Network::TestDoubleIntMessage::GetIntValue() const noexcept

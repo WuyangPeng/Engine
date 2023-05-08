@@ -3,10 +3,10 @@ TODO Level 3
 0.9.0.5
 
 1.  （TextParsing）使用模板生成代码而不是直接生成文件。
-2.  （TextParsing）实现json配置自动化代码和解析json功能。 
-3.  （TextParsing）json解析增加map类型。
-4.  （TextParsing）json转换成枚举：实现json配置自动化代码转换成枚举的功能。
-5.  （TextParsing）xml解析：实现xml配置自动化代码和解析xml功能。
-6.  （TextParsing）ini解析：实现ini配置自动化代码和解析ini功能。
-7.  （TextParsing）info解析：实现info配置自动化代码和解析info功能。
-8.  （TextParsing）使用Excel直接生成代码而不使用csv生成。
+2.  （TextParsing）使用Excel直接生成代码而不使用csv生成。
+3.  （TextParsing）实现json配置自动化代码和解析json功能。 
+4.  （TextParsing）json解析增加map类型。
+5.  （TextParsing）json转换成枚举：实现json配置自动化代码转换成枚举的功能。
+6.  （TextParsing）xml解析：实现xml配置自动化代码和解析xml功能。
+7.  （TextParsing）ini解析：实现ini配置自动化代码和解析ini功能。
+8.  （TextParsing）info解析：实现info配置自动化代码和解析info功能。

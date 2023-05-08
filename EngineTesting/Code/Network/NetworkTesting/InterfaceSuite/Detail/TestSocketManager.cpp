@@ -11,6 +11,7 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
+#include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 
 using std::make_shared;
 
@@ -20,7 +21,7 @@ Network::TestSocketManagerSharedPtr Network::TestSocketManager::Create(uint32_t 
 }
 
 Network::TestSocketManager::TestSocketManager(uint32_t messageID)
-    : ParentType{ CoreTools::DisableNotThrow::Disable },
+    : ParentType{},
       messageID{ messageID },
       testMessageEvent(make_shared<TestMessageEvent>(CoreTools::DisableNotThrow::Disable)),
       asyncConnectCount{ 0 },
@@ -33,9 +34,9 @@ Network::TestSocketManager::TestSocketManager(uint32_t messageID)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, TestSocketManager);
 
-void Network::TestSocketManager::InitEvent(uint64_t socketID)
+void Network::TestSocketManager::InitEvent(uint64_t socketID) noexcept
 {
-    InsertEvent(socketID, messageID, testMessageEvent);
+    socketID;
 }
 
 uint64_t Network::TestSocketManager::GetCallBackTime() const noexcept
@@ -49,7 +50,7 @@ bool Network::TestSocketManager::EventFunction(const CoreTools::CallbackParamete
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    auto eventType = System::UnderlyingCastEnum<SocketManagerEvent>(callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPoisition::Event)));
+    auto eventType = System::UnderlyingCastEnum<SocketManagerEvent>(callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPosition::Event)));
 
     switch (eventType)
     {

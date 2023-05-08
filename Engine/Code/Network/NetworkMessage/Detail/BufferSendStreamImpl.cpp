@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 19:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 13:41)
 
 #include "Network/NetworkExport.h"
 
@@ -17,11 +17,10 @@
 #include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/MessageBuffer.h"
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
-
-using std::make_shared;
 
 Network::BufferSendStreamImpl::BufferSendStreamImpl(int bytesTotal, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy)
     : topLevel{ bytesTotal - MessageInterface::GetMessageHeadSize() }, parserStrategy{ parserStrategy }, encryptedCompressionStrategy{ encryptedCompressionStrategy }
@@ -52,11 +51,11 @@ void Network::BufferSendStreamImpl::Save(const MessageBufferSharedPtr& messageBu
     NETWORK_CLASS_IS_VALID_9;
 
     const auto currentSize = topLevel.GetCurrentSize();
-    const auto messageLength = currentSize + MessageInterface::GetMessageHeadSize();
 
-    if (messageLength <= messageBuffer->GetSize())
+    if (const auto messageLength = currentSize + MessageInterface::GetMessageHeadSize();
+        messageLength <= messageBuffer->GetSize())
     {
-        MessageTarget messageTarget{ messageBuffer };
+        MessageTarget messageTarget{ *messageBuffer };
 
         messageTarget.Write(messageLength);
         messageTarget.Write(MESSAGE_MANAGER_SINGLETON.GetFullVersion());
@@ -71,7 +70,7 @@ void Network::BufferSendStreamImpl::Save(const MessageBufferSharedPtr& messageBu
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("缓冲区大小不足！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("缓冲区大小不足！"s))
     }
 }
 
@@ -92,13 +91,14 @@ bool Network::BufferSendStreamImpl::IsEmpty() const noexcept
         return false;
 }
 
-int Network::BufferSendStreamImpl::GetCurrentSize() const
+int Network::BufferSendStreamImpl::GetCurrentSize() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return topLevel.GetCurrentSize() + MessageInterface::GetMessageHeadSize();
 }
 
-void Network::BufferSendStreamImpl::EncryptedCompression(MAYBE_UNUSED const MessageBufferSharedPtr& messageBuffer) noexcept
+void Network::BufferSendStreamImpl::EncryptedCompression(const MessageBufferSharedPtr& messageBuffer) noexcept
 {
+    System::UnusedFunction(messageBuffer);
 }

@@ -24,3 +24,19 @@
     #endif  // _DEBUG
 
 #endif  // NETWORK_USE_ACE
+
+#ifdef NETWORK_USE_PROTO_BUF
+
+    #ifdef _DEBUG
+
+        #pragma comment(lib, "libprotobufd.lib")
+        #pragma comment(lib, "libprotobuf-lited.lib")
+
+    #else  // !_DEBUG
+
+        #pragma comment(lib, "libprotobuf.lib")
+        #pragma comment(lib, "libprotobuf-lite.lib")
+
+    #endif  // _DEBUG
+
+#endif  // NETWORK_USE_PROTO_BUF

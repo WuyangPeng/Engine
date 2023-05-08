@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/17 13:53)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/04/28 11:01)
 
 #include "Network/NetworkExport.h"
 
@@ -14,10 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::make_shared;
-using std::string;
-
-Network::AnalysisNetworkConfiguration::AnalysisNetworkConfiguration(const string& fileName)
+Network::AnalysisNetworkConfiguration::AnalysisNetworkConfiguration(const std::string& fileName)
     : impl{ fileName }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;

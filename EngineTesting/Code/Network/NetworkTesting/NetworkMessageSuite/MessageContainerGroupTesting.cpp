@@ -11,18 +11,29 @@
 #include "Flags/IntegerMessageType.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageContainerGroupDetail.h"
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MessageContainerGroupTesting)
+Network::MessageContainerGroupTesting::MessageContainerGroupTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MessageContainerGroupTesting)
+
+void Network::MessageContainerGroupTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 namespace Network
 {
@@ -60,17 +71,17 @@ void Network::MessageContainerGroupTesting::StreamingTest()
     TestingType::StructureType group{ { 100, 10, 10000, 5, 100 }, { 101, 11, 10001, 6, 101 }, { 102, 12, 10002, 7, 102 }, { 103, 13, 10003, 8, 103 } };
     TestingType messageContainer{ group };
 
-    ASSERT_EQUAL(messageContainer.GetStreamingSize(), CORE_TOOLS_STREAM_SIZE(group.at(0)) * boost::numeric_cast<int>(group.size()) + CORE_TOOLS_STREAM_SIZE(int32_t{}));
+    ASSERT_EQUAL(messageContainer.GetStreamingSize(), CoreTools::GetStreamSize(group.at(0)) * boost::numeric_cast<int>(group.size()) + CoreTools::GetStreamSize(int32_t{}));
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)
 
     auto buffer = make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian);
-    auto messageTarget = make_shared<MessageTarget>(buffer);
+    auto messageTarget = make_shared<MessageTarget>(*buffer);
 
     messageContainer.Save(*messageTarget);
 
-    auto messageSource = make_shared<MessageSource>(buffer);
+    auto messageSource = make_shared<MessageSource>(*buffer);
 
 #include STSTEM_WARNING_POP
 

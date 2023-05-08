@@ -10,14 +10,20 @@
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_SEND_MESSAGE_LEVEL_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_SEND_MESSAGE_LEVEL_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Network
 {
     class SendMessageLevelTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(SendMessageLevelTesting);
+        using ClassType = SendMessageLevelTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit SendMessageLevelTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

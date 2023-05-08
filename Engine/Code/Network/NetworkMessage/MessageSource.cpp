@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/19 10:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 11:40)
 
 #include "Network/NetworkExport.h"
 
@@ -14,24 +14,21 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::string;
-using std::vector;
-
-Network::MessageSource::MessageSource(const MessageBufferSharedPtr& messageBuffer) noexcept
-    : source{ messageBuffer }, parserStrategy{ messageBuffer->GetParserStrategy() }
+Network::MessageSource::MessageSource(MessageBuffer& messageBuffer) noexcept
+    : source{ messageBuffer }, parserStrategy{ messageBuffer.GetParserStrategy() }
 {
-    NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Network::MessageSource::MessageSource(MessageSource&& rhs) noexcept
-    : source{ std::move(rhs.source) }, parserStrategy{ rhs.parserStrategy }
+    : source{ rhs.source }, parserStrategy{ rhs.parserStrategy }
 {
-    NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Network::MessageSource& Network::MessageSource::operator=(MessageSource&& rhs) noexcept
 {
-    NETWORK_CLASS_IS_VALID_1;
+    NETWORK_CLASS_IS_VALID_9;
 
     if (this != &rhs)
     {
@@ -42,24 +39,13 @@ Network::MessageSource& Network::MessageSource::operator=(MessageSource&& rhs) n
     return *this;
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-
-bool Network::MessageSource::IsValid() const noexcept
-{
-    if (source != nullptr)
-        return true;
-    else
-        return false;
-}
-
-#endif  // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_STUB_DEFINE(Network, MessageSource)
 
 bool Network::MessageSource::ReadBool()
 {
-    NETWORK_CLASS_IS_VALID_1;
+    NETWORK_CLASS_IS_VALID_9;
 
-    uint32_t value{ 0 };
-
+    int32_t value{ 0 };
     Read(value);
 
     return (value != 0);
@@ -67,7 +53,7 @@ bool Network::MessageSource::ReadBool()
 
 void Network::MessageSource::ReadBool(int elementsNumber, bool* data)
 {
-    NETWORK_CLASS_IS_VALID_1;
+    NETWORK_CLASS_IS_VALID_9;
 
     if (data != nullptr)
     {
@@ -75,15 +61,17 @@ void Network::MessageSource::ReadBool(int elementsNumber, bool* data)
         {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+
             data[i] = ReadBool();
+
 #include STSTEM_WARNING_POP
         }
     }
 }
 
-string Network::MessageSource::ReadString()
+std::string Network::MessageSource::ReadString()
 {
-    NETWORK_CLASS_IS_VALID_1;
+    NETWORK_CLASS_IS_VALID_9;
 
     int32_t length{ 0 };
     Read(length);
@@ -96,22 +84,22 @@ string Network::MessageSource::ReadString()
             padding = 4 - padding;
         }
 
-        const auto* const text = source->GetCurrentReadBufferedPtr();
-        string datum(text, length);
+        const auto* const text = source.GetCurrentReadBufferedPtr();
+        std::string datum(text, length);
 
-        source->AddCurrentReadIndex(length + padding);
+        source.AddCurrentReadIndex(length + padding);
 
         return datum;
     }
     else
     {
-        return string{};
+        return std::string{};
     }
 }
 
-void Network::MessageSource::ReadString(int elementsNumber, string* data)
+void Network::MessageSource::ReadString(int elementsNumber, std::string* data)
 {
-    NETWORK_CLASS_IS_VALID_1;
+    NETWORK_CLASS_IS_VALID_9;
 
     if (data != nullptr)
     {
@@ -119,7 +107,9 @@ void Network::MessageSource::ReadString(int elementsNumber, string* data)
         {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+
             data[i] = ReadString();
+
 #include STSTEM_WARNING_POP
         }
     }
@@ -127,28 +117,28 @@ void Network::MessageSource::ReadString(int elementsNumber, string* data)
 
 int Network::MessageSource::GetBytesRead() const noexcept
 {
-    NETWORK_CLASS_IS_VALID_CONST_1;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return source->GetCurrentReadIndex();
+    return source.GetCurrentReadIndex();
 }
 
 int Network::MessageSource::GetBytesTotal() const noexcept
 {
-    NETWORK_CLASS_IS_VALID_CONST_1;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return source->GetCurrentWriteIndex();
+    return source.GetCurrentWriteIndex();
 }
 
 void Network::MessageSource::IncrementBytesProcessed(int bytesNumber)
 {
-    NETWORK_CLASS_IS_VALID_1;
+    NETWORK_CLASS_IS_VALID_9;
 
-    source->AddCurrentReadIndex(bytesNumber);
+    source.AddCurrentReadIndex(bytesNumber);
 }
 
-void Network::MessageSource::Read(vector<string>& datum)
+void Network::MessageSource::Read(std::vector<std::string>& datum)
 {
-    NETWORK_CLASS_IS_VALID_1;
+    NETWORK_CLASS_IS_VALID_9;
 
     int32_t elementsNumber{ 0 };
     Read(elementsNumber);
@@ -160,9 +150,9 @@ void Network::MessageSource::Read(vector<string>& datum)
     }
 }
 
-void Network::MessageSource::Read(string& datum)
+void Network::MessageSource::Read(std::string& datum)
 {
-    NETWORK_CLASS_IS_VALID_1;
+    NETWORK_CLASS_IS_VALID_9;
 
     datum = ReadString();
 }

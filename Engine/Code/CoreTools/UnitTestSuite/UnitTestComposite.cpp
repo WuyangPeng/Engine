@@ -97,12 +97,7 @@ void CoreTools::UnitTestComposite::SetRandomSeed(int aRandomSeed) noexcept
     randomSeed = aRandomSeed;
 }
 
-int CoreTools::UnitTestComposite::GetRandomSeed() const noexcept
-{
-    return randomSeed + System::GetEngineeringOffsetValue();
-}
-
 uint32_t CoreTools::UnitTestComposite::GetEngineRandomSeed() const
 {
-    return boost::numeric_cast<uint32_t>(GetRandomSeed());
+    return boost::numeric_cast<uint32_t>(randomSeed + System::GetEngineeringOffsetValue());
 }

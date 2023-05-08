@@ -50,9 +50,6 @@ namespace Network
     CORE_TOOLS_SHARED_PTR_DECLARE(Client);
     CORE_TOOLS_SHARED_PTR_DECLARE(Server);
 
-    class SocketManager;
-
-    CORE_TOOLS_SHARED_PTR_DECLARE(SocketManager);
     CORE_TOOLS_SHARED_PTR_DECLARE(SockStream);
     CORE_TOOLS_SHARED_PTR_DECLARE(SockAddress);
     CORE_TOOLS_SHARED_PTR_DECLARE(SockAcceptor);

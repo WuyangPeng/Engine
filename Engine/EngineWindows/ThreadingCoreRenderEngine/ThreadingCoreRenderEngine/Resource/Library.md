@@ -52,7 +52,7 @@ stlsoft（引擎直接关联）
 ----------------------------
 ACE（引擎通过宏NETWORK_USE_ACE关联）
 
-1. 版本：7.0.8。
+1. 版本：7.1.0。
 2. 官方网站：http://download.dre.vanderbilt.edu/、 http://www.dre.vanderbilt.edu/~schmidt/ACE.html。
 3. 在ace目录下增加文件config.h包含正确的config文件。
    #ifndef ACE_CONFIG_H
@@ -136,10 +136,12 @@ mysql connector c++（引擎通过宏DATABASE_USE_MYSQL_CPP_CONNECTOR关联）
    
 ----------------------------  
 protobuf（引擎通过宏NETWORK_USE_PROTOBUF关联）
-1. 版本：3.21.5。
+1. 版本：21.12。
 2. 官方网站：https://github.com/protocolbuffers/protobuf。
 3. git地址：https://github.com/protocolbuffers/protobuf.git。
 4. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+5. port_def.inc尾部增加
+   #include "System/Helper/PragmaWarning/ProtoBuf.h"
 
 ----------------------------
 freeglut（引擎通过宏SYSTEM_USE_GLUT关联）

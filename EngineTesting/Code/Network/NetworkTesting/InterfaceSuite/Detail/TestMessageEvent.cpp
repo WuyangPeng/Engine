@@ -11,6 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Threading/Flags/MutexFlags.h"
 #include "CoreTools/Threading/ScopedMutex.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/Interface/SendSocket.h"
 #include "Network/NetworkMessage/NullMessage.h"
 
@@ -44,19 +45,19 @@ uint64_t Network::TestMessageEvent::GetCallBackTime() const noexcept
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
 
-void Network::TestMessageEvent::CallBackEvent(MAYBE_UNUSED uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
+void Network::TestMessageEvent::CallBackEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
     CoreTools::ScopedMutex scopedMutex{ testMessageEventCriticalSection };
 
-    callBackTime += message->GetMessageID();
+    callBackTime += message->GetMessageId();
 
     auto serverSharedPtr = serverWeakPtr.lock();
 
     if (serverSharedPtr)
     {
-        MessageInterfaceSharedPtr sendMessage{ make_shared<NullMessage>(message->GetMessageID()) };
+        MessageInterfaceSharedPtr sendMessage{ make_shared<NullMessage>(MessageHeadStrategy::Default, message->GetMessageId()) };
         serverSharedPtr->AsyncSend(socketID, sendMessage);
     }
 }

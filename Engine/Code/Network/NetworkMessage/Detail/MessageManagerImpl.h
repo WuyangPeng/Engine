@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 11:00)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:07)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_MANAGER_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_MANAGER_IMPL_H
@@ -33,21 +33,26 @@ namespace Network
         CLASS_INVARIANT_DECLARE;
 
     public:
-        NODISCARD FactoryFunction Find(int64_t messageID, int version) const;
-        void Insert(int64_t messageID, const MessageTypeCondition& messageTypeCondition, FactoryFunction function);
-        void Remove(int64_t messageID, const MessageTypeCondition& messageTypeCondition);
-        void Remove(int64_t messageID);
+        NODISCARD FactoryFunction Find(int64_t messageId, int version) const;
+        NODISCARD FactoryFunction Find(const std::string& messageDescribe, int version) const;
 
-        void SetFullVersion(int fullVersion) noexcept;
+        void Insert(int64_t messageId, const MessageTypeCondition& messageTypeCondition, FactoryFunction function);
+        void Insert(const std::string& messageDescribe, const MessageTypeCondition& messageTypeCondition, FactoryFunction function);
+        void Remove(int64_t messageId, const MessageTypeCondition& messageTypeCondition);
+        void Remove(int64_t messageId);
+
+        void SetFullVersion(int aFullVersion) noexcept;
         NODISCARD int GetFullVersion() const noexcept;
 
     private:
         using ConditionContainer = std::map<MessageTypeCondition, FactoryFunction, MessageTypeConditionOperating>;
-        using FactoryContainer = std::map<int64_t, ConditionContainer>;
+        using IdFactoryContainer = std::map<int64_t, ConditionContainer>;
+        using DescribeFactoryContainer = std::map<std::string, ConditionContainer>;
 
     private:
-        FactoryContainer factories;
-        int m_FullVersion;
+        IdFactoryContainer idFactories;
+        DescribeFactoryContainer describeFactories;
+        int fullVersion;
     };
 }
 

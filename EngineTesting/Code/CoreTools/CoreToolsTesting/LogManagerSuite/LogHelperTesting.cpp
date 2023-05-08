@@ -52,12 +52,17 @@ void CoreTools::LogHelperTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void CoreTools::LogHelperTesting::MainTest()  
+void CoreTools::LogHelperTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(WriteMessageTest);
 
     ASSERT_NOT_THROW_EXCEPTION_0(WriteMessageToFileTest);
+
+    LOG_ASYNCHRONOUS_SINGLETON.Stop();
+    LOG_ASYNCHRONOUS_SINGLETON.Run();
+
     ASSERT_NOT_THROW_EXCEPTION_0(FileContentTest);
+
     ASSERT_NOT_THROW_EXCEPTION_0(DeleteFileTest);
 }
 

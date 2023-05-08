@@ -10,7 +10,7 @@
 #ifndef NETWORK_TESTING_CONFIGURATION_SUITE_ANALYSIS_NETWORK_CONFIGURATION_TESTING_H
 #define NETWORK_TESTING_CONFIGURATION_SUITE_ANALYSIS_NETWORK_CONFIGURATION_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Network/Configuration/ConfigurationFwd.h"
 
 namespace Network
@@ -18,7 +18,13 @@ namespace Network
     class AnalysisNetworkConfigurationTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(AnalysisNetworkConfigurationTesting);
+        using ClassType = AnalysisNetworkConfigurationTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit AnalysisNetworkConfigurationTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         using TestingType = AnalysisNetworkConfiguration;
 

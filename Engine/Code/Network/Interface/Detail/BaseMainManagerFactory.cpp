@@ -39,7 +39,7 @@ Network::BaseMainManagerFactory::ImplTypePtr Network::BaseMainManagerFactory::Cr
     switch (wrappersStrategyFlag)
     {
 #ifdef NETWORK_USE_ACE
-        case WrappersStrategy::ACE:
+        case WrappersStrategy::Ace:
             return make_shared<ACEMainManager>();
 #endif  // NETWORK_USE_ACE
 
@@ -61,9 +61,6 @@ Network::BaseMainManagerFactory::ImplTypePtr Network::BaseMainManagerFactory::Cr
 
         case WrappersStrategy::Network:
             return make_shared<NetworkMainManager>(CoreTools::DisableNotThrow::Disable);
-
-        case WrappersStrategy::Socket:
-            return make_shared<BoostMainManager>(CoreTools::DisableNotThrow::Disable);
 
         case WrappersStrategy::Null:
             return make_shared<NullMainManager>();

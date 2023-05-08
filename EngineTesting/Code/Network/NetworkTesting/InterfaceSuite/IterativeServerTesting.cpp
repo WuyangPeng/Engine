@@ -14,6 +14,7 @@
 #include "CoreTools/Base/Version.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/ConfigurationParameter.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/ConfigurationSubStrategy.h"
@@ -25,7 +26,6 @@
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/NullMessage.h"
-
 #include <vector>
 
 using std::make_shared;
@@ -78,9 +78,11 @@ void Network::IterativeServerTesting::CreateMessage()
 void Network::IterativeServerTesting::IterativeServerTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
-    ConfigurationStrategy serverConfigurationStrategy{ WrappersStrategy::ACE,
-                                                       ConnectStrategy::TCP,
+    ConfigurationStrategy serverConfigurationStrategy{ WrappersStrategy::Ace,
+                                                       ConnectStrategy::Tcp,
                                                        ServerStrategy::Iterative,
                                                        MessageStrategy::Default,
                                                        ParserStrategy::LittleEndian,
@@ -96,12 +98,12 @@ void Network::IterativeServerTesting::IterativeServerTest()
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)
 
-    ServerSharedPtr server{ make_shared<Server>(testSocketManager, serverConfigurationStrategy) };
+    ServerSharedPtr server{ make_shared<Server>(std::make_shared<MessageEventManager>(MessageEventManager::Create()), serverConfigurationStrategy) };
 
 #include STSTEM_WARNING_POP
 
-    ConfigurationStrategy clientConfigurationStrategy{ WrappersStrategy::ACE,
-                                                       ConnectStrategy::TCP,
+    ConfigurationStrategy clientConfigurationStrategy{ WrappersStrategy::Ace,
+                                                       ConnectStrategy::Tcp,
                                                        ClientStrategy::OnlySending,
                                                        MessageStrategy::Iovec,
                                                        ParserStrategy::LittleEndian,
@@ -118,7 +120,7 @@ void Network::IterativeServerTesting::IterativeServerTest()
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
-        clientContainer.push_back(make_shared<Client>(clientConfigurationStrategy, testSocketManager));
+        clientContainer.push_back(make_shared<Client>(clientConfigurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
     }
 
     for (auto& client : clientContainer)
@@ -162,7 +164,7 @@ void Network::IterativeServerTesting::ClientThread(ClientSharedPtr client, TestS
 
     for (;;)
     {
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(messageID) };
+        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(MessageHeadStrategy::Default, messageID) };
         client->Send(socketID, message);
 
         const auto volatile asyncAcceptorCount = testSocketManagerSharedPtr->GetAsyncAcceptorCount();

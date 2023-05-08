@@ -8,10 +8,10 @@
 ///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/23 15:46)
 
 #include "TestNetworkMessageEvent.h"
-#include "TestNullMessage.h" 
+#include "TestNullMessage.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/Threading/SyncTools.h"
 #include "System/Time/DeltaTime.h"
-#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 Network::TestNetworkMessageEvent::TestNetworkMessageEvent() noexcept

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 19:12)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/06 17:49)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_INIT_VALUE_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_INIT_VALUE_DETAIL_H
@@ -43,11 +43,13 @@ Network::MultipleMessageInitValue<1, Network::MultipleMessageContainer<E, ByteTy
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 bool Network::MultipleMessageInitValue<1, Network::MultipleMessageContainer<E, ByteType, Types...>>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 #endif  // NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_INIT_VALUE_DETAIL_H

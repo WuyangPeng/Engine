@@ -15,14 +15,25 @@
 #include "Network/Interface/SockConnector.h"
 #include "Network/Interface/SockStream.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <thread>
 
 using std::make_shared;
 using std::thread;
 using std::to_string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockStreamHandleTesting)
+Network::BoostSockStreamHandleTesting::BoostSockStreamHandleTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostSockStreamHandleTesting)
+
+void Network::BoostSockStreamHandleTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::BoostSockStreamHandleTesting::MainTest() noexcept
 {
@@ -80,7 +91,7 @@ void Network::BoostSockStreamHandleTesting::ClientConnect1(const TestingTypeShar
     constexpr auto aConnectTime = GetSynchronizeConnectTime();
     for (auto i = 0; i < aConnectTime; ++i)
     {
-        SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(), configurationStrategy.GetPort(), configurationStrategy) };
+        SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetHost(), configurationStrategy.GetPort(), configurationStrategy) };
 
         SockConnector sockConnector{ configurationStrategy };
 
@@ -93,7 +104,7 @@ void Network::BoostSockStreamHandleTesting::ClientConnect1(const TestingTypeShar
         ASSERT_UNEQUAL_FAILURE_THROW(i + 1, aConnectTime, "连接服务器失败。");
     }
 
-    ASSERT_EQUAL(configurationStrategy.GetIP() + ":" + to_string(configurationStrategy.GetPort()), sockStream->GetRemoteAddress());
+    ASSERT_EQUAL(configurationStrategy.GetHost() + ":" + to_string(configurationStrategy.GetPort()), sockStream->GetRemoteAddress());
     ASSERT_EQUAL(configurationStrategy.GetPort(), sockStream->GetRemotePort());
 
     const auto& nativeHandle = sockStream->GetBoostSockStream();
@@ -143,7 +154,7 @@ void Network::BoostSockStreamHandleTesting::ServerAcceptor(const TestingTypeShar
         ASSERT_UNEQUAL_FAILURE_THROW(i + 1, aAcceptTime, "等待客户端连接失败。");
     }
 
-    ASSERT_EQUAL(configurationStrategy.GetIP() + ":" + to_string(sockStream->GetRemotePort()), sockStream->GetRemoteAddress());
+    ASSERT_EQUAL(configurationStrategy.GetHost() + ":" + to_string(sockStream->GetRemotePort()), sockStream->GetRemoteAddress());
     ASSERT_UNEQUAL(configurationStrategy.GetPort(), sockStream->GetRemotePort());
 
     const auto& nativeHandle = sockStream->GetBoostSockStream();

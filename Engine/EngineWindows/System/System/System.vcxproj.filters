@@ -1860,6 +1860,9 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLPolygon.h">
       <Filter>OpenGL 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ProtoBuf.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\DllLib.cpp">

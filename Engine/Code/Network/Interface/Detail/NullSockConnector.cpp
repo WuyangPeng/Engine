@@ -46,10 +46,10 @@ void Network::NullSockConnector::AsyncConnect(const EventInterfaceSharedPtr& eve
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPoisition::Error) };
-    callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));
-    callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Null));
-    callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), 0);
+    CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPosition::Error) };
+    callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));
+    callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Null));
+    callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Error), 0);
 
     if (!eventInterface->EventFunction(callbackParameters))
     {

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 18:02)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 09:31)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_H
@@ -16,37 +16,34 @@
 #include "MultipleMessageContainer.h"
 #include "NetworkMessageInternalFwd.h"
 
-#include <vector>
-
 namespace Network
 {
     template <typename E, MultipleMessageByteType ByteType, MultipleMessageByteType... Types>
+    requires(std::is_enum_v<E>)
     class MultipleMessage : public MessageInterface
     {
     public:
-        static_assert(std::is_enum_v<E>, "E must be is enum.");
-
         using ClassType = MultipleMessage<E, ByteType, Types...>;
         using ParentType = MessageInterface;
         using MessageType = MultipleMessageContainer<E, ByteType, Types...>;
 
     public:
-        MultipleMessage(int64_t messageID, const MessageType& messageType);
+        MultipleMessage(MessageHeadStrategy messageHeadStrategy, int64_t messageId, const MessageType& messageType);
 
         template <typename T, typename... OtherTypes>
-        MultipleMessage(int64_t messageID, T value, OtherTypes&&... otherValue);
+        MultipleMessage(MessageHeadStrategy messageHeadStrategy, int64_t messageId, T value, OtherTypes&&... otherValue);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
         NETWORK_STREAM_DECLARE(MultipleMessage);
 
-        template <E index>
+        template <E Index>
         NODISCARD auto GetValue() const
         {
             NETWORK_CLASS_IS_VALID_CONST_9;
 
-            return message.GetValue<index>();
+            return message.template GetValue<Index>();
         }
 
         NODISCARD int GetSize() const;

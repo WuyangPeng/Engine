@@ -12,10 +12,11 @@
 
 #include "Network/NetworkDll.h"
 
+#include "CoreTools/MessageEvent/EventInterface.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Interface/NetworkInternalFwd.h"
+#include "Network/NetworkMessage/MessageEventManager.h"
 #include "Network/NetworkMessage/MessageInterface.h"
-#include "Network/NetworkMessage/SocketManager.h"
 
 namespace Network
 {
@@ -29,7 +30,7 @@ namespace Network
         using FactoryType = ClientFactory;
 
     public:
-        ClientImpl(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager) noexcept;
+        ClientImpl(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager) noexcept;
         ~ClientImpl() noexcept = default;
         ClientImpl(const ClientImpl& rhs) noexcept = delete;
         ClientImpl& operator=(const ClientImpl& rhs) noexcept = delete;
@@ -54,11 +55,11 @@ namespace Network
         NODISCARD virtual uint64_t GetSocketID() const noexcept;
 
     protected:
-        NODISCARD SocketManagerSharedPtr GetSocketManagerSharedPtr();
+        NODISCARD MessageEventManagerSharedPtr GetSocketManagerSharedPtr();
 
     private:
         ConfigurationStrategy configurationStrategy;
-        SocketManagerWeakPtr socketManager;
+        std::weak_ptr<MessageEventManager> socketManager;
     };
 }
 

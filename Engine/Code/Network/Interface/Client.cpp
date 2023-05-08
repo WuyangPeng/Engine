@@ -18,7 +18,7 @@
 
 using std::string;
 
-Network::Client::Client(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager)
+Network::Client::Client(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager)
     : ParentType{}, impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy, socketManager }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;

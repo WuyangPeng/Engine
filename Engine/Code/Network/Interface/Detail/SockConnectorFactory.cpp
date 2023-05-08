@@ -37,7 +37,7 @@ Network::SockConnectorFactory::ImplTypeSharedPtr Network::SockConnectorFactory::
     {
 #ifdef NETWORK_USE_ACE
 
-        case WrappersStrategy::ACE:
+        case WrappersStrategy::Ace:
             return make_shared<ACESockConnector>();
 
 #endif  // NETWORK_USE_ACE
@@ -51,7 +51,6 @@ Network::SockConnectorFactory::ImplTypeSharedPtr Network::SockConnectorFactory::
         case WrappersStrategy::Null:
             return make_shared<NullSockConnector>();
 
-        case WrappersStrategy::Socket:
         case WrappersStrategy::Default:
         default:
             return make_shared<BoostSockConnector>();

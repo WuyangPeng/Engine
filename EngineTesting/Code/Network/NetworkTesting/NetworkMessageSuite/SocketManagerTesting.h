@@ -10,14 +10,20 @@
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_SOCKET_MANAGER_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_SOCKET_MANAGER_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Network
 {
     class SocketManagerTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(SocketManagerTesting);
+        using ClassType = SocketManagerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit SocketManagerTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

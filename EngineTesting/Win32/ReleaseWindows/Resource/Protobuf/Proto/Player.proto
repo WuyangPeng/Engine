@@ -1,0 +1,13 @@
+syntax = "proto3";
+package Player;
+
+// 玩家请求
+message PlayerRequest{ 
+	int32 user_id = 1;
+}
+
+// 玩家回复
+message PlayerResponse{ 
+	int32 user_id = 1;
+}
+ 

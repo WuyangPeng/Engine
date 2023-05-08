@@ -10,17 +10,23 @@
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_EVENT_CONTAINER_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_EVENT_CONTAINER_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Network
 {
     class MessageEventContainerTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MessageEventContainerTesting);
+        using ClassType = MessageEventContainerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit MessageEventContainerTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        void MainTest() noexcept;
+        void MainTest();
 
         void SingleContainerTest();
         void PriorityContainerTest();

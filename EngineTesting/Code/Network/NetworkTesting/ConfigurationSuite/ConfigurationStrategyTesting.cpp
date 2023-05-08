@@ -9,12 +9,23 @@
 
 #include "ConfigurationStrategyTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/ConfigurationParameter.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+Network::ConfigurationStrategyTesting::ConfigurationStrategyTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, ConfigurationStrategy)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, ConfigurationStrategyTesting)
+
+void Network::ConfigurationStrategyTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::ConfigurationStrategyTesting::MainTest()
 {
@@ -28,10 +39,10 @@ void Network::ConfigurationStrategyTesting::DefaultTest()
     ConfigurationStrategy configurationStrategy = ConfigurationStrategy::Create();
 
     ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::Boost);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetPatternStrategy(), ServerStrategy::Disable);
+    ASSERT_ENUM_EQUAL(configurationStrategy.GetServerStrategy(), ServerStrategy::Disable);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetClientStrategy(), ClientStrategy::Disable);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetMessageStrategy(), MessageStrategy::Default);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::TCP);
+    ASSERT_ENUM_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::Tcp);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetParserStrategy(), ParserStrategy::LittleEndian);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetOpenSSLStrategy(), OpenSSLStrategy::Default);
 
@@ -40,7 +51,7 @@ void Network::ConfigurationStrategyTesting::DefaultTest()
     ASSERT_FALSE(configurationSubStrategy.IsExist(WrappersSubStrategy::MultiContext));
     ASSERT_FALSE(configurationSubStrategy.IsExist(WrappersSubStrategy::Threads));
 
-    ASSERT_TRUE(configurationStrategy.GetIP().empty());
+    ASSERT_TRUE(configurationStrategy.GetHost().empty());
 
     ASSERT_EQUAL(configurationStrategy.GetPort(), 0);
 
@@ -59,8 +70,8 @@ void Network::ConfigurationStrategyTesting::ServerTest()
     configurationParameter.AddParameter(SYSTEM_TEXT("ServerID"), SYSTEM_TEXT("1"));
     configurationParameter.AddParameter(SYSTEM_TEXT("BufferSize"), SYSTEM_TEXT("1000"));
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::ACE,
-                                                 ConnectStrategy::UDP,
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Ace,
+                                                 ConnectStrategy::Udp,
                                                  ServerStrategy::Iterative,
                                                  MessageStrategy::Iovec,
                                                  ParserStrategy::BigEndian,
@@ -72,11 +83,11 @@ void Network::ConfigurationStrategyTesting::ServerTest()
                                                  "172.0.1.1",
                                                  8010 };
 
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::ACE);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetPatternStrategy(), ServerStrategy::Iterative);
+    ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::Ace);
+    ASSERT_ENUM_EQUAL(configurationStrategy.GetServerStrategy(), ServerStrategy::Iterative);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetClientStrategy(), ClientStrategy::Disable);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetMessageStrategy(), MessageStrategy::Iovec);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::UDP);
+    ASSERT_ENUM_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::Udp);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetParserStrategy(), ParserStrategy::BigEndian);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetOpenSSLStrategy(), OpenSSLStrategy::OpenSSL);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetSocketSendMessage(), SocketSendMessage::Immediately);
@@ -89,15 +100,13 @@ void Network::ConfigurationStrategyTesting::ServerTest()
     ASSERT_EQUAL(configurationSubStrategy.GetValue(WrappersSubStrategy::MultiContext), 2);
     ASSERT_EQUAL(configurationSubStrategy.GetValue(WrappersSubStrategy::Threads), 3);
 
-    ASSERT_EQUAL(configurationStrategy.GetIP(), "172.0.1.1");
+    ASSERT_EQUAL(configurationStrategy.GetHost(), "172.0.1.1");
 
     ASSERT_EQUAL(configurationStrategy.GetPort(), 8010);
 
     auto secondConfigurationParameter = configurationStrategy.GetConfigurationParameter();
 
     ASSERT_TRUE(secondConfigurationParameter.IsParameterExist(SYSTEM_TEXT("ServerID"), SYSTEM_TEXT("1")));
-
-    ASSERT_EQUAL(configurationStrategy.GetBufferSize(), 1000);
 }
 
 void Network::ConfigurationStrategyTesting::ClientTest()
@@ -109,8 +118,8 @@ void Network::ConfigurationStrategyTesting::ClientTest()
     ConfigurationParameter configurationParameter = ConfigurationParameter::Create();
     configurationParameter.AddParameter(SYSTEM_TEXT("ServerID"), SYSTEM_TEXT("1"));
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::ACE,
-                                                 ConnectStrategy::UDP,
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Ace,
+                                                 ConnectStrategy::Udp,
                                                  ClientStrategy::Cache,
                                                  MessageStrategy::Iovec,
                                                  ParserStrategy::BigEndian,
@@ -122,11 +131,11 @@ void Network::ConfigurationStrategyTesting::ClientTest()
                                                  "172.0.1.1",
                                                  8010 };
 
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::ACE);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetPatternStrategy(), ServerStrategy::Disable);
+    ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::Ace);
+    ASSERT_ENUM_EQUAL(configurationStrategy.GetServerStrategy(), ServerStrategy::Disable);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetClientStrategy(), ClientStrategy::Cache);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetMessageStrategy(), MessageStrategy::Iovec);
-    ASSERT_ENUM_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::UDP);
+    ASSERT_ENUM_EQUAL(configurationStrategy.GetConnectStrategy(), ConnectStrategy::Udp);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetParserStrategy(), ParserStrategy::BigEndian);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetOpenSSLStrategy(), OpenSSLStrategy::OpenSSL);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetSocketSendMessage(), SocketSendMessage::Cache);
@@ -139,13 +148,11 @@ void Network::ConfigurationStrategyTesting::ClientTest()
     ASSERT_EQUAL(configurationSubStrategy.GetValue(WrappersSubStrategy::MultiContext), 2);
     ASSERT_EQUAL(configurationSubStrategy.GetValue(WrappersSubStrategy::Threads), 3);
 
-    ASSERT_EQUAL(configurationStrategy.GetIP(), "172.0.1.1");
+    ASSERT_EQUAL(configurationStrategy.GetHost(), "172.0.1.1");
 
     ASSERT_EQUAL(configurationStrategy.GetPort(), 8010);
 
     auto secondConfigurationParameter = configurationStrategy.GetConfigurationParameter();
 
     ASSERT_TRUE(secondConfigurationParameter.IsParameterExist(SYSTEM_TEXT("ServerID"), SYSTEM_TEXT("1")));
-
-    ASSERT_EQUAL(configurationStrategy.GetBufferSize(), 1024);
 }

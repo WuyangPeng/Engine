@@ -9,14 +9,14 @@
 
 #include "MessageTargetTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <boost/numeric/conversion/cast.hpp>
 
 using std::array;
@@ -81,7 +81,7 @@ void Network::MessageTargetTesting::SourceTest(ParserStrategy parserStrategy)
 {
     auto buffer = CreateTargetMessageBuffer(parserStrategy);
 
-    MessageSource messageSource{ buffer };
+    MessageSource messageSource{ *buffer };
 
     VerificationBool(messageSource);
     VerificationEnum(parserStrategy, messageSource);
@@ -95,7 +95,7 @@ Network::MessageBufferSharedPtr Network::MessageTargetTesting::CreateTargetMessa
     bytesWrite = 0;
 
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size1024, parserStrategy) };
-    MessageTarget messageTarget{ buffer };
+    MessageTarget messageTarget{ *buffer };
 
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
@@ -112,17 +112,17 @@ void Network::MessageTargetTesting::MessageTargetWriteBool(TestingType& messageT
 {
     messageTarget.WriteBool(boolValue);
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(boolValue);
+    bytesWrite += CoreTools::GetStreamSize(boolValue);
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
     messageTarget.WriteBoolWithNumber(boolArraySize, boolBuffer1.data());
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(boolArraySize) + CORE_TOOLS_STREAM_SIZE(boolBuffer1.at(0)) * boolArraySize;
+    bytesWrite += CoreTools::GetStreamSize(boolArraySize) + CoreTools::GetStreamSize(boolBuffer1.at(0)) * boolArraySize;
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
     messageTarget.WriteBoolWithoutNumber(boolArraySize, boolBuffer2.data());
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(boolBuffer2.at(0)) * boolArraySize;
+    bytesWrite += CoreTools::GetStreamSize(boolBuffer2.at(0)) * boolArraySize;
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 }
 
@@ -130,17 +130,17 @@ void Network::MessageTargetTesting::MessageTargetWriteEnum(TestingType& messageT
 {
     messageTarget.WriteEnum(parserStrategy);
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(parserStrategy);
+    bytesWrite += CoreTools::GetStreamSize(parserStrategy);
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
     messageTarget.WriteEnumWithNumber(enumArraySize, parserStrategyBuffer1.data());
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(enumArraySize) + CORE_TOOLS_STREAM_SIZE(parserStrategyBuffer1.at(0)) * enumArraySize;
+    bytesWrite += CoreTools::GetStreamSize(enumArraySize) + CoreTools::GetStreamSize(parserStrategyBuffer1.at(0)) * enumArraySize;
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
     messageTarget.WriteEnumWithoutNumber(enumArraySize, parserStrategyBuffer2.data());
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(parserStrategyBuffer2.at(0)) * enumArraySize;
+    bytesWrite += CoreTools::GetStreamSize(parserStrategyBuffer2.at(0)) * enumArraySize;
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 }
 
@@ -148,17 +148,17 @@ void Network::MessageTargetTesting::MessageTargetWriteInt16(TestingType& message
 {
     messageTarget.Write(int16Value);
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(int16Value);
+    bytesWrite += CoreTools::GetStreamSize(int16Value);
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
     messageTarget.WriteWithNumber(int16ArraySize, int16Buffer1.data());
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(int16ArraySize) + CORE_TOOLS_STREAM_SIZE(int16Buffer1.at(0)) * int16ArraySize;
+    bytesWrite += CoreTools::GetStreamSize(int16ArraySize) + CoreTools::GetStreamSize(int16Buffer1.at(0)) * int16ArraySize;
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
     messageTarget.WriteWithoutNumber(int16ArraySize, int16Buffer2.data());
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(int16Buffer2.at(0)) * int16ArraySize;
+    bytesWrite += CoreTools::GetStreamSize(int16Buffer2.at(0)) * int16ArraySize;
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 }
 
@@ -166,16 +166,16 @@ void Network::MessageTargetTesting::MessageTargetWriteString(TestingType& messag
 {
     messageTarget.WriteString(stringValue);
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(stringValue);
+    bytesWrite += CoreTools::GetStreamSize(stringValue);
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
     messageTarget.WriteStringWithNumber(stringArraySize, stringBuffer1.data());
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(stringArraySize);
+    bytesWrite += CoreTools::GetStreamSize(stringArraySize);
 
     for (const auto& value : stringBuffer1)
     {
-        bytesWrite += CORE_TOOLS_STREAM_SIZE(value);
+        bytesWrite += CoreTools::GetStreamSize(value);
     }
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
@@ -183,7 +183,7 @@ void Network::MessageTargetTesting::MessageTargetWriteString(TestingType& messag
 
     for (const auto& value : stringBuffer2)
     {
-        bytesWrite += CORE_TOOLS_STREAM_SIZE(value);
+        bytesWrite += CoreTools::GetStreamSize(value);
     }
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 }
@@ -192,17 +192,17 @@ void Network::MessageTargetTesting::MessageTargetWriteVector(TestingType& messag
 {
     messageTarget.Write(int32Vector);
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(int32Vector);
+    bytesWrite += CoreTools::GetStreamSize(int32Vector);
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
     messageTarget.Write(stringValue);
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(stringValue);
+    bytesWrite += CoreTools::GetStreamSize(stringValue);
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 
     messageTarget.Write(stringVector);
 
-    bytesWrite += CORE_TOOLS_STREAM_SIZE(stringVector);
+    bytesWrite += CoreTools::GetStreamSize(stringVector);
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
 }
 

@@ -54,14 +54,14 @@ void Network::ACESockConnector::AsyncConnect(const EventInterfaceSharedPtr& even
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     CoreTools::CallbackParameters callbackParameters{ 0 };
-    callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));
+    callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));
 
     const auto result = aceSockConnector.connect(sockStream->GetACESockStream(), sockAddress->GetACEInetAddress());
 
     if (result == 0)
     {
-        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
-        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), result);
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Ace));
+        callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Error), result);
 
         if (!eventInterface->EventFunction(callbackParameters))
         {

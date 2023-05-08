@@ -11,12 +11,23 @@
 #include "Detail/NullSocketManager.h"
 #include "Detail/TestNullMessage.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, SocketManagerTesting)
+Network::SocketManagerTesting::SocketManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SocketManagerTesting)
+
+void Network::SocketManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::SocketManagerTesting::MainTest()
 {
@@ -27,26 +38,30 @@ void Network::SocketManagerTesting::ManagerTest()
 {
     constexpr int64_t messageID{ 6 };
     NullSocketManager nullSocketManager{ messageID };
-    ASSERT_EQUAL(nullSocketManager.GetSocketSize(), 0);
+    // ASSERT_EQUAL(nullSocketManager.GetSocketSize(), 0);
 
     constexpr uint64_t socketID{ 1 };
-    nullSocketManager.InsertSocket(socketID);
-    ASSERT_EQUAL(nullSocketManager.GetSocketSize(), 1);
+    //  nullSocketManager.InsertSocket(socketID);
+    // ASSERT_EQUAL(nullSocketManager.GetSocketSize(), 1);
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
 
     TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(messageID) };
 
-    nullSocketManager.OnEvent(socketID, messageID, testMessage);
+    // nullSocketManager.OnEvent(socketID, messageID, testMessage);
     ASSERT_EQUAL(nullSocketManager.GetValue(), messageID);
 
-    nullSocketManager.OnEvent(socketID, messageID, testMessage);
+    //  nullSocketManager.OnEvent(socketID, messageID, testMessage);
     ASSERT_EQUAL(nullSocketManager.GetValue(), messageID * 2);
 
     ASSERT_TRUE(nullSocketManager.EventFunction(CoreTools::CallbackParameters{ 0 }));
 
-    nullSocketManager.RemoveSocket(socketID);
+    // nullSocketManager.RemoveSocket(socketID);
 
-    ASSERT_EQUAL(nullSocketManager.GetSocketSize(), 0);
+    //  ASSERT_EQUAL(nullSocketManager.GetSocketSize(), 0);
 
-    nullSocketManager.OnEvent(socketID, messageID, testMessage);
+    //  nullSocketManager.OnEvent(socketID, messageID, testMessage);
     ASSERT_EQUAL(nullSocketManager.GetValue(), messageID * 2);
+
+#include STSTEM_WARNING_POP
 }

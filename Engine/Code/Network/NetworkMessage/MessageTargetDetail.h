@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 18:30)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 09:51)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_TARGET_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_TARGET_DETAIL_H
@@ -29,7 +29,7 @@ void Network::MessageTarget::Write(T datum)
 
     const auto typeSize = CoreTools::GetStreamSize<T>();
 
-    return target->Write(typeSize, &datum);
+    return target.Write(typeSize, &datum);
 }
 
 template <typename T>
@@ -54,7 +54,7 @@ void Network::MessageTarget::WriteWithoutNumber(int32_t elementsNumber, const T*
     {
         const auto typeSize = CoreTools::GetStreamSize<T>();
 
-        target->Write(typeSize, elementsNumber, data);
+        target.Write(typeSize, elementsNumber, data);
     }
 }
 
@@ -75,7 +75,7 @@ void Network::MessageTarget::Write(const std::vector<T>& datum)
 }
 
 template <typename T>
-void Network::MessageTarget::WriteEnum(const T datum)
+void Network::MessageTarget::WriteEnum(T datum)
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 
@@ -107,7 +107,9 @@ void Network::MessageTarget::WriteEnumWithoutNumber(int32_t elementsNumber, cons
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+
         WriteEnum(data[i]);
+
 #include STSTEM_WARNING_POP
     }
 }

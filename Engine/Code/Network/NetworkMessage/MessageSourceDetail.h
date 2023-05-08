@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 18:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 09:50)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_SOURCE_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_SOURCE_DETAIL_H
@@ -27,7 +27,7 @@ void Network::MessageSource::Read(T& datum)
 
     const auto typeSize = CoreTools::GetStreamSize<T>();
 
-    source->Read(typeSize, &datum);
+    source.Read(typeSize, &datum);
 }
 
 template <typename T>
@@ -41,7 +41,7 @@ void Network::MessageSource::Read(int elementsNumber, T* data)
     {
         const auto typeSize = CoreTools::GetStreamSize<T>();
 
-        source->Read(typeSize, elementsNumber, data);
+        source.Read(typeSize, elementsNumber, data);
     }
 }
 
@@ -53,7 +53,6 @@ void Network::MessageSource::Read(std::vector<T>& datum)
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     int32_t elementsNumber{ 0 };
-
     Read(elementsNumber);
 
     if (0 < elementsNumber)
@@ -73,7 +72,6 @@ void Network::MessageSource::ReadEnum(T& datum)
     using UnderlyingType = std::underlying_type_t<T>;
 
     UnderlyingType value{ 0 };
-
     Read(value);
 
     datum = System::UnderlyingCastEnum<T>(value);
@@ -90,7 +88,9 @@ void Network::MessageSource::ReadEnum(int elementsNumber, T* data)
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+
         ReadEnum(data[i]);
+
 #include STSTEM_WARNING_POP
     }
 }

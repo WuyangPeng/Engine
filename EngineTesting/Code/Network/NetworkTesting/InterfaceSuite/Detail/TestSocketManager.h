@@ -12,17 +12,18 @@
 
 #include "TestMessageEvent.h"
 #include "Network/Interface/Server.h"
-#include "Network/NetworkMessage/SocketManager.h"
+#include "Network/NetworkMessage/MessageEventManager.h"
 
 #include <atomic>
 
 namespace Network
 {
-    class TestSocketManager : public SocketManager
+    class TestSocketManager : public CoreTools::EventInterface
     {
     public:
         using ClassType = TestSocketManager;
-        using ParentType = SocketManager;
+        using ParentType = EventInterface;
+
         using TestSocketManagerSharedPtr = std::shared_ptr<TestSocketManager>;
 
     public:
@@ -44,7 +45,7 @@ namespace Network
         void SetServerWeakPtr(const ServerSharedPtr& ptr) noexcept;
 
     private:
-        void InitEvent(uint64_t socketID) override;
+        void InitEvent(uint64_t socketID) noexcept;
 
     private:
         uint32_t messageID;

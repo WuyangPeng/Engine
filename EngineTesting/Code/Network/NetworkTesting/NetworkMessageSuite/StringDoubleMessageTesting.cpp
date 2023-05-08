@@ -12,24 +12,35 @@
 #include "Detail/TestIntMessage.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
-#include "Network/NetworkMessage/StringDoubleMessageDetail.h"
-
+#include "Network/NetworkMessage/StringMessageDetail.h"
 using std::make_shared;
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, StringDoubleMessageTesting)
+Network::StringDoubleMessageTesting::StringDoubleMessageTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, StringDoubleMessageTesting)
+
+void Network::StringDoubleMessageTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 namespace Network
 {
-    using TestingType = StringDoubleMessage<StringMessageField>;
+    using TestingType = StringMessage<StringMessageField>;
     using TestingTypeSharedPtr = std::shared_ptr<TestingType>;
 }
 
@@ -45,7 +56,7 @@ void Network::StringDoubleMessageTesting::RttiTest()
 {
     TestingType::StringType stringType{ "UserName", "UserInfo", "GuildName" };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(fullMessageID, stringType) };
+    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(MessageHeadStrategy::Default, fullMessageID, stringType) };
     TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(fullMessageID) };
 
     ASSERT_TRUE(testMessage->IsExactly(TestingType::GetCurrentRttiType()));
@@ -68,24 +79,28 @@ void Network::StringDoubleMessageTesting::FactoryTest()
 {
     TestingType::StringType stringType{ "UserName", "UserInfo", "GuildName" };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(fullMessageID, stringType) };
+    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(MessageHeadStrategy::UseSubId, fullMessageID, stringType) };
     ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 
     MESSAGE_MANAGER_SINGLETON.Insert(fullMessageID, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTarget messageTarget{ buffer };
-
+    MessageTarget messageTarget{ *buffer };
+#include STSTEM_WARNING_POP
     testMessage->Save(messageTarget);
 
-    MessageSource messageSource{ buffer };
+    MessageSource messageSource{ *buffer };
+
+    MessageHeadStrategy messageHeadStrategy{};
+    messageSource.ReadEnum(messageHeadStrategy);
 
     int64_t sourceMessageID{ 0 };
     messageSource.Read(sourceMessageID);
 
     ASSERT_EQUAL(sourceMessageID, fullMessageID);
 
-    auto factoryCreateMessage = TestingType::Factory(messageSource, fullMessageID);
+    auto factoryCreateMessage = TestingType::Factory(messageSource, MessageHeadStrategy::UseSubId, fullMessageID);
     auto polymorphicMessage = boost::dynamic_pointer_cast<TestingType>(factoryCreateMessage);
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(polymorphicMessage, "消息类型错误！");
@@ -105,26 +120,30 @@ void Network::StringDoubleMessageTesting::StreamingTest()
 {
     TestingType::StringType stringType{ "UserName", "UserInfo", "GuildName" };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(fullMessageID, stringType) };
+    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(MessageHeadStrategy::UseSubId, fullMessageID, stringType) };
     ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 
-    ASSERT_EQUAL(testMessage->GetStreamingSize(), CORE_TOOLS_STREAM_SIZE(fullMessageID) + CORE_TOOLS_STREAM_SIZE(stringType));
+    ASSERT_EQUAL(testMessage->GetStreamingSize(), CoreTools::GetStreamSize(fullMessageID) + CoreTools::GetStreamSize(stringType) + 4);
 
     MESSAGE_MANAGER_SINGLETON.Insert(fullMessageID, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTarget messageTarget{ buffer };
-
+    MessageTarget messageTarget{ *buffer };
+#include STSTEM_WARNING_POP
     testMessage->Save(messageTarget);
 
-    MessageSource messageSource{ buffer };
+    MessageSource messageSource{ *buffer };
+
+    MessageHeadStrategy messageHeadStrategy{};
+    messageSource.ReadEnum(messageHeadStrategy);
 
     int64_t sourceMessageID{ 0 };
     messageSource.Read(sourceMessageID);
 
     ASSERT_EQUAL(sourceMessageID, fullMessageID);
 
-    auto sourceTestStringMessage{ make_shared<TestingType>(fullMessageID, TestingType::StringType{}) };
+    auto sourceTestStringMessage{ make_shared<TestingType>(MessageHeadStrategy::UseSubId, fullMessageID, TestingType::StringType{}) };
     ASSERT_TRUE(sourceTestStringMessage->IsExactlyTypeOf(sourceTestStringMessage));
 
     sourceTestStringMessage->Load(messageSource);
@@ -136,10 +155,10 @@ void Network::StringDoubleMessageTesting::MessageTest()
 {
     TestingType::StringType stringType{ "UserName", "UserInfo", "GuildName" };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(fullMessageID, stringType) };
+    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(MessageHeadStrategy::UseSubId, fullMessageID, stringType) };
     ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 
-    ASSERT_EQUAL(testMessage->GetMessageID(), messageID);
-    ASSERT_EQUAL(testMessage->GetSubMessageID(), subMessageID);
-    ASSERT_EQUAL(testMessage->GetFullMessageID(), fullMessageID);
+    ASSERT_EQUAL(testMessage->GetMessageId(), messageID);
+    ASSERT_EQUAL(testMessage->GetSubMessageId(), subMessageID);
+    ASSERT_EQUAL(testMessage->GetFullMessageId(), fullMessageID);
 }

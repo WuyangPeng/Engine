@@ -1,6 +1,6 @@
 {
   "GameServer": {
-    "IP": "",
+    "Host": "",
     "Port": 8010,
     "Client": 0,
     "Server": 1,
@@ -12,14 +12,16 @@
     "Send": 0,
 
     "WrappersSub": {
+      "SendBufferSize": 1048576,
+      "ReceiveBufferSize": 1048576,
       "Threads": 2,
       "MultiContext": 0
     },
 
     "Parameter": {
-      "ServerID": 1,
-      "ServerID": 2,
-      "PlatformID": 1,
+      "ServerId": 1,
+      "PlatformId": 1,
+      "CellId": 1,
       "ServerName": "GameServer",
       "BufferSize": 100000
     }

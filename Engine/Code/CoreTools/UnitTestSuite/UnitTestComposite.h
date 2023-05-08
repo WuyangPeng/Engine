@@ -12,12 +12,11 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
-
 #include "UnitTestInterface.h"
 #include "UnitTestStream.h"
 #include "UnitTestSuiteFwd.h"
 #include "System/DynamicLink/Using/LoadLibraryUsing.h"
+#include "CoreTools/Helper/ExportMacro.h"
 
 // 使用组合模式封装UnitTest类和SuiteImpl类。
 namespace CoreTools
@@ -48,7 +47,6 @@ namespace CoreTools
         void SetTestLoopCount(int aTestLoopCount) noexcept;
         void SetRandomSeed(int aRandomSeed) noexcept;
 
-        NODISCARD int GetRandomSeed() const noexcept;
         NODISCARD uint32_t GetEngineRandomSeed() const;
 
     protected:

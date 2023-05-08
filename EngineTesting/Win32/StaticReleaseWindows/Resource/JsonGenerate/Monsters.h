@@ -42,6 +42,8 @@ namespace JsonConfigure
 
         NODISCARD System::String GetNetwork() const;
 
+        NODISCARD bool IsBoolTest() const noexcept;
+
         NODISCARD Test GetTest() const;
         NODISCARD int GetTestSize() const;
         NODISCARD TestConstIter GetTestBegin() const noexcept;
@@ -69,6 +71,7 @@ namespace JsonConfigure
         int system;
         int coreTools;
         System::String network;
+        bool boolTest;
         Test test;
         ConsoleTest consoleTest;
         DataContainer data;

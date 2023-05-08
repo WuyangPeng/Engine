@@ -15,7 +15,7 @@
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/Interface/BaseMainManager.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::ostream;
 
 Network::SingletonTesting::SingletonTesting(const OStreamShared& stream)
@@ -31,9 +31,11 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SingletonTesting)
 Network::ConfigurationStrategy Network::SingletonTesting::GetACEServerConfigurationStrategy(int increase) const
 {
     ConfigurationSubStrategy subStrategy = ConfigurationSubStrategy::Create();
+    subStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    subStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
-    return ConfigurationStrategy{ WrappersStrategy::ACE,
-                                  ConnectStrategy::TCP,
+    return ConfigurationStrategy{ WrappersStrategy::Ace,
+                                  ConnectStrategy::Tcp,
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,
@@ -49,9 +51,11 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetACEServerConfigurat
 Network::ConfigurationStrategy Network::SingletonTesting::GetBoostServerConfigurationStrategy(int increase) const
 {
     ConfigurationSubStrategy subStrategy = ConfigurationSubStrategy::Create();
+    subStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    subStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
     return ConfigurationStrategy{ WrappersStrategy::Boost,
-                                  ConnectStrategy::TCP,
+                                  ConnectStrategy::Tcp,
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,
@@ -67,9 +71,11 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetBoostServerConfigur
 Network::ConfigurationStrategy Network::SingletonTesting::GetBoostFixedServerConfigurationStrategy(int increase) const
 {
     ConfigurationSubStrategy subStrategy = ConfigurationSubStrategy::Create();
+    subStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    subStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
     return ConfigurationStrategy{ WrappersStrategy::Boost,
-                                  ConnectStrategy::TCP,
+                                  ConnectStrategy::Tcp,
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Fixed,
                                   ParserStrategy::LittleEndian,
@@ -84,9 +90,11 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetBoostFixedServerCon
 Network::ConfigurationStrategy Network::SingletonTesting::GetBoostClientConfigurationStrategy(int increase) const
 {
     ConfigurationSubStrategy subStrategy = ConfigurationSubStrategy::Create();
+    subStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    subStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
     return ConfigurationStrategy{ WrappersStrategy::Boost,
-                                  ConnectStrategy::TCP,
+                                  ConnectStrategy::Tcp,
                                   ClientStrategy::Cache,
                                   MessageStrategy::Iovec,
                                   ParserStrategy::LittleEndian,
@@ -102,9 +110,11 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetBoostClientConfigur
 Network::ConfigurationStrategy Network::SingletonTesting::GetBoostFixedClientConfigurationStrategy(int increase) const
 {
     ConfigurationSubStrategy subStrategy = ConfigurationSubStrategy::Create();
+    subStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    subStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
     return ConfigurationStrategy{ WrappersStrategy::Boost,
-                                  ConnectStrategy::TCP,
+                                  ConnectStrategy::Tcp,
                                   ClientStrategy::Cache,
                                   MessageStrategy::Fixed,
                                   ParserStrategy::LittleEndian,
@@ -120,10 +130,12 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetBoostFixedClientCon
 Network::ConfigurationStrategy Network::SingletonTesting::GetThreadsBoostServerConfigurationStrategy(int increase) const
 {
     ConfigurationSubStrategy subStrategy = ConfigurationSubStrategy::Create();
+    subStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    subStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
     subStrategy.Insert(WrappersSubStrategy::Threads, 3);
 
     return ConfigurationStrategy{ WrappersStrategy::Boost,
-                                  ConnectStrategy::TCP,
+                                  ConnectStrategy::Tcp,
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,
@@ -139,10 +151,12 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetThreadsBoostServerC
 Network::ConfigurationStrategy Network::SingletonTesting::GetMultiContextBoostServerConfigurationStrategy(int increase) const
 {
     ConfigurationSubStrategy subStrategy = ConfigurationSubStrategy::Create();
+    subStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    subStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
     subStrategy.Insert(WrappersSubStrategy::MultiContext, 3);
 
     return ConfigurationStrategy{ WrappersStrategy::Boost,
-                                  ConnectStrategy::TCP,
+                                  ConnectStrategy::Tcp,
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,
@@ -158,9 +172,11 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetMultiContextBoostSe
 Network::ConfigurationStrategy Network::SingletonTesting::GetNetworkServerConfigurationStrategy(int increase) const
 {
     ConfigurationSubStrategy subStrategy = ConfigurationSubStrategy::Create();
+    subStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    subStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
     return ConfigurationStrategy{ WrappersStrategy::Network,
-                                  ConnectStrategy::TCP,
+                                  ConnectStrategy::Tcp,
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,
@@ -176,9 +192,11 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetNetworkServerConfig
 Network::ConfigurationStrategy Network::SingletonTesting::GetNullServerConfigurationStrategy(int increase) const
 {
     ConfigurationSubStrategy subStrategy = ConfigurationSubStrategy::Create();
+    subStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    subStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
     return ConfigurationStrategy{ WrappersStrategy::Null,
-                                  ConnectStrategy::TCP,
+                                  ConnectStrategy::Tcp,
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,
@@ -194,9 +212,11 @@ Network::ConfigurationStrategy Network::SingletonTesting::GetNullServerConfigura
 Network::ConfigurationStrategy Network::SingletonTesting::GetSocketServerConfigurationStrategy(int increase) const
 {
     ConfigurationSubStrategy subStrategy = ConfigurationSubStrategy::Create();
+    subStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    subStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
-    return ConfigurationStrategy{ WrappersStrategy::Socket,
-                                  ConnectStrategy::TCP,
+    return ConfigurationStrategy{ WrappersStrategy::Beast,
+                                  ConnectStrategy::Tcp,
                                   ServerStrategy::Iterative,
                                   MessageStrategy::Default,
                                   ParserStrategy::LittleEndian,

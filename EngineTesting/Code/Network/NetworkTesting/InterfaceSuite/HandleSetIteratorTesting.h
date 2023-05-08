@@ -11,7 +11,7 @@
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_HANDLE_SET_ITERATOR_TESTING_H
 
 #include "SingletonTesting.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Network
 {

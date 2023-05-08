@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 18:16)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:00)
 
 #ifndef NETWORK_NETWORK_MESSAGE_NETWORK_MESSAGE_EVENT_H
 #define NETWORK_NETWORK_MESSAGE_NETWORK_MESSAGE_EVENT_H
@@ -37,7 +37,7 @@ namespace Network
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual void CallBackEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message) = 0;
+        virtual void CallBackEvent(uint64_t socketId, const ConstMessageInterfaceSharedPtr& message) = 0;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(NetworkMessageEvent);

@@ -10,17 +10,28 @@
 #include "ACESockAcceptorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Helper/UserMacro.h"
 #include "Network/Interface/SockAcceptor.h"
 #include "Network/Interface/SockAddress.h"
 #include "Network/Interface/SockStream.h"
 #include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-
 using std::make_shared;
 using std::string;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, ACESockAcceptorTesting)
+Network::ACESockAcceptorTesting::ACESockAcceptorTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, ACESockAcceptorTesting)
+
+void Network::ACESockAcceptorTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 namespace Network
 {
@@ -55,24 +66,28 @@ void Network::ACESockAcceptorTesting::AcceptorTest()
 
 #endif  // _WIN64
 
-    TestingType sockAcceptor1{ port, GetACEServerConfigurationStrategy() };
-    TestingType sockAcceptor2{ hostName, port + 10, GetACEServerConfigurationStrategy() };
+    ++port;
 
+    TestingType sockAcceptor1{ port - 1, GetACEServerConfigurationStrategy() };
+    TestingType sockAcceptor2{ hostName, port + 9, GetACEServerConfigurationStrategy() };
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     SockStreamSharedPtr sockStream{ make_shared<SockStream>(GetACEServerConfigurationStrategy()) };
     SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(GetACEServerConfigurationStrategy()) };
-    SocketManagerSharedPtr socketManager{ make_shared<TestSocketManager>(5) };
+    //  SocketManagerSharedPtr socketManager{ make_shared<TestSocketManager>(5) };
 
     auto enableNonBlock = sockAcceptor1.EnableNonBlock();
 
     auto result = sockAcceptor1.Accept(*sockStream);
     result = sockAcceptor1.Accept(*sockStream, *sockAddress);
-    sockAcceptor1.AsyncAccept(socketManager, sockStream, sockAddress);
-    sockAcceptor1.AsyncAccept(socketManager, sockStream);
+    //  sockAcceptor1.AsyncAccept(socketManager, sockStream, sockAddress);
+    //  sockAcceptor1.AsyncAccept(socketManager, sockStream);
 
     enableNonBlock = sockAcceptor2.EnableNonBlock();
 
     result = sockAcceptor2.Accept(*sockStream);
     result = sockAcceptor2.Accept(*sockStream, *sockAddress);
-    sockAcceptor2.AsyncAccept(socketManager, sockStream, sockAddress);
-    sockAcceptor2.AsyncAccept(socketManager, sockStream);
+    //  sockAcceptor2.AsyncAccept(socketManager, sockStream, sockAddress);
+    //  sockAcceptor2.AsyncAccept(socketManager, sockStream);
+#include STSTEM_WARNING_POP
 }

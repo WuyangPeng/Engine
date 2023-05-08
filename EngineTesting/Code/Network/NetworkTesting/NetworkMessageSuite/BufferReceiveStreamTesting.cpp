@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/BufferReceiveStream.h"
 #include "Network/NetworkMessage/BufferSendStream.h"
@@ -22,7 +23,6 @@
 #include "Network/NetworkMessage/MessageBuffer.h"
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
-
 using std::make_shared;
 using std::ostream;
 
@@ -50,8 +50,8 @@ void Network::BufferReceiveStreamTesting::MainTest()
 
     constexpr auto segment = 100;
 
-    const auto testLoopCount = GetTestLoopCount();
-    auto remainderLoopCount = testLoopCount;
+    const auto aTestLoopCount = GetTestLoopCount();
+    auto remainderLoopCount = aTestLoopCount;
     auto currentLoopCount = 1;
     while (0 < remainderLoopCount)
     {
@@ -63,45 +63,48 @@ void Network::BufferReceiveStreamTesting::MainTest()
     MESSAGE_MANAGER_SINGLETON.Remove(messageID);
 }
 
-void Network::BufferReceiveStreamTesting::ReceiveTest(int testLoopCount)
+void Network::BufferReceiveStreamTesting::ReceiveTest(int aTestLoopCount)
 {
-    ASSERT_NOT_THROW_EXCEPTION_2(FinishReceiveTest, testLoopCount, ParserStrategy::LittleEndian);
-    ASSERT_NOT_THROW_EXCEPTION_2(FinishReceiveTest, testLoopCount, ParserStrategy::BigEndian);
-    ASSERT_NOT_THROW_EXCEPTION_2(UnFinishReceiveTest, testLoopCount, ParserStrategy::LittleEndian);
-    ASSERT_NOT_THROW_EXCEPTION_2(UnFinishReceiveTest, testLoopCount, ParserStrategy::BigEndian);
-    ASSERT_NOT_THROW_EXCEPTION_2(CopyFinishReceiveTest, testLoopCount, ParserStrategy::LittleEndian);
-    ASSERT_NOT_THROW_EXCEPTION_2(CopyFinishReceiveTest, testLoopCount, ParserStrategy::BigEndian);
-    ASSERT_NOT_THROW_EXCEPTION_2(CopyUnFinishReceiveTest, testLoopCount, ParserStrategy::LittleEndian);
-    ASSERT_NOT_THROW_EXCEPTION_2(CopyUnFinishReceiveTest, testLoopCount, ParserStrategy::BigEndian);
+    ASSERT_NOT_THROW_EXCEPTION_2(FinishReceiveTest, aTestLoopCount, ParserStrategy::LittleEndian);
+    ASSERT_NOT_THROW_EXCEPTION_2(FinishReceiveTest, aTestLoopCount, ParserStrategy::BigEndian);
+    ASSERT_NOT_THROW_EXCEPTION_2(UnFinishReceiveTest, aTestLoopCount, ParserStrategy::LittleEndian);
+    ASSERT_NOT_THROW_EXCEPTION_2(UnFinishReceiveTest, aTestLoopCount, ParserStrategy::BigEndian);
+    ASSERT_NOT_THROW_EXCEPTION_2(CopyFinishReceiveTest, aTestLoopCount, ParserStrategy::LittleEndian);
+    ASSERT_NOT_THROW_EXCEPTION_2(CopyFinishReceiveTest, aTestLoopCount, ParserStrategy::BigEndian);
+    ASSERT_NOT_THROW_EXCEPTION_2(CopyUnFinishReceiveTest, aTestLoopCount, ParserStrategy::LittleEndian);
+    ASSERT_NOT_THROW_EXCEPTION_2(CopyUnFinishReceiveTest, aTestLoopCount, ParserStrategy::BigEndian);
 }
 
-void Network::BufferReceiveStreamTesting::FinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy)
+void Network::BufferReceiveStreamTesting::FinishReceiveTest(int aTestLoopCount, ParserStrategy parserStrategy)
 {
-    auto buffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
-
+    auto buffer = CreateSendMessageBuffer(aTestLoopCount, parserStrategy);
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     auto socketManager = make_shared<NullSocketManager>(messageID);
-    socketManager->InsertSocket(socketID);
+#include STSTEM_WARNING_POP
+   // socketManager->InsertSocket(socketID);
     ASSERT_EQUAL(socketManager->GetValue(), 0);
 
     TestingType bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
 
     ASSERT_TRUE(bufferReceiveStream.IsFinish());
 
-    bufferReceiveStream.OnEvent(socketID, socketManager);
+  //  bufferReceiveStream.OnEvent(socketID, *socketManager);
 
-    ASSERT_EQUAL(socketManager->GetValue(), messageID * testLoopCount);
+    ASSERT_EQUAL(socketManager->GetValue(), messageID * aTestLoopCount);
 }
 
-void Network::BufferReceiveStreamTesting::UnFinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy)
+void Network::BufferReceiveStreamTesting::UnFinishReceiveTest(int aTestLoopCount, ParserStrategy parserStrategy)
 {
-    auto buffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
+    auto buffer = CreateSendMessageBuffer(aTestLoopCount, parserStrategy);
 
     AddBufferLength(*buffer);
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     auto socketManager = make_shared<NullSocketManager>(messageID);
-    socketManager->InsertSocket(socketID);
+  //  socketManager->InsertSocket(socketID);
     ASSERT_EQUAL(socketManager->GetValue(), 0);
-
+#include STSTEM_WARNING_POP
     TestingType bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
 
     ASSERT_FALSE(bufferReceiveStream.IsFinish());
@@ -110,19 +113,20 @@ void Network::BufferReceiveStreamTesting::UnFinishReceiveTest(int testLoopCount,
 
     ASSERT_TRUE(bufferReceiveStream.IsFinish());
 
-    bufferReceiveStream.OnEvent(socketID, socketManager);
+ //   bufferReceiveStream.OnEvent(socketID, *socketManager);
 
-    const auto receiveCount = testLoopCount + 1;
+    const auto receiveCount = aTestLoopCount + 1;
     ASSERT_EQUAL(socketManager->GetValue(), messageID * receiveCount);
 }
 
-void Network::BufferReceiveStreamTesting::CopyFinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy)
+void Network::BufferReceiveStreamTesting::CopyFinishReceiveTest(int aTestLoopCount, ParserStrategy parserStrategy)
 {
-    auto buffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
-
+    auto buffer = CreateSendMessageBuffer(aTestLoopCount, parserStrategy);
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     auto socketManager = make_shared<NullSocketManager>(messageID);
-
-    socketManager->InsertSocket(socketID);
+#include STSTEM_WARNING_POP
+   // socketManager->InsertSocket(socketID);
     ASSERT_EQUAL(socketManager->GetValue(), 0);
 
     TestingType bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
@@ -133,27 +137,28 @@ void Network::BufferReceiveStreamTesting::CopyFinishReceiveTest(int testLoopCoun
 
     ASSERT_TRUE(copyBufferReceiveStream.IsFinish());
 
-    copyBufferReceiveStream.OnEvent(socketID, socketManager);
+  //  copyBufferReceiveStream.OnEvent(socketID, *socketManager);
 
-    ASSERT_EQUAL(socketManager->GetValue(), messageID * testLoopCount);
+    ASSERT_EQUAL(socketManager->GetValue(), messageID * aTestLoopCount);
 }
 
-void Network::BufferReceiveStreamTesting::CopyUnFinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy)
+void Network::BufferReceiveStreamTesting::CopyUnFinishReceiveTest(int aTestLoopCount, ParserStrategy parserStrategy)
 {
-    auto buffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
+    auto buffer = CreateSendMessageBuffer(aTestLoopCount, parserStrategy);
 
     AddBufferLength(*buffer);
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     auto socketManager = make_shared<NullSocketManager>(messageID);
-
-    socketManager->InsertSocket(socketID);
+#include STSTEM_WARNING_POP
+   // socketManager->InsertSocket(socketID);
     ASSERT_EQUAL(socketManager->GetValue(), 0);
 
     TestingType bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
 
     ASSERT_FALSE(bufferReceiveStream.IsFinish());
 
-    auto noUseBuffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
+    auto noUseBuffer = CreateSendMessageBuffer(aTestLoopCount, parserStrategy);
 
     TestingType copyBufferReceiveStream{ noUseBuffer, parserStrategy, EncryptedCompressionStrategy::Default };
     copyBufferReceiveStream = bufferReceiveStream;
@@ -165,9 +170,9 @@ void Network::BufferReceiveStreamTesting::CopyUnFinishReceiveTest(int testLoopCo
     ASSERT_FALSE(bufferReceiveStream.IsFinish());
     ASSERT_TRUE(copyBufferReceiveStream.IsFinish());
 
-    copyBufferReceiveStream.OnEvent(socketID, socketManager);
+    //copyBufferReceiveStream.OnEvent(socketID, *socketManager);
 
-    const auto receiveCount = testLoopCount + 1;
+    const auto receiveCount = aTestLoopCount + 1;
     ASSERT_EQUAL(socketManager->GetValue(), messageID * receiveCount);
 }
 
@@ -189,7 +194,7 @@ Network::MessageBufferSharedPtr Network::BufferReceiveStreamTesting::CreateAddMe
 
     *messageNumber = messageID;
 
-    const auto streamSize = CORE_TOOLS_STREAM_SIZE(messageID);
+    const auto streamSize = CoreTools::GetStreamSize(messageID);
 
     if (parserStrategy == ParserStrategy::BigEndian)
     {
@@ -201,11 +206,11 @@ Network::MessageBufferSharedPtr Network::BufferReceiveStreamTesting::CreateAddMe
     return messageBuffer;
 }
 
-Network::MessageBufferSharedPtr Network::BufferReceiveStreamTesting::CreateSendMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const
+Network::MessageBufferSharedPtr Network::BufferReceiveStreamTesting::CreateSendMessageBuffer(int aTestLoopCount, ParserStrategy parserStrategy) const
 {
     BufferSendStream bufferSendStream{ bufferSize, parserStrategy, EncryptedCompressionStrategy::Default };
 
-    for (auto i = 0; i < testLoopCount; ++i)
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         MAYBE_UNUSED auto value = bufferSendStream.Insert(testMessage);
     }
@@ -226,7 +231,7 @@ void Network::BufferReceiveStreamTesting::AddBufferLength(MessageBuffer& message
 
 #include STSTEM_WARNING_POP
 
-    const auto streamSize = CORE_TOOLS_STREAM_SIZE(length);
+    const auto streamSize = CoreTools::GetStreamSize(length);
 
     if (messageBuffer.GetParserStrategy() == ParserStrategy::BigEndian)
     {

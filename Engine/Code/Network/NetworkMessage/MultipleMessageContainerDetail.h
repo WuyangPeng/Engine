@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 18:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 09:25)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CONTAINER_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CONTAINER_DETAIL_H
@@ -22,6 +22,7 @@
 #include "Network/NetworkMessage/MultipleMessageStreamingSizeDetail.h"
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 Network::MultipleMessageContainer<E, ByteType, Types...>::MultipleMessageContainer() noexcept
     : message{}
 {
@@ -29,62 +30,70 @@ Network::MultipleMessageContainer<E, ByteType, Types...>::MultipleMessageContain
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 template <typename T, typename... OtherTypes>
 Network::MultipleMessageContainer<E, ByteType, Types...>::MultipleMessageContainer(T value, OtherTypes&&... otherValue)
     : message{}
 {
-    MultipleMessageInitValue<sm_Size, ClassType>(*this, value, std::forward<OtherTypes>(otherValue)...);
+    MultipleMessageInitValue<size, ClassType>(*this, value, std::forward<OtherTypes>(otherValue)...);
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-bool Network::MultipleMessageContainer<E, ByteType, Types...>::IsValid() const noexcept
+requires(std::is_enum_v<E>) bool Network::MultipleMessageContainer<E, ByteType, Types...>::IsValid() const noexcept
 {
     return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 void Network::MultipleMessageContainer<E, ByteType, Types...>::Load(MessageSource& source)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return MultipleMessageStreamingLoad<sm_Size, ClassType>{}.Load(*this, source);
+    return MultipleMessageStreamingLoad<size, ClassType>{}.Load(*this, source);
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 void Network::MultipleMessageContainer<E, ByteType, Types...>::Save(MessageTarget& target) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return MultipleMessageStreamingSave<sm_Size, ClassType>{}.Save(*this, target);
+    return MultipleMessageStreamingSave<size, ClassType>{}.Save(*this, target);
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 int Network::MultipleMessageContainer<E, ByteType, Types...>::GetStreamingSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return MultipleMessageStreamingSize<sm_Size, ClassType>{}.GetStreamingSize(*this);
+    return MultipleMessageStreamingSize<size, ClassType>{}.GetStreamingSize(*this);
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-template <int index>
-void Network::MultipleMessageContainer<E, ByteType, Types...>::SetValue(typename MultipleMessageParameterCast<MultipleMessageElement<index, ClassType>::sm_ByteType>::ValueType value)
+requires(std::is_enum_v<E>)
+template <int Index>
+void Network::MultipleMessageContainer<E, ByteType, Types...>::SetValue(typename MultipleMessageParameterCast<MultipleMessageElement<Index, ClassType>::byteType>::ValueType value)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    static_assert(0 <= index && index < sm_Size, "The index is out of bounds.");
+    static_assert(0 <= Index && Index < size, "The index is out of bounds.");
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-    message[index] = value;
+
+    message[Index] = value;
+
 #include STSTEM_WARNING_POP
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
+requires(std::is_enum_v<E>)
 int Network::MultipleMessageContainer<E, ByteType, Types...>::GetSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;

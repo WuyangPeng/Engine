@@ -10,14 +10,20 @@
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_INTERFACE_SHARED_PTR_LESS_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_INTERFACE_SHARED_PTR_LESS_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Network
 {
     class MessageInterfaceSharedPtrLessTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MessageInterfaceSharedPtrLessTesting);
+        using ClassType = MessageInterfaceSharedPtrLessTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit MessageInterfaceSharedPtrLessTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

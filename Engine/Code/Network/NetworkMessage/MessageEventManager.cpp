@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/19 10:16)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:55)
 
 #include "Network/NetworkExport.h"
 
@@ -14,8 +14,6 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::make_shared;
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Network, MessageEventManager)
 
@@ -32,32 +30,53 @@ Network::MessageEventManager::MessageEventManager(CoreTools::DisableNotThrow dis
 
 CLASS_INVARIANT_STUB_DEFINE(Network, MessageEventManager)
 
-void Network::MessageEventManager::Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
+void Network::MessageEventManager::Insert(int64_t messageId, const NetworkMessageEventSharedPtr& messageEvent)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    return impl->Insert(messageID, messageEvent);
+    return impl->Insert(messageId, messageEvent);
 }
 
-void Network::MessageEventManager::Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
+void Network::MessageEventManager::Insert(int64_t messageId, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    return impl->Insert(messageID, messageEvent, priority);
+    return impl->Insert(messageId, messageEvent, priority);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageEventManager, Remove, int64_t, void)
 
-void Network::MessageEventManager::Remove(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
+void Network::MessageEventManager::Remove(int64_t messageId, const NetworkMessageEventSharedPtr& messageEvent)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    return impl->Remove(messageID, messageEvent);
+    return impl->Remove(messageId, messageEvent);
 }
 
-void Network::MessageEventManager::OnEvent(int64_t messageID, uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
+void Network::MessageEventManager::Insert(const std::string& messageDescribe, const NetworkMessageEventSharedPtr& messageEvent)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    return impl->OnEvent(messageID, socketID, message);
+    return impl->Insert(messageDescribe, messageEvent);
+}
+
+void Network::MessageEventManager::Insert(const std::string& messageDescribe, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->Insert(messageDescribe, messageEvent, priority);
+}
+
+void Network::MessageEventManager::OnEvent(int64_t socketId, int64_t messageId, const ConstMessageInterfaceSharedPtr& message)
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->OnEvent(socketId, messageId, message);
+}
+
+void Network::MessageEventManager::OnEvent(int64_t socketId, const std::string& messageDescribe, const ConstMessageInterfaceSharedPtr& message)
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->OnEvent(socketId, messageDescribe, message);
 }

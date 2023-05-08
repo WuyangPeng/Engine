@@ -31,7 +31,7 @@ namespace Network
         using ParentType = ServerImpl;
 
     public:
-        IterativeServer(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
+        IterativeServer(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -42,8 +42,8 @@ namespace Network
 
     private:
         NODISCARD bool WaitForMultipleEvents() noexcept override;
-        NODISCARD bool HandleConnections(SocketManager& socketManager) override;
-        NODISCARD bool HandleData(const SocketManagerSharedPtr& socketManager) override;
+        NODISCARD bool HandleConnections(MessageEventManager& socketManager) override;
+        NODISCARD bool HandleData(const MessageEventManagerSharedPtr& socketManager) override;
         NODISCARD bool ImmediatelySend(MAYBE_UNUSED uint64_t socketID) noexcept override;
         NODISCARD bool ImmediatelySend() noexcept override;
         void ImmediatelyAsyncSend(MAYBE_UNUSED uint64_t socketID) noexcept override;

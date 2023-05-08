@@ -27,7 +27,7 @@ namespace Network
         using ParentType = ServerImpl;
 
     public:
-        explicit ReactiveServer(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
+        explicit ReactiveServer(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
         ~ReactiveServer() noexcept;
         ReactiveServer(const ReactiveServer& rhs) noexcept = default;
         ReactiveServer& operator=(const ReactiveServer& rhs) noexcept = default;
@@ -48,8 +48,8 @@ namespace Network
         void Init();
 
         NODISCARD bool WaitForMultipleEvents() override;
-        NODISCARD bool HandleConnections(SocketManager& socketManager) override;
-        NODISCARD bool HandleData(const SocketManagerSharedPtr& socketManager) override;
+        NODISCARD bool HandleConnections(MessageEventManager& socketManager) override;
+        NODISCARD bool HandleData(const MessageEventManagerSharedPtr& socketManager) override;
         NODISCARD bool ImmediatelySend(uint64_t socketID) override;
         NODISCARD bool ImmediatelySend() override;
         void ImmediatelyAsyncSend(MAYBE_UNUSED uint64_t socketID) noexcept override;

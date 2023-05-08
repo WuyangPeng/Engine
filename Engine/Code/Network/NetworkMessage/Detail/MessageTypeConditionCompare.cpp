@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 22:33)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:03)
 
 #include "Network/NetworkExport.h"
 
@@ -15,11 +15,8 @@
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
 #include "Network/NetworkMessage/MessageManager.h"
 
-using std::max;
-using std::min;
-
 Network::MessageTypeConditionCompare::MessageTypeConditionCompare(VersionsCondition condition, int version) noexcept
-    : ParentType{}, condition{ condition }, m_Version{ version }
+    : ParentType{}, condition{ condition }, compareVersion{ version }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -32,16 +29,16 @@ bool Network::MessageTypeConditionCompare::IsVersionsConform(int version) const 
 
     switch (condition)
     {
-        case Network::VersionsCondition::Greater:
-            return m_Version < version;
-        case Network::VersionsCondition::GreaterEequal:
-            return m_Version <= version;
-        case Network::VersionsCondition::Equality:
-            return m_Version == version;
-        case Network::VersionsCondition::LessEequal:
-            return version <= m_Version;
-        case Network::VersionsCondition::Less:
-            return version < m_Version;
+        case VersionsCondition::Greater:
+            return compareVersion < version;
+        case VersionsCondition::GreaterEqual:
+            return compareVersion <= version;
+        case VersionsCondition::Equality:
+            return compareVersion == version;
+        case VersionsCondition::LessEqual:
+            return version <= compareVersion;
+        case VersionsCondition::Less:
+            return version < compareVersion;
         default:
             return false;
     }
@@ -55,23 +52,23 @@ int Network::MessageTypeConditionCompare::GetMinVersion() const
 
     switch (condition)
     {
-        case Network::VersionsCondition::Greater:
-            minVersion = m_Version + 1;
+        case VersionsCondition::Greater:
+            minVersion = compareVersion + 1;
             break;
-        case Network::VersionsCondition::GreaterEequal:
-        case Network::VersionsCondition::Equality:
-            minVersion = m_Version;
+        case VersionsCondition::GreaterEqual:
+        case VersionsCondition::Equality:
+            minVersion = compareVersion;
             break;
-        case Network::VersionsCondition::LessEequal:
-        case Network::VersionsCondition::Less:
+        case VersionsCondition::LessEqual:
+        case VersionsCondition::Less:
             minVersion = 0;
             break;
         default:
-            minVersion = m_Version;
+            minVersion = compareVersion;
             break;
     }
 
-    return min(minVersion, MESSAGE_MANAGER_SINGLETON.GetFullVersion());
+    return std::min(minVersion, MESSAGE_MANAGER_SINGLETON.GetFullVersion());
 }
 
 int Network::MessageTypeConditionCompare::GetMaxVersion() const
@@ -82,22 +79,21 @@ int Network::MessageTypeConditionCompare::GetMaxVersion() const
 
     switch (condition)
     {
-        case Network::VersionsCondition::Greater:
-        case Network::VersionsCondition::GreaterEequal:
+        case VersionsCondition::Greater:
+        case VersionsCondition::GreaterEqual:
             minVersion = MESSAGE_MANAGER_SINGLETON.GetFullVersion();
             break;
-        case Network::VersionsCondition::Equality:
-        case Network::VersionsCondition::LessEequal:
-            minVersion = m_Version;
+        case VersionsCondition::Equality:
+        case VersionsCondition::LessEqual:
+            minVersion = compareVersion;
             break;
-        case Network::VersionsCondition::Less:
-            minVersion = m_Version - 1;
+        case VersionsCondition::Less:
+            minVersion = compareVersion - 1;
             break;
         default:
-            minVersion = m_Version;
+            minVersion = compareVersion;
             break;
     }
 
-    return max(minVersion, 0);
+    return std::max(minVersion, 0);
 }
-

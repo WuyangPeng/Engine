@@ -1,29 +1,29 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 18:17)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/06 11:02)
 
 #ifndef NETWORK_NETWORK_MESSAGE_NULL_DOUBLE_MESSAGE_H
 #define NETWORK_NETWORK_MESSAGE_NULL_DOUBLE_MESSAGE_H
 
 #include "Network/NetworkDll.h"
 
-#include "DoubleMessage.h"
+#include "MessageInterface.h"
 
 namespace Network
 {
-    class NETWORK_DEFAULT_DECLARE NullDoubleMessage final : public DoubleMessage
+    class NETWORK_DEFAULT_DECLARE NullDoubleMessage final : public MessageInterface
     {
     public:
         using ClassType = NullDoubleMessage;
-        using ParentType = DoubleMessage;
+        using ParentType = MessageInterface;
 
     public:
-        explicit NullDoubleMessage(int64_t messageID) noexcept;
+        NullDoubleMessage(MessageHeadStrategy messageHeadStrategy, int64_t messageId);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

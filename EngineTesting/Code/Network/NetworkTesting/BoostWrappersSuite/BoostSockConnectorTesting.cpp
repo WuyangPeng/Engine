@@ -10,8 +10,8 @@
 #include "BoostSockConnectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
-
 using std::make_shared;
 using std::string;
 
@@ -30,14 +30,13 @@ void Network::BoostSockConnectorTesting::ServerThread()
 
 void Network::BoostSockConnectorTesting::DoServerThread()
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(GetMessageID()) };
 
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    ServerSharedPtr server{ make_shared<Server>(testSocketManager, configurationStrategy) };
+    ServerSharedPtr server{ make_shared<Server>(std::make_shared<MessageEventManager>(MessageEventManager::Create()), configurationStrategy) };
 
 #include STSTEM_WARNING_POP
 

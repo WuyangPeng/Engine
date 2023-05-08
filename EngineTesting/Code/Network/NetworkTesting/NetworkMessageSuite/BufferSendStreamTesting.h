@@ -11,7 +11,7 @@
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_BUFFER_SEND_STREAM_TESTING_H
 
 #include "Detail/TestNullMessage.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Network/NetworkMessage/NetworkMessageInternalFwd.h"
 
 namespace Network
@@ -19,13 +19,19 @@ namespace Network
     class BufferSendStreamTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(BufferSendStreamTesting);
+        using ClassType = BufferSendStreamTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit BufferSendStreamTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();
 
-        void SendTest(int testLoopCount);
-        void FinishSendTest(int testLoopCount, ParserStrategy parserStrategy);
+        void SendTest(int aTestLoopCount);
+        void FinishSendTest(int aTestLoopCount, ParserStrategy parserStrategy);
 
         void DoRunUnitTest() override;
 

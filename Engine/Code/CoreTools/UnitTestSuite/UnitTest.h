@@ -18,6 +18,7 @@
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Exception/ExceptionFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/TextParsing/SimpleCSV/CellValue.h"
 
 #include <string>
 #include <type_traits>
@@ -225,18 +226,15 @@ namespace CoreTools
                                                 bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        requires std::is_constructible_v<LhsType, std::wstring> && std::is_constructible_v<RhsType, std::wstring>
+        requires std::is_constructible_v<std::wstring, LhsType> && std::is_constructible_v<std::wstring, RhsType>
         void AssertEqual(const LhsType& lhs,
                          const RhsType& rhs,
                          const FunctionDescribed& functionDescribed,
                          const std::string& errorMessage = std::string{},
                          bool failureThrow = false);
 
-        template <typename T>
-        static constexpr auto isString = std::is_same_v<std::decay_t<T>, std::string> || std::is_same_v<std::decay_t<T>, const char*>;
-
         template <typename LhsType, typename RhsType>
-        requires std::is_same_v<std::decay_t<LhsType>, std::string> || std::is_same_v<std::decay_t<LhsType>, const char*> && std::is_same_v<std::decay_t<RhsType>, std::string> || std::is_same_v<std::decay_t<RhsType>, const char*>
+        requires(std::is_constructible_v<std::string, LhsType> && std::is_constructible_v<std::string, RhsType>)
         void AssertEqual(const LhsType& lhs,
                          const RhsType& rhs,
                          const FunctionDescribed& functionDescribed,
@@ -245,6 +243,12 @@ namespace CoreTools
 
         void AssertEqual(wchar_t lhs,
                          wchar_t rhs,
+                         const FunctionDescribed& functionDescribed,
+                         const std::string& errorMessage = std::string{},
+                         bool failureThrow = false);
+
+        void AssertEqual(const SimpleCSV::CellValue& lhs,
+                         const SimpleCSV::CellValue& rhs,
                          const FunctionDescribed& functionDescribed,
                          const std::string& errorMessage = std::string{},
                          bool failureThrow = false);

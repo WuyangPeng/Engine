@@ -16,7 +16,7 @@
 #include "SendSocket.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "Network/NetworkMessage/SocketManager.h"
+#include "Network/NetworkMessage/MessageEventManager.h"
 
 NETWORK_NON_COPY_EXPORT_IMPL(ServerImpl);
 
@@ -29,7 +29,7 @@ namespace Network
         using ParentType = SendSocket;
 
     public:
-        Server(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
+        Server(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

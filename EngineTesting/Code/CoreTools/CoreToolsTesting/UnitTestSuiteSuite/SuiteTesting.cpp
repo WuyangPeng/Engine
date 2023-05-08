@@ -1,21 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 14:13)
+///	引擎测试版本：0.9.0.7 (2023/04/25 17:11)
 
 #include "SuiteTesting.h"
 #include "CoreTools/CoreToolsTesting/ContractSuite/FunctionDescribedTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::cout;
-using std::make_shared;
-using std::string;
+
 using namespace std::literals;
 
 CoreTools::SuiteTesting::SuiteTesting(const OStreamShared& stream)
@@ -42,27 +40,27 @@ void CoreTools::SuiteTesting::MainTest()
 
 void CoreTools::SuiteTesting::NameTest()
 {
-    string suiteName{ "SuiteName"s };
+    const auto suiteName = "SuiteName"s;
 
-    Suite suite{ suiteName, OStreamShared{ true }, true };
+    const Suite suite{ suiteName, OStreamShared{ true }, true };
 
     ASSERT_EQUAL(suite.GetName(), suiteName);
 }
 
 void CoreTools::SuiteTesting::StreamTest()
 {
-    string suiteName{ "SuiteName"s };
+    const auto suiteName = "SuiteName"s;
 
     Suite suite{ suiteName, OStreamShared{ true }, true };
 }
 
 void CoreTools::SuiteTesting::AddTestTest()
 {
-    string suiteName{ "SuiteName"s };
+    const auto suiteName = "SuiteName"s;
 
     Suite suite{ suiteName, GetStream(), true };
 
-    suite.AddTest(make_shared<FunctionDescribedTesting>(GetStream()));
+    suite.AddTest(std::make_shared<FunctionDescribedTesting>(GetStream()));
 
     ASSERT_EQUAL(suite.GetPassedNumber(), 0);
     ASSERT_EQUAL(suite.GetFailedNumber(), 0);
@@ -73,39 +71,39 @@ void CoreTools::SuiteTesting::AddTestTest()
 
 void CoreTools::SuiteTesting::AddSuiteTest()
 {
-    string suiteName{ "SuiteName"s };
+    const auto suiteName = "SuiteName"s;
 
-    Suite firstSuite{ suiteName, GetStream(), true };
+    Suite suite0{ suiteName, GetStream(), true };
 
-    firstSuite.AddTest(make_shared<FunctionDescribedTesting>(GetStream()));
+    suite0.AddTest(std::make_shared<FunctionDescribedTesting>(GetStream()));
 
-    ASSERT_EQUAL(firstSuite.GetPassedNumber(), 0);
-    ASSERT_EQUAL(firstSuite.GetFailedNumber(), 0);
-    ASSERT_EQUAL(firstSuite.GetErrorNumber(), 0);
+    ASSERT_EQUAL(suite0.GetPassedNumber(), 0);
+    ASSERT_EQUAL(suite0.GetFailedNumber(), 0);
+    ASSERT_EQUAL(suite0.GetErrorNumber(), 0);
 
-    Suite secondSuite{ suiteName, GetStream(), true };
-    secondSuite.AddSuite(firstSuite);
+    Suite suite1{ suiteName, GetStream(), true };
+    suite1.AddSuite(suite0);
 
-    ASSERT_EQUAL(firstSuite.GetPassedNumber(), 0);
-    ASSERT_EQUAL(firstSuite.GetFailedNumber(), 0);
-    ASSERT_EQUAL(firstSuite.GetErrorNumber(), 0);
-    ASSERT_EQUAL(secondSuite.GetPassedNumber(), 0);
-    ASSERT_EQUAL(secondSuite.GetFailedNumber(), 0);
-    ASSERT_EQUAL(secondSuite.GetErrorNumber(), 0);
+    ASSERT_EQUAL(suite0.GetPassedNumber(), 0);
+    ASSERT_EQUAL(suite0.GetFailedNumber(), 0);
+    ASSERT_EQUAL(suite0.GetErrorNumber(), 0);
+    ASSERT_EQUAL(suite1.GetPassedNumber(), 0);
+    ASSERT_EQUAL(suite1.GetFailedNumber(), 0);
+    ASSERT_EQUAL(suite1.GetErrorNumber(), 0);
 
-    secondSuite.PrintReport();
+    suite1.PrintReport();
 
-    secondSuite.ClearUnitTestCollection();
-    firstSuite.ClearUnitTestCollection();
+    suite1.ClearUnitTestCollection();
+    suite0.ClearUnitTestCollection();
 }
 
 void CoreTools::SuiteTesting::TestDataTest()
 {
-    string suiteName{ "SuiteName"s };
+    const auto suiteName = "SuiteName"s;
 
     Suite suite{ suiteName, GetStream(), true };
 
-    suite.AddTest(make_shared<FunctionDescribedTesting>(GetStream()));
+    suite.AddTest(std::make_shared<FunctionDescribedTesting>(GetStream()));
 
     ASSERT_EQUAL(suite.GetPassedNumber(), 0);
     ASSERT_EQUAL(suite.GetFailedNumber(), 0);

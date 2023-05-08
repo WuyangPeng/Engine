@@ -208,6 +208,15 @@
     <Filter Include="Helper 头文件">
       <UniqueIdentifier>{7ae87740-d62a-4b09-80ed-ae560520dd91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MessageOrientedMiddleware 头文件">
+      <UniqueIdentifier>{957802a3-8067-4a36-bd63-4200ba4d0014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ActiveMQ 头文件">
+      <UniqueIdentifier>{a0cff851-230f-4f49-949a-cb6a558275e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Nats 头文件">
+      <UniqueIdentifier>{55b8c713-8743-4c90-83fa-9923ac18585c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 2.txt">
@@ -317,7 +326,7 @@
     <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\AnalysisNetworkConfigurationImpl.cpp">
       <Filter>Configuration 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationIPPort.cpp">
+    <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationHostPort.cpp">
       <Filter>Configuration 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationParameterImpl.cpp">
@@ -491,9 +500,6 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\SendMessageLevel.cpp">
       <Filter>NetworkMessage 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\SocketManager.cpp">
-      <Filter>NetworkMessage 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageEventContainerImpl.cpp">
       <Filter>NetworkMessage 源文件\Detail</Filter>
     </ClCompile>
@@ -537,9 +543,6 @@
       <Filter>NetworkMessage 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\SingleMessageEventContainer.cpp">
-      <Filter>NetworkMessage 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\Detail\SocketManagerImpl.cpp">
       <Filter>NetworkMessage 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkWrappers\Detail\Acceptor\NetworkSockAcceptor.cpp">
@@ -597,9 +600,6 @@
       <Filter>NetworkMessage 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\MessageTypeConditionOperating.cpp">
-      <Filter>NetworkMessage 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkMessage\DoubleMessage.cpp">
       <Filter>NetworkMessage 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkMessage\NullDoubleMessage.cpp">
@@ -739,7 +739,7 @@
     <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\AnalysisNetworkConfigurationImpl.h">
       <Filter>Configuration 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationIPPort.h">
+    <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationHostPort.h">
       <Filter>Configuration 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\Configuration\Detail\ConfigurationParameterImpl.h">
@@ -892,9 +892,6 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\SendMessageLevel.h">
       <Filter>NetworkMessage 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\SocketManager.h">
-      <Filter>NetworkMessage 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\BufferReceiveStream.h">
       <Filter>NetworkMessage 头文件</Filter>
     </ClInclude>
@@ -980,9 +977,6 @@
       <Filter>NetworkMessage 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\SingleMessageEventContainer.h">
-      <Filter>NetworkMessage 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\SocketManagerImpl.h">
       <Filter>NetworkMessage 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\Detail\MessageEventContainerImpl.h">
@@ -1087,9 +1081,6 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\IntegerMessageDetail.h">
       <Filter>NetworkMessage 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\DoubleMessage.h">
-      <Filter>NetworkMessage 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\NullDoubleMessage.h">
       <Filter>NetworkMessage 头文件</Filter>
     </ClInclude>
@@ -1150,24 +1141,6 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleMessageDetail.h">
       <Filter>NetworkMessage 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\IntegerDoubleMessage.h">
-      <Filter>NetworkMessage 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\IntegerDoubleMessageDetail.h">
-      <Filter>NetworkMessage 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\StringDoubleMessage.h">
-      <Filter>NetworkMessage 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\StringDoubleMessageDetail.h">
-      <Filter>NetworkMessage 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleDoubleMessage.h">
-      <Filter>NetworkMessage 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MultipleDoubleMessageDetail.h">
-      <Filter>NetworkMessage 模板文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\MessageContainerGroup.h">
       <Filter>NetworkMessage 头文件</Filter>
     </ClInclude>
@@ -1221,6 +1194,36 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NullServer.h">
       <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\MessageOrientedMiddleware.h">
+      <Filter>MessageOrientedMiddleware 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\MessageOrientedMiddlewareFwd.h">
+      <Filter>MessageOrientedMiddleware 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ActiveMQ\ActiveMQ.h">
+      <Filter>ActiveMQ 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ActiveMQ\ActiveMQFwd.h">
+      <Filter>ActiveMQ 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Nats\Nats.h">
+      <Filter>Nats 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Nats\NatsFwd.h">
+      <Filter>Nats 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\ProtoBufMessage.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\ProtoBufMessageDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\JsonMessage.h">
+      <Filter>NetworkMessage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkMessage\JsonMessageDetail.h">
+      <Filter>NetworkMessage 模板文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

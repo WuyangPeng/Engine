@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/17 13:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/04/28 09:55)
 
 #include "Network/NetworkExport.h"
 
@@ -14,8 +14,14 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 
-using std::string;
 using namespace std::literals;
+
+Network::ConfigurationStrategyImpl::ConfigurationStrategyImpl(CoreTools::DisableNotThrow disableNotThrow)
+{
+    System::UnusedFunction(disableNotThrow);
+
+    NETWORK_SELF_CLASS_IS_VALID_9;
+}
 
 Network::ConfigurationStrategyImpl::ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy,
                                                               ConnectStrategy connectStrategy,
@@ -24,22 +30,22 @@ Network::ConfigurationStrategyImpl::ConfigurationStrategyImpl(WrappersStrategy w
                                                               ParserStrategy parserStrategy,
                                                               OpenSSLStrategy openSSLStrategy,
                                                               EncryptedCompressionStrategy encryptedCompressionStrategy,
-                                                              const ConfigurationSubStrategy& subStrategy,
-                                                              const ConfigurationParameter& configurationParameter,
+                                                              ConfigurationSubStrategy subStrategy,
+                                                              ConfigurationParameter configurationParameter,
                                                               SocketSendMessage socketSendMessage,
-                                                              const string& ip,
+                                                              const std::string& host,
                                                               int port)
     : wrappersStrategy{ wrappersStrategy },
       patternStrategy{ serverStrategy },
       messageStrategy{ messageStrategy },
       connectStrategy{ connectStrategy },
-      m_ParserStrategyFlag{ parserStrategy },
+      parserStrategy{ parserStrategy },
       openSSLStrategy{ openSSLStrategy },
       encryptedCompressionStrategy{ encryptedCompressionStrategy },
-      subStrategy{ subStrategy },
+      subStrategy{ std::move(subStrategy) },
       socketSendMessage{ socketSendMessage },
-      configurationIPPort{ ip, port },
-      configurationParameter{ configurationParameter }
+      configurationIpPort{ host, port },
+      configurationParameter{ std::move(configurationParameter) }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -51,22 +57,22 @@ Network::ConfigurationStrategyImpl::ConfigurationStrategyImpl(WrappersStrategy w
                                                               ParserStrategy parserStrategy,
                                                               OpenSSLStrategy openSSLStrategy,
                                                               EncryptedCompressionStrategy encryptedCompressionStrategy,
-                                                              const ConfigurationSubStrategy& subStrategy,
-                                                              const ConfigurationParameter& configurationParameter,
+                                                              ConfigurationSubStrategy subStrategy,
+                                                              ConfigurationParameter configurationParameter,
                                                               SocketSendMessage socketSendMessage,
-                                                              const string& ip,
+                                                              const std::string& host,
                                                               int port)
-    : wrappersStrategy{ wrappersStrategy },
-      messageStrategy{ messageStrategy },
+    : wrappersStrategy{ wrappersStrategy },    
       clientStrategy{ clientStrategy },
+      messageStrategy{ messageStrategy },
       connectStrategy{ connectStrategy },
-      m_ParserStrategyFlag{ parserStrategy },
+      parserStrategy{ parserStrategy },
       openSSLStrategy{ openSSLStrategy },
       encryptedCompressionStrategy{ encryptedCompressionStrategy },
-      subStrategy{ subStrategy },
+      subStrategy{ std::move(subStrategy) },
       socketSendMessage{ socketSendMessage },
-      configurationIPPort{ ip, port },
-      configurationParameter{ configurationParameter }
+      configurationIpPort{ host, port },
+      configurationParameter{ std::move(configurationParameter) }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -80,7 +86,7 @@ Network::WrappersStrategy Network::ConfigurationStrategyImpl::GetWrappersStrateg
     return wrappersStrategy;
 }
 
-Network::ServerStrategy Network::ConfigurationStrategyImpl::GetPatternStrategy() const noexcept
+Network::ServerStrategy Network::ConfigurationStrategyImpl::GetServerStrategy() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -115,18 +121,18 @@ bool Network::ConfigurationStrategyImpl::IsExist(WrappersSubStrategy wrappersSub
     return subStrategy.IsExist(wrappersSubStrategy);
 }
 
-string Network::ConfigurationStrategyImpl::GetIP() const
+std::string Network::ConfigurationStrategyImpl::GetHost() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return configurationIPPort.GetIP();
+    return configurationIpPort.GetHost();
 }
 
 int Network::ConfigurationStrategyImpl::GetPort() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return configurationIPPort.GetPort();
+    return configurationIpPort.GetPort();
 }
 
 Network::ConnectStrategy Network::ConfigurationStrategyImpl::GetConnectStrategy() const noexcept
@@ -140,7 +146,7 @@ Network::ParserStrategy Network::ConfigurationStrategyImpl::GetParserStrategy() 
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_ParserStrategyFlag;
+    return parserStrategy;
 }
 
 Network::OpenSSLStrategy Network::ConfigurationStrategyImpl::GetOpenSSLStrategy() const noexcept
@@ -162,29 +168,6 @@ Network::SocketSendMessage Network::ConfigurationStrategyImpl::GetSocketSendMess
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return socketSendMessage;
-}
-
-int Network::ConfigurationStrategyImpl::GetBufferSize() const
-{
-    NETWORK_CLASS_IS_VALID_CONST_9;
-
-    try
-    {
-        auto parameter = configurationParameter.GetParameter(SYSTEM_TEXT("BufferSize"s));
-
-        if (!parameter.empty())
-        {
-            return boost::lexical_cast<int>(*parameter.begin());
-        }
-    }
-    catch (...)
-    {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("BufferSize未配置。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-    }
-
-    constexpr auto defaultBufferSize = 1024;
-
-    return defaultBufferSize;
 }
 
 Network::EncryptedCompressionStrategy Network::ConfigurationStrategyImpl::GetEncryptedCompressionStrategy() const noexcept

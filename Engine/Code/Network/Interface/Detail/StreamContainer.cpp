@@ -13,11 +13,12 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
 using std::make_shared;
 
 Network::StreamContainer::StreamContainer(const ConfigurationStrategy& configurationStrategy, const SockStreamSharedPtr& sockStream)
-    : m_SockStream{ sockStream }, bufferSendStream{ configurationStrategy.GetBufferSize(), configurationStrategy.GetParserStrategy(), configurationStrategy.GetEncryptedCompressionStrategy() }
+    : m_SockStream{ sockStream }, bufferSendStream{ configurationStrategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::SendBufferSize), configurationStrategy.GetParserStrategy(), configurationStrategy.GetEncryptedCompressionStrategy() }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }

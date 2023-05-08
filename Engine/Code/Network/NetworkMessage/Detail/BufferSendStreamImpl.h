@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 10:37)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 13:32)
 
 #ifndef NETWORK_NETWORK_MESSAGE_BUFFER_SEND_STREAM_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_BUFFER_SEND_STREAM_IMPL_H
@@ -33,10 +33,10 @@ namespace Network
         void Clear();
 
         NODISCARD bool IsEmpty() const noexcept;
-        NODISCARD int GetCurrentSize() const;
+        NODISCARD int GetCurrentSize() const noexcept;
 
     private:
-        void EncryptedCompression(MAYBE_UNUSED const MessageBufferSharedPtr& messageBuffer) noexcept;
+        void EncryptedCompression(const MessageBufferSharedPtr& messageBuffer) noexcept;
 
     private:
         SendMessageLevel topLevel;

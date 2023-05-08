@@ -329,7 +329,7 @@
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
@@ -347,7 +347,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -362,7 +362,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|Win32'">
@@ -377,7 +377,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -399,7 +399,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|Win32'">
@@ -421,7 +421,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -440,7 +440,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|Win32'">
@@ -459,7 +459,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -477,7 +477,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
@@ -495,7 +495,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -510,7 +510,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|x64'">
@@ -525,7 +525,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -547,7 +547,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|x64'">
@@ -569,7 +569,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -588,7 +588,7 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|x64'">
@@ -607,28 +607,35 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/AncientBooks/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y
-xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/AncientBooks/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/BooksMain/*.*" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/Resource/BooksMain/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Renderer.json" />
+    <None Include="Resource\AncientBooks\Article.xlsx" />
     <None Include="Resource\AncientBooks\Book.xlsx" />
     <None Include="Resource\AncientBooks\Calendar.xlsx" />
     <None Include="Resource\AncientBooks\Category.xlsx" />
+    <None Include="Resource\AncientBooks\Chapter.xlsx" />
     <None Include="Resource\AncientBooks\Character.xlsx" />
     <None Include="Resource\AncientBooks\Country.xlsx" />
     <None Include="Resource\AncientBooks\Day.xlsx" />
     <None Include="Resource\AncientBooks\Emperor.xlsx" />
     <None Include="Resource\AncientBooks\Gather.xlsx" />
     <None Include="Resource\AncientBooks\Genus.xlsx" />
+    <None Include="Resource\AncientBooks\Geographic.xlsx" />
+    <None Include="Resource\AncientBooks\Identity.xlsx" />
     <None Include="Resource\AncientBooks\ImperialCourt.xlsx" />
+    <None Include="Resource\AncientBooks\Month.xlsx" />
     <None Include="Resource\AncientBooks\ReignTitle.xlsx" />
     <None Include="Resource\AncientBooks\SexagenaryCycle.xlsx" />
     <None Include="Resource\AncientBooks\Source.xlsx" />
     <None Include="Resource\AncientBooks\Version.xlsx" />
     <None Include="Resource\AncientBooks\Year.xlsx" />
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言\御製文.md" />
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言\進表.md" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
@@ -644,6 +651,9 @@ xcopy "$(ProjectDir)/Resource/History/*.*" "$(MillenniumHistoryEngineering)/$(Pl
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServer\DatabaseGenerateServerMessage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言\御製序.md" />
+    <Text Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言\御製詩.md" />
+    <Text Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言\校勘.md" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />

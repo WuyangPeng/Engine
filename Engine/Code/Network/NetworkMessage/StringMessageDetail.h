@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 19:28)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/06 17:26)
 
 #ifndef NETWORK_NETWORK_MESSAGE_STRING_MESSAGE_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_STRING_MESSAGE_DETAIL_H
@@ -18,8 +18,9 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 template <typename E>
-Network::StringMessage<E>::StringMessage(int64_t messageID, const StringType& stringType)
-    : ParentType{ messageID }, m_String{ stringType }
+requires(std::is_enum_v<E>)
+Network::StringMessage<E>::StringMessage(MessageHeadStrategy messageHeadStrategy, int64_t messageId, const StringType& message)
+    : ParentType{ messageHeadStrategy, messageId }, message{ message }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -27,7 +28,7 @@ Network::StringMessage<E>::StringMessage(int64_t messageID, const StringType& st
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename E>
-bool Network::StringMessage<E>::IsValid() const noexcept
+requires(std::is_enum_v<E>) bool Network::StringMessage<E>::IsValid() const noexcept
 {
     if (ParentType::IsValid())
         return true;
@@ -38,12 +39,14 @@ bool Network::StringMessage<E>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename E>
+requires(std::is_enum_v<E>)
 const CoreTools::Rtti& Network::StringMessage<E>::GetRttiType() const noexcept
 {
     return GetCurrentRttiType();
 }
 
 template <typename E>
+requires(std::is_enum_v<E>)
 const CoreTools::Rtti& Network::StringMessage<E>::GetCurrentRttiType() noexcept
 {
     static const auto rtti = CoreTools::Rtti{ typeid(ClassType).name(), &ParentType::GetCurrentRttiType() };
@@ -52,9 +55,10 @@ const CoreTools::Rtti& Network::StringMessage<E>::GetCurrentRttiType() noexcept
 }
 
 template <typename E>
-Network::MessageInterfaceSharedPtr Network::StringMessage<E>::Factory(MessageSource& source, int64_t messageID)
+requires(std::is_enum_v<E>)
+Network::MessageInterfaceSharedPtr Network::StringMessage<E>::Factory(MessageSource& source, MessageHeadStrategy messageHeadStrategy, int64_t messageId)
 {
-    auto object = std::make_shared<ClassType>(LoadConstructor::ConstructorLoader, messageID);
+    auto object = std::make_shared<ClassType>(LoadConstructor::ConstructorLoader, messageHeadStrategy, messageId);
 
     object->Load(source);
 
@@ -62,13 +66,15 @@ Network::MessageInterfaceSharedPtr Network::StringMessage<E>::Factory(MessageSou
 }
 
 template <typename E>
-Network::StringMessage<E>::StringMessage(LoadConstructor value, int64_t messageID) noexcept
-    : ParentType{ value, messageID }, m_String{}
+requires(std::is_enum_v<E>)
+Network::StringMessage<E>::StringMessage(LoadConstructor loadConstructor, MessageHeadStrategy messageHeadStrategy, int64_t messageId) noexcept
+    : ParentType{ loadConstructor, messageHeadStrategy, messageId }, message{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename E>
+requires(std::is_enum_v<E>)
 void Network::StringMessage<E>::Load(MessageSource& source)
 {
     NETWORK_CLASS_IS_VALID_9;
@@ -77,12 +83,13 @@ void Network::StringMessage<E>::Load(MessageSource& source)
 
     ParentType::Load(source);
 
-    m_String.Load(source);
+    message.Load(source);
 
     NETWORK_END_STREAM_LOAD(source);
 }
 
 template <typename E>
+requires(std::is_enum_v<E>)
 void Network::StringMessage<E>::Save(MessageTarget& target) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
@@ -91,33 +98,36 @@ void Network::StringMessage<E>::Save(MessageTarget& target) const
 
     ParentType::Save(target);
 
-    m_String.Save(target);
+    message.Save(target);
 
     NETWORK_END_STREAM_SAVE(target);
 }
 
 template <typename E>
+requires(std::is_enum_v<E>)
 int Network::StringMessage<E>::GetStreamingSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return ParentType::GetStreamingSize() + m_String.GetStreamingSize();
+    return ParentType::GetStreamingSize() + message.GetStreamingSize();
 }
 
 template <typename E>
+requires(std::is_enum_v<E>)
 std::string Network::StringMessage<E>::GetValue(E index) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_String.GetValue(index);
+    return message.GetValue(index);
 }
 
 template <typename E>
-int Network::StringMessage<E>::GetSize() const
+requires(std::is_enum_v<E>)
+int Network::StringMessage<E>::GetSize() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_String.GetSize();
+    return message.GetSize();
 }
 
 #endif  // NETWORK_NETWORK_MESSAGE_STRING_MESSAGE_DETAIL_H

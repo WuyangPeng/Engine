@@ -10,15 +10,25 @@
 #include "ClientTesting.h"
 #include "SingletonTestingDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Configuration/ConfigurationParameter.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/Interface/Client.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, ClientTesting)
+Network::ClientTesting::ClientTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, ClientTesting)
+
+void Network::ClientTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 void Network::ClientTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(ACESingletonTest<ClassType>, this, &ClassType::ACETest);
@@ -50,9 +60,14 @@ void Network::ClientTesting::NullTest()
 void Network::ClientTesting::ACEConstructionTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::ACE,
-                                                 ConnectStrategy::TCP,
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Ace,
+                                                 ConnectStrategy::Tcp,
                                                  ClientStrategy::OnlySending,
                                                  MessageStrategy::Iovec,
                                                  ParserStrategy::LittleEndian,
@@ -75,9 +90,11 @@ void Network::ClientTesting::ACEConstructionTest()
 void Network::ClientTesting::BoostConstructionTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Boost,
-                                                 ConnectStrategy::TCP,
+                                                 ConnectStrategy::Tcp,
                                                  ClientStrategy::Cache,
                                                  MessageStrategy::Iovec,
                                                  ParserStrategy::LittleEndian,
@@ -100,9 +117,11 @@ void Network::ClientTesting::BoostConstructionTest()
 void Network::ClientTesting::NetworkConstructionTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Network,
-                                                 ConnectStrategy::TCP,
+                                                 ConnectStrategy::Tcp,
                                                  ClientStrategy::OnlySending,
                                                  MessageStrategy::Iovec,
                                                  ParserStrategy::LittleEndian,
@@ -125,9 +144,11 @@ void Network::ClientTesting::NetworkConstructionTest()
 void Network::ClientTesting::NullConstructionTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null,
-                                                 ConnectStrategy::TCP,
+                                                 ConnectStrategy::Tcp,
                                                  ClientStrategy::Cache,
                                                  MessageStrategy::Iovec,
                                                  ParserStrategy::LittleEndian,

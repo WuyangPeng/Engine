@@ -15,7 +15,7 @@
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/Interface/SockAddress.h"
 
-Network::ClientImpl::ClientImpl(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager) noexcept
+Network::ClientImpl::ClientImpl(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager) noexcept
     : ParentType{}, configurationStrategy{ configurationStrategy }, socketManager{ socketManager }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -37,7 +37,7 @@ uint64_t Network::ClientImpl::GetSocketID() const noexcept
     return 0;
 }
 
-Network::SocketManagerSharedPtr Network::ClientImpl::GetSocketManagerSharedPtr()
+Network::MessageEventManagerSharedPtr Network::ClientImpl::GetSocketManagerSharedPtr()
 {
     NETWORK_CLASS_IS_VALID_9;
 

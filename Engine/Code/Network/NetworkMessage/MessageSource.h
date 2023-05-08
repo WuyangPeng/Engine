@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 17:02)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 11:39)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_SOURCE_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_SOURCE_H
@@ -27,7 +27,7 @@ namespace Network
         using ClassShareType = CoreTools::NonCopyClasses;
 
     public:
-        explicit MessageSource(const MessageBufferSharedPtr& messageBuffer) noexcept;
+        explicit MessageSource(MessageBuffer& messageBuffer) noexcept;
 
         ~MessageSource() noexcept = default;
         MessageSource(const MessageSource& rhs) = delete;
@@ -69,7 +69,7 @@ namespace Network
         void IncrementBytesProcessed(int bytesNumber);
 
     private:
-        MessageBufferSharedPtr source;
+        MessageBuffer& source;
         ParserStrategy parserStrategy;
     };
 }

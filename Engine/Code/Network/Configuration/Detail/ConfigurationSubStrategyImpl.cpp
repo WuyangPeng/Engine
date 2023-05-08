@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/17 13:53)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/04/28 10:01)
 
 #include "Network/NetworkExport.h"
 
 #include "ConfigurationSubStrategyImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
 Network::ConfigurationSubStrategyImpl::ConfigurationSubStrategyImpl() noexcept
     : container{}
@@ -25,24 +26,21 @@ bool Network::ConfigurationSubStrategyImpl::IsExist(WrappersSubStrategy wrappers
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = container.find(wrappersSubStrategy);
-
-    return iter != container.cend();
+    return container.contains(wrappersSubStrategy);
 }
 
 int Network::ConfigurationSubStrategyImpl::GetValue(WrappersSubStrategy wrappersSubStrategy) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = container.find(wrappersSubStrategy);
-
-    if (iter != container.cend())
+    if (const auto iter = container.find(wrappersSubStrategy);
+        iter != container.cend())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的子策略。"s));
+        return -1;
     }
 }
 
@@ -50,5 +48,5 @@ void Network::ConfigurationSubStrategyImpl::Insert(WrappersSubStrategy wrappersS
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    container.insert({ wrappersSubStrategy, value });
+    container.emplace(wrappersSubStrategy, value);
 }

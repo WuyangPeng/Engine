@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.4 (2023/03/06 14:19)
+///	引擎测试版本：0.9.0.7 (2023/04/26 14:02)
 
 #include "ZipEntryTesting.h"
 #include "System/CharacterString/FormatString.h"
@@ -139,7 +139,7 @@ void CoreTools::ZipEntryTesting::ZipEntryDataTest()
     ASSERT_EQUAL(dataAsString.size(), 2u);
 
     ASSERT_LESS_EQUAL(1u, zipEntry.GetIndex());
-    ASSERT_EQUAL(0, zipEntry.GetCompressedSize());
+    ASSERT_EQUAL(0, zipEntry.GetUncompressedSize());
     ASSERT_EQUAL(0, zipEntry.GetUncompressedSize());
 
     ASSERT_FALSE(zipEntry.IsDirectory());

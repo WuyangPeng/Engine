@@ -10,14 +10,20 @@
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_NETWORK_UNIQUE_ID_MANAGER_TESTING_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_NETWORK_UNIQUE_ID_MANAGER_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Network
 {
     class NetworkUniqueIDManagerTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(NetworkUniqueIDManagerTesting);
+        using ClassType = NetworkUniqueIDManagerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit NetworkUniqueIDManagerTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

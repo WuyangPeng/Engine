@@ -10,6 +10,7 @@
 #include "ACESockStreamTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/ConfigurationParameter.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/Helper/UserMacro.h"
@@ -22,7 +23,6 @@
 #include "Network/NetworkMessage/NullMessage.h"
 #include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-
 #include <array>
 #include <thread>
 
@@ -76,9 +76,11 @@ void Network::ACESockStreamTesting::StreamTest()
 {
     thread firstTread{ &ClassType::ACEServerThread, this };
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
 
-    ConfigurationStrategy clientConfigurationStrategy{ WrappersStrategy::ACE,
-                                                       ConnectStrategy::TCP,
+    ConfigurationStrategy clientConfigurationStrategy{ WrappersStrategy::Ace,
+                                                       ConnectStrategy::Tcp,
                                                        ClientStrategy::OnlySending,
                                                        MessageStrategy::Default,
                                                        ParserStrategy::LittleEndian,
@@ -93,7 +95,7 @@ void Network::ACESockStreamTesting::StreamTest()
     SockStreamSharedPtr sockStream{ make_shared<TestingType>(clientConfigurationStrategy) };
 
     SockConnector sockConnector{ clientConfigurationStrategy };
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(clientConfigurationStrategy.GetIP(), clientConfigurationStrategy.GetPort(), clientConfigurationStrategy) };
+    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(clientConfigurationStrategy.GetHost(), clientConfigurationStrategy.GetPort(), clientConfigurationStrategy) };
 
     if (sockConnector.Connect(sockStream, sockAddress))
     {
@@ -138,8 +140,10 @@ void Network::ACESockStreamTesting::ACEServerThread()
 void Network::ACESockStreamTesting::DoACEServerThread()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    ConfigurationStrategy serverConfigurationStrategy{ WrappersStrategy::ACE,
-                                                       ConnectStrategy::TCP,
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    ConfigurationStrategy serverConfigurationStrategy{ WrappersStrategy::Ace,
+                                                       ConnectStrategy::Tcp,
                                                        ServerStrategy::Iterative,
                                                        MessageStrategy::Default,
                                                        ParserStrategy::LittleEndian,
@@ -150,12 +154,13 @@ void Network::ACESockStreamTesting::DoACEServerThread()
                                                        SocketSendMessage::Default,
                                                        "127.0.0.1",
                                                        mPort };
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     constexpr auto messageID = 5;
     ConfigurationStrategy configurationStrategy{ serverConfigurationStrategy };
     TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
-
-    ServerSharedPtr server{ make_shared<Server>(testSocketManager, configurationStrategy) };
+#include STSTEM_WARNING_POP
+    ServerSharedPtr server{ make_shared<Server>(std::make_shared<MessageEventManager>(MessageEventManager::Create()), configurationStrategy) };
 
     testSocketManager->SetServerWeakPtr(server);
 

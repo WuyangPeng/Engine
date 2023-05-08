@@ -14,10 +14,21 @@
 #include "Network/Interface/SockConnector.h"
 #include "Network/Interface/SockStream.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockConnectorHandleTesting)
+Network::BoostSockConnectorHandleTesting::BoostSockConnectorHandleTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostSockConnectorHandleTesting)
+
+void Network::BoostSockConnectorHandleTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::BoostSockConnectorHandleTesting::MainTest()
 {
@@ -35,7 +46,7 @@ void Network::BoostSockConnectorHandleTesting::CopyConstructorTest()
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
     SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(), configurationStrategy.GetPort(), configurationStrategy) };
+    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetHost(), configurationStrategy.GetPort(), configurationStrategy) };
 
     TestingType sockConnector{ configurationStrategy };
     TestingType copySockConnector{ sockConnector };
@@ -49,7 +60,7 @@ void Network::BoostSockConnectorHandleTesting::CopyOperatorTest()
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
     SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(), configurationStrategy.GetPort(), configurationStrategy) };
+    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetHost(), configurationStrategy.GetPort(), configurationStrategy) };
 
     TestingType sockConnector{ configurationStrategy };
     TestingType copySockConnector{ GetBoostClientConfigurationStrategy() };

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 10:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:31)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_MANAGER_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_MANAGER_IMPL_H
@@ -28,7 +28,7 @@ namespace Network
         using ClassType = MessageEventManagerImpl;
 
     public:
-        explicit MessageEventManagerImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+        explicit MessageEventManagerImpl(CoreTools::DisableNotThrow disableNotThrow);
         ~MessageEventManagerImpl() noexcept = default;
 
         MessageEventManagerImpl(const MessageEventManagerImpl& rhs);
@@ -39,19 +39,24 @@ namespace Network
         CLASS_INVARIANT_DECLARE;
 
     public:
-        void Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent);
-        void Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority);
-        void Remove(int64_t messageID);
-        void Remove(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent);
+        void Insert(int64_t messageId, const NetworkMessageEventSharedPtr& messageEvent);
+        void Insert(int64_t messageId, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority);
+        void Remove(int64_t messageId);
+        void Remove(int64_t messageId, const NetworkMessageEventSharedPtr& messageEvent);
+        void Insert(const std::string& messageDescribe, const NetworkMessageEventSharedPtr& messageEvent);
+        void Insert(const std::string& messageDescribe, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority);
 
-        void OnEvent(int64_t messageID, uint64_t socketID, const ConstMessageInterfaceSharedPtr& message);
+        void OnEvent(int64_t socketId, int64_t messageId, const ConstMessageInterfaceSharedPtr& message);
+        void OnEvent(int64_t socketId, const std::string& messageDescribe, const ConstMessageInterfaceSharedPtr& message);
 
     private:
-        using EventContainer = std::map<int64_t, MessageEventContainer>;
+        using IdEventContainer = std::map<int64_t, MessageEventContainer>;
+        using DescribeEventContainer = std::map<std::string, MessageEventContainer>;
         using MutexUniquePtr = std::unique_ptr<CoreTools::Mutex>;
 
     private:
-        EventContainer eventContainer;
+        IdEventContainer idEventContainer;
+        DescribeEventContainer describeEventContainer;
         MutexUniquePtr mutex;
     };
 }

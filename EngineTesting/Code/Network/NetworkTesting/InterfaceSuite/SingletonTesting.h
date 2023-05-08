@@ -11,7 +11,7 @@
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SINGLETON_TESTING_H
 
 #include "System/Helper/Platform.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 
 namespace Network
@@ -19,7 +19,13 @@ namespace Network
     class SingletonTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(SingletonTesting);
+        using ClassType = SingletonTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit SingletonTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     protected:
         template <typename Test>

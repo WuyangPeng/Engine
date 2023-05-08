@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 22:34)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:28)
 
 #include "Network/NetworkExport.h"
 
@@ -19,9 +19,11 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Network, MultiMessageEventContainer)
 
-Network::MultiMessageEventContainer::MultiMessageEventContainer(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{}, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, m_Priority{ MessageEventPriority::Count }
+Network::MultiMessageEventContainer::MultiMessageEventContainer(CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{}, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, priority{ MessageEventPriority::Count }
 {
+    System::UnusedFunction(disableNotThrow);
+
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
@@ -29,22 +31,22 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MultiMessageEventContainer)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Network, MultiMessageEventContainer, Remove, NetworkMessageEventSharedPtr, void)
 
-void Network::MultiMessageEventContainer::Insert(const NetworkMessageEventSharedPtr& smartPointer)
+void Network::MultiMessageEventContainer::Insert(const NetworkMessageEventSharedPtr& messageEvent)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    m_Priority = MessageEventPriority::Middle;
+    priority = MessageEventPriority::Middle;
 
-    return impl->Insert(smartPointer);
+    return impl->Insert(messageEvent);
 }
 
-void Network::MultiMessageEventContainer::Insert(const NetworkMessageEventSharedPtr& smartPointer, MessageEventPriority priority)
+void Network::MultiMessageEventContainer::Insert(const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority aPriority)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    m_Priority = priority;
+    priority = aPriority;
 
-    return impl->Insert(smartPointer);
+    return impl->Insert(messageEvent);
 }
 
 Network::MultiMessageEventContainer::ImplPtr Network::MultiMessageEventContainer::Clone() const
@@ -65,7 +67,7 @@ Network::MultiMessageEventContainer::ImplPtr Network::MultiMessageEventContainer
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return impl->CloneToPriorityMessage(m_Priority);
+    return impl->CloneToPriorityMessage(priority);
 }
 
 bool Network::MultiMessageEventContainer::IsCanInsert() const noexcept
@@ -75,19 +77,19 @@ bool Network::MultiMessageEventContainer::IsCanInsert() const noexcept
     return true;
 }
 
-bool Network::MultiMessageEventContainer::IsPrioritySame(MessageEventPriority priority) const noexcept
+bool Network::MultiMessageEventContainer::IsPrioritySame(MessageEventPriority aPriority) const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    if (m_Priority == priority)
+    if (priority == aPriority)
         return true;
     else
         return false;
 }
 
-void Network::MultiMessageEventContainer::OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
+void Network::MultiMessageEventContainer::OnEvent(uint64_t socketId, const ConstMessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    return impl->OnEvent(socketID, message);
+    return impl->OnEvent(socketId, message);
 }

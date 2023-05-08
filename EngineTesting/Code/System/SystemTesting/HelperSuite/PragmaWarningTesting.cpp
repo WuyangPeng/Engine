@@ -40,6 +40,7 @@
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/Helper/PragmaWarning/PosixTime.h"
 #include "System/Helper/PragmaWarning/PropertyTree.h"
+#include "System/Helper/PragmaWarning/ProtoBuf.h"
 #include "System/Helper/PragmaWarning/PtrVector.h"
 #include "System/Helper/PragmaWarning/PugiXml.h"
 #include "System/Helper/PragmaWarning/RecursiveMutex.h"

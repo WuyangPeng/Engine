@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 18:02)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/06 17:31)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CAST_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CAST_H
@@ -17,7 +17,7 @@
 
 namespace Network
 {
-    template <MultipleMessageByteType byteType>
+    template <MultipleMessageByteType ByteType>
     struct MultipleMessageCast;
 
     template <>
@@ -74,6 +74,24 @@ namespace Network
         using ValueType = int8_t;
     };
 
+    template <>
+    struct MultipleMessageCast<MultipleMessageByteType::Bool>
+    {
+        using ValueType = bool;
+    };
+
+    template <>
+    struct MultipleMessageCast<MultipleMessageByteType::Float>
+    {
+        using ValueType = float;
+    };
+
+    template <>
+    struct MultipleMessageCast<MultipleMessageByteType::Double>
+    {
+        using ValueType = double;
+    };
+
     template <MultipleMessageByteType ByteType>
     struct MultipleMessageParameterCast
     {
@@ -85,7 +103,6 @@ namespace Network
     {
         using ValueType = const std::string&;
     };
-
 }
 
 #endif  // NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CAST_H

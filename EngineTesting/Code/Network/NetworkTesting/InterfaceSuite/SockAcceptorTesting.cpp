@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Helper/UserMacro.h"
 #include "Network/Interface/SockAcceptor.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 Network::SockAcceptorTesting::SockAcceptorTesting(const OStreamShared& stream)
     : ParentType{ stream }, mPort{ 8010 }
 {

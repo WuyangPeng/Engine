@@ -1,20 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/17 14:13)
+///	引擎测试版本：0.9.0.7 (2023/04/25 17:11)
 
 #include "UnitTestTesting.h"
 #include "Detail/TestEnum.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::ostream;
-using std::string;
+
+using namespace std::literals;
 
 CoreTools::UnitTestTesting::UnitTestTesting(const OStreamShared& stream)
     : ParentType{ stream }, passNumber{ 0 }, failNumber{ 0 }, errorNumber{ 0 }
@@ -39,17 +39,28 @@ void CoreTools::UnitTestTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
+bool CoreTools::UnitTestTesting::ExecuteLoopTest() noexcept
+{
+    return true;
+}
+
 void CoreTools::UnitTestTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(NameTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AssertTestTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(AssertTrueTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ErrorTestTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AssertEqualTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(AssertStringTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(AssertCellValueTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AssertCompareTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AssertNotThrowTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AssertThrowTest);
     ASSERT_NOT_THROW_EXCEPTION_0(TestResultTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PrintReportTest);
+
+    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(ExecuteLoopTest);
 }
 
 void CoreTools::UnitTestTesting::NameTest()
@@ -89,6 +100,14 @@ void CoreTools::UnitTestTesting::AssertTestTest()
 
     // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
     passNumber += 4;
+}
+
+void CoreTools::UnitTestTesting::AssertTrueTest() noexcept
+{
+    AssertTrue();
+
+    // AssertTrueTest包含1个ASSERT成功测试。
+    passNumber += 2;
 }
 
 void CoreTools::UnitTestTesting::ErrorTestTest()
@@ -140,10 +159,10 @@ void CoreTools::UnitTestTesting::AssertEqualTest()
     ASSERT_UNEQUAL_NULL_PTR(this);
     ASSERT_ENUM_EQUAL(TestEnum::Ten, TestEnum::Ten);
     ASSERT_ENUM_UNEQUAL(TestEnum::Ten, TestEnum::Fifteen);
-    constexpr float value{ 1.0f };
+    constexpr auto value = 1.0f;
     ASSERT_FLOATING_POINT_COMPLETE_EQUAL(value, value);
     ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL(value, value + 0.00001f);
-    System::String stringValue{ SYSTEM_TEXT("value") };
+    const auto stringValue = SYSTEM_TEXT("value"s);
     ASSERT_EQUAL(stringValue, stringValue);
 
     ASSERT_EQUAL(1, 1);
@@ -182,6 +201,33 @@ void CoreTools::UnitTestTesting::AssertEqualTest()
 
     // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
     passNumber += 4;
+}
+
+void CoreTools::UnitTestTesting::AssertStringTest()
+{
+    ASSERT_EQUAL("1", "1");
+    ASSERT_EQUAL("1", "1"s);
+    ASSERT_EQUAL("1"s, "1"s);
+    ASSERT_EQUAL("1"s, "1");
+
+    ASSERT_EQUAL(L"1", L"1");
+    ASSERT_EQUAL(L"1", L"1"s);
+    ASSERT_EQUAL(L"1"s, L"1"s);
+    ASSERT_EQUAL(L"1"s, L"1");
+
+    ASSERT_EQUAL('1', '1');
+    ASSERT_EQUAL(L'1', L'1');
+
+    // 上面有10个ASSERT_EQUAL成功测试。
+    passNumber += 11;
+}
+
+void CoreTools::UnitTestTesting::AssertCellValueTest()
+{
+    ASSERT_EQUAL(SimpleCSV::CellValue{ 7 }, SimpleCSV::CellValue{ 7 });
+
+    // 上面有1个ASSERT_EQUAL成功测试。
+    passNumber += 2;
 }
 
 void CoreTools::UnitTestTesting::AssertCompareTest()
@@ -304,16 +350,25 @@ void CoreTools::UnitTestTesting::TestResultTest()
     ASSERT_EQUAL(aErrorNumber, errorNumber);
 }
 
+void CoreTools::UnitTestTesting::PrintReportTest()
+{
+    PrintReport();
+    PrintRunUnitTest();
+    PrintTipsMessage();
+}
+
 void CoreTools::UnitTestTesting::NotThrowException() noexcept
 {
 }
 
-void CoreTools::UnitTestTesting::NotThrowExceptionWithParameter([[maybe_unused]] int parameter) noexcept
+void CoreTools::UnitTestTesting::NotThrowExceptionWithParameter(int parameter) noexcept
 {
+    System::UnusedFunction(parameter);
 }
 
-void CoreTools::UnitTestTesting::NotThrowExceptionWithTwoParameter([[maybe_unused]] int parameter1, [[maybe_unused]] float parameter2) noexcept
+void CoreTools::UnitTestTesting::NotThrowExceptionWithTwoParameter(int parameter1, float parameter2) noexcept
 {
+    System::UnusedFunction(parameter1, parameter2);
 }
 
 void CoreTools::UnitTestTesting::ThrowException()
@@ -321,13 +376,17 @@ void CoreTools::UnitTestTesting::ThrowException()
     THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常。如果触发断言，请按“否”取消。"));
 }
 
-void CoreTools::UnitTestTesting::ThrowExceptionWithParameter([[maybe_unused]] int parameter)
+void CoreTools::UnitTestTesting::ThrowExceptionWithParameter(int parameter)
 {
+    System::UnusedFunction(parameter);
+
     THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常。如果触发断言，请按“否”取消。"));
 }
 
-void CoreTools::UnitTestTesting::ThrowExceptionWithTwoParameter([[maybe_unused]] int parameter1, [[maybe_unused]] float parameter2)
+void CoreTools::UnitTestTesting::ThrowExceptionWithTwoParameter(int parameter1, float parameter2)
 {
+    System::UnusedFunction(parameter1, parameter2);
+
     THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常。如果触发断言，请按“否”取消。"));
 }
 

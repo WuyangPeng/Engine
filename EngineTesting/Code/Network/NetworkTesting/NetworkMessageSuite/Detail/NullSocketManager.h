@@ -11,15 +11,15 @@
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_NULL_SOCKET_MANAGER_H
 
 #include "TestNetworkMessageEvent.h"
-#include "Network/NetworkMessage/SocketManager.h"
+#include "CoreTools/MessageEvent/EventInterface.h"
 
 namespace Network
 {
-    class NullSocketManager : public SocketManager
+    class NullSocketManager : public CoreTools::EventInterface
     {
     public:
         using ClassType = NullSocketManager;
-        using ParentType = SocketManager;
+        using ParentType = CoreTools::EventInterface;
         using CallbackParameters = CoreTools::CallbackParameters;
 
     public:
@@ -32,7 +32,7 @@ namespace Network
         NODISCARD int GetValue() const noexcept;
 
     private:
-        void InitEvent(uint64_t socketID) override;
+        void InitEvent(uint64_t socketID) noexcept;
 
     private:
         TestNetworkMessageEventSharedPtr event;

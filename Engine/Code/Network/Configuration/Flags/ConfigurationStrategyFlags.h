@@ -1,44 +1,47 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/17 13:34)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/04/27 17:12)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
 
 #include "System/Helper/EnumOperator.h"
 
-#include <iostream>
-
 namespace Network
 {
     enum class WrappersStrategy
     {
         Default = 0,
-        ACE = 1,
+        Ace = 1,
         Boost = 2,
-        Network = 3,
-        Socket = 4,
+        Beast = 3,
+        Network = 4,
         Null = 5,
     };
 
     enum class ConnectStrategy
     {
-        TCP = 0,
-        UDP = 1,
+        Tcp = 0,
+        Udp = 1,
         Http = 2,
         WebSocket = 3,
+        Kcp = 4,
     };
 
     enum class WrappersSubStrategy
     {
         Default = 0,
-        Threads = 1,
-        MultiContext = 2,
+
+        SendBufferSize = 1,
+        ReceiveBufferSize = 2,
+
+        Threads = 3,
+        MultiContext = 4,
     };
 
     enum class ServerStrategy
@@ -50,7 +53,6 @@ namespace Network
         Proactor = 4,
         ProcessPerConnection = 5,
         ThreadPerConnection = 6,
-        RTThreadPerConnection = 7,
 
         End,
     };
@@ -85,12 +87,49 @@ namespace Network
     enum class EncryptedCompressionStrategy
     {
         Default = 0,
+
         Encrypted = (1 << 0),
         Compression = (1 << 1),
-        CompressionPriority = (1 << 2),
+    };
+
+    enum class MessageHeadStrategy
+    {
+        Default = 0,
+
+        Encrypted = (1 << 0),
+        Compression = (1 << 1),
+
+        PrefixBegin,
+
+        HasUserId = (1 << 2),
+        HasRpcCode = (1 << 3),
+        HasErrorCode = (1 << 4),
+        HasSecretKey = (1 << 5),
+
+        PrefixEnd,
+
+        UseSubId = (1 << 6),
+        UseDescribe = (1 << 7),
+
+        UseProtoBuf = (1 << 8),
+        UseJson = (1 << 9),
 
         End,
     };
+
+    NODISCARD static constexpr bool IsUseSubId(const MessageHeadStrategy messageHeadStrategy) noexcept
+    {
+        using System::operator&;
+
+        return (messageHeadStrategy & MessageHeadStrategy::UseSubId) != MessageHeadStrategy::Default;
+    }
+
+    NODISCARD static constexpr bool IsUseDescribe(const MessageHeadStrategy messageHeadStrategy) noexcept
+    {
+        using System::operator&;
+
+        return (messageHeadStrategy & MessageHeadStrategy::UseDescribe) != MessageHeadStrategy::Default;
+    }
 
     enum class OpenSSLStrategy
     {
@@ -121,7 +160,7 @@ namespace Network
         FightingServer,
         WorldServer,
         OfflineServer,
-        LeaderboardServer,
+        LeaderBoardServer,
         MailServer,
         ChatServer,
         RechargeServer,
@@ -129,9 +168,9 @@ namespace Network
         GameMasterServer,
         ServerManager,
         UpdateServer,
-        DatabaseServer,
         BackgroundServer,
-    };    
+        DatabaseServer,
+    };
 }
 
 #endif  // NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H

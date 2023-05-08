@@ -23,6 +23,7 @@ JsonConfigure::MonstersContainer::MonstersContainer(const CoreTools::JsonRow& js
     : system{ jsonRow.GetInt(SYSTEM_TEXT("system"s)) },
       coreTools{ jsonRow.GetInt(SYSTEM_TEXT("coreTools"s)) },
       network{ jsonRow.GetString(SYSTEM_TEXT("network"s)) },
+      boolTest{ jsonRow.GetBool(SYSTEM_TEXT("boolTest"s)) },
       test{ jsonRow.GetIntArray(SYSTEM_TEXT("test"s)) },
       consoleTest{ jsonRow.GetStringArray(SYSTEM_TEXT("consoleTest"s)) },
       data{}
@@ -78,6 +79,13 @@ System::String JsonConfigure::MonstersContainer::GetNetwork() const
     USER_CLASS_IS_VALID_CONST_9;
 
     return network;
+}
+
+bool JsonConfigure::MonstersContainer::IsBoolTest() const noexcept
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boolTest;
 }
 
 JsonConfigure::MonstersContainer::Test JsonConfigure::MonstersContainer::GetTest() const

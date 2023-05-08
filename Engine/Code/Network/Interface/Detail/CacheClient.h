@@ -29,7 +29,7 @@ namespace Network
         using SockAddressSharedPtr = std::shared_ptr<SockAddress>;
 
     public:
-        CacheClient(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager);
+        CacheClient(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

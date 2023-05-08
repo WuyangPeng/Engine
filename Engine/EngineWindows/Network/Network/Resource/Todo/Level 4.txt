@@ -1,6 +1,6 @@
 TODO Level 4
  
-0.8.0.1
+0.9.0.7
 
 1.	（NetworkMessage）MessageEventContainer增加一个监听某个消息段和所有消息的接口。
 2.	（NetworkMessage）加密策略：整数，加密策略，次数。根据整数计算可预测随机数。运行次数。

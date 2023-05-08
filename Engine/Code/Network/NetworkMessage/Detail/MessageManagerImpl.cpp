@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 22:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:08)
 
 #include "Network/NetworkExport.h"
 
@@ -15,22 +15,20 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::string;
-
 Network::MessageManagerImpl::MessageManagerImpl() noexcept
-    : factories{}, m_FullVersion{ CoreTools::Version::GetTCREFullVersion() }
+    : idFactories{}, describeFactories{}, fullVersion{ CoreTools::Version::GetTCREFullVersion() }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, MessageManagerImpl)
 
-Network::MessageManagerImpl::FactoryFunction Network::MessageManagerImpl::Find(int64_t messageID, int version) const
+Network::MessageManagerImpl::FactoryFunction Network::MessageManagerImpl::Find(int64_t messageId, int version) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = factories.find(messageID);
-    if (iter != factories.cend())
+    if (const auto iter = idFactories.find(messageId);
+        iter != idFactories.cend())
     {
         for (const auto& value : iter->second)
         {
@@ -41,45 +39,71 @@ Network::MessageManagerImpl::FactoryFunction Network::MessageManagerImpl::Find(i
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的工厂函数！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的工厂函数！"s))
 }
 
-void Network::MessageManagerImpl::Insert(int64_t messageID, const MessageTypeCondition& messageTypeCondition, FactoryFunction function)
+Network::MessageManagerImpl::FactoryFunction Network::MessageManagerImpl::Find(const std::string& messageDescribe, int version) const
 {
-    NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-    factories[messageID].insert({ messageTypeCondition, function });
-}
-
-void Network::MessageManagerImpl::Remove(int64_t messageID, const MessageTypeCondition& messageTypeCondition)
-{
-    NETWORK_CLASS_IS_VALID_9;
-
-    factories[messageID].erase(messageTypeCondition);
-
-    if (factories[messageID].empty())
+    if (const auto iter = describeFactories.find(messageDescribe);
+        iter != describeFactories.cend())
     {
-        factories.erase(messageID);
+        for (const auto& value : iter->second)
+        {
+            if (value.first.IsVersionsConform(version))
+            {
+                return value.second;
+            }
+        }
+    }
+
+    THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的工厂函数！"s))
+}
+
+void Network::MessageManagerImpl::Insert(int64_t messageId, const MessageTypeCondition& messageTypeCondition, FactoryFunction function)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    idFactories[messageId].insert({ messageTypeCondition, function });
+}
+
+void Network::MessageManagerImpl::Insert(const std::string& message, const MessageTypeCondition& messageTypeCondition, FactoryFunction function)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    describeFactories[message].insert({ messageTypeCondition, function });
+}
+
+void Network::MessageManagerImpl::Remove(int64_t messageId, const MessageTypeCondition& messageTypeCondition)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    idFactories[messageId].erase(messageTypeCondition);
+
+    if (idFactories[messageId].empty())
+    {
+        idFactories.erase(messageId);
     }
 }
 
-void Network::MessageManagerImpl::Remove(int64_t messageID)
+void Network::MessageManagerImpl::Remove(int64_t messageId)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    factories.erase(messageID);
+    idFactories.erase(messageId);
 }
 
-void Network::MessageManagerImpl::SetFullVersion(int fullVersion) noexcept
+void Network::MessageManagerImpl::SetFullVersion(int aFullVersion) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_FullVersion = fullVersion;
+    fullVersion = aFullVersion;
 }
 
 int Network::MessageManagerImpl::GetFullVersion() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_FullVersion;
+    return fullVersion;
 }

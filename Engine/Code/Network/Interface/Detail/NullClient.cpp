@@ -15,7 +15,7 @@
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/Interface/SockAddress.h"
 
-Network::NullClient::NullClient(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager) noexcept
+Network::NullClient::NullClient(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager) noexcept
     : ParentType{ configurationStrategy, socketManager }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;

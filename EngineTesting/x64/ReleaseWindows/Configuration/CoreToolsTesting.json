@@ -376,7 +376,8 @@
     "CustomTimeTesting": 1,
     "DeltaTimeManagerTesting": 1,
     "MillisecondTimerTesting": 0,
-    "SecondTimerTesting": 0
+    "SecondTimerTesting": 0,
+    "DateTesting": 1
   },
 
   "reportOutputSuite": {
@@ -386,7 +387,10 @@
   },
 
   "unitTestSuite": {
+    "OStreamSharedTesting": 1,
     "UnitTestTesting": 0,
+    "UnitTestCompositeTesting": 1,
+    "UnitTestStreamTesting": 1,
     "SuiteTesting": 1
   },
 
@@ -423,30 +427,6 @@
     "DllFunctionHelperTesting": 1,
     "CMainFunctionTestingHelperTesting": 1,
     "ExecuteDllMainTesting": 1
-  },
-
-  "handleManagerSuite": {
-    "HandleManagerTesting": 1,
-    "ResourceHandleTesting": 1
-  },
-
-  "resourceManagerSuite": {
-    "CommonDataResourceTesting": 1,
-    "ResourceManagerTesting": 1,
-    "ResourceManagerLockTesting": 1,
-    "ResourceFactoryTesting": 1
-  },
-
-  "frameMemorySystemSuite": {
-    "FrameMemorySystemTesting": 1,
-    "FrameMemorySystemManagerTesting": 1,
-    "FrameMemorySystemPointerShareTesting": 1
-  },
-
-  "bitArraySuite": {
-    "BitArrayTesting": 1,
-    "BitArray2DTesting": 1,
-    "TwoBitArrayTesting": 1
   },
 
   "moduleInitializerTerminatorSuite": {

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 10:47)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:13)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_CONTAINER_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_CONTAINER_IMPL_H
@@ -37,7 +37,7 @@ namespace Network
         virtual void Insert(const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority) = 0;
         virtual void Remove(const NetworkMessageEventSharedPtr& messageEvent) = 0;
 
-        virtual void OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message) = 0;
+        virtual void OnEvent(uint64_t socketId, const ConstMessageInterfaceSharedPtr& message) = 0;
 
         NODISCARD virtual ImplPtr Clone() const = 0;
         NODISCARD virtual ImplPtr CloneToMultiMessage() const = 0;

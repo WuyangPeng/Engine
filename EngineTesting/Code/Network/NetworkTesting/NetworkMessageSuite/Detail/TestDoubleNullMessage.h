@@ -10,15 +10,15 @@
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_TEST_DOUBLE_NULL_MESSAGE_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_TEST_DOUBLE_NULL_MESSAGE_H
 
-#include "Network/NetworkMessage/DoubleMessage.h"
+#include "Network/NetworkMessage/MessageInterface.h"
 
 namespace Network
 {
-    class TestDoubleNullMessage : public DoubleMessage
+    class TestDoubleNullMessage : public MessageInterface
     {
     public:
         using ClassType = TestDoubleNullMessage;
-        using ParentType = DoubleMessage;
+        using ParentType = MessageInterface;
 
     public:
         explicit TestDoubleNullMessage(int64_t messageID) noexcept;

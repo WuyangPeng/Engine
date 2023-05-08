@@ -28,9 +28,9 @@ Network::ServerFactory::ServerFactory() noexcept
 CLASS_INVARIANT_STUB_DEFINE(Network, ServerFactory)
 
 // static
-Network::ServerFactory::ImplTypeSharedPtr Network::ServerFactory::Create(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
+Network::ServerFactory::ImplTypeSharedPtr Network::ServerFactory::Create(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
 {
-    const auto patternStrategyFlag = configurationStrategy.GetPatternStrategy();
+    const auto patternStrategyFlag = configurationStrategy.GetServerStrategy();
 
     switch (patternStrategyFlag)
     {

@@ -15,13 +15,25 @@
 #include "Network/Interface/SockConnector.h"
 #include "Network/Interface/SockStream.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <thread>
 
 using std::make_shared;
 using std::thread;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockConnectorSynchronizeTesting)
+
+Network::BoostSockConnectorSynchronizeTesting::BoostSockConnectorSynchronizeTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostSockConnectorSynchronizeTesting)
+
+void Network::BoostSockConnectorSynchronizeTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::BoostSockConnectorSynchronizeTesting::MainTest() noexcept
 {
@@ -57,7 +69,7 @@ void Network::BoostSockConnectorSynchronizeTesting::SynchronizeConnectorTest()
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
     SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(), configurationStrategy.GetPort(), configurationStrategy) };
+    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetHost(), configurationStrategy.GetPort(), configurationStrategy) };
 
     TestingType sockConnector{ configurationStrategy };
 

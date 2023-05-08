@@ -10,12 +10,12 @@
 #include "MultipleMessageStreamingSizeTesting.h"
 #include "Flags/MultipleMessageType.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
 #include "Network/NetworkMessage/MultipleMessageCast.h"
 #include "Network/NetworkMessage/MultipleMessageContainerDetail.h"
 #include "Network/NetworkMessage/MultipleMessageStreamingSizeDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <string>
 
 using std::string;
@@ -36,7 +36,18 @@ namespace Network
     using TestingType = MultipleMessageStreamingSize<MultipleMessageSize<MultipleMessageType>::value, MultipleMessageType>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MultipleMessageStreamingSizeTesting)
+Network::MultipleMessageStreamingSizeTesting::MultipleMessageStreamingSizeTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MultipleMessageStreamingSizeTesting)
+
+void Network::MultipleMessageStreamingSizeTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::MultipleMessageStreamingSizeTesting::MainTest()
 {
@@ -59,15 +70,15 @@ void Network::MultipleMessageStreamingSizeTesting::BaseTest()
 
     MultipleMessageType multipleMessageContainer{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
 
-    const auto streamSize = CORE_TOOLS_STREAM_SIZE(int8Value) +
-                            CORE_TOOLS_STREAM_SIZE(int16Value) +
-                            CORE_TOOLS_STREAM_SIZE(int32Value) +
-                            CORE_TOOLS_STREAM_SIZE(int64Value) +
-                            CORE_TOOLS_STREAM_SIZE(uint8Value) +
-                            CORE_TOOLS_STREAM_SIZE(uint16Value) +
-                            CORE_TOOLS_STREAM_SIZE(uint32Value) +
-                            CORE_TOOLS_STREAM_SIZE(uint64Value) +
-                            CORE_TOOLS_STREAM_SIZE(stringValue);
+    const auto streamSize = CoreTools::GetStreamSize(int8Value) +
+                            CoreTools::GetStreamSize(int16Value) +
+                            CoreTools::GetStreamSize(int32Value) +
+                            CoreTools::GetStreamSize(int64Value) +
+                            CoreTools::GetStreamSize(uint8Value) +
+                            CoreTools::GetStreamSize(uint16Value) +
+                            CoreTools::GetStreamSize(uint32Value) +
+                            CoreTools::GetStreamSize(uint64Value) +
+                            CoreTools::GetStreamSize(stringValue);
 
     TestingType multipleMessageStreamingSize{};
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 14:04)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/04 13:32)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_TYPE_FLAGS_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_TYPE_FLAGS_H
@@ -17,9 +17,9 @@ namespace Network
     enum class VersionsCondition
     {
         Greater = 0,
-        GreaterEequal = 1,
+        GreaterEqual = 1,
         Equality = 2,
-        LessEequal = 3,
+        LessEqual = 3,
         Less = 4,
         Range = 5,  // [ ] 区间
         Specific = 6,
@@ -36,7 +36,10 @@ namespace Network
         Uint16 = 5,
         Int16 = 6,
         Uint8 = 7,
-        Int8 = 8, 
+        Int8 = 8,
+        Bool = 9,
+        Float = 10,
+        Double = 11,
     };
 }
 

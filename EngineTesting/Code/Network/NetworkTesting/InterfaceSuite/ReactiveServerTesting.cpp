@@ -14,6 +14,7 @@
 #include "CoreTools/Base/Version.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/ConfigurationParameter.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/ConfigurationSubStrategy.h"
@@ -25,7 +26,6 @@
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/NullMessage.h"
-
 #include <vector>
 
 using std::make_shared;
@@ -78,8 +78,10 @@ void Network::ReactiveServerTesting::CreateMessage()
 void Network::ReactiveServerTesting::ReactiveServerTest()
 {
     ConfigurationSubStrategy subStrategy = ConfigurationSubStrategy::Create();
-    ConfigurationStrategy serverConfigurationStrategy{ WrappersStrategy::ACE,
-                                                       ConnectStrategy::TCP,
+    subStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
+    subStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    ConfigurationStrategy serverConfigurationStrategy{ WrappersStrategy::Ace,
+                                                       ConnectStrategy::Tcp,
                                                        ServerStrategy::Reactive,
                                                        MessageStrategy::Default,
                                                        ParserStrategy::LittleEndian,
@@ -90,17 +92,17 @@ void Network::ReactiveServerTesting::ReactiveServerTest()
                                                        SocketSendMessage::Default,
                                                        "127.0.0.1",
                                                        mPort + increase };
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(clientSendMessageID) };
-
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)
 
-    ServerSharedPtr server{ make_shared<Server>(testSocketManager, serverConfigurationStrategy) };
+    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(clientSendMessageID) };
+
+    ServerSharedPtr server{ make_shared<Server>(std::make_shared<MessageEventManager>(MessageEventManager::Create()), serverConfigurationStrategy) };
 
 #include STSTEM_WARNING_POP
 
-    ConfigurationStrategy clientConfigurationStrategy{ WrappersStrategy::ACE,
-                                                       ConnectStrategy::TCP,
+    ConfigurationStrategy clientConfigurationStrategy{ WrappersStrategy::Ace,
+                                                       ConnectStrategy::Tcp,
                                                        ClientStrategy::Cache,
                                                        MessageStrategy::Iovec,
                                                        ParserStrategy::LittleEndian,
@@ -117,7 +119,7 @@ void Network::ReactiveServerTesting::ReactiveServerTest()
     const auto loopCount = GetTestLoopCount();
     for (auto i = 0; i < loopCount; ++i)
     {
-        clientContainer.push_back(make_shared<Client>(clientConfigurationStrategy, testSocketManager));
+        clientContainer.push_back(make_shared<Client>(clientConfigurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
     }
 
     for (auto& client : clientContainer)
@@ -163,7 +165,7 @@ void Network::ReactiveServerTesting::ClientThread(Client& client)
         ASSERT_UNEQUAL(i + 1, connectTime);
     }
 
-    MessageInterfaceSharedPtr message{ make_shared<NullMessage>(clientSendMessageID) };
+    MessageInterfaceSharedPtr message{ make_shared<NullMessage>(MessageHeadStrategy::Default, clientSendMessageID) };
     client.Send(socketID, message);
 
     client.ImmediatelySend(socketID);

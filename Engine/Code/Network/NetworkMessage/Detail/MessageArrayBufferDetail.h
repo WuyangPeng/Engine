@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 18:24)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 09:50)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_ARRAY_BUFFER_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_ARRAY_BUFFER_DETAIL_H
@@ -18,8 +18,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-template <Network::BuffBlockSize buffBlockSize>
-Network::MessageArrayBuffer<buffBlockSize>::MessageArrayBuffer(ParserStrategy parserStrategy) noexcept
+template <Network::BuffBlockSize Size>
+Network::MessageArrayBuffer<Size>::MessageArrayBuffer(ParserStrategy parserStrategy) noexcept
     : ParentType{ parserStrategy }, buffer{}
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
@@ -27,8 +27,8 @@ Network::MessageArrayBuffer<buffBlockSize>::MessageArrayBuffer(ParserStrategy pa
 
 #ifdef OPEN_CLASS_INVARIANT
 
-template <Network::BuffBlockSize buffBlockSize>
-bool Network::MessageArrayBuffer<buffBlockSize>::IsValid() const noexcept
+template <Network::BuffBlockSize Size>
+bool Network::MessageArrayBuffer<Size>::IsValid() const noexcept
 {
     if (ParentType::IsValid())
         return true;
@@ -38,52 +38,52 @@ bool Network::MessageArrayBuffer<buffBlockSize>::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-template <Network::BuffBlockSize buffBlockSize>
-char* Network::MessageArrayBuffer<buffBlockSize>::GetInitialBufferedPtr() noexcept
+template <Network::BuffBlockSize Size>
+char* Network::MessageArrayBuffer<Size>::GetInitialBufferedPtr() noexcept
 {
     NETWORK_CLASS_IS_VALID_1;
 
     return NON_CONST_MEMBER_CALL_CONST_MEMBER(char*, GetInitialBufferedPtr);
 }
 
-template <Network::BuffBlockSize buffBlockSize>
-const char* Network::MessageArrayBuffer<buffBlockSize>::GetInitialBufferedPtr() const noexcept
+template <Network::BuffBlockSize Size>
+const char* Network::MessageArrayBuffer<Size>::GetInitialBufferedPtr() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
     return buffer.data();
 }
 
-template <Network::BuffBlockSize buffBlockSize>
-Network::BuffBlockSize Network::MessageArrayBuffer<buffBlockSize>::GetBuffBlockSize() const noexcept
+template <Network::BuffBlockSize Size>
+Network::BuffBlockSize Network::MessageArrayBuffer<Size>::GetBuffBlockSize() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return buffBlockSize;
+    return Size;
 }
 
-template <Network::BuffBlockSize buffBlockSize>
-int Network::MessageArrayBuffer<buffBlockSize>::GetSize() const noexcept
+template <Network::BuffBlockSize Size>
+int Network::MessageArrayBuffer<Size>::GetSize() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return System::EnumCastUnderlying(buffBlockSize);
+    return System::EnumCastUnderlying(Size);
 }
 
-template <Network::BuffBlockSize buffBlockSize>
-typename Network::MessageArrayBuffer<buffBlockSize>::ImplPtr Network::MessageArrayBuffer<buffBlockSize>::Clone() const
+template <Network::BuffBlockSize Size>
+typename Network::MessageArrayBuffer<Size>::ImplPtr Network::MessageArrayBuffer<Size>::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
     return std::make_shared<ClassType>(*this);
 }
 
-template <Network::BuffBlockSize buffBlockSize>
-typename Network::MessageArrayBuffer<buffBlockSize>::ImplPtr Network::MessageArrayBuffer<buffBlockSize>::Expansion(int count) const
+template <Network::BuffBlockSize Size>
+typename Network::MessageArrayBuffer<Size>::ImplPtr Network::MessageArrayBuffer<Size>::Expansion(int count) const
 {
     if (count <= GetSize())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("扩容大小小于原容器大小"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("扩容大小小于原容器大小"s))
     }
 
     auto messageVectorBuffer = std::make_shared<MessageVectorBuffer>(count, GetParserStrategy());

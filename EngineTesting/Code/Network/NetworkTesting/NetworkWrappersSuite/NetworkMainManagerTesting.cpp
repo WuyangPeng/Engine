@@ -13,8 +13,19 @@
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Network::NetworkMainManagerTesting::NetworkMainManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, NetworkMainManagerTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NetworkMainManagerTesting)
+
+void Network::NetworkMainManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::NetworkMainManagerTesting::MainTest()
 {

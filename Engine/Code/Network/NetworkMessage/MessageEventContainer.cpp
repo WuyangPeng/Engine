@@ -26,9 +26,11 @@ Network::MessageEventContainer Network::MessageEventContainer::Create()
     return MessageEventContainer{ CoreTools::DisableNotThrow::Disable };
 }
 
-Network::MessageEventContainer::MessageEventContainer(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+Network::MessageEventContainer::MessageEventContainer(CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseFactory::Default }
 {
+    System::UnusedFunction(disableNotThrow);
+
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
@@ -66,9 +68,9 @@ void Network::MessageEventContainer::Insert(const NetworkMessageEventSharedPtr& 
     }
 }
 
-void Network::MessageEventContainer::OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
+void Network::MessageEventContainer::OnEvent(uint64_t socketId, const ConstMessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    return impl->OnEvent(socketID, message);
+    return impl->OnEvent(socketId, message);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 14:20)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:58)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_BUFFER_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_BUFFER_H
@@ -33,7 +33,7 @@ namespace Network
     public:
         MessageBuffer(BuffBlockSize buffBlockSize, int count, ParserStrategy parserStrategy);
         MessageBuffer(BuffBlockSize buffBlockSize, ParserStrategy parserStrategy);
-        MessageBuffer(int count, ParserStrategy parserStrategy); 
+        MessageBuffer(int count, ParserStrategy parserStrategy);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -70,7 +70,7 @@ namespace Network
 
         // 消息长度
         NODISCARD int GetMessageLength() const;
-        bool IsMessageReceiveEnd() const;
+        NODISCARD bool IsMessageReceiveEnd() const;
         void CheckingMessageHeadSize();
         void CheckingMessageContentSize();
 
@@ -89,7 +89,5 @@ namespace Network
     using MessageBufferSharedPtr = MessageBuffer::MessageBufferSharedPtr;
     using ConstMessageBufferSharedPtr = MessageBuffer::ConstMessageBufferSharedPtr;
 }
-
-EXPORT_SHARED_PTR(Network, MessageBuffer, NETWORK_DEFAULT_DECLARE);
 
 #endif  // NETWORK_NETWORK_MESSAGE_MESSAGE_BUFFER_H

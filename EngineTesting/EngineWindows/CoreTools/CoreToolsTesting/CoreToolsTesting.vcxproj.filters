@@ -1944,6 +1944,18 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\RangeIterationTesting.h">
       <Filter>TemplateToolsSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DateTesting.h">
+      <Filter>TimeSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\OStreamSharedTesting.h">
+      <Filter>UnitTestSuiteSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestCompositeTesting.h">
+      <Filter>UnitTestSuiteSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestStreamTesting.h">
+      <Filter>UnitTestSuiteSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
@@ -3178,6 +3190,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\RangeIterationTesting.cpp">
       <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DateTesting.cpp">
+      <Filter>TimeSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\OStreamSharedTesting.cpp">
+      <Filter>UnitTestSuiteSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestCompositeTesting.cpp">
+      <Filter>UnitTestSuiteSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestStreamTesting.cpp">
+      <Filter>UnitTestSuiteSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

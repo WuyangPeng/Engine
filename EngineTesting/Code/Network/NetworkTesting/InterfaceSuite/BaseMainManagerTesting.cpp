@@ -10,11 +10,22 @@
 #include "BaseMainManagerTesting.h"
 #include "SingletonTestingDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Interface/BaseMainManager.h"
+#include <CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h>
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Network::BaseMainManagerTesting::BaseMainManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, BaseMainManager)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BaseMainManagerTesting)
+
+void Network::BaseMainManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::BaseMainManagerTesting::MainTest()
 {

@@ -27,7 +27,7 @@ Network::ClientFactory::ClientFactory() noexcept
 CLASS_INVARIANT_STUB_DEFINE(Network, ClientFactory)
 
 // static
-Network::ClientFactory::ImplTypeSharedPtr Network::ClientFactory::Create(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager)
+Network::ClientFactory::ImplTypeSharedPtr Network::ClientFactory::Create(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager)
 {
     const auto clientStrategyFlag = configurationStrategy.GetClientStrategy();
 

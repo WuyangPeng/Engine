@@ -27,7 +27,7 @@ namespace Network
         using ParentType = ClientImpl;
 
     public:
-        OnlySendingClient(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager);
+        OnlySendingClient(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

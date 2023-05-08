@@ -1,29 +1,28 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 22:36)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 10:22)
 
 #include "Network/NetworkExport.h"
 
 #include "PriorityMessageEventContainer.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 
 #include <algorithm>
 #include <functional>
 
-using std::bind;
-using std::make_shared;
-using std::placeholders::_1;
-
-Network::PriorityMessageEventContainer::PriorityMessageEventContainer(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+Network::PriorityMessageEventContainer::PriorityMessageEventContainer(CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{}, multiMessageEventContainer(System::EnumCastUnderlying(MessageEventPriority::Count))
 {
+    System::UnusedFunction(disableNotThrow);
+
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
@@ -40,23 +39,20 @@ void Network::PriorityMessageEventContainer::Remove(const NetworkMessageEventSha
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    for_each(multiMessageEventContainer.begin(),
-             multiMessageEventContainer.end(),
-             bind(&MultiMessageEventContainerImpl::Remove,
-                  _1,
-                  messageEvent));
+    std::ranges::for_each(multiMessageEventContainer,
+                          [messageEvent](auto& value) noexcept {
+                              value.Remove(messageEvent);
+                          });
 }
 
-void Network::PriorityMessageEventContainer::OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
+void Network::PriorityMessageEventContainer::OnEvent(uint64_t socketId, const ConstMessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    for_each(multiMessageEventContainer.begin(),
-             multiMessageEventContainer.end(),
-             bind(&MultiMessageEventContainerImpl::OnEvent,
-                  _1,
-                  socketID,
-                  message));
+    std::ranges::for_each(multiMessageEventContainer,
+                          [socketId, message](auto& value) {
+                              value.OnEvent(socketId, message);
+                          });
 }
 
 void Network::PriorityMessageEventContainer::Insert(const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
@@ -70,7 +66,7 @@ Network::PriorityMessageEventContainer::ImplPtr Network::PriorityMessageEventCon
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return make_shared<ClassType>(*this);
+    return std::make_shared<ClassType>(*this);
 }
 
 Network::PriorityMessageEventContainer::ImplPtr Network::PriorityMessageEventContainer::CloneToMultiMessage() const
@@ -94,9 +90,11 @@ bool Network::PriorityMessageEventContainer::IsCanInsert() const noexcept
     return true;
 }
 
-bool Network::PriorityMessageEventContainer::IsPrioritySame(MAYBE_UNUSED MessageEventPriority priority) const noexcept
+bool Network::PriorityMessageEventContainer::IsPrioritySame(MessageEventPriority priority) const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(priority);
 
     return true;
 }

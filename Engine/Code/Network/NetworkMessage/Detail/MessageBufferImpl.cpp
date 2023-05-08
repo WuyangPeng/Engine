@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 19:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 11:30)
 
 #include "Network/NetworkExport.h"
 
@@ -22,7 +22,7 @@
 #include "Network/NetworkMessage/MessageInterface.h"
 
 Network::MessageBufferImpl::MessageBufferImpl(ParserStrategy parserStrategy) noexcept
-    : currentReadIndex{ 0 }, currentWriteIndex{ 0 }, m_ReceiveCount{ -1 }, parserStrategy{ parserStrategy }
+    : currentReadIndex{ 0 }, currentWriteIndex{ 0 }, receiveCount{ -1 }, parserStrategy{ parserStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -30,7 +30,7 @@ Network::MessageBufferImpl::MessageBufferImpl(ParserStrategy parserStrategy) noe
 Network::MessageBufferImpl::MessageBufferImpl(const MessageBufferImpl& rhs) noexcept
     : currentReadIndex{ rhs.currentReadIndex.operator int() },
       currentWriteIndex{ rhs.currentWriteIndex.operator int() },
-      m_ReceiveCount{ rhs.m_ReceiveCount.operator int() },
+      receiveCount{ rhs.receiveCount.operator int() },
       parserStrategy{ rhs.parserStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
@@ -39,7 +39,7 @@ Network::MessageBufferImpl::MessageBufferImpl(const MessageBufferImpl& rhs) noex
 Network::MessageBufferImpl::MessageBufferImpl(MessageBufferImpl&& rhs) noexcept
     : currentReadIndex{ rhs.currentReadIndex.operator int() },
       currentWriteIndex{ rhs.currentWriteIndex.operator int() },
-      m_ReceiveCount{ rhs.m_ReceiveCount.operator int() },
+      receiveCount{ rhs.receiveCount.operator int() },
       parserStrategy{ rhs.parserStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
@@ -51,7 +51,7 @@ Network::MessageBufferImpl& Network::MessageBufferImpl::operator=(const MessageB
 
     currentReadIndex = rhs.currentReadIndex.operator int();
     currentWriteIndex = rhs.currentWriteIndex.operator int();
-    m_ReceiveCount = rhs.m_ReceiveCount.operator int();
+    receiveCount = rhs.receiveCount.operator int();
     parserStrategy = rhs.parserStrategy;
 
     return *this;
@@ -63,7 +63,7 @@ Network::MessageBufferImpl& Network::MessageBufferImpl::operator=(MessageBufferI
 
     currentReadIndex = rhs.currentReadIndex.operator int();
     currentWriteIndex = rhs.currentWriteIndex.operator int();
-    m_ReceiveCount = rhs.m_ReceiveCount.operator int();
+    receiveCount = rhs.receiveCount.operator int();
     parserStrategy = rhs.parserStrategy;
 
     return *this;
@@ -112,7 +112,7 @@ void Network::MessageBufferImpl::AddCurrentReadIndex(int stepping)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("增加读索引越界。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("增加读索引越界。"s))
     }
 }
 
@@ -148,7 +148,7 @@ void Network::MessageBufferImpl::AddCurrentWriteIndex(int stepping)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("增加写索引越界。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("增加写索引越界。"s))
     }
 }
 
@@ -196,44 +196,44 @@ int Network::MessageBufferImpl::GetReceiveCount() const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    if (m_ReceiveCount < 0)
+    if (receiveCount < 0)
         return GetRemainingWriteCount();
     else
-        return m_ReceiveCount;
+        return receiveCount;
 }
 
-void Network::MessageBufferImpl::SetReceiveCount(int receiveCount)
+void Network::MessageBufferImpl::SetReceiveCount(int aReceiveCount)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    if (receiveCount == -1)
+    if (aReceiveCount == -1)
     {
-        m_ReceiveCount = receiveCount;
+        receiveCount = aReceiveCount;
     }
-    else if (currentWriteIndex + m_ReceiveCount <= GetSize())
+    else if (currentWriteIndex + receiveCount <= GetSize())
     {
-        m_ReceiveCount = receiveCount;
+        receiveCount = aReceiveCount;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("接收数据越界。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("接收数据越界。"s))
     }
 }
 
-void Network::MessageBufferImpl::DecreaseReceiveCount(int receiveCount)
+void Network::MessageBufferImpl::DecreaseReceiveCount(int aReceiveCount)
 {
-    if (m_ReceiveCount == -1)
+    if (receiveCount == -1)
     {
-        AddCurrentWriteIndex(receiveCount);
+        AddCurrentWriteIndex(aReceiveCount);
     }
-    else if (receiveCount <= m_ReceiveCount)
+    else if (aReceiveCount <= receiveCount)
     {
-        m_ReceiveCount -= receiveCount;
-        AddCurrentWriteIndex(receiveCount);
+        receiveCount -= aReceiveCount;
+        AddCurrentWriteIndex(aReceiveCount);
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("接收数据数量不足。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("接收数据数量不足。"s))
     }
 }
 
@@ -243,9 +243,9 @@ void Network::MessageBufferImpl::ClearCurrentIndex() noexcept
 
     ClearCurrentWriteIndex();
 
-    if (0 < m_ReceiveCount)
+    if (0 < receiveCount)
     {
-        m_ReceiveCount = 0;
+        receiveCount = 0;
     }
 }
 
@@ -272,7 +272,7 @@ int Network::MessageBufferImpl::GetMessageLength() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无法获取数据长度。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("无法获取数据长度。"s))
     }
 }
 
@@ -301,7 +301,7 @@ void Network::MessageBufferImpl::CheckingMessageHeadSize()
 
     if (GetRemainingWriteCount() <= MessageInterface::GetMessageHeadSize())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("接收消息头容量不足！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("接收消息头容量不足！"s))
     }
 }
 
@@ -314,7 +314,7 @@ void Network::MessageBufferImpl::CheckingMessageContentSize()
 
     if (bytesTotal < totalLength)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("接收数据长度不足！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("接收数据长度不足！"s))
     }
 }
 
@@ -342,11 +342,11 @@ void Network::MessageBufferImpl::Read(int itemSize, int itemsNumber, void* data)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    auto numberToCopy = boost::numeric_cast<int>(itemSize * itemsNumber);
+    const auto numberToCopy = boost::numeric_cast<int>(itemSize * itemsNumber);
 
     if (GetRemainingReadCount() < numberToCopy)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("可读取的缓冲区大小不足！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("可读取的缓冲区大小不足！"s))
     }
 
     const auto* const currentReadPtr = GetCurrentReadBufferedPtr();
@@ -372,14 +372,14 @@ void Network::MessageBufferImpl::Write(int itemSize, int itemsNumber, const void
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    auto numberToCopy = boost::numeric_cast<int>(itemSize * itemsNumber);
+    const auto numberToCopy = boost::numeric_cast<int>(itemSize * itemsNumber);
 
     if (GetSize() < numberToCopy)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("可写入的缓冲区大小不足！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("可写入的缓冲区大小不足！"s))
     }
 
-    auto currentWritePtr = GetCurrentWriteBufferedPtr();
+    const auto currentWritePtr = GetCurrentWriteBufferedPtr();
 
     System::MemoryCopy(currentWritePtr, data, numberToCopy);
 
@@ -393,8 +393,8 @@ void Network::MessageBufferImpl::Write(int itemSize, int itemsNumber, const void
 
 bool Network::MessageBufferImpl::IsNeedSwap() const
 {
-    if (CoreTools::Endian::IsLittleEndian() && parserStrategy != ParserStrategy::LittleEndian ||
-        CoreTools::Endian::IsBigEndian() && parserStrategy != ParserStrategy::BigEndian)
+    if ((CoreTools::Endian::IsLittleEndian() && parserStrategy != ParserStrategy::LittleEndian) ||
+        (CoreTools::Endian::IsBigEndian() && parserStrategy != ParserStrategy::BigEndian))
     {
         return true;
     }
@@ -412,7 +412,7 @@ void Network::MessageBufferImpl ::PushBack(const MessageBufferImpl& messageBuffe
 
     if (GetSize() < GetCurrentWriteIndex() + writeIndex)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("缓冲区大小不足！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("缓冲区大小不足！"s))
     }
 
     System::MemoryCopy(GetCurrentWriteBufferedPtr(), messageBuffer.GetInitialBufferedPtr(), writeIndex);

@@ -12,10 +12,11 @@
 
 #include "Network/NetworkDll.h"
 
+#include "CoreTools/MessageEvent/EventInterface.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Interface/NetworkInternalFwd.h"
+#include "Network/NetworkMessage/MessageEventManager.h"
 #include "Network/NetworkMessage/MessageInterface.h"
-#include "Network/NetworkMessage/SocketManager.h"
 
 namespace Network
 {
@@ -27,7 +28,7 @@ namespace Network
         using FactoryType = ServerFactory;
 
     public:
-        ServerImpl(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy) noexcept;
+        ServerImpl(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -38,19 +39,19 @@ namespace Network
         virtual void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) = 0;
 
     protected:
-        NODISCARD SocketManagerSharedPtr GetSocketManagerSharedPtr();
+        NODISCARD MessageEventManagerSharedPtr GetSocketManagerSharedPtr();
 
     private:
         NODISCARD virtual bool WaitForMultipleEvents() = 0;
-        NODISCARD virtual bool HandleConnections(SocketManager& socketManager) = 0;
-        NODISCARD virtual bool HandleData(const SocketManagerSharedPtr& socketManager) = 0;
+        NODISCARD virtual bool HandleConnections(MessageEventManager& socketManager) = 0;
+        NODISCARD virtual bool HandleData(const MessageEventManagerSharedPtr& socketManager) = 0;
         NODISCARD virtual bool ImmediatelySend() = 0;
         NODISCARD virtual bool ImmediatelySend(uint64_t socketID) = 0;
         virtual void ImmediatelyAsyncSend(uint64_t socketID) = 0;
 
     private:
         ConfigurationStrategy configurationStrategy;
-        SocketManagerWeakPtr m_SocketManager;
+        std::weak_ptr<MessageEventManager> m_SocketManager;
     };
 }
 

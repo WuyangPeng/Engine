@@ -10,7 +10,7 @@
 #ifndef NETWORK_TESTING_TESTING_HELPER_H
 #define NETWORK_TESTING_TESTING_HELPER_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
@@ -44,6 +44,9 @@ namespace Network
         void AddNetworkWrappersSuite();
         void AddSocketWrappersSuite();
         void AddOpensslSuite();
+        void AddMessageOrientedMiddlewareSuite();
+        void AddActiveMQSuite();
+        void AddNatsSuite();
 
         NODISCARD CoreTools::Suite GetBoostSockAcceptorSuite();
         NODISCARD CoreTools::Suite GetBoostSockConnectorSuite();

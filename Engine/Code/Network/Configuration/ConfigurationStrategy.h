@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/17 13:39)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/04/28 10:59)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_H
@@ -32,7 +32,7 @@ namespace Network
         NODISCARD static ConfigurationStrategy Create();
 
     private:
-        explicit ConfigurationStrategy(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+        explicit ConfigurationStrategy(CoreTools::DisableNotThrow disableNotThrow);
 
     public:
         ConfigurationStrategy(WrappersStrategy wrappersStrategy,
@@ -45,7 +45,7 @@ namespace Network
                               const ConfigurationSubStrategy& subStrategy,
                               const ConfigurationParameter& configurationParameter,
                               SocketSendMessage socketSendMessage,
-                              const std::string& ip,
+                              const std::string& host,
                               int port);
         ConfigurationStrategy(WrappersStrategy wrappersStrategy,
                               ConnectStrategy connectStrategy,
@@ -57,13 +57,13 @@ namespace Network
                               const ConfigurationSubStrategy& subStrategy,
                               const ConfigurationParameter& configurationParameter,
                               SocketSendMessage socketSendMessage,
-                              const std::string& ip,
+                              const std::string& host,
                               int port);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD WrappersStrategy GetWrappersStrategy() const noexcept;
-        NODISCARD ServerStrategy GetPatternStrategy() const noexcept;
+        NODISCARD ServerStrategy GetServerStrategy() const noexcept;
         NODISCARD MessageStrategy GetMessageStrategy() const noexcept;
         NODISCARD ClientStrategy GetClientStrategy() const noexcept;
         NODISCARD ConnectStrategy GetConnectStrategy() const noexcept;
@@ -77,9 +77,7 @@ namespace Network
 
         NODISCARD ConfigurationParameter GetConfigurationParameter() const noexcept;
 
-        NODISCARD int GetBufferSize() const;
-
-        NODISCARD std::string GetIP() const;
+        NODISCARD std::string GetHost() const;
         NODISCARD int GetPort() const noexcept;
 
     private:

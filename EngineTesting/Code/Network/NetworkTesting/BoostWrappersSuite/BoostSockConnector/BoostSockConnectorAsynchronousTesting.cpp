@@ -16,13 +16,24 @@
 #include "Network/Interface/SockStream.h"
 #include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <thread>
 
 using std::make_shared;
 using std::thread;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockConnectorAsynchronousTesting)
+Network::BoostSockConnectorAsynchronousTesting::BoostSockConnectorAsynchronousTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostSockConnectorAsynchronousTesting)
+
+void Network::BoostSockConnectorAsynchronousTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Network::BoostSockConnectorAsynchronousTesting::MainTest() noexcept
 {
@@ -59,7 +70,7 @@ void Network::BoostSockConnectorAsynchronousTesting::AsynchronousConnectorTest()
     TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(GetMessageID()) };
 
     SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(), configurationStrategy.GetPort(), configurationStrategy) };
+    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetHost(), configurationStrategy.GetPort(), configurationStrategy) };
 
     TestingType sockConnector{ configurationStrategy };
     sockConnector.AsyncConnect(testSocketManager, sockStream, sockAddress);

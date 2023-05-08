@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/17 11:51)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/04/28 09:49)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FACTORY_IMPL_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FACTORY_IMPL_H
 
 #include "Network/NetworkDll.h"
 
-#include "ConfigurationIPPort.h"
+#include "ConfigurationHostPort.h"
 #include "Network/Configuration/ConfigurationFwd.h"
 #include "Network/Configuration/ConfigurationInternalFwd.h"
 #include "Network/Configuration/ConfigurationParameter.h"
@@ -30,7 +30,7 @@ namespace Network
         using FactoryType = ConfigurationStrategyFactory;
 
     public:
-        ConfigurationStrategyImpl() = default;
+        explicit ConfigurationStrategyImpl(CoreTools::DisableNotThrow disableNotThrow);
         ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy,
                                   ConnectStrategy connectStrategy,
                                   ServerStrategy serverStrategy,
@@ -38,10 +38,10 @@ namespace Network
                                   ParserStrategy parserStrategy,
                                   OpenSSLStrategy openSSLStrategy,
                                   EncryptedCompressionStrategy encryptedCompressionStrategy,
-                                  const ConfigurationSubStrategy& subStrategy,
-                                  const ConfigurationParameter& configurationParameter,
+                                  ConfigurationSubStrategy subStrategy,
+                                  ConfigurationParameter configurationParameter,
                                   SocketSendMessage socketSendMessage,
-                                  const std::string& ip,
+                                  const std::string& host,
                                   int port);
         ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy,
                                   ConnectStrategy connectStrategy,
@@ -50,16 +50,16 @@ namespace Network
                                   ParserStrategy parserStrategy,
                                   OpenSSLStrategy openSSLStrategy,
                                   EncryptedCompressionStrategy encryptedCompressionStrategy,
-                                  const ConfigurationSubStrategy& subStrategy,
-                                  const ConfigurationParameter& configurationParameter,
+                                  ConfigurationSubStrategy subStrategy,
+                                  ConfigurationParameter configurationParameter,
                                   SocketSendMessage socketSendMessage,
-                                  const std::string& ip,
+                                  const std::string& host,
                                   int port);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD WrappersStrategy GetWrappersStrategy() const noexcept;
-        NODISCARD ServerStrategy GetPatternStrategy() const noexcept;
+        NODISCARD ServerStrategy GetServerStrategy() const noexcept;
         NODISCARD MessageStrategy GetMessageStrategy() const noexcept;
         NODISCARD ClientStrategy GetClientStrategy() const noexcept;
         NODISCARD ConnectStrategy GetConnectStrategy() const noexcept;
@@ -73,9 +73,7 @@ namespace Network
 
         NODISCARD ConfigurationParameter GetConfigurationParameter() const noexcept;
 
-        NODISCARD int GetBufferSize() const;
-
-        NODISCARD std::string GetIP() const;
+        NODISCARD std::string GetHost() const;
         NODISCARD int GetPort() const noexcept;
 
     private:
@@ -83,13 +81,13 @@ namespace Network
         ServerStrategy patternStrategy{ ServerStrategy::Disable };
         ClientStrategy clientStrategy{ ClientStrategy::Disable };
         MessageStrategy messageStrategy{ MessageStrategy::Default };
-        ConnectStrategy connectStrategy{ ConnectStrategy::TCP };
-        ParserStrategy m_ParserStrategyFlag{ ParserStrategy::LittleEndian };
+        ConnectStrategy connectStrategy{ ConnectStrategy::Tcp };
+        ParserStrategy parserStrategy{ ParserStrategy::LittleEndian };
         OpenSSLStrategy openSSLStrategy{ OpenSSLStrategy::Default };
         EncryptedCompressionStrategy encryptedCompressionStrategy{ EncryptedCompressionStrategy::Default };
         ConfigurationSubStrategy subStrategy{ ConfigurationSubStrategy::Create() };
         SocketSendMessage socketSendMessage{};
-        ConfigurationIPPort configurationIPPort{};
+        ConfigurationHostPort configurationIpPort{};
         ConfigurationParameter configurationParameter{ ConfigurationParameter::Create() };
     };
 }

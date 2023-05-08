@@ -10,17 +10,27 @@
 #include "MultipleMessageContainerTesting.h"
 #include "Flags/MultipleMessageType.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 #include "Network/NetworkMessage/MultipleMessageContainerDetail.h"
-
 using std::make_shared;
 using std::string;
+Network::MultipleMessageContainerTesting::MultipleMessageContainerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MultipleMessageContainerTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MultipleMessageContainerTesting)
+
+void Network::MultipleMessageContainerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 namespace Network
 {
@@ -107,24 +117,26 @@ void Network::MultipleMessageContainerTesting::StreamingTest()
 
     TestingType multipleMessageContainer{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
 
-    const auto streamSize = CORE_TOOLS_STREAM_SIZE(int8Value) +
-                            CORE_TOOLS_STREAM_SIZE(int16Value) +
-                            CORE_TOOLS_STREAM_SIZE(int32Value) +
-                            CORE_TOOLS_STREAM_SIZE(int64Value) +
-                            CORE_TOOLS_STREAM_SIZE(uint8Value) +
-                            CORE_TOOLS_STREAM_SIZE(uint16Value) +
-                            CORE_TOOLS_STREAM_SIZE(uint32Value) +
-                            CORE_TOOLS_STREAM_SIZE(uint64Value) +
-                            CORE_TOOLS_STREAM_SIZE(stringValue);
+    const auto streamSize = CoreTools::GetStreamSize(int8Value) +
+                            CoreTools::GetStreamSize(int16Value) +
+                            CoreTools::GetStreamSize(int32Value) +
+                            CoreTools::GetStreamSize(int64Value) +
+                            CoreTools::GetStreamSize(uint8Value) +
+                            CoreTools::GetStreamSize(uint16Value) +
+                            CoreTools::GetStreamSize(uint32Value) +
+                            CoreTools::GetStreamSize(uint64Value) +
+                            CoreTools::GetStreamSize(stringValue);
 
     ASSERT_EQUAL(multipleMessageContainer.GetStreamingSize(), streamSize);
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTarget messageTarget{ buffer };
+    MessageTarget messageTarget{ *buffer };
+#include STSTEM_WARNING_POP
 
     multipleMessageContainer.Save(messageTarget);
 
-    MessageSource messageSource{ buffer };
+    MessageSource messageSource{ *buffer };
 
     TestingType resultMessageContainer{};
 

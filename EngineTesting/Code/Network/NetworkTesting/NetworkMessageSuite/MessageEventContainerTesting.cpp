@@ -11,15 +11,27 @@
 #include "Detail/TestNetworkMessageEvent.h"
 #include "Detail/TestNullMessage.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 #include "Network/NetworkMessage/MessageEventContainer.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::make_shared;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, MessageEventContainer)
 
-void Network::MessageEventContainerTesting::MainTest() noexcept
+Network::MessageEventContainerTesting::MessageEventContainerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MessageEventContainerTesting)
+
+void Network::MessageEventContainerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
+
+void Network::MessageEventContainerTesting::MainTest()  
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SingleContainerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(PriorityContainerTest);
@@ -30,7 +42,7 @@ void Network::MessageEventContainerTesting::SingleContainerTest()
 {
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent{ make_shared<TestNetworkMessageEvent>() };
 
-    TestingType messageEventContainer = TestingType::Create();
+    MessageEventContainer messageEventContainer = MessageEventContainer::Create();
 
     messageEventContainer.Insert(testNetworkMessageEvent);
 
@@ -53,7 +65,7 @@ void Network::MessageEventContainerTesting::PriorityContainerTest()
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent1{ make_shared<TestNetworkMessageEvent>() };
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent2{ make_shared<TestNetworkMessageEvent>() };
 
-    TestingType messageEventContainer = TestingType::Create();
+    MessageEventContainer messageEventContainer = MessageEventContainer::Create();
 
     messageEventContainer.Insert(testNetworkMessageEvent1);
     messageEventContainer.Insert(testNetworkMessageEvent2, MessageEventPriority::Highest);
@@ -82,7 +94,7 @@ void Network::MessageEventContainerTesting::MultiContainerTest()
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent1{ make_shared<TestNetworkMessageEvent>() };
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent2{ make_shared<TestNetworkMessageEvent>() };
 
-    TestingType messageEventContainer = TestingType::Create();
+    MessageEventContainer messageEventContainer = MessageEventContainer::Create();
 
     messageEventContainer.Insert(testNetworkMessageEvent1);
     messageEventContainer.Insert(testNetworkMessageEvent2);

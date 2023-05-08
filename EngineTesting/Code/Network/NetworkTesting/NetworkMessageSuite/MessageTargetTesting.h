@@ -10,7 +10,7 @@
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_TARGET_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_TARGET_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Network/NetworkMessage/MessageSource.h"
 #include "Network/NetworkMessage/NetworkMessageInternalFwd.h"
 
@@ -22,8 +22,14 @@ namespace Network
     class MessageTargetTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MessageTargetTesting);
+        using ClassType = MessageTargetTesting;
+        using ParentType = UnitTest;
         using TestingType = MessageTarget;
+
+    public:
+        explicit MessageTargetTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

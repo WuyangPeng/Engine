@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 17:59)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 11:42)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_TARGET_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_TARGET_H
@@ -27,7 +27,7 @@ namespace Network
         using ClassShareType = CoreTools::NonCopyClasses;
 
     public:
-        explicit MessageTarget(const MessageBufferSharedPtr& messageBuffer) noexcept;
+        explicit MessageTarget(MessageBuffer& messageBuffer) noexcept;
         ~MessageTarget() noexcept = default;
         MessageTarget(const MessageTarget& rhs) = delete;
         MessageTarget& operator=(const MessageTarget& rhs) = delete;
@@ -42,7 +42,7 @@ namespace Network
         // WithoutNumber表示不写elementsNumber到缓冲区。
 
         // 写入bool值为4字节。
-        void WriteBool(const bool datum);
+        void WriteBool(bool datum);
         void WriteBoolWithNumber(int32_t elementsNumber, const bool* data);
         void WriteBoolWithoutNumber(int32_t elementsNumber, const bool* data);
 
@@ -67,7 +67,7 @@ namespace Network
 
         // 写入枚举值为实际长度。
         template <typename T>
-        void WriteEnum(const T datum);
+        void WriteEnum(T datum);
         template <typename T>
         void WriteEnumWithNumber(int32_t elementsNumber, const T* data);
         template <typename T>
@@ -77,7 +77,7 @@ namespace Network
         NODISCARD int GetBytesWritten() const noexcept;
 
     private:
-        MessageBufferSharedPtr target;
+        MessageBuffer& target;
         ParserStrategy parserStrategy;
     };
 }

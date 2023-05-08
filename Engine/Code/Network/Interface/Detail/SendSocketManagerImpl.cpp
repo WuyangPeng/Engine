@@ -12,7 +12,7 @@
 #include "SendSocketManagerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "Network/NetworkMessage/SocketManager.h"
+#include "Network/NetworkMessage/MessageEventManager.h"
 
 using std::make_shared;
 using std::string;
@@ -51,7 +51,7 @@ Network::SendSocketSharedPtr Network::SendSocketManagerImpl::GetSendSocket(const
     }
 }
 
-Network::SocketManagerSharedPtr Network::SendSocketManagerImpl::GetSocketManager() noexcept
+Network::MessageEventManagerSharedPtr Network::SendSocketManagerImpl::GetSocketManager() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 

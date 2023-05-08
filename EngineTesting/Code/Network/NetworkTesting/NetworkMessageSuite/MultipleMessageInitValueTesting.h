@@ -10,22 +10,28 @@
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MULTIPLE_MESSAGE_INIT_VALUE_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MULTIPLE_MESSAGE_INIT_VALUE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Network
 {
-	class MultipleMessageInitValueTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MultipleMessageInitValueTesting);
+    class MultipleMessageInitValueTesting : public CoreTools::UnitTest
+    {
+    public:
+        using ClassType = MultipleMessageInitValueTesting;
+        using ParentType = UnitTest;
 
-	private:
-		void MainTest();
+    public:
+        explicit MultipleMessageInitValueTesting(const OStreamShared& stream);
 
-		void BaseTest();
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void DoRunUnitTest() override;
-	};
+    private:
+        void MainTest();
+
+        void BaseTest();
+
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MULTIPLE_MESSAGE_INIT_VALUE_TESTING_H
+#endif  // NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MULTIPLE_MESSAGE_INIT_VALUE_TESTING_H

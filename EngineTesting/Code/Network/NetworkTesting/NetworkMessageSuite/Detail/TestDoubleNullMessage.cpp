@@ -10,13 +10,14 @@
 #include "TestDoubleNullMessage.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/Helper/StreamMacro.h"
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 
 Network::TestDoubleNullMessage::TestDoubleNullMessage(int64_t messageID) noexcept
-    : ParentType{ messageID }
+    : ParentType{ MessageHeadStrategy::UseSubId, messageID }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -31,5 +32,5 @@ int Network::TestDoubleNullMessage::GetValue() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return GetMessageID();
+    return GetMessageId();
 }

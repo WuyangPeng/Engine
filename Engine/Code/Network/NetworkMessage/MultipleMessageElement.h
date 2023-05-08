@@ -31,7 +31,7 @@ namespace Network
     {
         using ClassType = MultipleMessageElement<0, MultipleMessageContainer<E, ByteType, Types...>>;
 
-        static constexpr MultipleMessageByteType sm_ByteType = ByteType;
+        static constexpr MultipleMessageByteType byteType = ByteType;
     };
 }
 

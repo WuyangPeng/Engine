@@ -115,6 +115,39 @@
     <Filter Include="HelperSuite 源文件\Detail">
       <UniqueIdentifier>{29216d5c-747f-4961-8122-431632c55146}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MessageOrientedMiddlewareSuite 头文件">
+      <UniqueIdentifier>{180da080-4b4a-4b8f-9423-716f5800a1ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ActiveMQSuite 头文件">
+      <UniqueIdentifier>{36a41568-30aa-4f38-a531-879f7c3d2fdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NatsSuite 头文件">
+      <UniqueIdentifier>{2ef885f3-2d8b-421e-80e4-c8cb4b5cda39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Protobuf">
+      <UniqueIdentifier>{cefec525-eee5-4f22-8849-2a80f2a0de22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Protobuf\proto">
+      <UniqueIdentifier>{4844c2ca-784e-48be-9640-b61c21dcda4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessageSuite 头文件\Detail\Resource">
+      <UniqueIdentifier>{dbc092c8-10ab-4c53-bcc7-d6ddffc348b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessageSuite 头文件\Detail\Resource\Protobuf">
+      <UniqueIdentifier>{04f912c0-463e-4fc3-a93f-ed0bd709c25f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessageSuite 头文件\Detail\Resource\Protobuf\Proto">
+      <UniqueIdentifier>{02bf3da3-af74-4e9c-8646-b919be0c0b5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessageSuite 源文件\Detail\Resource">
+      <UniqueIdentifier>{174630f6-2497-4e88-8620-b4966aabfebe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessageSuite 源文件\Detail\Resource\Protobuf">
+      <UniqueIdentifier>{8f0e7ce2-ba03-4f65-b492-27b23ad63a8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessageSuite 源文件\Detail\Resource\Protobuf\Proto">
+      <UniqueIdentifier>{02e5b915-47d9-4dad-9dee-dad8dadb0132}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\Testing.h">
@@ -468,6 +501,18 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\Detail\TestMessage.h">
       <Filter>HelperSuite 头文件\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\MessageOrientedMiddlewareSuite\MessageOrientedMiddlewareSuite.h">
+      <Filter>MessageOrientedMiddlewareSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ActiveMQSuite\ActiveMQSuite.h">
+      <Filter>ActiveMQSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NatsSuite\NatsSuite.h">
+      <Filter>NatsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\Resource\Protobuf\Proto\Player.pb.h">
+      <Filter>NetworkMessageSuite 头文件\Detail\Resource\Protobuf\Proto</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\TestingHelper.cpp">
@@ -785,6 +830,9 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\Detail\TestMessage.cpp">
       <Filter>HelperSuite 源文件\Detail</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\Resource\Protobuf\Proto\Player.pb.cc">
+      <Filter>NetworkMessageSuite 源文件\Detail\Resource\Protobuf\Proto</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
@@ -842,6 +890,12 @@
     </None>
     <None Include="Configuration\Testing.json">
       <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\Protobuf\GenProtoBuf.bat">
+      <Filter>资源文件\Protobuf</Filter>
+    </None>
+    <None Include="Resource\Protobuf\proto\Player.proto">
+      <Filter>资源文件\Protobuf\proto</Filter>
     </None>
   </ItemGroup>
 </Project>

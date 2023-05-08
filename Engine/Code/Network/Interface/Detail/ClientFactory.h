@@ -13,7 +13,7 @@
 #include "Network/NetworkDll.h"
 
 #include "Network/Interface/NetworkInternalFwd.h"
-#include "Network/NetworkMessage/SocketManager.h"
+#include "Network/NetworkMessage/MessageEventManager.h"
 
 #include <memory>
 
@@ -31,7 +31,7 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD static ImplTypeSharedPtr Create(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager);
+        NODISCARD static ImplTypeSharedPtr Create(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager);
     };
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/18 19:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.7 (2023/05/08 11:37)
 
 #include "Network/NetworkExport.h"
 
@@ -16,8 +16,6 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 
-using std::make_shared;
-
 Network::MessageBufferFactory::MessageBufferFactory() noexcept
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -25,42 +23,41 @@ Network::MessageBufferFactory::MessageBufferFactory() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, MessageBufferFactory)
 
-// static
 Network::MessageBufferFactory::ImplTypePtr Network::MessageBufferFactory::Create(BuffBlockSize buffBlockSize, int count, ParserStrategy parserStrategy)
 {
-    constexpr auto maxCount = (System::EnumCastUnderlying(BuffBlockSize::Size512K) << 2);
-    if (maxCount < count)
+    if (constexpr auto maxCount = (System::EnumCastUnderlying(BuffBlockSize::Size512K) << 2);
+        maxCount < count)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("分配的缓冲区大小过大！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("分配的缓冲区大小过大！"s))
     }
 
     switch (buffBlockSize)
     {
-        case Network::BuffBlockSize::Size256:
+        case BuffBlockSize::Size256:
             return std::make_shared<MessageArrayBuffer<BuffBlockSize::Size256>>(parserStrategy);
-        case Network::BuffBlockSize::Size512:
+        case BuffBlockSize::Size512:
             return std::make_shared<MessageArrayBuffer<BuffBlockSize::Size512>>(parserStrategy);
-        case Network::BuffBlockSize::Size1024:
+        case BuffBlockSize::Size1024:
             return std::make_shared<MessageArrayBuffer<BuffBlockSize::Size1024>>(parserStrategy);
-        case Network::BuffBlockSize::Size2048:
+        case BuffBlockSize::Size2048:
             return std::make_shared<MessageArrayBuffer<BuffBlockSize::Size2048>>(parserStrategy);
-        case Network::BuffBlockSize::Size4096:
+        case BuffBlockSize::Size4096:
             return std::make_shared<MessageArrayBuffer<BuffBlockSize::Size4096>>(parserStrategy);
-        case Network::BuffBlockSize::Size8K:
+        case BuffBlockSize::Size8K:
             return std::make_shared<MessageArrayBuffer<BuffBlockSize::Size8K>>(parserStrategy);
-        case Network::BuffBlockSize::Size16K:
+        case BuffBlockSize::Size16K:
             return std::make_shared<MessageArrayBuffer<BuffBlockSize::Size16K>>(parserStrategy);
-        case Network::BuffBlockSize::Size32K:
+        case BuffBlockSize::Size32K:
             return std::make_shared<MessageArrayBuffer<BuffBlockSize::Size32K>>(parserStrategy);
-        case Network::BuffBlockSize::Size64K:
+        case BuffBlockSize::Size64K:
             return std::make_shared<MessageArrayBuffer<BuffBlockSize::Size64K>>(parserStrategy);
-        case Network::BuffBlockSize::Size128K:
+        case BuffBlockSize::Size128K:
             return std::make_shared<MessageArrayBuffer<BuffBlockSize::Size128K>>(parserStrategy);
-        case Network::BuffBlockSize::Size256K:
+        case BuffBlockSize::Size256K:
             return std::make_shared<MessageArrayBuffer<BuffBlockSize::Size256K>>(parserStrategy);
-        case Network::BuffBlockSize::Size512K:
+        case BuffBlockSize::Size512K:
             return std::make_shared<MessageArrayBuffer<BuffBlockSize::Size512K>>(parserStrategy);
-        case Network::BuffBlockSize::Automatic:
+        case BuffBlockSize::Automatic:
             return std::make_shared<MessageVectorBuffer>(count, parserStrategy);
         default:
             break;
