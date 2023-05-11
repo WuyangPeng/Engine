@@ -76,8 +76,20 @@ echo MinizInclude = %MinizInclude%
 echo  %cd%
 setx  MinizInclude "%cd%\..\miniz"  
 
+echo ProtobufInclude = %ProtobufInclude%
+echo  %cd%
+setx  ProtobufInclude "%cd%\..\protobuf\src"  
+
+echo AbseilInclude = %AbseilInclude%
+echo  %cd%
+setx  AbseilInclude "%cd%\..\protobuf\third_party\abseil-cpp"  
+
+echo ActiveMQInclude = %ActiveMQInclude%
+echo  %cd%
+setx  ActiveMQInclude "%cd%\..\activemq\src\main"  
+
 echo LibsEnvironmentInclude = %LibsEnvironmentInclude%
 echo %cd%
-setx LibsEnvironmentInclude "%GSLInclude%;%BoostInclude%;%StlSoftInclude%;%ACEInclude%;%MysqlInclude%;%MysqlConnectorInclude%;%MysqlConnectorMqsqlxInclude%;%FreeglutInclude%;%VisualLeakDetectorInclude%;%OpenSSLInclude%;%OpenALSoftInclude%;%ZlibInclude%;%FreetypeInclude%;%LuaInclude%;%OpenglInclude%;%OpengEGLlInclude%;%OpenXLSXInclude%;%PugiXmlInclude%;%MinizInclude%" 
+setx LibsEnvironmentInclude "%GSLInclude%;%BoostInclude%;%StlSoftInclude%;%ACEInclude%;%MysqlInclude%;%MysqlConnectorInclude%;%MysqlConnectorMqsqlxInclude%;%FreeglutInclude%;%VisualLeakDetectorInclude%;%OpenSSLInclude%;%OpenALSoftInclude%;%ZlibInclude%;%FreetypeInclude%;%LuaInclude%;%OpenglInclude%;%OpengEGLlInclude%;%OpenXLSXInclude%;%PugiXmlInclude%;%MinizInclude%;%ProtobufInclude%;%AbseilInclude%;%ActiveMQInclude%;" 
 
 pause
