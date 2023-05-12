@@ -1,3 +1,3 @@
-[submodule "Libs1"]
-	path = Libs1
-	url = https://github.com/WuyangPeng/EngineLib.git 
+[submodule "Libs"]
+	path = Libs
+	url = https://github.com/WuyangPeng/EngineLib.git
