@@ -21,7 +21,10 @@ namespace Network
         Boost = 2,
         Beast = 3,
         Network = 4,
-        Null = 5,
+        ActiveMQ = 5,
+        Nats = 6,
+        Kafka = 7,
+        Null = 8,
     };
 
     enum class ConnectStrategy

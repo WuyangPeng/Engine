@@ -1,19 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 14:22)
+///	引擎测试版本：0.9.0.8 (2023/05/15 10:33)
 
 #include "HandleSetIteratorTesting.h"
 #include "SingletonTestingDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Interface/HandleSet.h"
 #include "Network/Interface/HandleSetIterator.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 Network::HandleSetIteratorTesting::HandleSetIteratorTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -82,23 +83,23 @@ void Network::HandleSetIteratorTesting::NullConstructionTest()
 void Network::HandleSetIteratorTesting::ACEOperatorTest()
 {
     HandleSetIterator handleSetIterator{ GetACEServerConfigurationStrategy(), HandleSet(GetACEServerConfigurationStrategy()) };
-    MAYBE_UNUSED auto value = handleSetIterator.operator()();
+    MAYBE_UNUSED const auto result = handleSetIterator.operator()();
 }
 
 void Network::HandleSetIteratorTesting::BoostOperatorExceptionTest()
 {
     HandleSetIterator handleSetIterator{ GetBoostServerConfigurationStrategy(), HandleSet(GetBoostServerConfigurationStrategy()) };
-    MAYBE_UNUSED auto value = handleSetIterator.operator()();
+    MAYBE_UNUSED const auto result = handleSetIterator.operator()();
 }
 
 void Network::HandleSetIteratorTesting::NetworkOperatorExceptionTest()
 {
     HandleSetIterator handleSetIterator{ GetNetworkServerConfigurationStrategy(), HandleSet(GetNetworkServerConfigurationStrategy()) };
-    MAYBE_UNUSED auto value = handleSetIterator.operator()();
+    MAYBE_UNUSED const auto result = handleSetIterator.operator()();
 }
 
 void Network::HandleSetIteratorTesting::NullOperatorExceptionTest()
 {
     HandleSetIterator handleSetIterator{ GetNullServerConfigurationStrategy(), HandleSet(GetNullServerConfigurationStrategy()) };
-    MAYBE_UNUSED auto value = handleSetIterator.operator()();
+    MAYBE_UNUSED const auto result = handleSetIterator.operator()();
 }

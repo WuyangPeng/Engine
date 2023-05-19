@@ -27,3 +27,4 @@ Network
    9.	消息中间件：封装了消息中间件的实现。  
    10.	ActiveMQ：封装了ActiveMQ的实现。  
    11.	Nats：封装了Nats的实现。  
+   12.	Kafka：封装了Kafka的实现。 

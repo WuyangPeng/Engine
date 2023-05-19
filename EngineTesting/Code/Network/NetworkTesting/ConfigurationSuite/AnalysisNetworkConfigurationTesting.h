@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 15:35)
+///	引擎测试版本：0.9.0.8 (2023/05/11 10:56)
 
 #ifndef NETWORK_TESTING_CONFIGURATION_SUITE_ANALYSIS_NETWORK_CONFIGURATION_TESTING_H
 #define NETWORK_TESTING_CONFIGURATION_SUITE_ANALYSIS_NETWORK_CONFIGURATION_TESTING_H
@@ -20,13 +20,12 @@ namespace Network
     public:
         using ClassType = AnalysisNetworkConfigurationTesting;
         using ParentType = UnitTest;
+        using TestingType = AnalysisNetworkConfiguration;
 
     public:
         explicit AnalysisNetworkConfigurationTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
-
-        using TestingType = AnalysisNetworkConfiguration;
 
     private:
         void MainTest();

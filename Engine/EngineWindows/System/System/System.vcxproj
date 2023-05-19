@@ -429,6 +429,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaMessageMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ACE.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\ActiveMQ.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Algorithm.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Any.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\AsioConnect.h" />
@@ -513,6 +514,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4101.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4239.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4244.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4458.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4505.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4996.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6001.h" />

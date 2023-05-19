@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助测试版本：0.9.0.4 (2023/03/14 15:51)
+///	引擎辅助测试版本：0.9.0.8 (2023/05/10 18:23)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -13,7 +13,7 @@
 #include "Example/System/SystemExample/Helper/SystemExampleClassInvariantMacro.h"
 
 CoreToolsExample::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "核心工具·例子" }
+    : ParentType{ argc, argv, "网络·例子" }
 {
     InitSuite();
 

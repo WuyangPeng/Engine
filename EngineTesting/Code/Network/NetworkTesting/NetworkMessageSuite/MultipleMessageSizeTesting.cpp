@@ -1,24 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 10:52)
+///	引擎测试版本：0.9.0.8 (2023/05/12 09:21)
 
 #include "MultipleMessageSizeTesting.h"
 #include "Flags/MultipleMessageType.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
 #include "Network/NetworkMessage/MultipleMessageCast.h"
 #include "Network/NetworkMessage/MultipleMessageContainer.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <string>
 
-using std::is_same_v;
-using std::string;
+#include <string>
 
 Network::MultipleMessageSizeTesting::MultipleMessageSizeTesting(const OStreamShared& stream)
     : ParentType{ stream }

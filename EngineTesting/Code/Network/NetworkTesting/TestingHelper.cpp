@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.7 (2023/04/27 14:32)
+///	引擎测试版本：0.9.0.8 (2023/05/11 09:26)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -33,12 +33,11 @@ Network::TestingHelper::~TestingHelper() noexcept
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 
-    NoexceptNoReturn(*this, &ClassType::DestroySingleton);
+    NoexceptNoReturn(*this, &ClassType::ReleaseSingleton);
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, TestingHelper)
 
-// private
 void Network::TestingHelper::CreateSingleton()
 {
     MessageManager::Create();
@@ -47,8 +46,7 @@ void Network::TestingHelper::CreateSingleton()
     CoreTools::InitTerm::ExecuteInitializer();
 }
 
-// private
-void Network::TestingHelper::DestroySingleton()
+void Network::TestingHelper::ReleaseSingleton()
 {
     CoreTools::InitTerm::ExecuteTerminator();
     MessageManager::Destroy();
@@ -63,11 +61,11 @@ void Network::TestingHelper::InitSuite()
     AddACEWrappersSuite();
     AddBoostWrappersSuite();
     AddNetworkWrappersSuite();
-    AddSocketWrappersSuite();
     AddOpensslSuite();
     AddMessageOrientedMiddlewareSuite();
     AddActiveMQSuite();
     AddNatsSuite();
+    AddKafkaSuite();
 }
 
 void Network::TestingHelper::AddHelperSuite()
@@ -97,9 +95,10 @@ void Network::TestingHelper::AddNetworkMessageSuite()
     auto networkMessageSuite = GenerateSuite("网络消息");
 
     ADD_TEST(networkMessageSuite, MessageInterfaceTesting);
-    ADD_TEST(networkMessageSuite, DoubleMessageTesting);
     ADD_TEST(networkMessageSuite, NullMessageTesting);
     ADD_TEST(networkMessageSuite, NullDoubleMessageTesting);
+    ADD_TEST(networkMessageSuite, ProtoBufMessageTesting);
+    ADD_TEST(networkMessageSuite, JsonMessageTesting);
     ADD_TEST(networkMessageSuite, MessageContainerTesting);
     ADD_TEST(networkMessageSuite, IntegerMessageTesting);
     ADD_TEST(networkMessageSuite, StringMessageTesting);
@@ -112,9 +111,6 @@ void Network::TestingHelper::AddNetworkMessageSuite()
     ADD_TEST(networkMessageSuite, MultipleMessageStreamingLoadTesting);
     ADD_TEST(networkMessageSuite, MultipleMessageContainerTesting);
     ADD_TEST(networkMessageSuite, MultipleMessageTesting);
-    ADD_TEST(networkMessageSuite, IntegerDoubleMessageTesting);
-    ADD_TEST(networkMessageSuite, StringDoubleMessageTesting);
-    ADD_TEST(networkMessageSuite, MultipleDoubleMessageTesting);
     ADD_TEST(networkMessageSuite, MessageContainerGroupTesting);
     ADD_TEST(networkMessageSuite, MultipleMessageContainerGroupTesting);
     ADD_TEST(networkMessageSuite, MessageInterfaceSharedPtrLessTesting);
@@ -131,19 +127,16 @@ void Network::TestingHelper::AddNetworkMessageSuite()
     ADD_TEST(networkMessageSuite, MessageTargetTesting);
     ADD_TEST(networkMessageSuite, BufferReceiveStreamTesting);
     ADD_TEST(networkMessageSuite, BufferSendStreamTesting);
-    ADD_TEST(networkMessageSuite, SocketManagerTesting);
 
     AddSuite(networkMessageSuite);
 }
 
-// private
 void Network::TestingHelper::AddInterfaceSuite()
 {
     auto interfaceSuite = GenerateSuite("网络接口");
 
     ADD_TEST(interfaceSuite, BaseMainManagerTesting);
     ADD_TEST(interfaceSuite, SockAddressTesting);
-    ADD_TEST(interfaceSuite, NetworkUniqueIDManagerTesting);
     ADD_TEST(interfaceSuite, SockAcceptorTesting);
     ADD_TEST(interfaceSuite, SockConnectorTesting);
     ADD_TEST(interfaceSuite, SockStreamTesting);
@@ -164,7 +157,7 @@ void Network::TestingHelper::AddACEWrappersSuite()
     auto aCEWrappersSuite = GenerateSuite("ACE包装器");
 
     ADD_TEST(aCEWrappersSuite, ACEMainManagerTesting);
-    ADD_TEST(aCEWrappersSuite, ACESockInetAddressTesting);
+    ADD_TEST(aCEWrappersSuite, ACESockInternetAddressTesting);
     ADD_TEST(aCEWrappersSuite, ACESockAcceptorTesting);
     ADD_TEST(aCEWrappersSuite, ACESockConnectorTesting);
     ADD_TEST(aCEWrappersSuite, ACESockStreamTesting);
@@ -182,7 +175,7 @@ void Network::TestingHelper::AddBoostWrappersSuite()
     ADD_TEST(boostWrappersSuite, BoostMainManagerTesting);
     ADD_TEST(boostWrappersSuite, BoostMainManagerUseThreadsTesting);
     ADD_TEST(boostWrappersSuite, BoostMainManagerUseMultiContextTesting);
-    ADD_TEST(boostWrappersSuite, BoostSockInetAddressTesting);
+    ADD_TEST(boostWrappersSuite, BoostSockInternetAddressTesting);
     boostWrappersSuite.AddSuite(GetBoostSockAcceptorSuite());
     boostWrappersSuite.AddSuite(GetBoostSockConnectorSuite());
     boostWrappersSuite.AddSuite(GetBoostSockStreamSuite());
@@ -233,19 +226,12 @@ void Network::TestingHelper::AddNetworkWrappersSuite()
     auto networkWrappersSuite = GenerateSuite("Network包装器");
 
     ADD_TEST(networkWrappersSuite, NetworkMainManagerTesting);
-    ADD_TEST(networkWrappersSuite, NetworkSockInetAddressTesting);
+    ADD_TEST(networkWrappersSuite, NetworkSockInternetAddressTesting);
     ADD_TEST(networkWrappersSuite, NetworkSockAcceptorTesting);
     ADD_TEST(networkWrappersSuite, NetworkSockConnectorTesting);
     ADD_TEST(networkWrappersSuite, NetworkSockStreamTesting);
 
     AddSuite(networkWrappersSuite);
-}
-
-void Network::TestingHelper::AddSocketWrappersSuite()
-{
-    auto socketWrappersSuite = GenerateSuite("socket包装器");
-
-    AddSuite(socketWrappersSuite);
 }
 
 void Network::TestingHelper::AddOpensslSuite()
@@ -259,12 +245,22 @@ void Network::TestingHelper::AddMessageOrientedMiddlewareSuite()
 {
     auto messageOrientedMiddlewareSuite = GenerateSuite("消息中间件");
 
+    ADD_TEST(messageOrientedMiddlewareSuite, ConsumerTesting);
+    ADD_TEST(messageOrientedMiddlewareSuite, ProducerTesting);
+    ADD_TEST(messageOrientedMiddlewareSuite, RouteServiceManagerTesting);
+    ADD_TEST(messageOrientedMiddlewareSuite, RouteServiceTesting);
+
     AddSuite(messageOrientedMiddlewareSuite);
 }
 
 void Network::TestingHelper::AddActiveMQSuite()
 {
     auto activeMQSuite = GenerateSuite("Active MQ");
+
+    ADD_TEST(activeMQSuite, ActiveMQConsumerTesting);
+    ADD_TEST(activeMQSuite, ActiveMQProducerTesting);
+    ADD_TEST(activeMQSuite, ActiveMQRouteServiceManagerTesting);
+    ADD_TEST(activeMQSuite, ActiveMQRouteServiceTesting);
 
     AddSuite(activeMQSuite);
 }
@@ -274,4 +270,11 @@ void Network::TestingHelper::AddNatsSuite()
     auto natsSuite = GenerateSuite("Nats");
 
     AddSuite(natsSuite);
+}
+
+void Network::TestingHelper::AddKafkaSuite()
+{
+    auto kafkaSuite = GenerateSuite("Kafka");
+
+    AddSuite(kafkaSuite);
 }

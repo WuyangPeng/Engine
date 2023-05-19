@@ -182,7 +182,10 @@ xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../../$(Platform)/$(Con
 xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -212,7 +215,10 @@ xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../../$(Platform)/$(Con
 xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -240,7 +246,10 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Plat
 xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -271,7 +280,10 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Plat
 xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -298,7 +310,10 @@ xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../../$(Platform)/$(Confi
 xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -328,7 +343,10 @@ xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../../$(Platform)/$(Confi
 xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -356,7 +374,10 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Plat
 xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -387,7 +408,10 @@ xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Plat
 xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y

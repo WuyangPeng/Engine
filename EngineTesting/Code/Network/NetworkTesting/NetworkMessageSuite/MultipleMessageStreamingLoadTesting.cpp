@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 10:59)
+///	引擎测试版本：0.9.0.8 (2023/05/12 09:24)
 
 #include "MultipleMessageStreamingLoadTesting.h"
 #include "Flags/MultipleMessageType.h"
@@ -18,10 +18,8 @@
 #include "Network/NetworkMessage/MultipleMessageCast.h"
 #include "Network/NetworkMessage/MultipleMessageContainerDetail.h"
 #include "Network/NetworkMessage/MultipleMessageStreamingLoadDetail.h"
-#include <string>
 
-using std::make_shared;
-using std::string;
+#include <string>
 
 namespace Network
 {
@@ -69,20 +67,19 @@ void Network::MultipleMessageStreamingLoadTesting::BaseTest()
     constexpr uint32_t uint32Value{ 224 };
     constexpr uint64_t uint64Value{ 156 };
 
-    const string stringValue{ "string" };
+    const std::string stringValue{ "string" };
 
-    MultipleMessageType multipleMessageContainer{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-#include STSTEM_WARNING_POP
-    MessageTarget messageTarget{ *buffer };
+    const MultipleMessageType multipleMessageContainer{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
+
+    MessageBuffer buffer{ BuffBlockSize::Size256, ParserStrategy::LittleEndian };
+
+    MessageTarget messageTarget{ buffer };
 
     multipleMessageContainer.Save(messageTarget);
 
-    MessageSource messageSource{ *buffer };
+    MessageSource messageSource{ buffer };
 
-    TestingType multipleMessageStreamingLoad{};
+    const TestingType multipleMessageStreamingLoad{};
 
     MultipleMessageType resultMultipleMessageContainer{};
 

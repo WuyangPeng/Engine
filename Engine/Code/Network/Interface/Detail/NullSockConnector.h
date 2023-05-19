@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 14:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:26)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NULL_SOCK_CONNECTOR_H
 #define NETWORK_NETWORK_INTERFACE_NULL_SOCK_CONNECTOR_H
@@ -27,10 +27,10 @@ namespace Network
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept final;
-        void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) final;
+        NODISCARD bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept override;
+        void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-        NODISCARD SockConnectorSharedPtr Clone() const final;
+        NODISCARD SockConnectorSharedPtr Clone() const override;
     };
 }
 

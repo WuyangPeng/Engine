@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/21 16:55)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:13)
 
 #include "Network/NetworkExport.h"
 
@@ -19,9 +19,6 @@
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkWrappers/Detail/Acceptor/NetworkSockAcceptor.h"
 
-using std::make_shared;
-using std::string;
-
 Network::SockAcceptorFactory::SockAcceptorFactory() noexcept
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -29,43 +26,42 @@ Network::SockAcceptorFactory::SockAcceptorFactory() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, SockAcceptorFactory)
 
-// static
 Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Create(int port, const ConfigurationStrategy& configurationStrategy)
 {
-    const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
-
-    switch (wrappersStrategyFlag)
+    switch (const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+            wrappersStrategy)
     {
 #ifdef NETWORK_USE_ACE
+
         case WrappersStrategy::Ace:
-            return make_shared<ACESockAcceptor>(port);
+            return std::make_shared<ACESockAcceptor>(port);
+
 #endif  // NETWORK_USE_ACE
 
         case WrappersStrategy::Boost:
-            return make_shared<BoostSockAcceptor>(port);
+            return std::make_shared<BoostSockAcceptor>(port);
 
         case WrappersStrategy::Network:
-            return make_shared<NetworkSockAcceptor>(port);
+            return std::make_shared<NetworkSockAcceptor>(port);
 
         case WrappersStrategy::Null:
-            return make_shared<NullSockAcceptor>();
+            return std::make_shared<NullSockAcceptor>();
 
-        case WrappersStrategy::Default:
         default:
-            return make_shared<BoostSockAcceptor>(port);
+            return std::make_shared<BoostSockAcceptor>(port);
     }
 }
 
-// static
-Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Create(const string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
+Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Create(const std::string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
 {
-    const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
-
-    switch (wrappersStrategyFlag)
+    switch (const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+            wrappersStrategy)
     {
 #ifdef NETWORK_USE_ACE
+
         case WrappersStrategy::Ace:
             return make_shared<ACESockAcceptor>(hostName, port);
+
 #endif  // NETWORK_USE_ACE
 
         case WrappersStrategy::Boost:
@@ -75,9 +71,8 @@ Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Cr
             return make_shared<NetworkSockAcceptor>(hostName, port);
 
         case WrappersStrategy::Null:
-            return make_shared<NullSockAcceptor>();
+            return std::make_shared<NullSockAcceptor>();
 
-        case WrappersStrategy::Default:
         default:
             return make_shared<BoostSockAcceptor>(hostName, port);
     }
@@ -85,20 +80,21 @@ Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Cr
 
 Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Create(const ConfigurationStrategy& configurationStrategy)
 {
-    const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
-
-    switch (wrappersStrategyFlag)
+    switch (const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+            wrappersStrategy)
     {
 #ifdef NETWORK_USE_ACE
+
         case WrappersStrategy::Ace:
             return make_shared<ACESockAcceptor>(configurationStrategy.GetHost(), configurationStrategy.GetPort());
+
 #endif  // NETWORK_USE_ACE
 
         case WrappersStrategy::Boost:
         {
             if (configurationStrategy.GetHost().empty())
             {
-                return make_shared<BoostSockAcceptor>(configurationStrategy.GetPort());
+                return std::make_shared<BoostSockAcceptor>(configurationStrategy.GetPort());
             }
             else
             {
@@ -109,9 +105,8 @@ Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Cr
             return make_shared<NetworkSockAcceptor>(configurationStrategy.GetHost(), configurationStrategy.GetPort());
 
         case WrappersStrategy::Null:
-            return make_shared<NullSockAcceptor>();
+            return std::make_shared<NullSockAcceptor>();
 
-        case WrappersStrategy::Default:
         default:
             return make_shared<BoostSockAcceptor>(configurationStrategy.GetHost(), configurationStrategy.GetPort());
     }

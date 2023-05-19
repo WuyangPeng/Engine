@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 15:36)
+///	引擎测试版本：0.9.0.8 (2023/05/11 10:53)
 
 #include "ConfigurationParameterTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/Configuration/ConfigurationParameter.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Network/Configuration/ConfigurationParameter.h"
+
 Network::ConfigurationParameterTesting::ConfigurationParameterTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -32,13 +33,15 @@ void Network::ConfigurationParameterTesting::MainTest()
 
 void Network::ConfigurationParameterTesting::ParameterTest()
 {
-    ConfigurationParameter configurationParameter = ConfigurationParameter::Create();
+    auto configurationParameter = ConfigurationParameter::Create();
 
-    configurationParameter.AddParameter(SYSTEM_TEXT("PlatformID"), SYSTEM_TEXT("3"));
+    configurationParameter.AddParameter(SYSTEM_TEXT("PlatformId"), SYSTEM_TEXT("3"));
 
-    auto parameter = configurationParameter.GetParameter(SYSTEM_TEXT("PlatformID"));
+    const auto parameter = configurationParameter.GetParameter(SYSTEM_TEXT("PlatformId"));
 
     ASSERT_UNEQUAL(parameter.find(SYSTEM_TEXT("3")), parameter.end());
 
-    ASSERT_TRUE(configurationParameter.IsParameterExist(SYSTEM_TEXT("PlatformID"), SYSTEM_TEXT("3")));
+    ASSERT_TRUE(configurationParameter.IsParameterExist(SYSTEM_TEXT("PlatformId"), SYSTEM_TEXT("3")));
+
+    ASSERT_EQUAL(configurationParameter.GetFirstParameter(SYSTEM_TEXT("PlatformId")), SYSTEM_TEXT("3"));
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 10:43)
+///	引擎版本：0.9.0.8 (2023/05/15 14:04)
 
 #include "Network/NetworkExport.h"
 
@@ -20,7 +20,7 @@
     }
 
 Network::MessageEventManagerImpl::MessageEventManagerImpl(CoreTools::DisableNotThrow disableNotThrow)
-    : idEventContainer{}, describeEventContainer{}, mutex{ std::make_unique<CoreTools::Mutex>(CoreTools::MutexCreate::UseStdRecursive) }
+    : idEventContainer{}, describeEventContainer{}, mutex{ std::make_unique<CoreTools::Mutex>(CoreTools::MutexCreate::UseStdRecursive) }, event{}
 {
     System::UnusedFunction(disableNotThrow);
 
@@ -28,7 +28,7 @@ Network::MessageEventManagerImpl::MessageEventManagerImpl(CoreTools::DisableNotT
 }
 
 Network::MessageEventManagerImpl::MessageEventManagerImpl(const MessageEventManagerImpl& rhs)
-    : idEventContainer{ rhs.idEventContainer }, describeEventContainer{ rhs.describeEventContainer }, mutex{ std::make_unique<CoreTools::Mutex>(CoreTools::MutexCreate::UseStdRecursive) }
+    : idEventContainer{ rhs.idEventContainer }, describeEventContainer{ rhs.describeEventContainer }, mutex{ std::make_unique<CoreTools::Mutex>(CoreTools::MutexCreate::UseStdRecursive) }, event{ rhs.event }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -43,13 +43,14 @@ Network::MessageEventManagerImpl& Network::MessageEventManagerImpl::operator=(co
     {
         idEventContainer = rhs.idEventContainer;
         describeEventContainer = rhs.describeEventContainer;
+        event = rhs.event;
     }
 
     return *this;
 }
 
 Network::MessageEventManagerImpl::MessageEventManagerImpl(MessageEventManagerImpl&& rhs) noexcept
-    : idEventContainer{ std::move(rhs.idEventContainer) }, describeEventContainer{ std::move(rhs.describeEventContainer) }, mutex{ std::move(rhs.mutex) }
+    : idEventContainer{ std::move(rhs.idEventContainer) }, describeEventContainer{ std::move(rhs.describeEventContainer) }, mutex{ std::move(rhs.mutex) }, event{ std::move(rhs.event) }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -62,6 +63,7 @@ Network::MessageEventManagerImpl& Network::MessageEventManagerImpl::operator=(Me
     {
         idEventContainer = std::move(rhs.idEventContainer);
         describeEventContainer = std::move(rhs.describeEventContainer);
+        event = std::move(event);
     }
 
     return *this;
@@ -191,4 +193,22 @@ void Network::MessageEventManagerImpl::OnEvent(int64_t socketId, const std::stri
     {
         iter->second.OnEvent(socketId, message);
     }
+}
+
+void Network::MessageEventManagerImpl::SetCallbackEvent(const EventInterfaceSharedPtr& aEvent)
+{
+    MUTEX_ENTER_MEMBER;
+
+    NETWORK_CLASS_IS_VALID_9;
+
+    event = aEvent;
+}
+
+Network::MessageEventManagerImpl ::EventInterfaceSharedPtr Network::MessageEventManagerImpl::GetCallbackEvent()
+{
+    MUTEX_ENTER_MEMBER;
+
+    NETWORK_CLASS_IS_VALID_9;
+
+    return event.lock();
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 17:02)
+///	引擎测试版本：0.9.0.8 (2023/05/18 10:37)
 
 #ifndef NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SOCK_TESTING_H
 #define NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SOCK_TESTING_H
@@ -22,7 +22,7 @@ namespace Network
         using ParentType = SingletonTesting;
 
     public:
-        explicit BoostSockTesting(const OStreamShared& stream);
+        explicit BoostSockTesting(const OStreamShared& stream, int increase = 2500);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -34,13 +34,13 @@ namespace Network
         void ClearOffset() noexcept;
         NODISCARD int GetOffset() const noexcept;
         NODISCARD int GetIncrease() const noexcept;
-        NODISCARD int GetMessageID() const noexcept;
+        NODISCARD int GetMessageId() const noexcept;
         NODISCARD int GetRealOffset() const noexcept;
         NODISCARD int GetRealPort() const noexcept;
 
     private:
         int increase;
-        int messageID;
+        int messageId;
         int offset;
     };
 }

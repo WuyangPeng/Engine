@@ -54,6 +54,20 @@
 
     #endif  // NETWORK_USE_OPENSSL
 
+    #ifdef NETWORK_USE_ACTIVE_MQ
+
+        #ifdef _DEBUG
+
+            #pragma comment(lib, "activemq-cppd.lib")
+
+        #else  // !_DEBUG
+
+            #pragma comment(lib, "activemq-cpp.lib")
+
+        #endif  // _DEBUG
+
+    #endif  // NETWORK_USE_ACTIVE_MQ
+
 #endif  // TCRE_USE_MSVC
 
 #endif  // NETWORK_DLL_LIB_H

@@ -30,7 +30,7 @@ namespace CoreTools
         void MainTest();
 
         void IsValidTest() noexcept(!gOpenClassInvariant);
-        void CloseSystemMaxTest();
+        void CloseCoreToolsMaxTest();
         void MacroExistTest() noexcept(!gOpenClassInvariant);
     };
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 18:21)
+///	引擎测试版本：0.9.0.8 (2023/05/12 14:04)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_BUFFER_RECEIVE_STREAM_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_BUFFER_RECEIVE_STREAM_TESTING_H
@@ -16,7 +16,7 @@
 
 namespace Network
 {
-    class BufferReceiveStreamTesting : public CoreTools::UnitTest
+    class BufferReceiveStreamTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = BufferReceiveStreamTesting;
@@ -37,17 +37,17 @@ namespace Network
         void CopyUnFinishReceiveTest(int aTestLoopCount, ParserStrategy parserStrategy);
 
         NODISCARD MessageBufferSharedPtr CreateAddMessageBuffer(ParserStrategy parserStrategy) const;
-        NODISCARD MessageBufferSharedPtr CreateSendMessageBuffer(int aTestLoopCount, ParserStrategy parserStrategy) const;
+        NODISCARD MessageBufferSharedPtr CreateSendMessageBuffer(int aTestLoopCount, ParserStrategy parserStrategy);
         void AddBufferLength(MessageBuffer& messageBuffer);
 
         void DoRunUnitTest() override;
 
     private:
-        static constexpr int64_t messageID{ 6 };
+        static constexpr auto messageId = 6LL;
         static constexpr auto bufferSize = 1024;
 
         TestNullMessageSharedPtr testMessage;
-        uint64_t socketID;
+        int64_t socketId;
     };
 }
 

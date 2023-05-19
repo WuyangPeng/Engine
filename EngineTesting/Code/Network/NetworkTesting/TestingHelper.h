@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 16:35)
+///	引擎测试版本：0.9.0.8 (2023/05/11 09:26)
 
 #ifndef NETWORK_TESTING_TESTING_HELPER_H
 #define NETWORK_TESTING_TESTING_HELPER_H
@@ -16,7 +16,7 @@
 
 namespace Network
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
     public:
         using ClassType = TestingHelper;
@@ -41,19 +41,19 @@ namespace Network
         void AddInterfaceSuite();
         void AddACEWrappersSuite();
         void AddBoostWrappersSuite();
-        void AddNetworkWrappersSuite();
-        void AddSocketWrappersSuite();
+        void AddNetworkWrappersSuite(); 
         void AddOpensslSuite();
         void AddMessageOrientedMiddlewareSuite();
         void AddActiveMQSuite();
         void AddNatsSuite();
+        void AddKafkaSuite();
 
         NODISCARD CoreTools::Suite GetBoostSockAcceptorSuite();
         NODISCARD CoreTools::Suite GetBoostSockConnectorSuite();
         NODISCARD CoreTools::Suite GetBoostSockStreamSuite();
 
         void CreateSingleton();
-        void DestroySingleton();
+        void ReleaseSingleton();
     };
 }
 

@@ -13,9 +13,10 @@
 
   "networkMessageSuite": {
     "MessageInterfaceTesting": 1,
-    "DoubleMessageTesting": 1,
     "NullMessageTesting": 1,
     "NullDoubleMessageTesting": 1,
+    "ProtoBufMessageTesting": 1,
+    "JsonMessageTesting": 1,
     "MessageContainerTesting": 1,
     "IntegerMessageTesting": 1,
     "StringMessageTesting": 1,
@@ -28,9 +29,6 @@
     "MultipleMessageStreamingLoadTesting": 1,
     "MultipleMessageContainerTesting": 1,
     "MultipleMessageTesting": 1,
-    "IntegerDoubleMessageTesting": 1,
-    "StringDoubleMessageTesting": 1,
-    "MultipleDoubleMessageTesting": 1,
     "MessageContainerGroupTesting": 1,
     "MultipleMessageContainerGroupTesting": 1,
     "MessageInterfaceSharedPtrLessTesting": 1,
@@ -45,35 +43,33 @@
     "MessageBufferTesting": 158,
     "MessageSourceTesting": 1,
     "MessageTargetTesting": 1,
-    "BufferReceiveStreamTesting": 0,
-    "BufferSendStreamTesting": 153,
-    "SocketManagerTesting": 0
+    "BufferReceiveStreamTesting": 35,
+    "BufferSendStreamTesting": 153
   },
 
   "interfaceSuite": {
     "BaseMainManagerTesting": 1,
     "SockAddressTesting": 1,
-    "NetworkUniqueIDManagerTesting": 1,
     "SockAcceptorTesting": 1,
     "SockConnectorTesting": 1,
     "SockStreamTesting": 1,
     "HandleSetTesting": 1,
     "HandleSetIteratorTesting": 1,
     "ClientTesting": 1,
-    "CacheClientTesting": 0,
-    "OnlySendingClientTesting": 0,
+    "CacheClientTesting": 10,
+    "OnlySendingClientTesting": 10,
     "ServerTesting": 1,
-    "IterativeServerTesting": 0,
-    "ReactiveServerTesting": 0
+    "IterativeServerTesting": 10,
+    "ReactiveServerTesting": 10
   },
 
   "aCEWrappersSuite": {
     "ACEMainManagerTesting": 1,
-    "ACESockInetAddressTesting": 1,
+    "ACESockInternetAddressTesting": 1,
     "ACESockAcceptorTesting": 1,
     "ACESockConnectorTesting": 1,
-    "ACESockStreamTesting": 0,
-    "ACEIovecSockStreamTesting": 0,
+    "ACESockStreamTesting": 10,
+    "ACEIovecSockStreamTesting": 10,
     "SockACEHandleSetTesting": 1,
     "SockACEHandleSetIteratorTesting": 1
   },
@@ -82,36 +78,35 @@
     "BoostMainManagerTesting": 100,
     "BoostMainManagerUseThreadsTesting": 100,
     "BoostMainManagerUseMultiContextTesting": 100,
-    "BoostSockInetAddressTesting": 0,
-    "BoostSockConnectorTesting": 1
+    "BoostSockInternetAddressTesting": 1
   },
 
   "boostSockAcceptorSuite": {
-    "BoostSockAcceptorSynchronizeTesting": 0,
-    "BoostSockAcceptorNonBlockingTesting": 0,
-    "BoostSockAcceptorAsynchronousTesting": 0,
-    "BoostSockAcceptorHandleTesting": 0
+    "BoostSockAcceptorSynchronizeTesting": 1,
+    "BoostSockAcceptorNonBlockingTesting": 1,
+    "BoostSockAcceptorAsynchronousTesting": 1,
+    "BoostSockAcceptorHandleTesting": 1
   },
 
   "boostSockConnectorSuite": {
-    "BoostSockConnectorSynchronizeTesting": 0,
-    "BoostSockConnectorAsynchronousTesting": 0,
-    "BoostSockConnectorHandleTesting": 0
+    "BoostSockConnectorSynchronizeTesting": 1,
+    "BoostSockConnectorAsynchronousTesting": 1,
+    "BoostSockConnectorHandleTesting": 1
   },
 
   "boostSockStreamSuite": {
-    "BoostFixedSockStreamSynchronizeTesting": 0,
-    "BoostFixedSockStreamNonBlockingTesting": 0,
-    "BoostFixedSockStreamAsynchronousTesting": 0,
-    "BoostSegmentationSockStreamSynchronizeTesting": 0,
-    "BoostSegmentationSockStreamNonBlockingTesting": 0,
-    "BoostSegmentationSockStreamAsynchronousTesting": 0,
-    "BoostSockStreamHandleTesting": 0
+    "BoostFixedSockStreamSynchronizeTesting": 1,
+    "BoostFixedSockStreamNonBlockingTesting": 1,
+    "BoostFixedSockStreamAsynchronousTesting": 1,
+    "BoostSegmentationSockStreamSynchronizeTesting": 1,
+    "BoostSegmentationSockStreamNonBlockingTesting": 1,
+    "BoostSegmentationSockStreamAsynchronousTesting": 1,
+    "BoostSockStreamHandleTesting": 1
   },
 
   "networkWrappersSuite": {
     "NetworkMainManagerTesting": 1,
-    "NetworkSockInetAddressTesting": 1,
+    "NetworkSockInternetAddressTesting": 1,
     "NetworkSockAcceptorTesting": 1,
     "NetworkSockConnectorTesting": 1,
     "NetworkSockStreamTesting": 1
@@ -126,14 +121,24 @@
   },
 
   "messageOrientedMiddlewareSuite": {
-
+    "ConsumerTesting": 1,
+    "ProducerTesting": 1,
+    "RouteServiceManagerTesting": 1,
+    "RouteServiceTesting": 1
   },
 
   "activeMQSuite": {
-
+    "ActiveMQConsumerTesting": 1,
+    "ActiveMQProducerTesting": 1,
+    "ActiveMQRouteServiceManagerTesting": 1,
+    "ActiveMQRouteServiceTesting": 1
   },
 
   "natsSuite": {
+
+  },
+
+  "kafkaSuite": {
 
   }
 }

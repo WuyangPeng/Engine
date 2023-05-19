@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/22 22:27)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:23)
 
 #include "Network/NetworkExport.h"
 
@@ -18,10 +18,6 @@
 #include "Network/Configuration/ConfigurationSubStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
-using boost::numeric_cast;
-using std::make_unique;
-using std::move;
-
 Network::BoostMainManagerUseMultiContext::BoostMainManagerUseMultiContext(const ConfigurationSubStrategy& subStrategy)
     : ParentType{}, container{}, currentIndex{ 0 }
 {
@@ -30,19 +26,18 @@ Network::BoostMainManagerUseMultiContext::BoostMainManagerUseMultiContext(const 
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 void Network::BoostMainManagerUseMultiContext::InitContainer(int containerNumber)
 {
     for (auto index = 0; index < containerNumber; ++index)
     {
-        auto executorWorkGuardContextThread = make_unique<ExecutorWorkGuardContextThread>(CoreTools::DisableNotThrow::Disable);
+        auto executorWorkGuardContextThread = std::make_unique<ExecutorWorkGuardContextThread>(CoreTools::DisableNotThrow::Disable);
 
-        container.push_back(move(executorWorkGuardContextThread));
+        container.push_back(std::move(executorWorkGuardContextThread));
     }
 
     if (container.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("boost 多环境数量为零！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("boost 多环境数量为零！"s))
     }
 }
 
@@ -70,17 +65,17 @@ void Network::BoostMainManagerUseMultiContext::Run() noexcept
     NETWORK_CLASS_IS_VALID_1;
 }
 
-Network::IOContextType& Network::BoostMainManagerUseMultiContext::GetIOContext()
+Network::IoContextType& Network::BoostMainManagerUseMultiContext::GetContext()
 {
     NETWORK_CLASS_IS_VALID_1;
 
     const auto index = currentIndex++;
-    if (numeric_cast<int>(container.size()) <= currentIndex)
+    if (boost::numeric_cast<int>(container.size()) <= currentIndex)
     {
         currentIndex = 0;
     }
 
-    return container[index].GetIOContext();
+    return container[index].GetContext();
 }
 
 void Network::BoostMainManagerUseMultiContext::StopContext()

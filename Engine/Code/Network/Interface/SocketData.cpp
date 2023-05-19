@@ -1,19 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/21 17:03)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:59)
 
 #include "Network/NetworkExport.h"
 
 #include "SocketData.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-Network::SocketData::SocketData(SocketType socketType, int serverID) noexcept
-    : socketType{ socketType }, serverID{ serverID }
+Network::SocketData::SocketData(SocketType socketType, int serverId) noexcept
+    : socketType{ socketType }, serverId{ serverId }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -27,18 +27,18 @@ Network::SocketType Network::SocketData::GetSocketType() const noexcept
     return socketType;
 }
 
-int Network::SocketData::GetServerID() const noexcept
+int Network::SocketData::GetServerId() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return serverID;
+    return serverId;
 }
 
 bool Network::operator<(const SocketData& lhs, const SocketData& rhs) noexcept
 {
-    if (lhs.GetServerID() < rhs.GetServerID())
+    if (lhs.GetServerId() < rhs.GetServerId())
         return true;
-    else if (rhs.GetServerID() < lhs.GetServerID())
+    else if (rhs.GetServerId() < lhs.GetServerId())
         return false;
     else
         return lhs.GetSocketType() < rhs.GetSocketType();

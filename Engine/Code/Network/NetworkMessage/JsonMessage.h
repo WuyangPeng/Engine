@@ -33,7 +33,7 @@ namespace Network
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
         NETWORK_STREAM_DECLARE(JsonMessage);
 
-        NODISCARD T GetMessage() const;
+        NODISCARD T GetJsonMessage() const;
 
     private:
         std::string message;

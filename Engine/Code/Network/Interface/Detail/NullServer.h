@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/21 14:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 11:15)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NULL_SERVER_H
 #define NETWORK_NETWORK_INTERFACE_NULL_SERVER_H
@@ -23,22 +23,22 @@ namespace Network
         using ParentType = ServerImpl;
 
     public:
-        NullServer(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy) noexcept;
+        NullServer(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& messageEventManager) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) noexcept override;
-        void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) noexcept override;
+        void Send(int64_t socketId, const MessageInterfaceSharedPtr& message) noexcept override;
+        void AsyncSend(int64_t socketId, const MessageInterfaceSharedPtr& message) noexcept override;
 
-        NODISCARD bool EventFunction(MAYBE_UNUSED const CoreTools::CallbackParameters& callbackParameters) noexcept override;
+        NODISCARD bool EventFunction(const CoreTools::CallbackParameters& callbackParameters) noexcept override;
 
     private:
         NODISCARD bool WaitForMultipleEvents() noexcept override;
-        NODISCARD bool HandleConnections(MessageEventManager& socketManager) noexcept override;
-        NODISCARD bool HandleData(const MessageEventManagerSharedPtr& socketManager) noexcept override;
+        NODISCARD bool HandleConnections() noexcept override;
+        NODISCARD bool HandleData(const MessageEventManagerSharedPtr& aMessageEventManager) noexcept override;
         NODISCARD bool ImmediatelySend() noexcept override;
-        NODISCARD bool ImmediatelySend(uint64_t socketID) noexcept override;
-        void ImmediatelyAsyncSend(uint64_t socketID) noexcept override;
+        NODISCARD bool ImmediatelySend(int64_t socketId) noexcept override;
+        void ImmediatelyAsyncSend(int64_t socketId) noexcept override;
     };
 }
 

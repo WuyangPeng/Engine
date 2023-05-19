@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/21 17:03)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:34)
 
 #include "Network/NetworkExport.h"
 
@@ -15,8 +15,6 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::string;
 
 Network::SockStream::SockStream(const ConfigurationStrategy& configurationStrategy)
     : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
@@ -34,7 +32,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, CloseHandle, bool)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, SockStream, SetACEHandle, ACEHandleType, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, SockStream, SetNetworkHandle, WinSocketStreamType, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, EnableNonBlock, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetRemoteAddress, const string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetRemoteAddress, std::string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetRemotePort, int)
 
 int Network::SockStream::Send(const MessageBufferSharedPtr& messageBuffer)

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 17:14)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 10:22)
 
 #include "Network/NetworkExport.h"
 
@@ -13,10 +13,8 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::make_shared;
-
 Network::BufferSendStreamMultiIndexContainer::BufferSendStreamMultiIndexContainer() noexcept
-    : socketIDContainer{}, handleIDContainer{}
+    : socketIdContainer{}, handleIdContainer{}
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -25,7 +23,7 @@ Network::BufferSendStreamMultiIndexContainer::BufferSendStreamMultiIndexContaine
 
 bool Network::BufferSendStreamMultiIndexContainer::IsValid() const noexcept
 {
-    if (socketIDContainer.size() == handleIDContainer.size())
+    if (socketIdContainer.size() == handleIdContainer.size())
         return true;
     else
         return false;
@@ -33,29 +31,28 @@ bool Network::BufferSendStreamMultiIndexContainer::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-void Network::BufferSendStreamMultiIndexContainer::Insert(uint64_t socketID, ACEHandle handle, int bufferSize, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy)
+void Network::BufferSendStreamMultiIndexContainer::Insert(int64_t socketId, ACEHandleType handle, int bufferSize, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    auto bufferSendStreamContainer = make_shared<BufferSendStreamContainer>(socketID, handle, bufferSize, parserStrategy, encryptedCompressionStrategy);
+    auto bufferSendStreamContainer = std::make_shared<BufferSendStreamContainer>(socketId, handle, bufferSize, parserStrategy, encryptedCompressionStrategy);
 
-    socketIDContainer.insert({ socketID, bufferSendStreamContainer });
-    handleIDContainer.insert({ handle, bufferSendStreamContainer });
+    socketIdContainer.emplace(socketId, bufferSendStreamContainer);
+    handleIdContainer.emplace(handle, bufferSendStreamContainer);
 }
 
-Network::BufferSendStreamMultiIndexContainer::BufferSendStreamContainerSharedPtr Network::BufferSendStreamMultiIndexContainer::GetBufferSendStreamContainerBySocketID(uint64_t socketID)
+Network::BufferSendStreamMultiIndexContainer::BufferSendStreamContainerSharedPtr Network::BufferSendStreamMultiIndexContainer::GetBufferSendStreamContainerBySocketId(int64_t socketId)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    const auto iter = socketIDContainer.find(socketID);
-
-    if (iter != socketIDContainer.cend())
+    if (const auto iter = socketIdContainer.find(socketId);
+        iter != socketIdContainer.cend())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的socketID"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的socketID"s))
     }
 }
 
@@ -63,44 +60,41 @@ Network::BufferSendStreamMultiIndexContainer::BufferSendStreamContainerSharedPtr
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    const auto iter = handleIDContainer.find(handle);
-
-    if (iter != handleIDContainer.cend())
+    if (const auto iter = handleIdContainer.find(handle);
+        iter != handleIdContainer.cend())
     {
-        auto result = iter->second.lock();
-
-        if (result)
+        if (const auto result = iter->second.lock();
+            result != nullptr)
         {
             return result;
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的handle"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的handle"s))
 }
 
-void Network::BufferSendStreamMultiIndexContainer::Erase(uint64_t socketID)
+void Network::BufferSendStreamMultiIndexContainer::Erase(int64_t socketId)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    const auto iter = socketIDContainer.find(socketID);
-
-    if (iter != socketIDContainer.cend())
+    if (const auto iter = socketIdContainer.find(socketId);
+        iter != socketIdContainer.cend())
     {
-        handleIDContainer.erase(iter->second->GetACEHandle());
-        socketIDContainer.erase(iter);
+        handleIdContainer.erase(iter->second->GetACEHandle());
+        socketIdContainer.erase(iter);
     }
 }
 
-Network::BufferSendStreamMultiIndexContainer::SocketIDContainerConstIter Network::BufferSendStreamMultiIndexContainer::begin() const noexcept
+Network::BufferSendStreamMultiIndexContainer::SocketIdContainerConstIter Network::BufferSendStreamMultiIndexContainer::begin() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return socketIDContainer.begin();
+    return socketIdContainer.begin();
 }
 
-Network::BufferSendStreamMultiIndexContainer::SocketIDContainerConstIter Network::BufferSendStreamMultiIndexContainer::end() const noexcept
+Network::BufferSendStreamMultiIndexContainer::SocketIdContainerConstIter Network::BufferSendStreamMultiIndexContainer::end() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return socketIDContainer.end();
+    return socketIdContainer.end();
 }

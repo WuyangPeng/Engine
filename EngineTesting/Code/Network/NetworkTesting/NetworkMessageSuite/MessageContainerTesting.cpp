@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/23 16:28)
+///	引擎测试版本：0.9.0.8 (2023/05/11 17:24)
 
 #include "MessageContainerTesting.h"
 #include "Flags/IntegerMessageType.h"
@@ -18,8 +18,6 @@
 #include "Network/NetworkMessage/MessageContainerDetail.h"
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
-using std::make_shared;
-using std::string;
 
 Network::MessageContainerTesting::MessageContainerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -48,8 +46,8 @@ void Network::MessageContainerTesting::MainTest()
 
 void Network::MessageContainerTesting::BaseTest()
 {
-    TestingType::MessageType message{ 100, 10, 10000, 5, 100 };
-    TestingType messageContainer{ message };
+    const TestingType::MessageType message{ 100, 10, 10000, 5, 100 };
+    const TestingType messageContainer{ message };
 
     ASSERT_EQUAL_FAILURE_THROW(messageContainer.GetSize(), boost::numeric_cast<int>(message.size()), "数组大小不相等！");
 
@@ -61,19 +59,18 @@ void Network::MessageContainerTesting::BaseTest()
 
 void Network::MessageContainerTesting::StreamingTest()
 {
-    TestingType::MessageType message{ 100, 10, 1000, 2, 100 };
-    TestingType messageContainer{ message };
+    const TestingType::MessageType message{ 100, 10, 1000, 2, 100 };
+    const TestingType messageContainer{ message };
 
     ASSERT_EQUAL(messageContainer.GetStreamingSize(), CoreTools::GetStreamSize(message));
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-#include STSTEM_WARNING_POP
-    MessageTarget messageTarget{ *buffer };
+
+    MessageBuffer buffer{ BuffBlockSize::Size256, ParserStrategy::LittleEndian };
+
+    MessageTarget messageTarget{ buffer };
 
     messageContainer.Save(messageTarget);
 
-    MessageSource messageSource{ *buffer };
+    MessageSource messageSource{ buffer };
 
     TestingType resultMessageContainer{};
 

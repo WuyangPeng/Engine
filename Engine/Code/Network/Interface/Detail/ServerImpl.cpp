@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/21 14:51)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 11:34)
 
 #include "Network/NetworkExport.h"
 
@@ -15,8 +15,8 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Interface/BaseMainManager.h"
 
-Network::ServerImpl::ServerImpl(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy) noexcept
-    : ParentType{}, configurationStrategy{ configurationStrategy }, m_SocketManager{ socketManager }
+Network::ServerImpl::ServerImpl(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& messageEventManager) noexcept
+    : ParentType{}, configurationStrategy{ configurationStrategy }, messageEventManager{ messageEventManager }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -35,18 +35,17 @@ bool Network::ServerImpl::RunServer()
     NETWORK_CLASS_IS_VALID_9;
 
     return WaitForMultipleEvents() &&
-           HandleConnections(*m_SocketManager.lock()) &&
-           HandleData(m_SocketManager.lock()) &&
+           HandleConnections() &&
+           HandleData(messageEventManager.lock()) &&
            ImmediatelySend();
 }
 
-Network::MessageEventManagerSharedPtr Network::ServerImpl::GetSocketManagerSharedPtr()
+Network::MessageEventManagerSharedPtr Network::ServerImpl::GetMessageEventManagerSharedPtr()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    auto result = m_SocketManager.lock();
-
-    if (result)
+    if (auto result = messageEventManager.lock();
+        result != nullptr)
     {
         return result;
     }

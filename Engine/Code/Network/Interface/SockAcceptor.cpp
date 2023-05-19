@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/21 17:03)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:11)
 
 #include "Network/NetworkExport.h"
 
@@ -16,15 +16,13 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::string;
-
 Network::SockAcceptor::SockAcceptor(int port, const ConfigurationStrategy& configurationStrategy)
     : impl{ CoreTools::ImplCreateUseFactory::Default, port, configurationStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Network::SockAcceptor::SockAcceptor(const string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
+Network::SockAcceptor::SockAcceptor(const std::string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
     : impl{ CoreTools::ImplCreateUseFactory::Default, hostName, port, configurationStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
@@ -60,9 +58,9 @@ void Network::SockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInte
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, SockAcceptor, Accept, SockStream&, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, GetACEHandle, Network::SockAcceptor::ACEHandleType)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, GetBoostHandle, Network::SockAcceptor::BoostHandleType)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, GetWinSocket, Network::SockAcceptor::WinSocketType)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, GetACEHandle, Network::ACEHandleType)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, GetBoostHandle, Network::BoostHandleType)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, GetWinSocket, Network::WinSocketType)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, EnableNonBlock, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, GetAddress, string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, GetAddress, std::string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAcceptor, GetPort, int)

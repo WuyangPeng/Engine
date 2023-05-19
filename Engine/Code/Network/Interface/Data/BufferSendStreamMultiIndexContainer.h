@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/19 14:16)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 10:20)
 
 #ifndef NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_MULTI_INDEX_CONTAINER_H
 #define NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_MULTI_INDEX_CONTAINER_H
@@ -26,29 +26,29 @@ namespace Network
         using ClassType = BufferSendStreamMultiIndexContainer;
         using BufferSendStreamContainerSharedPtr = std::shared_ptr<BufferSendStreamContainer>;
         using BufferSendStreamContainerWeakPtr = std::weak_ptr<BufferSendStreamContainer>;
-        using SocketIDContainer = std::map<uint64_t, BufferSendStreamContainerSharedPtr>;
-        using SocketIDContainerConstIter = SocketIDContainer::const_iterator;
+        using SocketIdContainer = std::map<int64_t, BufferSendStreamContainerSharedPtr>;
+        using SocketIdContainerConstIter = SocketIdContainer::const_iterator;
 
     public:
         BufferSendStreamMultiIndexContainer() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        void Insert(uint64_t socketID, ACEHandle handle, int bufferSize, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy);
+        void Insert(int64_t socketId, ACEHandleType handle, int bufferSize, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy);
 
-        NODISCARD BufferSendStreamContainerSharedPtr GetBufferSendStreamContainerBySocketID(uint64_t socketID);
-        NODISCARD BufferSendStreamContainerSharedPtr GetBufferSendStreamContainerByHandle(ACEHandle handle);
+        NODISCARD BufferSendStreamContainerSharedPtr GetBufferSendStreamContainerBySocketId(int64_t socketId);
+        NODISCARD BufferSendStreamContainerSharedPtr GetBufferSendStreamContainerByHandle(ACEHandleType handle);
 
-        void Erase(uint64_t socketID);
-        NODISCARD SocketIDContainerConstIter begin() const noexcept;
-        NODISCARD SocketIDContainerConstIter end() const noexcept;
-
-    private:
-        using HandleIDContainer = std::map<ACEHandle, BufferSendStreamContainerWeakPtr>;
+        void Erase(int64_t socketId);
+        NODISCARD SocketIdContainerConstIter begin() const noexcept;
+        NODISCARD SocketIdContainerConstIter end() const noexcept;
 
     private:
-        SocketIDContainer socketIDContainer;
-        HandleIDContainer handleIDContainer;
+        using HandleIdContainer = std::map<ACEHandle, BufferSendStreamContainerWeakPtr>;
+
+    private:
+        SocketIdContainer socketIdContainer;
+        HandleIdContainer handleIdContainer;
     };
 }
 

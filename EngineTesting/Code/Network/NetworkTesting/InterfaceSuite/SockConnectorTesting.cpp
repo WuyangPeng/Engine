@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 15:26)
+///	引擎测试版本：0.9.0.8 (2023/05/15 10:27)
 
 #include "SingletonTestingDetail.h"
 #include "SockConnectorTesting.h"
@@ -14,6 +14,7 @@
 #include "Network/Helper/UserMacro.h"
 #include "Network/Interface/SockConnector.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 Network::SockConnectorTesting::SockConnectorTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {

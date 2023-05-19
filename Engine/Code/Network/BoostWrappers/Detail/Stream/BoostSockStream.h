@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/22 19:22)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:30)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_SOCK_STREAM_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_SOCK_STREAM_H
@@ -24,12 +24,12 @@ namespace Network
         using ParentType = SockStreamImpl;
 
     public:
-        explicit BoostSockStream(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+        explicit BoostSockStream(CoreTools::DisableNotThrow disableNotThrow);
         ~BoostSockStream() noexcept = 0;
-        BoostSockStream(const BoostSockStream& rhs) = default;
-        BoostSockStream& operator=(const BoostSockStream& rhs) = default;
-        BoostSockStream(BoostSockStream&& rhs) noexcept = default;
-        BoostSockStream& operator=(BoostSockStream&& rhs) noexcept = default;
+        BoostSockStream(const BoostSockStream& rhs) = delete;
+        BoostSockStream& operator=(const BoostSockStream& rhs) = delete;
+        BoostSockStream(BoostSockStream&& rhs) noexcept = delete;
+        BoostSockStream& operator=(BoostSockStream&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

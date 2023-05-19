@@ -16,6 +16,7 @@
 #include "Configuration/Configuration.h"
 #include "Helper/Helper.h"
 #include "Interface/Interface.h"
+#include "Kafka/Kafka.h"
 #include "MessageOrientedMiddleware/MessageOrientedMiddleware.h"
 #include "Nats/Nats.h"
 #include "NetworkMessage/NetworkMessage.h"

@@ -16,6 +16,7 @@
 #include "Configuration/ConfigurationFwd.h"
 #include "Helper/HelperFwd.h"
 #include "Interface/InterfaceFwd.h"
+#include "Kafka/KafkaFwd.h"
 #include "MessageOrientedMiddleware/MessageOrientedMiddlewareFwd.h"
 #include "Nats/NatsFwd.h"
 #include "NetworkMessage/NetworkMessageFwd.h"

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 18:04)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 10:52)
 
 #include "Network/NetworkExport.h"
 
@@ -16,10 +16,7 @@
 #include <gsl/util>
 #include <functional>
 
-using std::bind;
-using std::placeholders::_1;
-
-Network::HandleSetContainer::HandleSetContainer(const ConfigurationStrategy& configurationStrategy, ACEHandle acceptorHandle)
+Network::HandleSetContainer::HandleSetContainer(const ConfigurationStrategy& configurationStrategy, ACEHandleType acceptorHandle)
     : configurationStrategy{ configurationStrategy },
       acceptorHandle{ acceptorHandle },
       handleSetGroup{ HandleSet(configurationStrategy) },
@@ -54,7 +51,7 @@ Network::HandleSet Network::HandleSetContainer::GetCurrentHandleSet() const
     return handleSetGroup.at(currentIndex);
 }
 
-void Network::HandleSetContainer::SetBit(ACEHandle sockStreamHandle)
+void Network::HandleSetContainer::SetBit(ACEHandleType sockStreamHandle)
 {
     NETWORK_CLASS_IS_VALID_1;
 
@@ -69,7 +66,7 @@ void Network::HandleSetContainer::SetBit(ACEHandle sockStreamHandle)
     handleSetGroup.at(setIndex).SetBit(sockStreamHandle);
 }
 
-void Network::HandleSetContainer::ClearBit(ACEHandle sockStreamHandle)
+void Network::HandleSetContainer::ClearBit(ACEHandleType sockStreamHandle)
 {
     NETWORK_CLASS_IS_VALID_1;
 
@@ -88,17 +85,21 @@ void Network::HandleSetContainer::ToNextIndex()
         {
             currentIndex = 0;
 
-            handleSetGroup.erase(remove_if(handleSetGroup.begin() + 1, handleSetGroup.end(), bind(&HandleSet::IsFdSetCountIsOne, _1)), handleSetGroup.end());
+            handleSetGroup.erase(remove_if(handleSetGroup.begin() + 1,
+                                           handleSetGroup.end(),
+                                           [](const auto& value) {
+                                               return value.IsFdSetCountIsOne();
+                                           }),
+
+                                 handleSetGroup.end());
         }
     }
 }
 
-// private
 void Network::HandleSetContainer::Expansion()
 {
-    auto endIndex = handleSetGroup.size() - 1;
-
-    if (handleSetGroup.at(endIndex).IsFdSetFull())
+    if (auto endIndex = handleSetGroup.size() - 1;
+        handleSetGroup.at(endIndex).IsFdSetFull())
     {
         handleSetGroup.emplace_back(configurationStrategy);
 

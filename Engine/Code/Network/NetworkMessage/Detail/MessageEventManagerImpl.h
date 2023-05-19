@@ -13,6 +13,7 @@
 #include "Network/NetworkDll.h"
 
 #include "CoreTools/Contract/ContractFwd.h"
+#include "CoreTools/MessageEvent/EventInterface.h"
 #include "CoreTools/Threading/Mutex.h"
 #include "Network/NetworkMessage/MessageEventContainer.h"
 #include "Network/NetworkMessage/NetworkMessageInternalFwd.h"
@@ -26,6 +27,8 @@ namespace Network
     {
     public:
         using ClassType = MessageEventManagerImpl;
+        using EventInterfaceSharedPtr = CoreTools::EventInterfaceSharedPtr;
+        using EventInterfaceWeakPtr = CoreTools::EventInterfaceWeakPtr;
 
     public:
         explicit MessageEventManagerImpl(CoreTools::DisableNotThrow disableNotThrow);
@@ -49,6 +52,9 @@ namespace Network
         void OnEvent(int64_t socketId, int64_t messageId, const ConstMessageInterfaceSharedPtr& message);
         void OnEvent(int64_t socketId, const std::string& messageDescribe, const ConstMessageInterfaceSharedPtr& message);
 
+        void SetCallbackEvent(const EventInterfaceSharedPtr& aEvent);
+        NODISCARD EventInterfaceSharedPtr GetCallbackEvent();
+
     private:
         using IdEventContainer = std::map<int64_t, MessageEventContainer>;
         using DescribeEventContainer = std::map<std::string, MessageEventContainer>;
@@ -58,6 +64,7 @@ namespace Network
         IdEventContainer idEventContainer;
         DescribeEventContainer describeEventContainer;
         MutexUniquePtr mutex;
+        EventInterfaceWeakPtr event;
     };
 }
 

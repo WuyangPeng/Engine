@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/19 13:58)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 10:18)
 
 #ifndef NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_CONTAINER_H
 #define NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_CONTAINER_H
@@ -13,6 +13,7 @@
 #include "Network/NetworkDll.h"
 
 #include "Network/ACEWrappers/Using/ACEUsing.h"
+#include "Network/Interface/NetworkInternalFwd.h"
 #include "Network/NetworkMessage/BufferSendStream.h"
 
 namespace Network
@@ -23,7 +24,7 @@ namespace Network
         using ClassType = BufferSendStreamContainer;
 
     public:
-        BufferSendStreamContainer(uint64_t socketID, ACEHandle handle, int bufferSize, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy);
+        BufferSendStreamContainer(int64_t socketId, ACEHandleType handle, int bufferSize, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -37,11 +38,11 @@ namespace Network
 
         NODISCARD int GetCurrentSize() const noexcept;
 
-        NODISCARD ACEHandle GetACEHandle() const noexcept;
-        NODISCARD uint64_t GetSocketID() const noexcept;
+        NODISCARD ACEHandleType GetACEHandle() const noexcept;
+        NODISCARD int64_t GetSocketId() const noexcept;
 
     private:
-        uint64_t socketID;
+        int64_t socketId;
         ACEHandle handle;
         BufferSendStream bufferSendStream;
     };

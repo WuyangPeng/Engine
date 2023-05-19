@@ -19,7 +19,7 @@
 template <typename T>
 requires(std::is_base_of_v<google::protobuf::Message, T>)
 Network::ProtoBufMessage<T>::ProtoBufMessage(MessageHeadStrategy messageHeadStrategy, int64_t messageId, const T& message)
-    : ParentType{ messageHeadStrategy, messageId }, length{ message.ByteSizeLong() }, message{ message }
+    : ParentType{ messageHeadStrategy, messageId }, length{ boost::numeric_cast<int>(message.ByteSizeLong()) }, message{ message }
 {
     if (!IsUseProtoBuf())
     {
@@ -53,7 +53,7 @@ template <typename T>
 requires(std::is_base_of_v<google::protobuf::Message, T>)
 const CoreTools::Rtti& Network::ProtoBufMessage<T>::GetCurrentRttiType() noexcept
 {
-    static const auto rtti = CoreTools::Rtti{ typeid(ClassType).name(), &ParentType::GetCurrentRttiType() };
+    static const auto rtti = CoreTools::Rtti{ typeid(T).name(), &ParentType::GetCurrentRttiType() };
 
     return rtti;
 }
@@ -79,7 +79,7 @@ Network::ProtoBufMessage<T>::ProtoBufMessage(LoadConstructor loadConstructor, Me
 
 template <typename T>
 requires(std::is_base_of_v<google::protobuf::Message, T>)
-T Network::ProtoBufMessage<T>::GetMessage() const
+T Network::ProtoBufMessage<T>::GetProtoBufMessage() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -99,7 +99,7 @@ void Network::ProtoBufMessage<T>::Load(MessageSource& source)
     source.Read(length);
 
     std::vector<char> buffer(length);
-    source.Read(buffer);
+    source.Read(length, buffer.data());
 
     if (!message.ParseFromArray(buffer.data(), length))
     {
@@ -124,7 +124,7 @@ void Network::ProtoBufMessage<T>::Save(MessageTarget& target) const
     std::vector<char> buffer(length);
     if (message.SerializeToArray(buffer.data(), length))
     {
-        target.Write(buffer);
+        target.WriteWithoutNumber(length, buffer.data());
     }
     else
     {

@@ -217,6 +217,27 @@
     <Filter Include="Nats 头文件">
       <UniqueIdentifier>{55b8c713-8743-4c90-83fa-9923ac18585c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Kafka 头文件">
+      <UniqueIdentifier>{1eb9870e-59bb-496b-98b7-fcd35c7436fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageOrientedMiddleware 源文件">
+      <UniqueIdentifier>{c42c2029-ef50-4a3e-acc0-808c1b89e10c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageOrientedMiddleware 头文件\Detail">
+      <UniqueIdentifier>{02eef0b7-bc0e-4f37-84e0-6cb76efb488d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageOrientedMiddleware 源文件\Detail">
+      <UniqueIdentifier>{a02e9b78-1a90-401c-9980-5435bf4cf3b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ActiveMQ 源文件">
+      <UniqueIdentifier>{8b249f15-3cbd-4b48-a5e1-1dbb5f245d62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ActiveMQ 头文件\Detail">
+      <UniqueIdentifier>{4fb2589e-8732-471e-946b-40255b75eb01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ActiveMQ 源文件\Detail">
+      <UniqueIdentifier>{4e037ce1-a136-4d0f-82c8-ae0cedf9d361}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 2.txt">
@@ -272,7 +293,7 @@
     <ClCompile Include="..\..\..\Code\Network\ACEWrappers\Detail\Acceptor\SockACEHandleSetIterator.cpp">
       <Filter>ACEWrappers 源文件\Detail\Acceptor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\ACEWrappers\Detail\Address\ACESockInetAddress.cpp">
+    <ClCompile Include="..\..\..\Code\Network\ACEWrappers\Detail\Address\ACESockInternetAddress.cpp">
       <Filter>ACEWrappers 源文件\Detail\Address</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\ACEWrappers\Detail\BaseMainManager\ACEMainManager.cpp">
@@ -290,7 +311,7 @@
     <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\Acceptor\BoostSockAcceptor.cpp">
       <Filter>BoostWrappers 源文件\Detail\Acceptor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\Address\BoostSockInetAddress.cpp">
+    <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\Address\BoostSockInternetAddress.cpp">
       <Filter>BoostWrappers 源文件\Detail\Address</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\BoostWrappers\Detail\BaseMainManager\BoostMainManager.cpp">
@@ -548,7 +569,7 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkWrappers\Detail\Acceptor\NetworkSockAcceptor.cpp">
       <Filter>NetworkWrappers 源文件\Detail\Acceptor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkWrappers\Detail\Address\NetworkSockInetAddress.cpp">
+    <ClCompile Include="..\..\..\Code\Network\NetworkWrappers\Detail\Address\NetworkSockInternetAddress.cpp">
       <Filter>NetworkWrappers 源文件\Detail\Address</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkWrappers\Detail\BaseMainManager\NetworkMainManager.cpp">
@@ -632,6 +653,63 @@
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NullServer.cpp">
       <Filter>Interface 源文件\Detail</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\RouteServiceImpl.cpp">
+      <Filter>MessageOrientedMiddleware 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\ConsumerNode.cpp">
+      <Filter>MessageOrientedMiddleware 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\MessageOrientedMiddleware\Consumer.cpp">
+      <Filter>MessageOrientedMiddleware 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\MessageOrientedMiddleware\Producer.cpp">
+      <Filter>MessageOrientedMiddleware 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\MessageOrientedMiddleware\RouteService.cpp">
+      <Filter>MessageOrientedMiddleware 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\ConsumerFactory.cpp">
+      <Filter>MessageOrientedMiddleware 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\ConsumerImpl.cpp">
+      <Filter>MessageOrientedMiddleware 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\NullConsumer.cpp">
+      <Filter>MessageOrientedMiddleware 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ActiveMQ\Detail\ActiveMQConsumer.cpp">
+      <Filter>ActiveMQ 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\NullProducer.cpp">
+      <Filter>MessageOrientedMiddleware 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\ProducerFactory.cpp">
+      <Filter>MessageOrientedMiddleware 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\ProducerImpl.cpp">
+      <Filter>MessageOrientedMiddleware 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ActiveMQ\Detail\ActiveMQProducer.cpp">
+      <Filter>ActiveMQ 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\RouteServiceManagerImpl.cpp">
+      <Filter>MessageOrientedMiddleware 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ActiveMQ\Detail\ActiveMQInit.cpp">
+      <Filter>ActiveMQ 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\MessageOrientedMiddleware\RouteServiceManager.cpp">
+      <Filter>MessageOrientedMiddleware 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ActiveMQ\Detail\ActiveMQService.cpp">
+      <Filter>ActiveMQ 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ActiveMQ\Detail\ActiveMQProducerSession.cpp">
+      <Filter>ActiveMQ 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\ActiveMQ\Detail\ActiveMQConsumerSession.cpp">
+      <Filter>ActiveMQ 源文件\Detail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Network\NetworkDll.h">
@@ -673,7 +751,7 @@
     <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\Acceptor\SockACEHandleSetIterator.h">
       <Filter>ACEWrappers 头文件\Detail\Acceptor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\Address\ACESockInetAddress.h">
+    <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\Address\ACESockInternetAddress.h">
       <Filter>ACEWrappers 头文件\Detail\Address</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\ACEWrappers\Detail\BaseMainManager\ACEMainManager.h">
@@ -697,7 +775,7 @@
     <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\Acceptor\BoostSockAcceptor.h">
       <Filter>BoostWrappers 头文件\Detail\Acceptor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\Address\BoostSockInetAddress.h">
+    <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\Address\BoostSockInternetAddress.h">
       <Filter>BoostWrappers 头文件\Detail\Address</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\BoostWrappers\Detail\BaseMainManager\BoostMainManager.h">
@@ -997,7 +1075,7 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkWrappers\Detail\Acceptor\NetworkSockAcceptor.h">
       <Filter>NetworkWrappers 头文件\Detail\Acceptor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkWrappers\Detail\Address\NetworkSockInetAddress.h">
+    <ClInclude Include="..\..\..\Code\Network\NetworkWrappers\Detail\Address\NetworkSockInternetAddress.h">
       <Filter>NetworkWrappers 头文件\Detail\Address</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkWrappers\Detail\BaseMainManager\NetworkMainManager.h">
@@ -1224,6 +1302,75 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkMessage\JsonMessageDetail.h">
       <Filter>NetworkMessage 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Kafka\Kafka.h">
+      <Filter>Kafka 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Kafka\KafkaFwd.h">
+      <Filter>Kafka 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\RouteServiceImpl.h">
+      <Filter>MessageOrientedMiddleware 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\ConsumerNode.h">
+      <Filter>MessageOrientedMiddleware 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\Consumer.h">
+      <Filter>MessageOrientedMiddleware 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\Producer.h">
+      <Filter>MessageOrientedMiddleware 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\RouteService.h">
+      <Filter>MessageOrientedMiddleware 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\NullConsumer.h">
+      <Filter>MessageOrientedMiddleware 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\ConsumerFactory.h">
+      <Filter>MessageOrientedMiddleware 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\ConsumerImpl.h">
+      <Filter>MessageOrientedMiddleware 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\MessageOrientedMiddlewareInternalFwd.h">
+      <Filter>MessageOrientedMiddleware 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ActiveMQ\Detail\ActiveMQConsumer.h">
+      <Filter>ActiveMQ 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\ProducerImpl.h">
+      <Filter>MessageOrientedMiddleware 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\NullProducer.h">
+      <Filter>MessageOrientedMiddleware 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\ProducerFactory.h">
+      <Filter>MessageOrientedMiddleware 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ActiveMQ\Detail\ActiveMQProducer.h">
+      <Filter>ActiveMQ 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\Detail\RouteServiceManagerImpl.h">
+      <Filter>MessageOrientedMiddleware 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ActiveMQ\Detail\ActiveMQInit.h">
+      <Filter>ActiveMQ 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\MessageOrientedMiddleware\RouteServiceManager.h">
+      <Filter>MessageOrientedMiddleware 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ActiveMQ\Detail\ActiveMQService.h">
+      <Filter>ActiveMQ 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ActiveMQ\Detail\ActiveMQProducerSession.h">
+      <Filter>ActiveMQ 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ActiveMQ\ActiveMQInternalFwd.h">
+      <Filter>ActiveMQ 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\ActiveMQ\Detail\ActiveMQConsumerSession.h">
+      <Filter>ActiveMQ 头文件\Detail</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

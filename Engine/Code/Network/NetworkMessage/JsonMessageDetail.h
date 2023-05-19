@@ -50,7 +50,7 @@ const CoreTools::Rtti& Network::JsonMessage<T>::GetRttiType() const noexcept
 template <typename T>
 const CoreTools::Rtti& Network::JsonMessage<T>::GetCurrentRttiType() noexcept
 {
-    static const auto rtti = CoreTools::Rtti{ typeid(ClassType).name(), &ParentType::GetCurrentRttiType() };
+    static const auto rtti = CoreTools::Rtti{ typeid(T).name(), &ParentType::GetCurrentRttiType() };
 
     return rtti;
 }
@@ -73,7 +73,7 @@ Network::JsonMessage<T>::JsonMessage(LoadConstructor loadConstructor, MessageHea
 }
 
 template <typename T>
-T Network::JsonMessage<T>::GetMessage() const
+T Network::JsonMessage<T>::GetJsonMessage() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

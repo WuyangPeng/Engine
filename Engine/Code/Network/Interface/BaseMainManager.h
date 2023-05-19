@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 16:41)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/08 17:24)
 
 #ifndef NETWORK_NETWORK_INTERFACE_BASE_MAIN_MANAGER_H
 #define NETWORK_NETWORK_INTERFACE_BASE_MAIN_MANAGER_H
@@ -41,7 +41,7 @@ namespace Network
         static void Create(const ConfigurationStrategy& configurationStrategy);
         static void Destroy() noexcept;
 
-        SINGLETON_GET_PTR_DECLARE(BaseMainManager);
+        SINGLETON_GET_PTR_DECLARE(BaseMainManager)
 
         CLASS_INVARIANT_DECLARE;
 
@@ -49,7 +49,7 @@ namespace Network
         // BoostMainManager调用Run会阻塞线程。
         void Run();
 
-        NODISCARD IOContextType& GetIOContext();
+        NODISCARD IoContextType& GetContext();
         void StopContext();
         NODISCARD bool IsContextStop() const;
         void RestartContext();

@@ -1,17 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 14:33)
+///	引擎测试版本：0.9.0.8 (2023/05/17 14:51)
 
 #include "IterativeServerTesting.h"
 #include "SingletonTestingDetail.h"
-#include "Detail/TestSocketManager.h"
+#include "Detail/TestSocketEvent.h"
 #include "System/Helper/PragmaWarning/Thread.h"
+#include "System/Windows/Engineering.h"
 #include "CoreTools/Base/Version.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -26,33 +28,12 @@
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/NullMessage.h"
+
 #include <vector>
 
-using std::make_shared;
-using std::ostream;
-using std::vector;
-
 Network::IterativeServerTesting::IterativeServerTesting(const OStreamShared& stream)
-    : ParentType{ stream }, mPort{ 5926 }, messageID{ 5 }, increase{ 0 }
+    : ParentType{ stream }, port{ 5926 + System::GetEngineeringOffsetValue() }, messageId{ 5 }, increase{ 0 }, bufferSize{ 1048576 }
 {
-#ifdef _DEBUG
-
-    mPort += 4;
-
-#endif  // _DEBUG
-
-#ifdef BUILDING_NETWORK_STATIC
-
-    mPort += 2;
-
-#endif  // BUILDING_NETWORK_STATIC
-
-#ifdef _WIN64
-
-    mPort += 1;
-
-#endif  // _WIN64
-
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
@@ -60,47 +41,54 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, IterativeServerTesting)
 
 void Network::IterativeServerTesting::DoRunUnitTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateMessage);
+
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(DestroyMessage);
 }
 
 void Network::IterativeServerTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(CreateMessage);
     ASSERT_NOT_THROW_EXCEPTION_0(IterativeServerTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DestroyMessage);
 }
 
 void Network::IterativeServerTesting::CreateMessage()
 {
-    MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition::CreateNullCondition(), NullMessage::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(messageId, MessageTypeCondition::CreateNullCondition(), NullMessage::Factory);
+}
+
+void Network::IterativeServerTesting::DestroyMessage()
+{
+    MESSAGE_MANAGER_SINGLETON.Remove(messageId);
 }
 
 void Network::IterativeServerTesting::IterativeServerTest()
 {
-    ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    auto configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, bufferSize);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, bufferSize);
 
-    ConfigurationStrategy serverConfigurationStrategy{ WrappersStrategy::Ace,
-                                                       ConnectStrategy::Tcp,
-                                                       ServerStrategy::Iterative,
-                                                       MessageStrategy::Default,
-                                                       ParserStrategy::LittleEndian,
-                                                       OpenSSLStrategy::Default,
-                                                       EncryptedCompressionStrategy::Default,
-                                                       configurationSubStrategy,
-                                                       ConfigurationParameter::Create(),
-                                                       SocketSendMessage::Default,
-                                                       "127.0.0.1",
-                                                       mPort + increase };
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
+    const ConfigurationStrategy serverConfigurationStrategy{ WrappersStrategy::Ace,
+                                                             ConnectStrategy::Tcp,
+                                                             ServerStrategy::Iterative,
+                                                             MessageStrategy::Default,
+                                                             ParserStrategy::LittleEndian,
+                                                             OpenSSLStrategy::Default,
+                                                             EncryptedCompressionStrategy::Default,
+                                                             configurationSubStrategy,
+                                                             ConfigurationParameter::Create(),
+                                                             SocketSendMessage::Default,
+                                                             "127.0.0.1",
+                                                             port + increase };
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
+    const auto testMessageEvent = std::make_shared<TestMessageEvent>(CoreTools::DisableNotThrow::Disable);
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    messageEventManager->Insert(messageId, testMessageEvent);
+    messageEventManager->SetCallbackEvent(testSocketEvent);
 
-    ServerSharedPtr server{ make_shared<Server>(std::make_shared<MessageEventManager>(MessageEventManager::Create()), serverConfigurationStrategy) };
-
-#include STSTEM_WARNING_POP
+    Server server{ serverConfigurationStrategy, messageEventManager };
 
     ConfigurationStrategy clientConfigurationStrategy{ WrappersStrategy::Ace,
                                                        ConnectStrategy::Tcp,
@@ -113,50 +101,45 @@ void Network::IterativeServerTesting::IterativeServerTest()
                                                        ConfigurationParameter::Create(),
                                                        SocketSendMessage::Default,
                                                        "127.0.0.1",
-                                                       mPort + increase };
+                                                       port + increase };
 
-    vector<ClientSharedPtr> clientContainer;
-    boost::thread_group threadGroup;
+    std::vector<ClientSharedPtr> clientContainer{};
+    boost::thread_group threadGroup{};
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
-        clientContainer.push_back(make_shared<Client>(clientConfigurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
+        clientContainer.emplace_back(make_shared<Client>(clientConfigurationStrategy, messageEventManager));
     }
 
     for (auto& client : clientContainer)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::ClientThread, this, client, testSocketManager));
+        threadGroup.create_thread(boost::bind(&ClassType::ClientThread, this, boost::ref(*client), boost::ref(*testSocketEvent)));
     }
 
     const auto loopCount = GetTestLoopCount();
     for (;;)
     {
-        ASSERT_TRUE(server->RunServer());
+        ASSERT_TRUE(server.RunServer());
 
-        const auto volatile asyncAcceptorCount = testSocketManager->GetAsyncAcceptorCount();
-
-        if (asyncAcceptorCount == loopCount)
+        if (const auto volatile asyncAcceptorCount = testSocketEvent->GetAsyncAcceptorCount();
+            asyncAcceptorCount == loopCount)
         {
             break;
         }
     }
 
-    ASSERT_GREATER_EQUAL(testSocketManager->GetCallBackTime(), loopCount * messageID);
+    ASSERT_GREATER_EQUAL(testMessageEvent->GetCallBackTime(), loopCount * messageId);
 
     threadGroup.join_all();
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
-void Network::IterativeServerTesting::ClientThread(ClientSharedPtr client, TestSocketManagerSharedPtr testSocketManagerSharedPtr)
+void Network::IterativeServerTesting::ClientThread(Client& client, const TestSocketEvent& testSocketManager)
 {
-    uint64_t socketID{ 0 };
+    auto socketId = 0LL;
     for (;;)
     {
-        socketID = client->Connect();
-        if (socketID != 0)
+        socketId = client.Connect();
+        if (socketId != 0)
         {
             break;
         }
@@ -164,22 +147,15 @@ void Network::IterativeServerTesting::ClientThread(ClientSharedPtr client, TestS
 
     for (;;)
     {
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(MessageHeadStrategy::Default, messageID) };
-        client->Send(socketID, message);
+        const auto message = std::make_shared<NullMessage>(MessageHeadStrategy::Default, messageId);
+        client.Send(socketId, message);
 
-        const auto volatile asyncAcceptorCount = testSocketManagerSharedPtr->GetAsyncAcceptorCount();
+        const auto volatile asyncAcceptorCount = testSocketManager.GetAsyncAcceptorCount();
 
-        const auto loopCount = GetTestLoopCount();
-        if (asyncAcceptorCount == loopCount)
+        if (const auto loopCount = GetTestLoopCount();
+            asyncAcceptorCount == loopCount)
         {
             break;
         }
     }
-}
-
-#include STSTEM_WARNING_POP
-
-void Network::IterativeServerTesting::DestroyMessage()
-{
-    MESSAGE_MANAGER_SINGLETON.Remove(messageID);
 }

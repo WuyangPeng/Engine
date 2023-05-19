@@ -1,19 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 15:26)
+///	引擎测试版本：0.9.0.8 (2023/05/15 10:28)
 
 #include "SingletonTestingDetail.h"
 #include "SockStreamTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Helper/UserMacro.h"
 #include "Network/Interface/SockStream.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 Network::SockStreamTesting::SockStreamTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -86,61 +87,61 @@ void Network::SockStreamTesting::NetworkConstructionTest()
 void Network::SockStreamTesting::ACEGetACESockStreamTest()
 {
     SockStream sockStream{ GetACEServerConfigurationStrategy() };
-    MAYBE_UNUSED auto value = sockStream.GetACESockStream();
+    MAYBE_UNUSED const auto result = sockStream.GetACESockStream();
 }
 
 void Network::SockStreamTesting::ACEGetBoostSockStreamExceptionTest()
 {
     SockStream sockStream{ GetACEServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto& value = sockStream.GetBoostSockStream();
+    MAYBE_UNUSED const auto& result = sockStream.GetBoostSockStream();
 }
 
 void Network::SockStreamTesting::ACEGetNetworkSockStreamExceptionTest()
 {
     SockStream sockStream{ GetACEServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockStream.GetNetworkSockStream();
+    MAYBE_UNUSED const auto result = sockStream.GetNetworkSockStream();
 }
 
 void Network::SockStreamTesting::BoostGetACESockStreamExceptionTest()
 {
     SockStream sockStream{ GetBoostServerConfigurationStrategy() };
-    MAYBE_UNUSED auto value = sockStream.GetACESockStream();
+    MAYBE_UNUSED const auto result = sockStream.GetACESockStream();
 }
 
 void Network::SockStreamTesting::BoostGetBoostSockStreamTest()
 {
     SockStream sockStream{ GetBoostServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto& value = sockStream.GetBoostSockStream();
+    MAYBE_UNUSED const auto& result = sockStream.GetBoostSockStream();
 }
 
 void Network::SockStreamTesting::BoostGetNetworkSockStreamExceptionTest()
 {
     SockStream sockStream{ GetBoostServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockStream.GetNetworkSockStream();
+    MAYBE_UNUSED const auto result = sockStream.GetNetworkSockStream();
 }
 
 void Network::SockStreamTesting::NetworkGetACESockStreamExceptionTest()
 {
     SockStream sockStream{ GetNetworkServerConfigurationStrategy() };
-    MAYBE_UNUSED auto value = sockStream.GetACESockStream();
+    MAYBE_UNUSED const auto result = sockStream.GetACESockStream();
 }
 
 void Network::SockStreamTesting::NetworkGetBoostSockStreamExceptionTest()
 {
     SockStream sockStream{ GetNetworkServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto& value = sockStream.GetBoostSockStream();
+    MAYBE_UNUSED const auto& result = sockStream.GetBoostSockStream();
 }
 
 void Network::SockStreamTesting::NetworkGetNetworkSockStreamTest()
 {
     SockStream sockStream{ GetNetworkServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockStream.GetNetworkSockStream();
+    MAYBE_UNUSED const auto result = sockStream.GetNetworkSockStream();
 }
 
 void Network::SockStreamTesting::ACEGetACEHandleTest()
 {
     SockStream sockStream{ GetACEServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockStream.GetACEHandle();
+    MAYBE_UNUSED const auto result = sockStream.GetACEHandle();
 }
 
 void Network::SockStreamTesting::ACESetACEHandleTest()
@@ -157,8 +158,8 @@ void Network::SockStreamTesting::ACESetNetworkHandleExceptionTest()
 
 void Network::SockStreamTesting::BoostGetACEHandleExceptionTest()
 {
-    SockStream sockStream{ GetBoostServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockStream.GetACEHandle();
+    const SockStream sockStream{ GetBoostServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockStream.GetACEHandle();
 }
 
 void Network::SockStreamTesting::BoostSetACEHandleExceptionTest()
@@ -175,8 +176,8 @@ void Network::SockStreamTesting::BoostSetNetworkHandleExceptionTest()
 
 void Network::SockStreamTesting::NetworkGetACEHandleExceptionTest()
 {
-    SockStream sockStream{ GetNetworkServerConfigurationStrategy() };
-    MAYBE_UNUSED auto value = sockStream.GetACEHandle();
+    const SockStream sockStream{ GetNetworkServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockStream.GetACEHandle();
 }
 
 void Network::SockStreamTesting::NetworkSetACEHandleExceptionTest()
@@ -204,14 +205,14 @@ void Network::SockStreamTesting::NullTest()
 
 void Network::SockStreamTesting::NullGetACEHandleExceptionTest()
 {
-    SockStream sockStream{ GetNullServerConfigurationStrategy() };
-    MAYBE_UNUSED auto value = sockStream.GetACEHandle();
+    const SockStream sockStream{ GetNullServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockStream.GetACEHandle();
 }
 
 void Network::SockStreamTesting::NullSetACEHandleExceptionTest()
 {
     SockStream sockStream{ GetNullServerConfigurationStrategy() };
-    sockStream.SetACEHandle(0);
+    sockStream.SetACEHandle(nullptr);
 }
 
 void Network::SockStreamTesting::NullSetNetworkHandleExceptionTest()
@@ -228,17 +229,17 @@ void Network::SockStreamTesting::NullConstructionTest()
 void Network::SockStreamTesting::NullGetACESockStreamExceptionTest()
 {
     SockStream sockStream{ GetNullServerConfigurationStrategy() };
-    MAYBE_UNUSED auto value = sockStream.GetACESockStream();
+    MAYBE_UNUSED const auto result = sockStream.GetACESockStream();
 }
 
 void Network::SockStreamTesting::NullGetBoostSockStreamExceptionTest()
 {
     SockStream sockStream{ GetNullServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto& value = sockStream.GetBoostSockStream();
+    MAYBE_UNUSED const auto& result = sockStream.GetBoostSockStream();
 }
 
 void Network::SockStreamTesting::NullGetNetworkSockStreamExceptionTest()
 {
     SockStream sockStream{ GetNullServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockStream.GetNetworkSockStream();
+    MAYBE_UNUSED const auto result = sockStream.GetNetworkSockStream();
 }

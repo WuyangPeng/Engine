@@ -30,7 +30,7 @@ Network::BufferReceiveStream::BufferReceiveStream(const MessageBufferSharedPtr& 
 
 CLASS_INVARIANT_STUB_DEFINE(Network, BufferReceiveStream)
 
-void Network::BufferReceiveStream::OnEvent(uint64_t socketId, MessageEventManager& messageEventManager)
+void Network::BufferReceiveStream::OnEvent(int64_t socketId, MessageEventManager& messageEventManager)
 {
     NETWORK_CLASS_IS_VALID_1;
 

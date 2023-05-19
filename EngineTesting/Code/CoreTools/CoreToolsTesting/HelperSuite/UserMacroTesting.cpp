@@ -37,7 +37,7 @@ void CoreTools::UserMacroTesting::MainTest()
     ObjectManager::Create();
 
     ASSERT_NOT_THROW_EXCEPTION_0(IsValidTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CloseSystemMaxTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CloseCoreToolsMaxTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MacroExistTest);
 
     ObjectManager::Destroy();
@@ -65,7 +65,7 @@ void CoreTools::UserMacroTesting::IsValidTest() noexcept(!gOpenClassInvariant)
 #endif  // OPEN_CLASS_INVARIANT
 }
 
-void CoreTools::UserMacroTesting::CloseSystemMaxTest()
+void CoreTools::UserMacroTesting::CloseCoreToolsMaxTest()
 {
     ASSERT_EQUAL(CLOSE_ASSERT | CLOSE_CLASS_INVARIANT | CLOSE_USE_IMPORTANT_EXCEPTION_ASSERT | CLOSE_USE_SAFETY_LIMIT | CLOSE_USE_OPENXLSX, CLOSE_CORE_TOOLS_MAX);
 }

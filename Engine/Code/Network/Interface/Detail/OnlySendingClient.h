@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 15:12)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 11:17)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SENDING_A_TRIP_CLIENT_H
 #define NETWORK_NETWORK_INTERFACE_SENDING_A_TRIP_CLIENT_H
@@ -27,20 +27,20 @@ namespace Network
         using ParentType = ClientImpl;
 
     public:
-        OnlySendingClient(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager);
+        OnlySendingClient(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& messageEventManager);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD uint64_t Connect() override;
+        NODISCARD int64_t Connect() override;
         void AsyncConnect() override;
 
-        void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
-        void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
+        void Send(int64_t socketId, const MessageInterfaceSharedPtr& message) override;
+        void AsyncSend(int64_t socketId, const MessageInterfaceSharedPtr& message) override;
 
         void Receive() noexcept override;
         void AsyncReceive() noexcept override;
-        void ImmediatelySend(uint64_t socketID) override;
-        void ImmediatelyAsyncSend(uint64_t socketID) override;
+        void ImmediatelySend(int64_t socketId) override;
+        void ImmediatelyAsyncSend(int64_t socketId) override;
 
     private:
         using BufferType = std::vector<char>;

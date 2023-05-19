@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 17:53)
+///	Copyright (c) 2010-2023
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:27)
 
 #include "Network/NetworkExport.h"
 
@@ -13,8 +13,6 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-
-using std::make_unique;
 
 Network::ExecutorWorkGuardContextThread::ExecutorWorkGuardContextThread(CoreTools::DisableNotThrow disableNotThrow)
     : executorWorkGuardContext{ disableNotThrow }, thread{}
@@ -33,11 +31,11 @@ Network::ExecutorWorkGuardContextThread::~ExecutorWorkGuardContextThread() noexc
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ExecutorWorkGuardContextThread)
 
-Network::IOContextType& Network::ExecutorWorkGuardContextThread::GetIOContext() noexcept
+Network::IoContextType& Network::ExecutorWorkGuardContextThread::GetContext() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return executorWorkGuardContext.GetIOContext();
+    return executorWorkGuardContext.GetContext();
 }
 
 void Network::ExecutorWorkGuardContextThread::StopContext()
@@ -67,13 +65,11 @@ void Network::ExecutorWorkGuardContextThread::RestartContext()
     InitThread();
 }
 
-// private
 void Network::ExecutorWorkGuardContextThread::InitThread()
 {
-    thread = make_unique<ThreadType>(&ExecutorWorkGuardContext::Run, &executorWorkGuardContext);
+    thread = std::make_unique<ThreadType>(&ExecutorWorkGuardContext::Run, &executorWorkGuardContext);
 }
 
-// private
 void Network::ExecutorWorkGuardContextThread::JoinThreads()
 {
     if (thread != nullptr)

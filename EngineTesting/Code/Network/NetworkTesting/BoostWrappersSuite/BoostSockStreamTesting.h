@@ -1,17 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 16:33)
+///	引擎测试版本：0.9.0.8 (2023/05/18 10:46)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BOOST_SOCK_STREAM_TESTING_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BOOST_SOCK_STREAM_TESTING_H
 
 #include "BoostSockTesting.h"
-#include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
+#include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketEvent.h"
 
 namespace Network
 {
@@ -22,7 +22,7 @@ namespace Network
         using ParentType = BoostSockTesting;
 
     public:
-        explicit BoostSockStreamTesting(const OStreamShared& stream);
+        explicit BoostSockStreamTesting(const OStreamShared& stream, int increase = 2500);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -44,11 +44,11 @@ namespace Network
         void CreateMessage();
         void DestroyMessage();
         NODISCARD MessageBufferSharedPtr CreateMessageBuffer() const;
-        void VerificationMessageBuffer(const MessageBufferSharedPtr& messageBuffer);
+        void VerificationMessageBuffer(const MessageBuffer& messageBuffer);
 
-        NODISCARD uint64_t ClientConnect(const ClientSharedPtr& client);
-        void ClientSend(const ClientSharedPtr& client, uint64_t socketID, const TestSocketManagerSharedPtr& testSocketManager);
-        void ClientReceive(const ClientSharedPtr& client, const TestSocketManagerSharedPtr& testSocketManager);
+        NODISCARD int64_t ClientConnect(Client& client);
+        void ClientSend(Client& client, int64_t socketId, const TestSocketEvent& testSocketEvent);
+        void ClientReceive(Client& client, const TestSocketEvent& testSocketEvent);
 
         NODISCARD static constexpr int GetAcceptTime() noexcept
         {
@@ -122,7 +122,7 @@ namespace Network
         static constexpr auto sendTime = 100000000;
         static constexpr auto synchronizeSendTime = 1000;
         static constexpr auto asynchronousSendTime = 100000000;
-        static constexpr auto receiveTime = 100;
+        static constexpr auto receiveTime = 10000;
         static constexpr auto synchronizeReceiveTime = 1000;
         static constexpr auto asynchronousReceiveTime = 100000000;
     };

@@ -45,5 +45,6 @@ bool Network::ConfigurationParameter::IsParameterExist(const String& key, const 
     return impl->IsParameterExist(key, parameter);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, ConfigurationParameter, GetParameter, String, Network::ConfigurationParameter::Parameter);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, ConfigurationParameter, GetParameter, String, Network::ConfigurationParameter::Parameter)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, ConfigurationParameter, GetFirstParameter, String, System::String)
 COPY_UNSHARED_CLONE_SELF_DEFINE(Network, ConfigurationParameter)

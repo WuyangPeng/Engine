@@ -1,18 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/22 17:55)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 13:53)
 
 #include "Network/NetworkExport.h"
 
 #include "SockACEHandleSet.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-
-using std::make_shared;
 
 #ifdef NETWORK_USE_ACE
 
@@ -24,7 +22,7 @@ Network::SockACEHandleSet::SockACEHandleSet() noexcept
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SockACEHandleSet)
 
-void Network::SockACEHandleSet::SetBit(ACEHandle handle)
+void Network::SockACEHandleSet::SetBit(ACEHandleType handle)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -37,7 +35,9 @@ int64_t Network::SockACEHandleSet::GetMaxSet() const
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
+
     return reinterpret_cast<int64_t>(aceHandleSet.max_set());
+
     #include STSTEM_WARNING_POP
 }
 
@@ -48,21 +48,21 @@ Network::SockFdSet* Network::SockACEHandleSet::GetFdSet()
     return aceHandleSet.fdset();
 }
 
-void Network::SockACEHandleSet::Sync(ACEHandle maxHandle)
+void Network::SockACEHandleSet::Sync(ACEHandleType maxHandle)
 {
     NETWORK_CLASS_IS_VALID_9;
 
     aceHandleSet.sync(maxHandle);
 }
 
-bool Network::SockACEHandleSet::IsSet(ACEHandle handle) const
+bool Network::SockACEHandleSet::IsSet(ACEHandleType handle) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return aceHandleSet.is_set(handle) != 0;
 }
 
-void Network::SockACEHandleSet::ClearBit(ACEHandle handle)
+void Network::SockACEHandleSet::ClearBit(ACEHandleType handle)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -73,7 +73,7 @@ Network::SockACEHandleSet::ImplTypeSharedPtr Network::SockACEHandleSet::Clone() 
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return make_shared<ClassType>(*this);
+    return std::make_shared<ClassType>(*this);
 }
 
 const Network::ACEHandleSet& Network::SockACEHandleSet::GetACEHandleSet() const noexcept

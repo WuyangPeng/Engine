@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 13:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:53)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NULL_HANDLE_SET_H
 #define NETWORK_NETWORK_INTERFACE_NULL_HANDLE_SET_H
@@ -27,12 +27,12 @@ namespace Network
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        void SetBit(ACEHandle handle) noexcept override;
+        void SetBit(ACEHandleType handle) noexcept override;
         NODISCARD int64_t GetMaxSet() const noexcept override;
         NODISCARD SockFdSet* GetFdSet() override;
-        void Sync(ACEHandle maxHandle) noexcept override;
-        NODISCARD bool IsSet(ACEHandle handle) const noexcept override;
-        void ClearBit(ACEHandle handle) noexcept override;
+        void Sync(ACEHandleType maxHandle) noexcept override;
+        NODISCARD bool IsSet(ACEHandleType handle) const noexcept override;
+        void ClearBit(ACEHandleType handle) noexcept override;
 
         NODISCARD ImplTypeSharedPtr Clone() const override;
 

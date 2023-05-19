@@ -1,23 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/22 22:30)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:24)
 
 #include "Network/NetworkExport.h"
 
 #include "BoostMainManagerUseThreads.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Network/Configuration/ConfigurationSubStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-
-using std::make_unique;
 
 Network::BoostMainManagerUseThreads::BoostMainManagerUseThreads(const ConfigurationSubStrategy& subStrategy)
     : ParentType{ CoreTools::DisableNotThrow::Disable }, threads{}, threadNumber{ subStrategy.GetValue(WrappersSubStrategy::Threads) }
@@ -36,7 +34,6 @@ Network::BoostMainManagerUseThreads::~BoostMainManagerUseThreads() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, BoostMainManagerUseThreads)
 
-// private
 void Network::BoostMainManagerUseThreads::InitThread()
 {
     DoJoinThreads();
@@ -71,13 +68,11 @@ void Network::BoostMainManagerUseThreads::Run() noexcept
     NETWORK_CLASS_IS_VALID_9;
 }
 
-// private
 void Network::BoostMainManagerUseThreads::ThreadsRun()
 {
     ParentType::Run();
 }
 
-// private
 void Network::BoostMainManagerUseThreads::DoJoinThreads()
 {
     for (auto& value : threads)
@@ -88,12 +83,11 @@ void Network::BoostMainManagerUseThreads::DoJoinThreads()
     threads.clear();
 }
 
-// private
 void Network::BoostMainManagerUseThreads::DoInitThread()
 {
     for (auto i = 0; i < threadNumber; ++i)
     {
-        auto thread = make_unique<ThreadType>(&ClassType::ThreadsRun, this);
+        auto thread = std::make_unique<ThreadType>(&ClassType::ThreadsRun, this);
         threads.push_back(std::move(thread));
     }
 

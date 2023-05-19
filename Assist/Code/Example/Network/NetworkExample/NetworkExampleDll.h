@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/12 15:45)
+///	引擎辅助版本：0.9.0.8 (2023/05/10 18:20)
 
 #ifndef NETWORK_EXAMPLE_DLL_DLL_H
 #define NETWORK_EXAMPLE_DLL_DLL_H
@@ -16,8 +16,17 @@
 #if defined(BUILDING_NETWORK_EXAMPLE_NO_IMPORT) || defined(BUILDING_NETWORK_EXAMPLE_STATIC)
 
     #define NETWORK_EXAMPLE_DEFAULT_DECLARE
-    #define NETWORK_EXAMPLE_HIDDEN_DECLARE
     #define NETWORK_EXAMPLE_VISIBLE
+
+    #if defined(BUILDING_NETWORK_EXAMPLE_EXPORT)
+
+        #define NETWORK_EXAMPLE_HIDDEN_DECLARE
+
+    #else  // !defined(BUILDING_NETWORK_EXAMPLE_EXPORT)
+
+        #define NETWORK_EXAMPLE_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_NETWORK_EXAMPLE_EXPORT
 
 #else  // !defined(BUILDING_NETWORK_EXAMPLE_NO_IMPORT) && !defined(BUILDING_NETWORK_EXAMPLE_STATIC)
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/22 13:46)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 13:49)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_H
 #define NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_H
@@ -18,7 +18,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE SockACEHandleSet : public HandleSetImpl
+    class NETWORK_HIDDEN_DECLARE SockACEHandleSet final : public HandleSetImpl
     {
     public:
         using ClassType = SockACEHandleSet;
@@ -29,12 +29,12 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void SetBit(ACEHandle handle) override;
+        void SetBit(ACEHandleType handle) override;
         NODISCARD int64_t GetMaxSet() const override;
         NODISCARD SockFdSet* GetFdSet() override;
-        void Sync(ACEHandle maxHandle) override;
-        NODISCARD bool IsSet(ACEHandle handle) const override;
-        void ClearBit(ACEHandle handle) override;
+        void Sync(ACEHandleType maxHandle) override;
+        NODISCARD bool IsSet(ACEHandleType handle) const override;
+        void ClearBit(ACEHandleType handle) override;
         NODISCARD bool IsFdSetFull() const override;
         NODISCARD int IsFdSetCount() const override;
 

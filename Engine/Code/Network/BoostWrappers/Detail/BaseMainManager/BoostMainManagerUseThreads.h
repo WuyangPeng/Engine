@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/22 19:15)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:22)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_MAIN_MANAGER_USE_THREADS_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_MAIN_MANAGER_USE_THREADS_H
@@ -30,10 +30,10 @@ namespace Network
     public:
         explicit BoostMainManagerUseThreads(const ConfigurationSubStrategy& subStrategy);
         ~BoostMainManagerUseThreads() noexcept;
-        BoostMainManagerUseThreads(const BoostMainManagerUseThreads&) = default;
-        BoostMainManagerUseThreads& operator=(const BoostMainManagerUseThreads&) = default;
-        BoostMainManagerUseThreads(BoostMainManagerUseThreads&&) noexcept = default;
-        BoostMainManagerUseThreads& operator=(BoostMainManagerUseThreads&&) noexcept = default;
+        BoostMainManagerUseThreads(const BoostMainManagerUseThreads&) = delete;
+        BoostMainManagerUseThreads& operator=(const BoostMainManagerUseThreads&) = delete;
+        BoostMainManagerUseThreads(BoostMainManagerUseThreads&&) noexcept = delete;
+        BoostMainManagerUseThreads& operator=(BoostMainManagerUseThreads&&) noexcept = delete;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

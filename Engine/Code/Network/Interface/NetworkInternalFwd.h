@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 16:43)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/08 17:06)
 
 #ifndef NETWORK_INTERFACE_NETWORK_INTERNAL_FWD_H
 #define NETWORK_INTERFACE_NETWORK_INTERNAL_FWD_H
@@ -61,19 +61,19 @@ namespace Network
     using BoostHandleType = boost::asio::ip::tcp::acceptor::native_handle_type;
     using WinSocketType = System::WinSocket;
 
-    using ACEInetAddressType = ACEInetAddress;
-    using BoostInetAddressType = boost::asio::ip::tcp::endpoint;
-    using WinSockInetAddressType = System::WinSockInternetAddress;
+    using ACEInternetAddressType = ACEInternetAddress;
+    using BoostInternetAddressType = boost::asio::ip::tcp::endpoint;
+    using WinSockInternetAddressType = System::WinSockInternetAddress;
 
     using ACESockStreamType = ACESockStreamNativeType;
     using BoostSockStreamType = boost::asio::ip::tcp::socket;
     using WinSocketStreamType = System::WinSocket;
 
-    using IOContextType = boost::asio::io_context;
+    using IoContextType = boost::asio::io_context;
     using ErrorCodeType = boost::system::error_code;
 
-    static constexpr System::StringView g_ACELogName{ SYSTEM_TEXT("ACENetwork") };
-    static constexpr System::StringView g_BoostLogName{ SYSTEM_TEXT("BoostNetwork") };
+    static constexpr System::StringView aceLogName{ SYSTEM_TEXT("ACENetwork") };
+    static constexpr System::StringView boostLogName{ SYSTEM_TEXT("BoostNetwork") };
 }
 
 #endif  // NETWORK_INTERFACE_NETWORK_INTERNAL_FWD_H

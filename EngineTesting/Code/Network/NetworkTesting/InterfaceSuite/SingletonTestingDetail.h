@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 13:35)
+///	引擎测试版本：0.9.0.8 (2023/05/15 09:30)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SINGLETON_TESTING_DETAIL_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SINGLETON_TESTING_DETAIL_H
@@ -16,7 +16,7 @@
 #include "Network/Interface/BaseMainManager.h"
 
 template <typename Test>
-void Network::SingletonTesting::ACESingletonTest(MAYBE_UNUSED Test* test, MAYBE_UNUSED typename Test::TestFunction function)
+void Network::SingletonTesting::ACESingletonTest(Test* test, typename Test::TestFunction function)
 {
 #ifdef NETWORK_USE_ACE
 
@@ -25,6 +25,8 @@ void Network::SingletonTesting::ACESingletonTest(MAYBE_UNUSED Test* test, MAYBE_
     BaseMainManager::Destroy();
 
 #else  // !NETWORK_USE_ACE
+
+    System::UnusedFunction(test, function);
 
 #endif  // NETWORK_USE_ACE
 }

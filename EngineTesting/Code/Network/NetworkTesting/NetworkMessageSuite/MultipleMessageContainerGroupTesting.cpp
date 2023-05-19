@@ -1,16 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/23 18:45)
+///	引擎测试版本：0.9.0.8 (2023/05/12 10:00)
 
 #include "MultipleMessageContainerGroupTesting.h"
 #include "Flags/MultipleMessageType.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
@@ -18,9 +19,6 @@
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 #include "Network/NetworkMessage/MultipleMessageContainer.h"
 #include "Network/NetworkMessage/MultipleMessageContainerGroupDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
-using std::string;
 
 Network::MultipleMessageContainerGroupTesting::MultipleMessageContainerGroupTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -78,30 +76,30 @@ void Network::MultipleMessageContainerGroupTesting::BaseTest()
     constexpr uint32_t uint32Value{ 224 };
     constexpr uint64_t uint64Value{ 156 };
 
-    const string stringValue{ "string" };
+    const std::string stringValue{ "string" };
 
-    MultipleMessageType multipleMessageContainer1{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
-    MultipleMessageType multipleMessageContainer2{ boost::numeric_cast<int8_t>(int8Value + 1),
-                                                   boost::numeric_cast<uint8_t>(uint8Value + 1),
-                                                   boost::numeric_cast<int16_t>(int16Value + 1),
-                                                   boost::numeric_cast<uint16_t>(uint16Value + 1),
-                                                   int32Value + 1,
-                                                   uint32Value + 1,
-                                                   int64Value + 1,
-                                                   uint64Value + 1,
-                                                   stringValue + "1" };
-    MultipleMessageType multipleMessageContainer3{ boost::numeric_cast<int8_t>(int8Value + 2),
-                                                   boost::numeric_cast<uint8_t>(uint8Value + 2),
-                                                   boost::numeric_cast<int16_t>(int16Value + 2),
-                                                   boost::numeric_cast<uint16_t>(uint16Value + 2),
-                                                   int32Value + 2,
-                                                   uint32Value + 2,
-                                                   int64Value + 2,
-                                                   uint64Value + 2,
-                                                   stringValue + "2" };
-    TestingType::GroupType group{ multipleMessageContainer1, multipleMessageContainer2, multipleMessageContainer3 };
+    const MultipleMessageType multipleMessageContainer0{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
+    const MultipleMessageType multipleMessageContainer1{ boost::numeric_cast<int8_t>(int8Value + 1),
+                                                         boost::numeric_cast<uint8_t>(uint8Value + 1),
+                                                         boost::numeric_cast<int16_t>(int16Value + 1),
+                                                         boost::numeric_cast<uint16_t>(uint16Value + 1),
+                                                         int32Value + 1,
+                                                         uint32Value + 1,
+                                                         int64Value + 1,
+                                                         uint64Value + 1,
+                                                         stringValue + "1" };
+    const MultipleMessageType multipleMessageContainer2{ boost::numeric_cast<int8_t>(int8Value + 2),
+                                                         boost::numeric_cast<uint8_t>(uint8Value + 2),
+                                                         boost::numeric_cast<int16_t>(int16Value + 2),
+                                                         boost::numeric_cast<uint16_t>(uint16Value + 2),
+                                                         int32Value + 2,
+                                                         uint32Value + 2,
+                                                         int64Value + 2,
+                                                         uint64Value + 2,
+                                                         stringValue + "2" };
+    const TestingType::GroupType group{ multipleMessageContainer0, multipleMessageContainer1, multipleMessageContainer2 };
 
-    TestingType multipleMessageContainerGroup{ group };
+    const TestingType multipleMessageContainerGroup{ group };
 
     ASSERT_EQUAL(multipleMessageContainerGroup.GetSize(), boost::numeric_cast<int>(group.size()));
 
@@ -136,36 +134,36 @@ void Network::MultipleMessageContainerGroupTesting::StreamingTest()
     constexpr uint32_t uint32Value{ 224 };
     constexpr uint64_t uint64Value{ 156 };
 
-    const string stringValue{ "string" };
+    const std::string stringValue{ "string" };
 
-    MultipleMessageType multipleMessageContainer1{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
-    MultipleMessageType multipleMessageContainer2{ boost::numeric_cast<int8_t>(int8Value + 1), boost::numeric_cast<uint8_t>(uint8Value + 1),
-                                                   boost::numeric_cast<int16_t>(int16Value + 1), boost::numeric_cast<uint16_t>(uint16Value + 1),
-                                                   int32Value + 1, uint32Value + 1, int64Value + 1, uint64Value + 1, stringValue + "1" };
-    MultipleMessageType multipleMessageContainer3{ boost::numeric_cast<int8_t>(int8Value + 2), boost::numeric_cast<uint8_t>(uint8Value + 2),
-                                                   boost::numeric_cast<int16_t>(int16Value + 2), boost::numeric_cast<uint16_t>(uint16Value + 2),
-                                                   int32Value + 2, uint32Value + 2, int64Value + 2, uint64Value + 2, stringValue + "2" };
-    TestingType::GroupType group{ multipleMessageContainer1, multipleMessageContainer2, multipleMessageContainer3 };
+    const MultipleMessageType multipleMessageContainer0{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
+    const MultipleMessageType multipleMessageContainer1{ boost::numeric_cast<int8_t>(int8Value + 1), boost::numeric_cast<uint8_t>(uint8Value + 1),
+                                                         boost::numeric_cast<int16_t>(int16Value + 1), boost::numeric_cast<uint16_t>(uint16Value + 1),
+                                                         int32Value + 1, uint32Value + 1, int64Value + 1, uint64Value + 1, stringValue + "1" };
+    const MultipleMessageType multipleMessageContainer2{ boost::numeric_cast<int8_t>(int8Value + 2), boost::numeric_cast<uint8_t>(uint8Value + 2),
+                                                         boost::numeric_cast<int16_t>(int16Value + 2), boost::numeric_cast<uint16_t>(uint16Value + 2),
+                                                         int32Value + 2, uint32Value + 2, int64Value + 2, uint64Value + 2, stringValue + "2" };
+    const TestingType::GroupType group{ multipleMessageContainer0, multipleMessageContainer1, multipleMessageContainer2 };
 
-    TestingType multipleMessageContainerGroup{ group };
+    const TestingType multipleMessageContainerGroup{ group };
 
-    const auto streamSize = multipleMessageContainer1.GetStreamingSize() +
-                            multipleMessageContainer2.GetStreamingSize() +
+    const auto streamSize = multipleMessageContainer0.GetStreamingSize() +
                             multipleMessageContainer1.GetStreamingSize() +
+                            multipleMessageContainer0.GetStreamingSize() +
                             CoreTools::GetStreamSize(int32_t{});
 
     ASSERT_EQUAL(multipleMessageContainerGroup.GetStreamingSize(), streamSize);
 
-    MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(*buffer) };
+    MessageBuffer buffer{ BuffBlockSize::Size256, ParserStrategy::LittleEndian };
+    MessageTarget messageTarget{ buffer };
 
-    multipleMessageContainerGroup.Save(*messageTarget);
+    multipleMessageContainerGroup.Save(messageTarget);
 
-    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(*buffer) };
+    MessageSource messageSource{ buffer };
 
     TestingType resultMultipleMessageContainerGroup{};
 
-    resultMultipleMessageContainerGroup.Load(*messageSource);
+    resultMultipleMessageContainerGroup.Load(messageSource);
 
     ASSERT_EQUAL_FAILURE_THROW(resultMultipleMessageContainerGroup.GetSize(), multipleMessageContainerGroup.GetSize(), "数组大小不相等！");
 

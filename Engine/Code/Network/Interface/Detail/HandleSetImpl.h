@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 13:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:52)
 
 #ifndef NETWORK_NETWORK_INTERFACE_HANDLE_SET_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_HANDLE_SET_IMPL_H
@@ -36,12 +36,12 @@ namespace Network
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual void SetBit(ACEHandle handle) = 0;
+        virtual void SetBit(ACEHandleType handle) = 0;
         NODISCARD virtual int64_t GetMaxSet() const = 0;
         NODISCARD virtual SockFdSet* GetFdSet() = 0;
-        virtual void Sync(ACEHandle maxHandle) = 0;
-        NODISCARD virtual bool IsSet(ACEHandle handle) const = 0;
-        virtual void ClearBit(ACEHandle handle) = 0;
+        virtual void Sync(ACEHandleType maxHandle) = 0;
+        NODISCARD virtual bool IsSet(ACEHandleType handle) const = 0;
+        virtual void ClearBit(ACEHandleType handle) = 0;
 
         NODISCARD virtual ImplTypeSharedPtr Clone() const = 0;
 

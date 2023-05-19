@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 11:55)
+///	Copyright (c) 2010-2023
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 11:18)
 
 #include "Network/NetworkExport.h"
 
@@ -24,33 +24,26 @@
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageBuffer.h"
 
-#include <vector>
-
-using std::make_shared;
-using std::string;
-using std::vector;
-
-Network::OnlySendingClient::OnlySendingClient(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager)
-    : ParentType{ configurationStrategy, socketManager },
+Network::OnlySendingClient::OnlySendingClient(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& messageEventManager)
+    : ParentType{ configurationStrategy, messageEventManager },
       sockConnector{ configurationStrategy },
-      sockStream{ make_shared<SockStream>(configurationStrategy) },
+      sockStream{ std::make_shared<SockStream>(configurationStrategy) },
       bufferSendStream{ configurationStrategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::SendBufferSize), configurationStrategy.GetParserStrategy(), configurationStrategy.GetEncryptedCompressionStrategy() },
-      buffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::SendBufferSize), configurationStrategy.GetParserStrategy()))
+      buffer(std::make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::SendBufferSize), configurationStrategy.GetParserStrategy()))
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, OnlySendingClient)
 
-uint64_t Network::OnlySendingClient::Connect()
+int64_t Network::OnlySendingClient::Connect()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    const auto strategy = GetConfigurationStrategy();
+    const auto configuration = GetConfigurationStrategy();
 
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(strategy.GetHost(), strategy.GetPort(), strategy) };
-
-    if (sockConnector.Connect(sockStream, sockAddress))
+    if (const SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configuration.GetHost(), configuration.GetPort(), configuration) };
+        sockConnector.Connect(sockStream, sockAddress))
     {
         return UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
     }
@@ -65,14 +58,13 @@ void Network::OnlySendingClient::AsyncConnect()
     NETWORK_CLASS_IS_VALID_9;
 
     const auto strategy = GetConfigurationStrategy();
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(strategy.GetHost(), strategy.GetPort(), strategy) };
-#include STSTEM_WARNING_POP
-    // sockConnector.AsyncConnect(GetSocketManagerSharedPtr(), sockStream, sockAddress);
+
+    const SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(strategy.GetHost(), strategy.GetPort(), strategy) };
+
+    sockConnector.AsyncConnect(shared_from_this(), sockStream, sockAddress);
 }
 
-void Network::OnlySendingClient::Send(MAYBE_UNUSED uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::OnlySendingClient::Send(int64_t socketId, const MessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -83,15 +75,15 @@ void Network::OnlySendingClient::Send(MAYBE_UNUSED uint64_t socketID, const Mess
 
     if (bufferSendStream.Insert(message))
     {
-        ImmediatelySend(socketID);
+        ImmediatelySend(socketId);
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("缓冲区大小不足！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("缓冲区大小不足！"s))
     }
 }
 
-void Network::OnlySendingClient::AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::OnlySendingClient::AsyncSend(int64_t socketId, const MessageInterfaceSharedPtr& message)
 {
     if (GetConfigurationStrategy().GetSocketSendMessage() == SocketSendMessage::Cache)
     {
@@ -100,37 +92,47 @@ void Network::OnlySendingClient::AsyncSend(uint64_t socketID, const MessageInter
 
     if (bufferSendStream.Insert(message))
     {
-        ImmediatelyAsyncSend(socketID);
+        ImmediatelyAsyncSend(socketId);
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("缓冲区大小不足！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("缓冲区大小不足！"s))
     }
 }
 
-void Network::OnlySendingClient::ImmediatelySend(MAYBE_UNUSED uint64_t socketID)
+void Network::OnlySendingClient::ImmediatelySend(int64_t socketId)
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(socketId);
 
     if (!bufferSendStream.IsEmpty())
     {
+        buffer->ClearCurrentIndex();
         bufferSendStream.Save(buffer);
 
-        MAYBE_UNUSED const auto index = sockStream->Send(buffer);
+        if (const auto result = sockStream->Send(buffer);
+            result != buffer->GetCurrentWriteIndex())
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("消息发送失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        }
 
         bufferSendStream.Clear();
     }
 }
 
-void Network::OnlySendingClient::ImmediatelyAsyncSend(MAYBE_UNUSED uint64_t socketID)
+void Network::OnlySendingClient::ImmediatelyAsyncSend(int64_t socketId)
 {
     NETWORK_CLASS_IS_VALID_9;
 
+    System::UnusedFunction(socketId);
+
     if (!bufferSendStream.IsEmpty())
     {
+        buffer->ClearCurrentIndex();
         bufferSendStream.Save(buffer);
 
-        // sockStream->AsyncSend(GetSocketManagerSharedPtr(), buffer);
+        sockStream->AsyncSend(shared_from_this(), buffer);
 
         bufferSendStream.Clear();
     }
@@ -152,23 +154,21 @@ void Network::OnlySendingClient::AsyncReceive() noexcept
 
 bool Network::OnlySendingClient::EventFunction(const CoreTools::CallbackParameters& callbackParameters)
 {
-    const auto eventType = System::UnderlyingCastEnum<SocketManagerEvent>(callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPosition::Event)));
-
-    switch (eventType)
+    switch (const auto eventType = System::UnderlyingCastEnum<SocketManagerEvent>(callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPosition::Event)));
+            eventType)
     {
         case SocketManagerEvent::AsyncConnect:
         {
             const auto wrappersStrategy = callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy));
-            const auto result = callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPosition::Error));
-            if (System::UnderlyingCastEnum<WrappersStrategy>(wrappersStrategy) == WrappersStrategy::Ace && result == 0)
+
+            if (const auto result = callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPosition::Error));
+                result == 0)
             {
-                auto socket = GetSocketManagerSharedPtr();
-                const auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
-                //   socket->InsertSocket(socketID);
-                /*  if (!socket->EventFunction(callbackParameters))
-                  {
-                      LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("消息事件触发失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-                  }*/
+                if (const auto event = GetMessageEventManagerSharedPtr()->GetCallbackEvent();
+                    event != nullptr && !event->EventFunction(callbackParameters))
+                {
+                    LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("消息事件触发失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+                }
 
                 return true;
             }
@@ -179,5 +179,5 @@ bool Network::OnlySendingClient::EventFunction(const CoreTools::CallbackParamete
             break;
     }
 
-    return false;
+    return true;
 }

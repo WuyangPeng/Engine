@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 16:45)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:10)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCK_ACCEPTOR_H
 #define NETWORK_NETWORK_INTERFACE_SOCK_ACCEPTOR_H
@@ -24,10 +24,6 @@ namespace Network
     {
     public:
         NON_COPY_TYPE_DECLARE(SockAcceptor);
-        using ACEHandleType = ACEHandle;
-        using BoostHandleType = boost::asio::ip::tcp::acceptor::native_handle_type;
-        using WinSocketType = System::WinSocket;
-        using EventInterface = CoreTools::EventInterface;
 
     public:
         explicit SockAcceptor(const ConfigurationStrategy& configurationStrategy);
@@ -46,7 +42,7 @@ namespace Network
         NODISCARD bool EnableNonBlock();
 
         // ACE 专用，其他类调用抛出异常。
-        NODISCARD ACEHandle GetACEHandle();
+        NODISCARD ACEHandleType GetACEHandle();
 
         // boost 专用，其他类调用抛出异常。
         NODISCARD BoostHandleType GetBoostHandle();

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/23 15:48)
+///	引擎测试版本：0.9.0.8 (2023/05/11 11:35)
 
 #include "TestNullMessage.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
@@ -16,8 +16,8 @@
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 
-Network::TestNullMessage::TestNullMessage(int64_t messageID) noexcept
-    : ParentType{ MessageHeadStrategy::Default, messageID }
+Network::TestNullMessage::TestNullMessage(int64_t messageId) noexcept
+    : ParentType{ MessageHeadStrategy::Default, messageId }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }

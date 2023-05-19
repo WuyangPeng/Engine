@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/23 15:45)
+///	引擎测试版本：0.9.0.8 (2023/05/11 11:34)
 
 #include "TestDoubleIntMessage.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
@@ -17,8 +17,8 @@
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 
-Network::TestDoubleIntMessage::TestDoubleIntMessage(int64_t messageID) noexcept
-    : ParentType{ MessageHeadStrategy::UseSubId, messageID }, mIntValue{ 0 }
+Network::TestDoubleIntMessage::TestDoubleIntMessage(int64_t messageId) noexcept
+    : ParentType{ MessageHeadStrategy::UseSubId, messageId }, intValue{ 0 }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -29,7 +29,7 @@ CORE_TOOLS_RTTI_DEFINE(Network, TestDoubleIntMessage);
 NETWORK_FACTORY_DEFINE(Network, TestDoubleIntMessage);
 
 Network::TestDoubleIntMessage::TestDoubleIntMessage(LoadConstructor value, MessageHeadStrategy messageHeadStrategy, int64_t messageID) noexcept
-    : ParentType{ value, messageHeadStrategy, messageID }, mIntValue{ 0 }
+    : ParentType{ value, messageHeadStrategy, messageID }, intValue{ 0 }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -42,7 +42,7 @@ void Network::TestDoubleIntMessage::Load(MessageSource& source)
 
     ParentType::Load(source);
 
-    source.Read(mIntValue);
+    source.Read(intValue);
 
     NETWORK_END_STREAM_LOAD(source);
 }
@@ -55,7 +55,7 @@ void Network::TestDoubleIntMessage::Save(MessageTarget& target) const
 
     ParentType::Save(target);
 
-    target.Write(mIntValue);
+    target.Write(intValue);
 
     NETWORK_END_STREAM_SAVE(target);
 }
@@ -64,19 +64,19 @@ int Network::TestDoubleIntMessage::GetStreamingSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return ParentType::GetStreamingSize() + CoreTools::GetStreamSize(mIntValue);
+    return ParentType::GetStreamingSize() + CoreTools::GetStreamSize(intValue);
 }
 
 int Network::TestDoubleIntMessage::GetIntValue() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return mIntValue;
+    return intValue;
 }
 
-void Network::TestDoubleIntMessage::SetIntValue(int intValue) noexcept
+void Network::TestDoubleIntMessage::SetIntValue(int aIntValue) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    mIntValue = intValue;
+    intValue = aIntValue;
 }

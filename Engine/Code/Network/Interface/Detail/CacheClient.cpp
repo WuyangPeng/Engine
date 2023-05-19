@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 17:15)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 10:32)
 
 #include "Network/NetworkExport.h"
 
@@ -26,41 +26,35 @@
 
 #include <vector>
 
-using std::make_shared;
-using std::string;
-using std::vector;
-
-Network::CacheClient::CacheClient(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager)
-    : ParentType{ configurationStrategy, socketManager },
+Network::CacheClient::CacheClient(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& messageEventManager)
+    : ParentType{ configurationStrategy, messageEventManager },
       sockConnector{ configurationStrategy },
-      sockStream{ make_shared<SockStream>(configurationStrategy) },
+      sockStream{ std::make_shared<SockStream>(configurationStrategy) },
       sockAddress{ make_shared<SockAddress>(configurationStrategy.GetHost(), configurationStrategy.GetPort(), configurationStrategy) },
       bufferSendStream{ configurationStrategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::SendBufferSize),
                         configurationStrategy.GetParserStrategy(),
                         configurationStrategy.GetEncryptedCompressionStrategy() },
-      m_SocketID{ 0 },
-      sendBuffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::SendBufferSize), configurationStrategy.GetParserStrategy())),
-      receiveBuffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::ReceiveBufferSize), configurationStrategy.GetParserStrategy()))
+      clientSocketId{ 0 },
+      sendBuffer(std::make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::SendBufferSize), configurationStrategy.GetParserStrategy())),
+      receiveBuffer(std::make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::ReceiveBufferSize), configurationStrategy.GetParserStrategy()))
 {
     NETWORK_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, CacheClient)
 
-uint64_t Network::CacheClient::Connect()
+int64_t Network::CacheClient::Connect()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    const auto strategy = GetConfigurationStrategy();
-    auto socket = GetSocketManagerSharedPtr();
+    const auto configuration = GetConfigurationStrategy();
 
-    auto address = make_shared<SockAddress>(strategy.GetHost(), strategy.GetPort(), strategy);
-    if (socket && sockConnector.Connect(sockStream, address))
+    if (const auto address = make_shared<SockAddress>(configuration.GetHost(), configuration.GetPort(), configuration);
+        sockConnector.Connect(sockStream, address))
     {
-        m_SocketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
-        //  socket->InsertSocket(m_SocketID);
+        clientSocketId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
 
-        return m_SocketID;
+        return clientSocketId;
     }
 
     return 0;
@@ -73,21 +67,21 @@ void Network::CacheClient::AsyncConnect()
     sockConnector.AsyncConnect(shared_from_this(), sockStream, sockAddress);
 }
 
-void Network::CacheClient::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::CacheClient::Send(int64_t socketId, const MessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    if (m_SocketID == socketID)
+    if (clientSocketId == socketId)
     {
         if (GetConfigurationStrategy().GetSocketSendMessage() == SocketSendMessage::Immediately)
         {
-            ImmediatelySend(socketID);
+            ImmediatelySend(socketId);
         }
         else
         {
             if (!bufferSendStream.Insert(message))
             {
-                ImmediatelySend(socketID);
+                ImmediatelySend(socketId);
 
                 if (!bufferSendStream.Insert(message))
                 {
@@ -98,19 +92,19 @@ void Network::CacheClient::Send(uint64_t socketID, const MessageInterfaceSharedP
     }
 }
 
-void Network::CacheClient::AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::CacheClient::AsyncSend(int64_t socketId, const MessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
     if (GetConfigurationStrategy().GetSocketSendMessage() == SocketSendMessage::Immediately)
     {
-        ImmediatelyAsyncSend(socketID);
+        ImmediatelyAsyncSend(socketId);
     }
     else
     {
         if (!bufferSendStream.Insert(message))
         {
-            ImmediatelyAsyncSend(socketID);
+            ImmediatelyAsyncSend(socketId);
 
             if (!bufferSendStream.Insert(message))
             {
@@ -120,31 +114,35 @@ void Network::CacheClient::AsyncSend(uint64_t socketID, const MessageInterfaceSh
     }
 }
 
-void Network::CacheClient::ImmediatelySend(uint64_t socketID)
+void Network::CacheClient::ImmediatelySend(int64_t socketId)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    if (m_SocketID == socketID && !bufferSendStream.IsEmpty())
+    if (clientSocketId == socketId && !bufferSendStream.IsEmpty())
     {
         sendBuffer->ClearCurrentIndex();
         bufferSendStream.Save(sendBuffer);
 
-        MAYBE_UNUSED const auto index = sockStream->Send(sendBuffer);
+        if (const auto result = sockStream->Send(sendBuffer);
+            result != sendBuffer->GetCurrentWriteIndex())
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("消息发送失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        }
 
         bufferSendStream.Clear();
     }
 }
 
-void Network::CacheClient::ImmediatelyAsyncSend(uint64_t socketID)
+void Network::CacheClient::ImmediatelyAsyncSend(int64_t socketId)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    if (m_SocketID == socketID && !bufferSendStream.IsEmpty())
+    if (clientSocketId == socketId && !bufferSendStream.IsEmpty())
     {
         sendBuffer->ClearCurrentIndex();
         bufferSendStream.Save(sendBuffer);
 
-        //  sockStream->AsyncSend(GetSocketManagerSharedPtr(), sendBuffer);
+        sockStream->AsyncSend(shared_from_this(), sendBuffer);
 
         bufferSendStream.Clear();
     }
@@ -159,7 +157,7 @@ void Network::CacheClient::Receive()
         if (sockStream->Receive(receiveBuffer))
         {
             BufferReceiveStream bufferReceiveStream{ receiveBuffer, GetConfigurationStrategy().GetParserStrategy(), GetConfigurationStrategy().GetEncryptedCompressionStrategy() };
-            bufferReceiveStream.OnEvent(m_SocketID, *GetSocketManagerSharedPtr());
+            bufferReceiveStream.OnEvent(clientSocketId, *GetMessageEventManagerSharedPtr());
             receiveBuffer->ClearCurrentIndex();
         }
     }
@@ -177,35 +175,33 @@ void Network::CacheClient::AsyncReceive()
     sockStream->AsyncReceive(shared_from_this(), receiveBuffer);
 }
 
-uint64_t Network::CacheClient::GetSocketID() const noexcept
+int64_t Network::CacheClient::GetSocketId() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_SocketID;
+    return clientSocketId;
 }
 
 bool Network::CacheClient::EventFunction(const CoreTools::CallbackParameters& callbackParameters)
 {
-    auto eventType = System::UnderlyingCastEnum<SocketManagerEvent>(callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPosition::Event)));
-
-    auto socket = GetSocketManagerSharedPtr();
-
-    switch (eventType)
+    switch (const auto eventType = System::UnderlyingCastEnum<SocketManagerEvent>(callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPosition::Event)));
+            eventType)
     {
         case SocketManagerEvent::AsyncConnect:
         {
-            const auto result = callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPosition::Error));
-            if (result == 0)
+            if (const auto result = callbackParameters.GetInt32Value(System::EnumCastUnderlying(SocketManagerPosition::Error));
+                result == 0)
             {
-                m_SocketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
-                // socket->InsertSocket(m_SocketID);
-                /*  if (!socket->EventFunction(callbackParameters))
-                  {
-                      LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("事件触发失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-                  }*/
+                clientSocketId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
 
-                return true;
+                if (const auto callbackEvent = GetMessageEventManagerSharedPtr()->GetCallbackEvent();
+                    callbackEvent != nullptr)
+                {
+                    return callbackEvent->EventFunction(callbackParameters);
+                }
             }
+
+            return true;
         }
         break;
 
@@ -213,12 +209,25 @@ bool Network::CacheClient::EventFunction(const CoreTools::CallbackParameters& ca
         {
             const auto strategy = GetConfigurationStrategy();
             BufferReceiveStream bufferReceiveStream{ receiveBuffer, strategy.GetParserStrategy(), strategy.GetEncryptedCompressionStrategy() };
-            bufferReceiveStream.OnEvent(m_SocketID, *socket);
+            bufferReceiveStream.OnEvent(clientSocketId, *GetMessageEventManagerSharedPtr());
 
-            /* if (!socket->EventFunction(callbackParameters))
-             {
-                 LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("事件触发失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-             }*/
+            if (const auto callbackEvent = GetMessageEventManagerSharedPtr()->GetCallbackEvent();
+                callbackEvent != nullptr)
+            {
+                return callbackEvent->EventFunction(callbackParameters);
+            }
+
+            return true;
+        }
+        break;
+
+        case SocketManagerEvent::AsyncSend:
+        {
+            if (const auto callbackEvent = GetMessageEventManagerSharedPtr()->GetCallbackEvent();
+                callbackEvent != nullptr)
+            {
+                return callbackEvent->EventFunction(callbackParameters);
+            }
 
             return true;
         }
@@ -228,5 +237,5 @@ bool Network::CacheClient::EventFunction(const CoreTools::CallbackParameters& ca
             break;
     }
 
-    return false;
+    return true;
 }

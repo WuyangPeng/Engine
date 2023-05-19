@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 14:24)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:17)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NULL_SOCK_ACCEPTOR_H
 #define NETWORK_NETWORK_INTERFACE_NULL_SOCK_ACCEPTOR_H
@@ -28,15 +28,15 @@ namespace Network
         CLASS_INVARIANT_FINAL_DECLARE;
 
     public:
-        NODISCARD bool Accept(SockStream& sockStream, SockAddress& sockAddress) noexcept final;
-        NODISCARD bool Accept(SockStream& sockStream) noexcept final;
-        void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) noexcept final;
-        void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept final;
+        NODISCARD bool Accept(SockStream& sockStream, SockAddress& sockAddress) noexcept override;
+        NODISCARD bool Accept(SockStream& sockStream) noexcept override;
+        void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) noexcept override;
+        void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept override;
 
-        NODISCARD bool EnableNonBlock() noexcept final;
+        NODISCARD bool EnableNonBlock() noexcept override;
 
-        NODISCARD std::string GetAddress() const noexcept final;
-        NODISCARD int GetPort() const noexcept final;
+        NODISCARD std::string GetAddress() const noexcept override;
+        NODISCARD int GetPort() const noexcept override;
     };
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 18:06)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:52)
 
 #include "Network/NetworkExport.h"
 
@@ -17,8 +17,6 @@
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
-using std::make_shared;
-
 Network::HandleSetFactory::HandleSetFactory() noexcept
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -26,18 +24,19 @@ Network::HandleSetFactory::HandleSetFactory() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, HandleSetFactory)
 
-// static
 Network::HandleSetFactory::ImplTypeSharedPtr Network::HandleSetFactory::Create(const ConfigurationStrategy& configurationStrategy)
 {
-    const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
-
-    switch (wrappersStrategyFlag)
+    switch (const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+            wrappersStrategy)
     {
 #ifdef NETWORK_USE_ACE
+
         case WrappersStrategy::Ace:
-            return make_shared<SockACEHandleSet>();
+            return std::make_shared<SockACEHandleSet>();
+
 #endif  // NETWORK_USE_ACE
+
         default:
-            return make_shared<NullHandleSet>();
+            return std::make_shared<NullHandleSet>();
     }
 }

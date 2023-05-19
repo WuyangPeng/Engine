@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/19 18:54)
+///	引擎测试版本：0.9.0.8 (2023/05/12 14:54)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_BUFFER_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_BUFFER_TESTING_H
@@ -16,7 +16,7 @@
 
 namespace Network
 {
-    class MessageBufferTesting : public CoreTools::UnitTest
+    class MessageBufferTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = MessageBufferTesting;
@@ -29,9 +29,10 @@ namespace Network
 
     private:
         void MainTest();
+        void DoRunUnitTest() override;
 
         void InitTest();
-        void PushBackTest(int aTestLoopCount, ParserStrategy parserStrateg);
+        void PushBackTest(int aTestLoopCount, ParserStrategy parserStrategy);
         void ExpansionTest(int aTestLoopCount, ParserStrategy parserStrategy);
         void CloneTest(int aTestLoopCount, ParserStrategy parserStrategy);
         void ReadTest(int aTestLoopCount, ParserStrategy parserStrategy);
@@ -44,14 +45,12 @@ namespace Network
 
         void LoopTest(int aTestLoopCount);
 
-        NODISCARD MessageBufferSharedPtr CreateSendMessageBuffer(int aTestLoopCount, ParserStrategy parserStrategy) const;
+        NODISCARD MessageBufferSharedPtr CreateSendMessageBuffer(int aTestLoopCount, ParserStrategy parserStrategy);
         NODISCARD MessageBufferSharedPtr CreateAddMessageBuffer(int aTestLoopCount, ParserStrategy parserStrategy) const;
         void AddBufferLength(int aTestLoopCount, MessageBuffer& messageBuffer);
 
-        void DoRunUnitTest() override;
-
     private:
-        static constexpr int64_t messageID{ 6 };
+        static constexpr auto messageId = 6LL;
         static constexpr auto bufferSize = 1024;
 
         TestNullMessageSharedPtr testMessage;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/19 14:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 10:49)
 
 #ifndef NETWORK_NETWORK_INTERFACE_CLIENT_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_CLIENT_IMPL_H
@@ -25,12 +25,13 @@ namespace Network
     public:
         using ClassType = ClientImpl;
         using ParentType = EventInterface;
-        using EventInterfaceSharedPtr = CoreTools::EventInterfaceSharedPtr;
-        using CallbackParameters = CoreTools::CallbackParameters;
         using FactoryType = ClientFactory;
 
+        using CallbackParameters = CoreTools::CallbackParameters;
+        using EventInterfaceSharedPtr = CoreTools::EventInterfaceSharedPtr;
+
     public:
-        ClientImpl(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager) noexcept;
+        ClientImpl(ConfigurationStrategy configurationStrategy, const MessageEventManagerSharedPtr& messageEventManager) noexcept;
         ~ClientImpl() noexcept = default;
         ClientImpl(const ClientImpl& rhs) noexcept = delete;
         ClientImpl& operator=(const ClientImpl& rhs) noexcept = delete;
@@ -39,27 +40,30 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD virtual uint64_t Connect() = 0;
+        NODISCARD virtual int64_t Connect() = 0;
         virtual void AsyncConnect() = 0;
 
-        virtual void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) = 0;
-        virtual void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) = 0;
+        virtual void Send(int64_t socketId, const MessageInterfaceSharedPtr& message) = 0;
+        virtual void AsyncSend(int64_t socketId, const MessageInterfaceSharedPtr& message) = 0;
 
         virtual void Receive() = 0;
         virtual void AsyncReceive() = 0;
-        virtual void ImmediatelySend(uint64_t socketID) = 0;
-        virtual void ImmediatelyAsyncSend(uint64_t socketID) = 0;
+        virtual void ImmediatelySend(int64_t socketId) = 0;
+        virtual void ImmediatelyAsyncSend(int64_t socketID) = 0;
 
         NODISCARD ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
-        NODISCARD virtual uint64_t GetSocketID() const noexcept;
+        NODISCARD virtual int64_t GetSocketId() const noexcept;
 
     protected:
-        NODISCARD MessageEventManagerSharedPtr GetSocketManagerSharedPtr();
+        NODISCARD MessageEventManagerSharedPtr GetMessageEventManagerSharedPtr();
+
+    private:
+        using MessageEventManagerWeakPtr = std::weak_ptr<MessageEventManager>;
 
     private:
         ConfigurationStrategy configurationStrategy;
-        std::weak_ptr<MessageEventManager> socketManager;
+        MessageEventManagerWeakPtr messageEventManager;
     };
 }
 

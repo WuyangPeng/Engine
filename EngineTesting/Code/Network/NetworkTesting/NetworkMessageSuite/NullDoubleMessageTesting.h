@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/23 15:40)
+///	引擎测试版本：0.9.0.8 (2023/05/11 14:43)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_NULL_DOUBLE_MESSAGE_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_NULL_DOUBLE_MESSAGE_TESTING_H
@@ -14,7 +14,7 @@
 
 namespace Network
 {
-    class NullDoubleMessageTesting : public CoreTools::UnitTest
+    class NullDoubleMessageTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = NullDoubleMessageTesting;
@@ -27,18 +27,17 @@ namespace Network
 
     private:
         void MainTest();
+        void DoRunUnitTest() override;
 
         void RttiTest();
         void FactoryTest();
         void StreamingTest();
         void MessageTest();
 
-        void DoRunUnitTest() override;
-
     private:
-        static constexpr int64_t messageID{ 6 };
-        static constexpr int64_t subMessageID{ 4 };
-        static constexpr auto fullMessageID = (messageID << 32ull) + subMessageID;
+        static constexpr auto messageId = 6LL;
+        static constexpr auto subMessageId = 4LL;
+        static constexpr auto fullMessageId = (messageId << 32LL) + subMessageId;
     };
 }
 

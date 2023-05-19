@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/22 13:49)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:04)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_SOCK_STREAM_H
 #define NETWORK_NETWORK_INTERFACE_ACE_SOCK_STREAM_H
@@ -42,9 +42,9 @@ namespace Network
         void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
         void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
 
-        NODISCARD ACEHandle GetACEHandle() const override;
+        NODISCARD ACEHandleType GetACEHandle() const override;
 
-        void SetACEHandle(ACEHandle handle) override;
+        void SetACEHandle(ACEHandleType handle) override;
         NODISCARD bool CloseHandle() override;
 
         NODISCARD std::string GetRemoteAddress() const override;

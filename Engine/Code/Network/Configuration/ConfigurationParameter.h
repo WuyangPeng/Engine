@@ -42,6 +42,7 @@ namespace Network
         void AddParameter(const String& key, const String& parameter);
         NODISCARD bool IsParameterExist(const String& key, const String& parameter) const;
         NODISCARD Parameter GetParameter(const String& key) const;
+        NODISCARD String GetFirstParameter(const String& key) const;
 
     private:
         PackageType impl;

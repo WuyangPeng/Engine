@@ -142,6 +142,18 @@ Network::WrappersStrategy Network::AnalysisNetworkConfigurationImpl::GetWrappers
     {
         return WrappersStrategy::Network;
     }
+    else if (caseInsensitiveTString == SYSTEM_TEXT("ActiveMQ"))
+    {
+        return WrappersStrategy::ActiveMQ;
+    }
+    else if (caseInsensitiveTString == SYSTEM_TEXT("Nats"))
+    {
+        return WrappersStrategy::Nats;
+    }
+    else if (caseInsensitiveTString == SYSTEM_TEXT("Kafka"))
+    {
+        return WrappersStrategy::Kafka;
+    }
 
     THROW_EXCEPTION(SYSTEM_TEXT("网络包装器类型不存在。"s))
 }

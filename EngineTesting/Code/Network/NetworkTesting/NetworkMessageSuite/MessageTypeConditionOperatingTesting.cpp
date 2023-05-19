@@ -1,21 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/23 18:32)
+///	引擎测试版本：0.9.0.8 (2023/05/12 10:28)
 
 #include "MessageTypeConditionOperatingTesting.h"
 #include "ThreadingCoreRenderEngineTesting/Version.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/MessageTypeConditionOperating.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::set;
 
 Network::MessageTypeConditionOperatingTesting::MessageTypeConditionOperatingTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -38,14 +37,14 @@ void Network::MessageTypeConditionOperatingTesting::MainTest()
 void Network::MessageTypeConditionOperatingTesting::OperatingTest()
 {
     constexpr auto version = gTCRETestingVersion - 4;
-    MessageTypeCondition messageTypeCondition1{ VersionsCondition::Greater, version };
-    MessageTypeCondition messageTypeCondition2{ VersionsCondition::GreaterEqual, version };
-    MessageTypeCondition messageTypeCondition3{ VersionsCondition::Equality, version };
-    MessageTypeCondition messageTypeCondition4{ VersionsCondition::LessEqual, version };
-    MessageTypeCondition messageTypeCondition5{ VersionsCondition::Less, version };
-    MessageTypeCondition messageTypeCondition6{ version - 1, version + 1 };
-    MessageTypeCondition messageTypeCondition7{ set<int>{ version - 2, version + 3 } };
-    MessageTypeCondition messageTypeCondition8 = MessageTypeCondition::CreateNullCondition();
+    const MessageTypeCondition messageTypeCondition0 = MessageTypeCondition::CreateNullCondition();
+    const MessageTypeCondition messageTypeCondition1{ VersionsCondition::Greater, version };
+    const MessageTypeCondition messageTypeCondition2{ VersionsCondition::GreaterEqual, version };
+    const MessageTypeCondition messageTypeCondition3{ VersionsCondition::Equality, version };
+    const MessageTypeCondition messageTypeCondition4{ VersionsCondition::LessEqual, version };
+    const MessageTypeCondition messageTypeCondition5{ VersionsCondition::Less, version };
+    const MessageTypeCondition messageTypeCondition6{ version - 1, version + 1 };
+    const MessageTypeCondition messageTypeCondition7{ std::set<int>{ version - 2, version + 3 } };
 
     const MessageTypeConditionOperating messageTypeConditionOperating{};
 
@@ -68,9 +67,9 @@ void Network::MessageTypeConditionOperatingTesting::OperatingTest()
 
     ASSERT_TRUE(messageTypeConditionOperating(messageTypeCondition7, messageTypeCondition6));
 
-    ASSERT_FALSE(messageTypeConditionOperating(messageTypeCondition1, messageTypeCondition8));
-    ASSERT_FALSE(messageTypeConditionOperating(messageTypeCondition2, messageTypeCondition8));
-    ASSERT_FALSE(messageTypeConditionOperating(messageTypeCondition3, messageTypeCondition8));
-    ASSERT_TRUE(messageTypeConditionOperating(messageTypeCondition4, messageTypeCondition8));
-    ASSERT_TRUE(messageTypeConditionOperating(messageTypeCondition5, messageTypeCondition8));
+    ASSERT_FALSE(messageTypeConditionOperating(messageTypeCondition1, messageTypeCondition0));
+    ASSERT_FALSE(messageTypeConditionOperating(messageTypeCondition2, messageTypeCondition0));
+    ASSERT_FALSE(messageTypeConditionOperating(messageTypeCondition3, messageTypeCondition0));
+    ASSERT_TRUE(messageTypeConditionOperating(messageTypeCondition4, messageTypeCondition0));
+    ASSERT_TRUE(messageTypeConditionOperating(messageTypeCondition5, messageTypeCondition0));
 }

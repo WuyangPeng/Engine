@@ -73,12 +73,6 @@
     <Filter Include="OpensslSuite 源文件">
       <UniqueIdentifier>{b541a835-7a29-4af2-8841-0b2b33327ba9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SocketWrappersSuite 头文件">
-      <UniqueIdentifier>{c2853d64-5462-4703-903a-e4b4818b995a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SocketWrappersSuite 源文件">
-      <UniqueIdentifier>{42db1ba8-506e-4f1a-8b06-b63b52f299ba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{c3f54ba1-b05c-48ee-a70b-895f62856e8a}</UniqueIdentifier>
     </Filter>
@@ -148,6 +142,15 @@
     <Filter Include="NetworkMessageSuite 源文件\Detail\Resource\Protobuf\Proto">
       <UniqueIdentifier>{02e5b915-47d9-4dad-9dee-dad8dadb0132}</UniqueIdentifier>
     </Filter>
+    <Filter Include="KafkaSuite 头文件">
+      <UniqueIdentifier>{f053c860-1cb3-4159-9709-ff8872c7dc02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ActiveMQSuite 源文件">
+      <UniqueIdentifier>{72d2b6a7-2233-45e3-8e60-1d46acc30e8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageOrientedMiddlewareSuite 源文件">
+      <UniqueIdentifier>{bfbdf0d2-aa1e-482b-be3c-ade5f331a0c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\Testing.h">
@@ -168,7 +171,7 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockConnectorTesting.h">
       <Filter>ACEWrappersSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockInetAddressTesting.h">
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockInternetAddressTesting.h">
       <Filter>ACEWrappersSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockStreamTesting.h">
@@ -192,7 +195,7 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnectorTesting.h">
       <Filter>BoostWrappersSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockInetAddressTesting.h">
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockInternetAddressTesting.h">
       <Filter>BoostWrappersSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStreamTesting.h">
@@ -222,7 +225,7 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestMessageEvent.h">
       <Filter>InterfaceSuite 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestSocketManager.h">
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestSocketEvent.h">
       <Filter>InterfaceSuite 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockStreamTesting.h">
@@ -249,9 +252,6 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\IterativeServerTesting.h">
       <Filter>InterfaceSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\NetworkUniqueIDManagerTesting.h">
-      <Filter>InterfaceSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\OnlySendingClientTesting.h">
       <Filter>InterfaceSuite 头文件</Filter>
     </ClInclude>
@@ -276,9 +276,6 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SingletonTestingDetail.h">
       <Filter>InterfaceSuite 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\NullSocketManager.h">
-      <Filter>NetworkMessageSuite 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestNetworkMessageEvent.h">
       <Filter>NetworkMessageSuite 头文件\Detail</Filter>
     </ClInclude>
@@ -286,9 +283,6 @@
       <Filter>NetworkMessageSuite 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\SendMessageLevelTesting.h">
-      <Filter>NetworkMessageSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\SocketManagerTesting.h">
       <Filter>NetworkMessageSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\BufferReceiveStreamTesting.h">
@@ -336,7 +330,7 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockConnectorTesting.h">
       <Filter>NetworkWrappersSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockInetAddressTesting.h">
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockInternetAddressTesting.h">
       <Filter>NetworkWrappersSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockStreamTesting.h">
@@ -350,9 +344,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\OpensslSuite\OpensslSuite.h">
       <Filter>OpensslSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\SocketWrappersSuite\SocketWrappersSuite.h">
-      <Filter>SocketWrappersSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerUseMultiContextTesting.h">
       <Filter>BoostWrappersSuite 头文件</Filter>
@@ -408,9 +399,6 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestIntMessage.h">
       <Filter>NetworkMessageSuite 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\DoubleMessageTesting.h">
-      <Filter>NetworkMessageSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleNullMessage.h">
       <Filter>NetworkMessageSuite 头文件\Detail</Filter>
     </ClInclude>
@@ -465,15 +453,6 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageTesting.h">
       <Filter>NetworkMessageSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\IntegerDoubleMessageTesting.h">
-      <Filter>NetworkMessageSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\StringDoubleMessageTesting.h">
-      <Filter>NetworkMessageSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleDoubleMessageTesting.h">
-      <Filter>NetworkMessageSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageContainerGroupTesting.h">
       <Filter>NetworkMessageSuite 头文件</Filter>
     </ClInclude>
@@ -513,6 +492,42 @@
     <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\Resource\Protobuf\Proto\Player.pb.h">
       <Filter>NetworkMessageSuite 头文件\Detail\Resource\Protobuf\Proto</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\KafkaSuite\KafkaSuite.h">
+      <Filter>KafkaSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\ProtoBufMessageTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\JsonMessageTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestJsonMessage.h">
+      <Filter>NetworkMessageSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\MessageOrientedMiddlewareSuite\ConsumerTesting.h">
+      <Filter>MessageOrientedMiddlewareSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\MessageOrientedMiddlewareSuite\ProducerTesting.h">
+      <Filter>MessageOrientedMiddlewareSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\MessageOrientedMiddlewareSuite\RouteServiceTesting.h">
+      <Filter>MessageOrientedMiddlewareSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\MessageOrientedMiddlewareSuite\RouteServiceManagerTesting.h">
+      <Filter>MessageOrientedMiddlewareSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ActiveMQSuite\ActiveMQConsumerTesting.h">
+      <Filter>ActiveMQSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ActiveMQSuite\ActiveMQProducerTesting.h">
+      <Filter>ActiveMQSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ActiveMQSuite\ActiveMQRouteServiceTesting.h">
+      <Filter>ActiveMQSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ActiveMQSuite\ActiveMQRouteServiceManagerTesting.h">
+      <Filter>ActiveMQSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\TestingHelper.cpp">
@@ -536,7 +551,7 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockConnectorTesting.cpp">
       <Filter>ACEWrappersSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockInetAddressTesting.cpp">
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockInternetAddressTesting.cpp">
       <Filter>ACEWrappersSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockStreamTesting.cpp">
@@ -560,7 +575,7 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnectorTesting.cpp">
       <Filter>BoostWrappersSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockInetAddressTesting.cpp">
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockInternetAddressTesting.cpp">
       <Filter>BoostWrappersSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStreamTesting.cpp">
@@ -581,7 +596,7 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestMessageEvent.cpp">
       <Filter>InterfaceSuite 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestSocketManager.cpp">
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestSocketEvent.cpp">
       <Filter>InterfaceSuite 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\BaseMainManagerTesting.cpp">
@@ -600,9 +615,6 @@
       <Filter>InterfaceSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\IterativeServerTesting.cpp">
-      <Filter>InterfaceSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\NetworkUniqueIDManagerTesting.cpp">
       <Filter>InterfaceSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\OnlySendingClientTesting.cpp">
@@ -628,9 +640,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockStreamTesting.cpp">
       <Filter>InterfaceSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\NullSocketManager.cpp">
-      <Filter>NetworkMessageSuite 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestNetworkMessageEvent.cpp">
       <Filter>NetworkMessageSuite 源文件\Detail</Filter>
@@ -677,9 +686,6 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\SendMessageLevelTesting.cpp">
       <Filter>NetworkMessageSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\SocketManagerTesting.cpp">
-      <Filter>NetworkMessageSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkMainManagerTesting.cpp">
       <Filter>NetworkWrappersSuite 源文件</Filter>
     </ClCompile>
@@ -689,7 +695,7 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockConnectorTesting.cpp">
       <Filter>NetworkWrappersSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockInetAddressTesting.cpp">
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockInternetAddressTesting.cpp">
       <Filter>NetworkWrappersSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockStreamTesting.cpp">
@@ -749,9 +755,6 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestIntMessage.cpp">
       <Filter>NetworkMessageSuite 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\DoubleMessageTesting.cpp">
-      <Filter>NetworkMessageSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleNullMessage.cpp">
       <Filter>NetworkMessageSuite 源文件\Detail</Filter>
     </ClCompile>
@@ -797,15 +800,6 @@
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageTesting.cpp">
       <Filter>NetworkMessageSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\IntegerDoubleMessageTesting.cpp">
-      <Filter>NetworkMessageSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\StringDoubleMessageTesting.cpp">
-      <Filter>NetworkMessageSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleDoubleMessageTesting.cpp">
-      <Filter>NetworkMessageSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageContainerGroupTesting.cpp">
       <Filter>NetworkMessageSuite 源文件</Filter>
     </ClCompile>
@@ -832,6 +826,39 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\Resource\Protobuf\Proto\Player.pb.cc">
       <Filter>NetworkMessageSuite 源文件\Detail\Resource\Protobuf\Proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\ProtoBufMessageTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\JsonMessageTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestJsonMessage.cpp">
+      <Filter>NetworkMessageSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\MessageOrientedMiddlewareSuite\ConsumerTesting.cpp">
+      <Filter>MessageOrientedMiddlewareSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\MessageOrientedMiddlewareSuite\ProducerTesting.cpp">
+      <Filter>MessageOrientedMiddlewareSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\MessageOrientedMiddlewareSuite\RouteServiceTesting.cpp">
+      <Filter>MessageOrientedMiddlewareSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\MessageOrientedMiddlewareSuite\RouteServiceManagerTesting.cpp">
+      <Filter>MessageOrientedMiddlewareSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ActiveMQSuite\ActiveMQConsumerTesting.cpp">
+      <Filter>ActiveMQSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ActiveMQSuite\ActiveMQProducerTesting.cpp">
+      <Filter>ActiveMQSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ActiveMQSuite\ActiveMQRouteServiceTesting.cpp">
+      <Filter>ActiveMQSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ActiveMQSuite\ActiveMQRouteServiceManagerTesting.cpp">
+      <Filter>ActiveMQSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -896,6 +923,9 @@
     </None>
     <None Include="Resource\Protobuf\proto\Player.proto">
       <Filter>资源文件\Protobuf\proto</Filter>
+    </None>
+    <None Include="Configuration\ActiveMQTest.json">
+      <Filter>配置</Filter>
     </None>
   </ItemGroup>
 </Project>

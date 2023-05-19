@@ -1,19 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 14:13)
+///	引擎测试版本：0.9.0.8 (2023/05/15 09:09)
 
 #include "BaseMainManagerTesting.h"
 #include "SingletonTestingDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Interface/BaseMainManager.h"
-#include <CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h>
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 Network::BaseMainManagerTesting::BaseMainManagerTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -48,7 +49,7 @@ void Network::BaseMainManagerTesting::ACETest()
 
 void Network::BaseMainManagerTesting::BoostTest()
 {
-    MAYBE_UNUSED const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    MAYBE_UNUSED const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
@@ -61,18 +62,9 @@ void Network::BaseMainManagerTesting::BoostTest()
     ASSERT_TRUE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
 }
 
-void Network::BaseMainManagerTesting::NullTest()
-{
-    ASSERT_NOT_THROW_EXCEPTION_0(NullRunTest);
-    ASSERT_THROW_EXCEPTION_0(NullGetIOContextExceptionTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(NullStopContextExceptionTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(NullIsContextStopExceptionTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(NullRestartContextExceptionTest);
-}
-
 void Network::BaseMainManagerTesting::ThreadsBoostTest()
 {
-    MAYBE_UNUSED const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    MAYBE_UNUSED const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 
     BASE_MAIN_MANAGER_SINGLETON.Run();
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
@@ -85,7 +77,7 @@ void Network::BaseMainManagerTesting::ThreadsBoostTest()
 
 void Network::BaseMainManagerTesting::MultiContextBoostTest()
 {
-    MAYBE_UNUSED const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    MAYBE_UNUSED const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 
     BASE_MAIN_MANAGER_SINGLETON.Run();
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
@@ -99,7 +91,7 @@ void Network::BaseMainManagerTesting::MultiContextBoostTest()
 void Network::BaseMainManagerTesting::NetworkTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(NetworkRunTest);
-    ASSERT_THROW_EXCEPTION_0(NetworkGetIOContextExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(NetworkGetIoContextExceptionTest);
     ASSERT_THROW_EXCEPTION_0(NetworkStopContextExceptionTest);
     ASSERT_THROW_EXCEPTION_0(NetworkIsContextStopExceptionTest);
     ASSERT_THROW_EXCEPTION_0(NetworkRestartContextExceptionTest);
@@ -112,7 +104,7 @@ void Network::BaseMainManagerTesting::ACERunTest()
 
 void Network::BaseMainManagerTesting::ACEGetIOContextExceptionTest()
 {
-    MAYBE_UNUSED const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    MAYBE_UNUSED const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 }
 
 void Network::BaseMainManagerTesting::ACEStopContextExceptionTest()
@@ -122,7 +114,7 @@ void Network::BaseMainManagerTesting::ACEStopContextExceptionTest()
 
 void Network::BaseMainManagerTesting::ACEIsContextStopExceptionTest()
 {
-    MAYBE_UNUSED const auto value = BASE_MAIN_MANAGER_SINGLETON.IsContextStop();
+    MAYBE_UNUSED const auto result = BASE_MAIN_MANAGER_SINGLETON.IsContextStop();
 }
 
 void Network::BaseMainManagerTesting::ACERestartContextExceptionTest()
@@ -135,9 +127,9 @@ void Network::BaseMainManagerTesting::NetworkRunTest()
     BASE_MAIN_MANAGER_SINGLETON.Run();
 }
 
-void Network::BaseMainManagerTesting::NetworkGetIOContextExceptionTest()
+void Network::BaseMainManagerTesting::NetworkGetIoContextExceptionTest()
 {
-    MAYBE_UNUSED const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    MAYBE_UNUSED const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 }
 
 void Network::BaseMainManagerTesting::NetworkStopContextExceptionTest()
@@ -147,7 +139,7 @@ void Network::BaseMainManagerTesting::NetworkStopContextExceptionTest()
 
 void Network::BaseMainManagerTesting::NetworkIsContextStopExceptionTest()
 {
-    MAYBE_UNUSED const auto value = BASE_MAIN_MANAGER_SINGLETON.IsContextStop();
+    MAYBE_UNUSED const auto result = BASE_MAIN_MANAGER_SINGLETON.IsContextStop();
 }
 
 void Network::BaseMainManagerTesting::NetworkRestartContextExceptionTest()
@@ -155,14 +147,23 @@ void Network::BaseMainManagerTesting::NetworkRestartContextExceptionTest()
     BASE_MAIN_MANAGER_SINGLETON.RestartContext();
 }
 
+void Network::BaseMainManagerTesting::NullTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(NullRunTest);
+    ASSERT_THROW_EXCEPTION_0(NullGetIoContextExceptionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NullStopContextExceptionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NullIsContextStopExceptionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NullRestartContextExceptionTest);
+}
+
 void Network::BaseMainManagerTesting::NullRunTest()
 {
     BASE_MAIN_MANAGER_SINGLETON.Run();
 }
 
-void Network::BaseMainManagerTesting::NullGetIOContextExceptionTest()
+void Network::BaseMainManagerTesting::NullGetIoContextExceptionTest()
 {
-    MAYBE_UNUSED const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    MAYBE_UNUSED const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 }
 
 void Network::BaseMainManagerTesting::NullStopContextExceptionTest()
@@ -172,7 +173,7 @@ void Network::BaseMainManagerTesting::NullStopContextExceptionTest()
 
 void Network::BaseMainManagerTesting::NullIsContextStopExceptionTest()
 {
-    MAYBE_UNUSED const auto value = BASE_MAIN_MANAGER_SINGLETON.IsContextStop();
+    MAYBE_UNUSED const auto result = BASE_MAIN_MANAGER_SINGLETON.IsContextStop();
 }
 
 void Network::BaseMainManagerTesting::NullRestartContextExceptionTest()

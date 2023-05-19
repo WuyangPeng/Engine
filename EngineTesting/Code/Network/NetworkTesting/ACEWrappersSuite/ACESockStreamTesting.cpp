@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 14:21)
+///	引擎测试版本：0.9.0.8 (2023/05/18 09:50)
 
 #include "ACESockStreamTesting.h"
+#include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -21,37 +22,17 @@
 #include "Network/NetworkMessage/MessageBuffer.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/NullMessage.h"
-#include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
+#include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketEvent.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
+
+#include <CoreTools/Contract/Flags/DisableNotThrowFlags.h>
+
 #include <array>
 #include <thread>
 
-using std::array;
-using std::make_shared;
-using std::ostream;
-using std::thread;
-
 Network::ACESockStreamTesting::ACESockStreamTesting(const OStreamShared& stream)
-    : ParentType{ stream }, mPort{ 7540 }
+    : ParentType{ stream }, port{ 7540 + System::GetEngineeringOffsetValue() }, bufferSize{ 1048576 }
 {
-#ifdef _DEBUG
-
-    mPort += 4;
-
-#endif  // _DEBUG
-
-#ifdef BUILDING_NETWORK_STATIC
-
-    mPort += 2;
-
-#endif  // BUILDING_NETWORK_STATIC
-
-#ifdef _WIN64
-
-    mPort += 1;
-
-#endif  // _WIN64
-
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
@@ -62,11 +43,6 @@ void Network::ACESockStreamTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-namespace Network
-{
-    using TestingType = SockStream;
-}
-
 void Network::ACESockStreamTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(ACESingletonTest<ClassType>, this, &ClassType::StreamTest);
@@ -74,10 +50,10 @@ void Network::ACESockStreamTesting::MainTest()
 
 void Network::ACESockStreamTesting::StreamTest()
 {
-    thread firstTread{ &ClassType::ACEServerThread, this };
-    ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    std::thread thread0{ &ClassType::ACEServerThread, this };
+    auto configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, bufferSize);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, bufferSize);
 
     ConfigurationStrategy clientConfigurationStrategy{ WrappersStrategy::Ace,
                                                        ConnectStrategy::Tcp,
@@ -90,46 +66,46 @@ void Network::ACESockStreamTesting::StreamTest()
                                                        ConfigurationParameter::Create(),
                                                        SocketSendMessage::Default,
                                                        "127.0.0.1",
-                                                       mPort };
+                                                       port };
 
-    SockStreamSharedPtr sockStream{ make_shared<TestingType>(clientConfigurationStrategy) };
+    auto sockStream = std::make_shared<SockStream>(clientConfigurationStrategy);
 
     SockConnector sockConnector{ clientConfigurationStrategy };
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(clientConfigurationStrategy.GetHost(), clientConfigurationStrategy.GetPort(), clientConfigurationStrategy) };
+    const auto sockAddress = make_shared<SockAddress>(clientConfigurationStrategy.GetHost(), clientConfigurationStrategy.GetPort(), clientConfigurationStrategy);
 
     if (sockConnector.Connect(sockStream, sockAddress))
     {
-        MAYBE_UNUSED const auto value0 = sockStream->EnableNonBlock();
+        MAYBE_UNUSED const auto nonBlock = sockStream->EnableNonBlock();
 
-        MessageBufferSharedPtr buffer{ std::make_shared<MessageBuffer>(BuffBlockSize::Size256, 0, clientConfigurationStrategy.GetParserStrategy()) };
+        const auto buffer = std::make_shared<MessageBuffer>(BuffBlockSize::Size256, 0, clientConfigurationStrategy.GetParserStrategy());
         buffer->AddCurrentWriteIndex(50);
 
-        MAYBE_UNUSED const auto value1 = sockStream->Send(buffer);
+        MAYBE_UNUSED const auto result0 = sockStream->Send(buffer);
         buffer->ClearCurrentWriteIndex();
 
-        MAYBE_UNUSED const auto value2 = sockStream->Receive(buffer);
+        MAYBE_UNUSED const auto result1 = sockStream->Receive(buffer);
     }
 
-    firstTread.join();
+    thread0.join();
 
-    thread seconTread{ &ClassType::ACEServerThread, this };
+    std::thread thread1{ &ClassType::ACEServerThread, this };
 
-    sockStream = make_shared<TestingType>(clientConfigurationStrategy);
+    sockStream = std::make_shared<SockStream>(clientConfigurationStrategy);
 
     if (sockConnector.Connect(sockStream, sockAddress))
     {
-        MAYBE_UNUSED const auto value = sockStream->EnableNonBlock();
+        MAYBE_UNUSED const auto nonBlock = sockStream->EnableNonBlock();
 
-        TestSocketManagerSharedPtr socketManager{ make_shared<TestSocketManager>(5) };
+        const auto testSocketEvent = std::make_shared<TestSocketEvent>();
 
-        MessageBufferSharedPtr buffer{ std::make_shared<MessageBuffer>(BuffBlockSize::Size256, 0, clientConfigurationStrategy.GetParserStrategy()) };
+        const auto buffer = std::make_shared<MessageBuffer>(BuffBlockSize::Size256, 0, clientConfigurationStrategy.GetParserStrategy());
         buffer->AddCurrentWriteIndex(50);
-        sockStream->AsyncSend(socketManager, buffer);
+        sockStream->AsyncSend(testSocketEvent, buffer);
         buffer->ClearCurrentWriteIndex();
-        sockStream->AsyncReceive(socketManager, buffer);
+        sockStream->AsyncReceive(testSocketEvent, buffer);
     }
 
-    seconTread.join();
+    thread1.join();
 }
 
 void Network::ACESockStreamTesting::ACEServerThread()
@@ -139,39 +115,41 @@ void Network::ACESockStreamTesting::ACEServerThread()
 
 void Network::ACESockStreamTesting::DoACEServerThread()
 {
-    ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
-    ConfigurationStrategy serverConfigurationStrategy{ WrappersStrategy::Ace,
-                                                       ConnectStrategy::Tcp,
-                                                       ServerStrategy::Iterative,
-                                                       MessageStrategy::Default,
-                                                       ParserStrategy::LittleEndian,
-                                                       OpenSSLStrategy::Default,
-                                                       EncryptedCompressionStrategy::Default,
-                                                       configurationSubStrategy,
-                                                       ConfigurationParameter::Create(),
-                                                       SocketSendMessage::Default,
-                                                       "127.0.0.1",
-                                                       mPort };
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    constexpr auto messageID = 5;
-    ConfigurationStrategy configurationStrategy{ serverConfigurationStrategy };
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
-#include STSTEM_WARNING_POP
-    ServerSharedPtr server{ make_shared<Server>(std::make_shared<MessageEventManager>(MessageEventManager::Create()), configurationStrategy) };
+    auto configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, bufferSize);
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, bufferSize);
+    const ConfigurationStrategy serverConfigurationStrategy{ WrappersStrategy::Ace,
+                                                             ConnectStrategy::Tcp,
+                                                             ServerStrategy::Iterative,
+                                                             MessageStrategy::Default,
+                                                             ParserStrategy::LittleEndian,
+                                                             OpenSSLStrategy::Default,
+                                                             EncryptedCompressionStrategy::Default,
+                                                             configurationSubStrategy,
+                                                             ConfigurationParameter::Create(),
+                                                             SocketSendMessage::Default,
+                                                             "127.0.0.1",
+                                                             port };
 
-    testSocketManager->SetServerWeakPtr(server);
+    constexpr auto messageId = 5;
+    const auto configurationStrategy = serverConfigurationStrategy;
+    const auto testMessageEvent = std::make_shared<Network::TestMessageEvent>(CoreTools::DisableNotThrow::Disable);
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    messageEventManager->Insert(messageId, testMessageEvent);
+    messageEventManager->SetCallbackEvent(testSocketEvent);
+
+    const auto server = make_shared<Server>(configurationStrategy, messageEventManager);
+
+    testMessageEvent->SetServerWeakPtr(server);
 
     constexpr auto loopCount = 1;
     for (;;)
     {
         ASSERT_TRUE(server->RunServer());
 
-        const auto volatile asyncAcceptorCount = testSocketManager->GetAsyncAcceptorCount();
-
-        if (asyncAcceptorCount == loopCount)
+        if (const auto volatile asyncAcceptorCount = testSocketEvent->GetAsyncAcceptorCount();
+            asyncAcceptorCount == loopCount)
         {
             break;
         }

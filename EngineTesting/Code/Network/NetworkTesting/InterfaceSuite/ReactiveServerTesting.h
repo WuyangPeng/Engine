@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 13:56)
+///	引擎测试版本：0.9.0.8 (2023/05/17 15:37)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_REACTIVE_SERVER_TESTING_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_REACTIVE_SERVER_TESTING_H
@@ -16,7 +16,7 @@
 
 namespace Network
 {
-    class ReactiveServerTesting : public CoreTools::UnitTest
+    class ReactiveServerTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = ReactiveServerTesting;
@@ -29,18 +29,19 @@ namespace Network
 
     private:
         void MainTest();
+        void DoRunUnitTest() override;
+
         void CreateMessage();
         void ReactiveServerTest();
         void ClientThread(Client& client);
         void DestroyMessage();
 
-        void DoRunUnitTest() override;
-
     private:
-        int mPort;
-        uint32_t serverSendMessageID;
-        uint32_t clientSendMessageID;
+        int port;
+        int32_t serverSendMessageId;
+        int32_t clientSendMessageId;
         int increase;
+        int bufferSize;
     };
 }
 

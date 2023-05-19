@@ -1,25 +1,4 @@
 TODO Level 6
 
-0.8.0.8
+0.9.0.8
  
-1.   （BoostWrappersSuite）完成BoostWrappers的BoostMainManagerTesting的单元测试。  
-2.   （BoostWrappersSuite）完成BoostWrappers的BoostMainManagerUseMultiContextTesting的单元测试。  
-3.   （BoostWrappersSuite）完成BoostWrappers的BoostMainManagerUseThreadsTesting的单元测试。  
-4.   （BoostWrappersSuite）完成BoostWrappers的BoostSockInetAddressTesting的单元测试。  
-5.   （BoostWrappersSuite）完成BoostWrappers的BoostSockAcceptorAsynchronousTesting的单元测试。  
-6.   （BoostWrappersSuite）完成BoostWrappers的BoostSockAcceptorHandleTesting的单元测试。  
-7.   （BoostWrappersSuite）完成BoostWrappers的BoostSockAcceptorNonBlockingTesting的单元测试。  
-8.   （BoostWrappersSuite）完成BoostWrappers的BoostSockAcceptorSynchronizeTesting的单元测试。  
-9.   （BoostWrappersSuite）完成BoostWrappers的BoostSockAcceptorTesting的单元测试。  
-10.  （BoostWrappersSuite）完成BoostWrappers的BoostSockConnectorAsynchronousTesting的单元测试。  
-11.  （BoostWrappersSuite）完成BoostWrappers的BoostSockConnectorHandleTesting的单元测试。  
-12.  （BoostWrappersSuite）完成BoostWrappers的BoostSockConnectorSynchronizeTesting的单元测试。  
-13.  （BoostWrappersSuite）完成BoostWrappers的BoostSockConnectorTesting的单元测试。  
-14.  （BoostWrappersSuite）完成BoostWrappers的BoostFixedSockStreamAsynchronousTesting的单元测试。  
-15.  （BoostWrappersSuite）完成BoostWrappers的BoostFixedSockStreamNonBlockingTesting的单元测试。  
-16.  （BoostWrappersSuite）完成BoostWrappers的BoostFixedSockStreamSynchronizeTesting的单元测试。  
-17.  （BoostWrappersSuite）完成BoostWrappers的BoostSegmentationSockStreamAsynchronousTesting的单元测试。  
-18.  （BoostWrappersSuite）完成BoostWrappers的BoostSegmentationSockStreamNonBlockingTesting的单元测试。  
-19.  （BoostWrappersSuite）完成BoostWrappers的BoostSegmentationSockStreamSynchronizeTesting的单元测试。  
-20.  （BoostWrappersSuite）完成BoostWrappers的BoostSockStreamHandleTesting的单元测试。  
-21.  （BoostWrappersSuite）完成BoostWrappers的BoostSockStreamTesting的单元测试。  

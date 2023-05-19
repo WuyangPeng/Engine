@@ -1,41 +1,29 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 15:03)
+///	引擎测试版本：0.9.0.8 (2023/05/15 10:23)
 
 #include "SingletonTestingDetail.h"
 #include "SockAcceptorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Helper/UserMacro.h"
 #include "Network/Interface/SockAcceptor.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-Network::SockAcceptorTesting::SockAcceptorTesting(const OStreamShared& stream)
-    : ParentType{ stream }, mPort{ 8010 }
+
+namespace Network
 {
-#ifdef _DEBUG
+    using TestingType = SockAcceptor;
+}
 
-    mPort += 4;
-
-#endif  // _DEBUG
-
-#ifdef BUILDING_NETWORK_STATIC
-
-    mPort += 2;
-
-#endif  // BUILDING_NETWORK_STATIC
-
-#ifdef _WIN64
-
-    mPort += 1;
-
-#endif  // _WIN64
-
-    NETWORK_SELF_CLASS_IS_VALID_0;
+Network::SockAcceptorTesting::SockAcceptorTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SockAcceptorTesting)
@@ -43,11 +31,6 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, SockAcceptorTesting)
 void Network::SockAcceptorTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-}
-
-namespace Network
-{
-    using TestingType = SockAcceptor;
 }
 
 void Network::SockAcceptorTesting::MainTest()
@@ -78,73 +61,73 @@ void Network::SockAcceptorTesting::NetworkTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(NetworkConstructionTest);
     ASSERT_THROW_EXCEPTION_0(NetworkGetACEHandleExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(NetworkGetBoostHandleExceptionTest); 
+    ASSERT_THROW_EXCEPTION_0(NetworkGetBoostHandleExceptionTest);
 }
 
 void Network::SockAcceptorTesting::ACEConstructionTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort + 20, GetACEServerConfigurationStrategy() };
-    TestingType sockAcceptor2(mPort + 30, GetACEServerConfigurationStrategy());
+    const TestingType sockAcceptor0{ "127.0.0.1", GetShiftingPort(20), GetACEServerConfigurationStrategy() };
+    const TestingType sockAcceptor1{ GetShiftingPort(30), GetACEServerConfigurationStrategy() };
 }
 
 void Network::SockAcceptorTesting::BoostConstructionTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort + 20, GetBoostServerConfigurationStrategy() };
-    TestingType sockAcceptor2(mPort + 30, GetBoostServerConfigurationStrategy());
+    const TestingType sockAcceptor0{ GetShiftingPort(30), GetBoostServerConfigurationStrategy() };
+    const TestingType sockAcceptor1{ "127.0.0.1", GetShiftingPort(20), GetBoostServerConfigurationStrategy() };
 }
 
 void Network::SockAcceptorTesting::NetworkConstructionTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort + 20, GetNetworkServerConfigurationStrategy() };
-    TestingType sockAcceptor2(mPort + 30, GetNetworkServerConfigurationStrategy());
+    const TestingType sockAcceptor0{ GetShiftingPort(30), GetNetworkServerConfigurationStrategy() };
+    const TestingType sockAcceptor1{ "127.0.0.1", GetShiftingPort(20), GetNetworkServerConfigurationStrategy() };
 }
 
 void Network::SockAcceptorTesting::ACEGetACEHandleTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort + 20, GetACEServerConfigurationStrategy() };
-    MAYBE_UNUSED auto value = sockAcceptor1.GetACEHandle();
+    TestingType sockAcceptor{ "127.0.0.1", GetShiftingPort(20), GetACEServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockAcceptor.GetACEHandle();
 }
 
 void Network::SockAcceptorTesting::ACEGetBoostHandleExceptionTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort, GetACEServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockAcceptor1.GetBoostHandle();
+    TestingType sockAcceptor{ "127.0.0.1", GetShiftingPort(0), GetACEServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockAcceptor.GetBoostHandle();
 }
 
 void Network::SockAcceptorTesting::ACEGetNetworkHandleExceptionTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort, GetACEServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockAcceptor1.GetWinSocket();
+    TestingType sockAcceptor{ "127.0.0.1", GetShiftingPort(0), GetACEServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockAcceptor.GetWinSocket();
 }
 
 void Network::SockAcceptorTesting::BoostGetACEHandleExceptionTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort, GetBoostServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockAcceptor1.GetACEHandle();
+    TestingType sockAcceptor{ "127.0.0.1", GetShiftingPort(0), GetBoostServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockAcceptor.GetACEHandle();
 }
 
 void Network::SockAcceptorTesting::BoostGetBoostHandleTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort, GetBoostServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockAcceptor1.GetBoostHandle();
+    TestingType sockAcceptor{ "127.0.0.1", GetShiftingPort(0), GetBoostServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockAcceptor.GetBoostHandle();
 }
 
 void Network::SockAcceptorTesting::BoostGetNetworkHandleExceptionTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort, GetBoostServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockAcceptor1.GetWinSocket();
+    TestingType sockAcceptor{ "127.0.0.1", GetShiftingPort(0), GetBoostServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockAcceptor.GetWinSocket();
 }
 
 void Network::SockAcceptorTesting::NetworkGetACEHandleExceptionTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort, GetNetworkServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockAcceptor1.GetACEHandle();
+    TestingType sockAcceptor{ "127.0.0.1", GetShiftingPort(0), GetNetworkServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockAcceptor.GetACEHandle();
 }
 
 void Network::SockAcceptorTesting::NetworkGetBoostHandleExceptionTest()
 {
-    TestingType sockAcceptor{ "127.0.0.1", mPort, GetNetworkServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockAcceptor.GetBoostHandle();
+    TestingType sockAcceptor{ "127.0.0.1", GetShiftingPort(0), GetNetworkServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockAcceptor.GetBoostHandle();
 }
 
 void Network::SockAcceptorTesting::NullTest()
@@ -157,24 +140,24 @@ void Network::SockAcceptorTesting::NullTest()
 
 void Network::SockAcceptorTesting::NullGetACEHandleExceptionTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort, GetNullServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockAcceptor1.GetACEHandle();
+    TestingType sockAcceptor{ "127.0.0.1", GetShiftingPort(0), GetNullServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockAcceptor.GetACEHandle();
 }
 
 void Network::SockAcceptorTesting::NullGetBoostHandleExceptionTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort, GetNullServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockAcceptor1.GetBoostHandle();
+    TestingType sockAcceptor{ "127.0.0.1", GetShiftingPort(0), GetNullServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockAcceptor.GetBoostHandle();
 }
 
 void Network::SockAcceptorTesting::NullGetNetworkHandleExceptionTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort, GetNullServerConfigurationStrategy() };
-    MAYBE_UNUSED const auto value = sockAcceptor1.GetWinSocket();
+    TestingType sockAcceptor{ "127.0.0.1", GetShiftingPort(0), GetNullServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto result = sockAcceptor.GetWinSocket();
 }
 
 void Network::SockAcceptorTesting::NullConstructionTest()
 {
-    TestingType sockAcceptor1{ "127.0.0.1", mPort, GetNullServerConfigurationStrategy() };
-    TestingType sockAcceptor2(mPort + 10, GetNullServerConfigurationStrategy());
+    TestingType sockAcceptor0{ "127.0.0.1", GetShiftingPort(0), GetNullServerConfigurationStrategy() };
+    TestingType sockAcceptor1{ GetShiftingPort(10), GetNullServerConfigurationStrategy() };
 }

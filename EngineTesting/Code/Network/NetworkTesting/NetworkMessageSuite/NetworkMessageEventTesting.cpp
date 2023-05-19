@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 11:27)
+///	引擎测试版本：0.9.0.8 (2023/05/12 10:13)
 
 #include "NetworkMessageEventTesting.h"
 #include "Detail/TestNetworkMessageEvent.h"
@@ -13,7 +13,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
 
 Network::NetworkMessageEventTesting::NetworkMessageEventTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -35,10 +34,10 @@ void Network::NetworkMessageEventTesting::MainTest()
 
 void Network::NetworkMessageEventTesting::EventTest()
 {
-    constexpr int64_t messageID{ 6 };
-    TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(messageID) };
+    constexpr auto messageId = 6LL;
+    const auto testMessage = std::make_shared<TestNullMessage>(messageId);
 
-    TestNetworkMessageEvent testNetworkMessageEvent;
+    TestNetworkMessageEvent testNetworkMessageEvent{};
 
     ASSERT_EQUAL(testNetworkMessageEvent.GetValue(), 0);
 
@@ -51,6 +50,6 @@ void Network::NetworkMessageEventTesting::EventTest()
 
     testNetworkMessageEvent.CallBackEvent(1, testMessage);
 
-    ASSERT_EQUAL(testNetworkMessageEvent.GetValue(), messageID);
+    ASSERT_EQUAL(testNetworkMessageEvent.GetValue(), messageId);
     ASSERT_LESS(nowTime, testNetworkMessageEvent.GetNowTime());
 }

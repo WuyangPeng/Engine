@@ -1,24 +1,23 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 11:08)
+///	引擎测试版本：0.9.0.8 (2023/05/12 11:28)
 
 #include "MultipleMessageStreamingSizeTesting.h"
 #include "Flags/MultipleMessageType.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
 #include "Network/NetworkMessage/MultipleMessageCast.h"
 #include "Network/NetworkMessage/MultipleMessageContainerDetail.h"
 #include "Network/NetworkMessage/MultipleMessageStreamingSizeDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <string>
 
-using std::string;
+#include <string>
 
 namespace Network
 {
@@ -66,9 +65,9 @@ void Network::MultipleMessageStreamingSizeTesting::BaseTest()
     constexpr uint32_t uint32Value{ 224 };
     constexpr uint64_t uint64Value{ 156 };
 
-    const string stringValue{ "string" };
+    const std::string stringValue{ "string" };
 
-    MultipleMessageType multipleMessageContainer{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
+    const MultipleMessageType multipleMessageContainer{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
 
     const auto streamSize = CoreTools::GetStreamSize(int8Value) +
                             CoreTools::GetStreamSize(int16Value) +
@@ -80,7 +79,7 @@ void Network::MultipleMessageStreamingSizeTesting::BaseTest()
                             CoreTools::GetStreamSize(uint64Value) +
                             CoreTools::GetStreamSize(stringValue);
 
-    TestingType multipleMessageStreamingSize{};
+    const TestingType multipleMessageStreamingSize{};
 
     ASSERT_EQUAL(multipleMessageStreamingSize.GetStreamingSize(multipleMessageContainer), streamSize);
 }

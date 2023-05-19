@@ -1,19 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/22 22:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:22)
 
 #include "Network/NetworkExport.h"
 
-#include "BoostMainManager.h"
+#include "BoostMainManager.h" 
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-Network::BoostMainManager::BoostMainManager(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+Network::BoostMainManager::BoostMainManager(CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{}, executorWorkGuardContext{ disableNotThrow }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -28,11 +28,11 @@ void Network::BoostMainManager::Run()
     executorWorkGuardContext.Run();
 }
 
-Network::IOContextType& Network::BoostMainManager::GetIOContext() noexcept
+Network::IoContextType& Network::BoostMainManager::GetContext() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return executorWorkGuardContext.GetIOContext();
+    return executorWorkGuardContext.GetContext();
 }
 
 void Network::BoostMainManager::StopContext()

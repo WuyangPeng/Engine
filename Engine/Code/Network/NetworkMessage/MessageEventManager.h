@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.7 (2023/05/08 10:31)
+///	引擎版本：0.9.0.8 (2023/05/15 14:01)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_MANAGER_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_MANAGER_H
@@ -16,6 +16,7 @@
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/MessageEvent/EventInterface.h"
 
 NETWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(MessageEventManager, MessageEventManagerImpl);
 
@@ -25,9 +26,12 @@ namespace Network
     {
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(MessageEventManager);
+        using MessageEventManagerSharedPtr = std::shared_ptr<ClassType>;
+        using EventInterfaceSharedPtr = CoreTools::EventInterfaceSharedPtr;
 
     public:
         NODISCARD static MessageEventManager Create();
+        NODISCARD static MessageEventManagerSharedPtr CreateSharedPtr();
 
     private:
         explicit MessageEventManager(CoreTools::DisableNotThrow disableNotThrow);
@@ -46,6 +50,9 @@ namespace Network
 
         void OnEvent(int64_t socketId, int64_t messageId, const ConstMessageInterfaceSharedPtr& message);
         void OnEvent(int64_t socketId, const std::string& messageDescribe, const ConstMessageInterfaceSharedPtr& message);
+
+        void SetCallbackEvent(const EventInterfaceSharedPtr& eventInterface);
+        NODISCARD EventInterfaceSharedPtr GetCallbackEvent();
 
     private:
         PackageType impl;

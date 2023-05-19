@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/21 17:05)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 13:48)
 
 #ifndef NETWORK_ACE_WRAPPERS_ACE_SOCK_ACCEPTOR_H
 #define NETWORK_ACE_WRAPPERS_ACE_SOCK_ACCEPTOR_H
@@ -19,7 +19,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE ACESockAcceptor : public SockAcceptorImpl
+    class NETWORK_HIDDEN_DECLARE ACESockAcceptor final : public SockAcceptorImpl
     {
     public:
         using ClassType = ACESockAcceptor;
@@ -44,7 +44,7 @@ namespace Network
 
         NODISCARD bool EnableNonBlock() override;
 
-        NODISCARD ACEHandle GetACEHandle() override;
+        NODISCARD ACEHandleType GetACEHandle() override;
 
         NODISCARD std::string GetAddress() const override;
         NODISCARD int GetPort() const override;

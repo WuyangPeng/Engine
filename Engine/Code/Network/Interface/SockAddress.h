@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 17:07)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 08:59)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCK_ADDRESS_H
 #define NETWORK_NETWORK_INTERFACE_SOCK_ADDRESS_H
@@ -38,16 +38,16 @@ namespace Network
         CLASS_INVARIANT_DECLARE;
 
         // ACE 专用，其他类调用抛出异常。
-        NODISCARD const ACEInetAddressType& GetACEInetAddress() const;
-        NODISCARD ACEInetAddressType& GetACEInetAddress();
+        NODISCARD const ACEInternetAddressType& GetACEInternetAddress() const;
+        NODISCARD ACEInternetAddressType& GetACEInternetAddress();
 
         // boost 专用，其他类调用抛出异常。
-        NODISCARD const BoostInetAddressType& GetBoostInetAddress() const;
-        NODISCARD BoostInetAddressType& GetBoostInetAddress();
+        NODISCARD const BoostInternetAddressType& GetBoostInternetAddress() const;
+        NODISCARD BoostInternetAddressType& GetBoostInternetAddress();
 
         // Network 专用，其他类调用抛出异常。
-        NODISCARD const WinSockInetAddressType& GetWinSockInetAddress() const;
-        NODISCARD WinSockInetAddressType& GetWinSockInetAddress();
+        NODISCARD const WinSockInternetAddressType& GetWinSockInternetAddress() const;
+        NODISCARD WinSockInternetAddressType& GetWinSockInternetAddress();
 
         NODISCARD std::string GetAddress() const;
         NODISCARD int GetPort() const;

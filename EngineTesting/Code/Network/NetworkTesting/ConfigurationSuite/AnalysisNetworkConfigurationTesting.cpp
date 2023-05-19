@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 15:36)
+///	引擎测试版本：0.9.0.8 (2023/05/11 10:57)
 
 #include "AnalysisNetworkConfigurationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -15,6 +15,7 @@
 #include "Network/Configuration/ConfigurationParameter.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+
 Network::AnalysisNetworkConfigurationTesting::AnalysisNetworkConfigurationTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -35,7 +36,7 @@ void Network::AnalysisNetworkConfigurationTesting::MainTest()
 
 void Network::AnalysisNetworkConfigurationTesting::AnalysisNetworkConfigurationTest()
 {
-    TestingType analysisNetworkConfiguration{ "Configuration/NetworkTest.json" };
+    const TestingType analysisNetworkConfiguration{ "Configuration/NetworkTest.json" };
 
     constexpr auto configurationSize = 2;
     ASSERT_EQUAL(configurationSize, analysisNetworkConfiguration.GetSize());
@@ -46,7 +47,7 @@ void Network::AnalysisNetworkConfigurationTesting::AnalysisNetworkConfigurationT
 
 void Network::AnalysisNetworkConfigurationTesting::GameServerTest(const TestingType& analysisNetworkConfiguration)
 {
-    auto gameServer = analysisNetworkConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameServer"));
+    const auto gameServer = analysisNetworkConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameServer"));
 
     ASSERT_ENUM_EQUAL(gameServer.GetWrappersStrategy(), WrappersStrategy::Ace);
     ASSERT_ENUM_EQUAL(gameServer.GetServerStrategy(), ServerStrategy::Iterative);
@@ -56,7 +57,7 @@ void Network::AnalysisNetworkConfigurationTesting::GameServerTest(const TestingT
     ASSERT_ENUM_EQUAL(gameServer.GetParserStrategy(), ParserStrategy::BigEndian);
     ASSERT_ENUM_EQUAL(gameServer.GetOpenSSLStrategy(), OpenSSLStrategy::OpenSSL);
 
-    auto configurationSubStrategy = gameServer.GetConfigurationSubStrategy();
+    const auto configurationSubStrategy = gameServer.GetConfigurationSubStrategy();
 
     ASSERT_TRUE(configurationSubStrategy.IsExist(WrappersSubStrategy::MultiContext));
     ASSERT_TRUE(configurationSubStrategy.IsExist(WrappersSubStrategy::Threads));
@@ -68,7 +69,7 @@ void Network::AnalysisNetworkConfigurationTesting::GameServerTest(const TestingT
 
     ASSERT_EQUAL(gameServer.GetPort(), 8010);
 
-    auto configurationParameter = gameServer.GetConfigurationParameter();
+    const auto configurationParameter = gameServer.GetConfigurationParameter();
 
     ASSERT_TRUE(configurationParameter.IsParameterExist(SYSTEM_TEXT("ServerId"), SYSTEM_TEXT("1")));
     ASSERT_TRUE(configurationParameter.IsParameterExist(SYSTEM_TEXT("ServerId"), SYSTEM_TEXT("2")));
@@ -79,7 +80,7 @@ void Network::AnalysisNetworkConfigurationTesting::GameServerTest(const TestingT
 
 void Network::AnalysisNetworkConfigurationTesting::GameClientTest(const TestingType& analysisNetworkConfiguration)
 {
-    auto gameClient = analysisNetworkConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameClient"));
+    const auto gameClient = analysisNetworkConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameClient"));
 
     ASSERT_ENUM_EQUAL(gameClient.GetWrappersStrategy(), WrappersStrategy::Network);
     ASSERT_ENUM_EQUAL(gameClient.GetServerStrategy(), ServerStrategy::Disable);
@@ -89,13 +90,13 @@ void Network::AnalysisNetworkConfigurationTesting::GameClientTest(const TestingT
     ASSERT_ENUM_EQUAL(gameClient.GetParserStrategy(), ParserStrategy::LittleEndian);
     ASSERT_ENUM_EQUAL(gameClient.GetOpenSSLStrategy(), OpenSSLStrategy::Default);
 
-    auto configurationSubStrategy = gameClient.GetConfigurationSubStrategy();
+    const auto configurationSubStrategy = gameClient.GetConfigurationSubStrategy();
 
     ASSERT_EQUAL(gameClient.GetHost(), "127.0.0.1");
 
     ASSERT_EQUAL(gameClient.GetPort(), 8010);
 
-    auto configurationParameter = gameClient.GetConfigurationParameter();
+    const auto configurationParameter = gameClient.GetConfigurationParameter();
 
     ASSERT_TRUE(configurationParameter.IsParameterExist(SYSTEM_TEXT("PlatformId"), SYSTEM_TEXT("1")));
     ASSERT_TRUE(configurationParameter.IsParameterExist(SYSTEM_TEXT("PlatformId"), SYSTEM_TEXT("2")));

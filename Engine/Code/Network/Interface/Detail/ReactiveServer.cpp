@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 23:44)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 11:25)
 
 #include "Network/NetworkExport.h"
 
@@ -22,32 +22,25 @@
 #include "Network/NetworkMessage/MessageBuffer.h"
 #include "Network/NetworkMessage/MessageEventManager.h"
 
-#include <vector>
-
-using std::make_pair;
-using std::make_shared;
-using std::vector;
-
-Network::ReactiveServer::ReactiveServer(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
-    : ParentType{ socketManager, configurationStrategy },
+Network::ReactiveServer::ReactiveServer(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& messageEventManager)
+    : ParentType{ configurationStrategy, messageEventManager },
       sockAcceptor{ configurationStrategy.GetPort(), configurationStrategy },
-      sockStream{ make_shared<SockStream>(configurationStrategy) },
+      sockStream{ std::make_shared<SockStream>(configurationStrategy) },
       bufferSendStream{},
       masterHandleSet{ configurationStrategy, sockAcceptor.GetACEHandle() },
       activeHandles{ configurationStrategy },
-      buffer(make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::ReceiveBufferSize), configurationStrategy.GetParserStrategy()))
+      buffer(std::make_shared<MessageBuffer>(BuffBlockSize::Automatic, configurationStrategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::ReceiveBufferSize), configurationStrategy.GetParserStrategy()))
 {
     Init();
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 void Network::ReactiveServer::Init()
 {
     if (!sockAcceptor.EnableNonBlock())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("启用非阻塞失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("启用非阻塞失败！"s))
     }
 }
 
@@ -75,8 +68,8 @@ bool Network::ReactiveServer::WaitForMultipleEvents()
 {
     activeHandles = masterHandleSet.GetCurrentHandleSet();
 
-    const auto width = boost::numeric_cast<int>(activeHandles.GetMaxSet()) + 1;
-    if (!activeHandles.Select(width))
+    if (const auto width = boost::numeric_cast<int>(activeHandles.GetMaxSet()) + 1;
+        !activeHandles.Select(width))
     {
         return false;
     }
@@ -91,9 +84,8 @@ bool Network::ReactiveServer::WaitForMultipleEvents()
     return true;
 }
 
-bool Network::ReactiveServer::HandleConnections(MessageEventManager& socketManager)
+bool Network::ReactiveServer::HandleConnections()
 {
-    socketManager;
     if (activeHandles.IsSet(sockAcceptor.GetACEHandle()))
     {
         const auto strategy = GetConfigurationStrategy();
@@ -101,10 +93,9 @@ bool Network::ReactiveServer::HandleConnections(MessageEventManager& socketManag
         {
             masterHandleSet.SetBit(sockStream->GetACEHandle());
 
-            const auto socketID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
-           // socketManager.InsertSocket(socketID);
+            const auto socketId = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueId(CoreTools::UniqueIdSelect::Network);
 
-            bufferSendStream.Insert(socketID, sockStream->GetACEHandle(), strategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::SendBufferSize), strategy.GetParserStrategy(), strategy.GetEncryptedCompressionStrategy());
+            bufferSendStream.Insert(socketId, sockStream->GetACEHandle(), strategy.GetConfigurationSubStrategy().GetValue(WrappersSubStrategy::SendBufferSize), strategy.GetParserStrategy(), strategy.GetEncryptedCompressionStrategy());
         }
 
         activeHandles.ClearBit(sockAcceptor.GetACEHandle());
@@ -112,7 +103,7 @@ bool Network::ReactiveServer::HandleConnections(MessageEventManager& socketManag
     return true;
 }
 
-bool Network::ReactiveServer::HandleData(const MessageEventManagerSharedPtr& socketManager)
+bool Network::ReactiveServer::HandleData(const MessageEventManagerSharedPtr& aMessageEventManager)
 {
     HandleSetIterator handleSetIterator{ GetConfigurationStrategy(), activeHandles };
 
@@ -120,12 +111,14 @@ bool Network::ReactiveServer::HandleData(const MessageEventManagerSharedPtr& soc
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
+
     while (System::IsSocketValid(reinterpret_cast<System::WinSocket>(handle)))
+
 #include STSTEM_WARNING_POP
     {
         sockStream->SetACEHandle(handle);
 
-        auto container = bufferSendStream.GetBufferSendStreamContainerByHandle(handle);
+        const auto container = bufferSendStream.GetBufferSendStreamContainerByHandle(handle);
 
         try
         {
@@ -134,7 +127,7 @@ bool Network::ReactiveServer::HandleData(const MessageEventManagerSharedPtr& soc
                 const auto strategy = GetConfigurationStrategy();
 
                 BufferReceiveStream bufferReceiveStream(buffer, strategy.GetParserStrategy(), strategy.GetEncryptedCompressionStrategy());
-                bufferReceiveStream.OnEvent(container->GetSocketID(), *socketManager);
+                bufferReceiveStream.OnEvent(container->GetSocketId(), *aMessageEventManager);
                 buffer->ClearCurrentWriteIndex();
             }
             else
@@ -144,7 +137,7 @@ bool Network::ReactiveServer::HandleData(const MessageEventManagerSharedPtr& soc
                 {
                     LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("关闭句柄失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
                 }
-                bufferSendStream.Erase(container->GetSocketID());
+                bufferSendStream.Erase(container->GetSocketId());
             }
         }
         catch (CoreTools::Error&)
@@ -154,7 +147,7 @@ bool Network::ReactiveServer::HandleData(const MessageEventManagerSharedPtr& soc
             {
                 LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("关闭句柄失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
-            bufferSendStream.Erase(container->GetSocketID());
+            bufferSendStream.Erase(container->GetSocketId());
         }
 
         handle = handleSetIterator();
@@ -165,18 +158,18 @@ bool Network::ReactiveServer::HandleData(const MessageEventManagerSharedPtr& soc
     return true;
 }
 
-void Network::ReactiveServer::Send(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::ReactiveServer::Send(int64_t socketId, const MessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    auto container = bufferSendStream.GetBufferSendStreamContainerBySocketID(socketID);
+    const auto container = bufferSendStream.GetBufferSendStreamContainerBySocketId(socketId);
     const auto strategy = GetConfigurationStrategy();
 
     if (container->Insert(message))
     {
         if (strategy.GetSocketSendMessage() == SocketSendMessage::Immediately)
         {
-            if (!ImmediatelySend(socketID))
+            if (!ImmediatelySend(socketId))
             {
                 LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("消息发送失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
@@ -184,7 +177,7 @@ void Network::ReactiveServer::Send(uint64_t socketID, const MessageInterfaceShar
     }
     else
     {
-        if (!ImmediatelySend(socketID))
+        if (!ImmediatelySend(socketId))
         {
             LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("消息发送失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
@@ -196,7 +189,7 @@ void Network::ReactiveServer::Send(uint64_t socketID, const MessageInterfaceShar
 
         if (strategy.GetSocketSendMessage() == SocketSendMessage::Immediately)
         {
-            if (!ImmediatelySend(socketID))
+            if (!ImmediatelySend(socketId))
             {
                 LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("消息发送失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
             }
@@ -204,22 +197,25 @@ void Network::ReactiveServer::Send(uint64_t socketID, const MessageInterfaceShar
     }
 }
 
-void Network::ReactiveServer::AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Network::ReactiveServer::AsyncSend(int64_t socketId, const MessageInterfaceSharedPtr& message)
 {
-    AsyncSend(socketID, message);
+    AsyncSend(socketId, message);
 }
 
-bool Network::ReactiveServer::ImmediatelySend(uint64_t socketID)
+bool Network::ReactiveServer::ImmediatelySend(int64_t socketId)
 {
-    auto container = bufferSendStream.GetBufferSendStreamContainerBySocketID(socketID);
-
-    if (!container->IsEmpty())
+    if (const auto container = bufferSendStream.GetBufferSendStreamContainerBySocketId(socketId);
+        !container->IsEmpty())
     {
         sockStream->SetACEHandle(container->GetACEHandle());
 
         container->Save(buffer);
 
-        MAYBE_UNUSED const auto index = sockStream->Send(buffer);
+        if (const auto result = sockStream->Send(buffer);
+            result != buffer->GetSize())
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("消息发送失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        }
 
         container->Clear();
     }
@@ -227,8 +223,9 @@ bool Network::ReactiveServer::ImmediatelySend(uint64_t socketID)
     return true;
 }
 
-void Network::ReactiveServer::ImmediatelyAsyncSend(MAYBE_UNUSED uint64_t socketID) noexcept
+void Network::ReactiveServer::ImmediatelyAsyncSend(int64_t socketId) noexcept
 {
+    System::UnusedFunction(socketId);
 }
 
 bool Network::ReactiveServer::ImmediatelySend()
@@ -241,7 +238,11 @@ bool Network::ReactiveServer::ImmediatelySend()
 
             value.second->Save(buffer);
 
-            MAYBE_UNUSED const auto index = sockStream->Send(buffer);
+            if (const auto result = sockStream->Send(buffer);
+                result != buffer->GetSize())
+            {
+                LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, SYSTEM_TEXT("消息发送失败。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            }
 
             value.second->Clear();
         }
@@ -250,9 +251,11 @@ bool Network::ReactiveServer::ImmediatelySend()
     return true;
 }
 
-bool Network::ReactiveServer::EventFunction(MAYBE_UNUSED const CoreTools::CallbackParameters& callbackParameters) noexcept
+bool Network::ReactiveServer::EventFunction(const CoreTools::CallbackParameters& callbackParameters) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(callbackParameters);
 
     return true;
 }

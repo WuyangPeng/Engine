@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/21 17:02)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:51)
 
 #include "Network/NetworkExport.h"
 
@@ -26,12 +26,12 @@ Network::HandleSet::HandleSet(const ConfigurationStrategy& configurationStrategy
 
 CLASS_INVARIANT_STUB_DEFINE(Network, HandleSet)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, SetBit, ACEHandle, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, SetBit, ACEHandleType, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, GetMaxSet, int64_t)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, GetFdSet, Network::SockFdSet*)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, Sync, ACEHandle, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, IsSet, ACEHandle, bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, ClearBit, ACEHandle, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, Sync, ACEHandleType, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, IsSet, ACEHandleType, bool)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, ClearBit, ACEHandleType, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, GetACEHandleSet, const Network::ACEHandleSet&)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, IsFdSetFull, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, IsFdSetCount, int)

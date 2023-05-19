@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/23 16:51)
+///	引擎测试版本：0.9.0.8 (2023/05/11 14:14)
 
 #include "MessageInterfaceTesting.h"
+#include "TestDoubleIntMessage.h"
 #include "Detail/TestIntMessage.h"
 #include "Detail/TestNullMessage.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
@@ -21,8 +22,6 @@
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
-using std::make_shared;
-using std::string;
 
 Network::MessageInterfaceTesting::MessageInterfaceTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -43,12 +42,13 @@ void Network::MessageInterfaceTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(FactoryTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamingTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MessageTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(UseSubIdTest);
 }
 
 void Network::MessageInterfaceTesting::RttiTest()
 {
-    TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(messageID) };
-    TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(messageID) };
+    const auto testMessage = std::make_shared<TestNullMessage>(messageId);
+    const auto testIntMessage = std::make_shared<TestIntMessage>(messageId);
 
     ASSERT_TRUE(testMessage->IsExactly(TestNullMessage::GetCurrentRttiType()));
     ASSERT_FALSE(testMessage->IsExactly(MessageInterface::GetCurrentRttiType()));
@@ -63,94 +63,105 @@ void Network::MessageInterfaceTesting::RttiTest()
 
     const auto& attiType = testMessage->GetRttiType();
 
-    ASSERT_EQUAL(string{ attiType.GetName() }, string{ "Network.TestNullMessage" });
+    ASSERT_EQUAL(attiType.GetName(), "Network.TestNullMessage");
 
-    constexpr auto messsageHeadSize = 16;
+    constexpr auto messageHeadSize = 16;
 
-    ASSERT_EQUAL(MessageInterface::GetMessageHeadSize(), messsageHeadSize);
+    ASSERT_EQUAL(MessageInterface::GetMessageHeadSize(), messageHeadSize);
 }
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
 
 void Network::MessageInterfaceTesting::FactoryTest()
 {
     constexpr auto intValue = 5;
 
-    TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(messageID) };
+    TestIntMessage testIntMessage{ messageId };
 
-    testIntMessage->SetIntValue(intValue);
+    testIntMessage.SetIntValue(intValue);
 
-    MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition::CreateNullCondition(), TestIntMessage::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(messageId, MessageTypeCondition::CreateNullCondition(), TestIntMessage::Factory);
 
-    MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(*buffer) };
+    MessageBuffer buffer{ BuffBlockSize::Size256, ParserStrategy::LittleEndian };
+    MessageTarget messageTarget{ buffer };
 
-    testIntMessage->Save(*messageTarget);
+    testIntMessage.Save(messageTarget);
 
-    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(*buffer) };
+    MessageSource messageSource{ buffer };
 
     MessageHeadStrategy messageHeadStrategy{};
-    messageSource->ReadEnum(messageHeadStrategy);
+    messageSource.ReadEnum(messageHeadStrategy);
 
-    int32_t sourceMessageID{ 0 };
-    messageSource->Read(sourceMessageID);
+    int32_t sourceMessageId{ 0 };
+    messageSource.Read(sourceMessageId);
 
-    ASSERT_EQUAL(sourceMessageID, messageID);
+    ASSERT_EQUAL(sourceMessageId, messageId);
 
-    auto factoryCreateMessage = TestIntMessage::Factory(*messageSource, MessageHeadStrategy::Default, messageID);
-    auto polymorphicMessage = boost::dynamic_pointer_cast<TestIntMessage>(factoryCreateMessage);
+    const auto factoryCreateMessage = TestIntMessage::Factory(messageSource, MessageHeadStrategy::Default, messageId);
+    const auto polymorphicMessage = boost::dynamic_pointer_cast<TestIntMessage>(factoryCreateMessage);
 
     ASSERT_EQUAL(polymorphicMessage->GetIntValue(), intValue);
 
-    MESSAGE_MANAGER_SINGLETON.Remove(messageID);
+    MESSAGE_MANAGER_SINGLETON.Remove(messageId);
 }
 
 void Network::MessageInterfaceTesting::StreamingTest()
 {
     constexpr auto intValue = 5;
 
-    TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(messageID) };
+    TestIntMessage testIntMessage{ messageId };
 
-    ASSERT_EQUAL(testIntMessage->GetStreamingSize(), CoreTools::GetStreamSize(messageID) + CoreTools::GetStreamSize(intValue));
+    ASSERT_EQUAL(testIntMessage.GetStreamingSize(), 8 + CoreTools::GetStreamSize(intValue));
 
-    testIntMessage->SetIntValue(intValue);
+    testIntMessage.SetIntValue(intValue);
 
-    MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition::CreateNullCondition(), TestIntMessage::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(messageId, MessageTypeCondition::CreateNullCondition(), TestIntMessage::Factory);
 
-    MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(*buffer) };
+    MessageBuffer buffer{ BuffBlockSize::Size256, ParserStrategy::LittleEndian };
+    MessageTarget messageTarget{ buffer };
 
-    testIntMessage->Save(*messageTarget);
+    testIntMessage.Save(messageTarget);
 
-    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(*buffer) };
+    MessageSource messageSource{ buffer };
 
     MessageHeadStrategy messageHeadStrategy{};
-    messageSource->ReadEnum(messageHeadStrategy);
+    messageSource.ReadEnum(messageHeadStrategy);
 
-    int32_t sourceMessageID{ 0 };
-    messageSource->Read(sourceMessageID);
+    int32_t sourceMessageId{ 0 };
+    messageSource.Read(sourceMessageId);
 
-    ASSERT_EQUAL(sourceMessageID, messageID);
+    ASSERT_EQUAL(sourceMessageId, messageId);
 
-    auto sourceTestIntMessage{ make_shared<TestIntMessage>(messageID) };
+    TestIntMessage sourceTestIntMessage{ messageId };
 
-    sourceTestIntMessage->Load(*messageSource);
+    sourceTestIntMessage.Load(messageSource);
 
-    ASSERT_EQUAL(sourceTestIntMessage->GetIntValue(), intValue);
+    ASSERT_EQUAL(sourceTestIntMessage.GetIntValue(), intValue);
 
-    MESSAGE_MANAGER_SINGLETON.Remove(messageID);
+    MESSAGE_MANAGER_SINGLETON.Remove(messageId);
 }
-
-#include STSTEM_WARNING_POP
 
 void Network::MessageInterfaceTesting::MessageTest()
 {
-    TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(messageID) };
+    const auto testMessage = std::make_shared<TestNullMessage>(messageId);
 
-    ASSERT_EQUAL(testMessage->GetMessageId(), messageID);
+    ASSERT_EQUAL(testMessage->GetMessageId(), messageId);
     ASSERT_EQUAL(testMessage->GetSubMessageId(), 0);
-    ASSERT_EQUAL(testMessage->GetFullMessageId(), messageID);
+    ASSERT_EQUAL(testMessage->GetFullMessageId(), messageId);
 
     ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
+
+    ASSERT_EQUAL(testMessage->GetMessageHeadStrategy(), MessageHeadStrategy::Default);
+}
+
+void Network::MessageInterfaceTesting::UseSubIdTest()
+{
+    constexpr auto fullMessageId = (messageId << 32) + (messageId + 1);
+    const auto testMessage = std::make_shared<TestDoubleIntMessage>(fullMessageId);
+
+    ASSERT_EQUAL(testMessage->GetMessageId(), messageId);
+    ASSERT_EQUAL(testMessage->GetSubMessageId(), messageId + 1);
+    ASSERT_EQUAL(testMessage->GetFullMessageId(), fullMessageId);
+
+    ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
+
+    ASSERT_ENUM_EQUAL(testMessage->GetMessageHeadStrategy(), MessageHeadStrategy::UseSubId);
 }

@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/23 16:31)
+///	引擎测试版本：0.9.0.8 (2023/05/12 10:54)
 
 #include "MessageEventContainerTesting.h"
 #include "Detail/TestNetworkMessageEvent.h"
 #include "Detail/TestNullMessage.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 #include "Network/NetworkMessage/MessageEventContainer.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
-
 
 Network::MessageEventContainerTesting::MessageEventContainerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -31,7 +29,7 @@ void Network::MessageEventContainerTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Network::MessageEventContainerTesting::MainTest()  
+void Network::MessageEventContainerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SingleContainerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(PriorityContainerTest);
@@ -40,7 +38,7 @@ void Network::MessageEventContainerTesting::MainTest()
 
 void Network::MessageEventContainerTesting::SingleContainerTest()
 {
-    TestNetworkMessageEventSharedPtr testNetworkMessageEvent{ make_shared<TestNetworkMessageEvent>() };
+    const auto testNetworkMessageEvent = std::make_shared<TestNetworkMessageEvent>();
 
     MessageEventContainer messageEventContainer = MessageEventContainer::Create();
 
@@ -48,8 +46,8 @@ void Network::MessageEventContainerTesting::SingleContainerTest()
 
     ASSERT_EQUAL(testNetworkMessageEvent->GetValue(), 0);
 
-    constexpr int64_t messageID{ 6 };
-    TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(messageID) };
+    constexpr auto messageId = 6LL;
+    const auto testMessage = std::make_shared<TestNullMessage>(messageId);
 
     messageEventContainer.OnEvent(0, testMessage);
 
@@ -57,61 +55,61 @@ void Network::MessageEventContainerTesting::SingleContainerTest()
 
     messageEventContainer.OnEvent(1, testMessage);
 
-    ASSERT_EQUAL(testNetworkMessageEvent->GetValue(), boost::numeric_cast<int>(messageID));
+    ASSERT_EQUAL(testNetworkMessageEvent->GetValue(), boost::numeric_cast<int>(messageId));
 }
 
 void Network::MessageEventContainerTesting::PriorityContainerTest()
 {
-    TestNetworkMessageEventSharedPtr testNetworkMessageEvent1{ make_shared<TestNetworkMessageEvent>() };
-    TestNetworkMessageEventSharedPtr testNetworkMessageEvent2{ make_shared<TestNetworkMessageEvent>() };
+    const auto testNetworkMessageEvent0 = std::make_shared<TestNetworkMessageEvent>();
+    const auto testNetworkMessageEvent1 = std::make_shared<TestNetworkMessageEvent>();
 
-    MessageEventContainer messageEventContainer = MessageEventContainer::Create();
+    auto messageEventContainer = MessageEventContainer::Create();
 
     messageEventContainer.Insert(testNetworkMessageEvent1);
-    messageEventContainer.Insert(testNetworkMessageEvent2, MessageEventPriority::Highest);
+    messageEventContainer.Insert(testNetworkMessageEvent0, MessageEventPriority::Highest);
 
     ASSERT_EQUAL(testNetworkMessageEvent1->GetValue(), 0);
-    ASSERT_EQUAL(testNetworkMessageEvent2->GetValue(), 0);
+    ASSERT_EQUAL(testNetworkMessageEvent0->GetValue(), 0);
 
-    constexpr int64_t messageID{ 6 };
-    TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(messageID) };
+    constexpr auto messageId = 6LL;
+    const auto testMessage = std::make_shared<TestNullMessage>(messageId);
 
     messageEventContainer.OnEvent(0, testMessage);
 
     ASSERT_EQUAL(testNetworkMessageEvent1->GetValue(), 0);
-    ASSERT_EQUAL(testNetworkMessageEvent2->GetValue(), 0);
+    ASSERT_EQUAL(testNetworkMessageEvent0->GetValue(), 0);
 
     messageEventContainer.OnEvent(1, testMessage);
 
-    ASSERT_EQUAL(testNetworkMessageEvent1->GetValue(), boost::numeric_cast<int>(messageID));
-    ASSERT_EQUAL(testNetworkMessageEvent2->GetValue(), boost::numeric_cast<int>(messageID));
+    ASSERT_EQUAL(testNetworkMessageEvent1->GetValue(), boost::numeric_cast<int>(messageId));
+    ASSERT_EQUAL(testNetworkMessageEvent0->GetValue(), boost::numeric_cast<int>(messageId));
 
-    ASSERT_GREATER(testNetworkMessageEvent1->GetNowTime(), testNetworkMessageEvent2->GetNowTime());
+    ASSERT_GREATER(testNetworkMessageEvent1->GetNowTime(), testNetworkMessageEvent0->GetNowTime());
 }
 
 void Network::MessageEventContainerTesting::MultiContainerTest()
 {
-    TestNetworkMessageEventSharedPtr testNetworkMessageEvent1{ make_shared<TestNetworkMessageEvent>() };
-    TestNetworkMessageEventSharedPtr testNetworkMessageEvent2{ make_shared<TestNetworkMessageEvent>() };
+    const auto testNetworkMessageEvent0 = std::make_shared<TestNetworkMessageEvent>();
+    const auto testNetworkMessageEvent1 = std::make_shared<TestNetworkMessageEvent>();
 
-    MessageEventContainer messageEventContainer = MessageEventContainer::Create();
+    auto messageEventContainer = MessageEventContainer::Create();
 
     messageEventContainer.Insert(testNetworkMessageEvent1);
-    messageEventContainer.Insert(testNetworkMessageEvent2);
+    messageEventContainer.Insert(testNetworkMessageEvent0);
 
     ASSERT_EQUAL(testNetworkMessageEvent1->GetValue(), 0);
-    ASSERT_EQUAL(testNetworkMessageEvent2->GetValue(), 0);
+    ASSERT_EQUAL(testNetworkMessageEvent0->GetValue(), 0);
 
-    constexpr int64_t messageID{ 6 };
-    TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(messageID) };
+    constexpr auto messageId = 6LL;
+    const auto testMessage = std::make_shared<TestNullMessage>(messageId);
 
     messageEventContainer.OnEvent(0, testMessage);
 
     ASSERT_EQUAL(testNetworkMessageEvent1->GetValue(), 0);
-    ASSERT_EQUAL(testNetworkMessageEvent2->GetValue(), 0);
+    ASSERT_EQUAL(testNetworkMessageEvent0->GetValue(), 0);
 
     messageEventContainer.OnEvent(1, testMessage);
 
-    ASSERT_EQUAL(testNetworkMessageEvent1->GetValue(), boost::numeric_cast<int>(messageID));
-    ASSERT_EQUAL(testNetworkMessageEvent2->GetValue(), boost::numeric_cast<int>(messageID));
+    ASSERT_EQUAL(testNetworkMessageEvent1->GetValue(), boost::numeric_cast<int>(messageId));
+    ASSERT_EQUAL(testNetworkMessageEvent0->GetValue(), boost::numeric_cast<int>(messageId));
 }

@@ -34,7 +34,7 @@ namespace Network
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
         NETWORK_STREAM_DECLARE(ProtoBufMessage);
 
-        NODISCARD T GetMessage() const;
+        NODISCARD T GetProtoBufMessage() const;
 
     private:
         int32_t length;

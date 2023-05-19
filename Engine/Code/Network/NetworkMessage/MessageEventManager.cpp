@@ -22,6 +22,11 @@ Network::MessageEventManager Network::MessageEventManager::Create()
     return MessageEventManager{ CoreTools::DisableNotThrow::Disable };
 }
 
+Network::MessageEventManager::MessageEventManagerSharedPtr Network::MessageEventManager::CreateSharedPtr()
+{
+    return std::make_shared<ClassType>(Create());
+}
+
 Network::MessageEventManager::MessageEventManager(CoreTools::DisableNotThrow disableNotThrow)
     : impl{ disableNotThrow }
 {
@@ -79,4 +84,18 @@ void Network::MessageEventManager::OnEvent(int64_t socketId, const std::string& 
     NETWORK_CLASS_IS_VALID_1;
 
     return impl->OnEvent(socketId, messageDescribe, message);
+}
+
+void Network::MessageEventManager::SetCallbackEvent(const EventInterfaceSharedPtr& eventInterface)  
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->SetCallbackEvent(eventInterface);
+}
+
+Network::MessageEventManager::EventInterfaceSharedPtr Network::MessageEventManager::GetCallbackEvent()
+{
+    NETWORK_CLASS_IS_VALID_1;
+
+    return impl->GetCallbackEvent();
 }

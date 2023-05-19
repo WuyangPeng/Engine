@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/22 18:27)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:14)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_SOCK_ACCEPTOR_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_SOCK_ACCEPTOR_H
@@ -16,7 +16,7 @@
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE BoostSockAcceptor : public SockAcceptorImpl
+    class NETWORK_HIDDEN_DECLARE BoostSockAcceptor final : public SockAcceptorImpl
     {
     public:
         using ClassType = BoostSockAcceptor;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/22 22:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:25)
 
 #include "Network/NetworkExport.h"
 
@@ -14,15 +14,11 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using boost::asio::post;
-using boost::system::system_error;
-using CoreTools::Error;
-using std::bind;
-using std::exception;
-
-Network::ExecutorWorkGuardContext::ExecutorWorkGuardContext(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+Network::ExecutorWorkGuardContext::ExecutorWorkGuardContext(CoreTools::DisableNotThrow disableNotThrow)
     : ioContext{}, work{ make_work_guard(ioContext) }
 {
+    System::UnusedFunction(disableNotThrow);
+
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
@@ -39,15 +35,15 @@ void Network::ExecutorWorkGuardContext::Run()
             ioContext.run();
             break;
         }
-        catch (const Error& error)
+        catch (const CoreTools::Error& error)
         {
             LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
-        catch (const system_error& error)
+        catch (const std::system_error& error)
         {
             LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
-        catch (const exception& error)
+        catch (const std::exception& error)
         {
             LOG_SINGLETON_ENGINE_APPENDER(Warn, Network, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
@@ -58,7 +54,7 @@ void Network::ExecutorWorkGuardContext::Run()
     }
 }
 
-Network::IOContextType& Network::ExecutorWorkGuardContext::GetIOContext() noexcept
+Network::IoContextType& Network::ExecutorWorkGuardContext::GetContext() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -69,7 +65,7 @@ void Network::ExecutorWorkGuardContext::PostStopContext()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    post(ioContext, bind(&IOContextType::stop, &ioContext));
+    post(ioContext, std::bind(&IoContextType::stop, &ioContext));
 }
 
 bool Network::ExecutorWorkGuardContext::IsContextStop() const

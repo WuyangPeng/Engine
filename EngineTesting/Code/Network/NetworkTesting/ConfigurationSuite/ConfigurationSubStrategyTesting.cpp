@@ -1,18 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 15:36)
+///	引擎测试版本：0.9.0.8 (2023/05/11 10:52)
 
 #include "ConfigurationSubStrategyTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/ConfigurationSubStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 Network::ConfigurationSubStrategyTesting::ConfigurationSubStrategyTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -33,7 +34,7 @@ void Network::ConfigurationSubStrategyTesting::MainTest()
 
 void Network::ConfigurationSubStrategyTesting::SubStrategyTest()
 {
-    ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
+    auto configurationSubStrategy = ConfigurationSubStrategy::Create();
 
     ASSERT_FALSE(configurationSubStrategy.IsExist(WrappersSubStrategy::MultiContext));
 

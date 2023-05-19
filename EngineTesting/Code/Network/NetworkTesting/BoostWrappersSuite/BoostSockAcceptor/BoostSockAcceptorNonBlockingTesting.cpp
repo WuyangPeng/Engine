@@ -1,26 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 10:58)
+///	引擎测试版本：0.9.0.8 (2023/05/18 13:50)
 
 #include "BoostSockAcceptorNonBlockingTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Interface/Client.h"
 #include "Network/Interface/SockAcceptor.h"
 #include "Network/Interface/SockAddress.h"
 #include "Network/Interface/SockStream.h"
-#include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
+#include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketEvent.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <thread>
 
-using std::make_shared;
-using std::thread;
+#include <thread>
 
 Network::BoostSockAcceptorNonBlockingTesting::BoostSockAcceptorNonBlockingTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -42,7 +40,7 @@ void Network::BoostSockAcceptorNonBlockingTesting::MainTest()
 
 void Network::BoostSockAcceptorNonBlockingTesting::AcceptorTest()
 {
-    thread serverThread{ &ClassType::BoostServerThread, this };
+    std::thread serverThread{ &ClassType::BoostServerThread, this };
 
     const auto loopCount = GetTestLoopCount();
     for (auto loop = 0; loop < loopCount; ++loop)
@@ -58,76 +56,71 @@ void Network::BoostSockAcceptorNonBlockingTesting::AcceptorTest()
 
 void Network::BoostSockAcceptorNonBlockingTesting::NonBlockingTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(NonBlocking0Test);
     ASSERT_NOT_THROW_EXCEPTION_0(NonBlocking1Test);
     ASSERT_NOT_THROW_EXCEPTION_0(NonBlocking2Test);
     ASSERT_NOT_THROW_EXCEPTION_0(NonBlocking3Test);
     ASSERT_NOT_THROW_EXCEPTION_0(NonBlocking4Test);
     ASSERT_NOT_THROW_EXCEPTION_0(NonBlocking5Test);
-    ASSERT_NOT_THROW_EXCEPTION_0(NonBlocking6Test);
+}
+
+void Network::BoostSockAcceptorNonBlockingTesting::NonBlocking0Test()
+{
+    const auto realPort = GetRealPort();
+
+    TestingType sockAcceptor{ realPort, GetBoostServerConfigurationStrategy(GetRealOffset()) };
+    ASSERT_NOT_THROW_EXCEPTION_2(NonBlockingAccept, sockAcceptor, &ClassType::NonBlockingAcceptNoUseAddress);
+    ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
 void Network::BoostSockAcceptorNonBlockingTesting::NonBlocking1Test()
 {
-    const auto port = GetRealPort();
+    const auto boostHostName = GetHostName();
+    const auto realPort = GetRealPort();
 
-    TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(port, GetBoostServerConfigurationStrategy(GetRealOffset())) };
+    TestingType sockAcceptor{ boostHostName, realPort, GetBoostServerConfigurationStrategy(GetRealOffset()) };
     ASSERT_NOT_THROW_EXCEPTION_2(NonBlockingAccept, sockAcceptor, &ClassType::NonBlockingAcceptNoUseAddress);
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
 void Network::BoostSockAcceptorNonBlockingTesting::NonBlocking2Test()
 {
-    const auto hostName = GetHostName();
-    const auto port = GetRealPort();
-
-    TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(hostName, port, GetBoostServerConfigurationStrategy(GetRealOffset())) };
+    TestingType sockAcceptor{ GetBoostServerConfigurationStrategy(GetRealOffset()) };
     ASSERT_NOT_THROW_EXCEPTION_2(NonBlockingAccept, sockAcceptor, &ClassType::NonBlockingAcceptNoUseAddress);
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
 void Network::BoostSockAcceptorNonBlockingTesting::NonBlocking3Test()
 {
-    TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(GetBoostServerConfigurationStrategy(GetRealOffset())) };
-    ASSERT_NOT_THROW_EXCEPTION_2(NonBlockingAccept, sockAcceptor, &ClassType::NonBlockingAcceptNoUseAddress);
+    const auto realPort = GetRealPort();
+
+    TestingType sockAcceptor{ realPort, GetBoostServerConfigurationStrategy(GetRealOffset()) };
+    ASSERT_NOT_THROW_EXCEPTION_2(NonBlockingAccept, sockAcceptor, &ClassType::NonBlockingAcceptUseAddress);
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
 void Network::BoostSockAcceptorNonBlockingTesting::NonBlocking4Test()
 {
-    const auto port = GetRealPort();
+    const auto boostHostName = GetHostName();
+    const auto realPort = GetRealPort();
 
-    TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(port, GetBoostServerConfigurationStrategy(GetRealOffset())) };
+    TestingType sockAcceptor{ boostHostName, realPort, GetBoostServerConfigurationStrategy(GetRealOffset()) };
     ASSERT_NOT_THROW_EXCEPTION_2(NonBlockingAccept, sockAcceptor, &ClassType::NonBlockingAcceptUseAddress);
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
 void Network::BoostSockAcceptorNonBlockingTesting::NonBlocking5Test()
 {
-    const auto hostName = GetHostName();
-    const auto port = GetRealPort();
-
-    TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(hostName, port, GetBoostServerConfigurationStrategy(GetRealOffset())) };
+    TestingType sockAcceptor{ GetBoostServerConfigurationStrategy(GetRealOffset()) };
     ASSERT_NOT_THROW_EXCEPTION_2(NonBlockingAccept, sockAcceptor, &ClassType::NonBlockingAcceptUseAddress);
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostSockAcceptorNonBlockingTesting::NonBlocking6Test()
+void Network::BoostSockAcceptorNonBlockingTesting::NonBlockingAccept(TestingType& sockAcceptor, AcceptFunction acceptFunction)
 {
-    TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(GetBoostServerConfigurationStrategy(GetRealOffset())) };
-    ASSERT_NOT_THROW_EXCEPTION_2(NonBlockingAccept, sockAcceptor, &ClassType::NonBlockingAcceptUseAddress);
-    ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
-}
+    MAYBE_UNUSED const auto nonBlock = sockAcceptor.EnableNonBlock();
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
-void Network::BoostSockAcceptorNonBlockingTesting::NonBlockingAccept(const TestingTypeSharedPtr& sockAcceptor, AcceptFunction acceptFunction)
-{
-    MAYBE_UNUSED const auto value = sockAcceptor->EnableNonBlock();
-
-    thread clientThread{ &ClassType::ClientThread, this };
+    std::thread clientThread{ &ClassType::ClientThread, this };
 
     constexpr auto acceptTime = GetSynchronizeAcceptTime();
     for (auto i = 0; i < acceptTime; ++i)
@@ -143,23 +136,21 @@ void Network::BoostSockAcceptorNonBlockingTesting::NonBlockingAccept(const Testi
     clientThread.join();
 }
 
-bool Network::BoostSockAcceptorNonBlockingTesting::NonBlockingAcceptNoUseAddress(const TestingTypeSharedPtr& sockAcceptor)
+bool Network::BoostSockAcceptorNonBlockingTesting::NonBlockingAcceptNoUseAddress(TestingType& sockAcceptor)
 {
-    auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
+    const auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
 
-    SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
+    SockStream sockStream{ configurationStrategy };
 
-    return sockAcceptor->Accept(*sockStream);
+    return sockAcceptor.Accept(sockStream);
 }
 
-bool Network::BoostSockAcceptorNonBlockingTesting::NonBlockingAcceptUseAddress(const TestingTypeSharedPtr& sockAcceptor)
+bool Network::BoostSockAcceptorNonBlockingTesting::NonBlockingAcceptUseAddress(TestingType& sockAcceptor)
 {
-    auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
+    const auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
 
-    SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy) };
+    SockStream sockStream{ configurationStrategy };
+    SockAddress sockAddress{ configurationStrategy };
 
-    return sockAcceptor->Accept(*sockStream, *sockAddress);
+    return sockAcceptor.Accept(sockStream, sockAddress);
 }
-
-#include STSTEM_WARNING_POP

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/21 16:56)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:00)
 
 #include "Network/NetworkExport.h"
 
@@ -14,14 +14,11 @@
 #include "SockAddressImpl.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/ACEWrappers/Detail/Address/ACESockInetAddress.h"
-#include "Network/BoostWrappers/Detail/Address/BoostSockInetAddress.h"
+#include "Network/ACEWrappers/Detail/Address/ACESockInternetAddress.h"
+#include "Network/BoostWrappers/Detail/Address/BoostSockInternetAddress.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
-#include "Network/NetworkWrappers/Detail/Address/NetworkSockInetAddress.h"
-
-using std::make_shared;
-using std::string;
+#include "Network/NetworkWrappers/Detail/Address/NetworkSockInternetAddress.h"
 
 Network::SockAddressFactory::SockAddressFactory() noexcept
 {
@@ -30,72 +27,74 @@ Network::SockAddressFactory::SockAddressFactory() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, SockAddressFactory)
 
-// static
-Network::SockAddressFactory::ImplTypeSharedPtr Network::SockAddressFactory::Create(const string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
+Network::SockAddressFactory::ImplTypeSharedPtr Network::SockAddressFactory::Create(const std::string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
 {
-    const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
-
-    switch (wrappersStrategyFlag)
+    switch (const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+            wrappersStrategy)
     {
 #ifdef NETWORK_USE_ACE
+
         case WrappersStrategy::Ace:
-            return make_shared<ACESockInetAddress>(hostName, port);
+            return make_shared<ACESockInternetAddress>(hostName, port);
+
 #endif  // NETWORK_USE_ACE
+
         case WrappersStrategy::Boost:
-            return make_shared<BoostSockInetAddress>(hostName, port);
+            return make_shared<BoostSockInternetAddress>(hostName, port);
         case WrappersStrategy::Network:
-            return make_shared<NetworkSockInetAddress>(hostName, port);
+            return make_shared<NetworkSockInternetAddress>(hostName, port);
         case WrappersStrategy::Null:
             return make_shared<NullSockAddress>(hostName, port);
 
-        case WrappersStrategy::Default:
         default:
-            return make_shared<BoostSockInetAddress>(hostName, port);
+            return make_shared<BoostSockInternetAddress>(hostName, port);
     }
 }
 
 Network::SockAddressFactory::ImplTypeSharedPtr Network::SockAddressFactory::Create(const ConfigurationStrategy& configurationStrategy)
 {
-    const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
-
-    switch (wrappersStrategyFlag)
+    switch (const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+            wrappersStrategy)
     {
 #ifdef NETWORK_USE_ACE
+
         case WrappersStrategy::Ace:
-            return make_shared<ACESockInetAddress>();
+            return std::make_shared<ACESockInternetAddress>();
+
 #endif  // NETWORK_USE_ACE
+
         case WrappersStrategy::Boost:
-            return make_shared<BoostSockInetAddress>();
+            return std::make_shared<BoostSockInternetAddress>();
         case WrappersStrategy::Network:
-            return make_shared<NetworkSockInetAddress>(CoreTools::DisableNotThrow::Disable);
+            return std::make_shared<NetworkSockInternetAddress>(CoreTools::DisableNotThrow::Disable);
         case WrappersStrategy::Null:
-            return make_shared<NullSockAddress>(string{}, 0);
-  
-        case WrappersStrategy::Default:
+            return std::make_shared<NullSockAddress>(0);
+
         default:
-            return make_shared<BoostSockInetAddress>();
+            return std::make_shared<BoostSockInternetAddress>();
     }
 }
 
 Network::SockAddressFactory::ImplTypeSharedPtr Network::SockAddressFactory::Create(int port, const ConfigurationStrategy& configurationStrategy)
 {
-    const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
-
-    switch (wrappersStrategyFlag)
+    switch (const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
+            wrappersStrategy)
     {
 #ifdef NETWORK_USE_ACE
+
         case WrappersStrategy::Ace:
-            return make_shared<ACESockInetAddress>(port);
+            return std::make_shared<ACESockInternetAddress>(port);
+
 #endif  // NETWORK_USE_ACE
+
         case WrappersStrategy::Boost:
-            return make_shared<BoostSockInetAddress>(port);
+            return std::make_shared<BoostSockInternetAddress>(port);
         case WrappersStrategy::Network:
-            return make_shared<NetworkSockInetAddress>(port);
+            return std::make_shared<NetworkSockInternetAddress>(port);
         case WrappersStrategy::Null:
-            return make_shared<NullSockAddress>(string{}, port);
- 
-        case WrappersStrategy::Default:
+            return std::make_shared<NullSockAddress>(port);
+
         default:
-            return make_shared<BoostSockInetAddress>(port);
+            return std::make_shared<BoostSockInternetAddress>(port);
     }
 }

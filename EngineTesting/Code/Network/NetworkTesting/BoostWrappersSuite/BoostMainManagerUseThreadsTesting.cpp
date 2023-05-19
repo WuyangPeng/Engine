@@ -1,27 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 13:59)
+///	引擎测试版本：0.9.0.8 (2023/05/18 10:26)
 
 #include "BoostMainManagerUseThreadsTesting.h"
 #include "System/Helper/PragmaWarning/AsioPost.h"
+#include "System/Helper/PragmaWarning/Bind.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Threading/ScopedMutex.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-#include "System/Helper/PragmaWarning/Bind.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using boost::bind;
-using std::atomic_int;
-using std::mutex;
-using std::ostream;
-using std::unique_lock;
 
 Network::BoostMainManagerUseThreadsTesting::BoostMainManagerUseThreadsTesting(const OStreamShared& stream)
     : ParentType{ stream }, intCount{ 0 }, int16Count{ 0 }, conditionVariable{}
@@ -49,7 +44,7 @@ void Network::BoostMainManagerUseThreadsTesting::SingletonTest()
 
 void Network::BoostMainManagerUseThreadsTesting::IncrementTest()
 {
-    auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 
     intCount = 0;
 
@@ -65,7 +60,7 @@ void Network::BoostMainManagerUseThreadsTesting::IncrementTest()
     BASE_MAIN_MANAGER_SINGLETON.RestartContext();
     for (auto i = 0; i < incrementCount; ++i)
     {
-        boost::asio::post(ioContext, bind(&ClassType::Increment, this));
+        boost::asio::post(ioContext, boost::bind(&ClassType::Increment, this));
     }
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
@@ -76,18 +71,18 @@ void Network::BoostMainManagerUseThreadsTesting::IncrementTest()
 
 void Network::BoostMainManagerUseThreadsTesting::SleepIncrementTest()
 {
-    auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 
     intCount = 0;
     int16Count = 0;
 
-    boost::asio::post(ioContext, bind(&ClassType::IntSleepIncrement, this, boost::ref(ioContext), boost::ref(intCount)));
-    boost::asio::post(ioContext, bind(&ClassType::Int16SleepIncrement, this, boost::ref(ioContext), boost::ref(int16Count)));
+    post(ioContext, bind(&ClassType::IntSleepIncrement, this, boost::ref(ioContext), boost::ref(intCount)));
+    post(ioContext, bind(&ClassType::Int16SleepIncrement, this, boost::ref(ioContext), boost::ref(int16Count)));
 
     const auto endCount = GetTestLoopCount() + 1;
 
-    mutex testMutex;
-    unique_lock lock{ testMutex };
+    std::mutex testMutex;
+    std::unique_lock lock{ testMutex };
     conditionVariable.wait(lock);
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
@@ -102,13 +97,13 @@ void Network::BoostMainManagerUseThreadsTesting::Increment() noexcept
     ++intCount;
 }
 
-void Network::BoostMainManagerUseThreadsTesting::IntSleepIncrement(IOContextType& ioContext, atomic_int& count)
+void Network::BoostMainManagerUseThreadsTesting::IntSleepIncrement(IoContextType& ioContext, std::atomic_int& count)
 {
     const auto endCount = GetTestLoopCount() + 1;
 
     if (++count < endCount)
     {
-        boost::asio::post(ioContext, bind(&ClassType::IntSleepIncrement, this, boost::ref(ioContext), boost::ref(count)));
+        post(ioContext, bind(&ClassType::IntSleepIncrement, this, boost::ref(ioContext), boost::ref(count)));
     }
 
     if (endCount <= intCount && endCount <= int16Count)
@@ -117,13 +112,13 @@ void Network::BoostMainManagerUseThreadsTesting::IntSleepIncrement(IOContextType
     }
 }
 
-void Network::BoostMainManagerUseThreadsTesting::Int16SleepIncrement(IOContextType& ioContext, std::atomic_int16_t& count)
+void Network::BoostMainManagerUseThreadsTesting::Int16SleepIncrement(IoContextType& ioContext, std::atomic_int16_t& count)
 {
     const auto endCount = GetTestLoopCount() + 1;
 
     if (++count < endCount)
     {
-        boost::asio::post(ioContext, bind(&ClassType::Int16SleepIncrement, this, boost::ref(ioContext), boost::ref(count)));
+        post(ioContext, bind(&ClassType::Int16SleepIncrement, this, boost::ref(ioContext), boost::ref(count)));
     }
 
     if (endCount <= intCount && endCount <= int16Count)

@@ -1,24 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 13:58)
+///	引擎测试版本：0.9.0.8 (2023/05/18 10:22)
 
 #include "BoostMainManagerTesting.h"
 #include "System/Helper/Platform.h"
 #include "System/Helper/PragmaWarning/AsioPost.h"
+#include "System/Helper/PragmaWarning/Bind.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-#include "System/Helper/PragmaWarning/Bind.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using boost::bind;
-using boost::ref;
-using std::ostream;
 
 Network::BoostMainManagerTesting::BoostMainManagerTesting(const OStreamShared& stream)
     : ParentType{ stream }, count{ 0 }
@@ -46,11 +43,11 @@ void Network::BoostMainManagerTesting::SingletonTest()
 
 void Network::BoostMainManagerTesting::IncrementTest()
 {
-    auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 
     count = 0;
 
-    boost::asio::post(ioContext, bind(&ClassType::Increment, this));
+    post(ioContext, boost::bind(&ClassType::Increment, this));
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
@@ -65,7 +62,7 @@ void Network::BoostMainManagerTesting::IncrementTest()
     BASE_MAIN_MANAGER_SINGLETON.RestartContext();
     for (auto i = 0; i < incrementCount; ++i)
     {
-        boost::asio::post(ioContext, bind(&ClassType::Increment, this));
+        post(ioContext, boost::bind(&ClassType::Increment, this));
     }
 
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
@@ -80,12 +77,12 @@ void Network::BoostMainManagerTesting::IncrementTest()
 
 void Network::BoostMainManagerTesting::DecrementToZeroTest()
 {
-    auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 
     const auto initCount = GetTestLoopCount() + 1;
     count = initCount;
 
-    boost::asio::post(ioContext, bind(&ClassType::DecrementToZero, this, boost::ref(ioContext)));
+    post(ioContext, bind(&ClassType::DecrementToZero, this, boost::ref(ioContext)));
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
     ASSERT_EQUAL(count, initCount);
@@ -100,14 +97,14 @@ void Network::BoostMainManagerTesting::Increment() noexcept
     ++count;
 }
 
-void Network::BoostMainManagerTesting::DecrementToZero(IOContextType& ioContext)
+void Network::BoostMainManagerTesting::DecrementToZero(IoContextType& ioContext)
 {
     if (0 < count)
     {
         --count;
 
         const auto beforeValue = count;
-        boost::asio::post(ioContext, bind(&ClassType::DecrementToZero, this, boost::ref(ioContext)));
+        post(ioContext, bind(&ClassType::DecrementToZero, this, boost::ref(ioContext)));
 
         ASSERT_EQUAL(count, beforeValue);
     }

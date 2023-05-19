@@ -1,21 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 14:22)
+///	引擎测试版本：0.9.0.8 (2023/05/18 10:17)
 
 #include "SockACEHandleSetIteratorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Helper/UserMacro.h"
 #include "Network/Interface/HandleSet.h"
 #include "Network/Interface/HandleSetIterator.h"
 #include "Network/Interface/SockAcceptor.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 Network::SockACEHandleSetIteratorTesting::SockACEHandleSetIteratorTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -36,9 +37,9 @@ void Network::SockACEHandleSetIteratorTesting::MainTest()
 
 void Network::SockACEHandleSetIteratorTesting::HandleSetTest()
 {
-    HandleSet handleSet{ GetACEServerConfigurationStrategy() };
+    const HandleSet handleSet{ GetACEServerConfigurationStrategy() };
 
     HandleSetIterator iterator{ GetACEServerConfigurationStrategy(), handleSet };
 
-    MAYBE_UNUSED auto value = iterator();
+    MAYBE_UNUSED const auto result = iterator();
 }

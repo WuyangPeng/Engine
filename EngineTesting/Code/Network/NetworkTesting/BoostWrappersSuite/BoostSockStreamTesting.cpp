@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 14:00)
+///	引擎测试版本：0.9.0.8 (2023/05/18 10:46)
 
 #include "BoostSockStreamTesting.h"
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/Base/Version.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
@@ -23,14 +24,14 @@
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/NullMessage.h"
-#include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
-using std::make_shared;
+#include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketEvent.h"
 
-Network::BoostSockStreamTesting::BoostSockStreamTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+Network::BoostSockStreamTesting::BoostSockStreamTesting(const OStreamShared& stream, int increase)
+    : ParentType{ stream, increase }
 {
-    SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
+
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostSockStreamTesting)
 
 void Network::BoostSockStreamTesting::ClientThread()
@@ -40,28 +41,27 @@ void Network::BoostSockStreamTesting::ClientThread()
 
 void Network::BoostSockStreamTesting::DoClientThread()
 {
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(GetMessageID()) };
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
 
-    auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
+    messageEventManager->SetCallbackEvent(testSocketEvent);
 
-    ClientSharedPtr client{ make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())) };
+    const auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
 
-    const auto socketID = ClientConnect(client);
-    ClientSend(client, socketID, testSocketManager);
-    ASSERT_NOT_THROW_EXCEPTION_2(ClientReceive, client, testSocketManager);
+    Client client{ configurationStrategy, messageEventManager };
+
+    const auto socketId = ClientConnect(client);
+    ClientSend(client, socketId, *testSocketEvent);
+    ASSERT_NOT_THROW_EXCEPTION_2(ClientReceive, client, *testSocketEvent);
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
-uint64_t Network::BoostSockStreamTesting::ClientConnect(const ClientSharedPtr& client)
+int64_t Network::BoostSockStreamTesting::ClientConnect(Client& client)
 {
-    uint64_t socketID{ 0 };
+    auto socketId = 0LL;
     for (auto i = 0; i < connectTime; ++i)
     {
-        socketID = client->Connect();
-        if (socketID != 0u)
+        socketId = client.Connect();
+        if (socketId != 0u)
         {
             break;
         }
@@ -69,18 +69,18 @@ uint64_t Network::BoostSockStreamTesting::ClientConnect(const ClientSharedPtr& c
         ASSERT_UNEQUAL_FAILURE_THROW(i + 1, connectTime, "连接服务器失败。");
     }
 
-    return socketID;
+    return socketId;
 }
 
-void Network::BoostSockStreamTesting::ClientSend(const ClientSharedPtr& client, uint64_t socketID, const TestSocketManagerSharedPtr& testSocketManager)
+void Network::BoostSockStreamTesting::ClientSend(Client& client, int64_t socketId, const TestSocketEvent& testSocketEvent)
 {
-    MessageInterfaceSharedPtr message{ make_shared<NullMessage>(MessageHeadStrategy::Default, GetMessageID()) };
-    client->AsyncSend(socketID, message);
-    client->ImmediatelyAsyncSend(socketID);
+    const auto message = std::make_shared<NullMessage>(MessageHeadStrategy::Default, GetMessageId());
+    client.AsyncSend(socketId, message);
+    client.ImmediatelyAsyncSend(socketId);
 
     for (auto i = 0; i < sendTime; ++i)
     {
-        if (0 < testSocketManager->GetAsyncSendCount())
+        if (0 < testSocketEvent.GetAsyncSendCount())
         {
             break;
         }
@@ -89,13 +89,13 @@ void Network::BoostSockStreamTesting::ClientSend(const ClientSharedPtr& client, 
     }
 }
 
-void Network::BoostSockStreamTesting::ClientReceive(const ClientSharedPtr& client, const TestSocketManagerSharedPtr& testSocketManager)
+void Network::BoostSockStreamTesting::ClientReceive(Client& client, const TestSocketEvent& testSocketEvent)
 {
-    client->AsyncReceive();
+    client.AsyncReceive();
 
     for (auto i = 0; i < asynchronousReceiveTime; ++i)
     {
-        if (0 < testSocketManager->GetAsyncReceiveCount())
+        if (0 < testSocketEvent.GetAsyncReceiveCount())
         {
             break;
         }
@@ -104,8 +104,6 @@ void Network::BoostSockStreamTesting::ClientReceive(const ClientSharedPtr& clien
     }
 }
 
-#include STSTEM_WARNING_POP
-
 void Network::BoostSockStreamTesting::ClientNoSendThread()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DoClientNoSendThread);
@@ -113,16 +111,17 @@ void Network::BoostSockStreamTesting::ClientNoSendThread()
 
 void Network::BoostSockStreamTesting::DoClientNoSendThread()
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(GetMessageID()) };
-#include STSTEM_WARNING_POP
-    auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
 
-    ClientSharedPtr client{ make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())) };
+    messageEventManager->SetCallbackEvent(testSocketEvent);
 
-    const auto socketID = ClientConnect(client);
-    ASSERT_LESS(0, socketID);
+    const auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
+
+    Client client{ configurationStrategy, messageEventManager };
+
+    const auto socketId = ClientConnect(client);
+    ASSERT_LESS(0, socketId);
 }
 
 void Network::BoostSockStreamTesting::ServerThread()
@@ -132,21 +131,22 @@ void Network::BoostSockStreamTesting::ServerThread()
 
 void Network::BoostSockStreamTesting::DoServerThread()
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(GetMessageID()) };
-#include STSTEM_WARNING_POP
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    const auto testMessageEvent = std::make_shared<Network::TestMessageEvent>(CoreTools::DisableNotThrow::Disable);
+    messageEventManager->SetCallbackEvent(testSocketEvent);
+    messageEventManager->Insert(GetMessageId(), testMessageEvent);
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
-    ServerSharedPtr server{ make_shared<Server>(std::make_shared<MessageEventManager>(MessageEventManager::Create()), configurationStrategy) };
+    const auto server = make_shared<Server>(configurationStrategy, messageEventManager);
 
-    testSocketManager->SetServerWeakPtr(server);
+    testMessageEvent->SetServerWeakPtr(server);
 
     for (auto i = 0; i < receiveTime; ++i)
     {
-        MAYBE_UNUSED const auto value = server->RunServer();
+        ASSERT_TRUE(server->RunServer());
 
-        if (0 < testSocketManager->GetAsyncSendCount())
+        if (0 < testMessageEvent->GetCallBackTime())
         {
             break;
         }
@@ -162,21 +162,23 @@ void Network::BoostSockStreamTesting::ServerNoReceiveThread()
 
 void Network::BoostSockStreamTesting::DoServerNoReceiveThread()
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(GetMessageID()) };
-#include STSTEM_WARNING_POP
-    auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    const auto testMessageEvent = std::make_shared<Network::TestMessageEvent>(CoreTools::DisableNotThrow::Disable);
+    messageEventManager->SetCallbackEvent(testSocketEvent);
+    messageEventManager->Insert(GetMessageId(), testMessageEvent);
 
-    ServerSharedPtr server{ make_shared<Server>(std::make_shared<MessageEventManager>(MessageEventManager::Create()), configurationStrategy) };
+    const auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
-    testSocketManager->SetServerWeakPtr(server);
+    const auto server = make_shared<Server>(configurationStrategy, messageEventManager);
+
+    testMessageEvent->SetServerWeakPtr(server);
 
     for (auto i = 0; i < acceptTime; ++i)
     {
-        MAYBE_UNUSED const auto value = server->RunServer();
+        MAYBE_UNUSED const auto result = server->RunServer();
 
-        if (0 < testSocketManager->GetAsyncAcceptorCount())
+        if (0 < testSocketEvent->GetAsyncAcceptorCount())
         {
             break;
         }
@@ -187,12 +189,12 @@ void Network::BoostSockStreamTesting::DoServerNoReceiveThread()
 
 void Network::BoostSockStreamTesting::CreateMessage()
 {
-    MESSAGE_MANAGER_SINGLETON.Insert(GetMessageID(), MessageTypeCondition::CreateNullCondition(), NullMessage::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(GetMessageId(), MessageTypeCondition::CreateNullCondition(), NullMessage::Factory);
 }
 
 void Network::BoostSockStreamTesting::DestroyMessage()
 {
-    MESSAGE_MANAGER_SINGLETON.Remove(GetMessageID());
+    MESSAGE_MANAGER_SINGLETON.Remove(GetMessageId());
 }
 
 #include STSTEM_WARNING_PUSH
@@ -201,15 +203,13 @@ void Network::BoostSockStreamTesting::DestroyMessage()
 
 Network::MessageBufferSharedPtr Network::BoostSockStreamTesting::CreateMessageBuffer() const
 {
-    auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
+    const auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
-    MessageBufferSharedPtr messageBuffer{ make_shared<MessageBuffer>(BuffBlockSize::Size512, 0, configurationStrategy.GetParserStrategy()) };
+    auto messageBuffer = std::make_shared<MessageBuffer>(BuffBlockSize::Size512, 0, configurationStrategy.GetParserStrategy());
 
     auto initialBuffered = messageBuffer->GetInitialBufferedPtr();
 
-    auto aMessageID = GetMessageID();
-
-    auto messageLength = reinterpret_cast<int32_t*>(initialBuffered);
+    const auto messageLength = reinterpret_cast<int32_t*>(initialBuffered);
 
     if (messageLength == nullptr)
     {
@@ -217,10 +217,10 @@ Network::MessageBufferSharedPtr Network::BoostSockStreamTesting::CreateMessageBu
     }
 
     // 长度等于消息头长度加上消息ID和子消息ID长度。
-    *messageLength = MessageInterface::GetMessageHeadSize() + CoreTools::GetStreamSize(aMessageID) * 2;
+    *messageLength = MessageInterface::GetMessageHeadSize() + CoreTools::GetStreamSize(GetMessageId()) * 2;
 
     initialBuffered += CoreTools::GetStreamSize(*messageLength);
-    auto fullVersion = reinterpret_cast<int32_t*>(initialBuffered);
+    const auto fullVersion = reinterpret_cast<int32_t*>(initialBuffered);
     if (fullVersion == nullptr)
     {
         return messageBuffer;
@@ -229,7 +229,7 @@ Network::MessageBufferSharedPtr Network::BoostSockStreamTesting::CreateMessageBu
     *fullVersion = MESSAGE_MANAGER_SINGLETON.GetFullVersion();
 
     initialBuffered += CoreTools::GetStreamSize(*fullVersion);
-    auto timeInMicroseconds = reinterpret_cast<int64_t*>(initialBuffered);
+    const auto timeInMicroseconds = reinterpret_cast<int64_t*>(initialBuffered);
     if (timeInMicroseconds == nullptr)
     {
         return messageBuffer;
@@ -237,44 +237,42 @@ Network::MessageBufferSharedPtr Network::BoostSockStreamTesting::CreateMessageBu
     *timeInMicroseconds = System::GetTimeInMicroseconds();
 
     initialBuffered += CoreTools::GetStreamSize(*timeInMicroseconds);
-    auto messageNumber = reinterpret_cast<int64_t*>(initialBuffered);
+    const auto messageHeadStrategy = reinterpret_cast<int32_t*>(initialBuffered);
+    if (messageHeadStrategy == nullptr)
+    {
+        return messageBuffer;
+    }
+    *messageHeadStrategy = System::EnumCastUnderlying(MessageHeadStrategy::Default);
+
+    initialBuffered += CoreTools::GetStreamSize(*messageHeadStrategy);
+    const auto messageNumber = reinterpret_cast<int32_t*>(initialBuffered);
     if (messageNumber == nullptr)
     {
         return messageBuffer;
     }
-    *messageNumber = aMessageID;
+    *messageNumber = GetMessageId();
 
     messageBuffer->AddCurrentWriteIndex(*messageLength);
 
     return messageBuffer;
 }
 
-#include STSTEM_WARNING_POP
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26490)
-
-void Network::BoostSockStreamTesting::VerificationMessageBuffer(const MessageBufferSharedPtr& messageBuffer)
+void Network::BoostSockStreamTesting::VerificationMessageBuffer(const MessageBuffer& messageBuffer)
 {
-    auto initialBuffered = messageBuffer->GetInitialBufferedPtr();
+    auto initialBuffered = messageBuffer.GetInitialBufferedPtr();
 
-    const auto aMessageID = GetMessageID();
-
-    auto messageLength = reinterpret_cast<const int32_t*>(initialBuffered);
+    const auto messageLength = reinterpret_cast<const int32_t*>(initialBuffered);
     if (messageLength == nullptr)
     {
         return;
     }
 
     // 长度等于消息头长度加上消息ID和子消息ID长度。
-    const auto verificationMessageLength = MessageInterface::GetMessageHeadSize() + CoreTools::GetStreamSize(aMessageID) * 2;
+    const auto verificationMessageLength = MessageInterface::GetMessageHeadSize() + CoreTools::GetStreamSize(GetMessageId()) * 2;
     ASSERT_EQUAL(*messageLength, verificationMessageLength);
 
     initialBuffered += CoreTools::GetStreamSize(*messageLength);
-    auto fullVersion = reinterpret_cast<const int32_t*>(initialBuffered);
+    const auto fullVersion = reinterpret_cast<const int32_t*>(initialBuffered);
     if (fullVersion == nullptr)
     {
         return;
@@ -283,7 +281,7 @@ void Network::BoostSockStreamTesting::VerificationMessageBuffer(const MessageBuf
     ASSERT_EQUAL(*fullVersion, MESSAGE_MANAGER_SINGLETON.GetFullVersion());
 
     initialBuffered += CoreTools::GetStreamSize(*fullVersion);
-    auto timeInMicroseconds = reinterpret_cast<const int64_t*>(initialBuffered);
+    const auto timeInMicroseconds = reinterpret_cast<const int64_t*>(initialBuffered);
     if (timeInMicroseconds == nullptr)
     {
         return;
@@ -291,12 +289,20 @@ void Network::BoostSockStreamTesting::VerificationMessageBuffer(const MessageBuf
     ASSERT_LESS_EQUAL(*timeInMicroseconds, System::GetTimeInMicroseconds());
 
     initialBuffered += CoreTools::GetStreamSize(*timeInMicroseconds);
-    auto messageNumber = reinterpret_cast<const int64_t*>(initialBuffered);
+    const auto messageHeadStrategy = reinterpret_cast<const int32_t*>(initialBuffered);
+    if (messageHeadStrategy == nullptr)
+    {
+        return;
+    }
+    ASSERT_EQUAL(*messageHeadStrategy, System::EnumCastUnderlying(MessageHeadStrategy::Default));
+
+    initialBuffered += CoreTools::GetStreamSize(*messageHeadStrategy);
+    const auto messageNumber = reinterpret_cast<const int32_t*>(initialBuffered);
     if (messageNumber == nullptr)
     {
         return;
     }
-    ASSERT_EQUAL(*messageNumber, aMessageID);
+    ASSERT_EQUAL(*messageNumber, GetMessageId());
 }
 
 #include STSTEM_WARNING_POP

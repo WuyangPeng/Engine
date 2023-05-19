@@ -1,25 +1,23 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 11:04)
+///	引擎测试版本：0.9.0.8 (2023/05/18 14:02)
 
 #include "BoostSockAcceptorSynchronizeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Interface/Client.h"
 #include "Network/Interface/SockAcceptor.h"
 #include "Network/Interface/SockAddress.h"
 #include "Network/Interface/SockStream.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <thread>
 
-using std::make_shared;
-using std::thread;
+#include <thread>
 
 Network::BoostSockAcceptorSynchronizeTesting::BoostSockAcceptorSynchronizeTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -41,7 +39,7 @@ void Network::BoostSockAcceptorSynchronizeTesting::MainTest()
 
 void Network::BoostSockAcceptorSynchronizeTesting::AcceptorTest()
 {
-    thread serverThread{ &ClassType::BoostServerThread, this };
+    std::thread serverThread{ &ClassType::BoostServerThread, this };
 
     const auto loopCount = GetTestLoopCount();
     for (auto loop = 0; loop < loopCount; ++loop)
@@ -57,74 +55,69 @@ void Network::BoostSockAcceptorSynchronizeTesting::AcceptorTest()
 
 void Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAcceptTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(SynchronizeAccept0Test);
     ASSERT_NOT_THROW_EXCEPTION_0(SynchronizeAccept1Test);
     ASSERT_NOT_THROW_EXCEPTION_0(SynchronizeAccept2Test);
     ASSERT_NOT_THROW_EXCEPTION_0(SynchronizeAccept3Test);
     ASSERT_NOT_THROW_EXCEPTION_0(SynchronizeAccept4Test);
     ASSERT_NOT_THROW_EXCEPTION_0(SynchronizeAccept5Test);
-    ASSERT_NOT_THROW_EXCEPTION_0(SynchronizeAccept6Test);
+}
+
+void Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAccept0Test()
+{
+    const auto realPort = GetRealPort();
+
+    TestingType sockAcceptor{ realPort, GetBoostServerConfigurationStrategy(GetRealOffset()) };
+    ASSERT_NOT_THROW_EXCEPTION_2(SynchronizeAccept, sockAcceptor, &ClassType::SynchronizeAcceptNoUseAddress);
+    ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
 void Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAccept1Test()
 {
-    const auto port = GetRealPort();
+    const auto boostHostName = GetHostName();
+    const auto realPort = GetRealPort();
 
-    TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(port, GetBoostServerConfigurationStrategy(GetRealOffset())) };
+    TestingType sockAcceptor{ boostHostName, realPort, GetBoostServerConfigurationStrategy(GetRealOffset()) };
     ASSERT_NOT_THROW_EXCEPTION_2(SynchronizeAccept, sockAcceptor, &ClassType::SynchronizeAcceptNoUseAddress);
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
 void Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAccept2Test()
 {
-    const auto hostName = GetHostName();
-    const auto port = GetRealPort();
-
-    TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(hostName, port, GetBoostServerConfigurationStrategy(GetRealOffset())) };
+    TestingType sockAcceptor{ GetBoostServerConfigurationStrategy(GetRealOffset()) };
     ASSERT_NOT_THROW_EXCEPTION_2(SynchronizeAccept, sockAcceptor, &ClassType::SynchronizeAcceptNoUseAddress);
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
 void Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAccept3Test()
 {
-    TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(GetBoostServerConfigurationStrategy(GetRealOffset())) };
-    ASSERT_NOT_THROW_EXCEPTION_2(SynchronizeAccept, sockAcceptor, &ClassType::SynchronizeAcceptNoUseAddress);
+    const auto realPort = GetRealPort();
+
+    TestingType sockAcceptor{ realPort, GetBoostServerConfigurationStrategy(GetRealOffset()) };
+    ASSERT_NOT_THROW_EXCEPTION_2(SynchronizeAccept, sockAcceptor, &ClassType::SynchronizeAcceptUseAddress);
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
 void Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAccept4Test()
 {
-    const auto port = GetRealPort();
+    const auto boostHostName = GetHostName();
+    const auto port1 = GetRealPort();
 
-    TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(port, GetBoostServerConfigurationStrategy(GetRealOffset())) };
+    TestingType sockAcceptor{ boostHostName, port1, GetBoostServerConfigurationStrategy(GetRealOffset()) };
     ASSERT_NOT_THROW_EXCEPTION_2(SynchronizeAccept, sockAcceptor, &ClassType::SynchronizeAcceptUseAddress);
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
 void Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAccept5Test()
 {
-    const auto hostName = GetHostName();
-    const auto port = GetRealPort();
-
-    TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(hostName, port, GetBoostServerConfigurationStrategy(GetRealOffset())) };
+    TestingType sockAcceptor{ GetBoostServerConfigurationStrategy(GetRealOffset()) };
     ASSERT_NOT_THROW_EXCEPTION_2(SynchronizeAccept, sockAcceptor, &ClassType::SynchronizeAcceptUseAddress);
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAccept6Test()
+void Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAccept(TestingType& sockAcceptor, AcceptFunction acceptFunction)
 {
-    TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(GetBoostServerConfigurationStrategy(GetRealOffset())) };
-    ASSERT_NOT_THROW_EXCEPTION_2(SynchronizeAccept, sockAcceptor, &ClassType::SynchronizeAcceptUseAddress);
-    ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
-}
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
-void Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAccept(const TestingTypeSharedPtr& sockAcceptor, AcceptFunction acceptFunction)
-{
-    thread clientThread{ &ClassType::ClientThread, this };
+    std::thread clientThread{ &ClassType::ClientThread, this };
 
     constexpr auto acceptTime = GetSynchronizeAcceptTime();
     for (auto i = 0; i < acceptTime; ++i)
@@ -140,23 +133,21 @@ void Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAccept(const Testi
     clientThread.join();
 }
 
-bool Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAcceptNoUseAddress(const TestingTypeSharedPtr& sockAcceptor)
+bool Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAcceptNoUseAddress(TestingType& sockAcceptor)
 {
-    auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
+    const auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
 
-    SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
+    SockStream sockStream{ configurationStrategy };
 
-    return sockAcceptor->Accept(*sockStream);
+    return sockAcceptor.Accept(sockStream);
 }
 
-bool Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAcceptUseAddress(const TestingTypeSharedPtr& sockAcceptor)
+bool Network::BoostSockAcceptorSynchronizeTesting::SynchronizeAcceptUseAddress(TestingType& sockAcceptor)
 {
-    auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
+    const auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
 
-    SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy) };
+    SockStream sockStream{ configurationStrategy };
+    SockAddress sockAddress{ configurationStrategy };
 
-    return sockAcceptor->Accept(*sockStream, *sockAddress);
+    return sockAcceptor.Accept(sockStream, sockAddress);
 }
-
-#include STSTEM_WARNING_POP

@@ -30,7 +30,7 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        void OnEvent(uint64_t socketId, MessageEventManager& messageEventManager);
+        void OnEvent(int64_t socketId, MessageEventManager& messageEventManager);
 
         // 如果读取未完成，需要继续解析
         NODISCARD bool IsFinish() const noexcept;

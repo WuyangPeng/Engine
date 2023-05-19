@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 15:29)
+///	引擎测试版本：0.9.0.8 (2023/05/11 09:39)
 
 #include "StreamMacroTesting.h"
 #include "Detail/TestMessage.h"
@@ -14,12 +14,8 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
-#include "Network/NetworkMessage/MessageSource.h"
-#include "Network/NetworkMessage/MessageTarget.h"
-#include <array>
-
-using std::array;
-using std::make_shared;
+#include "Network/NetworkMessage/MessageSourceDetail.h"
+#include "Network/NetworkMessage/MessageTargetDetail.h"
 
 Network::StreamMacroTesting::StreamMacroTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -41,21 +37,16 @@ void Network::StreamMacroTesting::MainTest()
 
 void Network::StreamMacroTesting::TestMessageTest()
 {
-    constexpr auto size = 256;
+    TestMessage testMessage{};
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
+    MessageBuffer buffer{ BuffBlockSize::Size1024, 0, ParserStrategy::LittleEndian };
 
-    auto testMessage = make_shared<TestMessage>();
+    MessageTarget messageTarget{ buffer };
 
-    MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size1024, 0, ParserStrategy::LittleEndian) };
-#include STSTEM_WARNING_POP
-    MessageTarget messageTarget{ *buffer };
+    MessageSource messageSource{ buffer };
 
-    MessageSource messageSource{ *buffer };
+    testMessage.Load(messageSource);
+    testMessage.Save(messageTarget);
 
-    testMessage->Load(messageSource);
-    testMessage->Save(messageTarget);
-
-    ASSERT_LESS(0, testMessage->GetStreamingSize());
+    ASSERT_LESS(0, testMessage.GetStreamingSize());
 }

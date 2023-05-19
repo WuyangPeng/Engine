@@ -37,7 +37,7 @@ namespace Network
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual void CallBackEvent(uint64_t socketId, const ConstMessageInterfaceSharedPtr& message) = 0;
+        virtual void CallBackEvent(int64_t socketId, const ConstMessageInterfaceSharedPtr& message) = 0;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(NetworkMessageEvent);

@@ -1,19 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 11:36)
+///	引擎测试版本：0.9.0.8 (2023/05/12 15:07)
 
 #include "SendMessageLevelTesting.h"
 #include "Detail/TestNullMessage.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/NetworkMessage/SendMessageLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
+#include "Network/NetworkMessage/SendMessageLevel.h"
 
 Network::SendMessageLevelTesting::SendMessageLevelTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -42,8 +41,8 @@ void Network::SendMessageLevelTesting::SendMessageTest()
     ASSERT_EQUAL(sendMessageLevel.GetCurrentSize(), 0);
     ASSERT_EQUAL(sendMessageLevel.GetRemainingSize(), bufferSize);
 
-    constexpr int64_t messageID{ 6 };
-    TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(messageID) };
+    constexpr auto messageId = 6LL;
+    const auto testMessage = std::make_shared<TestNullMessage>(messageId);
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {

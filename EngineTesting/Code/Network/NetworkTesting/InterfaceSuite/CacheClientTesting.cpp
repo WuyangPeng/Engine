@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 14:16)
+///	引擎测试版本：0.9.0.8 (2023/05/16 08:57)
 
 #include "CacheClientTesting.h"
 #include "SingletonTestingDetail.h"
-#include "Detail/TestSocketManager.h"
+#include "Detail/TestSocketEvent.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -20,55 +21,41 @@
 #include "Network/NetworkMessage/MessageManager.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
 #include "Network/NetworkMessage/NullMessage.h"
+
 #include <thread>
 #include <vector>
 
-using std::make_shared;
-using std::ostream;
-using std::thread;
-using std::vector;
-
 Network::CacheClientTesting::CacheClientTesting(const OStreamShared& stream)
-    : ParentType{ stream }, mPort{ 8141 }, messageID{ 5 }, increase{ 160 }
+    : ParentType{ stream }, messageId{ 5 }, increase{ 163 }, boostStop{}
 {
-#ifdef _DEBUG
-
-    mPort += 4;
-
-#endif  // _DEBUG
-
-#ifdef BUILDING_NETWORK_STATIC
-
-    mPort += 2;
-
-#endif  // BUILDING_NETWORK_STATIC
-
-#ifdef _WIN64
-
-    mPort += 1;
-
-#endif  // _WIN64
-
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
+
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, CacheClientTesting)
 
 void Network::CacheClientTesting::DoRunUnitTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateMessage);
+
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(DestroyMessage);
 }
 
 void Network::CacheClientTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(CreateMessage);
     ASSERT_NOT_THROW_EXCEPTION_2(ACESingletonTest<ClassType>, this, &ClassType::ACETest);
-    increase += 10;
+
+    increase += 1000;
+    boostStop = 0;
     ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::BoostTest);
-    increase += 10;
+
+    increase += 1000;
+    boostStop = 0;
     ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::AsyncBoostTest);
-    increase += 10;
+
+    increase += 1000;
     ASSERT_NOT_THROW_EXCEPTION_2(NullSingletonTest<ClassType>, this, &ClassType::NullTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DestroyMessage);
 }
 
 void Network::CacheClientTesting::ACETest()
@@ -95,19 +82,19 @@ void Network::CacheClientTesting::NullTest()
 
 void Network::CacheClientTesting::CreateMessage()
 {
-    MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition::CreateNullCondition(), NullMessage::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(messageId, MessageTypeCondition::CreateNullCondition(), NullMessage::Factory);
 }
 
 void Network::CacheClientTesting::DestroyMessage()
 {
-    MESSAGE_MANAGER_SINGLETON.Remove(messageID);
+    MESSAGE_MANAGER_SINGLETON.Remove(messageId);
 }
 
 void Network::CacheClientTesting::ACESendingClientTest()
 {
-    ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    auto configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, GetBufferSize());
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, GetBufferSize());
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Ace,
                                                  ConnectStrategy::Tcp,
@@ -120,28 +107,29 @@ void Network::CacheClientTesting::ACESendingClientTest()
                                                  ConfigurationParameter::Create(),
                                                  SocketSendMessage::Default,
                                                  "127.0.0.1",
-                                                 mPort + increase };
+                                                 GetShiftingPort(increase) };
 
-    thread firstTread{ &ClassType::ACEServerThread, this };
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    vector<ClientSharedPtr> clientContainer;
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
-#include STSTEM_WARNING_POP
+    std::thread thread{ &ClassType::ACEServerThread, this };
+
+    std::vector<ClientSharedPtr> clientContainer{};
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    const auto testMessageEvent = std::make_shared<TestMessageEvent>(CoreTools::DisableNotThrow::Disable);
+    messageEventManager->Insert(messageId, testMessageEvent);
+
     const auto loopCount = GetTestLoopCount();
     for (auto i = 0; i < loopCount; ++i)
     {
-        clientContainer.push_back(make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
+        clientContainer.emplace_back(make_shared<Client>(configurationStrategy, messageEventManager));
     }
 
     for (auto& client : clientContainer)
     {
-        constexpr int connectTime{ 10 };
-        uint64_t socketID{ 0 };
+        constexpr auto connectTime = 10;
+
         for (auto i = 0; i < connectTime; ++i)
         {
-            socketID = client->Connect();
-            if (socketID != 0)
+            if (const auto socketId = client->Connect();
+                socketId != 0)
             {
                 break;
             }
@@ -149,26 +137,26 @@ void Network::CacheClientTesting::ACESendingClientTest()
             ASSERT_UNEQUAL(i + 1, connectTime);
         }
 
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(MessageHeadStrategy::Default, messageID) };
-        client->Send(client->GetSocketID(), message);
+        const auto message = std::make_shared<NullMessage>(MessageHeadStrategy::Default, messageId);
+        client->Send(client->GetSocketId(), message);
 
-        client->ImmediatelySend(client->GetSocketID());
+        client->ImmediatelySend(client->GetSocketId());
 
         client->Receive();
 
         client.reset();
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * messageID);
+    ASSERT_EQUAL(testMessageEvent->GetCallBackTime(), loopCount * messageId);
 
-    firstTread.join();
+    thread.join();
 }
 
 void Network::CacheClientTesting::ACEAsyncSendingClientTest()
 {
-    ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    auto configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, GetBufferSize());
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, GetBufferSize());
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Ace,
                                                  ConnectStrategy::Tcp,
@@ -181,28 +169,33 @@ void Network::CacheClientTesting::ACEAsyncSendingClientTest()
                                                  ConfigurationParameter::Create(),
                                                  SocketSendMessage::Default,
                                                  "127.0.0.1",
-                                                 mPort + increase };
+                                                 GetShiftingPort(increase) };
 
-    thread firstTread{ &ClassType::ACEServerThread, this };
+    std::thread thread{ &ClassType::ACEServerThread, this };
 
-    vector<ClientSharedPtr> clientContainer;
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
+    std::vector<ClientSharedPtr> clientContainer{};
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    const auto testMessageEvent = std::make_shared<TestMessageEvent>(CoreTools::DisableNotThrow::Disable);
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    messageEventManager->Insert(messageId, testMessageEvent);
+    messageEventManager->SetCallbackEvent(testSocketEvent);
+
     const auto loopCount = GetTestLoopCount();
     for (auto i = 0; i < loopCount; ++i)
     {
-        clientContainer.push_back(make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
+        clientContainer.emplace_back(make_shared<Client>(configurationStrategy, messageEventManager));
     }
 
-    int connectNum{ 1 };
+    auto connectNum = 1;
 
     for (auto& client : clientContainer)
     {
-        constexpr int connectTime{ 10 };
+        constexpr auto connectTime = 10;
         for (auto i = 0; i < connectTime; ++i)
         {
             client->AsyncConnect();
 
-            if (connectNum == testSocketManager->GetAsyncConnectCount())
+            if (connectNum == testSocketEvent->GetAsyncConnectCount())
             {
                 break;
             }
@@ -210,21 +203,21 @@ void Network::CacheClientTesting::ACEAsyncSendingClientTest()
             ASSERT_UNEQUAL(i + 1, connectTime);
         }
 
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(MessageHeadStrategy::Default, messageID) };
-        client->AsyncSend(client->GetSocketID(), message);
+        const auto message = std::make_shared<NullMessage>(MessageHeadStrategy::Default, messageId);
+        client->AsyncSend(client->GetSocketId(), message);
 
         ++connectNum;
 
-        client->ImmediatelyAsyncSend(client->GetSocketID());
+        client->ImmediatelyAsyncSend(client->GetSocketId());
 
         client->AsyncReceive();
 
         client.reset();
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * messageID);
+    ASSERT_EQUAL(testMessageEvent->GetCallBackTime(), loopCount * messageId);
 
-    firstTread.join();
+    thread.join();
 }
 
 void Network::CacheClientTesting::ACEServerThread()
@@ -234,37 +227,36 @@ void Network::CacheClientTesting::ACEServerThread()
 
 void Network::CacheClientTesting::DoACEServerThread()
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    ConfigurationStrategy configurationStrategy{ GetACEServerConfigurationStrategy(increase) };
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
-#include STSTEM_WARNING_POP
+    const auto configurationStrategy = GetACEServerConfigurationStrategy(increase);
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    const auto testMessageEvent = std::make_shared<TestMessageEvent>(CoreTools::DisableNotThrow::Disable);
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    messageEventManager->Insert(messageId, testMessageEvent);
+    messageEventManager->SetCallbackEvent(testSocketEvent);
 
-    ServerSharedPtr server{ make_shared<Server>(std::make_shared<MessageEventManager>(MessageEventManager::Create()), configurationStrategy) };
-
-    testSocketManager->SetServerWeakPtr(server);
+    const auto server = std::make_shared<Server>(configurationStrategy, messageEventManager);
+    testMessageEvent->SetServerWeakPtr(server);
 
     const auto loopCount = GetTestLoopCount();
     for (;;)
     {
         ASSERT_TRUE(server->RunServer());
 
-        const auto volatile asyncAcceptorCount = testSocketManager->GetAsyncAcceptorCount();
-
-        if (asyncAcceptorCount == loopCount)
+        if (const auto volatile asyncAcceptorCount = testSocketEvent->GetAsyncAcceptorCount();
+            asyncAcceptorCount == loopCount)
         {
             break;
         }
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * messageID);
+    ASSERT_EQUAL(testMessageEvent->GetCallBackTime(), loopCount * messageId);
 }
 
 void Network::CacheClientTesting::BoostSendingClientTest()
 {
-    ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    auto configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, GetBufferSize());
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, GetBufferSize());
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Boost,
                                                  ConnectStrategy::Tcp,
@@ -277,27 +269,32 @@ void Network::CacheClientTesting::BoostSendingClientTest()
                                                  ConfigurationParameter::Create(),
                                                  SocketSendMessage::Default,
                                                  "127.0.0.1",
-                                                 mPort + increase };
+                                                 GetShiftingPort(increase) };
 
-    vector<ClientSharedPtr> clientContainer;
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
+    std::vector<ClientSharedPtr> clientContainer{};
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    const auto testMessageEvent = std::make_shared<TestMessageEvent>(CoreTools::DisableNotThrow::Disable);
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    messageEventManager->Insert(messageId, testMessageEvent);
+    messageEventManager->SetCallbackEvent(testSocketEvent);
+
     const auto loopCount = GetTestLoopCount();
     for (auto i = 0; i < loopCount; ++i)
     {
-        clientContainer.push_back(make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
+        clientContainer.emplace_back(make_shared<Client>(configurationStrategy, messageEventManager));
     }
 
-    thread firstTread{ &ClassType::BoostServerThread, this };
-    thread secondTread{ &ClassType::BoostRunServerThread, this };
+    std::thread thread0{ &ClassType::BoostServerThread, this };
+    std::thread thread1{ &ClassType::BoostRunServerThread, this };
 
-    for (auto& client : clientContainer)
+    for (const auto& client : clientContainer)
     {
-        constexpr int connectTime{ 10 };
-        uint64_t socketID{ 0 };
+        constexpr auto connectTime = 10;
+
         for (auto i = 0; i < connectTime; ++i)
         {
-            socketID = client->Connect();
-            if (socketID != 0)
+            if (const auto socketId = client->Connect();
+                socketId != 0)
             {
                 break;
             }
@@ -305,25 +302,32 @@ void Network::CacheClientTesting::BoostSendingClientTest()
             ASSERT_UNEQUAL(i + 1, connectTime);
         }
 
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(MessageHeadStrategy::Default, messageID) };
-        client->Send(client->GetSocketID(), message);
+        const auto message = std::make_shared<NullMessage>(MessageHeadStrategy::Default, messageId);
+        client->Send(client->GetSocketId(), message);
 
-        client->ImmediatelySend(client->GetSocketID());
+        client->ImmediatelySend(client->GetSocketId());
 
         client->Receive();
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * messageID);
+    ++boostStop;
 
-    secondTread.join();
-    firstTread.join();
+    if (2 <= boostStop)
+    {
+        BASE_MAIN_MANAGER_SINGLETON.StopContext();
+    }
+
+    ASSERT_EQUAL(testMessageEvent->GetCallBackTime(), loopCount * messageId);
+
+    thread1.join();
+    thread0.join();
 }
 
 void Network::CacheClientTesting::BoostAsyncSendingClientTest()
 {
-    ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    auto configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, GetBufferSize());
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, GetBufferSize());
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Boost,
                                                  ConnectStrategy::Tcp,
@@ -336,62 +340,73 @@ void Network::CacheClientTesting::BoostAsyncSendingClientTest()
                                                  ConfigurationParameter::Create(),
                                                  SocketSendMessage::Default,
                                                  "127.0.0.1",
-                                                 mPort + increase };
+                                                 GetShiftingPort(increase) };
 
-    thread firstTread{ &ClassType::BoostServerThread, this };
-    thread secondTread{ &ClassType::BoostRunServerThread, this };
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    vector<ClientSharedPtr> clientContainer;
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
-#include STSTEM_WARNING_POP
+    std::thread thread0{ &ClassType::BoostServerThread, this };
+    std::thread thread1{ &ClassType::BoostRunServerThread, this };
+
+    std::vector<ClientSharedPtr> clientContainer{};
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    const auto testMessageEvent = std::make_shared<TestMessageEvent>(CoreTools::DisableNotThrow::Disable);
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    messageEventManager->Insert(messageId, testMessageEvent);
+    messageEventManager->SetCallbackEvent(testSocketEvent);
+
     const auto loopCount = GetTestLoopCount();
     for (auto i = 0; i < loopCount; ++i)
     {
-        clientContainer.push_back(make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
+        clientContainer.emplace_back(make_shared<Client>(configurationStrategy, messageEventManager));
     }
 
-    int connectNum{ 1 };
+    auto connectNum = 1;
 
-    for (auto& client : clientContainer)
+    for (const auto& client : clientContainer)
     {
         client->AsyncConnect();
 
         for (;;)
         {
-            const auto volatile asyncConnectCount = testSocketManager->GetAsyncConnectCount();
-            if (connectNum == asyncConnectCount)
+            if (const auto volatile asyncConnectCount = testSocketEvent->GetAsyncConnectCount();
+                connectNum == asyncConnectCount)
             {
                 break;
             }
         }
 
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(MessageHeadStrategy::Default, messageID) };
-        client->AsyncSend(client->GetSocketID(), message);
+        const auto message = std::make_shared<NullMessage>(MessageHeadStrategy::Default, messageId);
+        client->AsyncSend(client->GetSocketId(), message);
 
         ++connectNum;
 
-        client->ImmediatelyAsyncSend(client->GetSocketID());
+        client->ImmediatelyAsyncSend(client->GetSocketId());
     }
 
-    for (auto& client : clientContainer)
+    for (const auto& client : clientContainer)
     {
         client->AsyncReceive();
     }
 
+    const auto result = loopCount * messageId;
     for (;;)
     {
-        const auto volatile asyncReceiveCount = testSocketManager->GetAsyncReceiveCount();
-        if (loopCount == asyncReceiveCount)
+        if (const auto volatile asyncReceiveCount = testSocketEvent->GetAsyncReceiveCount();
+            loopCount == asyncReceiveCount)
         {
             break;
         }
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * messageID);
+    ++boostStop;
 
-    secondTread.join();
-    firstTread.join();
+    if (2 <= boostStop)
+    {
+        BASE_MAIN_MANAGER_SINGLETON.StopContext();
+    }
+
+    ASSERT_EQUAL(testMessageEvent->GetCallBackTime(), loopCount * messageId);
+
+    thread1.join();
+    thread0.join();
 }
 
 void Network::CacheClientTesting::BoostServerThread()
@@ -406,31 +421,41 @@ void Network::CacheClientTesting::BoostRunServerThread()
 
 void Network::CacheClientTesting::DoBoostServerThread()
 {
-    ConfigurationStrategy configurationStrategy{ GetBoostServerConfigurationStrategy(increase) };
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
-#include STSTEM_WARNING_POP
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), 0);
+    const auto configurationStrategy = GetBoostServerConfigurationStrategy(increase);
 
-    ServerSharedPtr server{ make_shared<Server>(std::make_shared<MessageEventManager>(MessageEventManager::Create()), configurationStrategy) };
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    const auto testMessageEvent = std::make_shared<TestMessageEvent>(CoreTools::DisableNotThrow::Disable);
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    messageEventManager->Insert(messageId, testMessageEvent);
+    messageEventManager->SetCallbackEvent(testSocketEvent);
+
+    ASSERT_EQUAL(testMessageEvent->GetCallBackTime(), 0);
+
+    const auto server = make_shared<Server>(configurationStrategy, messageEventManager);
+
+    testMessageEvent->SetServerWeakPtr(server);
 
     const auto loopCount = GetTestLoopCount();
+    const auto result = loopCount * messageId;
+
     for (;;)
     {
-        testSocketManager->SetServerWeakPtr(server);
-
         ASSERT_TRUE(server->RunServer());
 
-        if (0 < testSocketManager->GetCallBackTime())
+        if (result <= testMessageEvent->GetCallBackTime())
         {
-            BASE_MAIN_MANAGER_SINGLETON.StopContext();
             break;
         }
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * messageID);
-    BASE_MAIN_MANAGER_SINGLETON.StopContext();
+    ASSERT_EQUAL(testSocketEvent->GetAsyncAcceptorCount(), loopCount);
+
+    ++boostStop;
+
+    if (2 <= boostStop)
+    {
+        BASE_MAIN_MANAGER_SINGLETON.StopContext();
+    }
 
     for (;;)
     {
@@ -443,9 +468,9 @@ void Network::CacheClientTesting::DoBoostServerThread()
 
 void Network::CacheClientTesting::NullSendingClientTest()
 {
-    ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    auto configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, GetBufferSize());
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, GetBufferSize());
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null,
                                                  ConnectStrategy::Tcp,
@@ -458,26 +483,31 @@ void Network::CacheClientTesting::NullSendingClientTest()
                                                  ConfigurationParameter::Create(),
                                                  SocketSendMessage::Default,
                                                  "127.0.0.1",
-                                                 mPort + increase };
+                                                 GetShiftingPort(increase) };
 
-    vector<ClientSharedPtr> clientContainer;
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
+    std::vector<ClientSharedPtr> clientContainer{};
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    const auto testMessageEvent = std::make_shared<TestMessageEvent>(CoreTools::DisableNotThrow::Disable);
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    messageEventManager->Insert(messageId, testMessageEvent);
+    messageEventManager->SetCallbackEvent(testSocketEvent);
+
     const auto loopCount = GetTestLoopCount();
     for (auto i = 0; i < loopCount; ++i)
     {
-        clientContainer.push_back(make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
+        clientContainer.emplace_back(make_shared<Client>(configurationStrategy, messageEventManager));
     }
 
-    thread firstTread{ &ClassType::NullServerThread, this };
+    std::thread thread{ &ClassType::NullServerThread, this };
 
-    for (auto& client : clientContainer)
+    for (const auto& client : clientContainer)
     {
-        constexpr int connectTime{ 10 };
-        uint64_t socketID{ 0 };
+        constexpr auto connectTime = 10;
+
         for (auto i = 0; i < connectTime; ++i)
         {
-            socketID = client->Connect();
-            if (socketID != 0)
+            if (const auto socketId = client->Connect();
+                socketId != 0)
             {
                 break;
             }
@@ -485,27 +515,27 @@ void Network::CacheClientTesting::NullSendingClientTest()
             ASSERT_UNEQUAL(i + 1, connectTime);
         }
 
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(MessageHeadStrategy::Default, messageID) };
-        client->Send(client->GetSocketID(), message);
+        const auto message = std::make_shared<NullMessage>(MessageHeadStrategy::Default, messageId);
+        client->Send(client->GetSocketId(), message);
 
-        client->ImmediatelySend(client->GetSocketID());
+        client->ImmediatelySend(client->GetSocketId());
     }
 
-    for (auto& client : clientContainer)
+    for (const auto& client : clientContainer)
     {
         client->Receive();
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), 0);
+    ASSERT_EQUAL(testMessageEvent->GetCallBackTime(), 0);
 
-    firstTread.join();
+    thread.join();
 }
 
 void Network::CacheClientTesting::NullAsyncSendingClientTest()
 {
-    ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    auto configurationSubStrategy = ConfigurationSubStrategy::Create();
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, GetBufferSize());
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, GetBufferSize());
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null,
                                                  ConnectStrategy::Tcp,
@@ -518,48 +548,51 @@ void Network::CacheClientTesting::NullAsyncSendingClientTest()
                                                  ConfigurationParameter::Create(),
                                                  SocketSendMessage::Default,
                                                  "127.0.0.1",
-                                                 mPort + increase };
+                                                 GetShiftingPort(increase) };
 
-    thread firstTread{ &ClassType::NullServerThread, this };
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    vector<ClientSharedPtr> clientContainer;
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
-#include STSTEM_WARNING_POP
+    std::thread thread{ &ClassType::NullServerThread, this };
+
+    std::vector<ClientSharedPtr> clientContainer{};
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    const auto testMessageEvent = std::make_shared<TestMessageEvent>(CoreTools::DisableNotThrow::Disable);
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    messageEventManager->Insert(messageId, testMessageEvent);
+    messageEventManager->SetCallbackEvent(testSocketEvent);
+
     const auto loopCount = GetTestLoopCount();
     for (auto i = 0; i < loopCount; ++i)
     {
-        clientContainer.push_back(make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())));
+        clientContainer.emplace_back(make_shared<Client>(configurationStrategy, messageEventManager));
     }
 
-    int connectNum{ 1 };
+    auto connectNum = 1;
 
-    for (auto& client : clientContainer)
+    for (const auto& client : clientContainer)
     {
         client->AsyncConnect();
 
         for (;;)
         {
-            const auto volatile asyncConnectCount = testSocketManager->GetAsyncConnectCount();
+            const auto volatile asyncConnectCount = testSocketEvent->GetAsyncConnectCount();
             if (connectNum == asyncConnectCount)
             {
                 break;
             }
         }
 
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(MessageHeadStrategy::Default, messageID) };
-        client->AsyncSend(client->GetSocketID(), message);
+        const auto message = std::make_shared<NullMessage>(MessageHeadStrategy::Default, messageId);
+        client->AsyncSend(client->GetSocketId(), message);
 
         ++connectNum;
 
-        client->ImmediatelyAsyncSend(client->GetSocketID());
+        client->ImmediatelyAsyncSend(client->GetSocketId());
 
         client->AsyncReceive();
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), 0);
+    ASSERT_EQUAL(testMessageEvent->GetCallBackTime(), 0);
 
-    firstTread.join();
+    thread.join();
 }
 
 void Network::CacheClientTesting::NullServerThread()

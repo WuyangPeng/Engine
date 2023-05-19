@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 16:30)
+///	引擎测试版本：0.9.0.8 (2023/05/18 10:26)
 
 #ifndef NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_MAIN_MANAGER_USE_THREADS_TESTING_H
 #define NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_MAIN_MANAGER_USE_THREADS_TESTING_H
@@ -19,7 +19,7 @@
 
 namespace Network
 {
-    class BoostMainManagerUseThreadsTesting : public SingletonTesting
+    class BoostMainManagerUseThreadsTesting final : public SingletonTesting
     {
     public:
         using ClassType = BoostMainManagerUseThreadsTesting;
@@ -39,8 +39,8 @@ namespace Network
 
         // 测试辅助函数
         void Increment() noexcept;
-        void IntSleepIncrement(IOContextType& ioContext, std::atomic_int& count);
-        void Int16SleepIncrement(IOContextType& ioContext, std::atomic_int16_t& count);
+        void IntSleepIncrement(IoContextType& ioContext, std::atomic_int& count);
+        void Int16SleepIncrement(IoContextType& ioContext, std::atomic_int16_t& count);
 
         void DoRunUnitTest() override;
 

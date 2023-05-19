@@ -1,19 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 13:59)
+///	引擎测试版本：0.9.0.8 (2023/05/18 10:37)
 
 #include "BoostSockAcceptorTesting.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Interface/Client.h"
-#include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
-using std::make_shared;
+#include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketEvent.h"
 
 Network::BoostSockAcceptorTesting::BoostSockAcceptorTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -30,20 +30,19 @@ void Network::BoostSockAcceptorTesting::ClientThread()
 
 void Network::BoostSockAcceptorTesting::DoClientThread()
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(GetMessageID()) };
+    const auto testSocketEvent = std::make_shared<TestSocketEvent>();
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
 
-    auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
+    messageEventManager->SetCallbackEvent(testSocketEvent);
 
-    ClientSharedPtr client{ make_shared<Client>(configurationStrategy, std::make_shared<MessageEventManager>(MessageEventManager::Create())) };
+    const auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
 
-#include STSTEM_WARNING_POP
+    Client client{ configurationStrategy, messageEventManager };
 
     for (auto i = 0; i < connectTime; ++i)
     {
-        const auto socketID = client->Connect();
-        if (socketID != 0u)
+        if (const auto socketId = client.Connect();
+            socketId != 0u)
         {
             break;
         }

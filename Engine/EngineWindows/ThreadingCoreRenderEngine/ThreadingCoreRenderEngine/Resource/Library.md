@@ -272,3 +272,16 @@ FLTK（引擎通过宏USER_INTERFACE_USE_FLTK关联）
    以消除內存泄露。 
  
 ----------------------------
+Apr（引擎通过宏NETWORK_USE_ACTIVE_MQ关联）
+
+1. 官方网站：https://github.com/apache/apr 。
+2. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+
+----------------------------
+
+ActiveMQ（引擎通过宏NETWORK_USE_ACTIVE_MQ关联）
+
+1. 版本：5.18.1
+2. 官方网站：https://activemq.apache.org/components/cms/download/ 。
+
+----------------------------

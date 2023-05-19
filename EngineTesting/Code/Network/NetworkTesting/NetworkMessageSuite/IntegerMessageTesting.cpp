@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/23 16:07)
+///	引擎测试版本：0.9.0.8 (2023/05/12 08:55)
 
 #include "IntegerMessageTesting.h"
 #include "Flags/IntegerMessageType.h"
@@ -22,8 +22,6 @@
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
-using std::make_shared;
-using std::string;
 
 Network::IntegerMessageTesting::IntegerMessageTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -54,10 +52,10 @@ void Network::IntegerMessageTesting::MainTest()
 
 void Network::IntegerMessageTesting::RttiTest()
 {
-    TestingType::IntegerType integerType{ 100, 10, 1000, 2, 100 };
+    const TestingType::IntegerType integerType{ 100, 10, 1000, 2, 100 };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(MessageHeadStrategy::Default, messageID, integerType) };
-    TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(messageID) };
+    const auto testMessage = make_shared<TestingType>(MessageHeadStrategy::Default, messageId, integerType);
+    const auto testIntMessage = std::make_shared<TestIntMessage>(messageId);
 
     ASSERT_TRUE(testMessage->IsExactly(TestingType::GetCurrentRttiType()));
     ASSERT_FALSE(testMessage->IsExactly(MessageInterface::GetCurrentRttiType()));
@@ -72,37 +70,34 @@ void Network::IntegerMessageTesting::RttiTest()
 
     const auto& attiType = testMessage->GetRttiType();
 
-    ASSERT_EQUAL(string{ attiType.GetName() }, string{ typeid(TestingType).name() });
+    ASSERT_EQUAL(attiType.GetName(), typeid(TestingType).name());
 }
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
 
 void Network::IntegerMessageTesting::FactoryTest()
 {
-    TestingType::IntegerType integerType{ 100, 10, 1000, 2, 100 };
+    const TestingType::IntegerType integerType{ 100, 10, 1000, 2, 100 };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(MessageHeadStrategy::Default, messageID, integerType) };
+    const TestingType testMessage{ MessageHeadStrategy::Default, messageId, integerType };
 
-    MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(messageId, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
 
-    MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(*buffer) };
+    MessageBuffer buffer{ BuffBlockSize::Size256, ParserStrategy::LittleEndian };
+    MessageTarget messageTarget{ buffer };
 
-    testMessage->Save(*messageTarget);
+    testMessage.Save(messageTarget);
 
-    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(*buffer) };
+    MessageSource messageSource{ buffer };
 
     MessageHeadStrategy messageHeadStrategy{};
-    messageSource->ReadEnum(messageHeadStrategy);
+    messageSource.ReadEnum(messageHeadStrategy);
 
-    int32_t sourceMessageID{ 0 };
-    messageSource->Read(sourceMessageID);
+    int32_t sourceMessageId{ 0 };
+    messageSource.Read(sourceMessageId);
 
-    ASSERT_EQUAL(sourceMessageID, messageID);
+    ASSERT_EQUAL(sourceMessageId, messageId);
 
-    auto factoryCreateMessage = TestingType::Factory(*messageSource, MessageHeadStrategy::Default, messageID);
-    auto polymorphicMessage = boost::dynamic_pointer_cast<TestingType>(factoryCreateMessage);
+    const auto factoryCreateMessage = TestingType::Factory(messageSource, MessageHeadStrategy::Default, messageId);
+    const auto polymorphicMessage = boost::dynamic_pointer_cast<TestingType>(factoryCreateMessage);
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(polymorphicMessage, "消息类型错误！");
 
@@ -114,52 +109,50 @@ void Network::IntegerMessageTesting::FactoryTest()
         ASSERT_EQUAL(integerType.at(i), polymorphicMessage->GetValue(System::UnderlyingCastEnum<IntegerMessageField>(i)));
     }
 
-    MESSAGE_MANAGER_SINGLETON.Remove(messageID);
+    MESSAGE_MANAGER_SINGLETON.Remove(messageId);
 }
 
 void Network::IntegerMessageTesting::StreamingTest()
 {
-    TestingType::IntegerType integerType{ 100, 10, 1000, 2, 100 };
+    const TestingType::IntegerType integerType{ 100, 10, 1000, 2, 100 };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(MessageHeadStrategy::Default, messageID, integerType) };
+    const TestingType testMessage{ MessageHeadStrategy::Default, messageId, integerType };
 
-    ASSERT_EQUAL(testMessage->GetStreamingSize(), CoreTools::GetStreamSize(messageID) + CoreTools::GetStreamSize(integerType));
+    ASSERT_EQUAL(testMessage.GetStreamingSize(), CoreTools::GetStreamSize(messageId) + CoreTools::GetStreamSize(integerType));
 
-    MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(messageId, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
 
-    MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(*buffer) };
+    MessageBuffer buffer{ BuffBlockSize::Size256, ParserStrategy::LittleEndian };
+    MessageTarget messageTarget{ buffer };
 
-    testMessage->Save(*messageTarget);
+    testMessage.Save(messageTarget);
 
-    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(*buffer) };
+    MessageSource messageSource{ buffer };
 
     MessageHeadStrategy messageHeadStrategy{};
-    messageSource->ReadEnum(messageHeadStrategy);
+    messageSource.ReadEnum(messageHeadStrategy);
 
-    int32_t sourceMessageID{ 0 };
-    messageSource->Read(sourceMessageID);
+    int32_t sourceMessageId{ 0 };
+    messageSource.Read(sourceMessageId);
 
-    ASSERT_EQUAL(sourceMessageID, messageID);
+    ASSERT_EQUAL(sourceMessageId, messageId);
 
-    auto sourceTestIntMessage{ make_shared<TestingType>(MessageHeadStrategy::Default, messageID, TestingType::IntegerType{}) };
+    TestingType sourceTestIntMessage{ MessageHeadStrategy::Default, messageId, TestingType::IntegerType{} };
 
-    sourceTestIntMessage->Load(*messageSource);
+    sourceTestIntMessage.Load(messageSource);
 
-    MESSAGE_MANAGER_SINGLETON.Remove(messageID);
+    MESSAGE_MANAGER_SINGLETON.Remove(messageId);
 }
-
-#include STSTEM_WARNING_POP
 
 void Network::IntegerMessageTesting::MessageTest()
 {
     TestingType::IntegerType integerType{ 100, 10, 1000, 2, 100 };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(MessageHeadStrategy::Default, messageID, integerType) };
+    const auto testMessage = make_shared<TestingType>(MessageHeadStrategy::Default, messageId, integerType);
 
-    ASSERT_EQUAL(testMessage->GetMessageId(), messageID);
+    ASSERT_EQUAL(testMessage->GetMessageId(), messageId);
     ASSERT_EQUAL(testMessage->GetSubMessageId(), 0);
-    ASSERT_EQUAL(testMessage->GetFullMessageId(), messageID);
+    ASSERT_EQUAL(testMessage->GetFullMessageId(), messageId);
 
     ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 }

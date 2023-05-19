@@ -191,7 +191,9 @@ xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../$(Platform)/$(Configu
 xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(ProtobufWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(ProtobufWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -224,7 +226,9 @@ xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../$(Platform)/$(Configu
 xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(ProtobufWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(ProtobufWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -255,7 +259,9 @@ xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configura
 xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(ProtobufWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(ProtobufWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -289,7 +295,9 @@ xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configura
 xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(ProtobufWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(ProtobufWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -319,7 +327,9 @@ xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../$(Platform)/$(Configura
 xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(ProtobufX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(ProtobufX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -352,7 +362,9 @@ xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../$(Platform)/$(Configura
 xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(ProtobufX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(ProtobufX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -383,7 +395,9 @@ xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configurati
 xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(ProtobufX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -417,7 +431,9 @@ xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configurati
 xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(ProtobufX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

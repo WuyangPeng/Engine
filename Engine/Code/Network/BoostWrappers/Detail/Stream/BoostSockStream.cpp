@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/23 0:08)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:37)
 
 #include "Network/NetworkExport.h"
 
@@ -21,12 +21,7 @@
 #include "Network/Interface/Data/AddressData.h"
 #include "Network/NetworkMessage/MessageBuffer.h"
 
-using std::string;
-using std::to_string;
 using namespace std::literals;
-using boost::bind;
-using boost::numeric_cast;
-using boost::asio::detail::throw_error;
 
 namespace
 {
@@ -35,9 +30,11 @@ namespace
     constexpr auto synchronizeReceiveSuccess = SYSTEM_TEXT("同步接收消息成功，字节数："sv);
 }
 
-Network::BoostSockStream::BoostSockStream(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{}, socket{ BASE_MAIN_MANAGER_SINGLETON.GetIOContext() }
+Network::BoostSockStream::BoostSockStream(CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{}, socket{ BASE_MAIN_MANAGER_SINGLETON.GetContext() }
 {
+    System::UnusedFunction(disableNotThrow);
+
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
@@ -62,7 +59,7 @@ int Network::BoostSockStream::Send(const MessageBufferSharedPtr& messageBuffer)
     {
         ErrorCodeType errorCode{};
 
-        auto sendCount = numeric_cast<int>(socket.send(boost::asio::buffer(messageBuffer->GetCurrentReadBufferedPtr(), messageBuffer->GetRemainingReadCount()), 0, errorCode));
+        const auto sendCount = boost::numeric_cast<int>(socket.send(boost::asio::buffer(messageBuffer->GetCurrentReadBufferedPtr(), messageBuffer->GetRemainingReadCount()), 0, errorCode));
 
         if (boost::system::errc::operation_would_block == errorCode)
         {
@@ -70,7 +67,7 @@ int Network::BoostSockStream::Send(const MessageBufferSharedPtr& messageBuffer)
         }
         else if (errorCode != ErrorCodeType{})
         {
-            throw_error(errorCode, "Send");
+            boost::asio::detail::throw_error(errorCode, "Send");
         }
 
         if (sendCount == 0)
@@ -98,23 +95,23 @@ void Network::BoostSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInt
 
     socket.async_send(boost::asio::buffer(messageBuffer->GetCurrentReadBufferedPtr(),
                                           messageBuffer->GetRemainingReadCount()),
-                      bind(&ClassType::AsyncSendEvent,
-                           this,
-                           eventInterface,
-                           messageBuffer,
-                           originalReadIndex,
-                           boost::asio::placeholders::error,
-                           boost::asio::placeholders::bytes_transferred));
+                      boost::bind(&ClassType::AsyncSendEvent,
+                                  this,
+                                  eventInterface,
+                                  messageBuffer,
+                                  originalReadIndex,
+                                  boost::asio::placeholders::error,
+                                  boost::asio::placeholders::bytes_transferred));
 }
 
 void Network::BoostSockStream::AsyncSendEvent(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalReadIndex, const ErrorCodeType& errorCode, size_t bytesTransferred)
 {
     if (errorCode)
     {
-        throw_error(errorCode, "DoAsyncSend");
+        boost::asio::detail::throw_error(errorCode, "DoAsyncSend");
     }
 
-    auto presentBytesTransferred = numeric_cast<int>(bytesTransferred);
+    const auto presentBytesTransferred = boost::numeric_cast<int>(bytesTransferred);
 
     messageBuffer->AddCurrentReadIndex(presentBytesTransferred);
 
@@ -122,13 +119,13 @@ void Network::BoostSockStream::AsyncSendEvent(const EventInterfaceSharedPtr& eve
     {
         socket.async_send(boost::asio::buffer(messageBuffer->GetCurrentReadBufferedPtr(),
                                               messageBuffer->GetRemainingReadCount()),
-                          bind(&ClassType::AsyncSendEvent,
-                               this,
-                               eventInterface,
-                               messageBuffer,
-                               originalReadIndex,
-                               boost::asio::placeholders::error,
-                               boost::asio::placeholders::bytes_transferred));
+                          boost::bind(&ClassType::AsyncSendEvent,
+                                      this,
+                                      eventInterface,
+                                      messageBuffer,
+                                      originalReadIndex,
+                                      boost::asio::placeholders::error,
+                                      boost::asio::placeholders::bytes_transferred));
     }
     else
     {
@@ -148,17 +145,17 @@ int Network::BoostSockStream::HandleReceive(const MessageBufferSharedPtr& messag
 
     while (0 < messageBuffer->GetReceiveCount())
     {
-        ErrorCodeType errorCode;
+        ErrorCodeType errorCode{};
 
-        auto receiveCount = numeric_cast<int>(socket.receive(boost::asio::buffer(messageBuffer->GetCurrentWriteBufferedPtr(), messageBuffer->GetReceiveCount()), 0, errorCode));
+        const auto receiveCount = boost::numeric_cast<int>(socket.receive(boost::asio::buffer(messageBuffer->GetCurrentWriteBufferedPtr(), messageBuffer->GetReceiveCount()), 0, errorCode));
 
-        if (boost::system::errc::operation_would_block == errorCode)
+        if (errorCode == boost::system::errc::operation_would_block || errorCode.value() == 10035)
         {
             break;
         }
         else if (errorCode != ErrorCodeType{})
         {
-            throw_error(errorCode, "Receive");
+            boost::asio::detail::throw_error(errorCode, "Receive");
         }
 
         if (receiveCount == 0)
@@ -185,24 +182,23 @@ void Network::BoostSockStream::HandleAsyncReceive(const EventInterfaceSharedPtr&
 
     socket.async_receive(boost::asio::buffer(messageBuffer->GetCurrentWriteBufferedPtr(),
                                              messageBuffer->GetReceiveCount()),
-                         bind(&ClassType::AsyncReceiveEvent,
-                              this,
-                              eventInterface,
-                              messageBuffer,
-                              originalWriteIndex,
-                              boost::asio::placeholders::error,
-                              boost::asio::placeholders::bytes_transferred));
+                         boost::bind(&ClassType::AsyncReceiveEvent,
+                                     this,
+                                     eventInterface,
+                                     messageBuffer,
+                                     originalWriteIndex,
+                                     boost::asio::placeholders::error,
+                                     boost::asio::placeholders::bytes_transferred));
 }
 
-// private
 void Network::BoostSockStream::AsyncReceiveEvent(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex, const ErrorCodeType& errorCode, size_t bytesTransferred)
 {
     if (errorCode)
     {
-        throw_error(errorCode, "DoAsyncReceive");
+        boost::asio::detail::throw_error(errorCode, "DoAsyncReceive");
     }
 
-    auto presentBytesTransferred = numeric_cast<int>(bytesTransferred);
+    const auto presentBytesTransferred = boost::numeric_cast<int>(bytesTransferred);
 
     messageBuffer->DecreaseReceiveCount(presentBytesTransferred);
 
@@ -210,13 +206,13 @@ void Network::BoostSockStream::AsyncReceiveEvent(const EventInterfaceSharedPtr& 
     {
         socket.async_receive(boost::asio::buffer(messageBuffer->GetCurrentWriteBufferedPtr(),
                                                  messageBuffer->GetReceiveCount()),
-                             bind(&ClassType::AsyncReceiveEvent,
-                                  this,
-                                  eventInterface,
-                                  messageBuffer,
-                                  originalWriteIndex,
-                                  boost::asio::placeholders::error,
-                                  boost::asio::placeholders::bytes_transferred));
+                             boost::bind(&ClassType::AsyncReceiveEvent,
+                                         this,
+                                         eventInterface,
+                                         messageBuffer,
+                                         originalWriteIndex,
+                                         boost::asio::placeholders::error,
+                                         boost::asio::placeholders::bytes_transferred));
     }
     else
     {
@@ -258,7 +254,7 @@ std::string Network::BoostSockStream::GetRemoteAddress() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return socket.remote_endpoint().address().to_string() + ":"s + to_string(GetRemotePort());
+    return socket.remote_endpoint().address().to_string() + ":"s + std::to_string(GetRemotePort());
 }
 
 int Network::BoostSockStream::GetRemotePort() const

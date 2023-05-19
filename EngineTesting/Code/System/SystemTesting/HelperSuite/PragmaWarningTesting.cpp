@@ -10,6 +10,7 @@
 #include "PragmaWarningTesting.h"
 #include "System/Helper/PragmaWarning.h"
 #include "System/Helper/PragmaWarning/ACE.h"
+#include "System/Helper/PragmaWarning/ActiveMQ.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "System/Helper/PragmaWarning/Any.h"
 #include "System/Helper/PragmaWarning/AsioConnect.h"
@@ -60,6 +61,7 @@
 #include SYSTEM_WARNING_DISABLE(4101)
 #include SYSTEM_WARNING_DISABLE(4239)
 #include SYSTEM_WARNING_DISABLE(4244)
+#include SYSTEM_WARNING_DISABLE(4458)
 #include SYSTEM_WARNING_DISABLE(4505)
 #include SYSTEM_WARNING_DISABLE(4996)
 

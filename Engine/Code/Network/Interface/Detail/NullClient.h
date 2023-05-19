@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/19 14:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 11:13)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NULL_CLIENT_H
 #define NETWORK_NETWORK_INTERFACE_NULL_CLIENT_H
@@ -23,24 +23,24 @@ namespace Network
         using ParentType = ClientImpl;
 
     public:
-        NullClient(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& socketManager) noexcept;
+        NullClient(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& messageEventManager) noexcept;
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD uint64_t Connect() noexcept final;
-        void AsyncConnect() noexcept final;
+        NODISCARD int64_t Connect() noexcept override;
+        void AsyncConnect() noexcept override;
 
-        void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) noexcept final;
-        void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) noexcept final;
+        void Send(int64_t socketId, const MessageInterfaceSharedPtr& message) noexcept override;
+        void AsyncSend(int64_t socketId, const MessageInterfaceSharedPtr& message) noexcept override;
 
-        void Receive() noexcept final;
-        void AsyncReceive() noexcept final;
-        void ImmediatelySend(uint64_t socketID) noexcept final;
-        void ImmediatelyAsyncSend(uint64_t socketID) noexcept final;
+        void Receive() noexcept override;
+        void AsyncReceive() noexcept override;
+        void ImmediatelySend(int64_t socketId) noexcept override;
+        void ImmediatelyAsyncSend(int64_t socketId) noexcept override;
 
-        NODISCARD uint64_t GetSocketID() const noexcept final;
+        NODISCARD int64_t GetSocketId() const noexcept override;
 
-        NODISCARD bool EventFunction(MAYBE_UNUSED const CallbackParameters& callbackParameters) noexcept final;
+        NODISCARD bool EventFunction(const CallbackParameters& callbackParameters) noexcept override;
     };
 }
 

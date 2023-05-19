@@ -1,27 +1,25 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 23:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:26)
 
 #include "Network/NetworkExport.h"
 
 #include "NullSockConnector.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+#include "Network/NetworkMessage/Detail/BufferSendStreamImpl.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
-
-using std::make_shared;
-using std::string;
-using std::to_string;
 
 Network::NullSockConnector::NullSockConnector() noexcept
     : ParentType{}
@@ -31,9 +29,11 @@ Network::NullSockConnector::NullSockConnector() noexcept
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullSockConnector)
 
-bool Network::NullSockConnector::Connect(MAYBE_UNUSED const SockStreamSharedPtr& sockStream, MAYBE_UNUSED const SockAddressSharedPtr& sockAddress) noexcept
+bool Network::NullSockConnector::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(sockStream, sockAddress);
 
     return true;
 }
@@ -42,14 +42,16 @@ bool Network::NullSockConnector::Connect(MAYBE_UNUSED const SockStreamSharedPtr&
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
 
-void Network::NullSockConnector::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, MAYBE_UNUSED const SockStreamSharedPtr& sockStream, MAYBE_UNUSED const SockAddressSharedPtr& sockAddress)
+void Network::NullSockConnector::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(sockStream, sockAddress);
 
     CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPosition::Error) };
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Null));
-    callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Error), 0);
+    callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPosition::Error), EnumCastUnderlying(System::WindowError::Success));
 
     if (!eventInterface->EventFunction(callbackParameters))
     {
@@ -63,5 +65,5 @@ Network::NullSockConnector::SockConnectorSharedPtr Network::NullSockConnector::C
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return make_shared<ClassType>(*this);
+    return std::make_shared<ClassType>(*this);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/21 17:00)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 13:37)
 
 #include "Network/NetworkExport.h"
 
@@ -19,16 +19,13 @@
 #include "CoreTools/Threading/Mutex.h"
 #include "CoreTools/Threading/ScopedMutex.h"
 
-using std::make_shared;
-using std::make_unique;
-
 SINGLETON_GET_PTR_DEFINE(CoreTools, EntityManager);
 
 Network::BaseMainManager::BaseMainManagerUniquePtr Network::BaseMainManager::baseMainManager{};
 
 void Network::BaseMainManager::Create(const ConfigurationStrategy& configurationStrategy)
 {
-    baseMainManager = make_unique<BaseMainManager>(configurationStrategy, BaseMainManagerCreate::Init);
+    baseMainManager = std::make_unique<BaseMainManager>(configurationStrategy, BaseMainManagerCreate::Init);
 }
 
 void Network::BaseMainManager::Destroy() noexcept
@@ -36,9 +33,11 @@ void Network::BaseMainManager::Destroy() noexcept
     baseMainManager.reset();
 }
 
-Network::BaseMainManager::BaseMainManager(const ConfigurationStrategy& configurationStrategy, MAYBE_UNUSED BaseMainManagerCreate baseMainManagerCreate)
+Network::BaseMainManager::BaseMainManager(const ConfigurationStrategy& configurationStrategy, BaseMainManagerCreate baseMainManagerCreate)
     : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
 {
+    System::UnusedFunction(baseMainManagerCreate);
+
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
@@ -53,13 +52,13 @@ void Network::BaseMainManager::Run()
     impl->Run();
 }
 
-Network::IOContextType& Network::BaseMainManager::GetIOContext()
+Network::IoContextType& Network::BaseMainManager::GetContext()
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     NETWORK_CLASS_IS_VALID_1;
 
-    return impl->GetIOContext();
+    return impl->GetContext();
 }
 
 void Network::BaseMainManager::StopContext()

@@ -1,0 +1,28 @@
+{
+  "ActiveMQ": {
+    "Host": "43.139.123.106",
+    "Port": 61616,
+    "Client": 0,
+    "Server": 2,
+    "Wrappers": "ActiveMQ",
+    "Connect": "UDP",
+    "Message": 1,
+    "Parser": 0,
+    "OpenSSL": 1,
+    "Send": 0,
+
+    "WrappersSub": {
+      "SendBufferSize": 1048576,
+      "ReceiveBufferSize": 1048576
+    },
+
+    "Parameter": {
+      "Account": "admin",
+      "Password": "admin",
+      "SocketType": "Gateway",
+      "ServerId": 1000,
+      "IntranetIp": "127.0.0.1",
+      "IntranetPort": "2580"
+    }
+  }
+}

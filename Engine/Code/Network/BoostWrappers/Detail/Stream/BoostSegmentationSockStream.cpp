@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/23 0:07)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:31)
 
 #include "Network/NetworkExport.h"
 
@@ -17,9 +17,6 @@
 #include "Network/Interface/Data/AddressData.h"
 #include "Network/NetworkMessage/BufferSendStream.h"
 #include "Network/NetworkMessage/MessageBuffer.h"
-
-using boost::asio::detail::throw_error;
-using std::string;
 
 Network::BoostSegmentationSockStream::BoostSegmentationSockStream(CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{ disableNotThrow }, streamReceive{ StreamReceive::Head }
@@ -76,7 +73,7 @@ int Network::BoostSegmentationSockStream::ReceiveHead(const MessageBufferSharedP
     }
     else if (receiveSize != 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("接收消息头错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("接收消息头错误！"s))
     }
 
     return receiveSize;
@@ -95,7 +92,7 @@ int Network::BoostSegmentationSockStream::ReceiveContent(const MessageBufferShar
 
         if (0 < messageBuffer->GetReceiveCount())
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("接收消息内容错误！"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("接收消息内容错误！"s))
         }
     }
 
@@ -167,7 +164,7 @@ void Network::BoostSegmentationSockStream::SubclassAsyncReceiveHeadEvent(const E
 {
     if (errorCode != ErrorCodeType{})
     {
-        throw_error(errorCode, "SubclassAsyncReceiveHeadEvent");
+        boost::asio::detail::throw_error(errorCode, "SubclassAsyncReceiveHeadEvent");
     }
 
     if (messageBuffer->GetReceiveCount() == 0)
@@ -178,7 +175,7 @@ void Network::BoostSegmentationSockStream::SubclassAsyncReceiveHeadEvent(const E
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("接收消息头长度错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("接收消息头长度错误！"s))
     }
 }
 

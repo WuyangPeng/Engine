@@ -1,21 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 14:19)
+///	引擎测试版本：0.9.0.8 (2023/05/15 10:48)
 
 #include "ClientTesting.h"
 #include "SingletonTestingDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/ConfigurationParameter.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/Interface/Client.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
 
 Network::ClientTesting::ClientTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -60,110 +59,94 @@ void Network::ClientTesting::NullTest()
 void Network::ClientTesting::ACEConstructionTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, GetBufferSize());
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, GetBufferSize());
 
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, GetBufferSize());
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, GetBufferSize());
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Ace,
-                                                 ConnectStrategy::Tcp,
-                                                 ClientStrategy::OnlySending,
-                                                 MessageStrategy::Iovec,
-                                                 ParserStrategy::LittleEndian,
-                                                 OpenSSLStrategy::Default,
-                                                 EncryptedCompressionStrategy::Default,
-                                                 configurationSubStrategy,
-                                                 ConfigurationParameter::Create(),
-                                                 SocketSendMessage::Default,
-                                                 "127.0.0.1",
-                                                 8010 };
+    const ConfigurationStrategy configurationStrategy{ WrappersStrategy::Ace,
+                                                       ConnectStrategy::Tcp,
+                                                       ClientStrategy::OnlySending,
+                                                       MessageStrategy::Iovec,
+                                                       ParserStrategy::LittleEndian,
+                                                       OpenSSLStrategy::Default,
+                                                       EncryptedCompressionStrategy::Default,
+                                                       configurationSubStrategy,
+                                                       ConfigurationParameter::Create(),
+                                                       SocketSendMessage::Default,
+                                                       "127.0.0.1",
+                                                       8010 };
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    ClientSharedPtr clientContainer{ make_shared<Client>(configurationStrategy, nullptr) };
-
-#include STSTEM_WARNING_POP
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    Client clientContainer{ configurationStrategy, messageEventManager };
 }
 
 void Network::ClientTesting::BoostConstructionTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, GetBufferSize());
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, GetBufferSize());
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Boost,
-                                                 ConnectStrategy::Tcp,
-                                                 ClientStrategy::Cache,
-                                                 MessageStrategy::Iovec,
-                                                 ParserStrategy::LittleEndian,
-                                                 OpenSSLStrategy::Default,
-                                                 EncryptedCompressionStrategy::Default,
-                                                 configurationSubStrategy,
-                                                 ConfigurationParameter::Create(),
-                                                 SocketSendMessage::Default,
-                                                 "127.0.0.1",
-                                                 8010 };
+    const ConfigurationStrategy configurationStrategy{ WrappersStrategy::Boost,
+                                                       ConnectStrategy::Tcp,
+                                                       ClientStrategy::Cache,
+                                                       MessageStrategy::Iovec,
+                                                       ParserStrategy::LittleEndian,
+                                                       OpenSSLStrategy::Default,
+                                                       EncryptedCompressionStrategy::Default,
+                                                       configurationSubStrategy,
+                                                       ConfigurationParameter::Create(),
+                                                       SocketSendMessage::Default,
+                                                       "127.0.0.1",
+                                                       8010 };
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    ClientSharedPtr clientContainer{ make_shared<Client>(configurationStrategy, nullptr) };
-
-#include STSTEM_WARNING_POP
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    Client clientContainer{ configurationStrategy, messageEventManager };
 }
 
 void Network::ClientTesting::NetworkConstructionTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, GetBufferSize());
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, GetBufferSize());
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Network,
-                                                 ConnectStrategy::Tcp,
-                                                 ClientStrategy::OnlySending,
-                                                 MessageStrategy::Iovec,
-                                                 ParserStrategy::LittleEndian,
-                                                 OpenSSLStrategy::Default,
-                                                 EncryptedCompressionStrategy::Default,
-                                                 configurationSubStrategy,
-                                                 ConfigurationParameter::Create(),
-                                                 SocketSendMessage::Default,
-                                                 "127.0.0.1",
-                                                 8010 };
+    const ConfigurationStrategy configurationStrategy{ WrappersStrategy::Network,
+                                                       ConnectStrategy::Tcp,
+                                                       ClientStrategy::OnlySending,
+                                                       MessageStrategy::Iovec,
+                                                       ParserStrategy::LittleEndian,
+                                                       OpenSSLStrategy::Default,
+                                                       EncryptedCompressionStrategy::Default,
+                                                       configurationSubStrategy,
+                                                       ConfigurationParameter::Create(),
+                                                       SocketSendMessage::Default,
+                                                       "127.0.0.1",
+                                                       8010 };
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    ClientSharedPtr clientContainer{ make_shared<Client>(configurationStrategy, nullptr) };
-
-#include STSTEM_WARNING_POP
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    Client clientContainer{ configurationStrategy, messageEventManager };
 }
 
 void Network::ClientTesting::NullConstructionTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, 1048576);
-    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, 1048576);
+    configurationSubStrategy.Insert(WrappersSubStrategy::ReceiveBufferSize, GetBufferSize());
+    configurationSubStrategy.Insert(WrappersSubStrategy::SendBufferSize, GetBufferSize());
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null,
-                                                 ConnectStrategy::Tcp,
-                                                 ClientStrategy::Cache,
-                                                 MessageStrategy::Iovec,
-                                                 ParserStrategy::LittleEndian,
-                                                 OpenSSLStrategy::Default,
-                                                 EncryptedCompressionStrategy::Default,
-                                                 configurationSubStrategy,
-                                                 ConfigurationParameter::Create(),
-                                                 SocketSendMessage::Default,
-                                                 "127.0.0.1",
-                                                 8010 };
+    const ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null,
+                                                       ConnectStrategy::Tcp,
+                                                       ClientStrategy::Cache,
+                                                       MessageStrategy::Iovec,
+                                                       ParserStrategy::LittleEndian,
+                                                       OpenSSLStrategy::Default,
+                                                       EncryptedCompressionStrategy::Default,
+                                                       configurationSubStrategy,
+                                                       ConfigurationParameter::Create(),
+                                                       SocketSendMessage::Default,
+                                                       "127.0.0.1",
+                                                       8010 };
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    ClientSharedPtr clientContainer{ make_shared<Client>(configurationStrategy, nullptr) };
-
-#include STSTEM_WARNING_POP
+    const auto messageEventManager = MessageEventManager::CreateSharedPtr();
+    Client clientContainer{ configurationStrategy, messageEventManager };
 }

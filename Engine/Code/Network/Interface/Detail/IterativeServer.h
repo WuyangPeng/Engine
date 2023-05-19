@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 14:18)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 11:05)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ITERATIVE_SERVER_H
 #define NETWORK_NETWORK_INTERFACE_ITERATIVE_SERVER_H
@@ -31,26 +31,26 @@ namespace Network
         using ParentType = ServerImpl;
 
     public:
-        IterativeServer(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy);
+        IterativeServer(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& messageEventManager);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
-        void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
+        void Send(int64_t socketId, const MessageInterfaceSharedPtr& message) override;
+        void AsyncSend(int64_t socketId, const MessageInterfaceSharedPtr& message) override;
 
-        NODISCARD bool EventFunction(MAYBE_UNUSED const CoreTools::CallbackParameters& callbackParameters) noexcept override;
+        NODISCARD bool EventFunction(const CoreTools::CallbackParameters& callbackParameters) override;
 
     private:
         NODISCARD bool WaitForMultipleEvents() noexcept override;
-        NODISCARD bool HandleConnections(MessageEventManager& socketManager) override;
-        NODISCARD bool HandleData(const MessageEventManagerSharedPtr& socketManager) override;
-        NODISCARD bool ImmediatelySend(MAYBE_UNUSED uint64_t socketID) noexcept override;
+        NODISCARD bool HandleConnections() override;
+        NODISCARD bool HandleData(const MessageEventManagerSharedPtr& aMessageEventManager) override;
+        NODISCARD bool ImmediatelySend(int64_t socketId) noexcept override;
         NODISCARD bool ImmediatelySend() noexcept override;
-        void ImmediatelyAsyncSend(MAYBE_UNUSED uint64_t socketID) noexcept override;
+        void ImmediatelyAsyncSend(int64_t socketId) noexcept override;
 
     private:
         using BufferType = std::vector<char>;
-        using Container = std::map<uint64_t, StreamContainer>;
+        using Container = std::map<int64_t, StreamContainer>;
 
     private:
         SockAcceptor sockAcceptor;

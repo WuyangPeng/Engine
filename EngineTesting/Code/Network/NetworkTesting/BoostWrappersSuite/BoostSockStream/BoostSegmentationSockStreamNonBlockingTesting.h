@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 16:22)
+///	引擎测试版本：0.9.0.8 (2023/05/18 14:29)
 
 #ifndef NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SEGMENTATION_SOCK_STREAM_NON_BLOCKING_TESTING_H
 #define NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SEGMENTATION_SOCK_STREAM_NON_BLOCKING_TESTING_H
@@ -14,7 +14,7 @@
 
 namespace Network
 {
-    class BoostSegmentationSockStreamNonBlockingTesting : public BoostSockStreamTesting
+    class BoostSegmentationSockStreamNonBlockingTesting final : public BoostSockStreamTesting
     {
     public:
         using ClassType = BoostSegmentationSockStreamNonBlockingTesting;
@@ -40,12 +40,12 @@ namespace Network
         void ServerTest();
 
         void ClientNonBlockingConnect(const TestingTypeSharedPtr& sockStream);
-        void ClientNonBlockingSend(const TestingTypeSharedPtr& sockStream);
-        void ClientNonBlockingReceive(const TestingTypeSharedPtr& sockStream);
+        void ClientNonBlockingSend(TestingType& sockStream);
+        void ClientNonBlockingReceive(TestingType& sockStream);
 
-        void ServerNonBlockingAcceptor(const TestingTypeSharedPtr& sockStream);
-        void ServerNonBlockingReceive(const TestingTypeSharedPtr& sockStream);
-        void ServerNonBlockingSend(const TestingTypeSharedPtr& sockStream);
+        void ServerNonBlockingAcceptor(TestingType& sockStream);
+        void ServerNonBlockingReceive(TestingType& sockStream);
+        void ServerNonBlockingSend(TestingType& sockStream);
     };
 }
 

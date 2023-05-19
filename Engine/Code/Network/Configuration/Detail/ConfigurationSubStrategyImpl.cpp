@@ -26,7 +26,15 @@ bool Network::ConfigurationSubStrategyImpl::IsExist(WrappersSubStrategy wrappers
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return container.contains(wrappersSubStrategy);
+    if (const auto iter = container.find(wrappersSubStrategy);
+        iter != container.cend())
+    {
+        return 0 < iter->second;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 int Network::ConfigurationSubStrategyImpl::GetValue(WrappersSubStrategy wrappersSubStrategy) const

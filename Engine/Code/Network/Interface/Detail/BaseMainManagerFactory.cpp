@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 17:15)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/08 17:25)
 
 #include "Network/NetworkExport.h"
 
@@ -22,8 +22,6 @@
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkWrappers/Detail/BaseMainManager/NetworkMainManager.h"
 
-using std::make_shared;
-
 Network::BaseMainManagerFactory::BaseMainManagerFactory() noexcept
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -31,42 +29,49 @@ Network::BaseMainManagerFactory::BaseMainManagerFactory() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, BaseMainManagerFactory)
 
-// static
 Network::BaseMainManagerFactory::ImplTypePtr Network::BaseMainManagerFactory::Create(const ConfigurationStrategy& configurationStrategy)
 {
-    const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
-
-    switch (wrappersStrategyFlag)
+    switch (const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
+            wrappersStrategyFlag)
     {
 #ifdef NETWORK_USE_ACE
+
         case WrappersStrategy::Ace:
-            return make_shared<ACEMainManager>();
+        {
+            return std::make_shared<ACEMainManager>();
+        }
+
 #endif  // NETWORK_USE_ACE
 
         case WrappersStrategy::Boost:
         {
             if (configurationStrategy.IsExist(WrappersSubStrategy::Threads))
             {
-                return make_shared<BoostMainManagerUseThreads>(configurationStrategy.GetConfigurationSubStrategy());
+                return std::make_shared<BoostMainManagerUseThreads>(configurationStrategy.GetConfigurationSubStrategy());
             }
             else if (configurationStrategy.IsExist(WrappersSubStrategy::MultiContext))
             {
-                return make_shared<BoostMainManagerUseMultiContext>(configurationStrategy.GetConfigurationSubStrategy());
+                return std::make_shared<BoostMainManagerUseMultiContext>(configurationStrategy.GetConfigurationSubStrategy());
             }
             else
             {
-                return make_shared<BoostMainManager>(CoreTools::DisableNotThrow::Disable);
+                return std::make_shared<BoostMainManager>(CoreTools::DisableNotThrow::Disable);
             }
         }
 
         case WrappersStrategy::Network:
-            return make_shared<NetworkMainManager>(CoreTools::DisableNotThrow::Disable);
+        {
+            return std::make_shared<NetworkMainManager>(CoreTools::DisableNotThrow::Disable);
+        }
 
         case WrappersStrategy::Null:
-            return make_shared<NullMainManager>();
+        {
+            return std::make_shared<NullMainManager>();
+        }
 
-        case WrappersStrategy::Default:
         default:
-            return make_shared<BoostMainManager>(CoreTools::DisableNotThrow::Disable);
+        {
+            return std::make_shared<BoostMainManager>(CoreTools::DisableNotThrow::Disable);
+        }
     }
 }

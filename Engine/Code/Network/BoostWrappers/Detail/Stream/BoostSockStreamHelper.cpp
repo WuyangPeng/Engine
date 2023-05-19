@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/23 0:11)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:41)
 
 #include "Network/NetworkExport.h"
 
@@ -18,14 +18,13 @@
 #include "Network/Interface/Data/AddressData.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 
-using std::string;
 using namespace std::literals;
 
 namespace
 {
     constexpr auto port = SYSTEM_TEXT("，端口："sv);
 
-    constexpr auto g_BytesTransferred = SYSTEM_TEXT("，字节数："sv);
+    constexpr auto gBytesTransferred = SYSTEM_TEXT("，字节数："sv);
 
     constexpr auto asynchronousSendSuccess = SYSTEM_TEXT("异步发送消息成功，地址："sv);
 
@@ -86,6 +85,6 @@ void Network::BoostSockStreamHelper::PrintSuccessLog(const String& prefix, const
 {
     if (0 < bytesTransferred)
     {
-        LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Trace, Network, g_BoostLogName.data(), prefix, addressData.GetAddress(), port.data(), addressData.GetPort(), g_BytesTransferred.data(), bytesTransferred, CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Trace, Network, boostLogName.data(), prefix, addressData.GetAddress(), port.data(), addressData.GetPort(), gBytesTransferred.data(), bytesTransferred);
     }
 }

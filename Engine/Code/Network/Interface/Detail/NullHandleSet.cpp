@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 18:07)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:53)
 
 #include "Network/NetworkExport.h"
 
@@ -14,13 +14,13 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::make_shared;
-
 CLASS_INVARIANT_STUB_DEFINE(Network, NullHandleSet)
 
-void Network::NullHandleSet::SetBit(MAYBE_UNUSED ACEHandle handle) noexcept
+void Network::NullHandleSet::SetBit(ACEHandleType handle) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(handle);
 }
 
 int64_t Network::NullHandleSet::GetMaxSet() const noexcept
@@ -34,38 +34,44 @@ Network::SockFdSet* Network::NullHandleSet::GetFdSet()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("获取fdset失败！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("获取fdset失败！"s))
 }
 
-void Network::NullHandleSet::Sync(MAYBE_UNUSED ACEHandle maxHandle) noexcept
+void Network::NullHandleSet::Sync(ACEHandleType maxHandle) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(maxHandle);
 }
 
-bool Network::NullHandleSet::IsSet(MAYBE_UNUSED ACEHandle handle) const noexcept
+bool Network::NullHandleSet::IsSet(ACEHandleType handle) const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(handle);
 
     return false;
 }
 
-void Network::NullHandleSet::ClearBit(MAYBE_UNUSED ACEHandle handle) noexcept
+void Network::NullHandleSet::ClearBit(ACEHandleType handle) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(handle);
 }
 
 Network::NullHandleSet::ImplTypeSharedPtr Network::NullHandleSet::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return make_shared<ClassType>(*this);
+    return std::make_shared<ClassType>(*this);
 }
 
 const Network::ACEHandleSet& Network::NullHandleSet::GetACEHandleSet() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("获取ACEHandleSet失败！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("获取ACEHandleSet失败！"s))
 }
 
 bool Network::NullHandleSet::IsFdSetFull() const noexcept
@@ -82,9 +88,11 @@ int Network::NullHandleSet::IsFdSetCount() const noexcept
     return 0;
 }
 
-bool Network::NullHandleSet::Select(MAYBE_UNUSED int width) noexcept
+bool Network::NullHandleSet::Select(int width) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(width);
 
     return false;
 }

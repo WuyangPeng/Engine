@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 23:47)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 11:32)
 
 #include "Network/NetworkExport.h"
 
@@ -17,9 +17,6 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 
-using std::make_shared;
-using std::string;
-
 Network::ServerFactory::ServerFactory() noexcept
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -27,18 +24,16 @@ Network::ServerFactory::ServerFactory() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ServerFactory)
 
-// static
-Network::ServerFactory::ImplTypeSharedPtr Network::ServerFactory::Create(const MessageEventManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
+Network::ServerFactory::ImplTypeSharedPtr Network::ServerFactory::Create(const ConfigurationStrategy& configurationStrategy, const MessageEventManagerSharedPtr& messageEventManager)
 {
-    const auto patternStrategyFlag = configurationStrategy.GetServerStrategy();
-
-    switch (patternStrategyFlag)
+    switch (const auto serverStrategy = configurationStrategy.GetServerStrategy();
+            serverStrategy)
     {
         case ServerStrategy::Iterative:
-            return make_shared<IterativeServer>(socketManager, configurationStrategy);
+            return std::make_shared<IterativeServer>(configurationStrategy, messageEventManager);
         case ServerStrategy::Reactive:
-            return make_shared<ReactiveServer>(socketManager, configurationStrategy);
+            return std::make_shared<ReactiveServer>(configurationStrategy, messageEventManager);
         default:
-            return make_shared<NullServer>(socketManager, configurationStrategy);
+            return std::make_shared<NullServer>(configurationStrategy, messageEventManager);
     }
 }

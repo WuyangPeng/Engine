@@ -1,25 +1,23 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/23 15:55)
+///	引擎测试版本：0.9.0.8 (2023/05/12 14:53)
 
 #include "BufferSendStreamTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/BufferSendStream.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageBuffer.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
-using std::ostream;
 
 Network::BufferSendStreamTesting::BufferSendStreamTesting(const OStreamShared& stream)
-    : ParentType{ stream }, testMessage{ make_shared<TestNullMessage>(messageID) }
+    : ParentType{ stream }, testMessage{ std::make_shared<TestNullMessage>(messageId) }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -74,7 +72,7 @@ void Network::BufferSendStreamTesting::FinishSendTest(int aTestLoopCount, Parser
     ASSERT_LESS(MessageInterface::GetMessageHeadSize(), bufferSendStream.GetCurrentSize());
     ASSERT_EQUAL(MessageInterface::GetMessageHeadSize() + testMessage->GetStreamingSize() * aTestLoopCount, bufferSendStream.GetCurrentSize());
 
-    auto buffer = make_shared<MessageBuffer>(BuffBlockSize::Size1024, parserStrategy);
+    const auto buffer = std::make_shared<MessageBuffer>(BuffBlockSize::Size1024, parserStrategy);
 
     bufferSendStream.Save(buffer);
 

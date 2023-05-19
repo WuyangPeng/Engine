@@ -52,3 +52,18 @@ Network::ConfigurationParameterImpl::Parameter Network::ConfigurationParameterIm
 
     return Parameter{};
 }
+
+Network::ConfigurationParameterImpl::String Network::ConfigurationParameterImpl::GetFirstParameter(const String& key) const
+{
+    NETWORK_CLASS_IS_VALID_CONST_9;
+
+    if (const auto parameter = GetParameter(key);
+        !parameter.empty())
+    {
+        return *parameter.begin();
+    }
+    else
+    {
+        return String{};
+    }
+}

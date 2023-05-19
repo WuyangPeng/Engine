@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/21 17:05)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 13:44)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_USING_H
 #define NETWORK_NETWORK_INTERFACE_ACE_USING_H
@@ -32,20 +32,27 @@ namespace Network
 
 #ifdef NETWORK_USE_ACE
 
-    using ACEInetAddress = ACE_INET_Addr;
+    using ACEInternetAddress = ACE_INET_Addr;
     using ACESockStreamNativeType = ACE_SOCK_Stream;
     using ACEHandle = ACE_HANDLE;
     using ACEHandleSet = ACE_Handle_Set;
-    constexpr auto g_NonBlock = ACE_NONBLOCK;
+    constexpr auto gNonBlock = ACE_NONBLOCK;
 
     #ifdef NETWORK_USES_ACE_WCHAR
+
         #ifndef ACE_USES_WCHAR
+
             #error "NETWORK_USES_ACE_WCHAR要与编译好的ACE库中是否定义ACE_USES_WCHAR相对应"
+
         #endif  // ACE_USES_WCHAR
+
     #else  // !NETWORK_USES_ACE_WCHAR
+
         #ifdef ACE_USES_WCHAR
+
             #error "NETWORK_USES_ACE_WCHAR要与编译好的ACE库中是否定义ACE_USES_WCHAR相对应"
         #endif  // ACE_USES_WCHAR
+
     #endif  // NETWORK_USES_ACE_WCHAR
 
     #ifdef NETWORK_USES_ACE_WCHAR
@@ -62,7 +69,7 @@ namespace Network
 
 #else  // !NETWORK_USE_ACE
 
-    class ACEInetAddress
+    class ACEInternetAddress
     {
     };
 
@@ -75,7 +82,10 @@ namespace Network
     class ACEHandleSet
     {
     };
-    constexpr auto g_NonBlock = 1;
+    constexpr auto gNonBlock = 1;
+
+    using ACEString = String;
+    using ACEChar = TChar;
 
 #endif  // NETWORK_USE_ACE
 }

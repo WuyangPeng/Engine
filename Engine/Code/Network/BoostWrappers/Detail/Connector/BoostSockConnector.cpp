@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/23 0:03)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:28)
 
 #include "Network/NetworkExport.h"
 
@@ -19,12 +19,7 @@
 #include "Network/Interface/SockAddress.h"
 #include "Network/Interface/SockStream.h"
 
-using std::make_shared;
-using std::to_string;
 using namespace std::literals;
-using boost::asio::async_connect;
-using boost::asio::connect;
-using TcpType = boost::asio::ip::tcp;
 
 namespace
 {
@@ -43,18 +38,19 @@ CLASS_INVARIANT_STUB_DEFINE(Network, BoostSockConnector)
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
+
 bool Network::BoostSockConnector::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    auto& ioService = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    auto& ioService = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 
-    TcpType::resolver resolver{ ioService };
-    ErrorCodeType errorCode;
+    boost::asio::ip::tcp::resolver resolver{ ioService };
+    ErrorCodeType errorCode{};
 
     BoostSockConnectorHelper::PrintConnectorLog(synchronizeConnector.data(), AddressData{ *sockAddress });
 
-    connect(sockStream->GetBoostSockStream(), resolver.resolve(sockAddress->GetBoostInetAddress()), errorCode);
+    boost::asio::connect(sockStream->GetBoostSockStream(), resolver.resolve(sockAddress->GetBoostInternetAddress()), errorCode);
 
     if (errorCode == ErrorCodeType{})
     {
@@ -67,30 +63,27 @@ bool Network::BoostSockConnector::Connect(const SockStreamSharedPtr& sockStream,
         return false;
     }
 }
-#include STSTEM_WARNING_POP
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
 void Network::BoostSockConnector::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    auto& ioService = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    auto& ioService = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 
-    TcpType::resolver resolver{ ioService };
+    boost::asio::ip::tcp::resolver resolver{ ioService };
 
     BoostSockConnectorHelper::PrintConnectorLog(asynchronousConnector.data(), AddressData{ *sockAddress });
 
-    async_connect(sockStream->GetBoostSockStream(), resolver.resolve(sockAddress->GetBoostInetAddress()), [eventInterface](const ErrorCodeType& errorCode, const BoostInetAddressType& endpoint) {
-        BoostSockConnectorHelper::EventFunction(errorCode, eventInterface, AddressData{ endpoint.address().to_string() + ":" + to_string(endpoint.port()), endpoint.port() });
+    boost::asio::async_connect(sockStream->GetBoostSockStream(), resolver.resolve(sockAddress->GetBoostInternetAddress()), [eventInterface](const ErrorCodeType& errorCode, const BoostInternetAddressType& endpoint) {
+        BoostSockConnectorHelper::EventFunction(errorCode, eventInterface, AddressData{ endpoint.address().to_string() + ":" + std::to_string(endpoint.port()), endpoint.port() });
     });
 }
+
 #include STSTEM_WARNING_POP
 
 Network::BoostSockConnector::SockConnectorSharedPtr Network::BoostSockConnector::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return make_shared<ClassType>(*this);
+    return std::make_shared<ClassType>(*this);
 }

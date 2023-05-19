@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/23 17:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:49)
 
 #include "Network/NetworkExport.h"
 
@@ -20,51 +20,47 @@
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/Interface/SockAddress.h"
 #include "Network/Interface/SockStream.h"
-#include "Network/NetworkWrappers/Detail/Address/NetworkSockInetAddress.h"
-
-using std::string;
+#include "Network/NetworkWrappers/Detail/Address/NetworkSockInternetAddress.h"
 
 Network::NetworkSockAcceptor::NetworkSockAcceptor(int port)
     : ParentType{}, socketHandle{ System::CreateSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
 {
     if (!System::IsSocketValid(socketHandle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("创建本地端口失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("创建本地端口失败！"s))
     }
 
-    NetworkSockInetAddress sockAddress{ port };
-
-    if (!System::Bind(socketHandle, &sockAddress.GetWinSockInetAddress()))
+    if (NetworkSockInternetAddress sockAddress{ port };
+        !System::Bind(socketHandle, &sockAddress.GetWinSockInternetAddress()))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("绑定失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("绑定失败！"s))
     }
 
     if (!System::Listen(socketHandle, System::soMaxConn))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("监听失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("监听失败！"s))
     }
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::NetworkSockAcceptor::NetworkSockAcceptor(const string& hostName, int port)
+Network::NetworkSockAcceptor::NetworkSockAcceptor(const std::string& hostName, int port)
     : ParentType{}, socketHandle{ System::CreateSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
 {
     if (!System::IsSocketValid(socketHandle))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("创建本地端口失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("创建本地端口失败！"s))
     }
 
-    NetworkSockInetAddress sockAddress{ hostName, port };
-
-    if (!System::Bind(socketHandle, &sockAddress.GetWinSockInetAddress()))
+    if (NetworkSockInternetAddress sockAddress{ hostName, port };
+        !System::Bind(socketHandle, &sockAddress.GetWinSockInternetAddress()))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("绑定失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("绑定失败！"s))
     }
 
     if (!System::Listen(socketHandle, System::soMaxConn))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("监听失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("监听失败！"s))
     }
 
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -76,11 +72,10 @@ bool Network::NetworkSockAcceptor::Accept(SockStream& sockStream, SockAddress& s
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    auto addrLen = boost::numeric_cast<int>(sizeof(sockAddress.GetWinSockInetAddress()));
+    auto addressLength = boost::numeric_cast<int>(sizeof(sockAddress.GetWinSockInternetAddress()));
 
-    const auto acceptHandle = System::Accept(socketHandle, &sockAddress.GetWinSockInetAddress(), &addrLen);
-
-    if (System::IsSocketValid(acceptHandle))
+    if (const auto acceptHandle = System::Accept(socketHandle, &sockAddress.GetWinSockInternetAddress(), &addressLength);
+        System::IsSocketValid(acceptHandle))
     {
         sockStream.SetNetworkHandle(acceptHandle);
 
@@ -96,13 +91,12 @@ bool Network::NetworkSockAcceptor::Accept(SockStream& sockStream)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    NetworkSockInetAddress sockAddress{ CoreTools::DisableNotThrow::Disable };
+    NetworkSockInternetAddress sockAddress{ CoreTools::DisableNotThrow::Disable };
 
-    auto addrLen = boost::numeric_cast<int>(sizeof(sockAddress.GetWinSockInetAddress()));
+    auto addressLength = boost::numeric_cast<int>(sizeof(sockAddress.GetWinSockInternetAddress()));
 
-    const auto acceptHandle = System::Accept(socketHandle, &sockAddress.GetWinSockInetAddress(), &addrLen);
-
-    if (System::IsSocketValid(acceptHandle))
+    if (const auto acceptHandle = System::Accept(socketHandle, &sockAddress.GetWinSockInternetAddress(), &addressLength);
+        System::IsSocketValid(acceptHandle))
     {
         sockStream.SetNetworkHandle(acceptHandle);
 
@@ -118,8 +112,8 @@ bool Network::NetworkSockAcceptor::EnableNonBlock() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    unsigned long nonblock{ 1 };
-    return System::IoctlSocket(socketHandle, System::IoctlSocketCmd::FionBio, &nonblock);
+    unsigned long nonBlock{ 1 };
+    return IoctlSocket(socketHandle, System::IoctlSocketCmd::FionBio, &nonBlock);
 }
 
 System::WinSocket Network::NetworkSockAcceptor::GetWinSocket() noexcept
@@ -132,26 +126,32 @@ System::WinSocket Network::NetworkSockAcceptor::GetWinSocket() noexcept
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
-void Network::NetworkSockAcceptor::AsyncAccept(MAYBE_UNUSED const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
+
+void Network::NetworkSockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
 {
     NETWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(eventInterface);
 
     MAYBE_UNUSED const auto result = Accept(*sockStream);
 }
 
-void Network::NetworkSockAcceptor::AsyncAccept(MAYBE_UNUSED const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+void Network::NetworkSockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_9;
 
+    System::UnusedFunction(eventInterface);
+
     MAYBE_UNUSED const auto result = Accept(*sockStream, *sockAddress);
 }
+
 #include STSTEM_WARNING_POP
 
-string Network::NetworkSockAcceptor::GetAddress() const noexcept
+std::string Network::NetworkSockAcceptor::GetAddress() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return string{};
+    return std::string{};
 }
 
 int Network::NetworkSockAcceptor::GetPort() const noexcept

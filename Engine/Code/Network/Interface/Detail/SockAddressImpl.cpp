@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/21 16:56)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 09:03)
 
 #include "Network/NetworkExport.h"
 
@@ -16,44 +16,44 @@
 
 CLASS_INVARIANT_STUB_DEFINE(Network, SockAddressImpl)
 
-const Network::ACEInetAddressType& Network::SockAddressImpl::GetACEInetAddress() const
+const Network::ACEInternetAddressType& Network::SockAddressImpl::GetACEInternetAddress() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("不是ACE地址类！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("不是ACE地址类！"s))
 }
 
-Network::ACEInetAddressType& Network::SockAddressImpl::GetACEInetAddress()
+Network::ACEInternetAddressType& Network::SockAddressImpl::GetACEInternetAddress()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return NON_CONST_MEMBER_CALL_CONST_MEMBER(ACEInetAddressType&, GetACEInetAddress);
+    return NON_CONST_MEMBER_CALL_CONST_MEMBER(ACEInternetAddressType&, GetACEInternetAddress);
 }
 
-const Network::BoostInetAddressType& Network::SockAddressImpl::GetBoostInetAddress() const
+const Network::BoostInternetAddressType& Network::SockAddressImpl::GetBoostInternetAddress() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("不是boost地址类！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("不是boost地址类！"s))
 }
 
-Network::BoostInetAddressType& Network::SockAddressImpl::GetBoostInetAddress()
+Network::BoostInternetAddressType& Network::SockAddressImpl::GetBoostInternetAddress()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return NON_CONST_MEMBER_CALL_CONST_MEMBER(BoostInetAddressType&, GetBoostInetAddress);
+    return NON_CONST_MEMBER_CALL_CONST_MEMBER(BoostInternetAddressType&, GetBoostInternetAddress);
 }
 
-const Network::WinSockInetAddressType& Network::SockAddressImpl::GetWinSockInetAddress() const
+const Network::WinSockInternetAddressType& Network::SockAddressImpl::GetWinSockInternetAddress() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("不是WinSock地址类！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("不是WinSock地址类！"s))
 }
 
-Network::WinSockInetAddressType& Network::SockAddressImpl::GetWinSockInetAddress()
+Network::WinSockInternetAddressType& Network::SockAddressImpl::GetWinSockInternetAddress()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return NON_CONST_MEMBER_CALL_CONST_MEMBER(WinSockInetAddressType&, GetWinSockInetAddress);
+    return NON_CONST_MEMBER_CALL_CONST_MEMBER(WinSockInternetAddressType&, GetWinSockInternetAddress);
 }

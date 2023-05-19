@@ -1,18 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 14:23)
+///	引擎测试版本：0.9.0.8 (2023/05/15 10:32)
 
 #include "HandleSetTesting.h"
 #include "SingletonTestingDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "Network/Interface/HandleSet.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Network/Interface/HandleSet.h"
+
 Network::HandleSetTesting::HandleSetTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -166,18 +167,18 @@ void Network::HandleSetTesting::NullGetFdSetExceptionTest()
 
 void Network::HandleSetTesting::BoostGetACEHandleSetExceptionTest()
 {
-    HandleSet handleSet{ GetBoostServerConfigurationStrategy() };
+    const HandleSet handleSet{ GetBoostServerConfigurationStrategy() };
     MAYBE_UNUSED const auto& aceHandleSet = handleSet.GetACEHandleSet();
 }
 
 void Network::HandleSetTesting::NetworkGetACEHandleSetExceptionTest()
 {
-    HandleSet handleSet{ GetNetworkServerConfigurationStrategy() };
+    const HandleSet handleSet{ GetNetworkServerConfigurationStrategy() };
     MAYBE_UNUSED const auto& aceHandleSet = handleSet.GetACEHandleSet();
 }
 
 void Network::HandleSetTesting::NullGetACEHandleSetExceptionTest()
 {
-    HandleSet handleSet{ GetNullServerConfigurationStrategy() };
+    const HandleSet handleSet{ GetNullServerConfigurationStrategy() };
     MAYBE_UNUSED const auto& aceHandleSet = handleSet.GetACEHandleSet();
 }

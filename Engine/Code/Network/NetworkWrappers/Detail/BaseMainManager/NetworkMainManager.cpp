@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/23 17:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 14:52)
 
 #include "Network/NetworkExport.h"
 
@@ -19,9 +19,11 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 
-Network::NetworkMainManager::NetworkMainManager(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+Network::NetworkMainManager::NetworkMainManager(CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{}
 {
+    System::UnusedFunction(disableNotThrow);
+
     Init();
 
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -46,9 +48,9 @@ void Network::NetworkMainManager::Init()
     System::WinSockData wsaData{};
 
     constexpr auto versionRequested = System::MakeWord(2, 2);
-    const auto startUp = System::WinSockStartUp(versionRequested, &wsaData);
 
-    if (startUp != System::WinSockStartUpReturn::Successful)
+    if (const auto startUp = System::WinSockStartUp(versionRequested, &wsaData);
+        startUp != System::WinSockStartUpReturn::Successful)
     {
         THROW_WINDOWS_EXCEPTION;
     }
@@ -56,9 +58,8 @@ void Network::NetworkMainManager::Init()
 
 void Network::NetworkMainManager::Release() noexcept
 {
-    const auto cleanup = System::WinSockCleanup();
-
-    if (cleanup != System::WinSockCleanupReturn::Successful)
+    if (const auto cleanup = System::WinSockCleanup();
+        cleanup != System::WinSockCleanupReturn::Successful)
     {
         LOG_SINGLETON_ENGINE_APPENDER(Error, Network, SYSTEM_TEXT("销毁WinSock失败！"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }

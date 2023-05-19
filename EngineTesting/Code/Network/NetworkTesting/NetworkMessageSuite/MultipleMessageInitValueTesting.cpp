@@ -1,24 +1,23 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 10:48)
+///	引擎测试版本：0.9.0.8 (2023/05/12 09:23)
 
 #include "MultipleMessageInitValueTesting.h"
 #include "Flags/MultipleMessageType.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
 #include "Network/NetworkMessage/MultipleMessageCast.h"
 #include "Network/NetworkMessage/MultipleMessageContainerDetail.h"
 #include "Network/NetworkMessage/MultipleMessageInitValueDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <string>
 
-using std::string;
+#include <string>
 
 namespace Network
 {
@@ -66,7 +65,7 @@ void Network::MultipleMessageInitValueTesting::BaseTest()
     constexpr uint32_t uint32Value{ 224 };
     constexpr uint64_t uint64Value{ 156 };
 
-    const string stringValue{ "string" };
+    const std::string stringValue{ "string" };
 
     MultipleMessageType multipleMessageContainer{};
 

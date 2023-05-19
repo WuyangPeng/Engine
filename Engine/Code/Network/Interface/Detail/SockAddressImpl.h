@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/20 16:22)
+///	标准：std:c++20
+///	引擎版本：0.9.0.8 (2023/05/09 08:57)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCK_ADDRESS_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_SOCK_ADDRESS_IMPL_H
@@ -33,13 +33,13 @@ namespace Network
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        NODISCARD virtual const ACEInetAddressType& GetACEInetAddress() const;
-        NODISCARD virtual const BoostInetAddressType& GetBoostInetAddress() const;
-        NODISCARD virtual const WinSockInetAddressType& GetWinSockInetAddress() const;
+        NODISCARD virtual const ACEInternetAddressType& GetACEInternetAddress() const;
+        NODISCARD virtual const BoostInternetAddressType& GetBoostInternetAddress() const;
+        NODISCARD virtual const WinSockInternetAddressType& GetWinSockInternetAddress() const;
 
-        NODISCARD virtual ACEInetAddressType& GetACEInetAddress();
-        NODISCARD virtual BoostInetAddressType& GetBoostInetAddress();
-        NODISCARD virtual WinSockInetAddressType& GetWinSockInetAddress();
+        NODISCARD virtual ACEInternetAddressType& GetACEInternetAddress();
+        NODISCARD virtual BoostInternetAddressType& GetBoostInternetAddress();
+        NODISCARD virtual WinSockInternetAddressType& GetWinSockInternetAddress();
 
         NODISCARD virtual SockAddressSharedPtr Clone() const = 0;
 

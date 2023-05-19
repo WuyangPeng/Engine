@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/24 10:44)
+///	引擎测试版本：0.9.0.8 (2023/05/12 09:43)
 
 #include "MultipleMessageContainerTesting.h"
 #include "Flags/MultipleMessageType.h"
@@ -17,8 +17,7 @@
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 #include "Network/NetworkMessage/MultipleMessageContainerDetail.h"
-using std::make_shared;
-using std::string;
+
 Network::MultipleMessageContainerTesting::MultipleMessageContainerTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -64,7 +63,7 @@ void Network::MultipleMessageContainerTesting::BaseTest()
     constexpr uint32_t uint32Value{ 224 };
     constexpr uint64_t uint64Value{ 156 };
 
-    const string stringValue{ "string" };
+    const std::string stringValue{ "string" };
 
     TestingType multipleMessageContainer{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
 
@@ -113,9 +112,9 @@ void Network::MultipleMessageContainerTesting::StreamingTest()
     constexpr uint32_t uint32Value{ 224 };
     constexpr uint64_t uint64Value{ 156 };
 
-    const string stringValue{ "string" };
+    const std::string stringValue{ "string" };
 
-    TestingType multipleMessageContainer{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
+    const TestingType multipleMessageContainer{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
 
     const auto streamSize = CoreTools::GetStreamSize(int8Value) +
                             CoreTools::GetStreamSize(int16Value) +
@@ -128,15 +127,13 @@ void Network::MultipleMessageContainerTesting::StreamingTest()
                             CoreTools::GetStreamSize(stringValue);
 
     ASSERT_EQUAL(multipleMessageContainer.GetStreamingSize(), streamSize);
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-    MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTarget messageTarget{ *buffer };
-#include STSTEM_WARNING_POP
+
+    MessageBuffer buffer{ BuffBlockSize::Size256, ParserStrategy::LittleEndian };
+    MessageTarget messageTarget{ buffer };
 
     multipleMessageContainer.Save(messageTarget);
 
-    MessageSource messageSource{ *buffer };
+    MessageSource messageSource{ buffer };
 
     TestingType resultMessageContainer{};
 

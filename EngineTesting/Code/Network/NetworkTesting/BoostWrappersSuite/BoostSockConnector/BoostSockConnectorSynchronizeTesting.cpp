@@ -1,26 +1,23 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 11:31)
+///	引擎测试版本：0.9.0.8 (2023/05/18 14:23)
 
 #include "BoostSockConnectorSynchronizeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/Interface/SockAddress.h"
 #include "Network/Interface/SockConnector.h"
 #include "Network/Interface/SockStream.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 #include <thread>
-
-using std::make_shared;
-using std::thread;
-
 
 Network::BoostSockConnectorSynchronizeTesting::BoostSockConnectorSynchronizeTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -42,16 +39,16 @@ void Network::BoostSockConnectorSynchronizeTesting::MainTest() noexcept
 
 void Network::BoostSockConnectorSynchronizeTesting::ConnectorTest()
 {
-    thread serverThread{ &ClassType::BoostServerThread, this };
-
-    constexpr auto resetCount = 10;
+    std::thread serverThread{ &ClassType::BoostServerThread, this };
 
     const auto loopCount = GetTestLoopCount();
     for (auto loop = 0; loop < loopCount; ++loop)
     {
         ASSERT_NOT_THROW_EXCEPTION_0(SynchronizeConnectorTest);
         ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
-        if (loop % resetCount == (resetCount - 1))
+
+        if (constexpr auto resetCount = 10;
+            loop % resetCount == (resetCount - 1))
         {
             ASSERT_NOT_THROW_EXCEPTION_0(ClearOffset);
         }
@@ -64,12 +61,12 @@ void Network::BoostSockConnectorSynchronizeTesting::ConnectorTest()
 
 void Network::BoostSockConnectorSynchronizeTesting::SynchronizeConnectorTest()
 {
-    thread serverThread{ &ClassType::ServerThread, this };
+    std::thread serverThread{ &ClassType::ServerThread, this };
 
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
-    SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetHost(), configurationStrategy.GetPort(), configurationStrategy) };
+    const auto sockStream = std::make_shared<SockStream>(configurationStrategy);
+    const auto sockAddress = make_shared<SockAddress>(configurationStrategy.GetHost(), configurationStrategy.GetPort(), configurationStrategy);
 
     TestingType sockConnector{ configurationStrategy };
 

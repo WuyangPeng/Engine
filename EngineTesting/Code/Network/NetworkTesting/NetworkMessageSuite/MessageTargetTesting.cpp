@@ -1,31 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/23 18:26)
+///	引擎测试版本：0.9.0.8 (2023/05/12 15:04)
 
 #include "MessageTargetTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <boost/numeric/conversion/cast.hpp>
 
-using std::array;
-using std::make_shared;
-using std::ostream;
-using std::string;
-using std::vector;
-
-const string Network::MessageTargetTesting::stringValue{ "StringValue" };
+const std::string Network::MessageTargetTesting::stringValue{ "StringValue" };
 
 Network::MessageTargetTesting::MessageTargetTesting(const OStreamShared& stream)
     : ParentType{ stream },
@@ -79,7 +72,7 @@ void Network::MessageTargetTesting::MainTest()
 
 void Network::MessageTargetTesting::SourceTest(ParserStrategy parserStrategy)
 {
-    auto buffer = CreateTargetMessageBuffer(parserStrategy);
+    const auto buffer = CreateTargetMessageBuffer(parserStrategy);
 
     MessageSource messageSource{ *buffer };
 
@@ -94,7 +87,7 @@ Network::MessageBufferSharedPtr Network::MessageTargetTesting::CreateTargetMessa
 {
     bytesWrite = 0;
 
-    MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size1024, parserStrategy) };
+    auto buffer = std::make_shared<MessageBuffer>(BuffBlockSize::Size1024, parserStrategy);
     MessageTarget messageTarget{ *buffer };
 
     ASSERT_EQUAL(messageTarget.GetBytesWritten(), bytesWrite);
@@ -216,7 +209,7 @@ void Network::MessageTargetTesting::VerificationBool(MessageSource& messageSourc
     messageSource.Read(boolBufferSize);
     ASSERT_EQUAL(boolArraySize, boolBufferSize);
 
-    array<bool, boolArraySize> resultBoolBuffer{};
+    std::array<bool, boolArraySize> resultBoolBuffer{};
     messageSource.ReadBool(boolArraySize, resultBoolBuffer.data());
     ASSERT_EQUAL(resultBoolBuffer, boolBuffer1);
 
@@ -226,7 +219,7 @@ void Network::MessageTargetTesting::VerificationBool(MessageSource& messageSourc
 
 void Network::MessageTargetTesting::VerificationEnum(ParserStrategy parserStrategy, MessageSource& messageSource)
 {
-    ParserStrategy resultParserStrategy{ ParserStrategy::End };
+    auto resultParserStrategy = ParserStrategy::End;
     messageSource.ReadEnum(resultParserStrategy);
 
     ASSERT_ENUM_EQUAL(parserStrategy, resultParserStrategy);
@@ -235,7 +228,7 @@ void Network::MessageTargetTesting::VerificationEnum(ParserStrategy parserStrate
     messageSource.Read(parserStrategyBufferSize);
     ASSERT_EQUAL(enumArraySize, parserStrategyBufferSize);
 
-    array<ParserStrategy, enumArraySize> resultParserStrategyBuffer{};
+    std::array<ParserStrategy, enumArraySize> resultParserStrategyBuffer{};
     messageSource.ReadEnum(enumArraySize, resultParserStrategyBuffer.data());
     ASSERT_EQUAL(resultParserStrategyBuffer, parserStrategyBuffer1);
 
@@ -254,7 +247,7 @@ void Network::MessageTargetTesting::VerificationInt16(MessageSource& messageSour
     messageSource.Read(int16BufferSize);
     ASSERT_EQUAL(int16ArraySize, int16BufferSize);
 
-    array<int16_t, int16ArraySize> resultInt16Buffer{};
+    std::array<int16_t, int16ArraySize> resultInt16Buffer{};
     messageSource.Read(int16ArraySize, resultInt16Buffer.data());
     ASSERT_EQUAL(resultInt16Buffer, int16Buffer1);
 
@@ -264,7 +257,7 @@ void Network::MessageTargetTesting::VerificationInt16(MessageSource& messageSour
 
 void Network::MessageTargetTesting::VerificationString(MessageSource& messageSource)
 {
-    auto resultStringValue = messageSource.ReadString();
+    const auto resultStringValue = messageSource.ReadString();
 
     ASSERT_EQUAL(resultStringValue, stringValue);
 
@@ -272,7 +265,7 @@ void Network::MessageTargetTesting::VerificationString(MessageSource& messageSou
     messageSource.Read(stringBufferSize);
     ASSERT_EQUAL(stringArraySize, stringBufferSize);
 
-    array<string, stringArraySize> resultStringBuffer{};
+    std::array<std::string, stringArraySize> resultStringBuffer{};
     messageSource.ReadString(stringArraySize, resultStringBuffer.data());
     ASSERT_EQUAL(resultStringBuffer, stringBuffer1);
 
@@ -282,21 +275,21 @@ void Network::MessageTargetTesting::VerificationString(MessageSource& messageSou
 
 void Network::MessageTargetTesting::VerificationVector(MessageSource& messageSource)
 {
-    vector<int32_t> int32Buffer{};
+    std::vector<int32_t> int32Buffer{};
     messageSource.Read(int32Buffer);
 
-    auto int32BufferSize = boost::numeric_cast<int32_t>(int32Buffer.size());
+    const auto int32BufferSize = boost::numeric_cast<int32_t>(int32Buffer.size());
     ASSERT_EQUAL(int32BufferSize, int32VectorSize);
     ASSERT_EQUAL(int32Buffer, int32Vector);
 
-    string resultStringValue;
+    std::string resultStringValue;
     messageSource.Read(resultStringValue);
     ASSERT_EQUAL(resultStringValue, stringValue);
 
-    vector<string> stringBuffer{};
+    std::vector<std::string> stringBuffer{};
     messageSource.Read(stringBuffer);
 
-    auto stringBufferSize = boost::numeric_cast<int32_t>(stringBuffer.size());
+    const auto stringBufferSize = boost::numeric_cast<int32_t>(stringBuffer.size());
     ASSERT_EQUAL(stringBufferSize, stringVectorSize);
     ASSERT_EQUAL(stringBuffer, stringVector);
 }

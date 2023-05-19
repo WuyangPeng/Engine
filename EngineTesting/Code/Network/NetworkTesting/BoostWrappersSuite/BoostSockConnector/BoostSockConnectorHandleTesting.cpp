@@ -1,21 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 11:24)
+///	引擎测试版本：0.9.0.8 (2023/05/18 14:16)
 
 #include "BoostSockConnectorHandleTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Interface/SockAddress.h"
 #include "Network/Interface/SockConnector.h"
 #include "Network/Interface/SockStream.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::make_shared;
 
 Network::BoostSockConnectorHandleTesting::BoostSockConnectorHandleTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -43,30 +42,30 @@ void Network::BoostSockConnectorHandleTesting::ConnectorTest()
 
 void Network::BoostSockConnectorHandleTesting::CopyConstructorTest()
 {
-    auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
+    const auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
-    SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetHost(), configurationStrategy.GetPort(), configurationStrategy) };
+    const auto sockStream = std::make_shared<SockStream>(configurationStrategy);
+    const auto sockAddress = make_shared<SockAddress>(configurationStrategy.GetHost(), configurationStrategy.GetPort(), configurationStrategy);
 
-    TestingType sockConnector{ configurationStrategy };
+    const TestingType sockConnector{ configurationStrategy };
     TestingType copySockConnector{ sockConnector };
 
     // 触发复制操作
-    MAYBE_UNUSED const auto value = copySockConnector.Connect(sockStream, sockAddress);
+    MAYBE_UNUSED const auto result = copySockConnector.Connect(sockStream, sockAddress);
 }
 
 void Network::BoostSockConnectorHandleTesting::CopyOperatorTest()
 {
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
-    SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
-    SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetHost(), configurationStrategy.GetPort(), configurationStrategy) };
+    const auto sockStream = std::make_shared<SockStream>(configurationStrategy);
+    const auto sockAddress = make_shared<SockAddress>(configurationStrategy.GetHost(), configurationStrategy.GetPort(), configurationStrategy);
 
-    TestingType sockConnector{ configurationStrategy };
+    const TestingType sockConnector{ configurationStrategy };
     TestingType copySockConnector{ GetBoostClientConfigurationStrategy() };
 
     copySockConnector = sockConnector;
 
     // 触发复制操作
-    MAYBE_UNUSED const auto value = copySockConnector.Connect(sockStream, sockAddress);
+    MAYBE_UNUSED const auto result = copySockConnector.Connect(sockStream, sockAddress);
 }

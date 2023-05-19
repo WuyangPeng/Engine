@@ -1,20 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/23 18:32)
+///	引擎测试版本：0.9.0.8 (2023/05/12 10:17)
 
 #include "MessageTypeConditionTesting.h"
 #include "ThreadingCoreRenderEngineTesting/Version.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/NetworkMessage/Flags/MessageTypeFlags.h"
 #include "Network/NetworkMessage/MessageTypeCondition.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::set;
 
 Network::MessageTypeConditionTesting::MessageTypeConditionTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -40,11 +39,11 @@ void Network::MessageTypeConditionTesting::MainTest()
 void Network::MessageTypeConditionTesting::CompareTest()
 {
     constexpr auto version = gTCRETestingVersion - 2;
-    MessageTypeCondition messageTypeCondition1{ VersionsCondition::Greater, version };
-    MessageTypeCondition messageTypeCondition2{ VersionsCondition::GreaterEqual, version };
-    MessageTypeCondition messageTypeCondition3{ VersionsCondition::Equality, version };
-    MessageTypeCondition messageTypeCondition4{ VersionsCondition::LessEqual, version };
-    MessageTypeCondition messageTypeCondition5{ VersionsCondition::Less, version };
+    const MessageTypeCondition messageTypeCondition0{ VersionsCondition::Less, version };
+    const MessageTypeCondition messageTypeCondition1{ VersionsCondition::Greater, version };
+    const MessageTypeCondition messageTypeCondition2{ VersionsCondition::GreaterEqual, version };
+    const MessageTypeCondition messageTypeCondition3{ VersionsCondition::Equality, version };
+    const MessageTypeCondition messageTypeCondition4{ VersionsCondition::LessEqual, version };
 
     ASSERT_FALSE(messageTypeCondition1.IsVersionsConform(version - 1));
     ASSERT_FALSE(messageTypeCondition1.IsVersionsConform(version));
@@ -64,23 +63,23 @@ void Network::MessageTypeConditionTesting::CompareTest()
     ASSERT_TRUE(messageTypeCondition4.IsVersionsConform(version));
     ASSERT_FALSE(messageTypeCondition4.IsVersionsConform(version + 1));
 
-    ASSERT_TRUE(messageTypeCondition5.IsVersionsConform(version - 1));
-    ASSERT_FALSE(messageTypeCondition5.IsVersionsConform(version));
-    ASSERT_FALSE(messageTypeCondition5.IsVersionsConform(version + 1));
+    ASSERT_TRUE(messageTypeCondition0.IsVersionsConform(version - 1));
+    ASSERT_FALSE(messageTypeCondition0.IsVersionsConform(version));
+    ASSERT_FALSE(messageTypeCondition0.IsVersionsConform(version + 1));
 
     ASSERT_EQUAL(messageTypeCondition1.GetMinVersion(), version + 1);
     ASSERT_EQUAL(messageTypeCondition2.GetMinVersion(), version);
     ASSERT_EQUAL(messageTypeCondition3.GetMinVersion(), version);
     ASSERT_EQUAL(messageTypeCondition4.GetMinVersion(), 0);
-    ASSERT_EQUAL(messageTypeCondition5.GetMinVersion(), 0);
+    ASSERT_EQUAL(messageTypeCondition0.GetMinVersion(), 0);
 
     ASSERT_EQUAL(messageTypeCondition1.GetMaxVersion(), gTCRETestingVersion);
     ASSERT_EQUAL(messageTypeCondition2.GetMaxVersion(), gTCRETestingVersion);
     ASSERT_EQUAL(messageTypeCondition3.GetMaxVersion(), version);
     ASSERT_EQUAL(messageTypeCondition4.GetMaxVersion(), version);
-    ASSERT_EQUAL(messageTypeCondition5.GetMaxVersion(), version - 1);
+    ASSERT_EQUAL(messageTypeCondition0.GetMaxVersion(), version - 1);
 
-    ASSERT_TRUE(messageTypeCondition5 < messageTypeCondition4);
+    ASSERT_TRUE(messageTypeCondition0 < messageTypeCondition4);
     ASSERT_TRUE(messageTypeCondition4 < messageTypeCondition3);
     ASSERT_TRUE(messageTypeCondition3 < messageTypeCondition2);
     ASSERT_TRUE(messageTypeCondition2 < messageTypeCondition1);
@@ -89,7 +88,7 @@ void Network::MessageTypeConditionTesting::CompareTest()
 void Network::MessageTypeConditionTesting::RangeTest()
 {
     constexpr auto version = gTCRETestingVersion - 2;
-    MessageTypeCondition messageTypeCondition{ version - 1, version + 1 };
+    const MessageTypeCondition messageTypeCondition{ version - 1, version + 1 };
 
     ASSERT_FALSE(messageTypeCondition.IsVersionsConform(version - 2));
     ASSERT_TRUE(messageTypeCondition.IsVersionsConform(version - 1));
@@ -104,7 +103,7 @@ void Network::MessageTypeConditionTesting::RangeTest()
 void Network::MessageTypeConditionTesting::SpecificTest()
 {
     constexpr auto version = gTCRETestingVersion - 5;
-    MessageTypeCondition messageTypeCondition{ set<int>{ version - 2, version + 3 } };
+    const MessageTypeCondition messageTypeCondition{ std::set{ version - 2, version + 3 } };
 
     ASSERT_FALSE(messageTypeCondition.IsVersionsConform(version - 3));
     ASSERT_TRUE(messageTypeCondition.IsVersionsConform(version - 2));
@@ -120,13 +119,13 @@ void Network::MessageTypeConditionTesting::SpecificTest()
 
 void Network::MessageTypeConditionTesting::AllTest()
 {
-    MessageTypeCondition firstMessageTypeCondition = MessageTypeCondition::CreateNullCondition();
+    const MessageTypeCondition messageTypeCondition = MessageTypeCondition::CreateNullCondition();
 
-    ASSERT_TRUE(firstMessageTypeCondition.IsVersionsConform(gTCRETestingVersion - 3));
-    ASSERT_TRUE(firstMessageTypeCondition.IsVersionsConform(gTCRETestingVersion - 2));
-    ASSERT_TRUE(firstMessageTypeCondition.IsVersionsConform(gTCRETestingVersion - 1));
-    ASSERT_TRUE(firstMessageTypeCondition.IsVersionsConform(gTCRETestingVersion));
-    ASSERT_TRUE(firstMessageTypeCondition.IsVersionsConform(gTCRETestingVersion + 1));
-    ASSERT_TRUE(firstMessageTypeCondition.IsVersionsConform(gTCRETestingVersion + 2));
-    ASSERT_TRUE(firstMessageTypeCondition.IsVersionsConform(gTCRETestingVersion + 3));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion - 3));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion - 2));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion - 1));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion + 1));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion + 2));
+    ASSERT_TRUE(messageTypeCondition.IsVersionsConform(gTCRETestingVersion + 3));
 }

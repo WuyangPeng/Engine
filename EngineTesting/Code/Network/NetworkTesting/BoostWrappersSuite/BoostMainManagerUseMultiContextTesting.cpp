@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 13:59)
+///	引擎测试版本：0.9.0.8 (2023/05/18 10:25)
 
 #include "BoostMainManagerUseMultiContextTesting.h"
 #include "System/Helper/PragmaWarning/AsioPost.h"
@@ -13,14 +13,9 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Threading/ScopedMutex.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using boost::bind;
-using boost::ref;
-using std::mutex;
-using std::ostream;
-using std::unique_lock;
 
 Network::BoostMainManagerUseMultiContextTesting::BoostMainManagerUseMultiContextTesting(const OStreamShared& stream)
     : ParentType{ stream }, count{ 0 }, conditionVariable{}
@@ -48,11 +43,11 @@ void Network::BoostMainManagerUseMultiContextTesting::SingletonTest()
 
 void Network::BoostMainManagerUseMultiContextTesting::IncrementTest()
 {
-    auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 
     count = 0;
 
-    boost::asio::post(ioContext, bind(&ClassType::Increment, this));
+    post(ioContext, boost::bind(&ClassType::Increment, this));
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
@@ -64,7 +59,7 @@ void Network::BoostMainManagerUseMultiContextTesting::IncrementTest()
     BASE_MAIN_MANAGER_SINGLETON.RestartContext();
     for (auto i = 0; i < incrementCount; ++i)
     {
-        boost::asio::post(ioContext, bind(&ClassType::Increment, this));
+        post(ioContext, boost::bind(&ClassType::Increment, this));
     }
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
@@ -75,15 +70,15 @@ void Network::BoostMainManagerUseMultiContextTesting::IncrementTest()
 
 void Network::BoostMainManagerUseMultiContextTesting::DecrementToZeroTest()
 {
-    auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetContext();
 
     const auto initCount = GetTestLoopCount() + 1;
     count = initCount;
 
-    boost::asio::post(ioContext, bind(&ClassType::DecrementToZero, this, boost::ref(ioContext)));
+    post(ioContext, bind(&ClassType::DecrementToZero, this, boost::ref(ioContext)));
 
-    mutex testMutex;
-    unique_lock lock{ testMutex };
+    std::mutex testMutex;
+    std::unique_lock lock{ testMutex };
     conditionVariable.wait(lock);
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
@@ -97,14 +92,14 @@ void Network::BoostMainManagerUseMultiContextTesting::Increment() noexcept
     ++count;
 }
 
-void Network::BoostMainManagerUseMultiContextTesting::DecrementToZero(IOContextType& ioContext)
+void Network::BoostMainManagerUseMultiContextTesting::DecrementToZero(IoContextType& ioContext)
 {
     if (0 < count)
     {
         --count;
 
         const int beforeValue{ count };
-        boost::asio::post(ioContext, bind(&ClassType::DecrementToZero, this, boost::ref(ioContext)));
+        post(ioContext, bind(&ClassType::DecrementToZero, this, boost::ref(ioContext)));
 
         ASSERT_EQUAL(count, beforeValue);
     }
