@@ -55,23 +55,8 @@
     <Filter Include="MysqlConnectorWrappers 源文件\Detail">
       <UniqueIdentifier>{3d4b4597-8edc-4c80-a739-f013fd49ffc4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MysqlConnectorWrappers 头文件\Fwd">
-      <UniqueIdentifier>{f87e3a30-39f7-4b8b-b831-88db971bf898}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MysqlConnectorWrappers 头文件\Using">
       <UniqueIdentifier>{75d8d49a-fa53-4d31-8539-68b19d26d7a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SqlInterface 源文件">
-      <UniqueIdentifier>{b6aa8455-a337-4a02-953a-84f720e98f98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SqlInterface 源文件\Detail">
-      <UniqueIdentifier>{d6ac21c7-bc3c-4a73-b245-cf5f1a392c49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SqlInterface 头文件">
-      <UniqueIdentifier>{de9ee5b8-c22a-45e2-a5e0-3f70d08aa662}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SqlInterface 头文件\Detail">
-      <UniqueIdentifier>{fe7c6b58-c485-4677-afde-950d6a079b2f}</UniqueIdentifier>
     </Filter>
     <Filter Include="PostgreSqlWrappers 头文件">
       <UniqueIdentifier>{b3b2037f-e86e-4f05-865b-c44d4a42d37e}</UniqueIdentifier>
@@ -94,6 +79,63 @@
     <Filter Include="RedisWrappers 头文件">
       <UniqueIdentifier>{b39ddb2b-08b8-4b97-b2f6-c107adfc6dbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MysqlBoostWrappers 头文件">
+      <UniqueIdentifier>{a5cc7101-3625-4a62-966f-26db114010a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseInterface 模板文件">
+      <UniqueIdentifier>{0b503d14-6baa-4dd3-962a-46ad205c38cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseInterface 头文件">
+      <UniqueIdentifier>{de9ee5b8-c22a-45e2-a5e0-3f70d08aa662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseInterface 源文件">
+      <UniqueIdentifier>{b6aa8455-a337-4a02-953a-84f720e98f98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseInterface 头文件\Flags">
+      <UniqueIdentifier>{0f536b11-c655-4bde-be7b-e2022dc7910a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseInterface 头文件\Detail">
+      <UniqueIdentifier>{8532f460-bd2c-49ab-ba1f-7fdd2d96cbfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseInterface 源文件\Detail">
+      <UniqueIdentifier>{0e03bfa7-e6e5-4ad0-ad41-1408c4d10bad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseGenerate 头文件">
+      <UniqueIdentifier>{d84b9fe1-f32c-408e-b9d6-604ef0e93cfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseGenerate 源文件">
+      <UniqueIdentifier>{92bc33a7-cea6-4523-ac88-e71341e5ff8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MysqlBoostWrappers 源文件">
+      <UniqueIdentifier>{494ca1b3-2633-4cf7-817e-18f5dad27f05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MysqlBoostWrappers 头文件\Detail">
+      <UniqueIdentifier>{ee7ad77b-4dbd-4866-8896-310b33e0b88b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MysqlBoostWrappers 源文件\Detail">
+      <UniqueIdentifier>{50e7597c-ccb5-4d88-bd49-8e049e78a23a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Statement 源文件">
+      <UniqueIdentifier>{16b24a0b-8aa2-4f57-b545-1840b0b0dd07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MongoWrappers 源文件">
+      <UniqueIdentifier>{fd0d90b6-3f68-4797-9add-0cb3f7cf0f9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MongoWrappers 头文件\Detail">
+      <UniqueIdentifier>{26792fa4-3e55-4839-999d-5fa9fda4ef12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MongoWrappers 源文件\Detail">
+      <UniqueIdentifier>{bff795aa-7018-402b-94f4-48a2df1aa8bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RedisWrappers 源文件">
+      <UniqueIdentifier>{abee4a9d-7b39-4169-a38c-d0aa536d1fd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RedisWrappers 源文件\Detail">
+      <UniqueIdentifier>{c7f1bf49-b8d7-448c-a792-c0b7bfcb3ac4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RedisWrappers 头文件\Detail">
+      <UniqueIdentifier>{d47a4cdb-92c7-4282-b192-95b729be49d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Database\DllLib.cpp">
@@ -114,116 +156,86 @@
     <ClCompile Include="..\..\..\Code\Database\Configuration\Detail\ConfigurationStrategyImpl.cpp">
       <Filter>Configuration 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorCollection.cpp">
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseContainerImpl.cpp">
+      <Filter>DatabaseInterface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseImpl.cpp">
+      <Filter>DatabaseInterface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseEntityImpl.cpp">
+      <Filter>DatabaseInterface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabase.cpp">
+      <Filter>DatabaseInterface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\DatabaseEntity.cpp">
+      <Filter>DatabaseInterface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainer.cpp">
+      <Filter>DatabaseInterface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseManagerImpl.cpp">
+      <Filter>DatabaseInterface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseFlushImpl.cpp">
+      <Filter>DatabaseInterface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\DatabaseManager.cpp">
+      <Filter>DatabaseInterface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\DatabaseFlush.cpp">
+      <Filter>DatabaseInterface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\NullDatabaseFlush.cpp">
+      <Filter>DatabaseInterface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseFlushFactory.cpp">
+      <Filter>DatabaseInterface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\MysqlBoostWrappers\Detail\MysqlBoostDatabaseFlush.cpp">
+      <Filter>MysqlBoostWrappers 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\MysqlBoostWrappers\Detail\MysqlBoostConnection.cpp">
+      <Filter>MysqlBoostWrappers 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\Statement\SqlStatement.cpp">
+      <Filter>Statement 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDatabaseFlush.cpp">
       <Filter>MysqlConnectorWrappers 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDatabaseObject.cpp">
+    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorConnection.cpp">
       <Filter>MysqlConnectorWrappers 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDocResult.cpp">
-      <Filter>MysqlConnectorWrappers 源文件\Detail</Filter>
+    <ClCompile Include="..\..\..\Code\Database\MongoWrappers\Detail\MongoDatabaseFlush.cpp">
+      <Filter>MongoWrappers 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDocResultRow.cpp">
-      <Filter>MysqlConnectorWrappers 源文件\Detail</Filter>
+    <ClCompile Include="..\..\..\Code\Database\MongoWrappers\Detail\MongoConnection.cpp">
+      <Filter>MongoWrappers 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorResult.cpp">
-      <Filter>MysqlConnectorWrappers 源文件\Detail</Filter>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseEnvironmentImpl.cpp">
+      <Filter>DatabaseInterface 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorResultRow.cpp">
-      <Filter>MysqlConnectorWrappers 源文件\Detail</Filter>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\DatabaseEnvironment.cpp">
+      <Filter>DatabaseInterface 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorSchema.cpp">
-      <Filter>MysqlConnectorWrappers 源文件\Detail</Filter>
+    <ClCompile Include="..\..\..\Code\Database\MongoWrappers\Detail\MongoEnvironment.cpp">
+      <Filter>MongoWrappers 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorSession.cpp">
-      <Filter>MysqlConnectorWrappers 源文件\Detail</Filter>
+    <ClCompile Include="..\..\..\Code\Database\RedisWrappers\Detail\RedisConnection.cpp">
+      <Filter>RedisWrappers 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorTable.cpp">
-      <Filter>MysqlConnectorWrappers 源文件\Detail</Filter>
+    <ClCompile Include="..\..\..\Code\Database\RedisWrappers\Detail\RedisDatabaseFlush.cpp">
+      <Filter>RedisWrappers 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\CollectionFactory.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
+    <ClCompile Include="..\..\..\Code\Database\RedisWrappers\Detail\RedisContext.cpp">
+      <Filter>RedisWrappers 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\CollectionImpl.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
+    <ClCompile Include="..\..\..\Code\Database\RedisWrappers\Detail\RedisReply.cpp">
+      <Filter>RedisWrappers 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\DatabaseObjectFactory.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\DatabaseObjectImpl.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullCollection.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullDatabaseObject.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullResult.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullResultRow.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullSchema.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullSession.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\NullTable.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\ResultFactory.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\ResultImpl.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\ResultRowFactory.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\ResultRowImpl.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\SchemaFactory.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\SchemaImpl.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\SessionFactory.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\SessionImpl.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\TableFactory.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Detail\TableImpl.cpp">
-      <Filter>SqlInterface 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Collection.cpp">
-      <Filter>SqlInterface 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\DatabaseObject.cpp">
-      <Filter>SqlInterface 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Result.cpp">
-      <Filter>SqlInterface 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\ResultRow.cpp">
-      <Filter>SqlInterface 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Schema.cpp">
-      <Filter>SqlInterface 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Session.cpp">
-      <Filter>SqlInterface 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\SqlInterface\Table.cpp">
-      <Filter>SqlInterface 源文件</Filter>
+    <ClCompile Include="..\..\..\Code\Database\Statement\RedisStatement.cpp">
+      <Filter>Statement 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -281,128 +293,8 @@
     <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\MysqlConnectorWrappersFwd.h">
       <Filter>MysqlConnectorWrappers 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorCollection.h">
-      <Filter>MysqlConnectorWrappers 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDatabaseObject.h">
-      <Filter>MysqlConnectorWrappers 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDocResult.h">
-      <Filter>MysqlConnectorWrappers 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDocResultRow.h">
-      <Filter>MysqlConnectorWrappers 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorResult.h">
-      <Filter>MysqlConnectorWrappers 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorResultRow.h">
-      <Filter>MysqlConnectorWrappers 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorSchema.h">
-      <Filter>MysqlConnectorWrappers 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorSession.h">
-      <Filter>MysqlConnectorWrappers 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorTable.h">
-      <Filter>MysqlConnectorWrappers 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Fwd\MysqlConnectorFwd.h">
-      <Filter>MysqlConnectorWrappers 头文件\Fwd</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Using\MysqlConnectorUsing.h">
       <Filter>MysqlConnectorWrappers 头文件\Using</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\CollectionFactory.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\CollectionImpl.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\DatabaseObjectFactory.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\DatabaseObjectImpl.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullCollection.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullDatabaseObject.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullResult.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullResultRow.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullSchema.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullSession.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\NullTable.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\ResultFactory.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\ResultImpl.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\ResultRowFactory.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\ResultRowImpl.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\SchemaFactory.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\SchemaImpl.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\SessionFactory.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\SessionImpl.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\TableFactory.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Detail\TableImpl.h">
-      <Filter>SqlInterface 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Collection.h">
-      <Filter>SqlInterface 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\DatabaseObject.h">
-      <Filter>SqlInterface 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Result.h">
-      <Filter>SqlInterface 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\ResultRow.h">
-      <Filter>SqlInterface 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Schema.h">
-      <Filter>SqlInterface 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Session.h">
-      <Filter>SqlInterface 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\SqlInterface.h">
-      <Filter>SqlInterface 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\SqlInterfaceFwd.h">
-      <Filter>SqlInterface 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\Table.h">
-      <Filter>SqlInterface 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\SQLiteWrappers\SQLiteWrappersFwd.h">
       <Filter>SQLiteWrappers 头文件</Filter>
@@ -446,9 +338,6 @@
     <ClInclude Include="..\..\..\Code\Database\Helper\Helper.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\SqlInterface\SqlInterfaceInternalFwd.h">
-      <Filter>SqlInterface 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\MysqlWrappers\MysqlWrappersFwd.h">
       <Filter>MysqlWrappers 头文件</Filter>
     </ClInclude>
@@ -472,6 +361,132 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\RedisWrappers\RedisWrappersFwd.h">
       <Filter>RedisWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MysqlBoostWrappers\MysqlBoostWrappers.h">
+      <Filter>MysqlBoostWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MysqlBoostWrappers\MysqlBoostWrappersFwd.h">
+      <Filter>MysqlBoostWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseDetail.h">
+      <Filter>DatabaseInterface 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Flags\DataType.h">
+      <Filter>DatabaseInterface 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseContainerImpl.h">
+      <Filter>DatabaseInterface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseImpl.h">
+      <Filter>DatabaseInterface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseEntityImpl.h">
+      <Filter>DatabaseInterface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabase.h">
+      <Filter>DatabaseInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseEntity.h">
+      <Filter>DatabaseInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseInterface.h">
+      <Filter>DatabaseInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseInterfaceFwd.h">
+      <Filter>DatabaseInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseInterfaceInternalFwd.h">
+      <Filter>DatabaseInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainer.h">
+      <Filter>DatabaseInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DataTypeTraits.h">
+      <Filter>DatabaseInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Entity.h">
+      <Filter>DatabaseInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseGenerate\DatabaseGenerate.h">
+      <Filter>DatabaseGenerate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseGenerate\DatabaseGenerateFwd.h">
+      <Filter>DatabaseGenerate 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\EntityDetail.h">
+      <Filter>DatabaseInterface 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainerDetail.h">
+      <Filter>DatabaseInterface 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseEntityDetail.h">
+      <Filter>DatabaseInterface 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseManagerImpl.h">
+      <Filter>DatabaseInterface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseFlushImpl.h">
+      <Filter>DatabaseInterface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseManager.h">
+      <Filter>DatabaseInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseFlush.h">
+      <Filter>DatabaseInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\NullDatabaseFlush.h">
+      <Filter>DatabaseInterface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseFlushFactory.h">
+      <Filter>DatabaseInterface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MysqlBoostWrappers\Detail\MysqlBoostDatabaseFlush.h">
+      <Filter>MysqlBoostWrappers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MysqlBoostWrappers\Detail\MysqlBoostConnection.h">
+      <Filter>MysqlBoostWrappers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\Statement\SqlStatement.h">
+      <Filter>Statement 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\FieldName.h">
+      <Filter>DatabaseInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDatabaseFlush.h">
+      <Filter>MysqlConnectorWrappers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorConnection.h">
+      <Filter>MysqlConnectorWrappers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MongoWrappers\Detail\MongoConnection.h">
+      <Filter>MongoWrappers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MongoWrappers\Detail\MongoDatabaseFlush.h">
+      <Filter>MongoWrappers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseEnvironmentImpl.h">
+      <Filter>DatabaseInterface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseEnvironment.h">
+      <Filter>DatabaseInterface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MongoWrappers\Detail\MongoEnvironment.h">
+      <Filter>MongoWrappers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\RedisWrappers\Detail\RedisConnection.h">
+      <Filter>RedisWrappers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\RedisWrappers\Detail\RedisDatabaseFlush.h">
+      <Filter>RedisWrappers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\RedisWrappers\Detail\RedisContext.h">
+      <Filter>RedisWrappers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\RedisWrappers\Detail\RedisReply.h">
+      <Filter>RedisWrappers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\Statement\RedisStatement.h">
+      <Filter>Statement 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

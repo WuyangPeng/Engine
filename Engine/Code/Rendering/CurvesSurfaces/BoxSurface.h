@@ -54,7 +54,7 @@ namespace Rendering
         bool doSort;
     };
 
-    CORE_TOOLS_SHARED_PTR_DECLARE(BoxSurface)
+    CORE_TOOLS_SHARED_PTR_DECLARE(BoxSurface);
 }
 
 #endif  // RENDERING_CURVES_SURFACES_BOX_SURFACE_H

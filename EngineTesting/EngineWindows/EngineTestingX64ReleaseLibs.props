@@ -4,7 +4,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentX64ReleaseLib);$(EngineX64ReleaseLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(LibsEnvironmentX64Lib);$(LibsEnvironmentX64ReleaseLib);$(EngineX64ReleaseLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
 </Project>

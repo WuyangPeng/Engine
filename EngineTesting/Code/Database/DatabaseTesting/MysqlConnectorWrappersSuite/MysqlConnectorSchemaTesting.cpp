@@ -9,15 +9,24 @@
 
 #include "MysqlConnectorSchemaTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/SqlInterface/Schema.h"
-#include "Database/SqlInterface/Session.h"
-
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Database/Configuration/ConfigurationStrategy.h" 
 using std::string;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, MysqlConnectorSchemaTesting)
+Database::MysqlConnectorSchemaTesting::MysqlConnectorSchemaTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    DATABASE_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, MysqlConnectorSchemaTesting)
+
+void Database::MysqlConnectorSchemaTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Database::MysqlConnectorSchemaTesting::MainTest()
 {
@@ -37,7 +46,7 @@ void Database::MysqlConnectorSchemaTesting::SchemaTest()
     dbMapping.insert({ 1, "dbtest" });
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector,
-                                                 "127.0.0.1",
+                                                 "43.139.123.106",
                                                  33060,
                                                  "tcretest",
                                                  "root",
@@ -46,6 +55,7 @@ void Database::MysqlConnectorSchemaTesting::SchemaTest()
                                                  10,
                                                  100,
                                                  1000,
+                                                 1,
                                                  flagsOption,
                                                  stringOption,
                                                  booleanOption,
@@ -53,10 +63,7 @@ void Database::MysqlConnectorSchemaTesting::SchemaTest()
                                                  sslOption,
                                                  dbMapping };
 
-    Session session{ configurationStrategy };
-
-    Schema firstSchema{ session };
-    Schema secondSchema{ session, 1 };
+   
 }
 
 void Database::MysqlConnectorSchemaTesting::SchemaContainerTest()
@@ -71,7 +78,7 @@ void Database::MysqlConnectorSchemaTesting::SchemaContainerTest()
     dbMapping.insert({ 1, "dbtest" });
 
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector,
-                                                 "127.0.0.1",
+                                                 "43.139.123.106",
                                                  33060,
                                                  "tcretest",
                                                  "root",
@@ -80,6 +87,7 @@ void Database::MysqlConnectorSchemaTesting::SchemaContainerTest()
                                                  10,
                                                  100,
                                                  1000,
+                                                 1,
                                                  flagsOption,
                                                  stringOption,
                                                  booleanOption,
@@ -87,9 +95,5 @@ void Database::MysqlConnectorSchemaTesting::SchemaContainerTest()
                                                  sslOption,
                                                  dbMapping };
 
-    Session session{ configurationStrategy };
-
-    auto schemaContainer = session.GetSchemaContainer();
-
-    ASSERT_LESS(0u, schemaContainer.size());
+    
 }

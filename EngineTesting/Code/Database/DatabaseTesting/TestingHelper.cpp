@@ -10,6 +10,7 @@
 #include "Testing.h"
 #include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
+#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 

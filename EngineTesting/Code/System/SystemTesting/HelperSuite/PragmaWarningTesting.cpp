@@ -31,11 +31,14 @@
 #include "System/Helper/PragmaWarning/ListInserter.h"
 #include "System/Helper/PragmaWarning/MathConstants.h"
 #include "System/Helper/PragmaWarning/Miniz.h"
+#include "System/Helper/PragmaWarning/Mongocxx.h"
 #include "System/Helper/PragmaWarning/MultiIndex.h"
 #include "System/Helper/PragmaWarning/Mutex.h"
+#include "System/Helper/PragmaWarning/Mysql.h"
 #include "System/Helper/PragmaWarning/MysqlxXdevapi.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/OpenXLSX.h"
+#include "System/Helper/PragmaWarning/Hiredis.h"
 #include "System/Helper/PragmaWarning/Operators.h"
 #include "System/Helper/PragmaWarning/PolymorphicCast.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
@@ -59,23 +62,29 @@
 
 #include SYSTEM_WARNING_DISABLE(4100)
 #include SYSTEM_WARNING_DISABLE(4101)
+#include SYSTEM_WARNING_DISABLE(4200)
 #include SYSTEM_WARNING_DISABLE(4239)
 #include SYSTEM_WARNING_DISABLE(4244)
+#include SYSTEM_WARNING_DISABLE(4456)
 #include SYSTEM_WARNING_DISABLE(4458)
+#include SYSTEM_WARNING_DISABLE(4459)
 #include SYSTEM_WARNING_DISABLE(4505)
 #include SYSTEM_WARNING_DISABLE(4996)
 
 #include SYSTEM_WARNING_DISABLE(6001)
 #include SYSTEM_WARNING_DISABLE(6054)
+#include SYSTEM_WARNING_DISABLE(6201)
 #include SYSTEM_WARNING_DISABLE(6246)
 #include SYSTEM_WARNING_DISABLE(6255)
 #include SYSTEM_WARNING_DISABLE(6258)
 #include SYSTEM_WARNING_DISABLE(6262)
 #include SYSTEM_WARNING_DISABLE(6285)
+#include SYSTEM_WARNING_DISABLE(6294)
 #include SYSTEM_WARNING_DISABLE(6313)
 #include SYSTEM_WARNING_DISABLE(6320)
 #include SYSTEM_WARNING_DISABLE(6326)
 #include SYSTEM_WARNING_DISABLE(6330)
+#include SYSTEM_WARNING_DISABLE(6340)
 #include SYSTEM_WARNING_DISABLE(6385)
 #include SYSTEM_WARNING_DISABLE(6386)
 #include SYSTEM_WARNING_DISABLE(6387)
@@ -159,6 +168,7 @@
 #include SYSTEM_WARNING_DISABLE(26812)
 #include SYSTEM_WARNING_DISABLE(26814)
 #include SYSTEM_WARNING_DISABLE(26815)
+#include SYSTEM_WARNING_DISABLE(26817)
 #include SYSTEM_WARNING_DISABLE(26818)
 #include SYSTEM_WARNING_DISABLE(26819)
 

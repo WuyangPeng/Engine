@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助测试版本：0.8.0.10 (2022/07/12 11:09)
+///	引擎辅助测试版本：0.9.0.9 (2023/05/25 11:32)
 
 #ifndef DATABASE_EXAMPLE_TESTING_HELPER_H
 #define DATABASE_EXAMPLE_TESTING_HELPER_H

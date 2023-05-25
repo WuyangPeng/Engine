@@ -10,14 +10,20 @@
 #ifndef DATABASE_TESTING_CONFIGURATION_SUITE_ANALYSIS_DATABASE_CONFIGURATION_TESTING_H
 #define DATABASE_TESTING_CONFIGURATION_SUITE_ANALYSIS_DATABASE_CONFIGURATION_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Database
 {
     class AnalysisDatabaseConfigurationTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(AnalysisDatabaseConfigurationTesting);
+        using ClassType = AnalysisDatabaseConfigurationTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit AnalysisDatabaseConfigurationTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

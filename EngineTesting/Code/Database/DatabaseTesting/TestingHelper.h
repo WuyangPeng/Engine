@@ -10,7 +10,7 @@
 #ifndef DATABASE_TESTING_TESTING_HELPER_H
 #define DATABASE_TESTING_TESTING_HELPER_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 

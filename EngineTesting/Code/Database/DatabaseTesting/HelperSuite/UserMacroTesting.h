@@ -10,14 +10,20 @@
 #ifndef DATABASE_TESTING_HELPER_SUITE_USER_MACRO_TESTING_H
 #define DATABASE_TESTING_HELPER_SUITE_USER_MACRO_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Database
 {
     class UserMacroTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(UserMacroTesting);
+        using ClassType = UserMacroTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit UserMacroTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest() noexcept;

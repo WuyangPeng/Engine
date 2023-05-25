@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/25 11:16)
+///	标准：std:c++20
+///	引擎版本：0.9.0.9 (2023/05/22 16:26)
 
 #include "Database/DatabaseExport.h"
 
@@ -17,12 +17,9 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::map;
-using std::string;
-using std::vector;
 using namespace std::literals;
 
-Database::AnalysisDatabaseConfigurationImpl::AnalysisDatabaseConfigurationImpl(const string& fileName)
+Database::AnalysisDatabaseConfigurationImpl::AnalysisDatabaseConfigurationImpl(const std::string& fileName)
     : container{}, fileName{ fileName }, mainTree{}
 {
     Analysis();
@@ -32,43 +29,39 @@ Database::AnalysisDatabaseConfigurationImpl::AnalysisDatabaseConfigurationImpl(c
 
 CLASS_INVARIANT_STUB_DEFINE(Database, AnalysisDatabaseConfigurationImpl)
 
-// private
 void Database::AnalysisDatabaseConfigurationImpl::Analysis()
 {
     AnalysisJson();
     AnalysisMain();
 }
 
-// private
 void Database::AnalysisDatabaseConfigurationImpl::AnalysisJson()
 {
     read_json(fileName, mainTree);
 }
 
-// private
 void Database::AnalysisDatabaseConfigurationImpl::AnalysisMain()
 {
-    for (const auto& ptree : mainTree)
+    for (const auto& tree : mainTree)
     {
         try
         {
-            InsertStrategy(ptree.first, ptree.second);
+            InsertStrategy(tree.first, tree.second);
         }
         catch (const CoreTools::Error& error)
         {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, Database, SYSTEM_TEXT("数据库策略"), ptree.first, SYSTEM_TEXT("配置值错误："), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Database, SYSTEM_TEXT("数据库策略"), tree.first, SYSTEM_TEXT("配置值错误："), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 }
 
-// private
 void Database::AnalysisDatabaseConfigurationImpl::InsertStrategy(const String& name, const BasicTree& basicTree)
 {
     const auto wrappers = basicTree.get(SYSTEM_TEXT("Wrappers"s), SYSTEM_TEXT(""s));
 
     const auto wrappersStrategy = GetWrappersStrategy(wrappers);
 
-    const auto ip = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("IP"s), SYSTEM_TEXT(""s)));
+    const auto ip = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("Ip"s), SYSTEM_TEXT(""s)));
     const auto port = basicTree.get(SYSTEM_TEXT("Port"s), 0);
     const auto hostName = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("HostName"s), SYSTEM_TEXT(""s)));
     const auto userName = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("UserName"s), SYSTEM_TEXT(""s)));
@@ -78,6 +71,7 @@ void Database::AnalysisDatabaseConfigurationImpl::InsertStrategy(const String& n
     const auto poolMaxSize = basicTree.get(SYSTEM_TEXT("PoolMaxSize"s), 0);
     const auto poolQueueTimeout = basicTree.get(SYSTEM_TEXT("PoolQueueTimeout"s), 0);
     const auto poolMaxIdleTime = basicTree.get(SYSTEM_TEXT("PoolMaxIdleTime"s), 0);
+    const auto threadCount = basicTree.get(SYSTEM_TEXT("ThreadCount"s), 1);
 
     const auto useFlagsOption = (0 < basicTree.get(SYSTEM_TEXT("UseFlagsOption"s), 0u));
     const auto useStringOptions = (0 < basicTree.get(SYSTEM_TEXT("UseStringOption"s), 0u));
@@ -93,7 +87,7 @@ void Database::AnalysisDatabaseConfigurationImpl::InsertStrategy(const String& n
     const auto sslOptions = GetSSLOptions(basicTree, useSSLOptions);
     auto dbMapping = GetDBMapping(basicTree, useDBMapping);
 
-    dbMapping.insert({ 0, hostName });
+    dbMapping.emplace(0, hostName);
 
     ConfigurationStrategy configurationStrategy{ wrappersStrategy,
                                                  ip,
@@ -105,6 +99,7 @@ void Database::AnalysisDatabaseConfigurationImpl::InsertStrategy(const String& n
                                                  poolMaxSize,
                                                  poolQueueTimeout,
                                                  poolMaxIdleTime,
+                                                 threadCount,
                                                  flagsOption,
                                                  stringOptions,
                                                  booleanOptions,
@@ -112,19 +107,17 @@ void Database::AnalysisDatabaseConfigurationImpl::InsertStrategy(const String& n
                                                  sslOptions,
                                                  dbMapping };
 
-    container.insert({ name, configurationStrategy });
+    container.emplace(name, configurationStrategy);
 }
 
-// private
 Database::ConfigurationStrategy::FlagsOption Database::AnalysisDatabaseConfigurationImpl::GetFlagsOption(const BasicTree& basicTree, bool useFlagsOption)
 {
     ConfigurationStrategy::FlagsOption result{};
 
     if (useFlagsOption)
     {
-        auto flagsOption = basicTree.get_child(SYSTEM_TEXT("FlagsOption"s));
-
-        for (const auto& flags : flagsOption)
+        for (auto flagsOption = basicTree.get_child(SYSTEM_TEXT("FlagsOption"s));
+             const auto& flags : flagsOption)
         {
             if (0 < flags.second.get_value<int>())
             {
@@ -140,23 +133,21 @@ Database::ConfigurationStrategy Database::AnalysisDatabaseConfigurationImpl::Get
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = container.find(name);
-
-    if (iter != container.cend())
+    if (const auto iter = container.find(name);
+        iter != container.cend())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定名字的配置。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定名字的配置。"s))
     }
 }
 
 Database::WrappersStrategy Database::AnalysisDatabaseConfigurationImpl::GetWrappersStrategy(const String& wrappers)
 {
-    CoreTools::CaseInsensitiveTString caseInsensitiveTString{ wrappers.c_str() };
-
-    if (caseInsensitiveTString == SYSTEM_TEXT("Mysql"))
+    if (const CoreTools::CaseInsensitiveTString caseInsensitiveTString{ wrappers.c_str() };
+        caseInsensitiveTString == SYSTEM_TEXT("Mysql"))
     {
         return WrappersStrategy::Mysql;
     }
@@ -197,7 +188,7 @@ Database::WrappersStrategy Database::AnalysisDatabaseConfigurationImpl::GetWrapp
         return WrappersStrategy::Redis;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("数据库包装器类型不存在。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("数据库包装器类型不存在。"s))
 }
 
 Database::AnalysisDatabaseConfigurationImpl::ContainerConstIter Database::AnalysisDatabaseConfigurationImpl::begin() const noexcept
@@ -227,12 +218,11 @@ Database::ConfigurationStrategy::StringOption Database::AnalysisDatabaseConfigur
 
     if (useStringOption)
     {
-        auto stringOption = basicTree.get_child(SYSTEM_TEXT("StringOption"s));
-
-        for (const auto& flags : stringOption)
+        for (const auto stringOption = basicTree.get_child(SYSTEM_TEXT("StringOption"s));
+             const auto& flags : stringOption)
         {
-            result.insert({ CoreTools::StringConversion::StandardConversionMultiByte(flags.first),
-                            CoreTools::StringConversion::StandardConversionMultiByte(flags.second.get_value<System::String>()) });
+            result.emplace(CoreTools::StringConversion::StandardConversionMultiByte(flags.first),
+                           CoreTools::StringConversion::StandardConversionMultiByte(flags.second.get_value<System::String>()));
         }
     }
 
@@ -245,11 +235,10 @@ Database::ConfigurationStrategy::BooleanOption Database::AnalysisDatabaseConfigu
 
     if (useBooleanOption)
     {
-        auto stringOption = basicTree.get_child(SYSTEM_TEXT("BooleanOption"s));
-
-        for (const auto& flags : stringOption)
+        for (const auto booleanOption = basicTree.get_child(SYSTEM_TEXT("BooleanOption"s));
+             const auto& flags : booleanOption)
         {
-            result.insert({ CoreTools::StringConversion::StandardConversionMultiByte(flags.first), flags.second.get_value<bool>() });
+            result.emplace(CoreTools::StringConversion::StandardConversionMultiByte(flags.first), flags.second.get_value<bool>());
         }
     }
 
@@ -262,11 +251,10 @@ Database::ConfigurationStrategy::IntOption Database::AnalysisDatabaseConfigurati
 
     if (useIntOption)
     {
-        auto stringOption = basicTree.get_child(SYSTEM_TEXT("IntOption"s));
-
-        for (const auto& flags : stringOption)
+        for (const auto intOption = basicTree.get_child(SYSTEM_TEXT("IntOption"s));
+             const auto& flags : intOption)
         {
-            result.insert({ CoreTools::StringConversion::StandardConversionMultiByte(flags.first), flags.second.get_value<int>() });
+            result.emplace(CoreTools::StringConversion::StandardConversionMultiByte(flags.first), flags.second.get_value<int>());
         }
     }
 
@@ -279,12 +267,11 @@ Database::ConfigurationStrategy::SSLOption Database::AnalysisDatabaseConfigurati
 
     if (useSSLOption)
     {
-        auto stringOption = basicTree.get_child(SYSTEM_TEXT("SSLOption"s));
-
-        for (const auto& flags : stringOption)
+        for (const auto sslOption = basicTree.get_child(SYSTEM_TEXT("SSLOption"s));
+             const auto& flags : sslOption)
         {
-            result.insert({ CoreTools::StringConversion::StandardConversionMultiByte(flags.first),
-                            CoreTools::StringConversion::StandardConversionMultiByte(flags.second.get_value<System::String>()) });
+            result.emplace(CoreTools::StringConversion::StandardConversionMultiByte(flags.first),
+                           CoreTools::StringConversion::StandardConversionMultiByte(flags.second.get_value<System::String>()));
         }
     }
 
@@ -297,11 +284,10 @@ Database::ConfigurationStrategy::DBMapping Database::AnalysisDatabaseConfigurati
 
     if (useDBMapping)
     {
-        auto stringOption = basicTree.get_child(SYSTEM_TEXT("DBMapping"s));
-
-        for (const auto& flags : stringOption)
+        for (const auto dbMapping = basicTree.get_child(SYSTEM_TEXT("DBMapping"s));
+             const auto& flags : dbMapping)
         {
-            result.insert({ flags.second.get_value<int>(), CoreTools::StringConversion::StandardConversionMultiByte(flags.first) });
+            result.emplace(flags.second.get_value<int>(), CoreTools::StringConversion::StandardConversionMultiByte(flags.first));
         }
     }
 

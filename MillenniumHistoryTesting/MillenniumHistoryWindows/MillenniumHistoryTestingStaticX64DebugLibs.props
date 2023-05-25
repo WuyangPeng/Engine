@@ -7,7 +7,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentX64DebugLib);$(EngineStaticX64DebugLib);$(GameStaticX64DebugLib);$(MillenniumHistoryStaticX64DebugLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(LibsEnvironmentX64Lib);$(LibsEnvironmentX64DebugLib);$(EngineStaticX64DebugLib);$(GameStaticX64DebugLib);$(MillenniumHistoryStaticX64DebugLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;BUILDING_GAME_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>

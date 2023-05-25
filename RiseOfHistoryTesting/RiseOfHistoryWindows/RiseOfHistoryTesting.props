@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(LibsEnvironmentInclude);$(EngineInclude);$(GameInclude);$(RiseOfHistoryInclude);../../../Code/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LibsEnvironmentBaseInclude);$(LibsEnvironmentExtendInclude);$(EngineInclude);$(GameInclude);$(RiseOfHistoryInclude);../../../Code/;</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>

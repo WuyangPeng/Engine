@@ -9,13 +9,24 @@
 
 #include "ResultRowTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::string;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, ResultRowTesting)
+Database::ResultRowTesting::ResultRowTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    DATABASE_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, ResultRowTesting)
+
+void Database::ResultRowTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Database::ResultRowTesting::MainTest() noexcept
 {

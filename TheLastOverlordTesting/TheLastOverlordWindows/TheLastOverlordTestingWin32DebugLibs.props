@@ -7,7 +7,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentWin32DebugLib);$(EngineWin32DebugLib);$(GameWin32DebugLib);$(TheLastOverlordWin32DebugLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(LibsEnvironmentWin32Lib);$(LibsEnvironmentWin32DebugLib);$(EngineWin32DebugLib);$(GameWin32DebugLib);$(TheLastOverlordWin32DebugLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
 </Project>

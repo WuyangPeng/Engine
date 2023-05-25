@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/25 11:15)
+///	标准：std:c++20
+///	引擎版本：0.9.0.9 (2023/05/22 16:24)
 
 #ifndef DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_H
 #define DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_H
@@ -52,6 +52,7 @@ namespace Database
                               int poolMaxSize,
                               int poolQueueTimeout,
                               int poolMaxIdleTime,
+                              int threadCount,
                               const FlagsOption& flagsOption,
                               const StringOption& stringOption,
                               const BooleanOption& booleanOption,
@@ -63,7 +64,7 @@ namespace Database
 
         NODISCARD WrappersStrategy GetWrappersStrategy() const noexcept;
 
-        NODISCARD std::string GetIP() const;
+        NODISCARD std::string GetIp() const;
         NODISCARD int GetPort() const noexcept;
         NODISCARD std::string GetDBHostName() const;
         NODISCARD std::string GetDBUserName() const;
@@ -81,6 +82,8 @@ namespace Database
         NODISCARD int GetPoolMaxSize() const noexcept;
         NODISCARD int GetPoolQueueTimeout() const noexcept;
         NODISCARD int GetPoolMaxIdleTime() const noexcept;
+
+        NODISCARD int GetThreadCount() const noexcept;
 
     private:
         PackageType impl;

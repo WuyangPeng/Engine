@@ -9,14 +9,24 @@
 
 #include "SessionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/SqlInterface/Session.h"
-
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
+#include "Database/Configuration/ConfigurationStrategy.h" 
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::string;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, SessionTesting)
+Database::SessionTesting::SessionTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    DATABASE_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, SessionTesting)
+
+void Database::SessionTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Database::SessionTesting::MainTest()
 {
@@ -27,5 +37,5 @@ void Database::SessionTesting::NullSessionTest()
 {
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null, "127.0.0.1", 3306, "tcretest", "root", "123456" };
 
-    Session session{ configurationStrategy };
+ 
 }

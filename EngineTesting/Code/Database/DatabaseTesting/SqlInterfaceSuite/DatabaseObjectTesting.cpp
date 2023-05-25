@@ -9,15 +9,24 @@
 
 #include "DatabaseObjectTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/SqlInterface/DatabaseObject.h"
-#include "Database/SqlInterface/Session.h"
-
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Database/Configuration/ConfigurationStrategy.h" 
 using std::string;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, DatabaseObjectTesting)
+Database::DatabaseObjectTesting::DatabaseObjectTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    DATABASE_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, DatabaseObjectTesting)
+
+void Database::DatabaseObjectTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Database::DatabaseObjectTesting::MainTest()
 {
@@ -43,6 +52,7 @@ void Database::DatabaseObjectTesting::NullDatabaseObjectTest()
                                                  10,
                                                  100,
                                                  1000,
+                                                 1,
                                                  flagsOption,
                                                  stringOption,
                                                  booleanOption,
@@ -50,7 +60,5 @@ void Database::DatabaseObjectTesting::NullDatabaseObjectTest()
                                                  sslOption,
                                                  dbMapping };
 
-    DatabaseObject databaseObject{ configurationStrategy };
-
-    Session session{ databaseObject };
+  
 }

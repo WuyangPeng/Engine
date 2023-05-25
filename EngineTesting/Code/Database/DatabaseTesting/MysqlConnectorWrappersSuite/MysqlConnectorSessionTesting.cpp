@@ -9,14 +9,24 @@
 
 #include "MysqlConnectorSessionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/SqlInterface/Session.h"
-
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
+#include "Database/Configuration/ConfigurationStrategy.h" 
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::string;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, MysqlConnectorSessionTesting)
+Database::MysqlConnectorSessionTesting::MysqlConnectorSessionTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    DATABASE_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, MysqlConnectorSessionTesting)
+
+void Database::MysqlConnectorSessionTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Database::MysqlConnectorSessionTesting::MainTest()
 {
@@ -25,7 +35,7 @@ void Database::MysqlConnectorSessionTesting::MainTest()
 
 void Database::MysqlConnectorSessionTesting::SessionTest()
 {
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "127.0.0.1", 33060, "", "root", "TCRE" };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "43.139.123.106", 33060, "", "root", "TCRE" };
 
-    Session session{ configurationStrategy };
+    
 }

@@ -5,7 +5,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentWin32ReleaseLib);$(EngineWin32ReleaseLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(LibsEnvironmentWin32Lib);$(LibsEnvironmentWin32ReleaseLib);$(EngineWin32ReleaseLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/$(ProjectName).dll" "$(GameTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>

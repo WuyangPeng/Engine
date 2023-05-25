@@ -1,6 +1,6 @@
 {
   "GameServerDB": {
-    "IP": "127.0.0.1",
+    "Ip": "127.0.0.1",
     "Port": 8010,
     "Wrappers": "MysqlConnector",
     "HostName": "DBName",
@@ -58,7 +58,7 @@
   },
 
   "GameClientDB": {
-    "IP": "127.0.0.1",
+    "Ip": "127.0.0.1",
     "Port": 8011,
     "Wrappers": "SQLite",
     "HostName": "dbName",

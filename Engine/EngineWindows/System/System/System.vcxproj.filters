@@ -1869,6 +1869,36 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4458.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4456.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Mysql.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4459.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6340.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6294.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6201.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26817.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Mongocxx.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Hiredis.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4200.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\DllLib.cpp">

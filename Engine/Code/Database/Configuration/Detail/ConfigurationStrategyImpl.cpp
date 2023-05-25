@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/25 11:22)
+///	标准：std:c++20
+///	引擎版本：0.9.0.9 (2023/05/22 16:29)
 
 #include "Database/DatabaseExport.h"
 
@@ -13,26 +13,23 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::map;
-using std::string;
-using std::vector;
-
 Database::ConfigurationStrategyImpl::ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy,
-                                                               const string& ip,
+                                                               std::string ip,
                                                                int port,
-                                                               const string& hostName,
-                                                               const string& userName,
-                                                               const string& password)
+                                                               std::string hostName,
+                                                               std::string userName,
+                                                               std::string password)
     : wrappersStrategyFlag{ wrappersStrategy },
-      ip{ ip },
+      ip{ std::move(ip) },
       port{ port },
-      hostName{ hostName },
-      userName{ userName },
-      password{ password },
+      hostName{ std::move(hostName) },
+      userName{ std::move(userName) },
+      password{ std::move(password) },
       pooling{ false },
       poolMaxSize{ 0 },
       poolQueueTimeout{ 0 },
       poolMaxIdleTime{ 0 },
+      threadCount{ 1 },
       flagsOptions{},
       stringOptions{},
       booleanOptions{},
@@ -44,37 +41,39 @@ Database::ConfigurationStrategyImpl::ConfigurationStrategyImpl(WrappersStrategy 
 }
 
 Database::ConfigurationStrategyImpl::ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy,
-                                                               const string& ip,
+                                                               std::string ip,
                                                                int port,
-                                                               const string& hostName,
-                                                               const string& userName,
-                                                               const string& password,
+                                                               std::string hostName,
+                                                               std::string userName,
+                                                               std::string password,
                                                                bool pooling,
                                                                int poolMaxSize,
                                                                int poolQueueTimeout,
                                                                int poolMaxIdleTime,
-                                                               const FlagsOption& flagsOption,
-                                                               const StringOption& stringOption,
-                                                               const BooleanOption& booleanOption,
-                                                               const IntOption& intOption,
-                                                               const SSLOption& sslOption,
-                                                               const DBMapping& dbMapping)
+                                                               int threadCount,
+                                                               FlagsOption flagsOption,
+                                                               StringOption stringOption,
+                                                               BooleanOption booleanOption,
+                                                               IntOption intOption,
+                                                               SSLOption sslOption,
+                                                               DBMapping dbMapping)
     : wrappersStrategyFlag{ wrappersStrategy },
-      ip{ ip },
+      ip{ std::move(ip) },
       port{ port },
-      hostName{ hostName },
-      userName{ userName },
-      password{ password },
+      hostName{ std::move(hostName) },
+      userName{ std::move(userName) },
+      password{ std::move(password) },
       pooling{ pooling },
       poolMaxSize{ poolMaxSize },
       poolQueueTimeout{ poolQueueTimeout },
       poolMaxIdleTime{ poolMaxIdleTime },
-      flagsOptions{ flagsOption },
-      stringOptions{ stringOption },
-      booleanOptions{ booleanOption },
-      intOptions{ intOption },
-      sslOptions{ sslOption },
-      dbMapping{ dbMapping }
+      threadCount{ threadCount },
+      flagsOptions{ std::move(flagsOption) },
+      stringOptions{ std::move(stringOption) },
+      booleanOptions{ std::move(booleanOption) },
+      intOptions{ std::move(intOption) },
+      sslOptions{ std::move(sslOption) },
+      dbMapping{ std::move(dbMapping) }
 {
     DATABASE_SELF_CLASS_IS_VALID_9;
 }
@@ -88,7 +87,7 @@ Database::WrappersStrategy Database::ConfigurationStrategyImpl::GetWrappersStrat
     return wrappersStrategyFlag;
 }
 
-string Database::ConfigurationStrategyImpl::GetIP() const
+std::string Database::ConfigurationStrategyImpl::GetIp() const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -102,21 +101,21 @@ int Database::ConfigurationStrategyImpl::GetPort() const noexcept
     return port;
 }
 
-string Database::ConfigurationStrategyImpl::GetDBHostName() const
+std::string Database::ConfigurationStrategyImpl::GetDBHostName() const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
     return hostName;
 }
 
-string Database::ConfigurationStrategyImpl::GetDBUserName() const
+std::string Database::ConfigurationStrategyImpl::GetDBUserName() const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
     return userName;
 }
 
-string Database::ConfigurationStrategyImpl::GetDBPassword() const
+std::string Database::ConfigurationStrategyImpl::GetDBPassword() const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -176,14 +175,14 @@ std::string Database::ConfigurationStrategyImpl::GetDBName(int dbIndex) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = dbMapping.find(dbIndex);
-    if (iter != dbMapping.cend())
+    if (const auto iter = dbMapping.find(dbIndex);
+        iter != dbMapping.cend())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的数据库索引。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的数据库索引。"s))
     }
 }
 
@@ -213,4 +212,11 @@ int Database::ConfigurationStrategyImpl::GetPoolMaxIdleTime() const noexcept
     DATABASE_CLASS_IS_VALID_CONST_9;
 
     return poolMaxIdleTime;
+}
+
+int Database::ConfigurationStrategyImpl::GetThreadCount() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return threadCount;
 }

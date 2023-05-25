@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/25 11:02)
+///	标准：std:c++20
+///	引擎版本：0.9.0.9 (2023/05/22 16:25)
 
 #ifndef DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H
 #define DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H
@@ -33,33 +33,34 @@ namespace Database
 
     public:
         ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy,
-                                  const std::string& ip,
+                                  std::string ip,
                                   int port,
-                                  const std::string& hostName,
-                                  const std::string& userName,
-                                  const std::string& password);
+                                  std::string hostName,
+                                  std::string userName,
+                                  std::string password);
         ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy,
-                                  const std::string& ip,
+                                  std::string ip,
                                   int port,
-                                  const std::string& hostName,
-                                  const std::string& userName,
-                                  const std::string& password,
+                                  std::string hostName,
+                                  std::string userName,
+                                  std::string password,
                                   bool pooling,
                                   int poolMaxSize,
                                   int poolQueueTimeout,
                                   int poolMaxIdleTime,
-                                  const FlagsOption& flagsOption,
-                                  const StringOption& stringOption,
-                                  const BooleanOption& booleanOption,
-                                  const IntOption& intOption,
-                                  const SSLOption& sslOption,
-                                  const DBMapping& dbMapping);
+                                  int threadCount,
+                                  FlagsOption flagsOption,
+                                  StringOption stringOption,
+                                  BooleanOption booleanOption,
+                                  IntOption intOption,
+                                  SSLOption sslOption,
+                                  DBMapping dbMapping);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD WrappersStrategy GetWrappersStrategy() const noexcept;
 
-        NODISCARD std::string GetIP() const;
+        NODISCARD std::string GetIp() const;
         NODISCARD int GetPort() const noexcept;
         NODISCARD std::string GetDBHostName() const;
         NODISCARD std::string GetDBUserName() const;
@@ -79,6 +80,8 @@ namespace Database
         NODISCARD int GetPoolQueueTimeout() const noexcept;
         NODISCARD int GetPoolMaxIdleTime() const noexcept;
 
+        NODISCARD int GetThreadCount() const noexcept;
+
     private:
         WrappersStrategy wrappersStrategyFlag;
         std::string ip;
@@ -90,6 +93,7 @@ namespace Database
         int poolMaxSize;
         int poolQueueTimeout;
         int poolMaxIdleTime;
+        int threadCount;
 
         FlagsOption flagsOptions;
         StringOption stringOptions;

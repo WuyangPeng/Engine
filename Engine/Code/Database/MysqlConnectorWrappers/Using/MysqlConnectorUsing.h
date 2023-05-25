@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/25 17:54)
+///	标准：std:c++20
+///	引擎版本：0.9.0.9 (2023/05/24 14:19)
 
 #ifndef DATABASE_MYSQL_CONNECTOR_WRAPPERS_MYSQL_CONNECTOR_USING_H
 #define DATABASE_MYSQL_CONNECTOR_WRAPPERS_MYSQL_CONNECTOR_USING_H
@@ -19,6 +19,7 @@
 
 namespace Database
 {
+
     using MysqlxSession = mysqlx::abi2::r0::Session;
     using MysqlxSchema = mysqlx::abi2::r0::Schema;
     using MysqlxCollection = mysqlx::abi2::r0::Collection;
@@ -28,6 +29,8 @@ namespace Database
     using MysqlxRowResult = mysqlx::abi2::r0::RowResult;
     using MysqlxRow = mysqlx::abi2::r0::Row;
     using MysqlxTable = mysqlx::abi2::r0::Table;
+    using MysqlxValue = mysqlx::abi2::r0::Value;
+
 }
 
 #else  // ! DATABASE_USE_MYSQL_CPP_CONNECTOR
@@ -67,6 +70,10 @@ namespace Database
     };
 
     class MysqlxTable
+    {
+    };
+
+    class MysqlxValue
     {
     };
 }

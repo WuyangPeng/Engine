@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/25 11:24)
+///	标准：std:c++20
+///	引擎版本：0.9.0.9 (2023/05/22 16:28)
 
 #include "Database/DatabaseExport.h"
 
@@ -14,39 +14,35 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::make_shared;
-using std::map;
-using std::string;
-using std::vector;
-
 Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy,
-                                                       const string& ip,
+                                                       const std::string& ip,
                                                        int port,
-                                                       const string& hostName,
-                                                       const string& userName,
-                                                       const string& password)
+                                                       const std::string& hostName,
+                                                       const std::string& userName,
+                                                       const std::string& password)
     : impl{ wrappersStrategy, ip, port, hostName, userName, password }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
 Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy,
-                                                       const string& ip,
+                                                       const std::string& ip,
                                                        int port,
-                                                       const string& hostName,
-                                                       const string& userName,
-                                                       const string& password,
+                                                       const std::string& hostName,
+                                                       const std::string& userName,
+                                                       const std::string& password,
                                                        bool pooling,
                                                        int poolMaxSize,
                                                        int poolQueueTimeout,
                                                        int poolMaxIdleTime,
+                                                       int threadCount,
                                                        const FlagsOption& flagsOption,
                                                        const StringOption& stringOption,
                                                        const BooleanOption& booleanOption,
                                                        const IntOption& intOption,
                                                        const SSLOption& sslOption,
                                                        const DBMapping& dbMapping)
-    : impl{ wrappersStrategy, ip, port, hostName, userName, password, pooling, poolMaxSize, poolQueueTimeout, poolMaxIdleTime, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping }
+    : impl{ wrappersStrategy, ip, port, hostName, userName, password, pooling, poolMaxSize, poolQueueTimeout, poolMaxIdleTime, threadCount, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
@@ -54,11 +50,11 @@ Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappers
 CLASS_INVARIANT_STUB_DEFINE(Database, ConfigurationStrategy)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetWrappersStrategy, Database::WrappersStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetIP, string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetIp, std::string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPort, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBHostName, string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBUserName, string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBPassword, string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBHostName, std::string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBUserName, std::string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBPassword, std::string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetFlagsOption, Database::ConfigurationStrategy::FlagsOption)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetStringOptions, Database::ConfigurationStrategy::StringOption)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetBooleanOptions, Database::ConfigurationStrategy::BooleanOption)
@@ -66,9 +62,11 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetIntOptio
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetSSLOptions, Database::ConfigurationStrategy::SSLOption)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBMapping, Database::ConfigurationStrategy::DBMapping)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, IsUseSSL, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ConfigurationStrategy, GetDBName, int, string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ConfigurationStrategy, GetDBName, int, std::string)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPooling, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPoolMaxSize, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPoolQueueTimeout, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPoolMaxIdleTime, int)
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetThreadCount, int)

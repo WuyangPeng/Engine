@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/25 11:24)
+///	标准：std:c++20
+///	引擎版本：0.9.0.9 (2023/05/22 16:29)
 
 #include "Database/DatabaseExport.h"
 
@@ -14,10 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::make_shared;
-using std::string;
-
-Database::AnalysisDatabaseConfiguration::AnalysisDatabaseConfiguration(const string& fileName)
+Database::AnalysisDatabaseConfiguration::AnalysisDatabaseConfiguration(const std::string& fileName)
     : impl{ fileName }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;

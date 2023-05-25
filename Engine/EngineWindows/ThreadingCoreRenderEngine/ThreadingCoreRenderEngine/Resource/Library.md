@@ -32,7 +32,7 @@ EGL（引擎直接关联）
 ----------------------------
 boost（引擎直接关联）
 
-1. 版本：1.80.0。
+1. 版本：1.82.0。
 2. 官方网站：http://www.boost.org/。
 3. 编译指令：
   （1）运行bootstrap。
@@ -89,7 +89,7 @@ openssl（引擎通过宏NETWORK_USE_OPENSSL关联）
 ----------------------------
 
 mysql （引擎通过宏DATABASE_USE_MYSQL_C_API关联）
-1.  版本：8.0.30。
+1.  版本：8.0.33。
 2.  官方网站：https://www.mysql.com/。
 3.  编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 4.  定义WITHOUT_SERVER。
@@ -124,7 +124,7 @@ mysql （引擎通过宏DATABASE_USE_MYSQL_C_API关联）
 
 ----------------------------
 mysql connector c++（引擎通过宏DATABASE_USE_MYSQL_CPP_CONNECTOR关联）
-1. 版本：8.0.30。
+1. 版本：8.0.33。
 2. 官方网站：https://www.mysql.com/。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 4. 设置正确的WITH_SSL（原为system）指向对应版本的($openssl)，如编译的是x64版本，需要指向x64的openssl。
@@ -283,5 +283,37 @@ ActiveMQ（引擎通过宏NETWORK_USE_ACTIVE_MQ关联）
 
 1. 版本：5.18.1
 2. 官方网站：https://activemq.apache.org/components/cms/download/ 。
+
+----------------------------
+
+Mongo-c-driver（Mongo-cxx-driver关联）
+
+1. 版本：1.23.4
+2. 官方网站：https://github.com/mongodb/mongo-c-driver 。
+3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+4. 编译好x64版本后，执行Release版本的INSTALL。手动将C:/Program Files (x86)/mongo-c-driver下文件复制到mongo-cxx-driver/BuildX64/mongo-c-driver下，
+   然后再编译Win32版本，执行Release版本的INSTALL。手动将C:/Program Files (x86)/mongo-c-driver下文件复制到mongo-cxx-driver/BuildWin32/mongo-c-driver下，
+   可使用Mongo下的批处理文件CopyMongoWin32和CopyMongoX64执行。
+   
+----------------------------
+
+Mongo-cxx-driver（引擎通过宏DATABASE_USE_MONGO关联）
+
+1. 版本：3.7.1
+2. 官方网站：https://github.com/mongodb/mongo-cxx-driver 。
+3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+4. 设置libbson-1.0_DIR到mongo-c-driver下BuildX64\src\libbson。
+5. 设置BSON_LIBRARY到mongo-cxx-driver下BuildX64\mongo-c-driver\lib\bson-1.0.lib。
+6. 设置正确的Boost_INCLUDE_DIR。
+7. 设置libmongoc-1.0_DIR到mongo-c-driver下BuildX64\src\libmongoc。
+8. 设置MONGOC_LIBRARY到mongo-cxx-driver下BuildX64\mongo-c-driver\lib\mongoc-1.0.lib。
+
+----------------------------
+
+hiredis（引擎通过宏DATABASE_USE_REDIS关联）
+
+1. 版本：1.1.0
+2. 官方网站：https://github.com/redis/hiredis 。
+3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ----------------------------

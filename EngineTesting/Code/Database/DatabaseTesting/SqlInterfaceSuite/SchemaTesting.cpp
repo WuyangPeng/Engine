@@ -9,15 +9,24 @@
 
 #include "SchemaTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/SqlInterface/Schema.h"
-#include "Database/SqlInterface/Session.h"
-
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
+#include "Database/Configuration/ConfigurationStrategy.h" 
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::string;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, SchemaTesting)
+Database::SchemaTesting::SchemaTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    DATABASE_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, SchemaTesting)
+
+void Database::SchemaTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Database::SchemaTesting::MainTest()
 {
@@ -28,8 +37,4 @@ void Database::SchemaTesting::NullSchemaTest()
 {
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null, "127.0.0.1", 3306, "tcretest", "root", "123456" };
 
-    Session session{ configurationStrategy };
-
-    Schema schema1{ session };
-    Schema schema2{ session, 0 };
 }

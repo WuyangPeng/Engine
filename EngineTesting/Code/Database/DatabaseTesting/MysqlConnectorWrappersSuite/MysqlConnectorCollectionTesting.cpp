@@ -9,16 +9,24 @@
 
 #include "MysqlConnectorCollectionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/SqlInterface/Collection.h"
-#include "Database/SqlInterface/Schema.h"
-#include "Database/SqlInterface/Session.h"
-
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
+#include "Database/Configuration/ConfigurationStrategy.h" 
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::string;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, MysqlConnectorCollectionTesting)
+Database::MysqlConnectorCollectionTesting::MysqlConnectorCollectionTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    DATABASE_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, MysqlConnectorCollectionTesting)
+
+void Database::MysqlConnectorCollectionTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Database::MysqlConnectorCollectionTesting::MainTest()
 {
@@ -27,11 +35,7 @@ void Database::MysqlConnectorCollectionTesting::MainTest()
 
 void Database::MysqlConnectorCollectionTesting::CollectionTest()
 {
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "127.0.0.1", 33060, "tcretest", "root", "TCRE" };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "43.139.123.106", 33060, "tcretest", "root", "TCRE" };
 
-    Session session{ configurationStrategy };
-
-    Schema schema{ session };
-
-    Collection collection{ schema, "my_collection" };
+ 
 }

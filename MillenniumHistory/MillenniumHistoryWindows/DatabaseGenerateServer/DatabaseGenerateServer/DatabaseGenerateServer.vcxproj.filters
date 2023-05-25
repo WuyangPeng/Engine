@@ -43,9 +43,6 @@
     <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言">
       <UniqueIdentifier>{d0f1079d-40d5-4761-9f6d-2b79e0ec7174}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\正文">
-      <UniqueIdentifier>{e8a1b040-d9d3-43b2-a66c-379956b90e51}</UniqueIdentifier>
-    </Filter>
     <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\後序">
       <UniqueIdentifier>{b4f0af1d-88f0-4b45-b4b0-3ab5b0719ba6}</UniqueIdentifier>
     </Filter>
@@ -55,11 +52,38 @@
     <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\json\前言">
       <UniqueIdentifier>{965915be-f198-418d-9c1f-64e93e60c041}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\目錄">
-      <UniqueIdentifier>{3745123c-06d7-4038-ae32-b5d13ae947c1}</UniqueIdentifier>
+    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\本紀">
+      <UniqueIdentifier>{e8a1b040-d9d3-43b2-a66c-379956b90e51}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\json\目錄">
-      <UniqueIdentifier>{3f8a931b-c097-425f-8881-7c07b17ba02b}</UniqueIdentifier>
+    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\表">
+      <UniqueIdentifier>{4cf9cfce-ccc4-419c-a999-81b329546dbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\書">
+      <UniqueIdentifier>{5d1675b2-6134-4af0-95a2-d29aa3586f9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\世家">
+      <UniqueIdentifier>{55ab72f6-30ff-409d-bddb-617a68213a30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\列傳">
+      <UniqueIdentifier>{40ae2640-e996-47ff-9d4b-67ba4052e13d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\json\本紀">
+      <UniqueIdentifier>{291d206c-126a-4f5f-8bef-f1729bbe40af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\json\表">
+      <UniqueIdentifier>{61183009-b5ed-46c4-8df6-de6c52d72d6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\json\書">
+      <UniqueIdentifier>{4312c6bc-e348-4846-8fd8-60b19aafa3a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\json\列傳">
+      <UniqueIdentifier>{9322a797-0872-4ba5-baa0-6216b486bb01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\json\世家">
+      <UniqueIdentifier>{a975e8ae-f5dd-4560-96b2-be336bab4083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\json\後序">
+      <UniqueIdentifier>{af05e039-d4e3-427b-becd-ab9a81b6a7b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -189,17 +213,44 @@
     <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\json\前言\史記序考證.json">
       <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\json\前言</Filter>
     </None>
-    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\目錄\目錄.md">
-      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\目錄</Filter>
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\後序\補史記序.md">
+      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\後序</Filter>
     </None>
-    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\目錄\目錄考證.md">
-      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\目錄</Filter>
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\後序\補史記.md">
+      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\後序</Filter>
     </None>
-    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\json\目錄\目錄.json">
-      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\json\目錄</Filter>
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\後序\史記正義論例諡法解列國分野.md">
+      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\後序</Filter>
     </None>
-    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\json\目錄\目錄考證.json">
-      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\json\目錄</Filter>
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\後序\考證跋語.md">
+      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\後序</Filter>
+    </None>
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\json\後序\補史記.json">
+      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\json\後序</Filter>
+    </None>
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\json\後序\補史記序.json">
+      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\json\後序</Filter>
+    </None>
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\json\後序\考證跋語.json">
+      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\json\後序</Filter>
+    </None>
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\json\後序\史記正義論例諡法解列國分野.json">
+      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\json\後序</Filter>
+    </None>
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\json\後序\後序.json">
+      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\json\後序</Filter>
+    </None>
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\json\前言\目錄.json">
+      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\json\前言</Filter>
+    </None>
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\json\前言\目錄考證.json">
+      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\json\前言</Filter>
+    </None>
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言\目錄.md">
+      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言</Filter>
+    </None>
+    <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言\目錄考證.md">
+      <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

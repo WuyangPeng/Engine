@@ -9,9 +9,20 @@
 
 #include "UserMacroTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Database::UserMacroTesting::UserMacroTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    DATABASE_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, UserMacroTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, UserMacroTesting)
+
+void Database::UserMacroTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Database::UserMacroTesting::MainTest() noexcept
 {

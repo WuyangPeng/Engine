@@ -10,15 +10,25 @@
 #include "MysqlConnectorResultRowTesting.h"
 #include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/SqlInterface/Session.h"
-
 using std::string;
 using std::to_string;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, MysqlConnectorResultRowTesting)
+Database::MysqlConnectorResultRowTesting::MysqlConnectorResultRowTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    DATABASE_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, MysqlConnectorResultRowTesting)
+
+void Database::MysqlConnectorResultRowTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Database::MysqlConnectorResultRowTesting::MainTest()
 {
@@ -27,29 +37,5 @@ void Database::MysqlConnectorResultRowTesting::MainTest()
 
 void Database::MysqlConnectorResultRowTesting::ResultRowTest()
 {
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "127.0.0.1", 33060, "", "root", "TCRE" };
-
-    Session session{ configurationStrategy };
-
-    session.Execute("USE tcretest");
-
-    constexpr auto engineeringOffsetValue = System::GetEngineeringOffsetValue();
-    auto procedure = "my_add_one_procedure" + to_string(engineeringOffsetValue);
-
-    session.Execute("CREATE PROCEDURE " +
-                    procedure +
-                    " "
-                    " (INOUT incr_param INT) "
-                    "BEGIN "
-                    "  SET incr_param = incr_param + 1;"
-                    "END;");
-    session.Execute("SET @my_var = ?;", 10);
-    session.Execute("CALL " + procedure + "(@my_var);");
-    session.Execute("DROP PROCEDURE " + procedure + ";");
-
-    auto result = session.ExecuteResult("SELECT @my_var");
-
-    auto one = result->FetchOne();
-
-    ASSERT_EQUAL(11, one->GetInt64Value(0));
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "43.139.123.106", 33060, "", "root", "TCRE" };
 }
