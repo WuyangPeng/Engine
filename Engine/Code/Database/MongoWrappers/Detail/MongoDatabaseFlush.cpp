@@ -12,7 +12,7 @@
 #include "MongoDatabaseFlush.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Database/DatabaseInterface/BasisDatabaseContainer.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
 
 #ifdef DATABASE_USE_MONGO
 
@@ -30,7 +30,7 @@ Database::MongoDatabaseFlush::MongoDatabaseFlush(const ConfigurationStrategy& co
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, MongoDatabaseFlush)
 
-void Database::MongoDatabaseFlush::ChangeDatabase(int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer)
+void Database::MongoDatabaseFlush::ChangeDatabase(int64_t userId, const BasisDatabaseManager& basisDatabaseContainer)
 {
     DATABASE_CLASS_IS_VALID_9;
 
@@ -39,7 +39,7 @@ void Database::MongoDatabaseFlush::ChangeDatabase(int64_t userId, const BasisDat
     connection.at(userId % connection.size())->ChangeDatabase(basisDatabaseContainer);
 }
 
-Database::BasisDatabaseContainer Database::MongoDatabaseFlush::SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::BasisDatabaseManager Database::MongoDatabaseFlush::SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -48,7 +48,7 @@ Database::BasisDatabaseContainer Database::MongoDatabaseFlush::SelectOne(const B
     return connection.at(connection.size() - 1)->SelectOne(basisDatabaseContainer, fieldNameContainer);
 }
 
-Database::MongoDatabaseFlush::ResultContainer Database::MongoDatabaseFlush::SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::MongoDatabaseFlush::ResultContainer Database::MongoDatabaseFlush::SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -57,7 +57,7 @@ Database::MongoDatabaseFlush::ResultContainer Database::MongoDatabaseFlush::Sele
     return connection.at(connection.size() - 1)->SelectAll(basisDatabaseContainer, fieldNameContainer);
 }
 
-void Database::MongoDatabaseFlush::CheckWrappersStrategy(const BasisDatabaseContainer& basisDatabaseContainer) const
+void Database::MongoDatabaseFlush::CheckWrappersStrategy(const BasisDatabaseManager& basisDatabaseContainer) const
 {
     using System::operator&;
     if ((basisDatabaseContainer.GetWrappersStrategy() & WrappersStrategy::Mongo) == WrappersStrategy::Null)

@@ -24,7 +24,7 @@ Database::RedisReply::RedisReply(RedisContext& redisContext, const std::string& 
     {
         THROW_EXCEPTION(SYSTEM_TEXT("redis Command 失败。"))
     }
-    else if (redisReply->type != REDIS_REPLY_STATUS)
+    else if (redisReply->type == REDIS_REPLY_ERROR)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("redis Command 失败。") + CoreTools::StringConversion::MultiByteConversionStandard(redisReply->str))
     }

@@ -13,6 +13,7 @@
 #include "Database/DatabaseDll.h"
 
 #include "Database/Configuration/ConfigurationFwd.h"
+#include "Database/DatabaseInterface/BasisDatabaseContainer.h"
 #include "Database/DatabaseInterface/DataTypeTraits.h"
 #include "Database/DatabaseInterface/DatabaseEntity.h"
 #include "Database/DatabaseInterface/EntityDetail.h"
@@ -27,10 +28,11 @@ namespace DatabaseEntity
 
         using DataType = Database::DataType;
         using IndexType = Database::IndexType;
+        using BasisDatabaseManager = Database::BasisDatabaseManager;
         using BasisDatabaseContainer = Database::BasisDatabaseContainer;
 
     public:
-        explicit Chapter(const BasisDatabaseContainer& entity);
+        explicit Chapter(const BasisDatabaseManager& entity);
         Chapter(Database::WrappersStrategy wrappersStrategy,
                 boost::call_traits<Database::Traits::Int64>::param_type userId);
 
@@ -40,20 +42,22 @@ namespace DatabaseEntity
         NODISCARD Database::Traits::Int32 GetChapterId() const noexcept;
         NODISCARD Database::Traits::String GetChapterName() const;
         NODISCARD Database::Traits::Double GetChanceWinning() const noexcept;
-        NODISCARD Database::Traits::Bool IsChanceWinning() const noexcept;
+        NODISCARD Database::Traits::Bool IsWinning() const noexcept;
         NODISCARD Database::Traits::Int64Count GetCurrency() const noexcept;
         NODISCARD Database::Traits::Int32Count GetCount() const noexcept;
 
         void SetChapterId(boost::call_traits<Database::Traits::Int32>::param_type aChapterId);
         void SetChapterName(boost::call_traits<Database::Traits::String>::param_type aChapterName);
         void SetChanceWinning(boost::call_traits<Database::Traits::Double>::param_type aChanceWinning);
-        void SetChanceWinning(boost::call_traits<Database::Traits::Bool>::param_type aIsWinning);
+        void SetWinning(boost::call_traits<Database::Traits::Bool>::param_type aWinning);
         void SetCurrency(boost::call_traits<Database::Traits::Int64Count>::param_type aCurrency);
         void ModifyCurrency(boost::call_traits<Database::Traits::Int64Count>::param_type aCurrency);
         void SetCount(boost::call_traits<Database::Traits::Int32Count>::param_type aCount);
         void ModifyCount(boost::call_traits<Database::Traits::Int32Count>::param_type aCount);
 
-        NODISCARD FieldNameContainer GetFieldNameContainer() const override;
+        NODISCARD static const DatabaseFieldContainer& GetDatabaseFieldContainer();
+        NODISCARD static BasisDatabaseManager GetSelect(Database::WrappersStrategy wrappersStrategy,
+                                                        boost::call_traits<Database::Traits::Int64>::param_type userId);
 
         NODISCARD static constexpr std::string_view GetDatabaseName()
         {
@@ -63,23 +67,23 @@ namespace DatabaseEntity
     private:
         static constexpr std::string_view databaseName{ "UserChapter" };
 
-        static constexpr std::string_view userIdDescribe{ "userId" };
+        static constexpr std::string_view userIdDescribe{ "_id" };
         static constexpr std::string_view chapterIdDescribe{ "chapterId" };
         static constexpr std::string_view chapterNameDescribe{ "chapterName" };
         static constexpr std::string_view chanceWinningDescribe{ "chanceWinning" };
-        static constexpr std::string_view isWinningDescribe{ "isWinning" };
+        static constexpr std::string_view winningDescribe{ "winning" };
         static constexpr std::string_view currencyDescribe{ "currency" };
         static constexpr std::string_view countDescribe{ "count" };
 
     private:
-        NODISCARD static ObjectContainer GetKeyBasisDatabaseContainer(boost::call_traits<Database::Traits::Int64>::param_type userId);
+        NODISCARD static BasisDatabaseContainer GetKeyBasisDatabaseContainer(boost::call_traits<Database::Traits::Int64>::param_type userId);
 
     private:
         Database::Entity<userIdDescribe, DataType::Int64, IndexType::Key> userId;
         Database::Entity<chapterIdDescribe, DataType::Int32> chapterId;
         Database::Entity<chapterNameDescribe, DataType::String> chapterName;
         Database::Entity<chanceWinningDescribe, DataType::Double> chanceWinning;
-        Database::Entity<isWinningDescribe, DataType::Bool> isWinning;
+        Database::Entity<winningDescribe, DataType::Bool> winning;
         Database::Entity<currencyDescribe, DataType::Int64Count> currency;
         Database::Entity<countDescribe, DataType::Int32Count> count;
     };

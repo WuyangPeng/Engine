@@ -27,18 +27,18 @@ namespace Database
     public:
         using ClassType = DatabaseManagerImpl;
         using String = System::String;
-        using ResultContainer = std::vector<BasisDatabaseContainer>;
-        using FieldNameContainer = std::vector<FieldName>;
+        using ResultContainer = std::vector<BasisDatabaseManager>;
+        using FieldNameContainer = std::vector<DatabaseField>;
 
     public:
         explicit DatabaseManagerImpl(const std::string& fileName);
 
         CLASS_INVARIANT_DECLARE;
 
-        void ChangeDatabase(const String& databaseIndex, int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer);
+        void ChangeDatabase(const String& databaseIndex, int64_t userId, const BasisDatabaseManager& basisDatabaseContainer);
 
-        NODISCARD BasisDatabaseContainer SelectOne(const String& databaseIndex, const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
-        NODISCARD ResultContainer SelectAll(const String& databaseIndex, const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
+        NODISCARD BasisDatabaseManager SelectOne(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
+        NODISCARD ResultContainer SelectAll(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
 
     private:
         using DatabaseFlushSharedPtr = std::shared_ptr<DatabaseFlush>;

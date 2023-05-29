@@ -1,19 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 16:25)
+///	引擎测试版本：0.9.0.10 (2023/05/25 15:10)
 
 #include "ConfigurationStrategyTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
-using std::string;
-using std::vector;
 
 Database::ConfigurationStrategyTesting::ConfigurationStrategyTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -35,7 +33,7 @@ void Database::ConfigurationStrategyTesting::MainTest()
 
 void Database::ConfigurationStrategyTesting::ConfigurationTest()
 {
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "127.0.0.1", 8010u, "Server", "root", "password" };
+    const ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "127.0.0.1", 8010u, "Server", "root", "password" };
 
     ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::MysqlConnector);
     ASSERT_EQUAL(configurationStrategy.GetIp(), "127.0.0.1");
@@ -47,21 +45,21 @@ void Database::ConfigurationStrategyTesting::ConfigurationTest()
 
 void Database::ConfigurationStrategyTesting::FlagsOptionTest()
 {
-    ConfigurationStrategy::FlagsOption flagsOption{ "CLIENT_COMPRESS",
-                                                    "CLIENT_FOUND_ROWS",
-                                                    "CLIENT_IGNORE_SIGPIPE",
-                                                    "CLIENT_IGNORE_SPACE",
-                                                    "CLIENT_INTERACTIVE",
-                                                    "CLIENT_LOCAL_FILES",
-                                                    "CLIENT_MULTI_STATEMENTS",
-                                                    "CLIENT_NO_SCHEMA" };
-    ConfigurationStrategy::StringOption stringOption;
-    ConfigurationStrategy::BooleanOption booleanOption;
-    ConfigurationStrategy::IntOption intOption;
-    ConfigurationStrategy::SSLOption sslOption;
-    ConfigurationStrategy::DBMapping dbMapping;
+    const ConfigurationStrategy::FlagsOption flagsOption{ "CLIENT_COMPRESS",
+                                                          "CLIENT_FOUND_ROWS",
+                                                          "CLIENT_IGNORE_SIGPIPE",
+                                                          "CLIENT_IGNORE_SPACE",
+                                                          "CLIENT_INTERACTIVE",
+                                                          "CLIENT_LOCAL_FILES",
+                                                          "CLIENT_MULTI_STATEMENTS",
+                                                          "CLIENT_NO_SCHEMA" };
+    const ConfigurationStrategy::StringOption stringOption{};
+    const ConfigurationStrategy::BooleanOption booleanOption{};
+    const ConfigurationStrategy::IntOption intOption{};
+    const ConfigurationStrategy::SSLOption sslOption{};
+    const ConfigurationStrategy::DBMapping dbMapping{};
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "127.0.0.1", 8010u, "Server", "root", "password", false, 10, 100, 1000, 1, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping };
+    const ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "127.0.0.1", 8010, "Server", "root", "password", false, 10, 100, 1000, 1, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping };
 
     ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::MysqlConnector);
     ASSERT_EQUAL(configurationStrategy.GetIp(), "127.0.0.1");
@@ -80,4 +78,5 @@ void Database::ConfigurationStrategyTesting::FlagsOptionTest()
     ASSERT_EQUAL(configurationStrategy.GetSSLOptions(), sslOption);
     ASSERT_EQUAL(configurationStrategy.GetDBMapping(), dbMapping);
     ASSERT_FALSE(configurationStrategy.IsUseSSL());
+    ASSERT_EQUAL(configurationStrategy.GetThreadCount(), 1);
 }

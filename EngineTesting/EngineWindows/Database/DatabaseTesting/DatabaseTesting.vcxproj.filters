@@ -28,32 +28,17 @@
     <Filter Include="FlatFileWrappersSuite 头文件">
       <UniqueIdentifier>{c39dded6-231a-4989-9173-acdf06727ac0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FlatFileWrappersSuite 源文件">
-      <UniqueIdentifier>{4d01b980-ded3-48e4-aabf-7692d32c1148}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MysqlConnectorWrappersSuite 头文件">
       <UniqueIdentifier>{4bac74e7-6d21-434d-917e-1df2f3d8c876}</UniqueIdentifier>
     </Filter>
     <Filter Include="MysqlConnectorWrappersSuite 源文件">
       <UniqueIdentifier>{8a1de0b6-ca03-4157-8cd4-1aac06596c3d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SqlInterfaceSuite 头文件">
-      <UniqueIdentifier>{c00ff2be-0a75-4b15-ace8-f0c9690f25e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SqlInterfaceSuite 源文件">
-      <UniqueIdentifier>{5abb1bdd-7f5c-4ec9-9069-2e1a5c38433a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SQLiteWrappersSuite 头文件">
       <UniqueIdentifier>{b841df7e-131e-4189-b3e0-aabcf64a97db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SQLiteWrappersSuite 源文件">
-      <UniqueIdentifier>{375f8990-1ab4-4d14-bfd3-5133919e99bf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SqlServerWrappersSuite 头文件">
       <UniqueIdentifier>{0e8ccc1c-5d11-4a1c-9b05-d169b0dd08c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SqlServerWrappersSuite 源文件">
-      <UniqueIdentifier>{f71fb4d6-93ee-4c46-b160-8a4c7f14eb92}</UniqueIdentifier>
     </Filter>
     <Filter Include="StatementSuite 头文件">
       <UniqueIdentifier>{ebbbd969-bb6d-45df-a8b7-f0a15ae9257c}</UniqueIdentifier>
@@ -76,6 +61,36 @@
     <Filter Include="MysqlWrappersSuite 头文件">
       <UniqueIdentifier>{772918b2-f9d4-48a8-b7e5-aef34b872b71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DatabaseInterfaceSuite 头文件">
+      <UniqueIdentifier>{c00ff2be-0a75-4b15-ace8-f0c9690f25e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseInterfaceSuite 源文件">
+      <UniqueIdentifier>{5abb1bdd-7f5c-4ec9-9069-2e1a5c38433a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MongoWrappersSuite 头文件">
+      <UniqueIdentifier>{1697ee3a-22cf-4bd9-bcce-fd59dedf2d20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MongoWrappersSuite 源文件">
+      <UniqueIdentifier>{953d42a6-c18f-45e1-90ac-53d4b8a330a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseGenerateSuite 头文件">
+      <UniqueIdentifier>{7a51e024-10d5-4bb4-bd95-1bd8d38e8b66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MysqlBoostWrappersSuite 头文件">
+      <UniqueIdentifier>{6562ba92-9e65-4f84-b450-028d8b443183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MysqlBoostWrappersSuite 源文件">
+      <UniqueIdentifier>{fead636a-ef75-4b0d-ad12-cfd07c91ffeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MariaDBWrappersSuite 头文件">
+      <UniqueIdentifier>{5753b9a7-20d1-4f64-8755-aa051d97339c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RedisWrappersSuite 头文件">
+      <UniqueIdentifier>{28e16b75-360f-4934-bcc8-446c55773450}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RedisWrappersSuite 源文件">
+      <UniqueIdentifier>{18006fa1-1948-4a35-9290-10fae13c3393}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\Testing.h">
@@ -96,59 +111,11 @@
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\FlatFileWrappersSuite\FlatFileWrappersSuite.h">
       <Filter>FlatFileWrappersSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorDatabaseObjectTesting.h">
-      <Filter>MysqlConnectorWrappersSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorDocResultRowTesting.h">
-      <Filter>MysqlConnectorWrappersSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorDocResultTesting.h">
-      <Filter>MysqlConnectorWrappersSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorResultRowTesting.h">
-      <Filter>MysqlConnectorWrappersSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorResultTesting.h">
-      <Filter>MysqlConnectorWrappersSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorSchemaTesting.h">
-      <Filter>MysqlConnectorWrappersSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorSessionTesting.h">
-      <Filter>MysqlConnectorWrappersSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorTableTesting.h">
-      <Filter>MysqlConnectorWrappersSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorWrappersSuite.h">
       <Filter>MysqlConnectorWrappersSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorCollectionTesting.h">
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorDatabaseFlushTesting.h">
       <Filter>MysqlConnectorWrappersSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\DatabaseObjectTesting.h">
-      <Filter>SqlInterfaceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\ResultRowTesting.h">
-      <Filter>SqlInterfaceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\ResultTesting.h">
-      <Filter>SqlInterfaceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\SchemaTesting.h">
-      <Filter>SqlInterfaceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\SessionTesting.h">
-      <Filter>SqlInterfaceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\SqlInterfaceSuite.h">
-      <Filter>SqlInterfaceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\TableTesting.h">
-      <Filter>SqlInterfaceSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\CollectionTesting.h">
-      <Filter>SqlInterfaceSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\SQLiteWrappersSuite\SQLiteWrappersSuite.h">
       <Filter>SQLiteWrappersSuite 头文件</Filter>
@@ -171,8 +138,71 @@
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\HelperSuite\HelperSuite.h">
       <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\DatabaseFieldTesting.h">
+      <Filter>DatabaseInterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseTesting.h">
+      <Filter>DatabaseInterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseContainerTesting.h">
+      <Filter>DatabaseInterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseManagerTesting.h">
+      <Filter>DatabaseInterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\DatabaseEntityTesting.h">
+      <Filter>DatabaseInterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\EntityTesting.h">
+      <Filter>DatabaseInterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\DatabaseManagerTesting.h">
+      <Filter>DatabaseInterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\DatabaseInterfaceSuite.h">
+      <Filter>DatabaseInterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\DatabaseEnvironmentTesting.h">
+      <Filter>DatabaseInterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\DatabaseFlushTesting.h">
+      <Filter>DatabaseInterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MongoWrappersSuite\MongoEnvironmentTesting.h">
+      <Filter>MongoWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MongoWrappersSuite\MongoWrappersSuite.h">
+      <Filter>MongoWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseGenerateSuite\DatabaseGenerateSuite.h">
+      <Filter>DatabaseGenerateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\StatementSuite\RedisStatementTesting.h">
+      <Filter>StatementSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\StatementSuite\SqlStatementTesting.h">
+      <Filter>StatementSuite 头文件</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlWrappersSuite\MysqlWrappersSuite.h">
       <Filter>MysqlWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlBoostWrappersSuite\MysqlBoostDatabaseFlushTesting.h">
+      <Filter>MysqlBoostWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MysqlBoostWrappersSuite\MysqlBoostWrappersSuite.h">
+      <Filter>MysqlBoostWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MariaDBWrappersSuite\MariaDBWrappersSuite.h">
+      <Filter>MariaDBWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MongoWrappersSuite\MongoDatabaseFlushTesting.h">
+      <Filter>MongoWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\RedisWrappersSuite\RedisWrappersSuite.h">
+      <Filter>RedisWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\RedisWrappersSuite\RedisDatabaseFlushTesting.h">
+      <Filter>RedisWrappersSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -191,56 +221,56 @@
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\ConfigurationSuite\ConfigurationStrategyTesting.cpp">
       <Filter>ConfigurationSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorCollectionTesting.cpp">
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorDatabaseFlushTesting.cpp">
       <Filter>MysqlConnectorWrappersSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorDatabaseObjectTesting.cpp">
-      <Filter>MysqlConnectorWrappersSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorDocResultRowTesting.cpp">
-      <Filter>MysqlConnectorWrappersSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorDocResultTesting.cpp">
-      <Filter>MysqlConnectorWrappersSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorResultRowTesting.cpp">
-      <Filter>MysqlConnectorWrappersSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorResultTesting.cpp">
-      <Filter>MysqlConnectorWrappersSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorSchemaTesting.cpp">
-      <Filter>MysqlConnectorWrappersSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorSessionTesting.cpp">
-      <Filter>MysqlConnectorWrappersSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\MysqlConnectorWrappersSuite\MysqlConnectorTableTesting.cpp">
-      <Filter>MysqlConnectorWrappersSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\CollectionTesting.cpp">
-      <Filter>SqlInterfaceSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\DatabaseObjectTesting.cpp">
-      <Filter>SqlInterfaceSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\ResultRowTesting.cpp">
-      <Filter>SqlInterfaceSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\ResultTesting.cpp">
-      <Filter>SqlInterfaceSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\SchemaTesting.cpp">
-      <Filter>SqlInterfaceSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\SessionTesting.cpp">
-      <Filter>SqlInterfaceSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\SqlInterfaceSuite\TableTesting.cpp">
-      <Filter>SqlInterfaceSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\HelperSuite\UserMacroTesting.cpp">
       <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseTesting.cpp">
+      <Filter>DatabaseInterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseContainerTesting.cpp">
+      <Filter>DatabaseInterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseManagerTesting.cpp">
+      <Filter>DatabaseInterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\DatabaseEntityTesting.cpp">
+      <Filter>DatabaseInterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\EntityTesting.cpp">
+      <Filter>DatabaseInterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\DatabaseManagerTesting.cpp">
+      <Filter>DatabaseInterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\DatabaseFieldTesting.cpp">
+      <Filter>DatabaseInterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\DatabaseEnvironmentTesting.cpp">
+      <Filter>DatabaseInterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\DatabaseFlushTesting.cpp">
+      <Filter>DatabaseInterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\MongoWrappersSuite\MongoEnvironmentTesting.cpp">
+      <Filter>MongoWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\StatementSuite\RedisStatementTesting.cpp">
+      <Filter>StatementSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\StatementSuite\SqlStatementTesting.cpp">
+      <Filter>StatementSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\MysqlBoostWrappersSuite\MysqlBoostDatabaseFlushTesting.cpp">
+      <Filter>MysqlBoostWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\MongoWrappersSuite\MongoDatabaseFlushTesting.cpp">
+      <Filter>MongoWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\RedisWrappersSuite\RedisDatabaseFlushTesting.cpp">
+      <Filter>RedisWrappersSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

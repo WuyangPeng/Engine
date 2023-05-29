@@ -14,7 +14,7 @@
 
 #include "RedisContext.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/DatabaseInterface/BasisDatabaseContainer.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
 #include "Database/DatabaseInterface/DatabaseInterfaceFwd.h"
 
 #include <deque>
@@ -29,8 +29,8 @@ namespace Database
     {
     public:
         using ClassType = RedisConnection;
-        using ResultContainer = std::vector<BasisDatabaseContainer>;
-        using FieldNameContainer = std::vector<FieldName>;
+        using ResultContainer = std::vector<BasisDatabaseManager>;
+        using FieldNameContainer = std::vector<DatabaseField>;
 
     public:
         explicit RedisConnection(const ConfigurationStrategy& configurationStrategy);
@@ -43,16 +43,16 @@ namespace Database
     public:
         CLASS_INVARIANT_DECLARE;
 
-        void ChangeDatabase(const BasisDatabaseContainer& basisDatabaseContainer);
+        void ChangeDatabase(const BasisDatabaseManager& basisDatabaseContainer);
 
-        NODISCARD BasisDatabaseContainer SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
-        NODISCARD ResultContainer SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
-
-    private:
-        using Container = std::deque<BasisDatabaseContainer>;
+        NODISCARD BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
+        NODISCARD ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
 
     private:
-        NODISCARD BasisDatabaseContainer ExtractNext() noexcept;
+        using Container = std::deque<BasisDatabaseManager>;
+
+    private:
+        NODISCARD BasisDatabaseManager ExtractNext() noexcept;
 
         void WaitThread();
         void Execution();
@@ -61,7 +61,7 @@ namespace Database
         void Stop();
         void Join();
 
-        NODISCARD static BasisDatabase GetBasisDatabase(const FieldName& fieldName, const ::redisReply* redisReply);
+        NODISCARD static BasisDatabase GetBasisDatabase(const DatabaseField& fieldName, const ::redisReply* redisReply);
 
     private:
         ConfigurationStrategy configurationStrategy;

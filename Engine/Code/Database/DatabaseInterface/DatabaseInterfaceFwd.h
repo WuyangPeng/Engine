@@ -22,6 +22,7 @@ namespace Database
 
     class BasisDatabase;
     class BasisDatabaseContainer;
+    class BasisDatabaseManager;
     class DatabaseEntity;
 
     template <const std::string_view& FieldName, DataType Type, IndexType Index>
@@ -29,7 +30,7 @@ namespace Database
 
     class DatabaseManager;
     class DatabaseFlush;
-    class FieldName;
+    class DatabaseField;
 
     class DatabaseEnvironment;
 }

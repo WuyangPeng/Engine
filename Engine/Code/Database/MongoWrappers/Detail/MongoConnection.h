@@ -12,9 +12,9 @@
 
 #include "Database/DatabaseDll.h"
 
-#include "System/Helper/PragmaWarning/Mongocxx.h" 
+#include "System/Helper/PragmaWarning/Mongocxx.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/DatabaseInterface/BasisDatabaseContainer.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
 #include "Database/DatabaseInterface/DatabaseInterfaceFwd.h"
 
 #include <deque>
@@ -27,8 +27,8 @@ namespace Database
     {
     public:
         using ClassType = MongoConnection;
-        using ResultContainer = std::vector<BasisDatabaseContainer>;
-        using FieldNameContainer = std::vector<FieldName>;
+        using ResultContainer = std::vector<BasisDatabaseManager>;
+        using FieldNameContainer = std::vector<DatabaseField>;
 
     public:
         explicit MongoConnection(ConfigurationStrategy configurationStrategy);
@@ -41,16 +41,16 @@ namespace Database
     public:
         CLASS_INVARIANT_DECLARE;
 
-        void ChangeDatabase(const BasisDatabaseContainer& basisDatabaseContainer);
+        void ChangeDatabase(const BasisDatabaseManager& basisDatabaseContainer);
 
-        NODISCARD BasisDatabaseContainer SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
-        NODISCARD ResultContainer SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
-
-    private:
-        using Container = std::deque<BasisDatabaseContainer>;
+        NODISCARD BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
+        NODISCARD ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
 
     private:
-        NODISCARD BasisDatabaseContainer ExtractNext() noexcept;
+        using Container = std::deque<BasisDatabaseManager>;
+
+    private:
+        NODISCARD BasisDatabaseManager ExtractNext() noexcept;
 
         void WaitThread();
         void Execution();
@@ -62,16 +62,16 @@ namespace Database
 
         void Init();
 
-        void ExecutionDelete(const BasisDatabaseContainer& basisDatabaseContainer, mongocxx::collection& collection);
-        void ExecutionInsert(const BasisDatabaseContainer& basisDatabaseContainer, mongocxx::collection& collection);
-        void ExecutionUpdate(const BasisDatabaseContainer& basisDatabaseContainer, mongocxx::collection& collection);
+        void ExecutionDelete(const BasisDatabaseManager& basisDatabaseContainer, mongocxx::collection& collection);
+        void ExecutionInsert(const BasisDatabaseManager& basisDatabaseContainer, mongocxx::collection& collection);
+        void ExecutionUpdate(const BasisDatabaseManager& basisDatabaseContainer, mongocxx::collection& collection);
 
-        NODISCARD bsoncxx::builder::basic::document GetKeyDocument(const BasisDatabaseContainer& basisDatabaseContainer) const;
-        NODISCARD bsoncxx::builder::basic::document GetInsertDocument(const BasisDatabaseContainer& basisDatabaseContainer) const;
-        NODISCARD bsoncxx::builder::basic::document GetUpdateDocument(const BasisDatabaseContainer& basisDatabaseContainer) const;
-        NODISCARD bsoncxx::builder::basic::document GetDocument(const BasisDatabaseContainer::ObjectContainer& objectContainer) const;
+        NODISCARD bsoncxx::builder::basic::document GetKeyDocument(const BasisDatabaseManager& basisDatabaseContainer) const;
+        NODISCARD bsoncxx::builder::basic::document GetInsertDocument(const BasisDatabaseManager& basisDatabaseContainer) const;
+        NODISCARD bsoncxx::builder::basic::document GetUpdateDocument(const BasisDatabaseManager& basisDatabaseContainer) const;
+        NODISCARD bsoncxx::builder::basic::document GetDocument(const BasisDatabaseContainer& objectContainer) const;
 
-        NODISCARD static BasisDatabase GetBasisDatabase(const FieldName& fieldName, const bsoncxx::document::element& rowView);
+        NODISCARD static BasisDatabase GetBasisDatabase(const FieldNameContainer& fieldNameContainer, const bsoncxx::document::element& rowView);
         NODISCARD static std::string CreateMongoURI(const ConfigurationStrategy& configurationStrategy);
 
     private:

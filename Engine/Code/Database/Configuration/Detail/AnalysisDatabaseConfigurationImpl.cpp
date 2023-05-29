@@ -155,6 +155,10 @@ Database::WrappersStrategy Database::AnalysisDatabaseConfigurationImpl::GetWrapp
     {
         return WrappersStrategy::MysqlConnector;
     }
+    else if (caseInsensitiveTString == SYSTEM_TEXT("MysqlBoost"))
+    {
+        return WrappersStrategy::MysqlBoost;
+    }
     else if (caseInsensitiveTString == SYSTEM_TEXT("SQLite"))
     {
         return WrappersStrategy::SQLite;

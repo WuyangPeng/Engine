@@ -13,59 +13,62 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "Database/DatabaseInterface/BasisDatabase.h"
 #include "Database/DatabaseInterface/BasisDatabaseContainer.h"
-#include "Database/DatabaseInterface/FieldName.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
+#include "Database/DatabaseInterface/DatabaseField.h"
+
+using namespace std::literals;
 
 CLASS_INVARIANT_STUB_DEFINE(Database, SqlStatement)
 
-std::string Database::SqlStatement::GenerateStatement(const BasisDatabaseContainer& basisDatabaseContainer)
+std::string Database::SqlStatement::GenerateStatement(const BasisDatabaseManager& basisDatabaseManager)
 {
-    switch (basisDatabaseContainer.GetChangeType())
+    switch (basisDatabaseManager.GetChangeType())
     {
         case ChangeType::Insert:
-            return GenerateInsertStatement(basisDatabaseContainer);
+            return GenerateInsertStatement(basisDatabaseManager);
         case ChangeType::Update:
-            return GenerateUpdateStatement(basisDatabaseContainer);
+            return GenerateUpdateStatement(basisDatabaseManager);
         case ChangeType::Delete:
-            return GenerateDeleteStatement(basisDatabaseContainer);
+            return GenerateDeleteStatement(basisDatabaseManager);
     }
 
     return "";
 }
 
-std::string Database::SqlStatement::GenerateSelectOneStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseContainer& basisDatabaseContainer)
+std::string Database::SqlStatement::GenerateSelectOneStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseManager& basisDatabaseManager)
 {
-    auto result = GenerateSelectStatement(fieldNameContainer, basisDatabaseContainer);
+    auto result = GenerateSelectStatement(fieldNameContainer, basisDatabaseManager);
 
     result += " LIMIT 1;";
 
     return result;
 }
 
-std::string Database::SqlStatement::GenerateSelectAllStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseContainer& basisDatabaseContainer)
+std::string Database::SqlStatement::GenerateSelectAllStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseManager& basisDatabaseManager)
 {
-    auto result = GenerateSelectStatement(fieldNameContainer, basisDatabaseContainer);
+    auto result = GenerateSelectStatement(fieldNameContainer, basisDatabaseManager);
 
     result += ";";
 
     return result;
 }
 
-std::string Database::SqlStatement::GenerateDeleteStatement(const BasisDatabaseContainer& basisDatabaseContainer)
+std::string Database::SqlStatement::GenerateDeleteStatement(const BasisDatabaseManager& basisDatabaseManager)
 {
     std::string result{};
 
-    result += "DELETE FROM `" + basisDatabaseContainer.GetDatabaseName() + "` WHERE ";
+    result += "DELETE FROM `"s + basisDatabaseManager.GetDatabaseName().data() + "` WHERE ";
 
-    const auto key = basisDatabaseContainer.GetKey();
-    auto index = 1u;
+    const auto key = basisDatabaseManager.GetKey();
+    auto index = 1;
     for (const auto& value : key)
     {
         result += "`";
         result += value.GetFieldName();
         result += "` = ";
-        result += value.GetSqlString();
+        result += value.GetSqlFieldString();
 
-        if (index != key.size())
+        if (index != key.GetSize())
         {
             result += " AND ";
         }
@@ -78,21 +81,21 @@ std::string Database::SqlStatement::GenerateDeleteStatement(const BasisDatabaseC
     return result;
 }
 
-std::string Database::SqlStatement::GenerateInsertStatement(const BasisDatabaseContainer& basisDatabaseContainer)
+std::string Database::SqlStatement::GenerateInsertStatement(const BasisDatabaseManager& basisDatabaseManager)
 {
     std::string result{};
 
-    result += "INSERT INTO `" + basisDatabaseContainer.GetDatabaseName() + "`(";
+    result += "INSERT INTO `"s + basisDatabaseManager.GetDatabaseName().data() + "`(";
 
-    const auto container = basisDatabaseContainer.GetContainer();
-    auto index = 1u;
+    const auto container = basisDatabaseManager.GetDatabase();
+    auto index = 1;
     for (const auto& value : container)
     {
         result += "`";
         result += value.GetFieldName();
         result += "`";
 
-        if (index != container.size())
+        if (index != container.GetSize())
         {
             result += " , ";
         }
@@ -102,12 +105,12 @@ std::string Database::SqlStatement::GenerateInsertStatement(const BasisDatabaseC
 
     result += ") VALUES(";
 
-    index = 1u;
+    index = 1;
     for (const auto& value : container)
     {
-        result += value.GetSqlString();
+        result += value.GetQuotationMarkString();
 
-        if (index != container.size())
+        if (index != container.GetSize())
         {
             result += " , ";
         }
@@ -120,22 +123,22 @@ std::string Database::SqlStatement::GenerateInsertStatement(const BasisDatabaseC
     return result;
 }
 
-std::string Database::SqlStatement::GenerateUpdateStatement(const BasisDatabaseContainer& basisDatabaseContainer)
+std::string Database::SqlStatement::GenerateUpdateStatement(const BasisDatabaseManager& basisDatabaseManager)
 {
     std::string result{};
 
-    result += "UPDATE `" + basisDatabaseContainer.GetDatabaseName() + "` SET ";
+    result += "UPDATE `"s + basisDatabaseManager.GetDatabaseName().data() + "` SET ";
 
-    const auto container = basisDatabaseContainer.GetContainer();
-    auto index = 1u;
+    const auto container = basisDatabaseManager.GetDatabase();
+    auto index = 1;
     for (const auto& value : container)
     {
         result += "`";
         result += value.GetFieldName();
         result += "` = ";
-        result += value.GetSqlString();
+        result += value.GetSqlFieldString();
 
-        if (index != container.size())
+        if (index != container.GetSize())
         {
             result += " , ";
         }
@@ -145,17 +148,17 @@ std::string Database::SqlStatement::GenerateUpdateStatement(const BasisDatabaseC
 
     result += "WHERE ";
 
-    const auto key = basisDatabaseContainer.GetKey();
+    const auto key = basisDatabaseManager.GetKey();
 
-    index = 1u;
+    index = 1;
     for (const auto& value : key)
     {
         result += "`";
         result += value.GetFieldName();
         result += "` = ";
-        result += value.GetSqlString();
+        result += value.GetSqlFieldString();
 
-        if (index != key.size())
+        if (index != key.GetSize())
         {
             result += " AND ";
         }
@@ -168,7 +171,7 @@ std::string Database::SqlStatement::GenerateUpdateStatement(const BasisDatabaseC
     return result;
 }
 
-std::string Database::SqlStatement::GenerateSelectStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseContainer& basisDatabaseContainer)
+std::string Database::SqlStatement::GenerateSelectStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseManager& basisDatabaseManager)
 {
     std::string result{};
 
@@ -189,26 +192,25 @@ std::string Database::SqlStatement::GenerateSelectStatement(const FieldNameConta
         ++index;
     }
 
-    result += "FROM `" + basisDatabaseContainer.GetDatabaseName() + "` WHERE ";
+    result += "FROM `"s + basisDatabaseManager.GetDatabaseName().data() + "` WHERE ";
 
-    for (const auto key = basisDatabaseContainer.GetKey();
+    auto keyIndex = 1;
+    for (const auto key = basisDatabaseManager.GetKey();
          const auto& value : key)
     {
         result += "`";
         result += value.GetFieldName();
         result += "` = ";
 
-        result += value.GetSqlString();
+        result += value.GetSqlFieldString();
 
-        if (index != key.size())
+        if (keyIndex != key.GetSize())
         {
             result += " AND ";
         }
 
-        ++index;
+        ++keyIndex;
     }
-
-    result += ";";
 
     return result;
 }

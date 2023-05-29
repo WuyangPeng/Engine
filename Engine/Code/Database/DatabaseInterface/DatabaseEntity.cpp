@@ -18,13 +18,13 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Database, DatabaseEntity)
 
-Database::DatabaseEntity::DatabaseEntity(WrappersStrategy wrappersStrategy, const std::string& databaseName, const ObjectContainer& key)
+Database::DatabaseEntity::DatabaseEntity(WrappersStrategy wrappersStrategy, const std::string_view& databaseName, const BasisDatabaseContainer& key)
     : impl{ wrappersStrategy, databaseName, key }
 {
     DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
-Database::DatabaseEntity::DatabaseEntity(const BasisDatabaseContainer& entity)
+Database::DatabaseEntity::DatabaseEntity(const BasisDatabaseManager& entity)
     : impl{ entity }
 {
     DATABASE_SELF_CLASS_IS_VALID_9;
@@ -32,11 +32,32 @@ Database::DatabaseEntity::DatabaseEntity(const BasisDatabaseContainer& entity)
 
 CLASS_INVARIANT_STUB_DEFINE(Database, DatabaseEntity)
 
-Database::BasisDatabaseContainer Database::DatabaseEntity::GetModify() const noexcept
+Database::BasisDatabaseManager Database::DatabaseEntity::GetModify() const noexcept
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
     return impl->GetModify();
+}
+
+Database::BasisDatabaseManager Database::DatabaseEntity::GetDelete() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDelete();
+}
+
+void Database::DatabaseEntity::ClearModify()
+{
+    DATABASE_CLASS_IS_VALID_9;
+
+    return impl->ClearModify();
+}
+
+bool Database::DatabaseEntity::IsModify() const
+{
+    DATABASE_CLASS_IS_VALID_9;
+
+    return impl->IsModify();
 }
 
 void Database::DatabaseEntity::AddModify(const BasisDatabase& basisDatabase)

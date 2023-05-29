@@ -23,20 +23,20 @@ namespace Database
     {
     public:
         using ClassType = RedisStatement;
-        using FieldNameContainer = std::vector<FieldName>;
+        using FieldNameContainer = std::vector<DatabaseField>;
 
     public:
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD static std::string GenerateStatement(const BasisDatabaseContainer& basisDatabaseContainer);
-        NODISCARD static std::string GenerateSelectStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseContainer& basisDatabaseContainer);
+        NODISCARD static std::string GenerateStatement(const std::string& hostName, const BasisDatabaseManager& basisDatabaseManager);
+        NODISCARD static std::string GenerateSelectStatement(const std::string& hostName, const FieldNameContainer& fieldNameContainer, const BasisDatabaseManager& basisDatabaseManager);
 
     private:
-        NODISCARD static std::string GenerateInsertStatement(const BasisDatabaseContainer& basisDatabaseContainer);
-        NODISCARD static std::string GenerateUpdateStatement(const BasisDatabaseContainer& basisDatabaseContainer);
-        NODISCARD static std::string GenerateDeleteStatement(const BasisDatabaseContainer& basisDatabaseContainer);
+        NODISCARD static std::string GenerateInsertStatement(const std::string& hostName, const BasisDatabaseManager& basisDatabaseManager);
+        NODISCARD static std::string GenerateUpdateStatement(const std::string& hostName, const BasisDatabaseManager& basisDatabaseManager);
+        NODISCARD static std::string GenerateDeleteStatement(const std::string& hostName, const BasisDatabaseManager& basisDatabaseManager);
 
-        NODISCARD static std::string GenerateKey(const BasisDatabaseContainer& basisDatabaseContainer);
+        NODISCARD static std::string GenerateKey(const std::string& hostName, const BasisDatabaseManager& basisDatabaseManager);
     };
 
 }

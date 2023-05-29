@@ -98,11 +98,11 @@ std::any Database::BasisDatabase::GetAnyValue() const
     return impl->GetValue();
 }
 
-std::string Database::BasisDatabase::GetSqlString() const
+std::string Database::BasisDatabase::GetSqlFieldString() const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    return impl->GetSqlString();
+    return impl->GetSqlFieldString();
 }
 
 std::string Database::BasisDatabase::GetString() const
@@ -112,9 +112,9 @@ std::string Database::BasisDatabase::GetString() const
     return impl->GetString();
 }
 
-std::string Database::BasisDatabase::GetRedisString() const
+std::string Database::BasisDatabase::GetQuotationMarkString() const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    return impl->GetRedisString();
+    return impl->GetQuotationMarkString();
 }

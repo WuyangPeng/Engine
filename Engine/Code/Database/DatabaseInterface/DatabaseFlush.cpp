@@ -16,7 +16,7 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Database/DatabaseInterface/BasisDatabaseContainerDetail.h"
+#include "Database/DatabaseInterface/BasisDatabaseManagerDetail.h"
 
 Database::DatabaseFlush::DatabaseFlush(const ConfigurationStrategy& configurationStrategy)
     : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
@@ -26,21 +26,21 @@ Database::DatabaseFlush::DatabaseFlush(const ConfigurationStrategy& configuratio
 
 CLASS_INVARIANT_STUB_DEFINE(Database, DatabaseFlush)
 
-void Database::DatabaseFlush::ChangeDatabase(int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer)
+void Database::DatabaseFlush::ChangeDatabase(int64_t userId, const BasisDatabaseManager& basisDatabaseContainer)
 {
     DATABASE_CLASS_IS_VALID_9;
 
     return impl->ChangeDatabase(userId, basisDatabaseContainer);
 }
 
-Database::BasisDatabaseContainer Database::DatabaseFlush::SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::BasisDatabaseManager Database::DatabaseFlush::SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
     return impl->SelectOne(basisDatabaseContainer, fieldNameContainer);
 }
 
-Database::DatabaseFlush::ResultContainer Database::DatabaseFlush::SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::DatabaseFlush::ResultContainer Database::DatabaseFlush::SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 

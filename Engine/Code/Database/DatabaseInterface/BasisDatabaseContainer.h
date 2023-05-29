@@ -5,13 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/22 22:20)
+///	引擎版本：0.9.0.10 (2023/05/25 17:58)
 
 #ifndef DATABASE_DATABASE_INTERFACE_BASIS_DATABASE_CONTAINER_H
 #define DATABASE_DATABASE_INTERFACE_BASIS_DATABASE_CONTAINER_H
 
 #include "Database/DatabaseDll.h"
 
+#include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "Database/Configuration/ConfigurationFwd.h"
 #include "Database/DatabaseInterface/DataTypeTraits.h"
@@ -28,27 +29,31 @@ namespace Database
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(BasisDatabaseContainer);
         using ObjectContainer = std::vector<BasisDatabase>;
+        using ObjectContainerConstIter = ObjectContainer::const_iterator;
 
     public:
-        BasisDatabaseContainer(WrappersStrategy wrappersStrategy, const std::string& databaseName, ChangeType changeType, const ObjectContainer& key);
+        NODISCARD static BasisDatabaseContainer Create();
+        explicit BasisDatabaseContainer(const BasisDatabase& basisDatabase);
+        explicit BasisDatabaseContainer(const ObjectContainer& container);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD WrappersStrategy GetWrappersStrategy() const noexcept;
-        NODISCARD std::string GetDatabaseName() const;
-        NODISCARD ChangeType GetChangeType() const noexcept;
-        NODISCARD ObjectContainer GetKey() const;
         NODISCARD ObjectContainer GetContainer() const;
 
         void Modify(const BasisDatabase& basisDatabase);
+        void Set(const ObjectContainer& container);
 
         void Clear();
 
-        template <DataType Type>
-        NODISCARD typename DataTypeTraits<Type>::Type GetValue(const std::string_view& fieldName) const;
+        NODISCARD std::any GetAnyValue(const std::string_view& fieldName) const;
+
+        NODISCARD ObjectContainerConstIter begin() const noexcept;
+        NODISCARD ObjectContainerConstIter end() const noexcept;
+
+        NODISCARD int GetSize() const;
 
     private:
-        NODISCARD std::any GetAnyValue(const std::string_view& fieldName) const;
+        explicit BasisDatabaseContainer(CoreTools::DisableNotThrow disableNotThrow);
 
     private:
         PackageType impl;

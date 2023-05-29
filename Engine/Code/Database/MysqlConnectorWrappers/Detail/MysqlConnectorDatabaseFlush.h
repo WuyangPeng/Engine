@@ -37,13 +37,13 @@ namespace Database
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void ChangeDatabase(int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer) override;
+        void ChangeDatabase(int64_t userId, const BasisDatabaseManager& basisDatabaseContainer) override;
 
-        NODISCARD BasisDatabaseContainer SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const override;
-        NODISCARD ResultContainer SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const override;
+        NODISCARD BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const override;
+        NODISCARD ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const override;
 
     private:
-        void CheckWrappersStrategy(const BasisDatabaseContainer& basisDatabaseContainer) const;
+        void CheckWrappersStrategy(const BasisDatabaseManager& basisDatabaseContainer) const;
 
     private:
         Container connection;

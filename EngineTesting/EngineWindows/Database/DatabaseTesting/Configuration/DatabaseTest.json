@@ -1,11 +1,11 @@
 {
   "GameServerDB": {
-    "Ip": "127.0.0.1",
-    "Port": 8010,
+    "Ip": "43.139.123.106",
+    "Port": 33060,
     "Wrappers": "MysqlConnector",
-    "HostName": "DBName",
+    "HostName": "tcretest",
     "UserName": "root",
-    "Password": "password",
+    "Password": "TCRE",
 
     "Pooling": true,
     "PoolMaxSize": 10,
@@ -18,7 +18,7 @@
       "DBName2": 2
     },
 
-    "UseSSLOption": 1,
+    "UseSSLOption": 0,
     "SSLOption": {
       "sslKey": "",
       "sslCert": "",

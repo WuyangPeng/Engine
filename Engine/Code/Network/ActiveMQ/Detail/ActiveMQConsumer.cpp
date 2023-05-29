@@ -112,14 +112,14 @@ void Network::ActiveMQConsumer::Run()
 
         Execution();
 
-    } while (!isStop);
+    } while (!isStop || !messageContainer.empty());
 }
 
 void Network::ActiveMQConsumer::Execution()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    while (!messageContainer.empty())
+    if (!messageContainer.empty())
     {
         try
         {
@@ -133,7 +133,7 @@ void Network::ActiveMQConsumer::Execution()
                 bufferReceiveStream.OnEvent(0, GetMessageEventManager());
             }
 
-            continue;
+            return;
         }
         EXCEPTION_ALL_CATCH(Network)
 

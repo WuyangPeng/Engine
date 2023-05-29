@@ -16,72 +16,98 @@
 （2）配置解析：AnalysisDatabaseConfigurationTesting。
 
 ----------------------------
-3.  SqlInterfaceSuite 
+3.  DatabaseInterfaceSuite 
 
-对Sql接口模块的单元测试，包括： 
-（1） 数据对象：DatabaseObjectTesting。
-（2） 会话：SessionTesting。
-（3） 架构：SchemaTesting。
-（4） 采集：CollectionTesting。
-（5） 结果：ResultRowTesting、ResultTesting。
-（6） 表：TableTesting。
+对数据库接口模块的单元测试，包括： 
+（1） 记录： BasisDatabaseTesting。
+（2） 记录容器：BasisDatabaseContainerTesting、
+			    BasisDatabaseManagerTesting。
+（3） 记录修改：DatabaseEntityTesting、
+			    EntityTesting、
+				DatabaseFieldTesting。
+（4） 数据对象： DatabaseEnvironmentTesting。
+（5） 会话： DatabaseManagerTesting。
+（6） 存储： DatabaseFlushTesting。 
 
 ----------------------------
-4.  StatementSuite  
+4.  DatabaseGenerateSuite  
+
+对数据库生成的单元测试，包括：
+（1） 数据库生成。
+
+----------------------------
+5.  StatementSuite  
 
 对语句模块的单元测试，包括：
-（1） 语句。
+（1） 语句：RedisStatementTesting、
+		    SqlStatementTesting。
 
 ----------------------------
-5.	MySqlWrappers（MySQL C API 包装器）
+6.	MySqlWrappers（MySQL C API 包装器）
 
 对MySQL C API包装器模块的单元测试，包括： 
-（1） 数据对象。
-（2） 会话。
-（3） 架构。
-（4） 采集。
-（5） 结果。
-（6） 表。
+（1） 会话。
+（2） 存储。 
 
 ----------------------------
-6.  MysqlConnectorWrappersSuite 
+7.  MysqlConnectorWrappersSuite 
 
 对Mysql Connector 包装器模块的单元测试，包括： 
-（1） 数据对象：MysqlConnectorDatabaseObjectTesting。
-（2） 会话：MysqlConnectorSessionTesting。
-（3） 架构：MysqlConnectorSchemaTesting。
-（4） 采集：MysqlConnectorCollectionTesting。
-（5） 结果：MysqlConnectorDocResultRowTesting、MysqlConnectorDocResultTesting、MysqlConnectorResultRowTesting、MysqlConnectorResultTesting。
-（6） 表：MysqlConnectorTableTesting。
+（1） Mysql Connector：MysqlConnectorDatabaseFlushTesting。 
 
 ----------------------------
-7.  SqlServerWrappersSuite  
+8.  MysqlBoostWrappersSuite  
+
+对mysql boost包装器模块的单元测试，包括： 
+（1） mysql boost：MysqlBoostDatabaseFlushTesting。
+
+----------------------------
+9.  SqlServerWrappersSuite  
 
 对Sql Server 包装器模块的单元测试，包括： 
 （1） Sql Server。
 
 ----------------------------
-8.  SQLiteWrappersSuite 
+10.  SQLiteWrappersSuite 
 
 对SQLite 包装器模块的单元测试，包括： 
 （1） SQLite。
 
 ----------------------------
-9.  PostgreSQLSuite   
+11.  PostgreSQLSuite   
 
 对PostgreSQL包装器模块的单元测试，包括： 
 （1） PostgreSQL。
 
 ----------------------------
-10.  OracleSuite  
+12.  OracleSuite  
 
 对Oracle包装器模块的单元测试，包括： 
 （1） OracleSuite。
 
 ----------------------------
-11.  FlatFileWrappersSuite  
+13.  FlatFileWrappersSuite  
 
 对平面文件包装器模块的单元测试，包括：  
 （1） 平面文件。
+
+----------------------------
+14.  MariaDBWrappersSuite  
+
+对mariaDB包装器模块的单元测试，包括：  
+（1） mariaDB。
+
+----------------------------
+15.  MongoWrappersSuite  
+
+对mongo包装器模块的单元测试，包括：  
+（1） mongo： MongoEnvironmentTesting、
+			  MongoDatabaseFlushTesting。
+
+----------------------------
+16.  RedisWrappersSuite  
+
+对redis包装器模块的单元测试，包括：  
+（1） redis：RedisDatabaseFlushTesting。
 
 ----------------------------

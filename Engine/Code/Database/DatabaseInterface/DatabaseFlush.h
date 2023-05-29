@@ -25,18 +25,18 @@ namespace Database
     {
     public:
         NON_COPY_TYPE_DECLARE(DatabaseFlush);
-        using ResultContainer = std::vector<BasisDatabaseContainer>;
-        using FieldNameContainer = std::vector<FieldName>;
+        using ResultContainer = std::vector<BasisDatabaseManager>;
+        using FieldNameContainer = std::vector<DatabaseField>;
 
     public:
         explicit DatabaseFlush(const ConfigurationStrategy& configurationStrategy);
 
         CLASS_INVARIANT_DECLARE;
 
-        void ChangeDatabase(int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer);
+        void ChangeDatabase(int64_t userId, const BasisDatabaseManager& basisDatabaseContainer);
 
-        NODISCARD BasisDatabaseContainer SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
-        NODISCARD ResultContainer SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
+        NODISCARD BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
+        NODISCARD ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
 
     private:
         PackageType impl;

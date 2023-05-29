@@ -55,7 +55,7 @@ std::any Database::BasisDatabaseImpl::GetValue() const
     return value;
 }
 
-std::string Database::BasisDatabaseImpl::GetSqlString() const
+std::string Database::BasisDatabaseImpl::GetSqlFieldString() const
 {
     DATABASE_CLASS_IS_VALID_CONST_1;
 
@@ -110,7 +110,7 @@ std::string Database::BasisDatabaseImpl::GetString() const
     }
 }
 
-std::string Database::BasisDatabaseImpl::GetRedisString() const
+std::string Database::BasisDatabaseImpl::GetQuotationMarkString() const
 {
     DATABASE_CLASS_IS_VALID_CONST_1;
 

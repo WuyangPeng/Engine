@@ -15,7 +15,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Database/DatabaseInterface/BasisDatabaseContainer.h"
 #include "Database/DatabaseInterface/BasisDatabaseDetail.h"
-#include "Database/DatabaseInterface/FieldName.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
+#include "Database/DatabaseInterface/DatabaseField.h"
 #include "Database/Statement/SqlStatement.h"
 
 using namespace std::literals;
@@ -23,7 +24,7 @@ using namespace std::literals;
 Database::MysqlBoostConnection::MysqlBoostConnection(ConfigurationStrategy configurationStrategy)
     : configurationStrategy{ std::move(configurationStrategy) },
       context{},
-      sslContext{ boost::asio::ssl::context::tls_client },
+      sslContext{ CreateContext() },
       connection{ context.get_executor(), sslContext },
       container{},
       thread{},
@@ -34,6 +35,13 @@ Database::MysqlBoostConnection::MysqlBoostConnection(ConfigurationStrategy confi
     Init();
 
     DATABASE_SELF_CLASS_IS_VALID_9;
+}
+
+boost::asio::ssl::context Database::MysqlBoostConnection::CreateContext()
+{
+    boost::asio::ssl::context context{ boost::asio::ssl::context::tls_client };
+
+    return context;
 }
 
 void Database::MysqlBoostConnection::Init()
@@ -60,7 +68,11 @@ void Database::MysqlBoostConnection::Connect()
     boost::asio::ip::tcp::resolver resolver{ context.get_executor() };
     const auto endpoints = resolver.resolve(configurationStrategy.GetIp(), std::to_string(configurationStrategy.GetPort()));
 
-    const boost::mysql::handshake_params params{ configurationStrategy.GetDBUserName(), configurationStrategy.GetDBPassword(), configurationStrategy.GetDBHostName() };
+    const auto userName = configurationStrategy.GetDBUserName();
+    const auto password = configurationStrategy.GetDBPassword();
+    const auto hostName = configurationStrategy.GetDBHostName();
+
+    const boost::mysql::handshake_params params{ userName, password, hostName };
 
     if (!endpoints.empty())
     {
@@ -96,7 +108,7 @@ Database::MysqlBoostConnection::~MysqlBoostConnection() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Database, MysqlBoostConnection)
 
-void Database::MysqlBoostConnection::ChangeDatabase(const BasisDatabaseContainer& basisDatabaseContainer)
+void Database::MysqlBoostConnection::ChangeDatabase(const BasisDatabaseManager& basisDatabaseContainer)
 {
     DATABASE_CLASS_IS_VALID_9;
 
@@ -137,12 +149,12 @@ void Database::MysqlBoostConnection::WaitThread()
 
         Execution();
 
-    } while (!isStop);
+    } while (!isStop || !container.empty());
 }
 
 void Database::MysqlBoostConnection::Execution()
 {
-    while (!container.empty())
+    if (!container.empty())
     {
         EXCEPTION_TRY
         {
@@ -157,7 +169,7 @@ void Database::MysqlBoostConnection::Execution()
     }
 }
 
-Database::BasisDatabaseContainer Database::MysqlBoostConnection::ExtractNext() noexcept
+Database::BasisDatabaseManager Database::MysqlBoostConnection::ExtractNext() noexcept
 {
     auto basisDatabaseContainer = container.front();
 
@@ -166,16 +178,20 @@ Database::BasisDatabaseContainer Database::MysqlBoostConnection::ExtractNext() n
     return basisDatabaseContainer;
 }
 
-Database::BasisDatabaseContainer Database::MysqlBoostConnection::SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
+Database::BasisDatabaseManager Database::MysqlBoostConnection::SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
+
+    std::unique_lock uniqueLock{ mutex };
 
     boost::mysql::results result{};
     const auto sql = SqlStatement::GenerateSelectOneStatement(fieldNameContainer, basisDatabaseContainer);
 
     connection.query(sql, result);
 
-    BasisDatabaseContainer select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
+    uniqueLock.unlock();
+
+    BasisDatabaseManager select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
 
     if (const auto& rows = result.rows();
         !rows.empty())
@@ -192,20 +208,24 @@ Database::BasisDatabaseContainer Database::MysqlBoostConnection::SelectOne(const
     return select;
 }
 
-Database::MysqlBoostConnection::ResultContainer Database::MysqlBoostConnection::SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
+Database::MysqlBoostConnection::ResultContainer Database::MysqlBoostConnection::SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
+
+    std::unique_lock uniqueLock{ mutex };
 
     boost::mysql::results result{};
     const auto sql = SqlStatement::GenerateSelectAllStatement(fieldNameContainer, basisDatabaseContainer);
 
     connection.query(sql, result);
 
+    uniqueLock.unlock();
+
     ResultContainer resultContainer{};
 
     for (const auto& entity : result.rows())
     {
-        BasisDatabaseContainer select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
+        BasisDatabaseManager select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
 
         auto index = 0;
         for (const auto& value : entity)
@@ -220,7 +240,7 @@ Database::MysqlBoostConnection::ResultContainer Database::MysqlBoostConnection::
     return resultContainer;
 }
 
-Database::BasisDatabase Database::MysqlBoostConnection::GetBasisDatabase(const FieldName& fieldName, const boost::mysql::field_view& rowView)
+Database::BasisDatabase Database::MysqlBoostConnection::GetBasisDatabase(const DatabaseField& fieldName, const boost::mysql::field_view& rowView)
 {
     switch (fieldName.GetDataType())
     {

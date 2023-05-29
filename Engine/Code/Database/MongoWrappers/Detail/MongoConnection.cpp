@@ -15,8 +15,11 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Database/DatabaseInterface/BasisDatabaseContainer.h"
 #include "Database/DatabaseInterface/BasisDatabaseDetail.h"
-#include "Database/DatabaseInterface/FieldName.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
+#include "Database/DatabaseInterface/DatabaseField.h"
 #include "Database/Statement/SqlStatement.h"
+
+#include <string>
 
 using namespace std::literals;
 
@@ -26,7 +29,7 @@ Database::MongoConnection::MongoConnection(ConfigurationStrategy configurationSt
     : configurationStrategy{ std::move(configurationStrategy) },
       uri{ CreateMongoURI(this->configurationStrategy) },
       connection{ uri },
-      database{ connection[configurationStrategy.GetDBHostName()] },
+      database{ connection[this->configurationStrategy.GetDBHostName()] },
       container{},
       thread{},
       mutex{},
@@ -75,7 +78,7 @@ Database::MongoConnection::~MongoConnection() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Database, MongoConnection)
 
-void Database::MongoConnection::ChangeDatabase(const BasisDatabaseContainer& basisDatabaseContainer)
+void Database::MongoConnection::ChangeDatabase(const BasisDatabaseManager& basisDatabaseContainer)
 {
     DATABASE_CLASS_IS_VALID_9;
 
@@ -116,18 +119,18 @@ void Database::MongoConnection::WaitThread()
 
         Execution();
 
-    } while (!isStop);
+    } while (!isStop || !container.empty());
 }
 
 void Database::MongoConnection::Execution()
 {
-    while (!container.empty())
+    if (!container.empty())
     {
         EXCEPTION_TRY
         {
             const auto basisDatabaseContainer = ExtractNext();
 
-            auto collection = database[basisDatabaseContainer.GetDatabaseName()];
+            auto collection = database[basisDatabaseContainer.GetDatabaseName().data()];
 
             switch (basisDatabaseContainer.GetChangeType())
             {
@@ -148,24 +151,24 @@ void Database::MongoConnection::Execution()
     }
 }
 
-void Database::MongoConnection::ExecutionDelete(const BasisDatabaseContainer& basisDatabaseContainer, mongocxx::collection& collection)
+void Database::MongoConnection::ExecutionDelete(const BasisDatabaseManager& basisDatabaseContainer, mongocxx::collection& collection)
 {
     auto document = GetKeyDocument(basisDatabaseContainer);
 
     collection.delete_one(document.extract());
 }
 
-bsoncxx::builder::basic::document Database::MongoConnection::GetKeyDocument(const BasisDatabaseContainer& basisDatabaseContainer) const
+bsoncxx::builder::basic::document Database::MongoConnection::GetKeyDocument(const BasisDatabaseManager& basisDatabaseContainer) const
 {
     return GetDocument(basisDatabaseContainer.GetKey());
 }
 
-bsoncxx::builder::basic::document Database::MongoConnection::GetInsertDocument(const BasisDatabaseContainer& basisDatabaseContainer) const
+bsoncxx::builder::basic::document Database::MongoConnection::GetInsertDocument(const BasisDatabaseManager& basisDatabaseContainer) const
 {
-    return GetDocument(basisDatabaseContainer.GetContainer());
+    return GetDocument(basisDatabaseContainer.GetDatabase());
 }
 
-bsoncxx::builder::basic::document Database::MongoConnection::GetDocument(const BasisDatabaseContainer::ObjectContainer& objectContainer) const
+bsoncxx::builder::basic::document Database::MongoConnection::GetDocument(const BasisDatabaseContainer& objectContainer) const
 {
     bsoncxx::builder::basic::document document{};
 
@@ -204,18 +207,18 @@ bsoncxx::builder::basic::document Database::MongoConnection::GetDocument(const B
     return document;
 }
 
-void Database::MongoConnection::ExecutionInsert(const BasisDatabaseContainer& basisDatabaseContainer, mongocxx::collection& collection)
+void Database::MongoConnection::ExecutionInsert(const BasisDatabaseManager& basisDatabaseContainer, mongocxx::collection& collection)
 {
     auto document = GetInsertDocument(basisDatabaseContainer);
 
     collection.insert_one(document.extract());
 }
 
-bsoncxx::builder::basic::document Database::MongoConnection::GetUpdateDocument(const BasisDatabaseContainer& basisDatabaseContainer) const
+bsoncxx::builder::basic::document Database::MongoConnection::GetUpdateDocument(const BasisDatabaseManager& basisDatabaseContainer) const
 {
     bsoncxx::builder::basic::document document{};
 
-    for (const auto& value : basisDatabaseContainer.GetContainer())
+    for (const auto& value : basisDatabaseContainer.GetDatabase())
     {
         std::string fieldName{ value.GetFieldName() };
         switch (value.GetDataType())
@@ -250,7 +253,7 @@ bsoncxx::builder::basic::document Database::MongoConnection::GetUpdateDocument(c
     return document;
 }
 
-void Database::MongoConnection::ExecutionUpdate(const BasisDatabaseContainer& basisDatabaseContainer, mongocxx::collection& collection)
+void Database::MongoConnection::ExecutionUpdate(const BasisDatabaseManager& basisDatabaseContainer, mongocxx::collection& collection)
 {
     auto keyDocument = GetKeyDocument(basisDatabaseContainer);
     auto updateDocument = GetUpdateDocument(basisDatabaseContainer);
@@ -258,7 +261,7 @@ void Database::MongoConnection::ExecutionUpdate(const BasisDatabaseContainer& ba
     collection.update_one(keyDocument.extract(), updateDocument.extract());
 }
 
-Database::BasisDatabaseContainer Database::MongoConnection::ExtractNext() noexcept
+Database::BasisDatabaseManager Database::MongoConnection::ExtractNext() noexcept
 {
     auto basisDatabaseContainer = container.front();
 
@@ -267,53 +270,64 @@ Database::BasisDatabaseContainer Database::MongoConnection::ExtractNext() noexce
     return basisDatabaseContainer;
 }
 
-Database::BasisDatabaseContainer Database::MongoConnection::SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
+Database::BasisDatabaseManager Database::MongoConnection::SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    auto collection = database[basisDatabaseContainer.GetDatabaseName()];
+    std::unique_lock uniqueLock{ mutex };
+
+    auto collection = database[basisDatabaseContainer.GetDatabaseName().data()];
 
     auto keyDocument = GetKeyDocument(basisDatabaseContainer);
 
     const auto result = collection.find_one(keyDocument.extract());
 
-    BasisDatabaseContainer select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
+    uniqueLock.unlock();
+
+    BasisDatabaseManager select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
 
     if (result)
     {
-        auto index = 0;
         for (const auto& value : result.value())
         {
-            select.Modify(GetBasisDatabase(fieldNameContainer.at(index), value));
-
-            ++index;
+            if (const auto basisDatabase = GetBasisDatabase(fieldNameContainer, value);
+                basisDatabase.GetDataType() != DataType::Null)
+            {
+                select.Modify(basisDatabase);
+            }
         }
     }
 
     return select;
 }
 
-Database::MongoConnection::ResultContainer Database::MongoConnection::SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
+Database::MongoConnection::ResultContainer Database::MongoConnection::SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    auto collection = database[basisDatabaseContainer.GetDatabaseName()];
+    std::unique_lock uniqueLock{ mutex };
+
+    auto collection = database[basisDatabaseContainer.GetDatabaseName().data()];
 
     auto keyDocument = GetKeyDocument(basisDatabaseContainer);
 
     auto result = collection.find(keyDocument.extract());
 
+    uniqueLock.unlock();
+
     ResultContainer resultContainer{};
 
     for (const auto& entity : result)
     {
-        BasisDatabaseContainer select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
+        BasisDatabaseManager select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
 
-        auto index = 0;
         for (const auto& value : entity)
         {
-            select.Modify(GetBasisDatabase(fieldNameContainer.at(index), value));
-            ++index;
+            if (const auto basisDatabase = GetBasisDatabase(fieldNameContainer, value);
+                basisDatabase.GetDataType() != DataType::Null)
+            {
+                select.Modify(basisDatabase);
+            }
         }
 
         resultContainer.emplace_back(select);
@@ -322,38 +336,48 @@ Database::MongoConnection::ResultContainer Database::MongoConnection::SelectAll(
     return resultContainer;
 }
 
-Database::BasisDatabase Database::MongoConnection::GetBasisDatabase(const FieldName& fieldName, const bsoncxx::document::element& rowView)
+Database::BasisDatabase Database::MongoConnection::GetBasisDatabase(const FieldNameContainer& fieldNameContainer, const bsoncxx::document::element& rowView)
 {
-    switch (fieldName.GetDataType())
+    const std::string key{ rowView.key() };
+    const auto iter = std::ranges::find_if(fieldNameContainer, [key](const auto& value) {
+        return key == value.GetFieldName();
+    });
+
+    if (iter == fieldNameContainer.cend())
+    {
+        return BasisDatabase{ "nullptr" };
+    }
+
+    switch (iter->GetDataType())
     {
         case DataType::String:
         {
             const std::string result{ rowView.get_string().value };
-            return BasisDatabase{ fieldName.GetFieldName(), result };
+            return BasisDatabase{ iter->GetFieldName(), result };
         }
 
         case DataType::Int32:
         case DataType::Int32Count:
-            return BasisDatabase{ fieldName.GetFieldName(), rowView.get_int32() };
+            return BasisDatabase{ iter->GetFieldName(), rowView.get_int32() };
 
         case DataType::Int64:
         case DataType::Int64Count:
-            return BasisDatabase{ fieldName.GetFieldName(), rowView.get_int64() };
+            return BasisDatabase{ iter->GetFieldName(), rowView.get_int64() };
 
         case DataType::Double:
-            return BasisDatabase{ fieldName.GetFieldName(), rowView.get_double().value };
+            return BasisDatabase{ iter->GetFieldName(), rowView.get_double().value };
 
         case DataType::Bool:
-            return BasisDatabase{ fieldName.GetFieldName(), rowView.get_bool() };
+            return BasisDatabase{ iter->GetFieldName(), rowView.get_bool() };
 
         default:
-            return BasisDatabase{ fieldName.GetFieldName(), ""s };
+            return BasisDatabase{ iter->GetFieldName(), ""s };
     }
 }
 
 std::string Database::MongoConnection::CreateMongoURI(const ConfigurationStrategy& configurationStrategy)
 {
-    return "mongodb://" + configurationStrategy.GetIp() + ":" + std::to_string(configurationStrategy.GetPort()) + "?" + configurationStrategy.GetDBUserName() + "=" + configurationStrategy.GetDBPassword();
+    return "mongodb://" + configurationStrategy.GetDBUserName() + ":" + configurationStrategy.GetDBPassword() + "@" + configurationStrategy.GetIp() + ":" + std::to_string(configurationStrategy.GetPort()) + "/" + configurationStrategy.GetDBHostName();
 }
 
 #endif  // DATABASE_USE_MONGO

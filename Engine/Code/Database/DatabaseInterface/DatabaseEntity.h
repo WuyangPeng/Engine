@@ -32,11 +32,11 @@ namespace Database
     public:
         COPY_UNSHARED_TYPE_DECLARE(DatabaseEntity);
         using ObjectContainer = std::vector<BasisDatabase>;
-        using FieldNameContainer = std::vector<FieldName>;
+        using DatabaseFieldContainer = std::vector<DatabaseField>;
 
     public:
-        DatabaseEntity(WrappersStrategy wrappersStrategy, const std::string& databaseName, const ObjectContainer& key);
-        explicit DatabaseEntity(const BasisDatabaseContainer& entity);
+        DatabaseEntity(WrappersStrategy wrappersStrategy, const std::string_view& databaseName, const BasisDatabaseContainer& key);
+        explicit DatabaseEntity(const BasisDatabaseManager& entity);
         virtual ~DatabaseEntity() noexcept = default;
         DatabaseEntity(const DatabaseEntity& rhs) = default;
         DatabaseEntity& operator=(const DatabaseEntity& rhs) = default;
@@ -45,9 +45,12 @@ namespace Database
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        NODISCARD BasisDatabaseContainer GetModify() const noexcept;
+        NODISCARD BasisDatabaseManager GetModify() const noexcept;
+        NODISCARD BasisDatabaseManager GetDelete() const;
 
-        NODISCARD virtual FieldNameContainer GetFieldNameContainer() const = 0;
+        void ClearModify();
+
+        NODISCARD bool IsModify() const;
 
     protected:
         void AddModify(const BasisDatabase& basisDatabase);

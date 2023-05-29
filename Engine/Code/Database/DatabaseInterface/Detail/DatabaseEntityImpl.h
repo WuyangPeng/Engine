@@ -13,6 +13,7 @@
 #include "Database/DatabaseDll.h"
 
 #include "Database/DatabaseInterface/BasisDatabaseContainer.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
 
 #include <vector>
 
@@ -25,19 +26,22 @@ namespace Database
         using ObjectContainer = std::vector<BasisDatabase>;
 
     public:
-        DatabaseEntityImpl(WrappersStrategy wrappersStrategy, const std::string& databaseName, const ObjectContainer& key);
-        explicit DatabaseEntityImpl(BasisDatabaseContainer entity);
+        DatabaseEntityImpl(WrappersStrategy wrappersStrategy, const std::string_view& databaseName, const BasisDatabaseContainer& key);
+        explicit DatabaseEntityImpl(const BasisDatabaseManager& entity);
 
         CLASS_INVARIANT_DECLARE;
 
         void AddModify(const BasisDatabase& basisDatabase);
         void ClearModify();
 
-        NODISCARD BasisDatabaseContainer GetModify() const noexcept;
+        NODISCARD BasisDatabaseManager GetModify() const noexcept;
+        NODISCARD BasisDatabaseManager GetDelete() const;
+
+        NODISCARD bool IsModify() const;
 
     private:
         BasisDatabaseContainer entity;
-        BasisDatabaseContainer modify;
+        BasisDatabaseManager modify;
     };
 }
 #endif  // DATABASE_DATABASE_INTERFACE_DATABASE_ENTITY_IMPL_H

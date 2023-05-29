@@ -24,8 +24,8 @@ namespace Database
         using ClassType = DatabaseFlushImpl;
         using FactoryType = DatabaseFlushFactory;
         using DatabaseFlushSharedPtr = std::shared_ptr<ClassType>;
-        using ResultContainer = std::vector<BasisDatabaseContainer>;
-        using FieldNameContainer = std::vector<FieldName>;
+        using ResultContainer = std::vector<BasisDatabaseManager>;
+        using FieldNameContainer = std::vector<DatabaseField>;
 
     public:
         explicit DatabaseFlushImpl(ConfigurationStrategy configurationStrategy) noexcept;
@@ -37,12 +37,12 @@ namespace Database
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual void ChangeDatabase(int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer) = 0;
+        virtual void ChangeDatabase(int64_t userId, const BasisDatabaseManager& basisDatabaseContainer) = 0;
 
         NODISCARD ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
-        NODISCARD virtual BasisDatabaseContainer SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const = 0;
-        NODISCARD virtual ResultContainer SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const = 0;
+        NODISCARD virtual BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const = 0;
+        NODISCARD virtual ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const = 0;
 
     private:
         ConfigurationStrategy configurationStrategy;

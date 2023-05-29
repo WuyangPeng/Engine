@@ -1,20 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 16:25)
+///	引擎测试版本：0.9.0.10 (2023/05/25 14:54)
 
 #include "AnalysisDatabaseConfigurationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
-#include "Database/Configuration/AnalysisDatabaseConfiguration.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using std::string;
-using std::vector;
+#include "Database/Configuration/AnalysisDatabaseConfiguration.h"
 
 Database::AnalysisDatabaseConfigurationTesting::AnalysisDatabaseConfigurationTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -36,22 +33,22 @@ void Database::AnalysisDatabaseConfigurationTesting::MainTest()
 
 void Database::AnalysisDatabaseConfigurationTesting::ConfigurationTest()
 {
-    AnalysisDatabaseConfiguration analysisDatabaseConfiguration{ "Configuration/DatabaseTest.json" };
+    const AnalysisDatabaseConfiguration analysisDatabaseConfiguration{ "Configuration/DatabaseTest.json" };
 
     ASSERT_EQUAL(2, analysisDatabaseConfiguration.GetSize());
 
-    auto gameServer = analysisDatabaseConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameServerDB"));
+    const auto gameServer = analysisDatabaseConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameServerDB"));
 
     ASSERT_ENUM_EQUAL(gameServer.GetWrappersStrategy(), WrappersStrategy::MysqlConnector);
-    ASSERT_EQUAL(gameServer.GetIp(), "127.0.0.1");
-    ASSERT_EQUAL(gameServer.GetPort(), 8010);
-    ASSERT_EQUAL(gameServer.GetDBHostName(), "DBName");
+    ASSERT_EQUAL(gameServer.GetIp(), "43.139.123.106");
+    ASSERT_EQUAL(gameServer.GetPort(), 33060);
+    ASSERT_EQUAL(gameServer.GetDBHostName(), "tcretest");
     ASSERT_EQUAL(gameServer.GetDBUserName(), "root");
-    ASSERT_EQUAL(gameServer.GetDBPassword(), "password");
-    vector<string> clentFlags{ "CLIENT_COMPRESS", "CLIENT_IGNORE_SIGPIPE", "CLIENT_LOCAL_FILES" };
-    ASSERT_EQUAL(gameServer.GetFlagsOption(), clentFlags);
+    ASSERT_EQUAL(gameServer.GetDBPassword(), "TCRE");
+    const std::vector<std::string> clientFlags{ "CLIENT_COMPRESS", "CLIENT_IGNORE_SIGPIPE", "CLIENT_LOCAL_FILES" };
+    ASSERT_EQUAL(gameServer.GetFlagsOption(), clientFlags);
 
-    auto gameClient = analysisDatabaseConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameClientDB"));
+    const auto gameClient = analysisDatabaseConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameClientDB"));
 
     ASSERT_ENUM_EQUAL(gameClient.GetWrappersStrategy(), WrappersStrategy::SQLite);
     ASSERT_EQUAL(gameClient.GetIp(), "127.0.0.1");
@@ -59,5 +56,5 @@ void Database::AnalysisDatabaseConfigurationTesting::ConfigurationTest()
     ASSERT_EQUAL(gameClient.GetDBHostName(), "dbName");
     ASSERT_EQUAL(gameClient.GetDBUserName(), "Account");
     ASSERT_EQUAL(gameClient.GetDBPassword(), "Password");
-    ASSERT_EQUAL(gameClient.GetFlagsOption(), vector<string>{});
+    ASSERT_EQUAL(gameClient.GetFlagsOption(), std::vector<std::string>{});
 }

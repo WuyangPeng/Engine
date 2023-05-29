@@ -275,11 +275,13 @@
     <ClCompile Include="..\..\..\Code\Database\Configuration\Detail\ConfigurationStrategyImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabase.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseManager.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\DatabaseEntity.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\DatabaseEnvironment.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\DatabaseFlush.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\DatabaseManager.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseContainerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseEntityImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseEnvironmentImpl.cpp" />
@@ -320,7 +322,8 @@
     <ClInclude Include="..\..\..\Code\Database\DatabaseImport.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabase.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainer.h" />
-    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainerDetail.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseManager.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseManagerDetail.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseDetail.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseEntity.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseEntityDetail.h" />
@@ -332,6 +335,7 @@
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseManager.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DataTypeTraits.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseContainerImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseManagerImpl.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseImpl.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseEntityImpl.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseEnvironmentImpl.h" />
@@ -341,7 +345,7 @@
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\NullDatabaseFlush.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Entity.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\EntityDetail.h" />
-    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\FieldName.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseField.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Flags\DataType.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseLib.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseNoImport.h" />

@@ -5,54 +5,46 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/22 22:21)
+///	引擎版本：0.9.0.10 (2023/05/25 17:58)
 
 #include "Database/DatabaseExport.h"
 
 #include "BasisDatabaseContainer.h"
 #include "Detail/BasisDatabaseContainerImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Database, BasisDatabaseContainer)
 
-Database::BasisDatabaseContainer::BasisDatabaseContainer(WrappersStrategy wrappersStrategy, const std::string& databaseName, ChangeType changeType, const ObjectContainer& key)
-    : impl{ wrappersStrategy, databaseName, changeType, key }
+Database::BasisDatabaseContainer Database::BasisDatabaseContainer::Create()
+{
+    return BasisDatabaseContainer{ CoreTools::DisableNotThrow::Disable };
+}
+
+Database::BasisDatabaseContainer::BasisDatabaseContainer(const BasisDatabase& basisDatabase)
+    : impl{ basisDatabase }
+{
+    DATABASE_SELF_CLASS_IS_VALID_9;
+}
+
+Database::BasisDatabaseContainer::BasisDatabaseContainer(CoreTools::DisableNotThrow disableNotThrow)
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+{
+    System::UnusedFunction(disableNotThrow);
+
+    DATABASE_SELF_CLASS_IS_VALID_9;
+}
+
+Database::BasisDatabaseContainer::BasisDatabaseContainer(const ObjectContainer& container)
+    : impl{ container }
 {
     DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Database, BasisDatabaseContainer)
-
-Database::WrappersStrategy Database::BasisDatabaseContainer::GetWrappersStrategy() const noexcept
-{
-    DATABASE_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetWrappersStrategy();
-}
-
-std::string Database::BasisDatabaseContainer::GetDatabaseName() const
-{
-    DATABASE_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetDatabaseName();
-}
-
-Database::ChangeType Database::BasisDatabaseContainer::GetChangeType() const noexcept
-{
-    DATABASE_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetChangeType();
-}
-
-Database::BasisDatabaseContainer::ObjectContainer Database::BasisDatabaseContainer::GetKey() const
-{
-    DATABASE_CLASS_IS_VALID_CONST_9;
-
-    return impl->GetKey();
-}
 
 Database::BasisDatabaseContainer::ObjectContainer Database::BasisDatabaseContainer::GetContainer() const
 {
@@ -68,11 +60,20 @@ void Database::BasisDatabaseContainer::Modify(const BasisDatabase& basisDatabase
     return impl->Modify(basisDatabase);
 }
 
+void Database::BasisDatabaseContainer::Set(const ObjectContainer& container)
+{
+    DATABASE_CLASS_IS_VALID_9;
+
+    // 直接创建新的BasisDatabaseContainerImpl，否则会先执行复制操作再设置。
+    impl = PackageType{ container };
+}
+
 void Database::BasisDatabaseContainer::Clear()
 {
     DATABASE_CLASS_IS_VALID_9;
 
-    return impl->Clear();
+    // 直接创建空的BasisDatabaseContainerImpl，否则会先执行复制操作再清除。
+    impl = PackageType{ CoreTools::ImplCreateUseDefaultConstruction::Default };
 }
 
 std::any Database::BasisDatabaseContainer::GetAnyValue(const std::string_view& fieldName) const
@@ -80,4 +81,25 @@ std::any Database::BasisDatabaseContainer::GetAnyValue(const std::string_view& f
     DATABASE_CLASS_IS_VALID_CONST_9;
 
     return impl->GetAnyValue(fieldName);
+}
+
+Database::BasisDatabaseContainer::ObjectContainerConstIter Database::BasisDatabaseContainer::begin() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->begin();
+}
+
+Database::BasisDatabaseContainer::ObjectContainerConstIter Database::BasisDatabaseContainer::end() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->end();
+}
+
+int Database::BasisDatabaseContainer::GetSize() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetSize();
 }

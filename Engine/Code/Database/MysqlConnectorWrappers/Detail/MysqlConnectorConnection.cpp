@@ -16,7 +16,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Database/DatabaseInterface/BasisDatabaseContainer.h"
 #include "Database/DatabaseInterface/BasisDatabaseDetail.h"
-#include "Database/DatabaseInterface/FieldName.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
+#include "Database/DatabaseInterface/DatabaseField.h"
 #include "Database/Statement/SqlStatement.h"
 
 using namespace std::literals;
@@ -26,25 +27,25 @@ using namespace std::literals;
 Database::MysqlConnectorConnection::MysqlConnectorConnection(ConfigurationStrategy configurationStrategy)
     : configurationStrategy{ std::move(configurationStrategy) },
       client{ mysqlx::SessionOption::USER,
-              configurationStrategy.GetDBUserName(),
+              this->configurationStrategy.GetDBUserName(),
               mysqlx::SessionOption::PWD,
-              configurationStrategy.GetDBPassword(),
+              this->configurationStrategy.GetDBPassword(),
               mysqlx::SessionOption::HOST,
-              configurationStrategy.GetIp(),
+              this->configurationStrategy.GetIp(),
               mysqlx::SessionOption::PORT,
-              configurationStrategy.GetPort(),
+              this->configurationStrategy.GetPort(),
               mysqlx::SessionOption::DB,
-              configurationStrategy.GetDBHostName(),
+              this->configurationStrategy.GetDBHostName(),
               mysqlx::SessionOption::SSL_MODE,
-              configurationStrategy.IsUseSSL() ? mysqlx::SSLMode::VERIFY_CA : mysqlx::SSLMode::REQUIRED,
+              this->configurationStrategy.IsUseSSL() ? mysqlx::SSLMode::VERIFY_CA : mysqlx::SSLMode::REQUIRED,
               mysqlx::ClientOption::POOLING,
-              configurationStrategy.GetPooling(),
+              this->configurationStrategy.GetPooling(),
               mysqlx::ClientOption::POOL_MAX_SIZE,
-              configurationStrategy.GetPoolMaxSize(),
+              this->configurationStrategy.GetPoolMaxSize(),
               mysqlx::ClientOption::POOL_QUEUE_TIMEOUT,
-              configurationStrategy.GetPoolQueueTimeout(),
+              this->configurationStrategy.GetPoolQueueTimeout(),
               mysqlx::ClientOption::POOL_MAX_IDLE_TIME,
-              configurationStrategy.GetPoolMaxIdleTime() },
+              this->configurationStrategy.GetPoolMaxIdleTime() },
       session{ client.getSession() },
       container{},
       thread{},
@@ -82,7 +83,7 @@ Database::MysqlConnectorConnection::~MysqlConnectorConnection() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Database, MysqlConnectorConnection)
 
-void Database::MysqlConnectorConnection::ChangeDatabase(const BasisDatabaseContainer& basisDatabaseContainer)
+void Database::MysqlConnectorConnection::ChangeDatabase(const BasisDatabaseManager& basisDatabaseContainer)
 {
     DATABASE_CLASS_IS_VALID_9;
 
@@ -123,12 +124,12 @@ void Database::MysqlConnectorConnection::WaitThread()
 
         Execution();
 
-    } while (!isStop);
+    } while (!isStop || !container.empty());
 }
 
 void Database::MysqlConnectorConnection::Execution()
 {
-    while (!container.empty())
+    if (!container.empty())
     {
         EXCEPTION_TRY
         {
@@ -142,7 +143,7 @@ void Database::MysqlConnectorConnection::Execution()
     }
 }
 
-Database::BasisDatabaseContainer Database::MysqlConnectorConnection::ExtractNext() noexcept
+Database::BasisDatabaseManager Database::MysqlConnectorConnection::ExtractNext() noexcept
 {
     auto basisDatabaseContainer = container.front();
 
@@ -151,55 +152,69 @@ Database::BasisDatabaseContainer Database::MysqlConnectorConnection::ExtractNext
     return basisDatabaseContainer;
 }
 
-Database::BasisDatabaseContainer Database::MysqlConnectorConnection::SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
+Database::BasisDatabaseManager Database::MysqlConnectorConnection::SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
+
+    std::unique_lock uniqueLock{ mutex };
 
     const auto sql = SqlStatement::GenerateSelectOneStatement(fieldNameContainer, basisDatabaseContainer);
 
     auto result = session.sql(sql).execute();
 
-    BasisDatabaseContainer select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
+    uniqueLock.unlock();
+
+    BasisDatabaseManager select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
 
     if (result.hasData())
     {
-        const auto row = result.fetchOne();
-
-        for (auto index = 0u; index < row.colCount(); ++index)
+        if (const auto row = result.fetchOne();
+            row)
         {
-            select.Modify(GetBasisDatabase(fieldNameContainer.at(index), row[index]));
+            for (auto index = 0u; index < row.colCount(); ++index)
+            {
+                select.Modify(GetBasisDatabase(fieldNameContainer.at(index), row[index]));
+            }
         }
     }
 
     return select;
 }
 
-Database::MysqlConnectorConnection::ResultContainer Database::MysqlConnectorConnection::SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
+Database::MysqlConnectorConnection::ResultContainer Database::MysqlConnectorConnection::SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
+    std::unique_lock uniqueLock{ mutex };
+
     const auto sql = SqlStatement::GenerateSelectAllStatement(fieldNameContainer, basisDatabaseContainer);
 
-    auto result = session.sql(sql).execute().fetchAll();
+    auto result = session.sql(sql).execute();
+
+    uniqueLock.unlock();
 
     ResultContainer resultContainer{};
 
-    for (const auto& entity : result)
+    if (result.hasData())
     {
-        BasisDatabaseContainer select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
-
-        for (auto index = 0u; index < entity.colCount(); ++index)
+        for (auto row = result.fetchAll();
+             const auto& entity : row)
         {
-            select.Modify(GetBasisDatabase(fieldNameContainer.at(index), entity[index]));
-        }
+            BasisDatabaseManager select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
 
-        resultContainer.emplace_back(select);
+            for (auto index = 0u; index < entity.colCount(); ++index)
+            {
+                select.Modify(GetBasisDatabase(fieldNameContainer.at(index), entity[index]));
+            }
+
+            resultContainer.emplace_back(select);
+        }
     }
 
     return resultContainer;
 }
 
-Database::BasisDatabase Database::MysqlConnectorConnection::GetBasisDatabase(const FieldName& fieldName, const MysqlxValue& rowView)
+Database::BasisDatabase Database::MysqlConnectorConnection::GetBasisDatabase(const DatabaseField& fieldName, const MysqlxValue& rowView)
 {
     switch (fieldName.GetDataType())
     {

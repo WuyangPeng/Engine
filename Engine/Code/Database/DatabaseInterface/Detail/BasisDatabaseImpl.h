@@ -32,9 +32,9 @@ namespace Database
         NODISCARD std::string_view GetFieldName() const noexcept;
         NODISCARD DataType GetDataType() const noexcept;
         NODISCARD std::any GetValue() const;
-        NODISCARD std::string GetSqlString() const;
+        NODISCARD std::string GetSqlFieldString() const;
         NODISCARD std::string GetString() const;
-        NODISCARD std::string GetRedisString() const;
+        NODISCARD std::string GetQuotationMarkString() const;
 
     private:
         std::string_view fieldName;

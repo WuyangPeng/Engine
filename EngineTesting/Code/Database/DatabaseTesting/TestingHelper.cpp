@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/25 16:13)
+///	引擎测试版本：0.9.0.10 (2023/05/25 14:04)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -30,15 +30,20 @@ void Database::TestingHelper::InitSuite()
 {
     AddHelperSuite();
     AddConfigurationSuite();
-    AddSqlInterfaceSuite();
+    AddDatabaseInterfaceSuite();
+    AddDatabaseGenerateSuite();
     AddStatementSuite();
     AddMysqlWrappersSuite();
     AddMysqlConnectorWrappersSuite();
+    AddMysqlBoostWrappersSuite();
     AddSqlServerWrappersSuite();
     AddSQLiteWrappersSuite();
     AddPostgreSQLSuite();
     AddOracleSuite();
     AddFlatFileWrappersSuite();
+    AddMariaDBWrappersSuite();
+    AddMongoWrappersSuite();
+    AddRedisWrappersSuite();
 }
 
 void Database::TestingHelper::AddHelperSuite()
@@ -60,24 +65,36 @@ void Database::TestingHelper::AddConfigurationSuite()
     AddSuite(configurationSuite);
 }
 
-void Database::TestingHelper::AddSqlInterfaceSuite()
+void Database::TestingHelper::AddDatabaseInterfaceSuite()
 {
-    auto sqlInterfaceSuite = GenerateSuite("Sql接口");
+    auto databaseInterfaceSuite = GenerateSuite("数据库接口");
 
-    ADD_TEST(sqlInterfaceSuite, DatabaseObjectTesting);
-    ADD_TEST(sqlInterfaceSuite, SessionTesting);
-    ADD_TEST(sqlInterfaceSuite, SchemaTesting);
-    ADD_TEST(sqlInterfaceSuite, CollectionTesting);
-    ADD_TEST(sqlInterfaceSuite, TableTesting);
-    ADD_TEST(sqlInterfaceSuite, ResultTesting);
-    ADD_TEST(sqlInterfaceSuite, ResultRowTesting);
+    ADD_TEST(databaseInterfaceSuite, BasisDatabaseTesting);
+    ADD_TEST(databaseInterfaceSuite, BasisDatabaseContainerTesting);
+    ADD_TEST(databaseInterfaceSuite, BasisDatabaseManagerTesting);
+    ADD_TEST(databaseInterfaceSuite, DatabaseEntityTesting);
+    ADD_TEST(databaseInterfaceSuite, EntityTesting);
+    ADD_TEST(databaseInterfaceSuite, DatabaseManagerTesting);
+    ADD_TEST(databaseInterfaceSuite, DatabaseFieldTesting);
+    ADD_TEST(databaseInterfaceSuite, DatabaseEnvironmentTesting);
+    ADD_TEST(databaseInterfaceSuite, DatabaseFlushTesting);
 
-    AddSuite(sqlInterfaceSuite);
+    AddSuite(databaseInterfaceSuite);
+}
+
+void Database::TestingHelper::AddDatabaseGenerateSuite()
+{
+    auto databaseGenerateSuite = GenerateSuite("数据库生成");
+
+    AddSuite(databaseGenerateSuite);
 }
 
 void Database::TestingHelper::AddStatementSuite()
 {
     auto statementSuite = GenerateSuite("语句");
+
+    ADD_TEST(statementSuite, RedisStatementTesting);
+    ADD_TEST(statementSuite, SqlStatementTesting);
 
     AddSuite(statementSuite);
 }
@@ -93,17 +110,18 @@ void Database::TestingHelper::AddMysqlConnectorWrappersSuite()
 {
     auto mysqlConnectorWrappersSuite = GenerateSuite("Mysql Connector 包装器");
 
-    ADD_TEST(mysqlConnectorWrappersSuite, MysqlConnectorDatabaseObjectTesting);
-    ADD_TEST(mysqlConnectorWrappersSuite, MysqlConnectorSessionTesting);
-    ADD_TEST(mysqlConnectorWrappersSuite, MysqlConnectorSchemaTesting);
-    ADD_TEST(mysqlConnectorWrappersSuite, MysqlConnectorCollectionTesting);
-    ADD_TEST(mysqlConnectorWrappersSuite, MysqlConnectorDocResultTesting);
-    ADD_TEST(mysqlConnectorWrappersSuite, MysqlConnectorDocResultRowTesting);
-    ADD_TEST(mysqlConnectorWrappersSuite, MysqlConnectorTableTesting);
-    ADD_TEST(mysqlConnectorWrappersSuite, MysqlConnectorResultTesting);
-    ADD_TEST(mysqlConnectorWrappersSuite, MysqlConnectorResultRowTesting);
+    ADD_TEST(mysqlConnectorWrappersSuite, MysqlConnectorDatabaseFlushTesting);
 
     AddSuite(mysqlConnectorWrappersSuite);
+}
+
+void Database::TestingHelper::AddMysqlBoostWrappersSuite()
+{
+    auto mysqlBoostWrappersSuite = GenerateSuite("mysql boost 包装器");
+
+    ADD_TEST(mysqlBoostWrappersSuite, MysqlBoostDatabaseFlushTesting);
+
+    AddSuite(mysqlBoostWrappersSuite);
 }
 
 void Database::TestingHelper::AddSqlServerWrappersSuite()
@@ -139,4 +157,30 @@ void Database::TestingHelper::AddFlatFileWrappersSuite()
     auto flatFileWrappersSuite = GenerateSuite("平面文件包装器");
 
     AddSuite(flatFileWrappersSuite);
+}
+
+void Database::TestingHelper::AddMariaDBWrappersSuite()
+{
+    auto mariaDBWrappersSuite = GenerateSuite("mariaDB 包装器");
+
+    AddSuite(mariaDBWrappersSuite);
+}
+
+void Database::TestingHelper::AddMongoWrappersSuite()
+{
+    auto mongoWrappersSuite = GenerateSuite("mongo 包装器");
+
+    ADD_TEST(mongoWrappersSuite, MongoEnvironmentTesting);
+    ADD_TEST(mongoWrappersSuite, MongoDatabaseFlushTesting);
+
+    AddSuite(mongoWrappersSuite);
+}
+
+void Database::TestingHelper::AddRedisWrappersSuite()
+{
+    auto redisWrappersSuite = GenerateSuite("redis 包装器");
+
+    ADD_TEST(redisWrappersSuite, RedisDatabaseFlushTesting);
+
+    AddSuite(redisWrappersSuite);
 }

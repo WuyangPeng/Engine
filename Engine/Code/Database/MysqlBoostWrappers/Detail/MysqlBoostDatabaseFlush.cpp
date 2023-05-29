@@ -12,7 +12,7 @@
 #include "MysqlBoostDatabaseFlush.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Database/DatabaseInterface/BasisDatabaseContainer.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
 
 Database::MysqlBoostDatabaseFlush::MysqlBoostDatabaseFlush(const ConfigurationStrategy& configurationStrategy)
     : ParentType{ configurationStrategy }, connection{}
@@ -28,7 +28,7 @@ Database::MysqlBoostDatabaseFlush::MysqlBoostDatabaseFlush(const ConfigurationSt
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, MysqlBoostDatabaseFlush)
 
-void Database::MysqlBoostDatabaseFlush::ChangeDatabase(int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer)
+void Database::MysqlBoostDatabaseFlush::ChangeDatabase(int64_t userId, const BasisDatabaseManager& basisDatabaseContainer)
 {
     DATABASE_CLASS_IS_VALID_9;
 
@@ -37,7 +37,7 @@ void Database::MysqlBoostDatabaseFlush::ChangeDatabase(int64_t userId, const Bas
     connection.at(userId % connection.size())->ChangeDatabase(basisDatabaseContainer);
 }
 
-Database::BasisDatabaseContainer Database::MysqlBoostDatabaseFlush::SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::BasisDatabaseManager Database::MysqlBoostDatabaseFlush::SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -46,7 +46,7 @@ Database::BasisDatabaseContainer Database::MysqlBoostDatabaseFlush::SelectOne(co
     return connection.at(connection.size() - 1)->SelectOne(basisDatabaseContainer, fieldNameContainer);
 }
 
-Database::MysqlBoostDatabaseFlush::ResultContainer Database::MysqlBoostDatabaseFlush::SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::MysqlBoostDatabaseFlush::ResultContainer Database::MysqlBoostDatabaseFlush::SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -55,7 +55,7 @@ Database::MysqlBoostDatabaseFlush::ResultContainer Database::MysqlBoostDatabaseF
     return connection.at(connection.size() - 1)->SelectAll(basisDatabaseContainer, fieldNameContainer);
 }
 
-void Database::MysqlBoostDatabaseFlush::CheckWrappersStrategy(const BasisDatabaseContainer& basisDatabaseContainer) const
+void Database::MysqlBoostDatabaseFlush::CheckWrappersStrategy(const BasisDatabaseManager& basisDatabaseContainer) const
 {
     using System::operator&;
     if ((basisDatabaseContainer.GetWrappersStrategy() & WrappersStrategy::MysqlBoost) == WrappersStrategy::Null)

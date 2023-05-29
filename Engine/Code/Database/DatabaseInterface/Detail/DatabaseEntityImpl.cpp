@@ -14,15 +14,16 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Database/DatabaseInterface/BasisDatabase.h"
+#include "Database/DatabaseInterface/BasisDatabaseContainer.h"
 
-Database::DatabaseEntityImpl::DatabaseEntityImpl(WrappersStrategy wrappersStrategy, const std::string& databaseName, const ObjectContainer& key)
-    : entity{ wrappersStrategy, databaseName, ChangeType::Select, key }, modify{ wrappersStrategy, databaseName, ChangeType::Insert, key }
+Database::DatabaseEntityImpl::DatabaseEntityImpl(WrappersStrategy wrappersStrategy, const std::string_view& databaseName, const BasisDatabaseContainer& key)
+    : entity{ key }, modify{ wrappersStrategy, databaseName, ChangeType::Insert, key }
 {
     DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
-Database::DatabaseEntityImpl::DatabaseEntityImpl(BasisDatabaseContainer entity)
-    : entity{ std::move(entity) }, modify{ this->entity.GetWrappersStrategy(), this->entity.GetDatabaseName(), ChangeType::Update, this->entity.GetKey() }
+Database::DatabaseEntityImpl::DatabaseEntityImpl(const BasisDatabaseManager& entity)
+    : entity{ entity.GetDatabase() }, modify{ entity.GetWrappersStrategy(), entity.GetDatabaseName(), ChangeType::Update, entity.GetKey() }
 {
     DATABASE_SELF_CLASS_IS_VALID_9;
 }
@@ -44,9 +45,23 @@ void Database::DatabaseEntityImpl::ClearModify()
     modify.Clear();
 }
 
-Database::BasisDatabaseContainer Database::DatabaseEntityImpl::GetModify() const noexcept
+Database::BasisDatabaseManager Database::DatabaseEntityImpl::GetModify() const noexcept
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
     return modify;
+}
+
+Database::BasisDatabaseManager Database::DatabaseEntityImpl::GetDelete() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return BasisDatabaseManager{ modify.GetWrappersStrategy(), modify.GetDatabaseName(), ChangeType::Delete, modify.GetKey() };
+}
+
+bool Database::DatabaseEntityImpl::IsModify() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return modify.IsModify();
 }

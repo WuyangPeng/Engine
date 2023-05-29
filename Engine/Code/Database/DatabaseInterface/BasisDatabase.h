@@ -62,9 +62,9 @@ namespace Database
 
         NODISCARD std::any GetAnyValue() const;
 
-        NODISCARD std::string GetSqlString() const;
+        NODISCARD std::string GetSqlFieldString() const;
         NODISCARD std::string GetString() const;
-        NODISCARD std::string GetRedisString() const;
+        NODISCARD std::string GetQuotationMarkString() const;
 
     private:
         BasisDatabase(const std::string_view& fieldName, DataType dataType, const std::any& value);

@@ -13,7 +13,7 @@
 #include "Database/DatabaseDll.h"
 
 #include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/DatabaseInterface/BasisDatabaseContainer.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
 #include "Database/DatabaseInterface/DatabaseInterfaceFwd.h"
 #include "Database/MysqlConnectorWrappers/Using/MysqlConnectorUsing.h"
 
@@ -27,8 +27,8 @@ namespace Database
     {
     public:
         using ClassType = MysqlConnectorConnection;
-        using ResultContainer = std::vector<BasisDatabaseContainer>;
-        using FieldNameContainer = std::vector<FieldName>;
+        using ResultContainer = std::vector<BasisDatabaseManager>;
+        using FieldNameContainer = std::vector<DatabaseField>;
 
     public:
         explicit MysqlConnectorConnection(ConfigurationStrategy configurationStrategy);
@@ -41,16 +41,16 @@ namespace Database
     public:
         CLASS_INVARIANT_DECLARE;
 
-        void ChangeDatabase(const BasisDatabaseContainer& basisDatabaseContainer);
+        void ChangeDatabase(const BasisDatabaseManager& basisDatabaseContainer);
 
-        NODISCARD BasisDatabaseContainer SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
-        NODISCARD ResultContainer SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
-
-    private:
-        using Container = std::deque<BasisDatabaseContainer>;
+        NODISCARD BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
+        NODISCARD ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
 
     private:
-        NODISCARD BasisDatabaseContainer ExtractNext() noexcept;
+        using Container = std::deque<BasisDatabaseManager>;
+
+    private:
+        NODISCARD BasisDatabaseManager ExtractNext() noexcept;
 
         void WaitThread();
         void Execution();
@@ -59,7 +59,7 @@ namespace Database
         void Stop();
         void Join();
 
-        NODISCARD static BasisDatabase GetBasisDatabase(const FieldName& fieldName, const MysqlxValue& rowView);
+        NODISCARD static BasisDatabase GetBasisDatabase(const DatabaseField& fieldName, const MysqlxValue& rowView);
 
     private:
         ConfigurationStrategy configurationStrategy;

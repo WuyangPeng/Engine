@@ -110,12 +110,12 @@ void CoreTools::LogAsynchronousImpl::WaitThread()
 
         Execution();
 
-    } while (!isStop);
+    } while (!isStop || !logContainer.empty());
 }
 
 void CoreTools::LogAsynchronousImpl::Execution()
 {
-    while (!logContainer.empty())
+    if (!logContainer.empty())
     {
         try
         {

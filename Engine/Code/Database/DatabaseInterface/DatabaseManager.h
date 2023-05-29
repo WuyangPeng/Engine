@@ -26,19 +26,19 @@ namespace Database
     {
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(DatabaseManager);
-        using ResultContainer = std::vector<BasisDatabaseContainer>;
+        using ResultContainer = std::vector<BasisDatabaseManager>;
         using String = System::String;
-        using FieldNameContainer = std::vector<FieldName>;
+        using FieldNameContainer = std::vector<DatabaseField>;
 
     public:
         explicit DatabaseManager(const std::string& fileName);
 
         CLASS_INVARIANT_DECLARE;
 
-        void ChangeDatabase(const String& databaseIndex, int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer);
+        void ChangeDatabase(const String& databaseIndex, int64_t userId, const BasisDatabaseManager& basisDatabaseContainer);
 
-        NODISCARD BasisDatabaseContainer SelectOne(const String& databaseIndex, const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
-        NODISCARD ResultContainer SelectAll(const String& databaseIndex, const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
+        NODISCARD BasisDatabaseManager SelectOne(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
+        NODISCARD ResultContainer SelectAll(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
 
     private:
         PackageType impl;

@@ -10,17 +10,17 @@
 #include "Chapter.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Database/DatabaseInterface/BasisDatabaseContainerDetail.h"
+#include "Database/DatabaseInterface/BasisDatabaseManagerDetail.h"
 #include "Database/DatabaseInterface/DatabaseEntityDetail.h"
-#include "Database/DatabaseInterface/FieldName.h"
+#include "Database/DatabaseInterface/DatabaseField.h"
 
-DatabaseEntity::Chapter::Chapter(const BasisDatabaseContainer& entity)
+DatabaseEntity::Chapter::Chapter(const BasisDatabaseManager& entity)
     : ParentType{ entity },
       userId{ entity.GetValue<DataType::Int64>(userIdDescribe) },
       chapterId{ entity.GetValue<DataType::Int32>(chapterIdDescribe) },
       chapterName{ entity.GetValue<DataType::String>(chapterNameDescribe) },
       chanceWinning{ entity.GetValue<DataType::Double>(chanceWinningDescribe) },
-      isWinning{ entity.GetValue<DataType::Bool>(isWinningDescribe) },
+      winning{ entity.GetValue<DataType::Bool>(winningDescribe) },
       currency{ entity.GetValue<DataType::Int64Count>(currencyDescribe) },
       count{ entity.GetValue<DataType::Int32Count>(countDescribe) }
 {
@@ -33,7 +33,7 @@ DatabaseEntity::Chapter::Chapter(Database::WrappersStrategy wrappersStrategy, bo
       chapterId{ Database::Traits::Int32{} },
       chapterName{ Database::Traits::String{} },
       chanceWinning{ Database::Traits::Double{} },
-      isWinning{ Database::Traits::Bool{} },
+      winning{ Database::Traits::Bool{} },
       currency{ Database::Traits::Int64Count{} },
       count{ Database::Traits::Int32Count{} }
 {
@@ -72,11 +72,11 @@ Database::Traits::Double DatabaseEntity::Chapter::GetChanceWinning() const noexc
     return chanceWinning.GetValue();
 }
 
-Database::Traits::Bool DatabaseEntity::Chapter::IsChanceWinning() const noexcept
+Database::Traits::Bool DatabaseEntity::Chapter::IsWinning() const noexcept
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    return isWinning.GetValue();
+    return winning.GetValue();
 }
 
 Database::Traits::Int64Count DatabaseEntity::Chapter::GetCurrency() const noexcept
@@ -120,13 +120,13 @@ void DatabaseEntity::Chapter::SetChanceWinning(boost::call_traits<Database::Trai
     AddModify(chanceWinningDescribe, aChanceWinning);
 }
 
-void DatabaseEntity::Chapter::SetChanceWinning(boost::call_traits<Database::Traits::Bool>::param_type aIsWinning)
+void DatabaseEntity::Chapter::SetWinning(boost::call_traits<Database::Traits::Bool>::param_type aWinning)
 {
     DATABASE_CLASS_IS_VALID_9;
 
-    isWinning.SetValue(aIsWinning);
+    winning.SetValue(aWinning);
 
-    AddModify(isWinningDescribe, aIsWinning);
+    AddModify(winningDescribe, aWinning);
 }
 
 void DatabaseEntity::Chapter::SetCurrency(boost::call_traits<Database::Traits::Int64Count>::param_type aCurrency)
@@ -165,22 +165,31 @@ void DatabaseEntity::Chapter::ModifyCount(boost::call_traits<Database::Traits::I
     AddModify(countDescribe, GetCount());
 }
 
-DatabaseEntity::Chapter::FieldNameContainer DatabaseEntity::Chapter::GetFieldNameContainer() const
+const DatabaseEntity::Chapter::DatabaseFieldContainer& DatabaseEntity::Chapter::GetDatabaseFieldContainer()
 {
-    static FieldNameContainer fieldNameContainer{ Database::FieldName{ userIdDescribe, DataType::Int64 },
-                                                  Database::FieldName{ chapterIdDescribe, DataType::Int32 },
-                                                  Database::FieldName{ chapterNameDescribe, DataType::String },
-                                                  Database::FieldName{ chanceWinningDescribe, DataType::Double },
-                                                  Database::FieldName{ isWinningDescribe, DataType::Bool },
-                                                  Database::FieldName{ currencyDescribe, DataType::Int64Count },
-                                                  Database::FieldName{ countDescribe, DataType::Int32Count } };
+    static const DatabaseFieldContainer fieldNameContainer{ decltype(userId)::GetDatabaseField(),
+                                                            decltype(chapterId)::GetDatabaseField(),
+                                                            decltype(chapterName)::GetDatabaseField(),
+                                                            decltype(chanceWinning)::GetDatabaseField(),
+                                                            decltype(winning)::GetDatabaseField(),
+                                                            decltype(currency)::GetDatabaseField(),
+                                                            decltype(count)::GetDatabaseField() };
 
     return fieldNameContainer;
 }
 
-Database::DatabaseEntity::ObjectContainer DatabaseEntity::Chapter::GetKeyBasisDatabaseContainer(boost::call_traits<Database::Traits::Int64>::param_type userId)
+DatabaseEntity::Chapter::BasisDatabaseManager DatabaseEntity::Chapter::GetSelect(Database::WrappersStrategy wrappersStrategy,
+                                                                                 boost::call_traits<Database::Traits::Int64>::param_type userId)
 {
-    ObjectContainer objectContainer{ Database::BasisDatabase{ userIdDescribe, userId } };
+    return BasisDatabaseManager{ wrappersStrategy,
+                                 databaseName,
+                                 Database::ChangeType::Select,
+                                 GetKeyBasisDatabaseContainer(userId) };
+}
 
-    return objectContainer;
+Database::BasisDatabaseContainer DatabaseEntity::Chapter::GetKeyBasisDatabaseContainer(boost::call_traits<Database::Traits::Int64>::param_type userId)
+{
+    BasisDatabaseContainer basisDatabaseContainer{ BasisDatabaseContainer::ObjectContainer{ Database::BasisDatabase{ userIdDescribe, userId } } };
+
+    return basisDatabaseContainer;
 }

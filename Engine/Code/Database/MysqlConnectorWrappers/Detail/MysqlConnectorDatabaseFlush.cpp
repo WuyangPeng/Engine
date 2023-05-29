@@ -12,7 +12,7 @@
 #include "MysqlConnectorDatabaseFlush.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Database/DatabaseInterface/BasisDatabaseContainer.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
 
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
@@ -30,7 +30,7 @@ Database::MysqlConnectorDatabaseFlush::MysqlConnectorDatabaseFlush(const Configu
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, MysqlConnectorDatabaseFlush)
 
-void Database::MysqlConnectorDatabaseFlush::ChangeDatabase(int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer)
+void Database::MysqlConnectorDatabaseFlush::ChangeDatabase(int64_t userId, const BasisDatabaseManager& basisDatabaseContainer)
 {
     DATABASE_CLASS_IS_VALID_9;
 
@@ -39,7 +39,7 @@ void Database::MysqlConnectorDatabaseFlush::ChangeDatabase(int64_t userId, const
     connection.at(userId % connection.size())->ChangeDatabase(basisDatabaseContainer);
 }
 
-Database::BasisDatabaseContainer Database::MysqlConnectorDatabaseFlush::SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::BasisDatabaseManager Database::MysqlConnectorDatabaseFlush::SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -48,7 +48,7 @@ Database::BasisDatabaseContainer Database::MysqlConnectorDatabaseFlush::SelectOn
     return connection.at(connection.size() - 1)->SelectOne(basisDatabaseContainer, fieldNameContainer);
 }
 
-Database::MysqlConnectorDatabaseFlush::ResultContainer Database::MysqlConnectorDatabaseFlush::SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::MysqlConnectorDatabaseFlush::ResultContainer Database::MysqlConnectorDatabaseFlush::SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -57,7 +57,7 @@ Database::MysqlConnectorDatabaseFlush::ResultContainer Database::MysqlConnectorD
     return connection.at(connection.size() - 1)->SelectAll(basisDatabaseContainer, fieldNameContainer);
 }
 
-void Database::MysqlConnectorDatabaseFlush::CheckWrappersStrategy(const BasisDatabaseContainer& basisDatabaseContainer) const
+void Database::MysqlConnectorDatabaseFlush::CheckWrappersStrategy(const BasisDatabaseManager& basisDatabaseContainer) const
 {
     using System::operator&;
     if ((basisDatabaseContainer.GetWrappersStrategy() & WrappersStrategy::MysqlConnector) == WrappersStrategy::Null)

@@ -13,58 +13,59 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "Database/DatabaseInterface/BasisDatabase.h"
 #include "Database/DatabaseInterface/BasisDatabaseContainer.h"
-#include "Database/DatabaseInterface/FieldName.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
+#include "Database/DatabaseInterface/DatabaseField.h"
 
 CLASS_INVARIANT_STUB_DEFINE(Database, RedisStatement)
 
-std::string Database::RedisStatement::GenerateStatement(const BasisDatabaseContainer& basisDatabaseContainer)
+std::string Database::RedisStatement::GenerateStatement(const std::string& hostName, const BasisDatabaseManager& basisDatabaseManager)
 {
-    switch (basisDatabaseContainer.GetChangeType())
+    switch (basisDatabaseManager.GetChangeType())
     {
         case ChangeType::Insert:
-            return GenerateInsertStatement(basisDatabaseContainer);
+            return GenerateInsertStatement(hostName, basisDatabaseManager);
         case ChangeType::Update:
-            return GenerateUpdateStatement(basisDatabaseContainer);
+            return GenerateUpdateStatement(hostName, basisDatabaseManager);
         case ChangeType::Delete:
-            return GenerateDeleteStatement(basisDatabaseContainer);
+            return GenerateDeleteStatement(hostName, basisDatabaseManager);
     }
 
     return "";
 }
 
-std::string Database::RedisStatement::GenerateDeleteStatement(const BasisDatabaseContainer& basisDatabaseContainer)
+std::string Database::RedisStatement::GenerateDeleteStatement(const std::string& hostName, const BasisDatabaseManager& basisDatabaseManager)
 {
-    return "del " + GenerateKey(basisDatabaseContainer);
+    return "del " + GenerateKey(hostName, basisDatabaseManager);
 }
 
-std::string Database::RedisStatement::GenerateInsertStatement(const BasisDatabaseContainer& basisDatabaseContainer)
+std::string Database::RedisStatement::GenerateInsertStatement(const std::string& hostName, const BasisDatabaseManager& basisDatabaseManager)
 {
-    return GenerateUpdateStatement(basisDatabaseContainer);
+    return GenerateUpdateStatement(hostName, basisDatabaseManager);
 }
 
-std::string Database::RedisStatement::GenerateUpdateStatement(const BasisDatabaseContainer& basisDatabaseContainer)
+std::string Database::RedisStatement::GenerateUpdateStatement(const std::string& hostName, const BasisDatabaseManager& basisDatabaseManager)
 {
     std::string result{};
 
-    result += "hmset " + GenerateKey(basisDatabaseContainer);
+    result += "hmset " + GenerateKey(hostName, basisDatabaseManager);
 
-    for (const auto container = basisDatabaseContainer.GetContainer();
+    for (const auto container = basisDatabaseManager.GetDatabase();
          const auto& value : container)
     {
         result += " ";
         result += value.GetFieldName();
         result += " ";
-        result += value.GetRedisString();
+        result += value.GetString();
     }
 
     return result;
 }
 
-std::string Database::RedisStatement::GenerateSelectStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseContainer& basisDatabaseContainer)
+std::string Database::RedisStatement::GenerateSelectStatement(const std::string& hostName, const FieldNameContainer& fieldNameContainer, const BasisDatabaseManager& basisDatabaseManager)
 {
     std::string result{};
 
-    result += "hmget " + GenerateKey(basisDatabaseContainer);
+    result += "hmget " + GenerateKey(hostName, basisDatabaseManager);
 
     for (const auto& value : fieldNameContainer)
     {
@@ -76,19 +77,20 @@ std::string Database::RedisStatement::GenerateSelectStatement(const FieldNameCon
     return result;
 }
 
-std::string Database::RedisStatement::GenerateKey(const BasisDatabaseContainer& basisDatabaseContainer)
+std::string Database::RedisStatement::GenerateKey(const std::string& hostName, const BasisDatabaseManager& basisDatabaseManager)
 {
-    std::string result{};
+    auto result = hostName + ":";
 
-    result += basisDatabaseContainer.GetDatabaseName() + ":";
+    result += basisDatabaseManager.GetDatabaseName();
+    result += ":";
 
-    auto index = 1u;
-    for (const auto key = basisDatabaseContainer.GetKey();
+    auto index = 1;
+    for (const auto key = basisDatabaseManager.GetKey();
          const auto& value : key)
     {
-        result += value.GetRedisString();
+        result += value.GetQuotationMarkString();
 
-        if (index != key.size())
+        if (index != key.GetSize())
         {
             result += "_";
         }

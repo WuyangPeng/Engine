@@ -15,7 +15,7 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Database/DatabaseInterface/BasisDatabaseContainerDetail.h"
+#include "Database/DatabaseInterface/BasisDatabaseManagerDetail.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Database, DatabaseManager)
 
@@ -27,21 +27,21 @@ Database::DatabaseManager::DatabaseManager(const std::string& fileName)
 
 CLASS_INVARIANT_STUB_DEFINE(Database, DatabaseManager)
 
-void Database::DatabaseManager::ChangeDatabase(const String& databaseIndex, int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer)
+void Database::DatabaseManager::ChangeDatabase(const String& databaseIndex, int64_t userId, const BasisDatabaseManager& basisDatabaseContainer)
 {
     DATABASE_CLASS_IS_VALID_9;
 
     return impl->ChangeDatabase(databaseIndex, userId, basisDatabaseContainer);
 }
 
-Database::BasisDatabaseContainer Database::DatabaseManager::SelectOne(const String& databaseIndex, const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::BasisDatabaseManager Database::DatabaseManager::SelectOne(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
     return impl->SelectOne(databaseIndex, basisDatabaseContainer, fieldNameContainer);
 }
 
-Database::DatabaseManager::ResultContainer Database::DatabaseManager::SelectAll(const String& databaseIndex, const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::DatabaseManager::ResultContainer Database::DatabaseManager::SelectAll(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 

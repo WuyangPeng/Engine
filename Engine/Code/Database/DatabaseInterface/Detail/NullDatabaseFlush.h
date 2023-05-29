@@ -30,10 +30,10 @@ namespace Database
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void ChangeDatabase(int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer) noexcept override;
+        void ChangeDatabase(int64_t userId, const BasisDatabaseManager& basisDatabaseContainer) noexcept override;
 
-        NODISCARD BasisDatabaseContainer SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const override;
-        NODISCARD ResultContainer SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const noexcept override;
+        NODISCARD BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const override;
+        NODISCARD ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const noexcept override;
     };
 }
 

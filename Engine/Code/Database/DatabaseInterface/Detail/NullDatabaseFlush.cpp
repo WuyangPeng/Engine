@@ -13,6 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "Database/DatabaseInterface/BasisDatabase.h"
 #include "Database/DatabaseInterface/BasisDatabaseContainer.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
 
 Database::NullDatabaseFlush::NullDatabaseFlush(const ConfigurationStrategy& configurationStrategy) noexcept
     : ParentType{ configurationStrategy }
@@ -22,23 +23,23 @@ Database::NullDatabaseFlush::NullDatabaseFlush(const ConfigurationStrategy& conf
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, NullDatabaseFlush)
 
-void Database::NullDatabaseFlush::ChangeDatabase(int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer) noexcept
+void Database::NullDatabaseFlush::ChangeDatabase(int64_t userId, const BasisDatabaseManager& basisDatabaseContainer) noexcept
 {
     DATABASE_CLASS_IS_VALID_9;
 
     System::UnusedFunction(userId, basisDatabaseContainer);
 }
 
-Database::BasisDatabaseContainer Database::NullDatabaseFlush::SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::BasisDatabaseManager Database::NullDatabaseFlush::SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
     System::UnusedFunction(fieldNameContainer);
 
-    return BasisDatabaseContainer{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, BasisDatabaseContainer::ObjectContainer{} };
+    return BasisDatabaseManager{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, BasisDatabaseContainer::Create() };
 }
 
-Database::DatabaseFlushImpl::ResultContainer Database::NullDatabaseFlush::SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const noexcept
+Database::DatabaseFlushImpl::ResultContainer Database::NullDatabaseFlush::SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const noexcept
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 

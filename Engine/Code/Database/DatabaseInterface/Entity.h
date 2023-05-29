@@ -12,6 +12,8 @@
 
 #include "Database/DatabaseDll.h"
 
+#include "DataTypeTraits.h"
+#include "DatabaseField.h"
 #include "System/Helper/PragmaWarning/CallTraits.h"
 #include "Database/DatabaseInterface/DatabaseInterfaceFwd.h"
 
@@ -45,6 +47,8 @@ namespace Database
         {
             return Index;
         }
+
+        NODISCARD static DatabaseField GetDatabaseField() noexcept;
 
         NODISCARD EntityType GetValue() const noexcept(std::is_arithmetic_v<EntityType>);
         void SetValue(typename boost::call_traits<EntityType>::param_type aEntity) noexcept(std::is_arithmetic_v<EntityType>);

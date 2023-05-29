@@ -23,20 +23,20 @@ namespace Database
     {
     public:
         using ClassType = SqlStatement;
-        using FieldNameContainer = std::vector<FieldName>;
+        using FieldNameContainer = std::vector<DatabaseField>;
 
     public:
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD static std::string GenerateStatement(const BasisDatabaseContainer& basisDatabaseContainer);
-        NODISCARD static std::string GenerateSelectOneStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseContainer& basisDatabaseContainer);
-        NODISCARD static std::string GenerateSelectAllStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseContainer& basisDatabaseContainer);
+        NODISCARD static std::string GenerateStatement(const BasisDatabaseManager& basisDatabaseManager);
+        NODISCARD static std::string GenerateSelectOneStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseManager& basisDatabaseManager);
+        NODISCARD static std::string GenerateSelectAllStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseManager& basisDatabaseManager);
 
     private:
-        NODISCARD static std::string GenerateInsertStatement(const BasisDatabaseContainer& basisDatabaseContainer);
-        NODISCARD static std::string GenerateUpdateStatement(const BasisDatabaseContainer& basisDatabaseContainer);
-        NODISCARD static std::string GenerateDeleteStatement(const BasisDatabaseContainer& basisDatabaseContainer);
-        NODISCARD static std::string GenerateSelectStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseContainer& basisDatabaseContainer);
+        NODISCARD static std::string GenerateInsertStatement(const BasisDatabaseManager& basisDatabaseManager);
+        NODISCARD static std::string GenerateUpdateStatement(const BasisDatabaseManager& basisDatabaseManager);
+        NODISCARD static std::string GenerateDeleteStatement(const BasisDatabaseManager& basisDatabaseManager);
+        NODISCARD static std::string GenerateSelectStatement(const FieldNameContainer& fieldNameContainer, const BasisDatabaseManager& basisDatabaseManager);
     };
 
 }

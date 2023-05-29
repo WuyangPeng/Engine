@@ -156,7 +156,7 @@
     <ClCompile Include="..\..\..\Code\Database\Configuration\Detail\ConfigurationStrategyImpl.cpp">
       <Filter>Configuration 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseContainerImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseManagerImpl.cpp">
       <Filter>DatabaseInterface 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseImpl.cpp">
@@ -171,7 +171,7 @@
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\DatabaseEntity.cpp">
       <Filter>DatabaseInterface 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainer.cpp">
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseManager.cpp">
       <Filter>DatabaseInterface 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\DatabaseManagerImpl.cpp">
@@ -236,6 +236,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Database\Statement\RedisStatement.cpp">
       <Filter>Statement 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseContainerImpl.cpp">
+      <Filter>DatabaseInterface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainer.cpp">
+      <Filter>DatabaseInterface 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -374,7 +380,7 @@
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Flags\DataType.h">
       <Filter>DatabaseInterface 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseContainerImpl.h">
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseManagerImpl.h">
       <Filter>DatabaseInterface 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseImpl.h">
@@ -398,7 +404,7 @@
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseInterfaceInternalFwd.h">
       <Filter>DatabaseInterface 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainer.h">
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseManager.h">
       <Filter>DatabaseInterface 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DataTypeTraits.h">
@@ -416,7 +422,7 @@
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\EntityDetail.h">
       <Filter>DatabaseInterface 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainerDetail.h">
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseManagerDetail.h">
       <Filter>DatabaseInterface 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseEntityDetail.h">
@@ -449,7 +455,7 @@
     <ClInclude Include="..\..\..\Code\Database\Statement\SqlStatement.h">
       <Filter>Statement 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\FieldName.h">
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\DatabaseField.h">
       <Filter>DatabaseInterface 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\MysqlConnectorWrappers\Detail\MysqlConnectorDatabaseFlush.h">
@@ -487,6 +493,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\Statement\RedisStatement.h">
       <Filter>Statement 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Detail\BasisDatabaseContainerImpl.h">
+      <Filter>DatabaseInterface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainer.h">
+      <Filter>DatabaseInterface 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

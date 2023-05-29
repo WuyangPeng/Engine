@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/24 13:36)
+///	引擎版本：0.9.0.10 (2023/05/25 16:48)
 
 #ifndef DATABASE_DATABASE_INTERFACE_BASIS_DATABASE_CONTAINER_IMPL_H
 #define DATABASE_DATABASE_INTERFACE_BASIS_DATABASE_CONTAINER_IMPL_H
@@ -24,30 +24,29 @@ namespace Database
     public:
         using ClassType = BasisDatabaseContainerImpl;
         using ObjectContainer = std::vector<BasisDatabase>;
+        using ObjectContainerConstIter = ObjectContainer::const_iterator;
 
     public:
-        BasisDatabaseContainerImpl(WrappersStrategy wrappersStrategy, std::string databaseName, ChangeType changeType, ObjectContainer key) noexcept;
+        BasisDatabaseContainerImpl() noexcept;
+        explicit BasisDatabaseContainerImpl(ObjectContainer container) noexcept;
+        explicit BasisDatabaseContainerImpl(const BasisDatabase& basisDatabase);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD WrappersStrategy GetWrappersStrategy() const noexcept;
-        NODISCARD std::string GetDatabaseName() const;
-        NODISCARD ChangeType GetChangeType() const noexcept;
-        NODISCARD ObjectContainer GetKey() const;
         NODISCARD ObjectContainer GetContainer() const;
 
         void Modify(const BasisDatabase& basisDatabase);
 
-        void Clear() noexcept;
-
         NODISCARD std::any GetAnyValue(const std::string_view& fieldName) const;
 
+        NODISCARD ObjectContainerConstIter begin() const noexcept;
+        NODISCARD ObjectContainerConstIter end() const noexcept;
+
+        NODISCARD int GetSize() const;
+
     private:
-        WrappersStrategy wrappersStrategy;
         ObjectContainer container;
-        std::string databaseName;
-        ChangeType changeType;
-        ObjectContainer key;
     };
 }
+
 #endif  // DATABASE_DATABASE_INTERFACE_BASIS_DATABASE_CONTAINER_IMPL_H

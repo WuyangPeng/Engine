@@ -12,7 +12,7 @@
 #include "RedisDatabaseFlush.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Database/DatabaseInterface/BasisDatabaseContainer.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
 
 #ifdef DATABASE_USE_REDIS
 
@@ -30,7 +30,7 @@ Database::RedisDatabaseFlush::RedisDatabaseFlush(const ConfigurationStrategy& co
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Database, RedisDatabaseFlush)
 
-void Database::RedisDatabaseFlush::ChangeDatabase(int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer)
+void Database::RedisDatabaseFlush::ChangeDatabase(int64_t userId, const BasisDatabaseManager& basisDatabaseContainer)
 {
     DATABASE_CLASS_IS_VALID_9;
 
@@ -39,7 +39,7 @@ void Database::RedisDatabaseFlush::ChangeDatabase(int64_t userId, const BasisDat
     connection.at(userId % connection.size())->ChangeDatabase(basisDatabaseContainer);
 }
 
-Database::BasisDatabaseContainer Database::RedisDatabaseFlush::SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::BasisDatabaseManager Database::RedisDatabaseFlush::SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -48,7 +48,7 @@ Database::BasisDatabaseContainer Database::RedisDatabaseFlush::SelectOne(const B
     return connection.at(connection.size() - 1)->SelectOne(basisDatabaseContainer, fieldNameContainer);
 }
 
-Database::RedisDatabaseFlush::ResultContainer Database::RedisDatabaseFlush::SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::RedisDatabaseFlush::ResultContainer Database::RedisDatabaseFlush::SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -57,7 +57,7 @@ Database::RedisDatabaseFlush::ResultContainer Database::RedisDatabaseFlush::Sele
     return connection.at(connection.size() - 1)->SelectAll(basisDatabaseContainer, fieldNameContainer);
 }
 
-void Database::RedisDatabaseFlush::CheckWrappersStrategy(const BasisDatabaseContainer& basisDatabaseContainer) const
+void Database::RedisDatabaseFlush::CheckWrappersStrategy(const BasisDatabaseManager& basisDatabaseContainer) const
 {
     using System::operator&;
     if ((basisDatabaseContainer.GetWrappersStrategy() & WrappersStrategy::Redis) == WrappersStrategy::Null)

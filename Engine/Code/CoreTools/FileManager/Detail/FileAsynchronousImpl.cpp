@@ -108,12 +108,12 @@ void CoreTools::FileAsynchronousImpl::WaitThread()
 
         Execution();
 
-    } while (!isStop);
+    } while (!isStop || !fileContainer.empty());
 }
 
 void CoreTools::FileAsynchronousImpl::Execution()
 {
-    while (!fileContainer.empty())
+    if (!fileContainer.empty())
     {
         EXCEPTION_TRY
         {

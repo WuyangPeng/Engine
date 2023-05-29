@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Database/Configuration/AnalysisDatabaseConfiguration.h"
-#include "Database/DatabaseInterface/BasisDatabaseContainerDetail.h"
+#include "Database/DatabaseInterface/BasisDatabaseManagerDetail.h"
 #include "Database/DatabaseInterface/DatabaseEnvironment.h"
 #include "Database/DatabaseInterface/DatabaseFlush.h"
 
@@ -38,7 +38,7 @@ void Database::DatabaseManagerImpl::LoadFlush(const std::string& fileName)
 
 CLASS_INVARIANT_STUB_DEFINE(Database, DatabaseManagerImpl)
 
-void Database::DatabaseManagerImpl::ChangeDatabase(const String& databaseIndex, int64_t userId, const BasisDatabaseContainer& basisDatabaseContainer)
+void Database::DatabaseManagerImpl::ChangeDatabase(const String& databaseIndex, int64_t userId, const BasisDatabaseManager& basisDatabaseContainer)
 {
     DATABASE_CLASS_IS_VALID_9;
 
@@ -53,7 +53,7 @@ void Database::DatabaseManagerImpl::ChangeDatabase(const String& databaseIndex, 
     }
 }
 
-Database::BasisDatabaseContainer Database::DatabaseManagerImpl::SelectOne(const String& databaseIndex, const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::BasisDatabaseManager Database::DatabaseManagerImpl::SelectOne(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -68,7 +68,7 @@ Database::BasisDatabaseContainer Database::DatabaseManagerImpl::SelectOne(const 
     }
 }
 
-Database::DatabaseManagerImpl::ResultContainer Database::DatabaseManagerImpl::SelectAll(const String& databaseIndex, const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
+Database::DatabaseManagerImpl::ResultContainer Database::DatabaseManagerImpl::SelectAll(const String& databaseIndex, const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 

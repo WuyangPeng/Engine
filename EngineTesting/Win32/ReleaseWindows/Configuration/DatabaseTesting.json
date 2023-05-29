@@ -8,18 +8,25 @@
     "AnalysisDatabaseConfigurationTesting": 1
   },
 
-  "sqlInterfaceSuite": {
-    "DatabaseObjectTesting": 1,
-    "SessionTesting": 1,
-    "SchemaTesting": 1,
-    "CollectionTesting": 1,
-    "TableTesting": 1,
-    "ResultTesting": 1,
-    "ResultRowTesting": 1
+  "databaseInterfaceSuite": {
+    "BasisDatabaseTesting": 1,
+    "BasisDatabaseContainerTesting": 1,
+    "BasisDatabaseManagerTesting": 1,
+    "DatabaseEntityTesting": 1,
+    "EntityTesting": 1,
+    "DatabaseManagerTesting": 1,
+    "DatabaseFieldTesting": 1,
+    "DatabaseEnvironmentTesting": 1,
+    "DatabaseFlushTesting": 1
+  },
+
+  "databaseGenerateSuite": {
+
   },
 
   "statementSuite": {
-
+    "RedisStatementTesting": 1,
+    "SqlStatementTesting": 1
   },
 
   "mysqlWrappersSuite": {
@@ -27,15 +34,11 @@
   },
 
   "mysqlConnectorWrappersSuite": {
-    "MysqlConnectorDatabaseObjectTesting": 1,
-    "MysqlConnectorSessionTesting": 1,
-    "MysqlConnectorSchemaTesting": 1,
-    "MysqlConnectorCollectionTesting": 1,
-    "MysqlConnectorDocResultTesting": 1,
-    "MysqlConnectorDocResultRowTesting": 1,
-    "MysqlConnectorTableTesting": 1,
-    "MysqlConnectorResultTesting": 1,
-    "MysqlConnectorResultRowTesting": 1
+    "MysqlConnectorDatabaseFlushTesting": 1 
+  },
+
+  "mysqlBoostWrappersSuite": {
+    "MysqlBoostDatabaseFlushTesting": 1
   },
 
   "sqlServerWrappersSuite": {
@@ -57,5 +60,18 @@
 
   "flatFileWrappersSuite": {
 
+  },
+
+  "mariaDBWrappersSuite": {
+
+  },
+
+  "mongoWrappersSuite": {
+    "MongoEnvironmentTesting": 1,
+    "MongoDatabaseFlushTesting": 1
+  },
+
+  "redisWrappersSuite": {
+    "RedisDatabaseFlushTesting": 1
   }
 }

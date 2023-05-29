@@ -31,6 +31,14 @@ bool Database::Entity<FieldName, Type, Index>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <const std::string_view& FieldName, Database::DataType Type, Database::IndexType Index>
+Database::DatabaseField Database::Entity<FieldName, Type, Index>::GetDatabaseField() noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return DatabaseField{ FieldName, Type, Index };
+}
+
+template <const std::string_view& FieldName, Database::DataType Type, Database::IndexType Index>
 typename Database::Entity<FieldName, Type, Index>::EntityType Database::Entity<FieldName, Type, Index>::GetValue() const noexcept(std::is_arithmetic_v<EntityType>)
 {
     DATABASE_CLASS_IS_VALID_CONST_9;

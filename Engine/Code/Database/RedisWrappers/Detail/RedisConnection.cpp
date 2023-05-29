@@ -11,13 +11,15 @@
 
 #include "RedisConnection.h"
 #include "RedisReply.h"
+#include "System/Helper/PragmaWarning/LexicalCast.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Database/DatabaseInterface/BasisDatabaseContainer.h"
 #include "Database/DatabaseInterface/BasisDatabaseDetail.h"
-#include "Database/DatabaseInterface/FieldName.h"
+#include "Database/DatabaseInterface/BasisDatabaseManager.h"
+#include "Database/DatabaseInterface/DatabaseField.h"
 #include "Database/Statement/RedisStatement.h"
 
 using namespace std::literals;
@@ -63,7 +65,7 @@ Database::RedisConnection::~RedisConnection() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Database, RedisConnection)
 
-void Database::RedisConnection::ChangeDatabase(const BasisDatabaseContainer& basisDatabaseContainer)
+void Database::RedisConnection::ChangeDatabase(const BasisDatabaseManager& basisDatabaseContainer)
 {
     DATABASE_CLASS_IS_VALID_9;
 
@@ -93,7 +95,7 @@ void Database::RedisConnection::Join()
     }
 }
 
-Database::BasisDatabase Database::RedisConnection::GetBasisDatabase(const FieldName& fieldName, const redisReply* redisReply)
+Database::BasisDatabase Database::RedisConnection::GetBasisDatabase(const DatabaseField& fieldName, const redisReply* redisReply)
 {
     switch (fieldName.GetDataType())
     {
@@ -102,17 +104,17 @@ Database::BasisDatabase Database::RedisConnection::GetBasisDatabase(const FieldN
 
         case DataType::Int32:
         case DataType::Int32Count:
-            return BasisDatabase{ fieldName.GetFieldName(), boost::numeric_cast<int32_t>(redisReply->integer) };
+            return BasisDatabase{ fieldName.GetFieldName(), boost::lexical_cast<int32_t>(redisReply->str) };
 
         case DataType::Int64:
         case DataType::Int64Count:
-            return BasisDatabase{ fieldName.GetFieldName(), redisReply->integer };
+            return BasisDatabase{ fieldName.GetFieldName(), boost::lexical_cast<int64_t>(redisReply->str) };
 
         case DataType::Double:
-            return BasisDatabase{ fieldName.GetFieldName(), redisReply->dval };
+            return BasisDatabase{ fieldName.GetFieldName(), boost::lexical_cast<double>(redisReply->str) };
 
         case DataType::Bool:
-            return BasisDatabase{ fieldName.GetFieldName(), redisReply->integer != 0 };
+            return BasisDatabase{ fieldName.GetFieldName(), redisReply->str == "true"s };
 
         default:
             return BasisDatabase{ fieldName.GetFieldName(), ""s };
@@ -130,18 +132,18 @@ void Database::RedisConnection::WaitThread()
 
         Execution();
 
-    } while (!isStop);
+    } while (!isStop || !container.empty());
 }
 
 void Database::RedisConnection::Execution()
 {
-    while (!container.empty())
+    if (!container.empty())
     {
         EXCEPTION_TRY
         {
             const auto basisDatabaseContainer = ExtractNext();
 
-            const auto sql = RedisStatement::GenerateStatement(basisDatabaseContainer);
+            const auto sql = RedisStatement::GenerateStatement(configurationStrategy.GetDBHostName(), basisDatabaseContainer);
 
             RedisReply redisReply{ redisContext, sql };
         }
@@ -149,7 +151,7 @@ void Database::RedisConnection::Execution()
     }
 }
 
-Database::BasisDatabaseContainer Database::RedisConnection::ExtractNext() noexcept
+Database::BasisDatabaseManager Database::RedisConnection::ExtractNext() noexcept
 {
     auto basisDatabaseContainer = container.front();
 
@@ -158,15 +160,17 @@ Database::BasisDatabaseContainer Database::RedisConnection::ExtractNext() noexce
     return basisDatabaseContainer;
 }
 
-Database::BasisDatabaseContainer Database::RedisConnection::SelectOne(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
+Database::BasisDatabaseManager Database::RedisConnection::SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    const auto statement = RedisStatement::GenerateSelectStatement(fieldNameContainer, basisDatabaseContainer);
+    std::unique_lock uniqueLock{ mutex };
+
+    const auto statement = RedisStatement::GenerateSelectStatement(configurationStrategy.GetDBHostName(), fieldNameContainer, basisDatabaseContainer);
 
     RedisReply redisReply{ redisContext, statement };
 
-    BasisDatabaseContainer select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
+    BasisDatabaseManager select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
 
     if (const auto* result = redisReply.GetRedisReply();
         result != nullptr)
@@ -185,7 +189,12 @@ Database::BasisDatabaseContainer Database::RedisConnection::SelectOne(const Basi
             {
                 for (auto i = 0u; i < result->elements; ++i)
                 {
-                    select.Modify(GetBasisDatabase(fieldNameContainer.at(i), *result->element));
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26481)
+
+                    select.Modify(GetBasisDatabase(fieldNameContainer.at(i), result->element[i]));
+
+    #include STSTEM_WARNING_POP
                 }
             }
             break;
@@ -197,17 +206,21 @@ Database::BasisDatabaseContainer Database::RedisConnection::SelectOne(const Basi
     return select;
 }
 
-Database::RedisConnection::ResultContainer Database::RedisConnection::SelectAll(const BasisDatabaseContainer& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
+Database::RedisConnection::ResultContainer Database::RedisConnection::SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer)
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    const auto statement = RedisStatement::GenerateSelectStatement(fieldNameContainer, basisDatabaseContainer);
+    std::unique_lock uniqueLock{ mutex };
+
+    const auto statement = RedisStatement::GenerateSelectStatement(configurationStrategy.GetDBHostName(), fieldNameContainer, basisDatabaseContainer);
 
     RedisReply redisReply{ redisContext, statement };
 
+    uniqueLock.unlock();
+
     ResultContainer resultContainer{};
 
-    BasisDatabaseContainer select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
+    BasisDatabaseManager select{ basisDatabaseContainer.GetWrappersStrategy(), basisDatabaseContainer.GetDatabaseName(), ChangeType::Select, basisDatabaseContainer.GetKey() };
 
     if (const auto* result = redisReply.GetRedisReply();
         result != nullptr)
@@ -224,7 +237,12 @@ Database::RedisConnection::ResultContainer Database::RedisConnection::SelectAll(
             {
                 for (auto i = 0u; i < result->elements; ++i)
                 {
-                    select.Modify(GetBasisDatabase(fieldNameContainer.at(i), *result->element));
+    #include STSTEM_WARNING_PUSH
+    #include SYSTEM_WARNING_DISABLE(26481)
+
+                    select.Modify(GetBasisDatabase(fieldNameContainer.at(i), result->element[i]));
+
+    #include STSTEM_WARNING_POP
                 }
             }
             break;
