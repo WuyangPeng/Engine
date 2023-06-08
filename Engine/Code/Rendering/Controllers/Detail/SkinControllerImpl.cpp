@@ -188,7 +188,7 @@ int Rendering::SkinControllerImpl::GetStreamingSize() const noexcept
     result += CoreTools::GetStreamSize(numBones);
 
     result += numBones * RENDERING_STREAM_SIZE(bones.at(0));
-    result += size * MATHEMATICS_STREAM_SIZE(weights.at(0));
+    result += size * Mathematics::GetStreamSize(weights.at(0));
     result += size * CoreTools::GetStreamSize(offsets.at(0));
 
     return result;

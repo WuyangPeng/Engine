@@ -9,10 +9,10 @@
 
 #include "Rectangle3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Rectangle3Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class Rectangle3<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Rectangle3Testing)
+Mathematics::Rectangle3Testing::Rectangle3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Rectangle3Testing)
+
+void Mathematics::Rectangle3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Rectangle3Testing::MainTest()
 {
@@ -38,9 +49,9 @@ void Mathematics::Rectangle3Testing::RectangleTest()
 
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D center(firstRandomDistribution(generator),
                               firstRandomDistribution(generator),

@@ -5,13 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 15:46)
+///	引擎版本：0.9.0.11 (2023/05/30 09:40)
 
 #ifndef CORE_TOOLS_REPORT_OUTPUT_REPORT_OUTPUT_H
 #define CORE_TOOLS_REPORT_OUTPUT_REPORT_OUTPUT_H
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "CoreTools/LogManager/LogManagerFwd.h"
+#include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 #include "CoreTools/UnitTestSuite/OStreamShared.h"
 
 #include <string>
@@ -36,9 +38,9 @@ namespace CoreTools
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        void PrintString(const std::string& characterString);
+        void PrintString(const std::string& characterString, LogLevel logLevel = LogLevel::Trace);
         void PrintNewLine();
-        void PrintNumber(int number);
+        void PrintNumber(int number, LogLevel logLevel = LogLevel::Trace);
 
     protected:
         NODISCARD OStreamShared GetStream() noexcept;

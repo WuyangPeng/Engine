@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_ALGEBRA_SUITE_QUATERNION_FACTOR_TESTING_H
 #define MATHEMATICS_ALGEBRA_SUITE_QUATERNION_FACTOR_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class QuaternionFactorTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(QuaternionFactorTesting);
+        using ClassType = QuaternionFactorTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit QuaternionFactorTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

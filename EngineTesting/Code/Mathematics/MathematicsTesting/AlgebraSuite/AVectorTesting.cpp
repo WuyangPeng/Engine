@@ -9,10 +9,10 @@
 
 #include "AVectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Base/Float.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class AVector<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, AVectorTesting)
+Mathematics::AVectorTesting::AVectorTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, AVectorTesting)
+
+void Mathematics::AVectorTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::AVectorTesting::MainTest()
 {
@@ -165,9 +176,7 @@ void Mathematics::AVectorTesting::VectorCalculateTest()
     default_random_engine randomEngine{};
     const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         AVectorD firstVector{ randomDistribution(randomEngine), randomDistribution(randomEngine), randomDistribution(randomEngine) };
 

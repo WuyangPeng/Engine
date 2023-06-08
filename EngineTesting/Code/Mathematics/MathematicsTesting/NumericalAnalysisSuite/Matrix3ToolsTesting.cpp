@@ -9,9 +9,9 @@
 
 #include "Matrix3ToolsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/Matrix3ToolsDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -24,7 +24,18 @@ namespace Mathematics
     template class Matrix3Tools<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Matrix3ToolsTesting)
+Mathematics::Matrix3ToolsTesting::Matrix3ToolsTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Matrix3ToolsTesting)
+
+void Mathematics::Matrix3ToolsTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Matrix3ToolsTesting::MainTest()
 {
@@ -38,9 +49,9 @@ void Mathematics::Matrix3ToolsTesting::SingularValueTest()
     default_random_engine generator;
     const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Matrix3D matrix;
 
@@ -76,9 +87,9 @@ void Mathematics::Matrix3ToolsTesting::PolarDecompositionValueTest()
     default_random_engine generator;
     const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Matrix3D matrix;
 
@@ -112,9 +123,9 @@ void Mathematics::Matrix3ToolsTesting::QDUDecompositionValueTest()
     default_random_engine generator;
     const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Matrix3D matrix;
 

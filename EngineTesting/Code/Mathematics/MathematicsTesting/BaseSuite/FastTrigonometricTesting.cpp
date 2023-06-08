@@ -9,10 +9,10 @@
 
 #include "FastTrigonometricTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/FastTrigonometricDetail.h"
 #include "Mathematics/Base/MathDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -28,7 +28,18 @@ namespace Mathematics
 
 #endif  // BUILDING_MATHEMATICS_STATIC
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, FastTrigonometricTesting)
+Mathematics::FastTrigonometricTesting::FastTrigonometricTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, FastTrigonometricTesting)
+
+void Mathematics::FastTrigonometricTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::FastTrigonometricTesting::MainTest()
 {
@@ -52,9 +63,9 @@ void Mathematics::FastTrigonometricTesting::FloatFastSinTest()
     default_random_engine randomEngine{};
     const uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetHalfPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 
@@ -72,9 +83,9 @@ void Mathematics::FastTrigonometricTesting::DoubleFastSinTest()
     default_random_engine randomEngine{};
     const uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetHalfPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const double value = randomDistribution(randomEngine);
 
@@ -98,9 +109,9 @@ void Mathematics::FastTrigonometricTesting::FloatFastCosTest()
     default_random_engine randomEngine{};
     const uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetHalfPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 
@@ -118,9 +129,9 @@ void Mathematics::FastTrigonometricTesting::DoubleFastCosTest()
     default_random_engine randomEngine{};
     const uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetHalfPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 
@@ -144,9 +155,9 @@ void Mathematics::FastTrigonometricTesting::FloatFastTanTest()
     default_random_engine randomEngine{};
     const uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetQuarterPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 
@@ -164,9 +175,9 @@ void Mathematics::FastTrigonometricTesting::DoubleFastTanTest()
     default_random_engine randomEngine{};
     const uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetQuarterPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 
@@ -190,9 +201,9 @@ void Mathematics::FastTrigonometricTesting::FloatFastInvSinTest()
     default_random_engine randomEngine{};
     const uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetValue(1) };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 
@@ -208,9 +219,9 @@ void Mathematics::FastTrigonometricTesting::DoubleFastInvSinTest()
     default_random_engine randomEngine{};
     const uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetValue(1) };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 
@@ -232,9 +243,9 @@ void Mathematics::FastTrigonometricTesting::FloatFastInvCosTest()
     default_random_engine randomEngine{};
     const uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetValue(1) };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 
@@ -250,9 +261,9 @@ void Mathematics::FastTrigonometricTesting::DoubleFastInvCosTest()
     default_random_engine randomEngine{};
     const uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetValue(1) };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 
@@ -274,9 +285,9 @@ void Mathematics::FastTrigonometricTesting::FloatFastInvTanTest()
     default_random_engine randomEngine{};
     const uniform_real<float> randomDistribution{ MathF::GetValue(-1), MathF::GetValue(1) };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 
@@ -292,9 +303,9 @@ void Mathematics::FastTrigonometricTesting::DoubleFastInvTanTest()
     default_random_engine randomEngine{};
     const uniform_real<double> randomDistribution{ MathD::GetValue(-1), MathD::GetValue(1) };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 

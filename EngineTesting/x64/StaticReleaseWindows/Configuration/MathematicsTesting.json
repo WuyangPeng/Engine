@@ -208,7 +208,7 @@
     "GreatArcFit3Testing": 100,
     "PolynomialFit2Testing": 100,
     "PolynomialFit3Testing": 100,
-    "PolynomialFit4Testing": 10,
+    "PolynomialFit4Testing": 0,
     "PolynomialFit2PowersTesting": 100,
     "PolynomialFit3PowersTesting": 100,
     "PolynomialFit4PowersTesting": 100

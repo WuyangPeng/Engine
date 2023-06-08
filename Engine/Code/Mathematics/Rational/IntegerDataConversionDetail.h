@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/11 16:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:11)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_CONVERSION_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_CONVERSION_DETAIL_H
@@ -37,7 +37,6 @@ Mathematics::IntegerDataConversion<N, T>::IntegerDataConversion(const IntegerDat
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>::Init(const SignedIntegerType&)
 {
@@ -57,7 +56,6 @@ void Mathematics::IntegerDataConversion<N, T>::Init(const SignedIntegerType&)
     }
 }
 
-// private
 template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>::Init(const UnsignedIntegerType&)
 {
@@ -75,7 +73,6 @@ void Mathematics::IntegerDataConversion<N, T>::Init(const UnsignedIntegerType&)
     }
 }
 
-// private
 template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>::Init(const FloatType&)
 {
@@ -84,7 +81,6 @@ void Mathematics::IntegerDataConversion<N, T>::Init(const FloatType&)
     InitToFloatingPoint();
 }
 
-// private
 template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>::Init(const DoubleType&)
 {
@@ -93,7 +89,6 @@ void Mathematics::IntegerDataConversion<N, T>::Init(const DoubleType&)
     InitToFloatingPoint();
 }
 
-// private
 template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>::InitToFloatingPoint()
 {
@@ -111,7 +106,6 @@ void Mathematics::IntegerDataConversion<N, T>::InitToFloatingPoint()
     }
 }
 
-// private
 template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>::CalculateConversionValue()
 {
@@ -138,7 +132,6 @@ void Mathematics::IntegerDataConversion<N, T>::CalculateConversionValue()
 #include STSTEM_WARNING_POP
 }
 
-// private
 template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>::CalculateMantissa()
 {
@@ -169,7 +162,6 @@ void Mathematics::IntegerDataConversion<N, T>::CalculateMantissa()
     memcpy(&mantissa, &absData[index], sizeof(IntegerType));
 }
 
-// private
 template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>::Negative() noexcept
 {
@@ -179,7 +171,6 @@ void Mathematics::IntegerDataConversion<N, T>::Negative() noexcept
     }
 }
 
-// private
 template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>::SignedIntegerNegative()
 {

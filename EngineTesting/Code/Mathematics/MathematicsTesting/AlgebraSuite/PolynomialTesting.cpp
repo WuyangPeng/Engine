@@ -9,9 +9,9 @@
 
 #include "PolynomialTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/PolynomialDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <boost/numeric/conversion/cast.hpp>
 #include <random>
 #include <vector>
@@ -30,7 +30,18 @@ namespace Mathematics
 
 #endif  // BUILDING_MATHEMATICS_STATIC
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialTesting)
+Mathematics::PolynomialTesting::PolynomialTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, PolynomialTesting)
+
+void Mathematics::PolynomialTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::PolynomialTesting::MainTest()
 {

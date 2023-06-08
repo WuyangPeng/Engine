@@ -9,9 +9,9 @@
 
 #include "IntegerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Rational/IntegerDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class Integer<7>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerTesting)
+Mathematics::IntegerTesting::IntegerTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, IntegerTesting)
+
+void Mathematics::IntegerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::IntegerTesting::MainTest()
 {
@@ -49,9 +60,9 @@ void Mathematics::IntegerTesting::PositiveTest()
     const uniform_int<uint32_t> firstRandomDistribution(0, INT32_MAX);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
 
@@ -109,9 +120,9 @@ void Mathematics::IntegerTesting::NegativeTest()
     default_random_engine generator{};
     const uniform_int<> firstRandomDistribution(-INT32_MAX, 0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
 
@@ -189,9 +200,9 @@ void Mathematics::IntegerTesting::ReverseTest()
     const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
     const uniform_int<uint32_t> secondRandomDistribution(0, INT32_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> shortVector(26);
 
@@ -224,9 +235,9 @@ void Mathematics::IntegerTesting::AbsoluteValueTest()
     const uniform_int<> firstRandomDistribution(-INT32_MAX, INT32_MAX);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> shortVector(22);
 
@@ -260,9 +271,9 @@ void Mathematics::IntegerTesting::AddTest()
     const uniform_int<> firstRandomDistribution(0, INT32_MAX / 2);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(88);
         vector<uint16_t> secondShortVector(88);
@@ -345,9 +356,9 @@ void Mathematics::IntegerTesting::MinusTest()
     const uniform_int<> firstRandomDistribution(0, INT32_MAX / 2);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(66);
         vector<uint16_t> secondShortVector(66);
@@ -431,9 +442,9 @@ void Mathematics::IntegerTesting::MultiplyTest()
     const uniform_int<> firstRandomDistribution(0, INT16_MAX);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(40);
         vector<uint16_t> secondShortVector(40);
@@ -489,9 +500,9 @@ void Mathematics::IntegerTesting::DivideTest()
     const uniform_int<> firstRandomDistribution(0, INT16_MAX);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(40);
         vector<uint16_t> secondShortVector(40);
@@ -551,9 +562,9 @@ void Mathematics::IntegerTesting::LeftShiftTest()
     const uniform_int<> firstRandomDistribution(0, 16 * 20);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(40);
 
@@ -600,9 +611,9 @@ void Mathematics::IntegerTesting::RightShiftTest()
     const uniform_int<> firstRandomDistribution(0, 16 * 20);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(40);
 
@@ -648,9 +659,9 @@ void Mathematics::IntegerTesting::SignTest()
     default_random_engine generator{};
     const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(40);
 
@@ -675,9 +686,9 @@ void Mathematics::IntegerTesting::CompareTest()
     default_random_engine generator{};
     const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(40);
         vector<uint16_t> secondShortVector(40);
@@ -818,9 +829,9 @@ void Mathematics::IntegerTesting::BlockTest()
     const uniform_int<uint16_t> firstRandomDistribution(0, 39);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(40);
 
@@ -868,9 +879,9 @@ void Mathematics::IntegerTesting::BlockTest()
 
 void Mathematics::IntegerTesting::BitTest()
 {
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Integer<20> firstInteger;
 
@@ -891,9 +902,9 @@ void Mathematics::IntegerTesting::ConversionTest()
     const uniform_real<float> firstRandomDistribution(-1.0e38f, 1.0e38f);
     const uniform_real<double> secondRandomDistribution(static_cast<double>(std::numeric_limits<uint64_t>::min()), static_cast<double>(std::numeric_limits<uint64_t>::max()));
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
 

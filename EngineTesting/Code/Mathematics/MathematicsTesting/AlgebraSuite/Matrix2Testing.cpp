@@ -9,10 +9,10 @@
 
 #include "Matrix2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class Matrix2<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Matrix2Testing)
+Mathematics::Matrix2Testing::Matrix2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Matrix2Testing)
+
+void Mathematics::Matrix2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Matrix2Testing::MainTest()
 {
@@ -274,9 +285,7 @@ void Mathematics::Matrix2Testing::OperatorCalculateTest()
     default_random_engine generator{};
     const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Matrix2F fifthMatrix{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
 
@@ -337,9 +346,7 @@ void Mathematics::Matrix2Testing::ArithmeticCalculateTest()
     const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
     const uniform_real<float> angleRandomDistribution(0.0f, MathF::GetHalfPI());
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const Matrix2F::Vector2 firstVector(randomDistribution(generator),
                                             randomDistribution(generator));

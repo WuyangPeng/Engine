@@ -5,12 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.7 (2023/04/26 14:02)
+///	引擎测试版本：0.9.0.11 (2023/06/07 22:11)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_H
 
 #include "BatchConversionCSVTesting.h"
+#include "BatchConversionCodeTesting.h"
+#include "CSVConfigureLoadingTesting.h"
 #include "CSVConfigureTesting.h"
 #include "CSVContentTesting.h"
 #include "CSVDataTesting.h"

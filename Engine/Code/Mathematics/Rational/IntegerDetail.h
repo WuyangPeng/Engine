@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/11 16:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:12)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DETAIL_H
@@ -32,9 +32,11 @@ Mathematics::Integer<N> Mathematics::Integer<N>::CreateOne() noexcept
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <int N>
-Mathematics::Integer<N>::Integer(MAYBE_UNUSED Special special) noexcept
+Mathematics::Integer<N>::Integer(Special special) noexcept
     : integerData{ IntegerData::Special::One }
 {
+    System::UnusedFunction(special);
+
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 

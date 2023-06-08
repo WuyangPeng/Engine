@@ -3051,6 +3051,9 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MultiArrayAdapterDetail.h">
       <Filter>MemoryTools 模板文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSV\BatchConversionCode.h">
+      <Filter>TextParsing 头文件\CSV</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -4477,6 +4480,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\OStreamAsynchronousParameter.cpp">
       <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSV\BatchConversionCode.cpp">
+      <Filter>TextParsing 源文件\CSV</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

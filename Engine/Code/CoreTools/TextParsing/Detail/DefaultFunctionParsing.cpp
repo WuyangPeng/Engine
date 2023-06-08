@@ -13,8 +13,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::DefaultFunctionParsing::DefaultFunctionParsing(int indentationCount, const String& className)
-    : ParentType{ indentationCount }, className{ className }
+CoreTools::DefaultFunctionParsing::DefaultFunctionParsing(int indentationCount, const String& className, const String& keyTypeDescribe)
+    : ParentType{ indentationCount }, className{ className }, keyTypeDescribe{ keyTypeDescribe }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -43,7 +43,9 @@ System::String CoreTools::DefaultFunctionParsing::GenerateKeyConstructor() const
     content += TextParsing::gExplicit;
     content += TextParsing::gSpace;
     content += className;
-    content += TextParsing::gKeyNoexcept;
+    content += TextParsing::gLeftBrackets;
+    content += keyTypeDescribe;
+    content += SYSTEM_TEXT(" key) noexcept");
     content += TextParsing::gSemicolonNewline;
 
     return content;

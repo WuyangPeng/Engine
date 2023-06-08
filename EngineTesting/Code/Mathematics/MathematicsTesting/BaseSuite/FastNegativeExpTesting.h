@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_BASE_SUITE_FAST_NEGATIVE_EXP_TESTING_H
 #define MATHEMATICS_BASE_SUITE_FAST_NEGATIVE_EXP_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class FastNegativeExpTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(FastNegativeExpTesting);
+        using ClassType = FastNegativeExpTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit FastNegativeExpTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 17:14)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:45)
 
-#ifndef MATHEMATICS_OBJECTS3D_LOZENGE3_H
-#define MATHEMATICS_OBJECTS3D_LOZENGE3_H
+#ifndef MATHEMATICS_OBJECTS_3D_LOZENGE3_H
+#define MATHEMATICS_OBJECTS_3D_LOZENGE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -45,4 +45,4 @@ namespace Mathematics
     using Lozenge3D = Lozenge3<double>;
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_LOZENGE3_H
+#endif  // MATHEMATICS_OBJECTS_3D_LOZENGE3_H

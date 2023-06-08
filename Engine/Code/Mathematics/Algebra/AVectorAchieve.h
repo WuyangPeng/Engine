@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 ///	ÁªÏµ×÷Õß£º94458936@qq.com
 ///
-///	±ê×¼£ºstd:c++17
-///	ÒýÇæ°æ±¾£º0.8.0.2 (2022/02/07 11:20)
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.9.0.11 (2023/05/31 14:43)
 
 #ifndef MATHEMATICS_ALGEBRA_A_VECTOR_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_A_VECTOR_ACHIEVE_H
@@ -17,28 +17,25 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::AVector<T>::AVector(const Vector3& rhs) noexcept
     : AVector{ rhs.GetX(), rhs.GetY(), rhs.GetZ() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::AVector<T>::AVector(const ArrayType& rhs) noexcept
-    : AVector{ rhs[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::X)],
-               rhs[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Y)],
-               rhs[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Z)] }
+    : AVector{ rhs.at(System::EnumCastUnderlying(HomogeneousPoint::PointIndex::X)),
+               rhs.at(System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Y)),
+               rhs.at(System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Z)) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-#include STSTEM_WARNING_POP
-
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::AVector<T>::AVector(const HomogeneousPoint& homogeneousPoint) noexcept
     : homogeneousPoint{ homogeneousPoint.GetX(), homogeneousPoint.GetY(), homogeneousPoint.GetZ(), Math::GetValue(0) }
 {
@@ -48,7 +45,7 @@ Mathematics::AVector<T>::AVector(const HomogeneousPoint& homogeneousPoint) noexc
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename T>
-bool Mathematics::AVector<T>::IsValid() const noexcept
+requires std::is_arithmetic_v<T> bool Mathematics::AVector<T>::IsValid() const noexcept
 {
     if (Math::FAbs(homogeneousPoint.GetW()) <= Math::GetZeroTolerance())
         return true;
@@ -59,6 +56,7 @@ bool Mathematics::AVector<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::Vector3<T> Mathematics::AVector<T>::GetVector3() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -67,6 +65,7 @@ Mathematics::Vector3<T> Mathematics::AVector<T>::GetVector3() const noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 const T& Mathematics::AVector<T>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -75,6 +74,7 @@ const T& Mathematics::AVector<T>::operator[](int index) const
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 T& Mathematics::AVector<T>::operator[](int index)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -83,6 +83,7 @@ T& Mathematics::AVector<T>::operator[](int index)
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 T Mathematics::AVector<T>::GetX() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -91,6 +92,7 @@ T Mathematics::AVector<T>::GetX() const noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 void Mathematics::AVector<T>::SetX(T x) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -99,6 +101,7 @@ void Mathematics::AVector<T>::SetX(T x) noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 T Mathematics::AVector<T>::GetY() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -107,6 +110,7 @@ T Mathematics::AVector<T>::GetY() const noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 void Mathematics::AVector<T>::SetY(T y) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -115,6 +119,7 @@ void Mathematics::AVector<T>::SetY(T y) noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 T Mathematics::AVector<T>::GetZ() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -123,6 +128,7 @@ T Mathematics::AVector<T>::GetZ() const noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 void Mathematics::AVector<T>::SetZ(T z) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -131,6 +137,7 @@ void Mathematics::AVector<T>::SetZ(T z) noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::AVector<T> Mathematics::AVector<T>::operator-() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -139,11 +146,12 @@ Mathematics::AVector<T> Mathematics::AVector<T>::operator-() const noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::AVector<T>& Mathematics::AVector<T>::operator+=(const AVector& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    for (auto i = 0; i < aVectorSize; ++i)
+    for (auto i = 0; i < vectorSize; ++i)
     {
         homogeneousPoint[i] += rhs[i];
     }
@@ -152,11 +160,12 @@ Mathematics::AVector<T>& Mathematics::AVector<T>::operator+=(const AVector& rhs)
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::AVector<T>& Mathematics::AVector<T>::operator-=(const AVector& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    for (auto i = 0; i < aVectorSize; ++i)
+    for (auto i = 0; i < vectorSize; ++i)
     {
         homogeneousPoint[i] -= rhs[i];
     }
@@ -165,11 +174,12 @@ Mathematics::AVector<T>& Mathematics::AVector<T>::operator-=(const AVector& rhs)
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::AVector<T>& Mathematics::AVector<T>::operator*=(T scalar)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    for (auto i = 0; i < aVectorSize; ++i)
+    for (auto i = 0; i < vectorSize; ++i)
     {
         homogeneousPoint[i] *= scalar;
     }
@@ -178,6 +188,7 @@ Mathematics::AVector<T>& Mathematics::AVector<T>::operator*=(T scalar)
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::AVector<T>& Mathematics::AVector<T>::operator/=(T scalar)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -190,13 +201,14 @@ Mathematics::AVector<T>& Mathematics::AVector<T>::operator/=(T scalar)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ýÁã´íÎó¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("³ýÁã´íÎó¡£"s))
     }
 
     return *this;
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 T Mathematics::AVector<T>::Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -205,6 +217,7 @@ T Mathematics::AVector<T>::Length() const noexcept(gAssert < 3 || gMathematicsAs
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 T Mathematics::AVector<T>::SquaredLength() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -213,13 +226,13 @@ T Mathematics::AVector<T>::SquaredLength() const noexcept
 }
 
 template <typename T>
-void Mathematics::AVector<T>::Normalize(const T epsilon)
+requires std::is_arithmetic_v<T>
+void Mathematics::AVector<T>::Normalize(T epsilon)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto length = Length();
-
-    if (epsilon < length)
+    if (const auto length = Length();
+        epsilon < length)
     {
         auto invLength = Math::GetValue(1) / length;
 
@@ -227,18 +240,17 @@ void Mathematics::AVector<T>::Normalize(const T epsilon)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("³ýÁã´íÎó¡£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("³ýÁã´íÎó¡£"s))
     }
 }
 
 template <typename T>
-bool Mathematics::AVector<T>::IsZero(const T epsilon) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
+requires std::is_arithmetic_v<T> bool Mathematics::AVector<T>::IsZero(T epsilon) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto length = Length();
-
-    if (epsilon < Math::FAbs(length))
+    if (const auto length = Length();
+        epsilon < Math::FAbs(length))
     {
         return false;
     }
@@ -249,13 +261,12 @@ bool Mathematics::AVector<T>::IsZero(const T epsilon) const noexcept(gAssert < 3
 }
 
 template <typename T>
-bool Mathematics::AVector<T>::IsNormalize(const T epsilon) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
+requires std::is_arithmetic_v<T> bool Mathematics::AVector<T>::IsNormalize(T epsilon) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    auto length = Length();
-
-    if (epsilon < Math::FAbs(length - Math::GetValue(1)))
+    if (const auto length = Length();
+        epsilon < Math::FAbs(length - Math::GetValue(1)))
     {
         return false;
     }
@@ -266,23 +277,19 @@ bool Mathematics::AVector<T>::IsNormalize(const T epsilon) const noexcept(gAsser
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 typename Mathematics::AVector<T>::ArrayType Mathematics::AVector<T>::GetCoordinate() const noexcept
 {
     return ArrayType{ GetX(), GetY(), GetZ() };
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 void Mathematics::AVector<T>::Set(const ArrayType& coordinate) noexcept
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-    SetX(coordinate[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::X)]);
-    SetY(coordinate[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Y)]);
-    SetZ(coordinate[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Z)]);
-
-#include STSTEM_WARNING_POP
+    SetX(coordinate.at(System::EnumCastUnderlying(HomogeneousPoint::PointIndex::X)));
+    SetY(coordinate.at(System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Y)));
+    SetZ(coordinate.at(System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Z)));
 }
 
 #endif  // MATHEMATICS_ALGEBRA_A_VECTOR_ACHIEVE_H

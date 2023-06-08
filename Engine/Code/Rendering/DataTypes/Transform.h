@@ -80,7 +80,7 @@ namespace Rendering
 
         // 对于M = R * S，S的绝对值的最大值被返回。
         // 对于普通M，返回最大的row绝对值和，这是最大规模的转换的合理测量。
-        NODISCARD Real GetNorm() const noexcept;
+        NODISCARD Real GetNorm() const;
 
         // 矩阵-点乘法, M * p。
         NODISCARD APoint operator*(const APoint& point) const noexcept;

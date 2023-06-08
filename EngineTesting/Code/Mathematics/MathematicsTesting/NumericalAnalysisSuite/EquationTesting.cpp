@@ -9,17 +9,28 @@
 
 #include "EquationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/Equation.h"
 #include "Mathematics/NumericalAnalysis/EquationResultConstIteratorDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, EquationTesting)
+Mathematics::EquationTesting::EquationTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, EquationTesting)
+
+void Mathematics::EquationTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::EquationTesting::MainTest()
 {
@@ -34,9 +45,9 @@ void Mathematics::EquationTesting::OnceTest()
     default_random_engine generator;
     const uniform_real<double> firstRandomDistribution(-1.0e10, 1.0e10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Equation firstEquation(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
@@ -61,9 +72,9 @@ void Mathematics::EquationTesting::SecondaryTest()
     default_random_engine generator;
     const uniform_real<double> firstRandomDistribution(-1.0e8, 1.0e8);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Equation firstEquation(firstRandomDistribution(generator),
                                firstRandomDistribution(generator),
@@ -106,9 +117,9 @@ void Mathematics::EquationTesting::ThriceTest()
     default_random_engine generator;
     const uniform_real<double> firstRandomDistribution(-1.0e7, 1.0e7);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Equation firstEquation(firstRandomDistribution(generator),
                                firstRandomDistribution(generator),
@@ -204,9 +215,9 @@ void Mathematics::EquationTesting::QuarticTest()
     default_random_engine generator;
     const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Equation firstEquation(firstRandomDistribution(generator),
                                firstRandomDistribution(generator),

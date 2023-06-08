@@ -9,19 +9,30 @@
 
 #include "EllipseFit2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Approximation/EllipseFit2Detail.h"
 #include "Mathematics/Objects2D/Ellipse2Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, EllipseFit2Testing)
+Mathematics::EllipseFit2Testing::EllipseFit2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, EllipseFit2Testing)
+
+void Mathematics::EllipseFit2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::EllipseFit2Testing::MainTest()
 {
@@ -34,9 +45,9 @@ void Mathematics::EllipseFit2Testing::FitTest()
     const uniform_real<double> firstRandomDistribution(0.0, 100.0);
     const uniform_int<> secondRandomDistribution(5, 15);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
         const int size = secondRandomDistribution(generator);

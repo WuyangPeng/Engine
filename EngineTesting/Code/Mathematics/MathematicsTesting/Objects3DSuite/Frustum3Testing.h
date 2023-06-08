@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_OBJECTS3D_SUITE_FRUSTUM3_TESTING_H
 #define MATHEMATICS_OBJECTS3D_SUITE_FRUSTUM3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Frustum3Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Frustum3Testing);
+        using ClassType = Frustum3Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Frustum3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

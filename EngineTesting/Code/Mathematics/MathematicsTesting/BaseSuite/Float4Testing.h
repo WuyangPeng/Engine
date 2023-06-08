@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_BASE_SUITE_FLOAT_4_TESTING_H
 #define MATHEMATICS_BASE_SUITE_FLOAT_4_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Float4Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Float4Testing);
+        using ClassType = Float4Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Float4Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

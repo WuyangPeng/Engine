@@ -10,14 +10,21 @@
 #ifndef MATHEMATICS_ALGEBRA_SUITE_AVECTOR_ORTHONORMAL_BASIS_TESTING_H
 #define MATHEMATICS_ALGEBRA_SUITE_AVECTOR_ORTHONORMAL_BASIS_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
+
 
 namespace Mathematics
 {
     class AVectorOrthonormalBasisTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(AVectorOrthonormalBasisTesting);
+        using ClassType = AVectorOrthonormalBasisTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit AVectorOrthonormalBasisTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

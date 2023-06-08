@@ -197,7 +197,7 @@ Real Rendering::Transform<Real>::GetUniformScale() const noexcept(gAssert < 2 ||
 }
 
 template <typename Real>
-Real Rendering::Transform<Real>::GetNorm() const noexcept
+Real Rendering::Transform<Real>::GetNorm() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -385,25 +385,25 @@ int Rendering::Transform<Real>::GetStreamingSize() const noexcept
     {
         if (isUniformScale)
         {
-            size += MATHEMATICS_STREAM_SIZE(rotationOrGeneralMatrix);
+            size += Mathematics::GetStreamSize(rotationOrGeneralMatrix);
             size += CoreTools::GetStreamSize(scale.GetX());
-            size += MATHEMATICS_STREAM_SIZE(translate);
+            size += Mathematics::GetStreamSize(translate);
 
             return size;
         }
         else
         {
-            size += MATHEMATICS_STREAM_SIZE(rotationOrGeneralMatrix);
-            size += MATHEMATICS_STREAM_SIZE(scale);
-            size += MATHEMATICS_STREAM_SIZE(translate);
+            size += Mathematics::GetStreamSize(rotationOrGeneralMatrix);
+            size += Mathematics::GetStreamSize(scale);
+            size += Mathematics::GetStreamSize(translate);
 
             return size;
         }
     }
     else
     {
-        size += MATHEMATICS_STREAM_SIZE(rotationOrGeneralMatrix);
-        size += MATHEMATICS_STREAM_SIZE(translate);
+        size += Mathematics::GetStreamSize(rotationOrGeneralMatrix);
+        size += Mathematics::GetStreamSize(translate);
 
         return size;
     }

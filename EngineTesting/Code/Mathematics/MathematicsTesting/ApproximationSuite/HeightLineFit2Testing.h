@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_APPROXIMATION_SUITE_HEIGHT_LINE_FIT2_TESTING_H
 #define MATHEMATICS_APPROXIMATION_SUITE_HEIGHT_LINE_FIT2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class HeightLineFit2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(HeightLineFit2Testing);
+        using ClassType = HeightLineFit2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit HeightLineFit2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

@@ -9,7 +9,7 @@
 
 #include "Query3Int64Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
@@ -22,7 +22,7 @@
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Query/Query3Int64Detail.h"
 #include "Mathematics/Query/QuerySortTools.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -37,7 +37,18 @@ namespace Mathematics
     template class Query3Int64<float>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Query3Int64Testing)
+Mathematics::Query3Int64Testing::Query3Int64Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Query3Int64Testing)
+
+void Mathematics::Query3Int64Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Query3Int64Testing::MainTest()
 {
@@ -53,9 +64,9 @@ void Mathematics::Query3Int64Testing::VerticesTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_int<> secondRandomDistribution(1, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
         auto size = secondRandomDistribution(generator);
@@ -83,9 +94,9 @@ void Mathematics::Query3Int64Testing::PlaneTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_int<> secondRandomDistribution(1, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
         auto size = secondRandomDistribution(generator);
@@ -115,9 +126,9 @@ void Mathematics::Query3Int64Testing::TetrahedronTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_int<> secondRandomDistribution(1, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
         auto size = secondRandomDistribution(generator);
@@ -175,9 +186,9 @@ void Mathematics::Query3Int64Testing::CircumspherTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_int<> secondRandomDistribution(1, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
         auto size = secondRandomDistribution(generator);

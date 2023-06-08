@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.3 (2022/02/22 14:47)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 17:56)
 
-#ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_RIANGLE3_H
-#define MATHEMATICS_DISTANCE_DISTANCE_POINT3_RIANGLE3_H
+#ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_TRIANGLE3_H
+#define MATHEMATICS_DISTANCE_DISTANCE_POINT3_TRIANGLE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -48,7 +48,6 @@ namespace Mathematics
         Vector3 point;
         Triangle3 triangle;
 
-        // closest1 = sum_{i=0}^2 bary[i]*tri.vertex[i]
         mutable Vector3 triangleBary;
     };
 
@@ -56,4 +55,4 @@ namespace Mathematics
     using DistancePoint3Triangle3D = DistancePoint3Triangle3<double>;
 }
 
-#endif  // MATHEMATICS_DISTANCE_DISTANCE_POINT3_RIANGLE3_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_POINT3_TRIANGLE3_H

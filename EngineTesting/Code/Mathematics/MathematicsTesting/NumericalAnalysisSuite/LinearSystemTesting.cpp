@@ -9,7 +9,7 @@
 
 #include "LinearSystemTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
@@ -18,7 +18,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/NumericalAnalysis/LinearSystemDetail.h"
 #include "Mathematics/NumericalAnalysis/SparseMatrixDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <gsl/util>
 #include <random>
 
@@ -33,7 +33,18 @@ namespace Mathematics
     template class LinearSystem<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, LinearSystemTesting)
+Mathematics::LinearSystemTesting::LinearSystemTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, LinearSystemTesting)
+
+void Mathematics::LinearSystemTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::LinearSystemTesting::MainTest()
 {
@@ -54,9 +65,9 @@ void Mathematics::LinearSystemTesting::Solve2Test()
     const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
     const uniform_int<> integerRandomDistribution(1, 10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const LinearSystemD linearsystem(1e-10);
 
@@ -80,9 +91,9 @@ void Mathematics::LinearSystemTesting::Solve3Test()
     const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
     const uniform_int<> integerRandomDistribution(1, 10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const LinearSystemD linearsystem(1e-10);
 
@@ -114,9 +125,9 @@ void Mathematics::LinearSystemTesting::InverseTest()
     const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
     const uniform_int<> integerRandomDistribution(1, 10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const LinearSystemD linearsystem(1e-10);
 
@@ -155,9 +166,9 @@ void Mathematics::LinearSystemTesting::SolveTest()
     const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
     const uniform_int<> integerRandomDistribution(1, 10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const LinearSystemD linearsystem(1e-10);
 
@@ -200,9 +211,9 @@ void Mathematics::LinearSystemTesting::SolveTridiagonalTest()
     const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
     const uniform_int<> integerRandomDistribution(3, 10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const LinearSystemD linearsystem(1e-10);
 
@@ -257,9 +268,9 @@ void Mathematics::LinearSystemTesting::SolveConstTridiagonalTest()
     const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
     const uniform_int<> integerRandomDistribution(1, 10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const LinearSystemD linearsystem(1e-10);
 
@@ -308,9 +319,9 @@ void Mathematics::LinearSystemTesting::SolveSymmetricConjugateGradientTest()
     const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
     const uniform_int<> integerRandomDistribution(1, 10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const LinearSystemD linearsystem(1e-10);
 
@@ -380,9 +391,9 @@ void Mathematics::LinearSystemTesting::SolveBandedTest()
     const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
     const uniform_int<> integerRandomDistribution(4, 10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const LinearSystemD linearsystem(1e-10);
 
@@ -445,9 +456,9 @@ void Mathematics::LinearSystemTesting::InvertTest()
     const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
     const uniform_int<> integerRandomDistribution(4, 10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const LinearSystemD linearsystem(1e-10);
 

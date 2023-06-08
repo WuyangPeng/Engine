@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_BASE_SUITE_FAST_TRIGONOMETRIC_TESTING_H
 #define MATHEMATICS_BASE_SUITE_FAST_TRIGONOMETRIC_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class FastTrigonometricTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(FastTrigonometricTesting);
+        using ClassType = FastTrigonometricTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit FastTrigonometricTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

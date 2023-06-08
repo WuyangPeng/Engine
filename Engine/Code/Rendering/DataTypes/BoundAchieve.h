@@ -92,7 +92,7 @@ int Rendering::Bound<T>::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return MATHEMATICS_STREAM_SIZE(center) + CoreTools::GetStreamSize(radius);
+    return Mathematics::GetStreamSize(center) + CoreTools::GetStreamSize(radius);
 }
 
 template <typename T>
@@ -178,7 +178,7 @@ void Rendering::Bound<T>::ComputeFromData(int numElements, int stride, SpanConst
 
     std::vector<APoint> aPoint{};
 
-    const auto difference = stride - CoreTools::GetStreamSize(radius) * APoint::aPointSize;
+    const auto difference = stride - CoreTools::GetStreamSize(radius) * APoint::pointSize;
 
     if (difference < 0)
     {

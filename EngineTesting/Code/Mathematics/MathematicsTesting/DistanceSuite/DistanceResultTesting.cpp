@@ -9,12 +9,12 @@
 
 #include "DistanceResultTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Distance/DistanceResultDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::vector;
 
 namespace Mathematics
@@ -25,7 +25,18 @@ namespace Mathematics
     template class DistanceResult<double, Vector3D>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistanceResultTesting)
+Mathematics::DistanceResultTesting::DistanceResultTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, DistanceResultTesting)
+
+void Mathematics::DistanceResultTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::DistanceResultTesting::MainTest()
 {
@@ -145,12 +156,12 @@ void Mathematics::DistanceResultTesting::ClosestPointsTest()
 void Mathematics::DistanceResultTesting::MultipleClosestPointsTest()
 {
     vector<Vector3D> lhsPoint;
-    lhsPoint.push_back(Vector3F::GetUnitX());
-    lhsPoint.push_back(Vector3F::GetUnitZ());
+    lhsPoint.push_back(Vector3D::GetUnitX());
+    lhsPoint.push_back(Vector3D::GetUnitZ());
 
     vector<Vector3D> rhsPoint;
-    rhsPoint.push_back(Vector3F::GetUnitZ());
-    rhsPoint.push_back(Vector3F::GetUnitY());
+    rhsPoint.push_back(Vector3D::GetUnitZ());
+    rhsPoint.push_back(Vector3D::GetUnitY());
 
     DistanceResult3D distanceResult(6.9, 4.2, lhsPoint, rhsPoint);
 
@@ -158,12 +169,12 @@ void Mathematics::DistanceResultTesting::MultipleClosestPointsTest()
     ASSERT_APPROXIMATE(distanceResult.GetContactTime(), 4.2, 1e-10);
     ASSERT_EQUAL(distanceResult.GetLhsClosestPointSize(), 2);
     ASSERT_EQUAL(distanceResult.GetRhsClosestPointSize(), 2);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, distanceResult.GetLhsClosestPoint(), Vector3F::GetUnitX(), 1e-10);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, distanceResult.GetRhsClosestPoint(), Vector3F::GetUnitZ(), 1e-10);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, distanceResult.GetLhsClosestPoint(0), Vector3F::GetUnitX(), 1e-10);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, distanceResult.GetRhsClosestPoint(0), Vector3F::GetUnitZ(), 1e-10);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, distanceResult.GetLhsClosestPoint(1), Vector3F::GetUnitZ(), 1e-10);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, distanceResult.GetRhsClosestPoint(1), Vector3F::GetUnitY(), 1e-10);
+    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, distanceResult.GetLhsClosestPoint(), Vector3D::GetUnitX(), 1e-10);
+    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, distanceResult.GetRhsClosestPoint(), Vector3D::GetUnitZ(), 1e-10);
+    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, distanceResult.GetLhsClosestPoint(0), Vector3D::GetUnitX(), 1e-10);
+    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, distanceResult.GetRhsClosestPoint(0), Vector3D::GetUnitZ(), 1e-10);
+    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, distanceResult.GetLhsClosestPoint(1), Vector3D::GetUnitZ(), 1e-10);
+    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, distanceResult.GetRhsClosestPoint(1), Vector3D::GetUnitY(), 1e-10);
 
     DistanceResult3D copyDistanceResult(16.9, 14.2, rhsPoint, lhsPoint);
     copyDistanceResult = distanceResult;
@@ -172,12 +183,12 @@ void Mathematics::DistanceResultTesting::MultipleClosestPointsTest()
     ASSERT_APPROXIMATE(copyDistanceResult.GetContactTime(), 4.2, 1e-10);
     ASSERT_EQUAL(copyDistanceResult.GetLhsClosestPointSize(), 2);
     ASSERT_EQUAL(copyDistanceResult.GetRhsClosestPointSize(), 2);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, copyDistanceResult.GetLhsClosestPoint(), Vector3F::GetUnitX(), 1e-10);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, copyDistanceResult.GetRhsClosestPoint(), Vector3F::GetUnitZ(), 1e-10);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, copyDistanceResult.GetLhsClosestPoint(0), Vector3F::GetUnitX(), 1e-10);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, copyDistanceResult.GetRhsClosestPoint(0), Vector3F::GetUnitZ(), 1e-10);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, copyDistanceResult.GetLhsClosestPoint(1), Vector3F::GetUnitZ(), 1e-10);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, copyDistanceResult.GetRhsClosestPoint(1), Vector3F::GetUnitY(), 1e-10);
+    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, copyDistanceResult.GetLhsClosestPoint(), Vector3D::GetUnitX(), 1e-10);
+    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, copyDistanceResult.GetRhsClosestPoint(), Vector3D::GetUnitZ(), 1e-10);
+    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, copyDistanceResult.GetLhsClosestPoint(0), Vector3D::GetUnitX(), 1e-10);
+    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, copyDistanceResult.GetRhsClosestPoint(0), Vector3D::GetUnitZ(), 1e-10);
+    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, copyDistanceResult.GetLhsClosestPoint(1), Vector3D::GetUnitZ(), 1e-10);
+    ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, copyDistanceResult.GetRhsClosestPoint(1), Vector3D::GetUnitY(), 1e-10);
 
     distanceResult.SetDistance(7.0);
     ASSERT_APPROXIMATE(distanceResult.GetDistance(), 7.0, 1e-10);

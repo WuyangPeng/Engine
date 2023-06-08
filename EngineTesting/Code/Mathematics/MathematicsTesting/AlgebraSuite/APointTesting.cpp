@@ -9,11 +9,11 @@
 
 #include "APointTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Base/Float.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class APoint<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, APointTesting)
+Mathematics::APointTesting::APointTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, APointTesting)
+
+void Mathematics::APointTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::APointTesting::MainTest()
 {
@@ -178,9 +189,7 @@ void Mathematics::APointTesting::CalculateTest()
     default_random_engine randomEngine{};
     const uniform_real<float> randomDistribution{ -100.0f, 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         APointD fifthPoint{ randomDistribution(randomEngine), randomDistribution(randomEngine), randomDistribution(randomEngine) };
 

@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 15:31)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:44)
 
-#ifndef MATHEMATICS_OBJECTS3D_ELLIPSOID3_H
-#define MATHEMATICS_OBJECTS3D_ELLIPSOID3_H
+#ifndef MATHEMATICS_OBJECTS_3D_ELLIPSOID3_H
+#define MATHEMATICS_OBJECTS_3D_ELLIPSOID3_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -109,7 +109,7 @@ namespace Mathematics
     };
 
     template <typename Real>
-    NODISCARD bool Approximate(const Ellipsoid3<Real>& lhs, const Ellipsoid3<Real>& rhs, const Real epsilon);
+    NODISCARD bool Approximate(const Ellipsoid3<Real>& lhs, const Ellipsoid3<Real>& rhs, Real epsilon);
 
     // 调试输出
     template <typename Real>
@@ -119,4 +119,4 @@ namespace Mathematics
     using Ellipsoid3D = Ellipsoid3<double>;
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_ELLIPSOID3_H
+#endif  // MATHEMATICS_OBJECTS_3D_ELLIPSOID3_H

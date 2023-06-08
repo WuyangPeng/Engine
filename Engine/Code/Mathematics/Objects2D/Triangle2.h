@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 10:51)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:16)
 
-#ifndef MATHEMATICS_OBJECTS2D_TRIANGLE2_H
-#define MATHEMATICS_OBJECTS2D_TRIANGLE2_H
+#ifndef MATHEMATICS_OBJECTS_2D_TRIANGLE2_H
+#define MATHEMATICS_OBJECTS_2D_TRIANGLE2_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -60,4 +60,4 @@ namespace Mathematics
     using Triangle2D = Triangle2<double>;
 }
 
-#endif  // MATHEMATICS_OBJECTS2D_TRIANGLE2_H
+#endif  // MATHEMATICS_OBJECTS_2D_TRIANGLE2_H

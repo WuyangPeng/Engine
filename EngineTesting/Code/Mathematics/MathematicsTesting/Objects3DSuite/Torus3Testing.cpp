@@ -9,10 +9,10 @@
 
 #include "Torus3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Objects3D/Torus3Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -28,7 +28,18 @@ namespace Mathematics
 
 #endif  // BUILDING_MATHEMATICS_STATIC
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Torus3Testing)
+Mathematics::Torus3Testing::Torus3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Torus3Testing)
+
+void Mathematics::Torus3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Torus3Testing::MainTest()
 {
@@ -42,9 +53,9 @@ void Mathematics::Torus3Testing::TorusTest()
     const uniform_real<double> firstRandomDistribution(0.1, 100.0);
     const uniform_real<double> secondRandomDistribution(0.0, 1.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto innerRadius = firstRandomDistribution(generator);
 

@@ -9,16 +9,27 @@
 
 #include "Minimize1Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/Minimize1Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 namespace Mathematics
 {
     template class Minimize1<float, Minimize1Testing>;
     template class Minimize1<double, Minimize1Testing>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Minimize1Testing)
+Mathematics::Minimize1Testing::Minimize1Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Minimize1Testing)
+
+void Mathematics::Minimize1Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Minimize1Testing::MainTest()
 {

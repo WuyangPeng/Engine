@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 16:49)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 16:42)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX3_H
 #define MATHEMATICS_ALGEBRA_MATRIX3_H
@@ -41,11 +41,10 @@
 namespace Mathematics
 {
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Matrix3 final : private boost::additive<Matrix3<Real>, boost::multiplicative<Matrix3<Real>, Real>>
     {
     public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-
         using ClassType = Matrix3<Real>;
         using Vector3 = Vector3<Real>;
         using VectorIndex = typename Vector3::PointIndex;
@@ -70,7 +69,7 @@ namespace Mathematics
         // 如果标志为MatrixFlagsZero，创建零矩阵，
         // 否则创建单位矩阵。
         constexpr explicit Matrix3(MatrixInitType flag = MatrixInitType::Zero) noexcept
-            : m_X{ Create(flag, VectorIndex::X) }, m_Y{ Create(flag, VectorIndex::Y) }, m_Z{ Create(flag, VectorIndex::Z) }
+            : x{ Create(flag, VectorIndex::X) }, y{ Create(flag, VectorIndex::Y) }, z{ Create(flag, VectorIndex::Z) }
         {
         }
 
@@ -84,7 +83,7 @@ namespace Mathematics
                           Real member20,
                           Real member21,
                           Real member22) noexcept
-            : m_X{ member00, member01, member02 }, m_Y{ member10, member11, member12 }, m_Z{ member20, member21, member22 }
+            : x{ member00, member01, member02 }, y{ member10, member11, member12 }, z{ member20, member21, member22 }
         {
         }
 
@@ -105,9 +104,9 @@ namespace Mathematics
         // 创建一个对角矩阵,
         // member01 = member10 = member02 = member20 = member12 = member21 = 0
         constexpr Matrix3(Real member00, Real member11, Real member22) noexcept
-            : m_X{ member00, Math::GetValue(0), Math::GetValue(0) },
-              m_Y{ Math::GetValue(0), member11, Math::GetValue(0) },
-              m_Z{ Math::GetValue(0), Math::GetValue(0), member22 }
+            : x{ member00, Math::GetValue(0), Math::GetValue(0) },
+              y{ Math::GetValue(0), member11, Math::GetValue(0) },
+              z{ Math::GetValue(0), Math::GetValue(0), member22 }
         {
         }
 
@@ -162,8 +161,8 @@ namespace Mathematics
         NODISCARD Matrix3 Adjoint() const noexcept;
         NODISCARD Real Determinant() const noexcept;
 
-        NODISCARD Matrix3 GaussianEliminationInverse(const Real epsilon = Math::GetZeroTolerance()) const;
-        NODISCARD Real GaussianEliminationDeterminant(const Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix3 GaussianEliminationInverse(Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Real GaussianEliminationDeterminant(Real epsilon = Math::GetZeroTolerance()) const;
 
         // 矩阵必须是一个旋转矩阵，下面函数才有效。
         // Orthonormalize函数使用Gram-Schmidt正交化施加到所述旋转矩阵。
@@ -179,7 +178,7 @@ namespace Mathematics
         // D = diag(d0,d1,d2)是一个对角矩阵，这里对角线项为d0、d1和d2。
         // 特征向量u[i]对应的特征向量d[i]。特征值排序为d0 <= d1 <= d2。
         // 返回值的第一部分为rotation，第二部分为diagonal。
-        NODISCARD Matrix3EigenDecomposition EigenDecomposition(const Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix3EigenDecomposition EigenDecomposition(Real epsilon = Math::GetZeroTolerance()) const;
 
         // 从欧拉角创建旋转矩阵
         void MakeEulerXYZ(Real xAngle, Real yAngle, Real zAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1);
@@ -379,9 +378,9 @@ namespace Mathematics
 
     private:
         // 存储为行主序。
-        Vector3 m_X;
-        Vector3 m_Y;
-        Vector3 m_Z;
+        Vector3 x;
+        Vector3 y;
+        Vector3 z;
     };
 
     // vec^T * M
@@ -409,7 +408,7 @@ namespace Mathematics
     NODISCARD Matrix3<Real> TransposeTimesTranspose(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs) noexcept;
 
     template <typename Real>
-    NODISCARD bool Approximate(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs, const Real epsilon = Math<Real>::GetZeroTolerance());
+    NODISCARD bool Approximate(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance());
 
     // 调试输出。
     template <typename Real>

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/08 13:59)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 17:45)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_DETAIL_H
@@ -62,7 +62,7 @@ Real Mathematics::Dot(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs) 
 }
 
 template <typename Real>
-bool Mathematics::Approximate(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs, const Real epsilon) noexcept
+bool Mathematics::Approximate(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs, Real epsilon) noexcept
 {
     return Math<Real>::FAbs(lhs.GetW() - rhs.GetW()) <= epsilon &&
            Math<Real>::FAbs(lhs.GetX() - rhs.GetX()) <= epsilon &&
@@ -73,10 +73,14 @@ bool Mathematics::Approximate(const Quaternion<Real>& lhs, const Quaternion<Real
 template <typename Real>
 std::ostream& Mathematics::operator<<(std::ostream& outFile, const Quaternion<Real>& quaternion)
 {
-    return outFile << "w = " << quaternion.GetW()
-                   << " x = " << quaternion.GetX()
-                   << " y = " << quaternion.GetY()
-                   << " z = " << quaternion.GetZ();
+    return outFile << "w = "
+                   << quaternion.GetW()
+                   << " x = "
+                   << quaternion.GetX()
+                   << " y = "
+                   << quaternion.GetY()
+                   << " z = "
+                   << quaternion.GetZ();
 }
 
 #endif  // MATHEMATICS_ALGEBRA_QUATERNION_DETAIL_H

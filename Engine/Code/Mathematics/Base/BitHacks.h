@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/01/28 15:49)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/30 14:02)
 
 #ifndef MATHEMATICS_BASE_BIT_HACKS_H
 #define MATHEMATICS_BASE_BIT_HACKS_H
@@ -13,8 +13,6 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-
-#include <array>
 
 namespace Mathematics
 {
@@ -28,15 +26,13 @@ namespace Mathematics
 
     public:
         template <typename T>
-        NODISCARD constexpr static bool IsPowerOfTwo(T value) noexcept
-        {
-            static_assert(std::is_integral_v<T>, "T must be integral.");
+        requires std::is_integral_v<T>
+        NODISCARD static bool IsPowerOfTwo(T value);
 
-            return (0 < value) && ((value & (value - 1)) == 0);
-        }
-
-        template <typename T>
-        NODISCARD static T Log2OfPowerOfTwo(T powerOfTwo);
+        NODISCARD static int Log2OfPowerOfTwo(uint32_t powerOfTwo);
+        NODISCARD static int Log2OfPowerOfTwo(int32_t powerOfTwo);
+        NODISCARD static int Log2OfPowerOfTwo(uint64_t powerOfTwo) noexcept;
+        NODISCARD static int Log2OfPowerOfTwo(int64_t powerOfTwo);
 
         // 从IEEE32位区间在[0,1]的浮点数F，
         // 快速转换为区间在[0,2^P-1]的一个32位整数I，
@@ -53,8 +49,23 @@ namespace Mathematics
         NODISCARD static int GetTrailingBit(uint64_t value);
         NODISCARD static int GetTrailingBit(int64_t value);
 
-        NODISCARD static uint64_t RoundUpToPowerOfTwo(uint32_t value);
+        NODISCARD static uint32_t RoundUpToPowerOfTwo(uint32_t value);
         NODISCARD static uint32_t RoundDownToPowerOfTwo(uint32_t value);
+        NODISCARD static uint64_t RoundUpToPowerOfTwo(uint64_t value);
+        NODISCARD static uint64_t RoundDownToPowerOfTwo(uint64_t value);
+        NODISCARD static uint32_t RoundUpToPowerOfTwo(int32_t value);
+        NODISCARD static uint32_t RoundDownToPowerOfTwo(int32_t value);
+        NODISCARD static uint64_t RoundUpToPowerOfTwo(int64_t value);
+        NODISCARD static uint64_t RoundDownToPowerOfTwo(int64_t value);
+
+        NODISCARD static int PopulationCount(uint32_t value);
+        NODISCARD static int PopulationCount(uint64_t value);
+
+        NODISCARD static int GetNumLeadingZeroBits(uint32_t value);
+        NODISCARD static int GetNumLeadingZeroBits(uint64_t value);
+
+        NODISCARD static int GetNumTrailingZeroBits(uint32_t value);
+        NODISCARD static int GetNumTrailingZeroBits(uint64_t value);
     };
 }
 

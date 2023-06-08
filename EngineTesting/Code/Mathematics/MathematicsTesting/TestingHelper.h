@@ -10,7 +10,6 @@
 #ifndef MATHEMATICS_TESTING_TESTING_HELPER_H
 #define MATHEMATICS_TESTING_TESTING_HELPER_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 

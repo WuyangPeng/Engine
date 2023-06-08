@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_APPROXIMATION_SUITE_QUADRATIC_CIRCLE_FIT2_TESTING_H
 #define MATHEMATICS_APPROXIMATION_SUITE_QUADRATIC_CIRCLE_FIT2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class QuadraticCircleFit2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(QuadraticCircleFit2Testing);
+        using ClassType = QuadraticCircleFit2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit QuadraticCircleFit2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

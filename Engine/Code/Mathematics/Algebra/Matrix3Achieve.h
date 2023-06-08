@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 17:01)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 16:46)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX3_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_MATRIX3_ACHIEVE_H
@@ -26,12 +26,13 @@
 #include "Mathematics/NumericalAnalysis/GaussianEliminationDetail.h"
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real>::Matrix3(const ContainerType& entry, MatrixMajorFlags majorFlag)
-    : m_X{}, m_Y{}, m_Z{}
+    : x{}, y{}, z{}
 {
     if (entry.size() != matrixSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s))
     }
 
 #include STSTEM_WARNING_PUSH
@@ -39,15 +40,15 @@ Mathematics::Matrix3<Real>::Matrix3(const ContainerType& entry, MatrixMajorFlags
 
     if (majorFlag == MatrixMajorFlags::Row)
     {
-        m_X.SetCoordinate(entry[0], entry[1], entry[2]);
-        m_Y.SetCoordinate(entry[3], entry[4], entry[5]);
-        m_Z.SetCoordinate(entry[6], entry[7], entry[8]);
+        x.SetCoordinate(entry[0], entry[1], entry[2]);
+        y.SetCoordinate(entry[3], entry[4], entry[5]);
+        z.SetCoordinate(entry[6], entry[7], entry[8]);
     }
     else
     {
-        m_X.SetCoordinate(entry[0], entry[3], entry[6]);
-        m_Y.SetCoordinate(entry[1], entry[4], entry[7]);
-        m_Z.SetCoordinate(entry[2], entry[5], entry[8]);
+        x.SetCoordinate(entry[0], entry[3], entry[6]);
+        y.SetCoordinate(entry[1], entry[4], entry[7]);
+        z.SetCoordinate(entry[2], entry[5], entry[8]);
     }
 
 #include STSTEM_WARNING_POP
@@ -56,32 +57,34 @@ Mathematics::Matrix3<Real>::Matrix3(const ContainerType& entry, MatrixMajorFlags
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real>::Matrix3(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2, MatrixMajorFlags majorFlag)
-    : m_X{}, m_Y{}, m_Z{}
+    : x{}, y{}, z{}
 {
     if (majorFlag == MatrixMajorFlags::Row)
     {
-        m_X = vector0;
-        m_Y = vector1;
-        m_Z = vector2;
+        x = vector0;
+        y = vector1;
+        z = vector2;
     }
     else
     {
-        m_X.SetCoordinate(vector0[xIndex], vector1[xIndex], vector2[xIndex]);
-        m_Y.SetCoordinate(vector0[yIndex], vector1[yIndex], vector2[yIndex]);
-        m_Z.SetCoordinate(vector0[zIndex], vector1[zIndex], vector2[zIndex]);
+        x.SetCoordinate(vector0[xIndex], vector1[xIndex], vector2[xIndex]);
+        y.SetCoordinate(vector0[yIndex], vector1[yIndex], vector2[yIndex]);
+        z.SetCoordinate(vector0[zIndex], vector1[zIndex], vector2[zIndex]);
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real>::Matrix3(const Vector3ContainerType& vectors, MatrixMajorFlags majorFlag)
-    : m_X{}, m_Y{}, m_Z{}
+    : x{}, y{}, z{}
 {
     if (vectors.size() != vectorSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s))
     }
 
 #include STSTEM_WARNING_PUSH
@@ -89,15 +92,15 @@ Mathematics::Matrix3<Real>::Matrix3(const Vector3ContainerType& vectors, MatrixM
 
     if (majorFlag == MatrixMajorFlags::Row)
     {
-        m_X = vectors[xIndex];
-        m_Y = vectors[yIndex];
-        m_Z = vectors[zIndex];
+        x = vectors[xIndex];
+        y = vectors[yIndex];
+        z = vectors[zIndex];
     }
     else
     {
-        m_X.SetCoordinate(vectors[xIndex].GetX(), vectors[yIndex].GetX(), vectors[zIndex].GetX());
-        m_Y.SetCoordinate(vectors[xIndex].GetY(), vectors[yIndex].GetY(), vectors[zIndex].GetY());
-        m_Z.SetCoordinate(vectors[xIndex].GetZ(), vectors[yIndex].GetZ(), vectors[zIndex].GetZ());
+        x.SetCoordinate(vectors[xIndex].GetX(), vectors[yIndex].GetX(), vectors[zIndex].GetX());
+        y.SetCoordinate(vectors[xIndex].GetY(), vectors[yIndex].GetY(), vectors[zIndex].GetY());
+        z.SetCoordinate(vectors[xIndex].GetZ(), vectors[yIndex].GetZ(), vectors[zIndex].GetZ());
     }
 
 #include STSTEM_WARNING_POP
@@ -106,8 +109,9 @@ Mathematics::Matrix3<Real>::Matrix3(const Vector3ContainerType& vectors, MatrixM
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real>::Matrix3(const Vector3& axis, Real angle) noexcept
-    : m_X{}, m_Y{}, m_Z{}
+    : x{}, y{}, z{}
 {
     MakeRotation(axis, angle);
 
@@ -115,8 +119,9 @@ Mathematics::Matrix3<Real>::Matrix3(const Vector3& axis, Real angle) noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real>::Matrix3(MatrixRotationAxis axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
-    : m_X{}, m_Y{}, m_Z{}
+    : x{}, y{}, z{}
 {
     MakeRotation(axis, angle);
 
@@ -124,8 +129,9 @@ Mathematics::Matrix3<Real>::Matrix3(MatrixRotationAxis axis, Real angle) noexcep
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real>::Matrix3(const Vector3& vector0, const Vector3& vector1) noexcept
-    : m_X{}, m_Y{}, m_Z{}
+    : x{}, y{}, z{}
 {
     MakeTensorProduct(vector0, vector1);
 
@@ -135,7 +141,7 @@ Mathematics::Matrix3<Real>::Matrix3(const Vector3& vector0, const Vector3& vecto
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::Matrix3<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::Matrix3<Real>::IsValid() const noexcept
 {
     return true;
 }
@@ -143,36 +149,40 @@ bool Mathematics::Matrix3<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeZero() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X.ZeroOut();
-    m_Y.ZeroOut();
-    m_Z.ZeroOut();
+    x.ZeroOut();
+    y.ZeroOut();
+    z.ZeroOut();
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeIdentity() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X = Vector3::GetUnitX();
-    m_Y = Vector3::GetUnitY();
-    m_Z = Vector3::GetUnitZ();
+    x = Vector3::GetUnitX();
+    y = Vector3::GetUnitY();
+    z = Vector3::GetUnitZ();
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeDiagonal(Real member00, Real member11, Real member22) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X.SetCoordinate(member00, Math::GetValue(0), Math::GetValue(0));
-    m_Y.SetCoordinate(Math::GetValue(0), member11, Math::GetValue(0));
-    m_Z.SetCoordinate(Math::GetValue(0), Math::GetValue(0), member22);
+    x.SetCoordinate(member00, Math::GetValue(0), Math::GetValue(0));
+    y.SetCoordinate(Math::GetValue(0), member11, Math::GetValue(0));
+    z.SetCoordinate(Math::GetValue(0), Math::GetValue(0), member22);
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeRotation(const Vector3& axis, Real angle) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -197,12 +207,13 @@ void Mathematics::Matrix3<Real>::MakeRotation(const Vector3& axis, Real angle) n
     const auto ySin = axis.GetY() * sinValue;
     const auto zSin = axis.GetZ() * sinValue;
 
-    m_X.SetCoordinate(xAxisSquareMultipliedOneMinusCos + cosValue, xym - zSin, xzm + ySin);
-    m_Y.SetCoordinate(xym + zSin, yAxisSquareMultipliedOneMinusCos + cosValue, yzm - xSin);
-    m_Z.SetCoordinate(xzm - ySin, yzm + xSin, zAxisSquareMultipliedOneMinusCos + cosValue);
+    x.SetCoordinate(xAxisSquareMultipliedOneMinusCos + cosValue, xym - zSin, xzm + ySin);
+    y.SetCoordinate(xym + zSin, yAxisSquareMultipliedOneMinusCos + cosValue, yzm - xSin);
+    z.SetCoordinate(xzm - ySin, yzm + xSin, zAxisSquareMultipliedOneMinusCos + cosValue);
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeRotation(MatrixRotationAxis axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -214,27 +225,27 @@ void Mathematics::Matrix3<Real>::MakeRotation(MatrixRotationAxis axis, Real angl
     {
         case MatrixRotationAxis::X:
         {
-            m_X = Vector3::GetUnitX();
-            m_Y.SetCoordinate(Math::GetValue(0), cosValue, -sinValue);
-            m_Z.SetCoordinate(Math::GetValue(0), sinValue, cosValue);
+            x = Vector3::GetUnitX();
+            y.SetCoordinate(Math::GetValue(0), cosValue, -sinValue);
+            z.SetCoordinate(Math::GetValue(0), sinValue, cosValue);
 
             break;
         }
 
         case MatrixRotationAxis::Y:
         {
-            m_X.SetCoordinate(cosValue, Math::GetValue(0), sinValue);
-            m_Y = Vector3::GetUnitY();
-            m_Z.SetCoordinate(-sinValue, Math::GetValue(0), cosValue);
+            x.SetCoordinate(cosValue, Math::GetValue(0), sinValue);
+            y = Vector3::GetUnitY();
+            z.SetCoordinate(-sinValue, Math::GetValue(0), cosValue);
 
             break;
         }
 
         case MatrixRotationAxis::Z:
         {
-            m_X.SetCoordinate(cosValue, -sinValue, Math::GetValue(0));
-            m_Y.SetCoordinate(sinValue, cosValue, Math::GetValue(0));
-            m_Z = Vector3::GetUnitZ();
+            x.SetCoordinate(cosValue, -sinValue, Math::GetValue(0));
+            y.SetCoordinate(sinValue, cosValue, Math::GetValue(0));
+            z = Vector3::GetUnitZ();
 
             break;
         }
@@ -247,16 +258,18 @@ void Mathematics::Matrix3<Real>::MakeRotation(MatrixRotationAxis axis, Real angl
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeTensorProduct(const Vector3& vector0, const Vector3& vector1) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X.SetCoordinate(vector0.GetX() * vector1.GetX(), vector0.GetX() * vector1.GetY(), vector0.GetX() * vector1.GetZ());
-    m_Y.SetCoordinate(vector0.GetY() * vector1.GetX(), vector0.GetY() * vector1.GetY(), vector0.GetY() * vector1.GetZ());
-    m_Z.SetCoordinate(vector0.GetZ() * vector1.GetX(), vector0.GetZ() * vector1.GetY(), vector0.GetZ() * vector1.GetZ());
+    x.SetCoordinate(vector0.GetX() * vector1.GetX(), vector0.GetX() * vector1.GetY(), vector0.GetX() * vector1.GetZ());
+    y.SetCoordinate(vector0.GetY() * vector1.GetX(), vector0.GetY() * vector1.GetY(), vector0.GetY() * vector1.GetZ());
+    z.SetCoordinate(vector0.GetZ() * vector1.GetX(), vector0.GetZ() * vector1.GetY(), vector0.GetZ() * vector1.GetZ());
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 const Mathematics::Vector3<Real>& Mathematics::Matrix3<Real>::operator[](int row) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -264,19 +277,20 @@ const Mathematics::Vector3<Real>& Mathematics::Matrix3<Real>::operator[](int row
     switch (System::UnderlyingCastEnum<VectorIndex>(row))
     {
         case Matrix3::VectorIndex::X:
-            return m_X;
+            return x;
         case Matrix3::VectorIndex::Y:
-            return m_Y;
+            return y;
         case Matrix3::VectorIndex::Z:
-            return m_Z;
+            return z;
         default:
             break;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s))
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3<Real>& Mathematics::Matrix3<Real>::operator[](int row)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -285,6 +299,7 @@ Mathematics::Vector3<Real>& Mathematics::Matrix3<Real>::operator[](int row)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 const Real& Mathematics::Matrix3<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -295,6 +310,7 @@ const Real& Mathematics::Matrix3<Real>::operator()(int row, int column) const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real& Mathematics::Matrix3<Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -308,70 +324,76 @@ Real& Mathematics::Matrix3<Real>::operator()(int row, int column)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::operator-() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Matrix3{ -m_X.GetX(),
-                    -m_X.GetY(),
-                    -m_X.GetZ(),
-                    -m_Y.GetX(),
-                    -m_Y.GetY(),
-                    -m_Y.GetZ(),
-                    -m_Z.GetX(),
-                    -m_Z.GetY(),
-                    -m_Z.GetZ() };
+    return Matrix3{ -x.GetX(),
+                    -x.GetY(),
+                    -x.GetZ(),
+                    -y.GetX(),
+                    -y.GetY(),
+                    -y.GetZ(),
+                    -z.GetX(),
+                    -z.GetY(),
+                    -z.GetZ() };
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real>& Mathematics::Matrix3<Real>::operator+=(const Matrix3& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X += rhs.m_X;
-    m_Y += rhs.m_Y;
-    m_Z += rhs.m_Z;
+    x += rhs.x;
+    y += rhs.y;
+    z += rhs.z;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real>& Mathematics::Matrix3<Real>::operator-=(const Matrix3& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X -= rhs.m_X;
-    m_Y -= rhs.m_Y;
-    m_Z -= rhs.m_Z;
+    x -= rhs.x;
+    y -= rhs.y;
+    z -= rhs.z;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real>& Mathematics::Matrix3<Real>::operator*=(Real scalar) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X *= scalar;
-    m_Y *= scalar;
-    m_Z *= scalar;
+    x *= scalar;
+    y *= scalar;
+    z *= scalar;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real>& Mathematics::Matrix3<Real>::operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X /= scalar;
-    m_Y /= scalar;
-    m_Z /= scalar;
+    x /= scalar;
+    y /= scalar;
+    z /= scalar;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Matrix3<Real>::QuadraticForm(const Vector3& lhs, const Vector3& rhs) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -380,6 +402,7 @@ Real Mathematics::Matrix3<Real>::QuadraticForm(const Vector3& lhs, const Vector3
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::Transpose() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -396,6 +419,7 @@ Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::Transpose() const noexcep
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real>& Mathematics::Matrix3<Real>::operator*=(const Matrix3& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -406,6 +430,7 @@ Mathematics::Matrix3<Real>& Mathematics::Matrix3<Real>::operator*=(const Matrix3
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::TimesDiagonal(const Vector3& diagonal) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -422,6 +447,7 @@ Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::TimesDiagonal(const Vecto
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::DiagonalTimes(const Vector3& diagonal) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -438,13 +464,13 @@ Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::DiagonalTimes(const Vecto
 }
 
 template <typename Real>
-Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::GaussianEliminationInverse(const Real epsilon) const
+requires std::is_arithmetic_v<Real>
+Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::GaussianEliminationInverse(Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    GaussianElimination<Real> gaussianElimination{ vectorSize, GetContainer(), true, epsilon };
-
-    if (gaussianElimination.IsInverse())
+    if (GaussianElimination<Real> gaussianElimination{ vectorSize, GetContainer(), true, epsilon };
+        gaussianElimination.IsInverse())
     {
         return Matrix3{ gaussianElimination.GetInverse(), MatrixMajorFlags::Row };
     }
@@ -457,7 +483,8 @@ Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::GaussianEliminationInvers
 }
 
 template <typename Real>
-Real Mathematics::Matrix3<Real>::GaussianEliminationDeterminant(const Real epsilon) const
+requires std::is_arithmetic_v<Real>
+Real Mathematics::Matrix3<Real>::GaussianEliminationDeterminant(Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -467,6 +494,7 @@ Real Mathematics::Matrix3<Real>::GaussianEliminationDeterminant(const Real epsil
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::Inverse(const Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -496,24 +524,26 @@ Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::Inverse(const Real epsilo
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix3<Real> Mathematics::Matrix3<Real>::Adjoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Matrix3<Real>{ GetValue<1, 1>() * GetValue<2, 2>() - GetValue<1, 2>() * GetValue<2, 1>(),
-                          GetValue<0, 2>() * GetValue<2, 1>() - GetValue<0, 1>() * GetValue<2, 2>(),
-                          GetValue<0, 1>() * GetValue<1, 2>() - GetValue<0, 2>() * GetValue<1, 1>(),
+    return Matrix3{ GetValue<1, 1>() * GetValue<2, 2>() - GetValue<1, 2>() * GetValue<2, 1>(),
+                    GetValue<0, 2>() * GetValue<2, 1>() - GetValue<0, 1>() * GetValue<2, 2>(),
+                    GetValue<0, 1>() * GetValue<1, 2>() - GetValue<0, 2>() * GetValue<1, 1>(),
 
-                          GetValue<1, 2>() * GetValue<2, 0>() - GetValue<1, 0>() * GetValue<2, 2>(),
-                          GetValue<0, 0>() * GetValue<2, 2>() - GetValue<0, 2>() * GetValue<2, 0>(),
-                          GetValue<0, 2>() * GetValue<1, 0>() - GetValue<0, 0>() * GetValue<1, 2>(),
+                    GetValue<1, 2>() * GetValue<2, 0>() - GetValue<1, 0>() * GetValue<2, 2>(),
+                    GetValue<0, 0>() * GetValue<2, 2>() - GetValue<0, 2>() * GetValue<2, 0>(),
+                    GetValue<0, 2>() * GetValue<1, 0>() - GetValue<0, 0>() * GetValue<1, 2>(),
 
-                          GetValue<1, 0>() * GetValue<2, 1>() - GetValue<1, 1>() * GetValue<2, 0>(),
-                          GetValue<0, 1>() * GetValue<2, 0>() - GetValue<0, 0>() * GetValue<2, 1>(),
-                          GetValue<0, 0>() * GetValue<1, 1>() - GetValue<0, 1>() * GetValue<1, 0>() };
+                    GetValue<1, 0>() * GetValue<2, 1>() - GetValue<1, 1>() * GetValue<2, 0>(),
+                    GetValue<0, 1>() * GetValue<2, 0>() - GetValue<0, 0>() * GetValue<2, 1>(),
+                    GetValue<0, 0>() * GetValue<1, 1>() - GetValue<0, 1>() * GetValue<1, 0>() };
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Matrix3<Real>::Determinant() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -525,8 +555,8 @@ Real Mathematics::Matrix3<Real>::Determinant() const noexcept
     return GetValue<0, 0>() * column00 + GetValue<0, 1>() * column10 + GetValue<0, 2>() * column20;
 }
 
-// private
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Matrix3<Real>::ExtractAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -538,6 +568,7 @@ Real Mathematics::Matrix3<Real>::ExtractAngle() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::ExtractAngleAxis() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -619,6 +650,7 @@ typename Mathematics::Matrix3<Real>::Matrix3Extract Mathematics::Matrix3<Real>::
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Vector3 Mathematics::Matrix3<Real>::ExtractAxis() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -629,6 +661,7 @@ typename Mathematics::Matrix3<Real>::Vector3 Mathematics::Matrix3<Real>::Extract
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::Orthonormalize()
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -678,7 +711,8 @@ void Mathematics::Matrix3<Real>::Orthonormalize()
 }
 
 template <typename Real>
-typename Mathematics::Matrix3<Real>::Matrix3EigenDecomposition Mathematics::Matrix3<Real>::EigenDecomposition(const Real epsilon) const
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Matrix3<Real>::Matrix3EigenDecomposition Mathematics::Matrix3<Real>::EigenDecomposition(Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -748,6 +782,7 @@ typename Mathematics::Matrix3<Real>::Matrix3EigenDecomposition Mathematics::Matr
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeEuler(const Euler& euler) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -796,6 +831,7 @@ void Mathematics::Matrix3<Real>::MakeEuler(const Euler& euler) noexcept(gAssert 
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeEulerXYZ(Real xAngle, Real yAngle, Real zAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -808,6 +844,7 @@ void Mathematics::Matrix3<Real>::MakeEulerXYZ(Real xAngle, Real yAngle, Real zAn
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeEulerXZY(Real xAngle, Real zAngle, Real yAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -820,6 +857,7 @@ void Mathematics::Matrix3<Real>::MakeEulerXZY(Real xAngle, Real zAngle, Real yAn
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeEulerYXZ(Real yAngle, Real xAngle, Real zAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -832,6 +870,7 @@ void Mathematics::Matrix3<Real>::MakeEulerYXZ(Real yAngle, Real xAngle, Real zAn
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeEulerYZX(Real yAngle, Real zAngle, Real xAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -844,6 +883,7 @@ void Mathematics::Matrix3<Real>::MakeEulerYZX(Real yAngle, Real zAngle, Real xAn
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeEulerZXY(Real zAngle, Real xAngle, Real yAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -856,6 +896,7 @@ void Mathematics::Matrix3<Real>::MakeEulerZXY(Real zAngle, Real xAngle, Real yAn
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeEulerZYX(Real zAngle, Real yAngle, Real xAngle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -868,6 +909,7 @@ void Mathematics::Matrix3<Real>::MakeEulerZYX(Real zAngle, Real yAngle, Real xAn
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeEulerXYX(Real x0Angle, Real yAngle, Real x1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -880,6 +922,7 @@ void Mathematics::Matrix3<Real>::MakeEulerXYX(Real x0Angle, Real yAngle, Real x1
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeEulerXZX(Real x0Angle, Real zAngle, Real x1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -892,6 +935,7 @@ void Mathematics::Matrix3<Real>::MakeEulerXZX(Real x0Angle, Real zAngle, Real x1
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeEulerYXY(Real y0Angle, Real xAngle, Real y1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -904,6 +948,7 @@ void Mathematics::Matrix3<Real>::MakeEulerYXY(Real y0Angle, Real xAngle, Real y1
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeEulerYZY(Real y0Angle, Real zAngle, Real y1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -916,6 +961,7 @@ void Mathematics::Matrix3<Real>::MakeEulerYZY(Real y0Angle, Real zAngle, Real y1
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeEulerZXZ(Real z0Angle, Real xAngle, Real z1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -928,6 +974,7 @@ void Mathematics::Matrix3<Real>::MakeEulerZXZ(Real z0Angle, Real xAngle, Real z1
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::MakeEulerZYZ(Real z0Angle, Real yAngle, Real z1Angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -940,6 +987,7 @@ void Mathematics::Matrix3<Real>::MakeEulerZYZ(Real z0Angle, Real yAngle, Real z1
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerXYZ() const noexcept
 {
     // +-           -+   +-                                        -+
@@ -988,6 +1036,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerXZY() const noexcept
 {
     // +-           -+   +-                                        -+
@@ -1036,6 +1085,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerYXZ() const noexcept
 {
     // +-           -+   +-                                       -+
@@ -1085,6 +1135,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerYZX() const noexcept
 {
     // +-           -+   +-                                       -+
@@ -1136,6 +1187,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerZXY() const noexcept
 {
     // +-           -+   +-                                        -+
@@ -1188,6 +1240,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerZYX() const noexcept
 {
     // +-           -+   +-                                      -+
@@ -1240,6 +1293,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerXYX() const noexcept
 {
     // +-           -+   +-                                                -+
@@ -1287,6 +1341,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerXZX() const noexcept
 {
     // +-           -+   +-                                                -+
@@ -1335,6 +1390,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerYXY() const noexcept
 {
     // +-           -+   +-                                                -+
@@ -1383,6 +1439,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerYZY() const noexcept
 {
     // +-           -+   +-                                                -+
@@ -1431,6 +1488,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerZXZ() const noexcept
 {
     // +-           -+   +-                                                -+
@@ -1479,6 +1537,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEulerZYZ() const noexcept
 {
     // +-           -+   +-                                                -+
@@ -1527,6 +1586,7 @@ typename Mathematics::Matrix3<Real>::Euler Mathematics::Matrix3<Real>::ExtractEu
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix3<Real>::Slerp(Real t, const Matrix3& rot0, const Matrix3& rot1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -1543,40 +1603,43 @@ void Mathematics::Matrix3<Real>::Slerp(Real t, const Matrix3& rot0, const Matrix
     *this = rot0 * (*this);
 }
 
-template <typename T>
-typename Mathematics::Matrix3<T>::ArrayType Mathematics::Matrix3<T>::GetCoordinate() const noexcept
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Matrix3<Real>::ArrayType Mathematics::Matrix3<Real>::GetCoordinate() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return ArrayType{ m_X.GetX(),
-                      m_X.GetY(),
-                      m_X.GetZ(),
-                      m_Y.GetX(),
-                      m_Y.GetY(),
-                      m_Y.GetZ(),
-                      m_Z.GetX(),
-                      m_Z.GetY(),
-                      m_Z.GetZ() };
+    return ArrayType{ x.GetX(),
+                      x.GetY(),
+                      x.GetZ(),
+                      y.GetX(),
+                      y.GetY(),
+                      y.GetZ(),
+                      z.GetX(),
+                      z.GetY(),
+                      z.GetZ() };
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix3<Real>::ContainerType Mathematics::Matrix3<Real>::GetContainer() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return ContainerType{ m_X.GetX(),
-                          m_X.GetY(),
-                          m_X.GetZ(),
-                          m_Y.GetX(),
-                          m_Y.GetY(),
-                          m_Y.GetZ(),
-                          m_Z.GetX(),
-                          m_Z.GetY(),
-                          m_Z.GetZ() };
+    return ContainerType{ x.GetX(),
+                          x.GetY(),
+                          x.GetZ(),
+                          y.GetX(),
+                          y.GetY(),
+                          y.GetZ(),
+                          z.GetX(),
+                          z.GetY(),
+                          z.GetZ() };
 }
 
-template <typename T>
-void Mathematics::Matrix3<T>::Set(const ArrayType& coordinate)
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+void Mathematics::Matrix3<Real>::Set(const ArrayType& coordinate)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -1590,6 +1653,7 @@ void Mathematics::Matrix3<T>::Set(const ArrayType& coordinate)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix4<Real> Mathematics::Matrix3<Real>::Lift() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -1607,6 +1671,7 @@ Mathematics::Matrix4<Real> Mathematics::Matrix3<Real>::Lift() const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix2<Real> Mathematics::Matrix3<Real>::Project() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -1625,6 +1690,7 @@ Mathematics::Matrix2<Real> Mathematics::Matrix3<Real>::Project() const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Matrix3<Real>::Trace() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;

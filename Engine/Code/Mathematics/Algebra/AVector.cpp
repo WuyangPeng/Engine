@@ -1,19 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 11:19)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 09:31)
 
 #include "Mathematics/MathematicsExport.h"
 
 #ifdef MATHEMATICS_EXPORT_TEMPLATE
 
-    #ifndef MATHEMATICS_INCLUDED_AVECTOR_ACHIEVE
-        #define MATHEMATICS_INCLUDED_AVECTOR_ACHIEVE
-    #endif  // MATHEMATICS_INCLUDED_AVECTOR_ACHIEVE
+    #ifndef MATHEMATICS_INCLUDED_A_VECTOR_ACHIEVE
+
+        #define MATHEMATICS_INCLUDED_A_VECTOR_ACHIEVE
+
+    #endif  // MATHEMATICS_INCLUDED_A_VECTOR_ACHIEVE
 
 #endif  // MATHEMATICS_EXPORT_TEMPLATE
 

@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_ALGEBRA_SUITE_AXES_ALIGN_BOUNDING_BOX_3D_TESTING_H
 #define MATHEMATICS_ALGEBRA_SUITE_AXES_ALIGN_BOUNDING_BOX_3D_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class AxesAlignBoundingBox3DTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(AxesAlignBoundingBox3DTesting);
+        using ClassType = AxesAlignBoundingBox3DTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit AxesAlignBoundingBox3DTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

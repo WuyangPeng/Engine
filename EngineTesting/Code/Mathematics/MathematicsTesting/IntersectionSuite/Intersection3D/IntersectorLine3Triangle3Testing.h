@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_INTERSECTION_SUITE_INTERSECTOR_LINE3_TRIANGLE3_TESTING_H
 #define MATHEMATICS_INTERSECTION_SUITE_INTERSECTOR_LINE3_TRIANGLE3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class IntersectorLine3Triangle3Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(IntersectorLine3Triangle3Testing);
+        using ClassType = IntersectorLine3Triangle3Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit IntersectorLine3Triangle3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

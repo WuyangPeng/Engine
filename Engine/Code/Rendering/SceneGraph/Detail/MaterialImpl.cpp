@@ -57,11 +57,11 @@ int Rendering::MaterialImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = MATHEMATICS_STREAM_SIZE(emissive);
+    auto size = Mathematics::GetStreamSize(emissive);
 
-    size += MATHEMATICS_STREAM_SIZE(ambient);
-    size += MATHEMATICS_STREAM_SIZE(diffuse);
-    size += MATHEMATICS_STREAM_SIZE(specular);
+    size += Mathematics::GetStreamSize(ambient);
+    size += Mathematics::GetStreamSize(diffuse);
+    size += Mathematics::GetStreamSize(specular);
 
     return size;
 }

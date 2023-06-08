@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/08 14:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/01 10:28)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_ORTHONORMALIZE_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_ORTHONORMALIZE_H
@@ -22,11 +22,10 @@
 namespace Mathematics
 {
     template <typename Real, bool Robust = false>
+    requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector3Orthonormalize final
     {
     public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-
         using ClassType = Vector3Orthonormalize<Real, Robust>;
         using Math = Math<Real>;
         using Vector3 = Vector3<Real>;

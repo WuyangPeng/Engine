@@ -9,10 +9,10 @@
 
 #include "ConvexPolygon2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Objects2D/ConvexPolygon2Detail.h"
-
 #include <random>
 
 using std::default_random_engine;
@@ -24,7 +24,18 @@ namespace Mathematics
     template class ConvexPolygon2<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, ConvexPolygon2Testing)
+Mathematics::ConvexPolygon2Testing::ConvexPolygon2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, ConvexPolygon2Testing)
+
+void Mathematics::ConvexPolygon2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::ConvexPolygon2Testing::MainTest()
 {
@@ -34,11 +45,11 @@ void Mathematics::ConvexPolygon2Testing::MainTest()
 void Mathematics::ConvexPolygon2Testing::ConvexPolygonTest()
 {
     default_random_engine generator{ GetEngineRandomSeed() };
-    uniform_real<double> firstRandomDistribution{ 0.0, 100.0 };
+    const uniform_real<double> firstRandomDistribution{ 0.0, 100.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         constexpr auto size = 8;
 
@@ -47,7 +58,7 @@ void Mathematics::ConvexPolygon2Testing::ConvexPolygonTest()
         // x、y值为正
         Vector2D firstVertex(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
-        uniform_real<double> secondRandomDistribution(0.0, firstVertex[0]);
+        const uniform_real<double> secondRandomDistribution(0.0, firstVertex[0]);
 
         auto firstRandom = secondRandomDistribution(generator);
         auto secondRandom = firstRandomDistribution(generator);
@@ -71,7 +82,7 @@ void Mathematics::ConvexPolygon2Testing::ConvexPolygonTest()
         Vector2D seventhVertex(-sixthVertex[0], sixthVertex[1]);
 
         // x值为正、y值为负
-        Vector2D eighthVertex(seventhVertex[0] + firstRandom, seventhVertex[1] + secondRandom);
+        const Vector2D eighthVertex(seventhVertex[0] + firstRandom, seventhVertex[1] + secondRandom);
 
         // 由于是测试，没有对Vector2Ptr和linePtr进行初始化，
         // 使用SetVertex和UpdateLines进行计算。

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 16:11)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 16:28)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX2_DETAIL_H
 #define MATHEMATICS_ALGEBRA_MATRIX2_DETAIL_H
@@ -20,6 +20,7 @@
 #endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_MATRIX2_ACHIEVE)
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <int Row, int Column>
 Real Mathematics::Matrix2<Real>::GetValue() const noexcept
 {
@@ -39,6 +40,7 @@ Real Mathematics::Matrix2<Real>::GetValue() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <int Row, int Column>
 void Mathematics::Matrix2<Real>::SetValue(Real value) noexcept
 {
@@ -58,18 +60,20 @@ void Mathematics::Matrix2<Real>::SetValue(Real value) noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <int Row>
 const Mathematics::Vector2<Real>& Mathematics::Matrix2<Real>::GetVector() const noexcept
 {
     static_assert(0 <= Row && Row < vectorSize);
 
     if constexpr (Row == xIndex)
-        return m_X;
+        return x;
     else
-        return m_Y;
+        return y;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <int Row>
 Mathematics::Vector2<Real>& Mathematics::Matrix2<Real>::GetVector() noexcept
 {
@@ -79,6 +83,7 @@ Mathematics::Vector2<Real>& Mathematics::Matrix2<Real>::GetVector() noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <int Column>
 typename Mathematics::Vector2<Real>::GetCoordinateFunction Mathematics::Matrix2<Real>::GetVectorGetFunction() const noexcept
 {
@@ -91,6 +96,7 @@ typename Mathematics::Vector2<Real>::GetCoordinateFunction Mathematics::Matrix2<
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <int Column>
 typename Mathematics::Vector2<Real>::SetCoordinateFunction Mathematics::Matrix2<Real>::GetVectorSetFunction() const noexcept
 {
@@ -156,7 +162,7 @@ Mathematics::Matrix2<Real> Mathematics::TransposeTimesTranspose(const Matrix2<Re
 }
 
 template <typename Real>
-bool Mathematics::Approximate(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs, const Real epsilon) noexcept
+bool Mathematics::Approximate(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs, Real epsilon) noexcept
 {
     return Math<Real>::FAbs(lhs.GetValue<0, 0>() - rhs.GetValue<0, 0>()) <= epsilon &&
            Math<Real>::FAbs(lhs.GetValue<0, 1>() - rhs.GetValue<0, 1>()) <= epsilon &&

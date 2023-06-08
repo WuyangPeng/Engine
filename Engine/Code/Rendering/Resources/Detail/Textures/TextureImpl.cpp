@@ -85,7 +85,7 @@ void Rendering::TextureImpl::SaveToFile(WriteFileManager& outFile) const
     SaveLevelDataToFile(outFile);
 }
 
-void Rendering::TextureImpl::ReadFromFile(MAYBE_UNUSED ReadFileManager& inFile)
+void Rendering::TextureImpl::ReadFromFile(ReadFileManager& inFile)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -97,10 +97,10 @@ int Rendering::TextureImpl::GetNumLevels(int dim0, int dim1, int dim2, bool hasM
 {
     if (hasMipmaps)
     {
-        auto log0 = Mathematics::BitHacks::Log2OfPowerOfTwo(Mathematics::BitHacks::RoundDownToPowerOfTwo(dim0));
-        auto log1 = Mathematics::BitHacks::Log2OfPowerOfTwo(Mathematics::BitHacks::RoundDownToPowerOfTwo(dim1));
-        auto log2 = Mathematics::BitHacks::Log2OfPowerOfTwo(Mathematics::BitHacks::RoundDownToPowerOfTwo(dim2));
-        auto numLevels = 1 + std::max(log0, std::max(log1, log2));
+        const auto log0 = Mathematics::BitHacks::Log2OfPowerOfTwo(Mathematics::BitHacks::RoundDownToPowerOfTwo(dim0));
+        const auto log1 = Mathematics::BitHacks::Log2OfPowerOfTwo(Mathematics::BitHacks::RoundDownToPowerOfTwo(dim1));
+        const auto log2 = Mathematics::BitHacks::Log2OfPowerOfTwo(Mathematics::BitHacks::RoundDownToPowerOfTwo(dim2));
+        const auto numLevels = 1 + std::max(log0, std::max(log1, log2));
 
         return numLevels;
     }

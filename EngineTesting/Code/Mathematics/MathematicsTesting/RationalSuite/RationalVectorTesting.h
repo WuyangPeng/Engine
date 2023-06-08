@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_RATIONAL_SUITE_RATIONAL_VECTOR_TESTING_H
 #define MATHEMATICS_RATIONAL_SUITE_RATIONAL_VECTOR_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class RationalVectorTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(RationalVectorTesting);
+        using ClassType = RationalVectorTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit RationalVectorTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

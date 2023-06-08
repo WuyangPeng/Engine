@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_APPROXIMATION_SUITE_POLYNOMIAL_FIT4_POWERS_TESTING_H
 #define MATHEMATICS_APPROXIMATION_SUITE_POLYNOMIAL_FIT4_POWERS_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class PolynomialFit4PowersTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(PolynomialFit4PowersTesting);
+        using ClassType = PolynomialFit4PowersTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit PolynomialFit4PowersTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

@@ -30,7 +30,8 @@ namespace CoreTools
                                      std::string fileName,
                                      int lineNumber,
                                      std::string errorMessage,
-                                     const OStreamShared& streamShared) noexcept;
+                                     const OStreamShared& streamShared,
+                                     LogLevel logLevel) noexcept;
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -44,6 +45,7 @@ namespace CoreTools
         std::string fileName;
         int lineNumber;
         std::string errorMessage;
+        LogLevel logLevel;
     };
 }
 

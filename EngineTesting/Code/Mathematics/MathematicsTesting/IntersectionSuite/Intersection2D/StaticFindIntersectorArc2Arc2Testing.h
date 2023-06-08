@@ -10,7 +10,7 @@
 #ifndef MATHEMATICS_INTERSECTION_SUITE_STATIC_FIND_INTERSECTOR_ARC2_ARC2_TESTING_H
 #define MATHEMATICS_INTERSECTION_SUITE_STATIC_FIND_INTERSECTOR_ARC2_ARC2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Mathematics/Intersection/IntersectionFwd.h"
 
 namespace Mathematics
@@ -18,7 +18,13 @@ namespace Mathematics
     class StaticFindIntersectorArc2Arc2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(StaticFindIntersectorArc2Arc2Testing);
+        using ClassType = StaticFindIntersectorArc2Arc2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit StaticFindIntersectorArc2Arc2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

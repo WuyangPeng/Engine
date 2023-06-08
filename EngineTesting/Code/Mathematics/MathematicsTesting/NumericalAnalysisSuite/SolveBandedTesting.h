@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_SOLVE_BANDED_TESTING_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_SOLVE_BANDED_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class SolveBandedTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(SolveBandedTesting);
+        using ClassType = SolveBandedTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit SolveBandedTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

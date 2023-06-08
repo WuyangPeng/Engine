@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 11:17)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 14:55)
 
-#ifndef MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMALIZE_H
-#define MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMALIZE_H
+#ifndef MATHEMATICS_ALGEBRA_A_VECTOR_ORTHONORMALIZE_H
+#define MATHEMATICS_ALGEBRA_A_VECTOR_ORTHONORMALIZE_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -21,6 +21,7 @@
 namespace Mathematics
 {
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AVectorOrthonormalize final
     {
     public:
@@ -33,9 +34,9 @@ namespace Mathematics
     public:
         // Gram-Schmidt正交化。
         // 以线性无关的向量U、V和W，来计算一个正交组（单位长度，相互垂直）。
-        AVectorOrthonormalize(const AVector& uVector, const AVector& vVector, const AVector& wVector, const Real epsilon = Math::GetZeroTolerance());
+        AVectorOrthonormalize(const AVector& uVector, const AVector& vVector, const AVector& wVector, Real epsilon = Math::GetZeroTolerance());
 
-        explicit AVectorOrthonormalize(const std::vector<AVector> vectors, const Real epsilon = Math::GetZeroTolerance());
+        explicit AVectorOrthonormalize(const std::vector<AVector> vectors, Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
@@ -57,4 +58,4 @@ namespace Mathematics
     using AVectorOrthonormalizeD = AVectorOrthonormalize<double>;
 }
 
-#endif  // MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMALIZE_H
+#endif  // MATHEMATICS_ALGEBRA_A_VECTOR_ORTHONORMALIZE_H

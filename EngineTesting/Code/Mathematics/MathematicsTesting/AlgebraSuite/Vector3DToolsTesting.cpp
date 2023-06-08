@@ -9,10 +9,10 @@
 
 #include "Vector3DToolsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
-
 #include <random>
 
 using std::default_random_engine;
@@ -29,7 +29,18 @@ namespace Mathematics
 
 #endif  // BUILDING_MATHEMATICS_STATIC
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector3ToolsTesting)
+Mathematics::Vector3ToolsTesting::Vector3ToolsTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Vector3ToolsTesting)
+
+void Mathematics::Vector3ToolsTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Vector3ToolsTesting::MainTest()
 {
@@ -60,9 +71,9 @@ void Mathematics::Vector3ToolsTesting::ProductTest()
 
     const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Vector3D firstVector(randomDistribution(generator),
                              randomDistribution(generator),
@@ -103,9 +114,9 @@ void Mathematics::Vector3ToolsTesting::ProjectionTest()
 
     const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D firstVector(randomDistribution(generator),
                                    randomDistribution(generator),
@@ -150,9 +161,9 @@ void Mathematics::Vector3ToolsTesting::ConversionTest()
 
     const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D firstVector(randomDistribution(generator),
                                    randomDistribution(generator),
@@ -247,11 +258,11 @@ void Mathematics::Vector3ToolsTesting::OtherCalculateTest()
 
     const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
     vector<Vector3D> vectors;
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D eachVector(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 

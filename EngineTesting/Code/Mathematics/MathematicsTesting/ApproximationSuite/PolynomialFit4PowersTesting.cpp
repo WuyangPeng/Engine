@@ -10,11 +10,11 @@
 #include "PolynomialFit4PowersTesting.h"
 #include "CoreTools/DataTypes/TupleDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Approximation/PolynomialFit4PowersDetail.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -28,7 +28,18 @@ namespace Mathematics
     template class PolynomialFit4Powers<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialFit4PowersTesting)
+Mathematics::PolynomialFit4PowersTesting::PolynomialFit4PowersTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, PolynomialFit4PowersTesting)
+
+void Mathematics::PolynomialFit4PowersTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::PolynomialFit4PowersTesting::MainTest()
 {
@@ -43,9 +54,9 @@ void Mathematics::PolynomialFit4PowersTesting::FitTest()
     const uniform_int<> thirdRandomDistribution(2, 3);
     const uniform_int<> fourthRandomDistribution(0, 2);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<double> x;
         std::vector<double> y;

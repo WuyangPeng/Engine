@@ -106,8 +106,8 @@ Mathematics::Lozenge3<Real> Mathematics::ContLozenge3<Real>::ContLozenge(const s
     for (auto i = 0u; i < points.size(); ++i)
     {
         diff = points.at(i) - box.GetCenter();
-        auto u = Vector2Tools<Real>::DotProduct(box.GetAxis(2), diff);
-        auto v = Vector2Tools<Real>::DotProduct(box.GetAxis(1), diff);
+        auto u = Vector3Tools<Real>::DotProduct(box.GetAxis(2), diff);
+        auto v = Vector3Tools<Real>::DotProduct(box.GetAxis(1), diff);
 
         Real* aExtreme{ nullptr };
         Real* bExtreme{ nullptr };
@@ -144,7 +144,7 @@ Mathematics::Lozenge3<Real> Mathematics::ContLozenge3<Real>::ContLozenge(const s
             auto deltaU = u - *aExtreme;
             auto deltaV = v - *bExtreme;
             auto deltaSumSqr = deltaU * deltaU + deltaV * deltaV;
-            auto w = Vector2Tools<Real>::DotProduct(box.GetAxis(0), diff);
+            auto w = Vector3Tools<Real>::DotProduct(box.GetAxis(0), diff);
             auto wSqr = w * w;
             auto test = deltaSumSqr + wSqr;
             if (test > rSqr)

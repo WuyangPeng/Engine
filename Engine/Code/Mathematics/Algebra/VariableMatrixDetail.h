@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/08 10:15)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 18:20)
 
 #ifndef MATHEMATICS_ALGEBRA_VARIABLE_MATRIX_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VARIABLE_MATRIX_DETAIL_H
@@ -22,6 +22,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(int rowsNumber, int columnsNumber)
     : container{ rowsNumber, VariableLengthVector{ columnsNumber } }
 {
@@ -29,6 +30,7 @@ Mathematics::VariableMatrix<Real>::VariableMatrix(int rowsNumber, int columnsNum
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(int rowsNumber, int columnsNumber, const ContainerType& entry)
     : container{}
 {
@@ -38,6 +40,7 @@ Mathematics::VariableMatrix<Real>::VariableMatrix(int rowsNumber, int columnsNum
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(const VectorContainerType& matrix)
     : container{ matrix }
 {
@@ -45,6 +48,7 @@ Mathematics::VariableMatrix<Real>::VariableMatrix(const VectorContainerType& mat
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(const Matrix2& rhs)
     : container{}
 {
@@ -64,6 +68,7 @@ Mathematics::VariableMatrix<Real>::VariableMatrix(const Matrix2& rhs)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(const Matrix3& rhs)
     : container{}
 {
@@ -85,7 +90,7 @@ Mathematics::VariableMatrix<Real>::VariableMatrix(const Matrix3& rhs)
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::VariableMatrix<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::VariableMatrix<Real>::IsValid() const noexcept
 {
     try
     {
@@ -114,18 +119,19 @@ bool Mathematics::VariableMatrix<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::VariableMatrix<Real>::ResetSize(int rowsNumber, int columnsNumber)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
     if (rowsNumber < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("rowsNumber为负数！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("rowsNumber为负数！"s))
     }
 
     if (columnsNumber < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("columnsNumber为负数！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("columnsNumber为负数！"s))
     }
 
     container.clear();
@@ -134,6 +140,7 @@ void Mathematics::VariableMatrix<Real>::ResetSize(int rowsNumber, int columnsNum
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::VariableMatrix<Real>::GetRowsNumber() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
@@ -142,6 +149,7 @@ int Mathematics::VariableMatrix<Real>::GetRowsNumber() const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::VariableMatrix<Real>::GetColumnsNumber() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
@@ -157,6 +165,7 @@ int Mathematics::VariableMatrix<Real>::GetColumnsNumber() const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::VariableMatrix<Real>::GetElementsNumber() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
@@ -165,6 +174,7 @@ int Mathematics::VariableMatrix<Real>::GetElementsNumber() const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 const Mathematics::VariableLengthVector<Real>& Mathematics::VariableMatrix<Real>::operator[](int row) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
@@ -173,6 +183,7 @@ const Mathematics::VariableLengthVector<Real>& Mathematics::VariableMatrix<Real>
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableLengthVector<Real>& Mathematics::VariableMatrix<Real>::operator[](int row)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
@@ -181,6 +192,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableMatrix<Real>::oper
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 const Real& Mathematics::VariableMatrix<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
@@ -189,6 +201,7 @@ const Real& Mathematics::VariableMatrix<Real>::operator()(int row, int column) c
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real& Mathematics::VariableMatrix<Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
@@ -202,6 +215,7 @@ Real& Mathematics::VariableMatrix<Real>::operator()(int row, int column)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::VariableMatrix<Real>::ContainerType Mathematics::VariableMatrix<Real>::GetContainer() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
@@ -217,6 +231,7 @@ typename Mathematics::VariableMatrix<Real>::ContainerType Mathematics::VariableM
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::VariableMatrix<Real>::SetContainer(int rowsNumber, int columnsNumber, const ContainerType& entry)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
@@ -225,7 +240,7 @@ void Mathematics::VariableMatrix<Real>::SetContainer(int rowsNumber, int columns
 
     if (size != boost::numeric_cast<int>(entry.size()))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("可变矩阵大小错误。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("可变矩阵大小错误。"s))
     }
 
     for (auto row = 0; row < rowsNumber; ++row)
@@ -243,6 +258,7 @@ void Mathematics::VariableMatrix<Real>::SetContainer(int rowsNumber, int columns
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::VariableMatrix<Real>::SetIdentity()
 {
     MATHEMATICS_CLASS_IS_VALID_3;
@@ -252,7 +268,7 @@ void Mathematics::VariableMatrix<Real>::SetIdentity()
 
     if (rowsNumber != columnsNumber)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("可变矩阵不是方阵！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("可变矩阵不是方阵！"s))
     }
 
     for (auto rows = 0; rows < rowsNumber; ++rows)
@@ -272,19 +288,21 @@ void Mathematics::VariableMatrix<Real>::SetIdentity()
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::VariableMatrix<Real>::SetRow(int row, const VariableLengthVector& vector)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
     if (vector.GetSize() == GetColumnsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("向量大小与矩阵列数不相等！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("向量大小与矩阵列数不相等！"s))
     }
 
     (*this)[row] = vector;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::VariableMatrix<Real>::VariableLengthVector Mathematics::VariableMatrix<Real>::GetRow(int row) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
@@ -293,6 +311,7 @@ typename Mathematics::VariableMatrix<Real>::VariableLengthVector Mathematics::Va
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::VariableMatrix<Real>::SetColumn(int column, const VariableLengthVector& vector)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
@@ -301,7 +320,7 @@ void Mathematics::VariableMatrix<Real>::SetColumn(int column, const VariableLeng
 
     if (vector.GetSize() == rowsNumber)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("向量大小与矩阵行数不相等！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("向量大小与矩阵行数不相等！"s))
     }
 
     for (auto rows = 0; rows < rowsNumber; ++rows)
@@ -311,6 +330,7 @@ void Mathematics::VariableMatrix<Real>::SetColumn(int column, const VariableLeng
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::VariableMatrix<Real>::VariableLengthVector Mathematics::VariableMatrix<Real>::GetColumn(int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
@@ -328,6 +348,7 @@ typename Mathematics::VariableMatrix<Real>::VariableLengthVector Mathematics::Va
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::VariableMatrix<Real>::ResetMatrix(const VectorContainerType& matrix)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
@@ -336,6 +357,7 @@ void Mathematics::VariableMatrix<Real>::ResetMatrix(const VectorContainerType& m
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::VariableMatrix<Real>::SwapRows(int lhsRow, int rhsRow)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
@@ -347,6 +369,7 @@ void Mathematics::VariableMatrix<Real>::SwapRows(int lhsRow, int rhsRow)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::VariableMatrix<Real>::SwapColumns(int lhsColumns, int rhsColumns)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
@@ -361,13 +384,14 @@ void Mathematics::VariableMatrix<Real>::SwapColumns(int lhsColumns, int rhsColum
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator*=(const VariableMatrix& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
     if (GetColumnsNumber() != rhs.GetRowsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("矩阵大小不匹配！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("矩阵大小不匹配！"s))
     }
 
     *this = *this * rhs;
@@ -376,6 +400,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator*=
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real> Mathematics::VariableMatrix<Real>::operator-() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
@@ -397,6 +422,7 @@ Mathematics::VariableMatrix<Real> Mathematics::VariableMatrix<Real>::operator-()
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator+=(const VariableMatrix& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
@@ -406,7 +432,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator+=
 
     if (columnsNumber != rhs.GetColumnsNumber() || rowsNumber != rhs.GetRowsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("矩阵大小不匹配！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("矩阵大小不匹配！"s))
     }
 
     for (auto rows = 0; rows < rowsNumber; ++rows)
@@ -421,6 +447,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator+=
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator-=(const VariableMatrix& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
@@ -430,7 +457,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator-=
 
     if (columnsNumber != rhs.GetColumnsNumber() || rowsNumber != rhs.GetRowsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("矩阵大小不匹配！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("矩阵大小不匹配！"s))
     }
 
     for (auto rows = 0; rows < rowsNumber; ++rows)
@@ -445,6 +472,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator-=
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator*=(Real scalar)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
@@ -461,6 +489,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator*=
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator/=(Real scalar)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
@@ -493,19 +522,21 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator/=
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::VariableMatrix<Real>::QuadraticForm(const VariableLengthVector& vector0, const VariableLengthVector& vector1) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
     if (vector0.GetSize() != GetRowsNumber() || vector1.GetSize() != GetColumnsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("QuadraticForm中大小不匹配！\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("QuadraticForm中大小不匹配！\n"s))
     }
 
     return Dot(vector0, (*this) * vector1);
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableMatrix<Real> Mathematics::VariableMatrix<Real>::Transpose() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
@@ -527,13 +558,14 @@ Mathematics::VariableMatrix<Real> Mathematics::VariableMatrix<Real>::Transpose()
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::VariableMatrix<Real>::Matrix3 Mathematics::VariableMatrix<Real>::GetMatrix3() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
     if (GetRowsNumber() != GetColumnsNumber() && GetRowsNumber() != Matrix3::matrixSize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("矩阵不是Matrix3\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("矩阵不是Matrix3\n"s))
     }
 
     return Matrix3{ (*this)(0, 0),
@@ -570,7 +602,7 @@ Mathematics::VariableMatrix<Real> Mathematics::operator*(const VariableMatrix<Re
     // 'this' 是 Real x N, 'M' 是 N x C, '乘积 = this * M' 是 Real x C
     if (lhs.GetColumnsNumber() != rhs.GetRowsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("矩阵大小不匹配！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("矩阵大小不匹配！"s))
     }
 
     VariableMatrix<Real> result{ lhs.GetRowsNumber(), rhs.GetColumnsNumber() };
@@ -594,7 +626,7 @@ Mathematics::VariableLengthVector<Real> Mathematics::operator*(const VariableMat
 {
     if (vector.GetSize() != matrix.GetColumnsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("向量和矩阵的大小不匹配在 operator*\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("向量和矩阵的大小不匹配在 operator*\n"s))
     }
 
     VariableLengthVector<Real> product{ matrix.GetRowsNumber() };
@@ -615,7 +647,7 @@ Mathematics::VariableLengthVector<Real> Mathematics::operator*(const VariableLen
 {
     if (vector.GetSize() != matrix.GetRowsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("向量和矩阵的大小不匹配在 operator*\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("向量和矩阵的大小不匹配在 operator*\n"s))
     }
 
     VariableLengthVector<Real> product{ matrix.GetColumnsNumber() };
@@ -637,7 +669,7 @@ Mathematics::VariableMatrix<Real> Mathematics::TransposeTimes(const VariableMatr
     // P = A^T * B, P[r][c] = sum_m A[m][r] * B[m][c]
     if (lhs.GetRowsNumber() != rhs.GetRowsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("矩阵的大小不匹配在 TransposeTimes\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("矩阵的大小不匹配在 TransposeTimes\n"s))
     }
 
     VariableMatrix<Real> result{ lhs.GetColumnsNumber(), rhs.GetColumnsNumber() };
@@ -660,7 +692,7 @@ Mathematics::VariableMatrix<Real> Mathematics::TimesTranspose(const VariableMatr
     // P = A * B^T, P[r][c] = sum_m A[r][m] * B[c][m]
     if (lhs.GetColumnsNumber() != rhs.GetColumnsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("矩阵的大小不匹配在 TimesTranspose\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("矩阵的大小不匹配在 TimesTranspose\n"s))
     }
 
     VariableMatrix<Real> result{ lhs.GetRowsNumber(), rhs.GetRowsNumber() };
@@ -684,7 +716,7 @@ Mathematics::VariableMatrix<Real> Mathematics::TransposeTimesTranspose(const Var
     // P = A * B^T, P[r][c] = sum_m A[m][r] * B[c][m]
     if (lhs.GetRowsNumber() != rhs.GetColumnsNumber())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("矩阵的大小不匹配在 TransposeTimesTranspose\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("矩阵的大小不匹配在 TransposeTimesTranspose\n"s))
     }
 
     VariableMatrix<Real> result{ lhs.GetColumnsNumber(), rhs.GetRowsNumber() };

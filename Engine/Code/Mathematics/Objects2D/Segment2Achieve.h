@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 11:33)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:21)
 
-#ifndef MATHEMATICS_OBJECTS2D_SEGMENT2_ACHIEVE_H
-#define MATHEMATICS_OBJECTS2D_SEGMENT2_ACHIEVE_H
+#ifndef MATHEMATICS_OBJECTS_2D_SEGMENT2_ACHIEVE_H
+#define MATHEMATICS_OBJECTS_2D_SEGMENT2_ACHIEVE_H
 
 #include "Segment2.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real>
-Mathematics::Segment2<Real>::Segment2(const Vector2& beginPoint, const Vector2& endPoint, const Real epsilon)
+Mathematics::Segment2<Real>::Segment2(const Vector2& beginPoint, const Vector2& endPoint, Real epsilon)
     : beginPoint{ beginPoint },
       endPoint{ endPoint },
       center{ Math::GetRational(1, 2) * (beginPoint + endPoint) },
@@ -30,7 +30,7 @@ Mathematics::Segment2<Real>::Segment2(const Vector2& beginPoint, const Vector2& 
 }
 
 template <typename Real>
-Mathematics::Segment2<Real>::Segment2(Real extent, const Vector2& center, const Vector2& direction, const Real epsilon)
+Mathematics::Segment2<Real>::Segment2(Real extent, const Vector2& center, const Vector2& direction, Real epsilon)
     : beginPoint{ center - extent * direction },
       endPoint{ center + extent * direction },
       center{ center },
@@ -108,7 +108,6 @@ Real Mathematics::Segment2<Real>::GetExtent() const noexcept
     return extent;
 }
 
-// private
 template <typename Real>
 void Mathematics::Segment2<Real>::ComputeCenterDirectionExtent()
 {
@@ -119,7 +118,6 @@ void Mathematics::Segment2<Real>::ComputeCenterDirectionExtent()
     direction.Normalize(epsilon);
 }
 
-// private
 template <typename Real>
 void Mathematics::Segment2<Real>::ComputeEndPoints()
 {
@@ -135,4 +133,4 @@ Mathematics::Segment2<Real> Mathematics::Segment2<Real>::GetMove(Real t, const V
     return Segment2{ extent, center + t * velocity, direction, epsilon };
 }
 
-#endif  // MATHEMATICS_OBJECTS2D_SEGMENT2_ACHIEVE_H
+#endif  // MATHEMATICS_OBJECTS_2D_SEGMENT2_ACHIEVE_H

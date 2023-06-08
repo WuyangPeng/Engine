@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/02 22:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 15:06)
 
 #ifndef MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX3_H
 #define MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX3_H
@@ -17,12 +17,12 @@
 namespace Mathematics
 {
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AxesAlignBoundingBox3 final
     {
     public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-
         using ClassType = AxesAlignBoundingBox3<Real>;
+
         using Vector3 = Vector3<Real>;
         using Math = Math<Real>;
         using PointIndex = typename Vector3::PointIndex;
@@ -39,7 +39,7 @@ namespace Mathematics
         AxesAlignBoundingBox3(Real xMin, Real xMax, Real yMin, Real yMax, Real zMin, Real zMax) noexcept;
 
         template <typename RhsType>
-        AxesAlignBoundingBox3(const AxesAlignBoundingBox3<RhsType>& aabb);
+        explicit AxesAlignBoundingBox3(const AxesAlignBoundingBox3<RhsType>& aabb);
 
         CLASS_INVARIANT_DECLARE;
 

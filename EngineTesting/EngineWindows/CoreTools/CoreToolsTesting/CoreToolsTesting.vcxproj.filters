@@ -502,6 +502,9 @@
     <Filter Include="CoroutineSuite 源文件">
       <UniqueIdentifier>{e1b20191-c643-422b-bb43-5d1f1f6427c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\OutputCodeTesting">
+      <UniqueIdentifier>{ca7f6c4a-db74-4443-8592-f1f0a82c7355}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\BaseSuite.h">
@@ -1956,6 +1959,57 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestStreamTesting.h">
       <Filter>UnitTestSuiteSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCodeTesting.h">
+      <Filter>TextParsingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\Input1Container.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\Input1ContainerDetail.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\Input2.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\Input2Base.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\Input2Container.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\Input2ContainerDetail.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\Input3.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\Input3Base.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\Input3Container.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\Input3ContainerDetail.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\OutputCSVTesting.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\OutputCSVTestingContainer.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\OutputCSVTestingFwd.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\Input1.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\Input1Base.h">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureLoadingTesting.h">
+      <Filter>TextParsingSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
@@ -3202,6 +3256,42 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestStreamTesting.cpp">
       <Filter>UnitTestSuiteSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCodeTesting.cpp">
+      <Filter>TextParsingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\OutputCodeTesting\Input2.cpp">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\OutputCodeTesting\Input2Base.cpp">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\OutputCodeTesting\Input2Container.cpp">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\OutputCodeTesting\Input3.cpp">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\OutputCodeTesting\Input3Base.cpp">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\OutputCodeTesting\Input3Container.cpp">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\OutputCodeTesting\OutputCSVTestingContainer.cpp">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\OutputCodeTesting\Input1.cpp">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\OutputCodeTesting\Input1Base.cpp">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\OutputCodeTesting\Input1Container.cpp">
+      <Filter>资源文件\OutputCodeTesting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureLoadingTesting.cpp">
+      <Filter>TextParsingSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/11 16:35)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:13)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_DETAIL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_DETAIL_H
@@ -52,7 +52,6 @@ void Mathematics::RationalConversion<N, T>::Init(const SignedIntegerType&)
     }
 }
 
-// private
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::Init(const UnsignedIntegerType&)
 {
@@ -61,7 +60,6 @@ void Mathematics::RationalConversion<N, T>::Init(const UnsignedIntegerType&)
     InitToIntegral();
 }
 
-// private
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::Init(const FloatType&)
 {
@@ -70,7 +68,6 @@ void Mathematics::RationalConversion<N, T>::Init(const FloatType&)
     InitToFloatingPoint();
 }
 
-// private
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::Init(const DoubleType&)
 {
@@ -79,7 +76,6 @@ void Mathematics::RationalConversion<N, T>::Init(const DoubleType&)
     InitToFloatingPoint();
 }
 
-// private
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::InitToFloatingPoint()
 {
@@ -109,7 +105,6 @@ void Mathematics::RationalConversion<N, T>::InitToFloatingPoint()
 #include STSTEM_WARNING_POP
 }
 
-// private
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::CorrectWithShifting()
 {
@@ -133,7 +128,6 @@ void Mathematics::RationalConversion<N, T>::CorrectWithShifting()
     }
 }
 
-// private
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::CalculateMantissa()
 {
@@ -196,7 +190,6 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
     }
 }
 
-// private
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::Negative() noexcept
 {
@@ -206,7 +199,6 @@ void Mathematics::RationalConversion<N, T>::Negative() noexcept
     }
 }
 
-// private
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::InitToIntegral()
 {

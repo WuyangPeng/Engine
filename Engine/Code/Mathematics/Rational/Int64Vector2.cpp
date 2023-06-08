@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/11 17:01)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:08)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -19,9 +19,6 @@
 
 #include <iostream>
 
-using std::make_shared;
-using std::ostream;
-
 COPY_UNSHARED_CLONE_SELF_DEFINE(Mathematics, Int64Vector2)
 
 Mathematics::Int64Vector2 Mathematics::Int64Vector2::CreateDefault()
@@ -29,9 +26,11 @@ Mathematics::Int64Vector2 Mathematics::Int64Vector2::CreateDefault()
     return Int64Vector2{ CoreTools::DisableNotThrow::Disable };
 }
 
-Mathematics::Int64Vector2::Int64Vector2(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+Mathematics::Int64Vector2::Int64Vector2(CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(disableNotThrow);
+
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
@@ -153,7 +152,7 @@ bool Mathematics::Int64Vector2::operator<(const Int64Vector2& rhs) const
     return *impl < *rhs.impl;
 }
 
-ostream& Mathematics::operator<<(ostream& os, const Int64Vector2& rhs)
+std::ostream& Mathematics::operator<<(std::ostream& os, const Int64Vector2& rhs)
 {
     os << "x = " << rhs.GetX() << " y = " << rhs.GetY();
 

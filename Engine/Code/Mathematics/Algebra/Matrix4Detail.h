@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 18:18)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 16:56)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX4_DETAIL_H
 #define MATHEMATICS_ALGEBRA_MATRIX4_DETAIL_H
@@ -20,6 +20,7 @@
 #endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_MATRIX4_ACHIEVE)
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <int Row, int Column>
 Real Mathematics::Matrix4<Real>::GetValue() const noexcept
 {
@@ -39,6 +40,7 @@ Real Mathematics::Matrix4<Real>::GetValue() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <int Row, int Column>
 void Mathematics::Matrix4<Real>::SetValue(Real value) noexcept
 {
@@ -58,22 +60,24 @@ void Mathematics::Matrix4<Real>::SetValue(Real value) noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <int Row>
 const Mathematics::Vector4<Real>& Mathematics::Matrix4<Real>::GetVector() const noexcept
 {
     static_assert(0 <= Row && Row < vectorSize);
 
     if constexpr (Row == xIndex)
-        return m_X;
+        return x;
     else if constexpr (Row == yIndex)
-        return m_Y;
+        return y;
     else if constexpr (Row == zIndex)
-        return m_Z;
+        return z;
     else
-        return m_W;
+        return w;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <int Row>
 Mathematics::Vector4<Real>& Mathematics::Matrix4<Real>::GetVector() noexcept
 {
@@ -83,6 +87,7 @@ Mathematics::Vector4<Real>& Mathematics::Matrix4<Real>::GetVector() noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <int Column>
 typename Mathematics::Vector4<Real>::GetCoordinateFunction Mathematics::Matrix4<Real>::GetVectorGetFunction() const noexcept
 {
@@ -99,6 +104,7 @@ typename Mathematics::Vector4<Real>::GetCoordinateFunction Mathematics::Matrix4<
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <int Column>
 typename Mathematics::Vector4<Real>::SetCoordinateFunction Mathematics::Matrix4<Real>::GetVectorSetFunction() const noexcept
 {
@@ -221,7 +227,7 @@ Mathematics::Matrix4<Real> Mathematics::TransposeTimesTranspose(const Matrix4<Re
 }
 
 template <typename Real>
-bool Mathematics::Approximate(const Matrix4<Real>& lhs, const Matrix4<Real>& rhs, const Real epsilon)
+bool Mathematics::Approximate(const Matrix4<Real>& lhs, const Matrix4<Real>& rhs, Real epsilon)
 {
     for (auto row = 0; row < Matrix4<Real>::vectorSize; ++row)
     {

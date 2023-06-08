@@ -9,18 +9,29 @@
 
 #include "Vector4DTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3.h"
 #include "Mathematics/Algebra/Vector4Detail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
-
 namespace Mathematics
 {
     template class Vector4<float>;
     template class Vector4<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector4Testing)
+Mathematics::Vector4Testing::Vector4Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Vector4Testing)
+
+void Mathematics::Vector4Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Vector4Testing::MainTest()
 {

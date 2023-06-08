@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/09 11:00)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/30 14:57)
 
 #ifndef MATHEMATICS_BASE_LEXICO_ARRAY2_DETAIL_H
 #define MATHEMATICS_BASE_LEXICO_ARRAY2_DETAIL_H
@@ -107,8 +107,8 @@ Mathematics::LexicoArray2<false, Real>::LexicoArray2(int numRows, int numCols, c
 template <typename Real>
 bool Mathematics::LexicoArray2<false, Real>::IsValid() const noexcept
 {
-    const auto numElement = numRows * numCols;
-    if (matrix.size() == gsl::narrow_cast<size_t>(numElement))
+    if (const auto numElement = numRows * numCols;
+        matrix.size() == gsl::narrow_cast<size_t>(numElement))
         return true;
     else
         return false;
@@ -182,8 +182,8 @@ Mathematics::LexicoArray2<true, Real, NumRows, NumCols>::LexicoArray2(const Cont
 template <typename Real, int NumRows, int NumCols>
 bool Mathematics::LexicoArray2<true, Real, NumRows, NumCols>::IsValid() const noexcept
 {
-    constexpr auto numElement = NumRows * NumCols;
-    if (matrix.size() == gsl::narrow_cast<size_t>(numElement))
+    if (constexpr auto numElement = NumRows * NumCols;
+        matrix.size() == gsl::narrow_cast<size_t>(numElement))
         return true;
     else
         return false;
@@ -258,8 +258,8 @@ Mathematics::LexicoArray2<false, Real, NumRows, NumCols>::LexicoArray2(const Con
 template <typename Real, int NumRows, int NumCols>
 bool Mathematics::LexicoArray2<false, Real, NumRows, NumCols>::IsValid() const noexcept
 {
-    constexpr auto numElement = NumRows * NumCols;
-    if (matrix.size() == gsl::narrow_cast<size_t>(numElement))
+    if (constexpr auto numElement = NumRows * NumCols;
+        matrix.size() == gsl::narrow_cast<size_t>(numElement))
         return true;
     else
         return false;

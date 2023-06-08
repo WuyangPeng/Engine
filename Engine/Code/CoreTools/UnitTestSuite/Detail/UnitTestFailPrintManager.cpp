@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:42)
+///	引擎版本：0.9.0.11 (2023/05/30 09:40)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,8 +14,8 @@
 #include "CoreTools/ReportOutput/UnitTestFailReportOutput.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
-CoreTools::UnitTestFailPrintManager::UnitTestFailPrintManager(UnitTest& unitTest, const std::string& fileName, int lineNumber, const std::string& errorMessage)
-    : reportOutput{ make_shared<UnitTestFailReportOutput>(typeid(unitTest).name(), fileName, lineNumber, errorMessage, unitTest.GetStream()) }
+CoreTools::UnitTestFailPrintManager::UnitTestFailPrintManager(UnitTest& unitTest, const std::string& fileName, int lineNumber, const std::string& errorMessage, LogLevel logLevel)
+    : reportOutput{ make_shared<UnitTestFailReportOutput>(typeid(unitTest).name(), fileName, lineNumber, errorMessage, unitTest.GetStream(), logLevel) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

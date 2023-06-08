@@ -127,9 +127,9 @@ int Rendering::KeyframeControllerImpl::GetStreamingSize() const noexcept
     {
         size += numCommonTimes * CoreTools::GetStreamSize(commonTimes.at(0));
         size += CoreTools::GetStreamSize(numTranslations);
-        size += numTranslations * MATHEMATICS_STREAM_SIZE(translations.at(0));
+        size += numTranslations * Mathematics::GetStreamSize(translations.at(0));
         size += CoreTools::GetStreamSize(numRotations);
-        size += numRotations * MATHEMATICS_STREAM_SIZE(rotations.at(0));
+        size += numRotations * Mathematics::GetStreamSize(rotations.at(0));
         size += CoreTools::GetStreamSize(numScales);
         size += numScales * CoreTools::GetStreamSize(scales.at(0));
     }
@@ -137,10 +137,10 @@ int Rendering::KeyframeControllerImpl::GetStreamingSize() const noexcept
     {
         size += CoreTools::GetStreamSize(numTranslations);
         size += numTranslations * CoreTools::GetStreamSize(translationTimes.at(0));
-        size += numTranslations * MATHEMATICS_STREAM_SIZE(translations.at(0));
+        size += numTranslations * Mathematics::GetStreamSize(translations.at(0));
         size += CoreTools::GetStreamSize(numRotations);
         size += numRotations * CoreTools::GetStreamSize(rotationTimes.at(0));
-        size += numRotations * MATHEMATICS_STREAM_SIZE(rotations.at(0));
+        size += numRotations * Mathematics::GetStreamSize(rotations.at(0));
         size += CoreTools::GetStreamSize(numScales);
         size += numScales * CoreTools::GetStreamSize(scaleTimes.at(0));
         size += numScales * CoreTools::GetStreamSize(scales.at(0));

@@ -10,21 +10,27 @@
 #ifndef MATHEMATICS_OBJECTS3D_SUITE_BOX3_TESTING_H
 #define MATHEMATICS_OBJECTS3D_SUITE_BOX3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
-	class Box3Testing : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Box3Testing); 
+    class Box3Testing : public CoreTools::UnitTest
+    {
+    public:
+        using ClassType = Box3Testing;
+        using ParentType = UnitTest;
 
-	private:
-		void MainTest();
-		void BoxTest();
-	
-		void DoRunUnitTest() override;	 
-	};
+    public:
+        explicit Box3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+    private:
+        void MainTest();
+        void BoxTest();
+
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // MATHEMATICS_OBJECTS3D_SUITE_BOX3_TESTING_H
+#endif  // MATHEMATICS_OBJECTS3D_SUITE_BOX3_TESTING_H

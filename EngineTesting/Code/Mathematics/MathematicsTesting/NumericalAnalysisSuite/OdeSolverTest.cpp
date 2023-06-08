@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/OdeSolverDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 Mathematics::OdeSolverTest::OdeSolverTest(int dimension, double step, Function function, const OdeSolverTesting* userData)
     : ParentType{ dimension, step, function, userData }
 {

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/11 17:02)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:08)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -19,9 +19,6 @@
 
 #include <iostream>
 
-using std::make_shared;
-using std::ostream;
-
 COPY_UNSHARED_CLONE_SELF_DEFINE(Mathematics, Int64Vector3)
 
 Mathematics::Int64Vector3 Mathematics::Int64Vector3::CreateDefault()
@@ -29,9 +26,11 @@ Mathematics::Int64Vector3 Mathematics::Int64Vector3::CreateDefault()
     return Int64Vector3{ CoreTools::DisableNotThrow::Disable };
 }
 
-Mathematics::Int64Vector3::Int64Vector3(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+Mathematics::Int64Vector3::Int64Vector3(CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(disableNotThrow);
+
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
@@ -155,7 +154,7 @@ int64_t Mathematics::Int64Vector3::TripleScalar(const Int64Vector3& mhs, const I
     return Mathematics::TripleScalar(*impl, *mhs.impl, *rhs.impl);
 }
 
-ostream& Mathematics::operator<<(ostream& os, const Int64Vector3& rhs)
+std::ostream& Mathematics::operator<<(std::ostream& os, const Int64Vector3& rhs)
 {
     os << "x = " << rhs.GetX() << " y = " << rhs.GetY() << " z = " << rhs.GetZ();
 

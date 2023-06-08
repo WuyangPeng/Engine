@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/11 18:43)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/01 09:39)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR2_INFORMATION_H
 #define MATHEMATICS_ALGEBRA_VECTOR2_INFORMATION_H
@@ -21,12 +21,12 @@
 namespace Mathematics
 {
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class Vector2Information final
     {
     public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-
         using ClassType = Vector2Information<Real>;
+
         using Math = Math<Real>;
         using Vector2 = Vector2<Real>;
         using Vector2Tools = Vector2Tools<Real>;

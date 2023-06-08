@@ -9,11 +9,11 @@
 
 #include "AQuaternionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/AQuaternionDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -30,7 +30,18 @@ namespace Mathematics
 
 #endif  // BUILDING_MATHEMATICS_STATIC
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, AQuaternionTesting)
+Mathematics::AQuaternionTesting::AQuaternionTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, AQuaternionTesting)
+
+void Mathematics::AQuaternionTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::AQuaternionTesting::MainTest()
 {
@@ -85,9 +96,7 @@ void Mathematics::AQuaternionTesting::ConstructionTest()
     const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
     const uniform_real<float> secondRandomDistribution{ 0.0f, MathF::GetTwoPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         AVectorF firstVector{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
 
@@ -183,9 +192,7 @@ void Mathematics::AQuaternionTesting::OperatorCalculateTest()
     const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
     const uniform_real<double> secondRandomDistribution{ 0.0, MathD::GetTwoPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         AVectorD firstVector{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
 
@@ -318,9 +325,7 @@ void Mathematics::AQuaternionTesting::ArithmeticCalculateTest()
     const uniform_real<float> thirdRandomDistribution{ 0.0f, 1.0f };
     const uniform_int<> fourthRandomDistribution{ 0, 20 };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         AQuaternionF firstQuaternion{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/03 22:39)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 13:56)
 
 #ifndef MATHEMATICS_ALGEBRA_A_POINT_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_A_POINT_ACHIEVE_H
@@ -17,31 +17,28 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/TemplateTools/MaxElement.h"
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::APoint<T>::APoint(const Vector3& rhs) noexcept
     : APoint{ rhs.GetX(), rhs.GetY(), rhs.GetZ() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
 template <typename T>
-Mathematics::APoint<T>::APoint(const ArrayType& rhs) noexcept
-    : APoint{ rhs[HomogeneousPoint::xIndex], rhs[HomogeneousPoint::yIndex], rhs[HomogeneousPoint::zIndex] }
+requires std::is_arithmetic_v<T>
+Mathematics::APoint<T>::APoint(const ArrayType& rhs)
+    : APoint{ rhs.at(HomogeneousPoint::xIndex), rhs.at(HomogeneousPoint::yIndex), rhs.at(HomogeneousPoint::zIndex) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-#include STSTEM_WARNING_POP
-
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename T>
-bool Mathematics::APoint<T>::IsValid() const noexcept
+requires std::is_arithmetic_v<T> bool Mathematics::APoint<T>::IsValid() const noexcept
 {
     if (Math::FAbs(homogeneousPoint.GetW() - Math::GetValue(1)) <= Math::GetZeroTolerance())
         return true;
@@ -52,6 +49,7 @@ bool Mathematics::APoint<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::Vector3<T> Mathematics::APoint<T>::GetVector3() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -60,6 +58,7 @@ Mathematics::Vector3<T> Mathematics::APoint<T>::GetVector3() const noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::HomogeneousPoint<T> Mathematics::APoint<T>::GetHomogeneousPoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -68,6 +67,7 @@ Mathematics::HomogeneousPoint<T> Mathematics::APoint<T>::GetHomogeneousPoint() c
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 const T& Mathematics::APoint<T>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -76,6 +76,7 @@ const T& Mathematics::APoint<T>::operator[](int index) const
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 T& Mathematics::APoint<T>::operator[](int index)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -84,6 +85,7 @@ T& Mathematics::APoint<T>::operator[](int index)
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 T Mathematics::APoint<T>::GetX() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -92,6 +94,7 @@ T Mathematics::APoint<T>::GetX() const noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 void Mathematics::APoint<T>::SetX(T x) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -100,6 +103,7 @@ void Mathematics::APoint<T>::SetX(T x) noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 T Mathematics::APoint<T>::GetY() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -108,6 +112,7 @@ T Mathematics::APoint<T>::GetY() const noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 void Mathematics::APoint<T>::SetY(T y) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -116,6 +121,7 @@ void Mathematics::APoint<T>::SetY(T y) noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 T Mathematics::APoint<T>::GetZ() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -124,6 +130,7 @@ T Mathematics::APoint<T>::GetZ() const noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 void Mathematics::APoint<T>::SetZ(T z) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -132,11 +139,12 @@ void Mathematics::APoint<T>::SetZ(T z) noexcept
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::APoint<T>& Mathematics::APoint<T>::operator+=(const AVector& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    for (auto i = 0; i < aPointSize; ++i)
+    for (auto i = 0; i < pointSize; ++i)
     {
         homogeneousPoint[i] += rhs[i];
     }
@@ -145,11 +153,12 @@ Mathematics::APoint<T>& Mathematics::APoint<T>::operator+=(const AVector& rhs)
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::APoint<T>& Mathematics::APoint<T>::operator-=(const AVector& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    for (auto i = 0; i < aPointSize; ++i)
+    for (auto i = 0; i < pointSize; ++i)
     {
         homogeneousPoint[i] -= rhs[i];
     }
@@ -158,11 +167,12 @@ Mathematics::APoint<T>& Mathematics::APoint<T>::operator-=(const AVector& rhs)
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::APoint<T>& Mathematics::APoint<T>::operator+=(const APoint& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    for (auto i = 0; i < aPointSize; ++i)
+    for (auto i = 0; i < pointSize; ++i)
     {
         homogeneousPoint[i] += rhs[i];
     }
@@ -171,11 +181,12 @@ Mathematics::APoint<T>& Mathematics::APoint<T>::operator+=(const APoint& rhs)
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::APoint<T>& Mathematics::APoint<T>::operator-=(const APoint& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    for (auto i = 0; i < aPointSize; ++i)
+    for (auto i = 0; i < pointSize; ++i)
     {
         homogeneousPoint[i] -= rhs[i];
     }
@@ -184,11 +195,12 @@ Mathematics::APoint<T>& Mathematics::APoint<T>::operator-=(const APoint& rhs)
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::APoint<T>& Mathematics::APoint<T>::operator*=(T scalar)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    for (auto i = 0; i < aPointSize; ++i)
+    for (auto i = 0; i < pointSize; ++i)
     {
         homogeneousPoint[i] *= scalar;
     }
@@ -197,6 +209,7 @@ Mathematics::APoint<T>& Mathematics::APoint<T>::operator*=(T scalar)
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::APoint<T>& Mathematics::APoint<T>::operator/=(T scalar)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -209,13 +222,14 @@ Mathematics::APoint<T>& Mathematics::APoint<T>::operator/=(T scalar)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("除零错误。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("除零错误。"s))
     }
 
     return *this;
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 Mathematics::APoint<T> Mathematics::APoint<T>::operator-() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -224,37 +238,32 @@ Mathematics::APoint<T> Mathematics::APoint<T>::operator-() const noexcept
 }
 
 template <typename T>
-T Mathematics::APoint<T>::GetNorm() const noexcept
+requires std::is_arithmetic_v<T>
+T Mathematics::APoint<T>::GetNorm() const  
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto xFabs = Math::FAbs(GetX());
-    const auto yFabs = Math::FAbs(GetY());
-    const auto zFabs = Math::FAbs(GetZ());
+    const auto xFAbs = Math::FAbs(GetX());
+    const auto yFAbs = Math::FAbs(GetY());
+    const auto zFAbs = Math::FAbs(GetZ());
 
-    const auto maxValue = std::max(xFabs, std::max(yFabs, zFabs));
-
-    return maxValue;
+    return CoreTools::MaxElement({ xFAbs, yFAbs, zFAbs });
 }
 
 template <typename T>
+requires std::is_arithmetic_v<T>
 typename Mathematics::APoint<T>::ArrayType Mathematics::APoint<T>::GetCoordinate() const noexcept
 {
     return ArrayType{ GetX(), GetY(), GetZ() };
 }
 
 template <typename T>
-void Mathematics::APoint<T>::Set(const ArrayType& coordinate) noexcept
+requires std::is_arithmetic_v<T>
+void Mathematics::APoint<T>::Set(const ArrayType& coordinate)
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-    SetX(coordinate[HomogeneousPoint::xIndex]);
-    SetY(coordinate[HomogeneousPoint::yIndex]);
-    SetZ(coordinate[HomogeneousPoint::zIndex]);
-
-#include STSTEM_WARNING_POP
+    SetX(coordinate.at(HomogeneousPoint::xIndex));
+    SetY(coordinate.at(HomogeneousPoint::yIndex));
+    SetZ(coordinate.at(HomogeneousPoint::zIndex));
 }
 
 #endif  //  MATHEMATICS_ALGEBRA_A_POINT_ACHIEVE_H

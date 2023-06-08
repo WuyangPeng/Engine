@@ -737,8 +737,8 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceInt
     // 计算三角形的平面坐标。
     using Triangle = std::array<Vector2<Real>, 3>;
     Triangle projectTriangleVector{ Vector2<Real>::GetZero(),
-                                    Vector2<Real>(Vector2Tools<Real>::DotProduct(dir0, edge0), Vector2Tools<Real>::DotProduct(dir1, edge0)),
-                                    Vector2<Real>(Vector2Tools<Real>::DotProduct(dir0, edge1), Vector2Tools<Real>::DotProduct(dir1, edge1)) };
+                                    Vector2<Real>(Vector3Tools::DotProduct(dir0, edge0), Vector3Tools::DotProduct(dir1, edge0)),
+                                    Vector2<Real>(Vector3Tools::DotProduct(dir0, edge1), Vector3Tools::DotProduct(dir1, edge1)) };
 
     const Triangle2<Real> projectTriangle{ projectTriangleVector.at(0), projectTriangleVector.at(1), projectTriangleVector.at(2) };
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/11 13:48)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:09)
 
 #ifndef MATHEMATICS_RATIONAL_CONVERSION_INTEGER_DETAIL_H
 #define MATHEMATICS_RATIONAL_CONVERSION_INTEGER_DETAIL_H
@@ -35,7 +35,6 @@ Mathematics::ConversionInteger<T>::ConversionInteger(T value)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 template <typename T>
 void Mathematics::ConversionInteger<T>::Init(T value, const SignedIntegerType&)
 {
@@ -58,7 +57,6 @@ void Mathematics::ConversionInteger<T>::Init(T value, const SignedIntegerType&)
     maxMantissaBit = shifting;
 }
 
-// private
 template <typename T>
 void Mathematics::ConversionInteger<T>::Init(T value, const UnsignedIntegerType&)
 {
@@ -73,7 +71,6 @@ void Mathematics::ConversionInteger<T>::Init(T value, const UnsignedIntegerType&
     maxMantissaBit = shifting;
 }
 
-// private
 template <typename T>
 void Mathematics::ConversionInteger<T>::Init(T value, const FloatType&)
 {
@@ -96,7 +93,6 @@ void Mathematics::ConversionInteger<T>::Init(T value, const FloatType&)
     }
 }
 
-// private
 template <typename T>
 void Mathematics::ConversionInteger<T>::Init(T value, const DoubleType&)
 {
@@ -119,7 +115,6 @@ void Mathematics::ConversionInteger<T>::Init(T value, const DoubleType&)
     }
 }
 
-// private
 template <typename T>
 void Mathematics::ConversionInteger<T>::Amendment() noexcept
 {
@@ -153,11 +148,13 @@ void Mathematics::ConversionInteger<T>::ShiftingMantissa() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename T>
 bool Mathematics::ConversionInteger<T>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>

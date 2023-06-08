@@ -9,16 +9,27 @@
 
 #include "Vector2DTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
 using std::uniform_real;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector2Testing)
+Mathematics::Vector2Testing::Vector2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Vector2Testing)
+
+void Mathematics::Vector2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Vector2Testing::MainTest()
 {
@@ -171,9 +182,9 @@ void Mathematics::Vector2Testing::BarycentricsTest()
 
     const uniform_real<double> randomDistribution{ -10.0f, 10.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 fifthVector(randomDistribution(generator), randomDistribution(generator));
 

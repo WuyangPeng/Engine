@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/13 14:44)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:30)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -17,9 +17,6 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/NumericalAnalysis/EquationResultConstIteratorDetail.h"
-
-using std::complex;
-using std::vector;
 
 Mathematics::EquationQuartic::EquationQuartic(double constant, double once, double secondary, double thrice, double quartic, double epsilon)
     : ParentType{ epsilon }, constant{ constant }, once{ once }, secondary{ secondary }, thrice{ thrice }, quartic{ quartic }
@@ -88,7 +85,7 @@ bool Mathematics::EquationQuartic::Predigest()
     if (MathD::FAbs(constant) <= GetEpsilon())
     {
         SetRealResult(0.0);
-        EquationThrice equation{ once, secondary, thrice, quartic };
+        const EquationThrice equation{ once, secondary, thrice, quartic };
         AddResult(equation);
 
         return true;
@@ -97,7 +94,7 @@ bool Mathematics::EquationQuartic::Predigest()
     // 四次项为零时，化解方程。
     if (MathD::FAbs(quartic) <= GetEpsilon())
     {
-        EquationThrice equation{ constant, once, secondary, thrice };
+        const EquationThrice equation{ constant, once, secondary, thrice };
         AddResult(equation);
 
         return true;
@@ -147,7 +144,7 @@ void Mathematics::EquationQuartic::CalculateThriceEquation(double p, double q, d
     const auto zero = (4.0 * r * p - q * q) / 8.0;
 
     // 先求解一个三次方程。
-    EquationThrice equationThrice{ zero, one, two, 1.0 };
+    const EquationThrice equationThrice{ zero, one, two, 1.0 };
 
     MATHEMATICS_ASSERTION_1(equationThrice.IsRealResult(), "四次方程分解的三次方程无解！");
 
@@ -184,11 +181,11 @@ void Mathematics::EquationQuartic::CalculateSecondaryEquation(double thriceSolut
     const auto minConstant = thriceSolution - secondaryConstant;
     const auto maxConstant = thriceSolution + secondaryConstant;
 
-    EquationSecondary firstEquation{ minConstant, secondaryOnce, 1.0 };
-    EquationSecondary secondEquation{ maxConstant, -secondaryOnce, 1.0 };
+    const EquationSecondary equation0{ minConstant, secondaryOnce, 1.0 };
+    const EquationSecondary equation1{ maxConstant, -secondaryOnce, 1.0 };
 
     const auto three = thrice / quartic;
 
-    AddResult(firstEquation, -three / 4.0);
-    AddResult(secondEquation, -three / 4.0);
+    AddResult(equation0, -three / 4.0);
+    AddResult(equation1, -three / 4.0);
 }

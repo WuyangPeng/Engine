@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/15 11:26)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:44)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_CONST_ITERATOR_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_CONST_ITERATOR_H
@@ -29,7 +29,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = SparseMatrixConstIterator<Real>;
-        using SparseMatrixIndexContainer = typename std::map<SparseMatrixIndex, Real>;
+        using SparseMatrixIndexContainer = std::map<SparseMatrixIndex, Real>;
         using SparseMatrixConstIter = typename SparseMatrixIndexContainer::const_iterator;
         using SparseMatrixKey = typename SparseMatrixIndexContainer::key_type;
         using SparseMatrixMapped = typename SparseMatrixIndexContainer::mapped_type;

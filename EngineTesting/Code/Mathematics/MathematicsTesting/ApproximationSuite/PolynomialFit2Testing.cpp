@@ -9,12 +9,12 @@
 
 #include "PolynomialFit2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/PolynomialDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Approximation/PolynomialFit2Detail.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -28,7 +28,18 @@ namespace Mathematics
     template class PolynomialFit2<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialFit2Testing)
+Mathematics::PolynomialFit2Testing::PolynomialFit2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, PolynomialFit2Testing)
+
+void Mathematics::PolynomialFit2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::PolynomialFit2Testing::MainTest()
 {
@@ -42,9 +53,9 @@ void Mathematics::PolynomialFit2Testing::FitTest()
     const uniform_int<> secondRandomDistribution(10, 50);
     const uniform_int<> thirdRandomDistribution(3, 10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<double> x;
         std::vector<double> w;

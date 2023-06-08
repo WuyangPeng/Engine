@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_CONTAINMENT_SUITE_SCRIBE_CIRCLE2_INSCRIBE_TESTING_H
 #define MATHEMATICS_CONTAINMENT_SUITE_SCRIBE_CIRCLE2_INSCRIBE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class ScribeCircle2InscribeTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ScribeCircle2InscribeTesting);
+        using ClassType = ScribeCircle2InscribeTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit ScribeCircle2InscribeTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

@@ -62,6 +62,7 @@ namespace CoreTools
         NODISCARD IntVector3 GetIntVector3(const String& field) const;
         NODISCARD IntVector4 GetIntVector4(const String& field) const;
 
+        NODISCARD StringContainer GetStringArray(const String& field) const;
         NODISCARD BoolContainer GetBoolArray(const String& field) const;
         NODISCARD CharContainer GetCharArray(const String& field) const;
         NODISCARD IntContainer GetIntArray(const String& field) const;

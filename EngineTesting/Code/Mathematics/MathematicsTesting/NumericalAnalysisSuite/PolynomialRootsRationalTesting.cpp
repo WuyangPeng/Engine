@@ -9,11 +9,11 @@
 
 #include "PolynomialRootsRationalTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/PolynomialRootsRationalDetail.h"
 #include "Mathematics/Rational/IntegerDetail.h"
 #include "Mathematics/Rational/SignRationalDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -26,7 +26,18 @@ namespace Mathematics
     template class PolynomialRootsRational<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialRootsRationalTesting)
+Mathematics::PolynomialRootsRationalTesting::PolynomialRootsRationalTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, PolynomialRootsRationalTesting)
+
+void Mathematics::PolynomialRootsRationalTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::PolynomialRootsRationalTesting::MainTest()
 {
@@ -50,9 +61,9 @@ void Mathematics::PolynomialRootsRationalTesting::OnceTest()
     const uniform_real<double> firstRandomDistribution(-1.0e10, 1.0e10);
     const uniform_int<> secondRandomDistribution(0, 100000000);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         PolynomialRootsRationalD firstPolynomialRootsRational(1e-10);
 
@@ -128,9 +139,9 @@ void Mathematics::PolynomialRootsRationalTesting::SecondaryTest()
     const uniform_real<double> firstRandomDistribution(-1.0e8, 1.0e8);
     const uniform_int<> secondRandomDistribution(0, 1000000);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         PolynomialRootsRationalD firstPolynomialRootsRational(1e-10);
 
@@ -229,9 +240,9 @@ void Mathematics::PolynomialRootsRationalTesting::ThriceTest()
     const uniform_real<double> firstRandomDistribution(-1.0e7, 1.0e7);
     const uniform_int<> secondRandomDistribution(0, 1000000);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         PolynomialRootsRationalD firstPolynomialRootsRational(1e-10);
 
@@ -325,9 +336,9 @@ void Mathematics::PolynomialRootsRationalTesting::QuarticTest()
     const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
     const uniform_int<> secondRandomDistribution(0, 1000000);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         PolynomialRootsRationalD firstPolynomialRootsRational(1e-10);
 

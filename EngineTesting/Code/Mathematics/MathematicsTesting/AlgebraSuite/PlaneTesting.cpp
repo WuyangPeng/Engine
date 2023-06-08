@@ -9,11 +9,11 @@
 
 #include "PlaneTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/PlaneDetail.h"
-
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class Plane<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PlaneTesting)
+Mathematics::PlaneTesting::PlaneTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, PlaneTesting)
+
+void Mathematics::PlaneTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::PlaneTesting::MainTest()
 {
@@ -72,7 +83,7 @@ void Mathematics::PlaneTesting::ConstructionTest()
 
     HomogeneousPointD homogeneousPoint(3.0, 5.0, 6.0, 1.0);
 
-    PlaneD sixthPlane(homogeneousPoint);
+    PlaneD sixthPlane(homogeneousPoint, 1e-7);
 
     const double length = MathD::Sqrt(homogeneousPoint[0] * homogeneousPoint[0] +
                                       homogeneousPoint[1] * homogeneousPoint[1] +
@@ -126,9 +137,9 @@ void Mathematics::PlaneTesting::DistanceTest()
     default_random_engine generator{};
     const uniform_real<float> randomDistribution{ -100.0f, 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const APointD firstPoint(randomDistribution(generator),
                                  randomDistribution(generator),

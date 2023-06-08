@@ -9,10 +9,10 @@
 
 #include "MinimizeNTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/Minimize1Detail.h"
 #include "Mathematics/NumericalAnalysis/MinimizeNDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -26,7 +26,18 @@ namespace Mathematics
     template class MinimizeN<double, MinimizeNTesting>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, MinimizeNTesting)
+Mathematics::MinimizeNTesting::MinimizeNTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, MinimizeNTesting)
+
+void Mathematics::MinimizeNTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::MinimizeNTesting::MainTest()
 {
@@ -49,9 +60,9 @@ void Mathematics::MinimizeNTesting::GetMinimumTest()
 
     default_random_engine generator;
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<double> value;
 

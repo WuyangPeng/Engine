@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_BASE_SUITE_VECTOR_4D_TESTING_H
 #define MATHEMATICS_BASE_SUITE_VECTOR_4D_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Vector4Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector4Testing);
+        using ClassType = Vector4Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Vector4Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

@@ -1,22 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 11:20)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 14:43)
 
 #ifndef MATHEMATICS_ALGEBRA_A_VECTOR_DETAIL_H
 #define MATHEMATICS_ALGEBRA_A_VECTOR_DETAIL_H
 
 #include "AVector.h"
 
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_AVECTOR_ACHIEVE)
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_A_VECTOR_ACHIEVE)
 
     #include "AVectorAchieve.h"
 
-#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_AVECTOR_ACHIEVE)
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_A_VECTOR_ACHIEVE)
 
 #include "AVectorOrthonormalBasisDetail.h"
 #include "AVectorOrthonormalizeDetail.h"
@@ -24,7 +24,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename T>
-bool Mathematics::Approximate(const AVector<T>& lhs, const AVector<T>& rhs, const T epsilon) noexcept
+bool Mathematics::Approximate(const AVector<T>& lhs, const AVector<T>& rhs, T epsilon) noexcept
 {
     return Math<T>::FAbs(lhs.GetX() - rhs.GetX()) <= epsilon &&
            Math<T>::FAbs(lhs.GetY() - rhs.GetY()) <= epsilon &&
@@ -38,13 +38,13 @@ T Mathematics::Dot(const AVector<T>& lhs, const AVector<T>& rhs) noexcept
 }
 
 template <typename T>
-const Mathematics::AVector<T> Mathematics::Cross(const AVector<T>& lhs, const AVector<T>& rhs) noexcept
+Mathematics::AVector<T> Mathematics::Cross(const AVector<T>& lhs, const AVector<T>& rhs) noexcept
 {
     return AVector<T>{ lhs.GetY() * rhs.GetZ() - lhs.GetZ() * rhs.GetY(), lhs.GetZ() * rhs.GetX() - lhs.GetX() * rhs.GetZ(), lhs.GetX() * rhs.GetY() - lhs.GetY() * rhs.GetX() };
 }
 
 template <typename T>
-const Mathematics::AVector<T> Mathematics::UnitCross(const AVector<T>& lhs, const AVector<T>& rhs, const T epsilon)
+Mathematics::AVector<T> Mathematics::UnitCross(const AVector<T>& lhs, const AVector<T>& rhs, T epsilon)
 {
     auto cross = Cross(lhs, rhs);
 
@@ -54,7 +54,7 @@ const Mathematics::AVector<T> Mathematics::UnitCross(const AVector<T>& lhs, cons
 }
 
 template <typename T>
-const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const AVector<T>& uVector, const AVector<T>& vVector, const AVector<T>& wVector, const T epsilon)
+const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const AVector<T>& uVector, const AVector<T>& vVector, const AVector<T>& wVector, T epsilon)
 {
     /// 如果输入向量v0、v1和v2，则Gram-Schmidt正交向量产生矢量u0、u1和u2如下，
     ///   u0 = v0 / |v0|
@@ -67,7 +67,7 @@ const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const AV
 }
 
 template <typename T>
-const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const std::vector<AVector<T>>& vectors, const T epsilon)
+const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const std::vector<AVector<T>>& vectors, T epsilon)
 {
     MATHEMATICS_ASSERTION_1(vectors.size() == 3, "vectors的大小错误！");
 
@@ -75,7 +75,7 @@ const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const st
 }
 
 template <typename T>
-const Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateOrthonormalBasis(const AVector<T>& nonzeroVector, const T epsilon)
+const Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateOrthonormalBasis(const AVector<T>& nonzeroVector, T epsilon)
 {
     MATHEMATICS_ASSERTION_1(!nonzeroVector.IsZero(epsilon), "输入必须是非零向量！");
 
@@ -83,7 +83,7 @@ const Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateOrthonormalBa
 }
 
 template <typename T>
-const Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateComplementBasis(const AVector<T>& unitVector, const T epsilon)
+const Mathematics::AVectorOrthonormalBasis<T> Mathematics::GenerateComplementBasis(const AVector<T>& unitVector, T epsilon)
 {
     MATHEMATICS_ASSERTION_3(unitVector.IsNormalize(epsilon), "输入必须是单位向量！");
 

@@ -9,18 +9,29 @@
 
 #include "StaticFindIntersectorArc2Arc2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorArc2Arc2Detail.h"
 #include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorCircle2Circle2.h"
 #include "Mathematics/Objects2D/Arc2Detail.h"
 #include "Mathematics/Objects2D/Circle2Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::swap;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, StaticFindIntersectorArc2Arc2Testing)
+Mathematics::StaticFindIntersectorArc2Arc2Testing::StaticFindIntersectorArc2Arc2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, StaticFindIntersectorArc2Arc2Testing)
+
+void Mathematics::StaticFindIntersectorArc2Arc2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::StaticFindIntersectorArc2Arc2Testing::MainTest()
 {
@@ -38,9 +49,9 @@ void Mathematics::StaticFindIntersectorArc2Arc2Testing::EmptyTest()
     std::default_random_engine generator;
     const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2F lhsCenter(randomDistribution(generator),
                                  randomDistribution(generator));

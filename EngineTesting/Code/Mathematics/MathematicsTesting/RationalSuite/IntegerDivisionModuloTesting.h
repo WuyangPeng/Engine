@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_RATIONAL_SUITE_INTEGER_DIVISION_MODULO_TESTING_H
 #define MATHEMATICS_RATIONAL_SUITE_INTEGER_DIVISION_MODULO_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class IntegerDivisionModuloTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(IntegerDivisionModuloTesting);
+        using ClassType = IntegerDivisionModuloTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit IntegerDivisionModuloTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

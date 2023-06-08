@@ -9,10 +9,10 @@
 
 #include "Vector4DToolsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector4Detail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -29,7 +29,18 @@ namespace Mathematics
 
 #endif  // BUILDING_MATHEMATICS_STATIC
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector4ToolsTesting)
+Mathematics::Vector4ToolsTesting::Vector4ToolsTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Vector4ToolsTesting)
+
+void Mathematics::Vector4ToolsTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Vector4ToolsTesting::MainTest()
 {
@@ -59,9 +70,9 @@ void Mathematics::Vector4ToolsTesting::ProductTest()
 
     const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Vector4D firstVector(randomDistribution(generator),
                              randomDistribution(generator),
@@ -88,9 +99,9 @@ void Mathematics::Vector4ToolsTesting::ProjectionTest()
 
     const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector4D firstVector(randomDistribution(generator),
                                    randomDistribution(generator),
@@ -147,9 +158,9 @@ void Mathematics::Vector4ToolsTesting::OtherCalculateTest()
 
     vector<Vector4D> vectors;
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector4D eachVector(randomDistribution(generator),
                                   randomDistribution(generator),

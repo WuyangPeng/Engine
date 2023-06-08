@@ -186,11 +186,11 @@ int Rendering::WorldCoordinateFrame::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = MATHEMATICS_STREAM_SIZE(worldPosition);
+    auto size = Mathematics::GetStreamSize(worldPosition);
 
-    size += MATHEMATICS_STREAM_SIZE(worldDirectionVector);
-    size += MATHEMATICS_STREAM_SIZE(worldUpVector);
-    size += MATHEMATICS_STREAM_SIZE(worldRightVector);
+    size += Mathematics::GetStreamSize(worldDirectionVector);
+    size += Mathematics::GetStreamSize(worldUpVector);
+    size += Mathematics::GetStreamSize(worldRightVector);
 
     size += CoreTools::GetStreamSize(epsilon);
 

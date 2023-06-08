@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_DISTANCE_SUITE_DISTANCE_RESULT_TESTING_H
 #define MATHEMATICS_DISTANCE_SUITE_DISTANCE_RESULT_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class DistanceResultTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DistanceResultTesting);
+        using ClassType = DistanceResultTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit DistanceResultTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

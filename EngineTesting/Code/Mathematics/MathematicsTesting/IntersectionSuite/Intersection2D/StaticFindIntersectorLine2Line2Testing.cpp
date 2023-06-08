@@ -9,14 +9,25 @@
 
 #include "StaticFindIntersectorLine2Line2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
 #include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorLine2Line2Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, StaticFindIntersectorLine2Line2Testing)
+Mathematics::StaticFindIntersectorLine2Line2Testing::StaticFindIntersectorLine2Line2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, StaticFindIntersectorLine2Line2Testing)
+
+void Mathematics::StaticFindIntersectorLine2Line2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::StaticFindIntersectorLine2Line2Testing::MainTest()
 {
@@ -28,9 +39,9 @@ void Mathematics::StaticFindIntersectorLine2Line2Testing::LineTest()
     std::default_random_engine generator;
     const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2F lhsOrigin(randomDistribution(generator),
                                  randomDistribution(generator));

@@ -51,7 +51,7 @@ int Rendering::Float2ArrayImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return MATHEMATICS_STREAM_SIZE(elements);
+    return Mathematics::GetStreamSize(elements);
 }
 
 int Rendering::Float2ArrayImpl::GetNumElements() const

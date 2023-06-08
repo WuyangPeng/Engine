@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 16:54)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:51)
 
-#ifndef MATHEMATICS_OBJECTS3D_TETRAHEDRON3_DETAIL_H
-#define MATHEMATICS_OBJECTS3D_TETRAHEDRON3_DETAIL_H
+#ifndef MATHEMATICS_OBJECTS_3D_TETRAHEDRON3_DETAIL_H
+#define MATHEMATICS_OBJECTS_3D_TETRAHEDRON3_DETAIL_H
 
 #include "Tetrahedron3.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -110,12 +110,16 @@ typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::Tetrah
     // <v0,v1,v3>
     // <v0,v3,v2>
     // <v1,v2,v3>
-    std::array<Vector3, vertexSize> normal{ Vector3Tools::UnitCrossProduct(edge20, edge10), Vector3Tools::UnitCrossProduct(edge10, edge30),
-                                            Vector3Tools::UnitCrossProduct(edge30, edge20), Vector3Tools::UnitCrossProduct(edge21, edge31) };
+    std::array<Vector3, vertexSize> normal{ Vector3Tools::UnitCrossProduct(edge20, edge10),
+                                            Vector3Tools::UnitCrossProduct(edge10, edge30),
+                                            Vector3Tools::UnitCrossProduct(edge30, edge20),
+                                            Vector3Tools::UnitCrossProduct(edge21, edge31) };
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+
     const auto det = Vector3Tools::DotProduct(edge10, normal[3]);
+
 #include STSTEM_WARNING_POP
 
     if (det < Math::GetValue(0))
@@ -134,7 +138,9 @@ typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::Tetrah
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
+
         plane.emplace_back(normal[i], vertexs[i]);
+
 #include STSTEM_WARNING_POP
     }
 
@@ -157,4 +163,4 @@ Mathematics::Tetrahedron3<Real> Mathematics::Tetrahedron3<Real>::GetMove(Real t,
     return movedTetra;
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_TETRAHEDRON3_DETAIL_H
+#endif  // MATHEMATICS_OBJECTS_3D_TETRAHEDRON3_DETAIL_H

@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 16:11)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:49)
 
-#ifndef MATHEMATICS_OBJECTS3D_FRUSTUM3_ACHIEVE_H
-#define MATHEMATICS_OBJECTS3D_FRUSTUM3_ACHIEVE_H
+#ifndef MATHEMATICS_OBJECTS_3D_FRUSTUM3_ACHIEVE_H
+#define MATHEMATICS_OBJECTS_3D_FRUSTUM3_ACHIEVE_H
 
 #include "Frustum3.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -24,7 +24,7 @@ Mathematics::Frustum3<Real>::Frustum3(const Vector3& origin,
                                       Real directionMax,
                                       Real upBound,
                                       Real rightBound,
-                                      const Real epsilon) noexcept
+                                      Real epsilon) noexcept
     : origin{ origin },
       directionVector{ directionVector },
       upVector{ upVector },
@@ -34,8 +34,8 @@ Mathematics::Frustum3<Real>::Frustum3(const Vector3& origin,
       upBound{ upBound },
       rightBound{ rightBound },
       directionRatio{ directionMax / directionMin },
-      mTwoUF{ Math::GetValue(-2) * upBound * directionMax },
-      mTwoRF{ Math::GetValue(-2) * rightBound * directionMax },
+      twoUF{ Math::GetValue(-2) * upBound * directionMax },
+      twoRF{ Math::GetValue(-2) * rightBound * directionMax },
       epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -148,7 +148,7 @@ Real Mathematics::Frustum3<Real>::GetMTwoUF() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return mTwoUF;
+    return twoUF;
 }
 
 template <typename Real>
@@ -156,7 +156,7 @@ Real Mathematics::Frustum3<Real>::GetMTwoRF() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return mTwoRF;
+    return twoRF;
 }
 
 template <typename Real>
@@ -215,8 +215,8 @@ template <typename Real>
 void Mathematics::Frustum3<Real>::Update() noexcept
 {
     directionRatio = directionMax / directionMin;
-    mTwoUF = Math::GetValue(-2) * upBound * directionMax;
-    mTwoRF = Math::GetValue(-2) * rightBound * directionMax;
+    twoUF = Math::GetValue(-2) * upBound * directionMax;
+    twoRF = Math::GetValue(-2) * rightBound * directionMax;
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_FRUSTUM3_ACHIEVE_H
+#endif  // MATHEMATICS_OBJECTS_3D_FRUSTUM3_ACHIEVE_H

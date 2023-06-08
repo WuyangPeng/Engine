@@ -23,7 +23,7 @@ namespace CoreTools
         using ParentType = Parsing;
 
     public:
-        DefaultFunctionParsing(int indentationCount, const String& className);
+        DefaultFunctionParsing(int indentationCount, const String& className, const String& keyTypeDescribe);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -43,6 +43,7 @@ namespace CoreTools
 
     private:
         String className;
+        String keyTypeDescribe;
     };
 }
 

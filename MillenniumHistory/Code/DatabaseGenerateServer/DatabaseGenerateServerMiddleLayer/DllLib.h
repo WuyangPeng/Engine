@@ -16,6 +16,8 @@
 #include "CoreTools/CoreToolsLib.h"
 #include "Framework/FrameworkLib.h"
 
+#include "DatabaseGenerateServer/DatabaseGenerateServerConfiguration/AncientBooksLib.h"
+
 #if defined(TCRE_USE_MSVC)
 
 #endif  // TCRE_USE_MSVC

@@ -12,9 +12,9 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Distance/Distance3D/DistanceCircle3Circle3Detail.h"
 #include "Mathematics/Objects3D/Circle3Detail.h"
-
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include <random>
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::swap;
 
 namespace Mathematics
@@ -23,7 +23,18 @@ namespace Mathematics
     template class DistanceCircle3Circle3<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistanceCircle3Circle3Testing)
+Mathematics::DistanceCircle3Circle3Testing::DistanceCircle3Circle3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, DistanceCircle3Circle3Testing)
+
+void Mathematics::DistanceCircle3Circle3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::DistanceCircle3Circle3Testing::MainTest()
 {
@@ -39,9 +50,9 @@ void Mathematics::DistanceCircle3Circle3Testing::BaseTest()
     std::default_random_engine generator;
     const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3F lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3F lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));

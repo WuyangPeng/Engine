@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 16:56)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 17:56)
 
 #ifndef MATHEMATICS_ALGEBRA_TRIDIAGONALIZE_H
 #define MATHEMATICS_ALGEBRA_TRIDIAGONALIZE_H
@@ -19,11 +19,10 @@
 namespace Mathematics
 {
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Tridiagonalize final
     {
     public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-
         using ClassType = Tridiagonalize<Real>;
         using Math = Math<Real>;
         using Matrix3 = Matrix3<Real>;
@@ -46,7 +45,7 @@ namespace Mathematics
         // QLAlgorithm返回“true”当且仅当QL迭代方案收敛。
         void Init();
         NODISCARD bool QLAlgorithm();
-        NODISCARD static bool IsValueNear(Real subdiagonal, Real lhsDiagonal, Real rhsDiagonal) noexcept;
+        NODISCARD static bool IsValueNear(Real subDiagonal, Real lhsDiagonal, Real rhsDiagonal) noexcept;
         void UpdateDiagonal(int lhsIndex, int rhsIndex);
         void GivensRotation(int lhsIndex, int rhsIndex, Real cosValue, Real sinValue);
 
@@ -54,7 +53,7 @@ namespace Mathematics
         Matrix3 inputMatrix;
         Matrix3 outputMatrix;
         Vector3 diagonal;
-        Vector2 subdiagonal;
+        Vector2 subDiagonal;
         bool reflection;
     };
 }

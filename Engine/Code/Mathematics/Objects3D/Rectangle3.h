@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 17:05)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:46)
 
-#ifndef MATHEMATICS_OBJECTS3D_RECTANGLE3_H
-#define MATHEMATICS_OBJECTS3D_RECTANGLE3_H
+#ifndef MATHEMATICS_OBJECTS_3D_RECTANGLE3_H
+#define MATHEMATICS_OBJECTS_3D_RECTANGLE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -34,7 +34,7 @@ namespace Mathematics
         // 点Real(s,t) = C + s0 * U0 + s1 * U1，其中C是矩形的中心，U0和U1是单位长度的垂直轴。
         // 参数s0和s1是由约束|s0| <= e0 和|s1| <= e1，
         // 其中e0 > 0和e1 > 0称为矩形的范围。
-        Rectangle3(const Vector3& center, const Vector3& axis0, const Vector3& axis1, Real extent0, Real extent1, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        Rectangle3(const Vector3& center, const Vector3& axis0, const Vector3& axis1, Real extent0, Real extent1, Real epsilon = Math::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -76,4 +76,4 @@ namespace Mathematics
     using Rectangle3D = Rectangle3<double>;
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_RECTANGLE3_H
+#endif  // MATHEMATICS_OBJECTS_3D_RECTANGLE3_H

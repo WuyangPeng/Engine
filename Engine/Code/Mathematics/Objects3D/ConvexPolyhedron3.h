@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 17:54)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:44)
 
-#ifndef MATHEMATICS_OBJECTS3D_CONVEX_POLYHEDRON3_H
-#define MATHEMATICS_OBJECTS3D_CONVEX_POLYHEDRON3_H
+#ifndef MATHEMATICS_OBJECTS_3D_CONVEX_POLYHEDRON3_H
+#define MATHEMATICS_OBJECTS_3D_CONVEX_POLYHEDRON3_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -39,10 +39,10 @@ namespace Mathematics
         using PlaneContainerType = std::vector<Plane3>;
         using TrianglesType = std::set<int>;
 
-        using Vector3 = ParentType::Vector3;
-        using Vector3Tools = ParentType::Vector3Tools;
-        using VerticesType = ParentType::VerticesType;
-        using IndicesType = ParentType::IndicesType;
+        using Vector3 = typename ParentType::Vector3;
+        using Vector3Tools = typename ParentType::Vector3Tools;
+        using VerticesType = typename ParentType::VerticesType;
+        using IndicesType = typename ParentType::IndicesType;
 
     public:
         // 调用者负责确保网格代表一个凸多面体。
@@ -101,4 +101,4 @@ namespace Mathematics
     using ConvexPolyhedron3D = ConvexPolyhedron3<double>;
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_CONVEX_POLYHEDRON3_H
+#endif  // MATHEMATICS_OBJECTS_3D_CONVEX_POLYHEDRON3_H

@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_BISECT3_NODE_TESTING_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_BISECT3_NODE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Bisect3NodeTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Bisect3NodeTesting);
+        using ClassType = Bisect3NodeTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Bisect3NodeTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

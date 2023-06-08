@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_OBJECTS3D_SUITE_LOZENGE3_TESTING_H
 #define MATHEMATICS_OBJECTS3D_SUITE_LOZENGE3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Lozenge3Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Lozenge3Testing);
+        using ClassType = Lozenge3Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Lozenge3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

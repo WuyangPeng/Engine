@@ -9,14 +9,24 @@
 
 #include "DistancePoint3Ellipsoid3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Distance/Distance3D/DistancePoint3Ellipsoid3Detail.h"
 #include "Mathematics/NumericalAnalysis/Equation.h"
-
 #include <random>
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Mathematics::DistancePoint3Ellipsoid3Testing::DistancePoint3Ellipsoid3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistancePoint3Ellipsoid3Testing)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, DistancePoint3Ellipsoid3Testing)
+
+void Mathematics::DistancePoint3Ellipsoid3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::DistancePoint3Ellipsoid3Testing::MainTest()
 {
@@ -33,9 +43,9 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::BaseTest()
     const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const std::uniform_real<double> secondRandomDistribution(0.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
         const Vector3D center(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
@@ -92,9 +102,9 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::StaticDistanceTest()
     const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const std::uniform_real<double> secondRandomDistribution(0.0, 50.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
         const Vector3D center(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
@@ -185,9 +195,9 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::DynamicDistanceTest()
     const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const std::uniform_real<double> secondRandomDistribution(0.0, 50.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
         const Vector3D center(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
@@ -288,9 +298,9 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::DerivativeDistanceTest()
     const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const std::uniform_real<double> secondRandomDistribution(0.0, 50.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
         const Vector3D center(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
@@ -335,9 +345,9 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::IntervalDistanceTest()
     const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const std::uniform_real<double> secondRandomDistribution(0.0, 20.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
         const Vector3D center(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));

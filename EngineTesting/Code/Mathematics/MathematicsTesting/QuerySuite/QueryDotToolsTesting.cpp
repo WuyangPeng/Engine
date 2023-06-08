@@ -9,7 +9,7 @@
 
 #include "QueryDotToolsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix4Detail.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
@@ -17,7 +17,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4Detail.h"
 #include "Mathematics/Query/QueryDotToolsDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -30,7 +30,18 @@ namespace Mathematics
     template class QueryDotTools<float>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, QueryDotToolsTesting)
+Mathematics::QueryDotToolsTesting::QueryDotToolsTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, QueryDotToolsTesting)
+
+void Mathematics::QueryDotToolsTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::QueryDotToolsTesting::MainTest()
 {
@@ -44,9 +55,9 @@ void Mathematics::QueryDotToolsTesting::DotTest()
     default_random_engine generator;
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Vector2 firstVector(firstRandomDistribution(generator), firstRandomDistribution(generator));
         Vector2 secondVector(firstRandomDistribution(generator), firstRandomDistribution(generator));
@@ -66,14 +77,14 @@ void Mathematics::QueryDotToolsTesting::Det2Test()
     default_random_engine generator;
     const uniform_real<float> firstRandomDistribution(-100.0f, 100.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Vector2 firstVector(firstRandomDistribution(generator), firstRandomDistribution(generator));
         Vector2 secondVector(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
-        ASSERT_APPROXIMATE(Vector2ToolsD::DotPerp(firstVector, secondVector), QueryDotToolsD::Det2(firstVector[0], firstVector[1], secondVector[0], secondVector[1]), 1e-8f);
+        ASSERT_APPROXIMATE(Vector2ToolsF::DotPerp(firstVector, secondVector), QueryDotToolsF::Det2(firstVector[0], firstVector[1], secondVector[0], secondVector[1]), 1e-8f);
     }
 }
 
@@ -82,9 +93,9 @@ void Mathematics::QueryDotToolsTesting::Det3Test()
     default_random_engine generator;
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Vector3D firstVector(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
         Vector3D secondVector(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));

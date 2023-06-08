@@ -9,13 +9,13 @@
 
 #include "DistancePoint2Ellipse2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Distance/Distance2D/DistancePoint2Ellipse2Detail.h"
 #include "Mathematics/NumericalAnalysis/Equation.h"
-
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include <random>
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::default_random_engine;
 using std::swap;
 using std::uniform_real;
@@ -26,7 +26,18 @@ namespace Mathematics
     template class DistancePoint2Ellipse2<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistancePoint2Ellipse2Testing)
+Mathematics::DistancePoint2Ellipse2Testing::DistancePoint2Ellipse2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, DistancePoint2Ellipse2Testing)
+
+void Mathematics::DistancePoint2Ellipse2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::DistancePoint2Ellipse2Testing::MainTest()
 {
@@ -43,9 +54,9 @@ void Mathematics::DistancePoint2Ellipse2Testing::BaseTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_real<double> secondRandomDistribution(0.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
         const Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
@@ -97,9 +108,9 @@ void Mathematics::DistancePoint2Ellipse2Testing::StaticDistanceTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_real<double> secondRandomDistribution(0.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
         const Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
@@ -172,9 +183,9 @@ void Mathematics::DistancePoint2Ellipse2Testing::DynamicDistanceTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_real<double> secondRandomDistribution(0.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
         const Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
@@ -258,9 +269,9 @@ void Mathematics::DistancePoint2Ellipse2Testing::DerivativeDistanceTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_real<double> secondRandomDistribution(0.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
         const Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
@@ -305,9 +316,9 @@ void Mathematics::DistancePoint2Ellipse2Testing::IntervalDistanceTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_real<double> secondRandomDistribution(0.0, 20.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
         const Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));

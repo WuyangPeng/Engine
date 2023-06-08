@@ -9,11 +9,11 @@
 
 #include "QuaternionConstraintsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/QuaternionConstraintsDetail.h"
 #include "Mathematics/Algebra/Vector2.h"
 #include "Mathematics/Base/MathDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -29,7 +29,18 @@ namespace Mathematics
 
 #endif  // BUILDING_MATHEMATICS_STATIC
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, QuaternionConstraintsTesting)
+Mathematics::QuaternionConstraintsTesting::QuaternionConstraintsTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, QuaternionConstraintsTesting)
+
+void Mathematics::QuaternionConstraintsTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::QuaternionConstraintsTesting::MainTest()
 {
@@ -41,9 +52,9 @@ void Mathematics::QuaternionConstraintsTesting::ConstraintsTest()
     default_random_engine generator{};
     const uniform_real<float> firstRandomDistribution{ -MathF::GetHalfPI(), MathF::GetHalfPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const float firstAngle = firstRandomDistribution(generator);
 

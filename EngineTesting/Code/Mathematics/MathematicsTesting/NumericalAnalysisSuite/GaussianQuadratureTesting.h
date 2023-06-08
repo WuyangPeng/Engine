@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_GAUSSIAN_QUADRATURE_TESTING_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_GAUSSIAN_QUADRATURE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class GaussianQuadratureTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(GaussianQuadratureTesting);
+        using ClassType = GaussianQuadratureTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit GaussianQuadratureTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

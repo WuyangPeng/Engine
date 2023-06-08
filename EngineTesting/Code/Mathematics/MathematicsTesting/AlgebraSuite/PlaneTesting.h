@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_ALGEBRA_SUITE_PLANE_TESTING_H
 #define MATHEMATICS_ALGEBRA_SUITE_PLANE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class PlaneTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(PlaneTesting);
+        using ClassType = PlaneTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit PlaneTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

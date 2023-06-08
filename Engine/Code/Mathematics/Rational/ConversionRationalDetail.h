@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/11 17:18)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:10)
 
 #ifndef MATHEMATICS_RATIONAL_CONVERSION_RATIONAL_DETAIL_H
 #define MATHEMATICS_RATIONAL_CONVERSION_RATIONAL_DETAIL_H
@@ -36,7 +36,6 @@ Mathematics::ConversionRational<T>::ConversionRational(T value)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 template <typename T>
 void Mathematics::ConversionRational<T>::Init(T value, const SignedIntegerType&)
 {
@@ -68,7 +67,6 @@ void Mathematics::ConversionRational<T>::Init(T value, const SignedIntegerType&)
     reducibilityShifting = 0;
 }
 
-// private
 template <typename T>
 void Mathematics::ConversionRational<T>::Init(T value, const UnsignedIntegerType&)
 {
@@ -89,7 +87,6 @@ void Mathematics::ConversionRational<T>::Init(T value, const UnsignedIntegerType
     reducibilityShifting = 0;
 }
 
-// private
 template <typename T>
 void Mathematics::ConversionRational<T>::Init(T value, const FloatType&)
 {
@@ -98,7 +95,6 @@ void Mathematics::ConversionRational<T>::Init(T value, const FloatType&)
     InitFloatingPoint(value);
 }
 
-// private
 template <typename T>
 void Mathematics::ConversionRational<T>::Init(T value, const DoubleType&)
 {
@@ -291,7 +287,6 @@ Mathematics::Integer<N> Mathematics::ConversionRational<T>::GetDenominator() con
     return denominator;
 }
 
-// private
 template <typename T>
 int Mathematics::ConversionRational<T>::GetAssignmentNumeratorShifting(int bit) const
 {
@@ -327,7 +322,6 @@ int Mathematics::ConversionRational<T>::GetAssignmentNumeratorShifting(int bit) 
     }
 }
 
-// private
 template <typename T>
 int Mathematics::ConversionRational<T>::GetAssignmentDenominatorShifting(int bit) const
 {
@@ -363,7 +357,6 @@ int Mathematics::ConversionRational<T>::GetAssignmentDenominatorShifting(int bit
     }
 }
 
-// private
 template <typename T>
 uint64_t Mathematics::ConversionRational<T>::GetAssignmentNumeratorMantissa(int bit) const
 {
@@ -399,7 +392,6 @@ uint64_t Mathematics::ConversionRational<T>::GetAssignmentNumeratorMantissa(int 
     }
 }
 
-// private
 template <typename T>
 uint64_t Mathematics::ConversionRational<T>::GetAssignmentDenominatorMantissa(int bit) const
 {

@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_RATIONAL_SUITE_INTEGER_DATA_CONVERSION_TESTING_H
 #define MATHEMATICS_RATIONAL_SUITE_INTEGER_DATA_CONVERSION_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class IntegerDataConversionTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(IntegerDataConversionTesting);
+        using ClassType = IntegerDataConversionTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit IntegerDataConversionTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

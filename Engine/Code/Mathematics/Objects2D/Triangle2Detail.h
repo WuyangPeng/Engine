@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 10:53)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:21)
 
-#ifndef MATHEMATICS_OBJECTS2D_TRIANGLE2_DETAIL_H
-#define MATHEMATICS_OBJECTS2D_TRIANGLE2_DETAIL_H
+#ifndef MATHEMATICS_OBJECTS_2D_TRIANGLE2_DETAIL_H
+#define MATHEMATICS_OBJECTS_2D_TRIANGLE2_DETAIL_H
 
 #include "Triangle2.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -170,9 +170,7 @@ Real Mathematics::Triangle2<Real>::DistanceTo(const Vector2& point) const
                 {
                     s = numer / denom;
                     t = Math::GetValue(1) - s;
-                    sqrDistance = s * (a00 * s + a01 * t + Math::GetValue(2) * b0) +
-                                  t * (a01 * s + a11 * t + Math::GetValue(2) * b1) +
-                                  c;
+                    sqrDistance = s * (a00 * s + a01 * t + Math::GetValue(2) * b0) + t * (a01 * s + a11 * t + Math::GetValue(2) * b1) + c;
                 }
             }
             else
@@ -209,9 +207,7 @@ Real Mathematics::Triangle2<Real>::DistanceTo(const Vector2& point) const
                 {
                     t = numer / denom;
                     s = Math::GetValue(1) - t;
-                    sqrDistance = s * (a00 * s + a01 * t + Math::GetValue(2) * b0) +
-                                  t * (a01 * s + a11 * t + Math::GetValue(2) * b1) +
-                                  c;
+                    sqrDistance = s * (a00 * s + a01 * t + Math::GetValue(2) * b0) + t * (a01 * s + a11 * t + Math::GetValue(2) * b1) + c;
                 }
             }
             else
@@ -248,9 +244,7 @@ Real Mathematics::Triangle2<Real>::DistanceTo(const Vector2& point) const
                 {
                     s = numer / denom;
                     t = Math::GetValue(1) - s;
-                    sqrDistance = s * (a00 * s + a01 * t + Math::GetValue(2) * b0) +
-                                  t * (a01 * s + a11 * t + Math::GetValue(2) * b1) +
-                                  c;
+                    sqrDistance = s * (a00 * s + a01 * t + Math::GetValue(2) * b0) + t * (a01 * s + a11 * t + Math::GetValue(2) * b1) + c;
                 }
             }
         }
@@ -259,4 +253,4 @@ Real Mathematics::Triangle2<Real>::DistanceTo(const Vector2& point) const
     return Math::Sqrt(Math::FAbs(sqrDistance));
 }
 
-#endif  // MATHEMATICS_OBJECTS2D_TRIANGLE2_DETAIL_H
+#endif  // MATHEMATICS_OBJECTS_2D_TRIANGLE2_DETAIL_H

@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_ALGEBRA_SUITE_Vector3_ORTHONORMALIZE_TESTING_H
 #define MATHEMATICS_ALGEBRA_SUITE_Vector3_ORTHONORMALIZE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Vector3OrthonormalizeTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector3OrthonormalizeTesting);
+        using ClassType = Vector3OrthonormalizeTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Vector3OrthonormalizeTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

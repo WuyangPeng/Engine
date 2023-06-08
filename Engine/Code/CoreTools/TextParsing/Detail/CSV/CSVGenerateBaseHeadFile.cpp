@@ -61,7 +61,7 @@ System::String CoreTools::CSVGenerateBaseHeadFile::GetContent() const
     CSVGenerateClassName csvGenerateClassName{ GetCSVHead(), GetSuffix() };
     content += csvGenerateClassName.GenerateParentClassName();
 
-    CSVGenerateDefaultFunction csvGenerateDefaultFunction{ GetCSVHead(), GetSuffix() };
+    CSVGenerateDefaultFunction csvGenerateDefaultFunction{ GetCSVHead(), GetSuffix(), GetKeyTypeDescribe() };
     content += csvGenerateDefaultFunction.GenerateBaseDefaultFunction();
 
     CSVGenerateGetFunction csvGenerateGetFunction{ GetCSVHead(), GetKeyTypeDescribe() };

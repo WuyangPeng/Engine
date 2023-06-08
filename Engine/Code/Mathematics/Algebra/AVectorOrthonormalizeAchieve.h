@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 11:24)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 14:56)
 
-#ifndef MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMALIZE_ACHIEVE_H
-#define MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMALIZE_ACHIEVE_H
+#ifndef MATHEMATICS_ALGEBRA_A_VECTOR_ORTHONORMALIZE_ACHIEVE_H
+#define MATHEMATICS_ALGEBRA_A_VECTOR_ORTHONORMALIZE_ACHIEVE_H
 
 #include "AVectorDetail.h"
 #include "AVectorOrthonormalize.h"
@@ -16,7 +16,8 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::AVectorOrthonormalize<Real>::AVectorOrthonormalize(const AVector& uVector, const AVector& vVector, const AVector& wVector, const Real epsilon)
+requires std::is_arithmetic_v<Real>
+Mathematics::AVectorOrthonormalize<Real>::AVectorOrthonormalize(const AVector& uVector, const AVector& vVector, const AVector& wVector, Real epsilon)
     : uVector{ uVector }, vVector{ vVector }, wVector{ wVector }, epsilon{ epsilon }
 {
     Generate();
@@ -25,7 +26,8 @@ Mathematics::AVectorOrthonormalize<Real>::AVectorOrthonormalize(const AVector& u
 }
 
 template <typename Real>
-Mathematics::AVectorOrthonormalize<Real>::AVectorOrthonormalize(const std::vector<AVector> vectors, const Real epsilon)
+requires std::is_arithmetic_v<Real>
+Mathematics::AVectorOrthonormalize<Real>::AVectorOrthonormalize(const std::vector<AVector> vectors, Real epsilon)
     : uVector{ vectors.at(0) }, vVector{ vectors.at(1) }, wVector{ vectors.at(2) }, epsilon{ epsilon }
 {
     Generate();
@@ -34,6 +36,7 @@ Mathematics::AVectorOrthonormalize<Real>::AVectorOrthonormalize(const std::vecto
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::AVectorOrthonormalize<Real>::Generate()
 {
     /// 如果输入向量v0、v1和v2，则Gram-Schmidt正交向量产生矢量u0、u1和u2如下，
@@ -61,7 +64,7 @@ void Mathematics::AVectorOrthonormalize<Real>::Generate()
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::AVectorOrthonormalize<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::AVectorOrthonormalize<Real>::IsValid() const noexcept
 {
     try
     {
@@ -88,6 +91,7 @@ bool Mathematics::AVectorOrthonormalize<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorOrthonormalize<Real>::GetUVector() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -96,6 +100,7 @@ typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorO
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorOrthonormalize<Real>::GetVVector() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -104,6 +109,7 @@ typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorO
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorOrthonormalize<Real>::GetWVector() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -111,4 +117,4 @@ typename Mathematics::AVectorOrthonormalize<Real>::AVector Mathematics::AVectorO
     return wVector;
 }
 
-#endif  // MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMALIZE_ACHIEVE_H
+#endif  // MATHEMATICS_ALGEBRA_A_VECTOR_ORTHONORMALIZE_ACHIEVE_H

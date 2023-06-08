@@ -53,7 +53,7 @@ System::String CoreTools::DefaultFunctionDefinitionParsing::GenerateClassInvaria
     content += TextParsing::gSpace;
     content += className;
     content += TextParsing::gRightBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

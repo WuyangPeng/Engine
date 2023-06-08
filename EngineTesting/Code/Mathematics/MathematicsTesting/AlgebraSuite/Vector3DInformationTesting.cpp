@@ -9,10 +9,10 @@
 
 #include "Vector3DInformationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3InformationDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class Vector3Information<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector3InformationTesting)
+Mathematics::Vector3InformationTesting::Vector3InformationTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Vector3InformationTesting)
+
+void Mathematics::Vector3InformationTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Vector3InformationTesting::MainTest()
 {
@@ -49,9 +60,9 @@ void Mathematics::Vector3InformationTesting::DimensionTest()
     const double slope = secondRandomDistribution(generator);
     const double yCoordinate = secondRandomDistribution(generator);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D firstEachVector(firstRandomDistribution(generator),
                                        firstRandomDistribution(generator),
@@ -108,9 +119,9 @@ void Mathematics::Vector3InformationTesting::AxesAlignBoundingBoxTest()
 
     vector<Vector3D> vectors;
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D eachVector(randomDistribution(generator),
                                   randomDistribution(generator),
@@ -154,9 +165,9 @@ void Mathematics::Vector3InformationTesting::DirectionTest()
 
     vector<Vector3D> vectors;
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D eachVector(randomDistribution(generator),
                                   randomDistribution(generator),
@@ -263,9 +274,9 @@ void Mathematics::Vector3InformationTesting::ExtremeTest()
 
     vector<Vector3D> vectors;
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D eachVector(randomDistribution(generator),
                                   randomDistribution(generator),

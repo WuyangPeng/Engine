@@ -54,6 +54,7 @@ namespace CoreTools
 
         BoolArray,
         CharArray,
+        StringArray,
         IntArray,
         Int64Array,
         DoubleArray,
@@ -97,7 +98,7 @@ namespace CoreTools
         Begin,
         Middle,
         End,
-    };    
+    };
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_CSV_FLAGS_H

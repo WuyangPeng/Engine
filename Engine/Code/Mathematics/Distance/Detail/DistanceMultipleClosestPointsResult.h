@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/20 15:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 17:43)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_MULTIPLE_CLOSEST_POINTS_RESULT_H
 #define MATHEMATICS_DISTANCE_DISTANCE_MULTIPLE_CLOSEST_POINTS_RESULT_H
@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = DistanceMultipleClosestPointsResult<Real, Vector>;
         using ParentType = DistanceContactTimeResult<Real, Vector>;
         using ClosestPoints = std::vector<Vector>;
-        using ImplTypeSharedPtr = ParentType::ImplTypeSharedPtr;
+        using ImplTypeSharedPtr = typename ParentType::ImplTypeSharedPtr;
 
     public:
         DistanceMultipleClosestPointsResult(Real distance, Real contactTime, const ClosestPoints& lhsClosestPoints, const ClosestPoints& rhsClosestPoints);

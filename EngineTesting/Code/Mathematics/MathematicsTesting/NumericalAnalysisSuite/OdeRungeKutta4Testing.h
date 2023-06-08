@@ -10,7 +10,7 @@
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ODE_RUNGE_KUTTA4_TESTING_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ODE_RUNGE_KUTTA4_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 #include <vector>
 
@@ -19,7 +19,13 @@ namespace Mathematics
     class OdeRungeKutta4Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(OdeRungeKutta4Testing);
+        using ClassType = OdeRungeKutta4Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit OdeRungeKutta4Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         int GetDimension() const noexcept;
 

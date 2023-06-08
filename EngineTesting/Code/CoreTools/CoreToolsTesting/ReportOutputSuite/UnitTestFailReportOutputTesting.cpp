@@ -35,7 +35,7 @@ void CoreTools::UnitTestFailReportOutputTesting::MainTest()
 
 void CoreTools::UnitTestFailReportOutputTesting::ReportOutputTest()
 {
-    UnitTestFailReportOutput output{ "ClassName"s, "FileName"s, 0, ""s, GetStream() };
+    UnitTestFailReportOutput output{ "ClassName"s, "FileName"s, 0, ""s, GetStream(), LogLevel::Trace };
 
     output.PrintFailClassInformation();
     output.PrintFailFileName();

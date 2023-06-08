@@ -9,16 +9,27 @@
 
 #include "Bisect3RootTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/Bisect3RootDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 namespace Mathematics
 {
     template class Bisect3Root<float>;
     template class Bisect3Root<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Bisect3RootTesting)
+Mathematics::Bisect3RootTesting::Bisect3RootTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Bisect3RootTesting)
+
+void Mathematics::Bisect3RootTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Bisect3RootTesting::MainTest()
 {

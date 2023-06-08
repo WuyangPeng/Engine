@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_ALGEBRA_SUITE_VARIABLE_MATRIX_TESTING_H
 #define MATHEMATICS_ALGEBRA_SUITE_VARIABLE_MATRIX_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class VariableMatrixTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(VariableMatrixTesting);
+        using ClassType = VariableMatrixTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit VariableMatrixTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

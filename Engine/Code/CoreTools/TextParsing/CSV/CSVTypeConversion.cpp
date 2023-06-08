@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/04 15:01)
+///	引擎版本：0.9.0.11 (2023/06/04 17:33)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -174,6 +174,13 @@ CoreTools::CSVTypeConversion::DataTypeDescribeContainer CoreTools::CSVTypeConver
                                            SYSTEM_TEXT("GetIntVector4"sv),
                                            SYSTEM_TEXT("CoreTools::IntVector4"sv),
                                            SYSTEM_TEXT("return CoreTools::IntVector4{};\n"sv) },
+
+                                         { CSVDataType::StringArray,
+                                           SYSTEM_TEXT("string[]"sv),
+                                           SYSTEM_TEXT("std::vector<System::String>"sv),
+                                           SYSTEM_TEXT("GetStringArray"sv),
+                                           SYSTEM_TEXT("System::String"sv),
+                                           SYSTEM_TEXT(""sv) },
 
                                          { CSVDataType::BoolArray,
                                            SYSTEM_TEXT("bool[]"sv),

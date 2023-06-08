@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_APPROXIMATION_SUITE_CIRCLE_FIT2_TESTING_H
 #define MATHEMATICS_APPROXIMATION_SUITE_CIRCLE_FIT2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class CircleFit2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(CircleFit2Testing);
+        using ClassType = CircleFit2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit CircleFit2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

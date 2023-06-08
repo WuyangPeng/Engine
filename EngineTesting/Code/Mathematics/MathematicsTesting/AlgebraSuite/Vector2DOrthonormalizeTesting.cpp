@@ -9,10 +9,10 @@
 
 #include "Vector2DOrthonormalizeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2OrthonormalizeDetail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -24,7 +24,18 @@ namespace Mathematics
     template class Vector2Orthonormalize<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector2OrthonormalizeTesting)
+Mathematics::Vector2OrthonormalizeTesting::Vector2OrthonormalizeTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Vector2OrthonormalizeTesting)
+
+void Mathematics::Vector2OrthonormalizeTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Vector2OrthonormalizeTesting::MainTest()
 {
@@ -38,9 +49,9 @@ void Mathematics::Vector2OrthonormalizeTesting::OrthonormalizeTest()
     const uniform_real<double> firstRandomDistribution{ -10.0, 10.0 };
     const uniform_real<float> secondRandomDistribution{ -10.0f, 10.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Vector2 firstVector(firstRandomDistribution(generator),
                             firstRandomDistribution(generator));

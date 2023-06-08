@@ -9,9 +9,9 @@
 
 #include "Torus3ParametersTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Objects3D/Torus3ParametersDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #ifndef BUILDING_MATHEMATICS_STATIC
 
 namespace Mathematics
@@ -22,7 +22,18 @@ namespace Mathematics
 
 #endif  // BUILDING_MATHEMATICS_STATIC
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Torus3ParametersTesting)
+Mathematics::Torus3ParametersTesting::Torus3ParametersTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Torus3ParametersTesting)
+
+void Mathematics::Torus3ParametersTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Torus3ParametersTesting::MainTest()
 {

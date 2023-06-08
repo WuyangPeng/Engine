@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_BASE_SUITE_RANDOM_TESTING_H
 #define MATHEMATICS_BASE_SUITE_RANDOM_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class RandomTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(RandomTesting);
+        using ClassType = RandomTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit RandomTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

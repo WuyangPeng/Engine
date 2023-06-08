@@ -9,10 +9,10 @@
 
 #include "PolynomialDivideTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/PolynomialDetail.h"
 #include "Mathematics/Algebra/PolynomialDivideDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 #include <vector>
 
@@ -26,7 +26,18 @@ namespace Mathematics
     template class PolynomialDivide<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialDivideTesting)
+Mathematics::PolynomialDivideTesting::PolynomialDivideTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, PolynomialDivideTesting)
+
+void Mathematics::PolynomialDivideTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::PolynomialDivideTesting::MainTest()
 {

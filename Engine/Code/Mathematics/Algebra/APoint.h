@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/03 22:35)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 13:51)
 
 #ifndef MATHEMATICS_ALGEBRA_A_POINT_H
 #define MATHEMATICS_ALGEBRA_A_POINT_H
@@ -23,20 +23,20 @@
 namespace Mathematics
 {
     template <typename T>
+    requires std::is_arithmetic_v<T>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE APoint final
     {
     public:
-        static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
-
         using ClassType = APoint<T>;
+
         using Math = Math<T>;
         using AVector = AVector<T>;
         using Vector3 = Vector3<T>;
         using HomogeneousPoint = HomogeneousPoint<T>;
         using ContainerType = std::vector<ClassType>;
 
-        static constexpr auto aPointSize = System::EnumCastUnderlying(HomogeneousPoint::PointIndex::W);
-        using ArrayType = std::array<T, aPointSize>;
+        static constexpr auto pointSize = System::EnumCastUnderlying(HomogeneousPoint::PointIndex::W);
+        using ArrayType = std::array<T, pointSize>;
 
     public:
         // APoint表示仿射坐标 (x,y,z,1)。 默认 (0,0,0,1)
@@ -51,7 +51,7 @@ namespace Mathematics
         }
 
         explicit APoint(const Vector3& rhs) noexcept;
-        explicit APoint(const ArrayType& rhs) noexcept;
+        explicit APoint(const ArrayType& rhs);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -60,7 +60,7 @@ namespace Mathematics
         NODISCARD T GetY() const noexcept;
         void SetY(T y) noexcept;
         NODISCARD T GetZ() const noexcept;
-        void SetZ(T y) noexcept;
+        void SetZ(T z) noexcept;
 
         NODISCARD Vector3 GetVector3() const noexcept;
         NODISCARD HomogeneousPoint GetHomogeneousPoint() const noexcept;
@@ -80,10 +80,10 @@ namespace Mathematics
         APoint& operator/=(T scalar);
         NODISCARD APoint operator-() const noexcept;
 
-        NODISCARD T GetNorm() const noexcept;
+        NODISCARD T GetNorm() const;
 
         NODISCARD ArrayType GetCoordinate() const noexcept;
-        void Set(const ArrayType& coordinate) noexcept;
+        void Set(const ArrayType& coordinate);
 
         NODISCARD static constexpr APoint GetOrigin() noexcept
         {
@@ -140,7 +140,7 @@ namespace Mathematics
     NODISCARD T Dot(const APoint<T>& lhs, const AVector<T>& rhs) noexcept;
 
     template <typename T>
-    NODISCARD bool Approximate(const APoint<T>& lhs, const APoint<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance()) noexcept;
+    NODISCARD bool Approximate(const APoint<T>& lhs, const APoint<T>& rhs, T epsilon = Math<T>::GetZeroTolerance()) noexcept;
 
     // 调试输出
     template <typename T>

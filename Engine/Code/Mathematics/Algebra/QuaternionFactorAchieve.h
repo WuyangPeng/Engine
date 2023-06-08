@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/08 13:59)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 17:53)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_FACTOR_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_FACTOR_ACHIEVE_H
@@ -18,6 +18,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::QuaternionFactor<Real>::QuaternionFactor(const Quaternion& quaternion, QuaternionFactorFlags flag) noexcept(gAssert < 1 || gMathematicsAssert < 1)
     : quaternion{ quaternion }, sinX{}, cosX{}, sinY{}, cosY{}, sinZ{}, cosZ{}
 {
@@ -52,7 +53,7 @@ Mathematics::QuaternionFactor<Real>::QuaternionFactor(const Quaternion& quaterni
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::QuaternionFactor<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::QuaternionFactor<Real>::IsValid() const noexcept
 {
     return true;
 }
@@ -60,6 +61,7 @@ bool Mathematics::QuaternionFactor<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionFactor<Real>::GetSinX() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -68,6 +70,7 @@ Real Mathematics::QuaternionFactor<Real>::GetSinX() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionFactor<Real>::GetSinY() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -76,6 +79,7 @@ Real Mathematics::QuaternionFactor<Real>::GetSinY() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionFactor<Real>::GetSinZ() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -84,6 +88,7 @@ Real Mathematics::QuaternionFactor<Real>::GetSinZ() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionFactor<Real>::GetCosX() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -92,6 +97,7 @@ Real Mathematics::QuaternionFactor<Real>::GetCosX() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionFactor<Real>::GetCosY() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -100,6 +106,7 @@ Real Mathematics::QuaternionFactor<Real>::GetCosY() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionFactor<Real>::GetCosZ() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -108,12 +115,13 @@ Real Mathematics::QuaternionFactor<Real>::GetCosZ() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::QuaternionFactor<Real>::FactorXYZ() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     const auto a = quaternion.GetW() * quaternion.GetX() - quaternion.GetY() * quaternion.GetZ();
     const auto b = Math::GetRational(1, 2) * (quaternion.GetW() * quaternion.GetW() - quaternion.GetX() * quaternion.GetX() - quaternion.GetY() * quaternion.GetY() + quaternion.GetZ() * quaternion.GetZ());
 
-    auto length = Math::Sqrt(a * a + b * b);
+    const auto length = Math::Sqrt(a * a + b * b);
 
     if (Math::GetZeroTolerance() < length)
     {
@@ -175,6 +183,7 @@ void Mathematics::QuaternionFactor<Real>::FactorXYZ() noexcept(gAssert < 3 || gM
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::QuaternionFactor<Real>::FactorXZY() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     quaternion = Quaternion{ quaternion.GetW(), quaternion.GetX(), quaternion.GetZ(), -quaternion.GetY() };
@@ -189,6 +198,7 @@ void Mathematics::QuaternionFactor<Real>::FactorXZY() noexcept(gAssert < 3 || gM
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::QuaternionFactor<Real>::FactorYZX() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     quaternion = Quaternion{ quaternion.GetW(), -quaternion.GetY(), quaternion.GetZ(), -quaternion.GetX() };
@@ -207,6 +217,7 @@ void Mathematics::QuaternionFactor<Real>::FactorYZX() noexcept(gAssert < 3 || gM
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::QuaternionFactor<Real>::FactorYXZ() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     quaternion = Quaternion{ quaternion.GetW(), -quaternion.GetY(), quaternion.GetX(), quaternion.GetZ() };
@@ -221,6 +232,7 @@ void Mathematics::QuaternionFactor<Real>::FactorYXZ() noexcept(gAssert < 3 || gM
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::QuaternionFactor<Real>::FactorZXY() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     quaternion = Quaternion{ quaternion.GetW(), -quaternion.GetZ(), quaternion.GetX(), -quaternion.GetY() };
@@ -239,6 +251,7 @@ void Mathematics::QuaternionFactor<Real>::FactorZXY() noexcept(gAssert < 3 || gM
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::QuaternionFactor<Real>::FactorZYX() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     quaternion = Quaternion{ quaternion.GetW(), quaternion.GetZ(), -quaternion.GetY(), quaternion.GetX() };

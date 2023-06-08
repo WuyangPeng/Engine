@@ -24,13 +24,13 @@ CoreTools::CSVGenerateMember::CSVGenerateMember(CSVHead csvHead, String suffix) 
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CSVGenerateMember)
 
-System::String CoreTools::CSVGenerateMember::GenerateBaseMember()
+System::String CoreTools::CSVGenerateMember::GenerateBaseMember() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const BaseMemberParsing baseMemberParsing{};
 
-    return baseMemberParsing.GenerateBaseMember();
+    return baseMemberParsing.GenerateBaseMember(suffix);
 }
 
 System::String CoreTools::CSVGenerateMember::GenerateChildMember() const

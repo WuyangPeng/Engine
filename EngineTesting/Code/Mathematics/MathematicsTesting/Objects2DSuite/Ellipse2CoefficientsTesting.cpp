@@ -9,10 +9,10 @@
 
 #include "Ellipse2CoefficientsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Objects2D/Ellipse2CoefficientsDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -24,7 +24,18 @@ namespace Mathematics
     template class Ellipse2Coefficients<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Ellipse2CoefficientsTesting)
+Mathematics::Ellipse2CoefficientsTesting::Ellipse2CoefficientsTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Ellipse2CoefficientsTesting)
+
+void Mathematics::Ellipse2CoefficientsTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Ellipse2CoefficientsTesting::MainTest()
 {
@@ -36,9 +47,9 @@ void Mathematics::Ellipse2CoefficientsTesting::EllipseTest()
     default_random_engine generator{};
     const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Vector2 firstVector(firstRandomDistribution(generator),
                             firstRandomDistribution(generator));

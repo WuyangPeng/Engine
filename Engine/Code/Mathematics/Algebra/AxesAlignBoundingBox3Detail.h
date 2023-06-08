@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/02 22:32)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 15:07)
 
 #ifndef MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX3_DETAIL_H
 #define MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX3_DETAIL_H
@@ -22,6 +22,7 @@
 #endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_AXES_ALIGN_BOUNDING_BOX3_ACHIEVE)
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <typename RhsType>
 Mathematics::AxesAlignBoundingBox3<Real>::AxesAlignBoundingBox3(const AxesAlignBoundingBox3<RhsType>& aabb)
     : minPoint{ aabb.GetMinPoint() }, maxPoint{ aabb.GetMaxPoint() }

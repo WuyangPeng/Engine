@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_ALGEBRA_SUITE_QUATERNION_CONSTRAINTS_TESTING_H
 #define MATHEMATICS_ALGEBRA_SUITE_QUATERNION_CONSTRAINTS_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class QuaternionConstraintsTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(QuaternionConstraintsTesting);
+        using ClassType = QuaternionConstraintsTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit QuaternionConstraintsTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

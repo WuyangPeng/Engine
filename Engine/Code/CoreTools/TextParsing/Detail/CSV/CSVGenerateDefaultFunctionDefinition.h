@@ -24,7 +24,7 @@ namespace CoreTools
         using String = System::String;
 
     public:
-        explicit CSVGenerateDefaultFunctionDefinition(const CSVHead& csvHead, const String& suffix);
+        explicit CSVGenerateDefaultFunctionDefinition(const CSVHead& csvHead, const String& suffix, const String& keyTypeDescribe);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -36,6 +36,7 @@ namespace CoreTools
     private:
         CSVHead csvHead;
         String suffix;
+        String keyTypeDescribe;
     };
 }
 

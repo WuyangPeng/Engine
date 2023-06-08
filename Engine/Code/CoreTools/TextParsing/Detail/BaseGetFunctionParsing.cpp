@@ -95,6 +95,7 @@ System::String CoreTools::BaseGetFunctionParsing::GenerateMapping(int index, con
     content += TextParsing::gNodiscardVirtual;
     content += TextParsing::gSharedPtrConst;
     content += StringUtility::ToFirstLetterUpper(mapping);
+    content += TextParsing::gMappingType;
     content += TextParsing::gRightAngleBracket;
     content += TextParsing::gSpace;
     content += TextParsing::gGet;

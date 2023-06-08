@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_OBJECTS2D_SUITE_ELLIPSE2_TESTING_H
 #define MATHEMATICS_OBJECTS2D_SUITE_ELLIPSE2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Ellipse2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Ellipse2Testing);
+        using ClassType = Ellipse2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Ellipse2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

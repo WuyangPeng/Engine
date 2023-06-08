@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/01/31 3:41)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 15:33)
 
 #ifndef MATHEMATICS_ALGEBRA_BARYCENTRIC_COORDINATES_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BARYCENTRIC_COORDINATES_DETAIL_H
@@ -16,6 +16,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real, int WindowSize>
+requires std::is_arithmetic_v<Real> && (WindowSize == 3 || WindowSize == 4)
 Mathematics::BarycentricCoordinates<Real, WindowSize>::BarycentricCoordinates() noexcept
     : isValid{ false }, tuple{}
 {
@@ -23,6 +24,7 @@ Mathematics::BarycentricCoordinates<Real, WindowSize>::BarycentricCoordinates() 
 }
 
 template <typename Real, int WindowSize>
+requires std::is_arithmetic_v<Real> && (WindowSize == 3 || WindowSize == 4)
 Mathematics::BarycentricCoordinates<Real, WindowSize>::BarycentricCoordinates(bool isValid, const Tuple& tuple) noexcept
     : isValid{ isValid }, tuple{ tuple }
 {
@@ -31,7 +33,7 @@ Mathematics::BarycentricCoordinates<Real, WindowSize>::BarycentricCoordinates(bo
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real, int WindowSize>
-bool Mathematics::BarycentricCoordinates<Real, WindowSize>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> && (WindowSize == 3 || WindowSize == 4) bool Mathematics::BarycentricCoordinates<Real, WindowSize>::IsValid() const noexcept
 {
     if (!isValid || Math::FAbs(Math::GetValue(1) - tuple.GetSum()) <= Math::GetZeroTolerance())
         return true;
@@ -41,6 +43,7 @@ bool Mathematics::BarycentricCoordinates<Real, WindowSize>::IsValid() const noex
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, int WindowSize>
+requires std::is_arithmetic_v<Real> && (WindowSize == 3 || WindowSize == 4)
 Real Mathematics::BarycentricCoordinates<Real, WindowSize>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
@@ -50,7 +53,7 @@ Real Mathematics::BarycentricCoordinates<Real, WindowSize>::operator[](int index
 }
 
 template <typename Real, int WindowSize>
-bool Mathematics::BarycentricCoordinates<Real, WindowSize>::IsBarycentricCoordinatesValid() const noexcept
+requires std::is_arithmetic_v<Real> && (WindowSize == 3 || WindowSize == 4) bool Mathematics::BarycentricCoordinates<Real, WindowSize>::IsBarycentricCoordinatesValid() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 

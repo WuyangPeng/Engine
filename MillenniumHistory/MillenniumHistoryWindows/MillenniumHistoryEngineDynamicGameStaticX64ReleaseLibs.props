@@ -10,7 +10,7 @@
       <AdditionalLibraryDirectories>$(LibsEnvironmentX64Lib);$(LibsEnvironmentX64ReleaseLib);$(EngineX64ReleaseLib);$(GameEngineDynamicGameStaticX64ReleaseLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/$(ProjectName).dll" "$(RiseOfHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/$(ProjectName).dll" "$(MillenniumHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_GAME_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>

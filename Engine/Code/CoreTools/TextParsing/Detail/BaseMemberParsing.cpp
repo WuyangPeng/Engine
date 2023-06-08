@@ -22,7 +22,7 @@ CoreTools::BaseMemberParsing::BaseMemberParsing() noexcept
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, BaseMemberParsing)
 
-System::String CoreTools::BaseMemberParsing::GenerateBaseMember() const
+System::String CoreTools::BaseMemberParsing::GenerateBaseMember(const String& keyTypeDescribe) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -31,7 +31,8 @@ System::String CoreTools::BaseMemberParsing::GenerateBaseMember() const
     content += TextParsing::gPrivate;
 
     content += GenerateIndentation(1);
-    content += TextParsing::gIntKey;
+    content += keyTypeDescribe;
+    content += SYSTEM_TEXT(" key{};\n");
 
     content += GenerateIndentation();
     content += TextParsing::gClassEndBrackets;

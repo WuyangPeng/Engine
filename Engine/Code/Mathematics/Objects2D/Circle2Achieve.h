@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 10:20)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:18)
 
-#ifndef MATHEMATICS_OBJECTS2D_CIRCLE2_ACHIEVE_H
-#define MATHEMATICS_OBJECTS2D_CIRCLE2_ACHIEVE_H
+#ifndef MATHEMATICS_OBJECTS_2D_CIRCLE2_ACHIEVE_H
+#define MATHEMATICS_OBJECTS_2D_CIRCLE2_ACHIEVE_H
 
 #include "Circle2.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -51,12 +51,12 @@ Mathematics::Vector2<Real> Mathematics::Circle2<Real>::GetCenter() const noexcep
 }
 
 template <typename Real>
-void Mathematics::Circle2<Real>::SetCircle(const Vector2& newCenter, Real newRadius) noexcept
+void Mathematics::Circle2<Real>::SetCircle(const Vector2& aCenter, Real aRadius) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    center = newCenter;
-    radius = newRadius;
+    center = aCenter;
+    radius = aRadius;
 }
 
 template <typename Real>
@@ -67,4 +67,4 @@ Real Mathematics::Circle2<Real>::GetRadius() const noexcept
     return radius;
 }
 
-#endif  // MATHEMATICS_OBJECTS2D_CIRCLE2_ACHIEVE_H
+#endif  // MATHEMATICS_OBJECTS_2D_CIRCLE2_ACHIEVE_H

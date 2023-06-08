@@ -9,10 +9,10 @@
 
 #include "Matrix3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
-
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class Matrix3<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Matrix3Testing)
+Mathematics::Matrix3Testing::Matrix3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Matrix3Testing)
+
+void Mathematics::Matrix3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Matrix3Testing::MainTest()
 {
@@ -203,7 +214,7 @@ void Mathematics::Matrix3Testing::ConstructionTest()
     ASSERT_APPROXIMATE(eleventhMatrix(2, 2), 1.0, 1e-10);
 
     firstVector.Normalize();
-    eleventhMatrix.MakeRotation(firstVector, MathD::GetHalfPI() / 3.0);
+    eleventhMatrix.MakeRotation(Vector3D{ firstVector }, MathD::GetHalfPI() / 3.0);
 
     double cosValue = MathD::Cos(MathD::GetHalfPI() / 3.0);
     double sinValue = MathD::Sin(MathD::GetHalfPI() / 3.0);
@@ -269,7 +280,7 @@ void Mathematics::Matrix3Testing::ConstructionTest()
 
     secondVector.Normalize();
 
-    Matrix3D thirteenthMatrix(secondVector, MathD::GetHalfPI() / 6.0);
+    Matrix3D thirteenthMatrix(Vector3D{ secondVector }, MathD::GetHalfPI() / 6.0);
 
     cosValue = MathD::Cos(MathD::GetHalfPI() / 6.0);
     sinValue = MathD::Sin(MathD::GetHalfPI() / 6.0);
@@ -462,9 +473,7 @@ void Mathematics::Matrix3Testing::OperatorCalculateTest()
     default_random_engine generator{};
     const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Matrix3F fifthMatrix(randomDistribution(generator),
                              randomDistribution(generator),
@@ -580,9 +589,7 @@ void Mathematics::Matrix3Testing::ArithmeticCalculateTest()
     const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
     const uniform_real<float> angleRandomDistribution{ 0.0f, MathF::GetPI() - 0.01f };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Matrix3F::Vector3 firstVector(randomDistribution(generator),
                                       randomDistribution(generator),
@@ -760,9 +767,7 @@ void Mathematics::Matrix3Testing::EulerTest()
     const uniform_real<double> secondAngleRandomDistribution{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
     const uniform_real<double> thirdAngleRandomDistribution{ 0.0, MathD::GetHalfPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const double firstAngle = firstAngleRandomDistribution(generator);
         const double secondAngle = secondAngleRandomDistribution(generator);

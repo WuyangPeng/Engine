@@ -10,7 +10,7 @@
 #ifndef MATHEMATICS_INTERSECTION_SUITE_DYNAMIC_TEST_INTERSECTOR1_TESTING_H
 #define MATHEMATICS_INTERSECTION_SUITE_DYNAMIC_TEST_INTERSECTOR1_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Mathematics/Intersection/IntersectionFwd.h"
 
 namespace Mathematics
@@ -18,7 +18,13 @@ namespace Mathematics
     class DynamicTestIntersector1Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DynamicTestIntersector1Testing);
+        using ClassType = DynamicTestIntersector1Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit DynamicTestIntersector1Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

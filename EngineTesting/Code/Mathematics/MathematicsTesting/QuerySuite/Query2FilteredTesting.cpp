@@ -9,14 +9,14 @@
 
 #include "Query2FilteredTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Query/Query2FilteredDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -31,7 +31,18 @@ namespace Mathematics
     template class Query2Filtered<float>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Query2FilteredTesting)
+Mathematics::Query2FilteredTesting::Query2FilteredTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Query2FilteredTesting)
+
+void Mathematics::Query2FilteredTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Query2FilteredTesting::MainTest()
 {
@@ -47,9 +58,9 @@ void Mathematics::Query2FilteredTesting::VerticesTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_int<> secondRandomDistribution(1, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
         auto size = secondRandomDistribution(generator);
@@ -78,9 +89,9 @@ void Mathematics::Query2FilteredTesting::LineTest()
     const uniform_int<> secondRandomDistribution(1, 50);
     const uniform_real<double> thirdRandomDistribution(-1.0, 1.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> firstVertices;
         std::vector<Vector2D> secondVertices;
@@ -139,9 +150,9 @@ void Mathematics::Query2FilteredTesting::TriangleTest()
     const uniform_int<> secondRandomDistribution(1, 50);
     const uniform_real<double> thirdRandomDistribution(-1.0, 1.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> firstVertices;
         std::vector<Vector2D> secondVertices;
@@ -206,9 +217,9 @@ void Mathematics::Query2FilteredTesting::CircumcircleTest()
     const uniform_int<> secondRandomDistribution(1, 50);
     const uniform_real<double> thirdRandomDistribution(-1.0, 1.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> firstVertices;
         std::vector<Vector2D> secondVertices;

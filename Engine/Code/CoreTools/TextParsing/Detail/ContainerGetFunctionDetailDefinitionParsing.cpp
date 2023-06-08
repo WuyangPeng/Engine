@@ -187,7 +187,7 @@ System::String CoreTools::ContainerGetFunctionDetailDefinitionParsing::GenerateL
     content += TextParsing::gForLoop;
     content += lowerClassName;
     content += TextParsing::gRightBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

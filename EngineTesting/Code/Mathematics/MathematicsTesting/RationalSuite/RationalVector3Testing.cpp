@@ -9,12 +9,12 @@
 
 #include "RationalVector3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Rational/IntegerDetail.h"
 #include "Mathematics/Rational/RationalVector3Detail.h"
 #include "Mathematics/Rational/RationalVectorDetail.h"
 #include "Mathematics/Rational/SignRationalDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -26,7 +26,18 @@ namespace Mathematics
     template class RationalVector3<7>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, RationalVector3Testing)
+Mathematics::RationalVector3Testing::RationalVector3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, RationalVector3Testing)
+
+void Mathematics::RationalVector3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::RationalVector3Testing::MainTest()
 {

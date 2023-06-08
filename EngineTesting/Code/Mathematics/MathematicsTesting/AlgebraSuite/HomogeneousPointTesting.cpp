@@ -9,9 +9,9 @@
 
 #include "HomogeneousPointTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #ifndef BUILDING_MATHEMATICS_STATIC
 
 namespace Mathematics
@@ -22,7 +22,18 @@ namespace Mathematics
 
 #endif  // BUILDING_MATHEMATICS_STATIC
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, HomogeneousPointTesting)
+Mathematics::HomogeneousPointTesting::HomogeneousPointTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, HomogeneousPointTesting)
+
+void Mathematics::HomogeneousPointTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::HomogeneousPointTesting::MainTest()
 {

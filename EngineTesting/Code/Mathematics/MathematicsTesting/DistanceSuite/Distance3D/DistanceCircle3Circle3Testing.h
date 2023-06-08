@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_DISTANCE_SUITE_DISTANCE_CIRCLE3_CIRCLE3_TESTING_H
 #define MATHEMATICS_DISTANCE_SUITE_DISTANCE_CIRCLE3_CIRCLE3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class DistanceCircle3Circle3Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DistanceCircle3Circle3Testing);
+        using ClassType = DistanceCircle3Circle3Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit DistanceCircle3Circle3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

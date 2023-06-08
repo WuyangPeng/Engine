@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/01/29 11:17)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 09:13)
 
 #ifndef MATHEMATICS_BASE_LOG2_OF_POWER_OF_TWO_DETAIL_H
 #define MATHEMATICS_BASE_LOG2_OF_POWER_OF_TWO_DETAIL_H
@@ -18,6 +18,7 @@
 #include <gsl/util>
 
 template <typename T>
+requires std::is_integral_v<T>
 Mathematics::Log2OfPowerOfTwo<T>::Log2OfPowerOfTwo(T powerOfTwo) noexcept
     : powerOfTwo{ powerOfTwo }, powerOfTwoCopy{ powerOfTwo }, log2{ 0 }
 {
@@ -26,22 +27,34 @@ Mathematics::Log2OfPowerOfTwo<T>::Log2OfPowerOfTwo(T powerOfTwo) noexcept
     SELF_CLASS_IS_VALID_5;
 }
 
-// private
 template <typename T>
+requires std::is_integral_v<T>
 void Mathematics::Log2OfPowerOfTwo<T>::Convert() noexcept
 {
     auto maskIndex = 0;
-    for (auto mask : maskContainer)
+    if constexpr (std::is_same_v<CalculateType, uint32_t>)
     {
-        DetermineWhetherBitExist(maskIndex, mask);
+        for (const auto mask : maskContainer32)
+        {
+            DetermineWhetherBitExist(maskIndex, mask);
 
-        ++maskIndex;
+            ++maskIndex;
+        }
+    }
+    else
+    {
+        for (const auto mask : maskContainer64)
+        {
+            DetermineWhetherBitExist(maskIndex, mask);
+
+            ++maskIndex;
+        }
     }
 }
 
-// private
 template <typename T>
-void Mathematics::Log2OfPowerOfTwo<T>::DetermineWhetherBitExist(int maskIndex, uint32_t mask) noexcept
+requires std::is_integral_v<T>
+void Mathematics::Log2OfPowerOfTwo<T>::DetermineWhetherBitExist(int maskIndex, CalculateType mask) noexcept
 {
     if ((powerOfTwoCopy & mask) != 0)
     {
@@ -49,9 +62,9 @@ void Mathematics::Log2OfPowerOfTwo<T>::DetermineWhetherBitExist(int maskIndex, u
     }
 }
 
-// private
 template <typename T>
-void Mathematics::Log2OfPowerOfTwo<T>::PowerOfTwoWithMask(int maskIndex, uint32_t mask) noexcept
+requires std::is_integral_v<T>
+void Mathematics::Log2OfPowerOfTwo<T>::PowerOfTwoWithMask(int maskIndex, CalculateType mask) noexcept
 {
     log2 |= (1 << (maskSize - maskIndex - 1));
     powerOfTwoCopy &= mask;
@@ -60,7 +73,7 @@ void Mathematics::Log2OfPowerOfTwo<T>::PowerOfTwoWithMask(int maskIndex, uint32_
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename T>
-bool Mathematics::Log2OfPowerOfTwo<T>::IsValid() const noexcept
+requires std::is_integral_v<T> bool Mathematics::Log2OfPowerOfTwo<T>::IsValid() const noexcept
 {
     if (IsPowerOfTwoValid() && IsLog2Valid() && IsConvertValid())
         return true;
@@ -69,7 +82,7 @@ bool Mathematics::Log2OfPowerOfTwo<T>::IsValid() const noexcept
 }
 
 template <typename T>
-bool Mathematics::Log2OfPowerOfTwo<T>::IsPowerOfTwoValid() const noexcept
+requires std::is_integral_v<T> bool Mathematics::Log2OfPowerOfTwo<T>::IsPowerOfTwoValid() const noexcept
 {
     if (0 <= powerOfTwo)
         return true;
@@ -78,7 +91,7 @@ bool Mathematics::Log2OfPowerOfTwo<T>::IsPowerOfTwoValid() const noexcept
 }
 
 template <typename T>
-bool Mathematics::Log2OfPowerOfTwo<T>::IsLog2Valid() const noexcept
+requires std::is_integral_v<T> bool Mathematics::Log2OfPowerOfTwo<T>::IsLog2Valid() const noexcept
 {
     if (0 <= gsl::narrow_cast<T>(log2))
         return true;
@@ -87,11 +100,11 @@ bool Mathematics::Log2OfPowerOfTwo<T>::IsLog2Valid() const noexcept
 }
 
 template <typename T>
-bool Mathematics::Log2OfPowerOfTwo<T>::IsConvertValid() const noexcept
+requires std::is_integral_v<T> bool Mathematics::Log2OfPowerOfTwo<T>::IsConvertValid() const noexcept
 {
-    auto low = gsl::narrow_cast<T>(GetPowerOfTwoLow());
+    const auto low = gsl::narrow_cast<T>(GetPowerOfTwoLow());
     const auto high = low * 2;
-    auto original = powerOfTwo;
+    const auto original = powerOfTwo;
 
     if (low <= original && (original < high || high < low))
         return true;
@@ -100,7 +113,8 @@ bool Mathematics::Log2OfPowerOfTwo<T>::IsConvertValid() const noexcept
 }
 
 template <typename T>
-uint32_t Mathematics::Log2OfPowerOfTwo<T>::GetPowerOfTwoLow() const noexcept
+requires std::is_integral_v<T>
+typename Mathematics::Log2OfPowerOfTwo<T>::CalculateType Mathematics::Log2OfPowerOfTwo<T>::GetPowerOfTwoLow() const noexcept
 {
     auto result = 1u;
     for (auto i = 0u; i < log2; ++i)
@@ -114,11 +128,12 @@ uint32_t Mathematics::Log2OfPowerOfTwo<T>::GetPowerOfTwoLow() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-T Mathematics::Log2OfPowerOfTwo<T>::GetLog2() const
+requires std::is_integral_v<T>
+int Mathematics::Log2OfPowerOfTwo<T>::GetLog2() const
 {
     CLASS_IS_VALID_5;
 
-    return boost::numeric_cast<T>(log2);
+    return boost::numeric_cast<int>(log2);
 }
 
 #endif  // MATHEMATICS_BASE_LOG2_OF_POWER_OF_TWO_DETAIL_H

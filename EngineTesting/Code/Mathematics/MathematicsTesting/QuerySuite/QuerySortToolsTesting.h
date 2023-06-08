@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_QUERY_SUITE_QUERY_SORT_TOOLS_TESTING_H
 #define MATHEMATICS_QUERY_SUITE_QUERY_SORT_TOOLS_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class QuerySortToolsTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(QuerySortToolsTesting);
+        using ClassType = QuerySortToolsTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit QuerySortToolsTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

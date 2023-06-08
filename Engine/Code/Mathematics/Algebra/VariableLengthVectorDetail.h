@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 13:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 18:06)
 
 #ifndef MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_DETAIL_H
@@ -23,42 +23,31 @@
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableLengthVector<Real>::VariableLengthVector() noexcept
     : container{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26434)
-
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableLengthVector<Real>::VariableLengthVector(int size)
     : container(size)
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26434)
-
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableLengthVector<Real>::VariableLengthVector(const ContainerType& container)
     : container{ container }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26434)
-
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableLengthVector<Real>::VariableLengthVector(ContainerType&& container) noexcept
     : container{ std::move(container) }
 {
@@ -70,7 +59,7 @@ Mathematics::VariableLengthVector<Real>::VariableLengthVector(ContainerType&& co
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::VariableLengthVector<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::VariableLengthVector<Real>::IsValid() const noexcept
 {
     return true;
 }
@@ -78,6 +67,7 @@ bool Mathematics::VariableLengthVector<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::VariableLengthVector<Real>::GetSize() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -86,6 +76,7 @@ int Mathematics::VariableLengthVector<Real>::GetSize() const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 const Real& Mathematics::VariableLengthVector<Real>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -94,6 +85,7 @@ const Real& Mathematics::VariableLengthVector<Real>::operator[](int index) const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real& Mathematics::VariableLengthVector<Real>::operator[](int index)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -102,6 +94,7 @@ Real& Mathematics::VariableLengthVector<Real>::operator[](int index)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::VariableLengthVector<Real>::ResetSize(int size)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -117,6 +110,7 @@ void Mathematics::VariableLengthVector<Real>::ResetSize(int size)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableLengthVector<Real> Mathematics::VariableLengthVector<Real>::operator-() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -131,13 +125,14 @@ Mathematics::VariableLengthVector<Real> Mathematics::VariableLengthVector<Real>:
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator+=(const VariableLengthVector& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
     if (container.size() != rhs.container.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("向量大小不同！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("向量大小不同！"s))
     }
 
     for (auto i = 0u; i < container.size(); ++i)
@@ -154,6 +149,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator-=(const VariableLengthVector& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -177,6 +173,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator*=(Real scalar) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -190,6 +187,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator/=(Real scalar) noexcept(gMathematicsAssert < 0)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -215,6 +213,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::VariableLengthVector<Real>::Length() const noexcept(gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -223,6 +222,7 @@ Real Mathematics::VariableLengthVector<Real>::Length() const noexcept(gMathemati
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::VariableLengthVector<Real>::SquaredLength() const noexcept(gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -240,6 +240,7 @@ Real Mathematics::VariableLengthVector<Real>::SquaredLength() const noexcept(gMa
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon) noexcept(gMathematicsAssert < 2)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -265,6 +266,7 @@ void Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon) noexcept(g
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::VariableLengthVector<Real>::ContainerType Mathematics::VariableLengthVector<Real>::GetContainer() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -273,6 +275,7 @@ typename Mathematics::VariableLengthVector<Real>::ContainerType Mathematics::Var
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::VariableLengthVector<Real>::SetContainer(const ContainerType& newContainer)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -281,6 +284,7 @@ void Mathematics::VariableLengthVector<Real>::SetContainer(const ContainerType& 
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::VariableLengthVector<Real>::ContainerTypeConstIter Mathematics::VariableLengthVector<Real>::begin() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -289,6 +293,7 @@ typename Mathematics::VariableLengthVector<Real>::ContainerTypeConstIter Mathema
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::VariableLengthVector<Real>::ContainerTypeConstIter Mathematics::VariableLengthVector<Real>::end() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -297,6 +302,7 @@ typename Mathematics::VariableLengthVector<Real>::ContainerTypeConstIter Mathema
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::VariableLengthVector<Real>::ContainerTypeIter Mathematics::VariableLengthVector<Real>::begin() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -305,6 +311,7 @@ typename Mathematics::VariableLengthVector<Real>::ContainerTypeIter Mathematics:
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::VariableLengthVector<Real>::ContainerTypeIter Mathematics::VariableLengthVector<Real>::end() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;

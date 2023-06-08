@@ -998,6 +998,7 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Base\BaseFwd.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Base\BitHacks.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Base\BitHacksDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Constants.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Base\FastNegativeExp.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Base\FastNegativeExpAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Base\FastNegativeExpDetail.h" />
@@ -2075,6 +2076,8 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Rational\RationalVectorDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Rational\SignRational.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Rational\SignRationalDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\SortPointsOnCircle.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\SortPointsOnCircleDetail.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md" />

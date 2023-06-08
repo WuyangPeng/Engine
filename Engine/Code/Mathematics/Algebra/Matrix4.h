@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 18:15)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 16:52)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX4_H
 #define MATHEMATICS_ALGEBRA_MATRIX4_H
@@ -24,12 +24,12 @@
 namespace Mathematics
 {
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Matrix4 final : private boost::additive<Matrix4<Real>, boost::multiplicative<Matrix4<Real>, Real>>
     {
     public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-
         using ClassType = Matrix4<Real>;
+
         using Vector4 = Vector4<Real>;
         using VectorIndex = typename Vector4::PointIndex;
         static constexpr auto xIndex = Vector4::xIndex;
@@ -50,10 +50,10 @@ namespace Mathematics
     public:
         // 如果标志为MatrixFlagsZero，创建零矩阵，否则创建单位矩阵。
         explicit Matrix4(MatrixInitType flag = MatrixInitType::Zero) noexcept
-            : m_X{ Create(flag, VectorIndex::X) },
-              m_Y{ Create(flag, VectorIndex::Y) },
-              m_Z{ Create(flag, VectorIndex::Z) },
-              m_W{ Create(flag, VectorIndex::W) }
+            : x{ Create(flag, VectorIndex::X) },
+              y{ Create(flag, VectorIndex::Y) },
+              z{ Create(flag, VectorIndex::Z) },
+              w{ Create(flag, VectorIndex::W) }
         {
         }
 
@@ -74,10 +74,10 @@ namespace Mathematics
                 Real member31,
                 Real member32,
                 Real member33) noexcept
-            : m_X{ member00, member01, member02, member03 },
-              m_Y{ member10, member11, member12, member13 },
-              m_Z{ member20, member21, member22, member23 },
-              m_W{ member30, member31, member32, member33 }
+            : x{ member00, member01, member02, member03 },
+              y{ member10, member11, member12, member13 },
+              z{ member20, member21, member22, member23 },
+              w{ member30, member31, member32, member33 }
         {
         }
 
@@ -122,12 +122,12 @@ namespace Mathematics
         Matrix4& operator*=(const Matrix4& rhs) noexcept;
 
         // 其它运算
-        NODISCARD Matrix4 Inverse(const Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix4 Inverse(Real epsilon = Math::GetZeroTolerance()) const;
         NODISCARD Matrix4 Adjoint() const noexcept;
         NODISCARD Real Determinant() const noexcept;
 
-        NODISCARD Matrix4 GaussianEliminationInverse(const Real epsilon = Math::GetZeroTolerance()) const;
-        NODISCARD Real GaussianEliminationDeterminant(const Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix4 GaussianEliminationInverse(Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Real GaussianEliminationDeterminant(Real epsilon = Math::GetZeroTolerance()) const;
 
         // 投影矩阵到一个指定的平面
         // （包含“原点”和单位长度的“向量”）。
@@ -202,10 +202,10 @@ namespace Mathematics
 
     private:
         // 存储为行主序。
-        Vector4 m_X;
-        Vector4 m_Y;
-        Vector4 m_Z;
-        Vector4 m_W;
+        Vector4 x;
+        Vector4 y;
+        Vector4 z;
+        Vector4 w;
     };
 
     // M * vec
@@ -232,7 +232,7 @@ namespace Mathematics
     NODISCARD Matrix4<Real> TransposeTimesTranspose(const Matrix4<Real>& lhs, const Matrix4<Real>& rhs) noexcept;
 
     template <typename Real>
-    NODISCARD bool Approximate(const Matrix4<Real>& lhs, const Matrix4<Real>& rhs, const Real epsilon = Math<Real>::GetZeroTolerance());
+    NODISCARD bool Approximate(const Matrix4<Real>& lhs, const Matrix4<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance());
 
     // 调试输出。
     template <typename Real>

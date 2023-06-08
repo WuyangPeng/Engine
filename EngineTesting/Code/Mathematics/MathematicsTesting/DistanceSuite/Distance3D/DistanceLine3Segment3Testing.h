@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_DISTANCE_SUITE_DISTANCE_LINE3_SEGMENT3_TESTING_H
 #define MATHEMATICS_DISTANCE_SUITE_DISTANCE_LINE3_SEGMENT3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class DistanceLine3Segment3Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DistanceLine3Segment3Testing);
+        using ClassType = DistanceLine3Segment3Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit DistanceLine3Segment3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 15:46)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:49)
 
-#ifndef MATHEMATICS_OBJECTS3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
-#define MATHEMATICS_OBJECTS3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
+#ifndef MATHEMATICS_OBJECTS_3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
+#define MATHEMATICS_OBJECTS_3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
 
 #include "Ellipsoid3Coefficients.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
@@ -172,4 +172,4 @@ bool Mathematics::Approximate(const Ellipsoid3Coefficients<Real>& lhs, const Ell
     return true;
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
+#endif  // MATHEMATICS_OBJECTS_3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H

@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_DISTANCE_SUITE_DISTANCE_POINT3_RAY3_TESTING_H
 #define MATHEMATICS_DISTANCE_SUITE_DISTANCE_POINT3_RAY3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class DistancePoint3Ray3Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DistancePoint3Ray3Testing);
+        using ClassType = DistancePoint3Ray3Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit DistancePoint3Ray3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

@@ -9,12 +9,23 @@
 
 #include "BrentsMethodRootTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/BrentsMethodCalculateDetail.h"
 #include "Mathematics/NumericalAnalysis/BrentsMethodDetail.h"
 #include "Mathematics/NumericalAnalysis/BrentsMethodRootDetail.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Mathematics::BrentsMethodRootTesting::BrentsMethodRootTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, BrentsMethodRootTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, BrentsMethodRootTesting)
+
+void Mathematics::BrentsMethodRootTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::BrentsMethodRootTesting::MainTest()
 {

@@ -9,11 +9,22 @@
 
 #include "Bisect2StorageTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/NumericalAnalysis/Bisect2Detail.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Mathematics::Bisect2StorageTesting::Bisect2StorageTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Bisect2StorageTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Bisect2StorageTesting)
+
+void Mathematics::Bisect2StorageTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Bisect2StorageTesting::MainTest()
 {
@@ -28,4 +39,3 @@ void Mathematics::Bisect2StorageTesting::TestValuesTest() noexcept
 void Mathematics::Bisect2StorageTesting::SetStorageValueTest() noexcept
 {
 }
- 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/15 15:20)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:50)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_NONITERATIVE_EIGEN3X3_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_NONITERATIVE_EIGEN3X3_DETAIL_H
@@ -129,7 +129,7 @@ void Mathematics::NoniterativeEigen3x3<Real>::RescaleBack(Real maxValue) noexcep
 template <typename Real>
 void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3& matrix)
 {
-    static const auto sqrt3 = Math::Sqrt(Math::GetValue(3));
+    static const auto sqrt3Value = Math::Sqrt(Math::GetValue(3));
 
     // 转换的唯一的矩阵元素为双精度
     const auto a00 = matrix(0, 0);
@@ -179,8 +179,8 @@ void Mathematics::NoniterativeEigen3x3<Real>::ComputeRoots(const Matrix3& matrix
     const auto cosValue = Math::Cos(angle);
     const auto sinValue = Math::Sin(angle);
     const auto root0 = c2Divided3 + Math::GetValue(2) * magnitude * cosValue;
-    const auto root1 = c2Divided3 - magnitude * (cosValue + sqrt3 * sinValue);
-    const auto root2 = c2Divided3 - magnitude * (cosValue - sqrt3 * sinValue);
+    const auto root1 = c2Divided3 - magnitude * (cosValue + sqrt3Value * sinValue);
+    const auto root2 = c2Divided3 - magnitude * (cosValue - sqrt3Value * sinValue);
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)

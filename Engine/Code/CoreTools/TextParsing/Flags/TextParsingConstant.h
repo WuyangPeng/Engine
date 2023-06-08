@@ -246,6 +246,7 @@ namespace CoreTools::TextParsing
     constexpr System::StringView gEraseIter{ SYSTEM_TEXT(".erase(iter, ") };
     constexpr System::StringView gReturnKey{ SYSTEM_TEXT("return key;\n") };
     constexpr System::StringView gSort{ SYSTEM_TEXT("std::ranges::sort(") };
+    constexpr System::StringView gMappingType{ SYSTEM_TEXT("MappingType") };
     constexpr System::StringView gKeyMember{ SYSTEM_TEXT(": key{ key }\n") };
     constexpr System::StringView gCSVNameSpace{ SYSTEM_TEXT("CSVConfigure") };
     constexpr System::StringView gGenerateKey{ SYSTEM_TEXT(" GenerateKey(") };

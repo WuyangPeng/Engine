@@ -29,6 +29,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DatabaseGenerateServerCore"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DatabaseGenerateServerMiddleLayer", "..\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\DatabaseGenerateServerMiddleLayer.vcxproj", "{606AE9C8-D67E-4087-8A47-A0DAC254127C}"
 	ProjectSection(ProjectDependencies) = postProject
+		{7C502120-806E-489C-9542-CAA3678EEFE1} = {7C502120-806E-489C-9542-CAA3678EEFE1}
 		{376787F6-BD00-4DD5-9E9A-B8DD5D1FBD39} = {376787F6-BD00-4DD5-9E9A-B8DD5D1FBD39}
 	EndProjectSection
 EndProject
@@ -36,6 +37,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DatabaseGenerateServer", ".
 	ProjectSection(ProjectDependencies) = postProject
 		{606AE9C8-D67E-4087-8A47-A0DAC254127C} = {606AE9C8-D67E-4087-8A47-A0DAC254127C}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DatabaseGenerateServerConfiguration", "..\DatabaseGenerateServer\DatabaseGenerateServerConfiguration\DatabaseGenerateServerConfiguration.vcxproj", "{7C502120-806E-489C-9542-CAA3678EEFE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -281,6 +284,38 @@ Global
 		{EB5792FA-85BB-4067-AE29-BC04706092FD}.StaticRelease|x64.Build.0 = StaticRelease|x64
 		{EB5792FA-85BB-4067-AE29-BC04706092FD}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
 		{EB5792FA-85BB-4067-AE29-BC04706092FD}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.Debug|x64.ActiveCfg = Debug|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.Debug|x64.Build.0 = Debug|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.Debug|x86.ActiveCfg = Debug|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.Debug|x86.Build.0 = Debug|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.EngineStaticDebug|x64.ActiveCfg = EngineStaticDebug|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.EngineStaticDebug|x64.Build.0 = EngineStaticDebug|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.EngineStaticDebug|x86.ActiveCfg = EngineStaticDebug|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.EngineStaticDebug|x86.Build.0 = EngineStaticDebug|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.EngineStaticRelease|x64.ActiveCfg = EngineStaticRelease|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.EngineStaticRelease|x64.Build.0 = EngineStaticRelease|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.EngineStaticRelease|x86.ActiveCfg = EngineStaticRelease|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.EngineStaticRelease|x86.Build.0 = EngineStaticRelease|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.GameStaticDebug|x64.ActiveCfg = GameStaticDebug|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.GameStaticDebug|x64.Build.0 = GameStaticDebug|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.GameStaticDebug|x86.ActiveCfg = GameStaticDebug|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.GameStaticDebug|x86.Build.0 = GameStaticDebug|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.GameStaticRelease|x64.ActiveCfg = GameStaticRelease|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.GameStaticRelease|x64.Build.0 = GameStaticRelease|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.GameStaticRelease|x86.ActiveCfg = GameStaticRelease|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.GameStaticRelease|x86.Build.0 = GameStaticRelease|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.Release|x64.ActiveCfg = Release|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.Release|x64.Build.0 = Release|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.Release|x86.ActiveCfg = Release|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.Release|x86.Build.0 = Release|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{7C502120-806E-489C-9542-CAA3678EEFE1}.StaticRelease|x86.Build.0 = StaticRelease|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -294,6 +329,7 @@ Global
 		{376787F6-BD00-4DD5-9E9A-B8DD5D1FBD39} = {A47DDB92-6C58-4FFC-99DF-5A40A173FCEB}
 		{606AE9C8-D67E-4087-8A47-A0DAC254127C} = {A47DDB92-6C58-4FFC-99DF-5A40A173FCEB}
 		{EB5792FA-85BB-4067-AE29-BC04706092FD} = {A47DDB92-6C58-4FFC-99DF-5A40A173FCEB}
+		{7C502120-806E-489C-9542-CAA3678EEFE1} = {A47DDB92-6C58-4FFC-99DF-5A40A173FCEB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B0D40FC-5825-42A0-9DA3-E4A564B9D706}

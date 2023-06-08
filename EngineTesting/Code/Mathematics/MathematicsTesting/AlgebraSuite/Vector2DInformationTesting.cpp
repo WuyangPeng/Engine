@@ -9,11 +9,11 @@
 
 #include "Vector2DInformationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/AxesAlignBoundingBox2Detail.h"
 #include "Mathematics/Algebra/Vector2InformationDetail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -26,7 +26,18 @@ namespace Mathematics
     template class Vector2Information<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector2InformationTesting)
+Mathematics::Vector2InformationTesting::Vector2InformationTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Vector2InformationTesting)
+
+void Mathematics::Vector2InformationTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Vector2InformationTesting::MainTest()
 {
@@ -48,9 +59,9 @@ void Mathematics::Vector2InformationTesting::DimensionTest()
     vector<Vector2D> thirdVector;
     const double slope = secondRandomDistribution(generator);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 firstEachVector(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
@@ -91,9 +102,9 @@ void Mathematics::Vector2InformationTesting::AxesAlignBoundingBoxTest()
 
     vector<Vector2D> vectors;
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vectors.emplace_back(randomDistribution(generator), randomDistribution(generator));
     }
@@ -127,9 +138,9 @@ void Mathematics::Vector2InformationTesting::DirectionTest()
 
     vector<Vector2D> vectors;
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vectors.emplace_back(randomDistribution(generator), randomDistribution(generator));
     }
@@ -203,9 +214,9 @@ void Mathematics::Vector2InformationTesting::ExtremeTest()
 
     vector<Vector2D> vectors;
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 eachVector(randomDistribution(generator), randomDistribution(generator));
 

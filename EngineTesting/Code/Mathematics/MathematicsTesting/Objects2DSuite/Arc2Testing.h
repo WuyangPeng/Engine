@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_OBJECTS2D_SUITE_ARC2_TESTING_H
 #define MATHEMATICS_OBJECTS2D_SUITE_ARC2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Arc2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Arc2Testing);
+        using ClassType = Arc2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Arc2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

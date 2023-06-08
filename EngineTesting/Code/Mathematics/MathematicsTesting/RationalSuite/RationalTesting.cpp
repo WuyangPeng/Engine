@@ -9,10 +9,10 @@
 
 #include "RationalTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Rational/IntegerDetail.h"
 #include "Mathematics/Rational/SignRationalDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <limits>
 #include <random>
 
@@ -27,7 +27,18 @@ namespace Mathematics
     template class SignRational<7>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, RationalTesting)
+Mathematics::RationalTesting::RationalTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, RationalTesting)
+
+void Mathematics::RationalTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::RationalTesting::MainTest()
 {
@@ -45,9 +56,9 @@ void Mathematics::RationalTesting::ConstructionTest()
     const uniform_real<float> secondRandomDistribution(-1.0e38f, 1.0e38f);
     const uniform_real<double> thirdRandomDistribution(-1.0e300, 1.0e300);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(26);
         vector<uint16_t> secondShortVector(26);
@@ -122,9 +133,9 @@ void Mathematics::RationalTesting::AccessTest()
     default_random_engine generator{};
     const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(30);
         vector<uint16_t> secondShortVector(30);
@@ -171,9 +182,9 @@ void Mathematics::RationalTesting::OperatorTest()
     default_random_engine generator{};
     const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(30);
         vector<uint16_t> secondShortVector(30);
@@ -281,9 +292,9 @@ void Mathematics::RationalTesting::CompareTest()
     default_random_engine generator{};
     const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(30);
         vector<uint16_t> secondShortVector(30);
@@ -335,9 +346,9 @@ void Mathematics::RationalTesting::EliminatePowersOfTwoTest()
     const uniform_real<float> secondRandomDistribution(-1.0e38f, 1.0e38f);
     const uniform_real<double> thirdRandomDistribution(-1.0e300, 1.0e300);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(26);
         vector<uint16_t> secondShortVector(26);

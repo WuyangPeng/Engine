@@ -9,13 +9,24 @@
 
 #include "StaticFindIntersectorCircle2Circle2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
 #include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorCircle2Circle2Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, StaticFindIntersectorCircle2Circle2Testing)
+Mathematics::StaticFindIntersectorCircle2Circle2Testing::StaticFindIntersectorCircle2Circle2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, StaticFindIntersectorCircle2Circle2Testing)
+
+void Mathematics::StaticFindIntersectorCircle2Circle2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::StaticFindIntersectorCircle2Circle2Testing::MainTest()
 {
@@ -30,9 +41,9 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing::SameTest()
     std::default_random_engine generator;
     const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2F center(randomDistribution(generator),
                               randomDistribution(generator));
@@ -58,9 +69,9 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing::EmptyTest()
     std::default_random_engine generator;
     const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2F lhsCenter(randomDistribution(generator),
                                  randomDistribution(generator));
@@ -114,9 +125,9 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing::TangentTest()
     std::default_random_engine generator;
     const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2F lhsCenter(randomDistribution(generator),
                                  randomDistribution(generator));
@@ -156,9 +167,9 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing::PointTest()
     std::default_random_engine generator;
     const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2F lhsCenter(randomDistribution(generator),
                                  randomDistribution(generator));

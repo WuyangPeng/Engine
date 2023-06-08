@@ -9,11 +9,11 @@
 
 #include "EllipseByArcs2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Approximation/EllipseByArcs2Detail.h"
 #include "Mathematics/Objects2D/Ellipse2Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -27,7 +27,18 @@ namespace Mathematics
     template class EllipseByArcs2<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, EllipseByArcs2Testing)
+Mathematics::EllipseByArcs2Testing::EllipseByArcs2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, EllipseByArcs2Testing)
+
+void Mathematics::EllipseByArcs2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::EllipseByArcs2Testing::MainTest()
 {
@@ -40,9 +51,9 @@ void Mathematics::EllipseByArcs2Testing::Arcs2Test()
     const uniform_real<double> firstRandomDistribution(5.0, 100.0);
     const uniform_int<> secondRandomDistribution(10, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const int numArcs = secondRandomDistribution(generator);
         const double a = firstRandomDistribution(generator);
@@ -50,7 +61,7 @@ void Mathematics::EllipseByArcs2Testing::Arcs2Test()
 
         EllipseByArcs2D ellipseByArcs2(a, b, numArcs);
 
-        ASSERT_EQUAL(ellipseByArcs2.getNumArcs(), numArcs);
+        ASSERT_EQUAL(ellipseByArcs2.GetNumArcs(), numArcs);
 
         const std::vector<Vector2D> points = ellipseByArcs2.GetPoints();
         const std::vector<Circle2D> circle2 = ellipseByArcs2.GetCircle2();

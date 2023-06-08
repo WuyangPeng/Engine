@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/01/29 11:24)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/30 15:01)
 
 #ifndef MATHEMATICS_BASE_MATH_ACHIEVE_H
 #define MATHEMATICS_BASE_MATH_ACHIEVE_H
 
+#include "Constants.h"
 #include "Math.h"
 #include "Mathematics/Rational/FloatingPointAnalysisDetail.h"
 
@@ -27,17 +28,17 @@ Real Mathematics::Math<Real>::GetExponent() noexcept(gAssert < 3 || gMathematics
 template <typename Real>
 Real Mathematics::Math<Real>::GetLN2() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    static const auto ln2 = Log(GetValue(2));
+    static const auto result = Log(GetValue(2));
 
-    return ln2;
+    return result;
 }
 
 template <typename Real>
 Real Mathematics::Math<Real>::GetLN10() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    static const auto ln10 = Log(GetValue(10));
+    static const auto result = Log(GetValue(10));
 
-    return ln10;
+    return result;
 }
 
 template <typename Real>
@@ -59,9 +60,9 @@ Real Mathematics::Math<Real>::GetInverseLN10() noexcept(gAssert < 3 || gMathemat
 template <typename Real>
 Real Mathematics::Math<Real>::GetSqrt2() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    static const auto sqrt2 = Sqrt(GetValue(2));
+    static const auto result = Sqrt(GetValue(2));
 
-    return sqrt2;
+    return result;
 }
 
 template <typename Real>
@@ -75,9 +76,9 @@ Real Mathematics::Math<Real>::GetInverseSqrt2() noexcept(gAssert < 3 || gMathema
 template <typename Real>
 Real Mathematics::Math<Real>::GetSqrt3() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
-    static const auto sqrt3 = Sqrt(GetValue(3));
+    static const auto result = Sqrt(GetValue(3));
 
-    return sqrt3;
+    return result;
 }
 
 template <typename Real>
@@ -325,6 +326,36 @@ Real Mathematics::Math<Real>::GetNumericalRoundOff(Real value, Real minValue, Re
         return maxValue;
     else
         return value;
+}
+
+template <typename Real>
+Real Mathematics::Math<Real>::AtanDivPi(Real x) noexcept
+{
+    return ATan(x) * invPi<Real>;
+}
+
+template <typename Real>
+Real Mathematics::Math<Real>::Atan2DivPi(Real x, Real y) noexcept
+{
+    return ATan2(x, y) * invPi<Real>;
+}
+
+template <typename Real>
+Real Mathematics::Math<Real>::CosPi(Real x) noexcept
+{
+    return Cos(x * pi<Real>);
+}
+
+template <typename Real>
+Real Mathematics::Math<Real>::Exp10(Real x) noexcept(gAssert < 3 || gMathematicsAssert < 3)
+{
+    return Exp(x * ln10<Real>);
+}
+
+template <typename Real>
+Real Mathematics::Math<Real>::SinPi(Real x) noexcept
+{
+    return Sin(x * pi<Real>);
 }
 
 #endif  // MATHEMATICS_BASE_MATH_ACHIEVE_H

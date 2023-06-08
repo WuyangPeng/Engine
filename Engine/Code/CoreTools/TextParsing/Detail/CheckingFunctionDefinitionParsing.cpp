@@ -144,7 +144,7 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateCheckingMem
     content += scopeExpression;
     content += TextParsing::gRightBrackets;
     content += TextParsing::gRightBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -162,7 +162,7 @@ System::String CoreTools::CheckingFunctionDefinitionParsing::GenerateIsValidAchi
     }
 
     content += TextParsing::gRightBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     constexpr auto indentation = 1;
 

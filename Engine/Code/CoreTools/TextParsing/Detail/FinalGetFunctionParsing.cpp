@@ -159,6 +159,7 @@ System::String CoreTools::FinalGetFunctionParsing::GenerateMapping(int index, co
     content += TextParsing::gNodiscard;
     content += TextParsing::gSharedPtrConst;
     content += StringUtility::ToFirstLetterUpper(mapping);
+    content += TextParsing::gMappingType;
     content += TextParsing::gRightAngleBracket;
     content += TextParsing::gSpace;
     content += TextParsing::gGet;

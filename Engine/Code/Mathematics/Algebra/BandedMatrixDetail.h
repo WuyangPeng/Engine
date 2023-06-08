@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/08 13:19)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 15:25)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_DETAIL_H
@@ -22,6 +22,7 @@
 #include <gsl/util>
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::BandedMatrix<Real>::BandedMatrix(int size, int lowerBandsNumber, int upperBandsNumber)
     : diagonalBandContainer(size), lowerBandData{ size, lowerBandsNumber }, upperBandData{ size, upperBandsNumber }
 {
@@ -31,7 +32,7 @@ Mathematics::BandedMatrix<Real>::BandedMatrix(int size, int lowerBandsNumber, in
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::BandedMatrix<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::BandedMatrix<Real>::IsValid() const noexcept
 {
     if (!diagonalBandContainer.empty() &&
         gsl::narrow_cast<int>(diagonalBandContainer.size()) == lowerBandData.GetSize() &&
@@ -48,6 +49,7 @@ bool Mathematics::BandedMatrix<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::BandedMatrix<Real>::GetSize() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -56,6 +58,7 @@ int Mathematics::BandedMatrix<Real>::GetSize() const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::BandedMatrix<Real>::GetLowerBandsNumber() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -64,6 +67,7 @@ int Mathematics::BandedMatrix<Real>::GetLowerBandsNumber() const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::BandedMatrix<Real>::GetUpperBandsNumber() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -72,6 +76,7 @@ int Mathematics::BandedMatrix<Real>::GetUpperBandsNumber() const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::BandedMatrix<Real>::ResetSize(int size, int lowerBandsNumber, int upperBandsNumber)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -82,6 +87,7 @@ void Mathematics::BandedMatrix<Real>::ResetSize(int size, int lowerBandsNumber, 
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::BandedMatrix<Real>::GetStreamSize() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -90,6 +96,7 @@ int Mathematics::BandedMatrix<Real>::GetStreamSize() const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::BandedMatrix<Real>::ContainerType Mathematics::BandedMatrix<Real>::GetDiagonalBand() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -98,19 +105,21 @@ typename Mathematics::BandedMatrix<Real>::ContainerType Mathematics::BandedMatri
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::BandedMatrix<Real>::SetDiagonalBand(const ContainerType& diagonalBand)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
     if (diagonalBand.size() != diagonalBandContainer.size())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("对角线元素大小不相等。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("对角线元素大小不相等。"s))
     }
 
     diagonalBandContainer = diagonalBand;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::BandedMatrix<Real>::SetLowerBand(int index, const ContainerType& lowerBand)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -119,6 +128,7 @@ void Mathematics::BandedMatrix<Real>::SetLowerBand(int index, const ContainerTyp
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::BandedMatrix<Real>::SetLowerBandZero()
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -127,6 +137,7 @@ void Mathematics::BandedMatrix<Real>::SetLowerBandZero()
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::BandedMatrix<Real>::GetLowerBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -135,6 +146,7 @@ int Mathematics::BandedMatrix<Real>::GetLowerBandMax(int index) const noexcept(g
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::BandedMatrix<Real>::ContainerType Mathematics::BandedMatrix<Real>::GetLowerBand(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -143,6 +155,7 @@ typename Mathematics::BandedMatrix<Real>::ContainerType Mathematics::BandedMatri
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::BandedMatrix<Real>::GetUpperBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -151,6 +164,7 @@ int Mathematics::BandedMatrix<Real>::GetUpperBandMax(int index) const noexcept(g
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::BandedMatrix<Real>::SetUpperBand(int index, const ContainerType& upperBand)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -159,6 +173,7 @@ void Mathematics::BandedMatrix<Real>::SetUpperBand(int index, const ContainerTyp
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::BandedMatrix<Real>::ContainerType Mathematics::BandedMatrix<Real>::GetUpperBand(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -167,6 +182,7 @@ typename Mathematics::BandedMatrix<Real>::ContainerType Mathematics::BandedMatri
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::BandedMatrix<Real>::SetUpperBandZero()
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -175,6 +191,7 @@ void Mathematics::BandedMatrix<Real>::SetUpperBandZero()
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real& Mathematics::BandedMatrix<Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -188,6 +205,7 @@ Real& Mathematics::BandedMatrix<Real>::operator()(int row, int column)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 const Real& Mathematics::BandedMatrix<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -208,6 +226,7 @@ const Real& Mathematics::BandedMatrix<Real>::operator()(int row, int column) con
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::BandedMatrix<Real>::SetZero()
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -218,6 +237,7 @@ void Mathematics::BandedMatrix<Real>::SetZero()
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::BandedMatrix<Real>::SetIdentity()
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -228,6 +248,7 @@ void Mathematics::BandedMatrix<Real>::SetIdentity()
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::BandedMatrix<Real>::VariableMatrix Mathematics::BandedMatrix<Real>::ToVariableMatrix() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;

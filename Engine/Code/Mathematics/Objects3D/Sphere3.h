@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 14:27)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:47)
 
-#ifndef MATHEMATICS_OBJECTS3D_SPHERE3_H
-#define MATHEMATICS_OBJECTS3D_SPHERE3_H
+#ifndef MATHEMATICS_OBJECTS_3D_SPHERE3_H
+#define MATHEMATICS_OBJECTS_3D_SPHERE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -38,7 +38,7 @@ namespace Mathematics
         NODISCARD Vector3 GetCenter() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
 
-        void SetSphere(const Vector3& newCenter, Real newRadius) noexcept;
+        void SetSphere(const Vector3& aCenter, Real aRadius) noexcept;
 
     private:
         Vector3 center;
@@ -49,4 +49,4 @@ namespace Mathematics
     using Sphere3D = Sphere3<double>;
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_SPHERE3_H
+#endif  // MATHEMATICS_OBJECTS_3D_SPHERE3_H

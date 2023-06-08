@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 16:17)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:49)
 
-#ifndef MATHEMATICS_OBJECTS3D_PLANE3_ACHIEVE_H
-#define MATHEMATICS_OBJECTS3D_PLANE3_ACHIEVE_H
+#ifndef MATHEMATICS_OBJECTS_3D_PLANE3_ACHIEVE_H
+#define MATHEMATICS_OBJECTS_3D_PLANE3_ACHIEVE_H
 
 #include "Plane3.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -17,7 +17,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::Plane3<Real>::Plane3(const Vector3& normal, Real constant, const Real epsilon) noexcept
+Mathematics::Plane3<Real>::Plane3(const Vector3& normal, Real constant, Real epsilon) noexcept
     : normal{ normal }, constant{ constant }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -31,14 +31,14 @@ Mathematics::Plane3<Real>::Plane3() noexcept
 }
 
 template <typename Real>
-Mathematics::Plane3<Real>::Plane3(const Vector3& normal, const Vector3& point, const Real epsilon) noexcept
+Mathematics::Plane3<Real>::Plane3(const Vector3& normal, const Vector3& point, Real epsilon) noexcept
     : normal{ normal }, constant{ Vector3Tools::DotProduct(normal, point) }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-Mathematics::Plane3<Real>::Plane3(const Triangle3& triangle, const Real epsilon)
+Mathematics::Plane3<Real>::Plane3(const Triangle3& triangle, Real epsilon)
     : normal{}, constant{}, epsilon{ epsilon }
 {
     const auto edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
@@ -50,7 +50,7 @@ Mathematics::Plane3<Real>::Plane3(const Triangle3& triangle, const Real epsilon)
 }
 
 template <typename Real>
-Mathematics::Plane3<Real>::Plane3(const Vector3& point0, const Vector3& point1, const Vector3& point2, const Real epsilon)
+Mathematics::Plane3<Real>::Plane3(const Vector3& point0, const Vector3& point1, const Vector3& point2, Real epsilon)
     : normal{}, constant{}, epsilon{ epsilon }
 {
     const auto edge1 = point1 - point0;
@@ -147,4 +147,4 @@ Mathematics::Plane3<Real> Mathematics::Plane3<Real>::GetMove(Real t, const Vecto
     return movedPlane;
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_PLANE3_ACHIEVE_H
+#endif  // MATHEMATICS_OBJECTS_3D_PLANE3_ACHIEVE_H

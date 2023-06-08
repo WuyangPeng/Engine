@@ -9,11 +9,11 @@
 
 #include "SphereFit3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Approximation/SphereFit3Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -26,7 +26,18 @@ namespace Mathematics
     template class SphereFit3<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, SphereFit3Testing)
+Mathematics::SphereFit3Testing::SphereFit3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, SphereFit3Testing)
+
+void Mathematics::SphereFit3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::SphereFit3Testing::MainTest()
 {
@@ -39,9 +50,9 @@ void Mathematics::SphereFit3Testing::FitTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_int<> secondRandomDistribution(10, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
         const int size = secondRandomDistribution(generator);

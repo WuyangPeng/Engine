@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_APPROXIMATION_SUITE_QUADRATIC_FIT3_TESTING_H
 #define MATHEMATICS_APPROXIMATION_SUITE_QUADRATIC_FIT3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class QuadraticFit3Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(QuadraticFit3Testing);
+        using ClassType = QuadraticFit3Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit QuadraticFit3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

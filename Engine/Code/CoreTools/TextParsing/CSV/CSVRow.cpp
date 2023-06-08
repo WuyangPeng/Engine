@@ -45,6 +45,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetIntVector2, String,
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetIntVector3, String, CoreTools::IntVector3)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetIntVector4, String, CoreTools::IntVector4)
 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetStringArray, String, CoreTools::CSVRow::StringContainer)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetBoolArray, String, CoreTools::CSVRow::BoolContainer)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetCharArray, String, CoreTools::CSVRow::CharContainer)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVRow, GetIntArray, String, CoreTools::CSVRow::IntContainer)

@@ -16,8 +16,8 @@
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::CSVGenerateDefaultFunction::CSVGenerateDefaultFunction(const CSVHead& csvHead, const String& suffix)
-    : csvHead{ csvHead }, suffix{ suffix }
+CoreTools::CSVGenerateDefaultFunction::CSVGenerateDefaultFunction(const CSVHead& csvHead, const String& suffix, const String& keyTypeDescribe)
+    : csvHead{ csvHead }, suffix{ suffix }, keyTypeDescribe{ keyTypeDescribe }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -31,7 +31,7 @@ System::String CoreTools::CSVGenerateDefaultFunction::GenerateBaseDefaultFunctio
     const auto className = csvHead.GetCSVClassName() + suffix;
 
     constexpr auto indentationCount = 1;
-    const DefaultFunctionParsing defaultFunctionParsing{ indentationCount, className };
+    const DefaultFunctionParsing defaultFunctionParsing{ indentationCount, className, keyTypeDescribe };
 
     auto content = defaultFunctionParsing.GeneratePublic();
 
@@ -60,7 +60,7 @@ System::String CoreTools::CSVGenerateDefaultFunction::GenerateChildDefaultFuncti
     const auto className = csvHead.GetCSVClassName() + suffix;
 
     constexpr auto indentationCount = 1;
-    const DefaultFunctionParsing defaultFunctionParsing{ indentationCount, className };
+    const DefaultFunctionParsing defaultFunctionParsing{ indentationCount, className, keyTypeDescribe };
 
     auto content = defaultFunctionParsing.GeneratePublic();
 
@@ -79,7 +79,7 @@ System::String CoreTools::CSVGenerateDefaultFunction::GenerateDefaultFunction() 
     const auto className = csvHead.GetCSVClassName() + suffix;
 
     constexpr auto indentationCount = 1;
-    const DefaultFunctionParsing defaultFunctionParsing{ indentationCount, className };
+    const DefaultFunctionParsing defaultFunctionParsing{ indentationCount, className, keyTypeDescribe };
 
     auto content = defaultFunctionParsing.GeneratePublic();
 
@@ -98,7 +98,7 @@ System::String CoreTools::CSVGenerateDefaultFunction::GenerateContainerDefaultFu
     const auto className = csvHead.GetCSVClassName() + suffix;
 
     constexpr auto indentationCount = 1;
-    const DefaultFunctionParsing defaultFunctionParsing{ indentationCount, className };
+    const DefaultFunctionParsing defaultFunctionParsing{ indentationCount, className, keyTypeDescribe };
 
     auto content = defaultFunctionParsing.GeneratePublic();
 

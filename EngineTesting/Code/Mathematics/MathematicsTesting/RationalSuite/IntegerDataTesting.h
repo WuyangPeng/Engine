@@ -10,21 +10,27 @@
 #ifndef MATHEMATICS_RATIONAL_SUITE_INTEGER_DATA_TESTING_H
 #define MATHEMATICS_RATIONAL_SUITE_INTEGER_DATA_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class IntegerDataTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(IntegerDataTesting);
+        using ClassType = IntegerDataTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit IntegerDataTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();
         void CopyTest();
-        void BitTest(); 
+        void BitTest();
         void ConversionTest();
-        void FloatingPointConversionTest(); 
+        void FloatingPointConversionTest();
         void CompareTest();
 
         void DoRunUnitTest() override;

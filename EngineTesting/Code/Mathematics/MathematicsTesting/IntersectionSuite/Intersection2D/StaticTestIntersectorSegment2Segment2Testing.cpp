@@ -9,10 +9,10 @@
 
 #include "StaticTestIntersectorSegment2Segment2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Intersection/Intersection2D/StaticTestIntersectorLine2Classify.h"
 #include "Mathematics/Intersection/Intersection2D/StaticTestIntersectorSegment2Segment2Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 namespace Mathematics
@@ -21,7 +21,18 @@ namespace Mathematics
     template class StaticTestIntersectorSegment2Segment2<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, StaticTestIntersectorSegment2Segment2Testing)
+Mathematics::StaticTestIntersectorSegment2Segment2Testing::StaticTestIntersectorSegment2Segment2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, StaticTestIntersectorSegment2Segment2Testing)
+
+void Mathematics::StaticTestIntersectorSegment2Segment2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::StaticTestIntersectorSegment2Segment2Testing::MainTest()
 {
@@ -33,9 +44,9 @@ void Mathematics::StaticTestIntersectorSegment2Segment2Testing::SegmentTest()
     std::default_random_engine generator;
     const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2F lhsOrigin(randomDistribution(generator),
                                  randomDistribution(generator));

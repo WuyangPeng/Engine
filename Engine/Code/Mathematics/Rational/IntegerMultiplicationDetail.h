@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/11 15:55)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:13)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_MULTIPLICATION_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_MULTIPLICATION_DETAIL_H
@@ -34,7 +34,6 @@ Mathematics::IntegerMultiplication<N>::IntegerMultiplication(const IntegerData& 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 template <int N>
 void Mathematics::IntegerMultiplication<N>::Calculate()
 {
@@ -43,7 +42,6 @@ void Mathematics::IntegerMultiplication<N>::Calculate()
     Negative();
 }
 
-// private
 template <int N>
 void Mathematics::IntegerMultiplication<N>::Product()
 {
@@ -59,7 +57,6 @@ void Mathematics::IntegerMultiplication<N>::Product()
     }
 }
 
-// private
 template <int N>
 void Mathematics::IntegerMultiplication<N>::CalculateProduct(uint32_t lhsBit, uint32_t lhsIndex)
 {
@@ -91,7 +88,6 @@ void Mathematics::IntegerMultiplication<N>::CalculateProduct(uint32_t lhsBit, ui
 #include STSTEM_WARNING_POP
 }
 
-// private
 template <int N>
 uint32_t Mathematics::IntegerMultiplication<N>::CalculateResult(uint32_t lhsIndex)
 {
@@ -120,7 +116,6 @@ uint32_t Mathematics::IntegerMultiplication<N>::CalculateResult(uint32_t lhsInde
     return carry;
 }
 
-// private
 template <int N>
 void Mathematics::IntegerMultiplication<N>::DetermineCarry(uint32_t carry, uint32_t resultBufferIndex)
 {
@@ -140,7 +135,6 @@ void Mathematics::IntegerMultiplication<N>::DetermineCarry(uint32_t carry, uint3
     }
 }
 
-// private
 template <int N>
 void Mathematics::IntegerMultiplication<N>::OverflowTest()
 {
@@ -169,7 +163,6 @@ void Mathematics::IntegerMultiplication<N>::OverflowTest()
     multiplication = IntegerData{ result };
 }
 
-// private
 template <int N>
 void Mathematics::IntegerMultiplication<N>::Negative()
 {

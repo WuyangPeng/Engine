@@ -12,7 +12,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/BatchConversionCSV.h"
-#include "CoreTools/TextParsing/CSV/ExcelConversionCSV.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include <filesystem>
@@ -51,7 +50,7 @@ void CoreTools::BatchConversionCSVTesting::VerifyTest()
 
     for (const auto& inputPath : std::filesystem::directory_iterator(path))
     {
-        auto fileName = inputPath.path().native();
+        const auto fileName = inputPath.path().native();
 
         IFStreamManager ifStreamManager{ fileName };
 

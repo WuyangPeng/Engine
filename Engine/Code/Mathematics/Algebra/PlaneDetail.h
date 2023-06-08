@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 14:08)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 17:09)
 
 #ifndef MATHEMATICS_ALGEBRA_PLANE_DETAIL_H
 #define MATHEMATICS_ALGEBRA_PLANE_DETAIL_H
@@ -40,7 +40,7 @@ bool Mathematics::operator<(const Plane<T>& lhs, const Plane<T>& rhs)
 }
 
 template <typename T>
-bool Mathematics::Approximate(const Plane<T>& lhs, const Plane<T>& rhs, const T epsilon)
+bool Mathematics::Approximate(const Plane<T>& lhs, const Plane<T>& rhs, T epsilon)
 {
     for (auto i = 0; i < Plane<T>::planeSize; ++i)
     {

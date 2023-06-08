@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_ALGEBRA_SUITE_MATRIX3_EXTRACT_TESTING_H
 #define MATHEMATICS_ALGEBRA_SUITE_MATRIX3_EXTRACT_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Matrix3ExtractTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Matrix3ExtractTesting);
+        using ClassType = Matrix3ExtractTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Matrix3ExtractTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

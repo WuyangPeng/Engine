@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/01/29 10:47)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/30 14:54)
 
 #ifndef MATHEMATICS_BASE_FAST_NEGATIVE_EXP_ACHIEVE_H
 #define MATHEMATICS_BASE_FAST_NEGATIVE_EXP_ACHIEVE_H
@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
 template <typename Real>
+requires std::is_floating_point_v<Real>
 Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMoreRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
@@ -35,6 +36,7 @@ Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMoreRoughCalculation(Rea
 }
 
 template <typename Real>
+requires std::is_floating_point_v<Real>
 Real Mathematics::FastNegativeExp<Real>::FastNegativeExpRoughCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
@@ -57,6 +59,7 @@ Real Mathematics::FastNegativeExp<Real>::FastNegativeExpRoughCalculation(Real va
 }
 
 template <typename Real>
+requires std::is_floating_point_v<Real>
 Real Mathematics::FastNegativeExp<Real>::FastNegativeExpPreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");
@@ -82,6 +85,7 @@ Real Mathematics::FastNegativeExp<Real>::FastNegativeExpPreciseCalculation(Real 
 }
 
 template <typename Real>
+requires std::is_floating_point_v<Real>
 Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMorePreciseCalculation(Real value) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value, "输入值必须在范围[0,无穷大)！\n");

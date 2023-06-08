@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_ALGEBRA_SUITE_AXES_ALIGN_BOUNDING_BOX_2D_TESTING_H
 #define MATHEMATICS_ALGEBRA_SUITE_AXES_ALIGN_BOUNDING_BOX_2D_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class AxesAlignBoundingBox2DTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(AxesAlignBoundingBox2DTesting);
+        using ClassType = AxesAlignBoundingBox2DTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit AxesAlignBoundingBox2DTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

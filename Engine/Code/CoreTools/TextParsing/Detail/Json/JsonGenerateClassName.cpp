@@ -37,7 +37,7 @@ System::String CoreTools::JsonGenerateClassName::GenerateContainerClassName() co
     content += className;
     content += TextParsing::gSpace;
     content += TextParsing::gFinal;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gFunctionBeginBrackets;
@@ -67,7 +67,7 @@ System::String CoreTools::JsonGenerateClassName::GenerateContainerClassName(cons
     content += className;
     content += TextParsing::gSpace;
     content += TextParsing::gFinal;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;

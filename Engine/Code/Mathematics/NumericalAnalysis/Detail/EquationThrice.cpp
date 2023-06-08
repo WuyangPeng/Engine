@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/13 14:49)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:32)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
-
-using std::swap;
 
 Mathematics::EquationThrice::EquationThrice(double constant, double once, double secondary, double thrice, double epsilon)
     : ParentType{ epsilon }, constant{ constant }, once{ once }, secondary{ secondary }, thrice{ thrice }
@@ -81,7 +79,7 @@ bool Mathematics::EquationThrice::Predigest()
     if (MathD::FAbs(constant) <= GetEpsilon())
     {
         SetRealResult(0.0);
-        EquationSecondary equation{ once, secondary, thrice };
+        const EquationSecondary equation{ once, secondary, thrice };
         AddResult(equation);
 
         return true;
@@ -90,7 +88,7 @@ bool Mathematics::EquationThrice::Predigest()
     // 三次项为零时，化解方程。
     if (MathD::FAbs(thrice) <= GetEpsilon())
     {
-        EquationSecondary equation{ constant, once, secondary };
+        const EquationSecondary equation{ constant, once, secondary };
         AddResult(equation);
 
         return true;
@@ -182,7 +180,7 @@ void Mathematics::EquationThrice::CalculateResultDiscriminantIsZero(double qHalf
 
     if (maxRealResult < minRealResult)
     {
-        swap(minRealResult, maxRealResult);
+        std::swap(minRealResult, maxRealResult);
     }
 
     SetRealResult(minRealResult);

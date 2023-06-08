@@ -9,10 +9,10 @@
 
 #include "NoniterativeEigen3x3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/NumericalAnalysis/NoniterativeEigen3x3Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class NoniterativeEigen3x3<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, NoniterativeEigen3x3Testing)
+Mathematics::NoniterativeEigen3x3Testing::NoniterativeEigen3x3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, NoniterativeEigen3x3Testing)
+
+void Mathematics::NoniterativeEigen3x3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::NoniterativeEigen3x3Testing::MainTest()
 {
@@ -37,9 +48,9 @@ void Mathematics::NoniterativeEigen3x3Testing::EigenTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-1.0e2, 1.0e2);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Matrix3D firstMatrix(randomDistribution(generator),
                              randomDistribution(generator),

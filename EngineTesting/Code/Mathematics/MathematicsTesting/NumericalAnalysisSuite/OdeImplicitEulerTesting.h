@@ -10,7 +10,7 @@
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ODE_IMPLICIT_EULER_TESTING_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ODE_IMPLICIT_EULER_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Mathematics/Algebra/VariableMatrix.h"
 
 #include <vector>
@@ -20,7 +20,13 @@ namespace Mathematics
     class OdeImplicitEulerTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(OdeImplicitEulerTesting);
+        using ClassType = OdeImplicitEulerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit OdeImplicitEulerTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD int GetDimension() const noexcept;
 

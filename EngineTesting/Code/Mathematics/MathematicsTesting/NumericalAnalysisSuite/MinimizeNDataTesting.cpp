@@ -9,9 +9,9 @@
 
 #include "MinimizeNDataTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/MinimizeNDataDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::vector;
 
 namespace Mathematics
@@ -20,7 +20,18 @@ namespace Mathematics
     template class MinimizeNData<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, MinimizeNDataTesting)
+Mathematics::MinimizeNDataTesting::MinimizeNDataTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, MinimizeNDataTesting)
+
+void Mathematics::MinimizeNDataTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::MinimizeNDataTesting::MainTest()
 {

@@ -9,11 +9,11 @@
 
 #include "StaticIntersectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/MathematicsTesting/IntersectionSuite/Detail/StaticIntersectorTestDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 namespace Mathematics
 {
     template class StaticIntersectorTest<float, Vector2>;
@@ -22,7 +22,18 @@ namespace Mathematics
     template class StaticIntersectorTest<double, Vector3>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, StaticIntersectorTesting)
+Mathematics::StaticIntersectorTesting::StaticIntersectorTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, StaticIntersectorTesting)
+
+void Mathematics::StaticIntersectorTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::StaticIntersectorTesting::MainTest()
 {
@@ -31,6 +42,8 @@ void Mathematics::StaticIntersectorTesting::MainTest()
 
 void Mathematics::StaticIntersectorTesting::IntersectionTypeTest()
 {
+    using System::operator++;
+
     for (auto i = IntersectionType::Empty; i <= IntersectionType::Other; ++i)
     {
         StaticIntersectorTest<double, Vector3> intersectorTest(IntersectionType(i), 1e-10);

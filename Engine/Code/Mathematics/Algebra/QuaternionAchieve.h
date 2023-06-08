@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/08 14:01)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 17:46)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_ACHIEVE_H
@@ -25,8 +25,9 @@
 #include "Mathematics/NumericalAnalysis/ChebyshevRatioDetail.h"
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real>::Quaternion(const Matrix3& matrix)
-    : m_W{}, m_X{}, m_Y{}, m_Z{}
+    : w{}, x{}, y{}, z{}
 {
     FromRotationMatrix(matrix);
 
@@ -34,6 +35,7 @@ Mathematics::Quaternion<Real>::Quaternion(const Matrix3& matrix)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::FromRotationMatrix(const Matrix3& matrix)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -46,11 +48,11 @@ void Mathematics::Quaternion<Real>::FromRotationMatrix(const Matrix3& matrix)
         // |w| > 1/2, 可能选择 w > 1/2
         auto root = Math::Sqrt(trace + Math::GetValue(1));  // 2w
 
-        m_W = Math::GetRational(1, 2) * root;
+        w = Math::GetRational(1, 2) * root;
         root = Math::GetRational(1, 2) / root;  // 1 / (4w)
-        m_X = (matrix.GetValue<2, 1>() - matrix.GetValue<1, 2>()) * root;
-        m_Y = (matrix.GetValue<0, 2>() - matrix.GetValue<2, 0>()) * root;
-        m_Z = (matrix.GetValue<1, 0>() - matrix.GetValue<0, 1>()) * root;
+        x = (matrix.GetValue<2, 1>() - matrix.GetValue<1, 2>()) * root;
+        y = (matrix.GetValue<0, 2>() - matrix.GetValue<2, 0>()) * root;
+        z = (matrix.GetValue<1, 0>() - matrix.GetValue<0, 1>()) * root;
     }
     else
     {
@@ -78,15 +80,16 @@ void Mathematics::Quaternion<Real>::FromRotationMatrix(const Matrix3& matrix)
 
         (*this)[index0 + 1] = Math::GetRational(1, 2) * root;
         root = Math::GetRational(1, 2) / root;
-        m_W = (matrix(index2, index1) - matrix(index1, index2)) * root;
+        w = (matrix(index2, index1) - matrix(index1, index2)) * root;
         (*this)[index1 + 1] = (matrix(index1, index0) + matrix(index0, index1)) * root;
         (*this)[index2 + 1] = (matrix(index2, index0) + matrix(index0, index2)) * root;
     }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real>::Quaternion(const Vector3& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
-    : m_W{}, m_X{}, m_Y{}, m_Z{}
+    : w{}, x{}, y{}, z{}
 {
     MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
 
@@ -96,6 +99,7 @@ Mathematics::Quaternion<Real>::Quaternion(const Vector3& axis, Real angle) noexc
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::FromAxisAngle(const Vector3& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -108,19 +112,20 @@ void Mathematics::Quaternion<Real>::FromAxisAngle(const Vector3& axis, Real angl
 
     const auto sinValue = Math::Sin(halfAngle);
 
-    m_W = Math::Cos(halfAngle);
-    m_X = sinValue * axis.GetX();
-    m_Y = sinValue * axis.GetY();
-    m_Z = sinValue * axis.GetZ();
+    w = Math::Cos(halfAngle);
+    x = sinValue * axis.GetX();
+    y = sinValue * axis.GetY();
+    z = sinValue * axis.GetZ();
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real>::Quaternion(const ContainerType& rotationColumn)
-    : m_W{}, m_X{}, m_Y{}, m_Z{}
+    : w{}, x{}, y{}, z{}
 {
     if (rotationColumn.size() != zIndex)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s))
     }
 
     FromRotationColumnVector3(rotationColumn);
@@ -129,13 +134,14 @@ Mathematics::Quaternion<Real>::Quaternion(const ContainerType& rotationColumn)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::FromRotationColumnVector3(const ContainerType& rotationColumn)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
     if (rotationColumn.size() != zIndex)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s))
     }
 
     FromRotationMatrix(Matrix3{ rotationColumn, MatrixMajorFlags::Column });
@@ -144,7 +150,7 @@ void Mathematics::Quaternion<Real>::FromRotationColumnVector3(const ContainerTyp
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::Quaternion<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::Quaternion<Real>::IsValid() const noexcept
 {
     return true;
 }
@@ -152,6 +158,7 @@ bool Mathematics::Quaternion<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 const Real& Mathematics::Quaternion<Real>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -159,21 +166,22 @@ const Real& Mathematics::Quaternion<Real>::operator[](int index) const
     switch (System::UnderlyingCastEnum<PointIndex>(index))
     {
         case PointIndex::X:
-            return m_X;
+            return x;
         case PointIndex::Y:
-            return m_Y;
+            return y;
         case PointIndex::Z:
-            return m_Z;
+            return z;
         case PointIndex::W:
-            return m_W;
+            return w;
         default:
             break;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s))
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real& Mathematics::Quaternion<Real>::operator[](int index)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -182,70 +190,79 @@ Real& Mathematics::Quaternion<Real>::operator[](int index)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Quaternion<Real>::GetW() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_W;
+    return w;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Quaternion<Real>::GetX() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_X;
+    return x;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Quaternion<Real>::GetY() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Y;
+    return y;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Quaternion<Real>::GetZ() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Z;
+    return z;
 }
 
 template <typename Real>
-void Mathematics::Quaternion<Real>::SetW(Real w) noexcept
+requires std::is_arithmetic_v<Real>
+void Mathematics::Quaternion<Real>::SetW(Real aW) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_W = w;
+    w = aW;
 }
 
 template <typename Real>
-void Mathematics::Quaternion<Real>::SetX(Real x) noexcept
+requires std::is_arithmetic_v<Real>
+void Mathematics::Quaternion<Real>::SetX(Real aX) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X = x;
+    x = aX;
 }
 
 template <typename Real>
-void Mathematics::Quaternion<Real>::SetY(Real y) noexcept
+requires std::is_arithmetic_v<Real>
+void Mathematics::Quaternion<Real>::SetY(Real aY) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Y = y;
+    y = aY;
 }
 
 template <typename Real>
-void Mathematics::Quaternion<Real>::SetZ(Real z) noexcept
+requires std::is_arithmetic_v<Real>
+void Mathematics::Quaternion<Real>::SetZ(Real aZ) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Z = z;
+    z = aZ;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>::operator*=(const Quaternion& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -256,53 +273,58 @@ Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>::operator*=(const Q
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::operator-() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Quaternion{ -m_W, -m_X, -m_Y, -m_Z };
+    return Quaternion{ -w, -x, -y, -z };
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>::operator+=(const Quaternion& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_W += rhs.m_W;
-    m_X += rhs.m_X;
-    m_Y += rhs.m_Y;
-    m_Z += rhs.m_Z;
+    w += rhs.w;
+    x += rhs.x;
+    y += rhs.y;
+    z += rhs.z;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>::operator-=(const Quaternion& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_W -= rhs.m_W;
-    m_X -= rhs.m_X;
-    m_Y -= rhs.m_Y;
-    m_Z -= rhs.m_Z;
+    w -= rhs.w;
+    x -= rhs.x;
+    y -= rhs.y;
+    z -= rhs.z;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>::operator*=(Real scalar) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_W *= scalar;
-    m_X *= scalar;
-    m_Y *= scalar;
-    m_Z *= scalar;
+    w *= scalar;
+    x *= scalar;
+    y *= scalar;
+    z *= scalar;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>::operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -311,39 +333,40 @@ Mathematics::Quaternion<Real>& Mathematics::Quaternion<Real>::operator/=(Real sc
     {
         MATHEMATICS_ASSERTION_1(false, "除零错误！");
 
-        m_W = Math::maxReal;
-        m_X = Math::maxReal;
-        m_Y = Math::maxReal;
-        m_Z = Math::maxReal;
+        w = Math::maxReal;
+        x = Math::maxReal;
+        y = Math::maxReal;
+        z = Math::maxReal;
     }
     else
     {
-        m_W /= scalar;
-        m_X /= scalar;
-        m_Y /= scalar;
-        m_Z /= scalar;
+        w /= scalar;
+        x /= scalar;
+        y /= scalar;
+        z /= scalar;
     }
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::Matrix3 Mathematics::Quaternion<Real>::ToRotationMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto twoX = Math::GetValue(2) * m_X;
-    const auto twoY = Math::GetValue(2) * m_Y;
-    const auto twoZ = Math::GetValue(2) * m_Z;
-    const auto twoWX = twoX * m_W;
-    const auto twoWY = twoY * m_W;
-    const auto twoWZ = twoZ * m_W;
-    const auto twoXX = twoX * m_X;
-    const auto twoXY = twoY * m_X;
-    const auto twoXZ = twoZ * m_X;
-    const auto twoYY = twoY * m_Y;
-    const auto twoYZ = twoZ * m_Y;
-    const auto twoZZ = twoZ * m_Z;
+    const auto twoX = Math::GetValue(2) * x;
+    const auto twoY = Math::GetValue(2) * y;
+    const auto twoZ = Math::GetValue(2) * z;
+    const auto twoWX = twoX * w;
+    const auto twoWY = twoY * w;
+    const auto twoWZ = twoZ * w;
+    const auto twoXX = twoX * x;
+    const auto twoXY = twoY * x;
+    const auto twoXZ = twoZ * x;
+    const auto twoYY = twoY * y;
+    const auto twoYZ = twoZ * y;
+    const auto twoZZ = twoZ * z;
 
     return Matrix3{ Math::GetValue(1) - (twoYY + twoZZ),
                     twoXY - twoWZ,
@@ -357,6 +380,7 @@ typename Mathematics::Quaternion<Real>::Matrix3 Mathematics::Quaternion<Real>::T
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::ContainerType Mathematics::Quaternion<Real>::ToRotationColumnVector3() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -376,6 +400,7 @@ typename Mathematics::Quaternion<Real>::ContainerType Mathematics::Quaternion<Re
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::Vector3 Mathematics::Quaternion<Real>::ToAxis() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -383,13 +408,13 @@ typename Mathematics::Quaternion<Real>::Vector3 Mathematics::Quaternion<Real>::T
     // 代表旋转的四元数是
     //   q = cos(A/2) + sin(A/2) * (x*i + y*j + z*k)
 
-    const auto sqrareLength = m_X * m_X + m_Y * m_Y + m_Z * m_Z;
+    const auto squareLength = x * x + y * y + z * z;
 
-    if (Math::GetZeroTolerance() < sqrareLength)
+    if (Math::GetZeroTolerance() < squareLength)
     {
-        const auto invLength = Math::InvSqrt(sqrareLength);
+        const auto invLength = Math::InvSqrt(squareLength);
 
-        return Vector3{ m_X * invLength, m_Y * invLength, m_Z * invLength };
+        return Vector3{ x * invLength, y * invLength, z * invLength };
     }
     else
     {
@@ -399,15 +424,16 @@ typename Mathematics::Quaternion<Real>::Vector3 Mathematics::Quaternion<Real>::T
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Quaternion<Real>::ToAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto sqrareLength = m_X * m_X + m_Y * m_Y + m_Z * m_Z;
+    const auto squareLength = x * x + y * y + z * z;
 
-    if (Math::GetZeroTolerance() < sqrareLength)
+    if (Math::GetZeroTolerance() < squareLength)
     {
-        return Math::GetValue(2) * Math::ACos(m_W);
+        return Math::GetValue(2) * Math::ACos(w);
     }
     else
     {
@@ -416,6 +442,7 @@ Real Mathematics::Quaternion<Real>::ToAngle() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::Matrix3Extract Mathematics::Quaternion<Real>::ToAngleAxis() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -424,6 +451,7 @@ typename Mathematics::Quaternion<Real>::Matrix3Extract Mathematics::Quaternion<R
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Quaternion<Real>::Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -432,14 +460,16 @@ Real Mathematics::Quaternion<Real>::Length() const noexcept(gAssert < 3 || gMath
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Quaternion<Real>::SquaredLength() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_W * m_W + m_X * m_X + m_Y * m_Y + m_Z * m_Z;
+    return w * w + x * x + y * y + z * z;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::Normalize(Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -448,23 +478,24 @@ void Mathematics::Quaternion<Real>::Normalize(Real epsilon) noexcept(gAssert < 1
 
     if (epsilon < length)
     {
-        m_W /= length;
-        m_X /= length;
-        m_Y /= length;
-        m_Z /= length;
+        w /= length;
+        x /= length;
+        y /= length;
+        z /= length;
     }
     else
     {
         MATHEMATICS_ASSERTION_1(false, "四元数正则化错误！");
 
-        m_W = Math::GetValue(0);
-        m_X = Math::GetValue(0);
-        m_Y = Math::GetValue(0);
-        m_Z = Math::GetValue(0);
+        w = Math::GetValue(0);
+        x = Math::GetValue(0);
+        y = Math::GetValue(0);
+        z = Math::GetValue(0);
     }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Inverse() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -473,7 +504,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Inverse() const noe
 
     if (Math::GetZeroTolerance() < norm)
     {
-        return Quaternion{ m_W / norm, -m_X / norm, -m_Y / norm, -m_Z / norm };
+        return Quaternion{ w / norm, -x / norm, -y / norm, -z / norm };
     }
     else
     {
@@ -484,18 +515,20 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Inverse() const noe
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Conjugate() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Quaternion{ m_W, -m_X, -m_Y, -m_Z };
+    return Quaternion{ w, -x, -y, -z };
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Exp() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_1(Math::FAbs(m_W) <= Math::GetZeroTolerance(), "四元数w必须等于0！");
+    MATHEMATICS_ASSERTION_1(Math::FAbs(w) <= Math::GetZeroTolerance(), "四元数w必须等于0！");
 
     // 如果 q = A * (x*i+y*j+z*k) 这里 (x,y,z) 是单位长度，然后
     // exp(q) = cos(A) + sin(A)*(x*i+y*j+z*k)。
@@ -504,30 +537,31 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Exp() const noexcep
 
     Quaternion result{};
 
-    const auto angle = Math::Sqrt(m_X * m_X + m_Y * m_Y + m_Z * m_Z);
+    const auto angle = Math::Sqrt(x * x + y * y + z * z);
 
     const auto sinValue = Math::Sin(angle);
-    result.m_W = Math::Cos(angle);
+    result.w = Math::Cos(angle);
 
     if (Math::GetZeroTolerance() <= Math::FAbs(sinValue))
     {
-        auto coeff = sinValue / angle;
+        const auto coeff = sinValue / angle;
 
-        result.m_X = coeff * m_X;
-        result.m_Y = coeff * m_Y;
-        result.m_Z = coeff * m_Z;
+        result.x = coeff * x;
+        result.y = coeff * y;
+        result.z = coeff * z;
     }
     else
     {
-        result.m_X = m_X;
-        result.m_Y = m_Y;
-        result.m_Z = m_Z;
+        result.x = x;
+        result.y = y;
+        result.z = z;
     }
 
     return result;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Log() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -540,17 +574,17 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Log() const noexcep
 
     Quaternion result{ Math::GetValue(0), GetX(), GetY(), GetZ() };
 
-    if (Math::FAbs(m_W) < Math::GetValue(1))
+    if (Math::FAbs(w) < Math::GetValue(1))
     {
-        const auto angle = Math::ACos(m_W);
+        const auto angle = Math::ACos(w);
         const auto sinValue = Math::Sin(angle);
         if (Math::GetZeroTolerance() <= Math::FAbs(sinValue))
         {
             const auto coeff = angle / sinValue;
 
-            result.m_X = coeff * m_X;
-            result.m_Y = coeff * m_Y;
-            result.m_Z = coeff * m_Z;
+            result.x = coeff * x;
+            result.y = coeff * y;
+            result.z = coeff * z;
 
             return result;
         }
@@ -560,6 +594,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::Log() const noexcep
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::Vector3 Mathematics::Quaternion<Real>::Rotate(const Vector3& vector) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -599,6 +634,7 @@ typename Mathematics::Quaternion<Real>::Vector3 Mathematics::Quaternion<Real>::R
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::Vector4 Mathematics::Quaternion<Real>::Rotate(const Vector4& vector) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -611,6 +647,7 @@ typename Mathematics::Quaternion<Real>::Vector4 Mathematics::Quaternion<Real>::R
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::SlerpChebyshevRatio(Real t, const Quaternion& quaternion0, const Quaternion& quaternion1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -634,17 +671,19 @@ void Mathematics::Quaternion<Real>::SlerpChebyshevRatio(Real t, const Quaternion
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::SlerpChebyshevRatioRestricted(Real t, const Quaternion& quaternion0, const Quaternion& quaternion1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    auto cosA = Dot(quaternion0, quaternion1);
+    const auto cosA = Dot(quaternion0, quaternion1);
 
     const auto result = ChebyshevRatio<Real>::Get(t, cosA);
     *this = quaternion0 * result[0] + quaternion1 * result[1];
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::SlerpChebyshevRatioRestrictedPreprocessed(Real t, const Quaternion& quaternion0, const Quaternion& quaternion1, Real cosA)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -654,6 +693,7 @@ void Mathematics::Quaternion<Real>::SlerpChebyshevRatioRestrictedPreprocessed(Re
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::SlerpChebyshevRatioRestrictedPreprocessedHalf(Real t, const Quaternion& quaternion0, const Quaternion& quaternion1, const Quaternion& quaternionHalf, Real cosAHalf)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -672,6 +712,7 @@ void Mathematics::Quaternion<Real>::SlerpChebyshevRatioRestrictedPreprocessedHal
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::Slerp(Real t, const Quaternion& quaternion0, const Quaternion& quaternion1) noexcept
 {
     const auto cosValue = Dot(quaternion0, quaternion1);
@@ -684,10 +725,10 @@ void Mathematics::Quaternion<Real>::Slerp(Real t, const Quaternion& quaternion0,
         const auto coeff0 = Math::Sin(angle - tAngle) / sinValue;
         const auto coeff1 = Math::Sin(tAngle) / sinValue;
 
-        m_W = coeff0 * quaternion0.m_W + coeff1 * quaternion1.m_W;
-        m_X = coeff0 * quaternion0.m_X + coeff1 * quaternion1.m_X;
-        m_Y = coeff0 * quaternion0.m_Y + coeff1 * quaternion1.m_Y;
-        m_Z = coeff0 * quaternion0.m_Z + coeff1 * quaternion1.m_Z;
+        w = coeff0 * quaternion0.w + coeff1 * quaternion1.w;
+        x = coeff0 * quaternion0.x + coeff1 * quaternion1.x;
+        y = coeff0 * quaternion0.y + coeff1 * quaternion1.y;
+        z = coeff0 * quaternion0.z + coeff1 * quaternion1.z;
     }
     else
     {
@@ -696,6 +737,7 @@ void Mathematics::Quaternion<Real>::Slerp(Real t, const Quaternion& quaternion0,
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::SlerpExtraSpins(Real t, const Quaternion& quaternion0, const Quaternion& quaternion1, int extraSpins) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -711,10 +753,10 @@ void Mathematics::Quaternion<Real>::SlerpExtraSpins(Real t, const Quaternion& qu
         const auto coeff0 = Math::Sin((Math::GetValue(1) - t) * angle - phase) / sinValue;
         const auto coeff1 = Math::Sin(t * angle + phase) / sinValue;
 
-        m_W = coeff0 * quaternion0.m_W + coeff1 * quaternion1.m_W;
-        m_X = coeff0 * quaternion0.m_X + coeff1 * quaternion1.m_X;
-        m_Y = coeff0 * quaternion0.m_Y + coeff1 * quaternion1.m_Y;
-        m_Z = coeff0 * quaternion0.m_Z + coeff1 * quaternion1.m_Z;
+        w = coeff0 * quaternion0.w + coeff1 * quaternion1.w;
+        x = coeff0 * quaternion0.x + coeff1 * quaternion1.x;
+        y = coeff0 * quaternion0.y + coeff1 * quaternion1.y;
+        z = coeff0 * quaternion0.z + coeff1 * quaternion1.z;
     }
     else
     {
@@ -723,7 +765,7 @@ void Mathematics::Quaternion<Real>::SlerpExtraSpins(Real t, const Quaternion& qu
 }
 
 template <typename Real>
-bool Mathematics::Quaternion<Real>::IsNormalize(Real epsilon) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
+requires std::is_arithmetic_v<Real> bool Mathematics::Quaternion<Real>::IsNormalize(Real epsilon) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -740,6 +782,7 @@ bool Mathematics::Quaternion<Real>::IsNormalize(Real epsilon) const noexcept(gAs
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::Intermediate(const Quaternion& quaternion0, const Quaternion& quaternion1, const Quaternion& quaternion2)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -756,11 +799,12 @@ void Mathematics::Quaternion<Real>::Intermediate(const Quaternion& quaternion0, 
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::Squad(Real t, const Quaternion& q0, const Quaternion& a0, const Quaternion& a1, const Quaternion& q1) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    auto slerpT = Math::GetValue(2) * t * (Math::GetValue(1) - t);
+    const auto slerpT = Math::GetValue(2) * t * (Math::GetValue(1) - t);
 
     Quaternion slerpP{};
     slerpP.Slerp(t, q0, q1);
@@ -772,6 +816,7 @@ void Mathematics::Quaternion<Real>::Squad(Real t, const Quaternion& q0, const Qu
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Quaternion<Real>::Align(const Vector3& vector0, const Vector3& vector1, Real epsilon)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -813,14 +858,14 @@ void Mathematics::Quaternion<Real>::Align(const Vector3& vector0, const Vector3&
 
     const auto cosHalfAngle = Vector3Tools::DotProduct(vector0, bisector);
 
-    m_W = cosHalfAngle;
+    w = cosHalfAngle;
 
     if (!Math::Approximate(cosHalfAngle, Math::GetValue(0), epsilon))
     {
         const auto cross = Vector3Tools::CrossProduct(vector0, bisector);
-        m_X = cross.GetX();
-        m_Y = cross.GetY();
-        m_Z = cross.GetZ();
+        x = cross.GetX();
+        y = cross.GetY();
+        z = cross.GetZ();
     }
     else
     {
@@ -828,22 +873,23 @@ void Mathematics::Quaternion<Real>::Align(const Vector3& vector0, const Vector3&
         {
             // V1.x或V1.z是最大规模的组成部分。
             auto invLength = Math::InvSqrt(vector0.GetX() * vector0.GetX() + vector0.GetZ() * vector0.GetZ());
-            m_X = -vector0.GetZ() * invLength;
-            m_Y = Math::GetValue(0);
-            m_Z = +vector0.GetX() * invLength;
+            x = -vector0.GetZ() * invLength;
+            y = Math::GetValue(0);
+            z = +vector0.GetX() * invLength;
         }
         else
         {
             // V1.y或V1.z是最大规模的组成部分。
             auto invLength = Math::InvSqrt(vector0.GetY() * vector0.GetY() + vector0.GetZ() * vector0.GetZ());
-            m_X = Math::GetValue(0);
-            m_Y = +vector0.GetZ() * invLength;
-            m_Z = -vector0.GetY() * invLength;
+            x = Math::GetValue(0);
+            y = +vector0.GetZ() * invLength;
+            z = -vector0.GetY() * invLength;
         }
     }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::QuaternionSwingTwist Mathematics::Quaternion<Real>::DecomposeTwistTimesSwing(const Vector3& vector, Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -857,6 +903,7 @@ typename Mathematics::Quaternion<Real>::QuaternionSwingTwist Mathematics::Quater
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::QuaternionSwingTwist Mathematics::Quaternion<Real>::DecomposeSwingTimesTwist(const Vector3& vector, Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -870,6 +917,7 @@ typename Mathematics::Quaternion<Real>::QuaternionSwingTwist Mathematics::Quater
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestX() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -878,6 +926,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestX() const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestY() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -886,6 +935,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestY() const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZ() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -893,8 +943,8 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZ() const
     return GetClosest(QuaternionClosestAxis::Z);
 }
 
-// private
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosest(QuaternionClosestAxis axis) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -903,7 +953,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosest(Quaterni
 
     // 适当的非零分量将在后面进行设置。
     Quaternion quaternion{};
-    const auto p0 = m_W;
+    const auto p0 = w;
     const auto p1 = (*this)[axisIndex];
     const auto sqrLength = p0 * p0 + p1 * p1;
     if (Math::GetZeroTolerance() < sqrLength)
@@ -924,19 +974,20 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosest(Quaterni
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXY() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto det = m_W * m_Z - m_X * m_Y;
+    const auto det = w * z - x * y;
 
     if (Math::FAbs(det) < Math::GetRational(1, 2) - Math::GetZeroTolerance())
     {
         auto discr = Math::GetValue(1) - Math::GetValue(4) * det * det;
         discr = Math::Sqrt(Math::FAbs(discr));
 
-        const auto a = m_W * m_X + m_Y * m_Z;
-        const auto b = m_W * m_W - m_X * m_X + m_Y * m_Y - m_Z * m_Z;
+        const auto a = w * x + y * z;
+        const auto b = w * w - x * x + y * y - z * z;
 
         auto c0 = Math::GetValue(0);
         auto s0 = Math::GetValue(0);
@@ -956,8 +1007,8 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXY() cons
         c0 *= invLength;
         s0 *= invLength;
 
-        auto c1 = m_W * c0 + m_X * s0;
-        auto s1 = m_Y * c0 + m_Z * s0;
+        auto c1 = w * c0 + x * s0;
+        auto s1 = y * c0 + z * s0;
         invLength = Math::InvSqrt(c1 * c1 + s1 * s1);
         c1 *= invLength;
         s1 *= invLength;
@@ -968,16 +1019,17 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXY() cons
     {
         const auto invLength = Math::InvSqrt(Math::FAbs(det));
 
-        return Quaternion{ m_W * invLength, m_X * invLength, Math::GetValue(0), Math::GetValue(0) };
+        return Quaternion{ w * invLength, x * invLength, Math::GetValue(0), Math::GetValue(0) };
     }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestYX() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const Quaternion alt{ m_W, m_X, m_Y, -m_Z };
+    const Quaternion alt{ w, x, y, -z };
 
     auto quaternion = alt.GetClosestXY();
     quaternion.SetZ(-quaternion.GetZ());
@@ -986,11 +1038,12 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestYX() cons
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZX() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const Quaternion alt{ m_W, m_X, m_Z, m_Y };
+    const Quaternion alt{ w, x, z, y };
 
     auto quaternion = alt.GetClosestXY();
     std::swap(quaternion[Quaternion::yIndex], quaternion[Quaternion::zIndex]);
@@ -999,11 +1052,12 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZX() cons
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXZ() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const Quaternion alt{ m_W, m_X, -m_Z, m_Y };
+    const Quaternion alt{ w, x, -z, y };
 
     auto quaternion = alt.GetClosestXY();
 
@@ -1015,11 +1069,12 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXZ() cons
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestYZ() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const Quaternion alt{ m_W, m_Y, m_Z, m_X };
+    const Quaternion alt{ w, y, z, x };
 
     auto quaternion = alt.GetClosestXY();
     const auto save = quaternion[Quaternion::zIndex];
@@ -1031,11 +1086,12 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestYZ() cons
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZY() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const Quaternion alt{ m_W, m_Y, m_Z, -m_X };
+    const Quaternion alt{ w, y, z, -x };
 
     auto quaternion = alt.GetClosestXY();
     const auto save = quaternion[Quaternion::zIndex];
@@ -1047,6 +1103,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZY() cons
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorXYZ() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -1055,6 +1112,7 @@ typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorXZY() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -1063,6 +1121,7 @@ typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorYZX() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -1071,6 +1130,7 @@ typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorYXZ() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -1079,6 +1139,7 @@ typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorZXY() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -1087,6 +1148,7 @@ typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion<Real>::FactorZYX() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -1095,6 +1157,7 @@ typename Mathematics::Quaternion<Real>::QuaternionFactor Mathematics::Quaternion
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestX(const QuaternionConstraints& xCon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -1103,6 +1166,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestX(const Q
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestY(const QuaternionConstraints& yCon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -1111,6 +1175,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestY(const Q
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZ(const QuaternionConstraints& zCon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -1119,6 +1184,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZ(const Q
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosest(QuaternionClosestAxis axis, const QuaternionConstraints& con) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -1126,7 +1192,7 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosest(Quaterni
     // 各元素初始化为零
     Quaternion quaternion{};
 
-    auto p0 = m_W;
+    auto p0 = w;
     auto p1 = (*this)[System::EnumCastUnderlying(axis)];
     const auto sqrLength = p0 * p0 + p1 * p1;
     if (Math::GetZeroTolerance() < sqrLength)
@@ -1186,17 +1252,18 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosest(Quaterni
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXY(const QuaternionConstraints& xCon, const QuaternionConstraints& yCon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto det = m_W * m_Z - m_X * m_Y;
+    const auto det = w * z - x * y;
 
     if (Math::FAbs(det) < Math::GetRational(1, 2) - Math::GetZeroTolerance())
     {
         const auto discr = Math::Sqrt(Math::FAbs(Math::GetValue(1) - Math::GetValue(4) * det * det));
-        const auto a = m_W * m_X + m_Y * m_Z;
-        const auto b = m_W * m_W - m_X * m_X + m_Y * m_Y - m_Z * m_Z;
+        const auto a = w * x + y * z;
+        const auto b = w * w - x * x + y * y - z * z;
 
         Real c0{};
         Real s0{};
@@ -1216,8 +1283,8 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXY(const 
         c0 *= invLength;
         s0 *= invLength;
 
-        auto c1 = m_W * c0 + m_X * s0;
-        auto s1 = m_Y * c0 + m_Z * s0;
+        auto c1 = w * c0 + x * s0;
+        auto s1 = y * c0 + z * s0;
         invLength = Math::InvSqrt(c1 * c1 + s1 * s1);
         c1 *= invLength;
         s1 *= invLength;
@@ -1360,11 +1427,12 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXY(const 
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestYX(const QuaternionConstraints& yCon, const QuaternionConstraints& xCon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const Quaternion alt{ m_W, m_X, m_Y, -m_Z };
+    const Quaternion alt{ w, x, y, -z };
 
     auto quaternion = alt.GetClosestXY(xCon, yCon);
     quaternion.SetZ(-quaternion.GetZ());
@@ -1373,18 +1441,19 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestYX(const 
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZX(const QuaternionConstraints& zCon, const QuaternionConstraints& xCon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto det = m_W * m_Y - m_X * m_Z;
+    const auto det = w * y - x * z;
 
     if (Math::FAbs(det) < Math::GetRational(1, 2) - Math::GetZeroTolerance())
     {
         const auto discr = Math::Sqrt(Math::FAbs(Math::GetValue(1) - Math::GetValue(4) * det * det));
 
-        const auto a = m_W * m_Z + m_X * m_Y;
-        const auto b = m_W * m_W + m_X * m_X - m_Y * m_Y - m_Z * m_Z;
+        const auto a = w * z + x * y;
+        const auto b = w * w + x * x - y * y - z * z;
 
         auto c2 = Math::GetValue(0);
         auto s2 = Math::GetValue(0);
@@ -1404,8 +1473,8 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZX(const 
         c2 *= invLength;
         s2 *= invLength;
 
-        auto c0 = m_W * c2 + m_Z * s2;
-        auto s0 = m_X * c2 + m_Y * s2;
+        auto c0 = w * c2 + z * s2;
+        auto s0 = x * c2 + y * s2;
         invLength = Math::InvSqrt(c0 * c0 + s0 * s0);
         c0 *= invLength;
         s0 *= invLength;
@@ -1548,11 +1617,12 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZX(const 
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXZ(const QuaternionConstraints& xCon, const QuaternionConstraints& zCon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const Quaternion alt{ m_W, m_X, -m_Y, m_Z };
+    const Quaternion alt{ w, x, -y, z };
 
     auto quaternion = alt.GetClosestZX(zCon, xCon);
     quaternion.SetY(-quaternion.GetY());
@@ -1561,18 +1631,19 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestXZ(const 
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZY(const QuaternionConstraints& zCon, const QuaternionConstraints& yCon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto det = m_W * m_X + m_Y * m_Z;
+    const auto det = w * x + y * z;
 
     if (Math::FAbs(det) < Math::GetRational(1, 2) - Math::GetZeroTolerance())
     {
         const auto discr = Math::Sqrt(Math::FAbs(Math::GetValue(1) - Math::GetValue(4) * det * det));
 
-        const auto a = m_W * m_Z - m_X * m_Y;
-        const auto b = m_W * m_W - m_X * m_X + m_Y * m_Y - m_Z * m_Z;
+        const auto a = w * z - x * y;
+        const auto b = w * w - x * x + y * y - z * z;
 
         auto c2 = Math::GetValue(0);
         auto s2 = Math::GetValue(0);
@@ -1591,8 +1662,8 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZY(const 
         c2 *= invLength;
         s2 *= invLength;
 
-        auto c1 = m_W * c2 + m_Z * s2;
-        auto s1 = m_Y * c2 - m_X * s2;
+        auto c1 = w * c2 + z * s2;
+        auto s1 = y * c2 - x * s2;
         invLength = Math::InvSqrt(c1 * c1 + s1 * s1);
         c1 *= invLength;
         s1 *= invLength;
@@ -1735,11 +1806,12 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestZY(const 
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestYZ(const QuaternionConstraints& yCon, const QuaternionConstraints& zCon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const Quaternion alt{ m_W, -m_X, m_Y, m_Z };
+    const Quaternion alt{ w, -x, y, z };
 
     auto quaternion = alt.GetClosestZY(zCon, yCon);
     quaternion.SetX(-quaternion.GetX());
@@ -1747,25 +1819,21 @@ Mathematics::Quaternion<Real> Mathematics::Quaternion<Real>::GetClosestYZ(const 
     return quaternion;
 }
 
-template <typename T>
-typename Mathematics::Quaternion<T>::ArrayType Mathematics::Quaternion<T>::GetCoordinate() const noexcept
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Quaternion<Real>::ArrayType Mathematics::Quaternion<Real>::GetCoordinate() const noexcept
 {
     return ArrayType{ GetW(), GetX(), GetY(), GetZ() };
 }
 
-template <typename T>
-void Mathematics::Quaternion<T>::SetCoordinate(const ArrayType& coordinate) noexcept
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+void Mathematics::Quaternion<Real>::SetCoordinate(const ArrayType& coordinate) noexcept
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-    SetW(coordinate[System::EnumCastUnderlying(PointIndex::W)]);
-    SetX(coordinate[System::EnumCastUnderlying(PointIndex::X)]);
-    SetY(coordinate[System::EnumCastUnderlying(PointIndex::Y)]);
-    SetZ(coordinate[System::EnumCastUnderlying(PointIndex::Z)]);
-
-#include STSTEM_WARNING_POP
+    SetW(coordinate.at(System::EnumCastUnderlying(PointIndex::W)));
+    SetX(coordinate.at(System::EnumCastUnderlying(PointIndex::X)));
+    SetY(coordinate.at(System::EnumCastUnderlying(PointIndex::Y)));
+    SetZ(coordinate.at(System::EnumCastUnderlying(PointIndex::Z)));
 }
 
 #endif  // MATHEMATICS_ALGEBRA_QUATERNION_ACHIEVE_H

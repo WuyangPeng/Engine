@@ -28,7 +28,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD static String GenerateBaseMember();
+        NODISCARD String GenerateBaseMember() const;
         NODISCARD String GenerateChildMember() const;
         NODISCARD String GenerateContainerMember() const;
 

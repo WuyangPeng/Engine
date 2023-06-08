@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 15:50)
+///	引擎版本：0.9.0.11 (2023/05/30 09:40)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,8 +15,8 @@
 
 using namespace std::literals;
 
-CoreTools::UnitTestFailReportOutputImpl::UnitTestFailReportOutputImpl(std::string failClassName, std::string fileName, int lineNumber, std::string errorMessage, const OStreamShared& streamShared) noexcept
-    : ParentType{ streamShared }, failClassName{ std::move(failClassName) }, fileName{ std::move(fileName) }, lineNumber{ lineNumber }, errorMessage{ std::move(errorMessage) }
+CoreTools::UnitTestFailReportOutputImpl::UnitTestFailReportOutputImpl(std::string failClassName, std::string fileName, int lineNumber, std::string errorMessage, const OStreamShared& streamShared, LogLevel logLevel) noexcept
+    : ParentType{ streamShared }, failClassName{ std::move(failClassName) }, fileName{ std::move(fileName) }, lineNumber{ lineNumber }, errorMessage{ std::move(errorMessage) }, logLevel{ logLevel }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -28,7 +28,7 @@ void CoreTools::UnitTestFailReportOutputImpl::PrintFailClassInformation()
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     const auto failClassInformation = failClassName + " 测试失败："s;
-    PrintString(failClassInformation);
+    PrintString(failClassInformation, logLevel);
 }
 
 void CoreTools::UnitTestFailReportOutputImpl::PrintFailFileName()
@@ -36,21 +36,21 @@ void CoreTools::UnitTestFailReportOutputImpl::PrintFailFileName()
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     const auto failFileName = "文件 "s + fileName;
-    PrintString(failFileName);
+    PrintString(failFileName, logLevel);
 }
 
 void CoreTools::UnitTestFailReportOutputImpl::PrintFailLineNumber()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    PrintString(" 第"s);
-    PrintNumber(lineNumber);
-    PrintString("行"s);
+    PrintString(" 第"s, logLevel);
+    PrintNumber(lineNumber, logLevel);
+    PrintString("行"s, logLevel);
 }
 
 void CoreTools::UnitTestFailReportOutputImpl::PrintErrorMessage()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    PrintString(errorMessage);
+    PrintString(errorMessage, logLevel);
 }

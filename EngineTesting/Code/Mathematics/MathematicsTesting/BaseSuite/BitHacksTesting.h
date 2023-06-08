@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_BASE_SUITE_BIT_HACKS_TESTING_H
 #define MATHEMATICS_BASE_SUITE_BIT_HACKS_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class BitHacksTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(BitHacksTesting);
+        using ClassType = BitHacksTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit BitHacksTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

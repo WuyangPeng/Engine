@@ -202,7 +202,7 @@ int Rendering::MorphControllerImpl::GetStreamingSize() const
 
     size += CoreTools::GetStreamSize(numTargets);
     size += CoreTools::GetStreamSize(numKeys);
-    size += boost::numeric_cast<int>(vertices.size() * MATHEMATICS_STREAM_SIZE(vertices.at(0)));
+    size += boost::numeric_cast<int>(vertices.size() * Mathematics::GetStreamSize(vertices.at(0)));
     size += numKeys * CoreTools::GetStreamSize(times.at(0));
     size += boost::numeric_cast<int>(weights.size() * CoreTools::GetStreamSize(weights.at(0)));
 

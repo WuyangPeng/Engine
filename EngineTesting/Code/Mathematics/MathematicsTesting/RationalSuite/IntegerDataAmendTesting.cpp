@@ -8,11 +8,11 @@
 ///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/26 13:56)
 #include "IntegerDataAmendTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/IntegerDataAmendDetail.h"
 #include "Mathematics/Rational/IntegerDataDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::vector;
 
 namespace Mathematics
@@ -23,7 +23,18 @@ namespace Mathematics
     template class IntegerData<22>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerDataAmendTesting)
+Mathematics::IntegerDataAmendTesting::IntegerDataAmendTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, IntegerDataAmendTesting)
+
+void Mathematics::IntegerDataAmendTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::IntegerDataAmendTesting::MainTest()
 {

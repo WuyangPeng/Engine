@@ -9,10 +9,21 @@
 
 #include "SparseMatrixIndexTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/SparseMatrixIndex.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Mathematics::SparseMatrixIndexTesting::SparseMatrixIndexTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, SparseMatrixIndexTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, SparseMatrixIndexTesting)
+
+void Mathematics::SparseMatrixIndexTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::SparseMatrixIndexTesting::MainTest()
 {

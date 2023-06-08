@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 20:12)
+///	引擎版本：0.9.0.11 (2023/05/29 22:23)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_H
 #define CORE_TOOLS_TEXT_PARSING_H
 
 #include "CSV/BatchConversionCSV.h"
+#include "CSV/BatchConversionCode.h"
 #include "CSV/CSVContent.h"
 #include "CSV/CSVGenerate.h"
 #include "CSV/CSVHead.h"

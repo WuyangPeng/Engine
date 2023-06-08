@@ -192,12 +192,12 @@ int Rendering::ParticleControllerImpl::GetStreamingSize() const
     auto size = CoreTools::GetStreamSize(systemLinearSpeed);
 
     size += CoreTools::GetStreamSize(systemAngularSpeed);
-    size += MATHEMATICS_STREAM_SIZE(systemLinearAxis);
-    size += MATHEMATICS_STREAM_SIZE(systemAngularAxis);
+    size += Mathematics::GetStreamSize(systemLinearAxis);
+    size += Mathematics::GetStreamSize(systemAngularAxis);
     size += CoreTools::GetStreamSize(systemSizeChange);
     size += CoreTools::GetStreamSize(numParticles);
     size += numParticles * CoreTools::GetStreamSize(particleLinearSpeeds.at(0));
-    size += numParticles * MATHEMATICS_STREAM_SIZE(particleLinearAxes.at(0));
+    size += numParticles * Mathematics::GetStreamSize(particleLinearAxes.at(0));
     size += numParticles * CoreTools::GetStreamSize(particleSizeChanges.at(0));
 
     return size;

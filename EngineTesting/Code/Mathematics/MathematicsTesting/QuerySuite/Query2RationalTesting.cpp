@@ -9,7 +9,7 @@
 
 #include "Query2RationalTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
@@ -19,7 +19,7 @@
 #include "Mathematics/Query/Query2RationalDetail.h"
 #include "Mathematics/Query/QuerySortTools.h"
 #include "Mathematics/Rational/RationalVectorDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -34,7 +34,18 @@ namespace Mathematics
     template class Query2Rational<float>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Query2RationalTesting)
+Mathematics::Query2RationalTesting::Query2RationalTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Query2RationalTesting)
+
+void Mathematics::Query2RationalTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Query2RationalTesting::MainTest()
 {
@@ -50,9 +61,9 @@ void Mathematics::Query2RationalTesting::VerticesTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_int<> secondRandomDistribution(1, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
         auto size = secondRandomDistribution(generator);
@@ -80,9 +91,9 @@ void Mathematics::Query2RationalTesting::LineTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_int<> secondRandomDistribution(1, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
         auto size = secondRandomDistribution(generator);
@@ -138,9 +149,9 @@ void Mathematics::Query2RationalTesting::TriangleTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_int<> secondRandomDistribution(1, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
         auto size = secondRandomDistribution(generator);
@@ -192,9 +203,9 @@ void Mathematics::Query2RationalTesting::CircumcircleTest()
     const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const uniform_int<> secondRandomDistribution(1, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
         auto size = secondRandomDistribution(generator);

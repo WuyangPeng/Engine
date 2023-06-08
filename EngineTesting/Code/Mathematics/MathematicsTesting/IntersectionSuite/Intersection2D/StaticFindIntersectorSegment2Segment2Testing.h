@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_INTERSECTION_SUITE_STATIC_FIND_INTERSECTOR_SEGMENT2_SEGMENT2_TESTING_H
 #define MATHEMATICS_INTERSECTION_SUITE_STATIC_FIND_INTERSECTOR_SEGMENT2_SEGMENT2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class StaticFindIntersectorSegment2Segment2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(StaticFindIntersectorSegment2Segment2Testing);
+        using ClassType = StaticFindIntersectorSegment2Segment2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit StaticFindIntersectorSegment2Segment2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/17 14:05)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:35)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_SYMMETRIC_CONJUGATE_GRADIENT_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SOLVE_SYMMETRIC_CONJUGATE_GRADIENT_DETAIL_H
@@ -38,14 +38,12 @@ Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::SolveSymmetricConjug
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real, template <typename> class Matrix>
 void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::CalculateNormal(const RealContainer& input) noexcept
 {
     normal = Dot(input, input);
 }
 
-// private
 template <typename Real, template <typename> class Matrix>
 void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::FirstIteration()
 {
@@ -60,7 +58,6 @@ void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::FirstIteration(
     dot1 = Dot(inputAmend1, inputAmend1);
 }
 
-// private
 template <typename Real, template <typename> class Matrix>
 void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::RemainingIterations()
 {
@@ -91,7 +88,6 @@ void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::RemainingIterat
     THROW_EXCEPTION(SYSTEM_TEXT("循环超出次数！"s));
 }
 
-// private
 template <typename Real, template <typename> class Matrix>
 Real Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::Dot(const RealContainer& lhs, const RealContainer& rhs) const noexcept
 {
@@ -108,7 +104,6 @@ Real Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::Dot(const RealC
     return dot;
 }
 
-// private
 template <typename Real, template <typename> class Matrix>
 void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::Multiply()
 {
@@ -123,15 +118,12 @@ void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::Multiply()
     }
 }
 
-// private
 template <>
 MATHEMATICS_DEFAULT_DECLARE void Mathematics::SolveSymmetricConjugateGradient<float, Mathematics::SparseMatrix>::Multiply();
 
-// private
 template <>
 MATHEMATICS_DEFAULT_DECLARE void Mathematics::SolveSymmetricConjugateGradient<double, Mathematics::SparseMatrix>::Multiply();
 
-// private
 template <typename Real, template <typename> class Matrix>
 void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::UpdateOutput() noexcept
 {
@@ -146,7 +138,6 @@ void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::UpdateOutput() 
     }
 }
 
-// private
 template <typename Real, template <typename> class Matrix>
 void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::UpdateAmend1() noexcept
 {
@@ -161,7 +152,6 @@ void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::UpdateAmend1() 
     }
 }
 
-// private
 template <typename Real, template <typename> class Matrix>
 void Mathematics::SolveSymmetricConjugateGradient<Real, Matrix>::UpdateAmend2() noexcept
 {

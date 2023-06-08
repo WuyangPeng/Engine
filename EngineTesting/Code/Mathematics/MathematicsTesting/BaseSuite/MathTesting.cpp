@@ -9,17 +9,28 @@
 
 #include "MathTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/FloatingPointAnalysis.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
 using std::numeric_limits;
 using std::uniform_real;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, MathTesting)
+Mathematics::MathTesting::MathTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, MathTesting)
+
+void Mathematics::MathTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::MathTesting::MainTest()
 {
@@ -41,7 +52,7 @@ void Mathematics::MathTesting::ConstantTest()
 
 void Mathematics::MathTesting::FloatConstantTest()
 {
-    constexpr auto pi = 3.14159265358979f;
+    constexpr auto pi0 = 3.14159265358979f;
 
     // 完整测试
     ASSERT_APPROXIMATE(MathF::epsilon, numeric_limits<float>::epsilon(), 1.0e-8f);
@@ -49,17 +60,17 @@ void Mathematics::MathTesting::FloatConstantTest()
     ASSERT_APPROXIMATE(MathF::maxReal, numeric_limits<float>::max(), 1.0e-8f);
     ASSERT_APPROXIMATE(MathF::GetExponent(), log(numeric_limits<float>::max()), 1.0e-8f);
 
-    ASSERT_APPROXIMATE(MathF::GetPI(), pi, 1.0e-8f);
-    ASSERT_APPROXIMATE(MathF::GetTwoPI(), pi * 2.0f, 1.0e-8f);
-    ASSERT_APPROXIMATE(MathF::GetHalfPI(), pi / 2.0f, 1.0e-8f);
-    ASSERT_APPROXIMATE(MathF::GetQuarterPI(), pi / 4.0f, 1.0e-8f);
-    ASSERT_APPROXIMATE(MathF::GetInversePI(), 1.0f / pi, 1.0e-8f);
-    ASSERT_APPROXIMATE(MathF::GetInverseTwoPI(), 0.5f / pi, 1.0e-8f);
+    ASSERT_APPROXIMATE(MathF::GetPI(), pi0, 1.0e-8f);
+    ASSERT_APPROXIMATE(MathF::GetTwoPI(), pi0 * 2.0f, 1.0e-8f);
+    ASSERT_APPROXIMATE(MathF::GetHalfPI(), pi0 / 2.0f, 1.0e-8f);
+    ASSERT_APPROXIMATE(MathF::GetQuarterPI(), pi0 / 4.0f, 1.0e-8f);
+    ASSERT_APPROXIMATE(MathF::GetInversePI(), 1.0f / pi0, 1.0e-8f);
+    ASSERT_APPROXIMATE(MathF::GetInverseTwoPI(), 0.5f / pi0, 1.0e-8f);
 
     ASSERT_APPROXIMATE(MathF::GetRadianToDegree(), 1.0f / MathF::GetDegreeToRadian(), 1.0e-5f);
     ASSERT_APPROXIMATE(MathF::GetDegreeToRadian(), 1.0f / MathF::GetRadianToDegree(), 1.0e-8f);
-    ASSERT_APPROXIMATE(MathF::GetRadianToDegree(), 180.0f / pi, 1.0e-5f);
-    ASSERT_APPROXIMATE(MathF::GetDegreeToRadian(), pi / 180.0f, 1.0e-8f);
+    ASSERT_APPROXIMATE(MathF::GetRadianToDegree(), 180.0f / pi0, 1.0e-5f);
+    ASSERT_APPROXIMATE(MathF::GetDegreeToRadian(), pi0 / 180.0f, 1.0e-8f);
 
     ASSERT_APPROXIMATE(MathF::GetLN2(), log(2.0f), 1.0e-8f);
     ASSERT_APPROXIMATE(MathF::GetLN10(), log(10.0f), 1.0e-8f);
@@ -80,7 +91,7 @@ void Mathematics::MathTesting::FloatConstantTest()
 
 void Mathematics::MathTesting::DoubleConstantTest()
 {
-    constexpr auto pi = 3.14159265358979;
+    constexpr auto pi0 = 3.14159265358979;
 
     // 完整测试
     ASSERT_APPROXIMATE(MathD::epsilon, numeric_limits<double>::epsilon(), 1.0e-10);
@@ -88,17 +99,17 @@ void Mathematics::MathTesting::DoubleConstantTest()
     ASSERT_APPROXIMATE(MathD::maxReal, numeric_limits<double>::max(), 1.0e-10);
     ASSERT_APPROXIMATE(MathD::GetExponent(), log(numeric_limits<double>::max()), 1.0e-10);
 
-    ASSERT_APPROXIMATE(MathD::GetPI(), pi, 1.0e-10);
-    ASSERT_APPROXIMATE(MathD::GetTwoPI(), pi * 2.0, 1.0e-10);
-    ASSERT_APPROXIMATE(MathD::GetHalfPI(), pi / 2.0, 1.0e-10);
-    ASSERT_APPROXIMATE(MathD::GetQuarterPI(), pi / 4.0, 1.0e-10);
-    ASSERT_APPROXIMATE(MathD::GetInversePI(), 1.0 / pi, 1.0e-10);
-    ASSERT_APPROXIMATE(MathD::GetInverseTwoPI(), 0.5 / pi, 1.0e-10);
+    ASSERT_APPROXIMATE(MathD::GetPI(), pi0, 1.0e-10);
+    ASSERT_APPROXIMATE(MathD::GetTwoPI(), pi0 * 2.0, 1.0e-10);
+    ASSERT_APPROXIMATE(MathD::GetHalfPI(), pi0 / 2.0, 1.0e-10);
+    ASSERT_APPROXIMATE(MathD::GetQuarterPI(), pi0 / 4.0, 1.0e-10);
+    ASSERT_APPROXIMATE(MathD::GetInversePI(), 1.0 / pi0, 1.0e-10);
+    ASSERT_APPROXIMATE(MathD::GetInverseTwoPI(), 0.5 / pi0, 1.0e-10);
 
     ASSERT_APPROXIMATE(MathD::GetRadianToDegree(), 1.0 / MathD::GetDegreeToRadian(), 1.0e-10);
     ASSERT_APPROXIMATE(MathD::GetDegreeToRadian(), 1.0 / MathD::GetRadianToDegree(), 1.0e-10);
-    ASSERT_APPROXIMATE(MathD::GetRadianToDegree(), 180.0 / pi, 1.0e-10);
-    ASSERT_APPROXIMATE(MathD::GetDegreeToRadian(), pi / 180.0, 1.0e-10);
+    ASSERT_APPROXIMATE(MathD::GetRadianToDegree(), 180.0 / pi0, 1.0e-10);
+    ASSERT_APPROXIMATE(MathD::GetDegreeToRadian(), pi0 / 180.0, 1.0e-10);
 
     ASSERT_APPROXIMATE(MathD::GetLN2(), log(2.0), 1.0e-10);
     ASSERT_APPROXIMATE(MathD::GetLN10(), log(10.0), 1.0e-10);
@@ -128,17 +139,17 @@ void Mathematics::MathTesting::TrigonometricTest()
 void Mathematics::MathTesting::FloatTrigonometricTest()
 {
     // 迭代测试
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    ASSERT_LESS_EQUAL_FAILURE_THROW(0, testLoopCount, "测试循环次数为零！");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(0, aTestLoopCount, "测试循环次数为零！");
 
     constexpr auto begin = -1.0f;
     constexpr auto end = 1.0f;
-    const auto step = (end - begin) / testLoopCount;
+    const auto step = (end - begin) / aTestLoopCount;
 
     default_random_engine randomEngine{};
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = begin;
 
@@ -151,7 +162,7 @@ void Mathematics::MathTesting::FloatTrigonometricTest()
     // 随机值测试
     const uniform_real<float> randomDistribution{ -MathF::maxReal / 100.0f, MathF::maxReal / 100.0f };
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstFloatValue = randomDistribution(randomEngine);
         auto secondFloatValue = randomDistribution(randomEngine);
@@ -178,15 +189,15 @@ void Mathematics::MathTesting::FloatTrigonometricTest()
 void Mathematics::MathTesting::DoubleTrigonometricTest()
 {
     // 迭代测试
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    ASSERT_LESS_EQUAL_FAILURE_THROW(0, testLoopCount, "测试循环次数为零！");
+    ASSERT_LESS_EQUAL_FAILURE_THROW(0, aTestLoopCount, "测试循环次数为零！");
 
     constexpr auto begin = -1.0;
     constexpr auto end = 1.0;
-    const auto step = (end - begin) / testLoopCount;
+    const auto step = (end - begin) / aTestLoopCount;
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = begin;
 
@@ -200,7 +211,7 @@ void Mathematics::MathTesting::DoubleTrigonometricTest()
     default_random_engine randomEngine{};
     const uniform_real<double> randomDistribution{ -MathD::maxReal / 100.0, MathD::maxReal / 100.0 };
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstDoubleValue = randomDistribution(randomEngine);
         auto secondDoubleValue = randomDistribution(randomEngine);
@@ -256,9 +267,9 @@ void Mathematics::MathTesting::FloatBaseMathTest()
     default_random_engine randomEngine{};
     const uniform_real<float> randomDistribution{ -MathF::maxReal / 100.0f, MathF::maxReal / 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstFloatValue = randomDistribution(randomEngine);
         auto secondFloatValue = randomDistribution(randomEngine);
@@ -301,9 +312,9 @@ void Mathematics::MathTesting::DoubleBaseMathTest()
     default_random_engine randomEngine{};
     const uniform_real<double> randomDistribution{ -MathD::maxReal / 100.0, MathD::maxReal / 100.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstDoubleValue = randomDistribution(randomEngine);
         auto secondDoubleValue = randomDistribution(randomEngine);
@@ -361,9 +372,9 @@ void Mathematics::MathTesting::FloatLogTest()
     default_random_engine randomEngine{};
     const uniform_real<float> randomDistribution{ MathF::GetZeroTolerance(), MathF::maxReal };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const float floatValue = randomDistribution(randomEngine);
 
@@ -379,9 +390,9 @@ void Mathematics::MathTesting::DoubleLogTest()
     default_random_engine randomEngine{};
     const uniform_real<double> randomDistribution{ MathD::GetZeroTolerance(), MathD::maxReal };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto doubleValue = randomDistribution(randomEngine);
 
@@ -408,9 +419,9 @@ void Mathematics::MathTesting::FloatPowTest()
     // 会导致使用大量相同作用的负值进行测试。
     const uniform_real<float> expRandomDistribution{ -MathF::GetExponent(), MathF::GetExponent() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const float floatValue = expRandomDistribution(randomEngine);
 
@@ -419,7 +430,7 @@ void Mathematics::MathTesting::FloatPowTest()
 
     const uniform_real<float> positiveRandomDistribution{ MathF::GetZeroTolerance(), MathF::maxReal };
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstFloatValue = positiveRandomDistribution(randomEngine);
 
@@ -433,7 +444,7 @@ void Mathematics::MathTesting::FloatPowTest()
 
     const uniform_real<float> sqrtRandomDistribution{ -MathF::Sqrt(MathF::maxReal), MathF::Sqrt(MathF::maxReal) };
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto floatValue = sqrtRandomDistribution(randomEngine);
 
@@ -442,7 +453,7 @@ void Mathematics::MathTesting::FloatPowTest()
 
     const uniform_real<float> nonNegativeRandomDistribution{ MathF::GetValue(0), MathF::maxReal };
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstFloatValue = nonNegativeRandomDistribution(randomEngine);
 
@@ -472,9 +483,9 @@ void Mathematics::MathTesting::DoublePowTest()
 
     const uniform_real<double> expRandomDistribution{ -MathD::GetExponent(), MathD::GetExponent() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto doubleValue = expRandomDistribution(randomEngine);
 
@@ -483,7 +494,7 @@ void Mathematics::MathTesting::DoublePowTest()
 
     const uniform_real<double> positiveRandomDistribution{ MathD::GetZeroTolerance(), MathD::maxReal };
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstDoubleValue = positiveRandomDistribution(randomEngine);
 
@@ -497,7 +508,7 @@ void Mathematics::MathTesting::DoublePowTest()
 
     const uniform_real<double> sqrtRandomDistribution{ -MathD::Sqrt(MathD::maxReal), MathD::Sqrt(MathD::maxReal) };
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto doubleValue = sqrtRandomDistribution(randomEngine);
 
@@ -506,7 +517,7 @@ void Mathematics::MathTesting::DoublePowTest()
 
     const uniform_real<double> nonNegativeRandomDistribution{ MathD::GetValue(0), MathD::maxReal };
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstFloatValue = nonNegativeRandomDistribution(randomEngine);
 
@@ -536,9 +547,9 @@ void Mathematics::MathTesting::PowBoundaryTest()
 
     const uniform_real<double> doubleRandomDistribution{ MathD::epsilon, MathD::maxReal };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto doubleValue = doubleRandomDistribution(randomEngine);
 

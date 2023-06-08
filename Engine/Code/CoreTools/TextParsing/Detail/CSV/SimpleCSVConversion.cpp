@@ -134,8 +134,13 @@ std::string CoreTools::SimpleCSVConversion::GetContent(bool isFirstPage, int row
 
     auto columnIndex = 0;
 
-    for (const auto& xlCellValues = xlRow.GetValues<std::vector<SimpleCSV::CellValue>>();
-         const auto& xlCellValue : xlCellValues)
+    const auto& xlCellValues = xlRow.GetValues<std::vector<SimpleCSV::CellValue>>();
+    if (xlCellValues.empty() || (xlCellValues.at(0).GetType() == SimpleCSV::ValueType::Empty))
+    {
+        return content;
+    }
+
+    for (const auto& xlCellValue : xlCellValues)
     {
         if (exclude.contains(columnIndex))
         {

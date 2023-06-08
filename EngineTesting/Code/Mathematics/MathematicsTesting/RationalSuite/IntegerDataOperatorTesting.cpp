@@ -10,13 +10,13 @@
 #include "IntegerDataOperatorTesting.h"
 
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/IntegerDataAmendDetail.h"
 #include "Mathematics/Rational/IntegerDataAnalysisDetail.h"
 #include "Mathematics/Rational/IntegerDataDetail.h"
 #include "Mathematics/Rational/IntegerDataOperatorDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <boost/utility/binary.hpp>
 #include <random>
 
@@ -47,7 +47,18 @@ namespace Mathematics
     template class IntegerDataOperator<32>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerDataOperatorTesting)
+Mathematics::IntegerDataOperatorTesting::IntegerDataOperatorTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, IntegerDataOperatorTesting)
+
+void Mathematics::IntegerDataOperatorTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::IntegerDataOperatorTesting::MainTest()
 {
@@ -64,9 +75,9 @@ void Mathematics::IntegerDataOperatorTesting::AdditionTest()
     const uniform_int<> firstRandomDistribution(0, INT32_MAX / 2);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(28);
         vector<uint16_t> secondShortVector(28);
@@ -158,9 +169,9 @@ void Mathematics::IntegerDataOperatorTesting::SubtractionTest()
     const uniform_int<> firstRandomDistribution(0, INT32_MAX / 2);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(26);
         vector<uint16_t> secondShortVector(26);
@@ -270,9 +281,9 @@ void Mathematics::IntegerDataOperatorTesting::MultiplicationTest()
     const uniform_int<> firstRandomDistribution(0, INT32_MAX / 2);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(40);
         vector<uint16_t> secondShortVector(40);
@@ -321,9 +332,9 @@ void Mathematics::IntegerDataOperatorTesting::LeftShiftTest()
     const uniform_int<> firstRandomDistribution(0, 16 * 20);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(40);
 
@@ -365,9 +376,9 @@ void Mathematics::IntegerDataOperatorTesting::RightShiftTest()
     const uniform_int<> firstRandomDistribution(0, 16 * 20);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(40);
 
@@ -409,9 +420,9 @@ void Mathematics::IntegerDataOperatorTesting::DivisionModuloTest()
     const uniform_int<> firstRandomDistribution(0, INT16_MAX);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(40);
         vector<uint16_t> secondShortVector(40);

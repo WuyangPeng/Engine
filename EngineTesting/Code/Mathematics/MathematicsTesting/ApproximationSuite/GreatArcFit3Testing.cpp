@@ -7,14 +7,15 @@
 ///	标准：std:c++20
 ///	引擎测试版本：0.8.0.8 (2022/06/08 16:03)
 
+#include "GaussPointsFit3Testing.h"
 #include "GreatArcFit3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Approximation/GreatArcFit3Detail.h"
 #include "Mathematics/Approximation/GreatCircleFit3.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -27,7 +28,18 @@ namespace Mathematics
     template class GreatArcFit3<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, GreatArcFit3Testing)
+Mathematics::GreatArcFit3Testing::GreatArcFit3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, GreatArcFit3Testing)
+
+void Mathematics::GreatArcFit3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::GreatArcFit3Testing::MainTest()
 {
@@ -40,9 +52,9 @@ void Mathematics::GreatArcFit3Testing::FitTest()
     const uniform_real<double> firstRandomDistribution(0.0, 100.0);
     const uniform_int<> secondRandomDistribution(5, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
         const int size = secondRandomDistribution(generator);

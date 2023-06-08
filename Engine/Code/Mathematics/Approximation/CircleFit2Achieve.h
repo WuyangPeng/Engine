@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/17 18:13)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 17:32)
 
 #ifndef MATHEMATICS_APPROXIMATION_CIRCLE_FIT2_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_CIRCLE_FIT2_ACHIEVE_H
@@ -26,7 +26,6 @@ Mathematics::CircleFit2<Real>::CircleFit2(const PointType& points, int maxIterat
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 template <typename Real>
 void Mathematics::CircleFit2<Real>::Calculate(const PointType& points, int maxIterations, bool initialCenterIsAverage)
 {
@@ -65,7 +64,7 @@ void Mathematics::CircleFit2<Real>::Calculate(const PointType& points, int maxIt
 }
 
 template <typename Real>
-const Mathematics::Vector2<Real> Mathematics::CircleFit2<Real>::GetAveragePoint(const PointType& points)
+Mathematics::Vector2<Real> Mathematics::CircleFit2<Real>::GetAveragePoint(const PointType& points)
 {
     MATHEMATICS_ASSERTION_0(!points.empty(), "输入的数组大小为零！");
 
@@ -86,7 +85,7 @@ void Mathematics::CircleFit2<Real>::Iteration(const PointType& points, const Vec
 {
     // 计算平均值L, dL/da, dL/db。
     auto lengthAverage = Math::GetValue(0);
-    Vector2 derLenghtAverage{};
+    Vector2 derLengthAverage{};
 
     for (const auto& value : points)
     {
@@ -96,14 +95,14 @@ void Mathematics::CircleFit2<Real>::Iteration(const PointType& points, const Vec
         if (Math::GetZeroTolerance() < length)
         {
             lengthAverage += length;
-            derLenghtAverage -= difference / length;
+            derLengthAverage -= difference / length;
         }
     }
 
     lengthAverage /= boost::numeric_cast<Real>(points.size());
-    derLenghtAverage /= boost::numeric_cast<Real>(points.size());
+    derLengthAverage /= boost::numeric_cast<Real>(points.size());
 
-    circle.SetCircle(average + lengthAverage * derLenghtAverage, lengthAverage);
+    circle.SetCircle(average + lengthAverage * derLengthAverage, lengthAverage);
 }
 
 #ifdef OPEN_CLASS_INVARIANT

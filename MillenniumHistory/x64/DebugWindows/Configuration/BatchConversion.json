@@ -1,0 +1,5 @@
+{
+  "input": "Resource/AncientBooksInput",
+  "csvOutput": "Resource/AncientBooks",
+  "codeOutput": "../../../Code/DatabaseGenerateServer/DatabaseGenerateServerConfiguration/AncientBooks"
+}

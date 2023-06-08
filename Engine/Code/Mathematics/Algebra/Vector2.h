@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/01/31 3:50)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/01 09:29)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR2_H
 #define MATHEMATICS_ALGEBRA_VECTOR2_H
@@ -26,11 +26,10 @@
 namespace Mathematics
 {
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector2 final : private boost::additive<Vector2<Real>, boost::multiplicative<Vector2<Real>, Real, boost::totally_ordered<Vector2<Real>>>>
     {
     public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-
         enum class PointIndex
         {
             X = 0,
@@ -53,40 +52,40 @@ namespace Mathematics
 
     public:
         constexpr Vector2() noexcept
-            : m_X{}, m_Y{}
+            : x{}, y{}
         {
         }
 
         constexpr Vector2(Real x, Real y) noexcept
-            : m_X{ x }, m_Y{ y }
+            : x{ x }, y{ y }
         {
         }
 
         template <typename RhsType>
-        Vector2(const Vector2<RhsType>& vector);
+        explicit Vector2(const Vector2<RhsType>& vector);
         template <typename RhsType>
-        Vector2(const Vector3<RhsType>& vector);
+        explicit Vector2(const Vector3<RhsType>& vector);
         template <typename RhsType>
-        Vector2(const Vector4<RhsType>& vector);
+        explicit Vector2(const Vector4<RhsType>& vector);
 
         CLASS_INVARIANT_DECLARE;
 
         // 坐标访问
         NODISCARD Real GetX() const noexcept;
         NODISCARD Real GetY() const noexcept;
-        NODISCARD bool IsZero(const Real epsilon = Math::GetZeroTolerance()) const noexcept;
+        NODISCARD bool IsZero(Real epsilon = Math::GetZeroTolerance()) const noexcept;
 
-        void SetCoordinate(const ArrayType& coordinate) noexcept;
+        void SetCoordinate(const ArrayType& coordinate);
         NODISCARD ArrayType GetCoordinate() const noexcept;
 
         void ZeroOut() noexcept;
-        void SetCoordinate(Real x, Real y) noexcept;
-        void SetX(Real x) noexcept;
-        void SetY(Real y) noexcept;
-        void Normalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
-        void RobustNormalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void SetCoordinate(Real aX, Real aY) noexcept;
+        void SetX(Real aX) noexcept;
+        void SetY(Real aY) noexcept;
+        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void RobustNormalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        NODISCARD bool IsNormalize(const Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD bool IsNormalize(Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD const Real& operator[](int index) const;
         NODISCARD Real& operator[](int index);
@@ -137,8 +136,8 @@ namespace Mathematics
         NODISCARD Real GetMaxAbsComp() const noexcept;
 
     private:
-        Real m_X;
-        Real m_Y;
+        Real x;
+        Real y;
     };
 
     // STL

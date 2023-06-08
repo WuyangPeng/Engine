@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 14:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:46)
 
-#ifndef MATHEMATICS_OBJECTS3D_SEGMENT3_H
-#define MATHEMATICS_OBJECTS3D_SEGMENT3_H
+#ifndef MATHEMATICS_OBJECTS_3D_SEGMENT3_H
+#define MATHEMATICS_OBJECTS_3D_SEGMENT3_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -40,10 +40,10 @@ namespace Mathematics
         // 且|t| <= e。值 e = Length(P1-P0)/2是该线段的“范围”（半径或半长）。
 
         // 构造函数计算center、direction和extent从beginPoint和endPoint
-        Segment3(const Vector3& beginPoint, const Vector3& endPoint, const Real epsilon = Math::GetZeroTolerance());
+        Segment3(const Vector3& beginPoint, const Vector3& endPoint, Real epsilon = Math::GetZeroTolerance());
 
         // 构造函数计算beginPoint和endPoint从center、direction和extent
-        Segment3(Real extent, const Vector3& center, const Vector3& direction, const Real epsilon = Math::GetZeroTolerance());
+        Segment3(Real extent, const Vector3& center, const Vector3& direction, Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
@@ -79,11 +79,11 @@ namespace Mathematics
     using Segment3D = Segment3<double>;
 
     template <typename Real>
-    NODISCARD bool Approximate(const Segment3<Real>& lhs, const Segment3<Real>& rhs, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+    NODISCARD bool Approximate(const Segment3<Real>& lhs, const Segment3<Real>& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
     // 调试输出
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Segment3<Real>& segment);
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_SEGMENT3_H
+#endif  // MATHEMATICS_OBJECTS_3D_SEGMENT3_H

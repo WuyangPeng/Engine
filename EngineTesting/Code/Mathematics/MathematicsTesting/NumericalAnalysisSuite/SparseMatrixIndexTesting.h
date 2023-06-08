@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_SPARSE_MATRIX_INDEX_TESTING_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_SPARSE_MATRIX_INDEX_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class SparseMatrixIndexTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(SparseMatrixIndexTesting);
+        using ClassType = SparseMatrixIndexTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit SparseMatrixIndexTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

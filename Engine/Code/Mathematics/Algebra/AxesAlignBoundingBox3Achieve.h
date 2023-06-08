@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/02 22:32)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 15:07)
 
 #ifndef MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX3_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_AXES_ALIGN_BOUNDING_BOX3_ACHIEVE_H
@@ -17,6 +17,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AxesAlignBoundingBox3<Real>::AxesAlignBoundingBox3(const Vector3& minPoint, const Vector3& maxPoint) noexcept
     : minPoint{ minPoint }, maxPoint{ maxPoint }
 {
@@ -24,6 +25,7 @@ Mathematics::AxesAlignBoundingBox3<Real>::AxesAlignBoundingBox3(const Vector3& m
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AxesAlignBoundingBox3<Real>::AxesAlignBoundingBox3(Real xMin, Real xMax, Real yMin, Real yMax, Real zMin, Real zMax) noexcept
     : minPoint{ xMin, yMin, zMin }, maxPoint{ xMax, yMax, zMax }
 {
@@ -33,7 +35,7 @@ Mathematics::AxesAlignBoundingBox3<Real>::AxesAlignBoundingBox3(Real xMin, Real 
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::AxesAlignBoundingBox3<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::AxesAlignBoundingBox3<Real>::IsValid() const noexcept
 {
     return true;
 }
@@ -41,7 +43,7 @@ bool Mathematics::AxesAlignBoundingBox3<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::AxesAlignBoundingBox3<Real>::IsBoxValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::AxesAlignBoundingBox3<Real>::IsBoxValid() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -58,6 +60,7 @@ bool Mathematics::AxesAlignBoundingBox3<Real>::IsBoxValid() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3<Real> Mathematics::AxesAlignBoundingBox3<Real>::GetMinPoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -66,6 +69,7 @@ Mathematics::Vector3<Real> Mathematics::AxesAlignBoundingBox3<Real>::GetMinPoint
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3<Real> Mathematics::AxesAlignBoundingBox3<Real>::GetMaxPoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -74,6 +78,7 @@ Mathematics::Vector3<Real> Mathematics::AxesAlignBoundingBox3<Real>::GetMaxPoint
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::AxesAlignBoundingBox3<Real>::GetMinPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -82,6 +87,7 @@ Real Mathematics::AxesAlignBoundingBox3<Real>::GetMinPoint(int index) const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::AxesAlignBoundingBox3<Real>::GetMaxPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -90,6 +96,7 @@ Real Mathematics::AxesAlignBoundingBox3<Real>::GetMaxPoint(int index) const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::AxesAlignBoundingBox3<Real>::GetMinPoint(PointIndex index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -98,6 +105,7 @@ Real Mathematics::AxesAlignBoundingBox3<Real>::GetMinPoint(PointIndex index) con
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::AxesAlignBoundingBox3<Real>::GetMaxPoint(PointIndex index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -106,6 +114,7 @@ Real Mathematics::AxesAlignBoundingBox3<Real>::GetMaxPoint(PointIndex index) con
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::AxesAlignBoundingBox3<Real>::Vector3 Mathematics::AxesAlignBoundingBox3<Real>::GetCenter() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -114,6 +123,7 @@ typename Mathematics::AxesAlignBoundingBox3<Real>::Vector3 Mathematics::AxesAlig
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::AxesAlignBoundingBox3<Real>::GetExtentX() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -122,6 +132,7 @@ Real Mathematics::AxesAlignBoundingBox3<Real>::GetExtentX() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::AxesAlignBoundingBox3<Real>::GetExtentY() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -130,6 +141,7 @@ Real Mathematics::AxesAlignBoundingBox3<Real>::GetExtentY() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::AxesAlignBoundingBox3<Real>::GetExtentZ() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;

@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 11:10)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:18)
 
-#ifndef MATHEMATICS_OBJECTS2D_CONVEX_POLYGON2_DETAIL_H
-#define MATHEMATICS_OBJECTS2D_CONVEX_POLYGON2_DETAIL_H
+#ifndef MATHEMATICS_OBJECTS_2D_CONVEX_POLYGON2_DETAIL_H
+#define MATHEMATICS_OBJECTS_2D_CONVEX_POLYGON2_DETAIL_H
 
 #include "ConvexPolygon2.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -49,7 +49,7 @@ typename Mathematics::ConvexPolygon2<Real>::LineType Mathematics::ConvexPolygon2
 
     if (IsUpdateLines())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("需要更新线段。\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("需要更新线段。\n"s))
     }
 
     return lines;
@@ -62,7 +62,7 @@ const Mathematics::Line2<Real>& Mathematics::ConvexPolygon2<Real>::GetLine(int i
 
     if (IsUpdateLines())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("需要更新线段。\n"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("需要更新线段。\n"s))
     }
 
     return lines.at(index);
@@ -205,4 +205,4 @@ bool Mathematics::ConvexPolygon2<Real>::Contains(const typename Vector2& point, 
     return true;
 }
 
-#endif  // MATHEMATICS_OBJECTS2D_CONVEX_POLYGON2_DETAIL_H
+#endif  // MATHEMATICS_OBJECTS_2D_CONVEX_POLYGON2_DETAIL_H

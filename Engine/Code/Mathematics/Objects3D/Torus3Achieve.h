@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 16:48)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:51)
 
-#ifndef MATHEMATICS_OBJECTS3D_TORUS3_ACHIEVE_H
-#define MATHEMATICS_OBJECTS3D_TORUS3_ACHIEVE_H
+#ifndef MATHEMATICS_OBJECTS_3D_TORUS3_ACHIEVE_H
+#define MATHEMATICS_OBJECTS_3D_TORUS3_ACHIEVE_H
 
 #include "Torus3.h"
 #include "Torus3ParametersDetail.h"
@@ -24,6 +24,7 @@ Mathematics::Torus3<Real>::Torus3(Real outerRadius, Real innerRadius) noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Torus3<Real>::IsValid() const noexcept
 {
@@ -32,6 +33,7 @@ bool Mathematics::Torus3<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -132,4 +134,4 @@ Mathematics::Torus3Parameters<Real> Mathematics::Torus3<Real>::GetParameters(con
     return Torus3Parameters{ s, t };
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_TORUS3_ACHIEVE_H
+#endif  // MATHEMATICS_OBJECTS_3D_TORUS3_ACHIEVE_H

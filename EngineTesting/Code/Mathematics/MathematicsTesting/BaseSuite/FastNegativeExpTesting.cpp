@@ -9,10 +9,10 @@
 
 #include "FastNegativeExpTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/FastNegativeExpDetail.h"
 #include "Mathematics/Base/MathDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -27,7 +27,18 @@ namespace Mathematics
 }
 #endif  // BUILDING_MATHEMATICS_STATIC
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, FastNegativeExpTesting)
+Mathematics::FastNegativeExpTesting::FastNegativeExpTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, FastNegativeExpTesting)
+
+void Mathematics::FastNegativeExpTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::FastNegativeExpTesting::MainTest()
 {
@@ -43,9 +54,9 @@ void Mathematics::FastNegativeExpTesting::FloatFastExpTest()
     default_random_engine randomEngine{};
     const uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetExponent() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const float value = randomDistribution(randomEngine);
 
@@ -62,9 +73,9 @@ void Mathematics::FastNegativeExpTesting::DoubleFastExpTest()
     default_random_engine randomEngine{};
     const uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetExponent() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 
@@ -81,9 +92,9 @@ void Mathematics::FastNegativeExpTesting::FloatFastExpBoundaryTest()
     default_random_engine randomEngine{};
     const uniform_real<float> randomDistribution{ MathF::GetExponent(), MathF::maxReal };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 
@@ -100,9 +111,9 @@ void Mathematics::FastNegativeExpTesting::DoubleFastExpBoundaryTest()
     default_random_engine randomEngine{};
     const uniform_real<double> randomDistribution{ MathD::GetExponent(), MathD::maxReal };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = randomDistribution(randomEngine);
 

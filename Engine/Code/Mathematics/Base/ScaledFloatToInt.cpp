@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/01/29 11:18)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/30 14:59)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -33,7 +33,6 @@ Mathematics::ScaledFloatToInt::ScaledFloatToInt(float value, int power) noexcept
 
 #include STSTEM_WARNING_POP
 
-// private
 void Mathematics::ScaledFloatToInt::Scaled() noexcept
 {
     if (shift < 24)
@@ -43,7 +42,6 @@ void Mathematics::ScaledFloatToInt::Scaled() noexcept
     }
 }
 
-// private
 void Mathematics::ScaledFloatToInt::ShiftIntegerValue() noexcept
 {
     // 当将浮点数1.0f传入时，m_Shift可能会等于-1。
@@ -63,9 +61,9 @@ void Mathematics::ScaledFloatToInt::CorrectResult() noexcept
 
 #ifdef OPEN_CLASS_INVARIANT
 
-// m_FloatValue的区间为[0,1]。
-// m_Power的区间为[0,24]。
-// m_Result的区间为[0,2^power - 1]。
+// floatValue的区间为[0,1]。
+// power的区间为[0,24]。
+// result的区间为[0,2^power - 1]。
 bool Mathematics::ScaledFloatToInt::IsValid() const noexcept
 {
     if (0 <= floatValue && floatValue <= 1 && 0 <= power && power <= 24 && 0 <= result && result <= pow(2.0, power) - 1)

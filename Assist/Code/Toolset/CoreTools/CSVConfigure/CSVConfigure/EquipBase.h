@@ -59,7 +59,7 @@ namespace CSVConfigure
         NODISCARD virtual std::deque<bool>::const_iterator GetMaskEnd() const;
 
         NODISCARD virtual int GetHeroId() const noexcept;
-        NODISCARD virtual std::shared_ptr<const Hero> GetHeroId(MAYBE_UNUSED const CSVConfigureContainer& csvContainer) const;
+        NODISCARD virtual std::shared_ptr<const HeroMappingType> GetHeroId(MAYBE_UNUSED const CSVConfigureContainer& csvContainer) const;
 
     private:
         int key{};

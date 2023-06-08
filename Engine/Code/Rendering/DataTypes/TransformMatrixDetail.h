@@ -184,7 +184,7 @@ typename Rendering::TransformMatrix<Real>::Matrix Rendering::TransformMatrix<Rea
 template <typename Real>
 int Rendering::TransformMatrix<Real>::GetStreamingSize() const noexcept
 {
-    return MATHEMATICS_STREAM_SIZE(transformMatrix) + CoreTools::GetStreamSize(isIdentity) + CoreTools::GetStreamSize(isRotationOrScaleMatrix) + CoreTools::GetStreamSize(isUniformScale);
+    return Mathematics::GetStreamSize(transformMatrix) + CoreTools::GetStreamSize(isIdentity) + CoreTools::GetStreamSize(isRotationOrScaleMatrix) + CoreTools::GetStreamSize(isUniformScale);
 }
 
 #endif  // RENDERING_DATA_TYPES_TRANSFORM_MATRIX_DETAIL_H

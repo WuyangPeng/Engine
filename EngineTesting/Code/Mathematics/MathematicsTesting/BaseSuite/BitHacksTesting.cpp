@@ -9,9 +9,9 @@
 
 #include "BitHacksTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/BitHacksDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <algorithm>
 #include <random>
 
@@ -20,7 +20,18 @@ using std::pow;
 using std::uniform_int;
 using std::uniform_real;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, BitHacksTesting)
+Mathematics::BitHacksTesting::BitHacksTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, BitHacksTesting)
+
+void Mathematics::BitHacksTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::BitHacksTesting::MainTest()
 {
@@ -100,14 +111,14 @@ void Mathematics::BitHacksTesting::Log2OfPowerOfTwoTest()
 void Mathematics::BitHacksTesting::FixedValueLog2OfPowerOfTwoTest()
 {
     // πÃ∂®÷µ≤‚ ‘
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(1u), 0u);
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(3u), 1u);
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(4u), 2u);
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(5u), 2u);
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(8u), 3u);
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(15u), 3u);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(1u), 0);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(3u), 1);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(4u), 2);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(5u), 2);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(8u), 3);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(15u), 3);
     ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(31), 4);
-    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(32u), 5u);
+    ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(32u), 5);
 }
 
 void Mathematics::BitHacksTesting::SignIntLog2OfPowerOfTwoTest()
@@ -118,9 +129,9 @@ void Mathematics::BitHacksTesting::SignIntLog2OfPowerOfTwoTest()
     default_random_engine randomEngine{};
     const uniform_int<> integerRandomDistribution{ 0, max };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = integerRandomDistribution(randomEngine);
 
@@ -136,13 +147,13 @@ void Mathematics::BitHacksTesting::UnsignIntLog2OfPowerOfTwoTest()
     default_random_engine randomEngine{};
     const uniform_int<uint32_t> integerRandomDistribution{ 0, max };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = integerRandomDistribution(randomEngine);
 
-        ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(value), boost::numeric_cast<uint32_t>(log(boost::numeric_cast<double>(value)) / log(2.0)));
+        ASSERT_EQUAL(BitHacks::Log2OfPowerOfTwo(value), boost::numeric_cast<int32_t>(log(boost::numeric_cast<double>(value)) / log(2.0)));
     }
 }
 
@@ -180,9 +191,9 @@ void Mathematics::BitHacksTesting::ScaledFloatToIntRandomTest()
     const uniform_int<uint32_t> integerRandomDistribution{ 0, 24 };
     const uniform_real<float> floatRandomDistribution{ 0.0f, 1.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto value = floatRandomDistribution(randomEngine);
         auto power = integerRandomDistribution(randomEngine);

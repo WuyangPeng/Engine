@@ -9,9 +9,9 @@
 
 #include "Intersector1Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/MathematicsTesting/IntersectionSuite/Detail/Intersector1TestDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::swap;
@@ -22,7 +22,18 @@ namespace Mathematics
     template class Intersector1Test<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Intersector1Testing)
+Mathematics::Intersector1Testing::Intersector1Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Intersector1Testing)
+
+void Mathematics::Intersector1Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Intersector1Testing::MainTest()
 {
@@ -34,9 +45,9 @@ void Mathematics::Intersector1Testing::IntersectorTest()
     std::default_random_engine generator;
     const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto u0 = randomDistribution(generator);
         auto u1 = randomDistribution(generator);

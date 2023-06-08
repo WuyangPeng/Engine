@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/08 14:32)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 14:21)
 
-#ifndef MATHEMATICS_ALGEBRA_AQUATERNION_H
-#define MATHEMATICS_ALGEBRA_AQUATERNION_H
+#ifndef MATHEMATICS_ALGEBRA_A_QUATERNION_H
+#define MATHEMATICS_ALGEBRA_A_QUATERNION_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -23,12 +23,12 @@
 namespace Mathematics
 {
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AQuaternion final : private boost::additive<AQuaternion<Real>, boost::multiplicative<AQuaternion<Real>, Real, boost::totally_ordered<AQuaternion<Real>>>>
     {
     public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-
         using ClassType = AQuaternion<Real>;
+
         using Math = Math<Real>;
         using Matrix = Matrix<Real>;
         using AVector = AVector<Real>;
@@ -51,12 +51,12 @@ namespace Mathematics
         // 这里(w,x,y,z)不一定是单位长度的四维向量。
 
         constexpr AQuaternion() noexcept
-            : m_W{}, m_X{}, m_Y{}, m_Z{}
+            : w{}, x{}, y{}, z{}
         {
         }
 
         constexpr AQuaternion(Real w, Real x, Real y, Real z) noexcept
-            : m_W{ w }, m_X{ x }, m_Y{ y }, m_Z{ z }
+            : w{ w }, x{ x }, y{ y }, z{ z }
         {
         }
 
@@ -74,13 +74,13 @@ namespace Mathematics
         NODISCARD const Real& operator[](int index) const;
         NODISCARD Real& operator[](int index);
         NODISCARD Real GetW() const noexcept;
-        void SetW(Real w) noexcept;
+        void SetW(Real aW) noexcept;
         NODISCARD Real GetX() const noexcept;
-        void SetX(Real x) noexcept;
+        void SetX(Real aX) noexcept;
         NODISCARD Real GetY() const noexcept;
-        void SetY(Real y) noexcept;
+        void SetY(Real aY) noexcept;
         NODISCARD Real GetZ() const noexcept;
-        void SetZ(Real z) noexcept;
+        void SetZ(Real aZ) noexcept;
 
         // 算术运算
         AQuaternion& operator*=(const AQuaternion& rhs) noexcept;
@@ -149,10 +149,10 @@ namespace Mathematics
 
     private:
         // 存储的顺序是(w,x,y,z)。
-        Real m_W;
-        Real m_X;
-        Real m_Y;
-        Real m_Z;
+        Real w;
+        Real x;
+        Real y;
+        Real z;
     };
 
     // 比较 (仅使用在 STL 容器).
@@ -180,4 +180,4 @@ namespace Mathematics
     using AQuaternionD = AQuaternion<double>;
 }
 
-#endif  // MATHEMATICS_ALGEBRA_AQUATERNION_H
+#endif  // MATHEMATICS_ALGEBRA_A_QUATERNION_H

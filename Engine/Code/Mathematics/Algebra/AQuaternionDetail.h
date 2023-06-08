@@ -1,22 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/08 14:34)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 14:23)
 
-#ifndef MATHEMATICS_ALGEBRA_HQUATERNION_DETAIL_H
-#define MATHEMATICS_ALGEBRA_HQUATERNION_DETAIL_H
+#ifndef MATHEMATICS_ALGEBRA_A_QUATERNION_DETAIL_H
+#define MATHEMATICS_ALGEBRA_A_QUATERNION_DETAIL_H
 
 #include "AQuaternion.h"
 
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_AQUATERNION_ACHIEVE)
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_A_QUATERNION_ACHIEVE)
 
     #include "AQuaternionAchieve.h"
 
-#endif  //  !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_AQUATERNION_ACHIEVE)
+#endif  //  !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_A_QUATERNION_ACHIEVE)
 
 template <typename Real>
 bool Mathematics::operator==(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs)
@@ -73,12 +73,16 @@ bool Mathematics::Approximate(const AQuaternion<Real>& lhs, const AQuaternion<Re
 template <typename Real>
 std::ostream& Mathematics::operator<<(std::ostream& outFile, const AQuaternion<Real>& quaternion)
 {
-    outFile << "w = " << quaternion.GetW()
-            << "x = " << quaternion.GetX()
-            << "y = " << quaternion.GetY()
-            << "z = " << quaternion.GetZ();
+    outFile << "w = "
+            << quaternion.GetW()
+            << "x = "
+            << quaternion.GetX()
+            << "y = "
+            << quaternion.GetY()
+            << "z = "
+            << quaternion.GetZ();
 
     return outFile;
 }
 
-#endif  // MATHEMATICS_ALGEBRA_HQUATERNION_DETAIL_H
+#endif  // MATHEMATICS_ALGEBRA_A_QUATERNION_DETAIL_H

@@ -9,16 +9,27 @@
 
 #include "QuerySortToolsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Query/QuerySortTools.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, QuerySortToolsTesting)
+Mathematics::QuerySortToolsTesting::QuerySortToolsTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, QuerySortToolsTesting)
+
+void Mathematics::QuerySortToolsTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::QuerySortToolsTesting::MainTest()
 {
@@ -32,9 +43,9 @@ void Mathematics::QuerySortToolsTesting::SortTwoValueTest()
     default_random_engine generator;
     const uniform_int<> firstRandomDistribution(0, 2000);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
         auto secondValue = firstRandomDistribution(generator);
@@ -59,9 +70,9 @@ void Mathematics::QuerySortToolsTesting::SortThreeValueTest()
     default_random_engine generator;
     const uniform_int<> firstRandomDistribution(0, 2000);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
         auto secondValue = firstRandomDistribution(generator);
@@ -104,9 +115,9 @@ void Mathematics::QuerySortToolsTesting::SortFourValueTest()
     default_random_engine generator;
     const uniform_int<> firstRandomDistribution(0, 2000);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
         auto secondValue = firstRandomDistribution(generator);

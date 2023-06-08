@@ -9,16 +9,27 @@
 
 #include "GaussianQuadratureTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/GaussianQuadratureDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 namespace Mathematics
 {
     template class GaussianQuadrature<float, GaussianQuadratureTesting>;
     template class GaussianQuadrature<double, GaussianQuadratureTesting>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, GaussianQuadratureTesting)
+Mathematics::GaussianQuadratureTesting::GaussianQuadratureTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, GaussianQuadratureTesting)
+
+void Mathematics::GaussianQuadratureTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::GaussianQuadratureTesting::MainTest()
 {

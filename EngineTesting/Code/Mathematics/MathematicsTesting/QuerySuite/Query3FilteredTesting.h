@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_QUERY_SUITE_QUERY3_FILTERED_TESTING_H
 #define MATHEMATICS_QUERY_SUITE_QUERY3_FILTERED_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Query3FilteredTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Query3FilteredTesting);
+        using ClassType = Query3FilteredTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Query3FilteredTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

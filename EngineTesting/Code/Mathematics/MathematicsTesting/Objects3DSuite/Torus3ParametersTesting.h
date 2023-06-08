@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_OBJECTS3D_SUITE_TORUS3_PARAMETERS_TESTING_H
 #define MATHEMATICS_OBJECTS3D_SUITE_TORUS3_PARAMETERS_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Torus3ParametersTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Torus3ParametersTesting);
+        using ClassType = Torus3ParametersTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Torus3ParametersTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

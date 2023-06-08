@@ -50,7 +50,7 @@ namespace CSVConfigure
         NODISCARD std::deque<bool>::const_iterator GetMaskEnd() const noexcept override;
 
         NODISCARD int GetHeroId() const noexcept override;
-        NODISCARD std::shared_ptr<const Hero> GetHeroId(const CSVConfigureContainer& csvContainer) const override;
+        NODISCARD std::shared_ptr<const HeroMappingType> GetHeroId(const CSVConfigureContainer& csvContainer) const override;
 
     private:
         int id;  // Id

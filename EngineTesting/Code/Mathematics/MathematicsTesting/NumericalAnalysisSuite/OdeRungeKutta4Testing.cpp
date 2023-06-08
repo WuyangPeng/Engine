@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/OdeRungeKutta4Detail.h"
 #include "Mathematics/NumericalAnalysis/OdeSolverDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::ostream;
 using std::vector;
 

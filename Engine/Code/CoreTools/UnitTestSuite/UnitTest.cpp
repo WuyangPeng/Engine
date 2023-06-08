@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:43)
+///	引擎版本：0.9.0.11 (2023/05/30 09:40)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -161,9 +161,7 @@ void CoreTools::UnitTest::AssertTest(bool condition, const FunctionDescribed& fu
     }
     else
     {
-        LogConsoleTextColorsManager manager{ GetStream(), LogLevel::Error };
-
-        PrintFailReport(functionDescribed, errorMessage);
+        PrintFailReport(functionDescribed, errorMessage, LogLevel::Error);
 
         unitTestData->AddFailedNumber();
 
@@ -189,9 +187,7 @@ void CoreTools::UnitTest::ErrorTest(bool condition, const FunctionDescribed& fun
     }
     else
     {
-        LogConsoleTextColorsManager manager{ GetStream(), LogLevel::Fatal };
-
-        PrintFailReport(functionDescribed, errorMessage);
+        PrintFailReport(functionDescribed, errorMessage, LogLevel::Fatal);
 
         unitTestData->AddErrorNumber();
     }
@@ -205,17 +201,15 @@ void CoreTools::UnitTest::ErrorTest(bool condition, const FunctionDescribed& fun
     }
     else
     {
-        LogConsoleTextColorsManager manager{ GetStream(), LogLevel::Fatal };
-
-        PrintFailReport(functionDescribed, errorMessage.data());
+        PrintFailReport(functionDescribed, errorMessage.data(), LogLevel::Fatal);
 
         unitTestData->AddErrorNumber();
     }
 }
 
-void CoreTools::UnitTest::PrintFailReport(const FunctionDescribed& functionDescribed, const std::string& errorMessage)
+void CoreTools::UnitTest::PrintFailReport(const FunctionDescribed& functionDescribed, const std::string& errorMessage, LogLevel logLevel)
 {
-    UnitTestFailPrintManager manager{ *this, functionDescribed.GetFileName(), functionDescribed.GetLine(), errorMessage };
+    UnitTestFailPrintManager manager{ *this, functionDescribed.GetFileName(), functionDescribed.GetLine(), errorMessage, logLevel };
 
     manager.PrintFailClassInformation();
     manager.PrintFailFileName();

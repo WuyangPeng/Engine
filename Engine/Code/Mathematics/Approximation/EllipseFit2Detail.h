@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/18 15:08)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 17:33)
 
 #ifndef MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_DETAIL_H
@@ -28,7 +28,6 @@ Mathematics::EllipseFit2<Real>::EllipseFit2(const Points& points)
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::EllipseFit2<Real>::Fit2()
 {
@@ -77,7 +76,6 @@ void Mathematics::EllipseFit2<Real>::Fit2()
     rotate.MakeRotation(-minLocation.at(4));
 }
 
-// private
 template <typename Real>
 void Mathematics::EllipseFit2<Real>::InitialGuess()
 {
@@ -92,8 +90,6 @@ void Mathematics::EllipseFit2<Real>::InitialGuess()
     extent1 = box.GetExtent1();
 }
 
-// static
-// private
 template <typename Real>
 Real Mathematics::EllipseFit2<Real>::Energy(const Container& input, const EllipseFit2* userData)
 {

@@ -106,6 +106,8 @@ namespace CoreTools
     class CSVGenerate;
     class CSVTotalGenerate;
 
+    class BatchConversionCode;
+
     enum class JsonDataType;
     enum class JsonGenerateType;
     enum class JsonTotalGenerateType;
@@ -117,6 +119,7 @@ namespace CoreTools
     class JsonGenerate;
     class JsonRow;
     class JsonTotalGenerate;
+
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_FWD_H

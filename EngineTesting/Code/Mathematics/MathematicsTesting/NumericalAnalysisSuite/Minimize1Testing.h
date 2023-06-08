@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_MINIMIZE1_TESTING_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_MINIMIZE1_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Minimize1Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Minimize1Testing);
+        using ClassType = Minimize1Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Minimize1Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

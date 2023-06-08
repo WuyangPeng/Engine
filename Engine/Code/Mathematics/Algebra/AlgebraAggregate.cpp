@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/01/29 14:00)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 09:27)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -209,7 +209,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::AVectorF& datum)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
     using ValueType = Mathematics::AVectorF::ArrayType::value_type;
-    constexpr auto vectorSize = Mathematics::AVectorF::aVectorSize;
+    constexpr auto vectorSize = Mathematics::AVectorF::vectorSize;
 
     const auto homogeneousPoint = ReadContainer<ValueType, vectorSize>();
 
@@ -230,7 +230,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::AVectorD& datum)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
     using ValueType = Mathematics::AVectorD::ArrayType::value_type;
-    constexpr auto vectorSize = Mathematics::AVectorD::aVectorSize;
+    constexpr auto vectorSize = Mathematics::AVectorD::vectorSize;
 
     const auto homogeneousPoint = ReadContainer<ValueType, vectorSize>();
 
@@ -251,7 +251,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::APointF& datum)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
     using ValueType = Mathematics::APointF::ArrayType::value_type;
-    constexpr auto pointSize = Mathematics::APointF::aPointSize;
+    constexpr auto pointSize = Mathematics::APointF::pointSize;
 
     const auto homogeneousPoint = ReadContainer<ValueType, pointSize>();
 
@@ -272,7 +272,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::APointD& datum)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
     using ValueType = Mathematics::APointD::ArrayType::value_type;
-    constexpr auto pointSize = Mathematics::APointD::aPointSize;
+    constexpr auto pointSize = Mathematics::APointD::pointSize;
 
     const auto homogeneousPoint = ReadContainer<ValueType, pointSize>();
 
@@ -294,7 +294,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableLengthVectorF& 
 
     using ValueType = Mathematics::VariableLengthVectorF::ContainerType::value_type;
 
-    auto container = ReadVectorNotUseNumber<ValueType>();
+    const auto container = ReadVectorNotUseNumber<ValueType>();
 
     datum.SetContainer(container);
 }
@@ -314,7 +314,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableLengthVectorD& 
 
     using ValueType = Mathematics::VariableLengthVectorD::ContainerType::value_type;
 
-    auto container = ReadVectorNotUseNumber<ValueType>();
+    const auto container = ReadVectorNotUseNumber<ValueType>();
 
     datum.SetContainer(container);
 }
@@ -335,14 +335,14 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::PlaneF& datum)
     using ElementType = Mathematics::PlaneF::ElementType;
     using AVector = Mathematics::PlaneF::AVector;
 
-    auto epsilon = Read<ElementType>();
+    const auto epsilon = Read<ElementType>();
     datum.SetEpsilon(epsilon);
 
     auto normal = ReadAggregate<AVector>();
     normal.Normalize(epsilon);
     datum.SetNormal(normal);
 
-    auto constant = Read<ElementType>();
+    const auto constant = Read<ElementType>();
     datum.SetConstant(constant);
 }
 
@@ -364,14 +364,14 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::PlaneD& datum)
     using ElementType = Mathematics::PlaneD::ElementType;
     using AVector = Mathematics::PlaneD::AVector;
 
-    auto epsilon = Read<ElementType>();
+    const auto epsilon = Read<ElementType>();
     datum.SetEpsilon(epsilon);
 
     auto normal = ReadAggregate<AVector>();
     normal.Normalize(epsilon);
     datum.SetNormal(normal);
 
-    auto constant = Read<ElementType>();
+    const auto constant = Read<ElementType>();
     datum.SetConstant(constant);
 }
 
@@ -392,7 +392,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::PolynomialF& datum)
 
     using ValueType = Mathematics::PolynomialF::ContainerType::value_type;
 
-    auto container = ReadVectorNotUseNumber<ValueType>();
+    const auto container = ReadVectorNotUseNumber<ValueType>();
 
     datum.SetValue(container);
 }
@@ -412,7 +412,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::PolynomialD& datum)
 
     using ValueType = Mathematics::PolynomialD::ContainerType::value_type;
 
-    auto container = ReadVectorNotUseNumber<ValueType>();
+    const auto container = ReadVectorNotUseNumber<ValueType>();
 
     datum.SetValue(container);
 }
@@ -602,7 +602,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableMatrixF& datum)
 
     const auto rowsNumber = Read<int32_t>();
     const auto columnsNumber = Read<int32_t>();
-    auto container = ReadVectorUseNumber<ValueType>(rowsNumber * columnsNumber);
+    const auto container = ReadVectorUseNumber<ValueType>(rowsNumber * columnsNumber);
 
     datum.SetContainer(rowsNumber, columnsNumber, container);
 }
@@ -626,7 +626,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableMatrixD& datum)
 
     const auto rowsNumber = Read<int32_t>();
     const auto columnsNumber = Read<int32_t>();
-    auto container = ReadVectorUseNumber<ValueType>(rowsNumber * columnsNumber);
+    const auto container = ReadVectorUseNumber<ValueType>(rowsNumber * columnsNumber);
 
     datum.SetContainer(rowsNumber, columnsNumber, container);
 }
@@ -654,20 +654,20 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixF& datum)
 
     datum.ResetSize(size, lowerBandsNumber, upperBandsNumber);
 
-    auto container = ReadVectorUseNumber<ValueType>(size);
+    const auto container = ReadVectorUseNumber<ValueType>(size);
     datum.SetDiagonalBand(container);
 
     for (auto i = 0; i < lowerBandsNumber; ++i)
     {
         const auto lowerSize = size - 1 - i;
-        auto lowerBand = ReadVectorUseNumber<ValueType>(lowerSize);
+        const auto lowerBand = ReadVectorUseNumber<ValueType>(lowerSize);
         datum.SetLowerBand(lowerSize, lowerBand);
     }
 
     for (auto i = 0; i < upperBandsNumber; ++i)
     {
         const auto upperSize = size - 1 - i;
-        auto upperBand = ReadVectorUseNumber<ValueType>(upperSize);
+        const auto upperBand = ReadVectorUseNumber<ValueType>(upperSize);
         datum.SetLowerBand(upperSize, upperBand);
     }
 }
@@ -713,20 +713,20 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixD& datum)
 
     datum.ResetSize(size, lowerBandsNumber, upperBandsNumber);
 
-    auto container = ReadVectorUseNumber<ValueType>(size);
+    const auto container = ReadVectorUseNumber<ValueType>(size);
     datum.SetDiagonalBand(container);
 
     for (auto i = 0; i < lowerBandsNumber; ++i)
     {
         const auto lowerSize = size - 1 - i;
-        auto lowerBand = ReadVectorUseNumber<ValueType>(lowerSize);
+        const auto lowerBand = ReadVectorUseNumber<ValueType>(lowerSize);
         datum.SetLowerBand(lowerSize, lowerBand);
     }
 
     for (auto i = 0; i < upperBandsNumber; ++i)
     {
         const auto upperSize = size - 1 - i;
-        auto upperBand = ReadVectorUseNumber<ValueType>(upperSize);
+        const auto upperBand = ReadVectorUseNumber<ValueType>(upperSize);
         datum.SetLowerBand(upperSize, upperBand);
     }
 }
@@ -773,7 +773,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixSolveF& dat
 
     datum.ResetSize(size, lowerBandsNumber, upperBandsNumber, epsilon);
 
-    auto container = ReadVectorUseNumber<ValueType>(size);
+    const auto container = ReadVectorUseNumber<ValueType>(size);
     datum.SetDiagonalBand(container);
 
     for (auto i = 0; i < lowerBandsNumber; ++i)
@@ -834,7 +834,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixSolveD& dat
 
     datum.ResetSize(size, lowerBandsNumber, upperBandsNumber, epsilon);
 
-    auto container = ReadVectorUseNumber<ValueType>(size);
+    const auto container = ReadVectorUseNumber<ValueType>(size);
     datum.SetDiagonalBand(container);
 
     for (auto i = 0; i < lowerBandsNumber; ++i)
@@ -972,7 +972,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float1& datum)
 
     using ValueType = Mathematics::Float1::TupleType;
 
-    auto value = Read<ValueType>();
+    const auto value = Read<ValueType>();
 
     datum[0] = value;
 }
@@ -982,7 +982,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float1& datum)
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
-    for (auto element : datum)
+    for (const auto element : datum)
     {
         Write(element);
     }
@@ -998,7 +998,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float2& datum)
 
     for (auto i = 0; i < dimension; ++i)
     {
-        auto value = Read<ValueType>();
+        const auto value = Read<ValueType>();
 
         datum[i] = value;
     }
@@ -1009,7 +1009,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float2& datum)
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
-    for (auto element : datum)
+    for (const auto element : datum)
     {
         Write(element);
     }
@@ -1025,7 +1025,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float3& datum)
 
     for (auto i = 0; i < dimension; ++i)
     {
-        auto value = Read<ValueType>();
+        const auto value = Read<ValueType>();
 
         datum[i] = value;
     }
@@ -1036,7 +1036,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float3& datum)
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
-    for (auto element : datum)
+    for (const auto element : datum)
     {
         Write(element);
     }
@@ -1052,7 +1052,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float4& datum)
 
     for (auto i = 0; i < dimension; ++i)
     {
-        auto value = Read<ValueType>();
+        const auto value = Read<ValueType>();
 
         datum[i] = value;
     }
@@ -1063,7 +1063,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float4& datum)
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 
-    for (auto element : datum)
+    for (const auto element : datum)
     {
         Write(element);
     }

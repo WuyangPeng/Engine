@@ -9,10 +9,10 @@
 
 #include "FloatingPointAnalysisTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/FloatingPointAnalysisDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class FloatingPointAnalysis<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, FloatingPointAnalysisTesting)
+Mathematics::FloatingPointAnalysisTesting::FloatingPointAnalysisTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, FloatingPointAnalysisTesting)
+
+void Mathematics::FloatingPointAnalysisTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::FloatingPointAnalysisTesting::MainTest()
 {
@@ -44,9 +55,9 @@ void Mathematics::FloatingPointAnalysisTesting::NumericalValueSymbolTest()
     const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
     const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
         const FloatingPointAnalysis<float> firstFloatingPointAnalysis(firstValue);
@@ -114,9 +125,9 @@ void Mathematics::FloatingPointAnalysisTesting::ExponentTest()
     const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
     const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
         const FloatingPointAnalysis<float> firstFloatingPointAnalysis(firstValue);
@@ -190,9 +201,9 @@ void Mathematics::FloatingPointAnalysisTesting::MantissaTest()
     const uniform_int<> fifthRandomDistribution(0, 38);
     const uniform_int<> sixthRandomDistribution(0, 308);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
         const FloatingPointAnalysis<float> firstFloatingPointAnalysis(firstValue);

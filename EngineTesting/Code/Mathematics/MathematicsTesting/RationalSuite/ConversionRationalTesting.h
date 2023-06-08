@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_RATIONAL_SUITE_CONVERSION_RATIONAL_TESTING_H
 #define MATHEMATICS_RATIONAL_SUITE_CONVERSION_RATIONAL_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class ConversionRationalTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ConversionRationalTesting);
+        using ClassType = ConversionRationalTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit ConversionRationalTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

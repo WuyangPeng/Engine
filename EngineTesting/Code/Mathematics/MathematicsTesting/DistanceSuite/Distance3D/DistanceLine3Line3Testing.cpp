@@ -9,20 +9,31 @@
 
 #include "DistanceLine3Line3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Distance/Distance3D/DistanceLine3Line3Detail.h"
 #include "Mathematics/Objects3D/Line3Detail.h"
 #include <random>
-
 using std::swap;
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 namespace Mathematics
 {
     template class DistanceLine3Line3<float>;
     template class DistanceLine3Line3<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistanceLine3Line3Testing)
+Mathematics::DistanceLine3Line3Testing::DistanceLine3Line3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, DistanceLine3Line3Testing)
+
+void Mathematics::DistanceLine3Line3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::DistanceLine3Line3Testing::MainTest()
 {
@@ -38,9 +49,9 @@ void Mathematics::DistanceLine3Line3Testing::BaseTest()
     std::default_random_engine generator;
     const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3F lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3F lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
@@ -75,9 +86,9 @@ void Mathematics::DistanceLine3Line3Testing::StaticTest()
     std::default_random_engine generator;
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3D lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
@@ -162,9 +173,9 @@ void Mathematics::DistanceLine3Line3Testing::DynamicTest()
     std::default_random_engine generator;
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3D lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
@@ -249,9 +260,9 @@ void Mathematics::DistanceLine3Line3Testing::DerivativeTest()
     std::default_random_engine generator;
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3D lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
@@ -289,9 +300,9 @@ void Mathematics::DistanceLine3Line3Testing::IntervalTest()
     std::default_random_engine generator;
     const std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3D lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));

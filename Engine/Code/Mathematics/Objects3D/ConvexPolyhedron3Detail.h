@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 17:58)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:48)
 
-#ifndef MATHEMATICS_OBJECTS3D_CONVEX_POLYHEDRON3_DETAIL_H
-#define MATHEMATICS_OBJECTS3D_CONVEX_POLYHEDRON3_DETAIL_H
+#ifndef MATHEMATICS_OBJECTS_3D_CONVEX_POLYHEDRON3_DETAIL_H
+#define MATHEMATICS_OBJECTS_3D_CONVEX_POLYHEDRON3_DETAIL_H
 
 #include "ConvexPolyhedron3.h"
 #include "Polyhedron3Detail.h"
@@ -27,7 +27,6 @@ Mathematics::ConvexPolyhedron3<Real>::ConvexPolyhedron3(const VerticesType& vert
     MATHEMATICS_SELF_CLASS_IS_VALID_3;
 }
 
-// private
 template <typename Real>
 void Mathematics::ConvexPolyhedron3<Real>::InitPlanes()
 {
@@ -243,4 +242,4 @@ bool Mathematics::ConvexPolyhedron3<Real>::Contains(const Vector3& point, Real t
     return true;
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_CONVEX_POLYHEDRON3_DETAIL_H
+#endif  // MATHEMATICS_OBJECTS_3D_CONVEX_POLYHEDRON3_DETAIL_H

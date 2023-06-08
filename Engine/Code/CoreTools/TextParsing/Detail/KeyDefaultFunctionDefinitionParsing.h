@@ -23,7 +23,7 @@ namespace CoreTools
         using ParentType = DefaultFunctionDefinitionParsing;
 
     public:
-        explicit KeyDefaultFunctionDefinitionParsing(const CSVHead& csvHead, const String& className);
+        explicit KeyDefaultFunctionDefinitionParsing(const CSVHead& csvHead, const String& className, const String& keyTypeDescribe);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -31,6 +31,9 @@ namespace CoreTools
 
     private:
         NODISCARD String GenerateKeyMember() const;
+
+    private:
+        String keyTypeDescribe;
     };
 }
 

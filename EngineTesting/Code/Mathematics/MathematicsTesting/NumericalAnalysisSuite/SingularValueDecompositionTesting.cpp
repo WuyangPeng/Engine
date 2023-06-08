@@ -9,11 +9,11 @@
 
 #include "SingularValueDecompositionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
 #include "Mathematics/NumericalAnalysis/SingularValueDecompositionDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -27,7 +27,18 @@ namespace Mathematics
     template class SingularValueDecomposition<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, SingularValueDecompositionTesting)
+Mathematics::SingularValueDecompositionTesting::SingularValueDecompositionTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, SingularValueDecompositionTesting)
+
+void Mathematics::SingularValueDecompositionTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::SingularValueDecompositionTesting::MainTest()
 {
@@ -40,9 +51,9 @@ void Mathematics::SingularValueDecompositionTesting::SingularValueTest()
     const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
     const uniform_int<> secondRandomDistribution(2, 10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         int row = secondRandomDistribution(generator);
         int colomn = secondRandomDistribution(generator);

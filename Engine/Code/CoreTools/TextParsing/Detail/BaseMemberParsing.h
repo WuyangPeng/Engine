@@ -28,7 +28,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD String GenerateBaseMember() const;
+        NODISCARD String GenerateBaseMember(const String& keyTypeDescribe) const;
     };
 }
 

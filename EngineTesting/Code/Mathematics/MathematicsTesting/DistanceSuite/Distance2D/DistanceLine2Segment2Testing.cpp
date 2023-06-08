@@ -9,15 +9,15 @@
 
 #include "DistanceLine2Segment2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Distance/Distance2D/DistanceLine2Line2Detail.h"
 #include "Mathematics/Distance/Distance2D/DistanceLine2Segment2Detail.h"
 #include "Mathematics/Objects2D/Segment2Detail.h"
-
 #include <random>
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::default_random_engine;
 using std::swap;
 using std::uniform_real;
@@ -28,7 +28,18 @@ namespace Mathematics
     template class DistanceLine2Segment2<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistanceLine2Segment2Testing)
+Mathematics::DistanceLine2Segment2Testing::DistanceLine2Segment2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, DistanceLine2Segment2Testing)
+
+void Mathematics::DistanceLine2Segment2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::DistanceLine2Segment2Testing::MainTest()
 {
@@ -44,9 +55,9 @@ void Mathematics::DistanceLine2Segment2Testing::BaseTest()
     default_random_engine generator;
     const uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2F lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2F lhsDirection(randomDistribution(generator), randomDistribution(generator));
@@ -89,9 +100,9 @@ void Mathematics::DistanceLine2Segment2Testing::StaticTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 lhsDirection(randomDistribution(generator), randomDistribution(generator));
@@ -241,9 +252,9 @@ void Mathematics::DistanceLine2Segment2Testing::DynamicTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 lhsDirection(randomDistribution(generator), randomDistribution(generator));
@@ -408,9 +419,9 @@ void Mathematics::DistanceLine2Segment2Testing::DerivativeTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 lhsDirection(randomDistribution(generator), randomDistribution(generator));
@@ -450,9 +461,9 @@ void Mathematics::DistanceLine2Segment2Testing::IntervalTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-10.0, 10.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 lhsDirection(randomDistribution(generator), randomDistribution(generator));

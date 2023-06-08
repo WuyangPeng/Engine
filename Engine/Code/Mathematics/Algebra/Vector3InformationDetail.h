@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/03 20:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/01 10:21)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_TOOLS_INFORMATION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_TOOLS_INFORMATION_DETAIL_H
@@ -20,6 +20,7 @@
 #include <gsl/util>
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3Information<Real>::Vector3Information(const ContainerType& points, Real epsilon)
     : points{ points },
       epsilon{ epsilon },
@@ -50,6 +51,7 @@ Mathematics::Vector3Information<Real>::Vector3Information(const ContainerType& p
 
 // private
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3Information<Real>::Init()
 {
     // 计算输入点的轴对齐包围盒。跟踪“points”当前最小值和最大值的索引。
@@ -68,8 +70,8 @@ void Mathematics::Vector3Information<Real>::Init()
     }
 }
 
-// private
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3Information<Real>::ComputeAxisAlignedBoundingBox()
 {
     Vector3 min{ Math::maxReal, Math::maxReal, Math::maxReal };
@@ -84,26 +86,14 @@ void Mathematics::Vector3Information<Real>::ComputeAxisAlignedBoundingBox()
             {
                 min[directionIndex] = point[directionIndex];
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-                indexMin[directionIndex] = pointsIndex;
-
-#include STSTEM_WARNING_POP
+                indexMin.at(directionIndex) = pointsIndex;
             }
 
             if (max[directionIndex] < point[directionIndex])
             {
                 max[directionIndex] = point[directionIndex];
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-                indexMax[directionIndex] = pointsIndex;
-
-#include STSTEM_WARNING_POP
+                indexMax.at(directionIndex) = pointsIndex;
             }
         }
 
@@ -115,6 +105,7 @@ void Mathematics::Vector3Information<Real>::ComputeAxisAlignedBoundingBox()
 
 // private
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Vector3Information<Real>::DetermineMaximumRange()
 {
     auto maxPoint = aabb.GetMaxPoint();
@@ -122,13 +113,8 @@ void Mathematics::Vector3Information<Real>::DetermineMaximumRange()
 
     maxRange = maxPoint.GetX() - minPoint.GetX();
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-    minExtreme = indexMin[Vector3::xIndex];
-    maxExtreme = indexMax[Vector3::xIndex];
-
-#include STSTEM_WARNING_POP
+    minExtreme = indexMin.at(Vector3::xIndex);
+    maxExtreme = indexMax.at(Vector3::xIndex);
 
     for (auto i = Vector3::yIndex; i < Vector3::pointSize; ++i)
     {
@@ -138,21 +124,14 @@ void Mathematics::Vector3Information<Real>::DetermineMaximumRange()
         {
             maxRange = range;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-            minExtreme = indexMin[i];
-            maxExtreme = indexMax[i];
-
-#include STSTEM_WARNING_POP
+            minExtreme = indexMin.at(i);
+            maxExtreme = indexMax.at(i);
         }
     }
 }
 
-// private
 template <typename Real>
-bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyAPoint() noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyAPoint() noexcept
 {
     if (maxRange < epsilon)
     {
@@ -174,7 +153,7 @@ bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyAPoint() noexcep
 }
 
 template <typename Real>
-bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyALineSegment()
+requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyALineSegment()
 {
     directionX = points.at(maxExtreme) - origin;
     directionX.Normalize(epsilon);
@@ -211,7 +190,7 @@ bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyALineSegment()
 }
 
 template <typename Real>
-bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyAPlanarPolygon()
+requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyAPlanarPolygon()
 {
     directionY = points.at(perpendicularExtreme) - origin;
     const auto dot = Vector3Tools::DotProduct(directionX, directionY);
@@ -255,7 +234,7 @@ bool Mathematics::Vector3Information<Real>::TestPointSetIsNearlyAPlanarPolygon()
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::Vector3Information<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::IsValid() const noexcept
 {
     const auto pointsSize = gsl::narrow_cast<int>(points.size());
 
@@ -278,6 +257,7 @@ bool Mathematics::Vector3Information<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::Vector3Information<Real>::GetDimension() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -286,6 +266,7 @@ int Mathematics::Vector3Information<Real>::GetDimension() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AxesAlignBoundingBox3<Real> Mathematics::Vector3Information<Real>::GetAABB() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -294,6 +275,7 @@ Mathematics::AxesAlignBoundingBox3<Real> Mathematics::Vector3Information<Real>::
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Vector3Information<Real>::GetMaxRange() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -302,6 +284,7 @@ Real Mathematics::Vector3Information<Real>::GetMaxRange() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetOrigin() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -310,6 +293,7 @@ Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetOrigin() co
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetDirectionX() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -318,6 +302,7 @@ Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetDirectionX(
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetDirectionY() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -326,6 +311,7 @@ Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetDirectionY(
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetDirectionZ() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -334,6 +320,7 @@ Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetDirectionZ(
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetMinExtreme() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -342,6 +329,7 @@ Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetMinExtreme(
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetMaxExtreme() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -350,6 +338,7 @@ Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetMaxExtreme(
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetPerpendicularExtreme() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -358,6 +347,7 @@ Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetPerpendicul
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetTetrahedronExtreme() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -366,7 +356,7 @@ Mathematics::Vector3<Real> Mathematics::Vector3Information<Real>::GetTetrahedron
 }
 
 template <typename Real>
-bool Mathematics::Vector3Information<Real>::IsExtremeCCW() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::Vector3Information<Real>::IsExtremeCCW() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -374,6 +364,7 @@ bool Mathematics::Vector3Information<Real>::IsExtremeCCW() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::Vector3Information<Real>::GetMinExtremeIndex() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -382,6 +373,7 @@ int Mathematics::Vector3Information<Real>::GetMinExtremeIndex() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::Vector3Information<Real>::GetMaxExtremeIndex() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -390,6 +382,7 @@ int Mathematics::Vector3Information<Real>::GetMaxExtremeIndex() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::Vector3Information<Real>::GetPerpendicularExtremeIndex() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -398,6 +391,7 @@ int Mathematics::Vector3Information<Real>::GetPerpendicularExtremeIndex() const 
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::Vector3Information<Real>::GetTetrahedronExtremeIndex() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;

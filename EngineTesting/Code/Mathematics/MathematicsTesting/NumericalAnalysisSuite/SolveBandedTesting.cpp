@@ -9,11 +9,11 @@
 
 #include "SolveBandedTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/BandedMatrixDetail.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -21,7 +21,18 @@ using std::uniform_int;
 using std::uniform_real;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, SolveBandedTesting)
+Mathematics::SolveBandedTesting::SolveBandedTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, SolveBandedTesting)
+
+void Mathematics::SolveBandedTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::SolveBandedTesting::MainTest()
 {
@@ -34,9 +45,9 @@ void Mathematics::SolveBandedTesting::BandedTest()
     const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
     const uniform_int<> integerRandomDistribution(4, 10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const int size = integerRandomDistribution(generator);
 

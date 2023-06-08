@@ -12,6 +12,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "CoreTools/LogManager/Flags/LogManagerFlags.h"
 #include "CoreTools/ReportOutput/ReportOutputFwd.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteInternalFwd.h"
 
@@ -27,7 +28,7 @@ namespace CoreTools
         using ClassType = UnitTestFailPrintManager;
 
     public:
-        UnitTestFailPrintManager(UnitTest& unitTest, const std::string& fileName, int lineNumber, const std::string& errorMessage);
+        UnitTestFailPrintManager(UnitTest& unitTest, const std::string& fileName, int lineNumber, const std::string& errorMessage, LogLevel logLevel = LogLevel::Trace);
         ~UnitTestFailPrintManager() noexcept = default;
         UnitTestFailPrintManager(const UnitTestFailPrintManager& rhs) = delete;
         UnitTestFailPrintManager& operator=(const UnitTestFailPrintManager& rhs) = delete;

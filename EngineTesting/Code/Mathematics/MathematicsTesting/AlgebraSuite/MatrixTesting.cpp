@@ -9,7 +9,7 @@
 
 #include "MatrixTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
@@ -17,14 +17,25 @@
 #include "Mathematics/Algebra/PlaneDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
 using std::uniform_real;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, MatrixTesting)
+Mathematics::MatrixTesting::MatrixTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, MatrixTesting)
+
+void Mathematics::MatrixTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::MatrixTesting::MainTest()
 {
@@ -773,9 +784,9 @@ void Mathematics::MatrixTesting::OperatorCalculateTest()
     default_random_engine generator{};
     const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         MatrixF fifthMatrix(randomDistribution(generator),
                             randomDistribution(generator),
@@ -972,9 +983,9 @@ void Mathematics::MatrixTesting::ArithmeticCalculateTest()
     default_random_engine generator{};
     const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         HomogeneousPointF firstPoint(randomDistribution(generator),
                                      randomDistribution(generator),
@@ -1127,9 +1138,9 @@ void Mathematics::MatrixTesting::ProjectionTest()
     default_random_engine generator{};
     const uniform_real<float> randomDistribution{ -100.0f, 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         AVectorF firstVector(randomDistribution(generator),
                              randomDistribution(generator),
@@ -1238,9 +1249,9 @@ void Mathematics::MatrixTesting::HomogeneousPointTest()
     default_random_engine generator{};
     const uniform_real<float> randomDistribution{ -100.0f, 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         HomogeneousPointF firstPoint(randomDistribution(generator),
                                      randomDistribution(generator),
@@ -1359,7 +1370,7 @@ void Mathematics::MatrixTesting::HomogeneousPointTest()
     vector<APointF> firstAPointVector;
     vector<AVectorF> firstVectorVector;
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const HomogeneousPointF fifthPoint(randomDistribution(generator),
                                            randomDistribution(generator),
@@ -1466,9 +1477,9 @@ void Mathematics::MatrixTesting::Invert3x3Test()
     default_random_engine generator{};
     const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const MatrixF firstMatrix(randomDistribution(generator),
                                   randomDistribution(generator),

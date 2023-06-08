@@ -105,7 +105,7 @@ bool Rendering::BspNode::UpdateWorldData(double applicationTime)
 
     const auto result = Node::UpdateWorldData(applicationTime);
 
-    worldPlane = modelPlane.GetHomogeneousPoint() * GetWorldTransform().GetInverseMatrix();
+    worldPlane = Mathematics::PlaneF{ modelPlane.GetHomogeneousPoint() * GetWorldTransform().GetInverseMatrix() };
 
     return result;
 }

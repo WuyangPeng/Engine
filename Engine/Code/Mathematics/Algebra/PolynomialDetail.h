@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 14:28)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 17:13)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_DETAIL_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_DETAIL_H
@@ -21,36 +21,39 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real>::Polynomial(int degree)
     : coeff(0 <= degree ? degree + 1 : 0)
 {
     if (coeff.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("构造的多项式degree为负数！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("构造的多项式degree为负数！"s))
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real>::Polynomial(const ContainerType& coeff)
     : coeff{ coeff }
 {
     if (coeff.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("多项式为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("多项式为空。"s))
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real>::Polynomial(ContainerType&& coeff)
     : coeff{ coeff }
 {
     if (coeff.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("多项式为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("多项式为空。"s))
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -59,7 +62,7 @@ Mathematics::Polynomial<Real>::Polynomial(ContainerType&& coeff)
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::Polynomial<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::Polynomial<Real>::IsValid() const noexcept
 {
     if (!coeff.empty())
         return true;
@@ -70,13 +73,14 @@ bool Mathematics::Polynomial<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Polynomial<Real>::ResetDegree(int degree)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
     if (degree < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("构造的多项式degree为负数！"));
+        THROW_EXCEPTION(SYSTEM_TEXT("构造的多项式degree为负数！"))
     }
 
     coeff.clear();
@@ -87,6 +91,7 @@ void Mathematics::Polynomial<Real>::ResetDegree(int degree)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::Polynomial<Real>::GetDegree() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -95,6 +100,7 @@ int Mathematics::Polynomial<Real>::GetDegree() const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 const Real& Mathematics::Polynomial<Real>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -103,6 +109,7 @@ const Real& Mathematics::Polynomial<Real>::operator[](int index) const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real& Mathematics::Polynomial<Real>::operator[](int index)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -111,32 +118,25 @@ Real& Mathematics::Polynomial<Real>::operator[](int index)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Polynomial<Real>::GetBegin() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-    return coeff[0];
-
-#include STSTEM_WARNING_POP
+    return coeff.at(0);
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Polynomial<Real>::GetEnd() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-    return coeff[coeff.size() - 1];
-
-#include STSTEM_WARNING_POP
+    return coeff.at(coeff.size() - 1);
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Polynomial<Real>::operator()(Real value) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -153,6 +153,7 @@ Real Mathematics::Polynomial<Real>::operator()(Real value) const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Polynomial<Real>::ContainerType Mathematics::Polynomial<Real>::GetValue() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -161,36 +162,39 @@ typename Mathematics::Polynomial<Real>::ContainerType Mathematics::Polynomial<Re
 }
 
 template <typename Real>
-void Mathematics::Polynomial<Real>::SetValue(const ContainerType& newCoeff)
+requires std::is_arithmetic_v<Real>
+void Mathematics::Polynomial<Real>::SetValue(const ContainerType& aCoeff)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    if (newCoeff.empty())
+    if (aCoeff.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("多项式为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("多项式为空。"s))
     }
     else
     {
-        coeff = newCoeff;
+        coeff = aCoeff;
     }
 }
 
 template <typename Real>
-void Mathematics::Polynomial<Real>::SetValue(ContainerType&& newCoeff)
+requires std::is_arithmetic_v<Real>
+void Mathematics::Polynomial<Real>::SetValue(ContainerType&& aCoeff)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    if (newCoeff.empty())
+    if (aCoeff.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("多项式为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("多项式为空。"s))
     }
     else
     {
-        coeff = std::move(newCoeff);
+        coeff = std::move(aCoeff);
     }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::operator-() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -202,10 +206,11 @@ Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::operator-() const
         result.emplace_back(-value);
     }
 
-    return Polynomial<Real>{ std::move(result) };
+    return Polynomial{ std::move(result) };
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator+=(const Polynomial& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -219,18 +224,14 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator+=(const P
 
     for (auto i = 0u; i < result.coeff.size(); ++i)
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        coeff[i] += result.coeff[i];
-
-#include STSTEM_WARNING_POP
+        coeff.at(i) += result.coeff.at(i);
     }
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator-=(const Polynomial& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -241,6 +242,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator-=(const P
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator*=(const Polynomial& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -251,36 +253,29 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator*=(const P
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator+=(Real scalar) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-    coeff[0] += scalar;
-
-#include STSTEM_WARNING_POP
+    coeff.at(0) += scalar;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator-=(Real scalar) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-    coeff[0] -= scalar;
-
-#include STSTEM_WARNING_POP
+    coeff.at(0) -= scalar;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator*=(Real scalar) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -294,6 +289,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator*=(Real sc
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator/=(Real scalar)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -307,20 +303,20 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator/=(Real sc
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("除零错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("除零错误！"s))
     }
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::GetDerivative() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto degree = GetDegree();
-
-    if (0 < degree)
+    if (const auto degree = GetDegree();
+        0 < degree)
     {
         Polynomial result{ degree - 1 };
 
@@ -328,12 +324,7 @@ Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::GetDerivative() con
         {
             const auto nextIndex = index + 1;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-            result[index] = nextIndex * coeff[nextIndex];
-
-#include STSTEM_WARNING_POP
+            result[index] = nextIndex * coeff.at(nextIndex);
         }
         return result;
     }
@@ -346,6 +337,7 @@ Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::GetDerivative() con
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::GetInversion() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -357,18 +349,14 @@ Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::GetInversion() cons
     {
         const auto reverseIndex = degree - i;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        result[i] = coeff[reverseIndex];
-
-#include STSTEM_WARNING_POP
+        result[i] = coeff.at(reverseIndex);
     }
 
     return result;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::GetTranslation(Real t0) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -385,6 +373,7 @@ Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::GetTranslation(Real
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Polynomial<Real>::EliminateLeadingZeros(Real epsilon)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -396,6 +385,7 @@ void Mathematics::Polynomial<Real>::EliminateLeadingZeros(Real epsilon)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Polynomial<Real>::Compress(Real epsilon)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -409,12 +399,7 @@ void Mathematics::Polynomial<Real>::Compress(Real epsilon)
         result[degree] = Math::GetValue(1);
         for (auto i = 0; i < degree; ++i)
         {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-            result[i] = coeff[i] / coeff[degree];
-
-#include STSTEM_WARNING_POP
+            result[i] = coeff.at(i) / coeff.at(degree);
         }
 
         SetValue(std::move(result.coeff));
@@ -422,6 +407,7 @@ void Mathematics::Polynomial<Real>::Compress(Real epsilon)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 int Mathematics::Polynomial<Real>::GetCompressDegree(Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -430,10 +416,7 @@ int Mathematics::Polynomial<Real>::GetCompressDegree(Real epsilon) const
 
     for (auto i = degree; 0 <= i; --i)
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        if (Math::FAbs(coeff[i]) <= epsilon)
+        if (Math::FAbs(coeff.at(i)) <= epsilon)
         {
             --degree;
         }
@@ -441,14 +424,13 @@ int Mathematics::Polynomial<Real>::GetCompressDegree(Real epsilon) const
         {
             break;
         }
-
-#include STSTEM_WARNING_POP
     }
 
     return degree;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Polynomial<Real>::PolynomialDivide Mathematics::Polynomial<Real>::Divide(const Polynomial& divisor, Real epsilon) const
 {
     const auto degree = GetDegree();
@@ -463,7 +445,7 @@ typename Mathematics::Polynomial<Real>::PolynomialDivide Mathematics::Polynomial
         Polynomial remainder{ *this };
 
         // 做除法（欧几里得算法）。
-        auto inv = Math::GetValue(1) / divisor[divisorDegree];
+        const auto inv = Math::GetValue(1) / divisor[divisorDegree];
         for (auto quotientIndex = quotientDegree; 0 <= quotientIndex; --quotientIndex)
         {
             auto divisorIndex = divisorDegree + quotientIndex;
@@ -526,8 +508,8 @@ Mathematics::Polynomial<Real> Mathematics::GreatestCommonDivisor(const Polynomia
 
     for (;;)
     {
-        const auto polynomialDivide = Divide(a, b);
-        if (!Approximate(polynomialDivide.GetRemainder(), zero, epsilon))
+        if (const auto polynomialDivide = Divide(a, b);
+            !Approximate(polynomialDivide.GetRemainder(), zero, epsilon))
         {
             a = b;
             b = polynomialDivide.GetRemainder();
@@ -548,14 +530,14 @@ std::vector<Mathematics::Polynomial<Real>> Mathematics::SquareFreeFactorization(
 {
     std::vector<Polynomial<Real>> factors{};
 
-    auto fder = f.GetDerivative();
+    const auto fDerivative = f.GetDerivative();
 
-    auto a = GreatestCommonDivisor(f, fder);
+    auto a = GreatestCommonDivisor(f, fDerivative);
     auto polynomialDivide = Divide(f, a);
     auto b = polynomialDivide.GetQuotient();
     auto r = polynomialDivide.GetRemainder();
 
-    polynomialDivide = Divide(fder, a);
+    polynomialDivide = Divide(fDerivative, a);
     auto c = polynomialDivide.GetQuotient();
     r = polynomialDivide.GetRemainder();
     auto d = c - b.GetDerivative();
@@ -574,13 +556,14 @@ std::vector<Mathematics::Polynomial<Real>> Mathematics::SquareFreeFactorization(
         r = polynomialDivide.GetRemainder();
 
         d = c - b.GetDerivative();
+
     } while (0 < b.GetDegree());
 
     return factors;
 }
 
 template <typename T>
-bool Mathematics::Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rhs, const T epsilon)
+bool Mathematics::Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rhs, T epsilon)
 {
     if (lhs.GetDegree() != rhs.GetDegree())
     {

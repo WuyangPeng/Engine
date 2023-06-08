@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_OBJECTS2D_SUITE_POLYGON2_TESTING_H
 #define MATHEMATICS_OBJECTS2D_SUITE_POLYGON2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Polygon2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Polygon2Testing);
+        using ClassType = Polygon2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Polygon2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

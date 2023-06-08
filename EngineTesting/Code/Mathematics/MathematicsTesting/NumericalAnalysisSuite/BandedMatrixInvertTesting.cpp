@@ -9,11 +9,11 @@
 
 #include "BandedMatrixInvertTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
 #include "Mathematics/NumericalAnalysis/BandedMatrixInvertDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -27,7 +27,18 @@ namespace Mathematics
     template class BandedMatrixInvert<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, BandedMatrixInvertTesting)
+Mathematics::BandedMatrixInvertTesting::BandedMatrixInvertTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, BandedMatrixInvertTesting)
+
+void Mathematics::BandedMatrixInvertTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::BandedMatrixInvertTesting::MainTest()
 {
@@ -40,9 +51,9 @@ void Mathematics::BandedMatrixInvertTesting::BandedTest()
     const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
     const uniform_int<> integerRandomDistribution(4, 10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const auto size = integerRandomDistribution(generator);
 

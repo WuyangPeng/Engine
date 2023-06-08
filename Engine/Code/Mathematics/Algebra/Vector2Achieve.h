@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/01/31 3:54)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/01 09:33)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR2_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR2_ACHIEVE_H
@@ -20,7 +20,7 @@
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::Vector2<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::Vector2<Real>::IsValid() const noexcept
 {
     return true;
 }
@@ -28,33 +28,36 @@ bool Mathematics::Vector2<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Vector2<Real>::GetX() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_X;
+    return x;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Vector2<Real>::GetY() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Y;
+    return y;
 }
 
 template <typename Real>
-bool Mathematics::Vector2<Real>::IsZero(const Real epsilon) const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::Vector2<Real>::IsZero(Real epsilon) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (Math::FAbs(m_X) <= epsilon && Math::FAbs(m_Y) <= epsilon)
+    if (Math::FAbs(x) <= epsilon && Math::FAbs(y) <= epsilon)
         return true;
     else
         return false;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Vector2<Real>::ZeroOut() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -63,54 +66,55 @@ void Mathematics::Vector2<Real>::ZeroOut() noexcept
 }
 
 template <typename Real>
-void Mathematics::Vector2<Real>::SetCoordinate(Real x, Real y) noexcept
+requires std::is_arithmetic_v<Real>
+void Mathematics::Vector2<Real>::SetCoordinate(Real aX, Real aY) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X = x;
-    m_Y = y;
+    x = aX;
+    y = aY;
 }
 
 template <typename Real>
-void Mathematics::Vector2<Real>::SetCoordinate(const ArrayType& coordinate) noexcept
+requires std::is_arithmetic_v<Real>
+void Mathematics::Vector2<Real>::SetCoordinate(const ArrayType& coordinate)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-    m_X = coordinate[xIndex];
-    m_Y = coordinate[yIndex];
-
-#include STSTEM_WARNING_POP
+    x = coordinate.at(xIndex);
+    y = coordinate.at(yIndex);
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Vector2<Real>::ArrayType Mathematics::Vector2<Real>::GetCoordinate() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return ArrayType{ m_X, m_Y };
+    return ArrayType{ x, y };
 }
 
 template <typename Real>
-void Mathematics::Vector2<Real>::SetX(Real x) noexcept
+requires std::is_arithmetic_v<Real>
+void Mathematics::Vector2<Real>::SetX(Real aX) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X = x;
+    x = aX;
 }
 
 template <typename Real>
-void Mathematics::Vector2<Real>::SetY(Real y) noexcept
+requires std::is_arithmetic_v<Real>
+void Mathematics::Vector2<Real>::SetY(Real aY) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Y = y;
+    y = aY;
 }
 
 template <typename Real>
-void Mathematics::Vector2<Real>::Normalize(const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+requires std::is_arithmetic_v<Real>
+void Mathematics::Vector2<Real>::Normalize(Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -129,6 +133,7 @@ void Mathematics::Vector2<Real>::Normalize(const Real epsilon) noexcept(gAssert 
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Vector2<Real>::GetMaxAbsComp() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -137,7 +142,8 @@ Real Mathematics::Vector2<Real>::GetMaxAbsComp() const noexcept
 }
 
 template <typename Real>
-void Mathematics::Vector2<Real>::RobustNormalize(const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+requires std::is_arithmetic_v<Real>
+void Mathematics::Vector2<Real>::RobustNormalize(Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -155,7 +161,7 @@ void Mathematics::Vector2<Real>::RobustNormalize(const Real epsilon) noexcept(gA
 }
 
 template <typename Real>
-bool Mathematics::Vector2<Real>::IsNormalize(const Real epsilon) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
+requires std::is_arithmetic_v<Real> bool Mathematics::Vector2<Real>::IsNormalize(Real epsilon) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -168,14 +174,16 @@ bool Mathematics::Vector2<Real>::IsNormalize(const Real epsilon) const noexcept(
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector2<Real> Mathematics::Vector2<Real>::operator-() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Vector2{ -m_X, -m_Y };
+    return Vector2{ -x, -y };
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 const Real& Mathematics::Vector2<Real>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -184,6 +192,7 @@ const Real& Mathematics::Vector2<Real>::operator[](int index) const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real& Mathematics::Vector2<Real>::operator[](int index)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -192,6 +201,7 @@ Real& Mathematics::Vector2<Real>::operator[](int index)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 const Real& Mathematics::Vector2<Real>::operator[](PointIndex index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -199,17 +209,18 @@ const Real& Mathematics::Vector2<Real>::operator[](PointIndex index) const
     switch (index)
     {
         case PointIndex::X:
-            return m_X;
+            return x;
         case PointIndex::Y:
-            return m_Y;
+            return y;
         default:
             break;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s))
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real& Mathematics::Vector2<Real>::operator[](PointIndex index)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -218,47 +229,51 @@ Real& Mathematics::Vector2<Real>::operator[](PointIndex index)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector2<Real>& Mathematics::Vector2<Real>::operator+=(const Vector2& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X += rhs.m_X;
-    m_Y += rhs.m_Y;
+    x += rhs.x;
+    y += rhs.y;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector2<Real>& Mathematics::Vector2<Real>::operator-=(const Vector2& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X -= rhs.m_X;
-    m_Y -= rhs.m_Y;
+    x -= rhs.x;
+    y -= rhs.y;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector2<Real>& Mathematics::Vector2<Real>::operator*=(Real rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X *= rhs;
-    m_Y *= rhs;
+    x *= rhs;
+    y *= rhs;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector2<Real>& Mathematics::Vector2<Real>::operator/=(Real rhs) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
     if (Math::GetZeroTolerance() < Math::FAbs(rhs))
     {
-        m_X /= rhs;
-        m_Y /= rhs;
+        x /= rhs;
+        y /= rhs;
     }
     else
     {
@@ -271,6 +286,7 @@ Mathematics::Vector2<Real>& Mathematics::Vector2<Real>::operator/=(Real rhs) noe
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Vector2<Real>::BarycentricCoordinates Mathematics::Vector2<Real>::GetBarycentrics(const Vector2& vector0, const Vector2& vector1, const Vector2& vector2, const Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -278,25 +294,15 @@ typename Mathematics::Vector2<Real>::BarycentricCoordinates Mathematics::Vector2
     // 计算相对于该三角形vector2的向量。
     std::array<Vector2, pointSize + 1> difference{ vector0 - vector2, vector1 - vector2, *this - vector2 };
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-    auto det = ToolsType::DotPerp(difference[xIndex], difference[yIndex]);
-
-#include STSTEM_WARNING_POP
+    auto det = ToolsType::DotPerp(difference.at(xIndex), difference.at(yIndex));
 
     if (epsilon < Math::FAbs(det))
     {
         constexpr auto z = pointSize;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        CoreTools::Tuple<z + 1, Real> bary{ ToolsType::DotPerp(difference[z], difference[yIndex]) / det,
-                                            ToolsType::DotPerp(difference[xIndex], difference[z]) / det,
+        CoreTools::Tuple<z + 1, Real> bary{ ToolsType::DotPerp(difference.at(z), difference.at(yIndex)) / det,
+                                            ToolsType::DotPerp(difference.at(xIndex), difference.at(z)) / det,
                                             Math::GetValue(0) };
-
-#include STSTEM_WARNING_POP
 
         bary[z] = Math::GetValue(1) - bary[xIndex] - bary[yIndex];
 
@@ -315,6 +321,7 @@ typename Mathematics::Vector2<Real>::BarycentricCoordinates Mathematics::Vector2
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector2<Real> Mathematics::Vector2<Real>::GetMove(Real t, const Vector2& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_9;

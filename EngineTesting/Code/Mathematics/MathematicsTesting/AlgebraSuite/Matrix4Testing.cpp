@@ -9,7 +9,7 @@
 
 #include "Matrix4Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
@@ -19,14 +19,25 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4Detail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
 using std::uniform_real;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Matrix4Testing)
+Mathematics::Matrix4Testing::Matrix4Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Matrix4Testing)
+
+void Mathematics::Matrix4Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Matrix4Testing::MainTest()
 {
@@ -422,9 +433,7 @@ void Mathematics::Matrix4Testing::OperatorCalculateTest()
     default_random_engine generator{};
     const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Matrix4F fifthMatrix(randomDistribution(generator),
                              randomDistribution(generator),
@@ -621,9 +630,7 @@ void Mathematics::Matrix4Testing::ArithmeticCalculateTest()
     default_random_engine generator{};
     const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const Matrix4F::Vector4 firstVector(randomDistribution(generator),
                                             randomDistribution(generator),
@@ -714,9 +721,7 @@ void Mathematics::Matrix4Testing::ProjectionTest()
     default_random_engine generator{};
     const uniform_real<float> randomDistribution{ -100.0f, 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Matrix3F::Vector3 firstVector(randomDistribution(generator),
                                       randomDistribution(generator),

@@ -14,6 +14,7 @@
 
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/LogManager/LogManagerFwd.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 #include <string>
@@ -35,7 +36,8 @@ namespace CoreTools
                                  const std::string& fileName,
                                  int lineNumber,
                                  const std::string& errorMessage,
-                                 const OStreamShared& streamShared);
+                                 const OStreamShared& streamShared,
+                                 LogLevel logLevel);
 
         CLASS_INVARIANT_DECLARE;
 

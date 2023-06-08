@@ -9,12 +9,12 @@
 
 #include "DynamicIntersectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/MathematicsTesting/IntersectionSuite/Detail/DynamicIntersectorTestDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 namespace Mathematics
@@ -25,7 +25,18 @@ namespace Mathematics
     template class DynamicIntersectorTest<double, Vector3>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DynamicIntersectorTesting)
+Mathematics::DynamicIntersectorTesting::DynamicIntersectorTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, DynamicIntersectorTesting)
+
+void Mathematics::DynamicIntersectorTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::DynamicIntersectorTesting::MainTest()
 {
@@ -34,12 +45,14 @@ void Mathematics::DynamicIntersectorTesting::MainTest()
 
 void Mathematics::DynamicIntersectorTesting::IntersectionTypeTest()
 {
+    using System::operator++;
+
     std::default_random_engine generator;
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         for (auto i = IntersectionType::Empty; i <= IntersectionType::Other; ++i)
         {

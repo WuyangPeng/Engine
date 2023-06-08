@@ -225,7 +225,8 @@
 				  QuerySharedStringsTesting、
 				  QueryXmlDataTesting。
 （5）Excel转csv功能： ExcelConversionCSVTesting、
-					  BatchConversionCSVTesting。
+					  BatchConversionCSVTesting、
+					  BatchConversionCodeTesting。
 （6）csv解析：CSVDataTesting、
 			  CSVTypeConversionTesting、
 			  CSVHeadTesting、
@@ -234,7 +235,8 @@
 			  CSVGenerateTesting、
 			  CSVTotalGenerateTesting、
 			  CSVConfigureTesting、
-			  DataTypeDescribeTesting。
+			  DataTypeDescribeTesting、
+			  CSVConfigureLoadingTesting。
 （7）json解析： JsonHeadTesting、
 				JsonNodeContainerTesting、
 				JsonNodeTesting、

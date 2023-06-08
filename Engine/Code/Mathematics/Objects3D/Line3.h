@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 14:03)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:45)
 
-#ifndef MATHEMATICS_OBJECTS3D_LINE3_H
-#define MATHEMATICS_OBJECTS3D_LINE3_H
+#ifndef MATHEMATICS_OBJECTS_3D_LINE3_H
+#define MATHEMATICS_OBJECTS_3D_LINE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -32,7 +32,7 @@ namespace Mathematics
     public:
         // 线表示为P+t*D，其中P是线原点，D是单位长度的方向向量，t是任意实数。
         // 用户必须确保D是单位长度。
-        Line3(const Vector3& origin, const Vector3& direction, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        Line3(const Vector3& origin, const Vector3& direction, Real epsilon = Math::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -48,7 +48,7 @@ namespace Mathematics
     };
 
     template <typename Real>
-    NODISCARD bool Approximate(const Line3<Real>& lhs, const Line3<Real>& rhs, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+    NODISCARD bool Approximate(const Line3<Real>& lhs, const Line3<Real>& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
     // 调试输出
     template <typename Real>
@@ -58,4 +58,4 @@ namespace Mathematics
     using Line3D = Line3<double>;
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_LINE3_H
+#endif  // MATHEMATICS_OBJECTS_3D_LINE3_H

@@ -9,19 +9,30 @@
 
 #include "ConversionRationalTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/Log2OfPowerOfTwoDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/ConversionRationalDetail.h"
 #include "Mathematics/Rational/IntegerDataDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, ConversionRationalTesting)
+Mathematics::ConversionRationalTesting::ConversionRationalTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, ConversionRationalTesting)
+
+void Mathematics::ConversionRationalTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::ConversionRationalTesting::MainTest()
 {
@@ -40,9 +51,9 @@ void Mathematics::ConversionRationalTesting::NumericalValueSymbolTest()
     const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
     const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
         const ConversionRational<float> firstConversionRational(firstValue);
@@ -102,9 +113,9 @@ void Mathematics::ConversionRationalTesting::ExponentTest()
     const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
     const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
         const ConversionRational<float> firstConversionRational(firstValue);
@@ -195,9 +206,9 @@ void Mathematics::ConversionRationalTesting::MantissaTest()
     const uniform_int<> fifthRandomDistribution(0, 38);
     const uniform_int<> sixthRandomDistribution(0, 308);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
         const ConversionRational<float> firstConversionRational(firstValue);
@@ -310,7 +321,7 @@ void Mathematics::ConversionRationalTesting::IntegerTest()
     ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
     ASSERT_EQUAL(firstIntegerConversion.GetDenominatorShifting(), 0);
     ASSERT_EQUAL(firstIntegerConversion.GetDenominatorMantissa(), 1);
-    ASSERT_EQUAL(static_cast<uint32_t>(firstIntegerConversion.GetMaxShifting()), Log2OfPowerOfTwo<uint32_t>(22).GetLog2());
+    ASSERT_EQUAL(firstIntegerConversion.GetMaxShifting(), Log2OfPowerOfTwo<uint32_t>(22).GetLog2());
     ASSERT_EQUAL(firstIntegerConversion.GetReducibilityShifting(), 0);
 
     const ConversionRational<int16_t> secondIntegerConversion(-120);
@@ -320,7 +331,7 @@ void Mathematics::ConversionRationalTesting::IntegerTest()
     ASSERT_ENUM_EQUAL(secondIntegerConversion.GetSymbol(), NumericalValueSymbol::Negative);
     ASSERT_EQUAL(secondIntegerConversion.GetDenominatorShifting(), 0);
     ASSERT_EQUAL(secondIntegerConversion.GetDenominatorMantissa(), 1);
-    ASSERT_EQUAL(static_cast<uint32_t>(secondIntegerConversion.GetMaxShifting()), Log2OfPowerOfTwo<uint32_t>(120).GetLog2());
+    ASSERT_EQUAL(secondIntegerConversion.GetMaxShifting(), Log2OfPowerOfTwo<uint32_t>(120).GetLog2());
     ASSERT_EQUAL(secondIntegerConversion.GetReducibilityShifting(), 0);
 
     const ConversionRational<int64_t> thirdIntegerConversion(0);
@@ -343,7 +354,7 @@ void Mathematics::ConversionRationalTesting::UnsignedIntegerTest()
     ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
     ASSERT_EQUAL(firstIntegerConversion.GetDenominatorShifting(), 0);
     ASSERT_EQUAL(firstIntegerConversion.GetDenominatorMantissa(), 1);
-    ASSERT_EQUAL(static_cast<uint32_t>(firstIntegerConversion.GetMaxShifting()), Log2OfPowerOfTwo<uint32_t>(22).GetLog2());
+    ASSERT_EQUAL(firstIntegerConversion.GetMaxShifting(), Log2OfPowerOfTwo<uint32_t>(22).GetLog2());
     ASSERT_EQUAL(firstIntegerConversion.GetReducibilityShifting(), 0);
 
     const ConversionRational<uint8_t> secondIntegerConversion(120);
@@ -353,7 +364,7 @@ void Mathematics::ConversionRationalTesting::UnsignedIntegerTest()
     ASSERT_ENUM_EQUAL(secondIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
     ASSERT_EQUAL(secondIntegerConversion.GetDenominatorShifting(), 0);
     ASSERT_EQUAL(secondIntegerConversion.GetDenominatorMantissa(), 1);
-    ASSERT_EQUAL(static_cast<uint8_t>(secondIntegerConversion.GetMaxShifting()), Log2OfPowerOfTwo<uint8_t>(120).GetLog2());
+    ASSERT_EQUAL(secondIntegerConversion.GetMaxShifting(), Log2OfPowerOfTwo<uint8_t>(120).GetLog2());
     ASSERT_EQUAL(secondIntegerConversion.GetReducibilityShifting(), 0);
 
     const ConversionRational<uint64_t> thirdIntegerConversion(0);

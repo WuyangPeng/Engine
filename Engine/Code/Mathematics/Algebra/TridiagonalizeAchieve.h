@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 17:02)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 17:57)
 
 #ifndef MATHEMATICS_ALGEBRA_TRIDIAGONALIZE_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_TRIDIAGONALIZE_ACHIEVE_H
@@ -15,8 +15,9 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Tridiagonalize<Real>::Tridiagonalize(const Matrix3& matrix)
-    : inputMatrix{ matrix }, outputMatrix{ MatrixInitType::Identity }, reflection{ false }, diagonal{}, subdiagonal{}
+    : inputMatrix{ matrix }, outputMatrix{ MatrixInitType::Identity }, reflection{ false }, diagonal{}, subDiagonal{}
 {
     MATHEMATICS_ASSERTION_1(Math::FAbs(inputMatrix.GetValue<0, 1>() - inputMatrix.GetValue<1, 0>()) <= Math::GetZeroTolerance(), "矩阵必须是对称矩阵。");
     MATHEMATICS_ASSERTION_1(Math::FAbs(inputMatrix.GetValue<0, 2>() - inputMatrix.GetValue<2, 0>()) <= Math::GetZeroTolerance(), "矩阵必须是对称矩阵。");
@@ -34,13 +35,14 @@ Mathematics::Tridiagonalize<Real>::Tridiagonalize(const Matrix3& matrix)
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
-bool Mathematics::Tridiagonalize<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::Tridiagonalize<Real>::IsValid() const noexcept
 {
     return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Tridiagonalize<Real>::Init()
 {
     // Householder reduction T = Q^t M Q
@@ -49,7 +51,7 @@ void Mathematics::Tridiagonalize<Real>::Init()
     //   输出:
     //     outputMatrix, 正交矩阵 Q (反射)
     //     diagonal, T的对角线 T
-    //     subdiagonal,T的次对角项 T (T 是对称的)
+    //     subDiagonal,T的次对角项 T (T 是对称的)
 
     auto m00 = inputMatrix.GetValue<0, 0>();
     auto m01 = inputMatrix.GetValue<0, 1>();
@@ -60,18 +62,18 @@ void Mathematics::Tridiagonalize<Real>::Init()
 
     diagonal = Vector3{ m00, Math::GetValue(0), Math::GetValue(0) };
 
-    subdiagonal = Vector2::GetZero();
+    subDiagonal = Vector2::GetZero();
 
     if (Math::GetZeroTolerance() <= Math::FAbs(m02))
     {
-        subdiagonal.SetX(Math::Sqrt(m01 * m01 + m02 * m02));
-        auto invLength = Math::GetValue(1) / subdiagonal.GetX();
+        subDiagonal.SetX(Math::Sqrt(m01 * m01 + m02 * m02));
+        auto invLength = Math::GetValue(1) / subDiagonal.GetX();
         m01 *= invLength;
         m02 *= invLength;
         auto temp = Math::GetValue(2) * m01 * m12 + m02 * (m22 - m11);
         diagonal.SetY(m11 + m02 * temp);
         diagonal.SetZ(m22 - m02 * temp);
-        subdiagonal.SetY(m12 - m01 * temp);
+        subDiagonal.SetY(m12 - m01 * temp);
 
         outputMatrix = Matrix3{ Math::GetValue(1), Math::GetValue(0), Math::GetValue(0),
                                 Math::GetValue(0), m01, m02,
@@ -83,7 +85,7 @@ void Mathematics::Tridiagonalize<Real>::Init()
     {
         diagonal.SetY(m11);
         diagonal.SetZ(m22);
-        subdiagonal = Vector2{ m01, m12 };
+        subDiagonal = Vector2{ m01, m12 };
 
         outputMatrix.MakeIdentity();
 
@@ -92,23 +94,24 @@ void Mathematics::Tridiagonalize<Real>::Init()
 }
 
 template <typename Real>
-bool Mathematics::Tridiagonalize<Real>::IsValueNear(Real subdiagonal, Real lhsDiagonal, Real rhsDiagonal) noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::Tridiagonalize<Real>::IsValueNear(Real subDiagonal, Real lhsDiagonal, Real rhsDiagonal) noexcept
 {
     const auto sum = Math::FAbs(lhsDiagonal) + Math::FAbs(rhsDiagonal);
 
-    if (Math::FAbs(Math::FAbs(subdiagonal) + sum - sum) <= Math::epsilon)
+    if (Math::FAbs(Math::FAbs(subDiagonal) + sum - sum) <= Math::epsilon)
         return true;
     else
         return false;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Tridiagonalize<Real>::UpdateDiagonal(int lhsIndex, int rhsIndex)
 {
     // 计算特征值的一元二次方程的根。
     const auto sum = diagonal[lhsIndex] + diagonal[rhsIndex];
     const auto difference = diagonal[lhsIndex] - diagonal[rhsIndex];
-    const auto discr = Math::Sqrt(difference * difference + (Math::GetValue(4) * subdiagonal[lhsIndex] * subdiagonal[lhsIndex]));
+    const auto discr = Math::Sqrt(difference * difference + (Math::GetValue(4) * subDiagonal[lhsIndex] * subDiagonal[lhsIndex]));
     const auto eigenvalue0 = Math::GetRational(1, 2) * (sum - discr);
     const auto eigenvalue1 = Math::GetRational(1, 2) * (sum + discr);
 
@@ -118,13 +121,13 @@ void Mathematics::Tridiagonalize<Real>::UpdateDiagonal(int lhsIndex, int rhsInde
     // 计算Givens旋转。
     if (Math::GetValue(0) <= difference)
     {
-        cosValue = subdiagonal[lhsIndex];
+        cosValue = subDiagonal[lhsIndex];
         sinValue = diagonal[lhsIndex] - eigenvalue0;
     }
     else
     {
         cosValue = diagonal[rhsIndex] - eigenvalue0;
-        sinValue = subdiagonal[lhsIndex];
+        sinValue = subDiagonal[lhsIndex];
     }
 
     const auto invSqrt = Math::InvSqrt(cosValue * cosValue + sinValue * sinValue);
@@ -138,10 +141,11 @@ void Mathematics::Tridiagonalize<Real>::UpdateDiagonal(int lhsIndex, int rhsInde
     // 更新三角矩阵。
     diagonal[lhsIndex] = eigenvalue0;
     diagonal[rhsIndex] = eigenvalue1;
-    subdiagonal = Vector2::GetZero();
+    subDiagonal = Vector2::GetZero();
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Tridiagonalize<Real>::GivensRotation(int lhsIndex, int rhsIndex, Real cosValue, Real sinValue)
 {
     for (auto row = 0; row < Vector3::pointSize; ++row)
@@ -153,7 +157,7 @@ void Mathematics::Tridiagonalize<Real>::GivensRotation(int lhsIndex, int rhsInde
 }
 
 template <typename Real>
-bool Mathematics::Tridiagonalize<Real>::QLAlgorithm()
+requires std::is_arithmetic_v<Real> bool Mathematics::Tridiagonalize<Real>::QLAlgorithm()
 {
     // 这是基于书“矩阵计算”第二版（Gene H. Golub 和 Charles F. Van Loan）
     // 实现的对称QR算法。该算法在8.2.3。
@@ -163,7 +167,7 @@ bool Mathematics::Tridiagonalize<Real>::QLAlgorithm()
     constexpr auto indexMax = 32;
     for (auto i = 0; i < indexMax; ++i)
     {
-        if (IsValueNear(subdiagonal.GetX(), diagonal.GetX(), diagonal.GetY()))
+        if (IsValueNear(subDiagonal.GetX(), diagonal.GetX(), diagonal.GetY()))
         {
             // 该矩阵是有效的
             //       +-        -+
@@ -174,7 +178,7 @@ bool Mathematics::Tridiagonalize<Real>::QLAlgorithm()
             // Init函数将矩阵初始化为这种形式，所以下面的其他逻辑不会涉及。
 
             // 测试M是否是对角线矩阵（数字四舍五入）。
-            if (IsValueNear(subdiagonal.GetY(), diagonal.GetY(), diagonal.GetY()))
+            if (IsValueNear(subDiagonal.GetY(), diagonal.GetY(), diagonal.GetY()))
             {
                 return true;
             }
@@ -184,7 +188,7 @@ bool Mathematics::Tridiagonalize<Real>::QLAlgorithm()
             return true;
         }
 
-        if (IsValueNear(subdiagonal.GetY(), diagonal.GetY(), diagonal.GetY()))
+        if (IsValueNear(subDiagonal.GetY(), diagonal.GetY(), diagonal.GetY()))
         {
             // 该矩阵是有效
             //       +-         -+
@@ -194,7 +198,7 @@ bool Mathematics::Tridiagonalize<Real>::QLAlgorithm()
             //       +-         -+
 
             // 测试M是否是对角线矩阵（数字四舍五入）。
-            if (IsValueNear(subdiagonal.GetX(), diagonal.GetX(), diagonal.GetY()))
+            if (IsValueNear(subDiagonal.GetX(), diagonal.GetX(), diagonal.GetY()))
             {
                 return true;
             }
@@ -213,32 +217,32 @@ bool Mathematics::Tridiagonalize<Real>::QLAlgorithm()
 
         // 设置参数为QL步骤的第一阶段中。
         // 对于A的值是在对角项D[2]和隐式移位的差由Wilkinson建议。
-        auto ratio = (diagonal.GetY() - diagonal.GetX()) / (Math::GetValue(2) * subdiagonal.GetX());
+        auto ratio = (diagonal.GetY() - diagonal.GetX()) / (Math::GetValue(2) * subDiagonal.GetX());
         auto root = Math::Sqrt(Math::GetValue(1) + ratio * ratio);
-        auto subdiagonalY = subdiagonal.GetY();
+        auto subDiagonalY = subDiagonal.GetY();
         auto a = diagonal.GetZ() - diagonal.GetX();
         if (Math::GetValue(0) <= ratio)
         {
-            a += subdiagonal.GetX() / (ratio + root);
+            a += subDiagonal.GetX() / (ratio + root);
         }
         else
         {
-            a += subdiagonal.GetX() / (ratio - root);
+            a += subDiagonal.GetX() / (ratio - root);
         }
 
         auto cosValue = Math::GetValue(0);
         auto sinValue = Math::GetValue(0);
 
         // 计算Givens旋转的第一遍。
-        if (Math::FAbs(a) <= Math::FAbs(subdiagonalY))
+        if (Math::FAbs(a) <= Math::FAbs(subDiagonalY))
         {
-            ratio = a / subdiagonalY;
+            ratio = a / subDiagonalY;
             sinValue = Math::InvSqrt((Math::GetValue(1) + ratio * ratio));
             cosValue = ratio * sinValue;
         }
         else
         {
-            ratio = subdiagonalY / a;
+            ratio = subDiagonalY / a;
             cosValue = Math::InvSqrt(Math::GetValue(1) + ratio * ratio);
             sinValue = ratio * cosValue;
         }
@@ -248,26 +252,26 @@ bool Mathematics::Tridiagonalize<Real>::QLAlgorithm()
 
         // 设置参数为QL步骤的第二步。
         // 值tmp0和tmp1需要在第二阶段结束时，才能全面更新三对角矩阵。
-        auto value0 = (diagonal.GetY() - diagonal.GetZ()) * sinValue + Math::GetValue(2) * subdiagonal.GetY() * cosValue;
-        auto value1 = cosValue * subdiagonal.GetX();
-        subdiagonalY = sinValue * subdiagonal.GetX();
-        a = cosValue * value0 - subdiagonal.GetY();
+        auto value0 = (diagonal.GetY() - diagonal.GetZ()) * sinValue + Math::GetValue(2) * subDiagonal.GetY() * cosValue;
+        auto value1 = cosValue * subDiagonal.GetX();
+        subDiagonalY = sinValue * subDiagonal.GetX();
+        a = cosValue * value0 - subDiagonal.GetY();
         value0 *= sinValue;
 
         // 计算Givens旋转的第二遍。m_Subdiagonal的项S[1]在三对角矩阵，此时被更新。
-        if (Math::FAbs(a) <= Math::FAbs(subdiagonalY))
+        if (Math::FAbs(a) <= Math::FAbs(subDiagonalY))
         {
-            ratio = a / subdiagonalY;
+            ratio = a / subDiagonalY;
             root = Math::Sqrt(Math::GetValue(1) + ratio * ratio);
-            subdiagonal.SetY(subdiagonalY * root);
+            subDiagonal.SetY(subDiagonalY * root);
             sinValue = Math::GetValue(1) / root;
             cosValue = ratio * sinValue;
         }
         else
         {
-            ratio = subdiagonalY / a;
+            ratio = subDiagonalY / a;
             root = Math::Sqrt(Math::GetValue(1) + ratio * ratio);
-            subdiagonal.SetY(a * root);
+            subDiagonal.SetY(a * root);
             cosValue = Math::GetValue(1) / root;
             sinValue = ratio * cosValue;
         }
@@ -279,7 +283,7 @@ bool Mathematics::Tridiagonalize<Real>::QLAlgorithm()
         auto tmp2 = diagonal.GetY() - value0;
         diagonal[2] += value0;
         value0 = (diagonal.GetX() - tmp2) * sinValue + Math::GetValue(2) * value1 * cosValue;
-        subdiagonal.SetX(cosValue * value0 - value1);
+        subDiagonal.SetX(cosValue * value0 - value1);
         value0 *= sinValue;
         diagonal.SetY(tmp2 + value0);
         diagonal[0] -= value0;
@@ -289,7 +293,7 @@ bool Mathematics::Tridiagonalize<Real>::QLAlgorithm()
 }
 
 template <typename Real>
-bool Mathematics::Tridiagonalize<Real>::IsReflection() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::Tridiagonalize<Real>::IsReflection() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -297,6 +301,7 @@ bool Mathematics::Tridiagonalize<Real>::IsReflection() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Tridiagonalize<Real>::Matrix3 Mathematics::Tridiagonalize<Real>::GetRotation() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -305,6 +310,7 @@ typename Mathematics::Tridiagonalize<Real>::Matrix3 Mathematics::Tridiagonalize<
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Tridiagonalize<Real>::Vector3 Mathematics::Tridiagonalize<Real>::GetDiagonal() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;

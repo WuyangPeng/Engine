@@ -10,21 +10,27 @@
 #ifndef MATHEMATICS_OBJECTS3D_SUITE_TETRAHEDRON3_TESTING_H
 #define MATHEMATICS_OBJECTS3D_SUITE_TETRAHEDRON3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
-	class Tetrahedron3Testing : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Tetrahedron3Testing); 
+    class Tetrahedron3Testing : public CoreTools::UnitTest
+    {
+    public:
+        using ClassType = Tetrahedron3Testing;
+        using ParentType = UnitTest;
 
-	private:
-		void MainTest();
-		void TetrahedronTest();
-	
-		void DoRunUnitTest() override;	 
-	};
+    public:
+        explicit Tetrahedron3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+    private:
+        void MainTest();
+        void TetrahedronTest();
+
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // MATHEMATICS_OBJECTS3D_SUITE_TETRAHEDRON3_TESTING_H
+#endif  // MATHEMATICS_OBJECTS3D_SUITE_TETRAHEDRON3_TESTING_H

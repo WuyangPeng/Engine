@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_RATIONAL_SUITE_INT64_VECTOR_TESTING_H
 #define MATHEMATICS_RATIONAL_SUITE_INT64_VECTOR_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Int64VectorTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Int64VectorTesting);
+        using ClassType = Int64VectorTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Int64VectorTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

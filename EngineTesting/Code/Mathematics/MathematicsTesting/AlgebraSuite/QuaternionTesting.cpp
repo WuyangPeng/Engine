@@ -9,12 +9,12 @@
 
 #include "QuaternionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Matrix3.h"
 #include "Mathematics/Algebra/QuaternionDetail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
-
 #include <random>
 #include <vector>
 
@@ -23,7 +23,18 @@ using std::uniform_int;
 using std::uniform_real;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, QuaternionTesting)
+Mathematics::QuaternionTesting::QuaternionTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, QuaternionTesting)
+
+void Mathematics::QuaternionTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::QuaternionTesting::MainTest()
 {
@@ -81,9 +92,9 @@ void Mathematics::QuaternionTesting::ConstructionTest()
     const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
     const uniform_real<float> secondRandomDistribution{ 0.0f, MathF::GetTwoPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Vector3F firstVector(firstRandomDistribution(generator),
                              firstRandomDistribution(generator),
@@ -205,9 +216,9 @@ void Mathematics::QuaternionTesting::OperatorCalculateTest()
     const uniform_real<double> firstRandomDistribution{ -100.0f, 100.0f };
     const uniform_real<double> secondRandomDistribution{ 0.0f, MathF::GetTwoPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Vector3D firstVector(firstRandomDistribution(generator),
                              firstRandomDistribution(generator),
@@ -347,9 +358,9 @@ void Mathematics::QuaternionTesting::ArithmeticCalculateTest()
     const uniform_real<float> thirdRandomDistribution{ 0.0f, 1.0f };
     const uniform_int<> fourthRandomDistribution(0, 20);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         QuaternionF firstQuaternion(firstRandomDistribution(generator),
                                     firstRandomDistribution(generator),
@@ -549,18 +560,18 @@ void Mathematics::QuaternionTesting::ArithmeticCalculateTest()
         fourthVector.Normalize();
         firstVector.Normalize();
 
-        fifthVector = Vector3ToolsD::CrossProduct(fourthVector, firstVector);
+        fifthVector = Vector3ToolsD::CrossProduct(fourthVector, Vector3D{ firstVector });
 
         fifthVector.Normalize();
 
-        angle = Vector3ToolsD::GetVectorIncludedAngle(fourthVector, firstVector);
+        angle = Vector3ToolsD::GetVectorIncludedAngle(fourthVector, Vector3D{ firstVector });
 
         seventhQuaternion.FromAxisAngle(fifthVector, angle);
-        fifthQuaternion.Align(fourthVector, firstVector, 1e-7);
+        fifthQuaternion.Align(fourthVector, Vector3D{ firstVector }, 1e-7);
 
         ASSERT_TRUE(Approximate(seventhQuaternion, fifthQuaternion, 1e-6));
 
-        QuaternionD::QuaternionSwingTwist quaternionSwingTwist = eighthQuaternion.DecomposeTwistTimesSwing(firstVector, 1e-7);
+        QuaternionD::QuaternionSwingTwist quaternionSwingTwist = eighthQuaternion.DecomposeTwistTimesSwing(Vector3D{ firstVector }, 1e-7);
 
         seventhQuaternion = quaternionSwingTwist.GetTwist() * quaternionSwingTwist.GetSwing();
 
@@ -568,21 +579,21 @@ void Mathematics::QuaternionTesting::ArithmeticCalculateTest()
         ASSERT_APPROXIMATE(seventhQuaternion[3], eighthQuaternion[3], 1e-6);
 
         fifthVector = eighthQuaternion.Rotate(Vector3D(firstVector));
-        fifthQuaternion.Align(firstVector, fifthVector, 1e-7);
+        fifthQuaternion.Align(Vector3D{ firstVector }, fifthVector, 1e-7);
         seventhQuaternion = eighthQuaternion * fifthQuaternion.Conjugate();
 
         ASSERT_TRUE(Approximate(seventhQuaternion, quaternionSwingTwist.GetTwist(), 1e-10));
 
         ASSERT_TRUE(Approximate(fifthQuaternion, quaternionSwingTwist.GetSwing(), 1e-10));
 
-        quaternionSwingTwist = eighthQuaternion.DecomposeSwingTimesTwist(firstVector, 1e-7);
+        quaternionSwingTwist = eighthQuaternion.DecomposeSwingTimesTwist(Vector3D{ firstVector }, 1e-7);
 
         seventhQuaternion = quaternionSwingTwist.GetSwing() * quaternionSwingTwist.GetTwist();
 
         ASSERT_TRUE(Approximate(seventhQuaternion, eighthQuaternion, 1e-6));
 
         fifthVector = eighthQuaternion.Rotate(Vector3D(firstVector));
-        fifthQuaternion.Align(firstVector, fifthVector, 1e-7);
+        fifthQuaternion.Align(Vector3D{ firstVector }, fifthVector, 1e-7);
         seventhQuaternion = fifthQuaternion.Conjugate() * eighthQuaternion;
 
         ASSERT_TRUE(Approximate(fifthQuaternion, quaternionSwingTwist.GetSwing(), 1e-10));
@@ -604,9 +615,9 @@ void Mathematics::QuaternionTesting::ClosestCalculateTest()
     const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
     const uniform_real<float> secondRandomDistribution{ 0.0f, MathF::GetTwoPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         QuaternionF firstQuaternion(firstRandomDistribution(generator),
                                     firstRandomDistribution(generator),
@@ -775,9 +786,9 @@ void Mathematics::QuaternionTesting::FactorCalculateTest()
     default_random_engine generator{};
     const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         QuaternionF firstQuaternion(firstRandomDistribution(generator),
                                     firstRandomDistribution(generator),
@@ -889,9 +900,9 @@ void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
     const uniform_real<float> firstRandomDistribution{ -MathF::GetHalfPI(), MathF::GetHalfPI() };
     const uniform_real<float> thirdRandomDistribution{ -100.0f, 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const float firstAngle = firstRandomDistribution(generator);
 

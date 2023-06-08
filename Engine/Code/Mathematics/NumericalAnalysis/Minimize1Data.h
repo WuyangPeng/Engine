@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/15 11:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:42)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DATA_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DATA_H
@@ -36,14 +36,14 @@ namespace Mathematics
         NODISCARD Real GetMinLocation() const noexcept;
         NODISCARD Real GetMinValue() const noexcept;
 
-        void SetMinLocation(Real minLocation) noexcept;
-        void SetMinValue(Real minValue) noexcept;
+        void SetMinLocation(Real aMinLocation) noexcept;
+        void SetMinValue(Real aMinValue) noexcept;
         void SetInitValue() noexcept;
-        void CompareData(Real minLocation, Real minValue) noexcept;
+        void CompareData(Real aMinLocation, Real aMinValue) noexcept;
 
     private:
-        Real mMinLocation;
-        Real mMinValue;
+        Real minLocation;
+        Real minValue;
     };
 
     using Minimize1DataF = Minimize1Data<float>;

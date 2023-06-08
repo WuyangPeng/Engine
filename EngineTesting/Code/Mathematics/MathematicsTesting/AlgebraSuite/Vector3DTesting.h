@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_BASE_SUITE_VECTOR_3D_TESTING_H
 #define MATHEMATICS_BASE_SUITE_VECTOR_3D_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Vector3Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector3Testing);
+        using ClassType = Vector3Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Vector3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

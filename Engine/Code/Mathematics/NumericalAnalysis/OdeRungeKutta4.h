@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/16 14:48)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:43)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_ODE_RUNGE_KUTTA4_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_ODE_RUNGE_KUTTA4_H
@@ -27,7 +27,7 @@ namespace Mathematics
         using ClassType = OdeRungeKutta4<Real, UserDataType>;
         using ParentType = OdeSolver<Real, UserDataType>;
         using Math = Math<Real>;
-        using Data = ParentType::Data;
+        using Data = typename ParentType::Data;
         using Function = typename ParentType::Function;
         using Container = typename ParentType::Container;
 

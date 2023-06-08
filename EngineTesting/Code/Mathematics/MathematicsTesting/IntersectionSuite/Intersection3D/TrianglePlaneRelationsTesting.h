@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_INTERSECTION_SUITE_TRIANGLE_PLANE_RELATIONS_TESTING_H
 #define MATHEMATICS_INTERSECTION_SUITE_TRIANGLE_PLANE_RELATIONS_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class TrianglePlaneRelationsTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(TrianglePlaneRelationsTesting);
+        using ClassType = TrianglePlaneRelationsTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit TrianglePlaneRelationsTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

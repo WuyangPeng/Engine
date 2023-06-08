@@ -114,7 +114,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDetailNeste
     content += TextParsing::gForLoop;
     content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
     content += TextParsing::gRightBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gFunctionBeginBrackets;
@@ -259,7 +259,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateDetailDefin
         content += TextParsing::gForLoop;
         content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
         content += TextParsing::gRightBrackets;
-        content += TextParsing::gNewline;
+        content += TextParsing::gNewlineCharacter;
 
         content += TextParsing::gIndentation;
         content += TextParsing::gFunctionBeginBrackets;
@@ -337,7 +337,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateIsDefinitio
     content += TextParsing::gSmallConst;
     content += TextParsing::gSpace;
     content += TextParsing::gNoexcept;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
     content += TextParsing::gFunctionBeginBrackets;
 
     content += TextParsing::gIndentation;
@@ -373,7 +373,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateGetDefiniti
     content += TextParsing::gSmallConst;
     content += TextParsing::gSpace;
     content += TextParsing::gNoexcept;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
     content += TextParsing::gFunctionBeginBrackets;
 
     content += TextParsing::gIndentation;
@@ -411,7 +411,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateGetNestedDe
     content += TextParsing::gSmallConst;
     content += TextParsing::gSpace;
     content += TextParsing::gNoexcept;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
     content += TextParsing::gFunctionBeginBrackets;
 
     content += TextParsing::gIndentation;
@@ -607,7 +607,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateGetNestedAr
     content += TextParsing::gRightBrackets;
     content += TextParsing::gSpace;
     content += TextParsing::gSmallConst;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gFunctionBeginBrackets;
 
@@ -653,7 +653,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateGetNestedAr
 
     content += TextParsing::gIndentation;
     content += TextParsing::gElse;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gFunctionBeginBrackets;
@@ -825,7 +825,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateContainerIs
     content += TextParsing::gSmallConst;
     content += TextParsing::gSpace;
     content += TextParsing::gNoexcept;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
     content += TextParsing::gFunctionBeginBrackets;
 
     content += TextParsing::gIndentation;
@@ -862,7 +862,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateContainerGe
     content += TextParsing::gSmallConst;
     content += TextParsing::gSpace;
     content += TextParsing::gNoexcept;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
     content += TextParsing::gFunctionBeginBrackets;
 
     content += TextParsing::gIndentation;
@@ -905,7 +905,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateContainerGe
     content += TextParsing::gSmallConst;
     content += TextParsing::gSpace;
     content += TextParsing::gNoexcept;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
     content += TextParsing::gFunctionBeginBrackets;
 
     content += TextParsing::gIndentation;
@@ -1110,7 +1110,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateContainerGe
     content += TextParsing::gRightBrackets;
     content += TextParsing::gSpace;
     content += TextParsing::gSmallConst;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gFunctionBeginBrackets;
 
@@ -1156,7 +1156,7 @@ System::String CoreTools::JsonGenerateGetFunctionDefinition::GenerateContainerGe
 
     content += TextParsing::gIndentation;
     content += TextParsing::gElse;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gFunctionBeginBrackets;

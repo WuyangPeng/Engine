@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/03 14:42)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/01 10:50)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR4_TOOLS_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR4_TOOLS_ACHIEVE_H
@@ -16,7 +16,7 @@
 #include "Vector4Tools.h"
 
 template <typename Real>
-bool Mathematics::Vector4Tools<Real>::Approximate(const Vector4& lhs, const Vector4& rhs, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+requires std::is_arithmetic_v<Real> bool Mathematics::Vector4Tools<Real>::Approximate(const Vector4& lhs, const Vector4& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= epsilon, "epsilon必须大于或等于0！");
 
@@ -27,6 +27,7 @@ bool Mathematics::Vector4Tools<Real>::Approximate(const Vector4& lhs, const Vect
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Vector4Tools<Real>::GetRobustLength(const Vector4& vector)
 {
     const auto maxAbsComp = vector.GetMaxAbsComp();
@@ -43,12 +44,14 @@ Real Mathematics::Vector4Tools<Real>::GetRobustLength(const Vector4& vector)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Vector4Tools<Real>::GetLength(const Vector4& vector) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     return Math::Sqrt(GetLengthSquared(vector));
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Vector4Tools<Real>::GetLengthSquared(const Vector4& vector) noexcept
 {
     return vector.GetX() * vector.GetX() +
@@ -58,12 +61,14 @@ Real Mathematics::Vector4Tools<Real>::GetLengthSquared(const Vector4& vector) no
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Vector4Tools<Real>::Distance(const Vector4& lhs, const Vector4& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     return Math::Sqrt(DistanceSquared(lhs, rhs));
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Vector4Tools<Real>::DistanceSquared(const Vector4& lhs, const Vector4& rhs) noexcept
 {
     const auto distanceX = lhs.GetX() - rhs.GetX();
@@ -75,6 +80,7 @@ Real Mathematics::Vector4Tools<Real>::DistanceSquared(const Vector4& lhs, const 
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Vector4Tools<Real>::DotProduct(const Vector4& lhs, const Vector4& rhs) noexcept
 {
     return (lhs.GetX() * rhs.GetX() +
@@ -84,7 +90,8 @@ Real Mathematics::Vector4Tools<Real>::DotProduct(const Vector4& lhs, const Vecto
 }
 
 template <typename Real>
-typename Mathematics::Vector4Tools<Real>::Vector4 Mathematics::Vector4Tools<Real>::ParallelVectorLhsToRhs(const Vector4& lhs, const Vector4& rhs, const Real epsilon)
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Vector4Tools<Real>::Vector4 Mathematics::Vector4Tools<Real>::ParallelVectorLhsToRhs(const Vector4& lhs, const Vector4& rhs, Real epsilon)
 {
     const auto moduleSquare = GetLengthSquared(rhs);
 
@@ -101,18 +108,21 @@ typename Mathematics::Vector4Tools<Real>::Vector4 Mathematics::Vector4Tools<Real
 }
 
 template <typename Real>
-typename Mathematics::Vector4Tools<Real>::Vector4 Mathematics::Vector4Tools<Real>::ApeakVectorLhsToRhs(const Vector4& lhs, const Vector4& rhs, const Real epsilon)
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Vector4Tools<Real>::Vector4 Mathematics::Vector4Tools<Real>::ApeakVectorLhsToRhs(const Vector4& lhs, const Vector4& rhs, Real epsilon)
 {
     return lhs - ParallelVectorLhsToRhs(lhs, rhs, epsilon);
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Vector4Tools<Real>::GetVectorIncludedAngle(const Vector4& lhs, const Vector4& rhs) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     return Math::ACos(DotProduct(lhs, rhs) / (GetLength(lhs) * GetLength(rhs)));
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Vector4Tools<Real>::AxesAlignBoundingBox4D Mathematics::Vector4Tools<Real>::ComputeExtremes(const ContainerType& vectors)
 {
     Vector4 min{ Math::maxReal, Math::maxReal, Math::maxReal, Math::maxReal };
@@ -138,12 +148,14 @@ typename Mathematics::Vector4Tools<Real>::AxesAlignBoundingBox4D Mathematics::Ve
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3<Real> Mathematics::Vector4Tools<Real>::ProjectHomogeneous(const Vector4& vector) noexcept
 {
     return Vector3{ vector.GetX(), vector.GetY(), vector.GetZ() };
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector3<Real> Mathematics::Vector4Tools<Real>::Project(const Vector4& vector, int reject)
 {
     Vector3 result{};
@@ -167,14 +179,15 @@ Mathematics::Vector3<Real> Mathematics::Vector4Tools<Real>::Project(const Vector
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector4<Real> Mathematics::Vector4Tools<Real>::HyperCross(const Vector4& v0, const Vector4& v1, const Vector4& v2)
 {
-    Real m01 = v0[0] * v1[1] - v0[1] * v1[0];  // x0 * y1 - y0 * x1
-    Real m02 = v0[0] * v1[2] - v0[2] * v1[0];  // x0 * z1 - z0 * x1
-    Real m03 = v0[0] * v1[3] - v0[3] * v1[0];  // x0 * w1 - w0 * x1
-    Real m12 = v0[1] * v1[2] - v0[2] * v1[1];  // y0 * z1 - z0 * y1
-    Real m13 = v0[1] * v1[3] - v0[3] * v1[1];  // y0 * w1 - w0 * y1
-    Real m23 = v0[2] * v1[3] - v0[3] * v1[2];  // z0 * w1 - w0 * z1
+    const auto m01 = v0[0] * v1[1] - v0[1] * v1[0];  // x0 * y1 - y0 * x1
+    const auto m02 = v0[0] * v1[2] - v0[2] * v1[0];  // x0 * z1 - z0 * x1
+    const auto m03 = v0[0] * v1[3] - v0[3] * v1[0];  // x0 * w1 - w0 * x1
+    const auto m12 = v0[1] * v1[2] - v0[2] * v1[1];  // y0 * z1 - z0 * y1
+    const auto m13 = v0[1] * v1[3] - v0[3] * v1[1];  // y0 * w1 - w0 * y1
+    const auto m23 = v0[2] * v1[3] - v0[3] * v1[2];  // z0 * w1 - w0 * z1
 
     return Vector4{
         +m23 * v2[1] - m13 * v2[2] + m12 * v2[3],  // +m23 * y2 - m13 * z2 + m12 * w2
@@ -185,6 +198,7 @@ Mathematics::Vector4<Real> Mathematics::Vector4Tools<Real>::HyperCross(const Vec
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector4<Real> Mathematics::Vector4Tools<Real>::UnitHyperCross(const Vector4& v0, const Vector4& v1, const Vector4& v2, bool robust, const Real epsilon)
 {
     auto unitHyperCross = HyperCross(v0, v1, v2);
@@ -202,13 +216,15 @@ Mathematics::Vector4<Real> Mathematics::Vector4Tools<Real>::UnitHyperCross(const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Vector4Tools<Real>::DotHyperCross(const Vector4& v0, const Vector4& v1, const Vector4& v2, const Vector4& v3)
 {
     return DotProduct(HyperCross(v0, v1, v2), v3);
 }
 
 template <typename Real>
-Real Mathematics::Vector4Tools<Real>::ComputeOrthogonalComplement(const ContainerType& container, bool robust, const Real epsilon)
+requires std::is_arithmetic_v<Real>
+Real Mathematics::Vector4Tools<Real>::ComputeOrthogonalComplement(const ContainerType& container, bool robust, Real epsilon)
 {
     auto vector = container;
     if (vector.size() == 1u)
@@ -253,7 +269,7 @@ Real Mathematics::Vector4Tools<Real>::ComputeOrthogonalComplement(const Containe
                                  v0[1] * v1[3] - v1[1] * v0[3],
                                  v0[2] * v1[3] - v1[2] * v0[3] };
 
-        auto maxIndex = 0;
+        auto maxIndex = 0u;
         auto maxAbsValue = Math::FAbs(det.at(0));
         for (auto i = 1u; i < det.size(); ++i)
         {
@@ -290,7 +306,8 @@ Real Mathematics::Vector4Tools<Real>::ComputeOrthogonalComplement(const Containe
 }
 
 template <typename Real>
-Real Mathematics::Vector4Tools<Real>::Orthonormalize(const ContainerType& container, bool robust, const Real epsilon)
+requires std::is_arithmetic_v<Real>
+Real Mathematics::Vector4Tools<Real>::Orthonormalize(const ContainerType& container, bool robust, Real epsilon)
 {
     auto vector = container;
     auto& v0 = vector.at(0);

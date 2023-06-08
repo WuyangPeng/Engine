@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 14:24)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 17:12)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_H
@@ -25,11 +25,10 @@
 namespace Mathematics
 {
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class Polynomial final : private boost::additive<Polynomial<Real>, boost::additive<Polynomial<Real>, Real, boost::multiplicative<Polynomial<Real>, Real>>>
     {
     public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-
         using ClassType = Polynomial<Real>;
         using PolynomialDivide = PolynomialDivide<Real>;
         using Math = Math<Real>;
@@ -57,8 +56,8 @@ namespace Mathematics
         NODISCARD Real operator()(Real value) const;
 
         NODISCARD ContainerType GetValue() const;
-        void SetValue(const ContainerType& newCoeff);
-        void SetValue(ContainerType&& newCoeff);
+        void SetValue(const ContainerType& aCoeff);
+        void SetValue(ContainerType&& aCoeff);
 
         NODISCARD Polynomial operator-() const;
 
@@ -106,7 +105,7 @@ namespace Mathematics
     NODISCARD Polynomial<Real> GreatestCommonDivisor(const Polynomial<Real>& lhs, const Polynomial<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance());
 
     template <typename T>
-    NODISCARD bool Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance());
+    NODISCARD bool Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rhs, T epsilon = Math<T>::GetZeroTolerance());
 
     template <typename Real>
     std::vector<Polynomial<Real>> SquareFreeFactorization(const Polynomial<Real>& f);

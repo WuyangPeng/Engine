@@ -9,11 +9,11 @@
 
 #include "IntegerDataAnalysisTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/IntegerDataAnalysisDetail.h"
 #include "Mathematics/Rational/IntegerDataDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::vector;
 
 namespace Mathematics
@@ -29,7 +29,18 @@ namespace Mathematics
     template class IntegerDataAnalysis<12>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerDataAnalysisTesting)
+Mathematics::IntegerDataAnalysisTesting::IntegerDataAnalysisTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, IntegerDataAnalysisTesting)
+
+void Mathematics::IntegerDataAnalysisTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::IntegerDataAnalysisTesting::MainTest()
 {

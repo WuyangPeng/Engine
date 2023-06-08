@@ -334,10 +334,10 @@ int Rendering::LightImpl::GetStreamingSize() const noexcept
     size += CoreTools::GetStreamSize(cosAngle);
     size += CoreTools::GetStreamSize(sinAngle);
     size += CoreTools::GetStreamSize(exponent);
-    size += MATHEMATICS_STREAM_SIZE(position);
-    size += MATHEMATICS_STREAM_SIZE(directionVector);
-    size += MATHEMATICS_STREAM_SIZE(upVector);
-    size += MATHEMATICS_STREAM_SIZE(rightVector);
+    size += Mathematics::GetStreamSize(position);
+    size += Mathematics::GetStreamSize(directionVector);
+    size += Mathematics::GetStreamSize(upVector);
+    size += Mathematics::GetStreamSize(rightVector);
 
     return size;
 }

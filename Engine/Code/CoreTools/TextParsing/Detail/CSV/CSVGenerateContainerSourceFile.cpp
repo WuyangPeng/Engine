@@ -52,7 +52,7 @@ System::String CoreTools::CSVGenerateContainerSourceFile::GetContent() const
     const CSVGenerateHead csvGenerateHead{ GetCSVHead(), GetSuffix() };
     content += csvGenerateHead.GenerateContainerSourceHead();
 
-    const CSVGenerateDefaultFunctionDefinition csvGenerateDefaultFunctionDefinition{ GetCSVHead(), GetSuffix() };
+    const CSVGenerateDefaultFunctionDefinition csvGenerateDefaultFunctionDefinition{ GetCSVHead(), GetSuffix(), GetKeyTypeDescribe() };
     content += csvGenerateDefaultFunctionDefinition.GenerateContainerDefaultFunctionDefinition();
 
     const CSVGenerateGetFunctionDefinition csvGenerateGetFunctionDefinition{ GetCSVHead(), GetSuffix() };

@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 10:30)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:20)
 
-#ifndef MATHEMATICS_OBJECTS2D_LINE2_ACHIEVE_H
-#define MATHEMATICS_OBJECTS2D_LINE2_ACHIEVE_H
+#ifndef MATHEMATICS_OBJECTS_2D_LINE2_ACHIEVE_H
+#define MATHEMATICS_OBJECTS_2D_LINE2_ACHIEVE_H
 
 #include "Line2.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -17,7 +17,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::Line2<Real>::Line2(const Vector2& origin, const Vector2& direction, const Real epsilon) noexcept
+Mathematics::Line2<Real>::Line2(const Vector2& origin, const Vector2& direction, Real epsilon) noexcept
     : origin{ origin }, direction{ direction }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -91,4 +91,4 @@ Real Mathematics::Line2<Real>::DotProduct() const noexcept
     return Vector2Tools::DotProduct(direction, origin);
 }
 
-#endif  // MATHEMATICS_OBJECTS2D_LINE2_ACHIEVE_H
+#endif  // MATHEMATICS_OBJECTS_2D_LINE2_ACHIEVE_H

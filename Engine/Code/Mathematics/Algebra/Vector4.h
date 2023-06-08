@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/01 22:09)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/01 10:48)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR4_H
 #define MATHEMATICS_ALGEBRA_VECTOR4_H
@@ -25,6 +25,7 @@
 namespace Mathematics
 {
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector4 final : private boost::additive<Vector4<Real>, boost::multiplicative<Vector4<Real>, Real, boost::totally_ordered<Vector4<Real>>>>
     {
     public:
@@ -55,21 +56,21 @@ namespace Mathematics
 
     public:
         constexpr Vector4() noexcept
-            : m_X{}, m_Y{}, m_Z{}, m_W{}
+            : x{}, y{}, z{}, w{}
         {
         }
 
         constexpr Vector4(Real x, Real y, Real z, Real w) noexcept
-            : m_X{ x }, m_Y{ y }, m_Z{ z }, m_W{ w }
+            : x{ x }, y{ y }, z{ z }, w{ w }
         {
         }
 
         template <typename RhsType>
-        Vector4(const Vector2<RhsType>& vector);
+        explicit Vector4(const Vector2<RhsType>& vector);
         template <typename RhsType>
-        Vector4(const Vector3<RhsType>& vector);
+        explicit Vector4(const Vector3<RhsType>& vector);
         template <typename RhsType>
-        Vector4(const Vector4<RhsType>& vector);
+        explicit Vector4(const Vector4<RhsType>& vector);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -81,19 +82,19 @@ namespace Mathematics
         NODISCARD Real GetY() const noexcept;
         NODISCARD Real GetZ() const noexcept;
         NODISCARD Real GetW() const noexcept;
-        NODISCARD bool IsZero(const Real epsilon = Math::GetZeroTolerance()) const noexcept;
+        NODISCARD bool IsZero(Real epsilon = Math::GetZeroTolerance()) const noexcept;
 
         void ZeroOut() noexcept;
-        void SetCoordinate(Real x, Real y, Real z, Real w) noexcept;
-        void SetX(Real x) noexcept;
-        void SetY(Real y) noexcept;
-        void SetZ(Real z) noexcept;
-        void SetW(Real w) noexcept;
-        void Normalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
-        void RobustNormalize(const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
-        void ProjectionNormalization(const Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void SetCoordinate(Real aX, Real aY, Real aZ, Real aW) noexcept;
+        void SetX(Real aX) noexcept;
+        void SetY(Real aY) noexcept;
+        void SetZ(Real aZ) noexcept;
+        void SetW(Real aW) noexcept;
+        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void RobustNormalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+        void ProjectionNormalization(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
-        NODISCARD const Vector4 operator-() const noexcept;
+        NODISCARD Vector4 operator-() const noexcept;
         NODISCARD const Real& operator[](int index) const;
         NODISCARD Real& operator[](int index);
         NODISCARD const Real& operator[](PointIndex index) const;
@@ -150,10 +151,10 @@ namespace Mathematics
         using ToolsType = Vector4Tools<Real>;
 
     private:
-        Real m_X;
-        Real m_Y;
-        Real m_Z;
-        Real m_W;
+        Real x;
+        Real y;
+        Real z;
+        Real w;
     };
 
     // STL

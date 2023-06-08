@@ -5708,6 +5708,15 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Meshes\Detail\BasicMeshVertexImpl.h">
       <Filter>Meshes 头文件\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\SortPointsOnCircle.h">
+      <Filter>Rational 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Rational\SortPointsOnCircleDetail.h">
+      <Filter>Rational 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Base\Constants.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">

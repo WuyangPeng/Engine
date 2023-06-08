@@ -9,11 +9,11 @@
 
 #include "ConvexPolyhedron3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/ConvexPolyhedron3Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class ConvexPolyhedron3<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, ConvexPolyhedron3Testing)
+Mathematics::ConvexPolyhedron3Testing::ConvexPolyhedron3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, ConvexPolyhedron3Testing)
+
+void Mathematics::ConvexPolyhedron3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::ConvexPolyhedron3Testing::MainTest()
 {
@@ -39,9 +50,9 @@ void Mathematics::ConvexPolyhedron3Testing::ConvexPolyhedronTest()
     const uniform_real<double> secondRandomDistribution(-100.0, 0.0);
     const uniform_real<double> thirdRandomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto positive = firstRandomDistribution(generator);
         auto negative = secondRandomDistribution(generator);

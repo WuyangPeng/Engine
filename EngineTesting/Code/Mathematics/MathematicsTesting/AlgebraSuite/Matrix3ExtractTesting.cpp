@@ -9,11 +9,11 @@
 
 #include "Matrix3ExtractTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/Matrix3ExtractDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class Matrix3Extract<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Matrix3ExtractTesting)
+Mathematics::Matrix3ExtractTesting::Matrix3ExtractTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Matrix3ExtractTesting)
+
+void Mathematics::Matrix3ExtractTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Matrix3ExtractTesting::MainTest()
 {
@@ -38,9 +49,7 @@ void Mathematics::Matrix3ExtractTesting::ExtractTest()
     const uniform_real<double> randomDistribution{ -10.0, 10.0 };
     const uniform_real<double> angleDistribution(0.0, MathD::GetPI());
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Vector3D firstVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
         firstVector.Normalize();

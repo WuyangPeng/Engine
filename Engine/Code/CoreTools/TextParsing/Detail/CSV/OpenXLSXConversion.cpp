@@ -130,7 +130,13 @@ std::string CoreTools::OpenXLSXConversion::GetContent(bool isFirstPage, int rowI
 
     auto columnIndex = 0;
 
-    for (const auto& xlCellValues = xlRow.values<std::vector<OpenXLSX::XLCellValue>>(); const auto& xlCellValue : xlCellValues)
+    const auto& xlCellValues = xlRow.values<std::vector<OpenXLSX::XLCellValue>>();
+    if (xlCellValues.empty() || (xlCellValues.at(0).type() == OpenXLSX::XLValueType::Empty))
+    {
+        return content;
+    }
+
+    for (const auto& xlCellValue : xlCellValues)
     {
         if (exclude.contains(columnIndex))
         {

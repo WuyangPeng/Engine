@@ -21,8 +21,8 @@
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::CSVGenerateDefaultFunctionDefinition::CSVGenerateDefaultFunctionDefinition(const CSVHead& csvHead, const String& suffix)
-    : csvHead{ csvHead }, suffix{ suffix }
+CoreTools::CSVGenerateDefaultFunctionDefinition::CSVGenerateDefaultFunctionDefinition(const CSVHead& csvHead, const String& suffix, const String& keyTypeDescribe)
+    : csvHead{ csvHead }, suffix{ suffix }, keyTypeDescribe{ keyTypeDescribe }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -35,7 +35,7 @@ System::String CoreTools::CSVGenerateDefaultFunctionDefinition::GenerateBaseDefa
 
     const auto className = csvHead.GetCSVClassName() + suffix;
 
-    const KeyDefaultFunctionDefinitionParsing defaultFunctionDefinitionParsing{ csvHead, className };
+    const KeyDefaultFunctionDefinitionParsing defaultFunctionDefinitionParsing{ csvHead, className, keyTypeDescribe };
 
     auto content = defaultFunctionDefinitionParsing.GenerateKeyConstructorDefinition();
 

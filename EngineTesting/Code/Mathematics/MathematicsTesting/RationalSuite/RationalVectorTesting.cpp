@@ -9,17 +9,28 @@
 
 #include "RationalVectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Rational/IntegerDetail.h"
 #include "Mathematics/Rational/RationalVectorDetail.h"
 #include "Mathematics/Rational/SignRationalDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
 using std::uniform_int;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, RationalVectorTesting)
+Mathematics::RationalVectorTesting::RationalVectorTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, RationalVectorTesting)
+
+void Mathematics::RationalVectorTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::RationalVectorTesting::MainTest()
 {

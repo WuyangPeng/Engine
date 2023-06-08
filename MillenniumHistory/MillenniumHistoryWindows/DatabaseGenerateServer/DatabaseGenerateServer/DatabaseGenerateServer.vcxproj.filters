@@ -85,6 +85,9 @@
     <Filter Include="资源文件\BooksMain\子集\正史類\史記之屬\史記\json\後序">
       <UniqueIdentifier>{af05e039-d4e3-427b-becd-ab9a81b6a7b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\AncientBooksCsv">
+      <UniqueIdentifier>{1dab3e38-98e6-4dee-966a-5792d9132003}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
@@ -251,6 +254,66 @@
     </None>
     <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言\目錄考證.md">
       <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Country.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Day.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Emperor.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Gather.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Genus.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Geographic.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Identity.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\ImperialCourt.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Month.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\ReignTitle.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\SexagenaryCycle.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Source.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Version.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Year.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Article.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Book.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Calendar.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Category.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Chapter.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Character.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

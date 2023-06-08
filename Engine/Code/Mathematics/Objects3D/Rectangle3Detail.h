@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 17:07)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:50)
 
-#ifndef MATHEMATICS_OBJECTS3D_RECTANGLE3_DETAIL_H
-#define MATHEMATICS_OBJECTS3D_RECTANGLE3_DETAIL_H
+#ifndef MATHEMATICS_OBJECTS_3D_RECTANGLE3_DETAIL_H
+#define MATHEMATICS_OBJECTS_3D_RECTANGLE3_DETAIL_H
 
 #include "Rectangle3.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -18,7 +18,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::Rectangle3<Real>::Rectangle3(const Vector3& center, const Vector3& axis0, const Vector3& axis1, Real extent0, Real extent1, const Real epsilon) noexcept
+Mathematics::Rectangle3<Real>::Rectangle3(const Vector3& center, const Vector3& axis0, const Vector3& axis1, Real extent0, Real extent1, Real epsilon) noexcept
     : center{ center }, axis{ axis0, axis1 }, extent{ extent0, extent1 }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -187,4 +187,4 @@ Mathematics::Rectangle3<Real> Mathematics::Rectangle3<Real>::GetMove(Real t, con
     return Rectangle3{ GetCenter() + t * velocity, GetAxis0(), GetAxis1(), GetExtent0(), GetExtent1(), epsilon };
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_RECTANGLE3_DETAIL_H
+#endif  // MATHEMATICS_OBJECTS_3D_RECTANGLE3_DETAIL_H

@@ -9,10 +9,10 @@
 
 #include "IntegerDivisionModuloTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Rational/IntegerDetail.h"
 #include "Mathematics/Rational/IntegerDivisionModuloDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class IntegerDivisionModulo<7>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerDivisionModuloTesting)
+Mathematics::IntegerDivisionModuloTesting::IntegerDivisionModuloTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, IntegerDivisionModuloTesting)
+
+void Mathematics::IntegerDivisionModuloTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::IntegerDivisionModuloTesting::MainTest()
 {
@@ -40,9 +51,9 @@ void Mathematics::IntegerDivisionModuloTesting::DenominatorIsLargeTest()
     default_random_engine generator{};
     const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(66);
         vector<uint16_t> secondShortVector(66);
@@ -113,9 +124,9 @@ void Mathematics::IntegerDivisionModuloTesting::SingleTest()
     default_random_engine generator{};
     const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(66);
         vector<uint16_t> secondShortVector(66);
@@ -177,9 +188,9 @@ void Mathematics::IntegerDivisionModuloTesting::MultipleTest()
     const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
     const uniform_int<> secondRandomDistribution(33, 66);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(68);
         vector<uint16_t> secondShortVector(68);
@@ -245,9 +256,9 @@ void Mathematics::IntegerDivisionModuloTesting::Int32Test()
     default_random_engine generator{};
     const uniform_int<> firstRandomDistribution(INT32_MIN, UINT32_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const auto firstValue = firstRandomDistribution(generator);
         const auto secondValue = firstRandomDistribution(generator);

@@ -9,10 +9,21 @@
 
 #include "Float3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/Float.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Mathematics::Float3Testing::Float3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Float3Testing)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Float3Testing)
+
+void Mathematics::Float3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Float3Testing::MainTest()
 {

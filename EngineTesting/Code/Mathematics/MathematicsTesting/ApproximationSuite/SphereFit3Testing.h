@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_APPROXIMATION_SUITE_SPHERE_FIT3_TESTING_H
 #define MATHEMATICS_APPROXIMATION_SUITE_SPHERE_FIT3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class SphereFit3Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(SphereFit3Testing);
+        using ClassType = SphereFit3Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit SphereFit3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 11:07)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:12)
 
-#ifndef MATHEMATICS_OBJECTS2D_CONVEX_POLYGON2_H
-#define MATHEMATICS_OBJECTS2D_CONVEX_POLYGON2_H
+#ifndef MATHEMATICS_OBJECTS_2D_CONVEX_POLYGON2_H
+#define MATHEMATICS_OBJECTS_2D_CONVEX_POLYGON2_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -31,10 +31,10 @@ namespace Mathematics
         using ParentType = Polygon2<Real>;
         using Line2 = Line2<Real>;
         using LineType = std::vector<Line2>;
-        using Math = ParentType::Math;
-        using Vector2 = ParentType::Vector2;
-        using VerticesType = ParentType::VerticesType;
-        using Vector2Tools = ParentType::Vector2Tools;
+        using Math = typename ParentType::Math;
+        using Vector2 = typename ParentType::Vector2;
+        using VerticesType = typename ParentType::VerticesType;
+        using Vector2Tools = typename ParentType::Vector2Tools;
 
     public:
         // 调用方负责确保顶点数组表示凸多边形，且逆时针顺序。
@@ -85,4 +85,4 @@ namespace Mathematics
     using ConvexPolygon2D = ConvexPolygon2<double>;
 }
 
-#endif  // MATHEMATICS_OBJECTS2D_CONVEX_POLYGON2_H
+#endif  // MATHEMATICS_OBJECTS_2D_CONVEX_POLYGON2_H

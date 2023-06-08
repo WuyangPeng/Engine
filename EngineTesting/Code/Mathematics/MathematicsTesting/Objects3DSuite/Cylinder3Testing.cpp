@@ -9,10 +9,10 @@
 
 #include "Cylinder3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Cylinder3Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -24,7 +24,18 @@ namespace Mathematics
     template class Cylinder3<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Cylinder3Testing)
+Mathematics::Cylinder3Testing::Cylinder3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Cylinder3Testing)
+
+void Mathematics::Cylinder3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Cylinder3Testing::MainTest()
 {
@@ -37,9 +48,9 @@ void Mathematics::Cylinder3Testing::CylinderTest()
     const uniform_real<double> firstRandomDistribution{ 0.0, 100.0 };
     const uniform_real<double> secondRandomDistribution(0.0, MathD::GetHalfPI());
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D origin(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
 

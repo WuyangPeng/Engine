@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 15:48)
+///	引擎版本：0.9.0.11 (2023/05/30 09:40)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,11 +22,11 @@ CoreTools::ReportOutput::ReportOutput(const OStreamShared& streamShared) noexcep
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ReportOutput)
 
-void CoreTools::ReportOutput::PrintString(const std::string& characterString)
+void CoreTools::ReportOutput::PrintString(const std::string& characterString, LogLevel logLevel)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(streamShared, characterString);
+    LOG_ASYNCHRONOUS_SINGLETON.Registered(streamShared, characterString, logLevel);
 }
 
 void CoreTools::ReportOutput::PrintNewLine()
@@ -36,11 +36,11 @@ void CoreTools::ReportOutput::PrintNewLine()
     LOG_ASYNCHRONOUS_SINGLETON.Registered(streamShared, "\n");
 }
 
-void CoreTools::ReportOutput::PrintNumber(int number)
+void CoreTools::ReportOutput::PrintNumber(int number, LogLevel logLevel)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    LOG_ASYNCHRONOUS_SINGLETON.Registered(streamShared, std::to_string(number));
+    LOG_ASYNCHRONOUS_SINGLETON.Registered(streamShared, std::to_string(number), logLevel);
 }
 
 CoreTools::OStreamShared CoreTools::ReportOutput::GetStream() noexcept

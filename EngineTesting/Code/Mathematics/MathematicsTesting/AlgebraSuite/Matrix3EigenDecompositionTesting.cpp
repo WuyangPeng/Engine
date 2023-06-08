@@ -9,10 +9,10 @@
 
 #include "Matrix3EigenDecompositionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/Matrix3EigenDecompositionDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -24,7 +24,18 @@ namespace Mathematics
     template class Matrix3EigenDecomposition<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Matrix3EigenDecompositionTesting)
+Mathematics::Matrix3EigenDecompositionTesting::Matrix3EigenDecompositionTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Matrix3EigenDecompositionTesting)
+
+void Mathematics::Matrix3EigenDecompositionTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Matrix3EigenDecompositionTesting::MainTest()
 {
@@ -36,9 +47,7 @@ void Mathematics::Matrix3EigenDecompositionTesting::EigenDecompositionTest()
     default_random_engine generator{};
     const uniform_real<double> randomDistribution{ -10.0, 10.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Matrix3D firstMatrix{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
                               0.0, randomDistribution(generator), randomDistribution(generator),

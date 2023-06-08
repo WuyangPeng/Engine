@@ -13,8 +13,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
-CoreTools::KeyDefaultFunctionDefinitionParsing::KeyDefaultFunctionDefinitionParsing(const CSVHead& csvHead, const String& className)
-    : ParentType{ csvHead, className }
+CoreTools::KeyDefaultFunctionDefinitionParsing::KeyDefaultFunctionDefinitionParsing(const CSVHead& csvHead, const String& className, const String& keyTypeDescribe)
+    : ParentType{ csvHead, className }, keyTypeDescribe{ keyTypeDescribe }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -25,7 +25,7 @@ System::String CoreTools::KeyDefaultFunctionDefinitionParsing::GenerateKeyConstr
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = GenerateConstructor(TextParsing::gKeyNoexcept);
+    auto content = GenerateConstructor(TextParsing::gLeftBrackets + keyTypeDescribe + SYSTEM_TEXT(" key) noexcept"));
 
     content += GenerateKeyMember();
     content += GenerateFunctionBeginBrackets();

@@ -9,12 +9,12 @@
 
 #include "BandedMatrixSolveTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/BandedMatrixSolveDetail.h"
 #include "Mathematics/Algebra/Flags/MatrixFlags.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -27,7 +27,18 @@ namespace Mathematics
     template class BandedMatrixSolve<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, BandedMatrixSolveTesting)
+Mathematics::BandedMatrixSolveTesting::BandedMatrixSolveTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, BandedMatrixSolveTesting)
+
+void Mathematics::BandedMatrixSolveTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::BandedMatrixSolveTesting::MainTest()
 {
@@ -286,9 +297,7 @@ void Mathematics::BandedMatrixSolveTesting::SolveTest()
     const uniform_int<> firstIntegerRandomDistribution{ 2, 20 };
     const uniform_real<> doubleRandomDistribution{ 1.0, 3.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const int size = firstIntegerRandomDistribution(generator);
 

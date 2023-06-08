@@ -7,12 +7,13 @@
 ///	标准：std:c++20
 ///	引擎测试版本：0.8.0.8 (2022/06/08 11:33)
 
+#include "MathTesting.h"
 #include "RandomTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Base/RandomDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -28,7 +29,18 @@ namespace Mathematics
 
 #endif  // BUILDING_MATHEMATICS_STATIC
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, RandomTesting)
+Mathematics::RandomTesting::RandomTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, RandomTesting)
+
+void Mathematics::RandomTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::RandomTesting::MainTest()
 {
@@ -40,9 +52,9 @@ void Mathematics::RandomTesting::FloatRandomTest()
 {
     // 固定值测试
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstRandom = RandomF::UnitRandom(2);
         ASSERT_TRUE(MathF::GetValue(0) <= firstRandom);
@@ -61,9 +73,9 @@ void Mathematics::RandomTesting::DoubleRandomTest()
 {
     // 固定值测试
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstRandom = RandomD::UnitRandom(5);
         ASSERT_TRUE(MathD::GetValue(0) <= firstRandom);

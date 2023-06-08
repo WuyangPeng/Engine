@@ -9,11 +9,11 @@
 
 #include "PolynomialRootsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/PolynomialDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
 #include "Mathematics/NumericalAnalysis/PolynomialRootsDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -21,7 +21,18 @@ using std::uniform_int;
 using std::uniform_real;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialRootsTesting)
+Mathematics::PolynomialRootsTesting::PolynomialRootsTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, PolynomialRootsTesting)
+
+void Mathematics::PolynomialRootsTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::PolynomialRootsTesting::MainTest()
 {
@@ -49,9 +60,9 @@ void Mathematics::PolynomialRootsTesting::OnceTest()
     default_random_engine generator;
     const uniform_real<double> firstRandomDistribution(-1.0e10, 1.0e10);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         PolynomialRootsD firstPolynomialRoots(1e-10);
 
@@ -98,9 +109,9 @@ void Mathematics::PolynomialRootsTesting::SecondaryTest()
     default_random_engine generator;
     const uniform_real<double> firstRandomDistribution(-1.0e8, 1.0e8);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         PolynomialRootsD firstPolynomialRoots(1e-10);
 
@@ -152,9 +163,9 @@ void Mathematics::PolynomialRootsTesting::ThriceTest()
     const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
     const uniform_real<double> secondRandomDistribution(-1.0e1, 1.0e1);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         PolynomialRootsD firstPolynomialRoots(1e-6);
 
@@ -291,9 +302,9 @@ void Mathematics::PolynomialRootsTesting::SpecialCubicTest()
     default_random_engine generator;
     const uniform_real<double> firstRandomDistribution(-1.0e7, 1.0e7);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         PolynomialRootsD firstPolynomialRoots(1e-6);
 
@@ -317,9 +328,9 @@ void Mathematics::PolynomialRootsTesting::QuarticTest()
     const uniform_real<double> firstRandomDistribution(-1.0e3, 1.0e3);
     const uniform_real<double> secondRandomDistribution(-2.0, 2.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         PolynomialRootsD firstPolynomialRoots(1e-6);
 
@@ -418,9 +429,9 @@ void Mathematics::PolynomialRootsTesting::PolynomialTest()
     const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
     const uniform_int<> secondRandomDistribution(2, 8);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         PolynomialRootsD firstPolynomialRoots(1e-6);
 
@@ -475,9 +486,9 @@ void Mathematics::PolynomialRootsTesting::AllRealPartsNegativeTest()
     const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
     const uniform_int<> secondRandomDistribution(2, 8);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         PolynomialRootsD firstPolynomialRoots(1e-6);
 
@@ -572,9 +583,9 @@ void Mathematics::PolynomialRootsTesting::AllRealPartsPositiveTest()
     const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
     const uniform_int<> secondRandomDistribution(2, 8);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         PolynomialRootsD firstPolynomialRoots(1e-6);
 
@@ -676,9 +687,9 @@ void Mathematics::PolynomialRootsTesting::GetRootCountTest()
     const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
     const uniform_int<> secondRandomDistribution(2, 8);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         PolynomialRootsD firstPolynomialRoots(1e-6);
 

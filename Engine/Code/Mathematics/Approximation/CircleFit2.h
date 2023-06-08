@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/17 18:12)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 17:18)
 
 #ifndef MATHEMATICS_APPROXIMATION_CIRCLE_FIT2_H
 #define MATHEMATICS_APPROXIMATION_CIRCLE_FIT2_H
@@ -45,7 +45,7 @@ namespace Mathematics
 
     private:
         void Calculate(const PointType& points, int maxIterations, bool initialCenterIsAverage);
-        NODISCARD const Vector2 GetAveragePoint(const PointType& points);
+        NODISCARD Vector2 GetAveragePoint(const PointType& points);
         void Iteration(const PointType& points, const Vector2& average);
 
     private:

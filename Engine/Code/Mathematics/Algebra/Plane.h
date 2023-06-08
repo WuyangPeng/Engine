@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 14:06)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 17:08)
 
 #ifndef MATHEMATICS_ALGEBRA_PLANE_H
 #define MATHEMATICS_ALGEBRA_PLANE_H
@@ -24,12 +24,12 @@
 namespace Mathematics
 {
     template <typename T>
+    requires std::is_arithmetic_v<T>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Plane final : boost::totally_ordered<Plane<T>>
     {
     public:
-        static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
-
         using ClassType = Plane<T>;
+
         using ElementType = T;
         using Math = Math<T>;
         using APoint = APoint<T>;
@@ -49,17 +49,17 @@ namespace Mathematics
         // 使用HomogeneousPoint或三个T构造平面，只需保证输入的法线向量是非零向量。
 
         // 直接指定N和c
-        Plane(T normalX, T normalY, T normalZ, T constant, const T epsilon = Math::GetZeroTolerance());
-        Plane(const AVector& normal, T constant, const T epsilon = Math::GetZeroTolerance()) noexcept;
+        Plane(T normalX, T normalY, T normalZ, T constant, T epsilon = Math::GetZeroTolerance());
+        Plane(const AVector& normal, T constant, T epsilon = Math::GetZeroTolerance()) noexcept;
 
         // N被指定，c = Dot(N,P)，其中 P = (p0,p1,p2,1)是在平面上的点。
-        Plane(const AVector& normal, const APoint& point, const T epsilon = Math::GetZeroTolerance()) noexcept;
+        Plane(const AVector& normal, const APoint& point, T epsilon = Math::GetZeroTolerance()) noexcept;
 
         // N = Cross(P1 - P0,P2 - P0) / Length(Cross(P1 - P0,P2 - P0))，c = Dot(N,P0)，这里P0，P1，P2是在平面上的点。
-        Plane(const APoint& lhs, const APoint& mhs, const APoint& rhs, const T epsilon = Math::GetZeroTolerance());
+        Plane(const APoint& lhs, const APoint& mhs, const APoint& rhs, T epsilon = Math::GetZeroTolerance());
 
         // 指定整个(n0,n1,n2,-c) 元组。
-        Plane(const HomogeneousPoint& homogeneousPoint, const T epsilon = Math::GetZeroTolerance());
+        explicit Plane(const HomogeneousPoint& homogeneousPoint, T epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
@@ -71,7 +71,7 @@ namespace Mathematics
 
         // 访问单个组件。
         void SetConstant(T constant) noexcept;
-        void SetEpsilon(T newEpsilon) noexcept;
+        void SetEpsilon(T aEpsilon) noexcept;
         void SetNormal(const AVector& normal) noexcept(gAssert < 2 || gMathematicsAssert < 2);
         NODISCARD T GetConstant() const noexcept;
         NODISCARD T GetEpsilon() const noexcept;
@@ -98,7 +98,7 @@ namespace Mathematics
     };
 
     template <typename T>
-    NODISCARD bool Approximate(const Plane<T>& lhs, const Plane<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance());
+    NODISCARD bool Approximate(const Plane<T>& lhs, const Plane<T>& rhs, T epsilon = Math<T>::GetZeroTolerance());
 
     // 比较（仅供STL容器使用）。
     template <typename T>

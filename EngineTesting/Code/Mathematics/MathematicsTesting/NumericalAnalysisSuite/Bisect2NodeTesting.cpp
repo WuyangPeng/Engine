@@ -9,9 +9,20 @@
 
 #include "Bisect2NodeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Mathematics::Bisect2NodeTesting::Bisect2NodeTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Bisect2NodeTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Bisect2NodeTesting)
+
+void Mathematics::Bisect2NodeTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Bisect2NodeTesting::MainTest()
 {

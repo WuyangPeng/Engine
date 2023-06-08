@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/13 14:43)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:28)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_QUARTIC_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_QUARTIC_H
@@ -27,15 +27,15 @@ namespace Mathematics
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD double Substitution(double value) const noexcept final;
-        NODISCARD Imaginary Substitution(const Imaginary& value) const final;
+        NODISCARD double Substitution(double value) const noexcept override;
+        NODISCARD Imaginary Substitution(const Imaginary& value) const override;
 
     private:
-        NODISCARD double SubstitutionTangent(double solution) const noexcept final;
-        NODISCARD Imaginary SubstitutionTangent(const Imaginary& solution) const final;
+        NODISCARD double SubstitutionTangent(double solution) const noexcept override;
+        NODISCARD Imaginary SubstitutionTangent(const Imaginary& solution) const override;
 
-        void Solving() final;
-        NODISCARD bool Predigest() final;
+        void Solving() override;
+        NODISCARD bool Predigest() override;
 
         NODISCARD double CalculateP() const noexcept;
         NODISCARD double CalculateQ() const noexcept;

@@ -10,7 +10,7 @@
 #ifndef MATHEMATICS_INTERSECTION_SUITE_STATIC_FIND_INTERSECTOR_CIRCLE2_CIRCLE2_TESTING_H
 #define MATHEMATICS_INTERSECTION_SUITE_STATIC_FIND_INTERSECTOR_CIRCLE2_CIRCLE2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorCircle2Circle2.h"
 
 namespace Mathematics
@@ -18,7 +18,13 @@ namespace Mathematics
     class StaticFindIntersectorCircle2Circle2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(StaticFindIntersectorCircle2Circle2Testing);
+        using ClassType = StaticFindIntersectorCircle2Circle2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit StaticFindIntersectorCircle2Circle2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

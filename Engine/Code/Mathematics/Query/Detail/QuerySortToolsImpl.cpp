@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/17 15:56)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 17:03)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -14,10 +14,8 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-using std::swap;
-
 Mathematics::QuerySortToolsImpl::QuerySortToolsImpl(int value0, int value1)
-    : m_SortValue{ value0, value1 }, m_Symbol{ NumericalValueSymbol::Zero }
+    : sortValue{ value0, value1 }, symbol{ NumericalValueSymbol::Zero }
 {
     SortValue2();
 
@@ -25,7 +23,7 @@ Mathematics::QuerySortToolsImpl::QuerySortToolsImpl(int value0, int value1)
 }
 
 Mathematics::QuerySortToolsImpl::QuerySortToolsImpl(int value0, int value1, int value2)
-    : m_SortValue{ value0, value1, value2 }, m_Symbol{ NumericalValueSymbol::Zero }
+    : sortValue{ value0, value1, value2 }, symbol{ NumericalValueSymbol::Zero }
 {
     SortValue3();
 
@@ -33,7 +31,7 @@ Mathematics::QuerySortToolsImpl::QuerySortToolsImpl(int value0, int value1, int 
 }
 
 Mathematics::QuerySortToolsImpl::QuerySortToolsImpl(int value0, int value1, int value2, int value3)
-    : m_SortValue{ value0, value1, value2, value3 }, m_Symbol{ NumericalValueSymbol::Zero }
+    : sortValue{ value0, value1, value2, value3 }, symbol{ NumericalValueSymbol::Zero }
 {
     SortValue4();
 
@@ -46,28 +44,28 @@ Mathematics::NumericalValueSymbol Mathematics::QuerySortToolsImpl::GetSymbol() c
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Symbol;
+    return symbol;
 }
 
 int Mathematics::QuerySortToolsImpl::GetValue(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_SortValue.at(index);
+    return sortValue.at(index);
 }
 
 void Mathematics::QuerySortToolsImpl::SortValue2()
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (m_SortValue.at(1) < m_SortValue.at(0))
+    if (sortValue.at(1) < sortValue.at(0))
     {
-        swap(m_SortValue.at(0), m_SortValue.at(1));
-        m_Symbol = NumericalValueSymbol::Negative;
+        std::swap(sortValue.at(0), sortValue.at(1));
+        symbol = NumericalValueSymbol::Negative;
     }
     else
     {
-        m_Symbol = NumericalValueSymbol::Positive;
+        symbol = NumericalValueSymbol::Positive;
     }
 }
 
@@ -75,47 +73,47 @@ void Mathematics::QuerySortToolsImpl::SortValue3()
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (m_SortValue.at(0) <= m_SortValue.at(1))
+    if (sortValue.at(0) <= sortValue.at(1))
     {
-        if (m_SortValue.at(2) < m_SortValue.at(0))
+        if (sortValue.at(2) < sortValue.at(0))
         {
             // 0 1 2 -> 2 0 1
-            swap(m_SortValue.at(0), m_SortValue.at(2));
-            swap(m_SortValue.at(1), m_SortValue.at(2));
-            m_Symbol = NumericalValueSymbol::Positive;
+            std::swap(sortValue.at(0), sortValue.at(2));
+            std::swap(sortValue.at(1), sortValue.at(2));
+            symbol = NumericalValueSymbol::Positive;
         }
-        else if (m_SortValue.at(2) < m_SortValue.at(1))
+        else if (sortValue.at(2) < sortValue.at(1))
         {
             // 0 1 2 -> 0 2 1
-            swap(m_SortValue.at(1), m_SortValue.at(2));
-            m_Symbol = NumericalValueSymbol::Negative;
+            std::swap(sortValue.at(1), sortValue.at(2));
+            symbol = NumericalValueSymbol::Negative;
         }
         else
         {
             // 数值不变
-            m_Symbol = NumericalValueSymbol::Positive;
+            symbol = NumericalValueSymbol::Positive;
         }
     }
     else
     {
-        if (m_SortValue.at(2) < m_SortValue.at(1))
+        if (sortValue.at(2) < sortValue.at(1))
         {
             // 0 1 2 -> 2 1 0
-            swap(m_SortValue.at(0), m_SortValue.at(2));
-            m_Symbol = NumericalValueSymbol::Negative;
+            std::swap(sortValue.at(0), sortValue.at(2));
+            symbol = NumericalValueSymbol::Negative;
         }
-        else if (m_SortValue.at(2) < m_SortValue.at(0))
+        else if (sortValue.at(2) < sortValue.at(0))
         {
             // 0 1 2 -> 1 2 0
-            swap(m_SortValue.at(0), m_SortValue.at(2));
-            swap(m_SortValue.at(0), m_SortValue.at(1));
-            m_Symbol = NumericalValueSymbol::Positive;
+            std::swap(sortValue.at(0), sortValue.at(2));
+            std::swap(sortValue.at(0), sortValue.at(1));
+            symbol = NumericalValueSymbol::Positive;
         }
         else
         {
             // 0 1 2 -> 1 0 2
-            swap(m_SortValue.at(0), m_SortValue.at(1));
-            m_Symbol = NumericalValueSymbol::Negative;
+            std::swap(sortValue.at(0), sortValue.at(1));
+            symbol = NumericalValueSymbol::Negative;
         }
     }
 }
@@ -124,210 +122,210 @@ void Mathematics::QuerySortToolsImpl::SortValue4()
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (m_SortValue.at(0) <= m_SortValue.at(1))
+    if (sortValue.at(0) <= sortValue.at(1))
     {
-        if (m_SortValue.at(2) <= m_SortValue.at(3))
+        if (sortValue.at(2) <= sortValue.at(3))
         {
-            if (m_SortValue.at(1) <= m_SortValue.at(2))
+            if (sortValue.at(1) <= sortValue.at(2))
             {
                 // 数值不变
-                m_Symbol = NumericalValueSymbol::Positive;
+                symbol = NumericalValueSymbol::Positive;
             }
-            else if (m_SortValue.at(3) < m_SortValue.at(0))
+            else if (sortValue.at(3) < sortValue.at(0))
             {
                 // 0 1 2 3 -> 2 3 0 1
-                swap(m_SortValue.at(0), m_SortValue.at(2));
-                swap(m_SortValue.at(1), m_SortValue.at(3));
-                m_Symbol = NumericalValueSymbol::Positive;
+                std::swap(sortValue.at(0), sortValue.at(2));
+                std::swap(sortValue.at(1), sortValue.at(3));
+                symbol = NumericalValueSymbol::Positive;
             }
-            else if (m_SortValue.at(2) < m_SortValue.at(0))
+            else if (sortValue.at(2) < sortValue.at(0))
             {
-                if (m_SortValue.at(3) < m_SortValue.at(1))
+                if (sortValue.at(3) < sortValue.at(1))
                 {
                     // 0 1 2 3 -> 2 0 3 1
-                    swap(m_SortValue.at(0), m_SortValue.at(1));
-                    swap(m_SortValue.at(0), m_SortValue.at(3));
-                    swap(m_SortValue.at(0), m_SortValue.at(2));
-                    m_Symbol = NumericalValueSymbol::Negative;
+                    std::swap(sortValue.at(0), sortValue.at(1));
+                    std::swap(sortValue.at(0), sortValue.at(3));
+                    std::swap(sortValue.at(0), sortValue.at(2));
+                    symbol = NumericalValueSymbol::Negative;
                 }
                 else
                 {
                     // 0 1 2 3 -> 2 0 1 3
-                    swap(m_SortValue.at(0), m_SortValue.at(1));
-                    swap(m_SortValue.at(0), m_SortValue.at(2));
-                    m_Symbol = NumericalValueSymbol::Positive;
+                    std::swap(sortValue.at(0), sortValue.at(1));
+                    std::swap(sortValue.at(0), sortValue.at(2));
+                    symbol = NumericalValueSymbol::Positive;
                 }
             }
             else
             {
-                if (m_SortValue.at(3) < m_SortValue.at(1))
+                if (sortValue.at(3) < sortValue.at(1))
                 {
                     // 0 1 2 3 -> 0 2 3 1
-                    swap(m_SortValue.at(1), m_SortValue.at(2));
-                    swap(m_SortValue.at(2), m_SortValue.at(3));
-                    m_Symbol = NumericalValueSymbol::Positive;
+                    std::swap(sortValue.at(1), sortValue.at(2));
+                    std::swap(sortValue.at(2), sortValue.at(3));
+                    symbol = NumericalValueSymbol::Positive;
                 }
                 else
                 {
                     // 0 1 2 3 -> 0 2 1 3
-                    swap(m_SortValue.at(1), m_SortValue.at(2));
-                    m_Symbol = NumericalValueSymbol::Negative;
+                    std::swap(sortValue.at(1), sortValue.at(2));
+                    symbol = NumericalValueSymbol::Negative;
                 }
             }
         }
         else
         {
-            if (m_SortValue.at(1) <= m_SortValue.at(3))
+            if (sortValue.at(1) <= sortValue.at(3))
             {
                 // 0 1 2 3 -> 0 1 3 2
-                swap(m_SortValue.at(2), m_SortValue.at(3));
-                m_Symbol = NumericalValueSymbol::Negative;
+                std::swap(sortValue.at(2), sortValue.at(3));
+                symbol = NumericalValueSymbol::Negative;
             }
-            else if (m_SortValue.at(2) < m_SortValue.at(0))
+            else if (sortValue.at(2) < sortValue.at(0))
             {
                 // 0 1 2 3 -> 3 2 0 1
-                swap(m_SortValue.at(0), m_SortValue.at(2));
-                swap(m_SortValue.at(0), m_SortValue.at(1));
-                swap(m_SortValue.at(0), m_SortValue.at(3));
-                m_Symbol = NumericalValueSymbol::Negative;
+                std::swap(sortValue.at(0), sortValue.at(2));
+                std::swap(sortValue.at(0), sortValue.at(1));
+                std::swap(sortValue.at(0), sortValue.at(3));
+                symbol = NumericalValueSymbol::Negative;
             }
-            else if (m_SortValue.at(3) < m_SortValue.at(0))
+            else if (sortValue.at(3) < sortValue.at(0))
             {
-                if (m_SortValue.at(2) < m_SortValue.at(1))
+                if (sortValue.at(2) < sortValue.at(1))
                 {
                     // 0 1 2 3 -> 3 0 2 1
-                    swap(m_SortValue.at(0), m_SortValue.at(1));
-                    swap(m_SortValue.at(0), m_SortValue.at(3));
-                    m_Symbol = NumericalValueSymbol::Positive;
+                    std::swap(sortValue.at(0), sortValue.at(1));
+                    std::swap(sortValue.at(0), sortValue.at(3));
+                    symbol = NumericalValueSymbol::Positive;
                 }
                 else
                 {
                     // 0 1 2 3 -> 3 0 1 2
-                    swap(m_SortValue.at(0), m_SortValue.at(1));
-                    swap(m_SortValue.at(0), m_SortValue.at(2));
-                    swap(m_SortValue.at(0), m_SortValue.at(3));
-                    m_Symbol = NumericalValueSymbol::Negative;
+                    std::swap(sortValue.at(0), sortValue.at(1));
+                    std::swap(sortValue.at(0), sortValue.at(2));
+                    std::swap(sortValue.at(0), sortValue.at(3));
+                    symbol = NumericalValueSymbol::Negative;
                 }
             }
             else
             {
-                if (m_SortValue.at(2) < m_SortValue.at(1))
+                if (sortValue.at(2) < sortValue.at(1))
                 {
                     // 0 1 2 3 -> 0 3 2 1
-                    swap(m_SortValue.at(1), m_SortValue.at(3));
-                    m_Symbol = NumericalValueSymbol::Negative;
+                    std::swap(sortValue.at(1), sortValue.at(3));
+                    symbol = NumericalValueSymbol::Negative;
                 }
                 else
                 {
                     // 0 1 2 3 -> 0 3 1 2
-                    swap(m_SortValue.at(1), m_SortValue.at(2));
-                    swap(m_SortValue.at(1), m_SortValue.at(3));
-                    m_Symbol = NumericalValueSymbol::Positive;
+                    std::swap(sortValue.at(1), sortValue.at(2));
+                    std::swap(sortValue.at(1), sortValue.at(3));
+                    symbol = NumericalValueSymbol::Positive;
                 }
             }
         }
     }
     else
     {
-        if (m_SortValue.at(2) <= m_SortValue.at(3))
+        if (sortValue.at(2) <= sortValue.at(3))
         {
-            if (m_SortValue.at(0) <= m_SortValue.at(2))
+            if (sortValue.at(0) <= sortValue.at(2))
             {
                 // 0 1 2 3 -> 1 0 2 3
-                swap(m_SortValue.at(0), m_SortValue.at(1));
-                m_Symbol = NumericalValueSymbol::Negative;
+                std::swap(sortValue.at(0), sortValue.at(1));
+                symbol = NumericalValueSymbol::Negative;
             }
-            else if (m_SortValue.at(3) < m_SortValue.at(1))
+            else if (sortValue.at(3) < sortValue.at(1))
             {
                 // 0 1 2 3 -> 2 3 1 0
-                swap(m_SortValue.at(0), m_SortValue.at(3));
-                swap(m_SortValue.at(0), m_SortValue.at(1));
-                swap(m_SortValue.at(0), m_SortValue.at(2));
-                m_Symbol = NumericalValueSymbol::Negative;
+                std::swap(sortValue.at(0), sortValue.at(3));
+                std::swap(sortValue.at(0), sortValue.at(1));
+                std::swap(sortValue.at(0), sortValue.at(2));
+                symbol = NumericalValueSymbol::Negative;
             }
-            else if (m_SortValue.at(2) < m_SortValue.at(1))
+            else if (sortValue.at(2) < sortValue.at(1))
             {
-                if (m_SortValue.at(3) < m_SortValue.at(0))
+                if (sortValue.at(3) < sortValue.at(0))
                 {
                     // 0 1 2 3 -> 2 1 3 0
-                    swap(m_SortValue.at(0), m_SortValue.at(3));
-                    swap(m_SortValue.at(0), m_SortValue.at(2));
-                    m_Symbol = NumericalValueSymbol::Positive;
+                    std::swap(sortValue.at(0), sortValue.at(3));
+                    std::swap(sortValue.at(0), sortValue.at(2));
+                    symbol = NumericalValueSymbol::Positive;
                 }
                 else
                 {
                     // 0 1 2 3 -> 2 1 0 3
-                    swap(m_SortValue.at(0), m_SortValue.at(2));
-                    m_Symbol = NumericalValueSymbol::Negative;
+                    std::swap(sortValue.at(0), sortValue.at(2));
+                    symbol = NumericalValueSymbol::Negative;
                 }
             }
             else
             {
-                if (m_SortValue.at(3) < m_SortValue.at(0))
+                if (sortValue.at(3) < sortValue.at(0))
                 {
                     // 0 1 2 3 -> 1 2 3 0
-                    swap(m_SortValue.at(0), m_SortValue.at(3));
-                    swap(m_SortValue.at(0), m_SortValue.at(2));
-                    swap(m_SortValue.at(0), m_SortValue.at(1));
-                    m_Symbol = NumericalValueSymbol::Negative;
+                    std::swap(sortValue.at(0), sortValue.at(3));
+                    std::swap(sortValue.at(0), sortValue.at(2));
+                    std::swap(sortValue.at(0), sortValue.at(1));
+                    symbol = NumericalValueSymbol::Negative;
                 }
                 else
                 {
                     // 0 1 2 3 -> 1 2 0 3
-                    swap(m_SortValue.at(0), m_SortValue.at(2));
-                    swap(m_SortValue.at(0), m_SortValue.at(1));
-                    m_Symbol = NumericalValueSymbol::Positive;
+                    std::swap(sortValue.at(0), sortValue.at(2));
+                    std::swap(sortValue.at(0), sortValue.at(1));
+                    symbol = NumericalValueSymbol::Positive;
                 }
             }
         }
         else
         {
-            if (m_SortValue.at(0) <= m_SortValue.at(3))
+            if (sortValue.at(0) <= sortValue.at(3))
             {
                 // 0 1 2 3 -> 1 0 3 2
-                swap(m_SortValue.at(0), m_SortValue.at(1));
-                swap(m_SortValue.at(2), m_SortValue.at(3));
-                m_Symbol = NumericalValueSymbol::Positive;
+                std::swap(sortValue.at(0), sortValue.at(1));
+                std::swap(sortValue.at(2), sortValue.at(3));
+                symbol = NumericalValueSymbol::Positive;
             }
-            else if (m_SortValue.at(2) < m_SortValue.at(1))
+            else if (sortValue.at(2) < sortValue.at(1))
             {
                 // 0 1 2 3 -> 3 2 1 0
-                swap(m_SortValue.at(0), m_SortValue.at(3));
-                swap(m_SortValue.at(1), m_SortValue.at(2));
-                m_Symbol = NumericalValueSymbol::Positive;
+                std::swap(sortValue.at(0), sortValue.at(3));
+                std::swap(sortValue.at(1), sortValue.at(2));
+                symbol = NumericalValueSymbol::Positive;
             }
-            else if (m_SortValue.at(3) < m_SortValue.at(1))
+            else if (sortValue.at(3) < sortValue.at(1))
             {
-                if (m_SortValue.at(2) < m_SortValue.at(0))
+                if (sortValue.at(2) < sortValue.at(0))
                 {
                     // 0 1 2 3 -> 3 1 2 0
-                    swap(m_SortValue.at(0), m_SortValue.at(3));
-                    m_Symbol = NumericalValueSymbol::Negative;
+                    std::swap(sortValue.at(0), sortValue.at(3));
+                    symbol = NumericalValueSymbol::Negative;
                 }
                 else
                 {
                     // 0 1 2 3 -> 3 1 0 2
-                    swap(m_SortValue.at(0), m_SortValue.at(2));
-                    swap(m_SortValue.at(0), m_SortValue.at(3));
-                    m_Symbol = NumericalValueSymbol::Positive;
+                    std::swap(sortValue.at(0), sortValue.at(2));
+                    std::swap(sortValue.at(0), sortValue.at(3));
+                    symbol = NumericalValueSymbol::Positive;
                 }
             }
             else
             {
-                if (m_SortValue.at(2) < m_SortValue.at(0))
+                if (sortValue.at(2) < sortValue.at(0))
                 {
                     // 0 1 2 3 -> 1 3 2 0
-                    swap(m_SortValue.at(0), m_SortValue.at(3));
-                    swap(m_SortValue.at(0), m_SortValue.at(1));
-                    m_Symbol = NumericalValueSymbol::Positive;
+                    std::swap(sortValue.at(0), sortValue.at(3));
+                    std::swap(sortValue.at(0), sortValue.at(1));
+                    symbol = NumericalValueSymbol::Positive;
                 }
                 else
                 {
                     // 0 1 2 3 -> 1 3 0 2
-                    swap(m_SortValue.at(0), m_SortValue.at(2));
-                    swap(m_SortValue.at(0), m_SortValue.at(3));
-                    swap(m_SortValue.at(0), m_SortValue.at(1));
-                    m_Symbol = NumericalValueSymbol::Negative;
+                    std::swap(sortValue.at(0), sortValue.at(2));
+                    std::swap(sortValue.at(0), sortValue.at(3));
+                    std::swap(sortValue.at(0), sortValue.at(1));
+                    symbol = NumericalValueSymbol::Negative;
                 }
             }
         }

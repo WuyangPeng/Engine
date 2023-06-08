@@ -232,7 +232,9 @@
     "JsonGenerateTesting": 1,
     "JsonRowTesting": 1,
     "JsonConfigureTesting": 1,
-    "JsonTotalGenerateTesting": 1
+    "JsonTotalGenerateTesting": 1,
+    "BatchConversionCodeTesting": 1,
+    "CSVConfigureLoadingTesting": 1
   },
 
   "simpleZipSuite": {

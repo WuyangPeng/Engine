@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 19:03)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 16:03)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX_DETAIL_H
 #define MATHEMATICS_ALGEBRA_MATRIX_DETAIL_H
@@ -23,33 +23,35 @@
 #include <iostream>
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real>::Matrix(const Matrix3& rhs)
-    : m_Entry{ rhs(0, 0),
-               rhs(0, 1),
-               rhs(0, 2),
-               Math::GetValue(0),
-               rhs(1, 0),
-               rhs(1, 1),
-               rhs(1, 2),
-               Math::GetValue(0),
-               rhs(2, 0),
-               rhs(2, 1),
-               rhs(2, 2),
-               Math::GetValue(0),
-               Math::GetValue(0),
-               Math::GetValue(0),
-               Math::GetValue(0),
-               Math::GetValue(1) }
+    : entry{ rhs(0, 0),
+             rhs(0, 1),
+             rhs(0, 2),
+             Math::GetValue(0),
+             rhs(1, 0),
+             rhs(1, 1),
+             rhs(1, 2),
+             Math::GetValue(0),
+             rhs(2, 0),
+             rhs(2, 1),
+             rhs(2, 2),
+             Math::GetValue(0),
+             Math::GetValue(0),
+             Math::GetValue(0),
+             Math::GetValue(0),
+             Math::GetValue(1) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix<Real>::EntryType Mathematics::Matrix<Real>::Create(const ContainerType& entry, MatrixMajorFlags majorFlag)
 {
     if (entry.size() != entrySize)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s))
     }
 
 #include STSTEM_WARNING_PUSH
@@ -77,61 +79,65 @@ typename Mathematics::Matrix<Real>::EntryType Mathematics::Matrix<Real>::Create(
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real>::Matrix(const ContainerType& entry, MatrixMajorFlags majorFlag)
-    : m_Entry{ Create(entry, majorFlag) }
+    : entry{ Create(entry, majorFlag) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real>::Matrix(const Vector4& vector0, const Vector4& vector1, const Vector4& vector2, const Vector4& vector3, MatrixMajorFlags majorFlag)
-    : m_Entry{ Create(vector0.GetX(),
-                      vector0.GetY(),
-                      vector0.GetZ(),
-                      vector0.GetW(),
-                      vector1.GetX(),
-                      vector1.GetY(),
-                      vector1.GetZ(),
-                      vector1.GetW(),
-                      vector2.GetX(),
-                      vector2.GetY(),
-                      vector2.GetZ(),
-                      vector2.GetW(),
-                      vector3.GetX(),
-                      vector3.GetY(),
-                      vector3.GetZ(),
-                      vector3.GetW(),
-                      majorFlag) }
+    : entry{ Create(vector0.GetX(),
+                    vector0.GetY(),
+                    vector0.GetZ(),
+                    vector0.GetW(),
+                    vector1.GetX(),
+                    vector1.GetY(),
+                    vector1.GetZ(),
+                    vector1.GetW(),
+                    vector2.GetX(),
+                    vector2.GetY(),
+                    vector2.GetZ(),
+                    vector2.GetW(),
+                    vector3.GetX(),
+                    vector3.GetY(),
+                    vector3.GetZ(),
+                    vector3.GetW(),
+                    majorFlag) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real>::Matrix(const AVector& vector0, const AVector& vector1, const AVector& vector2, const APoint& point, MatrixMajorFlags majorFlag)
-    : m_Entry{ Create(vector0.GetX(),
-                      vector0.GetY(),
-                      vector0.GetZ(),
-                      Math::GetValue(0),
-                      vector1.GetX(),
-                      vector1.GetY(),
-                      vector1.GetZ(),
-                      Math::GetValue(0),
-                      vector2.GetX(),
-                      vector2.GetY(),
-                      vector2.GetZ(),
-                      Math::GetValue(0),
-                      point.GetX(),
-                      point.GetY(),
-                      point.GetZ(),
-                      Math::GetValue(1),
-                      majorFlag) }
+    : entry{ Create(vector0.GetX(),
+                    vector0.GetY(),
+                    vector0.GetZ(),
+                    Math::GetValue(0),
+                    vector1.GetX(),
+                    vector1.GetY(),
+                    vector1.GetZ(),
+                    Math::GetValue(0),
+                    vector2.GetX(),
+                    vector2.GetY(),
+                    vector2.GetZ(),
+                    Math::GetValue(0),
+                    point.GetX(),
+                    point.GetY(),
+                    point.GetZ(),
+                    Math::GetValue(1),
+                    majorFlag) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real>::Matrix(const AVector& axis, Real angle)
-    : m_Entry{}
+    : entry{}
 {
     MakeRotation(axis, angle);
 
@@ -142,6 +148,7 @@ Mathematics::Matrix<Real>::Matrix(const AVector& axis, Real angle)
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator=(const Matrix3& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -158,7 +165,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator=(const Matrix3& r
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::Matrix<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::Matrix<Real>::IsValid() const noexcept
 {
     return true;
 }
@@ -166,6 +173,7 @@ bool Mathematics::Matrix<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <int Index>
 void Mathematics::Matrix<Real>::Divide(Real value)
 {
@@ -176,33 +184,36 @@ void Mathematics::Matrix<Real>::Divide(Real value)
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-        m_Entry[Index] /= value;
+        entry[Index] /= value;
 
 #include STSTEM_WARNING_POP
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("除零错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("除零错误！"s))
     }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix<Real>::EntryTypeConstIter Mathematics::Matrix<Real>::begin() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Entry.begin();
+    return entry.begin();
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix<Real>::EntryTypeConstIter Mathematics::Matrix<Real>::end() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Entry.end();
+    return entry.end();
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix<Real>::Matrix3 Mathematics::Matrix<Real>::GetMatrix3() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -219,23 +230,26 @@ typename Mathematics::Matrix<Real>::Matrix3 Mathematics::Matrix<Real>::GetMatrix
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix<Real>::EntryType Mathematics::Matrix<Real>::GetData() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Entry;
+    return entry;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 const Real& Mathematics::Matrix<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     const auto index = column + columnSize * row;
-    return m_Entry.at(index);
+    return entry.at(index);
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real& Mathematics::Matrix<Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -249,6 +263,7 @@ Real& Mathematics::Matrix<Real>::operator()(int row, int column)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::SetRow(int row, const HomogeneousPoint& point)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -259,21 +274,17 @@ void Mathematics::Matrix<Real>::SetRow(int row, const HomogeneousPoint& point)
         {
             const auto index = rowSize * row + i;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-            m_Entry[index] = point[i];
-
-#include STSTEM_WARNING_POP
+            entry.at(index) = point[i];
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s))
     }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix<Real>::HomogeneousPoint Mathematics::Matrix<Real>::GetRow(int row) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -282,20 +293,16 @@ typename Mathematics::Matrix<Real>::HomogeneousPoint Mathematics::Matrix<Real>::
     {
         const auto index = gsl::narrow_cast<size_t>(rowSize) * gsl::narrow_cast<size_t>(row);
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        return HomogeneousPoint{ m_Entry[index], m_Entry[index + 1], m_Entry[index + 2], m_Entry[index + 3] };
-
-#include STSTEM_WARNING_POP
+        return HomogeneousPoint{ entry.at(index), entry.at(index + 1), entry.at(index + 2), entry.at(index + 3) };
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s))
     }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::SetColumn(int column, const HomogeneousPoint& point)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -306,22 +313,17 @@ void Mathematics::Matrix<Real>::SetColumn(int column, const HomogeneousPoint& po
         {
             const auto index = columnSize * i + column;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-            m_Entry[index] = point[i];
-
-#include STSTEM_WARNING_POP
+            entry.at(index) = point[i];
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s))
     }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix<Real>::HomogeneousPoint Mathematics::Matrix<Real>::GetColumn(int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -330,21 +332,16 @@ typename Mathematics::Matrix<Real>::HomogeneousPoint Mathematics::Matrix<Real>::
     {
         const auto index = gsl::narrow_cast<size_t>(column);
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-        return HomogeneousPoint{ m_Entry[index], m_Entry[columnSize + index], m_Entry[columnSize * 2 + index], m_Entry[columnSize * 3 + index] };
-
-#include STSTEM_WARNING_POP
+        return HomogeneousPoint{ entry.at(index), entry.at(columnSize + index), entry.at(columnSize * 2 + index), entry.at(columnSize * 3 + index) };
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s))
     }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix<Real>::ContainerType Mathematics::Matrix<Real>::GetColumnMajor() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -372,6 +369,7 @@ typename Mathematics::Matrix<Real>::ContainerType Mathematics::Matrix<Real>::Get
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::Matrix<Real>::EntryType Mathematics::Matrix<Real>::GetRowMajor() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -397,14 +395,16 @@ typename Mathematics::Matrix<Real>::EntryType Mathematics::Matrix<Real>::GetRowM
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::Set(const EntryType& rowMajor) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Entry = rowMajor;
+    entry = rowMajor;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real> Mathematics::Matrix<Real>::operator-() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -428,6 +428,7 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::operator-() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator+=(const Matrix& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -438,7 +439,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator+=(const Matrix& r
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
-        m_Entry[i] += rhs.m_Entry[i];
+        entry[i] += rhs.entry[i];
 
 #include STSTEM_WARNING_POP
     }
@@ -447,6 +448,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator+=(const Matrix& r
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator-=(const Matrix& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -456,7 +458,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator-=(const Matrix& r
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-        m_Entry[i] -= rhs.m_Entry[i];
+        entry[i] -= rhs.entry[i];
 
 #include STSTEM_WARNING_POP
     }
@@ -465,11 +467,12 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator-=(const Matrix& r
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator*=(Real scalar) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    for (auto& value : m_Entry)
+    for (auto& value : entry)
     {
         value *= scalar;
     }
@@ -478,34 +481,37 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator*=(Real scalar) no
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator/=(Real scalar)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
     if (Math::GetZeroTolerance() < Math::FAbs(scalar))
     {
-        for (auto& value : m_Entry)
+        for (auto& value : entry)
         {
             value /= scalar;
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("除零错误。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("除零错误。"s))
     }
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::MakeZero()
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Entry.fill(Math::GetValue(0));
+    entry.fill(Math::GetValue(0));
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::MakeIdentity() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -518,11 +524,11 @@ void Mathematics::Matrix<Real>::MakeIdentity() noexcept
 
         if ((i / rowSize) == (i % rowSize))
         {
-            m_Entry[i] = Math::GetValue(1);
+            entry[i] = Math::GetValue(1);
         }
         else
         {
-            m_Entry[i] = Math::GetValue(0);
+            entry[i] = Math::GetValue(0);
         }
 
 #include STSTEM_WARNING_POP
@@ -530,30 +536,32 @@ void Mathematics::Matrix<Real>::MakeIdentity() noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::MakeDiagonal(Real member00, Real member11, Real member22) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Entry = Create(member00,
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     member11,
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     member22,
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     Math::GetValue(1),
-                     MatrixMajorFlags::Row);
+    entry = Create(member00,
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   member11,
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   member22,
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   Math::GetValue(1),
+                   MatrixMajorFlags::Row);
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::MakeRotation(const AVector& axis, Real angle)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -578,30 +586,31 @@ void Mathematics::Matrix<Real>::MakeRotation(const AVector& axis, Real angle)
     const auto ySin = axis.GetY() * sinValue;
     const auto zSin = axis.GetZ() * sinValue;
 
-    m_Entry = Create(xAxisSquareMultipliedOneMinusCos + cosValue,
-                     xym - zSin,
-                     xzm + ySin,
-                     Math::GetValue(0),
+    entry = Create(xAxisSquareMultipliedOneMinusCos + cosValue,
+                   xym - zSin,
+                   xzm + ySin,
+                   Math::GetValue(0),
 
-                     xym + zSin,
-                     yAxisSquareMultipliedOneMinusCos + cosValue,
-                     yzm - xSin,
-                     Math::GetValue(0),
+                   xym + zSin,
+                   yAxisSquareMultipliedOneMinusCos + cosValue,
+                   yzm - xSin,
+                   Math::GetValue(0),
 
-                     xzm - ySin,
-                     yzm + xSin,
-                     zAxisSquareMultipliedOneMinusCos + cosValue,
-                     Math::GetValue(0),
+                   xzm - ySin,
+                   yzm + xSin,
+                   zAxisSquareMultipliedOneMinusCos + cosValue,
+                   Math::GetValue(0),
 
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     Math::GetValue(1),
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   Math::GetValue(1),
 
-                     MatrixMajorFlags::Row);
+                   MatrixMajorFlags::Row);
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Transpose() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -625,6 +634,7 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Transpose() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Inverse(const Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -668,11 +678,12 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Inverse(const Real epsilon)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("该矩阵不存在逆矩阵！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("该矩阵不存在逆矩阵！"s))
     }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Adjoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -709,6 +720,7 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Adjoint() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Invert3x3(const Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -753,11 +765,12 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::Invert3x3(const Real epsilo
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("该矩阵不存在逆矩阵！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("该矩阵不存在逆矩阵！"s))
     }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Matrix<Real>::Determinant() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -781,6 +794,7 @@ Real Mathematics::Matrix<Real>::Determinant() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator*=(const Matrix& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -791,6 +805,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator*=(const Matrix& r
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real> Mathematics::Matrix<Real>::TimesDiagonal(const APoint& diagonal) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -817,6 +832,7 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::TimesDiagonal(const APoint&
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::Matrix<Real> Mathematics::Matrix<Real>::DiagonalTimes(const APoint& diagonal) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -843,6 +859,7 @@ Mathematics::Matrix<Real> Mathematics::Matrix<Real>::DiagonalTimes(const APoint&
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::Orthonormalize() noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -892,6 +909,7 @@ void Mathematics::Matrix<Real>::Orthonormalize() noexcept(gAssert < 3 || gMathem
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Matrix<Real>::QuadraticForm(const HomogeneousPoint& point0, const HomogeneousPoint& point1) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -907,6 +925,7 @@ Real Mathematics::Matrix<Real>::QuadraticForm(const HomogeneousPoint& point0, co
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::MakeObliqueProjection(const APoint& origin, const AVector& normal, const AVector& direction)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -929,33 +948,34 @@ void Mathematics::Matrix<Real>::MakeObliqueProjection(const APoint& origin, cons
     // 其中M适用于[U^T 1]^T 为  M*[U^T 1]^T。
     // 选择矩阵，使得每当Dot(N,D) < 0时M[3][3] > 0（投影到平面上的“正侧”）。
 
-    auto dotNormalDirection = Dot(normal, direction);
-    auto dotNormalOrigin = Dot(origin, normal);
+    const auto dotNormalDirection = Dot(normal, direction);
+    const auto dotNormalOrigin = Dot(origin, normal);
 
-    m_Entry = Create(direction.GetX() * normal.GetX() - dotNormalDirection,
-                     direction.GetX() * normal.GetY(),
-                     direction.GetX() * normal.GetZ(),
-                     -dotNormalOrigin * direction.GetX(),
+    entry = Create(direction.GetX() * normal.GetX() - dotNormalDirection,
+                   direction.GetX() * normal.GetY(),
+                   direction.GetX() * normal.GetZ(),
+                   -dotNormalOrigin * direction.GetX(),
 
-                     direction.GetY() * normal.GetX(),
-                     direction.GetY() * normal.GetY() - dotNormalDirection,
-                     direction.GetY() * normal.GetZ(),
-                     -dotNormalOrigin * direction.GetY(),
+                   direction.GetY() * normal.GetX(),
+                   direction.GetY() * normal.GetY() - dotNormalDirection,
+                   direction.GetY() * normal.GetZ(),
+                   -dotNormalOrigin * direction.GetY(),
 
-                     direction.GetZ() * normal.GetX(),
-                     direction.GetZ() * normal.GetY(),
-                     direction.GetZ() * normal.GetZ() - dotNormalDirection,
-                     -dotNormalOrigin * direction.GetZ(),
+                   direction.GetZ() * normal.GetX(),
+                   direction.GetZ() * normal.GetY(),
+                   direction.GetZ() * normal.GetZ() - dotNormalDirection,
+                   -dotNormalOrigin * direction.GetZ(),
 
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     -dotNormalDirection,
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   -dotNormalDirection,
 
-                     MatrixMajorFlags::Row);
+                   MatrixMajorFlags::Row);
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::MakePerspectiveProjection(const APoint& origin, const AVector& normal, const APoint& eye)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -968,32 +988,33 @@ void Mathematics::Matrix<Real>::MakePerspectiveProjection(const APoint& origin, 
     //
     // 其中E为眼点，P为平面上的一个点，而N是单位长度的平面法线。
 
-    auto dotNormalDirection = Dot(normal, eye - origin);
+    const auto dotNormalDirection = Dot(normal, eye - origin);
 
-    m_Entry = Create(dotNormalDirection - eye.GetX() * normal.GetX(),
-                     -eye.GetX() * normal.GetY(),
-                     -eye.GetX() * normal.GetY(),
-                     -(GetValue<0>() * eye.GetX() + GetValue<1>() * eye.GetY() + GetValue<2>() * eye.GetY()),
+    entry = Create(dotNormalDirection - eye.GetX() * normal.GetX(),
+                   -eye.GetX() * normal.GetY(),
+                   -eye.GetX() * normal.GetY(),
+                   -(GetValue<0>() * eye.GetX() + GetValue<1>() * eye.GetY() + GetValue<2>() * eye.GetY()),
 
-                     -eye.GetY() * normal.GetX(),
-                     dotNormalDirection - eye.GetY() * normal.GetY(),
-                     -eye.GetY() * normal.GetY(),
-                     -(GetValue<4>() * eye.GetX() + GetValue<5>() * eye.GetY() + GetValue<6>() * eye.GetY()),
+                   -eye.GetY() * normal.GetX(),
+                   dotNormalDirection - eye.GetY() * normal.GetY(),
+                   -eye.GetY() * normal.GetY(),
+                   -(GetValue<4>() * eye.GetX() + GetValue<5>() * eye.GetY() + GetValue<6>() * eye.GetY()),
 
-                     -eye.GetZ() * normal.GetX(),
-                     -eye.GetZ() * normal.GetY(),
-                     dotNormalDirection - eye.GetY() * normal.GetY(),
-                     -(GetValue<8>() * eye.GetX() + GetValue<9>() * eye.GetX() + GetValue<10>() * eye.GetY()),
+                   -eye.GetZ() * normal.GetX(),
+                   -eye.GetZ() * normal.GetY(),
+                   dotNormalDirection - eye.GetY() * normal.GetY(),
+                   -(GetValue<8>() * eye.GetX() + GetValue<9>() * eye.GetX() + GetValue<10>() * eye.GetY()),
 
-                     -normal.GetX(),
-                     -normal.GetY(),
-                     -normal.GetZ(),
-                     Dot(eye, normal),
+                   -normal.GetX(),
+                   -normal.GetY(),
+                   -normal.GetZ(),
+                   Dot(eye, normal),
 
-                     MatrixMajorFlags::Row);
+                   MatrixMajorFlags::Row);
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Matrix<Real>::MakeReflection(const APoint& origin, const AVector& normal)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -1008,30 +1029,31 @@ void Mathematics::Matrix<Real>::MakeReflection(const APoint& origin, const AVect
 
     const auto twoDotNormalOrigin = Math::GetValue(2) * Dot(origin, normal);
 
-    m_Entry = Create(Math::GetValue(1) - Math::GetValue(2) * normal.GetX() * normal.GetX(),
-                     -Math::GetValue(2) * normal.GetX() * normal.GetY(),
-                     -Math::GetValue(2) * normal.GetX() * normal.GetZ(),
-                     twoDotNormalOrigin * normal.GetX(),
+    entry = Create(Math::GetValue(1) - Math::GetValue(2) * normal.GetX() * normal.GetX(),
+                   -Math::GetValue(2) * normal.GetX() * normal.GetY(),
+                   -Math::GetValue(2) * normal.GetX() * normal.GetZ(),
+                   twoDotNormalOrigin * normal.GetX(),
 
-                     -Math::GetValue(2) * normal.GetY() * normal.GetX(),
-                     Math::GetValue(1) - Math::GetValue(2) * normal.GetY() * normal.GetY(),
-                     -Math::GetValue(2) * normal.GetY() * normal.GetZ(),
-                     twoDotNormalOrigin * normal.GetY(),
+                   -Math::GetValue(2) * normal.GetY() * normal.GetX(),
+                   Math::GetValue(1) - Math::GetValue(2) * normal.GetY() * normal.GetY(),
+                   -Math::GetValue(2) * normal.GetY() * normal.GetZ(),
+                   twoDotNormalOrigin * normal.GetY(),
 
-                     -Math::GetValue(2) * normal.GetZ() * normal.GetX(),
-                     -Math::GetValue(2) * normal.GetZ() * normal.GetY(),
-                     Math::GetValue(1) - Math::GetValue(2) * normal.GetZ() * normal.GetZ(),
-                     twoDotNormalOrigin * normal.GetZ(),
+                   -Math::GetValue(2) * normal.GetZ() * normal.GetX(),
+                   -Math::GetValue(2) * normal.GetZ() * normal.GetY(),
+                   Math::GetValue(1) - Math::GetValue(2) * normal.GetZ() * normal.GetZ(),
+                   twoDotNormalOrigin * normal.GetZ(),
 
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     Math::GetValue(0),
-                     Math::GetValue(1),
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   Math::GetValue(0),
+                   Math::GetValue(1),
 
-                     MatrixMajorFlags::Row);
+                   MatrixMajorFlags::Row);
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Matrix<Real>::GetNorm() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -1246,7 +1268,7 @@ typename Mathematics::AVector<Real>::ContainerType Mathematics::BatchMultiply(co
 }
 
 template <typename Real>
-bool Mathematics::Approximate(const Matrix<Real>& lhs, const Matrix<Real>& rhs, const Real epsilon)
+bool Mathematics::Approximate(const Matrix<Real>& lhs, const Matrix<Real>& rhs, Real epsilon)
 {
     for (auto row = 0u; row < Matrix<Real>::rowSize; ++row)
     {

@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_DISTANCE_SUITE_DISTANCE_LINE2_RAY2_TESTING_H
 #define MATHEMATICS_DISTANCE_SUITE_DISTANCE_LINE2_RAY2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class DistanceLine2Ray2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DistanceLine2Ray2Testing);
+        using ClassType = DistanceLine2Ray2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit DistanceLine2Ray2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

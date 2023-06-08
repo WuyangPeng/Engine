@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/14 10:38)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:46)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_ROOT_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_ROOT_ACHIEVE_H
@@ -30,11 +30,13 @@ Mathematics::Bisect2Root<Real>::Bisect2Root(Real xRoot, Real yRoot, BisectRootTy
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Bisect2Root<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>

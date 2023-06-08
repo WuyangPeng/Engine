@@ -9,11 +9,11 @@
 
 #include "AxesAlignBoundingBox2DTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/AxesAlignBoundingBox2Detail.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +25,18 @@ namespace Mathematics
     template class AxesAlignBoundingBox2<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, AxesAlignBoundingBox2DTesting)
+Mathematics::AxesAlignBoundingBox2DTesting::AxesAlignBoundingBox2DTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, AxesAlignBoundingBox2DTesting)
+
+void Mathematics::AxesAlignBoundingBox2DTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::AxesAlignBoundingBox2DTesting::MainTest()
 {
@@ -60,9 +71,7 @@ void Mathematics::AxesAlignBoundingBox2DTesting::AccessTest()
     default_random_engine randomEngine{};
     const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Vector2F firstVector(firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine));
 
@@ -88,9 +97,7 @@ void Mathematics::AxesAlignBoundingBox2DTesting::IntersectionTest()
     default_random_engine randomEngine{};
     const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Vector2F firstVector(firstRandomDistribution(randomEngine),
                              firstRandomDistribution(randomEngine));

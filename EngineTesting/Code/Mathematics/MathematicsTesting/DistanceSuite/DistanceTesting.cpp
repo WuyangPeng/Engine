@@ -13,7 +13,7 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -29,7 +29,18 @@ namespace Mathematics
     template class DistanceTest<double, Vector3D>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistanceTesting)
+Mathematics::DistanceTesting::DistanceTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, DistanceTesting)
+
+void Mathematics::DistanceTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::DistanceTesting::MainTest()
 {
@@ -48,9 +59,9 @@ void Mathematics::DistanceTesting::BaseTest()
     default_random_engine generator;
     const uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         DistanceTest<float, Vector2F> distance(Vector2F(randomDistribution(generator), randomDistribution(generator)), Vector2F(randomDistribution(generator), randomDistribution(generator)));
 
@@ -74,9 +85,9 @@ void Mathematics::DistanceTesting::StaticTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         DistanceTest<double, Vector2D> distance(Vector2(randomDistribution(generator), randomDistribution(generator)),
                                                 Vector2(randomDistribution(generator), randomDistribution(generator)));
@@ -102,9 +113,9 @@ void Mathematics::DistanceTesting::DynamicTest()
     default_random_engine generator;
     const uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         DistanceTest<float, Vector3F> distance(Vector3F(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator)),
                                                Vector3F(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator)));
@@ -115,19 +126,19 @@ void Mathematics::DistanceTesting::DynamicTest()
         Vector3F rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsVelocity.Normalize();
 
-        const double distanceSquared = Vector3ToolsD::DistanceSquared(distance.GetLhs() + lhsVelocity * t, distance.GetRhs() + rhsVelocity * t);
+        const double distanceSquared = Vector3ToolsF::DistanceSquared(distance.GetLhs() + lhsVelocity * t, distance.GetRhs() + rhsVelocity * t);
 
         DistanceResult3F squaredResult = distance.GetSquared(t, lhsVelocity, rhsVelocity);
         ASSERT_APPROXIMATE(squaredResult.GetDistance(), distanceSquared, 1e-4f);
         ASSERT_APPROXIMATE(squaredResult.GetContactTime(), t, 1e-8f);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), distance.GetLhs() + lhsVelocity * t, 1e-8f);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), distance.GetRhs() + rhsVelocity * t, 1e-8f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsF::Approximate, squaredResult.GetLhsClosestPoint(), distance.GetLhs() + lhsVelocity * t, 1e-8f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsF::Approximate, squaredResult.GetRhsClosestPoint(), distance.GetRhs() + rhsVelocity * t, 1e-8f);
 
         DistanceResult3F result = distance.Get(t, lhsVelocity, rhsVelocity);
         ASSERT_APPROXIMATE(result.GetDistance(), MathD::Sqrt(distanceSquared), 1e-5f);
         ASSERT_APPROXIMATE(result.GetContactTime(), t, 1e-8f);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), distance.GetLhs() + lhsVelocity * t, 1e-8f);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetRhsClosestPoint(), distance.GetRhs() + rhsVelocity * t, 1e-8f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsF::Approximate, result.GetLhsClosestPoint(), distance.GetLhs() + lhsVelocity * t, 1e-8f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsF::Approximate, result.GetRhsClosestPoint(), distance.GetRhs() + rhsVelocity * t, 1e-8f);
     }
 }
 
@@ -136,9 +147,9 @@ void Mathematics::DistanceTesting::DerivativeTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const double t = MathD::FAbs(randomDistribution(generator));
         Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
@@ -169,9 +180,9 @@ void Mathematics::DistanceTesting::IntervalTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-10.0, 10.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         DistanceTest<double, Vector2D> distance(Vector2(randomDistribution(generator), randomDistribution(generator)),
                                                 Vector2(randomDistribution(generator), randomDistribution(generator)));
@@ -214,9 +225,9 @@ void Mathematics::DistanceTesting::BeginIntervalTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-10.0, 10.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
@@ -263,9 +274,9 @@ void Mathematics::DistanceTesting::EndIntervalTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-10.0, 10.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         double tMin = MathD::FAbs(randomDistribution(generator));
         double tMax = MathD::FAbs(randomDistribution(generator));
@@ -316,9 +327,9 @@ void Mathematics::DistanceTesting::IterationIntervalTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-10.0, 10.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         constexpr double tMin = 0.0;
         const double tMax = MathD::FAbs(randomDistribution(generator));

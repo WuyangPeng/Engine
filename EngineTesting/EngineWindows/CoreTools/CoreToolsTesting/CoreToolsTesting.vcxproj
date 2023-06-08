@@ -188,6 +188,7 @@ xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineerin
 xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
@@ -220,6 +221,7 @@ xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineerin
 xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
@@ -256,6 +258,7 @@ xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineerin
 xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
@@ -292,6 +295,7 @@ xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineerin
 xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
@@ -324,6 +328,7 @@ xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineerin
 xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
@@ -356,6 +361,7 @@ xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineerin
 xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
@@ -392,6 +398,7 @@ xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineerin
 xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
@@ -428,6 +435,7 @@ xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingEngineerin
 xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCodeTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/OutputCodeTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
@@ -788,7 +796,9 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ValueScopeTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCodeTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCSVTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureLoadingTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVContentTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVDataTesting.h" />
@@ -1245,6 +1255,21 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Resource\OutputCodeTesting\Input1.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\Input1Base.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\Input1Container.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\Input1ContainerDetail.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\Input2.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\Input2Base.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\Input2Container.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\Input2ContainerDetail.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\Input3.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\Input3Base.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\Input3Container.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\Input3ContainerDetail.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\OutputCSVTesting.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\OutputCSVTestingContainer.h" />
+    <ClInclude Include="Resource\OutputCodeTesting\OutputCSVTestingFwd.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\Detail\SingletonSubclass.cpp" />
@@ -1548,7 +1573,9 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingMain.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCodeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCSVTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureLoadingTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVContentTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVDataTesting.cpp" />
@@ -1869,6 +1896,16 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingEngineering)/$(P
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Resource\OutputCodeTesting\Input1.cpp" />
+    <ClCompile Include="Resource\OutputCodeTesting\Input1Base.cpp" />
+    <ClCompile Include="Resource\OutputCodeTesting\Input1Container.cpp" />
+    <ClCompile Include="Resource\OutputCodeTesting\Input2.cpp" />
+    <ClCompile Include="Resource\OutputCodeTesting\Input2Base.cpp" />
+    <ClCompile Include="Resource\OutputCodeTesting\Input2Container.cpp" />
+    <ClCompile Include="Resource\OutputCodeTesting\Input3.cpp" />
+    <ClCompile Include="Resource\OutputCodeTesting\Input3Base.cpp" />
+    <ClCompile Include="Resource\OutputCodeTesting\Input3Container.cpp" />
+    <ClCompile Include="Resource\OutputCodeTesting\OutputCSVTestingContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\CFileManagerTesting\CFileManagerHelperTestingText.txt" />

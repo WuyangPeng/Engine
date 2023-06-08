@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/04/03 17:39)
+///	引擎版本：0.9.0.11 (2023/05/30 09:40)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_H
@@ -18,6 +18,7 @@
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Exception/ExceptionFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/LogManager/LogManagerFwd.h"
 #include "CoreTools/TextParsing/SimpleCSV/CellValue.h"
 
 #include <string>
@@ -259,7 +260,7 @@ namespace CoreTools
         virtual void PrintTipsMessage();
 
     private:
-        void PrintFailReport(const FunctionDescribed& functionDescribed, const std::string& errorMessage);
+        void PrintFailReport(const FunctionDescribed& functionDescribed, const std::string& errorMessage, LogLevel logLevel);
 
         void AssertExceptionInfoLog(const Error& error, const std::string& errorMessage);
         void AssertExceptionInfoLog(const std::exception& error, const FunctionDescribed& functionDescribed, const std::string& errorMessage);

@@ -10,25 +10,31 @@
 #ifndef MATHEMATICS_DISTANCE_SUITE_DISTANCE_LINE3_RAY3_TESTING_H
 #define MATHEMATICS_DISTANCE_SUITE_DISTANCE_LINE3_RAY3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
-	class DistanceLine3Ray3Testing : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DistanceLine3Ray3Testing); 
+    class DistanceLine3Ray3Testing : public CoreTools::UnitTest
+    {
+    public:
+        using ClassType = DistanceLine3Ray3Testing;
+        using ParentType = UnitTest;
 
-	private:
-		void MainTest();		
-		void BaseTest();
-		void StaticTest();
-		void DynamicTest();
-		void DerivativeTest();
-		void IntervalTest();
+    public:
+        explicit DistanceLine3Ray3Testing(const OStreamShared& streamShared);
 
-		void DoRunUnitTest() override; 
-	};
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+    private:
+        void MainTest();
+        void BaseTest();
+        void StaticTest();
+        void DynamicTest();
+        void DerivativeTest();
+        void IntervalTest();
+
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // MATHEMATICS_DISTANCE_SUITE_DISTANCE_LINE3_RAY3_TESTING_H
+#endif  // MATHEMATICS_DISTANCE_SUITE_DISTANCE_LINE3_RAY3_TESTING_H

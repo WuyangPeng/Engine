@@ -9,12 +9,23 @@
 
 #include "Bisect3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/NumericalAnalysis/Bisect3Detail.h"
 #include "Mathematics/NumericalAnalysis/Bisect3RootDetail.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Mathematics::Bisect3Testing::Bisect3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Bisect3Testing)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Bisect3Testing)
+
+void Mathematics::Bisect3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Bisect3Testing::MainTest()
 {

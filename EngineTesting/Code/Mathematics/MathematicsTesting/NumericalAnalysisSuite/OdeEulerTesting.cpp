@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/OdeEulerDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::ostream;
 using std::vector;
 

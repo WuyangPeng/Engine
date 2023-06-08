@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/18 18:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 17:36)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT_POWERS_DATA_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT_POWERS_DATA_DETAIL_H
@@ -18,7 +18,7 @@
 
 template <typename Real, int S>
 Mathematics::PolynomialFitPowersData<Real, S>::PolynomialFitPowersData() noexcept
-    : m_MaxPower{}, m_Min{}, m_Max{}, m_Scale{}, m_InvTwoWScale{}, m_Coefficients{}, m_Solved{ false }
+    : maxPower{}, min{}, max{}, scale{}, invTwoWScale{}, coefficients{}, solved{ false }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -38,7 +38,7 @@ bool Mathematics::PolynomialFitPowersData<Real, S>::IsSolveSucceed() const noexc
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Solved;
+    return solved;
 }
 
 template <typename Real, int S>
@@ -46,7 +46,7 @@ int Mathematics::PolynomialFitPowersData<Real, S>::GetSize() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Size;
+    return size;
 }
 
 template <typename Real, int S>
@@ -54,7 +54,7 @@ int Mathematics::PolynomialFitPowersData<Real, S>::GetMaxPower(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_MaxPower.at(index);
+    return maxPower.at(index);
 }
 
 template <typename Real, int S>
@@ -62,7 +62,7 @@ Real Mathematics::PolynomialFitPowersData<Real, S>::GetMin(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Min.at(index);
+    return min.at(index);
 }
 
 template <typename Real, int S>
@@ -70,7 +70,7 @@ Real Mathematics::PolynomialFitPowersData<Real, S>::GetMax(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Max.at(index);
+    return max.at(index);
 }
 
 template <typename Real, int S>
@@ -78,7 +78,7 @@ Real Mathematics::PolynomialFitPowersData<Real, S>::GetScale(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Scale.at(index);
+    return scale.at(index);
 }
 
 template <typename Real, int S>
@@ -86,7 +86,7 @@ Real Mathematics::PolynomialFitPowersData<Real, S>::GetInvTwoWScale() const noex
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_InvTwoWScale;
+    return invTwoWScale;
 }
 
 template <typename Real, int S>
@@ -94,7 +94,7 @@ const typename Mathematics::PolynomialFitPowersData<Real, S>::Coefficients Mathe
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Coefficients;
+    return coefficients;
 }
 
 template <typename Real, int S>
@@ -102,7 +102,7 @@ Real Mathematics::PolynomialFitPowersData<Real, S>::GetCoefficients(int index) c
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Coefficients.at(index);
+    return coefficients.at(index);
 }
 
 template <typename Real, int S>
@@ -110,19 +110,19 @@ void Mathematics::PolynomialFitPowersData<Real, S>::SetMaxPower(int index, int p
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_MaxPower.at(index) = power;
+    maxPower.at(index) = power;
 }
 
 template <typename Real, int S>
-void Mathematics::PolynomialFitPowersData<Real, S>::SetScale(int index, Real scale)
+void Mathematics::PolynomialFitPowersData<Real, S>::SetScale(int index, Real aScale)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Scale.at(index) = scale;
+    scale.at(index) = aScale;
 
-    if (index == Size - 1)
+    if (index == size - 1)
     {
-        m_InvTwoWScale = Math::GetRational(1, 2) / m_Scale.at(index);
+        invTwoWScale = Math::GetRational(1, 2) / scale.at(index);
     }
 }
 
@@ -133,13 +133,13 @@ void Mathematics::PolynomialFitPowersData<Real, S>::Solve(const VariableMatrix& 
 
     try
     {
-        m_Coefficients = LinearSystem<Real>{}.Solve(matrix, vector.GetContainer());
+        coefficients = LinearSystem<Real>{}.Solve(matrix, vector.GetContainer());
 
-        m_Solved = true;
+        solved = true;
     }
     catch (const CoreTools::Error& error)
     {
-        m_Solved = false;
+        solved = false;
 
         LOG_SINGLETON_APPENDER(Info, CoreTools, SYSTEM_TEXT("求解线性系统失败\n"), error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }

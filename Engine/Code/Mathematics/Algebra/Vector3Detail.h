@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/01 16:29)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/01 10:12)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR3_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VECTOR3_DETAIL_H
@@ -23,25 +23,28 @@
 #include <iostream>
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <typename RhsType>
 Mathematics::Vector3<Real>::Vector3(const Vector2<RhsType>& vector)
-    : m_X{ boost::numeric_cast<Real>(vector.GetX()) }, m_Y{ boost::numeric_cast<Real>(vector.GetY()) }, m_Z{}
+    : x{ boost::numeric_cast<Real>(vector.GetX()) }, y{ boost::numeric_cast<Real>(vector.GetY()) }, z{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <typename RhsType>
 Mathematics::Vector3<Real>::Vector3(const Vector3<RhsType>& vector)
-    : m_X{ boost::numeric_cast<Real>(vector.GetX()) }, m_Y{ boost::numeric_cast<Real>(vector.GetY()) }, m_Z{ boost::numeric_cast<Real>(vector.GetZ()) }
+    : x{ boost::numeric_cast<Real>(vector.GetX()) }, y{ boost::numeric_cast<Real>(vector.GetY()) }, z{ boost::numeric_cast<Real>(vector.GetZ()) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 template <typename RhsType>
 Mathematics::Vector3<Real>::Vector3(const Vector4<RhsType>& vector)
-    : m_X{ boost::numeric_cast<Real>(vector.GetX()) }, m_Y{ boost::numeric_cast<Real>(vector.GetY()) }, m_Z{ boost::numeric_cast<Real>(vector.GetZ()) }
+    : x{ boost::numeric_cast<Real>(vector.GetX()) }, y{ boost::numeric_cast<Real>(vector.GetY()) }, z{ boost::numeric_cast<Real>(vector.GetZ()) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }

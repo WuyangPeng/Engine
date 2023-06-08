@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/OdeSolverDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::vector;
 
 namespace Mathematics

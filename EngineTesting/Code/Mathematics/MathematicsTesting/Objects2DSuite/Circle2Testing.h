@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_OBJECTS2D_SUITE_CIRCLE2_TESTING_H
 #define MATHEMATICS_OBJECTS2D_SUITE_CIRCLE2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Circle2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Circle2Testing);
+        using ClassType = Circle2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Circle2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

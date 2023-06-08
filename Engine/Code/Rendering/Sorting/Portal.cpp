@@ -51,7 +51,7 @@ void Rendering::Portal::UpdateWorldData(const TransformF& worldTransform)
         worldVertices.at(i) = worldTransform * modelVertices.at(i);
     }
 
-    worldPlane = modelPlane.GetHomogeneousPoint() * worldTransform.GetInverseMatrix();
+    worldPlane = Mathematics::PlaneF{ modelPlane.GetHomogeneousPoint() * worldTransform.GetInverseMatrix() };
 }
 
 bool Rendering::Portal::ReducedFrustum(const Culler& culler, std::array<float, 6>& reducedFrustum)

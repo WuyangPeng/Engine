@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_INTERSECTION_SUITE_STATIC_TEST_INTERSECTOR_RAY2_RAY2_TESTING_H
 #define MATHEMATICS_INTERSECTION_SUITE_STATIC_TEST_INTERSECTOR_RAY2_RAY2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class StaticTestIntersectorRay2Ray2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(StaticTestIntersectorRay2Ray2Testing);
+        using ClassType = StaticTestIntersectorRay2Ray2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit StaticTestIntersectorRay2Ray2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

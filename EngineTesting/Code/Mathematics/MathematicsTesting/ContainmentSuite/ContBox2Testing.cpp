@@ -9,19 +9,30 @@
 
 #include "ContBox2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/AxesAlignBoundingBox2Detail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Containment/ContBox2Detail.h"
 #include <random>
-
 namespace Mathematics
 {
     template class ContBox2<float>;
     template class ContBox2<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, ContBox2Testing)
+Mathematics::ContBox2Testing::ContBox2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, ContBox2Testing)
+
+void Mathematics::ContBox2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::ContBox2Testing::MainTest()
 {
@@ -36,9 +47,9 @@ void Mathematics::ContBox2Testing::ContAlignedBoxTest()
     const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const std::uniform_int<> secondRandomDistribution(10, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
         const int size = secondRandomDistribution(generator);
@@ -63,9 +74,9 @@ void Mathematics::ContBox2Testing::ContOrientedBoxTest()
     const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const std::uniform_int<> secondRandomDistribution(10, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
         const int size = secondRandomDistribution(generator);
@@ -90,9 +101,9 @@ void Mathematics::ContBox2Testing::MergeBoxesTest()
     const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const std::uniform_int<> secondRandomDistribution(10, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> firstVertices;
         const int firstSize = secondRandomDistribution(generator);

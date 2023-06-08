@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 11:39)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:19)
 
-#ifndef MATHEMATICS_OBJECTS2D_ELLIPSE2_DETAIL_H
-#define MATHEMATICS_OBJECTS2D_ELLIPSE2_DETAIL_H
+#ifndef MATHEMATICS_OBJECTS_2D_ELLIPSE2_DETAIL_H
+#define MATHEMATICS_OBJECTS_2D_ELLIPSE2_DETAIL_H
 
 #include "Ellipse2.h"
 #include "Ellipse2CoefficientsDetail.h"
@@ -243,7 +243,7 @@ Mathematics::Ellipse2<Real> Mathematics::Ellipse2<Real>::GetMove(Real t, const V
 }
 
 template <typename Real>
-bool Mathematics::Approximate(const Ellipse2<Real>& lhs, const Ellipse2<Real>& rhs, const Real epsilon)
+bool Mathematics::Approximate(const Ellipse2<Real>& lhs, const Ellipse2<Real>& rhs, Real epsilon)
 {
     return Vector2Tools<Real>::Approximate(lhs.GetCenter(), rhs.GetCenter(), epsilon) &&
            Vector2Tools<Real>::Approximate(lhs.GetAxis0(), rhs.GetAxis0(), epsilon) &&
@@ -269,4 +269,4 @@ std::ostream& Mathematics::operator<<(std::ostream& outFile, const Ellipse2<Real
     return outFile;
 }
 
-#endif  // MATHEMATICS_OBJECTS2D_ELLIPSE2_DETAIL_H
+#endif  // MATHEMATICS_OBJECTS_2D_ELLIPSE2_DETAIL_H

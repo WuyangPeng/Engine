@@ -9,10 +9,10 @@
 
 #include "Matrix2EigenDecompositionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
 #include "Mathematics/Algebra/Matrix2EigenDecompositionDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -24,7 +24,18 @@ namespace Mathematics
     template class Matrix2EigenDecomposition<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Matrix2EigenDecompositionTesting)
+Mathematics::Matrix2EigenDecompositionTesting::Matrix2EigenDecompositionTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Matrix2EigenDecompositionTesting)
+
+void Mathematics::Matrix2EigenDecompositionTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Matrix2EigenDecompositionTesting::MainTest()
 {
@@ -36,9 +47,7 @@ void Mathematics::Matrix2EigenDecompositionTesting::EigenDecompositionTest()
     default_random_engine generator{};
     const uniform_real<double> randomDistribution{ -10.0, 10.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Matrix2D firstMatrix(randomDistribution(generator), randomDistribution(generator), 0.0, randomDistribution(generator));
 

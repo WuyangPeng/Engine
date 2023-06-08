@@ -173,7 +173,7 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateParsing
     content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
     content += TextParsing::gRow;
     content += TextParsing::gRightBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gFunctionBeginBrackets;
@@ -249,7 +249,7 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateParsing
     content += TextParsing::gLeftBrackets;
     content += TextParsing::gRightBrackets;
     content += TextParsing::gRightBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gFunctionBeginBrackets;
@@ -312,7 +312,7 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateParsing
         content += TextParsing::gDoubleColon;
         content += TextParsing::gParsing;
         content += TextParsing::gJsonRowParameter;
-        content += TextParsing::gNewline;
+        content += TextParsing::gNewlineCharacter;
 
         content += TextParsing::gFunctionBeginBrackets;
 
@@ -346,7 +346,7 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinit
     content += StringUtility::ToFirstLetterUpper(jsonHead.GetJsonClassName());
     content += TextParsing::gContainer;
     content += TextParsing::gJsonRowParameter;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gColon;
@@ -377,7 +377,7 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinit
     content += jsonHead.GetJsonClassName();
     content += TextParsing::gContainer;
     content += TextParsing::gRightBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gNewlineCharacter;
 
@@ -404,7 +404,7 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateIdConst
         content += TextParsing::gRightBrackets;
         content += TextParsing::gSpace;
         content += TextParsing::gNoexcept;
-        content += TextParsing::gNewline;
+        content += TextParsing::gNewlineCharacter;
 
         content += TextParsing::gIndentation;
         content += TextParsing::gColon;
@@ -478,7 +478,7 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateParsing
         content += StringUtility::ToFirstLetterLower(jsonNode.GetTypeName());
         content += TextParsing::gRow;
         content += TextParsing::gRightBrackets;
-        content += TextParsing::gNewline;
+        content += TextParsing::gNewlineCharacter;
 
         content += TextParsing::gIndentation;
         content += TextParsing::gFunctionBeginBrackets;
@@ -555,7 +555,7 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateParsing
         content += TextParsing::gLeftBrackets;
         content += TextParsing::gRightBrackets;
         content += TextParsing::gRightBrackets;
-        content += TextParsing::gNewline;
+        content += TextParsing::gNewlineCharacter;
 
         content += TextParsing::gIndentation;
         content += TextParsing::gFunctionBeginBrackets;
@@ -620,7 +620,7 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateNestedA
         content += TextParsing::gDoubleColon;
         content += TextParsing::gParsing;
         content += TextParsing::gJsonRowParameter;
-        content += TextParsing::gNewline;
+        content += TextParsing::gNewlineCharacter;
 
         content += TextParsing::gFunctionBeginBrackets;
 
@@ -746,7 +746,7 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinit
     content += TextParsing::gDoubleColon;
     content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
     content += TextParsing::gJsonRowParameter;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gColon;
@@ -793,7 +793,7 @@ System::String CoreTools::JsonGenerateDefaultFunctionDefinition::GenerateDefinit
     content += TextParsing::gSpace;
     content += StringUtility::ToFirstLetterUpper(jsonNode.GetTypeName());
     content += TextParsing::gRightBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gNewlineCharacter;
 

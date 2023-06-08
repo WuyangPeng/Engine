@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/07 19:04)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 16:00)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX_H
 #define MATHEMATICS_ALGEBRA_MATRIX_H
@@ -29,12 +29,12 @@
 namespace Mathematics
 {
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class Matrix final : private boost::additive<Matrix<Real>, boost::multiplicative<Matrix<Real>, Real, boost::totally_ordered<Matrix<Real>>>>
     {
     public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-
         using ClassType = Matrix<Real>;
+
         using Math = Math<Real>;
         using APoint = APoint<Real>;
         using AVector = AVector<Real>;
@@ -52,8 +52,8 @@ namespace Mathematics
 
     public:
         // 如果标志为MatrixFlagsZero，创建零矩阵，否则创建单位矩阵。
-        explicit constexpr Matrix(MatrixInitType flag = MatrixInitType::Zero) noexcept
-            : m_Entry{ Create(flag) }
+        explicit constexpr Matrix(const MatrixInitType flag = MatrixInitType::Zero) noexcept
+            : entry{ Create(flag) }
         {
         }
 
@@ -74,45 +74,45 @@ namespace Mathematics
                          Real member31,
                          Real member32,
                          Real member33) noexcept
-            : m_Entry{ Create(member00,
-                              member01,
-                              member02,
-                              member03,
-                              member10,
-                              member11,
-                              member12,
-                              member13,
-                              member20,
-                              member21,
-                              member22,
-                              member23,
-                              member30,
-                              member31,
-                              member32,
-                              member33,
-                              MatrixMajorFlags::Row) }
+            : entry{ Create(member00,
+                            member01,
+                            member02,
+                            member03,
+                            member10,
+                            member11,
+                            member12,
+                            member13,
+                            member20,
+                            member21,
+                            member22,
+                            member23,
+                            member30,
+                            member31,
+                            member32,
+                            member33,
+                            MatrixMajorFlags::Row) }
         {
         }
 
         // 创建一个对角矩阵,
         constexpr Matrix(Real member00, Real member11, Real member22) noexcept
-            : m_Entry{ Create(member00,
-                              Math::GetValue(0),
-                              Math::GetValue(0),
-                              Math::GetValue(0),
-                              Math::GetValue(0),
-                              member11,
-                              Math::GetValue(0),
-                              Math::GetValue(0),
-                              Math::GetValue(0),
-                              Math::GetValue(0),
-                              member22,
-                              Math::GetValue(0),
-                              Math::GetValue(0),
-                              Math::GetValue(0),
-                              Math::GetValue(0),
-                              Math::GetValue(1),
-                              MatrixMajorFlags::Row) }
+            : entry{ Create(member00,
+                            Math::GetValue(0),
+                            Math::GetValue(0),
+                            Math::GetValue(0),
+                            Math::GetValue(0),
+                            member11,
+                            Math::GetValue(0),
+                            Math::GetValue(0),
+                            Math::GetValue(0),
+                            Math::GetValue(0),
+                            member22,
+                            Math::GetValue(0),
+                            Math::GetValue(0),
+                            Math::GetValue(0),
+                            Math::GetValue(0),
+                            Math::GetValue(1),
+                            MatrixMajorFlags::Row) }
         {
         }
 
@@ -162,7 +162,7 @@ namespace Mathematics
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-            return m_Entry[Index];
+            return entry[Index];
 
 #include STSTEM_WARNING_POP
         }
@@ -175,7 +175,7 @@ namespace Mathematics
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-            m_Entry[Index] = value;
+            entry[Index] = value;
 
 #include STSTEM_WARNING_POP
         }
@@ -188,7 +188,7 @@ namespace Mathematics
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-            m_Entry[Index] += value;
+            entry[Index] += value;
 
 #include STSTEM_WARNING_POP
         }
@@ -201,7 +201,7 @@ namespace Mathematics
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-            m_Entry[Index] -= value;
+            entry[Index] -= value;
 
 #include STSTEM_WARNING_POP
         }
@@ -214,7 +214,7 @@ namespace Mathematics
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 
-            m_Entry[Index] *= value;
+            entry[Index] *= value;
 
 #include STSTEM_WARNING_POP
         }
@@ -343,7 +343,7 @@ namespace Mathematics
             }
         }
 
-        NODISCARD static constexpr EntryType Create(MatrixInitType flag)
+        NODISCARD static constexpr EntryType Create(const MatrixInitType flag)
         {
             if (flag == MatrixInitType::Zero)
             {
@@ -374,7 +374,7 @@ namespace Mathematics
 
     private:
         // 矩阵存储为行主序
-        EntryType m_Entry{};
+        EntryType entry{};
     };
 
     // 调试输出。
@@ -432,7 +432,7 @@ namespace Mathematics
     NODISCARD typename AVector<Real>::ContainerType BatchMultiply(const Matrix<Real>& matrix, const typename AVector<Real>::ContainerType& inputPoints);
 
     template <typename Real>
-    NODISCARD bool Approximate(const Matrix<Real>& lhs, const Matrix<Real>& rhs, const Real epsilon = Math<Real>::GetZeroTolerance());
+    NODISCARD bool Approximate(const Matrix<Real>& lhs, const Matrix<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance());
 
     using MatrixF = Matrix<float>;
     using MatrixD = Matrix<double>;

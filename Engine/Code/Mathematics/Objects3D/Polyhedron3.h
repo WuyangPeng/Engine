@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 17:47)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:46)
 
-#ifndef MATHEMATICS_OBJECTS3D_POLYHEDRON3_H
-#define MATHEMATICS_OBJECTS3D_POLYHEDRON3_H
+#ifndef MATHEMATICS_OBJECTS_3D_POLYHEDRON3_H
+#define MATHEMATICS_OBJECTS_3D_POLYHEDRON3_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -52,7 +52,9 @@ namespace Mathematics
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
 #ifdef OPEN_CLASS_INVARIANT
+
         NODISCARD bool IndicesIsValid() const noexcept;
+
 #endif  // OPEN_CLASS_INVARIANT
 
         // 只读成员访问。
@@ -85,4 +87,4 @@ namespace Mathematics
     using Polyhedron3D = Polyhedron3<double>;
 }
 
-#endif  // MATHEMATICS_OBJECTS3D_POLYHEDRON3_H
+#endif  // MATHEMATICS_OBJECTS_3D_POLYHEDRON3_H

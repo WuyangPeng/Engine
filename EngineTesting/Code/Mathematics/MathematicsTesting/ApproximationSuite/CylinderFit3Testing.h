@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_APPROXIMATION_SUITE_CYLINDER_FIT3_TESTING_H
 #define MATHEMATICS_APPROXIMATION_SUITE_CYLINDER_FIT3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class CylinderFit3Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(CylinderFit3Testing);
+        using ClassType = CylinderFit3Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit CylinderFit3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

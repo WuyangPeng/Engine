@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_QUERY_SUITE_QUERY2_INTEGER_TESTING_H
 #define MATHEMATICS_QUERY_SUITE_QUERY2_INTEGER_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Query2IntegerTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Query2IntegerTesting);
+        using ClassType = Query2IntegerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Query2IntegerTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

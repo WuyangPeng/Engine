@@ -9,9 +9,9 @@
 
 #include "Vector3DOrthonormalBasisTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3OrthonormalBasisDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 #include <random>
 
@@ -24,7 +24,18 @@ namespace Mathematics
     template class Vector3OrthonormalBasis<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector3OrthonormalBasisTesting)
+Mathematics::Vector3OrthonormalBasisTesting::Vector3OrthonormalBasisTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Vector3OrthonormalBasisTesting)
+
+void Mathematics::Vector3OrthonormalBasisTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Vector3OrthonormalBasisTesting::MainTest()
 {
@@ -38,9 +49,9 @@ void Mathematics::Vector3OrthonormalBasisTesting::OrthonormalBasisTest()
     const uniform_real<double> firstRandomDistribution{ -10.0, 10.0 };
     const uniform_real<float> secondRandomDistribution{ -10.0f, 10.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         Vector3D firstVector(firstRandomDistribution(generator),
                              firstRandomDistribution(generator),

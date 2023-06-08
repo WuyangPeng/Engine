@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/08 11:51)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 15:27)
 
 /// 所谓的带状矩阵即：在矩阵A中，
 /// 所有的非零元素都集中在以主对角线为中心的带状区域中。
@@ -29,11 +29,10 @@
 namespace Mathematics
 {
     template <typename Real>
+    requires std::is_arithmetic_v<Real>
     class BandedMatrixSolve final
     {
     public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-
         using ClassType = BandedMatrixSolve<Real>;
         using Math = Math<Real>;
         using BandedMatrix = BandedMatrix<Real>;
@@ -42,13 +41,15 @@ namespace Mathematics
         using ContainerType = std::vector<Real>;
 
     public:
-        BandedMatrixSolve(int size, int lowerBandsNumber, int upperBandsNumber, const Real epsilon = Math::GetZeroTolerance());
+        BandedMatrixSolve(int size, int lowerBandsNumber, int upperBandsNumber, Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
 #ifdef OPEN_CLASS_INVARIANT
+
         NODISCARD bool IsSolveValid() const;
         NODISCARD Real GetProduct(const BandedMatrix& upperBandedMatrix, const BandedMatrix& lowerBandedMatrix, int row, int column) const;
+
 #endif  // OPEN_CLASS_INVARIANT
 
         // 成员访问
@@ -74,7 +75,7 @@ namespace Mathematics
         void SetLowerBand(int index, const ContainerType& lowerBand);
 
         // 上三角
-        // GetUupperBand(index):  0 <= index < UpperBandMax
+        // GetUpperBand(index):  0 <= index < UpperBandMax
         NODISCARD int GetUpperBandMax(int index) const noexcept(gAssert < 1 || gMathematicsAssert < 1);
         NODISCARD ContainerType GetUpperBand(int index) const;
         void SetUpperBand(int index, const ContainerType& upperBand);

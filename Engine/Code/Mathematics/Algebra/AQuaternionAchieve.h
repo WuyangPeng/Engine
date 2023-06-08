@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/08 14:35)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 14:23)
 
-#ifndef MATHEMATICS_ALGEBRA_HQUATERNION_ACHIEVE_H
-#define MATHEMATICS_ALGEBRA_HQUATERNION_ACHIEVE_H
+#ifndef MATHEMATICS_ALGEBRA_A_QUATERNION_ACHIEVE_H
+#define MATHEMATICS_ALGEBRA_A_QUATERNION_ACHIEVE_H
 
 #include "AQuaternion.h"
 #include "AVector.h"
@@ -19,25 +19,21 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real>::AQuaternion(const ArrayType& coordinate) noexcept
-    : m_W{ coordinate[System::EnumCastUnderlying(PointIndex::W)] },
-      m_X{ coordinate[System::EnumCastUnderlying(PointIndex::X)] },
-      m_Y{ coordinate[System::EnumCastUnderlying(PointIndex::Y)] },
-      m_Z{ coordinate[System::EnumCastUnderlying(PointIndex::Z)] }
+    : w{ coordinate.at(System::EnumCastUnderlying(PointIndex::W)) },
+      x{ coordinate.at(System::EnumCastUnderlying(PointIndex::X)) },
+      y{ coordinate.at(System::EnumCastUnderlying(PointIndex::Y)) },
+      z{ coordinate.at(System::EnumCastUnderlying(PointIndex::Z)) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
-
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real>::AQuaternion(const Matrix& matrix)
-    : m_W{}, m_X{}, m_Y{}, m_Z{}
+    : w{}, x{}, y{}, z{}
 {
     FromRotationMatrix(matrix);
 
@@ -45,24 +41,25 @@ Mathematics::AQuaternion<Real>::AQuaternion(const Matrix& matrix)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::AQuaternion<Real>::FromRotationMatrix(const Matrix& matrix)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
     // 算法在Ken Shoemake的文章，在1987年SIGGRAPH课程文章“四元微积分和快速动画”。
 
-    auto trace = matrix.GetValue<0>() + matrix.GetValue<5>() + matrix.GetValue<10>();
+    const auto trace = matrix.GetValue<0>() + matrix.GetValue<5>() + matrix.GetValue<10>();
 
     if (Math::GetValue(0) < trace)
     {
         // |w| > 1/2, 可能选择 w > 1/2
         auto root = Math::Sqrt(trace + Math::GetValue(1));  // 2w
 
-        m_W = Math::GetRational(1, 2) * root;
+        w = Math::GetRational(1, 2) * root;
         root = Math::GetRational(1, 2) / root;  // 1 / (4w)
-        m_X = (matrix.GetValue<9>() - matrix.GetValue<6>()) * root;
-        m_Y = (matrix.GetValue<2>() - matrix.GetValue<8>()) * root;
-        m_Z = (matrix.GetValue<4>() - matrix.GetValue<1>()) * root;
+        x = (matrix.GetValue<9>() - matrix.GetValue<6>()) * root;
+        y = (matrix.GetValue<2>() - matrix.GetValue<8>()) * root;
+        z = (matrix.GetValue<4>() - matrix.GetValue<1>()) * root;
     }
     else
     {
@@ -89,15 +86,16 @@ void Mathematics::AQuaternion<Real>::FromRotationMatrix(const Matrix& matrix)
 
         (*this)[index0 + 1] = Math::GetRational(1, 2) * root;
         root = Math::GetRational(1, 2) / root;
-        m_W = (matrix(index2, index1) - matrix(index1, index2)) * root;
+        w = (matrix(index2, index1) - matrix(index1, index2)) * root;
         (*this)[index1 + 1] = (matrix(index1, index0) + matrix(index0, index1)) * root;
         (*this)[index2 + 1] = (matrix(index2, index0) + matrix(index0, index2)) * root;
     }
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real>::AQuaternion(const AVector& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
-    : m_W{}, m_X{}, m_Y{}, m_Z{}
+    : w{}, x{}, y{}, z{}
 {
     MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
 
@@ -107,28 +105,29 @@ Mathematics::AQuaternion<Real>::AQuaternion(const AVector& axis, Real angle) noe
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::AQuaternion<Real>::FromAxisAngle(const AVector& axis, Real angle) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(axis.IsNormalize(), "axis必须是单位向量！");
 
     // 代表旋转的四元数是
-    //   q = cos(A/2) + sin(A/2) * (x * i + y * j + z * k)
+    // q = cos(A/2) + sin(A/2) * (x * i + y * j + z * k)
 
     const auto halfAngle = Math::GetRational(1, 2) * angle;
 
     const auto sinValue = Math::Sin(halfAngle);
-    m_W = Math::Cos(halfAngle);
+    w = Math::Cos(halfAngle);
 
-    m_X = sinValue * axis.GetX();
-    m_Y = sinValue * axis.GetY();
-    m_Z = sinValue * axis.GetZ();
+    x = sinValue * axis.GetX();
+    y = sinValue * axis.GetY();
+    z = sinValue * axis.GetZ();
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::AQuaternion<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::AQuaternion<Real>::IsValid() const noexcept
 {
     return true;
 }
@@ -136,6 +135,7 @@ bool Mathematics::AQuaternion<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 const Real& Mathematics::AQuaternion<Real>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -143,21 +143,22 @@ const Real& Mathematics::AQuaternion<Real>::operator[](int index) const
     switch (System::UnderlyingCastEnum<PointIndex>(index))
     {
         case PointIndex::X:
-            return m_X;
+            return x;
         case PointIndex::Y:
-            return m_Y;
+            return y;
         case PointIndex::Z:
-            return m_Z;
+            return z;
         case PointIndex::W:
-            return m_W;
+            return w;
         default:
             break;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s))
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real& Mathematics::AQuaternion<Real>::operator[](int index)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -166,70 +167,79 @@ Real& Mathematics::AQuaternion<Real>::operator[](int index)
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::AQuaternion<Real>::GetW() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_W;
+    return w;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::AQuaternion<Real>::GetX() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_X;
+    return x;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::AQuaternion<Real>::GetY() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Y;
+    return y;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::AQuaternion<Real>::GetZ() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Z;
+    return z;
 }
 
 template <typename Real>
-void Mathematics::AQuaternion<Real>::SetW(Real w) noexcept
+requires std::is_arithmetic_v<Real>
+void Mathematics::AQuaternion<Real>::SetW(Real aW) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_W = w;
+    w = aW;
 }
 
 template <typename Real>
-void Mathematics::AQuaternion<Real>::SetX(Real x) noexcept
+requires std::is_arithmetic_v<Real>
+void Mathematics::AQuaternion<Real>::SetX(Real aX) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X = x;
+    x = aX;
 }
 
 template <typename Real>
-void Mathematics::AQuaternion<Real>::SetY(Real y) noexcept
+requires std::is_arithmetic_v<Real>
+void Mathematics::AQuaternion<Real>::SetY(Real aY) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Y = y;
+    y = aY;
 }
 
 template <typename Real>
-void Mathematics::AQuaternion<Real>::SetZ(Real z) noexcept
+requires std::is_arithmetic_v<Real>
+void Mathematics::AQuaternion<Real>::SetZ(Real aZ) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Z = z;
+    z = aZ;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator*=(const AQuaternion& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -240,53 +250,58 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator*=(const
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::operator-() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return AQuaternion{ -m_W, -m_X, -m_Y, -m_Z };
+    return AQuaternion{ -w, -x, -y, -z };
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator+=(const AQuaternion& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_W += rhs.m_W;
-    m_X += rhs.m_X;
-    m_Y += rhs.m_Y;
-    m_Z += rhs.m_Z;
+    w += rhs.w;
+    x += rhs.x;
+    y += rhs.y;
+    z += rhs.z;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator-=(const AQuaternion& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_W -= rhs.m_W;
-    m_X -= rhs.m_X;
-    m_Y -= rhs.m_Y;
-    m_Z -= rhs.m_Z;
+    w -= rhs.w;
+    x -= rhs.x;
+    y -= rhs.y;
+    z -= rhs.z;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator*=(Real scalar) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_W *= scalar;
-    m_X *= scalar;
-    m_Y *= scalar;
-    m_Z *= scalar;
+    w *= scalar;
+    x *= scalar;
+    y *= scalar;
+    z *= scalar;
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator/=(Real scalar) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -295,39 +310,40 @@ Mathematics::AQuaternion<Real>& Mathematics::AQuaternion<Real>::operator/=(Real 
     {
         MATHEMATICS_ASSERTION_1(false, "除零错误！");
 
-        m_W = Math::maxReal;
-        m_X = Math::maxReal;
-        m_Y = Math::maxReal;
-        m_Z = Math::maxReal;
+        w = Math::maxReal;
+        x = Math::maxReal;
+        y = Math::maxReal;
+        z = Math::maxReal;
     }
     else
     {
-        m_W /= scalar;
-        m_X /= scalar;
-        m_Y /= scalar;
-        m_Z /= scalar;
+        w /= scalar;
+        x /= scalar;
+        y /= scalar;
+        z /= scalar;
     }
 
     return *this;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::AQuaternion<Real>::Matrix Mathematics::AQuaternion<Real>::ToRotationMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    auto twoX = Math::GetValue(2) * m_X;
-    auto twoY = Math::GetValue(2) * m_Y;
-    auto twoZ = Math::GetValue(2) * m_Z;
-    auto twoWX = twoX * m_W;
-    auto twoWY = twoY * m_W;
-    auto twoWZ = twoZ * m_W;
-    auto twoXX = twoX * m_X;
-    auto twoXY = twoY * m_X;
-    auto twoXZ = twoZ * m_X;
-    auto twoYY = twoY * m_Y;
-    auto twoYZ = twoZ * m_Y;
-    auto twoZZ = twoZ * m_Z;
+    const auto twoX = Math::GetValue(2) * x;
+    const auto twoY = Math::GetValue(2) * y;
+    const auto twoZ = Math::GetValue(2) * z;
+    const auto twoWX = twoX * w;
+    const auto twoWY = twoY * w;
+    const auto twoWZ = twoZ * w;
+    const auto twoXX = twoX * x;
+    const auto twoXY = twoY * x;
+    const auto twoXZ = twoZ * x;
+    const auto twoYY = twoY * y;
+    const auto twoYZ = twoZ * y;
+    const auto twoZZ = twoZ * z;
 
     return Matrix{ Math::GetValue(1) - (twoYY + twoZZ),
                    twoXY - twoWZ,
@@ -351,20 +367,21 @@ typename Mathematics::AQuaternion<Real>::Matrix Mathematics::AQuaternion<Real>::
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>::ToAxis() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     // 代表旋转的四元数是
-    //   q = cos(A/2) + sin(A/2) * (x*i + y*j + z*k)
+    // q = cos(A/2) + sin(A/2) * (x*i + y*j + z*k)
 
-    const auto sqrareLength = m_X * m_X + m_Y * m_Y + m_Z * m_Z;
+    const auto squareLength = x * x + y * y + z * z;
 
-    if (Math::GetZeroTolerance() < sqrareLength)
+    if (Math::GetZeroTolerance() < squareLength)
     {
-        const auto invLength = Math::InvSqrt(sqrareLength);
+        const auto invLength = Math::InvSqrt(squareLength);
 
-        return AVector{ m_X * invLength, m_Y * invLength, m_Z * invLength };
+        return AVector{ x * invLength, y * invLength, z * invLength };
     }
     else
     {
@@ -374,15 +391,16 @@ typename Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>:
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics ::AQuaternion<Real>::ToAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto sqrareLength = m_X * m_X + m_Y * m_Y + m_Z * m_Z;
+    const auto squareLength = x * x + y * y + z * z;
 
-    if (Math::GetZeroTolerance() < sqrareLength)
+    if (Math::GetZeroTolerance() < squareLength)
     {
-        return Math::GetValue(2) * Math::ACos(m_W);
+        return Math::GetValue(2) * Math::ACos(w);
     }
     else
     {
@@ -391,6 +409,7 @@ Real Mathematics ::AQuaternion<Real>::ToAngle() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::AQuaternion<Real>::Length() const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -399,14 +418,16 @@ Real Mathematics::AQuaternion<Real>::Length() const noexcept(gAssert < 3 || gMat
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::AQuaternion<Real>::SquaredLength() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_W * m_W + m_X * m_X + m_Y * m_Y + m_Z * m_Z;
+    return w * w + x * x + y * y + z * z;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::AQuaternion<Real>::Normalize(Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -415,24 +436,24 @@ void Mathematics::AQuaternion<Real>::Normalize(Real epsilon) noexcept(gAssert < 
 
     if (epsilon < length)
     {
-        m_W /= length;
-        m_X /= length;
-        m_Y /= length;
-        m_Z /= length;
+        w /= length;
+        x /= length;
+        y /= length;
+        z /= length;
     }
     else
     {
         MATHEMATICS_ASSERTION_1(false, "四元数正则化错误！");
 
-        m_W = Math::GetValue(0);
-        m_X = Math::GetValue(0);
-        m_Y = Math::GetValue(0);
-        m_Z = Math::GetValue(0);
+        w = Math::GetValue(0);
+        x = Math::GetValue(0);
+        y = Math::GetValue(0);
+        z = Math::GetValue(0);
     }
 }
 
 template <typename Real>
-bool Mathematics::AQuaternion<Real>::IsNormalize(Real epsilon) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
+requires std::is_arithmetic_v<Real> bool Mathematics::AQuaternion<Real>::IsNormalize(Real epsilon) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -449,6 +470,7 @@ bool Mathematics::AQuaternion<Real>::IsNormalize(Real epsilon) const noexcept(gA
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Inverse() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -457,7 +479,7 @@ Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Inverse() const n
 
     if (Math::GetZeroTolerance() < norm)
     {
-        return AQuaternion{ m_W / norm, -m_X / norm, -m_Y / norm, -m_Z / norm };
+        return AQuaternion{ w / norm, -x / norm, -y / norm, -z / norm };
     }
     else
     {
@@ -468,18 +490,20 @@ Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Inverse() const n
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Conjugate() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return AQuaternion{ m_W, -m_X, -m_Y, -m_Z };
+    return AQuaternion{ w, -x, -y, -z };
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Exp() const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_1(Math::FAbs(m_W) <= Math::GetZeroTolerance(), "四元数w必须等于0！");
+    MATHEMATICS_ASSERTION_1(Math::FAbs(w) <= Math::GetZeroTolerance(), "四元数w必须等于0！");
 
     // 如果 q = A * (x * i + y * j + z * k) 这里 (x,y,z) 是单位长度，然后
     // exp(q) = cos(A) + sin(A) * (x * i + y * j + z * k)。
@@ -488,30 +512,31 @@ Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Exp() const noexc
 
     AQuaternion result{};
 
-    const auto angle = Math::Sqrt(m_X * m_X + m_Y * m_Y + m_Z * m_Z);
+    const auto angle = Math::Sqrt(x * x + y * y + z * z);
 
     const auto sinValue = Math::Sin(angle);
-    result.m_W = Math::Cos(angle);
+    result.w = Math::Cos(angle);
 
     if (Math::GetZeroTolerance() <= Math::FAbs(sinValue))
     {
-        auto coeff = sinValue / angle;
+        const auto coefficient = sinValue / angle;
 
-        result.m_X = coeff * m_X;
-        result.m_Y = coeff * m_Y;
-        result.m_Z = coeff * m_Z;
+        result.x = coefficient * x;
+        result.y = coefficient * y;
+        result.z = coefficient * z;
     }
     else
     {
-        result.m_X = m_X;
-        result.m_Y = m_Y;
-        result.m_Z = m_Z;
+        result.x = x;
+        result.y = y;
+        result.z = z;
     }
 
     return result;
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Log() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -523,19 +548,19 @@ Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Log() const noexc
     // 因为 A/sin(A) 趋向于 1。
 
     AQuaternion result{ *this };
-    result.m_W = Math::GetValue(0);
+    result.w = Math::GetValue(0);
 
-    if (Math::FAbs(m_W) < Math::GetValue(1))
+    if (Math::FAbs(w) < Math::GetValue(1))
     {
-        const auto angle = Math::ACos(m_W);
+        const auto angle = Math::ACos(w);
         const auto sinValue = Math::Sin(angle);
         if (Math::GetZeroTolerance() <= Math::FAbs(sinValue))
         {
-            const auto coeff = angle / sinValue;
+            const auto coefficient = angle / sinValue;
 
-            result.m_X = coeff * m_X;
-            result.m_Y = coeff * m_Y;
-            result.m_Z = coeff * m_Z;
+            result.x = coefficient * x;
+            result.y = coefficient * y;
+            result.z = coefficient * z;
 
             return result;
         }
@@ -545,6 +570,7 @@ Mathematics::AQuaternion<Real> Mathematics::AQuaternion<Real>::Log() const noexc
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 typename Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>::Rotate(const AVector& vector) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
@@ -556,9 +582,9 @@ typename Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>:
     // 所以没有真正的工作去取q的逆。
 
     // 现在
-    //   q * u * q^{-1} = q * <0,x0,y0,z0> * q^{-1}
-    //     = q * (x0 * i + y0 * j + z0 * k) * q^{-1}
-    //     = x0 * (q * i * q^{-1}) + y0 * (q * j * q^{-1}) + z0 * (q * k * q^{-1})
+    // q * u * q^{-1} = q * <0,x0,y0,z0> * q^{-1}
+    //                = q * (x0 * i + y0 * j + z0 * k) * q^{-1}
+    //                = x0 * (q * i * q^{-1}) + y0 * (q * j * q^{-1}) + z0 * (q * k * q^{-1})
     //
     // 是计算在HQuaternion<Real>::ToRotationMatrix中旋转矩阵的列。
     // 向量v被获得作为与向量u与旋转矩阵的乘积。
@@ -571,6 +597,7 @@ typename Mathematics::AQuaternion<Real>::AVector Mathematics::AQuaternion<Real>:
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::AQuaternion<Real>::Slerp(Real t, const AQuaternion& quaternion0, const AQuaternion& quaternion1) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -582,13 +609,13 @@ void Mathematics::AQuaternion<Real>::Slerp(Real t, const AQuaternion& quaternion
     {
         const auto sinValue = Math::Sin(angle);
         const auto tAngle = t * angle;
-        const auto coeff0 = Math::Sin(angle - tAngle) / sinValue;
-        const auto coeff1 = Math::Sin(tAngle) / sinValue;
+        const auto coefficient0 = Math::Sin(angle - tAngle) / sinValue;
+        const auto coefficient1 = Math::Sin(tAngle) / sinValue;
 
-        m_W = coeff0 * quaternion0.m_W + coeff1 * quaternion1.m_W;
-        m_X = coeff0 * quaternion0.m_X + coeff1 * quaternion1.m_X;
-        m_Y = coeff0 * quaternion0.m_Y + coeff1 * quaternion1.m_Y;
-        m_Z = coeff0 * quaternion0.m_Z + coeff1 * quaternion1.m_Z;
+        w = coefficient0 * quaternion0.w + coefficient1 * quaternion1.w;
+        x = coefficient0 * quaternion0.x + coefficient1 * quaternion1.x;
+        y = coefficient0 * quaternion0.y + coefficient1 * quaternion1.y;
+        z = coefficient0 * quaternion0.z + coefficient1 * quaternion1.z;
     }
     else
     {
@@ -597,6 +624,7 @@ void Mathematics::AQuaternion<Real>::Slerp(Real t, const AQuaternion& quaternion
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::AQuaternion<Real>::Intermediate(const AQuaternion& quaternion0, const AQuaternion& quaternion1, const AQuaternion& quaternion2)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
@@ -612,11 +640,12 @@ void Mathematics::AQuaternion<Real>::Intermediate(const AQuaternion& quaternion0
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 void Mathematics::AQuaternion<Real>::Squad(Real t, const AQuaternion& q0, const AQuaternion& a0, const AQuaternion& a1, const AQuaternion& q1) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    auto slerpT = Math::GetValue(2) * t * (Math::GetValue(1) - t);
+    const auto slerpT = Math::GetValue(2) * t * (Math::GetValue(1) - t);
 
     AQuaternion slerpP{};
     slerpP.Slerp(t, q0, q1);
@@ -627,25 +656,21 @@ void Mathematics::AQuaternion<Real>::Squad(Real t, const AQuaternion& q0, const 
     Slerp(slerpT, slerpP, slerpQ);
 }
 
-template <typename T>
-typename Mathematics::AQuaternion<T>::ArrayType Mathematics::AQuaternion<T>::GetCoordinate() const noexcept
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+typename Mathematics::AQuaternion<Real>::ArrayType Mathematics::AQuaternion<Real>::GetCoordinate() const noexcept
 {
     return ArrayType{ GetW(), GetX(), GetY(), GetZ() };
 }
 
-template <typename T>
-void Mathematics::AQuaternion<T>::Set(const ArrayType& coordinate) noexcept
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+void Mathematics::AQuaternion<Real>::Set(const ArrayType& coordinate) noexcept
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-    SetW(coordinate[System::EnumCastUnderlying(PointIndex::W)]);
-    SetX(coordinate[System::EnumCastUnderlying(PointIndex::X)]);
-    SetY(coordinate[System::EnumCastUnderlying(PointIndex::Y)]);
-    SetZ(coordinate[System::EnumCastUnderlying(PointIndex::Z)]);
-
-#include STSTEM_WARNING_POP
+    SetW(coordinate.at(System::EnumCastUnderlying(PointIndex::W)));
+    SetX(coordinate.at(System::EnumCastUnderlying(PointIndex::X)));
+    SetY(coordinate.at(System::EnumCastUnderlying(PointIndex::Y)));
+    SetZ(coordinate.at(System::EnumCastUnderlying(PointIndex::Z)));
 }
 
-#endif  // MATHEMATICS_ALGEBRA_HQUATERNION_ACHIEVE_H
+#endif  // MATHEMATICS_ALGEBRA_A_QUATERNION_ACHIEVE_H

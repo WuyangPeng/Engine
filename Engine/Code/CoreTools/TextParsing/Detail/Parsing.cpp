@@ -176,7 +176,7 @@ System::String CoreTools::Parsing::GenerateElse(int addIndentationCount) const
     auto content = GenerateIndentation(addIndentationCount);
 
     content += TextParsing::gElse;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

@@ -9,10 +9,10 @@
 
 #include "EulerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/EulerDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -28,7 +28,18 @@ namespace Mathematics
 
 #endif  // BUILDING_MATHEMATICS_STATIC
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, EulerTesting)
+Mathematics::EulerTesting::EulerTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, EulerTesting)
+
+void Mathematics::EulerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::EulerTesting::MainTest()
 {
@@ -52,9 +63,7 @@ void Mathematics::EulerTesting::EulerXYZTest()
     const uniform_real<double> firstAngleDistribution{ -MathD::GetPI(), MathD::GetPI() };
     const uniform_real<double> secondAngleDistribution{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const double xAngle = firstAngleDistribution(generator);
         const double yAngle = secondAngleDistribution(generator);
@@ -100,9 +109,7 @@ void Mathematics::EulerTesting::EulerXZYTest()
     const uniform_real<double> firstAngleDistribution{ -MathD::GetPI(), MathD::GetPI() };
     const uniform_real<double> secondAngleDistribution{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const double xAngle = firstAngleDistribution(generator);
         const double yAngle = firstAngleDistribution(generator);
@@ -148,9 +155,7 @@ void Mathematics::EulerTesting::EulerYXZTest()
     const uniform_real<double> firstAngleDistribution{ -MathD::GetPI(), MathD::GetPI() };
     const uniform_real<double> secondAngleDistribution{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const double xAngle = secondAngleDistribution(generator);
         const double yAngle = firstAngleDistribution(generator);
@@ -196,9 +201,7 @@ void Mathematics::EulerTesting::EulerYZXTest()
     const uniform_real<double> firstAngleDistribution{ -MathD::GetPI(), MathD::GetPI() };
     const uniform_real<double> secondAngleDistribution{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const double xAngle = firstAngleDistribution(generator);
         const double yAngle = firstAngleDistribution(generator);
@@ -243,9 +246,7 @@ void Mathematics::EulerTesting::EulerZXYTest()
     const uniform_real<double> firstAngleDistribution{ -MathD::GetPI(), MathD::GetPI() };
     const uniform_real<double> secondAngleDistribution{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const double xAngle = secondAngleDistribution(generator);
         const double yAngle = firstAngleDistribution(generator);
@@ -291,9 +292,7 @@ void Mathematics::EulerTesting::EulerZYXTest()
     const uniform_real<double> firstAngleDistribution{ -MathD::GetPI(), MathD::GetPI() };
     const uniform_real<double> secondAngleDistribution{ -MathD::GetHalfPI(), MathD::GetHalfPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const double xAngle = firstAngleDistribution(generator);
         const double yAngle = secondAngleDistribution(generator);
@@ -339,9 +338,7 @@ void Mathematics::EulerTesting::EulerXYXTest()
     const uniform_real<double> firstAngleDistribution{ -MathD::GetPI(), MathD::GetPI() };
     const uniform_real<double> secondAngleDistribution{ 0, MathD::GetPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const double x0Angle = firstAngleDistribution(generator);
         const double yAngle = secondAngleDistribution(generator);
@@ -387,9 +384,7 @@ void Mathematics::EulerTesting::EulerXZXTest()
     const uniform_real<double> firstAngleDistribution{ -MathD::GetPI(), MathD::GetPI() };
     const uniform_real<double> secondAngleDistribution{ 0, MathD::GetPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const double x0Angle = firstAngleDistribution(generator);
         const double zAngle = secondAngleDistribution(generator);
@@ -435,9 +430,7 @@ void Mathematics::EulerTesting::EulerYXYTest()
     const uniform_real<double> firstAngleDistribution{ -MathD::GetPI(), MathD::GetPI() };
     const uniform_real<double> secondAngleDistribution{ 0, MathD::GetPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const double y0Angle = firstAngleDistribution(generator);
         const double xAngle = secondAngleDistribution(generator);
@@ -483,9 +476,7 @@ void Mathematics::EulerTesting::EulerYZYTest()
     const uniform_real<double> firstAngleDistribution{ -MathD::GetPI(), MathD::GetPI() };
     const uniform_real<double> secondAngleDistribution{ 0, MathD::GetPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const double y0Angle = firstAngleDistribution(generator);
         const double zAngle = secondAngleDistribution(generator);
@@ -531,9 +522,7 @@ void Mathematics::EulerTesting::EulerZXZTest()
     const uniform_real<double> firstAngleDistribution{ -MathD::GetPI(), MathD::GetPI() };
     const uniform_real<double> secondAngleDistribution{ 0, MathD::GetPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const double z0Angle = firstAngleDistribution(generator);
         const double xAngle = secondAngleDistribution(generator);
@@ -579,9 +568,7 @@ void Mathematics::EulerTesting::EulerZYZTest()
     const uniform_real<double> firstAngleDistribution{ -MathD::GetPI(), MathD::GetPI() };
     const uniform_real<double> secondAngleDistribution{ 0, MathD::GetPI() };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         const double z0Angle = firstAngleDistribution(generator);
         const double yAngle = secondAngleDistribution(generator);

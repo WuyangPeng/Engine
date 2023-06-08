@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/01/31 3:39)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 15:32)
 
 #ifndef MATHEMATICS_ALGEBRA_BARYCENTRIC_COORDINATES_H
 #define MATHEMATICS_ALGEBRA_BARYCENTRIC_COORDINATES_H
@@ -21,13 +21,12 @@
 namespace Mathematics
 {
     template <typename Real, int WindowSize>
+    requires std::is_arithmetic_v<Real> && (WindowSize == 3 || WindowSize == 4)
     class BarycentricCoordinates final
     {
     public:
-        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
-        static_assert((WindowSize == 3 || WindowSize == 4), "WindowSize must be 3 or 4.");
-
         using ClassType = BarycentricCoordinates<Real, WindowSize>;
+
         using Tuple = CoreTools::Tuple<WindowSize, Real>;
         using Math = Math<Real>;
 

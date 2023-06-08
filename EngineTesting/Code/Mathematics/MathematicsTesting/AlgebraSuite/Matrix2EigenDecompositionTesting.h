@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_ALGEBRA_SUITE_MATRIX2_EIGEN_DECOMPOSITION_TESTING_H
 #define MATHEMATICS_ALGEBRA_SUITE_MATRIX2_EIGEN_DECOMPOSITION_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Matrix2EigenDecompositionTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Matrix2EigenDecompositionTesting);
+        using ClassType = Matrix2EigenDecompositionTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Matrix2EigenDecompositionTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

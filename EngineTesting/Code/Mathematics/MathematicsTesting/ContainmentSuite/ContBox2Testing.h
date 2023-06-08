@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_CONTAINMENT_SUITE_CONT_BOX2_TESTING_H
 #define MATHEMATICS_CONTAINMENT_SUITE_CONT_BOX2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class ContBox2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ContBox2Testing);
+        using ClassType = ContBox2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit ContBox2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

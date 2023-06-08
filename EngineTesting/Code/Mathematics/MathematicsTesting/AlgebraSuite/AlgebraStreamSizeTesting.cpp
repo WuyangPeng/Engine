@@ -9,11 +9,22 @@
 
 #include "AlgebraStreamSizeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+Mathematics::AlgebraStreamSizeTesting::AlgebraStreamSizeTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, AlgebraStreamSizeTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, AlgebraStreamSizeTesting)
+
+void Mathematics::AlgebraStreamSizeTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::AlgebraStreamSizeTesting::MainTest()
 {
@@ -22,163 +33,163 @@ void Mathematics::AlgebraStreamSizeTesting::MainTest()
 
 void Mathematics::AlgebraStreamSizeTesting::StreamSizeTest()
 {
-    size_t size = MATHEMATICS_STREAM_SIZE(HomogeneousPointF());
+    size_t size = Mathematics::GetStreamSize(HomogeneousPointF());
 
     ASSERT_EQUAL(size, sizeof(float) * 4);
 
-    size = MATHEMATICS_STREAM_SIZE(HomogeneousPointD());
+    size = Mathematics::GetStreamSize(HomogeneousPointD());
 
     ASSERT_EQUAL(size, sizeof(double) * 4);
 
-    size = MATHEMATICS_STREAM_SIZE(Vector2F());
+    size = Mathematics::GetStreamSize(Vector2F());
 
     ASSERT_EQUAL(size, sizeof(float) * 2);
 
-    size = MATHEMATICS_STREAM_SIZE(Vector2D());
+    size = Mathematics::GetStreamSize(Vector2D());
 
     ASSERT_EQUAL(size, sizeof(double) * 2);
 
-    size = MATHEMATICS_STREAM_SIZE(Vector3F());
+    size = Mathematics::GetStreamSize(Vector3F());
 
     ASSERT_EQUAL(size, sizeof(float) * 3);
 
-    size = MATHEMATICS_STREAM_SIZE(Vector3D());
+    size = Mathematics::GetStreamSize(Vector3D());
 
     ASSERT_EQUAL(size, sizeof(double) * 3);
 
-    size = MATHEMATICS_STREAM_SIZE(Vector4F());
+    size = Mathematics::GetStreamSize(Vector4F());
 
     ASSERT_EQUAL(size, sizeof(float) * 4);
 
-    size = MATHEMATICS_STREAM_SIZE(Vector4D());
+    size = Mathematics::GetStreamSize(Vector4D());
 
     ASSERT_EQUAL(size, sizeof(double) * 4);
 
-    size = MATHEMATICS_STREAM_SIZE(AVectorF());
+    size = Mathematics::GetStreamSize(AVectorF());
 
     ASSERT_EQUAL(size, sizeof(float) * 3);
 
-    size = MATHEMATICS_STREAM_SIZE(AVectorD());
+    size = Mathematics::GetStreamSize(AVectorD());
 
     ASSERT_EQUAL(size, sizeof(double) * 3);
 
-    size = MATHEMATICS_STREAM_SIZE(APointF());
+    size = Mathematics::GetStreamSize(APointF());
 
     ASSERT_EQUAL(size, sizeof(float) * 3);
 
-    size = MATHEMATICS_STREAM_SIZE(APointD());
+    size = Mathematics::GetStreamSize(APointD());
 
     ASSERT_EQUAL(size, sizeof(double) * 3);
 
-    size = MATHEMATICS_STREAM_SIZE(VariableLengthVectorF(7));
+    size = Mathematics::GetStreamSize(VariableLengthVectorF(7));
 
     ASSERT_EQUAL(size, sizeof(float) * 7 + sizeof(int));
 
-    size = MATHEMATICS_STREAM_SIZE(VariableLengthVectorD(8));
+    size = Mathematics::GetStreamSize(VariableLengthVectorD(8));
 
     ASSERT_EQUAL(size, sizeof(double) * 8 + sizeof(int));
 
-    size = MATHEMATICS_STREAM_SIZE(PlaneF());
+    size = Mathematics::GetStreamSize(PlaneF());
 
     ASSERT_EQUAL(size, sizeof(float) * 5);
 
-    size = MATHEMATICS_STREAM_SIZE(PlaneD());
+    size = Mathematics::GetStreamSize(PlaneD());
 
     ASSERT_EQUAL(size, sizeof(double) * 5);
 
-    size = MATHEMATICS_STREAM_SIZE(PolynomialF(7));
+    size = Mathematics::GetStreamSize(PolynomialF(7));
 
     ASSERT_EQUAL(size, sizeof(float) * (7 + 1) + sizeof(int));
 
-    size = MATHEMATICS_STREAM_SIZE(PolynomialD(9));
+    size = Mathematics::GetStreamSize(PolynomialD(9));
 
     ASSERT_EQUAL(size, sizeof(double) * (9 + 1) + sizeof(int));
 
-    size = MATHEMATICS_STREAM_SIZE(Matrix2F());
+    size = Mathematics::GetStreamSize(Matrix2F());
 
     ASSERT_EQUAL(size, sizeof(float) * 2 * 2);
 
-    size = MATHEMATICS_STREAM_SIZE(Matrix2D());
+    size = Mathematics::GetStreamSize(Matrix2D());
 
     ASSERT_EQUAL(size, sizeof(double) * 2 * 2);
 
-    size = MATHEMATICS_STREAM_SIZE(Matrix3F());
+    size = Mathematics::GetStreamSize(Matrix3F());
 
     ASSERT_EQUAL(size, sizeof(float) * 3 * 3);
 
-    size = MATHEMATICS_STREAM_SIZE(Matrix3D());
+    size = Mathematics::GetStreamSize(Matrix3D());
 
     ASSERT_EQUAL(size, sizeof(double) * 3 * 3);
 
-    size = MATHEMATICS_STREAM_SIZE(Matrix4F());
+    size = Mathematics::GetStreamSize(Matrix4F());
 
     ASSERT_EQUAL(size, sizeof(float) * 4 * 4);
 
-    size = MATHEMATICS_STREAM_SIZE(Matrix4D());
+    size = Mathematics::GetStreamSize(Matrix4D());
 
     ASSERT_EQUAL(size, sizeof(double) * 4 * 4);
 
-    size = MATHEMATICS_STREAM_SIZE(MatrixF());
+    size = Mathematics::GetStreamSize(MatrixF());
 
     ASSERT_EQUAL(size, sizeof(float) * 16);
 
-    size = MATHEMATICS_STREAM_SIZE(MatrixD());
+    size = Mathematics::GetStreamSize(MatrixD());
 
     ASSERT_EQUAL(size, sizeof(double) * 16);
 
-    size = MATHEMATICS_STREAM_SIZE(VariableMatrixF(5, 7));
+    size = Mathematics::GetStreamSize(VariableMatrixF(5, 7));
 
     ASSERT_EQUAL(size, sizeof(float) * 5 * 7 + sizeof(int) * 2);
 
-    size = MATHEMATICS_STREAM_SIZE(VariableMatrixD(6, 8));
+    size = Mathematics::GetStreamSize(VariableMatrixD(6, 8));
 
     ASSERT_EQUAL(size, sizeof(double) * 6 * 8 + sizeof(int) * 2);
 
-    size = MATHEMATICS_STREAM_SIZE(BandedMatrixF(7, 2, 2));
+    size = Mathematics::GetStreamSize(BandedMatrixF(7, 2, 2));
 
     ASSERT_EQUAL(size, boost::numeric_cast<size_t>(BandedMatrixF(7, 2, 2).GetStreamSize()));
 
-    size = MATHEMATICS_STREAM_SIZE(BandedMatrixD(5, 1, 2));
+    size = Mathematics::GetStreamSize(BandedMatrixD(5, 1, 2));
 
     ASSERT_EQUAL(size, boost::numeric_cast<size_t>(BandedMatrixD(5, 1, 2).GetStreamSize()));
 
-    size = MATHEMATICS_STREAM_SIZE(BandedMatrixSolveF(3, 1, 1));
+    size = Mathematics::GetStreamSize(BandedMatrixSolveF(3, 1, 1));
 
     ASSERT_EQUAL(size, boost::numeric_cast<size_t>(BandedMatrixSolveF(3, 1, 1).GetStreamSize()));
 
-    size = MATHEMATICS_STREAM_SIZE(BandedMatrixSolveD(7, 3, 5));
+    size = Mathematics::GetStreamSize(BandedMatrixSolveD(7, 3, 5));
 
     ASSERT_EQUAL(size, boost::numeric_cast<size_t>(BandedMatrixSolveD(7, 3, 5).GetStreamSize()));
 
-    size = MATHEMATICS_STREAM_SIZE(QuaternionF());
+    size = Mathematics::GetStreamSize(QuaternionF());
 
     ASSERT_EQUAL(size, sizeof(float) * 4);
 
-    size = MATHEMATICS_STREAM_SIZE(QuaternionD());
+    size = Mathematics::GetStreamSize(QuaternionD());
 
     ASSERT_EQUAL(size, sizeof(double) * 4);
 
-    size = MATHEMATICS_STREAM_SIZE(AQuaternionF());
+    size = Mathematics::GetStreamSize(AQuaternionF());
 
     ASSERT_EQUAL(size, sizeof(float) * 4);
 
-    size = MATHEMATICS_STREAM_SIZE(AQuaternionD());
+    size = Mathematics::GetStreamSize(AQuaternionD());
 
     ASSERT_EQUAL(size, sizeof(double) * 4);
 
-    size = MATHEMATICS_STREAM_SIZE(Float1(0.0f));
+    size = Mathematics::GetStreamSize(Float1(0.0f));
 
     ASSERT_EQUAL(size, sizeof(float));
 
-    size = MATHEMATICS_STREAM_SIZE(Float2(0.0f, 0.0f));
+    size = Mathematics::GetStreamSize(Float2(0.0f, 0.0f));
 
     ASSERT_EQUAL(size, sizeof(float) * 2);
 
-    size = MATHEMATICS_STREAM_SIZE(Float3(0.0f, 0.0f, 0.0f));
+    size = Mathematics::GetStreamSize(Float3(0.0f, 0.0f, 0.0f));
 
     ASSERT_EQUAL(size, sizeof(float) * 3);
 
-    size = MATHEMATICS_STREAM_SIZE(Float4(0.0f, 0.0f, 0.0f, 0.0f));
+    size = Mathematics::GetStreamSize(Float4(0.0f, 0.0f, 0.0f, 0.0f));
 
     ASSERT_EQUAL(size, sizeof(float) * 4);
 }

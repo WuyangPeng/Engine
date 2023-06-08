@@ -9,15 +9,26 @@
 
 #include "DynamicFindIntersector1Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Intersection/DynamicFindIntersector1Detail.h"
 #include "Mathematics/Intersection/StaticTestIntersector1Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::swap;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DynamicFindIntersector1Testing)
+Mathematics::DynamicFindIntersector1Testing::DynamicFindIntersector1Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, DynamicFindIntersector1Testing)
+
+void Mathematics::DynamicFindIntersector1Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::DynamicFindIntersector1Testing::MainTest()
 {
@@ -29,9 +40,9 @@ void Mathematics::DynamicFindIntersector1Testing::IntersectorTest()
     std::default_random_engine generator;
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto u0 = randomDistribution(generator);
         auto u1 = randomDistribution(generator);

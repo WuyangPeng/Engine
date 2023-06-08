@@ -9,11 +9,11 @@
 
 #include "IntegerDataConversionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/IntegerDataConversionDetail.h"
 #include "Mathematics/Rational/IntegerDataDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <gsl/util>
 #include <limits>
 #include <random>
@@ -23,7 +23,18 @@ using std::numeric_limits;
 using std::uniform_int;
 using std::uniform_real;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerDataConversionTesting)
+Mathematics::IntegerDataConversionTesting::IntegerDataConversionTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, IntegerDataConversionTesting)
+
+void Mathematics::IntegerDataConversionTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::IntegerDataConversionTesting::MainTest()
 {
@@ -45,9 +56,9 @@ void Mathematics::IntegerDataConversionTesting::FloatingPointTest()
     const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
     const uniform_real<double> secondRandomDistribution(static_cast<double>(std::numeric_limits<uint64_t>::min()), static_cast<double>(std::numeric_limits<uint64_t>::max()));
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
 
@@ -87,9 +98,9 @@ void Mathematics::IntegerDataConversionTesting::IntegerTest()
     const uniform_int<int8_t> thirdRandomDistribution(-numeric_limits<int8_t>::max(), numeric_limits<int8_t>::max());
     const uniform_int<int16_t> fourthRandomDistribution(-numeric_limits<int16_t>::max(), numeric_limits<int16_t>::max());
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
 
@@ -141,9 +152,9 @@ void Mathematics::IntegerDataConversionTesting::UnsignedIntegerTest()
     const uniform_int<int8_t> thirdRandomDistribution(0, numeric_limits<int8_t>::max());
     const uniform_int<int16_t> fourthRandomDistribution(0, numeric_limits<int16_t>::max());
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         auto firstValue = firstRandomDistribution(generator);
 

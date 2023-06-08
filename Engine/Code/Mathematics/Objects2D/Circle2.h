@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 10:16)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:12)
 
-#ifndef MATHEMATICS_OBJECTS2D_CIRCLE2_H
-#define MATHEMATICS_OBJECTS2D_CIRCLE2_H
+#ifndef MATHEMATICS_OBJECTS_2D_CIRCLE2_H
+#define MATHEMATICS_OBJECTS_2D_CIRCLE2_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -38,7 +38,7 @@ namespace Mathematics
         NODISCARD Vector2 GetCenter() const noexcept;
         NODISCARD Real GetRadius() const noexcept;
 
-        void SetCircle(const Vector2& newCenter, Real newRadius) noexcept;
+        void SetCircle(const Vector2& aCenter, Real aRadius) noexcept;
 
     private:
         Vector2 center;
@@ -46,7 +46,7 @@ namespace Mathematics
     };
 
     template <typename Real>
-    NODISCARD bool Approximate(const Circle2<Real>& lhs, const Circle2<Real>& rhs, const Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
+    NODISCARD bool Approximate(const Circle2<Real>& lhs, const Circle2<Real>& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
     // 调试输出
     template <typename Real>
@@ -56,4 +56,4 @@ namespace Mathematics
     using Circle2D = Circle2<double>;
 }
 
-#endif  // MATHEMATICS_OBJECTS2D_CIRCLE2_H
+#endif  // MATHEMATICS_OBJECTS_2D_CIRCLE2_H

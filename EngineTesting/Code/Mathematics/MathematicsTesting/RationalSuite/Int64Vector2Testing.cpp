@@ -9,16 +9,27 @@
 
 #include "Int64Vector2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Rational/Int64Vector2.h"
 #include "Mathematics/Rational/Int64VectorDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
 using std::uniform_int;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Int64Vector2Testing)
+Mathematics::Int64Vector2Testing::Int64Vector2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, Int64Vector2Testing)
+
+void Mathematics::Int64Vector2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::Int64Vector2Testing::MainTest()
 {

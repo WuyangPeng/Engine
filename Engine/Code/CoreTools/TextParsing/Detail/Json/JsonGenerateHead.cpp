@@ -34,7 +34,7 @@ System::String CoreTools::JsonGenerateHead::GenerateCoreToolsHead() const
     content += jsonHead.GetNameSpace();
     content += TextParsing::gFwdHeadFileExtensionName;
     content += TextParsing::gQuotationMarks;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gUnicodeUsing;
     content += TextParsing::gNewlineCharacter;

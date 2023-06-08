@@ -9,10 +9,10 @@
 
 #include "ScribeCircle2InscribeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Containment/ScribeCircle2InscribeDetail.h"
-
 #include <random>
 
 namespace Mathematics
@@ -21,7 +21,18 @@ namespace Mathematics
     template class ScribeCircle2Inscribe<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, ScribeCircle2InscribeTesting)
+Mathematics::ScribeCircle2InscribeTesting::ScribeCircle2InscribeTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, ScribeCircle2InscribeTesting)
+
+void Mathematics::ScribeCircle2InscribeTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::ScribeCircle2InscribeTesting::MainTest()
 {
@@ -34,9 +45,9 @@ void Mathematics::ScribeCircle2InscribeTesting::InscribeTest()
     const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
     const std::uniform_int<> secondRandomDistribution(10, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 v0(firstRandomDistribution(generator), firstRandomDistribution(generator));
         const Vector2 v1(firstRandomDistribution(generator), firstRandomDistribution(generator));

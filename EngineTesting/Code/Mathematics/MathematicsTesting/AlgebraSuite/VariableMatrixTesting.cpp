@@ -9,10 +9,10 @@
 
 #include "VariableMatrixTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -20,7 +20,18 @@ using std::uniform_int;
 using std::uniform_real;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, VariableMatrixTesting)
+Mathematics::VariableMatrixTesting::VariableMatrixTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, VariableMatrixTesting)
+
+void Mathematics::VariableMatrixTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::VariableMatrixTesting::MainTest()
 {
@@ -96,9 +107,9 @@ void Mathematics::VariableMatrixTesting::ArithmeticCalculateTest()
     const uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
     const uniform_int<> integerRandomDistribution(1, 20);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         VariableMatrixF firstMatrix(integerRandomDistribution(generator), integerRandomDistribution(generator));
 
@@ -322,9 +333,9 @@ void Mathematics::VariableMatrixTesting::MatrixCalculateTest()
     const uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
     const uniform_int<> integerRandomDistribution(1, 20);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         VariableMatrixF firstMatrix(integerRandomDistribution(generator), integerRandomDistribution(generator));
 

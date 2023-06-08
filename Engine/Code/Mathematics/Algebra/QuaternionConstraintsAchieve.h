@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/08 14:00)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/31 17:51)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_ACHIEVE_H
@@ -16,6 +16,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Mathematics::QuaternionConstraints<Real>::QuaternionConstraints(Real minAngle, Real maxAngle) noexcept
     : minAngle{ minAngle },
       maxAngle{ maxAngle },
@@ -35,7 +36,7 @@ Mathematics::QuaternionConstraints<Real>::QuaternionConstraints(Real minAngle, R
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::QuaternionConstraints<Real>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::QuaternionConstraints<Real>::IsValid() const noexcept
 {
     if (-Math::GetHalfPI() <= minAngle && minAngle <= Math::GetHalfPI() && minAngle <= maxAngle && maxAngle <= Math::GetHalfPI())
         return true;
@@ -46,7 +47,7 @@ bool Mathematics::QuaternionConstraints<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::QuaternionConstraints<Real>::IsValid(Real x, Real y) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
+requires std::is_arithmetic_v<Real> bool Mathematics::QuaternionConstraints<Real>::IsValid(Real x, Real y) const noexcept(gAssert < 1 || gMathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_1(Math::Approximate(Math::Sqrt(x * x + y * y), Math::GetValue(1)), "(x,y)必须是单位长度！");
@@ -71,6 +72,7 @@ bool Mathematics::QuaternionConstraints<Real>::IsValid(Real x, Real y) const noe
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionConstraints<Real>::GetCosMinAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -79,6 +81,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetCosMinAngle() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionConstraints<Real>::GetSinMinAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -87,6 +90,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetSinMinAngle() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionConstraints<Real>::GetCosMaxAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -95,6 +99,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetCosMaxAngle() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionConstraints<Real>::GetSinMaxAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -103,6 +108,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetSinMaxAngle() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionConstraints<Real>::GetCosAvrAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -111,6 +117,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetCosAvrAngle() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionConstraints<Real>::GetSinAvrAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -119,6 +126,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetSinAvrAngle() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionConstraints<Real>::GetMinAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -127,6 +135,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetMinAngle() const noexcept
 }
 
 template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::QuaternionConstraints<Real>::GetMaxAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;

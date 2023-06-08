@@ -14,9 +14,9 @@
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Distance/Distance2D/DistancePoint2Box2Detail.h"
 #include "Mathematics/Objects2D/Box2Detail.h"
-
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include <random>
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::default_random_engine;
 using std::swap;
 using std::uniform_real;
@@ -27,7 +27,18 @@ namespace Mathematics
     template class DistancePoint2Box2<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistancePoint2Box2Testing)
+Mathematics::DistancePoint2Box2Testing::DistancePoint2Box2Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, DistancePoint2Box2Testing)
+
+void Mathematics::DistancePoint2Box2Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::DistancePoint2Box2Testing::MainTest()
 {
@@ -43,9 +54,9 @@ void Mathematics::DistancePoint2Box2Testing::BaseTest()
     default_random_engine generator;
     const uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2F point(randomDistribution(generator), randomDistribution(generator));
 
@@ -83,9 +94,9 @@ void Mathematics::DistancePoint2Box2Testing::StaticTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 point(randomDistribution(generator), randomDistribution(generator));
 
@@ -118,9 +129,9 @@ void Mathematics::DistancePoint2Box2Testing::DynamicTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 point(randomDistribution(generator), randomDistribution(generator));
         const Vector2 center(randomDistribution(generator), randomDistribution(generator));
@@ -158,9 +169,9 @@ void Mathematics::DistancePoint2Box2Testing::DerivativeTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 point(randomDistribution(generator), randomDistribution(generator));
 
@@ -201,9 +212,9 @@ void Mathematics::DistancePoint2Box2Testing::IntervalTest()
     default_random_engine generator;
     const uniform_real<double> randomDistribution(-10.0, 10.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector2 point(randomDistribution(generator), randomDistribution(generator));
 

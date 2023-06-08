@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/01 23:46)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/01 10:07)
 
 #ifndef MATHEMATICS_ALGEBRA_VECTOR2_ORTHONORMALIZE_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_VECTOR2_ORTHONORMALIZE_ACHIEVE_H
@@ -17,6 +17,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real, bool Robust>
+requires std::is_arithmetic_v<Real>
 Mathematics::Vector2Orthonormalize<Real, Robust>::Vector2Orthonormalize(const Vector2& lhs, const Vector2& rhs, const Real epsilon)
     : uVector{ lhs }, vVector{ rhs }, epsilon{ epsilon }
 {
@@ -26,6 +27,7 @@ Mathematics::Vector2Orthonormalize<Real, Robust>::Vector2Orthonormalize(const Ve
 }
 
 template <typename Real, bool Robust>
+requires std::is_arithmetic_v<Real>
 void Mathematics::Vector2Orthonormalize<Real, Robust>::Generate()
 {
     // 如果输入向量v0和v1，则Gram-Schmidt正交向量产生矢量u0和u1如下，
@@ -65,7 +67,7 @@ void Mathematics::Vector2Orthonormalize<Real, Robust>::Generate()
 #ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real, bool Robust>
-bool Mathematics::Vector2Orthonormalize<Real, Robust>::IsValid() const noexcept
+requires std::is_arithmetic_v<Real> bool Mathematics::Vector2Orthonormalize<Real, Robust>::IsValid() const noexcept
 {
     try
     {
@@ -89,6 +91,7 @@ bool Mathematics::Vector2Orthonormalize<Real, Robust>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, bool Robust>
+requires std::is_arithmetic_v<Real>
 const Mathematics::Vector2<Real> Mathematics::Vector2Orthonormalize<Real, Robust>::GetUVector() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
@@ -97,6 +100,7 @@ const Mathematics::Vector2<Real> Mathematics::Vector2Orthonormalize<Real, Robust
 }
 
 template <typename Real, bool Robust>
+requires std::is_arithmetic_v<Real>
 const Mathematics::Vector2<Real> Mathematics::Vector2Orthonormalize<Real, Robust>::GetVVector() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;

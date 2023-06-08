@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/NumericalAnalysis/LinearSystemDetail.h"
 
 template <typename Real>
@@ -229,7 +230,7 @@ Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const std::vector<V
 
     for (auto i = 0; i < numPoints; i++)
     {
-        auto rSqr = Vector3Tools<Real>::GetLengthSquared(planes.at(i));
+        auto rSqr = Vector2Tools<Real>::GetLengthSquared(planes.at(i));
         auto mult = (Math<Real>::GetValue(1)) / (rSqr + radiusSqr);
         auto x = (Math<Real>::GetValue(2)) * mult * radiusSqr * planes.at(i).GetX();
         auto y = (Math<Real>::GetValue(2)) * mult * radiusSqr * planes.at(i).GetY();
@@ -295,9 +296,9 @@ Real Mathematics::ConformalMap<Real>::ComputeRadius(const Vector2<Real>& v0, con
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    auto r0Sqr = Vector3Tools<Real>::GetLengthSquared(v0);
-    auto r1Sqr = Vector3Tools<Real>::GetLengthSquared(v1);
-    auto r2Sqr = Vector3Tools<Real>::GetLengthSquared(v2);
+    auto r0Sqr = Vector2Tools<Real>::GetLengthSquared(v0);
+    auto r1Sqr = Vector2Tools<Real>::GetLengthSquared(v1);
+    auto r2Sqr = Vector2Tools<Real>::GetLengthSquared(v2);
     auto diffR10 = r1Sqr - r0Sqr;
     auto diffR20 = r2Sqr - r0Sqr;
     auto diffX10 = v1.GetX() - v0.GetX();

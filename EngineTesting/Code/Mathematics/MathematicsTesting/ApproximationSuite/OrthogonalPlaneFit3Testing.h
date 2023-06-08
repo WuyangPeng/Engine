@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_APPROXIMATION_SUITE_ORTHOGONAL_PLANE_TESTING_H
 #define MATHEMATICS_APPROXIMATION_SUITE_ORTHOGONAL_PLANE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class OrthogonalPlaneFit3Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(OrthogonalPlaneFit3Testing);
+        using ClassType = OrthogonalPlaneFit3Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit OrthogonalPlaneFit3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

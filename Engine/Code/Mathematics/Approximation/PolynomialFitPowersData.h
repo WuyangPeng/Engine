@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/18 18:40)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 17:21)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT_POWERS_DATA_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT_POWERS_DATA_H
@@ -27,8 +27,8 @@ namespace Mathematics
         static_assert(2 <= S && S <= 4, "2 <= S && S <= 4");
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-        static constexpr auto Size = S;
-        using ClassType = PolynomialFitPowersData<Real, Size>;
+        static constexpr auto size = S;
+        using ClassType = PolynomialFitPowersData<Real, size>;
         using Math = Math<Real>;
         using Coefficients = std::vector<Real>;
         using VariableLengthVector = VariableLengthVector<Real>;
@@ -50,22 +50,22 @@ namespace Mathematics
         NODISCARD Real GetCoefficients(int index) const;
 
         void SetMaxPower(int index, int power);
-        void SetScale(int index, Real scale);
+        void SetScale(int index, Real aScale);
 
         void Solve(const VariableMatrix& matrix, const VariableLengthVector& vector);
 
     private:
-        using PowerType = std::array<int, Size - 1>;
-        using Container = std::array<Real, Size>;
+        using PowerType = std::array<int, size - 1>;
+        using Container = std::array<Real, size>;
 
     private:
-        PowerType m_MaxPower;
-        Container m_Min;
-        Container m_Max;
-        Container m_Scale;
-        Real m_InvTwoWScale;
-        Coefficients m_Coefficients;
-        bool m_Solved;
+        PowerType maxPower;
+        Container min;
+        Container max;
+        Container scale;
+        Real invTwoWScale;
+        Coefficients coefficients;
+        bool solved;
     };
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.5 (2023/03/31 15:52)
+///	引擎版本：0.9.0.11 (2023/05/30 09:41)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-CoreTools::UnitTestFailReportOutput::UnitTestFailReportOutput(const std::string& failClassName, const std::string& fileName, int lineNumber, const std::string& errorMessage, const OStreamShared& streamShared)
-    : impl{ failClassName, fileName, lineNumber, errorMessage, streamShared }
+CoreTools::UnitTestFailReportOutput::UnitTestFailReportOutput(const std::string& failClassName, const std::string& fileName, int lineNumber, const std::string& errorMessage, const OStreamShared& streamShared, LogLevel logLevel)
+    : impl{ failClassName, fileName, lineNumber, errorMessage, streamShared, logLevel }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

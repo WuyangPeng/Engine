@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/16 21:55)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:51)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_RATIONAL_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_RATIONAL_DETAIL_H
@@ -354,14 +354,14 @@ bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational&
         auto negativeDiscriminant = -rationalDiscriminant.ConvertTo<Real>();
         auto negativeSecondaryDivide3 = -rationalSecondaryDivide3.ConvertTo<Real>();
 
-        auto sqrt3 = Math::Sqrt(Math::GetValue(3));
+        auto sqrt3Value = Math::Sqrt(Math::GetValue(3));
         auto magnitude = Math::Sqrt(negativeQ);
         auto angle = Math::ATan2(Math::Sqrt(negativeDiscriminant), negativeR) / Math::GetValue(3);
         auto cosValue = Math::Cos(angle);
         auto sinValue = Math::Sin(angle);
         auto root0 = negativeSecondaryDivide3 + Math::GetValue(2) * magnitude * cosValue;
-        auto root1 = negativeSecondaryDivide3 - magnitude * (cosValue + sqrt3 * sinValue);
-        auto root2 = negativeSecondaryDivide3 - magnitude * (cosValue - sqrt3 * sinValue);
+        auto root1 = negativeSecondaryDivide3 - magnitude * (cosValue + sqrt3Value * sinValue);
+        auto root2 = negativeSecondaryDivide3 - magnitude * (cosValue - sqrt3Value * sinValue);
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)

@@ -9,18 +9,29 @@
 
 #include "AxesAlignBoundingBox4DTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/AxesAlignBoundingBox4Detail.h"
 #include "Mathematics/Algebra/Vector4Detail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 namespace Mathematics
 {
     template class AxesAlignBoundingBox4<float>;
     template class AxesAlignBoundingBox4<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, AxesAlignBoundingBox4DTesting)
+Mathematics::AxesAlignBoundingBox4DTesting::AxesAlignBoundingBox4DTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, AxesAlignBoundingBox4DTesting)
+
+void Mathematics::AxesAlignBoundingBox4DTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::AxesAlignBoundingBox4DTesting::MainTest()
 {

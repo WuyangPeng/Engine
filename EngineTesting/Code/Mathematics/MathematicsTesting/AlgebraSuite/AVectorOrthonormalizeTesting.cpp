@@ -9,9 +9,9 @@
 
 #include "AVectorOrthonormalizeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/AVectorOrthonormalizeDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -23,7 +23,18 @@ namespace Mathematics
     template class AVectorOrthonormalize<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, AVectorOrthonormalizeTesting)
+Mathematics::AVectorOrthonormalizeTesting::AVectorOrthonormalizeTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, AVectorOrthonormalizeTesting)
+
+void Mathematics::AVectorOrthonormalizeTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::AVectorOrthonormalizeTesting::MainTest()
 {
@@ -36,9 +47,7 @@ void Mathematics::AVectorOrthonormalizeTesting::OrthonormalizeTest()
     const uniform_real<double> firstRandomDistribution{ -10.0, 10.0 };
     const uniform_real<float> secondRandomDistribution{ -10.0f, 10.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         AVectorD firstVector{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
         AVectorD secondVector{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };

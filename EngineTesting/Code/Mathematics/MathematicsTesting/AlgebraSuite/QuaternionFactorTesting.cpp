@@ -9,10 +9,10 @@
 
 #include "QuaternionFactorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Polynomial.h"
 #include "Mathematics/Algebra/QuaternionFactorDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -24,7 +24,18 @@ namespace Mathematics
     template class QuaternionFactor<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, QuaternionFactorTesting)
+Mathematics::QuaternionFactorTesting::QuaternionFactorTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, QuaternionFactorTesting)
+
+void Mathematics::QuaternionFactorTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::QuaternionFactorTesting::MainTest()
 {
@@ -41,9 +52,9 @@ void Mathematics::QuaternionFactorTesting::FactorXYZTest()
     default_random_engine generator{};
     const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         QuaternionF firstQuaternion(firstRandomDistribution(generator),
                                     firstRandomDistribution(generator),
@@ -70,9 +81,9 @@ void Mathematics::QuaternionFactorTesting::FactorXZYTest()
     default_random_engine generator{};
     const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         QuaternionF firstQuaternion(firstRandomDistribution(generator),
                                     firstRandomDistribution(generator),
@@ -99,9 +110,9 @@ void Mathematics::QuaternionFactorTesting::FactorYZXTest()
     default_random_engine generator{};
     const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         QuaternionD firstQuaternion(firstRandomDistribution(generator),
                                     firstRandomDistribution(generator),
@@ -128,9 +139,9 @@ void Mathematics::QuaternionFactorTesting::FactorYXZTest()
     default_random_engine generator{};
     const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         QuaternionD firstQuaternion(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
 
@@ -154,9 +165,9 @@ void Mathematics::QuaternionFactorTesting::FactorZXYTest()
     default_random_engine generator{};
     const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         QuaternionF firstQuaternion(firstRandomDistribution(generator),
                                     firstRandomDistribution(generator),
@@ -183,9 +194,9 @@ void Mathematics::QuaternionFactorTesting::FactorZYXTest()
     default_random_engine generator{};
     const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         QuaternionD firstQuaternion(firstRandomDistribution(generator),
                                     firstRandomDistribution(generator),

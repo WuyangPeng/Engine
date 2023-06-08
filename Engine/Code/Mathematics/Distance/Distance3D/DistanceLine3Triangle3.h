@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.3 (2022/02/22 14:09)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 17:55)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE3_TRIANGLE3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE3_TRIANGLE3_H
@@ -52,8 +52,6 @@ namespace Mathematics
 
         // 有关最接近点的信息。
 
-        // closest0 = line.origin + param * line.direction
-        // closest1 = sum_{i=0}^2 bary[i] * tri.vertex[i]
         mutable Vector3 triangleBary;
     };
 

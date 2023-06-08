@@ -10,8 +10,9 @@
 #include "AlgebraAggregateTesting.h"
 #include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/ObjectRegister.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/AlgebraAggregate.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
@@ -22,7 +23,6 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
-
 #include <random>
 
 using std::default_random_engine;
@@ -31,7 +31,18 @@ using std::uniform_int;
 using std::uniform_real;
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, AlgebraAggregateTesting)
+Mathematics::AlgebraAggregateTesting::AlgebraAggregateTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, AlgebraAggregateTesting)
+
+void Mathematics::AlgebraAggregateTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::AlgebraAggregateTesting::MainTest()
 {

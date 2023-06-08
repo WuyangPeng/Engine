@@ -9,14 +9,14 @@
 
 #include "DistancePoint3Box3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Distance/Distance3D/DistancePoint3Box3Detail.h"
 #include "Mathematics/Objects3D/Box3Detail.h"
-
 #include <random>
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::swap;
 
 namespace Mathematics
@@ -25,7 +25,18 @@ namespace Mathematics
     template class DistancePoint3Box3<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistancePoint3Box3Testing)
+Mathematics::DistancePoint3Box3Testing::DistancePoint3Box3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, DistancePoint3Box3Testing)
+
+void Mathematics::DistancePoint3Box3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::DistancePoint3Box3Testing::MainTest()
 {
@@ -41,9 +52,9 @@ void Mathematics::DistancePoint3Box3Testing::BaseTest()
     std::default_random_engine generator;
     const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3F point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
@@ -82,9 +93,9 @@ void Mathematics::DistancePoint3Box3Testing::StaticTest()
     std::default_random_engine generator;
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
@@ -118,9 +129,9 @@ void Mathematics::DistancePoint3Box3Testing::DynamicTest()
     std::default_random_engine generator;
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         const Vector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
@@ -159,9 +170,9 @@ void Mathematics::DistancePoint3Box3Testing::DerivativeTest()
     std::default_random_engine generator;
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
@@ -202,9 +213,9 @@ void Mathematics::DistancePoint3Box3Testing::IntervalTest()
     std::default_random_engine generator;
     const std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 

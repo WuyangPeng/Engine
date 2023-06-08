@@ -9,16 +9,27 @@
 
 #include "TrapezoidRuleTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/TrapezoidRuleDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 namespace Mathematics
 {
     template class TrapezoidRule<float, TrapezoidRuleTesting>;
     template class TrapezoidRule<double, TrapezoidRuleTesting>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, TrapezoidRuleTesting)
+Mathematics::TrapezoidRuleTesting::TrapezoidRuleTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, TrapezoidRuleTesting)
+
+void Mathematics::TrapezoidRuleTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::TrapezoidRuleTesting::MainTest()
 {

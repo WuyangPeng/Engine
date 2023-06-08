@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_OBJECTS3D_SUITE_CONVEX_POLYHEDRON3_TESTING_H
 #define MATHEMATICS_OBJECTS3D_SUITE_CONVEX_POLYHEDRON3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class ConvexPolyhedron3Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ConvexPolyhedron3Testing);
+        using ClassType = ConvexPolyhedron3Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit ConvexPolyhedron3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

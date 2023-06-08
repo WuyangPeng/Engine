@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_QUERY_SUITE_QUERY2_RATIONAL_TESTING_H
 #define MATHEMATICS_QUERY_SUITE_QUERY2_RATIONAL_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Query2RationalTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Query2RationalTesting);
+        using ClassType = Query2RationalTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Query2RationalTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

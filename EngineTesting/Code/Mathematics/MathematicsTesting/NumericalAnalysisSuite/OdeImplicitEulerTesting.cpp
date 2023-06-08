@@ -13,7 +13,7 @@
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
 #include "Mathematics/NumericalAnalysis/OdeImplicitEulerDetail.h"
 #include "Mathematics/NumericalAnalysis/OdeSolverDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 using std::ostream;
 using std::vector;
 

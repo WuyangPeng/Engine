@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/18 14:59)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 17:33)
 
 #ifndef MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_ACHIEVE_H
@@ -39,7 +39,6 @@ Mathematics::CylinderFit3<Real>::CylinderFit3(const Points& points, const Vector
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real>
 void Mathematics::CylinderFit3<Real>::Fit3(const Points& points)
 {
@@ -49,7 +48,6 @@ void Mathematics::CylinderFit3<Real>::Fit3(const Points& points)
     ComputeCenter(average);
 }
 
-// private
 template <typename Real>
 void Mathematics::CylinderFit3<Real>::InitialGuess(const Points& points)
 {
@@ -64,7 +62,6 @@ void Mathematics::CylinderFit3<Real>::InitialGuess(const Points& points)
     }
 }
 
-// private
 template <typename Real>
 void Mathematics::CylinderFit3<Real>::Update(const Points& points)
 {
@@ -80,7 +77,6 @@ void Mathematics::CylinderFit3<Real>::Update(const Points& points)
     exactly = update.GetExactly();
 }
 
-// private
 template <typename Real>
 Real Mathematics::CylinderFit3<Real>::ComputeHeight(const Points& points)
 {
@@ -100,7 +96,6 @@ Real Mathematics::CylinderFit3<Real>::ComputeHeight(const Points& points)
     return *boundary.first + *boundary.second;
 }
 
-// private
 template <typename Real>
 void Mathematics::CylinderFit3<Real>::ComputeCenter(Real average)
 {

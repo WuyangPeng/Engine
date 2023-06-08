@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_DISTANCE_SUITE_DISTANCE_POINT2_ELLIPSE2_TESTING_H
 #define MATHEMATICS_DISTANCE_SUITE_DISTANCE_POINT2_ELLIPSE2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class DistancePoint2Ellipse2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DistancePoint2Ellipse2Testing);
+        using ClassType = DistancePoint2Ellipse2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit DistancePoint2Ellipse2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

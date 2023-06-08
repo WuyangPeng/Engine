@@ -9,12 +9,12 @@
 
 #include "GreatCircleFit3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Approximation/GreatCircleFit3Detail.h"
 #include "Mathematics/NumericalAnalysis/EigenDecomposition.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -27,7 +27,18 @@ namespace Mathematics
     template class GreatCircleFit3<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, GreatCircleFit3Testing)
+Mathematics::GreatCircleFit3Testing::GreatCircleFit3Testing(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, GreatCircleFit3Testing)
+
+void Mathematics::GreatCircleFit3Testing::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::GreatCircleFit3Testing::MainTest()
 {
@@ -40,9 +51,9 @@ void Mathematics::GreatCircleFit3Testing::FitTest()
     const uniform_real<double> firstRandomDistribution(0.0, 100.0);
     const uniform_int<> secondRandomDistribution(5, 50);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
         const int size = secondRandomDistribution(generator);

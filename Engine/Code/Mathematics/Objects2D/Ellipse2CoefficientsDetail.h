@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/10 13:19)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 15:19)
 
-#ifndef MATHEMATICS_OBJECTS2D_ELLIPSE2_COEFFICIENTS_DETAIL_H
-#define MATHEMATICS_OBJECTS2D_ELLIPSE2_COEFFICIENTS_DETAIL_H
+#ifndef MATHEMATICS_OBJECTS_2D_ELLIPSE2_COEFFICIENTS_DETAIL_H
+#define MATHEMATICS_OBJECTS_2D_ELLIPSE2_COEFFICIENTS_DETAIL_H
 
 #include "Ellipse2Coefficients.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
@@ -85,6 +85,7 @@ typename Mathematics::Ellipse2Coefficients<Real>::CoefficientsType Mathematics::
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+
         if (i != maxIndex)
         {
             result[i] *= invMaxValue;
@@ -93,6 +94,7 @@ typename Mathematics::Ellipse2Coefficients<Real>::CoefficientsType Mathematics::
         {
             result[i] = Math::GetValue(1);
         }
+
 #include STSTEM_WARNING_POP
     }
 
@@ -100,7 +102,7 @@ typename Mathematics::Ellipse2Coefficients<Real>::CoefficientsType Mathematics::
 }
 
 template <typename Real>
-bool Mathematics::Approximate(const Ellipse2Coefficients<Real>& lhs, const Ellipse2Coefficients<Real>& rhs, const Real epsilon)
+bool Mathematics::Approximate(const Ellipse2Coefficients<Real>& lhs, const Ellipse2Coefficients<Real>& rhs, Real epsilon)
 {
     const auto lhsCoefficients = lhs.GetCoefficients();
     const auto rhsCoefficients = rhs.GetCoefficients();
@@ -123,4 +125,4 @@ bool Mathematics::Approximate(const Ellipse2Coefficients<Real>& lhs, const Ellip
     return true;
 }
 
-#endif  // MATHEMATICS_OBJECTS2D_ELLIPSE2_COEFFICIENTS_DETAIL_H
+#endif  // MATHEMATICS_OBJECTS_2D_ELLIPSE2_COEFFICIENTS_DETAIL_H

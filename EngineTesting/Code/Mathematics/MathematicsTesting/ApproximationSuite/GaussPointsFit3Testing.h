@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_APPROXIMATION_SUITE_GUASS_POINTS_FIT3_TESTING_H
 #define MATHEMATICS_APPROXIMATION_SUITE_GUASS_POINTS_FIT3_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class GaussPointsFit3Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(GaussPointsFit3Testing);
+        using ClassType = GaussPointsFit3Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit GaussPointsFit3Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

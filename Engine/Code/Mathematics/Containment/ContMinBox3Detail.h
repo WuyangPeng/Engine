@@ -76,8 +76,8 @@ Mathematics::ContMinBox3<Real>::ContMinBox3(const std::vector<Vector3<Real>>& po
         for (auto i = 0; i < numPoints; ++i)
         {
             auto diff = points.at(i) - origin;
-            points2.at(i).SetX(Vector2Tools<Real>::DotProduct(u, diff));
-            points2.at(i).SetY(Vector2Tools<Real>::DotProduct(v, diff));
+            points2.at(i).SetX(Vector3Tools<Real>::DotProduct(u, diff));
+            points2.at(i).SetY(Vector3Tools<Real>::DotProduct(v, diff));
         }
 
         box2 = ContMinBox2<Real>{ points2, epsilon, queryType, false };

@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_QUERY_SUITE_QUERY3_INT64_TESTING_H
 #define MATHEMATICS_QUERY_SUITE_QUERY3_INT64_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class Query3Int64Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Query3Int64Testing);
+        using ClassType = Query3Int64Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit Query3Int64Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

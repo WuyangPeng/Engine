@@ -9,11 +9,11 @@
 
 #include "IntegerMultiplicationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/IntegerDataDetail.h"
 #include "Mathematics/Rational/IntegerMultiplicationDetail.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include <boost/utility/binary.hpp>
 #include <random>
 
@@ -34,7 +34,18 @@ namespace Mathematics
     template class IntegerMultiplication<32>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerMultiplicationTesting)
+Mathematics::IntegerMultiplicationTesting::IntegerMultiplicationTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, IntegerMultiplicationTesting)
+
+void Mathematics::IntegerMultiplicationTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Mathematics::IntegerMultiplicationTesting::MainTest()
 {
@@ -47,9 +58,9 @@ void Mathematics::IntegerMultiplicationTesting::MultiplicationTest()
     const uniform_int<> firstRandomDistribution(0, UINT16_MAX);
     const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto loop = 0; loop < testLoopCount; ++loop)
+    for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         vector<uint16_t> firstShortVector(40);
         vector<uint16_t> secondShortVector(40);

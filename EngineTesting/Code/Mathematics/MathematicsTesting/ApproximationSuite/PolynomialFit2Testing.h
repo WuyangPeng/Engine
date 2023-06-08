@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_APPROXIMATION_SUITE_POLYNOMIAL_FIT2_TESTING_H
 #define MATHEMATICS_APPROXIMATION_SUITE_POLYNOMIAL_FIT2_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class PolynomialFit2Testing : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(PolynomialFit2Testing);
+        using ClassType = PolynomialFit2Testing;
+        using ParentType = UnitTest;
+
+    public:
+        explicit PolynomialFit2Testing(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

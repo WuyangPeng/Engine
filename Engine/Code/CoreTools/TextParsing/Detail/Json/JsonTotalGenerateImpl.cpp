@@ -76,7 +76,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateNewLine()
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return TextParsing::gNewline.data();
+    return System::String{ TextParsing::gNewlineCharacter };
 }
 
 System::String CoreTools::JsonTotalGenerateImpl::GenerateHeaderGuard() const
@@ -585,7 +585,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerFunctionDefini
         content += TextParsing::gSmallConst;
         content += TextParsing::gSpace;
         content += TextParsing::gNoexcept;
-        content += TextParsing::gNewline;
+        content += TextParsing::gNewlineCharacter;
 
         content += TextParsing::gFunctionBeginBrackets;
 
@@ -663,7 +663,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
     content += TextParsing::gIndentation;
     content += TextParsing::gFunctionEndBrackets;
     content += TextParsing::gFunctionEndBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gVoid;
     content += TextParsing::gSpace;
@@ -674,7 +674,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
     content += TextParsing::gVerify;
     content += TextParsing::gBrackets;
     content += TextParsing::gSmallConst;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
     content += TextParsing::gFunctionBeginBrackets;
 
     for (const auto& value : dataType)
@@ -684,7 +684,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
         content += StringUtility::ToFirstLetterLower(value);
         content += TextParsing::gContainer;
         content += TextParsing::gRightBrackets;
-        content += TextParsing::gNewline;
+        content += TextParsing::gNewlineCharacter;
 
         content += TextParsing::gIndentation;
         content += TextParsing::gFunctionBeginBrackets;
@@ -698,14 +698,14 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
         content += TextParsing::gIndentation;
         content += TextParsing::gFunctionEndBrackets;
 
-        content += TextParsing::gNewline;
+        content += TextParsing::gNewlineCharacter;
     }
 
     content += TextParsing::gFunctionEndBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gOpenClassInvariant;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gBool;
     content += TextParsing::gSpace;
@@ -735,7 +735,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
         if (index == boost::numeric_cast<int>(dataType.size()) - 1)
         {
             content += TextParsing::gRightBrackets;
-            content += TextParsing::gNewline;
+            content += TextParsing::gNewlineCharacter;
         }
         else
         {
@@ -757,7 +757,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
 
     content += TextParsing::gIndentation;
     content += TextParsing::gElse;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gFunctionBeginBrackets;
@@ -770,9 +770,9 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
     content += TextParsing::gFunctionEndBrackets;
 
     content += TextParsing::gFunctionEndBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
     content += TextParsing::gOpenClassInvariantEndif;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }
@@ -789,7 +789,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
     content += TextParsing::gDoubleColon;
     content += className;
     content += TextParsing::gStringDirectory;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gColon;
@@ -819,7 +819,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
             content += TextParsing::gComma;
         }
 
-        content += TextParsing::gNewline;
+        content += TextParsing::gNewlineCharacter;
 
         ++index;
     }
@@ -834,12 +834,12 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
     content += TextParsing::gLeftBrackets;
     content += TextParsing::gRightBrackets;
     content += TextParsing::gSemicolonNewline;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gUserSelfClassIsValid1;
     content += TextParsing::gFunctionEndBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gVoid;
     content += TextParsing::gSpace;
@@ -849,12 +849,12 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
     content += TextParsing::gDoubleColon;
     content += TextParsing::gParsing;
     content += TextParsing::gStringDirectory;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gFunctionBeginBrackets;
     content += TextParsing::gIndentation;
     content += TextParsing::gFilesystemPath;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gDirectoryIterator;
@@ -865,7 +865,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
     content += TextParsing::gPathNative;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
@@ -884,7 +884,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
     content += TextParsing::gFunctionEndBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
@@ -893,7 +893,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
     content += TextParsing::gReadJson;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
@@ -906,7 +906,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
     content += TextParsing::gGetJsonClassName;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += GenerateContainerDefaultFunctionDefinition(className, dataType);
 
@@ -946,7 +946,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerMember() const
     content += TextParsing::gIndentation;
     content += TextParsing::gClassEndBrackets;
     content += TextParsing::gFunctionEndBrackets;
-    content += TextParsing::gNewline;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/02/09 16:39)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 16:46)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_CHEBYSHEV_RATIO_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_CHEBYSHEV_RATIO_DETAIL_H
@@ -13,6 +13,7 @@
 #include "ChebyshevRatio.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
@@ -111,6 +112,87 @@ typename Mathematics::ChebyshevRatio<Real>::Tuple Mathematics::ChebyshevRatio<Re
     }
 
     return Tuple{ f0, f1 };
+}
+
+template <typename Real>
+Real Mathematics::ChebyshevRatio<Real>::GetChebyshevRatio(Real t, Real angle)
+{
+    if (angle > Math::GetValue(0))
+    {
+        if (angle < Math::GetPI())
+        {
+            return Math::Sin(t * angle) / Math::Sin(angle);
+        }
+    }
+    else if (angle < Math::GetValue(0))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("无效角度"))
+    }
+
+    return t;
+}
+
+template <typename Real>
+Real Mathematics::ChebyshevRatio<Real>::ChebyshevRatioUsingCosAngle(Real t, Real cosAngle)
+{
+    if (cosAngle < Math::GetValue(1))
+    {
+        if (cosAngle > -Math::GetValue(1))
+        {
+            const auto angle = Math::ACos(cosAngle);
+            return Math::Sin(t * angle) / Math::Sin(angle);
+        }
+        else
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("无效角度"))
+        }
+    }
+    else
+    {
+        return t;
+    }
+}
+
+template <typename Real>
+std::array<Real, 2> Mathematics::ChebyshevRatio<Real>::ChebyshevRatios(Real t, Real angle)
+{
+    if (angle > Math::GetValue(0))
+    {
+        if (angle < Math::GetPI())
+        {
+            const auto sinAngle = std::sin(angle);
+            return std::array<Real, 2>{ Math::Sin((Math::GetValue(1) - t) * angle) / sinAngle,
+                                        Math::Sin(t * angle) / sinAngle };
+        }
+    }
+    else if (angle < Math::GetValue(0))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("无效角度"))
+    }
+
+    return std::array<Real, 2>{ Math::GetValue(1) - t, t };
+}
+
+template <typename Real>
+std::array<Real, 2> Mathematics::ChebyshevRatio<Real>::ChebyshevRatiosUsingCosAngle(Real t, Real cosAngle)
+{
+    if (cosAngle < Math::GetValue(1))
+    {
+        if (cosAngle > -Math::GetValue(1))
+        {
+            const auto angle = Math::ACos(cosAngle);
+            const auto sinAngle = Math::Sin(angle);
+            return std::array<Real, 2>{ Math::Sin((Math::GetValue(1) - t) * angle) / sinAngle, Math::Sin(t * angle) / sinAngle };
+        }
+        else
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("无效角度"))
+        }
+    }
+    else
+    {
+        return std::array<Real, 2>{ Math::GetValue(1) - t, t };
+    }
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_CHEBYSHEV_RATIO_DETAIL_H

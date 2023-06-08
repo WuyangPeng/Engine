@@ -826,6 +826,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\TrigonometricFunction.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ValueScope.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ValueScopeDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSV\BatchConversionCode.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSV\BatchConversionCSV.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSV\CSVContent.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSV\CSVGenerate.h" />
@@ -1351,6 +1352,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\TemplateTools\Factorial.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TemplateTools\Fibonacci.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TemplateTools\TrigonometricFunction.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSV\BatchConversionCode.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSV\BatchConversionCSV.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSV\CSVContent.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSV\CSVGenerate.cpp" />

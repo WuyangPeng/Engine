@@ -69,8 +69,8 @@ ACE（引擎通过宏NETWORK_USE_ACE关联）
 ----------------------------
 openssl（引擎通过宏NETWORK_USE_OPENSSL关联）
 
-1. 版本：3.0.5。
-2. 官方网站：https://www.openssl.org/。
+1. 版本：3.0.9。
+2. 官方网站：https://www.openssl.org/ 。
 3. 下载并安装 ActivePerl。下载地址：http://www.activestate.com/activeperl/downloads 
 4. 打开命令提示符，定位到 ($Perl64)\eg 目录，执行 perl example.pl，
    若提示 Hello from ActivePerl! 则说明 Perl 安装成功。
@@ -168,7 +168,7 @@ opencv（引擎通过宏IMAGICS_USE_OPENCV关联）
 Visual Leak Detector（引擎Debug版本直接关联）
 
 1. 版本：2.7.0。
-2. git地址：https://github.com/oneiric/vld。
+2. git地址：https://github.com/oneiric/vld 。
 3. Allocs.cpp第39行，testsuite.cpp第78行增加 
    #elif _MSC_VER > 1927	// VS 2019
    #define CRTDLLNAME   _T("ucrtbased.dll")
@@ -216,7 +216,7 @@ lua（引擎通过宏SCRIPT_USE_LUA关联）
 OpenXLSX （引擎通过宏CORE_TOOLS_USE_OPENXLSX关联）
 
 1. 版本：0.4.1。
-2. 官方网站：https://github.com/troldal/OpenXLSX。
+2. 官方网站：https://github.com/troldal/OpenXLSX 。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 4. OPENXLSX_LIBRARY_TYPE值修改成SHARED。
 
@@ -224,7 +224,7 @@ OpenXLSX （引擎通过宏CORE_TOOLS_USE_OPENXLSX关联）
 pugixml（引擎直接关联）
 
 1. 版本：1.12.1。
-2. 官方网站：https://github.com/zeux/pugixml。
+2. 官方网站：https://github.com/zeux/pugixml 。
 3. pugiconfig.hpp第47行，定义宏PUGIXML_HEADER_ONLY。
 
 ----------------------------

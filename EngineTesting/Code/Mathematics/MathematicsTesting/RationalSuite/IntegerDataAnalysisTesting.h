@@ -10,14 +10,20 @@
 #ifndef MATHEMATICS_RATIONAL_SUITE_INTEGER_DATA_ANALYSIS_TESTING_H
 #define MATHEMATICS_RATIONAL_SUITE_INTEGER_DATA_ANALYSIS_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Mathematics
 {
     class IntegerDataAnalysisTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(IntegerDataAnalysisTesting);
+        using ClassType = IntegerDataAnalysisTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit IntegerDataAnalysisTesting(const OStreamShared& streamShared);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         void MainTest();

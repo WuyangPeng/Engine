@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.3 (2022/02/22 14:39)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/06/08 17:55)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_RECTANGLE3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_RECTANGLE3_H
@@ -49,8 +49,7 @@ namespace Mathematics
         Vector3 point;
         Rectangle3 rectangle;
 
-        // 有关最接近的矩形点的信息
-        // closest1 = rect.center + param0 * rect.dir0 + param1 * rect.dir1
+        // 有关最接近的矩形点的信息 
         mutable Vector2 rectCoord;
     };
 

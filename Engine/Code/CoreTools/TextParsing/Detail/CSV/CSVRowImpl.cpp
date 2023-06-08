@@ -330,6 +330,27 @@ CoreTools::CSVRowImpl::ArrayType CoreTools::CSVRowImpl::GetArrayType(const Strin
     return arrayType;
 }
 
+CoreTools::CSVRowImpl::StringContainer CoreTools::CSVRowImpl::GetStringArray(const String& field) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    StringContainer result{};
+
+    for (const auto column = GetArrayType(field); const auto& value : column)
+    {
+        if (value.empty())
+        {
+            result.emplace_back(String{});
+        }
+        else
+        {
+            result.emplace_back(value);
+        }
+    }
+
+    return result;
+}
+
 CoreTools::CSVRowImpl::BoolContainer CoreTools::CSVRowImpl::GetBoolArray(const String& field) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;

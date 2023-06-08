@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.2 (2022/01/29 10:17)
+///	标准：std:c++20
+///	引擎版本：0.9.0.11 (2023/05/30 14:48)
 
 #ifndef MATHEMATICS_BASE_BIT_HACKS_DETAIL_H
 #define MATHEMATICS_BASE_BIT_HACKS_DETAIL_H
@@ -15,23 +15,15 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-#include <type_traits>
-
-// log2的快速整数算法
-// 通过掩码计算出powerOfTwo的最高位数，即log2(powerOfTwo)的值。
 template <typename T>
-T Mathematics::BitHacks::Log2OfPowerOfTwo(T powerOfTwo)
+requires std::is_integral_v<T> bool Mathematics::BitHacks::IsPowerOfTwo(T value)
 {
-    static_assert(std::is_integral_v<T>, "T must be integral.");
-
-    if (powerOfTwo <= 0)
+    if (value < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("值powerOfTwo必须大于0"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("值value必须是非负数。"s))
     }
 
-    const Mathematics::Log2OfPowerOfTwo<T> log2OfPowerOfTwo{ powerOfTwo };
-
-    return log2OfPowerOfTwo.GetLog2();
+    return (0 < value) && ((value & (value - 1)) == 0);
 }
 
 #endif  // MATHEMATICS_BASE_BIT_HACKS_DETAIL_H
