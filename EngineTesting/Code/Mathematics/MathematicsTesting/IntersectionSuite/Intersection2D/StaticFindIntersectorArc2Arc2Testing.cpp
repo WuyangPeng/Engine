@@ -1,24 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/06 11:28)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:52)
 
 #include "StaticFindIntersectorArc2Arc2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorArc2Arc2Detail.h"
 #include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorCircle2Circle2.h"
 #include "Mathematics/Objects2D/Arc2Detail.h"
 #include "Mathematics/Objects2D/Circle2Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::swap;
-using std::vector;
+#include <random>
 
 Mathematics::StaticFindIntersectorArc2Arc2Testing::StaticFindIntersectorArc2Arc2Testing(const OStreamShared& streamShared)
     : ParentType{ streamShared }
@@ -46,7 +44,7 @@ void Mathematics::StaticFindIntersectorArc2Arc2Testing::SameTest() noexcept
 
 void Mathematics::StaticFindIntersectorArc2Arc2Testing::EmptyTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -77,13 +75,13 @@ void Mathematics::StaticFindIntersectorArc2Arc2Testing::EmptyTest()
         auto maxX = lhsCenter.GetX() + lhsRadius;
         auto minX = lhsCenter.GetX() - lhsRadius;
 
-        const std::uniform_real<float> secondRandomDistribution(minX, maxX);
+        const std::uniform_real<float> randomDistribution1(minX, maxX);
 
-        const auto firstX = secondRandomDistribution(generator);
+        const auto firstX = randomDistribution1(generator);
         auto distanceX = lhsCenter.GetX() - firstX;
         const auto firstY = lhsCenter.GetY() - MathF::Sqrt(lhsRadius * lhsRadius - distanceX * distanceX);
 
-        const auto secondX = secondRandomDistribution(generator);
+        const auto secondX = randomDistribution1(generator);
         distanceX = lhsCenter.GetX() - secondX;
         const auto secondY = lhsCenter.GetY() - MathF::Sqrt(lhsRadius * lhsRadius - distanceX * distanceX);
 
@@ -121,7 +119,7 @@ void Mathematics::StaticFindIntersectorArc2Arc2Testing::EmptyTest()
         distanceX = rhsCenter.GetX() - fourthX;
         const auto fourthY = rhsCenter.GetY() - MathF::Sqrt(rhsRadius * rhsRadius - distanceX * distanceX);
 
-        const Arc2F secondArc(rhsCenter, rhsRadius, Vector2F(thirdX, thirdY), Vector2F(fourthX, fourthY), 1e-5f);
+        const Arc2F secondArc(rhsCenter, rhsRadius, Vector2F(thirdX, thirdY), Vector2F(fourthX, fourthY), 1e-4f);
 
         StaticFindIntersectorArc2Arc2<float> firstIntersector(firstArc, secondArc, 1e-2f);
 

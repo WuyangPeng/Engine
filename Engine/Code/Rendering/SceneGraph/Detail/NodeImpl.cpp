@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/04/01 15:46)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 11:13)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,9 +20,6 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/SceneGraph/Node.h"
-
-using std::string;
-using std::vector;
 
 Rendering::NodeImpl::NodeImpl(Node* realThis) noexcept
     : spatialChild{}, realThis{ realThis }
@@ -272,7 +269,7 @@ void Rendering::NodeImpl::GetVisibleSet(Culler& culler, bool noCull)
 
 // 名字支持。
 
-CoreTools::ObjectSharedPtr Rendering::NodeImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::NodeImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -289,11 +286,11 @@ CoreTools::ObjectSharedPtr Rendering::NodeImpl::GetObjectByName(const string& na
     return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::NodeImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::NodeImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vector<CoreTools::ObjectSharedPtr> objects{};
+    std::vector<CoreTools::ObjectSharedPtr> objects{};
 
     for (auto iter = spatialChild.begin(); iter != spatialChild.end(); ++iter)
     {
@@ -308,7 +305,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::NodeImpl::GetAllObjectsByName(cons
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::NodeImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::NodeImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -325,11 +322,11 @@ CoreTools::ConstObjectSharedPtr Rendering::NodeImpl::GetConstObjectByName(const 
     return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::NodeImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::NodeImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vector<CoreTools::ConstObjectSharedPtr> objects{};
+    std::vector<CoreTools::ConstObjectSharedPtr> objects{};
 
     for (auto iter = spatialChild.begin(); iter != spatialChild.end(); ++iter)
     {

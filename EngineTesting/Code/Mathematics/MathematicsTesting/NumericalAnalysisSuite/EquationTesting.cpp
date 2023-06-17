@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/02 17:14)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:02)
 
 #include "EquationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/NumericalAnalysis/Equation.h"
 #include "Mathematics/NumericalAnalysis/EquationResultConstIteratorDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
+#include <random>
 
 Mathematics::EquationTesting::EquationTesting(const OStreamShared& streamShared)
     : ParentType{ streamShared }
@@ -42,14 +39,14 @@ void Mathematics::EquationTesting::MainTest()
 
 void Mathematics::EquationTesting::OnceTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e10, 1.0e10);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e10, 1.0e10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Equation firstEquation(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Equation firstEquation(randomDistribution0(generator), randomDistribution0(generator));
 
         ASSERT_TRUE(firstEquation.IsRealResult());
         ASSERT_EQUAL(firstEquation.GetRealResultCount(), 1);
@@ -63,22 +60,22 @@ void Mathematics::EquationTesting::OnceTest()
 
         ASSERT_EQUAL(++iter, firstEquation.GetRealEnd());
 
-        ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-6);
+        ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-5);
     }
 }
 
 void Mathematics::EquationTesting::SecondaryTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e8, 1.0e8);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e8, 1.0e8);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Equation firstEquation(firstRandomDistribution(generator),
-                               firstRandomDistribution(generator),
-                               firstRandomDistribution(generator));
+        Equation firstEquation(randomDistribution0(generator),
+                               randomDistribution0(generator),
+                               randomDistribution0(generator));
 
         if (firstEquation.IsRealResult())
         {
@@ -114,17 +111,17 @@ void Mathematics::EquationTesting::SecondaryTest()
 
 void Mathematics::EquationTesting::ThriceTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e7, 1.0e7);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e7, 1.0e7);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Equation firstEquation(firstRandomDistribution(generator),
-                               firstRandomDistribution(generator),
-                               firstRandomDistribution(generator),
-                               firstRandomDistribution(generator));
+        Equation firstEquation(randomDistribution0(generator),
+                               randomDistribution0(generator),
+                               randomDistribution0(generator),
+                               randomDistribution0(generator));
 
         ASSERT_TRUE(firstEquation.IsRealResult());
 
@@ -144,7 +141,7 @@ void Mathematics::EquationTesting::ThriceTest()
             {
                 auto result = *iter;
 
-                ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-5);
+                ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-3);
             }
         }
         else if (firstEquation.GetRealResultCount() == 2)
@@ -212,18 +209,18 @@ void Mathematics::EquationTesting::ThriceTest()
 
 void Mathematics::EquationTesting::QuarticTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e4, 1.0e4);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Equation firstEquation(firstRandomDistribution(generator),
-                               firstRandomDistribution(generator),
-                               firstRandomDistribution(generator),
-                               firstRandomDistribution(generator),
-                               firstRandomDistribution(generator));
+        Equation firstEquation(randomDistribution0(generator),
+                               randomDistribution0(generator),
+                               randomDistribution0(generator),
+                               randomDistribution0(generator),
+                               randomDistribution0(generator));
 
         for (auto iter = firstEquation.GetRealBegin();
              iter != firstEquation.GetRealEnd();

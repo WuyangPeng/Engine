@@ -1,24 +1,23 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/24 11:08)
+///	引擎版本：0.9.0.12 (2023/06/12 13:28)
 
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLTexture2.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-
+#include "System/OpenGL/OpenGLTextures.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/Flags/CopyType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
-#include "System/OpenGL/OpenGLTextures.h"
 
 Rendering::OpenGLTexture2::OpenGLTexture2(const Texture2DSharedPtr& texture2D, const std::string& name)
     : ParentType{ texture2D, name, TextureTarget::Texture2D, TextureTargetBinding::Binding2D }

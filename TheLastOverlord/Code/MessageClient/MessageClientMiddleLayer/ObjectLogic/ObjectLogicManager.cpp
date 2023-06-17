@@ -12,8 +12,8 @@
 #include "MessageClient/MessageClientMiddleLayer/Macro/MessageClientMiddleLayerClassInvariantMacro.h"
 #include "ObjectLogicManager.h"
 
-MessageClientMiddleLayer::ObjectLogicManager::ObjectLogicManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+MessageClientMiddleLayer::ObjectLogicManager::ObjectLogicManager(Framework::MiddleLayerPlatform middleLayerPlatform,  const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     MESSAGE_CLIENT_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

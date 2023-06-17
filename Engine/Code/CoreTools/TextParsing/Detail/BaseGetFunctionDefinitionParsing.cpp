@@ -195,7 +195,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
     return content;
 }
 
-System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunctionArrayBody() const
+System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunctionArrayBody(bool unused) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -203,6 +203,13 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
 
     content += GenerateUserClassIsValidConst9(1);
     content += TextParsing::gNewlineCharacter;
+
+    if (unused)
+    {
+        content += GenerateIndentation(1);
+        content += SYSTEM_TEXT("System::UnusedFunction(index);\n");
+        content += TextParsing::gNewlineCharacter;
+    }
 
     content += GenerateBaseGetReturnDefinition(TextParsing::gBaseNotGetArray);
 
@@ -218,7 +225,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
 
     auto content = GenerateGetFunctionArrayCount(functionVariableName);
 
-    content += GenerateBaseGetFunctionArrayBody();
+    content += GenerateBaseGetFunctionArrayBody(false);
 
     return content;
 }
@@ -236,7 +243,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
     content += GetCSVClassName();
     content += TextParsing::gDoubleColon;
     content += functionVariableName;
-    content += TextParsing::gMaybeUnusedIndexParameterConst;
+    content += TextParsing::gIndexParameterConst;
 
     return content;
 }
@@ -247,7 +254,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
 
     auto content = GenerateBaseGetFunctionArrayIndex(valueType, functionVariableName);
 
-    content += GenerateBaseGetFunctionArrayBody();
+    content += GenerateBaseGetFunctionArrayBody(true);
 
     return content;
 }
@@ -258,7 +265,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
 
     auto content = GenerateGetFunctionArrayConstIterator(actualType, functionVariableName, TextParsing::gBeginFunctionConst);
 
-    content += GenerateBaseGetFunctionArrayBody();
+    content += GenerateBaseGetFunctionArrayBody(false);
 
     return content;
 }
@@ -269,7 +276,7 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
 
     auto content = GenerateGetFunctionArrayConstIterator(actualType, functionVariableName, TextParsing::gEndFunctionConst);
 
-    content += GenerateBaseGetFunctionArrayBody();
+    content += GenerateBaseGetFunctionArrayBody(false);
 
     return content;
 }
@@ -303,6 +310,10 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
     auto content = GenerateFunctionBeginBrackets();
 
     content += GenerateUserClassIsValidConst9(1);
+    content += TextParsing::gNewlineCharacter;
+
+    content += GenerateIndentation(1);
+    content += SYSTEM_TEXT("System::UnusedFunction(csvContainer);\n");
     content += TextParsing::gNewlineCharacter;
 
     content += GenerateBaseGetReturnDefinition(TextParsing::gBaseNotGetMapping);
@@ -356,7 +367,9 @@ System::String CoreTools::BaseGetFunctionDefinitionParsing::GenerateBaseGetFunct
     content += TextParsing::gDoubleColon;
     content += TextParsing::gGet;
     content += upperVariableName;
-    content += TextParsing::gMaybeUnusedConst;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gSmallConst;
+    content += TextParsing::gSpace;
     content += nameSpace;
     content += TextParsing::gContainerParameter;
     content += TextParsing::gNewlineCharacter;

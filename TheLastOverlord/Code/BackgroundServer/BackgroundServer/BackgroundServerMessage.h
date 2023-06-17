@@ -54,7 +54,7 @@ namespace BackgroundServer
         using ParentType = MessageType;
 
     public:
-        explicit BackgroundServerMessage(int64_t delta);
+        explicit BackgroundServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

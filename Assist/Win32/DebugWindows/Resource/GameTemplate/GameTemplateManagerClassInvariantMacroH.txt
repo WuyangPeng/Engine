@@ -11,7 +11,7 @@
 #define %ProjectCapital%_%ManagerCapital%_MACRO_%ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_MACRO_H
 
 #include "UserMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
 #if !defined(%ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL)
 	#define %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL 8

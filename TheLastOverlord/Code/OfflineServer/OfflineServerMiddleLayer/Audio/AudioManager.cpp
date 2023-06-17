@@ -12,8 +12,8 @@
 #include "AudioManager.h"
 #include "OfflineServer/OfflineServerMiddleLayer/Macro/OfflineServerMiddleLayerClassInvariantMacro.h"
 
-OfflineServerMiddleLayer::AudioManager::AudioManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+OfflineServerMiddleLayer::AudioManager::AudioManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     OFFLINE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

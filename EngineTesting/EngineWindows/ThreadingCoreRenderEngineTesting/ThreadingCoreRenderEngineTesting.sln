@@ -71,9 +71,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Animation", "Animation", "{
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationTesting", "..\Animation\AnimationTesting\AnimationTesting.vcxproj", "{E67A1043-570F-4D51-9C85-8637EDD762DD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArtificialIntellegence", "ArtificialIntellegence", "{E7AB4F77-94D4-4276-A7A8-5255E447B9FE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArtificialIntelligence", "ArtificialIntelligence", "{E7AB4F77-94D4-4276-A7A8-5255E447B9FE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArtificialIntellegenceTesting", "..\ArtificialIntellegence\ArtificialIntellegenceTesting\ArtificialIntellegenceTesting.vcxproj", "{C64C4BC0-603E-424B-8589-17D8E39B5F9D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArtificialIntelligenceTesting", "..\ArtificialIntelligence\ArtificialIntelligenceTesting\ArtificialIntelligenceTesting.vcxproj", "{C64C4BC0-603E-424B-8589-17D8E39B5F9D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterface", "UserInterface", "{AF3040F8-4D76-4928-95DC-3370972537A9}"
 EndProject

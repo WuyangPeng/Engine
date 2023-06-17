@@ -1,24 +1,34 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/05 16:14)
+///	引擎版本：0.9.0.12 (2023/06/13 14:41)
 
 #ifndef FRAMEWORK_HELPER_MIDDLE_LAYER_MACRO_H
 #define FRAMEWORK_HELPER_MIDDLE_LAYER_MACRO_H
 
 #include "System/Helper/EnumCast.h"
 
-#define ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(moduleName)                                   \
-public:                                                                                   \
-    void Set##moduleName##Manager(const MiddleLayerInterfaceSharedPtr& manager) override; \
-                                                                                          \
-protected:                                                                                \
-    MiddleLayerInterfaceSharedPtr Get##moduleName##Manager() override;                    \
-    ConstMiddleLayerInterfaceSharedPtr Get##moduleName##Manager() const override
+#define ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(moduleName)                                                \
+public:                                                                                                \
+    void Set##moduleName##Manager(const MiddleLayerInterfaceSharedPtr& manager) override;              \
+                                                                                                       \
+protected:                                                                                             \
+    MiddleLayerInterfaceSharedPtr Get##moduleName##Manager() override;                                 \
+    ConstMiddleLayerInterfaceSharedPtr Get##moduleName##Manager() const override;                      \
+    template <typename MiddleLayerType>                                                                \
+    std::shared_ptr<MiddleLayerType> Get##moduleName##Manager()                                        \
+    {                                                                                                  \
+        return boost::polymorphic_pointer_downcast<MiddleLayerType>(Get##moduleName##Manager());       \
+    }                                                                                                  \
+    template <typename MiddleLayerType>                                                                \
+    std::shared_ptr<const MiddleLayerType> Get##moduleName##Manager() const                            \
+    {                                                                                                  \
+        return boost::polymorphic_pointer_downcast<const MiddleLayerType>(Get##moduleName##Manager()); \
+    }
 
 #define ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(namespaceName, className, moduleName)                                                   \
     void namespaceName::className##ManagerInterface::Set##moduleName##Manager(const MiddleLayerInterfaceSharedPtr& manager)        \

@@ -1,23 +1,32 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/10 21:34)
+///	引擎辅助版本：0.9.0.12 (2023/06/15 14:43)
 
 #ifndef SKELETON_EDITOR_DLL_DLL_H
 #define SKELETON_EDITOR_DLL_DLL_H
 
-#include "Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 #include "System/Helper/ExportMacro.h"
 
 #if defined(BUILDING_SKELETON_EDITOR_NO_IMPORT) || defined(BUILDING_SKELETON_EDITOR_STATIC)
 
     #define SKELETON_EDITOR_DEFAULT_DECLARE
-    #define SKELETON_EDITOR_HIDDEN_DECLARE
     #define SKELETON_EDITOR_VISIBLE
+
+    #if defined(BUILDING_SKELETON_EDITOR_EXPORT)
+
+        #define SKELETON_EDITOR_HIDDEN_DECLARE
+
+    #else  // !defined(BUILDING_SKELETON_EDITOR_EXPORT)
+
+        #define SKELETON_EDITOR_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_SKELETON_EDITOR_EXPORT
 
 #else  // !defined(BUILDING_SKELETON_EDITOR_NO_IMPORT) && !defined(BUILDING_SKELETON_EDITOR_STATIC)
 

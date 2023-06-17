@@ -12,8 +12,8 @@
 #include "EventManager.h"
 #include "MessageClient/MessageClientMiddleLayer/Macro/MessageClientMiddleLayerClassInvariantMacro.h"
 
-MessageClientMiddleLayer::EventManager::EventManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+MessageClientMiddleLayer::EventManager::EventManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     MESSAGE_CLIENT_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.1 (2022/08/24 15:40)
+///	引擎版本：0.9.0.12 (2023/06/12 13:43)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,9 +21,6 @@
 #include "Mathematics/Algebra/Vector4Detail.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
 #include "Rendering/Shaders/VisualProgram.h"
-
-using std::string;
-using std::vector;
 
 Rendering::VisualEffectImpl::VisualEffectImpl(CoreTools::DisableNotThrow disableNotThrow)
     : program{ std::make_shared<VisualProgram>(disableNotThrow) },
@@ -83,7 +80,7 @@ void Rendering::VisualEffectImpl::Register(ObjectRegister& target) const
     target.Register(pvwMatrixConstant);
 }
 
-CoreTools::ObjectSharedPtr Rendering::VisualEffectImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::VisualEffectImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -96,7 +93,7 @@ CoreTools::ObjectSharedPtr Rendering::VisualEffectImpl::GetObjectByName(const st
     return pvwMatrixConstant->GetObjectByName(name);
 }
 
-Rendering::VisualEffectImpl::ObjectSharedPtrContainer Rendering::VisualEffectImpl::GetAllObjectsByName(const string& name)
+Rendering::VisualEffectImpl::ObjectSharedPtrContainer Rendering::VisualEffectImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -108,7 +105,7 @@ Rendering::VisualEffectImpl::ObjectSharedPtrContainer Rendering::VisualEffectImp
     return result;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::VisualEffectImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::VisualEffectImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -121,7 +118,7 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualEffectImpl::GetConstObjectByNam
     return pvwMatrixConstant->GetConstObjectByName(name);
 }
 
-Rendering::VisualEffectImpl::ConstObjectSharedPtrContainer Rendering::VisualEffectImpl::GetAllConstObjectsByName(const string& name) const
+Rendering::VisualEffectImpl::ConstObjectSharedPtrContainer Rendering::VisualEffectImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

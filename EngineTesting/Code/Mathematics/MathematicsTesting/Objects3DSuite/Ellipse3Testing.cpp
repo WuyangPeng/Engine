@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/28 17:25)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:16)
 
 #include "Ellipse3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Ellipse3Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -44,28 +42,28 @@ void Mathematics::Ellipse3Testing::MainTest()
 
 void Mathematics::Ellipse3Testing::EllipseTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D center(firstRandomDistribution(generator),
-                              firstRandomDistribution(generator),
-                              firstRandomDistribution(generator));
+        const Vector3D center(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        Vector3D normal(firstRandomDistribution(generator),
-                        firstRandomDistribution(generator),
-                        firstRandomDistribution(generator));
+        Vector3D normal(randomDistribution0(generator),
+                        randomDistribution0(generator),
+                        randomDistribution0(generator));
 
-        Vector3D major(firstRandomDistribution(generator),
-                       firstRandomDistribution(generator),
-                       firstRandomDistribution(generator));
+        Vector3D major(randomDistribution0(generator),
+                       randomDistribution0(generator),
+                       randomDistribution0(generator));
 
-        Vector3D minor(firstRandomDistribution(generator),
-                       firstRandomDistribution(generator),
-                       firstRandomDistribution(generator));
+        Vector3D minor(randomDistribution0(generator),
+                       randomDistribution0(generator),
+                       randomDistribution0(generator));
 
         auto majorLength = Vector3ToolsD::GetLength(major);
         auto minorLength = Vector3ToolsD::GetLength(minor);

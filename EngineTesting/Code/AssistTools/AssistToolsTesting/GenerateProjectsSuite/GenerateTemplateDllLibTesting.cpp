@@ -1,19 +1,31 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/22 16:14)
+///	引擎测试版本：0.9.0.12 (2023/06/13 10:53)
 
 #include "GenerateTemplateDllLibTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "AssistTools/GenerateProjects/CopyrightData.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateDllLib.h"
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(AssistTools, GenerateTemplateDllLib)
+AssistTools::GenerateTemplateDllLibTesting::GenerateTemplateDllLibTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateDllLibTesting)
+
+void AssistTools::GenerateTemplateDllLibTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void AssistTools::GenerateTemplateDllLibTesting::MainTest()
 {
@@ -29,9 +41,9 @@ void AssistTools::GenerateTemplateDllLibTesting::GenerateToTest()
     const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetSpecialCodeEngineDirectory());
     const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName);
 
-    TestingType::Replace replace = GetSpecialReplace();
+    GenerateTemplateDllLib::Replace replace = GetSpecialReplace();
 
-    TestingType generateTemplateSolution(fileName, replace);
+    GenerateTemplateDllLib generateTemplateSolution(fileName, replace);
 
     int defaultEndYearCount = GetContentFindCount(fileName, GetSpecialEndYear());
     ASSERT_EQUAL(defaultEndYearCount, 1);
@@ -95,7 +107,7 @@ void AssistTools::GenerateTemplateDllLibTesting::DefaultGenerateToTest()
     const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
     const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName);
 
-    TestingType generateTemplateSolution(fileName, TestingType::Replace());
+    GenerateTemplateDllLib generateTemplateSolution(fileName, GenerateTemplateDllLib::Replace());
 
     int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
     ASSERT_EQUAL(defaultEndYearCount, 1);

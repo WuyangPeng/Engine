@@ -12,8 +12,8 @@
 #include "ArtificialIntellegenceManager.h"
 #include "LogServer/LogServerMiddleLayer/Macro/LogServerMiddleLayerClassInvariantMacro.h"
 
-LogServerMiddleLayer::ArtificialIntellegenceManager::ArtificialIntellegenceManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+LogServerMiddleLayer::ArtificialIntellegenceManager::ArtificialIntellegenceManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     LOG_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

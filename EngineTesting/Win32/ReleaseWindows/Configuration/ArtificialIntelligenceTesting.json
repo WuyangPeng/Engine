@@ -1,0 +1,29 @@
+{
+  "helperSuite": {
+
+  },
+
+  "miscellaneousSuite": {
+
+  },
+
+  "pathSearchSuite": {
+
+  },
+
+  "finiteStateMachineSuite": {
+
+  },
+
+  "fuzzyStateMachineSuite": {
+
+  },
+
+  "geneticAlgorithmSuite": {
+
+  },
+
+  "neuralNetworkSuite": {
+
+  }
+}

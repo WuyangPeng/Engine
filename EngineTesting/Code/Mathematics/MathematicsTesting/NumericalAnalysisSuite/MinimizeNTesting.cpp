@@ -1,24 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/02 22:16)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:04)
 
 #include "MinimizeNTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/NumericalAnalysis/Minimize1Detail.h"
 #include "Mathematics/NumericalAnalysis/MinimizeNDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -48,27 +44,27 @@ void Mathematics::MinimizeNTesting::GetMinimumTest()
 {
     const MinimizeN<double, MinimizeNTesting> minimizeN(5, Function, 10, 10, 10, this);
 
-    vector<double> begin{ -10.0, -20.0, -30.0, -40.0, -70.0 };
+    std::vector<double> begin{ -10.0, -20.0, -30.0, -40.0, -70.0 };
 
-    vector<double> end{ 10.0, 20.0, 30.0, 40.0, 70.0 };
+    std::vector<double> end{ 10.0, 20.0, 30.0, 40.0, 70.0 };
 
-    vector<double> initial{ 0.0, 0.0, 0.0, 0.0, 0.0 };
+    std::vector<double> initial{ 0.0, 0.0, 0.0, 0.0, 0.0 };
 
     MinimizeNDataD result = minimizeN.GetMinimum(begin, end, initial);
 
     ASSERT_APPROXIMATE(result.GetMinValue(), Function(result.GetMinLocation(), this), 1e-10);
 
-    default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        vector<double> value;
+        std::vector<double> value;
 
         for (auto beginIndex = 0u; beginIndex < begin.size(); ++beginIndex)
         {
-            const uniform_int<> integerRandomDistribution(static_cast<int>(begin.at(beginIndex)), static_cast<int>(end.at(beginIndex)));
+            const std::uniform_int<> integerRandomDistribution(static_cast<int>(begin.at(beginIndex)), static_cast<int>(end.at(beginIndex)));
 
             value.push_back(integerRandomDistribution(generator));
         }
@@ -77,7 +73,7 @@ void Mathematics::MinimizeNTesting::GetMinimumTest()
     }
 }
 
-double Mathematics::MinimizeNTesting::Function(const vector<double>& value, const MinimizeNTesting* minimize1Testing) noexcept
+double Mathematics::MinimizeNTesting::Function(const std::vector<double>& value, const MinimizeNTesting* minimize1Testing) noexcept
 {
     double result = 0.0;
 

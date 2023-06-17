@@ -1,18 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 18:30)
+///	引擎测试版本：0.9.0.12 (2023/06/09 11:15)
 
 #include "AlgebraStreamSizeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
-#include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/Algebra/AlgebraStreamSize.h"
+
 Mathematics::AlgebraStreamSizeTesting::AlgebraStreamSizeTesting(const OStreamShared& streamShared)
     : ParentType{ streamShared }
 {
@@ -33,7 +34,7 @@ void Mathematics::AlgebraStreamSizeTesting::MainTest()
 
 void Mathematics::AlgebraStreamSizeTesting::StreamSizeTest()
 {
-    size_t size = Mathematics::GetStreamSize(HomogeneousPointF());
+    auto size = boost::numeric_cast<size_t>(Mathematics::GetStreamSize(HomogeneousPointF()));
 
     ASSERT_EQUAL(size, sizeof(float) * 4);
 

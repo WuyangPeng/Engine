@@ -55,7 +55,7 @@ namespace GatewayServer
         using ParentType = MessageType;
 
     public:
-        explicit GatewayServerMessage(int64_t delta);
+        explicit GatewayServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

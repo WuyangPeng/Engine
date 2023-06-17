@@ -6,7 +6,7 @@
 
 #include "%SolutionName%Helper.h"
 #include "%SolutionName%.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "Framework/MainFunctionHelper/WindowMainFunctionHelperDetail.h"
 #include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h"
 #include "CoreTools/MemoryTools/SubclassSmartPointerDetail.h"

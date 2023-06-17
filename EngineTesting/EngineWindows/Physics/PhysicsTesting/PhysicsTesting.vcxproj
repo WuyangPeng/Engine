@@ -255,7 +255,7 @@
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/CollisionDetectionSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CollisionDetectionSuite/" /F /Y</Command>
     </PreBuildEvent>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -309,9 +309,9 @@
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeTesting.h" />
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\CollisionDetectionSuite.h" />
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\FluidSuite\FluidSuite.h" />
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\HelperSuite\HelperSuite.h" />
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\IntersectionSuite\IntersectionSuite.h" />
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\LCPSolverSuite\LCPSolverSuite.h" />
-    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\MacroSuite\MacroSuite.h" />
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\MiscellaneousSuite\MiscellaneousSuite.h" />
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\ParticleSystemSuite\ParticleSystemSuite.h" />
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\RigidBodySuite\RigidBodySuite.h" />

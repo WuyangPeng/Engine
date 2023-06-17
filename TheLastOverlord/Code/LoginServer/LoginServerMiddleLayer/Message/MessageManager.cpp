@@ -12,8 +12,8 @@
 #include "LoginServer/LoginServerMiddleLayer/Macro/LoginServerMiddleLayerClassInvariantMacro.h"
 #include "MessageManager.h"
 
-LoginServerMiddleLayer::MessageManager::MessageManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+LoginServerMiddleLayer::MessageManager::MessageManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     LOGIN_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

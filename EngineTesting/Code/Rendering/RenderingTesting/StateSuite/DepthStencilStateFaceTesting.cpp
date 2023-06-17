@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/04 16:07)
+///	引擎测试版本：0.9.0.12 (2023/06/12 15:03)
 
 #include "DepthStencilStateFaceTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -17,11 +17,7 @@
 #include "Rendering/State/Flags/DepthStencilStateComparison.h"
 #include "Rendering/State/Flags/DepthStencilStateOperation.h"
 
-namespace Rendering
-{
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(DepthStencilStateOperation)
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(DepthStencilStateComparison)
-}
+using System::operator++;
 
 Rendering::DepthStencilStateFaceTesting::DepthStencilStateFaceTesting(const OStreamShared& stream)
     : ParentType{ stream },
@@ -142,11 +138,11 @@ void Rendering::DepthStencilStateFaceTesting::EqualTest()
 
 void Rendering::DepthStencilStateFaceTesting::GetStreamingSizeTest()
 {
-    auto streamingSize = CORE_TOOLS_STREAM_SIZE(fail);
+    auto streamingSize = CoreTools::GetStreamSize(fail);
 
-    streamingSize += CORE_TOOLS_STREAM_SIZE(depthFail);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(pass);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(comparison);
+    streamingSize += CoreTools::GetStreamSize(depthFail);
+    streamingSize += CoreTools::GetStreamSize(pass);
+    streamingSize += CoreTools::GetStreamSize(comparison);
 
     ASSERT_EQUAL(depthStencilStateFace.GetStreamingSize(), streamingSize);
 }

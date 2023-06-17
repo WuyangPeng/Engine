@@ -27,7 +27,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\Framework\OpenGLGlutCallBackUnitTestSuiteTesting\OpenGLGlutCallBackUnitTestSuiteTestingOpenGLGlutCallBack.cpp">
+    <ClCompile Include="..\..\..\Code\Framework\OpenGLGlutCallBackUnitTestSuiteTesting\OpenGLGlutCallBack.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Framework\OpenGLGlutCallBackUnitTestSuiteTesting\TestingHelper.cpp">
@@ -44,7 +44,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutCallBackUnitTestSuiteTesting\OpenGLGlutCallBackUnitTestSuiteTestingOpenGLGlutCallBack.h">
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutCallBackUnitTestSuiteTesting\OpenGLGlutCallBack.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutCallBackUnitTestSuiteTesting\Testing.h">

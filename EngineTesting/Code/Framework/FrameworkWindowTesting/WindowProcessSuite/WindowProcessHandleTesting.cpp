@@ -1,22 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 14:00)
+///	引擎测试版本：0.9.0.12 (2023/06/13 23:09)
 
 #include "WindowProcessHandleTesting.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "System/Windows/WindowsCreate.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/WindowProcess/WindowProcessHandleDetail.h"
 #include "Framework/WindowProcess/WindowProcessManager.h"
 
-using std::const_pointer_cast;
 using namespace std::literals;
 
 namespace Framework
@@ -47,7 +47,7 @@ void Framework::WindowProcessHandleTesting::MainTest()
 void Framework::WindowProcessHandleTesting::BaseTest()
 {
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-    TestingType process{ System::g_Microseconds / 60, environmentDirectory };
+    TestingType process{ System::gMicroseconds / 60, environmentDirectory };
 
     ASSERT_UNEQUAL_NULL_PTR(process.GetFunction());
     ASSERT_UNEQUAL_NULL_PTR(process.GetProcess());
@@ -64,7 +64,7 @@ void Framework::WindowProcessHandleTesting::ClassNameTest()
     MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-    TestingType process{ System::g_Microseconds / 60, environmentDirectory };
+    TestingType process{ System::gMicroseconds / 60, environmentDirectory };
 
     ASSERT_TRUE(process.IsClassNameExist(className));
 
@@ -78,7 +78,7 @@ void Framework::WindowProcessHandleTesting::ClassNameTest()
 void Framework::WindowProcessHandleTesting::HWndTest()
 {
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-    TestingType process{ System::g_Microseconds / 60, environmentDirectory };
+    TestingType process{ System::gMicroseconds / 60, environmentDirectory };
 
     ASSERT_EQUAL_NULL_PTR(process.GetMainWindowHwnd());
 }

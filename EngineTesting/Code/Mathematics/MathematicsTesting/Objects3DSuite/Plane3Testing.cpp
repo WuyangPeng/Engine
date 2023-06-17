@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/30 11:31)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:17)
 
 #include "Plane3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Plane3Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -45,52 +43,52 @@ void Mathematics::Plane3Testing::MainTest()
 
 void Mathematics::Plane3Testing::ConstructionTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Vector3D normal(firstRandomDistribution(generator),
-                        firstRandomDistribution(generator),
-                        firstRandomDistribution(generator));
+        Vector3D normal(randomDistribution0(generator),
+                        randomDistribution0(generator),
+                        randomDistribution0(generator));
 
         normal.Normalize();
 
-        double constant(firstRandomDistribution(generator));
+        double constant(randomDistribution0(generator));
 
         const Plane3D plane(normal, constant);
 
         ASSERT_TRUE(Vector3ToolsD::Approximate(normal, plane.GetNormal()));
         ASSERT_APPROXIMATE(constant, plane.GetConstant(), 1e-10);
 
-        const Vector3D firstPoint(firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator));
+        const Vector3D point0(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        const Plane3D secondPlane(normal, firstPoint);
+        const Plane3D secondPlane(normal, point0);
 
-        constant = Vector3ToolsD::DotProduct(normal, firstPoint);
+        constant = Vector3ToolsD::DotProduct(normal, point0);
 
         ASSERT_TRUE(Vector3ToolsD::Approximate(normal, secondPlane.GetNormal()));
         ASSERT_APPROXIMATE(constant, secondPlane.GetConstant(), 1e-10);
 
-        const Vector3D secondPoint(firstRandomDistribution(generator),
-                                   firstRandomDistribution(generator),
-                                   firstRandomDistribution(generator));
+        const Vector3D point1(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        const Vector3D thirdPoint(firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator));
+        const Vector3D point2(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        auto edge1 = secondPoint - firstPoint;
-        auto edge2 = thirdPoint - firstPoint;
+        auto edge1 = point1 - point0;
+        auto edge2 = point2 - point0;
         normal = Vector3ToolsD::UnitCrossProduct(edge1, edge2);
-        constant = Vector3ToolsD::DotProduct(normal, firstPoint);
+        constant = Vector3ToolsD::DotProduct(normal, point0);
 
-        const Plane3D thirdPlane(firstPoint, secondPoint, thirdPoint);
+        const Plane3D thirdPlane(point0, point1, point2);
 
         ASSERT_TRUE(Vector3ToolsD::Approximate(normal, thirdPlane.GetNormal()));
         ASSERT_APPROXIMATE(constant, thirdPlane.GetConstant(), 1e-10);
@@ -99,35 +97,35 @@ void Mathematics::Plane3Testing::ConstructionTest()
 
 void Mathematics::Plane3Testing::DistanceTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D firstPoint(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator));
+        const Vector3D point0(randomDistribution(generator),
+                              randomDistribution(generator),
+                              randomDistribution(generator));
 
-        const Vector3D secondPoint(randomDistribution(generator),
-                                   randomDistribution(generator),
-                                   randomDistribution(generator));
+        const Vector3D point1(randomDistribution(generator),
+                              randomDistribution(generator),
+                              randomDistribution(generator));
 
-        const Vector3D thirdPoint(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator));
+        const Vector3D point2(randomDistribution(generator),
+                              randomDistribution(generator),
+                              randomDistribution(generator));
 
-        const Plane3D plane(firstPoint, secondPoint, thirdPoint);
+        const Plane3D plane(point0, point1, point2);
 
-        ASSERT_APPROXIMATE(plane.DistanceTo(firstPoint), 0.0, 1e-10);
-        ASSERT_APPROXIMATE(plane.DistanceTo(secondPoint), 0.0, 1e-10);
-        ASSERT_APPROXIMATE(plane.DistanceTo(thirdPoint), 0.0, 1e-10);
+        ASSERT_APPROXIMATE(plane.DistanceTo(point0), 0.0, 1e-10);
+        ASSERT_APPROXIMATE(plane.DistanceTo(point1), 0.0, 1e-10);
+        ASSERT_APPROXIMATE(plane.DistanceTo(point2), 0.0, 1e-10);
 
-        ASSERT_ENUM_EQUAL(plane.WhichSide(firstPoint), NumericalValueSymbol::Zero);
-        ASSERT_ENUM_EQUAL(plane.WhichSide(secondPoint), NumericalValueSymbol::Zero);
-        ASSERT_ENUM_EQUAL(plane.WhichSide(thirdPoint), NumericalValueSymbol::Zero);
+        ASSERT_ENUM_EQUAL(plane.WhichSide(point0), NumericalValueSymbol::Zero);
+        ASSERT_ENUM_EQUAL(plane.WhichSide(point1), NumericalValueSymbol::Zero);
+        ASSERT_ENUM_EQUAL(plane.WhichSide(point2), NumericalValueSymbol::Zero);
 
         const Vector3D fourthPoint(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 

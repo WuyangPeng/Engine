@@ -55,7 +55,7 @@ namespace UpdateServer
         using ParentType = MessageType;
 
     public:
-        explicit UpdateServerMessage(int64_t delta);
+        explicit UpdateServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

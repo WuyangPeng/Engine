@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 16:46)
+///	引擎版本：0.9.0.12 (2023/06/13 14:09)
 
 #include "Framework/FrameworkExport.h"
 
@@ -19,17 +19,14 @@
 #include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 #include "CoreTools/UnitTestSuite/Suite.h"
 
-using std::make_shared;
-using std::string;
-
-Framework::WindowMessageUnitTestSuite::WindowMessageUnitTestSuite(int64_t delta, const string& suiteName)
-    : ParentType{ delta }, stream{ make_shared<StreamType>(true) }, impl{ suiteName, stream->GetStreamShared() }
+Framework::WindowMessageUnitTestSuite::WindowMessageUnitTestSuite(int64_t delta, const std::string& suiteName)
+    : ParentType{ delta }, stream{ std::make_shared<StreamType>(true) }, impl{ suiteName, stream->GetStreamShared() }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
- Framework::WindowMessageUnitTestSuite::WindowMessageUnitTestSuite(int64_t delta, const std::string& suiteName, const Framework::EnvironmentDirectory& environmentDirectory)
-    : ParentType{ delta, environmentDirectory }, stream{ make_shared<StreamType>(true) }, impl{ suiteName, stream->GetStreamShared() }
+Framework::WindowMessageUnitTestSuite::WindowMessageUnitTestSuite(int64_t delta, const std::string& suiteName, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ delta, environmentDirectory }, stream{ std::make_shared<StreamType>(true) }, impl{ suiteName, stream->GetStreamShared() }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -87,7 +84,7 @@ CoreTools::OStreamShared Framework::WindowMessageUnitTestSuite::GetStreamShared(
 }
 
 // protected
-void Framework::WindowMessageUnitTestSuite::AddTest(const string& suiteName, Suite& suite, const string& testName, const UnitTestSharedPtr& unitTest)
+void Framework::WindowMessageUnitTestSuite::AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -107,7 +104,7 @@ System::WindowsLResult Framework::WindowMessageUnitTestSuite::AddSuiteOnCreateMe
 }
 
 // protected
-CoreTools::Suite Framework::WindowMessageUnitTestSuite::GenerateSuite(const string& name)
+CoreTools::Suite Framework::WindowMessageUnitTestSuite::GenerateSuite(const std::string& name)
 {
     return Suite{ name, GetStreamShared(), IsPrintRun() };
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/06 13:47)
+///	引擎版本：0.9.0.12 (2023/06/12 14:04)
 
 #include "Rendering/RenderingExport.h"
 
@@ -25,9 +25,6 @@
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/DataTypes/TransformDetail.h"
-
-using std::string;
-using std::vector;
 
 Rendering::IKJointImpl::IKJointImpl() noexcept
     : allowTranslation{},
@@ -122,7 +119,7 @@ void Rendering::IKJointImpl::Register(CoreTools::ObjectRegister& target) const
     target.RegisterContainer(goals);
 }
 
-CoreTools::ObjectSharedPtr Rendering::IKJointImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::IKJointImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -146,7 +143,7 @@ CoreTools::ObjectSharedPtr Rendering::IKJointImpl::GetObjectByName(const string&
     }
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::IKJointImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::IKJointImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -161,7 +158,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::IKJointImpl::GetAllObjectsByName(c
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::IKJointImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::IKJointImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -186,7 +183,7 @@ CoreTools::ConstObjectSharedPtr Rendering::IKJointImpl::GetConstObjectByName(con
     }
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::IKJointImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::IKJointImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 

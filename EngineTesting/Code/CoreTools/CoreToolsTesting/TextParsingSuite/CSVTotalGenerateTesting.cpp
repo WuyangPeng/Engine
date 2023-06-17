@@ -59,12 +59,12 @@ void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateHeadTest()
     {
         const auto nativeFileName = inputPath.path().native();
 
-        if (nativeFileName.find(SYSTEM_TEXT("csv")) != nativeFileName.size() - 3)
+        if (nativeFileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT("csv"))) != nativeFileName.size() - 3)
         {
             continue;
         }
 
-        CSVContent csvContent{ nativeFileName };
+        CSVContent csvContent{ StringConversion::WideCharConversionStandard(nativeFileName) };
 
         container.emplace_back(csvContent.GetCSVHead());
     }
@@ -84,12 +84,12 @@ void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateFwdHeadTest()
     {
         const auto nativeFileName = inputPath.path().native();
 
-        if (nativeFileName.find(SYSTEM_TEXT("csv")) != nativeFileName.size() - 3)
+        if (nativeFileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT("csv"))) != nativeFileName.size() - 3)
         {
             continue;
         }
 
-        CSVContent csvContent{ nativeFileName };
+        CSVContent csvContent{ StringConversion::WideCharConversionStandard(nativeFileName) };
 
         container.emplace_back(csvContent.GetCSVHead());
     }
@@ -109,12 +109,12 @@ void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateContainerHeadTest()
     {
         const auto nativeFileName = inputPath.path().native();
 
-        if (nativeFileName.find(SYSTEM_TEXT("csv")) != nativeFileName.size() - 3)
+        if (nativeFileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT("csv"))) != nativeFileName.size() - 3)
         {
             continue;
         }
 
-        CSVContent csvContent{ nativeFileName };
+        CSVContent csvContent{ StringConversion::WideCharConversionStandard(nativeFileName) };
 
         container.emplace_back(csvContent.GetCSVHead());
     }
@@ -134,12 +134,12 @@ void CoreTools::CSVTotalGenerateTesting::CSVTotalGenerateContainerSourceTest()
     {
         const auto nativeFileName = inputPath.path().native();
 
-        if (nativeFileName.find(SYSTEM_TEXT("csv")) != nativeFileName.size() - 3)
+        if (nativeFileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT("csv"))) != nativeFileName.size() - 3)
         {
             continue;
         }
 
-        CSVContent csvContent{ nativeFileName };
+        CSVContent csvContent{ StringConversion::WideCharConversionStandard(nativeFileName) };
 
         container.emplace_back(csvContent.GetCSVHead());
     }

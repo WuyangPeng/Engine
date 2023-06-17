@@ -12,8 +12,8 @@
 #include "GameClient/GameClientMiddleLayer/Macro/GameClientMiddleLayerClassInvariantMacro.h"
 #include "NetworkManager.h"
 
-GameClientMiddleLayer::NetworkManager::NetworkManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+GameClientMiddleLayer::NetworkManager::NetworkManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     GAME_CLIENT_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

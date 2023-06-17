@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 22:58)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:41)
 
 #include "Vector2DOrthonormalizeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2OrthonormalizeDetail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -44,45 +42,45 @@ void Mathematics::Vector2OrthonormalizeTesting::MainTest()
 
 void Mathematics::Vector2OrthonormalizeTesting::OrthonormalizeTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> firstRandomDistribution{ -10.0, 10.0 };
-    const uniform_real<float> secondRandomDistribution{ -10.0f, 10.0f };
+    const std::uniform_real<double> randomDistribution0{ -10.0, 10.0 };
+    const std::uniform_real<float> randomDistribution1{ -10.0f, 10.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Vector2 firstVector(firstRandomDistribution(generator),
-                            firstRandomDistribution(generator));
-        Vector2 secondVector(firstRandomDistribution(generator),
-                             firstRandomDistribution(generator));
+        Vector2 vector0(randomDistribution0(generator),
+                        randomDistribution0(generator));
+        Vector2 vector1(randomDistribution0(generator),
+                        randomDistribution0(generator));
 
-        Vector2F thirdVector(secondRandomDistribution(generator),
-                             secondRandomDistribution(generator));
-        Vector2F fourthVector(secondRandomDistribution(generator),
-                              secondRandomDistribution(generator));
+        Vector2F vector2(randomDistribution1(generator),
+                         randomDistribution1(generator));
+        Vector2F vector3(randomDistribution1(generator),
+                         randomDistribution1(generator));
 
-        const Vector2OrthonormalizeD firstOrthonormalize(firstVector, secondVector, 1e-10);
+        const Vector2OrthonormalizeD firstOrthonormalize(vector0, vector1, 1e-10);
 
-        firstVector.Normalize();
-        const double dot0 = Vector2ToolsD::DotProduct(firstVector, secondVector);
-        secondVector -= firstVector * dot0;
-        secondVector.Normalize();
+        vector0.Normalize();
+        const double dot0 = Vector2ToolsD::DotProduct(vector0, vector1);
+        vector1 -= vector0 * dot0;
+        vector1.Normalize();
 
-        ASSERT_TRUE(Vector2ToolsD::Approximate(firstVector, firstOrthonormalize.GetUVector(), 1e-10));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(vector0, firstOrthonormalize.GetUVector(), 1e-10));
 
-        ASSERT_TRUE(Vector2ToolsD::Approximate(secondVector, firstOrthonormalize.GetVVector(), 1e-10));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(vector1, firstOrthonormalize.GetVVector(), 1e-10));
 
-        const Vector2OrthonormalizeF secondOrthonormalize(thirdVector, fourthVector, 1e-5f);
+        const Vector2OrthonormalizeF secondOrthonormalize(vector2, vector3, 1e-5f);
 
-        thirdVector.Normalize();
-        const float dot1 = Vector2ToolsF::DotProduct(thirdVector, fourthVector);
-        fourthVector -= thirdVector * dot1;
-        fourthVector.Normalize();
+        vector2.Normalize();
+        const float dot1 = Vector2ToolsF::DotProduct(vector2, vector3);
+        vector3 -= vector2 * dot1;
+        vector3.Normalize();
 
-        ASSERT_TRUE(Vector2ToolsF::Approximate(thirdVector, secondOrthonormalize.GetUVector(), 1e-8f));
+        ASSERT_TRUE(Vector2ToolsF::Approximate(vector2, secondOrthonormalize.GetUVector(), 1e-8f));
 
-        ASSERT_TRUE(Vector2ToolsF::Approximate(fourthVector, secondOrthonormalize.GetVVector(), 1e-5f));
+        ASSERT_TRUE(Vector2ToolsF::Approximate(vector3, secondOrthonormalize.GetVVector(), 1e-5f));
     }
 }

@@ -12,8 +12,8 @@
 #include "FightingServer/FightingServerMiddleLayer/Macro/FightingServerMiddleLayerClassInvariantMacro.h"
 #include "GUIManager.h"
 
-FightingServerMiddleLayer::GUIManager ::GUIManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+FightingServerMiddleLayer::GUIManager ::GUIManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     FIGHTING_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

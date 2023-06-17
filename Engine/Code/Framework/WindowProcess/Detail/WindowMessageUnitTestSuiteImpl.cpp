@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 16:42)
+///	引擎版本：0.9.0.12 (2023/06/13 14:08)
 
 #include "Framework/FrameworkExport.h"
 
@@ -17,11 +17,9 @@
 #include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
-using std::make_unique;
-using std::string;
 using namespace std::literals;
 
-Framework::WindowMessageUnitTestSuiteImpl::WindowMessageUnitTestSuiteImpl(const string& name, const OStreamShared& streamShared)
+Framework::WindowMessageUnitTestSuiteImpl::WindowMessageUnitTestSuiteImpl(const std::string& name, const OStreamShared& streamShared)
     : alloc{ ConsoleAlloc::Create() },
       testingInformationHelper{ CoreTools::TestingInformationHelper::Create() },
       windowSuite{ make_unique<Suite>(name, streamShared, testingInformationHelper.IsPrintRun()) },
@@ -102,7 +100,7 @@ void Framework::WindowMessageUnitTestSuiteImpl::KeyDownMessage(System::WindowsKe
     }
 }
 
-void Framework::WindowMessageUnitTestSuiteImpl::AddTest(const string& suiteName, Suite& suite, const string& testName, const UnitTestSharedPtr& unitTest)
+void Framework::WindowMessageUnitTestSuiteImpl::AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest)
 {
     const auto testLoopCount = testingInformationHelper.GetLoopCount(suiteName, testName);
 

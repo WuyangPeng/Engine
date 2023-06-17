@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 22:59)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:42)
 
 #include "Vector3DInformationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3InformationDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -48,76 +45,76 @@ void Mathematics::Vector3InformationTesting::MainTest()
 
 void Mathematics::Vector3InformationTesting::DimensionTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> firstRandomDistribution{ 0.0001, 0.0002 };
-    const uniform_real<double> secondRandomDistribution{ -10.0, 10.0 };
+    const std::uniform_real<double> randomDistribution0{ 0.0001, 0.0002 };
+    const std::uniform_real<double> randomDistribution1{ -10.0, 10.1 };
 
-    vector<Vector3D> firstVector;
-    vector<Vector3D> secondVector;
-    vector<Vector3D> thirdVector;
-    vector<Vector3D> fourthVector;
-    const double slope = secondRandomDistribution(generator);
-    const double yCoordinate = secondRandomDistribution(generator);
+    std::vector<Vector3D> vector0;
+    std::vector<Vector3D> vector1;
+    std::vector<Vector3D> vector2;
+    std::vector<Vector3D> vector3;
+    const double slope = randomDistribution1(generator);
+    const double yCoordinate = randomDistribution1(generator);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D firstEachVector(firstRandomDistribution(generator),
-                                       firstRandomDistribution(generator),
-                                       firstRandomDistribution(generator));
+        const Vector3D eachVector0(randomDistribution0(generator),
+                                   randomDistribution0(generator),
+                                   randomDistribution0(generator));
 
-        firstVector.push_back(firstEachVector);
+        vector0.push_back(eachVector0);
 
-        const double randomValue = firstRandomDistribution(generator) * secondRandomDistribution(generator);
+        const double randomValue = randomDistribution0(generator) * randomDistribution1(generator);
 
-        const Vector3D secondEachVector(randomValue, yCoordinate, randomValue * slope);
+        const Vector3D eachVector1(randomValue, yCoordinate, randomValue * slope);
 
-        secondVector.push_back(secondEachVector);
+        vector1.push_back(eachVector1);
 
-        const Vector3D thirdEachVector(secondRandomDistribution(generator),
-                                       secondRandomDistribution(generator),
-                                       firstRandomDistribution(generator));
+        const Vector3D eachVector2(randomDistribution1(generator),
+                                   randomDistribution1(generator),
+                                   randomDistribution0(generator));
 
-        thirdVector.push_back(thirdEachVector);
+        vector2.push_back(eachVector2);
 
-        const Vector3D fourthEachVector(secondRandomDistribution(generator),
-                                        secondRandomDistribution(generator),
-                                        secondRandomDistribution(generator));
+        const Vector3D eachVector3(randomDistribution1(generator),
+                                   randomDistribution1(generator),
+                                   randomDistribution1(generator));
 
-        fourthVector.push_back(fourthEachVector);
+        vector3.push_back(eachVector3);
     }
 
-    thirdVector.push_back(Vector3D(20.0, 80.7, firstRandomDistribution(generator)));
-    thirdVector.push_back(Vector3D(120.0, 180.7, firstRandomDistribution(generator)));
-    fourthVector.push_back(Vector3D(20.0, 80.7, 20.0));
-    fourthVector.push_back(Vector3D(120.0, 180.7, -80.0));
+    vector2.emplace_back(20.0, 80.7, randomDistribution0(generator));
+    vector2.emplace_back(120.0, 180.7, randomDistribution0(generator));
+    vector3.emplace_back(20.0, 80.7, 20.0);
+    vector3.emplace_back(120.0, 180.7, -80.0);
 
-    DoubleVector3Information firstInformation(firstVector, 0.0001);
+    DoubleVector3Information information0(vector0, 0.0001);
 
-    ASSERT_EQUAL(firstInformation.GetDimension(), 0);
+    ASSERT_EQUAL(information0.GetDimension(), 0);
 
-    DoubleVector3Information secondInformation(secondVector, 0.0001);
+    DoubleVector3Information information1(vector1, 0.0001);
 
-    ASSERT_EQUAL(secondInformation.GetDimension(), 1);
+    ASSERT_EQUAL(information1.GetDimension(), 1);
 
-    DoubleVector3Information thirdInformation(thirdVector, 0.0001);
+    DoubleVector3Information information2(vector2, 0.0001);
 
-    ASSERT_EQUAL(thirdInformation.GetDimension(), 2);
+    ASSERT_EQUAL(information2.GetDimension(), 2);
 
-    DoubleVector3Information fourthInformation(fourthVector, 0.0001);
+    DoubleVector3Information information3(vector3, 0.0001);
 
-    ASSERT_EQUAL(fourthInformation.GetDimension(), 3);
+    ASSERT_EQUAL(information3.GetDimension(), 3);
 }
 
 void Mathematics::Vector3InformationTesting::AxesAlignBoundingBoxTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    const std::uniform_real<double> randomDistribution{ -100.0f, 100.0f };
 
-    vector<Vector3D> vectors;
+    std::vector<Vector3D> vectors;
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -159,11 +156,11 @@ void Mathematics::Vector3InformationTesting::AxesAlignBoundingBoxTest()
 
 void Mathematics::Vector3InformationTesting::DirectionTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    const std::uniform_real<double> randomDistribution{ -100.0f, 100.0f };
 
-    vector<Vector3D> vectors;
+    std::vector<Vector3D> vectors;
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -268,11 +265,11 @@ void Mathematics::Vector3InformationTesting::DirectionTest()
 
 void Mathematics::Vector3InformationTesting::ExtremeTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    const std::uniform_real<double> randomDistribution{ -100.0f, 100.0f };
 
-    vector<Vector3D> vectors;
+    std::vector<Vector3D> vectors;
 
     const auto aTestLoopCount = GetTestLoopCount();
 

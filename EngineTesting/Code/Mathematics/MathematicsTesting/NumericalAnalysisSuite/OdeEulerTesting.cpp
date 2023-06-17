@@ -1,19 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/03 13:19)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:04)
 
 #include "OdeEulerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/NumericalAnalysis/OdeEulerDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::ostream;
-using std::vector;
+#include "Mathematics/NumericalAnalysis/OdeEulerDetail.h"
 
 namespace Mathematics
 {
@@ -56,7 +54,7 @@ void Mathematics::OdeEulerTesting::SolverTest()
 
     constexpr double tIn = 100;
 
-    vector<double> xIn;
+    std::vector<double> xIn;
 
     for (int i = 0; i < dimension; ++i)
     {
@@ -69,9 +67,9 @@ void Mathematics::OdeEulerTesting::SolverTest()
 
     auto xOut = result.x;
 
-    vector<double> testXOut(dimension);
+    std::vector<double> testXOut(dimension);
 
-    vector<double> functionValue = OdeEulerFunction(tIn, xIn, this);
+    std::vector<double> functionValue = OdeEulerFunction(tIn, xIn, this);
 
     for (int i = 0; i < dimension; ++i)
     {
@@ -88,13 +86,13 @@ void Mathematics::OdeEulerTesting::SolverTest()
     }
 }
 
-vector<double> Mathematics::OdeEulerTesting::OdeEulerFunction(double tIn, const vector<double>& xIn, const OdeEulerTesting* odeEulerTesting)
+std::vector<double> Mathematics::OdeEulerTesting::OdeEulerFunction(double tIn, const std::vector<double>& xIn, const OdeEulerTesting* odeEulerTesting)
 {
     if (odeEulerTesting != nullptr)
     {
         auto dimension = odeEulerTesting->GetDimension();
 
-        vector<double> out(dimension);
+        std::vector<double> out(dimension);
 
         for (auto i = 0; i < dimension; i++)
         {
@@ -105,7 +103,7 @@ vector<double> Mathematics::OdeEulerTesting::OdeEulerFunction(double tIn, const 
     }
     else
     {
-        return vector<double>{};
+        return std::vector<double>{};
     }
 }
 

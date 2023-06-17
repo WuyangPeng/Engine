@@ -1,23 +1,29 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/11 17:59)
+///	引擎测试版本：0.9.0.12 (2023/06/12 15:04)
 
 #ifndef RENDERING_SHADERS_SUITE_SINGLE_SHADER_BASE_DATA_TESTING_H
 #define RENDERING_SHADERS_SUITE_SINGLE_SHADER_BASE_DATA_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Rendering
 {
     class SingleShaderBaseDataTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(SingleShaderBaseDataTesting);
+        using ClassType = SingleShaderBaseDataTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit SingleShaderBaseDataTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

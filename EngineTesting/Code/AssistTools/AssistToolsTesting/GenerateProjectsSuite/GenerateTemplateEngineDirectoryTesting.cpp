@@ -1,21 +1,33 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/22 16:16)
+///	引擎测试版本：0.9.0.12 (2023/06/13 10:53)
 
 #include "GenerateTemplateEngineDirectoryTesting.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateEngineDirectory.h"
 
 using namespace std::literals;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(AssistTools, GenerateTemplateEngineDirectory)
+AssistTools::GenerateTemplateEngineDirectoryTesting::GenerateTemplateEngineDirectoryTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateEngineDirectoryTesting)
+
+void AssistTools::GenerateTemplateEngineDirectoryTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void AssistTools::GenerateTemplateEngineDirectoryTesting::MainTest()
 {
@@ -35,7 +47,7 @@ void AssistTools::GenerateTemplateEngineDirectoryTesting::GenerateToTest()
     const System::String newCoreName(SYSTEM_TEXT("Core"));
     const System::String newIncludeName(SYSTEM_TEXT("GameTemplateInclude"));
 
-    TestingType generateTemplateEngineDirectory(GetResourceDirectory(), "Configuration/StringReplacing.json");
+    GenerateTemplateEngineDirectory generateTemplateEngineDirectory(GetResourceDirectory(), "Configuration/StringReplacing.json");
 
     generateTemplateEngineDirectory.GenerateTo(GetExportDirectory(), GetSolutionName(), newCoreName, newIncludeName);
 }

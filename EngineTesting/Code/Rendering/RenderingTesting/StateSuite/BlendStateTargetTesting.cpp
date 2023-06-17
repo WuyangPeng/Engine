@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/02 22:07)
+///	引擎测试版本：0.9.0.12 (2023/06/12 15:02)
 
 #include "BlendStateTargetTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,18 +14,14 @@
 #include "CoreTools/ObjectSystems/BufferSource.h"
 #include "CoreTools/ObjectSystems/BufferTarget.h"
 #include "CoreTools/ObjectSystems/ObjectRegister.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/State/BlendStateTarget.h"
 #include "Rendering/State/Flags/BlendStateColorWrite.h"
 #include "Rendering/State/Flags/BlendStateMode.h"
 #include "Rendering/State/Flags/BlendStateOperation.h"
 
-namespace Rendering
-{
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(BlendStateMode)
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(BlendStateOperation)
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(BlendStateColorWrite)
-}
+using System::operator++;
 
 Rendering::BlendStateTargetTesting::BlendStateTargetTesting(const OStreamShared& stream)
     : ParentType{ stream },
@@ -194,17 +190,17 @@ void Rendering::BlendStateTargetTesting::SetMaskTest()
 
 void Rendering::BlendStateTargetTesting::GetStreamingSizeTest()
 {
-    auto streamingSize = CORE_TOOLS_STREAM_SIZE(enable);
+    auto streamingSize = CoreTools::GetStreamSize(enable);
 
-    streamingSize += CORE_TOOLS_STREAM_SIZE(sourceColor);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(destinationColor);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(operationColor);
+    streamingSize += CoreTools::GetStreamSize(sourceColor);
+    streamingSize += CoreTools::GetStreamSize(destinationColor);
+    streamingSize += CoreTools::GetStreamSize(operationColor);
 
-    streamingSize += CORE_TOOLS_STREAM_SIZE(sourceAlpha);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(destinationAlpha);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(operationAlpha);
+    streamingSize += CoreTools::GetStreamSize(sourceAlpha);
+    streamingSize += CoreTools::GetStreamSize(destinationAlpha);
+    streamingSize += CoreTools::GetStreamSize(operationAlpha);
 
-    streamingSize += CORE_TOOLS_STREAM_SIZE(mask);
+    streamingSize += CoreTools::GetStreamSize(mask);
 
     ASSERT_EQUAL(blendStateTarget.GetStreamingSize(), streamingSize);
 }

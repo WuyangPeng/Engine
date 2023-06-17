@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 10:30)
+///	Copyright (c) 2010-2023
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 19:52)
 
 #ifndef USER_INTERFACE_MACRO_USER_MACRO_H
 #define USER_INTERFACE_MACRO_USER_MACRO_H
@@ -10,7 +13,7 @@
 #include "System/Helper/ConfigMacro.h"
 #include "CoreTools/Helper/UserMacro.h"
 
-#define CLOSE_USE_WX_WIDGETS (0x01) 
+#define CLOSE_USE_WX_WIDGETS (0x01)
 #define CLOSE_USER_INTERFACE_MAX (((CLOSE_USE_WX_WIDGETS) << 1) - 1)
 
 // 编译测试（默认为0，最大值为0x01）
@@ -19,13 +22,16 @@
 static_assert(0 <= COMPILE_USER_INTERFACE_CLOSE, "COMPILE_USER_INTERFACE_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_USER_INTERFACE_CLOSE <= CLOSE_USER_INTERFACE_MAX, "COMPILE_ANIMATION_CLOSE Must be less than or equal CLOSE_USER_INTERFACE_MAX.");
 
-// 是否编译为静态库
-#ifdef BUILDING_STATIC
-	#define  BUILDING_USER_INTERFACE_STATIC
-#endif // BUILDING_STATIC
-
 #if !defined(COMPILE_USER_INTERFACE_CLOSE) || (COMPILE_USER_INTERFACE_CLOSE & CLOSE_USE_WX_WIDGETS) != CLOSE_USE_WX_WIDGETS
-	#define USER_INTERFACE_USE_WX_WIDGETS
-#endif // !defined(COMPILE_USER_INTERFACE_CLOSE) || (COMPILE_USER_INTERFACE_CLOSE & CLOSE_USE_WX_WIDGETS) != CLOSE_USE_WX_WIDGETS  
- 
-#endif // USER_INTERFACE_MACRO_USER_MACRO_H
+
+    #define USER_INTERFACE_USE_WX_WIDGETS
+
+#endif  // !defined(COMPILE_USER_INTERFACE_CLOSE) || (COMPILE_USER_INTERFACE_CLOSE & CLOSE_USE_WX_WIDGETS) != CLOSE_USE_WX_WIDGETS
+
+#ifdef BUILDING_STATIC
+
+    #define BUILDING_USER_INTERFACE_STATIC
+
+#endif  // BUILDING_STATIC
+
+#endif  // USER_INTERFACE_MACRO_USER_MACRO_H

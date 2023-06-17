@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/04 15:46)
+///	引擎版本：0.9.0.12 (2023/06/12 14:03)
 
 #include "Rendering/RenderingExport.h"
 
@@ -22,9 +22,6 @@
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
-
-using std::string;
-using std::vector;
 
 Rendering::BlendTransformControllerImpl::BlendTransformControllerImpl() noexcept
     : firstController{}, secondController{}, weight{ 0.0f }, rotationScaleMatrices{ false }, geometricRotation{ false }, geometricScale{ false }
@@ -127,7 +124,7 @@ void Rendering::BlendTransformControllerImpl::Register(CoreTools::ObjectRegister
     target.Register(secondController);
 }
 
-CoreTools::ObjectSharedPtr Rendering::BlendTransformControllerImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::BlendTransformControllerImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -149,7 +146,7 @@ CoreTools::ObjectSharedPtr Rendering::BlendTransformControllerImpl::GetObjectByN
     return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::BlendTransformControllerImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::BlendTransformControllerImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -161,7 +158,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::BlendTransformControllerImpl::GetA
     return firstObjects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::BlendTransformControllerImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::BlendTransformControllerImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -183,7 +180,7 @@ CoreTools::ConstObjectSharedPtr Rendering::BlendTransformControllerImpl::GetCons
     return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::BlendTransformControllerImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::BlendTransformControllerImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_1;
 

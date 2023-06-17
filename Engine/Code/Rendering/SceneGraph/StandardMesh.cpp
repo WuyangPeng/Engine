@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/03 16:26)
+///	引擎版本：0.9.0.12 (2023/06/12 11:18)
 
 #include "Rendering/RenderingExport.h"
 
@@ -17,8 +17,6 @@
 #include "Rendering/Resources/Detail/Buffers/VertexBufferImpl.h"
 #include "Rendering/SceneGraph/Detail/PickRecordContainerImpl.h"
 #include "Rendering/SceneGraph/Detail/PickRecordImpl.h"
-
-using std::make_shared;
 
 Rendering::StandardMesh::StandardMesh(const VertexFormatSharedPtr& vertexFormat, bool isStatic, bool inside, const TransformF* transform)
     : impl{ vertexFormat, isStatic, inside, transform }

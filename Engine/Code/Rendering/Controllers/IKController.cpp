@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/07 15:46)
+///	引擎版本：0.9.0.12 (2023/06/12 14:06)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,10 +20,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
-using std::make_shared;
-using std::string;
-using std::vector;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, IKController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, IKController);

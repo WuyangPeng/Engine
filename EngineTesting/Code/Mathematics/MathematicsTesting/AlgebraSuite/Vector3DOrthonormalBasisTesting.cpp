@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 22:59)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:43)
 
 #include "Vector3DOrthonormalBasisTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3OrthonormalBasisDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/Algebra/Vector3OrthonormalBasisDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -44,33 +42,33 @@ void Mathematics::Vector3OrthonormalBasisTesting::MainTest()
 
 void Mathematics::Vector3OrthonormalBasisTesting::OrthonormalBasisTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> firstRandomDistribution{ -10.0, 10.0 };
-    const uniform_real<float> secondRandomDistribution{ -10.0f, 10.0f };
+    const std::uniform_real<double> randomDistribution0{ -10.0, 10.0 };
+    const std::uniform_real<float> randomDistribution1{ -10.0f, 10.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Vector3D firstVector(firstRandomDistribution(generator),
-                             firstRandomDistribution(generator),
-                             firstRandomDistribution(generator));
+        Vector3D vector0(randomDistribution0(generator),
+                         randomDistribution0(generator),
+                         randomDistribution0(generator));
 
-        Vector3F secondVector(secondRandomDistribution(generator),
-                              secondRandomDistribution(generator),
-                              secondRandomDistribution(generator));
+        Vector3F vector1(randomDistribution1(generator),
+                         randomDistribution1(generator),
+                         randomDistribution1(generator));
 
-        const Vector3OrthonormalBasisD firstOrthonormalBasis(firstVector, false);
+        const Vector3OrthonormalBasisD firstOrthonormalBasis(vector0, false);
 
-        firstVector.Normalize();
+        vector0.Normalize();
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(firstVector, firstOrthonormalBasis.GetWVector(), 1e-10));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(vector0, firstOrthonormalBasis.GetWVector(), 1e-10));
 
-        const Vector3OrthonormalBasisF secondOrthonormalBasis(secondVector, false);
+        const Vector3OrthonormalBasisF secondOrthonormalBasis(vector1, false);
 
-        secondVector.Normalize();
+        vector1.Normalize();
 
-        ASSERT_TRUE(Vector3ToolsF::Approximate(secondVector, secondOrthonormalBasis.GetWVector(), 1e-8f));
+        ASSERT_TRUE(Vector3ToolsF::Approximate(vector1, secondOrthonormalBasis.GetWVector(), 1e-8f));
     }
 }

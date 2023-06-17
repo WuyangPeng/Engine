@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/31 11:40)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:21)
 
 #include "Triangle3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Triangle3Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -45,41 +42,41 @@ void Mathematics::Triangle3Testing::MainTest()
 
 void Mathematics::Triangle3Testing::TriangleTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D firstPoint(firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator));
+        const Vector3D point0(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        const Vector3D secondPoint(firstRandomDistribution(generator),
-                                   firstRandomDistribution(generator),
-                                   firstRandomDistribution(generator));
+        const Vector3D point1(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        const Vector3D thirdPoint(firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator));
+        const Vector3D point2(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        const Triangle3D triangle(firstPoint, secondPoint, thirdPoint);
+        const Triangle3D triangle(point0, point1, point2);
 
         auto vertex = triangle.GetVertex();
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(vertex.at(0), firstPoint));
-        ASSERT_TRUE(Vector3ToolsD::Approximate(vertex.at(1), secondPoint));
-        ASSERT_TRUE(Vector3ToolsD::Approximate(vertex.at(2), thirdPoint));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(vertex.at(0), point0));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(vertex.at(1), point1));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(vertex.at(2), point2));
 
-        const Vector3D fourthPoint(firstRandomDistribution(generator),
-                                   firstRandomDistribution(generator),
-                                   firstRandomDistribution(generator));
+        const Vector3D fourthPoint(randomDistribution0(generator),
+                                   randomDistribution0(generator),
+                                   randomDistribution0(generator));
 
-        auto diff = firstPoint - fourthPoint;
-        auto edge0 = secondPoint - firstPoint;
-        auto edge1 = thirdPoint - firstPoint;
+        auto diff = point0 - fourthPoint;
+        auto edge0 = point1 - point0;
+        auto edge1 = point2 - point0;
         auto a00 = Vector3ToolsD::GetLengthSquared(edge0);
         auto a01 = Vector3ToolsD::DotProduct(edge0, edge1);
         auto a11 = Vector3ToolsD::GetLengthSquared(edge1);

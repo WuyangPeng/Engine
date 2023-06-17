@@ -12,8 +12,8 @@
 #include "DatabaseServer/DatabaseServerMiddleLayer/Macro/DatabaseServerMiddleLayerClassInvariantMacro.h"
 #include "RenderingManager.h"
 
-DatabaseServerMiddleLayer::RenderingManager::RenderingManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+DatabaseServerMiddleLayer::RenderingManager::RenderingManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     DATABASE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

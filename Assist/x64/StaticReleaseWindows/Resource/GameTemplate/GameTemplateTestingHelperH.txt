@@ -7,7 +7,7 @@
 #ifndef %ProjectCapital%_%ManagerCapital%TESTING_TESTING_HELPER_H
 #define %ProjectCapital%_%ManagerCapital%TESTING_TESTING_HELPER_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h" 
 

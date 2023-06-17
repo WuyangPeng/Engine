@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 16:19)
+///	引擎测试版本：0.9.0.12 (2023/06/13 23:24)
 
 #include "FrameViewMiddleLayer.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
@@ -14,8 +14,6 @@
 #include "Framework/MiddleLayer/ModelMiddleLayer.h"
 
 #include <iostream>
-
-using std::cout;
 
 ModelViewController::FrameViewMiddleLayer::FrameViewMiddleLayer(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }, timeDelta{ timerInterval }
@@ -51,7 +49,7 @@ void ModelViewController::FrameViewMiddleLayer::PrintFrameRateMessage(int64_t aT
 
         if (modelMiddleLayer)
         {
-            cout << modelMiddleLayer->GetFrameRateMessage() << '\n';
+           std::cout << modelMiddleLayer->GetFrameRateMessage() << '\n';
         }
 
         timeDelta = timerInterval;

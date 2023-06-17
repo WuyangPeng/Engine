@@ -1,23 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 22:33)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:38)
 
 #include "QuaternionSwingTwistTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/QuaternionDetail.h"
 #include "Mathematics/Algebra/QuaternionSwingTwistDetail.h"
 #include "Mathematics/Algebra/Vector3.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -45,18 +43,18 @@ void Mathematics::QuaternionSwingTwistTesting::MainTest()
 
 void Mathematics::QuaternionSwingTwistTesting::QuaternionSwingTwistTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> randomDistribution{ -10.0, 10.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution{ -10.0, 10.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Vector3D firstVector(randomDistribution(generator),
-                             randomDistribution(generator),
-                             randomDistribution(generator));
+        Vector3D vector0(randomDistribution(generator),
+                         randomDistribution(generator),
+                         randomDistribution(generator));
 
-        firstVector.Normalize();
+        vector0.Normalize();
 
         QuaternionD firstQuaternion(randomDistribution(generator),
                                     randomDistribution(generator),
@@ -65,13 +63,13 @@ void Mathematics::QuaternionSwingTwistTesting::QuaternionSwingTwistTest()
 
         firstQuaternion.Normalize();
 
-        QuaternionD::QuaternionSwingTwist quaternionSwingTwist = firstQuaternion.DecomposeTwistTimesSwing(firstVector, 1e-10);
+        QuaternionD::QuaternionSwingTwist quaternionSwingTwist = firstQuaternion.DecomposeTwistTimesSwing(vector0, 1e-10);
 
         QuaternionD secondQuaternion = quaternionSwingTwist.GetTwist() * quaternionSwingTwist.GetSwing();
 
         ASSERT_TRUE(Approximate(firstQuaternion, secondQuaternion, 1e-10));
 
-        quaternionSwingTwist = firstQuaternion.DecomposeSwingTimesTwist(firstVector, 1e-10);
+        quaternionSwingTwist = firstQuaternion.DecomposeSwingTimesTwist(vector0, 1e-10);
 
         secondQuaternion = quaternionSwingTwist.GetSwing() * quaternionSwingTwist.GetTwist();
 

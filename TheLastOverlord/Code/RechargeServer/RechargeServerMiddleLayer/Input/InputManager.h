@@ -26,7 +26,7 @@ namespace RechargeServerMiddleLayer
         using ParentType = Framework::InputManager<ApplicationTrait>;
 
     public:
-        explicit InputManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit InputManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

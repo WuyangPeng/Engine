@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.5 (2023/04/03 09:40)
+///	千年史策版本：0.9.0.12 (2023/06/12 22:28)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServer/DatabaseGenerateServerHelper.h"
 #include "Framework/Helper/MainFunctionMacro.h"
@@ -14,7 +14,7 @@
 
 WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(DatabaseGenerateServer,
                                        DatabaseGenerateServerHelper,
-                                       SYSTEM_TEXT("Millennium History DatabaseGenerateServer"),
+                                       SYSTEM_TEXT("Millennium History Database Generate Server"),
                                        SYSTEM_TEXT("DefaultEnvironment"),
                                        SYSTEM_TEXT(""),
                                        1024,

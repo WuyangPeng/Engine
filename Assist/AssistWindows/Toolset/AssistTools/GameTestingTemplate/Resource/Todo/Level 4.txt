@@ -1,6 +1,6 @@
 TODO Level 4
 
-0.8.0.10
+0.9.0.12
 
 1. （GameTestingTemplate）完成游戏测试工程模板生成工具。
 2. （GameTestingTemplate）对游戏测试工程模板生成工具的公共代码增加单元测试。

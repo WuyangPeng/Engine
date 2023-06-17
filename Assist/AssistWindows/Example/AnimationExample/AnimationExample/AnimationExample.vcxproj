@@ -33,7 +33,7 @@
       <Configuration>StaticRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  </ItemGroup>  
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{387FFA77-1071-4835-A59F-DED288387D69}</ProjectGuid>
@@ -279,9 +279,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Example\Animation\AnimationExample\DllLib.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\Animation\AnimationExample\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\Animation\AnimationExample\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\Animation\AnimationExample\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\Animation\AnimationExample\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\Animation\AnimationExample\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\Animation\AnimationExample\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\..\Code\Example\Animation\AnimationExample\Placeholder\Placeholder.h" />
     <ClInclude Include="..\..\..\..\Code\Example\Animation\AnimationExample\AnimationExample.h" />
     <ClInclude Include="..\..\..\..\Code\Example\Animation\AnimationExample\AnimationExampleDll.h" />

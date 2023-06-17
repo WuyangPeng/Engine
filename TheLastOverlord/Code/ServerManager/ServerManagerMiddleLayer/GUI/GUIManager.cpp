@@ -12,8 +12,8 @@
 #include "GUIManager.h"
 #include "ServerManager/ServerManagerMiddleLayer/Macro/ServerManagerMiddleLayerClassInvariantMacro.h"
 
-ServerManagerMiddleLayer::GUIManager::GUIManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+ServerManagerMiddleLayer::GUIManager::GUIManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     SERVER_MANAGER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

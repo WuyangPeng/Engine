@@ -1,19 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/06 18:36)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:52)
 
 #include "StaticFindIntersectorLine2Line2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
 #include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorLine2Line2Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 #include <random>
 
 Mathematics::StaticFindIntersectorLine2Line2Testing::StaticFindIntersectorLine2Line2Testing(const OStreamShared& streamShared)
@@ -36,7 +37,7 @@ void Mathematics::StaticFindIntersectorLine2Line2Testing::MainTest()
 
 void Mathematics::StaticFindIntersectorLine2Line2Testing::LineTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -72,17 +73,17 @@ void Mathematics::StaticFindIntersectorLine2Line2Testing::LineTest()
         ASSERT_ENUM_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Point);
         ASSERT_EQUAL(thirdClassify.GetQuantity(), 1);
 
-        Vector2F firstPoint = thirdClassify.GetPoint() - thirdClassify.GetLhsLine().GetOrigin();
-        Vector2F secondPoint = thirdClassify.GetPoint() - thirdClassify.GetRhsLine().GetOrigin();
+        Vector2F point0 = thirdClassify.GetPoint() - thirdClassify.GetLhsLine().GetOrigin();
+        Vector2F point1 = thirdClassify.GetPoint() - thirdClassify.GetRhsLine().GetOrigin();
 
-        firstPoint.Normalize();
-        secondPoint.Normalize();
+        point0.Normalize();
+        point1.Normalize();
 
-        ASSERT_TRUE(Vector2ToolsF::Approximate(firstPoint, thirdClassify.GetLhsLine().GetDirection(), 1e-4f) ||
-                    Vector2ToolsF::Approximate(-firstPoint, thirdClassify.GetLhsLine().GetDirection(), 1e-4f));
+        ASSERT_TRUE(Vector2ToolsF::Approximate(point0, thirdClassify.GetLhsLine().GetDirection(), 1e-4f) ||
+                    Vector2ToolsF::Approximate(-point0, thirdClassify.GetLhsLine().GetDirection(), 1e-4f));
 
-        ASSERT_TRUE(Vector2ToolsF::Approximate(secondPoint, thirdClassify.GetRhsLine().GetDirection(), 1e-4f) ||
-                    Vector2ToolsF::Approximate(-secondPoint, thirdClassify.GetRhsLine().GetDirection(), 1e-4f));
+        ASSERT_TRUE(Vector2ToolsF::Approximate(point1, thirdClassify.GetRhsLine().GetDirection(), 1e-4f) ||
+                    Vector2ToolsF::Approximate(-point1, thirdClassify.GetRhsLine().GetDirection(), 1e-4f));
     }
 }
 

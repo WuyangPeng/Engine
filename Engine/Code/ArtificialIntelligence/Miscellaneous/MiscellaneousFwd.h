@@ -1,12 +1,13 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 10:08)
+///	Copyright (c) 2010-2023
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 19:30)
 
 #ifndef ARTIFICIAL_INTELLIGENCE_MISCELLANEOUS_FWD_H
 #define ARTIFICIAL_INTELLIGENCE_MISCELLANEOUS_FWD_H
 
- 
-
-#endif // ARTIFICIAL_INTELLIGENCE_MISCELLANEOUS_FWD_H
+#endif  // ARTIFICIAL_INTELLIGENCE_MISCELLANEOUS_FWD_H

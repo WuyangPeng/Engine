@@ -24,7 +24,7 @@ namespace UpdateServerMiddleLayer
         using ParentType = Framework::RenderingManagerInterface;
 
     public:
-        explicit RenderingManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit RenderingManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

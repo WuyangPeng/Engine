@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/03 20:01)
+///	引擎版本：0.9.0.12 (2023/06/12 11:19)
 
 #include "Rendering/RenderingExport.h"
 
@@ -22,10 +22,6 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
-using std::make_shared;
-using std::string;
-using std::vector;
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Visual)
 
@@ -178,7 +174,7 @@ void Rendering::Visual::UpdateModelBound()
     impl->UpdateModelBound();
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual, ComputeBounding, vector<APoint>, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual, ComputeBounding, std::vector<APoint>, void)
 
 void Rendering::Visual::GetVisibleSet(Culler& culler, MAYBE_UNUSED bool noCull)
 {

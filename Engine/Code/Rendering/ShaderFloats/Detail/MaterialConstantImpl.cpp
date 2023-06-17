@@ -1,23 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/07 18:05)
+///	引擎版本：0.9.0.12 (2023/06/12 11:02)
 
 #include "Rendering/RenderingExport.h"
 
 #include "MaterialConstantImpl.h"
-#include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::string;
-using std::vector;
+#include "CoreTools/ObjectSystems/StreamDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
 Rendering::MaterialConstantImpl::MaterialConstantImpl(const MaterialSharedPtr& material) noexcept
     : material{ material }
@@ -64,7 +60,7 @@ int Rendering::MaterialConstantImpl::GetStreamingSize() const noexcept
     return CoreTools::GetStreamSize(material);
 }
 
-CoreTools::ObjectSharedPtr Rendering::MaterialConstantImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::MaterialConstantImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -74,17 +70,17 @@ CoreTools::ObjectSharedPtr Rendering::MaterialConstantImpl::GetObjectByName(cons
         return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::MaterialConstantImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::MaterialConstantImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     if (material.object)
         return material.object->GetAllObjectsByName(name);
     else
-        return vector<CoreTools::ObjectSharedPtr>{};
+        return std::vector<CoreTools::ObjectSharedPtr>{};
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::MaterialConstantImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::MaterialConstantImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -94,14 +90,14 @@ CoreTools::ConstObjectSharedPtr Rendering::MaterialConstantImpl::GetConstObjectB
         return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::MaterialConstantImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::MaterialConstantImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_1;
 
     if (material.object)
         return material.object->GetAllConstObjectsByName(name);
     else
-        return vector<CoreTools::ConstObjectSharedPtr>{};
+        return std::vector<CoreTools::ConstObjectSharedPtr>{};
 }
 
 void Rendering::MaterialConstantImpl::Link(CoreTools::ObjectLink& source)

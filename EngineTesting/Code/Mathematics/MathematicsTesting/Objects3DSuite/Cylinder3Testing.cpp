@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/28 17:12)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:16)
 
 #include "Cylinder3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Cylinder3Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -44,25 +42,25 @@ void Mathematics::Cylinder3Testing::MainTest()
 
 void Mathematics::Cylinder3Testing::CylinderTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ 0.0, 100.0 };
-    const uniform_real<double> secondRandomDistribution(0.0, MathD::GetHalfPI());
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ 0.0, 100.0 };
+    const std::uniform_real<double> randomDistribution1(0.0, MathD::GetHalfPI());
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D origin(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
+        const Vector3D origin(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
 
-        Vector3D direction(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Vector3D direction(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
 
         direction.Normalize();
 
         const Line3D line(origin, direction);
 
-        const double radius(MathD::FAbs(secondRandomDistribution(generator)));
+        const double radius(MathD::FAbs(randomDistribution1(generator)));
 
-        const double height(MathD::FAbs(firstRandomDistribution(generator)));
+        const double height(MathD::FAbs(randomDistribution0(generator)));
 
         const Cylinder3D cylinder3(line, radius, height);
 

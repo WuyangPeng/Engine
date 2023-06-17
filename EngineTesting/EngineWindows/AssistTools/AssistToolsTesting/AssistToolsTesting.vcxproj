@@ -369,7 +369,7 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateSolutionTesting.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateVcxprojFiltersTesting.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateVcxprojTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\MacroSuite\MacroSuite.h" />
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\HelperSuite\HelperSuite.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingHelper.h" />
   </ItemGroup>

@@ -12,8 +12,8 @@
 #include "EventManager.h"
 #include "OfflineServer/OfflineServerMiddleLayer/Macro/OfflineServerMiddleLayerClassInvariantMacro.h"
 
-OfflineServerMiddleLayer::EventManager::EventManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+OfflineServerMiddleLayer::EventManager::EventManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     OFFLINE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/07 21:16)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:29)
 
 #include "ContBox2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,7 +14,9 @@
 #include "Mathematics/Algebra/AxesAlignBoundingBox2Detail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Containment/ContBox2Detail.h"
+
 #include <random>
+
 namespace Mathematics
 {
     template class ContBox2<float>;
@@ -43,20 +45,20 @@ void Mathematics::ContBox2Testing::MainTest()
 
 void Mathematics::ContBox2Testing::ContAlignedBoxTest()
 {
-    std::default_random_engine generator;
-    const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const std::uniform_int<> secondRandomDistribution(10, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(10, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        const int size = secondRandomDistribution(generator);
+        const int size = randomDistribution1(generator);
 
         for (int i = 0; i < size; ++i)
         {
-            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
         const Box2D box = ContBox2D::ContAlignedBox(vertices);
@@ -70,20 +72,20 @@ void Mathematics::ContBox2Testing::ContAlignedBoxTest()
 
 void Mathematics::ContBox2Testing::ContOrientedBoxTest()
 {
-    std::default_random_engine generator;
-    const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const std::uniform_int<> secondRandomDistribution(10, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(10, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        const int size = secondRandomDistribution(generator);
+        const int size = randomDistribution1(generator);
 
         for (int i = 0; i < size; ++i)
         {
-            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator));
+            vertices.emplace_back(randomDistribution0(generator), randomDistribution0(generator));
         }
 
         const Box2D box = ContBox2D::ContOrientedBox(vertices);
@@ -97,30 +99,30 @@ void Mathematics::ContBox2Testing::ContOrientedBoxTest()
 
 void Mathematics::ContBox2Testing::MergeBoxesTest()
 {
-    std::default_random_engine generator;
-    const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const std::uniform_int<> secondRandomDistribution(10, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(10, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> firstVertices;
-        const int firstSize = secondRandomDistribution(generator);
+        const int firstSize = randomDistribution1(generator);
 
         for (int i = 0; i < firstSize; ++i)
         {
-            firstVertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            firstVertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
         const Box2D firstBox = ContBox2D::ContAlignedBox(firstVertices);
 
         std::vector<Vector2D> secondVertices;
-        const int secondSize = secondRandomDistribution(generator);
+        const int secondSize = randomDistribution1(generator);
 
         for (int i = 0; i < secondSize; ++i)
         {
-            secondVertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            secondVertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
         const Box2D secondBox = ContBox2D::ContOrientedBox(secondVertices);

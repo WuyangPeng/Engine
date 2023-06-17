@@ -1,23 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 21:54)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:30)
 
 #include "Matrix3ExtractTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/Matrix3ExtractDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -45,23 +43,23 @@ void Mathematics::Matrix3ExtractTesting::MainTest()
 
 void Mathematics::Matrix3ExtractTesting::ExtractTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> randomDistribution{ -10.0, 10.0 };
-    const uniform_real<double> angleDistribution(0.0, MathD::GetPI());
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution{ -10.0, 10.0 };
+    const std::uniform_real<double> angleDistribution(0.0, MathD::GetPI());
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        Vector3D firstVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
-        firstVector.Normalize();
+        Vector3D vector0{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
+        vector0.Normalize();
 
         const double angle = angleDistribution(generator);
 
-        const Matrix3D firstMatrix(firstVector, angle);
+        const Matrix3D matrix0(vector0, angle);
 
-        const Matrix3ExtractD matrix3Extract = firstMatrix.ExtractAngleAxis();
+        const Matrix3ExtractD matrix3Extract = matrix0.ExtractAngleAxis();
 
         ASSERT_APPROXIMATE(matrix3Extract.GetAngle(), angle, 1e-10);
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(matrix3Extract.GetAxis(), firstVector));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(matrix3Extract.GetAxis(), vector0));
     }
 }

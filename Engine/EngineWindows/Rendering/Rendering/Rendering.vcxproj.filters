@@ -16,9 +16,6 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Abuse 头文件">
-      <UniqueIdentifier>{c475fc96-a878-4379-8a2a-55b9590e2158}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AglRenderer 头文件">
       <UniqueIdentifier>{d154e736-7cea-47a4-8524-c65cb1ba005c}</UniqueIdentifier>
     </Filter>
@@ -64,9 +61,6 @@
     <Filter Include="DataTypes 头文件\Detail">
       <UniqueIdentifier>{5cc4967b-841a-41c5-8048-f31337970d67}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Demogl 头文件">
-      <UniqueIdentifier>{ebf6d0d2-fb71-4b94-9985-09e049f9642b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Detail 头文件">
       <UniqueIdentifier>{46280062-fc51-4ca9-b08b-c1c4759ca309}</UniqueIdentifier>
     </Filter>
@@ -79,9 +73,6 @@
     <Filter Include="Detail 源文件\Detail">
       <UniqueIdentifier>{b32c8c6c-e65d-43c8-a878-e509903e85ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DevIL 头文件">
-      <UniqueIdentifier>{6d01510d-dc17-43f8-b59b-2d3e6963a767}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DirectAPI 头文件">
       <UniqueIdentifier>{3884aa5e-b8de-495d-b091-08e6cf0a502e}</UniqueIdentifier>
     </Filter>
@@ -90,9 +81,6 @@
     </Filter>
     <Filter Include="Dx9Renderer 源文件">
       <UniqueIdentifier>{c1d5c2e1-5169-40ba-b1bb-7a21f73ccf4b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FBX 头文件">
-      <UniqueIdentifier>{ca262e01-173b-45a5-86f5-07fabc951689}</UniqueIdentifier>
     </Filter>
     <Filter Include="GlobalEffects 头文件">
       <UniqueIdentifier>{d6284ec0-590d-4472-8347-49d3d66b9703}</UniqueIdentifier>
@@ -121,23 +109,11 @@
     <Filter Include="ImageProcessing 源文件">
       <UniqueIdentifier>{a8978875-716e-471d-b3b8-304f3d738738}</UniqueIdentifier>
     </Filter>
-    <Filter Include="JPEG 头文件">
-      <UniqueIdentifier>{f83b0337-f192-457e-905a-682a2e230c5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lib3ds 头文件">
-      <UniqueIdentifier>{41bd0244-d346-4fd0-98e8-c5181e3b5d9e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="LocalEffects 头文件">
       <UniqueIdentifier>{51a995e3-0e85-46c8-9d34-73fb048151e4}</UniqueIdentifier>
     </Filter>
     <Filter Include="LocalEffects 源文件">
       <UniqueIdentifier>{eabe060d-057f-45bb-a58a-d1589eab9300}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Nethack 头文件">
-      <UniqueIdentifier>{d71c23f0-575b-4326-90e1-688c4a3ae960}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Nvtoolkit 头文件">
-      <UniqueIdentifier>{b3cdbaf8-bbcc-402c-a9f7-4bf80890d1c5}</UniqueIdentifier>
     </Filter>
     <Filter Include="OpenGLAPI 头文件">
       <UniqueIdentifier>{205d22d7-af45-42e8-a7b0-148263fbc1e9}</UniqueIdentifier>
@@ -150,9 +126,6 @@
     </Filter>
     <Filter Include="OpenGLRenderer 模板文件">
       <UniqueIdentifier>{24e9d540-1b42-44ff-ac8a-1f549876abb6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Openvidia 头文件">
-      <UniqueIdentifier>{95193d7f-d737-4461-812a-21f3bec36fa9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Picture 头文件">
       <UniqueIdentifier>{a5d9b78a-e151-46ae-bdd0-4a5e92ab0c4b}</UniqueIdentifier>
@@ -238,20 +211,11 @@
     <Filter Include="TextFonts 头文件">
       <UniqueIdentifier>{f22c6b31-70c9-4b89-8b9f-d2b32bf26e9c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TIFF 头文件">
-      <UniqueIdentifier>{21ddd750-a4a4-4bb7-aa03-bd6330aafbee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Vertex 头文件">
       <UniqueIdentifier>{4fd85485-0333-4f69-8353-ebb522d8f881}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Wargamer 头文件">
-      <UniqueIdentifier>{1d78235b-9348-4dac-a37c-4bcd1a980762}</UniqueIdentifier>
-    </Filter>
     <Filter Include="WglRenderer 头文件">
       <UniqueIdentifier>{b22601ab-238f-481f-8b26-f0e32688ce46}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Wing 头文件">
-      <UniqueIdentifier>{eedbfa0e-b94c-4e59-b707-11cb2f361443}</UniqueIdentifier>
     </Filter>
     <Filter Include="DataTypes 头文件\Flags">
       <UniqueIdentifier>{19415151-2ea1-4720-aa7c-713618f1a0b1}</UniqueIdentifier>
@@ -1937,12 +1901,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingImport.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Abuse\Abuse.h">
-      <Filter>Abuse 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Abuse\AbuseFwd.h">
-      <Filter>Abuse 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\AglRenderer\AglRenderer.h">
       <Filter>AglRenderer 头文件</Filter>
     </ClInclude>
@@ -2150,12 +2108,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\ColourDetail.h">
       <Filter>DataTypes 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Demogl\Demogl.h">
-      <Filter>Demogl 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Demogl\DemoglFwd.h">
-      <Filter>Demogl 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Detail\ClodMeshCollapseInfo.h">
       <Filter>Detail 头文件\Detail</Filter>
     </ClInclude>
@@ -2216,12 +2168,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\Detail\SwitchNode.h">
       <Filter>Detail 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DevIL\DevIL.h">
-      <Filter>DevIL 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DevIL\DevILFwd.h">
-      <Filter>DevIL 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\DirectAPI\DirectAPIFwd.h">
       <Filter>DirectAPI 头文件</Filter>
     </ClInclude>
@@ -2272,12 +2218,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9IndexBuffer.h">
       <Filter>Dx9Renderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\FBX\FBXFwd.h">
-      <Filter>FBX 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\FBX\FBX.h">
-      <Filter>FBX 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\PlanarReflectionEffect.h">
       <Filter>GlobalEffects 头文件</Filter>
@@ -2338,18 +2278,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing3.h">
       <Filter>ImageProcessing 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\JPEG\JPEG.h">
-      <Filter>JPEG 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\JPEG\JPEGFwd.h">
-      <Filter>JPEG 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Lib3ds\Lib3ds.h">
-      <Filter>Lib3ds 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Lib3ds\Lib3dsFwd.h">
-      <Filter>Lib3ds 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightSptPerPixEffect.h">
       <Filter>LocalEffects 头文件</Filter>
@@ -2413,18 +2341,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerVerEffect.h">
       <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Nethack\Nethack.h">
-      <Filter>Nethack 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Nethack\NethackFwd.h">
-      <Filter>Nethack 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Nvtoolkit\Nvtoolkit.h">
-      <Filter>Nvtoolkit 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Nvtoolkit\NvtoolkitFwd.h">
-      <Filter>Nvtoolkit 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLAPI\OpenGLAPI.h">
       <Filter>OpenGLAPI 头文件</Filter>
@@ -2503,12 +2419,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatDataDetail.h">
       <Filter>OpenGLRenderer 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Openvidia\OpenvidiaFwd.h">
-      <Filter>Openvidia 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Openvidia\Openvidia.h">
-      <Filter>Openvidia 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Picture\PictureFwd.h">
       <Filter>Picture 头文件</Filter>
@@ -3119,29 +3029,11 @@
     <ClInclude Include="..\..\..\Code\Rendering\TextFonts\TextFontsFwd.h">
       <Filter>TextFonts 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\TIFF\TIFF.h">
-      <Filter>TIFF 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\TIFF\TIFFFwd.h">
-      <Filter>TIFF 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Vertex\Vertex.h">
       <Filter>Vertex 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Vertex\VertexFwd.h">
       <Filter>Vertex 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Wargamer\Wargamer.h">
-      <Filter>Wargamer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Wargamer\WargamerFwd.h">
-      <Filter>Wargamer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Wing\WingFwd.h">
-      <Filter>Wing 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Wing\Wing.h">
-      <Filter>Wing 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\DllLib.h">
       <Filter>头文件</Filter>

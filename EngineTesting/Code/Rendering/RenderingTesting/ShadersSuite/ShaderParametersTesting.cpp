@@ -1,31 +1,41 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/11 18:44)
+///	引擎测试版本：0.9.0.12 (2023/06/12 15:06)
 
 #include "ShaderParametersTesting.h"
 #include "System/Helper/PragmaWarning/LexicalCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Textures/Texture1D.h"
 #include "Rendering/Shaders/ShaderParameters.h"
 #include "Rendering/Shaders/VertexShader.h"
 
-using std::string;
+Rendering::ShaderParametersTesting::ShaderParametersTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, ShaderParametersTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ShaderParametersTesting)
+
+void Rendering::ShaderParametersTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Rendering::ShaderParametersTesting::MainTest()
 {
-    CoreTools::InitTerm::ExecuteInitializers();
+    CoreTools::InitTerm::ExecuteInitializer();
 
     RendererManager::Create();
 
@@ -35,7 +45,7 @@ void Rendering::ShaderParametersTesting::MainTest()
 
     RendererManager::Destroy();
 
-    CoreTools::InitTerm::ExecuteTerminators();
+    CoreTools::InitTerm::ExecuteTerminator();
 }
 
 void Rendering::ShaderParametersTesting::InitTest()

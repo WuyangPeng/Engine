@@ -1,19 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/26 13:56)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:32)
+
 #include "IntegerDataAmendTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/IntegerDataAmendDetail.h"
 #include "Mathematics/Rational/IntegerDataDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::vector;
 
 namespace Mathematics
 {
@@ -44,30 +44,30 @@ void Mathematics::IntegerDataAmendTesting::MainTest()
 
 void Mathematics::IntegerDataAmendTesting::FromUnsignedIntTest()
 {
-    vector<uint16_t> data{ 0b11111111'11111111,
-                           0b10111111'11111111,
-                           0b10000000'11111111,
-                           0b10000000'00000001,
-                           0b10000000'00000000,
-                           0b01111111'11111111,
-                           0b01011111'11111111,
-                           0b01000000'11111111,
-                           0b01000000'00000001,
-                           0b00100001'00011001,
-                           0b00010001'00011001,
-                           0b00001001'00011001,
-                           0b00000101'00011001,
-                           0b00000011'00011001,
-                           0b00000001'00011001,
-                           0b00000000'10011001,
-                           0b00000000'01011001,
-                           0b00000000'00111001,
-                           0b00000000'00011001,
-                           0b00000000'00001001,
-                           0b00000000'00000101,
-                           0b00000000'00000011,
-                           0b00000000'00000010,
-                           0b00000000'00000001 };
+    std::vector<uint16_t> data{ 0b11111111'11111111,
+                                0b10111111'11111111,
+                                0b10000000'11111111,
+                                0b10000000'00000001,
+                                0b10000000'00000000,
+                                0b01111111'11111111,
+                                0b01011111'11111111,
+                                0b01000000'11111111,
+                                0b01000000'00000001,
+                                0b00100001'00011001,
+                                0b00010001'00011001,
+                                0b00001001'00011001,
+                                0b00000101'00011001,
+                                0b00000011'00011001,
+                                0b00000001'00011001,
+                                0b00000000'10011001,
+                                0b00000000'01011001,
+                                0b00000000'00111001,
+                                0b00000000'00011001,
+                                0b00000000'00001001,
+                                0b00000000'00000101,
+                                0b00000000'00000011,
+                                0b00000000'00000010,
+                                0b00000000'00000001 };
 
     IntegerData<12> firstIntegerData(data);
     IntegerDataAmend<12> firstIntegerDataAmend(firstIntegerData);

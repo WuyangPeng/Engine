@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起测试版本：0.8.1.0 (2022/08/03 13:42)
+///	历史的崛起测试版本：0.9.0.12 (2023/06/17 13:00)
 
 #include "EngineTesting.h"
 #include "System/Threading/Process.h"
@@ -15,8 +15,8 @@
 #include "CoreTools/FileManager/Directory.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::string;
 using namespace std::literals;
 
 RiseOfHistory::EngineTesting::EngineTesting(const OStreamShared& stream)

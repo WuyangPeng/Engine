@@ -12,8 +12,8 @@
 #include "RechargeServer/RechargeServerMiddleLayer/Macro/RechargeServerMiddleLayerClassInvariantMacro.h"
 #include "ResourceManager.h"
 
-RechargeServerMiddleLayer::ResourceManager::ResourceManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+RechargeServerMiddleLayer::ResourceManager::ResourceManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     RECHARGE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

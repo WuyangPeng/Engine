@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/05 18:41)
+///	引擎版本：0.9.0.12 (2023/06/13 14:51)
 
 #include "Framework/FrameworkExport.h"
 
@@ -17,11 +17,8 @@
 #include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/UnitTestSuite/UnitTestComposite.h"
 
-using std::make_shared;
-using std::string;
-
-Framework::AndroidCallBackUnitTestSuiteImpl::AndroidCallBackUnitTestSuiteImpl(const string& name, const OStreamShared& streamShared)
-    : testingInformationHelper{ CoreTools::TestingInformationHelper::Create() }, suite{ make_shared<Suite>(name, streamShared, testingInformationHelper.IsPrintRun()) }
+Framework::AndroidCallBackUnitTestSuiteImpl::AndroidCallBackUnitTestSuiteImpl(const std::string& name, const OStreamShared& streamShared)
+    : testingInformationHelper{ CoreTools::TestingInformationHelper::Create() }, suite{ std::make_shared<Suite>(name, streamShared, testingInformationHelper.IsPrintRun()) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -73,7 +70,7 @@ int Framework::AndroidCallBackUnitTestSuiteImpl::GetPassedNumber() const noexcep
     return suite->GetPassedNumber();
 }
 
-void Framework::AndroidCallBackUnitTestSuiteImpl::AddTest(const string& suiteName, Suite& aSuite, const string& testName, const UnitTestSharedPtr& unitTest)
+void Framework::AndroidCallBackUnitTestSuiteImpl::AddTest(const std::string& suiteName, Suite& aSuite, const std::string& testName, const UnitTestSharedPtr& unitTest)
 {
     try
     {

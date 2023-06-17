@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/06 20:37)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:53)
 
 #include "StaticTestIntersectorLine2Line2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Intersection/Intersection2D/StaticTestIntersectorLine2Line2Detail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/Intersection/Intersection2D/StaticTestIntersectorLine2Line2Detail.h"
+
 #include <random>
 
 namespace Mathematics
@@ -40,7 +41,7 @@ void Mathematics::StaticTestIntersectorLine2Line2Testing::MainTest()
 
 void Mathematics::StaticTestIntersectorLine2Line2Testing::LineTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/03/25 16:38)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/09 19:51)
 
 #ifndef INPUT_OUTPUT_MACRO_USER_MACRO_H
 #define INPUT_OUTPUT_MACRO_USER_MACRO_H
@@ -25,9 +25,10 @@ static_assert(COMPILE_INPUT_OUTPUT_CLOSE <= CLOSE_INPUT_OUTPUT_MAX, "COMPILE_INP
     #define INPUT_OUTPUT_USE_X
 #endif  // !defined(COMPILE_INPUT_OUTPUT_CLOSE) || (COMPILE_INPUT_OUTPUT_CLOSE & CLOSE_USE_X) != CLOSE_USE_X
 
-// 是否编译为静态库
 #ifdef BUILDING_STATIC
+
     #define BUILDING_INPUT_OUTPUT_STATIC
+
 #endif  // BUILDING_STATIC
 
 #endif  // INPUT_OUTPUT_MACRO_USER_MACRO_H

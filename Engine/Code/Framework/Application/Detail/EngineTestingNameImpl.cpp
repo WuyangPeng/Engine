@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/06 11:18)
+///	引擎版本：0.9.0.12 (2023/06/13 14:45)
 
 #include "Framework/FrameworkExport.h"
 
@@ -19,8 +19,6 @@
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
-using std::for_each;
-using std::string;
 using namespace std::literals;
 
 Framework::EngineTestingNameImpl::EngineTestingNameImpl(const String& endName)
@@ -31,7 +29,7 @@ Framework::EngineTestingNameImpl::EngineTestingNameImpl(const String& endName)
 
 // static
 // private
-string Framework::EngineTestingNameImpl::GetProjectTestingName()
+std::string Framework::EngineTestingNameImpl::GetProjectTestingName()
 {
     Framework::EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
 
@@ -49,7 +47,7 @@ Framework::EngineTestingNameImpl::TestingNameContainer Framework::EngineTestingN
 
     TestingNameContainer engineTestingName{ endName };
 
-    for_each(mainTree.begin(), mainTree.end(), [&engineTestingName](const auto& value) {
+    std::for_each(mainTree.begin(), mainTree.end(), [&engineTestingName](const auto& value) {
         if (0 < value.second.get_value<int>())
         {
             engineTestingName.emplace_back(value.first);

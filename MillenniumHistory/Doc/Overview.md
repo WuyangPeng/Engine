@@ -1,15 +1,15 @@
-/// @mainpage Rise of History API 文档
+/// @mainpage Millennium History API 文档
 
-@copyright Copyright (c) 2011-2022
-Rise of History
+@copyright Copyright (c) 2011-2023
+Millennium History
 
 @author 彭武阳，彭晔恩，彭晔泽
 联系作者：94458936@qq.com
 
-@version 0.9.0.5
+@version 0.9.0.12
 标准：std:c++20
 
-@date 2022/08/02 18:07
+@date 2023/06/15 22:30
 
 @section sec_Contents 内容
 
@@ -19,9 +19,10 @@ Rise of History
 
 @section sec_Overview 概述
 
-千年史策包含一个模块：
+千年史策包含兩个模块：
 
-1. GameClient（游戏客户端） 
+1. GameClient（游戏客户端）
+2. DatabaseGenerateServer（数据库生成服务器） 
 
 @section sec_Detail 详细说明
 
@@ -31,6 +32,7 @@ Rise of History
 @section sec_SeeAlso 参见
 
 @li @ref page_GameClient_Base 
+@li @ref page_DatabaseGenerateServer_Base
 
 @page page_Documentation 说明
 

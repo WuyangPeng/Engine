@@ -17,8 +17,8 @@
 #include "Framework/MiddleLayer/ObjectLogicManagerDetail.h"
 #include "Framework/WindowProcess/WindowMessageDetail.h"
 
-GameClient::GameClientMessage::GameClientMessage(int64_t delta)
-    : ParentType{ delta }, alloc{ CoreTools::ConsoleAlloc::Create() }
+GameClient::GameClientMessage::GameClientMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ delta, environmentDirectory }, alloc{ CoreTools::ConsoleAlloc::Create() }
 {
     SELF_CLASS_IS_VALID_1;
 }

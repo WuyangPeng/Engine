@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/30 11:27)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:16)
 
 #include "Frustum3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Frustum3Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -45,37 +42,37 @@ void Mathematics::Frustum3Testing::MainTest()
 
 void Mathematics::Frustum3Testing::FrustumTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> firstRandomDistribution(-10.0, 10.0);
+    const std::uniform_real<double> randomDistribution0(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D origin(firstRandomDistribution(generator),
-                              firstRandomDistribution(generator),
-                              firstRandomDistribution(generator));
+        const Vector3D origin(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        const Vector3D firstVector(firstRandomDistribution(generator),
-                                   firstRandomDistribution(generator),
-                                   firstRandomDistribution(generator));
+        const Vector3D vector0(randomDistribution0(generator),
+                               randomDistribution0(generator),
+                               randomDistribution0(generator));
 
-        const Vector3D secondVector(firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator));
+        const Vector3D vector1(randomDistribution0(generator),
+                               randomDistribution0(generator),
+                               randomDistribution0(generator));
 
-        const Vector3D thirdVector(firstRandomDistribution(generator),
-                                   firstRandomDistribution(generator),
-                                   firstRandomDistribution(generator));
+        const Vector3D vector2(randomDistribution0(generator),
+                               randomDistribution0(generator),
+                               randomDistribution0(generator));
 
-        auto directionMin = MathD::FAbs(firstRandomDistribution(generator));
-        auto directionMax = directionMin + MathD::FAbs(firstRandomDistribution(generator));
+        auto directionMin = MathD::FAbs(randomDistribution0(generator));
+        auto directionMax = directionMin + MathD::FAbs(randomDistribution0(generator));
 
-        auto upBound = Vector3ToolsD::GetLength(firstVector);
-        auto rightBound = Vector3ToolsD::GetLength(secondVector);
+        auto upBound = Vector3ToolsD::GetLength(vector0);
+        auto rightBound = Vector3ToolsD::GetLength(vector1);
 
-        const auto orthonormalize = Vector3ToolsD::Orthonormalize(firstVector, secondVector, thirdVector, 1e-10);
+        const auto orthonormalize = Vector3ToolsD::Orthonormalize(vector0, vector1, vector2, 1e-10);
 
         const Frustum3D frustum(origin, orthonormalize.GetUVector(), orthonormalize.GetVVector(), orthonormalize.GetWVector(), directionMin, directionMax, upBound, rightBound);
 

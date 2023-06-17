@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/12 14:48)
+///	引擎版本：0.9.0.12 (2023/06/12 10:48)
 
 #include "Rendering/RenderingExport.h"
 
@@ -15,8 +15,6 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
-using std::string;
 
 Rendering::SingleShaderProfileDataImpl::SingleShaderProfileDataImpl(int numConstants, int numSamplers)
     : baseRegisters(numConstants), textureUnits(numSamplers), programs{}
@@ -42,7 +40,7 @@ void Rendering::SingleShaderProfileDataImpl::SetTextureUnit(int index, int textu
     textureUnits.at(index) = textureUnit;
 }
 
-void Rendering::SingleShaderProfileDataImpl::SetProgram(const string& program)
+void Rendering::SingleShaderProfileDataImpl::SetProgram(const std::string& program)
 {
     RENDERING_CLASS_IS_VALID_9;
 

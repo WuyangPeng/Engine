@@ -27,9 +27,11 @@ AncientBooks::CalendarContainer::CalendarContainer(const CoreTools::CSVContent& 
 void AncientBooks::CalendarContainer::Parsing(const CoreTools::CSVContent& csvContent)
 {
     const auto size = csvContent.GetCount();
+    const auto csvHead = csvContent.GetCSVHead();
+
     for (auto i = 0; i < size; ++i)
     {
-        CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
 
         calendar.emplace_back(std::make_shared<Calendar>(csvRow));
     }

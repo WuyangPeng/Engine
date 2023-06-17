@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/21 19:13)
+///	引擎版本：0.9.0.12 (2023/06/12 12:50)
 
 #include "Rendering/RenderingExport.h"
 
@@ -26,8 +26,6 @@
 #include "Detail/WindowRendererInput.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-using std::make_shared;
-
 Rendering::RendererFactory::RendererSharedPtr Rendering::RendererFactory::Create(const EnvironmentParameter& environmentParameter, const std::string& fileName)
 {
     RendererParameter rendererParameter{ fileName };
@@ -45,15 +43,15 @@ Rendering::RendererFactory::RendererSharedPtr Rendering::RendererFactory::Create
         case RendererTypes::Default:
             return CreateDefault(basis, renderingEnvironment);
         case RendererTypes::Windows:
-            return make_shared<WindowRenderer>(environmentParameter, basis);
+            return std::make_shared<WindowRenderer>(environmentParameter, basis);
         case RendererTypes::Glut:
-            return make_shared<GlutRenderer>(environmentParameter, basis);
+            return std::make_shared<GlutRenderer>(environmentParameter, basis);
         case RendererTypes::OpenGL:
-            return make_shared<OpenGLRenderer>(renderingEnvironment, basis.GetRendererBasis());
+            return std::make_shared<OpenGLRenderer>(renderingEnvironment, basis.GetRendererBasis());
         case RendererTypes::Dx11:
-            return make_shared<Dx9Renderer>(environmentParameter, basis);
+            return std::make_shared<Dx9Renderer>(environmentParameter, basis);
         case RendererTypes::OpenGLES:
-            return make_shared<OpenGLESRenderer>(environmentParameter, basis);
+            return std::make_shared<OpenGLESRenderer>(environmentParameter, basis);
         default:
             return CreateDefault(basis, renderingEnvironment);
     }
@@ -61,7 +59,7 @@ Rendering::RendererFactory::RendererSharedPtr Rendering::RendererFactory::Create
 
 Rendering::RendererFactory::RendererSharedPtr Rendering::RendererFactory::CreateDefault(const RendererParameter& basis, const RenderingEnvironment& renderingEnvironment)
 {
-    return make_shared<OpenGLRenderer>(renderingEnvironment, basis.GetRendererBasis());
+    return std::make_shared<OpenGLRenderer>(renderingEnvironment, basis.GetRendererBasis());
 }
 
 Rendering::RendererFactory::RendererInputSharedPtr Rendering::RendererFactory::CreateInput(RendererTypes type)
@@ -71,15 +69,15 @@ Rendering::RendererFactory::RendererInputSharedPtr Rendering::RendererFactory::C
         case RendererTypes::Default:
             return CreateDefaultInput();
         case RendererTypes::Windows:
-            return make_shared<WindowRendererInput>();
+            return std::make_shared<WindowRendererInput>();
         case RendererTypes::Glut:
-            return make_shared<GlutRendererInput>();
+            return std::make_shared<GlutRendererInput>();
         case RendererTypes::OpenGL:
-            return make_shared<OpenGLRendererInput>();
+            return std::make_shared<OpenGLRendererInput>();
         case RendererTypes::Dx11:
-            return make_shared<Dx9RendererInput>();
+            return std::make_shared<Dx9RendererInput>();
         case RendererTypes::OpenGLES:
-            return make_shared<OpenGLESRendererInput>();
+            return std::make_shared<OpenGLESRendererInput>();
         default:
             return CreateDefaultInput();
     }
@@ -87,5 +85,5 @@ Rendering::RendererFactory::RendererInputSharedPtr Rendering::RendererFactory::C
 
 Rendering::RendererFactory::RendererInputSharedPtr Rendering::RendererFactory::CreateDefaultInput()
 {
-    return make_shared<OpenGLRendererInput>();
+    return std::make_shared<OpenGLRendererInput>();
 }

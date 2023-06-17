@@ -5,17 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/25 18:14)
+///	最后的霸王版本：0.9.0.12 (2022/07/25 18:14)
 
 #ifndef WORLD_SERVER_CORE_MACRO_WORLD_SERVER_CORE_CUSTOM_ASSERT_MACRO_H
 #define WORLD_SERVER_CORE_MACRO_WORLD_SERVER_CORE_CUSTOM_ASSERT_MACRO_H
 
 #include "UserMacro.h"
-#include "CoreTools/Contract/Assertion.h"
+#include "CoreTools/Helper/CustomAssertMacro.h"
 
-#if defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
+#if defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
     #define WORLD_SERVER_CORE_ASSERT_LEVEL 0
-#endif  // OPEN_IMPORTANT_EXCPTION_ASSERT
+#endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 
 #if !defined(WORLD_SERVER_CORE_ASSERT_LEVEL)
     #define WORLD_SERVER_CORE_ASSERT_LEVEL 4

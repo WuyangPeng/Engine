@@ -1,13 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/21 14:12)
+///	引擎测试版本：0.9.0.12 (2023/06/12 16:07)
 
 #include "GraphicsObjectTestingBase.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -38,7 +39,7 @@ CoreTools::FileBufferSharedPtr Rendering::GraphicsObjectTestingBase::CorrectFile
 {
     ASSERT_LESS_EQUAL_FAILURE_THROW(beginIndex, boost::numeric_cast<int>(buffer.size()), "缓冲区大小不足于创建GraphicsObject。");
 
-    auto saveFileBuffer = std::make_shared<FileBuffer>(buffer.size());
+    auto saveFileBuffer = std::make_shared<FileBuffer>(boost::numeric_cast<int>(buffer.size()));
     saveFileBuffer->CopyBuffer(buffer.begin() + beginIndex, buffer.end());
 
     return saveFileBuffer;

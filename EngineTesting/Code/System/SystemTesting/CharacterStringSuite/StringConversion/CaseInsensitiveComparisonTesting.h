@@ -31,7 +31,7 @@ namespace System
 
         void CaseInsensitiveComparisonTest();
 
-        void CompareStringOrdinalUseBinaryTest(TChar lower, TChar capital);
+        void CompareStringOrdinalUseBinaryTest(wchar_t lower, wchar_t capital);
     };
 }
 

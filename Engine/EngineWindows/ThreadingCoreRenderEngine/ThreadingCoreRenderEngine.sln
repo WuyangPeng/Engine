@@ -88,7 +88,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Animation", "..\Animation\A
 		{39309DF3-41D1-4607-AAFF-D56F9465CD03} = {39309DF3-41D1-4607-AAFF-D56F9465CD03}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArtificialIntellegence", "..\ArtificialIntellegence\ArtificialIntellegence\ArtificialIntellegence.vcxproj", "{D86FF4E4-F3C1-4C64-947C-50E401ED3391}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArtificialIntelligence", "..\ArtificialIntelligence\ArtificialIntelligence\ArtificialIntelligence.vcxproj", "{D86FF4E4-F3C1-4C64-947C-50E401ED3391}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A7968056-15E9-4C40-9319-4DB908EE9EF9} = {A7968056-15E9-4C40-9319-4DB908EE9EF9}
 		{93A75F87-579B-45B2-BF88-6CC9B72958F1} = {93A75F87-579B-45B2-BF88-6CC9B72958F1}

@@ -1,23 +1,29 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/18 16:34)
+///	引擎测试版本：0.9.0.12 (2023/06/12 14:48)
 
 #ifndef RENDERING_RENDERING_OPENGL_RENDERER_SUITE_OPENGL_RENDER_TARGET_DATA_TESTING_H
 #define RENDERING_RENDERING_OPENGL_RENDERER_SUITE_OPENGL_RENDER_TARGET_DATA_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Rendering
 {
     class OpenGLRenderTargetDataTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(OpenGLRenderTargetDataTesting);
+        using ClassType = OpenGLRenderTargetDataTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit OpenGLRenderTargetDataTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

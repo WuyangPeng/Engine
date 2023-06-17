@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/02 18:19)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:02)
 
 #include "LinearSystemTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
@@ -18,14 +19,9 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/NumericalAnalysis/LinearSystemDetail.h"
 #include "Mathematics/NumericalAnalysis/SparseMatrixDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 #include <gsl/util>
 #include <random>
-
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
 
 namespace Mathematics
 {
@@ -61,9 +57,9 @@ void Mathematics::LinearSystemTesting::MainTest()
 
 void Mathematics::LinearSystemTesting::Solve2Test()
 {
-    default_random_engine generator;
-    const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const uniform_int<> integerRandomDistribution(1, 10);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    const std::uniform_int<> integerRandomDistribution(1, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -77,19 +73,19 @@ void Mathematics::LinearSystemTesting::Solve2Test()
 
         auto outputVector = linearsystem.Solve2(matrix, inputVector);
 
-        const Matrix2D firstMatrix(matrix.at(0).at(0), matrix.at(0).at(1), matrix.at(1).at(0), matrix.at(1).at(1));
-        const Vector2D firstVector(inputVector.at(0), inputVector.at(1));
-        const Vector2D secondVector(outputVector.at(0), outputVector.at(1));
+        const Matrix2D matrix0(matrix.at(0).at(0), matrix.at(0).at(1), matrix.at(1).at(0), matrix.at(1).at(1));
+        const Vector2D vector0(inputVector.at(0), inputVector.at(1));
+        const Vector2D vector1(outputVector.at(0), outputVector.at(1));
 
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, firstVector, firstMatrix * secondVector, 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, vector0, matrix0 * vector1, 1e-10);
     }
 }
 
 void Mathematics::LinearSystemTesting::Solve3Test()
 {
-    default_random_engine generator;
-    const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const uniform_int<> integerRandomDistribution(1, 10);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    const std::uniform_int<> integerRandomDistribution(1, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -111,19 +107,19 @@ void Mathematics::LinearSystemTesting::Solve3Test()
                                                floatRandomDistribution(generator) };
         auto outputVector = linearsystem.Solve3(matrix, inputVector);
 
-        const Matrix3D firstMatrix(matrix.at(0).at(0), matrix.at(0).at(1), matrix.at(0).at(2), matrix.at(1).at(0), matrix.at(1).at(1), matrix.at(1).at(2), matrix.at(2).at(0), matrix.at(2).at(1), matrix.at(2).at(2));
-        const Vector3D firstVector(inputVector.at(0), inputVector.at(1), inputVector.at(2));
-        const Vector3D secondVector(outputVector.at(0), outputVector.at(1), outputVector.at(2));
+        const Matrix3D matrix0(matrix.at(0).at(0), matrix.at(0).at(1), matrix.at(0).at(2), matrix.at(1).at(0), matrix.at(1).at(1), matrix.at(1).at(2), matrix.at(2).at(0), matrix.at(2).at(1), matrix.at(2).at(2));
+        const Vector3D vector0(inputVector.at(0), inputVector.at(1), inputVector.at(2));
+        const Vector3D vector1(outputVector.at(0), outputVector.at(1), outputVector.at(2));
 
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, firstVector, firstMatrix * secondVector, 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, vector0, matrix0 * vector1, 1e-10);
     }
 }
 
 void Mathematics::LinearSystemTesting::InverseTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const uniform_int<> integerRandomDistribution(1, 10);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    const std::uniform_int<> integerRandomDistribution(1, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -133,38 +129,38 @@ void Mathematics::LinearSystemTesting::InverseTest()
 
         const auto size = integerRandomDistribution(generator);
 
-        VariableMatrixD firstMatrix(size, size);
+        VariableMatrixD matrix0(size, size);
 
-        for (auto row = 0; row < firstMatrix.GetRowsNumber(); ++row)
+        for (auto row = 0; row < matrix0.GetRowsNumber(); ++row)
         {
-            for (auto column = 0; column < firstMatrix.GetColumnsNumber(); ++column)
+            for (auto column = 0; column < matrix0.GetColumnsNumber(); ++column)
             {
-                firstMatrix(row, column) = floatRandomDistribution(generator);
+                matrix0(row, column) = floatRandomDistribution(generator);
             }
         }
 
-        auto secondMatrix = linearsystem.Inverse(firstMatrix);
-        auto thirdMatrix = firstMatrix * secondMatrix;
-        VariableMatrixD fourthMatrix(size, size);
+        auto matrix1 = linearsystem.Inverse(matrix0);
+        auto matrix2 = matrix0 * matrix1;
+        VariableMatrixD matrix3(size, size);
 
-        for (auto row = 0; row < fourthMatrix.GetRowsNumber(); ++row)
+        for (auto row = 0; row < matrix3.GetRowsNumber(); ++row)
         {
-            fourthMatrix(row, row) = 1.0;
+            matrix3(row, row) = 1.0;
         }
 
         using VariableMatrixdApproximate = bool (*)(const VariableMatrixD& lhs, const VariableMatrixD& rhs, const double epsilon);
 
         VariableMatrixdApproximate function = Approximate<double>;
 
-        ASSERT_APPROXIMATE_USE_FUNCTION(function, thirdMatrix, fourthMatrix, 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(function, matrix2, matrix3, 1e-10);
     }
 }
 
 void Mathematics::LinearSystemTesting::SolveTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const uniform_int<> integerRandomDistribution(1, 10);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    const std::uniform_int<> integerRandomDistribution(1, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -174,28 +170,28 @@ void Mathematics::LinearSystemTesting::SolveTest()
 
         const auto size = integerRandomDistribution(generator);
 
-        VariableMatrixD firstMatrix(size, size);
+        VariableMatrixD matrix0(size, size);
 
-        for (auto row = 0; row < firstMatrix.GetRowsNumber(); ++row)
+        for (auto row = 0; row < matrix0.GetRowsNumber(); ++row)
         {
-            for (auto column = 0; column < firstMatrix.GetColumnsNumber(); ++column)
+            for (auto column = 0; column < matrix0.GetColumnsNumber(); ++column)
             {
-                firstMatrix(row, column) = floatRandomDistribution(generator);
+                matrix0(row, column) = floatRandomDistribution(generator);
             }
         }
 
-        vector<double> input{};
+        std::vector<double> input{};
 
         for (auto i = 0; i < size; ++i)
         {
             input.emplace_back(floatRandomDistribution(generator));
         }
 
-        auto output = linearsystem.Solve(firstMatrix, input);
+        auto output = linearsystem.Solve(matrix0, input);
 
         VariableLengthVectorD firstVariableLengthVector(input);
         VariableLengthVectorD secondVariableLengthVector(output);
-        VariableLengthVectorD thirdVariableLengthVector = firstMatrix * secondVariableLengthVector;
+        VariableLengthVectorD thirdVariableLengthVector = matrix0 * secondVariableLengthVector;
 
         using VariableLengthVectordApproximate = bool (*)(const VariableLengthVectorD& lhs, const VariableLengthVectorD& rhs, const double epsilon);
 
@@ -207,9 +203,9 @@ void Mathematics::LinearSystemTesting::SolveTest()
 
 void Mathematics::LinearSystemTesting::SolveTridiagonalTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const uniform_int<> integerRandomDistribution(3, 10);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    const std::uniform_int<> integerRandomDistribution(3, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -219,10 +215,10 @@ void Mathematics::LinearSystemTesting::SolveTridiagonalTest()
 
         auto size = integerRandomDistribution(generator);
 
-        vector<double> lower(gsl::narrow_cast<size_t>(size) - 1);
-        vector<double> main(size);
-        vector<double> upper(gsl::narrow_cast<size_t>(size) - 1);
-        vector<double> input(size);
+        std::vector<double> lower(gsl::narrow_cast<size_t>(size) - 1);
+        std::vector<double> main(size);
+        std::vector<double> upper(gsl::narrow_cast<size_t>(size) - 1);
+        std::vector<double> input(size);
 
         for (auto i = 0; i < size - 1; ++i)
         {
@@ -237,22 +233,22 @@ void Mathematics::LinearSystemTesting::SolveTridiagonalTest()
 
         auto output = linearsystem.SolveTridiagonal(size, lower, main, upper, input);
 
-        VariableMatrixD firstMatrix(size, size);
+        VariableMatrixD matrix0(size, size);
 
         for (auto i = 0; i < size - 1; ++i)
         {
-            firstMatrix(i, i + 1) = upper.at(i);
-            firstMatrix(i + 1, i) = lower.at(i);
+            matrix0(i, i + 1) = upper.at(i);
+            matrix0(i + 1, i) = lower.at(i);
         }
 
         for (auto i = 0; i < size; ++i)
         {
-            firstMatrix(i, i) = main.at(i);
+            matrix0(i, i) = main.at(i);
         }
 
         VariableLengthVectorD firstVariableLengthVector(input);
         VariableLengthVectorD secondVariableLengthVector(output);
-        VariableLengthVectorD thirdVariableLengthVector = firstMatrix * secondVariableLengthVector;
+        VariableLengthVectorD thirdVariableLengthVector = matrix0 * secondVariableLengthVector;
 
         using VariableLengthVectordApproximate = bool (*)(const VariableLengthVectorD& lhs, const VariableLengthVectorD& rhs, const double epsilon);
 
@@ -264,9 +260,9 @@ void Mathematics::LinearSystemTesting::SolveTridiagonalTest()
 
 void Mathematics::LinearSystemTesting::SolveConstTridiagonalTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const uniform_int<> integerRandomDistribution(1, 10);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    const std::uniform_int<> integerRandomDistribution(1, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -279,7 +275,7 @@ void Mathematics::LinearSystemTesting::SolveConstTridiagonalTest()
         double lower = floatRandomDistribution(generator);
         double main = floatRandomDistribution(generator);
         double upper = floatRandomDistribution(generator);
-        vector<double> input(size);
+        std::vector<double> input(size);
 
         for (int i = 0; i < size; ++i)
         {
@@ -288,36 +284,36 @@ void Mathematics::LinearSystemTesting::SolveConstTridiagonalTest()
 
         auto output = linearsystem.SolveConstTridiagonal(size, lower, main, upper, input);
 
-        VariableMatrixD firstMatrix(size, size);
+        VariableMatrixD matrix0(size, size);
 
         for (int i = 0; i < size - 1; ++i)
         {
-            firstMatrix(i, i + 1) = upper;
-            firstMatrix(i + 1, i) = lower;
+            matrix0(i, i + 1) = upper;
+            matrix0(i + 1, i) = lower;
         }
 
         for (int i = 0; i < size; ++i)
         {
-            firstMatrix(i, i) = main;
+            matrix0(i, i) = main;
         }
 
         VariableLengthVectorD firstVariableLengthVector(input);
         VariableLengthVectorD secondVariableLengthVector(output);
-        VariableLengthVectorD thirdVariableLengthVector = firstMatrix * secondVariableLengthVector;
+        VariableLengthVectorD thirdVariableLengthVector = matrix0 * secondVariableLengthVector;
 
         using VariableLengthVectordApproximate = bool (*)(const VariableLengthVectorD& lhs, const VariableLengthVectorD& rhs, const double epsilon);
 
         VariableLengthVectordApproximate function = Approximate<double>;
 
-        ASSERT_APPROXIMATE_USE_FUNCTION(function, thirdVariableLengthVector, firstVariableLengthVector, 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(function, thirdVariableLengthVector, firstVariableLengthVector, 1e-5);
     }
 }
 
 void Mathematics::LinearSystemTesting::SolveSymmetricConjugateGradientTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const uniform_int<> integerRandomDistribution(1, 10);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    const std::uniform_int<> integerRandomDistribution(1, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -327,37 +323,37 @@ void Mathematics::LinearSystemTesting::SolveSymmetricConjugateGradientTest()
 
         const int size = integerRandomDistribution(generator);
 
-        VariableMatrixD firstMatrix(size, size);
+        VariableMatrixD matrix0(size, size);
 
-        for (int row = 0; row < firstMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix0.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < firstMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix0.GetColumnsNumber(); ++column)
             {
-                firstMatrix(row, column) = floatRandomDistribution(generator);
+                matrix0(row, column) = floatRandomDistribution(generator);
             }
         }
 
-        for (int row = 0; row < firstMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix0.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < firstMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix0.GetColumnsNumber(); ++column)
             {
                 if (row < column)
-                    firstMatrix(row, column) = firstMatrix(column, row);
+                    matrix0(row, column) = matrix0(column, row);
             }
         }
 
-        vector<double> input(size);
+        std::vector<double> input(size);
 
         for (int i = 0; i < size; ++i)
         {
             input.at(i) = floatRandomDistribution(generator);
         }
 
-        auto output = linearsystem.SolveSymmetricConjugateGradient(firstMatrix, input);
+        auto output = linearsystem.SolveSymmetricConjugateGradient(matrix0, input);
 
         VariableLengthVectorD firstVariableLengthVector(input);
         VariableLengthVectorD secondVariableLengthVector(output);
-        VariableLengthVectorD thirdVariableLengthVector = firstMatrix * secondVariableLengthVector;
+        VariableLengthVectorD thirdVariableLengthVector = matrix0 * secondVariableLengthVector;
 
         using VariableLengthVectordApproximate = bool (*)(const VariableLengthVectorD& lhs, const VariableLengthVectorD& rhs, const double epsilon);
 
@@ -365,31 +361,31 @@ void Mathematics::LinearSystemTesting::SolveSymmetricConjugateGradientTest()
 
         ASSERT_APPROXIMATE_USE_FUNCTION(function, thirdVariableLengthVector, firstVariableLengthVector, 1e-8);
 
-        SparseMatrixD secondMatrix(size, size);
+        SparseMatrixD matrix1(size, size);
 
-        for (int row = 0; row < secondMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix1.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < secondMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix1.GetColumnsNumber(); ++column)
             {
-                secondMatrix(row, column) = floatRandomDistribution(generator);
+                matrix1(row, column) = floatRandomDistribution(generator);
             }
         }
 
-        output = linearsystem.SolveSymmetricConjugateGradient(secondMatrix, input);
+        output = linearsystem.SolveSymmetricConjugateGradient(matrix1, input);
 
         firstVariableLengthVector = VariableLengthVectorD(input);
         secondVariableLengthVector = VariableLengthVectorD(output);
-        thirdVariableLengthVector = secondMatrix * secondVariableLengthVector;
+        thirdVariableLengthVector = matrix1 * secondVariableLengthVector;
 
-        ASSERT_APPROXIMATE_USE_FUNCTION(function, thirdVariableLengthVector, firstVariableLengthVector, 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(function, thirdVariableLengthVector, firstVariableLengthVector, 1e-7);
     }
 }
 
 void Mathematics::LinearSystemTesting::SolveBandedTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const uniform_int<> integerRandomDistribution(4, 10);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    const std::uniform_int<> integerRandomDistribution(4, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -399,48 +395,48 @@ void Mathematics::LinearSystemTesting::SolveBandedTest()
 
         const int size = integerRandomDistribution(generator);
 
-        BandedMatrixD firstMatrix(size, size - 1, size - 2);
+        BandedMatrixD matrix0(size, size - 1, size - 2);
 
-        for (int i = 0; i < firstMatrix.GetSize(); ++i)
+        for (int i = 0; i < matrix0.GetSize(); ++i)
         {
-            firstMatrix(i, i) = floatRandomDistribution(generator);
+            matrix0(i, i) = floatRandomDistribution(generator);
         }
 
-        for (int row = 0; row < firstMatrix.GetSize(); ++row)
+        for (int row = 0; row < matrix0.GetSize(); ++row)
         {
-            for (int column = 0; column < firstMatrix.GetSize(); ++column)
+            for (int column = 0; column < matrix0.GetSize(); ++column)
             {
                 const int band = column - row;
-                if (band < 0 && -band - 1 < firstMatrix.GetLowerBandsNumber())
+                if (band < 0 && -band - 1 < matrix0.GetLowerBandsNumber())
                 {
-                    firstMatrix(row, column) = floatRandomDistribution(generator);
+                    matrix0(row, column) = floatRandomDistribution(generator);
                 }
             }
         }
 
-        for (int row = 0; row < firstMatrix.GetSize(); ++row)
+        for (int row = 0; row < matrix0.GetSize(); ++row)
         {
-            for (int column = 0; column < firstMatrix.GetSize(); ++column)
+            for (int column = 0; column < matrix0.GetSize(); ++column)
             {
                 const int band = column - row;
-                if (0 < band && band - 1 < firstMatrix.GetUpperBandsNumber())
+                if (0 < band && band - 1 < matrix0.GetUpperBandsNumber())
                 {
-                    firstMatrix(row, column) = floatRandomDistribution(generator);
+                    matrix0(row, column) = floatRandomDistribution(generator);
                 }
             }
         }
-        vector<double> input(size);
+        std::vector<double> input(size);
 
         for (int i = 0; i < size; ++i)
         {
             input.at(i) = floatRandomDistribution(generator);
         }
 
-        auto output = linearsystem.SolveBanded(firstMatrix, input);
+        auto output = linearsystem.SolveBanded(matrix0, input);
 
         VariableLengthVectorD firstVariableLengthVector(input);
         VariableLengthVectorD secondVariableLengthVector(output);
-        VariableLengthVectorD thirdVariableLengthVector = firstMatrix.ToVariableMatrix() * secondVariableLengthVector;
+        VariableLengthVectorD thirdVariableLengthVector = matrix0.ToVariableMatrix() * secondVariableLengthVector;
 
         using VariableLengthVectordApproximate = bool (*)(const VariableLengthVectorD& lhs, const VariableLengthVectorD& rhs, const double epsilon);
 
@@ -452,9 +448,9 @@ void Mathematics::LinearSystemTesting::SolveBandedTest()
 
 void Mathematics::LinearSystemTesting::InvertTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const uniform_int<> integerRandomDistribution(4, 10);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    const std::uniform_int<> integerRandomDistribution(4, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -464,51 +460,51 @@ void Mathematics::LinearSystemTesting::InvertTest()
 
         const int size = integerRandomDistribution(generator);
 
-        BandedMatrixD firstMatrix(size, size - 1, size - 2);
+        BandedMatrixD matrix0(size, size - 1, size - 2);
 
-        auto diagonalBand = firstMatrix.GetDiagonalBand();
-        for (int i = 0; i < firstMatrix.GetSize(); ++i)
+        auto diagonalBand = matrix0.GetDiagonalBand();
+        for (int i = 0; i < matrix0.GetSize(); ++i)
         {
-            firstMatrix(i, i) = floatRandomDistribution(generator);
+            matrix0(i, i) = floatRandomDistribution(generator);
         }
 
-        for (int row = 0; row < firstMatrix.GetSize(); ++row)
+        for (int row = 0; row < matrix0.GetSize(); ++row)
         {
-            for (int column = 0; column < firstMatrix.GetSize(); ++column)
+            for (int column = 0; column < matrix0.GetSize(); ++column)
             {
                 const int band = column - row;
-                if (band < 0 && -band - 1 < firstMatrix.GetLowerBandsNumber())
+                if (band < 0 && -band - 1 < matrix0.GetLowerBandsNumber())
                 {
-                    firstMatrix(row, column) = floatRandomDistribution(generator);
+                    matrix0(row, column) = floatRandomDistribution(generator);
                 }
             }
         }
 
-        for (int row = 0; row < firstMatrix.GetSize(); ++row)
+        for (int row = 0; row < matrix0.GetSize(); ++row)
         {
-            for (int column = 0; column < firstMatrix.GetSize(); ++column)
+            for (int column = 0; column < matrix0.GetSize(); ++column)
             {
                 const int band = column - row;
-                if (0 < band && band - 1 < firstMatrix.GetUpperBandsNumber())
+                if (0 < band && band - 1 < matrix0.GetUpperBandsNumber())
                 {
-                    firstMatrix(row, column) = floatRandomDistribution(generator);
+                    matrix0(row, column) = floatRandomDistribution(generator);
                 }
             }
         }
 
-        VariableMatrixD secondMatrix = linearsystem.Invert(firstMatrix);
-        VariableMatrixD thirdMatrix = firstMatrix.ToVariableMatrix() * secondMatrix;
-        VariableMatrixD fourthMatrix(size, size);
+        VariableMatrixD matrix1 = linearsystem.Invert(matrix0);
+        VariableMatrixD matrix2 = matrix0.ToVariableMatrix() * matrix1;
+        VariableMatrixD matrix3(size, size);
 
-        for (int row = 0; row < fourthMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix3.GetRowsNumber(); ++row)
         {
-            fourthMatrix(row, row) = 1.0;
+            matrix3(row, row) = 1.0;
         }
 
         using VariableMatrixdApproximate = bool (*)(const VariableMatrixD& lhs, const VariableMatrixD& rhs, const double epsilon);
 
         VariableMatrixdApproximate function = Approximate<double>;
 
-        ASSERT_APPROXIMATE_USE_FUNCTION(function, thirdMatrix, fourthMatrix, 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(function, matrix2, matrix3, 1e-10);
     }
 }

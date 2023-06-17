@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/04/02 14:45)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 11:17)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,9 +20,6 @@
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-
-using CoreTools::ReadFileManager;
-using std::make_shared;
 
 Rendering::LoadVisual::LoadVisual(const System::String& name)
     : impl{ VisualPrimitiveType::None }

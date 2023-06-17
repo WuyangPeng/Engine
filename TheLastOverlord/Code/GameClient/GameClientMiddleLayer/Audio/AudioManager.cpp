@@ -12,8 +12,8 @@
 #include "AudioManager.h"
 #include "GameClient/GameClientMiddleLayer/Macro/GameClientMiddleLayerClassInvariantMacro.h"
 
-GameClientMiddleLayer::AudioManager::AudioManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+GameClientMiddleLayer::AudioManager::AudioManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     GAME_CLIENT_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

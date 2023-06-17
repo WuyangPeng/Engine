@@ -1,32 +1,44 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/11 19:47)
+///	引擎测试版本：0.9.0.12 (2023/06/12 15:14)
 
 #include "WireStateTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "Rendering/Shaders/WireState.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, WireStateTesting)
+Rendering::WireStateTesting::WireStateTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, WireStateTesting)
+
+void Rendering::WireStateTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Rendering::WireStateTesting::MainTest()
 {
-    CoreTools::InitTerm::ExecuteInitializers();
+    CoreTools::InitTerm::ExecuteInitializer();
 
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
 
-    CoreTools::InitTerm::ExecuteTerminators();
+    CoreTools::InitTerm::ExecuteTerminator();
 }
 
 void Rendering::WireStateTesting::InitTest()
@@ -56,5 +68,4 @@ void Rendering::WireStateTesting::CopyTest()
 
 void Rendering::WireStateTesting::StreamTest() noexcept
 {
-     
 }

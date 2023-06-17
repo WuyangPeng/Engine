@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 14:00)
+///	引擎测试版本：0.9.0.12 (2023/06/13 23:08)
 
 #include "WindowMessageTesting.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "System/Windows/WindowsCreate.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/MiddleLayerInterface.h"
@@ -52,7 +53,7 @@ void Framework::WindowMessageTesting::MainTest()
 void Framework::WindowMessageTesting::MessageTest()
 {
     const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-    constexpr auto delta = System::g_Microseconds / 60;
+    constexpr auto delta = System::gMicroseconds / 60;
     TestingType message{ delta, environmentDirectory };
     ASSERT_EQUAL(message.GetDelta(), delta);
 
@@ -89,7 +90,7 @@ void Framework::WindowMessageTesting::MessageTest()
 void Framework::WindowMessageTesting::CloseMessageTest()
 {
     const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-    constexpr auto delta = System::g_Microseconds / 60;
+    constexpr auto delta = System::gMicroseconds / 60;
     TestingType message{ delta, environmentDirectory };
 
     auto instance = System::GetHInstance();
@@ -111,7 +112,7 @@ void Framework::WindowMessageTesting::CloseMessageTest()
 void Framework::WindowMessageTesting::DestroyMessageTest()
 {
     const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-    constexpr auto delta = System::g_Microseconds / 60;
+    constexpr auto delta = System::gMicroseconds / 60;
     TestingType message{ delta, environmentDirectory };
 
     auto instance = System::GetHInstance();
@@ -134,7 +135,7 @@ void Framework::WindowMessageTesting::DestroyMessageTest()
 void Framework::WindowMessageTesting::SetMainWindowTest()
 {
     const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-    constexpr auto delta = System::g_Microseconds / 60;
+    constexpr auto delta = System::gMicroseconds / 60;
     TestingType message{ delta, environmentDirectory };
 
     auto instance = System::GetHInstance();

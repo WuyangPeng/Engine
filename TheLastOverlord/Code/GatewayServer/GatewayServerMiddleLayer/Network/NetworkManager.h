@@ -24,7 +24,7 @@ namespace GatewayServerMiddleLayer
         using ParentType = Framework::NetworkManagerInterface;
 
     public:
-        explicit NetworkManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        NetworkManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

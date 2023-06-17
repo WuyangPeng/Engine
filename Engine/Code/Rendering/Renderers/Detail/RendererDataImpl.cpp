@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/20 14:13)
+///	引擎版本：0.9.0.12 (2023/06/12 12:44)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,12 +19,10 @@
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererBasis.h"
 
-using boost::property_tree::ptree_error;
-using std::make_shared;
 using namespace std::literals;
 
 Rendering::RendererDataImpl::RendererDataImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
-    : renderer{ make_shared<Renderer>(EnvironmentParameter::Create(), RendererParameter{ "" }) }
+    : renderer{ std::make_shared<Renderer>(EnvironmentParameter::Create(), RendererParameter{ "" }) }
 {
     renderer->Init();
 
@@ -52,7 +50,7 @@ void Rendering::RendererDataImpl::LoadConfiguration(const std::string& fileName)
         AnalysisRendererManager manager{ fileName };
         renderer = manager.GetRenderer();
     }
-    catch (const ptree_error& error)
+    catch (const boost::property_tree::ptree_error& error)
     {
         LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }

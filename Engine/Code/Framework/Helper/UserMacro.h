@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/05 16:14)
+///	引擎版本：0.9.0.12 (2023/06/13 14:41)
 
 #ifndef FRAMEWORK_HELPER_USER_MACRO_H
 #define FRAMEWORK_HELPER_USER_MACRO_H
@@ -39,15 +39,19 @@ static_assert(COMPILE_FRAMEWORK_CLOSE <= CLOSE_FRAMEWORK_MAX, "COMPILE_FRAMEWORK
 #if !defined(COMPILE_FRAMEWORK_CLOSE) || (COMPILE_FRAMEWORK_CLOSE & CLOSE_USE_ANDROID_TEST) != CLOSE_USE_ANDROID_TEST
 
     #ifdef SYSTEM_PLATFORM_ANDROID
+
         // 开启安卓测试模式
         #define FRAMEWORK_ANDROID_TEST
+
     #endif  // SYSTEM_PLATFORM_ANDROID
 
 #endif  // !defined(COMPILE_FRAMEWORK_CLOSE) || (COMPILE_FRAMEWORK_CLOSE & CLOSE_USE_ANDROID_TEST) != CLOSE_USE_ANDROID_TEST
 
-// 是否编译为静态库
+
 #ifdef BUILDING_STATIC
+
     #define BUILDING_FRAMEWORK_STATIC
+
 #endif  // BUILDING_STATIC
 
 #endif  // FRAMEWORK_HELPER_USER_MACRO_H

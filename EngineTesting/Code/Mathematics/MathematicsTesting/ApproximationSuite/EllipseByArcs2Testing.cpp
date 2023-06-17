@@ -1,25 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 15:03)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:14)
 
 #include "EllipseByArcs2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Approximation/EllipseByArcs2Detail.h"
 #include "Mathematics/Objects2D/Ellipse2Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -47,17 +43,17 @@ void Mathematics::EllipseByArcs2Testing::MainTest()
 
 void Mathematics::EllipseByArcs2Testing::Arcs2Test()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(5.0, 100.0);
-    const uniform_int<> secondRandomDistribution(10, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(5.0, 100.0);
+    const std::uniform_int<> randomDistribution1(10, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const int numArcs = secondRandomDistribution(generator);
-        const double a = firstRandomDistribution(generator);
-        const double b = firstRandomDistribution(generator);
+        const int numArcs = randomDistribution1(generator);
+        const double a = randomDistribution0(generator);
+        const double b = randomDistribution0(generator);
 
         EllipseByArcs2D ellipseByArcs2(a, b, numArcs);
 

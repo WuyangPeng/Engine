@@ -12,8 +12,8 @@
 #include "LogServer/LogServerMiddleLayer/Macro/LogServerMiddleLayerClassInvariantMacro.h"
 #include "NetworkManager.h"
 
-LogServerMiddleLayer::NetworkManager::NetworkManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+LogServerMiddleLayer::NetworkManager::NetworkManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     LOG_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

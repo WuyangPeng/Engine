@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.0 (2022/08/16 18:36)
+///	引擎版本：0.9.0.12 (2023/06/12 11:27)
 
 #include "Rendering/RenderingExport.h"
 
@@ -17,9 +17,6 @@
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "Rendering/Resources/DataFormat.h"
-
-using std::string;
-using std::vector;
 
 Rendering::DrawTargetImpl::DrawTargetImpl(int numRenderTargets,
                                           DataFormatType renderTargetFormat,
@@ -230,7 +227,7 @@ int Rendering::DrawTargetImpl::GetNumTargets() const
     return boost::numeric_cast<int>(renderTargetTextures.size());
 }
 
-CoreTools::ObjectSharedPtr Rendering::DrawTargetImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::DrawTargetImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -250,11 +247,11 @@ CoreTools::ObjectSharedPtr Rendering::DrawTargetImpl::GetObjectByName(const stri
     return CoreTools::Object::GetNullObject();
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::DrawTargetImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::DrawTargetImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    vector<CoreTools::ObjectSharedPtr> objects{};
+    std::vector<CoreTools::ObjectSharedPtr> objects{};
 
     for (const auto& colorTexture : renderTargetTextures)
     {
@@ -272,7 +269,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::DrawTargetImpl::GetAllObjectsByNam
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::DrawTargetImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::DrawTargetImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -292,11 +289,11 @@ CoreTools::ConstObjectSharedPtr Rendering::DrawTargetImpl::GetConstObjectByName(
     return CoreTools::Object::GetNullObject();
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::DrawTargetImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::DrawTargetImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    vector<CoreTools::ConstObjectSharedPtr> objects{};
+    std::vector<CoreTools::ConstObjectSharedPtr> objects{};
 
     for (const auto& colorTexture : renderTargetTextures)
     {

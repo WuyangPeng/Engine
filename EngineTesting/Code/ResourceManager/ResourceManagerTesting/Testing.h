@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/10 16:48)
+///	引擎测试版本：0.9.0.12 (2023/06/10 14:23)
 
 #ifndef RESOURCE_MANAGER_TESTING_H
 #define RESOURCE_MANAGER_TESTING_H
@@ -13,7 +13,7 @@
 #include "CollisionSuite/CollisionSuite.h"
 #include "FontSuite/FontSuite.h"
 #include "GameWorldMapSuite/GameWorldMapSuite.h"
-#include "MacroSuite/MacroSuite.h"
+#include "HelperSuite/HelperSuite.h"
 #include "MaterialSuite/MaterialSuite.h"
 #include "MiscellaneousSuite/MiscellaneousSuite.h"
 #include "PhysicalParametersSuite/PhysicalParametersSuite.h"

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 17:52)
+///	引擎版本：0.9.0.12 (2023/06/13 14:00)
 
 #ifndef FRAMEWORK_WINDOWS_API_FRAME_BUILD_DETAIL_H
 #define FRAMEWORK_WINDOWS_API_FRAME_BUILD_DETAIL_H
@@ -78,9 +78,8 @@ int Framework::WindowsAPIFrameBuild<Process>::EnterMessageLoop()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    auto process = windowRegister.GetWindowProcess();
-
-    if (process.Initialize())
+    if (auto process = windowRegister.GetWindowProcess();
+        process.Initialize())
     {
         // 默认PreIdle()清除缓冲区。允许应用程序填充他们的窗口在窗口显示之后和事件循环开始之前。
         process.PreIdle();

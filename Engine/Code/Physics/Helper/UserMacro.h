@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/04/24 16:54)
+///	引擎版本：0.9.0.12 (2023/06/12 16:36)
 
 #ifndef PHYSICS_MACRO_USER_MACRO_H
 #define PHYSICS_MACRO_USER_MACRO_H
@@ -16,7 +16,7 @@
 
 #define CLOSE_PHYSICS_USE_EXPORT_TEMPLATE (0x01)
 #define CLOSE_LCPSOLVER_LOG (0x01 << 1)
-#define CLOSE_LCPPOLYDIST_LOG (0x01 << 2) 
+#define CLOSE_LCPPOLYDIST_LOG (0x01 << 2)
 #define CLOSE_USE_PHYSICS_TEMPLATE_TEST (0x01 << 3)
 #define CLOSE_PHYSICS_MAX (((CLOSE_USE_PHYSICS_TEMPLATE_TEST) << 1) - 1)
 
@@ -79,14 +79,17 @@ static_assert(COMPILE_PHYSICS_CLOSE <= CLOSE_PHYSICS_MAX, "COMPILE_PHYSICS_CLOSE
 #if !defined(COMPILE_PHYSICS_CLOSE) || (COMPILE_PHYSICS_CLOSE & CLOSE_USE_PHYSICS_TEMPLATE_TEST) != CLOSE_USE_PHYSICS_TEMPLATE_TEST
 
     #ifndef BUILDING_STATIC
+
         #define PHYSICS_TEMPLATE_TEST static_cast<void>(0)
+
     #endif  // BUILDING_STATIC
 
 #endif  // !defined(COMPILE_PHYSICS_CLOSE) || (COMPILE_PHYSICS_CLOSE & CLOSE_USE_PHYSICS_TEMPLATE_TEST) != CLOSE_USE_PHYSICS_TEMPLATE_TEST
 
-// 是否编译为静态库
 #ifdef BUILDING_STATIC
-    #define BUILDING_PHYSICS_STATIC
+
+    #define BUILDING_PHYSICS_STATIC static_cast<void>(0)
+
 #endif  // BUILDING_STATIC
 
 #endif  // PHYSICS_MACRO_USER_MACRO_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/04/01 13:50)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 11:12)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,9 +20,6 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/APointDetail.h"
-
-using std::string;
-using std::vector;
 
 Rendering::CameraNodeImpl::CameraNodeImpl(const CameraSharedPtr& camera) noexcept
     : camera{ camera }
@@ -69,7 +66,7 @@ void Rendering::CameraNodeImpl::SetFrame(const APoint& position, const AVector& 
     camera.object->SetFrame(position, directionVector, upVector, rightVector);
 }
 
-CoreTools::ObjectSharedPtr Rendering::CameraNodeImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::CameraNodeImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -77,7 +74,7 @@ CoreTools::ObjectSharedPtr Rendering::CameraNodeImpl::GetObjectByName(const stri
     return camera.object->GetObjectByName(name);
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::CameraNodeImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::CameraNodeImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -85,7 +82,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::CameraNodeImpl::GetAllObjectsByNam
     return camera.object->GetAllObjectsByName(name);
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::CameraNodeImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::CameraNodeImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -93,7 +90,7 @@ CoreTools::ConstObjectSharedPtr Rendering::CameraNodeImpl::GetConstObjectByName(
     return camera.object->GetConstObjectByName(name);
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::CameraNodeImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::CameraNodeImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");

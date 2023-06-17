@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/27 11:04)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:25)
 
 #include "Query3Int64Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
@@ -22,14 +23,8 @@
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Query/Query3Int64Detail.h"
 #include "Mathematics/Query/QuerySortTools.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::swap;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -60,20 +55,20 @@ void Mathematics::Query3Int64Testing::MainTest()
 
 void Mathematics::Query3Int64Testing::VerticesTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
+            vertices.emplace_back(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
         }
 
         Query3Int64D query(vertices);
@@ -90,23 +85,23 @@ void Mathematics::Query3Int64Testing::VerticesTest()
 
 void Mathematics::Query3Int64Testing::PlaneTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
+            vertices.emplace_back(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
         }
 
-        const uniform_int<> thirdRandomDistribution(0, size - 1);
+        const std::uniform_int<> thirdRandomDistribution(0, size - 1);
 
         auto secondIndex = thirdRandomDistribution(generator);
         auto thirdIndex = thirdRandomDistribution(generator);
@@ -122,23 +117,23 @@ void Mathematics::Query3Int64Testing::PlaneTest()
 
 void Mathematics::Query3Int64Testing::TetrahedronTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
+            vertices.emplace_back(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
         }
 
-        const uniform_int<> thirdRandomDistribution(0, size - 1);
+        const std::uniform_int<> thirdRandomDistribution(0, size - 1);
 
         auto firstIndex = thirdRandomDistribution(generator);
         auto secondIndex = thirdRandomDistribution(generator);
@@ -150,7 +145,7 @@ void Mathematics::Query3Int64Testing::TetrahedronTest()
 
         if (query.ToPlane(secondIndex, thirdIndex, fourthIndex, fifthIndex) == PlaneQueryType::PositiveSide)
         {
-            swap(secondIndex, thirdIndex);
+            std::swap(secondIndex, thirdIndex);
         }
 
         ASSERT_ENUM_EQUAL(query.ToTetrahedron(secondIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
@@ -182,23 +177,23 @@ void Mathematics::Query3Int64Testing::TetrahedronTest()
 
 void Mathematics::Query3Int64Testing::CircumspherTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (auto i = 0; i < size; ++i)
         {
-            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
+            vertices.emplace_back(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
         }
 
-        const uniform_int<> thirdRandomDistribution(0, size - 1);
+        const std::uniform_int<> thirdRandomDistribution(0, size - 1);
 
         auto secondIndex = thirdRandomDistribution(generator);
         auto thirdIndex = thirdRandomDistribution(generator);

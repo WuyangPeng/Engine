@@ -1,21 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/30 11:33)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:20)
 
 #include "Polyhedron3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Objects3D/Polyhedron3Detail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
+#include "Mathematics/Objects3D/Polyhedron3Detail.h"
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -43,50 +41,50 @@ void Mathematics::Polyhedron3Testing::MainTest()
 
 void Mathematics::Polyhedron3Testing::PolyhedronTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> firstRandomDistribution(0.0, 100.0);
-    const uniform_real<double> secondRandomDistribution(-100.0, 0.0);
+    const std::uniform_real<double> randomDistribution0(0.0, 100.0);
+    const std::uniform_real<double> randomDistribution1(-100.0, 0.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D firstVector(firstRandomDistribution(generator),
-                                   secondRandomDistribution(generator),
-                                   firstRandomDistribution(generator));
+        const Vector3D vector0(randomDistribution0(generator),
+                               randomDistribution1(generator),
+                               randomDistribution0(generator));
 
-        const Vector3D secondVector(firstRandomDistribution(generator),
-                                    secondRandomDistribution(generator),
-                                    secondRandomDistribution(generator));
+        const Vector3D vector1(randomDistribution0(generator),
+                               randomDistribution1(generator),
+                               randomDistribution1(generator));
 
-        const Vector3D thirdVector(firstRandomDistribution(generator),
-                                   firstRandomDistribution(generator),
-                                   secondRandomDistribution(generator));
+        const Vector3D vector2(randomDistribution0(generator),
+                               randomDistribution0(generator),
+                               randomDistribution1(generator));
 
-        const Vector3D fourthVector(firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator));
+        const Vector3D vector3(randomDistribution0(generator),
+                               randomDistribution0(generator),
+                               randomDistribution0(generator));
 
-        const Vector3D fifthVector(secondRandomDistribution(generator),
-                                   secondRandomDistribution(generator),
-                                   firstRandomDistribution(generator));
+        const Vector3D vector4(randomDistribution1(generator),
+                               randomDistribution1(generator),
+                               randomDistribution0(generator));
 
-        const Vector3D sixthVector(secondRandomDistribution(generator),
-                                   secondRandomDistribution(generator),
-                                   secondRandomDistribution(generator));
+        const Vector3D vector5(randomDistribution1(generator),
+                               randomDistribution1(generator),
+                               randomDistribution1(generator));
 
-        const Vector3D seventhVector(secondRandomDistribution(generator),
-                                     firstRandomDistribution(generator),
-                                     secondRandomDistribution(generator));
+        const Vector3D seventhVector(randomDistribution1(generator),
+                                     randomDistribution0(generator),
+                                     randomDistribution1(generator));
 
-        const Vector3D eighthVector(secondRandomDistribution(generator),
-                                    firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator));
+        const Vector3D eighthVector(randomDistribution1(generator),
+                                    randomDistribution0(generator),
+                                    randomDistribution0(generator));
 
         constexpr int numVertices = 8;
 
-        Polyhedron3D::VerticesType vector3{ firstVector, secondVector, thirdVector, fourthVector, fifthVector, sixthVector, seventhVector, eighthVector };
+        Polyhedron3D::VerticesType vertices{ vector0, vector1, vector2, vector3, vector4, vector5, seventhVector, eighthVector };
 
         constexpr int numTriangles = 12;
 
@@ -140,22 +138,22 @@ void Mathematics::Polyhedron3Testing::PolyhedronTest()
             4
         };
 
-        Polyhedron3D polyhedron{ vector3, intPtr };
+        Polyhedron3D polyhedron{ vertices, intPtr };
 
         ASSERT_EQUAL(numVertices, polyhedron.GetNumVertices());
-        ASSERT_EQUAL(vector3, polyhedron.GetVertices());
+        ASSERT_EQUAL(vertices, polyhedron.GetVertices());
 
         ASSERT_EQUAL(numTriangles, polyhedron.GetNumTriangles());
         ASSERT_EQUAL(numTriangles * 3, polyhedron.GetNumIndices());
 
         ASSERT_EQUAL(intPtr, polyhedron.GetIndices());
 
-        const Vector3D ninthVector(secondRandomDistribution(generator), secondRandomDistribution(generator), secondRandomDistribution(generator));
+        const Vector3D ninthVector(randomDistribution1(generator), randomDistribution1(generator), randomDistribution1(generator));
 
-        Vector3D average = vector3.at(0);
+        Vector3D average = vertices.at(0);
         for (int m = 1; m < numVertices; ++m)
         {
-            average += vector3.at(m);
+            average += vertices.at(m);
         }
 
         average /= static_cast<double>(numVertices);
@@ -174,11 +172,11 @@ void Mathematics::Polyhedron3Testing::PolyhedronTest()
             const auto v0 = intPtr.at(k0);
             const auto v1 = intPtr.at(k1);
             const auto v2 = intPtr.at(k2);
-            const auto edge0 = vector3.at(v1) - vector3.at(v0);
-            const auto edge1 = vector3.at(v2) - vector3.at(v0);
+            const auto edge0 = vertices.at(v1) - vertices.at(v0);
+            const auto edge1 = vertices.at(v2) - vertices.at(v0);
             const auto cross = Vector3ToolsD::CrossProduct(edge0, edge1);
             surfaceArea += Vector3ToolsD::GetLength(cross);
-            volume += Vector3ToolsD::DotProduct(vector3.at(v0), cross);
+            volume += Vector3ToolsD::DotProduct(vertices.at(v0), cross);
         }
 
         surfaceArea *= 0.5;

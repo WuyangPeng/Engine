@@ -19,9 +19,6 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{87ddb33b-e291-4d32-b6f3-f5992a906761}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AbuseSuite 头文件">
-      <UniqueIdentifier>{6063e32c-ae19-4d2b-a4cb-73a705a59847}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AglRendererSuite 头文件">
       <UniqueIdentifier>{18cf75a8-1af1-489a-9160-1390e5729b1c}</UniqueIdentifier>
     </Filter>
@@ -52,29 +49,17 @@
     <Filter Include="DataTypesSuite 源文件">
       <UniqueIdentifier>{427547c9-7635-45d0-a68e-a5d7bbd3f43a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DemoglSuite 头文件">
-      <UniqueIdentifier>{eb154224-d980-425d-aa42-8441860b8400}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DemoglSuite 源文件">
-      <UniqueIdentifier>{8339d690-efb4-4cef-8cd9-0744424722a7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DetailSuite 头文件">
       <UniqueIdentifier>{705f876c-4882-4863-8ed0-e5f67626135d}</UniqueIdentifier>
     </Filter>
     <Filter Include="DetailSuite 源文件">
       <UniqueIdentifier>{c081f56a-e4a3-4c7e-b950-a04777f25753}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DevILSuite 头文件">
-      <UniqueIdentifier>{9e6ef146-05c8-4b75-b4dd-727b3a87f216}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DirectAPISuite 头文件">
       <UniqueIdentifier>{f68ce5fb-9ca9-4f22-9eca-5db3b8256291}</UniqueIdentifier>
     </Filter>
     <Filter Include="Dx9RendererSuite 头文件">
       <UniqueIdentifier>{bc44cfd3-ca3c-40d3-8bdd-a1907bb5fa04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FBXSuite 头文件">
-      <UniqueIdentifier>{d34e2e2a-2557-4584-84c2-5d3261033678}</UniqueIdentifier>
     </Filter>
     <Filter Include="GlobalEffectsSuite 头文件">
       <UniqueIdentifier>{c3d1a2bb-b117-46f4-9cae-4fec2dbf2bc1}</UniqueIdentifier>
@@ -91,23 +76,8 @@
     <Filter Include="ImageProcessingSuite 头文件">
       <UniqueIdentifier>{ad3dd38d-76c2-4b28-ba89-6358ed01d480}</UniqueIdentifier>
     </Filter>
-    <Filter Include="JPEGSuite 头文件">
-      <UniqueIdentifier>{0b7a7b7f-25b8-40aa-800f-fb8f47fe4a08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lib3dsSuite 头文件">
-      <UniqueIdentifier>{2c63014a-1246-419b-a7b9-afca6dbea49f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="MacroSuite 头文件">
-      <UniqueIdentifier>{3435d96f-cc05-4b64-a5ee-517cf2a32c25}</UniqueIdentifier>
-    </Filter>
     <Filter Include="LocalEffectsSuite 头文件">
       <UniqueIdentifier>{2cddabb7-133d-4d15-b8a0-e96940e3262f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NethackSuite 头文件">
-      <UniqueIdentifier>{46588087-d7ee-4f00-bb3b-6deb1ddbca4b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NvtoolkitSuite 头文件">
-      <UniqueIdentifier>{3b37f144-9054-476c-94db-de81fcc75d77}</UniqueIdentifier>
     </Filter>
     <Filter Include="OpenGLAPISuite 头文件">
       <UniqueIdentifier>{88472eac-1e07-4d92-90b0-272e880a5bf5}</UniqueIdentifier>
@@ -117,12 +87,6 @@
     </Filter>
     <Filter Include="OpenGLRendererSuite 源文件">
       <UniqueIdentifier>{fa73230f-02ad-4b1a-8e23-90516b19ece5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OpenvidiaSuite 头文件">
-      <UniqueIdentifier>{e0654c99-3df4-4ab2-adcc-d3a2b3cc125a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OpenvidiaSuite 源文件">
-      <UniqueIdentifier>{c882e19c-cc44-4244-8af6-3c07d3d57fb4}</UniqueIdentifier>
     </Filter>
     <Filter Include="PictureSuite 头文件">
       <UniqueIdentifier>{2504fe85-f5bd-4282-8bb1-99bf4efe177d}</UniqueIdentifier>
@@ -166,20 +130,11 @@
     <Filter Include="TextFontsSuite 头文件">
       <UniqueIdentifier>{01abc935-bc92-426a-aebb-7b7a43ce1035}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TIFFSuite 头文件">
-      <UniqueIdentifier>{a99b4fa3-7672-4c7c-bee6-7cf4f84fc629}</UniqueIdentifier>
-    </Filter>
     <Filter Include="VertexSuite 头文件">
       <UniqueIdentifier>{fb3b6898-a937-4d1e-b77f-5e0b7a3d8e62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="WargamerSuite 头文件">
-      <UniqueIdentifier>{2d27e2aa-4558-4440-a142-6bdbabb33305}</UniqueIdentifier>
-    </Filter>
     <Filter Include="WglRendererSuite 头文件">
       <UniqueIdentifier>{3786e173-abd7-4028-a02a-65fc66457d32}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="WingSuite">
-      <UniqueIdentifier>{e2c5f817-b9f3-4c9f-9fc4-7a538599df24}</UniqueIdentifier>
     </Filter>
     <Filter Include="资源文件\ResourcesSuite">
       <UniqueIdentifier>{ce87f0a0-1820-473f-8e45-81bc877eeddd}</UniqueIdentifier>
@@ -219,6 +174,9 @@
     </Filter>
     <Filter Include="StateSuite 源文件\Detail">
       <UniqueIdentifier>{a3b4921d-f130-4ac1-8c78-452051136f62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件">
+      <UniqueIdentifier>{3435d96f-cc05-4b64-a5ee-517cf2a32c25}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -362,9 +320,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\Testing.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\AbuseSuite\AbuseSuite.h">
-      <Filter>AbuseSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\AglRendererSuite\AglRendererSuite.h">
       <Filter>AglRendererSuite 头文件</Filter>
     </ClInclude>
@@ -479,9 +434,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DataTypesSuite\ColourConvertToTesting.h">
       <Filter>DataTypesSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DemoglSuite\DemoglSuite.h">
-      <Filter>DemoglSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DetailSuite\ClodMeshTesting.h">
       <Filter>DetailSuite 头文件</Filter>
     </ClInclude>
@@ -512,9 +464,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\Dx9RendererSuite\Dx9RendererSuite.h">
       <Filter>Dx9RendererSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\FBXSuite\FBXSuite.h">
-      <Filter>FBXSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\GlobalEffectsSuite\GlobalEffectsSuite.h">
       <Filter>GlobalEffectsSuite 头文件</Filter>
     </ClInclude>
@@ -530,23 +479,8 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ImageProcessingSuite\ImageProcessingSuite.h">
       <Filter>ImageProcessingSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\JPEGSuite\JPEGSuite.h">
-      <Filter>JPEGSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\Lib3dsSuite\Lib3dsSuite.h">
-      <Filter>Lib3dsSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\LocalEffectsSuite\LocalEffectsSuite.h">
       <Filter>LocalEffectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\MacroSuite\MacroSuite.h">
-      <Filter>MacroSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\NethackSuite\NethackSuite.h">
-      <Filter>NethackSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\NvtoolkitSuite\NvtoolkitSuite.h">
-      <Filter>NvtoolkitSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\OpenGLAPISuite\OpenGLAPISuite.h">
       <Filter>OpenGLAPISuite 头文件</Filter>
@@ -571,9 +505,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\OpenGLRendererSuite\OpenGLVertexFormatDataTesting.h">
       <Filter>OpenGLRendererSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\OpenvidiaSuite\OpenvidiaSuite.h">
-      <Filter>OpenvidiaSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\PictureSuite\PictureSuite.h">
       <Filter>PictureSuite 头文件</Filter>
@@ -917,26 +848,14 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\TextFontsSuite\TextFontsSuite.h">
       <Filter>TextFontsSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\TIFFSuite\TIFFSuite.h">
-      <Filter>TIFFSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\VertexSuite\VertexSuite.h">
       <Filter>VertexSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\WargamerSuite\WargamerSuite.h">
-      <Filter>WargamerSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\WglRendererSuite\WglRendererSuite.h">
       <Filter>WglRendererSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\WingSuite\WingSuite.h">
-      <Filter>WingSuite</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DataTypesSuite\ColourManagerTesting.h">
       <Filter>DataTypesSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DevILSuite\DevILSuite.h">
-      <Filter>DevILSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\WindowsParameterTesting.h">
       <Filter>RenderersSuite 头文件</Filter>
@@ -988,6 +907,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\RasterizerStateTesting.h">
       <Filter>StateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\HelperSuite\HelperSuite.h">
+      <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

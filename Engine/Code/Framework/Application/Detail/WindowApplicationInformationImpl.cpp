@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/06 11:27)
+///	引擎版本：0.9.0.12 (2023/06/13 14:49)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,8 +13,6 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Rendering/Renderers/RendererParameter.h"
-
-using std::string;
 
 Framework::WindowApplicationInformationImpl::WindowApplicationInformationImpl(const String& windowTitle, const WindowSize& size, const WindowPoint& point, bool allowResize)
     : windowTitle{ windowTitle },
@@ -111,7 +109,7 @@ float Framework::WindowApplicationInformationImpl::GetAspectRatio() const noexce
         return 0.0f;
 }
 
-string Framework::WindowApplicationInformationImpl::GetWindowTitleWithMultiByte() const
+std::string Framework::WindowApplicationInformationImpl::GetWindowTitleWithMultiByte() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 

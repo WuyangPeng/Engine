@@ -33,7 +33,7 @@
       <Configuration>StaticRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  </ItemGroup>  
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{0148D50C-1264-4C30-B500-0AE083AA40FB}</ProjectGuid>
@@ -279,9 +279,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Example\AssistTools\AssistToolsExample\DllLib.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\AssistTools\AssistToolsExample\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\AssistTools\AssistToolsExample\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\AssistTools\AssistToolsExample\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\AssistTools\AssistToolsExample\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\AssistTools\AssistToolsExample\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\AssistTools\AssistToolsExample\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\..\Code\Example\AssistTools\AssistToolsExample\Placeholder\Placeholder.h" />
     <ClInclude Include="..\..\..\..\Code\Example\AssistTools\AssistToolsExample\AssistToolsExample.h" />
     <ClInclude Include="..\..\..\..\Code\Example\AssistTools\AssistToolsExample\AssistToolsExampleDll.h" />

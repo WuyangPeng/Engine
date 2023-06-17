@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/02 22:13)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:04)
 
 #include "MinimizeNDataTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/NumericalAnalysis/MinimizeNDataDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::vector;
+#include "Mathematics/NumericalAnalysis/MinimizeNDataDetail.h"
 
 namespace Mathematics
 {
@@ -40,7 +39,7 @@ void Mathematics::MinimizeNDataTesting::MainTest()
 
 void Mathematics::MinimizeNDataTesting::DataTest()
 {
-    vector<double> minLocation{ 6.0, 5.0, 4.0, 3.0, 2.0 };
+    std::vector<double> minLocation{ 6.0, 5.0, 4.0, 3.0, 2.0 };
 
     MinimizeNDataD firstMinimize1Data(minLocation, 50.0);
 

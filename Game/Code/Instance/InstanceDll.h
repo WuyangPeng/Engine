@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.8.0.11 (2022/07/19 14:04)
+///	引擎游戏版本：0.9.0.12 (2023/06/16 16:53)
 
 #ifndef INSTANCE_DLL_H
 #define INSTANCE_DLL_H
@@ -16,8 +16,17 @@
 #if defined(BUILDING_INSTANCE_NO_IMPORT) || defined(BUILDING_INSTANCE_STATIC)
 
     #define INSTANCE_DEFAULT_DECLARE
-    #define INSTANCE_HIDDEN_DECLARE
     #define INSTANCE_VISIBLE
+
+    #if defined(BUILDING_INSTANCE_EXPORT)
+
+        #define INSTANCE_HIDDEN_DECLARE
+
+    #else  // !defined(BUILDING_INSTANCE_EXPORT)
+
+        #define INSTANCE_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_INSTANCE_EXPORT
 
 #else  // !defined(BUILDING_INSTANCE_NO_IMPORT) && !defined(BUILDING_INSTANCE_STATIC)
 

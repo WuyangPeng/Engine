@@ -1,25 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/26 17:03)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:43)
 
 #include "RationalTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Rational/IntegerDetail.h"
 #include "Mathematics/Rational/SignRationalDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 #include <limits>
 #include <random>
-
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
 
 namespace Mathematics
 {
@@ -51,22 +47,22 @@ void Mathematics::RationalTesting::MainTest()
 
 void Mathematics::RationalTesting::ConstructionTest()
 {
-    default_random_engine generator{};
-    const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
-    const uniform_real<float> secondRandomDistribution(-1.0e38f, 1.0e38f);
-    const uniform_real<double> thirdRandomDistribution(-1.0e300, 1.0e300);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
+    const std::uniform_real<float> randomDistribution1(-1.0e38f, 1.0e38f);
+    const std::uniform_real<double> thirdRandomDistribution(-1.0e300, 1.0e300);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        vector<uint16_t> firstShortVector(26);
-        vector<uint16_t> secondShortVector(26);
+        std::vector<uint16_t> firstShortVector(26);
+        std::vector<uint16_t> secondShortVector(26);
 
         for (auto i = 0; i < 26; ++i)
         {
-            firstShortVector.at(i) = firstRandomDistribution(generator);
-            secondShortVector.at(i) = firstRandomDistribution(generator);
+            firstShortVector.at(i) = randomDistribution0(generator);
+            secondShortVector.at(i) = randomDistribution0(generator);
         }
 
         const Integer<13> firstInteger(firstShortVector);
@@ -102,7 +98,7 @@ void Mathematics::RationalTesting::ConstructionTest()
         ASSERT_EQUAL(fifthRational.GetNumerator(), Integer<13>(firstShortVector.at(0)));
         ASSERT_EQUAL(fifthRational.GetDenominator(), Integer<13>(firstShortVector.at(1)));
 
-        const float firstValue = secondRandomDistribution(generator);
+        const float firstValue = randomDistribution1(generator);
 
         const SignRational<13> sixthRational(firstValue);
 
@@ -130,22 +126,22 @@ void Mathematics::RationalTesting::ConstructionTest()
 
 void Mathematics::RationalTesting::AccessTest()
 {
-    default_random_engine generator{};
-    const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        vector<uint16_t> firstShortVector(30);
-        vector<uint16_t> secondShortVector(30);
-        vector<uint16_t> thirdShortVector(30);
+        std::vector<uint16_t> firstShortVector(30);
+        std::vector<uint16_t> secondShortVector(30);
+        std::vector<uint16_t> thirdShortVector(30);
 
         for (auto i = 0; i < 7; ++i)
         {
-            firstShortVector.at(i) = firstRandomDistribution(generator);
-            secondShortVector.at(i) = firstRandomDistribution(generator);
-            thirdShortVector.at(i) = firstRandomDistribution(generator);
+            firstShortVector.at(i) = randomDistribution0(generator);
+            secondShortVector.at(i) = randomDistribution0(generator);
+            thirdShortVector.at(i) = randomDistribution0(generator);
         }
 
         secondShortVector.at(0) |= gsl::narrow_cast<uint16_t>(1);
@@ -179,24 +175,24 @@ void Mathematics::RationalTesting::AccessTest()
 
 void Mathematics::RationalTesting::OperatorTest()
 {
-    default_random_engine generator{};
-    const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        vector<uint16_t> firstShortVector(30);
-        vector<uint16_t> secondShortVector(30);
-        vector<uint16_t> thirdShortVector(30);
-        vector<uint16_t> fourthShortVector(30);
+        std::vector<uint16_t> firstShortVector(30);
+        std::vector<uint16_t> secondShortVector(30);
+        std::vector<uint16_t> thirdShortVector(30);
+        std::vector<uint16_t> fourthShortVector(30);
 
         for (int i = 0; i < 7; ++i)
         {
-            firstShortVector.at(i) = firstRandomDistribution(generator);
-            secondShortVector.at(i) = firstRandomDistribution(generator);
-            thirdShortVector.at(i) = firstRandomDistribution(generator);
-            fourthShortVector.at(i) = firstRandomDistribution(generator);
+            firstShortVector.at(i) = randomDistribution0(generator);
+            secondShortVector.at(i) = randomDistribution0(generator);
+            thirdShortVector.at(i) = randomDistribution0(generator);
+            fourthShortVector.at(i) = randomDistribution0(generator);
         }
 
         const Integer<15> firstInteger(firstShortVector);
@@ -289,24 +285,24 @@ void Mathematics::RationalTesting::OperatorTest()
 
 void Mathematics::RationalTesting::CompareTest()
 {
-    default_random_engine generator{};
-    const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        vector<uint16_t> firstShortVector(30);
-        vector<uint16_t> secondShortVector(30);
-        vector<uint16_t> thirdShortVector(30);
-        vector<uint16_t> fourthShortVector(30);
+        std::vector<uint16_t> firstShortVector(30);
+        std::vector<uint16_t> secondShortVector(30);
+        std::vector<uint16_t> thirdShortVector(30);
+        std::vector<uint16_t> fourthShortVector(30);
 
         for (auto i = 0; i < 7; ++i)
         {
-            firstShortVector.at(i) = firstRandomDistribution(generator);
-            secondShortVector.at(i) = firstRandomDistribution(generator);
-            thirdShortVector.at(i) = firstRandomDistribution(generator);
-            fourthShortVector.at(i) = firstRandomDistribution(generator);
+            firstShortVector.at(i) = randomDistribution0(generator);
+            secondShortVector.at(i) = randomDistribution0(generator);
+            thirdShortVector.at(i) = randomDistribution0(generator);
+            fourthShortVector.at(i) = randomDistribution0(generator);
         }
 
         const Integer<15> firstInteger(firstShortVector);
@@ -341,22 +337,22 @@ void Mathematics::RationalTesting::CompareTest()
 
 void Mathematics::RationalTesting::EliminatePowersOfTwoTest()
 {
-    default_random_engine generator{};
-    const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
-    const uniform_real<float> secondRandomDistribution(-1.0e38f, 1.0e38f);
-    const uniform_real<double> thirdRandomDistribution(-1.0e300, 1.0e300);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
+    const std::uniform_real<float> randomDistribution1(-1.0e38f, 1.0e38f);
+    const std::uniform_real<double> thirdRandomDistribution(-1.0e300, 1.0e300);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        vector<uint16_t> firstShortVector(26);
-        vector<uint16_t> secondShortVector(26);
+        std::vector<uint16_t> firstShortVector(26);
+        std::vector<uint16_t> secondShortVector(26);
 
         for (auto i = 0; i < 26; ++i)
         {
-            firstShortVector.at(i) = firstRandomDistribution(generator);
-            secondShortVector.at(i) = firstRandomDistribution(generator);
+            firstShortVector.at(i) = randomDistribution0(generator);
+            secondShortVector.at(i) = randomDistribution0(generator);
         }
 
         const Integer<13> firstInteger(firstShortVector);

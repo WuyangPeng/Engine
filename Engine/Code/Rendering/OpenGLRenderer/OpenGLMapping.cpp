@@ -1,16 +1,15 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/22 15:49)
+///	引擎版本：0.9.0.12 (2023/06/12 13:22)
 
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLMapping.h"
-
 
 Rendering::Int Rendering::OpenGLConstant::GetOpenGLAttributeChannels(int index)
 {
@@ -82,7 +81,7 @@ Rendering::UInt Rendering::OpenGLConstant::GetOpenGLTextureFormat(int index)
 {
     static std::array<Enum, System::EnumCastUnderlying(TextureFormat::Quantity)> result{
         0,
-        static_cast<GLenum>(System::TextureFormat::BGR),  //GL_BGR,
+        static_cast<GLenum>(System::TextureFormat::BGR),  // GL_BGR,
         static_cast<GLenum>(System::TextureFormat::RGBA),  // GL_RGBA
         static_cast<GLenum>(System::TextureFormat::RGBA),  // GL_RGBA
         static_cast<GLenum>(System::TextureFormat::A),  // GL_ALPHA,

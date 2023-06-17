@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/23 16:00)
+///	引擎版本：0.9.0.12 (2023/06/12 13:22)
 
 #include "Rendering/RenderingExport.h"
 
@@ -13,14 +13,13 @@
 #include "OpenGLMapping.h"
 #include "OpenGLRenderTargetDataImpl.h"
 #include "OpenGLTexture2D.h"
-
+#include "System/OpenGL/OpenGLBase.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/PlatformTexture2D.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Resources/Textures/DrawTarget.h"
-#include "System/OpenGL/OpenGLBase.h"
 
 Rendering::OpenGLRenderTargetDataImpl::OpenGLRenderTargetDataImpl(Renderer* renderer, const DrawTarget* renderTarget)
     : numTargets{ renderTarget != nullptr ? renderTarget->GetNumTargets() : 0 },
@@ -49,7 +48,7 @@ void Rendering::OpenGLRenderTargetDataImpl::CreateFramebufferObject() noexcept
     // 创建帧缓冲区对象。
 }
 
-System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl::CreateDrawBuffers(Renderer* renderer,const DrawTarget* aRenderTarget)
+System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl::CreateDrawBuffers(Renderer* renderer, const DrawTarget* aRenderTarget)
 {
     const auto previousBind = GetBoundTexture(ShaderFlags::SamplerType::Sampler2D);
 

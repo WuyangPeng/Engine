@@ -1,20 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.8.0.11 (2022/07/13 17:04)
+///	引擎游戏版本：0.9.0.12 (2023/06/16 13:16)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_GAME_VERSION_H
 #define THREADING_CORE_RENDER_ENGINE_GAME_VERSION_H
 
-//  g_TCREGameVersion % 100 是修订版本号
-//  g_TCREGameVersion / 100 % 100 是内部版本号
-//  g_TCREGameVersion / 10000 % 100 是次版本号
-//  g_TCREGameVersion / 1000000 % 100 是主版本号
+//  gTCREGameVersion % 100 是修订版本号
+//  gTCREGameVersion / 100 % 100 是内部版本号
+//  gTCREGameVersion / 10000 % 100 是次版本号
+//  gTCREGameVersion / 1000000 % 100 是主版本号
 
-constexpr auto g_TCREGameVersion = 80011;
+constexpr auto gTCREGameVersion = 90012;
 
 #endif  // THREADING_CORE_RENDER_ENGINE_GAME_VERSION_H

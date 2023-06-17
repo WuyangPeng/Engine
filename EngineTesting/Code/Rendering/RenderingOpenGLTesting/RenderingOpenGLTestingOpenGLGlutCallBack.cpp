@@ -1,18 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/17 22:17)
+///	引擎测试版本：0.9.0.12 (2023/06/12 14:45)
 
 #include "RenderingOpenGLTestingOpenGLGlutCallBack.h"
 #include "Testing.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
-
-using std::string;
 
 Rendering::RenderingOpenGLTestingOpenGLGlutCallBack::RenderingOpenGLTestingOpenGLGlutCallBack(int64_t delta)
     : ParentType{ delta, "【渲染库】OpenGL单元测试套件" }
@@ -28,7 +27,7 @@ void Rendering::RenderingOpenGLTestingOpenGLGlutCallBack::AddSuite()
     AddOpenGLRendererSuite();
 }
 
-string Rendering::RenderingOpenGLTestingOpenGLGlutCallBack::GetSuiteName() const
+std::string Rendering::RenderingOpenGLTestingOpenGLGlutCallBack::GetSuiteName() const
 {
     return "【渲染库】OpenGL单元测试套件";
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/06 11:18)
+///	引擎版本：0.9.0.12 (2023/06/13 14:45)
 
 #include "Framework/FrameworkExport.h"
 
@@ -16,14 +16,13 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Framework/WindowProcess/WindowProcessManager.h"
 
-using std::make_shared;
 using namespace std::literals;
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, FontInformationImpl)
 
 Framework::FontInformationImpl::FontInformationImplSharedPtr Framework::FontInformationImpl::Create(WindowsHWnd hwnd)
 {
-    return make_shared<WindowFontInformation>(hwnd);
+    return std::make_shared<WindowFontInformation>(hwnd);
 }
 
 Framework::FontInformationImpl::FontInformationImplSharedPtr Framework::FontInformationImpl::Create(PlatformTypes type)
@@ -32,7 +31,7 @@ Framework::FontInformationImpl::FontInformationImplSharedPtr Framework::FontInfo
     {
         case PlatformTypes::Glut:
         {
-            return make_shared<GlutFontInformation>();
+            return std::make_shared<GlutFontInformation>();
         }
 
         case PlatformTypes::Window:

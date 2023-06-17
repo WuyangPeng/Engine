@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/04/29 11:06)
+///	引擎版本：0.9.0.12 (2022/04/29 11:06)
 
 #include "AssistTools/AssistToolsExport.h"
 
@@ -84,7 +84,7 @@ namespace %SolutionName%
 
 #include "%SolutionName%.h"
 #include "%SolutionName%Helper.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "CoreTools/MemoryTools/SubclassSharedPtrDetail.h"
 #include "Framework/MainFunctionHelper/WindowMainFunctionHelperDetail.h"
 #include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h"

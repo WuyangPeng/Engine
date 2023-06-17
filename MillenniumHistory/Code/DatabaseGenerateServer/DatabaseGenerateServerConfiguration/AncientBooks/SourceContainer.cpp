@@ -27,9 +27,11 @@ AncientBooks::SourceContainer::SourceContainer(const CoreTools::CSVContent& csvC
 void AncientBooks::SourceContainer::Parsing(const CoreTools::CSVContent& csvContent)
 {
     const auto size = csvContent.GetCount();
+    const auto csvHead = csvContent.GetCSVHead();
+
     for (auto i = 0; i < size; ++i)
     {
-        CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
 
         source.emplace_back(std::make_shared<Source>(csvRow));
     }

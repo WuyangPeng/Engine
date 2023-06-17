@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 13:48)
+///	引擎版本：0.9.0.12 (2023/06/13 14:26)
 
 #include "Framework/FrameworkExport.h"
 
@@ -14,10 +14,6 @@
 #include "Detail/ModelMiddleLayerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::make_shared;
-using std::move;
-using std::string;
 
 namespace Framework
 {
@@ -31,7 +27,7 @@ Framework::ModelMiddleLayer::ModelMiddleLayer(MiddleLayerPlatform middleLayerPla
 }
 
 Framework::ModelMiddleLayer::ModelMiddleLayer(ModelMiddleLayer&& rhs) noexcept
-    : ParentType{ move(rhs) }, impl{ move(rhs.impl) }
+    : ParentType{ move(rhs) }, impl{ std::move(rhs.impl) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -42,7 +38,7 @@ Framework::ModelMiddleLayer& Framework::ModelMiddleLayer::operator=(ModelMiddleL
 
     ParentType::operator=(move(rhs));
 
-    impl = move(rhs.impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
@@ -50,7 +46,7 @@ Framework::ModelMiddleLayer& Framework::ModelMiddleLayer::operator=(ModelMiddleL
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, ModelMiddleLayer)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ModelMiddleLayer, GetFrameRate, double)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ModelMiddleLayer, GetFrameRateMessage, string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ModelMiddleLayer, GetFrameRateMessage, std::string)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ModelMiddleLayer, ResetTime, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ModelMiddleLayer, MeasureTime, void)

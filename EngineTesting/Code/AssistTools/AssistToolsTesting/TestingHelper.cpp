@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/22 15:35)
+///	引擎测试版本：0.9.0.12 (2023/06/13 10:39)
 
 #include "Testing.h"
 #include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
@@ -27,7 +27,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, TestingHelper)
 // private
 void AssistTools::TestingHelper::InitSuite()
 {
-    AddMacroSuite();
+    AddHelperSuite();
     AddGenerateProjectsSuite();
     AddFeaturesImporterSuite();
     AddBmpColorToGraySuite();
@@ -35,11 +35,11 @@ void AssistTools::TestingHelper::InitSuite()
     AddWmfxCompilerSuite();
 }
 
-void AssistTools::TestingHelper::AddMacroSuite()
+void AssistTools::TestingHelper::AddHelperSuite()
 {
-    auto macroSuite = GenerateSuite("宏");
+    auto helperSuite = GenerateSuite("宏");
 
-    AddSuite(macroSuite);
+    AddSuite(helperSuite);
 }
 
 void AssistTools::TestingHelper::AddGenerateProjectsSuite()

@@ -1,21 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/15 11:11)
+///	引擎测试版本：0.9.0.12 (2023/06/12 15:34)
 
 #include "ProjectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/InTopLevel.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/AxesAlignBoundingBox2Detail.h"
@@ -29,9 +30,18 @@
 #include <random>
 #include <vector>
 
-using std::vector;
+Rendering::ProjectorTesting::ProjectorTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, ProjectorTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ProjectorTesting)
+
+void Rendering::ProjectorTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Rendering::ProjectorTesting::MainTest()
 {
@@ -39,7 +49,7 @@ void Rendering::ProjectorTesting::MainTest()
 
     CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(RendererTypes::Default);
 
-    CoreTools::InitTerm::ExecuteInitializers();
+    CoreTools::InitTerm::ExecuteInitializer();
 
     ASSERT_NOT_THROW_EXCEPTION_0(FrameTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FrustumTest);
@@ -47,7 +57,7 @@ void Rendering::ProjectorTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AxesAlignBoundingBoxTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
 
-    CoreTools::InitTerm::ExecuteTerminators();
+    CoreTools::InitTerm::ExecuteTerminator();
 
     CameraManager::Destroy();
 }
@@ -515,7 +525,7 @@ void Rendering::ProjectorTesting::AxesAlignBoundingBoxTest()
         const Camera::Matrix viewProjectionMatrix = firstCamera.GetProjectionMatrix() * firstCamera.GetViewMatrix();
         const Camera::Matrix worldViewProjectionMatrix = viewProjectionMatrix * firstMatrix;
 
-        vector<float> buffer;
+        std::vector<float> buffer;
         constexpr int numVertices = 100;
 
         for (int i = 0; i < numVertices * 3; ++i)
@@ -568,7 +578,7 @@ void Rendering::ProjectorTesting::AxesAlignBoundingBoxTest()
             }
         }
 
-        const Camera::AxesAlignBoundingBox2D resultAabb = Mathematics::AxesAlignBoundingBox2D(xmin, xmax, ymin, ymax);
+        const Camera::AxesAlignBoundingBox2D resultAabb = Camera::AxesAlignBoundingBox2D(xmin, xmax, ymin, ymax);
 
         ASSERT_TRUE(Mathematics::Vector2ToolsF::Approximate(resultAabb.GetMinPoint(), aabb.GetMinPoint(), 1e-4f));
         ASSERT_TRUE(Mathematics::Vector2ToolsF::Approximate(resultAabb.GetMaxPoint(), aabb.GetMaxPoint(), 1e-3f));

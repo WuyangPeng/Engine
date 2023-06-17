@@ -1,24 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/06 17:59)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:52)
 
 #include "StaticFindIntersectorArc2Circle2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorArc2Circle2Detail.h"
 #include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorCircle2Circle2.h"
 #include "Mathematics/Objects2D/Arc2Detail.h"
 #include "Mathematics/Objects2D/Circle2Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::swap;
-using std::vector;
+#include <random>
 
 Mathematics::StaticFindIntersectorArc2Circle2Testing::StaticFindIntersectorArc2Circle2Testing(const OStreamShared& streamShared)
     : ParentType{ streamShared }
@@ -46,7 +44,7 @@ void Mathematics::StaticFindIntersectorArc2Circle2Testing::SameTest() noexcept
 
 void Mathematics::StaticFindIntersectorArc2Circle2Testing::EmptyTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -77,13 +75,13 @@ void Mathematics::StaticFindIntersectorArc2Circle2Testing::EmptyTest()
         const float maxX = lhsCenter.GetX() + lhsRadius;
         const float minX = lhsCenter.GetX() - lhsRadius;
 
-        const std::uniform_real<float> secondRandomDistribution(minX, maxX);
+        const std::uniform_real<float> randomDistribution1(minX, maxX);
 
-        const float firstX = secondRandomDistribution(generator);
+        const float firstX = randomDistribution1(generator);
         float distanceX = lhsCenter.GetX() - firstX;
         const float firstY = lhsCenter.GetY() - MathF::Sqrt(lhsRadius * lhsRadius - distanceX * distanceX);
 
-        const float secondX = secondRandomDistribution(generator);
+        const float secondX = randomDistribution1(generator);
         distanceX = lhsCenter.GetX() - secondX;
         const float secondY = lhsCenter.GetY() - MathF::Sqrt(lhsRadius * lhsRadius - distanceX * distanceX);
 

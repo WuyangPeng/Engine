@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 22:59)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:44)
 
 #include "Vector3DOrthonormalizeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3OrthonormalizeDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -44,70 +42,70 @@ void Mathematics::Vector3OrthonormalizeTesting::MainTest()
 
 void Mathematics::Vector3OrthonormalizeTesting::OrthonormalizeTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> firstRandomDistribution{ -10.0, 10.0 };
-    const uniform_real<float> secondRandomDistribution{ -10.0f, 10.0f };
+    const std::uniform_real<double> randomDistribution0{ -10.0, 10.0 };
+    const std::uniform_real<float> randomDistribution1{ -10.0f, 10.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Vector3D firstVector(firstRandomDistribution(generator),
-                             firstRandomDistribution(generator),
-                             firstRandomDistribution(generator));
-        Vector3D secondVector(firstRandomDistribution(generator),
-                              firstRandomDistribution(generator),
-                              firstRandomDistribution(generator));
-        Vector3D thirdVector(firstRandomDistribution(generator),
-                             firstRandomDistribution(generator),
-                             firstRandomDistribution(generator));
+        Vector3D vector0(randomDistribution0(generator),
+                         randomDistribution0(generator),
+                         randomDistribution0(generator));
+        Vector3D vector1(randomDistribution0(generator),
+                         randomDistribution0(generator),
+                         randomDistribution0(generator));
+        Vector3D vector2(randomDistribution0(generator),
+                         randomDistribution0(generator),
+                         randomDistribution0(generator));
 
-        Vector3F fourthVector(secondRandomDistribution(generator),
-                              secondRandomDistribution(generator),
-                              secondRandomDistribution(generator));
-        Vector3F fifthVector(secondRandomDistribution(generator),
-                             secondRandomDistribution(generator),
-                             secondRandomDistribution(generator));
-        Vector3F sixthVector(secondRandomDistribution(generator),
-                             secondRandomDistribution(generator),
-                             secondRandomDistribution(generator));
+        Vector3F vector3(randomDistribution1(generator),
+                         randomDistribution1(generator),
+                         randomDistribution1(generator));
+        Vector3F vector4(randomDistribution1(generator),
+                         randomDistribution1(generator),
+                         randomDistribution1(generator));
+        Vector3F vector5(randomDistribution1(generator),
+                         randomDistribution1(generator),
+                         randomDistribution1(generator));
 
-        const Vector3OrthonormalizeD firstOrthonormalize(firstVector, secondVector, thirdVector, 1e-10);
+        const Vector3OrthonormalizeD firstOrthonormalize(vector0, vector1, vector2, 1e-10);
 
-        firstVector.Normalize();
-        double dot0 = Vector3ToolsD::DotProduct(firstVector, secondVector);
-        secondVector -= firstVector * dot0;
-        secondVector.Normalize();
-        dot0 = Vector3ToolsD::DotProduct(firstVector, thirdVector);
-        thirdVector -= firstVector * dot0;
-        dot0 = Vector3ToolsD::DotProduct(secondVector, thirdVector);
-        thirdVector -= secondVector * dot0;
-        thirdVector.Normalize();
+        vector0.Normalize();
+        double dot0 = Vector3ToolsD::DotProduct(vector0, vector1);
+        vector1 -= vector0 * dot0;
+        vector1.Normalize();
+        dot0 = Vector3ToolsD::DotProduct(vector0, vector2);
+        vector2 -= vector0 * dot0;
+        dot0 = Vector3ToolsD::DotProduct(vector1, vector2);
+        vector2 -= vector1 * dot0;
+        vector2.Normalize();
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(firstVector, firstOrthonormalize.GetUVector(), 1e-10));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(vector0, firstOrthonormalize.GetUVector(), 1e-10));
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(secondVector, firstOrthonormalize.GetVVector(), 1e-10));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(vector1, firstOrthonormalize.GetVVector(), 1e-10));
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(thirdVector, firstOrthonormalize.GetWVector(), 1e-10));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(vector2, firstOrthonormalize.GetWVector(), 1e-10));
 
-        const Vector3OrthonormalizeF secondOrthonormalize(fourthVector, fifthVector, sixthVector, 1e-4f);
+        const Vector3OrthonormalizeF secondOrthonormalize(vector3, vector4, vector5, 1e-4f);
 
-        fourthVector.Normalize();
-        float dot1 = Vector3ToolsF::DotProduct(fourthVector, fifthVector);
-        fifthVector -= fourthVector * dot1;
-        fifthVector.Normalize();
+        vector3.Normalize();
+        float dot1 = Vector3ToolsF::DotProduct(vector3, vector4);
+        vector4 -= vector3 * dot1;
+        vector4.Normalize();
 
-        dot1 = Vector3ToolsF::DotProduct(fourthVector, sixthVector);
-        sixthVector -= fourthVector * dot1;
-        dot1 = Vector3ToolsF::DotProduct(fifthVector, sixthVector);
-        sixthVector -= fifthVector * dot1;
-        sixthVector.Normalize();
+        dot1 = Vector3ToolsF::DotProduct(vector3, vector5);
+        vector5 -= vector3 * dot1;
+        dot1 = Vector3ToolsF::DotProduct(vector4, vector5);
+        vector5 -= vector4 * dot1;
+        vector5.Normalize();
 
-        ASSERT_TRUE(Vector3ToolsF::Approximate(fourthVector, secondOrthonormalize.GetUVector(), 1e-8f));
+        ASSERT_TRUE(Vector3ToolsF::Approximate(vector3, secondOrthonormalize.GetUVector(), 1e-8f));
 
-        ASSERT_TRUE(Vector3ToolsF::Approximate(fifthVector, secondOrthonormalize.GetVVector(), 1e-6f));
+        ASSERT_TRUE(Vector3ToolsF::Approximate(vector4, secondOrthonormalize.GetVVector(), 1e-6f));
 
-        ASSERT_TRUE(Vector3ToolsF::Approximate(sixthVector, secondOrthonormalize.GetWVector(), 1e-4f));
+        ASSERT_TRUE(Vector3ToolsF::Approximate(vector5, secondOrthonormalize.GetWVector(), 1e-4f));
     }
 }

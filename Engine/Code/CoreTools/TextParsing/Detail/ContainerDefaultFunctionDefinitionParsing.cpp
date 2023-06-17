@@ -89,6 +89,12 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateCon
     content += GenerateContainerSize();
     content += GenerateContainerAddDataDefinition();
 
+    content += TextParsing::gNewlineCharacter;
+    content += GenerateIndentation(1);
+    content += SYSTEM_TEXT("LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT(\"");
+    content += lowerClassName;
+    content += SYSTEM_TEXT("表结束载入……\"));\n");
+
     content += GenerateFunctionEndBrackets();
     content += TextParsing::gNewlineCharacter;
 
@@ -148,7 +154,14 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateCon
 
     auto content = GenerateIndentation(1);
 
+    content += SYSTEM_TEXT("LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT(\"");
+    content += lowerClassName;
+    content += SYSTEM_TEXT("表开始载入……\"));\n\n");
+
+    content += GenerateIndentation(1);
     content += TextParsing::gContentSize;
+    content += GenerateIndentation(1);
+    content += SYSTEM_TEXT("const auto csvHead = csvContent.GetCSVHead();\n\n");
 
     return content;
 }
@@ -222,7 +235,30 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateRet
 
     auto content = GenerateIndentation(2);
 
-    content += TextParsing::gReturnKeyEqual;
+    content += TextParsing::gKeyEqual;
+    content += GenerateIndentation(2);
+    content += TextParsing::gLeftBrace;
+    content += TextParsing::gNewlineCharacter;
+    content += GenerateIndentation(3);
+    content += SYSTEM_TEXT("LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT(\"");
+    content += lowerClassName;
+    content += SYSTEM_TEXT("表存在重复主键，key = \"), (*lhs).GetKey(), SYSTEM_TEXT(\"。\\n\"), CoreTools::LogAppenderIOManageSign::TriggerAssert);\n\n");
+    content += GenerateIndentation(3);
+    content += TextParsing::gReturnTrue;
+    content += GenerateIndentation(2);
+    content += TextParsing::gRightBrace;
+    content += TextParsing::gNewlineCharacter;
+    content += GenerateIndentation(2);
+    content += TextParsing::gElse;
+    content += TextParsing::gNewlineCharacter;
+    content += GenerateIndentation(2);
+    content += TextParsing::gLeftBrace;
+    content += TextParsing::gNewlineCharacter;
+    content += GenerateIndentation(3);
+    content += TextParsing::gReturnFalse;
+    content += GenerateIndentation(2);
+    content += TextParsing::gRightBrace;
+    content += TextParsing::gNewlineCharacter;
 
     return content;
 }

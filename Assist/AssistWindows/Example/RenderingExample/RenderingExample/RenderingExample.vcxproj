@@ -33,7 +33,7 @@
       <Configuration>StaticRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  </ItemGroup>  
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{24A15630-1FF0-4B5D-96A1-718C43DA47FF}</ProjectGuid>
@@ -124,7 +124,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
-    <Import Project="..\..\..\AssistX64DebugLibs.props" /> 
+    <Import Project="..\..\..\AssistX64DebugLibs.props" />
     <Import Project="..\..\..\AssistDebugXCopy.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -279,9 +279,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Example\Rendering\RenderingExample\DllLib.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\Rendering\RenderingExample\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\Rendering\RenderingExample\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\Rendering\RenderingExample\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\Rendering\RenderingExample\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\Rendering\RenderingExample\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\Rendering\RenderingExample\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\..\Code\Example\Rendering\RenderingExample\Placeholder\Placeholder.h" />
     <ClInclude Include="..\..\..\..\Code\Example\Rendering\RenderingExample\RenderingExample.h" />
     <ClInclude Include="..\..\..\..\Code\Example\Rendering\RenderingExample\RenderingExampleDll.h" />

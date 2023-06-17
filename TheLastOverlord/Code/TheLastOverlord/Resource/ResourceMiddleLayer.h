@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/19 16:55)
+///	最后的霸王版本：0.9.0.12 (2023/06/17 15:01)
 
 #ifndef THE_LAST_OVERLORD_RESOURCE_MIDDLE_LAYER_H
 #define THE_LAST_OVERLORD_RESOURCE_MIDDLE_LAYER_H
@@ -27,11 +27,11 @@ namespace TheLastOverlord
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
-        explicit ResourceMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        ResourceMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD bool PreCreate(const EnvironmentDirectory& environmentDirectory) final;
+        NODISCARD bool PreCreate() final;
         NODISCARD bool Initialize() final;
 
         NODISCARD bool IsSelectValid(int select) const;

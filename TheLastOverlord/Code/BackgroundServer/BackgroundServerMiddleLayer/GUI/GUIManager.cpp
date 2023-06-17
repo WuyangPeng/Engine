@@ -12,8 +12,8 @@
 #include "BackgroundServer/BackgroundServerMiddleLayer/Macro/BackgroundServerMiddleLayerClassInvariantMacro.h"
 #include "GUIManager.h"
 
-BackgroundServerMiddleLayer::GUIManager::GUIManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+BackgroundServerMiddleLayer::GUIManager::GUIManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     BACKGROUND_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

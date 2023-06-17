@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/04/29 11:10)
+///	引擎版本：0.9.0.12 (2022/04/29 11:10)
 
 #include "AssistTools/AssistToolsExport.h"
 
@@ -394,7 +394,7 @@ UserMacro.h
 #define %ProjectCapital%_%ManagerCapital%_MACRO_USER_MACRO_H
 
 #include "CoreTools/Contract/Assertion.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "Framework/Macro/UserMacro.h" 
 
 #if !defined(%ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL)

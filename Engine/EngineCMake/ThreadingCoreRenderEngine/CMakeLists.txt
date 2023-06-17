@@ -31,10 +31,27 @@ link_directories($ENV{LibsEnvironmentX64Lib}/)
 
 # 包含子项目。
 add_subdirectory ("System")
+
 add_subdirectory ("CoreTools")
+
 add_subdirectory ("Network")
 add_subdirectory ("Database")
 add_subdirectory ("Script")
 add_subdirectory ("Mathematics")
+add_subdirectory ("SoundEffect")
+add_subdirectory ("InputOutput")
+
+add_subdirectory ("ResourceManager")
+add_subdirectory ("Rendering")
+add_subdirectory ("Physics")
+add_subdirectory ("Imagics")
+
+add_subdirectory ("Animation")
+add_subdirectory ("ArtificialIntelligence")
+add_subdirectory ("UserInterface")
+
+add_subdirectory ("AssistTools")
+
+add_subdirectory ("Framework")
 
 add_subdirectory ("ThreadingCoreRenderEngine")

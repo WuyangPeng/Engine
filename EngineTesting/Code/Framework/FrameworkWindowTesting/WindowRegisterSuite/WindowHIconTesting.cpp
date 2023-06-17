@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 13:52)
+///	引擎测试版本：0.9.0.12 (2023/06/13 23:07)
 
 #include "WindowHIconTesting.h"
 #include "resource.h"
@@ -13,6 +13,7 @@
 #include "System/Windows/WindowsRegister.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/WindowRegister/WindowHIcon.h"
 
 #include <algorithm>
@@ -25,17 +26,17 @@ namespace Framework
 Framework::WindowHIconTesting::WindowHIconTesting(const OStreamShared& stream, HInstance instance)
     : ParentType{ stream },
       instance{ instance },
-      container{ { 0, System::g_Application },
-                   { 32512, System::g_Application },
-                   { 32513, System::g_IDIHand },
-                   { 32514, System::g_Question },
-                   { 32515, System::g_Exclamation },
-                   { 32516, System::g_Asterisk },
-                   { 32517, System::g_WinLogo },
-                   { 32518, System::g_Shield },
-                   { 32515, System::g_Warning },
-                   { 32513, System::g_Error },
-                   { 32516, System::g_Information } }
+      container{ { 0, System::gApplication },
+                 { 32512, System::gApplication },
+                 { 32513, System::gIDIHand },
+                 { 32514, System::gQuestion },
+                 { 32515, System::gExclamation },
+                 { 32516, System::gAsterisk },
+                 { 32517, System::gWinLogo },
+                 { 32518, System::gShield },
+                 { 32515, System::gWarning },
+                 { 32513, System::gError },
+                 { 32516, System::gInformation } }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

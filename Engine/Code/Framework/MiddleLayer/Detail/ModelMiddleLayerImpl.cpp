@@ -1,19 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 11:16)
+///	引擎版本：0.9.0.12 (2023/06/13 14:23)
 
 #include "Framework/FrameworkExport.h"
 
 #include "ModelMiddleLayerImpl.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-
-using std::string;
 
 Framework::ModelMiddleLayerImpl::ModelMiddleLayerImpl(int maxTimer)
     : performanceMeasurements{ maxTimer }
@@ -30,7 +28,7 @@ double Framework::ModelMiddleLayerImpl::GetFrameRate() const
     return performanceMeasurements.GetFrameRate();
 }
 
-string Framework::ModelMiddleLayerImpl::GetFrameRateMessage() const
+std::string Framework::ModelMiddleLayerImpl::GetFrameRateMessage() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 

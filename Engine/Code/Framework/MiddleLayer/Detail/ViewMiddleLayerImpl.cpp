@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/01 21:31)
+///	引擎版本：0.9.0.12 (2023/06/13 14:24)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,8 +13,6 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Renderers/Renderer.h"
-
-using std::string;
 
 Framework::ViewMiddleLayerImpl::ViewMiddleLayerImpl() noexcept
     : renderer{}
@@ -39,7 +37,7 @@ Framework::ViewMiddleLayerImpl& Framework::ViewMiddleLayerImpl::operator=(ViewMi
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, ViewMiddleLayerImpl)
 
-void Framework::ViewMiddleLayerImpl::ResetRenderer(const string& fileName, const EnvironmentParameter& environmentParameter)
+void Framework::ViewMiddleLayerImpl::ResetRenderer(const std::string& fileName, const EnvironmentParameter& environmentParameter)
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 
@@ -62,7 +60,7 @@ void Framework::ViewMiddleLayerImpl::Resize(int width, int height)
     }
 }
 
-void Framework::ViewMiddleLayerImpl::DrawFrameRate(int x, int y, const Colour& color, const string& message)
+void Framework::ViewMiddleLayerImpl::DrawFrameRate(int x, int y, const Colour& color, const std::string& message)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 

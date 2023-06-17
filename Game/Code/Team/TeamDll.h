@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.8.0.11 (2022/07/18 17:12)
+///	引擎游戏版本：0.9.0.12 (2023/06/16 15:39)
 
 #ifndef TEAM_DLL_H
 #define TEAM_DLL_H
@@ -16,8 +16,17 @@
 #if defined(BUILDING_TEAM_NO_IMPORT) || defined(BUILDING_TEAM_STATIC)
 
     #define TEAM_DEFAULT_DECLARE
-    #define TEAM_HIDDEN_DECLARE
     #define TEAM_VISIBLE
+
+    #if defined(BUILDING_TEAM_EXPORT)
+
+        #define TEAM_HIDDEN_DECLARE
+
+    #else  // !defined(BUILDING_TEAM_EXPORT)
+
+        #define TEAM_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_TEAM_EXPORT
 
 #else  // !defined(BUILDING_TEAM_NO_IMPORT) && !defined(BUILDING_TEAM_STATIC)
 

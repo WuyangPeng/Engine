@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/06 11:27)
+///	引擎版本：0.9.0.12 (2023/06/13 14:48)
 
 #include "Framework/FrameworkExport.h"
 
@@ -16,10 +16,6 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Rendering/DataTypes/ColourDetail.h"
 #include "Rendering/Renderers/Renderer.h"
-
-using std::max;
-using std::min;
-using std::vector;
 
 Framework::PixelScreenImpl::PixelScreenImpl(const WindowSize& size)
     : screenWidth{ size.GetWindowWidth() }, screenHeight{ size.GetWindowHeight() }, screen{}, doFlip{ false }
@@ -110,10 +106,10 @@ void Framework::PixelScreenImpl::SetThickPixel(int x, int y, int thick, const Co
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    const auto xMin = max(x - thick, 0);
-    const auto xMax = min(x + thick, screenWidth - 1);
-    const auto yMin = max(y - thick, 0);
-    const auto yMax = min(y + thick, screenHeight - 1);
+    const auto xMin = std::max(x - thick, 0);
+    const auto xMax = std::min(x + thick, screenWidth - 1);
+    const auto yMin = std::max(y - thick, 0);
+    const auto yMax = std::min(y + thick, screenHeight - 1);
 
     for (auto yThick = yMin; yThick <= yMax; ++yThick)
     {
@@ -210,8 +206,8 @@ void Framework::PixelScreenImpl::DrawSolidCircle(int xCenter, int yCenter, int r
 
 void Framework::PixelScreenImpl::DoDrawSolidCircle1(int xCenter, int yCenter, int x, int y, const Colour& color)
 {
-    const auto yMin = max(yCenter - y, 0);
-    const auto yMax = min(yCenter + y, screenHeight - 1);
+    const auto yMin = std::max(yCenter - y, 0);
+    const auto yMax = std::min(yCenter + y, screenHeight - 1);
 
     const auto xCenterPlusX = xCenter + x;
     if (xCenterPlusX < screenWidth)
@@ -228,8 +224,8 @@ void Framework::PixelScreenImpl::DoDrawSolidCircle1(int xCenter, int yCenter, in
 
 void Framework::PixelScreenImpl::DoDrawSolidCircle2(int xCenter, int yCenter, int x, int y, const Colour& color)
 {
-    const auto yMin = max(yCenter - x, 0);
-    const auto yMax = min(yCenter + x, screenHeight - 1);
+    const auto yMin = std::max(yCenter - x, 0);
+    const auto yMax = std::min(yCenter + x, screenHeight - 1);
 
     const auto xCenterPlusY = xCenter + y;
     if (xCenterPlusY < screenWidth)
@@ -319,8 +315,8 @@ void Framework::PixelScreenImpl::Fill(int x, int y, const Colour& foreColor, con
     const auto xMax = screenWidth;
     const auto yMax = screenHeight;
     const auto stackSize = xMax * yMax;
-    vector<int> xStack(stackSize);
-    vector<int> yStack(stackSize);
+    std::vector<int> xStack(stackSize);
+    std::vector<int> yStack(stackSize);
 
     // 如果它是背景颜色，把种子点压入堆栈。背景颜色backColor的所有点压入到堆栈。
     auto top = 0;

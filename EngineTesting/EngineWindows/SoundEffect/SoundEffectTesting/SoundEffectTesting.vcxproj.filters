@@ -31,9 +31,6 @@
     <Filter Include="InterfaceSuite 头文件">
       <UniqueIdentifier>{a1d15a7a-e403-4d57-8d69-9a66e0cb8363}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MacroSuite 头文件">
-      <UniqueIdentifier>{f1b40f00-c893-4d90-af5a-44ab3c63e5c5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="OggSuite 头文件">
       <UniqueIdentifier>{4b41db95-bef1-413d-bea7-3793d46688d4}</UniqueIdentifier>
     </Filter>
@@ -45,6 +42,9 @@
     </Filter>
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{8e50d221-90d3-428d-b1e2-2c2ec55edf60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件">
+      <UniqueIdentifier>{f1b40f00-c893-4d90-af5a-44ab3c63e5c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -89,9 +89,6 @@
     <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\InterfaceSuite\InterfaceSuite.h">
       <Filter>InterfaceSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\MacroSuite\MacroSuite.h">
-      <Filter>MacroSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\OggSuite\OggSuite.h">
       <Filter>OggSuite 头文件</Filter>
     </ClInclude>
@@ -100,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\VorbisSuite\VorbisSuite.h">
       <Filter>VorbisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\HelperSuite\HelperSuite.h">
+      <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

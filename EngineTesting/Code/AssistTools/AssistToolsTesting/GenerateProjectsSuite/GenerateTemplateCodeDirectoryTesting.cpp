@@ -1,21 +1,33 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/22 16:13)
+///	引擎测试版本：0.9.0.12 (2023/06/13 10:53)
 
 #include "GenerateTemplateCodeDirectoryTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "AssistTools/GenerateProjects/CopyrightData.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateCodeDirectory.h"
 
 using namespace std::literals;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(AssistTools, GenerateTemplateCodeDirectory)
+AssistTools::GenerateTemplateCodeDirectoryTesting::GenerateTemplateCodeDirectoryTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateCodeDirectoryTesting)
+
+void AssistTools::GenerateTemplateCodeDirectoryTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void AssistTools::GenerateTemplateCodeDirectoryTesting::MainTest()
 {
@@ -52,7 +64,7 @@ void AssistTools::GenerateTemplateCodeDirectoryTesting::GenerateToTest()
     const System::String projectName(SYSTEM_TEXT("Project"));
     CopyrightData copyrightData = GetCopyrightData();
 
-    TestingType generateTemplateCodeDirectory(GetResourceDirectory(), "Configuration/StringReplacing.json");
+    GenerateTemplateCodeDirectory generateTemplateCodeDirectory(GetResourceDirectory(), "Configuration/StringReplacing.json");
 
     generateTemplateCodeDirectory.GenerateTo(GetExportDirectory(), GetSolutionName(), copyrightData, GetProjectCapital(), projectName, SYSTEM_TEXT("Core"), SYSTEM_TEXT("CORE"));
 }

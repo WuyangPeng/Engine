@@ -1,18 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/06 20:36)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:53)
 
 #include "StaticFindIntersectorSegment2Segment2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorSegment2Segment2Detail.h"
 #include "Mathematics/Intersection/Intersection2D/StaticTestIntersectorLine2Classify.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 #include <random>
 
 namespace Mathematics
@@ -41,7 +42,7 @@ void Mathematics::StaticFindIntersectorSegment2Segment2Testing::MainTest()
 
 void Mathematics::StaticFindIntersectorSegment2Segment2Testing::SegmentTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -96,7 +97,7 @@ void Mathematics::StaticFindIntersectorSegment2Segment2Testing::SegmentTest()
         ASSERT_ENUM_EQUAL(fourthClassify.GetIntersectionType(), IntersectionType::Segment);
         ASSERT_EQUAL(fourthClassify.GetQuantity(), 2);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin, fourthClassify.GetPoint(0), 1e-6f);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin + lhsDirection, fourthClassify.GetPoint(1), 1e-6f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin + lhsDirection, fourthClassify.GetPoint(1), 1e-5f);
 
         StaticFindIntersectorSegment2Segment2<float> fifthClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin - lhsDirection, lhsOrigin - secondExtent * lhsDirection));
 

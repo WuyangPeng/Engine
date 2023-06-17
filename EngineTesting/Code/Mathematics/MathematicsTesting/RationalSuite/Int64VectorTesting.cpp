@@ -1,21 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/26 13:54)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:31)
 
 #include "Int64VectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Rational/Int64VectorDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
+#include "Mathematics/Rational/Int64VectorDetail.h"
 
-using std::default_random_engine;
-using std::uniform_int;
+#include <random>
 
 Mathematics::Int64VectorTesting::Int64VectorTesting(const OStreamShared& streamShared)
     : ParentType{ streamShared }
@@ -40,172 +38,172 @@ void Mathematics::Int64VectorTesting::MainTest()
 
 void Mathematics::Int64VectorTesting::ConstructionTest()
 {
-    default_random_engine generator{};
-    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
 
-    Int64Vector<4> firstVector;
+    Int64Vector<4> vector0;
 
     for (int i = 0; i < 4; ++i)
     {
-        ASSERT_EQUAL(firstVector[i], 0);
+        ASSERT_EQUAL(vector0[i], 0);
     }
 
     for (int i = 0; i < 4; ++i)
     {
-        firstVector[i] = firstRandomDistribution(generator);
+        vector0[i] = randomDistribution0(generator);
     }
 
-    Int64Vector<4> secondVector(firstVector);
+    Int64Vector<4> vector1(vector0);
 
     for (int i = 0; i < 4; ++i)
     {
-        ASSERT_EQUAL(firstVector[i], secondVector[i]);
+        ASSERT_EQUAL(vector0[i], vector1[i]);
     }
 
-    Int64Vector<4> thirdVector;
+    Int64Vector<4> vector2;
 
     for (int i = 0; i < 4; ++i)
     {
-        thirdVector[i] = firstRandomDistribution(generator);
+        vector2[i] = randomDistribution0(generator);
     }
 
-    firstVector = thirdVector;
+    vector0 = vector2;
 
     for (int i = 0; i < 4; ++i)
     {
-        ASSERT_EQUAL(firstVector[i], thirdVector[i]);
+        ASSERT_EQUAL(vector0[i], vector2[i]);
     }
 }
 
 void Mathematics::Int64VectorTesting::CalculateTest()
 {
-    default_random_engine generator{};
-    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
 
-    Int64Vector<4> firstVector;
-    Int64Vector<4> secondVector;
+    Int64Vector<4> vector0;
+    Int64Vector<4> vector1;
 
     for (int i = 0; i < 4; ++i)
     {
-        firstVector[i] = firstRandomDistribution(generator);
-        secondVector[i] = firstRandomDistribution(generator);
+        vector0[i] = randomDistribution0(generator);
+        vector1[i] = randomDistribution0(generator);
     }
 
     int64_t squaredLength = 0;
     for (int i = 0; i < 4; ++i)
     {
-        squaredLength += firstVector[i] * firstVector[i];
+        squaredLength += vector0[i] * vector0[i];
     }
 
-    ASSERT_EQUAL(squaredLength, firstVector.SquaredLength());
+    ASSERT_EQUAL(squaredLength, vector0.SquaredLength());
 
     int64_t dot = 0;
     for (int i = 0; i < 4; ++i)
     {
-        dot += firstVector[i] * secondVector[i];
+        dot += vector0[i] * vector1[i];
     }
 
-    ASSERT_EQUAL(dot, Dot(firstVector, secondVector));
+    ASSERT_EQUAL(dot, Dot(vector0, vector1));
 }
 
 void Mathematics::Int64VectorTesting::OperatorTest()
 {
-    default_random_engine generator{};
-    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
 
-    Int64Vector<4> firstVector;
-    Int64Vector<4> secondVector;
+    Int64Vector<4> vector0;
+    Int64Vector<4> vector1;
 
     for (int i = 0; i < 4; ++i)
     {
-        firstVector[i] = firstRandomDistribution(generator);
-        secondVector[i] = firstRandomDistribution(generator);
+        vector0[i] = randomDistribution0(generator);
+        vector1[i] = randomDistribution0(generator);
     }
 
-    Int64Vector<4> thirdVector = firstVector + secondVector;
-    Int64Vector<4> fourthVector;
+    Int64Vector<4> vector2 = vector0 + vector1;
+    Int64Vector<4> vector3;
 
     for (int i = 0; i < 4; ++i)
     {
-        fourthVector[i] = firstVector[i] + secondVector[i];
+        vector3[i] = vector0[i] + vector1[i];
     }
 
-    ASSERT_EQUAL(thirdVector, fourthVector);
+    ASSERT_EQUAL(vector2, vector3);
 
-    thirdVector = firstVector - secondVector;
+    vector2 = vector0 - vector1;
 
     for (int i = 0; i < 4; ++i)
     {
-        fourthVector[i] = firstVector[i] - secondVector[i];
+        vector3[i] = vector0[i] - vector1[i];
     }
 
-    ASSERT_EQUAL(thirdVector, fourthVector);
+    ASSERT_EQUAL(vector2, vector3);
 
-    int64_t firstValue = firstRandomDistribution(generator);
+    int64_t firstValue = randomDistribution0(generator);
 
-    thirdVector = firstVector * firstValue;
+    vector2 = vector0 * firstValue;
 
     for (int i = 0; i < 4; ++i)
     {
-        fourthVector[i] = firstVector[i] * firstValue;
+        vector3[i] = vector0[i] * firstValue;
     }
 
-    ASSERT_EQUAL(thirdVector, fourthVector);
+    ASSERT_EQUAL(vector2, vector3);
 
-    firstValue = firstRandomDistribution(generator);
+    firstValue = randomDistribution0(generator);
 
-    thirdVector = firstValue * firstVector;
+    vector2 = firstValue * vector0;
 
     for (int i = 0; i < 4; ++i)
     {
-        fourthVector[i] = firstVector[i] * firstValue;
+        vector3[i] = vector0[i] * firstValue;
     }
 
-    ASSERT_EQUAL(thirdVector, fourthVector);
+    ASSERT_EQUAL(vector2, vector3);
 
-    firstValue = firstRandomDistribution(generator);
+    firstValue = randomDistribution0(generator);
 
-    thirdVector = firstVector / firstValue;
+    vector2 = vector0 / firstValue;
 
     for (int i = 0; i < 4; ++i)
     {
-        fourthVector[i] = firstVector[i] / firstValue;
+        vector3[i] = vector0[i] / firstValue;
     }
 
-    ASSERT_EQUAL(thirdVector, fourthVector);
+    ASSERT_EQUAL(vector2, vector3);
 
-    fourthVector = -firstVector;
+    vector3 = -vector0;
 
     for (int i = 0; i < 4; ++i)
     {
-        ASSERT_EQUAL(-fourthVector[i], firstVector[i]);
+        ASSERT_EQUAL(-vector3[i], vector0[i]);
     }
 }
 
 void Mathematics::Int64VectorTesting::CompareTest()
 {
-    default_random_engine generator{};
-    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<int64_t> randomDistribution0{ INT64_MIN, INT64_MAX };
 
-    Int64Vector<4> firstVector;
-    Int64Vector<4> secondVector;
+    Int64Vector<4> vector0;
+    Int64Vector<4> vector1;
 
     for (int i = 0; i < 4; ++i)
     {
-        firstVector[i] = firstRandomDistribution(generator);
-        secondVector[i] = firstRandomDistribution(generator);
+        vector0[i] = randomDistribution0(generator);
+        vector1[i] = randomDistribution0(generator);
     }
 
-    firstVector[0] = 0;
-    secondVector[0] = 1;
+    vector0[0] = 0;
+    vector1[0] = 1;
 
-    ASSERT_TRUE(firstVector == firstVector);
-    ASSERT_FALSE(firstVector == secondVector);
-    ASSERT_FALSE(secondVector != secondVector);
-    ASSERT_TRUE(firstVector != secondVector);
+    ASSERT_TRUE(vector0 == vector0);
+    ASSERT_FALSE(vector0 == vector1);
+    ASSERT_FALSE(vector1 != vector1);
+    ASSERT_TRUE(vector0 != vector1);
 
-    ASSERT_TRUE(firstVector < secondVector);
-    ASSERT_TRUE(firstVector <= secondVector);
-    ASSERT_FALSE(firstVector > secondVector);
-    ASSERT_FALSE(firstVector >= secondVector);
+    ASSERT_TRUE(vector0 < vector1);
+    ASSERT_TRUE(vector0 <= vector1);
+    ASSERT_FALSE(vector0 > vector1);
+    ASSERT_FALSE(vector0 >= vector1);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/09 22:09)
+///	引擎版本：0.9.0.12 (2023/06/12 13:53)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,9 +16,6 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
-
-using std::set;
-using std::vector;
 
 Rendering::CreateClodMeshImpl::CreateClodMeshImpl(TrianglesMesh& mesh)
     : clodMeshTriangleMesh{ mesh }, graph{ clodMeshTriangleMesh.GetNumVertices(), clodMeshTriangleMesh.GetNumIndices() }, collapses{}, collapseRecord{}
@@ -241,7 +238,7 @@ void Rendering::CreateClodMeshImpl::Collapse(const EdgeKey& edgeKey, int indexTh
     // 相对的边被保存，保存的顶点顺序。
     // 这个信息可以更容易地确定，当新的三角形被插入图形堆，边必须被更新。
     using Tuple = CoreTools::Tuple<3, int>;
-    set<Tuple> keepInfo{};
+    std::set<Tuple> keepInfo{};
 
     for (auto iter = vertexThrow.GetTriangleKeyBegin(); iter != vertexThrow.GetTriangleKeyEnd(); ++iter)
     {
@@ -334,7 +331,7 @@ void Rendering::CreateClodMeshImpl::ReorderBuffers()
     auto oldData = clodMeshTriangleMesh.GetVertexBufferReadOnlyData();
     const auto stride = clodMeshTriangleMesh.GetStride();
     const auto newDataSize = clodMeshTriangleMesh.GetNumVertices() * stride;
-    vector<char> newData(newDataSize);
+    std::vector<char> newData(newDataSize);
 
     for (auto vertexIndex = 0; vertexIndex < clodMeshTriangleMesh.GetNumVertices(); ++vertexIndex)
     {
@@ -353,7 +350,7 @@ void Rendering::CreateClodMeshImpl::ReorderBuffers()
     clodMeshTriangleMesh.SetNewVertexBufferData(newData);
 
     // 构建三角形旧顺序和新的三角形顺序的对应关系。
-    vector<int> triangleNewToOld(clodMeshTriangleMesh.GetNumTriangles());
+    std::vector<int> triangleNewToOld(clodMeshTriangleMesh.GetNumTriangles());
     auto trianglesNew = clodMeshTriangleMesh.GetNumTriangles() - 1;
 
     for (const auto& collapse : collapses)
@@ -371,7 +368,7 @@ void Rendering::CreateClodMeshImpl::ReorderBuffers()
     }
 
     // 重新排序索引缓冲区。
-    vector<char> newIndices(clodMeshTriangleMesh.GetNumIndices() * sizeof(int));
+    std::vector<char> newIndices(clodMeshTriangleMesh.GetNumIndices() * sizeof(int));
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
@@ -439,9 +436,9 @@ void Rendering::CreateClodMeshImpl::ComputeRecords()
     collapseRecord.at(0).SetNumTriangles(clodMeshTriangleMesh.GetNumTriangles());
 
     // 在索引缓冲区，因为我们处理每一个崩塌记录替换throw顶点。
-    vector<int> indices(clodMeshTriangleMesh.GetNumIndices());
+    std::vector<int> indices(clodMeshTriangleMesh.GetNumIndices());
     System::MemoryCopy(indices.data(), clodMeshTriangleMesh.GetIndexBufferReadOnlyData(), clodMeshTriangleMesh.GetNumIndices() * sizeof(int));
-    vector<int> verticesThrowIndices(clodMeshTriangleMesh.GetNumIndices());
+    std::vector<int> verticesThrowIndices(clodMeshTriangleMesh.GetNumIndices());
 
     // 进行中的崩塌记录。
     auto record = &collapseRecord.at(1);
@@ -475,7 +472,7 @@ void Rendering::CreateClodMeshImpl::ComputeRecords()
 
         if (0 < recordNumIndices)
         {
-            vector<int> indices2(recordNumIndices);
+            std::vector<int> indices2(recordNumIndices);
 
             const auto numBytes = recordNumIndices * sizeof(int);
             System::MemoryCopy(indices2.data(), verticesThrowIndices.data(), boost::numeric_cast<uint32_t>(numBytes));

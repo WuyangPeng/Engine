@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/04/29 13:38)
+///	引擎版本：0.9.0.12 (2022/04/29 13:38)
 
 #include "AssistTools/AssistToolsExport.h"
 
@@ -68,7 +68,7 @@ TestingHelper.h
 #ifndef %ProjectCapital%_%ManagerCapital%TESTING_TESTING_HELPER_H
 #define %ProjectCapital%_%ManagerCapital%TESTING_TESTING_HELPER_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 
 
@@ -109,7 +109,7 @@ TestingHelper.cpp
 
 #include "Testing.h"
 #include "TestingHelper.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
 CMAIN_FUNCTION_HELPER_SUBCLASS_DEFINE(%SolutionName%Testing, TestingHelper)

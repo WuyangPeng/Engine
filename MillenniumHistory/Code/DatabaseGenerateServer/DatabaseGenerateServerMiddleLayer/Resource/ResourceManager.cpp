@@ -5,17 +5,26 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.5 (2023/04/03 09:52)
+///	千年史策版本：0.9.0.12 (2023/06/12 21:56)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/DatabaseGenerateServerMiddleLayerExport.h"
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/Helper/DatabaseGenerateServerMiddleLayerClassInvariantMacro.h"
 #include "ResourceManager.h"
+#include "Detail/ResourceManagerImpl.h"
 
 DatabaseGenerateServerMiddleLayer::ResourceManager::ResourceManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
-    : ParentType{ middleLayerPlatform, environmentDirectory }
+    : ParentType{ middleLayerPlatform, environmentDirectory },
+      impl{ SYSTEM_TEXT("Resource/AncientBooksCsv") }
 {
-    DATABASE_GENERATE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
+    DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseGenerateServerMiddleLayer, ResourceManager)
+
+bool DatabaseGenerateServerMiddleLayer::ResourceManager::Initialize()
+{
+    DATABASE_GENERATE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_9;
+
+    return impl->Initialize();
+}

@@ -51,12 +51,12 @@ void CoreTools::JsonTotalGenerateTesting::JsonTotalGenerateHeadTest()
     {
         const auto nativeFileName = inputPath.path().native();
 
-        if (nativeFileName.find(SYSTEM_TEXT("json")) != nativeFileName.size() - 4)
+        if (nativeFileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT("json"))) != nativeFileName.size() - 4)
         {
             continue;
         }
 
-        JsonHead jsonHead{ nativeFileName };
+        JsonHead jsonHead{ StringConversion::WideCharConversionStandard(nativeFileName) };
 
         container.emplace_back(jsonHead);
     }
@@ -76,12 +76,12 @@ void CoreTools::JsonTotalGenerateTesting::JsonTotalGenerateFwdHeadTest()
     {
         const auto nativeFileName = inputPath.path().native();
 
-        if (nativeFileName.find(SYSTEM_TEXT("json")) != nativeFileName.size() - 4)
+        if (nativeFileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT("json"))) != nativeFileName.size() - 4)
         {
             continue;
         }
 
-        JsonHead jsonHead{ nativeFileName };
+        JsonHead jsonHead{ StringConversion::WideCharConversionStandard(nativeFileName) };
 
         container.emplace_back(jsonHead);
     }
@@ -101,12 +101,12 @@ void CoreTools::JsonTotalGenerateTesting::JsonTotalGenerateContainerHeadTest()
     {
         const auto nativeFileName = inputPath.path().native();
 
-        if (nativeFileName.find(SYSTEM_TEXT("json")) != nativeFileName.size() - 4)
+        if (nativeFileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT("json"))) != nativeFileName.size() - 4)
         {
             continue;
         }
 
-        JsonHead jsonHead{ nativeFileName };
+        JsonHead jsonHead{ StringConversion::WideCharConversionStandard(nativeFileName) };
 
         container.emplace_back(jsonHead);
     }
@@ -126,12 +126,12 @@ void CoreTools::JsonTotalGenerateTesting::JsonTotalGenerateContainerSourceTest()
     {
         const auto nativeFileName = inputPath.path().native();
 
-        if (nativeFileName.find(SYSTEM_TEXT("json")) != nativeFileName.size() - 4)
+        if (nativeFileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT("json"))) != nativeFileName.size() - 4)
         {
             continue;
         }
 
-        JsonHead jsonHead{ nativeFileName };
+        JsonHead jsonHead{ StringConversion::WideCharConversionStandard(nativeFileName) };
 
         container.emplace_back(jsonHead);
     }

@@ -1,18 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/06 21:08)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:54)
 
 #include "IntersectorLine3Triangle3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Intersection/Intersection3D/StaticFindIntersectorLine3Triangle3Detail.h"
 #include "Mathematics/Intersection/Intersection3D/StaticTestIntersectorLine3Triangle3Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 #include <random>
 
 using System::operator*;
@@ -47,7 +48,7 @@ void Mathematics::IntersectorLine3Triangle3Testing::MainTest()
 
 void Mathematics::IntersectorLine3Triangle3Testing::FindTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -66,19 +67,19 @@ void Mathematics::IntersectorLine3Triangle3Testing::FindTest()
 
         const Line3D line(origin, direction);
 
-        const Vector3D firstPoint(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator));
+        const Vector3D point0(randomDistribution(generator),
+                              randomDistribution(generator),
+                              randomDistribution(generator));
 
-        const Vector3D secondPoint(randomDistribution(generator),
-                                   randomDistribution(generator),
-                                   randomDistribution(generator));
+        const Vector3D point1(randomDistribution(generator),
+                              randomDistribution(generator),
+                              randomDistribution(generator));
 
-        const Vector3D thirdPoint(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator));
+        const Vector3D point2(randomDistribution(generator),
+                              randomDistribution(generator),
+                              randomDistribution(generator));
 
-        const Triangle3D triangle(firstPoint, secondPoint, thirdPoint);
+        const Triangle3D triangle(point0, point1, point2);
 
         StaticFindIntersectorLine3Triangle3<double> intersector(line, triangle);
 
@@ -95,11 +96,11 @@ void Mathematics::IntersectorLine3Triangle3Testing::FindTest()
                                                origin, 1e-10));
 
         ASSERT_TRUE(Vector3ToolsD::Approximate(intersector.GetTriangle().GetVertex(0),
-                                               firstPoint, 1e-10));
+                                               point0, 1e-10));
         ASSERT_TRUE(Vector3ToolsD::Approximate(intersector.GetTriangle().GetVertex(1),
-                                               secondPoint, 1e-10));
+                                               point1, 1e-10));
         ASSERT_TRUE(Vector3ToolsD::Approximate(intersector.GetTriangle().GetVertex(2),
-                                               thirdPoint, 1e-10));
+                                               point2, 1e-10));
 
         // 值测试
         const Vector3D lineOrigin = line.GetOrigin() - triangle.GetVertex(0);
@@ -170,38 +171,38 @@ void Mathematics::IntersectorLine3Triangle3Testing::FindTest()
 
 void Mathematics::IntersectorLine3Triangle3Testing::IntersectTest()
 {
-    std::default_random_engine generator;
-    const std::uniform_real<float> firstRandomDistribution(-100.0f, 100.0f);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution0(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3F origin(firstRandomDistribution(generator),
-                              firstRandomDistribution(generator),
-                              firstRandomDistribution(generator));
+        const Vector3F origin(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        Vector3F direction(firstRandomDistribution(generator),
-                           firstRandomDistribution(generator),
-                           firstRandomDistribution(generator));
+        Vector3F direction(randomDistribution0(generator),
+                           randomDistribution0(generator),
+                           randomDistribution0(generator));
 
         direction.Normalize();
 
         const Line3F line(origin, direction);
 
-        const Vector3F firstPoint(firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator));
+        const Vector3F point0(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        const Vector3F secondPoint(firstRandomDistribution(generator),
-                                   firstRandomDistribution(generator),
-                                   firstRandomDistribution(generator));
+        const Vector3F point1(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        const Vector3F thirdPoint(firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator));
+        const Vector3F point2(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        const Triangle3F triangle(firstPoint, secondPoint, thirdPoint);
+        const Triangle3F triangle(point0, point1, point2);
 
         StaticTestIntersectorLine3Triangle3<float> intersector(line, triangle);
 
@@ -218,11 +219,11 @@ void Mathematics::IntersectorLine3Triangle3Testing::IntersectTest()
                                                origin, 1e-8f));
 
         ASSERT_TRUE(Vector3ToolsF::Approximate(intersector.GetTriangle().GetVertex(0),
-                                               firstPoint, 1e-8f));
+                                               point0, 1e-8f));
         ASSERT_TRUE(Vector3ToolsF::Approximate(intersector.GetTriangle().GetVertex(1),
-                                               secondPoint, 1e-8f));
+                                               point1, 1e-8f));
         ASSERT_TRUE(Vector3ToolsF::Approximate(intersector.GetTriangle().GetVertex(2),
-                                               thirdPoint, 1e-8f));
+                                               point2, 1e-8f));
 
         // 值测试
         const Vector3F lineOrigin = line.GetOrigin() - triangle.GetVertex(0);

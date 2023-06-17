@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/12 15:09)
+///	引擎版本：0.9.0.12 (2023/06/12 10:49)
 
 #include "Rendering/RenderingExport.h"
 
@@ -15,8 +15,6 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
-
-using std::string;
 
 Rendering::SingleShaderSamplerDataImpl::SingleShaderSamplerDataImpl() noexcept
     : samplerName{},
@@ -34,7 +32,7 @@ Rendering::SingleShaderSamplerDataImpl::SingleShaderSamplerDataImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, SingleShaderSamplerDataImpl)
 
-void Rendering::SingleShaderSamplerDataImpl::SetSampler(const string& name, ShaderFlags::SamplerType type)
+void Rendering::SingleShaderSamplerDataImpl::SetSampler(const std::string& name, ShaderFlags::SamplerType type)
 {
     RENDERING_CLASS_IS_VALID_9;
 

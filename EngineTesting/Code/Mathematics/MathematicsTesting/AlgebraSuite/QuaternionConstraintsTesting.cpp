@@ -1,23 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 22:30)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:37)
 
 #include "QuaternionConstraintsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/QuaternionConstraintsDetail.h"
 #include "Mathematics/Algebra/Vector2.h"
 #include "Mathematics/Base/MathDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 #ifndef BUILDING_MATHEMATICS_STATIC
 
@@ -49,18 +47,18 @@ void Mathematics::QuaternionConstraintsTesting::MainTest()
 
 void Mathematics::QuaternionConstraintsTesting::ConstraintsTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> firstRandomDistribution{ -MathF::GetHalfPI(), MathF::GetHalfPI() };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution0{ -MathF::GetHalfPI(), MathF::GetHalfPI() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const float firstAngle = firstRandomDistribution(generator);
+        const float firstAngle = randomDistribution0(generator);
 
-        const uniform_real<float> secondRandomDistribution(firstAngle, MathF::GetHalfPI());
+        const std::uniform_real<float> randomDistribution1(firstAngle, MathF::GetHalfPI());
 
-        const float secondAngle = secondRandomDistribution(generator);
+        const float secondAngle = randomDistribution1(generator);
 
         const QuaternionConstraintsF firstQuaternionConstraints(firstAngle, secondAngle);
 
@@ -76,21 +74,21 @@ void Mathematics::QuaternionConstraintsTesting::ConstraintsTest()
         ASSERT_APPROXIMATE(firstQuaternionConstraints.GetCosAvrAngle(), MathF::Cos(avrAngle), 1e-8f);
         ASSERT_APPROXIMATE(firstQuaternionConstraints.GetSinAvrAngle(), MathF::Sin(avrAngle), 1e-8f);
 
-        const uniform_real<float> thirdRandomDistribution(-100.0f, 100.0f);
+        const std::uniform_real<float> thirdRandomDistribution(-100.0f, 100.0f);
 
-        Vector2F firstVector(thirdRandomDistribution(generator), thirdRandomDistribution(generator));
+        Vector2F vector0(thirdRandomDistribution(generator), thirdRandomDistribution(generator));
 
-        firstVector.Normalize();
+        vector0.Normalize();
 
-        const float angle = MathF::ATan(firstVector[1] / firstVector[0]);
+        const float angle = MathF::ATan(vector0[1] / vector0[0]);
 
         if (firstAngle <= angle && angle <= secondAngle)
         {
-            ASSERT_TRUE(firstQuaternionConstraints.IsValid(firstVector[0], firstVector[1]));
+            ASSERT_TRUE(firstQuaternionConstraints.IsValid(vector0[0], vector0[1]));
         }
         else
         {
-            ASSERT_FALSE(firstQuaternionConstraints.IsValid(firstVector[0], firstVector[1]));
+            ASSERT_FALSE(firstQuaternionConstraints.IsValid(vector0[0], vector0[1]));
         }
     }
 }

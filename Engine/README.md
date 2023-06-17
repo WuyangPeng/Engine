@@ -41,7 +41,7 @@
 	
 通过宏控制是否关联：
 	ACE、openssl、mysql、mysql connector c++、protobuf、freeglut、wxWidgets、opencv、OpenAL Soft、
-	lua、OpenXLSX、perl、Pantheios、Openrj、ogg、vorbis、FLTK、chipmunk2D physics。
+	lua、OpenXLSX、ogg、vorbis、FLTK、Apr、ActiveMQ、Mongo-c-driver、Mongo-cxx-driver、hiredis。
 
 ----------------------------
 相关模块：

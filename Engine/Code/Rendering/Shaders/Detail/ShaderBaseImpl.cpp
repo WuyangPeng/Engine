@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/11 20:51)
+///	引擎版本：0.9.0.12 (2023/06/12 10:45)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,8 +21,6 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-using std::string;
-
 Rendering::ShaderBaseImpl::ShaderBaseImpl(int numInputs, int numOutputs, int numConstants, int numSamplers)
     : input{ numInputs }, output{ numOutputs }, constants{ numConstants }, sampler{ numSamplers }, profile{}
 {
@@ -37,28 +35,28 @@ Rendering::ShaderBaseImpl::ShaderBaseImpl(int numInputs, int numOutputs)
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderBaseImpl)
 
-void Rendering::ShaderBaseImpl::SetInput(int index, const string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
+void Rendering::ShaderBaseImpl::SetInput(int index, const std::string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     input.SetData(index, name, type, semantic);
 }
 
-void Rendering::ShaderBaseImpl::SetOutput(int index, const string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
+void Rendering::ShaderBaseImpl::SetOutput(int index, const std::string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     output.SetData(index, name, type, semantic);
 }
 
-void Rendering::ShaderBaseImpl::SetConstant(int index, const string& name, int numRegistersUsed)
+void Rendering::ShaderBaseImpl::SetConstant(int index, const std::string& name, int numRegistersUsed)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     constants.SetConstant(index, name, numRegistersUsed);
 }
 
-void Rendering::ShaderBaseImpl::SetSampler(int index, const string& name, ShaderFlags::SamplerType type)
+void Rendering::ShaderBaseImpl::SetSampler(int index, const std::string& name, ShaderFlags::SamplerType type)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -163,7 +161,7 @@ int Rendering::ShaderBaseImpl::GetNumConstants() const
     return constants.GetNumConstants();
 }
 
-string Rendering::ShaderBaseImpl::GetConstantName(int index) const
+std::string Rendering::ShaderBaseImpl::GetConstantName(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -184,7 +182,7 @@ int Rendering::ShaderBaseImpl::GetNumSamplers() const
     return sampler.GetNumSamplers();
 }
 
-string Rendering::ShaderBaseImpl::GetSamplerName(int index) const
+std::string Rendering::ShaderBaseImpl::GetSamplerName(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

@@ -12,8 +12,8 @@
 #include "OfflineServer/OfflineServerMiddleLayer/Macro/OfflineServerMiddleLayerClassInvariantMacro.h"
 #include "ResourceManager.h"
 
-OfflineServerMiddleLayer::ResourceManager::ResourceManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+OfflineServerMiddleLayer::ResourceManager::ResourceManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     OFFLINE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

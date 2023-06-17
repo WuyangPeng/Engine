@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起版本：0.8.1.2 (2022/09/11 22:01)
+///	历史的崛起版本：0.9.0.12 (2023/06/17 12:43)
 
 #include "ProjectName.h"
 #include "RiseOfHistory/Helper/RiseOfHistoryClassInvariantMacro.h"
@@ -17,9 +17,6 @@
 
 #include <iostream>
 
-using std::setfill;
-using std::setw;
-using std::string;
 using namespace std::literals;
 
 RiseOfHistory::ProjectName::ProjectName(const String& fileName, const EnvironmentDirectory& environmentDirectory)
@@ -30,7 +27,7 @@ RiseOfHistory::ProjectName::ProjectName(const String& fileName, const Environmen
 
 // static
 // private
-string RiseOfHistory::ProjectName::GetProjectName(const String& fileName, const EnvironmentDirectory& environmentDirectory)
+std::string RiseOfHistory::ProjectName::GetProjectName(const String& fileName, const EnvironmentDirectory& environmentDirectory)
 {
     return CoreTools::StringConversion::StandardConversionMultiByte(environmentDirectory.GetDirectory(Framework::UpperDirectory::Configuration) + fileName);
 }
@@ -69,7 +66,7 @@ void RiseOfHistory::ProjectName::PrintSelect() const
 
     for (const auto& value : container)
     {
-        COUT << setw(width) << setfill(SYSTEM_TEXT('0')) << (index++) << SYSTEM_TEXT("：") << value << SYSTEM_TEXT("\n");
+        COUT << std::setw(width) << std::setfill(SYSTEM_TEXT('0')) << (index++) << SYSTEM_TEXT("：") << value << SYSTEM_TEXT("\n");
     }
 }
 

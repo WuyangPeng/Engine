@@ -26,10 +26,14 @@ CSVConfigure::EquipContainer::EquipContainer(const CoreTools::CSVContent& csvCon
 
 void CSVConfigure::EquipContainer::Parsing(const CoreTools::CSVContent& csvContent)
 {
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("equip表开始载入……"));
+
     const auto size = csvContent.GetCount();
+    const auto csvHead = csvContent.GetCSVHead();
+
     for (auto i = 0; i < size; ++i)
     {
-        CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
 
         equip.emplace_back(std::make_shared<Equip>(csvRow));
     }
@@ -37,6 +41,8 @@ void CSVConfigure::EquipContainer::Parsing(const CoreTools::CSVContent& csvConte
     std::ranges::sort(equip, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("equip表结束载入……"));
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, EquipContainer)

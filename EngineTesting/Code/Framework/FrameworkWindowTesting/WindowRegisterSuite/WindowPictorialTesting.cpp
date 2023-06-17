@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 13:52)
+///	引擎测试版本：0.9.0.12 (2023/06/13 23:07)
 
 #include "WindowPictorialTesting.h"
 #include "resource.h"
@@ -14,10 +14,8 @@
 #include "System/Windows/WindowsRegister.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/WindowRegister/WindowPictorial.h"
-
-using std::default_random_engine;
-using std::uniform_int;
 
 namespace Framework
 {
@@ -26,38 +24,38 @@ namespace Framework
 
 Framework::WindowPictorialTesting::WindowPictorialTesting(const OStreamShared& stream, HInstance hInstance)
     : ParentType{ stream }, instance{ hInstance },
-      iconContainer{ { 0, System::g_Application },
-                       { 32512, System::g_Application },
-                       { 32513, System::g_IDIHand },
-                       { 32514, System::g_Question },
-                       { 32515, System::g_Exclamation },
-                       { 32516, System::g_Asterisk },
-                       { 32517, System::g_WinLogo },
-                       { 32518, System::g_Shield },
-                       { 32515, System::g_Warning },
-                       { 32513, System::g_Error },
-                       { 32516, System::g_Information } },
-      cursorContainer{ { 0, System::g_Arrow },
-                         { 32512, System::g_Arrow },
-                         { 32513, System::g_Ibeam },
-                         { 32514, System::g_Wait },
-                         { 32515, System::g_Cross },
-                         { 32516, System::g_UpArrow },
-                         { 32642, System::g_SizeNwse },
-                         { 32643, System::g_SizeNesw },
-                         { 32644, System::g_SizeWe },
-                         { 32645, System::g_SizeNs },
-                         { 32646, System::g_SizeAll },
-                         { 32648, System::g_No },
-                         { 32649, System::g_IDCHand },
-                         { 32650, System::g_AppStarting },
-                         { 32651, System::g_Help } },
+      iconContainer{ { 0, System::gApplication },
+                     { 32512, System::gApplication },
+                     { 32513, System::gIDIHand },
+                     { 32514, System::gQuestion },
+                     { 32515, System::gExclamation },
+                     { 32516, System::gAsterisk },
+                     { 32517, System::gWinLogo },
+                     { 32518, System::gShield },
+                     { 32515, System::gWarning },
+                     { 32513, System::gError },
+                     { 32516, System::gInformation } },
+      cursorContainer{ { 0, System::gArrow },
+                       { 32512, System::gArrow },
+                       { 32513, System::gIbeam },
+                       { 32514, System::gWait },
+                       { 32515, System::gCross },
+                       { 32516, System::gUpArrow },
+                       { 32642, System::gSizeNwse },
+                       { 32643, System::gSizeNesw },
+                       { 32644, System::gSizeWe },
+                       { 32645, System::gSizeNs },
+                       { 32646, System::gSizeAll },
+                       { 32648, System::gNo },
+                       { 32649, System::gIDCHand },
+                       { 32650, System::gAppStarting },
+                       { 32651, System::gHelp } },
       brushContainer{ System::WindowsBrushTypes::WhiteBrush,
-                        System::WindowsBrushTypes::LtgrayBrush,
-                        System::WindowsBrushTypes::GrayBrush,
-                        System::WindowsBrushTypes::DkgrayBrush,
-                        System::WindowsBrushTypes::BlackBrush,
-                        System::WindowsBrushTypes::NullBrush },
+                      System::WindowsBrushTypes::LtgrayBrush,
+                      System::WindowsBrushTypes::GrayBrush,
+                      System::WindowsBrushTypes::DkgrayBrush,
+                      System::WindowsBrushTypes::BlackBrush,
+                      System::WindowsBrushTypes::NullBrush },
       testIconContainer{},
       testCursorContainer{},
       testBrushContainer{},
@@ -96,26 +94,26 @@ void Framework::WindowPictorialTesting::BrushTest()
     for_each(brushContainer.begin(), brushContainer.end(), [this](const auto& value) {
         const TestingType pictorial{ value };
 
-        ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(nullptr, System::g_Application));
-        ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(nullptr, System::g_Arrow));
+        ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(nullptr, System::gApplication));
+        ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(nullptr, System::gArrow));
         ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(value));
     });
 
     TestingType nullPictorial{ System::WindowsBrushTypes::Null };
 
-    ASSERT_EQUAL(nullPictorial.GetHIcon(), System::LoadSystemIcon(nullptr, System::g_Application));
-    ASSERT_EQUAL(nullPictorial.GetHCursor(), System::LoadSystemCursor(nullptr, System::g_Arrow));
+    ASSERT_EQUAL(nullPictorial.GetHIcon(), System::LoadSystemIcon(nullptr, System::gApplication));
+    ASSERT_EQUAL(nullPictorial.GetHCursor(), System::LoadSystemCursor(nullptr, System::gArrow));
     ASSERT_EQUAL(nullPictorial.GetHBrush(), nullptr);
 }
 
 void Framework::WindowPictorialTesting::RandomTest()
 {
-    default_random_engine generator{ GetEngineRandomSeed() };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     RandomContainer(generator);
 
-    const auto testLoopCount = GetTestLoopCount();
+    const auto aTestLoopCount = GetTestLoopCount();
 
-    for (auto i = 0; i < testLoopCount; ++i)
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         ASSERT_NOT_THROW_EXCEPTION_0(RandomIconTest);
         ASSERT_NOT_THROW_EXCEPTION_0(RandomCursorTest);
@@ -133,7 +131,7 @@ void Framework::WindowPictorialTesting::RandomTest()
     }
 }
 
-void Framework::WindowPictorialTesting::RandomContainer(default_random_engine& generator)
+void Framework::WindowPictorialTesting::RandomContainer(std::default_random_engine& generator)
 {
     testIconContainer = iconContainer;
     testCursorContainer = cursorContainer;
@@ -224,7 +222,7 @@ void Framework::WindowPictorialTesting::CustomIconAndCursorTest()
     ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(*brushIter));
 }
 
-void Framework::WindowPictorialTesting::NextIcon(default_random_engine& generator)
+void Framework::WindowPictorialTesting::NextIcon(std::default_random_engine& generator)
 {
     ++iconIter;
     if (iconIter == testIconContainer.cend())
@@ -234,7 +232,7 @@ void Framework::WindowPictorialTesting::NextIcon(default_random_engine& generato
     }
 }
 
-void Framework::WindowPictorialTesting::NextCursor(default_random_engine& generator)
+void Framework::WindowPictorialTesting::NextCursor(std::default_random_engine& generator)
 {
     ++cursorIter;
     if (cursorIter == testCursorContainer.cend())
@@ -244,7 +242,7 @@ void Framework::WindowPictorialTesting::NextCursor(default_random_engine& genera
     }
 }
 
-void Framework::WindowPictorialTesting::NextBrush(default_random_engine& generator)
+void Framework::WindowPictorialTesting::NextBrush(std::default_random_engine& generator)
 {
     ++brushIter;
     if (brushIter == testBrushContainer.cend())

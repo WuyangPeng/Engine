@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.1 (2022/08/24 18:12)
+///	引擎版本：0.9.0.12 (2023/06/12 10:50)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,9 +19,6 @@
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
 #include "Rendering/OpenGLRenderer/Detail/GLSL/GLSLVisualProgram.h"
 #include "Rendering/Shaders/Shader.h"
-
-using std::string;
-using std::vector;
 
 Rendering::VisualProgramImpl::VisualProgramSharedPtr Rendering::VisualProgramImpl::Create(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle)
 {
@@ -176,7 +173,7 @@ Rendering::VisualProgramImpl::VisualProgramSharedPtr Rendering::VisualProgramImp
     return std::make_shared<ClassType>(*this);
 }
 
-CoreTools::ObjectSharedPtr Rendering::VisualProgramImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::VisualProgramImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -195,7 +192,7 @@ CoreTools::ObjectSharedPtr Rendering::VisualProgramImpl::GetObjectByName(const s
     return geometryShader->GetObjectByName(name);
 }
 
-Rendering::VisualProgramImpl::ObjectSharedPtrContainer Rendering::VisualProgramImpl::GetAllObjectsByName(const string& name)
+Rendering::VisualProgramImpl::ObjectSharedPtrContainer Rendering::VisualProgramImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -210,7 +207,7 @@ Rendering::VisualProgramImpl::ObjectSharedPtrContainer Rendering::VisualProgramI
     return result;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::VisualProgramImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::VisualProgramImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -229,7 +226,7 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualProgramImpl::GetConstObjectByNa
     return geometryShader->GetConstObjectByName(name);
 }
 
-Rendering::VisualProgramImpl::ConstObjectSharedPtrContainer Rendering::VisualProgramImpl::GetAllConstObjectsByName(const string& name) const
+Rendering::VisualProgramImpl::ConstObjectSharedPtrContainer Rendering::VisualProgramImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

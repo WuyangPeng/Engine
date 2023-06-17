@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 13:51)
+///	引擎版本：0.9.0.12 (2023/06/13 14:36)
 
 #include "Framework/FrameworkExport.h"
 
@@ -23,20 +23,18 @@
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
-using std::make_shared;
-using std::move;
 using namespace std::literals;
 
 Framework::NetworkManagerInterface::NetworkManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory },
       impl{ System::EnumCastUnderlying(NetworkMiddleLayer::Count) },
-      networkManager{ make_shared<NetworkManagerImpl>() }
+      networkManager{ std::make_shared<NetworkManagerImpl>() }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Framework::NetworkManagerInterface::NetworkManagerInterface(NetworkManagerInterface&& rhs) noexcept
-    : ParentType{ move(rhs) }, impl{ move(rhs.impl) }, networkManager{ move(rhs.networkManager) }
+    : ParentType{ move(rhs) }, impl{ std::move(rhs.impl) }, networkManager{ move(rhs.networkManager) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -47,7 +45,7 @@ Framework::NetworkManagerInterface& Framework::NetworkManagerInterface::operator
 
     ParentType::operator=(move(rhs));
 
-    impl = move(rhs.impl);
+    impl = std::move(rhs.impl);
 
     networkManager = move(rhs.networkManager);
 

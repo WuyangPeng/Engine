@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/28 15:57)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:15)
 
 #include "Cone3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Cone3Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -45,27 +42,27 @@ void Mathematics::Cone3Testing::MainTest()
 
 void Mathematics::Cone3Testing::ConeTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
-    const uniform_real<double> secondRandomDistribution(0.0, MathD::GetHalfPI());
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
+    const std::uniform_real<double> randomDistribution1(0.0, MathD::GetHalfPI());
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D vertex(firstRandomDistribution(generator),
-                              firstRandomDistribution(generator),
-                              firstRandomDistribution(generator));
+        const Vector3D vertex(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        Vector3D axis(firstRandomDistribution(generator),
-                      firstRandomDistribution(generator),
-                      firstRandomDistribution(generator));
+        Vector3D axis(randomDistribution0(generator),
+                      randomDistribution0(generator),
+                      randomDistribution0(generator));
 
         axis.Normalize();
 
-        const double angle(secondRandomDistribution(generator));
+        const double angle(randomDistribution1(generator));
 
-        const double height(MathD::FAbs(firstRandomDistribution(generator)));
+        const double height(MathD::FAbs(randomDistribution0(generator)));
 
         const Cone3D cone(vertex, axis, angle, height);
 

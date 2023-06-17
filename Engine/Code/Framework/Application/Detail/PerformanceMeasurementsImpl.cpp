@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/06 11:26)
+///	引擎版本：0.9.0.12 (2023/06/13 14:48)
 
 #include "Framework/FrameworkExport.h"
 
@@ -14,9 +14,6 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-
-using std::array;
-using std::string;
 
 Framework::PerformanceMeasurementsImpl::PerformanceMeasurementsImpl(int maxTimer) noexcept
     : customTime{}, accumulatedTime{ 0 }, frameCount{ 0 }, accumulatedFrameCount{ 0 }, timer{ maxTimer }, maxTimer{ maxTimer }
@@ -46,7 +43,7 @@ double Framework::PerformanceMeasurementsImpl::GetFrameRate() const
         return 0.0;
 }
 
-string Framework::PerformanceMeasurementsImpl::GetFrameRateMessage() const
+std::string Framework::PerformanceMeasurementsImpl::GetFrameRateMessage() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 

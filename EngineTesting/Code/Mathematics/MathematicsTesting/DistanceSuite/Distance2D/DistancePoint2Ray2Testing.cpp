@@ -1,22 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/07 15:09)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:37)
 
 #include "DistancePoint2Ray2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Distance/Distance2D/DistancePoint2Ray2Detail.h"
+
 #include <random>
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::swap;
 
 namespace Mathematics
 {
@@ -48,7 +48,7 @@ void Mathematics::DistancePoint2Ray2Testing::MainTest()
 
 void Mathematics::DistancePoint2Ray2Testing::BaseTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -83,7 +83,7 @@ void Mathematics::DistancePoint2Ray2Testing::BaseTest()
 
 void Mathematics::DistancePoint2Ray2Testing::StaticTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -120,7 +120,7 @@ void Mathematics::DistancePoint2Ray2Testing::StaticTest()
 
 void Mathematics::DistancePoint2Ray2Testing::DynamicTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -163,7 +163,7 @@ void Mathematics::DistancePoint2Ray2Testing::DynamicTest()
 
 void Mathematics::DistancePoint2Ray2Testing::DerivativeTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -201,7 +201,7 @@ void Mathematics::DistancePoint2Ray2Testing::DerivativeTest()
 
 void Mathematics::DistancePoint2Ray2Testing::IntervalTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -222,7 +222,7 @@ void Mathematics::DistancePoint2Ray2Testing::IntervalTest()
         double tMax = MathD::FAbs(randomDistribution(generator));
         if (tMax < tMin)
         {
-            swap(tMin, tMax);
+            std::swap(tMin, tMax);
         }
 
         Vector2 lhsVelocity(randomDistribution(generator), randomDistribution(generator));

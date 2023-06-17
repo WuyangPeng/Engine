@@ -1,26 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/26 11:30)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:29)
 
 #include "ConversionIntegerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/Log2OfPowerOfTwoDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/ConversionIntegerDetail.h"
 #include "Mathematics/Rational/FloatingPointAnalysisDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 #include <random>
-
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
-
 
 Mathematics::ConversionIntegerTesting::ConversionIntegerTesting(const OStreamShared& streamShared)
     : ParentType{ streamShared }
@@ -46,17 +42,17 @@ void Mathematics::ConversionIntegerTesting::MainTest()
 
 void Mathematics::ConversionIntegerTesting::NumericalValueSymbolTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-    const uniform_real<float> thirdRandomDistribution{ -1.0e-1f, 1.0e-1f };
-    const uniform_real<double> fourthRandomDistribution{ -1.0e-1, 1.0e-1 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution0{ -1.0e38f, 1.0e38f };
+    const std::uniform_real<double> randomDistribution1{ -1.0e300, 1.0e300 };
+    const std::uniform_real<float> thirdRandomDistribution{ -1.0e-1f, 1.0e-1f };
+    const std::uniform_real<double> fourthRandomDistribution{ -1.0e-1, 1.0e-1 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        auto firstValue = firstRandomDistribution(generator);
+        auto firstValue = randomDistribution0(generator);
         const ConversionInteger<float> firstIntegerConversion(firstValue);
 
         if (0.0 <= firstValue)
@@ -68,7 +64,7 @@ void Mathematics::ConversionIntegerTesting::NumericalValueSymbolTest()
             ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Negative);
         }
 
-        auto secondValue = secondRandomDistribution(generator);
+        auto secondValue = randomDistribution1(generator);
         const ConversionInteger<double> secondIntegerConversion(secondValue);
 
         if (0.0 <= secondValue)
@@ -94,17 +90,17 @@ void Mathematics::ConversionIntegerTesting::NumericalValueSymbolTest()
 
 void Mathematics::ConversionIntegerTesting::ExponentTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-    const uniform_real<float> thirdRandomDistribution{ -1.0e-1f, 1.0e-1f };
-    const uniform_real<double> fourthRandomDistribution{ -1.0e-1, 1.0e-1 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution0{ -1.0e38f, 1.0e38f };
+    const std::uniform_real<double> randomDistribution1{ -1.0e300, 1.0e300 };
+    const std::uniform_real<float> thirdRandomDistribution{ -1.0e-1f, 1.0e-1f };
+    const std::uniform_real<double> fourthRandomDistribution{ -1.0e-1, 1.0e-1 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        auto firstValue = firstRandomDistribution(generator);
+        auto firstValue = randomDistribution0(generator);
         const ConversionInteger<float> firstIntegerConversion(firstValue);
 
         const auto firstRealExponent = firstIntegerConversion.GetShifting();
@@ -113,7 +109,7 @@ void Mathematics::ConversionIntegerTesting::ExponentTest()
 
         ASSERT_EQUAL(firstIntegerConversion.GetShifting(), secondIntegerConversion.GetShifting());
 
-        auto thirdValue = secondRandomDistribution(generator);
+        auto thirdValue = randomDistribution1(generator);
         const ConversionInteger<double> thirdIntegerConversion(thirdValue);
 
         const auto secondRealExponent = thirdIntegerConversion.GetShifting();
@@ -136,19 +132,19 @@ void Mathematics::ConversionIntegerTesting::ExponentTest()
 
 void Mathematics::ConversionIntegerTesting::MantissaTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-    const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-    const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
-    const uniform_int<> fifthRandomDistribution(0, 38);
-    const uniform_int<> sixthRandomDistribution(0, 308);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution0{ -1.0e38f, 1.0e38f };
+    const std::uniform_real<double> randomDistribution1{ -1.0e300, 1.0e300 };
+    const std::uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    const std::uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    const std::uniform_int<> fifthRandomDistribution(0, 38);
+    const std::uniform_int<> sixthRandomDistribution(0, 308);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        auto firstValue = firstRandomDistribution(generator);
+        auto firstValue = randomDistribution0(generator);
         const ConversionInteger<float> firstIntegerConversion(firstValue);
 
         auto firstExponent = firstIntegerConversion.GetShifting();
@@ -170,7 +166,7 @@ void Mathematics::ConversionIntegerTesting::MantissaTest()
 
         ASSERT_EQUAL(firstIntegerConversion.GetMantissaSize(), secondIntegerConversion.GetMantissaSize());
 
-        auto thirdValue = secondRandomDistribution(generator);
+        auto thirdValue = randomDistribution1(generator);
         const ConversionInteger<double> thirdIntegerConversion(thirdValue);
 
         auto secondExponent = thirdIntegerConversion.GetShifting();

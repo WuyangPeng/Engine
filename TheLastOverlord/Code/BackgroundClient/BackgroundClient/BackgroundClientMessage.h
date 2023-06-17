@@ -55,7 +55,7 @@ namespace BackgroundClient
         using ParentType = MessageType;
 
     public:
-        explicit BackgroundClientMessage(int64_t delta);
+        explicit BackgroundClientMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

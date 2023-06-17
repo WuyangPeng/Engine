@@ -55,7 +55,7 @@ namespace MessageClient
         using ParentType = MessageType;
 
     public:
-        explicit MessageClientMessage(int64_t delta);
+        explicit MessageClientMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

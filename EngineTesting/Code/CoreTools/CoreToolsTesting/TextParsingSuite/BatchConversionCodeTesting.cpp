@@ -39,7 +39,7 @@ void CoreTools::BatchConversionCodeTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(VerifyTest);
 }
 
-void CoreTools::BatchConversionCodeTesting::BatchConversionCodeTest()  
+void CoreTools::BatchConversionCodeTesting::BatchConversionCodeTest()
 {
     const BatchConversionCode batchConversionCode{ SYSTEM_TEXT("Resource/OutputCSVTesting"s), SYSTEM_TEXT("Resource/OutputCodeTesting") };
 }
@@ -54,7 +54,7 @@ void CoreTools::BatchConversionCodeTesting::VerifyTest()
     {
         const auto fileName = inputPath.path().native();
 
-        IFStreamManager ifStreamManager{ fileName };
+        IFStreamManager ifStreamManager{ CoreTools::StringConversion::WideCharConversionStandard(fileName) };
 
         ASSERT_FALSE(ifStreamManager.GetFileContent().empty());
 

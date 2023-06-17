@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.8.0.11 (2022/07/14 17:21)
+///	引擎游戏版本：0.9.0.12 (2023/06/16 17:03)
 
 #ifndef CHARACTER_INFORMATION_LIB_H
 #define CHARACTER_INFORMATION_LIB_H
@@ -17,9 +17,13 @@
     #ifndef BUILDING_CHARACTER_INFORMATION_STATIC
 
         #ifdef _DEBUG
+
             #pragma comment(lib, "CharacterInformationD.lib")
+
         #else  // !_DEBUG
+
             #pragma comment(lib, "CharacterInformation.lib")
+
         #endif  // _DEBUG
 
     #else  // !BUILDING_CHARACTER_INFORMATION_STATIC
@@ -27,9 +31,13 @@
         #include "DllLib.h"
 
         #ifdef _DEBUG
+
             #pragma comment(lib, "CharacterInformationStaticD.lib")
+
         #else  // !_DEBUG
+
             #pragma comment(lib, "CharacterInformationStatic.lib")
+
         #endif  // _DEBUG
 
     #endif  // BUILDING_CHARACTER_INFORMATION_STATIC

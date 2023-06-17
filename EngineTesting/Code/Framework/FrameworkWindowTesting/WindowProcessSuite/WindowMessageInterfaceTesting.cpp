@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 14:00)
+///	引擎测试版本：0.9.0.12 (2023/06/13 23:08)
 
 #include "WindowMessageInterfaceTesting.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "System/Windows/WindowsCreate.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/WindowCreate/WindowCreate.h"
@@ -51,7 +52,7 @@ void Framework::WindowMessageInterfaceTesting::MainTest()
 void Framework::WindowMessageInterfaceTesting::MessageTest()
 {
     const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-    constexpr auto delta = System::g_Microseconds / 60;
+    constexpr auto delta = System::gMicroseconds / 60;
 
     TestingType message{ delta, environmentDirectory };
     ASSERT_EQUAL(message.GetDelta(), delta);
@@ -88,7 +89,7 @@ void Framework::WindowMessageInterfaceTesting::MessageTest()
 
 void Framework::WindowMessageInterfaceTesting::CloseMessageTest()
 {
-    constexpr auto delta = System::g_Microseconds / 60;
+    constexpr auto delta = System::gMicroseconds / 60;
     TestingType message{ delta };
 
     auto instance = System::GetHInstance();
@@ -109,7 +110,7 @@ void Framework::WindowMessageInterfaceTesting::CloseMessageTest()
 
 void Framework::WindowMessageInterfaceTesting::DestroyMessageTest()
 {
-    constexpr auto delta = System::g_Microseconds / 60;
+    constexpr auto delta = System::gMicroseconds / 60;
     TestingType message{ delta };
 
     auto instance = System::GetHInstance();
@@ -131,7 +132,7 @@ void Framework::WindowMessageInterfaceTesting::DestroyMessageTest()
 
 void Framework::WindowMessageInterfaceTesting::SetMainWindowTest()
 {
-    constexpr auto delta = System::g_Microseconds / 60;
+    constexpr auto delta = System::gMicroseconds / 60;
     TestingType message{ delta };
 
     auto instance = System::GetHInstance();

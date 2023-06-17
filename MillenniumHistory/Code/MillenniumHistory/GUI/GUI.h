@@ -5,11 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.5 (2023/04/03 09:35)
+///	千年史策版本：0.9.0.12 (2023/06/15 23:05)
 
 #ifndef MILLENNIUM_HISTORY_GUI_H
 #define MILLENNIUM_HISTORY_GUI_H
 
-#include "GUIMiddleLayer.h"
+#include "GUIManager.h"
 
 #endif  // MILLENNIUM_HISTORY_GUI_H

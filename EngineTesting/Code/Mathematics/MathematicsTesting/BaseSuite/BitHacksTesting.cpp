@@ -1,24 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 10:44)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:26)
 
 #include "BitHacksTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Base/BitHacksDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/Base/BitHacksDetail.h"
+
 #include <algorithm>
 #include <random>
-
-using std::default_random_engine;
-using std::pow;
-using std::uniform_int;
-using std::uniform_real;
 
 Mathematics::BitHacksTesting::BitHacksTesting(const OStreamShared& streamShared)
     : ParentType{ streamShared }
@@ -126,8 +122,8 @@ void Mathematics::BitHacksTesting::SignIntLog2OfPowerOfTwoTest()
     // 随机值测试
     auto max = boost::numeric_cast<int>(pow(2.0, 31) - 1);
 
-    default_random_engine randomEngine{};
-    const uniform_int<> integerRandomDistribution{ 0, max };
+    std::default_random_engine randomEngine{ GetEngineRandomSeed() };
+    const std::uniform_int<> integerRandomDistribution{ 0, max };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -144,8 +140,8 @@ void Mathematics::BitHacksTesting::UnsignIntLog2OfPowerOfTwoTest()
     // 随机值测试
     const auto max = boost::numeric_cast<uint32_t>(pow(2.0, 32) - 1);
 
-    default_random_engine randomEngine{};
-    const uniform_int<uint32_t> integerRandomDistribution{ 0, max };
+    std::default_random_engine randomEngine{ GetEngineRandomSeed() };
+    const std::uniform_int<uint32_t> integerRandomDistribution{ 0, max };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -187,9 +183,9 @@ void Mathematics::BitHacksTesting::ScaledFloatToIntMaxTest()
 void Mathematics::BitHacksTesting::ScaledFloatToIntRandomTest()
 {
     // 随机值测试
-    default_random_engine randomEngine{};
-    const uniform_int<uint32_t> integerRandomDistribution{ 0, 24 };
-    const uniform_real<float> floatRandomDistribution{ 0.0f, 1.0f };
+    std::default_random_engine randomEngine{ GetEngineRandomSeed() };
+    const std::uniform_int<uint32_t> integerRandomDistribution{ 0, 24 };
+    const std::uniform_real<float> floatRandomDistribution{ 0.0f, 1.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 

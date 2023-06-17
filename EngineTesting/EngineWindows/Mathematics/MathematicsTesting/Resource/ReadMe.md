@@ -3,7 +3,7 @@
 ----------------------------
 数学库单元测试
 
-1.   MacroSuite 
+1.   HelperSuite 
 
 对宏模块的单元测试，包括： 
 （1）用户宏。
@@ -79,7 +79,13 @@
 （19）  凸多面体。
 
 ----------------------------
-6.	RationalSuite
+6. PrimitivesSuite
+
+对基本体模块的单元测试，包括：
+（1） 基本体。
+
+----------------------------
+7.	RationalSuite
 
 对有理数模块的单元测试，包括： 
 （1） 浮点数解析。
@@ -87,7 +93,7 @@
 （3） 有理数。
 
 ----------------------------
-7.	NumericalAnalysisSuite
+8.	NumericalAnalysisSuite
 
 对数值分析模块的单元测试，包括： 
 （1） 方程。
@@ -103,14 +109,14 @@
 （11）奇异值分解。
 
 ----------------------------
-8.	QuerySuite
+9.	QuerySuite
 
 对查询模块的单元测试，包括： 
 （1）  2D查询。
 （2）  3D查询。
 
 ----------------------------
-9.	ApproximationSuite
+10.	ApproximationSuite
 
 对近似模块的单元测试，包括： 
 （1） 2D点集匹配拟合方案。
@@ -118,51 +124,51 @@
 （3） 4D点集匹配拟合方案。
 
 ----------------------------
-10.	DistanceSuite
+11.	DistanceSuite
 
 对距离模块的单元测试，包括： 
 （1） 2D对象间的距离计算。
 （2） 3D对象间的距离计算。
 
 ----------------------------
-11.	IntersectionSuite
+12.	IntersectionSuite
 
 对相交模块的单元测试，包括： 
 （1） 2D对象间的相交计算。
 （2） 3D对象间的相交计算。
 
 ----------------------------
-12.	ComputationalGeometrySuite
+13.	ComputationalGeometrySuite
 
 对计算几何模块的单元测试，包括： 
 （1）计算几何。
 
 ----------------------------
-13.	ContainmentSuite
+14.	ContainmentSuite
 
 对包含模块的单元测试，包括： 
 （1）包含。
 
 ----------------------------
-14.	CurvesSurfacesVolumesSuite
+15.	CurvesSurfacesVolumesSuite
 
 对曲线曲面体积模块的单元测试，包括： 
 （1）曲线曲面体积。
 
 ----------------------------
-15.	InterpolationSuite
+16.	InterpolationSuite
 
 对插值模块的单元测试，包括： 
 （1）插值。
 
 ----------------------------
-16.	MeshesSuite
+17.	MeshesSuite
 
 对网格模块的单元测试，包括： 
 （1）网格。
 
 ----------------------------
-17.	MiscellaneousSuite
+18.	MiscellaneousSuite
 
 对杂项模块的单元测试，包括： 
 （1）杂项。

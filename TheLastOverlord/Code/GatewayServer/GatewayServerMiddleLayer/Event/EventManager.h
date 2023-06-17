@@ -24,7 +24,7 @@ namespace GatewayServerMiddleLayer
         using ParentType = Framework::EventManagerInterface;
 
     public:
-        explicit EventManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit EventManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

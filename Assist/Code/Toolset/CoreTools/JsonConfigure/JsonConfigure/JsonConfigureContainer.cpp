@@ -43,16 +43,16 @@ void JsonConfigure::JsonConfigureContainer::Parsing(const System::String& direct
     {
         auto fileName = inputPath.path().native();
 
-        if (fileName.find(SYSTEM_TEXT(".json"s)) != (fileName.size() - 5))
+        if (fileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT(".json"s))) != (fileName.size() - 5))
         {
             continue;
         }
 
-        CoreTools::JsonRow::BasicTree basicTree{ fileName };
-        read_json(CoreTools::StringConversion::StandardConversionMultiByte(fileName), basicTree);
+        CoreTools::JsonRow::BasicTree basicTree{ CoreTools::StringConversion::WideCharConversionStandard(fileName) };
+        read_json(CoreTools::StringConversion::WideCharConversionMultiByte(fileName), basicTree);
 
         CoreTools::JsonRow jsonRow{ basicTree };
-        CoreTools::JsonHead jsonHead{ fileName };
+        CoreTools::JsonHead jsonHead{ CoreTools::StringConversion::WideCharConversionStandard(fileName) };
         const auto className = jsonHead.GetJsonClassName();
 
         if (className == SYSTEM_TEXT("Monsters"s))

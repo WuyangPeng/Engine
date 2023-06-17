@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/03/29 13:56)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 13:56)
 
 #include "Rendering/RenderingExport.h"
 
@@ -17,8 +17,6 @@
 
 #include <gsl/util>
 #include <iostream>
-
-using std::ostream;
 
 Rendering::HalfFloat::HalfFloat(float value) noexcept
     : halfFloat{ ConvertHalfFloat(value) }
@@ -204,7 +202,7 @@ bool Rendering::Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const fl
         return false;
 }
 
-ostream& Rendering::operator<<(ostream& outFile, const HalfFloat& halfFloat)
+std::ostream& Rendering::operator<<(std::ostream& outFile, const HalfFloat& halfFloat)
 {
     outFile << halfFloat.ToFloat();
 

@@ -26,10 +26,14 @@ CSVConfigure::HeroContainer::HeroContainer(const CoreTools::CSVContent& csvConte
 
 void CSVConfigure::HeroContainer::Parsing(const CoreTools::CSVContent& csvContent)
 {
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("hero表开始载入……"));
+
     const auto size = csvContent.GetCount();
+    const auto csvHead = csvContent.GetCSVHead();
+
     for (auto i = 0; i < size; ++i)
     {
-        CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
 
         auto heroBase = std::make_shared<Hero>(csvRow);
 
@@ -39,6 +43,8 @@ void CSVConfigure::HeroContainer::Parsing(const CoreTools::CSVContent& csvConten
             LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("hero表存在重复主键："), heroBase->GetKey(), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("hero表结束载入……"));
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, HeroContainer)

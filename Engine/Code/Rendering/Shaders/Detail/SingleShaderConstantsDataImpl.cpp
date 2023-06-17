@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/12 14:43)
+///	引擎版本：0.9.0.12 (2023/06/12 10:48)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,9 +16,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-using std::string;
-
-Rendering::SingleShaderConstantsDataImpl::SingleShaderConstantsDataImpl(const string& name, int numRegistersUsed)
+Rendering::SingleShaderConstantsDataImpl::SingleShaderConstantsDataImpl(const std::string& name, int numRegistersUsed)
     : name{ name }, numRegistersUsed{ numRegistersUsed }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -50,7 +48,7 @@ void Rendering::SingleShaderConstantsDataImpl::SetConstant(const std::string& aN
     numRegistersUsed = aNumRegistersUsed;
 }
 
-string Rendering::SingleShaderConstantsDataImpl::GetConstantName() const
+std::string Rendering::SingleShaderConstantsDataImpl::GetConstantName() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

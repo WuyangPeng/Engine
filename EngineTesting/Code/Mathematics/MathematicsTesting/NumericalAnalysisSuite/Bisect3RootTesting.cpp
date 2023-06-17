@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/02 16:32)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:01)
 
 #include "Bisect3RootTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/NumericalAnalysis/Bisect3RootDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/NumericalAnalysis/Bisect3RootDetail.h"
+
 namespace Mathematics
 {
     template class Bisect3Root<float>;

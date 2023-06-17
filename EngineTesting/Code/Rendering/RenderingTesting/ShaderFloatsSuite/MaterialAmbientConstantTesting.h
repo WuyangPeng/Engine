@@ -1,23 +1,29 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/13 11:31)
+///	引擎测试版本：0.9.0.12 (2023/06/12 15:15)
 
 #ifndef RENDERING_SHADER_FLOATS_SUITE_MATERIAL_AMBIENT_CONSTANT_TESTING_H
 #define RENDERING_SHADER_FLOATS_SUITE_MATERIAL_AMBIENT_CONSTANT_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Rendering
 {
     class MaterialAmbientConstantTesting : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MaterialAmbientConstantTesting);
+        using ClassType = MaterialAmbientConstantTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit MaterialAmbientConstantTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
         void MainTest();

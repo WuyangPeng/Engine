@@ -55,7 +55,7 @@ namespace MailServer
         using ParentType = MessageType;
 
     public:
-        explicit MailServerMessage(int64_t delta);
+        explicit MailServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

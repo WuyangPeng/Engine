@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 13:56)
+///	引擎版本：0.9.0.12 (2023/06/13 14:37)
 
 #include "Framework/FrameworkExport.h"
 
@@ -22,10 +22,6 @@
 #include "Framework/WindowCreate/WindowPoint.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
-using std::make_shared;
-using std::move;
-using std::string;
-
 Framework::ViewMiddleLayer::ViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
@@ -33,7 +29,7 @@ Framework::ViewMiddleLayer::ViewMiddleLayer(MiddleLayerPlatform middleLayerPlatf
 }
 
 Framework::ViewMiddleLayer::ViewMiddleLayer(ViewMiddleLayer&& rhs) noexcept
-    : ParentType{ move(rhs) }, impl{ move(rhs.impl) }
+    : ParentType{ move(rhs) }, impl{ std::move(rhs.impl) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -44,7 +40,7 @@ Framework::ViewMiddleLayer& Framework::ViewMiddleLayer::operator=(ViewMiddleLaye
 
     ParentType::operator=(move(rhs));
 
-    impl = move(rhs.impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }

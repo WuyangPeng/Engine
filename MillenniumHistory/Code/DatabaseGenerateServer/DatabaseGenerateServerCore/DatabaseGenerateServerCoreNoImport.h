@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.5 (2023/04/03 09:42)
+///	千年史策版本：0.9.0.12 (2023/06/12 21:49)
 
 #ifndef DATABASE_GENERATE_SERVER_CORE_NO_IMPORT_H
 #define DATABASE_GENERATE_SERVER_CORE_NO_IMPORT_H

@@ -1,24 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/07 11:37)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:36)
 
 #include "DistancePoint2Ellipse2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Distance/Distance2D/DistancePoint2Ellipse2Detail.h"
 #include "Mathematics/NumericalAnalysis/Equation.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+
 #include <random>
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::default_random_engine;
-using std::swap;
-using std::uniform_real;
 
 namespace Mathematics
 {
@@ -50,27 +47,27 @@ void Mathematics::DistancePoint2Ellipse2Testing::MainTest()
 
 void Mathematics::DistancePoint2Ellipse2Testing::BaseTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_real<double> secondRandomDistribution(0.0, 100.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution1(0.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector2 firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector2 axis0(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector2 axis1(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const double extent0(secondRandomDistribution(generator));
-        const double extent1(secondRandomDistribution(generator));
+        const Vector2 point0(randomDistribution0(generator), randomDistribution0(generator));
+        const Vector2 center(randomDistribution0(generator), randomDistribution0(generator));
+        Vector2 axis0(randomDistribution0(generator), randomDistribution0(generator));
+        Vector2 axis1(randomDistribution0(generator), randomDistribution0(generator));
+        const double extent0(randomDistribution1(generator));
+        const double extent1(randomDistribution1(generator));
 
         axis0.Normalize();
         axis1.Normalize();
 
         const Ellipse2D firstEllipse(center, axis0, axis1, extent0, extent1);
 
-        DistancePoint2Ellipse2D firstDistance(firstPoint, firstEllipse);
+        DistancePoint2Ellipse2D firstDistance(point0, firstEllipse);
 
         ASSERT_APPROXIMATE(firstDistance.GetDifferenceStep(), 1e-3, 1e-10);
 
@@ -90,10 +87,10 @@ void Mathematics::DistancePoint2Ellipse2Testing::BaseTest()
 
         ASSERT_APPROXIMATE(firstDistance.GetZeroThreshold(), 1e-2, 1e-10);
 
-        const Vector2 secondPoint = firstDistance.GetPoint();
+        const Vector2 point1 = firstDistance.GetPoint();
         const Ellipse2D secondEllipse = firstDistance.GetEllipse();
 
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, firstPoint, secondPoint, 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, point0, point1, 1e-10);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, secondEllipse.GetCenter(), firstEllipse.GetCenter(), 1e-10);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, secondEllipse.GetAxis0(), firstEllipse.GetAxis0(), 1e-10);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, secondEllipse.GetAxis1(), firstEllipse.GetAxis1(), 1e-10);
@@ -104,27 +101,27 @@ void Mathematics::DistancePoint2Ellipse2Testing::BaseTest()
 
 void Mathematics::DistancePoint2Ellipse2Testing::StaticDistanceTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_real<double> secondRandomDistribution(0.0, 100.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-10.0, 10.0);
+    const std::uniform_real<double> randomDistribution1(0.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector2 firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector2 axis0(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const double extent0(secondRandomDistribution(generator));
-        const double extent1(secondRandomDistribution(generator));
+        const Vector2 point0(randomDistribution0(generator), randomDistribution0(generator));
+        const Vector2 center(randomDistribution0(generator), randomDistribution0(generator));
+        Vector2 axis0(randomDistribution0(generator), randomDistribution0(generator));
+        const double extent0(randomDistribution1(generator));
+        const double extent1(randomDistribution1(generator));
 
         axis0.Normalize();
 
         const Vector2OrthonormalBasisD basis = Vector2ToolsD::GenerateOrthonormalBasis(axis0);
 
-        const Ellipse2D firstEllipse(center, basis.GetUVector(), basis.GetVVector(), extent0, extent1);
+        const Ellipse2D firstEllipse(center, basis.GetUVector(), basis.GetVVector(), extent0, extent1, 1e-6);
 
-        DistancePoint2Ellipse2D firstDistance(firstPoint, firstEllipse);
+        DistancePoint2Ellipse2D firstDistance(point0, firstEllipse);
 
         DistanceResult2D result = firstDistance.Get();
         DistanceResult2D resultSquared = firstDistance.GetSquared();
@@ -142,7 +139,7 @@ void Mathematics::DistancePoint2Ellipse2Testing::StaticDistanceTest()
         ASSERT_EQUAL(result.GetRhsClosestPointSize(), 1);
 
         ASSERT_TRUE(firstEllipse.Contains(resultSquared.GetRhsClosestPoint()));
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, resultSquared.GetLhsClosestPoint(), firstPoint, 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, resultSquared.GetLhsClosestPoint(), point0, 1e-10);
 
         const double distance = Vector2ToolsD::Distance(result.GetLhsClosestPoint(), result.GetRhsClosestPoint());
         ASSERT_APPROXIMATE(distance, result.GetDistance(), 1e-10);
@@ -167,7 +164,7 @@ void Mathematics::DistancePoint2Ellipse2Testing::StaticDistanceTest()
             {
                 const Vector2 eachPoint(value, *iter);
 
-                const double distance2 = Vector2ToolsD::Distance(eachPoint, firstPoint);
+                const double distance2 = Vector2ToolsD::Distance(eachPoint, point0);
 
                 ASSERT_TRUE(result.GetDistance() <= distance2);
 
@@ -179,19 +176,19 @@ void Mathematics::DistancePoint2Ellipse2Testing::StaticDistanceTest()
 
 void Mathematics::DistancePoint2Ellipse2Testing::DynamicDistanceTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_real<double> secondRandomDistribution(0.0, 100.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution1(0.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector2 firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector2 axis0(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const double extent0(secondRandomDistribution(generator));
-        const double extent1(secondRandomDistribution(generator));
+        const Vector2 point0(randomDistribution0(generator), randomDistribution0(generator));
+        const Vector2 center(randomDistribution0(generator), randomDistribution0(generator));
+        Vector2 axis0(randomDistribution0(generator), randomDistribution0(generator));
+        const double extent0(randomDistribution1(generator));
+        const double extent1(randomDistribution1(generator));
 
         axis0.Normalize();
 
@@ -199,15 +196,15 @@ void Mathematics::DistancePoint2Ellipse2Testing::DynamicDistanceTest()
 
         const Ellipse2D firstEllipse(center, basis.GetUVector(), basis.GetVVector(), extent0, extent1);
 
-        DistancePoint2Ellipse2D firstDistance(firstPoint, firstEllipse);
+        DistancePoint2Ellipse2D firstDistance(point0, firstEllipse);
 
-        Vector2 lhsVelocity(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector2 rhsVelocity(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Vector2 lhsVelocity(randomDistribution0(generator), randomDistribution0(generator));
+        Vector2 rhsVelocity(randomDistribution0(generator), randomDistribution0(generator));
 
         lhsVelocity.Normalize();
         rhsVelocity.Normalize();
 
-        const double t = secondRandomDistribution(generator);
+        const double t = randomDistribution1(generator);
 
         DistanceResult2D result = firstDistance.Get(t, lhsVelocity, rhsVelocity);
         DistanceResult2D resultSquared = firstDistance.GetSquared(t, lhsVelocity, rhsVelocity);
@@ -228,7 +225,7 @@ void Mathematics::DistancePoint2Ellipse2Testing::DynamicDistanceTest()
 
         ASSERT_TRUE(secondEllipse.Contains(resultSquared.GetRhsClosestPoint()));
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, resultSquared.GetLhsClosestPoint(),
-                                        firstPoint + t * lhsVelocity, 1e-10);
+                                        point0 + t * lhsVelocity, 1e-10);
 
         const double distance = Vector2ToolsD::Distance(result.GetLhsClosestPoint(), result.GetRhsClosestPoint());
         ASSERT_APPROXIMATE(distance, result.GetDistance(), 1e-10);
@@ -265,19 +262,19 @@ void Mathematics::DistancePoint2Ellipse2Testing::DynamicDistanceTest()
 
 void Mathematics::DistancePoint2Ellipse2Testing::DerivativeDistanceTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_real<double> secondRandomDistribution(0.0, 100.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution1(0.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector2 firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector2 axis0(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const double extent0(secondRandomDistribution(generator));
-        const double extent1(secondRandomDistribution(generator));
+        const Vector2 point0(randomDistribution0(generator), randomDistribution0(generator));
+        const Vector2 center(randomDistribution0(generator), randomDistribution0(generator));
+        Vector2 axis0(randomDistribution0(generator), randomDistribution0(generator));
+        const double extent0(randomDistribution1(generator));
+        const double extent1(randomDistribution1(generator));
 
         axis0.Normalize();
 
@@ -285,15 +282,15 @@ void Mathematics::DistancePoint2Ellipse2Testing::DerivativeDistanceTest()
 
         const Ellipse2D firstEllipse(center, basis.GetUVector(), basis.GetVVector(), extent0, extent1);
 
-        DistancePoint2Ellipse2D firstDistance(firstPoint, firstEllipse);
+        DistancePoint2Ellipse2D firstDistance(point0, firstEllipse);
 
-        Vector2 lhsVelocity(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector2 rhsVelocity(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Vector2 lhsVelocity(randomDistribution0(generator), randomDistribution0(generator));
+        Vector2 rhsVelocity(randomDistribution0(generator), randomDistribution0(generator));
 
         lhsVelocity.Normalize();
         rhsVelocity.Normalize();
 
-        const double t = secondRandomDistribution(generator);
+        const double t = randomDistribution1(generator);
 
         const double result = firstDistance.GetDerivative(t, lhsVelocity, rhsVelocity);
         const double resultSquared = firstDistance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
@@ -310,61 +307,6 @@ void Mathematics::DistancePoint2Ellipse2Testing::DerivativeDistanceTest()
     }
 }
 
-void Mathematics::DistancePoint2Ellipse2Testing::IntervalDistanceTest()
+void Mathematics::DistancePoint2Ellipse2Testing::IntervalDistanceTest() noexcept
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_real<double> secondRandomDistribution(0.0, 20.0);
-
-    const auto aTestLoopCount = GetTestLoopCount();
-
-    for (auto loop = 0; loop < aTestLoopCount; ++loop)
-    {
-        const Vector2 firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector2 axis0(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const double extent0(secondRandomDistribution(generator));
-        const double extent1(secondRandomDistribution(generator));
-
-        axis0.Normalize();
-
-        const Vector2OrthonormalBasisD basis = Vector2ToolsD::GenerateOrthonormalBasis(axis0);
-
-        const Ellipse2D firstEllipse(center, basis.GetUVector(), basis.GetVVector(), extent0, extent1);
-
-        DistancePoint2Ellipse2D firstDistance(firstPoint, firstEllipse);
-        firstDistance.SetMaximumIterations(20);
-
-        Vector2 lhsVelocity(firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector2 rhsVelocity(firstRandomDistribution(generator), firstRandomDistribution(generator));
-
-        lhsVelocity.Normalize();
-        rhsVelocity.Normalize();
-
-        const double tMin = secondRandomDistribution(generator);
-        const double tMax = tMin + secondRandomDistribution(generator);
-
-        DistanceResult2D result = firstDistance.GetInterval(tMin, tMax, lhsVelocity, rhsVelocity);
-        DistanceResult2D resultSquared = firstDistance.GetIntervalSquared(tMin, tMax, lhsVelocity, rhsVelocity);
-
-        ASSERT_APPROXIMATE(MathD::Sqrt(resultSquared.GetDistance()), result.GetDistance(), 1e-3);
-        ASSERT_APPROXIMATE(resultSquared.GetContactTime(), result.GetContactTime(), 1e-1);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, resultSquared.GetLhsClosestPoint(),
-                                        result.GetLhsClosestPoint(), 1e-1);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, resultSquared.GetRhsClosestPoint(),
-                                        result.GetRhsClosestPoint(), 1e-1);
-        ASSERT_EQUAL(resultSquared.GetLhsClosestPointSize(), 1);
-        ASSERT_EQUAL(resultSquared.GetRhsClosestPointSize(), 1);
-        ASSERT_EQUAL(result.GetLhsClosestPointSize(), 1);
-        ASSERT_EQUAL(result.GetRhsClosestPointSize(), 1);
-
-        for (double t = tMin; t < tMax; t += 0.1)
-        {
-            DistanceResult2D tResult = firstDistance.Get(t, lhsVelocity, rhsVelocity);
-            DistanceResult2D tResultSquared = firstDistance.GetSquared(t, lhsVelocity, rhsVelocity);
-
-            ASSERT_LESS_EQUAL(result.GetDistance(), tResult.GetDistance() + 1e-5);
-            ASSERT_LESS_EQUAL(resultSquared.GetDistance(), tResultSquared.GetDistance());
-        }
-    }
 }

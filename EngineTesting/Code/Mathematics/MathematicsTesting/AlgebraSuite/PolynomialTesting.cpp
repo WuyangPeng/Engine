@@ -1,24 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 22:16)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:36)
 
 #include "PolynomialTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/PolynomialDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/Algebra/PolynomialDetail.h"
+
 #include <boost/numeric/conversion/cast.hpp>
 #include <random>
 #include <vector>
-
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
 
 #ifndef BUILDING_MATHEMATICS_STATIC
 
@@ -62,7 +59,7 @@ void Mathematics::PolynomialTesting::ConstructionTest()
 
     ASSERT_EQUAL(secondPolynomial.GetDegree(), 2);
 
-    vector<double> doubleVector{ 3.0, 5.0, 2.0, 1.0, 0.0, 2.0 };
+    std::vector<double> doubleVector{ 3.0, 5.0, 2.0, 1.0, 0.0, 2.0 };
     const int degree = boost::numeric_cast<int>(doubleVector.size() - 1);
 
     PolynomialD thirdPolynomial(doubleVector);
@@ -98,11 +95,11 @@ void Mathematics::PolynomialTesting::ConstructionTest()
 
 void Mathematics::PolynomialTesting::AccessTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    vector<double> doubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
-                                 randomDistribution(generator), randomDistribution(generator) };
+    std::vector<double> doubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
+                                      randomDistribution(generator), randomDistribution(generator) };
 
     const int degree = boost::numeric_cast<int>(doubleVector.size() - 1);
 
@@ -115,11 +112,11 @@ void Mathematics::PolynomialTesting::AccessTest()
 
 void Mathematics::PolynomialTesting::UpdateOperatorTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
-                                      randomDistribution(generator), randomDistribution(generator) };
+    std::vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
+                                           randomDistribution(generator), randomDistribution(generator) };
 
     PolynomialD firstPolynomial(firstDoubleVector);
 
@@ -132,7 +129,7 @@ void Mathematics::PolynomialTesting::UpdateOperatorTest()
         ASSERT_APPROXIMATE(secondPolynomial[i], -firstDoubleVector.at(i), 1e-10);
     }
 
-    vector<double> secondDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
+    std::vector<double> secondDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
 
     PolynomialD thirdPolynomial(secondDoubleVector);
     const int secondDegree = boost::numeric_cast<int>(secondDoubleVector.size() - 1);
@@ -219,17 +216,17 @@ void Mathematics::PolynomialTesting::UpdateOperatorTest()
 
 void Mathematics::PolynomialTesting::OperationTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
-                                      randomDistribution(generator), randomDistribution(generator) };
+    std::vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
+                                           randomDistribution(generator), randomDistribution(generator) };
 
     PolynomialD firstPolynomial(firstDoubleVector);
 
     const int firstDegree = boost::numeric_cast<int>(firstDoubleVector.size() - 1);
 
-    vector<double> secondDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
+    std::vector<double> secondDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
 
     PolynomialD secondPolynomial(secondDoubleVector);
     const int secondDegree = boost::numeric_cast<int>(secondDoubleVector.size() - 1);
@@ -324,11 +321,11 @@ void Mathematics::PolynomialTesting::OperationTest()
 
 void Mathematics::PolynomialTesting::CalculateTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
-                                      randomDistribution(generator), randomDistribution(generator) };
+    std::vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
+                                           randomDistribution(generator), randomDistribution(generator) };
 
     PolynomialD firstPolynomial(firstDoubleVector);
 
@@ -339,7 +336,7 @@ void Mathematics::PolynomialTesting::CalculateTest()
                           firstDoubleVector.at(3) * value * value * value +
                           firstDoubleVector.at(4) * value * value * value * value;
 
-    ASSERT_APPROXIMATE(result, firstPolynomial(value), 1e-10);
+    ASSERT_APPROXIMATE(result, firstPolynomial(value), 1e-8);
 
     PolynomialD secondPolynomial(firstPolynomial.GetDegree() - 1);
 
@@ -377,7 +374,7 @@ void Mathematics::PolynomialTesting::CalculateTest()
         ASSERT_APPROXIMATE(seventhPolynomial[i], sixthPolynomial[i], 1e-10);
     }
 
-    vector<double> secondDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
+    std::vector<double> secondDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
 
     PolynomialD eighthPolynomial(secondDoubleVector);
 

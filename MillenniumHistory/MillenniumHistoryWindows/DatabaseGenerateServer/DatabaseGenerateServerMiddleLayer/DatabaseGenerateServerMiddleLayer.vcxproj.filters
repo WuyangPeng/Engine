@@ -103,6 +103,12 @@
     <Filter Include="System 源文件\Detail">
       <UniqueIdentifier>{217ab7b4-a568-4be9-9257-f0ab4512b143}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource 头文件\Detail">
+      <UniqueIdentifier>{496ec08b-2c1a-4673-b7fc-f9e4109b81a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource 源文件\Detail">
+      <UniqueIdentifier>{51cf7f3e-faaf-4d36-ab7a-94c8c90923c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\DllMain.cpp">
@@ -149,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\System\Detail\SystemManagerImpl.cpp">
       <Filter>System 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Resource\Detail\ResourceManagerImpl.cpp">
+      <Filter>Resource 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\System\Detail\SystemManagerImpl.h">
       <Filter>System 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Resource\Detail\ResourceManagerImpl.h">
+      <Filter>Resource 头文件\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

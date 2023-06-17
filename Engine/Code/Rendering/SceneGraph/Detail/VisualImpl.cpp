@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/04/01 19:22)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 11:15)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,9 +18,6 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/Shaders/VisualEffectInstance.h"
-
-using std::string;
-using std::vector;
 
 Rendering::VisualImpl::VisualImpl(VisualPrimitiveType type) noexcept
     : visualData{ type }, modelBound{}, effect{}
@@ -163,7 +160,7 @@ void Rendering::VisualImpl::UpdateModelBound()
     }
 }
 
-void Rendering::VisualImpl::ComputeBounding(const vector<APoint>& positions)
+void Rendering::VisualImpl::ComputeBounding(const std::vector<APoint>& positions)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -226,7 +223,7 @@ void Rendering::VisualImpl::Link(CoreTools::ObjectLink& source)
     source.ResolveLink(effect);
 }
 
-CoreTools::ObjectSharedPtr Rendering::VisualImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::VisualImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -241,14 +238,14 @@ CoreTools::ObjectSharedPtr Rendering::VisualImpl::GetObjectByName(const string& 
         return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::VisualImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::VisualImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     auto visualDataObjects = visualData.GetAllObjectsByName(name);
     auto effectObjects = effect.object->GetAllObjectsByName(name);
 
-    vector<CoreTools::ObjectSharedPtr> entirelyObjects{};
+    std::vector<CoreTools::ObjectSharedPtr> entirelyObjects{};
 
     entirelyObjects.insert(entirelyObjects.end(), visualDataObjects.begin(), visualDataObjects.end());
 
@@ -257,7 +254,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::VisualImpl::GetAllObjectsByName(co
     return entirelyObjects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::VisualImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::VisualImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -272,14 +269,14 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualImpl::GetConstObjectByName(cons
         return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
     auto visualDataObjects = visualData.GetAllConstObjectsByName(name);
     auto effectObjects = effect.object->GetAllConstObjectsByName(name);
 
-    vector<CoreTools::ConstObjectSharedPtr> entirelyObjects{};
+    std::vector<CoreTools::ConstObjectSharedPtr> entirelyObjects{};
 
     entirelyObjects.insert(entirelyObjects.end(), visualDataObjects.begin(), visualDataObjects.end());
 

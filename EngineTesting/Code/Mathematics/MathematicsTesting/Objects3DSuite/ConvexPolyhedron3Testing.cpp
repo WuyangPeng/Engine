@@ -1,23 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/28 15:57)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:15)
 
 #include "ConvexPolyhedron3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/ConvexPolyhedron3Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -45,29 +43,29 @@ void Mathematics::ConvexPolyhedron3Testing::MainTest()
 
 void Mathematics::ConvexPolyhedron3Testing::ConvexPolyhedronTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ 0.0, 100.0 };
-    const uniform_real<double> secondRandomDistribution(-100.0, 0.0);
-    const uniform_real<double> thirdRandomDistribution(-100.0, 100.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ 0.0, 100.0 };
+    const std::uniform_real<double> randomDistribution1(-100.0, 0.0);
+    const std::uniform_real<double> thirdRandomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        auto positive = firstRandomDistribution(generator);
-        auto negative = secondRandomDistribution(generator);
+        auto positive = randomDistribution0(generator);
+        auto negative = randomDistribution1(generator);
 
-        Vector3D firstVector(positive, negative, positive);
+        Vector3D vector0(positive, negative, positive);
 
-        Vector3D secondVector(positive, negative, negative);
+        Vector3D vector1(positive, negative, negative);
 
-        Vector3D thirdVector(positive, positive, negative);
+        Vector3D vector2(positive, positive, negative);
 
-        Vector3D fourthVector(positive, positive, positive);
+        Vector3D vector3(positive, positive, positive);
 
-        Vector3D fifthVector(negative, negative, positive);
+        Vector3D vector4(negative, negative, positive);
 
-        Vector3D sixthVector(negative, negative, negative);
+        Vector3D vector5(negative, negative, negative);
 
         Vector3D seventhVector(negative, positive, negative);
 
@@ -77,12 +75,12 @@ void Mathematics::ConvexPolyhedron3Testing::ConvexPolyhedronTest()
 
         Polyhedron3D::VerticesType verticesType(numVertices);
 
-        verticesType.at(0) = firstVector;
-        verticesType.at(1) = secondVector;
-        verticesType.at(2) = thirdVector;
-        verticesType.at(3) = fourthVector;
-        verticesType.at(4) = fifthVector;
-        verticesType.at(5) = sixthVector;
+        verticesType.at(0) = vector0;
+        verticesType.at(1) = vector1;
+        verticesType.at(2) = vector2;
+        verticesType.at(3) = vector3;
+        verticesType.at(4) = vector4;
+        verticesType.at(5) = vector5;
         verticesType.at(6) = seventhVector;
         verticesType.at(7) = eighthVector;
 

@@ -1,21 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.8.0.11 (2022/07/18 14:34)
+///	引擎游戏版本：0.9.0.12 (2023/06/16 15:58)
 
 #include "Status/StatusExport.h"
 
 #include "Status/Status.h"
 
-#ifndef BUILDING_STATUSSTATIC
+#ifndef BUILDING_STATUS_STATIC
 
     #include "DllLib.h"
 
-#else  // !BUILDING_STATUSSTATIC
+#else  // !BUILDING_STATUS_STATIC
 
 namespace Status
 {
@@ -24,4 +24,4 @@ namespace Status
     }
 }
 
-#endif  // !BUILDING_STATUSSTATIC
+#endif  // !BUILDING_STATUS_STATIC

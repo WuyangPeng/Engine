@@ -3,13 +3,19 @@
 ----------------------------
 渲染库单元测试
 
-1.   MacroSuite 
+1.   HelperSuite 
 
-对宏模块的单元测试，包括： 
-（1）用户宏。  
+对帮助模块的单元测试，包括： 
+（1）用户宏。 
 
 ----------------------------
-2.  DataTypesSuite 
+2.  BaseSuite 
+
+对基础模块的单元测试，包括： 
+（1）图形对象基类。
+
+----------------------------
+3.  DataTypesSuite 
 
 对数据类型模块的单元测试，包括： 
 （1）半浮点数。
@@ -18,7 +24,7 @@
 （4）范围。
 
 ----------------------------
-3.	ResourcesSuite 
+4.	ResourcesSuite 
 
 对资源模块的单元测试，包括： 
 （1）顶点缓冲区。
@@ -30,7 +36,7 @@
 （7）顶点格式。
 
 ----------------------------
-4.	SceneGraphSuite 
+5.	SceneGraphSuite 
 
 对场景图模块的单元测试，包括： 
 （1）  相机对象。
@@ -46,7 +52,7 @@
 （11） 标准网格。
 
 ----------------------------
-5.	ControllersSuite 
+6.	ControllersSuite 
 
 对控制器模块的单元测试，包括： 
 （1）  控制器对象。
@@ -60,7 +66,7 @@
 （9）  反向运动控制器。 
 
 ----------------------------
-6.	ShaderFloatsSuite
+7.	ShaderFloatsSuite
 
 对浮点着色器模块的单元测试，包括： 
 （1） 摄像机浮点着色器。
@@ -69,7 +75,7 @@
 （4） 矩阵浮点着色器。
 
 ----------------------------
-7.	DetailSuite 
+8.	DetailSuite 
 
 对细节模块的单元测试，包括： 
 （1） 切换节点。
@@ -79,7 +85,7 @@
 （5） LOD节点。
 
 ----------------------------
-8.	ShadersSuite 
+9.	ShadersSuite 
 
 对着色器模块的单元测试，包括： 
 （1） 数据。
@@ -89,7 +95,7 @@
 （5） 视觉效果。 
 
 ----------------------------
-9.	LocalEffectsSuite
+10.	LocalEffectsSuite
 
 对局部特效模块的单元测试，包括： 
 （1） 光照局部特效。
@@ -98,13 +104,13 @@
 （3） 顶点着色局部特效。
  
 ----------------------------
-10.	GlobalEffectsSuite
+11.	GlobalEffectsSuite
 
 对全局特效模块的单元测试，包括： 
 （1）全局特效。 
 
 ----------------------------
-11.	CurvesSurfacesSuite
+12.	CurvesSurfacesSuite
 
 对曲线曲面模块的单元测试，包括： 
 （1）  浮点数组。
@@ -119,67 +125,67 @@
 （10） 反转曲面。 
  
 ----------------------------
-12.	IlluminationSuite 
+13.	IlluminationSuite 
 
 对光照模块的单元测试，包括： 
 （1）光照。
 
 ----------------------------
-13.	ImageProcessingSuite
+14.	ImageProcessingSuite
 
 对图像处理模块的单元测试，包括： 
 （1）图像处理。
  
 ----------------------------
-14.	PictureSuite
+15.	PictureSuite
 
 对图像模块的单元测试，包括： 
 （1）图像。
 
 ----------------------------
-15.	SortingSuite
+16.	SortingSuite
 
 对排序模块的单元测试，包括： 
 （1）排序。
 
 ----------------------------
-16.	TerrainSuite
+17.	TerrainSuite
 
 对地形处理模块的单元测试，包括： 
 （1）地形处理。
 
 ----------------------------
-17.	VertexSuite
+18.	VertexSuite
 
 对顶点模块的单元测试，包括： 
 （1）顶点。
 
 ---------------------------- 
-18.	TextFontsSuite
+19.	TextFontsSuite
 
 对文本及字体模块的单元测试，包括： 
 （1）文本及字体。
 
 ----------------------------
-19.	ConsoleGraphSuite
+20.	ConsoleGraphSuite
 
 对控制台图形模块的单元测试，包括： 
 （1）控制台图形。
 
 ----------------------------
-20.	OpenGLAPISuite
+21.	OpenGLAPISuite
 
 对OpenGLAPI模块的单元测试，包括： 
 （1）OpenGLAPI。
 
 ----------------------------
-21.	DirectAPISuite 
+22.	DirectAPISuite 
 
 对DirectAPI模块的单元测试，包括： 
 （1）DirectAPI。
 
 ----------------------------
-22.	RenderersSuite
+23.	RenderersSuite
 
 对渲染器模块的单元测试，包括： 
 （1） 渲染基础。
@@ -192,111 +198,45 @@
 （8） 渲染目标。
 
 ----------------------------
-23.	OpenGLRendererSuite
+24.	OpenGLRendererSuite
 
 对OpenGL渲染器模块的单元测试，包括： 
 （1）OpenGL渲染器。
 
 ----------------------------
-24.	Dx9RendererSuite 
+25.	Dx9RendererSuite 
 
 对Dx9渲染器模块的单元测试，包括： 
 （1）Dx9渲染器。
 
 ----------------------------
-25.	AglRendererSuite 
+26.	AglRendererSuite 
 
 对Agl渲染器模块的单元测试，包括： 
 （1）Agl渲染器。
 
 ----------------------------
-26.	GlutRendererSuite
+27.	GlutRendererSuite
 
 对Glut渲染器模块的单元测试，包括： 
 （1）Glut渲染器。
 
 ----------------------------
-27.	GlxRendererSuite
+28.	GlxRendererSuite
 
 对Glx渲染器模块的单元测试，包括： 
 （1）Glx渲染器。
 
 ----------------------------
-28.	WglRendererSuite
+29.	WglRendererSuite
 
 对Wgl渲染器模块的单元测试，包括： 
 （1）Wgl渲染器。
 
 ----------------------------
-29.	Lib3dsSuite 
+30.	StateSuite
 
-对Lib3ds渲染器模块的单元测试，包括： 
-（1）Lib3ds渲染器。
+对状态模块的单元测试，包括： 
+（1）状态。
 
-----------------------------
-30.	AbuseSuite
-
-对Abuse渲染器模块的单元测试，包括： 
-（1）Abuse渲染器。
-
-----------------------------
-31.	DemoglSuite
-
-对demogl渲染器模块的单元测试，包括： 
-（1）demogl渲染器。
-
-----------------------------
-32.	DevILSuite
-
-对DevIL渲染器模块的单元测试，包括： 
-（1）DevIL渲染器。
-
-----------------------------
-33.	FBXSuite
-
-对FBX渲染器模块的单元测试，包括： 
-（1）FBX渲染器。
-
-----------------------------
-34.	JPEGSuite
-
-对JPEG渲染器模块的单元测试，包括： 
-（1）JPEG渲染器。
-
-----------------------------
-35.	TIFFSuite
-
-对TIFF渲染器模块的单元测试，包括： 
-（1）TIFF渲染器。
-
-----------------------------
-36.	OpenvidiaSuite
-
-对openvidia渲染器模块的单元测试，包括： 
-（1）openvidia渲染器。
-
-----------------------------
-37.	NethackSuite
-
-对nethack渲染器模块的单元测试，包括： 
-（1）nethack渲染器。
-
-----------------------------
-38.	WingSuite 
-
-对wing渲染器模块的单元测试，包括： 
-（1）wing渲染器。
-
-----------------------------
-39.	WargamerSuite
-
-对wargamer渲染器模块的单元测试，包括： 
-（1）wargamer渲染器。
-
-----------------------------
-40.	NvtoolkitSuite
-
-对nvtoolkit渲染器模块的单元测试，包括： 
-（1）nvtoolkit渲染器。
-
-----------------------------
+---------------------------- 

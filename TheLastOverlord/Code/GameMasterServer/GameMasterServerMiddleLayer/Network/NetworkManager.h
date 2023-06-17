@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/28 22:23)
+///	最后的霸王版本：0.9.0.12 (2022/07/28 22:23)
 
 #ifndef GAME_MASTER_SERVER_MIDDLE_LAYER_NETWORK_MIDDLE_LAYER_NETWORK_H
 #define GAME_MASTER_SERVER_MIDDLE_LAYER_NETWORK_MIDDLE_LAYER_NETWORK_H
@@ -24,7 +24,7 @@ namespace GameMasterServerMiddleLayer
         using ParentType = Framework::NetworkManagerInterface;
 
     public:
-        explicit NetworkManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        NetworkManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

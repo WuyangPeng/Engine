@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 21:47)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:25)
 
 #include "Matrix2EigenDecompositionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
 #include "Mathematics/Algebra/Matrix2EigenDecompositionDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -44,22 +42,22 @@ void Mathematics::Matrix2EigenDecompositionTesting::MainTest()
 
 void Mathematics::Matrix2EigenDecompositionTesting::EigenDecompositionTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> randomDistribution{ -10.0, 10.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution{ -10.0, 10.0 };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        Matrix2D firstMatrix(randomDistribution(generator), randomDistribution(generator), 0.0, randomDistribution(generator));
+        Matrix2D matrix0(randomDistribution(generator), randomDistribution(generator), 0.0, randomDistribution(generator));
 
-        firstMatrix(1, 0) = firstMatrix(0, 1);
+        matrix0(1, 0) = matrix0(0, 1);
 
-        const auto eigenDecomposition = firstMatrix.EigenDecomposition(1e-10);
+        const auto eigenDecomposition = matrix0.EigenDecomposition(1e-10);
 
         const auto rotation = eigenDecomposition.GetRotation();
         const auto diagonal = eigenDecomposition.GetDiagonal();
 
-        const auto secondMatrix = rotation * diagonal * rotation.Transpose();
+        const auto matrix1 = rotation * diagonal * rotation.Transpose();
 
-        ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-10));
+        ASSERT_TRUE(Approximate(matrix0, matrix1, 1e-10));
     }
 }

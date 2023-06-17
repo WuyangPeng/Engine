@@ -1,25 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/03 16:07)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:08)
 
 #include "QDUDecompositionValueTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/NumericalAnalysis/QDUDecompositionValueDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::swap;
-using std::uniform_int;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -47,8 +43,8 @@ void Mathematics::QDUDecompositionValueTesting::MainTest()
 
 void Mathematics::QDUDecompositionValueTesting::QDUDecompositionValueTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e5, 1.0e5);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -60,7 +56,7 @@ void Mathematics::QDUDecompositionValueTesting::QDUDecompositionValueTest()
         {
             for (int j = 0; j < 3; ++j)
             {
-                matrix(m, j) = firstRandomDistribution(generator);
+                matrix(m, j) = randomDistribution0(generator);
             }
         }
 

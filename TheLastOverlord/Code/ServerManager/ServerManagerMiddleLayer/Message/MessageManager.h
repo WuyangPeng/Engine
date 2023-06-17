@@ -24,7 +24,7 @@ namespace ServerManagerMiddleLayer
         using ParentType = Framework::MessageManagerInterface;
 
     public:
-        explicit MessageManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit MessageManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

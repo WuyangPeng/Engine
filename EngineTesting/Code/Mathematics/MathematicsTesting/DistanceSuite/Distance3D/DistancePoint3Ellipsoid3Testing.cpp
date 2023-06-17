@@ -1,20 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/07 18:30)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:45)
 
 #include "DistancePoint3Ellipsoid3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Distance/Distance3D/DistancePoint3Ellipsoid3Detail.h"
 #include "Mathematics/NumericalAnalysis/Equation.h"
+
 #include <random>
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 Mathematics::DistancePoint3Ellipsoid3Testing::DistancePoint3Ellipsoid3Testing(const OStreamShared& streamShared)
     : ParentType{ streamShared }
 {
@@ -39,22 +41,22 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::MainTest()
 
 void Mathematics::DistancePoint3Ellipsoid3Testing::BaseTest()
 {
-    std::default_random_engine generator;
-    const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const std::uniform_real<double> secondRandomDistribution(0.0, 100.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution1(0.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const Vector3D center(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector3D axis0(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector3D axis1(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector3D axis2(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const double extent0(secondRandomDistribution(generator));
-        const double extent1(secondRandomDistribution(generator));
-        const double extent2(secondRandomDistribution(generator));
+        const Vector3D point0(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        const Vector3D center(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        Vector3D axis0(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        Vector3D axis1(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        Vector3D axis2(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        const double extent0(randomDistribution1(generator));
+        const double extent1(randomDistribution1(generator));
+        const double extent2(randomDistribution1(generator));
 
         axis0.Normalize();
         axis1.Normalize();
@@ -62,7 +64,7 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::BaseTest()
 
         const Ellipsoid3D firstEllipsoid(center, axis0, axis1, axis2, extent0, extent1, extent2);
 
-        DistancePoint3Ellipsoid3D firstDistance(firstPoint, firstEllipsoid);
+        DistancePoint3Ellipsoid3D firstDistance(point0, firstEllipsoid);
 
         ASSERT_APPROXIMATE(firstDistance.GetDifferenceStep(), 1e-3, 1e-10);
 
@@ -82,10 +84,10 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::BaseTest()
 
         ASSERT_APPROXIMATE(firstDistance.GetZeroThreshold(), 1e-2, 1e-10);
 
-        const Vector3D secondPoint = firstDistance.GetPoint();
+        const Vector3D point1 = firstDistance.GetPoint();
         const Ellipsoid3D secondEllipse = firstDistance.GetEllipsoid();
 
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, firstPoint, secondPoint, 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, point0, point1, 1e-10);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, secondEllipse.GetCenter(), firstEllipsoid.GetCenter(), 1e-10);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, secondEllipse.GetAxis0(), firstEllipsoid.GetAxis0(), 1e-10);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, secondEllipse.GetAxis1(), firstEllipsoid.GetAxis1(), 1e-10);
@@ -98,27 +100,27 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::BaseTest()
 
 void Mathematics::DistancePoint3Ellipsoid3Testing::StaticDistanceTest()
 {
-    std::default_random_engine generator;
-    const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const std::uniform_real<double> secondRandomDistribution(0.0, 50.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution1(0.0, 50.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const Vector3D center(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector3D axis0(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const double extent0(secondRandomDistribution(generator));
-        const double extent1(secondRandomDistribution(generator));
-        const double extent2(secondRandomDistribution(generator));
+        const Vector3D point0(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        const Vector3D center(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        Vector3D axis0(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        const double extent0(randomDistribution1(generator));
+        const double extent1(randomDistribution1(generator));
+        const double extent2(randomDistribution1(generator));
 
         axis0.Normalize();
 
         const Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
         const Ellipsoid3D firstEllipsoid(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2);
 
-        DistancePoint3Ellipsoid3D firstDistance(firstPoint, firstEllipsoid);
+        DistancePoint3Ellipsoid3D firstDistance(point0, firstEllipsoid);
 
         DistanceResult3D result = firstDistance.Get();
         DistanceResult3D resultSquared = firstDistance.GetSquared();
@@ -137,7 +139,7 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::StaticDistanceTest()
 
         ASSERT_TRUE(firstEllipsoid.Contains(resultSquared.GetRhsClosestPoint()));
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, resultSquared.GetLhsClosestPoint(),
-                                        firstPoint, 1e-10);
+                                        point0, 1e-10);
 
         const double distance = Vector3ToolsD::Distance(result.GetLhsClosestPoint(), result.GetRhsClosestPoint());
         ASSERT_APPROXIMATE(distance, result.GetDistance(), 1e-10);
@@ -178,7 +180,7 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::StaticDistanceTest()
                 {
                     const Vector3D eachPoint(x, y, *iter);
 
-                    const double distance2 = Vector3ToolsD::Distance(eachPoint, firstPoint);
+                    const double distance2 = Vector3ToolsD::Distance(eachPoint, point0);
 
                     ASSERT_TRUE(result.GetDistance() <= distance2);
 
@@ -191,35 +193,35 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::StaticDistanceTest()
 
 void Mathematics::DistancePoint3Ellipsoid3Testing::DynamicDistanceTest()
 {
-    std::default_random_engine generator;
-    const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const std::uniform_real<double> secondRandomDistribution(0.0, 50.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution1(0.0, 50.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const Vector3D center(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector3D axis0(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const double extent0(secondRandomDistribution(generator));
-        const double extent1(secondRandomDistribution(generator));
-        const double extent2(secondRandomDistribution(generator));
+        const Vector3D point0(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        const Vector3D center(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        Vector3D axis0(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        const double extent0(randomDistribution1(generator));
+        const double extent1(randomDistribution1(generator));
+        const double extent2(randomDistribution1(generator));
 
         axis0.Normalize();
 
         const Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
         const Ellipsoid3D firstEllipsoid(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2);
 
-        DistancePoint3Ellipsoid3D firstDistance(firstPoint, firstEllipsoid);
+        DistancePoint3Ellipsoid3D firstDistance(point0, firstEllipsoid);
 
-        Vector3D lhsVelocity(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector3D rhsVelocity(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Vector3D lhsVelocity(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        Vector3D rhsVelocity(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
 
         lhsVelocity.Normalize();
         rhsVelocity.Normalize();
 
-        const double t = secondRandomDistribution(generator);
+        const double t = randomDistribution1(generator);
 
         DistanceResult3D result = firstDistance.Get(t, lhsVelocity, rhsVelocity);
         DistanceResult3D resultSquared = firstDistance.GetSquared(t, lhsVelocity, rhsVelocity);
@@ -240,7 +242,7 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::DynamicDistanceTest()
 
         ASSERT_TRUE(secondEllipse.Contains(resultSquared.GetRhsClosestPoint()));
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, resultSquared.GetLhsClosestPoint(),
-                                        firstPoint + t * lhsVelocity, 1e-10);
+                                        point0 + t * lhsVelocity, 1e-10);
 
         const double distance = Vector3ToolsD::Distance(result.GetLhsClosestPoint(), result.GetRhsClosestPoint());
         ASSERT_APPROXIMATE(distance, result.GetDistance(), 1e-10);
@@ -294,35 +296,35 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::DynamicDistanceTest()
 
 void Mathematics::DistancePoint3Ellipsoid3Testing::DerivativeDistanceTest()
 {
-    std::default_random_engine generator;
-    const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const std::uniform_real<double> secondRandomDistribution(0.0, 50.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution1(0.0, 50.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const Vector3D center(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector3D axis0(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const double extent0(secondRandomDistribution(generator));
-        const double extent1(secondRandomDistribution(generator));
-        const double extent2(secondRandomDistribution(generator));
+        const Vector3D point0(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        const Vector3D center(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        Vector3D axis0(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        const double extent0(randomDistribution1(generator));
+        const double extent1(randomDistribution1(generator));
+        const double extent2(randomDistribution1(generator));
 
         axis0.Normalize();
 
         const Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
         const Ellipsoid3D firstEllipsoid(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2);
 
-        DistancePoint3Ellipsoid3D firstDistance(firstPoint, firstEllipsoid);
+        DistancePoint3Ellipsoid3D firstDistance(point0, firstEllipsoid);
 
-        Vector3D lhsVelocity(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector3D rhsVelocity(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Vector3D lhsVelocity(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        Vector3D rhsVelocity(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
 
         lhsVelocity.Normalize();
         rhsVelocity.Normalize();
 
-        const double t = secondRandomDistribution(generator);
+        const double t = randomDistribution1(generator);
 
         const double result = firstDistance.GetDerivative(t, lhsVelocity, rhsVelocity);
         const double resultSquared = firstDistance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
@@ -341,37 +343,37 @@ void Mathematics::DistancePoint3Ellipsoid3Testing::DerivativeDistanceTest()
 
 void Mathematics::DistancePoint3Ellipsoid3Testing::IntervalDistanceTest()
 {
-    std::default_random_engine generator;
-    const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const std::uniform_real<double> secondRandomDistribution(0.0, 20.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution1(0.0, 20.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const Vector3D center(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector3D axis0(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        const double extent0(secondRandomDistribution(generator));
-        const double extent1(secondRandomDistribution(generator));
-        const double extent2(secondRandomDistribution(generator));
+        const Vector3D point0(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        const Vector3D center(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        Vector3D axis0(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        const double extent0(randomDistribution1(generator));
+        const double extent1(randomDistribution1(generator));
+        const double extent2(randomDistribution1(generator));
 
         axis0.Normalize();
 
         const Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
         const Ellipsoid3D firstEllipsoid(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2);
 
-        DistancePoint3Ellipsoid3D firstDistance(firstPoint, firstEllipsoid);
+        DistancePoint3Ellipsoid3D firstDistance(point0, firstEllipsoid);
         firstDistance.SetMaximumIterations(20);
 
-        Vector3D lhsVelocity(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
-        Vector3D rhsVelocity(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Vector3D lhsVelocity(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
+        Vector3D rhsVelocity(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
 
         lhsVelocity.Normalize();
         rhsVelocity.Normalize();
 
-        const double tMin = secondRandomDistribution(generator);
-        const double tMax = tMin + secondRandomDistribution(generator);
+        const double tMin = randomDistribution1(generator);
+        const double tMax = tMin + randomDistribution1(generator);
 
         DistanceResult3D result = firstDistance.GetInterval(tMin, tMax, lhsVelocity, rhsVelocity);
         DistanceResult3D resultSquared = firstDistance.GetIntervalSquared(tMin, tMax, lhsVelocity, rhsVelocity);

@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 22:45)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:39)
 
 #include "VariableLengthVectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Mathematics/Algebra/VariableLengthVectorDetail.h"
+
 #include <boost/numeric/conversion/cast.hpp>
 #include <random>
-
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
 
 #ifndef BUILDING_MATHEMATICS_STATIC
 
@@ -53,236 +50,236 @@ void Mathematics::VariableLengthVectorTesting::MainTest()
 
 void Mathematics::VariableLengthVectorTesting::ConstructionTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> randomDistribution{ -100.0f, 100.0f };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution{ -100.0f, 100.0f };
 
-    VariableLengthVectorF firstVector(5);
+    VariableLengthVectorF vector0(5);
 
-    ASSERT_EQUAL(firstVector.GetSize(), 5);
+    ASSERT_EQUAL(vector0.GetSize(), 5);
 
-    vector<double> doubleVector;
+    std::vector<double> doubleVector;
     for (int i = 0; i < 15; ++i)
     {
         doubleVector.push_back(randomDistribution(generator));
     }
 
-    VariableLengthVectorD secondVector(doubleVector);
-    ASSERT_EQUAL(secondVector.GetSize(), boost::numeric_cast<int>(doubleVector.size()));
+    VariableLengthVectorD vector1(doubleVector);
+    ASSERT_EQUAL(vector1.GetSize(), boost::numeric_cast<int>(doubleVector.size()));
 
     for (int i = 0; i < 15; ++i)
     {
-        ASSERT_APPROXIMATE(secondVector[i], doubleVector.at(i), 1e-10);
+        ASSERT_APPROXIMATE(vector1[i], doubleVector.at(i), 1e-10);
     }
 
-    VariableLengthVectorD thirdVector(secondVector);
-    ASSERT_EQUAL(secondVector.GetSize(), thirdVector.GetSize());
+    VariableLengthVectorD vector2(vector1);
+    ASSERT_EQUAL(vector1.GetSize(), vector2.GetSize());
 
-    ASSERT_TRUE(Approximate(secondVector, thirdVector, 1e-10));
+    ASSERT_TRUE(Approximate(vector1, vector2, 1e-10));
 
-    ASSERT_EQUAL(secondVector.GetSize(), boost::numeric_cast<int>(doubleVector.size()));
+    ASSERT_EQUAL(vector1.GetSize(), boost::numeric_cast<int>(doubleVector.size()));
 
     for (int i = 0; i < 15; ++i)
     {
-        ASSERT_APPROXIMATE(secondVector[i], doubleVector.at(i), 1e-10);
+        ASSERT_APPROXIMATE(vector1[i], doubleVector.at(i), 1e-10);
     }
 
-    VariableLengthVectorD fourthVector;
-    thirdVector = fourthVector;
+    VariableLengthVectorD vector3;
+    vector2 = vector3;
 
-    ASSERT_EQUAL(thirdVector.GetSize(), 0);
+    ASSERT_EQUAL(vector2.GetSize(), 0);
 
-    fourthVector.ResetSize(10);
+    vector3.ResetSize(10);
 
-    ASSERT_EQUAL(fourthVector.GetSize(), 10);
-    ASSERT_EQUAL(thirdVector.GetSize(), 0);
+    ASSERT_EQUAL(vector3.GetSize(), 10);
+    ASSERT_EQUAL(vector2.GetSize(), 0);
 }
 
 void Mathematics::VariableLengthVectorTesting::AccessTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    vector<double> doubleVector;
+    std::vector<double> doubleVector;
     for (int i = 0; i < 15; ++i)
     {
         doubleVector.push_back(randomDistribution(generator));
     }
 
-    const VariableLengthVectorD firstVector(doubleVector);
-    VariableLengthVectorD secondVector(doubleVector);
+    const VariableLengthVectorD vector0(doubleVector);
+    VariableLengthVectorD vector1(doubleVector);
 
-    ASSERT_EQUAL(firstVector.GetSize(), 15);
-    ASSERT_EQUAL(secondVector.GetSize(), 15);
+    ASSERT_EQUAL(vector0.GetSize(), 15);
+    ASSERT_EQUAL(vector1.GetSize(), 15);
 }
 
 void Mathematics::VariableLengthVectorTesting::ArithmeticCalculateTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    vector<double> firstDoubleVector;
+    std::vector<double> firstDoubleVector;
     for (int i = 0; i < 15; ++i)
     {
         firstDoubleVector.push_back(randomDistribution(generator));
     }
 
-    vector<double> secondDoubleVector;
+    std::vector<double> secondDoubleVector;
     for (int i = 0; i < 15; ++i)
     {
         secondDoubleVector.push_back(randomDistribution(generator));
     }
 
-    VariableLengthVectorD firstVector(firstDoubleVector);
-    VariableLengthVectorD secondVector(secondDoubleVector);
+    VariableLengthVectorD vector0(firstDoubleVector);
+    VariableLengthVectorD vector1(secondDoubleVector);
 
-    VariableLengthVectorD thirdVector = -firstVector;
+    VariableLengthVectorD vector2 = -vector0;
 
     for (int i = 0; i < 15; ++i)
     {
-        ASSERT_APPROXIMATE(thirdVector[i], -firstDoubleVector.at(i), 1e-10);
+        ASSERT_APPROXIMATE(vector2[i], -firstDoubleVector.at(i), 1e-10);
     }
 
-    firstVector += secondVector;
+    vector0 += vector1;
 
     for (int i = 0; i < 15; ++i)
     {
-        ASSERT_APPROXIMATE(firstVector[i], firstDoubleVector.at(i) + secondDoubleVector.at(i), 1e-10);
+        ASSERT_APPROXIMATE(vector0[i], firstDoubleVector.at(i) + secondDoubleVector.at(i), 1e-10);
     }
 
-    secondVector -= firstVector;
+    vector1 -= vector0;
 
     for (int i = 0; i < 15; ++i)
     {
-        ASSERT_APPROXIMATE(secondVector[i], -firstDoubleVector.at(i), 1e-10);
+        ASSERT_APPROXIMATE(vector1[i], -firstDoubleVector.at(i), 1e-10);
     }
 
-    thirdVector *= 2.0;
+    vector2 *= 2.0;
 
     for (int i = 0; i < 15; ++i)
     {
-        ASSERT_APPROXIMATE(thirdVector[i], -firstDoubleVector.at(i) * 2.0, 1e-10);
+        ASSERT_APPROXIMATE(vector2[i], -firstDoubleVector.at(i) * 2.0, 1e-10);
     }
 
-    secondVector /= 2.0;
+    vector1 /= 2.0;
 
     for (int i = 0; i < 15; ++i)
     {
-        ASSERT_APPROXIMATE(secondVector[i], -firstDoubleVector.at(i) / 2.0, 1e-10);
+        ASSERT_APPROXIMATE(vector1[i], -firstDoubleVector.at(i) / 2.0, 1e-10);
     }
 
-    thirdVector = firstVector + secondVector;
+    vector2 = vector0 + vector1;
 
     for (int i = 0; i < 15; ++i)
     {
-        ASSERT_APPROXIMATE(thirdVector[i], firstDoubleVector.at(i) / 2.0 + secondDoubleVector.at(i), 1e-10);
+        ASSERT_APPROXIMATE(vector2[i], firstDoubleVector.at(i) / 2.0 + secondDoubleVector.at(i), 1e-10);
     }
 
-    thirdVector = firstVector - secondVector;
+    vector2 = vector0 - vector1;
 
     for (int i = 0; i < 15; ++i)
     {
-        ASSERT_APPROXIMATE(thirdVector[i], firstDoubleVector.at(i) * 1.5 + secondDoubleVector.at(i), 1e-10);
+        ASSERT_APPROXIMATE(vector2[i], firstDoubleVector.at(i) * 1.5 + secondDoubleVector.at(i), 1e-10);
     }
 
-    thirdVector = firstVector * 2.0;
+    vector2 = vector0 * 2.0;
 
     for (int i = 0; i < 15; ++i)
     {
-        ASSERT_APPROXIMATE(thirdVector[i], firstDoubleVector.at(i) * 2.0 + secondDoubleVector.at(i) * 2.0, 1e-10);
+        ASSERT_APPROXIMATE(vector2[i], firstDoubleVector.at(i) * 2.0 + secondDoubleVector.at(i) * 2.0, 1e-10);
     }
 
-    thirdVector = 2.0 * firstVector;
+    vector2 = 2.0 * vector0;
 
     for (int i = 0; i < 15; ++i)
     {
-        ASSERT_APPROXIMATE(thirdVector[i], firstDoubleVector.at(i) * 2.0 + secondDoubleVector.at(i) * 2.0, 1e-10);
+        ASSERT_APPROXIMATE(vector2[i], firstDoubleVector.at(i) * 2.0 + secondDoubleVector.at(i) * 2.0, 1e-10);
     }
 
-    thirdVector = firstVector / 2.0;
+    vector2 = vector0 / 2.0;
 
     for (int i = 0; i < 15; ++i)
     {
-        ASSERT_APPROXIMATE(thirdVector[i], firstDoubleVector.at(i) / 2.0 + secondDoubleVector.at(i) / 2.0, 1e-10);
+        ASSERT_APPROXIMATE(vector2[i], firstDoubleVector.at(i) / 2.0 + secondDoubleVector.at(i) / 2.0, 1e-10);
     }
 }
 
 void Mathematics::VariableLengthVectorTesting::VectorCalculateTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    vector<double> firstDoubleVector;
+    std::vector<double> firstDoubleVector;
     for (int i = 0; i < 15; ++i)
     {
         firstDoubleVector.push_back(randomDistribution(generator));
     }
 
-    VariableLengthVectorD firstVector(firstDoubleVector);
+    VariableLengthVectorD vector0(firstDoubleVector);
 
     double squaredLength = 0.0f;
     for (int i = 0; i < 15; ++i)
     {
-        squaredLength += firstVector[i] * firstVector[i];
+        squaredLength += vector0[i] * vector0[i];
     }
 
-    ASSERT_APPROXIMATE(squaredLength, firstVector.SquaredLength(), 1e-10);
-    ASSERT_APPROXIMATE(MathD::Sqrt(squaredLength), firstVector.Length(), 1e-10);
-    firstVector.Normalize();
+    ASSERT_APPROXIMATE(squaredLength, vector0.SquaredLength(), 1e-10);
+    ASSERT_APPROXIMATE(MathD::Sqrt(squaredLength), vector0.Length(), 1e-10);
+    vector0.Normalize();
 
     for (int i = 0; i < 15; ++i)
     {
-        ASSERT_APPROXIMATE(firstVector[i], firstDoubleVector.at(i) / MathD::Sqrt(squaredLength), 1e-10);
+        ASSERT_APPROXIMATE(vector0[i], firstDoubleVector.at(i) / MathD::Sqrt(squaredLength), 1e-10);
     }
 
-    vector<double> secondDoubleVector;
+    std::vector<double> secondDoubleVector;
     for (int i = 0; i < 15; ++i)
     {
         secondDoubleVector.push_back(randomDistribution(generator));
     }
 
-    VariableLengthVectorD secondVector(secondDoubleVector);
+    VariableLengthVectorD vector1(secondDoubleVector);
 
     double dotProduct = 0.0;
     for (int i = 0; i < 15; ++i)
     {
-        dotProduct += firstVector[i] * secondVector[i];
+        dotProduct += vector0[i] * vector1[i];
     }
 
-    ASSERT_APPROXIMATE(dotProduct, Dot(firstVector, secondVector), 1e-10);
+    ASSERT_APPROXIMATE(dotProduct, Dot(vector0, vector1), 1e-10);
 }
 
 void Mathematics::VariableLengthVectorTesting::CompareTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    vector<double> firstDoubleVector;
+    std::vector<double> firstDoubleVector;
     for (int i = 0; i < 15; ++i)
     {
         firstDoubleVector.push_back(randomDistribution(generator));
     }
 
-    vector<double> secondDoubleVector;
+    std::vector<double> secondDoubleVector;
     for (int i = 0; i < 15; ++i)
     {
         secondDoubleVector.push_back(randomDistribution(generator));
     }
 
-    VariableLengthVectorD firstVector(firstDoubleVector);
-    VariableLengthVectorD secondVector(secondDoubleVector);
+    VariableLengthVectorD vector0(firstDoubleVector);
+    VariableLengthVectorD vector1(secondDoubleVector);
 
-    firstVector[0] = 0.0;
-    secondVector[0] = 1.0;
+    vector0[0] = 0.0;
+    vector1[0] = 1.0;
 
-    ASSERT_TRUE(firstVector == firstVector);
-    ASSERT_FALSE(firstVector == secondVector);
-    ASSERT_TRUE(firstVector != secondVector);
-    ASSERT_TRUE(firstVector < secondVector);
-    ASSERT_TRUE(firstVector <= secondVector);
-    ASSERT_FALSE(firstVector > secondVector);
-    ASSERT_FALSE(firstVector >= secondVector);
+    ASSERT_TRUE(vector0 == vector0);
+    ASSERT_FALSE(vector0 == vector1);
+    ASSERT_TRUE(vector0 != vector1);
+    ASSERT_TRUE(vector0 < vector1);
+    ASSERT_TRUE(vector0 <= vector1);
+    ASSERT_FALSE(vector0 > vector1);
+    ASSERT_FALSE(vector0 >= vector1);
 
-    ASSERT_TRUE(Approximate(firstVector, firstVector, 1e-10));
-    ASSERT_TRUE(Approximate(secondVector, secondVector, 1e-10));
-    ASSERT_FALSE(Approximate(firstVector, secondVector, 1e-10));
+    ASSERT_TRUE(Approximate(vector0, vector0, 1e-10));
+    ASSERT_TRUE(Approximate(vector1, vector1, 1e-10));
+    ASSERT_FALSE(Approximate(vector0, vector1, 1e-10));
 }

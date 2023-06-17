@@ -26,10 +26,14 @@ CSVConfigure::SceneContainer::SceneContainer(const CoreTools::CSVContent& csvCon
 
 void CSVConfigure::SceneContainer::Parsing(const CoreTools::CSVContent& csvContent)
 {
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("scene表开始载入……"));
+
     const auto size = csvContent.GetCount();
+    const auto csvHead = csvContent.GetCSVHead();
+
     for (auto i = 0; i < size; ++i)
     {
-        CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
 
         auto sceneBase = std::make_shared<Scene>(csvRow);
 
@@ -39,6 +43,8 @@ void CSVConfigure::SceneContainer::Parsing(const CoreTools::CSVContent& csvConte
             LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("scene表存在重复主键："), sceneBase->GetKey(), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("scene表结束载入……"));
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, SceneContainer)

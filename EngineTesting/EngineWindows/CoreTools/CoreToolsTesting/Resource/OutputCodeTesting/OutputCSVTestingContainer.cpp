@@ -12,6 +12,7 @@
 #include "Input1Container.h"
 #include "Input2Container.h"
 #include "Input3Container.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
@@ -39,12 +40,12 @@ void OutputCSVTesting::OutputCSVTestingContainer::Parsing(const System::String& 
     {
         auto fileName = inputPath.path().native();
 
-        if (fileName.find(SYSTEM_TEXT(".csv"s)) != (fileName.size() - 4))
+        if (fileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT(".csv"s))) != (fileName.size() - 4))
         {
             continue;
         }
 
-        CoreTools::CSVContent csvContent{ fileName };
+        CoreTools::CSVContent csvContent{ CoreTools::StringConversion::WideCharConversionStandard(fileName) };
 
         const auto csvClassName = csvContent.GetCSVClassName();
 

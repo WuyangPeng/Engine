@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 16:47)
+///	引擎版本：0.9.0.12 (2023/06/13 14:10)
 
 #include "Framework/FrameworkExport.h"
 
@@ -16,16 +16,13 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Threading/ScopedMutex.h"
 
-using std::make_shared;
-using std::make_unique;
-
 SINGLETON_GET_PTR_DEFINE(Framework, WindowProcessManager)
 
 Framework::WindowProcessManager::WindowProcessManagerUniquePtr Framework::WindowProcessManager::windowProcessManager{};
 
 void Framework::WindowProcessManager::Create()
 {
-    windowProcessManager = make_unique<Framework::WindowProcessManager>(WindowProcessManagerCreate::Init);
+    windowProcessManager = std::make_unique<Framework::WindowProcessManager>(WindowProcessManagerCreate::Init);
 }
 
 void Framework::WindowProcessManager::Destroy() noexcept

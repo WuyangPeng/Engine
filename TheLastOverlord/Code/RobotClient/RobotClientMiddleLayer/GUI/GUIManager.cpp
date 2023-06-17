@@ -12,8 +12,8 @@
 #include "GUIManager.h"
 #include "RobotClient/RobotClientMiddleLayer/Macro/RobotClientMiddleLayerClassInvariantMacro.h"
 
-RobotClientMiddleLayer::GUIManager::GUIManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+RobotClientMiddleLayer::GUIManager::GUIManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     ROBOT_CLIENT_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

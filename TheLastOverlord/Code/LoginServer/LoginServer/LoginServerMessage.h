@@ -55,7 +55,7 @@ namespace LoginServer
         using ParentType = MessageType;
 
     public:
-        explicit LoginServerMessage(int64_t delta);
+        explicit LoginServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

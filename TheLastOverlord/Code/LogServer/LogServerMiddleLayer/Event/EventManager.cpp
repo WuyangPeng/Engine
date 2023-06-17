@@ -12,8 +12,8 @@
 #include "EventManager.h"
 #include "LogServer/LogServerMiddleLayer/Macro/LogServerMiddleLayerClassInvariantMacro.h"
 
-LogServerMiddleLayer::EventManager::EventManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+LogServerMiddleLayer::EventManager::EventManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     LOG_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

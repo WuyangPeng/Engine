@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/03 14:54)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:06)
 
 #include "OdeSolverTest.h"
 #include "OdeSolverTesting.h"
@@ -13,6 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/NumericalAnalysis/OdeSolverDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 Mathematics::OdeSolverTest::OdeSolverTest(int dimension, double step, Function function, const OdeSolverTesting* userData)
     : ParentType{ dimension, step, function, userData }
 {

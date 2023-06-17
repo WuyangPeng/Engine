@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/12 16:41)
+///	引擎版本：0.9.0.12 (2023/06/12 10:49)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,10 +19,6 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
 #include <gsl/util>
-
-using std::string;
-using std::swap;
-using std::vector;
 
 Rendering::VisualEffectInstanceImpl::VisualEffectInstanceImpl() noexcept
     : visualEffect{}, techniqueIndex{ 0 }, numPasses{ 0 }, vertexParameters{}, pixelParameters{}
@@ -86,8 +82,8 @@ Rendering::VisualEffectInstanceImpl& Rendering::VisualEffectInstanceImpl::operat
 void Rendering::VisualEffectInstanceImpl::Swap(VisualEffectInstanceImpl& rhs) noexcept
 {
     swap(visualEffect, rhs.visualEffect);
-    swap(techniqueIndex, rhs.techniqueIndex);
-    swap(numPasses, rhs.numPasses);
+    std::swap(techniqueIndex, rhs.techniqueIndex);
+    std::swap(numPasses, rhs.numPasses);
     vertexParameters.swap(rhs.vertexParameters);
     pixelParameters.swap(rhs.pixelParameters);
 }
@@ -165,7 +161,7 @@ void Rendering::VisualEffectInstanceImpl::Register(CoreTools::ObjectRegister& ta
     target.RegisterContainer(pixelParameters);
 }
 
-CoreTools::ObjectSharedPtr Rendering::VisualEffectInstanceImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::VisualEffectInstanceImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -192,7 +188,7 @@ CoreTools::ObjectSharedPtr Rendering::VisualEffectInstanceImpl::GetObjectByName(
     return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::VisualEffectInstanceImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::VisualEffectInstanceImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -215,7 +211,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::VisualEffectInstanceImpl::GetAllOb
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::VisualEffectInstanceImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::VisualEffectInstanceImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -242,7 +238,7 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualEffectInstanceImpl::GetConstObj
     return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualEffectInstanceImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualEffectInstanceImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

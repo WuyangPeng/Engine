@@ -1,27 +1,23 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/26 16:50)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:43)
 
 #include "RationalConversionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/IntegerDataAmendDetail.h"
 #include "Mathematics/Rational/RationalConversionDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 #include <gsl/util>
 #include <limits>
 #include <random>
-
-using std::default_random_engine;
-using std::numeric_limits;
-using std::uniform_int;
-using std::uniform_real;
 
 Mathematics::RationalConversionTesting::RationalConversionTesting(const OStreamShared& streamShared)
     : ParentType{ streamShared }
@@ -49,15 +45,15 @@ void Mathematics::RationalConversionTesting::MainTest()
 
 void Mathematics::RationalConversionTesting::FloatingPointTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> firstRandomDistribution(-1.0e38f, 1.0e38f);
-    const uniform_real<double> secondRandomDistribution(static_cast<double>(std::numeric_limits<uint64_t>::min()), static_cast<double>(std::numeric_limits<uint64_t>::max()));
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution0(-1.0e38f, 1.0e38f);
+    const std::uniform_real<double> randomDistribution1(static_cast<double>(std::numeric_limits<uint64_t>::min()), static_cast<double>(std::numeric_limits<uint64_t>::max()));
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        auto firstValue = firstRandomDistribution(generator);
+        auto firstValue = randomDistribution0(generator);
 
         const SignRational<20> firstRational(firstValue);
 
@@ -73,7 +69,7 @@ void Mathematics::RationalConversionTesting::FloatingPointTest()
 
         ASSERT_EQUAL(thirdValue, fourthValue);
 
-        auto fifthValue = secondRandomDistribution(generator);
+        auto fifthValue = randomDistribution1(generator);
 
         const SignRational<40> secondRational(fifthValue);
 
@@ -92,17 +88,17 @@ void Mathematics::RationalConversionTesting::FloatingPointTest()
 
 void Mathematics::RationalConversionTesting::IntegerTest()
 {
-    default_random_engine generator{};
-    const uniform_int<int64_t> firstRandomDistribution(-numeric_limits<int64_t>::max(), numeric_limits<int64_t>::max());
-    const uniform_int<int> secondRandomDistribution(-INT_MAX, INT_MAX);
-    const uniform_int<int8_t> thirdRandomDistribution(-numeric_limits<int8_t>::max(), numeric_limits<int8_t>::max());
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<int64_t> randomDistribution0(-std::numeric_limits<int64_t>::max(), std::numeric_limits<int64_t>::max());
+    const std::uniform_int<int> randomDistribution1(-INT_MAX, INT_MAX);
+    const std::uniform_int<int8_t> thirdRandomDistribution(-std::numeric_limits<int8_t>::max(), std::numeric_limits<int8_t>::max());
 
-    const uniform_int<int16_t> fourthRandomDistribution(-numeric_limits<int16_t>::max(), numeric_limits<int16_t>::max());
+    const std::uniform_int<int16_t> fourthRandomDistribution(-std::numeric_limits<int16_t>::max(), std::numeric_limits<int16_t>::max());
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        auto firstValue = firstRandomDistribution(generator);
+        auto firstValue = randomDistribution0(generator);
 
         const SignRational<20> firstIntegerData(firstValue);
 
@@ -122,7 +118,7 @@ void Mathematics::RationalConversionTesting::IntegerTest()
 
         ASSERT_EQUAL(thirdValue, fourthValue);
 
-        const int fifthValue = secondRandomDistribution(generator);
+        const int fifthValue = randomDistribution1(generator);
 
         const SignRational<40> secondIntegerData(fifthValue);
 
@@ -146,17 +142,17 @@ void Mathematics::RationalConversionTesting::IntegerTest()
 
 void Mathematics::RationalConversionTesting::UnsignedIntegerTest()
 {
-    default_random_engine generator{};
-    const uniform_int<uint64_t> firstRandomDistribution(0, numeric_limits<int64_t>::max());
-    const uniform_int<uint32_t> secondRandomDistribution(0, INT_MAX);
-    const uniform_int<uint8_t> thirdRandomDistribution(0, numeric_limits<int8_t>::max());
-    const uniform_int<uint16_t> fourthRandomDistribution(0, numeric_limits<int16_t>::max());
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<uint64_t> randomDistribution0(0, std::numeric_limits<int64_t>::max());
+    const std::uniform_int<uint32_t> randomDistribution1(0, INT_MAX);
+    const std::uniform_int<uint8_t> thirdRandomDistribution(0, std::numeric_limits<int8_t>::max());
+    const std::uniform_int<uint16_t> fourthRandomDistribution(0, std::numeric_limits<int16_t>::max());
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const uint64_t firstValue = firstRandomDistribution(generator);
+        const uint64_t firstValue = randomDistribution0(generator);
 
         const SignRational<20> firstIntegerData(firstValue);
 
@@ -176,7 +172,7 @@ void Mathematics::RationalConversionTesting::UnsignedIntegerTest()
 
         ASSERT_EQUAL(thirdValue, fourthValue);
 
-        const uint32_t fifthValue = secondRandomDistribution(generator);
+        const uint32_t fifthValue = randomDistribution1(generator);
 
         const SignRational<40> secondIntegerData(fifthValue);
 

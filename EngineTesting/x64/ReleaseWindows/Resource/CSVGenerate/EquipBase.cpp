@@ -82,9 +82,11 @@ int CSVConfigure::EquipBase::GetMaskCount() const
     THROW_EXCEPTION(SYSTEM_TEXT("equip表基类不允许获取数组。"s))
 }
 
-bool CSVConfigure::EquipBase::GetMask(MAYBE_UNUSED int index) const
+bool CSVConfigure::EquipBase::GetMask(int index) const
 {
     USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(index);
 
     THROW_EXCEPTION(SYSTEM_TEXT("equip表基类不允许获取数组。"s))
 }
@@ -110,9 +112,11 @@ int CSVConfigure::EquipBase::GetHeroId() const noexcept
     return 0;
 }
 
-std::shared_ptr<const CSVConfigure::Hero> CSVConfigure::EquipBase::GetHeroId(MAYBE_UNUSED const CSVConfigureContainer& csvContainer) const
+std::shared_ptr<const CSVConfigure::HeroMappingType> CSVConfigure::EquipBase::GetHeroId(const CSVConfigureContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
 
     THROW_EXCEPTION(SYSTEM_TEXT("equip表基类不允许获取映射值。"s))
 }

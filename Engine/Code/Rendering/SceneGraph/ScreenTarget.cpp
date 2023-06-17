@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/04/02 16:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 11:18)
 
 #include "Rendering/RenderingExport.h"
 
@@ -15,8 +15,6 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Shaders/ShaderManager.h"
-
-using std::vector;
 
 Rendering::CameraSharedPtr Rendering::ScreenTarget::CreateCamera()
 {
@@ -176,9 +174,9 @@ bool Rendering::ScreenTarget::ValidFormat(const VertexFormat& vertexFormat)
     return true;
 }
 
-vector<Rendering::ScreenTarget::APoint> Rendering::ScreenTarget::CreatePositions(int renderTargetWidth, int renderTargetHeight, float xMin, float xMax, float yMin, float yMax, float zValue)
+std::vector<Rendering::ScreenTarget::APoint> Rendering::ScreenTarget::CreatePositions(int renderTargetWidth, int renderTargetHeight, float xMin, float xMax, float yMin, float yMax, float zValue)
 {
-    vector<APoint> positions{};
+    std::vector<APoint> positions{};
 
     if (ValidSizes(renderTargetWidth, renderTargetHeight))
     {
@@ -210,9 +208,9 @@ vector<Rendering::ScreenTarget::APoint> Rendering::ScreenTarget::CreatePositions
     return positions;
 }
 
-vector<Rendering::ScreenTarget::Vector2D> Rendering::ScreenTarget::CreateTextureCoords()
+std::vector<Rendering::ScreenTarget::Vector2D> Rendering::ScreenTarget::CreateTextureCoords()
 {
-    vector<Vector2D> textureCoords{};
+    std::vector<Vector2D> textureCoords{};
 
     if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
     {

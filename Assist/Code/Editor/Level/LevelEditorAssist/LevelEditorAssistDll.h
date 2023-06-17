@@ -1,23 +1,32 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/07 16:20)
+///	引擎辅助版本：0.9.0.12 (2023/06/15 15:34)
 
 #ifndef LEVEL_EDITOR_DLL_DLL_H
 #define LEVEL_EDITOR_DLL_DLL_H
 
-#include "Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 #include "System/Helper/ExportMacro.h"
 
 #if defined(BUILDING_LEVEL_EDITOR_NO_IMPORT) || defined(BUILDING_LEVEL_EDITOR_STATIC)
 
     #define LEVEL_EDITOR_DEFAULT_DECLARE
-    #define LEVEL_EDITOR_HIDDEN_DECLARE
     #define LEVEL_EDITOR_VISIBLE
+
+    #if defined(BUILDING_LEVEL_EDITOR_EXPORT)
+
+        #define LEVEL_EDITOR_HIDDEN_DECLARE
+
+    #else  // !defined(BUILDING_LEVEL_EDITOR_EXPORT)
+
+        #define LEVEL_EDITOR_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_LEVEL_EDITOR_EXPORT
 
 #else  // !defined(BUILDING_LEVEL_EDITOR_NO_IMPORT) && !defined(BUILDING_LEVEL_EDITOR_STATIC)
 

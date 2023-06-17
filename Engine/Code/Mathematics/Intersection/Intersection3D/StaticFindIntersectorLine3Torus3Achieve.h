@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.3 (2022/03/01 19:21)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/09 09:26)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TORUS3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TORUS3_ACHIEVE_H
@@ -125,7 +125,7 @@ Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Torus3<Real>::
             return point3;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"s))
 }
 
 #endif  // MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TORUS3_ACHIEVE_H

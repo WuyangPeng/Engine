@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.0 (2022/08/09 15:04)
+///	引擎版本：0.9.0.12 (2023/06/12 11:20)
 
 #ifndef RENDERING_RENDERERS_TEXTURE_BUFFER_DETAIL_H
 #define RENDERING_RENDERERS_TEXTURE_BUFFER_DETAIL_H
@@ -23,12 +23,12 @@ void Rendering::TextureBuffer::SetMember(const std::string& name, const T& value
 
     if (layout.GetNumElements != 0)
     {
-        THROW_EXCEPTION("成员是一个数组，使用SetMember(name,index,value)。"s);
+        THROW_EXCEPTION(SYSTEM_TEXT("成员是一个数组，使用SetMember(name,index,value)。"s));
     }
 
     if (GetNumBytes() < layout.GetOffset() + sizeof(T))
     {
-        THROW_EXCEPTION("写入将访问缓冲区外的内存。"s);
+        THROW_EXCEPTION(SYSTEM_TEXT("写入将访问缓冲区外的内存。"s));
     }
 
     auto target = GetData(layout.GetOffset());
@@ -45,12 +45,12 @@ T Rendering::TextureBuffer::GetMember(const std::string& name) const
 
     if (layout.GetNumElements != 0)
     {
-        THROW_EXCEPTION("成员是一个数组，使用SetMember(name,index,value)。"s);
+        THROW_EXCEPTION(SYSTEM_TEXT("成员是一个数组，使用SetMember(name,index,value)。"s));
     }
 
     if (GetNumBytes() < layout.GetOffset() + sizeof(T))
     {
-        THROW_EXCEPTION("写入将访问缓冲区外的内存。"s);
+        THROW_EXCEPTION(SYSTEM_TEXT("写入将访问缓冲区外的内存。"s));
     }
 
     auto target = GetData(layout.GetOffset());
@@ -67,12 +67,12 @@ void Rendering::TextureBuffer::SetMember(const std::string& name, int index, con
 
     if (layout.GetNumElements == 0)
     {
-        THROW_EXCEPTION("成员不是一个数组，使用SetMember(name,value)。"s);
+        THROW_EXCEPTION(SYSTEM_TEXT("成员不是一个数组，使用SetMember(name,value)。"s));
     }
 
     if (GetNumBytes() < layout.GetOffset() + (index + 1) * sizeof(T))
     {
-        THROW_EXCEPTION("写入将访问缓冲区外的内存。"s);
+        THROW_EXCEPTION(SYSTEM_TEXT("写入将访问缓冲区外的内存。"s));
     }
 
     auto target = GetData(layout.GetOffset() + index * sizeof(T));
@@ -89,12 +89,12 @@ T Rendering::TextureBuffer::GetMember(const std::string& name, int index) const
 
     if (layout.GetNumElements == 0)
     {
-        THROW_EXCEPTION("成员不是一个数组，使用SetMember(name,value)。"s);
+        THROW_EXCEPTION(SYSTEM_TEXT("成员不是一个数组，使用SetMember(name,value)。"s));
     }
 
     if (GetNumBytes() < layout.GetOffset() + (index + 1) * sizeof(T))
     {
-        THROW_EXCEPTION("写入将访问缓冲区外的内存。"s);
+        THROW_EXCEPTION(SYSTEM_TEXT("写入将访问缓冲区外的内存。"s));
     }
 
     auto target = GetData(layout.GetOffset() + index * sizeof(T));

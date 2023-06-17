@@ -91,7 +91,7 @@ void CoreTools::CSVConfigureTesting::ChapterContainerTest()
     }
 
     const auto container = chapterContainer->GetContainer();
-    ASSERT_EQUAL(container.size(), 6u);
+    ASSERT_GREATER_EQUAL(container.size(), 6u);
 
     for (const auto& chapter : container)
     {

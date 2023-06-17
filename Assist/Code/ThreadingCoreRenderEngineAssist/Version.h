@@ -15,6 +15,6 @@
 //  g_TCREAssistVersion / 10000 % 100 是次版本号
 //  g_TCREAssistVersion / 1000000 % 100 是主版本号
 
-constexpr auto g_TCREAssistVersion = 80010;
+constexpr auto g_TCREAssistVersion = 90012;
 
 #endif  // THREADING_CORE_RENDER_ENGINE_ASSIST_VERSION_H

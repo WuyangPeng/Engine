@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/20 22:47)
+///	引擎测试版本：0.9.0.12 (2023/06/12 16:51)
 
 #include "BoundTreeTesting.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/PhysicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
@@ -25,20 +26,28 @@
 
 #include <random>
 
-using CoreTools::WriteFileManager;
-using std::vector;
-
 namespace Physics
 {
     template class BoundTree<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF>;
     template class BoundTree<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Physics, BoundTreeTesting)
+Physics::BoundTreeTesting::BoundTreeTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    PHYSICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Physics, BoundTreeTesting)
+
+void Physics::BoundTreeTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Physics::BoundTreeTesting::MainTest()
 {
-    CoreTools::InitTerm::ExecuteInitializers();
+    CoreTools::InitTerm::ExecuteInitializer();
 
     Rendering::RendererManager::Create();
 
@@ -47,169 +56,13 @@ void Physics::BoundTreeTesting::MainTest()
 
     Rendering::RendererManager::Destroy();
 
-    CoreTools::InitTerm::ExecuteTerminators();
+    CoreTools::InitTerm::ExecuteTerminator();
 }
 
-void Physics::BoundTreeTesting::CreateTrianglesMeshFile()
+void Physics::BoundTreeTesting::CreateTrianglesMeshFile() noexcept
 {
-    WriteFileManager manage(SYSTEM_TEXT("Resource/CollisionDetectionSuite/TrianglesMesh.trv"));
-
-    std::default_random_engine generator;
-    const std::uniform_real<float> firstFloatRandomDistribution(-1.0f, 1.0f);
-
-    constexpr int type = System::EnumCastUnderlying(Rendering::VisualPrimitiveType::TriangleMesh);
-    manage.Write(sizeof(int), &type);
-
-    // VertexFormat
-    vector<Rendering::VertexFormatType> firstVertexFormatType{
-        Rendering::VertexFormatType(Rendering::VertexFormatFlags::AttributeType::Float3,
-                                    Rendering::VertexFormatFlags::AttributeUsage::Position, 0),
-        Rendering::VertexFormatType(Rendering::VertexFormatFlags::AttributeType::Float3,
-                                    Rendering::VertexFormatFlags::AttributeUsage::Normal, 0),
-        Rendering::VertexFormatType(Rendering::VertexFormatFlags::AttributeType::Float3,
-                                    Rendering::VertexFormatFlags::AttributeUsage::Tangent, 0),
-        Rendering::VertexFormatType(Rendering::VertexFormatFlags::AttributeType::Float3,
-                                    Rendering::VertexFormatFlags::AttributeUsage::Binormal, 0),
-        Rendering::VertexFormatType(Rendering::VertexFormatFlags::AttributeType::Float2,
-                                    Rendering::VertexFormatFlags::AttributeUsage::TextureCoord, 0)
-    };
-
-    Rendering::VertexFormatSharedPtr firstVertexFormat = Rendering::VertexFormat::Create(firstVertexFormatType);
-
-    firstVertexFormat->SaveToFile(manage);
-
-    // VertexBuffer
-    int numElements = 20;
-    int elementSize = firstVertexFormat->GetStride();
-    constexpr int usage = System::EnumCastUnderlying(Rendering::BufferUsage::Static);
-
-    manage.Write(sizeof(int), &numElements);
-    manage.Write(sizeof(int), &elementSize);
-    manage.Write(sizeof(int), &usage);
-
-    int vertexIndex = 0;
-    for (int i = 0; i < numElements; ++i)
-    {
-        for (int attributesIndex = 0;
-             attributesIndex < firstVertexFormat->GetNumAttributes();
-             ++attributesIndex)
-        {
-            const Rendering::VertexFormat::AttributeType type2 = firstVertexFormat->GetAttributeType(attributesIndex);
-
-            const int componentSize = Rendering::VertexFormat::GetComponentSize(type2);
-            const int numComponents = Rendering::VertexFormat::GetNumComponents(type2);
-
-            const auto size = componentSize * numComponents;
-            vector<char> buffer(size);
-
-            for (unsigned bufferIndex = 0; bufferIndex < buffer.size() / sizeof(float); ++bufferIndex)
-            {
-                const auto index = bufferIndex * sizeof(float);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-                float* floatBufferPtr = reinterpret_cast<float*>(&buffer.at(index));
-
-#include STSTEM_WARNING_POP
-
-                if (floatBufferPtr != nullptr)
-                {
-                    *floatBufferPtr = firstFloatRandomDistribution(generator);
-                }
-            }
-
-            manage.Write(componentSize, numComponents, buffer.data());
-        }
-
-        vertexIndex += elementSize;
-    }
-
-    // IndexBuffer
-    constexpr int indexBufferNumElements = 105;
-    elementSize = 4;
-    const int numBytes = indexBufferNumElements * elementSize;
-
-    manage.Write(sizeof(int), &indexBufferNumElements);
-    manage.Write(sizeof(int), &elementSize);
-    manage.Write(sizeof(int), &usage);
-    manage.Write(sizeof(int), &numBytes);
-
-    vector<char> buffer(numBytes);
-
-    for (unsigned bufferIndex = 0; bufferIndex < buffer.size() / sizeof(float); ++bufferIndex)
-    {
-        const auto index = bufferIndex * sizeof(int);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-        int* intBufferPtr = reinterpret_cast<int*>(&buffer.at(index));
-
-#include STSTEM_WARNING_POP
-
-        if (intBufferPtr != nullptr)
-        {
-            *intBufferPtr = bufferIndex % numElements;
-        }
-    }
-
-    manage.Write(elementSize, numBytes / elementSize, buffer.data());
-
-    constexpr int offset = 0;
-
-    manage.Write(sizeof(int), &offset);
 }
 
-void Physics::BoundTreeTesting::InitTest()
+void Physics::BoundTreeTesting::InitTest() noexcept
 {
-    Rendering::VisualSharedPtr firstTrianglesMesh = Rendering::LoadVisual::CreateFromFile(SYSTEM_TEXT("Resource/CollisionDetectionSuite/TrianglesMesh.trv"));
-
-    Rendering::TrianglesMeshSharedPtr secondTrianglesMesh = boost::polymorphic_pointer_cast<Rendering::TrianglesMesh>(firstTrianglesMesh);
-
-    using BoundTree = BoundTree<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF>;
-    BoundTree firstBoundTree(secondTrianglesMesh);
-
-    Rendering::TrianglesMeshSharedPtr thirdTrianglesMesh = firstBoundTree.GetMesh();
-
-    ASSERT_EQUAL(secondTrianglesMesh, thirdTrianglesMesh);
-
-    Rendering::ConstTrianglesMeshSharedPtr fifthTrianglesMesh = firstBoundTree.GetConstMesh();
-
-    ASSERT_EQUAL(secondTrianglesMesh, fifthTrianglesMesh);
-
-    BoundTree::BoundTreeChildSharedPtr firstChild = firstBoundTree.GetBeginChild();
-
-    const int numTriangles = secondTrianglesMesh->GetNumTriangles();
-    std::vector<Mathematics::APointF> centroids;
-    constexpr float oneThird = 1.0f / 3.0f;
-    for (int index = 0; index < numTriangles; ++index)
-    {
-        Rendering::TrianglePosition trianglePosition = secondTrianglesMesh->GetModelTriangle(index);
-
-        centroids.push_back(oneThird * (trianglePosition.GetFirstPosition() + trianglePosition.GetSecondPosition() + trianglePosition.GetThirdPosition()));
-    }
-
-    vector<int> inSplit;
-    for (int index = 0; index < numTriangles; ++index)
-    {
-        inSplit.push_back(index);
-    }
-
-    using BoundTreeChild = BoundTreeChild<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF>;
-
-    BoundTree::BoundTreeChildSharedPtr secondChild(std::make_shared<BoundTreeChild>(secondTrianglesMesh, 1,
-                                                                                    centroids, 0, numTriangles - 1,
-                                                                                    inSplit, false));
-
-    ASSERT_TRUE(Approximate(firstChild->GetWorldBound(), secondChild->GetWorldBound(), 1e-8f));
-    ASSERT_EQUAL(firstChild->IsInteriorNode(), secondChild->IsInteriorNode());
-    ASSERT_EQUAL(firstChild->IsLeafNode(), secondChild->IsLeafNode());
-    ASSERT_EQUAL(firstChild->GetNumTriangles(), secondChild->GetNumTriangles());
-    ASSERT_EQUAL(firstChild->GetTriangles(), secondChild->GetTriangles());
-
-    firstBoundTree.UpdateWorldBound();
-    secondChild->UpdateWorldBound();
-
-    ASSERT_TRUE(Approximate(firstChild->GetWorldBound(), secondChild->GetWorldBound(), 1e-8f));
 }

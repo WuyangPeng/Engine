@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/28 15:15)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:15)
 
 #include "Box3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Objects3D/Box3Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -45,28 +42,28 @@ void Mathematics::Box3Testing::MainTest()
 
 void Mathematics::Box3Testing::BoxTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D center(firstRandomDistribution(generator),
-                              firstRandomDistribution(generator),
-                              firstRandomDistribution(generator));
+        const Vector3D center(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              randomDistribution0(generator));
 
-        const Vector3D firstAxis(firstRandomDistribution(generator),
-                                 firstRandomDistribution(generator),
-                                 firstRandomDistribution(generator));
+        const Vector3D firstAxis(randomDistribution0(generator),
+                                 randomDistribution0(generator),
+                                 randomDistribution0(generator));
 
-        const Vector3D secondAxis(firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator));
+        const Vector3D secondAxis(randomDistribution0(generator),
+                                  randomDistribution0(generator),
+                                  randomDistribution0(generator));
 
-        const Vector3D thirdAxis(firstRandomDistribution(generator),
-                                 firstRandomDistribution(generator),
-                                 firstRandomDistribution(generator));
+        const Vector3D thirdAxis(randomDistribution0(generator),
+                                 randomDistribution0(generator),
+                                 randomDistribution0(generator));
 
         auto firstExtent = Vector3ToolsD::GetLength(firstAxis);
         auto secondExtent = Vector3ToolsD::GetLength(secondAxis);

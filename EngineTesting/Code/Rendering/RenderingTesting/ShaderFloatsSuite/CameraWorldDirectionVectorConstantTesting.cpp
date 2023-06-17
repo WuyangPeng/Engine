@@ -10,13 +10,14 @@
 #include "CameraWorldDirectionVectorConstantTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/InTopLevel.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/CameraManager.h"
@@ -25,23 +26,32 @@
 
 #include <random>
 
-using std::vector;
+Rendering::CameraWorldDirectionVectorConstantTesting::CameraWorldDirectionVectorConstantTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, CameraWorldDirectionVectorConstantTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, CameraWorldDirectionVectorConstantTesting)
+
+void Rendering::CameraWorldDirectionVectorConstantTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Rendering::CameraWorldDirectionVectorConstantTesting::MainTest()
 {
     CameraManager::Create();
     RendererManager::Create();
 
-    CoreTools::InitTerm::ExecuteInitializers();
+    CoreTools::InitTerm::ExecuteInitializer();
 
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UpdateTest);
 
-    CoreTools::InitTerm::ExecuteTerminators();
+    CoreTools::InitTerm::ExecuteTerminator();
 
     RendererManager::Destroy();
     CameraManager::Destroy();
@@ -64,7 +74,7 @@ void Rendering::CameraWorldDirectionVectorConstantTesting::InitTest()
     firstShaderFloat.EnableUpdater();
     ASSERT_TRUE(firstShaderFloat.AllowUpdater());
 
-    vector<float> firstData(4, 1);
+    std::vector<float> firstData(4, 1);
     firstShaderFloat.SetRegisters(firstData);
 
     for (int i = 0; i < 4; ++i)
@@ -89,7 +99,7 @@ void Rendering::CameraWorldDirectionVectorConstantTesting::InitTest()
     thirdShaderFloat.EnableUpdater();
     ASSERT_TRUE(thirdShaderFloat.AllowUpdater());
 
-    vector<float> secondData;
+    std::vector<float> secondData;
     for (int registerIndex = 0; registerIndex < 4; ++registerIndex)
     {
         secondData.push_back(static_cast<float>(registerIndex));

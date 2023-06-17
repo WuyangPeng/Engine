@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/08 18:26)
+///	引擎版本：0.9.0.12 (2023/06/12 13:51)
 
 #include "Rendering/RenderingExport.h"
 
@@ -17,9 +17,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
-using std::string;
-using std::vector;
 
 Rendering::BillboardNodeImpl::BillboardNodeImpl() noexcept
     : camera{}
@@ -72,28 +69,28 @@ void Rendering::BillboardNodeImpl::Register(CoreTools::ObjectRegister& target) c
     target.Register(camera);
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::BillboardNodeImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::BillboardNodeImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return camera.object->GetConstObjectByName(name);
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::BillboardNodeImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::BillboardNodeImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return camera.object->GetAllConstObjectsByName(name);
 }
 
-CoreTools::ObjectSharedPtr Rendering::BillboardNodeImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::BillboardNodeImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return camera.object->GetObjectByName(name);
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::BillboardNodeImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::BillboardNodeImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 

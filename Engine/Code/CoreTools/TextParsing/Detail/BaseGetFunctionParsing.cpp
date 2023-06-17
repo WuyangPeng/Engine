@@ -76,7 +76,7 @@ System::String CoreTools::BaseGetFunctionParsing::GenerateArray(const String& ac
 
     auto content = GenerateCountFunction(functionVariableName, TextParsing::gNodiscardVirtual, TextParsing::gCountFunction);
 
-    content += GenerateGetValueFunction(valueType, functionVariableName, TextParsing::gNodiscardVirtual, TextParsing::gMaybeUnusedIndexParameter);
+    content += GenerateGetValueFunction(valueType, functionVariableName, TextParsing::gNodiscardVirtual, TextParsing::gIndexParameter);
     content += GenerateBeginIterFunction(actualType, functionVariableName, TextParsing::gNodiscardVirtual, TextParsing::gBeginFunction);
     content += GenerateEndIterFunction(actualType, functionVariableName, TextParsing::gNodiscardVirtual, TextParsing::gEndFunction);
 
@@ -100,7 +100,9 @@ System::String CoreTools::BaseGetFunctionParsing::GenerateMapping(int index, con
     content += TextParsing::gSpace;
     content += TextParsing::gGet;
     content += upperVariableName;
-    content += TextParsing::gMaybeUnusedConst;
+    content += TextParsing::gLeftBrackets;
+    content += TextParsing::gSmallConst;
+    content += TextParsing::gSpace;
     content += csvHead.GetNameSpace();
     content += TextParsing::gContainerParameter;
     content += TextParsing::gSemicolonNewline;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 14:29)
+///	引擎测试版本：0.9.0.12 (2023/06/13 23:10)
 
 #include "WindowApplicationInformationTesting.h"
 #include "resource.h"
@@ -16,6 +16,7 @@
 #include "System/Windows/WindowsRegister.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Renderers/RendererParameter.h"
 #include "Framework/Application/WindowApplicationInformation.h"
@@ -189,5 +190,5 @@ void Framework::WindowApplicationInformationTesting::RendererParameterTest()
 
     ASSERT_EQUAL(information.GetWindowPictorial().GetHBrush(), System::GetSystemStockObject(System::WindowsBrushTypes::BlackBrush));
     ASSERT_EQUAL(information.GetWindowPictorial().GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
-    ASSERT_EQUAL(information.GetWindowPictorial().GetHIcon(), System::LoadSystemIcon(nullptr, System::g_Question));
+    ASSERT_EQUAL(information.GetWindowPictorial().GetHIcon(), System::LoadSystemIcon(nullptr, System::gQuestion));
 }

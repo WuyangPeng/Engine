@@ -1,29 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/26 18:39)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:22)
 
 #include "Query2FilteredTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Query/Query2FilteredDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::swap;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -54,20 +49,20 @@ void Mathematics::Query2FilteredTesting::MainTest()
 
 void Mathematics::Query2FilteredTesting::VerticesTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
         Query2FilteredD query(vertices, 0.0);
@@ -84,10 +79,10 @@ void Mathematics::Query2FilteredTesting::VerticesTest()
 
 void Mathematics::Query2FilteredTesting::LineTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
-    const uniform_real<double> thirdRandomDistribution(-1.0, 1.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
+    const std::uniform_real<double> thirdRandomDistribution(-1.0, 1.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -95,15 +90,15 @@ void Mathematics::Query2FilteredTesting::LineTest()
     {
         std::vector<Vector2D> firstVertices;
         std::vector<Vector2D> secondVertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            firstVertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            firstVertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
             secondVertices.push_back(Vector2(thirdRandomDistribution(generator), thirdRandomDistribution(generator)));
         }
 
-        const uniform_int<> thirdRandomDistribution1(0, size - 1);
+        const std::uniform_int<> thirdRandomDistribution1(0, size - 1);
 
         auto firstIndex = thirdRandomDistribution1(generator);
         auto secondIndex = thirdRandomDistribution1(generator);
@@ -116,11 +111,11 @@ void Mathematics::Query2FilteredTesting::LineTest()
 
         if (firstIndex != secondIndex && secondIndex != thirdIndex && firstIndex != thirdIndex)
         {
-            const auto& firstVector = firstVertices.at(firstIndex);
-            const auto& secondVector = firstVertices.at(secondIndex);
-            const auto& thirdVector = firstVertices.at(thirdIndex);
+            const auto& vector0 = firstVertices.at(firstIndex);
+            const auto& vector1 = firstVertices.at(secondIndex);
+            const auto& vector2 = firstVertices.at(thirdIndex);
 
-            auto dotPerp = Vector2ToolsD::DotPerp(firstVector - secondVector, thirdVector - secondVector);
+            auto dotPerp = Vector2ToolsD::DotPerp(vector0 - vector1, vector2 - vector1);
 
             if (0.0 < dotPerp)
             {
@@ -145,10 +140,10 @@ void Mathematics::Query2FilteredTesting::LineTest()
 
 void Mathematics::Query2FilteredTesting::TriangleTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
-    const uniform_real<double> thirdRandomDistribution(-1.0, 1.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
+    const std::uniform_real<double> thirdRandomDistribution(-1.0, 1.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -156,15 +151,15 @@ void Mathematics::Query2FilteredTesting::TriangleTest()
     {
         std::vector<Vector2D> firstVertices;
         std::vector<Vector2D> secondVertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (int m = 0; m < size; ++m)
         {
-            firstVertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            firstVertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
             secondVertices.push_back(Vector2(thirdRandomDistribution(generator), thirdRandomDistribution(generator)));
         }
 
-        const uniform_int<> thirdRandomDistribution1(0, size - 1);
+        const std::uniform_int<> thirdRandomDistribution1(0, size - 1);
 
         auto firstIndex = thirdRandomDistribution1(generator);
         auto secondIndex = thirdRandomDistribution1(generator);
@@ -174,7 +169,7 @@ void Mathematics::Query2FilteredTesting::TriangleTest()
         Query2FilteredD firstQuery(firstVertices, 0.0);
         if (firstQuery.ToLine(secondIndex, thirdIndex, fourthIndex) == LineQueryType::Right)
         {
-            swap(secondIndex, thirdIndex);
+            std::swap(secondIndex, thirdIndex);
         }
 
         ASSERT_ENUM_EQUAL(firstQuery.ToTriangle(secondIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
@@ -203,7 +198,7 @@ void Mathematics::Query2FilteredTesting::TriangleTest()
 
         if (secondQuery.ToLine(secondIndex, thirdIndex, fourthIndex) == LineQueryType::Right)
         {
-            swap(secondIndex, thirdIndex);
+            std::swap(secondIndex, thirdIndex);
         }
 
         ASSERT_ENUM_EQUAL(secondQuery.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex), thirdQuery.ToTriangle(firstIndex, secondIndex, thirdIndex, fourthIndex));
@@ -212,10 +207,10 @@ void Mathematics::Query2FilteredTesting::TriangleTest()
 
 void Mathematics::Query2FilteredTesting::CircumcircleTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
-    const uniform_real<double> thirdRandomDistribution(-1.0, 1.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
+    const std::uniform_real<double> thirdRandomDistribution(-1.0, 1.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -223,15 +218,15 @@ void Mathematics::Query2FilteredTesting::CircumcircleTest()
     {
         std::vector<Vector2D> firstVertices;
         std::vector<Vector2D> secondVertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            firstVertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
-            secondVertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            firstVertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
+            secondVertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
-        const uniform_int<> thirdRandomDistribution1(0, size - 1);
+        const std::uniform_int<> thirdRandomDistribution1(0, size - 1);
 
         auto firstIndex = thirdRandomDistribution1(generator);
         auto secondIndex = thirdRandomDistribution1(generator);
@@ -248,26 +243,26 @@ void Mathematics::Query2FilteredTesting::CircumcircleTest()
             thirdIndex != fourthIndex && fourthIndex != firstIndex &&
             secondIndex != fourthIndex && firstIndex != thirdIndex)
         {
-            const auto& firstVector = firstVertices.at(firstIndex);
-            const auto& secondVector = firstVertices.at(secondIndex);
-            const auto& thirdVector = firstVertices.at(thirdIndex);
-            const auto& fourthVector = firstVertices.at(fourthIndex);
+            const auto& vector0 = firstVertices.at(firstIndex);
+            const auto& vector1 = firstVertices.at(secondIndex);
+            const auto& vector2 = firstVertices.at(thirdIndex);
+            const auto& vector3 = firstVertices.at(fourthIndex);
 
-            auto lhsPlusTest = secondVector + firstVector;
-            auto lhsMinusTest = secondVector - firstVector;
-            auto mhsPlusTest = thirdVector + firstVector;
-            auto mhsMinusTest = thirdVector - firstVector;
-            auto rhsPlusTest = fourthVector + firstVector;
-            auto rhsMinusTest = fourthVector - firstVector;
+            auto lhsPlusTest = vector1 + vector0;
+            auto lhsMinusTest = vector1 - vector0;
+            auto mhsPlusTest = vector2 + vector0;
+            auto mhsMinusTest = vector2 - vector0;
+            auto rhsPlusTest = vector3 + vector0;
+            auto rhsMinusTest = vector3 - vector0;
             auto z0 = Vector2ToolsD::DotProduct(lhsPlusTest, lhsMinusTest);
             auto z1 = Vector2ToolsD::DotProduct(mhsPlusTest, mhsMinusTest);
             auto z2 = Vector2ToolsD::DotProduct(rhsPlusTest, rhsMinusTest);
 
-            const Vector3D fifthVector(lhsMinusTest[0], lhsMinusTest[1], z0);
-            const Vector3D sixthVector(mhsMinusTest[0], mhsMinusTest[1], z1);
+            const Vector3D vector4(lhsMinusTest[0], lhsMinusTest[1], z0);
+            const Vector3D vector5(mhsMinusTest[0], mhsMinusTest[1], z1);
             const Vector3D seventhVector(rhsMinusTest[0], rhsMinusTest[1], z2);
 
-            auto dot = Vector3ToolsD::ScalarTripleProduct(fifthVector, sixthVector, seventhVector);
+            auto dot = Vector3ToolsD::ScalarTripleProduct(vector4, vector5, seventhVector);
             if (0.0 < dot)
             {
                 ASSERT_ENUM_EQUAL(firstQuery.ToCircumcircle(firstIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::Inside);

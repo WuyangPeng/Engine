@@ -252,6 +252,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerHead() const
     content += TextParsing::gUnicodeUsing;
     content += TextParsing::gNewlineCharacter;
 
+    content += TextParsing::gFilesystemInclude;
     content += TextParsing::gMemoryInclude;
     content += TextParsing::gNewlineCharacter;
 
@@ -287,12 +288,10 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerSourceHead() co
         content += TextParsing::gHeadFileSuffix;
     }
 
+    content += TextParsing::gStringConversion;
     content += TextParsing::gUserClassInvariantMacro;
     content += TextParsing::gExceptionMacro;
     content += TextParsing::gIncludeCSVContent;
-    content += TextParsing::gNewlineCharacter;
-
-    content += TextParsing::gFilesystemInclude;
     content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gUsingNamespaceLiterals;
@@ -468,6 +467,10 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerClassName() con
     content += TextParsing::gClassType;
     content += className;
     content += TextParsing::gSemicolonNewline;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += SYSTEM_TEXT("using String = System::String;\n");
     content += TextParsing::gNewlineCharacter;
 
     return content;
@@ -488,7 +491,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerDefaultFunction
     content += TextParsing::gExplicit;
     content += TextParsing::gSpace;
     content += className;
-    content += TextParsing::gDirectoryParameter;
+    content += SYSTEM_TEXT("(const String& directory);\n");
     content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
@@ -542,8 +545,15 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerFunction() cons
     content += TextParsing::gVoid;
     content += TextParsing::gSpace;
     content += TextParsing::gParsing;
-    content += TextParsing::gStringDirectory;
+    content += SYSTEM_TEXT("(const String& directory)");
     content += TextParsing::gSemicolonNewline;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += TextParsing::gVoid;
+    content += TextParsing::gSpace;
+    content += TextParsing::gParsing;
+    content += SYSTEM_TEXT("(const std::filesystem::directory_entry& inputPath);\n");
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
@@ -653,7 +663,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerParsingDefiniti
     content += className;
     content += TextParsing::gDoubleColon;
     content += TextParsing::gParsing;
-    content += TextParsing::gStringDirectory;
+    content += SYSTEM_TEXT("(const String& directory)");
     content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gFunctionBeginBrackets;
@@ -669,34 +679,50 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerParsingDefiniti
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
+    content += TextParsing::gParsing;
+    content += SYSTEM_TEXT("(inputPath);\n");
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gFunctionEndBrackets; 
+
+    content += TextParsing::gFunctionEndBrackets;
+    content += TextParsing::gNewlineCharacter;
+
+    content += TextParsing::gVoid;
+    content += TextParsing::gSpace;
+    content += nameSpace;
+    content += TextParsing::gDoubleColon;
+    content += className;
+    content += TextParsing::gDoubleColon;
+    content += TextParsing::gParsing;
+    content += SYSTEM_TEXT("(const std::filesystem::directory_entry& inputPath)");
+    content += TextParsing::gNewlineCharacter;
+
+    content += TextParsing::gFunctionBeginBrackets;
+
+    content += TextParsing::gIndentation;
     content += TextParsing::gPathNative;
     content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
-    content += TextParsing::gIndentation;
     content += TextParsing::gFileNameFind;
 
-    content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
     content += TextParsing::gFunctionBeginBrackets;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += TextParsing::gIndentation;
-    content += TextParsing::gContinue;
+    content += TextParsing::gReturn;
     content += TextParsing::gSemicolonNewline;
 
-    content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
     content += TextParsing::gFunctionEndBrackets;
     content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
-    content += TextParsing::gIndentation;
     content += TextParsing::gCSVContentInit;
     content += TextParsing::gNewlineCharacter;
 
-    content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
     content += TextParsing::gGetCSVClassName;
     content += TextParsing::gNewlineCharacter;
@@ -707,11 +733,9 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerParsingDefiniti
         if (firstData)
         {
             content += TextParsing::gIndentation;
-            content += TextParsing::gIndentation;
         }
         else
         {
-            content += TextParsing::gIndentation;
             content += TextParsing::gIndentation;
             content += TextParsing::gElse;
             content += TextParsing::gSpace;
@@ -721,10 +745,8 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerParsingDefiniti
         content += TextParsing::gSystemTextEndNewline;
 
         content += TextParsing::gIndentation;
-        content += TextParsing::gIndentation;
         content += TextParsing::gFunctionBeginBrackets;
 
-        content += TextParsing::gIndentation;
         content += TextParsing::gIndentation;
         content += TextParsing::gIndentation;
         content += StringUtility::ToFirstLetterLower(value);
@@ -743,14 +765,11 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerParsingDefiniti
         content += TextParsing::gSemicolonNewline;
 
         content += TextParsing::gIndentation;
-        content += TextParsing::gIndentation;
         content += TextParsing::gFunctionEndBrackets;
 
         firstData = false;
     }
 
-    content += TextParsing::gIndentation;
-    content += TextParsing::gFunctionEndBrackets;
     content += TextParsing::gFunctionEndBrackets;
     content += TextParsing::gNewlineCharacter;
 
@@ -776,9 +795,10 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerVerifyDefinitio
     for (const auto& value : dataType)
     {
         content += TextParsing::gIndentation;
-        content += TextParsing::gIfNot;
+        content += TextParsing::gIf;
         content += StringUtility::ToFirstLetterLower(value);
         content += TextParsing::gContainer;
+        content += SYSTEM_TEXT(" == nullptr");
         content += TextParsing::gRightBrackets;
         content += TextParsing::gNewlineCharacter;
 
@@ -834,6 +854,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerIsValidDefiniti
 
         content += StringUtility::ToFirstLetterLower(value);
         content += TextParsing::gContainer;
+        content += SYSTEM_TEXT(" != nullptr");
 
         if (index == boost::numeric_cast<int>(dataType.size()) - 1)
         {
@@ -892,7 +913,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerDefaultFunction
     content += TextParsing::gDoubleColon;
     content += className;
     content += TextParsing::gLeftBrackets;
-    content += TextParsing::gDirectory;
+    content += SYSTEM_TEXT("const String& directory");
     content += TextParsing::gRightBrackets;
     content += TextParsing::gNewlineCharacter;
 

@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/31 13:52)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:11)
 
 #include "Arc2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Objects2D/Arc2Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -44,23 +42,23 @@ void Mathematics::Arc2Testing::MainTest()
 
 void Mathematics::Arc2Testing::Arc2Test()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
-    const uniform_real<double> secondRandomDistribution{ 0.0, MathD::GetTwoPI() };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
+    const std::uniform_real<double> randomDistribution1{ 0.0, MathD::GetTwoPI() };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Vector2 center(randomDistribution0(generator), randomDistribution0(generator));
 
-        const double radius(MathD::FAbs(firstRandomDistribution(generator)));
+        const double radius(MathD::FAbs(randomDistribution0(generator)));
 
-        const double firstAngle(secondRandomDistribution(generator));
+        const double firstAngle(randomDistribution1(generator));
 
         const Vector2 end0(center[0] + radius * MathD::Cos(firstAngle), center[1] + radius * MathD::Sin(firstAngle));
 
-        const uniform_real<double> thirdRandomDistribution(firstAngle, MathD::GetTwoPI());
+        const std::uniform_real<double> thirdRandomDistribution(firstAngle, MathD::GetTwoPI());
 
         const double secondAngle(thirdRandomDistribution(generator));
 
@@ -73,7 +71,7 @@ void Mathematics::Arc2Testing::Arc2Test()
         ASSERT_TRUE(Vector2ToolsD::Approximate(end1, arc2.GetEnd1()));
         ASSERT_APPROXIMATE(arc2.GetRadius(), radius, 1e-10);
 
-        const double thirdAngle(secondRandomDistribution(generator));
+        const double thirdAngle(randomDistribution1(generator));
 
         const Vector2 point(center[0] + radius * MathD::Cos(thirdAngle), center[1] + radius * MathD::Sin(thirdAngle));
 

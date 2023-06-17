@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/12 17:17)
+///	引擎版本：0.9.0.12 (2023/06/12 10:50)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,9 +19,6 @@
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
-using std::string;
-using std::vector;
 
 Rendering::VisualPassImpl::VisualPassImpl() noexcept
     : vertexShader{},
@@ -111,7 +108,7 @@ void Rendering::VisualPassImpl::Register(CoreTools::ObjectRegister& target) cons
     target.Register(wireState);
 }
 
-CoreTools::ObjectSharedPtr Rendering::VisualPassImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::VisualPassImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -166,7 +163,7 @@ CoreTools::ObjectSharedPtr Rendering::VisualPassImpl::GetObjectByName(const stri
     return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::VisualPassImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::VisualPassImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -190,7 +187,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::VisualPassImpl::GetAllObjectsByNam
     return vertexObjects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::VisualPassImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::VisualPassImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -245,7 +242,7 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualPassImpl::GetConstObjectByName(
     return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualPassImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualPassImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

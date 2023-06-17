@@ -31,9 +31,6 @@
     <Filter Include="ImagesSuite 头文件">
       <UniqueIdentifier>{b86e65cc-dec8-43bb-94b5-d9675990e135}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MacroSuite 头文件">
-      <UniqueIdentifier>{b5eb8403-9c33-4611-8bf4-bc17e70c4004}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SegmentersSuite 头文件">
       <UniqueIdentifier>{d33a216b-8e31-41ac-9e1a-87409c71d604}</UniqueIdentifier>
     </Filter>
@@ -42,6 +39,9 @@
     </Filter>
     <Filter Include="OpenCVSuite 头文件">
       <UniqueIdentifier>{17648bee-d24e-44bf-b591-97604bd1ce13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件">
+      <UniqueIdentifier>{b5eb8403-9c33-4611-8bf4-bc17e70c4004}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +63,6 @@
     <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\ImagesSuite\ImagesSuite.h">
       <Filter>ImagesSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\MacroSuite\MacroSuite.h">
-      <Filter>MacroSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\OpenCVSuite\OpenCVSuite.h">
       <Filter>OpenCVSuite 头文件</Filter>
     </ClInclude>
@@ -74,6 +71,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\SegmentersSuite\SegmentersSuite.h">
       <Filter>SegmentersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\HelperSuite\HelperSuite.h">
+      <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +108,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-	<Text Include="Resource\Todo\Level 0.txt">
+    <Text Include="Resource\Todo\Level 0.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 1.txt">
@@ -137,6 +137,6 @@
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
-    </Text>    
+    </Text>
   </ItemGroup>
 </Project>

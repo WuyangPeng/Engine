@@ -1,25 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 11:10)
+///	引擎测试版本：0.9.0.12 (2023/06/13 20:26)
 
 #include "PixelScreenTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Framework/WindowCreate/WindowSize.h"
-
-using std::default_random_engine;
-using std::make_shared;
-using std::swap;
-using std::uniform_int;
 
 Framework::PixelScreenTesting::PixelScreenTesting(const OStreamShared& stream)
     : ParentType{ stream }, random{ minColour, maxColour }
@@ -67,12 +63,12 @@ void Framework::PixelScreenTesting::DefaultColourTest()
 
 void Framework::PixelScreenTesting::ClearScreenTest()
 {
-    default_random_engine generator{ GetEngineRandomSeed() };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
     auto pixelScreen = CreateTestPixelScreen();
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -82,7 +78,7 @@ void Framework::PixelScreenTesting::ClearScreenTest()
     }
 }
 
-Framework::PixelScreenTesting::Colour Framework::PixelScreenTesting::GetRandomColour(default_random_engine& generator)
+Framework::PixelScreenTesting::Colour Framework::PixelScreenTesting::GetRandomColour(std::default_random_engine& generator)
 {
     const auto red = random(generator);
     const auto green = random(generator);
@@ -96,14 +92,14 @@ void Framework::PixelScreenTesting::ResizeTest()
     constexpr auto minSize = 1;
     constexpr auto maxSize = 256;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
-    const uniform_int<> sizeRandom{ minSize, maxSize };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
+    const std::uniform_int<> sizeRandom{ minSize, maxSize };
 
     auto pixelScreen = CreateTestPixelScreen();
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -140,17 +136,17 @@ void Framework::PixelScreenTesting::SetPixelTest()
     constexpr auto minSize = 0;
     constexpr auto maxSize = 256;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> sizeRandom{ minSize, maxSize };
-    const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
     auto pixelScreen = CreateTestPixelScreen(width, height);
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -172,16 +168,16 @@ void Framework::PixelScreenTesting::SetThickPixelTest()
     constexpr auto minThick = 2;
     constexpr auto maxThick = 10;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> sizeRandom{ minSize, maxSize };
-    const uniform_int<> thickRandom{ minThick, maxThick };
-    const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    const std::uniform_int<> thickRandom{ minThick, maxThick };
+    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -219,15 +215,15 @@ void Framework::PixelScreenTesting::DrawLineTest()
     constexpr auto minSize = 0;
     constexpr auto maxSize = 128;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> sizeRandom{ minSize, maxSize };
-    const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -328,15 +324,15 @@ void Framework::PixelScreenTesting::DrawRectangleSolidTest()
     constexpr auto minSize = 0;
     constexpr auto maxSize = 128;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> sizeRandom{ minSize, maxSize };
-    const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -349,12 +345,12 @@ void Framework::PixelScreenTesting::DrawRectangleSolidTest()
 
         if (xMax < xMin)
         {
-            swap(xMin, xMax);
+            std::swap(xMin, xMax);
         }
 
         if (yMax < yMin)
         {
-            swap(yMin, yMax);
+            std::swap(yMin, yMax);
         }
 
         pixelScreen.DrawRectangle(xMin, yMin, xMax, yMax, clearColour, true);
@@ -384,15 +380,15 @@ void Framework::PixelScreenTesting::DrawRectangleHollowTest()
     constexpr auto minSize = 0;
     constexpr auto maxSize = 128;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> sizeRandom{ minSize, maxSize };
-    const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         auto xMin = sizeRandom(generator);
         auto yMin = sizeRandom(generator);
@@ -404,12 +400,12 @@ void Framework::PixelScreenTesting::DrawRectangleHollowTest()
 
         if (xMax < xMin)
         {
-            swap(xMin, xMax);
+            std::swap(xMin, xMax);
         }
 
         if (yMax < yMin)
         {
-            swap(yMin, yMax);
+            std::swap(yMin, yMax);
         }
 
         pixelScreen.DrawRectangle(xMin, yMin, xMax, yMax, clearColour, false);
@@ -443,16 +439,16 @@ void Framework::PixelScreenTesting::DrawCircleSolidTest()
     constexpr auto minRadius = 2;
     constexpr auto maxRadius = 50;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> sizeRandom{ minSize, maxSize };
-    const uniform_int<> radiusRandom{ minRadius, maxRadius };
-    const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
+    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -561,16 +557,16 @@ void Framework::PixelScreenTesting::DrawCircleHollowTest()
     constexpr auto minRadius = 2;
     constexpr auto maxRadius = 50;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> sizeRandom{ minSize, maxSize };
-    const uniform_int<> radiusRandom{ minRadius, maxRadius };
-    const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
+    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -653,16 +649,16 @@ void Framework::PixelScreenTesting::FillThickPixelTest()
     constexpr auto minThick = 2;
     constexpr auto maxThick = 10;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> sizeRandom{ minSize, maxSize };
-    const uniform_int<> thickRandom{ minThick, maxThick };
-    const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    const std::uniform_int<> thickRandom{ minThick, maxThick };
+    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -691,15 +687,15 @@ void Framework::PixelScreenTesting::FillRectangleSolidTest()
     constexpr auto minSize = 0;
     constexpr auto maxSize = 128;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> sizeRandom{ minSize, maxSize };
-    const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -712,12 +708,12 @@ void Framework::PixelScreenTesting::FillRectangleSolidTest()
 
         if (xMax < xMin)
         {
-            swap(xMin, xMax);
+            std::swap(xMin, xMax);
         }
 
         if (yMax < yMin)
         {
-            swap(yMin, yMax);
+            std::swap(yMin, yMax);
         }
 
         pixelScreen.DrawRectangle(xMin, yMin, xMax, yMax, clearColour, true);
@@ -738,15 +734,15 @@ void Framework::PixelScreenTesting::FillRectangleHollowTest()
     constexpr auto minSize = 0;
     constexpr auto maxSize = 128;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> sizeRandom{ minSize, maxSize };
-    const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -759,12 +755,12 @@ void Framework::PixelScreenTesting::FillRectangleHollowTest()
 
         if (xMax < xMin)
         {
-            swap(xMin, xMax);
+            std::swap(xMin, xMax);
         }
 
         if (yMax < yMin)
         {
-            swap(yMin, yMax);
+            std::swap(yMin, yMax);
         }
 
         pixelScreen.DrawRectangle(xMin, yMin, xMax, yMax, clearColour, false);
@@ -787,16 +783,16 @@ void Framework::PixelScreenTesting::FillCircleSolidTest()
     constexpr auto minRadius = 2;
     constexpr auto maxRadius = 50;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> sizeRandom{ minSize, maxSize };
-    const uniform_int<> radiusRandom{ minRadius, maxRadius };
-    const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> sizeRandom{ minSize, maxSize };
+    const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
+    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 

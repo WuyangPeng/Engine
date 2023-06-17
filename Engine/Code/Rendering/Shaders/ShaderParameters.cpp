@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/13 15:53)
+///	引擎版本：0.9.0.12 (2023/06/12 10:53)
 
 #include "Rendering/RenderingExport.h"
 
@@ -17,9 +17,6 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
-using std::make_shared;
-using std::string;
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, ShaderParameters)
 
@@ -53,7 +50,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderParameters, GetNumTextures,
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderParameters, GetConstants, Rendering::ShaderParameters::ConstShaderFloatSharedPtrGather)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderParameters, GetTextures, Rendering::ShaderParameters::ConstTextureSharedPtrGather)
 
-int Rendering::ShaderParameters::SetConstant(const string& name, const ShaderFloatSharedPtr& shaderFloat)
+int Rendering::ShaderParameters::SetConstant(const std::string& name, const ShaderFloatSharedPtr& shaderFloat)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -67,7 +64,7 @@ void Rendering::ShaderParameters::SetConstant(int handle, const ShaderFloatShare
     return impl->SetConstant(handle, shaderFloat);
 }
 
-int Rendering::ShaderParameters::SetTexture(const string& name, const TextureSharedPtr& texture)
+int Rendering::ShaderParameters::SetTexture(const std::string& name, const TextureSharedPtr& texture)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -81,9 +78,9 @@ void Rendering::ShaderParameters::SetTexture(int handle, const TextureSharedPtr&
     return impl->SetTexture(handle, texture);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ShaderParameters, GetConstant, string, Rendering::ConstShaderFloatSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ShaderParameters, GetConstant, std::string, Rendering::ConstShaderFloatSharedPtr)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ShaderParameters, GetTexture, string, Rendering::ConstTextureSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ShaderParameters, GetTexture, std::string, Rendering::ConstTextureSharedPtr)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderParameters, GetConstant, int, Rendering::ConstShaderFloatSharedPtr)
 

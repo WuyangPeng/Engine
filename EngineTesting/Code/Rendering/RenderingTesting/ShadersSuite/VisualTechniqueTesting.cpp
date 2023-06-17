@@ -1,30 +1,40 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/11 19:47)
+///	引擎测试版本：0.9.0.12 (2023/06/12 15:13)
 
 #include "VisualTechniqueTesting.h"
 #include "System/Helper/PragmaWarning/LexicalCast.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Shaders/VisualTechnique.h"
 
-using std::string;
+Rendering::VisualTechniqueTesting::VisualTechniqueTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, VisualTechniqueTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, VisualTechniqueTesting)
+
+void Rendering::VisualTechniqueTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Rendering::VisualTechniqueTesting::MainTest()
 {
-    CoreTools::InitTerm::ExecuteInitializers();
+    CoreTools::InitTerm::ExecuteInitializer();
 
     RendererManager::Create();
 
@@ -34,7 +44,7 @@ void Rendering::VisualTechniqueTesting::MainTest()
 
     RendererManager::Destroy();
 
-    CoreTools::InitTerm::ExecuteTerminators();
+    CoreTools::InitTerm::ExecuteTerminator();
 }
 
 void Rendering::VisualTechniqueTesting::InitTest()
@@ -43,27 +53,27 @@ void Rendering::VisualTechniqueTesting::InitTest()
 
     for (int i = 0; i < 3; ++i)
     {
-        vertexShader->SetInput(i, "VertexInput" + boost::lexical_cast<string>(i),
+        vertexShader->SetInput(i, "VertexInput" + boost::lexical_cast<std::string>(i),
                                ShaderFlags::VariableType{ i },
                                ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
-        vertexShader->SetOutput(i, "VertexOutput" + boost::lexical_cast<string>(i),
+        vertexShader->SetOutput(i, "VertexOutput" + boost::lexical_cast<std::string>(i),
                                 ShaderFlags::VariableType{ i },
                                 ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 4; ++i)
     {
-        vertexShader->SetConstant(i, "VertexConstant" + boost::lexical_cast<string>(i),
+        vertexShader->SetConstant(i, "VertexConstant" + boost::lexical_cast<std::string>(i),
                                   i);
     }
 
     for (int i = 0; i < 6; ++i)
     {
-        vertexShader->SetSampler(i, "VertexTexture" + boost::lexical_cast<string>(i),
+        vertexShader->SetSampler(i, "VertexTexture" + boost::lexical_cast<std::string>(i),
                                  ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
         vertexShader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
         vertexShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerCoordinate::Quantity) });
@@ -82,27 +92,27 @@ void Rendering::VisualTechniqueTesting::InitTest()
 
     for (int i = 0; i < 4; ++i)
     {
-        pixelShader->SetInput(i, "PixelInput" + boost::lexical_cast<string>(i),
+        pixelShader->SetInput(i, "PixelInput" + boost::lexical_cast<std::string>(i),
                               ShaderFlags::VariableType{ i },
                               ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
-        pixelShader->SetOutput(i, "PixelOutput" + boost::lexical_cast<string>(i),
+        pixelShader->SetOutput(i, "PixelOutput" + boost::lexical_cast<std::string>(i),
                                ShaderFlags::VariableType{ i },
                                ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 6; ++i)
     {
-        pixelShader->SetConstant(i, "PixelConstant" + boost::lexical_cast<string>(i),
+        pixelShader->SetConstant(i, "PixelConstant" + boost::lexical_cast<std::string>(i),
                                  i);
     }
 
     for (int i = 0; i < 7; ++i)
     {
-        pixelShader->SetSampler(i, "PixelTexture" + boost::lexical_cast<string>(i),
+        pixelShader->SetSampler(i, "PixelTexture" + boost::lexical_cast<std::string>(i),
                                 ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
         pixelShader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
         pixelShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerCoordinate::Quantity) });
@@ -203,27 +213,27 @@ void Rendering::VisualTechniqueTesting::CopyTest()
 
     for (int i = 0; i < 3; ++i)
     {
-        vertexShader->SetInput(i, "VertexInput" + boost::lexical_cast<string>(i),
+        vertexShader->SetInput(i, "VertexInput" + boost::lexical_cast<std::string>(i),
                                ShaderFlags::VariableType{ i },
                                ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
-        vertexShader->SetOutput(i, "VertexOutput" + boost::lexical_cast<string>(i),
+        vertexShader->SetOutput(i, "VertexOutput" + boost::lexical_cast<std::string>(i),
                                 ShaderFlags::VariableType{ i },
                                 ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 4; ++i)
     {
-        vertexShader->SetConstant(i, "VertexConstant" + boost::lexical_cast<string>(i),
+        vertexShader->SetConstant(i, "VertexConstant" + boost::lexical_cast<std::string>(i),
                                   i);
     }
 
     for (int i = 0; i < 6; ++i)
     {
-        vertexShader->SetSampler(i, "VertexTexture" + boost::lexical_cast<string>(i),
+        vertexShader->SetSampler(i, "VertexTexture" + boost::lexical_cast<std::string>(i),
                                  ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
         vertexShader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
         vertexShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerCoordinate::Quantity) });
@@ -242,27 +252,27 @@ void Rendering::VisualTechniqueTesting::CopyTest()
 
     for (int i = 0; i < 4; ++i)
     {
-        pixelShader->SetInput(i, "PixelInput" + boost::lexical_cast<string>(i),
+        pixelShader->SetInput(i, "PixelInput" + boost::lexical_cast<std::string>(i),
                               ShaderFlags::VariableType{ i },
                               ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
-        pixelShader->SetOutput(i, "PixelOutput" + boost::lexical_cast<string>(i),
+        pixelShader->SetOutput(i, "PixelOutput" + boost::lexical_cast<std::string>(i),
                                ShaderFlags::VariableType{ i },
                                ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 6; ++i)
     {
-        pixelShader->SetConstant(i, "PixelConstant" + boost::lexical_cast<string>(i),
+        pixelShader->SetConstant(i, "PixelConstant" + boost::lexical_cast<std::string>(i),
                                  i);
     }
 
     for (int i = 0; i < 7; ++i)
     {
-        pixelShader->SetSampler(i, "PixelTexture" + boost::lexical_cast<string>(i),
+        pixelShader->SetSampler(i, "PixelTexture" + boost::lexical_cast<std::string>(i),
                                 ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
         pixelShader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
         pixelShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerCoordinate::Quantity) });
@@ -377,27 +387,27 @@ void Rendering::VisualTechniqueTesting::StreamTest()
 
     for (int i = 0; i < 3; ++i)
     {
-        vertexShader->SetInput(i, "VertexInput" + boost::lexical_cast<string>(i),
+        vertexShader->SetInput(i, "VertexInput" + boost::lexical_cast<std::string>(i),
                                ShaderFlags::VariableType{ i },
                                ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
-        vertexShader->SetOutput(i, "VertexOutput" + boost::lexical_cast<string>(i),
+        vertexShader->SetOutput(i, "VertexOutput" + boost::lexical_cast<std::string>(i),
                                 ShaderFlags::VariableType{ i },
                                 ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 4; ++i)
     {
-        vertexShader->SetConstant(i, "VertexConstant" + boost::lexical_cast<string>(i),
+        vertexShader->SetConstant(i, "VertexConstant" + boost::lexical_cast<std::string>(i),
                                   i);
     }
 
     for (int i = 0; i < 6; ++i)
     {
-        vertexShader->SetSampler(i, "VertexTexture" + boost::lexical_cast<string>(i),
+        vertexShader->SetSampler(i, "VertexTexture" + boost::lexical_cast<std::string>(i),
                                  ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
         vertexShader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
         vertexShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerCoordinate::Quantity) });
@@ -416,27 +426,27 @@ void Rendering::VisualTechniqueTesting::StreamTest()
 
     for (int i = 0; i < 4; ++i)
     {
-        pixelShader->SetInput(i, "PixelInput" + boost::lexical_cast<string>(i),
+        pixelShader->SetInput(i, "PixelInput" + boost::lexical_cast<std::string>(i),
                               ShaderFlags::VariableType{ i },
                               ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
-        pixelShader->SetOutput(i, "PixelOutput" + boost::lexical_cast<string>(i),
+        pixelShader->SetOutput(i, "PixelOutput" + boost::lexical_cast<std::string>(i),
                                ShaderFlags::VariableType{ i },
                                ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 6; ++i)
     {
-        pixelShader->SetConstant(i, "PixelConstant" + boost::lexical_cast<string>(i),
+        pixelShader->SetConstant(i, "PixelConstant" + boost::lexical_cast<std::string>(i),
                                  i);
     }
 
     for (int i = 0; i < 7; ++i)
     {
-        pixelShader->SetSampler(i, "PixelTexture" + boost::lexical_cast<string>(i),
+        pixelShader->SetSampler(i, "PixelTexture" + boost::lexical_cast<std::string>(i),
                                 ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
         pixelShader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
         pixelShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerCoordinate::Quantity) });

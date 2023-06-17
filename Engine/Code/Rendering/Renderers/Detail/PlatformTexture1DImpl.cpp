@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/20 13:53)
+///	引擎版本：0.9.0.12 (2023/06/12 12:43)
 
 #include "Rendering/RenderingExport.h"
 
@@ -15,8 +15,6 @@
 #include "Rendering/OpenGLRenderer/OpenGLTexture1D.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Renderers/Renderer.h"
-
-using std::make_shared;
 
 Rendering::PlatformTexture1DImpl::PlatformTexture1DImpl() noexcept
 {

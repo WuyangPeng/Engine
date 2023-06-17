@@ -11,11 +11,11 @@
 #define MAIL_SERVER_CORE_MACRO_MAIL_SERVER_CORE_CUSTOM_ASSERT_MACRO_H
 
 #include "UserMacro.h"
-#include "CoreTools/Contract/Assertion.h"
+#include "CoreTools/Helper/CustomAssertMacro.h"
 
-#if defined(OPEN_IMPORTANT_EXCPTION_ASSERT)
+#if defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
     #define MAIL_SERVER_CORE_ASSERT_LEVEL 0
-#endif  // OPEN_IMPORTANT_EXCPTION_ASSERT
+#endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 
 #if !defined(MAIL_SERVER_CORE_ASSERT_LEVEL)
     #define MAIL_SERVER_CORE_ASSERT_LEVEL 4

@@ -1,5 +1,3 @@
 TODO Level 3
 
-0.8.0.10
-
-1. （ImagicsExample）完成图像分析库所需要的例子。
+0.9.0.12

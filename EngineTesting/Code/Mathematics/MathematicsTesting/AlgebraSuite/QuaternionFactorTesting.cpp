@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 22:30)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:38)
 
 #include "QuaternionFactorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Polynomial.h"
 #include "Mathematics/Algebra/QuaternionFactorDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -49,17 +47,17 @@ void Mathematics::QuaternionFactorTesting::MainTest()
 
 void Mathematics::QuaternionFactorTesting::FactorXYZTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        QuaternionF firstQuaternion(firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator));
+        QuaternionF firstQuaternion(randomDistribution0(generator),
+                                    randomDistribution0(generator),
+                                    randomDistribution0(generator),
+                                    randomDistribution0(generator));
 
         const QuaternionFactorF firstQuaternionFactor(firstQuaternion, QuaternionFactorFlags::XYZ);
 
@@ -78,17 +76,17 @@ void Mathematics::QuaternionFactorTesting::FactorXYZTest()
 
 void Mathematics::QuaternionFactorTesting::FactorXZYTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        QuaternionF firstQuaternion(firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator));
+        QuaternionF firstQuaternion(randomDistribution0(generator),
+                                    randomDistribution0(generator),
+                                    randomDistribution0(generator),
+                                    randomDistribution0(generator));
 
         const QuaternionFactorF firstQuaternionFactor(firstQuaternion, QuaternionFactorFlags::XZY);
 
@@ -107,17 +105,17 @@ void Mathematics::QuaternionFactorTesting::FactorXZYTest()
 
 void Mathematics::QuaternionFactorTesting::FactorYZXTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        QuaternionD firstQuaternion(firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator));
+        QuaternionD firstQuaternion(randomDistribution0(generator),
+                                    randomDistribution0(generator),
+                                    randomDistribution0(generator),
+                                    randomDistribution0(generator));
 
         const QuaternionFactorD firstQuaternionFactor(firstQuaternion, QuaternionFactorFlags::YZX);
 
@@ -136,14 +134,14 @@ void Mathematics::QuaternionFactorTesting::FactorYZXTest()
 
 void Mathematics::QuaternionFactorTesting::FactorYXZTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        QuaternionD firstQuaternion(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
+        QuaternionD firstQuaternion(randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator), randomDistribution0(generator));
 
         const QuaternionFactorD firstQuaternionFactor(firstQuaternion, QuaternionFactorFlags::YXZ);
 
@@ -162,17 +160,17 @@ void Mathematics::QuaternionFactorTesting::FactorYXZTest()
 
 void Mathematics::QuaternionFactorTesting::FactorZXYTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        QuaternionF firstQuaternion(firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator));
+        QuaternionF firstQuaternion(randomDistribution0(generator),
+                                    randomDistribution0(generator),
+                                    randomDistribution0(generator),
+                                    randomDistribution0(generator));
 
         const QuaternionFactorF firstQuaternionFactor(firstQuaternion, QuaternionFactorFlags::ZXY);
 
@@ -191,17 +189,17 @@ void Mathematics::QuaternionFactorTesting::FactorZXYTest()
 
 void Mathematics::QuaternionFactorTesting::FactorZYXTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        QuaternionD firstQuaternion(firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator),
-                                    firstRandomDistribution(generator));
+        QuaternionD firstQuaternion(randomDistribution0(generator),
+                                    randomDistribution0(generator),
+                                    randomDistribution0(generator),
+                                    randomDistribution0(generator));
 
         const QuaternionFactorD firstQuaternionFactor(firstQuaternion, QuaternionFactorFlags::ZYX);
 

@@ -40,7 +40,7 @@
     <Filter Include="FxCompilerSuite 头文件">
       <UniqueIdentifier>{084eedcc-6692-42d5-ad5f-f72276814e8c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MacroSuite 头文件">
+    <Filter Include="HelperSuite 头文件">
       <UniqueIdentifier>{48c54ddb-b823-4570-bfdf-362f6ef2a1f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -179,8 +179,8 @@
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\FxCompilerSuite\FxCompilerSuite.h">
       <Filter>FxCompilerSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\MacroSuite\MacroSuite.h">
-      <Filter>MacroSuite 头文件</Filter>
+    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\HelperSuite\HelperSuite.h">
+      <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

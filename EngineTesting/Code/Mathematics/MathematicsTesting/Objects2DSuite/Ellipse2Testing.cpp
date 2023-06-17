@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/31 19:25)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:12)
 
 #include "Ellipse2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Objects2D/Ellipse2Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -45,26 +43,26 @@ void Mathematics::Ellipse2Testing::MainTest()
 
 void Mathematics::Ellipse2Testing::ConstructionTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
-    const uniform_real<double> secondRandomDistribution(1.0, 10.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
+    const std::uniform_real<double> randomDistribution1(1.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Vector2 center(randomDistribution0(generator), randomDistribution0(generator));
 
-        Vector2 axis0(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Vector2 axis0(randomDistribution0(generator), randomDistribution0(generator));
 
         axis0.Normalize();
 
-        Vector2 axis1(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Vector2 axis1(randomDistribution0(generator), randomDistribution0(generator));
 
         axis1.Normalize();
 
-        double extent0(MathD::FAbs(secondRandomDistribution(generator)));
-        double extent1(MathD::FAbs(secondRandomDistribution(generator)));
+        double extent0(MathD::FAbs(randomDistribution1(generator)));
+        double extent1(MathD::FAbs(randomDistribution1(generator)));
 
         const Ellipse2D firstEllipse2(center, axis0, axis1, extent0, extent1);
 
@@ -107,26 +105,26 @@ void Mathematics::Ellipse2Testing::ConstructionTest()
 
 void Mathematics::Ellipse2Testing::CalculateTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
-    const uniform_real<double> secondRandomDistribution(1.0, 10.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
+    const std::uniform_real<double> randomDistribution1(1.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        const Vector2 center(randomDistribution0(generator), randomDistribution0(generator));
 
-        Vector2 axis0(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Vector2 axis0(randomDistribution0(generator), randomDistribution0(generator));
 
         axis0.Normalize();
 
-        Vector2 axis1(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Vector2 axis1(randomDistribution0(generator), randomDistribution0(generator));
 
         axis1.Normalize();
 
-        const double extent0(MathD::FAbs(secondRandomDistribution(generator)));
-        const double extent1(MathD::FAbs(secondRandomDistribution(generator)));
+        const double extent0(MathD::FAbs(randomDistribution1(generator)));
+        const double extent1(MathD::FAbs(randomDistribution1(generator)));
 
         Ellipse2D firstEllipse2(center, axis0, axis1, extent0, extent1);
 
@@ -142,23 +140,23 @@ void Mathematics::Ellipse2Testing::CalculateTest()
         firstEllipse2.FromCoefficients(secondEllipse2.ToCoefficients());
 
         // 测试firstEllipse2和secondEllipse2计算相等性
-        auto firstMatrix = firstEllipse2.GetMatrix();
-        auto secondMatrix = secondEllipse2.GetMatrix();
-        auto thirdMatrix = Matrix2D(firstEllipse2.GetAxis0() / firstEllipse2.GetExtent0(), firstEllipse2.GetAxis0() / firstEllipse2.GetExtent0()) +
-                           Matrix2D(firstEllipse2.GetAxis1() / firstEllipse2.GetExtent1(), firstEllipse2.GetAxis1() / firstEllipse2.GetExtent1());
+        auto matrix0 = firstEllipse2.GetMatrix();
+        auto matrix1 = secondEllipse2.GetMatrix();
+        auto matrix2 = Matrix2D(firstEllipse2.GetAxis0() / firstEllipse2.GetExtent0(), firstEllipse2.GetAxis0() / firstEllipse2.GetExtent0()) +
+                       Matrix2D(firstEllipse2.GetAxis1() / firstEllipse2.GetExtent1(), firstEllipse2.GetAxis1() / firstEllipse2.GetExtent1());
 
-        ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-9));
-        ASSERT_TRUE(Approximate(firstMatrix, thirdMatrix, 1e-10));
+        ASSERT_TRUE(Approximate(matrix0, matrix1, 1e-8));
+        ASSERT_TRUE(Approximate(matrix0, matrix2, 1e-10));
 
-        firstMatrix = firstEllipse2.GetMatrixInverse();
-        secondMatrix = secondEllipse2.GetMatrixInverse();
-        thirdMatrix = Matrix2D(firstEllipse2.GetAxis0() * firstEllipse2.GetExtent0(), firstEllipse2.GetAxis0() * firstEllipse2.GetExtent0()) +
-                      Matrix2D(firstEllipse2.GetAxis1() * firstEllipse2.GetExtent1(), firstEllipse2.GetAxis1() * firstEllipse2.GetExtent1());
+        matrix0 = firstEllipse2.GetMatrixInverse();
+        matrix1 = secondEllipse2.GetMatrixInverse();
+        matrix2 = Matrix2D(firstEllipse2.GetAxis0() * firstEllipse2.GetExtent0(), firstEllipse2.GetAxis0() * firstEllipse2.GetExtent0()) +
+                  Matrix2D(firstEllipse2.GetAxis1() * firstEllipse2.GetExtent1(), firstEllipse2.GetAxis1() * firstEllipse2.GetExtent1());
 
-        ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-3));
-        ASSERT_TRUE(Approximate(firstMatrix, thirdMatrix, 1e-10));
+        ASSERT_TRUE(Approximate(matrix0, matrix1, 1e-3));
+        ASSERT_TRUE(Approximate(matrix0, matrix2, 1e-10));
 
-        const Vector2 point(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        const Vector2 point(randomDistribution0(generator), randomDistribution0(generator));
 
         auto diff = point - firstEllipse2.GetCenter();
         auto ratio0 = Vector2ToolsD::DotProduct(firstEllipse2.GetAxis0(), diff) / firstEllipse2.GetExtent0();

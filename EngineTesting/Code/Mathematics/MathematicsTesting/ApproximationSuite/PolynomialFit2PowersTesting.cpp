@@ -1,25 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 16:38)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:18)
 
 #include "PolynomialFit2PowersTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Approximation/PolynomialFit2PowersDetail.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -47,25 +43,25 @@ void Mathematics::PolynomialFit2PowersTesting::MainTest()
 
 void Mathematics::PolynomialFit2PowersTesting::FitTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(0.0, 50.0);
-    const uniform_int<> secondRandomDistribution(10, 50);
-    const uniform_int<> thirdRandomDistribution(3, 5);
-    const uniform_int<> fourthRandomDistribution(0, 7);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(0.0, 5.0);
+    const std::uniform_int<> randomDistribution1(10, 50);
+    const std::uniform_int<> thirdRandomDistribution(3, 5);
+    const std::uniform_int<> fourthRandomDistribution(0, 7);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        vector<double> x;
-        vector<double> w;
-        vector<int> power;
-        const int size = secondRandomDistribution(generator);
+        std::vector<double> x;
+        std::vector<double> w;
+        std::vector<int> power;
+        const int size = randomDistribution1(generator);
 
         for (int i = 0; i < size; ++i)
         {
-            x.push_back(firstRandomDistribution(generator));
-            w.push_back(firstRandomDistribution(generator));
+            x.push_back(randomDistribution0(generator));
+            w.push_back(randomDistribution0(generator));
         }
 
         const int powSize = thirdRandomDistribution(generator);

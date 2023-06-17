@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{68f14701-d87c-4a2f-ac11-7381ed07c781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AncientBooksSuite 头文件">
+      <UniqueIdentifier>{eeada4f9-3340-406f-8739-b1833e10aea2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AncientBooksSuite 源文件">
+      <UniqueIdentifier>{673b509d-f72e-4805-9722-5f53f4ca371f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\AncientBooks">
+      <UniqueIdentifier>{24c4fc7f-334f-489b-8e89-75de5007e21d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\DatabaseGenerateServerBaseTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Book.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Calendar.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Category.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Chapter.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Character.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Country.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Day.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Emperor.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Gather.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Genus.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Geographic.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Identity.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\ImperialCourt.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Month.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\ReignTitle.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\SexagenaryCycle.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Source.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Version.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Year.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Article.csv">
+      <Filter>资源文件\AncientBooks</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\AncientBooksContainerTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\AncientBooksSuite.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\AncientBooksContainerTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

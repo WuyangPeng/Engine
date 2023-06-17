@@ -761,8 +761,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\WglRenderer\Detail\WglEnvironmentParameter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\Rendering\Abuse\Abuse.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Abuse\AbuseFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\AglRenderer\AglRenderer.h" />
     <ClInclude Include="..\..\..\Code\Rendering\AglRenderer\AglRendererData.h" />
     <ClInclude Include="..\..\..\Code\Rendering\AglRenderer\AglRendererFwd.h" />
@@ -858,8 +856,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformMatrix.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformMatrixDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Utility.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Demogl\Demogl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Demogl\DemoglFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\BillboardNode.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\ClodMesh.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\CollapseRecord.h" />
@@ -881,8 +877,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\Detail\DlodNode.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\Flags\SwitchNodeType.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Detail\SwitchNode.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DevIL\DevIL.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DevIL\DevILFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DirectAPI\DirectAPI.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DirectAPI\DirectAPIFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DllLib.h" />
@@ -901,8 +895,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9VertexBuffer.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9VertexFormat.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9VertexShader.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\FBX\FBX.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\FBX\FBXFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffect.h" />
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffects.h" />
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffectsFwd.h" />
@@ -927,10 +919,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing3.h" />
     <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessingBase.h" />
     <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessingFwd.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\JPEG\JPEG.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\JPEG\JPEGFwd.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Lib3ds\Lib3ds.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Lib3ds\Lib3dsFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\DefaultEffect.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightEffectImpl.h" />
@@ -960,10 +948,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4Effect.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4TextureEffect.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VisualEffect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Nethack\Nethack.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Nethack\NethackFwd.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Nvtoolkit\Nvtoolkit.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Nvtoolkit\NvtoolkitFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLAPI\OpenGLAPI.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLAPI\OpenGLAPIFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLComputeProgram.h" />
@@ -1057,8 +1041,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLRasterizerState.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLSamplerState.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\TextureDataTraits.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Openvidia\Openvidia.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Openvidia\OpenvidiaFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Picture\Picture.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Picture\PictureFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\BufferLockManager.h" />
@@ -1417,19 +1399,13 @@
     <ClInclude Include="..\..\..\Code\Rendering\Terrain\TerrainPage.h" />
     <ClInclude Include="..\..\..\Code\Rendering\TextFonts\TextFonts.h" />
     <ClInclude Include="..\..\..\Code\Rendering\TextFonts\TextFontsFwd.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\TIFF\TIFF.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\TIFF\TIFFFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Vertex\Vertex.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Vertex\VertexFwd.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Wargamer\Wargamer.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Wargamer\WargamerFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\WglRenderer\Detail\WglDevice.h" />
     <ClInclude Include="..\..\..\Code\Rendering\WglRenderer\Detail\WglEnvironment.h" />
     <ClInclude Include="..\..\..\Code\Rendering\WglRenderer\Detail\WglEnvironmentParameter.h" />
     <ClInclude Include="..\..\..\Code\Rendering\WglRenderer\WglRenderer.h" />
     <ClInclude Include="..\..\..\Code\Rendering\WglRenderer\WglRendererFwd.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Wing\Wing.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Wing\WingFwd.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md" />

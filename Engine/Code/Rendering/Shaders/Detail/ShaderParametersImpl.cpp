@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/12 13:41)
+///	引擎版本：0.9.0.12 (2023/06/12 10:47)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,10 +19,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
-using std::string;
-using std::swap;
-using std::vector;
 
 Rendering::ShaderParametersImpl::ShaderParametersImpl(const ConstShaderBaseSharedPtr& shaderBase)
     : shader{ shaderBase }, constants{}, textures{}
@@ -165,7 +161,7 @@ void Rendering::ShaderParametersImpl::Register(CoreTools::ObjectRegister& target
     }
 }
 
-CoreTools::ObjectSharedPtr Rendering::ShaderParametersImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::ShaderParametersImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -190,11 +186,11 @@ CoreTools::ObjectSharedPtr Rendering::ShaderParametersImpl::GetObjectByName(cons
     return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::ShaderParametersImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::ShaderParametersImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vector<CoreTools::ObjectSharedPtr> objects{};
+    std::vector<CoreTools::ObjectSharedPtr> objects{};
 
     for (auto& pointer : constants)
     {
@@ -211,7 +207,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::ShaderParametersImpl::GetAllObject
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::ShaderParametersImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::ShaderParametersImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -245,7 +241,7 @@ CoreTools::ConstObjectSharedPtr Rendering::ShaderParametersImpl::GetConstObjectB
     return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::ShaderParametersImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::ShaderParametersImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -308,7 +304,7 @@ Rendering::ShaderParametersImpl::ConstTextureSharedPtrGather Rendering::ShaderPa
     return gather;
 }
 
-int Rendering::ShaderParametersImpl::SetConstant(const string& name, const ShaderFloatSharedPtr& shaderFloat)
+int Rendering::ShaderParametersImpl::SetConstant(const std::string& name, const ShaderFloatSharedPtr& shaderFloat)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -334,7 +330,7 @@ void Rendering::ShaderParametersImpl::SetConstant(int handle, const ShaderFloatS
     constants.at(handle).object = shaderFloat;
 }
 
-int Rendering::ShaderParametersImpl::SetTexture(const string& name, const TextureSharedPtr& texture)
+int Rendering::ShaderParametersImpl::SetTexture(const std::string& name, const TextureSharedPtr& texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -360,7 +356,7 @@ void Rendering::ShaderParametersImpl::SetTexture(int handle, const TextureShared
     textures.at(handle).object = texture;
 }
 
-Rendering::ConstShaderFloatSharedPtr Rendering::ShaderParametersImpl::GetConstant(const string& name) const
+Rendering::ConstShaderFloatSharedPtr Rendering::ShaderParametersImpl::GetConstant(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

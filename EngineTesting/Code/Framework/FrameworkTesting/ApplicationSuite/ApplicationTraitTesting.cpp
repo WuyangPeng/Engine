@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 11:14)
+///	引擎测试版本：0.9.0.12 (2023/06/13 20:25)
 
 #include "ApplicationTraitTesting.h"
 #include "System/Android/Flags/AndroidKeyCodesFlags.h"
@@ -13,6 +13,7 @@
 #include "System/Windows/Flags/WindowsKeyCodesFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
 
 Framework::ApplicationTraitTesting::ApplicationTraitTesting(const OStreamShared& stream)
@@ -250,7 +251,7 @@ void Framework::ApplicationTraitTesting::AndroidKeyIdentifiersTest() noexcept
     static_assert(AndroidApplicationTrait::KeyIdentifiers::keyPageUp == System::EnumCastUnderlying(System::AndroidKeyCodes::PageUp));
     static_assert(AndroidApplicationTrait::KeyIdentifiers::keyPageDown == System::EnumCastUnderlying(System::AndroidKeyCodes::PageDown));
     static_assert(AndroidApplicationTrait::KeyIdentifiers::keyInsert == System::EnumCastUnderlying(System::AndroidKeyCodes::Insert));
-    static_assert(AndroidApplicationTrait::KeyIdentifiers::keyDelete == System::EnumCastUnderlying(System::AndroidKeyCodes::Del));
+    static_assert(AndroidApplicationTrait::KeyIdentifiers::keyDelete == System::EnumCastUnderlying(System::AndroidKeyCodes::Delete));
     static_assert(AndroidApplicationTrait::KeyIdentifiers::keyF1 == System::EnumCastUnderlying(System::AndroidKeyCodes::F1));
     static_assert(AndroidApplicationTrait::KeyIdentifiers::keyF2 == System::EnumCastUnderlying(System::AndroidKeyCodes::F2));
     static_assert(AndroidApplicationTrait::KeyIdentifiers::keyF3 == System::EnumCastUnderlying(System::AndroidKeyCodes::F3));

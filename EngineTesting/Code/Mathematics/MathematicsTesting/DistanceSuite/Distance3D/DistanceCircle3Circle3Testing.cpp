@@ -1,21 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/07 15:58)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:41)
 
 #include "DistanceCircle3Circle3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Distance/Distance3D/DistanceCircle3Circle3Detail.h"
 #include "Mathematics/Objects3D/Circle3Detail.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+
 #include <random>
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::swap;
 
 namespace Mathematics
 {
@@ -47,7 +47,7 @@ void Mathematics::DistanceCircle3Circle3Testing::MainTest()
 
 void Mathematics::DistanceCircle3Circle3Testing::BaseTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();

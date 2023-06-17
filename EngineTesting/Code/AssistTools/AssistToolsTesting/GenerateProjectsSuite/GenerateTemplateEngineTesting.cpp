@@ -1,21 +1,33 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/22 16:16)
+///	引擎测试版本：0.9.0.12 (2023/06/13 10:53)
 
 #include "GenerateTemplateEngineTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "AssistTools/GenerateProjects/CopyrightData.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateEngine.h"
 
 using namespace std::literals;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(AssistTools, GenerateTemplateEngine)
+AssistTools::GenerateTemplateEngineTesting::GenerateTemplateEngineTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateEngineTesting)
+
+void AssistTools::GenerateTemplateEngineTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void AssistTools::GenerateTemplateEngineTesting::MainTest()
 {
@@ -43,9 +55,9 @@ void AssistTools::GenerateTemplateEngineTesting::GenerateToTest()
     const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetSpecialCodeEngineDirectory());
     const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
 
-    TestingType::Replace replace = GetSpecialReplace();
+    GenerateTemplateEngine::Replace replace = GetSpecialReplace();
 
-    TestingType generateTemplateSolution(fileName, extension, replace);
+    GenerateTemplateEngine generateTemplateSolution(fileName, extension, replace);
 
     int defaultEndYearCount = GetContentFindCount(fileName, GetSpecialEndYear());
     ASSERT_EQUAL(defaultEndYearCount, 1);
@@ -120,7 +132,7 @@ void AssistTools::GenerateTemplateEngineTesting::DefaultEventManagerHeaderGenera
     const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
     const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
 
-    TestingType generateTemplateSolution(fileName, extension, TestingType::Replace());
+    GenerateTemplateEngine generateTemplateSolution(fileName, extension, GenerateTemplateEngine::Replace());
 
     int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
     ASSERT_EQUAL(defaultEndYearCount, 1);
@@ -193,7 +205,7 @@ void AssistTools::GenerateTemplateEngineTesting::DefaultEventManagerCppGenerateT
     const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
     const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
 
-    TestingType generateTemplateSolution(fileName, extension, TestingType::Replace());
+    GenerateTemplateEngine generateTemplateSolution(fileName, extension, GenerateTemplateEngine::Replace());
 
     int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
     ASSERT_EQUAL(defaultEndYearCount, 1);
@@ -266,7 +278,7 @@ void AssistTools::GenerateTemplateEngineTesting::DefaultInputManagerHeaderGenera
     const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
     const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
 
-    TestingType generateTemplateSolution(fileName, extension, TestingType::Replace());
+    GenerateTemplateEngine generateTemplateSolution(fileName, extension, GenerateTemplateEngine::Replace());
 
     int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
     ASSERT_EQUAL(defaultEndYearCount, 1);
@@ -340,7 +352,7 @@ void AssistTools::GenerateTemplateEngineTesting::DefaultInputManagerCppGenerateT
     const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
     const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
 
-    TestingType generateTemplateSolution(fileName, extension, TestingType::Replace());
+    GenerateTemplateEngine generateTemplateSolution(fileName, extension, GenerateTemplateEngine::Replace());
 
     int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
     ASSERT_EQUAL(defaultEndYearCount, 1);

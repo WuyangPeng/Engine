@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.11 (2023/06/06 22:13)
+///	千年史策版本：0.9.0.12 (2023/06/12 21:52)
 
-#ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SYSTEM_MIDDLE_LAYER_SYSTEM_IMPL_H
-#define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SYSTEM_MIDDLE_LAYER_SYSTEM_IMPL_H
+#ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SYSTEM_MANAGER_IMPL_H
+#define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SYSTEM_MANAGER_IMPL_H
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/DatabaseGenerateServerMiddleLayerDll.h"
 
-#include "DatabaseGenerateServer/DatabaseGenerateServerConfiguration/AncientBooks/AncientBooksContainer.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/AncientBooksContainer.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/Helper/ExportMacro.h"
 
 namespace DatabaseGenerateServerMiddleLayer
@@ -23,13 +23,12 @@ namespace DatabaseGenerateServerMiddleLayer
         using ClassType = SystemManagerImpl;
 
     public:
-        explicit SystemManagerImpl(const System::String& directory);
+        explicit SystemManagerImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-    private:
-        AncientBooks::AncientBooksContainer ancientBooksContainer;
+        NODISCARD bool Initialize() noexcept;
     };
 }
 
-#endif  // DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SYSTEM_MIDDLE_LAYER_SYSTEM_IMPL_H
+#endif  // DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SYSTEM_MANAGER_IMPL_H

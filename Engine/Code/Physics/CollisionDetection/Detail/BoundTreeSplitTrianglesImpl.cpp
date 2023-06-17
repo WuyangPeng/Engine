@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/04/25 13:55)
+///	引擎版本：0.9.0.12 (2023/06/12 16:38)
 
 #include "Physics/PhysicsExport.h"
 
@@ -16,8 +16,6 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Physics/CollisionDetection/BoundTreeProjectionInfo.h"
-
-using std::vector;
 
 #include <algorithm>
 
@@ -68,7 +66,7 @@ void Physics::BoundTreeSplitTrianglesImpl::SplitTriangles(const Centroids& centr
 
     // 投射到特定行
     const auto quantity = endIndex - beginIndex + 1;
-    vector<BoundTreeProjectionInfo> info;
+    std::vector<BoundTreeProjectionInfo> info;
 
     for (auto i = beginIndex; i <= endIndex; ++i)
     {

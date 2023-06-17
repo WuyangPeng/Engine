@@ -1,24 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/26 17:17)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:44)
 
 #include "RationalVector2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Rational/IntegerDetail.h"
 #include "Mathematics/Rational/RationalVector2Detail.h"
 #include "Mathematics/Rational/RationalVectorDetail.h"
 #include "Mathematics/Rational/SignRationalDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int;
+#include <random>
 
 namespace Mathematics
 {
@@ -49,167 +47,167 @@ void Mathematics::RationalVector2Testing::MainTest()
 
 void Mathematics::RationalVector2Testing::ConstructionTest()
 {
-    default_random_engine generator{};
-    const uniform_int<int> firstRandomDistribution(INT32_MIN, INT32_MAX);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<int> randomDistribution0(INT32_MIN, INT32_MAX);
 
-    RationalVector2<7> firstVector;
+    RationalVector2<7> vector0;
 
-    ASSERT_EQUAL(firstVector.GetX(), SignRational<7>(0));
-    ASSERT_EQUAL(firstVector.GetY(), SignRational<7>(0));
+    ASSERT_EQUAL(vector0.GetX(), SignRational<7>(0));
+    ASSERT_EQUAL(vector0.GetY(), SignRational<7>(0));
 
-    firstVector.SetX(SignRational<7>(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+    vector0.SetX(SignRational<7>(randomDistribution0(generator), randomDistribution0(generator)));
 
-    firstVector.SetY(SignRational<7>(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+    vector0.SetY(SignRational<7>(randomDistribution0(generator), randomDistribution0(generator)));
 
-    const RationalVector2<7> secondVector(firstVector);
+    const RationalVector2<7> vector1(vector0);
 
-    ASSERT_EQUAL(firstVector.GetX(), secondVector.GetX());
-    ASSERT_EQUAL(firstVector.GetY(), secondVector.GetY());
+    ASSERT_EQUAL(vector0.GetX(), vector1.GetX());
+    ASSERT_EQUAL(vector0.GetY(), vector1.GetY());
 
-    const SignRational<7> firstRational(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    const SignRational<7> firstRational(randomDistribution0(generator), randomDistribution0(generator));
 
-    const SignRational<7> secondRational(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    const SignRational<7> secondRational(randomDistribution0(generator), randomDistribution0(generator));
 
-    const RationalVector2<7> thirdVector(firstRational, secondRational);
+    const RationalVector2<7> vector2(firstRational, secondRational);
 
-    ASSERT_EQUAL(firstRational, thirdVector.GetX());
-    ASSERT_EQUAL(secondRational, thirdVector.GetY());
+    ASSERT_EQUAL(firstRational, vector2.GetX());
+    ASSERT_EQUAL(secondRational, vector2.GetY());
 
-    firstVector = thirdVector;
+    vector0 = vector2;
 
-    ASSERT_EQUAL(firstVector.GetX(), thirdVector.GetX());
-    ASSERT_EQUAL(firstVector.GetY(), thirdVector.GetY());
+    ASSERT_EQUAL(vector0.GetX(), vector2.GetX());
+    ASSERT_EQUAL(vector0.GetY(), vector2.GetY());
 
-    RationalVector<2, 7> fourthVector;
+    RationalVector<2, 7> vector3;
 
-    fourthVector[0] = SignRational<7>(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    vector3[0] = SignRational<7>(randomDistribution0(generator), randomDistribution0(generator));
 
-    fourthVector[1] = SignRational<7>(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    vector3[1] = SignRational<7>(randomDistribution0(generator), randomDistribution0(generator));
 
-    firstVector = fourthVector;
+    vector0 = vector3;
 
-    ASSERT_EQUAL(firstVector.GetX(), fourthVector[0]);
-    ASSERT_EQUAL(firstVector.GetY(), fourthVector[1]);
+    ASSERT_EQUAL(vector0.GetX(), vector3[0]);
+    ASSERT_EQUAL(vector0.GetY(), vector3[1]);
 
-    const RationalVector2<7> fifthVector(fourthVector);
+    const RationalVector2<7> vector4(vector3);
 
-    ASSERT_EQUAL(fifthVector.GetX(), fourthVector[0]);
-    ASSERT_EQUAL(fifthVector.GetY(), fourthVector[1]);
+    ASSERT_EQUAL(vector4.GetX(), vector3[0]);
+    ASSERT_EQUAL(vector4.GetY(), vector3[1]);
 }
 
 void Mathematics::RationalVector2Testing::CalculateTest()
 {
-    default_random_engine generator{};
-    const uniform_int<int> firstRandomDistribution(INT16_MIN, INT16_MAX);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<int> randomDistribution0(INT16_MIN, INT16_MAX);
 
-    const SignRational<15> firstRational(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    const SignRational<15> firstRational(randomDistribution0(generator), randomDistribution0(generator));
 
-    const SignRational<15> secondRational(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    const SignRational<15> secondRational(randomDistribution0(generator), randomDistribution0(generator));
 
-    const SignRational<15> thirdRational(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    const SignRational<15> thirdRational(randomDistribution0(generator), randomDistribution0(generator));
 
-    const SignRational<15> fourthRational(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    const SignRational<15> fourthRational(randomDistribution0(generator), randomDistribution0(generator));
 
-    const RationalVector2<15> firstVector(firstRational, secondRational);
-    const RationalVector2<15> secondVector(thirdRational, fourthRational);
+    const RationalVector2<15> vector0(firstRational, secondRational);
+    const RationalVector2<15> vector1(thirdRational, fourthRational);
 
     const SignRational<15> squaredLength = firstRational * firstRational + secondRational * secondRational;
 
-    ASSERT_EQUAL(squaredLength, firstVector.SquaredLength());
+    ASSERT_EQUAL(squaredLength, vector0.SquaredLength());
 
     const SignRational<15> dot = firstRational * thirdRational + secondRational * fourthRational;
 
-    ASSERT_EQUAL(dot, Dot(firstVector, secondVector));
+    ASSERT_EQUAL(dot, Dot(vector0, vector1));
 
-    const RationalVector2<15> thirdVector(fourthRational, -thirdRational);
+    const RationalVector2<15> vector2(fourthRational, -thirdRational);
 
-    ASSERT_EQUAL(thirdVector, secondVector.Perp());
+    ASSERT_EQUAL(vector2, vector1.Perp());
 
     const SignRational<15> fifthRational = firstRational * fourthRational - secondRational * thirdRational;
 
-    ASSERT_EQUAL(fifthRational, DotPerp(firstVector, secondVector));
+    ASSERT_EQUAL(fifthRational, DotPerp(vector0, vector1));
 }
 
 void Mathematics::RationalVector2Testing::OperatorTest()
 {
-    default_random_engine generator{};
-    const uniform_int<int> firstRandomDistribution(INT16_MIN, INT16_MAX);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<int> randomDistribution0(INT16_MIN, INT16_MAX);
 
-    const SignRational<12> firstRational(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    const SignRational<12> firstRational(randomDistribution0(generator), randomDistribution0(generator));
 
-    const SignRational<12> secondRational(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    const SignRational<12> secondRational(randomDistribution0(generator), randomDistribution0(generator));
 
-    const SignRational<12> thirdRational(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    const SignRational<12> thirdRational(randomDistribution0(generator), randomDistribution0(generator));
 
-    const SignRational<12> fourthRational(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    const SignRational<12> fourthRational(randomDistribution0(generator), randomDistribution0(generator));
 
-    const RationalVector2<12> firstVector(firstRational, secondRational);
-    const RationalVector2<12> secondVector(thirdRational, fourthRational);
+    const RationalVector2<12> vector0(firstRational, secondRational);
+    const RationalVector2<12> vector1(thirdRational, fourthRational);
 
-    RationalVector2<12> thirdVector = firstVector + secondVector;
-    RationalVector2<12> fourthVector(firstRational + thirdRational, secondRational + fourthRational);
+    RationalVector2<12> vector2 = vector0 + vector1;
+    RationalVector2<12> vector3(firstRational + thirdRational, secondRational + fourthRational);
 
-    ASSERT_EQUAL(thirdVector, fourthVector);
+    ASSERT_EQUAL(vector2, vector3);
 
-    thirdVector = firstVector - secondVector;
+    vector2 = vector0 - vector1;
 
-    fourthVector.SetX(firstRational - thirdRational);
-    fourthVector.SetY(secondRational - fourthRational);
+    vector3.SetX(firstRational - thirdRational);
+    vector3.SetY(secondRational - fourthRational);
 
-    ASSERT_EQUAL(thirdVector, fourthVector);
+    ASSERT_EQUAL(vector2, vector3);
 
-    SignRational<12> firstValue(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    SignRational<12> firstValue(randomDistribution0(generator), randomDistribution0(generator));
 
-    thirdVector = firstVector * firstValue;
+    vector2 = vector0 * firstValue;
 
-    fourthVector.SetX(firstRational * firstValue);
-    fourthVector.SetY(secondRational * firstValue);
+    vector3.SetX(firstRational * firstValue);
+    vector3.SetY(secondRational * firstValue);
 
-    ASSERT_EQUAL(thirdVector, fourthVector);
+    ASSERT_EQUAL(vector2, vector3);
 
-    firstValue = SignRational<12>(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    firstValue = SignRational<12>(randomDistribution0(generator), randomDistribution0(generator));
 
-    thirdVector = firstValue * firstVector;
+    vector2 = firstValue * vector0;
 
-    fourthVector.SetX(firstRational * firstValue);
-    fourthVector.SetY(secondRational * firstValue);
+    vector3.SetX(firstRational * firstValue);
+    vector3.SetY(secondRational * firstValue);
 
-    ASSERT_EQUAL(thirdVector, fourthVector);
+    ASSERT_EQUAL(vector2, vector3);
 
-    firstValue = SignRational<12>(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    firstValue = SignRational<12>(randomDistribution0(generator), randomDistribution0(generator));
 
-    thirdVector = firstVector / firstValue;
+    vector2 = vector0 / firstValue;
 
-    fourthVector.SetX(firstRational / firstValue);
-    fourthVector.SetY(secondRational / firstValue);
+    vector3.SetX(firstRational / firstValue);
+    vector3.SetY(secondRational / firstValue);
 
-    ASSERT_EQUAL(thirdVector, fourthVector);
+    ASSERT_EQUAL(vector2, vector3);
 
-    fourthVector = -firstVector;
+    vector3 = -vector0;
 
-    ASSERT_EQUAL(-fourthVector.GetX(), firstVector.GetX());
-    ASSERT_EQUAL(-fourthVector.GetY(), firstVector.GetY());
+    ASSERT_EQUAL(-vector3.GetX(), vector0.GetX());
+    ASSERT_EQUAL(-vector3.GetY(), vector0.GetY());
 }
 
 void Mathematics::RationalVector2Testing::CompareTest()
 {
-    default_random_engine generator{};
-    const uniform_int<int> firstRandomDistribution(INT16_MIN, INT16_MAX);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<int> randomDistribution0(INT16_MIN, INT16_MAX);
 
-    const SignRational<3> firstRational(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    const SignRational<3> firstRational(randomDistribution0(generator), randomDistribution0(generator));
 
-    const SignRational<3> secondRational(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    const SignRational<3> secondRational(randomDistribution0(generator), randomDistribution0(generator));
 
-    const RationalVector2<3> firstVector(SignRational<3>(0), firstRational);
-    const RationalVector2<3> secondVector(SignRational<3>(1), secondRational);
+    const RationalVector2<3> vector0(SignRational<3>(0), firstRational);
+    const RationalVector2<3> vector1(SignRational<3>(1), secondRational);
 
-    ASSERT_TRUE(firstVector == firstVector);
-    ASSERT_FALSE(firstVector == secondVector);
-    ASSERT_FALSE(secondVector != secondVector);
-    ASSERT_TRUE(firstVector != secondVector);
+    ASSERT_TRUE(vector0 == vector0);
+    ASSERT_FALSE(vector0 == vector1);
+    ASSERT_FALSE(vector1 != vector1);
+    ASSERT_TRUE(vector0 != vector1);
 
-    ASSERT_TRUE(firstVector < secondVector);
-    ASSERT_TRUE(firstVector <= secondVector);
-    ASSERT_FALSE(firstVector > secondVector);
-    ASSERT_FALSE(firstVector >= secondVector);
+    ASSERT_TRUE(vector0 < vector1);
+    ASSERT_TRUE(vector0 <= vector1);
+    ASSERT_FALSE(vector0 > vector1);
+    ASSERT_FALSE(vector0 >= vector1);
 }

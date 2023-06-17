@@ -1,15 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/02 0:41)
+///	引擎测试版本：0.9.0.12 (2023/06/12 15:03)
 
 #include "DrawingStateTesting.h"
 #include "Detail/DrawingStateTest.h"
-#include "System/Helper/EnumMacro.h"
 #include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -23,6 +22,7 @@
 #include "Rendering/RenderingTesting/BaseSuite/GraphicsObjectTestingBaseDetail.h"
 
 using namespace std::literals;
+using System::operator++;
 
 Rendering::DrawingStateTesting::DrawingStateTesting(const OStreamShared& stream)
     : ParentType{ stream, GraphicsObjectType::DrawingState, GraphicsObjectType::NumTypes, "DrawingStateTest"s }
@@ -112,11 +112,11 @@ void Rendering::DrawingStateTesting::StreamCreateExceptionTest()
 
 int Rendering::DrawingStateTesting::GetCorrectIndex(const DrawingStateTest& drawingStateTest) const
 {
-    const auto streamingSize = drawingStateTest.GetStreamingSize() - CORE_TOOLS_STREAM_SIZE(DrawingStateTest::GetCurrentRttiType().GetName());
+    const auto streamingSize = drawingStateTest.GetStreamingSize() - CoreTools::GetStreamSize(DrawingStateTest::GetCurrentRttiType().GetName());
 
 #ifdef SYSTEM_LITTLE_ENDIAN
 
-    const auto index = streamingSize - CORE_TOOLS_STREAM_SIZE(GetGraphicsObjectType());
+    const auto index = streamingSize - CoreTools::GetStreamSize(GetGraphicsObjectType());
 
 #else  // !SYSTEM_LITTLE_ENDIAN
 

@@ -1,22 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/02 21:47)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:03)
 
 #include "Matrix3ToolsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/NumericalAnalysis/Matrix3ToolsDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
+#include "Mathematics/NumericalAnalysis/Matrix3ToolsDetail.h"
 
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -46,8 +43,8 @@ void Mathematics::Matrix3ToolsTesting::MainTest()
 
 void Mathematics::Matrix3ToolsTesting::SingularValueTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e5, 1.0e5);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -59,7 +56,7 @@ void Mathematics::Matrix3ToolsTesting::SingularValueTest()
         {
             for (auto j = 0; j < 3; ++j)
             {
-                matrix(m, j) = firstRandomDistribution(generator);
+                matrix(m, j) = randomDistribution0(generator);
             }
         }
 
@@ -84,8 +81,8 @@ void Mathematics::Matrix3ToolsTesting::SingularValueTest()
 
 void Mathematics::Matrix3ToolsTesting::PolarDecompositionValueTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e5, 1.0e5);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -97,7 +94,7 @@ void Mathematics::Matrix3ToolsTesting::PolarDecompositionValueTest()
         {
             for (auto j = 0; j < 3; ++j)
             {
-                matrix(m, j) = firstRandomDistribution(generator);
+                matrix(m, j) = randomDistribution0(generator);
             }
         }
 
@@ -120,8 +117,8 @@ void Mathematics::Matrix3ToolsTesting::PolarDecompositionValueTest()
 
 void Mathematics::Matrix3ToolsTesting::QDUDecompositionValueTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e5, 1.0e5);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -133,7 +130,7 @@ void Mathematics::Matrix3ToolsTesting::QDUDecompositionValueTest()
         {
             for (auto j = 0; j < 3; ++j)
             {
-                matrix(m, j) = firstRandomDistribution(generator);
+                matrix(m, j) = randomDistribution0(generator);
             }
         }
         const Matrix3ToolsD matrix3Tools(matrix);

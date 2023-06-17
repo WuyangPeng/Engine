@@ -8,7 +8,7 @@
 ///	ÒıÇæ²âÊÔ°æ±¾£º0.9.0.8 (2023/05/11 14:14)
 
 #include "MessageInterfaceTesting.h"
-#include "TestDoubleIntMessage.h"
+#include "Detail/TestDoubleIntMessage.h"
 #include "Detail/TestIntMessage.h"
 #include "Detail/TestNullMessage.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"

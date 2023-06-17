@@ -24,7 +24,7 @@ namespace RechargeServerMiddleLayer
         using ParentType = Framework::SystemManagerInterface;
 
     public:
-        explicit SystemManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit SystemManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

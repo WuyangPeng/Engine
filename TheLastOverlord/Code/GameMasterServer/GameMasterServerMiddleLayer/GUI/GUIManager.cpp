@@ -5,15 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/28 22:25)
+///	最后的霸王版本：0.9.0.12 (2022/07/28 22:25)
 
 #include "GameMasterServer/GameMasterServerMiddleLayer/GameMasterServerMiddleLayerExport.h"
 
 #include "GUIManager.h"
 #include "GameMasterServer/GameMasterServerMiddleLayer/Macro/GameMasterServerMiddleLayerClassInvariantMacro.h"
 
-GameMasterServerMiddleLayer::GUIManager::GUIManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+GameMasterServerMiddleLayer::GUIManager::GUIManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     GAME_MASTER_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

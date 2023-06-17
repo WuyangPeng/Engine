@@ -18,8 +18,8 @@
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename ApplicationTrait>
-UpdateServerMiddleLayer::InputManager<ApplicationTrait>::InputManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+UpdateServerMiddleLayer::InputManager<ApplicationTrait>::InputManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     UPDATE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

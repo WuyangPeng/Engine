@@ -5,15 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/24 13:52)
+///	引擎测试版本：0.9.0.12 (2022/06/24 13:52)
 
 #include "AndroidProcessTesting.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/AndroidFrame/AndroidCallBackInterface.h"
 #include "Framework/AndroidFrame/AndroidProcessDetail.h"
-
 Framework::AndroidProcessAndroidCallBackInterface::AndroidProcessAndroidCallBackInterface(int64_t delta) noexcept
     : ParentType{ delta }
 {
@@ -62,7 +62,7 @@ void Framework::AndroidProcessTesting::MainTest()
 
 void Framework::AndroidProcessTesting::CallbackSucceedTest()
 {
-    AndroidProcess<AndroidProcessAndroidCallBackInterface> process(System::g_Microseconds / 60);
+    AndroidProcess<AndroidProcessAndroidCallBackInterface> process(System::gMicroseconds / 60);
 
     AndroidProcessManager::AppCmd appCmd = process.GetAppCmd();
 

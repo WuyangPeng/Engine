@@ -52,7 +52,7 @@ void CoreTools::BatchConversionCSVTesting::VerifyTest()
     {
         const auto fileName = inputPath.path().native();
 
-        IFStreamManager ifStreamManager{ fileName };
+        IFStreamManager ifStreamManager{ CoreTools::StringConversion::WideCharConversionStandard(fileName) };
 
         ASSERT_FALSE(ifStreamManager.GetFileContent().empty());
 

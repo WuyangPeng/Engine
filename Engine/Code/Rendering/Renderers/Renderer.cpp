@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/21 19:06)
+///	引擎版本：0.9.0.12 (2023/06/12 12:49)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,9 +21,6 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/DataTypes/ColourDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
-
-using std::move;
-using std::string;
 
 Rendering::Renderer::Renderer(const EnvironmentParameter& environmentParameter, const RendererParameter& rendererParameter)
     : impl{ CoreTools::ImplCreateUseFactory::Default, environmentParameter, rendererParameter.GetRendererType(), rendererParameter, RenderingEnvironment{ environmentParameter, rendererParameter } }, rendererID{ 0 }
@@ -55,7 +52,7 @@ Rendering::RendererSharedPtr Rendering::Renderer::Create(const std::string& file
 }
 
 Rendering::Renderer::Renderer(Renderer&& rhs) noexcept
-    : impl{ move(rhs.impl) }, rendererID{ rhs.rendererID }
+    : impl{ std::move(rhs.impl) }, rendererID{ rhs.rendererID }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -64,7 +61,7 @@ Rendering::Renderer& Rendering::Renderer::operator=(Renderer&& rhs) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    impl = move(rhs.impl);
+    impl = std::move(rhs.impl);
     rendererID = rhs.rendererID;
 
     return *this;

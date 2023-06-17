@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/11 12:01)
+///	引擎测试版本：0.9.0.12 (2023/06/12 14:50)
 
 #include "RenderingEnvironmentMessage.h"
 #include "Testing.h"
@@ -14,6 +14,7 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 #include "Framework/WindowProcess/WindowMessageDetail.h"
 

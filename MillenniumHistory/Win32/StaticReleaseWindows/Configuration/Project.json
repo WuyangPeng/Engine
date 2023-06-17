@@ -1,3 +1,4 @@
 {
-  "GameClient": 1
+  "GameClient": 1,
+  "DatabaseGenerateServer": 1
 }

@@ -12,8 +12,8 @@
 #include "DatabaseServer/DatabaseServerMiddleLayer/Macro/DatabaseServerMiddleLayerClassInvariantMacro.h"
 #include "EventManager.h"
 
-DatabaseServerMiddleLayer::EventManager::EventManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+DatabaseServerMiddleLayer::EventManager::EventManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     DATABASE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

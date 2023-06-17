@@ -1,19 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/09 17:46)
+///	引擎辅助版本：0.9.0.12 (2023/06/15 14:57)
 
 #ifndef SHADER_EDITOR_IMPORT_H
 #define SHADER_EDITOR_IMPORT_H
 
-#include "Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_SHADER_EDITOR_IMPORT
+
     #define BUILDING_SHADER_EDITOR_IMPORT
+
 #endif  // BUILDING_SHADER_EDITOR_IMPORT
 
 #endif  // SHADER_EDITOR_IMPORT_H

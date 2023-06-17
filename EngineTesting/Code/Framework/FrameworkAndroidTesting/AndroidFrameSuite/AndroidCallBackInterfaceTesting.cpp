@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/24 14:01)
+///	引擎测试版本：0.9.0.12 (2022/06/24 14:01)
 
 #include "AndroidCallBackInterfaceTesting.h"
-#include "System/Android/AndroidInputQueue.h"
+#include "System/Android/AndroidInputQueueFacade.h"
 #include "System/Android/Flags/AndroidInputFlags.h"
 #include "System/Android/Flags/AndroidNativeAppGlueFlags.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/AndroidFrame/AndroidCallBackInterface.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
-
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 Framework::AndroidCallBackInterfaceTesting::AndroidCallBackInterfaceTesting(const OStreamShared& stream, AndroidApp* androidApp)
     : ParentType{ stream }, androidApp{ androidApp }
 {
@@ -29,6 +29,7 @@ void Framework::AndroidCallBackInterfaceTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
+
 void Framework::AndroidCallBackInterfaceTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MessageTest);
@@ -36,7 +37,7 @@ void Framework::AndroidCallBackInterfaceTesting::MainTest()
 
 void Framework::AndroidCallBackInterfaceTesting::MessageTest()
 {
-    AndroidCallBackInterface androidCallBackInterface(System::g_Microseconds / 60);
+    AndroidCallBackInterface androidCallBackInterface(System::gMicroseconds / 60);
 
     androidCallBackInterface.NotDealCmdMessage(androidApp);
     androidCallBackInterface.InitMessage(androidApp);

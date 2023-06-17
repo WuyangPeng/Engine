@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 23:08)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:45)
 
 #include "Vector4DToolsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector4Detail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 #ifndef BUILDING_MATHEMATICS_STATIC
 
@@ -53,110 +50,110 @@ void Mathematics::Vector4ToolsTesting::MainTest()
 
 void Mathematics::Vector4ToolsTesting::DistanceTest()
 {
-    const Vector4F firstVector(3.0f, 4.0f, 5.0f, 3.0f);
+    const Vector4F vector0(3.0f, 4.0f, 5.0f, 3.0f);
 
-    ASSERT_APPROXIMATE(Vector4ToolsF::GetLength(firstVector), MathF::Sqrt(59.0f), 1e-8f);
-    ASSERT_APPROXIMATE(Vector4ToolsF::GetLengthSquared(firstVector), 59.0f, 1e-8f);
+    ASSERT_APPROXIMATE(Vector4ToolsF::GetLength(vector0), MathF::Sqrt(59.0f), 1e-8f);
+    ASSERT_APPROXIMATE(Vector4ToolsF::GetLengthSquared(vector0), 59.0f, 1e-8f);
 
-    const Vector4F secondVector(6.0f, 8.0f, 5.0f, 3.0f);
+    const Vector4F vector1(6.0f, 8.0f, 5.0f, 3.0f);
 
-    ASSERT_APPROXIMATE(Vector4ToolsF::Distance(firstVector, secondVector), 5.0f, 1e-8f);
-    ASSERT_APPROXIMATE(Vector4ToolsF::DistanceSquared(firstVector, secondVector), 25.0f, 1e-8f);
+    ASSERT_APPROXIMATE(Vector4ToolsF::Distance(vector0, vector1), 5.0f, 1e-8f);
+    ASSERT_APPROXIMATE(Vector4ToolsF::DistanceSquared(vector0, vector1), 25.0f, 1e-8f);
 }
 
 void Mathematics::Vector4ToolsTesting::ProductTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Vector4D firstVector(randomDistribution(generator),
-                             randomDistribution(generator),
-                             randomDistribution(generator),
-                             randomDistribution(generator));
+        Vector4D vector0(randomDistribution(generator),
+                         randomDistribution(generator),
+                         randomDistribution(generator),
+                         randomDistribution(generator));
 
-        Vector4D secondVector(randomDistribution(generator),
-                              randomDistribution(generator),
-                              randomDistribution(generator),
-                              randomDistribution(generator));
+        Vector4D vector1(randomDistribution(generator),
+                         randomDistribution(generator),
+                         randomDistribution(generator),
+                         randomDistribution(generator));
 
-        const double dotProduct = firstVector[0] * secondVector[0] +
-                                  firstVector[1] * secondVector[1] +
-                                  firstVector[2] * secondVector[2] +
-                                  firstVector[3] * secondVector[3];
+        const double dotProduct = vector0[0] * vector1[0] +
+                                  vector0[1] * vector1[1] +
+                                  vector0[2] * vector1[2] +
+                                  vector0[3] * vector1[3];
 
-        ASSERT_APPROXIMATE(Vector4ToolsD::DotProduct(firstVector, secondVector), dotProduct, 1e-10);
+        ASSERT_APPROXIMATE(Vector4ToolsD::DotProduct(vector0, vector1), dotProduct, 1e-10);
     }
 }
 
 void Mathematics::Vector4ToolsTesting::ProjectionTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector4D firstVector(randomDistribution(generator),
-                                   randomDistribution(generator),
-                                   randomDistribution(generator),
-                                   randomDistribution(generator));
+        const Vector4D vector0(randomDistribution(generator),
+                               randomDistribution(generator),
+                               randomDistribution(generator),
+                               randomDistribution(generator));
 
-        const Vector4D secondVector(randomDistribution(generator),
-                                    randomDistribution(generator),
-                                    randomDistribution(generator),
-                                    randomDistribution(generator));
+        const Vector4D vector1(randomDistribution(generator),
+                               randomDistribution(generator),
+                               randomDistribution(generator),
+                               randomDistribution(generator));
 
-        const double moduleSquare = Vector4ToolsD::GetLengthSquared(secondVector);
-        const Vector4D parallelVector = secondVector * (Vector4ToolsD::DotProduct(firstVector, secondVector) / moduleSquare);
+        const double moduleSquare = Vector4ToolsD::GetLengthSquared(vector1);
+        const Vector4D parallelVector = vector1 * (Vector4ToolsD::DotProduct(vector0, vector1) / moduleSquare);
 
-        ASSERT_TRUE(Vector4ToolsD::Approximate(parallelVector, Vector4ToolsD::ParallelVectorLhsToRhs(firstVector, secondVector)));
+        ASSERT_TRUE(Vector4ToolsD::Approximate(parallelVector, Vector4ToolsD::ParallelVectorLhsToRhs(vector0, vector1)));
 
-        const Vector4D apeakVector = firstVector - parallelVector;
+        const Vector4D apeakVector = vector0 - parallelVector;
 
-        ASSERT_TRUE(Vector4ToolsD::Approximate(apeakVector, Vector4ToolsD::ApeakVectorLhsToRhs(firstVector, secondVector)));
+        ASSERT_TRUE(Vector4ToolsD::Approximate(apeakVector, Vector4ToolsD::ApeakVectorLhsToRhs(vector0, vector1)));
 
-        const double angle = MathD::ACos(Vector4ToolsD::DotProduct(firstVector, secondVector) / (Vector4ToolsD::GetLength(firstVector) * Vector4ToolsD::GetLength(secondVector)));
+        const double angle = MathD::ACos(Vector4ToolsD::DotProduct(vector0, vector1) / (Vector4ToolsD::GetLength(vector0) * Vector4ToolsD::GetLength(vector1)));
 
-        ASSERT_APPROXIMATE(angle, Vector4ToolsD::GetVectorIncludedAngle(firstVector, secondVector), 1e-10);
+        ASSERT_APPROXIMATE(angle, Vector4ToolsD::GetVectorIncludedAngle(vector0, vector1), 1e-10);
     }
 }
 
 void Mathematics::Vector4ToolsTesting::CompareTest()
 {
-    const Vector4F firstVector(6.0f, 8.0f, 9.0f, 3.0f);
-    const Vector4F secondVector(7.0f, 5.0f, 19.0f, 32.0f);
+    const Vector4F vector0(6.0f, 8.0f, 9.0f, 3.0f);
+    const Vector4F vector1(7.0f, 5.0f, 19.0f, 32.0f);
 
-    ASSERT_TRUE(Vector4ToolsF::Approximate(firstVector, firstVector));
-    ASSERT_TRUE(Vector4ToolsF::Approximate(secondVector, secondVector));
-    ASSERT_FALSE(Vector4ToolsF::Approximate(firstVector, secondVector));
+    ASSERT_TRUE(Vector4ToolsF::Approximate(vector0, vector0));
+    ASSERT_TRUE(Vector4ToolsF::Approximate(vector1, vector1));
+    ASSERT_FALSE(Vector4ToolsF::Approximate(vector0, vector1));
 
-    ASSERT_TRUE(firstVector == firstVector);
-    ASSERT_FALSE(firstVector == secondVector);
-    ASSERT_TRUE(firstVector != secondVector);
-    ASSERT_TRUE(firstVector < secondVector);
-    ASSERT_TRUE(firstVector <= secondVector);
-    ASSERT_FALSE(firstVector > secondVector);
-    ASSERT_FALSE(firstVector >= secondVector);
+    ASSERT_TRUE(vector0 == vector0);
+    ASSERT_FALSE(vector0 == vector1);
+    ASSERT_TRUE(vector0 != vector1);
+    ASSERT_TRUE(vector0 < vector1);
+    ASSERT_TRUE(vector0 <= vector1);
+    ASSERT_FALSE(vector0 > vector1);
+    ASSERT_FALSE(vector0 >= vector1);
 
     GetStream() << "以下是调试信息：\n";
-    GetStream() << firstVector << '\n';
-    GetStream() << secondVector << '\n';
+    GetStream() << vector0 << '\n';
+    GetStream() << vector1 << '\n';
 }
 
 void Mathematics::Vector4ToolsTesting::OtherCalculateTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    vector<Vector4D> vectors;
+    std::vector<Vector4D> vectors;
 
     const auto aTestLoopCount = GetTestLoopCount();
 

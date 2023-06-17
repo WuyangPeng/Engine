@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/06 10:55)
+///	引擎版本：0.9.0.12 (2023/06/12 14:03)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,9 +20,6 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/Controllers/ControllerInterface.h"
-
-using std::string;
-using std::vector;
 
 Rendering::ControlledObjectImpl::ControlledObjectImpl(ControllerInterface* realThis) noexcept
     : controllers{}, realThis{ realThis }
@@ -122,7 +119,7 @@ const Rendering::ControllerInterface* Rendering::ControlledObjectImpl::GetContro
     return object.object.get();
 }
 
-void Rendering::ControlledObjectImpl::SetObject(ControllerInterface* aObject)  
+void Rendering::ControlledObjectImpl::SetObject(ControllerInterface* aObject)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -197,7 +194,7 @@ bool Rendering::ControlledObjectImpl::UpdateControllers(double applicationTime)
     return someoneUpdated;
 }
 
-CoreTools::ObjectSharedPtr Rendering::ControlledObjectImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::ControlledObjectImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -212,11 +209,11 @@ CoreTools::ObjectSharedPtr Rendering::ControlledObjectImpl::GetObjectByName(cons
     return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::ControlledObjectImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::ControlledObjectImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    vector<CoreTools::ObjectSharedPtr> objects{};
+    std::vector<CoreTools::ObjectSharedPtr> objects{};
 
     for (const auto& controller : controllers)
     {
@@ -229,7 +226,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::ControlledObjectImpl::GetAllObject
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::ControlledObjectImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::ControlledObjectImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -244,11 +241,11 @@ CoreTools::ConstObjectSharedPtr Rendering::ControlledObjectImpl::GetConstObjectB
     return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::ControlledObjectImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::ControlledObjectImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    vector<CoreTools::ConstObjectSharedPtr> objects{};
+    std::vector<CoreTools::ConstObjectSharedPtr> objects{};
 
     for (const auto& controller : controllers)
     {

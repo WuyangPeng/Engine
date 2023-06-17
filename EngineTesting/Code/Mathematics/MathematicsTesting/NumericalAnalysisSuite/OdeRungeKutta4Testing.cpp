@@ -1,20 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/03 14:39)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:05)
 
 #include "OdeRungeKutta4Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/NumericalAnalysis/OdeRungeKutta4Detail.h"
 #include "Mathematics/NumericalAnalysis/OdeSolverDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::ostream;
-using std::vector;
 
 namespace Mathematics
 {
@@ -57,7 +55,7 @@ void Mathematics::OdeRungeKutta4Testing::SolverTest()
 
     constexpr double tIn = 100;
 
-    vector<double> xIn;
+    std::vector<double> xIn;
 
     for (int i = 0; i < dimension; ++i)
     {
@@ -68,11 +66,11 @@ void Mathematics::OdeRungeKutta4Testing::SolverTest()
 
     const double tOut = data.t;
 
-    vector<double> xOut = data.x;
+    std::vector<double> xOut = data.x;
 
-    vector<double> testXOut(dimension);
+    std::vector<double> testXOut(dimension);
 
-    vector<double> firstStepFunctionValue = OdeRungeKutta4Function(tIn, xIn, this);
+    std::vector<double> firstStepFunctionValue = OdeRungeKutta4Function(tIn, xIn, this);
 
     for (int i = 0; i < dimension; ++i)
     {
@@ -80,14 +78,14 @@ void Mathematics::OdeRungeKutta4Testing::SolverTest()
     }
 
     const double halfT = tIn + odeRungeKutta4Test.GetStepSize() / 2;
-    vector<double> secondStepFunctionValue = OdeRungeKutta4Function(halfT, testXOut, this);
+    std::vector<double> secondStepFunctionValue = OdeRungeKutta4Function(halfT, testXOut, this);
 
     for (int i = 0; i < dimension; ++i)
     {
         testXOut.at(i) = xIn.at(i) + odeRungeKutta4Test.GetStepSize() / 2 * secondStepFunctionValue.at(i);
     }
 
-    vector<double> thirdStepFunctionValue = OdeRungeKutta4Function(halfT, testXOut, this);
+    std::vector<double> thirdStepFunctionValue = OdeRungeKutta4Function(halfT, testXOut, this);
 
     for (int i = 0; i < dimension; ++i)
     {
@@ -95,7 +93,7 @@ void Mathematics::OdeRungeKutta4Testing::SolverTest()
     }
 
     const double testTOut = tIn + odeRungeKutta4Test.GetStepSize();
-    vector<double> fourthStepFunctionValue = OdeRungeKutta4Function(testTOut, testXOut, this);
+    std::vector<double> fourthStepFunctionValue = OdeRungeKutta4Function(testTOut, testXOut, this);
 
     for (int i = 0; i < dimension; ++i)
     {
@@ -110,13 +108,13 @@ void Mathematics::OdeRungeKutta4Testing::SolverTest()
     }
 }
 
-vector<double> Mathematics::OdeRungeKutta4Testing::OdeRungeKutta4Function(double tIn, const vector<double>& xIn, const OdeRungeKutta4Testing* odeEulerTesting)
+std::vector<double> Mathematics::OdeRungeKutta4Testing::OdeRungeKutta4Function(double tIn, const std::vector<double>& xIn, const OdeRungeKutta4Testing* odeEulerTesting)
 {
     if (odeEulerTesting != nullptr)
     {
         int dimension = odeEulerTesting->GetDimension();
 
-        vector<double> out(dimension);
+        std::vector<double> out(dimension);
 
         for (int i = 0; i < dimension; i++)
         {
@@ -127,7 +125,7 @@ vector<double> Mathematics::OdeRungeKutta4Testing::OdeRungeKutta4Function(double
     }
     else
     {
-        return vector<double>{};
+        return std::vector<double>{};
     }
 }
 

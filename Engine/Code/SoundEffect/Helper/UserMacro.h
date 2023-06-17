@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/03/25 13:52)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/09 19:16)
 
 #ifndef SOUND_EFFECT_MACRO_USER_MACRO_H
 #define SOUND_EFFECT_MACRO_USER_MACRO_H
@@ -25,9 +25,10 @@ static_assert(COMPILE_SOUND_EFFECT_CLOSE <= CLOSE_SOUND_EFFECT_MAX, "COMPILE_SOU
     #define SOUND_EFFECT_USE_OPENAL
 #endif  // !defined(COMPILE_SOUND_EFFECT_CLOSE) || (COMPILE_SOUND_EFFECT_CLOSE & CLOSE_USE_OPENAL) != CLOSE_USE_OPENAL
 
-// 是否编译为静态库
 #ifdef BUILDING_STATIC
+
     #define BUILDING_SOUND_EFFECT_STATIC
+
 #endif  // BUILDING_STATIC
 
 #endif  // SOUND_EFFECT_MACRO_USER_MACRO_H

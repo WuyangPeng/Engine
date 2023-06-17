@@ -5,11 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.5 (2023/04/03 09:48)
+///	千年史策版本：0.9.0.12 (2023/06/13 21:45)
 
 #ifndef GAME_CLIENT_MIDDLE_LAYER_FWD_H
 #define GAME_CLIENT_MIDDLE_LAYER_FWD_H
 
+#include "ArtificialIntelligence/ArtificialIntelligenceFwd.h"
 #include "Audio/AudioFwd.h"
 #include "CameraSystems/CameraSystemsFwd.h"
 #include "Event/EventFwd.h"
@@ -23,6 +24,5 @@
 #include "System/SystemFwd.h"
 #include "Network/NetworkFwd.h"
 #include "Rendering/RenderingFwd.h"
-#include "ArtificialIntelligence/ArtificialIntelligenceFwd.h"
 
 #endif  // GAME_CLIENT_MIDDLE_LAYER_FWD_H

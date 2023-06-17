@@ -1,24 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 22:56)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:40)
 
 #include "Vector2DInformationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/AxesAlignBoundingBox2Detail.h"
 #include "Mathematics/Algebra/Vector2InformationDetail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -49,58 +46,58 @@ void Mathematics::Vector2InformationTesting::MainTest()
 
 void Mathematics::Vector2InformationTesting::DimensionTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> firstRandomDistribution{ 0.0001, 0.0002 };
-    const uniform_real<double> secondRandomDistribution(-10.0, 10.0);
+    const std::uniform_real<double> randomDistribution0{ 0.0001, 0.0002 };
+    const std::uniform_real<double> randomDistribution1(-10.0, 10.0);
 
-    vector<Vector2D> firstVector;
-    vector<Vector2D> secondVector;
-    vector<Vector2D> thirdVector;
-    const double slope = secondRandomDistribution(generator);
+    std::vector<Vector2D> vector0;
+    std::vector<Vector2D> vector1;
+    std::vector<Vector2D> vector2;
+    const double slope = randomDistribution1(generator);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector2 firstEachVector(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        const Vector2 firstEachVector(randomDistribution0(generator), randomDistribution0(generator));
 
-        firstVector.push_back(firstEachVector);
+        vector0.push_back(firstEachVector);
 
-        const double randomValue = firstRandomDistribution(generator) * secondRandomDistribution(generator);
+        const double randomValue = randomDistribution0(generator) * randomDistribution1(generator);
 
         const Vector2 secondEachVector(randomValue, randomValue * slope);
 
-        secondVector.push_back(secondEachVector);
+        vector1.push_back(secondEachVector);
 
-        const Vector2 thirdEachVector(secondRandomDistribution(generator), secondRandomDistribution(generator));
+        const Vector2 thirdEachVector(randomDistribution1(generator), randomDistribution1(generator));
 
-        thirdVector.push_back(thirdEachVector);
+        vector2.push_back(thirdEachVector);
     }
 
-    thirdVector.push_back(Vector2(20.0, 80.7));
-    thirdVector.push_back(Vector2(120.0, 180.7));
+    vector2.push_back(Vector2(20.0, 80.7));
+    vector2.push_back(Vector2(120.0, 180.7));
 
-    Vector2InformationD firstInformation(firstVector, 0.0001);
+    Vector2InformationD firstInformation(vector0, 0.0001);
 
     ASSERT_EQUAL(firstInformation.GetDimension(), 0);
 
-    Vector2InformationD secondInformation(secondVector, 0.0001);
+    Vector2InformationD secondInformation(vector1, 0.0001);
 
     ASSERT_EQUAL(secondInformation.GetDimension(), 1);
 
-    Vector2InformationD thirdInformation(thirdVector, 0.0001);
+    Vector2InformationD thirdInformation(vector2, 0.0001);
 
     ASSERT_EQUAL(thirdInformation.GetDimension(), 2);
 }
 
 void Mathematics::Vector2InformationTesting::AxesAlignBoundingBoxTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    const std::uniform_real<double> randomDistribution{ -100.0f, 100.0f };
 
-    vector<Vector2D> vectors;
+    std::vector<Vector2D> vectors;
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -132,11 +129,11 @@ void Mathematics::Vector2InformationTesting::AxesAlignBoundingBoxTest()
 
 void Mathematics::Vector2InformationTesting::DirectionTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    const std::uniform_real<double> randomDistribution{ -100.0f, 100.0f };
 
-    vector<Vector2D> vectors;
+    std::vector<Vector2D> vectors;
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -208,11 +205,11 @@ void Mathematics::Vector2InformationTesting::DirectionTest()
 
 void Mathematics::Vector2InformationTesting::ExtremeTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    const std::uniform_real<double> randomDistribution{ -100.0f, 100.0f };
 
-    vector<Vector2D> vectors;
+    std::vector<Vector2D> vectors;
 
     const auto aTestLoopCount = GetTestLoopCount();
 

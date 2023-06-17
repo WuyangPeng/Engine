@@ -1,24 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 22:59)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:42)
 
 #include "Vector2DToolsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/AxesAlignBoundingBox2Detail.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 #ifndef BUILDING_MATHEMATICS_STATIC
 
@@ -55,104 +52,104 @@ void Mathematics::Vector2ToolsTesting::MainTest()
 
 void Mathematics::Vector2ToolsTesting::DistanceTest()
 {
-    const Vector2F firstVector(3.0f, 4.0f);
+    const Vector2F vector0(3.0f, 4.0f);
 
-    ASSERT_APPROXIMATE(Vector2ToolsF::GetLength(firstVector), 5.0f, 1e-8f);
-    ASSERT_APPROXIMATE(Vector2ToolsF::GetLengthSquared(firstVector), 25.0f, 1e-8f);
+    ASSERT_APPROXIMATE(Vector2ToolsF::GetLength(vector0), 5.0f, 1e-8f);
+    ASSERT_APPROXIMATE(Vector2ToolsF::GetLengthSquared(vector0), 25.0f, 1e-8f);
 
-    const Vector2F secondVector(6.0f, 8.0f);
+    const Vector2F vector1(6.0f, 8.0f);
 
-    ASSERT_APPROXIMATE(Vector2ToolsF::Distance(firstVector, secondVector), 5.0f, 1e-8f);
-    ASSERT_APPROXIMATE(Vector2ToolsF::DistanceSquared(firstVector, secondVector), 25.0f, 1e-8f);
+    ASSERT_APPROXIMATE(Vector2ToolsF::Distance(vector0, vector1), 5.0f, 1e-8f);
+    ASSERT_APPROXIMATE(Vector2ToolsF::DistanceSquared(vector0, vector1), 25.0f, 1e-8f);
 }
 
 void Mathematics::Vector2ToolsTesting::ProductTest()
 {
-    const Vector2 firstVector(-4.0, 3.0);
-    const Vector2 secondVector(8.0, 6.0);
+    const Vector2 vector0(-4.0, 3.0);
+    const Vector2 vector1(8.0, 6.0);
 
-    ASSERT_APPROXIMATE(Vector2ToolsD::DotProduct(firstVector, secondVector), -14.0, 1e-8f);
-    ASSERT_APPROXIMATE(Vector2ToolsD::PseudoCrossProduct(firstVector, secondVector), -48.0, 1e-8f);
+    ASSERT_APPROXIMATE(Vector2ToolsD::DotProduct(vector0, vector1), -14.0, 1e-8f);
+    ASSERT_APPROXIMATE(Vector2ToolsD::PseudoCrossProduct(vector0, vector1), -48.0, 1e-8f);
 }
 
 void Mathematics::Vector2ToolsTesting::ProjectionTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -10.0f, 10.0f };
+    const std::uniform_real<double> randomDistribution{ -10.0f, 10.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector2 firstVector(randomDistribution(generator),
-                                  randomDistribution(generator));
+        const Vector2 vector0(randomDistribution(generator),
+                              randomDistribution(generator));
 
-        const Vector2 secondVector(randomDistribution(generator),
-                                   randomDistribution(generator));
+        const Vector2 vector1(randomDistribution(generator),
+                              randomDistribution(generator));
 
-        const double moduleSquare = Vector2ToolsD::GetLengthSquared(secondVector);
-        const Vector2 parallelVector = secondVector * (Vector2ToolsD::DotProduct(firstVector, secondVector) / moduleSquare);
+        const double moduleSquare = Vector2ToolsD::GetLengthSquared(vector1);
+        const Vector2 parallelVector = vector1 * (Vector2ToolsD::DotProduct(vector0, vector1) / moduleSquare);
 
-        ASSERT_TRUE(Vector2ToolsD::Approximate(Vector2ToolsD::ParallelVectorLhsToRhs(firstVector, secondVector), parallelVector));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(Vector2ToolsD::ParallelVectorLhsToRhs(vector0, vector1), parallelVector));
 
-        const Vector2 apeakVector = firstVector - parallelVector;
+        const Vector2 apeakVector = vector0 - parallelVector;
 
-        ASSERT_TRUE(Vector2ToolsD::Approximate(Vector2ToolsD::ApeakVectorLhsToRhs(firstVector, secondVector), apeakVector));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(Vector2ToolsD::ApeakVectorLhsToRhs(vector0, vector1), apeakVector));
 
-        const double angle = MathD::ACos(Vector2ToolsD::DotProduct(firstVector, secondVector) / (Vector2ToolsD::GetLength(firstVector) * Vector2ToolsD::GetLength(secondVector)));
+        const double angle = MathD::ACos(Vector2ToolsD::DotProduct(vector0, vector1) / (Vector2ToolsD::GetLength(vector0) * Vector2ToolsD::GetLength(vector1)));
 
-        ASSERT_APPROXIMATE(angle, Vector2ToolsD::GetVectorIncludedAngle(firstVector, secondVector), 1e-10);
+        ASSERT_APPROXIMATE(angle, Vector2ToolsD::GetVectorIncludedAngle(vector0, vector1), 1e-10);
     }
 }
 
 void Mathematics::Vector2ToolsTesting::PerpTest()
 {
-    const Vector2F firstVector(3.0f, 4.0f);
+    const Vector2F vector0(3.0f, 4.0f);
     Vector2F perpVector(4.0f, -3.0f);
 
-    ASSERT_TRUE(Vector2ToolsF::Approximate(Vector2ToolsF::GetPerp(firstVector), perpVector));
+    ASSERT_TRUE(Vector2ToolsF::Approximate(Vector2ToolsF::GetPerp(vector0), perpVector));
 
     perpVector.Normalize();
 
-    ASSERT_TRUE(Vector2ToolsF::Approximate(Vector2ToolsF::GetUnitPerp(firstVector), perpVector));
+    ASSERT_TRUE(Vector2ToolsF::Approximate(Vector2ToolsF::GetUnitPerp(vector0), perpVector));
 
-    const float dotPerp = firstVector.GetX() * perpVector.GetY() - firstVector.GetY() * perpVector.GetX();
+    const float dotPerp = vector0.GetX() * perpVector.GetY() - vector0.GetY() * perpVector.GetX();
 
-    ASSERT_APPROXIMATE(Vector2ToolsF::DotPerp(firstVector, perpVector), dotPerp, 1e-8f);
+    ASSERT_APPROXIMATE(Vector2ToolsF::DotPerp(vector0, perpVector), dotPerp, 1e-8f);
 }
 
 void Mathematics::Vector2ToolsTesting::CompareTest()
 {
-    const Vector2F firstVector(6.0f, 8.0f);
-    const Vector2F secondVector(7.0f, 5.0f);
+    const Vector2F vector0(6.0f, 8.0f);
+    const Vector2F vector1(7.0f, 5.0f);
 
-    ASSERT_TRUE(Vector2ToolsF::Approximate(firstVector, firstVector));
-    ASSERT_TRUE(Vector2ToolsF::Approximate(secondVector, secondVector));
-    ASSERT_FALSE(Vector2ToolsF::Approximate(firstVector, secondVector));
+    ASSERT_TRUE(Vector2ToolsF::Approximate(vector0, vector0));
+    ASSERT_TRUE(Vector2ToolsF::Approximate(vector1, vector1));
+    ASSERT_FALSE(Vector2ToolsF::Approximate(vector0, vector1));
 
-    ASSERT_TRUE(firstVector == firstVector);
-    ASSERT_FALSE(firstVector == secondVector);
-    ASSERT_TRUE(firstVector != secondVector);
-    ASSERT_TRUE(firstVector < secondVector);
-    ASSERT_TRUE(firstVector <= secondVector);
-    ASSERT_FALSE(firstVector > secondVector);
-    ASSERT_FALSE(firstVector >= secondVector);
+    ASSERT_TRUE(vector0 == vector0);
+    ASSERT_FALSE(vector0 == vector1);
+    ASSERT_TRUE(vector0 != vector1);
+    ASSERT_TRUE(vector0 < vector1);
+    ASSERT_TRUE(vector0 <= vector1);
+    ASSERT_FALSE(vector0 > vector1);
+    ASSERT_FALSE(vector0 >= vector1);
 
     GetStream() << "以下是调试信息：\n";
-    GetStream() << firstVector << '\n';
-    GetStream() << secondVector << '\n';
+    GetStream() << vector0 << '\n';
+    GetStream() << vector1 << '\n';
 }
 
 void Mathematics::Vector2ToolsTesting::OtherCalculateTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -10.0f, 10.0f };
+    const std::uniform_real<double> randomDistribution{ -10.0f, 10.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
-    vector<Vector2D> vectors;
+    std::vector<Vector2D> vectors;
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
@@ -175,27 +172,27 @@ void Mathematics::Vector2ToolsTesting::OtherCalculateTest()
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Vector2 firstVector(randomDistribution(generator), randomDistribution(generator));
-        Vector2 secondVector(randomDistribution(generator), randomDistribution(generator));
+        Vector2 vector0(randomDistribution(generator), randomDistribution(generator));
+        Vector2 vector1(randomDistribution(generator), randomDistribution(generator));
 
-        const Vector2ToolsD::Vector2Orthonormalize orthonormalize = Vector2ToolsD::Orthonormalize(firstVector, secondVector);
+        const Vector2ToolsD::Vector2Orthonormalize orthonormalize = Vector2ToolsD::Orthonormalize(vector0, vector1);
 
-        firstVector.Normalize();
+        vector0.Normalize();
 
-        const double dot = Vector2ToolsD::DotProduct(firstVector, secondVector);
-        secondVector -= firstVector * dot;
-        secondVector.Normalize();
+        const double dot = Vector2ToolsD::DotProduct(vector0, vector1);
+        vector1 -= vector0 * dot;
+        vector1.Normalize();
 
-        ASSERT_TRUE(Vector2ToolsD::Approximate(firstVector, orthonormalize.GetUVector()));
-        ASSERT_TRUE(Vector2ToolsD::Approximate(secondVector, orthonormalize.GetVVector()));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(vector0, orthonormalize.GetUVector()));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(vector1, orthonormalize.GetVVector()));
 
-        Vector2 thirdVector(randomDistribution(generator), randomDistribution(generator));
+        Vector2 vector2(randomDistribution(generator), randomDistribution(generator));
 
-        const Vector2OrthonormalBasisD orthonormalBasis = Vector2ToolsD::GenerateOrthonormalBasis(thirdVector);
+        const Vector2OrthonormalBasisD orthonormalBasis = Vector2ToolsD::GenerateOrthonormalBasis(vector2);
 
-        thirdVector.Normalize();
+        vector2.Normalize();
 
-        ASSERT_TRUE(Vector2ToolsD::Approximate(thirdVector, orthonormalBasis.GetUVector()));
-        ASSERT_TRUE(Vector2ToolsD::Approximate(Vector2ToolsD::GetPerp(thirdVector), orthonormalBasis.GetVVector()));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(vector2, orthonormalBasis.GetUVector()));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(Vector2ToolsD::GetPerp(vector2), orthonormalBasis.GetVVector()));
     }
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/12 13:27)
+///	引擎版本：0.9.0.12 (2023/06/12 10:46)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,8 +19,6 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
 #include <algorithm>
-
-using std::string;
 
 Rendering::ShaderConstantsDataImpl::ShaderConstantsDataImpl(int number)
     : singleShaderConstantsData{ number, SingleShaderConstantsData{ CoreTools::DisableNotThrow::Disable } }
@@ -36,7 +34,7 @@ Rendering::ShaderConstantsDataImpl::ShaderConstantsDataImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderConstantsDataImpl)
 
-void Rendering::ShaderConstantsDataImpl::SetConstant(int index, const string& name, int numRegistersUsed)
+void Rendering::ShaderConstantsDataImpl::SetConstant(int index, const std::string& name, int numRegistersUsed)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(singleShaderConstantsData.size()), "索引错误");
@@ -44,7 +42,7 @@ void Rendering::ShaderConstantsDataImpl::SetConstant(int index, const string& na
     singleShaderConstantsData.at(index).SetConstant(name, numRegistersUsed);
 }
 
-void Rendering::ShaderConstantsDataImpl::InsertData(const string& name, int numRegistersUsed)
+void Rendering::ShaderConstantsDataImpl::InsertData(const std::string& name, int numRegistersUsed)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -58,7 +56,7 @@ int Rendering::ShaderConstantsDataImpl::GetNumConstants() const
     return boost::numeric_cast<int>(singleShaderConstantsData.size());
 }
 
-string Rendering::ShaderConstantsDataImpl::GetConstantName(int index) const
+std::string Rendering::ShaderConstantsDataImpl::GetConstantName(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(singleShaderConstantsData.size()), "索引错误");

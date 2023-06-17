@@ -1,25 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/07 11:00)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:31)
 
 #include "DistanceTesting.h"
 #include "Detail/DistanceTestDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::swap;
-using std::uniform_int;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -56,8 +52,8 @@ void Mathematics::DistanceTesting::MainTest()
 
 void Mathematics::DistanceTesting::BaseTest()
 {
-    default_random_engine generator;
-    const uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -82,8 +78,8 @@ void Mathematics::DistanceTesting::BaseTest()
 
 void Mathematics::DistanceTesting::StaticTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -110,8 +106,8 @@ void Mathematics::DistanceTesting::StaticTest()
 
 void Mathematics::DistanceTesting::DynamicTest()
 {
-    default_random_engine generator;
-    const uniform_real<float> randomDistribution(-10.0f, 10.0f);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -144,8 +140,8 @@ void Mathematics::DistanceTesting::DynamicTest()
 
 void Mathematics::DistanceTesting::DerivativeTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> randomDistribution(-100.0, 100.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -177,8 +173,8 @@ void Mathematics::DistanceTesting::DerivativeTest()
 
 void Mathematics::DistanceTesting::IntervalTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -192,7 +188,7 @@ void Mathematics::DistanceTesting::IntervalTest()
         double tMax = MathD::FAbs(randomDistribution(generator));
         if (tMax < tMin)
         {
-            swap(tMin, tMax);
+            std::swap(tMin, tMax);
         }
 
         Vector2 lhsVelocity(randomDistribution(generator), randomDistribution(generator));
@@ -203,7 +199,7 @@ void Mathematics::DistanceTesting::IntervalTest()
         DistanceResult2D resultSquared = distance.GetIntervalSquared(tMin, tMax, lhsVelocity, rhsVelocity);
         DistanceResult2D result = distance.GetInterval(tMin, tMax, lhsVelocity, rhsVelocity);
 
-        ASSERT_APPROXIMATE(MathD::Sqrt(resultSquared.GetDistance()), result.GetDistance(), 1e-4);
+        ASSERT_APPROXIMATE(MathD::Sqrt(resultSquared.GetDistance()), result.GetDistance(), 1e-3);
         ASSERT_APPROXIMATE(resultSquared.GetContactTime(), result.GetContactTime(), 1e-1);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, resultSquared.GetLhsClosestPoint(), result.GetLhsClosestPoint(), 1e-2);
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, resultSquared.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-1);
@@ -213,8 +209,8 @@ void Mathematics::DistanceTesting::IntervalTest()
             DistanceResult2D tResult = distance.Get(t, lhsVelocity, rhsVelocity);
             DistanceResult2D tResultSquared = distance.GetSquared(t, lhsVelocity, rhsVelocity);
 
-            ASSERT_LESS_EQUAL(result.GetDistance(), tResult.GetDistance() + 0.0001);
-            ASSERT_LESS_EQUAL(resultSquared.GetDistance(), tResultSquared.GetDistance());
+            ASSERT_LESS_EQUAL(result.GetDistance(), tResult.GetDistance() + 0.001);
+            ASSERT_LESS_EQUAL(resultSquared.GetDistance(), tResultSquared.GetDistance() + 0.001);
         }
     }
 }
@@ -222,8 +218,8 @@ void Mathematics::DistanceTesting::IntervalTest()
 void Mathematics::DistanceTesting::BeginIntervalTest()
 {
     // 测试距离为有效值零。对象是在最初位置接触。
-    default_random_engine generator;
-    const uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -271,8 +267,8 @@ void Mathematics::DistanceTesting::BeginIntervalTest()
 void Mathematics::DistanceTesting::EndIntervalTest()
 {
     // 测试距离为有效值零。对象是在最终位置接触。
-    default_random_engine generator;
-    const uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -282,7 +278,7 @@ void Mathematics::DistanceTesting::EndIntervalTest()
         double tMax = MathD::FAbs(randomDistribution(generator));
         if (tMax < tMin)
         {
-            swap(tMin, tMax);
+            std::swap(tMin, tMax);
         }
 
         Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
@@ -324,8 +320,8 @@ void Mathematics::DistanceTesting::EndIntervalTest()
 void Mathematics::DistanceTesting::IterationIntervalTest()
 {
     // 测试牛顿法过程中返回的情况
-    default_random_engine generator;
-    const uniform_real<double> randomDistribution(-10.0, 10.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 

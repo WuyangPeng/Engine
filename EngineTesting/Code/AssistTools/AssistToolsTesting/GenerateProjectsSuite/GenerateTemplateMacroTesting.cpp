@@ -1,21 +1,33 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/22 16:38)
+///	引擎测试版本：0.9.0.12 (2023/06/13 10:53)
 
 #include "GenerateTemplateMacroTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "AssistTools/GenerateProjects/CopyrightData.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateMacro.h"
 
 using namespace std::literals;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(AssistTools, GenerateTemplateMacro)
+AssistTools::GenerateTemplateMacroTesting::GenerateTemplateMacroTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateMacroTesting)
+
+void AssistTools::GenerateTemplateMacroTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void AssistTools::GenerateTemplateMacroTesting::MainTest()
 {
@@ -38,9 +50,9 @@ void AssistTools::GenerateTemplateMacroTesting::GenerateToTest()
     const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + macroDirectory);
     const System::String newFullProjectName(SYSTEM_TEXT("ExportMacro"));
 
-    TestingType::Replace replace = GetSpecialReplace();
+    GenerateTemplateMacro::Replace replace = GetSpecialReplace();
 
-    TestingType generateTemplateSolution(fileName, replace);
+    GenerateTemplateMacro generateTemplateSolution(fileName, replace);
 
     int defaultEndYearCount = GetContentFindCount(fileName, GetSpecialEndYear());
     ASSERT_EQUAL(defaultEndYearCount, 1);
@@ -111,7 +123,7 @@ void AssistTools::GenerateTemplateMacroTesting::DefaultGenerateToTest(const Syst
     const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
     const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + macroDirectory);
 
-    TestingType generateTemplateSolution(fileName, TestingType::Replace());
+    GenerateTemplateMacro generateTemplateSolution(fileName, GenerateTemplateMacro::Replace());
 
     int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
     ASSERT_EQUAL(defaultEndYearCount, 1);

@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/26 19:03)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:23)
 
 #include "Query2RationalTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
@@ -19,14 +20,8 @@
 #include "Mathematics/Query/Query2RationalDetail.h"
 #include "Mathematics/Query/QuerySortTools.h"
 #include "Mathematics/Rational/RationalVectorDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::swap;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -57,20 +52,20 @@ void Mathematics::Query2RationalTesting::MainTest()
 
 void Mathematics::Query2RationalTesting::VerticesTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
         Query2RationalD query(vertices);
@@ -87,23 +82,23 @@ void Mathematics::Query2RationalTesting::VerticesTest()
 
 void Mathematics::Query2RationalTesting::LineTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
-        const uniform_int<> thirdRandomDistribution(0, size - 1);
+        const std::uniform_int<> thirdRandomDistribution(0, size - 1);
 
         auto firstIndex = thirdRandomDistribution(generator);
         auto secondIndex = thirdRandomDistribution(generator);
@@ -116,14 +111,14 @@ void Mathematics::Query2RationalTesting::LineTest()
 
         if (firstIndex != secondIndex && secondIndex != thirdIndex && firstIndex != thirdIndex)
         {
-            const Vector2 firstVector = vertices.at(firstIndex);
-            const Vector2 secondVector = vertices.at(secondIndex);
-            const Vector2 thirdVector = vertices.at(thirdIndex);
+            const Vector2 vector0 = vertices.at(firstIndex);
+            const Vector2 vector1 = vertices.at(secondIndex);
+            const Vector2 vector2 = vertices.at(thirdIndex);
 
-            const SignRational<32> x0(firstVector[0] - secondVector[0]);
-            const SignRational<32> y0(firstVector[1] - secondVector[1]);
-            const SignRational<32> x1(thirdVector[0] - secondVector[0]);
-            const SignRational<32> y1(thirdVector[1] - secondVector[1]);
+            const SignRational<32> x0(vector0[0] - vector1[0]);
+            const SignRational<32> y0(vector0[1] - vector1[1]);
+            const SignRational<32> x1(vector2[0] - vector1[0]);
+            const SignRational<32> y1(vector2[1] - vector1[1]);
 
             const SignRational<32> dotPerp = QueryDotTools<SignRational<32>>::Det2(x0, y0, x1, y1);
 
@@ -145,23 +140,23 @@ void Mathematics::Query2RationalTesting::LineTest()
 
 void Mathematics::Query2RationalTesting::TriangleTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
-        const uniform_int<> thirdRandomDistribution(0, size - 1);
+        const std::uniform_int<> thirdRandomDistribution(0, size - 1);
 
         auto firstIndex = thirdRandomDistribution(generator);
         auto secondIndex = thirdRandomDistribution(generator);
@@ -171,7 +166,7 @@ void Mathematics::Query2RationalTesting::TriangleTest()
         Query2RationalD query(vertices);
         if (query.ToLine(secondIndex, thirdIndex, fourthIndex) == LineQueryType::Right)
         {
-            swap(secondIndex, thirdIndex);
+            std::swap(secondIndex, thirdIndex);
         }
 
         ASSERT_ENUM_EQUAL(query.ToTriangle(secondIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
@@ -199,23 +194,23 @@ void Mathematics::Query2RationalTesting::TriangleTest()
 
 void Mathematics::Query2RationalTesting::CircumcircleTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
-        const uniform_int<> thirdRandomDistribution(0, size - 1);
+        const std::uniform_int<> thirdRandomDistribution(0, size - 1);
 
         auto firstIndex = thirdRandomDistribution(generator);
         auto secondIndex = thirdRandomDistribution(generator);
@@ -232,23 +227,23 @@ void Mathematics::Query2RationalTesting::CircumcircleTest()
             thirdIndex != fourthIndex && fourthIndex != firstIndex &&
             secondIndex != fourthIndex && firstIndex != thirdIndex)
         {
-            const Vector2 firstVector = vertices.at(firstIndex);
-            const Vector2 secondVector = vertices.at(secondIndex);
-            const Vector2 thirdVector = vertices.at(thirdIndex);
-            const Vector2 fourthVector = vertices.at(fourthIndex);
+            const Vector2 vector0 = vertices.at(firstIndex);
+            const Vector2 vector1 = vertices.at(secondIndex);
+            const Vector2 vector2 = vertices.at(thirdIndex);
+            const Vector2 vector3 = vertices.at(fourthIndex);
 
-            const SignRational<32> lhsPlusTestX(secondVector[0] + firstVector[0]);
-            const SignRational<32> lhsMinusTestX(secondVector[0] - firstVector[0]);
-            const SignRational<32> lhsPlusTestY(secondVector[1] + firstVector[1]);
-            const SignRational<32> lhsMinusTestY(secondVector[1] - firstVector[1]);
-            const SignRational<32> mhsPlusTestX(thirdVector[0] + firstVector[0]);
-            const SignRational<32> mhsMinusTestX(thirdVector[0] - firstVector[0]);
-            const SignRational<32> mhsPlusTestY(thirdVector[1] + firstVector[1]);
-            const SignRational<32> mhsMinusTestY(thirdVector[1] - firstVector[1]);
-            const SignRational<32> rhsPlusTestX(fourthVector[0] + firstVector[0]);
-            const SignRational<32> rhsMinusTestX(fourthVector[0] - firstVector[0]);
-            const SignRational<32> rhsPlusTestY(fourthVector[1] + firstVector[1]);
-            const SignRational<32> rhsMinusTestY(fourthVector[1] - firstVector[1]);
+            const SignRational<32> lhsPlusTestX(vector1[0] + vector0[0]);
+            const SignRational<32> lhsMinusTestX(vector1[0] - vector0[0]);
+            const SignRational<32> lhsPlusTestY(vector1[1] + vector0[1]);
+            const SignRational<32> lhsMinusTestY(vector1[1] - vector0[1]);
+            const SignRational<32> mhsPlusTestX(vector2[0] + vector0[0]);
+            const SignRational<32> mhsMinusTestX(vector2[0] - vector0[0]);
+            const SignRational<32> mhsPlusTestY(vector2[1] + vector0[1]);
+            const SignRational<32> mhsMinusTestY(vector2[1] - vector0[1]);
+            const SignRational<32> rhsPlusTestX(vector3[0] + vector0[0]);
+            const SignRational<32> rhsMinusTestX(vector3[0] - vector0[0]);
+            const SignRational<32> rhsPlusTestY(vector3[1] + vector0[1]);
+            const SignRational<32> rhsMinusTestY(vector3[1] - vector0[1]);
             const SignRational<32> z0 = lhsPlusTestX * lhsMinusTestX + lhsPlusTestY * lhsMinusTestY;
             const SignRational<32> z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
             const SignRational<32> z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;

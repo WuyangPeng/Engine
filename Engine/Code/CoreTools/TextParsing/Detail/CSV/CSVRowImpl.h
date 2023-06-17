@@ -42,7 +42,7 @@ namespace CoreTools
         using IntVector4Container = std::vector<IntVector4>;
 
     public:
-        CSVRowImpl(CSVHead csvHead, String rowContent);
+        CSVRowImpl(CSVHead csvHead, String rowContent); 
 
         CLASS_INVARIANT_DECLARE;
 

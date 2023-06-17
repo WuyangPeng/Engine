@@ -1,21 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/24 15:21)
+///	引擎测试版本：0.9.0.12 (2023/06/13 19:24)
 
 #include "OpenGLGlutProcessTesting.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/OpenGLGlutFrame/Flags/FrameParameter.h"
 #include "Framework/OpenGLGlutFrame/OpenGLGlutProcessDetail.h"
 
 Framework::OpenGLGlutProcessOpenGLGlutCallBack::OpenGLGlutProcessOpenGLGlutCallBack() noexcept
-    : ParentType{ System::g_Microseconds / 60 }
+    : ParentType{ System::gMicroseconds / 60 }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -33,7 +34,18 @@ namespace Framework
     }
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Framework, OpenGLGlutProcessTesting)
+Framework::OpenGLGlutProcessTesting::OpenGLGlutProcessTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, OpenGLGlutProcessTesting)
+
+void Framework::OpenGLGlutProcessTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Framework::OpenGLGlutProcessTesting::MainTest()
 {
@@ -44,7 +56,7 @@ void Framework::OpenGLGlutProcessTesting::MainTest()
 
 void Framework::OpenGLGlutProcessTesting::SetWindowIDSucceedTest()
 {
-    OpenGLGlutProcess<OpenGLGlutProcessOpenGLGlutCallBack> process{ System::g_Microseconds / 60 };
+    OpenGLGlutProcess<OpenGLGlutProcessOpenGLGlutCallBack> process{ System::gMicroseconds / 60 };
 
     const int window(process.GetWindowID());
 
@@ -53,7 +65,7 @@ void Framework::OpenGLGlutProcessTesting::SetWindowIDSucceedTest()
 
 void Framework::OpenGLGlutProcessTesting::CallbackSucceedTest()
 {
-    OpenGLGlutProcess<OpenGLGlutProcessOpenGLGlutCallBack> process{ System::g_Microseconds / 60 };
+    OpenGLGlutProcess<OpenGLGlutProcessOpenGLGlutCallBack> process{ System::gMicroseconds / 60 };
 
     ASSERT_TRUE(process.PreCreate());
     ASSERT_TRUE(process.Initialize());
@@ -151,7 +163,7 @@ void Framework::OpenGLGlutProcessTesting::CallbackSucceedTest()
 
 void Framework::OpenGLGlutProcessTesting::SetMillisecondSucceedTest()
 {
-    OpenGLGlutProcess<OpenGLGlutProcessOpenGLGlutCallBack> process{ System::g_Microseconds / 60 };
+    OpenGLGlutProcess<OpenGLGlutProcessOpenGLGlutCallBack> process{ System::gMicroseconds / 60 };
 
     constexpr auto millisecond = 17;
 

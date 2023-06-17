@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 最后的霸王测试版本：0.0.0.1 (2019/10/11 17:44)
+///	Copyright (c) 2010-2023
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	最后的霸王测试版本：0.9.0.12 (2023/06/17 14:11)
 
 #ifndef GAME_SERVER_CORE_TESTING_TESTING_HELPER_H
 #define GAME_SERVER_CORE_TESTING_TESTING_HELPER_H

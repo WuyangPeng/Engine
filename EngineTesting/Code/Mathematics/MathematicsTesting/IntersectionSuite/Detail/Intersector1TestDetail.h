@@ -1,14 +1,16 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/30 15:41)
+///	Copyright (c) 2010-2023
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:48)
 
 #ifndef MATHEMATICS_INTERSECTION_SUITE_INTERSECTOR1_TEST_DETAIL_H
 #define MATHEMATICS_INTERSECTION_SUITE_INTERSECTOR1_TEST_DETAIL_H
 
 #include "Intersector1Test.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Intersection/Intersector1Detail.h"
 
@@ -20,6 +22,7 @@ Mathematics::Intersector1Test<Real>::Intersector1Test(Real u0, Real u1, Real v0,
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Intersector1Test<Real>::IsValid() const noexcept
 {
@@ -28,6 +31,7 @@ bool Mathematics::Intersector1Test<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>

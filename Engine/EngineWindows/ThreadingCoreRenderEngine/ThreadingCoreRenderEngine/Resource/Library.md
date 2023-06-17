@@ -140,8 +140,11 @@ protobuf（引擎通过宏NETWORK_USE_PROTOBUF关联）
 2. 官方网站：https://github.com/protocolbuffers/protobuf。
 3. git地址：https://github.com/protocolbuffers/protobuf.git。
 4. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
-5. port_def.inc尾部增加
-   #include "System/Helper/PragmaWarning/ProtoBuf.h"
+5. 选中protobuf_BUILD_SHARED_LIBS。
+6. port_def.inc尾部增加
+   #ifdef PROTO_BUF_PRAGMA_WARNING
+	#include "System/Helper/PragmaWarning/ProtoBuf.h"
+   #endif
 
 ----------------------------
 freeglut（引擎通过宏SYSTEM_USE_GLUT关联）

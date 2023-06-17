@@ -1,21 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 18:42)
+///	引擎测试版本：0.9.0.12 (2023/06/09 13:11)
 
 #include "AVectorOrthonormalBasisTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/AVectorOrthonormalBasisDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
+#include "Mathematics/Algebra/AVectorOrthonormalBasisDetail.h"
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -43,26 +41,26 @@ void Mathematics::AVectorOrthonormalBasisTesting::MainTest()
 
 void Mathematics::AVectorOrthonormalBasisTesting::OrthonormalBasisTest()
 {
-    default_random_engine randomEngine{};
-    const uniform_real<double> firstRandomDistribution{ -10.0, 10.0 };
-    const uniform_real<float> secondRandomDistribution{ -10.0f, 10.0f };
+    std::default_random_engine randomEngine{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -10.0, 10.0 };
+    const std::uniform_real<float> randomDistribution1{ -10.0f, 10.0f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        AVectorD firstVector{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+        AVectorD vector0{ randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine) };
 
-        AVectorF secondVector{ secondRandomDistribution(randomEngine), secondRandomDistribution(randomEngine), secondRandomDistribution(randomEngine) };
+        AVectorF vector1{ randomDistribution1(randomEngine), randomDistribution1(randomEngine), randomDistribution1(randomEngine) };
 
-        const AVectorOrthonormalBasisD firstOrthonormalBasis{ firstVector, false };
+        const AVectorOrthonormalBasisD orthonormalBasis0{ vector0, false };
 
-        firstVector.Normalize();
+        vector0.Normalize();
 
-        ASSERT_TRUE(Approximate(firstVector, firstOrthonormalBasis.GetWVector(), 1e-10));
+        ASSERT_TRUE(Approximate(vector0, orthonormalBasis0.GetWVector(), 1e-10));
 
-        const AVectorOrthonormalBasisF secondOrthonormalBasis{ secondVector, false };
+        const AVectorOrthonormalBasisF orthonormalBasis1{ vector1, false };
 
-        secondVector.Normalize();
+        vector1.Normalize();
 
-        ASSERT_TRUE(Approximate(secondVector, secondOrthonormalBasis.GetWVector(), 1e-8f));
+        ASSERT_TRUE(Approximate(vector1, orthonormalBasis1.GetWVector(), 1e-8f));
     }
 }

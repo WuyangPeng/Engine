@@ -5,13 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策测试版本：0.9.0.5 (2023/04/03 13:40)
+///	千年史策测试版本：0.9.0.12 (2023/06/14 20:20)
 
 #include "Testing.h"
 #include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 
-DatabaseGenerateServerTesting::TestingHelper::TestingHelper(int argc, char** argv)
+DatabaseGenerateServerCoreTesting::TestingHelper::TestingHelper(int argc, char** argv)
     : ParentType{ argc, argv, "数据库生成服务器核心测试" }
 {
     InitSuite();
@@ -19,8 +19,8 @@ DatabaseGenerateServerTesting::TestingHelper::TestingHelper(int argc, char** arg
     USER_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseGenerateServerTesting, TestingHelper)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseGenerateServerCoreTesting, TestingHelper)
 
-void DatabaseGenerateServerTesting::TestingHelper::InitSuite() noexcept
+void DatabaseGenerateServerCoreTesting::TestingHelper::InitSuite() noexcept
 {
 }

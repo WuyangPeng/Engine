@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/26 22:44)
+///	引擎测试版本：0.9.0.12 (2023/06/13 20:06)
 
 #include "CameraModelMiddleLayerTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -15,6 +15,8 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Time/CustomTime.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Rendering/Renderers/EnvironmentParameter.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/Node.h"
@@ -29,14 +31,9 @@
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
 
-#include "Rendering/Renderers/EnvironmentParameter.h"
 #include <random>
 
-using std::default_random_engine;
-using std::make_shared;
-using std::string;
-using std::uniform_int;
-using std::uniform_real;
+using System::operator*;
 
 namespace Framework
 {
@@ -79,7 +76,7 @@ void Framework::CameraModelMiddleLayerTesting::MiddleLayerTest()
 
     TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
@@ -124,7 +121,7 @@ void Framework::CameraModelMiddleLayerTesting::FrameRateTest()
 
     TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
@@ -135,13 +132,13 @@ void Framework::CameraModelMiddleLayerTesting::FrameRateTest()
     ASSERT_TRUE(cameraViewMiddleLayer->Create(Rendering::EnvironmentParameter::Create()));
     ASSERT_TRUE(middleLayer.Initialize());
 
-    constexpr auto frame = System::g_Millisecond / maxTimer;
-    const auto testLoopCount = maxTimer * GetTestLoopCount();
+    constexpr auto frame = System::gMillisecond / maxTimer;
+    const auto aTestLoopCount = maxTimer * GetTestLoopCount();
 
     CoreTools::CustomTime customTime{};
     auto delta = 0;
     auto frameSum = 0;
-    for (auto i = 0; i < testLoopCount; ++i)
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         middleLayer.UpdateFrameCount();
 
@@ -182,7 +179,7 @@ void Framework::CameraModelMiddleLayerTesting::CameraMotionSpeedTest()
 
     TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
@@ -229,7 +226,7 @@ void Framework::CameraModelMiddleLayerTesting::MoveObjectTest()
 
     TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
@@ -241,9 +238,9 @@ void Framework::CameraModelMiddleLayerTesting::MoveObjectTest()
     ASSERT_TRUE(middleLayer.Initialize());
 
     middleLayer.SetTrackBallDow(false);
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> random{ 0, 1 };
-    const uniform_int<> selectRandom{ 0, 2 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> random{ 0, 1 };
+    const std::uniform_int<> selectRandom{ 0, 2 };
 
     ASSERT_FALSE(middleLayer.MoveObject());
 
@@ -251,8 +248,8 @@ void Framework::CameraModelMiddleLayerTesting::MoveObjectTest()
 
     constexpr auto rotationSpeed = 0.01f;
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         ASSERT_TRUE(middleLayer.Initialize());
 
@@ -311,7 +308,7 @@ void Framework::CameraModelMiddleLayerTesting::TrackBallDownTest()
 
     TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
@@ -339,7 +336,7 @@ void Framework::CameraModelMiddleLayerTesting::RotateTrackBallTest()
 
     TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
@@ -350,11 +347,11 @@ void Framework::CameraModelMiddleLayerTesting::RotateTrackBallTest()
     ASSERT_TRUE(cameraViewMiddleLayer->Create(Rendering::EnvironmentParameter::Create()));
     ASSERT_TRUE(middleLayer.Initialize());
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_real<float> random{ 0.0f, 100.0f };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> random{ 0.0f, 100.0f };
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         auto xTrackBegin = random(generator);
         auto yTrackBegin = random(generator);

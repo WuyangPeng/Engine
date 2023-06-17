@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.0 (2022/08/04 11:54)
+///	引擎版本：0.9.0.12 (2023/06/12 13:43)
 
 #include "Rendering/RenderingExport.h"
 
@@ -24,10 +24,12 @@
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26418)
+
 Rendering::FontImpl::FontSharedPtr Rendering::FontImpl::Create(MAYBE_UNUSED const ProgramFactorySharedPtr& factory, MAYBE_UNUSED int width, MAYBE_UNUSED int height, MAYBE_UNUSED const TexelsType& texels, MAYBE_UNUSED const CharacterDataType& characterData, MAYBE_UNUSED int maxMessageLength)
 {
     throw std::logic_error("The method or operation is not implemented.");
 }
+
 #include STSTEM_WARNING_POP
 
 Rendering::FontImpl::FontImpl(const ProgramFactorySharedPtr& factory, int width, int height, const TexelsType& texels, const CharacterDataType& characterData, int maxMessageLength)

@@ -12,8 +12,8 @@
 #include "ChatServer/ChatServerMiddleLayer/Macro/ChatServerMiddleLayerClassInvariantMacro.h"
 #include "EventManager.h"
 
-ChatServerMiddleLayer::EventManager::EventManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+ChatServerMiddleLayer::EventManager::EventManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     CHAT_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

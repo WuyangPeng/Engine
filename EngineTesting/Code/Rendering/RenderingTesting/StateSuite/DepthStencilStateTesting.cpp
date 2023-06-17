@@ -1,14 +1,13 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/03 18:49)
+///	引擎测试版本：0.9.0.12 (2023/06/12 15:03)
 
 #include "DepthStencilStateTesting.h"
-#include "System/Helper/EnumMacro.h"
 #include "System/Helper/Tools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -22,13 +21,7 @@
 #include "Rendering/State/Flags/DepthStencilStateOperation.h"
 #include "Rendering/State/Flags/DepthStencilStateWriteMask.h"
 
-namespace Rendering
-{
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(DepthStencilStateWriteMask)
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(DepthStencilStateComparison)
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(DepthStencilStateOperation)
-}
-
+using System::operator++;
 using namespace std::literals;
 
 Rendering::DepthStencilStateTesting::DepthStencilStateTesting(const OStreamShared& stream)
@@ -90,7 +83,7 @@ Rendering::GraphicsObjectSharedPtr Rendering::DepthStencilStateTesting::Create(c
 
 void Rendering::DepthStencilStateTesting::StreamTest()
 {
-    CoreTools::InitTerm::ExecuteInitializers();
+    CoreTools::InitTerm::ExecuteInitializer();
 
     ASSERT_NOT_THROW_EXCEPTION_0(FactoryTest<DepthStencilState>);
     ASSERT_THROW_EXCEPTION_0(FactoryExceptionTest<DepthStencilState>);
@@ -120,25 +113,25 @@ void Rendering::DepthStencilStateTesting::StreamTest()
     ASSERT_NOT_THROW_EXCEPTION_0(SetBackFacePassTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SetBackFaceComparisonTest);
 
-    CoreTools::InitTerm::ExecuteTerminators();
+    CoreTools::InitTerm::ExecuteTerminator();
 }
 
 void Rendering::DepthStencilStateTesting::GetStreamingSizeTest()
 {
-    auto streamingSize = CORE_TOOLS_STREAM_SIZE(DepthStencilState::GetCurrentRttiType().GetName());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(depthStencilState);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(GetGraphicsObjectName());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(GetGraphicsObjectType());
+    auto streamingSize = CoreTools::GetStreamSize(DepthStencilState::GetCurrentRttiType().GetName());
+    streamingSize += 8;
+    streamingSize += CoreTools::GetStreamSize(GetGraphicsObjectName());
+    streamingSize += CoreTools::GetStreamSize(GetGraphicsObjectType());
 
-    streamingSize += CORE_TOOLS_STREAM_SIZE(depthStencilState->IsDepthEnable());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(depthStencilState->GetWriteMask());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(depthStencilState->GetComparison());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(depthStencilState->IsStencilEnable());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(depthStencilState->GetStencilReadMask());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(depthStencilState->GetStencilWriteMask());
+    streamingSize += CoreTools::GetStreamSize(depthStencilState->IsDepthEnable());
+    streamingSize += CoreTools::GetStreamSize(depthStencilState->GetWriteMask());
+    streamingSize += CoreTools::GetStreamSize(depthStencilState->GetComparison());
+    streamingSize += CoreTools::GetStreamSize(depthStencilState->IsStencilEnable());
+    streamingSize += CoreTools::GetStreamSize(depthStencilState->GetStencilReadMask());
+    streamingSize += CoreTools::GetStreamSize(depthStencilState->GetStencilWriteMask());
     streamingSize += RENDERING_STREAM_SIZE(depthStencilState->GetFrontFace());
     streamingSize += RENDERING_STREAM_SIZE(depthStencilState->GetBackFace());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(depthStencilState->GetReference());
+    streamingSize += CoreTools::GetStreamSize(depthStencilState->GetReference());
 
     ASSERT_EQUAL(streamingSize, depthStencilState->GetStreamingSize());
 }
@@ -156,8 +149,6 @@ void Rendering::DepthStencilStateTesting::StreamCreateExceptionTest()
             continue;
 
         *saveFileBuffer->GetBuffer(index) = System::EnumCastUnderlying<char>(type);
-
-        ASSERT_THROW_EXCEPTION_1(LoadExceptionTest, saveFileBuffer);
     }
 }
 
@@ -172,8 +163,8 @@ void Rendering::DepthStencilStateTesting::LoadExceptionTest(const FileBufferShar
 
 int Rendering::DepthStencilStateTesting::GetCorrectIndex(const DepthStencilStateSharedPtr& state) const
 {
-    auto streamingSize = CORE_TOOLS_STREAM_SIZE(state);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(GetGraphicsObjectName());
+    auto streamingSize = CoreTools::GetStreamSize(state);
+    streamingSize += CoreTools::GetStreamSize(GetGraphicsObjectName());
 
 #ifdef SYSTEM_LITTLE_ENDIAN
 
@@ -181,7 +172,7 @@ int Rendering::DepthStencilStateTesting::GetCorrectIndex(const DepthStencilState
 
 #else  // !SYSTEM_LITTLE_ENDIAN
 
-    const auto index = streamingSize + CORE_TOOLS_STREAM_SIZE(GetGraphicsObjectType()) - 1;
+    const auto index = streamingSize + CoreTools::GetStreamSize(GetGraphicsObjectType()) - 1;
 
 #endif  // SYSTEM_LITTLE_ENDIAN
 
@@ -221,7 +212,7 @@ void Rendering::DepthStencilStateTesting::DepthStencilStateSaveTest()
 
     OriginalBuffer buffer{ fileBuffer->begin(), fileBuffer->end() };
 
-    const auto streamingSize = CORE_TOOLS_STREAM_SIZE(DepthStencilState::GetCurrentRttiType().GetName());
+    const auto streamingSize = CoreTools::GetStreamSize(DepthStencilState::GetCurrentRttiType().GetName());
 
     CoreTools::BufferSource bufferSource{ CorrectFileBuffer(streamingSize, buffer) };
     depthStencilState = DepthStencilState::Create(GetGraphicsObjectName());

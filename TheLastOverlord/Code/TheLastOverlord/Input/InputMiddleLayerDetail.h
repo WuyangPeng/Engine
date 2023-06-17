@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/19 16:56)
+///	最后的霸王版本：0.9.0.12 (2023/06/17 15:03)
 
-#ifndef THE_LAST_OVERLORD_INPUT_MIDDLE_LAYER_DEATIL_H
-#define THE_LAST_OVERLORD_INPUT_MIDDLE_LAYER_DEATIL_H
+#ifndef THE_LAST_OVERLORD_INPUT_MIDDLE_LAYER_DETAIL_H
+#define THE_LAST_OVERLORD_INPUT_MIDDLE_LAYER_DETAIL_H
 
 #include "InputMiddleLayer.h"
 #include "TheLastOverlord/Helper/TheLastOverlordClassInvariantMacro.h"
@@ -20,8 +20,8 @@
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename ApplicationTrait>
-TheLastOverlord::InputMiddleLayer<ApplicationTrait>::InputMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, lastKey{ -1 }
+TheLastOverlord::InputMiddleLayer<ApplicationTrait>::InputMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, lastKey{ -1 }
 {
     THE_LAST_OVERLORD_SELF_CLASS_IS_VALID_1;
 }
@@ -68,4 +68,4 @@ bool TheLastOverlord::InputMiddleLayer<ApplicationTrait>::KeyDown(int key, [[may
     return true;
 }
 
-#endif  // THE_LAST_OVERLORD_INPUT_MIDDLE_LAYER_DEATIL_H
+#endif  // THE_LAST_OVERLORD_INPUT_MIDDLE_LAYER_DETAIL_H

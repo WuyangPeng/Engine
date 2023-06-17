@@ -403,7 +403,6 @@ xcopy "$(ProjectDir)/Configuration/RendererNull.json" "../../../$(Platform)/$(Co
     <None Include="Resource\ShadersSuite\SecondSaveVisualEffect.trve" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\AbuseSuite\AbuseSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\AglRendererSuite\AglRendererSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\BaseSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\Detail\GraphicsObjectTest.h" />
@@ -448,7 +447,6 @@ xcopy "$(ProjectDir)/Configuration/RendererNull.json" "../../../$(Platform)/$(Co
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DataTypesSuite\TextureColourTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DataTypesSuite\TransformTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DataTypesSuite\UtilityTesting.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DemoglSuite\DemoglSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DetailSuite\BillboardNodeTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DetailSuite\ClodMeshTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DetailSuite\CollapseRecordArrayTesting.h" />
@@ -457,21 +455,15 @@ xcopy "$(ProjectDir)/Configuration/RendererNull.json" "../../../$(Platform)/$(Co
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DetailSuite\DetailSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DetailSuite\DlodNodeTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DetailSuite\SwitchNodeTesting.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DevILSuite\DevILSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DirectAPISuite\DirectAPISuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\Dx9RendererSuite\Dx9RendererSuite.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\FBXSuite\FBXSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\GlobalEffectsSuite\GlobalEffectsSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\GlutRendererSuite\GlutRendererSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\GlxRendererSuite\GlxRendererSuite.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\HelperSuite\HelperSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\IlluminationSuite\IlluminationSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ImageProcessingSuite\ImageProcessingSuite.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\JPEGSuite\JPEGSuite.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\Lib3dsSuite\Lib3dsSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\LocalEffectsSuite\LocalEffectsSuite.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\MacroSuite\MacroSuite.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\NethackSuite\NethackSuite.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\NvtoolkitSuite\NvtoolkitSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\OpenGLAPISuite\OpenGLAPISuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\OpenGLRendererSuite\OpenGLBindTextureTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\OpenGLRendererSuite\OpenGLRendererSuite.h" />
@@ -480,7 +472,6 @@ xcopy "$(ProjectDir)/Configuration/RendererNull.json" "../../../$(Platform)/$(Co
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\OpenGLRendererSuite\OpenGLTextureDataTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\OpenGLRendererSuite\OpenGLVertexFormatArrayDataTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\OpenGLRendererSuite\OpenGLVertexFormatDataTesting.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\OpenvidiaSuite\OpenvidiaSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\PictureSuite\PictureSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\BufferLockManageTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\BufferManagementLockEncapsulationTesting.h" />
@@ -609,11 +600,8 @@ xcopy "$(ProjectDir)/Configuration/RendererNull.json" "../../../$(Platform)/$(Co
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\TestingHelper.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\TextFontsSuite\TextFontsSuite.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\TIFFSuite\TIFFSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\VertexSuite\VertexSuite.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\WargamerSuite\WargamerSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\WglRendererSuite\WglRendererSuite.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\WingSuite\WingSuite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\Detail\GraphicsObjectTest.cpp" />

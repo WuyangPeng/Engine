@@ -24,7 +24,7 @@ namespace LoginServerMiddleLayer
         using ParentType = Framework::ArtificialIntellegenceInterface;
 
     public:
-        explicit ArtificialIntellegenceManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit ArtificialIntellegenceManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

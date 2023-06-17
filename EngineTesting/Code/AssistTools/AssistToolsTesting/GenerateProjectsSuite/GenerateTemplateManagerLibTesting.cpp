@@ -1,19 +1,31 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/22 16:38)
+///	引擎测试版本：0.9.0.12 (2023/06/13 10:54)
 
 #include "GenerateTemplateManagerLibTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "AssistTools/GenerateProjects/CopyrightData.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateManagerLib.h"
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(AssistTools, GenerateTemplateManagerLib)
+AssistTools::GenerateTemplateManagerLibTesting::GenerateTemplateManagerLibTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateManagerLibTesting)
+
+void AssistTools::GenerateTemplateManagerLibTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void AssistTools::GenerateTemplateManagerLibTesting::MainTest()
 {
@@ -30,9 +42,9 @@ void AssistTools::GenerateTemplateManagerLibTesting::GenerateToTest()
     const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName);
     const System::String newFullProjectName(newProjectName + (SYSTEM_TEXT("Lib")));
 
-    TestingType::Replace replace = GetSpecialReplace();
+    GenerateTemplateManagerLib::Replace replace = GetSpecialReplace();
 
-    TestingType generateTemplateSolution(fileName, replace);
+    GenerateTemplateManagerLib generateTemplateSolution(fileName, replace);
 
     int defaultEndYearCount = GetContentFindCount(fileName, GetSpecialEndYear());
     ASSERT_EQUAL(defaultEndYearCount, 1);
@@ -101,7 +113,7 @@ void AssistTools::GenerateTemplateManagerLibTesting::DefaultGenerateToTest()
     const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
     const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName);
 
-    TestingType generateTemplateSolution(fileName, TestingType::Replace());
+    GenerateTemplateManagerLib generateTemplateSolution(fileName, GenerateTemplateManagerLib::Replace());
 
     int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
     ASSERT_EQUAL(defaultEndYearCount, 1);

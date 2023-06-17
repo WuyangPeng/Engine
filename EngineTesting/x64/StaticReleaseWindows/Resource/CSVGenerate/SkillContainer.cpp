@@ -26,10 +26,14 @@ CSVConfigure::SkillContainer::SkillContainer(const CoreTools::CSVContent& csvCon
 
 void CSVConfigure::SkillContainer::Parsing(const CoreTools::CSVContent& csvContent)
 {
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("skill表开始载入……"));
+
     const auto size = csvContent.GetCount();
+    const auto csvHead = csvContent.GetCSVHead();
+
     for (auto i = 0; i < size; ++i)
     {
-        CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
 
         skill.emplace_back(std::make_shared<Skill>(csvRow));
     }
@@ -39,7 +43,16 @@ void CSVConfigure::SkillContainer::Parsing(const CoreTools::CSVContent& csvConte
     });
 
     const auto iter = std::ranges::unique(skill, [](const auto& lhs, const auto& rhs) noexcept {
-        return (*lhs).GetKey() == (*rhs).GetKey();
+        if((*lhs).GetKey() == (*rhs).GetKey())
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT("skill表存在重复主键，key = "), (*lhs).GetKey(), SYSTEM_TEXT("。\n"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     });
 
     if (iter.begin() != iter.end())
@@ -48,6 +61,8 @@ void CSVConfigure::SkillContainer::Parsing(const CoreTools::CSVContent& csvConte
 
         skill.erase(iter.begin(), iter.end());
     }
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("skill表结束载入……"));
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, SkillContainer)

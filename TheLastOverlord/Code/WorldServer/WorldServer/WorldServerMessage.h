@@ -55,7 +55,7 @@ namespace WorldServer
         using ParentType = MessageType;
 
     public:
-        explicit WorldServerMessage(int64_t delta);
+        explicit WorldServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

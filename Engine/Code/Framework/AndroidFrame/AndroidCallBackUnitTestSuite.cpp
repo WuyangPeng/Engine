@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/05 18:51)
+///	引擎版本：0.9.0.12 (2023/06/13 14:52)
 
 #include "Framework/FrameworkExport.h"
 
@@ -18,18 +18,14 @@
 #include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 #include "Framework/WindowProcess/Detail/WindowMessageUnitTestSuiteStream.h"
 
-using std::make_shared;
-using std::move;
-using std::string;
-
-Framework::AndroidCallBackUnitTestSuite::AndroidCallBackUnitTestSuite(int64_t delta, const string& suiteName)
-    : ParentType{ delta }, streamType{ make_shared<StreamType>(true) }, impl{ suiteName, streamType->GetStreamShared() }, isInit{ false }
+Framework::AndroidCallBackUnitTestSuite::AndroidCallBackUnitTestSuite(int64_t delta, const std::string& suiteName)
+    : ParentType{ delta }, streamType{ std::make_shared<StreamType>(true) }, impl{ suiteName, streamType->GetStreamShared() }, isInit{ false }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Framework::AndroidCallBackUnitTestSuite::AndroidCallBackUnitTestSuite(AndroidCallBackUnitTestSuite&& rhs) noexcept
-    : ParentType{ move(rhs) }, streamType{ move(rhs.streamType) }, impl{ move(rhs.impl) }, isInit{ rhs.isInit }
+    : ParentType{ std::move(rhs) }, streamType{ move(rhs.streamType) }, impl{ std::move(rhs.impl) }, isInit{ rhs.isInit }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -38,10 +34,10 @@ Framework::AndroidCallBackUnitTestSuite& Framework::AndroidCallBackUnitTestSuite
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    ParentType::operator=(move(rhs));
+    ParentType::operator=(std::move(rhs));
 
     streamType = move(rhs.streamType);
-    impl = move(rhs.impl);
+    impl = std::move(rhs.impl);
     isInit = rhs.isInit;
 
     return *this;

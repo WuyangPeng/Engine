@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 23:01)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:44)
 
 #include "Vector3DToolsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,11 +13,8 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 #ifndef BUILDING_MATHEMATICS_STATIC
 
@@ -54,132 +51,132 @@ void Mathematics::Vector3ToolsTesting::MainTest()
 
 void Mathematics::Vector3ToolsTesting::DistanceTest()
 {
-    const Vector3F firstVector(3.0f, 4.0f, 5.0f);
+    const Vector3F vector0(3.0f, 4.0f, 5.0f);
 
-    ASSERT_APPROXIMATE(Vector3ToolsF::GetLength(firstVector), MathF::Sqrt(50.0f), 1e-8f);
-    ASSERT_APPROXIMATE(Vector3ToolsF::GetLengthSquared(firstVector), 50.0f, 1e-8f);
+    ASSERT_APPROXIMATE(Vector3ToolsF::GetLength(vector0), MathF::Sqrt(50.0f), 1e-8f);
+    ASSERT_APPROXIMATE(Vector3ToolsF::GetLengthSquared(vector0), 50.0f, 1e-8f);
 
-    const Vector3F secondVector(6.0f, 8.0f, 5.0f);
+    const Vector3F vector1(6.0f, 8.0f, 5.0f);
 
-    ASSERT_APPROXIMATE(Vector3ToolsF::Distance(firstVector, secondVector), 5.0f, 1e-8f);
-    ASSERT_APPROXIMATE(Vector3ToolsF::DistanceSquared(firstVector, secondVector), 25.0f, 1e-8f);
+    ASSERT_APPROXIMATE(Vector3ToolsF::Distance(vector0, vector1), 5.0f, 1e-8f);
+    ASSERT_APPROXIMATE(Vector3ToolsF::DistanceSquared(vector0, vector1), 25.0f, 1e-8f);
 }
 
 void Mathematics::Vector3ToolsTesting::ProductTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Vector3D firstVector(randomDistribution(generator),
-                             randomDistribution(generator),
-                             randomDistribution(generator));
+        Vector3D vector0(randomDistribution(generator),
+                         randomDistribution(generator),
+                         randomDistribution(generator));
 
-        Vector3D secondVector(randomDistribution(generator),
-                              randomDistribution(generator),
-                              randomDistribution(generator));
+        Vector3D vector1(randomDistribution(generator),
+                         randomDistribution(generator),
+                         randomDistribution(generator));
 
-        const double dotProduct = firstVector[0] * secondVector[0] +
-                                  firstVector[1] * secondVector[1] +
-                                  firstVector[2] * secondVector[2];
+        const double dotProduct = vector0[0] * vector1[0] +
+                                  vector0[1] * vector1[1] +
+                                  vector0[2] * vector1[2];
 
-        ASSERT_APPROXIMATE(Vector3ToolsD::DotProduct(firstVector, secondVector), dotProduct, 1e-10);
+        ASSERT_APPROXIMATE(Vector3ToolsD::DotProduct(vector0, vector1), dotProduct, 1e-10);
 
-        Vector3D crossProduct(firstVector.GetY() * secondVector.GetZ() - firstVector.GetZ() * secondVector.GetY(),
-                              firstVector.GetZ() * secondVector.GetX() - firstVector.GetX() * secondVector.GetZ(),
-                              firstVector.GetX() * secondVector.GetY() - firstVector.GetY() * secondVector.GetX());
+        Vector3D crossProduct(vector0.GetY() * vector1.GetZ() - vector0.GetZ() * vector1.GetY(),
+                              vector0.GetZ() * vector1.GetX() - vector0.GetX() * vector1.GetZ(),
+                              vector0.GetX() * vector1.GetY() - vector0.GetY() * vector1.GetX());
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(Vector3ToolsD::CrossProduct(firstVector, secondVector), crossProduct));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(Vector3ToolsD::CrossProduct(vector0, vector1), crossProduct));
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(Vector3ToolsD::CrossProductWithReduceMultiplication(firstVector, secondVector), crossProduct));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(Vector3ToolsD::CrossProductWithReduceMultiplication(vector0, vector1), crossProduct));
 
         crossProduct.Normalize();
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(Vector3ToolsD::UnitCrossProduct(firstVector, secondVector), crossProduct));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(Vector3ToolsD::UnitCrossProduct(vector0, vector1), crossProduct));
 
-        const Vector3D thirdVector(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D vector2(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        ASSERT_APPROXIMATE(Vector3ToolsD::ScalarTripleProduct(firstVector, secondVector, thirdVector),
-                           Vector3ToolsD::DotProduct(Vector3ToolsD::CrossProduct(firstVector, secondVector), thirdVector), 1e-10);
+        ASSERT_APPROXIMATE(Vector3ToolsD::ScalarTripleProduct(vector0, vector1, vector2),
+                           Vector3ToolsD::DotProduct(Vector3ToolsD::CrossProduct(vector0, vector1), vector2), 1e-10);
     }
 }
 
 void Mathematics::Vector3ToolsTesting::ProjectionTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D firstVector(randomDistribution(generator),
-                                   randomDistribution(generator),
-                                   randomDistribution(generator));
+        const Vector3D vector0(randomDistribution(generator),
+                               randomDistribution(generator),
+                               randomDistribution(generator));
 
-        const Vector3D secondVector(randomDistribution(generator),
-                                    randomDistribution(generator),
-                                    randomDistribution(generator));
+        const Vector3D vector1(randomDistribution(generator),
+                               randomDistribution(generator),
+                               randomDistribution(generator));
 
-        const double moduleSquare = Vector3ToolsD::GetLengthSquared(secondVector);
-        const Vector3D parallelVector = secondVector * (Vector3ToolsD::DotProduct(firstVector, secondVector) / moduleSquare);
+        const double moduleSquare = Vector3ToolsD::GetLengthSquared(vector1);
+        const Vector3D parallelVector = vector1 * (Vector3ToolsD::DotProduct(vector0, vector1) / moduleSquare);
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(parallelVector, Vector3ToolsD::ParallelVectorLhsToRhs(firstVector, secondVector)));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(parallelVector, Vector3ToolsD::ParallelVectorLhsToRhs(vector0, vector1)));
 
-        const Vector3D apeakVector = firstVector - parallelVector;
+        const Vector3D apeakVector = vector0 - parallelVector;
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(apeakVector, Vector3ToolsD::ApeakVectorLhsToRhs(firstVector, secondVector)));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(apeakVector, Vector3ToolsD::ApeakVectorLhsToRhs(vector0, vector1)));
 
-        const double angle = MathD::ACos(Vector3ToolsD::DotProduct(firstVector, secondVector) / (Vector3ToolsD::GetLength(firstVector) * Vector3ToolsD::GetLength(secondVector)));
+        const double angle = MathD::ACos(Vector3ToolsD::DotProduct(vector0, vector1) / (Vector3ToolsD::GetLength(vector0) * Vector3ToolsD::GetLength(vector1)));
 
-        ASSERT_APPROXIMATE(angle, Vector3ToolsD::GetVectorIncludedAngle(firstVector, secondVector), 1e-10);
+        ASSERT_APPROXIMATE(angle, Vector3ToolsD::GetVectorIncludedAngle(vector0, vector1), 1e-10);
 
-        const Vector3D reflectionVector = 2 * Vector3ToolsD::DotProduct(secondVector, firstVector) * secondVector - firstVector;
+        const Vector3D reflectionVector = 2 * Vector3ToolsD::DotProduct(vector1, vector0) * vector1 - vector0;
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(reflectionVector, Vector3ToolsD::ReflectionVector(firstVector, secondVector)));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(reflectionVector, Vector3ToolsD::ReflectionVector(vector0, vector1)));
 
         constexpr double consistencyRatio(0.6);
 
-        const double conphiSquare = Vector3ToolsD::DotProduct(-secondVector, firstVector) * Vector3ToolsD::DotProduct(-secondVector, firstVector);
+        const double conphiSquare = Vector3ToolsD::DotProduct(-vector1, vector0) * Vector3ToolsD::DotProduct(-vector1, vector0);
         constexpr double consistencyRatioSquare = consistencyRatio * consistencyRatio;
         const double costheta = 1 / consistencyRatioSquare * MathD::Sqrt(1 - consistencyRatioSquare * (1 - conphiSquare));
 
-        const Vector3D refractionVector = consistencyRatio * firstVector - (costheta + consistencyRatio * Vector3ToolsD::DotProduct(-secondVector, firstVector)) * secondVector;
+        const Vector3D refractionVector = consistencyRatio * vector0 - (costheta + consistencyRatio * Vector3ToolsD::DotProduct(-vector1, vector0)) * vector1;
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(refractionVector, Vector3ToolsD::RefractionVector(firstVector, secondVector, consistencyRatio)));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(refractionVector, Vector3ToolsD::RefractionVector(vector0, vector1, consistencyRatio)));
     }
 }
 
 void Mathematics::Vector3ToolsTesting::ConversionTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D firstVector(randomDistribution(generator),
-                                   randomDistribution(generator),
-                                   randomDistribution(generator));
+        const Vector3D vector0(randomDistribution(generator),
+                               randomDistribution(generator),
+                               randomDistribution(generator));
 
-        double delta = Half(firstVector.GetZ());
+        double delta = Half(vector0.GetZ());
 
-        const Vector3D secondVector(firstVector.GetX() * delta, firstVector.GetY() * delta, firstVector.GetZ());
+        const Vector3D vector1(vector0.GetX() * delta, vector0.GetY() * delta, vector0.GetZ());
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(secondVector, Vector3ToolsD::FeatheringOutZAxes(firstVector, Half)));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(vector1, Vector3ToolsD::FeatheringOutZAxes(vector0, Half)));
 
-        const Vector3D twistZAxesVector = Vector3ToolsD::TwistZAxes(firstVector, Half);
+        const Vector3D twistZAxesVector = Vector3ToolsD::TwistZAxes(vector0, Half);
 
-        ASSERT_APPROXIMATE(twistZAxesVector.GetZ(), firstVector.GetZ(), 1e-10);
+        ASSERT_APPROXIMATE(twistZAxesVector.GetZ(), vector0.GetZ(), 1e-10);
 
-        const double testValue = (firstVector.GetX() - firstVector.GetY()) * (MathD::Sin(delta) + MathD::Cos(delta));
+        const double testValue = (vector0.GetX() - vector0.GetY()) * (MathD::Sin(delta) + MathD::Cos(delta));
 
         ASSERT_APPROXIMATE(twistZAxesVector.GetX() + twistZAxesVector.GetY(), testValue, 1e-10);
 
@@ -188,43 +185,43 @@ void Mathematics::Vector3ToolsTesting::ConversionTest()
         const double bendAreaMin = randomDistribution(generator);
         const double bendAreaMax = bendAreaMin + 1000000.0;
 
-        const Vector3D bendYAxesVector = Vector3ToolsD::BendYAxes(firstVector, curvatureRadius, bendCenter, bendAreaMin, bendAreaMax);
+        const Vector3D bendYAxesVector = Vector3ToolsD::BendYAxes(vector0, curvatureRadius, bendCenter, bendAreaMin, bendAreaMax);
 
-        ASSERT_APPROXIMATE(bendYAxesVector.GetX(), firstVector.GetX(), 1e-10);
+        ASSERT_APPROXIMATE(bendYAxesVector.GetX(), vector0.GetX(), 1e-10);
 
-        double y = firstVector.GetY();
+        double y = vector0.GetY();
 
-        if (firstVector.GetY() <= bendAreaMin)
+        if (vector0.GetY() <= bendAreaMin)
             y = bendAreaMin;
-        else if (firstVector.GetY() >= bendAreaMax)
+        else if (vector0.GetY() >= bendAreaMax)
             y = bendAreaMax;
 
         delta = 1 / curvatureRadius * (y - bendCenter);
 
-        if (bendAreaMin <= firstVector.GetY() && firstVector.GetY() <= bendAreaMax)
+        if (bendAreaMin <= vector0.GetY() && vector0.GetY() <= bendAreaMax)
         {
-            ASSERT_APPROXIMATE(bendYAxesVector.GetY(), -MathD::Sin(delta) * (firstVector.GetZ() - curvatureRadius) + bendCenter, 1e-10);
+            ASSERT_APPROXIMATE(bendYAxesVector.GetY(), -MathD::Sin(delta) * (vector0.GetZ() - curvatureRadius) + bendCenter, 1e-10);
 
-            ASSERT_APPROXIMATE(bendYAxesVector.GetZ(), -MathD::Cos(delta) * (firstVector.GetZ() - curvatureRadius) + bendCenter, 1e-10);
+            ASSERT_APPROXIMATE(bendYAxesVector.GetZ(), -MathD::Cos(delta) * (vector0.GetZ() - curvatureRadius) + bendCenter, 1e-10);
         }
-        else if (firstVector.GetY() < bendAreaMin)
+        else if (vector0.GetY() < bendAreaMin)
         {
             ASSERT_APPROXIMATE(bendYAxesVector.GetY(),
-                               -MathD::Sin(delta) * (firstVector.GetZ() - curvatureRadius) + bendCenter + MathD::Cos(delta) * (firstVector.GetY() - bendAreaMin),
+                               -MathD::Sin(delta) * (vector0.GetZ() - curvatureRadius) + bendCenter + MathD::Cos(delta) * (vector0.GetY() - bendAreaMin),
                                1e-10);
 
             ASSERT_APPROXIMATE(bendYAxesVector.GetZ(),
-                               -MathD::Cos(delta) * (firstVector.GetZ() - curvatureRadius) + bendCenter + MathD::Sin(delta) * (firstVector.GetY() - bendAreaMin),
+                               -MathD::Cos(delta) * (vector0.GetZ() - curvatureRadius) + bendCenter + MathD::Sin(delta) * (vector0.GetY() - bendAreaMin),
                                1e-10);
         }
         else
         {
             ASSERT_APPROXIMATE(bendYAxesVector.GetY(),
-                               (-MathD::Sin(delta) * (firstVector.GetZ() - curvatureRadius) + curvatureRadius + MathD::Cos(delta) * (firstVector.GetY() - bendAreaMax)),
+                               (-MathD::Sin(delta) * (vector0.GetZ() - curvatureRadius) + curvatureRadius + MathD::Cos(delta) * (vector0.GetY() - bendAreaMax)),
                                1e-10);
 
             ASSERT_APPROXIMATE(bendYAxesVector.GetZ(),
-                               (-MathD::Cos(delta) * (firstVector.GetZ() - curvatureRadius) + curvatureRadius + MathD::Sin(delta) * (firstVector.GetY() - bendAreaMax)),
+                               (-MathD::Cos(delta) * (vector0.GetZ() - curvatureRadius) + curvatureRadius + MathD::Sin(delta) * (vector0.GetY() - bendAreaMax)),
                                1e-10);
         }
     }
@@ -232,35 +229,35 @@ void Mathematics::Vector3ToolsTesting::ConversionTest()
 
 void Mathematics::Vector3ToolsTesting::CompareTest()
 {
-    const Vector3F firstVector(6.0f, 8.0f, 9.0f);
-    const Vector3F secondVector(7.0f, 5.0f, 19.0f);
+    const Vector3F vector0(6.0f, 8.0f, 9.0f);
+    const Vector3F vector1(7.0f, 5.0f, 19.0f);
 
-    ASSERT_TRUE(Vector3ToolsF::Approximate(firstVector, firstVector));
-    ASSERT_TRUE(Vector3ToolsF::Approximate(secondVector, secondVector));
-    ASSERT_FALSE(Vector3ToolsF::Approximate(firstVector, secondVector));
+    ASSERT_TRUE(Vector3ToolsF::Approximate(vector0, vector0));
+    ASSERT_TRUE(Vector3ToolsF::Approximate(vector1, vector1));
+    ASSERT_FALSE(Vector3ToolsF::Approximate(vector0, vector1));
 
-    ASSERT_TRUE(firstVector == firstVector);
-    ASSERT_FALSE(firstVector == secondVector);
-    ASSERT_TRUE(firstVector != secondVector);
-    ASSERT_TRUE(firstVector < secondVector);
-    ASSERT_TRUE(firstVector <= secondVector);
-    ASSERT_FALSE(firstVector > secondVector);
-    ASSERT_FALSE(firstVector >= secondVector);
+    ASSERT_TRUE(vector0 == vector0);
+    ASSERT_FALSE(vector0 == vector1);
+    ASSERT_TRUE(vector0 != vector1);
+    ASSERT_TRUE(vector0 < vector1);
+    ASSERT_TRUE(vector0 <= vector1);
+    ASSERT_FALSE(vector0 > vector1);
+    ASSERT_FALSE(vector0 >= vector1);
 
     GetStream() << "以下是调试信息：\n";
-    GetStream() << firstVector << '\n';
-    GetStream() << secondVector << '\n';
+    GetStream() << vector0 << '\n';
+    GetStream() << vector1 << '\n';
 }
 
 void Mathematics::Vector3ToolsTesting::OtherCalculateTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
-    vector<Vector3D> vectors;
+    std::vector<Vector3D> vectors;
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
@@ -283,55 +280,55 @@ void Mathematics::Vector3ToolsTesting::OtherCalculateTest()
         ASSERT_TRUE(eachVector.GetZ() <= maxVector.GetZ());
     }
 
-    Vector3D firstVector(randomDistribution(generator),
-                         randomDistribution(generator),
-                         randomDistribution(generator));
-    Vector3D secondVector(randomDistribution(generator),
-                          randomDistribution(generator),
-                          randomDistribution(generator));
+    Vector3D vector0(randomDistribution(generator),
+                     randomDistribution(generator),
+                     randomDistribution(generator));
+    Vector3D vector1(randomDistribution(generator),
+                     randomDistribution(generator),
+                     randomDistribution(generator));
 
-    Vector3D thirdVector(randomDistribution(generator),
-                         randomDistribution(generator),
-                         randomDistribution(generator));
+    Vector3D vector2(randomDistribution(generator),
+                     randomDistribution(generator),
+                     randomDistribution(generator));
 
     vectors.clear();
-    vectors.push_back(firstVector);
-    vectors.push_back(secondVector);
-    vectors.push_back(thirdVector);
+    vectors.push_back(vector0);
+    vectors.push_back(vector1);
+    vectors.push_back(vector2);
 
-    const Vector3ToolsD::Vector3Orthonormalize firstOrthonormalize = Vector3ToolsD::Orthonormalize(firstVector, secondVector, thirdVector);
+    const Vector3ToolsD::Vector3Orthonormalize firstOrthonormalize = Vector3ToolsD::Orthonormalize(vector0, vector1, vector2);
 
     const Vector3ToolsD::Vector3Orthonormalize secondOrthonormaliz = Vector3ToolsD::Orthonormalize(vectors);
 
-    firstVector.Normalize();
-    double dot0 = Vector3ToolsD::DotProduct(firstVector, secondVector);
-    secondVector -= dot0 * firstVector;
-    secondVector.Normalize();
+    vector0.Normalize();
+    double dot0 = Vector3ToolsD::DotProduct(vector0, vector1);
+    vector1 -= dot0 * vector0;
+    vector1.Normalize();
 
-    const double dot1 = Vector3ToolsD::DotProduct(secondVector, thirdVector);
-    dot0 = Vector3ToolsD::DotProduct(firstVector, thirdVector);
-    thirdVector -= dot0 * firstVector + dot1 * secondVector;
-    thirdVector.Normalize();
+    const double dot1 = Vector3ToolsD::DotProduct(vector1, vector2);
+    dot0 = Vector3ToolsD::DotProduct(vector0, vector2);
+    vector2 -= dot0 * vector0 + dot1 * vector1;
+    vector2.Normalize();
 
-    ASSERT_TRUE(Vector3ToolsD::Approximate(firstVector, firstOrthonormalize.GetUVector()));
-    ASSERT_TRUE(Vector3ToolsD::Approximate(secondVector, firstOrthonormalize.GetVVector()));
-    ASSERT_TRUE(Vector3ToolsD::Approximate(thirdVector, firstOrthonormalize.GetWVector()));
-    ASSERT_TRUE(Vector3ToolsD::Approximate(firstVector, secondOrthonormaliz.GetUVector()));
-    ASSERT_TRUE(Vector3ToolsD::Approximate(secondVector, secondOrthonormaliz.GetVVector()));
-    ASSERT_TRUE(Vector3ToolsD::Approximate(thirdVector, secondOrthonormaliz.GetWVector()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(vector0, firstOrthonormalize.GetUVector()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(vector1, firstOrthonormalize.GetVVector()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(vector2, firstOrthonormalize.GetWVector()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(vector0, secondOrthonormaliz.GetUVector()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(vector1, secondOrthonormaliz.GetVVector()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(vector2, secondOrthonormaliz.GetWVector()));
 
-    Vector3D fourthVector(randomDistribution(generator),
-                          randomDistribution(generator),
-                          randomDistribution(generator));
+    Vector3D vector3(randomDistribution(generator),
+                     randomDistribution(generator),
+                     randomDistribution(generator));
 
-    const Vector3OrthonormalBasisD firstOrthonormalBasis = Vector3ToolsD::GenerateOrthonormalBasis(fourthVector);
+    const Vector3OrthonormalBasisD firstOrthonormalBasis = Vector3ToolsD::GenerateOrthonormalBasis(vector3);
 
-    fourthVector.Normalize();
+    vector3.Normalize();
 
-    const Vector3OrthonormalBasisD secondOrthonormalBasis = Vector3ToolsD::GenerateComplementBasis(fourthVector);
+    const Vector3OrthonormalBasisD secondOrthonormalBasis = Vector3ToolsD::GenerateComplementBasis(vector3);
 
-    ASSERT_TRUE(Vector3ToolsD::Approximate(fourthVector, firstOrthonormalBasis.GetWVector()));
-    ASSERT_TRUE(Vector3ToolsD::Approximate(fourthVector, firstOrthonormalBasis.GetWVector()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(vector3, firstOrthonormalBasis.GetWVector()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(vector3, firstOrthonormalBasis.GetWVector()));
 
     ASSERT_TRUE(Vector3ToolsD::Approximate(firstOrthonormalBasis.GetUVector(), secondOrthonormalBasis.GetUVector()));
 

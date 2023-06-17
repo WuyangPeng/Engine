@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.8.0.11 (2022/07/19 14:05)
+///	引擎游戏版本：0.9.0.12 (2023/06/16 16:54)
 
 #ifndef INSTANCE_HELPER_USER_HELPER_H
 #define INSTANCE_HELPER_USER_HELPER_H
@@ -22,13 +22,14 @@
 static_assert(0 <= COMPILE_INSTANCE_CLOSE, "COMPILE_INSTANCE_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_INSTANCE_CLOSE <= CLOSE_INSTANCE_MAX, "COMPILE_INSTANCE_CLOSE Must be less than or equal CLOSE_INSTANCE_MAX.");
 
-// 是否编译为静态库
-#ifdef BUILDING_GAME_STATIC
-    #define BUILDING_INSTANCE_STATIC
-#endif  // BUILDING_GAME_STATIC
-
 #if !defined(COMPILE_INSTANCE_CLOSE) || (COMPILE_INSTANCE_CLOSE & CLOSE_USE_XXX) != CLOSE_USE_XXX
 
 #endif  // !defined(COMPILE_INSTANCE_CLOSE) || (COMPILE_INSTANCE_CLOSE & CLOSE_USE_XXX) != CLOSE_USE_XXX
+
+#ifdef BUILDING_GAME_STATIC
+
+    #define BUILDING_INSTANCE_STATIC
+
+#endif  // BUILDING_GAME_STATIC
 
 #endif  // INSTANCE_HELPER_USER_HELPER_H

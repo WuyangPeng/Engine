@@ -8,7 +8,7 @@
 #define %ProjectCapital%_%ManagerCapital%_MACRO_USER_MACRO_H
 
 #include "Framework/Helper/UserMacro.h" 
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "CoreTools/Assert/Assertion.h"
 
 #if !defined(%ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL)

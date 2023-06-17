@@ -98,13 +98,13 @@ void System::CompareStringUseLocaleStringTesting::CompareStringTest(size_t index
     CompareStringOppositeTest(languageLocaleString, compare, lhsComparesWString, rhsComparesWString);
 }
 
-void System::CompareStringUseLocaleStringTesting::CompareStringEqualTest(const wchar_t* languageLocaleString, Compares compare, const String& comparesWString)
+void System::CompareStringUseLocaleStringTesting::CompareStringEqualTest(const wchar_t* languageLocaleString, Compares compare, const std::wstring& comparesWString)
 {
     const auto result = CompareStringUseLocale(languageLocaleString, compare, comparesWString, comparesWString);
     ASSERT_ENUM_EQUAL(result, ComparesStringReturn::Equal);
 }
 
-void System::CompareStringUseLocaleStringTesting::CompareStringOppositeTest(const wchar_t* languageLocaleString, Compares compare, const String& lhsComparesWString, const String& rhsComparesWString)
+void System::CompareStringUseLocaleStringTesting::CompareStringOppositeTest(const wchar_t* languageLocaleString, Compares compare, const std::wstring& lhsComparesWString, const std::wstring& rhsComparesWString)
 {
     const auto lhsCompareRhs = CompareStringUseLocale(languageLocaleString, compare, lhsComparesWString, rhsComparesWString);
     const auto rhsCompareLhs = CompareStringUseLocale(languageLocaleString, compare, rhsComparesWString, lhsComparesWString);

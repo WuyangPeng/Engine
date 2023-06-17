@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.0 (2022/08/16 10:57)
+///	引擎版本：0.9.0.12 (2023/06/12 11:29)
 
 #include "Rendering/RenderingExport.h"
 
@@ -31,8 +31,6 @@ COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Texture3D)
 CORE_TOOLS_RTTI_DEFINE(Rendering, Texture3D);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture3D);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture3D);
-
-using std::make_shared;
 
 Rendering::Texture3D::Texture3D(DataFormatType format, int width, int height, int thickness, bool hasMipmaps)
     : ParentType{ ImplType::GetTotalElements(1, width, height, thickness, hasMipmaps),

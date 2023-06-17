@@ -1,24 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 18:38)
+///	引擎测试版本：0.9.0.12 (2023/06/09 13:03)
 
 #include "AQuaternionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/AQuaternionDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
+#include <random>
 
 #ifndef BUILDING_MATHEMATICS_STATIC
 
@@ -54,458 +51,414 @@ void Mathematics::AQuaternionTesting::MainTest()
 
 void Mathematics::AQuaternionTesting::ConstructionTest()
 {
-    AQuaternionF firstQuaternion;
+    AQuaternionF quaternion0;
 
-    ASSERT_APPROXIMATE(firstQuaternion[0], 0.0f, 1e-10f);
-    ASSERT_APPROXIMATE(firstQuaternion[1], 0.0f, 1e-10f);
-    ASSERT_APPROXIMATE(firstQuaternion[2], 0.0f, 1e-10f);
-    ASSERT_APPROXIMATE(firstQuaternion[3], 0.0f, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion0[0], 0.0f, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion0[1], 0.0f, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion0[2], 0.0f, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion0[3], 0.0f, 1e-10f);
 
-    AQuaternionF secondQuaternion{ 3.0, 5.0, 6.0, 7.0 };
+    AQuaternionF quaternion1{ 3.0, 5.0, 6.0, 7.0 };
 
-    ASSERT_APPROXIMATE(secondQuaternion[0], 3.0, 1e-10f);
-    ASSERT_APPROXIMATE(secondQuaternion[1], 5.0, 1e-10f);
-    ASSERT_APPROXIMATE(secondQuaternion[2], 6.0, 1e-10f);
-    ASSERT_APPROXIMATE(secondQuaternion[3], 7.0, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion1[0], 3.0, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion1[1], 5.0, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion1[2], 6.0, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion1[3], 7.0, 1e-10f);
 
-    AQuaternionF thirdQuaternion{ secondQuaternion };
+    AQuaternionF quaternion2{ quaternion1 };
 
-    ASSERT_APPROXIMATE(thirdQuaternion[0], 3.0, 1e-10f);
-    ASSERT_APPROXIMATE(thirdQuaternion[1], 5.0, 1e-10f);
-    ASSERT_APPROXIMATE(thirdQuaternion[2], 6.0, 1e-10f);
-    ASSERT_APPROXIMATE(thirdQuaternion[3], 7.0, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion2[0], 3.0, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion2[1], 5.0, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion2[2], 6.0, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion2[3], 7.0, 1e-10f);
 
-    thirdQuaternion[0] = 5.0;
-    thirdQuaternion[1] = 15.0;
-    thirdQuaternion[2] = 25.0;
-    thirdQuaternion[3] = 35.0;
+    quaternion2[0] = 5.0;
+    quaternion2[1] = 15.0;
+    quaternion2[2] = 25.0;
+    quaternion2[3] = 35.0;
 
-    ASSERT_APPROXIMATE(secondQuaternion[0], 3.0, 1e-10f);
-    ASSERT_APPROXIMATE(secondQuaternion[1], 5.0, 1e-10f);
-    ASSERT_APPROXIMATE(secondQuaternion[2], 6.0, 1e-10f);
-    ASSERT_APPROXIMATE(secondQuaternion[3], 7.0, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion1[0], 3.0, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion1[1], 5.0, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion1[2], 6.0, 1e-10f);
+    ASSERT_APPROXIMATE(quaternion1[3], 7.0, 1e-10f);
 
-    secondQuaternion = thirdQuaternion;
+    quaternion1 = quaternion2;
 
-    ASSERT_APPROXIMATE(secondQuaternion[0], 5.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion[1], 15.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion[2], 25.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion[3], 35.0, 1e-10);
-
-    default_random_engine randomEngine{};
-    const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
-    const uniform_real<float> secondRandomDistribution{ 0.0f, MathF::GetTwoPI() };
-
-    for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
-    {
-        AVectorF firstVector{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
-
-        firstVector.Normalize();
-
-        const float firstFloat{ secondRandomDistribution(randomEngine) };
-
-        const MatrixF firstMatrix{ firstVector, firstFloat };
-
-        AQuaternionF fourthQuaternion{ firstMatrix };
-
-        auto secondMatrix = fourthQuaternion.ToRotationMatrix();
-
-        ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-6f));
-
-        const AQuaternionF fifthQuaternion{ firstVector, firstFloat };
-
-        auto secondVector = fifthQuaternion.ToAxis();
-        auto secondFloat = fifthQuaternion.ToAngle();
-
-        ASSERT_TRUE(Approximate(firstVector, secondVector, 1e-6f));
-        ASSERT_APPROXIMATE(firstFloat, secondFloat, 1e-5f);
-
-        fourthQuaternion.FromRotationMatrix(firstMatrix);
-
-        secondMatrix = fourthQuaternion.ToRotationMatrix();
-
-        ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-6f));
-
-        fourthQuaternion.FromAxisAngle(firstVector, firstFloat);
-
-        secondVector = fifthQuaternion.ToAxis();
-        secondFloat = fifthQuaternion.ToAngle();
-
-        ASSERT_TRUE(Approximate(firstVector, secondVector, 1e-6f));
-        ASSERT_APPROXIMATE(firstFloat, secondFloat, 1e-5f);
-    }
+    ASSERT_APPROXIMATE(quaternion1[0], 5.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1[1], 15.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1[2], 25.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1[3], 35.0, 1e-10);
 }
 
 void Mathematics::AQuaternionTesting::AccessTest()
 {
-    const AQuaternionF firstQuaternion{ 3.0f, 5.0f, 6.0f, 7.0f };
+    constexpr AQuaternionF quaternion0{ 3.0f, 5.0f, 6.0f, 7.0f };
 
-    ASSERT_APPROXIMATE(firstQuaternion[0], 3.0f, 1e-8f);
-    ASSERT_APPROXIMATE(firstQuaternion[1], 5.0f, 1e-8f);
-    ASSERT_APPROXIMATE(firstQuaternion[2], 6.0f, 1e-8f);
-    ASSERT_APPROXIMATE(firstQuaternion[3], 7.0f, 1e-8f);
+    ASSERT_APPROXIMATE(quaternion0[0], 3.0f, 1e-8f);
+    ASSERT_APPROXIMATE(quaternion0[1], 5.0f, 1e-8f);
+    ASSERT_APPROXIMATE(quaternion0[2], 6.0f, 1e-8f);
+    ASSERT_APPROXIMATE(quaternion0[3], 7.0f, 1e-8f);
 
-    AQuaternionD secondQuaternion(23.0, 25.0, 62.0, 27.0);
+    AQuaternionD quaternion1(23.0, 25.0, 62.0, 27.0);
 
-    ASSERT_APPROXIMATE(secondQuaternion[0], 23.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion[1], 25.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion[2], 62.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion[3], 27.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1[0], 23.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1[1], 25.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1[2], 62.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1[3], 27.0, 1e-10);
 
-    ASSERT_APPROXIMATE(secondQuaternion.GetW(), 23.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetX(), 25.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetY(), 62.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetZ(), 27.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetW(), 23.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetX(), 25.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetY(), 62.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetZ(), 27.0, 1e-10);
 
-    secondQuaternion.SetW(3.0);
+    quaternion1.SetW(3.0);
 
-    ASSERT_APPROXIMATE(secondQuaternion.GetW(), 3.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetX(), 25.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetY(), 62.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetZ(), 27.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetW(), 3.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetX(), 25.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetY(), 62.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetZ(), 27.0, 1e-10);
 
-    secondQuaternion.SetX(4.5);
+    quaternion1.SetX(4.5);
 
-    ASSERT_APPROXIMATE(secondQuaternion.GetW(), 3.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetX(), 4.5, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetY(), 62.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetZ(), 27.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetW(), 3.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetX(), 4.5, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetY(), 62.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetZ(), 27.0, 1e-10);
 
-    secondQuaternion.SetY(14.5);
+    quaternion1.SetY(14.5);
 
-    ASSERT_APPROXIMATE(secondQuaternion.GetW(), 3.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetX(), 4.5, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetY(), 14.5, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetZ(), 27.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetW(), 3.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetX(), 4.5, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetY(), 14.5, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetZ(), 27.0, 1e-10);
 
-    secondQuaternion.SetZ(7.77);
+    quaternion1.SetZ(7.77);
 
-    ASSERT_APPROXIMATE(secondQuaternion.GetW(), 3.0, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetX(), 4.5, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetY(), 14.5, 1e-10);
-    ASSERT_APPROXIMATE(secondQuaternion.GetZ(), 7.77, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetW(), 3.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetX(), 4.5, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetY(), 14.5, 1e-10);
+    ASSERT_APPROXIMATE(quaternion1.GetZ(), 7.77, 1e-10);
 }
 
 void Mathematics::AQuaternionTesting::OperatorCalculateTest()
 {
-    default_random_engine randomEngine{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
-    const uniform_real<double> secondRandomDistribution{ 0.0, MathD::GetTwoPI() };
+    std::default_random_engine randomEngine{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
+    const std::uniform_real<double> randomDistribution1{ 0.0, MathD::GetTwoPI() };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        AVectorD firstVector{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+        AVectorD vector0{ randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine) };
 
-        firstVector.Normalize();
+        vector0.Normalize();
 
-        const double firstDouble{ secondRandomDistribution(randomEngine) };
+        const double double0{ randomDistribution1(randomEngine) };
 
-        const AQuaternionD firstQuaternion{ firstVector, firstDouble };
+        const AQuaternionD quaternion0{ vector0, double0 };
 
-        AVectorD secondVector{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+        AVectorD vector1{ randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine) };
 
-        secondVector.Normalize();
+        vector1.Normalize();
 
-        const double secondDouble{ secondRandomDistribution(randomEngine) };
+        const double double1{ randomDistribution1(randomEngine) };
 
-        const AQuaternionD secondQuaternion{ secondVector, secondDouble };
+        const AQuaternionD quaternion1{ vector1, double1 };
 
-        const auto thirdQuaternion = firstQuaternion * secondQuaternion;
+        const auto quaternion2 = quaternion0 * quaternion1;
 
-        const AQuaternionD fourthQuaternion{ MatrixD(firstVector, firstDouble) * MatrixD(secondVector, secondDouble) };
+        const AQuaternionD quaternion3{ MatrixD(vector0, double0) * MatrixD(vector1, double1) };
 
-        ASSERT_TRUE(Approximate(thirdQuaternion, fourthQuaternion, 1e-10) || Approximate(thirdQuaternion, -fourthQuaternion, 1e-10));
+        ASSERT_TRUE(Approximate(quaternion2, quaternion3, 1e-10) || Approximate(quaternion2, -quaternion3, 1e-10));
 
-        const auto firstMatrix = thirdQuaternion.ToRotationMatrix();
-        const auto secondMatrix = fourthQuaternion.ToRotationMatrix();
+        const auto matrix0 = quaternion2.ToRotationMatrix();
+        const auto matrix1 = quaternion3.ToRotationMatrix();
 
-        ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-10));
+        ASSERT_TRUE(Approximate(matrix0, matrix1, 1e-10));
 
-        AQuaternionD fifthQuaternion{ firstQuaternion };
+        AQuaternionD quaternion4{ quaternion0 };
 
-        fifthQuaternion *= secondQuaternion;
+        quaternion4 *= quaternion1;
 
-        const auto thirdMatrix = fifthQuaternion.ToRotationMatrix();
-        const auto fourthMatrix = fourthQuaternion.ToRotationMatrix();
+        const auto matrix2 = quaternion4.ToRotationMatrix();
+        const auto matrix3 = quaternion3.ToRotationMatrix();
 
-        ASSERT_TRUE(Approximate(firstMatrix, fourthMatrix, 1e-10));
+        ASSERT_TRUE(Approximate(matrix0, matrix3, 1e-10));
 
-        AQuaternionD sixthQuaternion{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+        AQuaternionD quaternion5{ randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine) };
 
-        auto seventhQuaternion = -sixthQuaternion;
+        auto seventhQuaternion = -quaternion5;
 
-        ASSERT_APPROXIMATE(sixthQuaternion[0], -seventhQuaternion[0], 1e-10);
-        ASSERT_APPROXIMATE(sixthQuaternion[1], -seventhQuaternion[1], 1e-10);
-        ASSERT_APPROXIMATE(sixthQuaternion[2], -seventhQuaternion[2], 1e-10);
-        ASSERT_APPROXIMATE(sixthQuaternion[3], -seventhQuaternion[3], 1e-10);
+        ASSERT_APPROXIMATE(quaternion5[0], -seventhQuaternion[0], 1e-10);
+        ASSERT_APPROXIMATE(quaternion5[1], -seventhQuaternion[1], 1e-10);
+        ASSERT_APPROXIMATE(quaternion5[2], -seventhQuaternion[2], 1e-10);
+        ASSERT_APPROXIMATE(quaternion5[3], -seventhQuaternion[3], 1e-10);
 
-        fifthQuaternion *= secondQuaternion;
+        quaternion4 *= quaternion1;
     }
 
-    const AQuaternionD eighthQuaternion{ 3.0, 5.1, 6.7, 8.71 };
-    const AQuaternionD ninthQuaternion{ 13.1, 15.0, 16.71, 18.7 };
+    const AQuaternionD quaternion6{ 3.0, 5.1, 6.7, 8.71 };
+    const AQuaternionD quaternion7{ 13.1, 15.0, 16.71, 18.7 };
 
-    auto tenthQuaternion = eighthQuaternion + ninthQuaternion;
+    auto quaternion8 = quaternion6 + quaternion7;
 
-    ASSERT_APPROXIMATE(tenthQuaternion[0], 16.1, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[1], 20.1, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[2], 23.41, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[3], 27.41, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[0], 16.1, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[1], 20.1, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[2], 23.41, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[3], 27.41, 1e-10);
 
-    tenthQuaternion = eighthQuaternion - ninthQuaternion;
+    quaternion8 = quaternion6 - quaternion7;
 
-    ASSERT_APPROXIMATE(tenthQuaternion[0], -10.1, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[1], -9.9, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[2], -10.01, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[3], -9.99, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[0], -10.1, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[1], -9.9, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[2], -10.01, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[3], -9.99, 1e-10);
 
-    tenthQuaternion = eighthQuaternion * 4.0;
+    quaternion8 = quaternion6 * 4.0;
 
-    ASSERT_APPROXIMATE(tenthQuaternion[0], 12.0, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[1], 20.4, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[2], 26.8, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[3], 34.84, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[0], 12.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[1], 20.4, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[2], 26.8, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[3], 34.84, 1e-10);
 
-    tenthQuaternion = 20.0 * eighthQuaternion;
+    quaternion8 = 20.0 * quaternion6;
 
-    ASSERT_APPROXIMATE(tenthQuaternion[0], 60.0, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[1], 102.0, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[2], 134.0, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[3], 174.2, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[0], 60.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[1], 102.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[2], 134.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[3], 174.2, 1e-10);
 
-    tenthQuaternion = eighthQuaternion / 2.0;
+    quaternion8 = quaternion6 / 2.0;
 
-    ASSERT_APPROXIMATE(tenthQuaternion[0], 1.5, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[1], 2.55, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[2], 3.35, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[3], 4.355, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[0], 1.5, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[1], 2.55, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[2], 3.35, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[3], 4.355, 1e-10);
 
-    tenthQuaternion = eighthQuaternion;
+    quaternion8 = quaternion6;
 
-    tenthQuaternion += ninthQuaternion;
+    quaternion8 += quaternion7;
 
-    ASSERT_APPROXIMATE(tenthQuaternion[0], 16.1, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[1], 20.1, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[2], 23.41, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[3], 27.41, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[0], 16.1, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[1], 20.1, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[2], 23.41, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[3], 27.41, 1e-10);
 
-    tenthQuaternion = eighthQuaternion;
+    quaternion8 = quaternion6;
 
-    tenthQuaternion -= ninthQuaternion;
+    quaternion8 -= quaternion7;
 
-    ASSERT_APPROXIMATE(tenthQuaternion[0], -10.1, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[1], -9.9, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[2], -10.01, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[3], -9.99, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[0], -10.1, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[1], -9.9, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[2], -10.01, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[3], -9.99, 1e-10);
 
-    tenthQuaternion = eighthQuaternion;
+    quaternion8 = quaternion6;
 
-    tenthQuaternion *= 4.0;
+    quaternion8 *= 4.0;
 
-    ASSERT_APPROXIMATE(tenthQuaternion[0], 12.0, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[1], 20.4, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[2], 26.8, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[3], 34.84, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[0], 12.0, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[1], 20.4, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[2], 26.8, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[3], 34.84, 1e-10);
 
-    tenthQuaternion = eighthQuaternion;
+    quaternion8 = quaternion6;
 
-    tenthQuaternion /= 2.0;
+    quaternion8 /= 2.0;
 
-    ASSERT_APPROXIMATE(tenthQuaternion[0], 1.5, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[1], 2.55, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[2], 3.35, 1e-10);
-    ASSERT_APPROXIMATE(tenthQuaternion[3], 4.355, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[0], 1.5, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[1], 2.55, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[2], 3.35, 1e-10);
+    ASSERT_APPROXIMATE(quaternion8[3], 4.355, 1e-10);
 }
 
 void Mathematics::AQuaternionTesting::ArithmeticCalculateTest()
 {
-    default_random_engine randomEngine{};
-    const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
-    const uniform_real<float> secondRandomDistribution{ 0.0, MathF::GetTwoPI() };
-    const uniform_real<float> thirdRandomDistribution{ 0.0f, 1.0f };
-    const uniform_int<> fourthRandomDistribution{ 0, 20 };
+    std::default_random_engine randomEngine{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution0{ -100.0f, 100.0f };
+    const std::uniform_real<float> randomDistribution1{ 0.0, MathF::GetTwoPI() };
+    const std::uniform_real<float> randomDistribution2{ 0.0f, 1.0f };
+    const std::uniform_int<> randomDistribution3{ 0, 20 };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        AQuaternionF firstQuaternion{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+        AQuaternionF quaternion0{ randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine) };
 
-        auto length = firstQuaternion[0] * firstQuaternion[0] + firstQuaternion[1] * firstQuaternion[1] + firstQuaternion[2] * firstQuaternion[2] + firstQuaternion[3] * firstQuaternion[3];
+        auto length = quaternion0[0] * quaternion0[0] + quaternion0[1] * quaternion0[1] + quaternion0[2] * quaternion0[2] + quaternion0[3] * quaternion0[3];
 
-        ASSERT_APPROXIMATE(length, firstQuaternion.SquaredLength(), 1e-8f);
+        ASSERT_APPROXIMATE(length, quaternion0.SquaredLength(), 1e-8f);
 
         length = MathF::Sqrt(length);
 
-        ASSERT_APPROXIMATE(length, firstQuaternion.Length(), 1e-8f);
+        ASSERT_APPROXIMATE(length, quaternion0.Length(), 1e-8f);
 
-        AQuaternionF secondQuaternion{ firstQuaternion };
+        AQuaternionF quaternion1{ quaternion0 };
 
-        secondQuaternion.Normalize();
+        quaternion1.Normalize();
 
-        ASSERT_APPROXIMATE(firstQuaternion[0], secondQuaternion[0] * length, 1e-5f);
-        ASSERT_APPROXIMATE(firstQuaternion[1], secondQuaternion[1] * length, 1e-5f);
-        ASSERT_APPROXIMATE(firstQuaternion[2], secondQuaternion[2] * length, 1e-5f);
-        ASSERT_APPROXIMATE(firstQuaternion[3], secondQuaternion[3] * length, 1e-5f);
+        ASSERT_APPROXIMATE(quaternion0[0], quaternion1[0] * length, 1e-5f);
+        ASSERT_APPROXIMATE(quaternion0[1], quaternion1[1] * length, 1e-5f);
+        ASSERT_APPROXIMATE(quaternion0[2], quaternion1[2] * length, 1e-5f);
+        ASSERT_APPROXIMATE(quaternion0[3], quaternion1[3] * length, 1e-5f);
 
-        secondQuaternion = firstQuaternion.Inverse();
+        quaternion1 = quaternion0.Inverse();
 
-        AQuaternionF thirdQuaternion = secondQuaternion * firstQuaternion;
+        AQuaternionF quaternion2 = quaternion1 * quaternion0;
 
-        ASSERT_APPROXIMATE(thirdQuaternion[0], 1.0f, 1e-6f);
-        ASSERT_APPROXIMATE(thirdQuaternion[1], 0.0f, 1e-7f);
-        ASSERT_APPROXIMATE(thirdQuaternion[2], 0.0f, 1e-7f);
-        ASSERT_APPROXIMATE(thirdQuaternion[3], 0.0f, 1e-7f);
+        ASSERT_APPROXIMATE(quaternion2[0], 1.0f, 1e-6f);
+        ASSERT_APPROXIMATE(quaternion2[1], 0.0f, 1e-7f);
+        ASSERT_APPROXIMATE(quaternion2[2], 0.0f, 1e-7f);
+        ASSERT_APPROXIMATE(quaternion2[3], 0.0f, 1e-7f);
 
-        thirdQuaternion = firstQuaternion * secondQuaternion;
+        quaternion2 = quaternion0 * quaternion1;
 
-        ASSERT_APPROXIMATE(thirdQuaternion[0], 1.0f, 1e-6f);
-        ASSERT_APPROXIMATE(thirdQuaternion[1], 0.0f, 1e-7f);
-        ASSERT_APPROXIMATE(thirdQuaternion[2], 0.0f, 1e-7f);
-        ASSERT_APPROXIMATE(thirdQuaternion[3], 0.0f, 1e-7f);
+        ASSERT_APPROXIMATE(quaternion2[0], 1.0f, 1e-6f);
+        ASSERT_APPROXIMATE(quaternion2[1], 0.0f, 1e-7f);
+        ASSERT_APPROXIMATE(quaternion2[2], 0.0f, 1e-7f);
+        ASSERT_APPROXIMATE(quaternion2[3], 0.0f, 1e-7f);
 
-        thirdQuaternion = firstQuaternion.Conjugate();
+        quaternion2 = quaternion0.Conjugate();
 
-        ASSERT_APPROXIMATE(thirdQuaternion[0], firstQuaternion[0], 1e-8f);
-        ASSERT_APPROXIMATE(thirdQuaternion[1], -firstQuaternion[1], 1e-8f);
-        ASSERT_APPROXIMATE(thirdQuaternion[2], -firstQuaternion[2], 1e-8f);
-        ASSERT_APPROXIMATE(thirdQuaternion[3], -firstQuaternion[3], 1e-8f);
+        ASSERT_APPROXIMATE(quaternion2[0], quaternion0[0], 1e-8f);
+        ASSERT_APPROXIMATE(quaternion2[1], -quaternion0[1], 1e-8f);
+        ASSERT_APPROXIMATE(quaternion2[2], -quaternion0[2], 1e-8f);
+        ASSERT_APPROXIMATE(quaternion2[3], -quaternion0[3], 1e-8f);
 
-        firstQuaternion[0] = 0.0f;
-        secondQuaternion = firstQuaternion.Exp();
-        thirdQuaternion = secondQuaternion.Log();
+        quaternion0[0] = 0.0f;
+        quaternion1 = quaternion0.Exp();
+        quaternion2 = quaternion1.Log();
 
-        firstQuaternion.Normalize();
-        thirdQuaternion.Normalize();
+        quaternion0.Normalize();
+        quaternion2.Normalize();
 
-        ASSERT_TRUE(Approximate(thirdQuaternion, firstQuaternion, 1e-6f) || Approximate(thirdQuaternion, -firstQuaternion, 1e-6f));
+        ASSERT_TRUE(Approximate(quaternion2, quaternion0, 1e-6f) || Approximate(quaternion2, -quaternion0, 1e-6f));
 
-        firstQuaternion = secondQuaternion;
-        secondQuaternion = firstQuaternion.Log();
-        thirdQuaternion = secondQuaternion.Exp();
+        quaternion0 = quaternion1;
+        quaternion1 = quaternion0.Log();
+        quaternion2 = quaternion1.Exp();
 
-        ASSERT_TRUE(Approximate(thirdQuaternion, firstQuaternion, 1e-2f));
+        ASSERT_TRUE(Approximate(quaternion2, quaternion0, 1e-2f));
 
-        const AVectorF firstVector{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+        const AVectorF vector0{ randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine) };
 
-        const auto secondVector = firstQuaternion.Rotate(firstVector);
-        const auto thirdVector = firstQuaternion.ToRotationMatrix() * firstVector;
+        const auto vector1 = quaternion0.Rotate(vector0);
+        const auto vector2 = quaternion0.ToRotationMatrix() * vector0;
 
-        ASSERT_TRUE(Approximate(secondVector, thirdVector, 1e-4f));
+        ASSERT_TRUE(Approximate(vector1, vector2, 1e-4f));
 
-        AVectorD fourthVector{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+        AVectorD vector3{ randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine) };
 
-        fourthVector.Normalize();
+        vector3.Normalize();
 
-        const double firstDouble{ secondRandomDistribution(randomEngine) };
+        const double double0{ randomDistribution1(randomEngine) };
 
-        AQuaternionD fourthQuaternion{ fourthVector, firstDouble };
+        AQuaternionD quaternion3{ vector3, double0 };
 
-        AVectorD fifthVector{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+        AVectorD vector4{ randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine) };
 
-        fifthVector.Normalize();
+        vector4.Normalize();
 
-        const double secondDouble{ secondRandomDistribution(randomEngine) };
+        const double double1{ randomDistribution1(randomEngine) };
 
-        AQuaternionD fifthQuaternion{ fifthVector, secondDouble };
+        AQuaternionD quaternion4{ vector4, double1 };
 
-        AQuaternionD sixthQuaternion;
+        AQuaternionD quaternion5{};
 
-        sixthQuaternion.Slerp(0.0, fourthQuaternion, fifthQuaternion);
+        quaternion5.Slerp(0.0, quaternion3, quaternion4);
 
-        ASSERT_TRUE(Approximate(fourthQuaternion, sixthQuaternion, 1e-10));
+        ASSERT_TRUE(Approximate(quaternion3, quaternion5, 1e-10));
 
-        sixthQuaternion.Slerp(1.0, fourthQuaternion, fifthQuaternion);
+        quaternion5.Slerp(1.0, quaternion3, quaternion4);
 
-        ASSERT_TRUE(Approximate(fifthQuaternion, sixthQuaternion, 1e-10));
+        ASSERT_TRUE(Approximate(quaternion4, quaternion5, 1e-10));
 
-        auto firstT = thirdRandomDistribution(randomEngine);
+        auto t0 = randomDistribution2(randomEngine);
 
-        sixthQuaternion.Slerp(firstT, fourthQuaternion, fifthQuaternion);
+        quaternion5.Slerp(t0, quaternion3, quaternion4);
 
-        auto cosValue = Dot(fourthQuaternion, fifthQuaternion);
+        auto cosValue = Dot(quaternion3, quaternion4);
         auto angle = MathD::ACos(cosValue);
 
-        auto passAngle = MathD::ACos(Dot(fourthQuaternion, sixthQuaternion));
-        auto remainAngle = MathD::ACos(Dot(sixthQuaternion, fifthQuaternion));
+        auto passAngle = MathD::ACos(Dot(quaternion3, quaternion5));
+        auto remainAngle = MathD::ACos(Dot(quaternion5, quaternion4));
 
         ASSERT_APPROXIMATE(passAngle + remainAngle, angle, 0.00001);
-        ASSERT_APPROXIMATE(passAngle / angle, firstT, 0.00001);
-        ASSERT_APPROXIMATE(remainAngle / angle, 1.0 - firstT, 0.0001);
+        ASSERT_APPROXIMATE(passAngle / angle, t0, 0.00001);
+        ASSERT_APPROXIMATE(remainAngle / angle, 1.0 - t0, 0.0001);
 
-        AQuaternionD eighthQuaternion{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+        AQuaternionD quaternion6{ randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine) };
 
-        eighthQuaternion.Normalize();
+        quaternion6.Normalize();
 
-        AQuaternionD ninthQuaternion{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+        AQuaternionD quaternion7{ randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine) };
 
-        ninthQuaternion.Normalize();
+        quaternion7.Normalize();
 
-        AQuaternionD tenthQuaternion{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+        AQuaternionD quaternion8{ randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine) };
 
-        tenthQuaternion.Normalize();
+        quaternion8.Normalize();
 
         // 使用另一种算法进行测试。
-        auto seventhQuaternion = eighthQuaternion.Inverse();
-        sixthQuaternion = ninthQuaternion.Inverse();
-        fifthQuaternion = seventhQuaternion * ninthQuaternion;
-        fourthQuaternion = sixthQuaternion * tenthQuaternion;
-        seventhQuaternion = 0.25 * (fifthQuaternion.Log() - fourthQuaternion.Log());
+        auto quaternion9 = quaternion6.Inverse();
+        quaternion5 = quaternion7.Inverse();
+        quaternion4 = quaternion9 * quaternion7;
+        quaternion3 = quaternion5 * quaternion8;
+        quaternion9 = 0.25 * (quaternion4.Log() - quaternion3.Log());
 
-        sixthQuaternion = ninthQuaternion * seventhQuaternion.Exp();
+        quaternion5 = quaternion7 * quaternion9.Exp();
 
-        sixthQuaternion.Normalize();
+        quaternion5.Normalize();
 
-        fifthQuaternion.Intermediate(eighthQuaternion, ninthQuaternion, tenthQuaternion);
+        quaternion4.Intermediate(quaternion6, quaternion7, quaternion8);
 
-        fifthQuaternion.Normalize();
+        quaternion4.Normalize();
 
-        ASSERT_TRUE(Approximate(fifthQuaternion, sixthQuaternion, 1e-10));
+        ASSERT_TRUE(Approximate(quaternion4, quaternion5, 1e-10));
 
-        AQuaternionD eleventhQuaternion{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+        AQuaternionD quaternion10{ randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine), randomDistribution0(randomEngine) };
 
-        eleventhQuaternion.Normalize();
+        quaternion10.Normalize();
 
-        const auto slerpT = 2.0 * firstT * (1.0 - firstT);
+        const auto slerpT = 2.0 * t0 * (1.0 - t0);
 
-        seventhQuaternion.Slerp(firstT, eighthQuaternion, eleventhQuaternion);
-        sixthQuaternion.Slerp(firstT, ninthQuaternion, tenthQuaternion);
-        fifthQuaternion.Slerp(slerpT, seventhQuaternion, sixthQuaternion);
+        quaternion9.Slerp(t0, quaternion6, quaternion10);
+        quaternion5.Slerp(t0, quaternion7, quaternion8);
+        quaternion4.Slerp(slerpT, quaternion9, quaternion5);
 
-        seventhQuaternion.Squad(firstT, eighthQuaternion, ninthQuaternion, tenthQuaternion, eleventhQuaternion);
+        quaternion9.Squad(t0, quaternion6, quaternion7, quaternion8, quaternion10);
 
-        ASSERT_TRUE(Approximate(seventhQuaternion, fifthQuaternion, 1e-10));
+        ASSERT_TRUE(Approximate(quaternion9, quaternion4, 1e-10));
 
-        auto dot = eighthQuaternion[0] * ninthQuaternion[0] + eighthQuaternion[1] * ninthQuaternion[1] +
-                   eighthQuaternion[2] * ninthQuaternion[2] + eighthQuaternion[3] * ninthQuaternion[3];
+        auto dot = quaternion6[0] * quaternion7[0] + quaternion6[1] * quaternion7[1] + quaternion6[2] * quaternion7[2] + quaternion6[3] * quaternion7[3];
 
-        ASSERT_APPROXIMATE(dot, Dot(eighthQuaternion, ninthQuaternion), 1e-10);
+        ASSERT_APPROXIMATE(dot, Dot(quaternion6, quaternion7), 1e-10);
     }
 }
 
 void Mathematics::AQuaternionTesting::CompareTest()
 {
-    default_random_engine randomEngine{};
-    const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
+    std::default_random_engine randomEngine{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution{ -100.0f, 100.0f };
 
-    AQuaternionF firstQuaternion{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+    AQuaternionF quaternion0{ randomDistribution(randomEngine), randomDistribution(randomEngine), randomDistribution(randomEngine), randomDistribution(randomEngine) };
 
-    AQuaternionF secondQuaternion{ firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+    AQuaternionF quaternion1{ randomDistribution(randomEngine), randomDistribution(randomEngine), randomDistribution(randomEngine), randomDistribution(randomEngine) };
 
-    ASSERT_TRUE(firstQuaternion == firstQuaternion);
-    ASSERT_FALSE(firstQuaternion == secondQuaternion);
-    ASSERT_TRUE(firstQuaternion != secondQuaternion);
+    ASSERT_TRUE(quaternion0 == quaternion0);
+    ASSERT_FALSE(quaternion0 == quaternion1);
+    ASSERT_TRUE(quaternion0 != quaternion1);
 
-    if (!(firstQuaternion < secondQuaternion))
+    if (!(quaternion0 < quaternion1))
     {
-        firstQuaternion[0] = 0.0f;
-        secondQuaternion[0] = 1.0f;
+        quaternion0[0] = 0.0f;
+        quaternion1[0] = 1.0f;
     }
 
-    ASSERT_TRUE(firstQuaternion < secondQuaternion);
-    ASSERT_FALSE(firstQuaternion > secondQuaternion);
-    ASSERT_TRUE(firstQuaternion <= secondQuaternion);
-    ASSERT_FALSE(firstQuaternion >= secondQuaternion);
+    ASSERT_TRUE(quaternion0 < quaternion1);
+    ASSERT_FALSE(quaternion0 > quaternion1);
+    ASSERT_TRUE(quaternion0 <= quaternion1);
+    ASSERT_FALSE(quaternion0 >= quaternion1);
 
-    ASSERT_TRUE(Approximate(firstQuaternion, firstQuaternion, 1e-8f));
-    ASSERT_TRUE(Approximate(secondQuaternion, secondQuaternion, 1e-8f));
-    ASSERT_FALSE(Approximate(firstQuaternion, secondQuaternion, 1e-8f));
+    ASSERT_TRUE(Approximate(quaternion0, quaternion0, 1e-8f));
+    ASSERT_TRUE(Approximate(quaternion1, quaternion1, 1e-8f));
+    ASSERT_FALSE(Approximate(quaternion0, quaternion1, 1e-8f));
 }

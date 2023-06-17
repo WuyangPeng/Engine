@@ -42,7 +42,7 @@ void CoreTools::BatchConversionCode::LoadConfigure(const String& inputDirectory,
     String nameSpace{};
     for (const auto& inputPath : std::filesystem::directory_iterator(path))
     {
-        const auto nativeFileName = inputPath.path().native();
+        const auto nativeFileName = StringConversion::WideCharConversionStandard(inputPath.path().native());
 
         if (nativeFileName.find(SYSTEM_TEXT("csv")) != nativeFileName.size() - 3)
         {

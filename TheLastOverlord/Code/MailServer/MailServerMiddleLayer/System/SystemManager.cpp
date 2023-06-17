@@ -12,8 +12,8 @@
 #include "MailServer/MailServerMiddleLayer/Macro/MailServerMiddleLayerClassInvariantMacro.h"
 #include "SystemManager.h"
 
-MailServerMiddleLayer::SystemManager::SystemManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+MailServerMiddleLayer::SystemManager::SystemManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform,environmentDirectory }
 {
     MAIL_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }

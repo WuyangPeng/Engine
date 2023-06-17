@@ -1,20 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/03 16:08)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:08)
 
 #include "RombergIntegralTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/NumericalAnalysis/RombergIntegralDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <vector>
+#include "Mathematics/NumericalAnalysis/RombergIntegralDetail.h"
 
-using std::vector;
+#include <vector>
 
 namespace Mathematics
 {
@@ -47,8 +46,8 @@ void Mathematics::RombergIntegralTesting::ValueTest()
 
     double difference = end - begin;
     constexpr int order = 5;
-    vector<double> rom0(order);
-    vector<double> rom1(order);
+    std::vector<double> rom0(order);
+    std::vector<double> rom1(order);
 
     rom0.at(0) = (0.5 * difference * (Solution(begin, this) + Solution(end, this)));
 

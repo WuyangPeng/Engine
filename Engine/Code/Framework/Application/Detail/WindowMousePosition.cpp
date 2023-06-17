@@ -1,19 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/06 11:28)
+///	引擎版本：0.9.0.12 (2023/06/13 14:49)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowMousePosition.h"
 #include "System/Windows/WindowsProcess.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-
-using std::make_shared;
 
 Framework::WindowMousePosition::WindowMousePosition(WindowsHWnd hwnd) noexcept
     : hwnd{ hwnd }
@@ -55,5 +53,5 @@ void Framework::WindowMousePosition::SetMousePosition(const WindowPoint& windowP
 
 Framework::WindowMousePosition::MousePositionImplSharedPtr Framework::WindowMousePosition::Clone() const
 {
-    return make_shared<ClassType>(hwnd);
+    return std::make_shared<ClassType>(hwnd);
 }

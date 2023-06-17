@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/04/27 16:57)
+///	引擎版本：0.9.0.12 (2023/06/12 17:58)
 
 #ifndef ANIMATION_MACRO_USER_MACRO_H
 #define ANIMATION_MACRO_USER_MACRO_H
@@ -27,9 +27,10 @@ static_assert(COMPILE_ANIMATION_CLOSE <= CLOSE_ANIMATION_MAX, "COMPILE_ANIMATION
 
 #endif  // !defined(COMPILE_ANIMATION_CLOSE) || (COMPILE_ANIMATION_CLOSE & CLOSE_USE_ANIMATION) != CLOSE_USE_ANIMATION
 
-// 是否编译为静态库
 #ifdef BUILDING_STATIC
+
     #define BUILDING_ANIMATION_STATIC
+
 #endif  // BUILDING_STATIC
 
 #endif  // ANIMATION_MACRO_USER_MACRO_H

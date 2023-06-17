@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/03 17:15)
+///	引擎版本：0.9.0.12 (2023/06/12 11:18)
 
 #include "Rendering/RenderingExport.h"
 
@@ -33,8 +33,6 @@
 #include "Mathematics/Objects3D/Line3Detail.h"
 #include "Mathematics/Objects3D/Triangle3Detail.h"
 #include "Rendering/Renderers/RendererManager.h"
-
-using std::vector;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, Triangles);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Triangles);
@@ -159,10 +157,10 @@ void Rendering::Triangles::UpdateModelTangentsUseTextureCoords(MAYBE_UNUSED cons
         // 得到三角形顶点的位置,法线,切线和纹理坐标。
         const auto triangleIndex = GetTriangle(index);
 
-        vector<APoint> localPosition(3);
-        vector<AVector> localNormal(3, Mathematics::AVectorF::GetZero());
-        vector<AVector> localTangent(3, Mathematics::AVectorF::GetZero());
-        vector<Vector2D> localTextureCoord(3);
+        std::vector<APoint> localPosition(3);
+        std::vector<AVector> localNormal(3, Mathematics::AVectorF::GetZero());
+        std::vector<AVector> localTangent(3, Mathematics::AVectorF::GetZero());
+        std::vector<Vector2D> localTextureCoord(3);
 
         for (auto current = 0; current < 3; ++current)
         {

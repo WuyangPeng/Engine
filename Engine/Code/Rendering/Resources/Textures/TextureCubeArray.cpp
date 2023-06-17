@@ -34,8 +34,6 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, TextureCubeArray);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TextureCubeArray);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TextureCubeArray);
 
-using std::make_shared;
-
 Rendering::TextureCubeArray::TextureCubeArray(int numCubes, DataFormatType format, int length, bool hasMipmaps)
     : ParentType{ ImplType::GetTotalElements(numCubes * System::EnumCastUnderlying(CubeFaceType::Count), length, length, 1, hasMipmaps),
                   DataFormat::GetNumBytesPerStruct(format),

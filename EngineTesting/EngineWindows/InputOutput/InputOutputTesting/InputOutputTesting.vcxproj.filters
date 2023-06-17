@@ -22,14 +22,14 @@
     <Filter Include="OutputInterfaceSuite 头文件">
       <UniqueIdentifier>{aabb9e33-78e6-4a20-b225-5f41b219186a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MacroSuite 头文件">
-      <UniqueIdentifier>{83c63a56-4bbb-46f5-b245-ac83cdf78f8d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="InputInterfaceSuite 头文件">
       <UniqueIdentifier>{b5f32d73-db47-40df-a57c-54dc6e18bd95}</UniqueIdentifier>
     </Filter>
     <Filter Include="ConfigurationSuite 头文件">
       <UniqueIdentifier>{8ec35e47-a3f4-4738-9f61-4558d3d696a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件">
+      <UniqueIdentifier>{83c63a56-4bbb-46f5-b245-ac83cdf78f8d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,11 +65,11 @@
     <ClInclude Include="..\..\..\Code\InputOutput\InputOutputTesting\InputInterfaceSuite\InputInterfaceSuite.h">
       <Filter>InputInterfaceSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\InputOutput\InputOutputTesting\MacroSuite\MacroSuite.h">
-      <Filter>MacroSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\InputOutput\InputOutputTesting\OutputInterfaceSuite\OutputInterfaceSuite.h">
       <Filter>OutputInterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\InputOutput\InputOutputTesting\HelperSuite\HelperSuite.h">
+      <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,23 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/07 17:59)
+///	引擎版本：0.9.0.12 (2023/06/12 11:01)
 
 #include "Rendering/RenderingExport.h"
 
 #include "LightConstantImpl.h"
-#include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::string;
-using std::vector;
+#include "CoreTools/ObjectSystems/StreamDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
 Rendering::LightConstantImpl::LightConstantImpl(const LightSharedPtr& light) noexcept
     : light{ light }
@@ -64,7 +60,7 @@ int Rendering::LightConstantImpl::GetStreamingSize() const noexcept
     return CoreTools::GetStreamSize(light);
 }
 
-CoreTools::ObjectSharedPtr Rendering::LightConstantImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::LightConstantImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -74,17 +70,17 @@ CoreTools::ObjectSharedPtr Rendering::LightConstantImpl::GetObjectByName(const s
         return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::LightConstantImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::LightConstantImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     if (light.object)
         return light.object->GetAllObjectsByName(name);
     else
-        return vector<CoreTools::ObjectSharedPtr>{};
+        return std::vector<CoreTools::ObjectSharedPtr>{};
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::LightConstantImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::LightConstantImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -94,14 +90,14 @@ CoreTools::ConstObjectSharedPtr Rendering::LightConstantImpl::GetConstObjectByNa
         return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::LightConstantImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::LightConstantImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     if (light.object)
         return light.object->GetAllConstObjectsByName(name);
     else
-        return vector<CoreTools::ConstObjectSharedPtr>{};
+        return std::vector<CoreTools::ConstObjectSharedPtr>{};
 }
 
 void Rendering::LightConstantImpl::Link(CoreTools::ObjectLink& source)

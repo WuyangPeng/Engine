@@ -16,14 +16,14 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{2f17764f-e1cc-4258-ac95-8ef39d4a9e77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{41b584d8-0bf4-4750-9e88-b52cadbafc99}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Placeholder 头文件">
       <UniqueIdentifier>{68c06b8e-285e-414c-8e8e-c088a309423c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Placeholder 源文件">
       <UniqueIdentifier>{27e33246-4751-43b6-9a82-64f78013a5cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{41b584d8-0bf4-4750-9e88-b52cadbafc99}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,19 +66,19 @@
       <Filter>Placeholder 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Team\Helper\HelperFwd.h">
-      <Filter>Macro 头文件</Filter>
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Team\Helper\TeamClassInvariantMacro.h">
-      <Filter>Macro 头文件</Filter>
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Team\Helper\TeamCustomAssertMacro.h">
-      <Filter>Macro 头文件</Filter>
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Team\Helper\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Team\Helper\Helper.h">
-      <Filter>Macro 头文件</Filter>
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

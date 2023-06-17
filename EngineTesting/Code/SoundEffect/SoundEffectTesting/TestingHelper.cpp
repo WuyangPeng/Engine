@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/10 15:35)
+///	引擎测试版本：0.9.0.12 (2023/06/09 19:30)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -28,7 +28,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(SoundEffect, TestingHelper)
 // private
 void SoundEffect::TestingHelper::InitSuite()
 {
-    AddMacroSuite();
+    AddHelperSuite();
     AddConfigurationSuite();
     AddInterfaceSuite();
     AddCsynUtilSuite();
@@ -39,11 +39,11 @@ void SoundEffect::TestingHelper::InitSuite()
     AddFreeAlutSuite();
 }
 
-void SoundEffect::TestingHelper::AddMacroSuite()
+void SoundEffect::TestingHelper::AddHelperSuite()
 {
-    auto macroSuite = GenerateSuite("宏");
+    auto helperSuite = GenerateSuite("宏");
 
-    AddSuite(macroSuite);
+    AddSuite(helperSuite);
 }
 
 void SoundEffect::TestingHelper::AddConfigurationSuite()

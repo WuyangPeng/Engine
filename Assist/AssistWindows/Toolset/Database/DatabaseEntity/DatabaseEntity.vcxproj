@@ -37,7 +37,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{63d98c5e-cf05-4849-ad00-4ee15203057b}</ProjectGuid>
+    <ProjectGuid>{4CF8E62E-6456-454C-9A18-E74FF220F42A}</ProjectGuid>
     <RootNamespace>DatabaseEntity</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

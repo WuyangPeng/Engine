@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 14:44)
+///	引擎版本：0.9.0.12 (2023/06/13 14:18)
 
 #include "Framework/FrameworkExport.h"
 
@@ -16,8 +16,6 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Threading/ScopedMutex.h"
 
-using std::make_shared;
-using std::make_unique;
 using namespace std::literals;
 
 SINGLETON_GET_PTR_DEFINE(Framework, OpenGLGlutProcessManager);
@@ -26,7 +24,7 @@ Framework::OpenGLGlutProcessManager::OpenGLGlutProcessManagerUniquePtr Framework
 
 void Framework::OpenGLGlutProcessManager::Create()
 {
-    openGLGlutProcessManager = make_unique<Framework::OpenGLGlutProcessManager>(OpenGLGlutProcessManagerCreate::Init);
+    openGLGlutProcessManager = std::make_unique<Framework::OpenGLGlutProcessManager>(OpenGLGlutProcessManagerCreate::Init);
 }
 
 void Framework::OpenGLGlutProcessManager::Destroy() noexcept

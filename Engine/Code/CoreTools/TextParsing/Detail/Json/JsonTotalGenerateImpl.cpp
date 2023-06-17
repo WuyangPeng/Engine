@@ -869,7 +869,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += SYSTEM_TEXT("if (fileName.find(SYSTEM_TEXT(\".json\"s)) != (fileName.size() - 5))\n"s);
+    content += SYSTEM_TEXT("if (fileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT(\".json\"s))) != (fileName.size() - 5))\n"s);
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
@@ -888,7 +888,7 @@ System::String CoreTools::JsonTotalGenerateImpl::GenerateContainerDefaultFunctio
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
-    content += TextParsing::gJsonRowBasicTree;
+    content += SYSTEM_TEXT("CoreTools::JsonRow::BasicTree basicTree{ CoreTools::StringConversion::WideCharConversionStandard(fileName) };\n");
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;

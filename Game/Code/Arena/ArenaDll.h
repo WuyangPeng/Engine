@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.8.0.11 (2022/07/19 11:21)
+///	引擎游戏版本：0.9.0.12 (2023/06/16 17:10)
 
 #ifndef ARENA_DLL_H
 #define ARENA_DLL_H
@@ -16,8 +16,17 @@
 #if defined(BUILDING_ARENA_NO_IMPORT) || defined(BUILDING_ARENA_STATIC)
 
     #define ARENA_DEFAULT_DECLARE
-    #define ARENA_HIDDEN_DECLARE
     #define ARENA_VISIBLE
+
+    #if defined(BUILDING_ARENA_EXPORT)
+
+        #define ARENA_HIDDEN_DECLARE
+
+    #else  // !defined(BUILDING_ARENA_EXPORT)
+
+        #define ARENA_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_ARENA_EXPORT
 
 #else  // !defined(BUILDING_ARENA_NO_IMPORT) && !defined(BUILDING_ARENA_STATIC)
 

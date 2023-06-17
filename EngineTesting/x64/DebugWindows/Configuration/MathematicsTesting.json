@@ -1,5 +1,5 @@
 {
-  "macroSuite": {
+  "helperSuite": {
 
   },
 
@@ -98,6 +98,10 @@
     "Lozenge3Testing": 100,
     "Polyhedron3Testing": 100,
     "ConvexPolyhedron3Testing": 100
+  },
+
+  "primitivesSuite": {
+
   },
 
   "rationalSuite": {
@@ -208,7 +212,7 @@
     "GreatArcFit3Testing": 100,
     "PolynomialFit2Testing": 100,
     "PolynomialFit3Testing": 100,
-    "PolynomialFit4Testing": 0,
+    "PolynomialFit4Testing": 1,
     "PolynomialFit2PowersTesting": 100,
     "PolynomialFit3PowersTesting": 100,
     "PolynomialFit4PowersTesting": 100

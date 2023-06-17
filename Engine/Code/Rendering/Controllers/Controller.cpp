@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/07 15:28)
+///	引擎版本：0.9.0.12 (2023/06/12 14:06)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,10 +21,6 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Base/MathDetail.h"
-
-using std::make_shared;
-using std::string;
-using std::vector;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, Controller);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Controller);
@@ -81,7 +77,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetPha
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetFrequency, double, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetActive, bool, void)
 
-CoreTools::ObjectSharedPtr Rendering::Controller::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::Controller::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -89,7 +85,7 @@ CoreTools::ObjectSharedPtr Rendering::Controller::GetObjectByName(const string& 
     return ParentType::GetObjectByName(name);
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::Controller::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::Controller::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -98,7 +94,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::Controller::GetAllObjectsByName(co
     ;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::Controller::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::Controller::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -106,7 +102,7 @@ CoreTools::ConstObjectSharedPtr Rendering::Controller::GetConstObjectByName(cons
     return ParentType::GetConstObjectByName(name);
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::Controller::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::Controller::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

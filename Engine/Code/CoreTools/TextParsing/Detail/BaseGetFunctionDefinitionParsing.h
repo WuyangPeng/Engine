@@ -51,7 +51,7 @@ namespace CoreTools
 
         NODISCARD String GenerateBaseGetFunctionArrayIndex(const String& valueType, const String& functionVariableName) const;
         NODISCARD String GenerateBaseGetFunctionArrayMapping(const String& upperVariableName, const String& mapping) const;
-        NODISCARD String GenerateBaseGetFunctionArrayBody() const;
+        NODISCARD String GenerateBaseGetFunctionArrayBody(bool unused) const;
         NODISCARD String GenerateBaseGetFunctionMappingBody() const;
     };
 }

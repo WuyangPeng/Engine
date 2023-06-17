@@ -8,7 +8,7 @@
 ///	%ProjectChineseName%°æ±¾£º%Versions% (%Date% %Hour%:%Minute%)
 
 #include "%SolutionName%Message.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h" 
 #include "Framework/MiddleLayer/InputManagerDetail.h"
 #include "Framework/WindowProcess/WindowMessageDetail.h" 
 #include "Framework/MiddleLayer/ObjectLogicManagerDetail.h"

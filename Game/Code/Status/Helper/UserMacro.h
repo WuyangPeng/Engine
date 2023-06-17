@@ -1,34 +1,35 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.8.0.11 (2022/07/18 14:35)
+///	引擎游戏版本：0.9.0.12 (2023/06/16 16:03)
 
-#ifndef STATUSHELPER_USER_HELPER_H
-#define STATUSHELPER_USER_HELPER_H
+#ifndef STATUS_HELPER_USER_HELPER_H
+#define STATUS_HELPER_USER_HELPER_H
 
 #include "System/Helper/ConfigMacro.h"
 #include "CoreTools/Helper/UserMacro.h"
 
 #define CLOSE_USE_XXX (0x01)
-#define CLOSE_STATUSMAX (((CLOSE_USE_XXX) << 1) - 1)
+#define CLOSE_STATUS_MAX (((CLOSE_USE_XXX) << 1) - 1)
 
 // 编译测试（默认为0，最大值为0x01）
-#define COMPILE_STATUSCLOSE 0x00
+#define COMPILE_STATUS_CLOSE 0x00
 
-static_assert(0 <= COMPILE_STATUSCLOSE, "COMPILE_STATUSCLOSE Must be greater than or equal 0.");
-static_assert(COMPILE_STATUSCLOSE <= CLOSE_STATUSMAX, "COMPILE_STATUSCLOSE Must be less than or equal CLOSE_STATUSMAX.");
+static_assert(0 <= COMPILE_STATUS_CLOSE, "COMPILE_STATUS_CLOSE Must be greater than or equal 0.");
+static_assert(COMPILE_STATUS_CLOSE <= CLOSE_STATUS_MAX, "COMPILE_STATUS_CLOSE Must be less than or equal CLOSE_STATUS_MAX.");
 
-// 是否编译为静态库
+#if !defined(COMPILE_STATUS_CLOSE) || (COMPILE_STATUS_CLOSE & CLOSE_USE_XXX) != CLOSE_USE_XXX
+
+#endif  // !defined(COMPILE_STATUS_CLOSE) || (COMPILE_STATUS_CLOSE & CLOSE_USE_XXX) != CLOSE_USE_XXX
+
 #ifdef BUILDING_GAME_STATIC
-    #define BUILDING_STATUSSTATIC
+
+    #define BUILDING_STATUS_STATIC
+
 #endif  // BUILDING_GAME_STATIC
 
-#if !defined(COMPILE_STATUSCLOSE) || (COMPILE_STATUSCLOSE & CLOSE_USE_XXX) != CLOSE_USE_XXX
-
-#endif  // !defined(COMPILE_STATUSCLOSE) || (COMPILE_STATUSCLOSE & CLOSE_USE_XXX) != CLOSE_USE_XXX
-
-#endif  // STATUSHELPER_USER_HELPER_H
+#endif  // STATUS_HELPER_USER_HELPER_H

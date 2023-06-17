@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/08/30 20:00)
+///	引擎版本：0.9.0.12 (2023/06/13 14:21)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_INTERFACE_H
@@ -13,6 +13,9 @@
 #include "Framework/FrameworkDll.h"
 
 #include "MiddleLayerInterface.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+
+#include <memory>
 
 namespace Framework
 {

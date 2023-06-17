@@ -22,7 +22,7 @@
     <Filter Include="Placeholder 源文件">
       <UniqueIdentifier>{3a08117e-e59b-4032-a7dc-57af9bd3d7f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
+    <Filter Include="Helper 头文件">
       <UniqueIdentifier>{3b02b5f2-d2e8-460e-bfd2-3cf54e7b6038}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -54,14 +54,14 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\Editor\EditorToolset\Placeholder\Placeholder.h">
       <Filter>Placeholder 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\Editor\EditorToolset\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Editor\EditorToolset\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\Editor\EditorToolset\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Editor\EditorToolset\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Toolset\Editor\EditorToolset\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Editor\EditorToolset\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

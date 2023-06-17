@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/24 13:57)
+///	引擎测试版本：0.9.0.12 (2022/06/24 13:57)
 
 #include "AndroidProcessManagerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/AndroidFrame/AndroidCallBackInterface.h"
 #include "Framework/AndroidFrame/AndroidProcessManager.h"
-
 Framework::AndroidProcessManagerTesting::AndroidProcessManagerTesting(const OStreamShared& stream, AndroidApp* androidApp)
     : ParentType{ stream }, androidApp{ androidApp }
 {

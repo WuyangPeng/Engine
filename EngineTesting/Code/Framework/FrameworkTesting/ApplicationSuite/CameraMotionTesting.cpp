@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 11:14)
+///	引擎测试版本：0.9.0.12 (2023/06/13 20:26)
 
 #include "CameraMotionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
@@ -18,9 +19,6 @@
 #include "Framework/Application/CameraMotion.h"
 
 #include <random>
-
-using std::default_random_engine;
-using std::uniform_int;
 
 namespace Framework
 {
@@ -99,11 +97,11 @@ void Framework::CameraMotionTesting::MoveTest()
     const auto up = camera->GetUpVector();
     auto right = camera->GetRightVector();
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> random{ 0, 1 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> random{ 0, 1 };
 
-    const auto testLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < testLoopCount; ++i)
+    const auto aTestLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < aTestLoopCount; ++i)
     {
         const auto moveForward = random(generator) == 1 ? true : false;
 

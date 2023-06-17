@@ -121,12 +121,6 @@
     <Filter Include="IntersectionSuite 源文件\Intersection3D">
       <UniqueIdentifier>{2346c27b-b7d9-4764-8887-7915a16b17e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MacroSuite 头文件">
-      <UniqueIdentifier>{d5215113-d279-44e5-bf02-8c63a9495ce6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="MacroSuite 源文件">
-      <UniqueIdentifier>{c64053f5-7f17-401c-b26a-0a06bd45c892}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MeshesSuite 头文件">
       <UniqueIdentifier>{7e1cfc3b-112a-4796-b718-e2f4bc5381d1}</UniqueIdentifier>
     </Filter>
@@ -168,6 +162,15 @@
     </Filter>
     <Filter Include="RationalSuite 源文件">
       <UniqueIdentifier>{7cd9405e-540c-4de1-8a2d-b106d9052a78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件">
+      <UniqueIdentifier>{d5215113-d279-44e5-bf02-8c63a9495ce6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件">
+      <UniqueIdentifier>{c64053f5-7f17-401c-b26a-0a06bd45c892}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PrimitivesSuite 头文件">
+      <UniqueIdentifier>{5b7c11e4-fadd-4714-a72e-23cea50dea67}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -642,9 +645,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection3D\IntersectorLine3Triangle3Testing.h">
       <Filter>IntersectionSuite 头文件\Intersection3D</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\MacroSuite\MacroSuite.h">
-      <Filter>MacroSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\MeshesSuite\MeshesSuite.h">
       <Filter>MeshesSuite 头文件</Filter>
     </ClInclude>
@@ -1001,6 +1001,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\FloatingPointAnalysisTesting.h">
       <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\HelperSuite\HelperSuite.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\PrimitivesSuite\PrimitivesSuite.h">
+      <Filter>PrimitivesSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1778,7 +1784,7 @@
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
-  <ItemGroup>    
+  <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
@@ -1794,7 +1800,7 @@
     <Text Include="Resource\Todo\Level 4.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-	<Text Include="Resource\Todo\Level 5.txt">
+    <Text Include="Resource\Todo\Level 5.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 6.txt">

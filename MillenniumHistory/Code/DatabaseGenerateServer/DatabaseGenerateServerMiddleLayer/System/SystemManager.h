@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.11 (2023/06/06 22:13)
+///	千年史策版本：0.9.0.12 (2023/06/12 21:56)
 
-#ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SYSTEM_MIDDLE_LAYER_SYSTEM_H
-#define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SYSTEM_MIDDLE_LAYER_SYSTEM_H
+#ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SYSTEM_MANAGER_H
+#define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SYSTEM_MANAGER_H
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/DatabaseGenerateServerMiddleLayerDll.h"
 
@@ -35,9 +35,11 @@ namespace DatabaseGenerateServerMiddleLayer
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
+        NODISCARD bool Initialize() noexcept override;
+
     private:
         PackageType impl;
     };
 }
 
-#endif  // DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SYSTEM_MIDDLE_LAYER_SYSTEM_H
+#endif  // DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SYSTEM_MANAGER_H

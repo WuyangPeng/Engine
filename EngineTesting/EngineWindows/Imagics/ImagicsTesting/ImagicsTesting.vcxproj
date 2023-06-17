@@ -173,7 +173,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-    </Link> 
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
@@ -184,7 +184,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-    </Link> 
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -199,7 +199,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-    </Link> 
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -214,7 +214,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-    </Link> 
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -225,7 +225,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-    </Link> 
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
@@ -236,8 +236,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-    </Link> 
-  </ItemDefinitionGroup>  
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -251,7 +251,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-    </Link> 
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -266,14 +266,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-    </Link> 
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\BinaryOperationsSuite\BinaryOperationsSuite.h" />
     <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\ExtractionSuite\ExtractionSuite.h" />
     <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\FiltersSuite\FiltersSuite.h" />
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\HelperSuite\HelperSuite.h" />
     <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\ImagesSuite\ImagesSuite.h" />
-    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\MacroSuite\MacroSuite.h" />
     <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\OpenCVSuite\OpenCVSuite.h" />
     <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\RasterDrawingSuite\RasterDrawingSuite.h" />
     <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\SegmentersSuite\SegmentersSuite.h" />

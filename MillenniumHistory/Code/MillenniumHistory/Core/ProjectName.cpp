@@ -5,19 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.5 (2023/04/03 09:35)
+///	千年史策版本：0.9.0.12 (2023/06/16 21:55)
 
 #include "MillenniumHistory/Helper/MillenniumHistoryClassInvariantMacro.h"
 #include "ProjectName.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
 #include <iostream>
-
-using namespace std::literals;
 
 MillenniumHistory::ProjectName::ProjectName(const String& fileName, const EnvironmentDirectory& environmentDirectory)
     : container{ GenerateEngineName(fileName, environmentDirectory) }
@@ -30,24 +27,29 @@ std::string MillenniumHistory::ProjectName::GetProjectName(const String& fileNam
     return CoreTools::StringConversion::StandardConversionMultiByte(environmentDirectory.GetDirectory(Framework::UpperDirectory::Configuration) + fileName);
 }
 
-MillenniumHistory::ProjectName::ProjectNameContainer MillenniumHistory::ProjectName::GenerateEngineName(const String& fileName, const EnvironmentDirectory& environmentDirectory)
+MillenniumHistory::ProjectName::ProjectNameContainer MillenniumHistory::ProjectName::GenerateEngineName(const TreeType& mainTree)
 {
-    const auto projectTestingName = GetProjectName(fileName, environmentDirectory);
-
-    boost::property_tree::basic_ptree<String, String> mainTree{};
-    read_json(projectTestingName, mainTree);
-
     ProjectNameContainer engineTestingName{};
 
-    for (const auto& tree : mainTree)
+    for (const auto& [first, second] : mainTree)
     {
-        if (0 < tree.second.get_value<int>())
+        if (0 < second.get_value<int>())
         {
-            engineTestingName.emplace_back(tree.first);
+            engineTestingName.emplace_back(first);
         }
     }
 
     return engineTestingName;
+}
+
+MillenniumHistory::ProjectName::ProjectNameContainer MillenniumHistory::ProjectName::GenerateEngineName(const String& fileName, const EnvironmentDirectory& environmentDirectory)
+{
+    const auto projectTestingName = GetProjectName(fileName, environmentDirectory);
+
+    TreeType mainTree{};
+    read_json(projectTestingName, mainTree);
+
+    return GenerateEngineName(mainTree);
 }
 
 CLASS_INVARIANT_STUB_DEFINE(MillenniumHistory, ProjectName)
@@ -58,12 +60,20 @@ void MillenniumHistory::ProjectName::PrintSelect() const
 
     auto index = 1;
     COUT << SYSTEM_TEXT("请选择要执行的工程：\n");
+
+    for (const auto& element : container)
+    {
+        PrintSelect(element, index);
+
+        ++index;
+    }
+}
+
+void MillenniumHistory::ProjectName::PrintSelect(const String& element, int index) const
+{
     const auto width = GetContainerPrintWidth();
 
-    for (const auto& value : container)
-    {
-        COUT << std::setw(width) << std::setfill(SYSTEM_TEXT('0')) << (index++) << SYSTEM_TEXT("：") << value << SYSTEM_TEXT("\n");
-    }
+    COUT << std::setw(width) << std::setfill(SYSTEM_TEXT('0')) << (index++) << SYSTEM_TEXT("：") << element << SYSTEM_TEXT("\n");
 }
 
 bool MillenniumHistory::ProjectName::IsSelectValid(int select) const
@@ -88,7 +98,9 @@ int MillenniumHistory::ProjectName::GetContainerPrintWidth() const
     auto size = boost::numeric_cast<int>(container.size());
     while (0 < size)
     {
-        size /= 10;
+        constexpr auto base = 10;
+
+        size /= base;
         ++result;
     }
 

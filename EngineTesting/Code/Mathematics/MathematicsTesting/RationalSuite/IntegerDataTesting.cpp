@@ -1,21 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/26 15:14)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:37)
 
 #include "IntegerDataTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/IntegerDataDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <gsl/util>
 
-using std::vector;
+#include <gsl/util>
 
 namespace Mathematics
 {
@@ -49,7 +48,7 @@ void Mathematics::IntegerDataTesting::MainTest()
 
 void Mathematics::IntegerDataTesting::CopyTest()
 {
-    vector<uint16_t> data{ 0xF000, 0xF458, 0xF789, 0x2523 };
+    std::vector<uint16_t> data{ 0xF000, 0xF458, 0xF789, 0x2523 };
 
     IntegerData<2> firstIntegerData(data);
 
@@ -82,30 +81,30 @@ void Mathematics::IntegerDataTesting::CopyTest()
 
 void Mathematics::IntegerDataTesting::BitTest()
 {
-    vector<uint16_t> data{ 0b11111111'00000000,  // 最低位
-                           0b10111111'11111111,
-                           0b10000000'11111111,
-                           0b10000000'00000001,
-                           0b10000111'00000001,
-                           0b01111111'11111110,
-                           0b01011111'11111110,
-                           0b01000000'11111110,
-                           0b01000000'00000010,
-                           0b00100001'00011100,
-                           0b00010001'00011000,
-                           0b00001001'00010000,
-                           0b00000101'00100000,
-                           0b00000011'01000000,
-                           0b00000001'10000000,
-                           0b00000001'00000000,
-                           0b01011010'00000000,
-                           0b01011100'00000000,
-                           0b00011000'00000000,
-                           0b00010000'00000000,
-                           0b00110000'00000000,
-                           0b01100000'00000000,
-                           0b01000000'00000000,
-                           0b11111111'00000000 };  // 最高位
+    std::vector<uint16_t> data{ 0b11111111'00000000,  // 最低位
+                                0b10111111'11111111,
+                                0b10000000'11111111,
+                                0b10000000'00000001,
+                                0b10000111'00000001,
+                                0b01111111'11111110,
+                                0b01011111'11111110,
+                                0b01000000'11111110,
+                                0b01000000'00000010,
+                                0b00100001'00011100,
+                                0b00010001'00011000,
+                                0b00001001'00010000,
+                                0b00000101'00100000,
+                                0b00000011'01000000,
+                                0b00000001'10000000,
+                                0b00000001'00000000,
+                                0b01011010'00000000,
+                                0b01011100'00000000,
+                                0b00011000'00000000,
+                                0b00010000'00000000,
+                                0b00110000'00000000,
+                                0b01100000'00000000,
+                                0b01000000'00000000,
+                                0b11111111'00000000 };  // 最高位
 
     IntegerData<12> firstIntegerData(data);
 
@@ -156,7 +155,7 @@ void Mathematics::IntegerDataTesting::ConversionTest()
 
 void Mathematics::IntegerDataTesting::CompareTest()
 {
-    vector<uint16_t> data{ 0xF000, 0xF458, 0xF789, 0x2523 };
+    std::vector<uint16_t> data{ 0xF000, 0xF458, 0xF789, 0x2523 };
 
     IntegerData<2> firstIntegerData(data);
     const IntegerData<2> secondIntegerData(data);

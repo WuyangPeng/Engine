@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/08 18:44)
+///	引擎版本：0.9.0.12 (2023/06/12 13:52)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,9 +18,6 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/Renderers/RendererManager.h"
-
-using std::string;
-using std::vector;
 
 Rendering::ClodMeshImpl::ClodMeshImpl() noexcept
     : currentRecord{ 0 }, targetRecord{ 0 }, recordArray{}
@@ -154,28 +151,28 @@ void Rendering::ClodMeshImpl::SelectLevelOfDetail(VertexBuffer& vertexbuffer, co
     }
 }
 
-CoreTools::ObjectSharedPtr Rendering::ClodMeshImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::ClodMeshImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return recordArray.object->GetObjectByName(name);
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::ClodMeshImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::ClodMeshImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return recordArray.object->GetAllObjectsByName(name);
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::ClodMeshImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::ClodMeshImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return recordArray.object->GetConstObjectByName(name);
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::ClodMeshImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::ClodMeshImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 

@@ -1,25 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/03 16:08)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:08)
 
 #include "SingularValueDecompositionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
 #include "Mathematics/NumericalAnalysis/SingularValueDecompositionDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::swap;
-using std::uniform_int;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -47,20 +43,20 @@ void Mathematics::SingularValueDecompositionTesting::MainTest()
 
 void Mathematics::SingularValueDecompositionTesting::SingularValueTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
-    const uniform_int<> secondRandomDistribution(2, 10);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e5, 1.0e5);
+    const std::uniform_int<> randomDistribution1(2, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        int row = secondRandomDistribution(generator);
-        int colomn = secondRandomDistribution(generator);
+        int row = randomDistribution1(generator);
+        int colomn = randomDistribution1(generator);
 
         if (row < colomn)
         {
-            swap(row, colomn);
+            std::swap(row, colomn);
         }
 
         VariableMatrixD matrix(row, colomn);
@@ -69,7 +65,7 @@ void Mathematics::SingularValueDecompositionTesting::SingularValueTest()
         {
             for (int j = 0; j < colomn; ++j)
             {
-                matrix(m, j) = firstRandomDistribution(generator);
+                matrix(m, j) = randomDistribution0(generator);
             }
         }
 

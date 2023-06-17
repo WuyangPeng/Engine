@@ -1,24 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 22:45)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:40)
 
 #include "VariableMatrixTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 Mathematics::VariableMatrixTesting::VariableMatrixTesting(const OStreamShared& streamShared)
     : ParentType{ streamShared }
@@ -64,7 +60,7 @@ void Mathematics::VariableMatrixTesting::ConstructionTest()
         }
     }
 
-    vector<double> firstEntry{ 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0 };
+    std::vector<double> firstEntry{ 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0 };
 
     VariableMatrixD thirdVariableMatrix(2, 4, firstEntry);
 
@@ -84,14 +80,14 @@ void Mathematics::VariableMatrixTesting::ConstructionTest()
         }
     }
 
-    vector<double> secondEntry{ -3.0, -4.0, -5.0, -6.0, -7.0, -8.0, -9.0, -10.0 };
+    std::vector<double> secondEntry{ -3.0, -4.0, -5.0, -6.0, -7.0, -8.0, -9.0, -10.0 };
 
-    vector<vector<double>> entryVector{ firstEntry, secondEntry };
+    std::vector<std::vector<double>> entryVector{ firstEntry, secondEntry };
 }
 
 void Mathematics::VariableMatrixTesting::AccessTest()
 {
-    vector<double> firstEntry{ 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0 };
+    std::vector<double> firstEntry{ 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0 };
 
     const VariableMatrixD firstVariableMatrix(2, 4, firstEntry);
 
@@ -102,225 +98,225 @@ void Mathematics::VariableMatrixTesting::AccessTest()
 
 void Mathematics::VariableMatrixTesting::ArithmeticCalculateTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
-    const uniform_int<> integerRandomDistribution(1, 20);
+    const std::uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
+    const std::uniform_int<> integerRandomDistribution(1, 20);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        VariableMatrixF firstMatrix(integerRandomDistribution(generator), integerRandomDistribution(generator));
+        VariableMatrixF matrix0(integerRandomDistribution(generator), integerRandomDistribution(generator));
 
-        for (int row = 0; row < firstMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix0.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < firstMatrix.GetColumnsNumber();
+            for (int column = 0; column < matrix0.GetColumnsNumber();
                  ++column)
             {
-                firstMatrix[row][column] = floatRandomDistribution(generator);
+                matrix0[row][column] = floatRandomDistribution(generator);
             }
         }
 
-        VariableMatrixF secondMatrix(firstMatrix.GetColumnsNumber(), integerRandomDistribution(generator));
+        VariableMatrixF matrix1(matrix0.GetColumnsNumber(), integerRandomDistribution(generator));
 
-        for (int row = 0; row < secondMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix1.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < secondMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix1.GetColumnsNumber(); ++column)
             {
-                secondMatrix[row][column] = floatRandomDistribution(generator);
+                matrix1[row][column] = floatRandomDistribution(generator);
             }
         }
 
-        VariableMatrixF thirdMatrix = firstMatrix * secondMatrix;
+        VariableMatrixF matrix2 = matrix0 * matrix1;
 
-        ASSERT_EQUAL(thirdMatrix.GetRowsNumber(), firstMatrix.GetRowsNumber());
-        ASSERT_EQUAL(thirdMatrix.GetColumnsNumber(), secondMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(thirdMatrix.GetElementsNumber(), firstMatrix.GetRowsNumber() * secondMatrix.GetColumnsNumber());
+        ASSERT_EQUAL(matrix2.GetRowsNumber(), matrix0.GetRowsNumber());
+        ASSERT_EQUAL(matrix2.GetColumnsNumber(), matrix1.GetColumnsNumber());
+        ASSERT_EQUAL(matrix2.GetElementsNumber(), matrix0.GetRowsNumber() * matrix1.GetColumnsNumber());
 
-        for (int row = 0; row < thirdMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix2.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < thirdMatrix.GetColumnsNumber(); ++column)
-            {
-                float sum = 0;
-                for (int index = 0; index < firstMatrix.GetColumnsNumber(); ++index)
-                {
-                    sum += firstMatrix(row, index) * secondMatrix(index, column);
-                }
-
-                ASSERT_APPROXIMATE(sum, thirdMatrix(row, column), 1e-10f);
-            }
-        }
-
-        thirdMatrix = firstMatrix;
-
-        thirdMatrix *= secondMatrix;
-
-        ASSERT_EQUAL(thirdMatrix.GetRowsNumber(), firstMatrix.GetRowsNumber());
-        ASSERT_EQUAL(thirdMatrix.GetColumnsNumber(), secondMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(thirdMatrix.GetElementsNumber(), firstMatrix.GetRowsNumber() * secondMatrix.GetColumnsNumber());
-
-        for (int row = 0; row < thirdMatrix.GetRowsNumber(); ++row)
-        {
-            for (int column = 0; column < thirdMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix2.GetColumnsNumber(); ++column)
             {
                 float sum = 0;
-                for (int index = 0; index < firstMatrix.GetColumnsNumber(); ++index)
+                for (int index = 0; index < matrix0.GetColumnsNumber(); ++index)
                 {
-                    sum += firstMatrix(row, index) * secondMatrix(index, column);
+                    sum += matrix0(row, index) * matrix1(index, column);
                 }
 
-                ASSERT_APPROXIMATE(sum, thirdMatrix(row, column), 1e-10f);
+                ASSERT_APPROXIMATE(sum, matrix2(row, column), 1e-10f);
             }
         }
 
-        thirdMatrix = -firstMatrix;
+        matrix2 = matrix0;
 
-        ASSERT_EQUAL(thirdMatrix.GetRowsNumber(), firstMatrix.GetRowsNumber());
-        ASSERT_EQUAL(thirdMatrix.GetColumnsNumber(), firstMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(thirdMatrix.GetElementsNumber(), firstMatrix.GetRowsNumber() * firstMatrix.GetColumnsNumber());
+        matrix2 *= matrix1;
 
-        for (int row = 0; row < thirdMatrix.GetRowsNumber(); ++row)
+        ASSERT_EQUAL(matrix2.GetRowsNumber(), matrix0.GetRowsNumber());
+        ASSERT_EQUAL(matrix2.GetColumnsNumber(), matrix1.GetColumnsNumber());
+        ASSERT_EQUAL(matrix2.GetElementsNumber(), matrix0.GetRowsNumber() * matrix1.GetColumnsNumber());
+
+        for (int row = 0; row < matrix2.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < thirdMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix2.GetColumnsNumber(); ++column)
             {
-                ASSERT_APPROXIMATE(firstMatrix(row, column), -thirdMatrix(row, column), 1e-10f);
+                float sum = 0;
+                for (int index = 0; index < matrix0.GetColumnsNumber(); ++index)
+                {
+                    sum += matrix0(row, index) * matrix1(index, column);
+                }
+
+                ASSERT_APPROXIMATE(sum, matrix2(row, column), 1e-10f);
             }
         }
 
-        VariableMatrixF fourthMatrix(firstMatrix.GetRowsNumber(), firstMatrix.GetColumnsNumber());
+        matrix2 = -matrix0;
 
-        VariableMatrixF fifthMatrix = firstMatrix + fourthMatrix;
+        ASSERT_EQUAL(matrix2.GetRowsNumber(), matrix0.GetRowsNumber());
+        ASSERT_EQUAL(matrix2.GetColumnsNumber(), matrix0.GetColumnsNumber());
+        ASSERT_EQUAL(matrix2.GetElementsNumber(), matrix0.GetRowsNumber() * matrix0.GetColumnsNumber());
 
-        ASSERT_EQUAL(fifthMatrix.GetRowsNumber(), firstMatrix.GetRowsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetColumnsNumber(), firstMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetElementsNumber(), firstMatrix.GetRowsNumber() * firstMatrix.GetColumnsNumber());
-
-        for (int row = 0; row < fifthMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix2.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < fifthMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix2.GetColumnsNumber(); ++column)
             {
-                ASSERT_APPROXIMATE(fifthMatrix(row, column), firstMatrix(row, column) + fourthMatrix(row, column), 1e-10f);
+                ASSERT_APPROXIMATE(matrix0(row, column), -matrix2(row, column), 1e-10f);
             }
         }
 
-        fifthMatrix = firstMatrix;
+        VariableMatrixF matrix3(matrix0.GetRowsNumber(), matrix0.GetColumnsNumber());
 
-        fifthMatrix += fourthMatrix;
+        VariableMatrixF matrix4 = matrix0 + matrix3;
 
-        ASSERT_EQUAL(fifthMatrix.GetRowsNumber(), firstMatrix.GetRowsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetColumnsNumber(), firstMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetElementsNumber(), firstMatrix.GetRowsNumber() * firstMatrix.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix0.GetRowsNumber());
+        ASSERT_EQUAL(matrix4.GetColumnsNumber(), matrix0.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetElementsNumber(), matrix0.GetRowsNumber() * matrix0.GetColumnsNumber());
 
-        for (int row = 0; row < fifthMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix4.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < fifthMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix4.GetColumnsNumber(); ++column)
             {
-                ASSERT_APPROXIMATE(fifthMatrix(row, column), firstMatrix(row, column) + fourthMatrix(row, column), 1e-10f);
+                ASSERT_APPROXIMATE(matrix4(row, column), matrix0(row, column) + matrix3(row, column), 1e-10f);
             }
         }
 
-        fifthMatrix = firstMatrix - fourthMatrix;
+        matrix4 = matrix0;
 
-        ASSERT_EQUAL(fifthMatrix.GetRowsNumber(), firstMatrix.GetRowsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetColumnsNumber(), firstMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetElementsNumber(), firstMatrix.GetRowsNumber() * firstMatrix.GetColumnsNumber());
+        matrix4 += matrix3;
 
-        for (int row = 0; row < fifthMatrix.GetRowsNumber(); ++row)
+        ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix0.GetRowsNumber());
+        ASSERT_EQUAL(matrix4.GetColumnsNumber(), matrix0.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetElementsNumber(), matrix0.GetRowsNumber() * matrix0.GetColumnsNumber());
+
+        for (int row = 0; row < matrix4.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < fifthMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix4.GetColumnsNumber(); ++column)
             {
-                ASSERT_APPROXIMATE(fifthMatrix(row, column), firstMatrix(row, column) - fourthMatrix(row, column), 1e-10f);
+                ASSERT_APPROXIMATE(matrix4(row, column), matrix0(row, column) + matrix3(row, column), 1e-10f);
             }
         }
 
-        fifthMatrix = firstMatrix;
+        matrix4 = matrix0 - matrix3;
 
-        fifthMatrix -= fourthMatrix;
+        ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix0.GetRowsNumber());
+        ASSERT_EQUAL(matrix4.GetColumnsNumber(), matrix0.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetElementsNumber(), matrix0.GetRowsNumber() * matrix0.GetColumnsNumber());
 
-        ASSERT_EQUAL(fifthMatrix.GetRowsNumber(), firstMatrix.GetRowsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetColumnsNumber(), firstMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetElementsNumber(), firstMatrix.GetRowsNumber() * firstMatrix.GetColumnsNumber());
-
-        for (int row = 0; row < fifthMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix4.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < fifthMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix4.GetColumnsNumber(); ++column)
             {
-                ASSERT_APPROXIMATE(fifthMatrix(row, column), firstMatrix(row, column) - fourthMatrix(row, column), 1e-10f);
+                ASSERT_APPROXIMATE(matrix4(row, column), matrix0(row, column) - matrix3(row, column), 1e-10f);
             }
         }
 
-        fifthMatrix = firstMatrix * 3.0f;
+        matrix4 = matrix0;
 
-        ASSERT_EQUAL(fifthMatrix.GetRowsNumber(), firstMatrix.GetRowsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetColumnsNumber(), firstMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetElementsNumber(), firstMatrix.GetRowsNumber() * firstMatrix.GetColumnsNumber());
+        matrix4 -= matrix3;
 
-        for (int row = 0; row < fifthMatrix.GetRowsNumber(); ++row)
+        ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix0.GetRowsNumber());
+        ASSERT_EQUAL(matrix4.GetColumnsNumber(), matrix0.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetElementsNumber(), matrix0.GetRowsNumber() * matrix0.GetColumnsNumber());
+
+        for (int row = 0; row < matrix4.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < fifthMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix4.GetColumnsNumber(); ++column)
             {
-                ASSERT_APPROXIMATE(fifthMatrix(row, column), firstMatrix(row, column) * 3.0f, 1e-10f);
+                ASSERT_APPROXIMATE(matrix4(row, column), matrix0(row, column) - matrix3(row, column), 1e-10f);
             }
         }
 
-        fifthMatrix = 2.5f * firstMatrix;
+        matrix4 = matrix0 * 3.0f;
 
-        ASSERT_EQUAL(fifthMatrix.GetRowsNumber(), firstMatrix.GetRowsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetColumnsNumber(), firstMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetElementsNumber(), firstMatrix.GetRowsNumber() * firstMatrix.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix0.GetRowsNumber());
+        ASSERT_EQUAL(matrix4.GetColumnsNumber(), matrix0.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetElementsNumber(), matrix0.GetRowsNumber() * matrix0.GetColumnsNumber());
 
-        for (int row = 0; row < fifthMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix4.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < fifthMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix4.GetColumnsNumber(); ++column)
             {
-                ASSERT_APPROXIMATE(fifthMatrix(row, column), firstMatrix(row, column) * 2.5f, 1e-10f);
+                ASSERT_APPROXIMATE(matrix4(row, column), matrix0(row, column) * 3.0f, 1e-10f);
             }
         }
 
-        fifthMatrix = firstMatrix;
+        matrix4 = 2.5f * matrix0;
 
-        fifthMatrix *= 4.0f;
+        ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix0.GetRowsNumber());
+        ASSERT_EQUAL(matrix4.GetColumnsNumber(), matrix0.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetElementsNumber(), matrix0.GetRowsNumber() * matrix0.GetColumnsNumber());
 
-        ASSERT_EQUAL(fifthMatrix.GetRowsNumber(), firstMatrix.GetRowsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetColumnsNumber(), firstMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetElementsNumber(), firstMatrix.GetRowsNumber() * firstMatrix.GetColumnsNumber());
-
-        for (int row = 0; row < fifthMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix4.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < fifthMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix4.GetColumnsNumber(); ++column)
             {
-                ASSERT_APPROXIMATE(fifthMatrix(row, column), firstMatrix(row, column) * 4.0f, 1e-10f);
+                ASSERT_APPROXIMATE(matrix4(row, column), matrix0(row, column) * 2.5f, 1e-10f);
             }
         }
 
-        fifthMatrix = firstMatrix / 3.0f;
+        matrix4 = matrix0;
 
-        ASSERT_EQUAL(fifthMatrix.GetRowsNumber(), firstMatrix.GetRowsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetColumnsNumber(), firstMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetElementsNumber(), firstMatrix.GetRowsNumber() * firstMatrix.GetColumnsNumber());
+        matrix4 *= 4.0f;
 
-        for (int row = 0; row < fifthMatrix.GetRowsNumber(); ++row)
+        ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix0.GetRowsNumber());
+        ASSERT_EQUAL(matrix4.GetColumnsNumber(), matrix0.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetElementsNumber(), matrix0.GetRowsNumber() * matrix0.GetColumnsNumber());
+
+        for (int row = 0; row < matrix4.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < fifthMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix4.GetColumnsNumber(); ++column)
             {
-                ASSERT_APPROXIMATE(fifthMatrix(row, column), firstMatrix(row, column) / 3.0f, 1e-10f);
+                ASSERT_APPROXIMATE(matrix4(row, column), matrix0(row, column) * 4.0f, 1e-10f);
             }
         }
 
-        fifthMatrix = firstMatrix;
+        matrix4 = matrix0 / 3.0f;
 
-        fifthMatrix /= 4.0f;
+        ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix0.GetRowsNumber());
+        ASSERT_EQUAL(matrix4.GetColumnsNumber(), matrix0.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetElementsNumber(), matrix0.GetRowsNumber() * matrix0.GetColumnsNumber());
 
-        ASSERT_EQUAL(fifthMatrix.GetRowsNumber(), firstMatrix.GetRowsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetColumnsNumber(), firstMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetElementsNumber(), firstMatrix.GetRowsNumber() * firstMatrix.GetColumnsNumber());
-
-        for (int row = 0; row < fifthMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix4.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < fifthMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix4.GetColumnsNumber(); ++column)
             {
-                ASSERT_APPROXIMATE(fifthMatrix(row, column), firstMatrix(row, column) / 4.0f, 1e-10f);
+                ASSERT_APPROXIMATE(matrix4(row, column), matrix0(row, column) / 3.0f, 1e-10f);
+            }
+        }
+
+        matrix4 = matrix0;
+
+        matrix4 /= 4.0f;
+
+        ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix0.GetRowsNumber());
+        ASSERT_EQUAL(matrix4.GetColumnsNumber(), matrix0.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetElementsNumber(), matrix0.GetRowsNumber() * matrix0.GetColumnsNumber());
+
+        for (int row = 0; row < matrix4.GetRowsNumber(); ++row)
+        {
+            for (int column = 0; column < matrix4.GetColumnsNumber(); ++column)
+            {
+                ASSERT_APPROXIMATE(matrix4(row, column), matrix0(row, column) / 4.0f, 1e-10f);
             }
         }
     }
@@ -328,199 +324,199 @@ void Mathematics::VariableMatrixTesting::ArithmeticCalculateTest()
 
 void Mathematics::VariableMatrixTesting::MatrixCalculateTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
-    const uniform_int<> integerRandomDistribution(1, 20);
+    const std::uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
+    const std::uniform_int<> integerRandomDistribution(1, 20);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        VariableMatrixF firstMatrix(integerRandomDistribution(generator), integerRandomDistribution(generator));
+        VariableMatrixF matrix0(integerRandomDistribution(generator), integerRandomDistribution(generator));
 
-        for (int row = 0; row < firstMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix0.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < firstMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix0.GetColumnsNumber(); ++column)
             {
-                firstMatrix[row][column] = floatRandomDistribution(generator);
+                matrix0[row][column] = floatRandomDistribution(generator);
             }
         }
 
-        VariableLengthVectorF firstVector(firstMatrix.GetRowsNumber());
+        VariableLengthVectorF vector0(matrix0.GetRowsNumber());
 
-        for (int index = 0; index < firstVector.GetSize(); ++index)
+        for (int index = 0; index < vector0.GetSize(); ++index)
         {
-            firstVector[index] = floatRandomDistribution(generator);
+            vector0[index] = floatRandomDistribution(generator);
         }
 
-        VariableLengthVectorF secondVector(firstMatrix.GetColumnsNumber());
+        VariableLengthVectorF vector1(matrix0.GetColumnsNumber());
 
-        for (int index = 0; index < secondVector.GetSize(); ++index)
+        for (int index = 0; index < vector1.GetSize(); ++index)
         {
-            secondVector[index] = floatRandomDistribution(generator);
+            vector1[index] = floatRandomDistribution(generator);
         }
 
-        float quadraticForm = Dot(firstVector, firstMatrix * secondVector);
+        float quadraticForm = Dot(vector0, matrix0 * vector1);
 
-        ASSERT_APPROXIMATE(quadraticForm, firstMatrix.QuadraticForm(firstVector, secondVector), 1e-10f);
+        ASSERT_APPROXIMATE(quadraticForm, matrix0.QuadraticForm(vector0, vector1), 1e-10f);
 
-        VariableMatrixF secondMatrix = firstMatrix.Transpose();
+        VariableMatrixF matrix1 = matrix0.Transpose();
 
-        ASSERT_EQUAL(firstMatrix.GetRowsNumber(), secondMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(firstMatrix.GetColumnsNumber(), secondMatrix.GetRowsNumber());
-        ASSERT_EQUAL(firstMatrix.GetElementsNumber(), secondMatrix.GetElementsNumber());
+        ASSERT_EQUAL(matrix0.GetRowsNumber(), matrix1.GetColumnsNumber());
+        ASSERT_EQUAL(matrix0.GetColumnsNumber(), matrix1.GetRowsNumber());
+        ASSERT_EQUAL(matrix0.GetElementsNumber(), matrix1.GetElementsNumber());
 
-        for (int row = 0; row < firstMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix0.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < firstMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix0.GetColumnsNumber(); ++column)
             {
-                ASSERT_APPROXIMATE(firstMatrix[row][column], secondMatrix[column][row], 1e-10f);
+                ASSERT_APPROXIMATE(matrix0[row][column], matrix1[column][row], 1e-10f);
             }
         }
 
-        VariableLengthVectorF thirdVector = firstMatrix * secondVector;
+        VariableLengthVectorF vector2 = matrix0 * vector1;
 
-        ASSERT_EQUAL(thirdVector.GetSize(), firstMatrix.GetRowsNumber());
+        ASSERT_EQUAL(vector2.GetSize(), matrix0.GetRowsNumber());
 
-        VariableLengthVectorF fourthVector(firstMatrix.GetRowsNumber());
+        VariableLengthVectorF vector3(matrix0.GetRowsNumber());
 
-        for (int rows = 0; rows < firstMatrix.GetRowsNumber(); ++rows)
+        for (int rows = 0; rows < matrix0.GetRowsNumber(); ++rows)
         {
-            for (int columns = 0; columns < firstMatrix.GetColumnsNumber(); ++columns)
+            for (int columns = 0; columns < matrix0.GetColumnsNumber(); ++columns)
             {
-                fourthVector[rows] += firstMatrix[rows][columns] * secondVector[columns];
+                vector3[rows] += matrix0[rows][columns] * vector1[columns];
             }
         }
 
-        ASSERT_TRUE(Approximate(thirdVector, fourthVector, 1e-10f));
+        ASSERT_TRUE(Approximate(vector2, vector3, 1e-10f));
 
-        secondVector.ResetSize(firstMatrix.GetRowsNumber());
+        vector1.ResetSize(matrix0.GetRowsNumber());
 
-        for (int index = 0; index < secondVector.GetSize(); ++index)
+        for (int index = 0; index < vector1.GetSize(); ++index)
         {
-            secondVector[index] = floatRandomDistribution(generator);
+            vector1[index] = floatRandomDistribution(generator);
         }
 
-        thirdVector = secondVector * firstMatrix;
+        vector2 = vector1 * matrix0;
 
-        ASSERT_EQUAL(thirdVector.GetSize(), firstMatrix.GetColumnsNumber());
+        ASSERT_EQUAL(vector2.GetSize(), matrix0.GetColumnsNumber());
 
-        fourthVector.ResetSize(firstMatrix.GetColumnsNumber());
+        vector3.ResetSize(matrix0.GetColumnsNumber());
 
-        for (int rows = 0; rows < firstMatrix.GetRowsNumber(); ++rows)
+        for (int rows = 0; rows < matrix0.GetRowsNumber(); ++rows)
         {
-            for (int columns = 0; columns < firstMatrix.GetColumnsNumber(); ++columns)
+            for (int columns = 0; columns < matrix0.GetColumnsNumber(); ++columns)
             {
-                fourthVector[columns] += firstMatrix[rows][columns] * secondVector[rows];
+                vector3[columns] += matrix0[rows][columns] * vector1[rows];
             }
         }
 
-        ASSERT_TRUE(Approximate(thirdVector, fourthVector, 1e-10f));
+        ASSERT_TRUE(Approximate(vector2, vector3, 1e-10f));
 
-        VariableMatrixD thirdMatrix(integerRandomDistribution(generator), integerRandomDistribution(generator));
+        VariableMatrixD matrix2(integerRandomDistribution(generator), integerRandomDistribution(generator));
 
-        for (int row = 0; row < thirdMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix2.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < thirdMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix2.GetColumnsNumber(); ++column)
             {
-                thirdMatrix[row][column] = floatRandomDistribution(generator);
+                matrix2[row][column] = floatRandomDistribution(generator);
             }
         }
 
-        VariableMatrixD fourthMatrix(thirdMatrix.GetRowsNumber(), integerRandomDistribution(generator));
+        VariableMatrixD matrix3(matrix2.GetRowsNumber(), integerRandomDistribution(generator));
 
-        for (int row = 0; row < fourthMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix3.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < fourthMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix3.GetColumnsNumber(); ++column)
             {
-                fourthMatrix[row][column] = floatRandomDistribution(generator);
+                matrix3[row][column] = floatRandomDistribution(generator);
             }
         }
 
-        VariableMatrixD fifthMatrix = TransposeTimes(thirdMatrix, fourthMatrix);
-        VariableMatrixD sixthMatrix = thirdMatrix.Transpose() * fourthMatrix;
+        VariableMatrixD matrix4 = TransposeTimes(matrix2, matrix3);
+        VariableMatrixD matrix5 = matrix2.Transpose() * matrix3;
 
-        ASSERT_EQUAL(fifthMatrix.GetRowsNumber(), sixthMatrix.GetRowsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetColumnsNumber(), sixthMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetElementsNumber(), sixthMatrix.GetElementsNumber());
+        ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix5.GetRowsNumber());
+        ASSERT_EQUAL(matrix4.GetColumnsNumber(), matrix5.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetElementsNumber(), matrix5.GetElementsNumber());
 
-        ASSERT_TRUE(Approximate(fifthMatrix, sixthMatrix, 1e-8));
+        ASSERT_TRUE(Approximate(matrix4, matrix5, 1e-8));
 
-        fourthMatrix.ResetSize(integerRandomDistribution(generator), thirdMatrix.GetColumnsNumber());
+        matrix3.ResetSize(integerRandomDistribution(generator), matrix2.GetColumnsNumber());
 
-        for (int row = 0; row < fourthMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix3.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < fourthMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix3.GetColumnsNumber(); ++column)
             {
-                fourthMatrix[row][column] = floatRandomDistribution(generator);
+                matrix3[row][column] = floatRandomDistribution(generator);
             }
         }
 
-        fifthMatrix = TimesTranspose(thirdMatrix, fourthMatrix);
-        sixthMatrix = thirdMatrix * fourthMatrix.Transpose();
+        matrix4 = TimesTranspose(matrix2, matrix3);
+        matrix5 = matrix2 * matrix3.Transpose();
 
-        ASSERT_EQUAL(fifthMatrix.GetRowsNumber(), sixthMatrix.GetRowsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetColumnsNumber(), sixthMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetElementsNumber(), sixthMatrix.GetElementsNumber());
+        ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix5.GetRowsNumber());
+        ASSERT_EQUAL(matrix4.GetColumnsNumber(), matrix5.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetElementsNumber(), matrix5.GetElementsNumber());
 
-        ASSERT_TRUE(Approximate(fifthMatrix, sixthMatrix, 1e-10));
+        ASSERT_TRUE(Approximate(matrix4, matrix5, 1e-10));
 
-        fourthMatrix.ResetSize(integerRandomDistribution(generator), thirdMatrix.GetRowsNumber());
+        matrix3.ResetSize(integerRandomDistribution(generator), matrix2.GetRowsNumber());
 
-        for (int row = 0; row < fourthMatrix.GetRowsNumber(); ++row)
+        for (int row = 0; row < matrix3.GetRowsNumber(); ++row)
         {
-            for (int column = 0; column < fourthMatrix.GetColumnsNumber(); ++column)
+            for (int column = 0; column < matrix3.GetColumnsNumber(); ++column)
             {
-                fourthMatrix[row][column] = floatRandomDistribution(generator);
+                matrix3[row][column] = floatRandomDistribution(generator);
             }
         }
 
-        fifthMatrix = TransposeTimesTranspose(thirdMatrix, fourthMatrix);
-        sixthMatrix = thirdMatrix.Transpose() * fourthMatrix.Transpose();
+        matrix4 = TransposeTimesTranspose(matrix2, matrix3);
+        matrix5 = matrix2.Transpose() * matrix3.Transpose();
 
-        ASSERT_EQUAL(fifthMatrix.GetRowsNumber(), sixthMatrix.GetRowsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetColumnsNumber(), sixthMatrix.GetColumnsNumber());
-        ASSERT_EQUAL(fifthMatrix.GetElementsNumber(), sixthMatrix.GetElementsNumber());
+        ASSERT_EQUAL(matrix4.GetRowsNumber(), matrix5.GetRowsNumber());
+        ASSERT_EQUAL(matrix4.GetColumnsNumber(), matrix5.GetColumnsNumber());
+        ASSERT_EQUAL(matrix4.GetElementsNumber(), matrix5.GetElementsNumber());
 
-        ASSERT_TRUE(Approximate(fifthMatrix, sixthMatrix, 1e-10));
+        ASSERT_TRUE(Approximate(matrix4, matrix5, 1e-10));
     }
 }
 
 void Mathematics::VariableMatrixTesting::CompareTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const std::uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
-    vector<double> firstDoubleVector;
+    std::vector<double> firstDoubleVector;
     for (int i = 0; i < 15; ++i)
     {
         firstDoubleVector.push_back(randomDistribution(generator));
     }
 
-    vector<double> secondDoubleVector;
+    std::vector<double> secondDoubleVector;
     for (int i = 0; i < 15; ++i)
     {
         secondDoubleVector.push_back(randomDistribution(generator));
     }
 
-    VariableMatrixD firstMatrix(3, 5, firstDoubleVector);
-    VariableMatrixD secondMatrix(3, 5, secondDoubleVector);
+    VariableMatrixD matrix0(3, 5, firstDoubleVector);
+    VariableMatrixD matrix1(3, 5, secondDoubleVector);
 
-    firstMatrix[0][0] = 0.0;
-    secondMatrix[0][0] = 1.0;
+    matrix0[0][0] = 0.0;
+    matrix1[0][0] = 1.0;
 
-    ASSERT_TRUE(firstMatrix == firstMatrix);
-    ASSERT_FALSE(firstMatrix != firstMatrix);
-    ASSERT_FALSE(firstMatrix == secondMatrix);
-    ASSERT_TRUE(firstMatrix != secondMatrix);
-    ASSERT_TRUE(firstMatrix < secondMatrix);
-    ASSERT_TRUE(firstMatrix <= secondMatrix);
-    ASSERT_FALSE(firstMatrix > secondMatrix);
-    ASSERT_FALSE(firstMatrix >= secondMatrix);
+    ASSERT_TRUE(matrix0 == matrix0);
+    ASSERT_FALSE(matrix0 != matrix0);
+    ASSERT_FALSE(matrix0 == matrix1);
+    ASSERT_TRUE(matrix0 != matrix1);
+    ASSERT_TRUE(matrix0 < matrix1);
+    ASSERT_TRUE(matrix0 <= matrix1);
+    ASSERT_FALSE(matrix0 > matrix1);
+    ASSERT_FALSE(matrix0 >= matrix1);
 
-    ASSERT_TRUE(Approximate(firstMatrix, firstMatrix, 1e-10));
-    ASSERT_TRUE(Approximate(secondMatrix, secondMatrix));
-    ASSERT_FALSE(Approximate(secondMatrix, firstMatrix));
+    ASSERT_TRUE(Approximate(matrix0, matrix0, 1e-10));
+    ASSERT_TRUE(Approximate(matrix1, matrix1));
+    ASSERT_FALSE(Approximate(matrix1, matrix0));
 }

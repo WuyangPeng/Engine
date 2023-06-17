@@ -33,7 +33,7 @@
       <Configuration>StaticRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  </ItemGroup>  
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{EB4870CE-1A5B-4C00-B1F7-E9B1F8B4DB34}</ProjectGuid>
@@ -279,9 +279,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Example\Physics\PhysicsExample\DllLib.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\Physics\PhysicsExample\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\Physics\PhysicsExample\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\Physics\PhysicsExample\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\Physics\PhysicsExample\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\Physics\PhysicsExample\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\Physics\PhysicsExample\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\..\Code\Example\Physics\PhysicsExample\Placeholder\Placeholder.h" />
     <ClInclude Include="..\..\..\..\Code\Example\Physics\PhysicsExample\PhysicsExample.h" />
     <ClInclude Include="..\..\..\..\Code\Example\Physics\PhysicsExample\PhysicsExampleDll.h" />

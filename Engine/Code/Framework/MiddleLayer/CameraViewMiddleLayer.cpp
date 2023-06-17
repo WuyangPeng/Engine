@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 11:28)
+///	引擎版本：0.9.0.12 (2023/06/13 14:25)
 
 #include "Framework/FrameworkExport.h"
 
@@ -14,8 +14,6 @@
 #include "Rendering/Renderers/Renderer.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
-using std::min;
-using std::move;
 using namespace std::literals;
 
 Framework::CameraViewMiddleLayer::CameraViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
@@ -66,7 +64,7 @@ bool Framework::CameraViewMiddleLayer::Resize(WindowDisplay windowDisplay, const
         const auto width = size.GetWindowWidth();
         const auto height = size.GetWindowHeight();
 
-        const auto minValue = min(height, width);
+        const auto minValue = std::min(height, width);
 
         if (0 < minValue)
         {

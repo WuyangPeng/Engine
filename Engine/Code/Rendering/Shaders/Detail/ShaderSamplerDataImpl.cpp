@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/12 14:32)
+///	引擎版本：0.9.0.12 (2023/06/12 10:48)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,8 +18,6 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
 #include <algorithm>
-
-using std::string;
 
 Rendering::ShaderSamplerDataImpl::ShaderSamplerDataImpl(int numSamplers)
     : singleShaderSamplerData{ numSamplers, SingleShaderSamplerData{ CoreTools::DisableNotThrow::Disable } }
@@ -35,7 +33,7 @@ Rendering::ShaderSamplerDataImpl::ShaderSamplerDataImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderSamplerDataImpl)
 
-void Rendering::ShaderSamplerDataImpl::SetSampler(int index, const string& name, ShaderFlags::SamplerType type)
+void Rendering::ShaderSamplerDataImpl::SetSampler(int index, const std::string& name, ShaderFlags::SamplerType type)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "索引错误");
@@ -90,7 +88,7 @@ int Rendering::ShaderSamplerDataImpl::GetNumSamplers() const
     return boost::numeric_cast<int>(singleShaderSamplerData.size());
 }
 
-string Rendering::ShaderSamplerDataImpl::GetSamplerName(int index) const
+std::string Rendering::ShaderSamplerDataImpl::GetSamplerName(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "索引错误");

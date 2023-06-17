@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 22:14)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:35)
 
 #include "PlaneTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,10 +14,8 @@
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/PlaneDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -68,18 +66,18 @@ void Mathematics::PlaneTesting::ConstructionTest()
     ASSERT_APPROXIMATE(thirdPlane.GetConstant(), 6.0, 1e-10);
     ASSERT_TRUE(Approximate(thirdNormal, firstNormal, 1e-10));
 
-    const APointD firstPoint(9.0, 2.0, 3.0);
+    const APointD point0(9.0, 2.0, 3.0);
 
-    const PlaneD fourthPlane(firstNormal, firstPoint);
-    ASSERT_APPROXIMATE(fourthPlane.DistanceTo(firstPoint), 0.0, 1e-10);
+    const PlaneD fourthPlane(firstNormal, point0);
+    ASSERT_APPROXIMATE(fourthPlane.DistanceTo(point0), 0.0, 1e-10);
 
-    const APointD secondPoint(19.0, 22.0, 13.0);
-    const APointD thirdPoint(-19.0, -22.0, 3.0);
+    const APointD point1(19.0, 22.0, 13.0);
+    const APointD point2(-19.0, -22.0, 3.0);
 
-    const PlaneD fifthPlane(firstPoint, secondPoint, thirdPoint);
-    ASSERT_APPROXIMATE(fifthPlane.DistanceTo(firstPoint), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(fifthPlane.DistanceTo(secondPoint), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(fifthPlane.DistanceTo(thirdPoint), 0.0, 1e-10);
+    const PlaneD fifthPlane(point0, point1, point2);
+    ASSERT_APPROXIMATE(fifthPlane.DistanceTo(point0), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(fifthPlane.DistanceTo(point1), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(fifthPlane.DistanceTo(point2), 0.0, 1e-10);
 
     HomogeneousPointD homogeneousPoint(3.0, 5.0, 6.0, 1.0);
 
@@ -134,34 +132,34 @@ void Mathematics::PlaneTesting::CompareTest()
 
 void Mathematics::PlaneTesting::DistanceTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> randomDistribution{ -100.0f, 100.0f };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution{ -100.0f, 100.0f };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const APointD firstPoint(randomDistribution(generator),
-                                 randomDistribution(generator),
-                                 randomDistribution(generator));
+        const APointD point0(randomDistribution(generator),
+                             randomDistribution(generator),
+                             randomDistribution(generator));
 
-        const APointD secondPoint(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator));
+        const APointD point1(randomDistribution(generator),
+                             randomDistribution(generator),
+                             randomDistribution(generator));
 
-        const APointD thirdPoint(randomDistribution(generator),
-                                 randomDistribution(generator),
-                                 randomDistribution(generator));
+        const APointD point2(randomDistribution(generator),
+                             randomDistribution(generator),
+                             randomDistribution(generator));
 
-        const PlaneD plane(firstPoint, secondPoint, thirdPoint);
+        const PlaneD plane(point0, point1, point2);
 
-        ASSERT_APPROXIMATE(plane.DistanceTo(firstPoint), 0.0, 1e-10);
-        ASSERT_APPROXIMATE(plane.DistanceTo(secondPoint), 0.0, 1e-10);
-        ASSERT_APPROXIMATE(plane.DistanceTo(thirdPoint), 0.0, 1e-10);
+        ASSERT_APPROXIMATE(plane.DistanceTo(point0), 0.0, 1e-10);
+        ASSERT_APPROXIMATE(plane.DistanceTo(point1), 0.0, 1e-10);
+        ASSERT_APPROXIMATE(plane.DistanceTo(point2), 0.0, 1e-10);
 
-        ASSERT_ENUM_EQUAL(plane.WhichSide(firstPoint), NumericalValueSymbol::Zero);
-        ASSERT_ENUM_EQUAL(plane.WhichSide(secondPoint), NumericalValueSymbol::Zero);
-        ASSERT_ENUM_EQUAL(plane.WhichSide(thirdPoint), NumericalValueSymbol::Zero);
+        ASSERT_ENUM_EQUAL(plane.WhichSide(point0), NumericalValueSymbol::Zero);
+        ASSERT_ENUM_EQUAL(plane.WhichSide(point1), NumericalValueSymbol::Zero);
+        ASSERT_ENUM_EQUAL(plane.WhichSide(point2), NumericalValueSymbol::Zero);
 
         const APointD fourthPoint(randomDistribution(generator),
                                   randomDistribution(generator),

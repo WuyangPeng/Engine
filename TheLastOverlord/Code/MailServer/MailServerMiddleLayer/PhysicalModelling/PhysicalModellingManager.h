@@ -24,7 +24,7 @@ namespace MailServerMiddleLayer
         using ParentType = Framework::PhysicalModellingManagerInterface;
 
     public:
-        explicit PhysicalModellingManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit PhysicalModellingManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

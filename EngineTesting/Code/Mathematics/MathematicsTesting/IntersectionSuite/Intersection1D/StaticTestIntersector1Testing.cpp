@@ -1,20 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/06 11:25)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:52)
 
 #include "StaticTestIntersector1Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Intersection/StaticTestIntersector1Detail.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
+#include "Mathematics/Intersection/StaticTestIntersector1Detail.h"
 
-using std::swap;
+#include <random>
 
 namespace Mathematics
 {
@@ -42,7 +41,7 @@ void Mathematics::StaticTestIntersector1Testing::MainTest()
 
 void Mathematics::StaticTestIntersector1Testing::IntersectorTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -56,12 +55,12 @@ void Mathematics::StaticTestIntersector1Testing::IntersectorTest()
 
         if (u1 < u0)
         {
-            swap(u0, u1);
+            std::swap(u0, u1);
         }
 
         if (v1 < v0)
         {
-            swap(v0, v1);
+            std::swap(v0, v1);
         }
 
         StaticTestIntersector1<float> intersector1(u0, u1, v0, v1);

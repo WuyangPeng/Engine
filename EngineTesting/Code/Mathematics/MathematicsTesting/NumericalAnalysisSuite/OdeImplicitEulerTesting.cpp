@@ -1,21 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/03 13:41)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:05)
 
 #include "OdeImplicitEulerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
 #include "Mathematics/NumericalAnalysis/OdeImplicitEulerDetail.h"
 #include "Mathematics/NumericalAnalysis/OdeSolverDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::ostream;
-using std::vector;
 
 namespace Mathematics
 {
@@ -58,7 +56,7 @@ void Mathematics::OdeImplicitEulerTesting::SolverTest()
 
     constexpr double tIn = 100;
 
-    vector<double> xIn;
+    std::vector<double> xIn;
 
     for (int i = 0; i < dimension; ++i)
     {
@@ -69,11 +67,11 @@ void Mathematics::OdeImplicitEulerTesting::SolverTest()
 
     const double tOut = data.t;
 
-    vector<double> xOut = data.x;
+    std::vector<double> xOut = data.x;
 
-    vector<double> testXOut(dimension);
+    std::vector<double> testXOut(dimension);
 
-    vector<double> functionValue = OdeImplicitEulerFunction(tIn, xIn, this);
+    std::vector<double> functionValue = OdeImplicitEulerFunction(tIn, xIn, this);
 
     VariableMatrixD derivativeFunctionMatrix = OdeImplicitEulerDerivativeFunction(tIn, xIn, this);
     VariableMatrixD identity(dimension, dimension);
@@ -107,13 +105,13 @@ int Mathematics::OdeImplicitEulerTesting::GetDimension() const noexcept
     return dimension;
 }
 
-vector<double> Mathematics::OdeImplicitEulerTesting::OdeImplicitEulerFunction(double tIn, const vector<double>& xIn, const OdeImplicitEulerTesting* odeEulerTesting)
+std::vector<double> Mathematics::OdeImplicitEulerTesting::OdeImplicitEulerFunction(double tIn, const std::vector<double>& xIn, const OdeImplicitEulerTesting* odeEulerTesting)
 {
     if (odeEulerTesting != nullptr)
     {
         int dimension = odeEulerTesting->GetDimension();
 
-        vector<double> out(dimension);
+        std::vector<double> out(dimension);
 
         for (int i = 0; i < dimension; i++)
         {
@@ -124,11 +122,11 @@ vector<double> Mathematics::OdeImplicitEulerTesting::OdeImplicitEulerFunction(do
     }
     else
     {
-        return vector<double>{};
+        return std::vector<double>{};
     }
 }
 
-Mathematics::VariableMatrixD Mathematics::OdeImplicitEulerTesting::OdeImplicitEulerDerivativeFunction(double tIn, const vector<double>& xIn, const OdeImplicitEulerTesting* odeEulerTesting)
+Mathematics::VariableMatrixD Mathematics::OdeImplicitEulerTesting::OdeImplicitEulerDerivativeFunction(double tIn, const std::vector<double>& xIn, const OdeImplicitEulerTesting* odeEulerTesting)
 {
     if (odeEulerTesting == nullptr)
     {

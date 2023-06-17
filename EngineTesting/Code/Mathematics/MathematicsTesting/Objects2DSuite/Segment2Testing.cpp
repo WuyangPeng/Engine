@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/01 14:23)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:12)
 
 #include "Segment2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Objects2D/Segment2Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -44,21 +42,21 @@ void Mathematics::Segment2Testing::MainTest()
 
 void Mathematics::Segment2Testing::SegmentTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector2 firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        const Vector2 point0(randomDistribution0(generator), randomDistribution0(generator));
 
-        const Vector2 secondPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        const Vector2 point1(randomDistribution0(generator), randomDistribution0(generator));
 
-        const Segment2D firstSegment(firstPoint, secondPoint);
+        const Segment2D firstSegment(point0, point1);
 
-        ASSERT_TRUE(Vector2ToolsD::Approximate(firstPoint, firstSegment.GetBeginPoint()));
-        ASSERT_TRUE(Vector2ToolsD::Approximate(secondPoint, firstSegment.GetEndPoint()));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(point0, firstSegment.GetBeginPoint()));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(point1, firstSegment.GetEndPoint()));
 
         const auto center = firstSegment.GetCenterPoint();
         const auto direction = firstSegment.GetDirection();
@@ -66,8 +64,8 @@ void Mathematics::Segment2Testing::SegmentTest()
 
         const Segment2D secondSegment(extent, center, direction);
 
-        ASSERT_TRUE(Vector2ToolsD::Approximate(firstPoint, secondSegment.GetBeginPoint()));
-        ASSERT_TRUE(Vector2ToolsD::Approximate(secondPoint, secondSegment.GetEndPoint()));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(point0, secondSegment.GetBeginPoint()));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(point1, secondSegment.GetEndPoint()));
         ASSERT_TRUE(Vector2ToolsD::Approximate(center, secondSegment.GetCenterPoint()));
         ASSERT_TRUE(Vector2ToolsD::Approximate(direction, secondSegment.GetDirection()));
         ASSERT_APPROXIMATE(extent, secondSegment.GetExtent(), 1e-10);

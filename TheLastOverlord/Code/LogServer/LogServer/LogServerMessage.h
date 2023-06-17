@@ -55,7 +55,7 @@ namespace LogServer
         using ParentType = MessageType;
 
     public:
-        explicit LogServerMessage(int64_t delta);
+        explicit LogServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

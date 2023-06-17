@@ -63,7 +63,7 @@ void CoreTools::CSVRowImpl::StringNotExistCommaParsing()
             value = csvHead.GetDefaultValue(index);
         }
 
-        rowType.emplace(csvHead.GetVariableName(index), value);
+        rowType.emplace(csvHead.GetVariableName(index), std::move(value));
         ++index;
     }
 }

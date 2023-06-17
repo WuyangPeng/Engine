@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/13 17:22)
+///	引擎版本：0.9.0.12 (2023/06/12 10:54)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,9 +19,6 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 
-using std::make_shared;
-using std::string;
-
 Rendering::SingleShaderSamplerData::SingleShaderSamplerData(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
@@ -30,7 +27,7 @@ Rendering::SingleShaderSamplerData::SingleShaderSamplerData(MAYBE_UNUSED CoreToo
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, SingleShaderSamplerData)
 
-void Rendering::SingleShaderSamplerData::SetSampler(const string& name, ShaderFlags::SamplerType type)
+void Rendering::SingleShaderSamplerData::SetSampler(const std::string& name, ShaderFlags::SamplerType type)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -53,7 +50,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderSamplerData, Se
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SingleShaderSamplerData, SetBorderColor, Colour, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderSamplerData, GetSamplerName, string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderSamplerData, GetSamplerName, std::string)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SingleShaderSamplerData, GetSamplerType, Rendering::ShaderFlags::SamplerType)
 

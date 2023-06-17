@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.8.0.11 (2022/07/19 11:23)
+///	引擎游戏版本：0.9.0.12 (2023/06/16 17:10)
 
 #ifndef ARENA_HELPER_CUSTOM_ASSERT_HELPER_H
 #define ARENA_HELPER_CUSTOM_ASSERT_HELPER_H
@@ -15,11 +15,15 @@
 #include "CoreTools/Helper/CustomAssertMacro.h"
 
 #if defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
+
     #define ARENA_ASSERT_LEVEL 0
+
 #endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 
 #if !defined(ARENA_ASSERT_LEVEL)
+
     #define ARENA_ASSERT_LEVEL 4
+
 #endif  // ARENA_ASSERT_LEVEL
 
 static_assert(ARENA_ASSERT_LEVEL <= ASSERT_LEVEL, "Assert level definition error.");
@@ -33,8 +37,8 @@ static_assert(ARENA_ASSERT_LEVEL <= ASSERT_LEVEL, "Assert level definition error
 
 #else  // ARENA_ASSERT_LEVEL < 0
 
-    #define ARENA_ASSERTION_0(condition, format, ...) ((void)0)
-    #define ARENA_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition, functionDescribed, format, ...) ((void)0)
+    #define ARENA_ASSERTION_0(condition, format, ...) (static_cast<void>(0))
+    #define ARENA_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition, functionDescribed, format, ...) (static_cast<void>(0))
 
 #endif  // 0 <= ARENA_ASSERT_LEVEL
 
@@ -47,8 +51,8 @@ static_assert(ARENA_ASSERT_LEVEL <= ASSERT_LEVEL, "Assert level definition error
 
 #else  // ARENA_ASSERT_LEVEL < 1
 
-    #define ARENA_ASSERTION_1(condition, format, ...) ((void)0)
-    #define ARENA_ASSERTION_USE_FUNCTION_DESCRIBED_1(condition, functionDescribed, format, ...) ((void)0)
+    #define ARENA_ASSERTION_1(condition, format, ...) (static_cast<void>(0))
+    #define ARENA_ASSERTION_USE_FUNCTION_DESCRIBED_1(condition, functionDescribed, format, ...) (static_cast<void>(0))
 
 #endif  // 1 <= ARENA_ASSERT_LEVEL
 
@@ -61,8 +65,8 @@ static_assert(ARENA_ASSERT_LEVEL <= ASSERT_LEVEL, "Assert level definition error
 
 #else  // ARENA_ASSERT_LEVEL < 2
 
-    #define ARENA_ASSERTION_2(condition, format, ...) ((void)0)
-    #define ARENA_ASSERTION_USE_FUNCTION_DESCRIBED_2(condition, functionDescribed, format, ...) ((void)0)
+    #define ARENA_ASSERTION_2(condition, format, ...) (static_cast<void>(0))
+    #define ARENA_ASSERTION_USE_FUNCTION_DESCRIBED_2(condition, functionDescribed, format, ...) (static_cast<void>(0))
 
 #endif  // 2 <= ARENA_ASSERT_LEVEL
 
@@ -75,8 +79,8 @@ static_assert(ARENA_ASSERT_LEVEL <= ASSERT_LEVEL, "Assert level definition error
 
 #else  // ARENA_ASSERT_LEVEL < 3
 
-    #define ARENA_ASSERTION_3(condition, format, ...) ((void)0)
-    #define ARENA_ASSERTION_USE_FUNCTION_DESCRIBED_3(condition, functionDescribed, format, ...) ((void)0)
+    #define ARENA_ASSERTION_3(condition, format, ...) (static_cast<void>(0))
+    #define ARENA_ASSERTION_USE_FUNCTION_DESCRIBED_3(condition, functionDescribed, format, ...) (static_cast<void>(0))
 
 #endif  // 3 <= ARENA_ASSERT_LEVEL
 
@@ -89,8 +93,8 @@ static_assert(ARENA_ASSERT_LEVEL <= ASSERT_LEVEL, "Assert level definition error
 
 #else  // ARENA_ASSERT_LEVEL < 4
 
-    #define ARENA_ASSERTION_4(condition, format, ...) ((void)0)
-    #define ARENA_ASSERTION_USE_FUNCTION_DESCRIBED_4(condition, functionDescribed, format, ...) ((void)0)
+    #define ARENA_ASSERTION_4(condition, format, ...) (static_cast<void>(0))
+    #define ARENA_ASSERTION_USE_FUNCTION_DESCRIBED_4(condition, functionDescribed, format, ...) (static_cast<void>(0))
 
 #endif  // 4 <= ARENA_ASSERT_LEVEL
 

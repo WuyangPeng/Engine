@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 14:41)
+///	引擎版本：0.9.0.12 (2023/06/13 14:17)
 
 #include "Framework/FrameworkExport.h"
 
@@ -18,12 +18,9 @@
 #include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/UnitTestSuite/UnitTestComposite.h"
 
-using std::make_shared;
-using std::string;
-
-Framework::OpenGLGlutCallBackUnitTestSuiteImpl::OpenGLGlutCallBackUnitTestSuiteImpl(const string& name, const OStreamShared& streamShared)
+Framework::OpenGLGlutCallBackUnitTestSuiteImpl::OpenGLGlutCallBackUnitTestSuiteImpl(const std::string& name, const OStreamShared& streamShared)
     : testingInformationHelper{ CoreTools::TestingInformationHelper::Create() },
-      openglSuite{ make_shared<Suite>(name, streamShared, testingInformationHelper.IsPrintRun()) },
+      openglSuite{ std::make_shared<Suite>(name, streamShared, testingInformationHelper.IsPrintRun()) },
       process{ { System::WindowsKeyCodes::F1, &ClassType::ResetTestDataOnMessage },
                { System::WindowsKeyCodes::F5, &ClassType::RunUnitTestOnMessage } }
 {
@@ -77,7 +74,7 @@ int Framework::OpenGLGlutCallBackUnitTestSuiteImpl::GetPassedNumber() const noex
     return openglSuite->GetPassedNumber();
 }
 
-void Framework::OpenGLGlutCallBackUnitTestSuiteImpl::AddTest(const string& suiteName, Suite& suite, const string& testName, const UnitTestSharedPtr& unitTest)
+void Framework::OpenGLGlutCallBackUnitTestSuiteImpl::AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest)
 {
     try
     {

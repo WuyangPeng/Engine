@@ -1,26 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 16:44)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:18)
 
 #include "PolynomialFit3PowersTesting.h"
 #include "CoreTools/DataTypes/TupleDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Approximation/PolynomialFit3PowersDetail.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -48,11 +44,11 @@ void Mathematics::PolynomialFit3PowersTesting::MainTest()
 
 void Mathematics::PolynomialFit3PowersTesting::FitTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(0.0, 2.0);
-    const uniform_int<> secondRandomDistribution(3, 7);
-    const uniform_int<> thirdRandomDistribution(2, 5);
-    const uniform_int<> fourthRandomDistribution(0, 3);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(0.0, 2.0);
+    const std::uniform_int<> randomDistribution1(3, 7);
+    const std::uniform_int<> thirdRandomDistribution(2, 5);
+    const std::uniform_int<> fourthRandomDistribution(0, 3);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -61,26 +57,26 @@ void Mathematics::PolynomialFit3PowersTesting::FitTest()
         std::vector<double> x;
         std::vector<double> y;
         std::vector<double> w;
-        const int xSize = secondRandomDistribution(generator);
-        const int ySize = secondRandomDistribution(generator);
+        const int xSize = randomDistribution1(generator);
+        const int ySize = randomDistribution1(generator);
 
         for (int i = 0; i < xSize; ++i)
         {
-            x.push_back(firstRandomDistribution(generator));
+            x.push_back(randomDistribution0(generator));
         }
 
         for (int i = 0; i < ySize; ++i)
         {
-            y.push_back(firstRandomDistribution(generator));
+            y.push_back(randomDistribution0(generator));
         }
 
         for (int i = 0; i < xSize * ySize; ++i)
         {
-            w.push_back(firstRandomDistribution(generator));
+            w.push_back(randomDistribution0(generator));
         }
 
         const int powSize = thirdRandomDistribution(generator);
-        vector<CoreTools::Tuple<2, int>> power;
+        std::vector<CoreTools::Tuple<2, int>> power;
 
         for (int i = 0; i < powSize; ++i)
         {

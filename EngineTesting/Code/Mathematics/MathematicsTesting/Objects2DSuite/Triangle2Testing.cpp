@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/01 14:24)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:12)
 
 #include "Triangle2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Objects2D/Triangle2Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -45,32 +42,32 @@ void Mathematics::Triangle2Testing::MainTest()
 
 void Mathematics::Triangle2Testing::TriangleTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector2 firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        const Vector2 point0(randomDistribution0(generator), randomDistribution0(generator));
 
-        const Vector2 secondPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        const Vector2 point1(randomDistribution0(generator), randomDistribution0(generator));
 
-        const Vector2 thirdPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        const Vector2 point2(randomDistribution0(generator), randomDistribution0(generator));
 
-        const Triangle2D triangle(firstPoint, secondPoint, thirdPoint);
+        const Triangle2D triangle(point0, point1, point2);
 
         auto vertex = triangle.GetVertex();
 
-        ASSERT_TRUE(Vector2ToolsD::Approximate(vertex.at(0), firstPoint));
-        ASSERT_TRUE(Vector2ToolsD::Approximate(vertex.at(1), secondPoint));
-        ASSERT_TRUE(Vector2ToolsD::Approximate(vertex.at(2), thirdPoint));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(vertex.at(0), point0));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(vertex.at(1), point1));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(vertex.at(2), point2));
 
-        const Vector2 fourthPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        const Vector2 fourthPoint(randomDistribution0(generator), randomDistribution0(generator));
 
-        auto diff = firstPoint - fourthPoint;
-        auto edge0 = secondPoint - firstPoint;
-        auto edge1 = thirdPoint - firstPoint;
+        auto diff = point0 - fourthPoint;
+        auto edge0 = point1 - point0;
+        auto edge1 = point2 - point0;
         auto a00 = Vector2ToolsD::GetLengthSquared(edge0);
         auto a01 = Vector2ToolsD::DotProduct(edge0, edge1);
         auto a11 = Vector2ToolsD::GetLengthSquared(edge1);

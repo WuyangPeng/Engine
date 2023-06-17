@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/24 16:36)
+///	引擎测试版本：0.9.0.12 (2023/06/13 19:48)
 
 #include "VirtualKeysTypesTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
 
 #include <random>
-
-using std::default_random_engine;
-using std::uniform_int;
 
 namespace Framework
 {
@@ -48,8 +46,8 @@ void Framework::VirtualKeysTypesTesting::WindowKeysTest()
     constexpr auto minValue = 0;
     constexpr auto maxValue = 1;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> random{ minValue, maxValue };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> random{ minValue, maxValue };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
@@ -105,8 +103,8 @@ void Framework::VirtualKeysTypesTesting::SetModifiersTest()
     constexpr auto minValue = 0;
     constexpr auto maxValue = 5;
 
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_int<> random{ minValue, maxValue };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> random{ minValue, maxValue };
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {

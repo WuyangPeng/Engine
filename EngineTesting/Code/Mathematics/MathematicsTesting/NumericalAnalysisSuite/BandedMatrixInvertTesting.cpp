@@ -1,25 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/01 16:28)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:59)
 
 #include "BandedMatrixInvertTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
 #include "Mathematics/NumericalAnalysis/BandedMatrixInvertDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -47,9 +43,9 @@ void Mathematics::BandedMatrixInvertTesting::MainTest()
 
 void Mathematics::BandedMatrixInvertTesting::BandedTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    const uniform_int<> integerRandomDistribution(4, 10);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    const std::uniform_int<> integerRandomDistribution(4, 10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -57,53 +53,53 @@ void Mathematics::BandedMatrixInvertTesting::BandedTest()
     {
         const auto size = integerRandomDistribution(generator);
 
-        BandedMatrixD firstMatrix(size, size - 1, size - 2);
+        BandedMatrixD matrix0(size, size - 1, size - 2);
 
-        auto diagonalBand = firstMatrix.GetDiagonalBand();
-        for (auto i = 0; i < firstMatrix.GetSize(); ++i)
+        auto diagonalBand = matrix0.GetDiagonalBand();
+        for (auto i = 0; i < matrix0.GetSize(); ++i)
         {
-            firstMatrix(i, i) = floatRandomDistribution(generator);
+            matrix0(i, i) = floatRandomDistribution(generator);
         }
 
-        for (auto row = 0; row < firstMatrix.GetSize(); ++row)
+        for (auto row = 0; row < matrix0.GetSize(); ++row)
         {
-            for (auto column = 0; column < firstMatrix.GetSize(); ++column)
+            for (auto column = 0; column < matrix0.GetSize(); ++column)
             {
                 const auto band = column - row;
-                if (band < 0 && -band - 1 < firstMatrix.GetLowerBandsNumber())
+                if (band < 0 && -band - 1 < matrix0.GetLowerBandsNumber())
                 {
-                    firstMatrix(row, column) = floatRandomDistribution(generator);
+                    matrix0(row, column) = floatRandomDistribution(generator);
                 }
             }
         }
 
-        for (auto row = 0; row < firstMatrix.GetSize(); ++row)
+        for (auto row = 0; row < matrix0.GetSize(); ++row)
         {
-            for (auto column = 0; column < firstMatrix.GetSize(); ++column)
+            for (auto column = 0; column < matrix0.GetSize(); ++column)
             {
                 const auto band = column - row;
-                if (0 < band && band - 1 < firstMatrix.GetUpperBandsNumber())
+                if (0 < band && band - 1 < matrix0.GetUpperBandsNumber())
                 {
-                    firstMatrix(row, column) = floatRandomDistribution(generator);
+                    matrix0(row, column) = floatRandomDistribution(generator);
                 }
             }
         }
 
-        BandedMatrixInvert<double> invert(firstMatrix, 1e-10);
+        BandedMatrixInvert<double> invert(matrix0, 1e-10);
 
-        VariableMatrixD secondMatrix = invert.GetInvert();
-        VariableMatrixD thirdMatrix = firstMatrix.ToVariableMatrix() * secondMatrix;
-        VariableMatrixD fourthMatrix(size, size);
+        VariableMatrixD matrix1 = invert.GetInvert();
+        VariableMatrixD matrix2 = matrix0.ToVariableMatrix() * matrix1;
+        VariableMatrixD matrix3(size, size);
 
-        for (auto row = 0; row < fourthMatrix.GetRowsNumber(); ++row)
+        for (auto row = 0; row < matrix3.GetRowsNumber(); ++row)
         {
-            fourthMatrix(row, row) = 1.0;
+            matrix3(row, row) = 1.0;
         }
 
         using VariableMatrixdApproximate = bool (*)(const VariableMatrixD& lhs, const VariableMatrixD& rhs, const double epsilon);
 
         VariableMatrixdApproximate function = Approximate<double>;
 
-        ASSERT_APPROXIMATE_USE_FUNCTION(function, thirdMatrix, fourthMatrix, 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(function, matrix2, matrix3, 1e-10);
     }
 }

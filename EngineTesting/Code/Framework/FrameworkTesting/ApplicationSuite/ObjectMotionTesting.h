@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 11:15)
+///	引擎测试版本：0.9.0.12 (2023/06/13 20:25)
 
 #ifndef FRAMEWORK_APPLICATION_SUITE_OBJECT_MOTION_TESTING_H
 #define FRAMEWORK_APPLICATION_SUITE_OBJECT_MOTION_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Mathematics/Algebra/AVector.h"
 #include "Mathematics/Algebra/Matrix.h"
 
@@ -42,7 +42,7 @@ namespace Framework
 
         void AssertRotate(const Matrixf& lhs, const Matrixf& rhs);
 
-        NODISCARD AVectorf GetSphereVector(float x, float y) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD AVectorf GetSphereVector(float x, float y) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
     };
 }
 

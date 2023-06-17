@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/11 20:44)
+///	引擎版本：0.9.0.12 (2023/06/12 10:45)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,9 +21,6 @@
 
 #include <algorithm>
 
-using std::for_each;
-using std::string;
-
 Rendering::ShaderBaseDataImpl::ShaderBaseDataImpl(int number)
     : singleShaderBaseData(number, SingleShaderBaseData{ CoreTools::DisableNotThrow::Disable })
 {
@@ -38,7 +35,7 @@ Rendering::ShaderBaseDataImpl::ShaderBaseDataImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderBaseDataImpl)
 
-void Rendering::ShaderBaseDataImpl::SetData(int index, const string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
+void Rendering::ShaderBaseDataImpl::SetData(int index, const std::string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(singleShaderBaseData.size()), "索引错误");
@@ -46,7 +43,7 @@ void Rendering::ShaderBaseDataImpl::SetData(int index, const string& name, Shade
     singleShaderBaseData.at(index).SetData(name, type, semantic);
 }
 
-void Rendering::ShaderBaseDataImpl::InsertData(const string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
+void Rendering::ShaderBaseDataImpl::InsertData(const std::string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -60,7 +57,7 @@ int Rendering::ShaderBaseDataImpl::GetNumber() const
     return boost::numeric_cast<int>(singleShaderBaseData.size());
 }
 
-string Rendering::ShaderBaseDataImpl::GetName(int index) const
+std::string Rendering::ShaderBaseDataImpl::GetName(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(singleShaderBaseData.size()), "索引错误");

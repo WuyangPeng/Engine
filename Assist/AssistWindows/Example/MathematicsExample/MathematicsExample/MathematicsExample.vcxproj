@@ -33,7 +33,7 @@
       <Configuration>StaticRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  </ItemGroup>  
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{7BBC5228-857E-4DAF-AFC4-088AB58E8452}</ProjectGuid>
@@ -279,9 +279,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Example\Mathematics\MathematicsExample\DllLib.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\Mathematics\MathematicsExample\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\Mathematics\MathematicsExample\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\Mathematics\MathematicsExample\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\Mathematics\MathematicsExample\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\Mathematics\MathematicsExample\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\Mathematics\MathematicsExample\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\..\Code\Example\Mathematics\MathematicsExample\Placeholder\Placeholder.h" />
     <ClInclude Include="..\..\..\..\Code\Example\Mathematics\MathematicsExample\MathematicsExample.h" />
     <ClInclude Include="..\..\..\..\Code\Example\Mathematics\MathematicsExample\MathematicsExampleDll.h" />

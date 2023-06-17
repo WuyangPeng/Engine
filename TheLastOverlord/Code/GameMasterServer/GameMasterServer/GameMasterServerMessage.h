@@ -55,7 +55,7 @@ namespace GameMasterServer
         using ParentType = MessageType;
 
     public:
-        explicit GameMasterServerMessage(int64_t delta);
+        explicit GameMasterServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

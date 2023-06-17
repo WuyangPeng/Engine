@@ -6,10 +6,10 @@ Threading Core Render Engine
 @author 彭武阳，彭晔恩，彭晔泽
 联系作者：94458936@qq.com
 
-@version 0.9.0.10
+@version 0.9.0.12
 标准：std:c++20
 
-@date 2023/05/25 13:38
+@date 2023/06/10 23:07
 
 @section sec_Contents 内容
 
@@ -29,7 +29,7 @@ Threading Core Render Engine
  
 第四层：资源管理（ResourceManager）、渲染（Rendering）、物理（Physics）、图像分析（Imagics）。
  
-第五层：动画（Animation）、人工智能（ArtificialIntellegence）、界面（UserInterface）。 
+第五层：动画（Animation）、人工智能（ArtificialIntelligence）、界面（UserInterface）。 
 
 第六层：辅助工具（AssistTools）。 
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/06 11:25)
+///	引擎版本：0.9.0.12 (2023/06/13 14:48)
 
 #include "Framework/FrameworkExport.h"
 
@@ -14,10 +14,6 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/DataTypes/Transform.h"
-
-using Mathematics::MathF;
-using Rendering::Spatial;
-using Rendering::TransformF;
 
 Framework::ObjectMotionRotateTrackBall::ObjectMotionRotateTrackBall(const SpatialSharedPtr& motionObject,
                                                                     const ConstCameraSharedPtr& camera,
@@ -50,7 +46,7 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
     auto endY = endYTrack;
 
     // 获得球面上的第一个向量。
-    auto length = MathF::Sqrt(beginX * beginX + beginY * beginY);
+    auto length = Mathematics::MathF::Sqrt(beginX * beginX + beginY * beginY);
     auto beginZ = 0.0f;
     auto endZ = 0.0f;
 
@@ -65,7 +61,7 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
     {
         // 计算点(x0,y0,z0)在负单位半球。
         beginZ = 1.0f - beginX * beginX - beginY * beginY;
-        beginZ = (beginZ <= 0.0f ? 0.0f : MathF::Sqrt(beginZ));
+        beginZ = (beginZ <= 0.0f ? 0.0f : Mathematics::MathF::Sqrt(beginZ));
     }
     beginZ *= -1.0f;
 
@@ -73,7 +69,7 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
     const AVector vec0{ beginZ, beginY, beginX };
 
     // 获得球面上的第二个向量。
-    length = MathF::Sqrt(endX * endX + endY * endY);
+    length = Mathematics::MathF::Sqrt(endX * endX + endY * endY);
     if (1.0f < length)
     {
         // 在单位圆外,投影到它。
@@ -85,7 +81,7 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
     {
         // 计算点(x1,y1,z1) 在负单位半球。
         endZ = 1.0f - endX * endX - endY * endY;
-        endZ = (endZ <= 0.0f ? 0.0f : MathF::Sqrt(endZ));
+        endZ = (endZ <= 0.0f ? 0.0f : Mathematics::MathF::Sqrt(endZ));
     }
     endZ *= -1.0f;
 
@@ -99,18 +95,18 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
     if (!axis.IsZero())
     {
         axis.Normalize();
-        angle = MathF::ACos(dot);
+        angle = Mathematics::MathF::ACos(dot);
     }
     else  // 向量是平行的。
     {
         if (dot < 0.0f)
         {
             // π弧度旋转。
-            auto invLength = MathF::InvSqrt(beginX * beginX + beginY * beginY);
+            auto invLength = Mathematics::MathF::InvSqrt(beginX * beginX + beginY * beginY);
             axis[0] = beginY * invLength;
             axis[1] = -beginX * invLength;
             axis[2] = 0.0f;
-            angle = MathF::GetPI();
+            angle = Mathematics::MathF::GetPI();
         }
         else
         {
@@ -143,7 +139,7 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
     localRotate.Orthonormalize();
 }
 
-TransformF Framework::ObjectMotionRotateTrackBall::GetTransform() const noexcept
+Rendering::TransformF Framework::ObjectMotionRotateTrackBall::GetTransform() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 

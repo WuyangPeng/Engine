@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/13 16:53)
+///	引擎版本：0.9.0.12 (2023/06/12 10:54)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,10 +18,7 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 
-using std::make_shared;
-using std::string;
-
-Rendering::SingleShaderConstantsData::SingleShaderConstantsData(const string& name, int numRegistersUsed)
+Rendering::SingleShaderConstantsData::SingleShaderConstantsData(const std::string& name, int numRegistersUsed)
     : impl{ name, numRegistersUsed }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -35,7 +32,7 @@ Rendering::SingleShaderConstantsData::SingleShaderConstantsData(MAYBE_UNUSED Cor
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, SingleShaderConstantsData)
 
-void Rendering::SingleShaderConstantsData::SetConstant(const string& name, int numRegistersUsed)
+void Rendering::SingleShaderConstantsData::SetConstant(const std::string& name, int numRegistersUsed)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -43,7 +40,7 @@ void Rendering::SingleShaderConstantsData::SetConstant(const string& name, int n
 }
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, SingleShaderConstantsData)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderConstantsData, GetConstantName, string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderConstantsData, GetConstantName, std::string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SingleShaderConstantsData, GetNumRegistersUsed, int)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderConstantsData, Load, CoreTools::BufferSource&, void)

@@ -1,5 +1,0 @@
-TODO Level 3
-
-0.8.0.10
-
-1. （ArtificialIntellegenceExample）完成人工智能库所需要的例子。

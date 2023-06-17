@@ -33,7 +33,7 @@
       <Configuration>StaticRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  </ItemGroup>  
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{16E2BEB0-FF66-49E2-85D6-705645418A12}</ProjectGuid>
@@ -102,7 +102,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
-    <Import Project="..\..\..\AssistWin32DebugLibs.props" /> 
+    <Import Project="..\..\..\AssistWin32DebugLibs.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -112,7 +112,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
-    <Import Project="..\..\..\AssistWin32ReleaseLibs.props" /> 
+    <Import Project="..\..\..\AssistWin32ReleaseLibs.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -122,7 +122,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
-    <Import Project="..\..\..\AssistX64DebugLibs.props" /> 
+    <Import Project="..\..\..\AssistX64DebugLibs.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -132,7 +132,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
-    <Import Project="..\..\..\AssistX64ReleaseLibs.props" /> 
+    <Import Project="..\..\..\AssistX64ReleaseLibs.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -168,23 +168,23 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PREPROCESSORDEFINITIONS>WIN32;_DEBUG;SCRIPTEDITORASSIST_EXPORTS;_WINDOWS;_USRDLL;%(PREPROCESSORDEFINITIONS)</PREPROCESSORDEFINITIONS>
-      <ConformanceMode>true</ConformanceMode> 
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-    </Link> 
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode> 
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-    </Link> 
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -237,7 +237,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -275,9 +275,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Editor\Script\ScriptEditorAssist\DllLib.h" />
-    <ClInclude Include="..\..\..\..\Code\Editor\Script\ScriptEditorAssist\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\..\Code\Editor\Script\ScriptEditorAssist\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\Editor\Script\ScriptEditorAssist\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Editor\Script\ScriptEditorAssist\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\..\Code\Editor\Script\ScriptEditorAssist\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Editor\Script\ScriptEditorAssist\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\..\Code\Editor\Script\ScriptEditorAssist\Placeholder\Placeholder.h" />
     <ClInclude Include="..\..\..\..\Code\Editor\Script\ScriptEditorAssist\ScriptEditorAssist.h" />
     <ClInclude Include="..\..\..\..\Code\Editor\Script\ScriptEditorAssist\ScriptEditorAssistDll.h" />

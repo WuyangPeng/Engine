@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/05 20:48)
+///	引擎版本：0.9.0.12 (2023/06/12 12:51)
 
 #include "Rendering/RenderingExport.h"
 
@@ -17,17 +17,15 @@
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::string;
-
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, RendererParameter)
 
-Rendering::RendererParameter::RendererParameter(const string& fileName)
+Rendering::RendererParameter::RendererParameter(const std::string& fileName)
     : impl{ CreateRendererParameter(fileName) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::RendererParameter::PackageType Rendering::RendererParameter::CreateRendererParameter(const string& fileName)
+Rendering::RendererParameter::PackageType Rendering::RendererParameter::CreateRendererParameter(const std::string& fileName)
 {
     try
     {
@@ -52,7 +50,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetNu
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetClearColor, Rendering::RendererParameter::ColourType);
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetWindowTitle, string);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetWindowTitle, std::string);
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetXPosition, int);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetYPosition, int);

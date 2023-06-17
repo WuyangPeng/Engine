@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/04/02 11:45)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 11:16)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,10 +19,6 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-
-using std::make_shared;
-using std::string;
-using std::vector;
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, CameraNode)
 
@@ -76,7 +72,7 @@ bool Rendering::CameraNode::UpdateWorldData(double applicationTime)
     return result;
 }
 
-CoreTools::ObjectSharedPtr Rendering::CameraNode::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::CameraNode::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -91,7 +87,7 @@ CoreTools::ObjectSharedPtr Rendering::CameraNode::GetObjectByName(const string& 
     }
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::CameraNode::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::CameraNode::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -103,7 +99,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::CameraNode::GetAllObjectsByName(co
     return parentObjects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::CameraNode::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::CameraNode::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -118,7 +114,7 @@ CoreTools::ConstObjectSharedPtr Rendering::CameraNode::GetConstObjectByName(cons
     }
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::CameraNode::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::CameraNode::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

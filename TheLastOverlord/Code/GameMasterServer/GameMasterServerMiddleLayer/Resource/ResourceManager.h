@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/28 22:21)
+///	最后的霸王版本：0.9.0.12 (2022/07/28 22:21)
 
 #ifndef GAME_MASTER_SERVER_MIDDLE_LAYER_RESOURCE_MIDDLE_LAYER_RESOURCE_H
 #define GAME_MASTER_SERVER_MIDDLE_LAYER_RESOURCE_MIDDLE_LAYER_RESOURCE_H
@@ -24,7 +24,7 @@ namespace GameMasterServerMiddleLayer
         using ParentType = Framework::ResourceManagerInterface;
 
     public:
-        explicit ResourceManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit ResourceManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

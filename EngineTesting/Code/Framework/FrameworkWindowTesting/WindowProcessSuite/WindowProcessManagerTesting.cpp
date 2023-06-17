@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 13:59)
+///	引擎测试版本：0.9.0.12 (2023/06/13 23:09)
 
 #include "WindowProcessManagerTesting.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "System/Windows/WindowsCreate.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/WindowCreate/WindowCreateHandle.h"
 #include "Framework/WindowCreate/WindowCreateParameter.h"
@@ -19,7 +20,6 @@
 #include "Framework/WindowCreate/WindowSize.h"
 #include "Framework/WindowProcess/WindowProcessManager.h"
 
-using std::const_pointer_cast;
 using namespace std::literals;
 
 Framework::WindowProcessManagerTesting::WindowProcessManagerTesting(const OStreamShared& stream, HWnd hwnd)
@@ -100,7 +100,7 @@ void Framework::WindowProcessManagerTesting::SetMainWindow()
 
     WINDOW_PROCESS_MANAGER_SINGLETON.SetMainWindowHwnd(hwnd);
 
-    constexpr auto delta = System::g_Microseconds / 60;
+    constexpr auto delta = System::gMicroseconds / 60;
     WindowMessageInterface message{ delta };
 
     ASSERT_EQUAL(message.CreateMessage(create.GetHwnd(), 0, 0), 0);

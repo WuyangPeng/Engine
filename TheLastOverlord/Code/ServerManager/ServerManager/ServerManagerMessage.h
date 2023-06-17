@@ -55,7 +55,7 @@ namespace ServerManager
         using ParentType = MessageType;
 
     public:
-        explicit ServerManagerMessage(int64_t delta);
+        explicit ServerManagerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

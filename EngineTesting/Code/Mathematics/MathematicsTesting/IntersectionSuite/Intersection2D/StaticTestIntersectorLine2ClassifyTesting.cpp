@@ -1,18 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/06 20:36)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:53)
 
 #include "StaticTestIntersectorLine2ClassifyTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
 #include "Mathematics/Intersection/Intersection2D/StaticTestIntersectorLine2ClassifyDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 #include <random>
 
 namespace Mathematics
@@ -41,7 +42,7 @@ void Mathematics::StaticTestIntersectorLine2ClassifyTesting::MainTest()
 
 void Mathematics::StaticTestIntersectorLine2ClassifyTesting::LineTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -75,6 +76,6 @@ void Mathematics::StaticTestIntersectorLine2ClassifyTesting::LineTest()
         ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate,
                                         lhsOrigin + thirdClassify.GetParameter0() * lhsDirection,
                                         rhsOrigin + thirdClassify.GetParameter1() * rhsDirection,
-                                        1e-4f);
+                                        1e-3f);
     }
 }

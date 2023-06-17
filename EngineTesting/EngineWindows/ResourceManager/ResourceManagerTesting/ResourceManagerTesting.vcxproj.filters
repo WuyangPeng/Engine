@@ -28,9 +28,6 @@
     <Filter Include="GameWorldMapSuite 头文件">
       <UniqueIdentifier>{3fbc6921-44d5-4adb-a320-415e8acda487}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MacroSuite 头文件">
-      <UniqueIdentifier>{5048e00e-2b58-4b89-a45d-e6254470670a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MaterialSuite 头文件">
       <UniqueIdentifier>{4ddbaa40-f5b8-45b2-97b8-02dcc09de755}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,9 @@
     </Filter>
     <Filter Include="PhysicalParametersSuite 头文件">
       <UniqueIdentifier>{b39bd29e-b8e2-4360-a6a5-6a8a76bebf6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件">
+      <UniqueIdentifier>{5048e00e-2b58-4b89-a45d-e6254470670a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -77,9 +77,6 @@
     <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\GameWorldMapSuite\GameWorldMapSuite.h">
       <Filter>GameWorldMapSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\MacroSuite\MacroSuite.h">
-      <Filter>MacroSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\MaterialSuite\MaterialSuite.h">
       <Filter>MaterialSuite 头文件</Filter>
     </ClInclude>
@@ -97,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\ThreeDimensionalModelSuite\ThreeDimensionalModelSuite.h">
       <Filter>ThreeDimensionalModelSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\HelperSuite\HelperSuite.h">
+      <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

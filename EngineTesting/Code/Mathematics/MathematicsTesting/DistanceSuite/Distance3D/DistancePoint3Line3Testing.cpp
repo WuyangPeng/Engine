@@ -1,21 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/07 18:54)
+///	引擎测试版本：0.9.0.12 (2023/06/09 15:45)
 
 #include "DistancePoint3Line3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Distance/Distance3D/DistancePoint3Line3Detail.h"
+
 #include <random>
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::swap;
 
 namespace Mathematics
 {
@@ -47,7 +47,7 @@ void Mathematics::DistancePoint3Line3Testing::MainTest()
 
 void Mathematics::DistancePoint3Line3Testing::BaseTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -82,7 +82,7 @@ void Mathematics::DistancePoint3Line3Testing::BaseTest()
 
 void Mathematics::DistancePoint3Line3Testing::StaticTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -117,7 +117,7 @@ void Mathematics::DistancePoint3Line3Testing::StaticTest()
 
 void Mathematics::DistancePoint3Line3Testing::DynamicTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -158,7 +158,7 @@ void Mathematics::DistancePoint3Line3Testing::DynamicTest()
 
 void Mathematics::DistancePoint3Line3Testing::DerivativeTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -196,7 +196,7 @@ void Mathematics::DistancePoint3Line3Testing::DerivativeTest()
 
 void Mathematics::DistancePoint3Line3Testing::IntervalTest()
 {
-    std::default_random_engine generator;
+    std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
@@ -217,7 +217,7 @@ void Mathematics::DistancePoint3Line3Testing::IntervalTest()
         double tMax = MathD::FAbs(randomDistribution(generator));
         if (tMax < tMin)
         {
-            swap(tMin, tMax);
+            std::swap(tMin, tMax);
         }
 
         Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));

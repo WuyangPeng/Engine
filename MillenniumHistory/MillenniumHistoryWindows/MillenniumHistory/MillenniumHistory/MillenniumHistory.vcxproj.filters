@@ -124,13 +124,13 @@
     <ClCompile Include="..\..\..\Code\MillenniumHistory\Core\ProjectName.cpp">
       <Filter>Core 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\MillenniumHistory\GUI\GUIMiddleLayer.cpp">
+    <ClCompile Include="..\..\..\Code\MillenniumHistory\GUI\GUIManager.cpp">
       <Filter>GUI 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\MillenniumHistory\Resource\ResourceMiddleLayer.cpp">
+    <ClCompile Include="..\..\..\Code\MillenniumHistory\Resource\ResourceManager.cpp">
       <Filter>Resource 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\MillenniumHistory\System\SystemMiddleLayer.cpp">
+    <ClCompile Include="..\..\..\Code\MillenniumHistory\System\SystemManager.cpp">
       <Filter>System 源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -165,7 +165,7 @@
     <ClInclude Include="..\..\..\Code\MillenniumHistory\GUI\GUIFwd.h">
       <Filter>GUI 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\GUI\GUIMiddleLayer.h">
+    <ClInclude Include="..\..\..\Code\MillenniumHistory\GUI\GUIManager.h">
       <Filter>GUI 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\MillenniumHistory\Helper\Helper.h">
@@ -183,10 +183,10 @@
     <ClInclude Include="..\..\..\Code\MillenniumHistory\Input\InputFwd.h">
       <Filter>Input 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Input\InputMiddleLayer.h">
+    <ClInclude Include="..\..\..\Code\MillenniumHistory\Input\InputManager.h">
       <Filter>Input 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Input\InputMiddleLayerDetail.h">
+    <ClInclude Include="..\..\..\Code\MillenniumHistory\Input\InputManagerDetail.h">
       <Filter>Input 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\MillenniumHistory\Resource\Resource.h">
@@ -195,7 +195,7 @@
     <ClInclude Include="..\..\..\Code\MillenniumHistory\Resource\ResourceFwd.h">
       <Filter>Resource 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Resource\ResourceMiddleLayer.h">
+    <ClInclude Include="..\..\..\Code\MillenniumHistory\Resource\ResourceManager.h">
       <Filter>Resource 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\MillenniumHistory\System\System.h">
@@ -204,7 +204,7 @@
     <ClInclude Include="..\..\..\Code\MillenniumHistory\System\SystemFwd.h">
       <Filter>System 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\System\SystemMiddleLayer.h">
+    <ClInclude Include="..\..\..\Code\MillenniumHistory\System\SystemManager.h">
       <Filter>System 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\MillenniumHistory\Helper\MillenniumHistoryClassInvariantMacro.h">

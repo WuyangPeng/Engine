@@ -1,20 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/03 14:17)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:05)
 
 #include "OdeMidpointTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/NumericalAnalysis/OdeMidpointDetail.h"
 #include "Mathematics/NumericalAnalysis/OdeSolverDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-using std::ostream;
-using std::vector;
 
 Mathematics::OdeMidpointTesting::OdeMidpointTesting(const OStreamShared& stream)
     : ParentType{ stream }, dimension{ 10 }
@@ -51,7 +49,7 @@ void Mathematics::OdeMidpointTesting::SolverTest()
 
     constexpr double tIn = 100;
 
-    vector<double> xIn;
+    std::vector<double> xIn;
 
     for (int i = 0; i < dimension; ++i)
     {
@@ -64,9 +62,9 @@ void Mathematics::OdeMidpointTesting::SolverTest()
 
     auto xOut = result.x;
 
-    vector<double> testXOut(dimension);
+    std::vector<double> testXOut(dimension);
 
-    vector<double> functionValue = OdeMidpointFunction(tIn, xIn, this);
+    std::vector<double> functionValue = OdeMidpointFunction(tIn, xIn, this);
 
     for (int i = 0; i < dimension; ++i)
     {
@@ -92,13 +90,13 @@ void Mathematics::OdeMidpointTesting::SolverTest()
     }
 }
 
-vector<double> Mathematics::OdeMidpointTesting::OdeMidpointFunction(double tIn, const vector<double>& xIn, const OdeMidpointTesting* odeEulerTesting)
+std::vector<double> Mathematics::OdeMidpointTesting::OdeMidpointFunction(double tIn, const std::vector<double>& xIn, const OdeMidpointTesting* odeEulerTesting)
 {
     if (odeEulerTesting != nullptr)
     {
         int dimension = odeEulerTesting->GetDimension();
 
-        vector<double> out(dimension);
+        std::vector<double> out(dimension);
 
         for (int i = 0; i < dimension; i++)
         {
@@ -109,7 +107,7 @@ vector<double> Mathematics::OdeMidpointTesting::OdeMidpointFunction(double tIn, 
     }
     else
     {
-        return vector<double>{};
+        return std::vector<double>{};
     }
 }
 

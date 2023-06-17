@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/12 14:41)
+///	引擎版本：0.9.0.12 (2023/06/12 10:48)
 
 #include "Rendering/RenderingExport.h"
 
@@ -15,9 +15,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-using std::string;
-
-Rendering::SingleShaderBaseDataImpl::SingleShaderBaseDataImpl(const string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
+Rendering::SingleShaderBaseDataImpl::SingleShaderBaseDataImpl(const std::string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
     : name{ name }, variableType{ type }, semantic{ semantic }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -40,7 +38,7 @@ void Rendering::SingleShaderBaseDataImpl::SetData(const std::string& aName, Shad
     semantic = aSemantic;
 }
 
-string Rendering::SingleShaderBaseDataImpl::GetName() const
+std::string Rendering::SingleShaderBaseDataImpl::GetName() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/12 18:24)
+///	引擎版本：0.9.0.12 (2023/06/12 10:50)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,9 +20,6 @@
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
-using std::string;
-using std::vector;
 
 Rendering::VisualTechniqueImpl::VisualTechniqueImpl() noexcept
     : passes{}
@@ -160,7 +157,7 @@ Rendering::ConstWireStateSharedPtr Rendering::VisualTechniqueImpl::GetWireState(
     return passes.at(passIndex).object->GetWireState();
 }
 
-CoreTools::ObjectSharedPtr Rendering::VisualTechniqueImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::VisualTechniqueImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -176,11 +173,11 @@ CoreTools::ObjectSharedPtr Rendering::VisualTechniqueImpl::GetObjectByName(const
     return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::VisualTechniqueImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::VisualTechniqueImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vector<CoreTools::ObjectSharedPtr> objects{};
+    std::vector<CoreTools::ObjectSharedPtr> objects{};
 
     for (auto& pointer : passes)
     {
@@ -192,7 +189,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::VisualTechniqueImpl::GetAllObjects
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::VisualTechniqueImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::VisualTechniqueImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -208,11 +205,11 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualTechniqueImpl::GetConstObjectBy
     return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualTechniqueImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualTechniqueImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vector<CoreTools::ConstObjectSharedPtr> objects{};
+    std::vector<CoreTools::ConstObjectSharedPtr> objects{};
 
     for (const auto& pointer : passes)
     {

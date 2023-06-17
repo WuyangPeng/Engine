@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/31 11:38)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:21)
 
 #include "Torus3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Objects3D/Torus3Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 #ifndef BUILDING_MATHEMATICS_STATIC
 
@@ -48,18 +46,18 @@ void Mathematics::Torus3Testing::MainTest()
 
 void Mathematics::Torus3Testing::TorusTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> firstRandomDistribution(0.1, 100.0);
-    const uniform_real<double> secondRandomDistribution(0.0, 1.0);
+    const std::uniform_real<double> randomDistribution0(0.1, 100.0);
+    const std::uniform_real<double> randomDistribution1(0.0, 1.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        auto innerRadius = firstRandomDistribution(generator);
+        auto innerRadius = randomDistribution0(generator);
 
-        const uniform_real<double> thirdRandomDistribution(innerRadius, 105.0);
+        const std::uniform_real<double> thirdRandomDistribution(innerRadius, 105.0);
 
         auto outerRadius = thirdRandomDistribution(generator);
 
@@ -68,8 +66,8 @@ void Mathematics::Torus3Testing::TorusTest()
         ASSERT_APPROXIMATE(outerRadius, torus.GetOuterRadius(), 1e-10);
         ASSERT_APPROXIMATE(innerRadius, torus.GetInnerRadius(), 1e-10);
 
-        auto t = secondRandomDistribution(generator);
-        auto s = secondRandomDistribution(generator);
+        auto t = randomDistribution1(generator);
+        auto s = randomDistribution1(generator);
 
         auto radius = torus.GetOuterRadius() + torus.GetInnerRadius() * cos(MathD::GetTwoPI() * t);
 

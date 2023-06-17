@@ -5,16 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 16:34)
+///	引擎测试版本：0.9.0.12 (2022/06/27 16:34)
 
 #include "OpenGLGlutCallBackUnitTestSuiteTesting.h"
 #include "System/OpenGL/Flags/GlutKeyCodesFlags.h"
 #include "System/Windows/Flags/WindowsKeyCodesFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "Framework/OpenGLGlutCallBackUnitTestSuiteTesting/OpenGLGlutCallBackUnitTestSuiteTestingOpenGLGlutCallBack.h"
-
-OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBackUnitTestSuiteTesting(const OStreamShared& ostream, OpenGLGlutCallBackUnitTestSuiteTestingOpenGLGlutCallBack* message)
+#include "Framework/OpenGLGlutCallBackUnitTestSuiteTesting/OpenGLGlutCallBack.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBackUnitTestSuiteTesting(const OStreamShared& ostream, OpenGLGlutCallBack* message)
     : ParentType(ostream), m_Message(message)
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;

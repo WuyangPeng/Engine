@@ -22,7 +22,7 @@
     <Filter Include="Placeholder 源文件">
       <UniqueIdentifier>{3a08117e-e59b-4032-a7dc-57af9bd3d7f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
+    <Filter Include="Helper 头文件">
       <UniqueIdentifier>{8b96910c-b958-454a-a889-acd5320b43a0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -65,14 +65,14 @@
     <ClInclude Include="..\..\..\..\Code\Editor\Animation\AnimationEditorAssist\Placeholder\Placeholder.h">
       <Filter>Placeholder 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Editor\Animation\AnimationEditorAssist\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
+    <ClInclude Include="..\..\..\..\Code\Editor\Animation\AnimationEditorAssist\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Editor\Animation\AnimationEditorAssist\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
+    <ClInclude Include="..\..\..\..\Code\Editor\Animation\AnimationEditorAssist\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Editor\Animation\AnimationEditorAssist\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
+    <ClInclude Include="..\..\..\..\Code\Editor\Animation\AnimationEditorAssist\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

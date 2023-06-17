@@ -8,7 +8,7 @@
 ///	引擎测试版本：0.9.0.8 (2023/05/11 16:16)
 
 #include "JsonMessageTesting.h"
-#include "TestJsonMessage.h"
+#include "Detail/TestJsonMessage.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTest/AssertExceptionMacro.h"

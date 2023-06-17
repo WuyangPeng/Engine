@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/05 11:28)
+///	引擎辅助版本：0.9.0.12 (2022/07/05 11:28)
 
 #include "WinMainEntryPoint3.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"

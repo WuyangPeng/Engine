@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/06 16:32)
+///	引擎版本：0.9.0.12 (2023/06/12 14:05)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,8 +20,6 @@
 #include "Mathematics/Algebra/AlgebraAggregate.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
-
-using std::vector;
 
 Rendering::SkinControllerImpl::SkinControllerImpl(int numVertices, int numBones)
     : numVertices{ numVertices },
@@ -134,7 +132,7 @@ void Rendering::SkinControllerImpl::SetWeights(int bonesIndex, int verticesIndex
     weights.at(index) = weight;
 }
 
-void Rendering::SkinControllerImpl::SetWeights(int bonesIndex, const vector<float>& weight)
+void Rendering::SkinControllerImpl::SetWeights(int bonesIndex, const std::vector<float>& weight)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_2(boost::numeric_cast<int>(weight.size()) == numVertices, "传入的骨骼大小错误");
@@ -164,7 +162,7 @@ void Rendering::SkinControllerImpl::SetOffsets(int bonesIndex, int verticesIndex
     offsets.at(index) = offset;
 }
 
-void Rendering::SkinControllerImpl::SetOffsets(int bonesIndex, const vector<APoint>& offset)
+void Rendering::SkinControllerImpl::SetOffsets(int bonesIndex, const std::vector<APoint>& offset)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_2(boost::numeric_cast<int>(offset.size()) == numVertices, "传入的骨骼大小错误");

@@ -1,25 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 21:21)
+///	引擎测试版本：0.9.0.12 (2023/06/09 13:50)
 
 #include "BandedMatrixSolveTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/BandedMatrixSolveDetail.h"
 #include "Mathematics/Algebra/Flags/MatrixFlags.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -48,355 +45,355 @@ void Mathematics::BandedMatrixSolveTesting::MainTest()
 
 void Mathematics::BandedMatrixSolveTesting::ConstructionTest()
 {
-    default_random_engine generator{};
-    const uniform_int<> firstIntegerRandomDistribution{ 2, 20 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> integerRandomDistribution0{ 2, 20 };
 
-    const int size = firstIntegerRandomDistribution(generator);
+    const int size = integerRandomDistribution0(generator);
 
-    const uniform_int<> secondIntegerRandomDistribution{ 1, size };
+    const std::uniform_int<> integerRandomDistribution1{ 1, size };
 
-    const int lowerBoundNumber = secondIntegerRandomDistribution(generator);
-    const int upperBoundNumber = secondIntegerRandomDistribution(generator);
+    const int lowerBoundNumber = integerRandomDistribution1(generator);
+    const int upperBoundNumber = integerRandomDistribution1(generator);
 
-    BandedMatrixSolveD firstBandedMatrix(size, lowerBoundNumber, upperBoundNumber);
+    BandedMatrixSolveD bandedMatrix0(size, lowerBoundNumber, upperBoundNumber);
 
-    ASSERT_EQUAL(firstBandedMatrix.GetSize(), size);
-    ASSERT_EQUAL(firstBandedMatrix.GetLowerBandsNumber(), lowerBoundNumber);
-    ASSERT_EQUAL(firstBandedMatrix.GetUpperBandsNumber(), upperBoundNumber);
+    ASSERT_EQUAL(bandedMatrix0.GetSize(), size);
+    ASSERT_EQUAL(bandedMatrix0.GetLowerBandsNumber(), lowerBoundNumber);
+    ASSERT_EQUAL(bandedMatrix0.GetUpperBandsNumber(), upperBoundNumber);
 
     // 对角线
-    for (int i = 0; i < firstBandedMatrix.GetSize(); ++i)
+    for (int i = 0; i < bandedMatrix0.GetSize(); ++i)
     {
-        firstBandedMatrix(i, i) = i * 1.0;
+        bandedMatrix0(i, i) = i * 1.0;
     }
 
-    auto firstPtr = firstBandedMatrix.GetDiagonalBand();
+    auto ptr0 = bandedMatrix0.GetDiagonalBand();
 
-    for (int i = 0; i < firstBandedMatrix.GetSize(); ++i)
+    for (auto i = 0; i < bandedMatrix0.GetSize(); ++i)
     {
-        ASSERT_APPROXIMATE(firstBandedMatrix(i, i), firstPtr.at(i), 1e-10);
+        ASSERT_APPROXIMATE(bandedMatrix0(i, i), ptr0.at(i), 1e-10);
     }
 
     // 下三角
-    for (int row = 0; row < firstBandedMatrix.GetSize(); ++row)
+    for (auto row = 0; row < bandedMatrix0.GetSize(); ++row)
     {
-        for (int column = 0; column < firstBandedMatrix.GetSize(); ++column)
+        for (auto column = 0; column < bandedMatrix0.GetSize(); ++column)
         {
-            const int band = column - row;
-            if (band < 0 && -band - 1 < firstBandedMatrix.GetLowerBandsNumber())
+            const auto band = column - row;
+            if (band < 0 && -band - 1 < bandedMatrix0.GetLowerBandsNumber())
             {
-                firstBandedMatrix(row, column) = row * 1.0 - column * 0.1;
+                bandedMatrix0(row, column) = row * 1.0 - column * 0.1;
             }
         }
     }
 
-    for (int i = 0; i < firstBandedMatrix.GetLowerBandsNumber(); ++i)
+    for (auto i = 0; i < bandedMatrix0.GetLowerBandsNumber(); ++i)
     {
-        ASSERT_EQUAL(firstBandedMatrix.GetLowerBandMax(i), firstBandedMatrix.GetSize() - 1 - i);
+        ASSERT_EQUAL(bandedMatrix0.GetLowerBandMax(i), bandedMatrix0.GetSize() - 1 - i);
 
-        auto secondPtr = firstBandedMatrix.GetLowerBand(i);
+        auto ptr1 = bandedMatrix0.GetLowerBand(i);
 
-        for (int j = 0; j < firstBandedMatrix.GetLowerBandMax(i); ++j)
+        for (int j = 0; j < bandedMatrix0.GetLowerBandMax(i); ++j)
         {
-            ASSERT_APPROXIMATE(firstBandedMatrix(i + 1 + j, j), secondPtr.at(j), 1e-10);
+            ASSERT_APPROXIMATE(bandedMatrix0(i + 1 + j, j), ptr1.at(j), 1e-10);
         }
     }
 
     // 上三角
-    for (int row = 0; row < firstBandedMatrix.GetSize(); ++row)
+    for (auto row = 0; row < bandedMatrix0.GetSize(); ++row)
     {
-        for (int column = 0; column < firstBandedMatrix.GetSize(); ++column)
+        for (auto column = 0; column < bandedMatrix0.GetSize(); ++column)
         {
-            const int band = column - row;
-            if (0 < band && band - 1 < firstBandedMatrix.GetUpperBandsNumber())
+            const auto band = column - row;
+            if (0 < band && band - 1 < bandedMatrix0.GetUpperBandsNumber())
             {
-                firstBandedMatrix(row, column) = row * 2.0 - column * 0.3;
+                bandedMatrix0(row, column) = row * 2.0 - column * 0.3;
             }
         }
     }
 
-    for (int i = 0; i < firstBandedMatrix.GetUpperBandsNumber(); ++i)
+    for (auto i = 0; i < bandedMatrix0.GetUpperBandsNumber(); ++i)
     {
-        ASSERT_EQUAL(firstBandedMatrix.GetUpperBandMax(i), firstBandedMatrix.GetSize() - 1 - i);
+        ASSERT_EQUAL(bandedMatrix0.GetUpperBandMax(i), bandedMatrix0.GetSize() - 1 - i);
 
-        auto secondPtr = firstBandedMatrix.GetUpperBand(i);
+        auto ptr1 = bandedMatrix0.GetUpperBand(i);
 
-        for (int j = 0; j < firstBandedMatrix.GetUpperBandMax(i); ++j)
+        for (int j = 0; j < bandedMatrix0.GetUpperBandMax(i); ++j)
         {
-            ASSERT_APPROXIMATE(firstBandedMatrix(j, i + 1 + j), secondPtr.at(j), 1e-10);
+            ASSERT_APPROXIMATE(bandedMatrix0(j, i + 1 + j), ptr1.at(j), 1e-10);
         }
     }
 
     // 其他元素为零
-    for (int row = 0; row < firstBandedMatrix.GetSize(); ++row)
+    for (auto row = 0; row < bandedMatrix0.GetSize(); ++row)
     {
-        for (int column = 0; column < firstBandedMatrix.GetSize(); ++column)
+        for (auto column = 0; column < bandedMatrix0.GetSize(); ++column)
         {
-            const int band = column - row;
+            const auto band = column - row;
 
-            if (0 < band && firstBandedMatrix.GetUpperBandsNumber() <= band - 1)
+            if (0 < band && bandedMatrix0.GetUpperBandsNumber() <= band - 1)
             {
-                ASSERT_APPROXIMATE(firstBandedMatrix(row, column), 0.0, 1e-10);
+                ASSERT_APPROXIMATE(bandedMatrix0(row, column), 0.0, 1e-10);
             }
-            else if (band < 0 && firstBandedMatrix.GetUpperBandsNumber() <= -band - 1)
+            else if (band < 0 && bandedMatrix0.GetLowerBandsNumber() <= -band - 1)
             {
-                ASSERT_APPROXIMATE(firstBandedMatrix(row, column), 0.0, 1e-10);
+                ASSERT_APPROXIMATE(bandedMatrix0(row, column), 0.0, 1e-10);
             }
         }
     }
 
-    const BandedMatrixSolveD secondBandedMatrix(firstBandedMatrix);
+    const BandedMatrixSolveD bandedMatrix1(bandedMatrix0);
 
-    ASSERT_EQUAL(secondBandedMatrix.GetSize(), firstBandedMatrix.GetSize());
-    ASSERT_EQUAL(secondBandedMatrix.GetLowerBandsNumber(), firstBandedMatrix.GetLowerBandsNumber());
-    ASSERT_EQUAL(secondBandedMatrix.GetUpperBandsNumber(), firstBandedMatrix.GetUpperBandsNumber());
+    ASSERT_EQUAL(bandedMatrix1.GetSize(), bandedMatrix0.GetSize());
+    ASSERT_EQUAL(bandedMatrix1.GetLowerBandsNumber(), bandedMatrix0.GetLowerBandsNumber());
+    ASSERT_EQUAL(bandedMatrix1.GetUpperBandsNumber(), bandedMatrix0.GetUpperBandsNumber());
 
-    for (int row = 0; row < firstBandedMatrix.GetSize(); ++row)
+    for (auto row = 0; row < bandedMatrix0.GetSize(); ++row)
     {
-        for (int column = 0; column < firstBandedMatrix.GetSize(); ++column)
+        for (auto column = 0; column < bandedMatrix0.GetSize(); ++column)
         {
-            ASSERT_APPROXIMATE(firstBandedMatrix(row, column), secondBandedMatrix(row, column), 1e-10);
+            ASSERT_APPROXIMATE(bandedMatrix0(row, column), bandedMatrix1(row, column), 1e-10);
         }
     }
 
     // 对角线
-    const auto thirdPtr = secondBandedMatrix.GetDiagonalBand();
+    const auto ptr2 = bandedMatrix1.GetDiagonalBand();
 
-    for (int i = 0; i < secondBandedMatrix.GetSize(); ++i)
+    for (auto i = 0; i < bandedMatrix1.GetSize(); ++i)
     {
-        ASSERT_APPROXIMATE(secondBandedMatrix(i, i), thirdPtr.at(i), 1e-10);
+        ASSERT_APPROXIMATE(bandedMatrix1(i, i), ptr2.at(i), 1e-10);
     }
 
     // 下三角
 
-    for (int i = 0; i < secondBandedMatrix.GetLowerBandsNumber(); ++i)
+    for (auto i = 0; i < bandedMatrix1.GetLowerBandsNumber(); ++i)
     {
-        ASSERT_EQUAL(secondBandedMatrix.GetLowerBandMax(i), secondBandedMatrix.GetSize() - 1 - i);
+        ASSERT_EQUAL(bandedMatrix1.GetLowerBandMax(i), bandedMatrix1.GetSize() - 1 - i);
 
-        const auto fourthPtr = secondBandedMatrix.GetLowerBand(i);
+        const auto ptr3 = bandedMatrix1.GetLowerBand(i);
 
-        for (int j = 0; j < secondBandedMatrix.GetLowerBandMax(i); ++j)
+        for (auto j = 0; j < bandedMatrix1.GetLowerBandMax(i); ++j)
         {
-            ASSERT_APPROXIMATE(secondBandedMatrix(i + 1 + j, j), fourthPtr.at(j), 1e-10);
+            ASSERT_APPROXIMATE(bandedMatrix1(i + 1 + j, j), ptr3.at(j), 1e-10);
         }
     }
 
     // 上三角
 
-    for (int i = 0; i < secondBandedMatrix.GetUpperBandsNumber(); ++i)
+    for (auto i = 0; i < bandedMatrix1.GetUpperBandsNumber(); ++i)
     {
-        ASSERT_EQUAL(secondBandedMatrix.GetUpperBandMax(i), secondBandedMatrix.GetSize() - 1 - i);
+        ASSERT_EQUAL(bandedMatrix1.GetUpperBandMax(i), bandedMatrix1.GetSize() - 1 - i);
 
-        const auto fifthPtr = secondBandedMatrix.GetUpperBand(i);
+        const auto ptr4 = bandedMatrix1.GetUpperBand(i);
 
-        for (int j = 0; j < secondBandedMatrix.GetUpperBandMax(i); ++j)
+        for (int j = 0; j < bandedMatrix1.GetUpperBandMax(i); ++j)
         {
-            ASSERT_APPROXIMATE(secondBandedMatrix(j, i + 1 + j), fifthPtr.at(j), 1e-10);
+            ASSERT_APPROXIMATE(bandedMatrix1(j, i + 1 + j), ptr4.at(j), 1e-10);
         }
     }
 
     // 其他元素为零
-    for (int row = 0; row < secondBandedMatrix.GetSize(); ++row)
+    for (auto row = 0; row < bandedMatrix1.GetSize(); ++row)
     {
-        for (int column = 0; column < secondBandedMatrix.GetSize(); ++column)
+        for (auto column = 0; column < bandedMatrix1.GetSize(); ++column)
         {
-            const int band = column - row;
+            const auto band = column - row;
 
-            if (0 < band && secondBandedMatrix.GetUpperBandsNumber() <= band - 1)
+            if (0 < band && bandedMatrix1.GetUpperBandsNumber() <= band - 1)
             {
-                ASSERT_APPROXIMATE(secondBandedMatrix(row, column), 0.0, 1e-10);
+                ASSERT_APPROXIMATE(bandedMatrix1(row, column), 0.0, 1e-10);
             }
-            else if (band < 0 && secondBandedMatrix.GetUpperBandsNumber() <= -band - 1)
+            else if (band < 0 && bandedMatrix1.GetLowerBandsNumber() <= -band - 1)
             {
-                ASSERT_APPROXIMATE(secondBandedMatrix(row, column), 0.0, 1e-10);
-            }
-        }
-    }
-
-    BandedMatrixSolveD thirdBandedMatrix(5, 1, 1);
-
-    for (int i = 0; i < thirdBandedMatrix.GetSize(); ++i)
-    {
-        thirdBandedMatrix(i, i) = i * 1.0;
-    }
-
-    for (int row = 0; row < thirdBandedMatrix.GetSize(); ++row)
-    {
-        for (int column = 0; column < thirdBandedMatrix.GetSize(); ++column)
-        {
-            const int band = column - row;
-            if (band < 0 && -band - 1 < thirdBandedMatrix.GetLowerBandsNumber())
-            {
-                thirdBandedMatrix(row, column) = row * 1.0 - column * 0.1;
+                ASSERT_APPROXIMATE(bandedMatrix1(row, column), 0.0, 1e-10);
             }
         }
     }
 
-    for (int row = 0; row < thirdBandedMatrix.GetSize(); ++row)
+    BandedMatrixSolveD bandedMatrix2(5, 1, 1);
+
+    for (auto i = 0; i < bandedMatrix2.GetSize(); ++i)
     {
-        for (int column = 0; column < thirdBandedMatrix.GetSize(); ++column)
+        bandedMatrix2(i, i) = i * 1.0;
+    }
+
+    for (auto row = 0; row < bandedMatrix2.GetSize(); ++row)
+    {
+        for (auto column = 0; column < bandedMatrix2.GetSize(); ++column)
         {
-            const int band = column - row;
-            if (0 < band && band - 1 < thirdBandedMatrix.GetUpperBandsNumber())
+            const auto band = column - row;
+            if (band < 0 && -band - 1 < bandedMatrix2.GetLowerBandsNumber())
             {
-                thirdBandedMatrix(row, column) = row * 2.0 - column * 0.2;
+                bandedMatrix2(row, column) = row * 1.0 - column * 0.1;
             }
         }
     }
 
-    firstBandedMatrix = thirdBandedMatrix;
-
-    ASSERT_EQUAL(thirdBandedMatrix.GetSize(), firstBandedMatrix.GetSize());
-    ASSERT_EQUAL(thirdBandedMatrix.GetLowerBandsNumber(), firstBandedMatrix.GetLowerBandsNumber());
-    ASSERT_EQUAL(thirdBandedMatrix.GetUpperBandsNumber(), firstBandedMatrix.GetUpperBandsNumber());
-
-    for (int row = 0; row < firstBandedMatrix.GetSize(); ++row)
+    for (auto row = 0; row < bandedMatrix2.GetSize(); ++row)
     {
-        for (int column = 0; column < firstBandedMatrix.GetSize(); ++column)
+        for (auto column = 0; column < bandedMatrix2.GetSize(); ++column)
         {
-            ASSERT_APPROXIMATE(firstBandedMatrix(row, column), thirdBandedMatrix(row, column), 1e-10);
+            const auto band = column - row;
+            if (0 < band && band - 1 < bandedMatrix2.GetUpperBandsNumber())
+            {
+                bandedMatrix2(row, column) = row * 2.0 - column * 0.2;
+            }
         }
     }
 
-    BandedMatrixSolveD fourthBandedMatrix(secondBandedMatrix);
+    bandedMatrix0 = bandedMatrix2;
 
-    fourthBandedMatrix.SetZero();
+    ASSERT_EQUAL(bandedMatrix2.GetSize(), bandedMatrix0.GetSize());
+    ASSERT_EQUAL(bandedMatrix2.GetLowerBandsNumber(), bandedMatrix0.GetLowerBandsNumber());
+    ASSERT_EQUAL(bandedMatrix2.GetUpperBandsNumber(), bandedMatrix0.GetUpperBandsNumber());
 
-    for (int row = 0; row < fourthBandedMatrix.GetSize(); ++row)
+    for (int row = 0; row < bandedMatrix0.GetSize(); ++row)
     {
-        for (int column = 0; column < fourthBandedMatrix.GetSize(); ++column)
+        for (int column = 0; column < bandedMatrix0.GetSize(); ++column)
         {
-            ASSERT_APPROXIMATE(fourthBandedMatrix(row, column), 0.0, 1e-10);
+            ASSERT_APPROXIMATE(bandedMatrix0(row, column), bandedMatrix2(row, column), 1e-10);
         }
     }
 
-    fourthBandedMatrix.SetIdentity();
+    BandedMatrixSolveD bandedMatrix3(bandedMatrix1);
 
-    for (int row = 0; row < fourthBandedMatrix.GetSize(); ++row)
+    bandedMatrix3.SetZero();
+
+    for (auto row = 0; row < bandedMatrix3.GetSize(); ++row)
     {
-        for (int column = 0; column < fourthBandedMatrix.GetSize(); ++column)
+        for (auto column = 0; column < bandedMatrix3.GetSize(); ++column)
+        {
+            ASSERT_APPROXIMATE(bandedMatrix3(row, column), 0.0, 1e-10);
+        }
+    }
+
+    bandedMatrix3.SetIdentity();
+
+    for (auto row = 0; row < bandedMatrix3.GetSize(); ++row)
+    {
+        for (auto column = 0; column < bandedMatrix3.GetSize(); ++column)
         {
             if (row == column)
             {
-                ASSERT_APPROXIMATE(fourthBandedMatrix(row, column), 1.0, 1e-10);
+                ASSERT_APPROXIMATE(bandedMatrix3(row, column), 1.0, 1e-10);
             }
             else
             {
-                ASSERT_APPROXIMATE(fourthBandedMatrix(row, column), 0.0, 1e-10);
+                ASSERT_APPROXIMATE(bandedMatrix3(row, column), 0.0, 1e-10);
             }
         }
     }
 
-    fourthBandedMatrix.SetEpsilon(1e-11);
-    ASSERT_APPROXIMATE(fourthBandedMatrix.GetEpsilon(), 1e-11, 1e-10);
+    bandedMatrix3.SetEpsilon(1e-11);
+    ASSERT_APPROXIMATE(bandedMatrix3.GetEpsilon(), 1e-11, 1e-10);
 }
 
 void Mathematics::BandedMatrixSolveTesting::SolveTest()
 {
-    default_random_engine generator{};
-    const uniform_int<> firstIntegerRandomDistribution{ 2, 20 };
-    const uniform_real<> doubleRandomDistribution{ 1.0, 3.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> integerRandomDistribution0{ 2, 20 };
+    const std::uniform_real<> doubleRandomDistribution{ 1.0, 3.0 };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        const int size = firstIntegerRandomDistribution(generator);
+        const auto size = integerRandomDistribution0(generator);
 
-        const uniform_int<> secondIntegerRandomDistribution(1, size - 1);
+        const std::uniform_int<> integerRandomDistribution1(1, size - 1);
 
-        const int boundNumber = secondIntegerRandomDistribution(generator);
+        const auto boundNumber = integerRandomDistribution1(generator);
 
-        BandedMatrixSolveD firstBandedMatrix(size, boundNumber, boundNumber, 1e-5);
+        BandedMatrixSolveD bandedMatrix0(size, boundNumber, boundNumber, 1e-5);
 
         // 下三角
-        for (int row = 0; row < firstBandedMatrix.GetSize(); ++row)
+        for (auto row = 0; row < bandedMatrix0.GetSize(); ++row)
         {
-            for (int column = 0; column < firstBandedMatrix.GetSize(); ++column)
+            for (auto column = 0; column < bandedMatrix0.GetSize(); ++column)
             {
-                const int band = column - row;
-                if (band < 0 && -band - 1 < firstBandedMatrix.GetLowerBandsNumber())
+                const auto band = column - row;
+                if (band < 0 && -band - 1 < bandedMatrix0.GetLowerBandsNumber())
                 {
-                    firstBandedMatrix(row, column) = doubleRandomDistribution(generator);
+                    bandedMatrix0(row, column) = doubleRandomDistribution(generator);
                 }
             }
         }
 
         // 上三角
-        for (int row = 0; row < firstBandedMatrix.GetSize(); ++row)
+        for (auto row = 0; row < bandedMatrix0.GetSize(); ++row)
         {
-            for (int column = 0; column < firstBandedMatrix.GetSize(); ++column)
+            for (auto column = 0; column < bandedMatrix0.GetSize(); ++column)
             {
-                const int band = column - row;
-                if (0 < band && band - 1 < firstBandedMatrix.GetUpperBandsNumber())
+                const auto band = column - row;
+                if (0 < band && band - 1 < bandedMatrix0.GetUpperBandsNumber())
                 {
-                    firstBandedMatrix(row, column) = firstBandedMatrix(column, row);
+                    bandedMatrix0(row, column) = bandedMatrix0(column, row);
                 }
             }
         }
 
         // 对角线
-        firstBandedMatrix(0, 0) = doubleRandomDistribution(generator);
+        bandedMatrix0(0, 0) = doubleRandomDistribution(generator);
 
-        for (int index = 1; index < firstBandedMatrix.GetSize(); ++index)
+        for (auto index = 1; index < bandedMatrix0.GetSize(); ++index)
         {
-            firstBandedMatrix(index, index) = firstBandedMatrix(index - 1, index - 1) * firstBandedMatrix(index, index - 1) + doubleRandomDistribution(generator);
+            bandedMatrix0(index, index) = bandedMatrix0(index - 1, index - 1) * bandedMatrix0(index, index - 1) + doubleRandomDistribution(generator);
         }
 
-        ASSERT_ENUM_EQUAL(firstBandedMatrix.GetSolve(), BandedMatrixSolveFlags::Unsolved);
+        ASSERT_ENUM_EQUAL(bandedMatrix0.GetSolve(), BandedMatrixSolveFlags::Unsolved);
 
-        if (!firstBandedMatrix.CholeskyFactor())
+        if (!bandedMatrix0.CholeskyFactor())
         {
-            ASSERT_ENUM_EQUAL(firstBandedMatrix.GetSolve(), BandedMatrixSolveFlags::Failure);
+            ASSERT_ENUM_EQUAL(bandedMatrix0.GetSolve(), BandedMatrixSolveFlags::Failure);
             continue;
         }
 
-        ASSERT_ENUM_EQUAL(firstBandedMatrix.GetSolve(), BandedMatrixSolveFlags::Succeed);
+        ASSERT_ENUM_EQUAL(bandedMatrix0.GetSolve(), BandedMatrixSolveFlags::Succeed);
 
-        VariableLengthVectorD firstVector(firstBandedMatrix.GetSize());
+        VariableLengthVectorD vector0(bandedMatrix0.GetSize());
 
-        for (int index = 0; index < firstVector.GetSize(); ++index)
+        for (auto index = 0; index < vector0.GetSize(); ++index)
         {
-            firstVector[index] = doubleRandomDistribution(generator);
+            vector0[index] = doubleRandomDistribution(generator);
         }
 
-        VariableLengthVectorD secondVector = firstBandedMatrix.SolveSystem(firstVector);
+        VariableLengthVectorD vector1 = bandedMatrix0.SolveSystem(vector0);
 
-        ASSERT_TRUE(Approximate(firstBandedMatrix.ToInputVariableMatrix() * secondVector, firstVector, 1e-10));
+        ASSERT_TRUE(Approximate(bandedMatrix0.ToInputVariableMatrix() * vector1, vector0, 1e-10));
 
-        VariableMatrixD firstVariableMatrix(firstBandedMatrix.GetSize(), firstBandedMatrix.GetSize());
+        VariableMatrixD variableMatrix0(bandedMatrix0.GetSize(), bandedMatrix0.GetSize());
 
-        for (int row = 0; row < firstBandedMatrix.GetSize(); ++row)
+        for (auto row = 0; row < bandedMatrix0.GetSize(); ++row)
         {
-            for (int column = 0; column < firstBandedMatrix.GetSize(); ++column)
+            for (auto column = 0; column < bandedMatrix0.GetSize(); ++column)
             {
-                firstVariableMatrix[row][column] = doubleRandomDistribution(generator);
+                variableMatrix0[row][column] = doubleRandomDistribution(generator);
             }
         }
 
-        VariableMatrixD secondVariableMatrix = firstBandedMatrix.SolveSystem(firstVariableMatrix);
+        VariableMatrixD variableMatrix1 = bandedMatrix0.SolveSystem(variableMatrix0);
 
-        ASSERT_TRUE(Approximate(firstBandedMatrix.ToInputVariableMatrix() * secondVariableMatrix, firstVariableMatrix, 1e-10));
+        ASSERT_TRUE(Approximate(bandedMatrix0.ToInputVariableMatrix() * variableMatrix1, variableMatrix0, 1e-10));
     }
 
-    BandedMatrixSolveD fifthBandedMatrix(3, 2, 2);
+    BandedMatrixSolveD bandedMatrix4(3, 2, 2);
 
-    fifthBandedMatrix(0, 0) = 6;
-    fifthBandedMatrix(0, 1) = 7;
-    fifthBandedMatrix(0, 2) = 5;
-    fifthBandedMatrix(1, 0) = 7;
-    fifthBandedMatrix(1, 1) = 13;
-    fifthBandedMatrix(1, 2) = 8;
-    fifthBandedMatrix(2, 0) = 5;
-    fifthBandedMatrix(2, 1) = 8;
-    fifthBandedMatrix(2, 2) = 6;
+    bandedMatrix4(0, 0) = 6;
+    bandedMatrix4(0, 1) = 7;
+    bandedMatrix4(0, 2) = 5;
+    bandedMatrix4(1, 0) = 7;
+    bandedMatrix4(1, 1) = 13;
+    bandedMatrix4(1, 2) = 8;
+    bandedMatrix4(2, 0) = 5;
+    bandedMatrix4(2, 1) = 8;
+    bandedMatrix4(2, 2) = 6;
 
-    ASSERT_ENUM_EQUAL(fifthBandedMatrix.GetSolve(), BandedMatrixSolveFlags::Unsolved);
+    ASSERT_ENUM_EQUAL(bandedMatrix4.GetSolve(), BandedMatrixSolveFlags::Unsolved);
 
-    if (!fifthBandedMatrix.CholeskyFactor())
+    if (!bandedMatrix4.CholeskyFactor())
     {
-        ASSERT_ENUM_EQUAL(fifthBandedMatrix.GetSolve(), BandedMatrixSolveFlags::Failure);
+        ASSERT_ENUM_EQUAL(bandedMatrix4.GetSolve(), BandedMatrixSolveFlags::Failure);
     }
     else
     {
-        ASSERT_ENUM_EQUAL(fifthBandedMatrix.GetSolve(), BandedMatrixSolveFlags::Succeed);
+        ASSERT_ENUM_EQUAL(bandedMatrix4.GetSolve(), BandedMatrixSolveFlags::Succeed);
     }
 }

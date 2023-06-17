@@ -18,8 +18,6 @@
 #include "Framework/Application/CameraMotion.h"
 #include "Framework/Application/ObjectMotion.h"
 
-using std::make_shared;
-using std::move;
 using namespace std::literals;
 
 Framework::CameraModelMiddleLayerImpl::CameraModelMiddleLayerImpl() noexcept
@@ -29,7 +27,7 @@ Framework::CameraModelMiddleLayerImpl::CameraModelMiddleLayerImpl() noexcept
 }
 
 Framework::CameraModelMiddleLayerImpl::CameraModelMiddleLayerImpl(CameraModelMiddleLayerImpl&& rhs) noexcept
-    : cameraMotion{ move(rhs.cameraMotion) }, objectMotion{ move(rhs.objectMotion) }
+    : cameraMotion{ std::move(rhs.cameraMotion) }, objectMotion{ std::move(rhs.objectMotion) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -38,8 +36,8 @@ Framework::CameraModelMiddleLayerImpl& Framework::CameraModelMiddleLayerImpl::op
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    cameraMotion = move(rhs.cameraMotion);
-    objectMotion = move(rhs.objectMotion);
+    cameraMotion = std::move(rhs.cameraMotion);
+    objectMotion = std::move(rhs.objectMotion);
 
     return *this;
 }
@@ -50,7 +48,7 @@ void Framework::CameraModelMiddleLayerImpl::InitializeCameraMotion(float transla
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    cameraMotion = make_shared<CameraMotion>(translationSpeed, rotationSpeed, translationSpeedFactor, rotationSpeedFactor);
+    cameraMotion = std::make_shared<CameraMotion>(translationSpeed, rotationSpeed, translationSpeedFactor, rotationSpeedFactor);
 }
 
 void Framework::CameraModelMiddleLayerImpl::InitializeObjectMotion()

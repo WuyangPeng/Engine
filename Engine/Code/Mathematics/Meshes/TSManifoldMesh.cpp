@@ -1,19 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.4 (2022/03/23 14:59)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/09 10:22)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "TSManifoldMesh.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include <fstream>
 
 Mathematics::TSManifoldMesh::TSManifoldMesh(TriangleCreator tCreator, TetrahedronCreator sCreator) noexcept

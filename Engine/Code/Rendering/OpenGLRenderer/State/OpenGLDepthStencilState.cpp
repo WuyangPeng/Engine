@@ -1,21 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/14 14:34)
+///	引擎版本：0.9.0.12 (2023/06/12 13:24)
 
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLDepthStencilState.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-
+#include "System/OpenGL/OpenGLBase.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/OpenGLRenderer/Detail/State/OpenGLDepthStencilStateImpl.h"
-#include "System/OpenGL/OpenGLBase.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, OpenGLDepthStencilState)
 

@@ -34,8 +34,8 @@ namespace System
         void CompareStringUseLocaleStringTest();
         void CompareStringTest(size_t index);
 
-        void CompareStringEqualTest(const wchar_t* languageLocaleString, Compares compare, const String& comparesWString);
-        void CompareStringOppositeTest(const wchar_t* languageLocaleString, Compares compare, const String& lhsComparesWString, const String& rhsComparesWString);
+        void CompareStringEqualTest(const wchar_t* languageLocaleString, Compares compare, const std::wstring& comparesWString);
+        void CompareStringOppositeTest(const wchar_t* languageLocaleString, Compares compare, const std::wstring& lhsComparesWString, const std::wstring& rhsComparesWString);
 
     private:
         using LanguageLocaleStringContainer = std::vector<const wchar_t*>;

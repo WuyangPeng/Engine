@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/04 18:33)
+///	引擎辅助版本：0.9.0.12 (2023/06/13 15:31)
 
 #include "ConsoleMainFunctionHelperBase1.h"
 #include "System/Helper/PragmaWarning.h"
@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 #include <iostream>
-
-using std::cout;
 
 Framework::ConsoleMainFunctionHelperBase1::ConsoleMainFunctionHelperBase1(int argc, char** argv, const String& consoleTitle, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ argc, argv, consoleTitle, environmentDirectory }
@@ -79,8 +77,8 @@ void Framework::ConsoleMainFunctionHelperBase1::PrintCommand()
     for (auto index = 0; index < command.GetExcessArgumentsCount(); ++index)
     {
         auto arguments = command.ExcessArguments();
-        cout << "命令行参数名为："
-             << arguments
-             << '\n';
+        std::cout << "命令行参数名为："
+                  << arguments
+                  << '\n';
     }
 }

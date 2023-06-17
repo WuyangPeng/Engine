@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/04/01 17:02)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 11:14)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,9 +16,6 @@
 #include "Rendering/Resources/Flags/DataFormatType.h"
 
 #include <vector>
-
-using std::swap;
-using std::vector;
 
 Rendering::StandardMeshImpl::StandardMeshImpl(const VertexFormatSharedPtr& vertexFormat, bool isStatic, bool inside, const TransformF* transform)
     : vertexFormat{ vertexFormat },
@@ -281,7 +278,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Box(MAYBE_UNUSED 
     // 生成索引（外视图）
     auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
 
-    vector<int> indices(36);
+    std::vector<int> indices(36);
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -354,7 +351,7 @@ void Rendering::StandardMeshImpl::ReverseTriangleOrder(int numTriangles, int* in
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
-            swap(indices[lhsIndex], indices[rhsIndex]);
+            std::swap(indices[lhsIndex], indices[rhsIndex]);
 
 #include STSTEM_WARNING_POP
         }
@@ -381,8 +378,8 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::CylinderOmittedEn
     // 产生单位圆上的点用于计算圆柱切片的网格点。
     const auto nextRadialSamples = radialSamples + 1;
 
-    vector<float> angleCos(nextRadialSamples);
-    vector<float> angleSin(nextRadialSamples);
+    std::vector<float> angleCos(nextRadialSamples);
+    std::vector<float> angleSin(nextRadialSamples);
     for (auto radialIndex = 0; radialIndex < radialSamples; ++radialIndex)
     {
         auto angle = Math::GetTwoPI() * radialSamplesInvertor * radialIndex;
@@ -432,7 +429,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::CylinderOmittedEn
 
     // 产生索引
     auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
-    vector<int> indices(numIndices);
+    std::vector<int> indices(numIndices);
     size_t indicesIndex{};
 
     auto aStart = 0;
@@ -530,8 +527,8 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Sphere(int zSampl
     const auto zFactor = 2.0f / boost::numeric_cast<float>(zSamplesMinus1);
 
     // 生成单位圆上的点，一个圆柱切片被计算网格点使用。
-    vector<float> angleCos(radialSamplesPlus1);
-    vector<float> angleSin(radialSamplesPlus1);
+    std::vector<float> angleCos(radialSamplesPlus1);
+    std::vector<float> angleSin(radialSamplesPlus1);
 
     for (auto radialSamplesIndex = 0; radialSamplesIndex < radialSamples; ++radialSamplesIndex)
     {
@@ -575,7 +572,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Sphere(int zSampl
 
     // 生成索引
     auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
-    vector<int> indices(numIndices);
+    std::vector<int> indices(numIndices);
     size_t indicesIndex{};
 
     auto zStart = 0;
@@ -715,7 +712,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Torus(int circleS
 
     // 生成索引
     auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
-    vector<int> indices(numIndices);
+    std::vector<int> indices(numIndices);
 
     size_t indicesIndex{};
     auto cStart = 0;
@@ -783,7 +780,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Tetrahedron() con
 
     // 生成索引
     auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
-    vector<int> indices(12);
+    std::vector<int> indices(12);
 
     indices.at(0) = 0;
     indices.at(1) = 1;
@@ -826,7 +823,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Hexahedron() cons
 
     // 生成索引
     auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
-    vector<int> indices(numIndices);
+    std::vector<int> indices(numIndices);
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -896,7 +893,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Octahedron() cons
 
     // 生成索引
     auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
-    vector<int> indices(numIndices);
+    std::vector<int> indices(numIndices);
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -958,7 +955,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Dodecahedron() co
 
     // 生成索引
     auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
-    vector<int> indices(numIndices);
+    std::vector<int> indices(numIndices);
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -1105,7 +1102,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Icosahedron() con
 
     // 生成索引
     auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
-    vector<int> indices(numIndices);
+    std::vector<int> indices(numIndices);
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)

@@ -24,7 +24,7 @@ namespace RechargeServerMiddleLayer
         using ParentType = Framework::AudioManagerInterface;
 
     public:
-        explicit AudioManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit AudioManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

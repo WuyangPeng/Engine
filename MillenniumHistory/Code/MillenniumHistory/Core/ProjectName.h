@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.5 (2023/04/03 09:36)
+///	千年史策版本：0.9.0.12 (2023/06/16 22:02)
 
 #ifndef MILLENNIUM_HISTORY_PROJECT_NAME_H
 #define MILLENNIUM_HISTORY_PROJECT_NAME_H
 
+#include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/UserMacro.h"
-#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 #include "Framework/MainFunctionHelper/MainFunctionHelperFwd.h"
 
 #include <vector>
@@ -23,6 +23,7 @@ namespace MillenniumHistory
     {
     public:
         using ClassType = ProjectName;
+
         using String = System::String;
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
@@ -38,10 +39,13 @@ namespace MillenniumHistory
 
     private:
         using ProjectNameContainer = std::vector<String>;
+        using TreeType = boost::property_tree::basic_ptree<String, String>;
 
     private:
         NODISCARD static std::string GetProjectName(const String& fileName, const EnvironmentDirectory& environmentDirectory);
         NODISCARD static ProjectNameContainer GenerateEngineName(const String& fileName, const EnvironmentDirectory& environmentDirectory);
+        NODISCARD static ProjectNameContainer GenerateEngineName(const TreeType& mainTree);
+        void PrintSelect(const String& element, int index) const;
 
     private:
         ProjectNameContainer container;

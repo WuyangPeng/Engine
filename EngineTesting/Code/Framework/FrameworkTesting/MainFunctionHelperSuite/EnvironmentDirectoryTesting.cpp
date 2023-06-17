@@ -1,38 +1,41 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 10:45)
+///	引擎测试版本：0.9.0.12 (2023/06/13 20:16)
 
 #include "EnvironmentDirectoryTesting.h"
 #include "Flags/DescriptionFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
 using namespace std::literals;
+using System::operator++;
 
 Framework::EnvironmentDirectoryTesting::EnvironmentDirectoryTesting(const OStreamShared& osPtr)
     : ParentType{ osPtr },
       mDescription{ { Description::Resource, SYSTEM_TEXT("Resource"s) },
-                     { Description::Configuration, SYSTEM_TEXT("Configuration"s) },
-                     { Description::Directory, SYSTEM_TEXT(""s) },
-                     { Description::LittleEndian, SYSTEM_TEXT("LittleEndian"s) },
-                     { Description::BigEndian, SYSTEM_TEXT("BigEndian"s) },
-                     { Description::Shader, SYSTEM_TEXT("Shader"s) },
-                     { Description::Scene, SYSTEM_TEXT("Scene"s) },
-                     { Description::Texture, SYSTEM_TEXT("Texture"s) },
-                     { Description::Vertex, SYSTEM_TEXT("Vertex"s) },
-                     { Description::Image, SYSTEM_TEXT("Image"s) },
-                     { Description::Default, SYSTEM_TEXT("Default"s) },
-                     { Description::OpenGL, SYSTEM_TEXT("OpenGL"s) },
-                     { Description::DirectX, SYSTEM_TEXT("DirectX"s) },
-                     { Description::Null, SYSTEM_TEXT(""s) },
-                     { Description::Framework, SYSTEM_TEXT("Framework"s) },
-                     { Description::EngineEnvironment, SYSTEM_TEXT("EngineTestingInclude"s) } },
+                    { Description::Configuration, SYSTEM_TEXT("Configuration"s) },
+                    { Description::Directory, SYSTEM_TEXT(""s) },
+                    { Description::LittleEndian, SYSTEM_TEXT("LittleEndian"s) },
+                    { Description::BigEndian, SYSTEM_TEXT("BigEndian"s) },
+                    { Description::Shader, SYSTEM_TEXT("Shader"s) },
+                    { Description::Scene, SYSTEM_TEXT("Scene"s) },
+                    { Description::Texture, SYSTEM_TEXT("Texture"s) },
+                    { Description::Vertex, SYSTEM_TEXT("Vertex"s) },
+                    { Description::Image, SYSTEM_TEXT("Image"s) },
+                    { Description::Default, SYSTEM_TEXT("Default"s) },
+                    { Description::OpenGL, SYSTEM_TEXT("OpenGL"s) },
+                    { Description::DirectX, SYSTEM_TEXT("DirectX"s) },
+                    { Description::Null, SYSTEM_TEXT(""s) },
+                    { Description::Framework, SYSTEM_TEXT("Framework"s) },
+                    { Description::EngineEnvironment, SYSTEM_TEXT("EngineTestingInclude"s) } },
       defaultEnvironmentDirectory{ GetDescription(Description::EngineEnvironment), SYSTEM_TEXT("Default"s) },
       fileEnvironmentDirectory{ GetDescription(Description::EngineEnvironment), SYSTEM_TEXT("FrameworkEngineDirectory"s) }
 {

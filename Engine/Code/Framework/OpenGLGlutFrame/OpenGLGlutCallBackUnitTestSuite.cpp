@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 14:43)
+///	引擎版本：0.9.0.12 (2023/06/13 14:17)
 
 #include "Framework/FrameworkExport.h"
 
@@ -20,18 +20,14 @@
 #include "CoreTools/UnitTestSuite/Suite.h"
 #include "Framework/WindowProcess/Detail/WindowMessageUnitTestSuiteStream.h"
 
-using std::make_shared;
-using std::move;
-using std::string;
-
-Framework::OpenGLGlutCallBackUnitTestSuite::OpenGLGlutCallBackUnitTestSuite(int64_t delta, const string& suiteName)
-    : ParentType{ delta }, stream{ make_shared<StreamType>(true) }, impl{ make_shared<ImplType>(suiteName, stream->GetStreamShared()) }, isInit{ false }
+Framework::OpenGLGlutCallBackUnitTestSuite::OpenGLGlutCallBackUnitTestSuite(int64_t delta, const std::string& suiteName)
+    : ParentType{ delta }, stream{ std::make_shared<StreamType>(true) }, impl{ make_shared<ImplType>(suiteName, stream->GetStreamShared()) }, isInit{ false }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Framework::OpenGLGlutCallBackUnitTestSuite::OpenGLGlutCallBackUnitTestSuite(OpenGLGlutCallBackUnitTestSuite&& rhs) noexcept
-    : ParentType{ move(rhs) }, stream{ move(rhs.stream) }, impl{ move(rhs.impl) }, isInit{ rhs.isInit }
+    : ParentType{ std::move(rhs) }, stream{ move(rhs.stream) }, impl{ move(rhs.impl) }, isInit{ rhs.isInit }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -40,7 +36,7 @@ Framework::OpenGLGlutCallBackUnitTestSuite& Framework::OpenGLGlutCallBackUnitTes
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    ParentType::operator=(move(rhs));
+    ParentType::operator=(std::move(rhs));
 
     stream = move(rhs.stream);
     impl = move(rhs.impl);
@@ -122,7 +118,7 @@ bool Framework::OpenGLGlutCallBackUnitTestSuite::IsPrintRun() const noexcept
 }
 
 // protected
-void Framework::OpenGLGlutCallBackUnitTestSuite::AddTest(const string& suiteName, Suite& suite, const string& testName, const UnitTestSharedPtr& unitTest)
+void Framework::OpenGLGlutCallBackUnitTestSuite::AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest)
 {
     impl->AddTest(suiteName, suite, testName, unitTest);
 }

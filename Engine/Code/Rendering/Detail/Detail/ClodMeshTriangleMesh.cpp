@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/09 18:54)
+///	引擎版本：0.9.0.12 (2023/06/12 13:52)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,8 +16,6 @@
 #include "Mathematics/Meshes/TriangleKey.h"
 
 #include <set>
-
-using std::set;
 
 Rendering::ClodMeshTriangleMesh::ClodMeshTriangleMesh(TrianglesMesh& mesh)
     : numVertices{ mesh.GetVertexBuffer()->GetNumElements() },
@@ -50,7 +48,7 @@ bool Rendering::ClodMeshTriangleMesh::ValidBuffers() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    using TriangleKeySet = set<Mathematics::TriangleKey>;
+    using TriangleKeySet = std::set<Mathematics::TriangleKey>;
     TriangleKeySet triangles{};
     std::set<int> vertexIndices{};
     auto currentIndex = GetIndexBufferReadOnlyData();
@@ -131,7 +129,7 @@ Mathematics::Vector3F Rendering::ClodMeshTriangleMesh::GetPosition(MAYBE_UNUSED 
     return Mathematics::Vector3F{};
 }
 
-const char* Rendering::ClodMeshTriangleMesh::GetVertexBufferReadOnlyData() const  
+const char* Rendering::ClodMeshTriangleMesh::GetVertexBufferReadOnlyData() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

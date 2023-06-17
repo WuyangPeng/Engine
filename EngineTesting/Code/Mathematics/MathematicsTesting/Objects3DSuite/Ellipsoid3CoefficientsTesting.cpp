@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/30 11:17)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:16)
 
 #include "Ellipsoid3CoefficientsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Ellipsoid3CoefficientsDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -44,37 +42,37 @@ void Mathematics::Ellipsoid3CoefficientsTesting::MainTest()
 
 void Mathematics::Ellipsoid3CoefficientsTesting::EllipsoidTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        Vector3D firstVector(firstRandomDistribution(generator),
-                             firstRandomDistribution(generator),
-                             firstRandomDistribution(generator));
+        Vector3D vector0(randomDistribution0(generator),
+                         randomDistribution0(generator),
+                         randomDistribution0(generator));
 
-        Matrix3D firstMatrix(firstRandomDistribution(generator),
-                             firstRandomDistribution(generator),
-                             firstRandomDistribution(generator));
+        Matrix3D matrix0(randomDistribution0(generator),
+                         randomDistribution0(generator),
+                         randomDistribution0(generator));
 
-        firstMatrix(0, 1) = firstRandomDistribution(generator);
-        firstMatrix(0, 2) = firstRandomDistribution(generator);
-        firstMatrix(1, 2) = firstRandomDistribution(generator);
-        firstMatrix(1, 0) = firstMatrix(0, 1);
-        firstMatrix(2, 0) = firstMatrix(0, 2);
-        firstMatrix(2, 1) = firstMatrix(1, 2);
+        matrix0(0, 1) = randomDistribution0(generator);
+        matrix0(0, 2) = randomDistribution0(generator);
+        matrix0(1, 2) = randomDistribution0(generator);
+        matrix0(1, 0) = matrix0(0, 1);
+        matrix0(2, 0) = matrix0(0, 2);
+        matrix0(2, 1) = matrix0(1, 2);
 
-        double constants(firstRandomDistribution(generator));
+        double constants(randomDistribution0(generator));
 
-        Ellipsoid3CoefficientsD ellipsoid3Coefficients(firstMatrix, firstVector, constants);
+        Ellipsoid3CoefficientsD ellipsoid3Coefficients(matrix0, vector0, constants);
 
-        auto secondMatrix = ellipsoid3Coefficients.GetMatrix();
+        auto matrix1 = ellipsoid3Coefficients.GetMatrix();
 
-        ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-10));
+        ASSERT_TRUE(Approximate(matrix0, matrix1, 1e-10));
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(ellipsoid3Coefficients.GetVector(), firstVector));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(ellipsoid3Coefficients.GetVector(), vector0));
 
         ASSERT_APPROXIMATE(constants, ellipsoid3Coefficients.GetConstants(), 1e-10);
 
@@ -89,17 +87,17 @@ void Mathematics::Ellipsoid3CoefficientsTesting::EllipsoidTest()
             ASSERT_APPROXIMATE(coefficient.at(m), secondCoefficient.at(m), 1e-10);
         }
 
-        firstVector = secondEllipse2Coefficients.GetVector();
-        firstMatrix = secondEllipse2Coefficients.GetMatrix();
+        vector0 = secondEllipse2Coefficients.GetVector();
+        matrix0 = secondEllipse2Coefficients.GetMatrix();
         constants = secondEllipse2Coefficients.GetConstants();
 
-        Ellipsoid3CoefficientsD thirdEllipse2Coefficients(firstMatrix, firstVector, constants);
+        Ellipsoid3CoefficientsD thirdEllipse2Coefficients(matrix0, vector0, constants);
 
-        secondMatrix = thirdEllipse2Coefficients.GetMatrix();
+        matrix1 = thirdEllipse2Coefficients.GetMatrix();
 
-        ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-10));
+        ASSERT_TRUE(Approximate(matrix0, matrix1, 1e-10));
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(thirdEllipse2Coefficients.GetVector(), firstVector));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(thirdEllipse2Coefficients.GetVector(), vector0));
 
         ASSERT_APPROXIMATE(constants, thirdEllipse2Coefficients.GetConstants(), 1e-10);
 

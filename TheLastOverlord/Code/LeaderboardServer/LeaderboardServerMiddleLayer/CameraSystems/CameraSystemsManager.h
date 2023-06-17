@@ -24,7 +24,7 @@ namespace LeaderboardServerMiddleLayer
         using ParentType = Framework::CameraSystemsManagerInterface;
 
     public:
-        explicit CameraSystemsManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit CameraSystemsManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

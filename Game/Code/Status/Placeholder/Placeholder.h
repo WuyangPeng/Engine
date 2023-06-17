@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.8.0.11 (2022/07/18 14:35)
+///	引擎游戏版本：0.9.0.12 (2023/06/16 16:03)
 
-#ifndef STATUSPLACEHOLDER_PLACEHOLDER_H
-#define STATUSPLACEHOLDER_PLACEHOLDER_H
+#ifndef STATUS_PLACEHOLDER_PLACEHOLDER_H
+#define STATUS_PLACEHOLDER_PLACEHOLDER_H
 
 #include "Status/StatusDll.h"
 
@@ -16,7 +16,7 @@
 
 namespace Status
 {
-    class STATUSDEFAULT_DECLARE Placeholder
+    class STATUS_DEFAULT_DECLARE Placeholder
     {
     public:
         using ClassType = Placeholder;
@@ -29,4 +29,4 @@ namespace Status
     };
 }
 
-#endif  // STATUSPLACEHOLDER_PLACEHOLDER_H
+#endif  // STATUS_PLACEHOLDER_PLACEHOLDER_H

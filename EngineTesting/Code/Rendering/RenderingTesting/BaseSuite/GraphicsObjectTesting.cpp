@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/10/01 14:46)
+///	引擎测试版本：0.9.0.12 (2023/06/12 16:07)
 
 #include "GraphicsObjectTesting.h"
 #include "GraphicsObjectTestingBaseDetail.h"
 #include "Detail/GraphicsObjectTest.h"
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 #include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -23,6 +23,7 @@
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
 
 using namespace std::literals;
+using System::operator++;
 
 Rendering::GraphicsObjectTesting::GraphicsObjectTesting(const OStreamShared& stream)
     : ParentType{ stream, GraphicsObjectType::None, GraphicsObjectType::NumTypes, "GraphicsObjectTest"s }

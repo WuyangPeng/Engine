@@ -33,7 +33,7 @@
       <Configuration>StaticRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  </ItemGroup>  
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{E538973D-53BC-4B52-98AF-CECFD2743D78}</ProjectGuid>
@@ -124,7 +124,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
-    <Import Project="..\..\..\AssistX64DebugLibs.props" /> 
+    <Import Project="..\..\..\AssistX64DebugLibs.props" />
     <Import Project="..\..\..\AssistDebugXCopy.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -279,9 +279,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Example\ResourceManager\ResourceManagerExample\DllLib.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\ResourceManager\ResourceManagerExample\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\ResourceManager\ResourceManagerExample\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\ResourceManager\ResourceManagerExample\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\ResourceManager\ResourceManagerExample\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\ResourceManager\ResourceManagerExample\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\ResourceManager\ResourceManagerExample\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\..\Code\Example\ResourceManager\ResourceManagerExample\Placeholder\Placeholder.h" />
     <ClInclude Include="..\..\..\..\Code\Example\ResourceManager\ResourceManagerExample\ResourceManagerExample.h" />
     <ClInclude Include="..\..\..\..\Code\Example\ResourceManager\ResourceManagerExample\ResourceManagerExampleDll.h" />

@@ -54,12 +54,12 @@ namespace CSVConfigure
 
         NODISCARD virtual std::deque<bool> GetMask() const;
         NODISCARD virtual int GetMaskCount() const;
-        NODISCARD virtual bool GetMask(MAYBE_UNUSED int index) const;
+        NODISCARD virtual bool GetMask(int index) const;
         NODISCARD virtual std::deque<bool>::const_iterator GetMaskBegin() const;
         NODISCARD virtual std::deque<bool>::const_iterator GetMaskEnd() const;
 
         NODISCARD virtual int GetHeroId() const noexcept;
-        NODISCARD virtual std::shared_ptr<const Hero> GetHeroId(MAYBE_UNUSED const CSVConfigureContainer& csvContainer) const;
+        NODISCARD virtual std::shared_ptr<const HeroMappingType> GetHeroId(const CSVConfigureContainer& csvContainer) const;
 
     private:
         int key{};

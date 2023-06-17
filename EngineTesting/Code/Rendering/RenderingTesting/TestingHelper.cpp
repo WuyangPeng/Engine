@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/11 17:48)
+///	引擎测试版本：0.9.0.12 (2023/06/12 14:55)
 
 #include "Testing.h"
 #include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
@@ -28,7 +28,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TestingHelper)
 
 void Rendering::TestingHelper::InitSuite()
 {
-    AddMacroSuite();
+    AddHelperSuite();
     AddBaseSuite();
     AddDataTypesSuite();
     AddResourcesSuite();
@@ -58,25 +58,13 @@ void Rendering::TestingHelper::InitSuite()
     AddGlxRendererSuite();
     AddWglRendererSuite();
     AddStateSuite();
-    AddLib3dsSuite();
-    AddAbuseSuite();
-    AddDemoglSuite();
-    AddDevILSuite();
-    AddFBXSuite();
-    AddJPEGSuite();
-    AddTIFFSuite();
-    AddOpenvidiaSuite();
-    AddNethackSuite();
-    AddWingSuite();
-    AddWargamerSuite();
-    AddNvtoolkitSuite();
 }
 
-void Rendering::TestingHelper::AddMacroSuite()
+void Rendering::TestingHelper::AddHelperSuite()
 {
-    auto macroSuite = GenerateSuite("宏");
+    auto helperSuite = GenerateSuite("帮助");
 
-    AddSuite(macroSuite);
+    AddSuite(helperSuite);
 }
 
 void Rendering::TestingHelper::AddBaseSuite()
@@ -451,88 +439,4 @@ void Rendering::TestingHelper::AddStateSuite()
     ADD_TEST(stateSuite, RasterizerStateTesting);
 
     AddSuite(stateSuite);
-}
-
-void Rendering::TestingHelper::AddLib3dsSuite()
-{
-    auto lib3dsSuite = GenerateSuite("Lib3ds");
-
-    AddSuite(lib3dsSuite);
-}
-
-void Rendering::TestingHelper::AddAbuseSuite()
-{
-    auto abuseSuite = GenerateSuite("Abuse");
-
-    AddSuite(abuseSuite);
-}
-
-void Rendering::TestingHelper::AddDemoglSuite()
-{
-    auto demoglSuite = GenerateSuite("Demogl");
-
-    AddSuite(demoglSuite);
-}
-
-void Rendering::TestingHelper::AddDevILSuite()
-{
-    auto devILSuite = GenerateSuite("DevIL");
-
-    AddSuite(devILSuite);
-}
-
-void Rendering::TestingHelper::AddFBXSuite()
-{
-    auto fBXSuite = GenerateSuite("FBX");
-
-    AddSuite(fBXSuite);
-}
-
-void Rendering::TestingHelper::AddJPEGSuite()
-{
-    auto jPEGSuite = GenerateSuite("JPEG");
-
-    AddSuite(jPEGSuite);
-}
-
-void Rendering::TestingHelper::AddTIFFSuite()
-{
-    auto tIFFSuite = GenerateSuite("TIFF");
-
-    AddSuite(tIFFSuite);
-}
-
-void Rendering::TestingHelper::AddOpenvidiaSuite()
-{
-    auto openvidiaSuite = GenerateSuite("Openvidia");
-
-    AddSuite(openvidiaSuite);
-}
-
-void Rendering::TestingHelper::AddNethackSuite()
-{
-    auto nethackSuite = GenerateSuite("Nethack");
-
-    AddSuite(nethackSuite);
-}
-
-void Rendering::TestingHelper::AddWingSuite()
-{
-    auto wingSuite = GenerateSuite("Wing");
-
-    AddSuite(wingSuite);
-}
-
-void Rendering::TestingHelper::AddWargamerSuite()
-{
-    auto wargamerSuite = GenerateSuite("Wargamer");
-
-    AddSuite(wargamerSuite);
-}
-
-void Rendering::TestingHelper::AddNvtoolkitSuite()
-{
-    auto nvtoolkitSuite = GenerateSuite("Nvtoolkit");
-
-    AddSuite(nvtoolkitSuite);
 }

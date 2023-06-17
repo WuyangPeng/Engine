@@ -24,7 +24,7 @@ namespace ChatServerMiddleLayer
         using ParentType = Framework::ObjectLogicInterface;
 
     public:
-        explicit ObjectLogicManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit ObjectLogicManager(Framework::MiddleLayerPlatform middleLayerPlatform,  const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/06 11:33)
+///	引擎版本：0.9.0.12 (2023/06/12 14:04)
 
 #include "Rendering/RenderingExport.h"
 
@@ -22,9 +22,6 @@
 #include "Mathematics/Algebra/AlgebraAggregate.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
-
-using std::string;
-using std::vector;
 
 Rendering::IKControllerImpl::IKControllerImpl() noexcept
     : iterations{ 128 }, orderEndToRoot{ true }, joints{}
@@ -117,7 +114,7 @@ void Rendering::IKControllerImpl::Register(CoreTools::ObjectRegister& target) co
     }
 }
 
-CoreTools::ObjectSharedPtr Rendering::IKControllerImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::IKControllerImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -133,11 +130,11 @@ CoreTools::ObjectSharedPtr Rendering::IKControllerImpl::GetObjectByName(const st
     return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::IKControllerImpl::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::IKControllerImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    vector<CoreTools::ObjectSharedPtr> objects{};
+    std::vector<CoreTools::ObjectSharedPtr> objects{};
 
     for (auto& pointer : joints)
     {
@@ -149,7 +146,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::IKControllerImpl::GetAllObjectsByN
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::IKControllerImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::IKControllerImpl::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -165,11 +162,11 @@ CoreTools::ConstObjectSharedPtr Rendering::IKControllerImpl::GetConstObjectByNam
     return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::IKControllerImpl::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::IKControllerImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    vector<CoreTools::ConstObjectSharedPtr> objects{};
+    std::vector<CoreTools::ConstObjectSharedPtr> objects{};
 
     for (const auto& pointer : joints)
     {

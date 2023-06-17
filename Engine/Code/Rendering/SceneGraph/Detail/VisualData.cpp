@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/04/02 14:05)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 11:15)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,9 +20,6 @@
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Shaders/VisualEffectInstance.h"
-
-using std::string;
-using std::vector;
 
 Rendering::VisualData::VisualData(VisualPrimitiveType type) noexcept
     : visualPrimitiveType{ type }, vertexFormat{}, vertexBuffer{}, indexBuffer{}
@@ -220,7 +217,7 @@ void Rendering::VisualData::Link(CoreTools::ObjectLink& source)
     source.ResolveLink(indexBuffer);
 }
 
-CoreTools::ObjectSharedPtr Rendering::VisualData::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::VisualData::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -239,7 +236,7 @@ CoreTools::ObjectSharedPtr Rendering::VisualData::GetObjectByName(const string& 
         return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::VisualData::GetAllObjectsByName(const string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::VisualData::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -247,7 +244,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::VisualData::GetAllObjectsByName(co
     auto vertexBufferObjects = vertexBuffer.object->GetAllObjectsByName(name);
     auto indexBufferObjects = indexBuffer.object->GetAllObjectsByName(name);
 
-    vector<CoreTools::ObjectSharedPtr> entirelyObjects{};
+    std::vector<CoreTools::ObjectSharedPtr> entirelyObjects{};
 
     entirelyObjects.insert(entirelyObjects.end(), vertexFormatObjects.begin(), vertexFormatObjects.end());
 
@@ -258,7 +255,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::VisualData::GetAllObjectsByName(co
     return entirelyObjects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::VisualData::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::VisualData::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -277,7 +274,7 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualData::GetConstObjectByName(cons
         return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualData::GetAllConstObjectsByName(const string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualData::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -285,7 +282,7 @@ vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualData::GetAllConstObject
     auto vertexBufferObjects = vertexBuffer.object->GetAllConstObjectsByName(name);
     auto indexBufferObjects = indexBuffer.object->GetAllConstObjectsByName(name);
 
-    vector<CoreTools::ConstObjectSharedPtr> entirelyObjects{};
+    std::vector<CoreTools::ConstObjectSharedPtr> entirelyObjects{};
 
     entirelyObjects.insert(entirelyObjects.end(), vertexFormatObjects.begin(), vertexFormatObjects.end());
 

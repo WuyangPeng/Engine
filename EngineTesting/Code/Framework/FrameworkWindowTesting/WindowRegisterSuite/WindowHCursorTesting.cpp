@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 13:52)
+///	引擎测试版本：0.9.0.12 (2023/06/13 23:07)
 
 #include "WindowHCursorTesting.h"
 #include "resource.h"
@@ -13,6 +13,7 @@
 #include "System/Windows/WindowsRegister.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/WindowRegister/WindowHCursor.h"
 
 #include <algorithm>
@@ -25,21 +26,21 @@ namespace Framework
 Framework::WindowHCursorTesting::WindowHCursorTesting(const OStreamShared& stream, HInstance instance)
     : ParentType{ stream },
       instance{ instance },
-      container{ { 0, System::g_Arrow },
-                   { 32512, System::g_Arrow },
-                   { 32513, System::g_Ibeam },
-                   { 32514, System::g_Wait },
-                   { 32515, System::g_Cross },
-                   { 32516, System::g_UpArrow },
-                   { 32642, System::g_SizeNwse },
-                   { 32643, System::g_SizeNesw },
-                   { 32644, System::g_SizeWe },
-                   { 32645, System::g_SizeNs },
-                   { 32646, System::g_SizeAll },
-                   { 32648, System::g_No },
-                   { 32649, System::g_IDCHand },
-                   { 32650, System::g_AppStarting },
-                   { 32651, System::g_Help } }
+      container{ { 0, System::gArrow },
+                 { 32512, System::gArrow },
+                 { 32513, System::gIbeam },
+                 { 32514, System::gWait },
+                 { 32515, System::gCross },
+                 { 32516, System::gUpArrow },
+                 { 32642, System::gSizeNwse },
+                 { 32643, System::gSizeNesw },
+                 { 32644, System::gSizeWe },
+                 { 32645, System::gSizeNs },
+                 { 32646, System::gSizeAll },
+                 { 32648, System::gNo },
+                 { 32649, System::gIDCHand },
+                 { 32650, System::gAppStarting },
+                 { 32651, System::gHelp } }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

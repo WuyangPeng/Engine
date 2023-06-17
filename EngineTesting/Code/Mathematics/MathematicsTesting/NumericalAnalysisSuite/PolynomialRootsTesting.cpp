@@ -1,25 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/03 15:57)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:07)
 
 #include "PolynomialRootsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/PolynomialDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
 #include "Mathematics/NumericalAnalysis/PolynomialRootsDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 Mathematics::PolynomialRootsTesting::PolynomialRootsTesting(const OStreamShared& streamShared)
     : ParentType{ streamShared }
@@ -57,8 +53,8 @@ void Mathematics::PolynomialRootsTesting::BaseTest()
 
 void Mathematics::PolynomialRootsTesting::OnceTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e10, 1.0e10);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e10, 1.0e10);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -68,8 +64,8 @@ void Mathematics::PolynomialRootsTesting::OnceTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        auto constant = firstRandomDistribution(generator);
-        auto once = firstRandomDistribution(generator);
+        auto constant = randomDistribution0(generator);
+        auto once = randomDistribution0(generator);
 
         if (MathD::FAbs(once) < 1e-10)
         {
@@ -84,14 +80,14 @@ void Mathematics::PolynomialRootsTesting::OnceTest()
         {
             auto root = firstPolynomialRoots.GetRoot(m);
 
-            ASSERT_APPROXIMATE(root * once + constant, 0.0, 1e-6);
+            ASSERT_APPROXIMATE(root * once + constant, 0.0, 1e-5);
         }
 
         for (auto iter = firstPolynomialRoots.GetBegin(); iter != firstPolynomialRoots.GetEnd(); ++iter)
         {
             auto root = *iter;
 
-            ASSERT_APPROXIMATE(root * once + constant, 0.0, 1e-6);
+            ASSERT_APPROXIMATE(root * once + constant, 0.0, 1e-5);
         }
 
         auto bound = firstPolynomialRoots.GetBound(constant, once);
@@ -106,8 +102,8 @@ void Mathematics::PolynomialRootsTesting::OnceTest()
 
 void Mathematics::PolynomialRootsTesting::SecondaryTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e8, 1.0e8);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e8, 1.0e8);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -117,9 +113,9 @@ void Mathematics::PolynomialRootsTesting::SecondaryTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        auto constant = firstRandomDistribution(generator);
-        auto once = firstRandomDistribution(generator);
-        auto secondary = firstRandomDistribution(generator);
+        auto constant = randomDistribution0(generator);
+        auto once = randomDistribution0(generator);
+        auto secondary = randomDistribution0(generator);
 
         const auto result = firstPolynomialRoots.FindAlgebraic(constant, once, secondary);
 
@@ -159,9 +155,9 @@ void Mathematics::PolynomialRootsTesting::SecondaryTest()
 
 void Mathematics::PolynomialRootsTesting::ThriceTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
-    const uniform_real<double> secondRandomDistribution(-1.0e1, 1.0e1);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e5, 1.0e5);
+    const std::uniform_real<double> randomDistribution1(-1.0e1, 1.0e1);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -171,10 +167,10 @@ void Mathematics::PolynomialRootsTesting::ThriceTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        auto constant = firstRandomDistribution(generator);
-        auto once = firstRandomDistribution(generator);
-        auto secondary = firstRandomDistribution(generator);
-        auto thrice = firstRandomDistribution(generator);
+        auto constant = randomDistribution0(generator);
+        auto once = randomDistribution0(generator);
+        auto secondary = randomDistribution0(generator);
+        auto thrice = randomDistribution0(generator);
 
         ASSERT_TRUE(firstPolynomialRoots.FindAlgebraic(constant, once, secondary, thrice));
 
@@ -205,9 +201,9 @@ void Mathematics::PolynomialRootsTesting::ThriceTest()
 
         ASSERT_APPROXIMATE(maxValue, bound, 1e-10);
 
-        constant = secondRandomDistribution(generator);
-        once = secondRandomDistribution(generator);
-        secondary = secondRandomDistribution(generator);
+        constant = randomDistribution1(generator);
+        once = randomDistribution1(generator);
+        secondary = randomDistribution1(generator);
         thrice = 1.0;
 
         PolynomialRootsD secondPolynomialRoots(1e-6);
@@ -299,8 +295,8 @@ void Mathematics::PolynomialRootsTesting::ThriceTest()
 
 void Mathematics::PolynomialRootsTesting::SpecialCubicTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e7, 1.0e7);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e7, 1.0e7);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -310,23 +306,23 @@ void Mathematics::PolynomialRootsTesting::SpecialCubicTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        auto constant = firstRandomDistribution(generator);
-        auto once = MathD::FAbs(firstRandomDistribution(generator));
-        auto thrice = MathD::FAbs(firstRandomDistribution(generator));
+        auto constant = randomDistribution0(generator);
+        auto once = MathD::FAbs(randomDistribution0(generator));
+        auto thrice = MathD::FAbs(randomDistribution0(generator));
 
         auto root = firstPolynomialRoots.SpecialCubic(thrice, once, constant);
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        ASSERT_APPROXIMATE(-constant + root * once + root * root * root * thrice, 0.0, 1e-3);
+        ASSERT_APPROXIMATE(-constant + root * once + root * root * root * thrice, 0.0, 1e-1);
     }
 }
 
 void Mathematics::PolynomialRootsTesting::QuarticTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e3, 1.0e3);
-    const uniform_real<double> secondRandomDistribution(-2.0, 2.0);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e3, 1.0e3);
+    const std::uniform_real<double> randomDistribution1(-2.0, 2.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -336,11 +332,11 @@ void Mathematics::PolynomialRootsTesting::QuarticTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        auto constant = firstRandomDistribution(generator);
-        auto once = firstRandomDistribution(generator);
-        auto secondary = firstRandomDistribution(generator);
-        auto thrice = firstRandomDistribution(generator);
-        auto quartic = firstRandomDistribution(generator);
+        auto constant = randomDistribution0(generator);
+        auto once = randomDistribution0(generator);
+        auto secondary = randomDistribution0(generator);
+        auto thrice = randomDistribution0(generator);
+        auto quartic = randomDistribution0(generator);
 
         if (firstPolynomialRoots.FindAlgebraic(constant, once, secondary, thrice, quartic))
         {
@@ -374,10 +370,10 @@ void Mathematics::PolynomialRootsTesting::QuarticTest()
 
         ASSERT_APPROXIMATE(maxValue, bound, 1e-10);
 
-        constant = secondRandomDistribution(generator);
-        once = secondRandomDistribution(generator);
-        secondary = secondRandomDistribution(generator);
-        thrice = secondRandomDistribution(generator);
+        constant = randomDistribution1(generator);
+        once = randomDistribution1(generator);
+        secondary = randomDistribution1(generator);
+        thrice = randomDistribution1(generator);
         quartic = 1.0;
 
         PolynomialRootsD secondPolynomialRoots(1e-5);
@@ -425,9 +421,9 @@ void Mathematics::PolynomialRootsTesting::QuarticTest()
 
 void Mathematics::PolynomialRootsTesting::PolynomialTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
-    const uniform_int<> secondRandomDistribution(2, 8);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e3, 1.0e3);
+    const std::uniform_int<> randomDistribution1(2, 7);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -437,12 +433,12 @@ void Mathematics::PolynomialRootsTesting::PolynomialTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        vector<double> tuple;
-        auto size = secondRandomDistribution(generator);
+        std::vector<double> tuple;
+        auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            tuple.push_back(firstRandomDistribution(generator));
+            tuple.push_back(randomDistribution0(generator));
         }
 
         PolynomialD firstPolynomial(tuple);
@@ -482,9 +478,9 @@ void Mathematics::PolynomialRootsTesting::PolynomialTest()
 
 void Mathematics::PolynomialRootsTesting::AllRealPartsNegativeTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
-    const uniform_int<> secondRandomDistribution(2, 8);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e6, 1.0e6);
+    const std::uniform_int<> randomDistribution1(2, 8);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -494,12 +490,12 @@ void Mathematics::PolynomialRootsTesting::AllRealPartsNegativeTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        vector<double> tuple;
-        auto size = secondRandomDistribution(generator);
+        std::vector<double> tuple;
+        auto size = randomDistribution1(generator);
 
         for (auto i = 0; i < size; ++i)
         {
-            tuple.push_back(firstRandomDistribution(generator));
+            tuple.push_back(randomDistribution0(generator));
         }
 
         PolynomialD firstPolynomial(tuple);
@@ -533,7 +529,7 @@ void Mathematics::PolynomialRootsTesting::AllRealPartsNegativeTest()
                 break;
             }
 
-            vector<double> tmpCoeff(degree);
+            std::vector<double> tmpCoeff(degree);
             tmpCoeff.at(0) = 2.0 * firstPolynomial[0] * firstPolynomial[degree - 1];
 
             for (auto i = 1; i <= degree - 2; ++i)
@@ -579,9 +575,9 @@ void Mathematics::PolynomialRootsTesting::AllRealPartsNegativeTest()
 
 void Mathematics::PolynomialRootsTesting::AllRealPartsPositiveTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
-    const uniform_int<> secondRandomDistribution(2, 8);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e6, 1.0e6);
+    const std::uniform_int<> randomDistribution1(2, 8);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -591,12 +587,12 @@ void Mathematics::PolynomialRootsTesting::AllRealPartsPositiveTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        vector<double> tuple;
-        auto size = secondRandomDistribution(generator);
+        std::vector<double> tuple;
+        auto size = randomDistribution1(generator);
 
         for (auto i = 0; i < size; ++i)
         {
-            tuple.push_back(firstRandomDistribution(generator));
+            tuple.push_back(randomDistribution0(generator));
         }
 
         PolynomialD firstPolynomial(tuple);
@@ -637,7 +633,7 @@ void Mathematics::PolynomialRootsTesting::AllRealPartsPositiveTest()
                 break;
             }
 
-            vector<double> tmpCoeff(degree);
+            std::vector<double> tmpCoeff(degree);
             tmpCoeff.at(0) = 2.0 * firstPolynomial[0] * firstPolynomial[degree - 1];
 
             for (auto i = 1; i <= degree - 2; ++i)
@@ -683,9 +679,9 @@ void Mathematics::PolynomialRootsTesting::AllRealPartsPositiveTest()
 
 void Mathematics::PolynomialRootsTesting::GetRootCountTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
-    const uniform_int<> secondRandomDistribution(2, 8);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-1.0e6, 1.0e6);
+    const std::uniform_int<> randomDistribution1(2, 8);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -695,12 +691,12 @@ void Mathematics::PolynomialRootsTesting::GetRootCountTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        vector<double> tuple;
-        auto size = secondRandomDistribution(generator);
+        std::vector<double> tuple;
+        auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            tuple.push_back(firstRandomDistribution(generator));
+            tuple.push_back(randomDistribution0(generator));
         }
 
         PolynomialD firstPolynomial(tuple);

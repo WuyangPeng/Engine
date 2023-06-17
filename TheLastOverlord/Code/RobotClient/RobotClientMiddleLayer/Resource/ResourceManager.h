@@ -24,7 +24,7 @@ namespace RobotClientMiddleLayer
         using ParentType = Framework::ResourceManagerInterface;
 
     public:
-        explicit ResourceManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit ResourceManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

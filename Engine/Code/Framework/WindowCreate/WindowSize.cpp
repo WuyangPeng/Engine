@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 16:12)
+///	引擎版本：0.9.0.12 (2023/06/13 14:14)
 
 #include "Framework/FrameworkExport.h"
 
@@ -16,7 +16,6 @@
 
 #include <iostream>
 
-using std::ostream;
 using namespace std::literals;
 
 Framework::WindowSize::WindowSize() noexcept
@@ -86,7 +85,7 @@ bool Framework::operator==(const WindowSize& lhs, const WindowSize& rhs) noexcep
     return lhs.GetWindowHeight() == rhs.GetWindowHeight() && lhs.GetWindowWidth() == rhs.GetWindowWidth();
 }
 
-ostream& Framework::operator<<(ostream& os, const WindowSize& size)
+std::ostream& Framework::operator<<(std::ostream& os, const WindowSize& size)
 {
     os << "width = "
        << size.GetWindowWidth()

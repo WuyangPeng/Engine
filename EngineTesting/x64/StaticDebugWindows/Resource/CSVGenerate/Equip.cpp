@@ -123,7 +123,7 @@ int CSVConfigure::Equip::GetHeroId() const noexcept
     return heroId;
 }
 
-std::shared_ptr<const CSVConfigure::Hero> CSVConfigure::Equip::GetHeroId(const CSVConfigureContainer& csvContainer) const
+std::shared_ptr<const CSVConfigure::HeroMappingType> CSVConfigure::Equip::GetHeroId(const CSVConfigureContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

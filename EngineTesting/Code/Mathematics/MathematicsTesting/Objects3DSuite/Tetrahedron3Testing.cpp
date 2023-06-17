@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/31 11:25)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:21)
 
 #include "Tetrahedron3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Objects3D/Tetrahedron3Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -45,48 +42,48 @@ void Mathematics::Tetrahedron3Testing::MainTest()
 
 void Mathematics::Tetrahedron3Testing::TetrahedronTest()
 {
-    default_random_engine generator{};
+    std::default_random_engine generator{ GetEngineRandomSeed() };
 
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const Vector3D firstPoint(firstRandomDistribution(generator),
-                                  firstRandomDistribution(generator),
-                                  -MathD::FAbs(firstRandomDistribution(generator)));
+        const Vector3D point0(randomDistribution0(generator),
+                              randomDistribution0(generator),
+                              -MathD::FAbs(randomDistribution0(generator)));
 
-        const Vector3D secondPoint(MathD::FAbs(firstRandomDistribution(generator)),
-                                   -MathD::FAbs(firstRandomDistribution(generator)),
+        const Vector3D point1(MathD::FAbs(randomDistribution0(generator)),
+                              -MathD::FAbs(randomDistribution0(generator)),
+                              0.0);
+
+        const Vector3D point2(randomDistribution0(generator),
+                              MathD::FAbs(randomDistribution0(generator)),
+                              0.0);
+
+        const Vector3D fourthPoint(-MathD::FAbs(randomDistribution0(generator)),
+                                   -MathD::FAbs(randomDistribution0(generator)),
                                    0.0);
 
-        const Vector3D thirdPoint(firstRandomDistribution(generator),
-                                  MathD::FAbs(firstRandomDistribution(generator)),
-                                  0.0);
+        const Tetrahedron3D tetrahedron(point0, point1, point2, fourthPoint);
 
-        const Vector3D fourthPoint(-MathD::FAbs(firstRandomDistribution(generator)),
-                                   -MathD::FAbs(firstRandomDistribution(generator)),
-                                   0.0);
-
-        const Tetrahedron3D tetrahedron(firstPoint, secondPoint, thirdPoint, fourthPoint);
-
-        ASSERT_TRUE(Vector3ToolsD::Approximate(tetrahedron.GetVertex(0), firstPoint));
-        ASSERT_TRUE(Vector3ToolsD::Approximate(tetrahedron.GetVertex(1), secondPoint));
-        ASSERT_TRUE(Vector3ToolsD::Approximate(tetrahedron.GetVertex(2), thirdPoint));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(tetrahedron.GetVertex(0), point0));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(tetrahedron.GetVertex(1), point1));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(tetrahedron.GetVertex(2), point2));
         ASSERT_TRUE(Vector3ToolsD::Approximate(tetrahedron.GetVertex(3), fourthPoint));
 
-        vector<Vector3D> Vector3dVector;
-        Vector3dVector.emplace_back(firstPoint);
-        Vector3dVector.emplace_back(secondPoint);
-        Vector3dVector.emplace_back(thirdPoint);
+        std::vector<Vector3D> Vector3dVector;
+        Vector3dVector.emplace_back(point0);
+        Vector3dVector.emplace_back(point1);
+        Vector3dVector.emplace_back(point2);
         Vector3dVector.emplace_back(fourthPoint);
 
         const Tetrahedron3D secondTetrahedron(Vector3dVector);
 
-        ASSERT_TRUE(Vector3ToolsD::Approximate(secondTetrahedron.GetVertex(0), firstPoint));
-        ASSERT_TRUE(Vector3ToolsD::Approximate(secondTetrahedron.GetVertex(1), secondPoint));
-        ASSERT_TRUE(Vector3ToolsD::Approximate(secondTetrahedron.GetVertex(2), thirdPoint));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(secondTetrahedron.GetVertex(0), point0));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(secondTetrahedron.GetVertex(1), point1));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(secondTetrahedron.GetVertex(2), point2));
         ASSERT_TRUE(Vector3ToolsD::Approximate(secondTetrahedron.GetVertex(3), fourthPoint));
 
         auto faceIndices = Tetrahedron3D::GetFaceIndices(0);

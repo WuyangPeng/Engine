@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 21:50)
+///	引擎测试版本：0.9.0.12 (2023/06/09 14:26)
 
 #include "Matrix2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -48,140 +45,140 @@ void Mathematics::Matrix2Testing::MainTest()
 
 void Mathematics::Matrix2Testing::ConstructionTest()
 {
-    Matrix2F firstMatrix(MatrixInitType::Zero);
+    Matrix2F matrix0(MatrixInitType::Zero);
 
-    ASSERT_APPROXIMATE(firstMatrix(0, 0), 0.0f, 1e-8f);
-    ASSERT_APPROXIMATE(firstMatrix(0, 1), 0.0f, 1e-8f);
-    ASSERT_APPROXIMATE(firstMatrix(1, 0), 0.0f, 1e-8f);
-    ASSERT_APPROXIMATE(firstMatrix(1, 1), 0.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix0(0, 0), 0.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix0(0, 1), 0.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix0(1, 0), 0.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix0(1, 1), 0.0f, 1e-8f);
 
-    Matrix2F secondMatrix(MatrixInitType::Identity);
+    Matrix2F matrix1(MatrixInitType::Identity);
 
-    ASSERT_APPROXIMATE(secondMatrix(0, 0), 1.0f, 1e-8f);
-    ASSERT_APPROXIMATE(secondMatrix(0, 1), 0.0f, 1e-8f);
-    ASSERT_APPROXIMATE(secondMatrix(1, 0), 0.0f, 1e-8f);
-    ASSERT_APPROXIMATE(secondMatrix(1, 1), 1.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix1(0, 0), 1.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix1(0, 1), 0.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix1(1, 0), 0.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix1(1, 1), 1.0f, 1e-8f);
 
-    Matrix2D thirdMatrix(3.0, 6.0, 1.0, 2.0);
+    Matrix2D matrix2(3.0, 6.0, 1.0, 2.0);
 
-    ASSERT_APPROXIMATE(thirdMatrix(0, 0), 3.0, 1e-10);
-    ASSERT_APPROXIMATE(thirdMatrix(0, 1), 6.0, 1e-10);
-    ASSERT_APPROXIMATE(thirdMatrix(1, 0), 1.0, 1e-10);
-    ASSERT_APPROXIMATE(thirdMatrix(1, 1), 2.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix2(0, 0), 3.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix2(0, 1), 6.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix2(1, 0), 1.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix2(1, 1), 2.0, 1e-10);
 
-    vector<double> doubleVector{ 6.0, 6.2, 9.0, 2.0 };
+    std::vector<double> doubleVector{ 6.0, 6.2, 9.0, 2.0 };
 
-    Matrix2D fourthMatrix(doubleVector, MatrixMajorFlags::Row);
+    Matrix2D matrix3(doubleVector, MatrixMajorFlags::Row);
 
-    ASSERT_APPROXIMATE(fourthMatrix(0, 0), 6.0, 1e-10);
-    ASSERT_APPROXIMATE(fourthMatrix(0, 1), 6.2, 1e-10);
-    ASSERT_APPROXIMATE(fourthMatrix(1, 0), 9.0, 1e-10);
-    ASSERT_APPROXIMATE(fourthMatrix(1, 1), 2.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix3(0, 0), 6.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix3(0, 1), 6.2, 1e-10);
+    ASSERT_APPROXIMATE(matrix3(1, 0), 9.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix3(1, 1), 2.0, 1e-10);
 
-    Matrix2D fifthMatrix(doubleVector, MatrixMajorFlags::Column);
+    Matrix2D matrix4(doubleVector, MatrixMajorFlags::Column);
 
-    ASSERT_APPROXIMATE(fifthMatrix(0, 0), 6.0, 1e-10);
-    ASSERT_APPROXIMATE(fifthMatrix(0, 1), 9.0, 1e-10);
-    ASSERT_APPROXIMATE(fifthMatrix(1, 0), 6.2, 1e-10);
-    ASSERT_APPROXIMATE(fifthMatrix(1, 1), 2.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix4(0, 0), 6.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix4(0, 1), 9.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix4(1, 0), 6.2, 1e-10);
+    ASSERT_APPROXIMATE(matrix4(1, 1), 2.0, 1e-10);
 
-    const Vector2F firstVector(6.0f, 3.0f);
-    const Vector2F secondVector(8.0f, 3.1f);
+    const Vector2F vector0(6.0f, 3.0f);
+    const Vector2F vector1(8.0f, 3.1f);
 
-    Matrix2F sixthMatrix(firstVector, secondVector, MatrixMajorFlags::Row);
+    Matrix2F matrix5(vector0, vector1, MatrixMajorFlags::Row);
 
-    ASSERT_APPROXIMATE(sixthMatrix(0, 0), 6.0f, 1e-8f);
-    ASSERT_APPROXIMATE(sixthMatrix(0, 1), 3.0f, 1e-8f);
-    ASSERT_APPROXIMATE(sixthMatrix(1, 0), 8.0f, 1e-8f);
-    ASSERT_APPROXIMATE(sixthMatrix(1, 1), 3.1f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix5(0, 0), 6.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix5(0, 1), 3.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix5(1, 0), 8.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix5(1, 1), 3.1f, 1e-8f);
 
-    Matrix2F seventhMatrix(firstVector, secondVector, MatrixMajorFlags::Column);
+    Matrix2F matrix6(vector0, vector1, MatrixMajorFlags::Column);
 
-    ASSERT_APPROXIMATE(seventhMatrix(0, 0), 6.0f, 1e-8f);
-    ASSERT_APPROXIMATE(seventhMatrix(0, 1), 8.0f, 1e-8f);
-    ASSERT_APPROXIMATE(seventhMatrix(1, 0), 3.0f, 1e-8f);
-    ASSERT_APPROXIMATE(seventhMatrix(1, 1), 3.1f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix6(0, 0), 6.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix6(0, 1), 8.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix6(1, 0), 3.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix6(1, 1), 3.1f, 1e-8f);
 
-    vector<Vector2F> Vector2Vector{ firstVector, secondVector };
+    std::vector<Vector2F> Vector2Vector{ vector0, vector1 };
 
-    Matrix2F eighthMatrix(Vector2Vector, MatrixMajorFlags::Row);
+    Matrix2F matrix7(Vector2Vector, MatrixMajorFlags::Row);
 
-    ASSERT_APPROXIMATE(eighthMatrix(0, 0), 6.0f, 1e-8f);
-    ASSERT_APPROXIMATE(eighthMatrix(0, 1), 3.0f, 1e-8f);
-    ASSERT_APPROXIMATE(eighthMatrix(1, 0), 8.0f, 1e-8f);
-    ASSERT_APPROXIMATE(eighthMatrix(1, 1), 3.1f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix7(0, 0), 6.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix7(0, 1), 3.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix7(1, 0), 8.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix7(1, 1), 3.1f, 1e-8f);
 
-    Matrix2F ninthMatrix(Vector2Vector, MatrixMajorFlags::Column);
+    Matrix2F matrix8(Vector2Vector, MatrixMajorFlags::Column);
 
-    ASSERT_APPROXIMATE(ninthMatrix(0, 0), 6.0f, 1e-8f);
-    ASSERT_APPROXIMATE(ninthMatrix(0, 1), 8.0f, 1e-8f);
-    ASSERT_APPROXIMATE(ninthMatrix(1, 0), 3.0f, 1e-8f);
-    ASSERT_APPROXIMATE(ninthMatrix(1, 1), 3.1f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix8(0, 0), 6.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix8(0, 1), 8.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix8(1, 0), 3.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix8(1, 1), 3.1f, 1e-8f);
 
-    Matrix2D tenthMatrix(6.0, 89.0);
+    Matrix2D matrix9(6.0, 89.0);
 
-    ASSERT_APPROXIMATE(tenthMatrix(0, 0), 6.0, 1e-10);
-    ASSERT_APPROXIMATE(tenthMatrix(0, 1), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(tenthMatrix(1, 0), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(tenthMatrix(1, 1), 89.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix9(0, 0), 6.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix9(0, 1), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix9(1, 0), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix9(1, 1), 89.0, 1e-10);
 
-    Matrix2D eleventhMatrix(MathD::GetHalfPI() / 3.0);
+    Matrix2D matrix10(MathD::GetHalfPI() / 3.0);
 
-    ASSERT_APPROXIMATE(eleventhMatrix(0, 0), cos(MathD::GetHalfPI() / 3.0), 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(0, 1), -sin(MathD::GetHalfPI() / 3.0), 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(1, 0), sin(MathD::GetHalfPI() / 3.0), 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(1, 1), cos(MathD::GetHalfPI() / 3.0), 1e-10);
+    ASSERT_APPROXIMATE(matrix10(0, 0), cos(MathD::GetHalfPI() / 3.0), 1e-10);
+    ASSERT_APPROXIMATE(matrix10(0, 1), -sin(MathD::GetHalfPI() / 3.0), 1e-10);
+    ASSERT_APPROXIMATE(matrix10(1, 0), sin(MathD::GetHalfPI() / 3.0), 1e-10);
+    ASSERT_APPROXIMATE(matrix10(1, 1), cos(MathD::GetHalfPI() / 3.0), 1e-10);
 
-    Matrix2F twelfthMatrix(firstVector, secondVector);
+    Matrix2F matrix11(vector0, vector1);
 
-    ASSERT_APPROXIMATE(firstVector.GetX() * secondVector.GetX(), twelfthMatrix(0, 0), 1e-8f);
-    ASSERT_APPROXIMATE(firstVector.GetX() * secondVector.GetY(), twelfthMatrix(0, 1), 1e-8f);
-    ASSERT_APPROXIMATE(firstVector.GetY() * secondVector.GetX(), twelfthMatrix(1, 0), 1e-8f);
-    ASSERT_APPROXIMATE(firstVector.GetY() * secondVector.GetY(), twelfthMatrix(1, 1), 1e-8f);
+    ASSERT_APPROXIMATE(vector0.GetX() * vector1.GetX(), matrix11(0, 0), 1e-8f);
+    ASSERT_APPROXIMATE(vector0.GetX() * vector1.GetY(), matrix11(0, 1), 1e-8f);
+    ASSERT_APPROXIMATE(vector0.GetY() * vector1.GetX(), matrix11(1, 0), 1e-8f);
+    ASSERT_APPROXIMATE(vector0.GetY() * vector1.GetY(), matrix11(1, 1), 1e-8f);
 
-    eleventhMatrix.MakeZero();
+    matrix10.MakeZero();
 
-    ASSERT_APPROXIMATE(eleventhMatrix(0, 0), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(0, 1), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(1, 0), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(1, 1), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(0, 0), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(0, 1), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(1, 0), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(1, 1), 0.0, 1e-10);
 
-    eleventhMatrix.MakeIdentity();
+    matrix10.MakeIdentity();
 
-    ASSERT_APPROXIMATE(eleventhMatrix(0, 0), 1.0, 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(0, 1), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(1, 0), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(1, 1), 1.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(0, 0), 1.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(0, 1), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(1, 0), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(1, 1), 1.0, 1e-10);
 
-    eleventhMatrix.MakeDiagonal(6.0, 9.0);
+    matrix10.MakeDiagonal(6.0, 9.0);
 
-    ASSERT_APPROXIMATE(eleventhMatrix(0, 0), 6.0, 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(0, 1), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(1, 0), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(1, 1), 9.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(0, 0), 6.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(0, 1), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(1, 0), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(1, 1), 9.0, 1e-10);
 
-    eleventhMatrix.MakeRotation(MathD::GetHalfPI() / 6.0);
+    matrix10.MakeRotation(MathD::GetHalfPI() / 6.0);
 
-    ASSERT_APPROXIMATE(eleventhMatrix(0, 0), cos(MathD::GetHalfPI() / 6.0), 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(0, 1), -sin(MathD::GetHalfPI() / 6.0), 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(1, 0), sin(MathD::GetHalfPI() / 6.0), 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(1, 1), cos(MathD::GetHalfPI() / 6.0), 1e-10);
+    ASSERT_APPROXIMATE(matrix10(0, 0), cos(MathD::GetHalfPI() / 6.0), 1e-10);
+    ASSERT_APPROXIMATE(matrix10(0, 1), -sin(MathD::GetHalfPI() / 6.0), 1e-10);
+    ASSERT_APPROXIMATE(matrix10(1, 0), sin(MathD::GetHalfPI() / 6.0), 1e-10);
+    ASSERT_APPROXIMATE(matrix10(1, 1), cos(MathD::GetHalfPI() / 6.0), 1e-10);
 
-    ninthMatrix.MakeTensorProduct(firstVector, secondVector);
+    matrix8.MakeTensorProduct(vector0, vector1);
 
-    ASSERT_APPROXIMATE(twelfthMatrix(0, 0), ninthMatrix(0, 0), 1e-8f);
-    ASSERT_APPROXIMATE(twelfthMatrix(0, 1), ninthMatrix(0, 1), 1e-8f);
-    ASSERT_APPROXIMATE(twelfthMatrix(1, 0), ninthMatrix(1, 0), 1e-8f);
-    ASSERT_APPROXIMATE(twelfthMatrix(1, 1), ninthMatrix(1, 1), 1e-8f);
+    ASSERT_APPROXIMATE(matrix11(0, 0), matrix8(0, 0), 1e-8f);
+    ASSERT_APPROXIMATE(matrix11(0, 1), matrix8(0, 1), 1e-8f);
+    ASSERT_APPROXIMATE(matrix11(1, 0), matrix8(1, 0), 1e-8f);
+    ASSERT_APPROXIMATE(matrix11(1, 1), matrix8(1, 1), 1e-8f);
 
-    eleventhMatrix = tenthMatrix;
+    matrix10 = matrix9;
 
-    ASSERT_APPROXIMATE(eleventhMatrix(0, 0), 6.0, 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(0, 1), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(1, 0), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(eleventhMatrix(1, 1), 89.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(0, 0), 6.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(0, 1), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(1, 0), 0.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix10(1, 1), 89.0, 1e-10);
 
-    Matrix2D thirteenthMatrix(eleventhMatrix);
+    Matrix2D thirteenthMatrix(matrix10);
 
     ASSERT_APPROXIMATE(thirteenthMatrix(0, 0), 6.0, 1e-10);
     ASSERT_APPROXIMATE(thirteenthMatrix(0, 1), 0.0, 1e-10);
@@ -191,245 +188,245 @@ void Mathematics::Matrix2Testing::ConstructionTest()
 
 void Mathematics::Matrix2Testing::AccessTest()
 {
-    const Matrix2F firstMatrix(3.0f, 4.0f, 8.1f, 3.2f);
+    const Matrix2F matrix0(3.0f, 4.0f, 8.1f, 3.2f);
 
-    ASSERT_APPROXIMATE(firstMatrix(0, 0), 3.0f, 1e-8f);
-    ASSERT_APPROXIMATE(firstMatrix(0, 1), 4.0f, 1e-8f);
-    ASSERT_APPROXIMATE(firstMatrix(1, 0), 8.1f, 1e-8f);
-    ASSERT_APPROXIMATE(firstMatrix(1, 1), 3.2f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix0(0, 0), 3.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix0(0, 1), 4.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix0(1, 0), 8.1f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix0(1, 1), 3.2f, 1e-8f);
 
-    Matrix2D secondMatrix(9.2, 1.0, 4.2, 5.2);
+    Matrix2D matrix1(9.2, 1.0, 4.2, 5.2);
 
-    ASSERT_APPROXIMATE(secondMatrix(0, 0), 9.2, 1e-10);
-    ASSERT_APPROXIMATE(secondMatrix(0, 1), 1.0, 1e-10);
-    ASSERT_APPROXIMATE(secondMatrix(1, 0), 4.2, 1e-10);
-    ASSERT_APPROXIMATE(secondMatrix(1, 1), 5.2, 1e-10);
+    ASSERT_APPROXIMATE(matrix1(0, 0), 9.2, 1e-10);
+    ASSERT_APPROXIMATE(matrix1(0, 1), 1.0, 1e-10);
+    ASSERT_APPROXIMATE(matrix1(1, 0), 4.2, 1e-10);
+    ASSERT_APPROXIMATE(matrix1(1, 1), 5.2, 1e-10);
 }
 
 void Mathematics::Matrix2Testing::OperatorCalculateTest()
 {
-    const Matrix2F firstMatrix(3.0f, 4.0f, 8.1f, 3.2f);
+    const Matrix2F matrix0(3.0f, 4.0f, 8.1f, 3.2f);
 
-    Matrix2F secondMatrix = -firstMatrix;
+    Matrix2F matrix1 = -matrix0;
 
-    ASSERT_APPROXIMATE(secondMatrix(0, 0), -3.0f, 1e-8f);
-    ASSERT_APPROXIMATE(secondMatrix(0, 1), -4.0f, 1e-8f);
-    ASSERT_APPROXIMATE(secondMatrix(1, 0), -8.1f, 1e-8f);
-    ASSERT_APPROXIMATE(secondMatrix(1, 1), -3.2f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix1(0, 0), -3.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix1(0, 1), -4.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix1(1, 0), -8.1f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix1(1, 1), -3.2f, 1e-8f);
 
-    Matrix2F thirdMatrix(9.2f, 3.0f, 2.0f, 9.0f);
+    Matrix2F matrix2(9.2f, 3.0f, 2.0f, 9.0f);
 
-    thirdMatrix += secondMatrix;
+    matrix2 += matrix1;
 
-    ASSERT_APPROXIMATE(thirdMatrix(0, 0), 6.2f, 1e-8f);
-    ASSERT_APPROXIMATE(thirdMatrix(0, 1), -1.0f, 1e-8f);
-    ASSERT_APPROXIMATE(thirdMatrix(1, 0), -6.1f, 1e6f);
-    ASSERT_APPROXIMATE(thirdMatrix(1, 1), 5.8f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix2(0, 0), 6.2f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix2(0, 1), -1.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix2(1, 0), -6.1f, 1e6f);
+    ASSERT_APPROXIMATE(matrix2(1, 1), 5.8f, 1e-8f);
 
-    thirdMatrix -= firstMatrix;
+    matrix2 -= matrix0;
 
-    ASSERT_APPROXIMATE(thirdMatrix(0, 0), 3.2f, 1e-6f);
-    ASSERT_APPROXIMATE(thirdMatrix(0, 1), -5.0f, 1e-8f);
-    ASSERT_APPROXIMATE(thirdMatrix(1, 0), -14.2f, 1e-6f);
-    ASSERT_APPROXIMATE(thirdMatrix(1, 1), 2.6f, 1e-6f);
+    ASSERT_APPROXIMATE(matrix2(0, 0), 3.2f, 1e-6f);
+    ASSERT_APPROXIMATE(matrix2(0, 1), -5.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix2(1, 0), -14.2f, 1e-6f);
+    ASSERT_APPROXIMATE(matrix2(1, 1), 2.6f, 1e-6f);
 
-    thirdMatrix *= 6.0f;
+    matrix2 *= 6.0f;
 
-    ASSERT_APPROXIMATE(thirdMatrix(0, 0), 19.2f, 1e-5f);
-    ASSERT_APPROXIMATE(thirdMatrix(0, 1), -30.0f, 1e-8f);
-    ASSERT_APPROXIMATE(thirdMatrix(1, 0), -85.2f, 1e-5f);
-    ASSERT_APPROXIMATE(thirdMatrix(1, 1), 15.6f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix2(0, 0), 19.2f, 1e-5f);
+    ASSERT_APPROXIMATE(matrix2(0, 1), -30.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix2(1, 0), -85.2f, 1e-5f);
+    ASSERT_APPROXIMATE(matrix2(1, 1), 15.6f, 1e-8f);
 
-    thirdMatrix /= 2.0f;
+    matrix2 /= 2.0f;
 
-    ASSERT_APPROXIMATE(thirdMatrix(0, 0), 9.6f, 1e-6f);
-    ASSERT_APPROXIMATE(thirdMatrix(0, 1), -15.0f, 1e-8f);
-    ASSERT_APPROXIMATE(thirdMatrix(1, 0), -42.6f, 1e-5f);
-    ASSERT_APPROXIMATE(thirdMatrix(1, 1), 7.8f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix2(0, 0), 9.6f, 1e-6f);
+    ASSERT_APPROXIMATE(matrix2(0, 1), -15.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix2(1, 0), -42.6f, 1e-5f);
+    ASSERT_APPROXIMATE(matrix2(1, 1), 7.8f, 1e-8f);
 
-    Matrix2F fourthMatrix1 = firstMatrix + thirdMatrix;
+    Matrix2F matrix31 = matrix0 + matrix2;
 
-    ASSERT_APPROXIMATE(fourthMatrix1(0, 0), 12.6f, 1e-6f);
-    ASSERT_APPROXIMATE(fourthMatrix1(0, 1), -11.0f, 1e-8f);
-    ASSERT_APPROXIMATE(fourthMatrix1(1, 0), -34.5f, 1e-8f);
-    ASSERT_APPROXIMATE(fourthMatrix1(1, 1), 11.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(0, 0), 12.6f, 1e-6f);
+    ASSERT_APPROXIMATE(matrix31(0, 1), -11.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(1, 0), -34.5f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(1, 1), 11.0f, 1e-8f);
 
-    fourthMatrix1 = firstMatrix - thirdMatrix;
+    matrix31 = matrix0 - matrix2;
 
-    ASSERT_APPROXIMATE(fourthMatrix1(0, 0), -6.6f, 1e-6f);
-    ASSERT_APPROXIMATE(fourthMatrix1(0, 1), 19.0f, 1e-8f);
-    ASSERT_APPROXIMATE(fourthMatrix1(1, 0), 50.7f, 1e-5f);
-    ASSERT_APPROXIMATE(fourthMatrix1(1, 1), -4.6f, 1e-6f);
+    ASSERT_APPROXIMATE(matrix31(0, 0), -6.6f, 1e-6f);
+    ASSERT_APPROXIMATE(matrix31(0, 1), 19.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(1, 0), 50.7f, 1e-5f);
+    ASSERT_APPROXIMATE(matrix31(1, 1), -4.6f, 1e-6f);
 
-    fourthMatrix1 = firstMatrix * 5.0f;
+    matrix31 = matrix0 * 5.0f;
 
-    ASSERT_APPROXIMATE(fourthMatrix1(0, 0), 15.0f, 1e-8f);
-    ASSERT_APPROXIMATE(fourthMatrix1(0, 1), 20.0f, 1e-8f);
-    ASSERT_APPROXIMATE(fourthMatrix1(1, 0), 40.5f, 1e-8f);
-    ASSERT_APPROXIMATE(fourthMatrix1(1, 1), 16.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(0, 0), 15.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(0, 1), 20.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(1, 0), 40.5f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(1, 1), 16.0f, 1e-8f);
 
-    fourthMatrix1 = 3.0f * firstMatrix;
+    matrix31 = 3.0f * matrix0;
 
-    ASSERT_APPROXIMATE(fourthMatrix1(0, 0), 9.0f, 1e-8f);
-    ASSERT_APPROXIMATE(fourthMatrix1(0, 1), 12.0f, 1e-8f);
-    ASSERT_APPROXIMATE(fourthMatrix1(1, 0), 24.3f, 1e-5f);
-    ASSERT_APPROXIMATE(fourthMatrix1(1, 1), 9.6f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(0, 0), 9.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(0, 1), 12.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(1, 0), 24.3f, 1e-5f);
+    ASSERT_APPROXIMATE(matrix31(1, 1), 9.6f, 1e-8f);
 
-    fourthMatrix1 = firstMatrix / 2.0f;
+    matrix31 = matrix0 / 2.0f;
 
-    ASSERT_APPROXIMATE(fourthMatrix1(0, 0), 1.5f, 1e-8f);
-    ASSERT_APPROXIMATE(fourthMatrix1(0, 1), 2.0f, 1e-8f);
-    ASSERT_APPROXIMATE(fourthMatrix1(1, 0), 4.05f, 1e-8f);
-    ASSERT_APPROXIMATE(fourthMatrix1(1, 1), 1.6f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(0, 0), 1.5f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(0, 1), 2.0f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(1, 0), 4.05f, 1e-8f);
+    ASSERT_APPROXIMATE(matrix31(1, 1), 1.6f, 1e-8f);
 
-    default_random_engine generator{};
-    const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution{ -10.0f, 10.0f };
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        Matrix2F fifthMatrix{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
+        Matrix2F matrix4{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
 
-        Matrix2F sixthMatrix{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
+        Matrix2F matrix5{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
 
-        Matrix2F seventhMatrix(sixthMatrix);
+        Matrix2F matrix6(matrix5);
 
-        seventhMatrix *= fifthMatrix;
+        matrix6 *= matrix4;
 
-        const Matrix2F fourthMatrix(sixthMatrix(0, 0) * fifthMatrix(0, 0) + sixthMatrix(0, 1) * fifthMatrix(1, 0),
-                                    sixthMatrix(0, 0) * fifthMatrix(0, 1) + sixthMatrix(0, 1) * fifthMatrix(1, 1),
-                                    sixthMatrix(1, 0) * fifthMatrix(0, 0) + sixthMatrix(1, 1) * fifthMatrix(1, 0),
-                                    sixthMatrix(1, 0) * fifthMatrix(0, 1) + sixthMatrix(1, 1) * fifthMatrix(1, 1));
+        const Matrix2F matrix3(matrix5(0, 0) * matrix4(0, 0) + matrix5(0, 1) * matrix4(1, 0),
+                               matrix5(0, 0) * matrix4(0, 1) + matrix5(0, 1) * matrix4(1, 1),
+                               matrix5(1, 0) * matrix4(0, 0) + matrix5(1, 1) * matrix4(1, 0),
+                               matrix5(1, 0) * matrix4(0, 1) + matrix5(1, 1) * matrix4(1, 1));
 
-        ASSERT_TRUE(Approximate(fourthMatrix, seventhMatrix, 1e-4f));
+        ASSERT_TRUE(Approximate(matrix3, matrix6, 1e-4f));
 
-        seventhMatrix = sixthMatrix * fifthMatrix;
+        matrix6 = matrix5 * matrix4;
 
-        ASSERT_TRUE(Approximate(fourthMatrix, seventhMatrix, 1e-8f));
+        ASSERT_TRUE(Approximate(matrix3, matrix6, 1e-8f));
 
-        Matrix2F::Vector2 firstVector(randomDistribution(generator),
-                                      randomDistribution(generator));
+        Matrix2F::Vector2 vector0(randomDistribution(generator),
+                                  randomDistribution(generator));
 
-        const Matrix2F::Vector2 secondVector = seventhMatrix * firstVector;
-        const Matrix2F::Vector2 thirdVector = firstVector * seventhMatrix;
+        const Matrix2F::Vector2 vector1 = matrix6 * vector0;
+        const Matrix2F::Vector2 vector2 = vector0 * matrix6;
 
-        Matrix2F::Vector2 fourthVector(seventhMatrix(0, 0) * firstVector[0] + seventhMatrix(0, 1) * firstVector[1],
-                                       seventhMatrix(1, 0) * firstVector[0] + seventhMatrix(1, 1) * firstVector[1]);
+        Matrix2F::Vector2 vector3(matrix6(0, 0) * vector0[0] + matrix6(0, 1) * vector0[1],
+                                  matrix6(1, 0) * vector0[0] + matrix6(1, 1) * vector0[1]);
 
-        ASSERT_TRUE(Vector2ToolsF::Approximate(secondVector, fourthVector, 1e-3f));
+        ASSERT_TRUE(Vector2ToolsF::Approximate(vector1, vector3, 1e-3f));
 
-        fourthVector[0] = seventhMatrix(0, 0) * firstVector[0] + seventhMatrix(1, 0) * firstVector[1];
+        vector3[0] = matrix6(0, 0) * vector0[0] + matrix6(1, 0) * vector0[1];
 
-        fourthVector[1] = seventhMatrix(0, 1) * firstVector[0] + seventhMatrix(1, 1) * firstVector[1];
+        vector3[1] = matrix6(0, 1) * vector0[0] + matrix6(1, 1) * vector0[1];
 
-        ASSERT_TRUE(Vector2ToolsF::Approximate(thirdVector, fourthVector, 1e-3f));
+        ASSERT_TRUE(Vector2ToolsF::Approximate(vector2, vector3, 1e-3f));
 
-        Matrix2F eighthMatrix = TransposeTimes(fifthMatrix, sixthMatrix);
-        Matrix2F ninthMatrix = fifthMatrix.Transpose() * sixthMatrix;
+        Matrix2F matrix7 = TransposeTimes(matrix4, matrix5);
+        Matrix2F matrix8 = matrix4.Transpose() * matrix5;
 
-        ASSERT_TRUE(Approximate(eighthMatrix, ninthMatrix, 1e-8f));
+        ASSERT_TRUE(Approximate(matrix7, matrix8, 1e-8f));
 
-        eighthMatrix = TimesTranspose(fifthMatrix, sixthMatrix);
-        ninthMatrix = fifthMatrix * sixthMatrix.Transpose();
+        matrix7 = TimesTranspose(matrix4, matrix5);
+        matrix8 = matrix4 * matrix5.Transpose();
 
-        ASSERT_TRUE(Approximate(eighthMatrix, ninthMatrix, 1e-8f));
+        ASSERT_TRUE(Approximate(matrix7, matrix8, 1e-8f));
 
-        eighthMatrix = TransposeTimesTranspose(fifthMatrix, sixthMatrix);
-        ninthMatrix = fifthMatrix.Transpose() * sixthMatrix.Transpose();
+        matrix7 = TransposeTimesTranspose(matrix4, matrix5);
+        matrix8 = matrix4.Transpose() * matrix5.Transpose();
 
-        ASSERT_TRUE(Approximate(eighthMatrix, ninthMatrix, 1e-8f));
+        ASSERT_TRUE(Approximate(matrix7, matrix8, 1e-8f));
     }
 }
 
 void Mathematics::Matrix2Testing::ArithmeticCalculateTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
-    const uniform_real<float> angleRandomDistribution(0.0f, MathF::GetHalfPI());
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution{ -10.0f, 10.0f };
+    const std::uniform_real<float> angleRandomDistribution(0.0f, MathF::GetHalfPI());
 
     for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        const Matrix2F::Vector2 firstVector(randomDistribution(generator),
-                                            randomDistribution(generator));
+        const Matrix2F::Vector2 vector0(randomDistribution(generator),
+                                        randomDistribution(generator));
 
-        const Matrix2F::Vector2 secondVector(randomDistribution(generator),
-                                             randomDistribution(generator));
+        const Matrix2F::Vector2 vector1(randomDistribution(generator),
+                                        randomDistribution(generator));
 
-        Matrix2F firstMatrix(randomDistribution(generator),
-                             randomDistribution(generator),
-                             randomDistribution(generator),
-                             randomDistribution(generator));
+        Matrix2F matrix0(randomDistribution(generator),
+                         randomDistribution(generator),
+                         randomDistribution(generator),
+                         randomDistribution(generator));
 
-        const float qForm = firstMatrix.QuadraticForm(firstVector, secondVector);
+        const float qForm = matrix0.QuadraticForm(vector0, vector1);
 
-        const float testQFormValue = Vector2ToolsF::DotProduct(firstVector, firstMatrix * secondVector);
+        const float testQFormValue = Vector2ToolsF::DotProduct(vector0, matrix0 * vector1);
 
         ASSERT_APPROXIMATE(qForm, testQFormValue, 1e-2f);
 
-        Matrix2F secondMatrix = firstMatrix.Transpose();
+        Matrix2F matrix1 = matrix0.Transpose();
 
-        ASSERT_APPROXIMATE(firstMatrix(0, 0), secondMatrix(0, 0), 1e-8f);
-        ASSERT_APPROXIMATE(firstMatrix(0, 1), secondMatrix(1, 0), 1e-8f);
-        ASSERT_APPROXIMATE(firstMatrix(1, 0), secondMatrix(0, 1), 1e-8f);
-        ASSERT_APPROXIMATE(firstMatrix(1, 1), secondMatrix(1, 1), 1e-8f);
+        ASSERT_APPROXIMATE(matrix0(0, 0), matrix1(0, 0), 1e-8f);
+        ASSERT_APPROXIMATE(matrix0(0, 1), matrix1(1, 0), 1e-8f);
+        ASSERT_APPROXIMATE(matrix0(1, 0), matrix1(0, 1), 1e-8f);
+        ASSERT_APPROXIMATE(matrix0(1, 1), matrix1(1, 1), 1e-8f);
 
-        const float determinant = secondMatrix(0, 0) * secondMatrix(1, 1) - secondMatrix(0, 1) * secondMatrix(1, 0);
+        const float determinant = matrix1(0, 0) * matrix1(1, 1) - matrix1(0, 1) * matrix1(1, 0);
 
-        ASSERT_APPROXIMATE(determinant, secondMatrix.Determinant(), 1e-3f);
+        ASSERT_APPROXIMATE(determinant, matrix1.Determinant(), 1e-3f);
 
         if (MathF::GetZeroTolerance() < MathF::FAbs(determinant))
         {
-            const Matrix2F thirdMatrix = secondMatrix.Inverse();
+            const Matrix2F matrix2 = matrix1.Inverse();
 
-            Matrix2F fourthMatrix = secondMatrix * thirdMatrix;
+            Matrix2F matrix3 = matrix1 * matrix2;
 
-            ASSERT_APPROXIMATE(fourthMatrix(0, 0), 1.0f, 1e-5f);
-            ASSERT_APPROXIMATE(fourthMatrix(0, 1), 0.0f, 1e-5f);
-            ASSERT_APPROXIMATE(fourthMatrix(1, 0), 0.0f, 1e-5f);
-            ASSERT_APPROXIMATE(fourthMatrix(1, 1), 1.0f, 1e-5f);
+            ASSERT_APPROXIMATE(matrix3(0, 0), 1.0f, 1e-5f);
+            ASSERT_APPROXIMATE(matrix3(0, 1), 0.0f, 1e-5f);
+            ASSERT_APPROXIMATE(matrix3(1, 0), 0.0f, 1e-5f);
+            ASSERT_APPROXIMATE(matrix3(1, 1), 1.0f, 1e-5f);
 
-            Matrix2F fifthMatrix = secondMatrix.Adjoint();
-            fifthMatrix /= determinant;
+            Matrix2F matrix4 = matrix1.Adjoint();
+            matrix4 /= determinant;
 
-            fourthMatrix = fifthMatrix * secondMatrix;
+            matrix3 = matrix4 * matrix1;
 
-            ASSERT_TRUE(Approximate(fourthMatrix, Matrix2F::GetIdentity(), 1e-5f));
+            ASSERT_TRUE(Approximate(matrix3, Matrix2F::GetIdentity(), 1e-5f));
         }
 
         const float angle = angleRandomDistribution(generator);
 
-        Matrix2F sixthMatrix(angle);
+        Matrix2F matrix5(angle);
 
-        ASSERT_APPROXIMATE(angle, sixthMatrix.ExtractAngle(), 1e-7f);
+        ASSERT_APPROXIMATE(angle, matrix5.ExtractAngle(), 1e-7f);
 
-        Matrix2F seventhMatrix(sixthMatrix);
+        Matrix2F matrix6(matrix5);
 
-        seventhMatrix.Orthonormalize();
+        matrix6.Orthonormalize();
 
-        Vector2F thirdVector(sixthMatrix(0, 0), sixthMatrix(1, 0));
-        const Vector2F fourthVector(seventhMatrix(0, 0), seventhMatrix(1, 0));
+        Vector2F vector2(matrix5(0, 0), matrix5(1, 0));
+        const Vector2F vector3(matrix6(0, 0), matrix6(1, 0));
 
-        thirdVector.Normalize();
+        vector2.Normalize();
 
-        ASSERT_TRUE(Vector2ToolsF::Approximate(thirdVector, fourthVector, 1e-7f));
+        ASSERT_TRUE(Vector2ToolsF::Approximate(vector2, vector3, 1e-7f));
 
-        Vector2F fifthVector(sixthMatrix(0, 1), sixthMatrix(1, 1));
-        const Vector2F sixthVector(seventhMatrix(0, 1), seventhMatrix(1, 1));
+        Vector2F vector4(matrix5(0, 1), matrix5(1, 1));
+        const Vector2F vector5(matrix6(0, 1), matrix6(1, 1));
 
-        fifthVector -= (Vector2ToolsF::DotProduct(fourthVector, fifthVector)) * fourthVector;
+        vector4 -= (Vector2ToolsF::DotProduct(vector3, vector4)) * vector3;
 
-        fifthVector.Normalize();
+        vector4.Normalize();
 
-        ASSERT_TRUE(Vector2ToolsF::Approximate(fifthVector, sixthVector, 1e-7f));
+        ASSERT_TRUE(Vector2ToolsF::Approximate(vector4, vector5, 1e-7f));
 
-        const Matrix2D eighthMatrix(randomDistribution(generator), angle, angle, randomDistribution(generator));
+        const Matrix2D matrix7(randomDistribution(generator), angle, angle, randomDistribution(generator));
 
-        const Matrix2D::Matrix2EigenDecomposition eigenDecomposition = eighthMatrix.EigenDecomposition(1e-10);
+        const Matrix2D::Matrix2EigenDecomposition eigenDecomposition = matrix7.EigenDecomposition(1e-10);
 
         const Matrix2D rotation = eigenDecomposition.GetRotation();
         const Matrix2D diagonal = eigenDecomposition.GetDiagonal();
 
-        const Matrix2D ninthMatrix = rotation * diagonal * rotation.Transpose();
+        const Matrix2D matrix8 = rotation * diagonal * rotation.Transpose();
 
-        ASSERT_TRUE(Approximate(ninthMatrix, eighthMatrix, 1e-10));
+        ASSERT_TRUE(Approximate(matrix8, matrix7, 1e-10));
     }
 }

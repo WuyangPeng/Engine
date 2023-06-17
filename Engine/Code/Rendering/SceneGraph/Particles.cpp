@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/04/02 16:08)
+///	标准：std:c++20
+///	引擎版本：0.9.0.12 (2023/06/12 11:17)
 
 #include "Rendering/RenderingExport.h"
 
@@ -22,9 +22,6 @@
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/SceneGraph/Culler.h"
 
-using std::make_shared;
-using std::vector;
-
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Particles)
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, Particles);
@@ -34,8 +31,8 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, Particles);
 Rendering::Particles::Particles(const VertexFormatSharedPtr& vertexformat,
                                 const VertexBufferSharedPtr& vertexbuffer,
                                 int indexSize,
-                                const vector<APoint>& positions,
-                                const vector<float>& sizes,
+                                const std::vector<APoint>& positions,
+                                const std::vector<float>& sizes,
                                 float sizeAdjust)
     : ParentType{ vertexformat, vertexbuffer, IndexBufferSharedPtr{} },
       impl{ positions, sizes, sizeAdjust }

@@ -1,17 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/11 17:48)
+///	引擎测试版本：0.9.0.12 (2023/06/12 14:57)
 
 #ifndef RENDERING_TESTING_TESTING_HELPER_H
 #define RENDERING_TESTING_TESTING_HELPER_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 namespace Rendering
@@ -29,7 +29,7 @@ namespace Rendering
 
     private:
         void InitSuite();
-        void AddMacroSuite();
+        void AddHelperSuite();
         void AddBaseSuite();
         void AddDataTypesSuite();
         void AddResourcesSuite();
@@ -59,18 +59,6 @@ namespace Rendering
         void AddGlxRendererSuite();
         void AddWglRendererSuite();
         void AddStateSuite();
-        void AddLib3dsSuite();
-        void AddAbuseSuite();
-        void AddDemoglSuite();
-        void AddDevILSuite();
-        void AddFBXSuite();
-        void AddJPEGSuite();
-        void AddTIFFSuite();
-        void AddOpenvidiaSuite();
-        void AddNethackSuite();
-        void AddWingSuite();
-        void AddWargamerSuite();
-        void AddNvtoolkitSuite();
     };
 }
 

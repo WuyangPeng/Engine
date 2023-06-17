@@ -1,5 +1,5 @@
 @default
-ID,测试0,测试1,测试2,测试4,测试5
+id,测试0,测试1,测试2,测试4,测试5
 int,bool,char,double,int,string
 id,test0,test1,test2,test4,test5
 10001,true,a,1.1,7,"测试4"

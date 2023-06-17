@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/26 11:49)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:30)
 
 #include "FloatingPointAnalysisTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/FloatingPointAnalysisDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -49,17 +46,17 @@ void Mathematics::FloatingPointAnalysisTesting::MainTest()
 
 void Mathematics::FloatingPointAnalysisTesting::NumericalValueSymbolTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-    const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-    const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution0{ -1.0e38f, 1.0e38f };
+    const std::uniform_real<double> randomDistribution1{ -1.0e300, 1.0e300 };
+    const std::uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    const std::uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        auto firstValue = firstRandomDistribution(generator);
+        auto firstValue = randomDistribution0(generator);
         const FloatingPointAnalysis<float> firstFloatingPointAnalysis(firstValue);
 
         if (0.0 <= firstValue)
@@ -73,7 +70,7 @@ void Mathematics::FloatingPointAnalysisTesting::NumericalValueSymbolTest()
             ASSERT_EQUAL(firstFloatingPointAnalysis.GetSymbolValue(), 1u);
         }
 
-        auto secondValue = secondRandomDistribution(generator);
+        auto secondValue = randomDistribution1(generator);
         const FloatingPointAnalysis<double> secondFloatingPointAnalysis(secondValue);
 
         if (0.0 <= secondValue)
@@ -119,17 +116,17 @@ void Mathematics::FloatingPointAnalysisTesting::NumericalValueSymbolTest()
 
 void Mathematics::FloatingPointAnalysisTesting::ExponentTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-    const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-    const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution0{ -1.0e38f, 1.0e38f };
+    const std::uniform_real<double> randomDistribution1{ -1.0e300, 1.0e300 };
+    const std::uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    const std::uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        auto firstValue = firstRandomDistribution(generator);
+        auto firstValue = randomDistribution0(generator);
         const FloatingPointAnalysis<float> firstFloatingPointAnalysis(firstValue);
 
         ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
@@ -144,7 +141,7 @@ void Mathematics::FloatingPointAnalysisTesting::ExponentTest()
 
         ASSERT_EQUAL(firstFloatingPointAnalysis.GetRealExponent(), secondFloatingPointAnalysis.GetRealExponent());
 
-        auto thirdValue = secondRandomDistribution(generator);
+        auto thirdValue = randomDistribution1(generator);
         const FloatingPointAnalysis<double> thirdFloatingPointAnalysis(thirdValue);
 
         ASSERT_ENUM_EQUAL(thirdFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
@@ -193,19 +190,19 @@ void Mathematics::FloatingPointAnalysisTesting::ExponentTest()
 
 void Mathematics::FloatingPointAnalysisTesting::MantissaTest()
 {
-    default_random_engine generator{};
-    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-    const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-    const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
-    const uniform_int<> fifthRandomDistribution(0, 38);
-    const uniform_int<> sixthRandomDistribution(0, 308);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<float> randomDistribution0{ -1.0e38f, 1.0e38f };
+    const std::uniform_real<double> randomDistribution1{ -1.0e300, 1.0e300 };
+    const std::uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    const std::uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    const std::uniform_int<> fifthRandomDistribution(0, 38);
+    const std::uniform_int<> sixthRandomDistribution(0, 308);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        auto firstValue = firstRandomDistribution(generator);
+        auto firstValue = randomDistribution0(generator);
         const FloatingPointAnalysis<float> firstFloatingPointAnalysis(firstValue);
 
         auto firstExponent = firstFloatingPointAnalysis.GetRealExponent();
@@ -229,7 +226,7 @@ void Mathematics::FloatingPointAnalysisTesting::MantissaTest()
 
         ASSERT_EQUAL(firstFloatingPointAnalysis.GetMantissa(), secondFloatingPointAnalysis.GetMantissa());
 
-        auto thirdValue = secondRandomDistribution(generator);
+        auto thirdValue = randomDistribution1(generator);
         const FloatingPointAnalysis<double> thirdFloatingPointAnalysis(thirdValue);
 
         auto secondExponent = thirdFloatingPointAnalysis.GetRealExponent();
@@ -302,6 +299,7 @@ void Mathematics::FloatingPointAnalysisTesting::MantissaTest()
         ASSERT_EQUAL(seventhFloatingPointAnalysis.GetMantissa(), eighthFloatingPointAnalysis.GetMantissa());
     }
 }
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 

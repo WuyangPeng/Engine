@@ -1,23 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/26 15:59)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:37)
 
 #include "IntegerDivisionModuloTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Rational/IntegerDetail.h"
 #include "Mathematics/Rational/IntegerDivisionModuloDetail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_int;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -48,24 +45,24 @@ void Mathematics::IntegerDivisionModuloTesting::MainTest()
 
 void Mathematics::IntegerDivisionModuloTesting::DenominatorIsLargeTest()
 {
-    default_random_engine generator{};
-    const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        vector<uint16_t> firstShortVector(66);
-        vector<uint16_t> secondShortVector(66);
+        std::vector<uint16_t> firstShortVector(66);
+        std::vector<uint16_t> secondShortVector(66);
 
         // 最高位为零
         for (auto i = 0; i < 60; ++i)
         {
-            firstShortVector.at(i) = firstRandomDistribution(generator);
-            secondShortVector.at(i) = firstRandomDistribution(generator);
+            firstShortVector.at(i) = randomDistribution0(generator);
+            secondShortVector.at(i) = randomDistribution0(generator);
         }
 
-        secondShortVector.at(61) = firstRandomDistribution(generator);
+        secondShortVector.at(61) = randomDistribution0(generator);
 
         const IntegerData<33> firstInteger(firstShortVector);
         const IntegerData<33> secondInteger(secondShortVector);
@@ -121,23 +118,23 @@ void Mathematics::IntegerDivisionModuloTesting::DenominatorIsLargeTest()
 
 void Mathematics::IntegerDivisionModuloTesting::SingleTest()
 {
-    default_random_engine generator{};
-    const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        vector<uint16_t> firstShortVector(66);
-        vector<uint16_t> secondShortVector(66);
+        std::vector<uint16_t> firstShortVector(66);
+        std::vector<uint16_t> secondShortVector(66);
 
         // 最高位为零
         for (auto i = 0; i < 65; ++i)
         {
-            firstShortVector.at(i) = firstRandomDistribution(generator);
+            firstShortVector.at(i) = randomDistribution0(generator);
         }
 
-        secondShortVector.at(0) = firstRandomDistribution(generator);
+        secondShortVector.at(0) = randomDistribution0(generator);
 
         const IntegerData<33> firstInteger(firstShortVector);
         const IntegerData<33> secondInteger(secondShortVector);
@@ -184,29 +181,29 @@ void Mathematics::IntegerDivisionModuloTesting::SingleTest()
 
 void Mathematics::IntegerDivisionModuloTesting::MultipleTest()
 {
-    default_random_engine generator{};
-    const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
-    const uniform_int<> secondRandomDistribution(33, 66);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<uint16_t> randomDistribution0(0, UINT16_MAX);
+    const std::uniform_int<> randomDistribution1(33, 66);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        vector<uint16_t> firstShortVector(68);
-        vector<uint16_t> secondShortVector(68);
+        std::vector<uint16_t> firstShortVector(68);
+        std::vector<uint16_t> secondShortVector(68);
 
-        const uint32_t secondIndexMax = secondRandomDistribution(generator);
+        const uint32_t secondIndexMax = randomDistribution1(generator);
 
         // 最高位为零
         for (auto i = 0u; i < secondIndexMax; ++i)
         {
-            firstShortVector.at(i) = firstRandomDistribution(generator);
-            secondShortVector.at(i) = firstRandomDistribution(generator);
+            firstShortVector.at(i) = randomDistribution0(generator);
+            secondShortVector.at(i) = randomDistribution0(generator);
         }
 
         for (auto i = secondIndexMax; i < 67; ++i)
         {
-            firstShortVector.at(i) = firstRandomDistribution(generator);
+            firstShortVector.at(i) = randomDistribution0(generator);
         }
 
         const IntegerData<34> firstInteger(firstShortVector);
@@ -253,15 +250,15 @@ void Mathematics::IntegerDivisionModuloTesting::MultipleTest()
 
 void Mathematics::IntegerDivisionModuloTesting::Int32Test()
 {
-    default_random_engine generator{};
-    const uniform_int<> firstRandomDistribution(INT32_MIN, UINT32_MAX);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_int<> randomDistribution0(INT32_MIN, UINT32_MAX);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
-        const auto firstValue = firstRandomDistribution(generator);
-        const auto secondValue = firstRandomDistribution(generator);
+        const auto firstValue = randomDistribution0(generator);
+        const auto secondValue = randomDistribution0(generator);
 
         const auto quotientValue = firstValue / secondValue;
 

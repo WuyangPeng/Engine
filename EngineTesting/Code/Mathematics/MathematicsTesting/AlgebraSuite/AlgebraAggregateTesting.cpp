@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/06/08 18:15)
+///	引擎测试版本：0.9.0.12 (2023/06/09 11:15)
 
 #include "AlgebraAggregateTesting.h"
 #include "CoreTools/FileManager/FileBuffer.h"
@@ -23,13 +23,8 @@
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::make_shared;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 Mathematics::AlgebraAggregateTesting::AlgebraAggregateTesting(const OStreamShared& streamShared)
     : ParentType{ streamShared }

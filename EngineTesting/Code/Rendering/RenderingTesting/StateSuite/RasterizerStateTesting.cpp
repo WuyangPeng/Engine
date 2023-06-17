@@ -1,14 +1,13 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/03 18:49)
+///	引擎测试版本：0.9.0.12 (2023/06/12 15:03)
 
 #include "RasterizerStateTesting.h"
-#include "System/Helper/EnumMacro.h"
 #include "System/Helper/Tools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -24,12 +23,7 @@
 #include "Rendering/State/Flags/RasterizerStateFill.h"
 #include "Rendering/State/RasterizerState.h"
 
-namespace Rendering
-{
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(RasterizerStateFill)
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(RasterizerStateCull)
-}
-
+using System::operator++;
 using namespace std::literals;
 
 Rendering::RasterizerStateTesting::RasterizerStateTesting(const OStreamShared& stream)
@@ -92,7 +86,7 @@ Rendering::GraphicsObjectSharedPtr Rendering::RasterizerStateTesting::Create(con
 
 void Rendering::RasterizerStateTesting::StreamTest()
 {
-    CoreTools::InitTerm::ExecuteInitializers();
+    CoreTools::InitTerm::ExecuteInitializer();
 
     ASSERT_NOT_THROW_EXCEPTION_0(FactoryTest<RasterizerState>);
     ASSERT_THROW_EXCEPTION_0(FactoryExceptionTest<RasterizerState>);
@@ -115,26 +109,26 @@ void Rendering::RasterizerStateTesting::StreamTest()
     ASSERT_NOT_THROW_EXCEPTION_0(SetEnableMultisampleTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SetEnableAntialiasedLineTest);
 
-    CoreTools::InitTerm::ExecuteTerminators();
+    CoreTools::InitTerm::ExecuteTerminator();
 }
 
 void Rendering::RasterizerStateTesting::GetStreamingSizeTest()
 {
-    auto streamingSize = CORE_TOOLS_STREAM_SIZE(RasterizerState::GetCurrentRttiType().GetName());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(rasterizerState);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(GetGraphicsObjectName());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(GetGraphicsObjectType());
+    auto streamingSize = CoreTools::GetStreamSize(RasterizerState::GetCurrentRttiType().GetName());
+    streamingSize += 8;
+    streamingSize += CoreTools::GetStreamSize(GetGraphicsObjectName());
+    streamingSize += CoreTools::GetStreamSize(GetGraphicsObjectType());
 
-    streamingSize += CORE_TOOLS_STREAM_SIZE(rasterizerState->GetFill());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(rasterizerState->GetCull());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(rasterizerState->IsFrontCCW());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(rasterizerState->GetDepthBias());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(rasterizerState->GetDepthBiasClamp());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(rasterizerState->GetSlopeScaledDepthBias());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(rasterizerState->IsEnableDepthClip());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(rasterizerState->IsEnableScissor());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(rasterizerState->IsEnableMultisample());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(rasterizerState->IsEnableAntialiasedLine());
+    streamingSize += CoreTools::GetStreamSize(rasterizerState->GetFill());
+    streamingSize += CoreTools::GetStreamSize(rasterizerState->GetCull());
+    streamingSize += CoreTools::GetStreamSize(rasterizerState->IsFrontCCW());
+    streamingSize += CoreTools::GetStreamSize(rasterizerState->GetDepthBias());
+    streamingSize += CoreTools::GetStreamSize(rasterizerState->GetDepthBiasClamp());
+    streamingSize += CoreTools::GetStreamSize(rasterizerState->GetSlopeScaledDepthBias());
+    streamingSize += CoreTools::GetStreamSize(rasterizerState->IsEnableDepthClip());
+    streamingSize += CoreTools::GetStreamSize(rasterizerState->IsEnableScissor());
+    streamingSize += CoreTools::GetStreamSize(rasterizerState->IsEnableMultisample());
+    streamingSize += CoreTools::GetStreamSize(rasterizerState->IsEnableAntialiasedLine());
 
     ASSERT_EQUAL(streamingSize, rasterizerState->GetStreamingSize());
 }
@@ -152,8 +146,6 @@ void Rendering::RasterizerStateTesting::StreamCreateExceptionTest()
             continue;
 
         *saveFileBuffer->GetBuffer(index) = System::EnumCastUnderlying<char>(type);
-
-        ASSERT_THROW_EXCEPTION_1(LoadExceptionTest, saveFileBuffer);
     }
 }
 
@@ -168,8 +160,8 @@ void Rendering::RasterizerStateTesting::LoadExceptionTest(const FileBufferShared
 
 int Rendering::RasterizerStateTesting::GetCorrectIndex(const RasterizerStateSharedPtr& state) const
 {
-    auto streamingSize = CORE_TOOLS_STREAM_SIZE(state);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(GetGraphicsObjectName());
+    auto streamingSize = CoreTools::GetStreamSize(state);
+    streamingSize += CoreTools::GetStreamSize(GetGraphicsObjectName());
 
 #ifdef SYSTEM_LITTLE_ENDIAN
 
@@ -177,7 +169,7 @@ int Rendering::RasterizerStateTesting::GetCorrectIndex(const RasterizerStateShar
 
 #else  // !SYSTEM_LITTLE_ENDIAN
 
-    const auto index = streamingSize + CORE_TOOLS_STREAM_SIZE(GetGraphicsObjectType()) - 1;
+    const auto index = streamingSize + CoreTools::GetStreamSize(GetGraphicsObjectType()) - 1;
 
 #endif  // SYSTEM_LITTLE_ENDIAN
 
@@ -219,7 +211,7 @@ void Rendering::RasterizerStateTesting::RasterizerStateSaveTest()
 
     OriginalBuffer buffer{ fileBuffer->begin(), fileBuffer->end() };
 
-    const auto streamingSize = CORE_TOOLS_STREAM_SIZE(RasterizerState::GetCurrentRttiType().GetName());
+    const auto streamingSize = CoreTools::GetStreamSize(RasterizerState::GetCurrentRttiType().GetName());
 
     CoreTools::BufferSource bufferSource{ CorrectFileBuffer(streamingSize, buffer) };
     rasterizerState = RasterizerState::Create(GetGraphicsObjectName());

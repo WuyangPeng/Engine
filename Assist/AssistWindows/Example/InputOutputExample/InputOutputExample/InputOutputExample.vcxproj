@@ -33,7 +33,7 @@
       <Configuration>StaticRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  </ItemGroup>  
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{24B48948-1E71-4AB7-A041-75820F9CBB05}</ProjectGuid>
@@ -124,7 +124,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
-    <Import Project="..\..\..\AssistX64DebugLibs.props" /> 
+    <Import Project="..\..\..\AssistX64DebugLibs.props" />
     <Import Project="..\..\..\AssistDebugXCopy.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -279,9 +279,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Example\InputOutput\InputOutputExample\DllLib.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\InputOutput\InputOutputExample\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\InputOutput\InputOutputExample\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\InputOutput\InputOutputExample\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\InputOutput\InputOutputExample\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\InputOutput\InputOutputExample\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\InputOutput\InputOutputExample\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\..\Code\Example\InputOutput\InputOutputExample\Placeholder\Placeholder.h" />
     <ClInclude Include="..\..\..\..\Code\Example\InputOutput\InputOutputExample\InputOutputExample.h" />
     <ClInclude Include="..\..\..\..\Code\Example\InputOutput\InputOutputExample\InputOutputExampleDll.h" />

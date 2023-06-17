@@ -1,18 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/06/30 16:03)
+///	引擎辅助版本：0.9.0.12 (2023/06/13 10:32)
 
 #include "GameTemplate.h"
 #include "GameTemplateHelper.h"
 #include "GenerateEngine.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-
-#include <iostream>
 
 GameTemplate::GameTemplateHelper::GameTemplateHelper(int argc, char** argv, const String& consoleTitle, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ argc, argv, consoleTitle, environmentDirectory }

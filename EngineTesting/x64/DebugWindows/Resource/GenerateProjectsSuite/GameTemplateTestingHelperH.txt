@@ -8,7 +8,7 @@
 #define %ProjectCapital%_%ManagerCapital%TESTING_TESTING_HELPER_H
 
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 #include <boost/shared_ptr.hpp>
 

@@ -28,7 +28,11 @@ CSVConfigure::SystemConstantContainer::SystemConstantContainer(const CoreTools::
 
 void CSVConfigure::SystemConstantContainer::Parsing(const CoreTools::CSVContent& csvContent)
 {
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("systemConstant表开始载入……"));
+
     const auto size = csvContent.GetCount();
+    const auto csvHead = csvContent.GetCSVHead();
+
     if (size == 0)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("systemConstant表为空。"s))
@@ -42,6 +46,8 @@ void CSVConfigure::SystemConstantContainer::Parsing(const CoreTools::CSVContent&
     CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(0) };
 
     systemConstant = std::make_shared<SystemConstant>(csvRow);
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("systemConstant表结束载入……"));
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, SystemConstantContainer)

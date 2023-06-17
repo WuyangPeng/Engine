@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/22 10:42)
+///	引擎版本：0.9.0.12 (2023/06/12 12:50)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,17 +18,13 @@
 #include "CoreTools/Threading/Mutex.h"
 #include "CoreTools/Threading/ScopedMutex.h"
 
-using std::make_shared;
-using std::make_unique;
-using std::string;
-
 SINGLETON_GET_PTR_DEFINE(Rendering, RendererInputData);
 
 Rendering::RendererInputData::RendererInputDataUniquePtr Rendering::RendererInputData::rendererInputData{};
 
 void Rendering::RendererInputData::Create()
 {
-    rendererInputData = make_unique<Rendering::RendererInputData>(RendererInputDataCreate::Init);
+    rendererInputData = std::make_unique<Rendering::RendererInputData>(RendererInputDataCreate::Init);
 }
 
 void Rendering::RendererInputData::Destroy() noexcept

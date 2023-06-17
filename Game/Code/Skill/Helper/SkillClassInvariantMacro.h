@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.8.0.11 (2022/07/18 11:42)
+///	引擎游戏版本：0.9.0.12 (2023/06/16 16:09)
 
 #ifndef SKILL_HELPER_CLASS_INVARIANT_HELPER_H
 #define SKILL_HELPER_CLASS_INVARIANT_HELPER_H
@@ -14,11 +14,15 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 #if !defined(SKILL_CLASS_INVARIANT_LEVEL)
+
     #define SKILL_CLASS_INVARIANT_LEVEL 8
+
 #endif  // SKILL_CLASS_INVARIANT_LEVEL
 
 #if !defined(SKILL_CLASS_INVARIANT_CONST_LEVEL)
+
     #define SKILL_CLASS_INVARIANT_CONST_LEVEL 8
+
 #endif  // SKILL_CLASS_INVARIANT_CONST_LEVEL
 
 static_assert(SKILL_CLASS_INVARIANT_LEVEL <= CLASS_INVARIANT_LEVEL, "Class invariant level definition error.");
@@ -31,8 +35,8 @@ static_assert(SKILL_CLASS_INVARIANT_CONST_LEVEL <= CLASS_INVARIANT_CONST_LEVEL, 
 
 #else  // SKILL_CLASS_INVARIANT_LEVEL < 0
 
-    #define SKILL_CLASS_IS_VALID_0 ((void)0)
-    #define SKILL_SELF_CLASS_IS_VALID_0 ((void)0)
+    #define SKILL_CLASS_IS_VALID_0 (static_cast<void>(0))
+    #define SKILL_SELF_CLASS_IS_VALID_0 (static_cast<void>(0))
 
 #endif  // 0 <= SKILL_CLASS_INVARIANT_LEVEL
 
@@ -43,8 +47,8 @@ static_assert(SKILL_CLASS_INVARIANT_CONST_LEVEL <= CLASS_INVARIANT_CONST_LEVEL, 
 
 #else  // SKILL_CLASS_INVARIANT_LEVEL < 1
 
-    #define SKILL_CLASS_IS_VALID_1 ((void)0)
-    #define SKILL_SELF_CLASS_IS_VALID_1 ((void)0)
+    #define SKILL_CLASS_IS_VALID_1 (static_cast<void>(0))
+    #define SKILL_SELF_CLASS_IS_VALID_1 (static_cast<void>(0))
 
 #endif  // 1 <= CLASS_INVARIANT_LEVEL
 
@@ -55,8 +59,8 @@ static_assert(SKILL_CLASS_INVARIANT_CONST_LEVEL <= CLASS_INVARIANT_CONST_LEVEL, 
 
 #else  // SKILL_CLASS_INVARIANT_LEVEL < 2
 
-    #define SKILL_CLASS_IS_VALID_2 ((void)0)
-    #define SKILL_SELF_CLASS_IS_VALID_2 ((void)0)
+    #define SKILL_CLASS_IS_VALID_2 (static_cast<void>(0))
+    #define SKILL_SELF_CLASS_IS_VALID_2 (static_cast<void>(0))
 
 #endif  // 2 <= SKILL_CLASS_INVARIANT_LEVEL
 
@@ -67,8 +71,8 @@ static_assert(SKILL_CLASS_INVARIANT_CONST_LEVEL <= CLASS_INVARIANT_CONST_LEVEL, 
 
 #else  // SKILL_CLASS_INVARIANT_LEVEL < 3
 
-    #define SKILL_CLASS_IS_VALID_3 ((void)0)
-    #define SKILL_SELF_CLASS_IS_VALID_3 ((void)0)
+    #define SKILL_CLASS_IS_VALID_3 (static_cast<void>(0))
+    #define SKILL_SELF_CLASS_IS_VALID_3 (static_cast<void>(0))
 
 #endif  // 3 <= SKILL_CLASS_INVARIANT_LEVEL
 
@@ -79,8 +83,8 @@ static_assert(SKILL_CLASS_INVARIANT_CONST_LEVEL <= CLASS_INVARIANT_CONST_LEVEL, 
 
 #else  // SKILL_CLASS_INVARIANT_LEVEL < 4
 
-    #define SKILL_CLASS_IS_VALID_4 ((void)0)
-    #define SKILL_SELF_CLASS_IS_VALID_4 ((void)0)
+    #define SKILL_CLASS_IS_VALID_4 (static_cast<void>(0))
+    #define SKILL_SELF_CLASS_IS_VALID_4 (static_cast<void>(0))
 
 #endif  // 4 <= SKILL_CLASS_INVARIANT_LEVEL
 
@@ -91,8 +95,8 @@ static_assert(SKILL_CLASS_INVARIANT_CONST_LEVEL <= CLASS_INVARIANT_CONST_LEVEL, 
 
 #else  // SKILL_CLASS_INVARIANT_LEVEL < 5
 
-    #define SKILL_CLASS_IS_VALID_5 ((void)0)
-    #define SKILL_SELF_CLASS_IS_VALID_5 ((void)0)
+    #define SKILL_CLASS_IS_VALID_5 (static_cast<void>(0))
+    #define SKILL_SELF_CLASS_IS_VALID_5 (static_cast<void>(0))
 
 #endif  // 5 <= SKILL_CLASS_INVARIANT_LEVEL
 
@@ -103,8 +107,8 @@ static_assert(SKILL_CLASS_INVARIANT_CONST_LEVEL <= CLASS_INVARIANT_CONST_LEVEL, 
 
 #else  // CLASS_INVARIANT_LEVEL < 6
 
-    #define SKILL_CLASS_IS_VALID_6 ((void)0)
-    #define SKILL_SELF_CLASS_IS_VALID_6 ((void)0)
+    #define SKILL_CLASS_IS_VALID_6 (static_cast<void>(0))
+    #define SKILL_SELF_CLASS_IS_VALID_6 (static_cast<void>(0))
 
 #endif  // 6 <= SKILL_CLASS_INVARIANT_LEVEL
 
@@ -115,8 +119,8 @@ static_assert(SKILL_CLASS_INVARIANT_CONST_LEVEL <= CLASS_INVARIANT_CONST_LEVEL, 
 
 #else  // SKILL_CLASS_INVARIANT_LEVEL < 7
 
-    #define SKILL_CLASS_IS_VALID_7 ((void)0)
-    #define SKILL_SELF_CLASS_IS_VALID_7 ((void)0)
+    #define SKILL_CLASS_IS_VALID_7 (static_cast<void>(0))
+    #define SKILL_SELF_CLASS_IS_VALID_7 (static_cast<void>(0))
 
 #endif  // 7 <= SKILL_CLASS_INVARIANT_LEVEL
 
@@ -127,8 +131,8 @@ static_assert(SKILL_CLASS_INVARIANT_CONST_LEVEL <= CLASS_INVARIANT_CONST_LEVEL, 
 
 #else  // SKILL_CLASS_INVARIANT_LEVEL < 8
 
-    #define SKILL_CLASS_IS_VALID_8 ((void)0)
-    #define SKILL_SELF_CLASS_IS_VALID_8 ((void)0)
+    #define SKILL_CLASS_IS_VALID_8 (static_cast<void>(0))
+    #define SKILL_SELF_CLASS_IS_VALID_8 (static_cast<void>(0))
 
 #endif  // 8 <= SKILL_CLASS_INVARIANT_LEVEL
 
@@ -139,69 +143,105 @@ static_assert(SKILL_CLASS_INVARIANT_CONST_LEVEL <= CLASS_INVARIANT_CONST_LEVEL, 
 
 #else  // SKILL_CLASS_INVARIANT_LEVEL < 9
 
-    #define SKILL_CLASS_IS_VALID_9 ((void)0)
-    #define SKILL_SELF_CLASS_IS_VALID_9 ((void)0)
+    #define SKILL_CLASS_IS_VALID_9 (static_cast<void>(0))
+    #define SKILL_SELF_CLASS_IS_VALID_9 (static_cast<void>(0))
 
 #endif  // 9 <= SKILL_CLASS_INVARIANT_LEVEL
 
 #if 0 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
+
     #define SKILL_CLASS_IS_VALID_CONST_0 CLASS_IS_VALID_CONST_0
+
 #else  // SKILL_CLASS_INVARIANT_CONST_LEVEL < 0
-    #define SKILL_CLASS_IS_VALID_CONST_0 ((void)0)
+
+    #define SKILL_CLASS_IS_VALID_CONST_0 (static_cast<void>(0))
+
 #endif  // 0 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
 
 #if 1 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
+
     #define SKILL_CLASS_IS_VALID_CONST_1 CLASS_IS_VALID_CONST_1
+
 #else  // SKILL_CLASS_INVARIANT_CONST_LEVEL < 1
-    #define SKILL_CLASS_IS_VALID_CONST_1 ((void)0)
+
+    #define SKILL_CLASS_IS_VALID_CONST_1 (static_cast<void>(0))
+
 #endif  // 1 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
 
 #if 2 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
+
     #define SKILL_CLASS_IS_VALID_CONST_2 CLASS_IS_VALID_CONST_2
+
 #else  // SKILL_CLASS_INVARIANT_CONST_LEVEL < 2
-    #define SKILL_CLASS_IS_VALID_CONST_2 ((void)0)
+
+    #define SKILL_CLASS_IS_VALID_CONST_2 (static_cast<void>(0))
+
 #endif  // 2 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
 
 #if 3 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
+
     #define SKILL_CLASS_IS_VALID_CONST_3 CLASS_IS_VALID_CONST_3
+
 #else  // SKILL_CLASS_INVARIANT_CONST_LEVEL < 3
-    #define SKILL_CLASS_IS_VALID_CONST_3 ((void)0)
+
+    #define SKILL_CLASS_IS_VALID_CONST_3 (static_cast<void>(0))
+
 #endif  // 3 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
 
 #if 4 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
+
     #define SKILL_CLASS_IS_VALID_CONST_4 CLASS_IS_VALID_CONST_4
+
 #else  // SKILL_CLASS_INVARIANT_CONST_LEVEL < 4
-    #define SKILL_CLASS_IS_VALID_CONST_4 ((void)0)
+
+    #define SKILL_CLASS_IS_VALID_CONST_4 (static_cast<void>(0))
+
 #endif  // 4 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
 
 #if 5 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
+
     #define SKILL_CLASS_IS_VALID_CONST_5 CLASS_IS_VALID_CONST_5
+
 #else  // SKILL_CLASS_INVARIANT_CONST_LEVEL < 5
-    #define SKILL_CLASS_IS_VALID_CONST_5 ((void)0)
+
+    #define SKILL_CLASS_IS_VALID_CONST_5 (static_cast<void>(0))
+
 #endif  // 5 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
 
 #if 6 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
     #define SKILL_CLASS_IS_VALID_CONST_6 CLASS_IS_VALID_CONST_6
 #else  // SKILL_CLASS_INVARIANT_CONST_LEVEL < 6
-    #define SKILL_CLASS_IS_VALID_CONST_6 ((void)0)
+    #define SKILL_CLASS_IS_VALID_CONST_6 (static_cast<void>(0))
 #endif  // 6 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
 
 #if 7 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
+
     #define SKILL_CLASS_IS_VALID_CONST_7 CLASS_IS_VALID_CONST_7
+
 #else  // SKILL_CLASS_INVARIANT_CONST_LEVEL < 7
-    #define SKILL_CLASS_IS_VALID_CONST_7 ((void)0)
+
+    #define SKILL_CLASS_IS_VALID_CONST_7 (static_cast<void>(0))
+
 #endif  // 7 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
 
 #if 8 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
+
     #define SKILL_CLASS_IS_VALID_CONST_8 CLASS_IS_VALID_CONST_8
+
 #else  // SKILL_CLASS_INVARIANT_CONST_LEVEL < 8
-    #define SKILL_CLASS_IS_VALID_CONST_8 ((void)0)
+
+    #define SKILL_CLASS_IS_VALID_CONST_8 (static_cast<void>(0))
+
 #endif  // 8 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
 
 #if 9 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
+
     #define SKILL_CLASS_IS_VALID_CONST_9 CLASS_IS_VALID_CONST_9
+
 #else  // SKILL_CLASS_INVARIANT_CONST_LEVEL < 9
-    #define SKILL_CLASS_IS_VALID_CONST_9 ((void)0)
+
+    #define SKILL_CLASS_IS_VALID_CONST_9 (static_cast<void>(0))
+
 #endif  // 9 <= SKILL_CLASS_INVARIANT_CONST_LEVEL
 
 #endif  // SKILL_HELPER_CLASS_INVARIANT_HELPER_H

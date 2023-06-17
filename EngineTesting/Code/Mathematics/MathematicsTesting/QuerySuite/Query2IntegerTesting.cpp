@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/26 18:56)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:23)
 
 #include "Query2IntegerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
@@ -18,14 +19,8 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Query/Query2IntegerDetail.h"
 #include "Mathematics/Query/QuerySortTools.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::swap;
-using std::uniform_int;
-using std::uniform_real;
-using std::vector;
+#include <random>
 
 namespace Mathematics
 {
@@ -56,20 +51,20 @@ void Mathematics::Query2IntegerTesting::MainTest()
 
 void Mathematics::Query2IntegerTesting::VerticesTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        const auto size = secondRandomDistribution(generator);
+        const auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            vertices.push_back(Vector2D(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector2D(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
         Query2IntegerD query(vertices);
@@ -86,23 +81,23 @@ void Mathematics::Query2IntegerTesting::VerticesTest()
 
 void Mathematics::Query2IntegerTesting::LineTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        const auto size = secondRandomDistribution(generator);
+        const auto size = randomDistribution1(generator);
 
         for (int i = 0; i < size; ++i)
         {
-            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
-        const uniform_int<> thirdRandomDistribution(0, size - 1);
+        const std::uniform_int<> thirdRandomDistribution(0, size - 1);
 
         auto secondIndex = thirdRandomDistribution(generator);
         auto thirdIndex = thirdRandomDistribution(generator);
@@ -116,23 +111,23 @@ void Mathematics::Query2IntegerTesting::LineTest()
 
 void Mathematics::Query2IntegerTesting::TriangleTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (auto m = 0; m < size; ++m)
         {
-            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
-        const uniform_int<> thirdRandomDistribution(0, size - 1);
+        const std::uniform_int<> thirdRandomDistribution(0, size - 1);
 
         auto firstIndex = thirdRandomDistribution(generator);
         auto secondIndex = thirdRandomDistribution(generator);
@@ -142,13 +137,13 @@ void Mathematics::Query2IntegerTesting::TriangleTest()
         Query2IntegerD query(vertices);
         if (query.ToLine(secondIndex, thirdIndex, fourthIndex) == LineQueryType::Right)
         {
-            swap(secondIndex, thirdIndex);
+            std::swap(secondIndex, thirdIndex);
         }
 
-        const Vector2 firstVector = vertices.at(firstIndex);
-        const Vector2 secondVector = vertices.at(secondIndex);
-        const Vector2 thirdVector = vertices.at(thirdIndex);
-        const Vector2 fourthVector = vertices.at(fourthIndex);
+        const Vector2 vector0 = vertices.at(firstIndex);
+        const Vector2 vector1 = vertices.at(secondIndex);
+        const Vector2 vector2 = vertices.at(thirdIndex);
+        const Vector2 vector3 = vertices.at(fourthIndex);
 
         ASSERT_ENUM_EQUAL(query.ToTriangle(secondIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
         ASSERT_ENUM_EQUAL(query.ToTriangle(thirdIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
@@ -178,23 +173,23 @@ void Mathematics::Query2IntegerTesting::TriangleTest()
 
 void Mathematics::Query2IntegerTesting::CircumcircleTest()
 {
-    default_random_engine generator;
-    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    const uniform_int<> secondRandomDistribution(1, 50);
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0(-100.0, 100.0);
+    const std::uniform_int<> randomDistribution1(1, 50);
 
     const auto aTestLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < aTestLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        auto size = secondRandomDistribution(generator);
+        auto size = randomDistribution1(generator);
 
         for (auto i = 0; i < size; ++i)
         {
-            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector2(randomDistribution0(generator), randomDistribution0(generator)));
         }
 
-        const uniform_int<> thirdRandomDistribution(0, size - 1);
+        const std::uniform_int<> thirdRandomDistribution(0, size - 1);
 
         auto secondIndex = thirdRandomDistribution(generator);
         auto thirdIndex = thirdRandomDistribution(generator);

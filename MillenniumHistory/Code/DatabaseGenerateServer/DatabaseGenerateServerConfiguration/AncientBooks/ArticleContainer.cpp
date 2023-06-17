@@ -27,9 +27,11 @@ AncientBooks::ArticleContainer::ArticleContainer(const CoreTools::CSVContent& cs
 void AncientBooks::ArticleContainer::Parsing(const CoreTools::CSVContent& csvContent)
 {
     const auto size = csvContent.GetCount();
+    const auto csvHead = csvContent.GetCSVHead();
+
     for (auto i = 0; i < size; ++i)
     {
-        CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
 
         article.emplace_back(std::make_shared<Article>(csvRow));
     }

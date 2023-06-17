@@ -1,22 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/31 19:27)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:12)
 
 #include "Polygon2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Objects2D/Polygon2Detail.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -44,8 +42,8 @@ void Mathematics::Polygon2Testing::MainTest()
 
 void Mathematics::Polygon2Testing::PolygonTest()
 {
-    default_random_engine generator{};
-    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ -100.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -53,25 +51,25 @@ void Mathematics::Polygon2Testing::PolygonTest()
     {
         constexpr auto size = 8;
 
-        Vector2D firstVertex(MathD::FAbs(firstRandomDistribution(generator)), MathD::FAbs(firstRandomDistribution(generator)));
+        Vector2D firstVertex(MathD::FAbs(randomDistribution0(generator)), MathD::FAbs(randomDistribution0(generator)));
 
-        const Vector2D secondVertex(firstVertex[0] - MathD::FAbs(firstRandomDistribution(generator)),
-                                    firstVertex[1] + MathD::FAbs(firstRandomDistribution(generator)));
+        const Vector2D secondVertex(firstVertex[0] - MathD::FAbs(randomDistribution0(generator)),
+                                    firstVertex[1] + MathD::FAbs(randomDistribution0(generator)));
 
-        Vector2D thirdVertex(-MathD::FAbs(firstRandomDistribution(generator)), MathD::FAbs(firstRandomDistribution(generator)));
+        Vector2D thirdVertex(-MathD::FAbs(randomDistribution0(generator)), MathD::FAbs(randomDistribution0(generator)));
 
-        const Vector2D fourthVertex(thirdVertex[0] - MathD::FAbs(firstRandomDistribution(generator)),
-                                    thirdVertex[1] - MathD::FAbs(firstRandomDistribution(generator)));
+        const Vector2D fourthVertex(thirdVertex[0] - MathD::FAbs(randomDistribution0(generator)),
+                                    thirdVertex[1] - MathD::FAbs(randomDistribution0(generator)));
 
-        Vector2D fifthVertex(-MathD::FAbs(firstRandomDistribution(generator)), -MathD::FAbs(firstRandomDistribution(generator)));
+        Vector2D fifthVertex(-MathD::FAbs(randomDistribution0(generator)), -MathD::FAbs(randomDistribution0(generator)));
 
-        Vector2D sixthVertex(fifthVertex[0] + MathD::FAbs(firstRandomDistribution(generator)),
-                             fifthVertex[1] - MathD::FAbs(firstRandomDistribution(generator)));
+        Vector2D sixthVertex(fifthVertex[0] + MathD::FAbs(randomDistribution0(generator)),
+                             fifthVertex[1] - MathD::FAbs(randomDistribution0(generator)));
 
-        Vector2D seventhVertex(MathD::FAbs(firstRandomDistribution(generator)), -MathD::FAbs(firstRandomDistribution(generator)));
+        Vector2D seventhVertex(MathD::FAbs(randomDistribution0(generator)), -MathD::FAbs(randomDistribution0(generator)));
 
-        const Vector2D eighthVertex(seventhVertex[0] + MathD::FAbs(firstRandomDistribution(generator)),
-                                    seventhVertex[1] + MathD::FAbs(firstRandomDistribution(generator)));
+        const Vector2D eighthVertex(seventhVertex[0] + MathD::FAbs(randomDistribution0(generator)),
+                                    seventhVertex[1] + MathD::FAbs(randomDistribution0(generator)));
 
         Polygon2D::VerticesType ptr{ firstVertex,
                                      secondVertex,
@@ -106,8 +104,8 @@ void Mathematics::Polygon2Testing::PolygonTest()
         ASSERT_TRUE(Vector2ToolsD::Approximate(seventhVertex, polygon.GetVertex(6)));
         ASSERT_TRUE(Vector2ToolsD::Approximate(eighthVertex, polygon.GetVertex(7)));
 
-        Vector2D ninthVertex(sixthVertex[0] + MathD::FAbs(firstRandomDistribution(generator)),
-                             sixthVertex[1] - MathD::FAbs(firstRandomDistribution(generator)));
+        Vector2D ninthVertex(sixthVertex[0] + MathD::FAbs(randomDistribution0(generator)),
+                             sixthVertex[1] - MathD::FAbs(randomDistribution0(generator)));
 
         polygon.SetVertex(5, ninthVertex);
 

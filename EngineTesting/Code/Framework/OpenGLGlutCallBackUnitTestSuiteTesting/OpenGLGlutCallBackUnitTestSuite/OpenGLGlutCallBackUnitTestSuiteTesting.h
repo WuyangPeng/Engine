@@ -9,11 +9,11 @@
 
 #include "System/Windows/Flags/WindowsFlags.h"
 #include "System/Windows/Using/WindowsUsing.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace OpenGLGlutCallBackUnitTestSuiteTesting
 {
-    class OpenGLGlutCallBackUnitTestSuiteTestingOpenGLGlutCallBack;
+    class OpenGLGlutCallBack;
 
     class OpenGLGlutCallBackUnitTestSuiteTesting : public CoreTools::UnitTest
     {
@@ -23,7 +23,7 @@ namespace OpenGLGlutCallBackUnitTestSuiteTesting
         using HWnd = System::WindowsHWnd;
 
     public:
-        explicit OpenGLGlutCallBackUnitTestSuiteTesting(const OStreamShared& ostream, OpenGLGlutCallBackUnitTestSuiteTestingOpenGLGlutCallBack* message);
+        explicit OpenGLGlutCallBackUnitTestSuiteTesting(const OStreamShared& ostream, OpenGLGlutCallBack* message);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -36,7 +36,7 @@ namespace OpenGLGlutCallBackUnitTestSuiteTesting
         void DoRunUnitTest() final;
 
     private:
-        OpenGLGlutCallBackUnitTestSuiteTestingOpenGLGlutCallBack* m_Message;
+        OpenGLGlutCallBack* m_Message;
     };
 }
 

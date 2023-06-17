@@ -533,6 +533,7 @@
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\ObjectLogic\ObjectLogicManager.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\PhysicalModelling\PhysicalModellingManager.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Rendering\RenderingManager.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Resource\Detail\ResourceManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Resource\ResourceManager.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\System\Detail\SystemManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\System\SystemManager.cpp" />
@@ -586,6 +587,7 @@
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Rendering\Rendering.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Rendering\RenderingFwd.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Rendering\RenderingManager.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Resource\Detail\ResourceManagerImpl.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Resource\Resource.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Resource\ResourceFwd.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Resource\ResourceManager.h" />

@@ -1,16 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/10/01 14:46)
+///	引擎测试版本：0.9.0.12 (2023/06/12 16:06)
 
 #ifndef RENDERING_BASE_SUITE_GRAPHICS_OBJECT_TESTING_BASE_DETAIL_H
 #define RENDERING_BASE_SUITE_GRAPHICS_OBJECT_TESTING_BASE_DETAIL_H
 
 #include "GraphicsObjectTestingBase.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -19,11 +20,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
-
-namespace Rendering
-{
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(GraphicsObjectType)
-}
 
 template <typename TestingType>
 std::shared_ptr<TestingType> Rendering::GraphicsObjectTestingBase::Create(const std::string& name, GraphicsObjectType graphicsObjectType)
@@ -67,7 +63,8 @@ void Rendering::GraphicsObjectTestingBase::GraphicsObjectRttiFalseTest(const Lhs
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::CloneObjectTest()
 {
-    for (auto type = beginGraphicsObjectType; type < endGraphicsObjectType; ++type)
+    using System::operator++;
+    for (auto type = beginGraphicsObjectType; type < endGraphicsObjectType; type = System::UnderlyingCastEnum<GraphicsObjectType>(System::EnumCastUnderlying(type) + 1))
     {
         ASSERT_NOT_THROW_EXCEPTION_1(CloneObjectTrueTest<TestingType>, type);
     }
@@ -97,11 +94,11 @@ template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::UniqueIDTest()
 {
     auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
-    ASSERT_LESS(0, testingType->GetUniqueID());
+    ASSERT_LESS(0, testingType->GetUniqueId());
 
     constexpr auto uniqueID = 7;
-    testingType->SetUniqueID(uniqueID);
-    ASSERT_EQUAL(testingType->GetUniqueID(), uniqueID);
+    testingType->SetUniqueId(uniqueID);
+    ASSERT_EQUAL(testingType->GetUniqueId(), uniqueID);
 }
 
 template <typename TestingType>
@@ -125,7 +122,8 @@ void Rendering::GraphicsObjectTestingBase::FactoryExceptionTest()
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::NameTest()
 {
-    for (auto type = beginGraphicsObjectType; type < endGraphicsObjectType; ++type)
+    using System::operator++;
+    for (auto type = beginGraphicsObjectType; type < endGraphicsObjectType; type = System::UnderlyingCastEnum<GraphicsObjectType>(System::EnumCastUnderlying(type) + 1))
     {
         const auto name = graphicsObjectName + std::to_string(System::EnumCastUnderlying(type));
 
@@ -189,7 +187,7 @@ void Rendering::GraphicsObjectTestingBase::GetAllConstObjectsByNameTest(const Te
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::StreamTest()
 {
-    CoreTools::InitTerm::ExecuteInitializers();
+    CoreTools::InitTerm::ExecuteInitializer();
 
     ASSERT_NOT_THROW_EXCEPTION_0(FactoryTest<TestingType>);
     ASSERT_THROW_EXCEPTION_0(FactoryExceptionTest<TestingType>);
@@ -199,7 +197,7 @@ void Rendering::GraphicsObjectTestingBase::StreamTest()
     ASSERT_NOT_THROW_EXCEPTION_0(LinkTest<TestingType>);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamCreateTest<TestingType>);
 
-    CoreTools::InitTerm::ExecuteTerminators();
+    CoreTools::InitTerm::ExecuteTerminator();
 }
 
 template <typename TestingType>
@@ -207,10 +205,10 @@ void Rendering::GraphicsObjectTestingBase::GetStreamingSizeTest()
 {
     auto testingType = Create<TestingType>(graphicsObjectName, beginGraphicsObjectType);
 
-    auto streamingSize = CORE_TOOLS_STREAM_SIZE(TestingType::GetCurrentRttiType().GetName());
-    streamingSize += CORE_TOOLS_STREAM_SIZE(testingType);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(graphicsObjectName);
-    streamingSize += CORE_TOOLS_STREAM_SIZE(beginGraphicsObjectType);
+    auto streamingSize = CoreTools::GetStreamSize(TestingType::GetCurrentRttiType().GetName());
+    streamingSize += 8;
+    streamingSize += CoreTools::GetStreamSize(graphicsObjectName);
+    streamingSize += CoreTools::GetStreamSize(beginGraphicsObjectType);
 
     ASSERT_EQUAL(streamingSize, testingType->GetStreamingSize());
 }
@@ -238,7 +236,8 @@ void Rendering::GraphicsObjectTestingBase::LinkTest()
 template <typename TestingType>
 void Rendering::GraphicsObjectTestingBase::StreamCreateTest()
 {
-    for (auto type = beginGraphicsObjectType; type < endGraphicsObjectType; ++type)
+    using System::operator++;
+    for (auto type = beginGraphicsObjectType; type < endGraphicsObjectType; type = System::UnderlyingCastEnum<GraphicsObjectType>(System::EnumCastUnderlying(type) + 1))
     {
         const auto name = graphicsObjectName + std::to_string(System::EnumCastUnderlying(type));
 
@@ -259,7 +258,7 @@ CoreTools::FileBufferSharedPtr Rendering::GraphicsObjectTestingBase::SaveTest(co
 
     OriginalBuffer buffer{ fileBuffer->begin(), fileBuffer->end() };
 
-    const auto streamingSize = CORE_TOOLS_STREAM_SIZE(TestingType::GetCurrentRttiType().GetName());
+    const auto streamingSize = CoreTools::GetStreamSize(TestingType::GetCurrentRttiType().GetName());
 
     RttiNameTest<TestingType>(streamingSize, buffer);
 

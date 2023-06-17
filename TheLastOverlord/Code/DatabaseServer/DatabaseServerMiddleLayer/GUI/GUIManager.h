@@ -24,7 +24,7 @@ namespace DatabaseServerMiddleLayer
         using ParentType = Framework::GUIManagerInterface;
 
     public:
-        explicit GUIManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit GUIManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

@@ -55,7 +55,7 @@ namespace GameClient
         using ParentType = MessageType;
 
     public:
-        explicit GameClientMessage(int64_t delta);
+        explicit GameClientMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

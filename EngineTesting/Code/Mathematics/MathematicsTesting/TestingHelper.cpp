@@ -28,11 +28,12 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, TestingHelper)
 
 void Mathematics::TestingHelper::InitSuite()
 {
-    AddMacroSuite();
+    AddHelperSuite();
     AddBaseSuite();
     AddAlgebraSuite();
     AddObjects2DSuite();
     AddObjects3DSuite();
+    AddPrimitivesSuite();
     AddRationalSuite();
     AddNumericalAnalysisSuite();
     AddQuerySuite();
@@ -47,11 +48,11 @@ void Mathematics::TestingHelper::InitSuite()
     AddMiscellaneousSuite();
 }
 
-void Mathematics::TestingHelper::AddMacroSuite()
+void Mathematics::TestingHelper::AddHelperSuite()
 {
-    auto macroSuite = GenerateSuite("ºê");
+    auto helperSuite = GenerateSuite("°ïÖú");
 
-    AddSuite(macroSuite);
+    AddSuite(helperSuite);
 }
 
 // private
@@ -173,6 +174,13 @@ void Mathematics::TestingHelper::AddObjects3DSuite()
     ADD_TEST(objects3DSuite, ConvexPolyhedron3Testing);
 
     AddSuite(objects3DSuite);
+}
+
+void Mathematics::TestingHelper::AddPrimitivesSuite()
+{
+    auto primitivesSuite = GenerateSuite("»ù±¾Ìå");
+
+    AddSuite(primitivesSuite);
 }
 
 // private

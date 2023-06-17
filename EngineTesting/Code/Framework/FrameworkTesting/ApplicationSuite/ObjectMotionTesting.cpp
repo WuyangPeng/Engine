@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 11:10)
+///	引擎测试版本：0.9.0.12 (2023/06/13 20:26)
 
 #include "ObjectMotionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/SceneGraph/CameraManager.h"
@@ -17,10 +18,6 @@
 #include "Framework/Application/ObjectMotion.h"
 
 #include <random>
-
-using std::default_random_engine;
-using std::uniform_int;
-using std::uniform_real;
 
 namespace Framework
 {
@@ -81,7 +78,7 @@ void Framework::ObjectMotionTesting::AssertRotate(const Matrixf& lhs, const Matr
     ASSERT_APPROXIMATE_USE_FUNCTION(approximate, lhs, rhs, Mathematics::MathF::epsilon);
 }
 
-Mathematics::AVectorF Framework::ObjectMotionTesting::GetSphereVector(float x, float y) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Mathematics::AVectorF Framework::ObjectMotionTesting::GetSphereVector(float x, float y) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     auto length = Mathematics::MathF::Sqrt(x * x + y * y);
     auto z = 0.0f;

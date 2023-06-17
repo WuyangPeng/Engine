@@ -89,6 +89,8 @@ void CoreTools::CSVRowTesting::DoRunUnitTest()
 
 void CoreTools::CSVRowTesting::MainTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateCSV);
+
     ASSERT_NOT_THROW_EXCEPTION_0(CSVRow0Test);
     ASSERT_NOT_THROW_EXCEPTION_0(CSVRow1Test);
 }
@@ -134,7 +136,8 @@ CoreTools::CSVHead CoreTools::CSVRowTesting::ReadFile()
 
 void CoreTools::CSVRowTesting::CSVRow0Test()
 {
-    const CSVRow csvRow{ ReadFile(), rowContent0 };
+    const auto csvHead = ReadFile();
+    const CSVRow csvRow{ csvHead, rowContent0 };
 
     ASSERT_EQUAL(csvRow.GetCount(), 27);
 
@@ -222,7 +225,8 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
 
 void CoreTools::CSVRowTesting::CSVRow1Test()
 {
-    const CSVRow csvRow{ ReadFile(), rowContent1 };
+    const auto csvHead = ReadFile();
+    const CSVRow csvRow{ csvHead, rowContent1 };
 
     ASSERT_EQUAL(csvRow.GetCount(), 27);
 

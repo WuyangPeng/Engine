@@ -27,9 +27,11 @@ AncientBooks::DayContainer::DayContainer(const CoreTools::CSVContent& csvContent
 void AncientBooks::DayContainer::Parsing(const CoreTools::CSVContent& csvContent)
 {
     const auto size = csvContent.GetCount();
+    const auto csvHead = csvContent.GetCSVHead();
+
     for (auto i = 0; i < size; ++i)
     {
-        CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(i) };
+        CoreTools::CSVRow csvRow{ csvHead, csvContent.GetContent(i) };
 
         day.emplace_back(std::make_shared<Day>(csvRow));
     }

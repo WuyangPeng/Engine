@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/31 14:22)
+///	引擎测试版本：0.9.0.12 (2023/06/09 16:11)
 
 #include "ConvexPolygon2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,10 +13,8 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Objects2D/ConvexPolygon2Detail.h"
-#include <random>
 
-using std::default_random_engine;
-using std::uniform_real;
+#include <random>
 
 namespace Mathematics
 {
@@ -44,8 +42,8 @@ void Mathematics::ConvexPolygon2Testing::MainTest()
 
 void Mathematics::ConvexPolygon2Testing::ConvexPolygonTest()
 {
-    default_random_engine generator{ GetEngineRandomSeed() };
-    const uniform_real<double> firstRandomDistribution{ 0.0, 100.0 };
+    std::default_random_engine generator{ GetEngineRandomSeed() };
+    const std::uniform_real<double> randomDistribution0{ 0.0, 100.0 };
 
     const auto aTestLoopCount = GetTestLoopCount();
 
@@ -56,12 +54,12 @@ void Mathematics::ConvexPolygon2Testing::ConvexPolygonTest()
         Polygon2D::VerticesType vector2Ptr(size);
 
         // x、y值为正
-        Vector2D firstVertex(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        Vector2D firstVertex(randomDistribution0(generator), randomDistribution0(generator));
 
-        const uniform_real<double> secondRandomDistribution(0.0, firstVertex[0]);
+        const std::uniform_real<double> randomDistribution1(0.0, firstVertex[0]);
 
-        auto firstRandom = secondRandomDistribution(generator);
-        auto secondRandom = firstRandomDistribution(generator);
+        auto firstRandom = randomDistribution1(generator);
+        auto secondRandom = randomDistribution0(generator);
 
         // x、y值为正
         Vector2D secondVertex(firstVertex[0] - firstRandom, firstVertex[1] + secondRandom);
