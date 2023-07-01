@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:46)
+///	版本：0.9.1.0 (2023/06/26 15:13)
 
 #ifndef RENDERING_HELPER_USER_MACRO_H
 #define RENDERING_HELPER_USER_MACRO_H
@@ -39,17 +39,17 @@ static_assert(COMPILE_RENDERING_CLOSE <= CLOSE_RENDERING_MAX, "COMPILE_RENDERING
 
     #if !defined(COMPILE_RENDERING_CLOSE) || (COMPILE_RENDERING_CLOSE & CLOSE_USE_VALIDATE_CAMERA_FRAME_ONCE) != CLOSE_USE_VALIDATE_CAMERA_FRAME_ONCE
 
-        // 启用此宏可验证相机轴方向是否形成右手正交法线集。
-        // 该测试仅进行一次，因为帧随着时间旋转期间的数值舍入误差可能需要对帧进行重新正则化。
-        // 使用在Camera类的SetAxes函数中。
+        /// 启用此宏可验证相机轴方向是否形成右手正交法线集。
+        /// 该测试仅进行一次，因为帧随着时间旋转期间的数值舍入误差可能需要对帧进行重新正则化。
+        /// 使用在Camera类的SetAxes函数中。
         #define RENDERING_VALIDATE_CAMERA_FRAME_ONCE static_cast<void>(0)
 
     #endif  // !defined(COMPILE_RENDERING_CLOSE) || (COMPILE_RENDERING_CLOSE & CLOSE_USE_VALIDATE_CAMERA_FRAME_ONCE) != CLOSE_USE_VALIDATE_CAMERA_FRAME_ONCE
 
     #if !defined(COMPILE_RENDERING_CLOSE) || (COMPILE_RENDERING_CLOSE & CLOSE_USE_ASSERT_ON_CHANGED_MAX_PROFILES) != CLOSE_USE_ASSERT_ON_CHANGED_MAX_PROFILES
 
-        // 启用此宏以测试ShaderFlags::Profiles::MaxProfiles是否已更改并影响流文件。
-        // 使用在Shader类的Load函数中。
+        /// 启用此宏以测试ShaderFlags::Profiles::MaxProfiles是否已更改并影响流文件。
+        /// 使用在Shader类的Load函数中。
         #define RENDERING_ASSERT_ON_CHANGED_MAX_PROFILES static_cast<void>(0)
 
     #endif  // !defined(COMPILE_RENDERING_CLOSE) || (COMPILE_RENDERING_CLOSE & CLOSE_USE_ASSERT_ON_CHANGED_MAX_PROFILES) != CLOSE_USE_ASSERT_ON_CHANGED_MAX_PROFILES

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:19)
+///	版本：0.9.1.0 (2023/06/25 16:30)
 
 #ifndef RENDERING_WGL_RENDERER_WGL_ENVIRONMENT_H
 #define RENDERING_WGL_RENDERER_WGL_ENVIRONMENT_H
@@ -15,8 +15,8 @@
 #include "System/OpenGL/Using/WglExtensionsUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 #include "Rendering/OpenGLRenderer/Detail/OpenGLEnvironment.h"
-#include "Rendering/Renderers/EnvironmentParameter.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/EnvironmentParameter.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 
 namespace Rendering
 {

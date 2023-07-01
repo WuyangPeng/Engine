@@ -5,12 +5,29 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:08)
+///	版本：0.9.1.0 (2023/06/28 10:00)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RendererDrawTarget.h"
+#include "Detail/RendererDrawTargetImpl.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, RendererDrawTarget)
+
+Rendering::RendererDrawTarget::RendererDrawTarget(const ConstDrawTargetSharedPtr& drawTarget)
+    : impl{ drawTarget }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
 CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererDrawTarget)
+
+Rendering::RendererDrawTarget::ConstDrawTargetSharedPtr Rendering::RendererDrawTarget::GetDrawTarget() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDrawTarget();
+}

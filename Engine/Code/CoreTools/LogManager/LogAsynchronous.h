@@ -56,6 +56,8 @@ namespace CoreTools
         void Run();
         void Stop();
 
+        void Wait();
+
     private:
         using LogAsynchronousUniquePtr = std::unique_ptr<LogAsynchronous>;
 

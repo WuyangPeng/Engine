@@ -16,6 +16,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/ShaderFloats/MaterialDiffuseConstant.h"
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
+#include "Rendering/Shaders/Flags/ShaderFlags.h"
 
 namespace
 {
@@ -119,73 +120,7 @@ CLASS_INVARIANT_STUB_DEFINE(Rendering, MaterialEffect)
 Rendering::MaterialEffect::MaterialEffect(CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{ disableNotThrow }
 {
-    auto vshader = std::make_shared<VertexShader>("Material", 1, 2, 2, 0);
-
-    vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
-    vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
-    vshader->SetOutput(1, "vertexColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    vshader->SetConstant(0, "PVWMatrix", 4);
-    vshader->SetConstant(1, "MaterialDiffuse", 1);
-
-    auto profile = vshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 2; ++j)
-        {
-            profile->SetBaseRegister(i, j, vRegisters.at(i)->at(j));
-        }
-
-        profile->SetProgram(i, vPrograms.at(i));
-    }
-
-    auto pshader = std::make_shared<PixelShader>("Material", 1, 1, 0, 0);
-    pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        profile->SetProgram(i, pPrograms.at(i));
-    }
-
-    auto pass = std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable);
-    pass->SetVertexShader(vshader);
-    pass->SetPixelShader(pshader);
-    pass->SetAlphaState(std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetCullState(std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetDepthState(std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetOffsetState(std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetStencilState(std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetWireState(std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable));
-
-    auto technique = std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable);
-    technique->InsertPass(pass);
-  
-
     RENDERING_SELF_CLASS_IS_VALID_9;
-}
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::MaterialEffect::CreateInstance(const MaterialSharedPtr& material)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    auto instance = std::make_shared<VisualEffectInstance>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), 0);
-
-    instance->SetVertexConstant(0, "PVWMatrix", std::make_shared<ProjectionViewMatrixConstant>(CoreTools::DisableNotThrow::Disable));
-    instance->SetVertexConstant(0, "MaterialDiffuse", std::make_shared<MaterialDiffuseConstant>(material));
-
-    return instance;
-}
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::MaterialEffect::CreateUniqueInstance(const MaterialSharedPtr& material)
-{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    auto effect = std::make_shared<ClassType>(CoreTools::DisableNotThrow::Disable);
-
-#include STSTEM_WARNING_POP
-
-    return effect->CreateInstance(material);
 }
 
 Rendering::MaterialEffect::MaterialEffect(LoadConstructor value)
@@ -217,8 +152,6 @@ void Rendering::MaterialEffect::PostLink()
     RENDERING_CLASS_IS_VALID_9;
 
     VisualEffect::PostLink();
-
-    
 }
 
 int64_t Rendering::MaterialEffect::Register(CoreTools::ObjectRegister& target) const

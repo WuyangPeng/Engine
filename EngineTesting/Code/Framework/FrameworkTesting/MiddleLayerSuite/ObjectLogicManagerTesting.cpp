@@ -14,7 +14,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/Renderers/EnvironmentParameter.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
-#include "Framework/MiddleLayer/ArtificialIntellegenceInterface.h"
+#include "Framework/MiddleLayer/ArtificialIntelligenceInterface.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/MiddleLayer/InputManagerInterface.h"
 #include "Framework/MiddleLayer/MessageManagerInterface.h"
@@ -30,7 +30,7 @@
 
 namespace Framework
 {
-    using TestingType = ObjectLogicManager<ObjectLogicInterface, ArtificialIntellegenceInterface>;
+    using TestingType = ObjectLogicManager<ObjectLogicInterface, ArtificialIntelligenceInterface>;
 }
 
 Framework::ObjectLogicManagerTesting::ObjectLogicManagerTesting(const OStreamShared& stream)

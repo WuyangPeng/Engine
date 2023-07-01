@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-CSVConfigure::SceneContainer::SceneContainer(const CoreTools::CSVContent& csvContent)
+CSVConfigure::SceneContainer::SceneContainer(const CSVContent& csvContent)
     : scene{}
 {
     Parsing(csvContent);
@@ -24,10 +24,16 @@ CSVConfigure::SceneContainer::SceneContainer(const CoreTools::CSVContent& csvCon
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void CSVConfigure::SceneContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void CSVConfigure::SceneContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("scene表开始载入……"));
 
+    Load(csvContent);
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("scene表结束载入……"));
+}
+
+void CSVConfigure::SceneContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -39,12 +45,10 @@ void CSVConfigure::SceneContainer::Parsing(const CoreTools::CSVContent& csvConte
 
         if (!scene.emplace(sceneBase->GetKey(), sceneBase).second)
         {
-
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("scene表存在重复主键："), sceneBase->GetKey(), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT("scene表存在重复主键："), sceneBase->GetKey(), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("scene表结束载入……"));
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, SceneContainer)

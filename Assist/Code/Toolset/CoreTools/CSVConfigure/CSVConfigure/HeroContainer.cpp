@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-CSVConfigure::HeroContainer::HeroContainer(const CoreTools::CSVContent& csvContent)
+CSVConfigure::HeroContainer::HeroContainer(const CSVContent& csvContent)
     : hero{}
 {
     Parsing(csvContent);
@@ -24,10 +24,16 @@ CSVConfigure::HeroContainer::HeroContainer(const CoreTools::CSVContent& csvConte
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void CSVConfigure::HeroContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void CSVConfigure::HeroContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("hero表开始载入……"));
 
+    Load(csvContent);
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("hero表结束载入……"));
+}
+
+void CSVConfigure::HeroContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -39,12 +45,10 @@ void CSVConfigure::HeroContainer::Parsing(const CoreTools::CSVContent& csvConten
 
         if (!hero.emplace(heroBase->GetKey(), heroBase).second)
         {
-
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("hero表存在重复主键："), heroBase->GetKey(), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT("hero表存在重复主键："), heroBase->GetKey(), CoreTools::LogAppenderIOManageSign::TriggerAssert);
         }
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("hero表结束载入……"));
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, HeroContainer)

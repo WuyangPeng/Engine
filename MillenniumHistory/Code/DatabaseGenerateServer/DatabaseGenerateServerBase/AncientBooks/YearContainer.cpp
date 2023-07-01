@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-AncientBooks::YearContainer::YearContainer(const CoreTools::CSVContent& csvContent)
+AncientBooks::YearContainer::YearContainer(const CSVContent& csvContent)
     : year{}
 {
     Parsing(csvContent);
@@ -24,10 +24,18 @@ AncientBooks::YearContainer::YearContainer(const CoreTools::CSVContent& csvConte
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void AncientBooks::YearContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void AncientBooks::YearContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("year表开始载入……"));
 
+    Load(csvContent);
+    Unique();
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("year表结束载入……"));
+}
+
+void AncientBooks::YearContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -41,7 +49,10 @@ void AncientBooks::YearContainer::Parsing(const CoreTools::CSVContent& csvConten
     std::ranges::sort(year, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
+}
 
+void AncientBooks::YearContainer::Unique()
+{
     const auto iter = std::ranges::unique(year, [](const auto& lhs, const auto& rhs) noexcept {
         if((*lhs).GetKey() == (*rhs).GetKey())
         {
@@ -57,12 +68,10 @@ void AncientBooks::YearContainer::Parsing(const CoreTools::CSVContent& csvConten
 
     if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("year表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-
         year.erase(iter.begin(), iter.end());
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("year表结束载入……"));
+    year.shrink_to_fit();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, YearContainer)

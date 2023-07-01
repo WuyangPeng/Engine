@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:28)
+///	版本：0.9.1.0 (2023/06/29 20:19)
 
 #include "Rendering/RenderingExport.h"
 
@@ -91,9 +91,9 @@ void Rendering::TextureImpl::ReadFromFile(ReadFileManager& inFile)
     LoadLevelDataFromFile(inFile);
 }
 
-int Rendering::TextureImpl::GetNumLevels(int dim0, int dim1, int dim2, bool hasMipmaps)
+int Rendering::TextureImpl::GetNumLevels(int dim0, int dim1, int dim2, bool hasMipMaps)
 {
-    if (hasMipmaps)
+    if (hasMipMaps)
     {
         const auto log0 = Mathematics::BitHacks::Log2OfPowerOfTwo(Mathematics::BitHacks::RoundDownToPowerOfTwo(dim0));
         const auto log1 = Mathematics::BitHacks::Log2OfPowerOfTwo(Mathematics::BitHacks::RoundDownToPowerOfTwo(dim1));
@@ -108,12 +108,12 @@ int Rendering::TextureImpl::GetNumLevels(int dim0, int dim1, int dim2, bool hasM
     }
 }
 
-int Rendering::TextureImpl::GetTotalElements(int numItems, int dim0, int dim1, int dim2, bool hasMipmaps)
+int Rendering::TextureImpl::GetTotalElements(int numItems, int dim0, int dim1, int dim2, bool hasMipMaps)
 {
     auto numElementsPerItem = dim0 * dim1 * dim2;
-    if (hasMipmaps)
+    if (hasMipMaps)
     {
-        const auto numLevels = GetNumLevels(dim0, dim1, dim2, hasMipmaps);
+        const auto numLevels = GetNumLevels(dim0, dim1, dim2, hasMipMaps);
         for (auto level = 1; level < numLevels; ++level)
         {
             if (dim0 > 1)

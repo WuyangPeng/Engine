@@ -38,6 +38,51 @@ void Rendering::OpenGLConstantBuffer::Enable() noexcept
     RENDERING_CLASS_IS_VALID_9;
 }
 
+bool Rendering::OpenGLConstantBuffer::CopyGpuToCpu(MAYBE_UNUSED int level)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLConstantBuffer::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLConstantBuffer::CopyCpuToGpu(MAYBE_UNUSED int level)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLConstantBuffer::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLConstantBuffer::GetNumActiveElements()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
 void Rendering::OpenGLConstantBuffer::AttachToUnit(OpenGLInt uniformBufferUnit) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;

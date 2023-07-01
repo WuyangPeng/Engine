@@ -200,7 +200,9 @@
 
   },
 
-  "renderersSuite": {
+  "rendererEngineSuite": {
+    "ViewportTesting": 1,
+    "DepthRangeTesting": 1,
     "RendererBasisTesting": 1,
     "WindowsParameterTesting": 1,
     "RendererParameterTesting": 1,

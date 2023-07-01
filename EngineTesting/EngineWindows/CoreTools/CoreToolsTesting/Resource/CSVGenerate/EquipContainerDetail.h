@@ -36,11 +36,11 @@ CSVConfigure::EquipContainer::Container CSVConfigure::EquipContainer::GetEquip(F
 
     Container result{};
 
-    for (const auto& value : equip)
+    for (const auto& element : equip)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

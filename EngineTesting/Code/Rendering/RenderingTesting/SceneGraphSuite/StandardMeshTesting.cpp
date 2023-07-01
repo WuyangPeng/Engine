@@ -11,7 +11,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/StandardMesh.h"
 
@@ -35,9 +34,7 @@ void Rendering::StandardMeshTesting::MainTest()
     CoreTools::InitTerm::ExecuteInitializer();
 
     CameraManager::Create();
-    RendererManager::Create();
-
-    RendererManager::Destroy();
+  
     CameraManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();

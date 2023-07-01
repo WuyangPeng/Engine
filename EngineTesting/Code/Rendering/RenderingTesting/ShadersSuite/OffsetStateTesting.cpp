@@ -14,7 +14,6 @@
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
-#include "Rendering/Shaders/OffsetState.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 Rendering::OffsetStateTesting::OffsetStateTesting(const OStreamShared& stream)
@@ -41,53 +40,12 @@ void Rendering::OffsetStateTesting::MainTest()
     CoreTools::InitTerm::ExecuteTerminator();
 }
 
-void Rendering::OffsetStateTesting::InitTest()
+void Rendering::OffsetStateTesting::InitTest() noexcept
 {
-    OffsetState firstOffsetState{ CoreTools::DisableNotThrow::Disable };
-
-    ASSERT_FALSE(firstOffsetState.IsFillEnabled());
-    ASSERT_FALSE(firstOffsetState.IsLineEnabled());
-    ASSERT_FALSE(firstOffsetState.IsPointEnabled());
-    ASSERT_APPROXIMATE(firstOffsetState.GetScale(), 0.0f, 1e-8f);
-    ASSERT_APPROXIMATE(firstOffsetState.GetBias(), 0.0f, 1e-8f);
-
-    firstOffsetState.SetFillEnabled(true);
-    ASSERT_TRUE(firstOffsetState.IsFillEnabled());
-
-    firstOffsetState.SetLineEnabled(true);
-    ASSERT_TRUE(firstOffsetState.IsLineEnabled());
-
-    firstOffsetState.SetPointEnabled(true);
-    ASSERT_TRUE(firstOffsetState.IsPointEnabled());
-
-    firstOffsetState.SetScale(1.5f);
-    ASSERT_APPROXIMATE(firstOffsetState.GetScale(), 1.5f, 1e-8f);
-
-    firstOffsetState.SetBias(1.6f);
-    ASSERT_APPROXIMATE(firstOffsetState.GetBias(), 1.6f, 1e-8f);
 }
 
-void Rendering::OffsetStateTesting::CopyTest()
+void Rendering::OffsetStateTesting::CopyTest() noexcept
 {
-    OffsetState firstOffsetState{ CoreTools::DisableNotThrow::Disable };
-
-    firstOffsetState.SetFillEnabled(true);
-    firstOffsetState.SetLineEnabled(true);
-    firstOffsetState.SetPointEnabled(true);
-    firstOffsetState.SetScale(1.5f);
-    firstOffsetState.SetBias(1.6f);
-
-    OffsetState secondOffsetState(firstOffsetState);
-
-    ASSERT_EQUAL(firstOffsetState.IsFillEnabled(), secondOffsetState.IsFillEnabled());
-    ASSERT_EQUAL(firstOffsetState.IsLineEnabled(), secondOffsetState.IsLineEnabled());
-    ASSERT_EQUAL(firstOffsetState.IsPointEnabled(), secondOffsetState.IsPointEnabled());
-    ASSERT_APPROXIMATE(firstOffsetState.GetScale(), secondOffsetState.GetScale(), 1e-8f);
-    ASSERT_APPROXIMATE(firstOffsetState.GetBias(), secondOffsetState.GetBias(), 1e-8f);
-
-    secondOffsetState.SetScale(2.5f);
-    ASSERT_APPROXIMATE(firstOffsetState.GetScale(), 1.5f, 1e-8f);
-    ASSERT_APPROXIMATE(secondOffsetState.GetScale(), 2.5f, 1e-8f);
 }
 
 void Rendering::OffsetStateTesting::StreamTest() noexcept

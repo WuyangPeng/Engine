@@ -12,7 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/SceneGraph/Flags/CameraFlags.h"
 
 namespace Rendering

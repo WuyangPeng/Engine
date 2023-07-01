@@ -18,7 +18,7 @@
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/PlaneDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
-#include "Rendering/Renderers/Renderer.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/SceneGraph/VisibleSet.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, PlanarReflectionEffect);
@@ -29,110 +29,108 @@ Rendering::PlanarReflectionEffect::PlanarReflectionEffect(int numPlanes)
     : ParentType{ CoreTools::DisableNotThrow::Disable },
       numPlanes{ numPlanes },
       planes(numPlanes),
-      reflectances(numPlanes),
-      alphaState{ std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable) },
-      depthState{ std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable) },
-      stencilState{ std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable) }
+      reflectances(numPlanes)
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, PlanarReflectionEffect)
 
-void Rendering::PlanarReflectionEffect::Draw(Renderer& renderer, VisibleSet& visibleSet)
+void Rendering::PlanarReflectionEffect::Draw(BaseRenderer& renderer, VisibleSet& visibleSet) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
+    renderer;
+    visibleSet;
+    /*  const auto saveDState = renderer.GetOverrideDepthState();
+      const auto saveSState = renderer.GetOverrideStencilState();
 
-    const auto saveDState = renderer.GetOverrideDepthState();
-    const auto saveSState = renderer.GetOverrideStencilState();
+      renderer.SetOverrideDepthState(depthState.object);
+      renderer.SetOverrideStencilState(stencilState.object);
 
-    renderer.SetOverrideDepthState(depthState.object);
-    renderer.SetOverrideStencilState(stencilState.object);
+      const auto depthRange = renderer.GetDepthRange();
 
-    const auto depthRange = renderer.GetDepthRange();
+      auto camera = renderer.GetCamera();
 
-    auto camera = renderer.GetCamera();
+      const auto numVisible = visibleSet.GetNumVisible();
 
-    const auto numVisible = visibleSet.GetNumVisible();
+      for (auto i = 0; i < numPlanes; ++i)
+      {
+          stencilState.object->SetEnabled(true);
+          stencilState.object->SetCompare(StencilStateFlags::CompareMode::Always);
+          stencilState.object->SetReference(boost::numeric_cast<uint32_t>(i + 1));
+          stencilState.object->SetOnFail(StencilStateFlags::OperationType::Keep);
+          stencilState.object->SetOnZFail(StencilStateFlags::OperationType::Keep);
+          stencilState.object->SetOnZPass(StencilStateFlags::OperationType::Replace);
 
-    for (auto i = 0; i < numPlanes; ++i)
-    {
-        stencilState.object->SetEnabled(true);
-        stencilState.object->SetCompare(StencilStateFlags::CompareMode::Always);
-        stencilState.object->SetReference(boost::numeric_cast<uint32_t>(i + 1));
-        stencilState.object->SetOnFail(StencilStateFlags::OperationType::Keep);
-        stencilState.object->SetOnZFail(StencilStateFlags::OperationType::Keep);
-        stencilState.object->SetOnZPass(StencilStateFlags::OperationType::Replace);
+          depthState.object->SetEnabled(true);
+          depthState.object->SetWritable(false);
+          depthState.object->SetCompare(DepthStateFlags::CompareMode::LessEqual);
 
-        depthState.object->SetEnabled(true);
-        depthState.object->SetWritable(false);
-        depthState.object->SetCompare(DepthStateFlags::CompareMode::LessEqual);
+          renderer.SetColorMask(false, false, false, false);
 
-        renderer.SetColorMask(false, false, false, false);
+          renderer.Draw(planes.at(i).object);
 
-        renderer.Draw(planes.at(i).object);
+          renderer.SetColorMask(true, true, true, true);
 
-        renderer.SetColorMask(true, true, true, true);
+          stencilState.object->SetEnabled(true);
+          stencilState.object->SetCompare(StencilStateFlags::CompareMode::Equal);
+          stencilState.object->SetReference(i + 1);
+          stencilState.object->SetOnFail(StencilStateFlags::OperationType::Keep);
+          stencilState.object->SetOnZFail(StencilStateFlags::OperationType::Keep);
+          stencilState.object->SetOnZPass(StencilStateFlags::OperationType::Keep);
 
-        stencilState.object->SetEnabled(true);
-        stencilState.object->SetCompare(StencilStateFlags::CompareMode::Equal);
-        stencilState.object->SetReference(i + 1);
-        stencilState.object->SetOnFail(StencilStateFlags::OperationType::Keep);
-        stencilState.object->SetOnZFail(StencilStateFlags::OperationType::Keep);
-        stencilState.object->SetOnZPass(StencilStateFlags::OperationType::Keep);
+          renderer.SetDepthRange(DepthRange{ 1.0f, 1.0f });
+          depthState.object->SetEnabled(true);
+          depthState.object->SetWritable(true);
+          depthState.object->SetCompare(DepthStateFlags::CompareMode::Always);
 
-        renderer.SetDepthRange(DepthRange{ 1.0f, 1.0f });
-        depthState.object->SetEnabled(true);
-        depthState.object->SetWritable(true);
-        depthState.object->SetCompare(DepthStateFlags::CompareMode::Always);
+          renderer.Draw(planes.at(i).object);
 
-        renderer.Draw(planes.at(i).object);
+          depthState.object->SetCompare(DepthStateFlags::CompareMode::LessEqual);
+          renderer.SetDepthRange(depthRange);
 
-        depthState.object->SetCompare(DepthStateFlags::CompareMode::LessEqual);
-        renderer.SetDepthRange(depthRange);
+          Mathematics::MatrixF reflection{};
+          Mathematics::PlaneF modelPlane{};
+          GetReflectionMatrixAndModelPlane(i, reflection, modelPlane);
 
-        Mathematics::MatrixF reflection{};
-        Mathematics::PlaneF modelPlane{};
-        GetReflectionMatrixAndModelPlane(i, reflection, modelPlane);
+          camera->SetPreViewMatrix(reflection);
 
-        camera->SetPreViewMatrix(reflection);
+          renderer.SetReverseCullOrder(true);
 
-        renderer.SetReverseCullOrder(true);
+          for (auto& value : visibleSet)
+          {
+              renderer.Draw(value);
+          }
 
-        for (auto& value : visibleSet)
-        {
-            renderer.Draw(value);
-        }
+          renderer.SetReverseCullOrder(false);
 
-        renderer.SetReverseCullOrder(false);
+          camera->SetPreViewMatrix(Mathematics::MatrixF::GetIdentityMatrix());
 
-        camera->SetPreViewMatrix(Mathematics::MatrixF::GetIdentityMatrix());
+          const auto saveAState = renderer.GetOverrideAlphaState();
+          renderer.SetOverrideAlphaState(alphaState.object);
+          alphaState.object->SetBlendEnabled(true);
+          alphaState.object->SetSourceBlend(AlphaStateFlags::SourceBlendMode::OneMinusConstantAlpha);
+          alphaState.object->SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::ConstantAlpha);
+          alphaState.object->SetConstantColor(Colour<float>{ 0.0f, 0.0f, 0.0f, reflectances.at(i) });
 
-        const auto saveAState = renderer.GetOverrideAlphaState();
-        renderer.SetOverrideAlphaState(alphaState.object);
-        alphaState.object->SetBlendEnabled(true);
-        alphaState.object->SetSourceBlend(AlphaStateFlags::SourceBlendMode::OneMinusConstantAlpha);
-        alphaState.object->SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::ConstantAlpha);
-        alphaState.object->SetConstantColor(Colour<float>{ 0.0f, 0.0f, 0.0f, reflectances.at(i) });
+          stencilState.object->SetCompare(StencilStateFlags::CompareMode::Equal);
+          stencilState.object->SetReference(i + 1);
+          stencilState.object->SetOnFail(StencilStateFlags::OperationType::Keep);
+          stencilState.object->SetOnZFail(StencilStateFlags::OperationType::Keep);
+          stencilState.object->SetOnZPass(StencilStateFlags::OperationType::Invert);
 
-        stencilState.object->SetCompare(StencilStateFlags::CompareMode::Equal);
-        stencilState.object->SetReference(i + 1);
-        stencilState.object->SetOnFail(StencilStateFlags::OperationType::Keep);
-        stencilState.object->SetOnZFail(StencilStateFlags::OperationType::Keep);
-        stencilState.object->SetOnZPass(StencilStateFlags::OperationType::Invert);
+          renderer.Draw(planes.at(i).object);
 
-        renderer.Draw(planes.at(i).object);
+          renderer.SetOverrideAlphaState(saveAState);
+      }
 
-        renderer.SetOverrideAlphaState(saveAState);
-    }
+      renderer.SetOverrideStencilState(saveSState);
+      renderer.SetOverrideDepthState(saveDState);
 
-    renderer.SetOverrideStencilState(saveSState);
-    renderer.SetOverrideDepthState(saveDState);
-
-    for (auto& value : visibleSet)
-    {
-        renderer.Draw(value);
-    }
+      for (auto& value : visibleSet)
+      {
+          renderer.Draw(value);
+      }*/
 }
 
 void Rendering::PlanarReflectionEffect::GetReflectionMatrixAndModelPlane(int i, Mathematics::MatrixF& reflection, Mathematics::PlaneF& modelPlane)
@@ -233,10 +231,7 @@ Rendering::PlanarReflectionEffect::PlanarReflectionEffect(LoadConstructor value)
     : ParentType{ value },
       numPlanes{ 0 },
       planes{},
-      reflectances{},
-      alphaState{ std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable) },
-      depthState{ std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable) },
-      stencilState{ std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable) }
+      reflectances{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -315,7 +310,7 @@ int Rendering::PlanarReflectionEffect::GetNumPlanes() const noexcept
     return numPlanes;
 }
 
-void Rendering::PlanarReflectionEffect::SetPlane(int i, const TrianglesMeshSharedPtr& plane)  
+void Rendering::PlanarReflectionEffect::SetPlane(int i, const TrianglesMeshSharedPtr& plane)
 {
     RENDERING_CLASS_IS_VALID_1;
 

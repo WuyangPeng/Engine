@@ -61,8 +61,8 @@ bool Rendering::OpenGLTexture2::CanAutoGenerateMipmaps() const
     auto texture = GetTexture2D();
 
     return texture &&
-           texture->HasMipmaps() &&
-           texture->WantAutogenerateMipmaps() &&
+           texture->HasMipMaps() &&
+           texture->WantAutoGenerateMipMaps() &&
            !texture->IsShared();
 }
 
@@ -81,4 +81,32 @@ void Rendering::OpenGLTexture2::LoadTextureLevel(int level, const ConstSpanItera
 
         System::SetGLTexturesSubImage2D(TextureTarget::Texture2D, level, 0, 0, width, height, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
     }
+}
+
+bool Rendering::OpenGLTexture2::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTexture2::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTexture2::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTexture2::GetNumActiveElements()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
 }

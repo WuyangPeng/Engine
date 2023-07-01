@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = SexagenaryCycle;
         using ParentType = SexagenaryCycleBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit SexagenaryCycle(const CoreTools::CSVRow& csvRow);
+        explicit SexagenaryCycle(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -33,17 +35,17 @@ namespace AncientBooks
 
         NODISCARD int GetId() const noexcept override;
 
-        NODISCARD System::String GetHeavenly() const override;
+        NODISCARD String GetHeavenly() const override;
 
-        NODISCARD System::String GetBranch() const override;
+        NODISCARD String GetBranch() const override;
 
-        NODISCARD System::String GetName() const override;
+        NODISCARD String GetName() const override;
 
     private:
         int id;  // Id
-        System::String heavenly;  // 天干
-        System::String branch;  // 地支
-        System::String name;  // 名字
+        String heavenly;  // 天干
+        String branch;  // 地支
+        String name;  // 名字
     };
 }
 

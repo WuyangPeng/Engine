@@ -22,6 +22,8 @@ namespace AncientBooks
     public:
         using ClassType = MonthBase;
 
+        using String = System::String;
+
     public:
         MonthBase() noexcept = default;
         explicit MonthBase(int key) noexcept;
@@ -38,7 +40,7 @@ namespace AncientBooks
 
         NODISCARD virtual int GetId() const noexcept;
 
-        NODISCARD virtual System::String GetName() const;
+        NODISCARD virtual String GetName() const;
 
     private:
         int key{};

@@ -59,3 +59,66 @@ void Rendering::OpenGLRasterizerState::Enable() noexcept(gAssert < 3 || gMathema
         System::DisableGLState(System::OpenGLEnable::PolygonOffsetPoint);
     }
 }
+
+bool Rendering::OpenGLRasterizerState::Update(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLRasterizerState::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLRasterizerState::CopyGpuToCpu()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLRasterizerState::CopyGpuToCpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLRasterizerState::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLRasterizerState::CopyCpuToGpu()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLRasterizerState::CopyCpuToGpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLRasterizerState::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLRasterizerState::GetNumActiveElements()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}

@@ -19,11 +19,11 @@ CSVConfigure::SceneContainer::ConstSceneSharedPtr CSVConfigure::SceneContainer::
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    for (const auto& value : scene)
+    for (const auto& element : scene)
     {
-        if (function(value.second))
+        if (function(element.second))
         {
-            return value.second;
+            return element.second;
         }
     }
 
@@ -37,11 +37,11 @@ CSVConfigure::SceneContainer::Container CSVConfigure::SceneContainer::GetScene(F
 
     Container result{};
 
-    for (const auto& value : scene)
+    for (const auto& element : scene)
     {
-        if (function(value.second))
+        if (function(element.second))
         {
-            result.emplace_back(value.second);
+            result.emplace_back(element.second);
         }
     }
 

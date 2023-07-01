@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:08)
+///	版本：0.9.1.0 (2023/06/28 10:26)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RendererObject.h"
 #include "Detail/RendererObjectImpl.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
@@ -27,5 +28,3 @@ CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererObject)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererObject, GetGraphicsObject, Rendering::RendererObject::GraphicsObjectSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererObject, GetGraphicsObject, Rendering::RendererObject::ConstGraphicsObjectSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererObject, GetName, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererObject, GetGLHandle, System::OpenGLUInt)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, RendererObject, SetGLHandle, OpenGLUInt, void)

@@ -14,7 +14,7 @@
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "Rendering/Renderers/EnvironmentParameter.h"
+#include "Rendering/RendererEngine/EnvironmentParameter.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 

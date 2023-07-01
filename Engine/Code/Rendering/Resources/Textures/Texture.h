@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:24)
+///	版本：0.9.1.0 (2023/06/29 20:15)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_H
 #define RENDERING_RESOURCES_TEXTURE_H
@@ -25,6 +25,7 @@ namespace Rendering
     public:
         using ClassType = Texture;
         using ParentType = Resource;
+
         using ReadFileManager = CoreTools::ReadFileManager;
         using WriteFileManager = CoreTools::WriteFileManager;
         using TextureSharedPtr = std::shared_ptr<ClassType>;
@@ -48,19 +49,19 @@ namespace Rendering
 
         NODISCARD virtual int GetDimension(int index) const = 0;
         NODISCARD virtual int GetNumDimensions() const = 0;
-        NODISCARD virtual int GetDimension(int i, int level) const = 0;
+        NODISCARD virtual int GetDimension(int level, int index) const = 0;
         NODISCARD virtual int GetNumLevelBytes(int level) const = 0;
         NODISCARD virtual int GetLevelOffset(int item, int level) const = 0;
 
-        NODISCARD virtual bool HasMipmaps() const = 0;
+        NODISCARD virtual bool HasMipMaps() const = 0;
 
         virtual void SaveToFile(WriteFileManager& outFile) const = 0;
         virtual void ReadFromFile(ReadFileManager& inFile) = 0;
 
-        void virtual AutogenerateMipmaps() noexcept = 0;
-        NODISCARD virtual bool WantAutogenerateMipmaps() const noexcept = 0;
+        void virtual AutoGenerateMipMaps() noexcept = 0;
+        NODISCARD virtual bool WantAutoGenerateMipMaps() const noexcept = 0;
 
-        NODISCARD virtual int GetNumSubresources() const noexcept = 0;
+        NODISCARD virtual int GetNumSubResources() const noexcept = 0;
         NODISCARD virtual int GetIndex(int item, int level) const = 0;
 
         NODISCARD ConstSpanIterator GetDataFor(int item, int level) const;

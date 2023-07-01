@@ -22,6 +22,8 @@ namespace AncientBooks
     public:
         using ClassType = SourceBase;
 
+        using String = System::String;
+
     public:
         SourceBase() noexcept = default;
         explicit SourceBase(int key) noexcept;
@@ -38,7 +40,7 @@ namespace AncientBooks
 
         NODISCARD virtual int GetId() const noexcept;
 
-        NODISCARD virtual System::String GetName() const;
+        NODISCARD virtual String GetName() const;
 
         NODISCARD virtual int GetSort() const noexcept;
 

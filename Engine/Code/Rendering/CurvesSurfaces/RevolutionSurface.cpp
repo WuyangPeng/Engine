@@ -19,8 +19,7 @@
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/CurvesSurfacesVolumes/Curve2Detail.h"
-#include "Rendering/DataTypes/TransformDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/DataTypes/TransformDetail.h" 
 #include "Rendering/SceneGraph/StandardMesh.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, RevolutionSurface);
@@ -176,7 +175,7 @@ void Rendering::RevolutionSurface::UpdateSurface()
 
     if (GetIndexBuffer() != nullptr)
     {
-        RENDERER_MANAGE_SINGLETON.UpdateAll(GetVertexBuffer());
+    
     }
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:27)
+///	版本：0.9.1.0 (2023/06/29 17:12)
 
 #include "Rendering/RenderingExport.h"
 
@@ -65,28 +65,28 @@ void Rendering::VertexFormatImpl::Bind(Semantic semantic, DataFormatType type, i
 
     if (numAttributes < 0 && attributes <= numAttributes)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("超过最大属性。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("超过最大属性。"))
     }
 
     if (semantic == Semantic::Color)
     {
         if (System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::ColorUnits) < unit)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("颜色单位无效。"));
+            THROW_EXCEPTION(SYSTEM_TEXT("颜色单位无效。"))
         }
     }
     else if (semantic == Semantic::TextureCoord)
     {
         if (System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits) < unit)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("纹理单位无效。"));
+            THROW_EXCEPTION(SYSTEM_TEXT("纹理单位无效。"))
         }
     }
     else
     {
         if (unit != 0)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("无效的语义单元。"));
+            THROW_EXCEPTION(SYSTEM_TEXT("无效的语义单元。"))
         }
     }
 
@@ -181,8 +181,8 @@ int Rendering::VertexFormatImpl::GetIndex(Semantic usage, int usageIndex) const 
 
     for (auto index = 0; index < numAttributes; ++index)
     {
-        const auto& attribute = elements.at(index);
-        if (attribute.GetUsage() == usage && attribute.GetUsageIndex() == usageIndex)
+        if (const auto& attribute = elements.at(index);
+            attribute.GetUsage() == usage && attribute.GetUsageIndex() == usageIndex)
         {
             return index;
         }

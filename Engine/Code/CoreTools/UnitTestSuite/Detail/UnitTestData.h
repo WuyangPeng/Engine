@@ -30,8 +30,8 @@ namespace CoreTools
         NODISCARD bool IsEmpty() const noexcept;
 
         void AddPassedNumber() noexcept;
-        void AddFailedNumber() noexcept;
-        void AddErrorNumber() noexcept;
+        void AddFailedNumber();
+        void AddErrorNumber();
         void ClearData() noexcept;
 
     private:

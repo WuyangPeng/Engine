@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.12 (2023/06/12 22:28)
+///	版本：0.9.1.0 (2023/06/19 21:28)
 
 #include "DatabaseGenerateServer.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/Helper/DatabaseGenerateServerCoreClassInvariantMacro.h"
 #include "DatabaseGenerateServerHelper.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Framework/MainFunctionHelper/WindowMainFunctionHelperDetail.h"
 #include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h"
 

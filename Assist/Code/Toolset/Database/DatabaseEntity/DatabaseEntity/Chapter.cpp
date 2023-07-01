@@ -8,11 +8,12 @@
 ///	ÒýÇæ¸¨Öú°æ±¾£º0.9.0.9 (2023/05/25 11:25)
 
 #include "Chapter.h"
-#include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Database/DatabaseInterface/BasisDatabaseManagerDetail.h"
 #include "Database/DatabaseInterface/DatabaseEntityDetail.h"
 #include "Database/DatabaseInterface/DatabaseField.h"
+#include "Database/DatabaseInterface/EntityDetail.h"
 
 DatabaseEntity::Chapter::Chapter(const BasisDatabaseManager& entity)
     : ParentType{ entity },
@@ -27,7 +28,7 @@ DatabaseEntity::Chapter::Chapter(const BasisDatabaseManager& entity)
     DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
-DatabaseEntity::Chapter::Chapter(Database::WrappersStrategy wrappersStrategy, boost::call_traits<Database::Traits::Int64>::param_type userId)
+DatabaseEntity::Chapter::Chapter(WrappersStrategy wrappersStrategy, boost::call_traits<Database::Traits::Int64>::param_type userId)
     : ParentType{ wrappersStrategy, databaseName.data(), GetKeyBasisDatabaseContainer(userId) },
       userId{ userId },
       chapterId{ Database::Traits::Int32{} },

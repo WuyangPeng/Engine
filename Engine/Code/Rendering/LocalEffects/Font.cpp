@@ -15,23 +15,48 @@
 
 #include <stdexcept>
 
-std::shared_ptr<const Rendering::VertexBuffer> Rendering::Font::GetVertexBuffer() const
+std::shared_ptr<const Rendering::VertexBuffer> Rendering::Font::GetVertexBuffer() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    throw std::logic_error("The method or operation is not implemented.");
+    return nullptr;
 }
 
-std::shared_ptr<const Rendering::IndexBuffer> Rendering::Font::GetIndexBuffer() const
+std::shared_ptr<const Rendering::IndexBuffer> Rendering::Font::GetIndexBuffer() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    throw std::logic_error("The method or operation is not implemented.");
+    return nullptr;
 }
 
-std::shared_ptr<const Rendering::TextEffect> Rendering::Font::GetTextEffect() const
+std::shared_ptr<const Rendering::TextEffect> Rendering::Font::GetTextEffect() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    throw std::logic_error("The method or operation is not implemented.");
+    return nullptr;
+}
+
+std::shared_ptr<Rendering::VertexBuffer> Rendering::Font::GetVertexBuffer() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return nullptr;
+}
+
+std::shared_ptr<Rendering::IndexBuffer> Rendering::Font::GetIndexBuffer() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return nullptr;
+}
+
+std::shared_ptr<Rendering::TextEffect> Rendering::Font::GetTextEffect() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return nullptr;
+}
+
+void Rendering::Font::Typeset(MAYBE_UNUSED int getWidth, MAYBE_UNUSED int getHeight, MAYBE_UNUSED int i, MAYBE_UNUSED int y, MAYBE_UNUSED const Colour<float>& color, MAYBE_UNUSED const std::string& string) noexcept
+{
 }

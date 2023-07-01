@@ -28,6 +28,8 @@ namespace Rendering
         OpenGLDrawingState(const DrawingStateSharedPtr& drawingState, const std::string& name);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        bool Update() noexcept override;
     };
 }
 

@@ -531,6 +531,7 @@
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\EngineSuite\EngineSuite.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\TestingHelper.h" />
   </ItemGroup>

@@ -13,7 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/OpenGLRenderer/GLSL/GLSLReflection.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Shaders/Detail/ComputeProgramImpl.h"
 
 namespace Rendering

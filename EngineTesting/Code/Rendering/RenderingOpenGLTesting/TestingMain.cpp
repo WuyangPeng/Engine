@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 14:44)
+///	版本：0.9.1.0 (2023/06/25 16:17)
 
 #include "Rendering/RenderingOpenGLTesting/TestingHelper.h"
 #include "Framework/Helper/MainFunctionMacro.h"
@@ -14,4 +14,10 @@
 
 #include <vld.h>
 
-GLUT_CONSOLE_MAIN_FUNCTION(Rendering, TestingHelper, SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""), 3, 0, Framework::FrameParameter::SixtyFrame);
+GLUT_CONSOLE_MAIN_FUNCTION(Rendering,
+                           TestingHelper,
+                           SYSTEM_TEXT("DefaultEnvironment"),
+                           SYSTEM_TEXT(""),
+                           4,
+                           5,
+                           Framework::FrameParameter::SixtyFrame);

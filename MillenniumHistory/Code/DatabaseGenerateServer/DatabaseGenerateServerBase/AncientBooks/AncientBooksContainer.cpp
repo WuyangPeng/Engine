@@ -13,7 +13,6 @@
 #include "BookContainer.h"
 #include "CalendarContainer.h"
 #include "CategoryContainer.h"
-#include "ChapterContainer.h"
 #include "CharacterContainer.h"
 #include "CountryContainer.h"
 #include "DayContainer.h"
@@ -34,16 +33,13 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 
-#include <filesystem>
-
 using namespace std::literals;
 
-AncientBooks::AncientBooksContainer::AncientBooksContainer(const System::String& directory)
+AncientBooks::AncientBooksContainer::AncientBooksContainer(const String& directory)
     : articleContainer{},
       bookContainer{},
       calendarContainer{},
       categoryContainer{},
-      chapterContainer{},
       characterContainer{},
       countryContainer{},
       dayContainer{},
@@ -66,234 +62,230 @@ AncientBooks::AncientBooksContainer::AncientBooksContainer(const System::String&
     USER_SELF_CLASS_IS_VALID_1;
 }
 
-void AncientBooks::AncientBooksContainer::Parsing(const System::String& directory)
+void AncientBooks::AncientBooksContainer::Parsing(const String& directory)
 {
     const std::filesystem::path path{ directory };
 
     for (const auto& inputPath : std::filesystem::directory_iterator(path))
     {
-        auto fileName = inputPath.path().native();
+        Parsing(inputPath);
+    }
+}
 
-        if (fileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT(".csv"s))) != (fileName.size() - 4))
-        {
-            continue;
-        }
+void AncientBooks::AncientBooksContainer::Parsing(const std::filesystem::directory_entry& inputPath)
+{
+    const auto fileName = inputPath.path().native();
 
-        CoreTools::CSVContent csvContent{ CoreTools::StringConversion::WideCharConversionStandard(fileName) };
+    if (fileName.find(L".csv"s) != (fileName.size() - 4))
+    {
+        return;
+    }
 
-        const auto csvClassName = csvContent.GetCSVClassName();
+    const CoreTools::CSVContent csvContent{ CoreTools::StringConversion::WideCharConversionStandard(fileName) };
 
-        if (csvClassName == SYSTEM_TEXT("Article"s))
-        {
-            articleContainer = std::make_shared<ArticleContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Book"s))
-        {
-            bookContainer = std::make_shared<BookContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Calendar"s))
-        {
-            calendarContainer = std::make_shared<CalendarContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Category"s))
-        {
-            categoryContainer = std::make_shared<CategoryContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Chapter"s))
-        {
-            chapterContainer = std::make_shared<ChapterContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Character"s))
-        {
-            characterContainer = std::make_shared<CharacterContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Country"s))
-        {
-            countryContainer = std::make_shared<CountryContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Day"s))
-        {
-            dayContainer = std::make_shared<DayContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Emperor"s))
-        {
-            emperorContainer = std::make_shared<EmperorContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Gather"s))
-        {
-            gatherContainer = std::make_shared<GatherContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Genus"s))
-        {
-            genusContainer = std::make_shared<GenusContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Geographic"s))
-        {
-            geographicContainer = std::make_shared<GeographicContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Identity"s))
-        {
-            identityContainer = std::make_shared<IdentityContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("ImperialCourt"s))
-        {
-            imperialCourtContainer = std::make_shared<ImperialCourtContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Month"s))
-        {
-            monthContainer = std::make_shared<MonthContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("ReignTitle"s))
-        {
-            reignTitleContainer = std::make_shared<ReignTitleContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("SexagenaryCycle"s))
-        {
-            sexagenaryCycleContainer = std::make_shared<SexagenaryCycleContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Source"s))
-        {
-            sourceContainer = std::make_shared<SourceContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Version"s))
-        {
-            versionContainer = std::make_shared<VersionContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Year"s))
-        {
-            yearContainer = std::make_shared<YearContainer>(csvContent);
-        }
+    const auto csvClassName = csvContent.GetCSVClassName();
+
+    if (csvClassName == SYSTEM_TEXT("Article"s))
+    {
+        articleContainer = std::make_shared<ArticleContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Book"s))
+    {
+        bookContainer = std::make_shared<BookContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Calendar"s))
+    {
+        calendarContainer = std::make_shared<CalendarContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Category"s))
+    {
+        categoryContainer = std::make_shared<CategoryContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Character"s))
+    {
+        characterContainer = std::make_shared<CharacterContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Country"s))
+    {
+        countryContainer = std::make_shared<CountryContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Day"s))
+    {
+        dayContainer = std::make_shared<DayContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Emperor"s))
+    {
+        emperorContainer = std::make_shared<EmperorContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Gather"s))
+    {
+        gatherContainer = std::make_shared<GatherContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Genus"s))
+    {
+        genusContainer = std::make_shared<GenusContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Geographic"s))
+    {
+        geographicContainer = std::make_shared<GeographicContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Identity"s))
+    {
+        identityContainer = std::make_shared<IdentityContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("ImperialCourt"s))
+    {
+        imperialCourtContainer = std::make_shared<ImperialCourtContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Month"s))
+    {
+        monthContainer = std::make_shared<MonthContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("ReignTitle"s))
+    {
+        reignTitleContainer = std::make_shared<ReignTitleContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("SexagenaryCycle"s))
+    {
+        sexagenaryCycleContainer = std::make_shared<SexagenaryCycleContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Source"s))
+    {
+        sourceContainer = std::make_shared<SourceContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Version"s))
+    {
+        versionContainer = std::make_shared<VersionContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Year"s))
+    {
+        yearContainer = std::make_shared<YearContainer>(csvContent);
     }
 }
 
 void AncientBooks::AncientBooksContainer::Verify() const
 {
-    if (!articleContainer)
+    if (articleContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("article表不存在。"s))
     }
 
-    if (!bookContainer)
+    if (bookContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("book表不存在。"s))
     }
 
-    if (!calendarContainer)
+    if (calendarContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("calendar表不存在。"s))
     }
 
-    if (!categoryContainer)
+    if (categoryContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("category表不存在。"s))
     }
 
-    if (!chapterContainer)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("chapter表不存在。"s))
-    }
-
-    if (!characterContainer)
+    if (characterContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("character表不存在。"s))
     }
 
-    if (!countryContainer)
+    if (countryContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("country表不存在。"s))
     }
 
-    if (!dayContainer)
+    if (dayContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("day表不存在。"s))
     }
 
-    if (!emperorContainer)
+    if (emperorContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("emperor表不存在。"s))
     }
 
-    if (!gatherContainer)
+    if (gatherContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("gather表不存在。"s))
     }
 
-    if (!genusContainer)
+    if (genusContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("genus表不存在。"s))
     }
 
-    if (!geographicContainer)
+    if (geographicContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("geographic表不存在。"s))
     }
 
-    if (!identityContainer)
+    if (identityContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("identity表不存在。"s))
     }
 
-    if (!imperialCourtContainer)
+    if (imperialCourtContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("imperialCourt表不存在。"s))
     }
 
-    if (!monthContainer)
+    if (monthContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("month表不存在。"s))
     }
 
-    if (!reignTitleContainer)
+    if (reignTitleContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("reignTitle表不存在。"s))
     }
 
-    if (!sexagenaryCycleContainer)
+    if (sexagenaryCycleContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("sexagenaryCycle表不存在。"s))
     }
 
-    if (!sourceContainer)
+    if (sourceContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("source表不存在。"s))
     }
 
-    if (!versionContainer)
+    if (versionContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("version表不存在。"s))
     }
 
-    if (!yearContainer)
+    if (yearContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("year表不存在。"s))
     }
 
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("AncientBooks结束载入……"));
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 
 bool AncientBooks::AncientBooksContainer::IsValid() const noexcept
 {
-    if (articleContainer &&
-        bookContainer &&
-        calendarContainer &&
-        categoryContainer &&
-        chapterContainer &&
-        characterContainer &&
-        countryContainer &&
-        dayContainer &&
-        emperorContainer &&
-        gatherContainer &&
-        genusContainer &&
-        geographicContainer &&
-        identityContainer &&
-        imperialCourtContainer &&
-        monthContainer &&
-        reignTitleContainer &&
-        sexagenaryCycleContainer &&
-        sourceContainer &&
-        versionContainer &&
-        yearContainer)
+    if (articleContainer != nullptr &&
+        bookContainer != nullptr &&
+        calendarContainer != nullptr &&
+        categoryContainer != nullptr &&
+        characterContainer != nullptr &&
+        countryContainer != nullptr &&
+        dayContainer != nullptr &&
+        emperorContainer != nullptr &&
+        gatherContainer != nullptr &&
+        genusContainer != nullptr &&
+        geographicContainer != nullptr &&
+        identityContainer != nullptr &&
+        imperialCourtContainer != nullptr &&
+        monthContainer != nullptr &&
+        reignTitleContainer != nullptr &&
+        sexagenaryCycleContainer != nullptr &&
+        sourceContainer != nullptr &&
+        versionContainer != nullptr &&
+        yearContainer != nullptr)
     {
         return true;
     }
@@ -305,140 +297,133 @@ bool AncientBooks::AncientBooksContainer::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-std::shared_ptr<const AncientBooks::ArticleContainer> AncientBooks::AncientBooksContainer::GetArticleContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstArticleContainerSharedPtr AncientBooks::AncientBooksContainer::GetArticleContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return articleContainer;
 }
 
-std::shared_ptr<const AncientBooks::BookContainer> AncientBooks::AncientBooksContainer::GetBookContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstBookContainerSharedPtr AncientBooks::AncientBooksContainer::GetBookContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return bookContainer;
 }
 
-std::shared_ptr<const AncientBooks::CalendarContainer> AncientBooks::AncientBooksContainer::GetCalendarContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstCalendarContainerSharedPtr AncientBooks::AncientBooksContainer::GetCalendarContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return calendarContainer;
 }
 
-std::shared_ptr<const AncientBooks::CategoryContainer> AncientBooks::AncientBooksContainer::GetCategoryContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstCategoryContainerSharedPtr AncientBooks::AncientBooksContainer::GetCategoryContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return categoryContainer;
 }
 
-std::shared_ptr<const AncientBooks::ChapterContainer> AncientBooks::AncientBooksContainer::GetChapterContainer() const noexcept
-{
-    USER_CLASS_IS_VALID_CONST_1;
-
-    return chapterContainer;
-}
-
-std::shared_ptr<const AncientBooks::CharacterContainer> AncientBooks::AncientBooksContainer::GetCharacterContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstCharacterContainerSharedPtr AncientBooks::AncientBooksContainer::GetCharacterContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return characterContainer;
 }
 
-std::shared_ptr<const AncientBooks::CountryContainer> AncientBooks::AncientBooksContainer::GetCountryContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstCountryContainerSharedPtr AncientBooks::AncientBooksContainer::GetCountryContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return countryContainer;
 }
 
-std::shared_ptr<const AncientBooks::DayContainer> AncientBooks::AncientBooksContainer::GetDayContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstDayContainerSharedPtr AncientBooks::AncientBooksContainer::GetDayContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return dayContainer;
 }
 
-std::shared_ptr<const AncientBooks::EmperorContainer> AncientBooks::AncientBooksContainer::GetEmperorContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstEmperorContainerSharedPtr AncientBooks::AncientBooksContainer::GetEmperorContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return emperorContainer;
 }
 
-std::shared_ptr<const AncientBooks::GatherContainer> AncientBooks::AncientBooksContainer::GetGatherContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstGatherContainerSharedPtr AncientBooks::AncientBooksContainer::GetGatherContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return gatherContainer;
 }
 
-std::shared_ptr<const AncientBooks::GenusContainer> AncientBooks::AncientBooksContainer::GetGenusContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstGenusContainerSharedPtr AncientBooks::AncientBooksContainer::GetGenusContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return genusContainer;
 }
 
-std::shared_ptr<const AncientBooks::GeographicContainer> AncientBooks::AncientBooksContainer::GetGeographicContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstGeographicContainerSharedPtr AncientBooks::AncientBooksContainer::GetGeographicContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return geographicContainer;
 }
 
-std::shared_ptr<const AncientBooks::IdentityContainer> AncientBooks::AncientBooksContainer::GetIdentityContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstIdentityContainerSharedPtr AncientBooks::AncientBooksContainer::GetIdentityContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return identityContainer;
 }
 
-std::shared_ptr<const AncientBooks::ImperialCourtContainer> AncientBooks::AncientBooksContainer::GetImperialCourtContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstImperialCourtContainerSharedPtr AncientBooks::AncientBooksContainer::GetImperialCourtContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return imperialCourtContainer;
 }
 
-std::shared_ptr<const AncientBooks::MonthContainer> AncientBooks::AncientBooksContainer::GetMonthContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstMonthContainerSharedPtr AncientBooks::AncientBooksContainer::GetMonthContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return monthContainer;
 }
 
-std::shared_ptr<const AncientBooks::ReignTitleContainer> AncientBooks::AncientBooksContainer::GetReignTitleContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstReignTitleContainerSharedPtr AncientBooks::AncientBooksContainer::GetReignTitleContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return reignTitleContainer;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleContainer> AncientBooks::AncientBooksContainer::GetSexagenaryCycleContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstSexagenaryCycleContainerSharedPtr AncientBooks::AncientBooksContainer::GetSexagenaryCycleContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return sexagenaryCycleContainer;
 }
 
-std::shared_ptr<const AncientBooks::SourceContainer> AncientBooks::AncientBooksContainer::GetSourceContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstSourceContainerSharedPtr AncientBooks::AncientBooksContainer::GetSourceContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return sourceContainer;
 }
 
-std::shared_ptr<const AncientBooks::VersionContainer> AncientBooks::AncientBooksContainer::GetVersionContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstVersionContainerSharedPtr AncientBooks::AncientBooksContainer::GetVersionContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return versionContainer;
 }
 
-std::shared_ptr<const AncientBooks::YearContainer> AncientBooks::AncientBooksContainer::GetYearContainer() const noexcept
+AncientBooks::AncientBooksContainer::ConstYearContainerSharedPtr AncientBooks::AncientBooksContainer::GetYearContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 

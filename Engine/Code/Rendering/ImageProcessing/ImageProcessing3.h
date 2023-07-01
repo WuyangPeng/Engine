@@ -28,8 +28,7 @@ namespace Rendering
                          int bound1,
                          int factor0,
                          int factor1,
-                         const std::vector<Mathematics::Float4>& imageData,
-                         const PixelShaderSharedPtr& mainPShader,
+                         const std::vector<Mathematics::Float4>& imageData, 
                          const Mathematics::Float4& boundaryColor,
                          bool useDirichlet);
 
@@ -52,13 +51,7 @@ namespace Rendering
 
         NODISCARD int Map3Dto1D(int x, int y, int z) noexcept;
 
-        NODISCARD Texture2DSharedPtr CreateTiledImage(const std::vector<Mathematics::Float4>& imageData);
-
-        void CreateBoundaryDirichletEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance);
-
-        void CreateBoundaryNeumannEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance);
-
-        void CreateDrawEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance, const Mathematics::Float4& boundaryColor);
+        NODISCARD Texture2DSharedPtr CreateTiledImage(const std::vector<Mathematics::Float4>& imageData); 
 
     private:
         int bound0;

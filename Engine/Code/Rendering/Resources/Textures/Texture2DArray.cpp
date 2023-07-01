@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:29)
+///	版本：0.9.1.0 (2023/06/29 20:27)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,8 +21,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTexture2Array.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/DataFormat.h"
 #include "Rendering/Resources/Detail/Textures/Texture2DImpl.h"
 #include "Rendering/Resources/Flags/UsageType.h"
@@ -33,11 +32,11 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Texture2DArray);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture2DArray);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture2DArray);
 
-Rendering::Texture2DArray::Texture2DArray(int numItems, DataFormatType format, int width, int height, bool hasMipmaps)
-    : ParentType{ ImplType::GetTotalElements(numItems, width, height, 1, hasMipmaps),
+Rendering::Texture2DArray::Texture2DArray(int numItems, DataFormatType format, int width, int height, bool hasMipMaps)
+    : ParentType{ ImplType::GetTotalElements(numItems, width, height, 1, hasMipMaps),
                   DataFormat::GetNumBytesPerStruct(format),
                   GraphicsObjectType::Texture2Array },
-      impl{ numItems, format, width, height, hasMipmaps }
+      impl{ numItems, format, width, height, hasMipMaps }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -62,7 +61,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture2DArray, GetNumLevelByte
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture2DArray, GetWidth, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture2DArray, GetHeight, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, HasMipmaps, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, HasMipMaps, bool)
 
 void Rendering::Texture2DArray::SaveToFile(WriteFileManager& outFile) const
 {
@@ -95,9 +94,9 @@ int Rendering::Texture2DArray::GetLevelOffset(int item, int level) const
     return impl->GetLevelOffset(item, level);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, AutogenerateMipmaps, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, WantAutogenerateMipmaps, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, GetNumSubresources, int)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, AutoGenerateMipMaps, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, WantAutoGenerateMipMaps, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2DArray, GetNumSubResources, int)
 
 int Rendering::Texture2DArray::GetIndex(int item, int level) const
 {
@@ -198,8 +197,12 @@ Rendering::Texture2DArray::RendererObjectSharedPtr Rendering::Texture2DArray::Cr
     switch (rendererTypes)
     {
         case RendererTypes::OpenGL:
+        {
             return std::make_shared<OpenGLTexture2Array>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        }
         default:
-            return ParentType::CreateRendererObject(rendererTypes);
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
+        }
     }
 }

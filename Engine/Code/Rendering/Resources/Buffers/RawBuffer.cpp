@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:25)
+///	版本：0.9.1.0 (2023/06/29 16:44)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/OpenGLRenderer/Resources/Buffers/OpenGLAtomicCounterBuffer.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, RawBuffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RawBuffer);
@@ -106,8 +106,12 @@ Rendering::RawBuffer::RendererObjectSharedPtr Rendering::RawBuffer::CreateRender
     switch (rendererTypes)
     {
         case RendererTypes::OpenGL:
+        {
             return std::make_shared<OpenGLAtomicCounterBuffer>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        }
         default:
-            return ParentType::CreateRendererObject(rendererTypes);
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
+        }
     }
 }

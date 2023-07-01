@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起版本：0.9.0.12 (2023/06/17 12:53)
+///	版本：0.9.1.0 (2023/06/19 15:20)
 
-#ifndef GAME_CLIENT_MIDDLE_LAYER_CAMERA_SYSTEMS_MIDDLE_LAYER_CAMERA_SYSTEMS_H
-#define GAME_CLIENT_MIDDLE_LAYER_CAMERA_SYSTEMS_MIDDLE_LAYER_CAMERA_SYSTEMS_H
+#ifndef GAME_CLIENT_MIDDLE_LAYER_CAMERA_SYSTEMS_CAMERA_SYSTEMS_MANAGER_H
+#define GAME_CLIENT_MIDDLE_LAYER_CAMERA_SYSTEMS_CAMERA_SYSTEMS_MANAGER_H
 
 #include "GameClient/GameClientMiddleLayer/GameClientMiddleLayerDll.h"
 
@@ -17,11 +17,11 @@
 
 namespace GameClientMiddleLayer
 {
-    class GAME_CLIENT_MIDDLE_LAYER_DEFAULT_DECLARE CameraSystemsManager : public Framework::CameraSystemsManagerInterface
+    class GAME_CLIENT_MIDDLE_LAYER_DEFAULT_DECLARE CameraSystemsManager final : public Framework::CameraSystemsManagerInterface
     {
     public:
         using ClassType = CameraSystemsManager;
-        using ParentType = Framework::CameraSystemsManagerInterface;
+        using ParentType = CameraSystemsManagerInterface;
 
         using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
@@ -33,4 +33,4 @@ namespace GameClientMiddleLayer
     };
 }
 
-#endif  // GAME_CLIENT_MIDDLE_LAYER_CAMERA_SYSTEMS_MIDDLE_LAYER_CAMERA_SYSTEMS_H
+#endif  // GAME_CLIENT_MIDDLE_LAYER_CAMERA_SYSTEMS_CAMERA_SYSTEMS_MANAGER_H

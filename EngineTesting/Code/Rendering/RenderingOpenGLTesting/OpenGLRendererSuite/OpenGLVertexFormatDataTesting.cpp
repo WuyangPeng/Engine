@@ -12,7 +12,6 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/OpenGLRenderer/OpenGLVertexFormatDataDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Buffers/VertexFormat.h"
 
 Rendering::OpenGLVertexFormatDataTesting::OpenGLVertexFormatDataTesting(const OStreamShared& stream)
@@ -28,9 +27,6 @@ void Rendering::OpenGLVertexFormatDataTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Rendering::OpenGLVertexFormatDataTesting::MainTest()
+void Rendering::OpenGLVertexFormatDataTesting::MainTest() noexcept
 {
-    RendererManager::Create();
-
-    RendererManager::Destroy();
 }

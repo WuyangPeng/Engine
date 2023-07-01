@@ -23,6 +23,8 @@ namespace CSVConfigure
     public:
         using ClassType = SkillBase;
 
+        using String = System::String;
+
     public:
         SkillBase() noexcept = default;
         explicit SkillBase(int key) noexcept;
@@ -43,7 +45,7 @@ namespace CSVConfigure
 
         NODISCARD virtual int GetReward() const noexcept;
 
-        NODISCARD virtual System::String GetSkillName() const;
+        NODISCARD virtual String GetSkillName() const;
 
         NODISCARD virtual VectorType GetVectorType() const noexcept;
 

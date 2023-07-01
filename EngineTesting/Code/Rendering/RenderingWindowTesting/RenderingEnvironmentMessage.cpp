@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 14:50)
+///	版本：0.9.1.0 (2023/06/25 16:09)
 
 #include "RenderingEnvironmentMessage.h"
 #include "Testing.h"
@@ -30,16 +30,16 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(RenderingWindowTesting, RenderingEnvironm
 
 void RenderingWindowTesting::RenderingEnvironmentMessage::InitSuite()
 {
-    AddRenderersSuite();
+    AddRendererEngineSuite();
 }
 
-void RenderingWindowTesting::RenderingEnvironmentMessage::AddRenderersSuite()
+void RenderingWindowTesting::RenderingEnvironmentMessage::AddRendererEngineSuite()
 {
-    auto hwnd = GetHwnd();
-    auto renderersSuite = GenerateSuite("渲染"s);
+    const auto hWnd = GetHwnd();
+    auto rendererEngineSuite = GenerateSuite("渲染引擎"s);
 
-    ADD_TEST_USE_PARAMETER_1(renderersSuite, RenderingEnvironmentTesting, hwnd);
-    ADD_TEST_USE_PARAMETER_1(renderersSuite, RenderingDeviceTesting, hwnd);
+    ADD_TEST_USE_PARAMETER_1(rendererEngineSuite, RenderingEnvironmentTesting, hWnd);
+    ADD_TEST_USE_PARAMETER_1(rendererEngineSuite, RenderingDeviceTesting, hWnd);
 
-    AddSuite(renderersSuite);
+    AddSuite(rendererEngineSuite);
 }

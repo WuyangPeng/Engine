@@ -13,7 +13,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/OpenGLRenderer/OpenGLVertexFormatArrayDataDetail.h"
 #include "Rendering/OpenGLRenderer/OpenGLVertexFormatDataDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Buffers/VertexFormat.h"
 
 Rendering::OpenGLVertexFormatArrayDataTesting::OpenGLVertexFormatArrayDataTesting(const OStreamShared& stream)
@@ -29,11 +28,8 @@ void Rendering::OpenGLVertexFormatArrayDataTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Rendering::OpenGLVertexFormatArrayDataTesting::MainTest()
+void Rendering::OpenGLVertexFormatArrayDataTesting::MainTest() noexcept
 {
-    RendererManager::Create();
-
-    RendererManager::Destroy();
 }
 
 void Rendering::OpenGLVertexFormatArrayDataTesting::AttributeUsageTextureCoordTest() noexcept

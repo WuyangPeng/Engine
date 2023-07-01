@@ -32,6 +32,10 @@ namespace Rendering
         NODISCARD ConstTextureDepthStencilSharedPtr GetTextureDepthStencil() const;
 
         NODISCARD bool CanAutoGenerateMipmaps() const noexcept override;
+        [[nodiscard]] bool Update(int item, int level) override;
+        [[nodiscard]] bool CopyGpuToCpu(int item, int level) override;
+        [[nodiscard]] bool CopyCpuToGpu(int item, int level) override;
+        [[nodiscard]] bool GetNumActiveElements() override;
     };
 }
 

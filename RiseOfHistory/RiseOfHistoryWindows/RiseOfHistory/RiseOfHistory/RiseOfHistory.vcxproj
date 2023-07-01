@@ -79,7 +79,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -104,7 +104,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -131,7 +131,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -156,7 +156,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -189,7 +189,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\RiseOfHistory.props" />
     <Import Project="..\..\RiseOfHistoryWin32DebugLibs.props" />
-  </ImportGroup>  
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\RiseOfHistory.props" />
@@ -209,7 +209,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\RiseOfHistory.props" />
     <Import Project="..\..\RiseOfHistoryWin32ReleaseLibs.props" />
-  </ImportGroup>  
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\RiseOfHistory.props" />
@@ -229,7 +229,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\RiseOfHistory.props" />
     <Import Project="..\..\RiseOfHistoryX64DebugLibs.props" />
-  </ImportGroup>  
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\RiseOfHistory.props" />
@@ -249,7 +249,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\RiseOfHistory.props" />
     <Import Project="..\..\RiseOfHistoryX64ReleaseLibs.props" />
-  </ImportGroup>  
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\RiseOfHistory.props" />
@@ -268,7 +268,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
@@ -280,7 +280,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
@@ -292,7 +292,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup> 
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
@@ -304,7 +304,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup> 
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
@@ -332,7 +332,14 @@ xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../$(Platform)/$(Config
 xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -344,7 +351,7 @@ xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Config
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
@@ -363,7 +370,14 @@ xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../$(Platform)/$(Config
 xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/DebugWindows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -394,7 +408,14 @@ xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../$(Platform)/$(Config
 xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -421,7 +442,14 @@ xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../$(Platform)/$(Config
 xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisWin32DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -452,7 +480,14 @@ xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(
 xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -464,7 +499,7 @@ xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Config
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -484,7 +519,14 @@ xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(
 xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/ReleaseWindows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -516,7 +558,14 @@ xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(
 xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -544,7 +593,14 @@ xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(
 xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisWin32ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -574,7 +630,14 @@ xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../$(Platform)/$(Configur
 xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -586,7 +649,7 @@ xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Config
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
@@ -605,7 +668,14 @@ xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../$(Platform)/$(Configur
 xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/DebugWindows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -636,7 +706,14 @@ xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../$(Platform)/$(Configur
 xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -663,7 +740,14 @@ xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../$(Platform)/$(Configur
 xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisX64DebugLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -694,7 +778,14 @@ xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(
 xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -706,7 +797,7 @@ xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../$(Platform)/$(Config
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -726,7 +817,14 @@ xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(
 xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineInclude)/../$(Platform)/ReleaseWindows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
@@ -758,7 +856,14 @@ xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(
 xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -786,7 +891,14 @@ xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(
 xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ProtobufX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(ActiveMQX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AprX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongoCxxDriverX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(BsoncxxX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MongocxxInclude)/../Build$(Platform)/mongo-c-driver/bin/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(HiredisX64ReleaseLib)/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -820,37 +932,17 @@ xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(
     <Text Include="Resource\Todo\Level 9.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\RiseOfHistory\Core\ProjectName.cpp" />
-    <ClCompile Include="..\..\..\Code\RiseOfHistory\GUI\GUIMiddleLayer.cpp" />
-    <ClCompile Include="..\..\..\Code\RiseOfHistory\Resource\ResourceMiddleLayer.cpp" />
-    <ClCompile Include="..\..\..\Code\RiseOfHistory\System\SystemMiddleLayer.cpp" />
     <ClCompile Include="..\..\..\Code\RiseOfHistory\RiseOfHistoryHelper.cpp" />
     <ClCompile Include="..\..\..\Code\RiseOfHistory\RiseOfHistoryLib.cpp" />
     <ClCompile Include="..\..\..\Code\RiseOfHistory\RiseOfHistoryMain.cpp" />
     <ClCompile Include="..\..\..\Code\RiseOfHistory\RiseOfHistoryMiddleLayerMessage.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\Core\Core.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\Core\CoreFwd.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\Core\ProjectName.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\GUI\GUI.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\GUI\GUIFwd.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\GUI\GUIMiddleLayer.h" />
     <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\RiseOfHistoryClassInvariantMacro.h" />
     <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\RiseOfHistoryCustomAssertMacro.h" />
     <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\Helper.h" />
     <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\HelperFwd.h" />
     <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\UserMacro.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\Input\Input.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\Input\InputFwd.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\Input\InputMiddleLayer.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\Input\InputMiddleLayerDetail.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\Resource\Resource.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\Resource\ResourceFwd.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\Resource\ResourceMiddleLayer.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\System\System.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\System\SystemFwd.h" />
-    <ClInclude Include="..\..\..\Code\RiseOfHistory\System\SystemMiddleLayer.h" />
     <ClInclude Include="..\..\..\Code\RiseOfHistory\RiseOfHistory.h" />
     <ClInclude Include="..\..\..\Code\RiseOfHistory\RiseOfHistoryFwd.h" />
     <ClInclude Include="..\..\..\Code\RiseOfHistory\RiseOfHistoryHelper.h" />

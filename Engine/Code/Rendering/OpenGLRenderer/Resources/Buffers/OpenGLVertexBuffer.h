@@ -32,6 +32,11 @@ namespace Rendering
         NODISCARD ConstVertexBufferSharedPtr GetVertexBuffer() const;
 
         void Enable() noexcept override;
+        [[nodiscard]] bool CopyGpuToCpu(int level) override;
+        [[nodiscard]] bool CopyGpuToCpu(int item, int level) override;
+        [[nodiscard]] bool CopyCpuToGpu(int level) override;
+        [[nodiscard]] bool CopyCpuToGpu(int item, int level) override;
+        [[nodiscard]] bool GetNumActiveElements() override;
     };
 }
 

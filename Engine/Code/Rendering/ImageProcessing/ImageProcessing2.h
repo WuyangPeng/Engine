@@ -29,7 +29,6 @@ namespace Rendering
         ImageProcessing2(int bound0,
                          int bound1,
                          const std::vector<Mathematics::Float4>& imageData,
-                         const PixelShaderSharedPtr& mainPShader,
                          bool useDirichlet);
 
         ImageProcessing2(int bound0, int bound1, int numTargets);
@@ -40,12 +39,6 @@ namespace Rendering
         NODISCARD float GetDy() const noexcept;
 
         NODISCARD Texture2DSharedPtr CreateImage(const std::vector<Mathematics::Float4>& imageData);
-
-        void CreateBoundaryDirichletEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance);
-
-        void CreateBoundaryNeumannEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance);
-
-        void CreateDrawEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance);
 
     private:
         void CreateVertexShader();

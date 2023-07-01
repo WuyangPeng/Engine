@@ -20,7 +20,6 @@
 #include "Mathematics/Objects3D/Line3Detail.h"
 #include "Mathematics/Objects3D/Triangle3Detail.h"
 #include "Rendering/Detail/SwitchNode.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/SceneGraph/Node.h"
@@ -48,11 +47,9 @@ void Rendering::PickerTesting::MainTest()
     CoreTools::InitTerm::ExecuteInitializer();
 
     CameraManager::Create();
-    RendererManager::Create();
 
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
 
-    RendererManager::Destroy();
     CameraManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();

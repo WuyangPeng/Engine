@@ -46,6 +46,7 @@ namespace Framework
         void AddLinuxFrameSuite();
         void AddMacintoshFrameSuite();
         void AddConsoleFrameSuite();
+        void AddProjectSuite();
     };
 }
 

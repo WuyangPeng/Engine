@@ -31,9 +31,9 @@ void JsonConfigure::RoadContainer::Parsing(const CoreTools::JsonRow& jsonRow)
 {
     const auto dataRow = jsonRow.GetJsonRowContainer(SYSTEM_TEXT("data"s));
 
-    for (const auto& value : dataRow)
+    for (const auto& element : dataRow)
     {
-        data.emplace_back(std::make_shared<Road::Data>(value));
+        data.emplace_back(std::make_shared<Road::Data>(element));
     }
 
     std::ranges::sort(data, [](const auto& lhs, const auto& rhs) noexcept {

@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-AncientBooks::SexagenaryCycleContainer::SexagenaryCycleContainer(const CoreTools::CSVContent& csvContent)
+AncientBooks::SexagenaryCycleContainer::SexagenaryCycleContainer(const CSVContent& csvContent)
     : sexagenaryCycle{}
 {
     Parsing(csvContent);
@@ -24,10 +24,18 @@ AncientBooks::SexagenaryCycleContainer::SexagenaryCycleContainer(const CoreTools
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void AncientBooks::SexagenaryCycleContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void AncientBooks::SexagenaryCycleContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("sexagenaryCycle表开始载入……"));
 
+    Load(csvContent);
+    Unique();
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("sexagenaryCycle表结束载入……"));
+}
+
+void AncientBooks::SexagenaryCycleContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -41,7 +49,10 @@ void AncientBooks::SexagenaryCycleContainer::Parsing(const CoreTools::CSVContent
     std::ranges::sort(sexagenaryCycle, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
+}
 
+void AncientBooks::SexagenaryCycleContainer::Unique()
+{
     const auto iter = std::ranges::unique(sexagenaryCycle, [](const auto& lhs, const auto& rhs) noexcept {
         if((*lhs).GetKey() == (*rhs).GetKey())
         {
@@ -57,12 +68,10 @@ void AncientBooks::SexagenaryCycleContainer::Parsing(const CoreTools::CSVContent
 
     if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("sexagenaryCycle表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-
         sexagenaryCycle.erase(iter.begin(), iter.end());
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("sexagenaryCycle表结束载入……"));
+    sexagenaryCycle.shrink_to_fit();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, SexagenaryCycleContainer)

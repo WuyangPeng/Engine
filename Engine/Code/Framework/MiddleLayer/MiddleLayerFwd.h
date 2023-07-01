@@ -49,11 +49,11 @@ namespace Framework
     class NetworkManagerInterface;
     class ObjectLogicManagerInterface;
 
-    template <typename ObjectLogic, typename ArtificialIntellegence>
+    template <typename ObjectLogic, typename ArtificialIntelligence>
     class ObjectLogicManager;
 
     class ObjectLogicInterface;
-    class ArtificialIntellegenceInterface;
+    class ArtificialIntelligenceInterface;
     class InputManagerInterface;
 
     template <typename ApplicationTrait>

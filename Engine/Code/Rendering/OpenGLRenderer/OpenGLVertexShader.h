@@ -13,8 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "OpenGLShader.h"
-#include "Rendering/Renderers/RenderersFwd.h"
-#include "Rendering/Shaders/VertexShader.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 
 namespace Rendering
 {
@@ -25,12 +24,12 @@ namespace Rendering
         using ParentType = OpenGLShader;
 
     public:
-        PdrVertexShader(Renderer* renderer, const VertexShader* vshader) noexcept;
+        PdrVertexShader(BaseRenderer* renderer) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void Enable(Renderer* renderer, const VertexShader* vshader, const ShaderParameters* parameters) noexcept;
-        void Disable(Renderer* renderer, const VertexShader* vshader, const ShaderParameters* parameters) noexcept;
+        void Enable(BaseRenderer* renderer) noexcept;
+        void Disable(BaseRenderer* renderer) noexcept;
 
     private:
         GLuint shader = 0;

@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
-#include "Rendering/Renderers/Renderer.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/SceneGraph/VisibleSet.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, PlanarShadowEffect);
@@ -30,98 +30,89 @@ Rendering::PlanarShadowEffect::PlanarShadowEffect(int numPlanes, const NodeShare
       projectors(numPlanes),
       shadowColors(numPlanes),
       shadowCaster{ shadowCaster },
-      alphaState{ std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable) },
-      depthState{ std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable) },
-      stencilState{ std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable) },
       material{ Material::Create() },
-      materialEffect{ std::make_shared<MaterialEffect>(CoreTools::DisableNotThrow::Disable) },
-      materialEffectInstance{ materialEffect->CreateInstance(material) }
+      materialEffect{ std::make_shared<MaterialEffect>(CoreTools::DisableNotThrow::Disable) } 
 {
-    auto sfloat = materialEffectInstance->GetVertexConstant(0, "MaterialDiffuse");
-
-    auto clonePShader = boost::polymorphic_pointer_cast<ShaderFloat>(sfloat->CloneObject());
-
-    clonePShader->EnableUpdater();
-
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, PlanarShadowEffect)
 
-void Rendering::PlanarShadowEffect::Draw(Renderer& renderer, VisibleSet& visibleSet)
+void Rendering::PlanarShadowEffect::Draw(BaseRenderer& renderer, VisibleSet& visibleSet) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
+    renderer;
+    visibleSet;
+    /*   const auto numVisible = visibleSet.GetNumVisible();
 
-    const auto numVisible = visibleSet.GetNumVisible();
+       for (auto& value : visibleSet)
+       {
+           renderer.Draw(value);
+       }
 
-    for (auto& value : visibleSet)
-    {
-        renderer.Draw(value);
-    }
+       const auto saveDState = renderer.GetOverrideDepthState();
+       const auto saveSState = renderer.GetOverrideStencilState();
 
-    const auto saveDState = renderer.GetOverrideDepthState();
-    const auto saveSState = renderer.GetOverrideStencilState();
+       renderer.SetOverrideDepthState(depthState);
+       renderer.SetOverrideStencilState(stencilState);
 
-    renderer.SetOverrideDepthState(depthState);
-    renderer.SetOverrideStencilState(stencilState);
+       auto camera = renderer.GetCamera();
 
-    auto camera = renderer.GetCamera();
+       for (auto i = 0; i < numPlanes; ++i)
+       {
+           depthState->SetEnabled(true);
+           depthState->SetWritable(true);
+           depthState->SetCompare(DepthStateFlags::CompareMode::LessEqual);
 
-    for (auto i = 0; i < numPlanes; ++i)
-    {
-        depthState->SetEnabled(true);
-        depthState->SetWritable(true);
-        depthState->SetCompare(DepthStateFlags::CompareMode::LessEqual);
+           stencilState->SetEnabled(true);
+           stencilState->SetCompare(StencilStateFlags::CompareMode::Always);
+           stencilState->SetReference(i + 1);
+           stencilState->SetOnFail(StencilStateFlags::OperationType::Keep);
+           stencilState->SetOnZFail(StencilStateFlags::OperationType::Keep);
+           stencilState->SetOnZPass(StencilStateFlags::OperationType::Replace);
 
-        stencilState->SetEnabled(true);
-        stencilState->SetCompare(StencilStateFlags::CompareMode::Always);
-        stencilState->SetReference(i + 1);
-        stencilState->SetOnFail(StencilStateFlags::OperationType::Keep);
-        stencilState->SetOnZFail(StencilStateFlags::OperationType::Keep);
-        stencilState->SetOnZPass(StencilStateFlags::OperationType::Replace);
+           renderer.Draw(planes.at(i).object);
 
-        renderer.Draw(planes.at(i).object);
+           const auto saveAState = renderer.GetOverrideAlphaState();
+           renderer.SetOverrideAlphaState(alphaState);
+           alphaState->SetBlendEnabled(true);
+           alphaState->SetSourceBlend(AlphaStateFlags::SourceBlendMode::SourceAlpha);
+           alphaState->SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::OneMinusSourceAlpha);
+           material->SetDiffuse(Colour<float>{ shadowColors.at(i)[0], shadowColors.at(i)[1], shadowColors.at(i)[2], shadowColors.at(i)[3] });
 
-        const auto saveAState = renderer.GetOverrideAlphaState();
-        renderer.SetOverrideAlphaState(alphaState);
-        alphaState->SetBlendEnabled(true);
-        alphaState->SetSourceBlend(AlphaStateFlags::SourceBlendMode::SourceAlpha);
-        alphaState->SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::OneMinusSourceAlpha);
-        material->SetDiffuse(Colour<float>{ shadowColors.at(i)[0], shadowColors.at(i)[1], shadowColors.at(i)[2], shadowColors.at(i)[3] });
+           depthState->SetEnabled(false);
 
-        depthState->SetEnabled(false);
+           stencilState->SetEnabled(true);
+           stencilState->SetCompare(StencilStateFlags::CompareMode::Equal);
+           stencilState->SetReference(i + 1);
+           stencilState->SetOnFail(StencilStateFlags::OperationType::Keep);
+           stencilState->SetOnZFail(StencilStateFlags::OperationType::Keep);
+           stencilState->SetOnZPass(StencilStateFlags::OperationType::Zero);
 
-        stencilState->SetEnabled(true);
-        stencilState->SetCompare(StencilStateFlags::CompareMode::Equal);
-        stencilState->SetReference(i + 1);
-        stencilState->SetOnFail(StencilStateFlags::OperationType::Keep);
-        stencilState->SetOnZFail(StencilStateFlags::OperationType::Keep);
-        stencilState->SetOnZPass(StencilStateFlags::OperationType::Zero);
+           Mathematics::MatrixF projection{};
+           if (!GetProjectionMatrix(i, projection))
+           {
+               continue;
+           }
 
-        Mathematics::MatrixF projection{};
-        if (!GetProjectionMatrix(i, projection))
-        {
-            continue;
-        }
+           camera->SetPreViewMatrix(projection);
 
-        camera->SetPreViewMatrix(projection);
+           for (auto& visual : visibleSet)
+           {
+               ConstVisualEffectInstanceSharedPtr save = visual->GetConstEffectInstance();
+               visual->SetEffectInstance(materialEffectInstance);
+               renderer.Draw(visual);
 
-        for (auto& visual : visibleSet)
-        {
-            ConstVisualEffectInstanceSharedPtr save = visual->GetConstEffectInstance();
-            visual->SetEffectInstance(materialEffectInstance);
-            renderer.Draw(visual);
+               visual->SetEffectInstance(boost::polymorphic_pointer_cast<VisualEffectInstance>(save->CloneObject()));
+           }
 
-            visual->SetEffectInstance(boost::polymorphic_pointer_cast<VisualEffectInstance>(save->CloneObject()));
-        }
+           camera->SetPreViewMatrix(Mathematics::MatrixF::GetIdentityMatrix());
 
-        camera->SetPreViewMatrix(Mathematics::MatrixF::GetIdentityMatrix());
+           renderer.SetOverrideAlphaState(saveAState);
+       }
 
-        renderer.SetOverrideAlphaState(saveAState);
-    }
-
-    renderer.SetOverrideStencilState(saveSState);
-    renderer.SetOverrideDepthState(saveDState);
+       renderer.SetOverrideStencilState(saveSState);
+       renderer.SetOverrideDepthState(saveDState);*/
 }
 
 bool Rendering::PlanarShadowEffect::GetProjectionMatrix(int i, Mathematics::MatrixF& projection)
@@ -266,12 +257,8 @@ Rendering::PlanarShadowEffect::PlanarShadowEffect(LoadConstructor value)
       projectors{},
       shadowColors{},
       shadowCaster{},
-      alphaState{},
-      depthState{},
-      stencilState{},
       material{},
-      materialEffect{},
-      materialEffectInstance{}
+      materialEffect{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -309,12 +296,8 @@ void Rendering::PlanarShadowEffect::PostLink()
 
     GlobalEffect::PostLink();
 
-    alphaState = std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable);
-    depthState = std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable);
-    stencilState = std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable);
     material = Material::Create();
     materialEffect = std::make_shared<MaterialEffect>(CoreTools::DisableNotThrow::Disable);
-    materialEffectInstance = materialEffect->CreateInstance(material);
 }
 
 int64_t Rendering::PlanarShadowEffect::Register(CoreTools::ObjectRegister& target) const

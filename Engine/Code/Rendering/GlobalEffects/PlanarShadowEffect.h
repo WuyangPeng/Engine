@@ -38,7 +38,7 @@ namespace Rendering
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void Draw(Renderer& renderer, VisibleSet& visibleSet) override;
+        void Draw(BaseRenderer& renderer, VisibleSet& visibleSet) noexcept override;
 
         NODISCARD int GetNumPlanes() const noexcept;
         void SetPlane(int i, const TrianglesMeshSharedPtr& plane);
@@ -59,13 +59,8 @@ namespace Rendering
         std::vector<Mathematics::Float4> shadowColors;
         CoreTools::ObjectAssociated<Node> shadowCaster;
 
-        AlphaStateSharedPtr alphaState;
-        DepthStateSharedPtr depthState;
-        StencilStateSharedPtr stencilState;
-
         MaterialSharedPtr material;
         MaterialEffectSharedPtr materialEffect;
-        VisualEffectInstanceSharedPtr materialEffectInstance;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(PlanarShadowEffect);

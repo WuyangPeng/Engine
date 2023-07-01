@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:23)
+///	版本：0.9.1.0 (2023/06/29 20:13)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_3D_IMPL_H
 #define RENDERING_RESOURCES_TEXTURE_3D_IMPL_H
@@ -26,8 +26,8 @@ namespace Rendering
         using ParentType = TextureImpl;
 
     public:
-        explicit Texture3DImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
-        Texture3DImpl(DataFormatType format, int width, int height, int thickness, bool hasMipmaps);
+        explicit Texture3DImpl(CoreTools::DisableNotThrow disableNotThrow);
+        Texture3DImpl(DataFormatType format, int width, int height, int thickness, bool hasMipMaps);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -45,12 +45,12 @@ namespace Rendering
         NODISCARD int GetNumLevelBytes(int level) const override;
         NODISCARD int GetLevelOffset(int item, int level) const override;
 
-        NODISCARD bool HasMipmaps() const noexcept override;
+        NODISCARD bool HasMipMaps() const noexcept override;
 
-        void AutogenerateMipmaps() noexcept override;
-        NODISCARD bool WantAutogenerateMipmaps() const noexcept override;
+        void AutoGenerateMipMaps() noexcept override;
+        NODISCARD bool WantAutoGenerateMipMaps() const noexcept override;
 
-        NODISCARD int GetNumSubresources() const noexcept override;
+        NODISCARD int GetNumSubResources() const noexcept override;
         NODISCARD int GetIndex(int item, int level) const override;
 
     private:
@@ -58,8 +58,8 @@ namespace Rendering
         using TextureLevelData = TextureLevelData<3>;
 
     private:
-        void LoadLevelData(CoreTools::BufferSource& source) override;
-        void SaveLevelData(CoreTools::BufferTarget& target) const override;
+        void LoadLevelData(BufferSource& source) override;
+        void SaveLevelData(BufferTarget& target) const override;
         NODISCARD int GetLevelDataStreamingSize() const override;
 
         void SaveLevelDataToFile(WriteFileManager& outFile) const override;

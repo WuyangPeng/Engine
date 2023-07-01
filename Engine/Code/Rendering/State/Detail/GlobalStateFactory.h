@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:25)
+///	版本：0.9.1.0 (2023/06/29 11:06)
 
 #ifndef RENDERING_STATE_GLOBAL_STATE_FACTORY_H
 #define RENDERING_STATE_GLOBAL_STATE_FACTORY_H
@@ -13,7 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/Base/BaseFwd.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/State/StateInternalFwd.h"
 
 #include <memory>
@@ -25,11 +25,16 @@ namespace Rendering
     {
     public:
         using ClassType = GlobalStateFactory;
+
         using GlobalStateSharedPtr = std::shared_ptr<GlobalStateImpl>;
         using RendererObjectBridgeSharedPtr = std::shared_ptr<RendererObjectBridge>;
 
     public:
-        NODISCARD static GlobalStateSharedPtr Create(RendererTypes rendererTypes, const std::string& blendStateName, const std::string& depthStencilStateName, const std::string& rasterizerStateName, const RendererObjectBridgeSharedPtr& rendererObjectBridge);
+        NODISCARD static GlobalStateSharedPtr Create(RendererTypes rendererTypes,
+                                                     const std::string& blendStateName,
+                                                     const std::string& depthStencilStateName,
+                                                     const std::string& rasterizerStateName,
+                                                     const RendererObjectBridgeSharedPtr& rendererObjectBridge);
     };
 }
 

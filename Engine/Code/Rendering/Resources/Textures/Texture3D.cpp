@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:29)
+///	版本：0.9.1.0 (2023/06/29 20:34)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,8 +21,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTexture3.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/DataFormat.h"
 #include "Rendering/Resources/Detail/Textures/Texture3DImpl.h"
 
@@ -32,11 +31,11 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Texture3D);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture3D);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture3D);
 
-Rendering::Texture3D::Texture3D(DataFormatType format, int width, int height, int thickness, bool hasMipmaps)
-    : ParentType{ ImplType::GetTotalElements(1, width, height, thickness, hasMipmaps),
+Rendering::Texture3D::Texture3D(DataFormatType format, int width, int height, int thickness, bool hasMipMaps)
+    : ParentType{ ImplType::GetTotalElements(1, width, height, thickness, hasMipMaps),
                   DataFormat::GetNumBytesPerStruct(format),
                   GraphicsObjectType::Texture3 },
-      impl{ format, width, height, thickness, hasMipmaps }
+      impl{ format, width, height, thickness, hasMipMaps }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -70,7 +69,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture3D, GetWidth, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture3D, GetHeight, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture3D, GetThickness, int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, HasMipmaps, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, HasMipMaps, bool)
 
 void Rendering::Texture3D::ReadFromFile(ReadFileManager& inFile)
 {
@@ -96,9 +95,9 @@ void Rendering::Texture3D::SaveToFile(WriteFileManager& outFile) const
     ParentType::SaveStorageDataToFile(outFile);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, AutogenerateMipmaps, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, WantAutogenerateMipmaps, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, GetNumSubresources, int)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, AutoGenerateMipMaps, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, WantAutoGenerateMipMaps, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture3D, GetNumSubResources, int)
 
 int Rendering::Texture3D::GetIndex(int item, int level) const
 {
@@ -199,8 +198,12 @@ Rendering::Texture3D::RendererObjectSharedPtr Rendering::Texture3D::CreateRender
     switch (rendererTypes)
     {
         case RendererTypes::OpenGL:
+        {
             return std::make_shared<OpenGLTexture3>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        }
         default:
-            return ParentType::CreateRendererObject(rendererTypes);
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
+        }
     }
 }

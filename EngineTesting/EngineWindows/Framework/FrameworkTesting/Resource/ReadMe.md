@@ -91,7 +91,7 @@
 （13）ObjectLogicManagerInterface
 （14）ObjectLogicManager
 （15）ObjectLogicInterface
-（16）ArtificialIntellegenceInterface
+（16）ArtificialIntelligenceInterface
 （17）InputManagerInterface
 （18）InputManagerDetail
 （19）PhysicalModellingManagerInterface
@@ -157,5 +157,15 @@ ConsoleFrame框架单元测试模块，目前包含：
 （1）ConsoleProcess
 （2）ConsoleCallBackInterface
 （3）ConsoleFrameBuild
+
+----------------------------
+14. 工程（Project）
+
+ Project单元测试模块，目前包含：
+（1）ProjectName：ProjectNameTesting。
+（2）中间层：GUIProjectManagerTesting、
+			 InputProjectManagerTesting、
+			 ResourceProjectManagerTesting、
+			 SystemProjectManagerTesting。
 
 ----------------------------

@@ -28,5 +28,8 @@ System::String CoreTools::DefaultSharedPtrUsingParsing::GenerateSharedPtrUsing()
     auto content = GenerateSharedPtr(TextParsing::gBase);
     content += GenerateSharedPtrContainer(TextParsing::gBase);
 
+    content += GenerateIndentation();
+    content += SYSTEM_TEXT("using CSVContent = CoreTools::CSVContent;\n");
+
     return content;
 }

@@ -10,7 +10,7 @@
 #ifndef FRAMEWORK_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_H
 
-#include "ArtificialIntellegenceInterface.h"
+#include "ArtificialIntelligenceInterface.h"
 #include "AudioManagerInterface.h"
 #include "CameraControllerMiddleLayerDetail.h"
 #include "CameraModelMiddleLayer.h"

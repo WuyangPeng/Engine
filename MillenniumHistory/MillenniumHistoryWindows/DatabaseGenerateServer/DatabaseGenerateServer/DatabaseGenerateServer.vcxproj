@@ -634,7 +634,6 @@ xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineeri
     <None Include="Resource\AncientBooksCsv\Book.csv" />
     <None Include="Resource\AncientBooksCsv\Calendar.csv" />
     <None Include="Resource\AncientBooksCsv\Category.csv" />
-    <None Include="Resource\AncientBooksCsv\Chapter.csv" />
     <None Include="Resource\AncientBooksCsv\Character.csv" />
     <None Include="Resource\AncientBooksCsv\Country.csv" />
     <None Include="Resource\AncientBooksCsv\Day.csv" />
@@ -654,7 +653,6 @@ xcopy "$(ProjectDir)/Resource/AncientBooksCsv/*.*" "$(MillenniumHistoryEngineeri
     <None Include="Resource\AncientBooks\Book.xlsx" />
     <None Include="Resource\AncientBooks\Calendar.xlsx" />
     <None Include="Resource\AncientBooks\Category.xlsx" />
-    <None Include="Resource\AncientBooks\Chapter.xlsx" />
     <None Include="Resource\AncientBooks\Character.xlsx" />
     <None Include="Resource\AncientBooks\Country.xlsx" />
     <None Include="Resource\AncientBooks\Day.xlsx" />

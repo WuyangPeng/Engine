@@ -301,16 +301,16 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderersSuite.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderingDeviceTesting.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderingEnvironmentTesting.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RendererEngineSuite\RendererEngineSuite.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RendererEngineSuite\RenderingDeviceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RendererEngineSuite\RenderingEnvironmentTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderingEnvironmentMessage.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\TestingHelper.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderingDeviceTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderingEnvironmentTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\RendererEngineSuite\RenderingDeviceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\RendererEngineSuite\RenderingEnvironmentTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderingEnvironmentMessage.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\TestingLib.cpp" />

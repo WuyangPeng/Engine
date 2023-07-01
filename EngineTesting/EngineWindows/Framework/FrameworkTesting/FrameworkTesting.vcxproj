@@ -178,7 +178,8 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -194,7 +195,8 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -214,7 +216,8 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -234,7 +237,8 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -250,7 +254,8 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -266,7 +271,8 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -286,7 +292,8 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -306,7 +313,8 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Project.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -315,6 +323,7 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\FrameworkTesting.json" />
     <None Include="Configuration\Log.json" />
+    <None Include="Configuration\Project.json" />
     <None Include="Configuration\Renderer.json" />
     <None Include="Configuration\Testing.json" />
     <None Include="Resource\ReadMe.md" />
@@ -372,7 +381,7 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MainFunctionHelperSuite.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\OpenGLGlutMainFunctionHelperTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\WindowMainFunctionHelperTesting.h" />
-    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ArtificialIntellegenceInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ArtificialIntelligenceInterfaceTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\AudioManagerInterfaceTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraControllerMiddleLayerTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraMiddleLayerTesting.h" />
@@ -415,6 +424,15 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutFrameSuite.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\Detail\GUIProjectManagerMock.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\Detail\ResourceProjectManagerMock.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\Detail\SystemProjectManagerMock.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\GUIProjectManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\InputProjectManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\ProjectNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\ProjectSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\ResourceProjectManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\SystemProjectManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\TestingHelper.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowCreateParameterTesting.h" />
@@ -484,7 +502,7 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MainFunctionHelperBaseTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\OpenGLGlutMainFunctionHelperTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\WindowMainFunctionHelperTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ArtificialIntellegenceInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ArtificialIntelligenceInterfaceTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\AudioManagerInterfaceTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraControllerMiddleLayerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraMiddleLayerTesting.cpp" />
@@ -524,6 +542,14 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutFrameBuildTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\Detail\GUIProjectManagerMock.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\Detail\ResourceProjectManagerMock.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\Detail\SystemProjectManagerMock.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\GUIProjectManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\InputProjectManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\ProjectNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\ResourceProjectManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ProjectSuite\SystemProjectManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingMain.cpp" />

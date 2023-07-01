@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:26)
+///	版本：0.9.1.0 (2023/06/29 17:12)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,6 +18,19 @@
 
 #include <gsl/util>
 #include <string>
+
+Rendering::ResourceImpl::ResourceImpl() noexcept
+    : numElements{ 0 },
+      elementSize{ 0 },
+      numBytes{ 0 },
+      usage{ UsageType::Immutable },
+      copy{ CopyType::None },
+      offset{ 0 },
+      numActiveElements{ 0 },
+      storage{}
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
 
 Rendering::ResourceImpl::ResourceImpl(int numElements, int elementSize)
     : numElements{ 0 < numElements ? numElements : 0 },
@@ -44,7 +57,7 @@ Rendering::ResourceImpl::ResourceImpl(int numElements, int elementSize, const St
 {
     if (boost::numeric_cast<int>(storage.size()) != numBytes)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("数据和数组大小不一致"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("数据和数组大小不一致"s))
     }
 
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -172,7 +185,7 @@ void Rendering::ResourceImpl::SetOffset(int aOffset)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效的offset值。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("无效的offset值。"s))
     }
 }
 
@@ -200,20 +213,20 @@ void Rendering::ResourceImpl::SetNumActiveElements(int aNumActiveElements)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效的numActiveElements值。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("无效的numActiveElements值。"s))
     }
 }
 
-void Rendering::ResourceImpl::SetNewData(const StorageType& newStorage)
+void Rendering::ResourceImpl::SetNewData(const StorageType& aStorage)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    if (boost::numeric_cast<int>(newStorage.size()) != numBytes)
+    if (boost::numeric_cast<int>(aStorage.size()) != numBytes)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("数据和数组大小不一致"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("数据和数组大小不一致"s))
     }
 
-    storage = newStorage;
+    storage = aStorage;
 }
 
 const char* Rendering::ResourceImpl::GetOriginalData() const
@@ -222,7 +235,7 @@ const char* Rendering::ResourceImpl::GetOriginalData() const
 
     if (storage.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("数据为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("数据为空。"s))
     }
 
     return storage.data();

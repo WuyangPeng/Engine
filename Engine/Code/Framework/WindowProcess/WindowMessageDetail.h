@@ -22,7 +22,7 @@
 #include "System/Windows/WindowsUser.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "Rendering/Renderers/EnvironmentParameter.h"
+#include "Rendering/RendererEngine/EnvironmentParameter.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/WindowCreate/WindowSize.h"
 

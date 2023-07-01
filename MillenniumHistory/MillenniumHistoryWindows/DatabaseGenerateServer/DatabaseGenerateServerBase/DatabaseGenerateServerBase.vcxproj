@@ -694,7 +694,6 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEng
     <None Include="Resource\AncientBooksInput\Book.xlsx" />
     <None Include="Resource\AncientBooksInput\Calendar.xlsx" />
     <None Include="Resource\AncientBooksInput\Category.xlsx" />
-    <None Include="Resource\AncientBooksInput\Chapter.xlsx" />
     <None Include="Resource\AncientBooksInput\Character.xlsx" />
     <None Include="Resource\AncientBooksInput\Country.xlsx" />
     <None Include="Resource\AncientBooksInput\Day.xlsx" />
@@ -714,7 +713,6 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEng
     <None Include="Resource\AncientBooks\Book.csv" />
     <None Include="Resource\AncientBooks\Calendar.csv" />
     <None Include="Resource\AncientBooks\Category.csv" />
-    <None Include="Resource\AncientBooks\Chapter.csv" />
     <None Include="Resource\AncientBooks\Character.csv" />
     <None Include="Resource\AncientBooks\Country.csv" />
     <None Include="Resource\AncientBooks\Day.csv" />
@@ -746,6 +744,9 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEng
     <Text Include="Resource\Todo\Level 9.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\ArticleEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\DatabaseEntity.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\DatabaseEntityFwd.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseGenerateServerBaseLib.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\AncientBooks.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\AncientBooksContainer.h" />
@@ -766,9 +767,6 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEng
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\CategoryBase.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\CategoryContainer.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\CategoryContainerDetail.h" />
-    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\Chapter.h" />
-    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\ChapterBase.h" />
-    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\ChapterContainer.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\ChapterContainerDetail.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\Character.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\CharacterBase.h" />
@@ -846,9 +844,6 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEng
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\Category.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\CategoryBase.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\CategoryContainer.cpp" />
-    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\Chapter.cpp" />
-    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\ChapterBase.cpp" />
-    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\ChapterContainer.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\Character.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\CharacterBase.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\CharacterContainer.cpp" />
@@ -894,6 +889,7 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEng
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\Year.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\YearBase.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\YearContainer.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\ArticleEntity.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DllLib.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

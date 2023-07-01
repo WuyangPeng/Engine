@@ -13,8 +13,8 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
-#include "Rendering/Renderers/Renderer.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/RendererEngine/Renderer.h"
+#include "Rendering/RendererEngine/RendererManager.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
 Framework::PixelScreenTesting::PixelScreenTesting(const OStreamShared& stream)

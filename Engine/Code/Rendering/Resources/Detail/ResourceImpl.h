@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:23)
+///	版本：0.9.1.0 (2023/06/29 17:08)
 
 #ifndef RENDERING_RESOURCES_RESOURCE_IMPL_H
 #define RENDERING_RESOURCES_RESOURCE_IMPL_H
@@ -24,11 +24,13 @@ namespace Rendering
     {
     public:
         using ClassType = ResourceImpl;
+
         using StorageType = std::vector<char>;
         using SpanIterator = CoreTools::SpanIterator<StorageType::iterator>;
         using ConstSpanIterator = CoreTools::SpanIterator<StorageType::const_iterator>;
 
     public:
+        ResourceImpl() noexcept;
         ResourceImpl(int numElements, int elementSize);
         ResourceImpl(int numElements, int elementSize, const StorageType& storage);
 
@@ -61,7 +63,7 @@ namespace Rendering
         void Save(CoreTools::BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const;
 
-        void SetNewData(const StorageType& newStorage);
+        void SetNewData(const StorageType& aStorage);
 
         NODISCARD const char* GetOriginalData() const;
         NODISCARD const char* GetOriginalData(int aOffset) const;

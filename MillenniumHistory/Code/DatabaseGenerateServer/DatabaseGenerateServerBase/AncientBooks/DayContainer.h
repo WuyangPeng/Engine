@@ -24,11 +24,13 @@ namespace AncientBooks
     {
     public:
         using ClassType = DayContainer;
+
         using ConstDayBaseSharedPtr = std::shared_ptr<const DayBase>;
         using Container = std::vector<ConstDayBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit DayContainer(const CoreTools::CSVContent& csvContent);
+        explicit DayContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,9 @@ namespace AncientBooks
         NODISCARD Container GetDay(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container day;

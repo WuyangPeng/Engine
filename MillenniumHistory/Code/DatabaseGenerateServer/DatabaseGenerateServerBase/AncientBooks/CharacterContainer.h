@@ -24,11 +24,13 @@ namespace AncientBooks
     {
     public:
         using ClassType = CharacterContainer;
+
         using ConstCharacterBaseSharedPtr = std::shared_ptr<const CharacterBase>;
         using Container = std::vector<ConstCharacterBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit CharacterContainer(const CoreTools::CSVContent& csvContent);
+        explicit CharacterContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,9 @@ namespace AncientBooks
         NODISCARD Container GetCharacter(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container character;

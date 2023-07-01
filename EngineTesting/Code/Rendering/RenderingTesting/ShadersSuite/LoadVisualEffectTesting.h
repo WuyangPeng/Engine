@@ -27,15 +27,6 @@ namespace Rendering
 
     private:
         void MainTest();
-        void CreateVisualEffectFile();
-        void VertexShaderTest();
-        void PixelShaderTest();
-        void AlphaStateTest();
-        void CullStateTest();
-        void DepthStateTest();
-        void OffsetStateTest();
-        void StencilStateTest();
-        void WireStateTest();
 
         void DoRunUnitTest() override;
     };

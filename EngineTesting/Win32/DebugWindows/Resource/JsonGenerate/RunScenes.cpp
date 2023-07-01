@@ -31,9 +31,9 @@ void JsonConfigure::RunScenesContainer::Parsing(const CoreTools::JsonRow& jsonRo
 {
     const auto dataRow = jsonRow.GetJsonRowContainer(SYSTEM_TEXT("data"s));
 
-    for (const auto& value : dataRow)
+    for (const auto& element : dataRow)
     {
-        data.emplace_back(std::make_shared<RunScenes::Data>(value));
+        data.emplace_back(std::make_shared<RunScenes::Data>(element));
     }
 
     std::ranges::sort(data, [](const auto& lhs, const auto& rhs) noexcept {
@@ -110,9 +110,9 @@ void JsonConfigure::RunScenes::Data::Parsing(const CoreTools::JsonRow& jsonRow)
 {
     const auto boundsRow = jsonRow.GetJsonRowContainer(SYSTEM_TEXT("bounds"s));
 
-    for (const auto& value : boundsRow)
+    for (const auto& element : boundsRow)
     {
-        bounds.emplace_back(std::make_shared<RunScenes::Bounds>(value));
+        bounds.emplace_back(std::make_shared<RunScenes::Bounds>(element));
     }
 
     std::ranges::sort(bounds, [](const auto& lhs, const auto& rhs) noexcept {
@@ -131,9 +131,9 @@ void JsonConfigure::RunScenes::Data::Parsing(const CoreTools::JsonRow& jsonRow)
     }
     const auto terrainsRow = jsonRow.GetJsonRowContainer(SYSTEM_TEXT("terrains"s));
 
-    for (const auto& value : terrainsRow)
+    for (const auto& element : terrainsRow)
     {
-        terrains.emplace_back(std::make_shared<RunScenes::Terrains>(value));
+        terrains.emplace_back(std::make_shared<RunScenes::Terrains>(element));
     }
 
     std::ranges::sort(terrains, [](const auto& lhs, const auto& rhs) noexcept {

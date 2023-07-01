@@ -115,6 +115,16 @@ bool Rendering::OpenGLBuffer::Update()
     return true;
 }
 
+bool Rendering::OpenGLBuffer::Update(MAYBE_UNUSED int level) noexcept
+{
+    return true;
+}
+
+bool Rendering::OpenGLBuffer::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level) noexcept
+{
+    return true;
+}
+
 bool Rendering::OpenGLBuffer::CopyCpuToGpu()
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -135,6 +145,7 @@ bool Rendering::OpenGLBuffer::CopyCpuToGpu()
         System::SetGLBufferSubData(type, offsetInBytes, numActiveBytes, source);
         System::SetGLBindBuffer(type, 0);
     }
+
     return true;
 }
 

@@ -10,7 +10,7 @@
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_FRAME_BUILD_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_FRAME_BUILD_H
 
-#include "Rendering/Renderers/RendererParameter.h"
+#include "Rendering/RendererEngine/RendererParameter.h"
 #include "Framework/Application/GLUTApplicationInformation.h"
 #include "Framework/MainFunctionHelper/MainFunctionHelperFwd.h"
 

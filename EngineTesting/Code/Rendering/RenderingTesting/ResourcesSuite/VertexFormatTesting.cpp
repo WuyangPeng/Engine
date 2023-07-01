@@ -17,7 +17,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Buffers/VertexFormat.h"
 
 Rendering::VertexFormatTesting::VertexFormatTesting(const OStreamShared& stream)
@@ -37,12 +36,11 @@ void Rendering::VertexFormatTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    RendererManager::Create();
+
 
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
 
-    RendererManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

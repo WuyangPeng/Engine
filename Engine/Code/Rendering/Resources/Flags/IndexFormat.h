@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:24)
+///	版本：0.9.1.0 (2023/06/29 11:27)
 
 #ifndef RENDERING_RESOURCES_INDEX_FORMAT_H
 #define RENDERING_RESOURCES_INDEX_FORMAT_H
@@ -21,27 +21,27 @@ namespace Rendering
         Zero = 0x00000000,
 
         None = 0xFFFFFFFF,
-        Polypoint = 0x00000001,
-        PolysegmentDisjoint = 0x00000002,
-        PolysegmentContiguous = 0x00000004,
-        Trimesh = 0x00000008,
-        Tristrip = 0x00000010,
-        PolysegmentDisjointAdj = 0x00000020,
-        PolysegmentContiguousAdj = 0x00000040,
-        TrimeshAdj = 0x00000080,
-        TristripAdj = 0x00000100,
+        PolyPoint = 0x00000001,
+        PolySegmentDisjoint = 0x00000002,
+        PolySegmentContiguous = 0x00000004,
+        TriMesh = 0x00000008,
+        TriStrip = 0x00000010,
+        PolySegmentDisjointAdj = 0x00000020,
+        PolySegmentContiguousAdj = 0x00000040,
+        TriMeshAdj = 0x00000080,
+        TriStripAdj = 0x00000100,
 
-        HasPoints = Polypoint,
+        HasPoints = PolyPoint,
 
-        HasSegments = PolysegmentDisjoint |
-                      PolysegmentContiguous |
-                      PolysegmentDisjointAdj |
-                      PolysegmentContiguousAdj,
+        HasSegments = PolySegmentDisjoint |
+                      PolySegmentContiguous |
+                      PolySegmentDisjointAdj |
+                      PolySegmentContiguousAdj,
 
-        HasTriangles = Trimesh |
-                       Tristrip |
-                       TrimeshAdj |
-                       TristripAdj,
+        HasTriangles = TriMesh |
+                       TriStrip |
+                       TriMeshAdj |
+                       TriStripAdj,
 
         NumTypes = 9
     };

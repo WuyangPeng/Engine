@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = Source;
         using ParentType = SourceBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Source(const CoreTools::CSVRow& csvRow);
+        explicit Source(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -33,13 +35,13 @@ namespace AncientBooks
 
         NODISCARD int GetId() const noexcept override;
 
-        NODISCARD System::String GetName() const override;
+        NODISCARD String GetName() const override;
 
         NODISCARD int GetSort() const noexcept override;
 
     private:
         int id;  // Id
-        System::String name;  // 出处
+        String name;  // 出处
         int sort;  // 排序
     };
 }

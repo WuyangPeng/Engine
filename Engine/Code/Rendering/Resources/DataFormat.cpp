@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:20)
+///	版本：0.9.1.0 (2023/06/29 12:33)
 
 #include "Rendering/RenderingExport.h"
 
@@ -386,7 +386,7 @@ int Rendering::DataFormat::GetNumChannels(DataFormatType type)
 
 Rendering::ChannelType Rendering::DataFormat::GetChannelType(DataFormatType type)
 {
-    static const std::array<Rendering::ChannelType, numFormats> channelType{
+    static const std::array<ChannelType, numFormats> channelType{
         ChannelType::UnSupported,  // Unknown
         ChannelType::UnSupported,  // R32G32B32A32Typeless
         ChannelType::Float,  // R32G32B32A32Float
@@ -758,5 +758,3 @@ bool Rendering::DataFormat::IsSupported(DataFormatType type)
 
     return supported.at(System::EnumCastUnderlying(type));
 }
-
- 

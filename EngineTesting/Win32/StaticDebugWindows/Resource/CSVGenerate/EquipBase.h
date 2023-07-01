@@ -26,6 +26,11 @@ namespace CSVConfigure
     public:
         using ClassType = EquipBase;
 
+        using String = System::String;
+        using BoolContainer = std::deque<bool>;
+        using BoolContainerConstIter = BoolContainer::const_iterator;
+        using ConstHeroSharedPtr = std::shared_ptr<const HeroMappingType>;
+
     public:
         EquipBase() noexcept = default;
         explicit EquipBase(int key) noexcept;
@@ -46,20 +51,20 @@ namespace CSVConfigure
 
         NODISCARD virtual int GetReward() const noexcept;
 
-        NODISCARD virtual System::String GetEquipName() const;
+        NODISCARD virtual String GetEquipName() const;
 
         NODISCARD virtual System::TChar GetLogo() const noexcept;
 
         NODISCARD virtual CoreTools::Vector3 GetPosition() const noexcept;
 
-        NODISCARD virtual std::deque<bool> GetMask() const;
+        NODISCARD virtual BoolContainer GetMask() const;
         NODISCARD virtual int GetMaskCount() const;
         NODISCARD virtual bool GetMask(int index) const;
-        NODISCARD virtual std::deque<bool>::const_iterator GetMaskBegin() const;
-        NODISCARD virtual std::deque<bool>::const_iterator GetMaskEnd() const;
+        NODISCARD virtual BoolContainerConstIter GetMaskBegin() const;
+        NODISCARD virtual BoolContainerConstIter GetMaskEnd() const;
 
         NODISCARD virtual int GetHeroId() const noexcept;
-        NODISCARD virtual std::shared_ptr<const HeroMappingType> GetHeroId(const CSVConfigureContainer& csvContainer) const;
+        NODISCARD virtual ConstHeroSharedPtr GetHeroId(const CSVConfigureContainer& csvContainer) const;
 
     private:
         int key{};

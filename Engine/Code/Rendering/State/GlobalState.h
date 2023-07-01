@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:26)
+///	版本：0.9.1.0 (2023/06/29 11:12)
 
 #ifndef RENDERING_STATE_GLOBAL_STATE_H
 #define RENDERING_STATE_GLOBAL_STATE_H
@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/Base/BaseFwd.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/State/StateInternalFwd.h"
 
 #include <memory>
@@ -29,6 +29,7 @@ namespace Rendering
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(GlobalState);
+
         using BlendStateSharedPtr = std::shared_ptr<BlendState>;
         using DepthStencilStateSharedPtr = std::shared_ptr<DepthStencilState>;
         using RasterizerStateSharedPtr = std::shared_ptr<RasterizerState>;
@@ -54,6 +55,10 @@ namespace Rendering
         NODISCARD BlendStateSharedPtr GetDefaultBlendState() noexcept;
         NODISCARD DepthStencilStateSharedPtr GetDefaultDepthStencilState() noexcept;
         NODISCARD RasterizerStateSharedPtr GetDefaultRasterizerState() noexcept;
+
+        void SetDefaultBlendState();
+        void SetDefaultDepthStencilState();
+        void SetDefaultRasterizerState();
 
     private:
         PackageType impl;

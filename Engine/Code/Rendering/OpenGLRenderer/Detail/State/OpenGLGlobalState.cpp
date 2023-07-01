@@ -12,7 +12,7 @@
 #include "OpenGLGlobalState.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Base/RendererObject.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/State/BlendState.h"
 #include "Rendering/State/DepthStencilState.h"
 #include "Rendering/State/RasterizerState.h"

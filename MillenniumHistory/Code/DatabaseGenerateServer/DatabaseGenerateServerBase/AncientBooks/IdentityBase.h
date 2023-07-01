@@ -22,6 +22,8 @@ namespace AncientBooks
     public:
         using ClassType = IdentityBase;
 
+        using String = System::String;
+
     public:
         IdentityBase() noexcept = default;
         explicit IdentityBase(int key) noexcept;
@@ -38,7 +40,7 @@ namespace AncientBooks
 
         NODISCARD virtual int GetId() const noexcept;
 
-        NODISCARD virtual System::String GetIdentity() const;
+        NODISCARD virtual String GetIdentity() const;
 
     private:
         int key{};

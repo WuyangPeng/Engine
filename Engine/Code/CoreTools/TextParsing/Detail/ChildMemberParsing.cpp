@@ -48,12 +48,12 @@ System::String CoreTools::ChildMemberParsing::GenerateMember() const
     const auto count = csvHead.GetCount();
     for (auto index = 0; index < count; ++index)
     {
-        const auto actualType = csvHead.GetActualType(index);
+        const auto abbreviation = csvHead.GetAbbreviation(index);
         const auto variableName = csvHead.GetVariableName(index);
         const auto annotation = StringConversion::Utf8ConversionStandard(csvHead.GetAnnotation(index));
 
         content += GenerateIndentation(1);
-        content += actualType;
+        content += abbreviation;
 
         content += TextParsing::gSpace;
         content += variableName;

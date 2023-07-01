@@ -10,6 +10,6 @@
 #ifndef RENDERING_DX9_RENDERER_H
 #define RENDERING_DX9_RENDERER_H
  
-#include "Dx9RendererData.h"
+
 
 #endif // RENDERING_DX9_RENDERER_H

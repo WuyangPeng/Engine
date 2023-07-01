@@ -36,11 +36,11 @@ AncientBooks::SexagenaryCycleContainer::Container AncientBooks::SexagenaryCycleC
 
     Container result{};
 
-    for (const auto& value : sexagenaryCycle)
+    for (const auto& element : sexagenaryCycle)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

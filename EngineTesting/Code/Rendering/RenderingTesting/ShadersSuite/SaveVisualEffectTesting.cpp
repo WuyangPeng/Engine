@@ -16,9 +16,6 @@
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Shaders/LoadVisualEffect.h"
-#include "Rendering/Shaders/SaveVisualEffect.h"
 
 Rendering::SaveVisualEffectTesting::SaveVisualEffectTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -37,13 +34,9 @@ void Rendering::SaveVisualEffectTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    RendererManager::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(CreateVisualEffectFile);
     ASSERT_NOT_THROW_EXCEPTION_0(SaveFile);
     ASSERT_NOT_THROW_EXCEPTION_0(SaveTest);
-
-    RendererManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

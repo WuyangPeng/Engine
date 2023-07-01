@@ -21,7 +21,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 
@@ -42,14 +41,14 @@ void Rendering::BufferTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    RendererManager::Create();
+ 
 
     ASSERT_NOT_THROW_EXCEPTION_0(VertexBufferTest);
     ASSERT_NOT_THROW_EXCEPTION_0(IndexBufferTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FileTest);
 
-    RendererManager::Destroy();
+ 
 
     CoreTools::InitTerm::ExecuteTerminator();
 }
@@ -60,14 +59,14 @@ void Rendering::BufferTesting::VertexBufferTest() noexcept
 
 void Rendering::BufferTesting::IndexBufferTest()
 {
-    auto firstIndexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, 5);
+    auto firstIndexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, 5);
 
     ASSERT_EQUAL(firstIndexBuffer->GetElementSize(), 0);
 
     ASSERT_EQUAL(firstIndexBuffer->GetNumBytes(), 0);
     ASSERT_EQUAL(firstIndexBuffer->GetOffset(), 0);
 
-    auto secondIndexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, 7, 8);
+    auto secondIndexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, 7, 8);
 
     ASSERT_EQUAL(secondIndexBuffer->GetElementSize(), 8);
 

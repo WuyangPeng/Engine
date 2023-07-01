@@ -36,11 +36,11 @@ AncientBooks::GatherContainer::Container AncientBooks::GatherContainer::GetGathe
 
     Container result{};
 
-    for (const auto& value : gather)
+    for (const auto& element : gather)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

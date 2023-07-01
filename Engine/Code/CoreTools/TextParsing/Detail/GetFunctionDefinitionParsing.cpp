@@ -88,7 +88,7 @@ System::String CoreTools::GetFunctionDefinitionParsing::GenerateGetFunctionArray
     const auto csvHead = GetCSVHead();
 
     auto content = actualType;
-    content += TextParsing::gConstIterator;
+    content += SYSTEM_TEXT("ConstIter");
     content += TextParsing::gSpace;
     content += csvHead.GetNameSpace();
     content += TextParsing::gDoubleColon;

@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-CSVConfigure::SkillContainer::SkillContainer(const CoreTools::CSVContent& csvContent)
+CSVConfigure::SkillContainer::SkillContainer(const CSVContent& csvContent)
     : skill{}
 {
     Parsing(csvContent);
@@ -24,10 +24,18 @@ CSVConfigure::SkillContainer::SkillContainer(const CoreTools::CSVContent& csvCon
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void CSVConfigure::SkillContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void CSVConfigure::SkillContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("skill表开始载入……"));
 
+    Load(csvContent);
+    Unique();
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("skill表结束载入……"));
+}
+
+void CSVConfigure::SkillContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -41,7 +49,10 @@ void CSVConfigure::SkillContainer::Parsing(const CoreTools::CSVContent& csvConte
     std::ranges::sort(skill, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
+}
 
+void CSVConfigure::SkillContainer::Unique()
+{
     const auto iter = std::ranges::unique(skill, [](const auto& lhs, const auto& rhs) noexcept {
         if((*lhs).GetKey() == (*rhs).GetKey())
         {
@@ -57,12 +68,9 @@ void CSVConfigure::SkillContainer::Parsing(const CoreTools::CSVContent& csvConte
 
     if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("skill表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-
         skill.erase(iter.begin(), iter.end());
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("skill表结束载入……"));
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, SkillContainer)

@@ -13,7 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/ObjectSystems/Object.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
 
 namespace Rendering
@@ -34,7 +34,7 @@ namespace Rendering
         explicit GlobalEffect(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
 
     public:
-        virtual void Draw(Renderer& renderer, VisibleSet& visibleSet) = 0;
+        virtual void Draw(BaseRenderer& renderer, VisibleSet& visibleSet) = 0;
     };
 
 #include STSTEM_WARNING_PUSH

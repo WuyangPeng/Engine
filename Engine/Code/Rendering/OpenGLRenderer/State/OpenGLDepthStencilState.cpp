@@ -60,3 +60,66 @@ void Rendering::OpenGLDepthStencilState::Enable() noexcept
         System::DisableGLState(System::OpenGLEnable::StencilTest);
     }
 }
+
+bool Rendering::OpenGLDepthStencilState::Update(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLDepthStencilState::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLDepthStencilState::CopyGpuToCpu()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLDepthStencilState::CopyGpuToCpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLDepthStencilState::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLDepthStencilState::CopyCpuToGpu()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLDepthStencilState::CopyCpuToGpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLDepthStencilState::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLDepthStencilState::GetNumActiveElements()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}

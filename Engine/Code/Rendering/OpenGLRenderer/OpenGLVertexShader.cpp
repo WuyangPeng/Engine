@@ -12,7 +12,7 @@
 #include "OpenGLVertexShader.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::PdrVertexShader::PdrVertexShader(Renderer*, MAYBE_UNUSED const VertexShader* vshader) noexcept
+Rendering::PdrVertexShader::PdrVertexShader(BaseRenderer*) noexcept
     : ParentType{}, shader{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -20,13 +20,12 @@ Rendering::PdrVertexShader::PdrVertexShader(Renderer*, MAYBE_UNUSED const Vertex
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PdrVertexShader)
 
-void Rendering::PdrVertexShader::Enable(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const VertexShader* vshader, MAYBE_UNUSED const ShaderParameters* parameters) noexcept
+void Rendering::PdrVertexShader::Enable(MAYBE_UNUSED BaseRenderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 }
 
-void Rendering::PdrVertexShader::Disable(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const VertexShader* vshader, MAYBE_UNUSED const ShaderParameters* parameters) noexcept
+void Rendering::PdrVertexShader::Disable(MAYBE_UNUSED BaseRenderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 }
- 

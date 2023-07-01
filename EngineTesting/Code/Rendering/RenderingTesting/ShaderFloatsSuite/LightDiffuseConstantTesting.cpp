@@ -17,7 +17,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
@@ -40,7 +39,6 @@ void Rendering::LightDiffuseConstantTesting::DoRunUnitTest()
 void Rendering::LightDiffuseConstantTesting::MainTest()
 {
     CameraManager::Create();
-    RendererManager::Create();
 
     CoreTools::InitTerm::ExecuteInitializer();
 
@@ -51,7 +49,6 @@ void Rendering::LightDiffuseConstantTesting::MainTest()
 
     CoreTools::InitTerm::ExecuteTerminator();
 
-    RendererManager::Destroy();
     CameraManager::Destroy();
 }
 

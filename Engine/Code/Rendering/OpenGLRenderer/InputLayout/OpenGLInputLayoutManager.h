@@ -33,12 +33,12 @@ namespace Rendering
     public:
         explicit OpenGLInputLayoutManager(CoreTools::DisableNotThrow disableNotThrow);
 
-        CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD OpenGLInputLayoutSharedPtr Bind(OpenGLUInt programHandle, OpenGLUInt vertexBufferHandle, const VertexBufferSharedPtr& vertexBuffer);
-        void Unbind(const VertexBufferSharedPtr& vertexBuffer);
-        void UnbindAll() noexcept;
-        NODISCARD bool HasElements() const noexcept;
+        bool Unbind(const VertexBufferSharedPtr& vertexBuffer) override;
+        void UnbindAll() noexcept override;
+        NODISCARD bool HasElements() const noexcept override;
 
     private:
         PackageType impl;

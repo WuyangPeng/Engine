@@ -1,5 +1,24 @@
 {
   "ancientBooksSuite": {
-    "AncientBooksContainerTesting": 1
+    "AncientBooksContainerTesting": 1,
+    "ArticleTesting": 1,
+    "BookTesting": 1,
+    "CalendarTesting": 1,
+    "CategoryTesting": 1,
+    "CharacterTesting": 1,
+    "CountryTesting": 1,
+    "DayTesting": 1,
+    "EmperorTesting": 1,
+    "GatherTesting": 1,
+    "GenusTesting": 1,
+    "GeographicTesting": 1,
+    "IdentityTesting": 1,
+    "ImperialCourtTesting": 1,
+    "MonthTesting": 1,
+    "ReignTitleTesting": 1,
+    "SexagenaryCycleTesting": 1,
+    "SourceTesting": 1,
+    "VersionTesting": 1,
+    "YearTesting": 1
   }
 }

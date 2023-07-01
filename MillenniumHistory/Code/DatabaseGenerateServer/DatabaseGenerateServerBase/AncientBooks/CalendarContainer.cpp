@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-AncientBooks::CalendarContainer::CalendarContainer(const CoreTools::CSVContent& csvContent)
+AncientBooks::CalendarContainer::CalendarContainer(const CSVContent& csvContent)
     : calendar{}
 {
     Parsing(csvContent);
@@ -24,10 +24,18 @@ AncientBooks::CalendarContainer::CalendarContainer(const CoreTools::CSVContent& 
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void AncientBooks::CalendarContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void AncientBooks::CalendarContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("calendar表开始载入……"));
 
+    Load(csvContent);
+    Unique();
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("calendar表结束载入……"));
+}
+
+void AncientBooks::CalendarContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -41,7 +49,10 @@ void AncientBooks::CalendarContainer::Parsing(const CoreTools::CSVContent& csvCo
     std::ranges::sort(calendar, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
+}
 
+void AncientBooks::CalendarContainer::Unique()
+{
     const auto iter = std::ranges::unique(calendar, [](const auto& lhs, const auto& rhs) noexcept {
         if((*lhs).GetKey() == (*rhs).GetKey())
         {
@@ -57,12 +68,10 @@ void AncientBooks::CalendarContainer::Parsing(const CoreTools::CSVContent& csvCo
 
     if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("calendar表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-
         calendar.erase(iter.begin(), iter.end());
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("calendar表结束载入……"));
+    calendar.shrink_to_fit();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, CalendarContainer)

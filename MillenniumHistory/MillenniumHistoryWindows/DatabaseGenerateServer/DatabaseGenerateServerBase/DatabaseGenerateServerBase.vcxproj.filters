@@ -34,6 +34,12 @@
     <Filter Include="资源文件\AncientBooks">
       <UniqueIdentifier>{0778b524-09ff-4c6f-a1a1-f941668c8d00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DatabaseEntity 头文件">
+      <UniqueIdentifier>{e9226211-ad11-49c3-afa0-4af0f3e4e462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseEntity 源文件">
+      <UniqueIdentifier>{3f5abbf2-dac7-48d7-9cd2-83bf256d7625}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
@@ -52,9 +58,6 @@
       <Filter>资源文件\AncientBooksInput</Filter>
     </None>
     <None Include="Resource\AncientBooksInput\Category.xlsx">
-      <Filter>资源文件\AncientBooksInput</Filter>
-    </None>
-    <None Include="Resource\AncientBooksInput\Chapter.xlsx">
       <Filter>资源文件\AncientBooksInput</Filter>
     </None>
     <None Include="Resource\AncientBooksInput\Character.xlsx">
@@ -148,9 +151,6 @@
       <Filter>资源文件\AncientBooks</Filter>
     </None>
     <None Include="Resource\AncientBooks\Category.csv">
-      <Filter>资源文件\AncientBooks</Filter>
-    </None>
-    <None Include="Resource\AncientBooks\Chapter.csv">
       <Filter>资源文件\AncientBooks</Filter>
     </None>
     <None Include="Resource\AncientBooks\Character.csv">
@@ -260,15 +260,6 @@
       <Filter>AncientBooks 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\CategoryContainer.h">
-      <Filter>AncientBooks 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\Chapter.h">
-      <Filter>AncientBooks 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\ChapterBase.h">
-      <Filter>AncientBooks 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\ChapterContainer.h">
       <Filter>AncientBooks 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\Character.h">
@@ -454,6 +445,15 @@
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\YearContainerDetail.h">
       <Filter>AncientBooks 模板文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\ArticleEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\DatabaseEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\DatabaseEntityFwd.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DllLib.cpp">
@@ -570,15 +570,6 @@
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\CategoryContainer.cpp">
       <Filter>AncientBooks 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\Chapter.cpp">
-      <Filter>AncientBooks 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\ChapterBase.cpp">
-      <Filter>AncientBooks 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\ChapterContainer.cpp">
-      <Filter>AncientBooks 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\Character.cpp">
       <Filter>AncientBooks 源文件</Filter>
     </ClCompile>
@@ -641,6 +632,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\AncientBooks\GeographicContainer.cpp">
       <Filter>AncientBooks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\ArticleEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

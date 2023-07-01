@@ -14,7 +14,7 @@
 #include "System/MemoryTools/MemoryHelperDetail.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 
-Rendering::ImageProcessing2::ImageProcessing2(int bound0, int bound1, const std::vector<Mathematics::Float4>& imageData, const PixelShaderSharedPtr& mainPShader, bool useDirichlet)
+Rendering::ImageProcessing2::ImageProcessing2(int bound0, int bound1, MAYBE_UNUSED const std::vector<Mathematics::Float4>& imageData, MAYBE_UNUSED bool useDirichlet)
     : ParentType{ bound0, bound1, 2 },
       bound0{ bound0 },
       bound1{ bound1 },
@@ -23,35 +23,6 @@ Rendering::ImageProcessing2::ImageProcessing2(int bound0, int bound1, const std:
       dx{ 1.0f / bound0M1 },
       dy{ 1.0f / bound1M1 }
 {
-    VisualEffectSharedPtr effect{ nullptr };
-    VisualEffectInstanceSharedPtr instance{ nullptr };
-
-    SetMainTexture(CreateImage(imageData));
-
-    CreateEffect(mainPShader, effect, instance);
-    SetMainEffect(effect);
-    SetMainEffectInstance(instance);
-    instance->SetPixelTexture(0, "StateSampler", GetColorTexture(1));
-
-    if (useDirichlet)
-    {
-        CreateBoundaryDirichletEffect(effect, instance);
-    }
-    else
-    {
-        CreateBoundaryNeumannEffect(effect, instance);
-    }
-    SetBoundaryEffect(effect);
-    SetBoundaryEffectInstance(instance);
-
-    instance->SetPixelTexture(0, "StateSampler", GetColorTexture(0));
-
-    CreateDrawEffect(effect, instance);
-    SetDrawEffect(effect);
-    SetDrawEffectInstance(instance);
-
-    instance->SetPixelTexture(0, "StateSampler", GetColorTexture(1));
-
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
@@ -81,83 +52,6 @@ Rendering::Texture2DSharedPtr Rendering::ImageProcessing2::CreateImage(MAYBE_UNU
     auto reflected = std::make_shared<Texture2D>(System::EnumCastUnderlying<DataFormatType>(System::TextureInternalFormat::RGBA32F), bound0, bound1, 1);
 
     return reflected;
-}
-
-void Rendering::ImageProcessing2::CreateBoundaryDirichletEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    auto pshader = std::make_shared<PixelShader>("BoundaryDirichlet2", 1, 1, 0, 2);
-
-    pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetSampler(0, "MaskSampler", ShaderFlags::SamplerType::Sampler2D);
-    pshader->SetSampler(1, "StateSampler", ShaderFlags::SamplerType::Sampler2D);
-
-    auto profile = pshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 2; ++j)
-        {
-            profile->SetTextureUnit(i, j, dirichletPTextureUnits.at(i)->at(j));
-        }
-
-        profile->SetProgram(i, dirichletPPrograms.at(i));
-    }
-
-    CreateEffect(pshader, effect, instance);
-}
-
-void Rendering::ImageProcessing2::CreateBoundaryNeumannEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    auto pshader = std::make_shared<PixelShader>("BoundaryNeumann2", 1, 1, 0, 2);
-
-    pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetSampler(0, "OffsetSampler", ShaderFlags::SamplerType::Sampler2D);
-    pshader->SetSampler(1, "StateSampler", ShaderFlags::SamplerType::Sampler2D);
-
-    auto profile = pshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 2; ++j)
-        {
-            profile->SetTextureUnit(i, j, neumannPTextureUnits.at(i)->at(j));
-        }
-
-        profile->SetProgram(i, neumannPPrograms.at(i));
-    }
-
-    CreateEffect(pshader, effect, instance);
-}
-
-void Rendering::ImageProcessing2::CreateDrawEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    auto pshader = std::make_shared<PixelShader>("DrawImage2", 1, 1, 0, 1);
-
-    pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetSampler(0, "StateSampler", ShaderFlags::SamplerType::Sampler2D);
-
-    auto profile = pshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 2; ++j)
-        {
-            profile->SetTextureUnit(i, j, drawPTextureUnits.at(i)->at(j));
-        }
-
-        profile->SetProgram(i, drawPPrograms.at(i));
-    }
-
-    CreateEffect(pshader, effect, instance);
 }
 
 std::array<int, 2> Rendering::ImageProcessing2::allDirichletPTextureUnits{ 0, 1 };

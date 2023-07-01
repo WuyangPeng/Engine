@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:20)
+///	版本：0.9.1.0 (2023/06/29 12:39)
 
 #ifndef RENDERING_RESOURCES_RESOURCE_H
 #define RENDERING_RESOURCES_RESOURCE_H
@@ -29,11 +29,13 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(Resource);
         using ParentType = GraphicsObject;
+
         using StorageType = std::vector<char>;
         using SpanIterator = CoreTools::SpanIterator<StorageType::iterator>;
         using ConstSpanIterator = CoreTools::SpanIterator<StorageType::const_iterator>;
 
     public:
+        explicit Resource(GraphicsObjectType type);
         Resource(int numElements, int elementSize, GraphicsObjectType type = GraphicsObjectType::Resource);
         Resource(int numElements, int elementSize, const StorageType& storage, GraphicsObjectType type = GraphicsObjectType::Resource);
 
@@ -54,28 +56,26 @@ namespace Rendering
         NODISCARD ConstSpanIterator GetData() const noexcept;
         NODISCARD SpanIterator GetData() noexcept;
 
-        NODISCARD ConstSpanIterator GetData(int aOffset) const;
-        NODISCARD SpanIterator GetData(int aOffset);
+        NODISCARD ConstSpanIterator GetData(int offset) const;
+        NODISCARD SpanIterator GetData(int offset);
 
-        void SetOffset(int aOffset);
+        void SetOffset(int offset);
         NODISCARD int GetOffset() const noexcept;
 
         // 应用程序可能需要不同数量的活跃索引。使用这个函数设置。
         // 它不改变数据存储,只改变缓冲区的numActiveElements成员。
         // 调用者负责保存的原始数量索引和当完成索引缓冲区时重置。
         // 调用者还不应该传入比原来的索引数量大的索引数量。
-        void SetNumActiveElements(int aNumActiveElements);
+        void SetNumActiveElements(int numActiveElements);
         NODISCARD int GetNumActiveElements() const noexcept;
         NODISCARD int GetNumActiveBytes() const noexcept;
 
-        void SetNewData(const StorageType& newStorage);
+        void SetNewData(const StorageType& storage);
 
         NODISCARD const char* GetOriginalData() const;
-        NODISCARD const char* GetOriginalData(int aOffset) const;
+        NODISCARD const char* GetOriginalData(int offset) const;
 
-        NODISCARD char* GetOriginalData(int aOffset);
-
-        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+        NODISCARD char* GetOriginalData(int offset);
 
     private:
         PackageType impl;

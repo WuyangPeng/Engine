@@ -9,6 +9,7 @@
 
 #include "AncientBooksContainer.h"
 #include "BookContainer.h"
+#include "CharacterContainer.h"
 #include "CountryContainer.h"
 #include "ReignTitleContainer.h"
 #include "Version.h"
@@ -19,7 +20,7 @@
 
 using namespace std::literals;
 
-AncientBooks::Version::Version(const CoreTools::CSVRow& csvRow)
+AncientBooks::Version::Version(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       book{ csvRow.GetInt(SYSTEM_TEXT("book"s)) },
@@ -58,7 +59,7 @@ int AncientBooks::Version::GetBook() const noexcept
     return book;
 }
 
-std::shared_ptr<const AncientBooks::BookMappingType> AncientBooks::Version::GetBook(const AncientBooksContainer& csvContainer) const
+AncientBooks::Version::ConstBookSharedPtr AncientBooks::Version::GetBook(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -86,7 +87,7 @@ int AncientBooks::Version::GetCountry() const noexcept
     return country;
 }
 
-std::shared_ptr<const AncientBooks::CountryMappingType> AncientBooks::Version::GetCountry(const AncientBooksContainer& csvContainer) const
+AncientBooks::Version::ConstCountrySharedPtr AncientBooks::Version::GetCountry(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -100,7 +101,7 @@ int64_t AncientBooks::Version::GetReignTitle() const noexcept
     return reignTitle;
 }
 
-std::shared_ptr<const AncientBooks::ReignTitleMappingType> AncientBooks::Version::GetReignTitle(const AncientBooksContainer& csvContainer) const
+AncientBooks::Version::ConstReignTitleSharedPtr AncientBooks::Version::GetReignTitle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -114,7 +115,7 @@ int AncientBooks::Version::GetYear() const noexcept
     return year;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::Version::GetYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::Version::ConstYearSharedPtr AncientBooks::Version::GetYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -128,7 +129,7 @@ System::String AncientBooks::Version::GetVersion() const
     return version;
 }
 
-std::vector<int> AncientBooks::Version::GetOtherAuthor() const
+AncientBooks::Version::IntContainer AncientBooks::Version::GetOtherAuthor() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -149,21 +150,37 @@ int AncientBooks::Version::GetOtherAuthor(int index) const
     return otherAuthor.at(index);
 }
 
-std::vector<int>::const_iterator AncientBooks::Version::GetOtherAuthorBegin() const noexcept
+AncientBooks::Version::IntContainerConstIter AncientBooks::Version::GetOtherAuthorBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return otherAuthor.cbegin();
 }
 
-std::vector<int>::const_iterator AncientBooks::Version::GetOtherAuthorEnd() const noexcept
+AncientBooks::Version::IntContainerConstIter AncientBooks::Version::GetOtherAuthorEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return otherAuthor.cend();
 }
 
-std::vector<System::String> AncientBooks::Version::GetAuthorDescribe() const
+AncientBooks::Version::CharacterContainer AncientBooks::Version::GetOtherAuthor(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    CharacterContainer result{};
+
+    const auto container = csvContainer.GetCharacterContainer();
+
+    for (const auto& element : otherAuthor)
+    {
+        result.emplace_back(container->GetCharacter(element));
+    }
+
+    return result;
+}
+
+AncientBooks::Version::StringContainer AncientBooks::Version::GetAuthorDescribe() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -184,14 +201,14 @@ System::String AncientBooks::Version::GetAuthorDescribe(int index) const
     return authorDescribe.at(index);
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Version::GetAuthorDescribeBegin() const noexcept
+AncientBooks::Version::StringContainerConstIter AncientBooks::Version::GetAuthorDescribeBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return authorDescribe.cbegin();
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Version::GetAuthorDescribeEnd() const noexcept
+AncientBooks::Version::StringContainerConstIter AncientBooks::Version::GetAuthorDescribeEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 

@@ -69,6 +69,30 @@ Database::BasisDatabase::BasisDatabase(const std::string_view& fieldName, const 
     DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
+Database::BasisDatabase::BasisDatabase(const std::string_view& fieldName, const DoubleArray& value)
+    : ClassType{ fieldName, DataType::DoubleArray, value }
+{
+    DATABASE_SELF_CLASS_IS_VALID_9;
+}
+
+Database::BasisDatabase::BasisDatabase(const std::string_view& fieldName, const Int64Array& value)
+    : ClassType{ fieldName, DataType::Int64Array, value }
+{
+    DATABASE_SELF_CLASS_IS_VALID_9;
+}
+
+Database::BasisDatabase::BasisDatabase(const std::string_view& fieldName, const Int32Array& value)
+    : ClassType{ fieldName, DataType::Int32Array, value }
+{
+    DATABASE_SELF_CLASS_IS_VALID_9;
+}
+
+Database::BasisDatabase::BasisDatabase(const std::string_view& fieldName, const StringArray& value)
+    : ClassType{ fieldName, DataType::StringArray, value }
+{
+    DATABASE_SELF_CLASS_IS_VALID_9;
+}
+
 Database::BasisDatabase::BasisDatabase(const std::string_view& fieldName, DataType dataType, const std::any& value)
     : impl{ fieldName, dataType, value }
 {

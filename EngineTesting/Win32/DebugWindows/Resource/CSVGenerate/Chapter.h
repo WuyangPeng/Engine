@@ -24,8 +24,10 @@ namespace CSVConfigure
         using ClassType = Chapter;
         using ParentType = ChapterBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Chapter(const CoreTools::CSVRow& csvRow);
+        explicit Chapter(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -37,7 +39,7 @@ namespace CSVConfigure
 
         NODISCARD int GetReward() const noexcept override;
 
-        NODISCARD System::String GetChapterName() const override;
+        NODISCARD String GetChapterName() const override;
 
         NODISCARD bool IsMain() const noexcept override;
 
@@ -52,7 +54,7 @@ namespace CSVConfigure
         int id;  // Id
         int nextId;  // 下一关Id
         int reward;  // 过关奖励
-        System::String chapterName;  // 关卡名称
+        String chapterName;  // 关卡名称
         bool isMain;  // 是否主线
         CoreTools::Vector2 position;  // 位置
         CoreTools::IntVector4 point;  // 点

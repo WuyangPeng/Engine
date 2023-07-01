@@ -13,7 +13,7 @@
 #include "Framework/FrameworkDll.h"
 
 #include "Rendering/DataTypes/ColourDetail.h"
-#include "Rendering/Renderers/Renderer.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Framework/WindowCreate/WindowCreateFwd.h"
 
 namespace Framework
@@ -24,9 +24,9 @@ namespace Framework
         using ClassType = ViewMiddleLayerImpl;
 
         using Colour = Rendering::Colour<float>;
-        using Renderer = Rendering::Renderer;
-        using RendererSharedPtr = Rendering::RendererSharedPtr;
-        using ConstRendererSharedPtr = Rendering::ConstRendererSharedPtr;
+        using Renderer = Rendering::BaseRenderer;
+        using RendererSharedPtr = Rendering::BaseRendererSharedPtr;
+        using ConstRendererSharedPtr = Rendering::ConstBaseRendererSharedPtr;
         using EnvironmentParameter = Rendering::EnvironmentParameter;
 
     public:

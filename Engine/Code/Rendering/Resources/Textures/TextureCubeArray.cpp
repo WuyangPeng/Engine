@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.0 (2022/08/16 14:43)
+///	版本：0.9.1.0 (2023/06/29 20:34)
 
 #include "Rendering/RenderingExport.h"
 
@@ -23,7 +23,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTextureCubeArray.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/DataFormat.h"
 #include "Rendering/Resources/Detail/Textures/TextureCubeImpl.h"
 #include "Rendering/Resources/Flags/CubeFaceType.h"
@@ -34,11 +34,11 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, TextureCubeArray);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TextureCubeArray);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TextureCubeArray);
 
-Rendering::TextureCubeArray::TextureCubeArray(int numCubes, DataFormatType format, int length, bool hasMipmaps)
-    : ParentType{ ImplType::GetTotalElements(numCubes * System::EnumCastUnderlying(CubeFaceType::Count), length, length, 1, hasMipmaps),
+Rendering::TextureCubeArray::TextureCubeArray(int numCubes, DataFormatType format, int length, bool hasMipMaps)
+    : ParentType{ ImplType::GetTotalElements(numCubes * System::EnumCastUnderlying(CubeFaceType::Count), length, length, 1, hasMipMaps),
                   DataFormat::GetNumBytesPerStruct(format),
                   GraphicsObjectType::TextureCubeArray },
-      impl{ numCubes, format, length, hasMipmaps },
+      impl{ numCubes, format, length, hasMipMaps },
       numCubes{ numCubes }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -99,11 +99,11 @@ void Rendering::TextureCubeArray::ReadFromFile(ReadFileManager& inFile)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, TextureCubeArray, GetWidth, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, TextureCubeArray, GetHeight, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, HasMipmaps, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, HasMipMaps, bool)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, AutogenerateMipmaps, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, WantAutogenerateMipmaps, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, GetNumSubresources, int)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, AutoGenerateMipMaps, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, WantAutoGenerateMipMaps, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCubeArray, GetNumSubResources, int)
 
 int Rendering::TextureCubeArray::GetLength() const
 {
@@ -273,8 +273,12 @@ Rendering::TextureCubeArray::RendererObjectSharedPtr Rendering::TextureCubeArray
     switch (rendererTypes)
     {
         case RendererTypes::OpenGL:
+        {
             return std::make_shared<OpenGLTextureCubeArray>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        }
         default:
-            return ParentType::CreateRendererObject(rendererTypes);
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
+        }
     }
 }

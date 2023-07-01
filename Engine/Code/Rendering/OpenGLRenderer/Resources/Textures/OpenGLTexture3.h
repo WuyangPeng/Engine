@@ -42,6 +42,12 @@ namespace Rendering
 
     protected:
         void LoadTextureLevel(int level, const ConstSpanIterator& data) override;
+
+    public:
+        [[nodiscard]] bool Update(int item, int level) override;
+        [[nodiscard]] bool CopyGpuToCpu(int item, int level) override;
+        [[nodiscard]] bool CopyCpuToGpu(int item, int level) override;
+        [[nodiscard]] bool GetNumActiveElements() override;
     };
 }
 

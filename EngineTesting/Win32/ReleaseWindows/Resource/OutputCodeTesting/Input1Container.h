@@ -24,11 +24,13 @@ namespace OutputCSVTesting
     {
     public:
         using ClassType = Input1Container;
+
         using ConstInput1BaseSharedPtr = std::shared_ptr<const Input1Base>;
         using Container = std::vector<ConstInput1BaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit Input1Container(const CoreTools::CSVContent& csvContent);
+        explicit Input1Container(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,9 @@ namespace OutputCSVTesting
         NODISCARD Container GetInput1(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container input1;

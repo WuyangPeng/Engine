@@ -12,10 +12,9 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "VisualEffect.h"
 #include "Rendering/SceneGraph/Light.h"
 #include "Rendering/SceneGraph/Material.h"
-#include "Rendering/Shaders/VisualEffectInstance.h"
-
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE LightDirPerVerEffect : public VisualEffect
@@ -31,10 +30,6 @@ namespace Rendering
         explicit LightDirPerVerEffect(CoreTools::DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
-
-        NODISCARD VisualEffectInstanceSharedPtr CreateInstance(const LightSharedPtr& light, const MaterialSharedPtr& material);
-
-        NODISCARD static VisualEffectInstanceSharedPtr CreateUniqueInstance(const LightSharedPtr& light, const MaterialSharedPtr& material);
     };
 
 #include STSTEM_WARNING_PUSH

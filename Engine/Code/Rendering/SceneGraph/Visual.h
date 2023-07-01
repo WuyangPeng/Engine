@@ -14,10 +14,10 @@
 
 #include "Spatial.h"
 #include "Flags/VisualFlags.h"
+#include "Rendering/LocalEffects/VisualEffect.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/Resources/Buffers/VertexFormat.h"
-#include "Rendering/Shaders/VisualEffectInstance.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(Visual, VisualImpl);
 
@@ -63,12 +63,9 @@ namespace Rendering
         NODISCARD const BoundF& GetModelBound() const noexcept;
         NODISCARD BoundF& GetModelBound() noexcept;
 
-        // 存取绘制对象的视觉效果。
-        void SetEffectInstance(const VisualEffectInstanceSharedPtr& effect) noexcept;
-        NODISCARD ConstVisualEffectInstanceSharedPtr GetConstEffectInstance() const noexcept;
-        NODISCARD VisualEffectInstanceSharedPtr GetEffectInstance() noexcept;
-
         virtual void UpdateModelSpace(MAYBE_UNUSED VisualUpdateType type);
+
+        NODISCARD std::shared_ptr<VisualEffect> GetEffect() noexcept;
 
     protected:
         virtual void UpdateModelBound();

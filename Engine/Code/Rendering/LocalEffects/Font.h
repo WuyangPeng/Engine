@@ -14,6 +14,8 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/LocalEffects/LocalEffectsFwd.h"
+#include "Rendering/RendererEngine/Detail/BaseRendererImpl.h"
+#include "Rendering/RendererEngine/Viewport.h"
 #include "Rendering/Resources/ResourcesFwd.h"
 
 namespace Rendering
@@ -24,9 +26,15 @@ namespace Rendering
         using ClassType = Font;
 
     public:
-        NODISCARD std::shared_ptr<const VertexBuffer> GetVertexBuffer() const;
-        NODISCARD std::shared_ptr<const IndexBuffer> GetIndexBuffer() const;
-        NODISCARD std::shared_ptr<const TextEffect> GetTextEffect() const;
+        NODISCARD std::shared_ptr<const VertexBuffer> GetVertexBuffer() const noexcept;
+        NODISCARD std::shared_ptr<const IndexBuffer> GetIndexBuffer() const noexcept;
+        NODISCARD std::shared_ptr<const TextEffect> GetTextEffect() const noexcept;
+
+        NODISCARD std::shared_ptr<VertexBuffer> GetVertexBuffer() noexcept;
+        NODISCARD std::shared_ptr<IndexBuffer> GetIndexBuffer() noexcept;
+        NODISCARD std::shared_ptr<TextEffect> GetTextEffect() noexcept;
+
+        void Typeset(int getWidth, int getHeight, int i, int y, const Colour<float>& color, const std::string& string) noexcept;
     };
 }
 

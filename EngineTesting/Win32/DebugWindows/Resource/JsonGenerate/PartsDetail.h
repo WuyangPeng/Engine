@@ -36,11 +36,11 @@ JsonConfigure::PartsContainer::DataContainer JsonConfigure::PartsContainer::GetD
 
     DataContainer result{};
 
-    for (const auto& value : data)
+    for (const auto& element : data)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 
@@ -69,11 +69,11 @@ JsonConfigure::Parts::Data::ScenesContainer JsonConfigure::Parts::Data::GetScene
 
     ScenesContainer result{};
 
-    for (const auto& value : scenes)
+    for (const auto& element : scenes)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

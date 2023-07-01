@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-AncientBooks::MonthContainer::MonthContainer(const CoreTools::CSVContent& csvContent)
+AncientBooks::MonthContainer::MonthContainer(const CSVContent& csvContent)
     : month{}
 {
     Parsing(csvContent);
@@ -24,10 +24,18 @@ AncientBooks::MonthContainer::MonthContainer(const CoreTools::CSVContent& csvCon
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void AncientBooks::MonthContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void AncientBooks::MonthContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("month表开始载入……"));
 
+    Load(csvContent);
+    Unique();
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("month表结束载入……"));
+}
+
+void AncientBooks::MonthContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -41,7 +49,10 @@ void AncientBooks::MonthContainer::Parsing(const CoreTools::CSVContent& csvConte
     std::ranges::sort(month, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
+}
 
+void AncientBooks::MonthContainer::Unique()
+{
     const auto iter = std::ranges::unique(month, [](const auto& lhs, const auto& rhs) noexcept {
         if((*lhs).GetKey() == (*rhs).GetKey())
         {
@@ -57,12 +68,10 @@ void AncientBooks::MonthContainer::Parsing(const CoreTools::CSVContent& csvConte
 
     if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("month表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-
         month.erase(iter.begin(), iter.end());
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("month表结束载入……"));
+    month.shrink_to_fit();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, MonthContainer)

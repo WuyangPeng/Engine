@@ -1,5 +1,5 @@
 {
-  "renderersSuite": {
+  "rendererEngineSuite": {
     "EnvironmentParameterTesting": 1,
     "RenderingEnvironmentTesting": 1,
     "PlatformVertexFormatTesting": 1,

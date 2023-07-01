@@ -22,6 +22,8 @@ namespace AncientBooks
     public:
         using ClassType = SexagenaryCycleBase;
 
+        using String = System::String;
+
     public:
         SexagenaryCycleBase() noexcept = default;
         explicit SexagenaryCycleBase(int key) noexcept;
@@ -38,11 +40,11 @@ namespace AncientBooks
 
         NODISCARD virtual int GetId() const noexcept;
 
-        NODISCARD virtual System::String GetHeavenly() const;
+        NODISCARD virtual String GetHeavenly() const;
 
-        NODISCARD virtual System::String GetBranch() const;
+        NODISCARD virtual String GetBranch() const;
 
-        NODISCARD virtual System::String GetName() const;
+        NODISCARD virtual String GetName() const;
 
     private:
         int key{};

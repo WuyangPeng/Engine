@@ -11,6 +11,7 @@
 
 #include "CSVGenerateClassName.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/CharacterString/StringUtility.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/Detail/ClassNameParsing.h"
 #include "CoreTools/TextParsing/Detail/SharedPtrUsingParsing.h"
@@ -37,8 +38,111 @@ System::String CoreTools::CSVGenerateClassName::GenerateParentClassName() const
     content += classNameParsing.GenerateFunctionBeginBrackets();
     content += classNameParsing.GeneratePublic();
     content += classNameParsing.GenerateClassType();
-
     content += TextParsing::gNewlineCharacter;
+
+    auto isOtherUsing = false;
+    if (csvHead.HasDataType(CSVDataType::String))
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using String = System::String;\n");
+
+        isOtherUsing = true;
+    }
+
+    if (csvHead.HasDataType(CSVDataType::StringArray))
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using StringContainer = std::vector<String>;\n");
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using StringContainerConstIter = StringContainer::const_iterator;\n");
+
+        isOtherUsing = true;
+    }
+
+    if (csvHead.HasDataType(CSVDataType::IntArray))
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using IntContainer = std::vector<int>;\n");
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using IntContainerConstIter = IntContainer::const_iterator;\n");
+
+        isOtherUsing = true;
+    }
+
+    if (csvHead.HasDataType(CSVDataType::Int64Array))
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using Int64Container = std::vector<int64_t>;\n");
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using Int64ContainerConstIter = Int64Container::const_iterator;\n");
+
+        isOtherUsing = true;
+    }
+
+    if (csvHead.HasDataType(CSVDataType::BoolArray))
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using BoolContainer = std::deque<bool>;\n");
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using BoolContainerConstIter = BoolContainer::const_iterator;\n");
+
+        isOtherUsing = true;
+    }
+
+    if (csvHead.HasDataType(CSVDataType::CharArray))
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using CharContainer = std::vector<System::TChar>;\n");
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using CharContainerConstIter = CharContainer::const_iterator;\n");
+
+        isOtherUsing = true;
+    }
+
+    if (csvHead.HasMapping())
+    {
+        for (auto i = 0; i < csvHead.GetCount(); ++i)
+        {
+            const auto mapping = csvHead.GetMapping(i);
+            if (!mapping.empty())
+            {
+                content += TextParsing::gIndentation;
+                content += TextParsing::gIndentation;
+                content += SYSTEM_TEXT("using Const");
+                content += StringUtility::ToFirstLetterUpper(mapping);
+                content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const ");
+                content += StringUtility::ToFirstLetterUpper(mapping);
+                content += SYSTEM_TEXT("MappingType>;\n");
+
+                if (CSVDataType::BoolArray <= csvHead.GetDataType(i))
+                {
+                    content += TextParsing::gIndentation;
+                    content += TextParsing::gIndentation;
+                    content += SYSTEM_TEXT("using ");
+                    content += StringUtility::ToFirstLetterUpper(mapping);
+                    content += SYSTEM_TEXT("Container = std::vector<Const");
+                    content += StringUtility::ToFirstLetterUpper(mapping);
+                    content += SYSTEM_TEXT("SharedPtr>;\n");
+                }
+            }
+        }
+    }
+
+    if (isOtherUsing)
+    {
+        content += TextParsing::gNewlineCharacter;
+    }
 
     return content;
 }
@@ -56,6 +160,11 @@ System::String CoreTools::CSVGenerateClassName::GenerateChildClassName() const
     content += classNameParsing.GeneratePublic();
     content += classNameParsing.GenerateClassType();
     content += classNameParsing.GenerateParentType();
+    content += TextParsing::gNewlineCharacter;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += SYSTEM_TEXT("using CSVRow = CoreTools::CSVRow;\n");
 
     content += TextParsing::gNewlineCharacter;
 
@@ -74,6 +183,97 @@ System::String CoreTools::CSVGenerateClassName::GenerateClassName() const
     content += classNameParsing.GenerateFunctionBeginBrackets();
     content += classNameParsing.GeneratePublic();
     content += classNameParsing.GenerateClassType();
+    content += TextParsing::gNewlineCharacter;
+
+    content += TextParsing::gIndentation;
+    content += TextParsing::gIndentation;
+    content += SYSTEM_TEXT("using CSVRow = CoreTools::CSVRow;\n");
+
+    if (csvHead.HasDataType(CSVDataType::String))
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using String = System::String;\n");
+    }
+
+    if (csvHead.HasDataType(CSVDataType::StringArray))
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using StringContainer = std::vector<String>;\n");
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using StringContainerConstIter = StringContainer::const_iterator;\n");
+    }
+
+    if (csvHead.HasDataType(CSVDataType::IntArray))
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using IntContainer = std::vector<int>;\n");
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using IntContainerConstIter = IntContainer::const_iterator;\n");
+    }
+
+    if (csvHead.HasDataType(CSVDataType::Int64Array))
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using Int64Container = std::vector<int64_t>;\n");
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using Int64ContainerConstIter = Int64Container::const_iterator;\n");
+    }
+
+    if (csvHead.HasDataType(CSVDataType::BoolArray))
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using BoolContainer = std::deque<bool>;\n");
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using BoolContainerConstIter = BoolContainer::const_iterator;\n");
+    }
+
+    if (csvHead.HasDataType(CSVDataType::CharArray))
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using CharContainer = std::vector<System::TChar>;\n");
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using CharContainerConstIter = CharContainer::const_iterator;\n");
+    }
+
+    if (csvHead.HasMapping())
+    {
+        for (auto i = 0; i < csvHead.GetCount(); ++i)
+        {
+            const auto mapping = csvHead.GetMapping(i);
+            if (!mapping.empty())
+            {
+                content += TextParsing::gIndentation;
+                content += TextParsing::gIndentation;
+                content += SYSTEM_TEXT("using Const");
+                content += StringUtility::ToFirstLetterUpper(mapping);
+                content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const ");
+                content += StringUtility::ToFirstLetterUpper(mapping);
+                content += SYSTEM_TEXT("MappingType>;\n");
+
+                if (CSVDataType::BoolArray <= csvHead.GetDataType(i))
+                {
+                    content += TextParsing::gIndentation;
+                    content += TextParsing::gIndentation;
+                    content += SYSTEM_TEXT("using ");
+                    content += StringUtility::ToFirstLetterUpper(mapping);
+                    content += SYSTEM_TEXT("Container = std::vector<Const");
+                    content += StringUtility::ToFirstLetterUpper(mapping);
+                    content += SYSTEM_TEXT("SharedPtr>;\n");
+                }
+            }
+        }
+    }
 
     content += TextParsing::gNewlineCharacter;
 
@@ -92,6 +292,7 @@ System::String CoreTools::CSVGenerateClassName::GenerateContainerClassName(const
     content += classNameParsing.GenerateFunctionBeginBrackets();
     content += classNameParsing.GeneratePublic();
     content += classNameParsing.GenerateClassType();
+    content += TextParsing::gNewlineCharacter;
 
     content += GenerateSharedPtrUsing(keyTypeDescribe);
 

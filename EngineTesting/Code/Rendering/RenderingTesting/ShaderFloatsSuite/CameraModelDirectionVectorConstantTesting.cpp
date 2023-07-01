@@ -17,7 +17,6 @@
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
@@ -42,7 +41,6 @@ void Rendering::CameraModelDirectionVectorConstantTesting::DoRunUnitTest()
 void Rendering::CameraModelDirectionVectorConstantTesting::MainTest()
 {
     CameraManager::Create();
-    RendererManager::Create();
 
     CoreTools::InitTerm::ExecuteInitializer();
 
@@ -53,7 +51,6 @@ void Rendering::CameraModelDirectionVectorConstantTesting::MainTest()
 
     CoreTools::InitTerm::ExecuteTerminator();
 
-    RendererManager::Destroy();
     CameraManager::Destroy();
 }
 

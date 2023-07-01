@@ -24,11 +24,13 @@ namespace AncientBooks
     {
     public:
         using ClassType = GenusContainer;
+
         using ConstGenusBaseSharedPtr = std::shared_ptr<const GenusBase>;
         using Container = std::vector<ConstGenusBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit GenusContainer(const CoreTools::CSVContent& csvContent);
+        explicit GenusContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,9 @@ namespace AncientBooks
         NODISCARD Container GetGenus(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container genus;

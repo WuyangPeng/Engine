@@ -18,7 +18,6 @@
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/Curve3Detail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TubeSurface);
@@ -209,7 +208,7 @@ void Rendering::TubeSurface::ComputeIndices(bool insideView)
         numTriangles = 2 * numSliceSamples * (numMedialSamples - 1);
     }
 
-    SetIndexBuffer(IndexBuffer::Create(IndexFormatType::Polypoint, 3 * numTriangles, sizeof(int)));
+    SetIndexBuffer(IndexBuffer::Create(IndexFormatType::PolyPoint, 3 * numTriangles, sizeof(int)));
 
     auto indices = GetIndexBuffer()->GetData();
     auto start = 0;
@@ -309,7 +308,7 @@ void Rendering::TubeSurface::UpdateSurface()
     {
         ComputeNormals();
     }
-    RENDERER_MANAGE_SINGLETON.UpdateAll(GetVertexBuffer());
+
 }
 
 Rendering::TubeSurface::TubeSurface(LoadConstructor value)

@@ -5,11 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策测试版本：0.9.0.12 (2023/06/14 21:01)
+///	版本：0.9.1.0 (2023/06/24 12:16)
 
 #ifndef DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_ANCIENT_BOOKS_SUITE_ANCIENT_BOOKS_CONTAINER_TESTING_H
 #define DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_ANCIENT_BOOKS_SUITE_ANCIENT_BOOKS_CONTAINER_TESTING_H
 
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/AncientBooksContainer.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace DatabaseGenerateServerBaseTesting
@@ -20,8 +21,10 @@ namespace DatabaseGenerateServerBaseTesting
         using ClassType = AncientBooksContainerTesting;
         using ParentType = UnitTest;
 
+        using AncientBooksContainer = AncientBooks::AncientBooksContainer;
+
     public:
-        explicit AncientBooksContainerTesting(const OStreamShared& stream);
+        explicit AncientBooksContainerTesting(const OStreamShared& stream, const AncientBooksContainer& ancientBooksContainer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -30,6 +33,9 @@ namespace DatabaseGenerateServerBaseTesting
         void DoRunUnitTest() override;
 
         void ContainerTest();
+
+    private:
+        AncientBooksContainer ancientBooksContainer;
     };
 }
 

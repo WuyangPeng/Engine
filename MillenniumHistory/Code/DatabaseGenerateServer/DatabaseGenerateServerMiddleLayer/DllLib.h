@@ -12,14 +12,9 @@
 
 #include "Helper/UserMacro.h"
 
-#include "System/SystemLib.h"
-#include "CoreTools/CoreToolsLib.h"
-#include "Framework/FrameworkLib.h"
+#include "ThreadingCoreRenderEngine/ThreadingCoreRenderEngineLib.h"
+#include "ThreadingCoreRenderEngineGame/ThreadingCoreRenderEngineGameLib.h"
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseGenerateServerBaseLib.h"
-
-#if defined(TCRE_USE_MSVC)
-
-#endif  // TCRE_USE_MSVC
 
 #endif  // DATABASE_GENERATE_SERVER_MIDDLE_LAYER_DLL_LIB_H

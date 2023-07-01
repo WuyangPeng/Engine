@@ -5,11 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:25)
+///	版本：0.9.1.0 (2023/06/29 14:49)
 
 #include "Rendering/RenderingExport.h"
 
-#include "IndexBuffer.h"
+#include "IndexBufferDetail.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -21,7 +21,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Base/BitHacksDetail.h"
 #include "Rendering/OpenGLRenderer/Resources/Buffers/OpenGLIndexBuffer.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 
 using System::operator&;
 
@@ -29,31 +29,35 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, IndexBuffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, IndexBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, IndexBuffer);
 
-Rendering::IndexBuffer::IndexBuffer(MAYBE_UNUSED IndexBufferCreate indexBufferCreate, IndexFormatType type, int numPrimitives)
+Rendering::IndexBuffer::IndexBuffer(IndexBufferCreate indexBufferCreate, IndexFormatType type, int numPrimitives)
     : ParentType{ GetIndexCounter(type, numPrimitives), 0, GraphicsObjectType::IndexBuffer },
       primitiveType{ type },
       numPrimitives{ numPrimitives },
       numActivePrimitives{ numPrimitives },
       firstPrimitive{ 0 }
 {
+    System::UnusedFunction(indexBufferCreate);
+
     if (numPrimitives <= 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效数量的primitives。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("无效数量的primitives。"s))
     }
 
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::IndexBuffer::IndexBuffer(MAYBE_UNUSED IndexBufferCreate indexBufferCreate, IndexFormatType type, int numPrimitives, int indexSize)
+Rendering::IndexBuffer::IndexBuffer(IndexBufferCreate indexBufferCreate, IndexFormatType type, int numPrimitives, int indexSize)
     : ParentType{ GetIndexCounter(type, numPrimitives), indexSize, GraphicsObjectType::IndexBuffer },
       primitiveType{ type },
       numPrimitives{ numPrimitives },
       numActivePrimitives{ numPrimitives },
       firstPrimitive{ 0 }
 {
+    System::UnusedFunction(indexBufferCreate);
+
     if (numPrimitives <= 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效数量的primitives。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("无效数量的primitives。"s))
     }
 
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -88,8 +92,8 @@ bool Rendering::IndexBuffer::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-Rendering::IndexBuffer::IndexBuffer(LoadConstructor value)
-    : ParentType{ value },
+Rendering::IndexBuffer::IndexBuffer(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor },
       primitiveType{ IndexFormatType::None },
       numPrimitives{ 0 },
       numActivePrimitives{ 0 },
@@ -199,7 +203,7 @@ void Rendering::IndexBuffer::SetNumActivePrimitives(int numActive)
 
     if (numPrimitives < numActive)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效数量的primitives。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("无效数量的primitives。"s))
     }
 
     numActivePrimitives = numActive;
@@ -226,11 +230,10 @@ void Rendering::IndexBuffer::SetFirstPrimitive(int first)
     if (first < numPrimitives && first + numActivePrimitives <= numPrimitives)
     {
         firstPrimitive = first;
-        return;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效的first primitives。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("无效的first primitives。"s))
     }
 }
 
@@ -253,335 +256,251 @@ int Rendering::IndexBuffer::GetFirstIndex() const
     return GetIndexCounter(primitiveType, firstPrimitive);
 }
 
-void Rendering::IndexBuffer::SetPoint(int i, int32_t v)
+void Rendering::IndexBuffer::SetPoint(int index, int32_t vertex)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     ValidPrimitiveType(IndexFormatType::HasPoints);
 
-    if (i < numPrimitives)
+    if (index < numPrimitives)
     {
-        if (GetElementSize() == sizeof(int32_t))
+        if (GetElementSize() == CoreTools::GetStreamSize<int32_t>())
         {
-            auto data = GetData(i * sizeof(int32_t));
-
-            data.Increase<int32_t>(v);
+            IncreaseData(index, vertex);
         }
         else
         {
-            auto data = GetData(i * sizeof(uint16_t));
-
-            data.Increase<uint16_t>(boost::numeric_cast<uint16_t>(v));
+            IncreaseData(index, boost::numeric_cast<uint16_t>(vertex));
         }
     }
+
+    THROW_EXCEPTION(SYSTEM_TEXT("索引越界。"s))
 }
 
-int32_t Rendering::IndexBuffer::GetPoint(int i) const
+int32_t Rendering::IndexBuffer::GetPoint(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     ValidPrimitiveType(IndexFormatType::HasPoints);
 
-    if (i < numPrimitives)
+    if (index < numPrimitives)
     {
-        if (GetElementSize() == sizeof(int32_t))
+        if (GetElementSize() == CoreTools::GetStreamSize<int32_t>())
         {
-            auto data = GetData(i * sizeof(int32_t));
-
-            return data.Increase<int32_t>();
+            return GetIncreaseData<int32_t>(index);
         }
         else
         {
-            auto data = GetData(i * sizeof(uint16_t));
-
-            return data.Increase<uint16_t>();
+            return GetIncreaseData<int16_t>(index);
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("索引越界。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("索引越界。"s))
 }
 
-void Rendering::IndexBuffer::SetSegment(int i, int32_t v0, int32_t v1)
+void Rendering::IndexBuffer::SetSegment(int index, int32_t vertex0, int32_t vertex1)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     ValidPrimitiveType(IndexFormatType::HasSegments);
 
-    if (i < numPrimitives)
+    if (index < numPrimitives)
     {
-        if (GetElementSize() == sizeof(uint32_t))
+        if (GetElementSize() == CoreTools::GetStreamSize<int32_t>())
         {
-            if (primitiveType == IndexFormatType::PolysegmentDisjoint)
+            if (primitiveType == IndexFormatType::PolySegmentDisjoint)
             {
-                auto data = GetData(2 * i * sizeof(int32_t));
-
-                data.Increase<int32_t>(v0);
-                data.Increase<int32_t>(v1);
+                IncreaseData(index, vertex0, vertex1, 2);
             }
             else
             {
-                auto data = GetData(i * sizeof(int32_t));
-
-                data.Increase<int32_t>(v0);
-                data.Increase<int32_t>(v1);
+                IncreaseData(index, vertex0, vertex1, 1);
             }
         }
         else
         {
-            if (primitiveType == IndexFormatType::PolysegmentDisjoint)
+            if (primitiveType == IndexFormatType::PolySegmentDisjoint)
             {
-                auto data = GetData(2 * i * sizeof(uint16_t));
-
-                data.Increase<uint16_t>(boost::numeric_cast<uint16_t>(v0));
-                data.Increase<uint16_t>(boost::numeric_cast<uint16_t>(v1));
+                IncreaseData(index, boost::numeric_cast<uint16_t>(vertex0), boost::numeric_cast<uint16_t>(vertex1), 2);
             }
             else
             {
-                auto data = GetData(i * sizeof(uint16_t));
-
-                data.Increase<uint16_t>(boost::numeric_cast<uint16_t>(v0));
-                data.Increase<uint16_t>(boost::numeric_cast<uint16_t>(v1));
+                IncreaseData(index, boost::numeric_cast<uint16_t>(vertex0), boost::numeric_cast<uint16_t>(vertex1), 1);
             }
         }
     }
+
+    THROW_EXCEPTION(SYSTEM_TEXT("索引越界。"s))
 }
 
-Rendering::IndexBuffer::SegmentType Rendering::IndexBuffer::GetSegment(int i) const
+Rendering::IndexBuffer::SegmentType Rendering::IndexBuffer::GetSegment(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     ValidPrimitiveType(IndexFormatType::HasSegments);
 
-    if (i < numPrimitives)
+    if (index < numPrimitives)
     {
-        if (GetElementSize() == sizeof(uint32_t))
+        if (GetElementSize() == CoreTools::GetStreamSize<int32_t>())
         {
-            if (primitiveType == IndexFormatType::PolysegmentDisjoint)
+            if (primitiveType == IndexFormatType::PolySegmentDisjoint)
             {
-                auto data = GetData(2 * i * sizeof(int32_t));
-
-                const auto v0 = data.Increase<int32_t>();
-                const auto v1 = data.Increase<int32_t>();
-
-                return { v0, v1 };
+                return GetIncreaseData<int32_t>(index, 2);
             }
             else
             {
-                auto data = GetData(i * sizeof(int32_t));
-
-                const auto v0 = data.Increase<int32_t>();
-                const auto v1 = data.Increase<int32_t>();
-
-                return { v0, v1 };
+                return GetIncreaseData<int32_t>(index, 1);
             }
         }
         else
         {
-            if (primitiveType == IndexFormatType::PolysegmentDisjoint)
+            if (primitiveType == IndexFormatType::PolySegmentDisjoint)
             {
-                auto data = GetData(2 * i * sizeof(uint16_t));
-
-                const auto v0 = data.Increase<uint16_t>();
-                const auto v1 = data.Increase<uint16_t>();
-
-                return { v0, v1 };
+                return GetIncreaseData<int16_t>(index, 2);
             }
             else
             {
-                auto data = GetData(i * sizeof(uint16_t));
-
-                const auto v0 = data.Increase<uint16_t>();
-                const auto v1 = data.Increase<uint16_t>();
-
-                return { v0, v1 };
+                return GetIncreaseData<int16_t>(index, 1);
             }
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("索引越界。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("索引越界。"s))
 }
 
-void Rendering::IndexBuffer::SetTriangle(int i, int32_t v0, int32_t v1, int32_t v2)
+void Rendering::IndexBuffer::SetTriangle(int index, int32_t vertex0, int32_t vertex1, int32_t vertex2)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     ValidPrimitiveType(IndexFormatType::HasTriangles);
 
-    if (i < numPrimitives)
+    if (index < numPrimitives)
     {
-        if (GetElementSize() == sizeof(uint32_t))
+        if (GetElementSize() == CoreTools::GetStreamSize<int32_t>())
         {
-            if (primitiveType == IndexFormatType::Trimesh)
+            if (primitiveType == IndexFormatType::TriMesh)
             {
-                auto data = GetData(3 * i * sizeof(int32_t));
-
-                data.Increase<int32_t>(v0);
-                data.Increase<int32_t>(v1);
-                data.Increase<int32_t>(v2);
+                IncreaseData(index, vertex0, vertex1, vertex2, 3);
             }
-            else if (primitiveType == IndexFormatType::Tristrip)
+            else if (primitiveType == IndexFormatType::TriStrip)
             {
-                auto data = GetData(i * sizeof(int32_t));
-
-                data.Increase<int32_t>(v0);
-                if ((i & 1) != 0)
+                if ((index & 1) != 0)
                 {
-                    data.Increase<int32_t>(v2);
-                    data.Increase<int32_t>(v1);
+                    IncreaseData(index, vertex0, vertex2, vertex1, 1);
                 }
                 else
                 {
-                    data.Increase<int32_t>(v1);
-                    data.Increase<int32_t>(v2);
+                    IncreaseData(index, vertex0, vertex1, vertex2, 1);
                 }
             }
-            else if (primitiveType == IndexFormatType::TrimeshAdj)
+            else if (primitiveType == IndexFormatType::TriMeshAdj)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TrimeshAdj不支持。"s));
+                THROW_EXCEPTION(SYSTEM_TEXT("TrimeshAdj不支持。"s))
             }
-            else if (primitiveType == IndexFormatType::TristripAdj)
+            else if (primitiveType == IndexFormatType::TriStripAdj)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TristripAdj不支持。"s));
+                THROW_EXCEPTION(SYSTEM_TEXT("TristripAdj不支持。"s))
             }
         }
         else
         {
-            if (primitiveType == IndexFormatType::Trimesh)
+            if (primitiveType == IndexFormatType::TriMesh)
             {
-                auto data = GetData(3 * i * sizeof(uint16_t));
-
-                data.Increase<uint16_t>(boost::numeric_cast<uint16_t>(v0));
-                data.Increase<uint16_t>(boost::numeric_cast<uint16_t>(v1));
-                data.Increase<uint16_t>(boost::numeric_cast<uint16_t>(v2));
+                IncreaseData(index, boost::numeric_cast<uint16_t>(vertex0), boost::numeric_cast<uint16_t>(vertex1), boost::numeric_cast<uint16_t>(vertex2), 3);
             }
-            else if (primitiveType == IndexFormatType::Tristrip)
+            else if (primitiveType == IndexFormatType::TriStrip)
             {
-                auto data = GetData(i * sizeof(uint16_t));
-
-                data.Increase<uint16_t>(boost::numeric_cast<uint16_t>(v0));
-                if ((i & 1) != 0)
+                if ((index & 1) != 0)
                 {
-                    data.Increase<uint16_t>(boost::numeric_cast<uint16_t>(v2));
-                    data.Increase<uint16_t>(boost::numeric_cast<uint16_t>(v1));
+                    IncreaseData(index, boost::numeric_cast<uint16_t>(vertex0), boost::numeric_cast<uint16_t>(vertex2), boost::numeric_cast<uint16_t>(vertex1), 1);
                 }
                 else
                 {
-                    data.Increase<uint16_t>(boost::numeric_cast<uint16_t>(v1));
-                    data.Increase<uint16_t>(boost::numeric_cast<uint16_t>(v2));
+                    IncreaseData(index, boost::numeric_cast<uint16_t>(vertex0), boost::numeric_cast<uint16_t>(vertex1), boost::numeric_cast<uint16_t>(vertex2), 1);
                 }
             }
-            else if (primitiveType == IndexFormatType::TrimeshAdj)
+            else if (primitiveType == IndexFormatType::TriMeshAdj)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TrimeshAdj不支持。"s));
+                THROW_EXCEPTION(SYSTEM_TEXT("TrimeshAdj不支持。"s))
             }
-            else if (primitiveType == IndexFormatType::TristripAdj)
+            else if (primitiveType == IndexFormatType::TriStripAdj)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TristripAdj不支持。"s));
+                THROW_EXCEPTION(SYSTEM_TEXT("TristripAdj不支持。"s))
             }
         }
     }
 }
 
-Rendering::IndexBuffer::TriangleType Rendering::IndexBuffer::GetTriangle(int i) const
+Rendering::IndexBuffer::TriangleType Rendering::IndexBuffer::GetTriangle(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     ValidPrimitiveType(IndexFormatType::HasTriangles);
 
-    if (i < numPrimitives)
+    if (index < numPrimitives)
     {
-        if (GetElementSize() == sizeof(uint32_t))
+        if (GetElementSize() == CoreTools::GetStreamSize<int32_t>())
         {
-            if (primitiveType == IndexFormatType::Trimesh)
+            if (primitiveType == IndexFormatType::TriMesh)
             {
-                auto data = GetData(3 * i * sizeof(int32_t));
-
-                const auto v0 = data.Increase<int32_t>();
-                const auto v1 = data.Increase<int32_t>();
-                const auto v2 = data.Increase<int32_t>();
-
-                return { v0, v1, v2 };
+                return GetIncreaseData<int32_t>(index, 3, false);
             }
-            else if (primitiveType == IndexFormatType::Tristrip)
+            else if (primitiveType == IndexFormatType::TriStrip)
             {
-                auto data = GetData(i * sizeof(int32_t));
-
-                const auto v0 = data.Increase<int32_t>();
-                if ((i & 1) != 0)
+                if ((index & 1) != 0)
                 {
-                    const auto v1 = data.Increase<int32_t>();
-                    const auto v2 = data.Increase<int32_t>();
-
-                    return { v0, v2, v1 };
+                    return GetIncreaseData<int32_t>(index, 1, true);
                 }
                 else
                 {
-                    const auto v1 = data.Increase<int32_t>();
-                    const auto v2 = data.Increase<int32_t>();
-
-                    return { v0, v1, v2 };
+                    return GetIncreaseData<int32_t>(index, 1, false);
                 }
             }
-            else if (primitiveType == IndexFormatType::TrimeshAdj)
+            else if (primitiveType == IndexFormatType::TriMeshAdj)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TrimeshAdj不支持。"s));
+                THROW_EXCEPTION(SYSTEM_TEXT("TrimeshAdj不支持。"s))
             }
-            else if (primitiveType == IndexFormatType::TristripAdj)
+            else if (primitiveType == IndexFormatType::TriStripAdj)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TristripAdj不支持。"s));
+                THROW_EXCEPTION(SYSTEM_TEXT("TristripAdj不支持。"s))
             }
         }
         else
         {
-            if (primitiveType == IndexFormatType::Trimesh)
+            if (primitiveType == IndexFormatType::TriMesh)
             {
-                auto data = GetData(3 * i * sizeof(uint16_t));
-
-                const auto v0 = data.Increase<uint16_t>();
-                const auto v1 = data.Increase<uint16_t>();
-                const auto v2 = data.Increase<uint16_t>();
-
-                return { v0, v1, v2 };
+                return GetIncreaseData<int16_t>(index, 3, false);
             }
-            else if (primitiveType == IndexFormatType::Tristrip)
+            else if (primitiveType == IndexFormatType::TriStrip)
             {
-                auto data = GetData(i * sizeof(uint16_t));
-
-                const auto v0 = data.Increase<uint16_t>();
-                if ((i & 1) != 0)
+                if ((index & 1) != 0)
                 {
-                    const auto v1 = data.Increase<uint16_t>();
-                    const auto v2 = data.Increase<uint16_t>();
-
-                    return { v0, v2, v1 };
+                    return GetIncreaseData<int16_t>(index, 1, true);
                 }
                 else
                 {
-                    const auto v1 = data.Increase<uint16_t>();
-                    const auto v2 = data.Increase<uint16_t>();
-
-                    return { v0, v1, v2 };
+                    return GetIncreaseData<int16_t>(index, 1, false);
                 }
             }
-            else if (primitiveType == IndexFormatType::TrimeshAdj)
+            else if (primitiveType == IndexFormatType::TriMeshAdj)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TrimeshAdj不支持。"s));
+                THROW_EXCEPTION(SYSTEM_TEXT("TrimeshAdj不支持。"s))
             }
-            else if (primitiveType == IndexFormatType::TristripAdj)
+            else if (primitiveType == IndexFormatType::TriStripAdj)
             {
-                THROW_EXCEPTION(SYSTEM_TEXT("TristripAdj不支持。"s));
+                THROW_EXCEPTION(SYSTEM_TEXT("TristripAdj不支持。"s))
             }
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("索引越界。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("索引越界。"s))
 }
 
 void Rendering::IndexBuffer::ValidPrimitiveType(IndexFormatType type) const
 {
     if ((primitiveType & type) == IndexFormatType::Zero)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效的primitive类型。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("无效的primitive类型。"s))
     }
 }
 
@@ -590,15 +509,15 @@ int Rendering::IndexBuffer::GetIndexCounter(IndexFormatType type, int numPrimiti
     using IndexCounterFunction = int (*)(int) noexcept;
     constexpr auto numTypes = System::EnumCastUnderlying(IndexFormatType::NumTypes);
 
-    static const std::array<IndexCounterFunction, numTypes> indexCounter{ &IndexBuffer::GetPolypointIndexCount,
-                                                                          &IndexBuffer::GetPolysegmentDisjointIndexCount,
-                                                                          &IndexBuffer::GetPolysegmentContiguousIndexCount,
-                                                                          &IndexBuffer::GetTrimeshIndexCount,
-                                                                          &IndexBuffer::GetTristripIndexCount,
-                                                                          &IndexBuffer::GetPolysegmentDisjointAdjIndexCount,
-                                                                          &IndexBuffer::GetPolysegmentContiguousAdjIndexCount,
-                                                                          &IndexBuffer::GetTrimeshAdjIndexCount,
-                                                                          &IndexBuffer::GetTristripAdjIndexCount };
+    static const std::array<IndexCounterFunction, numTypes> indexCounter{ &IndexBuffer::GetPolyPointIndexCount,
+                                                                          &IndexBuffer::GetPolySegmentDisjointIndexCount,
+                                                                          &IndexBuffer::GetPolySegmentContiguousIndexCount,
+                                                                          &IndexBuffer::GetTriMeshIndexCount,
+                                                                          &IndexBuffer::GetTriStripIndexCount,
+                                                                          &IndexBuffer::GetPolySegmentDisjointAdjIndexCount,
+                                                                          &IndexBuffer::GetPolySegmentContiguousAdjIndexCount,
+                                                                          &IndexBuffer::GetTriMeshAdjIndexCount,
+                                                                          &IndexBuffer::GetTriStripAdjIndexCount };
 
     const auto index = Mathematics::BitHacks::Log2OfPowerOfTwo(System::EnumCastUnderlying(type));
 
@@ -612,8 +531,12 @@ Rendering::IndexBuffer::RendererObjectSharedPtr Rendering::IndexBuffer::CreateRe
     switch (rendererTypes)
     {
         case RendererTypes::OpenGL:
+        {
             return std::make_shared<OpenGLIndexBuffer>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        }
         default:
-            return ParentType::CreateRendererObject(rendererTypes);
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
+        }
     }
 }

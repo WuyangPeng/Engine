@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:24)
+///	版本：0.9.1.0 (2023/06/29 19:40)
 
-#ifndef RENDERING_RENDERERS_DRAW_TARGET_H
-#define RENDERING_RENDERERS_DRAW_TARGET_H
+#ifndef RENDERING_RESOURCES_DRAW_TARGET_H
+#define RENDERING_RESOURCES_DRAW_TARGET_H
 
 #include "Rendering/RenderingDll.h"
 
@@ -31,7 +31,9 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(DrawTarget);
         using ParentType = Object;
-        using GraphicsObjectContainer = std::vector<GraphicsObjectSharedPtr>;
+
+        using RendererObjectSharedPtr = std::shared_ptr<RendererObject>;
+        using RendererObjectContainer = std::vector<RendererObjectSharedPtr>;
 
     public:
         // 支持目标的数量取决于图形硬件和驱动程序。“numRenderTargets”必须至少1。
@@ -39,14 +41,8 @@ namespace Rendering
                    DataFormatType renderTargetFormat,
                    int width,
                    int height,
-                   bool hasRenderTargetMipmaps = false,
+                   bool hasRenderTargetMipMaps = false,
                    DataFormatType depthStencilFormat = DataFormatType::Unknown);
-
-        virtual ~DrawTarget() noexcept = default;
-        DrawTarget(const DrawTarget& rhs) = default;
-        DrawTarget& operator=(const DrawTarget& rhs) = default;
-        DrawTarget(DrawTarget&& rhs) noexcept = default;
-        DrawTarget& operator=(DrawTarget&& rhs) noexcept = default;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -58,7 +54,7 @@ namespace Rendering
         NODISCARD DataFormatType GetRenderTargetFormat() const;
         NODISCARD int GetWidth() const;
         NODISCARD int GetHeight() const;
-        NODISCARD bool HasRenderTargetMipmaps() const;
+        NODISCARD bool HasRenderTargetMipMaps() const;
         NODISCARD DataFormatType GetDepthStencilFormat() const noexcept;
         NODISCARD TextureRenderTargetSharedPtr GetRenderTargetTexture(int index);
         NODISCARD TextureDepthStencilSharedPtr GetDepthStencilTexture();
@@ -66,14 +62,14 @@ namespace Rendering
         NODISCARD ConstTextureDepthStencilSharedPtr GetDepthStencilTexture() const;
         NODISCARD bool HasDepthStencil() const noexcept;
 
-        void AutogenerateRTMipmaps();
-        NODISCARD bool WantAutogenerateRTMipmaps() const;
+        void AutoGenerateRenderTargetMipMaps();
+        NODISCARD bool WantAutoGenerateRenderTargetMipMaps() const;
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
         NODISCARD RendererDrawTargetSharedPtr CreateRendererDrawTarget(RendererTypes rendererTypes,
-                                                                       const GraphicsObjectContainer& renderTargetTextures,
-                                                                       GraphicsObject& depthStencilTexture);
+                                                                       const RendererObjectContainer& renderTargetTextures,
+                                                                       const RendererObjectSharedPtr& depthStencilTexture) const;
 
     private:
         PackageType impl;
@@ -89,4 +85,4 @@ namespace Rendering
     CORE_TOOLS_SHARED_PTR_DECLARE(DrawTarget);
 }
 
-#endif  // RENDERING_RENDERERS_DRAW_TARGET_H
+#endif  // RENDERING_RESOURCES_DRAW_TARGET_H

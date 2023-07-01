@@ -25,12 +25,14 @@ namespace CSVConfigure
     {
     public:
         using ClassType = SceneContainer;
+
         using ConstSceneSharedPtr = std::shared_ptr<const Scene>;
         using MappingContainer = std::unordered_map<int, ConstSceneSharedPtr>;
         using Container = std::vector<ConstSceneSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit SceneContainer(const CoreTools::CSVContent& csvContent);
+        explicit SceneContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -45,7 +47,8 @@ namespace CSVConfigure
         NODISCARD Container GetScene(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
 
     private:
         MappingContainer scene;

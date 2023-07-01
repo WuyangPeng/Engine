@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:20)
+///	版本：0.9.1.0 (2023/06/29 12:41)
 
 #include "Rendering/RenderingExport.h"
 
@@ -27,6 +27,13 @@ COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Resource)
 CORE_TOOLS_RTTI_DEFINE(Rendering, Resource);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Resource);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Resource);
+
+Rendering::Resource::Resource(GraphicsObjectType type)
+    : ParentType{ "Resource", type },
+      impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
 
 Rendering::Resource::Resource(int numElements, int elementSize, GraphicsObjectType type)
     : ParentType{ "Resource", type },
@@ -74,7 +81,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Resource, GetOriginalData, int,
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Resource, GetOriginalData, int, char*)
 
 Rendering::Resource::Resource(LoadConstructor loadConstructor)
-    : ParentType{ loadConstructor }, impl{ 0, 0 }
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -135,11 +142,4 @@ void Rendering::Resource::Load(CoreTools::BufferSource& source)
     impl->Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
-}
-
-Rendering::Resource::RendererObjectSharedPtr Rendering::Resource::CreateRendererObject(MAYBE_UNUSED RendererTypes rendererTypes)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    THROW_EXCEPTION(SYSTEM_TEXT("函数未实现"));
 }

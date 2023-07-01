@@ -14,7 +14,6 @@
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
-#include "Rendering/Shaders/WireState.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 Rendering::WireStateTesting::WireStateTesting(const OStreamShared& stream)
@@ -41,29 +40,12 @@ void Rendering::WireStateTesting::MainTest()
     CoreTools::InitTerm::ExecuteTerminator();
 }
 
-void Rendering::WireStateTesting::InitTest()
+void Rendering::WireStateTesting::InitTest() noexcept
 {
-    WireState firstWireState(CoreTools::DisableNotThrow::Disable);
-
-    ASSERT_FALSE(firstWireState.IsEnabled());
-
-    firstWireState.SetEnabled(true);
-    ASSERT_TRUE(firstWireState.IsEnabled());
 }
 
-void Rendering::WireStateTesting::CopyTest()
+void Rendering::WireStateTesting::CopyTest() noexcept
 {
-    WireState firstWireState(CoreTools::DisableNotThrow::Disable);
-
-    firstWireState.SetEnabled(true);
-
-    WireState secondWireState(firstWireState);
-
-    ASSERT_EQUAL(firstWireState.IsEnabled(), secondWireState.IsEnabled());
-
-    firstWireState.SetEnabled(false);
-
-    ASSERT_UNEQUAL(firstWireState.IsEnabled(), secondWireState.IsEnabled());
 }
 
 void Rendering::WireStateTesting::StreamTest() noexcept

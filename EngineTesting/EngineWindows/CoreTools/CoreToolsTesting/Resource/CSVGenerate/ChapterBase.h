@@ -24,6 +24,8 @@ namespace CSVConfigure
     public:
         using ClassType = ChapterBase;
 
+        using String = System::String;
+
     public:
         ChapterBase() noexcept = default;
         explicit ChapterBase(int key) noexcept;
@@ -44,7 +46,7 @@ namespace CSVConfigure
 
         NODISCARD virtual int GetReward() const noexcept;
 
-        NODISCARD virtual System::String GetChapterName() const;
+        NODISCARD virtual String GetChapterName() const;
 
         NODISCARD virtual bool IsMain() const noexcept;
 

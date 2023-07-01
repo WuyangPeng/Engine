@@ -26,7 +26,7 @@ namespace Rendering
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void MainTest();
+        void MainTest() noexcept;
         void Texture1DTest();
         void Texture2DTest();
         void Texture3DTest();

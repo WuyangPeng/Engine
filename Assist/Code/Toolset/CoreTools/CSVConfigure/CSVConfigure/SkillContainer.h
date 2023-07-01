@@ -24,11 +24,13 @@ namespace CSVConfigure
     {
     public:
         using ClassType = SkillContainer;
+
         using ConstSkillBaseSharedPtr = std::shared_ptr<const SkillBase>;
         using Container = std::vector<ConstSkillBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit SkillContainer(const CoreTools::CSVContent& csvContent);
+        explicit SkillContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -44,7 +46,9 @@ namespace CSVConfigure
         NODISCARD Container GetSkill(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container skill;

@@ -24,11 +24,13 @@ namespace AncientBooks
     {
     public:
         using ClassType = SourceContainer;
+
         using ConstSourceBaseSharedPtr = std::shared_ptr<const SourceBase>;
         using Container = std::vector<ConstSourceBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit SourceContainer(const CoreTools::CSVContent& csvContent);
+        explicit SourceContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,9 @@ namespace AncientBooks
         NODISCARD Container GetSource(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container source;

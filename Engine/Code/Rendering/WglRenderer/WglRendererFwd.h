@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:20)
+///	版本：0.9.1.0 (2023/06/25 16:23)
 
 #ifndef RENDERING_WGL_RENDERER_FWD_H
 #define RENDERING_WGL_RENDERER_FWD_H

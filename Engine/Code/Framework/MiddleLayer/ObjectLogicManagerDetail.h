@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::ObjectLogicManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+template <typename ObjectLogic, typename ArtificialIntelligence>
+Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::ObjectLogicManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }, objectLogic{ middleLayerPlatform, environmentDirectory }, artificialIntellegence{ middleLayerPlatform, environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -23,8 +23,8 @@ Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::ObjectLogicM
 
 #ifdef OPEN_CLASS_INVARIANT
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::IsValid() const noexcept
+template <typename ObjectLogic, typename ArtificialIntelligence>
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::IsValid() const noexcept
 {
     if (ParentType::IsValid())
         return true;
@@ -34,8 +34,8 @@ bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::IsValid
 
 #endif  // OPEN_CLASS_INVARIANT
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::PreCreate()
+template <typename ObjectLogic, typename ArtificialIntelligence>
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::PreCreate()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -51,8 +51,8 @@ bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::PreCrea
     }
 }
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Initialize()
+template <typename ObjectLogic, typename ArtificialIntelligence>
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::Initialize()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -68,8 +68,8 @@ bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Initial
     }
 }
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::PreIdle()
+template <typename ObjectLogic, typename ArtificialIntelligence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::PreIdle()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -78,8 +78,8 @@ void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::PreIdle
     artificialIntellegence.PreIdle();
 }
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Terminate()
+template <typename ObjectLogic, typename ArtificialIntelligence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::Terminate()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -88,8 +88,8 @@ void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Termina
     artificialIntellegence.Terminate();
 }
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Create(const EnvironmentParameter& environmentParameter)
+template <typename ObjectLogic, typename ArtificialIntelligence>
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::Create(const EnvironmentParameter& environmentParameter)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -103,8 +103,8 @@ bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Create(
     }
 }
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Destroy()
+template <typename ObjectLogic, typename ArtificialIntelligence>
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::Destroy()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -118,8 +118,8 @@ bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Destroy
     }
 }
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Idle(int64_t timeDelta)
+template <typename ObjectLogic, typename ArtificialIntelligence>
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::Idle(int64_t timeDelta)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -133,8 +133,8 @@ bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Idle(in
     }
 }
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetSystemManager(const MiddleLayerInterfaceSharedPtr& systemManager)
+template <typename ObjectLogic, typename ArtificialIntelligence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::SetSystemManager(const MiddleLayerInterfaceSharedPtr& systemManager)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -143,8 +143,8 @@ void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetSyst
     artificialIntellegence.SetSystemManager(systemManager);
 }
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetPhysicalModellingManager(const MiddleLayerInterfaceSharedPtr& physicalModellingManager)
+template <typename ObjectLogic, typename ArtificialIntelligence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::SetPhysicalModellingManager(const MiddleLayerInterfaceSharedPtr& physicalModellingManager)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -153,8 +153,8 @@ void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetPhys
     artificialIntellegence.SetPhysicalModellingManager(physicalModellingManager);
 }
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetMessageManager(const MiddleLayerInterfaceSharedPtr& messageManager)
+template <typename ObjectLogic, typename ArtificialIntelligence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::SetMessageManager(const MiddleLayerInterfaceSharedPtr& messageManager)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -163,8 +163,8 @@ void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetMess
     artificialIntellegence.SetMessageManager(messageManager);
 }
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetInputManager(const MiddleLayerInterfaceSharedPtr& inputManager)
+template <typename ObjectLogic, typename ArtificialIntelligence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::SetInputManager(const MiddleLayerInterfaceSharedPtr& inputManager)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -173,8 +173,8 @@ void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetInpu
     artificialIntellegence.SetInputManager(inputManager);
 }
 
-template <typename ObjectLogic, typename ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetNetworkManager(const MiddleLayerInterfaceSharedPtr& networkManager)
+template <typename ObjectLogic, typename ArtificialIntelligence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntelligence>::SetNetworkManager(const MiddleLayerInterfaceSharedPtr& networkManager)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 

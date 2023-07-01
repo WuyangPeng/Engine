@@ -54,7 +54,7 @@ int AncientBooks::ImperialCourtBase::GetBegin() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::ImperialCourtBase::GetBegin(const AncientBooksContainer& csvContainer) const
+AncientBooks::ImperialCourtBase::ConstYearSharedPtr AncientBooks::ImperialCourtBase::GetBegin(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -70,7 +70,7 @@ int AncientBooks::ImperialCourtBase::GetEnd() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::ImperialCourtBase::GetEnd(const AncientBooksContainer& csvContainer) const
+AncientBooks::ImperialCourtBase::ConstYearSharedPtr AncientBooks::ImperialCourtBase::GetEnd(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

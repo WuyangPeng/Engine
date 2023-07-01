@@ -26,7 +26,7 @@ namespace Rendering
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void MainTest();
+        void MainTest() noexcept;
 
         void DoRunUnitTest() override;
     };

@@ -36,11 +36,11 @@ AncientBooks::DayContainer::Container AncientBooks::DayContainer::GetDay(Functio
 
     Container result{};
 
-    for (const auto& value : day)
+    for (const auto& element : day)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

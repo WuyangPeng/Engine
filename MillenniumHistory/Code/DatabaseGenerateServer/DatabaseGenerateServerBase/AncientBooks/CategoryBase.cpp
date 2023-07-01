@@ -40,7 +40,7 @@ int AncientBooks::CategoryBase::GetGather() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::GatherMappingType> AncientBooks::CategoryBase::GetGather(const AncientBooksContainer& csvContainer) const
+AncientBooks::CategoryBase::ConstGatherSharedPtr AncientBooks::CategoryBase::GetGather(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

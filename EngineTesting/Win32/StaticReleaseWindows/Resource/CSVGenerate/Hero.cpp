@@ -77,7 +77,7 @@ CoreTools::Vector4 CSVConfigure::Hero::GetPosition() const noexcept
     return position;
 }
 
-std::vector<System::TChar> CSVConfigure::Hero::GetDescribe() const
+CSVConfigure::Hero::CharContainer CSVConfigure::Hero::GetDescribe() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -98,14 +98,14 @@ System::TChar CSVConfigure::Hero::GetDescribe(int index) const
     return describe.at(index);
 }
 
-std::vector<System::TChar>::const_iterator CSVConfigure::Hero::GetDescribeBegin() const noexcept
+CSVConfigure::Hero::CharContainerConstIter CSVConfigure::Hero::GetDescribeBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return describe.cbegin();
 }
 
-std::vector<System::TChar>::const_iterator CSVConfigure::Hero::GetDescribeEnd() const noexcept
+CSVConfigure::Hero::CharContainerConstIter CSVConfigure::Hero::GetDescribeEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 

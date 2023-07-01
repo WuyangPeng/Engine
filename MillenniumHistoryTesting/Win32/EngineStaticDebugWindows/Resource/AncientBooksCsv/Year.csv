@@ -1,6 +1,6 @@
-@default,,SexagenaryCycle,ReignTitle
+@default,,SexagenaryCycle,ReignTitle,,ReignTitle,Year
 Id,名字,干支,正統年號,幾年,非年號,幾年
-int,string,int,int64,int,int[],int[]
+int,string,int,int64,int,int64[],int[]
 id,name,sexagenaryCycle,reignTitle,year,unorthodoxReignTitle,unorthodoxYear
 -841,,57
 -840,,58

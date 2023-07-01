@@ -36,11 +36,11 @@ AncientBooks::EmperorContainer::Container AncientBooks::EmperorContainer::GetEmp
 
     Container result{};
 
-    for (const auto& value : emperor)
+    for (const auto& element : emperor)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

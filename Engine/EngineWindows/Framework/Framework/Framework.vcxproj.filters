@@ -181,6 +181,21 @@
     <Filter Include="Application 头文件\Flags">
       <UniqueIdentifier>{158149a8-3d60-4720-b917-74b181b338b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project 头文件">
+      <UniqueIdentifier>{f7713055-5386-4521-94d6-5322592d3033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project 源文件">
+      <UniqueIdentifier>{041bff8a-de44-4a92-8df7-257255f1b8aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project 头文件\Detail">
+      <UniqueIdentifier>{1c88e8c1-acae-45a9-82b6-e518f900c940}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project 源文件\Detail">
+      <UniqueIdentifier>{aaa33bd7-e552-472e-a3dc-5c1ead8bb9e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project 模板文件">
+      <UniqueIdentifier>{7319edc2-6ee7-4e5d-af15-7509df98e65a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Framework\FrameworkFwd.h">
@@ -558,7 +573,7 @@
     <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ObjectLogicManagerDetail.h">
       <Filter>MiddleLayer 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ArtificialIntellegenceInterface.h">
+    <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\ArtificialIntelligenceInterface.h">
       <Filter>MiddleLayer 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Framework\MiddleLayer\AudioManagerInterface.h">
@@ -840,6 +855,39 @@
     <ClInclude Include="..\..\..\Code\Framework\WindowProcess\WindowMessageUnitTestSuiteDetail.h">
       <Filter>WindowProcess 模板文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Project\Project.h">
+      <Filter>Project 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Project\ProjectFwd.h">
+      <Filter>Project 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Project\Detail\ProjectNameImpl.h">
+      <Filter>Project 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Project\ProjectName.h">
+      <Filter>Project 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Project\GUIProjectManager.h">
+      <Filter>Project 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Project\InputProjectManager.h">
+      <Filter>Project 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Project\InputProjectManagerDetail.h">
+      <Filter>Project 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Project\ResourceProjectManager.h">
+      <Filter>Project 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Project\SystemProjectManager.h">
+      <Filter>Project 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Project\Detail\ResourceProjectManagerImpl.h">
+      <Filter>Project 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\Project\Detail\GenerateProjectName.h">
+      <Filter>Project 头文件\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Framework\DllLib.cpp">
@@ -998,7 +1046,7 @@
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\Detail\ViewMiddleLayerImpl.cpp">
       <Filter>MiddleLayer 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\ArtificialIntellegenceInterface.cpp">
+    <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\ArtificialIntelligenceInterface.cpp">
       <Filter>MiddleLayer 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Framework\MiddleLayer\AudioManagerInterface.cpp">
@@ -1154,9 +1202,30 @@
     <ClCompile Include="..\..\..\Code\Framework\WindowProcess\VirtualKeysTypes.cpp">
       <Filter>WindowProcess 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\Project\Detail\ProjectNameImpl.cpp">
+      <Filter>Project 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\Project\ProjectName.cpp">
+      <Filter>Project 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\Project\GUIProjectManager.cpp">
+      <Filter>Project 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\Project\ResourceProjectManager.cpp">
+      <Filter>Project 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\Project\SystemProjectManager.cpp">
+      <Filter>Project 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\Project\Detail\ResourceProjectManagerImpl.cpp">
+      <Filter>Project 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\Project\Detail\GenerateProjectName.cpp">
+      <Filter>Project 源文件\Detail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-	<Text Include="Resource\Todo\Level 0.txt">
+    <Text Include="Resource\Todo\Level 0.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 1.txt">
@@ -1185,7 +1254,7 @@
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
-    </Text>    
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">

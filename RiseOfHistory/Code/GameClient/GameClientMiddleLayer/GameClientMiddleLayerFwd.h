@@ -5,11 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起版本：0.9.0.12 (2023/06/17 12:49)
+///	版本：0.9.1.0 (2023/06/19 15:20)
 
 #ifndef GAME_CLIENT_MIDDLE_LAYER_FWD_H
 #define GAME_CLIENT_MIDDLE_LAYER_FWD_H
 
+#include "ArtificialIntelligence/ArtificialIntelligenceFwd.h"
 #include "Audio/AudioFwd.h"
 #include "CameraSystems/CameraSystemsFwd.h"
 #include "Event/EventFwd.h"
@@ -23,6 +24,5 @@
 #include "System/SystemFwd.h"
 #include "Network/NetworkFwd.h"
 #include "Rendering/RenderingFwd.h"
-#include "ArtificialIntellegence/ArtificialIntellegenceFwd.h"
 
 #endif  // GAME_CLIENT_MIDDLE_LAYER_FWD_H

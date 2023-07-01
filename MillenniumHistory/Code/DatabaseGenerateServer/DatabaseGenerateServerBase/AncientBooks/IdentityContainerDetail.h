@@ -36,11 +36,11 @@ AncientBooks::IdentityContainer::Container AncientBooks::IdentityContainer::GetI
 
     Container result{};
 
-    for (const auto& value : identity)
+    for (const auto& element : identity)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

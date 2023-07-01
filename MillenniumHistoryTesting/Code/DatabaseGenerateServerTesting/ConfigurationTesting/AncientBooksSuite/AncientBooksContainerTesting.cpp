@@ -5,18 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策测试版本：0.9.0.12 (2023/06/14 21:27)
+///	版本：0.9.1.0 (2023/06/24 12:16)
 
 #include "AncientBooksContainerTesting.h"
-#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/AncientBooksContainer.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerCore/Helper/DatabaseGenerateServerCoreClassInvariantMacro.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-DatabaseGenerateServerBaseTesting::AncientBooksContainerTesting::AncientBooksContainerTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+DatabaseGenerateServerBaseTesting::AncientBooksContainerTesting::AncientBooksContainerTesting(const OStreamShared& stream, const AncientBooksContainer& ancientBooksContainer)
+    : ParentType{ stream }, ancientBooksContainer{ ancientBooksContainer }
 {
-    USER_SELF_CLASS_IS_VALID_1;
+    DATABASE_GENERATE_SERVER_CORE_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseGenerateServerBaseTesting, AncientBooksContainerTesting)
@@ -33,13 +32,10 @@ void DatabaseGenerateServerBaseTesting::AncientBooksContainerTesting::MainTest()
 
 void DatabaseGenerateServerBaseTesting::AncientBooksContainerTesting::ContainerTest()
 {
-    AncientBooks::AncientBooksContainer ancientBooksContainer{ SYSTEM_TEXT("Resource/AncientBooksCsv") };
-
     ASSERT_UNEQUAL_NULL_PTR(ancientBooksContainer.GetArticleContainer());
     ASSERT_UNEQUAL_NULL_PTR(ancientBooksContainer.GetBookContainer());
     ASSERT_UNEQUAL_NULL_PTR(ancientBooksContainer.GetCalendarContainer());
     ASSERT_UNEQUAL_NULL_PTR(ancientBooksContainer.GetCategoryContainer());
-    ASSERT_UNEQUAL_NULL_PTR(ancientBooksContainer.GetChapterContainer());
     ASSERT_UNEQUAL_NULL_PTR(ancientBooksContainer.GetCharacterContainer());
     ASSERT_UNEQUAL_NULL_PTR(ancientBooksContainer.GetCountryContainer());
     ASSERT_UNEQUAL_NULL_PTR(ancientBooksContainer.GetDayContainer());

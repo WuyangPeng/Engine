@@ -33,6 +33,15 @@ namespace Rendering
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void Enable() noexcept(gAssert < 3 || gMathematicsAssert < 3) override;
+        [[nodiscard]] bool Update(int level) override;
+        [[nodiscard]] bool Update(int item, int level) override;
+        [[nodiscard]] bool CopyGpuToCpu() override;
+        [[nodiscard]] bool CopyGpuToCpu(int level) override;
+        [[nodiscard]] bool CopyGpuToCpu(int item, int level) override;
+        [[nodiscard]] bool CopyCpuToGpu() override;
+        [[nodiscard]] bool CopyCpuToGpu(int level) override;
+        [[nodiscard]] bool CopyCpuToGpu(int item, int level) override;
+        [[nodiscard]] bool GetNumActiveElements() override;
 
     private:
         PackageType impl;

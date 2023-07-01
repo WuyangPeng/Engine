@@ -20,11 +20,9 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 
-#include <filesystem>
-
 using namespace std::literals;
 
-CSVConfigure::CSVConfigureContainer::CSVConfigureContainer(const System::String& directory)
+CSVConfigure::CSVConfigureContainer::CSVConfigureContainer(const String& directory)
     : chapterContainer{},
       equipContainer{},
       heroContainer{},
@@ -38,94 +36,100 @@ CSVConfigure::CSVConfigureContainer::CSVConfigureContainer(const System::String&
     USER_SELF_CLASS_IS_VALID_1;
 }
 
-void CSVConfigure::CSVConfigureContainer::Parsing(const System::String& directory)
+void CSVConfigure::CSVConfigureContainer::Parsing(const String& directory)
 {
     const std::filesystem::path path{ directory };
 
     for (const auto& inputPath : std::filesystem::directory_iterator(path))
     {
-        auto fileName = inputPath.path().native();
+        Parsing(inputPath);
+    }
+}
 
-        if (fileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT(".csv"s))) != (fileName.size() - 4))
-        {
-            continue;
-        }
+void CSVConfigure::CSVConfigureContainer::Parsing(const std::filesystem::directory_entry& inputPath)
+{
+    const auto fileName = inputPath.path().native();
 
-        CoreTools::CSVContent csvContent{ CoreTools::StringConversion::WideCharConversionStandard(fileName) };
+    if (fileName.find(L".csv"s) != (fileName.size() - 4))
+    {
+        return;
+    }
 
-        const auto csvClassName = csvContent.GetCSVClassName();
+    const CoreTools::CSVContent csvContent{ CoreTools::StringConversion::WideCharConversionStandard(fileName) };
 
-        if (csvClassName == SYSTEM_TEXT("Chapter"s))
-        {
-            chapterContainer = std::make_shared<ChapterContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Equip"s))
-        {
-            equipContainer = std::make_shared<EquipContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Hero"s))
-        {
-            heroContainer = std::make_shared<HeroContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Scene"s))
-        {
-            sceneContainer = std::make_shared<SceneContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("Skill"s))
-        {
-            skillContainer = std::make_shared<SkillContainer>(csvContent);
-        }
-        else if (csvClassName == SYSTEM_TEXT("SystemConstant"s))
-        {
-            systemConstantContainer = std::make_shared<SystemConstantContainer>(csvContent);
-        }
+    const auto csvClassName = csvContent.GetCSVClassName();
+
+    if (csvClassName == SYSTEM_TEXT("Chapter"s))
+    {
+        chapterContainer = std::make_shared<ChapterContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Equip"s))
+    {
+        equipContainer = std::make_shared<EquipContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Hero"s))
+    {
+        heroContainer = std::make_shared<HeroContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Scene"s))
+    {
+        sceneContainer = std::make_shared<SceneContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("Skill"s))
+    {
+        skillContainer = std::make_shared<SkillContainer>(csvContent);
+    }
+    else if (csvClassName == SYSTEM_TEXT("SystemConstant"s))
+    {
+        systemConstantContainer = std::make_shared<SystemConstantContainer>(csvContent);
     }
 }
 
 void CSVConfigure::CSVConfigureContainer::Verify() const
 {
-    if (!chapterContainer)
+    if (chapterContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("chapter表不存在。"s))
     }
 
-    if (!equipContainer)
+    if (equipContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("equip表不存在。"s))
     }
 
-    if (!heroContainer)
+    if (heroContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("hero表不存在。"s))
     }
 
-    if (!sceneContainer)
+    if (sceneContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("scene表不存在。"s))
     }
 
-    if (!skillContainer)
+    if (skillContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("skill表不存在。"s))
     }
 
-    if (!systemConstantContainer)
+    if (systemConstantContainer == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("systemConstant表不存在。"s))
     }
 
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("CSVConfigure结束载入……"));
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 
 bool CSVConfigure::CSVConfigureContainer::IsValid() const noexcept
 {
-    if (chapterContainer &&
-        equipContainer &&
-        heroContainer &&
-        sceneContainer &&
-        skillContainer &&
-        systemConstantContainer)
+    if (chapterContainer != nullptr &&
+        equipContainer != nullptr &&
+        heroContainer != nullptr &&
+        sceneContainer != nullptr &&
+        skillContainer != nullptr &&
+        systemConstantContainer != nullptr)
     {
         return true;
     }
@@ -137,42 +141,42 @@ bool CSVConfigure::CSVConfigureContainer::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-std::shared_ptr<const CSVConfigure::ChapterContainer> CSVConfigure::CSVConfigureContainer::GetChapterContainer() const noexcept
+CSVConfigure::CSVConfigureContainer::ConstChapterContainerSharedPtr CSVConfigure::CSVConfigureContainer::GetChapterContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return chapterContainer;
 }
 
-std::shared_ptr<const CSVConfigure::EquipContainer> CSVConfigure::CSVConfigureContainer::GetEquipContainer() const noexcept
+CSVConfigure::CSVConfigureContainer::ConstEquipContainerSharedPtr CSVConfigure::CSVConfigureContainer::GetEquipContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return equipContainer;
 }
 
-std::shared_ptr<const CSVConfigure::HeroContainer> CSVConfigure::CSVConfigureContainer::GetHeroContainer() const noexcept
+CSVConfigure::CSVConfigureContainer::ConstHeroContainerSharedPtr CSVConfigure::CSVConfigureContainer::GetHeroContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return heroContainer;
 }
 
-std::shared_ptr<const CSVConfigure::SceneContainer> CSVConfigure::CSVConfigureContainer::GetSceneContainer() const noexcept
+CSVConfigure::CSVConfigureContainer::ConstSceneContainerSharedPtr CSVConfigure::CSVConfigureContainer::GetSceneContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return sceneContainer;
 }
 
-std::shared_ptr<const CSVConfigure::SkillContainer> CSVConfigure::CSVConfigureContainer::GetSkillContainer() const noexcept
+CSVConfigure::CSVConfigureContainer::ConstSkillContainerSharedPtr CSVConfigure::CSVConfigureContainer::GetSkillContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 
     return skillContainer;
 }
 
-std::shared_ptr<const CSVConfigure::SystemConstantContainer> CSVConfigure::CSVConfigureContainer::GetSystemConstantContainer() const noexcept
+CSVConfigure::CSVConfigureContainer::ConstSystemConstantContainerSharedPtr CSVConfigure::CSVConfigureContainer::GetSystemConstantContainer() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_1;
 

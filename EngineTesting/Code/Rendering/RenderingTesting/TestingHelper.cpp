@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 14:55)
+///	版本：0.9.1.0 (2023/06/20 16:47)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -50,7 +50,7 @@ void Rendering::TestingHelper::InitSuite()
     AddConsoleGraphSuite();
     AddOpenGLAPISuite();
     AddDirectAPISuite();
-    AddRenderersSuite();
+    AddRendererEngineSuite();
     AddOpenGLRendererSuite();
     AddDx9RendererSuite();
     AddAglRendererSuite();
@@ -348,34 +348,36 @@ void Rendering::TestingHelper::AddDirectAPISuite()
     AddSuite(directAPISuite);
 }
 
-void Rendering::TestingHelper::AddRenderersSuite()
+void Rendering::TestingHelper::AddRendererEngineSuite()
 {
-    auto renderersSuite = GenerateSuite("渲染器");
+    auto rendererEngineSuite = GenerateSuite("渲染器");
 
-    ADD_TEST(renderersSuite, RendererBasisTesting);
-    ADD_TEST(renderersSuite, WindowsParameterTesting);
-    ADD_TEST(renderersSuite, RendererParameterTesting);
-    ADD_TEST(renderersSuite, EnvironmentParameterTesting);
-    ADD_TEST(renderersSuite, RenderingEnvironmentTesting);
-    ADD_TEST(renderersSuite, RenderingDeviceTesting);
-    ADD_TEST(renderersSuite, PlatformVertexFormatTesting);
-    ADD_TEST(renderersSuite, VertexFormatManagementTesting);
-    ADD_TEST(renderersSuite, PlatformIndexBufferTesting);
-    ADD_TEST(renderersSuite, PlatformVertexBufferTesting);
-    ADD_TEST(renderersSuite, BufferLockManageTesting);
-    ADD_TEST(renderersSuite, BufferManagementTesting);
-    ADD_TEST(renderersSuite, BufferManagementLockEncapsulationTesting);
-    ADD_TEST(renderersSuite, PlatformTexture1DTesting);
-    ADD_TEST(renderersSuite, PlatformTexture2DTesting);
-    ADD_TEST(renderersSuite, PlatformTexture3DTesting);
-    ADD_TEST(renderersSuite, PlatformTextureCubeTesting);
-    ADD_TEST(renderersSuite, TextureLockManageTesting);
-    ADD_TEST(renderersSuite, TextureManagementTesting);
-    ADD_TEST(renderersSuite, TextureManagementLockEncapsulationTesting);
-    ADD_TEST(renderersSuite, PlatformRenderTargetTesting);
-    ADD_TEST(renderersSuite, RenderTargetManagementTesting);
+    ADD_TEST(rendererEngineSuite, ViewportTesting);
+    ADD_TEST(rendererEngineSuite, DepthRangeTesting);
+    ADD_TEST(rendererEngineSuite, RendererBasisTesting);
+    ADD_TEST(rendererEngineSuite, WindowsParameterTesting);
+    ADD_TEST(rendererEngineSuite, RendererParameterTesting);
+    ADD_TEST(rendererEngineSuite, EnvironmentParameterTesting);
+    ADD_TEST(rendererEngineSuite, RenderingEnvironmentTesting);
+    ADD_TEST(rendererEngineSuite, RenderingDeviceTesting);
+    ADD_TEST(rendererEngineSuite, PlatformVertexFormatTesting);
+    ADD_TEST(rendererEngineSuite, VertexFormatManagementTesting);
+    ADD_TEST(rendererEngineSuite, PlatformIndexBufferTesting);
+    ADD_TEST(rendererEngineSuite, PlatformVertexBufferTesting);
+    ADD_TEST(rendererEngineSuite, BufferLockManageTesting);
+    ADD_TEST(rendererEngineSuite, BufferManagementTesting);
+    ADD_TEST(rendererEngineSuite, BufferManagementLockEncapsulationTesting);
+    ADD_TEST(rendererEngineSuite, PlatformTexture1DTesting);
+    ADD_TEST(rendererEngineSuite, PlatformTexture2DTesting);
+    ADD_TEST(rendererEngineSuite, PlatformTexture3DTesting);
+    ADD_TEST(rendererEngineSuite, PlatformTextureCubeTesting);
+    ADD_TEST(rendererEngineSuite, TextureLockManageTesting);
+    ADD_TEST(rendererEngineSuite, TextureManagementTesting);
+    ADD_TEST(rendererEngineSuite, TextureManagementLockEncapsulationTesting);
+    ADD_TEST(rendererEngineSuite, PlatformRenderTargetTesting);
+    ADD_TEST(rendererEngineSuite, RenderTargetManagementTesting);
 
-    AddSuite(renderersSuite);
+    AddSuite(rendererEngineSuite);
 }
 
 void Rendering::TestingHelper::AddOpenGLRendererSuite()

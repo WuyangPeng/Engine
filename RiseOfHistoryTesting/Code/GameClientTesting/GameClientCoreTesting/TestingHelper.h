@@ -5,18 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起测试版本：0.9.0.12 (2023/06/17 13:05)
+///	版本：0.9.1.0 (2023/06/19 15:57)
 
 #ifndef GAME_CLIENT_CORE_TESTING_TESTING_HELPER_H
 #define GAME_CLIENT_CORE_TESTING_TESTING_HELPER_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
-#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 namespace GameClientTesting
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
     public:
         using ClassType = TestingHelper;
@@ -28,7 +26,9 @@ namespace GameClientTesting
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void InitSuite() noexcept;
+        void InitSuite();
+
+        void AddEngineSuite();
     };
 }
 

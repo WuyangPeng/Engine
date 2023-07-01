@@ -25,6 +25,21 @@ namespace AncientBooks
     public:
         using ClassType = BookBase;
 
+        using String = System::String;
+        using StringContainer = std::vector<String>;
+        using StringContainerConstIter = StringContainer::const_iterator;
+        using IntContainer = std::vector<int>;
+        using IntContainerConstIter = IntContainer::const_iterator;
+        using ConstGenusSharedPtr = std::shared_ptr<const GenusMappingType>;
+        using ConstCharacterSharedPtr = std::shared_ptr<const CharacterMappingType>;
+        using CharacterContainer = std::vector<ConstCharacterSharedPtr>;
+        using ConstCharacterSharedPtr = std::shared_ptr<const CharacterMappingType>;
+        using CharacterContainer = std::vector<ConstCharacterSharedPtr>;
+        using ConstCountrySharedPtr = std::shared_ptr<const CountryMappingType>;
+        using CountryContainer = std::vector<ConstCountrySharedPtr>;
+        using ConstCharacterSharedPtr = std::shared_ptr<const CharacterMappingType>;
+        using CharacterContainer = std::vector<ConstCharacterSharedPtr>;
+
     public:
         BookBase() noexcept = default;
         explicit BookBase(int key) noexcept;
@@ -42,59 +57,63 @@ namespace AncientBooks
         NODISCARD virtual int GetId() const noexcept;
 
         NODISCARD virtual int GetGenus() const noexcept;
-        NODISCARD virtual std::shared_ptr<const GenusMappingType> GetGenus(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstGenusSharedPtr GetGenus(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual System::String GetName() const;
+        NODISCARD virtual String GetName() const;
 
-        NODISCARD virtual std::vector<System::String> GetAlias() const;
+        NODISCARD virtual StringContainer GetAlias() const;
         NODISCARD virtual int GetAliasCount() const;
-        NODISCARD virtual System::String GetAlias(int index) const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetAliasBegin() const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetAliasEnd() const;
+        NODISCARD virtual String GetAlias(int index) const;
+        NODISCARD virtual StringContainerConstIter GetAliasBegin() const;
+        NODISCARD virtual StringContainerConstIter GetAliasEnd() const;
 
         NODISCARD virtual int GetVolume() const noexcept;
 
-        NODISCARD virtual std::vector<int> GetAuthor() const;
+        NODISCARD virtual IntContainer GetAuthor() const;
         NODISCARD virtual int GetAuthorCount() const;
         NODISCARD virtual int GetAuthor(int index) const;
-        NODISCARD virtual std::vector<int>::const_iterator GetAuthorBegin() const;
-        NODISCARD virtual std::vector<int>::const_iterator GetAuthorEnd() const;
+        NODISCARD virtual IntContainerConstIter GetAuthorBegin() const;
+        NODISCARD virtual IntContainerConstIter GetAuthorEnd() const;
+        NODISCARD virtual CharacterContainer GetAuthor(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual std::vector<System::String> GetAuthorDescribe() const;
+        NODISCARD virtual StringContainer GetAuthorDescribe() const;
         NODISCARD virtual int GetAuthorDescribeCount() const;
-        NODISCARD virtual System::String GetAuthorDescribe(int index) const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetAuthorDescribeBegin() const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetAuthorDescribeEnd() const;
+        NODISCARD virtual String GetAuthorDescribe(int index) const;
+        NODISCARD virtual StringContainerConstIter GetAuthorDescribeBegin() const;
+        NODISCARD virtual StringContainerConstIter GetAuthorDescribeEnd() const;
 
-        NODISCARD virtual std::vector<int> GetAnnotator() const;
+        NODISCARD virtual IntContainer GetAnnotator() const;
         NODISCARD virtual int GetAnnotatorCount() const;
         NODISCARD virtual int GetAnnotator(int index) const;
-        NODISCARD virtual std::vector<int>::const_iterator GetAnnotatorBegin() const;
-        NODISCARD virtual std::vector<int>::const_iterator GetAnnotatorEnd() const;
+        NODISCARD virtual IntContainerConstIter GetAnnotatorBegin() const;
+        NODISCARD virtual IntContainerConstIter GetAnnotatorEnd() const;
+        NODISCARD virtual CharacterContainer GetAnnotator(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual std::vector<System::String> GetAnnotateDescribe() const;
+        NODISCARD virtual StringContainer GetAnnotateDescribe() const;
         NODISCARD virtual int GetAnnotateDescribeCount() const;
-        NODISCARD virtual System::String GetAnnotateDescribe(int index) const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetAnnotateDescribeBegin() const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetAnnotateDescribeEnd() const;
+        NODISCARD virtual String GetAnnotateDescribe(int index) const;
+        NODISCARD virtual StringContainerConstIter GetAnnotateDescribeBegin() const;
+        NODISCARD virtual StringContainerConstIter GetAnnotateDescribeEnd() const;
 
-        NODISCARD virtual std::vector<int> GetCountry() const;
+        NODISCARD virtual IntContainer GetCountry() const;
         NODISCARD virtual int GetCountryCount() const;
         NODISCARD virtual int GetCountry(int index) const;
-        NODISCARD virtual std::vector<int>::const_iterator GetCountryBegin() const;
-        NODISCARD virtual std::vector<int>::const_iterator GetCountryEnd() const;
+        NODISCARD virtual IntContainerConstIter GetCountryBegin() const;
+        NODISCARD virtual IntContainerConstIter GetCountryEnd() const;
+        NODISCARD virtual CountryContainer GetCountry(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual std::vector<int> GetPerson() const;
+        NODISCARD virtual IntContainer GetPerson() const;
         NODISCARD virtual int GetPersonCount() const;
         NODISCARD virtual int GetPerson(int index) const;
-        NODISCARD virtual std::vector<int>::const_iterator GetPersonBegin() const;
-        NODISCARD virtual std::vector<int>::const_iterator GetPersonEnd() const;
+        NODISCARD virtual IntContainerConstIter GetPersonBegin() const;
+        NODISCARD virtual IntContainerConstIter GetPersonEnd() const;
+        NODISCARD virtual CharacterContainer GetPerson(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual std::vector<System::String> GetUnansweredQuestion() const;
+        NODISCARD virtual StringContainer GetUnansweredQuestion() const;
         NODISCARD virtual int GetUnansweredQuestionCount() const;
-        NODISCARD virtual System::String GetUnansweredQuestion(int index) const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetUnansweredQuestionBegin() const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetUnansweredQuestionEnd() const;
+        NODISCARD virtual String GetUnansweredQuestion(int index) const;
+        NODISCARD virtual StringContainerConstIter GetUnansweredQuestionBegin() const;
+        NODISCARD virtual StringContainerConstIter GetUnansweredQuestionEnd() const;
 
     private:
         int key{};

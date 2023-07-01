@@ -25,6 +25,20 @@ namespace AncientBooks
     public:
         using ClassType = ReignTitleBase;
 
+        using String = System::String;
+        using IntContainer = std::vector<int>;
+        using IntContainerConstIter = IntContainer::const_iterator;
+        using ConstCharacterSharedPtr = std::shared_ptr<const CharacterMappingType>;
+        using CharacterContainer = std::vector<ConstCharacterSharedPtr>;
+        using ConstYearSharedPtr = std::shared_ptr<const YearMappingType>;
+        using ConstMonthSharedPtr = std::shared_ptr<const MonthMappingType>;
+        using ConstSexagenaryCycleSharedPtr = std::shared_ptr<const SexagenaryCycleMappingType>;
+        using ConstDaySharedPtr = std::shared_ptr<const DayMappingType>;
+        using ConstYearSharedPtr = std::shared_ptr<const YearMappingType>;
+        using ConstMonthSharedPtr = std::shared_ptr<const MonthMappingType>;
+        using ConstSexagenaryCycleSharedPtr = std::shared_ptr<const SexagenaryCycleMappingType>;
+        using ConstDaySharedPtr = std::shared_ptr<const DayMappingType>;
+
     public:
         ReignTitleBase() noexcept = default;
         explicit ReignTitleBase(int64_t key) noexcept;
@@ -41,39 +55,40 @@ namespace AncientBooks
 
         NODISCARD virtual int64_t GetId() const noexcept;
 
-        NODISCARD virtual System::String GetName() const;
+        NODISCARD virtual String GetName() const;
 
-        NODISCARD virtual std::vector<int> GetEmperor() const;
+        NODISCARD virtual IntContainer GetEmperor() const;
         NODISCARD virtual int GetEmperorCount() const;
         NODISCARD virtual int GetEmperor(int index) const;
-        NODISCARD virtual std::vector<int>::const_iterator GetEmperorBegin() const;
-        NODISCARD virtual std::vector<int>::const_iterator GetEmperorEnd() const;
+        NODISCARD virtual IntContainerConstIter GetEmperorBegin() const;
+        NODISCARD virtual IntContainerConstIter GetEmperorEnd() const;
+        NODISCARD virtual CharacterContainer GetEmperor(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetSerial() const noexcept;
 
         NODISCARD virtual int GetBeginYear() const noexcept;
-        NODISCARD virtual std::shared_ptr<const YearMappingType> GetBeginYear(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstYearSharedPtr GetBeginYear(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetBeginMonth() const noexcept;
-        NODISCARD virtual std::shared_ptr<const MonthMappingType> GetBeginMonth(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstMonthSharedPtr GetBeginMonth(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetBeginSexagenaryCycle() const noexcept;
-        NODISCARD virtual std::shared_ptr<const SexagenaryCycleMappingType> GetBeginSexagenaryCycle(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstSexagenaryCycleSharedPtr GetBeginSexagenaryCycle(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetBeginDay() const noexcept;
-        NODISCARD virtual std::shared_ptr<const DayMappingType> GetBeginDay(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstDaySharedPtr GetBeginDay(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetEndYear() const noexcept;
-        NODISCARD virtual std::shared_ptr<const YearMappingType> GetEndYear(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstYearSharedPtr GetEndYear(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetEndMonth() const noexcept;
-        NODISCARD virtual std::shared_ptr<const MonthMappingType> GetEndMonth(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstMonthSharedPtr GetEndMonth(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetEndSexagenaryCycle() const noexcept;
-        NODISCARD virtual std::shared_ptr<const SexagenaryCycleMappingType> GetEndSexagenaryCycle(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstSexagenaryCycleSharedPtr GetEndSexagenaryCycle(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetEndDay() const noexcept;
-        NODISCARD virtual std::shared_ptr<const DayMappingType> GetEndDay(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstDaySharedPtr GetEndDay(const AncientBooksContainer& csvContainer) const;
 
     private:
         int64_t key{};

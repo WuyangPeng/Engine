@@ -47,8 +47,8 @@ Framework::ViewMiddleLayer& Framework::ViewMiddleLayer::operator=(ViewMiddleLaye
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, ViewMiddleLayer)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ViewMiddleLayer, GetRenderer, Rendering::RendererSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ViewMiddleLayer, GetRenderer, Rendering::ConstRendererSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ViewMiddleLayer, GetRenderer, Rendering::BaseRendererSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ViewMiddleLayer, GetRenderer, Rendering::ConstBaseRendererSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ViewMiddleLayer, GetClearColor, Framework::ViewMiddleLayer::Colour);
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Framework, ViewMiddleLayer, SetClearColor, Colour, void)
 

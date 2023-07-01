@@ -36,11 +36,11 @@ AncientBooks::CalendarContainer::Container AncientBooks::CalendarContainer::GetC
 
     Container result{};
 
-    for (const auto& value : calendar)
+    for (const auto& element : calendar)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

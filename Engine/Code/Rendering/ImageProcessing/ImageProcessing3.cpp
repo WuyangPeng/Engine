@@ -13,7 +13,7 @@
 #include "System/Helper/PragmaWarning.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 
-Rendering::ImageProcessing3::ImageProcessing3(int bound0, int bound1, int factor0, int factor1, const std::vector<Mathematics::Float4>& imageData, const PixelShaderSharedPtr& mainPShader, const Mathematics::Float4& boundaryColor, bool useDirichlet)
+Rendering::ImageProcessing3::ImageProcessing3(int bound0, int bound1, int factor0, int factor1, const std::vector<Mathematics::Float4>& imageData, MAYBE_UNUSED const Mathematics::Float4& boundaryColor, MAYBE_UNUSED bool useDirichlet)
     : ParentType{ bound0 * factor0, bound1 * factor1, 2 },
       bound0{ bound0 },
       bound1{ bound1 },
@@ -28,34 +28,8 @@ Rendering::ImageProcessing3::ImageProcessing3(int bound0, int bound1, int factor
       dz{ 1.0f / bound2M1 }
 {
     VisualEffectSharedPtr effect{};
-    VisualEffectInstanceSharedPtr instance{};
 
     SetMainTexture(CreateTiledImage(imageData));
-
-    CreateEffect(mainPShader, effect, instance);
-    SetMainEffect(effect);
-    SetMainEffectInstance(instance);
-
-    instance->SetPixelTexture(0, "StateSampler", GetColorTexture(1));
-
-    if (useDirichlet)
-    {
-        CreateBoundaryDirichletEffect(effect, instance);
-    }
-    else
-    {
-        CreateBoundaryNeumannEffect(effect, instance);
-    }
-    SetBoundaryEffect(effect);
-    SetBoundaryEffectInstance(instance);
-
-    instance->SetPixelTexture(0, "StateSampler", GetColorTexture(0));
-
-    CreateDrawEffect(effect, instance, boundaryColor);
-    SetDrawEffect(effect);
-    SetDrawEffectInstance(instance);
-
-    instance->SetPixelTexture(0, "StateSampler", GetColorTexture(1));
 
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -112,98 +86,6 @@ Rendering::Texture2DSharedPtr Rendering::ImageProcessing3::CreateTiledImage(MAYB
     auto tiled = std::make_shared<Texture2D>(System::EnumCastUnderlying<DataFormatType>(System::TextureInternalFormat::RGBA32F), GetNumCols(), GetNumRows(), 1);
 
     return tiled;
-}
-
-void Rendering::ImageProcessing3::CreateBoundaryDirichletEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    auto pshader = std::make_shared<PixelShader>("BoundaryDirichlet3", 1, 1, 0, 2);
-
-    pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetSampler(0, "MaskSampler", ShaderFlags::SamplerType::Sampler2D);
-    pshader->SetSampler(1, "StateSampler", ShaderFlags::SamplerType::Sampler2D);
-
-    auto profile = pshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 2; ++j)
-        {
-            profile->SetTextureUnit(i, j, dirichletPTextureUnits.at(i)->at(j));
-        }
-
-        profile->SetProgram(i, dirichletPPrograms.at(i));
-    }
-
-    CreateEffect(pshader, effect, instance);
-}
-
-void Rendering::ImageProcessing3::CreateBoundaryNeumannEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    auto pshader = std::make_shared<PixelShader>("BoundaryNeumann3", 1, 1, 0, 2);
-
-    pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetSampler(0, "OffsetSampler", ShaderFlags::SamplerType::Sampler2D);
-    pshader->SetSampler(1, "StateSampler", ShaderFlags::SamplerType::Sampler2D);
-
-    auto profile = pshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 2; ++j)
-        {
-            profile->SetTextureUnit(i, j, neumannPTextureUnits.at(i)->at(j));
-        }
-
-        profile->SetProgram(i, neumannPPrograms.at(i));
-    }
-
-    CreateEffect(pshader, effect, instance);
-}
-
-void Rendering::ImageProcessing3::CreateDrawEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance, const Mathematics::Float4& boundaryColor)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    auto pshader = std::make_shared<PixelShader>("DrawImage3", 1, 1, 1, 2);
-
-    pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetConstant(0, "BoundaryColor", 1);
-    pshader->SetSampler(0, "StateSampler", ShaderFlags::SamplerType::Sampler2D);
-    pshader->SetSampler(1, "MaskSampler", ShaderFlags::SamplerType::Sampler2D);
-
-    auto profile = pshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 1; ++j)
-        {
-            profile->SetBaseRegister(i, j, *drawPRegisters.at(i));
-        }
-
-        for (auto j = 0; j < 2; ++j)
-        {
-            profile->SetTextureUnit(i, j, drawPTextureUnits.at(i)->at(j));
-        }
-
-        profile->SetProgram(i, drawPPrograms.at(i));
-    }
-
-    CreateEffect(pshader, effect, instance);
-
-    auto boundaryColorConstant = std::make_shared<ShaderFloat>(1);
-
-    (*boundaryColorConstant)[0] = boundaryColor[0];
-    (*boundaryColorConstant)[1] = boundaryColor[1];
-    (*boundaryColorConstant)[2] = boundaryColor[2];
-    (*boundaryColorConstant)[3] = boundaryColor[3];
-    instance->SetPixelConstant(0, "BoundaryColor", boundaryColorConstant);
 }
 
 std::array<int, 2> Rendering::ImageProcessing3::allDirichletPTextureUnits{ 0, 1 };

@@ -12,8 +12,8 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "VisualEffect.h"
 #include "Rendering/SceneGraph/Material.h"
-#include "Rendering/Shaders/VisualEffectInstance.h"
 
 namespace Rendering
 {
@@ -30,10 +30,6 @@ namespace Rendering
         explicit MaterialEffect(CoreTools::DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
-
-        NODISCARD VisualEffectInstanceSharedPtr CreateInstance(const MaterialSharedPtr& material);
-
-        NODISCARD static VisualEffectInstanceSharedPtr CreateUniqueInstance(const MaterialSharedPtr& material);
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
     };

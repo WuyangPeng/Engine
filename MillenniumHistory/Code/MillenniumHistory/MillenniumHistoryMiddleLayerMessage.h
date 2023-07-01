@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.12 (2023/06/15 22:53)
+///	版本：0.9.1.0 (2023/06/17 23:41)
 
 #ifndef MILLENNIUM_HISTORY_MILLENNIUM_HISTORY_MIDDLE_LAYER_MESSAGE_H
 #define MILLENNIUM_HISTORY_MILLENNIUM_HISTORY_MIDDLE_LAYER_MESSAGE_H
@@ -13,29 +13,33 @@
 #include "MillenniumHistory.h"
 #include "CoreTools/Console/ConsoleAlloc.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
-#include "Framework/MiddleLayer/ArtificialIntellegenceInterface.h"
+#include "Framework/MiddleLayer/ArtificialIntelligenceInterface.h"
 #include "Framework/MiddleLayer/EngineMiddleLayerContainer.h"
 #include "Framework/MiddleLayer/ObjectLogicInterface.h"
 #include "Framework/MiddleLayer/ObjectLogicManager.h"
+#include "Framework/Project/GUIProjectManager.h"
+#include "Framework/Project/InputProjectManagerDetail.h"
+#include "Framework/Project/ResourceProjectManager.h"
+#include "Framework/Project/SystemProjectManager.h"
 #include "Framework/WindowProcess/WindowMessage.h"
 #include "Framework/WindowProcess/WindowProcessHandle.h"
 
 namespace MillenniumHistory
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<Framework::ObjectLogicInterface, Framework::ArtificialIntellegenceInterface>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<Framework::ObjectLogicInterface, Framework::ArtificialIntelligenceInterface>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
-                                                                  InputManager,
+                                                                  Framework::InputProjectManager,
                                                                   Framework::NetworkManagerInterface,
                                                                   ObjectLogicManager,
                                                                   Framework::PhysicalModellingManagerInterface,
                                                                   Framework::MessageManagerInterface,
                                                                   Framework::EventManagerInterface,
-                                                                  SystemManager,
-                                                                  ResourceManager,
+                                                                  Framework::SystemProjectManager,
+                                                                  Framework::ResourceProjectManager,
                                                                   Framework::AudioManagerInterface,
                                                                   Framework::CameraSystemsManagerInterface,
                                                                   Framework::RenderingManagerInterface,
-                                                                  GUIManager>;
+                                                                  Framework::GUIProjectManager>;
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
     class MillenniumHistoryMiddleLayerMessage final : public MessageType

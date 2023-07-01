@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-AncientBooks::DayContainer::DayContainer(const CoreTools::CSVContent& csvContent)
+AncientBooks::DayContainer::DayContainer(const CSVContent& csvContent)
     : day{}
 {
     Parsing(csvContent);
@@ -24,10 +24,18 @@ AncientBooks::DayContainer::DayContainer(const CoreTools::CSVContent& csvContent
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void AncientBooks::DayContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void AncientBooks::DayContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("day表开始载入……"));
 
+    Load(csvContent);
+    Unique();
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("day表结束载入……"));
+}
+
+void AncientBooks::DayContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -41,7 +49,10 @@ void AncientBooks::DayContainer::Parsing(const CoreTools::CSVContent& csvContent
     std::ranges::sort(day, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
+}
 
+void AncientBooks::DayContainer::Unique()
+{
     const auto iter = std::ranges::unique(day, [](const auto& lhs, const auto& rhs) noexcept {
         if((*lhs).GetKey() == (*rhs).GetKey())
         {
@@ -57,12 +68,10 @@ void AncientBooks::DayContainer::Parsing(const CoreTools::CSVContent& csvContent
 
     if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("day表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-
         day.erase(iter.begin(), iter.end());
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("day表结束载入……"));
+    day.shrink_to_fit();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, DayContainer)

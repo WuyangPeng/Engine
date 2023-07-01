@@ -15,6 +15,7 @@
 #include "CSVConfigureFwd.h"
 #include "System/Helper/UnicodeUsing.h"
 
+#include <filesystem>
 #include <memory>
 
 namespace CSVConfigure
@@ -24,29 +25,38 @@ namespace CSVConfigure
     public:
         using ClassType = CSVConfigureContainer;
 
+        using String = System::String;
+        using ConstChapterContainerSharedPtr = std::shared_ptr<const ChapterContainer>;
+        using ConstEquipContainerSharedPtr = std::shared_ptr<const EquipContainer>;
+        using ConstHeroContainerSharedPtr = std::shared_ptr<const HeroContainer>;
+        using ConstSceneContainerSharedPtr = std::shared_ptr<const SceneContainer>;
+        using ConstSkillContainerSharedPtr = std::shared_ptr<const SkillContainer>;
+        using ConstSystemConstantContainerSharedPtr = std::shared_ptr<const SystemConstantContainer>;
+
     public:
-        explicit CSVConfigureContainer(const System::String& directory);
+        explicit CSVConfigureContainer(const String& directory);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD std::shared_ptr<const ChapterContainer> GetChapterContainer() const noexcept;
-        NODISCARD std::shared_ptr<const EquipContainer> GetEquipContainer() const noexcept;
-        NODISCARD std::shared_ptr<const HeroContainer> GetHeroContainer() const noexcept;
-        NODISCARD std::shared_ptr<const SceneContainer> GetSceneContainer() const noexcept;
-        NODISCARD std::shared_ptr<const SkillContainer> GetSkillContainer() const noexcept;
-        NODISCARD std::shared_ptr<const SystemConstantContainer> GetSystemConstantContainer() const noexcept;
+        NODISCARD ConstChapterContainerSharedPtr GetChapterContainer() const noexcept;
+        NODISCARD ConstEquipContainerSharedPtr GetEquipContainer() const noexcept;
+        NODISCARD ConstHeroContainerSharedPtr GetHeroContainer() const noexcept;
+        NODISCARD ConstSceneContainerSharedPtr GetSceneContainer() const noexcept;
+        NODISCARD ConstSkillContainerSharedPtr GetSkillContainer() const noexcept;
+        NODISCARD ConstSystemConstantContainerSharedPtr GetSystemConstantContainer() const noexcept;
 
     private:
-        void Parsing(const System::String& directory);
+        void Parsing(const String& directory);
+        void Parsing(const std::filesystem::directory_entry& inputPath);
         void Verify() const;
 
     private:
-        std::shared_ptr<const ChapterContainer> chapterContainer;
-        std::shared_ptr<const EquipContainer> equipContainer;
-        std::shared_ptr<const HeroContainer> heroContainer;
-        std::shared_ptr<const SceneContainer> sceneContainer;
-        std::shared_ptr<const SkillContainer> skillContainer;
-        std::shared_ptr<const SystemConstantContainer> systemConstantContainer;
+        ConstChapterContainerSharedPtr chapterContainer;
+        ConstEquipContainerSharedPtr equipContainer;
+        ConstHeroContainerSharedPtr heroContainer;
+        ConstSceneContainerSharedPtr sceneContainer;
+        ConstSkillContainerSharedPtr skillContainer;
+        ConstSystemConstantContainerSharedPtr systemConstantContainer;
     };
 }
 

@@ -83,3 +83,12 @@ void CoreTools::LogAsynchronous::Stop()
     impl->Stop();
     impl->Join();
 }
+
+void CoreTools::LogAsynchronous::Wait()
+{
+    SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
+
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    impl->Wait();
+}

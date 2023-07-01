@@ -25,6 +25,28 @@ namespace AncientBooks
     public:
         using ClassType = CharacterBase;
 
+        using String = System::String;
+        using StringContainer = std::vector<String>;
+        using StringContainerConstIter = StringContainer::const_iterator;
+        using IntContainer = std::vector<int>;
+        using IntContainerConstIter = IntContainer::const_iterator;
+        using ConstCountrySharedPtr = std::shared_ptr<const CountryMappingType>;
+        using ConstIdentitySharedPtr = std::shared_ptr<const IdentityMappingType>;
+        using ConstCharacterSharedPtr = std::shared_ptr<const CharacterMappingType>;
+        using ConstCharacterSharedPtr = std::shared_ptr<const CharacterMappingType>;
+        using ConstCharacterSharedPtr = std::shared_ptr<const CharacterMappingType>;
+        using CharacterContainer = std::vector<ConstCharacterSharedPtr>;
+        using ConstCharacterSharedPtr = std::shared_ptr<const CharacterMappingType>;
+        using CharacterContainer = std::vector<ConstCharacterSharedPtr>;
+        using ConstYearSharedPtr = std::shared_ptr<const YearMappingType>;
+        using ConstMonthSharedPtr = std::shared_ptr<const MonthMappingType>;
+        using ConstSexagenaryCycleSharedPtr = std::shared_ptr<const SexagenaryCycleMappingType>;
+        using ConstDaySharedPtr = std::shared_ptr<const DayMappingType>;
+        using ConstYearSharedPtr = std::shared_ptr<const YearMappingType>;
+        using ConstMonthSharedPtr = std::shared_ptr<const MonthMappingType>;
+        using ConstSexagenaryCycleSharedPtr = std::shared_ptr<const SexagenaryCycleMappingType>;
+        using ConstDaySharedPtr = std::shared_ptr<const DayMappingType>;
+
     public:
         CharacterBase() noexcept = default;
         explicit CharacterBase(int key) noexcept;
@@ -42,72 +64,76 @@ namespace AncientBooks
         NODISCARD virtual int GetId() const noexcept;
 
         NODISCARD virtual int GetCountry() const noexcept;
-        NODISCARD virtual std::shared_ptr<const CountryMappingType> GetCountry(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstCountrySharedPtr GetCountry(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetIdentity() const noexcept;
-        NODISCARD virtual std::shared_ptr<const IdentityMappingType> GetIdentity(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstIdentitySharedPtr GetIdentity(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual System::String GetFamily() const;
+        NODISCARD virtual String GetFamily() const;
 
-        NODISCARD virtual System::String GetName() const;
+        NODISCARD virtual String GetName() const;
 
-        NODISCARD virtual System::String GetFullName() const;
+        NODISCARD virtual String GetFullName() const;
 
-        NODISCARD virtual std::vector<System::String> GetAlias() const;
+        NODISCARD virtual StringContainer GetAlias() const;
         NODISCARD virtual int GetAliasCount() const;
-        NODISCARD virtual System::String GetAlias(int index) const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetAliasBegin() const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetAliasEnd() const;
+        NODISCARD virtual String GetAlias(int index) const;
+        NODISCARD virtual StringContainerConstIter GetAliasBegin() const;
+        NODISCARD virtual StringContainerConstIter GetAliasEnd() const;
 
-        NODISCARD virtual System::String GetStyleName() const;
+        NODISCARD virtual String GetStyleName() const;
 
         NODISCARD virtual int GetSex() const noexcept;
 
         NODISCARD virtual int GetFather() const noexcept;
+        NODISCARD virtual ConstCharacterSharedPtr GetFather(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetMother() const noexcept;
+        NODISCARD virtual ConstCharacterSharedPtr GetMother(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual std::vector<int> GetFosterFather() const;
+        NODISCARD virtual IntContainer GetFosterFather() const;
         NODISCARD virtual int GetFosterFatherCount() const;
         NODISCARD virtual int GetFosterFather(int index) const;
-        NODISCARD virtual std::vector<int>::const_iterator GetFosterFatherBegin() const;
-        NODISCARD virtual std::vector<int>::const_iterator GetFosterFatherEnd() const;
+        NODISCARD virtual IntContainerConstIter GetFosterFatherBegin() const;
+        NODISCARD virtual IntContainerConstIter GetFosterFatherEnd() const;
+        NODISCARD virtual CharacterContainer GetFosterFather(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual std::vector<int> GetFosterMother() const;
+        NODISCARD virtual IntContainer GetFosterMother() const;
         NODISCARD virtual int GetFosterMotherCount() const;
         NODISCARD virtual int GetFosterMother(int index) const;
-        NODISCARD virtual std::vector<int>::const_iterator GetFosterMotherBegin() const;
-        NODISCARD virtual std::vector<int>::const_iterator GetFosterMotherEnd() const;
+        NODISCARD virtual IntContainerConstIter GetFosterMotherBegin() const;
+        NODISCARD virtual IntContainerConstIter GetFosterMotherEnd() const;
+        NODISCARD virtual CharacterContainer GetFosterMother(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetBirthYear() const noexcept;
-        NODISCARD virtual std::shared_ptr<const YearMappingType> GetBirthYear(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstYearSharedPtr GetBirthYear(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetBirthMonth() const noexcept;
-        NODISCARD virtual std::shared_ptr<const MonthMappingType> GetBirthMonth(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstMonthSharedPtr GetBirthMonth(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetBirthSexagenaryCycle() const noexcept;
-        NODISCARD virtual std::shared_ptr<const SexagenaryCycleMappingType> GetBirthSexagenaryCycle(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstSexagenaryCycleSharedPtr GetBirthSexagenaryCycle(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetBirthDay() const noexcept;
-        NODISCARD virtual std::shared_ptr<const DayMappingType> GetBirthDay(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstDaySharedPtr GetBirthDay(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetDeathYear() const noexcept;
-        NODISCARD virtual std::shared_ptr<const YearMappingType> GetDeathYear(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstYearSharedPtr GetDeathYear(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetDeathMonth() const noexcept;
-        NODISCARD virtual std::shared_ptr<const MonthMappingType> GetDeathMonth(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstMonthSharedPtr GetDeathMonth(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetDeathSexagenaryCycle() const noexcept;
-        NODISCARD virtual std::shared_ptr<const SexagenaryCycleMappingType> GetDeathSexagenaryCycle(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstSexagenaryCycleSharedPtr GetDeathSexagenaryCycle(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetDeathDay() const noexcept;
-        NODISCARD virtual std::shared_ptr<const DayMappingType> GetDeathDay(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstDaySharedPtr GetDeathDay(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual std::vector<System::String> GetUnansweredQuestion() const;
+        NODISCARD virtual StringContainer GetUnansweredQuestion() const;
         NODISCARD virtual int GetUnansweredQuestionCount() const;
-        NODISCARD virtual System::String GetUnansweredQuestion(int index) const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetUnansweredQuestionBegin() const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetUnansweredQuestionEnd() const;
+        NODISCARD virtual String GetUnansweredQuestion(int index) const;
+        NODISCARD virtual StringContainerConstIter GetUnansweredQuestionBegin() const;
+        NODISCARD virtual StringContainerConstIter GetUnansweredQuestionEnd() const;
 
     private:
         int key{};

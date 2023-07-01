@@ -12,6 +12,7 @@
 
 #include "Constants.h"
 #include "Math.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "Mathematics/Rational/FloatingPointAnalysisDetail.h"
 
 #include <algorithm>
@@ -164,7 +165,7 @@ Real Mathematics::Math<Real>::FAbs(Real value) noexcept
 template <typename Real>
 Real Mathematics::Math<Real>::Floor(Real value) noexcept
 {
-    return floor(value);
+    return std::floor(value);
 }
 
 template <typename Real>
@@ -207,7 +208,7 @@ Real Mathematics::Math<Real>::Log10(Real value) noexcept(gAssert < 3 || gMathema
 {
     MATHEMATICS_ASSERTION_3(GetValue(0) < value, "Log10的输入值为非正数！\n");
 
-    return GetInverseLN10() * log(value);
+    return std::log10(value);
 }
 
 template <typename Real>
@@ -356,6 +357,12 @@ template <typename Real>
 Real Mathematics::Math<Real>::SinPi(Real x) noexcept
 {
     return Sin(x * pi<Real>);
+}
+
+template <typename Real>
+int Mathematics::Math<Real>::GetNumberDigits(int64_t number)
+{
+    return number <= 0 ? 0 : boost::numeric_cast<int>(std::floor(std::log10(number)) + 1);
 }
 
 #endif  // MATHEMATICS_BASE_MATH_ACHIEVE_H

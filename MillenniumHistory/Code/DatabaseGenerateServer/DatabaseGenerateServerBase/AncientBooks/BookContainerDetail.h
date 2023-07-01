@@ -36,11 +36,11 @@ AncientBooks::BookContainer::Container AncientBooks::BookContainer::GetBook(Func
 
     Container result{};
 
-    for (const auto& value : book)
+    for (const auto& element : book)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

@@ -37,9 +37,9 @@ void JsonConfigure::MonstersContainer::Parsing(const CoreTools::JsonRow& jsonRow
 {
     const auto dataRow = jsonRow.GetJsonRowContainer(SYSTEM_TEXT("data"s));
 
-    for (const auto& value : dataRow)
+    for (const auto& element : dataRow)
     {
-        data.emplace_back(std::make_shared<Monsters::Data>(value));
+        data.emplace_back(std::make_shared<Monsters::Data>(element));
     }
 
     std::ranges::sort(data, [](const auto& lhs, const auto& rhs) noexcept {
@@ -192,9 +192,9 @@ void JsonConfigure::Monsters::Data::Parsing(const CoreTools::JsonRow& jsonRow)
 {
     const auto elementsRow = jsonRow.GetJsonRowContainer(SYSTEM_TEXT("elements"s));
 
-    for (const auto& value : elementsRow)
+    for (const auto& element : elementsRow)
     {
-        elements.emplace_back(std::make_shared<Monsters::Elements>(value));
+        elements.emplace_back(std::make_shared<Monsters::Elements>(element));
     }
 
     std::ranges::sort(elements, [](const auto& lhs, const auto& rhs) noexcept {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起版本：0.9.0.12 (2023/06/17 12:47)
+///	版本：0.9.1.0 (2023/06/19 15:18)
 
 #ifndef GAME_CLIENT_CORE_ENGINE_PLACEHOLDER_H
 #define GAME_CLIENT_CORE_ENGINE_PLACEHOLDER_H
@@ -16,7 +16,7 @@
 
 namespace GameClientCore
 {
-    class GAME_CLIENT_CORE_DEFAULT_DECLARE Placeholder
+    class GAME_CLIENT_CORE_DEFAULT_DECLARE Placeholder final
     {
     public:
         using ClassType = Placeholder;

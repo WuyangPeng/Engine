@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:29)
+///	版本：0.9.1.0 (2023/06/29 19:41)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,7 +19,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLDrawTarget.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/Detail/Textures/DrawTargetImpl.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, DrawTarget)
@@ -33,10 +33,10 @@ Rendering::DrawTarget::DrawTarget(int numRenderTargets,
                                   DataFormatType renderTargetFormat,
                                   int width,
                                   int height,
-                                  bool hasRenderTargetMipmaps,
+                                  bool hasRenderTargetMipMaps,
                                   DataFormatType depthStencilFormat)
     : ParentType{ "DrawTarget" },
-      impl{ numRenderTargets, renderTargetFormat, width, height, hasRenderTargetMipmaps, depthStencilFormat }
+      impl{ numRenderTargets, renderTargetFormat, width, height, hasRenderTargetMipMaps, depthStencilFormat }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -47,7 +47,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, GetNumTargets, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, GetRenderTargetFormat, Rendering::DataFormatType)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, GetWidth, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, GetHeight, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, HasRenderTargetMipmaps, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, HasRenderTargetMipMaps, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, DrawTarget, HasDepthStencil, bool)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, DrawTarget, GetDepthStencilFormat, Rendering::DataFormatType)
@@ -58,8 +58,8 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, GetDepthStencilTe
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, DrawTarget, GetRenderTargetTexture, int, Rendering::ConstTextureRenderTargetSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, GetDepthStencilTexture, Rendering::ConstTextureDepthStencilSharedPtr)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, AutogenerateRTMipmaps, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, WantAutogenerateRTMipmaps, bool)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, AutoGenerateRenderTargetMipMaps, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, DrawTarget, WantAutoGenerateRenderTargetMipMaps, bool)
 
 Rendering::DrawTarget::DrawTarget(LoadConstructor loadConstructor)
     : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
@@ -140,7 +140,7 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::DrawTarget::CloneObject() const
     return std::make_shared<ClassType>(*this);
 }
 
-Rendering::RendererDrawTargetSharedPtr Rendering::DrawTarget::CreateRendererDrawTarget(RendererTypes rendererTypes, const GraphicsObjectContainer& renderTargetTextures, GraphicsObject& depthStencilTexture)
+Rendering::RendererDrawTargetSharedPtr Rendering::DrawTarget::CreateRendererDrawTarget(RendererTypes rendererTypes, const RendererObjectContainer& renderTargetTextures, const RendererObjectSharedPtr& depthStencilTexture) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -151,16 +151,16 @@ Rendering::RendererDrawTargetSharedPtr Rendering::DrawTarget::CreateRendererDraw
             OpenGLDrawTarget::OpenGLTextureRenderTargetContainer container{};
             for (const auto& renderTargetTexture : renderTargetTextures)
             {
-                container.emplace_back(boost::polymorphic_pointer_cast<OpenGLTextureRenderTarget>(renderTargetTexture->CreateRendererObject(rendererTypes)));
+                container.emplace_back(boost::polymorphic_pointer_cast<OpenGLTextureRenderTarget>(renderTargetTexture));
             }
 
-            auto depthStencil = boost::polymorphic_pointer_cast<OpenGLTextureDepthStencil>(depthStencilTexture.CreateRendererObject(rendererTypes));
+            auto depthStencil = boost::polymorphic_pointer_cast<OpenGLTextureDepthStencil>(depthStencilTexture);
 
-            return std::make_shared<OpenGLDrawTarget>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), container, depthStencil);
+            return std::make_shared<OpenGLDrawTarget>(boost::polymorphic_pointer_cast<const ClassType>(shared_from_this()), container, depthStencil);
         }
         default:
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
         }
     }
 }

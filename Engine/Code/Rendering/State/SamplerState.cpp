@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:27)
+///	版本：0.9.1.0 (2023/06/29 11:18)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,7 +19,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
 #include "Rendering/OpenGLRenderer/State/OpenGLSamplerState.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, SamplerState)
 

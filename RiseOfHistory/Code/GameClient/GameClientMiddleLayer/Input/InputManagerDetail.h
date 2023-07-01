@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起版本：0.9.0.12 (2022/08/03 11:22)
+///	版本：0.9.1.0 (2023/06/19 15:30)
 
-#ifndef GAME_CLIENT_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_DETAIL_H
-#define GAME_CLIENT_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_DETAIL_H
+#ifndef GAME_CLIENT_MIDDLE_LAYER_INPUT_INPUT_MANAGER_DETAIL_H
+#define GAME_CLIENT_MIDDLE_LAYER_INPUT_INPUT_MANAGER_DETAIL_H
 
 #include "GameClient/GameClientMiddleLayer/Helper/GameClientMiddleLayerClassInvariantMacro.h"
 #include "InputManager.h"
@@ -39,4 +39,4 @@ bool GameClientMiddleLayer::InputManager<ApplicationTrait>::IsValid() const noex
 
 #endif  // OPEN_CLASS_INVARIANT
 
-#endif  // GAME_CLIENT_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_DETAIL_H
+#endif  // GAME_CLIENT_MIDDLE_LAYER_INPUT_INPUT_MANAGER_DETAIL_H

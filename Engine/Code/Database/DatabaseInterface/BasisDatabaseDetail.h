@@ -46,4 +46,36 @@ typename Database::DataTypeTraits<Type>::Type Database::BasisDatabase::GetValue(
     }
 }
 
+template <Database::DataType Type>
+std::string Database::BasisDatabase::GetArrayStringValue() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    const auto value = GetValue<Type>();
+
+    std::string result{};
+
+    auto index = 0;
+    for (const auto& element : value)
+    {
+        if constexpr (std::is_same_v<Database::DataTypeTraits<Type>::Type, BasisDatabase::StringArray>)
+        {
+            result += element;
+        }
+        else
+        {
+            result += std::to_string(element);
+        }
+
+        ++index;
+
+        if (index != value.size())
+        {
+            result += "|";
+        }
+    }
+
+    return result;
+}
+
 #endif  // DATABASE_DATABASE_INTERFACE_BASIS_DATABASE_DETAIL_H

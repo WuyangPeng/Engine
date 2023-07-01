@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = Genus;
         using ParentType = GenusBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Genus(const CoreTools::CSVRow& csvRow);
+        explicit Genus(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -34,24 +36,24 @@ namespace AncientBooks
         NODISCARD int GetId() const noexcept override;
 
         NODISCARD int GetCategory() const noexcept override;
-        NODISCARD std::shared_ptr<const CategoryMappingType> GetCategory(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstCategorySharedPtr GetCategory(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD System::String GetName() const override;
+        NODISCARD String GetName() const override;
 
         NODISCARD int GetFather() const noexcept override;
-        NODISCARD std::shared_ptr<const GenusMappingType> GetFather(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstGenusSharedPtr GetFather(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD System::String GetBegin() const override;
+        NODISCARD String GetBegin() const override;
 
-        NODISCARD System::String GetEnd() const override;
+        NODISCARD String GetEnd() const override;
 
     private:
         int id;  // Id
         int category;  // 類
-        System::String name;  // 名称
+        String name;  // 名称
         int father;  // 父類
-        System::String begin;  // 启始
-        System::String end;  // 结束
+        String begin;  // 启始
+        String end;  // 结束
     };
 }
 

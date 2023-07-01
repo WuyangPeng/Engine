@@ -14,7 +14,7 @@
 
 using namespace std::literals;
 
-CSVConfigure::Chapter::Chapter(const CoreTools::CSVRow& csvRow)
+CSVConfigure::Chapter::Chapter(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       nextId{ csvRow.GetInt(SYSTEM_TEXT("nextId"s)) },

@@ -19,10 +19,10 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{289e83fe-82ae-4928-8baf-4cd15f37ea4e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="RenderersSuite 头文件">
+    <Filter Include="RendererEngineSuite 头文件">
       <UniqueIdentifier>{e3f13dfe-622b-43de-ab8b-c8cba1d188c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="RenderersSuite 源文件">
+    <Filter Include="RendererEngineSuite 源文件">
       <UniqueIdentifier>{11adc7c9-b543-4c0d-bc3b-8546c0123006}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -36,14 +36,14 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\TestingHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderersSuite.h">
-      <Filter>RenderersSuite 头文件</Filter>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RendererEngineSuite\RendererEngineSuite.h">
+      <Filter>RendererEngineSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderingDeviceTesting.h">
-      <Filter>RenderersSuite 头文件</Filter>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RendererEngineSuite\RenderingDeviceTesting.h">
+      <Filter>RendererEngineSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderingEnvironmentTesting.h">
-      <Filter>RenderersSuite 头文件</Filter>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RendererEngineSuite\RenderingEnvironmentTesting.h">
+      <Filter>RendererEngineSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -59,11 +59,11 @@
     <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\TestingMain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderingDeviceTesting.cpp">
-      <Filter>RenderersSuite 源文件</Filter>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\RendererEngineSuite\RenderingDeviceTesting.cpp">
+      <Filter>RendererEngineSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderingEnvironmentTesting.cpp">
-      <Filter>RenderersSuite 源文件</Filter>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\RendererEngineSuite\RenderingEnvironmentTesting.cpp">
+      <Filter>RendererEngineSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

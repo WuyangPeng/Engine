@@ -21,7 +21,6 @@
 #include "Rendering/Detail/ClodMesh.h"
 #include "Rendering/Detail/CreateClodMesh.h"
 #include "Rendering/Detail/SwitchNode.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 
@@ -46,14 +45,14 @@ void Rendering::ClodMeshTesting::MainTest()
     CoreTools::InitTerm::ExecuteInitializer();
 
     CameraManager::Create();
-    RendererManager::Create();
+
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateTrianglesMeshFile);
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
 
-    RendererManager::Destroy();
+
     CameraManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();

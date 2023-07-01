@@ -15,7 +15,6 @@
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Shaders/AlphaState.h"
 
 Rendering::AlphaStateTesting::AlphaStateTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -41,65 +40,12 @@ void Rendering::AlphaStateTesting::MainTest()
     CoreTools::InitTerm::ExecuteTerminator();
 }
 
-void Rendering::AlphaStateTesting::InitTest()
+void Rendering::AlphaStateTesting::InitTest() noexcept
 {
-    AlphaState firstAlphaState{ CoreTools::DisableNotThrow::Disable };
-
-    ASSERT_FALSE(firstAlphaState.IsBlendEnabled());
-    ASSERT_ENUM_EQUAL(AlphaStateFlags::SourceBlendMode::SourceAlpha, firstAlphaState.GetSourceBlend());
-    ASSERT_ENUM_EQUAL(AlphaStateFlags::DestinationBlendMode::OneMinusSourceAlpha, firstAlphaState.GetDestinationBlend());
-    ASSERT_FALSE(firstAlphaState.IsCompareEnabled());
-    ASSERT_ENUM_EQUAL(AlphaStateFlags::CompareMode::Always, firstAlphaState.GetCompare());
-    ASSERT_APPROXIMATE(0.0f, firstAlphaState.GetReference(), 1e-8f);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Approximate<float>, firstAlphaState.GetConstantColor(), Colour<float>(0.0f, 0.0f, 0.0f, 0.0f), 1e-8f);
-
-    firstAlphaState.SetBlendEnabled(true);
-    ASSERT_TRUE(firstAlphaState.IsBlendEnabled());
-
-    firstAlphaState.SetSourceBlend(AlphaStateFlags::SourceBlendMode::DestinationColor);
-    ASSERT_ENUM_EQUAL(AlphaStateFlags::SourceBlendMode::DestinationColor, firstAlphaState.GetSourceBlend());
-
-    firstAlphaState.SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::One);
-    ASSERT_ENUM_EQUAL(AlphaStateFlags::DestinationBlendMode::One, firstAlphaState.GetDestinationBlend());
-
-    firstAlphaState.SetCompareEnabled(true);
-    ASSERT_TRUE(firstAlphaState.IsCompareEnabled());
-
-    firstAlphaState.SetCompare(AlphaStateFlags::CompareMode::Less);
-    ASSERT_ENUM_EQUAL(AlphaStateFlags::CompareMode::Less, firstAlphaState.GetCompare());
-
-    firstAlphaState.SetReference(0.5f);
-    ASSERT_APPROXIMATE(0.5f, firstAlphaState.GetReference(), 1e-8f);
-
-    firstAlphaState.SetConstantColor(Colour<float>(0.5f, 0.1f, 0.4f, 0.2f));
-    ASSERT_APPROXIMATE_USE_FUNCTION(Approximate<float>, firstAlphaState.GetConstantColor(), Colour<float>(0.5f, 0.1f, 0.4f, 0.2f), 1e-8f);
 }
 
-void Rendering::AlphaStateTesting::CopyTest()
+void Rendering::AlphaStateTesting::CopyTest() noexcept
 {
-    AlphaState firstAlphaState(CoreTools::DisableNotThrow::Disable);
-    firstAlphaState.SetBlendEnabled(true);
-    firstAlphaState.SetSourceBlend(AlphaStateFlags::SourceBlendMode::DestinationColor);
-    firstAlphaState.SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::One);
-    firstAlphaState.SetCompareEnabled(true);
-    firstAlphaState.SetCompare(AlphaStateFlags::CompareMode::Less);
-    firstAlphaState.SetReference(0.5f);
-    firstAlphaState.SetConstantColor(Colour<float>(0.5f, 0.1f, 0.4f, 0.2f));
-
-    AlphaState secondAlphaState(firstAlphaState);
-
-    ASSERT_EQUAL(firstAlphaState.IsBlendEnabled(), secondAlphaState.IsBlendEnabled());
-    ASSERT_ENUM_EQUAL(secondAlphaState.GetSourceBlend(), firstAlphaState.GetSourceBlend());
-    ASSERT_ENUM_EQUAL(secondAlphaState.GetDestinationBlend(), firstAlphaState.GetDestinationBlend());
-    ASSERT_EQUAL(firstAlphaState.IsCompareEnabled(), secondAlphaState.IsCompareEnabled());
-    ASSERT_ENUM_EQUAL(secondAlphaState.GetCompare(), firstAlphaState.GetCompare());
-    ASSERT_APPROXIMATE(secondAlphaState.GetReference(), firstAlphaState.GetReference(), 1e-8f);
-    ASSERT_APPROXIMATE_USE_FUNCTION(Approximate<float>, firstAlphaState.GetConstantColor(), secondAlphaState.GetConstantColor(), 1e-8f);
-
-    secondAlphaState.SetReference(0.51f);
-
-    ASSERT_APPROXIMATE(secondAlphaState.GetReference(), 0.51f, 1e-8f);
-    ASSERT_APPROXIMATE(firstAlphaState.GetReference(), 0.5f, 1e-8f);
 }
 
 void Rendering::AlphaStateTesting::StreamTest() noexcept

@@ -40,7 +40,7 @@ int AncientBooks::ArticleBase::GetVersion() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::VersionMappingType> AncientBooks::ArticleBase::GetVersion(const AncientBooksContainer& csvContainer) const
+AncientBooks::ArticleBase::ConstVersionSharedPtr AncientBooks::ArticleBase::GetVersion(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -54,15 +54,6 @@ int AncientBooks::ArticleBase::GetChapter() const noexcept
     USER_CLASS_IS_VALID_CONST_9;
 
     return 0;
-}
-
-std::shared_ptr<const AncientBooks::ChapterMappingType> AncientBooks::ArticleBase::GetChapter(const AncientBooksContainer& csvContainer) const
-{
-    USER_CLASS_IS_VALID_CONST_9;
-
-    System::UnusedFunction(csvContainer);
-
-    THROW_EXCEPTION(SYSTEM_TEXT("article表基类不允许获取映射值。"s))
 }
 
 System::String AncientBooks::ArticleBase::GetChapterName() const
@@ -79,7 +70,14 @@ int AncientBooks::ArticleBase::GetVolume() const noexcept
     return 0;
 }
 
-std::vector<int> AncientBooks::ArticleBase::GetOtherAuthor() const
+int AncientBooks::ArticleBase::GetChapterVolume() const noexcept
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return 0;
+}
+
+AncientBooks::ArticleBase::IntContainer AncientBooks::ArticleBase::GetOtherAuthor() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -102,21 +100,30 @@ int AncientBooks::ArticleBase::GetOtherAuthor(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("article表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::ArticleBase::GetOtherAuthorBegin() const
+AncientBooks::ArticleBase::IntContainerConstIter AncientBooks::ArticleBase::GetOtherAuthorBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("article表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::ArticleBase::GetOtherAuthorEnd() const
+AncientBooks::ArticleBase::IntContainerConstIter AncientBooks::ArticleBase::GetOtherAuthorEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("article表基类不允许获取数组。"s))
 }
 
-std::vector<System::String> AncientBooks::ArticleBase::GetAuthorDescribe() const
+AncientBooks::ArticleBase::CharacterContainer AncientBooks::ArticleBase::GetOtherAuthor(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("article表基类不允许获取映射值。"s))
+}
+
+AncientBooks::ArticleBase::StringContainer AncientBooks::ArticleBase::GetAuthorDescribe() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -139,14 +146,14 @@ System::String AncientBooks::ArticleBase::GetAuthorDescribe(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("article表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::ArticleBase::GetAuthorDescribeBegin() const
+AncientBooks::ArticleBase::StringContainerConstIter AncientBooks::ArticleBase::GetAuthorDescribeBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("article表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::ArticleBase::GetAuthorDescribeEnd() const
+AncientBooks::ArticleBase::StringContainerConstIter AncientBooks::ArticleBase::GetAuthorDescribeEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

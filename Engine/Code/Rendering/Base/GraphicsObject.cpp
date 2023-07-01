@@ -5,12 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:08)
+///	版本：0.9.1.0 (2023/06/28 09:58)
 
 #include "Rendering/RenderingExport.h"
 
 #include "GraphicsObject.h"
+#include "RendererObjectBridge.h"
 #include "Flags/GraphicsObjectType.h"
+#include "Detail/GraphicsObjectImpl.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -21,58 +24,81 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, GraphicsObject);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, GraphicsObject);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, GraphicsObject);
 
-Rendering::GraphicsObject::GraphicsObject(const std::string& name, GraphicsObjectType type)
-    : ParentType{ name }, graphicsObjectType{ type }
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, GraphicsObject)
+
+Rendering::GraphicsObject::GraphicsObject(const std::string& name, GraphicsObjectType graphicsObjectType)
+    : ParentType{ name }, impl{ graphicsObjectType }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
+Rendering::GraphicsObject::~GraphicsObject() noexcept
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+
+    NoexceptNoReturn(*this, &ClassType::Release);
+}
+
+void Rendering::GraphicsObject::Release()
+{
+    const auto rendererObjectBridge = impl->GetRendererObjectBridge();
+
+    rendererObjectBridge->UnbindRendererObject(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()));
+}
+
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, GraphicsObject);
+
+void Rendering::GraphicsObject::SetRendererObjectBridge(const RendererObjectBridgeSharedPtr& aRendererObjectBridge) noexcept
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+
+    return impl->SetRendererObjectBridge(aRendererObjectBridge);
+}
 
 Rendering::GraphicsObjectType Rendering::GraphicsObject::GetType() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return graphicsObjectType;
+    return impl->GetType();
 }
 
 bool Rendering::GraphicsObject::IsBuffer() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return GraphicsObjectType::Buffer <= graphicsObjectType && graphicsObjectType <= GraphicsObjectType::IndirectArgumentsBuffer;
+    return impl->IsBuffer();
 }
 
 bool Rendering::GraphicsObject::IsTexture() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return GraphicsObjectType::TextureSingle <= graphicsObjectType && graphicsObjectType <= GraphicsObjectType::Texture3;
+    return impl->IsTexture();
 }
 
 bool Rendering::GraphicsObject::IsTextureArray() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return GraphicsObjectType::TextureArray <= graphicsObjectType && graphicsObjectType <= GraphicsObjectType::TextureCubeArray;
+    return impl->IsTextureArray();
 }
 
 bool Rendering::GraphicsObject::IsShader() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return GraphicsObjectType::Shader <= graphicsObjectType && graphicsObjectType <= GraphicsObjectType::ComputeShader;
+    return impl->IsShader();
 }
 
 bool Rendering::GraphicsObject::IsDrawingState() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return GraphicsObjectType::DrawingState <= graphicsObjectType && graphicsObjectType <= GraphicsObjectType::RasterizerState;
+    return impl->IsDrawingState();
 }
 
 Rendering::GraphicsObject::GraphicsObject(LoadConstructor loadConstructor)
-    : ParentType{ loadConstructor }, graphicsObjectType{ GraphicsObjectType::None }
+    : ParentType{ loadConstructor }, impl{ GraphicsObjectType::None }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -83,7 +109,7 @@ int Rendering::GraphicsObject::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += CoreTools::GetStreamSize(graphicsObjectType);
+    size += impl->GetStreamingSize();
 
     return size;
 }
@@ -103,7 +129,7 @@ void Rendering::GraphicsObject::Save(BufferTarget& target) const
 
     ParentType::Save(target);
 
-    target.WriteEnum(graphicsObjectType);
+    impl->Save(target);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -130,7 +156,7 @@ void Rendering::GraphicsObject::Load(BufferSource& source)
 
     ParentType::Load(source);
 
-    source.ReadEnum(graphicsObjectType);
+    impl->Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

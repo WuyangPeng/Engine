@@ -17,7 +17,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Rendering/Renderers/RendererManager.h"
 
 Rendering::ClodMeshImpl::ClodMeshImpl() noexcept
     : currentRecord{ 0 }, targetRecord{ 0 }, recordArray{}
@@ -98,6 +97,10 @@ void Rendering::ClodMeshImpl::SetTargetRecord(int aTargetRecord) noexcept
     targetRecord = aTargetRecord;
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
 void Rendering::ClodMeshImpl::SelectLevelOfDetail(VertexBuffer& vertexbuffer, const IndexBufferSharedPtr& indexbuffer, int aTargetRecord)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -147,9 +150,11 @@ void Rendering::ClodMeshImpl::SelectLevelOfDetail(VertexBuffer& vertexbuffer, co
 
     if (bufferChanged)
     {
-        RENDERER_MANAGE_SINGLETON.UpdateAll(indexbuffer);
+        
     }
 }
+
+#include STSTEM_WARNING_POP
 
 CoreTools::ObjectSharedPtr Rendering::ClodMeshImpl::GetObjectByName(const std::string& name)
 {

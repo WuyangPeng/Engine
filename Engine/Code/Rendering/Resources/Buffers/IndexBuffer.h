@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:22)
+///	版本：0.9.1.0 (2023/06/29 14:45)
 
 #ifndef RENDERING_RESOURCES_INDEX_BUFFER_H
 #define RENDERING_RESOURCES_INDEX_BUFFER_H
@@ -49,12 +49,12 @@ namespace Rendering
         NODISCARD int GetFirstPrimitive() const noexcept;
         NODISCARD int GetFirstIndex() const;
 
-        void SetPoint(int i, int32_t v);
-        NODISCARD int32_t GetPoint(int i) const;
-        void SetSegment(int i, int32_t v0, int32_t v1);
-        NODISCARD SegmentType GetSegment(int i) const;
-        void SetTriangle(int i, int32_t v0, int32_t v1, int32_t v2);
-        NODISCARD TriangleType GetTriangle(int i) const;
+        void SetPoint(int index, int32_t vertex);
+        NODISCARD int32_t GetPoint(int index) const;
+        void SetSegment(int index, int32_t vertex0, int32_t vertex1);
+        NODISCARD SegmentType GetSegment(int index) const;
+        void SetTriangle(int index, int32_t vertex0, int32_t vertex1, int32_t vertex2);
+        NODISCARD TriangleType GetTriangle(int index) const;
 
         NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
 
@@ -68,56 +68,74 @@ namespace Rendering
         };
 
     public:
-        IndexBuffer(MAYBE_UNUSED IndexBufferCreate indexBufferCreate, IndexFormatType type, int numPrimitives, int indexSize);
-        IndexBuffer(MAYBE_UNUSED IndexBufferCreate indexBufferCreate, IndexFormatType type, int numPrimitives);
+        IndexBuffer(IndexBufferCreate indexBufferCreate, IndexFormatType type, int numPrimitives, int indexSize);
+        IndexBuffer(IndexBufferCreate indexBufferCreate, IndexFormatType type, int numPrimitives);
 
     private:
         NODISCARD static int GetIndexCounter(IndexFormatType type, int numPrimitives);
 
-        NODISCARD static constexpr int GetPolypointIndexCount(int numPrimitives) noexcept
+        NODISCARD static constexpr int GetPolyPointIndexCount(int numPrimitives) noexcept
         {
             return 0 < numPrimitives ? numPrimitives : 1;
         }
 
-        NODISCARD static constexpr int GetPolysegmentDisjointIndexCount(int numPrimitives) noexcept
+        NODISCARD static constexpr int GetPolySegmentDisjointIndexCount(int numPrimitives) noexcept
         {
             return 0 < numPrimitives ? 2 * numPrimitives : 2;
         }
 
-        NODISCARD static constexpr int GetPolysegmentContiguousIndexCount(int numPrimitives) noexcept
+        NODISCARD static constexpr int GetPolySegmentContiguousIndexCount(int numPrimitives) noexcept
         {
             return 0 < numPrimitives ? numPrimitives + 1 : 2;
         }
 
-        NODISCARD static constexpr int GetTrimeshIndexCount(int numPrimitives) noexcept
+        NODISCARD static constexpr int GetTriMeshIndexCount(int numPrimitives) noexcept
         {
             return 0 < numPrimitives ? 3 * numPrimitives : 3;
         }
 
-        NODISCARD static constexpr int GetTristripIndexCount(int numPrimitives) noexcept
+        NODISCARD static constexpr int GetTriStripIndexCount(int numPrimitives) noexcept
         {
             return 0 < numPrimitives ? numPrimitives + 2 : 3;
         }
 
-        NODISCARD static constexpr int GetPolysegmentDisjointAdjIndexCount(int numPrimitives) noexcept
+        NODISCARD static constexpr int GetPolySegmentDisjointAdjIndexCount(int numPrimitives) noexcept
         {
             return 0 < numPrimitives ? 4 * numPrimitives : 4;
         }
 
-        NODISCARD static constexpr int GetPolysegmentContiguousAdjIndexCount(int numPrimitives) noexcept
+        NODISCARD static constexpr int GetPolySegmentContiguousAdjIndexCount(int numPrimitives) noexcept
         {
             return 0 < numPrimitives ? numPrimitives + 3 : 4;
         }
 
-        NODISCARD static constexpr int GetTrimeshAdjIndexCount(int numPrimitives) noexcept
+        NODISCARD static constexpr int GetTriMeshAdjIndexCount(int numPrimitives) noexcept
         {
             return 0 < numPrimitives ? 6 * numPrimitives : 6;
         }
 
-        NODISCARD static constexpr int GetTristripAdjIndexCount(int numPrimitives) noexcept
+        NODISCARD static constexpr int GetTriStripAdjIndexCount(int numPrimitives) noexcept
         {
             return 0 < numPrimitives ? 2 * (numPrimitives + 2) : 6;
         }
+
+        template <typename T>
+        void IncreaseData(int index, T vertex);
+
+        template <typename T>
+        NODISCARD T GetIncreaseData(int index) const;
+
+        template <typename T>
+        void IncreaseData(int index, T vertex0, T vertex1, int multiple);
+
+        template <typename T>
+        NODISCARD SegmentType GetIncreaseData(int index, int multiple) const;
+
+        template <typename T>
+        void IncreaseData(int index, T vertex0, T vertex1, T vertex2, int multiple);
+
+        template <typename T>
+        NODISCARD TriangleType GetIncreaseData(int index, int multiple, bool changePosition) const;
 
     private:
         IndexFormatType primitiveType;

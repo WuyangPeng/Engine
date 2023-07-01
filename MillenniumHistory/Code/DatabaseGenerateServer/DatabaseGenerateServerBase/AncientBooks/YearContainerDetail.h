@@ -36,11 +36,11 @@ AncientBooks::YearContainer::Container AncientBooks::YearContainer::GetYear(Func
 
     Container result{};
 
-    for (const auto& value : year)
+    for (const auto& element : year)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

@@ -22,7 +22,6 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/BitHacksDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Textures/LoadTexture.h"
 #include "Rendering/Resources/Textures/SaveTexture.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
@@ -44,9 +43,7 @@ void Rendering::Texture2DTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    RendererManager::Create();
-
-    RendererManager::Destroy();
+   
 
     CoreTools::InitTerm::ExecuteTerminator();
 }
@@ -70,7 +67,7 @@ void Rendering::Texture2DTesting::MipmapsTest()
 {
     Texture2DSharedPtr firstTexture2D = LoadTexture::Load2DFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/Texture2D.trt"));
 
-    ASSERT_FALSE(firstTexture2D->HasMipmaps());
+    ASSERT_FALSE(firstTexture2D->HasMipMaps());
 }
 
 void Rendering::Texture2DTesting::StreamTest()

@@ -40,7 +40,7 @@ int AncientBooks::CountryBase::GetImperialCourt() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::ImperialCourtMappingType> AncientBooks::CountryBase::GetImperialCourt(const AncientBooksContainer& csvContainer) const
+AncientBooks::CountryBase::ConstImperialCourtSharedPtr AncientBooks::CountryBase::GetImperialCourt(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -63,7 +63,7 @@ int AncientBooks::CountryBase::GetBeginYear() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::CountryBase::GetBeginYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::CountryBase::ConstYearSharedPtr AncientBooks::CountryBase::GetBeginYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -79,7 +79,7 @@ int AncientBooks::CountryBase::GetBeginMonth() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::MonthMappingType> AncientBooks::CountryBase::GetBeginMonth(const AncientBooksContainer& csvContainer) const
+AncientBooks::CountryBase::ConstMonthSharedPtr AncientBooks::CountryBase::GetBeginMonth(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -95,7 +95,7 @@ int AncientBooks::CountryBase::GetBeginSexagenaryCycle() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::CountryBase::GetBeginSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::CountryBase::ConstSexagenaryCycleSharedPtr AncientBooks::CountryBase::GetBeginSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -111,7 +111,7 @@ int AncientBooks::CountryBase::GetBeginDay() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::CountryBase::GetBeginDay(const AncientBooksContainer& csvContainer) const
+AncientBooks::CountryBase::ConstDaySharedPtr AncientBooks::CountryBase::GetBeginDay(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -127,7 +127,7 @@ int AncientBooks::CountryBase::GetEndYear() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::CountryBase::GetEndYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::CountryBase::ConstYearSharedPtr AncientBooks::CountryBase::GetEndYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -143,7 +143,7 @@ int AncientBooks::CountryBase::GetEndMonth() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::MonthMappingType> AncientBooks::CountryBase::GetEndMonth(const AncientBooksContainer& csvContainer) const
+AncientBooks::CountryBase::ConstMonthSharedPtr AncientBooks::CountryBase::GetEndMonth(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -159,7 +159,7 @@ int AncientBooks::CountryBase::GetEndSexagenaryCycle() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::CountryBase::GetEndSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::CountryBase::ConstSexagenaryCycleSharedPtr AncientBooks::CountryBase::GetEndSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -175,7 +175,7 @@ int AncientBooks::CountryBase::GetEndDay() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::CountryBase::GetEndDay(const AncientBooksContainer& csvContainer) const
+AncientBooks::CountryBase::ConstDaySharedPtr AncientBooks::CountryBase::GetEndDay(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -184,7 +184,7 @@ std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::CountryBase::G
     THROW_EXCEPTION(SYSTEM_TEXT("country表基类不允许获取映射值。"s))
 }
 
-std::vector<System::String> AncientBooks::CountryBase::GetUnansweredQuestion() const
+AncientBooks::CountryBase::StringContainer AncientBooks::CountryBase::GetUnansweredQuestion() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -207,14 +207,14 @@ System::String AncientBooks::CountryBase::GetUnansweredQuestion(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("country表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::CountryBase::GetUnansweredQuestionBegin() const
+AncientBooks::CountryBase::StringContainerConstIter AncientBooks::CountryBase::GetUnansweredQuestionBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("country表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::CountryBase::GetUnansweredQuestionEnd() const
+AncientBooks::CountryBase::StringContainerConstIter AncientBooks::CountryBase::GetUnansweredQuestionEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

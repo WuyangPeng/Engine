@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-Rendering::OpenGLRenderTargetData::OpenGLRenderTargetData(Renderer* renderer, const DrawTarget* renderTarget)
+Rendering::OpenGLRenderTargetData::OpenGLRenderTargetData(BaseRenderer* renderer, const DrawTarget* renderTarget)
     : impl{ renderer, renderTarget }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -22,11 +22,11 @@ Rendering::OpenGLRenderTargetData::OpenGLRenderTargetData(Renderer* renderer, co
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, OpenGLRenderTargetData)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, OpenGLRenderTargetData, Enable, Renderer*, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, OpenGLRenderTargetData, Enable, BaseRenderer*, void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, OpenGLRenderTargetData, Disable, Renderer*, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, OpenGLRenderTargetData, Disable, BaseRenderer*, void)
 
-Rendering::ConstTexture2DSharedPtr Rendering::OpenGLRenderTargetData::ReadColor(int index, Renderer* renderer)
+Rendering::ConstTexture2DSharedPtr Rendering::OpenGLRenderTargetData::ReadColor(int index, BaseRenderer* renderer)
 {
     RENDERING_CLASS_IS_VALID_1;
 

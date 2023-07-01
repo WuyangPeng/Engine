@@ -21,7 +21,6 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/Controller.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/SceneGraph/Particles.h"
@@ -47,9 +46,7 @@ void Rendering::ParticleControllerTesting::MainTest()
     CoreTools::InitTerm::ExecuteInitializer();
 
     CameraManager::Create();
-    RendererManager::Create();
 
-    RendererManager::Destroy();
     CameraManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();

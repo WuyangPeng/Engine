@@ -16,8 +16,8 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, OpenGLDrawTarget)
 
-Rendering::OpenGLDrawTarget::OpenGLDrawTarget(const DrawTargetSharedPtr& target, const OpenGLTextureRenderTargetContainer& renderTargetTextures, const OpenGLTextureDepthStencilSharedPtr& depthStencilTexture)
-    : ParentType{}, impl{ target, renderTargetTextures, depthStencilTexture }
+Rendering::OpenGLDrawTarget::OpenGLDrawTarget(const ConstDrawTargetSharedPtr& target, const OpenGLTextureRenderTargetContainer& renderTargetTextures, const OpenGLTextureDepthStencilSharedPtr& depthStencilTexture)
+    : ParentType{ target }, impl{ target, renderTargetTextures, depthStencilTexture }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

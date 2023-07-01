@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-OutputCSVTesting::Input1Container::Input1Container(const CoreTools::CSVContent& csvContent)
+OutputCSVTesting::Input1Container::Input1Container(const CSVContent& csvContent)
     : input1{}
 {
     Parsing(csvContent);
@@ -24,10 +24,18 @@ OutputCSVTesting::Input1Container::Input1Container(const CoreTools::CSVContent& 
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void OutputCSVTesting::Input1Container::Parsing(const CoreTools::CSVContent& csvContent)
+void OutputCSVTesting::Input1Container::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("input1表开始载入……"));
 
+    Load(csvContent);
+    Unique();
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("input1表结束载入……"));
+}
+
+void OutputCSVTesting::Input1Container::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -41,7 +49,10 @@ void OutputCSVTesting::Input1Container::Parsing(const CoreTools::CSVContent& csv
     std::ranges::sort(input1, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
+}
 
+void OutputCSVTesting::Input1Container::Unique()
+{
     const auto iter = std::ranges::unique(input1, [](const auto& lhs, const auto& rhs) noexcept {
         if((*lhs).GetKey() == (*rhs).GetKey())
         {
@@ -57,12 +68,10 @@ void OutputCSVTesting::Input1Container::Parsing(const CoreTools::CSVContent& csv
 
     if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("input1表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-
         input1.erase(iter.begin(), iter.end());
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("input1表结束载入……"));
+    input1.shrink_to_fit();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(OutputCSVTesting, Input1Container)

@@ -15,7 +15,7 @@
 #include "EngineMiddleLayerInterface.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(ViewMiddleLayerImpl);
@@ -32,7 +32,7 @@ namespace Framework
         using ParentType = EngineMiddleLayerInterface;
         using MiddleLayerSharedPtr = std::shared_ptr<ClassType>;
 
-        using Renderer = Rendering::Renderer;
+        using Renderer = Rendering::BaseRenderer;
         using RendererSharedPtr = std::shared_ptr<Renderer>;
         using ConstRendererSharedPtr = std::shared_ptr<const Renderer>;
 

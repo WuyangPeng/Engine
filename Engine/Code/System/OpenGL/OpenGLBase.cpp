@@ -37,6 +37,11 @@ void System::ClearAllGLBufferBit() noexcept
     GLClear(EnumCastUnderlying(OpenGLClearMask::ColorBufferBit | OpenGLClearMask::DepthBufferBit | OpenGLClearMask::StencilBufferBit));
 }
 
+void System::SetGLClear(OpenGLClearMask openGLClearMask) noexcept
+{
+    GLClear(EnumCastUnderlying(openGLClearMask));
+}
+
 void System::SetGLViewport(OpenGLInt x, OpenGLInt y, OpenGLSize width, OpenGLSize height) noexcept
 {
     GLViewport(x, y, width, height);
@@ -205,4 +210,9 @@ void System::SetGLFrontFace(OpenGLFrontFace mode) noexcept
 void System::SetGLCullFace(RasterizerStateCullFace mode) noexcept
 {
     GLCullFace(EnumCastUnderlying(mode));
+}
+
+void System::SetGLFlush() noexcept
+{
+    GLFlush();
 }

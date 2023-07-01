@@ -24,11 +24,13 @@ namespace AncientBooks
     {
     public:
         using ClassType = IdentityContainer;
+
         using ConstIdentityBaseSharedPtr = std::shared_ptr<const IdentityBase>;
         using Container = std::vector<ConstIdentityBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit IdentityContainer(const CoreTools::CSVContent& csvContent);
+        explicit IdentityContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,9 @@ namespace AncientBooks
         NODISCARD Container GetIdentity(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container identity;

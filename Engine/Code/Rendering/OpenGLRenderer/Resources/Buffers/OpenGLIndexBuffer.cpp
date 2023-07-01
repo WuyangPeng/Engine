@@ -46,3 +46,38 @@ void Rendering::OpenGLIndexBuffer::Disable() noexcept
 
     System::SetGLBindBuffer(GetType(), 0);
 }
+
+bool Rendering::OpenGLIndexBuffer::CopyGpuToCpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLIndexBuffer::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLIndexBuffer::CopyCpuToGpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLIndexBuffer::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLIndexBuffer::GetNumActiveElements()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}

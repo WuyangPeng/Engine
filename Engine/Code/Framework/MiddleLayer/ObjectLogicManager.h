@@ -14,11 +14,11 @@
 
 namespace Framework
 {
-    template <typename ObjectLogic, typename ArtificialIntellegence>
+    template <typename ObjectLogic, typename ArtificialIntelligence>
     class ObjectLogicManager : public ObjectLogicManagerInterface
     {
     public:
-        using ClassType = ObjectLogicManager<ObjectLogic, ArtificialIntellegence>;
+        using ClassType = ObjectLogicManager<ObjectLogic, ArtificialIntelligence>;
         using ParentType = ObjectLogicManagerInterface;
         using ClassShareType = CoreTools::NonCopyClasses;
 
@@ -44,7 +44,7 @@ namespace Framework
 
     private:
         ObjectLogic objectLogic;
-        ArtificialIntellegence artificialIntellegence;
+        ArtificialIntelligence artificialIntellegence;
     };
 }
 

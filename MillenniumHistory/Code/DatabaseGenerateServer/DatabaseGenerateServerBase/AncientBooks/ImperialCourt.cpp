@@ -15,7 +15,7 @@
 
 using namespace std::literals;
 
-AncientBooks::ImperialCourt::ImperialCourt(const CoreTools::CSVRow& csvRow)
+AncientBooks::ImperialCourt::ImperialCourt(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       category{ csvRow.GetString(SYSTEM_TEXT("category"s)) },
@@ -63,7 +63,7 @@ int AncientBooks::ImperialCourt::GetBegin() const noexcept
     return begin;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::ImperialCourt::GetBegin(const AncientBooksContainer& csvContainer) const
+AncientBooks::ImperialCourt::ConstYearSharedPtr AncientBooks::ImperialCourt::GetBegin(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -77,7 +77,7 @@ int AncientBooks::ImperialCourt::GetEnd() const noexcept
     return end;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::ImperialCourt::GetEnd(const AncientBooksContainer& csvContainer) const
+AncientBooks::ImperialCourt::ConstYearSharedPtr AncientBooks::ImperialCourt::GetEnd(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

@@ -60,7 +60,7 @@ bool Rendering::OpenGLTexture1Array::CanAutoGenerateMipmaps() const
 
     auto texture = GetTexture();
 
-    return texture && texture->HasMipmaps() && texture->WantAutogenerateMipmaps();
+    return texture && texture->HasMipMaps() && texture->WantAutoGenerateMipMaps();
 }
 
 void Rendering::OpenGLTexture1Array::Enable() noexcept
@@ -79,4 +79,32 @@ void Rendering::OpenGLTexture1Array::LoadTextureLevel(int item, int level, const
 
         System::SetGLTexturesSubImage2D(TextureTarget::Texture1DArray, level, 0, item, length, 1, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
     }
+}
+
+bool Rendering::OpenGLTexture1Array::Update(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTexture1Array::CopyGpuToCpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTexture1Array::CopyCpuToGpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTexture1Array::GetNumActiveElements()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
 }

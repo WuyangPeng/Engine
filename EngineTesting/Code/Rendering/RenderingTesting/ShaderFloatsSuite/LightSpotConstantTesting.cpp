@@ -18,7 +18,6 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
@@ -42,7 +41,6 @@ void Rendering::LightSpotConstantTesting::DoRunUnitTest()
 void Rendering::LightSpotConstantTesting::MainTest()
 {
     CameraManager::Create();
-    RendererManager::Create();
 
     CoreTools::InitTerm::ExecuteInitializer();
 
@@ -53,7 +51,6 @@ void Rendering::LightSpotConstantTesting::MainTest()
 
     CoreTools::InitTerm::ExecuteTerminator();
 
-    RendererManager::Destroy();
     CameraManager::Destroy();
 }
 

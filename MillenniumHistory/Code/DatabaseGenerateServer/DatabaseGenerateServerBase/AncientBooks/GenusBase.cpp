@@ -40,7 +40,7 @@ int AncientBooks::GenusBase::GetCategory() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::CategoryMappingType> AncientBooks::GenusBase::GetCategory(const AncientBooksContainer& csvContainer) const
+AncientBooks::GenusBase::ConstCategorySharedPtr AncientBooks::GenusBase::GetCategory(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -63,7 +63,7 @@ int AncientBooks::GenusBase::GetFather() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::GenusMappingType> AncientBooks::GenusBase::GetFather(const AncientBooksContainer& csvContainer) const
+AncientBooks::GenusBase::ConstGenusSharedPtr AncientBooks::GenusBase::GetFather(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

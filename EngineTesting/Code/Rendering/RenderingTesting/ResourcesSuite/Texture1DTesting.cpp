@@ -22,7 +22,6 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/BitHacksDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Textures/LoadTexture.h"
 #include "Rendering/Resources/Textures/SaveTexture.h"
 #include "Rendering/Resources/Textures/Texture1D.h"
@@ -44,9 +43,6 @@ void Rendering::Texture1DTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    RendererManager::Create();
-
-    RendererManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();
 }
@@ -68,7 +64,7 @@ void Rendering::Texture1DTesting::MipmapsTest()
 {
     Texture1DSharedPtr firstTexture1D = LoadTexture::Load1DFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/Texture1D.trt"));
 
-    ASSERT_FALSE(firstTexture1D->HasMipmaps());
+    ASSERT_FALSE(firstTexture1D->HasMipMaps());
 }
 
 void Rendering::Texture1DTesting::StreamTest()

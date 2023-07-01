@@ -13,7 +13,7 @@
 
 using namespace std::literals;
 
-CSVConfigure::Skill::Skill(const CoreTools::CSVRow& csvRow)
+CSVConfigure::Skill::Skill(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       nextId{ csvRow.GetInt(SYSTEM_TEXT("nextId"s)) },

@@ -25,6 +25,15 @@ namespace AncientBooks
     public:
         using ClassType = ArticleBase;
 
+        using String = System::String;
+        using StringContainer = std::vector<String>;
+        using StringContainerConstIter = StringContainer::const_iterator;
+        using IntContainer = std::vector<int>;
+        using IntContainerConstIter = IntContainer::const_iterator;
+        using ConstVersionSharedPtr = std::shared_ptr<const VersionMappingType>;
+        using ConstCharacterSharedPtr = std::shared_ptr<const CharacterMappingType>;
+        using CharacterContainer = std::vector<ConstCharacterSharedPtr>;
+
     public:
         ArticleBase() noexcept = default;
         explicit ArticleBase(int64_t key) noexcept;
@@ -42,32 +51,34 @@ namespace AncientBooks
         NODISCARD virtual int64_t GetId() const noexcept;
 
         NODISCARD virtual int GetVersion() const noexcept;
-        NODISCARD virtual std::shared_ptr<const VersionMappingType> GetVersion(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstVersionSharedPtr GetVersion(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetChapter() const noexcept;
-        NODISCARD virtual std::shared_ptr<const ChapterMappingType> GetChapter(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual System::String GetChapterName() const;
+        NODISCARD virtual String GetChapterName() const;
 
         NODISCARD virtual int GetVolume() const noexcept;
 
-        NODISCARD virtual std::vector<int> GetOtherAuthor() const;
+        NODISCARD virtual int GetChapterVolume() const noexcept;
+
+        NODISCARD virtual IntContainer GetOtherAuthor() const;
         NODISCARD virtual int GetOtherAuthorCount() const;
         NODISCARD virtual int GetOtherAuthor(int index) const;
-        NODISCARD virtual std::vector<int>::const_iterator GetOtherAuthorBegin() const;
-        NODISCARD virtual std::vector<int>::const_iterator GetOtherAuthorEnd() const;
+        NODISCARD virtual IntContainerConstIter GetOtherAuthorBegin() const;
+        NODISCARD virtual IntContainerConstIter GetOtherAuthorEnd() const;
+        NODISCARD virtual CharacterContainer GetOtherAuthor(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual std::vector<System::String> GetAuthorDescribe() const;
+        NODISCARD virtual StringContainer GetAuthorDescribe() const;
         NODISCARD virtual int GetAuthorDescribeCount() const;
-        NODISCARD virtual System::String GetAuthorDescribe(int index) const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetAuthorDescribeBegin() const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetAuthorDescribeEnd() const;
+        NODISCARD virtual String GetAuthorDescribe(int index) const;
+        NODISCARD virtual StringContainerConstIter GetAuthorDescribeBegin() const;
+        NODISCARD virtual StringContainerConstIter GetAuthorDescribeEnd() const;
 
-        NODISCARD virtual System::String GetTitle() const;
+        NODISCARD virtual String GetTitle() const;
 
-        NODISCARD virtual System::String GetAbbreviation() const;
+        NODISCARD virtual String GetAbbreviation() const;
 
-        NODISCARD virtual System::String GetDirectory() const;
+        NODISCARD virtual String GetDirectory() const;
 
     private:
         int64_t key{};

@@ -17,16 +17,15 @@
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
-#include "Rendering/Shaders/VisualEffectInstance.h"
 
 Rendering::VisualImpl::VisualImpl(VisualPrimitiveType type) noexcept
-    : visualData{ type }, modelBound{}, effect{}
+    : visualData{ type }, modelBound{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::VisualImpl::VisualImpl(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer) noexcept
-    : visualData{ type, vertexformat, vertexbuffer, indexbuffer }, modelBound{}, effect{}
+    : visualData{ type, vertexformat, vertexbuffer, indexbuffer }, modelBound{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -45,27 +44,6 @@ Rendering::ConstVertexFormatSharedPtr Rendering::VisualImpl::GetConstVertexForma
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return visualData.GetConstVertexFormat();
-}
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::VisualImpl::GetEffectInstance() noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    return effect.object;
-}
-
-Rendering::ConstVisualEffectInstanceSharedPtr Rendering::VisualImpl::GetConstEffectInstance() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    return effect.object;
-}
-
-void Rendering::VisualImpl::SetEffectInstance(const VisualEffectInstanceSharedPtr& aEffect) noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    effect.object = aEffect;
 }
 
 Rendering::BoundF& Rendering::VisualImpl::GetModelBound() noexcept
@@ -183,7 +161,6 @@ void Rendering::VisualImpl::Load(CoreTools::BufferSource& source)
 
     visualData.Load(source);
     source.ReadAggregate(modelBound);
-    source.ReadObjectAssociated(effect);
 }
 
 void Rendering::VisualImpl::Save(CoreTools::BufferTarget& target) const
@@ -192,7 +169,6 @@ void Rendering::VisualImpl::Save(CoreTools::BufferTarget& target) const
 
     visualData.Save(target);
     target.WriteAggregate(modelBound);
-    target.WriteObjectAssociated(effect);
 }
 
 int Rendering::VisualImpl::GetStreamingSize() const noexcept
@@ -202,7 +178,6 @@ int Rendering::VisualImpl::GetStreamingSize() const noexcept
     auto size = visualData.GetStreamingSize();
 
     size += RENDERING_STREAM_SIZE(modelBound);
-    size += CoreTools::GetStreamSize(effect);
 
     return size;
 }
@@ -212,7 +187,6 @@ void Rendering::VisualImpl::Register(CoreTools::ObjectRegister& target) const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     visualData.Register(target);
-    target.Register(effect);
 }
 
 void Rendering::VisualImpl::Link(CoreTools::ObjectLink& source)
@@ -220,7 +194,6 @@ void Rendering::VisualImpl::Link(CoreTools::ObjectLink& source)
     RENDERING_CLASS_IS_VALID_9;
 
     visualData.Link(source);
-    source.ResolveLink(effect);
 }
 
 CoreTools::ObjectSharedPtr Rendering::VisualImpl::GetObjectByName(const std::string& name)
@@ -231,11 +204,7 @@ CoreTools::ObjectSharedPtr Rendering::VisualImpl::GetObjectByName(const std::str
     if (object != nullptr)
         return object;
 
-    object = effect.object->GetObjectByName(name);
-    if (object != nullptr)
-        return object;
-    else
-        return nullptr;
+    return object;
 }
 
 std::vector<CoreTools::ObjectSharedPtr> Rendering::VisualImpl::GetAllObjectsByName(const std::string& name)
@@ -243,13 +212,10 @@ std::vector<CoreTools::ObjectSharedPtr> Rendering::VisualImpl::GetAllObjectsByNa
     RENDERING_CLASS_IS_VALID_9;
 
     auto visualDataObjects = visualData.GetAllObjectsByName(name);
-    auto effectObjects = effect.object->GetAllObjectsByName(name);
 
     std::vector<CoreTools::ObjectSharedPtr> entirelyObjects{};
 
     entirelyObjects.insert(entirelyObjects.end(), visualDataObjects.begin(), visualDataObjects.end());
-
-    entirelyObjects.insert(entirelyObjects.end(), effectObjects.begin(), effectObjects.end());
 
     return entirelyObjects;
 }
@@ -262,11 +228,7 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualImpl::GetConstObjectByName(cons
     if (object != nullptr)
         return object;
 
-    object = effect.object->GetConstObjectByName(name);
-    if (object != nullptr)
-        return object;
-    else
-        return nullptr;
+    return object;
 }
 
 std::vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualImpl::GetAllConstObjectsByName(const std::string& name) const
@@ -274,13 +236,10 @@ std::vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualImpl::GetAllConstO
     RENDERING_CLASS_IS_VALID_9;
 
     auto visualDataObjects = visualData.GetAllConstObjectsByName(name);
-    auto effectObjects = effect.object->GetAllConstObjectsByName(name);
 
     std::vector<CoreTools::ConstObjectSharedPtr> entirelyObjects{};
 
     entirelyObjects.insert(entirelyObjects.end(), visualDataObjects.begin(), visualDataObjects.end());
-
-    entirelyObjects.insert(entirelyObjects.end(), effectObjects.begin(), effectObjects.end());
 
     return entirelyObjects;
 }

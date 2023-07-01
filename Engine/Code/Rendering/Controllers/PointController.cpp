@@ -23,7 +23,6 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Buffers/Buffer.h"
 #include "Rendering/SceneGraph/Polypoint.h"
 #include "Rendering/SceneGraph/Visual.h"
@@ -178,7 +177,7 @@ void Rendering::PointController::UpdatePointMotion(float ctrlTime)
             auto deltaTrn = distance * GetPointLinearAxis(i);
         }
 
-        RENDERER_MANAGE_SINGLETON.UpdateAll(points->GetConstVertexBuffer());
+        
     }
 }
 

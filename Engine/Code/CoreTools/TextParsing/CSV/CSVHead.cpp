@@ -40,8 +40,17 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, CSVHead, GetAnnotation, int, Sy
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, CSVHead, GetDataType, int, CoreTools::CSVDataType)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVHead, GetDataType, String, CoreTools::CSVDataType)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, CSVHead, GetActualType, int, System::String)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, CSVHead, GetAbbreviation, int, System::String)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, CSVHead, GetValueType, int, System::String)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, CSVHead, GetActualTypeByNameSpace, int, System::String)
+
+System::String CoreTools::CSVHead::GetAbbreviationByNameSpace(int index, const String& className) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetAbbreviationByNameSpace(index, className);
+}
+
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVHead, GetDataIndex, String, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVHead, GetDataIndex, StringView, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CSVHead, HasDataField, String, bool)

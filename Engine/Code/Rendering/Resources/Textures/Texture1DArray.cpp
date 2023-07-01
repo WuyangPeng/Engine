@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:29)
+///	版本：0.9.1.0 (2023/06/29 20:21)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,8 +21,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTexture1Array.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/DataFormat.h"
 #include "Rendering/Resources/Detail/Textures/Texture1DImpl.h"
 
@@ -32,11 +31,11 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Texture1DArray);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture1DArray);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture1DArray);
 
-Rendering::Texture1DArray::Texture1DArray(int numItems, DataFormatType format, int length, bool hasMipmaps)
-    : ParentType{ ImplType::GetTotalElements(numItems, length, 1, 1, hasMipmaps),
+Rendering::Texture1DArray::Texture1DArray(int numItems, DataFormatType format, int length, bool hasMipMaps)
+    : ParentType{ ImplType::GetTotalElements(numItems, length, 1, 1, hasMipMaps),
                   DataFormat::GetNumBytesPerStruct(format),
                   GraphicsObjectType::Texture1Array },
-      impl{ numItems, format, length, hasMipmaps }
+      impl{ numItems, format, length, hasMipMaps }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -67,7 +66,7 @@ int Rendering::Texture1DArray::GetLevelOffset(int item, int level) const
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture1DArray, GetLength, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, HasMipmaps, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, HasMipMaps, bool)
 
 void Rendering::Texture1DArray::SaveToFile(WriteFileManager& outFile) const
 {
@@ -93,9 +92,9 @@ void Rendering::Texture1DArray::ReadFromFile(ReadFileManager& inFile)
     ParentType::ReadStorageDataFromFile(inFile);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, AutogenerateMipmaps, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, WantAutogenerateMipmaps, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, GetNumSubresources, int)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, AutoGenerateMipMaps, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, WantAutoGenerateMipMaps, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1DArray, GetNumSubResources, int)
 
 int Rendering::Texture1DArray::GetNumElementsFor(int level) const
 {
@@ -196,8 +195,12 @@ Rendering::Texture1DArray::RendererObjectSharedPtr Rendering::Texture1DArray::Cr
     switch (rendererTypes)
     {
         case RendererTypes::OpenGL:
+        {
             return std::make_shared<OpenGLTexture1Array>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        }
         default:
-            return ParentType::CreateRendererObject(rendererTypes);
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
+        }
     }
 }

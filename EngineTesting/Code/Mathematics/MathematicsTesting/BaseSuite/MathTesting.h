@@ -34,6 +34,7 @@ namespace Mathematics
         void PowTest();
         void TruncationTest();
         void ApproximateTest();
+        void NumberDigitsTest();
 
         // Constant≤‚ ‘
         void FloatConstantTest();

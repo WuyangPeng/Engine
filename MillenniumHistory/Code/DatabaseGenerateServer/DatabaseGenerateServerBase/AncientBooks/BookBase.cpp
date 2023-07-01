@@ -40,7 +40,7 @@ int AncientBooks::BookBase::GetGenus() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::GenusMappingType> AncientBooks::BookBase::GetGenus(const AncientBooksContainer& csvContainer) const
+AncientBooks::BookBase::ConstGenusSharedPtr AncientBooks::BookBase::GetGenus(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -56,7 +56,7 @@ System::String AncientBooks::BookBase::GetName() const
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取字符串。"s))
 }
 
-std::vector<System::String> AncientBooks::BookBase::GetAlias() const
+AncientBooks::BookBase::StringContainer AncientBooks::BookBase::GetAlias() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -79,14 +79,14 @@ System::String AncientBooks::BookBase::GetAlias(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::BookBase::GetAliasBegin() const
+AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAliasBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::BookBase::GetAliasEnd() const
+AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAliasEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -100,7 +100,7 @@ int AncientBooks::BookBase::GetVolume() const noexcept
     return 0;
 }
 
-std::vector<int> AncientBooks::BookBase::GetAuthor() const
+AncientBooks::BookBase::IntContainer AncientBooks::BookBase::GetAuthor() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -123,21 +123,30 @@ int AncientBooks::BookBase::GetAuthor(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::BookBase::GetAuthorBegin() const
+AncientBooks::BookBase::IntContainerConstIter AncientBooks::BookBase::GetAuthorBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::BookBase::GetAuthorEnd() const
+AncientBooks::BookBase::IntContainerConstIter AncientBooks::BookBase::GetAuthorEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<System::String> AncientBooks::BookBase::GetAuthorDescribe() const
+AncientBooks::BookBase::CharacterContainer AncientBooks::BookBase::GetAuthor(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取映射值。"s))
+}
+
+AncientBooks::BookBase::StringContainer AncientBooks::BookBase::GetAuthorDescribe() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -160,21 +169,21 @@ System::String AncientBooks::BookBase::GetAuthorDescribe(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::BookBase::GetAuthorDescribeBegin() const
+AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAuthorDescribeBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::BookBase::GetAuthorDescribeEnd() const
+AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAuthorDescribeEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<int> AncientBooks::BookBase::GetAnnotator() const
+AncientBooks::BookBase::IntContainer AncientBooks::BookBase::GetAnnotator() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -197,21 +206,30 @@ int AncientBooks::BookBase::GetAnnotator(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::BookBase::GetAnnotatorBegin() const
+AncientBooks::BookBase::IntContainerConstIter AncientBooks::BookBase::GetAnnotatorBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::BookBase::GetAnnotatorEnd() const
+AncientBooks::BookBase::IntContainerConstIter AncientBooks::BookBase::GetAnnotatorEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<System::String> AncientBooks::BookBase::GetAnnotateDescribe() const
+AncientBooks::BookBase::CharacterContainer AncientBooks::BookBase::GetAnnotator(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取映射值。"s))
+}
+
+AncientBooks::BookBase::StringContainer AncientBooks::BookBase::GetAnnotateDescribe() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -234,21 +252,21 @@ System::String AncientBooks::BookBase::GetAnnotateDescribe(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::BookBase::GetAnnotateDescribeBegin() const
+AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAnnotateDescribeBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::BookBase::GetAnnotateDescribeEnd() const
+AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAnnotateDescribeEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<int> AncientBooks::BookBase::GetCountry() const
+AncientBooks::BookBase::IntContainer AncientBooks::BookBase::GetCountry() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -271,21 +289,30 @@ int AncientBooks::BookBase::GetCountry(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::BookBase::GetCountryBegin() const
+AncientBooks::BookBase::IntContainerConstIter AncientBooks::BookBase::GetCountryBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::BookBase::GetCountryEnd() const
+AncientBooks::BookBase::IntContainerConstIter AncientBooks::BookBase::GetCountryEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<int> AncientBooks::BookBase::GetPerson() const
+AncientBooks::BookBase::CountryContainer AncientBooks::BookBase::GetCountry(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取映射值。"s))
+}
+
+AncientBooks::BookBase::IntContainer AncientBooks::BookBase::GetPerson() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -308,21 +335,30 @@ int AncientBooks::BookBase::GetPerson(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::BookBase::GetPersonBegin() const
+AncientBooks::BookBase::IntContainerConstIter AncientBooks::BookBase::GetPersonBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::BookBase::GetPersonEnd() const
+AncientBooks::BookBase::IntContainerConstIter AncientBooks::BookBase::GetPersonEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<System::String> AncientBooks::BookBase::GetUnansweredQuestion() const
+AncientBooks::BookBase::CharacterContainer AncientBooks::BookBase::GetPerson(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取映射值。"s))
+}
+
+AncientBooks::BookBase::StringContainer AncientBooks::BookBase::GetUnansweredQuestion() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -345,14 +381,14 @@ System::String AncientBooks::BookBase::GetUnansweredQuestion(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::BookBase::GetUnansweredQuestionBegin() const
+AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetUnansweredQuestionBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::BookBase::GetUnansweredQuestionEnd() const
+AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetUnansweredQuestionEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

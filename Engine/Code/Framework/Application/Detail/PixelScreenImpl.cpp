@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Rendering/DataTypes/ColourDetail.h"
-#include "Rendering/Renderers/Renderer.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 
 Framework::PixelScreenImpl::PixelScreenImpl(const WindowSize& size)
     : screenWidth{ size.GetWindowWidth() }, screenHeight{ size.GetWindowHeight() }, screen{}, doFlip{ false }
@@ -61,13 +61,13 @@ void Framework::PixelScreenImpl::Resize(const WindowSize& size, const Colour& co
     ClearScreen(color);
 }
 
-void Framework::PixelScreenImpl::Draw(const RendererSharedPtr& renderer)
+void Framework::PixelScreenImpl::Draw(const RendererSharedPtr& renderer) noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
     if (renderer != nullptr)
     {
-        renderer->Draw(screen, doFlip);
+        // renderer->Draw(screen, doFlip);
     }
 }
 

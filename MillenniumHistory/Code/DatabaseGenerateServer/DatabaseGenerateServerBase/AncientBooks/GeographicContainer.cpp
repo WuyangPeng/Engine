@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-AncientBooks::GeographicContainer::GeographicContainer(const CoreTools::CSVContent& csvContent)
+AncientBooks::GeographicContainer::GeographicContainer(const CSVContent& csvContent)
     : geographic{}
 {
     Parsing(csvContent);
@@ -24,10 +24,18 @@ AncientBooks::GeographicContainer::GeographicContainer(const CoreTools::CSVConte
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void AncientBooks::GeographicContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void AncientBooks::GeographicContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("geographic表开始载入……"));
 
+    Load(csvContent);
+    Unique();
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("geographic表结束载入……"));
+}
+
+void AncientBooks::GeographicContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -41,7 +49,10 @@ void AncientBooks::GeographicContainer::Parsing(const CoreTools::CSVContent& csv
     std::ranges::sort(geographic, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
+}
 
+void AncientBooks::GeographicContainer::Unique()
+{
     const auto iter = std::ranges::unique(geographic, [](const auto& lhs, const auto& rhs) noexcept {
         if((*lhs).GetKey() == (*rhs).GetKey())
         {
@@ -57,12 +68,10 @@ void AncientBooks::GeographicContainer::Parsing(const CoreTools::CSVContent& csv
 
     if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("geographic表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-
         geographic.erase(iter.begin(), iter.end());
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("geographic表结束载入……"));
+    geographic.shrink_to_fit();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, GeographicContainer)

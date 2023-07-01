@@ -21,7 +21,6 @@
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/SkinController.h"
 #include "Rendering/DataTypes/Transform.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/RenderingTesting/SceneGraphSuite/VisualTest.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 
@@ -42,9 +41,7 @@ void Rendering::SkinControllerTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    RendererManager::Create();
-
-    RendererManager::Destroy();
+   
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

@@ -99,6 +99,21 @@ void CoreTools::LogAsynchronousImpl::Join()
     }
 }
 
+void CoreTools::LogAsynchronousImpl::Wait()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    for (;;)
+    {
+        std::unique_lock uniqueLock{ mutex };
+
+        if (isStop || logContainer.empty())
+        {
+            break;
+        }
+    }
+}
+
 void CoreTools::LogAsynchronousImpl::WaitThread()
 {
     do

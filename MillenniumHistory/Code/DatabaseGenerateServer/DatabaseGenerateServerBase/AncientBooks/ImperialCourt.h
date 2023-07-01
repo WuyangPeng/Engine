@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = ImperialCourt;
         using ParentType = ImperialCourtBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit ImperialCourt(const CoreTools::CSVRow& csvRow);
+        explicit ImperialCourt(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -33,20 +35,20 @@ namespace AncientBooks
 
         NODISCARD int GetId() const noexcept override;
 
-        NODISCARD System::String GetCategory() const override;
+        NODISCARD String GetCategory() const override;
 
-        NODISCARD System::String GetBook() const override;
+        NODISCARD String GetBook() const override;
 
         NODISCARD int GetBegin() const noexcept override;
-        NODISCARD std::shared_ptr<const YearMappingType> GetBegin(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstYearSharedPtr GetBegin(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetEnd() const noexcept override;
-        NODISCARD std::shared_ptr<const YearMappingType> GetEnd(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstYearSharedPtr GetEnd(const AncientBooksContainer& csvContainer) const override;
 
     private:
         int id;  // Id
-        System::String category;  // 名称
-        System::String book;  // 书名
+        String category;  // 名称
+        String book;  // 书名
         int begin;  // 启始
         int end;  // 结束
     };

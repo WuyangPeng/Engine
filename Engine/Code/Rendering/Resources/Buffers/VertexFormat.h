@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:22)
+///	版本：0.9.1.0 (2023/06/29 17:06)
 
 #ifndef RENDERING_RESOURCES_VERTEX_FORMAT_H
 #define RENDERING_RESOURCES_VERTEX_FORMAT_H
@@ -30,6 +30,7 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(VertexFormat);
         using ParentType = Object;
+
         using VertexFormatSharedPtr = std::shared_ptr<ClassType>;
         using ConstVertexFormatSharedPtr = std::shared_ptr<const ClassType>;
         using Semantic = VertexFormatFlags::Semantic;
@@ -89,7 +90,7 @@ namespace Rendering
         };
 
     public:
-        VertexFormat(MAYBE_UNUSED VertexFormatCreate vertexFormatCreate, int numAttributes);
+        VertexFormat(VertexFormatCreate vertexFormatCreate, int numAttributes);
 
     private:
         void SetAttribute(int attribute, const VertexFormatAttribute& vertexFormatElement);

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:27)
+///	版本：0.9.1.0 (2023/06/29 11:17)
 
 #include "Rendering/RenderingExport.h"
 
@@ -24,7 +24,7 @@
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/OpenGLRenderer/State/OpenGLRasterizerState.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, RasterizerState);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RasterizerState);
@@ -33,6 +33,16 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, RasterizerState);
 Rendering::RasterizerState::RasterizerStateSharedPtr Rendering::RasterizerState::Create(const std::string& name)
 {
     return std::make_shared<RasterizerState>(RasterizerStateCreate::Init, name);
+}
+
+Rendering::RasterizerState::RasterizerStateSharedPtr Rendering::RasterizerState::Create(const std::string& name, RasterizerStateFill rasterizerStateFill, RasterizerStateCull rasterizerStateCull)
+{
+    return std::make_shared<RasterizerState>(RasterizerStateCreate::Init, name, rasterizerStateFill, rasterizerStateCull);
+}
+
+Rendering::RasterizerState::RasterizerStateSharedPtr Rendering::RasterizerState::Create(const std::string& name, RasterizerStateCull rasterizerStateCull)
+{
+    return std::make_shared<RasterizerState>(RasterizerStateCreate::Init, name, rasterizerStateCull);
 }
 
 Rendering::RasterizerState::RasterizerState(RasterizerStateCreate rasterizerStateCreate, const std::string& name)
@@ -45,8 +55,44 @@ Rendering::RasterizerState::RasterizerState(RasterizerStateCreate rasterizerStat
       slopeScaledDepthBias{ 0.0f },
       enableDepthClip{ true },
       enableScissor{ false },
-      enableMultisample{ false },
-      enableAntialiasedLine{ false }
+      enableMultiSample{ false },
+      enableAntiAliasedLine{ false }
+{
+    System::UnusedFunction(rasterizerStateCreate);
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::RasterizerState::RasterizerState(RasterizerStateCreate rasterizerStateCreate, const std::string& name, RasterizerStateFill rasterizerStateFill, RasterizerStateCull rasterizerStateCull)
+    : ParentType{ name, GraphicsObjectType::RasterizerState },
+      fill{ rasterizerStateFill },
+      cull{ rasterizerStateCull },
+      frontCCW{ true },
+      depthBias{ 0 },
+      depthBiasClamp{ 0.0f },
+      slopeScaledDepthBias{ 0.0f },
+      enableDepthClip{ true },
+      enableScissor{ false },
+      enableMultiSample{ false },
+      enableAntiAliasedLine{ false }
+{
+    System::UnusedFunction(rasterizerStateCreate);
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::RasterizerState::RasterizerState(RasterizerStateCreate rasterizerStateCreate, const std::string& name, RasterizerStateCull rasterizerStateCull)
+    : ParentType{ name, GraphicsObjectType::RasterizerState },
+      fill{ RasterizerStateFill::Solid },
+      cull{ rasterizerStateCull },
+      frontCCW{ true },
+      depthBias{ 0 },
+      depthBiasClamp{ 0.0f },
+      slopeScaledDepthBias{ 0.0f },
+      enableDepthClip{ true },
+      enableScissor{ false },
+      enableMultiSample{ false },
+      enableAntiAliasedLine{ false }
 {
     System::UnusedFunction(rasterizerStateCreate);
 
@@ -65,8 +111,8 @@ Rendering::RasterizerState::RasterizerState(LoadConstructor loadConstructor)
       slopeScaledDepthBias{ 0.0f },
       enableDepthClip{ true },
       enableScissor{ false },
-      enableMultisample{ false },
-      enableAntialiasedLine{ false }
+      enableMultiSample{ false },
+      enableAntiAliasedLine{ false }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -85,8 +131,8 @@ int Rendering::RasterizerState::GetStreamingSize() const
     size += RENDERING_STREAM_SIZE(slopeScaledDepthBias);
     size += RENDERING_STREAM_SIZE(enableDepthClip);
     size += RENDERING_STREAM_SIZE(enableScissor);
-    size += RENDERING_STREAM_SIZE(enableMultisample);
-    size += RENDERING_STREAM_SIZE(enableAntialiasedLine);
+    size += RENDERING_STREAM_SIZE(enableMultiSample);
+    size += RENDERING_STREAM_SIZE(enableAntiAliasedLine);
 
     return size;
 }
@@ -114,8 +160,8 @@ void Rendering::RasterizerState::Save(CoreTools::BufferTarget& target) const
     target.Write(slopeScaledDepthBias);
     target.Write(enableDepthClip);
     target.Write(enableScissor);
-    target.Write(enableMultisample);
-    target.Write(enableAntialiasedLine);
+    target.Write(enableMultiSample);
+    target.Write(enableAntiAliasedLine);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -150,12 +196,12 @@ void Rendering::RasterizerState::Load(CoreTools::BufferSource& source)
     source.Read(slopeScaledDepthBias);
     source.Read(enableDepthClip);
     source.Read(enableScissor);
-    source.Read(enableMultisample);
-    source.Read(enableAntialiasedLine);
+    source.Read(enableMultiSample);
+    source.Read(enableAntiAliasedLine);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 
-    CheckDrawingState();
+    CheckRasterizerState();
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::RasterizerState::CloneObject() const
@@ -281,28 +327,28 @@ bool Rendering::RasterizerState::IsEnableMultisample() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return enableMultisample;
+    return enableMultiSample;
 }
 
 void Rendering::RasterizerState::SetEnableMultisample(bool aEnableMultisample) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    enableMultisample = aEnableMultisample;
+    enableMultiSample = aEnableMultisample;
 }
 
 bool Rendering::RasterizerState::IsEnableAntialiasedLine() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return enableAntialiasedLine;
+    return enableAntiAliasedLine;
 }
 
 void Rendering::RasterizerState::SetEnableAntialiasedLine(bool aEnableAntialiasedLine) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    enableAntialiasedLine = aEnableAntialiasedLine;
+    enableAntiAliasedLine = aEnableAntialiasedLine;
 }
 
 Rendering::RasterizerState::RendererObjectSharedPtr Rendering::RasterizerState::CreateRendererObject(RendererTypes rendererTypes)
@@ -318,7 +364,7 @@ Rendering::RasterizerState::RendererObjectSharedPtr Rendering::RasterizerState::
     }
 }
 
-void Rendering::RasterizerState::CheckDrawingState()
+void Rendering::RasterizerState::CheckRasterizerState()
 {
     if (GetType() != GraphicsObjectType::RasterizerState)
     {

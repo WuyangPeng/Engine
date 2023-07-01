@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:45) 
+///	引擎版本：0.9.0.12 (2023/06/12 13:45)
 
 #include "Rendering/RenderingExport.h"
 
@@ -15,6 +15,7 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
+#include "Rendering/Shaders/Flags/ShaderFlags.h"
 
 namespace
 {
@@ -121,70 +122,7 @@ CLASS_INVARIANT_STUB_DEFINE(Rendering, VertexColor4Effect)
 Rendering::VertexColor4Effect::VertexColor4Effect(CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{ disableNotThrow }
 {
-    auto vshader = std::make_shared<VertexShader>("VertexColor4", 2, 2, 1, 0);
-    vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
-    vshader->SetInput(1, "modelColor", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Color0);
-    vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
-    vshader->SetOutput(1, "vertexColor", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Color0);
-    vshader->SetConstant(0, "PVWMatrix", 4);
-    auto profile = vshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 5; ++j)
-        {
-            profile->SetBaseRegister(i, j, *vRegisters.at(i));
-        }
-
-        profile->SetProgram(i, vPrograms.at(i));
-    }
-
-    auto pshader = std::make_shared<PixelShader>("VertexColor4", 1, 1, 0, 0);
-    pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    profile = pshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        profile->SetProgram(i, pPrograms.at(i));
-    }
-
-    auto pass = std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable);
-    pass->SetVertexShader(vshader);
-    pass->SetPixelShader(pshader);
-    pass->SetAlphaState(std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetCullState(std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetDepthState(std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetOffsetState(std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetStencilState(std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetWireState(std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable));
-
-    auto technique = std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable);
-    technique->InsertPass(pass);
-
     RENDERING_SELF_CLASS_IS_VALID_9;
-}
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::VertexColor4Effect::CreateInstance()
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    auto instance = std::make_shared<VisualEffectInstance>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), 0);
-    instance->SetVertexConstant(0, 0, std::make_shared<ProjectionViewMatrixConstant>(CoreTools::DisableNotThrow::Disable));
-
-    return instance;
-}
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::VertexColor4Effect::CreateUniqueInstance()
-{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    auto effect = std::make_shared<ClassType>(CoreTools::DisableNotThrow::Disable);
-
-#include STSTEM_WARNING_POP
-
-    return effect->CreateInstance();
 }
 
 Rendering::VertexColor4Effect::VertexColor4Effect(LoadConstructor value)

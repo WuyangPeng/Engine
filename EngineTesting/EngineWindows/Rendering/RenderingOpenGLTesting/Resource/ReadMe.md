@@ -3,10 +3,11 @@
 ----------------------------
 渲染库OpenGL单元测试
 
-1.	RenderersSuite
+1.	RendererEngineSuite
 
-对渲染器模块的单元测试，包括： 
-（1） 渲染基础。
+对渲染引擎模块的单元测试，包括： 
+（1） 渲染基础：EnvironmentParameterTesting、
+				RenderingEnvironmentTesting。
 （2） 渲染参数。
 （3） 顶点格式对象。
 （4） 索引缓冲区。

@@ -80,6 +80,8 @@ namespace Mathematics
         NODISCARD static Real Exp10(Real x) noexcept(gAssert < 3 || gMathematicsAssert < 3);
         NODISCARD static Real SinPi(Real x) noexcept;
 
+        NODISCARD static int GetNumberDigits(int64_t number);
+
     public:
         // 公用常数。
         NODISCARD static Real GetExponent() noexcept(gAssert < 3 || gMathematicsAssert < 3);

@@ -54,8 +54,10 @@ namespace CoreTools
         NODISCARD CSVDataType GetDataType(int index) const;
         NODISCARD CSVDataType GetDataType(const String& field) const;
         NODISCARD String GetActualType(int index) const;
+        NODISCARD String GetAbbreviation(int index) const;
         NODISCARD String GetValueType(int index) const;
         NODISCARD String GetActualTypeByNameSpace(int index) const;
+        NODISCARD String GetAbbreviationByNameSpace(int index, const String& className) const;
         NODISCARD bool HasDataField(const String& field) const;
         NODISCARD bool HasDataField(const StringView& field) const;
         NODISCARD int GetDataIndex(const String& field) const;

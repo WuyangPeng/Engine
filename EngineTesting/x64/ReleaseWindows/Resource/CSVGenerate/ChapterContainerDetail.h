@@ -36,11 +36,11 @@ CSVConfigure::ChapterContainer::Container CSVConfigure::ChapterContainer::GetCha
 
     Container result{};
 
-    for (const auto& value : chapter)
+    for (const auto& element : chapter)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

@@ -13,7 +13,7 @@
 #include "Framework/FrameworkDll.h"
 
 #include "Rendering/DataTypes/Colour.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Framework/Application/PixelScreen.h"
 #include "Framework/WindowCreate/WindowCreateFwd.h"
 
@@ -24,8 +24,8 @@ namespace Framework
     public:
         using ClassType = PixelViewMiddleLayerImpl;
         using Colour = Rendering::Colour<uint8_t>;
-        using RendererSharedPtr = std::shared_ptr<Rendering::Renderer>;
-        using ConstRendererSharedPtr = std::shared_ptr<const Rendering::Renderer>;
+        using RendererSharedPtr = std::shared_ptr<Rendering::BaseRenderer>;
+        using ConstRendererSharedPtr = std::shared_ptr<const Rendering::BaseRenderer>;
 
     public:
         PixelViewMiddleLayerImpl(int width, int height);

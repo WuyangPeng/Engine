@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起版本：0.9.0.12 (2023/06/17 12:40)
+///	版本：0.9.1.0 (2023/06/19 15:16)
 
 #ifndef RISE_OF_HISTORY_RISE_OF_HISTORY_MIDDLE_LAYER_MESSAGE_H
 #define RISE_OF_HISTORY_RISE_OF_HISTORY_MIDDLE_LAYER_MESSAGE_H
@@ -13,29 +13,33 @@
 #include "RiseOfHistory.h"
 #include "CoreTools/Console/ConsoleAlloc.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
-#include "Framework/MiddleLayer/ArtificialIntellegenceInterface.h"
+#include "Framework/MiddleLayer/ArtificialIntelligenceInterface.h"
 #include "Framework/MiddleLayer/EngineMiddleLayerContainer.h"
 #include "Framework/MiddleLayer/ObjectLogicInterface.h"
 #include "Framework/MiddleLayer/ObjectLogicManager.h"
+#include "Framework/Project/GUIProjectManager.h"
+#include "Framework/Project/InputProjectManagerDetail.h"
+#include "Framework/Project/ResourceProjectManager.h"
+#include "Framework/Project/SystemProjectManager.h"
 #include "Framework/WindowProcess/WindowMessage.h"
 #include "Framework/WindowProcess/WindowProcessHandle.h"
 
 namespace RiseOfHistory
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<Framework::ObjectLogicInterface, Framework::ArtificialIntellegenceInterface>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<Framework::ObjectLogicInterface, Framework::ArtificialIntelligenceInterface>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
-                                                                  InputMiddleLayer,
+                                                                  Framework::InputProjectManager,
                                                                   Framework::NetworkManagerInterface,
                                                                   ObjectLogicManager,
                                                                   Framework::PhysicalModellingManagerInterface,
                                                                   Framework::MessageManagerInterface,
                                                                   Framework::EventManagerInterface,
-                                                                  SystemMiddleLayer,
-                                                                  ResourceMiddleLayer,
+                                                                  Framework::SystemProjectManager,
+                                                                  Framework::ResourceProjectManager,
                                                                   Framework::AudioManagerInterface,
                                                                   Framework::CameraSystemsManagerInterface,
                                                                   Framework::RenderingManagerInterface,
-                                                                  GUIMiddleLayer>;
+                                                                  Framework::GUIProjectManager>;
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
     class RiseOfHistoryMiddleLayerMessage final : public MessageType

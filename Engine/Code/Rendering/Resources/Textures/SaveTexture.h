@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:24)
+///	版本：0.9.1.0 (2023/06/29 20:15)
 
 #ifndef RENDERING_RESOURCES_SAVE_TEXTURE_H
 #define RENDERING_RESOURCES_SAVE_TEXTURE_H
@@ -19,8 +19,6 @@
 
 namespace Rendering
 {
-    class Texture;
-
     class RENDERING_DEFAULT_DECLARE SaveTexture
     {
     public:
@@ -28,7 +26,7 @@ namespace Rendering
 
         // 支持保存原始纹理。
     public:
-        // 保存纹理到.trt文件外的流媒体系统。
+        // 保存纹理到.tct文件外的流媒体系统。
         // 纹理对象可以是1D, 2D, 3D or cube。
         static void SaveToFile(const Texture& texture, const System::String& fileName);
     };

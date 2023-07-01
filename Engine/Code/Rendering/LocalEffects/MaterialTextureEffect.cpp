@@ -148,107 +148,10 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, MaterialTextureEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, MaterialTextureEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, MaterialTextureEffect);
 
-Rendering::MaterialTextureEffect::MaterialTextureEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
+Rendering::MaterialTextureEffect::MaterialTextureEffect(MAYBE_UNUSED ShaderFlags::SamplerFilter filter, MAYBE_UNUSED ShaderFlags::SamplerCoordinate coordinate0, MAYBE_UNUSED ShaderFlags::SamplerCoordinate coordinate1)
     : ParentType{ CoreTools::DisableNotThrow::Disable }
 {
-    auto vshader = std::make_shared<VertexShader>("MaterialTexture", 2, 3, 2, 0);
-    vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
-    vshader->SetInput(1, "modelTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
-    vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
-    vshader->SetOutput(1, "vertexColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    vshader->SetOutput(2, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
-    vshader->SetConstant(0, "PVWMatrix", 4);
-    vshader->SetConstant(1, "MaterialDiffuse", 1);
-
-    auto profile = vshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 2; ++j)
-        {
-            profile->SetBaseRegister(i, j, vRegisters.at(i)->at(j));
-        }
-
-        profile->SetProgram(i, vPrograms.at(i));
-    }
-
-    auto pshader = std::make_shared<PixelShader>("MaterialTexture", 2, 1, 0, 1);
-    pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetInput(1, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetSampler(0, "BaseSampler", ShaderFlags::SamplerType::Sampler2D);
-    pshader->SetFilter(0, filter);
-    pshader->SetCoordinate(0, 0, coordinate0);
-    pshader->SetCoordinate(0, 1, coordinate1);
-
-    profile = pshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 1; ++j)
-        {
-            profile->SetTextureUnit(i, j, *pTextureUnits.at(i));
-        }
-
-        profile->SetProgram(i, pPrograms.at(i));
-    }
-
-    auto pass = std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable);
-    pass->SetVertexShader(vshader);
-    pass->SetPixelShader(pshader);
-    pass->SetAlphaState(std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetCullState(std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetDepthState(std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetOffsetState(std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetStencilState(std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetWireState(std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable));
-
-    auto technique = std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable);
-    technique->InsertPass(pass);
-
     RENDERING_SELF_CLASS_IS_VALID_9;
-}
-
-Rendering::PixelShaderSharedPtr Rendering::MaterialTextureEffect::GetPixelShaderSharedPtr() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    return nullptr;
-}
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::MaterialTextureEffect::CreateInstance(const MaterialSharedPtr& material, const Texture2DSharedPtr& texture)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    auto instance = std::make_shared<VisualEffectInstance>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), 0);
-
-    instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>(CoreTools::DisableNotThrow::Disable)));
-    instance->SetVertexConstant(0, 1, ShaderFloatSharedPtr(std::make_shared<MaterialDiffuseConstant>(MaterialSharedPtr(material))));
-    instance->SetPixelTexture(0, 0, TextureSharedPtr(texture));
-
-    const auto filter = GetPixelShaderSharedPtr()->GetFilter(0);
-    if (filter != ShaderFlags::SamplerFilter::Nearest && filter != ShaderFlags::SamplerFilter::NearesLinear && !texture->HasMipmaps())
-    {
-    }
-
-    return instance;
-}
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::MaterialTextureEffect::CreateUniqueInstance(const MaterialSharedPtr& material, const Texture2DSharedPtr& texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
-{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    auto effect = std::make_shared<MaterialTextureEffect>(ShaderFlags::SamplerFilter::Nearest);
-
-#include STSTEM_WARNING_POP
-
-    auto pshader = effect->GetPixelShaderSharedPtr();
-    pshader->SetFilter(0, filter);
-    pshader->SetCoordinate(0, 0, coordinate0);
-    pshader->SetCoordinate(0, 1, coordinate1);
-
-    return effect->CreateInstance(material, texture);
 }
 
 Rendering::MaterialTextureEffect::MaterialTextureEffect(LoadConstructor value)

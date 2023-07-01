@@ -16,7 +16,7 @@
 
 using namespace std::literals;
 
-AncientBooks::Genus::Genus(const CoreTools::CSVRow& csvRow)
+AncientBooks::Genus::Genus(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       category{ csvRow.GetInt(SYSTEM_TEXT("category"s)) },
@@ -51,7 +51,7 @@ int AncientBooks::Genus::GetCategory() const noexcept
     return category;
 }
 
-std::shared_ptr<const AncientBooks::CategoryMappingType> AncientBooks::Genus::GetCategory(const AncientBooksContainer& csvContainer) const
+AncientBooks::Genus::ConstCategorySharedPtr AncientBooks::Genus::GetCategory(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -72,7 +72,7 @@ int AncientBooks::Genus::GetFather() const noexcept
     return father;
 }
 
-std::shared_ptr<const AncientBooks::GenusMappingType> AncientBooks::Genus::GetFather(const AncientBooksContainer& csvContainer) const
+AncientBooks::Genus::ConstGenusSharedPtr AncientBooks::Genus::GetFather(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

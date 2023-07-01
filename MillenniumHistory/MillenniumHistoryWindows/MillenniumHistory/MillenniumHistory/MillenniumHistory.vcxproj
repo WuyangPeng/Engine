@@ -932,37 +932,17 @@ xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(
     <Text Include="Resource\Todo\Level 9.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\MillenniumHistory\Core\ProjectName.cpp" />
-    <ClCompile Include="..\..\..\Code\MillenniumHistory\GUI\GUIManager.cpp" />
-    <ClCompile Include="..\..\..\Code\MillenniumHistory\Resource\ResourceManager.cpp" />
-    <ClCompile Include="..\..\..\Code\MillenniumHistory\System\SystemManager.cpp" />
     <ClCompile Include="..\..\..\Code\MillenniumHistory\MillenniumHistoryHelper.cpp" />
     <ClCompile Include="..\..\..\Code\MillenniumHistory\MillenniumHistoryLib.cpp" />
     <ClCompile Include="..\..\..\Code\MillenniumHistory\MillenniumHistoryMain.cpp" />
     <ClCompile Include="..\..\..\Code\MillenniumHistory\MillenniumHistoryMiddleLayerMessage.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Core\Core.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Core\CoreFwd.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Core\ProjectName.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\GUI\GUI.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\GUI\GUIFwd.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\GUI\GUIManager.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Helper\MillenniumHistoryClassInvariantMacro.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Helper\MillenniumHistoryCustomAssertMacro.h" />
     <ClInclude Include="..\..\..\Code\MillenniumHistory\Helper\Helper.h" />
     <ClInclude Include="..\..\..\Code\MillenniumHistory\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\MillenniumHistory\Helper\MillenniumHistoryClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\MillenniumHistory\Helper\MillenniumHistoryCustomAssertMacro.h" />
     <ClInclude Include="..\..\..\Code\MillenniumHistory\Helper\UserMacro.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Input\Input.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Input\InputFwd.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Input\InputManager.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Input\InputManagerDetail.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Resource\Resource.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Resource\ResourceFwd.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\Resource\ResourceManager.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\System\System.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\System\SystemFwd.h" />
-    <ClInclude Include="..\..\..\Code\MillenniumHistory\System\SystemManager.h" />
     <ClInclude Include="..\..\..\Code\MillenniumHistory\MillenniumHistory.h" />
     <ClInclude Include="..\..\..\Code\MillenniumHistory\MillenniumHistoryFwd.h" />
     <ClInclude Include="..\..\..\Code\MillenniumHistory\MillenniumHistoryHelper.h" />

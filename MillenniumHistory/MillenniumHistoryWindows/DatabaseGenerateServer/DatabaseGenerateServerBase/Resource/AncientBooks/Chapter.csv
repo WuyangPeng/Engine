@@ -1,7 +1,0 @@
-@default
-Id,名稱
-int,string
-id,name
-1,"前言"
-2,"正文"
-3,"後序"

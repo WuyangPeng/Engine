@@ -33,6 +33,11 @@ namespace Rendering
 
         void Enable() noexcept override;
         void Disable() noexcept;
+        [[nodiscard]] bool CopyGpuToCpu(int level) override;
+        [[nodiscard]] bool CopyGpuToCpu(int item, int level) override;
+        [[nodiscard]] bool CopyCpuToGpu(int level) override;
+        [[nodiscard]] bool CopyCpuToGpu(int item, int level) override;
+        [[nodiscard]] bool GetNumActiveElements() override;
     };
 }
 

@@ -24,11 +24,13 @@ namespace AncientBooks
     {
     public:
         using ClassType = EmperorContainer;
+
         using ConstEmperorBaseSharedPtr = std::shared_ptr<const EmperorBase>;
         using Container = std::vector<ConstEmperorBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit EmperorContainer(const CoreTools::CSVContent& csvContent);
+        explicit EmperorContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,9 @@ namespace AncientBooks
         NODISCARD Container GetEmperor(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container emperor;

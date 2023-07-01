@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:22)
+///	版本：0.9.1.0 (2023/06/29 17:05)
 
-#ifndef RENDERING_RENDERERS_RAW_BUFFER_H
-#define RENDERING_RENDERERS_RAW_BUFFER_H
+#ifndef RENDERING_RESOURCES_RAW_BUFFER_H
+#define RENDERING_RESOURCES_RAW_BUFFER_H
 
 #include "Rendering/RenderingDll.h"
 
@@ -22,6 +22,7 @@ namespace Rendering
     public:
         using ClassType = RawBuffer;
         using ParentType = Buffer;
+
         using MemberLayoutContainer = std::vector<MemberLayout>;
 
     public:
@@ -35,6 +36,11 @@ namespace Rendering
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
         NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
+        NODISCARD static constexpr auto GetShaderDataLookup() noexcept
+        {
+            return 3;
+        }
     };
 
 #include STSTEM_WARNING_PUSH
@@ -47,4 +53,4 @@ namespace Rendering
     CORE_TOOLS_SHARED_PTR_DECLARE(RawBuffer);
 }
 
-#endif  // RENDERING_RENDERERS_RAW_BUFFER_H
+#endif  // RENDERING_RESOURCES_RAW_BUFFER_H

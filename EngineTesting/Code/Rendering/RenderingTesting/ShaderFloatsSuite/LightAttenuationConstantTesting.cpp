@@ -17,7 +17,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
@@ -40,7 +39,6 @@ void Rendering::LightAttenuationConstantTesting::DoRunUnitTest()
 void Rendering::LightAttenuationConstantTesting::MainTest()
 {
     CameraManager::Create();
-    RendererManager::Create();
 
     CoreTools::InitTerm::ExecuteInitializer();
 
@@ -51,7 +49,6 @@ void Rendering::LightAttenuationConstantTesting::MainTest()
 
     CoreTools::InitTerm::ExecuteTerminator();
 
-    RendererManager::Destroy();
     CameraManager::Destroy();
 }
 

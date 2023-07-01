@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起版本：0.9.0.12 (2023/06/17 12:51)
+///	版本：0.9.1.0 (2023/06/19 15:33)
 
-#ifndef GAME_CLIENT_MIDDLE_LAYER_NETWORK_MIDDLE_LAYER_NETWORK_H
-#define GAME_CLIENT_MIDDLE_LAYER_NETWORK_MIDDLE_LAYER_NETWORK_H
+#ifndef GAME_CLIENT_MIDDLE_LAYER_NETWORK_NETWORK_MANAGER_H
+#define GAME_CLIENT_MIDDLE_LAYER_NETWORK_NETWORK_MANAGER_H
 
 #include "GameClient/GameClientMiddleLayer/GameClientMiddleLayerDll.h"
 
@@ -17,11 +17,11 @@
 
 namespace GameClientMiddleLayer
 {
-    class GAME_CLIENT_MIDDLE_LAYER_DEFAULT_DECLARE NetworkManager : public Framework::NetworkManagerInterface
+    class GAME_CLIENT_MIDDLE_LAYER_DEFAULT_DECLARE NetworkManager final : public Framework::NetworkManagerInterface
     {
     public:
         using ClassType = NetworkManager;
-        using ParentType = Framework::NetworkManagerInterface;
+        using ParentType = NetworkManagerInterface;
 
         using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
@@ -33,4 +33,4 @@ namespace GameClientMiddleLayer
     };
 }
 
-#endif  // GAME_CLIENT_MIDDLE_LAYER_NETWORK_MIDDLE_LAYER_NETWORK_H
+#endif  // GAME_CLIENT_MIDDLE_LAYER_NETWORK_NETWORK_MANAGER_H

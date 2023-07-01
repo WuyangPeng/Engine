@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-CSVConfigure::ChapterContainer::ChapterContainer(const CoreTools::CSVContent& csvContent)
+CSVConfigure::ChapterContainer::ChapterContainer(const CSVContent& csvContent)
     : chapter{}
 {
     Parsing(csvContent);
@@ -24,10 +24,18 @@ CSVConfigure::ChapterContainer::ChapterContainer(const CoreTools::CSVContent& cs
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void CSVConfigure::ChapterContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void CSVConfigure::ChapterContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("chapter表开始载入……"));
 
+    Load(csvContent);
+    Unique();
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("chapter表结束载入……"));
+}
+
+void CSVConfigure::ChapterContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -41,7 +49,10 @@ void CSVConfigure::ChapterContainer::Parsing(const CoreTools::CSVContent& csvCon
     std::ranges::sort(chapter, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
+}
 
+void CSVConfigure::ChapterContainer::Unique()
+{
     const auto iter = std::ranges::unique(chapter, [](const auto& lhs, const auto& rhs) noexcept {
         if((*lhs).GetKey() == (*rhs).GetKey())
         {
@@ -57,12 +68,10 @@ void CSVConfigure::ChapterContainer::Parsing(const CoreTools::CSVContent& csvCon
 
     if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("chapter表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-
         chapter.erase(iter.begin(), iter.end());
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("chapter表结束载入……"));
+    chapter.shrink_to_fit();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, ChapterContainer)

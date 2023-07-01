@@ -12,8 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/OpenGLRenderer/OpenGLRenderTargetData.h"
-#include "Rendering/Renderers/Renderer.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Textures/DrawTarget.h"
 
 Rendering::OpenGLRenderTargetDataTesting::OpenGLRenderTargetDataTesting(const OStreamShared& stream)
@@ -31,11 +30,11 @@ void Rendering::OpenGLRenderTargetDataTesting::DoRunUnitTest()
 
 void Rendering::OpenGLRenderTargetDataTesting::MainTest()
 {
-    RendererManager::Create();
+  
 
     ASSERT_NOT_THROW_EXCEPTION_0(OpenGLRenderTargetDataTest);
 
-    RendererManager::Destroy();
+   
 }
 
 void Rendering::OpenGLRenderTargetDataTesting::OpenGLRenderTargetDataTest() noexcept

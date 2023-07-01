@@ -13,7 +13,7 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::PdrPixelShader::PdrPixelShader(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const PixelShader* pshader) noexcept
+Rendering::PdrPixelShader::PdrPixelShader(MAYBE_UNUSED BaseRenderer* renderer) noexcept
     : ParentType{}, shader{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -21,12 +21,12 @@ Rendering::PdrPixelShader::PdrPixelShader(MAYBE_UNUSED Renderer* renderer, MAYBE
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PdrPixelShader)
 
-void Rendering::PdrPixelShader::Enable(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const PixelShader* pshader, MAYBE_UNUSED const ShaderParameters* parameters) noexcept
+void Rendering::PdrPixelShader::Enable(MAYBE_UNUSED BaseRenderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 }
 
-void Rendering::PdrPixelShader::Disable(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const PixelShader* pshader, MAYBE_UNUSED const ShaderParameters* parameters) noexcept
+void Rendering::PdrPixelShader::Disable(MAYBE_UNUSED BaseRenderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 }

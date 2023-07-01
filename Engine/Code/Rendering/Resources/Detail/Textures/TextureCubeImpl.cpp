@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:28)
+///	版本：0.9.1.0 (2023/06/29 20:19)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,27 +18,29 @@
 
 #include <vector>
 
-Rendering::TextureCubeImpl::TextureCubeImpl(DataFormatType format, int length, bool hasMipmaps)
-    : ParentType{ format, GetNumLevels(length, length, 1, hasMipmaps) },
-      textureLevelData{ cubeFaceCount, length, length, hasMipmaps, GetTotalElements(cubeFaceCount, length, length, 1, hasMipmaps), GetNumLevels() }
+Rendering::TextureCubeImpl::TextureCubeImpl(DataFormatType format, int length, bool hasMipMaps)
+    : ParentType{ format, GetNumLevels(length, length, 1, hasMipMaps) },
+      textureLevelData{ cubeFaceCount, length, length, hasMipMaps, GetTotalElements(cubeFaceCount, length, length, 1, hasMipMaps), GetNumLevels() }
 {
     RENDERING_ASSERTION_0(0 < length, "length 必须是正数\n");
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::TextureCubeImpl::TextureCubeImpl(int numCubes, DataFormatType format, int length, bool hasMipmaps)
-    : ParentType{ format, GetNumLevels(length, length, 1, hasMipmaps) },
-      textureLevelData{ numCubes * cubeFaceCount, length, length, hasMipmaps, GetTotalElements(numCubes * cubeFaceCount, length, length, 1, hasMipmaps), GetNumLevels() }
+Rendering::TextureCubeImpl::TextureCubeImpl(int numCubes, DataFormatType format, int length, bool hasMipMaps)
+    : ParentType{ format, GetNumLevels(length, length, 1, hasMipMaps) },
+      textureLevelData{ numCubes * cubeFaceCount, length, length, hasMipMaps, GetTotalElements(numCubes * cubeFaceCount, length, length, 1, hasMipMaps), GetNumLevels() }
 {
     RENDERING_ASSERTION_0(0 < length, "length 必须是正数\n");
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::TextureCubeImpl::TextureCubeImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+Rendering::TextureCubeImpl::TextureCubeImpl(CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{ DataFormatType::Unknown, 0 }, textureLevelData{ cubeFaceCount, 0, 0, false, 0, 1 }
 {
+    System::UnusedFunction(disableNotThrow);
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
@@ -86,11 +88,11 @@ int Rendering::TextureCubeImpl::GetLevelOffset(int item, int level) const
     return textureLevelData.GetLevelOffset(item, level);
 }
 
-bool Rendering::TextureCubeImpl::HasMipmaps() const noexcept
+bool Rendering::TextureCubeImpl::HasMipMaps() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return textureLevelData.HasMipmaps();
+    return textureLevelData.HasMipMaps();
 }
 
 int Rendering::TextureCubeImpl::GetWidth() const
@@ -136,21 +138,21 @@ void Rendering::TextureCubeImpl::LoadLevelDataFromFile(ReadFileManager& inFile)
     textureLevelData.ReadFromFile(inFile);
 }
 
-void Rendering::TextureCubeImpl::AutogenerateMipmaps() noexcept
+void Rendering::TextureCubeImpl::AutoGenerateMipMaps() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return textureLevelData.AutogenerateMipmaps();
+    return textureLevelData.AutoGenerateMipMaps();
 }
 
-bool Rendering::TextureCubeImpl::WantAutogenerateMipmaps() const noexcept
+bool Rendering::TextureCubeImpl::WantAutoGenerateMipMaps() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return textureLevelData.WantAutogenerateMipmaps();
+    return textureLevelData.WantAutoGenerateMipMaps();
 }
 
-int Rendering::TextureCubeImpl::GetNumSubresources() const noexcept
+int Rendering::TextureCubeImpl::GetNumSubResources() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -163,7 +165,7 @@ int Rendering::TextureCubeImpl::GetIndex(int item, int level) const
 
     if (textureLevelData.GetNumItems() <= item || GetNumLevels() <= level)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效输入。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("无效输入。"))
     }
 
     return GetNumLevels() * item + level;
@@ -179,8 +181,8 @@ void Rendering::TextureCubeImpl::SaveBaseToFile(WriteFileManager& outFile) const
     const auto dimension0 = GetDimension(0);
     outFile.Write(sizeof(int32_t), &dimension0);
 
-    const auto hasMipmaps = HasMipmaps();
-    outFile.Write(sizeof(bool), &hasMipmaps);
+    const auto hasMipMaps = HasMipMaps();
+    outFile.Write(sizeof(bool), &hasMipMaps);
 
     const auto numItems = GetNumItems();
     outFile.Write(sizeof(int32_t), &numItems);

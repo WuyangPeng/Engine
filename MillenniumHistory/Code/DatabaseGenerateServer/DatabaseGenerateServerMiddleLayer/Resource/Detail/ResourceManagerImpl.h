@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.12 (2023/06/12 21:52)
+///	版本：0.9.1.0 (2023/06/19 21:50)
 
-#ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_RESOURCE_MANAGER_IMPL_H
-#define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_RESOURCE_MANAGER_IMPL_H
+#ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_RESOURCE_RESOURCE_MANAGER_IMPL_H
+#define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_RESOURCE_RESOURCE_MANAGER_IMPL_H
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/DatabaseGenerateServerMiddleLayerDll.h"
 
@@ -37,6 +37,7 @@ namespace DatabaseGenerateServerMiddleLayer
 
     private:
         using AncientBooksContainerSharedPtr = std::shared_ptr<AncientBooks::AncientBooksContainer>;
+        using ThreadSharedPtr = std::shared_ptr<std::jthread>;
 
     private:
         void InitAncientBooks();
@@ -44,9 +45,9 @@ namespace DatabaseGenerateServerMiddleLayer
     private:
         System::String directory;
         AncientBooksContainerSharedPtr ancientBooksContainer;
-        std::shared_ptr<std::jthread> thread;
+        ThreadSharedPtr thread;
         std::mutex mutex;
     };
 }
 
-#endif  // DATABASE_GENERATE_SERVER_MIDDLE_LAYER_RESOURCE_MANAGER_IMPL_H
+#endif  // DATABASE_GENERATE_SERVER_MIDDLE_LAYER_RESOURCE_RESOURCE_MANAGER_IMPL_H

@@ -24,11 +24,13 @@ namespace AncientBooks
     {
     public:
         using ClassType = MonthContainer;
+
         using ConstMonthBaseSharedPtr = std::shared_ptr<const MonthBase>;
         using Container = std::vector<ConstMonthBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit MonthContainer(const CoreTools::CSVContent& csvContent);
+        explicit MonthContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,9 @@ namespace AncientBooks
         NODISCARD Container GetMonth(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container month;

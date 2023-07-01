@@ -531,15 +531,6 @@
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerTesting\Testing.h" />
-    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerTesting\TestingHelper.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerTesting\TestingHelper.cpp" />
-    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerTesting\TestingLib.cpp" />
-    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerTesting\TestingMain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />
@@ -550,6 +541,20 @@
     <Text Include="Resource\Todo\Level 7.txt" />
     <Text Include="Resource\Todo\Level 8.txt" />
     <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\DatabaseGenerateServerSuite\DatabaseGenerateServerHelperTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\DatabaseGenerateServerSuite\DatabaseGenerateServerMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\DatabaseGenerateServerSuite\DatabaseGenerateServerSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\Testing.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\TestingHelper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\DatabaseGenerateServerSuite\DatabaseGenerateServerHelperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\DatabaseGenerateServerSuite\DatabaseGenerateServerMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\TestingHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\TestingLib.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\TestingMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

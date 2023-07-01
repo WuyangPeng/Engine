@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.12 (2023/06/15 22:54)
+///	版本：0.9.1.0 (2023/06/17 23:41)
 
 #ifndef MILLENNIUM_HISTORY_VERSION_H
 #define MILLENNIUM_HISTORY_VERSION_H
@@ -15,6 +15,6 @@
 //  gMillenniumHistoryVersion / 10000 % 100 是次版本号
 //  gMillenniumHistoryVersion / 1000000 % 100 是主版本号
 
-constexpr auto gMillenniumHistoryVersion = 90012;
+constexpr auto gMillenniumHistoryVersion = 90100;
 
 #endif  // MILLENNIUM_HISTORY_VERSION_H

@@ -15,16 +15,17 @@
 #include "System/OpenGL/OpenGLFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/Base/RendererObject.h"
+#include "Rendering/OpenGLRenderer/OpenGLRendererObject.h"
 #include "Rendering/State/SamplerState.h"
 #include "Rendering/State/StateFwd.h"
 
 namespace Rendering
 {
-    class RENDERING_DEFAULT_DECLARE OpenGLSamplerState : public RendererObject
+    class RENDERING_DEFAULT_DECLARE OpenGLSamplerState : public OpenGLRendererObject
     {
     public:
         using ClassType = OpenGLSamplerState;
-        using ParentType = RendererObject;
+        using ParentType = OpenGLRendererObject;
 
     public:
         OpenGLSamplerState(const SamplerStateSharedPtr& samplerState, const std::string& name);
@@ -37,11 +38,23 @@ namespace Rendering
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void Enable() noexcept override;
+        NODISCARD bool Update() noexcept override;
 
         NODISCARD static System::TextureSamplerCoordinate GetSamplerStateMode(SamplerStateMode samplerStateMode);
 
     private:
         void Init(const SamplerState& samplerState);
+
+    public:
+        [[nodiscard]] bool Update(int level) override;
+        [[nodiscard]] bool Update(int item, int level) override;
+        [[nodiscard]] bool CopyGpuToCpu() override;
+        [[nodiscard]] bool CopyGpuToCpu(int level) override;
+        [[nodiscard]] bool CopyGpuToCpu(int item, int level) override;
+        [[nodiscard]] bool CopyCpuToGpu() override;
+        [[nodiscard]] bool CopyCpuToGpu(int level) override;
+        [[nodiscard]] bool CopyCpuToGpu(int item, int level) override;
+        [[nodiscard]] bool GetNumActiveElements() override;
     };
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:26)
+///	版本：0.9.1.0 (2023/06/29 11:17)
 
 #include "Rendering/RenderingExport.h"
 
@@ -22,7 +22,7 @@
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/OpenGLRenderer/State/OpenGLDepthStencilState.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, DepthStencilState);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, DepthStencilState);
@@ -148,7 +148,7 @@ void Rendering::DepthStencilState::Load(BufferSource& source)
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 
-    CheckDrawingState();
+    CheckDepthStencilState();
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::DepthStencilState::CloneObject() const
@@ -326,7 +326,7 @@ void Rendering::DepthStencilState::SetReference(int aReference) noexcept
     reference = aReference;
 }
 
-void Rendering::DepthStencilState::CheckDrawingState()
+void Rendering::DepthStencilState::CheckDepthStencilState()
 {
     if (GetType() != GraphicsObjectType::DepthStencilState)
     {

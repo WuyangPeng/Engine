@@ -185,11 +185,16 @@
 （1）DirectAPI。
 
 ----------------------------
-23.	RenderersSuite
+23.	RendererEngineSuite
 
 对渲染器模块的单元测试，包括： 
-（1） 渲染基础。
-（2） 渲染参数。
+（1） 渲染基础：ViewportTesting、
+				DepthRangeTesting、
+				EnvironmentParameterTesting、
+				RenderingEnvironmentTesting。
+（2） 渲染参数：RendererBasisTesting、
+			    WindowsParameterTesting、
+				RendererParameterTesting。
 （3） 顶点格式对象。
 （4） 索引缓冲区。
 （5） 顶点缓冲区。

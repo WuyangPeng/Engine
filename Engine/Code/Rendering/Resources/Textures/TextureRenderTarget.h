@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:25)
+///	版本：0.9.1.0 (2023/06/29 20:18)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_RENDER_TARGET_H
 #define RENDERING_RESOURCES_TEXTURE_RENDER_TARGET_H
@@ -23,7 +23,7 @@ namespace Rendering
         using ParentType = Texture2D;
 
     public:
-        TextureRenderTarget(DataFormatType format, int width, int height, bool hasMipmaps);
+        TextureRenderTarget(DataFormatType format, int width, int height, bool hasMipMaps);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

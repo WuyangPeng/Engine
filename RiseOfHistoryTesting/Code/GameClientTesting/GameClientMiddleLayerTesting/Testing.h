@@ -5,9 +5,24 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起测试版本：0.9.0.12 (2023/06/17 13:05)
+///	版本：0.9.1.0 (2023/06/19 19:18)
 
 #ifndef GAME_CLIENT_MIDDLE_LAYER_TESTING_H
 #define GAME_CLIENT_MIDDLE_LAYER_TESTING_H
+
+#include "ArtificialIntelligenceSuite/ArtificialIntelligenceSuite.h"
+#include "AudioSuite/AudioSuite.h"
+#include "CameraSystemsSuite/CameraSystemsSuite.h"
+#include "EventSuite/EventSuite.h"
+#include "GUISuite/GUISuite.h"
+#include "HelperSuite/HelperSuite.h"
+#include "InputSuite/InputSuite.h"
+#include "MessageSuite/MessageSuite.h"
+#include "NetworkSuite/NetworkSuite.h"
+#include "ObjectLogicSuite/ObjectLogicSuite.h"
+#include "PhysicalModellingSuite/PhysicalModellingSuite.h"
+#include "RenderingSuite/RenderingSuite.h"
+#include "ResourceSuite/ResourceSuite.h"
+#include "SystemSuite/SystemSuite.h"
 
 #endif  // GAME_CLIENT_MIDDLE_LAYER_TESTING_H

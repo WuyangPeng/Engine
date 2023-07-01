@@ -14,7 +14,7 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/DataTypes/Colour.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
 #include <vector>
@@ -26,8 +26,8 @@ namespace Framework
     public:
         using ClassType = PixelScreenImpl;
         using Colour = Rendering::Colour<uint8_t>;
-        using RendererSharedPtr = std::shared_ptr<Rendering::Renderer>;
-        using ConstRendererSharedPtr = std::shared_ptr<const Rendering::Renderer>;
+        using RendererSharedPtr = std::shared_ptr<Rendering::BaseRenderer>;
+        using ConstRendererSharedPtr = std::shared_ptr<const Rendering::BaseRenderer>;
 
     public:
         explicit PixelScreenImpl(const WindowSize& size);
@@ -45,7 +45,7 @@ namespace Framework
 
         void Resize(const WindowSize& size, const Colour& color);
 
-        void Draw(const RendererSharedPtr& renderer);
+        void Draw(const RendererSharedPtr& renderer) noexcept;
 
         void ClearScreen(const Colour& color);
 

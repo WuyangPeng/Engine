@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = Article;
         using ParentType = ArticleBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Article(const CoreTools::CSVRow& csvRow);
+        explicit Article(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -34,44 +36,47 @@ namespace AncientBooks
         NODISCARD int64_t GetId() const noexcept override;
 
         NODISCARD int GetVersion() const noexcept override;
-        NODISCARD std::shared_ptr<const VersionMappingType> GetVersion(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstVersionSharedPtr GetVersion(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetChapter() const noexcept override;
-        NODISCARD std::shared_ptr<const ChapterMappingType> GetChapter(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD System::String GetChapterName() const override;
+        NODISCARD String GetChapterName() const override;
 
         NODISCARD int GetVolume() const noexcept override;
 
-        NODISCARD std::vector<int> GetOtherAuthor() const override;
+        NODISCARD int GetChapterVolume() const noexcept override;
+
+        NODISCARD IntContainer GetOtherAuthor() const override;
         NODISCARD int GetOtherAuthorCount() const override;
         NODISCARD int GetOtherAuthor(int index) const override;
-        NODISCARD std::vector<int>::const_iterator GetOtherAuthorBegin() const noexcept override;
-        NODISCARD std::vector<int>::const_iterator GetOtherAuthorEnd() const noexcept override;
+        NODISCARD IntContainerConstIter GetOtherAuthorBegin() const noexcept override;
+        NODISCARD IntContainerConstIter GetOtherAuthorEnd() const noexcept override;
+        NODISCARD CharacterContainer GetOtherAuthor(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD std::vector<System::String> GetAuthorDescribe() const override;
+        NODISCARD StringContainer GetAuthorDescribe() const override;
         NODISCARD int GetAuthorDescribeCount() const override;
-        NODISCARD System::String GetAuthorDescribe(int index) const override;
-        NODISCARD std::vector<System::String>::const_iterator GetAuthorDescribeBegin() const noexcept override;
-        NODISCARD std::vector<System::String>::const_iterator GetAuthorDescribeEnd() const noexcept override;
+        NODISCARD String GetAuthorDescribe(int index) const override;
+        NODISCARD StringContainerConstIter GetAuthorDescribeBegin() const noexcept override;
+        NODISCARD StringContainerConstIter GetAuthorDescribeEnd() const noexcept override;
 
-        NODISCARD System::String GetTitle() const override;
+        NODISCARD String GetTitle() const override;
 
-        NODISCARD System::String GetAbbreviation() const override;
+        NODISCARD String GetAbbreviation() const override;
 
-        NODISCARD System::String GetDirectory() const override;
+        NODISCARD String GetDirectory() const override;
 
     private:
         int64_t id;  // Id
         int version;  // 版本
         int chapter;  // 章
-        System::String chapterName;  // 章節名字
+        String chapterName;  // 章節名字
         int volume;  // 卷
-        std::vector<int> otherAuthor;  // 其他作者
-        std::vector<System::String> authorDescribe;  // 作者描述
-        System::String title;  // 標題
-        System::String abbreviation;  // 標題
-        System::String directory;  // 目錄
+        int chapterVolume;  // 章節卷
+        IntContainer otherAuthor;  // 其他作者
+        StringContainer authorDescribe;  // 作者描述
+        String title;  // 標題
+        String abbreviation;  // 標題（簡稱）
+        String directory;  // 目錄
     };
 }
 

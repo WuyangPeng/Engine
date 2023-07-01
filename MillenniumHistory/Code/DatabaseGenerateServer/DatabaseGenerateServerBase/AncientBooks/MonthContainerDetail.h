@@ -36,11 +36,11 @@ AncientBooks::MonthContainer::Container AncientBooks::MonthContainer::GetMonth(F
 
     Container result{};
 
-    for (const auto& value : month)
+    for (const auto& element : month)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

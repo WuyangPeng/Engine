@@ -17,8 +17,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Mathematics/Algebra/APointDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Mathematics/Algebra/APointDetail.h" 
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/SceneGraph/Culler.h"
 
@@ -56,7 +55,7 @@ void Rendering::Particles::InitIndexBuffer(int indexSize)
     RENDERING_ASSERTION_1(numVertices % 4 == 0, "顶点数必须是4的倍数。\n");
     RENDERING_ASSERTION_1(numParticles == impl->GetNumParticles(), "粒子数必须和位置数组大小相等。\n");
 
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, 6 * numParticles, indexSize);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, 6 * numParticles, indexSize);
     InitIndexBufferInParticles(*indexBuffer);
     SetIndexBuffer(indexBuffer);
 }
@@ -195,7 +194,7 @@ void Rendering::Particles::GenerateParticles(const Camera& camera)
 
     UpdateModelSpace(VisualUpdateType::Normals);
 
-    RENDERER_MANAGE_SINGLETON.UpdateAll(GetConstVertexBuffer());
+ 
 }
 
 void Rendering::Particles::GetVisibleSet(Culler& culler, bool noCull)

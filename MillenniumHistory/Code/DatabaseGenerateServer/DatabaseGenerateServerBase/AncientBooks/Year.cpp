@@ -11,20 +11,21 @@
 #include "ReignTitleContainer.h"
 #include "SexagenaryCycleContainer.h"
 #include "Year.h"
+#include "YearContainer.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVRowDetail.h"
 
 using namespace std::literals;
 
-AncientBooks::Year::Year(const CoreTools::CSVRow& csvRow)
+AncientBooks::Year::Year(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       name{ csvRow.GetString(SYSTEM_TEXT("name"s)) },
       sexagenaryCycle{ csvRow.GetInt(SYSTEM_TEXT("sexagenaryCycle"s)) },
       reignTitle{ csvRow.GetInt64(SYSTEM_TEXT("reignTitle"s)) },
       year{ csvRow.GetInt(SYSTEM_TEXT("year"s)) },
-      unorthodoxReignTitle{ csvRow.GetIntArray(SYSTEM_TEXT("unorthodoxReignTitle"s)) },
+      unorthodoxReignTitle{ csvRow.GetInt64Array(SYSTEM_TEXT("unorthodoxReignTitle"s)) },
       unorthodoxYear{ csvRow.GetIntArray(SYSTEM_TEXT("unorthodoxYear"s)) }
 {
     USER_SELF_CLASS_IS_VALID_9;
@@ -60,7 +61,7 @@ int AncientBooks::Year::GetSexagenaryCycle() const noexcept
     return sexagenaryCycle;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::Year::GetSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::Year::ConstSexagenaryCycleSharedPtr AncientBooks::Year::GetSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -74,7 +75,7 @@ int64_t AncientBooks::Year::GetReignTitle() const noexcept
     return reignTitle;
 }
 
-std::shared_ptr<const AncientBooks::ReignTitleMappingType> AncientBooks::Year::GetReignTitle(const AncientBooksContainer& csvContainer) const
+AncientBooks::Year::ConstReignTitleSharedPtr AncientBooks::Year::GetReignTitle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -88,7 +89,7 @@ int AncientBooks::Year::GetYear() const noexcept
     return year;
 }
 
-std::vector<int> AncientBooks::Year::GetUnorthodoxReignTitle() const
+AncientBooks::Year::Int64Container AncientBooks::Year::GetUnorthodoxReignTitle() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -102,28 +103,44 @@ int AncientBooks::Year::GetUnorthodoxReignTitleCount() const
     return boost::numeric_cast<int>(unorthodoxReignTitle.size());
 }
 
-int AncientBooks::Year::GetUnorthodoxReignTitle(int index) const
+int64_t AncientBooks::Year::GetUnorthodoxReignTitle(int index) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return unorthodoxReignTitle.at(index);
 }
 
-std::vector<int>::const_iterator AncientBooks::Year::GetUnorthodoxReignTitleBegin() const noexcept
+AncientBooks::Year::Int64ContainerConstIter AncientBooks::Year::GetUnorthodoxReignTitleBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return unorthodoxReignTitle.cbegin();
 }
 
-std::vector<int>::const_iterator AncientBooks::Year::GetUnorthodoxReignTitleEnd() const noexcept
+AncientBooks::Year::Int64ContainerConstIter AncientBooks::Year::GetUnorthodoxReignTitleEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return unorthodoxReignTitle.cend();
 }
 
-std::vector<int> AncientBooks::Year::GetUnorthodoxYear() const
+AncientBooks::Year::ReignTitleContainer AncientBooks::Year::GetUnorthodoxReignTitle(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    ReignTitleContainer result{};
+
+    const auto container = csvContainer.GetReignTitleContainer();
+
+    for (const auto& element : unorthodoxReignTitle)
+    {
+        result.emplace_back(container->GetReignTitle(element));
+    }
+
+    return result;
+}
+
+AncientBooks::Year::IntContainer AncientBooks::Year::GetUnorthodoxYear() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -144,17 +161,33 @@ int AncientBooks::Year::GetUnorthodoxYear(int index) const
     return unorthodoxYear.at(index);
 }
 
-std::vector<int>::const_iterator AncientBooks::Year::GetUnorthodoxYearBegin() const noexcept
+AncientBooks::Year::IntContainerConstIter AncientBooks::Year::GetUnorthodoxYearBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return unorthodoxYear.cbegin();
 }
 
-std::vector<int>::const_iterator AncientBooks::Year::GetUnorthodoxYearEnd() const noexcept
+AncientBooks::Year::IntContainerConstIter AncientBooks::Year::GetUnorthodoxYearEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return unorthodoxYear.cend();
+}
+
+AncientBooks::Year::YearContainer AncientBooks::Year::GetUnorthodoxYear(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    YearContainer result{};
+
+    const auto container = csvContainer.GetYearContainer();
+
+    for (const auto& element : unorthodoxYear)
+    {
+        result.emplace_back(container->GetYear(element));
+    }
+
+    return result;
 }
 

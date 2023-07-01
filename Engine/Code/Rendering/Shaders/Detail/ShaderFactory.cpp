@@ -12,7 +12,7 @@
 #include "ShaderFactory.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "Rendering/OpenGLRenderer/Detail/GLSL/GLSLShader.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 
 Rendering::ShaderFactory::ShaderSharedPtr Rendering::ShaderFactory::Create(RendererTypes type, const GLSLReflection& reflector, ReferenceType referenceType)
 {

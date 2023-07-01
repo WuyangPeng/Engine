@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:22)
+///	版本：0.9.1.0 (2023/06/29 14:24)
 
 #ifndef RENDERING_RESOURCES_BUFFER_H
 #define RENDERING_RESOURCES_BUFFER_H
@@ -23,13 +23,20 @@ namespace Rendering
         using ParentType = Resource;
 
     public:
+        explicit Buffer(GraphicsObjectType type);
         Buffer(int numElements, int elementSize, GraphicsObjectType type = GraphicsObjectType::Buffer);
         Buffer(int numElements, int elementSize, const StorageType& storage, GraphicsObjectType type = GraphicsObjectType::Buffer);
-        explicit Buffer(GraphicsObjectType type);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Buffer);
+
+    protected:
+        template <typename T>
+        void CheckMember(const T& layout) const;
+
+        template <typename T>
+        void CheckMember(int index, const T& layout) const;
     };
 
 #include STSTEM_WARNING_PUSH

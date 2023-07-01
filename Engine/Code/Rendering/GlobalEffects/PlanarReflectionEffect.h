@@ -35,7 +35,7 @@ namespace Rendering
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void Draw(Renderer& renderer, VisibleSet& visibleSet) override;
+        void Draw(BaseRenderer& renderer, VisibleSet& visibleSet) noexcept override;
 
         NODISCARD int GetNumPlanes() const noexcept;
         void SetPlane(int i, const TrianglesMeshSharedPtr& plane);
@@ -52,10 +52,6 @@ namespace Rendering
         int numPlanes;
         std::vector<CoreTools::ObjectAssociated<TrianglesMesh>> planes;
         std::vector<float> reflectances;
-
-        CoreTools::ObjectAssociated<AlphaState> alphaState;
-        CoreTools::ObjectAssociated<DepthState> depthState;
-        CoreTools::ObjectAssociated<StencilState> stencilState;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(PlanarReflectionEffect);

@@ -13,7 +13,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/OpenGLRenderer/OpenGLTextureDataDetail.h"
 #include "Rendering/OpenGLRenderer/OpenGLTextureDataManageDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Textures/LoadTexture.h"
 
 Rendering::OpenGLTextureDataManageTesting::OpenGLTextureDataManageTesting(const OStreamShared& stream)
@@ -29,11 +28,9 @@ void Rendering::OpenGLTextureDataManageTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Rendering::OpenGLTextureDataManageTesting::MainTest()
+void Rendering::OpenGLTextureDataManageTesting::MainTest() noexcept
 {
-    RendererManager::Create();
-
-    RendererManager::Destroy();
+   
 }
 
 void Rendering::OpenGLTextureDataManageTesting::Texture1DTest()

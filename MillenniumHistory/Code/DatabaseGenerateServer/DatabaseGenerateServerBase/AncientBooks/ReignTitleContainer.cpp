@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-AncientBooks::ReignTitleContainer::ReignTitleContainer(const CoreTools::CSVContent& csvContent)
+AncientBooks::ReignTitleContainer::ReignTitleContainer(const CSVContent& csvContent)
     : reignTitle{}
 {
     Parsing(csvContent);
@@ -24,10 +24,18 @@ AncientBooks::ReignTitleContainer::ReignTitleContainer(const CoreTools::CSVConte
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void AncientBooks::ReignTitleContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void AncientBooks::ReignTitleContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("reignTitle表开始载入……"));
 
+    Load(csvContent);
+    Unique();
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("reignTitle表结束载入……"));
+}
+
+void AncientBooks::ReignTitleContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -41,7 +49,10 @@ void AncientBooks::ReignTitleContainer::Parsing(const CoreTools::CSVContent& csv
     std::ranges::sort(reignTitle, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
+}
 
+void AncientBooks::ReignTitleContainer::Unique()
+{
     const auto iter = std::ranges::unique(reignTitle, [](const auto& lhs, const auto& rhs) noexcept {
         if((*lhs).GetKey() == (*rhs).GetKey())
         {
@@ -57,12 +68,10 @@ void AncientBooks::ReignTitleContainer::Parsing(const CoreTools::CSVContent& csv
 
     if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("reignTitle表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-
         reignTitle.erase(iter.begin(), iter.end());
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("reignTitle表结束载入……"));
+    reignTitle.shrink_to_fit();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, ReignTitleContainer)

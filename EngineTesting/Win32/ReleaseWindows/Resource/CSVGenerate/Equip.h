@@ -24,8 +24,10 @@ namespace CSVConfigure
         using ClassType = Equip;
         using ParentType = EquipBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Equip(const CoreTools::CSVRow& csvRow);
+        explicit Equip(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -37,29 +39,29 @@ namespace CSVConfigure
 
         NODISCARD int GetReward() const noexcept override;
 
-        NODISCARD System::String GetEquipName() const override;
+        NODISCARD String GetEquipName() const override;
 
         NODISCARD System::TChar GetLogo() const noexcept override;
 
         NODISCARD CoreTools::Vector3 GetPosition() const noexcept override;
 
-        NODISCARD std::deque<bool> GetMask() const override;
+        NODISCARD BoolContainer GetMask() const override;
         NODISCARD int GetMaskCount() const override;
         NODISCARD bool GetMask(int index) const override;
-        NODISCARD std::deque<bool>::const_iterator GetMaskBegin() const noexcept override;
-        NODISCARD std::deque<bool>::const_iterator GetMaskEnd() const noexcept override;
+        NODISCARD BoolContainerConstIter GetMaskBegin() const noexcept override;
+        NODISCARD BoolContainerConstIter GetMaskEnd() const noexcept override;
 
         NODISCARD int GetHeroId() const noexcept override;
-        NODISCARD std::shared_ptr<const HeroMappingType> GetHeroId(const CSVConfigureContainer& csvContainer) const override;
+        NODISCARD ConstHeroSharedPtr GetHeroId(const CSVConfigureContainer& csvContainer) const override;
 
     private:
         int id;  // Id
         int nextId;  // 下一关ID
         int reward;  // 过关奖励
-        System::String equipName;  // 装备名称
+        String equipName;  // 装备名称
         System::TChar logo;  // 标识
         CoreTools::Vector3 position;  // 位置
-        std::deque<bool> mask;  // 掩码
+        BoolContainer mask;  // 掩码
         int heroId;  // 英雄Id
     };
 }

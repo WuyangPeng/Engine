@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = Book;
         using ParentType = BookBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Book(const CoreTools::CSVRow& csvRow);
+        explicit Book(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -34,73 +36,77 @@ namespace AncientBooks
         NODISCARD int GetId() const noexcept override;
 
         NODISCARD int GetGenus() const noexcept override;
-        NODISCARD std::shared_ptr<const GenusMappingType> GetGenus(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstGenusSharedPtr GetGenus(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD System::String GetName() const override;
+        NODISCARD String GetName() const override;
 
-        NODISCARD std::vector<System::String> GetAlias() const override;
+        NODISCARD StringContainer GetAlias() const override;
         NODISCARD int GetAliasCount() const override;
-        NODISCARD System::String GetAlias(int index) const override;
-        NODISCARD std::vector<System::String>::const_iterator GetAliasBegin() const noexcept override;
-        NODISCARD std::vector<System::String>::const_iterator GetAliasEnd() const noexcept override;
+        NODISCARD String GetAlias(int index) const override;
+        NODISCARD StringContainerConstIter GetAliasBegin() const noexcept override;
+        NODISCARD StringContainerConstIter GetAliasEnd() const noexcept override;
 
         NODISCARD int GetVolume() const noexcept override;
 
-        NODISCARD std::vector<int> GetAuthor() const override;
+        NODISCARD IntContainer GetAuthor() const override;
         NODISCARD int GetAuthorCount() const override;
         NODISCARD int GetAuthor(int index) const override;
-        NODISCARD std::vector<int>::const_iterator GetAuthorBegin() const noexcept override;
-        NODISCARD std::vector<int>::const_iterator GetAuthorEnd() const noexcept override;
+        NODISCARD IntContainerConstIter GetAuthorBegin() const noexcept override;
+        NODISCARD IntContainerConstIter GetAuthorEnd() const noexcept override;
+        NODISCARD CharacterContainer GetAuthor(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD std::vector<System::String> GetAuthorDescribe() const override;
+        NODISCARD StringContainer GetAuthorDescribe() const override;
         NODISCARD int GetAuthorDescribeCount() const override;
-        NODISCARD System::String GetAuthorDescribe(int index) const override;
-        NODISCARD std::vector<System::String>::const_iterator GetAuthorDescribeBegin() const noexcept override;
-        NODISCARD std::vector<System::String>::const_iterator GetAuthorDescribeEnd() const noexcept override;
+        NODISCARD String GetAuthorDescribe(int index) const override;
+        NODISCARD StringContainerConstIter GetAuthorDescribeBegin() const noexcept override;
+        NODISCARD StringContainerConstIter GetAuthorDescribeEnd() const noexcept override;
 
-        NODISCARD std::vector<int> GetAnnotator() const override;
+        NODISCARD IntContainer GetAnnotator() const override;
         NODISCARD int GetAnnotatorCount() const override;
         NODISCARD int GetAnnotator(int index) const override;
-        NODISCARD std::vector<int>::const_iterator GetAnnotatorBegin() const noexcept override;
-        NODISCARD std::vector<int>::const_iterator GetAnnotatorEnd() const noexcept override;
+        NODISCARD IntContainerConstIter GetAnnotatorBegin() const noexcept override;
+        NODISCARD IntContainerConstIter GetAnnotatorEnd() const noexcept override;
+        NODISCARD CharacterContainer GetAnnotator(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD std::vector<System::String> GetAnnotateDescribe() const override;
+        NODISCARD StringContainer GetAnnotateDescribe() const override;
         NODISCARD int GetAnnotateDescribeCount() const override;
-        NODISCARD System::String GetAnnotateDescribe(int index) const override;
-        NODISCARD std::vector<System::String>::const_iterator GetAnnotateDescribeBegin() const noexcept override;
-        NODISCARD std::vector<System::String>::const_iterator GetAnnotateDescribeEnd() const noexcept override;
+        NODISCARD String GetAnnotateDescribe(int index) const override;
+        NODISCARD StringContainerConstIter GetAnnotateDescribeBegin() const noexcept override;
+        NODISCARD StringContainerConstIter GetAnnotateDescribeEnd() const noexcept override;
 
-        NODISCARD std::vector<int> GetCountry() const override;
+        NODISCARD IntContainer GetCountry() const override;
         NODISCARD int GetCountryCount() const override;
         NODISCARD int GetCountry(int index) const override;
-        NODISCARD std::vector<int>::const_iterator GetCountryBegin() const noexcept override;
-        NODISCARD std::vector<int>::const_iterator GetCountryEnd() const noexcept override;
+        NODISCARD IntContainerConstIter GetCountryBegin() const noexcept override;
+        NODISCARD IntContainerConstIter GetCountryEnd() const noexcept override;
+        NODISCARD CountryContainer GetCountry(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD std::vector<int> GetPerson() const override;
+        NODISCARD IntContainer GetPerson() const override;
         NODISCARD int GetPersonCount() const override;
         NODISCARD int GetPerson(int index) const override;
-        NODISCARD std::vector<int>::const_iterator GetPersonBegin() const noexcept override;
-        NODISCARD std::vector<int>::const_iterator GetPersonEnd() const noexcept override;
+        NODISCARD IntContainerConstIter GetPersonBegin() const noexcept override;
+        NODISCARD IntContainerConstIter GetPersonEnd() const noexcept override;
+        NODISCARD CharacterContainer GetPerson(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD std::vector<System::String> GetUnansweredQuestion() const override;
+        NODISCARD StringContainer GetUnansweredQuestion() const override;
         NODISCARD int GetUnansweredQuestionCount() const override;
-        NODISCARD System::String GetUnansweredQuestion(int index) const override;
-        NODISCARD std::vector<System::String>::const_iterator GetUnansweredQuestionBegin() const noexcept override;
-        NODISCARD std::vector<System::String>::const_iterator GetUnansweredQuestionEnd() const noexcept override;
+        NODISCARD String GetUnansweredQuestion(int index) const override;
+        NODISCARD StringContainerConstIter GetUnansweredQuestionBegin() const noexcept override;
+        NODISCARD StringContainerConstIter GetUnansweredQuestionEnd() const noexcept override;
 
     private:
         int id;  // Id
         int genus;  // 屬
-        System::String name;  // 名稱
-        std::vector<System::String> alias;  // 別名
+        String name;  // 名稱
+        StringContainer alias;  // 別名
         int volume;  // 卷數
-        std::vector<int> author;  // 作者
-        std::vector<System::String> authorDescribe;  // 作者描述
-        std::vector<int> annotator;  // 註解作者
-        std::vector<System::String> annotateDescribe;  // 註解描述
-        std::vector<int> country;  // 國家
-        std::vector<int> person;  // 人
-        std::vector<System::String> unansweredQuestion;  // 存疑
+        IntContainer author;  // 作者
+        StringContainer authorDescribe;  // 作者描述
+        IntContainer annotator;  // 註解作者
+        StringContainer annotateDescribe;  // 註解描述
+        IntContainer country;  // 國家
+        IntContainer person;  // 人
+        StringContainer unansweredQuestion;  // 存疑
     };
 }
 

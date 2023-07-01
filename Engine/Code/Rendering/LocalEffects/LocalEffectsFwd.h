@@ -12,6 +12,7 @@
 
 namespace Rendering
 {
+    class OverlayEffect;
     class VisualEffect;
     class LightCameraGeometry;
 
@@ -36,6 +37,8 @@ namespace Rendering
     class VertexColor4TextureEffect;
 
     class TextEffect;
+
+    class Font;
 }
 
 #endif  // RENDERING_LOCAL_EFFECTS_FWD_H

@@ -13,7 +13,7 @@
 
 using namespace std::literals;
 
-AncientBooks::Source::Source(const CoreTools::CSVRow& csvRow)
+AncientBooks::Source::Source(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       name{ csvRow.GetString(SYSTEM_TEXT("name"s)) },

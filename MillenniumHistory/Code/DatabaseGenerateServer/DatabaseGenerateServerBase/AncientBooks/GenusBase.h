@@ -23,6 +23,10 @@ namespace AncientBooks
     public:
         using ClassType = GenusBase;
 
+        using String = System::String;
+        using ConstCategorySharedPtr = std::shared_ptr<const CategoryMappingType>;
+        using ConstGenusSharedPtr = std::shared_ptr<const GenusMappingType>;
+
     public:
         GenusBase() noexcept = default;
         explicit GenusBase(int key) noexcept;
@@ -40,16 +44,16 @@ namespace AncientBooks
         NODISCARD virtual int GetId() const noexcept;
 
         NODISCARD virtual int GetCategory() const noexcept;
-        NODISCARD virtual std::shared_ptr<const CategoryMappingType> GetCategory(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstCategorySharedPtr GetCategory(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual System::String GetName() const;
+        NODISCARD virtual String GetName() const;
 
         NODISCARD virtual int GetFather() const noexcept;
-        NODISCARD virtual std::shared_ptr<const GenusMappingType> GetFather(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstGenusSharedPtr GetFather(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual System::String GetBegin() const;
+        NODISCARD virtual String GetBegin() const;
 
-        NODISCARD virtual System::String GetEnd() const;
+        NODISCARD virtual String GetEnd() const;
 
     private:
         int key{};

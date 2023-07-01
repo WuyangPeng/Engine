@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:22)
+///	版本：0.9.1.0 (2023/06/29 14:31)
 
 #ifndef RENDERING_RESOURCES_MEMBER_LAYOUT_H
 #define RENDERING_RESOURCES_MEMBER_LAYOUT_H
@@ -15,7 +15,6 @@
 #include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 
 #include <string>
-#include <vector>
 
 RENDERING_PERFORMANCE_UNSHARED_EXPORT_IMPL(MemberLayoutImpl);
 

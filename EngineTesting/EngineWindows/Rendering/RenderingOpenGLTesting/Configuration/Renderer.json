@@ -5,7 +5,7 @@
 
     "ColorFormat": 8,
     "DepthStencilFormat": 22,
-    "MultisamplesNumber": 1
+    "MultiSamplesNumber": 1
   },
 
   "ClearColor": {

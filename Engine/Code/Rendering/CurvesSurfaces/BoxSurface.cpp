@@ -22,7 +22,7 @@
 #include "Mathematics/Base/Float.h"
 #include "Mathematics/CurvesSurfacesVolumes/BSplineBasisDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/BSplineVolumeDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
+ 
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, BoxSurface);
@@ -106,7 +106,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface::CreateFace(int numRows,
     }
 
     const auto numTriangles = 2 * (numRows - 1) * (numCols - 1);
-    auto ibuffer = IndexBuffer::Create(IndexFormatType::Polypoint, 3 * numTriangles, boost::numeric_cast<int>(sizeof(int32_t)));
+    auto ibuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, 3 * numTriangles, boost::numeric_cast<int>(sizeof(int32_t)));
     auto spanIterator = ibuffer->GetData();
 
     for (auto row = 0, i = 0; row < numRows - 1; ++row)
@@ -178,14 +178,14 @@ void Rendering::BoxSurface::UpdateSurface()
     UpdateFace(numWSamples, numVSamples, vformat, vbuffer, false, 0.0f, permute);
     mesh->UpdateModelSpace(VisualUpdateType::Normals);
 
-    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer);
+ 
 
     mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(1));
     vformat = mesh->GetVertexFormat();
     vbuffer = mesh->GetVertexBuffer();
     UpdateFace(numWSamples, numVSamples, vformat, vbuffer, true, 1.0f, permute);
     mesh->UpdateModelSpace(VisualUpdateType::Normals);
-    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer);
+     
 
     permute.at(0) = 0;
     permute.at(1) = 2;
@@ -196,14 +196,14 @@ void Rendering::BoxSurface::UpdateSurface()
     vbuffer = mesh->GetVertexBuffer();
     UpdateFace(numWSamples, numUSamples, vformat, vbuffer, true, 0.0f, permute);
     mesh->UpdateModelSpace(VisualUpdateType::Normals);
-    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer);
+    
 
     mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(3));
     vformat = mesh->GetVertexFormat();
     vbuffer = mesh->GetVertexBuffer();
     UpdateFace(numWSamples, numUSamples, vformat, vbuffer, false, 1.0f, permute);
     mesh->UpdateModelSpace(VisualUpdateType::Normals);
-    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer);
+    
 
     permute.at(0) = 0;
     permute.at(1) = 1;
@@ -214,14 +214,14 @@ void Rendering::BoxSurface::UpdateSurface()
     vbuffer = mesh->GetVertexBuffer();
     UpdateFace(numVSamples, numUSamples, vformat, vbuffer, false, 0.0f, permute);
     mesh->UpdateModelSpace(VisualUpdateType::Normals);
-    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer);
+ 
 
     mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(5));
     vformat = mesh->GetVertexFormat();
     vbuffer = mesh->GetVertexBuffer();
     UpdateFace(numVSamples, numUSamples, vformat, vbuffer, true, 1.0f, permute);
     mesh->UpdateModelSpace(VisualUpdateType::Normals);
-    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer);
+   
 }
 
 Rendering::BoxSurface::BoxSurface(LoadConstructor value)

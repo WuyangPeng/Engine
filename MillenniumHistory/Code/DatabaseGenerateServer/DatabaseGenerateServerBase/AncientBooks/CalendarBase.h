@@ -25,6 +25,22 @@ namespace AncientBooks
     public:
         using ClassType = CalendarBase;
 
+        using String = System::String;
+        using StringContainer = std::vector<String>;
+        using StringContainerConstIter = StringContainer::const_iterator;
+        using IntContainer = std::vector<int>;
+        using IntContainerConstIter = IntContainer::const_iterator;
+        using ConstBookSharedPtr = std::shared_ptr<const BookMappingType>;
+        using BookContainer = std::vector<ConstBookSharedPtr>;
+        using ConstCharacterSharedPtr = std::shared_ptr<const CharacterMappingType>;
+        using CharacterContainer = std::vector<ConstCharacterSharedPtr>;
+        using ConstYearSharedPtr = std::shared_ptr<const YearMappingType>;
+        using ConstCountrySharedPtr = std::shared_ptr<const CountryMappingType>;
+        using ConstYearSharedPtr = std::shared_ptr<const YearMappingType>;
+        using ConstYearSharedPtr = std::shared_ptr<const YearMappingType>;
+        using ConstYearSharedPtr = std::shared_ptr<const YearMappingType>;
+        using ConstYearSharedPtr = std::shared_ptr<const YearMappingType>;
+
     public:
         CalendarBase() noexcept = default;
         explicit CalendarBase(int key) noexcept;
@@ -41,45 +57,47 @@ namespace AncientBooks
 
         NODISCARD virtual int GetId() const noexcept;
 
-        NODISCARD virtual System::String GetName() const;
+        NODISCARD virtual String GetName() const;
 
-        NODISCARD virtual std::vector<System::String> GetAlias() const;
+        NODISCARD virtual StringContainer GetAlias() const;
         NODISCARD virtual int GetAliasCount() const;
-        NODISCARD virtual System::String GetAlias(int index) const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetAliasBegin() const;
-        NODISCARD virtual std::vector<System::String>::const_iterator GetAliasEnd() const;
+        NODISCARD virtual String GetAlias(int index) const;
+        NODISCARD virtual StringContainerConstIter GetAliasBegin() const;
+        NODISCARD virtual StringContainerConstIter GetAliasEnd() const;
 
-        NODISCARD virtual std::vector<int> GetSource() const;
+        NODISCARD virtual IntContainer GetSource() const;
         NODISCARD virtual int GetSourceCount() const;
         NODISCARD virtual int GetSource(int index) const;
-        NODISCARD virtual std::vector<int>::const_iterator GetSourceBegin() const;
-        NODISCARD virtual std::vector<int>::const_iterator GetSourceEnd() const;
+        NODISCARD virtual IntContainerConstIter GetSourceBegin() const;
+        NODISCARD virtual IntContainerConstIter GetSourceEnd() const;
+        NODISCARD virtual BookContainer GetSource(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual System::String GetPublication() const;
+        NODISCARD virtual String GetPublication() const;
 
-        NODISCARD virtual std::vector<int> GetCreator() const;
+        NODISCARD virtual IntContainer GetCreator() const;
         NODISCARD virtual int GetCreatorCount() const;
         NODISCARD virtual int GetCreator(int index) const;
-        NODISCARD virtual std::vector<int>::const_iterator GetCreatorBegin() const;
-        NODISCARD virtual std::vector<int>::const_iterator GetCreatorEnd() const;
+        NODISCARD virtual IntContainerConstIter GetCreatorBegin() const;
+        NODISCARD virtual IntContainerConstIter GetCreatorEnd() const;
+        NODISCARD virtual CharacterContainer GetCreator(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetFormulate() const noexcept;
-        NODISCARD virtual std::shared_ptr<const YearMappingType> GetFormulate(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstYearSharedPtr GetFormulate(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetCountry() const noexcept;
-        NODISCARD virtual std::shared_ptr<const CountryMappingType> GetCountry(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstCountrySharedPtr GetCountry(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetBegin() const noexcept;
-        NODISCARD virtual std::shared_ptr<const YearMappingType> GetBegin(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstYearSharedPtr GetBegin(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetEnd() const noexcept;
-        NODISCARD virtual std::shared_ptr<const YearMappingType> GetEnd(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstYearSharedPtr GetEnd(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetAgainBegin() const noexcept;
-        NODISCARD virtual std::shared_ptr<const YearMappingType> GetAgainBegin(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstYearSharedPtr GetAgainBegin(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetAgainEnd() const noexcept;
-        NODISCARD virtual std::shared_ptr<const YearMappingType> GetAgainEnd(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstYearSharedPtr GetAgainEnd(const AncientBooksContainer& csvContainer) const;
 
     private:
         int key{};

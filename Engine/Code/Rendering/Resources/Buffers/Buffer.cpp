@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:25)
+///	版本：0.9.1.0 (2023/06/29 14:25)
 
 #include "Rendering/RenderingExport.h"
 
@@ -22,7 +22,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Buffer);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Buffer);
 
 Rendering::Buffer::Buffer(GraphicsObjectType type)
-    : ParentType{ 0, 0, type }
+    : ParentType{ type }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-AncientBooks::GatherContainer::GatherContainer(const CoreTools::CSVContent& csvContent)
+AncientBooks::GatherContainer::GatherContainer(const CSVContent& csvContent)
     : gather{}
 {
     Parsing(csvContent);
@@ -24,10 +24,18 @@ AncientBooks::GatherContainer::GatherContainer(const CoreTools::CSVContent& csvC
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void AncientBooks::GatherContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void AncientBooks::GatherContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("gather表开始载入……"));
 
+    Load(csvContent);
+    Unique();
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("gather表结束载入……"));
+}
+
+void AncientBooks::GatherContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -41,7 +49,10 @@ void AncientBooks::GatherContainer::Parsing(const CoreTools::CSVContent& csvCont
     std::ranges::sort(gather, [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
+}
 
+void AncientBooks::GatherContainer::Unique()
+{
     const auto iter = std::ranges::unique(gather, [](const auto& lhs, const auto& rhs) noexcept {
         if((*lhs).GetKey() == (*rhs).GetKey())
         {
@@ -57,12 +68,10 @@ void AncientBooks::GatherContainer::Parsing(const CoreTools::CSVContent& csvCont
 
     if (iter.begin() != iter.end())
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("gather表存在重复主键。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-
         gather.erase(iter.begin(), iter.end());
     }
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("gather表结束载入……"));
+    gather.shrink_to_fit();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(AncientBooks, GatherContainer)

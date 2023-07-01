@@ -34,6 +34,7 @@ namespace CoreTools
         NODISCARD static CSVDataType GetDataType(const String& describe);
 
         NODISCARD static String GetActualType(CSVDataType csvDataType);
+        NODISCARD static String GetAbbreviation(CSVDataType csvDataType);
         NODISCARD static String GetFunctionName(CSVDataType csvDataType);
         NODISCARD static String GetValueType(CSVDataType csvDataType);
         NODISCARD static String GetBaseReturnDescribe(CSVDataType csvDataType);
@@ -48,6 +49,7 @@ namespace CoreTools
         using DataTypeConversionFunctionName = std::map<CSVDataType, String>;
         using DataTypeConversionValueType = std::map<CSVDataType, String>;
         using DataTypeConversionBaseReturnDescribe = std::map<CSVDataType, String>;
+        using DataTypeConversionAbbreviation = std::map<CSVDataType, String>;
 
     private:
         NODISCARD static FormatTypeConversionDescribe GetFormatTypeConversionDescribe();
@@ -59,6 +61,7 @@ namespace CoreTools
         NODISCARD static DataTypeConversionFunctionName GetDataTypeConversionFunctionName();
         NODISCARD static DataTypeConversionValueType GetDataTypeConversionValueType();
         NODISCARD static DataTypeConversionBaseReturnDescribe GetDataTypeConversionBaseReturnDescribe();
+        NODISCARD static DataTypeConversionAbbreviation GetDataTypeConversionAbbreviation();
     };
 }
 

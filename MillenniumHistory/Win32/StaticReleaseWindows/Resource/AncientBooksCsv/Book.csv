@@ -1,4 +1,4 @@
-@default,Genus
+@default,Genus,,,,Character,,Character,,Country,Character
 Id,屬,名稱,別名,卷數,作者,作者描述,註解作者,註解描述,國家,人,存疑
 int,int,string,string[],int,int[],string[],int[],string[],int[],int[],string[]
 id,genus,name,alias,volume,author,authorDescribe,annotator,annotateDescribe,country,person,unansweredQuestion

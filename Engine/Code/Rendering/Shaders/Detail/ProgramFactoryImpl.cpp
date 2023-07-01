@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/OpenGLRenderer/Detail/GLSL/GLSLProgramFactory.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Shaders/Flags/ShaderAPIType.h"
 
 Rendering::ProgramFactoryImpl::ProgramFactoryImpl(CoreTools::DisableNotThrow disableNotThrow)

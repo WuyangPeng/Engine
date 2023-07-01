@@ -43,6 +43,9 @@ namespace Rendering
         NODISCARD ConstConstantBufferSharedPtr GetTranslate() const noexcept;
         NODISCARD ConstConstantBufferSharedPtr GetColor() const noexcept;
 
+        NODISCARD ConstantBufferSharedPtr GetTranslate() noexcept;
+        NODISCARD ConstantBufferSharedPtr GetColor() noexcept;
+
         void SetTranslate(float x, float y);
         void SetNormalizedZ(float z);
         void SetColor(const Colour& aColor);

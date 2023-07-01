@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:25)
+///	版本：0.9.1.0 (2023/06/29 16:46)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/OpenGLRenderer/Resources/Buffers/OpenGLStructuredBuffer.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/Flags/CounterType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
 
@@ -154,8 +154,12 @@ Rendering::StructuredBuffer::RendererObjectSharedPtr Rendering::StructuredBuffer
     switch (rendererTypes)
     {
         case RendererTypes::OpenGL:
+        {
             return std::make_shared<OpenGLStructuredBuffer>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        }
         default:
-            return ParentType::CreateRendererObject(rendererTypes);
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
+        }
     }
 }

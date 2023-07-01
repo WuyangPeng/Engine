@@ -5,11 +5,30 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策测试版本：0.9.0.12 (2023/06/14 21:00)
+///	版本：0.9.1.0 (2023/06/24 13:11)
 
 #ifndef DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_ANCIENT_BOOKS_SUITE_H
 #define DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_ANCIENT_BOOKS_SUITE_H
 
 #include "AncientBooksContainerTesting.h"
+#include "ArticleTesting.h"
+#include "BookTesting.h"
+#include "CalendarTesting.h"
+#include "CategoryTesting.h"
+#include "CharacterTesting.h"
+#include "CountryTesting.h"
+#include "DayTesting.h"
+#include "EmperorTesting.h"
+#include "GatherTesting.h"
+#include "GenusTesting.h"
+#include "GeographicTesting.h"
+#include "IdentityTesting.h"
+#include "ImperialCourtTesting.h"
+#include "MonthTesting.h"
+#include "ReignTitleTesting.h"
+#include "SexagenaryCycleTesting.h"
+#include "SourceTesting.h"
+#include "VersionTesting.h"
+#include "YearTesting.h"
 
 #endif  // DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_ANCIENT_BOOKS_SUITE_H

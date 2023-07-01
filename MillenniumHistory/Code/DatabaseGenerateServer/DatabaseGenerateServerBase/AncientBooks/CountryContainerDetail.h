@@ -36,11 +36,11 @@ AncientBooks::CountryContainer::Container AncientBooks::CountryContainer::GetCou
 
     Container result{};
 
-    for (const auto& value : country)
+    for (const auto& element : country)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

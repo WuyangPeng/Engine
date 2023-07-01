@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:26)
+///	版本：0.9.1.0 (2023/06/29 11:12)
 
 #ifndef RENDERING_STATE_RASTERIZER_STATE_H
 #define RENDERING_STATE_RASTERIZER_STATE_H
@@ -39,7 +39,11 @@ namespace Rendering
 
     public:
         NODISCARD static RasterizerStateSharedPtr Create(const std::string& name);
-        explicit RasterizerState(RasterizerStateCreate rasterizerStateCreate, const std::string& name);
+        NODISCARD static RasterizerStateSharedPtr Create(const std::string& name, RasterizerStateFill rasterizerStateFill, RasterizerStateCull rasterizerStateCull);
+        NODISCARD static RasterizerStateSharedPtr Create(const std::string& name, RasterizerStateCull rasterizerStateCull);
+        RasterizerState(RasterizerStateCreate rasterizerStateCreate, const std::string& name);
+        RasterizerState(RasterizerStateCreate rasterizerStateCreate, const std::string& name, RasterizerStateFill rasterizerStateFill, RasterizerStateCull rasterizerStateCull);
+        RasterizerState(RasterizerStateCreate rasterizerStateCreate, const std::string& name, RasterizerStateCull rasterizerStateCull);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -80,7 +84,7 @@ namespace Rendering
         NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
 
     private:
-        void CheckDrawingState();
+        void CheckRasterizerState();
 
     private:
         RasterizerStateFill fill;
@@ -91,8 +95,8 @@ namespace Rendering
         float slopeScaledDepthBias;
         bool enableDepthClip;
         bool enableScissor;
-        bool enableMultisample;
-        bool enableAntialiasedLine;
+        bool enableMultiSample;
+        bool enableAntiAliasedLine;
     };
 
 #include STSTEM_WARNING_PUSH

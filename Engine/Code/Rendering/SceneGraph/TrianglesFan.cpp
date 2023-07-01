@@ -37,7 +37,7 @@ Rendering::TrianglesFan::TrianglesFan(const VertexFormatSharedPtr& vertexformat,
 {
     const auto numVertices = vertexbuffer->GetNumElements();
 
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numVertices, indexSize);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numVertices, indexSize);
     InitIndexBuffer(*indexBuffer);
     SetIndexBuffer(indexBuffer);
 

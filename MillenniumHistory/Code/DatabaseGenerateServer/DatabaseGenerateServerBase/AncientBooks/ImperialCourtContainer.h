@@ -24,11 +24,13 @@ namespace AncientBooks
     {
     public:
         using ClassType = ImperialCourtContainer;
+
         using ConstImperialCourtBaseSharedPtr = std::shared_ptr<const ImperialCourtBase>;
         using Container = std::vector<ConstImperialCourtBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit ImperialCourtContainer(const CoreTools::CSVContent& csvContent);
+        explicit ImperialCourtContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,9 @@ namespace AncientBooks
         NODISCARD Container GetImperialCourt(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container imperialCourt;

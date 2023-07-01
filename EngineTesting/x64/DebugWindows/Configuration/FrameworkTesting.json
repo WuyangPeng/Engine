@@ -72,7 +72,7 @@
     "NetworkManagerInterfaceTesting": 1,
     "ObjectLogicManagerInterfaceTesting": 1,
     "ObjectLogicManagerTesting": 1,
-    "ArtificialIntellegenceInterfaceTesting": 1,
+    "ArtificialIntelligenceInterfaceTesting": 1,
     "ObjectLogicInterfaceTesting": 1,
     "InputManagerInterfaceTesting": 1,
     "InputManagerTesting": 1,
@@ -127,5 +127,13 @@
     "ConsoleProcessTesting": 1,
     "ConsoleCallBackInterfaceTesting": 1,
     "ConsoleFrameBuildTesting": 1
+  },
+
+  "projectSuite": {
+    "ProjectNameTesting": 1,
+    "GUIProjectManagerTesting": 1,
+    "InputProjectManagerTesting": 1,
+    "ResourceProjectManagerTesting": 1,
+    "SystemProjectManagerTesting": 1
   }
 }

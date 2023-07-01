@@ -25,7 +25,6 @@
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/SceneGraph/SaveVisual.h"
@@ -52,7 +51,6 @@ void Rendering::TrianglesFanTesting::MainTest()
     CoreTools::InitTerm::ExecuteInitializer();
 
     CameraManager::Create();
-    RendererManager::Create();
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateTrianglesMeshFile);
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
@@ -62,7 +60,6 @@ void Rendering::TrianglesFanTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(FileTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UpdateModelSpaceTest);
 
-    RendererManager::Destroy();
     CameraManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();

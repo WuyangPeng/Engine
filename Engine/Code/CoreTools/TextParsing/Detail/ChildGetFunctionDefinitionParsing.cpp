@@ -165,7 +165,7 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunction
 
     const auto csvHead = GetCSVHead();
 
-    auto content = GenerateVariableFunction(index, csvHead.GetActualTypeByNameSpace(index));
+    auto content = GenerateVariableFunction(index, csvHead.GetAbbreviationByNameSpace(index, GetCSVClassName()));
     content += TextParsing::gNewlineCharacter;
 
     content += GenerateFunctionBeginBrackets();
@@ -197,12 +197,13 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunction
         const auto actualType = csvHead.GetActualTypeByNameSpace(index);
         const auto functionVariableName = csvHead.GetFunctionVariableName(index);
         const auto variableName = csvHead.GetVariableName(index);
+        const auto abbreviation = csvHead.GetAbbreviationByNameSpace(index, GetCSVClassName());
 
         auto content = GenerateGetFunctionArrayCountDefinition(functionVariableName, variableName);
 
         content += GenerateGetFunctionArrayDefinition(csvHead.GetValueType(index), functionVariableName, variableName);
-        content += GenerateGetFunctionArrayBeginDefinition(actualType, functionVariableName, variableName);
-        content += GenerateGetFunctionArrayEndDefinition(actualType, functionVariableName, variableName);
+        content += GenerateGetFunctionArrayBeginDefinition(abbreviation, functionVariableName, variableName);
+        content += GenerateGetFunctionArrayEndDefinition(abbreviation, functionVariableName, variableName);
 
         return content;
     }
@@ -370,9 +371,9 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunction
         const auto variableName = csvHead.GetVariableName(index);
         const auto upperVariableName = StringUtility::ToFirstLetterUpper(variableName);
 
-        auto content = GenerateGetFunctionArrayMapping(upperVariableName, mapping);
+        auto content = GenerateGetFunctionArrayMapping(upperVariableName, mapping, index);
 
-        content += GenerateGetFunctionMappingBody(variableName, mapping);
+        content += GenerateGetFunctionMappingBody(variableName, mapping, index);
 
         return content;
     }
@@ -380,7 +381,7 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunction
     return String{};
 }
 
-System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunctionArrayMapping(const String& upperVariableName, const String& mapping) const
+System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunctionArrayMapping(const String& upperVariableName, const String& mapping, int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -390,30 +391,58 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunction
 
     auto content = GenerateIndentation();
 
-    content += TextParsing::gSharedPtrConst;
-    content += nameSpace;
-    content += TextParsing::gDoubleColon;
-    content += StringUtility::ToFirstLetterUpper(mapping);
-    content += TextParsing::gMappingType;
-    content += TextParsing::gRightAngleBracket;
-    content += TextParsing::gSpace;
-    content += nameSpace;
-    content += TextParsing::gDoubleColon;
-    content += GetCSVClassName();
-    content += TextParsing::gDoubleColon;
-    content += TextParsing::gGet;
-    content += upperVariableName;
-    content += TextParsing::gLeftBrackets;
-    content += TextParsing::gSmallConst;
-    content += TextParsing::gSpace;
-    content += nameSpace;
-    content += TextParsing::gContainerParameter;
-    content += TextParsing::gNewlineCharacter;
+    const auto dataType = csvHead.GetDataType(index);
+
+    if (CSVDataType::BoolArray <= dataType)
+    {
+        content += csvHead.GetNameSpace();
+        content += TextParsing::gDoubleColon;
+        content += GetCSVClassName();
+        content += TextParsing::gDoubleColon;
+        content += StringUtility::ToFirstLetterUpper(mapping);
+        content += SYSTEM_TEXT("Container");
+        content += TextParsing::gSpace;
+        content += nameSpace;
+        content += TextParsing::gDoubleColon;
+        content += GetCSVClassName();
+        content += TextParsing::gDoubleColon;
+        content += TextParsing::gGet;
+        content += upperVariableName;
+        content += TextParsing::gLeftBrackets;
+        content += TextParsing::gSmallConst;
+        content += TextParsing::gSpace;
+        content += nameSpace;
+        content += TextParsing::gContainerParameter;
+        content += TextParsing::gNewlineCharacter;
+    }
+    else
+    {
+        content += csvHead.GetNameSpace();
+        content += TextParsing::gDoubleColon;
+        content += GetCSVClassName();
+        content += TextParsing::gDoubleColon;
+        content += SYSTEM_TEXT("Const");
+        content += StringUtility::ToFirstLetterUpper(mapping);
+        content += SYSTEM_TEXT("SharedPtr");
+        content += TextParsing::gSpace;
+        content += nameSpace;
+        content += TextParsing::gDoubleColon;
+        content += GetCSVClassName();
+        content += TextParsing::gDoubleColon;
+        content += TextParsing::gGet;
+        content += upperVariableName;
+        content += TextParsing::gLeftBrackets;
+        content += TextParsing::gSmallConst;
+        content += TextParsing::gSpace;
+        content += nameSpace;
+        content += TextParsing::gContainerParameter;
+        content += TextParsing::gNewlineCharacter;
+    }
 
     return content;
 }
 
-System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunctionMappingBody(const String& variableName, const String& mapping) const
+System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunctionMappingBody(const String& variableName, const String& mapping, int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -424,7 +453,55 @@ System::String CoreTools::ChildGetFunctionDefinitionParsing::GenerateGetFunction
     content += GenerateUserClassIsValidConst();
     content += TextParsing::gNewlineCharacter;
 
-    content += GenerateGetContainerMapping(variableName, upperMapping);
+    const auto csvHead = GetCSVHead();
+
+    const auto dataType = csvHead.GetDataType(index);
+
+    if (CSVDataType::BoolArray <= dataType)
+    {
+        const auto nameSpace = csvHead.GetNameSpace();
+
+        content += GenerateIndentation(1);
+
+        content += StringUtility::ToFirstLetterUpper(mapping);
+        content += SYSTEM_TEXT("Container result{};\n");
+        content += TextParsing::gNewlineCharacter;
+
+        content += GenerateIndentation(1);
+        content += SYSTEM_TEXT("const auto container = csvContainer.Get");
+        content += upperMapping;
+        content += SYSTEM_TEXT("Container();\n");
+        content += TextParsing::gNewlineCharacter;
+
+        content += GenerateIndentation(1);
+        content += SYSTEM_TEXT("for (const auto& element : ");
+        content += variableName;
+        content += SYSTEM_TEXT(")\n");
+
+        content += GenerateIndentation(1);
+        content += TextParsing::gLeftBrace;
+        content += TextParsing::gNewlineCharacter;
+
+        content += GenerateIndentation(2);
+        content += SYSTEM_TEXT("result.emplace_back(container->Get");
+        content += upperMapping;
+        content += TextParsing::gLeftBrackets;
+        content += SYSTEM_TEXT("element");
+        content += TextParsing::gRightBrackets;
+        content += SYSTEM_TEXT(");\n");
+
+        content += GenerateIndentation(1);
+        content += TextParsing::gRightBrace;
+        content += TextParsing::gNewlineCharacter;
+        content += TextParsing::gNewlineCharacter;
+
+        content += GenerateIndentation(1);
+        content += SYSTEM_TEXT("return result;\n");
+    }
+    else
+    {
+        content += GenerateGetContainerMapping(variableName, upperMapping);
+    }
 
     content += GenerateFunctionEndBrackets();
     content += TextParsing::gNewlineCharacter;

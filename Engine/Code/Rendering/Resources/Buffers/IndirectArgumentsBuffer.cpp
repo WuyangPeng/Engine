@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:25)
+///	版本：0.9.1.0 (2023/06/29 16:41)
 
 #include "Rendering/RenderingExport.h"
 
@@ -38,6 +38,15 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::IndirectArgumentsBuffer::CloneObj
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return std::make_shared<ClassType>(*this);
+}
+
+Rendering::GraphicsObject::RendererObjectSharedPtr Rendering::IndirectArgumentsBuffer::CreateRendererObject(RendererTypes rendererTypes)
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(rendererTypes);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
 }
 
 Rendering::IndirectArgumentsBuffer::IndirectArgumentsBuffer(LoadConstructor loadConstructor)

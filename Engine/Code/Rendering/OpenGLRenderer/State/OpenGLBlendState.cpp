@@ -109,3 +109,66 @@ void Rendering::OpenGLBlendState::SetGLBlendColor() noexcept
     const auto blendColor = impl->GetBlendColor();
     System::SetGLBlendColor(blendColor.GetRed(), blendColor.GetGreen(), blendColor.GetBlue(), blendColor.GetAlpha());
 }
+
+bool Rendering::OpenGLBlendState::Update(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLBlendState::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLBlendState::CopyGpuToCpu()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLBlendState::CopyGpuToCpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLBlendState::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLBlendState::CopyCpuToGpu()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLBlendState::CopyCpuToGpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLBlendState::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLBlendState::GetNumActiveElements()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}

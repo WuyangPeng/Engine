@@ -13,7 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Shaders/ShadersFwd.h"
 
 #include <string>

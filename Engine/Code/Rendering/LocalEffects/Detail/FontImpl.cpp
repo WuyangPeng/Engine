@@ -86,7 +86,7 @@ Rendering::FontImpl::FontImpl(const ProgramFactorySharedPtr& factory, int width,
     }
 
     const auto numTriangles = 2 * maxMessageLength;
-    indexBuffer = IndexBuffer::Create(IndexFormatType::Trimesh, numTriangles, sizeof(uint32_t));
+    indexBuffer = IndexBuffer::Create(IndexFormatType::TriMesh, numTriangles, sizeof(uint32_t));
     const auto indices = indexBuffer->GetData();
     for (auto i = 0; i < maxMessageLength; ++i)
     {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:20)
+///	版本：0.9.1.0 (2023/06/25 16:30)
 
 #include "Rendering/RenderingExport.h"
 
@@ -26,7 +26,7 @@ Rendering::WglEnvironment::WglEnvironment(const EnvironmentParameter& environmen
 {
     if (handle == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效的窗口句柄。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("无效的窗口句柄。"s))
     }
 
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -102,7 +102,7 @@ void Rendering::WglEnvironment::CreateDevice()
     device = System::GetSystemDC(handle);
     if (device == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效的设备上下文。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("无效的设备上下文。"s))
     }
 }
 
@@ -120,9 +120,8 @@ System::PixelFormatDescriptor Rendering::WglEnvironment::GetPixelFormatDescripto
     pixelFormatDescriptor.iPixelType = System::EnumCastUnderlying<System::WindowsByte>(System::PixelTypes::TypeRGBA);
     pixelFormatDescriptor.cColorBits = 32;
 
-    const auto depthStencilForma = GetDepthStencilFormat();
-
-    if (depthStencilForma == DataFormatType::D24UNormS8UInt)
+    if (const auto depthStencilFormat = GetDepthStencilFormat();
+        depthStencilFormat == DataFormatType::D24UNormS8UInt)
     {
         pixelFormatDescriptor.cDepthBits = 24;
         pixelFormatDescriptor.cStencilBits = 8;
@@ -141,12 +140,12 @@ void Rendering::WglEnvironment::SetWindowPixelFormat(const System::PixelFormatDe
     const auto pixelFormat = System::ChooseWindowPixelFormat(device, &pixelFormatDescriptor);
     if (pixelFormat == 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ChoosePixelFormat失败。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("ChoosePixelFormat失败。"))
     }
 
     if (!System::SetWindowPixelFormat(device, pixelFormat, &pixelFormatDescriptor))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("SetPixelFormat失败。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("SetPixelFormat失败。"))
     }
 }
 
@@ -155,12 +154,12 @@ void Rendering::WglEnvironment::CreateContext()
     immediate = System::CreateWglContext(device);
     if (immediate == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("wglCreateContext失败。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("wglCreateContext失败。"))
     }
 
     if (!System::MakeWglCurrent(device, immediate))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("wglMakeCurrent失败。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("wglMakeCurrent失败。"))
     }
 }
 

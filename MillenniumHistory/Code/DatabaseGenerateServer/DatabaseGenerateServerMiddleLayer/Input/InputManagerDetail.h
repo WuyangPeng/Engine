@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.12 (2023/06/12 22:24)
+///	版本：0.9.1.0 (2023/06/19 21:48)
 
-#ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_DETAIL_H
-#define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_DETAIL_H
+#ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_INPUT_MANAGER_DETAIL_H
+#define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_INPUT_MANAGER_DETAIL_H
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/Helper/DatabaseGenerateServerMiddleLayerClassInvariantMacro.h"
 #include "InputManager.h"
@@ -39,4 +39,4 @@ bool DatabaseGenerateServerMiddleLayer::InputManager<ApplicationTrait>::IsValid(
 
 #endif  // OPEN_CLASS_INVARIANT
 
-#endif  // DATABASE_GENERATE_SERVER_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_DETAIL_H
+#endif  // DATABASE_GENERATE_SERVER_MIDDLE_LAYER_INPUT_MANAGER_DETAIL_H

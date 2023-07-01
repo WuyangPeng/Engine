@@ -39,3 +39,31 @@ bool Rendering::OpenGLTextureDepthStencil::CanAutoGenerateMipmaps() const noexce
 
     return false;
 }
+
+bool Rendering::OpenGLTextureDepthStencil::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTextureDepthStencil::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTextureDepthStencil::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTextureDepthStencil::GetNumActiveElements()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}

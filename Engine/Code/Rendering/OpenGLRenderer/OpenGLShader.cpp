@@ -14,10 +14,10 @@
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, OpenGLShader)
 
-void Rendering::OpenGLShader::SetSamplerState(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const ShaderBase* shader, MAYBE_UNUSED int profile, MAYBE_UNUSED const ShaderParameters* parameters, MAYBE_UNUSED int maxSamplers, MAYBE_UNUSED RendererData::SamplerState* currentSS) noexcept
+void Rendering::OpenGLShader::SetSamplerState(MAYBE_UNUSED BaseRenderer* renderer, MAYBE_UNUSED int profile, MAYBE_UNUSED int maxSamplers, MAYBE_UNUSED RendererData::SamplerState* currentSS) noexcept
 {
 }
 
-void Rendering::OpenGLShader::DisableTextures(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const ShaderBase* shader, MAYBE_UNUSED int profile, MAYBE_UNUSED const ShaderParameters* parameters, MAYBE_UNUSED int maxSamplers) noexcept
+void Rendering::OpenGLShader::DisableTextures(MAYBE_UNUSED BaseRenderer* renderer, MAYBE_UNUSED int profile, MAYBE_UNUSED int maxSamplers) noexcept
 {
 }

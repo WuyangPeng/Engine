@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:22)
+///	版本：0.9.1.0 (2023/06/29 17:05)
 
 #ifndef RENDERING_RESOURCES_VERTEX_BUFFER_H
 #define RENDERING_RESOURCES_VERTEX_BUFFER_H
@@ -29,6 +29,7 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(VertexBuffer);
         using ParentType = Buffer;
+
         using VertexBufferSharedPtr = std::shared_ptr<ClassType>;
         using ConstVertexBufferSharedPtr = std::shared_ptr<const ClassType>;
         using StructuredBufferSharedPtr = std::shared_ptr<StructuredBuffer>;
@@ -61,8 +62,8 @@ namespace Rendering
         };
 
     public:
-        explicit VertexBuffer(MAYBE_UNUSED VertexBufferCreate indexBufferCreate, const VertexFormat& format, const StructuredBufferSharedPtr& structuredBuffer);
-        VertexBuffer(MAYBE_UNUSED VertexBufferCreate indexBufferCreate, const VertexFormat& format, int numVertices);
+        VertexBuffer(VertexBufferCreate vertexBufferCreate, const VertexFormat& format, const StructuredBufferSharedPtr& structuredBuffer);
+        VertexBuffer(VertexBufferCreate vertexBufferCreate, const VertexFormat& format, int numVertices);
 
     private:
         PackageType impl;

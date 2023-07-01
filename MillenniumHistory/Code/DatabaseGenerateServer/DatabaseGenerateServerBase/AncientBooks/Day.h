@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = Day;
         using ParentType = DayBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Day(const CoreTools::CSVRow& csvRow);
+        explicit Day(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -33,11 +35,11 @@ namespace AncientBooks
 
         NODISCARD int GetId() const noexcept override;
 
-        NODISCARD System::String GetName() const override;
+        NODISCARD String GetName() const override;
 
     private:
         int id;  // Id
-        System::String name;  // Ãû×Ö
+        String name;  // Ãû×Ö
     };
 }
 

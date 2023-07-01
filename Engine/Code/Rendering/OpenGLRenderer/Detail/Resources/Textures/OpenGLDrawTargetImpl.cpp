@@ -19,7 +19,7 @@
 
 #include <array>
 
-Rendering::OpenGLDrawTargetImpl::OpenGLDrawTargetImpl(const DrawTargetSharedPtr& target,
+Rendering::OpenGLDrawTargetImpl::OpenGLDrawTargetImpl(const ConstDrawTargetSharedPtr& target,
                                                       const OpenGLTextureRenderTargetContainer& renderTargetTextures,
                                                       const OpenGLTextureDepthStencilSharedPtr& depthStencilTexture)
     : drawTarget{ target },

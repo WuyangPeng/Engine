@@ -12,8 +12,9 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "VisualEffect.h"
 #include "Rendering/Resources/Textures/Texture1D.h"
-#include "Rendering/Shaders/VisualEffectInstance.h"
+#include "Rendering/Shaders/Flags/ShaderFlags.h"
 
 namespace Rendering
 {
@@ -31,12 +32,6 @@ namespace Rendering
                                  ShaderFlags::SamplerCoordinate coordinate = ShaderFlags::SamplerCoordinate::ClampEdge);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
-
-        NODISCARD PixelShaderSharedPtr GetPixelShaderSharedPtr() const noexcept;
-
-        NODISCARD VisualEffectInstanceSharedPtr CreateInstance(const Texture1DSharedPtr& texture);
-
-        NODISCARD static VisualEffectInstanceSharedPtr CreateUniqueInstance(const Texture1DSharedPtr& texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate);
     };
 
 #include STSTEM_WARNING_PUSH

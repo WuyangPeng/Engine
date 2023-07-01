@@ -5,14 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策测试版本：0.9.0.12 (2023/06/12 22:30)
+///	版本：0.9.1.0 (2023/06/19 22:30)
 
 #ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_TESTING_TESTING_HELPER_H
 #define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_TESTING_TESTING_HELPER_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
-#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 namespace DatabaseGenerateServerTesting
 {
@@ -28,7 +26,22 @@ namespace DatabaseGenerateServerTesting
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void InitSuite() noexcept;
+        void InitSuite();
+
+        void AddArtificialIntelligenceSuite();
+        void AddAudioSuite();
+        void AddCameraSystemsSuite();
+        void AddEventSuite();
+        void AddGUISuite();
+        void AddHelperSuite();
+        void AddInputSuite();
+        void AddMessageSuite();
+        void AddNetworkSuite();
+        void AddObjectLogicSuite();
+        void AddPhysicalModellingSuite();
+        void AddRenderingSuite();
+        void AddResourceSuite();
+        void AddSystemSuite();
     };
 }
 

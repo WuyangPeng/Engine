@@ -24,11 +24,13 @@ namespace AncientBooks
     {
     public:
         using ClassType = SexagenaryCycleContainer;
+
         using ConstSexagenaryCycleBaseSharedPtr = std::shared_ptr<const SexagenaryCycleBase>;
         using Container = std::vector<ConstSexagenaryCycleBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit SexagenaryCycleContainer(const CoreTools::CSVContent& csvContent);
+        explicit SexagenaryCycleContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,9 @@ namespace AncientBooks
         NODISCARD Container GetSexagenaryCycle(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container sexagenaryCycle;

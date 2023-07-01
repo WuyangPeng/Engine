@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 15:00)
+///	版本：0.9.1.0 (2023/06/20 16:47)
 
 #ifndef RENDERING_TESTING_H
 #define RENDERING_TESTING_H
@@ -29,7 +29,7 @@
 #include "OpenGLAPISuite/OpenGLAPISuite.h"
 #include "OpenGLRendererSuite/OpenGLRendererSuite.h"
 #include "PictureSuite/PictureSuite.h"
-#include "RenderersSuite/RenderersSuite.h"
+#include "RendererEngineSuite/RendererEngineSuite.h"
 #include "ResourcesSuite/ResourcesSuite.h"
 #include "SceneGraphSuite/SceneGraphSuite.h"
 #include "ShaderFloatsSuite/ShaderFloatsSuite.h"

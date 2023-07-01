@@ -23,8 +23,11 @@ namespace CSVConfigure
     public:
         using ClassType = Scene;
 
+        using CSVRow = CoreTools::CSVRow;
+        using String = System::String;
+
     public:
-        explicit Scene(const CoreTools::CSVRow& csvRow);
+        explicit Scene(const CSVRow& csvRow);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -36,7 +39,7 @@ namespace CSVConfigure
 
         NODISCARD int GetReward() const noexcept;
 
-        NODISCARD System::String GetSceneName() const;
+        NODISCARD String GetSceneName() const;
 
         NODISCARD double GetLength() const noexcept;
 
@@ -46,7 +49,7 @@ namespace CSVConfigure
         int id;  // Id
         int nextId;  // 下一级Id
         int reward;  // 过关奖励
-        System::String sceneName;  // 场景名称
+        String sceneName;  // 场景名称
         double length;  // 场景长度
         CoreTools::IntVector2 position;  // 位置
     };

@@ -39,5 +39,33 @@ bool Rendering::OpenGLTextureRenderTarget::CanAutoGenerateMipmaps() const
 
     auto texture = GetTexture();
 
-    return texture && texture->HasMipmaps() && texture->WantAutogenerateMipmaps();
+    return texture && texture->HasMipMaps() && texture->WantAutoGenerateMipMaps();
+}
+
+bool Rendering::OpenGLTextureRenderTarget::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTextureRenderTarget::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTextureRenderTarget::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTextureRenderTarget::GetNumActiveElements()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
 }

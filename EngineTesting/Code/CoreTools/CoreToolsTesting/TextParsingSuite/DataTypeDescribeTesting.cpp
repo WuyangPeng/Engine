@@ -36,7 +36,7 @@ void CoreTools::DataTypeDescribeTesting::MainTest()
 
 void CoreTools::DataTypeDescribeTesting::DataTypeDescribeTest()
 {
-    constexpr DataTypeDescribe dataTypeDescribe{ CSVDataType::String, SYSTEM_TEXT("string"sv), SYSTEM_TEXT("System::String"sv), SYSTEM_TEXT("GetString"sv), SYSTEM_TEXT("System::String"sv), SYSTEM_TEXT(""sv) };
+    constexpr DataTypeDescribe dataTypeDescribe{ CSVDataType::String, SYSTEM_TEXT("string"sv), SYSTEM_TEXT("System::String"sv), SYSTEM_TEXT("GetString"sv), SYSTEM_TEXT("System::String"sv), SYSTEM_TEXT(""sv), SYSTEM_TEXT("String"sv) };
 
     ASSERT_ENUM_EQUAL(dataTypeDescribe.GetCsvDataType(), CSVDataType::String);
     ASSERT_EQUAL(dataTypeDescribe.GetDescribe().data(), SYSTEM_TEXT("string"));
@@ -44,4 +44,5 @@ void CoreTools::DataTypeDescribeTesting::DataTypeDescribeTest()
     ASSERT_EQUAL(dataTypeDescribe.GetFunctionName().data(), SYSTEM_TEXT("GetString"));
     ASSERT_EQUAL(dataTypeDescribe.GetValueType().data(), SYSTEM_TEXT("System::String"));
     ASSERT_EQUAL(dataTypeDescribe.GetBaseReturnDescribe().data(), SYSTEM_TEXT(""));
+    ASSERT_EQUAL(dataTypeDescribe.GetAbbreviation().data(), SYSTEM_TEXT("String"));
 }

@@ -1,4 +1,4 @@
-@default,Book,,,Country,ReignTitle,Year
+@default,Book,,,Country,ReignTitle,Year,,Character
 Id,書,出處,出處名字,時代,年號,年,版本,其他作者,作者描述
 int,int,int,string,int,int64,int,string,int[],string[]
 id,book,source,sourceName,country,reignTitle,year,version,otherAuthor,authorDescribe

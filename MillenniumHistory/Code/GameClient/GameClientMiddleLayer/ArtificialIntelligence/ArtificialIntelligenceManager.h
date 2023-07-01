@@ -13,15 +13,15 @@
 #include "GameClient/GameClientMiddleLayer/GameClientMiddleLayerDll.h"
 
 #include "GameClient/GameClientMiddleLayer/Helper/ExportMacro.h"
-#include "Framework/MiddleLayer/ArtificialIntellegenceInterface.h"
+#include "Framework/MiddleLayer/ArtificialIntelligenceInterface.h"
 
 namespace GameClientMiddleLayer
 {
-    class GAME_CLIENT_MIDDLE_LAYER_DEFAULT_DECLARE ArtificialIntelligenceManager : public Framework::ArtificialIntellegenceInterface
+    class GAME_CLIENT_MIDDLE_LAYER_DEFAULT_DECLARE ArtificialIntelligenceManager : public Framework::ArtificialIntelligenceInterface
     {
     public:
         using ClassType = ArtificialIntelligenceManager;
-        using ParentType = Framework::ArtificialIntellegenceInterface;
+        using ParentType = Framework::ArtificialIntelligenceInterface;
 
         using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
         using EnvironmentDirectory = Framework::EnvironmentDirectory;

@@ -12,32 +12,6 @@
 
 namespace Rendering
 {
-    class SingleShaderBaseData;
-    class ShaderBaseData;
-    class SingleShaderConstantsData;
-    class ShaderConstantsData;
-    class SingleShaderSamplerData;
-    class ShaderSamplerData;
-    class ShaderManager;
-    class ShaderParameters;
-    class ShaderBase;
-    class PixelShader;
-    class VertexShader;
-    class SingleShaderProfileData;
-    class ShaderProfileData;
-    class AlphaState;
-    class CullState;
-    class DepthState;
-    class StencilState;
-    class WireState;
-    class OffsetState;
-    class VisualPass;
-    class VisualTechnique;
-    class VisualEffect;
-    class SaveVisualEffect;
-    class LoadVisualEffect;
-    class VisualEffectInstance;
-
     enum class ShaderDataLookup;
     enum class ShaderAPIType;
 

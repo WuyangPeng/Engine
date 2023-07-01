@@ -21,7 +21,6 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/Controller.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/SceneGraph/Polypoint.h"
 
@@ -42,9 +41,7 @@ void Rendering::PointControllerTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    RendererManager::Create();
 
-    RendererManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

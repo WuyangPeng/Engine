@@ -99,6 +99,69 @@ void Rendering::OpenGLSamplerState::Init(const SamplerState& samplerState)
     }
 }
 
+bool Rendering::OpenGLSamplerState::Update(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLSamplerState::Update(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLSamplerState::CopyGpuToCpu()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLSamplerState::CopyGpuToCpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLSamplerState::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLSamplerState::CopyCpuToGpu()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLSamplerState::CopyCpuToGpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLSamplerState::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLSamplerState::GetNumActiveElements()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
 Rendering::OpenGLSamplerState::~OpenGLSamplerState() noexcept
 {
     System::SetGLDeleteSamplers(GetGLHandle());
@@ -111,6 +174,13 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, OpenGLSamplerState)
 void Rendering::OpenGLSamplerState::Enable() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
+}
+
+bool Rendering::OpenGLSamplerState::Update() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return false;
 }
 
 System::TextureSamplerCoordinate Rendering::OpenGLSamplerState::GetSamplerStateMode(SamplerStateMode samplerStateMode)

@@ -467,10 +467,35 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerClassName() con
     content += TextParsing::gClassType;
     content += className;
     content += TextParsing::gSemicolonNewline;
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gIndentation;
     content += TextParsing::gIndentation;
     content += SYSTEM_TEXT("using String = System::String;\n");
+
+    EnumType dataType{};
+
+    for (const auto& value : csvHeadContainer)
+    {
+        if (value.GetCSVFormatType() != CSVFormatType::Enum)
+        {
+            dataType.emplace(value.GetCSVClassName());
+        }
+    }
+
+    for (const auto& value : dataType)
+    {
+        content += TextParsing::gIndentation;
+        content += TextParsing::gIndentation;
+        content += SYSTEM_TEXT("using Const");
+        content += value;
+        content += TextParsing::gContainer;
+        content += SYSTEM_TEXT("SharedPtr = std::shared_ptr<const ");
+        content += value;
+        content += TextParsing::gContainer;
+        content += SYSTEM_TEXT(">;\n");
+    }
+
     content += TextParsing::gNewlineCharacter;
 
     return content;
@@ -525,10 +550,10 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerFunction() cons
         content += TextParsing::gIndentation;
         content += TextParsing::gIndentation;
         content += TextParsing::gNodiscard;
-        content += TextParsing::gSharedPtrConst;
+        content += SYSTEM_TEXT("Const");
         content += value;
         content += TextParsing::gContainer;
-        content += TextParsing::gRightAngleBracket;
+        content += SYSTEM_TEXT("SharedPtr");
         content += TextParsing::gSpace;
         content += TextParsing::gGet;
         content += value;
@@ -583,12 +608,14 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerFunctionDefinit
 
     for (const auto& value : dataType)
     {
-        content += TextParsing::gSharedPtrConst;
         content += nameSpace;
         content += TextParsing::gDoubleColon;
+        content += className;
+        content += TextParsing::gDoubleColon;
+        content += SYSTEM_TEXT("Const");
         content += value;
         content += TextParsing::gContainer;
-        content += TextParsing::gRightAngleBracket;
+        content += SYSTEM_TEXT("SharedPtr");
         content += TextParsing::gSpace;
 
         content += nameSpace;
@@ -683,7 +710,7 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerParsingDefiniti
     content += SYSTEM_TEXT("(inputPath);\n");
 
     content += TextParsing::gIndentation;
-    content += TextParsing::gFunctionEndBrackets; 
+    content += TextParsing::gFunctionEndBrackets;
 
     content += TextParsing::gFunctionEndBrackets;
     content += TextParsing::gNewlineCharacter;
@@ -816,6 +843,12 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerVerifyDefinitio
 
         content += TextParsing::gNewlineCharacter;
     }
+
+    content += TextParsing::gIndentation;
+    content += SYSTEM_TEXT("LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT(\"");
+    content += nameSpace;
+    content += SYSTEM_TEXT("Ω· ¯‘ÿ»Î°≠°≠\"));");
+    content += TextParsing::gNewlineCharacter;
 
     content += TextParsing::gFunctionEndBrackets;
     content += TextParsing::gNewlineCharacter;
@@ -982,10 +1015,10 @@ System::String CoreTools::CSVTotalGenerateImpl::GenerateContainerMember() const
     {
         content += TextParsing::gIndentation;
         content += TextParsing::gIndentation;
-        content += TextParsing::gSharedPtrConst;
+        content += SYSTEM_TEXT("Const");
         content += value;
         content += TextParsing::gContainer;
-        content += TextParsing::gRightAngleBracket;
+        content += SYSTEM_TEXT("SharedPtr");
         content += TextParsing::gSpace;
         content += StringUtility::ToFirstLetterLower(value);
         content += TextParsing::gContainer;

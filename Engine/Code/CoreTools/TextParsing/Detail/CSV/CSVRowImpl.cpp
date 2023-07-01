@@ -53,9 +53,10 @@ void CoreTools::CSVRowImpl::StringNotExistCommaParsing()
     auto index = 0;
     for (auto& value : column)
     {
-        if (csvHead.GetDataType(index) == CSVDataType::String)
+        if (csvHead.GetDataType(index) == CSVDataType::String ||
+            csvHead.GetDataType(index) == CSVDataType::StringArray)
         {
-            boost::algorithm::trim_if(value, boost::algorithm::is_any_of(TextParsing::gQuotationMarks));
+            trim_if(value, boost::algorithm::is_any_of(TextParsing::gQuotationMarks));
         }
 
         if (value.empty())
@@ -83,7 +84,8 @@ void CoreTools::CSVRowImpl::StringExistCommaParsing()
         }
         else
         {
-            if (csvHead.GetDataType(index) == CSVDataType::String)
+            if (csvHead.GetDataType(index) == CSVDataType::String ||
+                csvHead.GetDataType(index) == CSVDataType::StringArray)
             {
                 boost::algorithm::trim_if(lastCache, boost::algorithm::is_any_of(TextParsing::gQuotationMarks));
                 boost::replace_all(lastCache, TextParsing::gStringComma, TextParsing::gComma);

@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.12 (2023/06/12 22:09)
+///	版本：0.9.1.0 (2023/06/19 21:49)
 
-#ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_PHYSICAL_MODELLING_MANAGER_H
-#define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_PHYSICAL_MODELLING_MANAGER_H
+#ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_PHYSICAL_MODELLING_PHYSICAL_MODELLING_MANAGER_H
+#define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_PHYSICAL_MODELLING_PHYSICAL_MODELLING_MANAGER_H
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/DatabaseGenerateServerMiddleLayerDll.h"
 
@@ -22,6 +22,7 @@ namespace DatabaseGenerateServerMiddleLayer
     public:
         using ClassType = PhysicalModellingManager;
         using ParentType = Framework::PhysicalModellingManagerInterface;
+
         using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
@@ -32,4 +33,4 @@ namespace DatabaseGenerateServerMiddleLayer
     };
 }
 
-#endif  // DATABASE_GENERATE_SERVER_MIDDLE_LAYER_PHYSICAL_MODELLING_MANAGER_H
+#endif  // DATABASE_GENERATE_SERVER_MIDDLE_LAYER_PHYSICAL_MODELLING_PHYSICAL_MODELLING_MANAGER_H

@@ -68,7 +68,7 @@ CoreTools::Vector3 CSVConfigure::EquipBase::GetPosition() const noexcept
     return CoreTools::Vector3{};
 }
 
-std::deque<bool> CSVConfigure::EquipBase::GetMask() const
+CSVConfigure::EquipBase::BoolContainer CSVConfigure::EquipBase::GetMask() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -91,14 +91,14 @@ bool CSVConfigure::EquipBase::GetMask(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("equip表基类不允许获取数组。"s))
 }
 
-std::deque<bool>::const_iterator CSVConfigure::EquipBase::GetMaskBegin() const
+CSVConfigure::EquipBase::BoolContainerConstIter CSVConfigure::EquipBase::GetMaskBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("equip表基类不允许获取数组。"s))
 }
 
-std::deque<bool>::const_iterator CSVConfigure::EquipBase::GetMaskEnd() const
+CSVConfigure::EquipBase::BoolContainerConstIter CSVConfigure::EquipBase::GetMaskEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -112,7 +112,7 @@ int CSVConfigure::EquipBase::GetHeroId() const noexcept
     return 0;
 }
 
-std::shared_ptr<const CSVConfigure::HeroMappingType> CSVConfigure::EquipBase::GetHeroId(const CSVConfigureContainer& csvContainer) const
+CSVConfigure::EquipBase::ConstHeroSharedPtr CSVConfigure::EquipBase::GetHeroId(const CSVConfigureContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

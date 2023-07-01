@@ -36,3 +36,38 @@ void Rendering::OpenGLVertexBuffer::Enable() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 }
+
+bool Rendering::OpenGLVertexBuffer::CopyGpuToCpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLVertexBuffer::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLVertexBuffer::CopyCpuToGpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLVertexBuffer::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLVertexBuffer::GetNumActiveElements()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}

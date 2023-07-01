@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = Gather;
         using ParentType = GatherBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Gather(const CoreTools::CSVRow& csvRow);
+        explicit Gather(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -33,11 +35,11 @@ namespace AncientBooks
 
         NODISCARD int GetId() const noexcept override;
 
-        NODISCARD System::String GetGather() const override;
+        NODISCARD String GetGather() const override;
 
     private:
         int id;  // Id
-        System::String gather;  // Ãû³Æ
+        String gather;  // Ãû³Æ
     };
 }
 

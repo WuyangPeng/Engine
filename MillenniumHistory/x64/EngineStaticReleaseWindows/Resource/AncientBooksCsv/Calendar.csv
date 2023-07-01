@@ -1,4 +1,4 @@
-@default,,,,,,Year,Country,Year,Year,Year,Year
+@default,,,Book,,Character,Year,Country,Year,Year,Year,Year
 Id,名字,別名,出處,刊載,創制人,制定年,國家,開始,結束,再次開始,再次結束
 int,string,string[],int[],string,int[],int,int,int,int,int,int
 id,name,alias,source,publication,creator,formulate,country,begin,end,againBegin,againEnd

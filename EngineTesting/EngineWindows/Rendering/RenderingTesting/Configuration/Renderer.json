@@ -4,7 +4,7 @@
   "Texture": {
     "ColorFormat": 2,
     "DepthStencilFormat": 45,
-    "MultisamplesNumber": 1
+    "MultiSamplesNumber": 1
   },
 
   "ClearColor": {

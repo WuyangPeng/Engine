@@ -27,6 +27,7 @@
 #include "Rendering/ShaderFloats/MaterialSpecularConstant.h"
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
 #include "Rendering/ShaderFloats/WorldMatrixConstant.h"
+#include "Rendering/Shaders/Flags/ShaderFlags.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, LightPntPerPixEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, LightPntPerPixEffect);
@@ -255,106 +256,10 @@ namespace
 Rendering::LightPntPerPixEffect::LightPntPerPixEffect(CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{ disableNotThrow }
 {
-    auto vshader = std::make_shared<VertexShader>("LightPntPerPix", 2, 3, 1, 0);
-    vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
-    vshader->SetInput(1, "modelNormal", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord1);
-    vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
-    vshader->SetOutput(1, "vertexPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord0);
-    vshader->SetOutput(2, "vertexNormal", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord1);
-    vshader->SetConstant(0, "PVWMatrix", 4);
-
-    auto profile = vshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 1; ++j)
-        {
-            profile->SetBaseRegister(i, j, *vRegisters.at(i));
-        }
-
-        profile->SetProgram(i, vPrograms.at(i));
-    }
-
-    auto pshader = std::make_shared<PixelShader>("LightPntPerPix", 2, 1, 11, 0);
-    pshader->SetInput(0, "vertexPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord0);
-    pshader->SetInput(1, "vertexNormal", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord1);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetConstant(0, "WMatrix", 4);
-    pshader->SetConstant(1, "CameraModelPosition", 1);
-    pshader->SetConstant(2, "MaterialEmissive", 1);
-    pshader->SetConstant(3, "MaterialAmbient", 1);
-    pshader->SetConstant(4, "MaterialDiffuse", 1);
-    pshader->SetConstant(5, "MaterialSpecular", 1);
-    pshader->SetConstant(6, "LightModelPosition", 1);
-    pshader->SetConstant(7, "LightAmbient", 1);
-    pshader->SetConstant(8, "LightDiffuse", 1);
-    pshader->SetConstant(9, "LightSpecular", 1);
-    pshader->SetConstant(10, "LightAttenuation", 1);
-
-    profile = pshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 11; ++j)
-        {
-            profile->SetBaseRegister(i, j, (*pRegisters.at(i)).at(j));
-        }
-
-        profile->SetProgram(i, pPrograms.at(i));
-    }
-
-    auto pass = std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable);
-
-    pass->SetVertexShader(vshader);
-    pass->SetPixelShader(pshader);
-    pass->SetAlphaState(std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetCullState(std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetDepthState(std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetOffsetState(std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetStencilState(std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetWireState(std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable));
-
-    auto technique = std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable);
-    technique->InsertPass(pass);
-
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, LightPntPerPixEffect)
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::LightPntPerPixEffect::CreateInstance(const LightSharedPtr& light, const MaterialSharedPtr& material)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    auto instance = std::make_shared<VisualEffectInstance>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), 0);
-
-    instance->SetVertexConstant(0, 0, std::make_shared<ProjectionViewMatrixConstant>(CoreTools::DisableNotThrow::Disable));
-    instance->SetPixelConstant(0, 0, std::make_shared<WorldMatrixConstant>(CoreTools::DisableNotThrow::Disable));
-    instance->SetPixelConstant(0, 1, std::make_shared<CameraModelPositionConstant>(CoreTools::DisableNotThrow::Disable));
-    instance->SetPixelConstant(0, 2, std::make_shared<MaterialEmissiveConstant>(material));
-    instance->SetPixelConstant(0, 3, std::make_shared<MaterialAmbientConstant>(material));
-    instance->SetPixelConstant(0, 4, std::make_shared<MaterialDiffuseConstant>(material));
-    instance->SetPixelConstant(0, 5, std::make_shared<MaterialSpecularConstant>(material));
-    instance->SetPixelConstant(0, 6, std::make_shared<LightModelPositionConstant>(light));
-    instance->SetPixelConstant(0, 7, std::make_shared<LightAmbientConstant>(light));
-    instance->SetPixelConstant(0, 8, std::make_shared<LightDiffuseConstant>(light));
-    instance->SetPixelConstant(0, 9, std::make_shared<LightSpecularConstant>(light));
-    instance->SetPixelConstant(0, 10, std::make_shared<LightAttenuationConstant>(light));
-
-    return instance;
-}
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::LightPntPerPixEffect::CreateUniqueInstance(const LightSharedPtr& light, const MaterialSharedPtr& material)
-{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    auto effect = std::make_shared<ClassType>(CoreTools::DisableNotThrow::Disable);
-
-#include STSTEM_WARNING_POP
-
-    return effect->CreateInstance(light, material);
-}
 
 Rendering::LightPntPerPixEffect::LightPntPerPixEffect(LoadConstructor value)
     : VisualEffect{ value }

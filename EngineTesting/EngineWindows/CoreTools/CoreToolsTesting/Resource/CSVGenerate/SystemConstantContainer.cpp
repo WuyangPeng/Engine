@@ -18,7 +18,7 @@
 
 #include <algorithm>
 
-CSVConfigure::SystemConstantContainer::SystemConstantContainer(const CoreTools::CSVContent& csvContent)
+CSVConfigure::SystemConstantContainer::SystemConstantContainer(const CSVContent& csvContent)
     : systemConstant{}
 {
     Parsing(csvContent);
@@ -26,10 +26,16 @@ CSVConfigure::SystemConstantContainer::SystemConstantContainer(const CoreTools::
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void CSVConfigure::SystemConstantContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void CSVConfigure::SystemConstantContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("systemConstant表开始载入……"));
 
+    Load(csvContent);
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("systemConstant表结束载入……"));
+}
+
+void CSVConfigure::SystemConstantContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -40,14 +46,13 @@ void CSVConfigure::SystemConstantContainer::Parsing(const CoreTools::CSVContent&
 
     if (1 < size)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, User,  SYSTEM_TEXT("systemConstant表不是唯一的"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, User, SYSTEM_TEXT("systemConstant表不是唯一的"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 
     CoreTools::CSVRow csvRow{ csvContent.GetCSVHead(), csvContent.GetContent(0) };
 
     systemConstant = std::make_shared<SystemConstant>(csvRow);
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("systemConstant表结束载入……"));
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, SystemConstantContainer)

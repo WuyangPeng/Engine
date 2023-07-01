@@ -19,6 +19,12 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{68f14701-d87c-4a2f-ac11-7381ed07c781}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EngineSuite 头文件">
+      <UniqueIdentifier>{3e430f2c-2e39-45e0-852c-2af5e35ebd6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSuite 源文件">
+      <UniqueIdentifier>{14d61277-7e00-4d35-8fc2-78ed7433ac15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
@@ -46,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientCoreTesting\TestingHelper.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\GameClientTesting\GameClientCoreTesting\EngineSuite\EngineSuite.h">
+      <Filter>EngineSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

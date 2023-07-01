@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:22)
+///	版本：0.9.1.0 (2023/06/29 16:51)
 
-#ifndef RENDERING_RENDERERS_TEXTURE_BUFFER_H
-#define RENDERING_RENDERERS_TEXTURE_BUFFER_H
+#ifndef RENDERING_RESOURCES_TEXTURE_BUFFER_H
+#define RENDERING_RESOURCES_TEXTURE_BUFFER_H
 
 #include "Rendering/RenderingDll.h"
 
@@ -26,6 +26,7 @@ namespace Rendering
         using TextureBufferImpl = BufferLayout;
         COPY_UNSHARED_TYPE_DECLARE(TextureBuffer);
         using ParentType = Buffer;
+
         using MemberLayoutContainer = std::vector<MemberLayout>;
 
     public:
@@ -63,10 +64,12 @@ namespace Rendering
             return 1;
         }
 
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
     private:
         PackageType impl;
         DataFormatType format;
     };
 }
 
-#endif  // RENDERING_RENDERERS_TEXTURE_BUFFER_H
+#endif  // RENDERING_RESOURCES_TEXTURE_BUFFER_H

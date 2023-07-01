@@ -26,6 +26,7 @@ namespace System
     void SYSTEM_DEFAULT_DECLARE SetGLClearColor(OpenGLFloat red, OpenGLFloat green, OpenGLFloat blue, OpenGLFloat alpha) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLClearStencil(OpenGLInt stencil) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLClearDepth(OpenGLDouble depth) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLClear(OpenGLClearMask openGLClearMask) noexcept;
 
     void SYSTEM_DEFAULT_DECLARE SetGLFrontFace(OpenGLFrontFace mode) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLCullFace(RasterizerStateCullFace mode) noexcept;
@@ -61,6 +62,8 @@ namespace System
     void SYSTEM_DEFAULT_DECLARE SetGLColorMask(OpenGLBoolean red, OpenGLBoolean green, OpenGLBoolean blue, OpenGLBoolean alpha) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLColorMask(OpenGLUInt index, OpenGLBoolean red, OpenGLBoolean green, OpenGLBoolean blue, OpenGLBoolean alpha) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLSampleMask(OpenGLUInt maskNumber, OpenGLBitfield mask) noexcept;
+
+    void SYSTEM_DEFAULT_DECLARE SetGLFlush() noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_BASE_H

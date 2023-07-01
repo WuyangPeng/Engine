@@ -14,7 +14,7 @@
 
 #include "System/OpenGL/Fwd/OpenGLFlagsFwd.h"
 #include "System/OpenGL/Using/OpenGLUsing.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Shaders/Detail/ProgramFactoryImpl.h"
 
 namespace Rendering

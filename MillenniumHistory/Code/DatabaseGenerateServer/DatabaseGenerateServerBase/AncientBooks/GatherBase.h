@@ -22,6 +22,8 @@ namespace AncientBooks
     public:
         using ClassType = GatherBase;
 
+        using String = System::String;
+
     public:
         GatherBase() noexcept = default;
         explicit GatherBase(int key) noexcept;
@@ -38,7 +40,7 @@ namespace AncientBooks
 
         NODISCARD virtual int GetId() const noexcept;
 
-        NODISCARD virtual System::String GetGather() const;
+        NODISCARD virtual String GetGather() const;
 
     private:
         int key{};

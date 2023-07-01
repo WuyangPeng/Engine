@@ -12,6 +12,7 @@
 #include "UnitTestData.h"
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/LogManager/LogAsynchronous.h"
 
 CoreTools::UnitTestData::UnitTestData() noexcept
     : pass{ 0 }, fail{ 0 }, error{ 0 }
@@ -66,24 +67,28 @@ void CoreTools::UnitTestData::AddPassedNumber() noexcept
     ++pass;
 }
 
-void CoreTools::UnitTestData::AddFailedNumber() noexcept
+void CoreTools::UnitTestData::AddFailedNumber()  
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     if (fail == 0)
     {
+        LOG_ASYNCHRONOUS_SINGLETON.Wait();
+
         System::SystemPause();
     }
 
     ++fail;
 }
 
-void CoreTools::UnitTestData::AddErrorNumber() noexcept
+void CoreTools::UnitTestData::AddErrorNumber()  
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     if (error == 0)
     {
+        LOG_ASYNCHRONOUS_SINGLETON.Wait();
+
         System::SystemPause();
     }
 

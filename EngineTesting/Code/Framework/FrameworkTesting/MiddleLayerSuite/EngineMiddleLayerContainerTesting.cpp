@@ -16,7 +16,7 @@
 #include "Rendering/Renderers/RendererManager.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
-#include "Framework/MiddleLayer/ArtificialIntellegenceInterface.h"
+#include "Framework/MiddleLayer/ArtificialIntelligenceInterface.h"
 #include "Framework/MiddleLayer/EngineMiddleLayerContainerDetail.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/MiddleLayer/ObjectLogicManagerDetail.h"
@@ -82,7 +82,7 @@ void Framework::EngineMiddleLayerContainerTesting::DefaultEngineMiddleLayerTest(
 
 void Framework::EngineMiddleLayerContainerTesting::EngineMiddleLayerTest()
 {
-    using ObjectLogicManager = ObjectLogicManager<ObjectLogicManagerInterface, ArtificialIntellegenceInterface>;
+    using ObjectLogicManager = ObjectLogicManager<ObjectLogicManagerInterface, ArtificialIntelligenceInterface>;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)

@@ -36,11 +36,11 @@ JsonConfigure::RunScenesContainer::DataContainer JsonConfigure::RunScenesContain
 
     DataContainer result{};
 
-    for (const auto& value : data)
+    for (const auto& element : data)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 
@@ -69,11 +69,11 @@ JsonConfigure::RunScenes::Data::BoundsContainer JsonConfigure::RunScenes::Data::
 
     BoundsContainer result{};
 
-    for (const auto& value : bounds)
+    for (const auto& element : bounds)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 
@@ -102,11 +102,11 @@ JsonConfigure::RunScenes::Data::TerrainsContainer JsonConfigure::RunScenes::Data
 
     TerrainsContainer result{};
 
-    for (const auto& value : terrains)
+    for (const auto& element : terrains)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

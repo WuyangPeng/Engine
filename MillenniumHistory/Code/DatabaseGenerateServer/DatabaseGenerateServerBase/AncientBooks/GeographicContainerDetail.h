@@ -36,11 +36,11 @@ AncientBooks::GeographicContainer::Container AncientBooks::GeographicContainer::
 
     Container result{};
 
-    for (const auto& value : geographic)
+    for (const auto& element : geographic)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

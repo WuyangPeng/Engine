@@ -1,3 +1,6 @@
 {
-
+  "gameClientSuite": {
+    "GameClientHelperTesting": 1,
+    "GameClientMessageTesting": 1
+  }
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:24)
+///	版本：0.9.1.0 (2023/06/29 19:54)
 
 #ifndef RENDERING_RESOURCES_LOAD_TEXTURE_H
 #define RENDERING_RESOURCES_LOAD_TEXTURE_H
@@ -30,7 +30,7 @@ namespace Rendering
         using ClassType = LoadTexture;
 
     public:
-        // 加载纹理从.trt文件外的流媒体系统。
+        // 加载纹理从.tct文件外的流媒体系统。
         // 纹理对象可以是1D, 2D, 3D 或者 cube。
         // 调用者可以查询返回的纹理类型。
         NODISCARD static TextureSharedPtr LoadFromFile(const System::String& name);

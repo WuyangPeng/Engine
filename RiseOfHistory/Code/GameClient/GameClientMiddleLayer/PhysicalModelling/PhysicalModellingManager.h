@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起版本：0.9.0.12 (2023/06/17 12:50)
+///	版本：0.9.1.0 (2023/06/19 15:36)
 
-#ifndef GAME_CLIENT_MIDDLE_LAYER_PHYSICAL_MODELLING_MIDDLE_LAYER_PHYSICAL_MODELLING_H
-#define GAME_CLIENT_MIDDLE_LAYER_PHYSICAL_MODELLING_MIDDLE_LAYER_PHYSICAL_MODELLING_H
+#ifndef GAME_CLIENT_MIDDLE_LAYER_PHYSICAL_MODELLING_PHYSICAL_MODELLING_MANAGER_H
+#define GAME_CLIENT_MIDDLE_LAYER_PHYSICAL_MODELLING_PHYSICAL_MODELLING_MANAGER_H
 
 #include "GameClient/GameClientMiddleLayer/GameClientMiddleLayerDll.h"
 
@@ -17,11 +17,11 @@
 
 namespace GameClientMiddleLayer
 {
-    class GAME_CLIENT_MIDDLE_LAYER_DEFAULT_DECLARE PhysicalModellingManager : public Framework::PhysicalModellingManagerInterface
+    class GAME_CLIENT_MIDDLE_LAYER_DEFAULT_DECLARE PhysicalModellingManager final : public Framework::PhysicalModellingManagerInterface
     {
     public:
         using ClassType = PhysicalModellingManager;
-        using ParentType = Framework::PhysicalModellingManagerInterface;
+        using ParentType = PhysicalModellingManagerInterface;
         using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
@@ -32,4 +32,4 @@ namespace GameClientMiddleLayer
     };
 }
 
-#endif  // GAME_CLIENT_MIDDLE_LAYER_PHYSICAL_MODELLING_MIDDLE_LAYER_PHYSICAL_MODELLING_H
+#endif  // GAME_CLIENT_MIDDLE_LAYER_PHYSICAL_MODELLING_PHYSICAL_MODELLING_MANAGER_H

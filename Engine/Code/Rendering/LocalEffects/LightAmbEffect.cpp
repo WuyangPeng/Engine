@@ -19,6 +19,7 @@
 #include "Rendering/ShaderFloats/MaterialAmbientConstant.h"
 #include "Rendering/ShaderFloats/MaterialEmissiveConstant.h"
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
+#include "Rendering/Shaders/Flags/ShaderFlags.h"
 
 namespace
 {
@@ -137,83 +138,10 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, LightAmbEffect);
 Rendering::LightAmbEffect::LightAmbEffect(CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{ disableNotThrow }
 {
-    auto vshader = std::make_shared<VertexShader>("LightAmb", 1, 2, 5, 0);
-    vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
-    vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
-    vshader->SetOutput(1, "vertexColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    vshader->SetConstant(0, "PVWMatrix", 4);
-    vshader->SetConstant(1, "MaterialEmissive", 1);
-    vshader->SetConstant(2, "MaterialAmbient", 1);
-    vshader->SetConstant(3, "LightAmbient", 1);
-    vshader->SetConstant(4, "LightAttenuation", 1);
-
-    auto profile = vshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 5; ++j)
-        {
-            profile->SetBaseRegister(i, j, (*vRegisters.at(i)).at(j));
-        }
-
-        profile->SetProgram(i, vPrograms.at(i));
-    }
-
-    auto pshader = std::make_shared<PixelShader>("LightAmb", 1, 1, 0, 0);
-    pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-
-    profile = pshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        profile->SetProgram(i, pPrograms.at(i));
-    }
-
-    auto pass = std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable);
-    pass->SetVertexShader(vshader);
-    pass->SetPixelShader(pshader);
-    pass->SetAlphaState(std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetCullState(std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetDepthState(std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetOffsetState(std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetStencilState(std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetWireState(std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable));
-
-    auto technique = std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable);
-    technique->InsertPass(pass);
-
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, LightAmbEffect)
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::LightAmbEffect::CreateInstance(const LightSharedPtr& light, const MaterialSharedPtr& material)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    auto instance = std::make_shared<VisualEffectInstance>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), 0);
-
-    instance->SetVertexConstant(0, 0, std::make_shared<ProjectionViewMatrixConstant>(CoreTools::DisableNotThrow::Disable));
-    instance->SetVertexConstant(0, 1, std::make_shared<MaterialEmissiveConstant>(material));
-    instance->SetVertexConstant(0, 2, std::make_shared<MaterialAmbientConstant>(material));
-    instance->SetVertexConstant(0, 3, std::make_shared<LightAmbientConstant>(light));
-    instance->SetVertexConstant(0, 4, std::make_shared<LightAttenuationConstant>(light));
-
-    return instance;
-}
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::LightAmbEffect::CreateUniqueInstance(const LightSharedPtr& light, const MaterialSharedPtr& material)
-{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    auto effect = std::make_shared<LightAmbEffect>(CoreTools::DisableNotThrow::Disable);
-
-#include STSTEM_WARNING_POP
-
-    return effect->CreateInstance(light, material);
-}
 
 Rendering::LightAmbEffect::LightAmbEffect(LoadConstructor value)
     : ParentType{ value }

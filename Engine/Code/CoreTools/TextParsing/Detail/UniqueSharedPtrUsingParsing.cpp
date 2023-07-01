@@ -25,5 +25,10 @@ System::String CoreTools::UniqueSharedPtrUsingParsing::GenerateSharedPtrUsing() 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GenerateSharedPtr();
+    auto content = GenerateSharedPtr();
+
+    content += GenerateIndentation();
+    content += SYSTEM_TEXT("using CSVContent = CoreTools::CSVContent;\n");
+
+    return content;
 }

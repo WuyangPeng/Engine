@@ -23,6 +23,9 @@ namespace AncientBooks
     public:
         using ClassType = CategoryBase;
 
+        using String = System::String;
+        using ConstGatherSharedPtr = std::shared_ptr<const GatherMappingType>;
+
     public:
         CategoryBase() noexcept = default;
         explicit CategoryBase(int key) noexcept;
@@ -40,9 +43,9 @@ namespace AncientBooks
         NODISCARD virtual int GetId() const noexcept;
 
         NODISCARD virtual int GetGather() const noexcept;
-        NODISCARD virtual std::shared_ptr<const GatherMappingType> GetGather(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstGatherSharedPtr GetGather(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual System::String GetCategory() const;
+        NODISCARD virtual String GetCategory() const;
 
     private:
         int key{};

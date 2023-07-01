@@ -102,6 +102,8 @@ bool Framework::RenderingManagerInterface::Paint()
 
     if (ParentType::Paint())
     {
+        viewMiddleLayer->ClearColorBuffer();
+
         viewMiddleLayer->SwapBuffers();
 
         return true;
@@ -128,14 +130,14 @@ bool Framework::RenderingManagerInterface::Destroy()
     }
 }
 
-Rendering::RendererSharedPtr Framework::RenderingManagerInterface::GetRenderer()
+Rendering::BaseRendererSharedPtr Framework::RenderingManagerInterface::GetRenderer()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
     return viewMiddleLayer->GetRenderer();
 }
 
-Rendering::ConstRendererSharedPtr Framework::RenderingManagerInterface::GetRenderer() const
+Rendering::ConstBaseRendererSharedPtr Framework::RenderingManagerInterface::GetRenderer() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 

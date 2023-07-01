@@ -19,11 +19,11 @@ CSVConfigure::HeroContainer::ConstHeroSharedPtr CSVConfigure::HeroContainer::Get
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    for (const auto& value : hero)
+    for (const auto& element : hero)
     {
-        if (function(value.second))
+        if (function(element.second))
         {
-            return value.second;
+            return element.second;
         }
     }
 
@@ -37,11 +37,11 @@ CSVConfigure::HeroContainer::Container CSVConfigure::HeroContainer::GetHero(Func
 
     Container result{};
 
-    for (const auto& value : hero)
+    for (const auto& element : hero)
     {
-        if (function(value.second))
+        if (function(element.second))
         {
-            result.emplace_back(value.second);
+            result.emplace_back(element.second);
         }
     }
 

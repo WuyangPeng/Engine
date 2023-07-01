@@ -13,9 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "OpenGLRendererData.h"
-#include "Rendering/Renderers/RenderersFwd.h"
-#include "Rendering/Shaders/ShaderBase.h"
-#include "Rendering/Shaders/ShaderParameters.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 
 namespace Rendering
 {
@@ -35,14 +33,12 @@ namespace Rendering
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
     protected:
-        void SetSamplerState(Renderer* renderer,
-                             const ShaderBase* shader,
+        void SetSamplerState(BaseRenderer* renderer,
                              int profile,
-                             const ShaderParameters* parameters,
                              int maxSamplers,
                              RendererData::SamplerState* currentSS) noexcept;
 
-        void DisableTextures(Renderer* renderer, const ShaderBase* shader, int profile, const ShaderParameters* parameters, int maxSamplers) noexcept;
+        void DisableTextures(BaseRenderer* renderer, int profile, int maxSamplers) noexcept;
     };
 
 }

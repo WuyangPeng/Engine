@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起版本：0.9.0.12 (2023/06/17 12:45)
+///	版本：0.9.1.0 (2023/06/19 15:18)
 
 #ifndef GAME_CLIENT_CORE_HELPER_USER_MACRO_H
 #define GAME_CLIENT_CORE_HELPER_USER_MACRO_H
@@ -27,7 +27,7 @@ static_assert(COMPILE_GAME_CLIENT_CORE_CLOSE <= CLOSE_GAME_CLIENT_CORE_MAX, "COM
 
 #ifdef BUILDING_STATIC
 
-    #define BUILDING_GAME_CLIENT_CORE_STATIC
+    #define BUILDING_GAME_CLIENT_CORE_STATIC (static_cast<void>(0))
 
 #endif  // BUILDING_STATIC
 

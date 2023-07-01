@@ -19,7 +19,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Shaders/ComputeProgram.h"
 #include "Rendering/Shaders/Flags/ShaderAPIType.h"
 #include "Rendering/Shaders/Shader.h"

@@ -17,7 +17,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Resources/Textures/DrawTarget.h"
 
@@ -38,9 +37,7 @@ void Rendering::RenderTargetTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    RendererManager::Create();
-
-    RendererManager::Destroy();
+  
 
     CoreTools::InitTerm::ExecuteTerminator();
 }
@@ -54,7 +51,7 @@ void Rendering::RenderTargetTesting::BaseTest()
     ASSERT_EQUAL(firstRenderTarget.GetWidth(), 20);
     ASSERT_EQUAL(firstRenderTarget.GetHeight(), 22);
 
-    ASSERT_FALSE(firstRenderTarget.HasRenderTargetMipmaps());
+    ASSERT_FALSE(firstRenderTarget.HasRenderTargetMipMaps());
     ASSERT_TRUE(firstRenderTarget.HasDepthStencil());
 }
 

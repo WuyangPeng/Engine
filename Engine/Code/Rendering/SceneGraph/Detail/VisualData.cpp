@@ -19,7 +19,6 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
-#include "Rendering/Shaders/VisualEffectInstance.h"
 
 Rendering::VisualData::VisualData(VisualPrimitiveType type) noexcept
     : visualPrimitiveType{ type }, vertexFormat{}, vertexBuffer{}, indexBuffer{}

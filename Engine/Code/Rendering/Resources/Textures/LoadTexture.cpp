@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:29)
+///	版本：0.9.1.0 (2023/06/29 20:20)
 
 #include "Rendering/RenderingExport.h"
 
@@ -17,7 +17,6 @@
 #include "TextureRenderTarget.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-// static
 Rendering::TextureSharedPtr Rendering::LoadTexture::LoadFromFile(const System::String& name)
 {
     ReadFileManager inFile{ name };
@@ -68,12 +67,11 @@ Rendering::TextureSharedPtr Rendering::LoadTexture::LoadFromFile(const System::S
         }
         default:
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("无效的纹理类型。\n"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("无效的纹理类型。\n"s))
         }
     }
 }
 
-// static
 Rendering::Texture1DSharedPtr Rendering::LoadTexture::Load1DFromFile(const System::String& name)
 {
     ReadFileManager inFile{ name };
@@ -92,12 +90,11 @@ Rendering::Texture1DSharedPtr Rendering::LoadTexture::Load1DFromFile(const Syste
         }
         default:
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::Texture1D。\n"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::Texture1D。\n"s))
         }
     }
 }
 
-// static
 Rendering::Texture2DSharedPtr Rendering::LoadTexture::Load2DFromFile(MAYBE_UNUSED const System::String& name)
 {
     ReadFileManager inFile{ name };
@@ -124,12 +121,11 @@ Rendering::Texture2DSharedPtr Rendering::LoadTexture::Load2DFromFile(MAYBE_UNUSE
         }
         default:
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::Texture2D。\n"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::Texture2D。\n"s))
         }
     }
 }
 
-// static
 Rendering::Texture3DSharedPtr Rendering::LoadTexture::Load3DFromFile(MAYBE_UNUSED const System::String& name)
 {
     ReadFileManager inFile{ name };
@@ -148,12 +144,11 @@ Rendering::Texture3DSharedPtr Rendering::LoadTexture::Load3DFromFile(MAYBE_UNUSE
         }
         default:
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::Texture3D。\n"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::Texture3D。\n"s))
         }
     }
 }
 
-// static
 Rendering::TextureCubeSharedPtr Rendering::LoadTexture::LoadCubeFromFile(MAYBE_UNUSED const System::String& name)
 {
     ReadFileManager inFile{ name };
@@ -172,7 +167,7 @@ Rendering::TextureCubeSharedPtr Rendering::LoadTexture::LoadCubeFromFile(MAYBE_U
         }
         default:
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::TextureCube。\n"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("纹理类型不是TextureType::TextureCube。\n"s))
         }
     }
 }

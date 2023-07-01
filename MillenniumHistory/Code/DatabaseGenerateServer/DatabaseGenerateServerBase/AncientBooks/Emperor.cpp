@@ -20,7 +20,7 @@
 
 using namespace std::literals;
 
-AncientBooks::Emperor::Emperor(const CoreTools::CSVRow& csvRow)
+AncientBooks::Emperor::Emperor(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       character{ csvRow.GetInt(SYSTEM_TEXT("character"s)) },
@@ -73,7 +73,7 @@ int AncientBooks::Emperor::GetCharacter() const noexcept
     return character;
 }
 
-std::shared_ptr<const AncientBooks::CharacterMappingType> AncientBooks::Emperor::GetCharacter(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstCharacterSharedPtr AncientBooks::Emperor::GetCharacter(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -94,7 +94,7 @@ System::String AncientBooks::Emperor::GetDynasticTitle() const
     return dynasticTitle;
 }
 
-std::vector<System::String> AncientBooks::Emperor::GetDynasticTitleAlias() const
+AncientBooks::Emperor::StringContainer AncientBooks::Emperor::GetDynasticTitleAlias() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -115,14 +115,14 @@ System::String AncientBooks::Emperor::GetDynasticTitleAlias(int index) const
     return dynasticTitleAlias.at(index);
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Emperor::GetDynasticTitleAliasBegin() const noexcept
+AncientBooks::Emperor::StringContainerConstIter AncientBooks::Emperor::GetDynasticTitleAliasBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return dynasticTitleAlias.cbegin();
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Emperor::GetDynasticTitleAliasEnd() const noexcept
+AncientBooks::Emperor::StringContainerConstIter AncientBooks::Emperor::GetDynasticTitleAliasEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -136,7 +136,7 @@ System::String AncientBooks::Emperor::GetPosthumousTitle() const
     return posthumousTitle;
 }
 
-std::vector<System::String> AncientBooks::Emperor::GetPosthumousTitleAlias() const
+AncientBooks::Emperor::StringContainer AncientBooks::Emperor::GetPosthumousTitleAlias() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -157,14 +157,14 @@ System::String AncientBooks::Emperor::GetPosthumousTitleAlias(int index) const
     return posthumousTitleAlias.at(index);
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Emperor::GetPosthumousTitleAliasBegin() const noexcept
+AncientBooks::Emperor::StringContainerConstIter AncientBooks::Emperor::GetPosthumousTitleAliasBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return posthumousTitleAlias.cbegin();
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Emperor::GetPosthumousTitleAliasEnd() const noexcept
+AncientBooks::Emperor::StringContainerConstIter AncientBooks::Emperor::GetPosthumousTitleAliasEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -178,7 +178,7 @@ int AncientBooks::Emperor::GetBeginYear() const noexcept
     return beginYear;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::Emperor::GetBeginYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstYearSharedPtr AncientBooks::Emperor::GetBeginYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -192,7 +192,7 @@ int AncientBooks::Emperor::GetBeginMonth() const noexcept
     return beginMonth;
 }
 
-std::shared_ptr<const AncientBooks::MonthMappingType> AncientBooks::Emperor::GetBeginMonth(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstMonthSharedPtr AncientBooks::Emperor::GetBeginMonth(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -206,7 +206,7 @@ int AncientBooks::Emperor::GetBeginSexagenaryCycle() const noexcept
     return beginSexagenaryCycle;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::Emperor::GetBeginSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstSexagenaryCycleSharedPtr AncientBooks::Emperor::GetBeginSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -220,7 +220,7 @@ int AncientBooks::Emperor::GetBeginDay() const noexcept
     return beginDay;
 }
 
-std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::Emperor::GetBeginDay(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstDaySharedPtr AncientBooks::Emperor::GetBeginDay(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -234,7 +234,7 @@ int AncientBooks::Emperor::GetEndYear() const noexcept
     return endYear;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::Emperor::GetEndYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstYearSharedPtr AncientBooks::Emperor::GetEndYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -248,7 +248,7 @@ int AncientBooks::Emperor::GetEndMonth() const noexcept
     return endMonth;
 }
 
-std::shared_ptr<const AncientBooks::MonthMappingType> AncientBooks::Emperor::GetEndMonth(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstMonthSharedPtr AncientBooks::Emperor::GetEndMonth(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -262,7 +262,7 @@ int AncientBooks::Emperor::GetEndSexagenaryCycle() const noexcept
     return endSexagenaryCycle;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::Emperor::GetEndSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstSexagenaryCycleSharedPtr AncientBooks::Emperor::GetEndSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -276,7 +276,7 @@ int AncientBooks::Emperor::GetEndDay() const noexcept
     return endDay;
 }
 
-std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::Emperor::GetEndDay(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstDaySharedPtr AncientBooks::Emperor::GetEndDay(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -290,7 +290,7 @@ int AncientBooks::Emperor::GetAgainBeginYear() const noexcept
     return againBeginYear;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::Emperor::GetAgainBeginYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstYearSharedPtr AncientBooks::Emperor::GetAgainBeginYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -304,7 +304,7 @@ int AncientBooks::Emperor::GetAgainBeginMonth() const noexcept
     return againBeginMonth;
 }
 
-std::shared_ptr<const AncientBooks::MonthMappingType> AncientBooks::Emperor::GetAgainBeginMonth(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstMonthSharedPtr AncientBooks::Emperor::GetAgainBeginMonth(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -318,7 +318,7 @@ int AncientBooks::Emperor::GetAgainBeginSexagenaryCycle() const noexcept
     return againBeginSexagenaryCycle;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::Emperor::GetAgainBeginSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstSexagenaryCycleSharedPtr AncientBooks::Emperor::GetAgainBeginSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -332,7 +332,7 @@ int AncientBooks::Emperor::GetAgainBeginDay() const noexcept
     return againBeginDay;
 }
 
-std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::Emperor::GetAgainBeginDay(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstDaySharedPtr AncientBooks::Emperor::GetAgainBeginDay(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -346,7 +346,7 @@ int AncientBooks::Emperor::GetAgainEndYear() const noexcept
     return againEndYear;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::Emperor::GetAgainEndYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstYearSharedPtr AncientBooks::Emperor::GetAgainEndYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -360,7 +360,7 @@ int AncientBooks::Emperor::GetAgainEndMonth() const noexcept
     return againEndMonth;
 }
 
-std::shared_ptr<const AncientBooks::MonthMappingType> AncientBooks::Emperor::GetAgainEndMonth(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstMonthSharedPtr AncientBooks::Emperor::GetAgainEndMonth(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -374,7 +374,7 @@ int AncientBooks::Emperor::GetAgainEndSexagenaryCycle() const noexcept
     return againEndSexagenaryCycle;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::Emperor::GetAgainEndSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstSexagenaryCycleSharedPtr AncientBooks::Emperor::GetAgainEndSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -388,14 +388,14 @@ int AncientBooks::Emperor::GetAgainEndDay() const noexcept
     return againEndDay;
 }
 
-std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::Emperor::GetAgainEndDay(const AncientBooksContainer& csvContainer) const
+AncientBooks::Emperor::ConstDaySharedPtr AncientBooks::Emperor::GetAgainEndDay(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return csvContainer.GetDayContainer()->GetDay(againEndDay);
 }
 
-std::vector<System::String> AncientBooks::Emperor::GetUnansweredQuestion() const
+AncientBooks::Emperor::StringContainer AncientBooks::Emperor::GetUnansweredQuestion() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -416,14 +416,14 @@ System::String AncientBooks::Emperor::GetUnansweredQuestion(int index) const
     return unansweredQuestion.at(index);
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Emperor::GetUnansweredQuestionBegin() const noexcept
+AncientBooks::Emperor::StringContainerConstIter AncientBooks::Emperor::GetUnansweredQuestionBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return unansweredQuestion.cbegin();
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Emperor::GetUnansweredQuestionEnd() const noexcept
+AncientBooks::Emperor::StringContainerConstIter AncientBooks::Emperor::GetUnansweredQuestionEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 

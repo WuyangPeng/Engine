@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:23)
+///	版本：0.9.1.0 (2023/06/29 20:14)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_CUBE_IMPL_H
 #define RENDERING_RESOURCES_TEXTURE_CUBE_IMPL_H
@@ -27,9 +27,9 @@ namespace Rendering
         using ParentType = TextureImpl;
 
     public:
-        explicit TextureCubeImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
-        TextureCubeImpl(DataFormatType format, int length, bool hasMipmaps);
-        TextureCubeImpl(int numCubes, DataFormatType format, int length, bool hasMipmaps);
+        explicit TextureCubeImpl(CoreTools::DisableNotThrow disableNotThrow);
+        TextureCubeImpl(DataFormatType format, int length, bool hasMipMaps);
+        TextureCubeImpl(int numCubes, DataFormatType format, int length, bool hasMipMaps);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -45,12 +45,12 @@ namespace Rendering
         NODISCARD int GetNumLevelBytes(int level) const override;
         NODISCARD int GetLevelOffset(int item, int level) const override;
 
-        NODISCARD bool HasMipmaps() const noexcept override;
+        NODISCARD bool HasMipMaps() const noexcept override;
 
-        void AutogenerateMipmaps() noexcept override;
-        NODISCARD bool WantAutogenerateMipmaps() const noexcept override;
+        void AutoGenerateMipMaps() noexcept override;
+        NODISCARD bool WantAutoGenerateMipMaps() const noexcept override;
 
-        NODISCARD int GetNumSubresources() const noexcept override;
+        NODISCARD int GetNumSubResources() const noexcept override;
         NODISCARD int GetIndex(int item, int level) const override;
 
     private:

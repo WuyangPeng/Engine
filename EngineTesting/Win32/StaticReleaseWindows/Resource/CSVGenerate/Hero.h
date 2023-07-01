@@ -25,8 +25,13 @@ namespace CSVConfigure
     public:
         using ClassType = Hero;
 
+        using CSVRow = CoreTools::CSVRow;
+        using String = System::String;
+        using CharContainer = std::vector<System::TChar>;
+        using CharContainerConstIter = CharContainer::const_iterator;
+
     public:
-        explicit Hero(const CoreTools::CSVRow& csvRow);
+        explicit Hero(const CSVRow& csvRow);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -38,26 +43,26 @@ namespace CSVConfigure
 
         NODISCARD int GetReward() const noexcept;
 
-        NODISCARD System::String GetHeroName() const;
+        NODISCARD String GetHeroName() const;
 
         NODISCARD int64_t GetUniqueIdentifier() const noexcept;
 
         NODISCARD CoreTools::Vector4 GetPosition() const noexcept;
 
-        NODISCARD std::vector<System::TChar> GetDescribe() const;
+        NODISCARD CharContainer GetDescribe() const;
         NODISCARD int GetDescribeCount() const;
         NODISCARD System::TChar GetDescribe(int index) const;
-        NODISCARD std::vector<System::TChar>::const_iterator GetDescribeBegin() const noexcept;
-        NODISCARD std::vector<System::TChar>::const_iterator GetDescribeEnd() const noexcept;
+        NODISCARD CharContainerConstIter GetDescribeBegin() const noexcept;
+        NODISCARD CharContainerConstIter GetDescribeEnd() const noexcept;
 
     private:
         int id;  // Id
         int nextId;  // 下一级Id
         int reward;  // 过关奖励
-        System::String heroName;  // 英雄名称
+        String heroName;  // 英雄名称
         int64_t uniqueIdentifier;  // 唯一标识符
         CoreTools::Vector4 position;  // 位置
-        std::vector<System::TChar> describe;  // 描述
+        CharContainer describe;  // 描述
     };
 }
 

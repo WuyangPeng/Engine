@@ -18,7 +18,7 @@
 #include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Rendering/Renderers/RendererParameter.h"
+#include "Rendering/RendererEngine/RendererParameter.h"
 #include "Framework/Application/GLUTApplicationInformation.h"
 #include "Framework/Application/WindowApplicationInformation.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
@@ -59,7 +59,7 @@ namespace Framework
 #include STSTEM_WARNING_POP
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414) 
+#include SYSTEM_WARNING_DISABLE(26414)
 
     template <typename T>
     int WinMainEntryPoint(System::WindowsHInstance instance, char* commandLine, const System::TChar* engineEnvironment, const System::TChar* engineDirectory, const System::TChar* renderer, [[maybe_unused]] System::WindowsHInstance previousInstance)

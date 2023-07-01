@@ -12,7 +12,7 @@
 #include "WindowApplicationInformationImpl.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "Rendering/Renderers/RendererParameter.h"
+#include "Rendering/RendererEngine/RendererParameter.h"
 
 Framework::WindowApplicationInformationImpl::WindowApplicationInformationImpl(const String& windowTitle, const WindowSize& size, const WindowPoint& point, bool allowResize)
     : windowTitle{ windowTitle },

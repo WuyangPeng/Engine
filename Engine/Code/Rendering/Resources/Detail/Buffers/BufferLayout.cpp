@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:27)
+///	版本：0.9.1.0 (2023/06/29 17:11)
 
 #include "Rendering/RenderingExport.h"
 
@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 
-Rendering::BufferLayout::BufferLayout(const MemberLayoutContainer& memberLayoutContainer)
-    : layout{ memberLayoutContainer }
+Rendering::BufferLayout::BufferLayout(MemberLayoutContainer memberLayoutContainer) noexcept
+    : layout{ std::move(memberLayoutContainer) }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -53,11 +53,10 @@ bool Rendering::BufferLayout::HasMember(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto iter = std::find_if(layout.begin(), layout.end(), [name](const auto& item) {
-        return name == item.GetName();
-    });
-
-    if (iter != layout.end())
+    if (const auto iter = std::ranges::find_if(layout, [name](const auto& item) {
+            return name == item.GetName();
+        });
+        iter != layout.end())
     {
         return true;
     }
@@ -71,17 +70,16 @@ Rendering::MemberLayout Rendering::BufferLayout::GetMember(const std::string& na
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto iter = std::find_if(layout.begin(), layout.end(), [name](const auto& item) {
-        return name == item.GetName();
-    });
-
-    if (iter != layout.end())
+    if (const auto iter = std::ranges::find_if(layout, [name](const auto& item) {
+            return name == item.GetName();
+        });
+        iter != layout.end())
     {
         return *iter;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("查找成员名字失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("查找成员名字失败。"s))
     }
 }
 
@@ -117,8 +115,8 @@ void Rendering::BufferLayout::SortLayouts()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    std::sort(layout.begin(), layout.end(),
-              [](const MemberLayout& lhs, const MemberLayout& rhs) noexcept {
-                  return lhs.GetOffset() < rhs.GetOffset();
-              });
+    std::ranges::sort(layout,
+                      [](const MemberLayout& lhs, const MemberLayout& rhs) noexcept {
+                          return lhs.GetOffset() < rhs.GetOffset();
+                      });
 }

@@ -14,7 +14,7 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "Rendering/Renderers/Renderer.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
 namespace Framework
@@ -81,13 +81,13 @@ bool Framework::PixelViewMiddleLayer::Idle(int64_t timeDelta)
 
     if (ParentType::Idle(timeDelta) && renderer)
     {
-        if (renderer->PreDraw())
+        //  if (renderer->PreDraw())
         {
             renderer->ClearBuffers();
             impl->Draw(renderer);
             ScreenOverlay();
-            renderer->PostDraw();
-            renderer->DisplayColorBuffer();
+            // renderer->PostDraw();
+            renderer->DisplayColorBuffer(0);
         }
 
         return true;

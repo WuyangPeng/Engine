@@ -66,6 +66,17 @@ System::String CoreTools::ContainerFunctionParsing::GenerateParsing() const
 
     content += GenerateIndentation();
     content += TextParsing::gParsingFunction;
+
+    content += GenerateIndentation();
+    content += SYSTEM_TEXT("void Load(const CSVContent& csvContent);\n");
+
+    if (GetCSVHead().GetCSVFormatType() == CSVFormatType::Default ||
+        GetCSVHead().GetCSVFormatType() == CSVFormatType::Key)
+    {
+        content += GenerateIndentation();
+        content += SYSTEM_TEXT("void Unique();\n");
+    } 
+
     content += TextParsing::gNewlineCharacter;
 
     return content;

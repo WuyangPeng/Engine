@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:07)
+///	版本：0.9.1.0 (2023/06/28 09:58)
 
 #ifndef RENDERING_BASE_GRAPHICS_OBJECT_H
 #define RENDERING_BASE_GRAPHICS_OBJECT_H
@@ -13,16 +13,19 @@
 #include "Rendering/RenderingDll.h"
 
 #include "BaseFwd.h"
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/ObjectSystems/Object.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
+
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(GraphicsObject, GraphicsObjectImpl);
 
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE GraphicsObject : public CoreTools::Object
     {
     public:
-        using ClassType = GraphicsObject;
+        COPY_UNSHARED_TYPE_DECLARE(GraphicsObject);
         using ParentType = Object;
 
         using ObjectLink = CoreTools::ObjectLink;
@@ -30,9 +33,15 @@ namespace Rendering
         using BufferTarget = CoreTools::BufferTarget;
         using ObjectRegister = CoreTools::ObjectRegister;
         using RendererObjectSharedPtr = std::shared_ptr<RendererObject>;
+        using RendererObjectBridgeSharedPtr = std::shared_ptr<RendererObjectBridge>;
 
     public:
-        GraphicsObject(const std::string& name, GraphicsObjectType type);
+        GraphicsObject(const std::string& name, GraphicsObjectType graphicsObjectType);
+        ~GraphicsObject() noexcept;
+        GraphicsObject(const GraphicsObject& rhs) = default;
+        GraphicsObject& operator=(const GraphicsObject& rhs) = default;
+        GraphicsObject(GraphicsObject&& rhs) noexcept = default;
+        GraphicsObject& operator=(GraphicsObject&& rhs) noexcept = default;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -41,19 +50,20 @@ namespace Rendering
         NODISCARD GraphicsObjectType GetType() const noexcept;
 
         NODISCARD bool IsBuffer() const noexcept;
-
         NODISCARD bool IsTexture() const noexcept;
-
         NODISCARD bool IsTextureArray() const noexcept;
-
         NODISCARD bool IsShader() const noexcept;
-
         NODISCARD bool IsDrawingState() const noexcept;
 
         NODISCARD virtual RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) = 0;
 
+        void SetRendererObjectBridge(const RendererObjectBridgeSharedPtr& aRendererObjectBridge) noexcept;
+
     private:
-        GraphicsObjectType graphicsObjectType;
+        void Release();
+
+    private:
+        PackageType impl;
     };
 
 #include STSTEM_WARNING_PUSH

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:23)
+///	版本：0.9.1.0 (2023/06/29 17:07)
 
 #ifndef RENDERING_RESOURCES_VERTEX_BUFFER_IMPL_H
 #define RENDERING_RESOURCES_VERTEX_BUFFER_IMPL_H
@@ -26,12 +26,13 @@ namespace Rendering
     {
     public:
         using ClassType = VertexBufferImpl;
-        using StructuredBufferSharedPtr = std::shared_ptr<StructuredBuffer>;
-        using VertexFormatSharedPtr = std::shared_ptr<VertexFormat>;
+        using VertexBufferSharedPtr = std::shared_ptr<ClassType>;
+
         using BufferTarget = CoreTools::BufferTarget;
         using BufferSource = CoreTools::BufferSource;
-        using ImplSharedPtr = std::shared_ptr<ClassType>;
         using Semantic = VertexFormatFlags::Semantic;
+        using VertexFormatSharedPtr = std::shared_ptr<VertexFormat>;
+        using StructuredBufferSharedPtr = std::shared_ptr<StructuredBuffer>;
 
     public:
         explicit VertexBufferImpl(const VertexFormat& format);
@@ -47,7 +48,7 @@ namespace Rendering
         void Save(BufferTarget& target) const;
         void Load(BufferSource& source);
 
-        NODISCARD ImplSharedPtr Clone() const;
+        NODISCARD VertexBufferSharedPtr Clone() const;
 
         NODISCARD int GetIndex(Semantic usage, int usageIndex) const noexcept;
         NODISCARD DataFormatType GetAttributeType(int attribute) const;

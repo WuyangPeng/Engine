@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:22)
+///	版本：0.9.1.0 (2023/06/29 19:54)
 
 #ifndef RENDERING_RESOURCES_LOAD_TEXTURE_DETAIL_H
 #define RENDERING_RESOURCES_LOAD_TEXTURE_DETAIL_H
@@ -18,6 +18,9 @@
 #include "Rendering/Resources/Detail/Textures/TextureData.h"
 #include "Rendering/Resources/Detail/Textures/TextureImpl.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
+#include "Rendering/Resources/Textures/Texture1DArray.h"
+#include "Rendering/Resources/Textures/Texture2DArray.h"
+#include "Rendering/Resources/Textures/TextureCubeArray.h"
 
 template <typename TextureType, int NumDimensions>
 TextureType Rendering::LoadTexture::CreateTexture1D(ReadFileManager& inFile)
@@ -30,13 +33,13 @@ TextureType Rendering::LoadTexture::CreateTexture1D(ReadFileManager& inFile)
     auto dimension0 = 0;
     inFile.Read(sizeof(int32_t), &dimension0);
 
-    auto hasMipmaps = false;
-    inFile.Read(sizeof(bool), &hasMipmaps);
+    auto hasMipMaps = false;
+    inFile.Read(sizeof(bool), &hasMipMaps);
 
     auto numItems = 0;
     inFile.Read(sizeof(int32_t), &numItems);
 
-    TextureType texture{ std::make_shared<Texture1D>(dataFormatType, dimension0, hasMipmaps) };
+    auto texture = std::make_shared<Texture1D>(dataFormatType, dimension0, hasMipMaps);
     texture->ReadFromFile(inFile);
 
     return texture;
@@ -53,13 +56,13 @@ TextureType Rendering::LoadTexture::CreateTexture1DArray(ReadFileManager& inFile
     auto dimension0 = 0;
     inFile.Read(sizeof(int32_t), &dimension0);
 
-    auto hasMipmaps = false;
-    inFile.Read(sizeof(bool), &hasMipmaps);
+    auto hasMipMaps = false;
+    inFile.Read(sizeof(bool), &hasMipMaps);
 
     auto numItems = 0;
     inFile.Read(sizeof(int32_t), &numItems);
 
-    TextureType texture{ std::make_shared<Texture1DArray>(numItems, dataFormatType, dimension0, hasMipmaps) };
+    auto texture = std::make_shared<Texture1DArray>(numItems, dataFormatType, dimension0, hasMipMaps);
     texture->ReadFromFile(inFile);
 
     return texture;
@@ -79,13 +82,13 @@ TextureType Rendering::LoadTexture::CreateTexture2D(ReadFileManager& inFile)
     auto dimension1 = 0;
     inFile.Read(sizeof(int32_t), &dimension1);
 
-    auto hasMipmaps = false;
-    inFile.Read(sizeof(bool), &hasMipmaps);
+    auto hasMipMaps = false;
+    inFile.Read(sizeof(bool), &hasMipMaps);
 
     auto numItems = 0;
     inFile.Read(sizeof(int32_t), &numItems);
 
-    TextureType texture{ std::make_shared<ActualType>(dataFormatType, dimension0, dimension1, hasMipmaps) };
+    auto texture = std::make_shared<ActualType>(dataFormatType, dimension0, dimension1, hasMipMaps);
     texture->ReadFromFile(inFile);
 
     return texture;
@@ -105,13 +108,13 @@ TextureType Rendering::LoadTexture::CreateTexture2DArray(ReadFileManager& inFile
     auto dimension1 = 0;
     inFile.Read(sizeof(int32_t), &dimension1);
 
-    auto hasMipmaps = false;
-    inFile.Read(sizeof(bool), &hasMipmaps);
+    auto hasMipMaps = false;
+    inFile.Read(sizeof(bool), &hasMipMaps);
 
     auto numItems = 0;
     inFile.Read(sizeof(int32_t), &numItems);
 
-    TextureType texture{ std::make_shared<Texture2DArray>(numItems, dataFormatType, dimension0, dimension1, hasMipmaps) };
+    auto texture = std::make_shared<Texture2DArray>(numItems, dataFormatType, dimension0, dimension1, hasMipMaps);
     texture->ReadFromFile(inFile);
 
     return texture;
@@ -134,13 +137,13 @@ TextureType Rendering::LoadTexture::CreateTexture3D(ReadFileManager& inFile)
     auto dimension2 = 0;
     inFile.Read(sizeof(int32_t), &dimension2);
 
-    auto hasMipmaps = false;
-    inFile.Read(sizeof(bool), &hasMipmaps);
+    auto hasMipMaps = false;
+    inFile.Read(sizeof(bool), &hasMipMaps);
 
     auto numItems = 0;
     inFile.Read(sizeof(int32_t), &numItems);
 
-    TextureType texture{ std::make_shared<Texture3D>(dataFormatType, dimension0, dimension1, dimension2, hasMipmaps) };
+    auto texture = std::make_shared<Texture3D>(dataFormatType, dimension0, dimension1, dimension2, hasMipMaps);
     texture->ReadFromFile(inFile);
 
     return texture;
@@ -157,13 +160,13 @@ TextureType Rendering::LoadTexture::CreateTextureCube(ReadFileManager& inFile)
     auto dimension0 = 0;
     inFile.Read(sizeof(int32_t), &dimension0);
 
-    auto hasMipmaps = false;
-    inFile.Read(sizeof(bool), &hasMipmaps);
+    auto hasMipMaps = false;
+    inFile.Read(sizeof(bool), &hasMipMaps);
 
     auto numItems = 0;
     inFile.Read(sizeof(int32_t), &numItems);
 
-    TextureType texture{ std::make_shared<TextureCube>(dataFormatType, dimension0, hasMipmaps) };
+    auto texture = std::make_shared<TextureCube>(dataFormatType, dimension0, hasMipMaps);
     texture->ReadFromFile(inFile);
 
     return texture;
@@ -180,13 +183,13 @@ TextureType Rendering::LoadTexture::CreateTextureCubeArray(ReadFileManager& inFi
     auto dimension0 = 0;
     inFile.Read(sizeof(int32_t), &dimension0);
 
-    auto hasMipmaps = false;
-    inFile.Read(sizeof(bool), &hasMipmaps);
+    auto hasMipMaps = false;
+    inFile.Read(sizeof(bool), &hasMipMaps);
 
     auto numItems = 0;
     inFile.Read(sizeof(int32_t), &numItems);
 
-    TextureType texture{ std::make_shared<TextureCubeArray>(numItems, dataFormatType, dimension0, hasMipmaps) };
+    auto texture = std::make_shared<TextureCubeArray>(numItems, dataFormatType, dimension0, hasMipMaps);
     texture->ReadFromFile(inFile);
 
     return texture;

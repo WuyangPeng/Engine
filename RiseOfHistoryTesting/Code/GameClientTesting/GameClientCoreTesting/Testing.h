@@ -5,9 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起测试版本：0.9.0.12 (2023/06/17 13:05)
+///	版本：0.9.1.0 (2023/06/19 17:34)
 
 #ifndef GAME_CLIENT_CORE_TESTING_H
 #define GAME_CLIENT_CORE_TESTING_H
+
+#include "EngineSuite/EngineSuite.h"
 
 #endif  // GAME_CLIENT_CORE_TESTING_H

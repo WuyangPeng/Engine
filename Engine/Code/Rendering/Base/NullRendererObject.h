@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:07)
+///	版本：0.9.1.0 (2023/06/28 10:26)
 
 #ifndef RENDERING_BASE_NULL_RENDERER_OBJECT_H
 #define RENDERING_BASE_NULL_RENDERER_OBJECT_H
@@ -16,7 +16,7 @@
 
 namespace Rendering
 {
-    class RENDERING_DEFAULT_DECLARE NullRendererObject : public RendererObject
+    class RENDERING_DEFAULT_DECLARE NullRendererObject final : public RendererObject
     {
     public:
         using ClassType = NullRendererObject;
@@ -28,6 +28,20 @@ namespace Rendering
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void Enable() noexcept override;
+
+        NODISCARD bool Update() noexcept override;
+        NODISCARD bool Update(int level) noexcept override;
+        NODISCARD bool Update(int item, int level) noexcept override;
+
+        NODISCARD bool CopyGpuToCpu() noexcept override;
+        NODISCARD bool CopyGpuToCpu(int level) noexcept override;
+        NODISCARD bool CopyGpuToCpu(int item, int level) noexcept override;
+
+        NODISCARD bool CopyCpuToGpu() noexcept override;
+        NODISCARD bool CopyCpuToGpu(int level) noexcept override;
+        NODISCARD bool CopyCpuToGpu(int item, int level) noexcept override;
+
+        NODISCARD bool GetNumActiveElements() noexcept override;
     };
 }
 

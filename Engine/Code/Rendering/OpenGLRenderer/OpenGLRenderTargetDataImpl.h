@@ -15,7 +15,7 @@
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Resources/ResourcesFwd.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
 
@@ -32,7 +32,7 @@ namespace Rendering
         using Enum = System::OpenGLEnum;
 
     public:
-        OpenGLRenderTargetDataImpl(Renderer* renderer, const DrawTarget* renderTarget);
+        OpenGLRenderTargetDataImpl(BaseRenderer* renderer, const DrawTarget* renderTarget);
         virtual ~OpenGLRenderTargetDataImpl() noexcept = default;
         OpenGLRenderTargetDataImpl(const OpenGLRenderTargetDataImpl& rhs) = delete;
         OpenGLRenderTargetDataImpl& operator=(const OpenGLRenderTargetDataImpl& rhs) = delete;
@@ -42,14 +42,14 @@ namespace Rendering
         CLASS_INVARIANT_DECLARE;
 
         // 渲染目标的操作。
-        virtual void Enable(Renderer* renderer) noexcept;
-        virtual void Disable(Renderer* renderer) noexcept;
-        NODISCARD virtual ConstTexture2DSharedPtr ReadColor(int index, Renderer* renderer);
+        virtual void Enable(BaseRenderer* renderer) noexcept;
+        virtual void Disable(BaseRenderer* renderer) noexcept;
+        NODISCARD virtual ConstTexture2DSharedPtr ReadColor(int index, BaseRenderer* renderer);
 
     private:
         void CreateFramebufferObject() noexcept;
-        NODISCARD UInt CreateDrawBuffers(Renderer* renderer, const DrawTarget* aRenderTarget);
-        void CreateDepthStencilTexture(Renderer* renderer, const DrawTarget* aRenderTarget, UInt previousBind);
+        NODISCARD UInt CreateDrawBuffers(const BaseRenderer* renderer, const DrawTarget* aRenderTarget);
+        void CreateDepthStencilTexture(const BaseRenderer* renderer, const DrawTarget* aRenderTarget, UInt previousBind);
         void CheckFramebufferStatus() noexcept;
 
     private:

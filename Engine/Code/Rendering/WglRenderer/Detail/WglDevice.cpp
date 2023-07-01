@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:20)
+///	版本：0.9.1.0 (2023/06/25 16:58)
 
 #include "Rendering/RenderingExport.h"
 
@@ -33,6 +33,10 @@ void Rendering::WglDevice::Init()
     ResetSize();
 }
 
+void Rendering::WglDevice::Execute(MAYBE_UNUSED const ComputeProgramSharedPtr& computeProgram, MAYBE_UNUSED int numXGroups, MAYBE_UNUSED int numYGroups, MAYBE_UNUSED int numZGroups) noexcept
+{
+}
+
 #ifdef OPEN_CLASS_INVARIANT
 
 bool Rendering::WglDevice::IsValid() const noexcept
@@ -49,13 +53,13 @@ Rendering::WglDevice::RenderingDeviceSharedPtr Rendering::WglDevice::Clone() con
     return std::make_shared<ClassType>(*this);
 }
 
-void Rendering::WglDevice::SwapBuffers()
+void Rendering::WglDevice::SwapBuffers(int syncInterval)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    if (!System::DisplayColorBuffer(device, 0))
+    if (!System::DisplayColorBuffer(device, syncInterval))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("交换缓冲区失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("交换缓冲区失败。"s))
     }
 }
 
@@ -66,7 +70,7 @@ void Rendering::WglDevice::ResetSize()
     System::WindowsRect windowsRect{};
     if (!System::GetSystemClientRect(hWnd, windowsRect))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("获取窗口大小失败。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("获取窗口大小失败。"s))
     }
 
     SetSize(windowsRect.right - windowsRect.left, windowsRect.bottom - windowsRect.top);

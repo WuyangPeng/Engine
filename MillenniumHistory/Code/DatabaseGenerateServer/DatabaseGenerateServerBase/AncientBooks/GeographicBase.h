@@ -22,6 +22,8 @@ namespace AncientBooks
     public:
         using ClassType = GeographicBase;
 
+        using String = System::String;
+
     public:
         GeographicBase() noexcept = default;
         explicit GeographicBase(int key) noexcept;
@@ -38,7 +40,7 @@ namespace AncientBooks
 
         NODISCARD virtual int GetId() const noexcept;
 
-        NODISCARD virtual System::String GetName() const;
+        NODISCARD virtual String GetName() const;
 
     private:
         int key{};

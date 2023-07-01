@@ -24,11 +24,13 @@ namespace CSVConfigure
     {
     public:
         using ClassType = EquipContainer;
+
         using ConstEquipBaseSharedPtr = std::shared_ptr<const EquipBase>;
         using Container = std::vector<ConstEquipBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit EquipContainer(const CoreTools::CSVContent& csvContent);
+        explicit EquipContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,8 @@ namespace CSVConfigure
         NODISCARD Container GetEquip(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
 
     private:
         Container equip;

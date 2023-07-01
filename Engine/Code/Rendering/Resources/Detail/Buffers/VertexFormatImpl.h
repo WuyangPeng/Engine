@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:23)
+///	版本：0.9.1.0 (2023/06/29 17:07)
 
 #ifndef RENDERING_RESOURCES_VERTEX_FORMAT_IMPL_H
 #define RENDERING_RESOURCES_VERTEX_FORMAT_IMPL_H
@@ -25,6 +25,7 @@ namespace Rendering
     {
     public:
         using ClassType = VertexFormatImpl;
+
         using Semantic = VertexFormatFlags::Semantic;
         using BufferTarget = CoreTools::BufferTarget;
         using BufferSource = CoreTools::BufferSource;
@@ -65,10 +66,12 @@ namespace Rendering
 
     private:
         static constexpr auto attributes = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::Attributes);
+        using ElementsType = std::array<VertexFormatAttribute, attributes>;
 
+    private:
         int numAttributes;
         int stride;
-        std::array<VertexFormatAttribute, attributes> elements;
+        ElementsType elements;
     };
 }
 

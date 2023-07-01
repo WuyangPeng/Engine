@@ -20,8 +20,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "CoreTools/ObjectSystems/StreamSize.h" 
 #include "Rendering/SceneGraph/Visual.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, MorphController);
@@ -111,7 +110,7 @@ bool Rendering::MorphController::Update(double applicationTime)
             }
 
             visual->UpdateModelSpace(VisualUpdateType::Normals);
-            RENDERER_MANAGE_SINGLETON.UpdateAll(visual->GetConstVertexBuffer());
+        
 
             return true;
         }

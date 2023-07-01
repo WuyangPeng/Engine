@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:29)
+///	版本：0.9.1.0 (2023/06/29 20:26)
 
 #include "Rendering/RenderingExport.h"
 
@@ -23,8 +23,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTexture2.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/DataFormat.h"
 #include "Rendering/Resources/Detail/Textures/Texture2DImpl.h"
 #include "Rendering/Resources/Flags/UsageType.h"
@@ -35,19 +34,19 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Texture2D);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture2D);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture2D);
 
-Rendering::Texture2D::Texture2D(DataFormatType format, int width, int height, bool hasMipmaps)
-    : ParentType{ ImplType::GetTotalElements(1, width, height, 1, hasMipmaps),
+Rendering::Texture2D::Texture2D(DataFormatType format, int width, int height, bool hasMipMaps)
+    : ParentType{ ImplType::GetTotalElements(1, width, height, 1, hasMipMaps),
                   DataFormat::GetNumBytesPerStruct(format),
                   GraphicsObjectType::Texture2 },
-      impl{ format, width, height, hasMipmaps },
+      impl{ format, width, height, hasMipMaps },
       shared{ false }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Texture2D::Texture2D(DataFormatType format, int width, int height, bool hasMipmaps, GraphicsObjectType type)
-    : ParentType{ ImplType::GetTotalElements(1, width, height, 1, hasMipmaps), DataFormat::GetNumBytesPerStruct(format), type },
-      impl{ format, width, height, hasMipmaps },
+Rendering::Texture2D::Texture2D(DataFormatType format, int width, int height, bool hasMipMaps, GraphicsObjectType type)
+    : ParentType{ ImplType::GetTotalElements(1, width, height, 1, hasMipMaps), DataFormat::GetNumBytesPerStruct(format), type },
+      impl{ format, width, height, hasMipMaps },
       shared{ false }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -73,7 +72,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture2D, GetNumLevelBytes, in
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture2D, GetWidth, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture2D, GetHeight, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, HasMipmaps, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, HasMipMaps, bool)
 
 void Rendering::Texture2D::SaveToFile(WriteFileManager& outFile) const
 {
@@ -110,9 +109,9 @@ int Rendering::Texture2D::GetLevelOffset(int item, int level) const
     return impl->GetLevelOffset(item, level);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, AutogenerateMipmaps, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, WantAutogenerateMipmaps, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, GetNumSubresources, int)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, AutoGenerateMipMaps, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, WantAutoGenerateMipMaps, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture2D, GetNumSubResources, int)
 
 int Rendering::Texture2D::GetIndex(int item, int level) const
 {
@@ -234,8 +233,12 @@ Rendering::Texture2D::RendererObjectSharedPtr Rendering::Texture2D::CreateRender
     switch (rendererTypes)
     {
         case RendererTypes::OpenGL:
+        {
             return std::make_shared<OpenGLTexture2>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        }
         default:
-            return ParentType::CreateRendererObject(rendererTypes);
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
+        }
     }
 }

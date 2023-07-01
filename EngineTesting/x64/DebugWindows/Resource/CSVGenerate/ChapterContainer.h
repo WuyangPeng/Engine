@@ -24,11 +24,13 @@ namespace CSVConfigure
     {
     public:
         using ClassType = ChapterContainer;
+
         using ConstChapterBaseSharedPtr = std::shared_ptr<const ChapterBase>;
         using Container = std::vector<ConstChapterBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit ChapterContainer(const CoreTools::CSVContent& csvContent);
+        explicit ChapterContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,9 @@ namespace CSVConfigure
         NODISCARD Container GetChapter(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container chapter;

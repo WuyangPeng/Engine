@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = Country;
         using ParentType = CountryBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Country(const CoreTools::CSVRow& csvRow);
+        explicit Country(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -34,44 +36,44 @@ namespace AncientBooks
         NODISCARD int GetId() const noexcept override;
 
         NODISCARD int GetImperialCourt() const noexcept override;
-        NODISCARD std::shared_ptr<const ImperialCourtMappingType> GetImperialCourt(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstImperialCourtSharedPtr GetImperialCourt(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD System::String GetCategory() const override;
+        NODISCARD String GetCategory() const override;
 
         NODISCARD int GetBeginYear() const noexcept override;
-        NODISCARD std::shared_ptr<const YearMappingType> GetBeginYear(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstYearSharedPtr GetBeginYear(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetBeginMonth() const noexcept override;
-        NODISCARD std::shared_ptr<const MonthMappingType> GetBeginMonth(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstMonthSharedPtr GetBeginMonth(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetBeginSexagenaryCycle() const noexcept override;
-        NODISCARD std::shared_ptr<const SexagenaryCycleMappingType> GetBeginSexagenaryCycle(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstSexagenaryCycleSharedPtr GetBeginSexagenaryCycle(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetBeginDay() const noexcept override;
-        NODISCARD std::shared_ptr<const DayMappingType> GetBeginDay(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstDaySharedPtr GetBeginDay(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetEndYear() const noexcept override;
-        NODISCARD std::shared_ptr<const YearMappingType> GetEndYear(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstYearSharedPtr GetEndYear(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetEndMonth() const noexcept override;
-        NODISCARD std::shared_ptr<const MonthMappingType> GetEndMonth(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstMonthSharedPtr GetEndMonth(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetEndSexagenaryCycle() const noexcept override;
-        NODISCARD std::shared_ptr<const SexagenaryCycleMappingType> GetEndSexagenaryCycle(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstSexagenaryCycleSharedPtr GetEndSexagenaryCycle(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetEndDay() const noexcept override;
-        NODISCARD std::shared_ptr<const DayMappingType> GetEndDay(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstDaySharedPtr GetEndDay(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD std::vector<System::String> GetUnansweredQuestion() const override;
+        NODISCARD StringContainer GetUnansweredQuestion() const override;
         NODISCARD int GetUnansweredQuestionCount() const override;
-        NODISCARD System::String GetUnansweredQuestion(int index) const override;
-        NODISCARD std::vector<System::String>::const_iterator GetUnansweredQuestionBegin() const noexcept override;
-        NODISCARD std::vector<System::String>::const_iterator GetUnansweredQuestionEnd() const noexcept override;
+        NODISCARD String GetUnansweredQuestion(int index) const override;
+        NODISCARD StringContainerConstIter GetUnansweredQuestionBegin() const noexcept override;
+        NODISCARD StringContainerConstIter GetUnansweredQuestionEnd() const noexcept override;
 
     private:
         int id;  // Id
         int imperialCourt;  // 王朝
-        System::String category;  // 名称
+        String category;  // 名称
         int beginYear;  // 开始年
         int beginMonth;  // 开始月
         int beginSexagenaryCycle;  // 开始干支日
@@ -80,7 +82,7 @@ namespace AncientBooks
         int endMonth;  // 结束月
         int endSexagenaryCycle;  // 结束干支日
         int endDay;  // 结束日
-        std::vector<System::String> unansweredQuestion;  // 存疑
+        StringContainer unansweredQuestion;  // 存疑
     };
 }
 

@@ -15,7 +15,7 @@
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Resources/ResourcesFwd.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
 
@@ -29,14 +29,14 @@ namespace Rendering
         NON_COPY_TYPE_DECLARE(OpenGLRenderTargetData);
 
     public:
-        OpenGLRenderTargetData(Renderer* renderer, const DrawTarget* renderTarget);
+        OpenGLRenderTargetData(BaseRenderer* renderer, const DrawTarget* renderTarget);
 
         CLASS_INVARIANT_DECLARE;
 
         // 渲染目标的操作。
-        void Enable(Renderer* renderer) noexcept;
-        void Disable(Renderer* renderer) noexcept;
-        NODISCARD ConstTexture2DSharedPtr ReadColor(int index, Renderer* renderer);
+        void Enable(BaseRenderer* renderer) noexcept;
+        void Disable(BaseRenderer* renderer) noexcept;
+        NODISCARD ConstTexture2DSharedPtr ReadColor(int index, BaseRenderer* renderer);
 
     private:
         PackageType impl;

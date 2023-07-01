@@ -29,13 +29,15 @@ namespace CoreTools
                                    StringView actualType,
                                    StringView functionName,
                                    StringView valueType,
-                                   StringView baseReturnDescribe)
+                                   StringView baseReturnDescribe,
+                                   StringView abbreviation)
             : csvDataType{ csvDataType },
               describe{ describe },
               actualType{ actualType },
               functionName{ functionName },
               valueType{ valueType },
-              baseReturnDescribe{ baseReturnDescribe }
+              baseReturnDescribe{ baseReturnDescribe },
+              abbreviation{ abbreviation }
         {
         }
 
@@ -69,6 +71,11 @@ namespace CoreTools
             return baseReturnDescribe;
         }
 
+        NODISCARD constexpr StringView GetAbbreviation() const noexcept
+        {
+            return abbreviation;
+        }
+
     private:
         CSVDataType csvDataType;
         StringView describe;
@@ -76,6 +83,7 @@ namespace CoreTools
         StringView functionName;
         StringView valueType;
         StringView baseReturnDescribe;
+        StringView abbreviation;
     };
 }
 

@@ -36,11 +36,11 @@ AncientBooks::ReignTitleContainer::Container AncientBooks::ReignTitleContainer::
 
     Container result{};
 
-    for (const auto& value : reignTitle)
+    for (const auto& element : reignTitle)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

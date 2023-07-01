@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = Category;
         using ParentType = CategoryBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Category(const CoreTools::CSVRow& csvRow);
+        explicit Category(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -34,14 +36,14 @@ namespace AncientBooks
         NODISCARD int GetId() const noexcept override;
 
         NODISCARD int GetGather() const noexcept override;
-        NODISCARD std::shared_ptr<const GatherMappingType> GetGather(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstGatherSharedPtr GetGather(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD System::String GetCategory() const override;
+        NODISCARD String GetCategory() const override;
 
     private:
         int id;  // Id
         int gather;  // ¼¯
-        System::String category;  // Ãû³Æ
+        String category;  // Ãû³Æ
     };
 }
 

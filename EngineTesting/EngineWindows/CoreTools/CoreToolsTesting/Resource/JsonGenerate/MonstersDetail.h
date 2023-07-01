@@ -36,11 +36,11 @@ JsonConfigure::MonstersContainer::DataContainer JsonConfigure::MonstersContainer
 
     DataContainer result{};
 
-    for (const auto& value : data)
+    for (const auto& element : data)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 
@@ -69,11 +69,11 @@ JsonConfigure::Monsters::Data::ElementsContainer JsonConfigure::Monsters::Data::
 
     ElementsContainer result{};
 
-    for (const auto& value : elements)
+    for (const auto& element : elements)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

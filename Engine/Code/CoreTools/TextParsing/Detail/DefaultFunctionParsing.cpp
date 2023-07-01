@@ -60,7 +60,7 @@ System::String CoreTools::DefaultFunctionParsing::GenerateCSVRowConstructor() co
     content += TextParsing::gExplicit;
     content += TextParsing::gSpace;
     content += className;
-    content += TextParsing::gCSVRow;
+    content += SYSTEM_TEXT("(const CSVRow& csvRow)");
     content += TextParsing::gSemicolonNewline;
 
     return content;

@@ -16,7 +16,7 @@
 
 using namespace std::literals;
 
-CSVConfigure::Equip::Equip(const CoreTools::CSVRow& csvRow)
+CSVConfigure::Equip::Equip(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       nextId{ csvRow.GetInt(SYSTEM_TEXT("nextId"s)) },
@@ -81,7 +81,7 @@ CoreTools::Vector3 CSVConfigure::Equip::GetPosition() const noexcept
     return position;
 }
 
-std::deque<bool> CSVConfigure::Equip::GetMask() const
+CSVConfigure::Equip::BoolContainer CSVConfigure::Equip::GetMask() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -102,14 +102,14 @@ bool CSVConfigure::Equip::GetMask(int index) const
     return mask.at(index);
 }
 
-std::deque<bool>::const_iterator CSVConfigure::Equip::GetMaskBegin() const noexcept
+CSVConfigure::Equip::BoolContainerConstIter CSVConfigure::Equip::GetMaskBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return mask.cbegin();
 }
 
-std::deque<bool>::const_iterator CSVConfigure::Equip::GetMaskEnd() const noexcept
+CSVConfigure::Equip::BoolContainerConstIter CSVConfigure::Equip::GetMaskEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -123,7 +123,7 @@ int CSVConfigure::Equip::GetHeroId() const noexcept
     return heroId;
 }
 
-std::shared_ptr<const CSVConfigure::HeroMappingType> CSVConfigure::Equip::GetHeroId(const CSVConfigureContainer& csvContainer) const
+CSVConfigure::Equip::ConstHeroSharedPtr CSVConfigure::Equip::GetHeroId(const CSVConfigureContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

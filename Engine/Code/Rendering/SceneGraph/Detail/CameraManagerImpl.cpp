@@ -11,7 +11,6 @@
 
 #include "CameraManagerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "Rendering/Renderers/RendererInput.h"
 
 Rendering::CameraManagerImpl::CameraManagerImpl() noexcept
     : depthType{ DepthType::MinusOneToOne }

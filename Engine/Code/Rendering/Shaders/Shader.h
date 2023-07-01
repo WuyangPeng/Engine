@@ -17,7 +17,7 @@
 #include "Rendering/Base/GraphicsObject.h"
 #include "Rendering/OpenGLRenderer/Flags/ReferenceType.h"
 #include "Rendering/OpenGLRenderer/GLSL/GLSLReflection.h"
-#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Resources/Buffers/MemberLayout.h"
 #include "Rendering/Resources/Detail/Buffers/BufferLayout.h"
 #include "Rendering/Resources/ResourcesFwd.h"

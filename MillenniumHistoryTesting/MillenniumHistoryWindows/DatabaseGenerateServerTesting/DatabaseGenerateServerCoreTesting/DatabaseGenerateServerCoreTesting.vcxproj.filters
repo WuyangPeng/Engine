@@ -19,6 +19,9 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{68f14701-d87c-4a2f-ac11-7381ed07c781}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EngineSuite 头文件">
+      <UniqueIdentifier>{277d1bc8-ce99-4697-a074-9377d66e3e2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
@@ -46,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\TestingHelper.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\EngineSuite\EngineSuite.h">
+      <Filter>EngineSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

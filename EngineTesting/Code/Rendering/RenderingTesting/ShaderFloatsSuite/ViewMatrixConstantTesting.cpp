@@ -19,7 +19,7 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
+
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
@@ -43,7 +43,7 @@ void Rendering::ViewMatrixConstantTesting::DoRunUnitTest()
 void Rendering::ViewMatrixConstantTesting::MainTest()
 {
     CameraManager::Create();
-    RendererManager::Create();
+    
 
     CoreTools::InitTerm::ExecuteInitializer();
 
@@ -54,7 +54,7 @@ void Rendering::ViewMatrixConstantTesting::MainTest()
 
     CoreTools::InitTerm::ExecuteTerminator();
 
-    RendererManager::Destroy();
+    
     CameraManager::Destroy();
 }
 

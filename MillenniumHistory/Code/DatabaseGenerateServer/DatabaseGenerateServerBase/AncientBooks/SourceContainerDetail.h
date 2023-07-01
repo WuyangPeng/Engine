@@ -36,11 +36,11 @@ AncientBooks::SourceContainer::Container AncientBooks::SourceContainer::GetSourc
 
     Container result{};
 
-    for (const auto& value : source)
+    for (const auto& element : source)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

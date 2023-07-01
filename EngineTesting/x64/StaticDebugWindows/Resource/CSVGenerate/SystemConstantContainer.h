@@ -24,17 +24,20 @@ namespace CSVConfigure
     {
     public:
         using ClassType = SystemConstantContainer;
+
         using ConstSystemConstantSharedPtr = std::shared_ptr<const SystemConstant>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit SystemConstantContainer(const CoreTools::CSVContent& csvContent);
+        explicit SystemConstantContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD ConstSystemConstantSharedPtr GetSystemConstant() const noexcept;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
 
     private:
         ConstSystemConstantSharedPtr systemConstant;

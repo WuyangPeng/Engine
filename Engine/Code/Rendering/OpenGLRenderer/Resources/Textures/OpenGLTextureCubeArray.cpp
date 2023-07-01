@@ -102,7 +102,7 @@ bool Rendering::OpenGLTextureCubeArray::CanAutoGenerateMipmaps() const
 
     auto texture = GetTexture();
 
-    return texture && texture->HasMipmaps() && texture->WantAutogenerateMipmaps();
+    return texture && texture->HasMipMaps() && texture->WantAutoGenerateMipMaps();
 }
 
 void Rendering::OpenGLTextureCubeArray::Enable() noexcept
@@ -127,4 +127,32 @@ void Rendering::OpenGLTextureCubeArray::LoadTextureLevel(int item, int level, co
 
         System::SetGLTexturesSubImage3D(targetFace, level, 0, 0, cube, width, height, 1, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
     }
+}
+
+bool Rendering::OpenGLTextureCubeArray::Update(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTextureCubeArray::CopyGpuToCpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTextureCubeArray::CopyCpuToGpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLTextureCubeArray::GetNumActiveElements()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
 }

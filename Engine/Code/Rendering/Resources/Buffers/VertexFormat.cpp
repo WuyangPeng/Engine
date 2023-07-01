@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:25)
+///	版本：0.9.1.0 (2023/06/29 17:11)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,7 +20,6 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/DataFormat.h"
 #include "Rendering/Resources/Detail/Buffers/VertexFormatImpl.h"
 
@@ -30,33 +29,33 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, VertexFormat);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, VertexFormat);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, VertexFormat);
 
-// private
-Rendering::VertexFormat::VertexFormat(MAYBE_UNUSED VertexFormatCreate vertexFormatCreate, int numAttributes)
+Rendering::VertexFormat::VertexFormat(VertexFormatCreate vertexFormatCreate, int numAttributes)
     : ParentType{ "VertexFormat" }, impl{ numAttributes }
 {
+    System::UnusedFunction(vertexFormatCreate);
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, VertexFormat)
 
-// static
 Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat::Create(const AttributeContainer& triple)
 {
     auto numAttributes = boost::numeric_cast<int>(triple.size());
 
-    auto vertexformat = std::make_shared<VertexFormat>(VertexFormatCreate::Init, numAttributes);
+    auto vertexFormat = std::make_shared<VertexFormat>(VertexFormatCreate::Init, numAttributes);
 
     auto offset = 0;
     for (auto i = 0; i < numAttributes; ++i)
     {
         const auto& attribute = triple.at(i);
-        vertexformat->SetAttribute(i, attribute.GetType(), attribute.GetUsage(), attribute.GetUsageIndex(), offset);
+        vertexFormat->SetAttribute(i, attribute.GetType(), attribute.GetUsage(), attribute.GetUsageIndex(), offset);
         offset += DataFormat::GetNumBytesPerStruct(attribute.GetType());
     }
 
-    vertexformat->SetStride(offset);
+    vertexFormat->SetStride(offset);
 
-    return vertexformat;
+    return vertexFormat;
 }
 
 Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat::Create()

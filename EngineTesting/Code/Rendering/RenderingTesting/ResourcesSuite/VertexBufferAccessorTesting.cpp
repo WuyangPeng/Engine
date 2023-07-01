@@ -13,7 +13,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/RenderingTesting/SceneGraphSuite/VisualTest.h"
 #include "Rendering/SceneGraph/Flags/VisualFlags.h"
 
@@ -34,12 +33,11 @@ void Rendering::VertexBufferAccessorTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    RendererManager::Create();
+
 
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(HaveNotTest);
 
-    RendererManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

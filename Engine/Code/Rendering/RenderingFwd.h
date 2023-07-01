@@ -5,11 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:10)
+///	版本：0.9.1.0 (2023/06/20 14:20)
 
 #ifndef RENDERING_FWD_H
 #define RENDERING_FWD_H
-
 
 #include "AglRenderer/AglRendererFwd.h"
 #include "Base/BaseFwd.h"
@@ -29,7 +28,7 @@
 #include "OpenGLAPI/OpenGLAPIFwd.h"
 #include "OpenGLRenderer/OpenGLRendererFwd.h"
 #include "Picture/PictureFwd.h"
-#include "Renderers/RenderersFwd.h"
+#include "RendererEngine/RendererEngineFwd.h"
 #include "Resources/ResourcesFwd.h"
 #include "SceneGraph/SceneGraphFwd.h"
 #include "ShaderFloats/ShaderFloatsFwd.h"

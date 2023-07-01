@@ -5,12 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起版本：0.9.0.12 (2023/06/17 12:44)
+///	版本：0.9.1.0 (2023/06/19 15:17)
 
 #ifndef GAME_CLIENT_GAME_CLIENT_MESSAGE_H
 #define GAME_CLIENT_GAME_CLIENT_MESSAGE_H
 
-#include "GameClient/GameClientMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "GameClient/GameClientMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "GameClient/GameClientMiddleLayer/Audio/AudioManager.h"
 #include "GameClient/GameClientMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "GameClient/GameClientMiddleLayer/Event/EventManager.h"
@@ -32,7 +32,7 @@
 
 namespace GameClient
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<GameClientMiddleLayer::ObjectLogicManager, GameClientMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<GameClientMiddleLayer::ObjectLogicManager, GameClientMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   GameClientMiddleLayer::InputManager,
                                                                   GameClientMiddleLayer::NetworkManager,
@@ -48,7 +48,7 @@ namespace GameClient
                                                                   GameClientMiddleLayer::GUIManager>;
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
-    class GameClientMessage : public MessageType
+    class GameClientMessage final : public MessageType
     {
     public:
         using ClassType = GameClientMessage;

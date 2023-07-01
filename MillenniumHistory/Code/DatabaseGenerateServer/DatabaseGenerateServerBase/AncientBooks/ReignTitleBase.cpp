@@ -40,7 +40,7 @@ System::String AncientBooks::ReignTitleBase::GetName() const
     THROW_EXCEPTION(SYSTEM_TEXT("reignTitle表基类不允许获取字符串。"s))
 }
 
-std::vector<int> AncientBooks::ReignTitleBase::GetEmperor() const
+AncientBooks::ReignTitleBase::IntContainer AncientBooks::ReignTitleBase::GetEmperor() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -63,18 +63,27 @@ int AncientBooks::ReignTitleBase::GetEmperor(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("reignTitle表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::ReignTitleBase::GetEmperorBegin() const
+AncientBooks::ReignTitleBase::IntContainerConstIter AncientBooks::ReignTitleBase::GetEmperorBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("reignTitle表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::ReignTitleBase::GetEmperorEnd() const
+AncientBooks::ReignTitleBase::IntContainerConstIter AncientBooks::ReignTitleBase::GetEmperorEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("reignTitle表基类不允许获取数组。"s))
+}
+
+AncientBooks::ReignTitleBase::CharacterContainer AncientBooks::ReignTitleBase::GetEmperor(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("reignTitle表基类不允许获取映射值。"s))
 }
 
 int AncientBooks::ReignTitleBase::GetSerial() const noexcept
@@ -91,7 +100,7 @@ int AncientBooks::ReignTitleBase::GetBeginYear() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::ReignTitleBase::GetBeginYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::ReignTitleBase::ConstYearSharedPtr AncientBooks::ReignTitleBase::GetBeginYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -107,7 +116,7 @@ int AncientBooks::ReignTitleBase::GetBeginMonth() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::MonthMappingType> AncientBooks::ReignTitleBase::GetBeginMonth(const AncientBooksContainer& csvContainer) const
+AncientBooks::ReignTitleBase::ConstMonthSharedPtr AncientBooks::ReignTitleBase::GetBeginMonth(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -123,7 +132,7 @@ int AncientBooks::ReignTitleBase::GetBeginSexagenaryCycle() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::ReignTitleBase::GetBeginSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::ReignTitleBase::ConstSexagenaryCycleSharedPtr AncientBooks::ReignTitleBase::GetBeginSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -139,7 +148,7 @@ int AncientBooks::ReignTitleBase::GetBeginDay() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::ReignTitleBase::GetBeginDay(const AncientBooksContainer& csvContainer) const
+AncientBooks::ReignTitleBase::ConstDaySharedPtr AncientBooks::ReignTitleBase::GetBeginDay(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -155,7 +164,7 @@ int AncientBooks::ReignTitleBase::GetEndYear() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::ReignTitleBase::GetEndYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::ReignTitleBase::ConstYearSharedPtr AncientBooks::ReignTitleBase::GetEndYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -171,7 +180,7 @@ int AncientBooks::ReignTitleBase::GetEndMonth() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::MonthMappingType> AncientBooks::ReignTitleBase::GetEndMonth(const AncientBooksContainer& csvContainer) const
+AncientBooks::ReignTitleBase::ConstMonthSharedPtr AncientBooks::ReignTitleBase::GetEndMonth(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -187,7 +196,7 @@ int AncientBooks::ReignTitleBase::GetEndSexagenaryCycle() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::ReignTitleBase::GetEndSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::ReignTitleBase::ConstSexagenaryCycleSharedPtr AncientBooks::ReignTitleBase::GetEndSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -203,7 +212,7 @@ int AncientBooks::ReignTitleBase::GetEndDay() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::ReignTitleBase::GetEndDay(const AncientBooksContainer& csvContainer) const
+AncientBooks::ReignTitleBase::ConstDaySharedPtr AncientBooks::ReignTitleBase::GetEndDay(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

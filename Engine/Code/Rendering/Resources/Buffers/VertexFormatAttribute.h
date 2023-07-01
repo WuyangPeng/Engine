@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:22)
+///	版本：0.9.1.0 (2023/06/29 17:07)
 
 #ifndef RENDERING_RESOURCES_VERTEX_FORMAT_ATTRIBUTE_H
 #define RENDERING_RESOURCES_VERTEX_FORMAT_ATTRIBUTE_H
@@ -23,6 +23,7 @@ namespace Rendering
     {
     public:
         using ClassType = VertexFormatAttribute;
+
         using Semantic = VertexFormatFlags::Semantic;
         using BufferTarget = CoreTools::BufferTarget;
         using BufferSource = CoreTools::BufferSource;

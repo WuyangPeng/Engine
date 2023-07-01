@@ -15,15 +15,16 @@
 #include "System/OpenGL/OpenGLFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/Base/RendererObject.h"
+#include "Rendering/OpenGLRenderer/OpenGLRendererObject.h"
 #include "Rendering/Resources/Resource.h"
 
 namespace Rendering
 {
-    class RENDERING_DEFAULT_DECLARE OpenGLResource : public RendererObject
+    class RENDERING_DEFAULT_DECLARE OpenGLResource : public OpenGLRendererObject
     {
     public:
         using ClassType = OpenGLResource;
-        using ParentType = RendererObject;
+        using ParentType = OpenGLRendererObject;
         using BufferLocking = System::BufferLocking;
 
     public:
@@ -33,7 +34,6 @@ namespace Rendering
 
         NODISCARD ConstResourceSharedPtr GetResource() const;
 
-        NODISCARD virtual bool Update() = 0;
         NODISCARD virtual bool CopyCpuToGpu() = 0;
         NODISCARD virtual bool CopyGpuToCpu() = 0;
 

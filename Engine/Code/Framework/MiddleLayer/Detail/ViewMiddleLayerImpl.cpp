@@ -12,7 +12,7 @@
 #include "ViewMiddleLayerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "Rendering/Renderers/Renderer.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 
 Framework::ViewMiddleLayerImpl::ViewMiddleLayerImpl() noexcept
     : renderer{}
@@ -66,11 +66,15 @@ void Framework::ViewMiddleLayerImpl::DrawFrameRate(int x, int y, const Colour& c
 
     if (renderer != nullptr)
     {
-        if (renderer->PreDraw())
-        {
-            renderer->Draw(x, y, color, message);
-            renderer->PostDraw();
-        }
+        x;
+        y;
+        color;
+        message;
+        /*  if (renderer->PreDraw())
+          {
+              renderer->Draw(x, y, color, message);
+              renderer->PostDraw();
+          }*/
     }
     else
     {
@@ -150,7 +154,7 @@ void Framework::ViewMiddleLayerImpl::SwapBuffers()
         ThrowException();
     }
 
-    renderer->SwapBuffers();
+    renderer->DisplayColorBuffer(0);
 }
 
 Framework::ViewMiddleLayerImpl::ConstRendererSharedPtr Framework::ViewMiddleLayerImpl::GetRenderer() const

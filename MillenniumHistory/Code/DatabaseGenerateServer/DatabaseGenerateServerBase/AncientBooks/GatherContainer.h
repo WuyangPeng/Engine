@@ -24,11 +24,13 @@ namespace AncientBooks
     {
     public:
         using ClassType = GatherContainer;
+
         using ConstGatherBaseSharedPtr = std::shared_ptr<const GatherBase>;
         using Container = std::vector<ConstGatherBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit GatherContainer(const CoreTools::CSVContent& csvContent);
+        explicit GatherContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,9 @@ namespace AncientBooks
         NODISCARD Container GetGather(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container gather;

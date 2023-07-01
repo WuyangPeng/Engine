@@ -15,7 +15,7 @@
 
 using namespace std::literals;
 
-AncientBooks::Category::Category(const CoreTools::CSVRow& csvRow)
+AncientBooks::Category::Category(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       gather{ csvRow.GetInt(SYSTEM_TEXT("gather"s)) },
@@ -47,7 +47,7 @@ int AncientBooks::Category::GetGather() const noexcept
     return gather;
 }
 
-std::shared_ptr<const AncientBooks::GatherMappingType> AncientBooks::Category::GetGather(const AncientBooksContainer& csvContainer) const
+AncientBooks::Category::ConstGatherSharedPtr AncientBooks::Category::GetGather(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

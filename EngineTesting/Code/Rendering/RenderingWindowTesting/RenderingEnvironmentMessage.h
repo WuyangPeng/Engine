@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 14:50)
+///	版本：0.9.1.0 (2023/06/25 16:11)
 
 #ifndef RENDERING_WINDOW_TESTING_RENDERING_ENVIRONMENT_MESSAGE_H
 #define RENDERING_WINDOW_TESTING_RENDERING_ENVIRONMENT_MESSAGE_H
@@ -14,11 +14,12 @@
 
 namespace RenderingWindowTesting
 {
-    class RenderingEnvironmentMessage : public Framework::WindowMessageUnitTestSuite
+    class RenderingEnvironmentMessage final : public Framework::WindowMessageUnitTestSuite
     {
     public:
         using ClassType = RenderingEnvironmentMessage;
         using ParentType = WindowMessageUnitTestSuite;
+
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
@@ -27,9 +28,9 @@ namespace RenderingWindowTesting
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        void InitSuite() final;
+        void InitSuite() override;
 
-        void AddRenderersSuite();
+        void AddRendererEngineSuite();
     };
 
     using RenderingWindowHandle = Framework::WindowProcessHandle<RenderingEnvironmentMessage>;

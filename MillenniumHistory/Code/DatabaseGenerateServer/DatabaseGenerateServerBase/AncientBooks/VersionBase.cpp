@@ -40,7 +40,7 @@ int AncientBooks::VersionBase::GetBook() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::BookMappingType> AncientBooks::VersionBase::GetBook(const AncientBooksContainer& csvContainer) const
+AncientBooks::VersionBase::ConstBookSharedPtr AncientBooks::VersionBase::GetBook(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -70,7 +70,7 @@ int AncientBooks::VersionBase::GetCountry() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::CountryMappingType> AncientBooks::VersionBase::GetCountry(const AncientBooksContainer& csvContainer) const
+AncientBooks::VersionBase::ConstCountrySharedPtr AncientBooks::VersionBase::GetCountry(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -86,7 +86,7 @@ int64_t AncientBooks::VersionBase::GetReignTitle() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::ReignTitleMappingType> AncientBooks::VersionBase::GetReignTitle(const AncientBooksContainer& csvContainer) const
+AncientBooks::VersionBase::ConstReignTitleSharedPtr AncientBooks::VersionBase::GetReignTitle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -102,7 +102,7 @@ int AncientBooks::VersionBase::GetYear() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::VersionBase::GetYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::VersionBase::ConstYearSharedPtr AncientBooks::VersionBase::GetYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -118,7 +118,7 @@ System::String AncientBooks::VersionBase::GetVersion() const
     THROW_EXCEPTION(SYSTEM_TEXT("version表基类不允许获取字符串。"s))
 }
 
-std::vector<int> AncientBooks::VersionBase::GetOtherAuthor() const
+AncientBooks::VersionBase::IntContainer AncientBooks::VersionBase::GetOtherAuthor() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -141,21 +141,30 @@ int AncientBooks::VersionBase::GetOtherAuthor(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("version表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::VersionBase::GetOtherAuthorBegin() const
+AncientBooks::VersionBase::IntContainerConstIter AncientBooks::VersionBase::GetOtherAuthorBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("version表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::VersionBase::GetOtherAuthorEnd() const
+AncientBooks::VersionBase::IntContainerConstIter AncientBooks::VersionBase::GetOtherAuthorEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("version表基类不允许获取数组。"s))
 }
 
-std::vector<System::String> AncientBooks::VersionBase::GetAuthorDescribe() const
+AncientBooks::VersionBase::CharacterContainer AncientBooks::VersionBase::GetOtherAuthor(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("version表基类不允许获取映射值。"s))
+}
+
+AncientBooks::VersionBase::StringContainer AncientBooks::VersionBase::GetAuthorDescribe() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -178,14 +187,14 @@ System::String AncientBooks::VersionBase::GetAuthorDescribe(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("version表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::VersionBase::GetAuthorDescribeBegin() const
+AncientBooks::VersionBase::StringContainerConstIter AncientBooks::VersionBase::GetAuthorDescribeBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("version表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::VersionBase::GetAuthorDescribeEnd() const
+AncientBooks::VersionBase::StringContainerConstIter AncientBooks::VersionBase::GetAuthorDescribeEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

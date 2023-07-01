@@ -22,7 +22,6 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/BitHacksDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Textures/LoadTexture.h"
 #include "Rendering/Resources/Textures/SaveTexture.h"
 #include "Rendering/Resources/Textures/TextureCube.h"
@@ -44,9 +43,7 @@ void Rendering::TextureCubeTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    RendererManager::Create();
-
-    RendererManager::Destroy();
+   
 
     CoreTools::InitTerm::ExecuteTerminator();
 }
@@ -75,7 +72,7 @@ void Rendering::TextureCubeTesting::MipmapsTest()
 {
     TextureCubeSharedPtr firstTextureCube = LoadTexture::LoadCubeFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/TextureCube.trt"));
 
-    ASSERT_FALSE(firstTextureCube->HasMipmaps());
+    ASSERT_FALSE(firstTextureCube->HasMipMaps());
 }
 
 void Rendering::TextureCubeTesting::StreamTest()

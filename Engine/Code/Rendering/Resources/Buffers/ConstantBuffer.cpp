@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:25)
+///	版本：0.9.1.0 (2023/06/29 14:33)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,7 +18,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/OpenGLRenderer/Resources/Buffers/OpenGLConstantBuffer.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/Detail/Buffers/BufferLayout.h"
 #include "Rendering/Resources/Flags/UsageType.h"
 
@@ -50,8 +50,8 @@ int Rendering::ConstantBuffer::GetRoundedNumBytes(int numBytes) noexcept
 {
     if (0 < numBytes)
     {
-        const auto remainder = numBytes % constantBufferRequiredMinimumBytes;
-        if (remainder == 0)
+        if (const auto remainder = numBytes % constantBufferRequiredMinimumBytes;
+            remainder == 0)
         {
             return numBytes;
         }
@@ -85,9 +85,13 @@ Rendering::ConstantBuffer::RendererObjectSharedPtr Rendering::ConstantBuffer::Cr
     switch (rendererTypes)
     {
         case RendererTypes::OpenGL:
+        {
             return std::make_shared<OpenGLConstantBuffer>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        }
         default:
-            return ParentType::CreateRendererObject(rendererTypes);
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
+        }
     }
 }
 

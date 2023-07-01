@@ -1,6 +1,3 @@
 TODO Level 5
 
-0.9.0.12
- 
-1. （Application）补全Linux和Macintosh的KeyIdentifiers、KeyboardModifiers和MouseModifiers的单元测试。
-2. （Application）重构PixelScreenTesting。
+0.9.1.0

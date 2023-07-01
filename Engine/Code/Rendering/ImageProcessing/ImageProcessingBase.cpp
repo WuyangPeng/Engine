@@ -18,9 +18,8 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Base/Float.h"
-#include "Rendering/Renderers/Renderer.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
-#include "Rendering/Shaders/ShaderManager.h"
 
 Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, int numTargets)
     : numCols{ numCols },
@@ -32,18 +31,13 @@ Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, in
       rowSpacing{ 1.0f / numRowsM1 },
       camera{ std::make_shared<Camera>(false) },
       rectangle{},
-      vertexShader{},
       pvwMatrixConstant{},
       renderTargets{},
       mainTexture{},
       mainEffect{},
-      mainEffectInstance{},
       boundaryEffect{},
-      boundaryEffectInstance{},
       drawEffect{},
-      drawEffectInstance{},
-      drawInput{},
-      drawInputInstance{}
+      drawInput{}
 {
     RENDERING_ASSERTION_0(numCols > 1 && numRows > 0, "无效bound.\n");
     RENDERING_ASSERTION_0(numTargets > 0, "目标数量无效。\n");
@@ -66,38 +60,12 @@ Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, in
     auto vbuffer = VertexBuffer::Create(*vformat, vstride);
     VertexBuffer vba = *vbuffer;
 
-    auto xmin = 0.0f;
-    auto xmax = 0.0f;
-    auto ymin = 0.0f;
-    auto ymax = 0.0f;
-    Mathematics::Float2 tc0{};
-    Mathematics::Float2 tc1{};
-    Mathematics::Float2 tc2{};
-    Mathematics::Float2 tc3{};
-    if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
-    {
-        xmin = 0.0f;
-        xmax = 1.0f;
-        ymin = 0.0f;
-        ymax = 1.0f;
-        tc0 = Mathematics::Float2(0.0f, 0.0f);
-        tc1 = Mathematics::Float2(1.0f, 0.0f);
-        tc2 = Mathematics::Float2(1.0f, 1.0f);
-        tc3 = Mathematics::Float2(0.0f, 1.0f);
-    }
-    else
-    {
-        xmin = -0.5f * colSpacing;
-        xmax = 1.0f - 0.5f * colSpacing;
-        ymin = +0.5f * rowSpacing;
-        ymax = 1.0f + 0.5f * rowSpacing;
-        tc0 = Mathematics::Float2(0.0f, 1.0f);
-        tc1 = Mathematics::Float2(1.0f, 1.0f);
-        tc2 = Mathematics::Float2(1.0f, 0.0f);
-        tc3 = Mathematics::Float2(0.0f, 0.0f);
-    }
+    const Mathematics::Float2 tc0{};
+    const Mathematics::Float2 tc1{};
+    const Mathematics::Float2 tc2{};
+    const Mathematics::Float2 tc3{};
 
-    auto ibuffer = IndexBuffer::Create(IndexFormatType::Polypoint, 6, boost::numeric_cast<int>(sizeof(int)));
+    auto ibuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, 6, boost::numeric_cast<int>(sizeof(int)));
 
     auto indices = ibuffer->GetData();
     indices.Increase<int32_t>(0);
@@ -121,150 +89,93 @@ Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, in
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ImageProcessingBase)
 
-void Rendering::ImageProcessingBase::CreateEffect(const PixelShaderSharedPtr& pshader, VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
+void Rendering::ImageProcessingBase::CreateEffect(MAYBE_UNUSED VisualEffectSharedPtr& effect) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    auto pass = std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable);
-
-#include STSTEM_WARNING_POP
-
-    pass->SetPixelShader(pshader);
-
-    pass->SetVertexShader(vertexShader);
-
-    pass->SetAlphaState(std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetOffsetState(std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetStencilState(std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetWireState(std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable));
-
-    auto cstate = std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable);
-    cstate->SetEnabled(false);
-    pass->SetCullState(cstate);
-
-    auto dstate = std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable);
-    dstate->SetEnabled(false);
-    dstate->SetWritable(false);
-    pass->SetDepthState(dstate);
-
-    effect = std::make_shared<VisualEffect>(CoreTools::DisableNotThrow::Disable);
-
-    instance = std::make_shared<VisualEffectInstance>(effect, 0);
-
-    instance->SetVertexConstant(0, "PVWMatrix", pvwMatrixConstant);
 }
 
-void Rendering::ImageProcessingBase::PreDraw()
+void Rendering::ImageProcessingBase::PreDraw() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
-
-    if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
-    {
-        camera->SetPostProjectionMatrix(Mathematics::MatrixF{ 1.0f, -1.0f, 1.0f });
-    }
 }
 
-void Rendering::ImageProcessingBase::PostDraw()
+void Rendering::ImageProcessingBase::PostDraw() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
-
-    if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
-    {
-        camera->SetPostProjectionMatrix(Mathematics::MatrixF::GetIdentityMatrix());
-    }
 }
 
-void Rendering::ImageProcessingBase::Initialize(Renderer& renderer, bool openglHack)
+void Rendering::ImageProcessingBase::Initialize(BaseRenderer& renderer, bool openglHack) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
+    renderer;
+    openglHack;
+    /*  renderer.Bind(renderTargets.at(0));
+      renderer.Bind(renderTargets.at(1));
+      renderer.Bind(GetMainTexture());
+      if (renderer.PreDraw())
+      {
+          renderer.SetCamera(camera);
 
-    renderer.Bind(renderTargets.at(0));
-    renderer.Bind(renderTargets.at(1));
-    renderer.Bind(GetMainTexture());
-    if (renderer.PreDraw())
-    {
-        renderer.SetCamera(camera);
+          if (openglHack)
+          {
+              mainEffectInstance->SetPixelTexture(0, "StateSampler", mainTexture);
+              rectangle->SetEffectInstance(mainEffectInstance);
+          }
+          else
+          {
+              drawEffectInstance->SetPixelTexture(0, "StateSampler", mainTexture);
+              rectangle->SetEffectInstance(drawEffectInstance);
+          }
 
-        if (openglHack)
-        {
-            mainEffectInstance->SetPixelTexture(0, "StateSampler", mainTexture);
-            rectangle->SetEffectInstance(mainEffectInstance);
-        }
-        else
-        {
-            drawEffectInstance->SetPixelTexture(0, "StateSampler", mainTexture);
-            rectangle->SetEffectInstance(drawEffectInstance);
-        }
+          renderer.Enable(renderTargets.at(0));
+          renderer.ClearColorBuffer();
+          renderer.Draw(rectangle);
+          renderer.Disable(renderTargets.at(0));
+          if (openglHack)
+          {
+              mainEffectInstance->SetPixelTexture(0, "StateSampler", boost::dynamic_pointer_cast<Texture>(renderTargets.at(1)->GetRenderTargetTexture(0)->CloneObject()));
+          }
+          else
+          {
+              drawEffectInstance->SetPixelTexture(0, "StateSampler", boost::dynamic_pointer_cast<Texture>(renderTargets.at(1)->GetRenderTargetTexture(0)->CloneObject()));
+          }
 
-        renderer.Enable(renderTargets.at(0));
-        renderer.ClearColorBuffer();
-        renderer.Draw(rectangle);
-        renderer.Disable(renderTargets.at(0));
-        if (openglHack)
-        {
-            mainEffectInstance->SetPixelTexture(0, "StateSampler", boost::dynamic_pointer_cast<Texture>(renderTargets.at(1)->GetRenderTargetTexture(0)->CloneObject()));
-        }
-        else
-        {
-            drawEffectInstance->SetPixelTexture(0, "StateSampler", boost::dynamic_pointer_cast<Texture>(renderTargets.at(1)->GetRenderTargetTexture(0)->CloneObject()));
-        }
+          rectangle->SetEffectInstance(boundaryEffectInstance);
+          renderer.Enable(renderTargets.at(1));
+          renderer.Draw(rectangle);
+          renderer.Disable(renderTargets.at(1));
 
-        rectangle->SetEffectInstance(boundaryEffectInstance);
-        renderer.Enable(renderTargets.at(1));
-        renderer.Draw(rectangle);
-        renderer.Disable(renderTargets.at(1));
-
-        renderer.PostDraw();
-    }
+          renderer.PostDraw();
+      }*/
 }
 
-void Rendering::ImageProcessingBase::ExecuteStep(Renderer& renderer, bool draw)
+void Rendering::ImageProcessingBase::ExecuteStep(BaseRenderer& renderer, bool draw) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
+    renderer;
+    draw;
+    /*  if (draw)
+      {
+          PreDraw();
+          rectangle->SetEffectInstance(drawEffectInstance);
+          renderer.Draw(rectangle);
+          PostDraw();
+      }
 
-    if (draw)
-    {
-        PreDraw();
-        rectangle->SetEffectInstance(drawEffectInstance);
-        renderer.Draw(rectangle);
-        PostDraw();
-    }
+      rectangle->SetEffectInstance(mainEffectInstance);
+      renderer.Enable(renderTargets.at(0));
+      renderer.Draw(rectangle);
+      renderer.Disable(renderTargets.at(0));
 
-    rectangle->SetEffectInstance(mainEffectInstance);
-    renderer.Enable(renderTargets.at(0));
-    renderer.Draw(rectangle);
-    renderer.Disable(renderTargets.at(0));
-
-    rectangle->SetEffectInstance(boundaryEffectInstance);
-    renderer.Enable(renderTargets.at(1));
-    renderer.Draw(rectangle);
-    renderer.Disable(renderTargets.at(1));
+      rectangle->SetEffectInstance(boundaryEffectInstance);
+      renderer.Enable(renderTargets.at(1));
+      renderer.Draw(rectangle);
+      renderer.Disable(renderTargets.at(1));*/
 }
 
 void Rendering::ImageProcessingBase::CreateVertexShader()
 {
     RENDERING_CLASS_IS_VALID_9;
-
-    vertexShader = std::make_shared<VertexShader>("Wm5.ScreenShader", 1, 2, 1, 0);
-    vertexShader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
-    vertexShader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
-    vertexShader->SetOutput(1, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
-    vertexShader->SetConstant(0, "PVWMatrix", 4);
-
-    auto profile = vertexShader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 1; ++j)
-        {
-            profile->SetBaseRegister(i, j, *vRegisters.at(i));
-        }
-
-        profile->SetProgram(i, vPrograms.at(i));
-    }
 
     pvwMatrixConstant = std::make_shared<ProjectionViewWorldMatrixConstant>(CoreTools::DisableNotThrow::Disable);
 }
@@ -283,13 +194,6 @@ void Rendering::ImageProcessingBase::SetMainEffect(const VisualEffectSharedPtr& 
     mainEffect = val;
 }
 
-void Rendering::ImageProcessingBase::SetMainEffectInstance(const VisualEffectInstanceSharedPtr& val) noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    mainEffectInstance = val;
-}
-
 void Rendering::ImageProcessingBase::SetBoundaryEffect(const VisualEffectSharedPtr& val) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -297,25 +201,11 @@ void Rendering::ImageProcessingBase::SetBoundaryEffect(const VisualEffectSharedP
     boundaryEffect = val;
 }
 
-void Rendering::ImageProcessingBase::SetBoundaryEffectInstance(const VisualEffectInstanceSharedPtr& val) noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    boundaryEffectInstance = val;
-}
-
 void Rendering::ImageProcessingBase::SetDrawEffect(const VisualEffectSharedPtr& val) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     drawEffect = val;
-}
-
-void Rendering::ImageProcessingBase::SetDrawEffectInstance(const VisualEffectInstanceSharedPtr& val) noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    drawEffectInstance = val;
 }
 
 Rendering::TextureSharedPtr Rendering::ImageProcessingBase::GetColorTexture(int index)
@@ -451,11 +341,4 @@ Rendering::ConstTexture2DSharedPtr Rendering::ImageProcessingBase::GetMainTextur
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return mainTexture;
-}
-
-Rendering::ConstVisualEffectInstanceSharedPtr Rendering::ImageProcessingBase::GetMainEffectInstance() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    return mainEffectInstance;
 }

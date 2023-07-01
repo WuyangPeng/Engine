@@ -25,6 +25,18 @@ namespace AncientBooks
     public:
         using ClassType = YearBase;
 
+        using String = System::String;
+        using IntContainer = std::vector<int>;
+        using IntContainerConstIter = IntContainer::const_iterator;
+        using Int64Container = std::vector<int64_t>;
+        using Int64ContainerConstIter = Int64Container::const_iterator;
+        using ConstSexagenaryCycleSharedPtr = std::shared_ptr<const SexagenaryCycleMappingType>;
+        using ConstReignTitleSharedPtr = std::shared_ptr<const ReignTitleMappingType>;
+        using ConstReignTitleSharedPtr = std::shared_ptr<const ReignTitleMappingType>;
+        using ReignTitleContainer = std::vector<ConstReignTitleSharedPtr>;
+        using ConstYearSharedPtr = std::shared_ptr<const YearMappingType>;
+        using YearContainer = std::vector<ConstYearSharedPtr>;
+
     public:
         YearBase() noexcept = default;
         explicit YearBase(int key) noexcept;
@@ -41,27 +53,29 @@ namespace AncientBooks
 
         NODISCARD virtual int GetId() const noexcept;
 
-        NODISCARD virtual System::String GetName() const;
+        NODISCARD virtual String GetName() const;
 
         NODISCARD virtual int GetSexagenaryCycle() const noexcept;
-        NODISCARD virtual std::shared_ptr<const SexagenaryCycleMappingType> GetSexagenaryCycle(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstSexagenaryCycleSharedPtr GetSexagenaryCycle(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int64_t GetReignTitle() const noexcept;
-        NODISCARD virtual std::shared_ptr<const ReignTitleMappingType> GetReignTitle(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstReignTitleSharedPtr GetReignTitle(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetYear() const noexcept;
 
-        NODISCARD virtual std::vector<int> GetUnorthodoxReignTitle() const;
+        NODISCARD virtual Int64Container GetUnorthodoxReignTitle() const;
         NODISCARD virtual int GetUnorthodoxReignTitleCount() const;
-        NODISCARD virtual int GetUnorthodoxReignTitle(int index) const;
-        NODISCARD virtual std::vector<int>::const_iterator GetUnorthodoxReignTitleBegin() const;
-        NODISCARD virtual std::vector<int>::const_iterator GetUnorthodoxReignTitleEnd() const;
+        NODISCARD virtual int64_t GetUnorthodoxReignTitle(int index) const;
+        NODISCARD virtual Int64ContainerConstIter GetUnorthodoxReignTitleBegin() const;
+        NODISCARD virtual Int64ContainerConstIter GetUnorthodoxReignTitleEnd() const;
+        NODISCARD virtual ReignTitleContainer GetUnorthodoxReignTitle(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual std::vector<int> GetUnorthodoxYear() const;
+        NODISCARD virtual IntContainer GetUnorthodoxYear() const;
         NODISCARD virtual int GetUnorthodoxYearCount() const;
         NODISCARD virtual int GetUnorthodoxYear(int index) const;
-        NODISCARD virtual std::vector<int>::const_iterator GetUnorthodoxYearBegin() const;
-        NODISCARD virtual std::vector<int>::const_iterator GetUnorthodoxYearEnd() const;
+        NODISCARD virtual IntContainerConstIter GetUnorthodoxYearBegin() const;
+        NODISCARD virtual IntContainerConstIter GetUnorthodoxYearEnd() const;
+        NODISCARD virtual YearContainer GetUnorthodoxYear(const AncientBooksContainer& csvContainer) const;
 
     private:
         int key{};

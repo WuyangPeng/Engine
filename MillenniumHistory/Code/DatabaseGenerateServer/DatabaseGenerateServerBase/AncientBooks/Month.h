@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = Month;
         using ParentType = MonthBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Month(const CoreTools::CSVRow& csvRow);
+        explicit Month(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -33,11 +35,11 @@ namespace AncientBooks
 
         NODISCARD int GetId() const noexcept override;
 
-        NODISCARD System::String GetName() const override;
+        NODISCARD String GetName() const override;
 
     private:
         int id;  // Id
-        System::String name;  // Ãû×Ö
+        String name;  // Ãû×Ö
     };
 }
 

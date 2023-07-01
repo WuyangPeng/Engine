@@ -15,12 +15,12 @@
   },
 
   "WindowParameter": {
-    "WindowTitle": "RiseOfHistory",
+    "WindowTitle": "Rise Of History",
     "Width": 1024,
     "Height": 768,
     "X": 0,
     "Y": 0,
     "AllowResize": true,
-    "ClassName": "RiseOfHistory"
+    "ClassName": "Rise Of History"
   }
 }

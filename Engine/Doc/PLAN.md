@@ -7,15 +7,24 @@
 
 时间（2023/06/18——2023/12/31）
 
-实现内容：1. Geometric Tools Engine代码及例子并入引擎。	  
-		  2. Distance例子。
-		  3. Geometrics例子。
-		  4. Graphics例子。
-		  5. Imagics例子。
-		  6. Intersection例子。
-		  7. Mathematics例子。
-		  8. Physics例子。
-		  9. SceneGraphs例子。
+实现内容：1. Geometric Tools Engine代码及例子并入引擎。	 
+		  2. Base模块。		  
+		  3. State模块。
+		  4. Resources模块。
+		  5. Shaders模块。
+		  6. Effects模块。		  
+		  7. SceneGraph模块。
+		  8. OpenGL模块。
+		  9. GLSL模块。
+		  10.Applications模块。
+		  11.Distance例子。
+		  12.Geometrics例子。
+		  13.Graphics例子。
+		  14.Imagics例子。
+		  15.Intersection例子。
+		  16.Mathematics例子。
+		  17.Physics例子。
+		  18.SceneGraphs例子。
 ----------------------------
 引擎实现（0.9.2.0——0.9.2.?）
 

@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = Version;
         using ParentType = VersionBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Version(const CoreTools::CSVRow& csvRow);
+        explicit Version(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -34,46 +36,47 @@ namespace AncientBooks
         NODISCARD int GetId() const noexcept override;
 
         NODISCARD int GetBook() const noexcept override;
-        NODISCARD std::shared_ptr<const BookMappingType> GetBook(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstBookSharedPtr GetBook(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetSource() const noexcept override;
 
-        NODISCARD System::String GetSourceName() const override;
+        NODISCARD String GetSourceName() const override;
 
         NODISCARD int GetCountry() const noexcept override;
-        NODISCARD std::shared_ptr<const CountryMappingType> GetCountry(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstCountrySharedPtr GetCountry(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int64_t GetReignTitle() const noexcept override;
-        NODISCARD std::shared_ptr<const ReignTitleMappingType> GetReignTitle(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstReignTitleSharedPtr GetReignTitle(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetYear() const noexcept override;
-        NODISCARD std::shared_ptr<const YearMappingType> GetYear(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstYearSharedPtr GetYear(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD System::String GetVersion() const override;
+        NODISCARD String GetVersion() const override;
 
-        NODISCARD std::vector<int> GetOtherAuthor() const override;
+        NODISCARD IntContainer GetOtherAuthor() const override;
         NODISCARD int GetOtherAuthorCount() const override;
         NODISCARD int GetOtherAuthor(int index) const override;
-        NODISCARD std::vector<int>::const_iterator GetOtherAuthorBegin() const noexcept override;
-        NODISCARD std::vector<int>::const_iterator GetOtherAuthorEnd() const noexcept override;
+        NODISCARD IntContainerConstIter GetOtherAuthorBegin() const noexcept override;
+        NODISCARD IntContainerConstIter GetOtherAuthorEnd() const noexcept override;
+        NODISCARD CharacterContainer GetOtherAuthor(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD std::vector<System::String> GetAuthorDescribe() const override;
+        NODISCARD StringContainer GetAuthorDescribe() const override;
         NODISCARD int GetAuthorDescribeCount() const override;
-        NODISCARD System::String GetAuthorDescribe(int index) const override;
-        NODISCARD std::vector<System::String>::const_iterator GetAuthorDescribeBegin() const noexcept override;
-        NODISCARD std::vector<System::String>::const_iterator GetAuthorDescribeEnd() const noexcept override;
+        NODISCARD String GetAuthorDescribe(int index) const override;
+        NODISCARD StringContainerConstIter GetAuthorDescribeBegin() const noexcept override;
+        NODISCARD StringContainerConstIter GetAuthorDescribeEnd() const noexcept override;
 
     private:
         int id;  // Id
         int book;  // 書
         int source;  // 出處
-        System::String sourceName;  // 出處名字
+        String sourceName;  // 出處名字
         int country;  // 時代
         int64_t reignTitle;  // 年號
         int year;  // 年
-        System::String version;  // 版本
-        std::vector<int> otherAuthor;  // 其他作者
-        std::vector<System::String> authorDescribe;  // 作者描述
+        String version;  // 版本
+        IntContainer otherAuthor;  // 其他作者
+        StringContainer authorDescribe;  // 作者描述
     };
 }
 

@@ -12,7 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/Shaders/VisualEffectInstance.h"
+#include "VisualEffect.h"
 
 namespace Rendering
 {
@@ -29,10 +29,6 @@ namespace Rendering
         explicit VertexColor4Effect(CoreTools::DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
-
-        NODISCARD VisualEffectInstanceSharedPtr CreateInstance();
-
-        NODISCARD static VisualEffectInstanceSharedPtr CreateUniqueInstance();
     };
 
 #include STSTEM_WARNING_PUSH

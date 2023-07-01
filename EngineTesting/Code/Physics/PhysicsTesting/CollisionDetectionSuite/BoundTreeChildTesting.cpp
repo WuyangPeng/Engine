@@ -19,7 +19,7 @@
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Rendering/DataTypes/Bound.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/RendererEngine/RendererManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/SceneGraph/TrianglesMesh.h"
 #include "Physics/CollisionDetection/BoundTreeDetail.h"

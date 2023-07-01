@@ -20,3 +20,10 @@ Rendering::OpenGLDrawingState::OpenGLDrawingState(const DrawingStateSharedPtr& d
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, OpenGLDrawingState)
+
+bool Rendering::OpenGLDrawingState::Update() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return false;
+}

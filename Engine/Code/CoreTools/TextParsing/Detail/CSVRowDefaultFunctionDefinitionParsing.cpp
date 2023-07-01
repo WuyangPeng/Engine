@@ -29,7 +29,7 @@ System::String CoreTools::CSVRowDefaultFunctionDefinitionParsing::GenerateCSVRow
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto content = GenerateConstructor(TextParsing::gCSVRow);
+    auto content = GenerateConstructor(SYSTEM_TEXT("(const CSVRow& csvRow)"));
 
     content += GenerateParentMember();
 

@@ -132,99 +132,10 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture3DEffect);
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, Texture3DEffect)
 
-Rendering::Texture3DEffect::Texture3DEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1, ShaderFlags::SamplerCoordinate coordinate2)
+Rendering::Texture3DEffect::Texture3DEffect(MAYBE_UNUSED ShaderFlags::SamplerFilter filter, MAYBE_UNUSED ShaderFlags::SamplerCoordinate coordinate0, MAYBE_UNUSED ShaderFlags::SamplerCoordinate coordinate1, MAYBE_UNUSED ShaderFlags::SamplerCoordinate coordinate2)
     : ParentType{ CoreTools::DisableNotThrow::Disable }
 {
-    auto vshader = std::make_shared<VertexShader>("Texture2D", 2, 2, 1, 0);
-    vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
-    vshader->SetInput(1, "modelTCoord", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord0);
-    vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
-    vshader->SetOutput(1, "vertexTCoord", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord0);
-    vshader->SetConstant(0, "PVWMatrix", 4);
-    auto profile = vshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 1; ++j)
-        {
-            profile->SetBaseRegister(i, j, *vRegisters.at(i));
-        }
-
-        profile->SetProgram(i, vPrograms.at(i));
-    }
-
-    auto pshader = std::make_shared<PixelShader>("Texture2D", 1, 1, 0, 1);
-    pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord0);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetSampler(0, "BaseSampler", ShaderFlags::SamplerType::Sampler2D);
-    pshader->SetFilter(0, filter);
-    pshader->SetCoordinate(0, 0, coordinate0);
-    pshader->SetCoordinate(0, 1, coordinate1);
-    pshader->SetCoordinate(0, 2, coordinate2);
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 1; ++j)
-        {
-            profile->SetTextureUnit(i, j, *pTextureUnits.at(i));
-        }
-
-        profile->SetProgram(i, pPrograms.at(i));
-    }
-
-    auto pass = std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable);
-    pass->SetVertexShader(vshader);
-    pass->SetPixelShader(pshader);
-    pass->SetAlphaState(std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetCullState(std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetDepthState(std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetOffsetState(std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetStencilState(std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetWireState(std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable));
-
-    auto technique = std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable);
-    technique->InsertPass(pass);
-
     RENDERING_SELF_CLASS_IS_VALID_9;
-}
-
-Rendering::PixelShaderSharedPtr Rendering::Texture3DEffect::GetPixelShaderSharedPtr() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    return nullptr;
-}
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::Texture3DEffect::CreateInstance(const Texture3DSharedPtr& texture)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    auto instance = std::make_shared<VisualEffectInstance>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), 0);
-    instance->SetVertexConstant(0, 0, std::make_shared<ProjectionViewMatrixConstant>(CoreTools::DisableNotThrow::Disable));
-    instance->SetPixelTexture(0, 0, texture);
-
-    const auto filter = GetPixelShaderSharedPtr()->GetFilter(0);
-    if (filter != ShaderFlags::SamplerFilter::Nearest && filter != ShaderFlags::SamplerFilter::Linear && !texture->HasMipmaps())
-    {
-    }
-
-    return instance;
-}
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::Texture3DEffect::CreateUniqueInstance(const Texture3DSharedPtr& texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1, ShaderFlags::SamplerCoordinate coordinate2)
-{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    auto effect = std::make_shared<ClassType>(ShaderFlags::SamplerFilter::Nearest);
-
-#include STSTEM_WARNING_POP
-
-    auto pshader = effect->GetPixelShaderSharedPtr();
-    pshader->SetFilter(0, filter);
-    pshader->SetCoordinate(0, 0, coordinate0);
-    pshader->SetCoordinate(0, 1, coordinate1);
-    pshader->SetCoordinate(0, 2, coordinate2);
-    return effect->CreateInstance(texture);
 }
 
 Rendering::Texture3DEffect::Texture3DEffect(LoadConstructor value)

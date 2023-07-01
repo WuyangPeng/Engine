@@ -53,8 +53,8 @@ namespace CoreTools
         NODISCARD String GenerateGetFunctionArrayIndex(const String& valueType, const String& functionVariableName) const;
         NODISCARD String GenerateReturnIter(const String& variableName, const StringView& endDescribe) const;
 
-        NODISCARD String GenerateGetFunctionArrayMapping(const String& upperVariableName, const String& mapping) const;
-        NODISCARD String GenerateGetFunctionMappingBody(const String& variableName, const String& mapping) const;
+        NODISCARD String GenerateGetFunctionArrayMapping(const String& upperVariableName, const String& mapping, int index) const;
+        NODISCARD String GenerateGetFunctionMappingBody(const String& variableName, const String& mapping, int index) const;
         NODISCARD String GenerateGetContainerMapping(const String& variableName, const String& upperMapping) const;
     };
 }

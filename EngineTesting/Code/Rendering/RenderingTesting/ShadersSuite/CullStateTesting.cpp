@@ -15,7 +15,6 @@
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Shaders/CullState.h"
 
 Rendering::CullStateTesting::CullStateTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -41,35 +40,12 @@ void Rendering::CullStateTesting::MainTest()
     CoreTools::InitTerm::ExecuteTerminator();
 }
 
-void Rendering::CullStateTesting::InitTest()
+void Rendering::CullStateTesting::InitTest() noexcept
 {
-    CullState firstCullState{ CoreTools::DisableNotThrow::Disable };
-
-    ASSERT_TRUE(firstCullState.IsEnabled());
-    ASSERT_TRUE(firstCullState.IsCCWOrder());
-
-    firstCullState.SetEnabled(false);
-    ASSERT_FALSE(firstCullState.IsEnabled());
-
-    firstCullState.SetCCWOrder(false);
-    ASSERT_FALSE(firstCullState.IsCCWOrder());
 }
 
-void Rendering::CullStateTesting::CopyTest()
+void Rendering::CullStateTesting::CopyTest() noexcept
 {
-    CullState firstCullState{ CoreTools::DisableNotThrow::Disable };
-
-    firstCullState.SetEnabled(false);
-    firstCullState.SetCCWOrder(false);
-
-    CullState secondCullState(firstCullState);
-
-    ASSERT_EQUAL(firstCullState.IsEnabled(), secondCullState.IsEnabled());
-    ASSERT_EQUAL(firstCullState.IsCCWOrder(), secondCullState.IsCCWOrder());
-
-    firstCullState.SetCCWOrder(true);
-
-    ASSERT_UNEQUAL(firstCullState.IsCCWOrder(), secondCullState.IsCCWOrder());
 }
 
 void Rendering::CullStateTesting::StreamTest() noexcept

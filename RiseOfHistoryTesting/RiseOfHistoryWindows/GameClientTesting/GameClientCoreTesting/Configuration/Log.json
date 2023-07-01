@@ -13,10 +13,11 @@
     "Physics": 1,
     "Imagics": 1,
     "Animation": 1,
-    "ArtificialIntellegence": 1,
+    "ArtificialIntelligence": 1,
     "UserInterface": 1,
     "AssistTools": 1,
-    "Framework": 1
+    "Framework": 1,
+    "User": 1
   },
 
   "Appender": {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:08)
+///	版本：0.9.1.0 (2023/06/28 10:25)
 
 #include "Rendering/RenderingExport.h"
 
@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 Rendering::RendererObjectImpl::RendererObjectImpl(const GraphicsObjectSharedPtr& graphicsObject, const std::string& name)
-    : graphicsObject{ graphicsObject }, name{ name }, glHandle{ 0 }
+    : graphicsObject{ graphicsObject }, name{ name }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -33,16 +33,9 @@ bool Rendering::RendererObjectImpl::IsValid() const noexcept
 
 Rendering::RendererObjectImpl::GraphicsObjectSharedPtr Rendering::RendererObjectImpl::GetGraphicsObject()
 {
-    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-    auto result = graphicsObject.lock();
-
-    if (!result)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("GraphicsObject对象已被销毁。"));
-    }
-
-    return result;
+    return const_pointer_cast<GraphicsObject>(static_cast<const ClassType>(*this).GetGraphicsObject());
 }
 
 Rendering::RendererObjectImpl::ConstGraphicsObjectSharedPtr Rendering::RendererObjectImpl::GetGraphicsObject() const
@@ -53,7 +46,7 @@ Rendering::RendererObjectImpl::ConstGraphicsObjectSharedPtr Rendering::RendererO
 
     if (!result)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("GraphicsObject对象已被销毁。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("GraphicsObject对象已被销毁。"))
     }
 
     return result;
@@ -64,18 +57,4 @@ std::string Rendering::RendererObjectImpl::GetName() const
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return name;
-}
-
-System::OpenGLUInt Rendering::RendererObjectImpl::GetGLHandle() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return glHandle;
-}
-
-void Rendering::RendererObjectImpl::SetGLHandle(OpenGLUInt handler) noexcept
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    glHandle = handler;
 }

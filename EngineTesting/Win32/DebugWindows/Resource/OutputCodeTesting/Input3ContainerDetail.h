@@ -36,11 +36,11 @@ OutputCSVTesting::Input3Container::Container OutputCSVTesting::Input3Container::
 
     Container result{};
 
-    for (const auto& value : input3)
+    for (const auto& element : input3)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

@@ -162,9 +162,6 @@
     <None Include="Resource\AncientBooks\Article.xlsx">
       <Filter>资源文件\AncientBooks</Filter>
     </None>
-    <None Include="Resource\AncientBooks\Chapter.xlsx">
-      <Filter>资源文件\AncientBooks</Filter>
-    </None>
     <None Include="Resource\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言\進表.md">
       <Filter>资源文件\BooksMain\子集\正史類\史記之屬\史記\四庫全書\前言</Filter>
     </None>
@@ -307,9 +304,6 @@
       <Filter>资源文件\AncientBooksCsv</Filter>
     </None>
     <None Include="Resource\AncientBooksCsv\Category.csv">
-      <Filter>资源文件\AncientBooksCsv</Filter>
-    </None>
-    <None Include="Resource\AncientBooksCsv\Chapter.csv">
       <Filter>资源文件\AncientBooksCsv</Filter>
     </None>
     <None Include="Resource\AncientBooksCsv\Character.csv">

@@ -36,11 +36,11 @@ CSVConfigure::SkillContainer::Container CSVConfigure::SkillContainer::GetSkill(F
 
     Container result{};
 
-    for (const auto& value : skill)
+    for (const auto& element : skill)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

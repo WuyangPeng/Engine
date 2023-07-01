@@ -32,6 +32,10 @@ namespace Database
         using ByteArray = std::vector<uint8_t>;
         using ObjectSharedPtr = std::shared_ptr<BasisDatabase>;
         using ObjectArray = std::vector<ObjectSharedPtr>;
+        using StringArray = std::vector<std::string>;
+        using Int32Array = std::vector<int32_t>;
+        using Int64Array = std::vector<int64_t>;
+        using DoubleArray = std::vector<double>;
 
     public:
         explicit BasisDatabase(const std::string_view& fieldName);
@@ -43,6 +47,11 @@ namespace Database
         BasisDatabase(const std::string_view& fieldName, bool value);
         BasisDatabase(const std::string_view& fieldName, const ObjectSharedPtr& value);
         BasisDatabase(const std::string_view& fieldName, const ObjectArray& value);
+
+        BasisDatabase(const std::string_view& fieldName, const StringArray& value);
+        BasisDatabase(const std::string_view& fieldName, const Int32Array& value);
+        BasisDatabase(const std::string_view& fieldName, const Int64Array& value);
+        BasisDatabase(const std::string_view& fieldName, const DoubleArray& value);
 
         template <typename T>
         requires(std::is_integral_v<T>)
@@ -59,6 +68,9 @@ namespace Database
 
         template <DataType Type>
         NODISCARD typename DataTypeTraits<Type>::Type GetValue() const;
+
+        template <DataType Type>
+        NODISCARD std::string GetArrayStringValue() const;
 
         NODISCARD std::any GetAnyValue() const;
 

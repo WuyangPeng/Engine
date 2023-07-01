@@ -31,8 +31,7 @@
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Intersection/Intersection3D/StaticFindIntersectorLine3Triangle3Detail.h"
 #include "Mathematics/Objects3D/Line3Detail.h"
-#include "Mathematics/Objects3D/Triangle3Detail.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Mathematics/Objects3D/Triangle3Detail.h" 
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, Triangles);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Triangles);
@@ -119,7 +118,7 @@ void Rendering::Triangles::UpdateModelSpace(VisualUpdateType type)
         return;
     }
 
-    RENDERER_MANAGE_SINGLETON.UpdateAll(GetConstVertexBuffer());
+  
 }
 
 // private

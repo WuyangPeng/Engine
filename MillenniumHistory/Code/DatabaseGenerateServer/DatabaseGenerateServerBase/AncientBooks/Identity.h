@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = Identity;
         using ParentType = IdentityBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Identity(const CoreTools::CSVRow& csvRow);
+        explicit Identity(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -33,11 +35,11 @@ namespace AncientBooks
 
         NODISCARD int GetId() const noexcept override;
 
-        NODISCARD System::String GetIdentity() const override;
+        NODISCARD String GetIdentity() const override;
 
     private:
         int id;  // Id
-        System::String identity;  // Ãû³Æ
+        String identity;  // Ãû³Æ
     };
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:27)
+///	版本：0.9.1.0 (2023/06/29 17:12)
 
 #include "Rendering/RenderingExport.h"
 
@@ -95,16 +95,15 @@ void Rendering::VertexBufferImpl::Load(BufferSource& source)
 
     vertexFormat->Load(source);
 
-    const auto hasStructuredBuffer = source.ReadBool();
-
-    if (hasStructuredBuffer)
+    if (const auto hasStructuredBuffer = source.ReadBool();
+        hasStructuredBuffer)
     {
         structuredBuffer = std::make_shared<StructuredBuffer>(0, 0);
         structuredBuffer->Load(source);
     }
 }
 
-Rendering::VertexBufferImpl::ImplSharedPtr Rendering::VertexBufferImpl::Clone() const
+Rendering::VertexBufferImpl::VertexBufferSharedPtr Rendering::VertexBufferImpl::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

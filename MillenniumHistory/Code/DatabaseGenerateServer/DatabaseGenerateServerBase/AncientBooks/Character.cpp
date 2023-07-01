@@ -9,6 +9,7 @@
 
 #include "AncientBooksContainer.h"
 #include "Character.h"
+#include "CharacterContainer.h"
 #include "CountryContainer.h"
 #include "DayContainer.h"
 #include "IdentityContainer.h"
@@ -21,7 +22,7 @@
 
 using namespace std::literals;
 
-AncientBooks::Character::Character(const CoreTools::CSVRow& csvRow)
+AncientBooks::Character::Character(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       country{ csvRow.GetInt(SYSTEM_TEXT("country"s)) },
@@ -72,7 +73,7 @@ int AncientBooks::Character::GetCountry() const noexcept
     return country;
 }
 
-std::shared_ptr<const AncientBooks::CountryMappingType> AncientBooks::Character::GetCountry(const AncientBooksContainer& csvContainer) const
+AncientBooks::Character::ConstCountrySharedPtr AncientBooks::Character::GetCountry(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -86,7 +87,7 @@ int AncientBooks::Character::GetIdentity() const noexcept
     return identity;
 }
 
-std::shared_ptr<const AncientBooks::IdentityMappingType> AncientBooks::Character::GetIdentity(const AncientBooksContainer& csvContainer) const
+AncientBooks::Character::ConstIdentitySharedPtr AncientBooks::Character::GetIdentity(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -114,7 +115,7 @@ System::String AncientBooks::Character::GetFullName() const
     return fullName;
 }
 
-std::vector<System::String> AncientBooks::Character::GetAlias() const
+AncientBooks::Character::StringContainer AncientBooks::Character::GetAlias() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -135,14 +136,14 @@ System::String AncientBooks::Character::GetAlias(int index) const
     return alias.at(index);
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Character::GetAliasBegin() const noexcept
+AncientBooks::Character::StringContainerConstIter AncientBooks::Character::GetAliasBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return alias.cbegin();
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Character::GetAliasEnd() const noexcept
+AncientBooks::Character::StringContainerConstIter AncientBooks::Character::GetAliasEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -170,6 +171,13 @@ int AncientBooks::Character::GetFather() const noexcept
     return father;
 }
 
+AncientBooks::Character::ConstCharacterSharedPtr AncientBooks::Character::GetFather(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return csvContainer.GetCharacterContainer()->GetCharacter(father);
+}
+
 int AncientBooks::Character::GetMother() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
@@ -177,7 +185,14 @@ int AncientBooks::Character::GetMother() const noexcept
     return mother;
 }
 
-std::vector<int> AncientBooks::Character::GetFosterFather() const
+AncientBooks::Character::ConstCharacterSharedPtr AncientBooks::Character::GetMother(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return csvContainer.GetCharacterContainer()->GetCharacter(mother);
+}
+
+AncientBooks::Character::IntContainer AncientBooks::Character::GetFosterFather() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -198,21 +213,37 @@ int AncientBooks::Character::GetFosterFather(int index) const
     return fosterFather.at(index);
 }
 
-std::vector<int>::const_iterator AncientBooks::Character::GetFosterFatherBegin() const noexcept
+AncientBooks::Character::IntContainerConstIter AncientBooks::Character::GetFosterFatherBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return fosterFather.cbegin();
 }
 
-std::vector<int>::const_iterator AncientBooks::Character::GetFosterFatherEnd() const noexcept
+AncientBooks::Character::IntContainerConstIter AncientBooks::Character::GetFosterFatherEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return fosterFather.cend();
 }
 
-std::vector<int> AncientBooks::Character::GetFosterMother() const
+AncientBooks::Character::CharacterContainer AncientBooks::Character::GetFosterFather(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    CharacterContainer result{};
+
+    const auto container = csvContainer.GetCharacterContainer();
+
+    for (const auto& element : fosterFather)
+    {
+        result.emplace_back(container->GetCharacter(element));
+    }
+
+    return result;
+}
+
+AncientBooks::Character::IntContainer AncientBooks::Character::GetFosterMother() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -233,18 +264,34 @@ int AncientBooks::Character::GetFosterMother(int index) const
     return fosterMother.at(index);
 }
 
-std::vector<int>::const_iterator AncientBooks::Character::GetFosterMotherBegin() const noexcept
+AncientBooks::Character::IntContainerConstIter AncientBooks::Character::GetFosterMotherBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return fosterMother.cbegin();
 }
 
-std::vector<int>::const_iterator AncientBooks::Character::GetFosterMotherEnd() const noexcept
+AncientBooks::Character::IntContainerConstIter AncientBooks::Character::GetFosterMotherEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return fosterMother.cend();
+}
+
+AncientBooks::Character::CharacterContainer AncientBooks::Character::GetFosterMother(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    CharacterContainer result{};
+
+    const auto container = csvContainer.GetCharacterContainer();
+
+    for (const auto& element : fosterMother)
+    {
+        result.emplace_back(container->GetCharacter(element));
+    }
+
+    return result;
 }
 
 int AncientBooks::Character::GetBirthYear() const noexcept
@@ -254,7 +301,7 @@ int AncientBooks::Character::GetBirthYear() const noexcept
     return birthYear;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::Character::GetBirthYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::Character::ConstYearSharedPtr AncientBooks::Character::GetBirthYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -268,7 +315,7 @@ int AncientBooks::Character::GetBirthMonth() const noexcept
     return birthMonth;
 }
 
-std::shared_ptr<const AncientBooks::MonthMappingType> AncientBooks::Character::GetBirthMonth(const AncientBooksContainer& csvContainer) const
+AncientBooks::Character::ConstMonthSharedPtr AncientBooks::Character::GetBirthMonth(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -282,7 +329,7 @@ int AncientBooks::Character::GetBirthSexagenaryCycle() const noexcept
     return birthSexagenaryCycle;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::Character::GetBirthSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::Character::ConstSexagenaryCycleSharedPtr AncientBooks::Character::GetBirthSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -296,7 +343,7 @@ int AncientBooks::Character::GetBirthDay() const noexcept
     return birthDay;
 }
 
-std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::Character::GetBirthDay(const AncientBooksContainer& csvContainer) const
+AncientBooks::Character::ConstDaySharedPtr AncientBooks::Character::GetBirthDay(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -310,7 +357,7 @@ int AncientBooks::Character::GetDeathYear() const noexcept
     return deathYear;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::Character::GetDeathYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::Character::ConstYearSharedPtr AncientBooks::Character::GetDeathYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -324,7 +371,7 @@ int AncientBooks::Character::GetDeathMonth() const noexcept
     return deathMonth;
 }
 
-std::shared_ptr<const AncientBooks::MonthMappingType> AncientBooks::Character::GetDeathMonth(const AncientBooksContainer& csvContainer) const
+AncientBooks::Character::ConstMonthSharedPtr AncientBooks::Character::GetDeathMonth(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -338,7 +385,7 @@ int AncientBooks::Character::GetDeathSexagenaryCycle() const noexcept
     return deathSexagenaryCycle;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::Character::GetDeathSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::Character::ConstSexagenaryCycleSharedPtr AncientBooks::Character::GetDeathSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -352,14 +399,14 @@ int AncientBooks::Character::GetDeathDay() const noexcept
     return deathDay;
 }
 
-std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::Character::GetDeathDay(const AncientBooksContainer& csvContainer) const
+AncientBooks::Character::ConstDaySharedPtr AncientBooks::Character::GetDeathDay(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return csvContainer.GetDayContainer()->GetDay(deathDay);
 }
 
-std::vector<System::String> AncientBooks::Character::GetUnansweredQuestion() const
+AncientBooks::Character::StringContainer AncientBooks::Character::GetUnansweredQuestion() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -380,14 +427,14 @@ System::String AncientBooks::Character::GetUnansweredQuestion(int index) const
     return unansweredQuestion.at(index);
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Character::GetUnansweredQuestionBegin() const noexcept
+AncientBooks::Character::StringContainerConstIter AncientBooks::Character::GetUnansweredQuestionBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return unansweredQuestion.cbegin();
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Character::GetUnansweredQuestionEnd() const noexcept
+AncientBooks::Character::StringContainerConstIter AncientBooks::Character::GetUnansweredQuestionEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 

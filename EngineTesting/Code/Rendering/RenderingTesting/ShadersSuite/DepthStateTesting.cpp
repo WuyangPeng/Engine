@@ -15,7 +15,6 @@
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Shaders/DepthState.h"
 
 Rendering::DepthStateTesting::DepthStateTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -41,40 +40,12 @@ void Rendering::DepthStateTesting::MainTest()
     CoreTools::InitTerm::ExecuteTerminator();
 }
 
-void Rendering::DepthStateTesting::InitTest()
+void Rendering::DepthStateTesting::InitTest() noexcept
 {
-    DepthState firstDepthState{ CoreTools::DisableNotThrow::Disable };
-
-    ASSERT_TRUE(firstDepthState.IsEnabled());
-    ASSERT_TRUE(firstDepthState.IsWritable());
-    ASSERT_ENUM_EQUAL(firstDepthState.GetCompare(), DepthStateFlags::CompareMode::LessEqual);
-
-    firstDepthState.SetEnabled(false);
-    ASSERT_FALSE(firstDepthState.IsEnabled());
-
-    firstDepthState.SetWritable(false);
-    ASSERT_FALSE(firstDepthState.IsWritable());
-
-    firstDepthState.SetCompare(DepthStateFlags::CompareMode::GreaterEqual);
-    ASSERT_ENUM_EQUAL(firstDepthState.GetCompare(), DepthStateFlags::CompareMode::GreaterEqual);
 }
 
-void Rendering::DepthStateTesting::CopyTest()
+void Rendering::DepthStateTesting::CopyTest() noexcept
 {
-    DepthState firstDepthState{ CoreTools::DisableNotThrow::Disable };
-    firstDepthState.SetEnabled(false);
-    firstDepthState.SetWritable(false);
-    firstDepthState.SetCompare(DepthStateFlags::CompareMode::GreaterEqual);
-
-    DepthState secondDepthState(firstDepthState);
-
-    ASSERT_EQUAL(firstDepthState.IsEnabled(), secondDepthState.IsEnabled());
-    ASSERT_EQUAL(firstDepthState.IsWritable(), secondDepthState.IsWritable());
-    ASSERT_ENUM_EQUAL(firstDepthState.GetCompare(), secondDepthState.GetCompare());
-
-    secondDepthState.SetCompare(DepthStateFlags::CompareMode::Less);
-    ASSERT_ENUM_EQUAL(secondDepthState.GetCompare(), DepthStateFlags::CompareMode::Less);
-    ASSERT_ENUM_EQUAL(firstDepthState.GetCompare(), DepthStateFlags::CompareMode::GreaterEqual);
 }
 
 void Rendering::DepthStateTesting::StreamTest() noexcept

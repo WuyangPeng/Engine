@@ -145,6 +145,20 @@ Rendering::TextEffect::ConstConstantBufferSharedPtr Rendering::TextEffect::GetCo
     return impl->GetColor();
 }
 
+Rendering::VisualEffect::ConstantBufferSharedPtr Rendering::TextEffect::GetTranslate() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return nullptr;
+}
+
+Rendering::VisualEffect::ConstantBufferSharedPtr Rendering::TextEffect::GetColor() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return nullptr;
+}
+
 void Rendering::TextEffect::SetTranslate(float x, float y)
 {
     RENDERING_CLASS_IS_VALID_9;

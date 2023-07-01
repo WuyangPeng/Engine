@@ -14,7 +14,6 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
-#include "Rendering/Shaders/ShaderManager.h"
 
 Rendering::CameraSharedPtr Rendering::ScreenTarget::CreateCamera()
 {
@@ -41,21 +40,15 @@ Rendering::TrianglesMeshSharedPtr Rendering::ScreenTarget::CreateRectangle(const
         const auto vstride = vertexFormat->GetStride();
         auto vertexBuffer = VertexBuffer::Create(*vertexFormat, vstride);
 
-        if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
-        {
-        }
-        else
-        {
-            const auto dx = 0.5f * (xMax - xMin) / static_cast<float>(renderTargetWidth - 1);
-            const auto dy = 0.5f * (yMax - yMin) / static_cast<float>(renderTargetHeight - 1);
-            xMin -= dx;
-            xMax -= dx;
-            yMin += dy;
-            yMax += dy;
-        }
+        const auto dx = 0.5f * (xMax - xMin) / static_cast<float>(renderTargetWidth - 1);
+        const auto dy = 0.5f * (yMax - yMin) / static_cast<float>(renderTargetHeight - 1);
+        xMin -= dx;
+        xMax -= dx;
+        yMin += dy;
+        yMax += dy;
 
         // 创建正方形的索引缓冲区
-        auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, 6, boost::numeric_cast<int>(sizeof(int)));
+        auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, 6, boost::numeric_cast<int>(sizeof(int)));
         InitIndexBufferInParticles(*indexBuffer);
 
         return std::make_shared<TrianglesMesh>(vertexFormat, vertexBuffer, indexBuffer);
@@ -180,22 +173,12 @@ std::vector<Rendering::ScreenTarget::APoint> Rendering::ScreenTarget::CreatePosi
 
     if (ValidSizes(renderTargetWidth, renderTargetHeight))
     {
-        if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
-        {
-            xMin = 0.0f;
-            xMax = 1.0f;
-            yMin = 0.0f;
-            yMax = 1.0f;
-        }
-        else
-        {
-            const auto dx = 0.5f * (xMax - xMin) / boost::numeric_cast<float>(renderTargetWidth - 1);
-            const auto dy = 0.5f * (yMax - yMin) / boost::numeric_cast<float>(renderTargetHeight - 1);
-            xMin -= dx;
-            xMax -= dx;
-            yMin += dy;
-            yMax += dy;
-        }
+        const auto dx = 0.5f * (xMax - xMin) / boost::numeric_cast<float>(renderTargetWidth - 1);
+        const auto dy = 0.5f * (yMax - yMin) / boost::numeric_cast<float>(renderTargetHeight - 1);
+        xMin -= dx;
+        xMax -= dx;
+        yMin += dy;
+        yMax += dy;
 
         positions.emplace_back(xMin, yMin, zValue);
         positions.emplace_back(xMax, yMin, zValue);
@@ -212,20 +195,10 @@ std::vector<Rendering::ScreenTarget::Vector2D> Rendering::ScreenTarget::CreateTe
 {
     std::vector<Vector2D> textureCoords{};
 
-    if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
-    {
-        textureCoords.emplace_back(0.0f, 0.0f);
-        textureCoords.emplace_back(1.0f, 0.0f);
-        textureCoords.emplace_back(1.0f, 1.0f);
-        textureCoords.emplace_back(0.0f, 1.0f);
-    }
-    else
-    {
-        textureCoords.emplace_back(0.0f, 1.0f);
-        textureCoords.emplace_back(1.0f, 1.0f);
-        textureCoords.emplace_back(1.0f, 0.0f);
-        textureCoords.emplace_back(0.0f, 0.0f);
-    }
+    textureCoords.emplace_back(0.0f, 0.0f);
+    textureCoords.emplace_back(1.0f, 0.0f);
+    textureCoords.emplace_back(1.0f, 1.0f);
+    textureCoords.emplace_back(0.0f, 1.0f);
 
     RENDERING_ASSERTION_1(textureCoords.size() == 4, "返回的数组大小错误！");
 

@@ -5,18 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 14:57)
+///	版本：0.9.1.0 (2023/06/20 16:47)
 
 #ifndef RENDERING_TESTING_TESTING_HELPER_H
 #define RENDERING_TESTING_TESTING_HELPER_H
 
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 namespace Rendering
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
     public:
         using ClassType = TestingHelper;
@@ -51,7 +49,7 @@ namespace Rendering
         void AddConsoleGraphSuite();
         void AddOpenGLAPISuite();
         void AddDirectAPISuite();
-        void AddRenderersSuite();
+        void AddRendererEngineSuite();
         void AddOpenGLRendererSuite();
         void AddDx9RendererSuite();
         void AddAglRendererSuite();

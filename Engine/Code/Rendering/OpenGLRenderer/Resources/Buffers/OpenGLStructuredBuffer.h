@@ -36,7 +36,7 @@ namespace Rendering
         NODISCARD bool CopyCounterValueToBuffer(const OpenGLBuffer* targetBuffer, OpenGLInt offset);
         NODISCARD bool CopyCounterValueFromBuffer(const OpenGLBuffer* sourceBuffer, OpenGLInt offset);
 
-        NODISCARD bool GetNumActiveElements();
+        NODISCARD bool GetNumActiveElements() override;
         NODISCARD bool SetNumActiveElements();
 
         NODISCARD bool CopyGpuToCpu() override;
@@ -45,6 +45,12 @@ namespace Rendering
 
     protected:
         void Initialize() override;
+
+    public:
+        [[nodiscard]] bool CopyGpuToCpu(int level) override;
+        [[nodiscard]] bool CopyGpuToCpu(int item, int level) override;
+        [[nodiscard]] bool CopyCpuToGpu(int level) override;
+        [[nodiscard]] bool CopyCpuToGpu(int item, int level) override;
 
     private:
         OpenGLInt counterOffset;

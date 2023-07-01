@@ -29,6 +29,8 @@ System::String CoreTools::MapSharedPtrUsingParsing::GenerateSharedPtrUsing() con
 
     content += GenerateSharedPtrMappingContainer(keyTypeDescribe, mappingName);
     content += GenerateSharedPtrContainer();
+    content += GenerateIndentation();
+    content += SYSTEM_TEXT("using CSVContent = CoreTools::CSVContent;\n");
 
     return content;
 }

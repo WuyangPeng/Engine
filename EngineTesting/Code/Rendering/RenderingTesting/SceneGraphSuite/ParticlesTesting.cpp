@@ -25,7 +25,6 @@
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/SceneGraph/Particles.h"
@@ -52,7 +51,6 @@ void Rendering::ParticlesTesting::MainTest()
     CoreTools::InitTerm::ExecuteInitializer();
 
     CameraManager::Create();
-    RendererManager::Create();
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateTrianglesMeshFile);
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
@@ -61,7 +59,6 @@ void Rendering::ParticlesTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FileTest);
 
-    RendererManager::Destroy();
     CameraManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();

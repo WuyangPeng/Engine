@@ -10,7 +10,7 @@
 #ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_H
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_H
 
-#include "ArtificialIntellegenceInterfaceTesting.h"
+#include "ArtificialIntelligenceInterfaceTesting.h"
 #include "AudioManagerInterfaceTesting.h"
 #include "CameraControllerMiddleLayerTesting.h"
 #include "CameraMiddleLayerTesting.h"

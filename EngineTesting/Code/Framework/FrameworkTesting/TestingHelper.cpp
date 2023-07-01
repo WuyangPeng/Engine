@@ -48,6 +48,7 @@ void Framework::TestingHelper::InitSuite()
     AddLinuxFrameSuite();
     AddMacintoshFrameSuite();
     AddConsoleFrameSuite();
+    AddProjectSuite();
 }
 
 void Framework::TestingHelper::AddHelperSuite()
@@ -156,7 +157,7 @@ void Framework::TestingHelper::AddMiddleLayerSuite()
     ADD_TEST(middleLayerSuite, NetworkManagerInterfaceTesting);
     ADD_TEST(middleLayerSuite, ObjectLogicManagerInterfaceTesting);
     ADD_TEST(middleLayerSuite, ObjectLogicManagerTesting);
-    ADD_TEST(middleLayerSuite, ArtificialIntellegenceInterfaceTesting);
+    ADD_TEST(middleLayerSuite, ArtificialIntelligenceInterfaceTesting);
     ADD_TEST(middleLayerSuite, ObjectLogicInterfaceTesting);
     ADD_TEST(middleLayerSuite, InputManagerInterfaceTesting);
     ADD_TEST(middleLayerSuite, InputManagerTesting);
@@ -243,4 +244,17 @@ void Framework::TestingHelper::AddConsoleFrameSuite()
     ADD_TEST(consoleFrameSuite, ConsoleFrameBuildTesting);
 
     AddSuite(consoleFrameSuite);
+}
+
+void Framework::TestingHelper::AddProjectSuite()
+{
+    auto projectSuite = GenerateSuite("¹¤³Ì");
+
+    ADD_TEST(projectSuite, ProjectNameTesting);
+    ADD_TEST(projectSuite, GUIProjectManagerTesting);
+    ADD_TEST(projectSuite, InputProjectManagerTesting);
+    ADD_TEST(projectSuite, ResourceProjectManagerTesting);
+    ADD_TEST(projectSuite, SystemProjectManagerTesting);
+
+    AddSuite(projectSuite);
 }

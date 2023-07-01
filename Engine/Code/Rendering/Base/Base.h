@@ -5,15 +5,19 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:07)
+///	版本：0.9.1.0 (2023/06/28 09:49)
 
 #ifndef RENDERING_BASE_H
 #define RENDERING_BASE_H
 
+#include "DrawTargetBridge.h"
 #include "GraphicsObject.h"
-#include "RendererObjectBridge.h"
-#include "RendererObject.h"
+#include "InputLayoutManager.h"
+#include "NullRendererObject.h"
 #include "RendererDrawTarget.h"
+#include "RendererObject.h"
+#include "RendererObjectBridge.h"
+#include "TotalAllocation.h"
 
 #include "Flags/GraphicsObjectType.h"
 

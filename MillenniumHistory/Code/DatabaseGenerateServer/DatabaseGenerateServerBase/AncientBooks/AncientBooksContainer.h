@@ -15,6 +15,7 @@
 #include "AncientBooksFwd.h"
 #include "System/Helper/UnicodeUsing.h"
 
+#include <filesystem>
 #include <memory>
 
 namespace AncientBooks
@@ -24,57 +25,77 @@ namespace AncientBooks
     public:
         using ClassType = AncientBooksContainer;
 
+        using String = System::String;
+        using ConstArticleContainerSharedPtr = std::shared_ptr<const ArticleContainer>;
+        using ConstBookContainerSharedPtr = std::shared_ptr<const BookContainer>;
+        using ConstCalendarContainerSharedPtr = std::shared_ptr<const CalendarContainer>;
+        using ConstCategoryContainerSharedPtr = std::shared_ptr<const CategoryContainer>;
+        using ConstCharacterContainerSharedPtr = std::shared_ptr<const CharacterContainer>;
+        using ConstCountryContainerSharedPtr = std::shared_ptr<const CountryContainer>;
+        using ConstDayContainerSharedPtr = std::shared_ptr<const DayContainer>;
+        using ConstEmperorContainerSharedPtr = std::shared_ptr<const EmperorContainer>;
+        using ConstGatherContainerSharedPtr = std::shared_ptr<const GatherContainer>;
+        using ConstGenusContainerSharedPtr = std::shared_ptr<const GenusContainer>;
+        using ConstGeographicContainerSharedPtr = std::shared_ptr<const GeographicContainer>;
+        using ConstIdentityContainerSharedPtr = std::shared_ptr<const IdentityContainer>;
+        using ConstImperialCourtContainerSharedPtr = std::shared_ptr<const ImperialCourtContainer>;
+        using ConstMonthContainerSharedPtr = std::shared_ptr<const MonthContainer>;
+        using ConstReignTitleContainerSharedPtr = std::shared_ptr<const ReignTitleContainer>;
+        using ConstSexagenaryCycleContainerSharedPtr = std::shared_ptr<const SexagenaryCycleContainer>;
+        using ConstSourceContainerSharedPtr = std::shared_ptr<const SourceContainer>;
+        using ConstVersionContainerSharedPtr = std::shared_ptr<const VersionContainer>;
+        using ConstYearContainerSharedPtr = std::shared_ptr<const YearContainer>;
+
     public:
-        explicit AncientBooksContainer(const System::String& directory);
+        explicit AncientBooksContainer(const String& directory);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD std::shared_ptr<const ArticleContainer> GetArticleContainer() const noexcept;
-        NODISCARD std::shared_ptr<const BookContainer> GetBookContainer() const noexcept;
-        NODISCARD std::shared_ptr<const CalendarContainer> GetCalendarContainer() const noexcept;
-        NODISCARD std::shared_ptr<const CategoryContainer> GetCategoryContainer() const noexcept;
-        NODISCARD std::shared_ptr<const ChapterContainer> GetChapterContainer() const noexcept;
-        NODISCARD std::shared_ptr<const CharacterContainer> GetCharacterContainer() const noexcept;
-        NODISCARD std::shared_ptr<const CountryContainer> GetCountryContainer() const noexcept;
-        NODISCARD std::shared_ptr<const DayContainer> GetDayContainer() const noexcept;
-        NODISCARD std::shared_ptr<const EmperorContainer> GetEmperorContainer() const noexcept;
-        NODISCARD std::shared_ptr<const GatherContainer> GetGatherContainer() const noexcept;
-        NODISCARD std::shared_ptr<const GenusContainer> GetGenusContainer() const noexcept;
-        NODISCARD std::shared_ptr<const GeographicContainer> GetGeographicContainer() const noexcept;
-        NODISCARD std::shared_ptr<const IdentityContainer> GetIdentityContainer() const noexcept;
-        NODISCARD std::shared_ptr<const ImperialCourtContainer> GetImperialCourtContainer() const noexcept;
-        NODISCARD std::shared_ptr<const MonthContainer> GetMonthContainer() const noexcept;
-        NODISCARD std::shared_ptr<const ReignTitleContainer> GetReignTitleContainer() const noexcept;
-        NODISCARD std::shared_ptr<const SexagenaryCycleContainer> GetSexagenaryCycleContainer() const noexcept;
-        NODISCARD std::shared_ptr<const SourceContainer> GetSourceContainer() const noexcept;
-        NODISCARD std::shared_ptr<const VersionContainer> GetVersionContainer() const noexcept;
-        NODISCARD std::shared_ptr<const YearContainer> GetYearContainer() const noexcept;
+        NODISCARD ConstArticleContainerSharedPtr GetArticleContainer() const noexcept;
+        NODISCARD ConstBookContainerSharedPtr GetBookContainer() const noexcept;
+        NODISCARD ConstCalendarContainerSharedPtr GetCalendarContainer() const noexcept;
+        NODISCARD ConstCategoryContainerSharedPtr GetCategoryContainer() const noexcept;
+        NODISCARD ConstCharacterContainerSharedPtr GetCharacterContainer() const noexcept;
+        NODISCARD ConstCountryContainerSharedPtr GetCountryContainer() const noexcept;
+        NODISCARD ConstDayContainerSharedPtr GetDayContainer() const noexcept;
+        NODISCARD ConstEmperorContainerSharedPtr GetEmperorContainer() const noexcept;
+        NODISCARD ConstGatherContainerSharedPtr GetGatherContainer() const noexcept;
+        NODISCARD ConstGenusContainerSharedPtr GetGenusContainer() const noexcept;
+        NODISCARD ConstGeographicContainerSharedPtr GetGeographicContainer() const noexcept;
+        NODISCARD ConstIdentityContainerSharedPtr GetIdentityContainer() const noexcept;
+        NODISCARD ConstImperialCourtContainerSharedPtr GetImperialCourtContainer() const noexcept;
+        NODISCARD ConstMonthContainerSharedPtr GetMonthContainer() const noexcept;
+        NODISCARD ConstReignTitleContainerSharedPtr GetReignTitleContainer() const noexcept;
+        NODISCARD ConstSexagenaryCycleContainerSharedPtr GetSexagenaryCycleContainer() const noexcept;
+        NODISCARD ConstSourceContainerSharedPtr GetSourceContainer() const noexcept;
+        NODISCARD ConstVersionContainerSharedPtr GetVersionContainer() const noexcept;
+        NODISCARD ConstYearContainerSharedPtr GetYearContainer() const noexcept;
 
     private:
-        void Parsing(const System::String& directory);
+        void Parsing(const String& directory);
+        void Parsing(const std::filesystem::directory_entry& inputPath);
         void Verify() const;
 
     private:
-        std::shared_ptr<const ArticleContainer> articleContainer;
-        std::shared_ptr<const BookContainer> bookContainer;
-        std::shared_ptr<const CalendarContainer> calendarContainer;
-        std::shared_ptr<const CategoryContainer> categoryContainer;
-        std::shared_ptr<const ChapterContainer> chapterContainer;
-        std::shared_ptr<const CharacterContainer> characterContainer;
-        std::shared_ptr<const CountryContainer> countryContainer;
-        std::shared_ptr<const DayContainer> dayContainer;
-        std::shared_ptr<const EmperorContainer> emperorContainer;
-        std::shared_ptr<const GatherContainer> gatherContainer;
-        std::shared_ptr<const GenusContainer> genusContainer;
-        std::shared_ptr<const GeographicContainer> geographicContainer;
-        std::shared_ptr<const IdentityContainer> identityContainer;
-        std::shared_ptr<const ImperialCourtContainer> imperialCourtContainer;
-        std::shared_ptr<const MonthContainer> monthContainer;
-        std::shared_ptr<const ReignTitleContainer> reignTitleContainer;
-        std::shared_ptr<const SexagenaryCycleContainer> sexagenaryCycleContainer;
-        std::shared_ptr<const SourceContainer> sourceContainer;
-        std::shared_ptr<const VersionContainer> versionContainer;
-        std::shared_ptr<const YearContainer> yearContainer;
+        ConstArticleContainerSharedPtr articleContainer;
+        ConstBookContainerSharedPtr bookContainer;
+        ConstCalendarContainerSharedPtr calendarContainer;
+        ConstCategoryContainerSharedPtr categoryContainer;
+        ConstCharacterContainerSharedPtr characterContainer;
+        ConstCountryContainerSharedPtr countryContainer;
+        ConstDayContainerSharedPtr dayContainer;
+        ConstEmperorContainerSharedPtr emperorContainer;
+        ConstGatherContainerSharedPtr gatherContainer;
+        ConstGenusContainerSharedPtr genusContainer;
+        ConstGeographicContainerSharedPtr geographicContainer;
+        ConstIdentityContainerSharedPtr identityContainer;
+        ConstImperialCourtContainerSharedPtr imperialCourtContainer;
+        ConstMonthContainerSharedPtr monthContainer;
+        ConstReignTitleContainerSharedPtr reignTitleContainer;
+        ConstSexagenaryCycleContainerSharedPtr sexagenaryCycleContainer;
+        ConstSourceContainerSharedPtr sourceContainer;
+        ConstVersionContainerSharedPtr versionContainer;
+        ConstYearContainerSharedPtr yearContainer;
     };
 }
 

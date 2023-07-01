@@ -23,6 +23,10 @@ namespace AncientBooks
     public:
         using ClassType = ImperialCourtBase;
 
+        using String = System::String;
+        using ConstYearSharedPtr = std::shared_ptr<const YearMappingType>;
+        using ConstYearSharedPtr = std::shared_ptr<const YearMappingType>;
+
     public:
         ImperialCourtBase() noexcept = default;
         explicit ImperialCourtBase(int key) noexcept;
@@ -39,15 +43,15 @@ namespace AncientBooks
 
         NODISCARD virtual int GetId() const noexcept;
 
-        NODISCARD virtual System::String GetCategory() const;
+        NODISCARD virtual String GetCategory() const;
 
-        NODISCARD virtual System::String GetBook() const;
+        NODISCARD virtual String GetBook() const;
 
         NODISCARD virtual int GetBegin() const noexcept;
-        NODISCARD virtual std::shared_ptr<const YearMappingType> GetBegin(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstYearSharedPtr GetBegin(const AncientBooksContainer& csvContainer) const;
 
         NODISCARD virtual int GetEnd() const noexcept;
-        NODISCARD virtual std::shared_ptr<const YearMappingType> GetEnd(const AncientBooksContainer& csvContainer) const;
+        NODISCARD virtual ConstYearSharedPtr GetEnd(const AncientBooksContainer& csvContainer) const;
 
     private:
         int key{};

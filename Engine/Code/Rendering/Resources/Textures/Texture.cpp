@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:29)
+///	版本：0.9.1.0 (2023/06/29 20:20)
 
 #include "Rendering/RenderingExport.h"
 
@@ -59,9 +59,9 @@ Rendering::SubResource Rendering::Texture::GetSubResource(int index)
     const auto level = index % numLevels;
     const auto rowPitch = GetDimension(level, 0) * GetElementSize();
 
-    SubResource sr{ item, level, GetDataFor(item, level), rowPitch, GetDimension(level, 1) * rowPitch };
+    SubResource subResource{ item, level, GetDataFor(item, level), rowPitch, GetDimension(level, 1) * rowPitch };
 
-    return sr;
+    return subResource;
 }
 
 Rendering::Texture::SpanIterator Rendering::Texture::GetDataFor(int item, int level)

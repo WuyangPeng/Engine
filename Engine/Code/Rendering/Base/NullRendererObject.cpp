@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:08)
+///	版本：0.9.1.0 (2023/06/28 10:28)
 
 #include "Rendering/RenderingExport.h"
 
@@ -24,4 +24,86 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, NullRendererObject)
 void Rendering::NullRendererObject::Enable() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
+}
+
+bool Rendering::NullRendererObject::Update() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return false;
+}
+
+bool Rendering::NullRendererObject::Update(int level) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(level);
+
+    return false;
+}
+
+bool Rendering::NullRendererObject::Update(int item, int level) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(item, level);
+
+    return false;
+}
+
+bool Rendering::NullRendererObject::CopyGpuToCpu() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return false;
+}
+
+bool Rendering::NullRendererObject::CopyGpuToCpu(int level) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(level);
+
+    return false;
+}
+
+bool Rendering::NullRendererObject::CopyGpuToCpu(int item, int level) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(item, level);
+
+    return false;
+}
+
+bool Rendering::NullRendererObject::CopyCpuToGpu() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return false;
+}
+
+bool Rendering::NullRendererObject::CopyCpuToGpu(int level) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(level);
+
+    return false;
+}
+
+bool Rendering::NullRendererObject::CopyCpuToGpu(int item, int level) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(item, level);
+
+    return false;
+}
+
+bool Rendering::NullRendererObject::GetNumActiveElements() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return false;
 }

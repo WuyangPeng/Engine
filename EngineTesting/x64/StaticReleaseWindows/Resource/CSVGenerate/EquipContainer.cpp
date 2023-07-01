@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-CSVConfigure::EquipContainer::EquipContainer(const CoreTools::CSVContent& csvContent)
+CSVConfigure::EquipContainer::EquipContainer(const CSVContent& csvContent)
     : equip{}
 {
     Parsing(csvContent);
@@ -24,10 +24,16 @@ CSVConfigure::EquipContainer::EquipContainer(const CoreTools::CSVContent& csvCon
     USER_SELF_CLASS_IS_VALID_9;
 }
 
-void CSVConfigure::EquipContainer::Parsing(const CoreTools::CSVContent& csvContent)
+void CSVConfigure::EquipContainer::Parsing(const CSVContent& csvContent)
 {
     LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("equip表开始载入……"));
 
+    Load(csvContent);
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("equip表结束载入……"));
+}
+
+void CSVConfigure::EquipContainer::Load(const CSVContent& csvContent)
+{
     const auto size = csvContent.GetCount();
     const auto csvHead = csvContent.GetCSVHead();
 
@@ -42,7 +48,7 @@ void CSVConfigure::EquipContainer::Parsing(const CoreTools::CSVContent& csvConte
         return (*lhs).GetKey() < (*rhs).GetKey();
     });
 
-    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("equip表结束载入……"));
+    equip.shrink_to_fit();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, EquipContainer)

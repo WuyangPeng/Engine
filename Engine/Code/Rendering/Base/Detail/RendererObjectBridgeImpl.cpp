@@ -5,14 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:07)
+///	版本：0.9.1.0 (2023/06/28 10:24)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RendererObjectBridgeImpl.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/Base/GraphicsObject.h"
+#include "Rendering/Base/RendererObject.h"
+#include "Rendering/Base/TotalAllocation.h"
+#include "Rendering/Resources/Resource.h"
 
 Rendering::RendererObjectBridgeImpl::RendererObjectBridgeImpl() noexcept
     : container{}
@@ -26,8 +30,8 @@ Rendering::RendererObjectBridgeImpl::RendererObjectSharedPtr Rendering::Renderer
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto iter = container.find(graphicsObject);
-    if (iter == container.end())
+    if (auto iter = container.find(graphicsObject);
+        iter == container.end())
     {
         auto rendererObject = graphicsObject->CreateRendererObject(rendererTypes);
 
@@ -59,13 +63,31 @@ Rendering::RendererObjectBridgeImpl::ConstRendererObjectSharedPtr Rendering::Ren
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = container.find(graphicsObject);
-    if (iter != container.end())
+    if (const auto iter = container.find(graphicsObject);
+        iter != container.end())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("RendererObject未绑定。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("RendererObject未绑定。"s))
     }
+}
+
+Rendering::TotalAllocation Rendering::RendererObjectBridgeImpl::GetTotalAllocation() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    TotalAllocation totalAllocation{};
+
+    for (const auto& element : container)
+    {
+        const auto& object = element.second;
+
+        const auto resource = boost::polymorphic_pointer_downcast<const Resource>(object->GetGraphicsObject());
+        totalAllocation.AddNumObjects(1);
+        totalAllocation.AddNumBytes(resource->GetNumBytes());
+    }
+
+    return totalAllocation;
 }

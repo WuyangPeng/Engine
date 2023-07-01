@@ -31,9 +31,9 @@ void JsonConfigure::PartsContainer::Parsing(const CoreTools::JsonRow& jsonRow)
 {
     const auto dataRow = jsonRow.GetJsonRowContainer(SYSTEM_TEXT("data"s));
 
-    for (const auto& value : dataRow)
+    for (const auto& element : dataRow)
     {
-        data.emplace_back(std::make_shared<Parts::Data>(value));
+        data.emplace_back(std::make_shared<Parts::Data>(element));
     }
 
     std::ranges::sort(data, [](const auto& lhs, const auto& rhs) noexcept {
@@ -106,9 +106,9 @@ void JsonConfigure::Parts::Data::Parsing(const CoreTools::JsonRow& jsonRow)
 {
     const auto scenesRow = jsonRow.GetJsonRowContainer(SYSTEM_TEXT("scenes"s));
 
-    for (const auto& value : scenesRow)
+    for (const auto& element : scenesRow)
     {
-        scenes.emplace_back(std::make_shared<Parts::Scenes>(value));
+        scenes.emplace_back(std::make_shared<Parts::Scenes>(element));
     }
 
     std::ranges::sort(scenes, [](const auto& lhs, const auto& rhs) noexcept {

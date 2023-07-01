@@ -13,7 +13,7 @@
 
 using namespace std::literals;
 
-AncientBooks::SexagenaryCycle::SexagenaryCycle(const CoreTools::CSVRow& csvRow)
+AncientBooks::SexagenaryCycle::SexagenaryCycle(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       heavenly{ csvRow.GetString(SYSTEM_TEXT("heavenly"s)) },

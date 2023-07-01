@@ -16,7 +16,7 @@
 #include "CoreTools/Base/SingletonDetail.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 
 RENDERING_EXPORT_UNIQUE_PTR(CameraManager);
 RENDERING_NON_COPY_EXPORT_IMPL(CameraManagerImpl);

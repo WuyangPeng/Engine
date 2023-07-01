@@ -11,6 +11,7 @@
 
 #include "RedisConnection.h"
 #include "RedisReply.h"
+#include "System/Helper/PragmaWarning/Algorithm.h"
 #include "System/Helper/PragmaWarning/LexicalCast.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
@@ -115,6 +116,57 @@ Database::BasisDatabase Database::RedisConnection::GetBasisDatabase(const Databa
 
         case DataType::Bool:
             return BasisDatabase{ fieldName.GetFieldName(), redisReply->str == "true"s };
+
+        case DataType::StringArray:
+        {
+            const std::string column{ redisReply->str };
+            BasisDatabase::StringArray element{};
+            split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+
+            return BasisDatabase{ fieldName.GetFieldName(), element };
+        }
+
+        case DataType::Int32Array:
+        {
+            const std::string column{ redisReply->str };
+            BasisDatabase::StringArray element{};
+            split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+
+            BasisDatabase::Int32Array result{};
+            for (const auto& value : element)
+            {
+                result.emplace_back(boost::lexical_cast<int32_t>(value));
+            }
+            return BasisDatabase{ fieldName.GetFieldName(), result };
+        }
+
+        case DataType::Int64Array:
+        {
+            const std::string column{ redisReply->str };
+            BasisDatabase::StringArray element{};
+            split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+
+            BasisDatabase::Int64Array result{};
+            for (const auto& value : element)
+            {
+                result.emplace_back(boost::lexical_cast<int64_t>(value));
+            }
+            return BasisDatabase{ fieldName.GetFieldName(), result };
+        }
+
+        case DataType::DoubleArray:
+        {
+            const std::string column{ redisReply->str };
+            BasisDatabase::StringArray element{};
+            split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+
+            BasisDatabase::DoubleArray result{};
+            for (const auto& value : element)
+            {
+                result.emplace_back(boost::lexical_cast<double>(value));
+            }
+            return BasisDatabase{ fieldName.GetFieldName(), element };
+        }
 
         default:
             return BasisDatabase{ fieldName.GetFieldName(), ""s };

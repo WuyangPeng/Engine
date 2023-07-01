@@ -15,8 +15,7 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
-#include "Mathematics/CurvesSurfacesVolumes/ParametricSurfaceDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Mathematics/CurvesSurfacesVolumes/ParametricSurfaceDetail.h" 
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, RectangleSurface);
@@ -54,7 +53,7 @@ Rendering::RectangleSurface::RectangleSurface(const std::shared_ptr<Mathematics:
 
     const auto numTriangles = 2 * (numUSamples - 1) * (numVSamples - 1);
     const auto numIndices = 3 * numTriangles;
-    SetIndexBuffer(IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, sizeof(int)));
+    SetIndexBuffer(IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, sizeof(int)));
 
     auto indices = GetIndexBuffer()->GetData();
     for (auto uIndex = 0, i = 0; uIndex < numUSamples - 1; ++uIndex)
@@ -105,7 +104,7 @@ void Rendering::RectangleSurface::UpdateSurface()
     }
 
     UpdateModelSpace(VisualUpdateType::Normals);
-    RENDERER_MANAGE_SINGLETON.UpdateAll(GetVertexBuffer());
+ 
 }
 
 Rendering::RectangleSurface::RectangleSurface(LoadConstructor value)

@@ -40,7 +40,7 @@ int AncientBooks::CharacterBase::GetCountry() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::CountryMappingType> AncientBooks::CharacterBase::GetCountry(const AncientBooksContainer& csvContainer) const
+AncientBooks::CharacterBase::ConstCountrySharedPtr AncientBooks::CharacterBase::GetCountry(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -56,7 +56,7 @@ int AncientBooks::CharacterBase::GetIdentity() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::IdentityMappingType> AncientBooks::CharacterBase::GetIdentity(const AncientBooksContainer& csvContainer) const
+AncientBooks::CharacterBase::ConstIdentitySharedPtr AncientBooks::CharacterBase::GetIdentity(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -86,7 +86,7 @@ System::String AncientBooks::CharacterBase::GetFullName() const
     THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取字符串。"s))
 }
 
-std::vector<System::String> AncientBooks::CharacterBase::GetAlias() const
+AncientBooks::CharacterBase::StringContainer AncientBooks::CharacterBase::GetAlias() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -109,14 +109,14 @@ System::String AncientBooks::CharacterBase::GetAlias(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::CharacterBase::GetAliasBegin() const
+AncientBooks::CharacterBase::StringContainerConstIter AncientBooks::CharacterBase::GetAliasBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::CharacterBase::GetAliasEnd() const
+AncientBooks::CharacterBase::StringContainerConstIter AncientBooks::CharacterBase::GetAliasEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -144,6 +144,15 @@ int AncientBooks::CharacterBase::GetFather() const noexcept
     return 0;
 }
 
+AncientBooks::CharacterBase::ConstCharacterSharedPtr AncientBooks::CharacterBase::GetFather(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取映射值。"s))
+}
+
 int AncientBooks::CharacterBase::GetMother() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
@@ -151,7 +160,16 @@ int AncientBooks::CharacterBase::GetMother() const noexcept
     return 0;
 }
 
-std::vector<int> AncientBooks::CharacterBase::GetFosterFather() const
+AncientBooks::CharacterBase::ConstCharacterSharedPtr AncientBooks::CharacterBase::GetMother(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取映射值。"s))
+}
+
+AncientBooks::CharacterBase::IntContainer AncientBooks::CharacterBase::GetFosterFather() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -174,21 +192,30 @@ int AncientBooks::CharacterBase::GetFosterFather(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::CharacterBase::GetFosterFatherBegin() const
+AncientBooks::CharacterBase::IntContainerConstIter AncientBooks::CharacterBase::GetFosterFatherBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::CharacterBase::GetFosterFatherEnd() const
+AncientBooks::CharacterBase::IntContainerConstIter AncientBooks::CharacterBase::GetFosterFatherEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取数组。"s))
 }
 
-std::vector<int> AncientBooks::CharacterBase::GetFosterMother() const
+AncientBooks::CharacterBase::CharacterContainer AncientBooks::CharacterBase::GetFosterFather(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取映射值。"s))
+}
+
+AncientBooks::CharacterBase::IntContainer AncientBooks::CharacterBase::GetFosterMother() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -211,18 +238,27 @@ int AncientBooks::CharacterBase::GetFosterMother(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::CharacterBase::GetFosterMotherBegin() const
+AncientBooks::CharacterBase::IntContainerConstIter AncientBooks::CharacterBase::GetFosterMotherBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::CharacterBase::GetFosterMotherEnd() const
+AncientBooks::CharacterBase::IntContainerConstIter AncientBooks::CharacterBase::GetFosterMotherEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取数组。"s))
+}
+
+AncientBooks::CharacterBase::CharacterContainer AncientBooks::CharacterBase::GetFosterMother(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取映射值。"s))
 }
 
 int AncientBooks::CharacterBase::GetBirthYear() const noexcept
@@ -232,7 +268,7 @@ int AncientBooks::CharacterBase::GetBirthYear() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::CharacterBase::GetBirthYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::CharacterBase::ConstYearSharedPtr AncientBooks::CharacterBase::GetBirthYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -248,7 +284,7 @@ int AncientBooks::CharacterBase::GetBirthMonth() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::MonthMappingType> AncientBooks::CharacterBase::GetBirthMonth(const AncientBooksContainer& csvContainer) const
+AncientBooks::CharacterBase::ConstMonthSharedPtr AncientBooks::CharacterBase::GetBirthMonth(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -264,7 +300,7 @@ int AncientBooks::CharacterBase::GetBirthSexagenaryCycle() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::CharacterBase::GetBirthSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::CharacterBase::ConstSexagenaryCycleSharedPtr AncientBooks::CharacterBase::GetBirthSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -280,7 +316,7 @@ int AncientBooks::CharacterBase::GetBirthDay() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::CharacterBase::GetBirthDay(const AncientBooksContainer& csvContainer) const
+AncientBooks::CharacterBase::ConstDaySharedPtr AncientBooks::CharacterBase::GetBirthDay(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -296,7 +332,7 @@ int AncientBooks::CharacterBase::GetDeathYear() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::CharacterBase::GetDeathYear(const AncientBooksContainer& csvContainer) const
+AncientBooks::CharacterBase::ConstYearSharedPtr AncientBooks::CharacterBase::GetDeathYear(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -312,7 +348,7 @@ int AncientBooks::CharacterBase::GetDeathMonth() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::MonthMappingType> AncientBooks::CharacterBase::GetDeathMonth(const AncientBooksContainer& csvContainer) const
+AncientBooks::CharacterBase::ConstMonthSharedPtr AncientBooks::CharacterBase::GetDeathMonth(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -328,7 +364,7 @@ int AncientBooks::CharacterBase::GetDeathSexagenaryCycle() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::CharacterBase::GetDeathSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::CharacterBase::ConstSexagenaryCycleSharedPtr AncientBooks::CharacterBase::GetDeathSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -344,7 +380,7 @@ int AncientBooks::CharacterBase::GetDeathDay() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::CharacterBase::GetDeathDay(const AncientBooksContainer& csvContainer) const
+AncientBooks::CharacterBase::ConstDaySharedPtr AncientBooks::CharacterBase::GetDeathDay(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -353,7 +389,7 @@ std::shared_ptr<const AncientBooks::DayMappingType> AncientBooks::CharacterBase:
     THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取映射值。"s))
 }
 
-std::vector<System::String> AncientBooks::CharacterBase::GetUnansweredQuestion() const
+AncientBooks::CharacterBase::StringContainer AncientBooks::CharacterBase::GetUnansweredQuestion() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -376,14 +412,14 @@ System::String AncientBooks::CharacterBase::GetUnansweredQuestion(int index) con
     THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::CharacterBase::GetUnansweredQuestionBegin() const
+AncientBooks::CharacterBase::StringContainerConstIter AncientBooks::CharacterBase::GetUnansweredQuestionBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("character表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::CharacterBase::GetUnansweredQuestionEnd() const
+AncientBooks::CharacterBase::StringContainerConstIter AncientBooks::CharacterBase::GetUnansweredQuestionEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

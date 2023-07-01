@@ -13,7 +13,7 @@
 
 using namespace std::literals;
 
-OutputCSVTesting::Input1::Input1(const CoreTools::CSVRow& csvRow)
+OutputCSVTesting::Input1::Input1(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       test0{ csvRow.GetBool(SYSTEM_TEXT("test0"s)) },

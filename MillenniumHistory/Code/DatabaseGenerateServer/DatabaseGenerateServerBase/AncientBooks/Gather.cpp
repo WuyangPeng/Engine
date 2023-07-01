@@ -13,7 +13,7 @@
 
 using namespace std::literals;
 
-AncientBooks::Gather::Gather(const CoreTools::CSVRow& csvRow)
+AncientBooks::Gather::Gather(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       gather{ csvRow.GetString(SYSTEM_TEXT("gather"s)) }

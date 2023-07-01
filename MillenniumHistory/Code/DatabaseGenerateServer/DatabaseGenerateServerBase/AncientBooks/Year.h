@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = Year;
         using ParentType = YearBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Year(const CoreTools::CSVRow& csvRow);
+        explicit Year(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -33,36 +35,38 @@ namespace AncientBooks
 
         NODISCARD int GetId() const noexcept override;
 
-        NODISCARD System::String GetName() const override;
+        NODISCARD String GetName() const override;
 
         NODISCARD int GetSexagenaryCycle() const noexcept override;
-        NODISCARD std::shared_ptr<const SexagenaryCycleMappingType> GetSexagenaryCycle(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstSexagenaryCycleSharedPtr GetSexagenaryCycle(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int64_t GetReignTitle() const noexcept override;
-        NODISCARD std::shared_ptr<const ReignTitleMappingType> GetReignTitle(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstReignTitleSharedPtr GetReignTitle(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetYear() const noexcept override;
 
-        NODISCARD std::vector<int> GetUnorthodoxReignTitle() const override;
+        NODISCARD Int64Container GetUnorthodoxReignTitle() const override;
         NODISCARD int GetUnorthodoxReignTitleCount() const override;
-        NODISCARD int GetUnorthodoxReignTitle(int index) const override;
-        NODISCARD std::vector<int>::const_iterator GetUnorthodoxReignTitleBegin() const noexcept override;
-        NODISCARD std::vector<int>::const_iterator GetUnorthodoxReignTitleEnd() const noexcept override;
+        NODISCARD int64_t GetUnorthodoxReignTitle(int index) const override;
+        NODISCARD Int64ContainerConstIter GetUnorthodoxReignTitleBegin() const noexcept override;
+        NODISCARD Int64ContainerConstIter GetUnorthodoxReignTitleEnd() const noexcept override;
+        NODISCARD ReignTitleContainer GetUnorthodoxReignTitle(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD std::vector<int> GetUnorthodoxYear() const override;
+        NODISCARD IntContainer GetUnorthodoxYear() const override;
         NODISCARD int GetUnorthodoxYearCount() const override;
         NODISCARD int GetUnorthodoxYear(int index) const override;
-        NODISCARD std::vector<int>::const_iterator GetUnorthodoxYearBegin() const noexcept override;
-        NODISCARD std::vector<int>::const_iterator GetUnorthodoxYearEnd() const noexcept override;
+        NODISCARD IntContainerConstIter GetUnorthodoxYearBegin() const noexcept override;
+        NODISCARD IntContainerConstIter GetUnorthodoxYearEnd() const noexcept override;
+        NODISCARD YearContainer GetUnorthodoxYear(const AncientBooksContainer& csvContainer) const override;
 
     private:
         int id;  // Id
-        System::String name;  // 名字
+        String name;  // 名字
         int sexagenaryCycle;  // 干支
         int64_t reignTitle;  // 正統年號
         int year;  // 幾年
-        std::vector<int> unorthodoxReignTitle;  // 非年號
-        std::vector<int> unorthodoxYear;  // 幾年
+        Int64Container unorthodoxReignTitle;  // 非年號
+        IntContainer unorthodoxYear;  // 幾年
     };
 }
 

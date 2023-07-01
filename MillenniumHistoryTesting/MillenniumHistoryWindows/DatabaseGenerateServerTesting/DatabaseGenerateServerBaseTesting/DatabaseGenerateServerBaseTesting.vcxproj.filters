@@ -154,6 +154,63 @@
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\AncientBooksSuite.h">
       <Filter>AncientBooksSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\ArticleTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\YearTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\BookTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\CalendarTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\CategoryTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\CharacterTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\CountryTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\DayTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\EmperorTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\GatherTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\GenusTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\GeographicTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\IdentityTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\ImperialCourtTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\MonthTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\ReignTitleTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\SexagenaryCycleTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\SourceTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\VersionTesting.h">
+      <Filter>AncientBooksSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\TestingHelper.cpp">
@@ -166,6 +223,63 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\AncientBooksContainerTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\ArticleTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\BookTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\CalendarTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\CategoryTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\CharacterTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\CountryTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\DayTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\EmperorTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\GatherTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\GenusTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\GeographicTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\IdentityTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\ImperialCourtTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\MonthTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\ReignTitleTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\SexagenaryCycleTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\SourceTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\VersionTesting.cpp">
+      <Filter>AncientBooksSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ConfigurationTesting\AncientBooksSuite\YearTesting.cpp">
       <Filter>AncientBooksSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>

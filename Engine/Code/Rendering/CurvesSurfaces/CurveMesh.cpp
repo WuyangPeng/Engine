@@ -16,8 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Mathematics/Base/Float.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Mathematics/Base/Float.h" 
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, CurveMesh);
@@ -86,7 +85,7 @@ void Rendering::CurveMesh::SetLevel(int aLevel)
     UpdateModelSpace(VisualUpdateType::Normals);
 
     OnDynamicChange();
-    RENDERER_MANAGE_SINGLETON.BindAll(GetVertexBuffer());
+  
 }
 
 int Rendering::CurveMesh::GetLevel() const noexcept

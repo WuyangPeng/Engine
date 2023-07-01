@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:26)
+///	版本：0.9.1.0 (2023/06/29 11:14)
 
 #include "Rendering/RenderingExport.h"
 
@@ -73,7 +73,7 @@ void Rendering::GlobalStateImpl::SetActiveBlendState(const BlendStateSharedPtr& 
 
     if (!state)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("state指针为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("state指针为空。"s))
     }
 
     activeBlendState = state;
@@ -85,7 +85,7 @@ void Rendering::GlobalStateImpl::SetActiveDepthStencilState(const DepthStencilSt
 
     if (!state)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("state指针为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("state指针为空。"s))
     }
 
     activeDepthStencilState = state;
@@ -97,7 +97,7 @@ void Rendering::GlobalStateImpl::SetActiveRasterizerState(const RasterizerStateS
 
     if (!state)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("state指针为空。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("state指针为空。"s))
     }
 
     activeRasterizerState = state;
@@ -149,50 +149,64 @@ Rendering::GlobalStateImpl::RendererObjectSharedPtr Rendering::GlobalStateImpl::
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto sharedPtr = rendererObjectBridge.lock();
-    if (!sharedPtr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("rendererObjectBridge已释放。"s));
-    }
-
-    return sharedPtr->BindRendererObject(rendererTypes, graphicsObject);
+    return GetRendererObjectBridge()->BindRendererObject(rendererTypes, graphicsObject);
 }
 
 void Rendering::GlobalStateImpl::UnbindRendererObject(const GraphicsObjectSharedPtr& graphicsObject)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto sharedPtr = rendererObjectBridge.lock();
-    if (!sharedPtr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("rendererObjectBridge已释放。"s));
-    }
-
-    return sharedPtr->UnbindRendererObject(graphicsObject);
+    return GetRendererObjectBridge()->UnbindRendererObject(graphicsObject);
 }
 
 Rendering::GlobalStateImpl::RendererObjectSharedPtr Rendering::GlobalStateImpl::GetRendererObject(const GraphicsObjectSharedPtr& graphicsObject)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto sharedPtr = rendererObjectBridge.lock();
-    if (!sharedPtr)
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("rendererObjectBridge已释放。"s));
-    }
-
-    return sharedPtr->GetRendererObject(graphicsObject);
+    return GetRendererObjectBridge()->GetRendererObject(graphicsObject);
 }
 
 Rendering::GlobalStateImpl::ConstRendererObjectSharedPtr Rendering::GlobalStateImpl::GetRendererObject(const GraphicsObjectSharedPtr& graphicsObject) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto sharedPtr = rendererObjectBridge.lock();
-    if (!sharedPtr)
+    const auto result = rendererObjectBridge.lock();
+    if (result == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("rendererObjectBridge已释放。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("rendererObjectBridge已释放。"s))
     }
 
-    return sharedPtr->GetRendererObject(graphicsObject);
+    return result->GetRendererObject(graphicsObject);
+}
+
+Rendering::GlobalStateImpl::RendererObjectBridgeSharedPtr Rendering::GlobalStateImpl::GetRendererObjectBridge()
+{
+    auto result = rendererObjectBridge.lock();
+    if (result == nullptr)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("rendererObjectBridge已释放。"s))
+    }
+
+    return result;
+}
+
+void Rendering::GlobalStateImpl::SetDefaultBlendState()
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    SetActiveBlendState(defaultBlendState);
+}
+
+void Rendering::GlobalStateImpl::SetDefaultDepthStencilState()
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    SetActiveDepthStencilState(defaultDepthStencilState);
+}
+
+void Rendering::GlobalStateImpl::SetDefaultRasterizerState()
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    SetActiveRasterizerState(defaultRasterizerState);
 }

@@ -8,7 +8,9 @@
 /// 自动生成
 
 #include "AncientBooksContainer.h"
+#include "BookContainer.h"
 #include "Calendar.h"
+#include "CharacterContainer.h"
 #include "CountryContainer.h"
 #include "YearContainer.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -17,7 +19,7 @@
 
 using namespace std::literals;
 
-AncientBooks::Calendar::Calendar(const CoreTools::CSVRow& csvRow)
+AncientBooks::Calendar::Calendar(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       name{ csvRow.GetString(SYSTEM_TEXT("name"s)) },
@@ -58,7 +60,7 @@ System::String AncientBooks::Calendar::GetName() const
     return name;
 }
 
-std::vector<System::String> AncientBooks::Calendar::GetAlias() const
+AncientBooks::Calendar::StringContainer AncientBooks::Calendar::GetAlias() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -79,21 +81,21 @@ System::String AncientBooks::Calendar::GetAlias(int index) const
     return alias.at(index);
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Calendar::GetAliasBegin() const noexcept
+AncientBooks::Calendar::StringContainerConstIter AncientBooks::Calendar::GetAliasBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return alias.cbegin();
 }
 
-std::vector<System::String>::const_iterator AncientBooks::Calendar::GetAliasEnd() const noexcept
+AncientBooks::Calendar::StringContainerConstIter AncientBooks::Calendar::GetAliasEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return alias.cend();
 }
 
-std::vector<int> AncientBooks::Calendar::GetSource() const
+AncientBooks::Calendar::IntContainer AncientBooks::Calendar::GetSource() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -114,18 +116,34 @@ int AncientBooks::Calendar::GetSource(int index) const
     return source.at(index);
 }
 
-std::vector<int>::const_iterator AncientBooks::Calendar::GetSourceBegin() const noexcept
+AncientBooks::Calendar::IntContainerConstIter AncientBooks::Calendar::GetSourceBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return source.cbegin();
 }
 
-std::vector<int>::const_iterator AncientBooks::Calendar::GetSourceEnd() const noexcept
+AncientBooks::Calendar::IntContainerConstIter AncientBooks::Calendar::GetSourceEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return source.cend();
+}
+
+AncientBooks::Calendar::BookContainer AncientBooks::Calendar::GetSource(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    BookContainer result{};
+
+    const auto container = csvContainer.GetBookContainer();
+
+    for (const auto& element : source)
+    {
+        result.emplace_back(container->GetBook(element));
+    }
+
+    return result;
 }
 
 System::String AncientBooks::Calendar::GetPublication() const
@@ -135,7 +153,7 @@ System::String AncientBooks::Calendar::GetPublication() const
     return publication;
 }
 
-std::vector<int> AncientBooks::Calendar::GetCreator() const
+AncientBooks::Calendar::IntContainer AncientBooks::Calendar::GetCreator() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -156,18 +174,34 @@ int AncientBooks::Calendar::GetCreator(int index) const
     return creator.at(index);
 }
 
-std::vector<int>::const_iterator AncientBooks::Calendar::GetCreatorBegin() const noexcept
+AncientBooks::Calendar::IntContainerConstIter AncientBooks::Calendar::GetCreatorBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return creator.cbegin();
 }
 
-std::vector<int>::const_iterator AncientBooks::Calendar::GetCreatorEnd() const noexcept
+AncientBooks::Calendar::IntContainerConstIter AncientBooks::Calendar::GetCreatorEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     return creator.cend();
+}
+
+AncientBooks::Calendar::CharacterContainer AncientBooks::Calendar::GetCreator(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    CharacterContainer result{};
+
+    const auto container = csvContainer.GetCharacterContainer();
+
+    for (const auto& element : creator)
+    {
+        result.emplace_back(container->GetCharacter(element));
+    }
+
+    return result;
 }
 
 int AncientBooks::Calendar::GetFormulate() const noexcept
@@ -177,7 +211,7 @@ int AncientBooks::Calendar::GetFormulate() const noexcept
     return formulate;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::Calendar::GetFormulate(const AncientBooksContainer& csvContainer) const
+AncientBooks::Calendar::ConstYearSharedPtr AncientBooks::Calendar::GetFormulate(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -191,7 +225,7 @@ int AncientBooks::Calendar::GetCountry() const noexcept
     return country;
 }
 
-std::shared_ptr<const AncientBooks::CountryMappingType> AncientBooks::Calendar::GetCountry(const AncientBooksContainer& csvContainer) const
+AncientBooks::Calendar::ConstCountrySharedPtr AncientBooks::Calendar::GetCountry(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -205,7 +239,7 @@ int AncientBooks::Calendar::GetBegin() const noexcept
     return begin;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::Calendar::GetBegin(const AncientBooksContainer& csvContainer) const
+AncientBooks::Calendar::ConstYearSharedPtr AncientBooks::Calendar::GetBegin(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -219,7 +253,7 @@ int AncientBooks::Calendar::GetEnd() const noexcept
     return end;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::Calendar::GetEnd(const AncientBooksContainer& csvContainer) const
+AncientBooks::Calendar::ConstYearSharedPtr AncientBooks::Calendar::GetEnd(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -233,7 +267,7 @@ int AncientBooks::Calendar::GetAgainBegin() const noexcept
     return againBegin;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::Calendar::GetAgainBegin(const AncientBooksContainer& csvContainer) const
+AncientBooks::Calendar::ConstYearSharedPtr AncientBooks::Calendar::GetAgainBegin(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -247,7 +281,7 @@ int AncientBooks::Calendar::GetAgainEnd() const noexcept
     return againEnd;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::Calendar::GetAgainEnd(const AncientBooksContainer& csvContainer) const
+AncientBooks::Calendar::ConstYearSharedPtr AncientBooks::Calendar::GetAgainEnd(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

@@ -18,7 +18,7 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
+
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
@@ -42,7 +42,7 @@ void Rendering::LightWorldDirectionVectorConstantTesting::DoRunUnitTest()
 void Rendering::LightWorldDirectionVectorConstantTesting::MainTest()
 {
     CameraManager::Create();
-    RendererManager::Create();
+    
 
     CoreTools::InitTerm::ExecuteInitializer();
 
@@ -53,7 +53,7 @@ void Rendering::LightWorldDirectionVectorConstantTesting::MainTest()
 
     CoreTools::InitTerm::ExecuteTerminator();
 
-    RendererManager::Destroy();
+    
     CameraManager::Destroy();
 }
 

@@ -13,10 +13,8 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/ScreenTarget.h"
-#include "Rendering/Shaders/ShaderManager.h"
 
 #include <vector>
 
@@ -38,14 +36,10 @@ void Rendering::ScreenTargetTesting::MainTest()
     CoreTools::InitTerm::ExecuteInitializer();
 
     CameraManager::Create();
-    RendererManager::Create();
-    ShaderManager::Create();
 
     ASSERT_NOT_THROW_EXCEPTION_0(CameraTest);
     ASSERT_NOT_THROW_EXCEPTION_0(TrianglesMeshTest);
 
-    ShaderManager::Destroy();
-    RendererManager::Destroy();
     CameraManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();

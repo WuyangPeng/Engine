@@ -421,7 +421,8 @@ System::String CoreTools::CSVHeadImpl::GetActualTypeByNameSpace(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (const auto type = GetDataType(index); type == CSVDataType::Enum || type == CSVDataType::EnumArray)
+    if (const auto type = GetDataType(index);
+        type == CSVDataType::Enum || type == CSVDataType::EnumArray)
     {
         return pathSplitParsing.GetNameSpace() + TextParsing::gDoubleColon.data() + GetEnumTypeName(index);
     }
@@ -526,4 +527,41 @@ System::String CoreTools::CSVHeadImpl::GetScopeExpression(int index) const
     const ScopeExpressionParsing scopeExpressionParsing{ scopeExpression, variableNameExpression };
 
     return scopeExpressionParsing.Parsing();
+}
+
+System::String CoreTools::CSVHeadImpl::GetAbbreviation(int index) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    if (const auto type = GetDataType(index); type == CSVDataType::Enum || type == CSVDataType::EnumArray)
+    {
+        return GetEnumTypeName(index);
+    }
+    else
+    {
+        return CSVTypeConversion::GetAbbreviation(type);
+    }
+}
+
+System::String CoreTools::CSVHeadImpl::GetAbbreviationByNameSpace(int index, const String& className) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    if (const auto type = GetDataType(index);
+        type == CSVDataType::Enum || type == CSVDataType::EnumArray)
+    {
+        return pathSplitParsing.GetNameSpace() + TextParsing::gDoubleColon.data() + GetEnumTypeName(index);
+    }
+    else if (type < CSVDataType::BoolArray)
+    {
+        return CSVTypeConversion::GetActualType(type);
+    }
+    else
+    {
+        return pathSplitParsing.GetNameSpace() +
+               TextParsing::gDoubleColon.data() +
+               className +
+               TextParsing::gDoubleColon.data() +
+               CSVTypeConversion::GetAbbreviation(type);
+    }
 }

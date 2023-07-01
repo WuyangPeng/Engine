@@ -36,11 +36,11 @@ JsonConfigure::RoadContainer::DataContainer JsonConfigure::RoadContainer::GetDat
 
     DataContainer result{};
 
-    for (const auto& value : data)
+    for (const auto& element : data)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

@@ -1,4 +1,4 @@
-@default,,,,Year,Month,SexagenaryCycle,Day,Year,Month,SexagenaryCycle,Day
+@default,,Character,,Year,Month,SexagenaryCycle,Day,Year,Month,SexagenaryCycle,Day
 Id,名称,皇帝,序號,开始年,开始月,开始干支日,开始日,结束年,结束月,结束干支日,结束日
 int64,string,int[],int,int,int,int,int,int,int,int,int
 id,name,emperor,serial,beginYear,beginMonth,beginSexagenaryCycle,beginDay,endYear,endMonth,endSexagenaryCycle,endDay

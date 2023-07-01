@@ -41,7 +41,7 @@ void JsonConfigure::JsonConfigureContainer::Parsing(const System::String& direct
 
     for (const auto& inputPath : std::filesystem::directory_iterator(path))
     {
-        auto fileName = inputPath.path().native();
+        const auto fileName = inputPath.path().native();
 
         if (fileName.find(CoreTools::StringConversion::StandardConversionWideChar(SYSTEM_TEXT(".json"s))) != (fileName.size() - 5))
         {

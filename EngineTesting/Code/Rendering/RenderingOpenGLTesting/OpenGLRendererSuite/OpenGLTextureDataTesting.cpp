@@ -12,7 +12,6 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/OpenGLRenderer/OpenGLTextureDataDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Textures/LoadTexture.h"
 
 Rendering::OpenGLTextureDataTesting::OpenGLTextureDataTesting(const OStreamShared& stream)
@@ -28,11 +27,9 @@ void Rendering::OpenGLTextureDataTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Rendering::OpenGLTextureDataTesting::MainTest()
+void Rendering::OpenGLTextureDataTesting::MainTest() noexcept
 {
-    RendererManager::Create();
 
-    RendererManager::Destroy();
 }
 
 void Rendering::OpenGLTextureDataTesting::Texture1DTest()

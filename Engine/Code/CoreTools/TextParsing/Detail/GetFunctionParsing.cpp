@@ -142,7 +142,15 @@ System::String CoreTools::GetFunctionParsing::GenerateGetValueFunction(const Str
     auto content = GenerateIndentation();
 
     content += beginDescribe;
-    content += valueType;
+    if (valueType == SYSTEM_TEXT("System::String"))
+    {
+        content += SYSTEM_TEXT("String");
+    }
+    else
+    {
+        content += valueType;
+    }
+
     content += TextParsing::gSpace;
     content += functionVariableName;
     content += endDescribe;
@@ -158,7 +166,7 @@ System::String CoreTools::GetFunctionParsing::GenerateBeginIterFunction(const St
 
     content += beginDescribe;
     content += actualType;
-    content += TextParsing::gConstIterator;
+    content += SYSTEM_TEXT("ConstIter");
     content += TextParsing::gSpace;
     content += functionVariableName;
     content += endDescribe;
@@ -174,7 +182,7 @@ System::String CoreTools::GetFunctionParsing::GenerateEndIterFunction(const Stri
 
     content += beginDescribe;
     content += actualType;
-    content += TextParsing::gConstIterator;
+    content += SYSTEM_TEXT("ConstIter");
     content += TextParsing::gSpace;
     content += functionVariableName;
     content += endDescribe;

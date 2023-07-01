@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:19)
+///	版本：0.9.1.0 (2023/06/25 16:58)
 
 #ifndef RENDERING_WGL_RENDERER_WGL_DEVICE_H
 #define RENDERING_WGL_RENDERER_WGL_DEVICE_H
@@ -35,11 +35,14 @@ namespace Rendering
 
         NODISCARD RenderingDeviceSharedPtr Clone() const override;
 
-        void SwapBuffers() override;
+        void SwapBuffers(int syncInterval) override;
         void ResetSize() override;
 
     private:
         void Init();
+
+    public:
+        void Execute(const ComputeProgramSharedPtr& computeProgram, int numXGroups, int numYGroups, int numZGroups) noexcept override;
 
     private:
         WindowsHWnd hWnd;

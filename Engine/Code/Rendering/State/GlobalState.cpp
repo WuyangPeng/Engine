@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:27)
+///	版本：0.9.1.0 (2023/06/29 11:17)
 
 #include "Rendering/RenderingExport.h"
 
@@ -25,14 +25,14 @@ Rendering::GlobalState::GlobalState(RendererTypes rendererTypes, const std::stri
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, GlobalState)
 
-void Rendering::GlobalState::CreateDefaultGlobalState()  
+void Rendering::GlobalState::CreateDefaultGlobalState()
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return impl->CreateDefaultGlobalState();
 }
 
-void Rendering::GlobalState::DestroyDefaultGlobalState()  
+void Rendering::GlobalState::DestroyDefaultGlobalState()
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -100,4 +100,25 @@ Rendering::GlobalState::RasterizerStateSharedPtr Rendering::GlobalState::GetDefa
     RENDERING_CLASS_IS_VALID_9;
 
     return impl->GetDefaultRasterizerState();
+}
+
+void Rendering::GlobalState::SetDefaultBlendState()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetDefaultBlendState();
+}
+
+void Rendering::GlobalState::SetDefaultDepthStencilState()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetDefaultDepthStencilState();
+}
+
+void Rendering::GlobalState::SetDefaultRasterizerState()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetDefaultRasterizerState();
 }

@@ -36,11 +36,11 @@ AncientBooks::GenusContainer::Container AncientBooks::GenusContainer::GetGenus(F
 
     Container result{};
 
-    for (const auto& value : genus)
+    for (const auto& element : genus)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

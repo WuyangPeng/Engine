@@ -19,6 +19,7 @@
 #include "MainFunctionHelperSuite/MainFunctionHelperSuite.h"
 #include "MiddleLayerSuite/MiddleLayerSuite.h"
 #include "OpenGLGlutFrameSuite/OpenGLGlutFrameSuite.h"
+#include "ProjectSuite/ProjectSuite.h"
 #include "WindowCreateSuite/WindowCreateSuite.h"
 #include "WindowProcessSuite/WindowProcessSuite.h"
 #include "WindowRegisterSuite/WindowRegisterSuite.h"

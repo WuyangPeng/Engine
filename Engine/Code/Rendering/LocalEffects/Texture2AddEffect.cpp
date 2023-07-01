@@ -15,6 +15,7 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
+#include "Rendering/Shaders/Flags/ShaderFlags.h"
 
 namespace
 {
@@ -155,112 +156,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture2AddEffect);
 Rendering::Texture2AddEffect::Texture2AddEffect(CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{ disableNotThrow }
 {
-    auto vshader = std::make_shared<VertexShader>("Texture2Add", 3, 3, 1, 0);
-    vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
-    vshader->SetInput(1, "modelTCoord0", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
-    vshader->SetInput(2, "modelTCoord1", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord1);
-    vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
-    vshader->SetOutput(1, "vertexTCoord0", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
-    vshader->SetOutput(2, "vertexTCoord1", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord1);
-    vshader->SetConstant(0, "PVWMatrix", 4);
-
-    auto profile = vshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 1; ++j)
-        {
-            profile->SetBaseRegister(i, j, *vRegisters.at(i));
-        }
-
-        profile->SetProgram(i, vPrograms.at(i));
-    }
-
-    auto pshader = std::make_shared<PixelShader>("Texture2Add", 2, 1, 0, 2);
-    pshader->SetInput(0, "vertexTCoord0", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
-    pshader->SetInput(1, "vertexTCoord1", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord1);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
-    pshader->SetSampler(0, "Sampler0", ShaderFlags::SamplerType::Sampler2D);
-    pshader->SetSampler(1, "Sampler1", ShaderFlags::SamplerType::Sampler2D);
-    profile = pshader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 2; ++j)
-        {
-            profile->SetTextureUnit(i, j, pTextureUnits.at(i)->at(j));
-        }
-
-        profile->SetProgram(i, pPrograms.at(i));
-    }
-
-    auto pass = std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable);
-    pass->SetVertexShader(vshader);
-    pass->SetPixelShader(pshader);
-    pass->SetAlphaState(std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetCullState(std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetDepthState(std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetOffsetState(std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetStencilState(std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable));
-    pass->SetWireState(std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable));
-
-    auto technique = std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable);
-
-    technique->InsertPass(pass);
-
     RENDERING_SELF_CLASS_IS_VALID_9;
-}
-
-Rendering::PixelShaderSharedPtr Rendering::Texture2AddEffect::GetPixelShaderSharedPtr() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    return nullptr;
-}
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::Texture2AddEffect::CreateInstance(const Texture2DSharedPtr& texture0, const Texture2DSharedPtr& texture1)
-{
-    RENDERING_CLASS_IS_VALID_9;
-
-    auto instance = std::make_shared<VisualEffectInstance>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), 0);
-
-    instance->SetVertexConstant(0, 0, std::make_shared<ProjectionViewMatrixConstant>(CoreTools::DisableNotThrow::Disable));
-    instance->SetPixelTexture(0, 0, TextureSharedPtr(texture0));
-    instance->SetPixelTexture(0, 1, TextureSharedPtr(texture1));
-
-    const auto pshader = GetPixelShaderSharedPtr();
-
-    const auto filter0 = pshader->GetFilter(0);
-    if (filter0 != ShaderFlags::SamplerFilter::Nearest && filter0 != ShaderFlags::SamplerFilter::Linear && !texture0->HasMipmaps())
-    {
-    }
-
-    const auto filter1 = pshader->GetFilter(1);
-    if (filter1 != ShaderFlags::SamplerFilter::Nearest && filter1 != ShaderFlags::SamplerFilter::Linear && !texture1->HasMipmaps())
-    {
-    }
-
-    return instance;
-}
-
-Rendering::VisualEffectInstanceSharedPtr Rendering::Texture2AddEffect::CreateUniqueInstance(const Texture2DSharedPtr& texture0, ShaderFlags::SamplerFilter filter0, ShaderFlags::SamplerCoordinate coordinate00, ShaderFlags::SamplerCoordinate coordinate01, const Texture2DSharedPtr& texture1, ShaderFlags::SamplerFilter filter1, ShaderFlags::SamplerCoordinate coordinate10, ShaderFlags::SamplerCoordinate coordinate11)
-{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    auto effect = std::make_shared<ClassType>(CoreTools::DisableNotThrow::Disable);
-
-#include STSTEM_WARNING_POP
-
-    auto pshader = effect->GetPixelShaderSharedPtr();
-    pshader->SetFilter(0, filter0);
-    pshader->SetCoordinate(0, 0, coordinate00);
-    pshader->SetCoordinate(0, 1, coordinate01);
-    pshader->SetFilter(1, filter1);
-    pshader->SetCoordinate(1, 0, coordinate10);
-    pshader->SetCoordinate(1, 1, coordinate11);
-
-    return effect->CreateInstance(texture0, texture1);
 }
 
 Rendering::Texture2AddEffect::Texture2AddEffect(LoadConstructor value)

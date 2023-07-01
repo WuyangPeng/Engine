@@ -51,9 +51,9 @@ namespace Rendering
         NODISCARD bool CopyCpuToGpu() override;
         NODISCARD bool CopyGpuToCpu() override;
 
-        NODISCARD bool Update(int level);
-        NODISCARD bool CopyCpuToGpu(int level);
-        NODISCARD bool CopyGpuToCpu(int level);
+        NODISCARD bool Update(int level) override;
+        NODISCARD bool CopyCpuToGpu(int level) override;
+        NODISCARD bool CopyGpuToCpu(int level) override;
 
         NODISCARD virtual bool CanAutoGenerateMipmaps() const = 0;
 

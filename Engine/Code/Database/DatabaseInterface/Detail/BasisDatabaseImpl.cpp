@@ -100,6 +100,94 @@ std::string Database::BasisDatabaseImpl::GetString() const
                 }
             }
 
+            case DataType::StringArray:
+            {
+                const auto anyValue = std::any_cast<DataTypeTraits<DataType::StringArray>::Type>(value);
+
+                std::string result{};
+
+                auto index = 0;
+                for (const auto& element : anyValue)
+                {
+                    result += element;
+
+                    ++index;
+
+                    if (index != anyValue.size())
+                    {
+                        result += "|";
+                    }
+                }
+
+                return result;
+            }
+
+            case DataType::Int32Array:
+            {
+                const auto anyValue = std::any_cast<DataTypeTraits<DataType::Int32Array>::Type>(value);
+
+                std::string result{};
+
+                auto index = 0;
+                for (const auto& element : anyValue)
+                {
+                    result += std::to_string(element);
+
+                    ++index;
+
+                    if (index != anyValue.size())
+                    {
+                        result += "|";
+                    }
+                }
+
+                return result;
+            }
+
+            case DataType::Int64Array:
+            {
+                const auto anyValue = std::any_cast<DataTypeTraits<DataType::Int64Array>::Type>(value);
+
+                std::string result{};
+
+                auto index = 0;
+                for (const auto& element : anyValue)
+                {
+                    result += std::to_string(element);
+
+                    ++index;
+
+                    if (index != anyValue.size())
+                    {
+                        result += "|";
+                    }
+                }
+
+                return result;
+            }
+
+            case DataType::DoubleArray:
+            {
+                const auto anyValue = std::any_cast<DataTypeTraits<DataType::DoubleArray>::Type>(value);
+
+                std::string result{};
+
+                auto index = 0;
+                for (const auto& element : anyValue)
+                {
+                    result += std::to_string(element);
+
+                    ++index;
+
+                    if (index != anyValue.size())
+                    {
+                        result += "|";
+                    }
+                }
+
+                return result;
+            }
+
             default:
                 return "";
         }

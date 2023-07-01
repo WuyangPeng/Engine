@@ -187,7 +187,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Rectangle(int xSa
     }
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
 
     totalIndex = 0;
     for (auto yIndex = 0; yIndex < ySamples - 1; ++yIndex)
@@ -250,7 +250,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Disk(int shellSam
     }
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
     InitIndexBufferInDisk(*indexBuffer, radialSamplesMinus1, shellSamplesMinus1);
 
     return std::make_shared<TrianglesMesh>(vertexFormat->Clone(), vertexBuffer, indexBuffer);
@@ -276,7 +276,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Box(MAYBE_UNUSED 
     }
 
     // 生成索引（外视图）
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
 
     std::vector<int> indices(36);
 
@@ -428,7 +428,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::CylinderOmittedEn
     }
 
     // 产生索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
     size_t indicesIndex{};
 
@@ -571,7 +571,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Sphere(int zSampl
     ++totalIndex;
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
     size_t indicesIndex{};
 
@@ -711,7 +711,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Torus(int circleS
     }
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
     size_t indicesIndex{};
@@ -779,7 +779,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Tetrahedron() con
     // 生成几何数据。
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
     std::vector<int> indices(12);
 
     indices.at(0) = 0;
@@ -822,7 +822,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Hexahedron() cons
     // 生成几何数据。
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
 #include STSTEM_WARNING_PUSH
@@ -892,7 +892,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Octahedron() cons
     // 生成几何数据。
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
 #include STSTEM_WARNING_PUSH
@@ -954,7 +954,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Dodecahedron() co
     // 生成几何数据。
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
 #include STSTEM_WARNING_PUSH
@@ -1101,7 +1101,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Icosahedron() con
     // 生成几何数据。
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::PolyPoint, numIndices, 4);
     std::vector<int> indices(numIndices);
 
 #include STSTEM_WARNING_PUSH

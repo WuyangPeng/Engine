@@ -36,11 +36,11 @@ AncientBooks::CharacterContainer::Container AncientBooks::CharacterContainer::Ge
 
     Container result{};
 
-    for (const auto& value : character)
+    for (const auto& element : character)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 

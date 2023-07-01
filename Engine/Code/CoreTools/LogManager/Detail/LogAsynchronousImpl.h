@@ -47,6 +47,8 @@ namespace CoreTools
         void Stop();
         void Join();
 
+        void Wait();
+
     private:
         using LogAsynchronousParameterBaseSharedPtr = std::shared_ptr<AsynchronousParameterBase>;
         using LogContainer = std::deque<LogAsynchronousParameterBaseSharedPtr>;

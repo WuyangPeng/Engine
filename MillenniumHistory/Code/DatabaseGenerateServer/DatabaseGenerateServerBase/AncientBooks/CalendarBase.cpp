@@ -40,7 +40,7 @@ System::String AncientBooks::CalendarBase::GetName() const
     THROW_EXCEPTION(SYSTEM_TEXT("calendar表基类不允许获取字符串。"s))
 }
 
-std::vector<System::String> AncientBooks::CalendarBase::GetAlias() const
+AncientBooks::CalendarBase::StringContainer AncientBooks::CalendarBase::GetAlias() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -63,21 +63,21 @@ System::String AncientBooks::CalendarBase::GetAlias(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("calendar表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::CalendarBase::GetAliasBegin() const
+AncientBooks::CalendarBase::StringContainerConstIter AncientBooks::CalendarBase::GetAliasBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("calendar表基类不允许获取数组。"s))
 }
 
-std::vector<System::String>::const_iterator AncientBooks::CalendarBase::GetAliasEnd() const
+AncientBooks::CalendarBase::StringContainerConstIter AncientBooks::CalendarBase::GetAliasEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("calendar表基类不允许获取数组。"s))
 }
 
-std::vector<int> AncientBooks::CalendarBase::GetSource() const
+AncientBooks::CalendarBase::IntContainer AncientBooks::CalendarBase::GetSource() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -100,18 +100,27 @@ int AncientBooks::CalendarBase::GetSource(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("calendar表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::CalendarBase::GetSourceBegin() const
+AncientBooks::CalendarBase::IntContainerConstIter AncientBooks::CalendarBase::GetSourceBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("calendar表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::CalendarBase::GetSourceEnd() const
+AncientBooks::CalendarBase::IntContainerConstIter AncientBooks::CalendarBase::GetSourceEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("calendar表基类不允许获取数组。"s))
+}
+
+AncientBooks::CalendarBase::BookContainer AncientBooks::CalendarBase::GetSource(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("calendar表基类不允许获取映射值。"s))
 }
 
 System::String AncientBooks::CalendarBase::GetPublication() const
@@ -121,7 +130,7 @@ System::String AncientBooks::CalendarBase::GetPublication() const
     THROW_EXCEPTION(SYSTEM_TEXT("calendar表基类不允许获取字符串。"s))
 }
 
-std::vector<int> AncientBooks::CalendarBase::GetCreator() const
+AncientBooks::CalendarBase::IntContainer AncientBooks::CalendarBase::GetCreator() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -144,18 +153,27 @@ int AncientBooks::CalendarBase::GetCreator(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("calendar表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::CalendarBase::GetCreatorBegin() const
+AncientBooks::CalendarBase::IntContainerConstIter AncientBooks::CalendarBase::GetCreatorBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("calendar表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::CalendarBase::GetCreatorEnd() const
+AncientBooks::CalendarBase::IntContainerConstIter AncientBooks::CalendarBase::GetCreatorEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("calendar表基类不允许获取数组。"s))
+}
+
+AncientBooks::CalendarBase::CharacterContainer AncientBooks::CalendarBase::GetCreator(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("calendar表基类不允许获取映射值。"s))
 }
 
 int AncientBooks::CalendarBase::GetFormulate() const noexcept
@@ -165,7 +183,7 @@ int AncientBooks::CalendarBase::GetFormulate() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::CalendarBase::GetFormulate(const AncientBooksContainer& csvContainer) const
+AncientBooks::CalendarBase::ConstYearSharedPtr AncientBooks::CalendarBase::GetFormulate(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -181,7 +199,7 @@ int AncientBooks::CalendarBase::GetCountry() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::CountryMappingType> AncientBooks::CalendarBase::GetCountry(const AncientBooksContainer& csvContainer) const
+AncientBooks::CalendarBase::ConstCountrySharedPtr AncientBooks::CalendarBase::GetCountry(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -197,7 +215,7 @@ int AncientBooks::CalendarBase::GetBegin() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::CalendarBase::GetBegin(const AncientBooksContainer& csvContainer) const
+AncientBooks::CalendarBase::ConstYearSharedPtr AncientBooks::CalendarBase::GetBegin(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -213,7 +231,7 @@ int AncientBooks::CalendarBase::GetEnd() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::CalendarBase::GetEnd(const AncientBooksContainer& csvContainer) const
+AncientBooks::CalendarBase::ConstYearSharedPtr AncientBooks::CalendarBase::GetEnd(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -229,7 +247,7 @@ int AncientBooks::CalendarBase::GetAgainBegin() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::CalendarBase::GetAgainBegin(const AncientBooksContainer& csvContainer) const
+AncientBooks::CalendarBase::ConstYearSharedPtr AncientBooks::CalendarBase::GetAgainBegin(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -245,7 +263,7 @@ int AncientBooks::CalendarBase::GetAgainEnd() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::YearMappingType> AncientBooks::CalendarBase::GetAgainEnd(const AncientBooksContainer& csvContainer) const
+AncientBooks::CalendarBase::ConstYearSharedPtr AncientBooks::CalendarBase::GetAgainEnd(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

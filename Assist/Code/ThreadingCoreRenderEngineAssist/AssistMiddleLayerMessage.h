@@ -13,7 +13,7 @@
 #include "Assist.h"
 #include "CoreTools/Console/ConsoleAlloc.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
-#include "Framework/MiddleLayer/ArtificialIntellegenceInterface.h"
+#include "Framework/MiddleLayer/ArtificialIntelligenceInterface.h"
 #include "Framework/MiddleLayer/EngineMiddleLayerContainer.h"
 #include "Framework/MiddleLayer/ObjectLogicInterface.h"
 #include "Framework/MiddleLayer/ObjectLogicManager.h"
@@ -22,7 +22,7 @@
 
 namespace ThreadingCoreRenderEngineAssist
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<Framework::ObjectLogicInterface, Framework::ArtificialIntellegenceInterface>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<Framework::ObjectLogicInterface, Framework::ArtificialIntelligenceInterface>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   InputMiddleLayer,
                                                                   Framework::NetworkManagerInterface,

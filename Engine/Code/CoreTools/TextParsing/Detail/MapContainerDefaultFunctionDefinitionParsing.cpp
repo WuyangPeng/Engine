@@ -48,7 +48,6 @@ System::String CoreTools::MapContainerDefaultFunctionDefinitionParsing::Generate
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     auto content = GenerateFunctionBeginBrackets(2);
-    content += TextParsing::gNewlineCharacter;
 
     content += GenerateWarnLog(3);
     content += GenerateRepeatKey(0, TextParsing::gRepeatKeyHint);

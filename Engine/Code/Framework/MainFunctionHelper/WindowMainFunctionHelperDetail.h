@@ -18,7 +18,6 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Framework/WindowProcess/WindowProcessManager.h"
 
@@ -144,9 +143,8 @@ void Framework::WindowMainFunctionHelper<Build, Process>::InitCamera()
 
 // private
 template <template <typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>::InitRendererManager()
+void Framework::WindowMainFunctionHelper<Build, Process>::InitRendererManager() noexcept
 {
-    Rendering::RendererManager::Create();
     windowMainFunctionSchedule = WindowMainFunctionSchedule::RendererManager;
 }
 
@@ -189,7 +187,6 @@ void Framework::WindowMainFunctionHelper<Build, Process>::DestroyRendererManager
 {
     if (WindowMainFunctionSchedule::RendererManager <= windowMainFunctionSchedule)
     {
-        Rendering::RendererManager::Destroy();
         windowMainFunctionSchedule = WindowMainFunctionSchedule::Camera;
     }
 }

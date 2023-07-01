@@ -59,7 +59,7 @@ namespace Framework
 
         void InitWindowProcess();
         void InitCamera();
-        void InitRendererManager();
+        void InitRendererManager() noexcept;
         void InitImpl(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information);
 
         void DestroyImpl() noexcept;

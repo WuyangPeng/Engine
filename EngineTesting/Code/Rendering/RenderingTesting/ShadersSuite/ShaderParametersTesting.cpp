@@ -15,10 +15,8 @@
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Renderers/RendererManager.h"
+
 #include "Rendering/Resources/Textures/Texture1D.h"
-#include "Rendering/Shaders/ShaderParameters.h"
-#include "Rendering/Shaders/VertexShader.h"
 
 Rendering::ShaderParametersTesting::ShaderParametersTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -37,36 +35,15 @@ void Rendering::ShaderParametersTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    RendererManager::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
 
-    RendererManager::Destroy();
-
     CoreTools::InitTerm::ExecuteTerminator();
 }
 
-void Rendering::ShaderParametersTesting::InitTest()
+void Rendering::ShaderParametersTesting::InitTest() noexcept
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    auto shader = std::make_shared<VertexShader>("Shader", 1, 1, 5, 4);
-
-#include STSTEM_WARNING_POP
-
-    shader->SetConstant(0, "Constant0", 1);
-    shader->SetConstant(1, "Constant1", 1);
-    shader->SetConstant(2, "Constant2", 2);
-    shader->SetConstant(3, "Constant3", 3);
-    shader->SetConstant(4, "Constant4", 4);
-
-    shader->SetSampler(0, "Texture0", ShaderFlags::SamplerType::Sampler1D);
-    shader->SetSampler(1, "Texture1", ShaderFlags::SamplerType::Sampler1D);
-    shader->SetSampler(2, "Texture2", ShaderFlags::SamplerType::Sampler1D);
-    shader->SetSampler(3, "Texture3", ShaderFlags::SamplerType::Sampler1D);
 }
 
 void Rendering::ShaderParametersTesting::CopyTest() noexcept

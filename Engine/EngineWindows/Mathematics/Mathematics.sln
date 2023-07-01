@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.852
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33529.622
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mathematics", "Mathematics\Mathematics.vcxproj", "{6A32C718-DB51-4F52-A30C-E5D2BBA20C5F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{71DC1C2A-38BA-4795-99A5-0BB41EC88555}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathematicsTesting", "..\..\..\EngineTesting\EngineWindows\Mathematics\MathematicsTesting\MathematicsTesting.vcxproj", "{D4ED31F5-61D8-49C8-A294-879040149F1D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6A32C718-DB51-4F52-A30C-E5D2BBA20C5F} = {6A32C718-DB51-4F52-A30C-E5D2BBA20C5F}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathematicsToolset", "..\..\..\Assist\AssistWindows\Toolset\Mathematics\MathematicsToolset\MathematicsToolset.vcxproj", "{AE86C407-195C-4E04-8D5A-F7AD4DAEC682}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -26,11 +26,24 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathematicsExample", "..\..
 		{6A32C718-DB51-4F52-A30C-E5D2BBA20C5F} = {6A32C718-DB51-4F52-A30C-E5D2BBA20C5F}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DistanceAlignedBoxesCore", "..\..\..\Assist\AssistWindows\Example\MathematicsExample\DistanceAlignedBoxesCore\DistanceAlignedBoxesCore.vcxproj", "{E700A690-1875-47F8-8E71-33A7475CDADE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DistanceAlignedBoxes", "..\..\..\Assist\AssistWindows\Example\MathematicsExample\DistanceAlignedBoxes\DistanceAlignedBoxes.vcxproj", "{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6A32C718-DB51-4F52-A30C-E5D2BBA20C5F} = {6A32C718-DB51-4F52-A30C-E5D2BBA20C5F}
+		{E700A690-1875-47F8-8E71-33A7475CDADE} = {E700A690-1875-47F8-8E71-33A7475CDADE}
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathematicsExampleTesting", "..\..\..\AssistTesting\AssistWindows\Example\MathematicsExample\MathematicsExampleTesting\MathematicsExampleTesting.vcxproj", "{211C819A-B433-46F4-AC40-3B86B9B84DFD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7BBC5228-857E-4DAF-AFC4-088AB58E8452} = {7BBC5228-857E-4DAF-AFC4-088AB58E8452}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DistanceAlignedBoxesTesting", "..\..\..\AssistTesting\AssistWindows\Example\MathematicsExample\DistanceAlignedBoxesTesting\DistanceAlignedBoxesTesting.vcxproj", "{A080EEBD-8407-4C3E-8518-76089CBBD246}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E700A690-1875-47F8-8E71-33A7475CDADE} = {E700A690-1875-47F8-8E71-33A7475CDADE}
 	EndProjectSection
 EndProject
 Global
@@ -125,6 +138,54 @@ Global
 		{211C819A-B433-46F4-AC40-3B86B9B84DFD}.StaticRelease|x64.Build.0 = StaticRelease|x64
 		{211C819A-B433-46F4-AC40-3B86B9B84DFD}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
 		{211C819A-B433-46F4-AC40-3B86B9B84DFD}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.Debug|x64.ActiveCfg = Debug|x64
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.Debug|x64.Build.0 = Debug|x64
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.Debug|x86.ActiveCfg = Debug|Win32
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.Debug|x86.Build.0 = Debug|Win32
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.Release|x64.ActiveCfg = Release|x64
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.Release|x64.Build.0 = Release|x64
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.Release|x86.ActiveCfg = Release|Win32
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.Release|x86.Build.0 = Release|Win32
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.Debug|x64.ActiveCfg = Debug|x64
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.Debug|x64.Build.0 = Debug|x64
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.Debug|x86.ActiveCfg = Debug|Win32
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.Debug|x86.Build.0 = Debug|Win32
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.Release|x64.ActiveCfg = Release|x64
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.Release|x64.Build.0 = Release|x64
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.Release|x86.ActiveCfg = Release|Win32
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.Release|x86.Build.0 = Release|Win32
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{A080EEBD-8407-4C3E-8518-76089CBBD246}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.Debug|x64.ActiveCfg = Debug|x64
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.Debug|x64.Build.0 = Debug|x64
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.Debug|x86.ActiveCfg = Debug|Win32
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.Debug|x86.Build.0 = Debug|Win32
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.Release|x64.ActiveCfg = Release|x64
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.Release|x64.Build.0 = Release|x64
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.Release|x86.ActiveCfg = Release|Win32
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.Release|x86.Build.0 = Release|Win32
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{E700A690-1875-47F8-8E71-33A7475CDADE}.StaticRelease|x86.Build.0 = StaticRelease|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,6 +196,9 @@ Global
 		{7BBC5228-857E-4DAF-AFC4-088AB58E8452} = {1504500E-E7BA-4374-AC46-F44FF2154161}
 		{BE26215C-6244-486D-B087-517ED6906614} = {1504500E-E7BA-4374-AC46-F44FF2154161}
 		{211C819A-B433-46F4-AC40-3B86B9B84DFD} = {BE26215C-6244-486D-B087-517ED6906614}
+		{EDADECDE-9A03-4CAD-BF7C-4A02DEB86C65} = {1504500E-E7BA-4374-AC46-F44FF2154161}
+		{A080EEBD-8407-4C3E-8518-76089CBBD246} = {BE26215C-6244-486D-B087-517ED6906614}
+		{E700A690-1875-47F8-8E71-33A7475CDADE} = {1504500E-E7BA-4374-AC46-F44FF2154161}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {946B4585-5322-4D1B-AAF0-ACFC1758DCA4}

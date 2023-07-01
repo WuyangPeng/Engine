@@ -18,6 +18,7 @@
 #include "Rendering/DataTypes/Colour.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
 #include "Rendering/Shaders/ProgramFactory.h"
+#include "Rendering/State/SamplerState.h"
 
 namespace Rendering
 {

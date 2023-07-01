@@ -175,6 +175,34 @@ void Rendering::OpenGLStructuredBuffer::Initialize()
     }
 }
 
+bool Rendering::OpenGLStructuredBuffer::CopyGpuToCpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLStructuredBuffer::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLStructuredBuffer::CopyCpuToGpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLStructuredBuffer::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
 Rendering::ConstStructuredBufferSharedPtr Rendering::OpenGLStructuredBuffer::GetStructuredBuffer() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;

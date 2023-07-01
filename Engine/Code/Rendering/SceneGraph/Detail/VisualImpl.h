@@ -21,7 +21,6 @@
 #include "Rendering/Resources/Buffers/VertexFormat.h"
 #include "Rendering/SceneGraph/Flags/VisualFlags.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
-#include "Rendering/Shaders/VisualEffectInstance.h"
 
 #include <string>
 #include <vector>
@@ -49,7 +48,7 @@ namespace Rendering
 
         void SetVertexFormat(const VertexFormatSharedPtr& vertexformat) noexcept;
         NODISCARD ConstVertexFormatSharedPtr GetConstVertexFormat() const noexcept;
-        NODISCARD VertexFormatSharedPtr GetVertexFormat() noexcept; 
+        NODISCARD VertexFormatSharedPtr GetVertexFormat() noexcept;
 
         void SetVertexBuffer(const VertexBufferSharedPtr& vertexbuffer) noexcept;
         NODISCARD ConstVertexBufferSharedPtr GetConstVertexBuffer() const noexcept;
@@ -61,11 +60,6 @@ namespace Rendering
 
         NODISCARD const BoundF& GetModelBound() const noexcept;
         NODISCARD BoundF& GetModelBound() noexcept;
-
-        // 存取绘制对象的视觉效果。
-        void SetEffectInstance(const VisualEffectInstanceSharedPtr& aEffect) noexcept;
-        NODISCARD ConstVisualEffectInstanceSharedPtr GetConstEffectInstance() const noexcept;
-        NODISCARD VisualEffectInstanceSharedPtr GetEffectInstance() noexcept;
 
         // 对几何更新的支持。
         NODISCARD BoundF GetWorldBound(const TransformF& worldTransform);
@@ -81,17 +75,11 @@ namespace Rendering
         CORE_TOOLS_NAMES_IMPL_DECLARE;
 
     private:
-        using ObjectAssociated = CoreTools::ObjectAssociated<VisualEffectInstance>;
-
-    private:
         void DoUpdateModelBound();
 
     private:
         VisualData visualData;
         BoundF modelBound;
-
-        // 着色器效果用来绘制视觉。
-        ObjectAssociated effect;
     };
 }
 

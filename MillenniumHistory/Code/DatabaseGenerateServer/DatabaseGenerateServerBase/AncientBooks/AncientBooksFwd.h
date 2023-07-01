@@ -30,10 +30,6 @@ namespace AncientBooks
     class CategoryBase;
     class CategoryContainer;
     using CategoryMappingType = CategoryBase;
-    class Chapter;
-    class ChapterBase;
-    class ChapterContainer;
-    using ChapterMappingType = ChapterBase;
     class Character;
     class CharacterBase;
     class CharacterContainer;

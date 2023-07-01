@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:22)
+///	版本：0.9.1.0 (2023/06/29 20:07)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_DETAIL_H
 #define RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_DETAIL_H
@@ -28,8 +28,8 @@ Rendering::TextureLevelData<NumDimensions>::TextureLevelData() noexcept
       levelDimension{},
       levelNumBytes{},
       levelOffsets{},
-      hasMipmaps{ false },
-      autogenerateMipmaps{ false }
+      hasMipMaps{ false },
+      autoGenerateMipMaps{ false }
 {
     static_assert(NumDimensions == 1, "NumDimensions must be 1.");
 
@@ -37,13 +37,13 @@ Rendering::TextureLevelData<NumDimensions>::TextureLevelData() noexcept
 }
 
 template <int NumDimensions>
-Rendering::TextureLevelData<NumDimensions>::TextureLevelData(int numItems, int dimension0, bool hasMipmaps, int elementSize, int numLevels)
+Rendering::TextureLevelData<NumDimensions>::TextureLevelData(int numItems, int dimension0, bool hasMipMaps, int elementSize, int numLevels)
     : numItems{ numItems },
       levelDimension{},
       levelNumBytes{},
       levelOffsets(numItems),
-      hasMipmaps{ hasMipmaps },
-      autogenerateMipmaps{ false }
+      hasMipMaps{ hasMipMaps },
+      autoGenerateMipMaps{ false }
 {
     static_assert(NumDimensions == 1, "NumDimensions must be 1.");
 
@@ -53,13 +53,13 @@ Rendering::TextureLevelData<NumDimensions>::TextureLevelData(int numItems, int d
 }
 
 template <int NumDimensions>
-Rendering::TextureLevelData<NumDimensions>::TextureLevelData(int numItems, int dimension0, int dimension1, bool hasMipmaps, int elementSize, int numLevels)
+Rendering::TextureLevelData<NumDimensions>::TextureLevelData(int numItems, int dimension0, int dimension1, bool hasMipMaps, int elementSize, int numLevels)
     : numItems{ numItems },
       levelDimension{},
       levelNumBytes{},
       levelOffsets(numItems),
-      hasMipmaps{ hasMipmaps },
-      autogenerateMipmaps{ false }
+      hasMipMaps{ hasMipMaps },
+      autoGenerateMipMaps{ false }
 {
     static_assert(NumDimensions == 2, "NumDimensions must be 2.");
 
@@ -69,13 +69,13 @@ Rendering::TextureLevelData<NumDimensions>::TextureLevelData(int numItems, int d
 }
 
 template <int NumDimensions>
-Rendering::TextureLevelData<NumDimensions>::TextureLevelData(int numItems, int dimension0, int dimension1, int dimension2, bool hasMipmaps, int elementSize, int numLevels)
+Rendering::TextureLevelData<NumDimensions>::TextureLevelData(int numItems, int dimension0, int dimension1, int dimension2, bool hasMipMaps, int elementSize, int numLevels)
     : numItems{ numItems },
       levelDimension{},
       levelNumBytes{},
       levelOffsets(numItems),
-      hasMipmaps{ hasMipmaps },
-      autogenerateMipmaps{ false }
+      hasMipMaps{ hasMipMaps },
+      autoGenerateMipMaps{ false }
 {
     static_assert(NumDimensions == 3, "NumDimensions must be 3.");
 
@@ -101,7 +101,7 @@ void Rendering::TextureLevelData<NumDimensions>::Init(int dimension0, int dimens
 
     levelNumBytes.at(0) = dimension0 * dimension1 * dimension2 * elementSize;
 
-    if (hasMipmaps)
+    if (hasMipMaps)
     {
         for (auto level = 1; level < numLevels; ++level)
         {
@@ -134,16 +134,16 @@ void Rendering::TextureLevelData<NumDimensions>::Init(int dimension0, int dimens
             }
         }
 
-        InitLevelOffsetsHasMipmaps(numLevels);
+        InitLevelOffsetsHasMipMaps(numLevels);
     }
     else
     {
-        InitLevelOffsetsNoMipmaps(numLevels);
+        InitLevelOffsetsNoMipMaps(numLevels);
     }
 }
 
 template <int NumDimensions>
-void Rendering::TextureLevelData<NumDimensions>::InitLevelOffsetsHasMipmaps(int numLevels)
+void Rendering::TextureLevelData<NumDimensions>::InitLevelOffsetsHasMipMaps(int numLevels)
 {
     auto numBytes = 0;
     for (auto item = 0; item < numItems; ++item)
@@ -157,7 +157,7 @@ void Rendering::TextureLevelData<NumDimensions>::InitLevelOffsetsHasMipmaps(int 
 }
 
 template <int NumDimensions>
-void Rendering::TextureLevelData<NumDimensions>::InitLevelOffsetsNoMipmaps(int numLevels)
+void Rendering::TextureLevelData<NumDimensions>::InitLevelOffsetsNoMipMaps(int numLevels)
 {
     const auto levelNumByte = levelNumBytes.at(0);
 
@@ -202,11 +202,11 @@ int Rendering::TextureLevelData<NumDimensions>::GetDimension(int index) const
 }
 
 template <int NumDimensions>
-bool Rendering::TextureLevelData<NumDimensions>::HasMipmaps() const noexcept
+bool Rendering::TextureLevelData<NumDimensions>::HasMipMaps() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return hasMipmaps;
+    return hasMipMaps;
 }
 
 template <int NumDimensions>
@@ -255,7 +255,7 @@ void Rendering::TextureLevelData<NumDimensions>::SetNumLevelBytes(int level, int
 }
 
 template <int NumDimensions>
-void Rendering::TextureLevelData<NumDimensions>::Load(CoreTools::BufferSource& source)
+void Rendering::TextureLevelData<NumDimensions>::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -275,12 +275,12 @@ void Rendering::TextureLevelData<NumDimensions>::Load(CoreTools::BufferSource& s
         levelOffsets.emplace_back(levelOffset);
     }
 
-    hasMipmaps = source.ReadBool();
-    autogenerateMipmaps = source.ReadBool();
+    hasMipMaps = source.ReadBool();
+    autoGenerateMipMaps = source.ReadBool();
 }
 
 template <int NumDimensions>
-void Rendering::TextureLevelData<NumDimensions>::Save(CoreTools::BufferTarget& target) const
+void Rendering::TextureLevelData<NumDimensions>::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -300,8 +300,8 @@ void Rendering::TextureLevelData<NumDimensions>::Save(CoreTools::BufferTarget& t
         target.WriteContainer(levelOffset);
     }
 
-    target.Write(hasMipmaps);
-    target.Write(autogenerateMipmaps);
+    target.Write(hasMipMaps);
+    target.Write(autoGenerateMipMaps);
 }
 
 template <int NumDimensions>
@@ -327,8 +327,8 @@ int Rendering::TextureLevelData<NumDimensions>::GetStreamingSize() const
         size += CoreTools::GetStreamSize(levelOffset);
     }
 
-    size += CoreTools::GetStreamSize(hasMipmaps);
-    size += CoreTools::GetStreamSize(autogenerateMipmaps);
+    size += CoreTools::GetStreamSize(hasMipMaps);
+    size += CoreTools::GetStreamSize(autoGenerateMipMaps);
 
     return size;
 }
@@ -352,8 +352,8 @@ void Rendering::TextureLevelData<NumDimensions>::SaveToFile(WriteFileManager& ou
         outFile.Write(sizeof(int32_t), levelOffset.size(), levelOffset.data());
     }
 
-    outFile.Write(sizeof(bool), &hasMipmaps);
-    outFile.Write(sizeof(bool), &autogenerateMipmaps);
+    outFile.Write(sizeof(bool), &hasMipMaps);
+    outFile.Write(sizeof(bool), &autoGenerateMipMaps);
 }
 
 template <int NumDimensions>
@@ -380,27 +380,27 @@ void Rendering::TextureLevelData<NumDimensions>::ReadFromFile(ReadFileManager& i
         inFile.Read(sizeof(int32_t), levelOffset.size(), levelOffset.data());
     }
 
-    inFile.Read(sizeof(bool), &hasMipmaps);
-    inFile.Read(sizeof(bool), &autogenerateMipmaps);
+    inFile.Read(sizeof(bool), &hasMipMaps);
+    inFile.Read(sizeof(bool), &autoGenerateMipMaps);
 }
 
 template <int NumDimensions>
-void Rendering::TextureLevelData<NumDimensions>::AutogenerateMipmaps() noexcept
+void Rendering::TextureLevelData<NumDimensions>::AutoGenerateMipMaps() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    if (hasMipmaps)
+    if (hasMipMaps)
     {
-        autogenerateMipmaps = true;
+        autoGenerateMipMaps = true;
     }
 }
 
 template <int NumDimensions>
-bool Rendering::TextureLevelData<NumDimensions>::WantAutogenerateMipmaps() const noexcept
+bool Rendering::TextureLevelData<NumDimensions>::WantAutoGenerateMipMaps() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return autogenerateMipmaps;
+    return autoGenerateMipMaps;
 }
 
 #endif  // RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_DETAIL_H

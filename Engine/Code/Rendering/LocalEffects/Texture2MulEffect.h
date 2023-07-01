@@ -12,8 +12,8 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "VisualEffect.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
-#include "Rendering/Shaders/VisualEffectInstance.h"
 
 namespace Rendering
 {
@@ -30,19 +30,6 @@ namespace Rendering
         explicit Texture2MulEffect(CoreTools::DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
-
-        NODISCARD PixelShaderSharedPtr GetPixelShaderSharedPtr() const noexcept;
-
-        NODISCARD VisualEffectInstanceSharedPtr CreateInstance(const Texture2DSharedPtr& texture0, const Texture2DSharedPtr& texture1);
-
-        NODISCARD static VisualEffectInstanceSharedPtr CreateUniqueInstance(const Texture2DSharedPtr& texture0,
-                                                                            ShaderFlags::SamplerFilter filter0,
-                                                                            ShaderFlags::SamplerCoordinate coordinate00,
-                                                                            ShaderFlags::SamplerCoordinate coordinate01,
-                                                                            const Texture2DSharedPtr& texture1,
-                                                                            ShaderFlags::SamplerFilter filter1,
-                                                                            ShaderFlags::SamplerCoordinate coordinate10,
-                                                                            ShaderFlags::SamplerCoordinate coordinate11);
     };
 
 #include STSTEM_WARNING_PUSH

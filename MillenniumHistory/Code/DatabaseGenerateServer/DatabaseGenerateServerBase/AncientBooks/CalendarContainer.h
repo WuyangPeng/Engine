@@ -24,11 +24,13 @@ namespace AncientBooks
     {
     public:
         using ClassType = CalendarContainer;
+
         using ConstCalendarBaseSharedPtr = std::shared_ptr<const CalendarBase>;
         using Container = std::vector<ConstCalendarBaseSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit CalendarContainer(const CoreTools::CSVContent& csvContent);
+        explicit CalendarContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -43,7 +45,9 @@ namespace AncientBooks
         NODISCARD Container GetCalendar(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
+        void Unique();
 
     private:
         Container calendar;

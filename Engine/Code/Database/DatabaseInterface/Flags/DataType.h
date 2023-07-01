@@ -18,15 +18,19 @@ namespace Database
     {
         Null = 0,
         String = 1,
-        Int32 = 2,
-        Int32Count = 3,
-        Int64 = 4,
-        Int64Count = 5,
-        Double = 6,
-        Bool = 7,
-        ByteArray = 8,
-        Object = 9,
-        ObjectArray = 10,
+        StringArray = 2,
+        Int32 = 3,
+        Int32Count = 4,
+        Int32Array = 5,
+        Int64 = 6,
+        Int64Count = 7,
+        Int64Array = 8,
+        Double = 9,
+        DoubleArray = 10,
+        Bool = 11,
+        ByteArray = 12,
+        Object = 13,
+        ObjectArray = 14,
     };
 
     enum class IndexType

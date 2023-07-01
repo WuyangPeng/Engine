@@ -12,7 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/Shaders/VisualEffectInstance.h"
+#include "VisualEffect.h"
 
 namespace Rendering
 {
@@ -31,8 +31,6 @@ namespace Rendering
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
-
-        NODISCARD VisualEffectInstanceSharedPtr CreateInstance();
     };
 
 #include STSTEM_WARNING_PUSH

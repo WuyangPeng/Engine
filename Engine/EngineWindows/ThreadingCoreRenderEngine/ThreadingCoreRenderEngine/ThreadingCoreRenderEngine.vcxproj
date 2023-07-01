@@ -184,7 +184,15 @@ xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingEngine
 xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
 xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(MillenniumHistoryEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(MillenniumHistoryTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(MillenniumHistoryTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(RiseOfHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(RiseOfHistoryEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(RiseOfHistoryTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(RiseOfHistoryTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -222,7 +230,15 @@ xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(GameTestingEnginee
 xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
 xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -260,7 +276,15 @@ xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingEngine
 xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
 xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(MillenniumHistoryEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(MillenniumHistoryTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(MillenniumHistoryTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(RiseOfHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(RiseOfHistoryEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(RiseOfHistoryTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(RiseOfHistoryTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -298,7 +322,15 @@ xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(GameTestingEnginee
 xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
 xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">

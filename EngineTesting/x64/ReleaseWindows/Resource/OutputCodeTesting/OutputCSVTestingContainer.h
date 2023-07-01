@@ -15,6 +15,7 @@
 #include "OutputCSVTestingFwd.h"
 #include "System/Helper/UnicodeUsing.h"
 
+#include <filesystem>
 #include <memory>
 
 namespace OutputCSVTesting
@@ -24,23 +25,29 @@ namespace OutputCSVTesting
     public:
         using ClassType = OutputCSVTestingContainer;
 
+        using String = System::String;
+        using ConstInput1ContainerSharedPtr = std::shared_ptr<const Input1Container>;
+        using ConstInput2ContainerSharedPtr = std::shared_ptr<const Input2Container>;
+        using ConstInput3ContainerSharedPtr = std::shared_ptr<const Input3Container>;
+
     public:
-        explicit OutputCSVTestingContainer(const System::String& directory);
+        explicit OutputCSVTestingContainer(const String& directory);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD std::shared_ptr<const Input1Container> GetInput1Container() const noexcept;
-        NODISCARD std::shared_ptr<const Input2Container> GetInput2Container() const noexcept;
-        NODISCARD std::shared_ptr<const Input3Container> GetInput3Container() const noexcept;
+        NODISCARD ConstInput1ContainerSharedPtr GetInput1Container() const noexcept;
+        NODISCARD ConstInput2ContainerSharedPtr GetInput2Container() const noexcept;
+        NODISCARD ConstInput3ContainerSharedPtr GetInput3Container() const noexcept;
 
     private:
-        void Parsing(const System::String& directory);
+        void Parsing(const String& directory);
+        void Parsing(const std::filesystem::directory_entry& inputPath);
         void Verify() const;
 
     private:
-        std::shared_ptr<const Input1Container> input1Container;
-        std::shared_ptr<const Input2Container> input2Container;
-        std::shared_ptr<const Input3Container> input3Container;
+        ConstInput1ContainerSharedPtr input1Container;
+        ConstInput2ContainerSharedPtr input2Container;
+        ConstInput3ContainerSharedPtr input3Container;
     };
 }
 

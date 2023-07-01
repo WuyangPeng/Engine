@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:27)
+///	版本：0.9.1.0 (2023/06/29 19:36)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,23 +18,30 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "Rendering/Resources/DataFormat.h"
 
+Rendering::DrawTargetImpl::DrawTargetImpl() noexcept
+    : renderTargetTextures{},
+      depthStencilTexture{}
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
 Rendering::DrawTargetImpl::DrawTargetImpl(int numRenderTargets,
                                           DataFormatType renderTargetFormat,
                                           int width,
                                           int height,
-                                          bool hasRenderTargetMipmaps,
+                                          bool hasRenderTargetMipMaps,
                                           DataFormatType depthStencilFormat)
     : renderTargetTextures{},
       depthStencilTexture{}
 {
     if (numRenderTargets <= 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("目标数量必须至少为 1。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("目标数量必须至少为 1。"))
     }
 
     for (auto i = 0; i < numRenderTargets; ++i)
     {
-        renderTargetTextures.emplace_back(std::make_shared<TextureRenderTarget>(renderTargetFormat, width, height, hasRenderTargetMipmaps));
+        renderTargetTextures.emplace_back(std::make_shared<TextureRenderTarget>(renderTargetFormat, width, height, hasRenderTargetMipMaps));
     }
 
     if (depthStencilFormat != DataFormatType::Unknown)
@@ -45,27 +52,10 @@ Rendering::DrawTargetImpl::DrawTargetImpl(int numRenderTargets,
         }
         else
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("无效的深度模板格式。"));
+            THROW_EXCEPTION(SYSTEM_TEXT("无效的深度模板格式。"))
         }
     }
 
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-Rendering::DrawTargetImpl& Rendering::DrawTargetImpl::operator=(DrawTargetImpl&& rhs) noexcept
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    DrawTargetImpl temp{ std::move(rhs) };
-
-    Swap(temp);
-
-    return *this;
-}
-
-Rendering::DrawTargetImpl::DrawTargetImpl(DrawTargetImpl&& rhs) noexcept
-    : renderTargetTextures{ std::move(rhs.renderTargetTextures) }, depthStencilTexture{ std::move(rhs.depthStencilTexture) }
-{
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
@@ -73,9 +63,9 @@ Rendering::DrawTargetImpl& Rendering::DrawTargetImpl::operator=(const DrawTarget
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    DrawTargetImpl temp{ rhs };
+    auto drawTargetImpl = rhs;
 
-    Swap(temp);
+    Swap(drawTargetImpl);
 
     return *this;
 }
@@ -83,9 +73,9 @@ Rendering::DrawTargetImpl& Rendering::DrawTargetImpl::operator=(const DrawTarget
 Rendering::DrawTargetImpl::DrawTargetImpl(const DrawTargetImpl& rhs)
     : renderTargetTextures{}, depthStencilTexture{}
 {
-    for (auto i = 0u; i < rhs.renderTargetTextures.size(); ++i)
+    for (const auto& element : rhs.renderTargetTextures)
     {
-        renderTargetTextures.emplace_back(std::make_shared<TextureRenderTarget>(*rhs.renderTargetTextures.at(i).object), rhs.renderTargetTextures.at(i).associated);
+        renderTargetTextures.emplace_back(std::make_shared<TextureRenderTarget>(*element.object), element.associated);
     }
 
     if (rhs.depthStencilTexture.object != nullptr)
@@ -96,17 +86,27 @@ Rendering::DrawTargetImpl::DrawTargetImpl(const DrawTargetImpl& rhs)
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
+Rendering::DrawTargetImpl& Rendering::DrawTargetImpl::operator=(DrawTargetImpl&& rhs) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    auto drawTargetImpl = std::move(rhs);
+
+    Swap(drawTargetImpl);
+
+    return *this;
+}
+
+Rendering::DrawTargetImpl::DrawTargetImpl(DrawTargetImpl&& rhs) noexcept
+    : renderTargetTextures{ std::move(rhs.renderTargetTextures) }, depthStencilTexture{ std::move(rhs.depthStencilTexture) }
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
 void Rendering::DrawTargetImpl::Swap(DrawTargetImpl& rhs) noexcept
 {
     renderTargetTextures.swap(rhs.renderTargetTextures);
     std::swap(depthStencilTexture, rhs.depthStencilTexture);
-}
-
-Rendering::DrawTargetImpl::DrawTargetImpl() noexcept
-    : renderTargetTextures{},
-      depthStencilTexture{}
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -139,11 +139,11 @@ int Rendering::DrawTargetImpl::GetHeight() const
     return renderTargetTextures.at(0)->GetHeight();
 }
 
-bool Rendering::DrawTargetImpl::HasRenderTargetMipmaps() const
+bool Rendering::DrawTargetImpl::HasRenderTargetMipMaps() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return renderTargetTextures.at(0)->HasMipmaps();
+    return renderTargetTextures.at(0)->HasMipMaps();
 }
 
 Rendering::DataFormatType Rendering::DrawTargetImpl::GetDepthStencilFormat() const noexcept
@@ -168,7 +168,7 @@ Rendering::ConstTextureDepthStencilSharedPtr Rendering::DrawTargetImpl::GetDepth
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效的深度模板格式。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("无效的深度模板格式。"))
     }
 }
 
@@ -200,24 +200,24 @@ bool Rendering::DrawTargetImpl::HasDepthStencil() const noexcept
     return depthStencilTexture.object != nullptr;
 }
 
-void Rendering::DrawTargetImpl::AutogenerateRTMipmaps()
+void Rendering::DrawTargetImpl::AutoGenerateRenderTargetMipMaps()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    if (HasRenderTargetMipmaps())
+    if (HasRenderTargetMipMaps())
     {
         for (auto& texture : renderTargetTextures)
         {
-            texture->AutogenerateMipmaps();
+            texture->AutoGenerateMipMaps();
         }
     }
 }
 
-bool Rendering::DrawTargetImpl::WantAutogenerateRTMipmaps() const
+bool Rendering::DrawTargetImpl::WantAutoGenerateRenderTargetMipMaps() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return renderTargetTextures.at(0)->WantAutogenerateMipmaps();
+    return renderTargetTextures.at(0)->WantAutoGenerateMipMaps();
 }
 
 int Rendering::DrawTargetImpl::GetNumTargets() const
@@ -247,11 +247,11 @@ CoreTools::ObjectSharedPtr Rendering::DrawTargetImpl::GetObjectByName(const std:
     return CoreTools::Object::GetNullObject();
 }
 
-std::vector<CoreTools::ObjectSharedPtr> Rendering::DrawTargetImpl::GetAllObjectsByName(const std::string& name)
+Rendering::DrawTargetImpl::ObjectSharedPtrContainer Rendering::DrawTargetImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    std::vector<CoreTools::ObjectSharedPtr> objects{};
+    ObjectSharedPtrContainer objects{};
 
     for (const auto& colorTexture : renderTargetTextures)
     {
@@ -289,11 +289,11 @@ CoreTools::ConstObjectSharedPtr Rendering::DrawTargetImpl::GetConstObjectByName(
     return CoreTools::Object::GetNullObject();
 }
 
-std::vector<CoreTools::ConstObjectSharedPtr> Rendering::DrawTargetImpl::GetAllConstObjectsByName(const std::string& name) const
+Rendering::DrawTargetImpl::ConstObjectSharedPtrContainer Rendering::DrawTargetImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    std::vector<CoreTools::ConstObjectSharedPtr> objects{};
+    ConstObjectSharedPtrContainer objects{};
 
     for (const auto& colorTexture : renderTargetTextures)
     {
@@ -322,7 +322,7 @@ int Rendering::DrawTargetImpl::GetStreamingSize() const
     return size;
 }
 
-void Rendering::DrawTargetImpl::Save(CoreTools::BufferTarget& target) const
+void Rendering::DrawTargetImpl::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -330,7 +330,7 @@ void Rendering::DrawTargetImpl::Save(CoreTools::BufferTarget& target) const
     target.WriteObjectAssociated(depthStencilTexture);
 }
 
-void Rendering::DrawTargetImpl::Load(CoreTools::BufferSource& source)
+void Rendering::DrawTargetImpl::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -338,7 +338,7 @@ void Rendering::DrawTargetImpl::Load(CoreTools::BufferSource& source)
     source.ReadObjectAssociated(depthStencilTexture);
 }
 
-void Rendering::DrawTargetImpl::Link(CoreTools::ObjectLink& source)
+void Rendering::DrawTargetImpl::Link(ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -346,7 +346,7 @@ void Rendering::DrawTargetImpl::Link(CoreTools::ObjectLink& source)
     source.ResolveLink(depthStencilTexture);
 }
 
-void Rendering::DrawTargetImpl::Register(CoreTools::ObjectRegister& target) const
+void Rendering::DrawTargetImpl::Register(ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

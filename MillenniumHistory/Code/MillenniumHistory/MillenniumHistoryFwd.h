@@ -5,16 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.12 (2023/06/15 22:53)
+///	版本：0.9.1.0 (2023/06/19 15:14)
 
 #ifndef MILLENNIUM_HISTORY_MILLENNIUM_HISTORY_FWD_H
 #define MILLENNIUM_HISTORY_MILLENNIUM_HISTORY_FWD_H
 
-#include "Core/CoreFwd.h"
-#include "GUI/GUIFwd.h"
 #include "Helper/HelperFwd.h"
-#include "Input/InputFwd.h"
-#include "Resource/ResourceFwd.h"
-#include "System/SystemFwd.h"
 
 #endif  // MILLENNIUM_HISTORY_MILLENNIUM_HISTORY_FWD_H

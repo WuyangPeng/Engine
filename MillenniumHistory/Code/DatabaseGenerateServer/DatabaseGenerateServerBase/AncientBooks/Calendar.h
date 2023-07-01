@@ -24,8 +24,10 @@ namespace AncientBooks
         using ClassType = Calendar;
         using ParentType = CalendarBase;
 
+        using CSVRow = CoreTools::CSVRow;
+
     public:
-        explicit Calendar(const CoreTools::CSVRow& csvRow);
+        explicit Calendar(const CSVRow& csvRow);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -33,53 +35,55 @@ namespace AncientBooks
 
         NODISCARD int GetId() const noexcept override;
 
-        NODISCARD System::String GetName() const override;
+        NODISCARD String GetName() const override;
 
-        NODISCARD std::vector<System::String> GetAlias() const override;
+        NODISCARD StringContainer GetAlias() const override;
         NODISCARD int GetAliasCount() const override;
-        NODISCARD System::String GetAlias(int index) const override;
-        NODISCARD std::vector<System::String>::const_iterator GetAliasBegin() const noexcept override;
-        NODISCARD std::vector<System::String>::const_iterator GetAliasEnd() const noexcept override;
+        NODISCARD String GetAlias(int index) const override;
+        NODISCARD StringContainerConstIter GetAliasBegin() const noexcept override;
+        NODISCARD StringContainerConstIter GetAliasEnd() const noexcept override;
 
-        NODISCARD std::vector<int> GetSource() const override;
+        NODISCARD IntContainer GetSource() const override;
         NODISCARD int GetSourceCount() const override;
         NODISCARD int GetSource(int index) const override;
-        NODISCARD std::vector<int>::const_iterator GetSourceBegin() const noexcept override;
-        NODISCARD std::vector<int>::const_iterator GetSourceEnd() const noexcept override;
+        NODISCARD IntContainerConstIter GetSourceBegin() const noexcept override;
+        NODISCARD IntContainerConstIter GetSourceEnd() const noexcept override;
+        NODISCARD BookContainer GetSource(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD System::String GetPublication() const override;
+        NODISCARD String GetPublication() const override;
 
-        NODISCARD std::vector<int> GetCreator() const override;
+        NODISCARD IntContainer GetCreator() const override;
         NODISCARD int GetCreatorCount() const override;
         NODISCARD int GetCreator(int index) const override;
-        NODISCARD std::vector<int>::const_iterator GetCreatorBegin() const noexcept override;
-        NODISCARD std::vector<int>::const_iterator GetCreatorEnd() const noexcept override;
+        NODISCARD IntContainerConstIter GetCreatorBegin() const noexcept override;
+        NODISCARD IntContainerConstIter GetCreatorEnd() const noexcept override;
+        NODISCARD CharacterContainer GetCreator(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetFormulate() const noexcept override;
-        NODISCARD std::shared_ptr<const YearMappingType> GetFormulate(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstYearSharedPtr GetFormulate(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetCountry() const noexcept override;
-        NODISCARD std::shared_ptr<const CountryMappingType> GetCountry(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstCountrySharedPtr GetCountry(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetBegin() const noexcept override;
-        NODISCARD std::shared_ptr<const YearMappingType> GetBegin(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstYearSharedPtr GetBegin(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetEnd() const noexcept override;
-        NODISCARD std::shared_ptr<const YearMappingType> GetEnd(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstYearSharedPtr GetEnd(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetAgainBegin() const noexcept override;
-        NODISCARD std::shared_ptr<const YearMappingType> GetAgainBegin(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstYearSharedPtr GetAgainBegin(const AncientBooksContainer& csvContainer) const override;
 
         NODISCARD int GetAgainEnd() const noexcept override;
-        NODISCARD std::shared_ptr<const YearMappingType> GetAgainEnd(const AncientBooksContainer& csvContainer) const override;
+        NODISCARD ConstYearSharedPtr GetAgainEnd(const AncientBooksContainer& csvContainer) const override;
 
     private:
         int id;  // Id
-        System::String name;  // 名字
-        std::vector<System::String> alias;  // 別名
-        std::vector<int> source;  // 出處
-        System::String publication;  // 刊載
-        std::vector<int> creator;  // 創制人
+        String name;  // 名字
+        StringContainer alias;  // 別名
+        IntContainer source;  // 出處
+        String publication;  // 刊載
+        IntContainer creator;  // 創制人
         int formulate;  // 制定年
         int country;  // 國家
         int begin;  // 開始

@@ -42,6 +42,8 @@ namespace Rendering
         NODISCARD BufferUsage GetUsage() const noexcept;
 
         NODISCARD bool Update() override;
+        NODISCARD bool Update(int level) noexcept override;
+        NODISCARD bool Update(int item, int level) noexcept override;
         NODISCARD bool CopyCpuToGpu() override;
         NODISCARD bool CopyGpuToCpu() override;
 

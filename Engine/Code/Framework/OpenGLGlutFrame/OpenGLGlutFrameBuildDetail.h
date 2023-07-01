@@ -84,7 +84,7 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::InitGlutFunctionLibrary
 {
     System::GlutInit(&argc, argv);
 
-    System::GlutInitDisplayMode(0 < rendererParameter.GetNumMultisamples());
+    System::GlutInitDisplayMode(0 < rendererParameter.GetNumMultiSamples());
 
     System::GlutInitWindowPosition(rendererParameter.GetXPosition(), rendererParameter.GetYPosition());
     System::GlutInitWindowSize(rendererParameter.GetWidth(), rendererParameter.GetHeight());

@@ -37,6 +37,12 @@ namespace Database
     };
 
     template <>
+    struct DataTypeTraits<DataType::StringArray>
+    {
+        using Type = std::vector<std::string>;
+    };
+
+    template <>
     struct DataTypeTraits<DataType::Int32>
     {
         using Type = int32_t;
@@ -46,6 +52,12 @@ namespace Database
     struct DataTypeTraits<DataType::Int32Count>
     {
         using Type = int32_t;
+    };
+
+    template <>
+    struct DataTypeTraits<DataType::Int32Array>
+    {
+        using Type = std::vector<int32_t>;
     };
 
     template <>
@@ -61,9 +73,21 @@ namespace Database
     };
 
     template <>
+    struct DataTypeTraits<DataType::Int64Array>
+    {
+        using Type = std::vector<int64_t>;
+    };
+
+    template <>
     struct DataTypeTraits<DataType::Double>
     {
         using Type = double;
+    };
+
+    template <>
+    struct DataTypeTraits<DataType::DoubleArray>
+    {
+        using Type = std::vector<double>;
     };
 
     template <>
@@ -93,11 +117,15 @@ namespace Database
     namespace Traits
     {
         using String = Database::DataTypeTraits<DataType::String>::Type;
+        using StringArray = Database::DataTypeTraits<DataType::StringArray>::Type;
         using Int32 = Database::DataTypeTraits<DataType::Int32>::Type;
         using Int32Count = Database::DataTypeTraits<DataType::Int32Count>::Type;
+        using Int32Array = Database::DataTypeTraits<DataType::Int32Array>::Type;
         using Int64 = Database::DataTypeTraits<DataType::Int64>::Type;
         using Int64Count = Database::DataTypeTraits<DataType::Int64Count>::Type;
+        using Int64Array = Database::DataTypeTraits<DataType::Int64Array>::Type;
         using Double = Database::DataTypeTraits<DataType::Double>::Type;
+        using DoubleArray = Database::DataTypeTraits<DataType::DoubleArray>::Type;
         using Bool = Database::DataTypeTraits<DataType::Bool>::Type;
     }
 }

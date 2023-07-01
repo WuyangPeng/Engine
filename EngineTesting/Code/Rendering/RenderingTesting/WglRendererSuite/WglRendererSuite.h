@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 15:01)
+///	版本：0.9.1.0 (2023/06/25 16:24)
 
 #ifndef RENDERING_WGL_RENDERER_SUITE_H
 #define RENDERING_WGL_RENDERER_SUITE_H

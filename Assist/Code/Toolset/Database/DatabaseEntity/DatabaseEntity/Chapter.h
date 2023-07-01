@@ -16,7 +16,7 @@
 #include "Database/DatabaseInterface/BasisDatabaseContainer.h"
 #include "Database/DatabaseInterface/DataTypeTraits.h"
 #include "Database/DatabaseInterface/DatabaseEntity.h"
-#include "Database/DatabaseInterface/EntityDetail.h"
+#include "Database/DatabaseInterface/Entity.h"
 
 namespace DatabaseEntity
 {
@@ -28,12 +28,13 @@ namespace DatabaseEntity
 
         using DataType = Database::DataType;
         using IndexType = Database::IndexType;
+        using WrappersStrategy = Database::WrappersStrategy;
         using BasisDatabaseManager = Database::BasisDatabaseManager;
         using BasisDatabaseContainer = Database::BasisDatabaseContainer;
 
     public:
         explicit Chapter(const BasisDatabaseManager& entity);
-        Chapter(Database::WrappersStrategy wrappersStrategy,
+        Chapter(WrappersStrategy wrappersStrategy,
                 boost::call_traits<Database::Traits::Int64>::param_type userId);
 
         CLASS_INVARIANT_FINAL_DECLARE;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:30)
+///	版本：0.9.1.0 (2023/06/29 20:36)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,14 +16,14 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTextureRenderTarget.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TextureRenderTarget);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TextureRenderTarget);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TextureRenderTarget);
 
-Rendering::TextureRenderTarget::TextureRenderTarget(DataFormatType format, int width, int height, bool hasMipmaps)
-    : ParentType{ format, width, height, hasMipmaps, GraphicsObjectType::TextureRenderTarget }
+Rendering::TextureRenderTarget::TextureRenderTarget(DataFormatType format, int width, int height, bool hasMipMaps)
+    : ParentType{ format, width, height, hasMipMaps, GraphicsObjectType::TextureRenderTarget }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -107,8 +107,12 @@ Rendering::TextureRenderTarget::RendererObjectSharedPtr Rendering::TextureRender
     switch (rendererTypes)
     {
         case RendererTypes::OpenGL:
+        {
             return std::make_shared<OpenGLTextureRenderTarget>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        }
         default:
-            return ParentType::CreateRendererObject(rendererTypes);
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
+        }
     }
 }

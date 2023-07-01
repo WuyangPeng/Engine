@@ -43,7 +43,17 @@ System::String CoreTools::DefaultContainerDefaultFunctionDefinitionParsing::Gene
 
     content += GenerateReturnKeyLess();
     content += GenerateLambdaEnd();
+    content += GenerateFunctionEndBrackets();
     content += TextParsing::gNewlineCharacter;
+
+    content += SYSTEM_TEXT("void ");
+    content += GetCSVHead().GetNameSpace();
+    content += TextParsing::gDoubleColon;
+    content += GetCSVClassName();
+    content += TextParsing::gDoubleColon;
+    content += SYSTEM_TEXT("Unique()");
+    content += TextParsing::gNewlineCharacter;
+    content += GenerateFunctionBeginBrackets();
 
     content += GenerateUnique();
     content += GenerateReturnKeyEqual();
@@ -59,10 +69,6 @@ System::String CoreTools::DefaultContainerDefaultFunctionDefinitionParsing::Gene
 
     content += GenerateFunctionBeginBrackets(1);
 
-    content += GenerateWarnLog(2);
-    content += GenerateRepeatKey(0, TextParsing::gRepeatKey);
-    content += GenerateLogAssert(0);
-    content += TextParsing::gNewlineCharacter;
     content += GenerateEraseIter();
 
     content += GenerateFunctionEndBrackets(1);

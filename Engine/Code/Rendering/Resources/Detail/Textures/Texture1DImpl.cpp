@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:28)
+///	版本：0.9.1.0 (2023/06/29 20:18)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,27 +18,29 @@
 
 #include <vector>
 
-Rendering::Texture1DImpl::Texture1DImpl(DataFormatType format, int length, bool hasMipmaps)
-    : ClassType{ 1, format, length, hasMipmaps }
+Rendering::Texture1DImpl::Texture1DImpl(DataFormatType format, int length, bool hasMipMaps)
+    : ClassType{ 1, format, length, hasMipMaps }
 {
     RENDERING_ASSERTION_0(0 < length, "length 必须是正数\n");
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::Texture1DImpl::Texture1DImpl(int numItems, DataFormatType format, int length, bool hasMipmaps)
-    : ParentType{ format, GetNumLevels(length, 1, 1, hasMipmaps) },
-      textureLevelData{ numItems, length, hasMipmaps, GetTotalElements(1, length, 1, 1, hasMipmaps), GetNumLevels() }
+Rendering::Texture1DImpl::Texture1DImpl(int numItems, DataFormatType format, int length, bool hasMipMaps)
+    : ParentType{ format, GetNumLevels(length, 1, 1, hasMipMaps) },
+      textureLevelData{ numItems, length, hasMipMaps, GetTotalElements(1, length, 1, 1, hasMipMaps), GetNumLevels() }
 {
     RENDERING_ASSERTION_0(0 < length, "length 必须是正数\n");
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::Texture1DImpl::Texture1DImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+Rendering::Texture1DImpl::Texture1DImpl(CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{ DataFormatType::Unknown, 1 },
       textureLevelData{ 1, 0, false, 0, 1 }
 {
+    System::UnusedFunction(disableNotThrow);
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
@@ -86,28 +88,28 @@ int Rendering::Texture1DImpl::GetLevelOffset(int item, int level) const
     return textureLevelData.GetLevelOffset(item, level);
 }
 
-bool Rendering::Texture1DImpl::HasMipmaps() const noexcept
+bool Rendering::Texture1DImpl::HasMipMaps() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return textureLevelData.HasMipmaps();
+    return textureLevelData.HasMipMaps();
 }
 
-void Rendering::Texture1DImpl::AutogenerateMipmaps() noexcept
+void Rendering::Texture1DImpl::AutoGenerateMipMaps() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return textureLevelData.AutogenerateMipmaps();
+    return textureLevelData.AutoGenerateMipMaps();
 }
 
-bool Rendering::Texture1DImpl::WantAutogenerateMipmaps() const noexcept
+bool Rendering::Texture1DImpl::WantAutoGenerateMipMaps() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return textureLevelData.WantAutogenerateMipmaps();
+    return textureLevelData.WantAutoGenerateMipMaps();
 }
 
-int Rendering::Texture1DImpl::GetNumSubresources() const noexcept
+int Rendering::Texture1DImpl::GetNumSubResources() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -120,7 +122,7 @@ int Rendering::Texture1DImpl::GetIndex(int item, int level) const
 
     if (textureLevelData.GetNumItems() <= item || GetNumLevels() <= level)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无效输入。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("无效输入。"))
     }
 
     return GetNumLevels() * item + level;
@@ -133,12 +135,12 @@ int Rendering::Texture1DImpl::GetLength() const
     return GetDimension(0, 0);
 }
 
-void Rendering::Texture1DImpl::LoadLevelData(CoreTools::BufferSource& source)
+void Rendering::Texture1DImpl::LoadLevelData(BufferSource& source)
 {
     textureLevelData.Load(source);
 }
 
-void Rendering::Texture1DImpl::SaveLevelData(CoreTools::BufferTarget& target) const
+void Rendering::Texture1DImpl::SaveLevelData(BufferTarget& target) const
 {
     textureLevelData.Save(target);
 }
@@ -172,8 +174,8 @@ void Rendering::Texture1DImpl::SaveBaseToFile(WriteFileManager& outFile) const
     const auto dimension0 = GetDimension(0);
     outFile.Write(sizeof(int32_t), &dimension0);
 
-    const auto hasMipmaps = HasMipmaps();
-    outFile.Write(sizeof(bool), &hasMipmaps);
+    const auto hasMipMaps = HasMipMaps();
+    outFile.Write(sizeof(bool), &hasMipMaps);
 
     const auto numItems = GetNumItems();
     outFile.Write(sizeof(int32_t), &numItems);

@@ -37,7 +37,7 @@ Rendering::TrianglesStrip::TrianglesStrip(const VertexFormatSharedPtr& vertexfor
 {
     const auto numVertices = vertexbuffer->GetNumElements();
 
-    IndexBufferSharedPtr indexBuffer{ IndexBuffer::Create(IndexFormatType::Polypoint, numVertices, indexSize) };
+    IndexBufferSharedPtr indexBuffer{ IndexBuffer::Create(IndexFormatType::PolyPoint, numVertices, indexSize) };
     InitIndexBuffer(*indexBuffer);
     SetIndexBuffer(indexBuffer);
 

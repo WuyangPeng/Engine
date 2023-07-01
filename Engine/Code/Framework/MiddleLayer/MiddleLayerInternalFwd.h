@@ -52,8 +52,8 @@ namespace Framework
     using ObjectLogicInterfaceSharedPtr = std::shared_ptr<ObjectLogicInterface>;
     using ConstObjectLogicInterfaceSharedPtr = std::shared_ptr<const ObjectLogicInterface>;
 
-    using ArtificialIntellegenceInterfaceSharedPtr = std::shared_ptr<ArtificialIntellegenceInterface>;
-    using ConstArtificialIntellegenceInterfaceSharedPtr = std::shared_ptr<const ArtificialIntellegenceInterface>;
+    using ArtificialIntelligenceInterfaceSharedPtr = std::shared_ptr<ArtificialIntelligenceInterface>;
+    using ConstArtificialIntelligenceInterfaceSharedPtr = std::shared_ptr<const ArtificialIntelligenceInterface>;
 
     using InputManagerInterfaceSharedPtr = std::shared_ptr<InputManagerInterface>;
     using ConstInputManagerInterfaceSharedPtr = std::shared_ptr<const InputManagerInterface>;

@@ -86,14 +86,52 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateCon
 
     content += GenerateFunctionBeginBrackets();
 
-    content += GenerateContainerSize();
-    content += GenerateContainerAddDataDefinition();
+    content += GenerateIndentation(1);
 
-    content += TextParsing::gNewlineCharacter;
+    content += SYSTEM_TEXT("LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT(\"");
+    content += lowerClassName;
+    content += SYSTEM_TEXT("表开始载入……\"));\n\n");
+
+    content += GenerateIndentation(1);
+    content += SYSTEM_TEXT("Load(csvContent);\n");
+
+    if (csvHead.GetCSVFormatType() == CSVFormatType::Default ||
+        csvHead.GetCSVFormatType() == CSVFormatType::Key)
+    {
+        content += GenerateIndentation(1);
+        content += SYSTEM_TEXT("Unique();\n");
+        content += TextParsing::gNewlineCharacter;
+    }
+
     content += GenerateIndentation(1);
     content += SYSTEM_TEXT("LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT(\"");
     content += lowerClassName;
     content += SYSTEM_TEXT("表结束载入……\"));\n");
+
+    content += GenerateFunctionEndBrackets();
+    content += TextParsing::gNewlineCharacter;
+
+    content += SYSTEM_TEXT("void ");
+    content += csvHead.GetNameSpace();
+    content += TextParsing::gDoubleColon;
+    content += GetCSVClassName();
+    content += TextParsing::gDoubleColon;
+    content += SYSTEM_TEXT("Load");
+    content += TextParsing::gCSVContent;
+    content += TextParsing::gNewlineCharacter;
+
+    content += GenerateFunctionBeginBrackets();
+    content += GenerateContainerSize();
+    content += GenerateContainerAddDataDefinition();
+    content += TextParsing::gNewlineCharacter;
+
+    if (csvHead.GetCSVFormatType() == CSVFormatType::Vector ||
+        csvHead.GetCSVFormatType() == CSVFormatType::Default)
+    {
+        content += GenerateIndentation(1);
+        content += lowerClassName;
+        content += SYSTEM_TEXT(".shrink_to_fit();\n");
+    }
 
     content += GenerateFunctionEndBrackets();
     content += TextParsing::gNewlineCharacter;
@@ -153,12 +191,6 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateCon
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     auto content = GenerateIndentation(1);
-
-    content += SYSTEM_TEXT("LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT(\"");
-    content += lowerClassName;
-    content += SYSTEM_TEXT("表开始载入……\"));\n\n");
-
-    content += GenerateIndentation(1);
     content += TextParsing::gContentSize;
     content += GenerateIndentation(1);
     content += SYSTEM_TEXT("const auto csvHead = csvContent.GetCSVHead();\n\n");
@@ -316,7 +348,6 @@ System::String CoreTools::ContainerDefaultFunctionDefinitionParsing::GenerateRep
 
     auto content = GenerateIndentation(addIndentationCount);
 
-    content += TextParsing::gSpace;
     content += TextParsing::gSystemText;
     content += lowerClassName;
     content += repeatKey;

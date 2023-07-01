@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起版本：0.9.0.12 (2023/06/17 12:51)
+///	版本：0.9.1.0 (2023/06/19 15:31)
 
-#ifndef GAME_CLIENT_MIDDLE_LAYER_MESSAGE_MIDDLE_LAYER_MESSAGE_H
-#define GAME_CLIENT_MIDDLE_LAYER_MESSAGE_MIDDLE_LAYER_MESSAGE_H
+#ifndef GAME_CLIENT_MIDDLE_LAYER_MESSAGE_MESSAGE_MANAGER_H
+#define GAME_CLIENT_MIDDLE_LAYER_MESSAGE_MESSAGE_MANAGER_H
 
 #include "GameClient/GameClientMiddleLayer/GameClientMiddleLayerDll.h"
 
@@ -17,11 +17,11 @@
 
 namespace GameClientMiddleLayer
 {
-    class GAME_CLIENT_MIDDLE_LAYER_DEFAULT_DECLARE MessageManager : public Framework::MessageManagerInterface
+    class GAME_CLIENT_MIDDLE_LAYER_DEFAULT_DECLARE MessageManager final : public Framework::MessageManagerInterface
     {
     public:
         using ClassType = MessageManager;
-        using ParentType = Framework::MessageManagerInterface;
+        using ParentType = MessageManagerInterface;
 
         using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
@@ -33,4 +33,4 @@ namespace GameClientMiddleLayer
     };
 }
 
-#endif  // GAME_CLIENT_MIDDLE_LAYER_MESSAGE_MIDDLE_LAYER_MESSAGE_H
+#endif  // GAME_CLIENT_MIDDLE_LAYER_MESSAGE_MESSAGE_MANAGER_H

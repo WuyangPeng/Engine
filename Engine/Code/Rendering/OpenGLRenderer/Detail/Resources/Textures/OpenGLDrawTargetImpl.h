@@ -35,7 +35,7 @@ namespace Rendering
         using ConstOpenGLTextureDepthStencilSharedPtr = std::shared_ptr<const OpenGLTextureDepthStencil>;
 
     public:
-        OpenGLDrawTargetImpl(const DrawTargetSharedPtr& target,
+        OpenGLDrawTargetImpl(const ConstDrawTargetSharedPtr& target,
                              const OpenGLTextureRenderTargetContainer& renderTargetTextures,
                              const OpenGLTextureDepthStencilSharedPtr& depthStencilTexture);
         ~OpenGLDrawTargetImpl() noexcept;
@@ -54,7 +54,7 @@ namespace Rendering
         void Disable();
 
     private:
-        DrawTargetSharedPtr drawTarget;
+        ConstDrawTargetSharedPtr drawTarget;
         OpenGLTextureRenderTargetContainer renderTargetTextures;
         OpenGLTextureDepthStencilSharedPtr depthStencilTexture;
 

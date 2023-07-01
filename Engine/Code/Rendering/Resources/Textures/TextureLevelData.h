@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:24)
+///	版本：0.9.1.0 (2023/06/29 20:05)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_H
 #define RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_H
@@ -29,19 +29,21 @@ namespace Rendering
         using ClassType = TextureLevelData<NumDimensions>;
         using ReadFileManager = CoreTools::ReadFileManager;
         using WriteFileManager = CoreTools::WriteFileManager;
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
 
     public:
         TextureLevelData() noexcept;
-        explicit TextureLevelData(int numItems, int dimension0, bool hasMipmaps, int elementSize, int numLevels);
-        explicit TextureLevelData(int numItems, int dimension0, int dimension1, bool hasMipmaps, int elementSize, int numLevels);
-        explicit TextureLevelData(int numItems, int dimension0, int dimension1, int dimension2, bool hasMipmaps, int elementSize, int numLevels);
+        explicit TextureLevelData(int numItems, int dimension0, bool hasMipMaps, int elementSize, int numLevels);
+        explicit TextureLevelData(int numItems, int dimension0, int dimension1, bool hasMipMaps, int elementSize, int numLevels);
+        explicit TextureLevelData(int numItems, int dimension0, int dimension1, int dimension2, bool hasMipMaps, int elementSize, int numLevels);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD int GetNumItems() const noexcept;
         NODISCARD int GetNumDimensions() const noexcept;
         NODISCARD int GetDimension(int index) const;
-        NODISCARD bool HasMipmaps() const noexcept;
+        NODISCARD bool HasMipMaps() const noexcept;
         NODISCARD int GetDimension(int level, int index) const;
         NODISCARD int GetNumLevelBytes(int level) const;
         NODISCARD int GetLevelOffset(int item, int level) const;
@@ -49,15 +51,15 @@ namespace Rendering
         void SetDimension(int level, int index, int dimension);
         void SetNumLevelBytes(int level, int aNumLevelBytes);
 
-        void Load(CoreTools::BufferSource& source);
-        void Save(CoreTools::BufferTarget& target) const;
+        void Load(BufferSource& source);
+        void Save(BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const;
 
         void SaveToFile(WriteFileManager& outFile) const;
         void ReadFromFile(ReadFileManager& inFile);
 
-        void AutogenerateMipmaps() noexcept;
-        NODISCARD bool WantAutogenerateMipmaps() const noexcept;
+        void AutoGenerateMipMaps() noexcept;
+        NODISCARD bool WantAutoGenerateMipMaps() const noexcept;
 
     private:
         using LevelDimensionType = std::array<std::array<int, NumDimensions>, textureMaximumMipmapLevels>;
@@ -67,16 +69,16 @@ namespace Rendering
 
     private:
         void Init(int dimension0, int dimension1, int dimension2, int elementSize, int numLevels);
-        void InitLevelOffsetsNoMipmaps(int numLevels);
-        void InitLevelOffsetsHasMipmaps(int numLevels);
+        void InitLevelOffsetsNoMipMaps(int numLevels);
+        void InitLevelOffsetsHasMipMaps(int numLevels);
 
     private:
         int numItems;
         LevelDimensionType levelDimension;
         LevelNumBytesType levelNumBytes;
         LevelOffsetsContainer levelOffsets;
-        bool hasMipmaps;
-        bool autogenerateMipmaps;
+        bool hasMipMaps;
+        bool autoGenerateMipMaps;
     };
 }
 

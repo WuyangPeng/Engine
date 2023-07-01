@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:25)
+///	版本：0.9.1.0 (2023/06/29 17:09)
 
 #include "Rendering/RenderingExport.h"
 
@@ -22,8 +22,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Rendering/OpenGLRenderer/Resources/Buffers/OpenGLVertexBuffer.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/Buffers/StructuredBuffer.h"
 #include "Rendering/Resources/Detail/Buffers/VertexBufferImpl.h"
 
@@ -33,15 +32,19 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, VertexBuffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, VertexBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, VertexBuffer);
 
-Rendering::VertexBuffer::VertexBuffer(MAYBE_UNUSED VertexBufferCreate indexBufferCreate, const VertexFormat& format, const StructuredBufferSharedPtr& structuredBuffer)
+Rendering::VertexBuffer::VertexBuffer(VertexBufferCreate vertexBufferCreate, const VertexFormat& format, const StructuredBufferSharedPtr& structuredBuffer)
     : ParentType{ structuredBuffer->GetNumElements(), format.GetStride(), GraphicsObjectType::VertexBuffer }, impl{ format, structuredBuffer }
 {
+    System::UnusedFunction(vertexBufferCreate);
+
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::VertexBuffer::VertexBuffer(MAYBE_UNUSED VertexBufferCreate indexBufferCreate, const VertexFormat& format, int numVertices)
+Rendering::VertexBuffer::VertexBuffer(VertexBufferCreate vertexBufferCreate, const VertexFormat& format, int numVertices)
     : ParentType{ numVertices, format.GetStride(), GraphicsObjectType::VertexBuffer }, impl{ format }
 {
+    System::UnusedFunction(vertexBufferCreate);
+
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
@@ -68,7 +71,7 @@ Rendering::VertexBuffer::StructuredBufferSharedPtr Rendering::VertexBuffer::GetS
 
     if (buffer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("Structured Buffer 指针为空。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("Structured Buffer 指针为空。"))
     }
 
     return buffer;
@@ -156,22 +159,21 @@ Rendering::VertexBuffer::SpanIterator Rendering::VertexBuffer::GetChannel(Semant
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto index = impl->GetIndex(semantic, unit);
+    const auto index = impl->GetIndex(semantic, unit);
     if (index < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("缓冲区没有使用指定单位的指定语义。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("缓冲区没有使用指定单位的指定语义。"s))
     }
 
-    auto type = impl->GetAttributeType(index);
-
-    if (!requiredTypes.empty() && requiredTypes.find(type) == requiredTypes.end())
+    if (const auto type = impl->GetAttributeType(index);
+        !requiredTypes.empty() && !requiredTypes.contains(type))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("语义的类型不在所需类型的集合中。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("语义的类型不在所需类型的集合中。"s))
     }
 
-    auto buffer = impl->GetStructuredBuffer();
+    const auto buffer = impl->GetStructuredBuffer();
 
-    auto offset = impl->GetOffset(index);
+    const auto offset = impl->GetOffset(index);
 
     return (buffer == nullptr) ? GetData(offset) : buffer->GetData(offset);
 }
@@ -183,8 +185,12 @@ Rendering::VertexBuffer::RendererObjectSharedPtr Rendering::VertexBuffer::Create
     switch (rendererTypes)
     {
         case RendererTypes::OpenGL:
+        {
             return std::make_shared<OpenGLVertexBuffer>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        }
         default:
-            return ParentType::CreateRendererObject(rendererTypes);
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
+        }
     }
 }

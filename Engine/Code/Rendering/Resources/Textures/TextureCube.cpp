@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:29)
+///	版本：0.9.1.0 (2023/06/29 20:34)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,7 +21,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTextureCube.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/DataFormat.h"
 #include "Rendering/Resources/Detail/Textures/TextureCubeImpl.h"
 #include "Rendering/Resources/Flags/CubeFaceType.h"
@@ -32,11 +32,11 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, TextureCube);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TextureCube);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TextureCube);
 
-Rendering::TextureCube::TextureCube(DataFormatType format, int length, bool hasMipmaps)
-    : ParentType{ ImplType::GetTotalElements(System::EnumCastUnderlying(CubeFaceType::Count), length, length, 1, hasMipmaps),
+Rendering::TextureCube::TextureCube(DataFormatType format, int length, bool hasMipMaps)
+    : ParentType{ ImplType::GetTotalElements(System::EnumCastUnderlying(CubeFaceType::Count), length, length, 1, hasMipMaps),
                   DataFormat::GetNumBytesPerStruct(format),
                   GraphicsObjectType::TextureCube },
-      impl{ format, length, hasMipmaps }
+      impl{ format, length, hasMipMaps }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -92,11 +92,11 @@ void Rendering::TextureCube::SaveToFile(WriteFileManager& outFile) const
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, TextureCube, GetWidth, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, TextureCube, GetHeight, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, HasMipmaps, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, HasMipMaps, bool)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, AutogenerateMipmaps, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, WantAutogenerateMipmaps, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, GetNumSubresources, int)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, AutoGenerateMipMaps, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, WantAutoGenerateMipMaps, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, GetNumSubResources, int)
 
 int Rendering::TextureCube::GetLength() const
 {
@@ -204,8 +204,12 @@ Rendering::TextureCube::RendererObjectSharedPtr Rendering::TextureCube::CreateRe
     switch (rendererTypes)
     {
         case RendererTypes::OpenGL:
+        {
             return std::make_shared<OpenGLTextureCube>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        }
         default:
-            return ParentType::CreateRendererObject(rendererTypes);
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s))
+        }
     }
 }

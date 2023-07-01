@@ -34,6 +34,11 @@ namespace Rendering
         NODISCARD ConstConstantBufferSharedPtr GetConstantBuffer() const;
 
         void Enable() noexcept override;
+        [[nodiscard]] bool CopyGpuToCpu(int level) override;
+        [[nodiscard]] bool CopyGpuToCpu(int item, int level) override;
+        [[nodiscard]] bool CopyCpuToGpu(int level) override;
+        [[nodiscard]] bool CopyCpuToGpu(int item, int level) override;
+        [[nodiscard]] bool GetNumActiveElements() override;
     };
 }
 

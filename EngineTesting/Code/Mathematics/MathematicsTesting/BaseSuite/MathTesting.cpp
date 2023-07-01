@@ -38,6 +38,7 @@ void Mathematics::MathTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(PowTest);
     ASSERT_NOT_THROW_EXCEPTION_0(TruncationTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ApproximateTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NumberDigitsTest);
 }
 
 // Constant≤‚ ‘
@@ -620,4 +621,26 @@ void Mathematics::MathTesting::ApproximateTest()
     const FloatingPointAnalysis<double> rhsAnalysis{ fourthValue };
 
     ASSERT_TRUE(MathD::FloatingPointEqual(secondValue, fourthValue, 11));
+}
+
+void Mathematics::MathTesting::NumberDigitsTest()
+{
+    for (auto index = 1LL; index <= std::numeric_limits<int64_t>::max() && 0 < index; index *= 10)
+    {
+        for (auto i = index; i < index * 10; i += index)
+        {
+            auto digits = i;
+            auto result = 0;
+
+            while (0 < digits)
+            {
+                constexpr auto base = 10;
+
+                digits /= base;
+                ++result;
+            }
+
+            ASSERT_EQUAL(MathF::GetNumberDigits(i), result);
+        }
+    }
 }

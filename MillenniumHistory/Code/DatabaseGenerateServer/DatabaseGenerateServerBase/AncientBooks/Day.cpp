@@ -13,7 +13,7 @@
 
 using namespace std::literals;
 
-AncientBooks::Day::Day(const CoreTools::CSVRow& csvRow)
+AncientBooks::Day::Day(const CSVRow& csvRow)
     : ParentType{},
       id{ csvRow.GetInt(SYSTEM_TEXT("id"s)) },
       name{ csvRow.GetString(SYSTEM_TEXT("name"s)) }

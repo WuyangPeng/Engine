@@ -21,7 +21,6 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/Particles.h"
 #include "Rendering/SceneGraph/Visual.h"
 

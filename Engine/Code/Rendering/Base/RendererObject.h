@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:07)
+///	版本：0.9.1.0 (2023/06/28 10:26)
 
 #ifndef RENDERING_BASE_RENDERER_OBJECT_H
 #define RENDERING_BASE_RENDERER_OBJECT_H
@@ -13,7 +13,6 @@
 #include "Rendering/RenderingDll.h"
 
 #include "BaseFwd.h"
-#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
@@ -27,9 +26,9 @@ namespace Rendering
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(RendererObject);
+
         using GraphicsObjectSharedPtr = std::shared_ptr<GraphicsObject>;
         using ConstGraphicsObjectSharedPtr = std::shared_ptr<const GraphicsObject>;
-        using OpenGLUInt = System::OpenGLUInt;
 
     public:
         explicit RendererObject(const GraphicsObjectSharedPtr& graphicsObject, const std::string& name = "");
@@ -46,11 +45,19 @@ namespace Rendering
         NODISCARD std::string GetName() const;
 
         virtual void Enable() = 0;
+        NODISCARD virtual bool Update() = 0;
+        NODISCARD virtual bool Update(int level) = 0;
+        NODISCARD virtual bool Update(int item, int level) = 0;
 
-        NODISCARD OpenGLUInt GetGLHandle() const noexcept;
+        NODISCARD virtual bool CopyGpuToCpu() = 0;
+        NODISCARD virtual bool CopyGpuToCpu(int level) = 0;
+        NODISCARD virtual bool CopyGpuToCpu(int item, int level) = 0;
 
-    protected:
-        void SetGLHandle(OpenGLUInt handler) noexcept;
+        NODISCARD virtual bool CopyCpuToGpu() = 0;
+        NODISCARD virtual bool CopyCpuToGpu(int level) = 0;
+        NODISCARD virtual bool CopyCpuToGpu(int item, int level) = 0;
+
+        NODISCARD virtual bool GetNumActiveElements() = 0;
 
     private:
         PackageType impl;

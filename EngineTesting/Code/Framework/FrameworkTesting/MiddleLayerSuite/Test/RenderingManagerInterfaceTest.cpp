@@ -9,7 +9,7 @@
 
 #include "RenderingManagerInterfaceTest.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "Rendering/Renderers/Renderer.h"
+#include "Rendering/RendererEngine/Renderer.h"
 
 Framework::RenderingManagerInterfaceTest::RenderingManagerInterfaceTest(MiddleLayerInterfaceCreate middleLayerInterfaceCreate, MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerInterfaceCreate, middleLayerPlatform, environmentDirectory }

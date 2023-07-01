@@ -19,6 +19,12 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{68f14701-d87c-4a2f-ac11-7381ed07c781}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DatabaseGenerateServerSuite 头文件">
+      <UniqueIdentifier>{393bc48f-df98-4f7f-abc3-e712d3ec7e61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseGenerateServerSuite 源文件">
+      <UniqueIdentifier>{b070e008-4a0c-4d40-8580-499f9062ec2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
@@ -39,25 +45,6 @@
     <None Include="Configuration\Testing.json">
       <Filter>配置</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerTesting\Testing.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerTesting\TestingHelper.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerTesting\TestingHelper.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerTesting\TestingLib.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerTesting\TestingMain.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
@@ -90,5 +77,39 @@
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\DatabaseGenerateServerSuite\DatabaseGenerateServerHelperTesting.h">
+      <Filter>DatabaseGenerateServerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\DatabaseGenerateServerSuite\DatabaseGenerateServerMessageTesting.h">
+      <Filter>DatabaseGenerateServerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\DatabaseGenerateServerSuite\DatabaseGenerateServerSuite.h">
+      <Filter>DatabaseGenerateServerSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\DatabaseGenerateServerSuite\DatabaseGenerateServerHelperTesting.cpp">
+      <Filter>DatabaseGenerateServerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\ServerTesting\DatabaseGenerateServerSuite\DatabaseGenerateServerMessageTesting.cpp">
+      <Filter>DatabaseGenerateServerSuite 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

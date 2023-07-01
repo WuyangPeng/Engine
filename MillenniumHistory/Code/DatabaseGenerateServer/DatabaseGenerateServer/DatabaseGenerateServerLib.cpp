@@ -5,9 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.12 (2023/06/12 22:28)
+///	版本：0.9.1.0 (2023/06/19 21:28)
 
 #include "ThreadingCoreRenderEngine/ThreadingCoreRenderEngineLib.h"
+#include "ThreadingCoreRenderEngineGame/ThreadingCoreRenderEngineGameLib.h"
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/DatabaseGenerateServerCoreLib.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/DatabaseGenerateServerMiddleLayerLib.h"

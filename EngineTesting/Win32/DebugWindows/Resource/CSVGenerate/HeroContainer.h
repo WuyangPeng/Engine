@@ -25,12 +25,14 @@ namespace CSVConfigure
     {
     public:
         using ClassType = HeroContainer;
+
         using ConstHeroSharedPtr = std::shared_ptr<const Hero>;
         using MappingContainer = std::map<int, ConstHeroSharedPtr>;
         using Container = std::vector<ConstHeroSharedPtr>;
+        using CSVContent = CoreTools::CSVContent;
 
     public:
-        explicit HeroContainer(const CoreTools::CSVContent& csvContent);
+        explicit HeroContainer(const CSVContent& csvContent);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -45,7 +47,8 @@ namespace CSVConfigure
         NODISCARD Container GetHero(Function function) const;
 
     private:
-        void Parsing(const CoreTools::CSVContent& csvContent);
+        void Parsing(const CSVContent& csvContent);
+        void Load(const CSVContent& csvContent);
 
     private:
         MappingContainer hero;

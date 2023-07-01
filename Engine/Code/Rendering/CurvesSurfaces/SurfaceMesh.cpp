@@ -17,8 +17,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Mathematics/Meshes/EdgeKey.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Mathematics/Meshes/EdgeKey.h" 
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 #include <set>
@@ -97,7 +96,7 @@ void Rendering::SurfaceMesh::SetLevel(int aLevel)
     numFullVertices = numTotalVertices;
 
     const auto numTotalIndices = 3 * numTotalTriangles;
-    SetIndexBuffer(IndexBuffer::Create(IndexFormatType::Polypoint, numTotalIndices, sizeof(int)));
+    SetIndexBuffer(IndexBuffer::Create(IndexFormatType::PolyPoint, numTotalIndices, sizeof(int)));
 
     auto indices = GetIndexBuffer()->GetData();
     for (auto i = 0; i < numTotalTriangles; ++i)
@@ -108,7 +107,7 @@ void Rendering::SurfaceMesh::SetLevel(int aLevel)
             indices.Increase(tri.v.at(j));
         }
     }
-    RENDERER_MANAGE_SINGLETON.UpdateAll(GetIndexBuffer());
+   
 
     OnDynamicChange();
     UpdateModelSpace(VisualUpdateType::Normals);

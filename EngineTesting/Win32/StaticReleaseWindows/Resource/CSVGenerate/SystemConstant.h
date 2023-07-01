@@ -23,8 +23,11 @@ namespace CSVConfigure
     public:
         using ClassType = SystemConstant;
 
+        using CSVRow = CoreTools::CSVRow;
+        using String = System::String;
+
     public:
-        explicit SystemConstant(const CoreTools::CSVRow& csvRow);
+        explicit SystemConstant(const CSVRow& csvRow);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -36,7 +39,7 @@ namespace CSVConfigure
 
         NODISCARD int GetReward() const noexcept;
 
-        NODISCARD System::String GetSkillName() const;
+        NODISCARD String GetSkillName() const;
 
         NODISCARD VectorType GetVectorType() const noexcept;
 
@@ -46,7 +49,7 @@ namespace CSVConfigure
         int id;  // Id
         int nextId;  // 下一级Id
         int reward;  // 过关奖励
-        System::String skillName;  // 技能名称
+        String skillName;  // 技能名称
         VectorType vectorType;  // 向量类型
         CoreTools::IntVector3 position;  // 位置
     };

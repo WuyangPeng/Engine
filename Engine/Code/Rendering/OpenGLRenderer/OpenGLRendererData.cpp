@@ -10,5 +10,4 @@
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLMapping.h"
-#include "OpenGLRendererData.h"
-#include "Rendering/Shaders/AlphaState.h"
+#include "OpenGLRendererData.h" 

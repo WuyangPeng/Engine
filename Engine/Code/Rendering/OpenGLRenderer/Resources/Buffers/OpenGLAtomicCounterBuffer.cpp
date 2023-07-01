@@ -39,6 +39,41 @@ void Rendering::OpenGLAtomicCounterBuffer::Enable() noexcept
     RENDERING_CLASS_IS_VALID_9;
 }
 
+bool Rendering::OpenGLAtomicCounterBuffer::CopyGpuToCpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLAtomicCounterBuffer::CopyGpuToCpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLAtomicCounterBuffer::CopyCpuToGpu(MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLAtomicCounterBuffer::CopyCpuToGpu(MAYBE_UNUSED int item, MAYBE_UNUSED int level)
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
+bool Rendering::OpenGLAtomicCounterBuffer::GetNumActiveElements()
+{
+    CoreTools::DisableNoexcept();
+
+    return false;
+}
+
 void Rendering::OpenGLAtomicCounterBuffer::AttachToUnit(OpenGLInt atomicCounterBufferUnit) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;

@@ -10,6 +10,8 @@
 #include "Database/DatabaseExport.h"
 
 #include "MysqlConnectorConnection.h"
+#include "System/Helper/PragmaWarning/Algorithm.h"
+#include "System/Helper/PragmaWarning/LexicalCast.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
@@ -248,6 +250,57 @@ Database::BasisDatabase Database::MysqlConnectorConnection::GetBasisDatabase(con
         {
             const int64_t result{ rowView };
             return BasisDatabase{ fieldName.GetFieldName(), result != 0 };
+        }
+
+        case DataType::StringArray:
+        {
+            const std::string column{ rowView };
+            BasisDatabase::StringArray element{};
+            split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+
+            return BasisDatabase{ fieldName.GetFieldName(), element };
+        }
+
+        case DataType::Int32Array:
+        {
+            const std::string column{ rowView };
+            BasisDatabase::StringArray element{};
+            split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+
+            BasisDatabase::Int32Array result{};
+            for (const auto& value : element)
+            {
+                result.emplace_back(boost::lexical_cast<int32_t>(value));
+            }
+            return BasisDatabase{ fieldName.GetFieldName(), result };
+        }
+
+        case DataType::Int64Array:
+        {
+            const std::string column{ rowView };
+            BasisDatabase::StringArray element{};
+            split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+
+            BasisDatabase::Int64Array result{};
+            for (const auto& value : element)
+            {
+                result.emplace_back(boost::lexical_cast<int64_t>(value));
+            }
+            return BasisDatabase{ fieldName.GetFieldName(), result };
+        }
+
+        case DataType::DoubleArray:
+        {
+            const std::string column{ rowView };
+            BasisDatabase::StringArray element{};
+            split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+
+            BasisDatabase::DoubleArray result{};
+            for (const auto& value : element)
+            {
+                result.emplace_back(boost::lexical_cast<double>(value));
+            }
+            return BasisDatabase{ fieldName.GetFieldName(), element };
         }
 
         default:

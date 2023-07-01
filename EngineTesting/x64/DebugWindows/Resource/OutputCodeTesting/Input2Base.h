@@ -22,6 +22,8 @@ namespace OutputCSVTesting
     public:
         using ClassType = Input2Base;
 
+        using String = System::String;
+
     public:
         Input2Base() noexcept = default;
         explicit Input2Base(int key) noexcept;
@@ -46,7 +48,7 @@ namespace OutputCSVTesting
 
         NODISCARD virtual int GetTest4() const noexcept;
 
-        NODISCARD virtual System::String GetTest5() const;
+        NODISCARD virtual String GetTest5() const;
 
     private:
         int key{};

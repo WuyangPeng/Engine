@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:23)
+///	版本：0.9.1.0 (2023/06/29 19:29)
 
 #ifndef RENDERING_RESOURCES_DRAW_TARGET_IMPL_H
 #define RENDERING_RESOURCES_DRAW_TARGET_IMPL_H
@@ -25,13 +25,18 @@ namespace Rendering
     public:
         using ClassType = DrawTargetImpl;
 
+        using BufferTarget = CoreTools::BufferTarget;
+        using BufferSource = CoreTools::BufferSource;
+        using ObjectLink = CoreTools::ObjectLink;
+        using ObjectRegister = CoreTools::ObjectRegister;
+
     public:
         DrawTargetImpl() noexcept;
         DrawTargetImpl(int numRenderTargets,
                        DataFormatType renderTargetFormat,
                        int width,
                        int height,
-                       bool hasRenderTargetMipmaps = false,
+                       bool hasRenderTargetMipMaps = false,
                        DataFormatType depthStencilFormat = DataFormatType::Unknown);
 
         ~DrawTargetImpl() noexcept = default;
@@ -47,7 +52,7 @@ namespace Rendering
         NODISCARD DataFormatType GetRenderTargetFormat() const;
         NODISCARD int GetWidth() const;
         NODISCARD int GetHeight() const;
-        NODISCARD bool HasRenderTargetMipmaps() const;
+        NODISCARD bool HasRenderTargetMipMaps() const;
         NODISCARD DataFormatType GetDepthStencilFormat() const noexcept;
         NODISCARD TextureRenderTargetSharedPtr GetRenderTargetTexture(int index);
         NODISCARD TextureDepthStencilSharedPtr GetDepthStencilTexture();
@@ -55,14 +60,14 @@ namespace Rendering
         NODISCARD ConstTextureDepthStencilSharedPtr GetDepthStencilTexture() const;
         NODISCARD bool HasDepthStencil() const noexcept;
 
-        void AutogenerateRTMipmaps();
-        NODISCARD bool WantAutogenerateRTMipmaps() const;
+        void AutoGenerateRenderTargetMipMaps();
+        NODISCARD bool WantAutoGenerateRenderTargetMipMaps() const;
 
         NODISCARD int GetStreamingSize() const;
-        void Save(CoreTools::BufferTarget& target) const;
-        void Load(CoreTools::BufferSource& source);
-        void Link(CoreTools::ObjectLink& source);
-        void Register(CoreTools::ObjectRegister& target) const;
+        void Save(BufferTarget& target) const;
+        void Load(BufferSource& source);
+        void Link(ObjectLink& source);
+        void Register(ObjectRegister& target) const;
 
         CORE_TOOLS_NAMES_IMPL_DECLARE;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:24)
+///	版本：0.9.1.0 (2023/06/29 20:16)
 
 #ifndef RENDERING_RESOURCES_TEXTURE1D_ARRAY_H
 #define RENDERING_RESOURCES_TEXTURE1D_ARRAY_H
@@ -42,11 +42,11 @@ namespace Rendering
         NODISCARD int GetNumLevels() const noexcept override;
 
         NODISCARD int GetNumDimensions() const noexcept override;
-        NODISCARD int GetDimension(int index, int level) const override;
+        NODISCARD int GetDimension(int level, int index) const override;
         NODISCARD int GetNumLevelBytes(int level) const override;
         NODISCARD int GetLevelOffset(int item, int level) const override;
 
-        NODISCARD bool HasMipmaps() const noexcept override;
+        NODISCARD bool HasMipMaps() const noexcept override;
 
         NODISCARD int GetNumElementsFor(int level) const override;
 
@@ -55,10 +55,10 @@ namespace Rendering
 
         NODISCARD int GetLength() const;
 
-        void AutogenerateMipmaps() noexcept override;
-        NODISCARD bool WantAutogenerateMipmaps() const noexcept override;
+        void AutoGenerateMipMaps() noexcept override;
+        NODISCARD bool WantAutoGenerateMipMaps() const noexcept override;
 
-        NODISCARD int GetNumSubresources() const noexcept override;
+        NODISCARD int GetNumSubResources() const noexcept override;
         NODISCARD int GetIndex(int item, int level) const override;
 
         NODISCARD TextureSharedPtr Clone() const override;

@@ -11,7 +11,7 @@
 
 #include "CameraViewMiddleLayer.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "Rendering/Renderers/Renderer.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
 using namespace std::literals;
@@ -24,6 +24,8 @@ Framework::CameraViewMiddleLayer::CameraViewMiddleLayer(MiddleLayerPlatform midd
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, CameraViewMiddleLayer)
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
 void Framework::CameraViewMiddleLayer::SetCamera(const CameraSmartPointer& camera)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
@@ -32,9 +34,11 @@ void Framework::CameraViewMiddleLayer::SetCamera(const CameraSmartPointer& camer
 
     if (renderer)
     {
-        renderer->SetCamera(camera);
+        camera;
+       // renderer->SetCamera(camera);
     }
 }
+#include STSTEM_WARNING_POP
 
 Framework::WindowSize Framework::CameraViewMiddleLayer::GetWindowSize() const
 {

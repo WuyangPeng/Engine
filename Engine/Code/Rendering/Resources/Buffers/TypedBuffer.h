@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 11:22)
+///	版本：0.9.1.0 (2023/06/29 17:05)
 
-#ifndef RENDERING_RENDERERS_TYPED_BUFFER_H
-#define RENDERING_RENDERERS_TYPED_BUFFER_H
+#ifndef RENDERING_RESOURCES_TYPED_BUFFER_H
+#define RENDERING_RESOURCES_TYPED_BUFFER_H
 
 #include "Rendering/RenderingDll.h"
 
@@ -32,7 +32,8 @@ namespace Rendering
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TypedBuffer);
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
     };
 }
 
-#endif  // RENDERING_RENDERERS_TYPED_BUFFER_H
+#endif  // RENDERING_RESOURCES_TYPED_BUFFER_H

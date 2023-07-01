@@ -47,7 +47,7 @@ int AncientBooks::YearBase::GetSexagenaryCycle() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::SexagenaryCycleMappingType> AncientBooks::YearBase::GetSexagenaryCycle(const AncientBooksContainer& csvContainer) const
+AncientBooks::YearBase::ConstSexagenaryCycleSharedPtr AncientBooks::YearBase::GetSexagenaryCycle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -63,7 +63,7 @@ int64_t AncientBooks::YearBase::GetReignTitle() const noexcept
     return 0;
 }
 
-std::shared_ptr<const AncientBooks::ReignTitleMappingType> AncientBooks::YearBase::GetReignTitle(const AncientBooksContainer& csvContainer) const
+AncientBooks::YearBase::ConstReignTitleSharedPtr AncientBooks::YearBase::GetReignTitle(const AncientBooksContainer& csvContainer) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -79,7 +79,7 @@ int AncientBooks::YearBase::GetYear() const noexcept
     return 0;
 }
 
-std::vector<int> AncientBooks::YearBase::GetUnorthodoxReignTitle() const
+AncientBooks::YearBase::Int64Container AncientBooks::YearBase::GetUnorthodoxReignTitle() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -93,7 +93,7 @@ int AncientBooks::YearBase::GetUnorthodoxReignTitleCount() const
     THROW_EXCEPTION(SYSTEM_TEXT("year表基类不允许获取数组。"s))
 }
 
-int AncientBooks::YearBase::GetUnorthodoxReignTitle(int index) const
+int64_t AncientBooks::YearBase::GetUnorthodoxReignTitle(int index) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -102,21 +102,30 @@ int AncientBooks::YearBase::GetUnorthodoxReignTitle(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("year表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::YearBase::GetUnorthodoxReignTitleBegin() const
+AncientBooks::YearBase::Int64ContainerConstIter AncientBooks::YearBase::GetUnorthodoxReignTitleBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("year表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::YearBase::GetUnorthodoxReignTitleEnd() const
+AncientBooks::YearBase::Int64ContainerConstIter AncientBooks::YearBase::GetUnorthodoxReignTitleEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("year表基类不允许获取数组。"s))
 }
 
-std::vector<int> AncientBooks::YearBase::GetUnorthodoxYear() const
+AncientBooks::YearBase::ReignTitleContainer AncientBooks::YearBase::GetUnorthodoxReignTitle(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("year表基类不允许获取映射值。"s))
+}
+
+AncientBooks::YearBase::IntContainer AncientBooks::YearBase::GetUnorthodoxYear() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -139,17 +148,26 @@ int AncientBooks::YearBase::GetUnorthodoxYear(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("year表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::YearBase::GetUnorthodoxYearBegin() const
+AncientBooks::YearBase::IntContainerConstIter AncientBooks::YearBase::GetUnorthodoxYearBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("year表基类不允许获取数组。"s))
 }
 
-std::vector<int>::const_iterator AncientBooks::YearBase::GetUnorthodoxYearEnd() const
+AncientBooks::YearBase::IntContainerConstIter AncientBooks::YearBase::GetUnorthodoxYearEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("year表基类不允许获取数组。"s))
+}
+
+AncientBooks::YearBase::YearContainer AncientBooks::YearBase::GetUnorthodoxYear(const AncientBooksContainer& csvContainer) const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    System::UnusedFunction(csvContainer);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("year表基类不允许获取映射值。"s))
 }
 

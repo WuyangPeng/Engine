@@ -36,11 +36,11 @@ AncientBooks::CategoryContainer::Container AncientBooks::CategoryContainer::GetC
 
     Container result{};
 
-    for (const auto& value : category)
+    for (const auto& element : category)
     {
-        if (function(value))
+        if (function(element))
         {
-            result.emplace_back(value);
+            result.emplace_back(element);
         }
     }
 
