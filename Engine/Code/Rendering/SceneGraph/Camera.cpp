@@ -29,7 +29,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Camera);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Camera);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Camera);
 
-Rendering::Camera::Camera(bool isPerspective, float epsilon)
+Rendering::Camera::Camera(bool isPerspective, MAYBE_UNUSED bool isDepthRangeZeroOne, float epsilon)
     : ParentType{ "Camera" }, impl{ isPerspective, epsilon }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;

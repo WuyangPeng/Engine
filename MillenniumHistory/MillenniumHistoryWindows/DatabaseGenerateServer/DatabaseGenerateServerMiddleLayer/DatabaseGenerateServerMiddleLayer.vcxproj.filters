@@ -97,17 +97,17 @@
     <Filter Include="ArtificialIntelligence 头文件">
       <UniqueIdentifier>{f096e9e3-81f1-4e17-b2c3-97d694c49dc6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="System 头文件\Detail">
-      <UniqueIdentifier>{5332263e-1b06-488e-816d-900f81ce433f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="System 源文件\Detail">
-      <UniqueIdentifier>{217ab7b4-a568-4be9-9257-f0ab4512b143}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource 头文件\Detail">
       <UniqueIdentifier>{496ec08b-2c1a-4673-b7fc-f9e4109b81a1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource 源文件\Detail">
       <UniqueIdentifier>{51cf7f3e-faaf-4d36-ab7a-94c8c90923c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System 头文件\Detail">
+      <UniqueIdentifier>{c291adbc-4d65-4db3-9574-e05492447223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System 源文件\Detail">
+      <UniqueIdentifier>{5ab1a9b9-9950-44e0-bae9-8f496138d439}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -153,11 +153,11 @@
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.cpp">
       <Filter>ArtificialIntelligence 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\System\Detail\SystemManagerImpl.cpp">
-      <Filter>System 源文件\Detail</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Resource\Detail\ResourceManagerImpl.cpp">
       <Filter>Resource 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\System\Detail\SystemManagerImpl.cpp">
+      <Filter>System 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,11 +323,11 @@
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.h">
       <Filter>ArtificialIntelligence 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\System\Detail\SystemManagerImpl.h">
-      <Filter>System 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\Resource\Detail\ResourceManagerImpl.h">
       <Filter>Resource 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerMiddleLayer\System\Detail\SystemManagerImpl.h">
+      <Filter>System 头文件\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

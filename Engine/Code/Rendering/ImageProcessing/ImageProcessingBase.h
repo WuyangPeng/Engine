@@ -17,7 +17,7 @@
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/TrianglesMesh.h"
 #include "Rendering/ShaderFloats/ProjectionViewWorldMatrixConstant.h"
-#include "Rendering/Shaders/Flags/ShaderFlags.h"
+
 
 namespace Rendering
 {
@@ -94,8 +94,8 @@ namespace Rendering
 
         static constexpr auto dx9VRegisters = 0;
         static constexpr auto oglVRegisters = 1;
-        static std::array<const int*, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> vRegisters;
-        static std::array<std::string, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> vPrograms;
+        static std::array<const int*, 5> vRegisters;
+        static std::array<std::string, 5> vPrograms;
     };
 }
 

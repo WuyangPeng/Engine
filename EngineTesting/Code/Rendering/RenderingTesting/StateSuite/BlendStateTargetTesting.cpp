@@ -180,7 +180,7 @@ void Rendering::BlendStateTargetTesting::SetOperationAlphaTest()
 
 void Rendering::BlendStateTargetTesting::SetMaskTest()
 {
-    for (auto stateColorWrite = BlendStateColorWrite::Disenable; stateColorWrite <= BlendStateColorWrite::EnableAll; ++stateColorWrite)
+    for (auto stateColorWrite = BlendStateColorWrite::DisEnable; stateColorWrite <= BlendStateColorWrite::EnableAll; ++stateColorWrite)
     {
         blendStateTarget.SetMask(stateColorWrite);
         mask = stateColorWrite;

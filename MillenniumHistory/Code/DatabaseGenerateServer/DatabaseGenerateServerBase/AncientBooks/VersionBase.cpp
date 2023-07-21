@@ -164,21 +164,21 @@ AncientBooks::VersionBase::CharacterContainer AncientBooks::VersionBase::GetOthe
     THROW_EXCEPTION(SYSTEM_TEXT("version表基类不允许获取映射值。"s))
 }
 
-AncientBooks::VersionBase::StringContainer AncientBooks::VersionBase::GetAuthorDescribe() const
+AncientBooks::VersionBase::StringContainer AncientBooks::VersionBase::GetAuthorNotes() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("version表基类不允许获取数组。"s))
 }
 
-int AncientBooks::VersionBase::GetAuthorDescribeCount() const
+int AncientBooks::VersionBase::GetAuthorNotesCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("version表基类不允许获取数组。"s))
 }
 
-System::String AncientBooks::VersionBase::GetAuthorDescribe(int index) const
+System::String AncientBooks::VersionBase::GetAuthorNotes(int index) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -187,14 +187,14 @@ System::String AncientBooks::VersionBase::GetAuthorDescribe(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("version表基类不允许获取数组。"s))
 }
 
-AncientBooks::VersionBase::StringContainerConstIter AncientBooks::VersionBase::GetAuthorDescribeBegin() const
+AncientBooks::VersionBase::StringContainerConstIter AncientBooks::VersionBase::GetAuthorNotesBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("version表基类不允许获取数组。"s))
 }
 
-AncientBooks::VersionBase::StringContainerConstIter AncientBooks::VersionBase::GetAuthorDescribeEnd() const
+AncientBooks::VersionBase::StringContainerConstIter AncientBooks::VersionBase::GetAuthorNotesEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

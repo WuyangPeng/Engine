@@ -52,16 +52,16 @@ namespace Rendering
         float dy;
 
         static std::array<int, 2> allDirichletPTextureUnits;
-        static std::array<std::array<int, 2>*, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> dirichletPTextureUnits;
-        static std::array<std::string, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> dirichletPPrograms;
+        static std::array<std::array<int, 2>*, 5> dirichletPTextureUnits;
+        static std::array<std::string, 5> dirichletPPrograms;
 
         static std::array<int, 2> msAllNeumannPTextureUnits;
-        static std::array<std::array<int, 2>*, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> neumannPTextureUnits;
-        static std::array<std::string, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> neumannPPrograms;
+        static std::array<std::array<int, 2>*, 5> neumannPTextureUnits;
+        static std::array<std::string, 5> neumannPPrograms;
 
         static std::array<int, 2> msAllDrawPTextureUnits;
-        static std::array<std::array<int, 2>*, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> drawPTextureUnits;
-        static std::array<std::string, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> drawPPrograms;
+        static std::array<std::array<int, 2>*, 5> drawPTextureUnits;
+        static std::array<std::string, 5> drawPPrograms;
     };
 }
 

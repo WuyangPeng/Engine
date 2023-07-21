@@ -12,6 +12,7 @@
 #include "GLSLVisualProgram.h"
 #include "System/OpenGL/OpenGLProgram.h"
 #include "System/OpenGL/OpenGLShader.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/Shaders/Flags/ShaderAPIType.h"
@@ -22,7 +23,7 @@ Rendering::GLSLVisualProgram::GLSLVisualProgram(OpenGLUInt programHandle, OpenGL
       vertexShaderHandle{ vertexShaderHandle },
       pixelShaderHandle{ pixelShaderHandle },
       geometryShaderHandle{ geometryShaderHandle },
-      reflector{ programHandle }
+      reflector{ Reflection::Create() }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -55,7 +56,7 @@ Rendering::GLSLVisualProgram::OpenGLUInt Rendering::GLSLVisualProgram::GetGShade
     return geometryShaderHandle;
 }
 
-Rendering::GLSLReflection Rendering::GLSLVisualProgram::GetReflector() const
+Rendering::Reflection Rendering::GLSLVisualProgram::GetReflector() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -73,7 +74,7 @@ Rendering::GLSLVisualProgram::~GLSLVisualProgram() noexcept
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 
-    if (System::IsGLProgram(programHandle))
+/*    if (System::IsGLProgram(programHandle))
     {
         if (System::IsGLShader(vertexShaderHandle))
         {
@@ -94,7 +95,7 @@ Rendering::GLSLVisualProgram::~GLSLVisualProgram() noexcept
         }
 
         System::DeleteGLProgram(programHandle);
-    }
+    }*/
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, GLSLVisualProgram)

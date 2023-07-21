@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:46)
+///	版本：0.9.1.1 (2023/07/05 14:32)
 
 #include "Rendering/RenderingExport.h"
 
@@ -17,10 +17,10 @@
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 
-Rendering::ShaderDataImpl::ShaderDataImpl(GraphicsObjectType inType, const std::string& inName, int inBindPoint, int inNumBytes, int inExtra, bool inIsGpuWritable)
+Rendering::ShaderDataImpl::ShaderDataImpl(GraphicsObjectType inType, std::string inName, int inBindPoint, int inNumBytes, int inExtra, bool inIsGpuWritable) noexcept
     : object{},
       type{ inType },
-      name{ inName },
+      name{ std::move(inName) },
       bindPoint{ inBindPoint },
       numBytes{ inNumBytes },
       extra{ inExtra },
@@ -45,7 +45,7 @@ Rendering::ShaderDataImpl& Rendering::ShaderDataImpl::operator=(const ShaderData
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    object = GraphicsObjectObjectAssociated{ boost::polymorphic_pointer_cast<GraphicsObject>(rhs.object->CloneObject()), rhs.object.associated },
+    object = GraphicsObjectObjectAssociated{ boost::polymorphic_pointer_cast<GraphicsObject>(rhs.object->CloneObject()), rhs.object.associated };
     type = rhs.type;
     name = rhs.name;
     bindPoint = rhs.bindPoint;
@@ -57,13 +57,13 @@ Rendering::ShaderDataImpl& Rendering::ShaderDataImpl::operator=(const ShaderData
 }
 
 Rendering::ShaderDataImpl::ShaderDataImpl(ShaderDataImpl&& rhs) noexcept
-    : object{ std::move(object) },
-      type{ std::move(rhs.type) },
+    : object{ std::move(rhs.object) },
+      type{ rhs.type },
       name{ std::move(rhs.name) },
-      bindPoint{ std::move(rhs.bindPoint) },
-      numBytes{ std::move(rhs.numBytes) },
-      extra{ std::move(rhs.extra) },
-      isGpuWritable{ std::move(rhs.isGpuWritable) }
+      bindPoint{ rhs.bindPoint },
+      numBytes{ rhs.numBytes },
+      extra{ rhs.extra },
+      isGpuWritable{ rhs.isGpuWritable }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -72,13 +72,13 @@ Rendering::ShaderDataImpl& Rendering::ShaderDataImpl::operator=(ShaderDataImpl&&
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    object = std::move(object);
-    type = std::move(rhs.type);
+    object = std::move(rhs.object);
+    type = rhs.type;
     name = std::move(rhs.name);
-    bindPoint = std::move(rhs.bindPoint);
-    numBytes = std::move(rhs.numBytes);
-    extra = std::move(rhs.extra);
-    isGpuWritable = std::move(rhs.isGpuWritable);
+    bindPoint = rhs.bindPoint;
+    numBytes = rhs.numBytes;
+    extra = rhs.extra;
+    isGpuWritable = rhs.isGpuWritable;
 
     return *this;
 }
@@ -127,7 +127,7 @@ bool Rendering::ShaderDataImpl::IsGpuWritable() const noexcept
     return isGpuWritable;
 }
 
-void Rendering::ShaderDataImpl::SetObject(const GraphicsObjectSharedPtr& graphicsObject) noexcept
+void Rendering::ShaderDataImpl::SetGraphicsObject(const GraphicsObjectSharedPtr& graphicsObject) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -141,7 +141,14 @@ Rendering::ConstGraphicsObjectSharedPtr Rendering::ShaderDataImpl::GetGraphicsOb
     return object.object;
 }
 
-void Rendering::ShaderDataImpl::Load(CoreTools::BufferSource& source)
+Rendering::GraphicsObjectSharedPtr Rendering::ShaderDataImpl::GetGraphicsObject() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return object.object;
+}
+
+void Rendering::ShaderDataImpl::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -156,7 +163,7 @@ void Rendering::ShaderDataImpl::Load(CoreTools::BufferSource& source)
     isGpuWritable = source.ReadBool();
 }
 
-void Rendering::ShaderDataImpl::Save(CoreTools::BufferTarget& target) const
+void Rendering::ShaderDataImpl::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -186,14 +193,14 @@ int Rendering::ShaderDataImpl::GetStreamingSize() const
     return size;
 }
 
-void Rendering::ShaderDataImpl::Link(CoreTools::ObjectLink& source)
+void Rendering::ShaderDataImpl::Link(ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     source.ResolveLink(object);
 }
 
-void Rendering::ShaderDataImpl::Register(CoreTools::ObjectRegister& target) const
+void Rendering::ShaderDataImpl::Register(ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

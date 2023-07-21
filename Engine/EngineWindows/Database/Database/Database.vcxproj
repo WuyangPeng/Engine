@@ -273,6 +273,24 @@
     <ClCompile Include="..\..\..\Code\Database\Configuration\ConfigurationStrategy.cpp" />
     <ClCompile Include="..\..\..\Code\Database\Configuration\Detail\AnalysisDatabaseConfigurationImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Database\Configuration\Detail\ConfigurationStrategyImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntityAnalysis.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntityClass.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeFwdHeaderFileGeneration.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeHeaderFileGeneration.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeMapping.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeMappingAnalysis.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeEntityAnalysisImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeEntityClassImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeEntityImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeFwdHeaderFileGenerationImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeHeaderFileGenerationImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeMappingAnalysisImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeMappingImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\EntityHeaderFileGenerationImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\EntitySourceFileGenerationImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\EntityHeaderFileGeneration.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\EntitySourceFileGeneration.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabase.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainer.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseManager.cpp" />
@@ -315,6 +333,26 @@
     <ClInclude Include="..\..\..\Code\Database\Configuration\Flags\ConfigurationStrategyFlags.h" />
     <ClInclude Include="..\..\..\Code\Database\Database.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseDll.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntity.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntityAnalysis.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntityClass.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeFwdHeaderFileGeneration.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeHeaderFileGeneration.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeMapping.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeMappingAnalysis.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\DatabaseEntityCodeGeneration.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\DatabaseEntityCodeGenerationFwd.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeEntityAnalysisImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeEntityClassImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeEntityImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeFwdHeaderFileGenerationImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeHeaderFileGenerationImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeMappingAnalysisImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeMappingImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\EntityHeaderFileGenerationImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\EntitySourceFileGenerationImpl.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\EntityHeaderFileGeneration.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\EntitySourceFileGeneration.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseExport.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseFwd.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseGenerate\DatabaseGenerate.h" />
@@ -393,10 +431,15 @@
     <ClInclude Include="..\..\..\Code\Database\Statement\StatementFwd.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\DatabaseEntity.json" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\DatabaseEntity.txt" />
+    <Text Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\DatabaseEntityFwd.txt" />
+    <Text Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\EntityCpp.txt" />
+    <Text Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\EntityH.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />

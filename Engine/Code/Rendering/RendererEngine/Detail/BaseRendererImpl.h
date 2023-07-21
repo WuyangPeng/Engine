@@ -100,6 +100,7 @@ namespace Rendering
         void SetBlendState(const BlendStateSharedPtr& state);
         NODISCARD BlendStateSharedPtr GetBlendState() noexcept;
         NODISCARD BlendStateSharedPtr GetDefaultBlendState() noexcept;
+        void SetDefaultBlendState();
 
         void SetDepthStencilState(const DepthStencilStateSharedPtr& state);
         NODISCARD DepthStencilStateSharedPtr GetDepthStencilState() noexcept;
@@ -170,6 +171,8 @@ namespace Rendering
         void Unbind(Font* currentActiveFont) noexcept;
         void Update(Font& activeFont);
         NODISCARD int64_t SetState(Font& activeFont);
+
+        NODISCARD static GlobalFont CreateGlobalFont(RendererTypes rendererTypes);
 
     private:
         RendererTypes rendererTypes;

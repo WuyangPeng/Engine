@@ -85,7 +85,7 @@ bool Framework::WindowMessageLoopImpl::ProcessingMessage(WindowsHWnd hwnd) noexc
         return false;
     }
 
-    System::WindowsHAccel accel{ nullptr };
+    System::WindowsHAccelerator accel{ nullptr };
     if (!System::SystemTranslateAccelerator(hwnd, accel, &msg))
     {
         System::TranslateSystemMessage(&msg);

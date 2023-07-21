@@ -118,7 +118,7 @@ void Rendering::CameraTesting::FrustumTest()
         const float upFieldOfViewDegrees = 2.0f * Mathematics::MathF::ATan(ratio) * Mathematics::MathF::GetRadianToDegree();
         const float aspectRatio = rightMin / upMin;
 
-        Camera firstCamera(true);
+        Camera firstCamera(true, true);
 
         firstCamera.SetFrustum(directionMin, directionMax, upMin, upMax, rightMin, rightMax);
 
@@ -153,7 +153,7 @@ void Rendering::CameraTesting::FrustumTest()
         ASSERT_APPROXIMATE(data.GetDirectionMax(), directionMax, 1e-5f);
         ASSERT_TRUE(data.IsSymmetric());
 
-        Camera secondCamera(false);
+        Camera secondCamera(false, true);
 
         secondCamera.SetFrustum(frustum.data());
 
@@ -184,7 +184,7 @@ void Rendering::CameraTesting::FrustumTest()
 
         ASSERT_FALSE(data.IsSymmetric());
 
-        Camera thirdCamera(false);
+        Camera thirdCamera(false, true);
 
         thirdCamera.SetFrustum(upFieldOfViewDegrees, aspectRatio, directionMin, directionMax);
 
@@ -245,7 +245,7 @@ void Rendering::CameraTesting::ProjectionMatrixTest()
 
         const float rightMax = -rightMin;
 
-        Camera firstCamera(true);
+        Camera firstCamera(true, true);
 
         firstCamera.SetFrustum(directionMin, directionMax, upMin, upMax, rightMin, rightMax);
 
@@ -285,7 +285,7 @@ void Rendering::CameraTesting::ProjectionMatrixTest()
             ASSERT_TRUE(Approximate(firstCamera.GetProjectionViewMatrix(), projection * firstCamera.GetViewMatrix(), 1e-5f));
         }
 
-        Camera secondCamera(false);
+        Camera secondCamera(false, true);
 
         secondCamera.SetFrustum(directionMin, directionMax, upMin, upMax, rightMin, rightMax);
 
@@ -440,7 +440,7 @@ void Rendering::CameraTesting::ProjectionMatrixTest()
         const float nearExtrude = Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator));
         const float farExtrude = nearExtrude + 100.0f;
 
-        Camera thirdCamera(false);
+        Camera thirdCamera(false, true);
         thirdCamera.SetProjectionMatrix(p00, p10, p11, p01, nearExtrude, farExtrude);
 
         const Camera::APoint q000 = nearExtrude * p00;
@@ -525,7 +525,7 @@ void Rendering::CameraTesting::AxesAlignBoundingBoxTest()
                                          firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator),
                                          firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator));
 
-        Camera firstCamera(true);
+        Camera firstCamera(true, true);
         firstCamera.SetFrustum(directionMin, directionMax, upMin, upMax, rightMin, rightMax);
 
         const Camera::Matrix viewProjectionMatrix = firstCamera.GetProjectionMatrix() * firstCamera.GetViewMatrix();

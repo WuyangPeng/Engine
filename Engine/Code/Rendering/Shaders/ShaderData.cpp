@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:53)
+///	版本：0.9.1.1 (2023/07/05 14:36)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ShaderData.h"
 #include "Detail/ShaderDataImpl.h"
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
@@ -35,17 +34,18 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderData, GetNumBytes,
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderData, GetExtra, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderData, IsGpuWritable, bool)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, ShaderData, SetObject, GraphicsObjectSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, ShaderData, SetGraphicsObject, GraphicsObjectSharedPtr, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderData, GetGraphicsObject, Rendering::ConstGraphicsObjectSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderData, GetGraphicsObject, Rendering::GraphicsObjectSharedPtr)
 
-void Rendering::ShaderData::Load(CoreTools::BufferSource& source)
+void Rendering::ShaderData::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     impl->Load(source);
 }
 
-void Rendering::ShaderData::Save(CoreTools::BufferTarget& target) const
+void Rendering::ShaderData::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -59,14 +59,14 @@ int Rendering::ShaderData::GetStreamingSize() const
     return impl->GetStreamingSize();
 }
 
-void Rendering::ShaderData::Link(CoreTools::ObjectLink& source)
+void Rendering::ShaderData::Link(ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     impl->Link(source);
 }
 
-void Rendering::ShaderData::Register(CoreTools::ObjectRegister& target) const
+void Rendering::ShaderData::Register(ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

@@ -33,6 +33,32 @@ Rendering::SamplerStateImpl::SamplerStateImpl() noexcept
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
+Rendering::SamplerStateImpl::SamplerStateImpl(SamplerStateFilter filter, SamplerStateMode mode0, SamplerStateMode mode1) noexcept
+    : filter{ filter },
+      mode{ mode0, mode1, SamplerStateMode::Clamp },
+      mipLODBias{ 0.0f },
+      maxAnisotropy{ 1 },
+      comparison{ SamplerStateComparison::Never },
+      borderColor{ 1.0f, 1.0f, 1.0f, 1.0f },
+      minLOD{ -std::numeric_limits<float>::max() },
+      maxLOD{ std::numeric_limits<float>::max() }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::SamplerStateImpl::SamplerStateImpl(SamplerStateFilter filter, SamplerStateMode mode0, SamplerStateMode mode1, SamplerStateMode mode2) noexcept
+    : filter{ filter },
+      mode{ mode0, mode1, mode2 },
+      mipLODBias{ 0.0f },
+      maxAnisotropy{ 1 },
+      comparison{ SamplerStateComparison::Never },
+      borderColor{ 1.0f, 1.0f, 1.0f, 1.0f },
+      minLOD{ -std::numeric_limits<float>::max() },
+      maxLOD{ std::numeric_limits<float>::max() }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
 CLASS_INVARIANT_STUB_DEFINE(Rendering, SamplerStateImpl)
 
 void Rendering::SamplerStateImpl::Load(CoreTools::BufferSource& source)

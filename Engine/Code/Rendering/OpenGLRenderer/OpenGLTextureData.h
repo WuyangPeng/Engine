@@ -43,7 +43,7 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        void Enable(int textureUnit);
+        void Enable(int textureUnit) noexcept;
         void Disable(int textureUnit) noexcept;
         NODISCARD void* Lock(int level, BufferLocking mode) noexcept;
         void Unlock(int level);
@@ -55,14 +55,13 @@ namespace Rendering
     private:
         void CreatePixelBufferObjects(const Texture* aTexture);
         void InitRemainData() noexcept;
-        NODISCARD UInt CreateTextureStructure();
+        NODISCARD UInt CreateTextureStructure() noexcept;
         void CreateMipmapLevelStructures(const Texture* aTexture, UInt previousBind) noexcept;
         void TextureImage(int level) noexcept;
 
     private:
         static constexpr auto textureDimension = TextureDataTraits<Texture>::dimension;
         static constexpr auto textureFace = TextureDataTraits<Texture>::face;
-        static constexpr auto textureSamplerType = TextureDataTraits<Texture>::samplerType;
         static constexpr auto textureTextureTargetType = TextureDataTraits<Texture>::textureTargetType;
 
     private:

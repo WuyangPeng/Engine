@@ -11,6 +11,7 @@
 #define DATABASE_DATABASE_INTERFACE_BASIS_DATABASE_DETAIL_H
 
 #include "BasisDatabase.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "Database/DatabaseInterface/Flags/DataType.h"
 
@@ -55,10 +56,10 @@ std::string Database::BasisDatabase::GetArrayStringValue() const
 
     std::string result{};
 
-    auto index = 0;
+    auto index = 0u;
     for (const auto& element : value)
     {
-        if constexpr (std::is_same_v<Database::DataTypeTraits<Type>::Type, BasisDatabase::StringArray>)
+        if constexpr (std::is_same_v<typename DataTypeTraits<Type>::Type, BasisDatabase::StringArray>)
         {
             result += element;
         }

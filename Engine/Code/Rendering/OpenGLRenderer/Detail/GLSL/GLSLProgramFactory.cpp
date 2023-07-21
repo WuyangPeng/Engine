@@ -21,9 +21,18 @@
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
 #include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Shaders/ComputeProgram.h"
+#include "Rendering/Shaders/Reflection.h"
 #include "Rendering/Shaders/Flags/ShaderAPIType.h"
 #include "Rendering/Shaders/Shader.h"
 #include "Rendering/Shaders/VisualProgram.h"
+#include "Rendering/Shaders/Flags/ReferenceType.h"
+
+#include <CoreTools/Contract/Flags/DisableNotThrowFlags.h>
+
+Rendering::ProgramFactoryImpl::ProgramFactorySharedPtr Rendering::GLSLProgramFactory::Create()
+{
+    return std::make_shared<ClassType>(CoreTools::DisableNotThrow::Disable);
+}
 
 Rendering::GLSLProgramFactory::GLSLProgramFactory(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{ "#version 430", "main", "main", "main", "main", 0 }

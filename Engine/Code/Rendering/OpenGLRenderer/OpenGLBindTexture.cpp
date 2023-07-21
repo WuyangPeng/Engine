@@ -15,17 +15,3 @@
 #include "System/OpenGL/OpenGLBase.h"
 
 #include <gsl/util>
-
-Rendering::UInt Rendering::BindTexture(ShaderFlags::SamplerType target, MAYBE_UNUSED UInt texture)
-{
-    const auto current = System::GetGLInteger(System::UnderlyingCastEnum<System::OpenGLQuery>(OpenGLConstant::GetOpenGLTextureTargetBinding(System::EnumCastUnderlying(target))));
-
-    return gsl::narrow_cast<UInt>(current);
-}
-
-Rendering::UInt Rendering::GetBoundTexture(ShaderFlags::SamplerType target)
-{
-    const auto current = System::GetGLInteger(System::UnderlyingCastEnum<System::OpenGLQuery>(OpenGLConstant::GetOpenGLTextureTargetBinding(System::EnumCastUnderlying(target))));
-
-    return gsl::narrow_cast<UInt>(current);
-}

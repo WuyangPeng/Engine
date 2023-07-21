@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/02/02 14:41)
+///	版本：0.9.1.1 (2023/07/19 18:51)
 
 #include "System/SystemExport.h"
 
@@ -20,13 +20,13 @@ System::String System::GetEngineeringSuffix()
 
 #ifdef BUILDING_SYSTEM_STATIC
 
-    suffix += SYSTEM_TEXT("Static"s);
+    suffix += SYSTEM_TEXT("Static");
 
 #endif  // BUILDING_SYSTEM_STATIC
 
 #ifdef _DEBUG
 
-    suffix += SYSTEM_TEXT("D"s);
+    suffix += SYSTEM_TEXT("D");
 
 #endif  // _DEBUG
 
@@ -39,19 +39,19 @@ System::String System::GetEngineeringTypesSuffix()
 
 #ifdef BUILDING_SYSTEM_STATIC
 
-    suffix += SYSTEM_TEXT("Static"s);
+    suffix += SYSTEM_TEXT("Static");
 
 #endif  // BUILDING_SYSTEM_STATIC
 
 #ifdef _DEBUG
 
-    suffix += SYSTEM_TEXT("D"s);
+    suffix += SYSTEM_TEXT("D");
 
 #endif  // _DEBUG
 
 #ifdef _WIN64
 
-    suffix += SYSTEM_TEXT("X"s);
+    suffix += SYSTEM_TEXT("X");
 
 #endif  // _WIN64
 
@@ -62,11 +62,11 @@ System::String System::GetEngineeringExeSuffix()
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return SYSTEM_TEXT(".exe"s);
+    return SYSTEM_TEXT(".exe");
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    return SYSTEM_TEXT(""s);
+    return String{};
 
 #endif  // BUILDING_SYSTEM_STATIC
 }

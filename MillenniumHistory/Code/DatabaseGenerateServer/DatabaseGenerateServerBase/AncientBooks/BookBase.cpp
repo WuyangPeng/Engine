@@ -146,21 +146,21 @@ AncientBooks::BookBase::CharacterContainer AncientBooks::BookBase::GetAuthor(con
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取映射值。"s))
 }
 
-AncientBooks::BookBase::StringContainer AncientBooks::BookBase::GetAuthorDescribe() const
+AncientBooks::BookBase::StringContainer AncientBooks::BookBase::GetAuthorNotes() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-int AncientBooks::BookBase::GetAuthorDescribeCount() const
+int AncientBooks::BookBase::GetAuthorNotesCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-System::String AncientBooks::BookBase::GetAuthorDescribe(int index) const
+System::String AncientBooks::BookBase::GetAuthorNotes(int index) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -169,14 +169,14 @@ System::String AncientBooks::BookBase::GetAuthorDescribe(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAuthorDescribeBegin() const
+AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAuthorNotesBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAuthorDescribeEnd() const
+AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAuthorNotesEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -229,21 +229,21 @@ AncientBooks::BookBase::CharacterContainer AncientBooks::BookBase::GetAnnotator(
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取映射值。"s))
 }
 
-AncientBooks::BookBase::StringContainer AncientBooks::BookBase::GetAnnotateDescribe() const
+AncientBooks::BookBase::StringContainer AncientBooks::BookBase::GetAnnotateNotes() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-int AncientBooks::BookBase::GetAnnotateDescribeCount() const
+int AncientBooks::BookBase::GetAnnotateNotesCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-System::String AncientBooks::BookBase::GetAnnotateDescribe(int index) const
+System::String AncientBooks::BookBase::GetAnnotateNotes(int index) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
@@ -252,14 +252,14 @@ System::String AncientBooks::BookBase::GetAnnotateDescribe(int index) const
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAnnotateDescribeBegin() const
+AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAnnotateNotesBegin() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("book表基类不允许获取数组。"s))
 }
 
-AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAnnotateDescribeEnd() const
+AncientBooks::BookBase::StringContainerConstIter AncientBooks::BookBase::GetAnnotateNotesEnd() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/14 10:22)	
+///	版本：0.9.1.1 (2023/07/13 12:41)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_H
 #define THREADING_CORE_RENDER_ENGINE_H
@@ -26,8 +26,8 @@
 #include "Physics/Physics.h"
 #include "Imagics/Imagics.h"
 
-#include "Animation/Animation.h"
 #include "ArtificialIntelligence/ArtificialIntelligence.h"
+#include "Animation/Animation.h"
 #include "UserInterface/UserInterface.h"
 
 #include "AssistTools/AssistTools.h"

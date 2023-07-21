@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/02/02 14:41)
+///	版本：0.9.1.1 (2023/07/19 17:36)
 
 #include "System/SystemExport.h"
 
@@ -13,15 +13,13 @@
 #include "Flags/WindowsCreateFlags.h"
 #include "System/Helper/EnumCast.h"
 
-#include <array>
-
 namespace System
 {
-    bool GetWindowsInformation(WindowsHWnd hwnd, String& result, GetWindowsInformationFunction getWindowsInformationFunction)
+    bool GetWindowsInformation(WindowsHWnd hWnd, String& result, GetWindowsInformationFunction getWindowsInformationFunction)
     {
-        std::array<TChar, gMaxPath> name{};
+        TCharContainer name{};
 
-        if (getWindowsInformationFunction != nullptr && getWindowsInformationFunction(hwnd, name.data(), gMaxPath) == 0)
+        if (getWindowsInformationFunction != nullptr && getWindowsInformationFunction(hWnd, name.data(), gMaxPath) == 0)
         {
             result.clear();
             return false;
@@ -93,15 +91,15 @@ System::WindowsHWnd System::CreateSystemWindow(const String& className,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSystemClassName(WindowsHWnd hwnd, String& className)
+bool System::GetSystemClassName(WindowsHWnd hWnd, String& className)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return GetWindowsInformation(hwnd, className, ::GetClassName);
+    return GetWindowsInformation(hWnd, className, ::GetClassName);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd);
+    UnusedFunction(hWnd);
 
     className.clear();
 
@@ -110,15 +108,15 @@ bool System::GetSystemClassName(WindowsHWnd hwnd, String& className)
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetWindowTextString(WindowsHWnd hwnd, String& windowText)
+bool System::GetWindowTextString(WindowsHWnd hWnd, String& windowText)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return GetWindowsInformation(hwnd, windowText, ::GetWindowText);
+    return GetWindowsInformation(hWnd, windowText, ::GetWindowText);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd);
+    UnusedFunction(hWnd);
 
     windowText.clear();
 
@@ -140,34 +138,38 @@ System::WindowsHInstance System::GetHInstance() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::RemoveMenuCloseButton(WindowsHWnd hwnd) noexcept
+bool System::RemoveMenuCloseButton(WindowsHWnd hWnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    const auto hmenu = GetWindowSystemMenu(hwnd);
-    if (hmenu != nullptr && RemoveSystemMenu(hmenu, SystemMenuCommand::Close, MenuItem::ByCommand))
+    if (const auto menu = GetWindowSystemMenu(hWnd);
+        menu != nullptr && RemoveSystemMenu(menu, SystemMenuCommand::Close, MenuItem::ByCommand))
+    {
         return true;
+    }
     else
+    {
         return false;
+    }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd);
+    UnusedFunction(hWnd);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsHMenu System::GetWindowSystemMenu(WindowsHWnd hwnd) noexcept
+System::WindowsHMenu System::GetWindowSystemMenu(WindowsHWnd hWnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::GetSystemMenu(hwnd, gFalse);
+    return ::GetSystemMenu(hWnd, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd);
+    UnusedFunction(hWnd);
 
     return nullptr;
 

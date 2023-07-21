@@ -17,7 +17,6 @@
 #include "CoreTools/Time/CustomTime.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/RendererEngine/EnvironmentParameter.h"
-#include "Rendering/RendererEngine/RendererManager.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/Node.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
@@ -55,7 +54,6 @@ void Framework::CameraModelMiddleLayerTesting::DoRunUnitTest()
 
 void Framework::CameraModelMiddleLayerTesting::MainTest()
 {
-    Rendering::RendererManager::Create();
     Rendering::CameraManager::Create();
 
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
@@ -67,7 +65,6 @@ void Framework::CameraModelMiddleLayerTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(RotateTrackBallTest);
 
     Rendering::CameraManager::Destroy();
-    Rendering::RendererManager::Destroy();
 }
 
 void Framework::CameraModelMiddleLayerTesting::MiddleLayerTest()

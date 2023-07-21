@@ -5,19 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:30)
+///	版本：0.9.1.1 (2023/07/05 11:25)
 
 #ifndef RENDERING_SHADERS_SHADER_FACTORY_H
 #define RENDERING_SHADERS_SHADER_FACTORY_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/OpenGLRenderer/Flags/ReferenceType.h"
-#include "Rendering/OpenGLRenderer/GLSL/GLSLReflection.h"
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Shaders/ShadersInternalFwd.h"
-
-#include <string>
 
 namespace Rendering
 {
@@ -28,7 +24,7 @@ namespace Rendering
         using ShaderSharedPtr = std::shared_ptr<ShaderImpl>;
 
     public:
-        NODISCARD static ShaderSharedPtr Create(RendererTypes type, const GLSLReflection& reflector, ReferenceType referenceType);
+        NODISCARD static ShaderSharedPtr Create(RendererTypes rendererTypes, const Reflection& reflector, ReferenceType referenceType);
     };
 }
 

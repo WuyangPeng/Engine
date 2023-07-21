@@ -72,7 +72,7 @@ bool Database::BasisDatabaseManagerImpl::IsModify() const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    return 0 < database.GetSize();
+    return 0 < database.GetSize() || changeType == ChangeType::Delete;
 }
 
 std::string_view Database::BasisDatabaseManagerImpl::GetDatabaseName() const noexcept

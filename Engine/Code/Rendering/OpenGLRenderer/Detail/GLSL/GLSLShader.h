@@ -12,8 +12,6 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/OpenGLRenderer/Flags/ReferenceType.h"
-#include "Rendering/OpenGLRenderer/GLSL/GLSLReflection.h"
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Shaders/Detail/ShaderImpl.h"
 
@@ -26,7 +24,7 @@ namespace Rendering
         using ParentType = ShaderImpl;
 
     public:
-        GLSLShader(const GLSLReflection& reflector, ReferenceType referenceType);
+        GLSLShader(const Reflection& reflector, ReferenceType referenceType);
 
     public:
         CLASS_INVARIANT_OVERRIDE_DECLARE;

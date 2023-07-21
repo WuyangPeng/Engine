@@ -30,14 +30,9 @@ Rendering::LightWorldDirectionVectorConstant::LightWorldDirectionVectorConstant(
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, LightWorldDirectionVectorConstant)
 
-void Rendering::LightWorldDirectionVectorConstant::Update(MAYBE_UNUSED const Visual* visual, MAYBE_UNUSED const Camera* camera)
+void Rendering::LightWorldDirectionVectorConstant::Update(MAYBE_UNUSED const Visual* visual, MAYBE_UNUSED const Camera* camera) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-
-    auto light = GetLight();
-    const auto& worldDirectionVector = light->GetDirectionVector();
-
-    SetRegister(0, worldDirectionVector);
 }
 
 Rendering::ShaderFloatSharedPtr Rendering::LightWorldDirectionVectorConstant::Clone() const

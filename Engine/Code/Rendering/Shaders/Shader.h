@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:43)
+///	版本：0.9.1.1 (2023/07/05 12:35)
 
 #ifndef RENDERING_SHADERS_SHADER_H
 #define RENDERING_SHADERS_SHADER_H
@@ -15,13 +15,9 @@
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Rendering/Base/GraphicsObject.h"
-#include "Rendering/OpenGLRenderer/Flags/ReferenceType.h"
-#include "Rendering/OpenGLRenderer/GLSL/GLSLReflection.h"
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Resources/Buffers/MemberLayout.h"
-#include "Rendering/Resources/Detail/Buffers/BufferLayout.h"
 #include "Rendering/Resources/ResourcesFwd.h"
-#include "Rendering/Shaders/Flags/ShaderDataLookup.h"
 #include "Rendering/Shaders/ShaderData.h"
 #include "Rendering/Shaders/ShadersInternalFwd.h"
 #include "Rendering/State/StateFwd.h"
@@ -39,6 +35,7 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(Shader);
         using ParentType = GraphicsObject;
+
         using MemberLayoutContainer = std::vector<MemberLayout>;
         using TextureSingleSharedPtr = std::shared_ptr<TextureSingle>;
         using SamplerStateSharedPtr = std::shared_ptr<SamplerState>;
@@ -50,7 +47,7 @@ namespace Rendering
         using ShaderDataContainerIter = ShaderDataContainer::iterator;
 
     public:
-        Shader(GraphicsObjectType graphicsObjectType, RendererTypes rendererTypes, const GLSLReflection& reflector, ReferenceType referenceType);
+        Shader(GraphicsObjectType graphicsObjectType, RendererTypes rendererTypes, const Reflection& reflector, ReferenceType referenceType);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -113,10 +110,13 @@ namespace Rendering
         NODISCARD std::shared_ptr<const T> Get(const std::string& name) const;
 
         template <typename T>
+        NODISCARD std::shared_ptr<T> Get(const std::string& name);
+
+        template <typename T>
         void Set(int handle, const std::shared_ptr<T>& object);
 
         template <typename T>
-        std::shared_ptr<const T> Get(int handle) const;
+        NODISCARD std::shared_ptr<const T> Get(int handle) const;
 
         NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
 

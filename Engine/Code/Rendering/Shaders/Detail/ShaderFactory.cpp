@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:46)
+///	版本：0.9.1.1 (2023/07/05 14:32)
 
 #include "Rendering/RenderingExport.h"
 
@@ -14,23 +14,25 @@
 #include "Rendering/OpenGLRenderer/Detail/GLSL/GLSLShader.h"
 #include "Rendering/RendererEngine/Flags/RendererTypes.h"
 
-Rendering::ShaderFactory::ShaderSharedPtr Rendering::ShaderFactory::Create(RendererTypes type, const GLSLReflection& reflector, ReferenceType referenceType)
+Rendering::ShaderFactory::ShaderSharedPtr Rendering::ShaderFactory::Create(RendererTypes rendererTypes, const Reflection& reflector, ReferenceType referenceType)
 {
-    switch (type)
+    switch (rendererTypes)
     {
         case RendererTypes::Glut:
-            return std::make_shared<GLSLShader>(reflector, referenceType);
         case RendererTypes::OpenGL:
-            return std::make_shared<GLSLShader>(reflector, referenceType);
         case RendererTypes::OpenGLES:
+        case RendererTypes::Glfw:
+        case RendererTypes::Vulkan:
+        {
             return std::make_shared<GLSLShader>(reflector, referenceType);
+        }
 
         case RendererTypes::Dx11:
         case RendererTypes::Default:
         case RendererTypes::Windows:
         default:
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("未定义的着色器类型。"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("未定义的着色器类型。"s))
         }
     }
 }

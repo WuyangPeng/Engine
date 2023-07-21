@@ -15,7 +15,6 @@
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Rendering/RendererEngine/EnvironmentParameter.h"
-#include "Rendering/RendererEngine/RendererManager.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/MiddleLayer/ModelMiddleLayer.h"
@@ -39,8 +38,6 @@ void Framework::PixelViewMiddleLayerTesting::DoRunUnitTest()
 
 void Framework::PixelViewMiddleLayerTesting::MainTest()
 {
-    Rendering::RendererManager::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ClearScreenTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DoFlipTest);
@@ -55,8 +52,6 @@ void Framework::PixelViewMiddleLayerTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(FillRectangleSolidTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FillRectangleHollowTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FillCircleSolidTest);
-
-    Rendering::RendererManager::Destroy();
 }
 
 void Framework::PixelViewMiddleLayerTesting::MiddleLayerTest()

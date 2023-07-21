@@ -13,13 +13,10 @@
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/Resources/Flags/VertexFormatFlags.h"
-#include "Rendering/Shaders/Flags/ShaderFlags.h"
 
 // 提供了基于OpenGL的抽象API实现
 namespace Rendering
 {
-    System::OpenGLUInt BindTexture(ShaderFlags::SamplerType target, System::OpenGLUInt texture);
-    System::OpenGLUInt GetBoundTexture(ShaderFlags::SamplerType target);
 
     template <VertexFormatFlags::Semantic usage>
     class OpenGLVertexFormatData;

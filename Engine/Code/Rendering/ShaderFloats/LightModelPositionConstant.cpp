@@ -30,17 +30,12 @@ Rendering::LightModelPositionConstant::LightModelPositionConstant(const LightSha
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, LightModelPositionConstant)
 
-void Rendering::LightModelPositionConstant::Update(const Visual* visual, MAYBE_UNUSED const Camera* camera)
+void Rendering::LightModelPositionConstant::Update(const Visual* visual, MAYBE_UNUSED const Camera* camera) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     if (visual != nullptr)
     {
-        const auto worldPosition = GetLight()->GetPosition();
-        const auto worldInverseMatrix = visual->GetWorldTransform().GetInverseMatrix();
-        const auto modelPosition = worldInverseMatrix * worldPosition;
-
-        SetRegister(0, modelPosition);
     }
 }
 

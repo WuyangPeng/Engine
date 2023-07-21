@@ -28,6 +28,7 @@ namespace Rendering
         using ShaderType = System::ShaderType;
 
     public:
+        NODISCARD static ProgramFactorySharedPtr Create();
         explicit GLSLProgramFactory(CoreTools::DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;

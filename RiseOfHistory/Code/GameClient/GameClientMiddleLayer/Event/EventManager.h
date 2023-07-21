@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 15:20)
+///	版本：0.9.1.1 (2023/07/18 17:59)
 
 #ifndef GAME_CLIENT_MIDDLE_LAYER_EVENT_EVENT_MANAGER_H
 #define GAME_CLIENT_MIDDLE_LAYER_EVENT_EVENT_MANAGER_H
@@ -22,9 +22,6 @@ namespace GameClientMiddleLayer
     public:
         using ClassType = EventManager;
         using ParentType = EventManagerInterface;
-
-        using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
-        using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
         EventManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);

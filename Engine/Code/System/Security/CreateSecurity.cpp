@@ -19,7 +19,7 @@
 bool System::SystemConvertToAutoInheritPrivateObjectSecurity(SecurityDescriptorPtr parentDescriptor,
                                                              SecurityDescriptorPtr currentSecurityDescriptor,
                                                              SecurityDescriptorPtr* newSecurityDescriptor,
-                                                             SystemGUID* objectType,
+                                                             SystemGloballyUniqueIdentifier* objectType,
                                                              bool isDirectoryObject,
                                                              AccessCheckGenericMappingPtr genericMapping) noexcept
 {
@@ -84,7 +84,7 @@ bool System::CreateSystemPrivateObjectSecurity(SecurityDescriptorPtr parentDescr
 bool System::CreateSystemPrivateObjectSecurity(SecurityDescriptorPtr parentDescriptor,
                                                SecurityDescriptorPtr creatorDescriptor,
                                                SecurityDescriptorPtr* newDescriptor,
-                                               SystemGUID* objectType,
+                                               SystemGloballyUniqueIdentifier* objectType,
                                                bool isContainerObject,
                                                SecurityAutoInherit autoInheritFlags,
                                                WindowsHandle token,
@@ -116,7 +116,7 @@ bool System::CreateSystemPrivateObjectSecurity(SecurityDescriptorPtr parentDescr
 bool System::CreateSystemPrivateObjectSecurityWithMultipleInheritance(SecurityDescriptorPtr parentDescriptor,
                                                                       SecurityDescriptorPtr creatorDescriptor,
                                                                       SecurityDescriptorPtr* newDescriptor,
-                                                                      SystemGUID** objectTypes,
+                                                                      SystemGloballyUniqueIdentifier** objectTypes,
                                                                       WindowsULong guidCount,
                                                                       bool isContainerObject,
                                                                       SecurityAutoInherit autoInheritFlags,

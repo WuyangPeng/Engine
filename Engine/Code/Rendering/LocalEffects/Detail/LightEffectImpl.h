@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:42)
+///	版本：0.9.1.1 (2023/07/06 09:42)
 
 #ifndef RENDERING_LOCAL_EFFECTS_LIGHT_EFFECT_IMPL_H
 #define RENDERING_LOCAL_EFFECTS_LIGHT_EFFECT_IMPL_H
@@ -13,6 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "System/Helper/EnumCast.h"
+#include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "Rendering/LocalEffects/LocalEffectsFwd.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
@@ -26,8 +27,11 @@ namespace Rendering
     {
     public:
         using ClassType = LightEffectImpl;
-        using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactory>;
-        using ProgramSources = std::array<std::string, System::EnumCastUnderlying(ShaderAPIType::NumAPI)>;
+
+        using ObjectLink = CoreTools::ObjectLink;
+        using BufferTarget = CoreTools::BufferTarget;
+        using BufferSource = CoreTools::BufferSource;
+        using ObjectRegister = CoreTools::ObjectRegister;
         using MaterialSharedPtr = std::shared_ptr<Material>;
         using ConstMaterialSharedPtr = std::shared_ptr<const Material>;
         using LightSharedPtr = std::shared_ptr<Light>;
@@ -39,11 +43,23 @@ namespace Rendering
         using ConstConstantBufferSharedPtr = std::shared_ptr<const ConstantBuffer>;
 
     public:
-        LightEffectImpl(const MaterialSharedPtr& material,
-                        const LightSharedPtr& lighting,
-                        const LightCameraGeometrySharedPtr& geometry) noexcept;
+        explicit LightEffectImpl(CoreTools::DisableNotThrow disableNotThrow);
+        LightEffectImpl(MaterialSharedPtr material,
+                        LightSharedPtr lighting,
+                        LightCameraGeometrySharedPtr geometry,
+                        int numMaterialConstantBytes,
+                        int numLightingConstantBytes,
+                        int numGeometryConstantBytes);
 
         CLASS_INVARIANT_DECLARE;
+
+        CORE_TOOLS_NAMES_IMPL_DECLARE;
+
+        NODISCARD int GetStreamingSize() const;
+        void Save(BufferTarget& target) const;
+        void Load(BufferSource& source);
+        void Link(ObjectLink& source);
+        void Register(ObjectRegister& target) const;
 
         void SetMaterial(const MaterialSharedPtr& aMaterial) noexcept;
         void SetLighting(const LightSharedPtr& aLighting) noexcept;
@@ -57,7 +73,10 @@ namespace Rendering
         NODISCARD ConstConstantBufferSharedPtr GetLightingConstant() const noexcept;
         NODISCARD ConstConstantBufferSharedPtr GetGeometryConstant() const noexcept;
 
-    protected:
+        NODISCARD ConstantBufferSharedPtr GetMaterialConstant() noexcept;
+        NODISCARD ConstantBufferSharedPtr GetLightingConstant() noexcept;
+        NODISCARD ConstantBufferSharedPtr GetGeometryConstant() noexcept;
+
         NODISCARD static std::string GetGLSLLitFunction();
 
     private:

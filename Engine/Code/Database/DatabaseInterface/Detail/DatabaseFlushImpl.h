@@ -44,6 +44,8 @@ namespace Database
         NODISCARD virtual BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const = 0;
         NODISCARD virtual ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const = 0;
 
+        NODISCARD WrappersStrategy GetWrappersStrategy() const noexcept;
+
     private:
         ConfigurationStrategy configurationStrategy;
     };

@@ -68,11 +68,11 @@ namespace AncientBooks
         NODISCARD virtual IntContainerConstIter GetOtherAuthorEnd() const;
         NODISCARD virtual CharacterContainer GetOtherAuthor(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual StringContainer GetAuthorDescribe() const;
-        NODISCARD virtual int GetAuthorDescribeCount() const;
-        NODISCARD virtual String GetAuthorDescribe(int index) const;
-        NODISCARD virtual StringContainerConstIter GetAuthorDescribeBegin() const;
-        NODISCARD virtual StringContainerConstIter GetAuthorDescribeEnd() const;
+        NODISCARD virtual StringContainer GetAuthorNotes() const;
+        NODISCARD virtual int GetAuthorNotesCount() const;
+        NODISCARD virtual String GetAuthorNotes(int index) const;
+        NODISCARD virtual StringContainerConstIter GetAuthorNotesBegin() const;
+        NODISCARD virtual StringContainerConstIter GetAuthorNotesEnd() const;
 
         NODISCARD virtual String GetTitle() const;
 

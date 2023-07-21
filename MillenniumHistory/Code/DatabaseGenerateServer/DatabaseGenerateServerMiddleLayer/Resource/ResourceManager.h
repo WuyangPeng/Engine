@@ -5,13 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 21:50)
+///	版本：0.9.1.1 (2023/07/18 22:31)
 
 #ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_RESOURCE_RESOURCE_MANAGER_H
 #define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_RESOURCE_RESOURCE_MANAGER_H
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/DatabaseGenerateServerMiddleLayerDll.h"
 
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/AncientBooksFwd.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/Helper/ExportMacro.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "Framework/MiddleLayer/ResourceManagerInterface.h"
@@ -28,8 +29,7 @@ namespace DatabaseGenerateServerMiddleLayer
         NON_COPY_TYPE_DECLARE(ResourceManager);
         using ParentType = Framework::ResourceManagerInterface;
 
-        using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
-        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+        using ConstAncientBooksContainerSharedPtr = std::shared_ptr<const AncientBooks::AncientBooksContainer>;
 
     public:
         ResourceManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
@@ -37,6 +37,9 @@ namespace DatabaseGenerateServerMiddleLayer
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD bool Initialize() override;
+        NODISCARD bool Destroy() noexcept override;
+
+        NODISCARD ConstAncientBooksContainerSharedPtr GetAncientBooksContainer();
 
     private:
         PackageType impl;

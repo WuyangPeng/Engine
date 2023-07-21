@@ -48,7 +48,7 @@ namespace System
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CreateSystemPrivateObjectSecurity(SecurityDescriptorPtr parentDescriptor,
                                                                             SecurityDescriptorPtr creatorDescriptor,
                                                                             SecurityDescriptorPtr* newDescriptor,
-                                                                            SystemGUID* objectType,
+                                                                            SystemGloballyUniqueIdentifier* objectType,
                                                                             bool isContainerObject,
                                                                             SecurityAutoInherit autoInheritFlags,
                                                                             WindowsHandle token,
@@ -57,7 +57,7 @@ namespace System
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CreateSystemPrivateObjectSecurityWithMultipleInheritance(SecurityDescriptorPtr parentDescriptor,
                                                                                                    SecurityDescriptorPtr creatorDescriptor,
                                                                                                    SecurityDescriptorPtr* newDescriptor,
-                                                                                                   SystemGUID** objectTypes,
+                                                                                                   SystemGloballyUniqueIdentifier** objectTypes,
                                                                                                    WindowsULong guidCount,
                                                                                                    bool isContainerObject,
                                                                                                    SecurityAutoInherit autoInheritFlags,
@@ -85,7 +85,7 @@ namespace System
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SystemConvertToAutoInheritPrivateObjectSecurity(SecurityDescriptorPtr parentDescriptor,
                                                                                           SecurityDescriptorPtr currentSecurityDescriptor,
                                                                                           SecurityDescriptorPtr* newSecurityDescriptor,
-                                                                                          SystemGUID* objectType,
+                                                                                          SystemGloballyUniqueIdentifier* objectType,
                                                                                           bool isDirectoryObject,
                                                                                           AccessCheckGenericMappingPtr genericMapping) noexcept;
 

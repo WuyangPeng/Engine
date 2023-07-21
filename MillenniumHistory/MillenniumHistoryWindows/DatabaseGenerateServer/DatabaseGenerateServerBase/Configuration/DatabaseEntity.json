@@ -1,0 +1,743 @@
+{
+  "ArticleEntity": {
+    "databaseName": "article",
+
+    "entity": {
+      "id": {
+        "dataType": "Int64",
+        "indexType": "Key"
+      },
+
+      "version": {
+        "dataType": "Int32"
+      },
+
+      "chapter": {
+        "dataType": "Int32"
+      },
+
+      "chapterName": {
+        "dataType": "String"
+      },
+
+      "chapterVolume": {
+        "dataType": "Int32"
+      },
+
+      "otherAuthor": {
+        "dataType": "Int32Array"
+      },
+
+      "authorNotes": {
+        "dataType": "StringArray"
+      },
+
+      "title": {
+        "dataType": "String"
+      },
+
+      "abbreviation": {
+        "dataType": "String"
+      },
+
+      "directory": {
+        "dataType": "String"
+      }
+    }
+  },
+
+  "BookEntity": {
+    "databaseName": "book",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "genus": {
+        "dataType": "Int32"
+      },
+
+      "name": {
+        "dataType": "String"
+      },
+
+      "alias": {
+        "dataType": "StringArray"
+      },
+
+      "volume": {
+        "dataType": "Int32"
+      },
+
+      "author": {
+        "dataType": "Int32Array"
+      },
+
+      "authorNotes": {
+        "dataType": "StringArray"
+      },
+
+      "annotator": {
+        "dataType": "Int32Array"
+      },
+
+      "annotateNotes": {
+        "dataType": "StringArray"
+      },
+
+      "country": {
+        "dataType": "Int32Array"
+      },
+
+      "person": {
+        "dataType": "Int32Array"
+      },
+
+      "unansweredQuestion": {
+        "dataType": "StringArray"
+      }
+    }
+  },
+
+  "CalendarEntity": {
+    "databaseName": "calendar",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "name": {
+        "dataType": "String"
+      },
+
+      "alias": {
+        "dataType": "StringArray"
+      },
+
+      "source": {
+        "dataType": "Int32Array"
+      },
+
+      "publication": {
+        "dataType": "String"
+      },
+
+      "creator": {
+        "dataType": "Int32Array"
+      },
+
+      "formulate": {
+        "dataType": "Int32"
+      },
+
+      "country": {
+        "dataType": "Int32"
+      },
+
+      "begin": {
+        "dataType": "Int32"
+      },
+
+      "end": {
+        "dataType": "Int32"
+      },
+
+      "againBegin": {
+        "dataType": "Int32"
+      },
+
+      "againEnd": {
+        "dataType": "Int32"
+      }
+    }
+  },
+
+  "CategoryEntity": {
+    "databaseName": "category",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "gather": {
+        "dataType": "Int32"
+      },
+
+      "category": {
+        "dataType": "String"
+      }
+    }
+  },
+
+  "CharacterEntity": {
+    "databaseName": "character",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "country": {
+        "dataType": "Int32"
+      },
+
+      "identity": {
+        "dataType": "Int32"
+      },
+
+      "family": {
+        "dataType": "String"
+      },
+
+      "name": {
+        "dataType": "String"
+      },
+
+      "fullName": {
+        "dataType": "String"
+      },
+
+      "alias": {
+        "dataType": "StringArray"
+      },
+
+      "styleName": {
+        "dataType": "String"
+      },
+
+      "sex": {
+        "dataType": "Int32"
+      },
+
+      "father": {
+        "dataType": "Int32"
+      },
+
+      "mother": {
+        "dataType": "Int32"
+      },
+
+      "fosterFather": {
+        "dataType": "Int32Array"
+      },
+
+      "fosterMother": {
+        "dataType": "Int32Array"
+      },
+
+      "birthYear": {
+        "dataType": "Int32"
+      },
+
+      "birthMonth": {
+        "dataType": "Int32"
+      },
+
+      "birthSexagenaryCycle": {
+        "dataType": "Int32"
+      },
+
+      "birthDay": {
+        "dataType": "Int32"
+      },
+
+      "deathYear": {
+        "dataType": "Int32"
+      },
+
+      "deathMonth": {
+        "dataType": "Int32"
+      },
+
+      "deathSexagenaryCycle": {
+        "dataType": "Int32"
+      },
+
+      "deathDay": {
+        "dataType": "Int32"
+      },
+
+      "unansweredQuestion": {
+        "dataType": "StringArray"
+      }
+    }
+  },
+
+  "CountryEntity": {
+    "databaseName": "country",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "imperialCourt": {
+        "dataType": "Int32"
+      },
+
+      "category": {
+        "dataType": "String"
+      },
+
+      "beginYear": {
+        "dataType": "Int32"
+      },
+
+      "beginMonth": {
+        "dataType": "Int32"
+      },
+
+      "beginSexagenaryCycle": {
+        "dataType": "Int32"
+      },
+
+      "beginDay": {
+        "dataType": "Int32"
+      },
+
+      "endYear": {
+        "dataType": "Int32"
+      },
+
+      "endMonth": {
+        "dataType": "Int32"
+      },
+
+      "endSexagenaryCycle": {
+        "dataType": "Int32"
+      },
+
+      "endDay": {
+        "dataType": "Int32"
+      },
+
+      "unansweredQuestion": {
+        "dataType": "StringArray"
+      }
+    }
+  },
+
+  "DayEntity": {
+    "databaseName": "day",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "name": {
+        "dataType": "String"
+      }
+    }
+  },
+
+  "EmperorEntity": {
+    "databaseName": "emperor",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "character": {
+        "dataType": "Int32"
+      },
+
+      "name": {
+        "dataType": "String"
+      },
+
+      "dynasticTitle": {
+        "dataType": "String"
+      },
+
+      "dynasticTitleAlias": {
+        "dataType": "StringArray"
+      },
+
+      "posthumousTitle": {
+        "dataType": "String"
+      },
+
+      "posthumousTitleAlias": {
+        "dataType": "StringArray"
+      },
+
+      "beginYear": {
+        "dataType": "Int32"
+      },
+
+      "beginMonth": {
+        "dataType": "Int32"
+      },
+
+      "beginSexagenaryCycle": {
+        "dataType": "Int32"
+      },
+
+      "beginDay": {
+        "dataType": "Int32"
+      },
+
+      "endYear": {
+        "dataType": "Int32"
+      },
+
+      "endMonth": {
+        "dataType": "Int32"
+      },
+
+      "endSexagenaryCycle": {
+        "dataType": "Int32"
+      },
+
+      "endDay": {
+        "dataType": "Int32"
+      },
+
+      "againBeginYear": {
+        "dataType": "Int32"
+      },
+
+      "againBeginMonth": {
+        "dataType": "Int32"
+      },
+
+      "againBeginSexagenaryCycle": {
+        "dataType": "Int32"
+      },
+
+      "againBeginDay": {
+        "dataType": "Int32"
+      },
+
+      "againEndYear": {
+        "dataType": "Int32"
+      },
+
+      "againEndMonth": {
+        "dataType": "Int32"
+      },
+
+      "againEndSexagenaryCycle": {
+        "dataType": "Int32"
+      },
+
+      "againEndDay": {
+        "dataType": "Int32"
+      },
+
+      "unansweredQuestion": {
+        "dataType": "StringArray"
+      }
+    }
+  },
+
+  "GatherEntity": {
+    "databaseName": "gather",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "gather": {
+        "dataType": "String"
+      }
+    }
+  },
+
+  "GenusEntity": {
+    "databaseName": "genus",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "category": {
+        "dataType": "Int32"
+      },
+
+      "name": {
+        "dataType": "String"
+      },
+
+      "father": {
+        "dataType": "Int32"
+      },
+
+      "begin": {
+        "dataType": "String"
+      },
+
+      "end": {
+        "dataType": "String"
+      }
+    }
+  },
+
+  "GeographicEntity": {
+    "databaseName": "geographic",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "name": {
+        "dataType": "String"
+      }
+
+    }
+  },
+
+  "IdentityEntity": {
+    "databaseName": "identity",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "identity": {
+        "dataType": "String"
+      }
+    }
+  },
+
+  "ImperialCourtEntity": {
+    "databaseName": "imperialCourt",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "category": {
+        "dataType": "String"
+      },
+
+      "book": {
+        "dataType": "String"
+      },
+
+      "begin": {
+        "dataType": "Int32"
+      },
+
+      "end": {
+        "dataType": "Int32"
+      }
+    }
+  },
+
+  "MonthEntity": {
+    "databaseName": "month",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "name": {
+        "dataType": "String"
+      }
+    }
+  },
+
+  "ReignTitleEntity": {
+    "databaseName": "reignTitle",
+
+    "entity": {
+      "id": {
+        "dataType": "Int64",
+        "indexType": "Key"
+      },
+
+      "name": {
+        "dataType": "String"
+      },
+
+      "emperor": {
+        "dataType": "Int32Array"
+      },
+
+      "serial": {
+        "dataType": "Int32"
+      },
+
+      "beginYear": {
+        "dataType": "Int32"
+      },
+
+      "beginMonth": {
+        "dataType": "Int32"
+      },
+
+      "beginSexagenaryCycle": {
+        "dataType": "Int32"
+      },
+
+      "beginDay": {
+        "dataType": "Int32"
+      },
+
+      "endYear": {
+        "dataType": "Int32"
+      },
+
+      "endMonth": {
+        "dataType": "Int32"
+      },
+
+      "endSexagenaryCycle": {
+        "dataType": "Int32"
+      },
+
+      "endDay": {
+        "dataType": "Int32"
+      }
+    }
+  },
+
+  "SexagenaryCycleEntity": {
+    "databaseName": "sexagenaryCycle",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "heavenly": {
+        "dataType": "String"
+      },
+
+      "branch": {
+        "dataType": "String"
+      },
+
+      "name": {
+        "dataType": "String"
+      }
+    }
+  },
+
+  "SourceEntity": {
+    "databaseName": "source",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "name": {
+        "dataType": "String"
+      },
+
+      "sort": {
+        "dataType": "Int32"
+      }
+    }
+  },
+
+  "VersionEntity": {
+    "databaseName": "version",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "book": {
+        "dataType": "Int32"
+      },
+
+      "source": {
+        "dataType": "Int32"
+      },
+
+      "sourceName": {
+        "dataType": "String"
+      },
+
+      "country": {
+        "dataType": "Int32"
+      },
+
+      "reignTitle": {
+        "dataType": "Int64"
+      },
+
+      "year": {
+        "dataType": "Int32"
+      },
+
+      "version": {
+        "dataType": "String"
+      },
+
+      "otherAuthor": {
+        "dataType": "Int32Array"
+      },
+
+      "authorNotes": {
+        "dataType": "StringArray"
+      }
+    }
+  },
+
+  "YearEntity": {
+    "databaseName": "year",
+
+    "entity": {
+      "id": {
+        "dataType": "Int32",
+        "indexType": "Key"
+      },
+
+      "name": {
+        "dataType": "String"
+      },
+
+      "sexagenaryCycle": {
+        "dataType": "Int32"
+      },
+
+      "reignTitle": {
+        "dataType": "Int64"
+      },
+
+      "year": {
+        "dataType": "Int32"
+      },
+
+      "unorthodoxReignTitle": {
+        "dataType": "Int64Array"
+      },
+
+      "unorthodoxYear": {
+        "dataType": "Int32Array"
+      }
+    }
+  }
+}

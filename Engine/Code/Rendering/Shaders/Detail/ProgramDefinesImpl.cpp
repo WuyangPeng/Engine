@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:45)
+///	版本：0.9.1.1 (2023/07/05 14:30)
 
 #include "Rendering/RenderingExport.h"
 
@@ -26,10 +26,11 @@ void Rendering::ProgramDefinesImpl::Remove(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    definitions.erase(remove_if(definitions.begin(), definitions.end(), [&name](const auto& value) {
-                          return value.first == name;
-                      }),
-                      definitions.end());
+    const auto iter = std::ranges::remove_if(definitions, [&name](const auto& element) {
+        return element.first == name;
+    });
+
+    definitions.erase(iter.begin(), iter.end());
 }
 
 void Rendering::ProgramDefinesImpl::Clear() noexcept
@@ -67,7 +68,7 @@ std::string Rendering::ProgramDefinesImpl::Get(const std::string& name) const
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("查找ProgramDefines失败。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("查找ProgramDefines失败。"s))
 }
 
 int Rendering::ProgramDefinesImpl::GetSize() const

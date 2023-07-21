@@ -14,7 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 
 Database::MongoEnvironment::MongoEnvironment() noexcept
-    : isInit{ false }
 {
     DATABASE_SELF_CLASS_IS_VALID_9;
 }
@@ -36,3 +35,5 @@ void Database::MongoEnvironment::InitEnvironment()
 
     isInit = true;
 }
+
+std::atomic_bool Database::MongoEnvironment::isInit;

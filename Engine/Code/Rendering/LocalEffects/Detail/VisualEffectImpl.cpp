@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:43)
+///	版本：0.9.1.1 (2023/07/05 18:25)
 
 #include "Rendering/RenderingExport.h"
 
@@ -17,24 +17,64 @@
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Mathematics/Algebra/Matrix4Detail.h"
 #include "Mathematics/Algebra/Vector4Detail.h"
+#include "Rendering/DataTypes/SpecializedIO.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
+#include "Rendering/Shaders/ProgramFactory.h"
+#include "Rendering/Shaders/ProgramSources.h"
 #include "Rendering/Shaders/VisualProgram.h"
 
 Rendering::VisualEffectImpl::VisualEffectImpl(CoreTools::DisableNotThrow disableNotThrow)
-    : program{ std::make_shared<VisualProgram>(disableNotThrow) },
-      pvwMatrixConstant{ std::make_shared<ConstantBuffer>(CoreTools::GetStreamSize<Matrix4F>(), true) }
+    : program{ std::make_shared<VisualProgram>(VisualProgram::Create()) },
+      baseRenderer{},
+      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>(Mathematics::GetStreamSize<Matrix4>(), true) }
 {
-    SetPVWMatrix(Matrix4F::GetIdentity());
+    System::UnusedFunction(disableNotThrow);
+
+    SetProjectionViewWorldMatrix(Matrix4::GetIdentity());
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VisualEffectImpl::VisualEffectImpl(const VisualProgramSharedPtr& visualProgram)
-    : program{ visualProgram }, pvwMatrixConstant{ std::make_shared<ConstantBuffer>(CoreTools::GetStreamSize<Matrix4F>(), true) }
+Rendering::VisualEffectImpl::VisualEffectImpl(VisualProgramSharedPtr visualProgram)
+    : program{ std::move(visualProgram) },
+      baseRenderer{},
+      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>(Mathematics::GetStreamSize<Matrix4>(), true) }
 {
-    SetPVWMatrix(Matrix4F::GetIdentity());
+    SetProjectionViewWorldMatrix(Matrix4::GetIdentity());
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::VisualEffectImpl::VisualEffectImpl(const BaseRendererSharedPtr& baseRenderer)
+    : program{ std::make_shared<VisualProgram>(VisualProgram::Create()) },
+      baseRenderer{ baseRenderer },
+      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>(Mathematics::GetStreamSize<Matrix4>(), true) }
+{
+    SetProjectionViewWorldMatrix(Matrix4::GetIdentity());
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::VisualEffectImpl::VisualEffectImpl(const BaseRendererSharedPtr& baseRenderer, VisualProgramSharedPtr visualProgram)
+    : program{ std::move(visualProgram) },
+      baseRenderer{ baseRenderer },
+      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>(CoreTools::GetStreamSize<Matrix4>(), true) }
+{
+    SetProjectionViewWorldMatrix(Matrix4::GetIdentity());
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::VisualEffectImpl::VisualEffectImpl(ProgramFactory& factory, const BaseRendererSharedPtr& baseRenderer, const std::string& vertexShaderFile, const std::string& pixelShaderFile)
+    : program{ factory.CreateFromFiles(baseRenderer->GetShaderName(vertexShaderFile), baseRenderer->GetShaderName(pixelShaderFile), "") },
+      baseRenderer{ baseRenderer },
+      projectionViewWorldMatrixConstant{ std::make_shared<ConstantBuffer>(CoreTools::GetStreamSize<Matrix4>(), true) }
+{
+    SetProjectionViewWorldMatrix(Matrix4::GetIdentity());
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -45,7 +85,7 @@ int Rendering::VisualEffectImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return program->GetStreamingSize() + CoreTools::GetStreamSize(pvwMatrixConstant);
+    return program->GetStreamingSize() + Rendering::GetStreamSize(projectionViewWorldMatrixConstant);
 }
 
 void Rendering::VisualEffectImpl::Save(BufferTarget& target) const
@@ -53,7 +93,7 @@ void Rendering::VisualEffectImpl::Save(BufferTarget& target) const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     program->Save(target);
-    target.WriteObjectAssociated(pvwMatrixConstant);
+    target.WriteObjectAssociated(projectionViewWorldMatrixConstant);
 }
 
 void Rendering::VisualEffectImpl::Load(BufferSource& source)
@@ -61,7 +101,7 @@ void Rendering::VisualEffectImpl::Load(BufferSource& source)
     RENDERING_CLASS_IS_VALID_9;
 
     program->Load(source);
-    source.ReadObjectAssociated(pvwMatrixConstant);
+    source.ReadObjectAssociated(projectionViewWorldMatrixConstant);
 }
 
 void Rendering::VisualEffectImpl::Link(ObjectLink& source)
@@ -69,7 +109,7 @@ void Rendering::VisualEffectImpl::Link(ObjectLink& source)
     RENDERING_CLASS_IS_VALID_9;
 
     program->Link(source);
-    source.ResolveLink(pvwMatrixConstant);
+    source.ResolveLink(projectionViewWorldMatrixConstant);
 }
 
 void Rendering::VisualEffectImpl::Register(ObjectRegister& target) const
@@ -77,20 +117,20 @@ void Rendering::VisualEffectImpl::Register(ObjectRegister& target) const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     program->Register(target);
-    target.Register(pvwMatrixConstant);
+    target.Register(projectionViewWorldMatrixConstant);
 }
 
 CoreTools::ObjectSharedPtr Rendering::VisualEffectImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto result = program->GetObjectByName(name);
-    if (!result->IsNullObject())
+    if (auto result = program->GetObjectByName(name);
+        !result->IsNullObject())
     {
         return result;
     }
 
-    return pvwMatrixConstant->GetObjectByName(name);
+    return projectionViewWorldMatrixConstant->GetObjectByName(name);
 }
 
 Rendering::VisualEffectImpl::ObjectSharedPtrContainer Rendering::VisualEffectImpl::GetAllObjectsByName(const std::string& name)
@@ -99,8 +139,8 @@ Rendering::VisualEffectImpl::ObjectSharedPtrContainer Rendering::VisualEffectImp
 
     auto result = program->GetAllObjectsByName(name);
 
-    auto pvwMatrixConstantResult = pvwMatrixConstant->GetAllObjectsByName(name);
-    result.insert(result.end(), pvwMatrixConstantResult.begin(), pvwMatrixConstantResult.end());
+    auto projectionViewWorldMatrixConstantResult = projectionViewWorldMatrixConstant->GetAllObjectsByName(name);
+    result.insert(result.end(), projectionViewWorldMatrixConstantResult.begin(), projectionViewWorldMatrixConstantResult.end());
 
     return result;
 }
@@ -109,13 +149,13 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualEffectImpl::GetConstObjectByNam
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto result = program->GetConstObjectByName(name);
-    if (!result->IsNullObject())
+    if (auto result = program->GetConstObjectByName(name);
+        !result->IsNullObject())
     {
         return result;
     }
 
-    return pvwMatrixConstant->GetConstObjectByName(name);
+    return projectionViewWorldMatrixConstant->GetConstObjectByName(name);
 }
 
 Rendering::VisualEffectImpl::ConstObjectSharedPtrContainer Rendering::VisualEffectImpl::GetAllConstObjectsByName(const std::string& name) const
@@ -124,8 +164,29 @@ Rendering::VisualEffectImpl::ConstObjectSharedPtrContainer Rendering::VisualEffe
 
     auto result = program->GetAllConstObjectsByName(name);
 
-    auto pvwMatrixConstantResult = pvwMatrixConstant->GetAllConstObjectsByName(name);
-    result.insert(result.end(), pvwMatrixConstantResult.begin(), pvwMatrixConstantResult.end());
+    auto projectionViewWorldMatrixConstantResult = projectionViewWorldMatrixConstant->GetAllConstObjectsByName(name);
+    result.insert(result.end(), projectionViewWorldMatrixConstantResult.begin(), projectionViewWorldMatrixConstantResult.end());
+
+    return result;
+}
+
+void Rendering::VisualEffectImpl::SetBaseRenderer(const BaseRendererSharedPtr& aBaseRenderer) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    baseRenderer = aBaseRenderer;
+}
+
+Rendering::VisualEffectImpl::BaseRendererSharedPtr Rendering::VisualEffectImpl::GetBaseRenderer()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    auto result = baseRenderer.lock();
+
+    if (result == nullptr)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("BaseRenderer 已被释放。"))
+    }
 
     return result;
 }
@@ -186,45 +247,52 @@ Rendering::VisualEffectImpl::ShaderSharedPtr Rendering::VisualEffectImpl::GetGeo
     return program->GetGeometryShader();
 }
 
-void Rendering::VisualEffectImpl::SetPVWMatrixConstant(const ConstantBufferSharedPtr& buffer)
+void Rendering::VisualEffectImpl::SetProjectionViewWorldMatrixConstant(const ConstantBufferSharedPtr& buffer)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    pvwMatrixConstant.object = buffer;
-    SetPVWMatrix(Matrix4F::GetIdentity());
+    projectionViewWorldMatrixConstant.object = buffer;
+    SetProjectionViewWorldMatrix(Matrix4::GetIdentity());
 }
 
-Rendering::VisualEffectImpl::ConstConstantBufferSharedPtr Rendering::VisualEffectImpl::GetPVWMatrixConstant() const noexcept
+Rendering::VisualEffectImpl::ConstConstantBufferSharedPtr Rendering::VisualEffectImpl::GetProjectionViewWorldMatrixConstant() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return pvwMatrixConstant.object;
+    return projectionViewWorldMatrixConstant.object;
 }
 
-void Rendering::VisualEffectImpl::SetPVWMatrix(const Matrix4F& pvwMatrix)
+Rendering::VisualEffectImpl::ConstantBufferSharedPtr Rendering::VisualEffectImpl::GetProjectionViewWorldMatrixConstant() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto data = pvwMatrixConstant->GetData();
+    return projectionViewWorldMatrixConstant.object;
+}
 
-    const auto container = pvwMatrix.GetContainer();
-    for (const auto& value : container)
+void Rendering::VisualEffectImpl::SetProjectionViewWorldMatrix(const Matrix4& projectionViewWorldMatrix)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    auto data = projectionViewWorldMatrixConstant->GetData();
+
+    for (const auto container = projectionViewWorldMatrix.GetContainer();
+         const auto& element : container)
     {
-        data.Increase<float>(value);
+        data.Increase<float>(element);
     }
 }
 
-Rendering::VisualEffectImpl::Matrix4F Rendering::VisualEffectImpl::GetPVWMatrix() const
+Rendering::VisualEffectImpl::Matrix4 Rendering::VisualEffectImpl::GetProjectionViewWorldMatrix() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto data = pvwMatrixConstant->GetData();
+    auto data = projectionViewWorldMatrixConstant->GetData();
 
-    Matrix4F::ContainerType container{};
-    for (auto i = 0; i < Matrix4F::matrixSize; ++i)
+    Matrix4::ContainerType container{};
+    for (auto i = 0; i < Matrix4::matrixSize; ++i)
     {
         container.emplace_back(data.Increase<float>());
     }
 
-    return Matrix4F{ container, Mathematics::MatrixMajorFlags::Row };
+    return Matrix4{ container, Mathematics::MatrixMajorFlags::Row };
 }

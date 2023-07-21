@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 21:43)
+///	版本：0.9.1.1 (2023/07/18 22:42)
 
 #ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_AUDIO_AUDIO_MANAGER_H
 #define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_AUDIO_AUDIO_MANAGER_H
@@ -22,9 +22,6 @@ namespace DatabaseGenerateServerMiddleLayer
     public:
         using ClassType = AudioManager;
         using ParentType = Framework::AudioManagerInterface;
-
-        using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
-        using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
         AudioManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);

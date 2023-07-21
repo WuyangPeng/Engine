@@ -53,11 +53,11 @@ namespace AncientBooks
         NODISCARD IntContainerConstIter GetOtherAuthorEnd() const noexcept override;
         NODISCARD CharacterContainer GetOtherAuthor(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD StringContainer GetAuthorDescribe() const override;
-        NODISCARD int GetAuthorDescribeCount() const override;
-        NODISCARD String GetAuthorDescribe(int index) const override;
-        NODISCARD StringContainerConstIter GetAuthorDescribeBegin() const noexcept override;
-        NODISCARD StringContainerConstIter GetAuthorDescribeEnd() const noexcept override;
+        NODISCARD StringContainer GetAuthorNotes() const override;
+        NODISCARD int GetAuthorNotesCount() const override;
+        NODISCARD String GetAuthorNotes(int index) const override;
+        NODISCARD StringContainerConstIter GetAuthorNotesBegin() const noexcept override;
+        NODISCARD StringContainerConstIter GetAuthorNotesEnd() const noexcept override;
 
         NODISCARD String GetTitle() const override;
 
@@ -73,7 +73,7 @@ namespace AncientBooks
         int volume;  // 卷
         int chapterVolume;  // 章節卷
         IntContainer otherAuthor;  // 其他作者
-        StringContainer authorDescribe;  // 作者描述
+        StringContainer authorNotes;  // 作者描述
         String title;  // 標題
         String abbreviation;  // 標題（簡稱）
         String directory;  // 目錄

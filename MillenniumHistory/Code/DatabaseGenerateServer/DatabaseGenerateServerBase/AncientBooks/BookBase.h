@@ -76,11 +76,11 @@ namespace AncientBooks
         NODISCARD virtual IntContainerConstIter GetAuthorEnd() const;
         NODISCARD virtual CharacterContainer GetAuthor(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual StringContainer GetAuthorDescribe() const;
-        NODISCARD virtual int GetAuthorDescribeCount() const;
-        NODISCARD virtual String GetAuthorDescribe(int index) const;
-        NODISCARD virtual StringContainerConstIter GetAuthorDescribeBegin() const;
-        NODISCARD virtual StringContainerConstIter GetAuthorDescribeEnd() const;
+        NODISCARD virtual StringContainer GetAuthorNotes() const;
+        NODISCARD virtual int GetAuthorNotesCount() const;
+        NODISCARD virtual String GetAuthorNotes(int index) const;
+        NODISCARD virtual StringContainerConstIter GetAuthorNotesBegin() const;
+        NODISCARD virtual StringContainerConstIter GetAuthorNotesEnd() const;
 
         NODISCARD virtual IntContainer GetAnnotator() const;
         NODISCARD virtual int GetAnnotatorCount() const;
@@ -89,11 +89,11 @@ namespace AncientBooks
         NODISCARD virtual IntContainerConstIter GetAnnotatorEnd() const;
         NODISCARD virtual CharacterContainer GetAnnotator(const AncientBooksContainer& csvContainer) const;
 
-        NODISCARD virtual StringContainer GetAnnotateDescribe() const;
-        NODISCARD virtual int GetAnnotateDescribeCount() const;
-        NODISCARD virtual String GetAnnotateDescribe(int index) const;
-        NODISCARD virtual StringContainerConstIter GetAnnotateDescribeBegin() const;
-        NODISCARD virtual StringContainerConstIter GetAnnotateDescribeEnd() const;
+        NODISCARD virtual StringContainer GetAnnotateNotes() const;
+        NODISCARD virtual int GetAnnotateNotesCount() const;
+        NODISCARD virtual String GetAnnotateNotes(int index) const;
+        NODISCARD virtual StringContainerConstIter GetAnnotateNotesBegin() const;
+        NODISCARD virtual StringContainerConstIter GetAnnotateNotesEnd() const;
 
         NODISCARD virtual IntContainer GetCountry() const;
         NODISCARD virtual int GetCountryCount() const;

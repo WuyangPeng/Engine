@@ -5,27 +5,52 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 21:52)
+///	版本：0.9.1.1 (2023/07/18 22:27)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/DatabaseGenerateServerMiddleLayerExport.h"
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/Helper/DatabaseGenerateServerMiddleLayerClassInvariantMacro.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/Resource/ResourceManager.h"
 #include "SystemManager.h"
 #include "Detail/SystemManagerImpl.h"
-#include "CoreTools/Contract/Flags/ImplFlags.h"
 
 DatabaseGenerateServerMiddleLayer::SystemManager::SystemManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory },
-      impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+      impl{ "Configuration/Database.json" }
 {
     DATABASE_GENERATE_SERVER_MIDDLE_LAYER_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseGenerateServerMiddleLayer, SystemManager)
 
-bool DatabaseGenerateServerMiddleLayer::SystemManager::Initialize() noexcept
+bool DatabaseGenerateServerMiddleLayer::SystemManager::Idle(int64_t timeDelta)
+{
+    DATABASE_GENERATE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(timeDelta);
+
+    const auto resource = GetResourceManager<ResourceManager>();
+
+    const auto ancientBooksContainer = resource->GetAncientBooksContainer();
+
+    if (ancientBooksContainer != nullptr)
+    {
+        return impl->Idle(*ancientBooksContainer);
+    }
+
+    return true;
+}
+
+bool DatabaseGenerateServerMiddleLayer::SystemManager::Initialize()
 {
     DATABASE_GENERATE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_9;
 
     return impl->Initialize();
+}
+
+bool DatabaseGenerateServerMiddleLayer::SystemManager::Destroy() noexcept
+{
+    DATABASE_GENERATE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_9;
+
+    return impl->Destroy();
 }

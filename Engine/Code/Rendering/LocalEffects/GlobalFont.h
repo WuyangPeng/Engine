@@ -16,6 +16,7 @@
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "Rendering/DataTypes/Colour.h"
 #include "Rendering/LocalEffects/LocalEffectsFwd.h"
+#include "Rendering/Shaders/ShadersFwd.h"
 
 RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(GlobalFont, GlobalFontImpl);
 
@@ -27,11 +28,10 @@ namespace Rendering
         DELAY_COPY_UNSHARED_TYPE_DECLARE(GlobalFont);
 
         using FontSharedPtr = std::shared_ptr<Font>;
+        using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactory>;
 
     public:
-        NODISCARD static  GlobalFont Create();
-
-        explicit GlobalFont(CoreTools::DisableNotThrow disableNotThrow);
+        explicit GlobalFont(FontType fontType, ProgramFactory& factory, int maxMessageLength);
 
         CLASS_INVARIANT_DECLARE;
 

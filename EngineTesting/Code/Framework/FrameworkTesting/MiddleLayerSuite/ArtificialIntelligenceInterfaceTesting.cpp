@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Renderers/EnvironmentParameter.h"
+#include "Rendering/RendererEngine/EnvironmentParameter.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/ArtificialIntelligenceInterface.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"

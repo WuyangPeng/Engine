@@ -75,3 +75,10 @@ int Rendering::RenderingEnvironment::GetNumMultiSamples() const noexcept
 
     return impl->GetNumMultiSamples();
 }
+
+Rendering::RenderingEnvironment::ColourType Rendering::RenderingEnvironment::GetClearColor() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetClearColor();
+}

@@ -34,7 +34,7 @@ namespace Framework
         NODISCARD WindowsWParam EnterMessageLoop(WindowsHWnd hwnd);
 
     private:
-        using WindowsMsg = System::WindowsMsg;
+        using WindowsMsg = System::WindowsMessage;
         using CustomTime = CoreTools::CustomTime;
 
     private:

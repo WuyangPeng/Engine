@@ -38,6 +38,7 @@ namespace Rendering
         // 你应该在使用ComputeVisibleSet之前，调用SetCamera。
         explicit Culler(const ConstCameraSharedPtr& camera);
         virtual ~Culler() noexcept = default;
+
         Culler(const Culler& rhs) = default;
         Culler& operator=(const Culler& rhs) = default;
         Culler(Culler&& rhs) noexcept = default;
@@ -88,6 +89,8 @@ namespace Rendering
 
         NODISCARD VisualContainerIter begin() noexcept;
         NODISCARD VisualContainerIter end() noexcept;
+
+        void ComputeVisibleSet(const CameraSharedPtr& scene, const SpatialSharedPtr& shared) noexcept;
 
     private:
         PackageType impl;

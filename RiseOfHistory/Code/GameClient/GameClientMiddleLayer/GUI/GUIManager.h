@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 15:21)
+///	版本：0.9.1.1 (2023/07/18 17:57)
 
 #ifndef GAME_CLIENT_MIDDLE_LAYER_GUI_GUI_MANAGER_H
 #define GAME_CLIENT_MIDDLE_LAYER_GUI_GUI_MANAGER_H
@@ -22,9 +22,6 @@ namespace GameClientMiddleLayer
     public:
         using ClassType = GUIManager;
         using ParentType = GUIManagerInterface;
-
-        using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
-        using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
         GUIManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);

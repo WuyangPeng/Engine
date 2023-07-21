@@ -30,14 +30,9 @@ Rendering::LightWorldPositionConstant::LightWorldPositionConstant(const LightSha
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, LightWorldPositionConstant)
 
-void Rendering::LightWorldPositionConstant::Update(MAYBE_UNUSED const Visual* visual, MAYBE_UNUSED const Camera* camera)
+void Rendering::LightWorldPositionConstant::Update(MAYBE_UNUSED const Visual* visual, MAYBE_UNUSED const Camera* camera) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-
-    auto light = GetLight();
-    const auto& worldPosition = light->GetPosition();
-
-    SetRegister(0, worldPosition);
 }
 
 Rendering::ShaderFloatSharedPtr Rendering::LightWorldPositionConstant::Clone() const

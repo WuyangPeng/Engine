@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:43)
+///	版本：0.9.1.1 (2023/07/20 19:35)
 
 #ifndef RENDERING_RENDERERS_TEXT_EFFECT_H
 #define RENDERING_RENDERERS_TEXT_EFFECT_H
@@ -32,7 +32,7 @@ namespace Rendering
         using Colour = Colour<float>;
 
     public:
-        TextEffect(const ProgramFactorySharedPtr& factory, const Texture2DSharedPtr& texture);
+        TextEffect(ProgramFactory& factory, const Texture2DSharedPtr& texture);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

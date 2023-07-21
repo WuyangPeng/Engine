@@ -352,4 +352,24 @@ Real Mathematics::Vector4Tools<Real>::Orthonormalize(const ContainerType& contai
     return minLength;
 }
 
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Vector4Tools<Real>::Vector4 Mathematics::Vector4Tools<Real>::CrossProduct(const Vector4& lhs, const Vector4& rhs) noexcept
+{
+    return Vector4{ lhs.GetY() * rhs.GetZ() - lhs.GetZ() * rhs.GetY(),
+                    lhs.GetZ() * rhs.GetX() - lhs.GetX() * rhs.GetZ(),
+                    lhs.GetX() * rhs.GetY() - lhs.GetY() * rhs.GetX(),
+                    Real{} };
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
+typename Mathematics::Vector4Tools<Real>::Vector4 Mathematics::Vector4Tools<Real>::UnitCrossProduct(const Vector4& lhs, const Vector4& rhs, Real epsilon) noexcept(gAssert < 1 || gMathematicsAssert < 1)
+{
+    auto cross = CrossProduct(lhs, rhs);
+    cross.Normalize(epsilon);
+
+    return cross;
+}
+
 #endif  // MATHEMATICS_ALGEBRA_VECTOR4_TOOLS_ACHIEVE_H

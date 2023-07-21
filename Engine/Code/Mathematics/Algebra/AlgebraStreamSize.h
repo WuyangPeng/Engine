@@ -383,7 +383,7 @@ struct CoreTools::StreamSize<Mathematics::Float4>
 namespace Mathematics
 {
     template <typename T>
-    NODISCARD int GetStreamSize(T value) noexcept(noexcept(CoreTools::StreamSize<T>::GetStreamSize(value)))
+    NODISCARD int GetStreamSize(T value = T{}) noexcept(noexcept(CoreTools::StreamSize<T>::GetStreamSize(value)))
     {
         return CoreTools::StreamSize<T>::GetStreamSize(value);
     }

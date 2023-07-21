@@ -61,6 +61,9 @@ namespace Mathematics
 
         NODISCARD static Real ComputeOrthogonalComplement(const ContainerType& container, bool robust = false, Real epsilon = Math::GetZeroTolerance());
         NODISCARD static Real Orthonormalize(const ContainerType& container, bool robust = false, Real epsilon = Math::GetZeroTolerance());
+
+        NODISCARD static Vector4 CrossProduct(const Vector4& lhs, const Vector4& rhs) noexcept;
+        NODISCARD static Vector4 UnitCrossProduct(const Vector4& lhs, const Vector4& rhs, Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
     };
 
     using Vector4ToolsF = Vector4Tools<float>;

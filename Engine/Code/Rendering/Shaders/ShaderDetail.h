@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:29)
+///	版本：0.9.1.1 (2023/07/01 16:20)
 
 #ifndef RENDERING_SHADERS_SHADER_DETAIL_H
 #define RENDERING_SHADERS_SHADER_DETAIL_H
@@ -30,16 +30,18 @@ int Rendering::Shader::Set(const std::string& name, const std::shared_ptr<T>& ob
         {
             if (IsValid(*iter, object.get()))
             {
-                iter->SetObject(object);
+                iter->SetGraphicsObject(object);
 
                 return handle;
             }
+
             return -1;
         }
+
         ++handle;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s))
 }
 
 template <typename T>
@@ -58,7 +60,26 @@ std::shared_ptr<const T> Rendering::Shader::Get(const std::string& name) const
         }
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s))
+}
+
+template <typename T>
+std::shared_ptr<T> Rendering::Shader::Get(const std::string& name)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    constexpr auto index = T::GetShaderDataLookup();
+
+    const auto end = GetShaderDataEnd(index);
+    for (auto iter = GetShaderDataBegin(index); iter != end; ++iter)
+    {
+        if (name == iter->GetName())
+        {
+            return boost::polymorphic_pointer_cast<T>(iter->GetGraphicsObject());
+        }
+    }
+
+    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s))
 }
 
 template <typename T>
@@ -72,15 +93,15 @@ void Rendering::Shader::Set(int handle, const std::shared_ptr<T>& object)
     const auto end = GetShaderDataEnd(index);
     if (0 <= handle && handle < end - begin)
     {
-        auto iter = begin + handle;
-        if (IsValid(*iter, object.get()))
+        if (auto iter = begin + handle;
+            IsValid(*iter, object.get()))
         {
-            iter->SetObject(object);
+            iter->SetGraphicsObject(object);
         }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s))
     }
 }
 

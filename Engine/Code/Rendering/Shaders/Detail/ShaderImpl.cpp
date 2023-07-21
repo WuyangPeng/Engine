@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:46)
+///	版本：0.9.1.1 (2023/07/05 14:32)
 
 #include "Rendering/RenderingExport.h"
 
@@ -51,7 +51,8 @@ int Rendering::ShaderImpl::Get(const std::string& name) const
             ++handle;
         }
     }
-    return -1;
+
+    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s))
 }
 
 int Rendering::ShaderImpl::GetConstantBufferSize(int handle) const
@@ -75,7 +76,7 @@ int Rendering::ShaderImpl::GetConstantBufferSize(const std::string& name) const
         ++handle;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s))
 }
 
 int Rendering::ShaderImpl::GetTextureBufferSize(int handle) const
@@ -99,7 +100,7 @@ int Rendering::ShaderImpl::GetTextureBufferSize(std::string const& name) const
         ++handle;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s))
 }
 
 int Rendering::ShaderImpl::GetStructuredBufferSize(int handle) const
@@ -123,7 +124,7 @@ int Rendering::ShaderImpl::GetStructuredBufferSize(const std::string& name) cons
         ++handle;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s))
 }
 
 Rendering::ShaderImpl::MemberLayoutContainer Rendering::ShaderImpl::GetConstantBufferLayout(int handle) const
@@ -147,7 +148,7 @@ Rendering::ShaderImpl::MemberLayoutContainer Rendering::ShaderImpl::GetConstantB
         ++handle;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s))
 }
 
 Rendering::ShaderImpl::MemberLayoutContainer Rendering::ShaderImpl::GetTextureBufferLayout(int handle) const
@@ -171,7 +172,7 @@ Rendering::ShaderImpl::MemberLayoutContainer Rendering::ShaderImpl::GetTextureBu
         ++handle;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s))
 }
 
 Rendering::ShaderImpl::MemberLayoutContainer Rendering::ShaderImpl::GetStructuredBufferLayout(int handle) const
@@ -195,7 +196,7 @@ Rendering::ShaderImpl::MemberLayoutContainer Rendering::ShaderImpl::GetStructure
         ++handle;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s))
 }
 
 int Rendering::ShaderImpl::GetNumXThreads() const noexcept
@@ -233,7 +234,7 @@ Rendering::ShaderImpl::ShaderDataContainer Rendering::ShaderImpl::GetData(int lo
     return lookupData.at(lookup);
 }
 
-void Rendering::ShaderImpl::Load(CoreTools::BufferSource& source)
+void Rendering::ShaderImpl::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -270,7 +271,7 @@ void Rendering::ShaderImpl::Load(CoreTools::BufferSource& source)
     }
 }
 
-void Rendering::ShaderImpl::Save(CoreTools::BufferTarget& target) const
+void Rendering::ShaderImpl::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -342,7 +343,7 @@ int Rendering::ShaderImpl::GetStreamingSize() const
     return size;
 }
 
-void Rendering::ShaderImpl::Link(CoreTools::ObjectLink& source)
+void Rendering::ShaderImpl::Link(ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -355,7 +356,7 @@ void Rendering::ShaderImpl::Link(CoreTools::ObjectLink& source)
     }
 }
 
-void Rendering::ShaderImpl::Register(CoreTools::ObjectRegister& target) const
+void Rendering::ShaderImpl::Register(ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

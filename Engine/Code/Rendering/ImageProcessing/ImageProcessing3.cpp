@@ -89,7 +89,7 @@ Rendering::Texture2DSharedPtr Rendering::ImageProcessing3::CreateTiledImage(MAYB
 }
 
 std::array<int, 2> Rendering::ImageProcessing3::allDirichletPTextureUnits{ 0, 1 };
-std::array<std::array<int, 2>*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessing3::dirichletPTextureUnits{
+std::array<std::array<int, 2>*, 5> Rendering::ImageProcessing3::dirichletPTextureUnits{
     nullptr,
     &allDirichletPTextureUnits,
     &allDirichletPTextureUnits,
@@ -97,7 +97,7 @@ std::array<std::array<int, 2>*, System::EnumCastUnderlying(Rendering::ShaderFlag
     &allDirichletPTextureUnits
 };
 
-std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessing3::dirichletPPrograms{
+std::array<std::string, 5> Rendering::ImageProcessing3::dirichletPPrograms{
     // PP_NONE
     "",
 
@@ -134,7 +134,7 @@ std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profi
 };
 
 std::array<int, 2> Rendering::ImageProcessing3::allNeumannPTextureUnits{ 0, 1 };
-std::array<std::array<int, 2>*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessing3::neumannPTextureUnits{
+std::array<std::array<int, 2>*, 5> Rendering::ImageProcessing3::neumannPTextureUnits{
     nullptr,
     &allNeumannPTextureUnits,
     &allNeumannPTextureUnits,
@@ -142,7 +142,7 @@ std::array<std::array<int, 2>*, System::EnumCastUnderlying(Rendering::ShaderFlag
     &allNeumannPTextureUnits
 };
 
-std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessing3::neumannPPrograms{
+std::array<std::string, 5> Rendering::ImageProcessing3::neumannPPrograms{
     // PP_NONE
     "",
 
@@ -178,7 +178,7 @@ std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profi
     "END\n"
 };
 
-std::array<const int*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessing3::drawPRegisters{
+std::array<const int*, 5> Rendering::ImageProcessing3::drawPRegisters{
     nullptr,
     &allDrawPRegisters,
     &allDrawPRegisters,
@@ -187,7 +187,7 @@ std::array<const int*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profil
 };
 
 std::array<int, 2> Rendering::ImageProcessing3::allDrawPTextureUnits{ 0, 1 };
-std::array<std::array<int, 2>*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessing3::drawPTextureUnits{
+std::array<std::array<int, 2>*, 5> Rendering::ImageProcessing3::drawPTextureUnits{
     nullptr,
     &allDrawPTextureUnits,
     &allDrawPTextureUnits,
@@ -195,7 +195,7 @@ std::array<std::array<int, 2>*, System::EnumCastUnderlying(Rendering::ShaderFlag
     &allDrawPTextureUnits
 };
 
-std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessing3::drawPPrograms{
+std::array<std::string, 5> Rendering::ImageProcessing3::drawPPrograms{
     // PP_NONE
     "",
 

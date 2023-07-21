@@ -275,6 +275,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\UserInterface\Configuration\Configuration.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\Configuration\ConfigurationFwd.h" />
+    <ClInclude Include="..\..\..\Code\UserInterface\DirectX\DirectX.h" />
+    <ClInclude Include="..\..\..\Code\UserInterface\DirectX\DirectXFwd.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\DllLib.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\FLTK\FLTK.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\FLTK\FLTKFwd.h" />
@@ -284,8 +286,8 @@
     <ClInclude Include="..\..\..\Code\UserInterface\Interface\Interface.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\Interface\InterfaceFwd.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\Interface\User.h" />
-    <ClInclude Include="..\..\..\Code\UserInterface\Trixul\Trixul.h" />
-    <ClInclude Include="..\..\..\Code\UserInterface\Trixul\TrixulFwd.h" />
+    <ClInclude Include="..\..\..\Code\UserInterface\OpenGL\OpenGL.h" />
+    <ClInclude Include="..\..\..\Code\UserInterface\OpenGL\OpenGLFwd.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterface.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceDll.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceExport.h" />
@@ -295,8 +297,6 @@
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceNoImport.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\WxWidgets\WxWidgets.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\WxWidgets\WxWidgetsFwd.h" />
-    <ClInclude Include="..\..\..\Code\UserInterface\XFree86\XFree86.h" />
-    <ClInclude Include="..\..\..\Code\UserInterface\XFree86\XFree86Fwd.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md" />

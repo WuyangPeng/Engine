@@ -10,6 +10,7 @@
 #ifndef DATABASE_GENERATE_SERVER_CORE_TESTING_HELPER_H
 #define DATABASE_GENERATE_SERVER_CORE_TESTING_HELPER_H
 
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/AncientBooksContainer.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 
 namespace DatabaseGenerateServerCoreTesting
@@ -26,9 +27,13 @@ namespace DatabaseGenerateServerCoreTesting
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using AncientBooksContainer = AncientBooks::AncientBooksContainer;
+
+    private:
         void InitSuite();
 
         void AddEngineSuite();
+        void AddConvertSuite(const AncientBooksContainer& ancientBooksContainer);
     };
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/02/02 14:40)
+///	版本：0.9.1.1 (2023/07/18 19:25)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_SYSTEM_H
 #define SYSTEM_WINDOWS_WINDOWS_SYSTEM_H
@@ -25,20 +25,22 @@ namespace System
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetNumaProcessorNodeNumber(WindowsUChar processor, WindowsUCharPtr nodeNumber) noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE DebugBreak() noexcept;
-    void SYSTEM_DEFAULT_DECLARE Exit() noexcept;
-    int SYSTEM_DEFAULT_DECLARE SystemCommand(const char* command) noexcept;
-
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetSystemCurrentDirectory(WindowsDWord bufferLength, TChar* buffer) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemCurrentDirectory(const TChar* pathName) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemUserName(TChar* buffer, WindowsDWord* bufferCount) noexcept;
 
-    NODISCARD WindowsBool SYSTEM_DEFAULT_DECLARE BoolConversion(bool value) noexcept;
-    void SYSTEM_DEFAULT_DECLARE BoolConversion(WindowsBool value, bool* result) noexcept;
+    NODISCARD WindowsBool SYSTEM_DEFAULT_DECLARE BoolConversion(bool input) noexcept;
+    void SYSTEM_DEFAULT_DECLARE BoolConversion(WindowsBool input, bool* result) noexcept;
 
     NODISCARD WindowsHWnd SYSTEM_DEFAULT_DECLARE GetActiveWindow() noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemClientRect(WindowsHWnd hWnd, WindowsRect& windowsRect) noexcept;
+
+    /// 正式环境禁止调用DebugBreak、Exit和GetSystemInput。
+    /// SystemCommand函数不是线程安全的。
+    void SYSTEM_DEFAULT_DECLARE DebugBreak() noexcept;
+    void SYSTEM_DEFAULT_DECLARE Exit() noexcept;
+    int SYSTEM_DEFAULT_DECLARE SystemCommand(const char* command) noexcept;
 
     template <typename T>
     NODISCARD T GetSystemInput()

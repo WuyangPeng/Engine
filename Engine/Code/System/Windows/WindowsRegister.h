@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/02/02 14:40)
+///	版本：0.9.1.1 (2023/07/18 19:27)   
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_REGISTER_H
 #define SYSTEM_WINDOWS_WINDOWS_REGISTER_H
@@ -23,8 +23,8 @@ namespace System
     NODISCARD WindowsHGdiObj SYSTEM_DEFAULT_DECLARE GetSystemStockObject(WindowsBrushTypes background) noexcept;
     NODISCARD WindowsHCursor SYSTEM_DEFAULT_DECLARE LoadSystemCursor(WindowsHInstance instance, const TChar* cursor) noexcept;
     NODISCARD WindowsHIcon SYSTEM_DEFAULT_DECLARE LoadSystemIcon(WindowsHInstance instance, const TChar* icon) noexcept;
-    NODISCARD WindowsAtom SYSTEM_DEFAULT_DECLARE RegisterSystemClass(const WindowsClassEx* wndClassEx) noexcept;
-    NODISCARD WindowsUInt SYSTEM_DEFAULT_DECLARE RegisterSystemWindowMessage(const TChar* string) noexcept;
+    NODISCARD WindowsAtom SYSTEM_DEFAULT_DECLARE RegisterSystemClass(const WindowsClassEx* windowClassEx) noexcept;
+    NODISCARD WindowsUInt SYSTEM_DEFAULT_DECLARE RegisterSystemWindowMessage(const TChar* message) noexcept;
 }
 
 #endif  // SYSTEM_WINDOWS_WINDOWS_REGISTER_H

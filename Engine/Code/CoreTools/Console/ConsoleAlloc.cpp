@@ -15,6 +15,7 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/LogManager/LogAsynchronous.h"
 
 #include <string>
 
@@ -81,6 +82,14 @@ void CoreTools::ConsoleAlloc::ReOpenConsole()
 
 void CoreTools::ConsoleAlloc::CloseConsole() const noexcept
 {
+    try
+    {
+        LOG_ASYNCHRONOUS_SINGLETON.Wait();
+    }
+    catch (...)
+    {
+    }
+
     CloseConsole(out);
     CloseConsole(in);
     CloseConsole(error);

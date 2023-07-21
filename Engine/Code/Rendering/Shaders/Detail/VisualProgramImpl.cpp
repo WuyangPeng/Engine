@@ -5,11 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:50)
+///	版本：0.9.1.1 (2023/07/05 14:34)
 
 #include "Rendering/RenderingExport.h"
 
 #include "VisualProgramImpl.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
@@ -17,7 +18,9 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
+#include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/OpenGLRenderer/Detail/GLSL/GLSLVisualProgram.h"
+#include "Rendering/Shaders/Reflection.h"
 #include "Rendering/Shaders/Shader.h"
 
 Rendering::VisualProgramImpl::VisualProgramSharedPtr Rendering::VisualProgramImpl::Create(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle)
@@ -81,7 +84,7 @@ void Rendering::VisualProgramImpl::SetVertexShader(const ShaderSharedPtr& shader
 
     if (shader->GetType() != GraphicsObjectType::VertexShader)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("输入必须是顶点着色器。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("输入必须是顶点着色器。"))
     }
 
     vertexShader.object = shader;
@@ -93,7 +96,7 @@ void Rendering::VisualProgramImpl::SetPixelShader(const ShaderSharedPtr& shader)
 
     if (shader->GetType() != GraphicsObjectType::PixelShader)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("输入必须是像素着色器。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("输入必须是像素着色器。"))
     }
 
     pixelShader.object = shader;
@@ -105,7 +108,7 @@ void Rendering::VisualProgramImpl::SetGeometryShader(const ShaderSharedPtr& shad
 
     if (shader->GetType() != GraphicsObjectType::GeometryShader)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("输入必须是几何着色器。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("输入必须是几何着色器。"))
     }
 
     geometryShader.object = shader;
@@ -115,10 +118,10 @@ int Rendering::VisualProgramImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CoreTools::GetStreamSize(vertexShader);
+    auto size = Rendering::GetStreamSize(vertexShader);
 
-    size += CoreTools::GetStreamSize(pixelShader);
-    size += CoreTools::GetStreamSize(geometryShader);
+    size += Rendering::GetStreamSize(pixelShader);
+    size += Rendering::GetStreamSize(geometryShader);
 
     return size;
 }
@@ -159,11 +162,11 @@ void Rendering::VisualProgramImpl::Register(ObjectRegister& target) const
     target.Register(geometryShader);
 }
 
-Rendering::GLSLReflection Rendering::VisualProgramImpl::GetReflector() const
+Rendering::Reflection Rendering::VisualProgramImpl::GetReflector() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return GLSLReflection{ 0 };
+    return Reflection::Create();
 }
 
 Rendering::VisualProgramImpl::VisualProgramSharedPtr Rendering::VisualProgramImpl::Clone() const

@@ -5,18 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:42)
+///	版本：0.9.1.1 (2023/07/12 15:01)
 
-#ifndef RENDERING_RENDERERS_FONT_IMPL_H
-#define RENDERING_RENDERERS_FONT_IMPL_H
+#ifndef RENDERING_LOCAL_EFFECTS_FONT_IMPL_H
+#define RENDERING_LOCAL_EFFECTS_FONT_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/DataTypes/Colour.h"
-#include "Rendering/LocalEffects/LocalEffectsFwd.h"
+#include "Rendering/LocalEffects/LocalEffectsInternalFwd.h"
 #include "Rendering/Resources/ResourcesFwd.h"
-#include "Rendering/Shaders/ProgramFactory.h"
+#include "Rendering/Shaders/ShadersFwd.h"
 
 #include <vector>
 
@@ -26,29 +26,24 @@ namespace Rendering
     {
     public:
         using ClassType = FontImpl;
-        using FactoryType = FontImpl;
+        using FactoryType = FontFactory;
+
         using FontSharedPtr = std::shared_ptr<FontImpl>;
-        using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactory>;
         using VertexBufferSharedPtr = std::shared_ptr<VertexBuffer>;
         using IndexBufferSharedPtr = std::shared_ptr<IndexBuffer>;
         using TextEffectSharedPtr = std::shared_ptr<TextEffect>;
         using ConstVertexBufferSharedPtr = std::shared_ptr<const VertexBuffer>;
         using ConstIndexBufferSharedPtr = std::shared_ptr<const IndexBuffer>;
         using ConstTextEffectSharedPtr = std::shared_ptr<const TextEffect>;
+        using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactory>;
         using Texture2DSharedPtr = std::shared_ptr<Texture2D>;
-        using TexelsType = std::vector<char>;
-        using CharacterDataType = std::vector<float>;
+
         using Colour = Colour<float>;
+        using TexelsType = std::vector<uint8_t>;
+        using CharacterDataType = std::array<float, 257>;
 
     public:
-        NODISCARD static FontSharedPtr Create(const ProgramFactorySharedPtr& factory,
-                                              int width,
-                                              int height,
-                                              const TexelsType& texels,
-                                              const CharacterDataType& characterData,
-                                              int maxMessageLength);
-
-        FontImpl(const ProgramFactorySharedPtr& factory,
+        FontImpl(ProgramFactory& factory,
                  int width,
                  int height,
                  const TexelsType& texels,
@@ -60,12 +55,15 @@ namespace Rendering
         FontImpl(FontImpl&& rhs) noexcept = default;
         FontImpl& operator=(FontImpl&& rhs) noexcept = default;
 
-        CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-    public:
         NODISCARD ConstVertexBufferSharedPtr GetVertexBuffer() const noexcept;
         NODISCARD ConstIndexBufferSharedPtr GetIndexBuffer() const noexcept;
         NODISCARD ConstTextEffectSharedPtr GetTextEffect() const noexcept;
+
+        NODISCARD VertexBufferSharedPtr GetVertexBuffer() noexcept;
+        NODISCARD IndexBufferSharedPtr GetIndexBuffer() noexcept;
+        NODISCARD TextEffectSharedPtr GetTextEffect() noexcept;
 
         NODISCARD int GetHeight() const;
         NODISCARD int GetWidth(const std::string& message) const;
@@ -77,7 +75,7 @@ namespace Rendering
                      const Colour& color,
                      const std::string& message) const;
 
-        virtual FontSharedPtr Clone() const = 0;
+        NODISCARD virtual FontSharedPtr Clone() const = 0;
 
     private:
         int maxMessageLength;
@@ -89,4 +87,4 @@ namespace Rendering
     };
 }
 
-#endif  // RENDERING_RENDERERS_FONT_IMPL_H
+#endif  // RENDERING_LOCAL_EFFECTS_FONT_IMPL_H

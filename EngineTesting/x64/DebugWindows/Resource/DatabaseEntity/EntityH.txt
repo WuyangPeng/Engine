@@ -1,0 +1,52 @@
+$Copyright$
+
+#ifndef $NamespaceUppercaseSeparator$_$ClassUppercaseSeparator$_H
+#define $NamespaceUppercaseSeparator$_$ClassUppercaseSeparator$_H
+
+#include "Database/Configuration/ConfigurationFwd.h"
+#include "Database/DatabaseInterface/BasisDatabaseContainer.h"
+#include "Database/DatabaseInterface/DataTypeTraits.h"
+#include "Database/DatabaseInterface/DatabaseEntity.h"
+#include "Database/DatabaseInterface/Entity.h"
+
+namespace $Namespace$
+{
+    class $Class$ final : public Database::DatabaseEntity
+    {
+    public:
+        using ClassType = $Class$;
+        using ParentType = DatabaseEntity;
+
+        using DataType = Database::DataType;
+        using IndexType = Database::IndexType;
+        using WrappersStrategy = Database::WrappersStrategy;
+        using BasisDatabaseManager = Database::BasisDatabaseManager;
+        using BasisDatabaseContainer = Database::BasisDatabaseContainer;
+
+    public:
+        NODISCARD static $Class$ Create(const BasisDatabaseManager& entity, WrappersStrategy wrappersStrategy, Database::Traits::ParamType::$KeyType$ $KeyName$);
+        explicit $Class$(const BasisDatabaseManager& entity);
+        $Class$(WrappersStrategy wrappersStrategy, Database::Traits::ParamType::$KeyType$ $KeyName$);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
+
+$GetDeclaration$$SetDeclaration$$ModifyDeclaration$        NODISCARD static const DatabaseFieldContainer& GetDatabaseFieldContainer();
+        NODISCARD static BasisDatabaseManager GetSelect(Database::WrappersStrategy wrappersStrategy, Database::Traits::ParamType::$KeyType$ $KeyName$);
+
+        NODISCARD static constexpr std::string_view GetDatabaseName()
+        {
+            return databaseName;
+        }
+
+    private:
+        static constexpr std::string_view databaseName{ "$DatabaseName$" };
+
+$Describe$
+    private:
+        NODISCARD static BasisDatabaseContainer GetKeyBasisDatabaseContainer(Database::Traits::ParamType::$KeyType$ $KeyName$);
+
+    private:
+$Field$    };
+}
+
+#endif  // $NamespaceUppercaseSeparator$_$ClassUppercaseSeparator$_H

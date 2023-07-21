@@ -26,3 +26,10 @@ Database::ConfigurationStrategy Database::DatabaseFlushImpl::GetConfigurationStr
 
     return configurationStrategy;
 }
+
+Database::WrappersStrategy Database::DatabaseFlushImpl::GetWrappersStrategy() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return configurationStrategy.GetWrappersStrategy();
+}

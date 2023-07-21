@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/02/02 14:42)
+///	版本：0.9.1.1 (2023/07/18 19:27)
 
 #include "System/SystemExport.h"
 
@@ -57,30 +57,30 @@ System::WindowsHIcon System::LoadSystemIcon(WindowsHInstance instance, const TCh
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsAtom System::RegisterSystemClass(const WindowsClassEx* wndClassEx) noexcept
+System::WindowsAtom System::RegisterSystemClass(const WindowsClassEx* windowClassEx) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::RegisterClassEx(wndClassEx);
+    return ::RegisterClassEx(windowClassEx);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(wndClassEx);
+    UnusedFunction(windowClassEx);
 
     return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsUInt System::RegisterSystemWindowMessage(const TChar* string) noexcept
+System::WindowsUInt System::RegisterSystemWindowMessage(const TChar* message) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::RegisterWindowMessage(string);
+    return ::RegisterWindowMessage(message);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(string);
+    UnusedFunction(message);
 
     return 0;
 

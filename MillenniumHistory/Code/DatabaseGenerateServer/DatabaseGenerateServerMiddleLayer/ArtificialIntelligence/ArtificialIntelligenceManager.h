@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 21:42)
+///	版本：0.9.1.1 (2023/07/18 22:42)
 
 #ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_ARTIFICIAL_INTELLIGENCE_ARTIFICIAL_INTELLIGENCE_MANAGER_H
 #define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_ARTIFICIAL_INTELLIGENCE_ARTIFICIAL_INTELLIGENCE_MANAGER_H
@@ -22,9 +22,6 @@ namespace DatabaseGenerateServerMiddleLayer
     public:
         using ClassType = ArtificialIntelligenceManager;
         using ParentType = Framework::ArtificialIntelligenceInterface;
-
-        using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
-        using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
         ArtificialIntelligenceManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);

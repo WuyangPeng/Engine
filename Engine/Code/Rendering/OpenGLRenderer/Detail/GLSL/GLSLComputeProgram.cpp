@@ -12,15 +12,17 @@
 #include "GLSLComputeProgram.h"
 #include "System/OpenGL/OpenGLProgram.h"
 #include "System/OpenGL/OpenGLShader.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/Shaders/Flags/ShaderAPIType.h"
+#include "Rendering/Shaders/Reflection.h"
 
 Rendering::GLSLComputeProgram::GLSLComputeProgram(OpenGLUInt programHandle, OpenGLUInt computeShaderHandle)
     : ParentType{},
       programHandle{ programHandle },
       computeShaderHandle{ computeShaderHandle },
-      reflector{ programHandle }
+      reflector{ Reflection::Create() }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -39,7 +41,7 @@ Rendering::GLSLComputeProgram::OpenGLUInt Rendering::GLSLComputeProgram::GetComp
     return computeShaderHandle;
 }
 
-Rendering::GLSLReflection Rendering::GLSLComputeProgram::GetReflector() const
+Rendering::Reflection Rendering::GLSLComputeProgram::GetReflector() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -49,7 +51,7 @@ Rendering::GLSLReflection Rendering::GLSLComputeProgram::GetReflector() const
 Rendering::GLSLComputeProgram::ComputeProgramSharedPtr Rendering::GLSLComputeProgram::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
+
     return std::make_shared<ClassType>(*this);
 }
 

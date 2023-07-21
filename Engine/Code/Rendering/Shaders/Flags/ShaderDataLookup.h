@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:42)
+///	版本：0.9.1.1 (2023/07/01 14:55)
 
 #ifndef RENDERING_SHADERS_SHADER_DATA_LOOKUP_H
 #define RENDERING_SHADERS_SHADER_DATA_LOOKUP_H
@@ -14,16 +14,16 @@ namespace Rendering
 {
     enum class ShaderDataLookup
     {
-        ConstantBufferShaderDataLookup = 0,  // CB
-        TextureBufferShaderDataLookup = 1,  // TB
-        StructuredBufferShaderDataLookup = 2,  // SB
-        RawBufferShaderDataLookup = 3,  // RB
-        TypedBufferShaderDataLookup = 4,  // TY
-        TextureSingleShaderDataLookup = 5,  // TX
-        TextureArrayShaderDataLookup = 6,  // TA
-        SamplerStateShaderDataLookup = 7,  // SS
-        AtomicCounterBufferShaderDataLookup = 8,  // AB
-        AtomicCounterShaderDataLookup = 9,  // AC
+        ConstantBufferShaderDataLookup = 0,  // ConstantBuffer
+        TextureBufferShaderDataLookup = 1,  // TextureBuffer
+        StructuredBufferShaderDataLookup = 2,  // StructuredBuffer
+        RawBufferShaderDataLookup = 3,  // RawBuffer
+        TypedBufferShaderDataLookup = 4,  // TypedBuffer
+        TextureSingleShaderDataLookup = 5,  // TextureSingle
+        TextureArrayShaderDataLookup = 6,  // TextureArray
+        SamplerStateShaderDataLookup = 7,  //  SamplerState
+        AtomicCounterBufferShaderDataLookup = 8,  // AtomicCounterBuffer
+        AtomicCounterShaderDataLookup = 9,  // AtomicCounter
         NumLookupIndices = 10
     };
 

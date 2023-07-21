@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:44)
+///	版本：0.9.1.1 (2023/07/20 19:35)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,7 +16,10 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/LocalEffects/Detail/TextEffectImpl.h"
+#include "Rendering/Resources/Textures/Texture2D.h"
+#include "Rendering/Shaders/Shader.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, TextEffect)
 
@@ -24,69 +27,22 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, TextEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TextEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TextEffect);
 
-using namespace std::literals;
-
-namespace
+Rendering::TextEffect::TextEffect(ProgramFactory& factory, const Texture2DSharedPtr& texture)
+    : ParentType{ factory.CreateFromFiles("Resource/Shader/TextEffect.vs", "Resource/Shader/TextEffect.ps", "") },
+      impl{ factory.GetAPI(), Rendering::GetStreamSize<Mathematics::Vector3<float>>(), Rendering::GetStreamSize<Mathematics::Vector4<float>>() }
 {
-    const auto vsSource =
-        R"(
-    uniform Translate
-    {
-        vec3 translate;
-    };
+    GetVertexShader()->Set("Translate", GetTranslate());
 
-    layout(location = 0) in vec2 modelPosition;
-    layout(location = 1) in vec2 modelTCoord;
-    layout(location = 0) out vec2 vertexTCoord;
-
-    void main()
-    {
-        vertexTCoord = modelTCoord;
-        gl_Position.x = 2.0f * modelPosition.x - 1.0f + 2.0f * translate.x;
-        gl_Position.y = 2.0f * modelPosition.y - 1.0f + 2.0f * translate.y;
-        gl_Position.z = translate.z;
-        gl_Position.w = 1.0f;
-    }
-)"s;
-
-    const auto psSource =
-        R"(
-    uniform TextColor
-    {
-        vec4 textColor;
-    };
-
-    layout(location = 0) in vec2 vertexTCoord;
-    layout(location = 0) out vec4 pixelColor;
-
-    uniform sampler2D baseSampler;
-
-    void main()
-    {
-        float bitmapAlpha = texture(baseSampler, vertexTCoord).r;
-        if (bitmapAlpha > 0.5f)
-        {
-            discard;
-        }
-        pixelColor = textColor;
-    }
-)"s;
-}
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::TextEffect::TextEffect(const ProgramFactorySharedPtr& factory, const Texture2DSharedPtr& texture)
-    : ParentType{ factory->CreateFromSources(vsSource, psSource, "") }, impl{ texture, *GetProgram() }
-{
+    auto pixelShader = GetPixelShader();
+    pixelShader->Set("TextColor", GetColor());
+    pixelShader->Set("baseTexture", texture, "baseSampler", impl->GetSamplerState());
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
-#include STSTEM_WARNING_POP
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TextEffect)
 
 Rendering::TextEffect::TextEffect(LoadConstructor loadConstructor)
-    : ParentType{ loadConstructor }, impl{ CoreTools::DisableNotThrow::Disable }
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -149,14 +105,14 @@ Rendering::VisualEffect::ConstantBufferSharedPtr Rendering::TextEffect::GetTrans
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return nullptr;
+    return impl->GetTranslate();
 }
 
 Rendering::VisualEffect::ConstantBufferSharedPtr Rendering::TextEffect::GetColor() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return nullptr;
+    return impl->GetColor();
 }
 
 void Rendering::TextEffect::SetTranslate(float x, float y)

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 18:03)
+///	版本：0.9.1.1 (2023/07/18 18:17)
 
 #ifndef GAME_CLIENT_MIDDLE_LAYER_TESTING_TESTING_HELPER_H
 #define GAME_CLIENT_MIDDLE_LAYER_TESTING_TESTING_HELPER_H
@@ -14,7 +14,7 @@
 
 namespace GameClientTesting
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
     public:
         using ClassType = TestingHelper;

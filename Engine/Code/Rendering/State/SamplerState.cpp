@@ -34,6 +34,20 @@ Rendering::SamplerState::SamplerState(const std::string& name)
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
+Rendering::SamplerState::SamplerState(SamplerStateFilter filter, SamplerStateMode mode0, SamplerStateMode mode1)
+    : ParentType{ "SamplerState", GraphicsObjectType::SamplerState },
+      impl{ filter, mode0, mode1 }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::SamplerState::SamplerState(SamplerStateFilter filter, SamplerStateMode mode0, SamplerStateMode mode1, SamplerStateMode mode2)
+    : ParentType{ "SamplerState", GraphicsObjectType::SamplerState },
+      impl{ filter, mode0, mode1, mode2 }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, SamplerState)
 
 Rendering::SamplerStateFilter Rendering::SamplerState::GetFilter() const noexcept

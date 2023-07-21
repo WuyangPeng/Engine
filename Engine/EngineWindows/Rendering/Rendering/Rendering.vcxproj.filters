@@ -370,14 +370,8 @@
     <Filter Include="OpenGLRenderer 头文件\InputLayout">
       <UniqueIdentifier>{b1c52966-a11f-43f7-a390-7ac19ce672c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OpenGLRenderer 头文件\GLSL">
-      <UniqueIdentifier>{413654ed-b7a9-431a-b177-38562cf33a32}</UniqueIdentifier>
-    </Filter>
     <Filter Include="OpenGLRenderer 头文件\Detail\GLSL">
       <UniqueIdentifier>{e16e01f0-7309-4211-8984-d77adc17b64b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OpenGLRenderer 源文件\GLSL">
-      <UniqueIdentifier>{4a44c0c2-35c3-4ebe-8b6b-be3c15d50665}</UniqueIdentifier>
     </Filter>
     <Filter Include="OpenGLRenderer 源文件\Detail\GLSL">
       <UniqueIdentifier>{da9083c9-6201-437a-b23c-c58cbd2787f2}</UniqueIdentifier>
@@ -402,6 +396,21 @@
     </Filter>
     <Filter Include="RendererEngine 源文件\Detail">
       <UniqueIdentifier>{52cef25e-0337-407a-a160-1b23cc0f8e46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LocalEffects 头文件\Flags">
+      <UniqueIdentifier>{ba4b3476-a530-4b9b-aa91-adb49323c8c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LocalEffects 着色器文件">
+      <UniqueIdentifier>{a8470b29-b1fc-4628-ab39-adf7b5692c81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LocalEffects 着色器文件\Shader">
+      <UniqueIdentifier>{d7cac131-b587-4ba7-a009-c9a16da819a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalEffects 头文件\Detail">
+      <UniqueIdentifier>{1eb6e079-10bc-4f87-b64e-ba857823310b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalEffects 源文件\Detail">
+      <UniqueIdentifier>{2fd06422-101f-48eb-bc56-ab12e09407ec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -624,15 +633,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\Detail\SwitchNode.cpp">
       <Filter>Detail 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffect.cpp">
-      <Filter>GlobalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\PlanarReflectionEffect.cpp">
-      <Filter>GlobalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\PlanarShadowEffect.cpp">
-      <Filter>GlobalEffects 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\GlutRenderer\GlutRenderers.cpp">
       <Filter>GlutRenderer 源文件</Filter>
     </ClCompile>
@@ -651,61 +651,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing2.cpp">
       <Filter>ImageProcessing 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\DefaultEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightAmbEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightDirPerPixEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightDirPerVerEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerPixEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerVerEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightSptPerPixEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightSptPerVerEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\MaterialEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\MaterialTextureEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture1DEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture2AddEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture2ColorBlendEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture2DEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture2MulEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture3DEffect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\VertexColor3Effect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4Effect.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4TextureEffect.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\AmbientLightEffect.cpp">
       <Filter>LocalEffects 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLRenderTargetData.cpp">
@@ -768,12 +714,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CullerImpl.cpp">
       <Filter>SceneGraph 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\LightImpl.cpp">
-      <Filter>SceneGraph 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\MaterialImpl.cpp">
-      <Filter>SceneGraph 源文件\Detail</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\NodeImpl.cpp">
       <Filter>SceneGraph 源文件\Detail</Filter>
     </ClCompile>
@@ -828,13 +768,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Culler.cpp">
       <Filter>SceneGraph 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Light.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\LoadVisual.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Material.cpp">
       <Filter>SceneGraph 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Node.cpp">
@@ -1263,9 +1197,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightEffectImpl.cpp">
       <Filter>LocalEffects 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightCameraGeometry.cpp">
-      <Filter>LocalEffects 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RendererEngine\RenderingEnvironment.cpp">
       <Filter>RendererEngine 源文件</Filter>
     </ClCompile>
@@ -1458,68 +1389,38 @@
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLShader.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionInputImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionInput.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionInput.cpp">
-      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionOutputImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionOutput.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionOutput.cpp">
-      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionUniformImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionUniform.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionUniform.cpp">
-      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionDataBlockImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionDataBlock.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionDataBlock.cpp">
-      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionAtomicCounterBufferImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionAtomicCounterBuffer.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionAtomicCounterBuffer.cpp">
-      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionSubroutineUniformImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionSubroutineUniform.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionSubroutineUniform.cpp">
-      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionBufferVariableImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionBufferVariable.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionBufferVariable.cpp">
-      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackVaryingImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackVarying.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionTransformFeedbackVarying.cpp">
-      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackBufferImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackBuffer.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionTransformFeedbackBuffer.cpp">
-      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionImpl.cpp">
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflection.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionEnumMap.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflection.cpp">
-      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLVisualProgram.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
@@ -1574,6 +1475,261 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\ShaderData.cpp">
       <Filter>Shaders 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionImpl.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Reflection.cpp">
+      <Filter>Shaders 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\NullComputeProgram.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionUniform.cpp">
+      <Filter>Shaders 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionDataBlock.cpp">
+      <Filter>Shaders 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionAtomicCounterBuffer.cpp">
+      <Filter>Shaders 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionBufferVariable.cpp">
+      <Filter>Shaders 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionUniformImpl.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionUniformFactory.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionDataBlockImpl.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionDataBlockFactory.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionBufferVariableImpl.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionBufferVariableFactory.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionAtomicCounterBufferImpl.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionAtomicCounterBufferFactory.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionInputImpl.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionInputFactory.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionInput.cpp">
+      <Filter>Shaders 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionOutputImpl.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionOutputFactory.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionOutput.cpp">
+      <Filter>Shaders 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionSubroutineUniformImpl.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionSubroutineUniformFactory.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionSubroutineUniform.cpp">
+      <Filter>Shaders 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackBufferImpl.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackBufferFactory.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionTransformFeedbackBuffer.cpp">
+      <Filter>Shaders 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackVaryingImpl.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackVaryingFactory.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionTransformFeedbackVarying.cpp">
+      <Filter>Shaders 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionFactory.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ComputeProgramFactory.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Light.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Material.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\MaterialImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramSourcesImpl.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ProgramSources.cpp">
+      <Filter>Shaders 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightCameraGeometryImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightCameraGeometry.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\AreaLightEffectParametersImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\AreaLightEffectParameters.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\AreaLightEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\AreaLightEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\BumpMapEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\BumpMapEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\ConstantColorEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\ConstantColorEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\CubeMapEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\CubeMapEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\DirectionalLightEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\DirectionalLightTextureEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\DirectionalLightTextureEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontFactory.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H12.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H14.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H16.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H18.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H12.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H14.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H16.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H18.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\GlossMapEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\GlossMapEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\OverlayEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\Detail\PlanarShadowEffectImpl.cpp">
+      <Filter>GlobalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\Detail\PlanarReflectionEffectImpl.cpp">
+      <Filter>GlobalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\PlanarReflectionEffect.cpp">
+      <Filter>GlobalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\PlanarShadowEffect.cpp">
+      <Filter>GlobalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\Detail\LightProjectorImpl.cpp">
+      <Filter>GlobalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\ProjectionViewWorldUpdater.cpp">
+      <Filter>SceneGraph 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\LightProjector.cpp">
+      <Filter>GlobalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\PointLightEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\PointLightTextureEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\PointLightTextureEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\ProjectedTextureEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\ProjectedTextureEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\SphereMapEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\SphereMapEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\SpotLightEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture2DEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\Texture2DEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\Texture3DEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture3DEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1871,15 +2027,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9RendererFwd.h">
       <Filter>Dx9Renderer 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\PlanarReflectionEffect.h">
-      <Filter>GlobalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\PlanarShadowEffect.h">
-      <Filter>GlobalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffect.h">
-      <Filter>GlobalEffects 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffects.h">
       <Filter>GlobalEffects 头文件</Filter>
     </ClInclude>
@@ -1931,67 +2078,13 @@
     <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing3.h">
       <Filter>ImageProcessing 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightSptPerPixEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightSptPerVerEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LocalEffects.h">
       <Filter>LocalEffects 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LocalEffectsFwd.h">
       <Filter>LocalEffects 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\MaterialEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\MaterialTextureEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture1DEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture2AddEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture2ColorBlendEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture2DEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture2MulEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture3DEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VertexColor3Effect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4Effect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4TextureEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\DefaultEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightAmbEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightDirPerPixEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightDirPerVerEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerPixEffect.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerVerEffect.h">
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\AmbientLightEffect.h">
       <Filter>LocalEffects 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLAPI\OpenGLAPI.h">
@@ -2084,9 +2177,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\RendererEngine\RendererEngineFwd.h">
       <Filter>RendererEngine 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\LightImpl.h">
-      <Filter>SceneGraph 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraFrustum.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
@@ -2103,9 +2193,6 @@
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CullerImpl.h">
-      <Filter>SceneGraph 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\MaterialImpl.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\NodeImpl.h">
@@ -2153,13 +2240,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Culler.h">
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Light.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\LoadVisual.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Material.h">
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Node.h">
@@ -2405,9 +2486,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\CullingModeFlags.h">
       <Filter>SceneGraph 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\LightFlags.h">
-      <Filter>SceneGraph 头文件\Flags</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\VisualFlags.h">
       <Filter>SceneGraph 头文件\Flags</Filter>
     </ClInclude>
@@ -2421,9 +2499,6 @@
       <Filter>Detail 头文件\Flags</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\DepthStateFlags.h">
-      <Filter>Shaders 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\ShaderFlags.h">
       <Filter>Shaders 头文件\Flags</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\StencilStateFlags.h">
@@ -2843,9 +2918,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightEffectImpl.h">
       <Filter>LocalEffects 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightCameraGeometry.h">
-      <Filter>LocalEffects 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\RendererEngine\RenderingEnvironment.h">
       <Filter>RendererEngine 头文件</Filter>
     </ClInclude>
@@ -3044,71 +3116,38 @@
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLProgramFactory.h">
       <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Flags\ReferenceType.h">
-      <Filter>OpenGLRenderer 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionInputImpl.h">
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionInput.h">
       <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionInput.h">
-      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionOutputImpl.h">
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionOutput.h">
       <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionOutput.h">
-      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionUniformImpl.h">
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionUniform.h">
       <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionUniform.h">
-      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionDataBlockImpl.h">
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionDataBlock.h">
       <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionDataBlock.h">
-      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionAtomicCounterBufferImpl.h">
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionAtomicCounterBuffer.h">
       <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionAtomicCounterBuffer.h">
-      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionSubroutineUniformImpl.h">
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionSubroutineUniform.h">
       <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionSubroutineUniform.h">
-      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionBufferVariableImpl.h">
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionBufferVariable.h">
       <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionBufferVariable.h">
-      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackVaryingImpl.h">
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackVarying.h">
       <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionTransformFeedbackVarying.h">
-      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackBufferImpl.h">
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackBuffer.h">
       <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionTransformFeedbackBuffer.h">
-      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionImpl.h">
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflection.h">
       <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionEnumMap.h">
       <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflection.h">
-      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderImplDetail.h">
       <Filter>Shaders 模板文件\Detail</Filter>
@@ -3173,6 +3212,276 @@
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\ShaderData.h">
       <Filter>Shaders 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionImpl.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Reflection.h">
+      <Filter>Shaders 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\ReferenceType.h">
+      <Filter>Shaders 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\NullComputeProgram.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionUniform.h">
+      <Filter>Shaders 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionDataBlock.h">
+      <Filter>Shaders 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionAtomicCounterBuffer.h">
+      <Filter>Shaders 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionBufferVariable.h">
+      <Filter>Shaders 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionUniformImpl.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionUniformFactory.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionDataBlockImpl.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionDataBlockFactory.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionBufferVariableImpl.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionBufferVariableFactory.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionAtomicCounterBufferImpl.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionAtomicCounterBufferFactory.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionInputImpl.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionInputFactory.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionInput.h">
+      <Filter>Shaders 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionOutputImpl.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionOutputFactory.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionOutput.h">
+      <Filter>Shaders 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionSubroutineUniformImpl.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionSubroutineUniformFactory.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionSubroutineUniform.h">
+      <Filter>Shaders 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackBufferImpl.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackBufferFactory.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionTransformFeedbackBuffer.h">
+      <Filter>Shaders 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackVaryingImpl.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackVaryingFactory.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionTransformFeedbackVarying.h">
+      <Filter>Shaders 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionFactory.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ComputeProgramFactory.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Light.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Material.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\MaterialImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Flags\LightFlags.h">
+      <Filter>LocalEffects 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramSourcesImpl.h">
+      <Filter>Shaders 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ProgramSources.h">
+      <Filter>Shaders 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightCameraGeometryImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightCameraGeometry.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\AreaLightEffectParametersImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\AreaLightEffectParameters.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\AreaLightEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\AreaLightEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\BumpMapEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\BumpMapEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\ConstantColorEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\ConstantColorEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\CubeMapEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\CubeMapEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\DirectionalLightEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\DirectionalLightTextureEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\DirectionalLightTextureEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Flags\FontFlags.h">
+      <Filter>LocalEffects 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontFactory.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LocalEffectsInternalFwd.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H12.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H14.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H16.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H18.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H12.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H14.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H16.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H18.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\GlossMapEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\GlossMapEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\OverlayEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\Detail\PlanarShadowEffectImpl.h">
+      <Filter>GlobalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\Detail\PlanarReflectionEffectImpl.h">
+      <Filter>GlobalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\PlanarReflectionEffect.h">
+      <Filter>GlobalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\PlanarShadowEffect.h">
+      <Filter>GlobalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\Detail\LightProjectorImpl.h">
+      <Filter>GlobalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\ProjectionViewWorldUpdater.h">
+      <Filter>SceneGraph 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\LightProjector.h">
+      <Filter>GlobalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CullingPlane.h">
+      <Filter>SceneGraph 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\PointLightEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\PointLightTextureEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\PointLightTextureEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\ProjectedTextureEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\ProjectedTextureEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\SphereMapEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\SphereMapEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\SpotLightEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture2DEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\Texture2DEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\Texture3DEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture3DEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
@@ -3180,6 +3489,129 @@
     </None>
     <None Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\AmbientLightEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\AmbientLightEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\AreaLightEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\AreaLightEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\BumpMapEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\BumpMapEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\ConstantColorEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\ConstantColorEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\CubeMapEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\CubeMapEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.vs.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.vs.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.ps.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.ps.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightTextureEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightTextureEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\GlossMapEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\GlossMapEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\OverlayEffectColor.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\OverlayEffectGray.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\OverlayEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.ps.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.vs.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.vs.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.ps.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightTextureEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightTextureEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\ProjectedTextureEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\ProjectedTextureEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\SphereMapEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\SphereMapEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.vs.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.ps.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.ps.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.vs.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\TextEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\TextEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture2DEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture2DEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture3DEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture3DEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -3213,5 +3645,130 @@
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\AmbientLightEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\AmbientLightEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\AreaLightEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\AreaLightEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\BumpMapEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\BumpMapEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\ConstantColorEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\ConstantColorEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\CubeMapEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\CubeMapEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.vs.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.vs.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.ps.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.ps.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightTextureEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightTextureEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\GlossMapEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\GlossMapEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\OverlayEffectColor.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\OverlayEffectGray.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\OverlayEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.ps.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.ps.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.vs.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.vs.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightTextureEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightTextureEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\ProjectedTextureEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\ProjectedTextureEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\SphereMapEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\SphereMapEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.vs.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.vs.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.ps.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.ps.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\TextEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\TextEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture2DEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture2DEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture3DEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture3DEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

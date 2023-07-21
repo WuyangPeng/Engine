@@ -20,7 +20,6 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/DataTypes/Colour.h"
 #include "Rendering/DataTypes/DataTypesFwd.h"
-#include "Rendering/GlobalEffects/GlobalEffect.h"
 #include "Rendering/GlobalEffects/GlobalEffectsFwd.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
@@ -132,6 +131,7 @@ namespace Rendering
         void SetBlendState(const BlendStateSharedPtr& state);
         NODISCARD BlendStateSharedPtr GetBlendState() noexcept;
         NODISCARD BlendStateSharedPtr GetDefaultBlendState() noexcept;
+        void SetDefaultBlendState();
 
         void SetDepthStencilState(const DepthStencilStateSharedPtr& state);
         NODISCARD DepthStencilStateSharedPtr GetDepthStencilState() noexcept;

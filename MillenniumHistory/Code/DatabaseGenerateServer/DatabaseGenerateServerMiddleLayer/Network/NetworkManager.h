@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 21:48)
+///	版本：0.9.1.1 (2023/07/18 22:35)
 
 #ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_NETWORK_NETWORK_MANAGER_H
 #define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_NETWORK_NETWORK_MANAGER_H
@@ -22,9 +22,6 @@ namespace DatabaseGenerateServerMiddleLayer
     public:
         using ClassType = NetworkManager;
         using ParentType = Framework::NetworkManagerInterface;
-
-        using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
-        using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
         NetworkManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);

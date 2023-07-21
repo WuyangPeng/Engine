@@ -60,11 +60,11 @@ namespace AncientBooks
         NODISCARD IntContainerConstIter GetOtherAuthorEnd() const noexcept override;
         NODISCARD CharacterContainer GetOtherAuthor(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD StringContainer GetAuthorDescribe() const override;
-        NODISCARD int GetAuthorDescribeCount() const override;
-        NODISCARD String GetAuthorDescribe(int index) const override;
-        NODISCARD StringContainerConstIter GetAuthorDescribeBegin() const noexcept override;
-        NODISCARD StringContainerConstIter GetAuthorDescribeEnd() const noexcept override;
+        NODISCARD StringContainer GetAuthorNotes() const override;
+        NODISCARD int GetAuthorNotesCount() const override;
+        NODISCARD String GetAuthorNotes(int index) const override;
+        NODISCARD StringContainerConstIter GetAuthorNotesBegin() const noexcept override;
+        NODISCARD StringContainerConstIter GetAuthorNotesEnd() const noexcept override;
 
     private:
         int id;  // Id
@@ -76,7 +76,7 @@ namespace AncientBooks
         int year;  // 年
         String version;  // 版本
         IntContainer otherAuthor;  // 其他作者
-        StringContainer authorDescribe;  // 作者描述
+        StringContainer authorNotes;  // 作者描述
     };
 }
 

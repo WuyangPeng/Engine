@@ -10,53 +10,78 @@
 #include "Rendering/RenderingExport.h"
 
 #include "Font.h"
+#include "Detail/FontFactory.h"
+#include "Detail/FontImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-#include <stdexcept>
+COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Rendering, Font)
 
-std::shared_ptr<const Rendering::VertexBuffer> Rendering::Font::GetVertexBuffer() const noexcept
+Rendering::Font::Font(FontType fontType, ProgramFactory& factory, int maxMessageLength)
+    : impl{ CoreTools::ImplCreateUseFactory::Default, fontType, factory, maxMessageLength }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::Font::ConstVertexBufferSharedPtr Rendering::Font::GetVertexBuffer() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return nullptr;
+    return impl->GetVertexBuffer();
 }
 
-std::shared_ptr<const Rendering::IndexBuffer> Rendering::Font::GetIndexBuffer() const noexcept
+Rendering::Font::ConstIndexBufferSharedPtr Rendering::Font::GetIndexBuffer() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return nullptr;
+    return impl->GetIndexBuffer();
 }
 
-std::shared_ptr<const Rendering::TextEffect> Rendering::Font::GetTextEffect() const noexcept
+Rendering::Font::ConstTextEffectSharedPtr Rendering::Font::GetTextEffect() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return nullptr;
+    return impl->GetTextEffect();
 }
 
-std::shared_ptr<Rendering::VertexBuffer> Rendering::Font::GetVertexBuffer() noexcept
+int Rendering::Font::GetHeight() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetHeight();
+}
+
+int Rendering::Font::GetWidth(const std::string& message) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWidth(message);
+}
+
+void Rendering::Font::Typeset(int viewportWidth, int viewportHeight, int x, int y, const Colour& color, const std::string& message) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->Typeset(viewportWidth, viewportHeight, x, y, color, message);
+}
+
+Rendering::Font::VertexBufferSharedPtr Rendering::Font::GetVertexBuffer() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return nullptr;
+    return impl->GetVertexBuffer();
 }
 
-std::shared_ptr<Rendering::IndexBuffer> Rendering::Font::GetIndexBuffer() noexcept
+Rendering::Font::IndexBufferSharedPtr Rendering::Font::GetIndexBuffer() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return nullptr;
+    return impl->GetIndexBuffer();
 }
 
-std::shared_ptr<Rendering::TextEffect> Rendering::Font::GetTextEffect() noexcept
+Rendering::Font::TextEffectSharedPtr Rendering::Font::GetTextEffect() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return nullptr;
-}
-
-void Rendering::Font::Typeset(MAYBE_UNUSED int getWidth, MAYBE_UNUSED int getHeight, MAYBE_UNUSED int i, MAYBE_UNUSED int y, MAYBE_UNUSED const Colour<float>& color, MAYBE_UNUSED const std::string& string) noexcept
-{
+    return impl->GetTextEffect();
 }

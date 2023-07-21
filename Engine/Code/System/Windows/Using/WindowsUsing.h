@@ -5,18 +5,22 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/02/02 14:38)
+///	版本：0.9.1.1 (2023/07/19 18:54)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_USING_H
 #define SYSTEM_WINDOWS_WINDOWS_USING_H
 
+#include "WindowsPictorialUsing.h"
 #include "System/Helper/Platform.h"
+#include "System/Helper/UnicodeUsing.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
 
     #include <TlHelp32.h>
 
 #endif  // SYSTEM_PLATFORM_WIN32
+
+#include <array>
 
 namespace System
 {
@@ -52,7 +56,6 @@ namespace System
     using WindowsLargeInteger = LARGE_INTEGER;
     using WindowsLargeIntegerPtr = PLARGE_INTEGER;
 
-    using WindowsConstGuidPtr = LPCGUID;
     using WindowsConstVoidPtr = LPCVOID;
     using WindowsVoidPtr = LPVOID;
 
@@ -60,6 +63,9 @@ namespace System
     using WindowsWordPtr = LPWORD;
     using WindowsDWord = DWORD;
     using WindowsDWordPtr = PDWORD;
+
+    constexpr WindowsDWord gMaxPath{ MAX_PATH };
+    using TCharContainer = std::array<TChar, gMaxPath>;
 
     using WindowsULongPtrSizeType = ULONG_PTR;
     using WindowsULongPtrSizeTypePtr = PULONG_PTR;
@@ -79,8 +85,8 @@ namespace System
     using WindowsHWnd = HWND;
     using WindowsHMenu = HMENU;
     using WindowsRect = RECT;
-    using WindowsMsg = MSG;
-    using WindowsHAccel = HACCEL;
+    using WindowsMessage = MSG;
+    using WindowsHAccelerator = HACCEL;
     using WindowsHLocal = HLOCAL;
     using WindowsLResult = LRESULT;
     using WindowsProcess = WNDPROC;
@@ -91,7 +97,7 @@ namespace System
     using WindowsSystemInfo = SYSTEM_INFO;
     using WindowsHandle = HANDLE;
     using WindowsHandlePtr = PHANDLE;
-    using WindowsDlgProc = DLGPROC;
+    using WindowsDialogueProcedure = DLGPROC;
 
     constexpr auto maxModuleName32 = MAX_MODULE_NAME32;
     constexpr auto windowExceptionMaximumParameters = EXCEPTION_MAXIMUM_PARAMETERS;
@@ -109,14 +115,13 @@ namespace System
     using WindowsImageImportDescriptorPtr = PIMAGE_IMPORT_DESCRIPTOR;
     using WindowsTextMetric = TEXTMETRIC;
 
-    constexpr WindowsDWord gMaxPath{ MAX_PATH };
-
     using SystemHResult = HRESULT;
-    using SystemIID = IID;
-    using SystemCLSID = CLSID;
-    using SystemGUID = GUID;
+    using SystemInterfaceIdentifier = IID;
+    using SystemClassIdentifier = CLSID;
+    using SystemGloballyUniqueIdentifier = GUID;
+    using WindowsConstGloballyUniqueIdentifierPtr = LPCGUID;
 
-    constexpr SystemHResult gResultOK{ S_OK };
+    constexpr SystemHResult gResultOk{ S_OK };
     constexpr SystemHResult gResultNoInterface{ E_NOINTERFACE };
     constexpr SystemHResult gResultClassNoaggregation{ CLASS_E_NOAGGREGATION };
     constexpr SystemHResult gNoError{ NOERROR };
@@ -190,7 +195,6 @@ namespace System
     };
     using WindowsLargeIntegerPtr = WindowsLargeInteger*;
 
-    using WindowsConstGuidPtr = const SystemGUID*;
     using WindowsConstVoidPtr = const void*;
     using WindowsVoidPtr = void*;
 
@@ -199,14 +203,17 @@ namespace System
     using WindowsDWord = uint32_t;
     using WindowsDWordPtr = WindowsDWord*;
 
+    constexpr WindowsDWord gMaxPath{ 260 };
+    using TCharContainer = std::array<TChar, gMaxPath>;
+
     using WindowsULongPtrSizeType = uint64_t;
-    using WindowsULongPtrSizeTypePtr = uint64_t*;
+    using WindowsULongPtrSizeTypePtr = WindowsULongPtrSizeType*;
     using WindowsLongPtrSizeType = int64_t;
-    using WindowsLongPtrSizeTypePtr = int64_t*;
+    using WindowsLongPtrSizeTypePtr = WindowsLongPtrSizeType*;
     using WindowsIntPtrSizeType = int64_t;
-    using WindowsIntPtrSizeTypePtr = int64_t*;
+    using WindowsIntPtrSizeTypePtr = WindowsIntPtrSizeType*;
     using WindowsDWordPtrSizeType = uint64_t;
-    using WindowsDWordPtrSizeTypePtr = uint64_t*;
+    using WindowsDWordPtrSizeTypePtr = WindowsDWordPtrSizeType*;
 
     struct WindowsPointSize
     {
@@ -244,7 +251,7 @@ namespace System
         WindowsLong bottom;
     };
 
-    struct WindowsMsg
+    struct WindowsMessage
     {
         WindowsHWnd hwnd;
         uint32_t message;
@@ -254,11 +261,11 @@ namespace System
         WindowsPoint pt;
     };
 
-    struct WindowHaccelDeclare
+    struct WindowsHAcceleratorDeclare
     {
         int unused;
     };
-    using WindowsHAccel = WindowHaccelDeclare*;
+    using WindowsHAccelerator = WindowsHAcceleratorDeclare*;
 
     using WindowsHLocal = void*;
     using WindowsLResult = int;
@@ -300,26 +307,26 @@ namespace System
 
     struct WindowsSystemInfo
     {
-        uint16_t wProcessorArchitecture;  // 处理器的体系结构
+        uint16_t wProcessorArchitecture;
         uint16_t wReserved;
-        uint32_t dwPageSize;  // 分页大小
-        void* lpMinimumApplicationAddress;  // 最小寻址空间
-        void* lpMaximumApplicationAddress;  // 最大寻址空间
-        uint32_t dwActiveProcessorMask;  // 处理器掩码
-        uint32_t dwNumberOfProcessors;  // 处理器数目
-        uint32_t dwProcessorType;  // 处理器类型
-        uint32_t dwAllocationGranularity;  // 虚拟内存空间的粒度
-        uint16_t wProcessorLevel;  // 处理器等级
-        uint16_t wProcessorRevision;  // 处理器版本
+        uint32_t dwPageSize;
+        void* lpMinimumApplicationAddress;
+        void* lpMaximumApplicationAddress;
+        uint32_t dwActiveProcessorMask;
+        uint32_t dwNumberOfProcessors;
+        uint32_t dwProcessorType;
+        uint32_t dwAllocationGranularity;
+        uint16_t wProcessorLevel;
+        uint16_t wProcessorRevision;
     };
 
     using WindowsHandle = void*;
     using WindowsHandlePtr = WindowsHandle*;
-    using WindowsDlgProc = WindowsIntPtrSizeType (*)(WindowsHWnd, WindowsUInt, WindowsWParam, WindowsLParam);
+    using WindowsDialogueProcedure = WindowsIntPtrSizeType (*)(WindowsHWnd, WindowsUInt, WindowsWParam, WindowsLParam);
 
-    constexpr int maxModuleName32{ 255 };
-    constexpr int windowExceptionMaximumParameters{ 15 };
-    const WindowsHandle invalidHandleValue{ reinterpret_cast<WindowsHandle>(int(-1)) };
+    constexpr auto maxModuleName32 = 255;
+    constexpr auto windowExceptionMaximumParameters = 15;
+    const WindowsHandle invalidHandleValue{ reinterpret_cast<WindowsHandle>(-1) };
 
     struct WindowsModuleEntry32
     {
@@ -340,15 +347,15 @@ namespace System
     {
         uint32_t ExceptionCode;
         uint32_t ExceptionFlags;
-        ExceptionRecord* ExceptionRecord;
+        WindowsExceptionRecord* ExceptionRecord;
         void* ExceptionAddress;
         uint32_t NumberParameters;
         uint64_t ExceptionInformation[windowExceptionMaximumParameters];
     };
     using WindowsExceptionRecordPtr = WindowsExceptionRecord*;
 
-    constexpr auto g_WindowMaximumSupportedExtension = 512;
-    constexpr auto g_WindowSizeOf80387Registers = 80;
+    constexpr auto gWindowMaximumSupportedExtension = 512;
+    constexpr auto gWindowSizeOf80387Registers = 80;
 
     struct WindowFloatingSaveArea
     {
@@ -359,7 +366,7 @@ namespace System
         uint32_t ErrorSelector;
         uint32_t DataOffset;
         uint32_t DataSelector;
-        unsigned char RegisterArea[g_WindowSizeOf80387Registers];
+        unsigned char RegisterArea[gWindowSizeOf80387Registers];
         uint32_t Cr0NpxState;
     };
 
@@ -389,9 +396,9 @@ namespace System
         uint32_t EFlags;
         uint32_t Esp;
         uint32_t SegSs;
-        unsigned char ExtendedRegisters[g_WindowMaximumSupportedExtension];
+        unsigned char ExtendedRegisters[gWindowMaximumSupportedExtension];
     };
-    using PWindowContext = WindowsContext*;
+    using WindowsContextPtr = WindowsContext*;
 
     struct WindowsExceptionPointers
     {
@@ -439,11 +446,9 @@ namespace System
         uint8_t tmCharSet;
     };
 
-    constexpr WindowsDWord gMaxPath{ 260 };
-
     using SystemHResult = long;
 
-    struct SystemIID
+    struct SystemInterfaceIdentifier
     {
         unsigned long Data1;
         unsigned short Data2;
@@ -451,12 +456,13 @@ namespace System
         unsigned char Data4[8];
     };
 
-    using SystemCLSID = SystemIID;
-    using SystemGUID = SystemIID;
+    using SystemClassIdentifier = SystemInterfaceIdentifier;
+    using SystemGloballyUniqueIdentifier = SystemInterfaceIdentifier;
+    using WindowsConstGloballyUniqueIdentifierPtr = const SystemGloballyUniqueIdentifier*;
 
     constexpr SystemHResult gResultOK{ 0 };
-    constexpr SystemHResult gResultNoInterface{ 0x80004002L };
-    constexpr SystemHResult gResultClassNoaggregation{ 0x80040110L };
+    constexpr SystemHResult gResultNoInterface{ static_cast<SystemHResult>(0x80004002L) };
+    constexpr SystemHResult gResultClassNoaggregation{ static_cast<SystemHResult>(0x80040110L) };
     constexpr SystemHResult gNoError{ 0 };
 
     using GetWindowsInformationFunction = int (*)(WindowsHWnd, const TChar*, int);

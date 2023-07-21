@@ -1,69 +1,70 @@
-///	Copyright (c) 2010-2023
+Ôªø///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///	‰ΩúËÄÖÔºöÂΩ≠Ê≠¶Èò≥ÔºåÂΩ≠ÊôîÊÅ©ÔºåÂΩ≠ÊôîÊ≥Ω
+///	ËÅîÁ≥ª‰ΩúËÄÖÔºö94458936@qq.com
 ///
-///	±Í◊º£∫std:c++20
-///	“˝«Ê∞Ê±æ£∫0.9.0.12 (2023/06/12 13:48)
+///	Ê†áÂáÜÔºöstd:c++20
+///	ÁâàÊú¨Ôºö0.9.1.1 (2023/07/17 15:59)
 
 #ifndef RENDERING_GLOBAL_EFFECTS_PLANAR_SHADOW_EFFECT_H
 #define RENDERING_GLOBAL_EFFECTS_PLANAR_SHADOW_EFFECT_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "GlobalEffect.h"
-#include "CoreTools/ObjectSystems/ObjectAssociated.h"
-#include "Mathematics/Algebra/Matrix.h"
-#include "Mathematics/Base/Float.h"
-#include "Rendering/LocalEffects/MaterialEffect.h"
-#include "Rendering/SceneGraph/Light.h"
-#include "Rendering/SceneGraph/Node.h"
-#include "Rendering/SceneGraph/TrianglesMesh.h"
+#include "CoreTools/Contract/ContractFwd.h"
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
+#include "Mathematics/Algebra/AlgebraFwd.h"
+#include "Rendering/GlobalEffects/GlobalEffectsFwd.h"
+#include "Rendering/LocalEffects/LocalEffectsFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
+#include "Rendering/SceneGraph/SceneGraphFwd.h"
+#include "Rendering/Shaders/ShadersFwd.h"
+#include "Rendering/State/StateFwd.h"
+
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(PlanarShadowEffect, PlanarShadowEffectImpl);
 
 namespace Rendering
 {
-    class PlanarShadowEffect : public GlobalEffect
+    class RENDERING_DEFAULT_DECLARE PlanarShadowEffect
     {
     public:
-        using ClassType = PlanarShadowEffect;
-        using ParentType = GlobalEffect;
+        COPY_UNSHARED_TYPE_DECLARE(PlanarShadowEffect);
 
-    private:
-        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(PlanarShadowEffect);
-        CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
+        using NodeSharedPtr = std::shared_ptr<Node>;
+        using VisualSharedPtr = std::shared_ptr<Visual>;
+        using VisualContainer = std::vector<VisualSharedPtr>;
+        using Vector4 = Mathematics::Vector4<float>;
+        using Vector4Container = std::vector<Vector4>;
+        using BlendStateSharedPtr = std::shared_ptr<BlendState>;
+        using DepthStencilStateSharedPtr = std::shared_ptr<DepthStencilState>;
+        using ConstantColorEffectSharedPtr = std::shared_ptr<ConstantColorEffect>;
+        using ConstantColorEffectContainer = std::vector<ConstantColorEffectSharedPtr>;
+        using VisualEffectSharedPtr = std::shared_ptr<VisualEffect>;
+        using VisualEffectContainer = std::vector<VisualEffectSharedPtr>;
+        using ModelSpaceTrianglesType = std::vector<std::array<Vector4, 3>>;
+        using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactory>;
+        using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
+        using Matrix4 = Mathematics::Matrix4<float>;
+        using Matrix = Mathematics::Matrix<float>;
+        using SpatialSharedPtr = std::shared_ptr<Spatial>;
+        using LightProjectorSharedPtr = std::shared_ptr<LightProjector>;
 
     public:
-        PlanarShadowEffect(int numPlanes, const NodeSharedPtr& shadowCaster);
+        explicit PlanarShadowEffect(const BaseRendererSharedPtr& engine,
+                                    const ProgramFactorySharedPtr& factory,
+                                    const NodeSharedPtr& shadowCaster,
+                                    const LightProjectorSharedPtr& lightProjector,
+                                    const VisualContainer& planeVisuals,
+                                    const Vector4Container& shadowColors);
 
-        CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-        void Draw(BaseRenderer& renderer, VisibleSet& visibleSet) noexcept override;
-
-        NODISCARD int GetNumPlanes() const noexcept;
-        void SetPlane(int i, const TrianglesMeshSharedPtr& plane);
-        NODISCARD ConstTrianglesMeshSharedPtr GetPlane(int i) const;
-        void SetProjector(int i, Light* projector);
-        NODISCARD ConstLightSharedPtr GetProjector(int i) const;
-        void SetShadowColor(int i, const Mathematics::Float4& shadowColor);
-        NODISCARD const Mathematics::Float4& GetShadowColor(int i) const;
-        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
-
-    protected:
-        NODISCARD bool GetProjectionMatrix(int i, Mathematics::MatrixF& projection);
+        void Draw(const BaseRendererSharedPtr& engine, ProjectionViewWorldUpdater& projectionViewWorldMatrices);
 
     private:
-        int numPlanes;
-        std::vector<CoreTools::ObjectAssociated<TrianglesMesh>> planes;
-        std::vector<CoreTools::ObjectAssociated<Light>> projectors;
-        std::vector<Mathematics::Float4> shadowColors;
-        CoreTools::ObjectAssociated<Node> shadowCaster;
-
-        MaterialSharedPtr material;
-        MaterialEffectSharedPtr materialEffect;
+        PackageType impl;
     };
-
-    CORE_TOOLS_SHARED_PTR_DECLARE(PlanarShadowEffect);
 }
 
 #endif  // RENDERING_GLOBAL_EFFECTS_PLANAR_SHADOW_EFFECT_H

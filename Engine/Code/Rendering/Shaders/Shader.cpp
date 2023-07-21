@@ -5,13 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:52)
+///	版本：0.9.1.1 (2023/07/05 14:36)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ShaderDetail.h"
+#include "Flags/ReferenceType.h"
 #include "Detail/ShaderFactory.h"
 #include "Detail/ShaderImpl.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -23,6 +25,7 @@
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
 #include "Rendering/Resources/Buffers/StructuredBuffer.h"
 #include "Rendering/Resources/Buffers/TextureBuffer.h"
+#include "Rendering/Shaders/Reflection.h"
 
 COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Rendering, Shader)
 
@@ -30,7 +33,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Shader);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Shader);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Shader);
 
-Rendering::Shader::Shader(GraphicsObjectType graphicsObjectType, RendererTypes rendererTypes, const GLSLReflection& reflector, ReferenceType referenceType)
+Rendering::Shader::Shader(GraphicsObjectType graphicsObjectType, RendererTypes rendererTypes, const Reflection& reflector, ReferenceType referenceType)
     : ParentType{ "Shader", graphicsObjectType }, impl{ CoreTools::ImplCreateUseFactory::Default, rendererTypes, reflector, referenceType }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -100,7 +103,7 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::Shader::CloneObject() const
 }
 
 Rendering::Shader::Shader(LoadConstructor loadConstructor)
-    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseFactory::Default, RendererTypes::Default, GLSLReflection{ 0 }, ReferenceType::Vertex }
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseFactory::Default, RendererTypes::Default, Reflection::Create(), ReferenceType::Vertex }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -120,14 +123,14 @@ int64_t Rendering::Shader::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto registerID = ParentType::Register(target);
+    const auto registerId = ParentType::Register(target);
 
-    if (0 < registerID)
+    if (0 < registerId)
     {
         impl->Register(target);
     }
 
-    return registerID;
+    return registerId;
 }
 
 void Rendering::Shader::Save(CoreTools::BufferTarget& target) const
@@ -221,9 +224,11 @@ bool Rendering::Shader::IsValid(const ShaderData& goal, const SamplerState* reso
     return impl->IsValid(goal, resource);
 }
 
-Rendering::Shader::RendererObjectSharedPtr Rendering::Shader::CreateRendererObject(MAYBE_UNUSED RendererTypes rendererTypes)
+Rendering::Shader::RendererObjectSharedPtr Rendering::Shader::CreateRendererObject(RendererTypes rendererTypes)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数未实现"));
+    System::UnusedFunction(rendererTypes);
+
+    THROW_EXCEPTION(SYSTEM_TEXT("着色器无法生成RendererObject。"))
 }

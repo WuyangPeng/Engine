@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:29)
+///	版本：0.9.1.1 (2023/07/05 11:15)
 
 #ifndef RENDERING_SHADERS_PROGRAM_FACTORY_IMPL_H
 #define RENDERING_SHADERS_PROGRAM_FACTORY_IMPL_H
@@ -26,19 +26,18 @@ namespace Rendering
     public:
         using ClassType = ProgramFactoryImpl;
         using FactoryType = ClassType;
+
         using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactoryImpl>;
         using VisualProgramSharedPtr = std::shared_ptr<VisualProgram>;
         using ComputeProgramSharedPtr = std::shared_ptr<ComputeProgram>;
-        using DefinesType = std::pair<std::string, std::string>;
-        using Container = std::vector<DefinesType>;
-        using ContainerConstIter = Container::const_iterator;
+        using ContainerConstIter = ProgramDefines::ContainerConstIter;
 
     public:
-        ProgramFactoryImpl(const std::string& version,
-                           const std::string& vsEntry,
-                           const std::string& psEntry,
-                           const std::string& gsEntry,
-                           const std::string& csEntry,
+        ProgramFactoryImpl(std::string version,
+                           std::string vertexShaderEntry,
+                           std::string pixelShaderEntry,
+                           std::string geometryShaderEntry,
+                           std::string computeShaderEntry,
                            int flags);
         explicit ProgramFactoryImpl(CoreTools::DisableNotThrow disableNotThrow);
         virtual ~ProgramFactoryImpl() noexcept = default;
@@ -51,13 +50,13 @@ namespace Rendering
 
         NODISCARD virtual ShaderAPIType GetAPI() const noexcept = 0;
 
-        NODISCARD VisualProgramSharedPtr CreateFromFiles(const std::string& vsFile, const std::string& psFile, const std::string& gsFile);
-        NODISCARD VisualProgramSharedPtr CreateFromSources(const std::string& vsSource, const std::string& psSource, const std::string& gsSource);
+        NODISCARD VisualProgramSharedPtr CreateFromFiles(const std::string& vertexShaderFile, const std::string& pixelShaderFile, const std::string& geometryShaderFile);
+        NODISCARD VisualProgramSharedPtr CreateFromSources(const std::string& vertexShaderSource, const std::string& pixelShaderSource, const std::string& geometryShaderSource);
 
-        NODISCARD ComputeProgramSharedPtr CreateFromFile(const std::string& csFile);
-        NODISCARD ComputeProgramSharedPtr CreateFromSource(const std::string& csSource);
+        NODISCARD ComputeProgramSharedPtr CreateFromFile(const std::string& computeShaderFile);
+        NODISCARD ComputeProgramSharedPtr CreateFromSource(const std::string& computeShaderSource);
 
-        NODISCARD static std::string GetStringFromFile(const std::string& filename);
+        NODISCARD static std::string GetStringFromFile(const std::string& fileName);
 
         void PushDefines();
         void PopDefines();
@@ -67,14 +66,14 @@ namespace Rendering
         NODISCARD static ProgramFactorySharedPtr Create(RendererTypes rendererTypes);
 
     protected:
-        NODISCARD virtual VisualProgramSharedPtr CreateFromNamedSources(const std::string& vsName,
-                                                                        const std::string& vsSource,
-                                                                        const std::string& psName,
-                                                                        const std::string& psSource,
-                                                                        const std::string& gsName,
-                                                                        const std::string& gsSource) = 0;
+        NODISCARD virtual VisualProgramSharedPtr CreateFromNamedSources(const std::string& vertexShaderName,
+                                                                        const std::string& vertexShaderSource,
+                                                                        const std::string& pixelShaderName,
+                                                                        const std::string& pixelShaderSource,
+                                                                        const std::string& geometryShaderName,
+                                                                        const std::string& geometryShaderSource) = 0;
 
-        NODISCARD virtual ComputeProgramSharedPtr CreateFromNamedSource(const std::string& csName, const std::string& csSource) = 0;
+        NODISCARD virtual ComputeProgramSharedPtr CreateFromNamedSource(const std::string& computeShaderName, const std::string& computeShaderSource) = 0;
 
         NODISCARD std::string GetVersion() const;
         NODISCARD int GetDefinesSize() const;
@@ -88,10 +87,10 @@ namespace Rendering
 
     private:
         std::string version;
-        std::string vsEntry;
-        std::string psEntry;
-        std::string gsEntry;
-        std::string csEntry;
+        std::string vertexShaderEntry;
+        std::string pixelShaderEntry;
+        std::string geometryShaderEntry;
+        std::string computeShaderEntry;
         ProgramDefines defines;
         int flags;
 

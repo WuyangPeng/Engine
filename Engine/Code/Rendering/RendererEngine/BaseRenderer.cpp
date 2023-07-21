@@ -397,6 +397,13 @@ Rendering::BaseRenderer::BlendStateSharedPtr Rendering::BaseRenderer::GetDefault
     return impl->GetDefaultBlendState();
 }
 
+void Rendering::BaseRenderer::SetDefaultBlendState()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetDefaultBlendState();
+}
+
 void Rendering::BaseRenderer::SetDepthStencilState(const DepthStencilStateSharedPtr& state)
 {
     RENDERING_CLASS_IS_VALID_9;

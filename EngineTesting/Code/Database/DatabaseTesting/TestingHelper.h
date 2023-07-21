@@ -46,6 +46,7 @@ namespace Database
         void AddMariaDBWrappersSuite();
         void AddMongoWrappersSuite();
         void AddRedisWrappersSuite();
+        void AddDatabaseEntityCodeGenerationSuite();
     };
 }
 

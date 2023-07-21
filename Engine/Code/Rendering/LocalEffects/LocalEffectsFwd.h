@@ -5,40 +5,40 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:42)
+///	版本：0.9.1.1 (2023/07/05 15:27)
 
 #ifndef RENDERING_LOCAL_EFFECTS_FWD_H
 #define RENDERING_LOCAL_EFFECTS_FWD_H
 
 namespace Rendering
 {
-    class OverlayEffect;
+    class Material;
+    class Light;
     class VisualEffect;
     class LightCameraGeometry;
-
-    class DefaultEffect;
-    class LightAmbEffect;
-    class LightDirPerPixEffect;
-    class LightDirPerVerEffect;
-    class LightPntPerPixEffect;
-    class LightPntPerVerEffect;
-    class LightSptPerPixEffect;
-    class LightSptPerVerEffect;
-    class MaterialEffect;
-    class MaterialTextureEffect;
-    class Texture1DEffect;
-    class Texture2AddEffect;
-    class Texture2ColorBlendEffect;
-    class Texture2DEffect;
-    class Texture2MulEffect;
-    class Texture3DEffect;
-    class VertexColor3Effect;
-    class VertexColor4Effect;
-    class VertexColor4TextureEffect;
-
-    class TextEffect;
-
+    class LightEffect;
+    class AmbientLightEffect;
+    class AreaLightEffect;
+    class AreaLightEffectParameters;
+    class BumpMapEffect;
+    class ConstantColorEffect;
+    class CubeMapEffect;
+    class DirectionalLightEffect;
+    class DirectionalLightTextureEffect;
     class Font;
+    class GlossMapEffect;
+    class OverlayEffect;
+    class PointLightEffect;
+    class PointLightTextureEffect;
+    class ProjectedTextureEffect;
+    class SphereMapEffect;
+    class SpotLightEffect;
+    class TextEffect;
+    class Texture2DEffect;
+    class Texture3DEffect;
+
+    enum class FontType;
+    enum class LightType;
 }
 
 #endif  // RENDERING_LOCAL_EFFECTS_FWD_H

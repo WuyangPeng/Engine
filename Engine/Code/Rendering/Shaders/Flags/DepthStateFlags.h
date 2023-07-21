@@ -5,28 +5,25 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:42)
+///	版本：0.9.1.1 (2023/07/01 14:55)
 
 #ifndef RENDERING_SHADERS_DEPTH_STATE_FLAGS_H
 #define RENDERING_SHADERS_DEPTH_STATE_FLAGS_H
 
-namespace Rendering
+namespace Rendering::DepthStateFlags
 {
-    namespace DepthStateFlags
+    enum class CompareMode
     {
-        enum class CompareMode
-        {
-            Never,
-            Less,
-            Equal,
-            LessEqual,
-            Greater,
-            NotEqual,
-            GreaterEqual,
-            Always,
-            Quantity
-        };
-    }
+        Never,
+        Less,
+        Equal,
+        LessEqual,
+        Greater,
+        NotEqual,
+        GreaterEqual,
+        Always,
+        Quantity
+    };
 }
 
 #endif  // RENDERING_SHADERS_DEPTH_STATE_FLAGS_H

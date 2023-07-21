@@ -29,6 +29,13 @@ namespace Rendering
 
     public:
         SamplerStateImpl() noexcept;
+        SamplerStateImpl(SamplerStateFilter filter,
+                         SamplerStateMode mode0,
+                         SamplerStateMode mode1) noexcept;
+        SamplerStateImpl(SamplerStateFilter filter,
+                         SamplerStateMode mode0,
+                         SamplerStateMode mode1,
+                         SamplerStateMode mode2) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

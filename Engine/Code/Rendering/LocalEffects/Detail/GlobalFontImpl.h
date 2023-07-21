@@ -7,14 +7,15 @@
 ///	标准：std:c++20
 ///	版本：0.9.1.0 (2023/06/25 13:46)
 
-#ifndef RENDERING_RENDERER_ENGINE_GLOBAL_FONT_IMPL_H
-#define RENDERING_RENDERER_ENGINE_GLOBAL_FONT_IMPL_H
+#ifndef RENDERING_LOCAL_EFFECTS_GLOBAL_FONT_IMPL_H
+#define RENDERING_LOCAL_EFFECTS_GLOBAL_FONT_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/Contract/ContractFwd.h"
 #include "Rendering/DataTypes/Colour.h"
 #include "Rendering/LocalEffects/LocalEffectsFwd.h"
+#include "Rendering/Shaders/ShadersFwd.h"
 
 namespace Rendering
 {
@@ -24,9 +25,10 @@ namespace Rendering
         using ClassType = GlobalFontImpl;
 
         using FontSharedPtr = std::shared_ptr<Font>;
+        using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactory>;
 
     public:
-        explicit GlobalFontImpl(CoreTools::DisableNotThrow disableNotThrow);
+        explicit GlobalFontImpl(FontType fontType, ProgramFactory& factory, int maxMessageLength);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -41,4 +43,4 @@ namespace Rendering
     };
 }
 
-#endif  // RENDERING_RENDERER_ENGINE_GLOBAL_FONT_IMPL_H
+#endif  // RENDERING_LOCAL_EFFECTS_GLOBAL_FONT_IMPL_H

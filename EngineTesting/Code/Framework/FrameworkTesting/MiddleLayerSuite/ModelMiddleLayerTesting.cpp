@@ -18,7 +18,7 @@
 #include "CoreTools/Time/CustomTime.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
-#include "Rendering/Renderers/EnvironmentParameter.h"
+#include "Rendering/RendererEngine/EnvironmentParameter.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/MiddleLayer/ModelMiddleLayer.h"

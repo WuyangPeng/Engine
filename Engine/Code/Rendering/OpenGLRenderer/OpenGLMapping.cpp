@@ -110,7 +110,7 @@ Rendering::UInt Rendering::OpenGLConstant::GetOpenGLTextureFormat(int index)
 
 Rendering::UInt Rendering::OpenGLConstant::GetOpenGLTextureTarget(int index)
 {
-    static std::array<Enum, System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)> result{
+    static std::array<Enum, 5> result{
         0,
         static_cast<UInt>(System::TextureTarget::Texture1D),  // GL_TEXTURE_1D,
         static_cast<UInt>(System::TextureTarget::Texture2D),  // GL_TEXTURE_2D,
@@ -123,7 +123,7 @@ Rendering::UInt Rendering::OpenGLConstant::GetOpenGLTextureTarget(int index)
 
 Rendering::UInt Rendering::OpenGLConstant::GetOpenGLTextureTargetBinding(int index)
 {
-    static std::array<Enum, System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)> result{
+    static std::array<Enum, 5> result{
         0,
         static_cast<UInt>(System::TextureTargetBinding::Binding1D),  // GL_TEXTURE_BINDING_1D,
         static_cast<UInt>(System::TextureTargetBinding::Binding2D),  // GL_TEXTURE_BINDING_2D,
@@ -167,7 +167,7 @@ Rendering::UInt Rendering::OpenGLConstant::GetOpenGLTextureType(int index)
 
 Rendering::Int Rendering::OpenGLConstant::GetOpenGLWrapMode(int index)
 {
-    static std::array<Enum, System::EnumCastUnderlying(ShaderFlags::SamplerCoordinate::Quantity)> result{
+    static std::array<Enum, 6> result{
         0,  // GL_CLAMP,
         0,  // GL_CLAMP,
         static_cast<GLenum>(System::TextureSamplerCoordinate::Repeat),  // GL_REPEAT,

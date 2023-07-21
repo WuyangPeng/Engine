@@ -29,7 +29,7 @@ Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, in
       numTargets{ numTargets },
       colSpacing{ 1.0f / numColsM1 },
       rowSpacing{ 1.0f / numRowsM1 },
-      camera{ std::make_shared<Camera>(false) },
+      camera{ std::make_shared<Camera>(false, true) },
       rectangle{},
       pvwMatrixConstant{},
       renderTargets{},
@@ -215,7 +215,7 @@ Rendering::TextureSharedPtr Rendering::ImageProcessingBase::GetColorTexture(int 
     return boost::dynamic_pointer_cast<Texture>(renderTargets.at(index)->GetRenderTargetTexture(0)->CloneObject());
 }
 
-std::array<const int*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessingBase::vRegisters{
+std::array<const int*, 5> Rendering::ImageProcessingBase::vRegisters{
     nullptr,
     &dx9VRegisters,
     &dx9VRegisters,
@@ -223,7 +223,7 @@ std::array<const int*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profil
     &oglVRegisters
 };
 
-std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessingBase::vPrograms{
+std::array<std::string, 5> Rendering::ImageProcessingBase::vPrograms{
     // VP_NONE
     "",
 

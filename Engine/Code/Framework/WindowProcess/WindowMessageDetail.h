@@ -378,6 +378,8 @@ System::WindowsLResult Framework::WindowMessage<MiddleLayer>::PaintMessage([[may
 
     middleLayer->Paint();
 
+    MAYBE_UNUSED const auto result = System::SystemValidateRect(hwnd);
+
     return 0;
 }
 

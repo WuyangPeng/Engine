@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:42)
+///	版本：0.9.1.1 (2023/07/14 14:13)
 
 #ifndef RENDERING_RENDERERS_FONT_H
 #define RENDERING_RENDERERS_FONT_H
@@ -18,23 +18,49 @@
 #include "Rendering/RendererEngine/Viewport.h"
 #include "Rendering/Resources/ResourcesFwd.h"
 
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(Font, FontImpl);
+
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE Font
     {
     public:
-        using ClassType = Font;
+        COPY_UNSHARED_TYPE_DECLARE(Font);
+
+        using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactory>;
+        using VertexBufferSharedPtr = std::shared_ptr<VertexBuffer>;
+        using IndexBufferSharedPtr = std::shared_ptr<IndexBuffer>;
+        using TextEffectSharedPtr = std::shared_ptr<TextEffect>;
+        using ConstVertexBufferSharedPtr = std::shared_ptr<const VertexBuffer>;
+        using ConstIndexBufferSharedPtr = std::shared_ptr<const IndexBuffer>;
+        using ConstTextEffectSharedPtr = std::shared_ptr<const TextEffect>;
+        using Colour = Colour<float>;
 
     public:
-        NODISCARD std::shared_ptr<const VertexBuffer> GetVertexBuffer() const noexcept;
-        NODISCARD std::shared_ptr<const IndexBuffer> GetIndexBuffer() const noexcept;
-        NODISCARD std::shared_ptr<const TextEffect> GetTextEffect() const noexcept;
+        Font(FontType fontType, ProgramFactory& factory, int maxMessageLength);
 
-        NODISCARD std::shared_ptr<VertexBuffer> GetVertexBuffer() noexcept;
-        NODISCARD std::shared_ptr<IndexBuffer> GetIndexBuffer() noexcept;
-        NODISCARD std::shared_ptr<TextEffect> GetTextEffect() noexcept;
+        CLASS_INVARIANT_DECLARE;
 
-        void Typeset(int getWidth, int getHeight, int i, int y, const Colour<float>& color, const std::string& string) noexcept;
+        NODISCARD ConstVertexBufferSharedPtr GetVertexBuffer() const noexcept;
+        NODISCARD ConstIndexBufferSharedPtr GetIndexBuffer() const noexcept;
+        NODISCARD ConstTextEffectSharedPtr GetTextEffect() const noexcept;
+
+        NODISCARD int GetHeight() const;
+        NODISCARD int GetWidth(const std::string& message) const;
+
+        void Typeset(int viewportWidth,
+                     int viewportHeight,
+                     int x,
+                     int y,
+                     const Colour& color,
+                     const std::string& message) const;
+
+        NODISCARD VertexBufferSharedPtr GetVertexBuffer() noexcept;
+        NODISCARD IndexBufferSharedPtr GetIndexBuffer() noexcept;
+        NODISCARD TextEffectSharedPtr GetTextEffect() noexcept;
+
+    private:
+        PackageType impl;
     };
 }
 

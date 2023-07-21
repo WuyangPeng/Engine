@@ -10,6 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "GLSLShader.h"
+#include "System/Helper/PragmaWarning/PolymorphicCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
@@ -22,9 +23,15 @@
 #include "Rendering/Resources/Textures/TextureArray.h"
 #include "Rendering/Resources/Textures/TextureSingle.h"
 #include "Rendering/Shaders/Detail/ShaderImplDetail.h"
+#include "Rendering/Shaders/Flags/ReferenceType.h"
+#include "Rendering/Shaders/Reflection.h"
+#include "Rendering/Shaders/ReflectionAtomicCounterBuffer.h"
+#include "Rendering/Shaders/ReflectionBufferVariable.h"
+#include "Rendering/Shaders/ReflectionDataBlock.h"
+#include "Rendering/Shaders/ReflectionUniform.h"
 #include "Rendering/State/SamplerState.h"
 
-Rendering::GLSLShader::GLSLShader(const GLSLReflection& reflector, ReferenceType referenceType)
+Rendering::GLSLShader::GLSLShader(const Reflection& reflector, ReferenceType referenceType)
     : ParentType{}
 {
     if (ReferenceType::Compute == referenceType)

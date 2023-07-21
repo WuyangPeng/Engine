@@ -5,15 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:29)
+///	版本：0.9.1.1 (2023/07/05 11:12)
 
 #ifndef RENDERING_SHADERS_COMPUTE_PROGRAM_IMPL_H
 #define RENDERING_SHADERS_COMPUTE_PROGRAM_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/OpenGLRenderer/GLSL/GLSLReflection.h"
+#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/Shaders/ShadersFwd.h"
+#include "Rendering/Shaders/ShadersInternalFwd.h"
 
 #include <memory>
 
@@ -23,14 +24,14 @@ namespace Rendering
     {
     public:
         using ClassType = ComputeProgramImpl;
+        using FactoryType = ComputeProgramFactory;
+
+        using OpenGLUInt = System::OpenGLUInt;
         using ShaderSharedPtr = std::shared_ptr<Shader>;
         using ConstShaderSharedPtr = std::shared_ptr<const Shader>;
         using ComputeProgramSharedPtr = std::shared_ptr<ComputeProgramImpl>;
-        using FactoryType = ComputeProgramImpl;
-        using OpenGLUInt = System::OpenGLUInt;
 
     public:
-        NODISCARD static ComputeProgramSharedPtr Create(OpenGLUInt programHandle, OpenGLUInt computeShaderHandle);
         ComputeProgramImpl() noexcept;
         virtual ~ComputeProgramImpl() noexcept = default;
         ComputeProgramImpl(const ComputeProgramImpl& rhs) = default;
@@ -41,10 +42,10 @@ namespace Rendering
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         NODISCARD ConstShaderSharedPtr GetComputeShader() const noexcept;
-
         void SetComputeShader(const ShaderSharedPtr& shader);
-        NODISCARD virtual GLSLReflection GetReflector() const;
-        NODISCARD virtual ComputeProgramSharedPtr Clone() const;
+
+        NODISCARD virtual Reflection GetReflector() const = 0;
+        NODISCARD virtual ComputeProgramSharedPtr Clone() const = 0;
 
     private:
         ShaderSharedPtr computeShader;

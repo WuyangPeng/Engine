@@ -44,6 +44,7 @@ void Database::TestingHelper::InitSuite()
     AddMariaDBWrappersSuite();
     AddMongoWrappersSuite();
     AddRedisWrappersSuite();
+    AddDatabaseEntityCodeGenerationSuite();
 }
 
 void Database::TestingHelper::AddHelperSuite()
@@ -183,4 +184,16 @@ void Database::TestingHelper::AddRedisWrappersSuite()
     ADD_TEST(redisWrappersSuite, RedisDatabaseFlushTesting);
 
     AddSuite(redisWrappersSuite);
+}
+
+void Database::TestingHelper::AddDatabaseEntityCodeGenerationSuite()
+{
+    auto databaseEntityCodeGenerationSuite = GenerateSuite("数据库实体代码生成");
+
+    ADD_TEST(databaseEntityCodeGenerationSuite, CodeHeaderFileGenerationTesting);
+    ADD_TEST(databaseEntityCodeGenerationSuite, CodeFwdHeaderFileGenerationTesting);
+    ADD_TEST(databaseEntityCodeGenerationSuite, EntityHeaderFileGenerationTesting);
+    ADD_TEST(databaseEntityCodeGenerationSuite, EntitySourceFileGenerationTesting);
+    
+    AddSuite(databaseEntityCodeGenerationSuite);
 }

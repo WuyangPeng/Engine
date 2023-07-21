@@ -60,7 +60,7 @@ void Rendering::LightAttenuationConstantTesting::InitTest()
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        const LightSharedPtr firstLight(std::make_shared<Light>(LightType::Ambient));
+        const LightSharedPtr firstLight(std::make_shared<Light>(Mathematics::MathF::GetZeroTolerance()));
 
         const float exponent = secondFloatRandomDistribution(generator);
         firstLight->SetExponent(exponent);
@@ -81,12 +81,6 @@ void Rendering::LightAttenuationConstantTesting::InitTest()
         firstLight->SetAmbient(ambient);
         firstLight->SetDiffuse(diffuse);
         firstLight->SetSpecular(specular);
-
-        const Light::APoint firstPosition(firstFloatRandomDistribution(generator),
-                                          firstFloatRandomDistribution(generator),
-                                          firstFloatRandomDistribution(generator));
-
-        firstLight->SetPosition(firstPosition);
 
         const float constant = secondFloatRandomDistribution(generator);
         const float linear = secondFloatRandomDistribution(generator);
@@ -163,7 +157,7 @@ void Rendering::LightAttenuationConstantTesting::CopyTest()
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        const LightSharedPtr firstLight(std::make_shared<Light>(LightType::Ambient));
+        const LightSharedPtr firstLight(std::make_shared<Light>(Mathematics::MathF::GetZeroTolerance()));
 
         const float exponent = secondFloatRandomDistribution(generator);
         firstLight->SetExponent(exponent);
@@ -184,12 +178,6 @@ void Rendering::LightAttenuationConstantTesting::CopyTest()
         firstLight->SetAmbient(ambient);
         firstLight->SetDiffuse(diffuse);
         firstLight->SetSpecular(specular);
-
-        const Light::APoint firstPosition(firstFloatRandomDistribution(generator),
-                                          firstFloatRandomDistribution(generator),
-                                          firstFloatRandomDistribution(generator));
-
-        firstLight->SetPosition(firstPosition);
 
         const float constant = secondFloatRandomDistribution(generator);
         const float linear = secondFloatRandomDistribution(generator);

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:41)
+///	版本：0.9.1.1 (2023/07/05 11:25)
 
 #ifndef RENDERING_SHADERS_VISUAL_PROGRAM_IMPL_H
 #define RENDERING_SHADERS_VISUAL_PROGRAM_IMPL_H
@@ -27,15 +27,16 @@ namespace Rendering
     public:
         using ClassType = VisualProgramImpl;
         using FactoryType = VisualProgramImpl;
-        using ShaderSharedPtr = std::shared_ptr<Shader>;
-        using ConstShaderSharedPtr = std::shared_ptr<const Shader>;
+
+        using OpenGLUInt = System::OpenGLUInt;
         using ObjectLink = CoreTools::ObjectLink;
         using BufferTarget = CoreTools::BufferTarget;
         using BufferSource = CoreTools::BufferSource;
         using ObjectRegister = CoreTools::ObjectRegister;
+        using ShaderSharedPtr = std::shared_ptr<Shader>;
+        using ConstShaderSharedPtr = std::shared_ptr<const Shader>;
         using ShaderObjectAssociated = CoreTools::ObjectAssociated<Shader>;
         using VisualProgramSharedPtr = std::shared_ptr<VisualProgramImpl>;
-        using OpenGLUInt = System::OpenGLUInt;
 
     public:
         NODISCARD static VisualProgramSharedPtr Create(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle);
@@ -69,7 +70,7 @@ namespace Rendering
         void Link(ObjectLink& source);
         void Register(ObjectRegister& target) const;
 
-        NODISCARD virtual GLSLReflection GetReflector() const;
+        NODISCARD virtual Reflection GetReflector() const;
         NODISCARD virtual VisualProgramSharedPtr Clone() const;
 
     private:

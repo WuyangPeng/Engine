@@ -13,7 +13,8 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Spatial.h"
-#include "Flags/VisualFlags.h"
+#include "Flags/VisualFlags.h" 
+#include "Rendering/LocalEffects/ConstantColorEffect.h"
 #include "Rendering/LocalEffects/VisualEffect.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
@@ -36,6 +37,7 @@ namespace Rendering
         explicit Visual(VisualPrimitiveType type);
         Visual(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer);
         ~Visual() noexcept = default;
+
         Visual(const Visual& rhs);
         Visual& operator=(const Visual& rhs);
         Visual(Visual&& rhs) noexcept;
@@ -66,6 +68,7 @@ namespace Rendering
         virtual void UpdateModelSpace(MAYBE_UNUSED VisualUpdateType type);
 
         NODISCARD std::shared_ptr<VisualEffect> GetEffect() noexcept;
+        void SetEffect(const std::shared_ptr<VisualEffect>& visualEffect) noexcept;
 
     protected:
         virtual void UpdateModelBound();

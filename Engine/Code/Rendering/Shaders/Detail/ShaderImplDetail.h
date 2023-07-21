@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:28)
+///	版本：0.9.1.1 (2023/07/01 16:14)
 
 #ifndef RENDERING_SHADERS_SHADER_IMPL_DETAIL_H
 #define RENDERING_SHADERS_SHADER_IMPL_DETAIL_H
@@ -13,7 +13,6 @@
 #include "ShaderImpl.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
 
 template <typename T>
 int Rendering::ShaderImpl::Set(const std::string& name, const std::shared_ptr<T>& object)
@@ -31,16 +30,17 @@ int Rendering::ShaderImpl::Set(const std::string& name, const std::shared_ptr<T>
         {
             if (IsValid(*iter, object.get()))
             {
-                iter->SetObject(object);
+                iter->SetGraphicsObject(object);
 
                 return handle;
             }
+
             return -1;
         }
         ++handle;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("无法找到对象"s))
 }
 
 #endif  // RENDERING_SHADERS_SHADER_IMPL_DETAIL_H

@@ -26,6 +26,7 @@ namespace CoreTools
     public:
         NON_COPY_TYPE_DECLARE(IFStreamManager);
         using String = System::String;
+        using IFileStream = System::IFileStream;
 
     public:
         explicit IFStreamManager(const String& fileName);
@@ -36,6 +37,8 @@ namespace CoreTools
         NODISCARD String BackupFile() const;
 
         void SetSimplifiedChinese();
+
+        NODISCARD IFileStream& GetFileStream() noexcept;
 
     private:
         PackageType impl;

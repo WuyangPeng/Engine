@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:43)
+///	版本：0.9.1.1 (2023/07/05 11:26)
 
 #ifndef RENDERING_SHADERS_PROGRAM_DEFINES_H
 #define RENDERING_SHADERS_PROGRAM_DEFINES_H
@@ -30,7 +30,7 @@ namespace Rendering
         using ContainerConstIter = Container::const_iterator;
 
     public:
-        explicit ProgramDefines(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+        NODISCARD static ProgramDefines Create();
 
         CLASS_INVARIANT_DECLARE;
 
@@ -46,6 +46,9 @@ namespace Rendering
 
         NODISCARD ContainerConstIter begin() const noexcept;
         NODISCARD ContainerConstIter end() const noexcept;
+
+    private:
+        explicit ProgramDefines(CoreTools::DisableNotThrow disableNotThrow);
 
     private:
         PackageType impl;

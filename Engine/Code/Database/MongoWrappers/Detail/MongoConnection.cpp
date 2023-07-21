@@ -264,17 +264,17 @@ bsoncxx::builder::basic::document Database::MongoConnection::GetUpdateDocument(c
                 break;
 
             case DataType::StringArray:
-                document.append(bsoncxx::builder::basic::kvp("$set", bsoncxx::builder::basic::make_document(bsoncxx::builder::basic::kvp(fieldName, value.GetArrayStringValue<DataType::StringArray>()))));
+                 document.append(bsoncxx::builder::basic::kvp("$set", bsoncxx::builder::basic::make_document(bsoncxx::builder::basic::kvp(fieldName, value.GetArrayStringValue<DataType::StringArray>()))));
                 break;
 
             case DataType::Int32Array:
                 document.append(bsoncxx::builder::basic::kvp("$set", bsoncxx::builder::basic::make_document(bsoncxx::builder::basic::kvp(fieldName, value.GetArrayStringValue<DataType::Int32Array>()))));
                 break;
-
+                
             case DataType::Int64Array:
                 document.append(bsoncxx::builder::basic::kvp("$set", bsoncxx::builder::basic::make_document(bsoncxx::builder::basic::kvp(fieldName, value.GetArrayStringValue<DataType::Int64Array>()))));
                 break;
-
+                
             case DataType::DoubleArray:
                 document.append(bsoncxx::builder::basic::kvp("$set", bsoncxx::builder::basic::make_document(bsoncxx::builder::basic::kvp(fieldName, value.GetArrayStringValue<DataType::DoubleArray>()))));
                 break;
@@ -422,7 +422,10 @@ Database::BasisDatabase Database::MongoConnection::GetBasisDatabase(const FieldN
             BasisDatabase::Int32Array result{};
             for (const auto& value : element)
             {
-                result.emplace_back(boost::lexical_cast<int32_t>(value));
+                if (!value.empty())
+                {
+                    result.emplace_back(boost::lexical_cast<int32_t>(value));
+                }
             }
 
             return BasisDatabase{ iter->GetFieldName(), result };
@@ -437,7 +440,10 @@ Database::BasisDatabase Database::MongoConnection::GetBasisDatabase(const FieldN
             BasisDatabase::Int64Array result{};
             for (const auto& value : element)
             {
-                result.emplace_back(boost::lexical_cast<int64_t>(value));
+                if (!value.empty())
+                {
+                    result.emplace_back(boost::lexical_cast<int64_t>(value));
+                }
             }
 
             return BasisDatabase{ iter->GetFieldName(), result };
@@ -452,8 +458,12 @@ Database::BasisDatabase Database::MongoConnection::GetBasisDatabase(const FieldN
             BasisDatabase::DoubleArray result{};
             for (const auto& value : element)
             {
-                result.emplace_back(boost::lexical_cast<double>(value));
+                if (!value.empty())
+                {
+                    result.emplace_back(boost::lexical_cast<double>(value));
+                }
             }
+
             return BasisDatabase{ iter->GetFieldName(), element };
         }
 

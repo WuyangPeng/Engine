@@ -16,7 +16,7 @@ namespace Rendering
 {
     enum class BlendStateColorWrite
     {
-        Disenable = 0,
+        DisEnable = 0,
         EnableRed = (1 << 0),
         EnableGreen = (1 << 1),
         EnableBlue = (1 << 2),

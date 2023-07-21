@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:42)
+///	版本：0.9.1.1 (2023/07/20 19:19)
 
-#ifndef RENDERING_LOCAL_EFFECTS_IMPL_H
-#define RENDERING_LOCAL_EFFECTS_IMPL_H
+#ifndef RENDERING_LOCAL_EFFECTS_TEXT_EFFECT_IMPL_H
+#define RENDERING_LOCAL_EFFECTS_TEXT_EFFECT_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
@@ -26,28 +26,26 @@ namespace Rendering
     {
     public:
         using ClassType = TextEffectImpl;
+
         using ConstantBufferSharedPtr = std::shared_ptr<ConstantBuffer>;
         using SamplerStateSharedPtr = std::shared_ptr<SamplerState>;
         using ConstConstantBufferSharedPtr = std::shared_ptr<const ConstantBuffer>;
         using ConstSamplerStateSharedPtr = std::shared_ptr<const SamplerState>;
-        using Texture2DSharedPtr = std::shared_ptr<Texture2D>;
-        using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactory>;
-        using VisualProgramSharedPtr = std::shared_ptr<VisualProgram>;
+
         using Colour = Colour<float>;
-        using Object = CoreTools::Object;
-        using ObjectLink = CoreTools::ObjectLink;
-        using BufferTarget = CoreTools::BufferTarget;
-        using BufferSource = CoreTools::BufferSource;
-        using ObjectRegister = CoreTools::ObjectRegister;
 
     public:
-        TextEffectImpl(const Texture2DSharedPtr& texture, VisualProgram& visualProgram);
-        explicit TextEffectImpl(CoreTools::DisableNotThrow disableNotThrow) noexcept;
+        TextEffectImpl(ShaderAPIType shaderAPIType, int numTranslateConstantBytes, int numColorConstantBytes);
+        TextEffectImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD ConstConstantBufferSharedPtr GetTranslate() const noexcept;
         NODISCARD ConstConstantBufferSharedPtr GetColor() const noexcept;
+
+        NODISCARD ConstantBufferSharedPtr GetTranslate() noexcept;
+        NODISCARD ConstantBufferSharedPtr GetColor() noexcept;
+        NODISCARD SamplerStateSharedPtr GetSamplerState() noexcept;
 
         void SetTranslate(float x, float y);
         void SetNormalizedZ(float z);
@@ -60,4 +58,4 @@ namespace Rendering
     };
 }
 
-#endif  // RENDERING_LOCAL_EFFECTS_IMPL_H
+#endif  // RENDERING_LOCAL_EFFECTS_TEXT_EFFECT_IMPL_H

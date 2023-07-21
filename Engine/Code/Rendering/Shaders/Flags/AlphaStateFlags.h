@@ -5,66 +5,64 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:42)
+///	版本：0.9.1.1 (2023/07/01 14:55)
 
 #ifndef RENDERING_SHADERS_ALPHA_STATE_FLAGS_H
 #define RENDERING_SHADERS_ALPHA_STATE_FLAGS_H
 
-namespace Rendering
+namespace Rendering::AlphaStateFlags
 {
-    namespace AlphaStateFlags
+
+    enum class SourceBlendMode
     {
-        enum class SourceBlendMode
-        {
-            Zero,
-            One,
-            DestinationColor,
-            OneMinusDestinationColor,
-            SourceAlpha,
-            OneMinusSourceAlpha,
-            DestinationAlpha,
-            OneMinusDestinationAlpha,
-            SourceAlphaSaturate,
-            ConstantColor,
-            OneMinusConstantColor,
-            ConstantAlpha,
-            OneMinusConstantAlpha,
+        Zero,
+        One,
+        DestinationColor,
+        OneMinusDestinationColor,
+        SourceAlpha,
+        OneMinusSourceAlpha,
+        DestinationAlpha,
+        OneMinusDestinationAlpha,
+        SourceAlphaSaturate,
+        ConstantColor,
+        OneMinusConstantColor,
+        ConstantAlpha,
+        OneMinusConstantAlpha,
 
-            Quantity
-        };
+        Quantity
+    };
 
-        enum class DestinationBlendMode
-        {
-            Zero,
-            One,
-            SourceColor,
-            OneMinusSourceColor,
-            SourceAlpha,
-            OneMinusSourceAlpha,
-            DestinationAlpha,
-            OneMinusDestinationAlpha,
-            ConstantColor,
-            OneMinusConstantColor,
-            ConstantAlpha,
-            OneMinusConstantAlpha,
+    enum class DestinationBlendMode
+    {
+        Zero,
+        One,
+        SourceColor,
+        OneMinusSourceColor,
+        SourceAlpha,
+        OneMinusSourceAlpha,
+        DestinationAlpha,
+        OneMinusDestinationAlpha,
+        ConstantColor,
+        OneMinusConstantColor,
+        ConstantAlpha,
+        OneMinusConstantAlpha,
 
-            Quantity
-        };
+        Quantity
+    };
 
-        enum class CompareMode
-        {
-            Never,
-            Less,
-            Equal,
-            LessEqual,
-            Greater,
-            NotEqual,
-            GreaterEqual,
-            Always,
+    enum class CompareMode
+    {
+        Never,
+        Less,
+        Equal,
+        LessEqual,
+        Greater,
+        NotEqual,
+        GreaterEqual,
+        Always,
 
-            Quantity
-        };
-    }
+        Quantity
+    };
 }
 
 #endif  // RENDERING_SHADERS_ALPHA_STATE_FLAGS_H

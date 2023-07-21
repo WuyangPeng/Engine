@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:52)
+///	版本：0.9.1.1 (2023/07/05 14:34)
 
 #include "Rendering/RenderingExport.h"
 
@@ -29,32 +29,32 @@ Rendering::ShaderAPIType Rendering::ProgramFactory::GetAPI() const noexcept
     return impl->GetAPI();
 }
 
-Rendering::ProgramFactory::VisualProgramSharedPtr Rendering::ProgramFactory::CreateFromFiles(const std::string& vsFile, const std::string& psFile, const std::string& gsFile)
+Rendering::ProgramFactory::VisualProgramSharedPtr Rendering::ProgramFactory::CreateFromFiles(const std::string& vertexShaderFile, const std::string& pixelShaderFile, const std::string& geometryShaderFile)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return impl->CreateFromFiles(vsFile, psFile, gsFile);
+    return impl->CreateFromFiles(vertexShaderFile, pixelShaderFile, geometryShaderFile);
 }
 
-Rendering::ProgramFactory::VisualProgramSharedPtr Rendering::ProgramFactory::CreateFromSources(const std::string& vsSource, const std::string& psSource, const std::string& gsSource)
+Rendering::ProgramFactory::VisualProgramSharedPtr Rendering::ProgramFactory::CreateFromSources(const std::string& vertexShaderSource, const std::string& pixelShaderSource, const std::string& geometryShaderSource)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return impl->CreateFromFiles(vsSource, psSource, gsSource);
+    return impl->CreateFromSources(vertexShaderSource, pixelShaderSource, geometryShaderSource);
 }
 
-Rendering::ProgramFactory::ComputeProgramSharedPtr Rendering::ProgramFactory::CreateFromFile(const std::string& csFile)
+Rendering::ProgramFactory::ComputeProgramSharedPtr Rendering::ProgramFactory::CreateFromFile(const std::string& computeShaderFile)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return impl->CreateFromFile(csFile);
+    return impl->CreateFromFile(computeShaderFile);
 }
 
-Rendering::ProgramFactory::ComputeProgramSharedPtr Rendering::ProgramFactory::CreateFromSource(const std::string& csSource)
+Rendering::ProgramFactory::ComputeProgramSharedPtr Rendering::ProgramFactory::CreateFromSource(const std::string& computeShaderSource)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return impl->CreateFromSource(csSource);
+    return impl->CreateFromSource(computeShaderSource);
 }
 
 void Rendering::ProgramFactory::PushDefines()

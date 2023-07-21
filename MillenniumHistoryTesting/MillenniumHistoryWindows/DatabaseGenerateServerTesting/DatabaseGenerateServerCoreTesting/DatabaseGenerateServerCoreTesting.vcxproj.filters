@@ -22,6 +22,12 @@
     <Filter Include="EngineSuite 头文件">
       <UniqueIdentifier>{277d1bc8-ce99-4697-a074-9377d66e3e2c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConvertSuite 头文件">
+      <UniqueIdentifier>{2086c953-f4ac-4083-a128-b8f1dfa67ad5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConvertSuite 源文件">
+      <UniqueIdentifier>{6bf49286-4a48-4df5-aa11-620195633b76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
@@ -53,6 +59,66 @@
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\EngineSuite\EngineSuite.h">
       <Filter>EngineSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CategoryConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CharacterConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ConvertSuite.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CountryConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\DayConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\EmperorConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\GatherConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\GenusConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\GeographicConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\IdentityConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ImperialCourtConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\MonthConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ReignTitleConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\SexagenaryCycleConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\SourceConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\VersionConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\YearConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ArticleConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\BookConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CalendarConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\TestingHelper.cpp">
@@ -63,6 +129,63 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\TestingMain.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\YearConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\VersionConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\SourceConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\SexagenaryCycleConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ReignTitleConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\MonthConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ImperialCourtConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\IdentityConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\GeographicConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\GenusConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ArticleConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\BookConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CalendarConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CategoryConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CharacterConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CountryConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\DayConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\EmperorConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\GatherConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

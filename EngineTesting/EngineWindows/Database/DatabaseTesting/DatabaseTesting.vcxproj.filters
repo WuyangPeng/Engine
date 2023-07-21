@@ -91,6 +91,15 @@
     <Filter Include="RedisWrappersSuite 源文件">
       <UniqueIdentifier>{18006fa1-1948-4a35-9290-10fae13c3393}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DatabaseEntityCodeGeneration 源文件">
+      <UniqueIdentifier>{d93996f3-07d1-4f11-a9d0-74930f6a9cb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseEntityCodeGeneration 头文件">
+      <UniqueIdentifier>{534a5436-bc44-4977-8fd9-e6b0b4fb875f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\DatabaseEntity">
+      <UniqueIdentifier>{9b969869-c9ac-4589-a948-e95cdf95acbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\Testing.h">
@@ -204,6 +213,30 @@
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\RedisWrappersSuite\RedisDatabaseFlushTesting.h">
       <Filter>RedisWrappersSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\DatabaseEntityCodeGenerationSuite.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\CodeHeaderFileGenerationTesting.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\DatabaseEntity\DatabaseEntity.h">
+      <Filter>资源文件\DatabaseEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\CodeFwdHeaderFileGenerationTesting.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\DatabaseEntity\DatabaseEntityFwd.h">
+      <Filter>资源文件\DatabaseEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\EntityHeaderFileGenerationTesting.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\DatabaseEntity\Chapter.h">
+      <Filter>资源文件\DatabaseEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\EntitySourceFileGenerationTesting.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\TestingHelper.cpp">
@@ -272,6 +305,21 @@
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\RedisWrappersSuite\RedisDatabaseFlushTesting.cpp">
       <Filter>RedisWrappersSuite 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\CodeHeaderFileGenerationTesting.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\CodeFwdHeaderFileGenerationTesting.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\EntityHeaderFileGenerationTesting.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\EntitySourceFileGenerationTesting.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\DatabaseEntity\Chapter.cpp">
+      <Filter>资源文件\DatabaseEntity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\DatabaseTest.json">
@@ -294,6 +342,12 @@
     </None>
     <None Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="Configuration\DatabaseEntity.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\DatabaseEntity\DatabaseEntity.json">
+      <Filter>资源文件\DatabaseEntity</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +380,18 @@
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\DatabaseEntity\DatabaseEntity.txt">
+      <Filter>资源文件\DatabaseEntity</Filter>
+    </Text>
+    <Text Include="Resource\DatabaseEntity\DatabaseEntityFwd.txt">
+      <Filter>资源文件\DatabaseEntity</Filter>
+    </Text>
+    <Text Include="Resource\DatabaseEntity\EntityCpp.txt">
+      <Filter>资源文件\DatabaseEntity</Filter>
+    </Text>
+    <Text Include="Resource\DatabaseEntity\EntityH.txt">
+      <Filter>资源文件\DatabaseEntity</Filter>
     </Text>
   </ItemGroup>
 </Project>

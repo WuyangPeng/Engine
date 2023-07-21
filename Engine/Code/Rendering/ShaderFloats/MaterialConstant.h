@@ -15,7 +15,7 @@
 #include "ShaderFloat.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "Rendering/SceneGraph/Material.h"
+#include "Rendering/LocalEffects/Material.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(MaterialConstant, MaterialConstantImpl);
 

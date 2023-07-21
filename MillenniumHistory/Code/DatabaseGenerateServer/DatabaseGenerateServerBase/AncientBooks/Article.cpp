@@ -26,7 +26,7 @@ AncientBooks::Article::Article(const CSVRow& csvRow)
       volume{ csvRow.GetInt(SYSTEM_TEXT("volume"s)) },
       chapterVolume{ csvRow.GetInt(SYSTEM_TEXT("chapterVolume"s)) },
       otherAuthor{ csvRow.GetIntArray(SYSTEM_TEXT("otherAuthor"s)) },
-      authorDescribe{ csvRow.GetStringArray(SYSTEM_TEXT("authorDescribe"s)) },
+      authorNotes{ csvRow.GetStringArray(SYSTEM_TEXT("authorNotes"s)) },
       title{ csvRow.GetString(SYSTEM_TEXT("title"s)) },
       abbreviation{ csvRow.GetString(SYSTEM_TEXT("abbreviation"s)) },
       directory{ csvRow.GetString(SYSTEM_TEXT("directory"s)) }
@@ -143,39 +143,39 @@ AncientBooks::Article::CharacterContainer AncientBooks::Article::GetOtherAuthor(
     return result;
 }
 
-AncientBooks::Article::StringContainer AncientBooks::Article::GetAuthorDescribe() const
+AncientBooks::Article::StringContainer AncientBooks::Article::GetAuthorNotes() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return authorDescribe;
+    return authorNotes;
 }
 
-int AncientBooks::Article::GetAuthorDescribeCount() const
+int AncientBooks::Article::GetAuthorNotesCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(authorDescribe.size());
+    return boost::numeric_cast<int>(authorNotes.size());
 }
 
-System::String AncientBooks::Article::GetAuthorDescribe(int index) const
+System::String AncientBooks::Article::GetAuthorNotes(int index) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return authorDescribe.at(index);
+    return authorNotes.at(index);
 }
 
-AncientBooks::Article::StringContainerConstIter AncientBooks::Article::GetAuthorDescribeBegin() const noexcept
+AncientBooks::Article::StringContainerConstIter AncientBooks::Article::GetAuthorNotesBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return authorDescribe.cbegin();
+    return authorNotes.cbegin();
 }
 
-AncientBooks::Article::StringContainerConstIter AncientBooks::Article::GetAuthorDescribeEnd() const noexcept
+AncientBooks::Article::StringContainerConstIter AncientBooks::Article::GetAuthorNotesEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return authorDescribe.cend();
+    return authorNotes.cend();
 }
 
 System::String AncientBooks::Article::GetTitle() const

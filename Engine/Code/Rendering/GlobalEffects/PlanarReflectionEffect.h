@@ -1,60 +1,67 @@
-///	Copyright (c) 2010-2023
+Ôªø///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///	‰ΩúËÄÖÔºöÂΩ≠Ê≠¶Èò≥ÔºåÂΩ≠ÊôîÊÅ©ÔºåÂΩ≠ÊôîÊ≥Ω
+///	ËÅîÁ≥ª‰ΩúËÄÖÔºö94458936@qq.com
 ///
-///	±Í◊º£∫std:c++20
-///	“˝«Ê∞Ê±æ£∫0.9.0.12 (2023/06/12 13:48)
+///	Ê†áÂáÜÔºöstd:c++20
+///	ÁâàÊú¨Ôºö0.9.1.1 (2023/07/17 15:57)
 
 #ifndef RENDERING_GLOBAL_EFFECTS_PLANAR_REFLECTION_EFFECT_H
 #define RENDERING_GLOBAL_EFFECTS_PLANAR_REFLECTION_EFFECT_H
 
-#include "GlobalEffect.h"
-#include "CoreTools/ObjectSystems/ObjectAssociated.h"
-#include "Mathematics/Algebra/AVectorDetail.h"
-#include "Mathematics/Algebra/Matrix.h"
-#include "Mathematics/Algebra/Plane.h"
 #include "Rendering/RenderingDll.h"
-#include "Rendering/SceneGraph/TrianglesMesh.h"
+
+#include "CoreTools/Contract/ContractFwd.h"
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
+#include "Mathematics/Algebra/Vector4.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
+#include "Rendering/SceneGraph/SceneGraphFwd.h"
+#include "Rendering/State/StateFwd.h"
+
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(PlanarReflectionEffect, PlanarReflectionEffectImpl);
 
 namespace Rendering
 {
-    class PlanarReflectionEffect : public GlobalEffect
+    class RENDERING_DEFAULT_DECLARE PlanarReflectionEffect
     {
     public:
-        using ClassType = PlanarReflectionEffect;
-        using ParentType = GlobalEffect;
+        COPY_UNSHARED_TYPE_DECLARE(PlanarReflectionEffect);
 
-    private:
-        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(PlanarReflectionEffect);
-        CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
+        using NodeSharedPtr = std::shared_ptr<Node>;
+        using VisualSharedPtr = std::shared_ptr<Visual>;
+        using VisualContainer = std::vector<VisualSharedPtr>;
+        using ReflectanceType = std::vector<float>;
+        using Vector4 = Mathematics::Vector4<float>;
+        using Vector4Container = std::vector<Vector4>;
+        using BlendStateSharedPtr = std::shared_ptr<BlendState>;
+        using RasterizerStateSharedPtr = std::shared_ptr<RasterizerState>;
+        using DepthStencilStateSharedPtr = std::shared_ptr<DepthStencilState>;
+        using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
+        using SpatialSharedPtr = std::shared_ptr<Spatial>;
 
     public:
-        explicit PlanarReflectionEffect(int numPlanes);
+        PlanarReflectionEffect(const NodeSharedPtr& reflectionCaster,
+                               const VisualContainer& planeVisuals,
+                               const ReflectanceType& reflectances);
 
-        CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-        void Draw(BaseRenderer& renderer, VisibleSet& visibleSet) noexcept override;
+        void Draw(const BaseRendererSharedPtr& engine, ProjectionViewWorldUpdater& projectionViewWorldMatrices);
 
-        NODISCARD int GetNumPlanes() const noexcept;
-        void SetPlane(int i, const TrianglesMeshSharedPtr& plane);
-        NODISCARD ConstTrianglesMeshSharedPtr GetPlane(int i) const;
-        void SetReflectance(int i, float reflectance);
-        NODISCARD float GetReflectance(int i) const;
+        NODISCARD VisualContainer GetPlaneVisuals() const;
 
-        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+        NODISCARD Vector4Container GetPlaneOrigins() const;
 
-    protected:
-        void GetReflectionMatrixAndModelPlane(int i, Mathematics::MatrixF& reflection, Mathematics::PlaneF& modelPlane);
+        NODISCARD Vector4Container GetPlaneNormals() const;
+
+        void SetReflectance(int index, float reflectance);
+
+        NODISCARD float GetReflectance(int index) const;
 
     private:
-        int numPlanes;
-        std::vector<CoreTools::ObjectAssociated<TrianglesMesh>> planes;
-        std::vector<float> reflectances;
+        PackageType impl;
     };
-
-    CORE_TOOLS_SHARED_PTR_DECLARE(PlanarReflectionEffect);
 }
 
 #endif  // RENDERING_GLOBAL_EFFECTS_PLANAR_REFLECTION_EFFECT_H

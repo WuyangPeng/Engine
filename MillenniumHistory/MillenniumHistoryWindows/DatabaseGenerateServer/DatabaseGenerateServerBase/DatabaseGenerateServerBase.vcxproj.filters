@@ -40,6 +40,9 @@
     <Filter Include="DatabaseEntity 源文件">
       <UniqueIdentifier>{3f5abbf2-dac7-48d7-9cd2-83bf256d7625}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\DatabaseEntity">
+      <UniqueIdentifier>{585c3da9-32b2-4990-a15c-3bb056375567}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
@@ -165,6 +168,15 @@
     <None Include="Resource\AncientBooks\Emperor.csv">
       <Filter>资源文件\AncientBooks</Filter>
     </None>
+    <None Include="Configuration\EntityBatchConversion.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\DatabaseEntity.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\DatabaseEntity\DatabaseEntity.json">
+      <Filter>资源文件\DatabaseEntity</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
@@ -196,6 +208,18 @@
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\DatabaseEntity\DatabaseEntity.txt">
+      <Filter>资源文件\DatabaseEntity</Filter>
+    </Text>
+    <Text Include="Resource\DatabaseEntity\DatabaseEntityFwd.txt">
+      <Filter>资源文件\DatabaseEntity</Filter>
+    </Text>
+    <Text Include="Resource\DatabaseEntity\EntityCpp.txt">
+      <Filter>资源文件\DatabaseEntity</Filter>
+    </Text>
+    <Text Include="Resource\DatabaseEntity\EntityH.txt">
+      <Filter>资源文件\DatabaseEntity</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -454,6 +478,60 @@
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\DatabaseEntityFwd.h">
       <Filter>DatabaseEntity 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\BookEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\CalendarEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\CategoryEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\CharacterEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\EmperorEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\GatherEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\GenusEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\GeographicEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\IdentityEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\ImperialCourtEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\MonthEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\ReignTitleEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\SexagenaryCycleEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\SourceEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\VersionEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\YearEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\DayEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\CountryEntity.h">
+      <Filter>DatabaseEntity 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DllLib.cpp">
@@ -634,6 +712,60 @@
       <Filter>AncientBooks 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\ArticleEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\BookEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\CalendarEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\CategoryEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\CharacterEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\YearEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\DayEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\EmperorEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\GatherEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\GenusEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\GeographicEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\IdentityEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\ImperialCourtEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\MonthEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\ReignTitleEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\SexagenaryCycleEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\SourceEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\VersionEntity.cpp">
+      <Filter>DatabaseEntity 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerBase\DatabaseEntity\CountryEntity.cpp">
       <Filter>DatabaseEntity 源文件</Filter>
     </ClCompile>
   </ItemGroup>

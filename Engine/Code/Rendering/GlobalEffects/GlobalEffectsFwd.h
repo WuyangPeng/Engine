@@ -5,16 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:48)
+///	版本：0.9.1.1 (2023/07/17 15:44)
 
 #ifndef RENDERING_GLOBAL_EFFECTS_FWD_H
 #define RENDERING_GLOBAL_EFFECTS_FWD_H
 
 namespace Rendering
 {
-    class GlobalEffect;
     class PlanarReflectionEffect;
     class PlanarShadowEffect;
+    class LightProjector;
 }
 
 #endif  // RENDERING_GLOBAL_EFFECTS_FWD_H

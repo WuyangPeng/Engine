@@ -10,34 +10,31 @@
 #ifndef RENDERING_SHADERS_STENCIL_STATE_FLAGS_H
 #define RENDERING_SHADERS_STENCIL_STATE_FLAGS_H
 
-namespace Rendering
+namespace Rendering::StencilStateFlags
 {
-    namespace StencilStateFlags
+    enum class CompareMode
     {
-        enum class CompareMode
-        {
-            Never,
-            Less,
-            Equal,
-            LessEqual,
-            Greater,
-            NotEqual,
-            GreaterEqual,
-            Always,
-            Quantity
-        };
+        Never,
+        Less,
+        Equal,
+        LessEqual,
+        Greater,
+        NotEqual,
+        GreaterEqual,
+        Always,
+        Quantity
+    };
 
-        enum class OperationType
-        {
-            Keep,
-            Zero,
-            Replace,
-            Increment,
-            Decrement,
-            Invert,
-            Quantity
-        };
-    }
+    enum class OperationType
+    {
+        Keep,
+        Zero,
+        Replace,
+        Increment,
+        Decrement,
+        Invert,
+        Quantity
+    };
 }
 
 #endif  // RENDERING_SHADERS_STENCIL_STATE_FLAGS_H

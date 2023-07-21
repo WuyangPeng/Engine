@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 15:48)
+///	版本：0.9.1.1 (2023/07/18 18:11)
 
 #ifndef GAME_CLIENT_TESTING_GAME_CLIENT_SUITE_H
 #define GAME_CLIENT_TESTING_GAME_CLIENT_SUITE_H

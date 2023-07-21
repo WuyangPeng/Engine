@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/02/02 14:38)
+///	版本：0.9.1.1 (2023/07/20 11:37)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_SYSTEM_FLAGS_H
 #define SYSTEM_WINDOWS_WINDOWS_SYSTEM_FLAGS_H
@@ -22,7 +22,7 @@ namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    enum class Toolhelp32
+    enum class ToolHelp32
     {
         SnapHeapList = TH32CS_SNAPHEAPLIST,
         SnapProcess = TH32CS_SNAPPROCESS,

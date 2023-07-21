@@ -1,49 +1,58 @@
-///	Copyright (c) 2010-2023
+Ôªø///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///	‰ΩúËÄÖÔºöÂΩ≠Ê≠¶Èò≥ÔºåÂΩ≠ÊôîÊÅ©ÔºåÂΩ≠ÊôîÊ≥Ω
+///	ËÅîÁ≥ª‰ΩúËÄÖÔºö94458936@qq.com
 ///
-///	±Í◊º£∫std:c++20
-///	“˝«Ê∞Ê±æ£∫0.9.0.12 (2023/06/12 13:43)
+///	Ê†áÂáÜÔºöstd:c++20
+///	ÁâàÊú¨Ôºö0.9.1.1 (2023/07/20 20:16)
 
-#ifndef RENDERING_LOCAL_EFFECTS_TEXTURE3D_EFFECT_H
-#define RENDERING_LOCAL_EFFECTS_TEXTURE3D_EFFECT_H
+#ifndef RENDERING_LOCAL_EFFECTS_TEXTURE_3D_EFFECT_H
+#define RENDERING_LOCAL_EFFECTS_TEXTURE_3D_EFFECT_H
 
 #include "Rendering/RenderingDll.h"
 
 #include "VisualEffect.h"
-#include "Rendering/Resources/Textures/Texture3D.h"
-#include "Rendering/Shaders/Flags/ShaderFlags.h"
+#include "CoreTools/Contract/ContractFwd.h"
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
+#include "Rendering/Resources/ResourcesFwd.h"
+#include "Rendering/State/StateFwd.h"
+
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(Texture3DEffect, Texture3DEffectImpl);
 
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE Texture3DEffect : public VisualEffect
     {
     public:
-        using ClassType = Texture3DEffect;
+        COPY_UNSHARED_TYPE_DECLARE(Texture3DEffect);
         using ParentType = VisualEffect;
 
-    private:
-        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Texture3DEffect);
+        using Texture3DSharedPtr = std::shared_ptr<Texture3D>;
+        using SamplerStateSharedPtr = std::shared_ptr<SamplerState>;
 
     public:
-        explicit Texture3DEffect(ShaderFlags::SamplerFilter filter,
-                                 ShaderFlags::SamplerCoordinate coordinate0 = ShaderFlags::SamplerCoordinate::ClampEdge,
-                                 ShaderFlags::SamplerCoordinate coordinate1 = ShaderFlags::SamplerCoordinate::ClampEdge,
-                                 ShaderFlags::SamplerCoordinate coordinate2 = ShaderFlags::SamplerCoordinate::ClampEdge);
+        explicit Texture3DEffect(ProgramFactory& factory,
+                                 const BaseRendererSharedPtr& baseRenderer,
+                                 const Texture3DSharedPtr& texture,
+                                 SamplerStateFilter filter,
+                                 SamplerStateMode mode0,
+                                 SamplerStateMode mode1,
+                                 SamplerStateMode mode2);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        CORE_TOOLS_OBJECT_FACTORY_DECLARE(Texture3DEffect);
+        CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
+
+        NODISCARD Texture3DSharedPtr GetTexture() noexcept;
+        NODISCARD SamplerStateSharedPtr GetSamplerState() noexcept;
+
+        void SetProjectionViewWorldMatrixConstant(const ConstantBufferSharedPtr& buffer) override;
+
+    private:
+        PackageType impl;
     };
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-
-    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(Texture3DEffect);
-
-#include STSTEM_WARNING_POP
-
-    CORE_TOOLS_SHARED_PTR_DECLARE(Texture3DEffect);
 }
 
-#endif  // RENDERING_LOCAL_EFFECTS_TEXTURE3D_EFFECT_H
+#endif  // RENDERING_LOCAL_EFFECTS_TEXTURE_3D_EFFECT_H

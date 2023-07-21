@@ -35,7 +35,7 @@ namespace Framework
         void InformationTest();
         void AllowResizeTest();
         void NotAllowedResizeTest();
-        void RendererParameterTest();
+        void RendererParameterTest() noexcept;
 
     private:
         HInstance instance;

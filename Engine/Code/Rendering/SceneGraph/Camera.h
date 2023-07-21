@@ -38,7 +38,7 @@ namespace Rendering
         using Math = Mathematics::Math<float>;
 
     public:
-        explicit Camera(bool isPerspective, float epsilon = Math::GetZeroTolerance());
+        explicit Camera(bool isPerspective, bool isDepthRangeZeroOne, float epsilon = Math::GetZeroTolerance());
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 

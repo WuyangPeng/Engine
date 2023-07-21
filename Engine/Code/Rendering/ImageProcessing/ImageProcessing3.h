@@ -67,18 +67,18 @@ namespace Rendering
         float dz;
 
         static std::array<int, 2> allDirichletPTextureUnits;
-        static std::array<std::array<int, 2>*, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> dirichletPTextureUnits;
-        static std::array<std::string, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> dirichletPPrograms;
+        static std::array<std::array<int, 2>*, 5> dirichletPTextureUnits;
+        static std::array<std::string, 5> dirichletPPrograms;
 
         static std::array<int, 2> allNeumannPTextureUnits;
-        static std::array<std::array<int, 2>*, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> neumannPTextureUnits;
-        static std::array<std::string, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> neumannPPrograms;
+        static std::array<std::array<int, 2>*, 5> neumannPTextureUnits;
+        static std::array<std::string, 5> neumannPPrograms;
 
         static constexpr auto allDrawPRegisters = 0;
-        static std::array<const int*, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> drawPRegisters;
+        static std::array<const int*, 5> drawPRegisters;
         static std::array<int, 2> allDrawPTextureUnits;
-        static std::array<std::array<int, 2>*, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> drawPTextureUnits;
-        static std::array<std::string, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> drawPPrograms;
+        static std::array<std::array<int, 2>*, 5> drawPTextureUnits;
+        static std::array<std::string, 5> drawPPrograms;
     };
 }
 

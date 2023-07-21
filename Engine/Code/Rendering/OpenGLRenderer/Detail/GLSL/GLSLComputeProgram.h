@@ -12,9 +12,9 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/OpenGLRenderer/GLSL/GLSLReflection.h"
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Shaders/Detail/ComputeProgramImpl.h"
+#include "Rendering/Shaders/Reflection.h"
 
 namespace Rendering
 {
@@ -37,13 +37,13 @@ namespace Rendering
 
         NODISCARD OpenGLUInt GetProgramHandle() const noexcept;
         NODISCARD OpenGLUInt GetComputeShaderHandle() const noexcept;
-        NODISCARD GLSLReflection GetReflector() const override;
+        NODISCARD Reflection GetReflector() const override;
         NODISCARD ComputeProgramSharedPtr Clone() const override;
 
     private:
         OpenGLUInt programHandle;
         OpenGLUInt computeShaderHandle;
-        GLSLReflection reflector;
+        Reflection reflector;
     };
 }
 

@@ -61,9 +61,9 @@ void DatabaseGenerateServerBaseTesting::BookTesting::EffectiveTest()
         ASSERT_FALSE(article->GetName().empty());
         ASSERT_GREATER_EQUAL(article->GetVolume(), -2);
 
-        ASSERT_GREATER_EQUAL_USE_MESSAGE(article->GetAuthor().size(), article->GetAuthorDescribe().size(), "id = " + std::to_string(article->GetId()));
+        ASSERT_GREATER_EQUAL_USE_MESSAGE(article->GetAuthor().size(), article->GetAuthorNotes().size(), "id = " + std::to_string(article->GetId()));
 
-        ASSERT_GREATER_EQUAL_USE_MESSAGE(article->GetAnnotator().size(), article->GetAnnotateDescribe().size(), "id = " + std::to_string(article->GetId()));
+        ASSERT_GREATER_EQUAL_USE_MESSAGE(article->GetAnnotator().size(), article->GetAnnotateNotes().size(), "id = " + std::to_string(article->GetId()));
 
         const auto unansweredQuestion = article->GetUnansweredQuestion();
 

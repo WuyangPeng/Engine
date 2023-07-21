@@ -15,7 +15,7 @@
 #include "ShaderFloat.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "Rendering/SceneGraph/Light.h"
+#include "Rendering/LocalEffects/Light.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(LightConstant, LightConstantImpl);
 

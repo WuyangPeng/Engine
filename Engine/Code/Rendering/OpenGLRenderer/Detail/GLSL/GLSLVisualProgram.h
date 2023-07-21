@@ -13,6 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
+#include "Rendering/Shaders/Reflection.h"
 #include "Rendering/Shaders/Detail/VisualProgramImpl.h"
 
 namespace Rendering
@@ -38,7 +39,7 @@ namespace Rendering
         NODISCARD OpenGLUInt GetVertexShaderHandle() const noexcept;
         NODISCARD OpenGLUInt GetPixelShaderHandle() const noexcept;
         NODISCARD OpenGLUInt GetGShaderHandle() const noexcept;
-        NODISCARD GLSLReflection GetReflector() const override;
+        NODISCARD Reflection GetReflector() const override;
 
         NODISCARD VisualProgramSharedPtr Clone() const override;
 
@@ -47,7 +48,7 @@ namespace Rendering
         OpenGLUInt vertexShaderHandle;
         OpenGLUInt pixelShaderHandle;
         OpenGLUInt geometryShaderHandle;
-        GLSLReflection reflector;
+        Reflection reflector;
     };
 }
 

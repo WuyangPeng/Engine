@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:44)
+///	版本：0.9.1.1 (2023/07/01 16:46)
 
 #ifndef RENDERING_SHADERS_FWD_H
 #define RENDERING_SHADERS_FWD_H
@@ -14,6 +14,7 @@ namespace Rendering
 {
     enum class ShaderDataLookup;
     enum class ShaderAPIType;
+    enum class ReferenceType;
 
     class ShaderData;
     class Shader;
@@ -21,6 +22,18 @@ namespace Rendering
     class ComputeProgram;
     class ProgramFactory;
     class ProgramDefines;
+    class ProgramSources;
+
+    class Reflection;
+    class ReflectionUniform;
+    class ReflectionDataBlock;
+    class ReflectionAtomicCounterBuffer;
+    class ReflectionBufferVariable;
+    class ReflectionInput;
+    class ReflectionOutput;
+    class ReflectionSubroutineUniform;
+    class ReflectionTransformFeedbackBuffer;
+    class ReflectionTransformFeedbackVarying;
 }
 
 #endif  // RENDERING_SHADERS_FWD_H

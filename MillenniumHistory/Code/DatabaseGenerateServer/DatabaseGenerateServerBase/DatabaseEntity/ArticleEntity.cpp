@@ -1,239 +1,269 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/30 23:23)
+/// 标准：std:c++20
+/// 自动生成
 
 #include "ArticleEntity.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "Database/DatabaseInterface/BasisDatabaseDetail.h"
 #include "Database/DatabaseInterface/BasisDatabaseManagerDetail.h"
 #include "Database/DatabaseInterface/DatabaseEntityDetail.h"
 #include "Database/DatabaseInterface/DatabaseField.h"
 #include "Database/DatabaseInterface/EntityDetail.h"
 
-AncientBooks::ArticleEntity::ArticleEntity(const BasisDatabaseManager& entity)
+DatabaseEntity::ArticleEntity DatabaseEntity::ArticleEntity::Create(const BasisDatabaseManager& entity, WrappersStrategy wrappersStrategy, Database::Traits::ParamType::Int64 id)
+{
+    return entity.IsModify() ? ArticleEntity{ entity } : ArticleEntity{ wrappersStrategy, id };
+}
+
+DatabaseEntity::ArticleEntity::ArticleEntity(const BasisDatabaseManager& entity)
     : ParentType{ entity },
       id{ entity.GetValue<DataType::Int64>(idDescribe) },
       version{ entity.GetValue<DataType::Int32>(versionDescribe) },
       chapter{ entity.GetValue<DataType::Int32>(chapterDescribe) },
       chapterName{ entity.GetValue<DataType::String>(chapterNameDescribe) },
-      volume{ entity.GetValue<DataType::Int32>(volumeDescribe) },
       chapterVolume{ entity.GetValue<DataType::Int32>(chapterVolumeDescribe) },
       otherAuthor{ entity.GetValue<DataType::Int32Array>(otherAuthorDescribe) },
-      authorDescribe{ entity.GetValue<DataType::StringArray>(authorDescribeDescribe) },
+      authorNotes{ entity.GetValue<DataType::StringArray>(authorNotesDescribe) },
       title{ entity.GetValue<DataType::String>(titleDescribe) },
       abbreviation{ entity.GetValue<DataType::String>(abbreviationDescribe) },
       directory{ entity.GetValue<DataType::String>(directoryDescribe) }
 {
-    DATABASE_SELF_CLASS_IS_VALID_9;
+    USER_SELF_CLASS_IS_VALID_9;
 }
 
-AncientBooks::ArticleEntity::ArticleEntity(WrappersStrategy wrappersStrategy, boost::call_traits<Database::Traits::Int64>::param_type id)
+DatabaseEntity::ArticleEntity::ArticleEntity(WrappersStrategy wrappersStrategy, Database::Traits::ParamType::Int64 id)
     : ParentType{ wrappersStrategy, databaseName.data(), GetKeyBasisDatabaseContainer(id) },
       id{ id },
       version{ Database::Traits::Int32{} },
       chapter{ Database::Traits::Int32{} },
       chapterName{ Database::Traits::String{} },
-      volume{ Database::Traits::Int32{} },
       chapterVolume{ Database::Traits::Int32{} },
       otherAuthor{ Database::Traits::Int32Array{} },
-      authorDescribe{ Database::Traits::StringArray{} },
+      authorNotes{ Database::Traits::StringArray{} },
       title{ Database::Traits::String{} },
       abbreviation{ Database::Traits::String{} },
       directory{ Database::Traits::String{} }
 {
     AddModify(idDescribe, id);
 
-    DATABASE_SELF_CLASS_IS_VALID_9;
+    USER_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AncientBooks, ArticleEntity)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseEntity, ArticleEntity)
 
-Database::Traits::Int64 AncientBooks::ArticleEntity::GetId() const noexcept
+Database::Traits::Int64 DatabaseEntity::ArticleEntity::GetId() const noexcept
 {
-    DATABASE_CLASS_IS_VALID_CONST_9;
+    USER_CLASS_IS_VALID_CONST_9;
 
     return id.GetValue();
 }
 
-Database::Traits::Int32 AncientBooks::ArticleEntity::GetVersion() const noexcept
+Database::Traits::Int32 DatabaseEntity::ArticleEntity::GetVersion() const noexcept
 {
-    DATABASE_CLASS_IS_VALID_CONST_9;
+    USER_CLASS_IS_VALID_CONST_9;
 
     return version.GetValue();
 }
 
-Database::Traits::Int32 AncientBooks::ArticleEntity::GetChapter() const noexcept
+Database::Traits::Int32 DatabaseEntity::ArticleEntity::GetChapter() const noexcept
 {
-    DATABASE_CLASS_IS_VALID_CONST_9;
+    USER_CLASS_IS_VALID_CONST_9;
 
     return chapter.GetValue();
 }
 
-Database::Traits::String AncientBooks::ArticleEntity::GetChapterName() const
+Database::Traits::String DatabaseEntity::ArticleEntity::GetChapterName() const
 {
-    DATABASE_CLASS_IS_VALID_CONST_9;
+    USER_CLASS_IS_VALID_CONST_9;
 
     return chapterName.GetValue();
 }
 
-Database::Traits::Int32 AncientBooks::ArticleEntity::GetVolume() const noexcept
+Database::Traits::Int32 DatabaseEntity::ArticleEntity::GetChapterVolume() const noexcept
 {
-    DATABASE_CLASS_IS_VALID_CONST_9;
-
-    return volume.GetValue();
-}
-
-Database::Traits::Int32 AncientBooks::ArticleEntity::GetChapterVolume() const noexcept
-{
-    DATABASE_CLASS_IS_VALID_CONST_9;
+    USER_CLASS_IS_VALID_CONST_9;
 
     return chapterVolume.GetValue();
 }
 
-Database::Traits::Int32Array AncientBooks::ArticleEntity::GetOtherAuthor() const
+Database::Traits::Int32Array DatabaseEntity::ArticleEntity::GetOtherAuthor() const
 {
-    DATABASE_CLASS_IS_VALID_CONST_9;
+    USER_CLASS_IS_VALID_CONST_9;
 
     return otherAuthor.GetValue();
 }
 
-Database::Traits::StringArray AncientBooks::ArticleEntity::GetAuthorDescribe() const
+Database::Traits::StringArray DatabaseEntity::ArticleEntity::GetAuthorNotes() const
 {
-    DATABASE_CLASS_IS_VALID_CONST_9;
+    USER_CLASS_IS_VALID_CONST_9;
 
-    return authorDescribe.GetValue();
+    return authorNotes.GetValue();
 }
 
-Database::Traits::String AncientBooks::ArticleEntity::GetTitle() const
+Database::Traits::String DatabaseEntity::ArticleEntity::GetTitle() const
 {
-    DATABASE_CLASS_IS_VALID_CONST_9;
+    USER_CLASS_IS_VALID_CONST_9;
 
     return title.GetValue();
 }
 
-Database::Traits::String AncientBooks::ArticleEntity::GetAbbreviation() const
+Database::Traits::String DatabaseEntity::ArticleEntity::GetAbbreviation() const
 {
-    DATABASE_CLASS_IS_VALID_CONST_9;
+    USER_CLASS_IS_VALID_CONST_9;
 
     return abbreviation.GetValue();
 }
 
-Database::Traits::String AncientBooks::ArticleEntity::GetDirectory() const
+Database::Traits::String DatabaseEntity::ArticleEntity::GetDirectory() const
 {
-    DATABASE_CLASS_IS_VALID_CONST_9;
+    USER_CLASS_IS_VALID_CONST_9;
 
     return directory.GetValue();
 }
 
-void AncientBooks::ArticleEntity::SetVersion(boost::call_traits<Database::Traits::Int32>::param_type aVersion)
+void DatabaseEntity::ArticleEntity::SetId(Database::Traits::ParamType::Int64 aId)
 {
-    DATABASE_CLASS_IS_VALID_9;
+    USER_CLASS_IS_VALID_9;
 
-    version.SetValue(aVersion);
+    if (aId != GetId())
+    {
+        id.SetValue(aId);
 
-    AddModify(versionDescribe, aVersion);
+        AddModify(idDescribe, GetId());
+    }
 }
 
-void AncientBooks::ArticleEntity::SetChapter(boost::call_traits<Database::Traits::Int32>::param_type aChapter)
+void DatabaseEntity::ArticleEntity::SetVersion(Database::Traits::ParamType::Int32 aVersion)
 {
-    DATABASE_CLASS_IS_VALID_9;
+    USER_CLASS_IS_VALID_9;
 
-    chapter.SetValue(aChapter);
+    if (aVersion != GetVersion())
+    {
+        version.SetValue(aVersion);
 
-    AddModify(chapterDescribe, aChapter);
+        AddModify(versionDescribe, GetVersion());
+    }
 }
 
-void AncientBooks::ArticleEntity::SetChapterName(boost::call_traits<Database::Traits::String>::param_type aChapterName)
+void DatabaseEntity::ArticleEntity::SetChapter(Database::Traits::ParamType::Int32 aChapter)
 {
-    DATABASE_CLASS_IS_VALID_9;
+    USER_CLASS_IS_VALID_9;
 
-    chapterName.SetValue(aChapterName);
+    if (aChapter != GetChapter())
+    {
+        chapter.SetValue(aChapter);
 
-    AddModify(chapterNameDescribe, aChapterName);
+        AddModify(chapterDescribe, GetChapter());
+    }
 }
 
-void AncientBooks::ArticleEntity::SetVolume(boost::call_traits<Database::Traits::Int32>::param_type aVolume)
+void DatabaseEntity::ArticleEntity::SetChapterName(Database::Traits::ParamType::String aChapterName)
 {
-    DATABASE_CLASS_IS_VALID_9;
+    USER_CLASS_IS_VALID_9;
 
-    volume.SetValue(aVolume);
+    if (aChapterName != GetChapterName())
+    {
+        chapterName.SetValue(aChapterName);
 
-    AddModify(volumeDescribe, aVolume);
+        AddModify(chapterNameDescribe, GetChapterName());
+    }
 }
 
-void AncientBooks::ArticleEntity::SetChapterVolume(boost::call_traits<Database::Traits::Int32>::param_type aChapterVolume)
+void DatabaseEntity::ArticleEntity::SetChapterVolume(Database::Traits::ParamType::Int32 aChapterVolume)
 {
-    DATABASE_CLASS_IS_VALID_9;
+    USER_CLASS_IS_VALID_9;
 
-    chapterVolume.SetValue(aChapterVolume);
+    if (aChapterVolume != GetChapterVolume())
+    {
+        chapterVolume.SetValue(aChapterVolume);
 
-    AddModify(chapterVolumeDescribe, aChapterVolume);
+        AddModify(chapterVolumeDescribe, GetChapterVolume());
+    }
 }
 
-void AncientBooks::ArticleEntity::SetOtherAuthor(boost::call_traits<Database::Traits::Int32Array>::param_type aOtherAuthor)
+void DatabaseEntity::ArticleEntity::SetOtherAuthor(Database::Traits::ParamType::Int32Array aOtherAuthor)
 {
-    DATABASE_CLASS_IS_VALID_9;
+    USER_CLASS_IS_VALID_9;
 
-    otherAuthor.SetValue(aOtherAuthor);
+    if (aOtherAuthor != GetOtherAuthor())
+    {
+        otherAuthor.SetValue(aOtherAuthor);
 
-    AddModify(otherAuthorDescribe, aOtherAuthor);
+        AddModify(otherAuthorDescribe, GetOtherAuthor());
+    }
 }
 
-void AncientBooks::ArticleEntity::SetAuthorDescribe(boost::call_traits<Database::Traits::StringArray>::param_type aAuthorDescribe)
+void DatabaseEntity::ArticleEntity::SetAuthorNotes(Database::Traits::ParamType::StringArray aAuthorNotes)
 {
-    DATABASE_CLASS_IS_VALID_9;
+    USER_CLASS_IS_VALID_9;
 
-    authorDescribe.SetValue(aAuthorDescribe);
+    if (aAuthorNotes != GetAuthorNotes())
+    {
+        authorNotes.SetValue(aAuthorNotes);
 
-    AddModify(authorDescribeDescribe, aAuthorDescribe);
+        AddModify(authorNotesDescribe, GetAuthorNotes());
+    }
 }
 
-void AncientBooks::ArticleEntity::SetTitle(boost::call_traits<Database::Traits::String>::param_type aTitle)
+void DatabaseEntity::ArticleEntity::SetTitle(Database::Traits::ParamType::String aTitle)
 {
-    DATABASE_CLASS_IS_VALID_9;
+    USER_CLASS_IS_VALID_9;
 
-    title.SetValue(aTitle);
+    if (aTitle != GetTitle())
+    {
+        title.SetValue(aTitle);
 
-    AddModify(titleDescribe, aTitle);
+        AddModify(titleDescribe, GetTitle());
+    }
 }
 
-void AncientBooks::ArticleEntity::SetAbbreviation(boost::call_traits<Database::Traits::String>::param_type aAbbreviation)
+void DatabaseEntity::ArticleEntity::SetAbbreviation(Database::Traits::ParamType::String aAbbreviation)
 {
-    DATABASE_CLASS_IS_VALID_9;
+    USER_CLASS_IS_VALID_9;
 
-    abbreviation.SetValue(aAbbreviation);
+    if (aAbbreviation != GetAbbreviation())
+    {
+        abbreviation.SetValue(aAbbreviation);
 
-    AddModify(abbreviationDescribe, aAbbreviation);
+        AddModify(abbreviationDescribe, GetAbbreviation());
+    }
 }
 
-void AncientBooks::ArticleEntity::SeDirectory(boost::call_traits<Database::Traits::String>::param_type aDirectory)
+void DatabaseEntity::ArticleEntity::SetDirectory(Database::Traits::ParamType::String aDirectory)
 {
-    DATABASE_CLASS_IS_VALID_9;
+    USER_CLASS_IS_VALID_9;
 
-    directory.SetValue(aDirectory);
+    if (aDirectory != GetDirectory())
+    {
+        directory.SetValue(aDirectory);
 
-    AddModify(directoryDescribe, aDirectory);
+        AddModify(directoryDescribe, GetDirectory());
+    }
 }
 
-const AncientBooks::ArticleEntity::DatabaseFieldContainer& AncientBooks::ArticleEntity::GetDatabaseFieldContainer()
+const DatabaseEntity::ArticleEntity::DatabaseFieldContainer& DatabaseEntity::ArticleEntity::GetDatabaseFieldContainer()
 {
     static const DatabaseFieldContainer fieldNameContainer{ decltype(id)::GetDatabaseField(),
                                                             decltype(version)::GetDatabaseField(),
                                                             decltype(chapter)::GetDatabaseField(),
                                                             decltype(chapterName)::GetDatabaseField(),
-                                                            decltype(volume)::GetDatabaseField(),
-                                                            decltype(chapterVolume)::GetDatabaseField() };
+                                                            decltype(chapterVolume)::GetDatabaseField(),
+                                                            decltype(otherAuthor)::GetDatabaseField(),
+                                                            decltype(authorNotes)::GetDatabaseField(),
+                                                            decltype(title)::GetDatabaseField(),
+                                                            decltype(abbreviation)::GetDatabaseField(),
+                                                            decltype(directory)::GetDatabaseField() };
 
     return fieldNameContainer;
 }
 
-AncientBooks::ArticleEntity::BasisDatabaseManager AncientBooks::ArticleEntity::GetSelect(Database::WrappersStrategy wrappersStrategy,
-                                                                                         boost::call_traits<Database::Traits::Int64>::param_type id)
+DatabaseEntity::ArticleEntity::BasisDatabaseManager DatabaseEntity::ArticleEntity::GetSelect(WrappersStrategy wrappersStrategy, Database::Traits::ParamType::Int64 id)
 {
     return BasisDatabaseManager{ wrappersStrategy,
                                  databaseName,
@@ -241,7 +271,7 @@ AncientBooks::ArticleEntity::BasisDatabaseManager AncientBooks::ArticleEntity::G
                                  GetKeyBasisDatabaseContainer(id) };
 }
 
-Database::BasisDatabaseContainer AncientBooks::ArticleEntity::GetKeyBasisDatabaseContainer(boost::call_traits<Database::Traits::Int64>::param_type id)
+Database::BasisDatabaseContainer DatabaseEntity::ArticleEntity::GetKeyBasisDatabaseContainer(Database::Traits::ParamType::Int64 id)
 {
     BasisDatabaseContainer basisDatabaseContainer{ BasisDatabaseContainer::ObjectContainer{ Database::BasisDatabase{ idDescribe, id } } };
 

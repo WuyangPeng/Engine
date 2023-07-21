@@ -18,6 +18,7 @@
 #include "Rendering/Base/RendererObject.h"
 #include "Rendering/Base/RendererObjectBridge.h"
 #include "Rendering/Base/TotalAllocation.h"
+#include "Rendering/LocalEffects/Flags/FontFlags.h"
 #include "Rendering/LocalEffects/Font.h"
 #include "Rendering/LocalEffects/OverlayEffect.h"
 #include "Rendering/LocalEffects/TextEffect.h"
@@ -29,6 +30,7 @@
 #include "Rendering/Resources/Textures/Texture.h"
 #include "Rendering/Resources/Textures/TextureArray.h"
 #include "Rendering/SceneGraph/Visual.h"
+#include "Rendering/Shaders/ProgramFactory.h"
 #include "Rendering/Shaders/Shader.h"
 #include "Rendering/State/BlendState.h"
 #include "Rendering/State/DepthStencilState.h"
@@ -38,11 +40,20 @@ Rendering::BaseRendererImpl::BaseRendererImpl(RendererTypes rendererTypes, const
     : rendererTypes{ rendererTypes },
       rendererAdapter{ renderingEnvironment },
       rendererClear{},
-      globalFont{ GlobalFont::Create() },
+      globalFont{ CreateGlobalFont(rendererTypes) },
       globalState{ rendererTypes, "BlendState", "DepthStencilState", "RasterizerState", rendererAdapter.GetRendererObjectBridge() },
       allowOcclusionQuery{ false }
 {
+    rendererClear.SetClearColor(renderingEnvironment.GetClearColor());
+
     RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::GlobalFont Rendering::BaseRendererImpl::CreateGlobalFont(RendererTypes rendererTypes)
+{
+    ProgramFactory programFactory{ rendererTypes };
+
+    return GlobalFont{ FontType::ArialW400H18, programFactory, 256 };
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, BaseRendererImpl)
@@ -287,6 +298,13 @@ Rendering::BaseRendererImpl::BlendStateSharedPtr Rendering::BaseRendererImpl::Ge
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return globalState.GetDefaultBlendState();
+}
+
+void Rendering::BaseRendererImpl::SetDefaultBlendState()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return globalState.SetDefaultBlendState();
 }
 
 void Rendering::BaseRendererImpl::SetDepthStencilState(const DepthStencilStateSharedPtr& state)

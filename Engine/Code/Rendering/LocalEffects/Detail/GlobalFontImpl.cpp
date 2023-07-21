@@ -15,12 +15,10 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/LocalEffects/Font.h"
 
-Rendering::GlobalFontImpl::GlobalFontImpl(CoreTools::DisableNotThrow disableNotThrow)
-    : defaultFont{ std::make_shared<Font>() },
+Rendering::GlobalFontImpl::GlobalFontImpl(FontType fontType, ProgramFactory& factory, int maxMessageLength)
+    : defaultFont{ std::make_shared<Font>(fontType, factory, maxMessageLength) },
       activeFont{ defaultFont }
 {
-    System::UnusedFunction(disableNotThrow);
-
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 

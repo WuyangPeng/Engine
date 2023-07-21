@@ -5,13 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:43)
+///	版本：0.9.1.1 (2023/07/05 11:26)
 
 #ifndef RENDERING_SHADERS_PROGRAM_FACTORY_H
 #define RENDERING_SHADERS_PROGRAM_FACTORY_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "Flags/ShaderAPIType.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Shaders/ShadersFwd.h"
@@ -26,8 +28,10 @@ namespace Rendering
     {
     public:
         NON_COPY_TYPE_DECLARE(ProgramFactory);
+
         using VisualProgramSharedPtr = std::shared_ptr<VisualProgram>;
         using ComputeProgramSharedPtr = std::shared_ptr<ComputeProgram>;
+        using ProgramSources = std::array<std::string, System::EnumCastUnderlying(ShaderAPIType::NumAPI)>;
 
     public:
         explicit ProgramFactory(RendererTypes rendererTypes);
@@ -36,11 +40,11 @@ namespace Rendering
 
         NODISCARD ShaderAPIType GetAPI() const noexcept;
 
-        NODISCARD VisualProgramSharedPtr CreateFromFiles(const std::string& vsFile, const std::string& psFile, const std::string& gsFile);
-        NODISCARD VisualProgramSharedPtr CreateFromSources(const std::string& vsSource, const std::string& psSource, const std::string& gsSource);
+        NODISCARD VisualProgramSharedPtr CreateFromFiles(const std::string& vertexShaderFile, const std::string& pixelShaderFile, const std::string& geometryShaderFile);
+        NODISCARD VisualProgramSharedPtr CreateFromSources(const std::string& vertexShaderSource, const std::string& pixelShaderSource, const std::string& geometryShaderSource);
 
-        NODISCARD ComputeProgramSharedPtr CreateFromFile(const std::string& csFile);
-        NODISCARD ComputeProgramSharedPtr CreateFromSource(const std::string& csSource);
+        NODISCARD ComputeProgramSharedPtr CreateFromFile(const std::string& computeShaderFile);
+        NODISCARD ComputeProgramSharedPtr CreateFromSource(const std::string& computeShaderSource);
 
         void PushDefines();
         void PopDefines();

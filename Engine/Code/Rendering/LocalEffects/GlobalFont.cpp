@@ -19,13 +19,8 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, GlobalFont)
 
-Rendering::GlobalFont Rendering::GlobalFont::Create()
-{
-    return GlobalFont{ CoreTools::DisableNotThrow::Disable };
-}
-
-Rendering::GlobalFont::GlobalFont(CoreTools::DisableNotThrow disableNotThrow)
-    : impl{ disableNotThrow }
+Rendering::GlobalFont::GlobalFont(FontType fontType, ProgramFactory& factory, int maxMessageLength)
+    : impl{ fontType, factory, maxMessageLength }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

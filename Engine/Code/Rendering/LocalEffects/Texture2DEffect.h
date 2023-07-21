@@ -13,26 +13,41 @@
 #include "Rendering/RenderingDll.h"
 
 #include "VisualEffect.h"
-#include "Rendering/Resources/Textures/Texture2D.h"
-#include "Rendering/Shaders/Flags/ShaderFlags.h"
+#include "Rendering/Resources/ResourcesFwd.h"
+#include "Rendering/State/StateFwd.h"
+
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(Texture2DEffect, Texture2DEffectImpl);
 
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE Texture2DEffect : public VisualEffect
     {
     public:
-        using ClassType = Texture2DEffect;
+        COPY_UNSHARED_TYPE_DECLARE(Texture2DEffect);
         using ParentType = VisualEffect;
 
-    private:
-        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Texture2DEffect);
+        using Texture2DSharedPtr = std::shared_ptr<Texture2D>;
+        using SamplerStateSharedPtr = std::shared_ptr<SamplerState>;
 
     public:
-        explicit Texture2DEffect(ShaderFlags::SamplerFilter filter,
-                                 ShaderFlags::SamplerCoordinate coordinate0 = ShaderFlags::SamplerCoordinate::ClampEdge,
-                                 ShaderFlags::SamplerCoordinate coordinate1 = ShaderFlags::SamplerCoordinate::ClampEdge);
+        Texture2DEffect(ProgramFactory& factory,
+                        const BaseRendererSharedPtr& baseRenderer,
+                        const Texture2DSharedPtr& texture,
+                        SamplerStateFilter filter,
+                        SamplerStateMode mode0,
+                        SamplerStateMode mode1);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Texture2DEffect);
+
+        NODISCARD Texture2DSharedPtr GetTexture() noexcept;
+        NODISCARD SamplerStateSharedPtr GetSamplerState() noexcept;
+
+        void SetProjectionViewWorldMatrixConstant(const ConstantBufferSharedPtr& buffer) override;
+
+    private:
+        PackageType impl;
     };
 
 #include STSTEM_WARNING_PUSH

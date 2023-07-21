@@ -357,7 +357,10 @@
     <ClCompile Include="..\..\..\Code\Rendering\Detail\SwitchNode.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DllLib.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DllMain.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\Detail\LightProjectorImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\Detail\PlanarReflectionEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\Detail\PlanarShadowEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\LightProjector.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\PlanarReflectionEffect.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\GlobalEffects\PlanarShadowEffect.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\GlutRenderer\GlutRenderers.cpp" />
@@ -366,49 +369,74 @@
     <ClCompile Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing2.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing3.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessingBase.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\DefaultEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\AreaLightEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\AreaLightEffectParameters.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\BumpMapEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\ConstantColorEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\CubeMapEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\AreaLightEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\AreaLightEffectParametersImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\BumpMapEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\ConstantColorEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\CubeMapEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\DirectionalLightTextureEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H12.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H14.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H16.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H18.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H12.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H14.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H16.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H18.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontFactory.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\GlobalFontImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\GlossMapEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightCameraGeometryImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\MaterialImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\OverlayEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\PointLightTextureEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\ProjectedTextureEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\SphereMapEffectImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\TextEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\Texture2DEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\Texture3DEffectImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\VisualEffectImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\DirectionalLightEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\DirectionalLightTextureEffect.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Font.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\GlobalFont.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightAmbEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\GlossMapEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Light.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\AmbientLightEffect.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightCameraGeometry.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightDirPerPixEffect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightDirPerVerEffect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerPixEffect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerVerEffect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightSptPerPixEffect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightSptPerVerEffect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\MaterialEffect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\MaterialTextureEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\LightEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Material.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\OverlayEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\PointLightEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\PointLightTextureEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\ProjectedTextureEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\SphereMapEffect.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\SpotLightEffect.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\TextEffect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture1DEffect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture2AddEffect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture2ColorBlendEffect.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture2DEffect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture2MulEffect.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture3DEffect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\VertexColor3Effect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4Effect.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4TextureEffect.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\VisualEffect.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLComputeProgram.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLProgramFactory.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionAtomicCounterBufferImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionBufferVariableImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionDataBlockImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionAtomicCounterBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionBufferVariable.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionDataBlock.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionEnumMap.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionInputImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionOutputImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionSubroutineUniformImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackBufferImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackVaryingImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionUniformImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflection.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionInput.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionOutput.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionSubroutineUniform.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackVarying.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionUniform.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLShader.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLVisualProgram.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\InputLayout\OpenGLInputLayoutImpl.cpp" />
@@ -421,16 +449,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLDepthStencilStateImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLGlobalState.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLRasterizerStateImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflection.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionAtomicCounterBuffer.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionBufferVariable.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionDataBlock.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionInput.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionOutput.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionSubroutineUniform.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionTransformFeedbackBuffer.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionTransformFeedbackVarying.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionUniform.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayout.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayoutAttribute.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayoutManager.cpp" />
@@ -553,8 +571,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraMatrix.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraNodeImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CullerImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\LightImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\MaterialImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\NodeImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\NormalDerivatives.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParticlesImpl.cpp" />
@@ -568,9 +584,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualData.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\WorldCoordinateFrame.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Light.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\LoadVisual.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Material.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Node.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Particles.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Picker.cpp" />
@@ -578,6 +592,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\PickRecordContainer.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Polypoint.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Polysegment.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\ProjectionViewWorldUpdater.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Projector.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\SaveVisual.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\ScreenTarget.cpp" />
@@ -625,15 +640,49 @@
     <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\ViewWorldMatrixConstant.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\WorldMatrixConstant.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\ComputeProgram.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ComputeProgramFactory.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ComputeProgramImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\NullComputeProgram.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramDefinesImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramFactoryImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramSourcesImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionAtomicCounterBufferFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionAtomicCounterBufferImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionBufferVariableFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionBufferVariableImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionDataBlockFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionDataBlockImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionInputFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionInputImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionOutputFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionOutputImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionSubroutineUniformFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionSubroutineUniformImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackBufferFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackBufferImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackVaryingFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackVaryingImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionUniformFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionUniformImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderDataImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderFactory.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\VisualProgramImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\ProgramDefines.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\ProgramFactory.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ProgramSources.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Reflection.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionAtomicCounterBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionBufferVariable.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionDataBlock.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionInput.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionOutput.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionSubroutineUniform.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionTransformFeedbackBuffer.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionTransformFeedbackVarying.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\ReflectionUniform.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Shader.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\ShaderData.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\VisualProgram.cpp" />
@@ -785,9 +834,12 @@
     <ClInclude Include="..\..\..\Code\Rendering\DllLib.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Renderer.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9RendererFwd.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\Detail\LightProjectorImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\Detail\PlanarReflectionEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\Detail\PlanarShadowEffectImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffects.h" />
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\GlobalEffectsFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\LightProjector.h" />
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\PlanarReflectionEffect.h" />
     <ClInclude Include="..\..\..\Code\Rendering\GlobalEffects\PlanarShadowEffect.h" />
     <ClInclude Include="..\..\..\Code\Rendering\GlutRenderer\GlutRenderer.h" />
@@ -809,53 +861,81 @@
     <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessing3.h" />
     <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessingBase.h" />
     <ClInclude Include="..\..\..\Code\Rendering\ImageProcessing\ImageProcessingFwd.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\DefaultEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\AreaLightEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\AreaLightEffectParameters.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\BumpMapEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\ConstantColorEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\CubeMapEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\AreaLightEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\AreaLightEffectParametersImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\BumpMapEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\ConstantColorEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\CubeMapEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\DirectionalLightTextureEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H12.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H14.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H16.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW400H18.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H12.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H14.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H16.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontArialW700H18.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontFactory.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\GlobalFontImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\GlossMapEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightCameraGeometryImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\LightImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\MaterialImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\OverlayEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\PointLightTextureEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\ProjectedTextureEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\SphereMapEffectImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\TextEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\Texture2DEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\Texture3DEffectImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\VisualEffectImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\DirectionalLightEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\DirectionalLightTextureEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Flags\FontFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Flags\LightFlags.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Font.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\GlobalFont.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightAmbEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\GlossMapEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Light.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\AmbientLightEffect.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightCameraGeometry.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightDirPerPixEffect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightDirPerVerEffect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerPixEffect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightPntPerVerEffect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightSptPerPixEffect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightSptPerVerEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LightEffect.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LocalEffects.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LocalEffectsFwd.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\MaterialEffect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\MaterialTextureEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\LocalEffectsInternalFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Material.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\OverlayEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\PointLightEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\PointLightTextureEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\ProjectedTextureEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\SphereMapEffect.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\SpotLightEffect.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\TextEffect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture1DEffect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture2AddEffect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture2ColorBlendEffect.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture2DEffect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture2MulEffect.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture3DEffect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VertexColor3Effect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4Effect.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VertexColor4TextureEffect.h" />
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VisualEffect.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLAPI\OpenGLAPI.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLAPI\OpenGLAPIFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLComputeProgram.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLProgramFactory.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionAtomicCounterBufferImpl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionBufferVariableImpl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionDataBlockImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionAtomicCounterBuffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionBufferVariable.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionDataBlock.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionEnumMap.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionImpl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionInputImpl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionOutputImpl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionSubroutineUniformImpl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackBufferImpl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackVaryingImpl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionUniformImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflection.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionInput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionOutput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionSubroutineUniform.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackBuffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackVarying.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionUniform.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLShader.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLVisualProgram.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\InputLayout\OpenGLInputLayoutImpl.h" />
@@ -868,17 +948,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLDepthStencilStateImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLGlobalState.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLRasterizerStateImpl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Flags\ReferenceType.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflection.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionAtomicCounterBuffer.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionBufferVariable.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionDataBlock.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionInput.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionOutput.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionSubroutineUniform.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionTransformFeedbackBuffer.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionTransformFeedbackVarying.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionUniform.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayout.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayoutAttribute.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayoutManager.h" />
@@ -1037,14 +1106,13 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CameraManager.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CameraNode.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Culler.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\CullingPlane.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraFrustum.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraManagerImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraMatrix.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraNodeImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\CullerImpl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\LightImpl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\MaterialImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\NodeImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\NormalDerivatives.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\ParticlesImpl.h" />
@@ -1060,11 +1128,8 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\WorldCoordinateFrame.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\CameraFlags.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\CullingModeFlags.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\LightFlags.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\VisualFlags.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Light.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\LoadVisual.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Material.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Node.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Particles.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Picker.h" />
@@ -1072,6 +1137,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\PickRecordContainer.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Polypoint.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Polysegment.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\ProjectionViewWorldUpdater.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Projector.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SaveVisual.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SceneGraph.h" />
@@ -1123,9 +1189,32 @@
     <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\ViewWorldMatrixConstant.h" />
     <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\WorldMatrixConstant.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\ComputeProgram.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ComputeProgramFactory.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ComputeProgramImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\NullComputeProgram.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramDefinesImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramFactoryImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramSourcesImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionAtomicCounterBufferFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionAtomicCounterBufferImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionBufferVariableFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionBufferVariableImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionDataBlockFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionDataBlockImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionInputFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionInputImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionOutputFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionOutputImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionSubroutineUniformFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionSubroutineUniformImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackBufferFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackBufferImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackVaryingFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionTransformFeedbackVaryingImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionUniformFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ReflectionUniformImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderDataImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderFactory.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderImpl.h" />
@@ -1133,13 +1222,24 @@
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\VisualProgramImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\AlphaStateFlags.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\DepthStateFlags.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\ReferenceType.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\ShaderAPIType.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\ShaderDataLookup.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\ShaderFlags.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\StencilStateFlags.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\ProgramDefines.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\ProgramDefinesDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\ProgramFactory.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ProgramSources.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Reflection.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionAtomicCounterBuffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionBufferVariable.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionDataBlock.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionInput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionOutput.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionSubroutineUniform.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionTransformFeedbackBuffer.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionTransformFeedbackVarying.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\ReflectionUniform.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Shader.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\ShaderData.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\ShaderDetail.h" />
@@ -1195,6 +1295,47 @@
     <ClInclude Include="..\..\..\Code\Rendering\WglRenderer\WglRendererFwd.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\AmbientLightEffect.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\AmbientLightEffect.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\AreaLightEffect.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\AreaLightEffect.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\BumpMapEffect.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\BumpMapEffect.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\ConstantColorEffect.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\ConstantColorEffect.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\CubeMapEffect.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\CubeMapEffect.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.ps.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.ps.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.vs.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.vs.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightTextureEffect.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightTextureEffect.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\GlossMapEffect.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\GlossMapEffect.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\OverlayEffect.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\OverlayEffectColor.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\OverlayEffectGray.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.ps.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.ps.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.vs.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.vs.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightTextureEffect.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightTextureEffect.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\ProjectedTextureEffect.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\ProjectedTextureEffect.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\SphereMapEffect.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\SphereMapEffect.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.ps.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.ps.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.vs.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.vs.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\TextEffect.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\TextEffect.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture2DEffect.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture2DEffect.vs.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture3DEffect.ps.glsl" />
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture3DEffect.vs.glsl" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
@@ -1209,6 +1350,746 @@
     <Text Include="Resource\Todo\Level 7.txt" />
     <Text Include="Resource\Todo\Level 8.txt" />
     <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\AmbientLightEffect.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\AmbientLightEffect.vs.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\AreaLightEffect.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\AreaLightEffect.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\BumpMapEffect.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\BumpMapEffect.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\ConstantColorEffect.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\ConstantColorEffect.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\CubeMapEffect.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\CubeMapEffect.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.ps.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.ps.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.vs.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightEffect.vs.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightTextureEffect.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\DirectionalLightTextureEffect.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\GlossMapEffect.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\GlossMapEffect.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\OverlayEffect.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\OverlayEffectColor.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\OverlayEffectGray.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.ps.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.ps.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.vs.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightEffect.vs.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightTextureEffect.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\PointLightTextureEffect.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\ProjectedTextureEffect.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\ProjectedTextureEffect.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\SphereMapEffect.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\SphereMapEffect.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.ps.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.ps.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.vs.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\SpotLightEffect.vs.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\TextEffect.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\TextEffect.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture2DEffect.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture2DEffect.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture3DEffect.ps.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">PSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture3DEffect.vs.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

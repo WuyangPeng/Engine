@@ -55,11 +55,11 @@ namespace AncientBooks
         NODISCARD IntContainerConstIter GetAuthorEnd() const noexcept override;
         NODISCARD CharacterContainer GetAuthor(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD StringContainer GetAuthorDescribe() const override;
-        NODISCARD int GetAuthorDescribeCount() const override;
-        NODISCARD String GetAuthorDescribe(int index) const override;
-        NODISCARD StringContainerConstIter GetAuthorDescribeBegin() const noexcept override;
-        NODISCARD StringContainerConstIter GetAuthorDescribeEnd() const noexcept override;
+        NODISCARD StringContainer GetAuthorNotes() const override;
+        NODISCARD int GetAuthorNotesCount() const override;
+        NODISCARD String GetAuthorNotes(int index) const override;
+        NODISCARD StringContainerConstIter GetAuthorNotesBegin() const noexcept override;
+        NODISCARD StringContainerConstIter GetAuthorNotesEnd() const noexcept override;
 
         NODISCARD IntContainer GetAnnotator() const override;
         NODISCARD int GetAnnotatorCount() const override;
@@ -68,11 +68,11 @@ namespace AncientBooks
         NODISCARD IntContainerConstIter GetAnnotatorEnd() const noexcept override;
         NODISCARD CharacterContainer GetAnnotator(const AncientBooksContainer& csvContainer) const override;
 
-        NODISCARD StringContainer GetAnnotateDescribe() const override;
-        NODISCARD int GetAnnotateDescribeCount() const override;
-        NODISCARD String GetAnnotateDescribe(int index) const override;
-        NODISCARD StringContainerConstIter GetAnnotateDescribeBegin() const noexcept override;
-        NODISCARD StringContainerConstIter GetAnnotateDescribeEnd() const noexcept override;
+        NODISCARD StringContainer GetAnnotateNotes() const override;
+        NODISCARD int GetAnnotateNotesCount() const override;
+        NODISCARD String GetAnnotateNotes(int index) const override;
+        NODISCARD StringContainerConstIter GetAnnotateNotesBegin() const noexcept override;
+        NODISCARD StringContainerConstIter GetAnnotateNotesEnd() const noexcept override;
 
         NODISCARD IntContainer GetCountry() const override;
         NODISCARD int GetCountryCount() const override;
@@ -101,9 +101,9 @@ namespace AncientBooks
         StringContainer alias;  // 別名
         int volume;  // 卷數
         IntContainer author;  // 作者
-        StringContainer authorDescribe;  // 作者描述
+        StringContainer authorNotes;  // 作者描述
         IntContainer annotator;  // 註解作者
-        StringContainer annotateDescribe;  // 註解描述
+        StringContainer annotateNotes;  // 註解描述
         IntContainer country;  // 國家
         IntContainer person;  // 人
         StringContainer unansweredQuestion;  // 存疑

@@ -26,9 +26,9 @@ AncientBooks::Book::Book(const CSVRow& csvRow)
       alias{ csvRow.GetStringArray(SYSTEM_TEXT("alias"s)) },
       volume{ csvRow.GetInt(SYSTEM_TEXT("volume"s)) },
       author{ csvRow.GetIntArray(SYSTEM_TEXT("author"s)) },
-      authorDescribe{ csvRow.GetStringArray(SYSTEM_TEXT("authorDescribe"s)) },
+      authorNotes{ csvRow.GetStringArray(SYSTEM_TEXT("authorNotes"s)) },
       annotator{ csvRow.GetIntArray(SYSTEM_TEXT("annotator"s)) },
-      annotateDescribe{ csvRow.GetStringArray(SYSTEM_TEXT("annotateDescribe"s)) },
+      annotateNotes{ csvRow.GetStringArray(SYSTEM_TEXT("annotateNotes"s)) },
       country{ csvRow.GetIntArray(SYSTEM_TEXT("country"s)) },
       person{ csvRow.GetIntArray(SYSTEM_TEXT("person"s)) },
       unansweredQuestion{ csvRow.GetStringArray(SYSTEM_TEXT("unansweredQuestion"s)) }
@@ -166,39 +166,39 @@ AncientBooks::Book::CharacterContainer AncientBooks::Book::GetAuthor(const Ancie
     return result;
 }
 
-AncientBooks::Book::StringContainer AncientBooks::Book::GetAuthorDescribe() const
+AncientBooks::Book::StringContainer AncientBooks::Book::GetAuthorNotes() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return authorDescribe;
+    return authorNotes;
 }
 
-int AncientBooks::Book::GetAuthorDescribeCount() const
+int AncientBooks::Book::GetAuthorNotesCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(authorDescribe.size());
+    return boost::numeric_cast<int>(authorNotes.size());
 }
 
-System::String AncientBooks::Book::GetAuthorDescribe(int index) const
+System::String AncientBooks::Book::GetAuthorNotes(int index) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return authorDescribe.at(index);
+    return authorNotes.at(index);
 }
 
-AncientBooks::Book::StringContainerConstIter AncientBooks::Book::GetAuthorDescribeBegin() const noexcept
+AncientBooks::Book::StringContainerConstIter AncientBooks::Book::GetAuthorNotesBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return authorDescribe.cbegin();
+    return authorNotes.cbegin();
 }
 
-AncientBooks::Book::StringContainerConstIter AncientBooks::Book::GetAuthorDescribeEnd() const noexcept
+AncientBooks::Book::StringContainerConstIter AncientBooks::Book::GetAuthorNotesEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return authorDescribe.cend();
+    return authorNotes.cend();
 }
 
 AncientBooks::Book::IntContainer AncientBooks::Book::GetAnnotator() const
@@ -252,39 +252,39 @@ AncientBooks::Book::CharacterContainer AncientBooks::Book::GetAnnotator(const An
     return result;
 }
 
-AncientBooks::Book::StringContainer AncientBooks::Book::GetAnnotateDescribe() const
+AncientBooks::Book::StringContainer AncientBooks::Book::GetAnnotateNotes() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return annotateDescribe;
+    return annotateNotes;
 }
 
-int AncientBooks::Book::GetAnnotateDescribeCount() const
+int AncientBooks::Book::GetAnnotateNotesCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(annotateDescribe.size());
+    return boost::numeric_cast<int>(annotateNotes.size());
 }
 
-System::String AncientBooks::Book::GetAnnotateDescribe(int index) const
+System::String AncientBooks::Book::GetAnnotateNotes(int index) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return annotateDescribe.at(index);
+    return annotateNotes.at(index);
 }
 
-AncientBooks::Book::StringContainerConstIter AncientBooks::Book::GetAnnotateDescribeBegin() const noexcept
+AncientBooks::Book::StringContainerConstIter AncientBooks::Book::GetAnnotateNotesBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return annotateDescribe.cbegin();
+    return annotateNotes.cbegin();
 }
 
-AncientBooks::Book::StringContainerConstIter AncientBooks::Book::GetAnnotateDescribeEnd() const noexcept
+AncientBooks::Book::StringContainerConstIter AncientBooks::Book::GetAnnotateNotesEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return annotateDescribe.cend();
+    return annotateNotes.cend();
 }
 
 AncientBooks::Book::IntContainer AncientBooks::Book::GetCountry() const

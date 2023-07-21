@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:43)
+///	版本：0.9.1.1 (2023/07/20 19:20)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,24 +21,19 @@
 #include "Rendering/Shaders/VisualProgram.h"
 #include "Rendering/State/SamplerState.h"
 
-Rendering::TextEffectImpl::TextEffectImpl(const Texture2DSharedPtr& texture, VisualProgram& visualProgram)
-    : translate{ std::make_shared<ConstantBuffer>(boost::numeric_cast<int>(Mathematics::Vector3<float>::pointSize * sizeof(float)), true) },
-      color{ std::make_shared<ConstantBuffer>(boost::numeric_cast<int>(Colour::arraySize * sizeof(float)), true) },
+Rendering::TextEffectImpl::TextEffectImpl(ShaderAPIType shaderAPIType, int numTranslateConstantBytes, int numColorConstantBytes)
+    : translate{ std::make_shared<ConstantBuffer>(numTranslateConstantBytes, true) },
+      color{ std::make_shared<ConstantBuffer>(numColorConstantBytes, true) },
       samplerState{ std::make_shared<SamplerState>("SamplerState") }
 {
     SetTranslate(0.0f, 0.0f);
-    SetNormalizedZ(-1.0f);
-    visualProgram.GetVertexShader()->Set("Translate", translate);
-
+    SetNormalizedZ(shaderAPIType == ShaderAPIType::GLSL ? -1.0f : 0.0f);
     SetColor({ 0.0f, 0.0f, 0.0f, 0.0f });
-    auto pshader = visualProgram.GetPixelShader();
-    pshader->Set("TextColor", color);
-    pshader->Set("baseTexture", texture, "baseSampler", samplerState);
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::TextEffectImpl::TextEffectImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow) noexcept
+Rendering::TextEffectImpl::TextEffectImpl() noexcept
     : translate{},
       color{},
       samplerState{}
@@ -60,6 +55,27 @@ Rendering::TextEffectImpl::ConstConstantBufferSharedPtr Rendering::TextEffectImp
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return color;
+}
+
+Rendering::TextEffectImpl::ConstantBufferSharedPtr Rendering::TextEffectImpl::GetTranslate() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return translate;
+}
+
+Rendering::TextEffectImpl::ConstantBufferSharedPtr Rendering::TextEffectImpl::GetColor() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return color;
+}
+
+Rendering::TextEffectImpl::SamplerStateSharedPtr Rendering::TextEffectImpl::GetSamplerState() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return samplerState;
 }
 
 void Rendering::TextEffectImpl::SetTranslate(float x, float y)

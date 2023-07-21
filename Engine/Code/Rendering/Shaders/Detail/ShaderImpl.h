@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:30)
+///	版本：0.9.1.1 (2023/07/05 11:25)
 
 #ifndef RENDERING_SHADERS_SHADER_IMPL_H
 #define RENDERING_SHADERS_SHADER_IMPL_H
@@ -32,6 +32,7 @@ namespace Rendering
     public:
         using ClassType = ShaderImpl;
         using FactoryType = ShaderFactory;
+
         using MemberLayoutContainer = std::vector<MemberLayout>;
         using TextureSingleSharedPtr = std::shared_ptr<TextureSingle>;
         using SamplerStateSharedPtr = std::shared_ptr<SamplerState>;
@@ -39,9 +40,14 @@ namespace Rendering
         using SamplerStateSharedPtr = std::shared_ptr<SamplerState>;
         using CompiledCodeContainer = std::vector<uint8_t>;
         using ShaderDataContainer = std::vector<ShaderData>;
-        using ConstShaderDataContainerIter = ShaderDataContainer::const_iterator;
         using ShaderDataContainerIter = ShaderDataContainer::iterator;
+        using ConstShaderDataContainerIter = ShaderDataContainer::const_iterator;
         using ShaderSharedPtr = std::shared_ptr<ShaderImpl>;
+
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
+        using ObjectLink = CoreTools::ObjectLink;
+        using ObjectRegister = CoreTools::ObjectRegister;
 
     public:
         ShaderImpl() noexcept;
@@ -86,11 +92,11 @@ namespace Rendering
         NODISCARD CompiledCodeContainer GetCompiledCode() const;
         NODISCARD ShaderDataContainer GetData(int lookup) const;
 
-        virtual void Load(CoreTools::BufferSource& source);
-        virtual void Save(CoreTools::BufferTarget& target) const;
+        virtual void Load(BufferSource& source);
+        virtual void Save(BufferTarget& target) const;
         NODISCARD virtual int GetStreamingSize() const;
-        virtual void Link(CoreTools::ObjectLink& source);
-        virtual void Register(CoreTools::ObjectRegister& target) const;
+        virtual void Link(ObjectLink& source);
+        virtual void Register(ObjectRegister& target) const;
 
         NODISCARD virtual ShaderSharedPtr Clone() const = 0;
 

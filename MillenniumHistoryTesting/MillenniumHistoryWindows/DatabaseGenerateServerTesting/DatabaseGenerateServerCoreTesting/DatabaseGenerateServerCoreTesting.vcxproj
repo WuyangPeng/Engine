@@ -531,11 +531,50 @@
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ArticleConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\BookConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CalendarConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CategoryConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CharacterConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ConvertSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CountryConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\DayConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\EmperorConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\GatherConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\GenusConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\GeographicConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\IdentityConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ImperialCourtConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\MonthConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ReignTitleConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\SexagenaryCycleConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\SourceConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\VersionConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\YearConvertTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\EngineSuite\EngineSuite.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\TestingHelper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ArticleConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\BookConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CalendarConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CategoryConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CharacterConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CountryConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\DayConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\EmperorConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\GatherConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\GenusConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\GeographicConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\IdentityConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ImperialCourtConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\MonthConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ReignTitleConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\SexagenaryCycleConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\SourceConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\VersionConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\YearConvertTesting.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\TestingMain.cpp" />

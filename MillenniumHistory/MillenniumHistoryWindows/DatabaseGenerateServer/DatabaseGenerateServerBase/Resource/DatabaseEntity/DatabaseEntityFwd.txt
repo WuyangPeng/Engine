@@ -1,0 +1,10 @@
+$Copyright$
+
+#ifndef $NamespaceUppercaseSeparator$_FWD_H
+#define $NamespaceUppercaseSeparator$_FWD_H
+
+namespace $Namespace$
+{
+$ClassDeclaration$}
+
+#endif  // $NamespaceUppercaseSeparator$_FWD_H

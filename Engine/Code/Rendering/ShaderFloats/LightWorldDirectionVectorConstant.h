@@ -31,7 +31,7 @@ namespace Rendering
         CORE_TOOLS_OBJECT_FACTORY_DECLARE(LightWorldDirectionVectorConstant);
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 
-        void Update(const Visual* visual, const Camera* camera) override;
+        void Update(const Visual* visual, const Camera* camera) noexcept override;
 
         NODISCARD ShaderFloatSharedPtr Clone() const override;
     };

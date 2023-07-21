@@ -126,12 +126,12 @@ public:                                                  \
     int64_t namespaceName::className::Register(CoreTools::ObjectRegister& target) const \
     {                                                                                   \
         CLASS_IS_VALID_CONST_0;                                                         \
-        const auto registerID = ParentType::Register(target);                           \
-        if (registerID != 0)                                                            \
+        const auto registerId = ParentType::Register(target);                           \
+        if (registerId != 0)                                                            \
         {                                                                               \
             impl->Register(target);                                                     \
         }                                                                               \
-        return registerID;                                                              \
+        return registerId;                                                              \
     }
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(namespaceName, className)      \

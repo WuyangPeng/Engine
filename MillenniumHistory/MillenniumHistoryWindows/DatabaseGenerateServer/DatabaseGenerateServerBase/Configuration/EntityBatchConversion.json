@@ -1,0 +1,4 @@
+{
+  "input": "Configuration/DatabaseEntity.json",
+  "codeOutput": "../../../Code/DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity"
+}

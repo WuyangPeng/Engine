@@ -346,7 +346,7 @@ CoreTools::CSVRowImpl::StringContainer CoreTools::CSVRowImpl::GetStringArray(con
         }
         else
         {
-            result.emplace_back(value);
+            result.emplace_back(StringConversion::Utf8ConversionStandard(value));
         }
     }
 

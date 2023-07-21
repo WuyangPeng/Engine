@@ -17,7 +17,7 @@
 #include "Mathematics/Algebra/MatrixDetail.h"
 
 Framework::CameraMotionImpl::CameraMotionImpl(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor)
-    : camera{ std::make_shared<Camera>(true) },
+    : camera{ std::make_shared<Camera>(true, false) },
       worldDirection{ camera->GetDirectionVector() },
       worldUp{ camera->GetUpVector() },
       worldRight{ camera->GetRightVector() },

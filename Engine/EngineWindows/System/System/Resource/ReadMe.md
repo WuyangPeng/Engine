@@ -157,8 +157,8 @@
 12.	OpenGL（OpenGL）
 
 封装了OpenGL调用的实现。包括OpenGL API、GLUT、GLEW和OpenGL标志。
-（1） OpenGL工具：OpenGL辅助工具。
-（2） OpenGL初始化：OpenGL的环境初始化。
+（1） OpenGL 工具：OpenGL辅助工具。
+（2） OpenGL 初始化：OpenGL的环境初始化。
 （3） OpenGL Base：对OpenGL API的封装。
 （4） OpenGL 缓冲区：对OpenGL 缓冲区的封装。
 （5） OpenGL 纹理：对OpenGL 纹理的封装。

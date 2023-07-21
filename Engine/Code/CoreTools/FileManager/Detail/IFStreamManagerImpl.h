@@ -37,6 +37,8 @@ namespace CoreTools
 
         void SetSimplifiedChinese();
 
+        NODISCARD IFileStream& GetFileStream() noexcept;
+
     private:
         NODISCARD String GetBackupName() const;
         void CopyContentToStream(OStream* stream) const;

@@ -14,6 +14,7 @@
 
 #include "DatabaseInterfaceFwd.h"
 #include "Flags/DataType.h"
+#include "System/Helper/PragmaWarning/CallTraits.h"
 
 #include <memory>
 #include <string>
@@ -127,6 +128,21 @@ namespace Database
         using Double = Database::DataTypeTraits<DataType::Double>::Type;
         using DoubleArray = Database::DataTypeTraits<DataType::DoubleArray>::Type;
         using Bool = Database::DataTypeTraits<DataType::Bool>::Type;
+
+        namespace ParamType
+        {
+            using String = boost::call_traits<Traits::String>::param_type;
+            using StringArray = boost::call_traits<Traits::StringArray>::param_type;
+            using Int32 = boost::call_traits<Traits::Int32>::param_type;
+            using Int32Count = boost::call_traits<Traits::Int32Count>::param_type;
+            using Int32Array = boost::call_traits<Traits::Int32Array>::param_type;
+            using Int64 = boost::call_traits<Traits::Int64>::param_type;
+            using Int64Count = boost::call_traits<Traits::Int64Count>::param_type;
+            using Int64Array = boost::call_traits<Traits::Int64Array>::param_type;
+            using Double = boost::call_traits<Traits::Double>::param_type;
+            using DoubleArray = boost::call_traits<Traits::DoubleArray>::param_type;
+            using Bool = boost::call_traits<Traits::Bool>::param_type;
+        }
     }
 }
 

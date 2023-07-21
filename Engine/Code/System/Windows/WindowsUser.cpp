@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/02/02 14:43)
+///	版本：0.9.1.1 (2023/07/18 18:22)
 
 #include "System/SystemExport.h"
 
@@ -13,54 +13,54 @@
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
 
-bool System::PostSystemThreadMessage(WindowsDWord threadID, WindowsMessages msg, WindowsWParam wParam, WindowsLParam lParam) noexcept
+bool System::PostSystemThreadMessage(WindowsDWord threadId, WindowsMessages message, WindowsWParam wParam, WindowsLParam lParam) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::PostThreadMessage(threadID, EnumCastUnderlying(msg), wParam, lParam) != gFalse)
+    if (::PostThreadMessage(threadId, EnumCastUnderlying(message), wParam, lParam) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(threadID, msg, wParam, lParam);
+    UnusedFunction(threadId, message, wParam, lParam);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SystemInvalidateRect(WindowsHWnd hwnd) noexcept
+bool System::SystemInvalidateRect(WindowsHWnd hWnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InvalidateRect(hwnd, nullptr, gTrue) != gFalse)
+    if (::InvalidateRect(hWnd, nullptr, gTrue) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd);
+    UnusedFunction(hWnd);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::UpdateSystemWindows(WindowsHWnd hwnd) noexcept
+bool System::UpdateSystemWindows(WindowsHWnd hWnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::UpdateWindow(hwnd) != gFalse)
+    if (::UpdateWindow(hWnd) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd);
+    UnusedFunction(hWnd);
 
     return false;
 

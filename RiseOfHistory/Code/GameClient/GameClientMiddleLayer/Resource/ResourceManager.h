@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 15:38)
+///	版本：0.9.1.1 (2023/07/18 17:48)
 
 #ifndef GAME_CLIENT_MIDDLE_LAYER_RESOURCE_RESOURCE_MANAGER_H
 #define GAME_CLIENT_MIDDLE_LAYER_RESOURCE_RESOURCE_MANAGER_H
@@ -22,9 +22,6 @@ namespace GameClientMiddleLayer
     public:
         using ClassType = ResourceManager;
         using ParentType = ResourceManagerInterface;
-
-        using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
-        using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
         ResourceManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);

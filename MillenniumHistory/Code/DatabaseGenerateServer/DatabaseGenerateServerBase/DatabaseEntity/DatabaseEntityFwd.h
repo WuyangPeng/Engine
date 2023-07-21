@@ -1,18 +1,36 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/30 22:57)
+/// 标准：std:c++20
+/// 自动生成
 
-#ifndef DATABASE_GENERATE_SERVER_BASE_DATABASE_ENTITY_FWD_H
-#define DATABASE_GENERATE_SERVER_BASE_DATABASE_ENTITY_FWD_H
+#ifndef DATABASE_ENTITY_FWD_H
+#define DATABASE_ENTITY_FWD_H
 
-namespace AncientBooks
+namespace DatabaseEntity
 {
     class ArticleEntity;
+    class BookEntity;
+    class CalendarEntity;
+    class CategoryEntity;
+    class CharacterEntity;
+    class CountryEntity;
+    class DayEntity;
+    class EmperorEntity;
+    class GatherEntity;
+    class GenusEntity;
+    class GeographicEntity;
+    class IdentityEntity;
+    class ImperialCourtEntity;
+    class MonthEntity;
+    class ReignTitleEntity;
+    class SexagenaryCycleEntity;
+    class SourceEntity;
+    class VersionEntity;
+    class YearEntity;
 }
 
-#endif  // DATABASE_GENERATE_SERVER_BASE_DATABASE_ENTITY_FWD_H
+#endif  // DATABASE_ENTITY_FWD_H

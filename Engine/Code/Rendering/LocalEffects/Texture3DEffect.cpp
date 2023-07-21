@@ -1,195 +1,74 @@
-///	Copyright (c) 2010-2023
+Ôªø///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
-///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///	‰ΩúËÄÖÔºöÂΩ≠Ê≠¶Èò≥ÔºåÂΩ≠ÊôîÊÅ©ÔºåÂΩ≠ÊôîÊ≥Ω
+///	ËÅîÁ≥ª‰ΩúËÄÖÔºö94458936@qq.com
 ///
-///	±Í◊º£∫std:c++20
-///	“˝«Ê∞Ê±æ£∫0.9.0.12 (2023/06/12 13:45)
+///	Ê†áÂáÜÔºöstd:c++20
+///	ÁâàÊú¨Ôºö0.9.1.1 (2023/07/20 20:16)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Texture3DEffect.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
+#include "Detail/Texture3DEffectImpl.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "Rendering/Resources/Textures/Texture3D.h"
+#include "Rendering/Shaders/Shader.h"
 
-namespace
-{
-    constexpr auto dx9VRegisters = 0;
-    constexpr auto oglVRegisters = 1;
-    std::array<const int*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> vRegisters{
-        nullptr,
-        &dx9VRegisters,
-        &dx9VRegisters,
-        &dx9VRegisters,
-        &oglVRegisters
-    };
-
-    std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> vPrograms{
-        // VP_NONE
-        "",
-
-        // VP_VS_1_1
-        "vs_1_1\n"
-        "def c4, 1.00000000, 0, 0, 0\n"
-        "dcl_position0 v0\n"
-        "dcl_texcoord0 v1\n"
-        "mov r0.w, c4.x\n"
-        "mov r0.xyz, v0\n"
-        "dp4 oPos.w, r0, c3\n"
-        "dp4 oPos.z, r0, c2\n"
-        "dp4 oPos.y, r0, c1\n"
-        "dp4 oPos.x, r0, c0\n"
-        "mov oT0.xyz, v1\n",
-
-        // VP_VS_2_0
-        "vs_2_0\n"
-        "def c4, 1.00000000, 0, 0, 0\n"
-        "dcl_position0 v0\n"
-        "dcl_texcoord0 v1\n"
-        "mov r0.w, c4.x\n"
-        "mov r0.xyz, v0\n"
-        "dp4 oPos.w, r0, c3\n"
-        "dp4 oPos.z, r0, c2\n"
-        "dp4 oPos.y, r0, c1\n"
-        "dp4 oPos.x, r0, c0\n"
-        "mov oT0.xyz, v1\n",
-
-        // VP_VS_3_0
-        "vs_3_0\n"
-        "dcl_position o0\n"
-        "dcl_texcoord0 o1\n"
-        "def c4, 1.00000000, 0, 0, 0\n"
-        "dcl_position0 v0\n"
-        "dcl_texcoord0 v1\n"
-        "mov r0.w, c4.x\n"
-        "mov r0.xyz, v0\n"
-        "dp4 o0.w, r0, c3\n"
-        "dp4 o0.z, r0, c2\n"
-        "dp4 o0.y, r0, c1\n"
-        "dp4 o0.x, r0, c0\n"
-        "mov o1.xyz, v1\n",
-
-        // VP_ARBVP1
-        "!!ARBvp1.0\n"
-        "PARAM c[5] = { { 1 }, program.local[1..4] };\n"
-        "TEMP R0;\n"
-        "MOV R0.w, c[0].x;\n"
-        "MOV R0.xyz, vertex.position;\n"
-        "DP4 result.position.w, R0, c[4];\n"
-        "DP4 result.position.z, R0, c[3];\n"
-        "DP4 result.position.y, R0, c[2];\n"
-        "DP4 result.position.x, R0, c[1];\n"
-        "MOV result.texcoord[0].xyz, vertex.texcoord[0];\n"
-        "END\n"
-    };
-
-    constexpr auto allPTextureUnits = 0;
-    std::array<const int*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> pTextureUnits{
-        nullptr,
-        &allPTextureUnits,
-        &allPTextureUnits,
-        &allPTextureUnits,
-        &allPTextureUnits
-    };
-
-    std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> pPrograms{
-        // PP_NONE
-        "",
-
-        // PP_PS_1_1
-        "ps.1.1\n"
-        "tex t0\n"
-        "mov r0, t0\n",
-
-        // PP_PS_2_0
-        "ps_2_0\n"
-        "dcl_volume s0\n"
-        "dcl t0.xyz\n"
-        "texld r0, t0, s0\n"
-        "mov oC0, r0\n",
-
-        // PP_PS_3_0
-        "ps_3_0\n"
-        "dcl_volume s0\n"
-        "dcl_texcoord0 v0.xyz\n"
-        "texld r0, v0, s0\n"
-        "mov oC0, r0\n",
-
-        // PP_ARBFP1
-        "!!ARBfp1.0\n"
-        "TEX result.color, fragment.texcoord[0], texture[0], 3D;\n"
-        "END\n"
-    };
-}
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Texture3DEffect)
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, Texture3DEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture3DEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture3DEffect);
 
+Rendering::Texture3DEffect::Texture3DEffect(ProgramFactory& factory,
+                                            const BaseRendererSharedPtr& baseRenderer,
+                                            const Texture3DSharedPtr& texture,
+                                            SamplerStateFilter filter,
+                                            SamplerStateMode mode0,
+                                            SamplerStateMode mode1,
+                                            SamplerStateMode mode2)
+    : ParentType{ factory,
+                  baseRenderer,
+                  "Resource/Shader/Texture3DEffect.vs",
+                  "Resource/Shader/Texture3DEffect.ps" },
+      impl{ texture, filter, mode0, mode1, mode2 }
+{
+    GetVertexShader()->Set("projectionViewWorldMatrix", GetProjectionViewWorldMatrixConstant());
+    GetPixelShader()->Set("baseTexture", texture, "baseSampler", impl->GetSamplerState());
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::Texture3DEffect::Texture3DEffect(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
 CLASS_INVARIANT_STUB_DEFINE(Rendering, Texture3DEffect)
 
-Rendering::Texture3DEffect::Texture3DEffect(MAYBE_UNUSED ShaderFlags::SamplerFilter filter, MAYBE_UNUSED ShaderFlags::SamplerCoordinate coordinate0, MAYBE_UNUSED ShaderFlags::SamplerCoordinate coordinate1, MAYBE_UNUSED ShaderFlags::SamplerCoordinate coordinate2)
-    : ParentType{ CoreTools::DisableNotThrow::Disable }
-{
-    RENDERING_SELF_CLASS_IS_VALID_9;
-}
-
-Rendering::Texture3DEffect::Texture3DEffect(LoadConstructor value)
-    : VisualEffect{ value }
-{
-    RENDERING_SELF_CLASS_IS_VALID_9;
-}
-
-void Rendering::Texture3DEffect::Load(CoreTools::BufferSource& source)
+Rendering::Texture3DEffect::Texture3DSharedPtr Rendering::Texture3DEffect::GetTexture() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
-
-    VisualEffect::Load(source);
-
-    CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
+    return impl->GetTexture();
 }
 
-void Rendering::Texture3DEffect::Link(CoreTools::ObjectLink& source)
+Rendering::Texture3DEffect::SamplerStateSharedPtr Rendering::Texture3DEffect::GetSamplerState() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    VisualEffect::Link(source);
+    return impl->GetSamplerState();
 }
 
-void Rendering::Texture3DEffect::PostLink()
+void Rendering::Texture3DEffect::SetProjectionViewWorldMatrixConstant(const ConstantBufferSharedPtr& buffer)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    VisualEffect::PostLink();
-}
+    ParentType::SetProjectionViewWorldMatrixConstant(buffer);
 
-int64_t Rendering::Texture3DEffect::Register(CoreTools::ObjectRegister& target) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    return VisualEffect::Register(target);
-}
-
-void Rendering::Texture3DEffect::Save(CoreTools::BufferTarget& target) const
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
-
-    VisualEffect::Save(target);
-
-    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
-}
-
-int Rendering::Texture3DEffect::GetStreamingSize() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    return VisualEffect::GetStreamingSize();
+    GetVertexShader()->Set("projectionViewWorldMatrix", GetProjectionViewWorldMatrixConstant());
 }

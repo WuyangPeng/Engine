@@ -1,0 +1,54 @@
+$Copyright$
+
+#include "$Class$.h"
+#include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "Database/DatabaseInterface/BasisDatabaseDetail.h"
+#include "Database/DatabaseInterface/BasisDatabaseManagerDetail.h"
+#include "Database/DatabaseInterface/DatabaseEntityDetail.h"
+#include "Database/DatabaseInterface/DatabaseField.h"
+#include "Database/DatabaseInterface/EntityDetail.h"
+
+$Namespace$::$Class$ $Namespace$::$Class$::Create(const BasisDatabaseManager& entity, WrappersStrategy wrappersStrategy, Database::Traits::ParamType::$KeyType$ $KeyName$)
+{
+    return entity.IsModify() ? $Class${ entity } : $Class${ wrappersStrategy, $KeyName$ };
+}
+
+$Namespace$::$Class$::$Class$(const BasisDatabaseManager& entity)
+    : ParentType{ entity },
+$FieldAssignment${
+    USER_SELF_CLASS_IS_VALID_9;
+}
+
+$Namespace$::$Class$::$Class$(WrappersStrategy wrappersStrategy, Database::Traits::ParamType::$KeyType$ $KeyName$)
+    : ParentType{ wrappersStrategy, databaseName.data(), GetKeyBasisDatabaseContainer($KeyName$) },
+      $KeyName${ $KeyName$ },
+$FieldInit${
+    AddModify($KeyName$Describe, $KeyName$);
+
+    USER_SELF_CLASS_IS_VALID_9;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE($Namespace$, $Class$)
+
+$GetDefine$$SetDefine$$ModifyDefine$const $Namespace$::$Class$::DatabaseFieldContainer& $Namespace$::$Class$::GetDatabaseFieldContainer()
+{
+    static const DatabaseFieldContainer fieldNameContainer{ $DatabaseField$ };
+
+    return fieldNameContainer;
+}
+
+$Namespace$::$Class$::BasisDatabaseManager $Namespace$::$Class$::GetSelect(WrappersStrategy wrappersStrategy, Database::Traits::ParamType::$KeyType$ $KeyName$)
+{
+    return BasisDatabaseManager{ wrappersStrategy,
+                                 databaseName,
+                                 Database::ChangeType::Select,
+                                 GetKeyBasisDatabaseContainer($KeyName$) };
+}
+
+Database::BasisDatabaseContainer $Namespace$::$Class$::GetKeyBasisDatabaseContainer(Database::Traits::ParamType::$KeyType$ $KeyName$)
+{
+    BasisDatabaseContainer basisDatabaseContainer{ BasisDatabaseContainer::ObjectContainer{ Database::BasisDatabase{ $KeyName$Describe, $KeyName$ } } };
+
+    return basisDatabaseContainer;
+}

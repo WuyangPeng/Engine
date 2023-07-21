@@ -309,6 +309,9 @@
     <None Include="Resource\AncientBooksCsv\Character.csv">
       <Filter>资源文件\AncientBooksCsv</Filter>
     </None>
+    <None Include="Configuration\Database.json">
+      <Filter>配置</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServer\DatabaseGenerateServer.h">

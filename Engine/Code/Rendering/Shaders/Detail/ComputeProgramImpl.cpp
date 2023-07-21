@@ -5,20 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:45)
+///	版本：0.9.1.1 (2023/07/05 14:30)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ComputeProgramImpl.h"
+#include "NullComputeProgram.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
-#include "Rendering/OpenGLRenderer/Detail/GLSL/GLSLComputeProgram.h"
 #include "Rendering/Shaders/Shader.h"
-
-Rendering::ComputeProgramImpl::ComputeProgramSharedPtr Rendering::ComputeProgramImpl::Create(OpenGLUInt programHandle, OpenGLUInt computeShaderHandle)
-{
-    return std::make_shared<GLSLComputeProgram>(programHandle, computeShaderHandle);
-}
 
 Rendering::ComputeProgramImpl::ComputeProgramImpl() noexcept
     : computeShader{}
@@ -41,22 +36,8 @@ void Rendering::ComputeProgramImpl::SetComputeShader(const ShaderSharedPtr& shad
 
     if (shader->GetType() != GraphicsObjectType::ComputeShader)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("输入必须是计算着色器。"));
+        THROW_EXCEPTION(SYSTEM_TEXT("输入必须是计算着色器。"))
     }
 
     computeShader = shader;
-}
-
-Rendering::GLSLReflection Rendering::ComputeProgramImpl::GetReflector() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    return GLSLReflection{ 0 };
-}
-
-Rendering::ComputeProgramImpl::ComputeProgramSharedPtr Rendering::ComputeProgramImpl::Clone() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    return std::make_shared<ClassType>(*this);
 }

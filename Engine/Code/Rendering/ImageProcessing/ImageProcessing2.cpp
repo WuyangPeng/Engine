@@ -55,7 +55,7 @@ Rendering::Texture2DSharedPtr Rendering::ImageProcessing2::CreateImage(MAYBE_UNU
 }
 
 std::array<int, 2> Rendering::ImageProcessing2::allDirichletPTextureUnits{ 0, 1 };
-std::array<std::array<int, 2>*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessing2::dirichletPTextureUnits{
+std::array<std::array<int, 2>*, 5> Rendering::ImageProcessing2::dirichletPTextureUnits{
     nullptr,
     &allDirichletPTextureUnits,
     &allDirichletPTextureUnits,
@@ -63,7 +63,7 @@ std::array<std::array<int, 2>*, System::EnumCastUnderlying(Rendering::ShaderFlag
     &allDirichletPTextureUnits
 };
 
-std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessing2::dirichletPPrograms{
+std::array<std::string, 5> Rendering::ImageProcessing2::dirichletPPrograms{
     // PP_NONE
     "",
 
@@ -100,7 +100,7 @@ std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profi
 };
 
 std::array<int, 2> Rendering::ImageProcessing2::msAllNeumannPTextureUnits{ 0, 1 };
-std::array<std::array<int, 2>*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessing2::neumannPTextureUnits{
+std::array<std::array<int, 2>*, 5> Rendering::ImageProcessing2::neumannPTextureUnits{
     nullptr,
     &msAllNeumannPTextureUnits,
     &msAllNeumannPTextureUnits,
@@ -108,7 +108,7 @@ std::array<std::array<int, 2>*, System::EnumCastUnderlying(Rendering::ShaderFlag
     &msAllNeumannPTextureUnits
 };
 
-std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessing2::neumannPPrograms{
+std::array<std::string, 5> Rendering::ImageProcessing2::neumannPPrograms{
     // PP_NONE
     "",
 
@@ -145,7 +145,7 @@ std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profi
 };
 
 std::array<int, 2> Rendering::ImageProcessing2::msAllDrawPTextureUnits{ 0, 1 };
-std::array<std::array<int, 2>*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessing2::drawPTextureUnits{
+std::array<std::array<int, 2>*, 5> Rendering::ImageProcessing2::drawPTextureUnits{
     nullptr,
     &msAllDrawPTextureUnits,
     &msAllDrawPTextureUnits,
@@ -153,7 +153,7 @@ std::array<std::array<int, 2>*, System::EnumCastUnderlying(Rendering::ShaderFlag
     &msAllDrawPTextureUnits
 };
 
-std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessing2::drawPPrograms{
+std::array<std::string, 5> Rendering::ImageProcessing2::drawPPrograms{
     // PP_NONE
     "",
 

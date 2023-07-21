@@ -136,3 +136,10 @@ void CoreTools::IFStreamManagerImpl::SetSimplifiedChinese()
 
 #endif  // !defined(TCRE_USE_GCC)
 }
+
+System::IFileStream& CoreTools::IFStreamManagerImpl::GetFileStream() noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    return iStream;
+}

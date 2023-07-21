@@ -94,7 +94,7 @@ System::AndroidLooperEvent System::AndroidLooperPollAll(int32_t timeoutMillis, i
 
     UnusedFunction(timeoutMillis, outFd, outEvents, outData);
 
-    WindowsMsg msg{};
+    WindowsMessage msg{};
 
     if (PeekSystemMessage(&msg))
     {

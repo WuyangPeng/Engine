@@ -106,7 +106,7 @@ std::string Database::BasisDatabaseImpl::GetString() const
 
                 std::string result{};
 
-                auto index = 0;
+                auto index = 0u;
                 for (const auto& element : anyValue)
                 {
                     result += element;
@@ -128,7 +128,7 @@ std::string Database::BasisDatabaseImpl::GetString() const
 
                 std::string result{};
 
-                auto index = 0;
+                auto index = 0u;
                 for (const auto& element : anyValue)
                 {
                     result += std::to_string(element);
@@ -150,7 +150,7 @@ std::string Database::BasisDatabaseImpl::GetString() const
 
                 std::string result{};
 
-                auto index = 0;
+                auto index = 0u;
                 for (const auto& element : anyValue)
                 {
                     result += std::to_string(element);
@@ -172,7 +172,7 @@ std::string Database::BasisDatabaseImpl::GetString() const
 
                 std::string result{};
 
-                auto index = 0;
+                auto index = 0u;
                 for (const auto& element : anyValue)
                 {
                     result += std::to_string(element);

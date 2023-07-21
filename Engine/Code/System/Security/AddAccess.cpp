@@ -54,8 +54,8 @@ bool System::AddAccessAllowedObjectAccessControlEntries(AccessCheckACLPtr acl,
                                                         AccessControlListRevision aceRevision,
                                                         ControlACEInheritance aceFlags,
                                                         SpecificAccess accessMask,
-                                                        SystemGUID* objectTypeGuid,
-                                                        SystemGUID* inheritedObjectTypeGuid,
+                                                        SystemGloballyUniqueIdentifier* objectTypeGuid,
+                                                        SystemGloballyUniqueIdentifier* inheritedObjectTypeGuid,
                                                         SecuritySIDPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -124,8 +124,8 @@ bool System::AddAccessDeniedObjectAccessControlEntries(AccessCheckACLPtr acl,
                                                        AccessControlListRevision aceRevision,
                                                        ControlACEInheritance aceFlags,
                                                        SpecificAccess accessMask,
-                                                       SystemGUID* objectTypeGuid,
-                                                       SystemGUID* inheritedObjectTypeGuid,
+                                                       SystemGloballyUniqueIdentifier* objectTypeGuid,
+                                                       SystemGloballyUniqueIdentifier* inheritedObjectTypeGuid,
                                                        SecuritySIDPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -216,8 +216,8 @@ bool System::AddAuditAccessObjectAccessControlEntries(AccessCheckACLPtr acl,
                                                       AccessControlListRevision aceRevision,
                                                       ControlACEInheritance aceFlags,
                                                       SpecificAccess accessMask,
-                                                      SystemGUID* objectTypeGuid,
-                                                      SystemGUID* inheritedObjectTypeGuid,
+                                                      SystemGloballyUniqueIdentifier* objectTypeGuid,
+                                                      SystemGloballyUniqueIdentifier* inheritedObjectTypeGuid,
                                                       SecuritySIDPtr sid,
                                                       bool auditSuccess,
                                                       bool auditFailure) noexcept

@@ -21,6 +21,7 @@
 #include "Mathematics/Algebra/AVector.h"
 #include "Mathematics/Algebra/Plane.h"
 #include "Mathematics/Algebra/Vector3.h"
+#include "Rendering/SceneGraph/CullingPlane.h"
 
 #include <type_traits>
 
@@ -87,6 +88,7 @@ namespace Rendering
 
         void ReadAggregate(CoreTools::BufferSource& source);
         void WriteAggregate(CoreTools::BufferTarget& target) const;
+        NumericalValueSymbol WhichSide(CullingPlane<float> plane) noexcept;
 
     private:
         NODISCARD bool TestLineIntersection(const APoint& origin, const AVector& direction, T tMax) const noexcept(gAssert < 2 || gRenderingAssert < 2);

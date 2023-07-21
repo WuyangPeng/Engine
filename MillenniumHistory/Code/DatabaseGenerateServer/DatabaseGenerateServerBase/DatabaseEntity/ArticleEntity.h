@@ -1,16 +1,14 @@
-///	Copyright (c) 2010-2023
-///	Threading Core Render Engine
+/// Copyright (c) 2010-
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/30 23:23)
+/// 标准：std:c++20
+/// 自动生成
 
-#ifndef DATABASE_GENERATE_SERVER_BASE_DATABASE_ENTITY_ARTICLE_ENTITY_H
-#define DATABASE_GENERATE_SERVER_BASE_DATABASE_ENTITY_ARTICLE_ENTITY_H
-
-#include "Database/DatabaseDll.h"
+#ifndef DATABASE_ENTITY_ARTICLE_ENTITY_H
+#define DATABASE_ENTITY_ARTICLE_ENTITY_H
 
 #include "Database/Configuration/ConfigurationFwd.h"
 #include "Database/DatabaseInterface/BasisDatabaseContainer.h"
@@ -18,7 +16,7 @@
 #include "Database/DatabaseInterface/DatabaseEntity.h"
 #include "Database/DatabaseInterface/Entity.h"
 
-namespace AncientBooks
+namespace DatabaseEntity
 {
     class ArticleEntity final : public Database::DatabaseEntity
     {
@@ -33,9 +31,9 @@ namespace AncientBooks
         using BasisDatabaseContainer = Database::BasisDatabaseContainer;
 
     public:
+        NODISCARD static ArticleEntity Create(const BasisDatabaseManager& entity, WrappersStrategy wrappersStrategy, Database::Traits::ParamType::Int64 id);
         explicit ArticleEntity(const BasisDatabaseManager& entity);
-        ArticleEntity(WrappersStrategy wrappersStrategy,
-                      boost::call_traits<Database::Traits::Int64>::param_type id);
+        ArticleEntity(WrappersStrategy wrappersStrategy, Database::Traits::ParamType::Int64 id);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -43,28 +41,26 @@ namespace AncientBooks
         NODISCARD Database::Traits::Int32 GetVersion() const noexcept;
         NODISCARD Database::Traits::Int32 GetChapter() const noexcept;
         NODISCARD Database::Traits::String GetChapterName() const;
-        NODISCARD Database::Traits::Int32 GetVolume() const noexcept;
         NODISCARD Database::Traits::Int32 GetChapterVolume() const noexcept;
         NODISCARD Database::Traits::Int32Array GetOtherAuthor() const;
-        NODISCARD Database::Traits::StringArray GetAuthorDescribe() const;
+        NODISCARD Database::Traits::StringArray GetAuthorNotes() const;
         NODISCARD Database::Traits::String GetTitle() const;
         NODISCARD Database::Traits::String GetAbbreviation() const;
         NODISCARD Database::Traits::String GetDirectory() const;
 
-        void SetVersion(boost::call_traits<Database::Traits::Int32>::param_type aVersion);
-        void SetChapter(boost::call_traits<Database::Traits::Int32>::param_type aChapter);
-        void SetChapterName(boost::call_traits<Database::Traits::String>::param_type aChapterName);
-        void SetVolume(boost::call_traits<Database::Traits::Int32>::param_type aVolume);
-        void SetChapterVolume(boost::call_traits<Database::Traits::Int32>::param_type aChapterVolume);
-        void SetOtherAuthor(boost::call_traits<Database::Traits::Int32Array>::param_type aOtherAuthor);
-        void SetAuthorDescribe(boost::call_traits<Database::Traits::StringArray>::param_type aAuthorDescribe);
-        void SetTitle(boost::call_traits<Database::Traits::String>::param_type aTitle);
-        void SetAbbreviation(boost::call_traits<Database::Traits::String>::param_type aAbbreviation);
-        void SeDirectory(boost::call_traits<Database::Traits::String>::param_type aDirectory);
+        void SetId(Database::Traits::ParamType::Int64 aId);
+        void SetVersion(Database::Traits::ParamType::Int32 aVersion);
+        void SetChapter(Database::Traits::ParamType::Int32 aChapter);
+        void SetChapterName(Database::Traits::ParamType::String aChapterName);
+        void SetChapterVolume(Database::Traits::ParamType::Int32 aChapterVolume);
+        void SetOtherAuthor(Database::Traits::ParamType::Int32Array aOtherAuthor);
+        void SetAuthorNotes(Database::Traits::ParamType::StringArray aAuthorNotes);
+        void SetTitle(Database::Traits::ParamType::String aTitle);
+        void SetAbbreviation(Database::Traits::ParamType::String aAbbreviation);
+        void SetDirectory(Database::Traits::ParamType::String aDirectory);
 
         NODISCARD static const DatabaseFieldContainer& GetDatabaseFieldContainer();
-        NODISCARD static BasisDatabaseManager GetSelect(Database::WrappersStrategy wrappersStrategy,
-                                                        boost::call_traits<Database::Traits::Int64>::param_type id);
+        NODISCARD static BasisDatabaseManager GetSelect(Database::WrappersStrategy wrappersStrategy, Database::Traits::ParamType::Int64 id);
 
         NODISCARD static constexpr std::string_view GetDatabaseName()
         {
@@ -72,36 +68,34 @@ namespace AncientBooks
         }
 
     private:
-        static constexpr std::string_view databaseName{ "UserChapter" };
+        static constexpr std::string_view databaseName{ "article" };
 
         static constexpr std::string_view idDescribe{ "_id" };
         static constexpr std::string_view versionDescribe{ "version" };
         static constexpr std::string_view chapterDescribe{ "chapter" };
         static constexpr std::string_view chapterNameDescribe{ "chapterName" };
-        static constexpr std::string_view volumeDescribe{ "volume" };
         static constexpr std::string_view chapterVolumeDescribe{ "chapterVolume" };
         static constexpr std::string_view otherAuthorDescribe{ "otherAuthor" };
-        static constexpr std::string_view authorDescribeDescribe{ "authorDescribe" };
+        static constexpr std::string_view authorNotesDescribe{ "authorNotes" };
         static constexpr std::string_view titleDescribe{ "title" };
         static constexpr std::string_view abbreviationDescribe{ "abbreviation" };
         static constexpr std::string_view directoryDescribe{ "directory" };
 
     private:
-        NODISCARD static BasisDatabaseContainer GetKeyBasisDatabaseContainer(boost::call_traits<Database::Traits::Int64>::param_type id);
+        NODISCARD static BasisDatabaseContainer GetKeyBasisDatabaseContainer(Database::Traits::ParamType::Int64 id);
 
     private:
         Database::Entity<idDescribe, DataType::Int64, IndexType::Key> id;
         Database::Entity<versionDescribe, DataType::Int32> version;
         Database::Entity<chapterDescribe, DataType::Int32> chapter;
         Database::Entity<chapterNameDescribe, DataType::String> chapterName;
-        Database::Entity<volumeDescribe, DataType::Int32> volume;
         Database::Entity<chapterVolumeDescribe, DataType::Int32> chapterVolume;
-        Database::Entity<chapterVolumeDescribe, DataType::Int32Array> otherAuthor;
-        Database::Entity<chapterVolumeDescribe, DataType::StringArray> authorDescribe;
-        Database::Entity<chapterVolumeDescribe, DataType::String> title;
-        Database::Entity<chapterVolumeDescribe, DataType::String> abbreviation;
-        Database::Entity<chapterVolumeDescribe, DataType::String> directory;
+        Database::Entity<otherAuthorDescribe, DataType::Int32Array> otherAuthor;
+        Database::Entity<authorNotesDescribe, DataType::StringArray> authorNotes;
+        Database::Entity<titleDescribe, DataType::String> title;
+        Database::Entity<abbreviationDescribe, DataType::String> abbreviation;
+        Database::Entity<directoryDescribe, DataType::String> directory;
     };
 }
 
-#endif  // DATABASE_GENERATE_SERVER_BASE_DATABASE_ENTITY_ARTICLE_ENTITY_H
+#endif  // DATABASE_ENTITY_ARTICLE_ENTITY_H

@@ -58,9 +58,9 @@ void DatabaseGenerateServerBaseTesting::ArticleTesting::EffectiveTest()
         ASSERT_GREATER_EQUAL(article->GetVolume(), 0);
         ASSERT_GREATER(article->GetChapterVolume(), 0);
 
-        if (!article->GetAuthorDescribe().empty())
+        if (!article->GetAuthorNotes().empty())
         {
-            ASSERT_EQUAL(article->GetOtherAuthor().size(), article->GetAuthorDescribe().size());
+            ASSERT_EQUAL(article->GetOtherAuthor().size(), article->GetAuthorNotes().size());
         }
 
         ASSERT_EQUAL(article->GetId(), article->GetVersion() * 10000LL + article->GetChapter() * 1000LL + article->GetChapterVolume());

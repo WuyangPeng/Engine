@@ -1860,6 +1860,12 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Miscellaneous\TangentsToCircles.cpp">
       <Filter>Miscellaneous 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\CylindricalCoordinates.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\SphereCoordinates.cpp">
+      <Filter>Algebra 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsLib.h">
@@ -5716,6 +5722,24 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Base\Constants.h">
       <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\CylindricalCoordinates.h">
+      <Filter>Algebra 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\CylindricalCoordinatesAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\CylindricalCoordinatesDetail.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\SphereCoordinates.h">
+      <Filter>Algebra 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\SphereCoordinatesAchieve.h">
+      <Filter>Algebra 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\SphereCoordinatesDetail.h">
+      <Filter>Algebra 模板文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

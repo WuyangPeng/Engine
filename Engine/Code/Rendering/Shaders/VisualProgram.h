@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:44)
+///	版本：0.9.1.1 (2023/07/05 12:36)
 
 #ifndef RENDERING_SHADERS_VISUAL_PROGRAM_H
 #define RENDERING_SHADERS_VISUAL_PROGRAM_H
@@ -16,7 +16,6 @@
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/NameMacro.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
-#include "Rendering/OpenGLRenderer/GLSL/GLSLReflection.h"
 #include "Rendering/Shaders/ShadersFwd.h"
 
 #include <string>
@@ -25,28 +24,24 @@ RENDERING_COPY_UNSHARED_EXPORT_IMPL(VisualProgram, VisualProgramImpl);
 
 namespace Rendering
 {
-    class RENDERING_DEFAULT_DECLARE VisualProgram
+    class RENDERING_DEFAULT_DECLARE VisualProgram final
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(VisualProgram);
-        using ShaderSharedPtr = std::shared_ptr<Shader>;
-        using ConstShaderSharedPtr = std::shared_ptr<const Shader>;
+
+        using OpenGLUInt = System::OpenGLUInt;
         using ObjectLink = CoreTools::ObjectLink;
         using BufferTarget = CoreTools::BufferTarget;
         using BufferSource = CoreTools::BufferSource;
         using ObjectRegister = CoreTools::ObjectRegister;
-        using OpenGLUInt = System::OpenGLUInt;
+        using ShaderSharedPtr = std::shared_ptr<Shader>;
+        using ConstShaderSharedPtr = std::shared_ptr<const Shader>;
 
     public:
-        explicit VisualProgram(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+        NODISCARD static VisualProgram Create();
         VisualProgram(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle);
-        virtual ~VisualProgram() noexcept = default;
-        VisualProgram(const VisualProgram& rhs) = default;
-        VisualProgram& operator=(const VisualProgram& rhs) = default;
-        VisualProgram(VisualProgram&& rhs) noexcept = default;
-        VisualProgram& operator=(VisualProgram&& rhs) noexcept = default;
 
-        CLASS_INVARIANT_VIRTUAL_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
         NODISCARD ConstShaderSharedPtr GetVertexShader() const noexcept;
         NODISCARD ConstShaderSharedPtr GetPixelShader() const noexcept;
@@ -68,7 +63,10 @@ namespace Rendering
         void Link(ObjectLink& source);
         void Register(ObjectRegister& target) const;
 
-        NODISCARD GLSLReflection GetReflector() const;
+        NODISCARD Reflection GetReflector() const;
+
+    private:
+        explicit VisualProgram(CoreTools::DisableNotThrow disableNotThrow);
 
     private:
         PackageType impl;

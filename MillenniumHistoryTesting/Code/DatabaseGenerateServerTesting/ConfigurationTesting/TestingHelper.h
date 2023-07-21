@@ -5,11 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/24 12:16)
+///	版本：0.9.1.1 (2023/07/20 23:42)
 
 #ifndef DATABASE_GENERATE_SERVER_BASE_TESTING_HELPER_H
 #define DATABASE_GENERATE_SERVER_BASE_TESTING_HELPER_H
 
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/AncientBooksFwd.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 
 namespace DatabaseGenerateServerBaseTesting
@@ -26,9 +27,13 @@ namespace DatabaseGenerateServerBaseTesting
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using AncientBooksContainer = AncientBooks::AncientBooksContainer;
+
+    private:
         void InitSuite();
 
-        void AddAncientBooksSuite();
+        void AddAncientBooksSuite(const AncientBooksContainer& ancientBooksContainer);
+        void AddDatabaseEntitySuite(const AncientBooksContainer& ancientBooksContainer);
     };
 }
 

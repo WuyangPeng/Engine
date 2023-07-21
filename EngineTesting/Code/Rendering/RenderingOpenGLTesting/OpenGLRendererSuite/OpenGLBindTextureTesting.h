@@ -27,7 +27,6 @@ namespace Rendering
 
     private:
         void MainTest() noexcept;
-        void TextureTest();
 
         void DoRunUnitTest() override;
     };

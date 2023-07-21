@@ -12,8 +12,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Renderers/EnvironmentParameter.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/RendererEngine/EnvironmentParameter.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/MiddleLayer/ModelMiddleLayer.h"
@@ -43,12 +42,8 @@ void Framework::ViewMiddleLayerTesting::DoRunUnitTest()
 
 void Framework::ViewMiddleLayerTesting::MainTest()
 {
-    Rendering::RendererManager::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DrawFrameRateTest);
-
-    Rendering::RendererManager::Destroy();
 }
 
 void Framework::ViewMiddleLayerTesting::MiddleLayerTest()

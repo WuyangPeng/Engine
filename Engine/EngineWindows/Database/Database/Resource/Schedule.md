@@ -32,3 +32,4 @@ Database
 	14. mariaDB包装器：封装了mariaDB的实现。
 	15. mongo包装器：封装了mongo的实现。
 	16. Redis包装器：封装了Redis的实现。
+	17. DatabaseEntity代码生成：封装了DatabaseEntity代码的生成。

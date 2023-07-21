@@ -64,3 +64,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Culler, GetVisible, int, Render
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Culler, begin, Rendering::Culler::VisualContainerIter)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Culler, end, Rendering::Culler::VisualContainerIter)
+
+void Rendering::Culler::ComputeVisibleSet(MAYBE_UNUSED const CameraSharedPtr& scene, MAYBE_UNUSED const SpatialSharedPtr& shared) noexcept
+{
+}

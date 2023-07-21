@@ -38,6 +38,8 @@ namespace Database
         NODISCARD BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
         NODISCARD ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const;
 
+        NODISCARD WrappersStrategy GetWrappersStrategy() const noexcept;
+
     private:
         PackageType impl;
     };

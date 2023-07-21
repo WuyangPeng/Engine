@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 21:51)
+///	版本：0.9.1.1 (2023/07/18 22:31)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/DatabaseGenerateServerMiddleLayerExport.h"
 
@@ -13,7 +13,7 @@
 #include "ResourceManagerImpl.h"
 #include "CoreTools/Helper/LogMacro.h"
 
-DatabaseGenerateServerMiddleLayer::ResourceManagerImpl::ResourceManagerImpl(const System::String& directory)
+DatabaseGenerateServerMiddleLayer::ResourceManagerImpl::ResourceManagerImpl(const String& directory)
     : directory{ directory },
       ancientBooksContainer{},
       thread{},
@@ -33,6 +33,15 @@ bool DatabaseGenerateServerMiddleLayer::ResourceManagerImpl::Initialize()
     return true;
 }
 
+bool DatabaseGenerateServerMiddleLayer::ResourceManagerImpl::Destroy() noexcept
+{
+    DATABASE_GENERATE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_9;
+
+    thread.reset();
+
+    return true;
+}
+
 DatabaseGenerateServerMiddleLayer::ResourceManagerImpl::ConstAncientBooksContainerSharedPtr DatabaseGenerateServerMiddleLayer::ResourceManagerImpl::GetAncientBooksContainer()
 {
     DATABASE_GENERATE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_9;
@@ -44,7 +53,7 @@ DatabaseGenerateServerMiddleLayer::ResourceManagerImpl::ConstAncientBooksContain
 
 void DatabaseGenerateServerMiddleLayer::ResourceManagerImpl::InitAncientBooks()
 {
-    const auto result = std::make_shared<AncientBooks::AncientBooksContainer>(directory);    
+    const auto result = std::make_shared<AncientBooks::AncientBooksContainer>(directory);
 
     std::unique_lock unique_lock{ mutex };
 

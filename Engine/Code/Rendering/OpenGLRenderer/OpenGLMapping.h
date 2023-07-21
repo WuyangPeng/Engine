@@ -20,7 +20,7 @@
 #include "Rendering/SceneGraph/Flags/VisualFlags.h"
 #include "Rendering/Shaders/Flags/AlphaStateFlags.h"
 #include "Rendering/Shaders/Flags/DepthStateFlags.h"
-#include "Rendering/Shaders/Flags/ShaderFlags.h"
+
 #include "Rendering/Shaders/Flags/StencilStateFlags.h"
 
 namespace Rendering

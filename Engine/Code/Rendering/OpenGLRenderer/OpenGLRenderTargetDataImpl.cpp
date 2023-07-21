@@ -11,10 +11,10 @@
 
 #include "OpenGLBindTexture.h"
 #include "OpenGLMapping.h"
-#include "OpenGLRenderTargetDataImpl.h" 
+#include "OpenGLRenderTargetDataImpl.h"
 #include "System/OpenGL/OpenGLBase.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Resources/Textures/DrawTarget.h"
@@ -48,11 +48,9 @@ void Rendering::OpenGLRenderTargetDataImpl::CreateFramebufferObject() noexcept
 
 System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl::CreateDrawBuffers(const BaseRenderer* renderer, const DrawTarget* aRenderTarget)
 {
-    const auto previousBind = GetBoundTexture(ShaderFlags::SamplerType::Sampler2D);
-
     if (renderer == nullptr || aRenderTarget == nullptr)
     {
-        return previousBind;
+        return 0;
     }
 
     for (auto index = 0; index < numTargets; ++index)
@@ -70,7 +68,7 @@ System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl::CreateDrawBuffers(cons
         // 附加纹理到帧缓冲区。
     }
 
-    return previousBind;
+    return 0;
 }
 
 void Rendering::OpenGLRenderTargetDataImpl::CreateDepthStencilTexture(const BaseRenderer* renderer, const DrawTarget* aRenderTarget, MAYBE_UNUSED UInt previousBind)

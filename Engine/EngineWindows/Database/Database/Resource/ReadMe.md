@@ -139,4 +139,9 @@
 （2） 存储：Redis的存储类。  
 
 ----------------------------
+17. DatabaseEntityCodeGeneration（DatabaseEntity代码生成）
+
+实现DatabaseEntity代码的生成。 
+
+----------------------------
 

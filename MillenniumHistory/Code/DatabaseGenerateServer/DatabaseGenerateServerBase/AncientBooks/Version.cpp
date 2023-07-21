@@ -31,7 +31,7 @@ AncientBooks::Version::Version(const CSVRow& csvRow)
       year{ csvRow.GetInt(SYSTEM_TEXT("year"s)) },
       version{ csvRow.GetString(SYSTEM_TEXT("version"s)) },
       otherAuthor{ csvRow.GetIntArray(SYSTEM_TEXT("otherAuthor"s)) },
-      authorDescribe{ csvRow.GetStringArray(SYSTEM_TEXT("authorDescribe"s)) }
+      authorNotes{ csvRow.GetStringArray(SYSTEM_TEXT("authorNotes"s)) }
 {
     USER_SELF_CLASS_IS_VALID_9;
 }
@@ -180,38 +180,38 @@ AncientBooks::Version::CharacterContainer AncientBooks::Version::GetOtherAuthor(
     return result;
 }
 
-AncientBooks::Version::StringContainer AncientBooks::Version::GetAuthorDescribe() const
+AncientBooks::Version::StringContainer AncientBooks::Version::GetAuthorNotes() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return authorDescribe;
+    return authorNotes;
 }
 
-int AncientBooks::Version::GetAuthorDescribeCount() const
+int AncientBooks::Version::GetAuthorNotesCount() const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(authorDescribe.size());
+    return boost::numeric_cast<int>(authorNotes.size());
 }
 
-System::String AncientBooks::Version::GetAuthorDescribe(int index) const
+System::String AncientBooks::Version::GetAuthorNotes(int index) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return authorDescribe.at(index);
+    return authorNotes.at(index);
 }
 
-AncientBooks::Version::StringContainerConstIter AncientBooks::Version::GetAuthorDescribeBegin() const noexcept
+AncientBooks::Version::StringContainerConstIter AncientBooks::Version::GetAuthorNotesBegin() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return authorDescribe.cbegin();
+    return authorNotes.cbegin();
 }
 
-AncientBooks::Version::StringContainerConstIter AncientBooks::Version::GetAuthorDescribeEnd() const noexcept
+AncientBooks::Version::StringContainerConstIter AncientBooks::Version::GetAuthorNotesEnd() const noexcept
 {
     USER_CLASS_IS_VALID_CONST_9;
 
-    return authorDescribe.cend();
+    return authorNotes.cend();
 }
 

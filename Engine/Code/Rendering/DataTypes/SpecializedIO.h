@@ -167,7 +167,7 @@ RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Ren
 namespace Rendering
 {
     template <typename T>
-    int GetStreamSize(T value) noexcept(noexcept(CoreTools::StreamSize<T>::GetStreamSize(value)))
+    int GetStreamSize(T value = T{}) noexcept(noexcept(CoreTools::StreamSize<T>::GetStreamSize(value)))
     {
         return CoreTools::StreamSize<T>::GetStreamSize(value);
     }

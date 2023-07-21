@@ -14,7 +14,7 @@
 
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
-#include "Rendering/SceneGraph/Material.h"
+#include "Rendering/LocalEffects/Material.h"
 
 #include <string>
 #include <vector>

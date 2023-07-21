@@ -37,6 +37,7 @@ namespace Rendering
     class Picker;
     class ScreenTarget;
     class StandardMesh;
+    class ProjectionViewWorldUpdater;
 }
 
 #endif  // RENDERING_RENDERING_SCENE_GRAPH_FWD_H

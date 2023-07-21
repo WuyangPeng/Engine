@@ -61,6 +61,13 @@ int Rendering::RenderingEnvironmentImpl::GetNumMultiSamples() const noexcept
     return rendererParameter.GetNumMultiSamples();
 }
 
+Rendering::RenderingEnvironmentImpl::ColourType Rendering::RenderingEnvironmentImpl::GetClearColor() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return rendererParameter.GetClearColor();
+}
+
 Rendering::RenderingDevice Rendering::RenderingEnvironmentImpl::GetRenderingDevice() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;

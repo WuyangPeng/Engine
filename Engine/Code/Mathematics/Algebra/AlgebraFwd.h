@@ -182,6 +182,14 @@ namespace Mathematics
     requires std::is_arithmetic_v<Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AQuaternion;
 
+    template <typename Real>
+    requires std::is_floating_point_v<Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CylindricalCoordinates;
+
+    template <typename Real>
+    requires std::is_floating_point_v<Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE SphereCoordinates;
+
     enum class ExtractEulerResultType;
     enum class ExtractEulerResultOrder;
     enum class MatrixInitType;

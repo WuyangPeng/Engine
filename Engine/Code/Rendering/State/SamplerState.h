@@ -31,6 +31,13 @@ namespace Rendering
 
     public:
         explicit SamplerState(const std::string& name);
+        SamplerState(SamplerStateFilter filter,
+                     SamplerStateMode mode0,
+                     SamplerStateMode mode1);
+        SamplerState(SamplerStateFilter filter,
+                     SamplerStateMode mode0,
+                     SamplerStateMode mode1,
+                     SamplerStateMode mode2);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

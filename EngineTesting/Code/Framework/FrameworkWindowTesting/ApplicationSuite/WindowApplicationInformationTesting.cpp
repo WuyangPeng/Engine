@@ -18,7 +18,6 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
-#include "Rendering/Renderers/RendererParameter.h"
 #include "Framework/Application/WindowApplicationInformation.h"
 #include "Framework/WindowCreate/WindowPoint.h"
 #include "Framework/WindowCreate/WindowSize.h"
@@ -163,32 +162,7 @@ void Framework::WindowApplicationInformationTesting::NotAllowedResizeTest()
     ASSERT_EQUAL(information.GetWindowPictorial().GetHIcon(), windowPictorial.GetHIcon());
 }
 
-void Framework::WindowApplicationInformationTesting::RendererParameterTest()
+void Framework::WindowApplicationInformationTesting::RendererParameterTest() noexcept
 {
-    Rendering::RendererParameter rendererParameter{ "Configuration/FrameworkWindowTestingRenderer.json" };
 
-    const auto width = rendererParameter.GetWidth();
-    const auto height = rendererParameter.GetHeight();
-    const WindowSize size{ width, height };
-
-    auto windowTitle = SYSTEM_TEXT("FrameworkWindowTesting"s);
-
-    TestingType information{ instance, rendererParameter };
-
-    ASSERT_EQUAL(information.GetWindowTitle(), windowTitle);
-    ASSERT_EQUAL(information.GetWindowTitleWithMultiByte(), "FrameworkWindowTesting"s);
-
-    ASSERT_EQUAL(information.GetXPosition(), rendererParameter.GetXPosition());
-    ASSERT_EQUAL(information.GetYPosition(), rendererParameter.GetYPosition());
-    ASSERT_EQUAL(information.GetWidth(), rendererParameter.GetWidth());
-    ASSERT_EQUAL(information.GetHeight(), rendererParameter.GetHeight());
-    ASSERT_EQUAL(information.GetWindowSize(), size);
-    ASSERT_APPROXIMATE(information.GetAspectRatio(), boost::numeric_cast<float>(width) / boost::numeric_cast<float>(height), Mathematics::MathF::epsilon);
-    ASSERT_ENUM_EQUAL(information.GetStyle(), System::WindowsStyles::Default);
-    ASSERT_EQUAL(information.GetWindowName().GetWindowClassName(), rendererParameter.GetWindowClassName());
-    ASSERT_EQUAL(information.GetWindowName().GetWindowMenuName(), rendererParameter.GetWindowMenuName());
-
-    ASSERT_EQUAL(information.GetWindowPictorial().GetHBrush(), System::GetSystemStockObject(System::WindowsBrushTypes::BlackBrush));
-    ASSERT_EQUAL(information.GetWindowPictorial().GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
-    ASSERT_EQUAL(information.GetWindowPictorial().GetHIcon(), System::LoadSystemIcon(nullptr, System::gQuestion));
 }

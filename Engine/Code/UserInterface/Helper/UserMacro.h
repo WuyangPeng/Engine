@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 19:52)
+///	版本：0.9.1.1 (2023/07/11 20:10)
 
 #ifndef USER_INTERFACE_MACRO_USER_MACRO_H
 #define USER_INTERFACE_MACRO_USER_MACRO_H
@@ -13,10 +13,16 @@
 #include "System/Helper/ConfigMacro.h"
 #include "CoreTools/Helper/UserMacro.h"
 
-#define CLOSE_USE_WX_WIDGETS (0x01)
-#define CLOSE_USER_INTERFACE_MAX (((CLOSE_USE_WX_WIDGETS) << 1) - 1)
+#define USER_INTERFACE_ClOSE_BEGIN (0x01)
 
-// 编译测试（默认为0，最大值为0x01）
+#define CLOSE_USE_WX_WIDGETS (USER_INTERFACE_ClOSE_BEGIN)
+#define CLOSE_USE_FLTK (USER_INTERFACE_ClOSE_BEGIN << 1)
+
+#define USER_INTERFACE_ClOSE_END CLOSE_USE_FLTK
+
+#define CLOSE_USER_INTERFACE_MAX (((USER_INTERFACE_ClOSE_END) << 1) - 1)
+
+// 编译测试（默认为0，最大值为0x03）
 #define COMPILE_USER_INTERFACE_CLOSE 0x00
 
 static_assert(0 <= COMPILE_USER_INTERFACE_CLOSE, "COMPILE_USER_INTERFACE_CLOSE Must be greater than or equal 0.");

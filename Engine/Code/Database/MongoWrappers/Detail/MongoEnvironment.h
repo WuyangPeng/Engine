@@ -12,6 +12,8 @@
 
 #include "Database/DatabaseDll.h"
 
+#include <atomic>
+
 namespace Database
 {
     class DATABASE_HIDDEN_DECLARE MongoEnvironment final
@@ -27,7 +29,7 @@ namespace Database
         void InitEnvironment();
 
     private:
-        bool isInit;
+        static std::atomic_bool isInit;
     };
 }
 

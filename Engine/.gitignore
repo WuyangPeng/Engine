@@ -1,5 +1,6 @@
 *.aps
 *.config
+*.cso
 *.db
 *.db-shm
 *.db-wal

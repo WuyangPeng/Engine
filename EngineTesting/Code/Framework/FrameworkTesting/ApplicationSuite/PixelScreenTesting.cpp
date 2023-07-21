@@ -13,8 +13,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
-#include "Rendering/RendererEngine/Renderer.h"
-#include "Rendering/RendererEngine/RendererManager.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
 Framework::PixelScreenTesting::PixelScreenTesting(const OStreamShared& stream)
@@ -32,8 +30,6 @@ void Framework::PixelScreenTesting::DoRunUnitTest()
 
 void Framework::PixelScreenTesting::MainTest()
 {
-    Rendering::RendererManager::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(DefaultColourTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ClearScreenTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ResizeTest);
@@ -50,8 +46,6 @@ void Framework::PixelScreenTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(FillRectangleHollowTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FillCircleSolidTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DrawTest);
-
-    Rendering::RendererManager::Destroy();
 }
 
 void Framework::PixelScreenTesting::DefaultColourTest()

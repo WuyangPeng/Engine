@@ -162,6 +162,10 @@ std::shared_ptr<Rendering::VisualEffect> Rendering::Visual::GetEffect() noexcept
     return nullptr;
 }
 
+void Rendering::Visual::SetEffect(MAYBE_UNUSED const std::shared_ptr<VisualEffect>& visualEffect) noexcept
+{
+}
+
 void Rendering::Visual::UpdateWorldBound()
 {
     const auto worldTransform = GetWorldTransform();

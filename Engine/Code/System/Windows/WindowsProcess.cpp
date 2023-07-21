@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/02/02 14:42)
+///	版本：0.9.1.1 (2023/07/18 19:32)
 
 #include "System/SystemExport.h"
 
@@ -18,127 +18,124 @@
 #include "System/SystemOutput/Flags/MessageBoxFlags.h"
 #include "System/SystemOutput/MessageBoxSelection.h"
 
-using namespace std::literals;
-
-bool System::GetSystemMessage(WindowsMsg* msg, WindowsHWnd hwnd) noexcept
+bool System::GetSystemMessage(WindowsMessage* message, WindowsHWnd hWnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    const auto gotMessage = ::GetMessage(msg, hwnd, 0, 0);
-
-    if (gotMessage != 0 && gotMessage != -1)
+    if (const auto result = ::GetMessage(message, hWnd, 0, 0);
+        result != 0 && result != -1)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(msg, hwnd);
+    UnusedFunction(message, hWnd);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::TranslateSystemMessage(const WindowsMsg* msg) noexcept
+bool System::TranslateSystemMessage(const WindowsMessage* message) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TranslateMessage(msg) != gFalse)
+    if (::TranslateMessage(message) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(msg);
+    UnusedFunction(message);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::DispatchSystemMessage(const WindowsMsg* msg) noexcept
+bool System::DispatchSystemMessage(const WindowsMessage* message) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::DispatchMessage(msg) != gFalse)
+    if (::DispatchMessage(message) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(msg);
+    UnusedFunction(message);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::PeekSystemMessage(WindowsMsg* msg, WindowsHWnd hWnd) noexcept
+bool System::PeekSystemMessage(WindowsMessage* message, WindowsHWnd hWnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::PeekMessage(msg, hWnd, 0, 0, EnumCastUnderlying(PeekMessageOptions::Remove)) != gFalse)
+    if (::PeekMessage(message, hWnd, 0, 0, EnumCastUnderlying(PeekMessageOptions::Remove)) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(msg, hwnd);
+    UnusedFunction(message, hWnd);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SystemTranslateAccelerator(WindowsHWnd hwnd, WindowsHAccel accel, WindowsMsg* msg) noexcept
+bool System::SystemTranslateAccelerator(WindowsHWnd hWnd, WindowsHAccelerator accelerator, WindowsMessage* message) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TranslateAccelerator(hwnd, accel, msg) != gFalse)
+    if (::TranslateAccelerator(hWnd, accelerator, message) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd, accel, msg);
+    UnusedFunction(hWnd, accelerator, msg);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SystemValidateRect(WindowsHWnd hwnd) noexcept
+bool System::SystemValidateRect(WindowsHWnd hWnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ValidateRect(hwnd, nullptr) != gFalse)
+    if (::ValidateRect(hWnd, nullptr) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd);
+    UnusedFunction(hWnd);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsLResult System::DefaultSystemWindowProcess(WindowsHWnd hwnd, WindowsMessages msg, WindowsWParam wParam, WindowsLParam lParam) noexcept
+System::WindowsLResult System::DefaultSystemWindowProcess(WindowsHWnd hWnd, WindowsMessages message, WindowsWParam wParam, WindowsLParam lParam) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::DefWindowProc(hwnd, EnumCastUnderlying(msg), wParam, lParam);
+    return ::DefWindowProc(hWnd, EnumCastUnderlying(message), wParam, lParam);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd, msg, wParam, lParam);
+    UnusedFunction(hWnd, message, wParam, lParam);
 
     return 0;
 
@@ -160,59 +157,62 @@ int System::PostSystemQuitMessage() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::DefaultMessageBox(WindowsHWnd hwnd, const String& information, const String& title) noexcept
+bool System::DefaultMessageBox(WindowsHWnd hWnd, const String& information, const String& title) noexcept
 {
-    constexpr MessageBoxFlagsData flagsData{ MessageBoxType::YesNo,
-                                             MessageBoxIcon::Exclamation,
-                                             MessageBoxDefault::Button2,
-                                             MessageBoxMode::ApplModal,
-                                             MessageBoxMisc::NoMisc };
-
-    if (MessageBoxSelection(hwnd, information.c_str(), title.c_str(), flagsData) == DialogBoxCommand::IDYes)
+    if (constexpr MessageBoxFlagsData flagsData{ MessageBoxType::YesNo,
+                                                 MessageBoxIcon::Exclamation,
+                                                 MessageBoxDefault::Button2,
+                                                 MessageBoxMode::ApplModal,
+                                                 MessageBoxMisc::NoMisc };
+        MessageBoxSelection(hWnd, information.c_str(), title.c_str(), flagsData) == DialogBoxCommand::IDYes)
+    {
         return true;
+    }
     else
+    {
         return false;
+    }
 }
 
-bool System::DestroySystemWindow(WindowsHWnd hwnd) noexcept
+bool System::DestroySystemWindow(WindowsHWnd hWnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::DestroyWindow(hwnd) != gFalse)
+    if (::DestroyWindow(hWnd) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd);
+    UnusedFunction(hWnd);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SendSystemMessage(WindowsHWnd hwnd, WindowsMessages msg, WindowsWParam wParam, WindowsLParam lParam) noexcept
+bool System::SendSystemMessage(WindowsHWnd hWnd, WindowsMessages message, WindowsWParam wParam, WindowsLParam lParam) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SendMessage(hwnd, EnumCastUnderlying(msg), wParam, lParam) != gFalse)
+    if (::SendMessage(hWnd, EnumCastUnderlying(message), wParam, lParam) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd, msg, wParam, lParam);
+    UnusedFunction(hWnd, message, wParam, lParam);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetCursorClientPos(WindowsHWnd hwnd, WindowsPoint& point) noexcept
+bool System::GetCursorClientPos(WindowsHWnd hWnd, WindowsPoint& point) noexcept
 {
-    return GetSystemCursorPos(point) && SystemScreenToClient(hwnd, point);
+    return GetSystemCursorPos(point) && SystemScreenToClient(hWnd, point);
 }
 
 bool System::SetCursorClientPos(WindowsHWnd hWnd, const WindowsPoint& point) noexcept
@@ -222,36 +222,36 @@ bool System::SetCursorClientPos(WindowsHWnd hWnd, const WindowsPoint& point) noe
     return SystemClientToScreen(hWnd, clientPoint) && SetSystemCursorPos(clientPoint);
 }
 
-bool System::SystemBeginPaint(WindowsHWnd hwnd, WindowsPaintStruct* paintStruct) noexcept
+bool System::SystemBeginPaint(WindowsHWnd hWnd, WindowsPaintStruct* paintStruct) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::BeginPaint(hwnd, paintStruct) != nullptr)
+    if (::BeginPaint(hWnd, paintStruct) != nullptr)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd, paintStruct);
+    UnusedFunction(hWnd, paintStruct);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SystemEndPaint(WindowsHWnd hwnd, const WindowsPaintStruct* paintStruct) noexcept
+bool System::SystemEndPaint(WindowsHWnd hWnd, const WindowsPaintStruct* paintStruct) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EndPaint(hwnd, paintStruct) != gFalse)
+    if (::EndPaint(hWnd, paintStruct) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd, paintStruct);
+    UnusedFunction(hWnd, paintStruct);
 
     return false;
 
@@ -262,31 +262,35 @@ System::String System::GetSystemCommandLine()
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    const TChar* commandLine{ ::GetCommandLine() };
-    if (commandLine != nullptr)
+    if (const auto* commandLine = ::GetCommandLine();
+        commandLine != nullptr)
+    {
         return commandLine;
+    }
     else
-        return SYSTEM_TEXT(""s);
+    {
+        return String{};
+    }
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    return SYSTEM_TEXT(""s);
+    return String{};
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::PostSystemMessage(WindowsHWnd hwnd, WindowsMessages msg, WindowsWParam wParam, WindowsLParam lParam) noexcept
+bool System::PostSystemMessage(WindowsHWnd hWnd, WindowsMessages message, WindowsWParam wParam, WindowsLParam lParam) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::PostMessage(hwnd, EnumCastUnderlying(msg), wParam, lParam)) != gFalse)
+    if (::PostMessage(hWnd, EnumCastUnderlying(message), wParam, lParam) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd, msg, wParam, lParam);
+    UnusedFunction(hWnd, message, wParam, lParam);
 
     return false;
 
@@ -297,7 +301,7 @@ bool System::GetSystemCursorPos(WindowsPoint& point) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::GetCursorPos(&point)) != gFalse)
+    if (::GetCursorPos(&point) != gFalse)
         return true;
     else
         return false;
@@ -315,7 +319,7 @@ bool System::SetSystemCursorPos(const WindowsPoint& point) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::SetCursorPos(point.x, point.y)) != gFalse)
+    if (::SetCursorPos(point.x, point.y) != gFalse)
         return true;
     else
         return false;
@@ -329,36 +333,36 @@ bool System::SetSystemCursorPos(const WindowsPoint& point) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SystemClientToScreen(WindowsHWnd hwnd, WindowsPoint& point) noexcept
+bool System::SystemClientToScreen(WindowsHWnd hWnd, WindowsPoint& point) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::ClientToScreen(hwnd, &point)) != gFalse)
+    if (::ClientToScreen(hWnd, &point) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd, point);
+    UnusedFunction(hWnd, point);
 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SystemScreenToClient(WindowsHWnd hwnd, WindowsPoint& point) noexcept
+bool System::SystemScreenToClient(WindowsHWnd hWnd, WindowsPoint& point) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::ScreenToClient(hwnd, &point)) != gFalse)
+    if (::ScreenToClient(hWnd, &point) != gFalse)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(hwnd, point);
+    UnusedFunction(hWnd, point);
 
     return false;
 

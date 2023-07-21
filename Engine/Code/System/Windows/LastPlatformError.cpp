@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/02/02 14:41)
+///	版本：0.9.1.1 (2023/07/19 17:40)
 
 #include "System/SystemExport.h"
 
@@ -13,11 +13,13 @@
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/Platform.h"
 
+#include <gsl/util>
+
 System::WindowError System::GetPlatformLastError() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<WindowError>(::GetLastError());
+    return UnderlyingCastEnum<WindowError>(gsl::narrow_cast<int>(::GetLastError()));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -43,7 +45,7 @@ System::ErrorMode System::GetPlatformErrorMode() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<ErrorMode>(::GetErrorMode());
+    return UnderlyingCastEnum<ErrorMode>(gsl::narrow_cast<int>(::GetErrorMode()));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -56,7 +58,7 @@ System::ErrorMode System::SetPlatformErrorMode(ErrorMode flag) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<ErrorMode>(::SetErrorMode(EnumCastUnderlying(flag)));
+    return UnderlyingCastEnum<ErrorMode>(gsl::narrow_cast<int>(::SetErrorMode(EnumCastUnderlying(flag))));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

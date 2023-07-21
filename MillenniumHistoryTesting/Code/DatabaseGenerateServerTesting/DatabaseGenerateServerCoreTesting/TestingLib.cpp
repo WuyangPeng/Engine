@@ -10,4 +10,5 @@
 #include "ThreadingCoreRenderEngine/ThreadingCoreRenderEngineLib.h"
 #include "ThreadingCoreRenderEngineGame/ThreadingCoreRenderEngineGameLib.h"
 
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseGenerateServerBaseLib.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/DatabaseGenerateServerCoreLib.h"

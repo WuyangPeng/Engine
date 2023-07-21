@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/SceneGraph/Material.h"
+#include "Rendering/LocalEffects/Material.h"
 
 Rendering::MaterialTesting::MaterialTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -42,9 +42,9 @@ void Rendering::MaterialTesting::BaseTest()
     ASSERT_TRUE(Approximate(firstMaterial->GetEmissive(), Material::Colour(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
     ASSERT_TRUE(Approximate(firstMaterial->GetAmbient(), Material::Colour(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
     ASSERT_TRUE(Approximate(firstMaterial->GetDiffuse(), Material::Colour(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
-    ASSERT_TRUE(Approximate(firstMaterial->GetSpecular(), Material::Colour(0.0f, 0.0f, 0.0f, 0.0f), 1e-8f));
+    ASSERT_TRUE(Approximate(firstMaterial->GetSpecular(), Material::Colour(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
     ASSERT_APPROXIMATE(firstMaterial->GetAlpha(), 1.0f, 1e-8f);
-    ASSERT_APPROXIMATE(firstMaterial->GetSpecularExponent(), 0.0f, 1e-8f);
+    ASSERT_APPROXIMATE(firstMaterial->GetSpecularExponent(), 1.0f, 1e-8f);
 
     firstMaterial->SetEmissive(Material::Colour(1.0f, 0.0f, 0.0f, 1.0f));
     firstMaterial->SetAmbient(Material::Colour(0.0f, 1.0f, 0.0f, 1.0f));

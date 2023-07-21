@@ -136,6 +136,21 @@
     <Filter Include="RedisWrappers 头文件\Detail">
       <UniqueIdentifier>{d47a4cdb-92c7-4282-b192-95b729be49d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DatabaseEntityCodeGeneration 源文件">
+      <UniqueIdentifier>{0a86f853-c30e-43c7-8e68-1493a016a9f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseEntityCodeGeneration 头文件">
+      <UniqueIdentifier>{9f43c97e-c50c-44af-bff4-0dc5febb9e27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseEntityCodeGeneration 配置文件">
+      <UniqueIdentifier>{9a113f20-deeb-4c94-bf81-e1f093ecfa41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseEntityCodeGeneration 头文件\Detail">
+      <UniqueIdentifier>{4a91c878-ff21-4a52-b3cf-95fcd0bfbfa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseEntityCodeGeneration 源文件\Detail">
+      <UniqueIdentifier>{5622f945-ddd9-46ae-a2cc-53c55d77f9c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Database\DllLib.cpp">
@@ -242,6 +257,60 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainer.cpp">
       <Filter>DatabaseInterface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeEntityImpl.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntity.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeEntityClassImpl.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntityClass.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeEntityAnalysisImpl.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntityAnalysis.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeMappingImpl.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeMapping.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeMappingAnalysisImpl.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeMappingAnalysis.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeHeaderFileGeneration.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeHeaderFileGenerationImpl.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeFwdHeaderFileGenerationImpl.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeFwdHeaderFileGeneration.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\EntityHeaderFileGenerationImpl.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\EntityHeaderFileGeneration.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\EntitySourceFileGenerationImpl.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\EntitySourceFileGeneration.cpp">
+      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -500,6 +569,66 @@
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\BasisDatabaseContainer.h">
       <Filter>DatabaseInterface 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\DatabaseEntityCodeGeneration.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\DatabaseEntityCodeGenerationFwd.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeEntityImpl.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntity.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeEntityClassImpl.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntityClass.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeEntityAnalysisImpl.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntityAnalysis.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeMappingImpl.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeMapping.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeMappingAnalysisImpl.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeMappingAnalysis.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeHeaderFileGeneration.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeHeaderFileGenerationImpl.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeFwdHeaderFileGenerationImpl.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeFwdHeaderFileGeneration.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\EntityHeaderFileGenerationImpl.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\EntityHeaderFileGeneration.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\EntitySourceFileGenerationImpl.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\EntitySourceFileGeneration.h">
+      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
@@ -507,6 +636,9 @@
     </None>
     <None Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\DatabaseEntity.json">
+      <Filter>DatabaseEntityCodeGeneration 配置文件</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -539,6 +671,18 @@
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\DatabaseEntity.txt">
+      <Filter>DatabaseEntityCodeGeneration 配置文件</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\DatabaseEntityFwd.txt">
+      <Filter>DatabaseEntityCodeGeneration 配置文件</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\EntityCpp.txt">
+      <Filter>DatabaseEntityCodeGeneration 配置文件</Filter>
+    </Text>
+    <Text Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\EntityH.txt">
+      <Filter>DatabaseEntityCodeGeneration 配置文件</Filter>
     </Text>
   </ItemGroup>
 </Project>

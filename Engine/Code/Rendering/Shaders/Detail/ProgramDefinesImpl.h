@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:29)
+///	版本：0.9.1.1 (2023/07/05 11:14)
 
 #ifndef RENDERING_SHADERS_PROGRAM_DEFINES_IMPL_H
 #define RENDERING_SHADERS_PROGRAM_DEFINES_IMPL_H
@@ -21,6 +21,7 @@ namespace Rendering
     {
     public:
         using ClassType = ProgramDefinesImpl;
+
         using DefinesType = std::pair<std::string, std::string>;
         using Container = std::vector<DefinesType>;
         using ContainerConstIter = Container::const_iterator;

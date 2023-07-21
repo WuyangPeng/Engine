@@ -142,7 +142,9 @@ namespace System
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    NODISCARD constexpr WindowsWord LowWord(WindowsDWordPtrSizeType param) noexcept
+    template <typename T>
+    requires std::is_integral_v<T>
+    NODISCARD constexpr WindowsWord GetLowWord(T param) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
 
@@ -155,7 +157,9 @@ namespace System
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    NODISCARD constexpr WindowsWord HighWord(WindowsDWordPtrSizeType param) noexcept
+    template <typename T>
+    requires std::is_integral_v<T>
+    NODISCARD constexpr WindowsWord GetHighWord(T param) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
 

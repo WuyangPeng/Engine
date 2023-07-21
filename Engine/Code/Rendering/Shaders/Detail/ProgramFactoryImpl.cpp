@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:45)
+///	版本：0.9.1.1 (2023/07/05 14:31)
 
 #include "Rendering/RenderingExport.h"
 
@@ -17,29 +17,30 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/OpenGLRenderer/Detail/GLSL/GLSLProgramFactory.h"
 #include "Rendering/RendererEngine/Flags/RendererTypes.h"
-#include "Rendering/Shaders/Flags/ShaderAPIType.h"
 
 Rendering::ProgramFactoryImpl::ProgramFactoryImpl(CoreTools::DisableNotThrow disableNotThrow)
     : version{},
-      vsEntry{},
-      psEntry{},
-      gsEntry{},
-      csEntry{},
-      defines{ disableNotThrow },
+      vertexShaderEntry{},
+      pixelShaderEntry{},
+      geometryShaderEntry{},
+      computeShaderEntry{},
+      defines{ ProgramDefines::Create() },
       flags{},
       definesStack{},
       flagsStack{}
 {
+    System::UnusedFunction(disableNotThrow);
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ProgramFactoryImpl::ProgramFactoryImpl(const std::string& version, const std::string& vsEntry, const std::string& psEntry, const std::string& gsEntry, const std::string& csEntry, int flags)
-    : version{ version },
-      vsEntry{ vsEntry },
-      psEntry{ psEntry },
-      gsEntry{ gsEntry },
-      csEntry{ csEntry },
-      defines{ CoreTools::DisableNotThrow::Disable },
+Rendering::ProgramFactoryImpl::ProgramFactoryImpl(std::string version, std::string vertexShaderEntry, std::string pixelShaderEntry, std::string geometryShaderEntry, std::string computeShaderEntry, int flags)
+    : version{ std::move(version) },
+      vertexShaderEntry{ std::move(vertexShaderEntry) },
+      pixelShaderEntry{ std::move(pixelShaderEntry) },
+      geometryShaderEntry{ std::move(geometryShaderEntry) },
+      computeShaderEntry{ std::move(computeShaderEntry) },
+      defines{ ProgramDefines::Create() },
       flags{ flags },
       definesStack{},
       flagsStack{}
@@ -49,58 +50,58 @@ Rendering::ProgramFactoryImpl::ProgramFactoryImpl(const std::string& version, co
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ProgramFactoryImpl)
 
-Rendering::ProgramFactoryImpl::VisualProgramSharedPtr Rendering::ProgramFactoryImpl::CreateFromFiles(const std::string& vsFile, const std::string& psFile, const std::string& gsFile)
+Rendering::ProgramFactoryImpl::VisualProgramSharedPtr Rendering::ProgramFactoryImpl::CreateFromFiles(const std::string& vertexShaderFile, const std::string& pixelShaderFile, const std::string& geometryShaderFile)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    if (vsFile.empty() || psFile.empty())
+    if (vertexShaderFile.empty() || pixelShaderFile.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("一个程序必须有一个顶点着色器和一个像素着色器。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("一个程序必须有一个顶点着色器和一个像素着色器。"s))
     }
 
-    auto vsSource = GetStringFromFile(vsFile);
-    auto psSource = GetStringFromFile(psFile);
+    const auto vertexShaderSource = GetStringFromFile(vertexShaderFile);
+    const auto pixelShaderSource = GetStringFromFile(pixelShaderFile);
 
-    std::string gsSource{};
-    if (!gsFile.empty())
+    std::string geometryShaderSource{};
+    if (!geometryShaderFile.empty())
     {
-        gsSource = GetStringFromFile(gsFile);
+        geometryShaderSource = GetStringFromFile(geometryShaderFile);
     }
 
-    return CreateFromNamedSources(vsFile, vsSource, psFile, psSource, gsFile, gsSource);
+    return CreateFromNamedSources(vertexShaderFile, vertexShaderSource, pixelShaderFile, pixelShaderSource, geometryShaderFile, geometryShaderSource);
 }
 
-Rendering::ProgramFactoryImpl::VisualProgramSharedPtr Rendering::ProgramFactoryImpl::CreateFromSources(const std::string& vsSource, const std::string& psSource, const std::string& gsSource)
+Rendering::ProgramFactoryImpl::VisualProgramSharedPtr Rendering::ProgramFactoryImpl::CreateFromSources(const std::string& vertexShaderSource, const std::string& pixelShaderSource, const std::string& geometryShaderSource)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return CreateFromNamedSources("vs", vsSource, "ps", psSource, "gs", gsSource);
+    return CreateFromNamedSources("vs", vertexShaderSource, "ps", pixelShaderSource, "gs", geometryShaderSource);
 }
 
-Rendering::ProgramFactoryImpl::ComputeProgramSharedPtr Rendering::ProgramFactoryImpl::CreateFromFile(const std::string& csFile)
+Rendering::ProgramFactoryImpl::ComputeProgramSharedPtr Rendering::ProgramFactoryImpl::CreateFromFile(const std::string& computeShaderFile)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    if (csFile.empty())
+    if (computeShaderFile.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("一个程序必须有一个计算着色器。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("一个程序必须有一个计算着色器。"s))
     }
 
-    std::string csSource = GetStringFromFile(csFile);
+    const auto computeShaderSource = GetStringFromFile(computeShaderFile);
 
-    return CreateFromNamedSource(csFile, csSource);
+    return CreateFromNamedSource(computeShaderFile, computeShaderSource);
 }
 
-Rendering::ProgramFactoryImpl::ComputeProgramSharedPtr Rendering::ProgramFactoryImpl::CreateFromSource(const std::string& csSource)
+Rendering::ProgramFactoryImpl::ComputeProgramSharedPtr Rendering::ProgramFactoryImpl::CreateFromSource(const std::string& computeShaderSource)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return CreateFromNamedSource("cs", csSource);
+    return CreateFromNamedSource("cs", computeShaderSource);
 }
 
-std::string Rendering::ProgramFactoryImpl::GetStringFromFile(const std::string& filename)
+std::string Rendering::ProgramFactoryImpl::GetStringFromFile(const std::string& fileName)
 {
-    CoreTools::IFStreamManager manager{ CoreTools::StringConversion::MultiByteConversionStandard(filename) };
+    const CoreTools::IFStreamManager manager{ CoreTools::StringConversion::MultiByteConversionStandard(fileName) };
 
     return CoreTools::StringConversion::StandardConversionMultiByte(manager.GetFileContent());
 }
@@ -117,7 +118,7 @@ void Rendering::ProgramFactoryImpl::PopDefines()
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    if (definesStack.size() > 0)
+    if (!definesStack.empty())
     {
         defines = definesStack.top();
         definesStack.pop();
@@ -150,13 +151,13 @@ Rendering::ProgramFactoryImpl::ProgramFactorySharedPtr Rendering::ProgramFactory
         case RendererTypes::Glut:
         case RendererTypes::OpenGL:
         case RendererTypes::OpenGLES:
-            return std::make_shared<GLSLProgramFactory>(CoreTools::DisableNotThrow::Disable);
+            return GLSLProgramFactory::Create();
 
         default:
             break;
     }
 
-    THROW_EXCEPTION(SYSTEM_TEXT("Program工厂类型未定义。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("Program工厂类型未定义。"s))
 }
 
 std::string Rendering::ProgramFactoryImpl::GetVersion() const

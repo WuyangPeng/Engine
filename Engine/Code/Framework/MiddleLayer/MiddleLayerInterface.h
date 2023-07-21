@@ -36,6 +36,9 @@ namespace Framework
         using WindowDisplay = System::WindowsDisplay;
         using EnvironmentParameter = Rendering::EnvironmentParameter;
 
+        using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     protected:
         enum class MiddleLayerInterfaceCreate
         {

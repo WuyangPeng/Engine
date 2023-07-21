@@ -16,14 +16,8 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{e95646c8-4e8d-4bd5-b65a-4b318e89d0f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Trixul 头文件">
-      <UniqueIdentifier>{9bb86a3b-7c38-4570-9ffd-b466ebbfe289}</UniqueIdentifier>
-    </Filter>
     <Filter Include="WxWidgets 头文件">
       <UniqueIdentifier>{9af7f4ab-3d3b-41ea-a671-1d3c443169db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="XFree86 头文件">
-      <UniqueIdentifier>{37a14fcc-9efe-483f-a50d-84bc15a46063}</UniqueIdentifier>
     </Filter>
     <Filter Include="Interface 头文件">
       <UniqueIdentifier>{fab77a4a-3a3b-4a1a-b78f-c86c8aca0689}</UniqueIdentifier>
@@ -36,6 +30,12 @@
     </Filter>
     <Filter Include="Helper 头文件">
       <UniqueIdentifier>{7ac9c5ad-6e5c-4995-b66a-4a96d9e2fbd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGL 头文件">
+      <UniqueIdentifier>{8277d66a-d8d3-442e-becd-00e930e0455a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX 头文件">
+      <UniqueIdentifier>{3bf315cb-7c66-49df-a306-ed8d5ba487aa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -89,23 +89,11 @@
     <ClInclude Include="..\..\..\Code\UserInterface\Interface\User.h">
       <Filter>Interface 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\UserInterface\Trixul\Trixul.h">
-      <Filter>Trixul 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\UserInterface\Trixul\TrixulFwd.h">
-      <Filter>Trixul 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\UserInterface\WxWidgets\WxWidgets.h">
       <Filter>WxWidgets 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\UserInterface\WxWidgets\WxWidgetsFwd.h">
       <Filter>WxWidgets 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\UserInterface\XFree86\XFree86.h">
-      <Filter>XFree86 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\UserInterface\XFree86\XFree86Fwd.h">
-      <Filter>XFree86 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\UserInterface\DllLib.h">
       <Filter>头文件</Filter>
@@ -118,6 +106,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\UserInterface\Helper\UserMacro.h">
       <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\OpenGL\OpenGL.h">
+      <Filter>OpenGL 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\OpenGL\OpenGLFwd.h">
+      <Filter>OpenGL 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\DirectX\DirectX.h">
+      <Filter>DirectX 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\DirectX\DirectXFwd.h">
+      <Filter>DirectX 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

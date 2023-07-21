@@ -12,8 +12,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/Renderers/EnvironmentParameter.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/RendererEngine/EnvironmentParameter.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
@@ -53,7 +52,6 @@ void Framework::ModelViewControllerMiddleLayerContainerTesting::DoRunUnitTest()
 
 void Framework::ModelViewControllerMiddleLayerContainerTesting::MainTest()
 {
-    Rendering::RendererManager::Create();
     Rendering::CameraManager::Create();
 
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
@@ -61,7 +59,6 @@ void Framework::ModelViewControllerMiddleLayerContainerTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CameraMiddleLayerTest);
 
     Rendering::CameraManager::Destroy();
-    Rendering::RendererManager::Destroy();
 }
 
 void Framework::ModelViewControllerMiddleLayerContainerTesting::MiddleLayerTest()

@@ -17,6 +17,7 @@
 #include "RendererEngineFwd.h"
 #include "RenderingDevice.h"
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+#include "Rendering/DataTypes/Colour.h"
 
 RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(RenderingEnvironment, RenderingEnvironmentImpl);
 
@@ -26,6 +27,8 @@ namespace Rendering
     {
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(RenderingEnvironment);
+
+        using ColourType = Colour<float>;
 
     public:
         RenderingEnvironment(const EnvironmentParameter& environmentParameter, const RendererParameter& rendererParameter);
@@ -41,6 +44,8 @@ namespace Rendering
         NODISCARD DataFormatType GetColorFormat() const noexcept;
         NODISCARD DataFormatType GetDepthStencilFormat() const noexcept;
         NODISCARD int GetNumMultiSamples() const noexcept;
+
+        NODISCARD ColourType GetClearColor() const noexcept;
 
     private:
         PackageType impl;

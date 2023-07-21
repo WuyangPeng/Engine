@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.12 (2023/06/12 21:51)
+///	版本：0.9.1.1 (2023/07/18 22:25)
 
 #ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_DLL_LIB_H
 #define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_DLL_LIB_H
@@ -16,5 +16,6 @@
 #include "ThreadingCoreRenderEngineGame/ThreadingCoreRenderEngineGameLib.h"
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseGenerateServerBaseLib.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerCore/DatabaseGenerateServerCoreLib.h"
 
 #endif  // DATABASE_GENERATE_SERVER_MIDDLE_LAYER_DLL_LIB_H

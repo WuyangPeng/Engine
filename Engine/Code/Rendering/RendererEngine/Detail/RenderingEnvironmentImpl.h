@@ -23,6 +23,8 @@ namespace Rendering
     public:
         using ClassType = RenderingEnvironmentImpl;
         using FactoryType = RenderingEnvironmentFactory;
+
+        using ColourType = Colour<float>;
         using RenderingEnvironmentSharedPtr = std::shared_ptr<RenderingEnvironmentImpl>;
 
     public:
@@ -48,6 +50,8 @@ namespace Rendering
         NODISCARD DataFormatType GetColorFormat() const noexcept;
         NODISCARD DataFormatType GetDepthStencilFormat() const noexcept;
         NODISCARD int GetNumMultiSamples() const noexcept;
+
+        NODISCARD ColourType GetClearColor() const noexcept;
 
     private:
         RendererParameter rendererParameter;

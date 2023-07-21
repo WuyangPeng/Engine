@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/02/02 14:43)
+///	版本：0.9.1.1 (2023/07/18 19:25)
 
 #include "System/SystemExport.h"
 
 #include "WindowsSystem.h"
-#include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
 
 void System::GetWindowSystemInfo(WindowsSystemInfo& systemInfo) noexcept
@@ -21,25 +20,9 @@ void System::GetWindowSystemInfo(WindowsSystemInfo& systemInfo) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(systemInfoy);
+    UnusedFunction(systemInfo);
 
 #endif  // SYSTEM_PLATFORM_WIN32
-}
-
-void System::DebugBreak() noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
-
-    ::__debugbreak();
-
-#else  // !SYSTEM_PLATFORM_WIN32
-
-#endif  // SYSTEM_PLATFORM_WIN32
-}
-
-void System::Exit() noexcept
-{
-    ::exit(0);
 }
 
 bool System::GetNumaProcessorNodeNumber(WindowsUChar processor, WindowsUCharPtr nodeNumber) noexcept
@@ -58,11 +41,6 @@ bool System::GetNumaProcessorNodeNumber(WindowsUChar processor, WindowsUCharPtr 
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
-}
-
-int System::SystemCommand(const char* command) noexcept
-{
-    return std::system(command);
 }
 
 bool System::SetSystemCurrentDirectory(const TChar* pathName) noexcept
@@ -116,19 +94,19 @@ System::WindowsDWord System::GetSystemCurrentDirectory(WindowsDWord bufferLength
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsBool System::BoolConversion(bool value) noexcept
+System::WindowsBool System::BoolConversion(bool input) noexcept
 {
-    if (value)
+    if (input)
         return gTrue;
     else
         return gFalse;
 }
 
-void System::BoolConversion(WindowsBool value, bool* result) noexcept
+void System::BoolConversion(WindowsBool input, bool* result) noexcept
 {
     if (result != nullptr)
     {
-        *result = ((value != gFalse) ? true : false);
+        *result = ((input != gFalse) ? true : false);
     }
 }
 
@@ -153,4 +131,25 @@ bool System::GetSystemClientRect(WindowsHWnd hWnd, WindowsRect& windowsRect) noe
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
+}
+
+void System::DebugBreak() noexcept
+{
+#ifdef SYSTEM_PLATFORM_WIN32
+
+    ::__debugbreak();
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+#endif  // SYSTEM_PLATFORM_WIN32
+}
+
+void System::Exit() noexcept
+{
+    ::exit(0);
+}
+
+int System::SystemCommand(const char* command) noexcept
+{
+    return std::system(command);
 }

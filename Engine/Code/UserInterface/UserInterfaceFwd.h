@@ -5,17 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 19:50)
+///	版本：0.9.1.1 (2023/07/11 20:09)
 
 #ifndef USER_INTERFACE_FWD_H
 #define USER_INTERFACE_FWD_H
 
 #include "Configuration/ConfigurationFwd.h"
+#include "DirectX/DirectXFwd.h"
 #include "FLTK/FLTKFwd.h"
 #include "Helper/HelperFwd.h"
 #include "Interface/InterfaceFwd.h"
-#include "Trixul/TrixulFwd.h"
+#include "OpenGL/OpenGLFwd.h"
 #include "WxWidgets/WxWidgetsFwd.h"
-#include "XFree86/XFree86Fwd.h"
 
 #endif  // USER_INTERFACE_FWD_H

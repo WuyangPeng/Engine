@@ -281,6 +281,7 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\BandedMatrix.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\BandedMatrixSolve.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\BarycentricCoordinates.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\CylindricalCoordinates.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Euler.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\HomogeneousPoint.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Matrix.cpp" />
@@ -297,6 +298,7 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\QuaternionConstraints.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\QuaternionFactor.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\QuaternionSwingTwist.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\Algebra\SphereCoordinates.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\Tridiagonalize.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\VariableLengthVector.cpp" />
     <ClCompile Include="..\..\..\Code\Mathematics\Algebra\VariableMatrix.cpp" />
@@ -827,6 +829,9 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BandedMatrixSolveDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BarycentricCoordinates.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\BarycentricCoordinatesDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\CylindricalCoordinates.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\CylindricalCoordinatesAchieve.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\CylindricalCoordinatesDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\BandedMatrixData.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Detail\BandedMatrixDataDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Euler.h" />
@@ -877,6 +882,9 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionSwingTwist.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionSwingTwistAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\QuaternionSwingTwistDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\SphereCoordinates.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\SphereCoordinatesAchieve.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\Algebra\SphereCoordinatesDetail.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Tridiagonalize.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\TridiagonalizeAchieve.h" />
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\TridiagonalizeDetail.h" />

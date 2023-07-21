@@ -5,18 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:42)
+///	版本：0.9.1.1 (2023/07/05 18:25)
 
-#ifndef RENDERING_SHADERS_VISUAL_EFFECT_IMPL_H
-#define RENDERING_SHADERS_VISUAL_EFFECT_IMPL_H
+#ifndef RENDERING_LOCAL_EFFECTS_VISUAL_EFFECT_IMPL_H
+#define RENDERING_LOCAL_EFFECTS_VISUAL_EFFECT_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/Helper/NameMacro.h"
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/Matrix4.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
 #include "Rendering/Shaders/ShadersFwd.h"
 
@@ -26,6 +26,7 @@ namespace Rendering
     {
     public:
         using ClassType = VisualEffectImpl;
+
         using Object = CoreTools::Object;
         using ObjectLink = CoreTools::ObjectLink;
         using BufferTarget = CoreTools::BufferTarget;
@@ -38,15 +39,26 @@ namespace Rendering
         using ConstantBufferSharedPtr = std::shared_ptr<ConstantBuffer>;
         using ConstConstantBufferSharedPtr = std::shared_ptr<const ConstantBuffer>;
         using ConstantBufferObjectAssociated = CoreTools::ObjectAssociated<ConstantBuffer>;
-        using Matrix4F = Mathematics::Matrix4F;
+        using Matrix4 = Mathematics::Matrix4F;
+        using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
+        using BaseRendererWeakPtr = std::weak_ptr<BaseRenderer>; 
 
     public:
         explicit VisualEffectImpl(CoreTools::DisableNotThrow disableNotThrow);
-        explicit VisualEffectImpl(const VisualProgramSharedPtr& visualProgram);
+        explicit VisualEffectImpl(VisualProgramSharedPtr visualProgram);
+        explicit VisualEffectImpl(const BaseRendererSharedPtr& baseRenderer);
+        VisualEffectImpl(const BaseRendererSharedPtr& baseRenderer, VisualProgramSharedPtr visualProgram);
+        VisualEffectImpl(ProgramFactory& factory,
+                         const BaseRendererSharedPtr& baseRenderer,
+                         const std::string& vertexShaderFile,
+                         const std::string& pixelShaderFile);
 
         CLASS_INVARIANT_DECLARE;
 
         CORE_TOOLS_NAMES_IMPL_DECLARE;
+
+        void SetBaseRenderer(const BaseRendererSharedPtr& aBaseRenderer) noexcept;
+        NODISCARD BaseRendererSharedPtr GetBaseRenderer();
 
         NODISCARD int GetStreamingSize() const noexcept;
         void Save(BufferTarget& target) const;
@@ -65,17 +77,21 @@ namespace Rendering
         NODISCARD ShaderSharedPtr GetPixelShader() noexcept;
         NODISCARD ShaderSharedPtr GetGeometryShader() noexcept;
 
-        void SetPVWMatrixConstant(const ConstantBufferSharedPtr& buffer);
+        void SetProjectionViewWorldMatrixConstant(const ConstantBufferSharedPtr& buffer);
 
-        NODISCARD ConstConstantBufferSharedPtr GetPVWMatrixConstant() const noexcept;
+        NODISCARD ConstConstantBufferSharedPtr GetProjectionViewWorldMatrixConstant() const noexcept;
+        NODISCARD ConstantBufferSharedPtr GetProjectionViewWorldMatrixConstant() noexcept;
 
-        void SetPVWMatrix(const Matrix4F& pvwMatrix);
-        NODISCARD Matrix4F GetPVWMatrix() const;
+        void SetProjectionViewWorldMatrix(const Matrix4& projectionViewWorldMatrix);
+        NODISCARD Matrix4 GetProjectionViewWorldMatrix() const;
 
     private:
         VisualProgramSharedPtr program;
-        ConstantBufferObjectAssociated pvwMatrixConstant;
+        BaseRendererWeakPtr baseRenderer;
+
+        // 用于存储附加此效果的Visual对象的4x4投影视图世界变换的常量缓冲区。
+        ConstantBufferObjectAssociated projectionViewWorldMatrixConstant;
     };
 }
 
-#endif  // RENDERING_SHADERS_VISUAL_EFFECT_IMPL_H
+#endif  // RENDERING_LOCAL_EFFECTS_VISUAL_EFFECT_IMPL_H

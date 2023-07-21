@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:43)
+///	版本：0.9.1.1 (2023/07/12 15:11)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,19 +20,7 @@
 #include "Rendering/Resources/Flags/UsageType.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
 
-#include <stdexcept>
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26418)
-
-Rendering::FontImpl::FontSharedPtr Rendering::FontImpl::Create(MAYBE_UNUSED const ProgramFactorySharedPtr& factory, MAYBE_UNUSED int width, MAYBE_UNUSED int height, MAYBE_UNUSED const TexelsType& texels, MAYBE_UNUSED const CharacterDataType& characterData, MAYBE_UNUSED int maxMessageLength)
-{
-    throw std::logic_error("The method or operation is not implemented.");
-}
-
-#include STSTEM_WARNING_POP
-
-Rendering::FontImpl::FontImpl(const ProgramFactorySharedPtr& factory, int width, int height, const TexelsType& texels, const CharacterDataType& characterData, int maxMessageLength)
+Rendering::FontImpl::FontImpl(ProgramFactory& factory, int width, int height, const TexelsType& texels, const CharacterDataType& characterData, int maxMessageLength)
     : maxMessageLength{ maxMessageLength },
       vertexBuffer{},
       indexBuffer{},
@@ -40,11 +28,11 @@ Rendering::FontImpl::FontImpl(const ProgramFactorySharedPtr& factory, int width,
       textEffect{},
       characterData{ characterData }
 {
-    auto vformat = VertexFormat::Create();
-    vformat->Bind(VertexFormatFlags::Semantic::Position, DataFormatType::R32G32Float, 0);
-    vformat->Bind(VertexFormatFlags::Semantic::TextureCoord, DataFormatType::R32G32Float, 0);
+    const auto vertexFormat = VertexFormat::Create();
+    vertexFormat->Bind(VertexFormatFlags::Semantic::Position, DataFormatType::R32G32Float, 0);
+    vertexFormat->Bind(VertexFormatFlags::Semantic::TextureCoord, DataFormatType::R32G32Float, 0);
     const auto numVertices = 4 * maxMessageLength;
-    vertexBuffer = VertexBuffer::Create(*vformat, numVertices);
+    vertexBuffer = VertexBuffer::Create(*vertexFormat, numVertices);
     vertexBuffer->SetUsage(UsageType::DynamicUpdate);
 
     auto vertices = vertexBuffer->GetData();
@@ -87,20 +75,26 @@ Rendering::FontImpl::FontImpl(const ProgramFactorySharedPtr& factory, int width,
 
     const auto numTriangles = 2 * maxMessageLength;
     indexBuffer = IndexBuffer::Create(IndexFormatType::TriMesh, numTriangles, sizeof(uint32_t));
-    const auto indices = indexBuffer->GetData();
+    auto indices = indexBuffer->GetData();
     for (auto i = 0; i < maxMessageLength; ++i)
     {
-        vertices.Increase<uint32_t>(4 * i);
-        vertices.Increase<uint32_t>(4 * i + 3);
-        vertices.Increase<uint32_t>(4 * i + 1);
+        indices.Increase<uint32_t>(4 * i);
+        indices.Increase<uint32_t>(4 * i + 3);
+        indices.Increase<uint32_t>(4 * i + 1);
 
-        vertices.Increase<uint32_t>(4 * i);
-        vertices.Increase<uint32_t>(4 * i + 2);
-        vertices.Increase<uint32_t>(4 * i + 3);
+        indices.Increase<uint32_t>(4 * i);
+        indices.Increase<uint32_t>(4 * i + 2);
+        indices.Increase<uint32_t>(4 * i + 3);
     }
 
     texture = std::make_shared<Texture2D>(DataFormatType::R8UNorm, width, height, false);
-    texture->SetNewData(texels);
+
+    Texture2D::StorageType storageType{};
+    for (auto value : texels)
+    {
+        storageType.emplace_back(value);
+    }
+    texture->SetNewData(storageType);
 
     textEffect = std::make_shared<TextEffect>(factory, texture);
 
@@ -130,6 +124,27 @@ Rendering::FontImpl::ConstTextEffectSharedPtr Rendering::FontImpl::GetTextEffect
     return textEffect;
 }
 
+Rendering::FontImpl::VertexBufferSharedPtr Rendering::FontImpl::GetVertexBuffer() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return vertexBuffer;
+}
+
+Rendering::FontImpl::IndexBufferSharedPtr Rendering::FontImpl::GetIndexBuffer() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return indexBuffer;
+}
+
+Rendering::FontImpl::TextEffectSharedPtr Rendering::FontImpl::GetTextEffect() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return textEffect;
+}
+
 int Rendering::FontImpl::GetHeight() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -141,7 +156,7 @@ int Rendering::FontImpl::GetWidth(const std::string& message) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto tw = boost::numeric_cast<float>(texture->GetWidth());
+    const auto textureWidth = boost::numeric_cast<float>(texture->GetWidth());
 
     auto width = 0.0f;
     const auto length = std::min(boost::numeric_cast<int>(message.length()), maxMessageLength);
@@ -151,7 +166,7 @@ int Rendering::FontImpl::GetWidth(const std::string& message) const
         const auto tx0 = characterData.at(c);
         const auto next = c + 1;
         const auto tx1 = characterData.at(next);
-        const auto charWidthM1 = (tx1 - tx0) * tw - 1.0f;
+        const auto charWidthM1 = (tx1 - tx0) * textureWidth - 1.0f;
 
         width += charWidthM1;
     }
@@ -163,13 +178,13 @@ void Rendering::FontImpl::Typeset(int viewportWidth, int viewportHeight, int x, 
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto vdx = 1.0f / boost::numeric_cast<float>(viewportWidth);
-    const auto vdy = 1.0f / boost::numeric_cast<float>(viewportHeight);
+    const auto viewportDX = 1.0f / boost::numeric_cast<float>(viewportWidth);
+    const auto viewportDY = 1.0f / boost::numeric_cast<float>(viewportHeight);
 
-    auto tw = boost::numeric_cast<float>(texture->GetWidth());
-    auto th = boost::numeric_cast<float>(texture->GetHeight());
+    const auto tw = boost::numeric_cast<float>(texture->GetWidth());
+    const auto th = boost::numeric_cast<float>(texture->GetHeight());
 
-    auto vertexSize = vertexBuffer->GetFormat().GetStride();
+    const auto vertexSize = vertexBuffer->GetFormat().GetStride();
     auto data = vertexBuffer->GetData();
 
     auto x0 = 0.0f;
@@ -181,35 +196,43 @@ void Rendering::FontImpl::Typeset(int viewportWidth, int viewportHeight, int x, 
         const auto tx0 = characterData.at(c);
         const auto nextIndex = c + 1;
         const auto tx1 = characterData.at(nextIndex);
-        auto charWidthM1 = (tx1 - tx0) * tw - 1.0f;
+        const auto charWidthM1 = (tx1 - tx0) * tw - 1.0f;
 
         const auto fourI = 4 * boost::numeric_cast<size_t>(i);
 
-        const auto x1 = x0 + charWidthM1 * vdx;
+        const auto x1 = x0 + charWidthM1 * viewportDX;
 
         data.Increase<float>(x0);
         data.Increase<float>(0.0f);
         data.Increase<float>(tx0);
         if (0 < stepSize)
+        {
             data += stepSize;
+        }
 
         data.Increase<float>(x0);
-        data.Increase<float>(vdy * th);
+        data.Increase<float>(viewportDY * th);
         data.Increase<float>(tx0);
         if (0 < stepSize)
+        {
             data += stepSize;
+        }
 
         data.Increase<float>(x1);
         data.Increase<float>(0.0f);
         data.Increase<float>(tx1);
         if (0 < stepSize)
+        {
             data += stepSize;
+        }
 
         data.Increase<float>(x1);
-        data.Increase<float>(vdy * th);
+        data.Increase<float>(viewportDY * th);
         data.Increase<float>(tx1);
         if (0 < stepSize)
+        {
             data += stepSize;
+        }
 
         x0 = x1;
     }
@@ -217,8 +240,8 @@ void Rendering::FontImpl::Typeset(int viewportWidth, int viewportHeight, int x, 
     vertexBuffer->SetNumActiveElements(4 * length);
     indexBuffer->SetNumActivePrimitives(2 * length);
 
-    const auto trnX = vdx * boost::numeric_cast<float>(x);
-    const auto trnY = 1.0f - vdy * boost::numeric_cast<float>(y);
+    const auto trnX = viewportDX * boost::numeric_cast<float>(x);
+    const auto trnY = 1.0f - viewportDY * boost::numeric_cast<float>(y);
     textEffect->SetTranslate(trnX, trnY);
     textEffect->SetColor(color);
 }

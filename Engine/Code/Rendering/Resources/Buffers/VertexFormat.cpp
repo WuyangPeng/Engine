@@ -60,7 +60,7 @@ Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat::Create(c
 
 Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat::Create()
 {
-    return std::make_shared<VertexFormat>(VertexFormatCreate::Init, 0);
+    return std::make_shared<VertexFormat>(VertexFormatCreate::Init, 1);
 }
 
 void Rendering::VertexFormat::SetAttribute(int attribute, DataFormatType type, Semantic usage, int usageIndex, int offset)

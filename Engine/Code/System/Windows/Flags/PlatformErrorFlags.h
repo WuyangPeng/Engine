@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.1 (2023/02/02 14:36)
+///	版本：0.9.1.1 (2023/07/20 11:37)
 
 #ifndef SYSTEM_WINDOWS_PLATFORM_ERROR_FLAGS_H
 #define SYSTEM_WINDOWS_PLATFORM_ERROR_FLAGS_H
@@ -27,8 +27,8 @@ namespace System
     enum class ErrorMode
     {
         Default = 0x0000,
-        FailCriticaleErrors = SEM_FAILCRITICALERRORS,
-        NoGPFaultErrorBox = SEM_NOGPFAULTERRORBOX,
+        FailCriticalErrors = SEM_FAILCRITICALERRORS,
+        NoGeneralProtectionFaultErrorBox = SEM_NOGPFAULTERRORBOX,
 
         // 为进程设置此值后，将忽略清除该值的其他设置。
         NoAlignmentFaultExcept = SEM_NOALIGNMENTFAULTEXCEPT,
@@ -1066,7 +1066,7 @@ namespace System
     {
         Default = 0x0000,
         FailCriticaleErrors = 0x0001,
-        NoGPFaultErrorBox = 0x0002,
+        NoGeneralProtectionFaultErrorBox = 0x0002,
         NoAlignmentFaultExcept = 0x0004,
         NoOpenFileErrorBox = 0x8000,
     };

@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Rendering/RendererEngine/Renderer.h"
-#include "Rendering/RendererEngine/RendererManager.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/MiddleLayer/RenderingManagerInterface.h"
@@ -40,8 +38,6 @@ void Framework::RenderingManagerInterfaceTesting::DoRunUnitTest()
 
 void Framework::RenderingManagerInterfaceTesting::MainTest()
 {
-    Rendering::RendererManager::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerMemberTest<RenderingManagerInterface>);
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerExceptionTest);
@@ -56,8 +52,6 @@ void Framework::RenderingManagerInterfaceTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(RendererTest);
     ASSERT_THROW_EXCEPTION_0(RendererExceptionTest);
     ASSERT_THROW_EXCEPTION_0(ConstRendererExceptionTest);
-
-    Rendering::RendererManager::Destroy();
 }
 
 void Framework::RenderingManagerInterfaceTesting::MiddleLayerTest()

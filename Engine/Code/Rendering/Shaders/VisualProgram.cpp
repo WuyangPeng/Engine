@@ -5,20 +5,29 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:55)
+///	版本：0.9.1.1 (2023/07/05 14:36)
 
 #include "Rendering/RenderingExport.h"
 
 #include "VisualProgram.h"
 #include "Detail/VisualProgramImpl.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "Rendering/Shaders/Reflection.h"
 
 COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Rendering, VisualProgram)
 
-Rendering::VisualProgram::VisualProgram(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+Rendering::VisualProgram Rendering::VisualProgram::Create()
+{
+    return VisualProgram{ CoreTools::DisableNotThrow::Disable };
+}
+
+Rendering::VisualProgram::VisualProgram(CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(disableNotThrow);
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
@@ -54,4 +63,4 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, GetAllObjec
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, GetConstObjectByName, std::string, CoreTools::ConstObjectSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, GetAllConstObjectsByName, std::string, Rendering::VisualProgram::ConstObjectSharedPtrContainer)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualProgram, GetReflector, Rendering::GLSLReflection)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualProgram, GetReflector, Rendering::Reflection)

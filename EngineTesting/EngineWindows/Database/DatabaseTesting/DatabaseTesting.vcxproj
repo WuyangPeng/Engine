@@ -177,8 +177,14 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/DatabaseEntity.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/DatabaseEntity/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/DatabaseEntity/" /F /Y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
@@ -193,8 +199,14 @@ xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Co
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/DatabaseEntity.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/DatabaseEntity/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/DatabaseEntity/" /F /Y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -213,8 +225,14 @@ xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Co
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/DatabaseEntity.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/DatabaseEntity/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/DatabaseEntity/" /F /Y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -233,8 +251,14 @@ xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Co
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/DatabaseEntity.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/DatabaseEntity/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/DatabaseEntity/" /F /Y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -249,8 +273,14 @@ xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Co
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/DatabaseEntity.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/DatabaseEntity/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/DatabaseEntity/" /F /Y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
@@ -265,8 +295,14 @@ xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Co
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/DatabaseEntity.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/DatabaseEntity/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/DatabaseEntity/" /F /Y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -285,8 +321,14 @@ xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Co
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/DatabaseEntity.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/DatabaseEntity/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/DatabaseEntity/" /F /Y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -305,13 +347,24 @@ xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Co
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/DatabaseEntity.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/DatabaseEntity/*.*" "../../../$(Platform)/$(Configuration)Windows/Resource/DatabaseEntity/" /F /Y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
+xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\ConfigurationSuite\AnalysisDatabaseConfigurationTesting.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\ConfigurationSuite\ConfigurationStrategyTesting.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\ConfigurationSuite\ConfigurationSuite.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\CodeFwdHeaderFileGenerationTesting.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\CodeHeaderFileGenerationTesting.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\DatabaseEntityCodeGenerationSuite.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\EntityHeaderFileGenerationTesting.h" />
+    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\EntitySourceFileGenerationTesting.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseGenerateSuite\DatabaseGenerateSuite.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseTesting.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseContainerTesting.h" />
@@ -346,10 +399,44 @@ xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Co
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\StatementSuite\StatementSuite.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\TestingHelper.h" />
+    <ClInclude Include="Resource\DatabaseEntity\Chapter.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\DatabaseEntity\DatabaseEntity.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\DatabaseEntity\DatabaseEntityFwd.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\ConfigurationSuite\AnalysisDatabaseConfigurationTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\ConfigurationSuite\ConfigurationStrategyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\CodeFwdHeaderFileGenerationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\CodeHeaderFileGenerationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\EntityHeaderFileGenerationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\EntitySourceFileGenerationTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseContainerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseManagerTesting.cpp" />
@@ -370,17 +457,33 @@ xcopy "$(ProjectDir)/Configuration/DatabaseTest.json" "../../../$(Platform)/$(Co
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\TestingMain.cpp" />
+    <ClCompile Include="Resource\DatabaseEntity\Chapter.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Configuration\DatabaseEntity.json" />
     <None Include="Configuration\DatabaseTest.json" />
     <None Include="Configuration\DatabaseTesting.json" />
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Testing.json" />
+    <None Include="Resource\DatabaseEntity\DatabaseEntity.json" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Resource\DatabaseEntity\DatabaseEntity.txt" />
+    <Text Include="Resource\DatabaseEntity\DatabaseEntityFwd.txt" />
+    <Text Include="Resource\DatabaseEntity\EntityCpp.txt" />
+    <Text Include="Resource\DatabaseEntity\EntityH.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />

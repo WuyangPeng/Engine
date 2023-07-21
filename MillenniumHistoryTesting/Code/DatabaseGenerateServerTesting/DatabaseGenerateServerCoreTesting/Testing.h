@@ -11,5 +11,6 @@
 #define DATABASE_GENERATE_SERVER_CORE_TESTING_H
 
 #include "EngineSuite/EngineSuite.h"
+#include "ConvertSuite/ConvertSuite.h"
 
 #endif  // DATABASE_GENERATE_SERVER_CORE_TESTING_H

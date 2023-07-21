@@ -30,7 +30,10 @@ void Database::DatabaseFlush::ChangeDatabase(int64_t userId, const BasisDatabase
 {
     DATABASE_CLASS_IS_VALID_9;
 
-    return impl->ChangeDatabase(userId, basisDatabaseContainer);
+    if (basisDatabaseContainer.IsModify())
+    {
+        impl->ChangeDatabase(userId, basisDatabaseContainer);
+    }
 }
 
 Database::BasisDatabaseManager Database::DatabaseFlush::SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const
@@ -45,4 +48,11 @@ Database::DatabaseFlush::ResultContainer Database::DatabaseFlush::SelectAll(cons
     DATABASE_CLASS_IS_VALID_CONST_9;
 
     return impl->SelectAll(basisDatabaseContainer, fieldNameContainer);
+}
+
+Database::WrappersStrategy Database::DatabaseFlush::GetWrappersStrategy() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWrappersStrategy();
 }

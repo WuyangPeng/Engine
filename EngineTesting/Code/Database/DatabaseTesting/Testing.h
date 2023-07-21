@@ -11,6 +11,7 @@
 #define DATABASE_TESTING_H
 
 #include "ConfigurationSuite/ConfigurationSuite.h"
+#include "DatabaseEntityCodeGenerationSuite/DatabaseEntityCodeGenerationSuite.h"
 #include "DatabaseGenerateSuite/DatabaseGenerateSuite.h"
 #include "DatabaseInterfaceSuite/DatabaseInterfaceSuite.h"
 #include "FlatFileWrappersSuite/FlatFileWrappersSuite.h"

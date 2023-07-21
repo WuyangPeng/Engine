@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 13:43)
+///	版本：0.9.1.1 (2023/07/06 09:14)
 
-#ifndef RENDERING_SHADERS_VISUAL_EFFECT_H
-#define RENDERING_SHADERS_VISUAL_EFFECT_H
+#ifndef RENDERING_LOCAL_EFFECTS_VISUAL_EFFECT_H
+#define RENDERING_LOCAL_EFFECTS_VISUAL_EFFECT_H
 
 #include "Rendering/RenderingDll.h"
 
@@ -16,6 +16,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/ObjectSystems/Object.h"
 #include "Mathematics/Algebra/Matrix4.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Resources/ResourcesFwd.h"
 #include "Rendering/Shaders/ShadersFwd.h"
 
@@ -28,22 +29,33 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(VisualEffect);
         using ParentType = Object;
+
+        using Matrix4 = Mathematics::Matrix4F;
         using ShaderSharedPtr = std::shared_ptr<Shader>;
         using ConstShaderSharedPtr = std::shared_ptr<const Shader>;
         using VisualProgramSharedPtr = std::shared_ptr<VisualProgram>;
         using ConstVisualProgramSharedPtr = std::shared_ptr<const VisualProgram>;
         using ConstantBufferSharedPtr = std::shared_ptr<ConstantBuffer>;
         using ConstConstantBufferSharedPtr = std::shared_ptr<const ConstantBuffer>;
-        using Matrix4F = Mathematics::Matrix4F;
+        using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
 
     public:
-        explicit VisualEffect(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+        explicit VisualEffect(CoreTools::DisableNotThrow disableNotThrow);
         explicit VisualEffect(const VisualProgramSharedPtr& visualProgram);
+        explicit VisualEffect(const BaseRendererSharedPtr& baseRenderer);
+        VisualEffect(const BaseRendererSharedPtr& baseRenderer, const VisualProgramSharedPtr& visualProgram);
+        VisualEffect(ProgramFactory& factory,
+                     const BaseRendererSharedPtr& baseRenderer,
+                     const std::string& vertexShaderFile,
+                     const std::string& pixelShaderFile);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VisualEffect);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
+
+        void SetBaseRenderer(const BaseRendererSharedPtr& baseRenderer) noexcept;
+        NODISCARD BaseRendererSharedPtr GetBaseRenderer();
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
@@ -58,12 +70,13 @@ namespace Rendering
         NODISCARD ShaderSharedPtr GetPixelShader() noexcept;
         NODISCARD ShaderSharedPtr GetGeometryShader() noexcept;
 
-        virtual void SetPVWMatrixConstant(const ConstantBufferSharedPtr& buffer);
+        virtual void SetProjectionViewWorldMatrixConstant(const ConstantBufferSharedPtr& buffer);
 
-        NODISCARD ConstConstantBufferSharedPtr GetPVWMatrixConstant() const noexcept;
+        NODISCARD ConstConstantBufferSharedPtr GetProjectionViewWorldMatrixConstant() const noexcept;
+        NODISCARD ConstantBufferSharedPtr GetProjectionViewWorldMatrixConstant() noexcept;
 
-        void SetPVWMatrix(const Matrix4F& pvwMatrix);
-        NODISCARD Matrix4F GetPVWMatrix() const;
+        void SetProjectionViewWorldMatrix(const Matrix4& projectionViewWorldMatrix);
+        NODISCARD Matrix4 GetProjectionViewWorldMatrix() const;
 
     private:
         PackageType impl;
@@ -79,4 +92,4 @@ namespace Rendering
     CORE_TOOLS_SHARED_PTR_DECLARE(VisualEffect);
 }
 
-#endif  // RENDERING_SHADERS_VISUAL_EFFECT_H
+#endif  // RENDERING_LOCAL_EFFECTS_VISUAL_EFFECT_H

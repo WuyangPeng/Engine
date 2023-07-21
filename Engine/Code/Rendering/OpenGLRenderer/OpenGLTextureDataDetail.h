@@ -19,7 +19,6 @@
 #include "Rendering/Resources/Textures/Texture2D.h"
 #include "Rendering/Resources/Textures/Texture3D.h"
 #include "Rendering/Resources/Textures/TextureCube.h"
-#include "Rendering/Shaders/Flags/ShaderFlags.h"
 
 template <typename Texture>
 Rendering::OpenGLTextureData<Texture>::OpenGLTextureData(const Texture* texture)
@@ -90,13 +89,11 @@ void Rendering::OpenGLTextureData<Texture>::InitRemainData() noexcept
 
 // private
 template <typename Texture>
-System::OpenGLUInt Rendering::OpenGLTextureData<Texture>::CreateTextureStructure()
+System::OpenGLUInt Rendering::OpenGLTextureData<Texture>::CreateTextureStructure() noexcept
 {
     // 创建纹理结构。
 
-    const auto previousBind = BindTexture(textureSamplerType, texture);
-
-    return previousBind;
+    return 0;
 }
 
 template <>
@@ -125,11 +122,9 @@ bool Rendering::OpenGLTextureData<Texture>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIAN
 
 template <typename Texture>
-void Rendering::OpenGLTextureData<Texture>::Enable(MAYBE_UNUSED int textureUnit)
+void Rendering::OpenGLTextureData<Texture>::Enable(MAYBE_UNUSED int textureUnit) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-
-    previousTexture = BindTexture(textureSamplerType, texture);
 }
 
 template <typename Texture>
@@ -164,8 +159,6 @@ void Rendering::OpenGLTextureData<Texture>::Unlock(int level)
     {
         if (writeLock.at(0).at(level))
         {
-            const auto previousBind = BindTexture(textureSamplerType, texture);
-
             TextureImage(level);
 
             writeLock.at(0).at(level) = false;
@@ -210,8 +203,6 @@ void Rendering::OpenGLTextureData<Texture>::Unlock(int face, int level)
     {
         if (writeLock.at(face).at(level))
         {
-            const auto previousBind = BindTexture(TextureDataTraits<Texture>::samplerType, texture);
-
             writeLock.at(face).at(level) = false;
         }
 

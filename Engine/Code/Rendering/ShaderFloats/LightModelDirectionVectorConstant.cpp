@@ -30,17 +30,12 @@ Rendering::LightModelDirectionVectorConstant::LightModelDirectionVectorConstant(
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, LightModelDirectionVectorConstant)
 
-void Rendering::LightModelDirectionVectorConstant::Update(const Visual* visual, MAYBE_UNUSED const Camera* camera)
+void Rendering::LightModelDirectionVectorConstant::Update(const Visual* visual, MAYBE_UNUSED const Camera* camera) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     if (visual != nullptr)
     {
-        auto light = GetLight();
-        const auto worldInverseMatrix = visual->GetWorldTransform().GetInverseMatrix();
-        const auto modelDirectionVector = worldInverseMatrix * light->GetDirectionVector();
-
-        SetRegister(0, modelDirectionVector);
     }
 }
 

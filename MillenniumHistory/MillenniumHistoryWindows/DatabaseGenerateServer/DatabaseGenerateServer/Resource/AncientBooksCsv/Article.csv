@@ -1,7 +1,7 @@
 @default,Version,,,,,Character
 Id,版本,章,章節名字,卷,章節卷,其他作者,作者描述,標題,標題（簡稱）,目錄
 int64,int,int,string,int,int,int[],string[],string,string,string
-id,version,chapter,chapterName,volume,chapterVolume,otherAuthor,authorDescribe,title,abbreviation,directory
+id,version,chapter,chapterName,volume,chapterVolume,otherAuthor,authorNotes,title,abbreviation,directory
 1001000131001,100100013,1,"前言",0,1,1700180914&1700180915&1700180916&1700180917&1700180918,"詳校官&覆勘&覆校官&校對官&謄録","校勘"
 1001000131002,100100013,1,"前言",0,2,1700180056,,"御製序"
 1001000131003,100100013,1,"前言",0,3,1700180056,,"御製詩"

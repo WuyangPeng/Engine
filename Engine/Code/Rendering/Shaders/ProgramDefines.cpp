@@ -5,20 +5,28 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 10:52)
+///	版本：0.9.1.1 (2023/07/05 14:34)
 
 #include "Rendering/RenderingExport.h"
 
-#include "ProgramDefines.h"
+#include "ProgramDefinesDetail.h"
 #include "Detail/ProgramDefinesImpl.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, ProgramDefines)
 
-Rendering::ProgramDefines::ProgramDefines(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+Rendering::ProgramDefines Rendering::ProgramDefines::Create()
+{
+    return ProgramDefines{ CoreTools::DisableNotThrow::Disable };
+}
+
+Rendering::ProgramDefines::ProgramDefines(CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(disableNotThrow);
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 

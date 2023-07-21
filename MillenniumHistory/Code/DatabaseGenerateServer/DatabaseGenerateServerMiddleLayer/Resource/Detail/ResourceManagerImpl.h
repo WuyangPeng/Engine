@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 21:50)
+///	版本：0.9.1.1 (2023/07/18 22:32)
 
 #ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_RESOURCE_RESOURCE_MANAGER_IMPL_H
 #define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_RESOURCE_RESOURCE_MANAGER_IMPL_H
@@ -24,26 +24,29 @@ namespace DatabaseGenerateServerMiddleLayer
     {
     public:
         using ClassType = ResourceManagerImpl;
+
+        using String = System::String;
         using ConstAncientBooksContainerSharedPtr = std::shared_ptr<const AncientBooks::AncientBooksContainer>;
 
     public:
-        explicit ResourceManagerImpl(const System::String& directory);
+        explicit ResourceManagerImpl(const String& directory);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD bool Initialize();
+        NODISCARD bool Destroy() noexcept;
 
         NODISCARD ConstAncientBooksContainerSharedPtr GetAncientBooksContainer();
 
     private:
-        using AncientBooksContainerSharedPtr = std::shared_ptr<AncientBooks::AncientBooksContainer>;
         using ThreadSharedPtr = std::shared_ptr<std::jthread>;
+        using AncientBooksContainerSharedPtr = std::shared_ptr<AncientBooks::AncientBooksContainer>;
 
     private:
         void InitAncientBooks();
 
     private:
-        System::String directory;
+        String directory;
         AncientBooksContainerSharedPtr ancientBooksContainer;
         ThreadSharedPtr thread;
         std::mutex mutex;

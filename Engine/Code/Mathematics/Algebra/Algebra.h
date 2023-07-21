@@ -23,6 +23,7 @@
 #include "BandedMatrixDetail.h"
 #include "BandedMatrixSolveDetail.h"
 #include "BarycentricCoordinates.h"
+#include "CylindricalCoordinatesDetail.h"
 #include "EulerDetail.h"
 #include "HomogeneousPointDetail.h"
 #include "Matrix2Detail.h"
@@ -53,5 +54,6 @@
 #include "Vector3ToolsDetail.h"
 #include "Vector4Detail.h"
 #include "Vector4ToolsDetail.h"
+#include "SphereCoordinatesDetail.h"
 
 #endif  // MATHEMATICS_ALGEBRA_H

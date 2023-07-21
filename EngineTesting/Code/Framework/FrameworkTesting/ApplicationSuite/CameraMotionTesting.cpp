@@ -92,7 +92,7 @@ void Framework::CameraMotionTesting::MoveTest()
     constexpr auto rotationSpeed = 1.0f;
     TestingType cameraMotion{ translationSpeed, rotationSpeed };
 
-    Rendering::CameraSharedPtr camera = std::make_shared<Rendering::Camera>(false);
+    Rendering::CameraSharedPtr camera = std::make_shared<Rendering::Camera>(false, false);
     auto direction = camera->GetDirectionVector();
     const auto up = camera->GetUpVector();
     auto right = camera->GetRightVector();
