@@ -19,13 +19,255 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/CppNaming/Rules/=Unions/@EntryIndexedValue">&lt;NamingElement Priority="4"&gt;&lt;Descriptor Static="Indeterminate" Constexpr="Indeterminate" Const="Indeterminate" Volatile="Indeterminate" Accessibility="NOT_APPLICABLE"&gt;&lt;type Name="union" /&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;&lt;/NamingElement&gt;</s:String>
 	<s:Boolean x:Key="/Default/Environment/Feedback/SendActivityLogs/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/Feedback/ShouldPrompt/@EntryValue">False</s:Boolean>
-	<s:Int64 x:Key="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue">13</s:Int64>
+	<s:Int64 x:Key="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue">40</s:Int64>
 	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheck/@EntryValue">07/21/2023 15:31:03</s:String>
 	<s:String x:Key="/Default/Housekeeping/DiskCleanup/LastRunTime/@EntryValue">07/21/2023 15:34:58</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=EditorConfigFeatureSuggester/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/Housekeeping/FeedbackReport/SelectedUserIdentificator/@EntryValue">anonymous</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Housekeeping/IntellisenseHousekeeping/HintUsed/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/OptionsDialogView/Position/@EntryValue">[251,-8](1024,768)</s:String>
-	<s:String x:Key="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue">CppNaming</s:String>
+	<s:String x:Key="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue">CppFormattingStyle</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/UpgradeFromExceptionReport/UpgradePerformed/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/Housekeeping/WhatsNewShown/WhatsNewShownIndexedEntry/=RC/@EntryIndexedValue">2023.1</s:String></wpf:ResourceDictionary>
+	<s:String x:Key="/Default/Housekeeping/WhatsNewShown/WhatsNewShownIndexedEntry/=RC/@EntryIndexedValue">2023.1</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=3AB47DFD69B2604798ED8CD6EBBABC84/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=3AB47DFD69B2604798ED8CD6EBBABC84/EntryName/@EntryValue">Export Source file</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=3AB47DFD69B2604798ED8CD6EBBABC84/Position/@EntryValue">8</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=56D79E6468CFA34A9D178B860B4FA6C2/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=56D79E6468CFA34A9D178B860B4FA6C2/EntryName/@EntryValue">Impl Header file</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=56D79E6468CFA34A9D178B860B4FA6C2/Position/@EntryValue">5</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=7B3A0F7EFC620D49ADFAF22814E6C88A/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=7B3A0F7EFC620D49ADFAF22814E6C88A/EntryName/@EntryValue">Impl Source file</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=7B3A0F7EFC620D49ADFAF22814E6C88A/Position/@EntryValue">6</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=BA1CB638A7AD224E825C2FE0C973FAC2/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=BA1CB638A7AD224E825C2FE0C973FAC2/EntryName/@EntryValue">Export Header file</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=BA1CB638A7AD224E825C2FE0C973FAC2/Position/@EntryValue">7</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/CustomProperties/=Extension/@EntryIndexedValue">cpp</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/CustomProperties/=FileName/@EntryIndexedValue">NewFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/CustomProperties/=ValidateFileName/@EntryIndexedValue">False</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Description/@EntryValue">Export Source file</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Field/=ClassName/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Field/=ClassName/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Field/=ClassName/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Field/=ClassName/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Field/=Namespace/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Field/=Namespace/Expression/@EntryValue">getProjectName()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Field/=Namespace/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Field/=Namespace/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Field/=TIME/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Field/=TIME/Expression/@EntryValue">getCurrentTime("yyyy/MM/dd HH:mm")</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Field/=TIME/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Field/=TIME/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/Type/@EntryValue">InCppProjectFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Text/@EntryValue">///	Copyright (c) 2010-2023&#xD;
+///	Threading Core Render Engine&#xD;
+///&#xD;
+///	作者：彭武阳，彭晔恩，彭晔泽&#xD;
+///	联系作者：94458936@qq.com&#xD;
+///&#xD;
+///	标准：std:c++20&#xD;
+///	版本：0.9.1.2 ($TIME$)&#xD;
+&#xD;
+#include "$Namespace$/$Namespace$Export.h"&#xD;
+&#xD;
+#include "$ClassName$.h"&#xD;
+#include "Detail/$ClassName$Impl.h"&#xD;
+#include "CoreTools/Contract/Flags/ImplFlags.h"&#xD;
+#include "CoreTools/Helper/ClassInvariant/$Namespace$ClassInvariantMacro.h" &#xD;
+&#xD;
+COPY_UNSHARED_CLONE_SELF_DEFINE($Namespace$, $ClassName$)&#xD;
+&#xD;
+$Namespace$::$ClassName$::$ClassName$() &#xD;
+	:impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }&#xD;
+{&#xD;
+    $Namespace$_SELF_CLASS_IS_VALID_9;&#xD;
+}&#xD;
+&#xD;
+CLASS_INVARIANT_STUB_DEFINE($Namespace$, $ClassName$) </s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Description/@EntryValue">TC</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Field/=TIME/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Field/=TIME/Expression/@EntryValue">getCurrentTime("yyyy/MM/dd HH:mm")</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Field/=TIME/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Field/=TIME/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Scope/=F6696F8185506F41B9C4252540BE9C18/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Scope/=F6696F8185506F41B9C4252540BE9C18/Type/@EntryValue">InCppFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Shortcut/@EntryValue">TC</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56C457098B9D594984004E64805F1F59/Text/@EntryValue">///	Copyright (c) 2010-2023&#xD;
+///	Threading Core Render Engine&#xD;
+///&#xD;
+///	作者：彭武阳，彭晔恩，彭晔泽&#xD;
+///	联系作者：94458936@qq.com&#xD;
+///&#xD;
+///	标准：std:c++20&#xD;
+///	版本：0.9.1.2 ($TIME$)</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/CustomProperties/=Extension/@EntryIndexedValue">h</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/CustomProperties/=FileName/@EntryIndexedValue">NewFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/CustomProperties/=ValidateFileName/@EntryIndexedValue">False</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Description/@EntryValue">Impl Header file</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassName/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassName/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassName/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassName/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassNameUppercase/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassNameUppercase/Expression/@EntryValue">getUpperCaseAlphaNumericFileName()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassNameUppercase/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassNameUppercase/Order/@EntryValue">3</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=Namespace/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=Namespace/Expression/@EntryValue">getProjectName()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=Namespace/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=Namespace/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=TIME/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=TIME/Expression/@EntryValue">getCurrentTime("yyyy/MM/dd HH:mm")</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=TIME/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=TIME/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/Type/@EntryValue">InCppProjectFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Text/@EntryValue">///	Copyright (c) 2010-2023&#xD;
+///	Threading Core Render Engine&#xD;
+///&#xD;
+///	作者：彭武阳，彭晔恩，彭晔泽&#xD;
+///	联系作者：94458936@qq.com&#xD;
+///&#xD;
+///	标准：std:c++20&#xD;
+///	版本：0.9.1.2 ($TIME$)&#xD;
+&#xD;
+#ifndef $Namespace$_XX_$ClassNameUppercase$&#xD;
+#define $Namespace$_XX_$ClassNameUppercase$&#xD;
+&#xD;
+#include "$Namespace$/$Namespace$Dll.h"&#xD;
+&#xD;
+namespace $Namespace$&#xD;
+{&#xD;
+    class $Namespace$_HIDDEN_DECLARE $ClassName$&#xD;
+    {&#xD;
+    public:&#xD;
+        using ClassType = $ClassName$; &#xD;
+&#xD;
+    public:&#xD;
+        $ClassName$() noexcept; &#xD;
+&#xD;
+        CLASS_INVARIANT_DECLARE;         &#xD;
+    };&#xD;
+}&#xD;
+&#xD;
+#endif  // $Namespace$_XX_$ClassNameUppercase$&#xD;
+</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/CustomProperties/=Extension/@EntryIndexedValue">cpp</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/CustomProperties/=FileName/@EntryIndexedValue">NewFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/CustomProperties/=ValidateFileName/@EntryIndexedValue">False</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Description/@EntryValue">Impl Source file</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Field/=ClassName/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Field/=ClassName/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Field/=ClassName/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Field/=ClassName/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Field/=Namespace/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Field/=Namespace/Expression/@EntryValue">getProjectName()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Field/=Namespace/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Field/=Namespace/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Field/=TIME/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Field/=TIME/Expression/@EntryValue">getCurrentTime("yyyy/MM/dd HH:mm")</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Field/=TIME/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Field/=TIME/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/Type/@EntryValue">InCppProjectFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Text/@EntryValue">///	Copyright (c) 2010-2023&#xD;
+///	Threading Core Render Engine&#xD;
+///&#xD;
+///	作者：彭武阳，彭晔恩，彭晔泽&#xD;
+///	联系作者：94458936@qq.com&#xD;
+///&#xD;
+///	标准：std:c++20&#xD;
+///	版本：0.9.1.2 ($TIME$)&#xD;
+&#xD;
+#include "$Namespace$/$Namespace$Export.h"&#xD;
+&#xD;
+#include "$ClassName$.h"&#xD;
+#include "CoreTools/Helper/ClassInvariant/$Namespace$ClassInvariantMacro.h" &#xD;
+&#xD;
+$Namespace$::$ClassName$::$ClassName$() noexcept &#xD;
+{&#xD;
+    $Namespace$_SELF_CLASS_IS_VALID_9;&#xD;
+}&#xD;
+&#xD;
+CLASS_INVARIANT_STUB_DEFINE($Namespace$, $ClassName$) </s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/CustomProperties/=Extension/@EntryIndexedValue">h</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/CustomProperties/=FileName/@EntryIndexedValue">NewFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/CustomProperties/=ValidateFileName/@EntryIndexedValue">False</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Description/@EntryValue">Export Header file</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassName/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassName/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassName/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassName/Order/@EntryValue">3</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassNameUppercase/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassNameUppercase/Expression/@EntryValue">getUpperCaseAlphaNumericFileName()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassNameUppercase/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassNameUppercase/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=Namespace/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=Namespace/Expression/@EntryValue">getProjectName()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=Namespace/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=Namespace/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=TIME/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=TIME/Expression/@EntryValue">getCurrentTime("yyyy/MM/dd HH:mm")</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=TIME/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=TIME/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Scope/=CD5B1AEA8099834C8F10F84286AA88CA/Type/@EntryValue">InCppProjectFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Text/@EntryValue">///	Copyright (c) 2010-2023&#xD;
+///	Threading Core Render Engine&#xD;
+///&#xD;
+///	作者：彭武阳，彭晔恩，彭晔泽&#xD;
+///	联系作者：94458936@qq.com&#xD;
+///&#xD;
+///	标准：std:c++20&#xD;
+///	版本：0.9.1.2 ($TIME$)&#xD;
+&#xD;
+#ifndef $Namespace$_XX_$ClassNameUppercase$&#xD;
+#define $Namespace$_XX_$ClassNameUppercase$&#xD;
+&#xD;
+#include "$Namespace$/$Namespace$Dll.h"&#xD;
+&#xD;
+#include "CoreTools/Contract/ContractFwd.h"&#xD;
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"&#xD;
+&#xD;
+RENDERING_COPY_UNSHARED_EXPORT_IMPL($ClassName$, $ClassName$Impl);&#xD;
+&#xD;
+namespace $Namespace$&#xD;
+{&#xD;
+    class $Namespace$_DEFAULT_DECLARE $ClassName$&#xD;
+    {&#xD;
+    public:&#xD;
+        COPY_UNSHARED_TYPE_DECLARE($ClassName$);&#xD;
+&#xD;
+    public:&#xD;
+        $ClassName$(); &#xD;
+&#xD;
+        CLASS_INVARIANT_DECLARE;   &#xD;
+		&#xD;
+	private:&#xD;
+        PackageType impl;&#xD;
+    };&#xD;
+}&#xD;
+&#xD;
+#endif  // $Namespace$_XX_$ClassNameUppercase$&#xD;
+</s:String></wpf:ResourceDictionary>
