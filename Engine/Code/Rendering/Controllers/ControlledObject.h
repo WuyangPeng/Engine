@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:01)
+///	版本：0.9.1.2 (2023/07/24 11:14)
 
 #ifndef RENDERING_CONTROLLERS_CONTROLLED_OBJECT_H
 #define RENDERING_CONTROLLERS_CONTROLLED_OBJECT_H
@@ -27,32 +27,25 @@ namespace Rendering
 
     public:
         explicit ControlledObject(CoreTools::DisableNotThrow disableNotThrow);
-        ~ControlledObject() noexcept = default;
-        ControlledObject(const ControlledObject& rhs);
-        ControlledObject& operator=(const ControlledObject& rhs);
-        ControlledObject(ControlledObject&& rhs) noexcept;
-        ControlledObject& operator=(ControlledObject&& rhs) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ControlledObject);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-        NODISCARD const ControllerInterface* GetControllerObject() const noexcept override;
-        NODISCARD ControllerInterface* GetControllerObject() noexcept override;
         NODISCARD bool Update(double applicationTime) override;
-        void SetObject(ControllerInterface* object) override;
 
         NODISCARD int GetNumControllers() const override;
         NODISCARD ConstControllerInterfaceSharedPtr GetConstController(int index) const;
         NODISCARD ControllerInterfaceSharedPtr GetController(int index);
-        void AttachController(ControllerInterfaceSharedPtr controller) override;
-        void DetachController(ControllerInterfaceSharedPtr controller) override;
+        void AttachController(const ControllerInterfaceSharedPtr& controller) override;
+        void DetachController(const ControllerInterfaceSharedPtr& controller) override;
         void DetachAllControllers();
         NODISCARD bool UpdateControllers(double applicationTime);
 
-    private:
-        void AttachControllerInCopy(const ControlledObject& rhs);
+        NODISCARD ConstControllerInterfaceSharedPtr GetControllerObject() const override;
+        NODISCARD ControllerInterfaceSharedPtr GetControllerObject() override;
+        void SetControllerObject(const ControllerInterfaceSharedPtr& object) override;
 
     private:
         PackageType impl;

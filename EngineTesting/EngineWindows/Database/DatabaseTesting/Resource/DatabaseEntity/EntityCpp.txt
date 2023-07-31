@@ -46,6 +46,14 @@ $Namespace$::$Class$::BasisDatabaseManager $Namespace$::$Class$::GetSelect(Wrapp
                                  GetKeyBasisDatabaseContainer($KeyName$) };
 }
 
+$Namespace$::$Class$::BasisDatabaseManager $Namespace$::$Class$::GetSelectAll(WrappersStrategy wrappersStrategy)
+{
+    return BasisDatabaseManager{ wrappersStrategy,
+                                 databaseName,
+                                 Database::ChangeType::Select,
+                                 BasisDatabaseContainer::Create() };
+}
+
 Database::BasisDatabaseContainer $Namespace$::$Class$::GetKeyBasisDatabaseContainer(Database::Traits::ParamType::$KeyType$ $KeyName$)
 {
     BasisDatabaseContainer basisDatabaseContainer{ BasisDatabaseContainer::ObjectContainer{ Database::BasisDatabase{ $KeyName$Describe, $KeyName$ } } };

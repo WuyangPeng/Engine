@@ -23,7 +23,7 @@ namespace Rendering
         using ParentType = FontImpl;
 
     public:
-        FontArialW400H12(ProgramFactory& factory, int maxMessageLength);
+        FontArialW400H12(ProgramFactory& factory, const std::string& shaderExtendName, int maxMessageLength);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

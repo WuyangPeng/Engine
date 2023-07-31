@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/20 11:37)
+///	版本：0.9.1.2 (2023/07/22 17:44)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_CODES_FLAGS_H
 #define SYSTEM_WINDOWS_WINDOWS_CODES_FLAGS_H
@@ -113,16 +113,16 @@ namespace System
 
         Sleep = VK_SLEEP,
 
-        Numpad0 = VK_NUMPAD0,
-        Numpad1 = VK_NUMPAD1,
-        Numpad2 = VK_NUMPAD2,
-        Numpad3 = VK_NUMPAD3,
-        Numpad4 = VK_NUMPAD4,
-        Numpad5 = VK_NUMPAD5,
-        Numpad6 = VK_NUMPAD6,
-        Numpad7 = VK_NUMPAD7,
-        Numpad8 = VK_NUMPAD8,
-        Numpad9 = VK_NUMPAD9,
+        NumPad0 = VK_NUMPAD0,
+        NumPad1 = VK_NUMPAD1,
+        NumPad2 = VK_NUMPAD2,
+        NumPad3 = VK_NUMPAD3,
+        NumPad4 = VK_NUMPAD4,
+        NumPad5 = VK_NUMPAD5,
+        NumPad6 = VK_NUMPAD6,
+        NumPad7 = VK_NUMPAD7,
+        NumPad8 = VK_NUMPAD8,
+        NumPad9 = VK_NUMPAD9,
         Multiply = VK_MULTIPLY,
         Add = VK_ADD,
         Separator = VK_SEPARATOR,
@@ -154,7 +154,7 @@ namespace System
         F23 = VK_F23,
         F24 = VK_F24,
 
-        Numlock = VK_NUMLOCK,
+        NumLock = VK_NUMLOCK,
         Scroll = VK_SCROLL,
 
         OemNecEqual = VK_OEM_NEC_EQUAL,
@@ -222,7 +222,7 @@ namespace System
         OemPa1 = VK_OEM_PA1,
         OemPa2 = VK_OEM_PA2,
         OemPa3 = VK_OEM_PA3,
-        OemWsctrl = VK_OEM_WSCTRL,
+        OemWsCtrl = VK_OEM_WSCTRL,
         OemCusel = VK_OEM_CUSEL,
         OemAttn = VK_OEM_ATTN,
         OemFinish = VK_OEM_FINISH,
@@ -237,7 +237,7 @@ namespace System
         Ereof = VK_EREOF,
         Play = VK_PLAY,
         Zoom = VK_ZOOM,
-        Noname = VK_NONAME,
+        NoName = VK_NONAME,
         Pa1 = VK_PA1,
         OemClear = VK_OEM_CLEAR,
     };
@@ -350,16 +350,16 @@ namespace System
 
         Sleep = 0x5F,
 
-        Numpad0 = 0x60,
-        Numpad1 = 0x61,
-        Numpad2 = 0x62,
-        Numpad3 = 0x63,
-        Numpad4 = 0x64,
-        Numpad5 = 0x65,
-        Numpad6 = 0x66,
-        Numpad7 = 0x67,
-        Numpad8 = 0x68,
-        Numpad9 = 0x69,
+        NumPad0 = 0x60,
+        NumPad1 = 0x61,
+        NumPad2 = 0x62,
+        NumPad3 = 0x63,
+        NumPad4 = 0x64,
+        NumPad5 = 0x65,
+        NumPad6 = 0x66,
+        NumPad7 = 0x67,
+        NumPad8 = 0x68,
+        NumPad9 = 0x69,
         Multiply = 0x6A,
         Add = 0x6B,
         Separator = 0x6C,
@@ -391,7 +391,7 @@ namespace System
         F23 = 0x86,
         F24 = 0x87,
 
-        Numlock = 0x90,
+        NumLock = 0x90,
         Scroll = 0x91,
 
         OemNecEqual = 0x92,
@@ -459,7 +459,7 @@ namespace System
         OemPa1 = 0xEB,
         OemPa2 = 0xEC,
         OemPa3 = 0xED,
-        OemWsctrl = 0xEE,
+        OemWsCtrl = 0xEE,
         OemCusel = 0xEF,
         OemAttn = 0xF0,
         OemFinish = 0xF1,
@@ -474,7 +474,7 @@ namespace System
         Ereof = 0xF9,
         Play = 0xFA,
         Zoom = 0xFB,
-        Noname = 0xFC,
+        NoName = 0xFC,
         Pa1 = 0xFD,
         OemClear = 0xFE,
     };

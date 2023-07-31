@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 10:32)
+///	版本：0.9.1.2 (2023/07/31 10:35)
 
 #ifndef GAME_TEMPLATE_GENERATE_ENGINE_H
 #define GAME_TEMPLATE_GENERATE_ENGINE_H
@@ -25,6 +25,9 @@ namespace GameTemplate
         GenerateEngine(const std::string& configurationFileName, const std::string& parameterFileName);
 
         CLASS_INVARIANT_DECLARE;
+
+    private:
+        using StringReplacing = CoreTools::StringReplacing;
 
     private:
         void Generate();

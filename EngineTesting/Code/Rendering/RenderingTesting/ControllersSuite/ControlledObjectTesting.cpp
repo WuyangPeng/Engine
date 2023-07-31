@@ -69,7 +69,7 @@ void Rendering::ControlledObjectTesting::InitTest()
 
     firstcontrolledObjectTest->AttachController(secondcontrolledObjectTest);
 
-    ASSERT_EQUAL(secondcontrolledObjectTest->GetControllerObject(), firstcontrolledObjectTest.get());
+    ASSERT_EQUAL(secondcontrolledObjectTest->GetControllerObject(), firstcontrolledObjectTest);
 
     ASSERT_EQUAL(firstcontrolledObjectTest->GetNumControllers(), 2);
     ASSERT_EQUAL(firstcontrolledObjectTest->GetController(0), controllerTest);

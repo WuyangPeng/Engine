@@ -25,9 +25,9 @@ namespace Framework
 Framework::WindowHBrushTesting::WindowHBrushTesting(const OStreamShared& stream)
     : ParentType{ stream },
       container{ System::WindowsBrushTypes::WhiteBrush,
-                 System::WindowsBrushTypes::LtgrayBrush,
+                 System::WindowsBrushTypes::LightGrayBrush,
                  System::WindowsBrushTypes::GrayBrush,
-                 System::WindowsBrushTypes::DkgrayBrush,
+                 System::WindowsBrushTypes::DarkGrayBrush,
                  System::WindowsBrushTypes::BlackBrush,
                  System::WindowsBrushTypes::NullBrush }
 {

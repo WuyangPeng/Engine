@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/15 14:50)
+///	版本：0.9.1.2 (2023/07/31 14:34)
 
 #ifndef SHADOW_EDITOR_LIB_H
 #define SHADOW_EDITOR_LIB_H

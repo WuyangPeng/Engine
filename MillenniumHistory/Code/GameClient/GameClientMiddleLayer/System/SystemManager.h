@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.12 (2023/06/13 21:45)
+///	版本：0.9.1.2 (2023/07/25 19:47)
 
 #ifndef GAME_CLIENT_MIDDLE_LAYER_SYSTEM_MIDDLE_LAYER_SYSTEM_H
 #define GAME_CLIENT_MIDDLE_LAYER_SYSTEM_MIDDLE_LAYER_SYSTEM_H
@@ -21,10 +21,7 @@ namespace GameClientMiddleLayer
     {
     public:
         using ClassType = SystemManager;
-        using ParentType = Framework::SystemManagerInterface;
-
-        using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
-        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+        using ParentType = SystemManagerInterface;
 
     public:
         SystemManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);

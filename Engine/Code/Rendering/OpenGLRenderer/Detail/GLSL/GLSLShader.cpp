@@ -342,7 +342,10 @@ void Rendering::GLSLShader::Set(const std::string& textureName, const TextureSin
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    ParentType::Set(textureName, texture);
+    // GLSL textureName没有使用
+    System::UnusedFunction(textureName);
+
+    ParentType::Set(samplerName, texture);
     ParentType::Set(samplerName, state);
 }
 
@@ -350,7 +353,10 @@ void Rendering::GLSLShader::Set(const std::string& textureName, const TextureArr
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    ParentType::Set(textureName, texture);
+    // GLSL textureName没有使用
+    System::UnusedFunction(textureName);
+
+    ParentType::Set(samplerName, texture);
     ParentType::Set(samplerName, state);
 }
 

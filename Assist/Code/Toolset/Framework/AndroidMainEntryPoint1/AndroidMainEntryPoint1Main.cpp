@@ -5,9 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 15:02)
+///	版本：0.9.1.2 (2023/07/28 14:37)
 
 #include "AndroidMainEntryPoint1.h"
+#include "System/Helper/Tools.h"
 #include "Framework/Helper/MainFunctionMacro.h"
 
 #include <vld.h>
@@ -30,8 +31,9 @@ int main()
     return Framework::AndroidMainEntryPoint<Framework::AndroidMainEntryPoint1>(&androidApp, SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""));
 }
 
-void android_main(MAYBE_UNUSED System::AndroidApp* androidApp)
+void android_main(System::AndroidApp* androidApp)
 {
+    System::UnusedFunction(androidApp);
 }
 
 #else  // !FRAMEWORK_ANDROID_TEST && !SYSTEM_PLATFORM_ANDROID

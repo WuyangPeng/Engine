@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:03)
+///	版本：0.9.1.2 (2023/07/24 11:01)
 
 #include "Rendering/RenderingExport.h"
 
@@ -27,7 +27,7 @@ Rendering::ControlledObjectImpl::ControlledObjectImpl(ControllerInterface* realT
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ControlledObjectImpl::~ControlledObjectImpl()
+Rendering::ControlledObjectImpl::~ControlledObjectImpl() noexcept
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 
@@ -63,7 +63,6 @@ int Rendering::ControlledObjectImpl::GetNumControllers() const
 Rendering::ConstControllerInterfaceSharedPtr Rendering::ControlledObjectImpl::GetConstController(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < GetNumControllers(), "索引错误在GetController\n");
 
     return controllers.at(index).object;
 }
@@ -71,7 +70,6 @@ Rendering::ConstControllerInterfaceSharedPtr Rendering::ControlledObjectImpl::Ge
 Rendering::ControllerInterfaceSharedPtr Rendering::ControlledObjectImpl::GetController(int index)
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_0(0 <= index && index < GetNumControllers(), "索引错误在GetController\n");
 
     return controllers.at(index).object;
 }
@@ -89,80 +87,24 @@ void Rendering::ControlledObjectImpl::AttachController(const ControllerInterface
         }
     }
 
-    controller->SetObject(realThis);
+    controller->SetControllerObject(boost::polymorphic_pointer_cast<ControllerInterface>(realThis->shared_from_this()));
 
     controllers.emplace_back(controller);
-}
-
-void Rendering::ControlledObjectImpl::AttachControllerInCopy(const ControllerInterfaceSharedPtr& controller)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    // 测试控制器是否已经在数组中。
-    for (const auto& value : controllers)
-    {
-        if (controller == value.object)
-        {
-            return;
-        }
-    }
-
-    controller->SetObjectInCopy(realThis);
-
-    controllers.emplace_back(controller);
-}
-
-const Rendering::ControllerInterface* Rendering::ControlledObjectImpl::GetControllerObject() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return object.object.get();
-}
-
-void Rendering::ControlledObjectImpl::SetObject(ControllerInterface* aObject)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    if (aObject != nullptr)
-    {
-        object.object = boost::polymorphic_pointer_cast<ControllerInterface>(aObject->shared_from_this());
-    }
-}
-
-Rendering::ControllerInterface* Rendering::ControlledObjectImpl::GetControllerObject() noexcept
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    return object.object.get();
 }
 
 void Rendering::ControlledObjectImpl::DetachController(const ControllerInterfaceSharedPtr& controller)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto findIndex = -1;
-
-    for (auto i = 0u; i < controllers.size(); ++i)
+    for (auto iter = controllers.cbegin(); iter != controllers.cend(); ++iter)
     {
-        if (controller == controllers.at(i).object)
+        if (controller == iter->object)
         {
             // 取消绑定的控制器对象。
-            controller->SetObject(nullptr);
-
-            findIndex = i;
+            controller->SetControllerObject(nullptr);
+            controllers.erase(iter);
             break;
         }
-    }
-
-    if (findIndex != -1)
-    {
-        // 删除数组中的控制器对象，保持数组连续
-        for (auto i = findIndex + 1; i < boost::numeric_cast<int>(controllers.size()); ++i)
-        {
-            const auto i0 = i - 1;
-            controllers.at(i0) = controllers.at(i);
-        }
-        controllers.pop_back();
     }
 }
 
@@ -173,7 +115,7 @@ void Rendering::ControlledObjectImpl::DetachAllControllers()
     for (const auto& controller : controllers)
     {
         // 取消绑定的控制器对象。
-        controller.object->SetObject(nullptr);
+        controller.object->SetControllerObject(nullptr);
     }
 
     controllers.clear();
@@ -209,11 +151,11 @@ CoreTools::ObjectSharedPtr Rendering::ControlledObjectImpl::GetObjectByName(cons
     return nullptr;
 }
 
-std::vector<CoreTools::ObjectSharedPtr> Rendering::ControlledObjectImpl::GetAllObjectsByName(const std::string& name)
+Rendering::ControlledObjectImpl::ObjectSharedPtrContainer Rendering::ControlledObjectImpl::GetAllObjectsByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    std::vector<CoreTools::ObjectSharedPtr> objects{};
+    ObjectSharedPtrContainer objects{};
 
     for (const auto& controller : controllers)
     {
@@ -241,11 +183,11 @@ CoreTools::ConstObjectSharedPtr Rendering::ControlledObjectImpl::GetConstObjectB
     return nullptr;
 }
 
-std::vector<CoreTools::ConstObjectSharedPtr> Rendering::ControlledObjectImpl::GetAllConstObjectsByName(const std::string& name) const
+Rendering::ControlledObjectImpl::ConstObjectSharedPtrContainer Rendering::ControlledObjectImpl::GetAllConstObjectsByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    std::vector<CoreTools::ConstObjectSharedPtr> objects{};
+    ConstObjectSharedPtrContainer objects{};
 
     for (const auto& controller : controllers)
     {
@@ -262,19 +204,10 @@ int Rendering::ControlledObjectImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CoreTools::GetStreamSize(int32_t{});
-
-    if (!controllers.empty())
-    {
-        size += boost::numeric_cast<int32_t>(CoreTools::GetStreamSize(controllers.at(0)) * controllers.size());
-    }
-
-    size += CoreTools::GetStreamSize(object);
-
-    return size;
+    return CoreTools::GetStreamSize(controllers);
 }
 
-void Rendering::ControlledObjectImpl::Register(CoreTools::ObjectRegister& target) const
+void Rendering::ControlledObjectImpl::Register(ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -282,25 +215,13 @@ void Rendering::ControlledObjectImpl::Register(CoreTools::ObjectRegister& target
     {
         target.RegisterContainer(controllers);
     }
-
-    target.Register(object);
 }
 
-void Rendering::ControlledObjectImpl::Save(CoreTools::BufferTarget& target) const
+void Rendering::ControlledObjectImpl::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    if (!controllers.empty())
-    {
-        target.WriteObjectAssociatedContainerWithNumber(controllers);
-    }
-    else
-    {
-        constexpr int zero = 0;
-        target.Write(zero);
-    }
-
-    target.WriteObjectAssociated(object);
+    target.WriteObjectAssociatedContainerWithNumber(controllers);
 }
 
 void Rendering::ControlledObjectImpl::Link(CoreTools::ObjectLink& source)
@@ -311,23 +232,11 @@ void Rendering::ControlledObjectImpl::Link(CoreTools::ObjectLink& source)
     {
         source.ResolveLinkContainer(controllers);
     }
-
-    source.ResolveLink(object);
 }
 
 void Rendering::ControlledObjectImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    int32_t size{ 0 };
-    source.Read(size);
-
-    controllers.resize(size);
-
-    if (!controllers.empty())
-    {
-        source.ReadObjectAssociatedContainer(controllers);
-    }
-
-    source.ReadObjectAssociated(object);
+    source.ReadObjectAssociatedContainer(controllers);
 }

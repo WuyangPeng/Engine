@@ -1731,6 +1731,15 @@
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Texture3DEffect.cpp">
       <Filter>LocalEffects 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\VolumeFogEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\VolumeFogEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\VertexColorEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingLib.h">
@@ -3482,6 +3491,15 @@
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Texture3DEffect.h">
       <Filter>LocalEffects 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VertexColorEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\VolumeFogEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VolumeFogEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\ReadMe.md">
@@ -3611,6 +3629,18 @@
       <Filter>LocalEffects 着色器文件\Shader</Filter>
     </None>
     <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture3DEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\VertexColorEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\VertexColorEffect.ps.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\VolumeFogEffect.vs.glsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </None>
+    <None Include="..\..\..\Code\Rendering\LocalEffects\Shader\VolumeFogEffect.ps.glsl">
       <Filter>LocalEffects 着色器文件\Shader</Filter>
     </None>
   </ItemGroup>
@@ -3768,6 +3798,18 @@
       <Filter>LocalEffects 着色器文件\Shader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\Texture3DEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\VertexColorEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\VertexColorEffect.vs.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\VolumeFogEffect.ps.hlsl">
+      <Filter>LocalEffects 着色器文件\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\Code\Rendering\LocalEffects\Shader\VolumeFogEffect.vs.hlsl">
       <Filter>LocalEffects 着色器文件\Shader</Filter>
     </FxCompile>
   </ItemGroup>

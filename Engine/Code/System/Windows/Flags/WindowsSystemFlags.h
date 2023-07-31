@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/20 11:37)
+///	版本：0.9.1.2 (2023/07/22 17:30)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_SYSTEM_FLAGS_H
 #define SYSTEM_WINDOWS_WINDOWS_SYSTEM_FLAGS_H
@@ -40,7 +40,7 @@ namespace System
         Resource = IMAGE_DIRECTORY_ENTRY_RESOURCE,
         Exception = IMAGE_DIRECTORY_ENTRY_EXCEPTION,
         Security = IMAGE_DIRECTORY_ENTRY_SECURITY,
-        Basereloc = IMAGE_DIRECTORY_ENTRY_BASERELOC,
+        BaseRelocation = IMAGE_DIRECTORY_ENTRY_BASERELOC,
         Debug = IMAGE_DIRECTORY_ENTRY_DEBUG,
         Architecture = IMAGE_DIRECTORY_ENTRY_ARCHITECTURE,
         GlobalPtr = IMAGE_DIRECTORY_ENTRY_GLOBALPTR,
@@ -54,17 +54,17 @@ namespace System
 
     enum class ComboBoxNotification
     {
-        Errspace = CBN_ERRSPACE,
-        Selchange = CBN_SELCHANGE,
-        Dblclk = CBN_DBLCLK,
-        Setfocus = CBN_SETFOCUS,
-        Killfocus = CBN_KILLFOCUS,
-        Editchange = CBN_EDITCHANGE,
-        Editupdate = CBN_EDITUPDATE,
+        ErrorSpace = CBN_ERRSPACE,
+        SelectionChange = CBN_SELCHANGE,
+        DoubleClick = CBN_DBLCLK,
+        SetFocus = CBN_SETFOCUS,
+        KillFocus = CBN_KILLFOCUS,
+        EditChange = CBN_EDITCHANGE,
+        EditUpdate = CBN_EDITUPDATE,
         Dropdown = CBN_DROPDOWN,
         Closeup = CBN_CLOSEUP,
-        Selendok = CBN_SELENDOK,
-        Selendcancel = CBN_SELENDCANCEL,
+        SelectEndOk = CBN_SELENDOK,
+        SelectEndCancel = CBN_SELENDCANCEL,
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -87,7 +87,7 @@ namespace System
         Resource = 2,
         Exception = 3,
         Security = 4,
-        Basereloc = 5,
+        BaseRelocation = 5,
         Debug = 6,
         Architecture = 7,
         GlobalPtr = 8,
@@ -101,17 +101,17 @@ namespace System
 
     enum class ComboBoxNotification
     {
-        Errspace = -1,
-        Selchange = 1,
-        Dblclk = 2,
-        Setfocus = 3,
-        Killfocus = 4,
-        Editchange = 5,
-        Editupdate = 6,
+        ErrorSpace = -1,
+        SelectionChange = 1,
+        DoubleClick = 2,
+        SetFocus = 3,
+        KillFocus = 4,
+        EditChange = 5,
+        EditUpdate = 6,
         Dropdown = 7,
         Closeup = 8,
-        Selendok = 9,
-        Selendcancel = 10,
+        SelectEndOk = 9,
+        SelectEndCancel = 10,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

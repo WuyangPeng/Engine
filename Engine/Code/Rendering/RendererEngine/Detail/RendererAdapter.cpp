@@ -117,6 +117,13 @@ std::string Rendering::RendererAdapter::GetShaderName(const std::string& name) c
     return renderingDevice.GetShaderName(name);
 }
 
+std::string Rendering::RendererAdapter::GetShaderExtendName() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return renderingDevice.GetShaderExtendName();
+}
+
 void Rendering::RendererAdapter::Resize(int width, int height)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -131,17 +138,18 @@ void Rendering::RendererAdapter::SwapBuffers(int syncInterval)
     renderingDevice.SwapBuffers(syncInterval);
 }
 
-int64_t Rendering::RendererAdapter::DrawPrimitive(const ConstVertexBufferSharedPtr& vertexBuffer, const ConstIndexBufferSharedPtr& indexBuffer, const ConstVisualEffectSharedPtr& effect)
+int64_t Rendering::RendererAdapter::DrawPrimitive(const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer, const VisualEffectSharedPtr& effect)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return renderingDevice.DrawPrimitive(vertexBuffer, indexBuffer, effect);
+    return renderingDevice.DrawPrimitive(*rendererObjectBridge, vertexBuffer, indexBuffer, effect);
 }
 
 void Rendering::RendererAdapter::Release()
 {
     RENDERING_CLASS_IS_VALID_9;
 
+    rendererObjectBridge->Release();
     renderingEnvironment.Release();
 }
 

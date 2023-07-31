@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:01)
+///	版本：0.9.1.2 (2023/07/24 11:24)
 
 #ifndef RENDERING_CONTROLLERS_TRANSFORM_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_TRANSFORM_CONTROLLER_IMPL_H
@@ -23,8 +23,11 @@ namespace Rendering
     {
     public:
         using ClassType = TransformControllerImpl;
+
         using APoint = Mathematics::APointF;
         using Matrix = Mathematics::MatrixF;
+        using BufferTarget = CoreTools::BufferTarget;
+        using BufferSource = CoreTools::BufferSource;
 
     public:
         explicit TransformControllerImpl(const TransformF& localTransform) noexcept;
@@ -41,8 +44,8 @@ namespace Rendering
         void SetMatrix(const Matrix& matrix) noexcept;
 
         NODISCARD int GetStreamingSize() const noexcept;
-        void Save(CoreTools::BufferTarget& target) const;
-        void Load(CoreTools::BufferSource& source);
+        void Save(BufferTarget& target) const;
+        void Load(BufferSource& source);
 
     private:
         TransformF localTransform;

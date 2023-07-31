@@ -36,7 +36,7 @@ namespace Framework
         using RendererSharedPtr = std::shared_ptr<Renderer>;
         using ConstRendererSharedPtr = std::shared_ptr<const Renderer>;
 
-    protected:
+    public:
         RenderingManagerInterface(MiddleLayerPlatform modelViewController, const EnvironmentDirectory& environmentDirectory);
 
     public:

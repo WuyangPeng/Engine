@@ -5,13 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:06)
+///	版本：0.9.1.2 (2023/07/24 16:26)
 
 #include "Rendering/RenderingExport.h"
 
 #include "PointController.h"
 #include "Detail/PointControllerImpl.h"
 #include "System/Helper/PragmaWarning.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -33,8 +34,8 @@ CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, PointController);
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, PointController)
 
-Rendering::PointController::PointController(CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{ disableNotThrow }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, points{ nullptr }
+Rendering::PointController::PointController(const BaseRendererSharedPtr& baseRenderer)
+    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ baseRenderer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -87,40 +88,30 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, PointController, 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController, GetSystemAngularAxis, Rendering::PointController::AVector)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, PointController, SetSystemAngularAxis, AVector, void)
 
-void Rendering::PointController::Reallocate(int numPoints)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    if (0 < numPoints)
-        impl = PackageType{ numPoints };
-    else
-        impl = PackageType{ CoreTools::ImplCreateUseDefaultConstruction::Default };
-}
-
-void Rendering::PointController::SetObject(ControllerInterface* object)
+void Rendering::PointController::SetControllerObject(const ControllerInterfaceSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "无效类\n");
 
-    ParentType::SetObject(object);
+    const auto visual = boost::polymorphic_pointer_cast<Visual>(object);
 
-    if (object != nullptr)
-    {
-        points = dynamic_cast<Polypoint*>(object);
-        Reallocate(points->GetVertexBuffer()->GetNumElements());
-    }
-    else
-    {
-        points = nullptr;
-        Reallocate(0);
-    }
+    impl->SetControllerObject(*visual);
+
+    ParentType::SetControllerObject(object);
 }
 
-void Rendering::PointController::SetObjectInCopy(ControllerInterface* object)
+void Rendering::PointController::UpdateSystemMotion(float ctrlTime)
 {
-    RENDERING_CLASS_IS_VALID_1;
+    const auto visual = boost::polymorphic_pointer_cast<Visual>(GetControllerObject());
 
-    ParentType::SetObject(object);
+    impl->UpdateSystemMotion(*visual, ctrlTime);
+}
+
+void Rendering::PointController::UpdatePointMotion(float ctrlTime)
+{
+    const auto visual = boost::polymorphic_pointer_cast<Visual>(GetControllerObject());
+
+    impl->UpdatePointMotion(*visual, ctrlTime);
 }
 
 bool Rendering::PointController::Update(double applicationTime)
@@ -129,7 +120,7 @@ bool Rendering::PointController::Update(double applicationTime)
 
     if (Controller::Update(applicationTime))
     {
-        auto ctrlTime = boost::numeric_cast<float>(GetControlTime(applicationTime));
+        const auto ctrlTime = boost::numeric_cast<float>(GetControlTime(applicationTime));
 
         UpdateSystemMotion(ctrlTime);
         UpdatePointMotion(ctrlTime);
@@ -140,49 +131,8 @@ bool Rendering::PointController::Update(double applicationTime)
     return false;
 }
 
-void Rendering::PointController::UpdateSystemMotion(float ctrlTime)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    if (points != nullptr)
-    {
-        const auto distance = ctrlTime * GetSystemLinearSpeed();
-        auto deltaTrn = distance * GetSystemLinearAxis();
-        auto localTransform = points->GetLocalTransform();
-        const auto translate = localTransform.GetTranslate() + deltaTrn;
-        localTransform.SetTranslate(translate);
-
-        const auto angle = ctrlTime * GetSystemAngularSpeed();
-        const Mathematics::MatrixF deltaRot{ GetSystemAngularAxis(), angle };
-        const auto rotate = deltaRot * localTransform.GetRotate();
-        localTransform.SetRotate(rotate);
-
-        points->SetLocalTransform(localTransform);
-    }
-}
-
-void Rendering::PointController::UpdatePointMotion(float ctrlTime)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    if (points != nullptr)
-    {
-        VertexBuffer vba = *points->GetVertexBuffer();
-
-        const auto numPoints = points->GetNumPoints();
-        for (auto i = 0; i < numPoints; ++i)
-        {
-            const auto distance = ctrlTime * GetPointLinearSpeed(i);
-
-            auto deltaTrn = distance * GetPointLinearAxis(i);
-        }
-
-        
-    }
-}
-
-Rendering::PointController::PointController(LoadConstructor value)
-    : ParentType{ value }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, points{ nullptr }
+Rendering::PointController::PointController(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -230,12 +180,6 @@ void Rendering::PointController::PostLink()
     RENDERING_CLASS_IS_VALID_1;
 
     ParentType::PostLink();
-
-    auto object = GetControllerObject();
-
-    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "无效类\n");
-
-    points = dynamic_cast<Polypoint*>(object);
 }
 
 void Rendering::PointController::Load(CoreTools::BufferSource& source)

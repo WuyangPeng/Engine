@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:06)
+///	版本：0.9.1.2 (2023/07/24 19:02)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ParticleController.h"
 #include "Detail/ParticleControllerImpl.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -30,8 +31,8 @@ CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, ParticleController);
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, ParticleController)
 
-Rendering::ParticleController::ParticleController(CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{ disableNotThrow }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, particles{ nullptr }
+Rendering::ParticleController::ParticleController(const BaseRendererSharedPtr& baseRenderer)
+    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ baseRenderer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -83,7 +84,7 @@ bool Rendering::ParticleController::Update(double applicationTime)
 
     if (ParentType::Update(applicationTime))
     {
-        auto ctrlTime = boost::numeric_cast<float>(GetControlTime(applicationTime));
+        const auto ctrlTime = boost::numeric_cast<float>(GetControlTime(applicationTime));
 
         UpdateSystemMotion(ctrlTime);
         UpdatePointMotion(ctrlTime);
@@ -94,97 +95,53 @@ bool Rendering::ParticleController::Update(double applicationTime)
     return false;
 }
 
-void Rendering::ParticleController::SetObject(ControllerInterface* object)
+void Rendering::ParticleController::SetCamera(const std::shared_ptr<Camera>& aCamera) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetCamera(aCamera);
+}
+
+std::shared_ptr<Rendering::Camera> Rendering::ParticleController::GetCamera() noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetCamera();
+}
+
+void Rendering::ParticleController::SetControllerObject(const ControllerInterfaceSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Particles::GetCurrentRttiType()), "无效类\n");
 
-    ParentType::SetObject(object);
+    const auto visual = boost::polymorphic_pointer_cast<Visual>(object);
 
-    if (object != nullptr)
-    {
-        particles = dynamic_cast<Particles*>(object);
-        Reallocate(particles->GetNumParticles());
-    }
-    else
-    {
-        particles = nullptr;
-        Reallocate(0);
-    }
-}
+    impl->SetControllerObject(*visual);
 
-void Rendering::ParticleController::SetObjectInCopy(ControllerInterface* object)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    ParentType::SetObject(object);
-}
-
-void Rendering::ParticleController::Reallocate(int numParticles)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    if (0 < numParticles)
-        impl = PackageType{ numParticles };
-    else
-        impl = PackageType{ CoreTools::ImplCreateUseDefaultConstruction::Default };
+    ParentType::SetControllerObject(object);
 }
 
 void Rendering::ParticleController::UpdateSystemMotion(float ctrlTime)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    if (particles != nullptr)
-    {
-        const auto dSize = ctrlTime * GetSystemSizeChange();
-        particles->SetSizeAdjust(particles->GetSizeAdjust() + dSize);
-        if (particles->GetSizeAdjust() < 0.0f)
-        {
-            particles->SetSizeAdjust(0.0f);
-        }
+    const auto visual = boost::polymorphic_pointer_cast<Particles>(GetControllerObject());
 
-        const auto distance = ctrlTime * GetSystemLinearSpeed();
-        auto deltaTrn = distance * GetSystemLinearAxis();
-        auto localTransform = particles->GetLocalTransform();
-        const auto translate = localTransform.GetTranslate() + deltaTrn;
-        localTransform.SetTranslate(translate);
-
-        const auto angle = ctrlTime * GetSystemAngularSpeed();
-        const Mathematics::MatrixF deltaRot{ GetSystemAngularAxis(), angle };
-        const auto rotate = deltaRot * localTransform.GetRotate();
-        localTransform.SetRotate(rotate);
-
-        particles->SetLocalTransform(localTransform);
-    }
+    impl->UpdateSystemMotion(*visual, ctrlTime);
 }
 
 void Rendering::ParticleController::UpdatePointMotion(float ctrlTime)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    if (particles != nullptr)
-    {
-        const auto numActive = particles->GetNumActive();
-        for (auto i = 0; i < numActive; ++i)
-        {
-            auto position = particles->GetParticlesPosition(i);
-            auto size = particles->GetSize(i);
+    const auto visual = boost::polymorphic_pointer_cast<Particles>(GetControllerObject());
 
-            const auto dSize = ctrlTime * GetParticleSizeChange(i);
-            size += dSize;
-            const auto distance = ctrlTime * GetParticleLinearSpeed(i);
-            auto deltaTrn = distance * GetParticleLinearAxis(i);
-            position += deltaTrn;
-
-            particles->SetPosition(i, position);
-            particles->SetSize(i, size);
-        }
-    }
+    impl->UpdatePointMotion(*visual, ctrlTime);
 }
 
 Rendering::ParticleController::ParticleController(LoadConstructor value)
-    : ParentType{ value }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, particles{ nullptr }
+    : ParentType{ value }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -232,12 +189,6 @@ void Rendering::ParticleController::PostLink()
     RENDERING_CLASS_IS_VALID_1;
 
     ParentType::PostLink();
-
-    auto object = GetControllerObject();
-
-    RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Particles::GetCurrentRttiType()), "无效类\n");
-
-    particles = dynamic_cast<Particles*>(object);
 }
 
 void Rendering::ParticleController::Load(CoreTools::BufferSource& source)

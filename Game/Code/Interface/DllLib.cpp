@@ -5,17 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.9.0.12 (2023/06/16 16:50)
+///	版本：0.9.1.2 (2023/07/25 15:53)
 
 #include "Interface/InterfaceExport.h"
 
 #include "Interface/Interface.h"
 
-#ifndef BUILDING_ACTIVITY_STATIC
+#ifndef BUILDING_INTERFACE_STATIC
 
     #include "DllLib.h"
 
-#else  // !BUILDING_ACTIVITY_STATIC
+#else  // !BUILDING_INTERFACE_STATIC
 
 namespace Interface
 {
@@ -24,4 +24,4 @@ namespace Interface
     }
 }
 
-#endif  // !BUILDING_ACTIVITY_STATIC
+#endif  // !BUILDING_INTERFACE_STATIC

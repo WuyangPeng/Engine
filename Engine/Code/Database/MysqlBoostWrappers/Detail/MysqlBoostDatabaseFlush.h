@@ -35,10 +35,12 @@ namespace Database
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void ChangeDatabase(int64_t userId, const BasisDatabaseManager& basisDatabaseContainer) override; 
+        void ChangeDatabase(int64_t userId, const BasisDatabaseManager& basisDatabaseContainer) override;
 
         NODISCARD BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const override;
         NODISCARD ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const override;
+
+        void Wait() override;
 
     private:
         void CheckWrappersStrategy(const BasisDatabaseManager& basisDatabaseContainer) const;

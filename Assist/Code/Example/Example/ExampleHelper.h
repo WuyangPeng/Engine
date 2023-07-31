@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/15 17:14)
+///	版本：0.9.1.2 (2023/07/31 10:44)
 
 #ifndef EXAMPLE_EXAMPLE_HELPER_H
 #define EXAMPLE_EXAMPLE_HELPER_H
@@ -18,7 +18,7 @@ namespace Example
 {
     using WindowMainFunctionHelper = Framework::WindowMainFunctionHelper<Framework::WindowsAPIFrameBuild, Framework::WindowProcessInterface>;
 
-    class ExampleHelper : public WindowMainFunctionHelper
+    class ExampleHelper final : public WindowMainFunctionHelper
     {
     public:
         using ClassType = ExampleHelper;

@@ -13,7 +13,7 @@
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/Helper/DatabaseGenerateServerCoreClassInvariantMacro.h"
 #include "Detail/AncientBooksDatabaseSaveImpl.h"
 
-DatabaseGenerateServerCore::AncientBooksDatabaseSave::AncientBooksDatabaseSave(const DatabaseFlushSharedPtr& databaseFlush) noexcept
+DatabaseGenerateServerCore::AncientBooksDatabaseSave::AncientBooksDatabaseSave(const DatabaseFlushSharedPtr& databaseFlush)
     : impl{ databaseFlush }
 {
     DATABASE_GENERATE_SERVER_CORE_SELF_CLASS_IS_VALID_9;

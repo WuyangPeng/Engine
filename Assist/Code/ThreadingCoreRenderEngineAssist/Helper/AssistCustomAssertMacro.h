@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/06/30 14:09)
+///	版本：0.9.1.2 (2023/07/28 09:21)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_ASSIST_ASSIST_CUSTOM_ASSERT_MACRO_H
 #define THREADING_CORE_RENDER_ENGINE_ASSIST_ASSIST_CUSTOM_ASSERT_MACRO_H
@@ -14,11 +14,15 @@
 #include "CoreTools/Helper/Assertion/UserCustomAssertMacro.h"
 
 #if defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
+
     #define ASSIST_ASSERT_LEVEL 0
+
 #endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 
 #if !defined(ASSIST_ASSERT_LEVEL)
+
     #define ASSIST_ASSERT_LEVEL 4
+
 #endif  // ASSIST_ASSERT_LEVEL
 
 static_assert(ASSIST_ASSERT_LEVEL <= USER_ASSERT_LEVEL, "Assert level definition error.");

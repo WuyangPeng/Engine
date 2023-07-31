@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 17:16)
+///	版本：0.9.1.2 (2023/07/28 14:06)
 
 #include "MacintoshMainFunctionHelper1.h"
 #include "Framework/Helper/MainFunctionMacro.h"
@@ -17,14 +17,9 @@ int main()
 {
     EXCEPTION_TRY
     {
-        Framework::EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
+        const Framework::EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-        auto helper = std::make_shared<Framework::MacintoshMainFunctionHelper1>(environmentDirectory);
-
-#include STSTEM_WARNING_POP
+        const auto helper = Framework::MacintoshMainFunctionHelper1::Create(environmentDirectory);
 
         return helper->Run();
     }

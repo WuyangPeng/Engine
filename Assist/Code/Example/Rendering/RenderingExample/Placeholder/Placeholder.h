@@ -5,8 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/12 14:37)
-///	引擎辅助版本：0.8.0.10 (2022/07/12 18:01)
+///	版本：0.9.1.2 (2023/07/31 11:10)
 
 #ifndef RENDERING_EXAMPLE_PLACEHOLDER_H
 #define RENDERING_EXAMPLE_PLACEHOLDER_H

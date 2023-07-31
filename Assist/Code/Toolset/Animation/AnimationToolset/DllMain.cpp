@@ -5,19 +5,19 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/12 18:01)
+///	版本：0.9.1.2 (2023/07/31 10:42)
 
 #include "Toolset/Animation/AnimationToolset/AnimationToolsetExport.h"
 
-#include "Toolset/Animation/AnimationToolset/AnimationToolsetFwd.h" 
 #include "CoreTools/Helper/MainFunctionMacro.h"
+#include "Toolset/Animation/AnimationToolset/AnimationToolsetFwd.h"
 
 #ifndef BUILDING_ANIMATION_STATIC
 
-	DLL_MAIN_FUNCTION(Animation);
+DLL_MAIN_FUNCTION(Animation);
 
-#else // !BUILDING_ANIMATION_STATIC
+#else  // !BUILDING_ANIMATION_STATIC
 
-	CORE_TOOLS_MUTEX_INIT(Animation);
+CORE_TOOLS_MUTEX_INIT(Animation);
 
-#endif // !BUILDING_ANIMATION_STATIC
+#endif  // !BUILDING_ANIMATION_STATIC

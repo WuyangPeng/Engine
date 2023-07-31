@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 17:16)
+///	版本：0.9.1.2 (2023/07/28 14:06)
 
 #ifndef MACINTOSH_MAIN_FUNCTION_HELPER1_H
 #define MACINTOSH_MAIN_FUNCTION_HELPER1_H
@@ -24,8 +24,12 @@ namespace Framework
         using ClassType = MacintoshMainFunctionHelper1;
         using ParentType = BaseType;
 
+        using MacintoshMainFunctionHelper1SharedPtr = std::shared_ptr<ClassType>;
+
     public:
-        MacintoshMainFunctionHelper1(const EnvironmentDirectory& environmentDirectory);
+        NODISCARD static MacintoshMainFunctionHelper1SharedPtr Create(const EnvironmentDirectory& environmentDirectory);
+
+        explicit MacintoshMainFunctionHelper1(const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_FINAL_DECLARE;
     };

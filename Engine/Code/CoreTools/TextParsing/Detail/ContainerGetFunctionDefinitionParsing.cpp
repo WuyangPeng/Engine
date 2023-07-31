@@ -136,6 +136,18 @@ System::String CoreTools::ContainerGetFunctionDefinitionParsing::GenerateGetCont
     content += GenerateFunctionEndBrackets();
     content += TextParsing::gNewlineCharacter;
 
+    content += GenerateGetContainerSizeFunction();
+
+    content += GenerateFunctionBeginBrackets();
+
+    content += GenerateUserClassIsValidConst9(1);
+    content += TextParsing::gNewlineCharacter;
+
+    content += GenerateReturnContainerSize(lowerClassName);
+
+    content += GenerateFunctionEndBrackets();
+    content += TextParsing::gNewlineCharacter;
+
     return content;
 }
 
@@ -148,6 +160,42 @@ System::String CoreTools::ContainerGetFunctionDefinitionParsing::GenerateReturnC
     content += TextParsing::gReturn;
     content += TextParsing::gSpace;
     content += lowerClassName;
+    content += TextParsing::gSemicolonNewline;
+
+    return content;
+}
+
+System::String CoreTools::ContainerGetFunctionDefinitionParsing::GenerateGetContainerSizeFunction() const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    const auto csvHead = GetCSVHead();
+
+    const auto nameSpace = csvHead.GetNameSpace();
+    const auto containerClassName = GetCSVClassName();
+
+    String content{};
+
+    content += SYSTEM_TEXT("int ");
+    content += nameSpace;
+    content += TextParsing::gDoubleColon;
+    content += containerClassName;
+    content += SYSTEM_TEXT("::GetContainerSize() const\n");
+
+    return content;
+}
+
+System::String CoreTools::ContainerGetFunctionDefinitionParsing::GenerateReturnContainerSize(const String& lowerClassName) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    auto content = GenerateIndentation(1);
+
+    content += TextParsing::gReturn;
+    content += TextParsing::gSpace;
+    content += SYSTEM_TEXT("boost::numeric_cast<int>(");
+    content += lowerClassName;
+    content += SYSTEM_TEXT(".size())");
     content += TextParsing::gSemicolonNewline;
 
     return content;

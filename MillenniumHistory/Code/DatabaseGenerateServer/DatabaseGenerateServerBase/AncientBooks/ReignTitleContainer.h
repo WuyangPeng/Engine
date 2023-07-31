@@ -38,6 +38,8 @@ namespace AncientBooks
         NODISCARD ConstReignTitleBaseSharedPtr GetReignTitle(int64_t key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstReignTitleBaseSharedPtr GetFirstReignTitle(Function function) const;
 

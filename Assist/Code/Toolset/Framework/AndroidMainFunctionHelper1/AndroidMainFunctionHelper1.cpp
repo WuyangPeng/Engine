@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 15:28)
+///	版本：0.9.1.2 (2023/07/28 14:33)
 
 #include "AndroidMainFunctionHelper1.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"

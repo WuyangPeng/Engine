@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:01)
+///	版本：0.9.1.2 (2023/07/24 10:57)
 
 #ifndef RENDERING_CONTROLLERS_CONTROLLER_H
 #define RENDERING_CONTROLLERS_CONTROLLER_H
@@ -34,14 +34,14 @@ namespace Rendering
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Controller);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-        NODISCARD const ControllerInterface* GetControllerObject() const noexcept override;
-        NODISCARD ControllerInterface* GetControllerObject() noexcept override;
+        NODISCARD ConstControllerInterfaceSharedPtr GetControllerObject() const override;
+        NODISCARD ControllerInterfaceSharedPtr GetControllerObject() override;
 
         NODISCARD bool Update(double applicationTime) override;
 
         // 这个函数是公有的,因为类ControlledObject需要设置对象在调用AttachController。
         // 派生类管理一组控制器时还需要在调用AttachController设置对象。
-        void SetObject(ControllerInterface* aObject) override;
+        void SetControllerObject(const ControllerInterfaceSharedPtr& aObject) override;
 
         void SetApplicationTime(double applicationTime) noexcept;
         NODISCARD double GetApplicationTime() const noexcept;
@@ -63,10 +63,6 @@ namespace Rendering
 
     private:
         PackageType impl;
-
-        // 控制对象。这是一个常规的指针,而不是一个智能指针,
-        // 以避免引用循环在m_Object和'this'之间。
-        ControllerInterface* controllerInterface;
     };
 
 #include STSTEM_WARNING_PUSH

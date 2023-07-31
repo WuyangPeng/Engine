@@ -34,9 +34,7 @@ void CoreTools::CSVContentImpl::Parsing()
 {
     const IFStreamManager streamManager{ fileName };
 
-    const auto content = streamManager.GetFileContent();
-
-    split(fileContent, content, boost::is_any_of(TextParsing::gNewline), boost::token_compress_on);
+    fileContent = streamManager.GetFileContent(TextParsing::gNewline);
 
     if (fileContent.size() < fileHeaderSize)
     {

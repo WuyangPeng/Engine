@@ -17,7 +17,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Mathematics/Algebra/APointDetail.h" 
+#include "Mathematics/Algebra/APointDetail.h"
 #include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/SceneGraph/Culler.h"
 
@@ -30,7 +30,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, Particles);
 Rendering::Particles::Particles(const VertexFormatSharedPtr& vertexformat,
                                 const VertexBufferSharedPtr& vertexbuffer,
                                 int indexSize,
-                                const std::vector<APoint>& positions,
+                                const std::vector<Mathematics::Vector4F>& positions,
                                 const std::vector<float>& sizes,
                                 float sizeAdjust)
     : ParentType{ vertexformat, vertexbuffer, IndexBufferSharedPtr{} },
@@ -40,7 +40,12 @@ Rendering::Particles::Particles(const VertexFormatSharedPtr& vertexformat,
     InitTextureCoord();
 
     // 计算边界范围仅基于粒子的位置。
-    ComputeBounding(positions);
+    std::vector<APoint> point{};
+    for (const auto& element : positions)
+    {
+        point.emplace_back(APoint{ element[0], element[1], element[2] });
+    }
+    ComputeBounding(point);
 
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -141,13 +146,13 @@ Rendering::ControllerInterfaceSharedPtr Rendering::Particles::Clone() const
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Particles, GetNumParticles, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Particles, GetParticlesPosition, int, Rendering::Particles::APoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Particles, GetParticlesPosition, int, Mathematics::Vector4F)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Particles, GetSize, int, float)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Particles, SetSizeAdjust, float, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Particles, GetSizeAdjust, float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Particles, GetNumActive, int)
 
-void Rendering::Particles::SetPosition(int index, const APoint& position)
+void Rendering::Particles::SetPosition(int index, const Mathematics::Vector4F& position)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -193,8 +198,6 @@ void Rendering::Particles::GenerateParticles(const Camera& camera)
     }
 
     UpdateModelSpace(VisualUpdateType::Normals);
-
- 
 }
 
 void Rendering::Particles::GetVisibleSet(Culler& culler, bool noCull)

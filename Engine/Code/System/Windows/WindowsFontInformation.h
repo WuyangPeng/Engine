@@ -18,7 +18,7 @@
 // 字体信息函数。
 namespace System
 {
-    NODISCARD int SYSTEM_DEFAULT_DECLARE GetStringWidth(WindowsHWnd hWnd, const String& text) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE GetStringWidth(WindowsHWnd hWnd, const String& text);
     NODISCARD int SYSTEM_DEFAULT_DECLARE GetCharacterWidth(WindowsHWnd hWnd, TChar character);
     NODISCARD int SYSTEM_DEFAULT_DECLARE GetFontHeight(WindowsHWnd hWnd) noexcept;
 

@@ -36,7 +36,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{F329A755-B76E-40D7-AC36-B9EC9598C7EC}</ProjectGuid>
+    <ProjectGuid>{D00B55C0-231A-4718-B206-06FD658B8160}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ArtificialIntelligenceExampleTesting</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -99,7 +99,7 @@
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
- <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\AssistTesting.props" />
     <Import Project="..\..\..\AssistTestingWin32DebugLibs.props" />

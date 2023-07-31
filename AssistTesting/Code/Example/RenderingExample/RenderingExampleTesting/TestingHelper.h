@@ -5,18 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助测试版本：0.9.0.12 (2023/06/12 14:39)
+///	版本：0.9.1.2 (2023/07/31 18:12)
 
 #ifndef RENDERING_EXAMPLE_TESTING_HELPER_H
 #define RENDERING_EXAMPLE_TESTING_HELPER_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 namespace RenderingExample
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
     public:
         using ClassType = TestingHelper;

@@ -51,6 +51,8 @@ namespace Rendering
         using TextureSingleSharedPtr = std::shared_ptr<TextureSingle>;
         using TextureArraySharedPtr = std::shared_ptr<TextureArray>;
         using StructuredBufferSharedPtr = std::shared_ptr<StructuredBuffer>;
+        using VertexBufferSharedPtr = std::shared_ptr<VertexBuffer>;
+        using IndexBufferSharedPtr = std::shared_ptr<IndexBuffer>;
         using ConstVertexBufferSharedPtr = std::shared_ptr<const VertexBuffer>;
         using ConstIndexBufferSharedPtr = std::shared_ptr<const IndexBuffer>;
 
@@ -163,16 +165,16 @@ namespace Rendering
         void Flush();
 
     private:
-        NODISCARD int64_t DrawPrimitive(const ConstVertexBufferSharedPtr& vertexBuffer,
-                                        const ConstIndexBufferSharedPtr& indexBuffer,
-                                        const ConstVisualEffectSharedPtr& effect);
+        NODISCARD int64_t DrawPrimitive(const VertexBufferSharedPtr& vertexBuffer,
+                                        const IndexBufferSharedPtr& indexBuffer,
+                                        const VisualEffectSharedPtr& effect);
 
         void Bind(Font& font);
         void Unbind(Font* currentActiveFont) noexcept;
         void Update(Font& activeFont);
         NODISCARD int64_t SetState(Font& activeFont);
 
-        NODISCARD static GlobalFont CreateGlobalFont(RendererTypes rendererTypes);
+        NODISCARD static GlobalFont CreateGlobalFont(RendererTypes rendererTypes, const RendererAdapter& rendererAdapter);
 
     private:
         RendererTypes rendererTypes;

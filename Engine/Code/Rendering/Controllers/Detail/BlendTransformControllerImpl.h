@@ -59,7 +59,7 @@ namespace Rendering
         NODISCARD bool IsGeometricRotation() const noexcept;
         NODISCARD bool IsGeometricScale() const noexcept;
 
-        void SetObject(ControllerInterface* object);
+        void SetObject(const ControllerInterfaceSharedPtr& object);
         bool Update(double applicationTime);
 
         NODISCARD APoint GetBlendTranslate() const;

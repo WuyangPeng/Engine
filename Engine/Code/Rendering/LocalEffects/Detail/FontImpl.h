@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/DataTypes/Colour.h"
 #include "Rendering/LocalEffects/LocalEffectsInternalFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Resources/ResourcesFwd.h"
 #include "Rendering/Shaders/ShadersFwd.h"
 
@@ -44,6 +45,7 @@ namespace Rendering
 
     public:
         FontImpl(ProgramFactory& factory,
+                 const std::string& shaderExtendName,
                  int width,
                  int height,
                  const TexelsType& texels,

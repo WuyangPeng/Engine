@@ -38,6 +38,8 @@ namespace AncientBooks
         NODISCARD ConstCategoryBaseSharedPtr GetCategory(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstCategoryBaseSharedPtr GetFirstCategory(Function function) const;
 

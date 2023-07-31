@@ -66,4 +66,14 @@ void Database::MongoDatabaseFlush::CheckWrappersStrategy(const BasisDatabaseMana
     }
 }
 
+void Database::MongoDatabaseFlush::Wait()
+{
+    DATABASE_CLASS_IS_VALID_9;
+
+    for (auto& element : connection)
+    {
+        element->Wait();
+    }
+}
+
 #endif  // DATABASE_USE_MONGO

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 17:24)
+///	版本：0.9.1.2 (2023/07/28 13:38)
 
 #include "WindowMainFunctionHelper1.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"

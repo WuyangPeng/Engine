@@ -227,12 +227,12 @@ float Rendering::BlendTransformControllerImpl::GetWeight() const noexcept
     return weight;
 }
 
-void Rendering::BlendTransformControllerImpl::SetObject(ControllerInterface* object)
+void Rendering::BlendTransformControllerImpl::SetObject(const ControllerInterfaceSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    firstController.object->SetObject(object);
-    secondController.object->SetObject(object);
+    firstController.object->SetControllerObject(object);
+    secondController.object->SetControllerObject(object);
 }
 
 bool Rendering::BlendTransformControllerImpl::Update(double applicationTime)

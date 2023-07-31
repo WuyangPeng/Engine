@@ -25,7 +25,7 @@ namespace Framework
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD int GetStringWidth(const String& text) const noexcept final;
+        NODISCARD int GetStringWidth(const String& text) const final;
         NODISCARD int GetCharacterWidth(const TChar character) const final;
         NODISCARD int GetFontHeight() const noexcept final;
 

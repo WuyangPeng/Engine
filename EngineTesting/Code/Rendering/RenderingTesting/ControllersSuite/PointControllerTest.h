@@ -21,7 +21,7 @@ namespace Rendering
         using ParentType = PointController;
 
     public:
-        explicit PointControllerTest(CoreTools::DisableNotThrow disableNotThrow);
+        explicit PointControllerTest(const BaseRendererSharedPtr& baseRenderer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

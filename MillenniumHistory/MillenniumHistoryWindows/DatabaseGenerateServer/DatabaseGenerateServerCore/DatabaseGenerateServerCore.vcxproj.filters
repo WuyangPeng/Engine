@@ -22,19 +22,19 @@
     <Filter Include="Convert 模板文件">
       <UniqueIdentifier>{ac805d61-46a0-4d2b-94cf-f6c7f4d22c77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Convert 源文件">
-      <UniqueIdentifier>{2f3a6e83-e7d2-47cb-a2a3-78996d46dd4e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Convert 头文件">
-      <UniqueIdentifier>{d18ba2ae-c9f2-4163-aefb-84e75cca8717}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Convert 模板文件\Detail">
       <UniqueIdentifier>{0764f6f4-d1be-44dc-88a9-f6ec8e1c2de4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Convert 源文件\Detail">
-      <UniqueIdentifier>{a27da6fe-529a-49c4-848b-6778d9981ec1}</UniqueIdentifier>
+    <Filter Include="Convert 头文件">
+      <UniqueIdentifier>{2f3a6e83-e7d2-47cb-a2a3-78996d46dd4e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Convert 头文件\Detail">
+      <UniqueIdentifier>{a27da6fe-529a-49c4-848b-6778d9981ec1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Convert 源文件">
+      <UniqueIdentifier>{d18ba2ae-c9f2-4163-aefb-84e75cca8717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Convert 源文件\Detail">
       <UniqueIdentifier>{e1521069-597e-493a-a267-38af1776b4bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -82,25 +82,28 @@
       <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\AncientBooksDatabaseSave.h">
-      <Filter>Convert 源文件</Filter>
+      <Filter>Convert 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\Convert.h">
-      <Filter>Convert 源文件</Filter>
+      <Filter>Convert 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\ConvertEntity.h">
-      <Filter>Convert 源文件</Filter>
+      <Filter>Convert 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\ConvertFwd.h">
-      <Filter>Convert 源文件</Filter>
+      <Filter>Convert 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\Detail\AncientBooksDatabaseSaveImplDetail.h">
       <Filter>Convert 模板文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\Detail\AncientBooksDatabaseSaveImpl.h">
-      <Filter>Convert 源文件\Detail</Filter>
+      <Filter>Convert 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\Detail\ConvertEntityImpl.h">
-      <Filter>Convert 源文件\Detail</Filter>
+      <Filter>Convert 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\Detail\ConvertEntityImplDetail.h">
+      <Filter>Convert 模板文件\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -111,16 +114,16 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\AncientBooksDatabaseSave.cpp">
-      <Filter>Convert 头文件</Filter>
+      <Filter>Convert 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\ConvertEntity.cpp">
-      <Filter>Convert 头文件</Filter>
+      <Filter>Convert 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\Detail\AncientBooksDatabaseSaveImpl.cpp">
-      <Filter>Convert 头文件\Detail</Filter>
+      <Filter>Convert 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\Detail\ConvertEntityImpl.cpp">
-      <Filter>Convert 头文件\Detail</Filter>
+      <Filter>Convert 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

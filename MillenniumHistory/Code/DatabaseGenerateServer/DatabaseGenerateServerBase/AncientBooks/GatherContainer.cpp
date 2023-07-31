@@ -9,6 +9,7 @@
 
 #include "Gather.h"
 #include "GatherContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::GatherContainer::Container AncientBooks::GatherContainer::GetConta
     USER_CLASS_IS_VALID_CONST_9;
 
     return gather;
+}
+
+int AncientBooks::GatherContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(gather.size());
 }
 

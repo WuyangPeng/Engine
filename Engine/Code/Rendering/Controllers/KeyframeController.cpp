@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:06)
+///	版本：0.9.1.2 (2023/07/25 13:43)
 
 #include "Rendering/RenderingExport.h"
 
 #include "KeyframeController.h"
 #include "Detail/KeyframeControllerImpl.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -101,19 +102,12 @@ void Rendering::KeyframeController::SetScales(int index, float scales)
     return impl->SetScales(index, scales);
 }
 
-void Rendering::KeyframeController::SetObject(ControllerInterface* object)
+void Rendering::KeyframeController::SetControllerObject(const ControllerInterfaceSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::GetCurrentRttiType()), "无效类\n");
 
-    ParentType::SetObject(object);
-}
-
-void Rendering::KeyframeController::SetObjectInCopy(ControllerInterface* object)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    ParentType::SetObject(object);
+    ParentType::SetControllerObject(object);
 }
 
 Rendering::ControllerInterfaceSharedPtr Rendering::KeyframeController::Clone() const
@@ -139,7 +133,7 @@ bool Rendering::KeyframeController::Update(double applicationTime)
 
     if (ParentType::Update(applicationTime))
     {
-        auto ctrlTime = boost::numeric_cast<float>(GetControlTime(applicationTime));
+        const auto ctrlTime = boost::numeric_cast<float>(GetControlTime(applicationTime));
 
         // 这里的逻辑检查同样时间的数组，以减少调用GetKeyInfo的次数。
         if (0 < GetNumCommonTimes())
@@ -189,8 +183,9 @@ bool Rendering::KeyframeController::Update(double applicationTime)
                 SetUniformScale(scale);
             }
         }
-        auto spatial = dynamic_cast<Spatial*>(GetControllerObject());
-        if (spatial != nullptr)
+
+        if (const auto spatial = boost::polymorphic_pointer_cast<Spatial>(GetControllerObject());
+            spatial != nullptr)
         {
             spatial->SetLocalTransform(GetTransform());
         }
@@ -201,8 +196,8 @@ bool Rendering::KeyframeController::Update(double applicationTime)
     return false;
 }
 
-Rendering::KeyframeController::KeyframeController(LoadConstructor value)
-    : ParentType{ value }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+Rendering::KeyframeController::KeyframeController(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

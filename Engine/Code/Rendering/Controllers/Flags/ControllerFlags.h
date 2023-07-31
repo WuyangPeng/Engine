@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:01)
+///	版本：0.9.1.2 (2023/07/24 09:40)
 
 #ifndef RENDERING_CONTROLLERS_CONTROLLER_FLAGS_H
 #define RENDERING_CONTROLLERS_CONTROLLER_FLAGS_H
 
 namespace Rendering
 {
-	// 时间管理。一个控制器可以使用自己的时间比例和它指定时间是如何被映射到应用程序时间。
+    // 时间管理。一个控制器可以使用自己的时间比例和它指定时间是如何被映射到应用程序时间。
     enum class ControllerRepeatType
     {
         Clamp,
@@ -21,4 +21,4 @@ namespace Rendering
     };
 }
 
-#endif // RENDERING_CONTROLLERS_CONTROLLER_FLAGS_H
+#endif  // RENDERING_CONTROLLERS_CONTROLLER_FLAGS_H

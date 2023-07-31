@@ -38,6 +38,8 @@ namespace AncientBooks
         NODISCARD ConstDayBaseSharedPtr GetDay(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstDayBaseSharedPtr GetFirstDay(Function function) const;
 

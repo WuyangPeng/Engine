@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:05)
+///	版本：0.9.1.2 (2023/07/24 13:48)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,14 +20,21 @@
 #include "Mathematics/Algebra/AlgebraAggregate.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
+#include "Rendering/Resources/Flags/DataFormatType.h"
 
-Rendering::SkinControllerImpl::SkinControllerImpl(int numVertices, int numBones)
+Rendering::SkinControllerImpl::SkinControllerImpl(int numVertices, int numBones, const BaseRendererSharedPtr& baseRenderer)
     : numVertices{ numVertices },
       numBones{ numBones },
       size{ numVertices * numBones },
       bones(numBones),
       weights(size),
-      offsets(size)
+      offsets(size),
+      baseRenderer{ baseRenderer },
+      position{ -1 },
+      stride{},
+      firstUpdate{},
+      canUpdate{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -38,7 +45,12 @@ Rendering::SkinControllerImpl::SkinControllerImpl() noexcept
       size{ 0 },
       bones{},
       weights{},
-      offsets{}
+      offsets{},
+      baseRenderer{},
+      position{ -1 },
+      stride{},
+      firstUpdate{},
+      canUpdate{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -74,7 +86,7 @@ Rendering::ConstNodeSharedPtr Rendering::SkinControllerImpl::GetBones(int bonesI
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < numBones, "索引错误！");
 
-    return bones.at(bonesIndex).object;
+    return bones.at(bonesIndex).object.lock();
 }
 
 float Rendering::SkinControllerImpl::GetWeights(int bonesIndex, int verticesIndex) const
@@ -111,12 +123,16 @@ void Rendering::SkinControllerImpl::SetBones(int bonesIndex, const ConstNodeShar
     bones.at(bonesIndex).object = node;
 }
 
-void Rendering::SkinControllerImpl::SetBones(const std::vector<CoreTools::ConstObjectAssociated<Node>>& aBones)
+void Rendering::SkinControllerImpl::SetBones(const ConstObjectAssociatedContainer& aBones)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_2(boost::numeric_cast<int>(aBones.size()) == numBones, "传入的骨骼大小错误");
 
-    bones = aBones;
+    bones.clear();
+    for (const auto& element : aBones)
+    {
+        bones.emplace_back(element.object, element.associated);
+    }
 }
 
 void Rendering::SkinControllerImpl::SetWeights(int bonesIndex, int verticesIndex, float weight)
@@ -199,7 +215,11 @@ void Rendering::SkinControllerImpl::Save(CoreTools::BufferTarget& target) const
     target.Write(numVertices);
     target.Write(numBones);
 
-    target.WriteObjectAssociatedContainerWithNumber(bones);
+    for (const auto& element : bones)
+    {
+        target.WriteWeakObjectAssociated(element);
+    }
+
     target.WriteContainerWithNumber(weights);
     target.WriteAggregateContainerWithNumber(offsets);
 }
@@ -211,11 +231,17 @@ void Rendering::SkinControllerImpl::Load(CoreTools::BufferSource& source)
     source.Read(numVertices);
     source.Read(numBones);
     size = numVertices * numBones;
-    bones.resize(numBones);
+
     weights.resize(size);
     offsets.resize(size);
 
-    source.ReadObjectAssociatedContainer(numBones, bones);
+    std::vector<ConstObjectAssociated> objectAssociated{};
+    source.ReadObjectAssociatedContainer(numBones, objectAssociated);
+    for (const auto& element : objectAssociated)
+    {
+        bones.emplace_back(element.object, element.associated);
+    }
+
     weights = source.ReadVectorUseNumber<float>(size);
     source.ReadAggregateContainer(size, offsets);
 }
@@ -231,5 +257,97 @@ void Rendering::SkinControllerImpl::Register(CoreTools::ObjectRegister& target) 
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target.RegisterContainer(bones);
+    for (const auto& element : bones)
+    {
+        target.RegisterWeakPtr(element);
+    }
+}
+
+bool Rendering::SkinControllerImpl::Update(const VisualSharedPtr& visual)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    if (firstUpdate)
+    {
+        firstUpdate = false;
+        OnFirstUpdate(*visual);
+    }
+
+    if (canUpdate)
+    {
+        TransformF identity{};
+        identity.MakeIdentity();
+        visual->SetWorldTransform(identity);
+        visual->SetWorldTransformIsCurrent(true);
+
+        std::vector<Mathematics::Matrix<float>> worldTransforms(numBones);
+        for (auto bone = 0; bone < numBones; ++bone)
+        {
+            worldTransforms.at(bone) = bones.at(bone).object.lock()->GetWorldTransform().GetMatrix();
+        }
+
+        auto current = position;
+
+        const auto vertexBuffer = visual->GetVertexBuffer();
+
+        for (auto vertex = 0; vertex < numVertices; ++vertex)
+        {
+            std::array<float, 3> currentPosition{};
+            for (auto bone = 0; bone < numBones; ++bone)
+            {
+                if (const auto weight = weights.at(bone);
+                    !Mathematics::MathF::Approximate(weight, 0.0f))
+                {
+                    const auto& worldTransform = worldTransforms.at(bone);
+                    const auto& offset = offsets.at(bone);
+
+                    currentPosition.at(0) += weight * (worldTransform.GetValue<0>() * offset[0] + worldTransform.GetValue<1>() * offset[1] + worldTransform.GetValue<2>() * offset[2] + worldTransform.GetValue<3>());
+                    currentPosition.at(1) += weight * (worldTransform.GetValue<4>() * offset[0] + worldTransform.GetValue<5>() * offset[1] + worldTransform.GetValue<6>() * offset[2] + worldTransform.GetValue<7>());
+                    currentPosition.at(2) += weight * (worldTransform.GetValue<8>() * offset[0] + worldTransform.GetValue<9>() * offset[1] + worldTransform.GetValue<10>() * offset[2] + worldTransform.GetValue<11>());
+                }
+            }
+
+            auto target = vertexBuffer->GetData(current);
+            target.Increase(currentPosition.at(0));
+            target.Increase(currentPosition.at(1));
+            target.Increase(currentPosition.at(2));
+
+            current += stride;
+        }
+
+        visual->UpdateModelBound();
+        visual->UpdateModelNormals();
+
+        return baseRenderer.lock()->Update(visual->GetVertexBuffer());
+    }
+
+    return false;
+}
+
+void Rendering::SkinControllerImpl::OnFirstUpdate(Visual& visual)
+{
+    if (const auto vertexBuffer = visual.GetVertexBuffer();
+        numVertices == vertexBuffer->GetNumElements())
+    {
+        const auto vertexFormat = vertexBuffer->GetFormat();
+        const auto numAttributes = vertexFormat.GetNumAttributes();
+        for (auto i = 0; i < numAttributes; ++i)
+        {
+            const auto semantic = vertexFormat.GetAttributeUsage(i);
+            const auto type = vertexFormat.GetAttributeType(i);
+            const auto unit = vertexFormat.GetUsageIndex(i);
+            const auto offset = vertexFormat.GetOffset(i);
+
+            if (semantic == VertexFormatFlags::Semantic::Position &&
+                (type == DataFormatType::R32G32B32Float || type == DataFormatType::R32G32B32A32Float))
+            {
+                position = offset;
+                stride = vertexFormat.GetStride();
+                canUpdate = true;
+                break;
+            }
+        }
+    }
+
+    canUpdate = (position != -1);
 }

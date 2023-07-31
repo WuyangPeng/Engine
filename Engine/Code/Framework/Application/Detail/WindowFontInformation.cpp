@@ -31,7 +31,7 @@ bool Framework::WindowFontInformation::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-int Framework::WindowFontInformation::GetStringWidth(const String& text) const noexcept
+int Framework::WindowFontInformation::GetStringWidth(const String& text) const  
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 

@@ -81,7 +81,7 @@ void System::AccessCheckByTypeResultListTesting::GetAccessCheckTest(FileHandleDe
     WindowsDWord privilegeLength{ sizeof(privileges) };
     WindowsDWord grantedAccessList{ 0 };
     WindowsDWord accessStatusList{ 0 };
-    SystemGUID objectType = { 0 };
+    SystemGloballyUniqueIdentifier objectType = { 0 };
     SecurityObjectTypeList objectTypeList{ 0, 1, &objectType };
 
     auto sid = GetSecuritySID();

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.4 (2023/03/17 17:22)
+///	版本：0.9.1.2 (2023/07/28 14:48)
 
 #include "Helper.h"
 #include "System/Helper/Tools.h"
@@ -14,7 +14,7 @@
 
 CORE_TOOLS_MUTEX_EXTERN(MainFuction);
 
-MainFuction::Helper::Helper(int argc, char** argv)
+MainFunction::Helper::Helper(int argc, char** argv)
 {
     System::UnusedFunction(argc, argv);
 
@@ -23,7 +23,7 @@ MainFuction::Helper::Helper(int argc, char** argv)
     dllMutex.Initialize();
 }
 
-MainFuction::Helper::~Helper() noexcept
+MainFunction::Helper::~Helper() noexcept
 {
     EXCEPTION_TRY
     {
@@ -34,7 +34,7 @@ MainFuction::Helper::~Helper() noexcept
     EXCEPTION_ALL_CATCH(CoreTools)
 }
 
-int MainFuction::Helper::Run()
+int MainFunction::Helper::Run()
 {
     auto& dllMutex = GetMainFuctionMutex();
 

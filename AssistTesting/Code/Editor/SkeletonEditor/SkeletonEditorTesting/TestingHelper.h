@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助测试版本：0.9.0.12 (2023/06/15 14:46)
+///	版本：0.9.1.2 (2023/07/31 19:29)
 
 #ifndef SKELETON_EDITOR_TESTING_HELPER_H
 #define SKELETON_EDITOR_TESTING_HELPER_H
@@ -16,7 +16,7 @@
 
 namespace SkeletonEditor
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
     public:
         using ClassType = TestingHelper;

@@ -324,7 +324,11 @@
     </Link>
     <PreBuildEvent>
       <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
@@ -361,7 +365,11 @@ xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTes
     </Link>
     <PreBuildEvent>
       <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -380,7 +388,11 @@ xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTes
     </Link>
     <PreBuildEvent>
       <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|Win32'">
@@ -429,7 +441,11 @@ xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTes
     </Link>
     <PreBuildEvent>
       <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -444,7 +460,11 @@ xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTes
     </Link>
     <PreBuildEvent>
       <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
@@ -481,7 +501,11 @@ xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTes
     </Link>
     <PreBuildEvent>
       <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>  
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -500,7 +524,11 @@ xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTes
     </Link>
     <PreBuildEvent>
       <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticRelease|x64'">
@@ -549,7 +577,11 @@ xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTes
     </Link>
     <PreBuildEvent>
       <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(MillenniumHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(RiseOfHistoryTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

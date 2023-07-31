@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.9.0.12 (2023/06/16 16:51)
+///	版本：0.9.1.2 (2023/07/25 15:54)
 
 #include "Interface/InterfaceExport.h"
 
@@ -14,7 +14,7 @@
 
 Interface::Placeholder::Placeholder() noexcept
 {
-    ACTIVITY_SELF_CLASS_IS_VALID_9;
+    INTERFACE_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Interface, Placeholder)

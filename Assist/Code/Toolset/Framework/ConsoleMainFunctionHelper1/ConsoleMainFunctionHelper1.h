@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 15:30)
+///	版本：0.9.1.2 (2023/07/28 14:32)
 
 #ifndef CONSOLE_MAIN_FUNCTION_HELPER1_H
 #define CONSOLE_MAIN_FUNCTION_HELPER1_H

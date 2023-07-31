@@ -5,17 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏测试版本：0.9.0.12 (2023/06/17 11:23)
+///	版本：0.9.1.2 (2023/07/27 14:46)
 
 #ifndef QUEST_TESTING_HELPER_H
 #define QUEST_TESTING_HELPER_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 
 namespace Quest
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
     public:
         using ClassType = TestingHelper;

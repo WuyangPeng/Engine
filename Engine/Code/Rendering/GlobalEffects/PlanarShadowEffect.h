@@ -22,6 +22,8 @@
 #include "Rendering/Shaders/ShadersFwd.h"
 #include "Rendering/State/StateFwd.h"
 
+#include <vector>
+
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(PlanarShadowEffect, PlanarShadowEffectImpl);
 
 namespace Rendering

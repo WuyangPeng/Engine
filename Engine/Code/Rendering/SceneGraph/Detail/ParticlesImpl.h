@@ -35,18 +35,18 @@ namespace Rendering
         // 元素的粒子数量的是1/4 vertexbuffer元素的个数。
         // 索引缓冲区是自动生成的。
         // 'positionSizes'包含位置在开始的三元组和大小在第四元组。
-        ParticlesImpl(const std::vector<APoint>& positions, const std::vector<float>& sizes, float sizeAdjust);
+        ParticlesImpl(const std::vector<Mathematics::Vector4F>& positions, const std::vector<float>& sizes, float sizeAdjust);
         ParticlesImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD int GetNumParticles() const;
-        NODISCARD APoint GetParticlesPosition(int index) const;
+        NODISCARD Mathematics::Vector4F GetParticlesPosition(int index) const;
         NODISCARD float GetSize(int index) const;
         void SetSizeAdjust(float aSizeAdjust);
         NODISCARD float GetSizeAdjust() const noexcept;
 
-        void SetPosition(int index, const APoint& position);
+        void SetPosition(int index, const Mathematics::Vector4F& position);
         void SetSize(int index, float size);
 
         NODISCARD float GetTrueSize(int index) const;
@@ -60,7 +60,7 @@ namespace Rendering
         NODISCARD int GetStreamingSize() const;
 
     private:
-        std::vector<APoint> positions;
+        std::vector<Mathematics::Vector4F> positions;
         std::vector<float> sizes;
         float sizeAdjust;
         int numActive;

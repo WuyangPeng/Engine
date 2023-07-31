@@ -33,6 +33,6 @@ void System::PeekMessageTesting::MainTest()
 
 void System::PeekMessageTesting::PeekMessageTest() noexcept
 {
-    WindowsMsg msg{};
+    WindowsMessage msg{};
     MAYBE_UNUSED const auto result = PeekSystemMessage(&msg, hwnd);
 }

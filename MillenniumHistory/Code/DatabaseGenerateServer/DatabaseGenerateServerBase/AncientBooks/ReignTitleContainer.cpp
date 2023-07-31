@@ -9,6 +9,7 @@
 
 #include "ReignTitle.h"
 #include "ReignTitleContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::ReignTitleContainer::Container AncientBooks::ReignTitleContainer::
     USER_CLASS_IS_VALID_CONST_9;
 
     return reignTitle;
+}
+
+int AncientBooks::ReignTitleContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(reignTitle.size());
 }
 

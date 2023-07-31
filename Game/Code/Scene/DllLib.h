@@ -12,8 +12,7 @@
 
 #include "Helper/UserMacro.h"
 
-#include "System/SystemLib.h"
-#include "CoreTools/CoreToolsLib.h"
+#include "ThreadingCoreRenderEngine/ThreadingCoreRenderEngineLib.h"
 
 #if defined(TCRE_USE_MSVC)
 

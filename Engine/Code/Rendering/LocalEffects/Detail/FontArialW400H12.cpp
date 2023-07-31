@@ -13,8 +13,8 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::FontArialW400H12::FontArialW400H12(ProgramFactory& factory, int maxMessageLength)
-    : ParentType{ factory, width, height, GetTexels(), GetCharacterDataType(), maxMessageLength }
+Rendering::FontArialW400H12::FontArialW400H12(ProgramFactory& factory, const std::string& shaderExtendName, int maxMessageLength)
+    : ParentType{ factory, shaderExtendName, width, height, GetTexels(), GetCharacterDataType(), maxMessageLength }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

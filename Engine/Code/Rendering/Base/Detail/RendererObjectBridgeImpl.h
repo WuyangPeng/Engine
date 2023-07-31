@@ -39,6 +39,7 @@ namespace Rendering
         NODISCARD RendererObjectSharedPtr GetRendererObject(const GraphicsObjectSharedPtr& graphicsObject);
         NODISCARD ConstRendererObjectSharedPtr GetRendererObject(const GraphicsObjectSharedPtr& graphicsObject) const;
         NODISCARD TotalAllocation GetTotalAllocation() const;
+        void Release() noexcept;
 
     private:
         using RendererObjectContainer = std::map<GraphicsObjectSharedPtr, RendererObjectSharedPtr>;

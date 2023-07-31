@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:01)
+///	版本：0.9.1.2 (2023/07/24 13:46)
 
 #ifndef RENDERING_CONTROLLERS_SKIN_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_SKIN_CONTROLLER_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "CoreTools/ObjectSystems/ConstObjectAssociated.h"
+#include "CoreTools/ObjectSystems/ConstWeakObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Rendering/DataTypes/Bound.h"
@@ -26,11 +26,16 @@ namespace Rendering
     {
     public:
         using ClassType = SkinControllerImpl;
+
         using APoint = Mathematics::APointF;
+        using BaseRendererWeakPtr = std::weak_ptr<BaseRenderer>;
+        using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
+        using ConstObjectAssociated = CoreTools::ConstObjectAssociated<Node>;
+        using ConstObjectAssociatedContainer = std::vector<ConstObjectAssociated>;
 
     public:
         // 顶点和骨骼的数目在对象的生存期是固定的。
-        SkinControllerImpl(int numVertices, int numBones);
+        SkinControllerImpl(int numVertices, int numBones, const BaseRendererSharedPtr& baseRenderer);
         SkinControllerImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -48,7 +53,7 @@ namespace Rendering
         void SetWeights(int bonesIndex, int verticesIndex, float weight);
         void SetOffsets(int bonesIndex, int verticesIndex, const APoint& offset);
 
-        void SetBones(const std::vector<CoreTools::ConstObjectAssociated<Node>>& aBones);
+        void SetBones(const ConstObjectAssociatedContainer& aBones);
         void SetWeights(int bonesIndex, const std::vector<float>& weight);
         void SetOffsets(int bonesIndex, const std::vector<APoint>& offset);
 
@@ -58,13 +63,27 @@ namespace Rendering
         void Link(CoreTools::ObjectLink& source);
         void Register(CoreTools::ObjectRegister& target) const;
 
+        NODISCARD bool Update(const VisualSharedPtr& visual);
+
     private:
-        int numVertices;  // nv
-        int numBones;  // nb
+        using ConstWeakObjectAssociated = CoreTools::ConstWeakObjectAssociated<Node>;
+
+    private:
+        void OnFirstUpdate(Visual& visual);
+
+    private:
+        int numVertices;
+        int numBones;
         int size;
-        std::vector<CoreTools::ConstObjectAssociated<Node>> bones;  // bones[nb]
-        std::vector<float> weights;  // weight[nb][nv], 索引 v + nv * b
-        std::vector<APoint> offsets;  // offset[nb][nv], 索引 v + nv * b
+        std::vector<ConstWeakObjectAssociated> bones;  // bones[numBones]
+        std::vector<float> weights;  // weight[numBones][numVertices], 索引 vertex + numVertices * bone
+        std::vector<APoint> offsets;  // offset[numBones][numVertices], 索引 vertex + numVertices * bone
+
+        BaseRendererWeakPtr baseRenderer;
+        int position;
+        int stride;
+        bool firstUpdate;
+        bool canUpdate;
     };
 }
 

@@ -36,6 +36,8 @@ namespace Rendering
     class TextEffect;
     class Texture2DEffect;
     class Texture3DEffect;
+    class VertexColorEffect;
+    class VolumeFogEffect;
 
     enum class FontType;
     enum class LightType;

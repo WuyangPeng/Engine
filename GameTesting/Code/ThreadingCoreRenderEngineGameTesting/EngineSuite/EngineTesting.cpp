@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏测试版本：0.9.0.12 (2023/06/17 11:13)
+///	版本：0.9.1.2 (2023/07/25 20:14)
 
 #include "EngineTesting.h"
 #include "System/Threading/Process.h"
@@ -36,9 +36,8 @@ void ThreadingCoreRenderEngineGame::EngineTesting::MainTest()
 {
     CoreTools::Directory directory{ System::GetEngineeringDirectory() };
 
-    const auto isStreamSharedFile = IsStreamSharedFile();
-
-    if (!isStreamSharedFile)
+    if (const auto isStreamSharedFile = IsStreamSharedFile();
+        !isStreamSharedFile)
     {
         ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(EngineTest);
     }
@@ -48,7 +47,7 @@ bool ThreadingCoreRenderEngineGame::EngineTesting::EngineTest()
 {
     engineTestingName.PrintSelect(GetStream());
 
-    auto select = System::GetSystemInput<int>();
+    const auto select = System::GetSystemInput<int>();
 
     return ExecuteEngineTesting(select);
 }

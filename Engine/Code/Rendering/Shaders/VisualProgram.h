@@ -64,6 +64,7 @@ namespace Rendering
         void Register(ObjectRegister& target) const;
 
         NODISCARD Reflection GetReflector() const;
+        NODISCARD OpenGLUInt GetProgramHandle() const;
 
     private:
         explicit VisualProgram(CoreTools::DisableNotThrow disableNotThrow);

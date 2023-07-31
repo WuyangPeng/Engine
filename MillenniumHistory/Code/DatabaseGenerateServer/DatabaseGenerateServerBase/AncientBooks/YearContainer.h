@@ -38,6 +38,8 @@ namespace AncientBooks
         NODISCARD ConstYearBaseSharedPtr GetYear(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstYearBaseSharedPtr GetFirstYear(Function function) const;
 

@@ -166,6 +166,10 @@ void Rendering::Visual::SetEffect(MAYBE_UNUSED const std::shared_ptr<VisualEffec
 {
 }
 
+void Rendering::Visual::SetWorldTransformIsCurrent(MAYBE_UNUSED bool cond) noexcept
+{
+}
+
 void Rendering::Visual::UpdateWorldBound()
 {
     const auto worldTransform = GetWorldTransform();
@@ -177,6 +181,10 @@ void Rendering::Visual::UpdateWorldBound()
 void Rendering::Visual::UpdateModelBound()
 {
     impl->UpdateModelBound();
+}
+
+void Rendering::Visual::UpdateModelNormals() noexcept
+{
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual, ComputeBounding, std::vector<APoint>, void)

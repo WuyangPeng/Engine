@@ -28,7 +28,7 @@ namespace DatabaseGenerateServerCore
         using DatabaseFlushSharedPtr = std::shared_ptr<DatabaseFlush>;
 
     public:
-        explicit AncientBooksDatabaseSaveImpl(const DatabaseFlushSharedPtr& databaseFlush) noexcept;
+        explicit AncientBooksDatabaseSaveImpl(const DatabaseFlushSharedPtr& databaseFlush);
 
         CLASS_INVARIANT_DECLARE;
 

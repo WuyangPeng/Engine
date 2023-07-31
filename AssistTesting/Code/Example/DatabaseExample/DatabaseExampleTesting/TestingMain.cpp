@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助测试版本：0.9.0.9 (2023/05/25 11:32)
+///	版本：0.9.1.2 (2023/07/31 18:21)
 
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "Example/DatabaseExample/DatabaseExampleTesting/TestingHelper.h"

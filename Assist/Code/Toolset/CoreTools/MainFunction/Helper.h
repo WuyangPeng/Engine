@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.4 (2023/03/17 17:22)
+///	版本：0.9.1.2 (2023/07/28 14:48)
 
-#ifndef MAIN_FUCTION_HELPER_H
-#define MAIN_FUCTION_HELPER_H
+#ifndef MAIN_FUNCTION_HELPER_H
+#define MAIN_FUNCTION_HELPER_H
 
 #include "System/Helper/ConfigMacro.h"
 
-namespace MainFuction
+namespace MainFunction
 {
     class Helper final
     {
@@ -31,4 +31,4 @@ namespace MainFuction
     };
 }
 
-#endif  // MAIN_FUCTION_HELPER_H
+#endif  // MAIN_FUNCTION_HELPER_H

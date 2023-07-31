@@ -64,3 +64,10 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, GetConstObjectB
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, GetAllConstObjectsByName, std::string, Rendering::VisualProgram::ConstObjectSharedPtrContainer)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualProgram, GetReflector, Rendering::Reflection)
+
+Rendering::VisualProgram::OpenGLUInt Rendering::VisualProgram::GetProgramHandle() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetProgramHandle();
+}

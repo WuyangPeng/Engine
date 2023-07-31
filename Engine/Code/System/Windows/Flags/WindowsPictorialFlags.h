@@ -22,9 +22,9 @@ namespace System
     enum class WindowsBrushTypes : uint32_t
     {
         WhiteBrush = WHITE_BRUSH,
-        LtgrayBrush = LTGRAY_BRUSH,
+        LightGrayBrush = LTGRAY_BRUSH,
         GrayBrush = GRAY_BRUSH,
-        DkgrayBrush = DKGRAY_BRUSH,
+        DarkGrayBrush = DKGRAY_BRUSH,
         BlackBrush = BLACK_BRUSH,
         NullBrush = NULL_BRUSH,
         Null = 0xFFFFFFFF,
@@ -35,9 +35,9 @@ namespace System
     enum class WindowsBrushTypes : uint32_t
     {
         WhiteBrush = 0,
-        LtgrayBrush = 1,
+        LightGrayBrush = 1,
         GrayBrush = 2,
-        DkgrayBrush = 3,
+        DarkGrayBrush = 3,
         BlackBrush = 4,
         NullBrush = 5,
         Null = 0xFFFFFFFF,

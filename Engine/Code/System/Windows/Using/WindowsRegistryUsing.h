@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/20 11:36)
+///	版本：0.9.1.2 (2023/07/22 17:16)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_REGISTRY_USING_H
 #define SYSTEM_WINDOWS_WINDOWS_REGISTRY_USING_H
@@ -27,7 +27,7 @@ namespace System
     static const SystemHKey gUsers{ HKEY_USERS };
     static const SystemHKey gPerformanceData{ HKEY_PERFORMANCE_DATA };
     static const SystemHKey gPerformanceText{ HKEY_PERFORMANCE_TEXT };
-    static const SystemHKey gPerformanceNlstext{ HKEY_PERFORMANCE_NLSTEXT };
+    static const SystemHKey gPerformanceNaturalLanguageSpeechText{ HKEY_PERFORMANCE_NLSTEXT };
     static const SystemHKey gCurrentConfig{ HKEY_CURRENT_CONFIG };
     static const SystemHKey gDynData{ HKEY_DYN_DATA };
     static const SystemHKey gCurrentUserLocalSettings{ HKEY_CURRENT_USER_LOCAL_SETTINGS };
@@ -45,14 +45,14 @@ namespace System
     static const TChar* gSizeNs{ IDC_SIZENS };
     static const TChar* gSizeAll{ IDC_SIZEALL };
     static const TChar* gNo{ IDC_NO };
-    static const TChar* gIDCHand{ IDC_HAND };
+    static const TChar* gIdcHand{ IDC_HAND };
     static const TChar* gAppStarting{ IDC_APPSTARTING };
     static const TChar* gHelp{ IDC_HELP };
     static const TChar* gPin{ IDC_PIN };
     static const TChar* gPerson{ IDC_PERSON };
 
     static const TChar* gApplication{ IDI_APPLICATION };
-    static const TChar* gIDIHand{ IDI_HAND };
+    static const TChar* gIdiHand{ IDI_HAND };
     static const TChar* gQuestion{ IDI_QUESTION };
     static const TChar* gExclamation{ IDI_EXCLAMATION };
     static const TChar* gAsterisk{ IDI_ASTERISK };
@@ -82,7 +82,7 @@ namespace System
     static const SystemHKey gUsers{ 0x80000003 };
     static const SystemHKey gPerformanceData{ 0x80000004 };
     static const SystemHKey gPerformanceText{ 0x80000050 };
-    static const SystemHKey gPerformanceNlstext{ 0x80000060 };
+    static const SystemHKey gPerformanceNaturalLanguageSpeechText{ 0x80000060 };
     static const SystemHKey gCurrentConfig{ 0x80000005 };
     static const SystemHKey gDynData{ 0x80000006 };
     static const SystemHKey gCurrentUserLocalSettings{ 0x80000007 };
@@ -100,14 +100,14 @@ namespace System
     static const TChar* gSizeNs{ SYSTEM_TEXT("IDC_SIZENS") };
     static const TChar* gSizeAll{ SYSTEM_TEXT("IDC_SIZEALL") };
     static const TChar* gNo{ SYSTEM_TEXT("IDC_NO") };
-    static const TChar* gIDCHand{ SYSTEM_TEXT("IDC_HAND") };
+    static const TChar* gIdcHand{ SYSTEM_TEXT("IDC_HAND") };
     static const TChar* gAppStarting{ SYSTEM_TEXT("IDC_APPSTARTING") };
     static const TChar* gHelp{ SYSTEM_TEXT("IDC_HELP") };
     static const TChar* gPin{ SYSTEM_TEXT("IDC_PIN") };
     static const TChar* gPerson{ SYSTEM_TEXT("IDC_PERSON") };
 
     static const TChar* gApplication{ SYSTEM_TEXT("IDI_APPLICATION") };
-    static const TChar* gIDIHand{ SYSTEM_TEXT("IDI_HAND") };
+    static const TChar* gIdiHand{ SYSTEM_TEXT("IDI_HAND") };
     static const TChar* gQuestion{ SYSTEM_TEXT("IDI_QUESTION") };
     static const TChar* gExclamation{ SYSTEM_TEXT("IDI_EXCLAMATION") };
     static const TChar* gAsterisk{ SYSTEM_TEXT("IDI_ASTERISK") };

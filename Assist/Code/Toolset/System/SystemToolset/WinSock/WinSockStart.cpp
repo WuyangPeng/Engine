@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.1.3 (2022/10/27 23:45)
+///	版本：0.9.1.2 (2023/07/28 10:18)
 
 #include "Toolset/System/SystemToolset/SystemToolsetExport.h"
 
@@ -66,9 +66,9 @@ void SystemToolset::WinSockStart::WinSockStartUp()
     System::WinSockData wsaData{};
 
     constexpr auto versionRequested = System::MakeWord(2, 2);
-    const auto startUp = System::WinSockStartUp(versionRequested, &wsaData);
 
-    if (startUp != System::WinSockStartUpReturn::Successful)
+    if (const auto startUp = System::WinSockStartUp(versionRequested, &wsaData);
+        startUp != System::WinSockStartUpReturn::Successful)
     {
         throw std::runtime_error("StartUp 失败。\n");
     }

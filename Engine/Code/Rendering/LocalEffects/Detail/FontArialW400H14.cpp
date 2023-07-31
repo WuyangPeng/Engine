@@ -12,8 +12,8 @@
 #include "FontArialW400H14.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::FontArialW400H14::FontArialW400H14(ProgramFactory& factory, int maxMessageLength)
-    : ParentType{ factory, width, height, GetTexels(), GetCharacterDataType(), maxMessageLength }
+Rendering::FontArialW400H14::FontArialW400H14(ProgramFactory& factory, const std::string& shaderExtendName, int maxMessageLength)
+    : ParentType{ factory, shaderExtendName, width, height, GetTexels(), GetCharacterDataType(), maxMessageLength }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

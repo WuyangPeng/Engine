@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.9.0.12 (2023/06/16 13:21)
+///	版本：0.9.1.2 (2023/07/25 16:57)
 
 #ifndef USER_INFO_HELPER_USER_HELPER_H
 #define USER_INFO_HELPER_USER_HELPER_H
@@ -13,8 +13,13 @@
 #include "System/Helper/ConfigMacro.h"
 #include "CoreTools/Helper/UserMacro.h"
 
-#define CLOSE_USE_XXX (0x01)
-#define CLOSE_USER_INFO_MAX (((CLOSE_USE_XXX) << 1) - 1)
+#define USER_INFO_CLOSE_BEGIN (0x01)
+
+#define CLOSE_USE_USER_INFO (USER_INFO_CLOSE_BEGIN)
+
+#define USER_INFO_CLOSE_END CLOSE_USE_USER_INFO
+
+#define CLOSE_USER_INFO_MAX (((USER_INFO_CLOSE_END) << 1) - 1)
 
 // 编译测试（默认为0，最大值为0x01）
 #define COMPILE_USER_INFO_CLOSE 0x00
@@ -22,9 +27,9 @@
 static_assert(0 <= COMPILE_USER_INFO_CLOSE, "COMPILE_USER_INFO_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_USER_INFO_CLOSE <= CLOSE_USER_INFO_MAX, "COMPILE_USER_INFO_CLOSE Must be less than or equal CLOSE_USER_INFO_MAX.");
 
-#if !defined(COMPILE_USER_INFO_CLOSE) || (COMPILE_USER_INFO_CLOSE & CLOSE_USE_XXX) != CLOSE_USE_XXX
+#if !defined(COMPILE_USER_INFO_CLOSE) || (COMPILE_USER_INFO_CLOSE & CLOSE_USE_USER_INFO) != CLOSE_USE_USER_INFO
 
-#endif  // !defined(COMPILE_USER_INFO_CLOSE) || (COMPILE_USER_INFO_CLOSE & CLOSE_USE_XXX) != CLOSE_USE_XXX
+#endif  // !defined(COMPILE_USER_INFO_CLOSE) || (COMPILE_USER_INFO_CLOSE & CLOSE_USE_USER_INFO) != CLOSE_USE_USER_INFO
 
 #ifdef BUILDING_GAME_STATIC
 

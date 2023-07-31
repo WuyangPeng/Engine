@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:02)
+///	版本：0.9.1.2 (2023/07/24 19:35)
 
 #ifndef RENDERING_CONTROLLERS_MORPH_CONTROLLER_H
 #define RENDERING_CONTROLLERS_MORPH_CONTROLLER_H
@@ -16,6 +16,7 @@
 #include "ControllerKeyInfo.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(MorphController, MorphControllerImpl);
 
@@ -28,6 +29,7 @@ namespace Rendering
         using ParentType = Controller;
         using AVector = Mathematics::AVectorF;
         using APoint = Mathematics::APointF;
+        using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
 
     public:
         // 顶点的数目，变形的目标，被固定对象的生存期的键。
@@ -40,7 +42,7 @@ namespace Rendering
 
         // numKeys:  键的数目，每个键发生在一个特定的时间。
 
-        MorphController(int numVertices, int numTargets, int numKeys);
+        MorphController(int numVertices, int numTargets, int numKeys, const BaseRendererSharedPtr& baseRenderer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -60,8 +62,7 @@ namespace Rendering
 
         // 动画更新。应用程序时间以毫秒为单位。
         NODISCARD bool Update(double applicationTime) override;
-        void SetObject(ControllerInterface* object) override;
-        void SetObjectInCopy(ControllerInterface* object) override;
+        void SetControllerObject(const ControllerInterfaceSharedPtr& object) override;
 
         NODISCARD ControllerInterfaceSharedPtr Clone() const override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;

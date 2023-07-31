@@ -113,3 +113,8 @@ System::OpenGLUInt System::GetGLProgramResourceIndex(OpenGLUInt program, Program
 {
     return GLGetProgramResourceIndex(program, EnumCastUnderlying(programInterface), name);
 }
+
+void System::SetUseProgram(OpenGLUInt program) noexcept
+{
+    GLUseProgram(program);
+}

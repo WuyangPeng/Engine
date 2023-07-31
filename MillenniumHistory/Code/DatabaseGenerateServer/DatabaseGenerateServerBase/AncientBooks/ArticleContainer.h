@@ -38,6 +38,8 @@ namespace AncientBooks
         NODISCARD ConstArticleBaseSharedPtr GetArticle(int64_t key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstArticleBaseSharedPtr GetFirstArticle(Function function) const;
 

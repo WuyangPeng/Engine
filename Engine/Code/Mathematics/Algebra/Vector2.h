@@ -86,6 +86,7 @@ namespace Mathematics
         void RobustNormalize(Real epsilon = Math::GetZeroTolerance()) noexcept(gAssert < 1 || gMathematicsAssert < 1);
 
         NODISCARD bool IsNormalize(Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD Vector2 GetNormalize(Real epsilon = Math::GetZeroTolerance()) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
 
         NODISCARD const Real& operator[](int index) const;
         NODISCARD Real& operator[](int index);

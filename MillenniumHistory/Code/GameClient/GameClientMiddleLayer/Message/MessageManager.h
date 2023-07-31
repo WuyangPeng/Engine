@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.12 (2023/06/13 22:01)
+///	版本：0.9.1.2 (2023/07/25 19:50)
 
 #ifndef GAME_CLIENT_MIDDLE_LAYER_MESSAGE_MIDDLE_LAYER_MESSAGE_H
 #define GAME_CLIENT_MIDDLE_LAYER_MESSAGE_MIDDLE_LAYER_MESSAGE_H
@@ -21,7 +21,7 @@ namespace GameClientMiddleLayer
     {
     public:
         using ClassType = MessageManager;
-        using ParentType = Framework::MessageManagerInterface;
+        using ParentType = MessageManagerInterface;
 
         using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
         using EnvironmentDirectory = Framework::EnvironmentDirectory;

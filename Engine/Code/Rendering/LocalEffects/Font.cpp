@@ -17,8 +17,8 @@
 
 COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Rendering, Font)
 
-Rendering::Font::Font(FontType fontType, ProgramFactory& factory, int maxMessageLength)
-    : impl{ CoreTools::ImplCreateUseFactory::Default, fontType, factory, maxMessageLength }
+Rendering::Font::Font(FontType fontType, ProgramFactory& factory, const std::string& shaderExtendName, int maxMessageLength)
+    : impl{ CoreTools::ImplCreateUseFactory::Default, fontType, factory, shaderExtendName, maxMessageLength }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

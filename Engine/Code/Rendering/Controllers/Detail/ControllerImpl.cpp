@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:04)
+///	版本：0.9.1.2 (2023/07/24 10:55)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,7 +18,14 @@
 #include "Rendering/Controllers/ControllerInterface.h"
 
 Rendering::ControllerImpl::ControllerImpl() noexcept
-    : controllerRepeat{ ControllerRepeatType::Clamp }, controllerMinTime{ 0.0 }, controllerMaxTime{ 0.0 }, controllerPhase{ 0.0 }, controllerFrequency{ 1.0 }, controllerActive{ true }, controllerApplicationTime{ -Mathematics::MathD::maxReal }
+    : controllerRepeat{ ControllerRepeatType::Clamp },
+      controllerMinTime{ 0.0 },
+      controllerMaxTime{ 0.0 },
+      controllerPhase{ 0.0 },
+      controllerFrequency{ 1.0 },
+      controllerActive{ true },
+      controllerApplicationTime{ -Mathematics::MathD::maxReal },
+      controllerInterface{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -84,11 +91,11 @@ double Rendering::ControllerImpl::GetControlTime(double applicationTime)
         return controlTime;
     }
 
-    const auto timeRange = controllerMaxTime - controllerMinTime;
-    if (0.0 < timeRange)
+    if (const auto timeRange = controllerMaxTime - controllerMinTime;
+        0.0 < timeRange)
     {
         const auto multiples = (controlTime - controllerMinTime) / timeRange;
-        auto integerTime = Math::Floor(multiples);
+        const auto integerTime = Math::Floor(multiples);
         const auto fractionTime = multiples - integerTime;
         if (controllerRepeat == ControllerRepeatType::Wrap)
         {
@@ -96,7 +103,7 @@ double Rendering::ControllerImpl::GetControlTime(double applicationTime)
         }
 
         // controllerRepeat == ControllerRepeatType::ClampCycle
-        if (boost::numeric_cast<int>(integerTime) & 1)
+        if ((boost::numeric_cast<int>(integerTime) & 1) != 0)
         {
             // 时间向后走。
             return controllerMaxTime - fractionTime * timeRange;
@@ -228,4 +235,39 @@ int Rendering::ControllerImpl::GetStreamingSize() const noexcept
     size += CoreTools::GetStreamSize(controllerActive);
 
     return size;
+}
+
+void Rendering::ControllerImpl::SetObject(const ControllerInterfaceSharedPtr& object) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    controllerInterface = object;
+}
+
+Rendering::ControllerImpl::ConstControllerInterfaceSharedPtr Rendering::ControllerImpl::GetControllerObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto result = controllerInterface.lock();
+
+    if (!result)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("ControllerObject 已释放"))
+    }
+
+    return result;
+}
+
+Rendering::ControllerImpl::ControllerInterfaceSharedPtr Rendering::ControllerImpl::GetControllerObject()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    auto result = controllerInterface.lock();
+
+    if (!result)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("ControllerObject 已释放"))
+    }
+
+    return result;
 }

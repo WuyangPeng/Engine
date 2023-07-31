@@ -47,3 +47,8 @@ Database::DatabaseFlushImpl::ResultContainer Database::NullDatabaseFlush::Select
 
     return ResultContainer{};
 }
+
+void Database::NullDatabaseFlush::Wait() noexcept
+{
+    DATABASE_CLASS_IS_VALID_9;
+}

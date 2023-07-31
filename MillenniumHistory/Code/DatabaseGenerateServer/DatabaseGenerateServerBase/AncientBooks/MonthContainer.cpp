@@ -9,6 +9,7 @@
 
 #include "Month.h"
 #include "MonthContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::MonthContainer::Container AncientBooks::MonthContainer::GetContain
     USER_CLASS_IS_VALID_CONST_9;
 
     return month;
+}
+
+int AncientBooks::MonthContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(month.size());
 }
 

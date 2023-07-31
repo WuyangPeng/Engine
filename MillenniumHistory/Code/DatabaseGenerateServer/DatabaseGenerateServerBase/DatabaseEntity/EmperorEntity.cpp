@@ -579,6 +579,14 @@ DatabaseEntity::EmperorEntity::BasisDatabaseManager DatabaseEntity::EmperorEntit
                                  GetKeyBasisDatabaseContainer(id) };
 }
 
+DatabaseEntity::EmperorEntity::BasisDatabaseManager DatabaseEntity::EmperorEntity::GetSelectAll(WrappersStrategy wrappersStrategy)
+{
+    return BasisDatabaseManager{ wrappersStrategy,
+                                 databaseName,
+                                 Database::ChangeType::Select,
+                                 BasisDatabaseContainer::Create() };
+}
+
 Database::BasisDatabaseContainer DatabaseEntity::EmperorEntity::GetKeyBasisDatabaseContainer(Database::Traits::ParamType::Int32 id)
 {
     BasisDatabaseContainer basisDatabaseContainer{ BasisDatabaseContainer::ObjectContainer{ Database::BasisDatabase{ idDescribe, id } } };

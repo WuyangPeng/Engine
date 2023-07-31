@@ -9,6 +9,7 @@
 
 #include "Calendar.h"
 #include "CalendarContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::CalendarContainer::Container AncientBooks::CalendarContainer::GetC
     USER_CLASS_IS_VALID_CONST_9;
 
     return calendar;
+}
+
+int AncientBooks::CalendarContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(calendar.size());
 }
 

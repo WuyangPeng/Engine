@@ -55,6 +55,7 @@ namespace DatabaseEntity
 
         NODISCARD static const DatabaseFieldContainer& GetDatabaseFieldContainer();
         NODISCARD static BasisDatabaseManager GetSelect(Database::WrappersStrategy wrappersStrategy, Database::Traits::ParamType::Int32 id);
+        NODISCARD static BasisDatabaseManager GetSelectAll(Database::WrappersStrategy wrappersStrategy);
 
         NODISCARD static constexpr std::string_view GetDatabaseName()
         {

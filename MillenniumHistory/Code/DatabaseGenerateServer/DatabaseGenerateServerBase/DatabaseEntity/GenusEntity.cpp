@@ -183,6 +183,14 @@ DatabaseEntity::GenusEntity::BasisDatabaseManager DatabaseEntity::GenusEntity::G
                                  GetKeyBasisDatabaseContainer(id) };
 }
 
+DatabaseEntity::GenusEntity::BasisDatabaseManager DatabaseEntity::GenusEntity::GetSelectAll(WrappersStrategy wrappersStrategy)
+{
+    return BasisDatabaseManager{ wrappersStrategy,
+                                 databaseName,
+                                 Database::ChangeType::Select,
+                                 BasisDatabaseContainer::Create() };
+}
+
 Database::BasisDatabaseContainer DatabaseEntity::GenusEntity::GetKeyBasisDatabaseContainer(Database::Traits::ParamType::Int32 id)
 {
     BasisDatabaseContainer basisDatabaseContainer{ BasisDatabaseContainer::ObjectContainer{ Database::BasisDatabase{ idDescribe, id } } };

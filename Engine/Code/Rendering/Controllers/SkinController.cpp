@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:07)
+///	版本：0.9.1.2 (2023/07/24 13:51)
 
 #include "Rendering/RenderingExport.h"
 
 #include "SkinController.h"
 #include "Detail/SkinControllerImpl.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -20,7 +21,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/ObjectSystems/StreamSize.h" 
+#include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/SceneGraph/Visual.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, SkinController);
@@ -29,8 +30,8 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, SkinController);
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, SkinController)
 
-Rendering::SkinController::SkinController(int numVertices, int numBones)
-    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ numVertices, numBones }
+Rendering::SkinController::SkinController(int numVertices, int numBones, const BaseRendererSharedPtr& baseRenderer)
+    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ numVertices, numBones, baseRenderer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -96,7 +97,7 @@ Rendering::ControllerInterfaceSharedPtr Rendering::SkinController::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
 
 bool Rendering::SkinController::Update(double applicationTime)
@@ -105,63 +106,24 @@ bool Rendering::SkinController::Update(double applicationTime)
 
     if (ParentType::Update(applicationTime))
     {
-        // 访问该顶点缓冲器来存储混合目标。
-        auto visual = dynamic_cast<Visual*>(GetControllerObject());
-        if (visual != nullptr)
-        {
-            auto vertexBuffer = visual->GetVertexBuffer();
+        const auto visual = boost::polymorphic_pointer_cast<Visual>(GetControllerObject());
 
-            if (vertexBuffer)
-            {
-                RENDERING_ASSERTION_2(impl->GetNumVertices() == visual->GetVertexBuffer()->GetNumElements(), "控制器必须和缓冲器具有相同数量的顶点\n");
-
-                // 皮肤顶点在骨骼世界坐标系统计算，所以视觉世界变换必须为单位。
-                visual->SetWorldTransform(TransformF{});
-
-                // 计算的皮肤顶点位置。
-                for (auto vertex = 0; vertex < impl->GetNumVertices(); ++vertex)
-                {
-                    auto position = Mathematics::APointF{};
-                    for (auto bone = 0; bone < impl->GetNumBones(); ++bone)
-                    {
-                        const auto weight = impl->GetWeights(bone, vertex);
-                        if (Mathematics::MathF::GetZeroTolerance() < Mathematics::MathF::FAbs(weight))
-                        {
-                            const auto offset = impl->GetOffsets(bone, vertex);
-                            const auto worldOffset = impl->GetBones(bone)->GetWorldTransform() * offset;
-                            position += weight * worldOffset;
-                        }
-                    }
-                }
-
-                visual->UpdateModelSpace(VisualUpdateType::Normals);
- 
-
-                return true;
-            }
-        }
+        return impl->Update(visual);
     }
 
     return false;
 }
 
-void Rendering::SkinController::SetObject(ControllerInterface* object)
+void Rendering::SkinController::SetControllerObject(const ControllerInterfaceSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "无效类\n");
 
-    ParentType::SetObject(object);
+    ParentType::SetControllerObject(object);
 }
 
-void Rendering::SkinController::SetObjectInCopy(ControllerInterface* object)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    ParentType::SetObject(object);
-}
-
-Rendering::SkinController::SkinController(LoadConstructor value)
-    : ParentType{ value }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+Rendering::SkinController::SkinController(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -181,13 +143,13 @@ int64_t Rendering::SkinController::Register(CoreTools::ObjectRegister& target) c
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    const auto registerID = ParentType::Register(target);
-    if (registerID != 0)
+    const auto registerId = ParentType::Register(target);
+    if (registerId != 0)
     {
         impl->Register(target);
     }
 
-    return registerID;
+    return registerId;
 }
 
 void Rendering::SkinController::Save(CoreTools::BufferTarget& target) const

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 17:16)
+///	版本：0.9.1.2 (2023/07/28 14:06)
 
 #include "MacintoshMainFunctionHelper1.h"
 #include "System/Time/DeltaTime.h"
@@ -13,6 +13,11 @@
 #include "Framework/MacintoshFrame/MacintoshFrameBuildDetail.h"
 #include "Framework/MacintoshFrame/MacintoshProcessDetail.h"
 #include "Framework/MainFunctionHelper/MacintoshMainFunctionHelperDetail.h"
+
+Framework::MacintoshMainFunctionHelper1::MacintoshMainFunctionHelper1SharedPtr Framework::MacintoshMainFunctionHelper1::Create(const EnvironmentDirectory& environmentDirectory)
+{
+    return std::make_shared<MacintoshMainFunctionHelper1>(environmentDirectory);
+}
 
 Framework::MacintoshMainFunctionHelper1::MacintoshMainFunctionHelper1(const Framework::EnvironmentDirectory& environmentDirectory)
     : ParentType{ environmentDirectory }

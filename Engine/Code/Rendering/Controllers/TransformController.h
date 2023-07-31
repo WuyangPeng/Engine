@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:02)
+///	版本：0.9.1.2 (2023/07/24 11:25)
 
 #ifndef RENDERING_CONTROLLERS_TRANSFORM_CONTROLLER_H
 #define RENDERING_CONTROLLERS_TRANSFORM_CONTROLLER_H
@@ -26,6 +26,7 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(TransformController);
         using ParentType = Controller;
+
         using APoint = Mathematics::APointF;
         using Matrix = Mathematics::MatrixF;
 
@@ -45,8 +46,7 @@ namespace Rendering
         void SetScale(const APoint& scale) noexcept(gAssert < 2 || gRenderingAssert < 2);
         void SetMatrix(const Matrix& matrix) noexcept;
 
-        void SetObject(ControllerInterface* object) override;
-        void SetObjectInCopy(ControllerInterface* object) override;
+        void SetControllerObject(const ControllerInterfaceSharedPtr& object) override;
 
         // 动画更新。应用程序时间以毫秒为单位。
         // 更新简单的拷贝m_LocalTransform到Spatial m_Object的LocalTransform。

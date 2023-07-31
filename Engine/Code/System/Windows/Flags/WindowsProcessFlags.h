@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/20 11:37)
+///	版本：0.9.1.2 (2023/07/22 17:31)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_PROCESS_FLAGS_H
 #define SYSTEM_WINDOWS_WINDOWS_PROCESS_FLAGS_H
@@ -20,7 +20,7 @@ namespace System
     {
         NoRemove = PM_NOREMOVE,
         Remove = PM_REMOVE,
-        Noyield = PM_NOYIELD,
+        NoYield = PM_NOYIELD,
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -29,7 +29,7 @@ namespace System
     {
         NoRemove = 0x0000,
         Remove = 0x0001,
-        Noyield = 0x0002,
+        NoYield = 0x0002,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

@@ -20,8 +20,8 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, PointControllerTest);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, PointControllerTest);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, PointControllerTest);
 
-Rendering::PointControllerTest::PointControllerTest(CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{ disableNotThrow }
+Rendering::PointControllerTest::PointControllerTest(const BaseRendererSharedPtr& baseRenderer)
+    : ParentType{ baseRenderer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

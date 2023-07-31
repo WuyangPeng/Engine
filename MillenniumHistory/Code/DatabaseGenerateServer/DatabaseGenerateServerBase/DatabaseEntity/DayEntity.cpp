@@ -95,6 +95,14 @@ DatabaseEntity::DayEntity::BasisDatabaseManager DatabaseEntity::DayEntity::GetSe
                                  GetKeyBasisDatabaseContainer(id) };
 }
 
+DatabaseEntity::DayEntity::BasisDatabaseManager DatabaseEntity::DayEntity::GetSelectAll(WrappersStrategy wrappersStrategy)
+{
+    return BasisDatabaseManager{ wrappersStrategy,
+                                 databaseName,
+                                 Database::ChangeType::Select,
+                                 BasisDatabaseContainer::Create() };
+}
+
 Database::BasisDatabaseContainer DatabaseEntity::DayEntity::GetKeyBasisDatabaseContainer(Database::Traits::ParamType::Int32 id)
 {
     BasisDatabaseContainer basisDatabaseContainer{ BasisDatabaseContainer::ObjectContainer{ Database::BasisDatabase{ idDescribe, id } } };

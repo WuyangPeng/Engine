@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:02)
+///	版本：0.9.1.2 (2023/07/24 14:57)
 
 #ifndef RENDERING_CONTROLLERS_POINT_CONTROLLER_H
 #define RENDERING_CONTROLLERS_POINT_CONTROLLER_H
@@ -14,6 +14,7 @@
 
 #include "Controller.h"
 #include "Mathematics/Algebra/AVector.h"
+#include "Rendering/SceneGraph/Polypoint.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(PointController, PointControllerImpl);
@@ -26,10 +27,11 @@ namespace Rendering
         COPY_UNSHARED_TYPE_DECLARE(PointController);
         using ParentType = Controller;
         using AVector = Mathematics::AVectorF;
+        using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
 
     public:
         // 所连接的对象必须是Polypoint或Polypoint派生的类。
-        explicit PointController(CoreTools::DisableNotThrow disableNotThrow);
+        explicit PointController(const BaseRendererSharedPtr& baseRenderer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -61,13 +63,9 @@ namespace Rendering
 
         // 动画更新。应用程序时间以毫秒为单位。
         NODISCARD bool Update(double applicationTime) override;
-        void SetObject(ControllerInterface* object) override;
-        void SetObjectInCopy(ControllerInterface* object) override;
+        void SetControllerObject(const ControllerInterfaceSharedPtr& object) override;
 
     protected:
-        // 对于点运动数组的延迟分配。
-        void Reallocate(int numPoints);
-
         // 该类从运动参数计算新的位置和方向。
         // 派生类应该更新运动参数，然后要么调用基类的更新方法或在自己的更新方法中提供位置和方向。
         virtual void UpdateSystemMotion(float ctrlTime);
@@ -75,8 +73,6 @@ namespace Rendering
 
     private:
         PackageType impl;
-
-        Polypoint* points;
     };
 
 #include STSTEM_WARNING_PUSH

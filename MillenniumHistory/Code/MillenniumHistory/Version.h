@@ -15,6 +15,6 @@
 //  gMillenniumHistoryVersion / 10000 % 100 是次版本号
 //  gMillenniumHistoryVersion / 1000000 % 100 是主版本号
 
-constexpr auto gMillenniumHistoryVersion = 90100;
+constexpr auto gMillenniumHistoryVersion = 90102;
 
 #endif  // MILLENNIUM_HISTORY_VERSION_H

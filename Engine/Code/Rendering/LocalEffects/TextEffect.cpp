@@ -18,6 +18,7 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/LocalEffects/Detail/TextEffectImpl.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
 #include "Rendering/Shaders/Shader.h"
 
@@ -27,15 +28,16 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, TextEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TextEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TextEffect);
 
-Rendering::TextEffect::TextEffect(ProgramFactory& factory, const Texture2DSharedPtr& texture)
-    : ParentType{ factory.CreateFromFiles("Resource/Shader/TextEffect.vs", "Resource/Shader/TextEffect.ps", "") },
+Rendering::TextEffect::TextEffect(ProgramFactory& factory, const std::string& shaderExtendName, const Texture2DSharedPtr& texture)
+    : ParentType{ factory.CreateFromFiles("Resource/Shader/TextEffect.vs" + shaderExtendName, "Resource/Shader/TextEffect.ps" + shaderExtendName, "") },
       impl{ factory.GetAPI(), Rendering::GetStreamSize<Mathematics::Vector3<float>>(), Rendering::GetStreamSize<Mathematics::Vector4<float>>() }
 {
     GetVertexShader()->Set("Translate", GetTranslate());
 
-    auto pixelShader = GetPixelShader();
+    const auto pixelShader = GetPixelShader();
     pixelShader->Set("TextColor", GetColor());
     pixelShader->Set("baseTexture", texture, "baseSampler", impl->GetSamplerState());
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 

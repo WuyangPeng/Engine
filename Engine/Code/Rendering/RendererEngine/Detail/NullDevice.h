@@ -41,11 +41,13 @@ namespace Rendering
 
         NODISCARD bool HasDepthRange01() const noexcept override;
         NODISCARD std::string GetShaderName(const std::string& name) const override;
+        NODISCARD std::string GetShaderExtendName() const override;
         NODISCARD void Resize(int width, int height) noexcept override;
 
-        NODISCARD int64_t DrawPrimitive(const ConstVertexBufferSharedPtr& vertexBuffer,
-                                        const ConstIndexBufferSharedPtr& indexBuffer,
-                                        const ConstVisualEffectSharedPtr& effect) noexcept override;
+        NODISCARD int64_t DrawPrimitive(RendererObjectBridge& rendererObjectBridge,
+                                        const VertexBufferSharedPtr& vertexBuffer,
+                                        const IndexBufferSharedPtr& indexBuffer,
+                                        const VisualEffectSharedPtr& effect) noexcept override;
 
         void ClearColorBuffer(const RendererClear& rendererClear) noexcept override;
         void ClearDepthBuffer(const RendererClear& rendererClear) noexcept override;

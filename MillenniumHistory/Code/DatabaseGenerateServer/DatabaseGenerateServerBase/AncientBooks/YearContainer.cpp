@@ -9,6 +9,7 @@
 
 #include "Year.h"
 #include "YearContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::YearContainer::Container AncientBooks::YearContainer::GetContainer
     USER_CLASS_IS_VALID_CONST_9;
 
     return year;
+}
+
+int AncientBooks::YearContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(year.size());
 }
 

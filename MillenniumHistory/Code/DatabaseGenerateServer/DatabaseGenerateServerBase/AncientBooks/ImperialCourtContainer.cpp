@@ -9,6 +9,7 @@
 
 #include "ImperialCourt.h"
 #include "ImperialCourtContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::ImperialCourtContainer::Container AncientBooks::ImperialCourtConta
     USER_CLASS_IS_VALID_CONST_9;
 
     return imperialCourt;
+}
+
+int AncientBooks::ImperialCourtContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(imperialCourt.size());
 }
 

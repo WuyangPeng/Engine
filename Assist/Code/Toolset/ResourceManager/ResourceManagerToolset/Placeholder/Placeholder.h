@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/10 14:01)
+///	版本：0.9.1.2 (2023/07/28 10:35)
 
 #ifndef RESOURCE_MANAGER_TOOLSET_PLACEHOLDER_H
 #define RESOURCE_MANAGER_TOOLSET_PLACEHOLDER_H

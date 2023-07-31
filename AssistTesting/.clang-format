@@ -89,7 +89,7 @@ IncludeCategories:
     Priority:        10 
   - Regex:           '^"Imagics/.*'
     Priority:        11	
-  - Regex:           '^"(Animation|ArtificialIntellegence|UserInterface)/.*'
+  - Regex:           '^"(Animation|ArtificialIntelligence|UserInterface)/.*'
     Priority:        12	 
   - Regex:           '^"UserInterface/.*'
     Priority:        13

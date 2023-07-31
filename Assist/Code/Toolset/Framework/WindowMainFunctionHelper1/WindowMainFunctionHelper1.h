@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 17:24)
+///	版本：0.9.1.2 (2023/07/28 13:38)
 
 #ifndef WINDOW_MAIN_FUNCTION_HELPER1_H
 #define WINDOW_MAIN_FUNCTION_HELPER1_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.1.3 (2022/10/16 21:31)
+///	版本：0.9.1.2 (2023/07/31 10:49)
 
 #ifndef SYSTEM_EXAMPLE_HELPER_USER_MACRO_H
 #define SYSTEM_EXAMPLE_HELPER_USER_MACRO_H
@@ -30,9 +30,10 @@ static_assert(COMPILE_SYSTEM_EXAMPLE_CLOSE <= CLOSE_SYSTEM_EXAMPLE_MAX, "COMPILE
 
 #endif  // !defined(COMPILE_SYSTEM_EXAMPLE_CLOSE) || (COMPILE_SYSTEM_EXAMPLE_CLOSE & CLOSE_USE_SYSTEM_EXAMPLE) != CLOSE_USE_SYSTEM_EXAMPLE
 
-// 是否编译为静态库
 #ifdef BUILDING_STATIC
+
     #define BUILDING_SYSTEM_EXAMPLE_STATIC
+
 #endif  // BUILDING_STATIC
 
 #endif  // SYSTEM_EXAMPLE_HELPER_USER_MACRO_H

@@ -1,0 +1,16 @@
+{
+  "Copyright": "/// Copyright (c) 2010-\n/// Threading Core Render Engine\n///\n/// 作者：彭武阳，彭晔恩，彭晔泽\n/// 联系作者：94458936@qq.com\n///\n/// 标准：std:c++20\n/// 自动生成",
+  "IncludeClass": "#include \"$Class$.h\"",
+  "ClassDeclaration": "    class $Class$;",
+  "GetDeclaration": "        NODISCARD Database::Traits::$EntityType$ $IsBool$$EntityFirstUppercase$() const$EntityIsNoexcept$;",
+  "SetDeclaration": "        void Set$EntityFirstUppercase$(Database::Traits::ParamType::$EntityType$ a$EntityFirstUppercase$);",
+  "ModifyDeclaration": "        void Modify$EntityFirstUppercase$(Database::Traits::ParamType::$EntityType$ a$EntityFirstUppercase$);",
+  "Describe": "        static constexpr std::string_view $Entity$Describe{ \"$EntityIsKey$\" };",
+  "Field": "        Database::Entity<$Entity$Describe, DataType::$EntityType$$EntityIsIndex$> $Entity$;",
+  "FieldAssignment": "      $Entity${ entity.GetValue<DataType::$EntityType$>($Entity$Describe) }$FieldIsEnd$",
+  "FieldInit": "      $Entity${ Database::Traits::$EntityType${} }$FieldIsEnd$",
+  "GetDefine": "Database::Traits::$EntityType$ $Namespace$::$Class$::$IsBool$$EntityFirstUppercase$() const$EntityIsNoexcept$\n{\n    USER_CLASS_IS_VALID_CONST_9;\n\n    return $Entity$.GetValue();\n}\n",
+  "SetDefine": "void $Namespace$::$Class$::Set$EntityFirstUppercase$(Database::Traits::ParamType::$EntityType$ a$EntityFirstUppercase$)\n{\n    USER_CLASS_IS_VALID_9;\n\n    if (a$EntityFirstUppercase$ != $IsBool$$EntityFirstUppercase$())\n    {\n        $Entity$.SetValue(a$EntityFirstUppercase$);\n\n        AddModify($Entity$Describe, $IsBool$$EntityFirstUppercase$());\n    }\n}\n",
+  "ModifyDefine": "void $Namespace$::$Class$::Modify$EntityFirstUppercase$(Database::Traits::ParamType::$EntityType$ a$EntityFirstUppercase$)\n{\n    USER_CLASS_IS_VALID_9;\n\n    $Entity$.ModifyValue(a$EntityFirstUppercase$);\n\n    AddModify($Entity$Describe, Get$EntityFirstUppercase$());\n}\n",
+  "DatabaseField": "$EntityIndent$decltype($Entity$)::GetDatabaseField()$FieldIsEnd$"
+}

@@ -71,7 +71,7 @@ bool Framework::OpenGLGlutCallBack<MiddleLayer>::ChangeSize(int width, int heigh
     FRAMEWORK_CLASS_IS_VALID_1;
 
     if (!(ParentType::ChangeSize(width, height) &&
-          middleLayer->Resize(System::WindowsDisplay::GLUTUnDefinition, WindowSize(width, height)) &&
+          middleLayer->Resize(System::WindowsDisplay::GlutUnDefinition, WindowSize(width, height)) &&
           middleLayer->Paint()))
     {
         DestroyWindow();

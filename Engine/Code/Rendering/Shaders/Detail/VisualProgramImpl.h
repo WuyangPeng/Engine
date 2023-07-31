@@ -72,6 +72,7 @@ namespace Rendering
 
         NODISCARD virtual Reflection GetReflector() const;
         NODISCARD virtual VisualProgramSharedPtr Clone() const;
+        NODISCARD virtual OpenGLUInt GetProgramHandle() const;
 
     private:
         ShaderObjectAssociated vertexShader;

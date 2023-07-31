@@ -63,6 +63,34 @@ Rendering::OverlayEffect::ConstVisualEffectSharedPtr Rendering::OverlayEffect::G
     return impl->GetEffect();
 }
 
+Rendering::OverlayEffect::VertexBufferSharedPtr Rendering::OverlayEffect::GetVertexBuffer() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetVertexBuffer();
+}
+
+Rendering::OverlayEffect::IndexBufferSharedPtr Rendering::OverlayEffect::GetIndexBuffer() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetIndexBuffer();
+}
+
+Rendering::OverlayEffect::VisualProgramSharedPtr Rendering::OverlayEffect::GetProgram() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetProgram();
+}
+
+Rendering::OverlayEffect::VisualEffectSharedPtr Rendering::OverlayEffect::GetEffect() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->GetEffect();
+}
+
 void Rendering::OverlayEffect::SetOverlayRectangle(const RectangleType& rectangle)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -122,6 +150,6 @@ void Rendering::OverlayEffect::SetTexture(std::string const& textureName, const 
 void Rendering::OverlayEffect::SetNormalizedZ(float z)
 {
     RENDERING_CLASS_IS_VALID_9;
-    
+
     return impl->SetNormalizedZ(z);
 }

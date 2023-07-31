@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.9.0.12 (2023/06/16 13:16)
+///	版本：0.9.1.2 (2023/07/25 15:15)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_GAME_VERSION_H
 #define THREADING_CORE_RENDER_ENGINE_GAME_VERSION_H
@@ -15,6 +15,6 @@
 //  gTCREGameVersion / 10000 % 100 是次版本号
 //  gTCREGameVersion / 1000000 % 100 是主版本号
 
-constexpr auto gTCREGameVersion = 90012;
+constexpr auto gTCREGameVersion = 90102;
 
 #endif  // THREADING_CORE_RENDER_ENGINE_GAME_VERSION_H

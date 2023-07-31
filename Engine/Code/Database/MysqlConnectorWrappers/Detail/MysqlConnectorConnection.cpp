@@ -308,4 +308,19 @@ Database::BasisDatabase Database::MysqlConnectorConnection::GetBasisDatabase(con
     }
 }
 
+void Database::MysqlConnectorConnection::Wait()
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    for (;;)
+    {
+        std::unique_lock uniqueLock{ mutex };
+
+        if (isStop || container.empty())
+        {
+            break;
+        }
+    }
+}
+
 #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR

@@ -9,6 +9,7 @@
 
 #include "Version.h"
 #include "VersionContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::VersionContainer::Container AncientBooks::VersionContainer::GetCon
     USER_CLASS_IS_VALID_CONST_9;
 
     return version;
+}
+
+int AncientBooks::VersionContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(version.size());
 }
 

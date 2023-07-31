@@ -205,6 +205,14 @@ DatabaseEntity::YearEntity::BasisDatabaseManager DatabaseEntity::YearEntity::Get
                                  GetKeyBasisDatabaseContainer(id) };
 }
 
+DatabaseEntity::YearEntity::BasisDatabaseManager DatabaseEntity::YearEntity::GetSelectAll(WrappersStrategy wrappersStrategy)
+{
+    return BasisDatabaseManager{ wrappersStrategy,
+                                 databaseName,
+                                 Database::ChangeType::Select,
+                                 BasisDatabaseContainer::Create() };
+}
+
 Database::BasisDatabaseContainer DatabaseEntity::YearEntity::GetKeyBasisDatabaseContainer(Database::Traits::ParamType::Int32 id)
 {
     BasisDatabaseContainer basisDatabaseContainer{ BasisDatabaseContainer::ObjectContainer{ Database::BasisDatabase{ idDescribe, id } } };

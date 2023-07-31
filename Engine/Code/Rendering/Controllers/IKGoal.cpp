@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:06)
+///	版本：0.9.1.2 (2023/07/25 14:34)
 
 #include "Rendering/RenderingExport.h"
 
@@ -44,8 +44,8 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal, GetEffectorPosit
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, IKGoal, SetWeight, float, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal, GetWeight, float)
 
-Rendering::IKGoal::IKGoal(LoadConstructor value)
-    : ParentType{ value }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+Rendering::IKGoal::IKGoal(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -65,13 +65,13 @@ int64_t Rendering::IKGoal::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    const auto registerID = ParentType::Register(target);
-    if (registerID != 0)
+    const auto registerId = ParentType::Register(target);
+    if (registerId != 0)
     {
         impl->Register(target);
     }
 
-    return registerID;
+    return registerId;
 }
 
 void Rendering::IKGoal::Save(CoreTools::BufferTarget& target) const

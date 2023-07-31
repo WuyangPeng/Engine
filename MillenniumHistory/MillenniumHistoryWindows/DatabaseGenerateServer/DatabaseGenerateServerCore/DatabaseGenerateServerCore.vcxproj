@@ -528,6 +528,7 @@
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\Detail\AncientBooksDatabaseSaveImpl.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\Detail\AncientBooksDatabaseSaveImplDetail.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\Detail\ConvertEntityImpl.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\Convert\Detail\ConvertEntityImplDetail.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\DllLib.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\DatabaseGenerateServerCore.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServer\DatabaseGenerateServerCore\DatabaseGenerateServerCoreDll.h" />

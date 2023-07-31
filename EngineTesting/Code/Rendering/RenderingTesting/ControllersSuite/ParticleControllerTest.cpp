@@ -20,8 +20,8 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ParticleControllerTest);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ParticleControllerTest);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, ParticleControllerTest);
 
-Rendering::ParticleControllerTest::ParticleControllerTest(CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{ disableNotThrow }
+Rendering::ParticleControllerTest::ParticleControllerTest(const BaseRendererSharedPtr& baseRenderer)
+    : ParentType{ baseRenderer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

@@ -9,6 +9,7 @@
 
 #include "Day.h"
 #include "DayContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::DayContainer::Container AncientBooks::DayContainer::GetContainer()
     USER_CLASS_IS_VALID_CONST_9;
 
     return day;
+}
+
+int AncientBooks::DayContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(day.size());
 }
 

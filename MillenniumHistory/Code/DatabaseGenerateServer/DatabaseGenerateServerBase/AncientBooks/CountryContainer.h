@@ -38,6 +38,8 @@ namespace AncientBooks
         NODISCARD ConstCountryBaseSharedPtr GetCountry(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstCountryBaseSharedPtr GetFirstCountry(Function function) const;
 

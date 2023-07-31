@@ -5,13 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/16 15:55)
+///	版本：0.9.1.2 (2023/07/30 22:41)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/DatabaseGenerateServerCoreExport.h"
 
 #include "AncientBooksDatabaseSaveImplDetail.h"
+#include "CoreTools/Helper/LogMacro.h"
 
-DatabaseGenerateServerCore::AncientBooksDatabaseSaveImpl::AncientBooksDatabaseSaveImpl(const DatabaseFlushSharedPtr& databaseFlush) noexcept
+DatabaseGenerateServerCore::AncientBooksDatabaseSaveImpl::AncientBooksDatabaseSaveImpl(const DatabaseFlushSharedPtr& databaseFlush)
     : databaseFlush{ databaseFlush }, convertEntity{ databaseFlush }
 {
     DATABASE_GENERATE_SERVER_CORE_SELF_CLASS_IS_VALID_9;
@@ -42,4 +43,10 @@ void DatabaseGenerateServerCore::AncientBooksDatabaseSaveImpl::DatabaseSave(cons
     DatabaseSave(*ancientBooksContainer.GetSourceContainer());
     DatabaseSave(*ancientBooksContainer.GetVersionContainer());
     DatabaseSave(*ancientBooksContainer.GetYearContainer());
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("多余数据库正在删除。"));
+
+    convertEntity.DeleteInvalidDatabase();
+
+    LOG_SINGLETON_ENGINE_APPENDER(Info, User, SYSTEM_TEXT("数据库删除结束"));
 }

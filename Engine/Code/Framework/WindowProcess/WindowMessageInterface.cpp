@@ -254,7 +254,7 @@ System::WindowsLResult Framework::WindowMessageInterface::EraseBackgroundMessage
 
     CoreTools::DisableNoexcept();
 
-    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::EraseBkgnd, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::EraseBackground, wParam, lParam);
 }
 
 void Framework::WindowMessageInterface::Display([[maybe_unused]] HWnd hwnd, [[maybe_unused]] int64_t timeDelta)

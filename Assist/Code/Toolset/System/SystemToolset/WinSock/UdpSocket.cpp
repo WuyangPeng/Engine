@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.1.3 (2022/10/27 1:03)
+///	版本：0.9.1.2 (2023/07/28 10:19)
 
 #include "Toolset/System/SystemToolset/SystemToolsetExport.h"
 
@@ -59,7 +59,7 @@ void SystemToolset::UdpSocket::CloseSocket()
 }
 
 SystemToolset::UdpSocket::UdpSocket(UdpSocket&& rhs) noexcept
-    : winSocket{ std::move(rhs.winSocket) }
+    : winSocket{ rhs.winSocket }
 {
     SYSTEM_TOOLSET_SELF_CLASS_IS_VALID_1;
 }
@@ -68,7 +68,7 @@ SystemToolset::UdpSocket& SystemToolset::UdpSocket::operator=(UdpSocket&& rhs) n
 {
     SYSTEM_TOOLSET_CLASS_IS_VALID_1;
 
-    winSocket = std::move(rhs.winSocket);
+    winSocket = rhs.winSocket;
 
     return *this;
 }

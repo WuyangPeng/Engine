@@ -12,6 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/RendererEngine/Detail/RenderingDeviceImpl.h"
 
 namespace Rendering
@@ -40,11 +41,13 @@ namespace Rendering
 
         NODISCARD bool HasDepthRange01() const noexcept override;
         NODISCARD std::string GetShaderName(const std::string& name) const override;
+        NODISCARD std::string GetShaderExtendName() const override;
         NODISCARD void Resize(int width, int height) override;
 
-        NODISCARD int64_t DrawPrimitive(const ConstVertexBufferSharedPtr& vertexBuffer,
-                                        const ConstIndexBufferSharedPtr& indexBuffer,
-                                        const ConstVisualEffectSharedPtr& effect) noexcept override;
+        NODISCARD int64_t DrawPrimitive(RendererObjectBridge& rendererObjectBridge,
+                                        const VertexBufferSharedPtr& vertexBuffer,
+                                        const IndexBufferSharedPtr& indexBuffer,
+                                        const VisualEffectSharedPtr& effect) override;
 
         void ClearColorBuffer(const RendererClear& rendererClear) noexcept override;
         void ClearDepthBuffer(const RendererClear& rendererClear) noexcept override;
@@ -54,6 +57,25 @@ namespace Rendering
         void WaitForFinish() noexcept override;
         void Flush() noexcept override;
         void Execute(const ComputeProgramSharedPtr& computeProgram, int numXGroups, int numYGroups, int numZGroups) noexcept override;
+
+    private:
+        using OpenGLUInt = System::OpenGLUInt;
+
+    private:
+        NODISCARD bool EnableShaders(VisualEffect& effect, OpenGLUInt program);
+        void DisableShaders(VisualEffect& effect, OpenGLUInt program) noexcept;
+        void Enable(const Shader& shader, OpenGLUInt program) noexcept;
+        void Disable(const Shader& shader, OpenGLUInt program) noexcept;
+        void EnableConstantBuffers(const Shader& shader, OpenGLUInt program) noexcept;
+        void DisableConstantBuffers(const Shader& shader, OpenGLUInt program) noexcept;
+        void EnableSBuffers(const Shader& shader, OpenGLUInt program) noexcept;
+        void DisableSBuffers(const Shader& shader, OpenGLUInt program) noexcept;
+        void EnableTextures(const Shader& shader, OpenGLUInt program) noexcept;
+        void DisableTextures(const Shader& shader, OpenGLUInt program) noexcept;
+        void EnableTextureArrays(const Shader& shader, OpenGLUInt program) noexcept;
+        void DisableTextureArrays(const Shader& shader, OpenGLUInt program) noexcept;
+        void EnableSamplers(const Shader& shader, OpenGLUInt program) noexcept;
+        void DisableSamplers(const Shader& shader, OpenGLUInt program) noexcept;
     };
 }
 

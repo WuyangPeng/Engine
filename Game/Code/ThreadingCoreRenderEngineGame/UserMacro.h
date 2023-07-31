@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.9.0.12 (2023/06/16 13:15)
+///	版本：0.9.1.2 (2023/07/25 15:15)
 
-#ifndef THREADING_CORE_RENDER_ENGINE_GAME_USER_HELPER_H
-#define THREADING_CORE_RENDER_ENGINE_GAME_USER_HELPER_H
+#ifndef THREADING_CORE_RENDER_ENGINE_GAME_USER_MACRO_H
+#define THREADING_CORE_RENDER_ENGINE_GAME_USER_MACRO_H
 
 #include "Activity/Helper/UserMacro.h"
 #include "Arena/Helper/UserMacro.h"
@@ -29,4 +29,4 @@
 #include "TimeRefresh/Helper/UserMacro.h"
 #include "UserInfo/Helper/UserMacro.h"
 
-#endif  // THREADING_CORE_RENDER_ENGINE_GAME_USER_HELPER_H
+#endif  // THREADING_CORE_RENDER_ENGINE_GAME_USER_MACRO_H

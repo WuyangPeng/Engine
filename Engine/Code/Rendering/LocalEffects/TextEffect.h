@@ -32,7 +32,7 @@ namespace Rendering
         using Colour = Colour<float>;
 
     public:
-        TextEffect(ProgramFactory& factory, const Texture2DSharedPtr& texture);
+        TextEffect(ProgramFactory& factory, const std::string& shaderExtendName, const Texture2DSharedPtr& texture);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

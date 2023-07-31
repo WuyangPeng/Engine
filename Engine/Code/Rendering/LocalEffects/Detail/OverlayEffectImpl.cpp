@@ -162,6 +162,34 @@ Rendering::OverlayEffectImpl::ConstVisualEffectSharedPtr Rendering::OverlayEffec
     return effect;
 }
 
+Rendering::OverlayEffectImpl::VertexBufferSharedPtr Rendering::OverlayEffectImpl::GetVertexBuffer() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return vertexBuffer;
+}
+
+Rendering::OverlayEffectImpl::IndexBufferSharedPtr Rendering::OverlayEffectImpl::GetIndexBuffer() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return indexBuffer;
+}
+
+Rendering::OverlayEffectImpl::VisualProgramSharedPtr Rendering::OverlayEffectImpl::GetProgram() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return program;
+}
+
+Rendering::OverlayEffectImpl::VisualEffectSharedPtr Rendering::OverlayEffectImpl::GetEffect() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return effect;
+}
+
 void Rendering::OverlayEffectImpl::SetOverlayRectangle(const RectangleType& rectangle)
 {
     RENDERING_CLASS_IS_VALID_9;

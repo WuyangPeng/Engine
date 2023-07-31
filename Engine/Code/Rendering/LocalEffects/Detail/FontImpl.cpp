@@ -20,7 +20,7 @@
 #include "Rendering/Resources/Flags/UsageType.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
 
-Rendering::FontImpl::FontImpl(ProgramFactory& factory, int width, int height, const TexelsType& texels, const CharacterDataType& characterData, int maxMessageLength)
+Rendering::FontImpl::FontImpl(ProgramFactory& factory, const std::string& shaderExtendName, int width, int height, const TexelsType& texels, const CharacterDataType& characterData, int maxMessageLength)
     : maxMessageLength{ maxMessageLength },
       vertexBuffer{},
       indexBuffer{},
@@ -96,7 +96,7 @@ Rendering::FontImpl::FontImpl(ProgramFactory& factory, int width, int height, co
     }
     texture->SetNewData(storageType);
 
-    textEffect = std::make_shared<TextEffect>(factory, texture);
+    textEffect = std::make_shared<TextEffect>(factory, shaderExtendName, texture);
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

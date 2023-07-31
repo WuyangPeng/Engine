@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 10:35)
+///	版本：0.9.1.2 (2023/07/31 10:27)
 
 #ifndef GAME_TESTING_TEMPLATE_GAME_TESTING_TEMPLATE_HELPER_H
 #define GAME_TESTING_TEMPLATE_GAME_TESTING_TEMPLATE_HELPER_H
@@ -14,16 +14,17 @@
 
 namespace GameTestingTemplate
 {
-    class GameTestingTemplateHelper : public Framework::ConsoleMainFunctionHelperBase
+    class GameTestingTemplateHelper final : public Framework::ConsoleMainFunctionHelperBase
     {
     public:
         using ClassType = GameTestingTemplateHelper;
         using ParentType = ConsoleMainFunctionHelperBase;
+
         using String = System::String;
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
-        GameTestingTemplateHelper(int argc, char** argv, const System::String& consoleTitle, const EnvironmentDirectory& environmentDirectory);
+        GameTestingTemplateHelper(int argc, char** argv, const String& consoleTitle, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

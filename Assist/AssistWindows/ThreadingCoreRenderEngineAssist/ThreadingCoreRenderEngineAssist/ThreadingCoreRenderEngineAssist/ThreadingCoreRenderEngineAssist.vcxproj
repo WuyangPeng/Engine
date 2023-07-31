@@ -497,37 +497,17 @@ xcopy "$(HiredisX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)W
     <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\AssistLib.cpp" />
     <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\AssistMain.cpp" />
     <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\AssistMiddleLayerMessage.cpp" />
-    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Core\ProjectName.cpp" />
-    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\GUI\GUIMiddleLayer.cpp" />
-    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Resource\ResourceMiddleLayer.cpp" />
-    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\System\SystemMiddleLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Assist.h" />
     <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\AssistFwd.h" />
     <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\AssistHelper.h" />
     <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\AssistMiddleLayerMessage.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Core\Core.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Core\CoreFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Core\ProjectName.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\GUI\GUI.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\GUI\GUIFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\GUI\GUIMiddleLayer.h" />
     <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Helper\AssistClassInvariantMacro.h" />
     <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Helper\AssistCustomAssertMacro.h" />
     <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Helper\Helper.h" />
     <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Helper\HelperFwd.h" />
     <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Helper\UserMacro.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Input\Input.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Input\InputFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Input\InputMiddleLayer.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Input\InputMiddleLayerDetail.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Resource\Resource.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Resource\ResourceFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Resource\ResourceMiddleLayer.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\System\System.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\System\SystemFwd.h" />
-    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\System\SystemMiddleLayer.h" />
     <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Version.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

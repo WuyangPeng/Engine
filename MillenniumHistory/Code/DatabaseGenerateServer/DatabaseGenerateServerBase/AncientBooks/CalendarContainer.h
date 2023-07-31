@@ -38,6 +38,8 @@ namespace AncientBooks
         NODISCARD ConstCalendarBaseSharedPtr GetCalendar(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstCalendarBaseSharedPtr GetFirstCalendar(Function function) const;
 

@@ -34,7 +34,7 @@
   },
 
   "mysqlConnectorWrappersSuite": {
-    "MysqlConnectorDatabaseFlushTesting": 1 
+    "MysqlConnectorDatabaseFlushTesting": 1
   },
 
   "mysqlBoostWrappersSuite": {
@@ -73,5 +73,12 @@
 
   "redisWrappersSuite": {
     "RedisDatabaseFlushTesting": 1
+  },
+
+  "databaseEntityCodeGenerationSuite": {
+    "CodeHeaderFileGenerationTesting": 1,
+    "CodeFwdHeaderFileGenerationTesting": 1,
+    "EntityHeaderFileGenerationTesting": 1,
+    "EntitySourceFileGenerationTesting": 1
   }
 }

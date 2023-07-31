@@ -30,11 +30,11 @@ namespace System
         DoubleClicks = CS_DBLCLKS,
 
         /// 该窗口类的每个窗口实例都分配一个唯一的窗口类DC。
-        OwnDC = CS_OWNDC,
+        OwnDc = CS_OWNDC,
         /// 该窗口类的所有窗口实例都共享一个窗口类DC。
-        ClassDC = CS_CLASSDC,
+        ClassDc = CS_CLASSDC,
         /// 将子窗口的裁剪区域设置到父窗口的DC中去，这样子窗口便可以在父窗口上绘制自身。
-        ParentDC = CS_PARENTDC,
+        ParentDc = CS_PARENTDC,
 
         /// 禁止系统菜单的关闭选项
         NoClose = CS_NOCLOSE,
@@ -59,7 +59,7 @@ namespace System
         /// 比如菜单用来强调自己和其他窗口的z顺序关系。)
         DropShadow = CS_DROPSHADOW,
 
-        CommonUse = Redraw | OwnDC | DoubleClicks,
+        CommonUse = Redraw | OwnDc | DoubleClicks,
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -72,9 +72,9 @@ namespace System
         Redraw = VerticalRedraw | HorizontalRedraw,
 
         DoubleClicks = 0x0008,
-        OwnDC = 0x0020,
-        ClassDC = 0x0040,
-        ParentDC = 0x0080,
+        OwnDc = 0x0020,
+        ClassDc = 0x0040,
+        ParentDc = 0x0080,
         NoClose = 0x0200,
         SaveBits = 0x0800,
         ByteAlignClient = 0x1000,
@@ -82,7 +82,7 @@ namespace System
         GlobalWindow = 0x4000,
         DropShadow = 0x00020000,
 
-        CommonUse = Redraw | OwnDC | DoubleClicks,
+        CommonUse = Redraw | OwnDc | DoubleClicks,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

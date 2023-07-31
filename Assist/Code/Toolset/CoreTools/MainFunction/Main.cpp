@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.4 (2023/03/17 17:21)
+///	版本：0.9.1.2 (2023/07/28 14:48)
 
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "Toolset/CoreTools/MainFunction/Helper.h"
@@ -14,4 +14,4 @@
 
 CORE_TOOLS_MUTEX_INIT(MainFuction);
 
-MAIN_FUNCTION(MainFuction, Helper)
+MAIN_FUNCTION(MainFunction, Helper)

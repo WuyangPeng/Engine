@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:01)
+///	版本：0.9.1.2 (2023/07/24 17:33)
 
 #ifndef RENDERING_CONTROLLERS_PARTICLE_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_PARTICLE_CONTROLLER_IMPL_H
@@ -15,6 +15,9 @@
 #include "CoreTools/ObjectSystems/BufferTarget.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/AVector.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
+#include "Rendering/SceneGraph/Camera.h"
+#include "Rendering/SceneGraph/Visual.h"
 
 #include <vector>
 
@@ -24,10 +27,13 @@ namespace Rendering
     {
     public:
         using ClassType = ParticleControllerImpl;
+
         using AVector = Mathematics::AVectorF;
+        using BaseRendererWeakPtr = std::weak_ptr<BaseRenderer>;
+        using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
 
     public:
-        explicit ParticleControllerImpl(int numParticles);
+        explicit ParticleControllerImpl(const BaseRendererSharedPtr& baseRenderer) noexcept;
         ParticleControllerImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -60,6 +66,14 @@ namespace Rendering
         void Save(CoreTools::BufferTarget& target) const;
         void Load(CoreTools::BufferSource& source);
 
+        void SetCamera(const std::shared_ptr<Camera>& aCamera) noexcept;
+        NODISCARD std::shared_ptr<Camera> GetCamera() noexcept;
+
+        void SetControllerObject(Visual& visual);
+
+        void UpdateSystemMotion(Particles& particles, float ctrlTime);
+        void UpdatePointMotion(Particles& particles, float ctrlTime);
+
     private:
         // 系统的运动，在局部坐标。速度矢量应为单位的长度。
         float systemLinearSpeed;
@@ -72,6 +86,9 @@ namespace Rendering
         std::vector<float> particleLinearSpeeds;
         std::vector<AVector> particleLinearAxes;
         std::vector<float> particleSizeChanges;
+
+        std::shared_ptr<Camera> camera;
+        BaseRendererWeakPtr baseRenderer;
     };
 }
 

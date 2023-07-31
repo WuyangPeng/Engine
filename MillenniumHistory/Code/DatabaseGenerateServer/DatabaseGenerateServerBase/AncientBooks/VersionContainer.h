@@ -38,6 +38,8 @@ namespace AncientBooks
         NODISCARD ConstVersionBaseSharedPtr GetVersion(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstVersionBaseSharedPtr GetFirstVersion(Function function) const;
 

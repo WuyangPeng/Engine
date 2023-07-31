@@ -21,7 +21,7 @@ namespace Rendering
         using ParentType = ParticleController;
 
     public:
-        explicit ParticleControllerTest(CoreTools::DisableNotThrow disableNotThrow);
+        explicit ParticleControllerTest(const BaseRendererSharedPtr& baseRenderer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

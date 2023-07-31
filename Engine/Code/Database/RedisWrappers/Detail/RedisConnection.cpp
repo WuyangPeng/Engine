@@ -309,4 +309,19 @@ Database::RedisConnection::ResultContainer Database::RedisConnection::SelectAll(
     return resultContainer;
 }
 
+void Database::RedisConnection::Wait()
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    for (;;)
+    {
+        std::unique_lock uniqueLock{ mutex };
+
+        if (isStop || container.empty())
+        {
+            break;
+        }
+    }
+}
+
 #endif  // DATABASE_USE_REDIS

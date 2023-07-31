@@ -1,20 +1,15 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/06/30 13:57)
+///	版本：0.9.1.2 (2023/07/28 09:20)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_ASSIST_ASSIST_H
 #define THREADING_CORE_RENDER_ENGINE_ASSIST_ASSIST_H
 
-#include "Core/Core.h"
-#include "GUI/GUI.h"
 #include "Helper/Helper.h"
-#include "Input/Input.h"
-#include "Resource/Resource.h"
-#include "System/System.h"
 
 #endif  // THREADING_CORE_RENDER_ENGINE_ASSIST_ASSIST_H

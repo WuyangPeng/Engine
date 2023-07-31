@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 17:26)
+///	版本：0.9.1.2 (2023/07/28 13:36)
 
 #include "WindowMessageLoop1.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -24,10 +24,10 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, WindowMessageLoop1)
 
 int Framework::WindowMessageLoop1::EnterMessageLoop()
 {
-    auto hwnd = GetHwnd();
+    const auto hWnd = GetHwnd();
 
     System::String className{};
-    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
+    MAYBE_UNUSED const auto value = System::GetSystemClassName(hWnd, className);
 
     EnterOldMessageLoop(className);
     EnterNewMessageLoop(className);
@@ -35,43 +35,39 @@ int Framework::WindowMessageLoop1::EnterMessageLoop()
     return 0;
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26461)
-
-void Framework::WindowMessageLoop1::DisplayFunction(MAYBE_UNUSED WindowsHWnd hwnd, MAYBE_UNUSED int64_t timeDelta) noexcept
+void Framework::WindowMessageLoop1::DisplayFunction(WindowsHWnd hWnd, int64_t timeDelta) noexcept
 {
+    System::UnusedFunction(hWnd, timeDelta);
 }
-
-#include STSTEM_WARNING_POP
 
 void Framework::WindowMessageLoop1::EnterOldMessageLoop(const String& className)
 {
-    auto instance = System::GetHInstance();
+    const auto instance = System::GetHInstance();
 
     WindowMessageLoop loop{ nullptr };
 
-    auto windowName = SYSTEM_TEXT("Open Old Message Window"s);
+    const auto windowName = SYSTEM_TEXT("Open Old Message Window"s);
 
     const WindowSize size{ 800, 600 };
-    WindowCreateParameter createParameter{ windowName };
-    WindowInstanceParameter instanceParameter{ instance, className };
-    WindowCreateHandle create{ instanceParameter, createParameter, size };
+    const WindowCreateParameter createParameter{ windowName };
+    const WindowInstanceParameter instanceParameter{ instance, className };
+    const WindowCreateHandle create{ instanceParameter, createParameter, size };
 
     loop.EnterMessageLoop(create.GetHwnd());
 }
 
 void Framework::WindowMessageLoop1::EnterNewMessageLoop(const String& className)
 {
-    auto instance = System::GetHInstance();
+    const auto instance = System::GetHInstance();
 
     WindowMessageLoop loop{ DisplayFunction };
 
-    auto windowName = SYSTEM_TEXT("Open New Message Window"s);
+    const auto windowName = SYSTEM_TEXT("Open New Message Window"s);
 
     const WindowSize size{ 800, 600 };
-    WindowCreateParameter createParameter{ windowName };
-    WindowInstanceParameter instanceParameter{ instance, className };
-    WindowCreateHandle create{ instanceParameter, createParameter, size };
+    const WindowCreateParameter createParameter{ windowName };
+    const WindowInstanceParameter instanceParameter{ instance, className };
+    const WindowCreateHandle create{ instanceParameter, createParameter, size };
 
     loop.EnterMessageLoop(create.GetHwnd());
 }

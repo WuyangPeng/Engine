@@ -66,4 +66,14 @@ void Database::RedisDatabaseFlush::CheckWrappersStrategy(const BasisDatabaseMana
     }
 }
 
+void Database::RedisDatabaseFlush::Wait()
+{
+    DATABASE_CLASS_IS_VALID_9;
+
+    for (auto& element : connection)
+    {
+        element->Wait();
+    }
+}
+
 #endif  // DATABASE_USE_REDIS

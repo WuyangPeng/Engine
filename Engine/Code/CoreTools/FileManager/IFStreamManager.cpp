@@ -23,6 +23,14 @@ CoreTools::IFStreamManager::IFStreamManager(const String& fileName)
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, IFStreamManager)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, IFStreamManager, GetFileContent, System::String)
+
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, IFStreamManager, BackupFile, System::String)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, IFStreamManager, SetSimplifiedChinese, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, IFStreamManager, GetFileStream, System::IFileStream&)
+
+CoreTools::IFStreamManager::FileContent CoreTools::IFStreamManager::GetFileContent(System::StringView separate) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetFileContent(separate);
+}

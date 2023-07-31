@@ -15,6 +15,7 @@
 #include "CoreTools/Contract/ContractFwd.h"
 #include "Rendering/DataTypes/Colour.h"
 #include "Rendering/LocalEffects/LocalEffectsFwd.h"
+#include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Rendering/Shaders/ShadersFwd.h"
 
 namespace Rendering
@@ -28,7 +29,7 @@ namespace Rendering
         using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactory>;
 
     public:
-        explicit GlobalFontImpl(FontType fontType, ProgramFactory& factory, int maxMessageLength);
+        explicit GlobalFontImpl(FontType fontType, ProgramFactory& factory, const std::string& shaderExtendName, int maxMessageLength);
 
         CLASS_INVARIANT_DECLARE;
 

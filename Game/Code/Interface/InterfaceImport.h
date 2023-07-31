@@ -5,17 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.9.0.12 (2023/06/16 16:50)
+///	版本：0.9.1.2 (2023/07/25 15:53)
 
-#ifndef ACTIVITY_IMPORT_H
-#define ACTIVITY_IMPORT_H
+#ifndef INTERFACE_IMPORT_H
+#define INTERFACE_IMPORT_H
 
 #include "Helper/UserMacro.h"
 
-#ifndef BUILDING_ACTIVITY_IMPORT
+#ifndef BUILDING_INTERFACE_IMPORT
 
-    #define BUILDING_ACTIVITY_IMPORT
+    #define BUILDING_INTERFACE_IMPORT
 
-#endif  // BUILDING_ACTIVITY_IMPORT
+#endif  // BUILDING_INTERFACE_IMPORT
 
-#endif  // ACTIVITY_IMPORT_H
+#endif  // INTERFACE_IMPORT_H

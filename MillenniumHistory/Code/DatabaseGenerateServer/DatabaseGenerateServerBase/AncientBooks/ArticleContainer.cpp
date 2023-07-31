@@ -9,6 +9,7 @@
 
 #include "Article.h"
 #include "ArticleContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::ArticleContainer::Container AncientBooks::ArticleContainer::GetCon
     USER_CLASS_IS_VALID_CONST_9;
 
     return article;
+}
+
+int AncientBooks::ArticleContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(article.size());
 }
 

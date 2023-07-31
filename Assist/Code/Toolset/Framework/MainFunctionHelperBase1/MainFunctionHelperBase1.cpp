@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 17:20)
+///	版本：0.9.1.2 (2023/07/28 13:42)
 
 #include "MainFunctionHelperBase1.h"
 #include "System/Time/DeltaTime.h"
@@ -14,9 +14,11 @@
 
 #include <iostream>
 
-Framework::MainFunctionHelperBase1::MainFunctionHelperBase1(MAYBE_UNUSED int argc, MAYBE_UNUSED char** argv, MAYBE_UNUSED const String& consoleTitle, const EnvironmentDirectory& environmentDirectory)
+Framework::MainFunctionHelperBase1::MainFunctionHelperBase1(int argc, char** argv, const String& consoleTitle, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ environmentDirectory }
 {
+    System::UnusedFunction(argc, argv, consoleTitle);
+
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 

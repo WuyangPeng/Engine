@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:02)
+///	版本：0.9.1.2 (2023/07/24 19:02)
 
 #ifndef RENDERING_CONTROLLERS_PARTICLE_CONTROLLER_H
 #define RENDERING_CONTROLLERS_PARTICLE_CONTROLLER_H
@@ -14,6 +14,7 @@
 
 #include "Controller.h"
 #include "Mathematics/Algebra/AVector.h"
+#include "Rendering/SceneGraph/Particles.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(ParticleController, ParticleControllerImpl);
@@ -25,11 +26,13 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(ParticleController);
         using ParentType = Controller;
+
         using AVector = Mathematics::AVectorF;
+        using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
 
     public:
         // 所连接的对象必须是Particles。
-        explicit ParticleController(CoreTools::DisableNotThrow disableNotThrow);
+        explicit ParticleController(const BaseRendererSharedPtr& baseRenderer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -61,13 +64,12 @@ namespace Rendering
 
         // 动画更新。应用程序时间以毫秒为单位。
         NODISCARD bool Update(double applicationTime) override;
-        void SetObject(ControllerInterface* object) override;
-        void SetObjectInCopy(ControllerInterface* object) override;
+        void SetControllerObject(const ControllerInterfaceSharedPtr& object) override;
+
+        void SetCamera(const std::shared_ptr<Camera>& aCamera) noexcept;
+        NODISCARD std::shared_ptr<Camera> GetCamera() noexcept;
 
     protected:
-        // 对于粒子运动数组的延迟分配。
-        void Reallocate(int numParticles);
-
         // 该类从运动参数计算新的位置和方向。
         // 派生类应该更新运动参数，然后要么调用基类的更新方法或在自己的更新方法中提供位置和方向。
         virtual void UpdateSystemMotion(float ctrlTime);
@@ -75,8 +77,6 @@ namespace Rendering
 
     private:
         PackageType impl;
-
-        Particles* particles;
     };
 
 #include STSTEM_WARNING_PUSH

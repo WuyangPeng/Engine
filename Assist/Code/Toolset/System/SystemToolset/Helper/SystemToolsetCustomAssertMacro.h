@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.1.3 (2022/10/24 22:42)
+///	版本：0.9.1.2 (2023/07/28 10:21)
 
 #ifndef SYSTEM_TOOLSET_HELPER_SYSTEM_TOOLSET_CUSTOM_ASSERT_MACRO_H
 #define SYSTEM_TOOLSET_HELPER_SYSTEM_TOOLSET_CUSTOM_ASSERT_MACRO_H
@@ -14,14 +14,18 @@
 #include "CoreTools/Helper/Assertion/UserCustomAssertMacro.h"
 
 #if defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
+
     #define SYSTEM_TOOLSET_ASSERT_LEVEL 0
+
 #endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
 
 #if !defined(SYSTEM_TOOLSET_ASSERT_LEVEL)
+
     #define SYSTEM_TOOLSET_ASSERT_LEVEL 4
+
 #endif  // SYSTEM_TOOLSET_ASSERT_LEVEL
 
-constexpr auto g_SystemToolsetAssert = SYSTEM_TOOLSET_ASSERT_LEVEL;
+constexpr auto gSystemToolsetAssert = SYSTEM_TOOLSET_ASSERT_LEVEL;
 
 static_assert(SYSTEM_TOOLSET_ASSERT_LEVEL <= USER_ASSERT_LEVEL, "Assert level definition error.");
 

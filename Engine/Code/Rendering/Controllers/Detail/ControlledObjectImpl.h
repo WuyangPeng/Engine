@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:01)
+///	版本：0.9.1.2 (2023/07/24 10:59)
 
 #ifndef RENDERING_CONTROLLERS_CONTROLLED_OBJECT_IMPL_H
 #define RENDERING_CONTROLLERS_CONTROLLED_OBJECT_IMPL_H
@@ -24,6 +24,7 @@ namespace Rendering
     {
     public:
         using ClassType = ControlledObjectImpl;
+
         using BufferSource = CoreTools::BufferSource;
         using BufferTarget = CoreTools::BufferTarget;
         using ObjectRegister = CoreTools::ObjectRegister;
@@ -31,6 +32,8 @@ namespace Rendering
         using Object = CoreTools::Object;
         using ObjectSharedPtr = CoreTools::ObjectSharedPtr;
         using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;
+        using ObjectSharedPtrContainer = std::vector<ObjectSharedPtr>;
+        using ConstObjectSharedPtrContainer = std::vector<ConstObjectSharedPtr>;
 
     public:
         explicit ControlledObjectImpl(ControllerInterface* realThis) noexcept;
@@ -53,11 +56,6 @@ namespace Rendering
         void DetachController(const ControllerInterfaceSharedPtr& controller);
         void DetachAllControllers();
         bool UpdateControllers(double applicationTime);
-        void AttachControllerInCopy(const ControllerInterfaceSharedPtr& controller);
-
-        NODISCARD const ControllerInterface* GetControllerObject() const noexcept;
-        NODISCARD ControllerInterface* GetControllerObject() noexcept;
-        void SetObject(ControllerInterface* aObject);
 
         void Load(CoreTools::BufferSource& source);
         void Save(CoreTools::BufferTarget& target) const;
@@ -66,17 +64,18 @@ namespace Rendering
         void Link(CoreTools::ObjectLink& source);
 
         NODISCARD ObjectSharedPtr GetObjectByName(const std::string& name);
-        NODISCARD std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name);
+        NODISCARD ObjectSharedPtrContainer GetAllObjectsByName(const std::string& name);
         NODISCARD ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
-        NODISCARD std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
+        NODISCARD ConstObjectSharedPtrContainer GetAllConstObjectsByName(const std::string& name) const;
+
+    private:
+        using ObjectAssociated = CoreTools::ObjectAssociated<ControllerInterface>;
 
     private:
         // 控制器控制该对象的数组。
-        std::vector<CoreTools::ObjectAssociated<ControllerInterface>> controllers;
+        std::vector<ObjectAssociated> controllers;
 
         ControllerInterface* realThis;
-
-        CoreTools::ObjectAssociated<ControllerInterface> object;
     };
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/09 19:26)
+///	版本：0.9.1.2 (2023/07/31 10:56)
 
 #ifndef SOUND_EFFECT_EXAMPLE_DLL_LIB_H
 #define SOUND_EFFECT_EXAMPLE_DLL_LIB_H

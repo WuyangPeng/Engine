@@ -53,7 +53,7 @@ Framework::EngineMiddleLayerContainer<ApplicationTrait,
       resource{ std::make_shared<ResourceManagerType>(modelViewController, environmentDirectory) },
       audio{ std::make_shared<AudioManagerType>(modelViewController, environmentDirectory) },
       cameraSystems{ std::make_shared<CameraSystemsManagerType>(modelViewController, environmentDirectory) },
-      rendering{ RenderingManagerType::CreateMiddleLayer(modelViewController, environmentDirectory) },
+      rendering{ std::make_shared<RenderingManagerType>(modelViewController, environmentDirectory) },
       gui{ std::make_shared<GUIManagerType>(modelViewController, environmentDirectory) }
 {
     Init();

@@ -5,16 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.9.0.12 (2023/06/16 16:50)
+///	版本：0.9.1.2 (2023/07/25 15:53)
 
-#ifndef ACTIVITY_LIB_H
-#define ACTIVITY_LIB_H
+#ifndef INTERFACE_LIB_H
+#define INTERFACE_LIB_H
 
 #include "Helper/UserMacro.h"
 
 #if defined(TCRE_USE_MSVC)
 
-    #ifndef BUILDING_ACTIVITY_STATIC
+    #ifndef BUILDING_INTERFACE_STATIC
 
         #ifdef _DEBUG
 
@@ -26,7 +26,7 @@
 
         #endif  // _DEBUG
 
-    #else  // !BUILDING_ACTIVITY_STATIC
+    #else  // !BUILDING_INTERFACE_STATIC
 
         #include "DllLib.h"
 
@@ -40,8 +40,8 @@
 
         #endif  // _DEBUG
 
-    #endif  // BUILDING_ACTIVITY_STATIC
+    #endif  // BUILDING_INTERFACE_STATIC
 
 #endif  // TCRE_USE_MSVC
 
-#endif  // ACTIVITY_LIB_H
+#endif  // INTERFACE_LIB_H

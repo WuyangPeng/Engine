@@ -10,11 +10,12 @@
 #include "System/SystemExport.h"
 
 #include "WindowsFontInformation.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/WindowsMacro.h"
 
 #include <gsl/util>
 
-int System::GetStringWidth(WindowsHWnd hWnd, const String& text) noexcept
+int System::GetStringWidth(WindowsHWnd hWnd, const String& text)
 {
     if (text.empty())
     {
@@ -23,7 +24,7 @@ int System::GetStringWidth(WindowsHWnd hWnd, const String& text) noexcept
 
     const auto context = GetSystemDC(hWnd);
     WindowsPointSize size{ 0, 0 };
-    if (GetSystemTextExtentPoint32(context, text.c_str(), gsl::narrow_cast<int>(text.size()), &size) &&
+    if (GetSystemTextExtentPoint32(context, text.c_str(), boost::numeric_cast<int>(text.size()), &size) &&
         ReleaseSystemDC(hWnd, context))
     {
         return gsl::narrow_cast<int>(size.cx);

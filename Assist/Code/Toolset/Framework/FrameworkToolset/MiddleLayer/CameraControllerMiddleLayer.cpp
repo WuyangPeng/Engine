@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 16:50)
+///	版本：0.9.1.2 (2023/07/28 14:23)
 
 #include "Toolset/Framework/FrameworkToolset/FrameworkToolsetExport.h"
 
@@ -14,9 +14,9 @@
 #include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/MiddleLayer/CameraControllerMiddleLayerDetail.h"
 
-CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, CameraControllerMiddleLayer)
+    CLASS_INVARIANT_STUB_DEFINE(FrameworkToolset, CameraControllerMiddleLayer)
 
-namespace FrameworkToolset
+        namespace FrameworkToolset
 {
     template class Framework::CameraControllerMiddleLayer<Framework::WindowApplicationTrait>;
 }

@@ -27,6 +27,10 @@ namespace Rendering
         using RendererObjectBridgeSharedPtr = std::shared_ptr<RendererObjectBridge>;
         using DrawTargetBridgeSharedPtr = std::shared_ptr<DrawTargetBridge>;
 
+        using VertexBufferSharedPtr = std::shared_ptr<VertexBuffer>;
+        using IndexBufferSharedPtr = std::shared_ptr<IndexBuffer>;
+        using VisualEffectSharedPtr = std::shared_ptr<VisualEffect>;
+
         using ConstVertexBufferSharedPtr = std::shared_ptr<const VertexBuffer>;
         using ConstIndexBufferSharedPtr = std::shared_ptr<const IndexBuffer>;
         using ConstVisualEffectSharedPtr = std::shared_ptr<const VisualEffect>;
@@ -61,14 +65,15 @@ namespace Rendering
         NODISCARD bool HasDepthRange01() const;
 
         NODISCARD std::string GetShaderName(const std::string& name) const;
+        NODISCARD std::string GetShaderExtendName() const;
 
         NODISCARD void Resize(int width, int height);
 
         void SwapBuffers(int syncInterval);
 
-        NODISCARD int64_t DrawPrimitive(const ConstVertexBufferSharedPtr& vertexBuffer,
-                                        const ConstIndexBufferSharedPtr& indexBuffer,
-                                        const ConstVisualEffectSharedPtr& effect);
+        NODISCARD int64_t DrawPrimitive(const VertexBufferSharedPtr& vertexBuffer,
+                                        const IndexBufferSharedPtr& indexBuffer,
+                                        const VisualEffectSharedPtr& effect);
 
         void ClearColorBuffer(const RendererClear& rendererClear);
         void ClearDepthBuffer(const RendererClear& rendererClear);

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.4 (2023/03/17 14:46)
+///	版本：0.9.1.2 (2023/07/28 15:34)
 
 #ifndef EXPORT_TEST_SOUND_EFFECT_NON_COPY_MACRO_IMPL_H
 #define EXPORT_TEST_SOUND_EFFECT_NON_COPY_MACRO_IMPL_H

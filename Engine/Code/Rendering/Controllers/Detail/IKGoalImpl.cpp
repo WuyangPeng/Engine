@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:04)
+///	版本：0.9.1.2 (2023/07/25 14:35)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,13 +21,13 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
 Rendering::IKGoalImpl::IKGoalImpl(const SpatialSharedPtr& target, const SpatialSharedPtr& effector, float weight) noexcept
-    : goalTarget{ target }, effector{ effector }, weight{ weight }
+    : weight{ weight }, goalTarget{ target }, effector{ effector }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::IKGoalImpl::IKGoalImpl() noexcept
-    : goalTarget{}, effector{}, weight{ 1.0f }
+    : weight{ 1.0f }, goalTarget{}, effector{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

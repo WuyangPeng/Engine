@@ -1,6 +1,3 @@
 TODO Level 6
 
-0.9.0.12
- 
-1.（TerrainEditor）地形的可视化编辑。 
- 
+0.9.1.2

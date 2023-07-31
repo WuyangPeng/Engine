@@ -31,6 +31,8 @@
 #include "SpotLightEffect.h"
 #include "Texture2DEffect.h"
 #include "Texture3DEffect.h"
+#include "VertexColorEffect.h"
 #include "VisualEffect.h"
+#include "VolumeFogEffect.h"
 
 #endif  // RENDERING_LOCAL_EFFECTS_H

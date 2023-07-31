@@ -102,6 +102,13 @@ std::string Rendering::RenderingDevice::GetShaderName(const std::string& name) c
     return impl->GetShaderName(name);
 }
 
+std::string Rendering::RenderingDevice::GetShaderExtendName() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetShaderExtendName();
+}
+
 void Rendering::RenderingDevice::Resize(int width, int height)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -109,11 +116,11 @@ void Rendering::RenderingDevice::Resize(int width, int height)
     return impl->Resize(width, height);
 }
 
-int64_t Rendering::RenderingDevice::DrawPrimitive(const ConstVertexBufferSharedPtr& vertexBuffer, const ConstIndexBufferSharedPtr& indexBuffer, const ConstVisualEffectSharedPtr& effect)
+int64_t Rendering::RenderingDevice::DrawPrimitive(RendererObjectBridge& rendererObjectBridge, const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer, const VisualEffectSharedPtr& effect)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return impl->DrawPrimitive(vertexBuffer, indexBuffer, effect);
+    return impl->DrawPrimitive(rendererObjectBridge, vertexBuffer, indexBuffer, effect);
 }
 
 void Rendering::RenderingDevice::ClearColorBuffer(const RendererClear& rendererClear)

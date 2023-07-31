@@ -19,7 +19,7 @@
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Rendering/DataTypes/Bound.h"
-#include "Rendering/RendererEngine/RendererManager.h"
+#include "Rendering/RendererEngine/RendererEngine.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/SceneGraph/TrianglesMesh.h"
 #include "Physics/CollisionDetection/BoundTreeDetail.h"
@@ -49,12 +49,8 @@ void Physics::BoundTreeChildTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializer();
 
-    Rendering::RendererManager::Create();
-
     ASSERT_NOT_THROW_EXCEPTION_0(CreateTrianglesMeshFile);
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
-
-    Rendering::RendererManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminator();
 }

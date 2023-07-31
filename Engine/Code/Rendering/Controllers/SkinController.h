@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:02)
+///	版本：0.9.1.2 (2023/07/24 13:49)
 
 #ifndef RENDERING_CONTROLLERS_SKIN_CONTROLLER_H
 #define RENDERING_CONTROLLERS_SKIN_CONTROLLER_H
@@ -26,11 +26,15 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(SkinController);
         using ParentType = Controller;
+
         using APoint = Mathematics::APointF;
+        using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
+        using ConstObjectAssociated = CoreTools::ConstObjectAssociated<Node>;
+        using ConstObjectAssociatedContainer = std::vector<ConstObjectAssociated>;
 
     public:
         // 顶点和骨骼的数目在对象的生存期是固定的。
-        SkinController(int numVertices, int numBones);
+        SkinController(int numVertices, int numBones, const BaseRendererSharedPtr& baseRenderer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -48,7 +52,7 @@ namespace Rendering
         void SetWeights(int bonesIndex, int verticesIndex, float weights);
         void SetOffsets(int bonesIndex, int verticesIndex, const APoint& offsets);
 
-        void SetBones(const std::vector<CoreTools::ConstObjectAssociated<Node>>& bones);
+        void SetBones(const ConstObjectAssociatedContainer& bones);
         void SetWeights(int bonesIndex, const std::vector<float>& weights);
         void SetOffsets(int bonesIndex, const std::vector<APoint>& offsets);
 
@@ -57,8 +61,7 @@ namespace Rendering
 
         NODISCARD ControllerInterfaceSharedPtr Clone() const override;
 
-        void SetObject(ControllerInterface* object) override;
-        void SetObjectInCopy(ControllerInterface* object) override;
+        void SetControllerObject(const ControllerInterfaceSharedPtr& object) override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     private:

@@ -63,3 +63,13 @@ void Database::MysqlBoostDatabaseFlush::CheckWrappersStrategy(const BasisDatabas
         THROW_EXCEPTION(SYSTEM_TEXT("数据库不是使用mysql boost。"))
     }
 }
+
+void Database::MysqlBoostDatabaseFlush::Wait()
+{
+    DATABASE_CLASS_IS_VALID_9;
+
+    for (auto& element : connection)
+    {
+        element->Wait();
+    }
+}

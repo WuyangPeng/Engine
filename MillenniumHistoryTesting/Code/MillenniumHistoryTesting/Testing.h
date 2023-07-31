@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策测试版本：0.9.0.12 (2023/06/13 22:38)
+///	版本：0.9.1.2 (2023/07/25 19:25)
 
 #ifndef THE_LAST_OVERLORD_TESTING_H
 #define THE_LAST_OVERLORD_TESTING_H

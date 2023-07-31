@@ -55,8 +55,8 @@ bool System::MakeWordTesting::ReverseMakeWordTest()
 
     const auto param = low + (high << reverseMakeWordShiftNum);
 
-    const auto reverseLow = LowWord(param);
-    const auto reverseHigh = HighWord(param);
+    const auto reverseLow = GetLowWord(param);
+    const auto reverseHigh = GetHighWord(param);
 
     ASSERT_EQUAL(reverseLow, low);
     ASSERT_EQUAL(reverseHigh, high);

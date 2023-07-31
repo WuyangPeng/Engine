@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.4 (2023/03/14 15:48)
+///	版本：0.9.1.2 (2023/07/31 13:53)
 
 #ifndef CORE_TOOLS_EXAMPLE_EXPORT_H
 #define CORE_TOOLS_EXAMPLE_EXPORT_H

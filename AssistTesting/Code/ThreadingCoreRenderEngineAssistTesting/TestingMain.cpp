@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助测试版本：0.9.0.12 (2023/06/15 19:16)
+///	版本：0.9.1.2 (2023/07/28 09:13)
 
 #include "ThreadingCoreRenderEngineAssistTesting/TestingHelper.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"

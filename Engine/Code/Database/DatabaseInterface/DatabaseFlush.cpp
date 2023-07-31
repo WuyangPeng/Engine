@@ -56,3 +56,10 @@ Database::WrappersStrategy Database::DatabaseFlush::GetWrappersStrategy() const 
 
     return impl->GetWrappersStrategy();
 }
+
+void Database::DatabaseFlush::Wait()
+{
+    DATABASE_CLASS_IS_VALID_9;
+
+    return impl->Wait();
+}

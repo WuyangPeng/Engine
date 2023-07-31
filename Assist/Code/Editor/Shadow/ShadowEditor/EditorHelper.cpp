@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/15 14:48)
+///	版本：0.9.1.2 (2023/07/31 14:40)
 
 #include "Editor.h"
 #include "EditorHelper.h"
@@ -13,8 +13,8 @@
 #include "Framework/MainFunctionHelper/WindowMainFunctionHelperDetail.h"
 #include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h"
 
-ShadowEditor::EditorHelper ::EditorHelper(WindowsHInstance hInstance, char* cmdLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
-    : ParentType{ hInstance, cmdLine, information, environmentDirectory }
+ShadowEditor::EditorHelper ::EditorHelper(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ instance, commandLine, information, environmentDirectory }
 {
     SELF_CLASS_IS_VALID_9;
 }

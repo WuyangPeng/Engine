@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.9.0.12 (2023/06/16 16:51)
+///	版本：0.9.1.2 (2023/07/25 15:54)
 
-#ifndef ACTIVITY_PLACEHOLDER_PLACEHOLDER_H
-#define ACTIVITY_PLACEHOLDER_PLACEHOLDER_H
+#ifndef INTERFACE_PLACEHOLDER_PLACEHOLDER_H
+#define INTERFACE_PLACEHOLDER_PLACEHOLDER_H
 
 #include "Interface/InterfaceDll.h"
 
@@ -16,7 +16,7 @@
 
 namespace Interface
 {
-    class ACTIVITY_DEFAULT_DECLARE Placeholder
+    class INTERFACE_DEFAULT_DECLARE Placeholder
     {
     public:
         using ClassType = Placeholder;
@@ -29,4 +29,4 @@ namespace Interface
     };
 }
 
-#endif  // ACTIVITY_PLACEHOLDER_PLACEHOLDER_H
+#endif  // INTERFACE_PLACEHOLDER_PLACEHOLDER_H

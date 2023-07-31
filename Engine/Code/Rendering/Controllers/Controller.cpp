@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:06)
+///	版本：0.9.1.2 (2023/07/24 10:57)
 
 #include "Rendering/RenderingExport.h"
 
@@ -29,34 +29,34 @@ CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Controller);
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Controller)
 
 Rendering::Controller::Controller(CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{ disableNotThrow }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, controllerInterface{ nullptr }
+    : ParentType{ disableNotThrow }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Controller)
 
-const Rendering::ControllerInterface* Rendering::Controller::GetControllerObject() const noexcept
+Rendering::Controller::ConstControllerInterfaceSharedPtr Rendering::Controller::GetControllerObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return controllerInterface;
+    return impl->GetControllerObject();
 }
 
-Rendering::ControllerInterface* Rendering::Controller::GetControllerObject() noexcept
+Rendering::Controller::ControllerInterfaceSharedPtr Rendering::Controller::GetControllerObject()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    return controllerInterface;
+    return impl->GetControllerObject();
 }
 
-void Rendering::Controller::SetObject(ControllerInterface* aObject)
+void Rendering::Controller::SetControllerObject(const ControllerInterfaceSharedPtr& aObject)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     CoreTools::DisableNoexcept();
 
-    controllerInterface = aObject;
+    impl->SetObject(aObject);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetApplicationTime, double, void)
@@ -81,7 +81,7 @@ CoreTools::ObjectSharedPtr Rendering::Controller::GetObjectByName(const std::str
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    // m_Object不搜索对象图以避免循环。
+    // object不搜索对象图以避免循环。
     return ParentType::GetObjectByName(name);
 }
 
@@ -89,16 +89,15 @@ std::vector<CoreTools::ObjectSharedPtr> Rendering::Controller::GetAllObjectsByNa
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    // m_Object不搜索对象图以避免循环。
+    // object不搜索对象图以避免循环。
     return ParentType::GetAllObjectsByName(name);
-    ;
 }
 
 CoreTools::ConstObjectSharedPtr Rendering::Controller::GetConstObjectByName(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    // m_Object不搜索对象图以避免循环。
+    // object不搜索对象图以避免循环。
     return ParentType::GetConstObjectByName(name);
 }
 
@@ -106,13 +105,13 @@ std::vector<CoreTools::ConstObjectSharedPtr> Rendering::Controller::GetAllConstO
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    // m_Object不搜索对象图以避免循环。
+    // object不搜索对象图以避免循环。
     return ParentType::GetAllConstObjectsByName(name);
     ;
 }
 
-Rendering::Controller::Controller(LoadConstructor value)
-    : ParentType{ value }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, controllerInterface{ nullptr }
+Rendering::Controller::Controller(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

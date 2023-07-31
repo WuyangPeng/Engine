@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 17:20)
+///	版本：0.9.1.2 (2023/07/28 13:41)
 
 #ifndef MAIN_FUNCTION_HELPER_BASE1_H
 #define MAIN_FUNCTION_HELPER_BASE1_H
@@ -25,7 +25,7 @@ namespace Framework
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD int DoRun() final;
+        NODISCARD int DoRun() override;
     };
 }
 

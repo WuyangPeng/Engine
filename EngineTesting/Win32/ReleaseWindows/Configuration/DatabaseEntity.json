@@ -1,0 +1,36 @@
+{
+  "Chapter": {
+    "databaseName": "UserChapter",
+
+    "entity": {
+      "userId": {
+        "dataType": "Int64",
+        "indexType": "Key"
+      },
+
+      "chapterId": {
+        "dataType": "Int32"
+      },
+
+      "chapterName": {
+        "dataType": "String"
+      },
+
+      "chanceWinning": {
+        "dataType": "Double"
+      },
+
+      "winning": {
+        "dataType": "Bool"
+      },
+
+      "currency": {
+        "dataType": "Int64Count"
+      },
+
+      "count": {
+        "dataType": "Int32Count"
+      }
+    }
+  }
+}

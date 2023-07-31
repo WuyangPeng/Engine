@@ -9,6 +9,7 @@
 
 #include "Emperor.h"
 #include "EmperorContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::EmperorContainer::Container AncientBooks::EmperorContainer::GetCon
     USER_CLASS_IS_VALID_CONST_9;
 
     return emperor;
+}
+
+int AncientBooks::EmperorContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(emperor.size());
 }
 

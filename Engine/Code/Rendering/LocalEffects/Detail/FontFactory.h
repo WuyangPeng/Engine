@@ -36,6 +36,7 @@ namespace Rendering
     public:
         NODISCARD static FontSharedPtr Create(FontType fontType,
                                               ProgramFactory& factory,
+                                              const std::string& shaderExtendName,
                                               int maxMessageLength);
     };
 }

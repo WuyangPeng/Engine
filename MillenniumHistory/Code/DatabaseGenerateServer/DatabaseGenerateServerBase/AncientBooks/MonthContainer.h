@@ -38,6 +38,8 @@ namespace AncientBooks
         NODISCARD ConstMonthBaseSharedPtr GetMonth(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstMonthBaseSharedPtr GetFirstMonth(Function function) const;
 

@@ -37,7 +37,7 @@ void System::LoadIconTesting::MainTest()
 void System::LoadIconTesting::LoadIconTest()
 {
     ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gApplication));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gIDIHand));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gIdiHand));
     ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gQuestion));
     ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gExclamation));
     ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gAsterisk));

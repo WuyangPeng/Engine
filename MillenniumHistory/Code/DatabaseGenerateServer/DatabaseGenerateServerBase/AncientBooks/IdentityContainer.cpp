@@ -9,6 +9,7 @@
 
 #include "Identity.h"
 #include "IdentityContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::IdentityContainer::Container AncientBooks::IdentityContainer::GetC
     USER_CLASS_IS_VALID_CONST_9;
 
     return identity;
+}
+
+int AncientBooks::IdentityContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(identity.size());
 }
 

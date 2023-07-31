@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 17:26)
+///	版本：0.9.1.2 (2023/07/28 13:36)
 
 #ifndef WINDOW_MESSAGE_LOOP1_H
 #define WINDOW_MESSAGE_LOOP1_H
@@ -30,10 +30,10 @@ namespace Framework
         CLASS_INVARIANT_FINAL_DECLARE;
 
     protected:
-        NODISCARD int EnterMessageLoop() final;
+        NODISCARD int EnterMessageLoop() override;
 
     private:
-        static void DisplayFunction(WindowsHWnd hwnd, int64_t timeDelta) noexcept;
+        static void DisplayFunction(WindowsHWnd hWnd, int64_t timeDelta) noexcept;
 
         void EnterOldMessageLoop(const String& className);
         void EnterNewMessageLoop(const String& className);

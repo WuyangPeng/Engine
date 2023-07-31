@@ -38,7 +38,7 @@ Framework::WindowHCursorTesting::WindowHCursorTesting(const OStreamShared& strea
                  { 32645, System::gSizeNs },
                  { 32646, System::gSizeAll },
                  { 32648, System::gNo },
-                 { 32649, System::gIDCHand },
+                 { 32649, System::gIdcHand },
                  { 32650, System::gAppStarting },
                  { 32651, System::gHelp } }
 {

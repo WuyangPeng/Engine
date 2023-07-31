@@ -359,7 +359,7 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGene
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateServerTesting/DatabaseGenerateServerBaseTesting/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/DebugWindows/EntityBatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
 $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe</Command>
     </PreBuildEvent>
     <PostBuildEvent>
@@ -380,14 +380,14 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
       <Command>
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStaticD.exe
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateServerTesting/DatabaseGenerateServerBaseTesting/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe</Command>
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStaticD.exe</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|Win32'">
@@ -410,8 +410,8 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGene
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateServerTesting/DatabaseGenerateServerBaseTesting/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe</Command>
+xcopy "$(AssistEngineering)/$(Platform)/StaticDebugWindows/EntityBatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStaticD.exe</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -469,7 +469,7 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGene
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateServerTesting/DatabaseGenerateServerBaseTesting/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/ReleaseWindows/EntityBatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
 $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe</Command>
     </PreBuildEvent>
     <PostBuildEvent>
@@ -494,14 +494,14 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
       <Command>
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStatic.exe
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateServerTesting/DatabaseGenerateServerBaseTesting/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe</Command>
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStatic.exe</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|Win32'">
@@ -528,8 +528,8 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGene
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateServerTesting/DatabaseGenerateServerBaseTesting/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe</Command>
+xcopy "$(AssistEngineering)/$(Platform)/StaticReleaseWindows/EntityBatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStatic.exe</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -579,7 +579,7 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGene
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateServerTesting/DatabaseGenerateServerBaseTesting/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/DebugWindows/EntityBatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
 $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe</Command>
     </PreBuildEvent>
     <PostBuildEvent>
@@ -600,14 +600,14 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
       <Command>
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionD.exe
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStaticD.exe
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateServerTesting/DatabaseGenerateServerBaseTesting/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe</Command>
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStaticD.exe</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticDebug|x64'">
@@ -630,8 +630,8 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGene
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateServerTesting/DatabaseGenerateServerBaseTesting/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionD.exe</Command>
+xcopy "$(AssistEngineering)/$(Platform)/StaticDebugWindows/EntityBatchConversionStaticD.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStaticD.exe</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -689,7 +689,7 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGene
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateServerTesting/DatabaseGenerateServerBaseTesting/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(AssistEngineering)/$(Platform)/ReleaseWindows/EntityBatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
 $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe</Command>
     </PreBuildEvent>
     <PostBuildEvent>
@@ -714,14 +714,14 @@ $(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchC
       <Command>
 xcopy "$(ProjectDir)/Configuration/BatchConversion.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooks/*.xlsx" "$(ProjectDir)/Resource/AncientBooksInput/" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversion.exe
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/BatchConversionStatic.exe
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGenerateServer/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateServerTesting/DatabaseGenerateServerBaseTesting/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe</Command>
+xcopy "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStatic.exe</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineStaticRelease|x64'">
@@ -748,8 +748,8 @@ xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(ProjectDir)/../DatabaseGene
 xcopy "$(ProjectDir)/Resource/AncientBooks/*.csv" "$(MillenniumHistoryTestingEngineering)/MillenniumHistoryWindows/DatabaseGenerateServerTesting/DatabaseGenerateServerBaseTesting/Resource/AncientBooksCsv/" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
 xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
-xcopy "$(AssistEngineering)/$(Platform)/ReleaseWindows/EntityBatchConversion.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
-$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversion.exe</Command>
+xcopy "$(AssistEngineering)/$(Platform)/StaticReleaseWindows/EntityBatchConversionStatic.exe" "$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+$(MillenniumHistoryEngineering)/$(Platform)/$(Configuration)Windows/EntityBatchConversionStatic.exe</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -46,6 +46,8 @@ namespace Database
 
         NODISCARD WrappersStrategy GetWrappersStrategy() const noexcept;
 
+        virtual void Wait() = 0;
+
     private:
         ConfigurationStrategy configurationStrategy;
     };

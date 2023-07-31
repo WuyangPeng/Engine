@@ -38,6 +38,8 @@ namespace AncientBooks
         NODISCARD ConstImperialCourtBaseSharedPtr GetImperialCourt(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstImperialCourtBaseSharedPtr GetFirstImperialCourt(Function function) const;
 

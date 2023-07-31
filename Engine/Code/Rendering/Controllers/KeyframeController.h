@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:02)
+///	版本：0.9.1.2 (2023/07/25 13:42)
 
 #ifndef RENDERING_CONTROLLERS_KEYFRAME_CONTROLLER_H
 #define RENDERING_CONTROLLERS_KEYFRAME_CONTROLLER_H
@@ -75,8 +75,7 @@ namespace Rendering
 
         // 动画更新。应用程序时间以毫秒为单位。
         NODISCARD bool Update(double applicationTime) override;
-        void SetObject(ControllerInterface* object) override;
-        void SetObjectInCopy(ControllerInterface* object) override;
+        void SetControllerObject(const ControllerInterfaceSharedPtr& object) override;
 
         NODISCARD ControllerInterfaceSharedPtr Clone() const override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;

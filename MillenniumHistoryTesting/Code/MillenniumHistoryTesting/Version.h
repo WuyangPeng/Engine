@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策测试版本：0.9.0.12 (2023/06/13 22:38)
+///	版本：0.9.1.2 (2023/07/25 19:25)
 
 #ifndef MILLENNIUM_HISTORY_TESTING_VERSION_H
 #define MILLENNIUM_HISTORY_TESTING_VERSION_H
@@ -15,6 +15,6 @@
 //  g_MillenniumHistoryTestingVersion / 10000 % 100 是次版本号
 //  g_MillenniumHistoryTestingVersion / 1000000 % 100 是主版本号
 
-constexpr auto gMillenniumHistoryTestingVersion = 90012;
+constexpr auto gMillenniumHistoryTestingVersion = 90102;
 
 #endif  // MILLENNIUM_HISTORY_TESTING_VERSION_H

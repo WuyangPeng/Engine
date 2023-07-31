@@ -11,6 +11,7 @@
 
 #include "BlendTransformController.h"
 #include "Detail/BlendTransformControllerImpl.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -142,20 +143,12 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController, IsGeometricScale, bool)
 
-void Rendering::BlendTransformController::SetObject(ControllerInterface* object)
+void Rendering::BlendTransformController::SetControllerObject(const ControllerInterfaceSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::GetCurrentRttiType()), "ÎÞÐ§Àà\n");
 
-    ParentType::SetObject(object);
-    impl->SetObject(object);
-}
-
-void Rendering::BlendTransformController::SetObjectInCopy(ControllerInterface* object)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    ParentType::SetObject(object);
+    ParentType::SetControllerObject(object);
     impl->SetObject(object);
 }
 
@@ -189,7 +182,7 @@ bool Rendering::BlendTransformController::Update(double applicationTime)
             SetMatrix(blendMatrix);
         }
 
-        auto spatial = dynamic_cast<Spatial*>(GetControllerObject());
+        auto spatial = boost::polymorphic_pointer_cast<Spatial>(GetControllerObject());
 
         if (spatial != nullptr)
         {

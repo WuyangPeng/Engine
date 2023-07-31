@@ -1,5 +1,3 @@
 TODO Level 3
 
-0.9.0.12
-
-1. （MathematicsExample）完成数学库所需要的例子。
+0.9.1.2

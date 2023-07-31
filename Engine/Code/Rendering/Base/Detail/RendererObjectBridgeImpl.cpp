@@ -91,3 +91,10 @@ Rendering::TotalAllocation Rendering::RendererObjectBridgeImpl::GetTotalAllocati
 
     return totalAllocation;
 }
+
+void Rendering::RendererObjectBridgeImpl::Release() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    container.clear();
+}

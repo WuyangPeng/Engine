@@ -39,7 +39,7 @@ namespace Rendering
         Particles(const VertexFormatSharedPtr& vertexformat,
                   const VertexBufferSharedPtr& vertexbuffer,
                   int indexSize,
-                  const std::vector<APoint>& positions,
+                  const std::vector<Mathematics::Vector4F>& positions,
                   const std::vector<float>& sizes,
                   float sizeAdjust);
 
@@ -48,12 +48,12 @@ namespace Rendering
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Particles);
 
         NODISCARD int GetNumParticles() const;
-        NODISCARD APoint GetParticlesPosition(int index) const;
+        NODISCARD Mathematics::Vector4F GetParticlesPosition(int index) const;
         NODISCARD float GetSize(int index) const;
         NODISCARD void SetSizeAdjust(float sizeAdjust);
         NODISCARD float GetSizeAdjust() const noexcept;
 
-        void SetPosition(int index, const APoint& position);
+        void SetPosition(int index, const Mathematics::Vector4F& position);
         void SetSize(int index, float size);
 
         // 允许应用程序指定小于最大数量的顶点绘制。

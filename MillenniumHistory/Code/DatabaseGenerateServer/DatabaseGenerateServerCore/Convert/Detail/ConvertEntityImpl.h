@@ -16,6 +16,8 @@
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity/DatabaseEntity.h"
 #include "Framework/Helper/UserMacro.h"
 
+#include <map>
+
 namespace DatabaseGenerateServerCore
 {
     using namespace AncientBooks;
@@ -30,40 +32,89 @@ namespace DatabaseGenerateServerCore
         using DatabaseFlushSharedPtr = std::shared_ptr<DatabaseFlush>;
 
     public:
-        explicit ConvertEntityImpl(const DatabaseFlushSharedPtr& databaseFlush) noexcept;
+        explicit ConvertEntityImpl(const DatabaseFlushSharedPtr& databaseFlush);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ArticleEntity Convert(const ArticleBase& article) const;
-        NODISCARD BookEntity Convert(const BookBase& book) const;
-        NODISCARD CalendarEntity Convert(const CalendarBase& calendar) const;
-        NODISCARD CategoryEntity Convert(const CategoryBase& category) const;
-        NODISCARD CharacterEntity Convert(const CharacterBase& character) const;
-        NODISCARD CountryEntity Convert(const CountryBase& country) const;
-        NODISCARD DayEntity Convert(const DayBase& day) const;
-        NODISCARD EmperorEntity Convert(const EmperorBase& emperor) const;
-        NODISCARD GatherEntity Convert(const GatherBase& gather) const;
-        NODISCARD GenusEntity Convert(const GenusBase& genus) const;
-        NODISCARD GeographicEntity Convert(const GeographicBase& geographic) const;
-        NODISCARD IdentityEntity Convert(const IdentityBase& identity) const;
-        NODISCARD ImperialCourtEntity Convert(const ImperialCourtBase& imperialCourt) const;
-        NODISCARD MonthEntity Convert(const MonthBase& month) const;
-        NODISCARD ReignTitleEntity Convert(const ReignTitleBase& reignTitle) const;
-        NODISCARD SexagenaryCycleEntity Convert(const SexagenaryCycleBase& sexagenaryCycle) const;
-        NODISCARD SourceEntity Convert(const SourceBase& source) const;
-        NODISCARD VersionEntity Convert(const VersionBase& version) const;
-        NODISCARD YearEntity Convert(const YearBase& year) const;
+        void DeleteInvalidDatabase();
+
+        NODISCARD ArticleEntity Convert(const ArticleBase& article);
+        NODISCARD BookEntity Convert(const BookBase& book);
+        NODISCARD CalendarEntity Convert(const CalendarBase& calendar);
+        NODISCARD CategoryEntity Convert(const CategoryBase& category);
+        NODISCARD CharacterEntity Convert(const CharacterBase& character);
+        NODISCARD CountryEntity Convert(const CountryBase& country);
+        NODISCARD DayEntity Convert(const DayBase& day);
+        NODISCARD EmperorEntity Convert(const EmperorBase& emperor);
+        NODISCARD GatherEntity Convert(const GatherBase& gather);
+        NODISCARD GenusEntity Convert(const GenusBase& genus);
+        NODISCARD GeographicEntity Convert(const GeographicBase& geographic);
+        NODISCARD IdentityEntity Convert(const IdentityBase& identity);
+        NODISCARD ImperialCourtEntity Convert(const ImperialCourtBase& imperialCourt);
+        NODISCARD MonthEntity Convert(const MonthBase& month);
+        NODISCARD ReignTitleEntity Convert(const ReignTitleBase& reignTitle);
+        NODISCARD SexagenaryCycleEntity Convert(const SexagenaryCycleBase& sexagenaryCycle);
+        NODISCARD SourceEntity Convert(const SourceBase& source);
+        NODISCARD VersionEntity Convert(const VersionBase& version);
+        NODISCARD YearEntity Convert(const YearBase& year);
 
     private:
         using String = System::String;
         using StringContainer = std::vector<String>;
         using StringContainerConstIter = StringContainer::const_iterator;
+        using StringArray = Database::Traits::StringArray;
+        using BasisDatabaseManager = Database::BasisDatabaseManager;
+        using ResultContainer = std::vector<BasisDatabaseManager>;
+        using ArticleEntityContainer = std::map<int64_t, ArticleEntity>;
+        using BookEntityContainer = std::map<int32_t, BookEntity>;
+        using CalendarEntityContainer = std::map<int32_t, CalendarEntity>;
+        using CategoryEntityContainer = std::map<int32_t, CategoryEntity>;
+        using CharacterEntityContainer = std::map<int32_t, CharacterEntity>;
+        using CountryEntityContainer = std::map<int32_t, CountryEntity>;
+        using DayEntityContainer = std::map<int32_t, DayEntity>;
+        using EmperorEntityContainer = std::map<int32_t, EmperorEntity>;
+        using GatherEntityContainer = std::map<int32_t, GatherEntity>;
+        using GenusEntityContainer = std::map<int32_t, GenusEntity>;
+        using GeographicEntityContainer = std::map<int32_t, GeographicEntity>;
+        using IdentityEntityContainer = std::map<int32_t, IdentityEntity>;
+        using ImperialCourtEntityContainer = std::map<int32_t, ImperialCourtEntity>;
+        using MonthEntityContainer = std::map<int32_t, MonthEntity>;
+        using ReignTitleEntityContainer = std::map<int64_t, ReignTitleEntity>;
+        using SexagenaryCycleEntityContainer = std::map<int32_t, SexagenaryCycleEntity>;
+        using SourceEntityContainer = std::map<int32_t, SourceEntity>;
+        using VersionEntityContainer = std::map<int32_t, VersionEntity>;
+        using YearEntityContainer = std::map<int32_t, YearEntity>;
 
     private:
-        NODISCARD static Database::Traits::StringArray Convert(const StringContainerConstIter& begin, const StringContainerConstIter& end);
+        NODISCARD static StringArray Convert(const StringContainerConstIter& begin, const StringContainerConstIter& end);
+
+        template <typename KeyType, typename EntityType>
+        NODISCARD std::map<KeyType, EntityType> GetEntityContainer(const ResultContainer& database);
+
+        template <typename EntityContainerType>
+        void DeleteInvalidDatabase(const EntityContainerType& entityContainer);
 
     private:
         DatabaseFlushSharedPtr databaseFlush;
+        ArticleEntityContainer articleEntityContainer;
+        BookEntityContainer bookEntityContainer;
+        CalendarEntityContainer calendarEntityContainer;
+        CategoryEntityContainer categoryEntityContainer;
+        CharacterEntityContainer characterEntityContainer;
+        CountryEntityContainer countryEntityContainer;
+        DayEntityContainer dayEntityContainer;
+        EmperorEntityContainer emperorEntityContainer;
+        GatherEntityContainer gatherEntityContainer;
+        GenusEntityContainer genusEntityContainer;
+        GeographicEntityContainer geographicEntityContainer;
+        IdentityEntityContainer identityEntityContainer;
+        ImperialCourtEntityContainer imperialCourtEntityContainer;
+        MonthEntityContainer monthEntityContainer;
+        ReignTitleEntityContainer reignTitleEntityContainer;
+        SexagenaryCycleEntityContainer sexagenaryCycleEntityContainer;
+        SourceEntityContainer sourceEntityContainer;
+        VersionEntityContainer versionEntityContainer;
+        YearEntityContainer yearEntityContainer;
     };
 }
 

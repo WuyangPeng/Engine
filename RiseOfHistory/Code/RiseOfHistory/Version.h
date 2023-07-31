@@ -15,6 +15,6 @@
 //  gRiseOfHistoryVersion / 10000 % 100 是次版本号
 //  gRiseOfHistoryVersion / 1000000 % 100 是主版本号
 
-constexpr auto gRiseOfHistoryVersion = 90101;
+constexpr auto gRiseOfHistoryVersion = 90102;
 
 #endif  // RISE_OF_HISTORY_VERSION_H

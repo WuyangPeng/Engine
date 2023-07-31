@@ -284,7 +284,7 @@ void Rendering::Spatial::PostLink()
 
     ParentType::PostLink();
 
-    parent = dynamic_cast<Spatial*>(GetControllerObject());
+    //parent = dynamic_cast<Spatial*>(GetControllerObject());
 }
 
 void Rendering::Spatial::Load(CoreTools::BufferSource& source)

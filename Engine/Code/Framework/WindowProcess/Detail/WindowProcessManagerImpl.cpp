@@ -35,7 +35,7 @@ Framework::WindowProcessManagerImpl::ClassNameContainerSharedPtr Framework::Wind
 Framework::WindowProcessManagerImpl::MessageFunctionPointerContainerSharedPtr Framework::WindowProcessManagerImpl::GetMessageFunctionPointer()
 {
     static MessageFunctionPointerContainer messageFunctionPointerContainer{ { System::WindowsMessages::Paint, &WindowMessageInterface::PaintMessage },
-                                                                            { System::WindowsMessages::EraseBkgnd, &WindowMessageInterface::EraseBackgroundMessage },
+                                                                            { System::WindowsMessages::EraseBackground, &WindowMessageInterface::EraseBackgroundMessage },
                                                                             { System::WindowsMessages::Move, &WindowMessageInterface::MoveMessage },
                                                                             { System::WindowsMessages::Size, &WindowMessageInterface::SizeMessage },
                                                                             { System::WindowsMessages::Char, &WindowMessageInterface::CharMessage },

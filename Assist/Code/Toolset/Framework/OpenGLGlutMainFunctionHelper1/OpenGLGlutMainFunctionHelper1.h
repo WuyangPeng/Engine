@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 17:22)
+///	版本：0.9.1.2 (2023/07/28 13:39)
 
 #ifndef OPENGL_GLUT_MAIN_FUNCTION_HELPER1_H
 #define OPENGL_GLUT_MAIN_FUNCTION_HELPER1_H

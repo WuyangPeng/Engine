@@ -25,8 +25,10 @@ namespace CoreTools
     {
     public:
         NON_COPY_TYPE_DECLARE(IFStreamManager);
+
         using String = System::String;
         using IFileStream = System::IFileStream;
+        using FileContent = std::vector<String>;
 
     public:
         explicit IFStreamManager(const String& fileName);
@@ -39,6 +41,7 @@ namespace CoreTools
         void SetSimplifiedChinese();
 
         NODISCARD IFileStream& GetFileStream() noexcept;
+        NODISCARD FileContent GetFileContent(System::StringView separate) const;
 
     private:
         PackageType impl;

@@ -33,29 +33,31 @@ namespace DatabaseGenerateServerCore
         using DatabaseFlushSharedPtr = std::shared_ptr<DatabaseFlush>;
 
     public:
-        explicit ConvertEntity(const DatabaseFlushSharedPtr& databaseFlush) noexcept;
+        explicit ConvertEntity(const DatabaseFlushSharedPtr& databaseFlush);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ArticleEntity Convert(const ArticleBase& article) const;
-        NODISCARD BookEntity Convert(const BookBase& book) const;
-        NODISCARD CalendarEntity Convert(const CalendarBase& calendar) const;
-        NODISCARD CategoryEntity Convert(const CategoryBase& category) const;
-        NODISCARD CharacterEntity Convert(const CharacterBase& character) const;
-        NODISCARD CountryEntity Convert(const CountryBase& country) const;
-        NODISCARD DayEntity Convert(const DayBase& day) const;
-        NODISCARD EmperorEntity Convert(const EmperorBase& emperor) const;
-        NODISCARD GatherEntity Convert(const GatherBase& gather) const;
-        NODISCARD GenusEntity Convert(const GenusBase& genus) const;
-        NODISCARD GeographicEntity Convert(const GeographicBase& geographic) const;
-        NODISCARD IdentityEntity Convert(const IdentityBase& identity) const;
-        NODISCARD ImperialCourtEntity Convert(const ImperialCourtBase& imperialCourt) const;
-        NODISCARD MonthEntity Convert(const MonthBase& month) const;
-        NODISCARD ReignTitleEntity Convert(const ReignTitleBase& reignTitle) const;
-        NODISCARD SexagenaryCycleEntity Convert(const SexagenaryCycleBase& sexagenaryCycle) const;
-        NODISCARD SourceEntity Convert(const SourceBase& source) const;
-        NODISCARD VersionEntity Convert(const VersionBase& version) const;
-        NODISCARD YearEntity Convert(const YearBase& year) const;
+        void DeleteInvalidDatabase();
+
+        NODISCARD ArticleEntity Convert(const ArticleBase& article);
+        NODISCARD BookEntity Convert(const BookBase& book);
+        NODISCARD CalendarEntity Convert(const CalendarBase& calendar);
+        NODISCARD CategoryEntity Convert(const CategoryBase& category);
+        NODISCARD CharacterEntity Convert(const CharacterBase& character);
+        NODISCARD CountryEntity Convert(const CountryBase& country);
+        NODISCARD DayEntity Convert(const DayBase& day);
+        NODISCARD EmperorEntity Convert(const EmperorBase& emperor);
+        NODISCARD GatherEntity Convert(const GatherBase& gather);
+        NODISCARD GenusEntity Convert(const GenusBase& genus);
+        NODISCARD GeographicEntity Convert(const GeographicBase& geographic);
+        NODISCARD IdentityEntity Convert(const IdentityBase& identity);
+        NODISCARD ImperialCourtEntity Convert(const ImperialCourtBase& imperialCourt);
+        NODISCARD MonthEntity Convert(const MonthBase& month);
+        NODISCARD ReignTitleEntity Convert(const ReignTitleBase& reignTitle);
+        NODISCARD SexagenaryCycleEntity Convert(const SexagenaryCycleBase& sexagenaryCycle);
+        NODISCARD SourceEntity Convert(const SourceBase& source);
+        NODISCARD VersionEntity Convert(const VersionBase& version);
+        NODISCARD YearEntity Convert(const YearBase& year);
 
     private:
         PackageType impl;

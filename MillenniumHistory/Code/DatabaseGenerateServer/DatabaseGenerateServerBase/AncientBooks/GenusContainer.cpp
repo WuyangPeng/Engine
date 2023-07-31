@@ -9,6 +9,7 @@
 
 #include "Genus.h"
 #include "GenusContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::GenusContainer::Container AncientBooks::GenusContainer::GetContain
     USER_CLASS_IS_VALID_CONST_9;
 
     return genus;
+}
+
+int AncientBooks::GenusContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(genus.size());
 }
 

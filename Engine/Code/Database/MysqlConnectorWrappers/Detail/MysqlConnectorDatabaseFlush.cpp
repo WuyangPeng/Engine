@@ -66,4 +66,14 @@ void Database::MysqlConnectorDatabaseFlush::CheckWrappersStrategy(const BasisDat
     }
 }
 
+void Database::MysqlConnectorDatabaseFlush::Wait()
+{
+    DATABASE_CLASS_IS_VALID_9;
+
+    for (auto& element : connection)
+    {
+        element->Wait();
+    }
+}
+
 #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR

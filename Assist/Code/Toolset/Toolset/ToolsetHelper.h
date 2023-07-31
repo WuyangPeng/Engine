@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/15 17:46)
+///	版本：0.9.1.2 (2023/07/28 10:12)
 
 #ifndef TOOLSET_TOOLSET_HELPER_H
 #define TOOLSET_TOOLSET_HELPER_H
@@ -18,7 +18,7 @@ namespace Toolset
 {
     using WindowMainFunctionHelper = Framework::WindowMainFunctionHelper<Framework::WindowsAPIFrameBuild, Framework::WindowProcessInterface>;
 
-    class ToolsetHelper : public WindowMainFunctionHelper
+    class ToolsetHelper final : public WindowMainFunctionHelper
     {
     public:
         using ClassType = ToolsetHelper;

@@ -1,7 +1,4 @@
 TODO Level 4
 
-0.9.0.12
-
-1. （GameTemplate）完成游戏工程模板生成工具。
-2. （GameTemplate）对游戏工程模板生成工具增加公共代码。
+0.9.1.2
  

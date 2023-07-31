@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/20 11:37)
+///	版本：0.9.1.2 (2023/07/22 17:36)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_MESSAGES_FLAGS_H
 #define SYSTEM_WINDOWS_WINDOWS_MESSAGES_FLAGS_H
@@ -40,7 +40,7 @@ namespace System
         EndSession = WM_ENDSESSION,
 
         Quit = WM_QUIT,
-        EraseBkgnd = WM_ERASEBKGND,
+        EraseBackground = WM_ERASEBKGND,
         ShowWindow = WM_SHOWWINDOW,
         WinIniChange = WM_WININICHANGE,
 
@@ -56,15 +56,15 @@ namespace System
         ChildActivate = WM_CHILDACTIVATE,
         QueueSync = WM_QUEUESYNC,
 
-        GetMinmaxInfo = WM_GETMINMAXINFO,
+        GetMinMaxInfo = WM_GETMINMAXINFO,
         PaintIcon = WM_PAINTICON,
-        IconEraseBkgnd = WM_ICONERASEBKGND,
+        IconEraseBackground = WM_ICONERASEBKGND,
         NextDlgCtl = WM_NEXTDLGCTL,
         SpoolerStatus = WM_SPOOLERSTATUS,
         DrawItem = WM_DRAWITEM,
         MeasureItem = WM_MEASUREITEM,
         DeleteItem = WM_DELETEITEM,
-        VkeyToItem = WM_VKEYTOITEM,
+        VirtualKeyToItem = WM_VKEYTOITEM,
         CharToItem = WM_CHARTOITEM,
         SetFont = WM_SETFONT,
         GetFont = WM_GETFONT,
@@ -86,7 +86,7 @@ namespace System
         Notify = WM_NOTIFY,
         InputLangChangeRequest = WM_INPUTLANGCHANGEREQUEST,
         InputLangChange = WM_INPUTLANGCHANGE,
-        Tcard = WM_TCARD,
+        TaskCard = WM_TCARD,
         Help = WM_HELP,
         UserChanged = WM_USERCHANGED,
         NotifyFormat = WM_NOTIFYFORMAT,
@@ -98,11 +98,11 @@ namespace System
         SetIcon = WM_SETICON,
 
         NcCreate = WM_NCCREATE,
-        NCDestroy = WM_NCDESTROY,
+        NcDestroy = WM_NCDESTROY,
         NcCalcSize = WM_NCCALCSIZE,
-        NCChitTest = WM_NCHITTEST,
+        NcChitTest = WM_NCHITTEST,
         NcPaint = WM_NCPAINT,
-        NCActivate = WM_NCACTIVATE,
+        NcActivate = WM_NCACTIVATE,
         GetDlgCode = WM_GETDLGCODE,
 
         SyncPaint = WM_SYNCPAINT,
@@ -110,17 +110,17 @@ namespace System
         NcMouseMove = WM_NCMOUSEMOVE,
         NcLButtonDown = WM_NCLBUTTONDOWN,
         NcLButtonUp = WM_NCLBUTTONUP,
-        NcLButtonDblclk = WM_NCLBUTTONDBLCLK,
+        NcLButtonDoubleClick = WM_NCLBUTTONDBLCLK,
         NcRButtonDown = WM_NCRBUTTONDOWN,
         NcRButtonUp = WM_NCRBUTTONUP,
-        NcRButtonDblclk = WM_NCRBUTTONDBLCLK,
+        NcRButtonDoubleClick = WM_NCRBUTTONDBLCLK,
         NcMButtonDown = WM_NCMBUTTONDOWN,
         NcMButtonUp = WM_NCMBUTTONUP,
-        NcMButtonDblclk = WM_NCMBUTTONDBLCLK,
+        NcMButtonDoubleClick = WM_NCMBUTTONDBLCLK,
 
         NcXButtonDown = WM_NCXBUTTONDOWN,
         NcXButtonUp = WM_NCXBUTTONUP,
-        NcXButtonDblclk = WM_NCXBUTTONDBLCLK,
+        NcXButtonDoubleClick = WM_NCXBUTTONDBLCLK,
 
         InputDeviceChange = WM_INPUT_DEVICE_CHANGE,
         Input = WM_INPUT,
@@ -163,12 +163,12 @@ namespace System
         MenuRButtonUp = WM_MENURBUTTONUP,
         MenuDrag = WM_MENUDRAG,
         MenuGetObject = WM_MENUGETOBJECT,
-        UninitMenuPopup = WM_UNINITMENUPOPUP,
+        UnInitMenuPopup = WM_UNINITMENUPOPUP,
         MenuCommand = WM_MENUCOMMAND,
 
-        ChangeUIState = WM_CHANGEUISTATE,
-        UpdateUIState = WM_UPDATEUISTATE,
-        QueryUIState = WM_QUERYUISTATE,
+        ChangeUiState = WM_CHANGEUISTATE,
+        UpdateUiState = WM_UPDATEUISTATE,
+        QueryUiState = WM_QUERYUISTATE,
         CtlColorMsgBox = WM_CTLCOLORMSGBOX,
         CtlColorEdit = WM_CTLCOLOREDIT,
         CtlColorListBox = WM_CTLCOLORLISTBOX,
@@ -182,19 +182,19 @@ namespace System
         MouseMove = WM_MOUSEMOVE,
         LButtonDown = WM_LBUTTONDOWN,
         LButtonUp = WM_LBUTTONUP,
-        LButtonDblclk = WM_LBUTTONDBLCLK,
+        LButtonDoubleClick = WM_LBUTTONDBLCLK,
         RButtonDown = WM_RBUTTONDOWN,
         RButtonUp = WM_RBUTTONUP,
-        RButtonDblclk = WM_RBUTTONDBLCLK,
+        RButtonDoubleClick = WM_RBUTTONDBLCLK,
         MButtonDown = WM_MBUTTONDOWN,
         MButtonUp = WM_MBUTTONUP,
-        MButtonDblclk = WM_MBUTTONDBLCLK,
+        MButtonDoubleClick = WM_MBUTTONDBLCLK,
 
         MouseWheel = WM_MOUSEWHEEL,
 
         XButtonDown = WM_XBUTTONDOWN,
         XButtonUp = WM_XBUTTONUP,
-        XButtonDblclk = WM_XBUTTONDBLCLK,
+        XButtonDoubleClick = WM_XBUTTONDBLCLK,
 
         MouseHWheel = WM_MOUSEHWHEEL,
 
@@ -227,7 +227,7 @@ namespace System
         EnterSizeMove = WM_ENTERSIZEMOVE,
         ExitSizeMove = WM_EXITSIZEMOVE,
         DropFiles = WM_DROPFILES,
-        MdiRefrshMenu = WM_MDIREFRESHMENU,
+        MdiRefreshMenu = WM_MDIREFRESHMENU,
 
         Touch = WM_TOUCH,
 
@@ -246,8 +246,8 @@ namespace System
         MouseHover = WM_MOUSEHOVER,
         MouseLeave = WM_MOUSELEAVE,
 
-        NCMouseHover = WM_NCMOUSEHOVER,
-        NCMouseLeave = WM_NCMOUSELEAVE,
+        NcMouseHover = WM_NCMOUSEHOVER,
+        NcMouseLeave = WM_NCMOUSELEAVE,
 
         WtsSessionChange = WM_WTSSESSION_CHANGE,
 
@@ -260,14 +260,14 @@ namespace System
         Clear = WM_CLEAR,
         Undo = WM_UNDO,
         RenderFormat = WM_RENDERFORMAT,
-        RenderErallFormats = WM_RENDERALLFORMATS,
+        RenderAllFormats = WM_RENDERALLFORMATS,
         DestroyClipboard = WM_DESTROYCLIPBOARD,
         DrawClipboard = WM_DRAWCLIPBOARD,
         PaintClipboard = WM_PAINTCLIPBOARD,
-        VscrollClipboard = WM_VSCROLLCLIPBOARD,
+        VerticalScrollClipboard = WM_VSCROLLCLIPBOARD,
         SizeClipboard = WM_SIZECLIPBOARD,
-        AskCBFormatName = WM_ASKCBFORMATNAME,
-        ChangeCBChain = WM_CHANGECBCHAIN,
+        AskCbFormatName = WM_ASKCBFORMATNAME,
+        ChangeCbChain = WM_CHANGECBCHAIN,
         HScrollClipboard = WM_HSCROLLCLIPBOARD,
         QueryNewPalette = WM_QUERYNEWPALETTE,
         PaletteIsChanging = WM_PALETTEISCHANGING,
@@ -291,7 +291,7 @@ namespace System
         DwmSendIconicThumbnail = WM_DWMSENDICONICTHUMBNAIL,
         DwmSendIconicLivePreviewBitmap = WM_DWMSENDICONICLIVEPREVIEWBITMAP,
 
-        GetTitleBarinfoex = WM_GETTITLEBARINFOEX,
+        GetTitleBarInfoExtended = WM_GETTITLEBARINFOEX,
 
         HandheldFirst = WM_HANDHELDFIRST,
         HandheldLast = WM_HANDHELDLAST,
@@ -299,8 +299,8 @@ namespace System
         AfxFirst = WM_AFXFIRST,
         AfxLast = WM_AFXLAST,
 
-        PenwinFirst = WM_PENWINFIRST,
-        PenwinLast = WM_PENWINLAST,
+        PenWinFirst = WM_PENWINFIRST,
+        PenWinLast = WM_PENWINLAST,
 
         App = WM_APP,
 
@@ -333,7 +333,7 @@ namespace System
         EndSession = 0x0016,
 
         Quit = 0x0012,
-        EraseBkgnd = 0x0014,
+        EraseBackground = 0x0014,
         ShowWindow = 0x0018,
         WinIniChange = 0x001A,
 
@@ -349,7 +349,7 @@ namespace System
         ChildActivate = 0x0022,
         QueueSync = 0x0023,
 
-        GetMinmaxInfo = 0x0024,
+        GetMinMaxInfo = 0x0024,
         PaintIcon = 0x0026,
         IconEraseBkgnd = 0x0027,
         NextDlgCtl = 0x0028,
@@ -357,7 +357,7 @@ namespace System
         DrawItem = 0x002B,
         MeasureItem = 0x002C,
         DeleteItem = 0x002D,
-        VkeyToItem = 0x002E,
+        VirtualKeyToItem = 0x002E,
         CharToItem = 0x002F,
         SetFont = 0x0030,
         GetFont = 0x0031,
@@ -379,7 +379,7 @@ namespace System
         Notify = 0x004E,
         InputLangChangeRequest = 0x0050,
         InputLangChange = 0x0051,
-        Tcard = 0x0052,
+        TaskCard = 0x0052,
         Help = 0x0053,
         UserChanged = 0x0054,
         NotifyFormat = 0x0055,
@@ -391,11 +391,11 @@ namespace System
         SetIcon = 0x0080,
 
         NcCreate = 0x0081,
-        NCDestroy = 0x0082,
+        NcDestroy = 0x0082,
         NcCalcSize = 0x0083,
-        NCChitTest = 0x0084,
+        NcChitTest = 0x0084,
         NcPaint = 0x0085,
-        NCActivate = 0x0086,
+        NcActivate = 0x0086,
         GetDlgCode = 0x0087,
 
         SyncPaint = 0x0088,
@@ -403,17 +403,17 @@ namespace System
         NcMouseMove = 0x00A0,
         NcLButtonDown = 0x00A1,
         NcLButtonUp = 0x00A2,
-        NcLButtonDblclk = 0x00A3,
+        NcLButtonDoubleClick = 0x00A3,
         NcRButtonDown = 0x00A4,
         NcRButtonUp = 0x00A5,
-        NcRButtonDblclk = 0x00A6,
+        NcRButtonDoubleClick = 0x00A6,
         NcMButtonDown = 0x00A7,
         NcMButtonUp = 0x00A8,
-        NcMButtonDblclk = 0x00A9,
+        NcMButtonDoubleClick = 0x00A9,
 
         NcXButtonDown = 0x00AB,
         NcXButtonUp = 0x00AC,
-        NcXButtonDblclk = 0x00AD,
+        NcXButtonDoubleClick = 0x00AD,
 
         InputDeviceChange = 0x00FE,
         Input = 0x00FF,
@@ -456,12 +456,12 @@ namespace System
         MenuRButtonUp = 0x0122,
         MenuDrag = 0x0123,
         MenuGetObject = 0x0124,
-        UninitMenuPopup = 0x0125,
+        UnInitMenuPopup = 0x0125,
         MenuCommand = 0x0126,
 
-        ChangeUIState = 0x0127,
-        UpdateUIState = 0x0128,
-        QueryUIState = 0x0129,
+        ChangeUiState = 0x0127,
+        UpdateUiState = 0x0128,
+        QueryUiState = 0x0129,
         CtlColorMsgBox = 0x0132,
         CtlColorEdit = 0x0133,
         CtlColorListBox = 0x0134,
@@ -475,19 +475,19 @@ namespace System
         MouseMove = 0x0200,
         LButtonDown = 0x0201,
         LButtonUp = 0x0202,
-        LButtonDblclk = 0x0203,
+        LButtonDoubleClick = 0x0203,
         RButtonDown = 0x0204,
         RButtonUp = 0x0205,
-        RButtonDblclk = 0x0206,
+        RButtonDoubleClick = 0x0206,
         MButtonDown = 0x0207,
         MButtonUp = 0x0208,
-        MButtonDblclk = 0x0209,
+        MButtonDoubleClick = 0x0209,
 
         MouseWheel = 0x020A,
 
         XButtonDown = 0x020B,
         XButtonUp = 0x020C,
-        XButtonDblclk = 0x020D,
+        XButtonDoubleClick = 0x020D,
 
         MouseHWheel = 0x020E,
 
@@ -520,7 +520,7 @@ namespace System
         EnterSizeMove = 0x0231,
         ExitSizeMove = 0x0232,
         DropFiles = 0x0233,
-        MdiRefrshMenu = 0x0234,
+        MdiRefreshMenu = 0x0234,
 
         Touch = 0x0240,
 
@@ -539,8 +539,8 @@ namespace System
         MouseHover = 0x02A1,
         MouseLeave = 0x02A3,
 
-        NCMouseHover = 0x02A0,
-        NCMouseLeave = 0x02A2,
+        NcMouseHover = 0x02A0,
+        NcMouseLeave = 0x02A2,
 
         WtsSessionChange = 0x02B1,
 
@@ -553,14 +553,14 @@ namespace System
         Clear = 0x0303,
         Undo = 0x0304,
         RenderFormat = 0x0305,
-        RenderErallFormats = 0x0306,
+        RenderAllFormats = 0x0306,
         DestroyClipboard = 0x0307,
         DrawClipboard = 0x0308,
         PaintClipboard = 0x0309,
-        VscrollClipboard = 0x030A,
+        VerticalScrollClipboard = 0x030A,
         SizeClipboard = 0x030B,
-        AskCBFormatName = 0x030C,
-        ChangeCBChain = 0x030D,
+        AskCbFormatName = 0x030C,
+        ChangeCbChain = 0x030D,
         HScrollClipboard = 0x030E,
         QueryNewPalette = 0x030F,
         PaletteIsChanging = 0x0310,
@@ -584,7 +584,7 @@ namespace System
         DwmSendIconicThumbnail = 0x0323,
         DwmSendIconicLivePreviewBitmap = 0x0326,
 
-        GetTitleBarinfoex = 0x033F,
+        GetTitleBarInfoExtended = 0x033F,
 
         HandheldFirst = 0x0358,
         HandheldLast = 0x035F,
@@ -592,8 +592,8 @@ namespace System
         AfxFirst = 0x0360,
         AfxLast = 0x037F,
 
-        PenwinFirst = 0x0380,
-        PenwinLast = 0x038F,
+        PenWinFirst = 0x0380,
+        PenWinLast = 0x038F,
 
         App = 0x8000,
 

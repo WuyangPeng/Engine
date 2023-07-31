@@ -13,7 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Spatial.h"
-#include "Flags/VisualFlags.h" 
+#include "Flags/VisualFlags.h"
 #include "Rendering/LocalEffects/ConstantColorEffect.h"
 #include "Rendering/LocalEffects/VisualEffect.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
@@ -69,9 +69,11 @@ namespace Rendering
 
         NODISCARD std::shared_ptr<VisualEffect> GetEffect() noexcept;
         void SetEffect(const std::shared_ptr<VisualEffect>& visualEffect) noexcept;
+        void SetWorldTransformIsCurrent(bool cond) noexcept;
+        virtual void UpdateModelBound();
+        virtual void UpdateModelNormals() noexcept;
 
     protected:
-        virtual void UpdateModelBound();
         void ComputeBounding(const std::vector<APoint>& positions);
 
         // 支持分级裁剪。

@@ -13,8 +13,8 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
-#include "Rendering/Shaders/Reflection.h"
 #include "Rendering/Shaders/Detail/VisualProgramImpl.h"
+#include "Rendering/Shaders/Reflection.h"
 
 namespace Rendering
 {
@@ -35,7 +35,7 @@ namespace Rendering
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD OpenGLUInt GetProgramHandle() const noexcept;
+        NODISCARD OpenGLUInt GetProgramHandle() const noexcept override;
         NODISCARD OpenGLUInt GetVertexShaderHandle() const noexcept;
         NODISCARD OpenGLUInt GetPixelShaderHandle() const noexcept;
         NODISCARD OpenGLUInt GetGShaderHandle() const noexcept;

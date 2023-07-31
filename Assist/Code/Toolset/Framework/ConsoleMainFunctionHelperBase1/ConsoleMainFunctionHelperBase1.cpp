@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/13 15:31)
+///	版本：0.9.1.2 (2023/07/28 14:30)
 
 #include "ConsoleMainFunctionHelperBase1.h"
 #include "System/Helper/PragmaWarning.h"
@@ -46,8 +46,8 @@ void Framework::ConsoleMainFunctionHelperBase1::PrintConsoleParameter()
 {
     for (auto index = 0; index < GetArgc(); ++index)
     {
-        const auto* const* aArgv = GetArgv();
-        if (aArgv != nullptr)
+        if (const auto* const* aArgv = GetArgv();
+            aArgv != nullptr)
         {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)

@@ -13,8 +13,13 @@
 #include "System/Helper/ConfigMacro.h"
 #include "CoreTools/Helper/UserMacro.h"
 
-#define CLOSE_USE_XXX (0x01)
-#define CLOSE_QUEST_MAX (((CLOSE_USE_XXX) << 1) - 1)
+#define QUEST_CLOSE_BEGIN (0x01)
+
+#define CLOSE_USE_QUEST (QUEST_CLOSE_BEGIN)
+
+#define QUEST_CLOSE_END CLOSE_USE_QUEST
+
+#define CLOSE_QUEST_MAX (((QUEST_CLOSE_END) << 1) - 1)
 
 // 编译测试（默认为0，最大值为0x01）
 #define COMPILE_QUEST_CLOSE 0x00
@@ -22,9 +27,9 @@
 static_assert(0 <= COMPILE_QUEST_CLOSE, "COMPILE_QUEST_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_QUEST_CLOSE <= CLOSE_QUEST_MAX, "COMPILE_QUEST_CLOSE Must be less than or equal CLOSE_QUEST_MAX.");
 
-#if !defined(COMPILE_QUEST_CLOSE) || (COMPILE_QUEST_CLOSE & CLOSE_USE_XXX) != CLOSE_USE_XXX
+#if !defined(COMPILE_QUEST_CLOSE) || (COMPILE_QUEST_CLOSE & CLOSE_USE_QUEST) != CLOSE_USE_QUEST
 
-#endif  // !defined(COMPILE_QUEST_CLOSE) || (COMPILE_QUEST_CLOSE & CLOSE_USE_XXX) != CLOSE_USE_XXX
+#endif  // !defined(COMPILE_QUEST_CLOSE) || (COMPILE_QUEST_CLOSE & CLOSE_USE_QUEST) != CLOSE_USE_QUEST
 
 #ifdef BUILDING_GAME_STATIC
 

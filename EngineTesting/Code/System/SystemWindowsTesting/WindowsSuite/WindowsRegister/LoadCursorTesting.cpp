@@ -47,7 +47,7 @@ void System::LoadCursorTesting::LoadCursorTest()
     ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gSizeNs));
     ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gSizeAll));
     ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gNo));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gIDCHand));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gIdcHand));
     ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gAppStarting));
     ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gHelp));
 

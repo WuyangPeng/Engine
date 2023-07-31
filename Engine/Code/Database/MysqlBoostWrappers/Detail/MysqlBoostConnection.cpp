@@ -318,3 +318,18 @@ Database::BasisDatabase Database::MysqlBoostConnection::GetBasisDatabase(const D
             return BasisDatabase{ fieldName.GetFieldName(), ""s };
     }
 }
+
+void Database::MysqlBoostConnection::Wait()
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    for (;;)
+    {
+        std::unique_lock uniqueLock{ mutex };
+
+        if (isStop || container.empty())
+        {
+            break;
+        }
+    }
+}

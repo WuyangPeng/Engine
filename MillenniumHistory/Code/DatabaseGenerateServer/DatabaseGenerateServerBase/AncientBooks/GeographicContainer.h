@@ -38,6 +38,8 @@ namespace AncientBooks
         NODISCARD ConstGeographicBaseSharedPtr GetGeographic(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstGeographicBaseSharedPtr GetFirstGeographic(Function function) const;
 

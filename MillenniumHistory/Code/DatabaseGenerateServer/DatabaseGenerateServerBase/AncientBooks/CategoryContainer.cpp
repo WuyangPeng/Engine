@@ -9,6 +9,7 @@
 
 #include "Category.h"
 #include "CategoryContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::CategoryContainer::Container AncientBooks::CategoryContainer::GetC
     USER_CLASS_IS_VALID_CONST_9;
 
     return category;
+}
+
+int AncientBooks::CategoryContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(category.size());
 }
 

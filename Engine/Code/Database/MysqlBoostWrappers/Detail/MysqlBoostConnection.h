@@ -43,6 +43,8 @@ namespace Database
 
         NODISCARD BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
         NODISCARD ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
+       
+        void Wait();
 
     private:
         using Container = std::deque<BasisDatabaseManager>;

@@ -23,7 +23,7 @@ namespace System
         MaxShow = SIZE_MAXSHOW,
         Minimized = SIZE_MINIMIZED,
         Restored = SIZE_RESTORED,
-        GLUTUnDefinition = 0xFF,
+        GlutUnDefinition = 0xFF,
         AndroidUnDefinition = 0xFF,
         UnDefinition = 0xFF,
     };
@@ -37,7 +37,7 @@ namespace System
         MaxShow = 2,
         Minimized = 3,
         Restored = 4,
-        GLUTUnDefinition = 0xFF,
+        GlutUnDefinition = 0xFF,
         AndroidUnDefinition = 0xFF,
         UnDefinition = 0xFF,
     };

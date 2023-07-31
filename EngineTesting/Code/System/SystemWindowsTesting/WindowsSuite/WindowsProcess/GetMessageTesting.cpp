@@ -36,12 +36,12 @@ void System::GetMessageTesting::GetMessageTest()
 {
     ASSERT_TRUE(PostSystemMessage(hwnd, WindowsMessages::User, 0, 0));
 
-    WindowsMsg msg{};
+    WindowsMessage msg{};
     ASSERT_TRUE(GetSystemMessage(&msg, hwnd));
 
     ASSERT_EQUAL(msg.hwnd, hwnd);
 
-    WindowsHAccel accel{ 0 };
+    WindowsHAccelerator accel{ 0 };
     auto result = SystemTranslateAccelerator(hwnd, accel, &msg);
     result = TranslateSystemMessage(&msg);
     result = DispatchSystemMessage(&msg);

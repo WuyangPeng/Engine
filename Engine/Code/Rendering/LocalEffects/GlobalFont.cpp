@@ -19,8 +19,8 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, GlobalFont)
 
-Rendering::GlobalFont::GlobalFont(FontType fontType, ProgramFactory& factory, int maxMessageLength)
-    : impl{ fontType, factory, maxMessageLength }
+Rendering::GlobalFont::GlobalFont(FontType fontType, ProgramFactory& factory, const std::string& shaderExtendName, int maxMessageLength)
+    : impl{ fontType, factory, shaderExtendName, maxMessageLength }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

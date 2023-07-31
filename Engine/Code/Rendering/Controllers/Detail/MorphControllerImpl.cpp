@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:05)
+///	版本：0.9.1.2 (2023/07/24 19:34)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,14 +20,15 @@
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
 
-Rendering::MorphControllerImpl::MorphControllerImpl(int numVertices, int numTargets, int numKeys)
+Rendering::MorphControllerImpl::MorphControllerImpl(int numVertices, int numTargets, int numKeys, const BaseRendererSharedPtr& baseRenderer)
     : numVertices{ numVertices },
       numTargets{ numTargets },
       vertices(numVertices * boost::numeric_cast<size_t>(numTargets)),
       numKeys{ numKeys },
       times(numKeys),
       weights((boost::numeric_cast<size_t>(numTargets) - 1) * numKeys),
-      lastIndex{ 0 }
+      lastIndex{ 0 },
+      baseRenderer{ baseRenderer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -154,8 +155,8 @@ Rendering::ControllerKeyInfo Rendering::MorphControllerImpl::GetKeyInfo(float ct
         return ControllerKeyInfo{};
     }
 
-    const auto index = numKeys - 1;
-    if (times.at(index) <= ctrlTime)
+    if (const auto index = numKeys - 1;
+        times.at(index) <= ctrlTime)
     {
         lastIndex = numKeys - 1;
 
@@ -240,4 +241,91 @@ void Rendering::MorphControllerImpl::Load(CoreTools::BufferSource& source)
     const auto numTotalWeights = numKeys * (numTargets - 1);
     weights.resize(numTotalWeights);
     source.ReadContainer(numTotalWeights, weights);
+}
+
+void Rendering::MorphControllerImpl::SetControllerObject(Visual& visual)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto vertexBuffer = visual.GetVertexBuffer();
+    if (vertexBuffer->GetNumElements() != numVertices)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("Mismatch in number of vertices."))
+    }
+
+    const auto vertexFormat = vertexBuffer->GetFormat();
+    const auto index = vertexFormat.GetIndex(VertexFormatFlags::Semantic::Position, 0);
+    if (index < 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("Vertex format does not have VertexFormatFlags::Semantic::Position."))
+    }
+
+    if (const auto type = vertexFormat.GetAttributeType(index);
+        type != DataFormatType::R32G32B32A32Float && type != DataFormatType::R32G32B32Float)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("Invalid position type."))
+    }
+
+    if (const auto offset = vertexFormat.GetOffset(index);
+        offset != 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("Position offset must be 0."))
+    }
+}
+
+bool Rendering::MorphControllerImpl::Update(double controlTime, Visual& visual)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto vertexBuffer = visual.GetVertexBuffer();
+    const auto vertexFormat = vertexBuffer->GetFormat();
+
+    const auto count = vertexBuffer->GetNumElements();
+    auto combination = vertexBuffer->GetData();
+    const auto vertexSize = vertexFormat.GetStride();
+    for (auto i = 0; i < count; ++i)
+    {
+        combination.Increase(0.0f);
+        combination.Increase(0.0f);
+        combination.Increase(0.0f);
+
+        if (vertexSize > CoreTools::GetStreamSize<float>() * 3)
+        {
+            combination += (vertexSize - CoreTools::GetStreamSize<float>() * 3);
+        }
+    }
+
+    const auto controllerKeyInfo = GetKeyInfo(boost::numeric_cast<float>(controlTime));
+    const auto oneMinusNormTime = 1.0f - controllerKeyInfo.GetNormTime();
+
+    for (auto n = 0; n < numTargets; ++n)
+    {
+        const auto index0 = controllerKeyInfo.GetFirstIndex() * numTargets + n;
+        const auto index1 = controllerKeyInfo.GetSecondIndex() * numTargets + n;
+        const auto w = oneMinusNormTime * weights.at(index0) + controllerKeyInfo.GetNormTime() * weights.at(index1);
+        combination = vertexBuffer->GetData();
+        for (auto m = 0; m < numVertices; ++m)
+        {
+            const auto x = combination.Increase<float>();
+            const auto y = combination.Increase<float>();
+            const auto z = combination.Increase<float>();
+
+            auto position = w * Mathematics::Vector3{ x, y, z };
+
+            combination -= CoreTools::GetStreamSize<float>() * 3;
+            combination.Increase(position.GetX());
+            combination.Increase(position.GetY());
+            combination.Increase(position.GetZ());
+
+            if (vertexSize > CoreTools::GetStreamSize<float>() * 3)
+            {
+                combination += (vertexSize - CoreTools::GetStreamSize<float>() * 3);
+            }
+        }
+    }
+
+    visual.UpdateModelBound();
+    visual.UpdateModelNormals();
+
+    return baseRenderer.lock()->Update(vertexBuffer);
 }

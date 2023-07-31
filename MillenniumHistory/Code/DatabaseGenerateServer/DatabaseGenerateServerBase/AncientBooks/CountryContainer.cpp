@@ -9,6 +9,7 @@
 
 #include "Country.h"
 #include "CountryContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::CountryContainer::Container AncientBooks::CountryContainer::GetCon
     USER_CLASS_IS_VALID_CONST_9;
 
     return country;
+}
+
+int AncientBooks::CountryContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(country.size());
 }
 

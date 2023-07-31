@@ -37,7 +37,7 @@ namespace Rendering
         using Colour = Colour<float>;
 
     public:
-        Font(FontType fontType, ProgramFactory& factory, int maxMessageLength);
+        Font(FontType fontType, ProgramFactory& factory, const std::string& shaderExtendName, int maxMessageLength);
 
         CLASS_INVARIANT_DECLARE;
 

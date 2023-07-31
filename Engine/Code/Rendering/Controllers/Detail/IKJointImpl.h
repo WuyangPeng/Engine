@@ -64,7 +64,7 @@ namespace Rendering
 
     private:
         // 索引i为joint的父世界axis[i]。
-        static const int numAxis = 3;
+        static constexpr  int numAxis = 3;
 
         std::array<bool, numAxis> allowTranslation;  // 默认 = false
         std::array<float, numAxis> minTranslation;  // 默认 = -无穷大

@@ -259,6 +259,7 @@ System::String CoreTools::CSVGenerateHead::GenerateContainerSourceHead() const
         content += TextParsing::gHeadDetailFileSuffix;
     }
 
+    content += TextParsing::gNumericCast;
     content += TextParsing::gLogMacro;
     content += TextParsing::gIncludeCSVContent;
     content += TextParsing::gIncludeCSVHead;

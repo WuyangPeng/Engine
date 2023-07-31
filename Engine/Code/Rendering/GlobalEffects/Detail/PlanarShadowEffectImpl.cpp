@@ -116,7 +116,7 @@ void Rendering::PlanarShadowEffectImpl::Draw(const BaseRendererSharedPtr& engine
 
     auto drawResult = engine->Draw(casterVisuals);
 
-    for (auto i = 0; i < planeVisuals.size(); ++i)
+    for (auto i = 0; i < boost::numeric_cast<int>(planeVisuals.size()); ++i)
     {
         const auto& plane = planeVisuals.at(i);
         const auto reference = i + 1;
@@ -138,7 +138,7 @@ void Rendering::PlanarShadowEffectImpl::Draw(const BaseRendererSharedPtr& engine
 
         camera->SetPreViewMatrix(projectionMatrix);
 
-        for (auto j = 0; j < casterVisuals.size(); ++j)
+        for (auto j = 0; j < boost::numeric_cast<int>(casterVisuals.size()); ++j)
         {
             const auto& visual = casterVisuals.at(j);
             saveVisualEffects.at(j) = visual->GetEffect();
@@ -165,7 +165,7 @@ void Rendering::PlanarShadowEffectImpl::Draw(const BaseRendererSharedPtr& engine
 
         drawResult = engine->Draw(casterVisuals);
 
-        for (auto j = 0; j < casterVisuals.size(); ++j)
+        for (auto j = 0; j < boost::numeric_cast<int>(casterVisuals.size()); ++j)
         {
             const auto& visual = casterVisuals.at(j);
             projectionViewWorldMatrices.Unsubscribe(visual);
@@ -249,7 +249,6 @@ void Rendering::PlanarShadowEffectImpl::GetModelSpaceTriangles()
 
         std::vector<int32_t> triangle{ get<0>(triangleTuple), get<1>(triangleTuple), get<2>(triangleTuple) };
 
-        auto rawData = vertexBuffer->GetData();
         const auto stride = vertexFormat.GetStride();
         auto& point = modelSpaceTriangles.at(index);
         for (auto j = 0; j < 3; ++j)

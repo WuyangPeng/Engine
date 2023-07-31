@@ -75,7 +75,7 @@ System::String CoreTools::ContainerFunctionParsing::GenerateParsing() const
     {
         content += GenerateIndentation();
         content += SYSTEM_TEXT("void Unique();\n");
-    } 
+    }
 
     content += TextParsing::gNewlineCharacter;
 
@@ -119,6 +119,9 @@ System::String CoreTools::ContainerFunctionParsing::GenerateGetContainer() const
 
     auto content = GenerateIndentation();
     content += TextParsing::gGetContainerConst;
+    content += TextParsing::gNewlineCharacter;
+    content += GenerateIndentation();
+    content += SYSTEM_TEXT("NODISCARD int GetContainerSize() const;\n");
     content += TextParsing::gNewlineCharacter;
 
     return content;

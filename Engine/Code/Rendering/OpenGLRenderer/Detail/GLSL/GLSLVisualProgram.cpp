@@ -23,7 +23,7 @@ Rendering::GLSLVisualProgram::GLSLVisualProgram(OpenGLUInt programHandle, OpenGL
       vertexShaderHandle{ vertexShaderHandle },
       pixelShaderHandle{ pixelShaderHandle },
       geometryShaderHandle{ geometryShaderHandle },
-      reflector{ Reflection::Create() }
+      reflector{ programHandle }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -74,28 +74,28 @@ Rendering::GLSLVisualProgram::~GLSLVisualProgram() noexcept
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 
-/*    if (System::IsGLProgram(programHandle))
-    {
-        if (System::IsGLShader(vertexShaderHandle))
+    /*    if (System::IsGLProgram(programHandle))
         {
-            System::DetachGLShader(programHandle, vertexShaderHandle);
-            System::DeleteGLShader(vertexShaderHandle);
-        }
+            if (System::IsGLShader(vertexShaderHandle))
+            {
+                System::DetachGLShader(programHandle, vertexShaderHandle);
+                System::DeleteGLShader(vertexShaderHandle);
+            }
 
-        if (System::IsGLShader(pixelShaderHandle))
-        {
-            System::DetachGLShader(programHandle, pixelShaderHandle);
-            System::DeleteGLShader(pixelShaderHandle);
-        }
+            if (System::IsGLShader(pixelShaderHandle))
+            {
+                System::DetachGLShader(programHandle, pixelShaderHandle);
+                System::DeleteGLShader(pixelShaderHandle);
+            }
 
-        if (System::IsGLShader(geometryShaderHandle))
-        {
-            System::DetachGLShader(programHandle, geometryShaderHandle);
-            System::DeleteGLShader(geometryShaderHandle);
-        }
+            if (System::IsGLShader(geometryShaderHandle))
+            {
+                System::DetachGLShader(programHandle, geometryShaderHandle);
+                System::DeleteGLShader(geometryShaderHandle);
+            }
 
-        System::DeleteGLProgram(programHandle);
-    }*/
+            System::DeleteGLProgram(programHandle);
+        }*/
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, GLSLVisualProgram)

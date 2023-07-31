@@ -4,7 +4,7 @@
   "GameTemplateInclude": "ToolsetGameTemplateInclude",
   "ProjectName": "The Last Overlord",
   "EndYear": "2023",
-  "Versions": "0.9.0.12",
+  "Versions": "0.9.1.2",
   "ProjectChineseName": "最后的霸王",
   "ResourceDirectory": "Resource/GameTemplate",
   "ExportDirectory": "Export",

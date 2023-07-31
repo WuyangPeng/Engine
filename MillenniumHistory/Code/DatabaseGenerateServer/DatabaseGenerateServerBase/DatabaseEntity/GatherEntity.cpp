@@ -95,6 +95,14 @@ DatabaseEntity::GatherEntity::BasisDatabaseManager DatabaseEntity::GatherEntity:
                                  GetKeyBasisDatabaseContainer(id) };
 }
 
+DatabaseEntity::GatherEntity::BasisDatabaseManager DatabaseEntity::GatherEntity::GetSelectAll(WrappersStrategy wrappersStrategy)
+{
+    return BasisDatabaseManager{ wrappersStrategy,
+                                 databaseName,
+                                 Database::ChangeType::Select,
+                                 BasisDatabaseContainer::Create() };
+}
+
 Database::BasisDatabaseContainer DatabaseEntity::GatherEntity::GetKeyBasisDatabaseContainer(Database::Traits::ParamType::Int32 id)
 {
     BasisDatabaseContainer basisDatabaseContainer{ BasisDatabaseContainer::ObjectContainer{ Database::BasisDatabase{ idDescribe, id } } };

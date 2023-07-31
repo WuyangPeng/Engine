@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:01)
+///	版本：0.9.1.2 (2023/07/24 10:54)
 
 #ifndef RENDERING_CONTROLLERS_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_CONTROLLER_IMPL_H
@@ -24,9 +24,13 @@ namespace Rendering
     {
     public:
         using ClassType = ControllerImpl;
+
         using BufferSource = CoreTools::BufferSource;
         using BufferTarget = CoreTools::BufferTarget;
         using Math = Mathematics::Math<double>;
+        using ControllerInterfaceWeakPtr = std::weak_ptr<ControllerInterface>;
+        using ControllerInterfaceSharedPtr = std::shared_ptr<ControllerInterface>;
+        using ConstControllerInterfaceSharedPtr = std::shared_ptr<const ControllerInterface>;
 
     public:
         ControllerImpl() noexcept;
@@ -59,6 +63,10 @@ namespace Rendering
         void Save(CoreTools::BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const noexcept;
 
+        void SetObject(const ControllerInterfaceSharedPtr& object) noexcept;
+        NODISCARD ConstControllerInterfaceSharedPtr GetControllerObject() const;
+        NODISCARD ControllerInterfaceSharedPtr GetControllerObject();
+
     private:
         ControllerRepeatType controllerRepeat;  // 默认 = ControllerRepeatType::Clamp
         double controllerMinTime;  // 默认 = 0
@@ -69,6 +77,8 @@ namespace Rendering
 
         // 应用程序的时间,以毫秒为单位。
         double controllerApplicationTime;
+
+        ControllerInterfaceWeakPtr controllerInterface;
     };
 }
 

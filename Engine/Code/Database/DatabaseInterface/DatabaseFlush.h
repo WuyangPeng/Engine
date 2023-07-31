@@ -40,6 +40,8 @@ namespace Database
 
         NODISCARD WrappersStrategy GetWrappersStrategy() const noexcept;
 
+        void Wait();
+
     private:
         PackageType impl;
     };

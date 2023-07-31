@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助测试版本：0.9.0.12 (2023/06/15 19:17)
+///	版本：0.9.1.2 (2023/07/28 09:14)
 
 #include "ThreadingCoreRenderEngineAssist/Version.h"
 #include "ThreadingCoreRenderEngineAssistTesting/Version.h"
@@ -29,5 +29,5 @@ void ThreadingCoreRenderEngineAssist::VersionTesting::DoRunUnitTest()
 
 void ThreadingCoreRenderEngineAssist::VersionTesting::MainTest()
 {
-    ASSERT_GREATER_EQUAL(g_TCREAssistVersion, g_TCREAssistTestingVersion);
+    ASSERT_GREATER_EQUAL(gTCREAssistVersion, gTCREAssistTestingVersion);
 }

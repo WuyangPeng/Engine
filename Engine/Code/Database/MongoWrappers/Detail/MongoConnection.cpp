@@ -477,4 +477,19 @@ std::string Database::MongoConnection::CreateMongoURI(const ConfigurationStrateg
     return "mongodb://" + configurationStrategy.GetDBUserName() + ":" + configurationStrategy.GetDBPassword() + "@" + configurationStrategy.GetIp() + ":" + std::to_string(configurationStrategy.GetPort()) + "/" + configurationStrategy.GetDBHostName();
 }
 
+void Database::MongoConnection::Wait()
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    for (;;)
+    {
+        std::unique_lock uniqueLock{ mutex };
+
+        if (isStop || container.empty())
+        {
+            break;
+        }
+    }
+}
+
 #endif  // DATABASE_USE_MONGO

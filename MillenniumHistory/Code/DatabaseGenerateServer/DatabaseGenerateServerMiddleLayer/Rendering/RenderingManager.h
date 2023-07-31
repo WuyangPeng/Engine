@@ -27,6 +27,8 @@ namespace DatabaseGenerateServerMiddleLayer
         RenderingManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        NODISCARD bool Idle(int64_t timeDelta) override;
     };
 }
 

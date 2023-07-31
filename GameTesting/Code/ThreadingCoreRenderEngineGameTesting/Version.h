@@ -15,6 +15,6 @@
 //  gTCREGameTestingVersion / 10000 % 100 是次版本号
 //  gTCREGameTestingVersion / 1000000 % 100 是主版本号
 
-constexpr auto gTCREGameTestingVersion = 90012;
+constexpr auto gTCREGameTestingVersion = 90102;
 
 #endif  // THREADING_CORE_RENDER_ENGINE_GAME_TESTING_VERSION_H

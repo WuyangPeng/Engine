@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助测试版本：0.9.0.12 (2023/06/09 19:28)
+///	版本：0.9.1.2 (2023/07/31 18:07)
 
 #ifndef SOUND_EFFECT_EXAMPLE_TESTING_HELPER_H
 #define SOUND_EFFECT_EXAMPLE_TESTING_HELPER_H

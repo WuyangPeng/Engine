@@ -134,6 +134,24 @@ void Mathematics::Vector2<Real>::Normalize(Real epsilon) noexcept(gAssert < 1 ||
 
 template <typename Real>
 requires std::is_arithmetic_v<Real>
+Mathematics::Vector2<Real> Mathematics::Vector2<Real>::GetNormalize(Real epsilon) const noexcept(gAssert < 3 || gMathematicsAssert < 3)
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto length = ToolsType::GetLength(*this);
+
+    if (epsilon < length)
+    {
+        return Vector2{ x / length, y / length };
+    }
+    else
+    {
+        return Vector2{};
+    }
+}
+
+template <typename Real>
+requires std::is_arithmetic_v<Real>
 Real Mathematics::Vector2<Real>::GetMaxAbsComp() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;

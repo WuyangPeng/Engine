@@ -13,6 +13,7 @@
 #include "CoreTools/Base/Flags/UniqueIdSelect.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/FileManager/OFStreamManager.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -82,19 +83,27 @@ void BatchConversion::Helper::Conversion()
     {
         Database::CodeFwdHeaderFileGeneration codeFwdHeaderFileGeneration{ SYSTEM_TEXT("Resource/DatabaseEntity/DatabaseEntityFwd.txt"), codeEntityAnalysis, codeMappingAnalysis };
 
-        CoreTools::OFStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityAnalysis.GetNamespaceName() + SYSTEM_TEXT("Fwd.h"), false };
-        streamManager.SetSimplifiedChinese();
+        if (const auto result = GetContent(codeOutput + SYSTEM_TEXT("/") + codeEntityAnalysis.GetNamespaceName() + SYSTEM_TEXT("Fwd.h"));
+            result != codeFwdHeaderFileGeneration.GetContent())
+        {
+            CoreTools::OFStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityAnalysis.GetNamespaceName() + SYSTEM_TEXT("Fwd.h"), false };
+            streamManager.SetSimplifiedChinese();
 
-        streamManager << codeFwdHeaderFileGeneration.GetContent();
+            streamManager << codeFwdHeaderFileGeneration.GetContent();
+        }
     }
 
     {
         Database::CodeHeaderFileGeneration codeHeaderFileGeneration{ SYSTEM_TEXT("Resource/DatabaseEntity/DatabaseEntity.txt"), codeEntityAnalysis, codeMappingAnalysis };
 
-        CoreTools::OFStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityAnalysis.GetNamespaceName() + SYSTEM_TEXT(".h"), false };
-        streamManager.SetSimplifiedChinese();
+        if (const auto result = GetContent(codeOutput + SYSTEM_TEXT("/") + codeEntityAnalysis.GetNamespaceName() + SYSTEM_TEXT(".h"));
+            result != codeHeaderFileGeneration.GetContent())
+        {
+            CoreTools::OFStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityAnalysis.GetNamespaceName() + SYSTEM_TEXT(".h"), false };
+            streamManager.SetSimplifiedChinese();
 
-        streamManager << codeHeaderFileGeneration.GetContent();
+            streamManager << codeHeaderFileGeneration.GetContent();
+        }
     }
 
     {
@@ -105,10 +114,14 @@ void BatchConversion::Helper::Conversion()
                                                                              codeEntityClass,
                                                                              codeMappingAnalysis };
 
-            CoreTools::OFStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".h"), false };
-            streamManager.SetSimplifiedChinese();
+            if (const auto result = GetContent(codeOutput + SYSTEM_TEXT("/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".h"));
+                result != entityHeaderFileGeneration.GetContent())
+            {
+                CoreTools::OFStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".h"), false };
+                streamManager.SetSimplifiedChinese();
 
-            streamManager << entityHeaderFileGeneration.GetContent();
+                streamManager << entityHeaderFileGeneration.GetContent();
+            }
         }
     }
 
@@ -119,11 +132,22 @@ void BatchConversion::Helper::Conversion()
                                                                              codeEntityAnalysis.GetNamespaceName(),
                                                                              codeEntityClass,
                                                                              codeMappingAnalysis };
+            if (const auto result = GetContent(codeOutput + SYSTEM_TEXT("/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".cpp"));
+                result != entitySourceFileGeneration.GetContent())
+            {
+                CoreTools::OFStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".cpp"), false };
+                streamManager.SetSimplifiedChinese();
 
-            CoreTools::OFStreamManager streamManager{ codeOutput + SYSTEM_TEXT("/") + codeEntityClass.GetEntityClassName() + SYSTEM_TEXT(".cpp"), false };
-            streamManager.SetSimplifiedChinese();
-
-            streamManager << entitySourceFileGeneration.GetContent();
+                streamManager << entitySourceFileGeneration.GetContent();
+            }
         }
     }
+}
+
+System::String BatchConversion::Helper::GetContent(const String& fileName)
+{
+    CoreTools::IFStreamManager streamManager{ fileName };
+    streamManager.SetSimplifiedChinese();
+
+    return streamManager.GetFileContent();
 }

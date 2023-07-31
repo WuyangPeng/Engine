@@ -40,7 +40,7 @@ Rendering::BaseRendererImpl::BaseRendererImpl(RendererTypes rendererTypes, const
     : rendererTypes{ rendererTypes },
       rendererAdapter{ renderingEnvironment },
       rendererClear{},
-      globalFont{ CreateGlobalFont(rendererTypes) },
+      globalFont{ CreateGlobalFont(rendererTypes, rendererAdapter) },
       globalState{ rendererTypes, "BlendState", "DepthStencilState", "RasterizerState", rendererAdapter.GetRendererObjectBridge() },
       allowOcclusionQuery{ false }
 {
@@ -49,11 +49,11 @@ Rendering::BaseRendererImpl::BaseRendererImpl(RendererTypes rendererTypes, const
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::GlobalFont Rendering::BaseRendererImpl::CreateGlobalFont(RendererTypes rendererTypes)
+Rendering::GlobalFont Rendering::BaseRendererImpl::CreateGlobalFont(RendererTypes rendererTypes, const RendererAdapter& rendererAdapter)
 {
     ProgramFactory programFactory{ rendererTypes };
 
-    return GlobalFont{ FontType::ArialW400H18, programFactory, 256 };
+    return GlobalFont{ FontType::ArialW400H18, programFactory, rendererAdapter.GetShaderExtendName(), 256 };
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, BaseRendererImpl)
@@ -775,7 +775,7 @@ void Rendering::BaseRendererImpl::Flush()
     return rendererAdapter.Flush();
 }
 
-int64_t Rendering::BaseRendererImpl::DrawPrimitive(const ConstVertexBufferSharedPtr& vertexBuffer, const ConstIndexBufferSharedPtr& indexBuffer, const ConstVisualEffectSharedPtr& effect)
+int64_t Rendering::BaseRendererImpl::DrawPrimitive(const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer, const VisualEffectSharedPtr& effect)
 {
     RENDERING_CLASS_IS_VALID_9;
 

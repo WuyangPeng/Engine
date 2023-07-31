@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.4 (2023/03/16 20:34)
+///	版本：0.9.1.2 (2023/07/31 10:12)
 
 #include "InputOutput/InputOutputExport.h"
 
@@ -26,5 +26,3 @@ int InputOutput::InputOutputPerformanceUnsharedMacroImpl::GetCount() const noexc
 
     return count;
 }
-
- 

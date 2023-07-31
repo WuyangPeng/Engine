@@ -38,6 +38,8 @@ namespace AncientBooks
         NODISCARD ConstSexagenaryCycleBaseSharedPtr GetSexagenaryCycle(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstSexagenaryCycleBaseSharedPtr GetFirstSexagenaryCycle(Function function) const;
 

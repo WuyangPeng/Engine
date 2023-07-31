@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.12 (2023/06/13 22:03)
+///	版本：0.9.1.2 (2023/07/25 19:51)
 
 #ifndef GAME_CLIENT_MIDDLE_LAYER_GUI_H
 #define GAME_CLIENT_MIDDLE_LAYER_GUI_H

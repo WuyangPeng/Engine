@@ -35,7 +35,7 @@ Rendering::NodeImpl::~NodeImpl() noexcept
         {
             if (iter->object != nullptr)
             {
-                iter->object->SetObject(nullptr);
+                iter->object->SetControllerObject(nullptr);
                 iter->object.reset();
             }
         }

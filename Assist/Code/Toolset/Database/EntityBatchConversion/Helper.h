@@ -12,12 +12,16 @@
 
 #include "CoreTools/Helper/UserMacro.h"
 
+#include "System/Helper/UnicodeUsing.h"
+
 namespace BatchConversion
 {
     class Helper final
     {
     public:
         using ClassType = Helper;
+
+        using String = System::String;
 
     public:
         Helper(int argc, char** argv);
@@ -33,6 +37,8 @@ namespace BatchConversion
 
     private:
         void Conversion();
+
+        NODISCARD String GetContent(const String& fileName);
     };
 }
 

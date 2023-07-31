@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:07)
+///	版本：0.9.1.2 (2023/07/24 11:26)
 
 #include "Rendering/RenderingExport.h"
 
 #include "TransformController.h"
 #include "Detail/TransformControllerImpl.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -60,19 +61,12 @@ void Rendering::TransformController::SetScale(const APoint& scale) noexcept(gAss
     return impl->SetScale(scale);
 }
 
-void Rendering::TransformController::SetObject(ControllerInterface* object)
+void Rendering::TransformController::SetControllerObject(const ControllerInterfaceSharedPtr& object)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::GetCurrentRttiType()), "无效类\n");
 
-    ParentType::SetObject(object);
-}
-
-void Rendering::TransformController::SetObjectInCopy(ControllerInterface* object)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    ParentType::SetObject(object);
+    ParentType::SetControllerObject(object);
 }
 
 bool Rendering::TransformController::Update(double applicationTime)
@@ -81,8 +75,8 @@ bool Rendering::TransformController::Update(double applicationTime)
 
     if (ParentType::Update(applicationTime))
     {
-        auto spatial = dynamic_cast<Spatial*>(GetControllerObject());
-        if (spatial != nullptr)
+        if (const auto spatial = boost::polymorphic_pointer_cast<Spatial>(GetControllerObject());
+            spatial != nullptr)
         {
             spatial->SetLocalTransform(impl->GetTransform());
             return true;
@@ -99,8 +93,8 @@ Rendering::ControllerInterfaceSharedPtr Rendering::TransformController::Clone() 
     return std::make_shared<ClassType>(*this);
 }
 
-Rendering::TransformController::TransformController(LoadConstructor value)
-    : ParentType{ value }, impl{ TransformF{} }
+Rendering::TransformController::TransformController(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ TransformF{} }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

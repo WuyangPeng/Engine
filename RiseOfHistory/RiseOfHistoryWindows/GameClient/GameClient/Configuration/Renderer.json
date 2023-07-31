@@ -8,9 +8,9 @@
   },
 
   "ClearColor": {
-    "Red": 1.0,
+    "Red": 0.4,
     "Green": 1.0,
-    "Blue": 1.0,
+    "Blue": 0.8,
     "Alpha": 1.0
   },
 

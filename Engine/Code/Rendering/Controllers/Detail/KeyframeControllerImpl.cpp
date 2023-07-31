@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:05)
+///	版本：0.9.1.2 (2023/07/25 13:41)
 
 #include "Rendering/RenderingExport.h"
 
@@ -421,8 +421,8 @@ Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl::GetKeyInfo(float
         return ControllerKeyInfo{};
     }
 
-    const auto index = times.size() - 1;
-    if (times.at(index) <= ctrlTime)
+    if (const auto index = times.size() - 1;
+        times.at(index) <= ctrlTime)
     {
         lastIndex = boost::numeric_cast<int>(times.size() - 1);
 
@@ -465,15 +465,14 @@ Rendering::KeyframeControllerImpl::APoint Rendering::KeyframeControllerImpl::Get
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto translation = translations.at(keyInfo.GetFirstIndex()) + keyInfo.GetNormTime() * (translations.at(keyInfo.GetSecondIndex()) - translations.at(keyInfo.GetFirstIndex()));
-    return translation;
+    return translations.at(keyInfo.GetFirstIndex()) + keyInfo.GetNormTime() * (translations.at(keyInfo.GetSecondIndex()) - translations.at(keyInfo.GetFirstIndex()));
 }
 
 Rendering::KeyframeControllerImpl::Matrix Rendering::KeyframeControllerImpl::GetRotate(const ControllerKeyInfo& keyInfo) const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    AQuaternion quaternion;
+    AQuaternion quaternion{};
     quaternion.Slerp(keyInfo.GetNormTime(), rotations.at(keyInfo.GetFirstIndex()), rotations.at(keyInfo.GetSecondIndex()));
 
     return quaternion.ToRotationMatrix();

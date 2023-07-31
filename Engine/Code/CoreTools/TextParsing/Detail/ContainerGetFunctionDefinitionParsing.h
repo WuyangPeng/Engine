@@ -46,6 +46,8 @@ namespace CoreTools
         NODISCARD String GenerateGetReturnFirst(const String& lowerClassName) const;
         NODISCARD String GenerateGetContainerFunction(const StringView& containerName) const;
         NODISCARD String GenerateReturnContainer(const String& lowerClassName) const;
+        NODISCARD String GenerateGetContainerSizeFunction() const;
+        NODISCARD String GenerateReturnContainerSize(const String& lowerClassName) const;
 
         NODISCARD String GenerateLambdaFunctionResultJudge(const String& lowerClassName) const;
     };

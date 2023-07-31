@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/19 18:54)
+///	版本：0.9.1.2 (2023/07/22 17:13)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_USING_H
 #define SYSTEM_WINDOWS_WINDOWS_USING_H
@@ -123,7 +123,7 @@ namespace System
 
     constexpr SystemHResult gResultOk{ S_OK };
     constexpr SystemHResult gResultNoInterface{ E_NOINTERFACE };
-    constexpr SystemHResult gResultClassNoaggregation{ CLASS_E_NOAGGREGATION };
+    constexpr SystemHResult gResultClassNoAggregation{ CLASS_E_NOAGGREGATION };
     constexpr SystemHResult gNoError{ NOERROR };
 
     using GetWindowsInformationFunction = decltype(::GetClassName);
@@ -462,7 +462,7 @@ namespace System
 
     constexpr SystemHResult gResultOK{ 0 };
     constexpr SystemHResult gResultNoInterface{ static_cast<SystemHResult>(0x80004002L) };
-    constexpr SystemHResult gResultClassNoaggregation{ static_cast<SystemHResult>(0x80040110L) };
+    constexpr SystemHResult gResultClassNoAggregation{ static_cast<SystemHResult>(0x80040110L) };
     constexpr SystemHResult gNoError{ 0 };
 
     using GetWindowsInformationFunction = int (*)(WindowsHWnd, const TChar*, int);
@@ -498,7 +498,7 @@ namespace System
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
-    using DisplayFunction = void (*)(WindowsHWnd hwnd, int64_t timeDelta);
+    using DisplayFunction = void (*)(WindowsHWnd hWnd, int64_t timeDelta);
 }
 
 #endif  // SYSTEM_WINDOWS_WINDOWS_USING_H

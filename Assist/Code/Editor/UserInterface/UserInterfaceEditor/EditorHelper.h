@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/15 13:29)
+///	版本：0.9.1.2 (2023/07/31 14:18)
 
 #ifndef USER_INTERFACE_EDITOR_EDITOR_HELPER_H
 #define USER_INTERFACE_EDITOR_EDITOR_HELPER_H
@@ -18,7 +18,7 @@ namespace UserInterfaceEditor
 {
     using WindowMainFunctionHelper = Framework::WindowMainFunctionHelper<Framework::WindowsAPIFrameBuild, Framework::WindowProcessInterface>;
 
-    class EditorHelper : public WindowMainFunctionHelper
+    class EditorHelper final : public WindowMainFunctionHelper
     {
     public:
         using ClassType = EditorHelper;
@@ -27,7 +27,7 @@ namespace UserInterfaceEditor
         using WindowApplicationInformation = Framework::WindowApplicationInformation;
 
     public:
-        EditorHelper(WindowsHInstance hInstance, char* cmdLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
+        EditorHelper(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

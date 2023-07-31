@@ -5,17 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏测试版本：0.9.0.12 (2023/06/17 11:22)
+///	版本：0.9.1.2 (2023/07/27 15:11)
 
 #ifndef ITEM_MANAGER_TESTING_HELPER_H
 #define ITEM_MANAGER_TESTING_HELPER_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 
 namespace ItemManager
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
     public:
         using ClassType = TestingHelper;

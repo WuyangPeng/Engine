@@ -38,6 +38,8 @@ namespace AncientBooks
         NODISCARD ConstEmperorBaseSharedPtr GetEmperor(int key) const;
         NODISCARD Container GetContainer() const;
 
+        NODISCARD int GetContainerSize() const;
+
         template <typename Function>
         NODISCARD ConstEmperorBaseSharedPtr GetFirstEmperor(Function function) const;
 

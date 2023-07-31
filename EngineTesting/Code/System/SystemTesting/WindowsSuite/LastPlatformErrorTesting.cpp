@@ -19,7 +19,7 @@
 
 System::LastPlatformErrorTesting::LastPlatformErrorTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      errorModes{ ErrorMode::FailCriticaleErrors, ErrorMode::NoGPFaultErrorBox, ErrorMode::NoOpenFileErrorBox }
+      errorModes{ ErrorMode::FailCriticalErrors, ErrorMode::NoGeneralProtectionFaultErrorBox, ErrorMode::NoOpenFileErrorBox }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }

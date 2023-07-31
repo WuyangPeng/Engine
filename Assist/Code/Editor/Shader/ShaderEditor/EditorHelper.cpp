@@ -13,8 +13,8 @@
 #include "Framework/MainFunctionHelper/WindowMainFunctionHelperDetail.h"
 #include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h"
 
-ShaderEditor::EditorHelper ::EditorHelper(WindowsHInstance hInstance, char* cmdLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
-    : ParentType{ hInstance, cmdLine, information, environmentDirectory }
+ShaderEditor::EditorHelper ::EditorHelper(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ instance, commandLine, information, environmentDirectory }
 {
     SELF_CLASS_IS_VALID_9;
 }

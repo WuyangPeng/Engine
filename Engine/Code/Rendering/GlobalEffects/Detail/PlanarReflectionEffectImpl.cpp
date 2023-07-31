@@ -260,7 +260,6 @@ void Rendering::PlanarReflectionEffectImpl::GetModelSpacePlanes()
 
         std::vector<int32_t> triangle{ get<0>(triangleTuple), get<1>(triangleTuple), get<2>(triangleTuple) };
 
-        auto rawData = vertexBuffer->GetData();
         const auto stride = vertexFormat.GetStride();
         std::array<Vector4, 3> p{};
         for (auto j = 0; j < 3; ++j)

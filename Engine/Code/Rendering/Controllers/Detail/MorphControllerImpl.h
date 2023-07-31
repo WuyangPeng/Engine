@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:01)
+///	版本：0.9.1.2 (2023/07/24 19:28)
 
 #ifndef RENDERING_CONTROLLERS_MORPH_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_MORPH_CONTROLLER_IMPL_H
@@ -17,6 +17,7 @@
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
 #include "Rendering/Controllers/ControllerKeyInfo.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
 
 #include <vector>
 
@@ -28,6 +29,8 @@ namespace Rendering
         using ClassType = MorphControllerImpl;
         using AVector = Mathematics::AVectorF;
         using APoint = Mathematics::APointF;
+        using BaseRendererWeakPtr = std::weak_ptr<BaseRenderer>;
+        using BaseRendererSharedPtr = std::shared_ptr<BaseRenderer>;
 
     public:
         // 顶点的数目，变形的目标，被固定对象的生存期的键。
@@ -40,7 +43,7 @@ namespace Rendering
 
         // numKeys:  键的数目，每个键发生在一个特定的时间。
 
-        MorphControllerImpl(int numVertices, int numTargets, int numKeys);
+        MorphControllerImpl(int numVertices, int numTargets, int numKeys, const BaseRendererSharedPtr& baseRenderer);
         MorphControllerImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
@@ -64,6 +67,9 @@ namespace Rendering
         void Save(CoreTools::BufferTarget& target) const;
         void Load(CoreTools::BufferSource& source);
 
+        void SetControllerObject(Visual& visual);
+        NODISCARD bool Update(double controlTime, Visual& visual);
+
     private:
         // 目标几何体。每个目标的顶点的数量必须和被管理的几何对象的顶点数量相匹配。
         // 顶点数组在位置0是那些目标之一。
@@ -85,6 +91,8 @@ namespace Rendering
 
         // O(1)边界查找键。
         int lastIndex;
+
+        BaseRendererWeakPtr baseRenderer;
     };
 }
 

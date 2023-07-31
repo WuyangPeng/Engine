@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	千年史策版本：0.9.0.12 (2023/06/13 22:00)
+///	版本：0.9.1.2 (2023/07/25 19:48)
 
 #ifndef GAME_CLIENT_MIDDLE_LAYER_OBJECT_LOGIC_MIDDLE_LAYER_OBJECT_LOGIC_H
 #define GAME_CLIENT_MIDDLE_LAYER_OBJECT_LOGIC_MIDDLE_LAYER_OBJECT_LOGIC_H
@@ -21,10 +21,7 @@ namespace GameClientMiddleLayer
     {
     public:
         using ClassType = ObjectLogicManager;
-        using ParentType = Framework::ObjectLogicInterface;
-
-        using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
-        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+        using ParentType = ObjectLogicInterface;
 
     public:
         ObjectLogicManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);

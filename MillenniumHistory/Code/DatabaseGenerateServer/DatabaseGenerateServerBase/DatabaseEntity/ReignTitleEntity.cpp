@@ -315,6 +315,14 @@ DatabaseEntity::ReignTitleEntity::BasisDatabaseManager DatabaseEntity::ReignTitl
                                  GetKeyBasisDatabaseContainer(id) };
 }
 
+DatabaseEntity::ReignTitleEntity::BasisDatabaseManager DatabaseEntity::ReignTitleEntity::GetSelectAll(WrappersStrategy wrappersStrategy)
+{
+    return BasisDatabaseManager{ wrappersStrategy,
+                                 databaseName,
+                                 Database::ChangeType::Select,
+                                 BasisDatabaseContainer::Create() };
+}
+
 Database::BasisDatabaseContainer DatabaseEntity::ReignTitleEntity::GetKeyBasisDatabaseContainer(Database::Traits::ParamType::Int64 id)
 {
     BasisDatabaseContainer basisDatabaseContainer{ BasisDatabaseContainer::ObjectContainer{ Database::BasisDatabase{ idDescribe, id } } };

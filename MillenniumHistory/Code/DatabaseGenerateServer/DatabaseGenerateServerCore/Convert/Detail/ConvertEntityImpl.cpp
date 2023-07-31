@@ -5,18 +5,37 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/16 15:56)
+///	版本：0.9.1.2 (2023/07/30 22:03)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/DatabaseGenerateServerCoreExport.h"
 
-#include "ConvertEntityImpl.h"
+#include "ConvertEntityImplDetail.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/Helper/DatabaseGenerateServerCoreClassInvariantMacro.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "Database/DatabaseInterface/BasisDatabaseManagerDetail.h"
 #include "Database/DatabaseInterface/DatabaseFlush.h"
 
-DatabaseGenerateServerCore::ConvertEntityImpl::ConvertEntityImpl(const DatabaseFlushSharedPtr& databaseFlush) noexcept
-    : databaseFlush{ databaseFlush }
+DatabaseGenerateServerCore::ConvertEntityImpl::ConvertEntityImpl(const DatabaseFlushSharedPtr& databaseFlush)
+    : databaseFlush{ databaseFlush },
+      articleEntityContainer{ GetEntityContainer<int64_t, ArticleEntity>(databaseFlush->SelectAll(ArticleEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), ArticleEntity::GetDatabaseFieldContainer())) },
+      bookEntityContainer{ GetEntityContainer<int32_t, BookEntity>(databaseFlush->SelectAll(BookEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), BookEntity::GetDatabaseFieldContainer())) },
+      calendarEntityContainer{ GetEntityContainer<int32_t, CalendarEntity>(databaseFlush->SelectAll(CalendarEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), CalendarEntity::GetDatabaseFieldContainer())) },
+      categoryEntityContainer{ GetEntityContainer<int32_t, CategoryEntity>(databaseFlush->SelectAll(CategoryEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), CategoryEntity::GetDatabaseFieldContainer())) },
+      characterEntityContainer{ GetEntityContainer<int32_t, CharacterEntity>(databaseFlush->SelectAll(CharacterEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), CharacterEntity::GetDatabaseFieldContainer())) },
+      countryEntityContainer{ GetEntityContainer<int32_t, CountryEntity>(databaseFlush->SelectAll(CountryEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), CountryEntity::GetDatabaseFieldContainer())) },
+      dayEntityContainer{ GetEntityContainer<int32_t, DayEntity>(databaseFlush->SelectAll(DayEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), DayEntity::GetDatabaseFieldContainer())) },
+      emperorEntityContainer{ GetEntityContainer<int32_t, EmperorEntity>(databaseFlush->SelectAll(EmperorEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), EmperorEntity::GetDatabaseFieldContainer())) },
+      gatherEntityContainer{ GetEntityContainer<int32_t, GatherEntity>(databaseFlush->SelectAll(GatherEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), GatherEntity::GetDatabaseFieldContainer())) },
+      genusEntityContainer{ GetEntityContainer<int32_t, GenusEntity>(databaseFlush->SelectAll(GenusEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), GenusEntity::GetDatabaseFieldContainer())) },
+      geographicEntityContainer{ GetEntityContainer<int32_t, GeographicEntity>(databaseFlush->SelectAll(GeographicEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), GeographicEntity::GetDatabaseFieldContainer())) },
+      identityEntityContainer{ GetEntityContainer<int32_t, IdentityEntity>(databaseFlush->SelectAll(IdentityEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), IdentityEntity::GetDatabaseFieldContainer())) },
+      imperialCourtEntityContainer{ GetEntityContainer<int32_t, ImperialCourtEntity>(databaseFlush->SelectAll(ImperialCourtEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), ImperialCourtEntity::GetDatabaseFieldContainer())) },
+      monthEntityContainer{ GetEntityContainer<int32_t, MonthEntity>(databaseFlush->SelectAll(MonthEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), MonthEntity::GetDatabaseFieldContainer())) },
+      reignTitleEntityContainer{ GetEntityContainer<int64_t, ReignTitleEntity>(databaseFlush->SelectAll(ReignTitleEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), ReignTitleEntity::GetDatabaseFieldContainer())) },
+      sexagenaryCycleEntityContainer{ GetEntityContainer<int32_t, SexagenaryCycleEntity>(databaseFlush->SelectAll(SexagenaryCycleEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), SexagenaryCycleEntity::GetDatabaseFieldContainer())) },
+      sourceEntityContainer{ GetEntityContainer<int32_t, SourceEntity>(databaseFlush->SelectAll(SourceEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), SourceEntity::GetDatabaseFieldContainer())) },
+      versionEntityContainer{ GetEntityContainer<int32_t, VersionEntity>(databaseFlush->SelectAll(VersionEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), VersionEntity::GetDatabaseFieldContainer())) },
+      yearEntityContainer{ GetEntityContainer<int32_t, YearEntity>(databaseFlush->SelectAll(YearEntity::GetSelectAll(databaseFlush->GetWrappersStrategy()), YearEntity::GetDatabaseFieldContainer())) }
 {
     DATABASE_GENERATE_SERVER_CORE_SELF_CLASS_IS_VALID_1;
 }
@@ -30,14 +49,12 @@ bool DatabaseGenerateServerCore::ConvertEntityImpl::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-DatabaseEntity::ArticleEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const ArticleBase& article) const
+DatabaseEntity::ArticleEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const ArticleBase& article)
 {
-    DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
+    DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_1;
 
-    const auto database = databaseFlush->SelectOne(ArticleEntity::GetSelect(databaseFlush->GetWrappersStrategy(), article.GetId()),
-                                                   ArticleEntity::GetDatabaseFieldContainer());
-
-    auto articleEntity = ArticleEntity::Create(database, databaseFlush->GetWrappersStrategy(), article.GetId());
+    const auto result = articleEntityContainer.find(article.GetId());
+    auto articleEntity = result != articleEntityContainer.cend() ? result->second : ArticleEntity{ databaseFlush->GetWrappersStrategy(), article.GetId() };
 
     articleEntity.SetVersion(article.GetVersion());
     articleEntity.SetChapter(article.GetChapter());
@@ -49,12 +66,14 @@ DatabaseEntity::ArticleEntity DatabaseGenerateServerCore::ConvertEntityImpl::Con
     articleEntity.SetAbbreviation(CoreTools::StringConversion::StandardConversionUtf8(article.GetAbbreviation()));
     articleEntity.SetDirectory(CoreTools::StringConversion::StandardConversionUtf8(article.GetDirectory()));
 
+    articleEntityContainer.erase(result);
+
     return articleEntity;
 }
 
 Database::Traits::StringArray DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const StringContainerConstIter& begin, const StringContainerConstIter& end)
 {
-    Database::Traits::StringArray result{};
+    StringArray result{};
     for (auto iter = begin; iter != end; ++iter)
     {
         result.emplace_back(CoreTools::StringConversion::StandardConversionUtf8(*iter));
@@ -63,14 +82,12 @@ Database::Traits::StringArray DatabaseGenerateServerCore::ConvertEntityImpl::Con
     return result;
 }
 
-DatabaseEntity::BookEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const BookBase& book) const
+DatabaseEntity::BookEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const BookBase& book)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(BookEntity::GetSelect(databaseFlush->GetWrappersStrategy(), book.GetId()),
-                                                   BookEntity::GetDatabaseFieldContainer());
-
-    auto bookEntity = BookEntity::Create(database, databaseFlush->GetWrappersStrategy(), book.GetId());
+    const auto result = bookEntityContainer.find(book.GetId());
+    auto bookEntity = result != bookEntityContainer.cend() ? result->second : BookEntity{ databaseFlush->GetWrappersStrategy(), book.GetId() };
 
     bookEntity.SetGenus(book.GetGenus());
     bookEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(book.GetName()));
@@ -84,17 +101,17 @@ DatabaseEntity::BookEntity DatabaseGenerateServerCore::ConvertEntityImpl::Conver
     bookEntity.SetPerson(book.GetPerson());
     bookEntity.SetUnansweredQuestion(Convert(book.GetUnansweredQuestionBegin(), book.GetUnansweredQuestionEnd()));
 
+    bookEntityContainer.erase(result);
+
     return bookEntity;
 }
 
-DatabaseEntity::CalendarEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const CalendarBase& calendar) const
+DatabaseEntity::CalendarEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const CalendarBase& calendar)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(CalendarEntity::GetSelect(databaseFlush->GetWrappersStrategy(), calendar.GetId()),
-                                                   CalendarEntity::GetDatabaseFieldContainer());
-
-    auto calendarEntity = CalendarEntity::Create(database, databaseFlush->GetWrappersStrategy(), calendar.GetId());
+    const auto result = calendarEntityContainer.find(calendar.GetId());
+    auto calendarEntity = result != calendarEntityContainer.cend() ? result->second : CalendarEntity{ databaseFlush->GetWrappersStrategy(), calendar.GetId() };
 
     calendarEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(calendar.GetName()));
     calendarEntity.SetAlias(Convert(calendar.GetAliasBegin(), calendar.GetAliasEnd()));
@@ -108,32 +125,32 @@ DatabaseEntity::CalendarEntity DatabaseGenerateServerCore::ConvertEntityImpl::Co
     calendarEntity.SetAgainBegin(calendar.GetAgainBegin());
     calendarEntity.SetAgainEnd(calendar.GetAgainEnd());
 
+    calendarEntityContainer.erase(result);
+
     return calendarEntity;
 }
 
-DatabaseEntity::CategoryEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const CategoryBase& category) const
+DatabaseEntity::CategoryEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const CategoryBase& category)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(CategoryEntity::GetSelect(databaseFlush->GetWrappersStrategy(), category.GetId()),
-                                                   CategoryEntity::GetDatabaseFieldContainer());
-
-    auto categoryEntity = CategoryEntity::Create(database, databaseFlush->GetWrappersStrategy(), category.GetId());
+    const auto result = categoryEntityContainer.find(category.GetId());
+    auto categoryEntity = result != categoryEntityContainer.cend() ? result->second : CategoryEntity{ databaseFlush->GetWrappersStrategy(), category.GetId() };
 
     categoryEntity.SetGather(category.GetGather());
     categoryEntity.SetCategory(CoreTools::StringConversion::StandardConversionUtf8(category.GetCategory()));
 
+    categoryEntityContainer.erase(result);
+
     return categoryEntity;
 }
 
-DatabaseEntity::CharacterEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const CharacterBase& character) const
+DatabaseEntity::CharacterEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const CharacterBase& character)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(CharacterEntity::GetSelect(databaseFlush->GetWrappersStrategy(), character.GetId()),
-                                                   CharacterEntity::GetDatabaseFieldContainer());
-
-    auto characterEntity = CharacterEntity::Create(database, databaseFlush->GetWrappersStrategy(), character.GetId());
+    const auto result = characterEntityContainer.find(character.GetId());
+    auto characterEntity = result != characterEntityContainer.cend() ? result->second : CharacterEntity{ databaseFlush->GetWrappersStrategy(), character.GetId() };
 
     characterEntity.SetCountry(character.GetCountry());
     characterEntity.SetIdentity(character.GetIdentity());
@@ -157,17 +174,17 @@ DatabaseEntity::CharacterEntity DatabaseGenerateServerCore::ConvertEntityImpl::C
     characterEntity.SetDeathDay(character.GetDeathDay());
     characterEntity.SetUnansweredQuestion(Convert(character.GetUnansweredQuestionBegin(), character.GetUnansweredQuestionEnd()));
 
+    characterEntityContainer.erase(result);
+
     return characterEntity;
 }
 
-DatabaseEntity::CountryEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const CountryBase& country) const
+DatabaseEntity::CountryEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const CountryBase& country)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(CountryEntity::GetSelect(databaseFlush->GetWrappersStrategy(), country.GetId()),
-                                                   CountryEntity::GetDatabaseFieldContainer());
-
-    auto countryEntity = CountryEntity::Create(database, databaseFlush->GetWrappersStrategy(), country.GetId());
+    const auto result = countryEntityContainer.find(country.GetId());
+    auto countryEntity = result != countryEntityContainer.cend() ? result->second : CountryEntity{ databaseFlush->GetWrappersStrategy(), country.GetId() };
 
     countryEntity.SetImperialCourt(country.GetImperialCourt());
     countryEntity.SetCategory(CoreTools::StringConversion::StandardConversionUtf8(country.GetCategory()));
@@ -181,42 +198,36 @@ DatabaseEntity::CountryEntity DatabaseGenerateServerCore::ConvertEntityImpl::Con
     countryEntity.SetEndDay(country.GetEndDay());
     countryEntity.SetUnansweredQuestion(Convert(country.GetUnansweredQuestionBegin(), country.GetUnansweredQuestionEnd()));
 
+    countryEntityContainer.erase(result);
+
     return countryEntity;
 }
 
-DatabaseEntity::DayEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const DayBase& day) const
+DatabaseEntity::DayEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const DayBase& day)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(DayEntity::GetSelect(databaseFlush->GetWrappersStrategy(), day.GetId()),
-                                                   DayEntity::GetDatabaseFieldContainer());
-
-    auto dayEntity = DayEntity::Create(database, databaseFlush->GetWrappersStrategy(), day.GetId());
+    const auto result = dayEntityContainer.find(day.GetId());
+    auto dayEntity = result != dayEntityContainer.cend() ? result->second : DayEntity{ databaseFlush->GetWrappersStrategy(), day.GetId() };
 
     dayEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(day.GetName()));
+
+    dayEntityContainer.erase(result);
 
     return dayEntity;
 }
 
-DatabaseEntity::EmperorEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const EmperorBase& emperor) const
+DatabaseEntity::EmperorEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const EmperorBase& emperor)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(EmperorEntity::GetSelect(databaseFlush->GetWrappersStrategy(), emperor.GetId()),
-                                                   EmperorEntity::GetDatabaseFieldContainer());
-
-    auto emperorEntity = EmperorEntity::Create(database, databaseFlush->GetWrappersStrategy(), emperor.GetId());
+    const auto result = emperorEntityContainer.find(emperor.GetId());
+    auto emperorEntity = result != emperorEntityContainer.cend() ? result->second : EmperorEntity{ databaseFlush->GetWrappersStrategy(), emperor.GetId() };
 
     emperorEntity.SetCharacter(emperor.GetCharacter());
     emperorEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(emperor.GetName()));
     emperorEntity.SetDynasticTitle(CoreTools::StringConversion::StandardConversionUtf8(emperor.GetDynasticTitle()));
-    Database::Traits::StringArray dynasticTitleAlias{};
-    for (auto iter = emperor.GetDynasticTitleAliasBegin(); iter != emperor.GetDynasticTitleAliasEnd(); ++iter)
-    {
-        dynasticTitleAlias.emplace_back(CoreTools::StringConversion::StandardConversionUtf8(*iter));
-    }
-    emperorEntity.SetDynasticTitleAlias(dynasticTitleAlias);
-
+    emperorEntity.SetDynasticTitleAlias(Convert(emperor.GetDynasticTitleAliasBegin(), emperor.GetDynasticTitleAliasEnd()));
     emperorEntity.SetPosthumousTitle(CoreTools::StringConversion::StandardConversionUtf8(emperor.GetPosthumousTitle()));
     emperorEntity.SetPosthumousTitleAlias(Convert(emperor.GetPosthumousTitleAliasBegin(), emperor.GetPosthumousTitleAliasEnd()));
     emperorEntity.SetBeginYear(emperor.GetBeginYear());
@@ -237,31 +248,31 @@ DatabaseEntity::EmperorEntity DatabaseGenerateServerCore::ConvertEntityImpl::Con
     emperorEntity.SetAgainEndDay(emperor.GetAgainEndDay());
     emperorEntity.SetUnansweredQuestion(Convert(emperor.GetUnansweredQuestionBegin(), emperor.GetUnansweredQuestionEnd()));
 
+    emperorEntityContainer.erase(result);
+
     return emperorEntity;
 }
 
-DatabaseEntity::GatherEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const GatherBase& gather) const
+DatabaseEntity::GatherEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const GatherBase& gather)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(GatherEntity::GetSelect(databaseFlush->GetWrappersStrategy(), gather.GetId()),
-                                                   GatherEntity::GetDatabaseFieldContainer());
-
-    auto gatherEntity = GatherEntity::Create(database, databaseFlush->GetWrappersStrategy(), gather.GetId());
+    const auto result = gatherEntityContainer.find(gather.GetId());
+    auto gatherEntity = result != gatherEntityContainer.cend() ? result->second : GatherEntity{ databaseFlush->GetWrappersStrategy(), gather.GetId() };
 
     gatherEntity.SetGather(CoreTools::StringConversion::StandardConversionUtf8(gather.GetGather()));
+
+    gatherEntityContainer.erase(result);
 
     return gatherEntity;
 }
 
-DatabaseEntity::GenusEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const GenusBase& genus) const
+DatabaseEntity::GenusEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const GenusBase& genus)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(GenusEntity::GetSelect(databaseFlush->GetWrappersStrategy(), genus.GetId()),
-                                                   GenusEntity::GetDatabaseFieldContainer());
-
-    auto genusEntity = GenusEntity::Create(database, databaseFlush->GetWrappersStrategy(), genus.GetId());
+    const auto result = genusEntityContainer.find(genus.GetId());
+    auto genusEntity = result != genusEntityContainer.cend() ? result->second : GenusEntity{ databaseFlush->GetWrappersStrategy(), genus.GetId() };
 
     genusEntity.SetCategory(genus.GetCategory());
     genusEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(genus.GetName()));
@@ -269,76 +280,76 @@ DatabaseEntity::GenusEntity DatabaseGenerateServerCore::ConvertEntityImpl::Conve
     genusEntity.SetBegin(CoreTools::StringConversion::StandardConversionUtf8(genus.GetBegin()));
     genusEntity.SetEnd(CoreTools::StringConversion::StandardConversionUtf8(genus.GetEnd()));
 
+    genusEntityContainer.erase(result);
+
     return genusEntity;
 }
 
-DatabaseEntity::GeographicEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const GeographicBase& geographic) const
+DatabaseEntity::GeographicEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const GeographicBase& geographic)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(GeographicEntity::GetSelect(databaseFlush->GetWrappersStrategy(), geographic.GetId()),
-                                                   GeographicEntity::GetDatabaseFieldContainer());
-
-    auto geographicEntity = GeographicEntity::Create(database, databaseFlush->GetWrappersStrategy(), geographic.GetId());
+    const auto result = geographicEntityContainer.find(geographic.GetId());
+    auto geographicEntity = result != geographicEntityContainer.cend() ? result->second : GeographicEntity{ databaseFlush->GetWrappersStrategy(), geographic.GetId() };
 
     geographicEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(geographic.GetName()));
+
+    geographicEntityContainer.erase(result);
 
     return geographicEntity;
 }
 
-DatabaseEntity::IdentityEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const IdentityBase& identity) const
+DatabaseEntity::IdentityEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const IdentityBase& identity)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(IdentityEntity::GetSelect(databaseFlush->GetWrappersStrategy(), identity.GetId()),
-                                                   IdentityEntity::GetDatabaseFieldContainer());
-
-    auto identityEntity = IdentityEntity::Create(database, databaseFlush->GetWrappersStrategy(), identity.GetId());
+    const auto result = identityEntityContainer.find(identity.GetId());
+    auto identityEntity = result != identityEntityContainer.cend() ? result->second : IdentityEntity{ databaseFlush->GetWrappersStrategy(), identity.GetId() };
 
     identityEntity.SetIdentity(CoreTools::StringConversion::StandardConversionUtf8(identity.GetIdentity()));
+
+    identityEntityContainer.erase(result);
 
     return identityEntity;
 }
 
-DatabaseEntity::ImperialCourtEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const ImperialCourtBase& imperialCourt) const
+DatabaseEntity::ImperialCourtEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const ImperialCourtBase& imperialCourt)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(ImperialCourtEntity::GetSelect(databaseFlush->GetWrappersStrategy(), imperialCourt.GetId()),
-                                                   ImperialCourtEntity::GetDatabaseFieldContainer());
-
-    auto imperialCourtEntity = ImperialCourtEntity::Create(database, databaseFlush->GetWrappersStrategy(), imperialCourt.GetId());
+    const auto result = imperialCourtEntityContainer.find(imperialCourt.GetId());
+    auto imperialCourtEntity = result != imperialCourtEntityContainer.cend() ? result->second : ImperialCourtEntity{ databaseFlush->GetWrappersStrategy(), imperialCourt.GetId() };
 
     imperialCourtEntity.SetCategory(CoreTools::StringConversion::StandardConversionUtf8(imperialCourt.GetCategory()));
     imperialCourtEntity.SetBook(CoreTools::StringConversion::StandardConversionUtf8(imperialCourt.GetBook()));
     imperialCourtEntity.SetBegin(imperialCourt.GetBegin());
     imperialCourtEntity.SetEnd(imperialCourt.GetEnd());
 
+    imperialCourtEntityContainer.erase(result);
+
     return imperialCourtEntity;
 }
 
-DatabaseEntity::MonthEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const MonthBase& month) const
+DatabaseEntity::MonthEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const MonthBase& month)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(MonthEntity::GetSelect(databaseFlush->GetWrappersStrategy(), month.GetId()),
-                                                   MonthEntity::GetDatabaseFieldContainer());
-
-    auto monthEntity = MonthEntity::Create(database, databaseFlush->GetWrappersStrategy(), month.GetId());
+    const auto result = monthEntityContainer.find(month.GetId());
+    auto monthEntity = result != monthEntityContainer.cend() ? result->second : MonthEntity{ databaseFlush->GetWrappersStrategy(), month.GetId() };
 
     monthEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(month.GetName()));
+
+    monthEntityContainer.erase(result);
 
     return monthEntity;
 }
 
-DatabaseEntity::ReignTitleEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const ReignTitleBase& reignTitle) const
+DatabaseEntity::ReignTitleEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const ReignTitleBase& reignTitle)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(ReignTitleEntity::GetSelect(databaseFlush->GetWrappersStrategy(), reignTitle.GetId()),
-                                                   ReignTitleEntity::GetDatabaseFieldContainer());
-
-    auto reignTitleEntity = ReignTitleEntity::Create(database, databaseFlush->GetWrappersStrategy(), reignTitle.GetId());
+    const auto result = reignTitleEntityContainer.find(reignTitle.GetId());
+    auto reignTitleEntity = result != reignTitleEntityContainer.cend() ? result->second : ReignTitleEntity{ databaseFlush->GetWrappersStrategy(), reignTitle.GetId() };
 
     reignTitleEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(reignTitle.GetName()));
     reignTitleEntity.SetEmperor(reignTitle.GetEmperor());
@@ -352,48 +363,48 @@ DatabaseEntity::ReignTitleEntity DatabaseGenerateServerCore::ConvertEntityImpl::
     reignTitleEntity.SetEndSexagenaryCycle(reignTitle.GetEndSexagenaryCycle());
     reignTitleEntity.SetEndDay(reignTitle.GetEndDay());
 
+    reignTitleEntityContainer.erase(result);
+
     return reignTitleEntity;
 }
 
-DatabaseEntity::SexagenaryCycleEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const SexagenaryCycleBase& sexagenaryCycle) const
+DatabaseEntity::SexagenaryCycleEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const SexagenaryCycleBase& sexagenaryCycle)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(SexagenaryCycleEntity::GetSelect(databaseFlush->GetWrappersStrategy(), sexagenaryCycle.GetId()),
-                                                   SexagenaryCycleEntity::GetDatabaseFieldContainer());
-
-    auto sexagenaryCycleEntity = SexagenaryCycleEntity::Create(database, databaseFlush->GetWrappersStrategy(), sexagenaryCycle.GetId());
+    const auto result = sexagenaryCycleEntityContainer.find(sexagenaryCycle.GetId());
+    auto sexagenaryCycleEntity = result != sexagenaryCycleEntityContainer.cend() ? result->second : SexagenaryCycleEntity{ databaseFlush->GetWrappersStrategy(), sexagenaryCycle.GetId() };
 
     sexagenaryCycleEntity.SetHeavenly(CoreTools::StringConversion::StandardConversionUtf8(sexagenaryCycle.GetHeavenly()));
     sexagenaryCycleEntity.SetBranch(CoreTools::StringConversion::StandardConversionUtf8(sexagenaryCycle.GetBranch()));
     sexagenaryCycleEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(sexagenaryCycle.GetName()));
 
+    sexagenaryCycleEntityContainer.erase(result);
+
     return sexagenaryCycleEntity;
 }
 
-DatabaseEntity::SourceEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const SourceBase& source) const
+DatabaseEntity::SourceEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const SourceBase& source)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(SourceEntity::GetSelect(databaseFlush->GetWrappersStrategy(), source.GetId()),
-                                                   SourceEntity::GetDatabaseFieldContainer());
-
-    auto sourceEntity = SourceEntity::Create(database, databaseFlush->GetWrappersStrategy(), source.GetId());
+    const auto result = sourceEntityContainer.find(source.GetId());
+    auto sourceEntity = result != sourceEntityContainer.cend() ? result->second : SourceEntity{ databaseFlush->GetWrappersStrategy(), source.GetId() };
 
     sourceEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(source.GetName()));
     sourceEntity.SetSort(source.GetSort());
 
+    sourceEntityContainer.erase(result);
+
     return sourceEntity;
 }
 
-DatabaseEntity::VersionEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const VersionBase& version) const
+DatabaseEntity::VersionEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const VersionBase& version)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(VersionEntity::GetSelect(databaseFlush->GetWrappersStrategy(), version.GetId()),
-                                                   VersionEntity::GetDatabaseFieldContainer());
-
-    auto versionEntity = VersionEntity::Create(database, databaseFlush->GetWrappersStrategy(), version.GetId());
+    const auto result = versionEntityContainer.find(version.GetId());
+    auto versionEntity = result != versionEntityContainer.cend() ? result->second : VersionEntity{ databaseFlush->GetWrappersStrategy(), version.GetId() };
 
     versionEntity.SetBook(version.GetBook());
     versionEntity.SetSource(version.GetSource());
@@ -405,17 +416,17 @@ DatabaseEntity::VersionEntity DatabaseGenerateServerCore::ConvertEntityImpl::Con
     versionEntity.SetOtherAuthor(version.GetOtherAuthor());
     versionEntity.SetAuthorNotes(Convert(version.GetAuthorNotesBegin(), version.GetAuthorNotesEnd()));
 
+    versionEntityContainer.erase(result);
+
     return versionEntity;
 }
 
-DatabaseEntity::YearEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const YearBase& year) const
+DatabaseEntity::YearEntity DatabaseGenerateServerCore::ConvertEntityImpl::Convert(const YearBase& year)
 {
     DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_CONST_1;
 
-    const auto database = databaseFlush->SelectOne(YearEntity::GetSelect(databaseFlush->GetWrappersStrategy(), year.GetId()),
-                                                   YearEntity::GetDatabaseFieldContainer());
-
-    auto yearEntity = YearEntity::Create(database, databaseFlush->GetWrappersStrategy(), year.GetId());
+    const auto result = yearEntityContainer.find(year.GetId());
+    auto yearEntity = result != yearEntityContainer.cend() ? result->second : YearEntity{ databaseFlush->GetWrappersStrategy(), year.GetId() };
 
     yearEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(year.GetName()));
     yearEntity.SetSexagenaryCycle(year.GetSexagenaryCycle());
@@ -424,5 +435,32 @@ DatabaseEntity::YearEntity DatabaseGenerateServerCore::ConvertEntityImpl::Conver
     yearEntity.SetUnorthodoxReignTitle(year.GetUnorthodoxReignTitle());
     yearEntity.SetUnorthodoxYear(year.GetUnorthodoxYear());
 
+    yearEntityContainer.erase(result);
+
     return yearEntity;
+}
+
+void DatabaseGenerateServerCore::ConvertEntityImpl::DeleteInvalidDatabase()
+{
+    DATABASE_GENERATE_SERVER_CORE_CLASS_IS_VALID_1;
+
+    DeleteInvalidDatabase(articleEntityContainer);
+    DeleteInvalidDatabase(bookEntityContainer);
+    DeleteInvalidDatabase(calendarEntityContainer);
+    DeleteInvalidDatabase(categoryEntityContainer);
+    DeleteInvalidDatabase(characterEntityContainer);
+    DeleteInvalidDatabase(countryEntityContainer);
+    DeleteInvalidDatabase(dayEntityContainer);
+    DeleteInvalidDatabase(emperorEntityContainer);
+    DeleteInvalidDatabase(gatherEntityContainer);
+    DeleteInvalidDatabase(genusEntityContainer);
+    DeleteInvalidDatabase(geographicEntityContainer);
+    DeleteInvalidDatabase(identityEntityContainer);
+    DeleteInvalidDatabase(imperialCourtEntityContainer);
+    DeleteInvalidDatabase(monthEntityContainer);
+    DeleteInvalidDatabase(reignTitleEntityContainer);
+    DeleteInvalidDatabase(sexagenaryCycleEntityContainer);
+    DeleteInvalidDatabase(sourceEntityContainer);
+    DeleteInvalidDatabase(versionEntityContainer);
+    DeleteInvalidDatabase(yearEntityContainer);
 }

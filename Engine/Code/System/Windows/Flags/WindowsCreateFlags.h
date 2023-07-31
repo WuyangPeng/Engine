@@ -33,14 +33,14 @@ namespace System
         Restore = SC_RESTORE,
         TaskList = SC_TASKLIST,
         ScreenSave = SC_SCREENSAVE,
-        Hotkey = SC_HOTKEY,
+        HotKey = SC_HOTKEY,
 
         Default = SC_DEFAULT,
         MonitorPower = SC_MONITORPOWER,
         ContextHelp = SC_CONTEXTHELP,
         Separator = SC_SEPARATOR,
 
-        Issecure = SCF_ISSECURE,
+        IsSecure = SCF_ISSECURE,
     };
 
     enum class MenuItem
@@ -66,14 +66,14 @@ namespace System
 
         String = MF_STRING,
         Bitmap = MF_BITMAP,
-        Ownerdraw = MF_OWNERDRAW,
+        OwnerDraw = MF_OWNERDRAW,
 
         Popup = MF_POPUP,
         MenuBarBreak = MF_MENUBARBREAK,
         MenuBreak = MF_MENUBREAK,
 
-        UnHilite = MF_UNHILITE,
-        Hilite = MF_HILITE,
+        UnHighlight = MF_UNHILITE,
+        Highlight = MF_HILITE,
 
         Default = MF_DEFAULT,
 
@@ -106,14 +106,14 @@ namespace System
         Restore = 0xF120,
         TaskList = 0xF130,
         ScreenSave = 0xF140,
-        Hotkey = 0xF150,
+        HotKey = 0xF150,
 
         Default = 0xF160,
         MonitorPower = 0xF170,
         ContextHelp = 0xF180,
         Separator = 0xF00F,
 
-        Issecure = 0x00000001,
+        IsSecure = 0x00000001,
     };
 
     enum class MenuItem
@@ -139,14 +139,14 @@ namespace System
 
         String = 0x00000000L,
         Bitmap = 0x00000004L,
-        Ownerdraw = 0x00000100L,
+        OwnerDraw = 0x00000100L,
 
         Popup = 0x00000010L,
         MenuBarBreak = 0x00000020L,
         MenuBreak = 0x00000040L,
 
-        UnHilite = 0x00000000L,
-        Hilite = 0x00000080L,
+        UnHighlight = 0x00000000L,
+        Highlight = 0x00000080L,
 
         Default = 0x00001000L,
 

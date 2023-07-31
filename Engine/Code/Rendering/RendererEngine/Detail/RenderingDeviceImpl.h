@@ -12,6 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "Rendering/Base/BaseFwd.h"
 #include "Rendering/LocalEffects/VisualEffect.h"
 #include "Rendering/RendererEngine/DepthRange.h"
 #include "Rendering/RendererEngine/RendererEngineInternalFwd.h"
@@ -28,6 +29,9 @@ namespace Rendering
         using FactoryType = RenderingDeviceFactory;
 
         using RenderingDeviceSharedPtr = std::shared_ptr<RenderingDeviceImpl>;
+        using VertexBufferSharedPtr = std::shared_ptr<VertexBuffer>;
+        using IndexBufferSharedPtr = std::shared_ptr<IndexBuffer>;
+        using VisualEffectSharedPtr = std::shared_ptr<VisualEffect>;
         using ConstVertexBufferSharedPtr = std::shared_ptr<const VertexBuffer>;
         using ConstIndexBufferSharedPtr = std::shared_ptr<const IndexBuffer>;
         using ConstVisualEffectSharedPtr = std::shared_ptr<const VisualEffect>;
@@ -61,11 +65,13 @@ namespace Rendering
 
         NODISCARD virtual bool HasDepthRange01() const = 0;
         NODISCARD virtual std::string GetShaderName(const std::string& name) const = 0;
+        NODISCARD virtual std::string GetShaderExtendName() const = 0;
         NODISCARD virtual void Resize(int width, int height) = 0;
 
-        NODISCARD virtual int64_t DrawPrimitive(const ConstVertexBufferSharedPtr& vertexBuffer,
-                                                const ConstIndexBufferSharedPtr& indexBuffer,
-                                                const ConstVisualEffectSharedPtr& effect) = 0;
+        NODISCARD virtual int64_t DrawPrimitive(RendererObjectBridge& rendererObjectBridge,
+                                                const VertexBufferSharedPtr& vertexBuffer,
+                                                const IndexBufferSharedPtr& indexBuffer,
+                                                const VisualEffectSharedPtr& effect) = 0;
 
         virtual void ClearColorBuffer(const RendererClear& rendererClear) = 0;
         virtual void ClearDepthBuffer(const RendererClear& rendererClear) = 0;

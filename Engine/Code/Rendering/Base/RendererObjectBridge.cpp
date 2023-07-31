@@ -70,3 +70,10 @@ Rendering::TotalAllocation Rendering::RendererObjectBridge::GetTotalAllocation()
 
     return impl->GetTotalAllocation();
 }
+
+void Rendering::RendererObjectBridge::Release()
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->Release();
+}

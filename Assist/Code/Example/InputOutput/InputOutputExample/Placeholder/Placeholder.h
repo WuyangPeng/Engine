@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/09 20:04)
+///	版本：0.9.1.2 (2023/07/31 11:31)
 
 #ifndef INPUT_OUTPUT_EXAMPLE_PLACEHOLDER_H
 #define INPUT_OUTPUT_EXAMPLE_PLACEHOLDER_H

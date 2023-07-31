@@ -1,0 +1,15 @@
+diff a/Code/CoreTools/TextParsing/Detail/CSV/CSVContentImpl.cpp b/Code/CoreTools/TextParsing/Detail/CSV/CSVContentImpl.cpp	(rejected hunks)
+@@ -32,11 +32,9 @@
+ 
+ void CoreTools::CSVContentImpl::Parsing()
+ {
+-    const IFStreamManager streamManager{ fileName };
++    IFStreamManager streamManager{ fileName };
+ 
+-    const auto content = streamManager.GetFileContent();
+-
+-    split(fileContent, content, boost::is_any_of(TextParsing::gNewline), boost::token_compress_on);
++    fileContent = streamManager.GetSeparateFileContent();
+ 
+     if (fileContent.size() < fileHeaderSize)
+     {

@@ -176,6 +176,15 @@ Rendering::VisualProgramImpl::VisualProgramSharedPtr Rendering::VisualProgramImp
     return std::make_shared<ClassType>(*this);
 }
 
+Rendering::VisualProgramImpl::OpenGLUInt Rendering::VisualProgramImpl::GetProgramHandle() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    CoreTools::DisableNoexcept();
+
+    return 0;
+}
+
 CoreTools::ObjectSharedPtr Rendering::VisualProgramImpl::GetObjectByName(const std::string& name)
 {
     RENDERING_CLASS_IS_VALID_9;

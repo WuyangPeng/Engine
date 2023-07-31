@@ -21,26 +21,26 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/LocalEffects/Flags/FontFlags.h"
 
-Rendering::FontFactory::FontSharedPtr Rendering::FontFactory::Create(FontType fontType, ProgramFactory& factory, int maxMessageLength)
+Rendering::FontFactory::FontSharedPtr Rendering::FontFactory::Create(FontType fontType, ProgramFactory& factory, const std::string& shaderExtendName, int maxMessageLength)
 {
     switch (fontType)
     {
         case FontType::ArialW400H12:
-            return std::make_shared<FontArialW400H12>(factory, maxMessageLength);
+            return std::make_shared<FontArialW400H12>(factory, shaderExtendName, maxMessageLength);
         case FontType::ArialW400H14:
-            return std::make_shared<FontArialW400H14>(factory, maxMessageLength);
+            return std::make_shared<FontArialW400H14>(factory, shaderExtendName, maxMessageLength);
         case FontType::ArialW400H16:
-            return std::make_shared<FontArialW400H16>(factory, maxMessageLength);
+            return std::make_shared<FontArialW400H16>(factory, shaderExtendName, maxMessageLength);
         case FontType::ArialW400H18:
-            return std::make_shared<FontArialW400H18>(factory, maxMessageLength);
+            return std::make_shared<FontArialW400H18>(factory, shaderExtendName, maxMessageLength);
         case FontType::ArialW700H12:
-            return std::make_shared<FontArialW700H12>(factory, maxMessageLength);
+            return std::make_shared<FontArialW700H12>(factory, shaderExtendName, maxMessageLength);
         case FontType::ArialW700H14:
-            return std::make_shared<FontArialW700H14>(factory, maxMessageLength);
+            return std::make_shared<FontArialW700H14>(factory, shaderExtendName, maxMessageLength);
         case FontType::ArialW700H16:
-            return std::make_shared<FontArialW700H16>(factory, maxMessageLength);
+            return std::make_shared<FontArialW700H16>(factory, shaderExtendName, maxMessageLength);
         case FontType::ArialW700H18:
-            return std::make_shared<FontArialW700H18>(factory, maxMessageLength);
+            return std::make_shared<FontArialW700H18>(factory, shaderExtendName, maxMessageLength);
         default:
         {
             THROW_EXCEPTION(SYSTEM_TEXT("未找到指定的字体类型。"))

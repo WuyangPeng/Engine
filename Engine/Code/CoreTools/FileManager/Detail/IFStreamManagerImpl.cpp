@@ -11,12 +11,14 @@
 
 #include "IFStreamManagerImpl.h"
 #include "IFStreamSeekManager.h"
+#include "System/Helper/PragmaWarning/Algorithm.h"
 #include "System/Helper/PragmaWarning/Format.h"
 #include "System/Helper/PragmaWarning/PosixTime.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
+#include <fstream>
 #include <sstream>
 
 using namespace std::literals;
@@ -55,7 +57,7 @@ System::String CoreTools::IFStreamManagerImpl::BackupFile() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    const auto newName = GetBackupName();
+    auto newName = GetBackupName();
     System::OFileStream os{ newName, System::OFileStream::app };
 
     if (os)
@@ -142,4 +144,15 @@ System::IFileStream& CoreTools::IFStreamManagerImpl::GetFileStream() noexcept
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     return iStream;
+}
+
+CoreTools::IFStreamManagerImpl::FileContent CoreTools::IFStreamManagerImpl::GetFileContent(System::StringView separate) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    FileContent fileContent{};
+
+    split(fileContent, GetFileContent(), boost::is_any_of(separate), boost::token_compress_on);
+
+    return fileContent;
 }

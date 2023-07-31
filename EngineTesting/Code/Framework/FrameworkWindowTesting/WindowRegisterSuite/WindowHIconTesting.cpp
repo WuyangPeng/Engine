@@ -28,7 +28,7 @@ Framework::WindowHIconTesting::WindowHIconTesting(const OStreamShared& stream, H
       instance{ instance },
       container{ { 0, System::gApplication },
                  { 32512, System::gApplication },
-                 { 32513, System::gIDIHand },
+                 { 32513, System::gIdiHand },
                  { 32514, System::gQuestion },
                  { 32515, System::gExclamation },
                  { 32516, System::gAsterisk },

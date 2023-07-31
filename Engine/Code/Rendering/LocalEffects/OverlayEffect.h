@@ -68,6 +68,11 @@ namespace Rendering
         NODISCARD ConstVisualProgramSharedPtr GetProgram() const noexcept;
         NODISCARD ConstVisualEffectSharedPtr GetEffect() const noexcept;
 
+        NODISCARD VertexBufferSharedPtr GetVertexBuffer() noexcept;
+        NODISCARD IndexBufferSharedPtr GetIndexBuffer() noexcept;
+        NODISCARD VisualProgramSharedPtr GetProgram() noexcept;
+        NODISCARD VisualEffectSharedPtr GetEffect() noexcept;
+
         void SetOverlayRectangle(const RectangleType& rectangle);
 
         NODISCARD RectangleType GetOverlayRectangle() const noexcept;

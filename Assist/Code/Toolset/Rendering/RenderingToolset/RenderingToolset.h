@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.9.0.12 (2023/06/12 14:32)
+///	版本：0.9.1.2 (2023/07/28 10:36)
 
 #ifndef RENDERING_TOOLSET_H
 #define RENDERING_TOOLSET_H

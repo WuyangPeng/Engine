@@ -21,7 +21,7 @@
 
 #include <gsl/util>
 
-Rendering::ParticlesImpl::ParticlesImpl(const std::vector<APoint>& positions, const std::vector<float>& sizes, float sizeAdjust)
+Rendering::ParticlesImpl::ParticlesImpl(const std::vector<Mathematics::Vector4F>& positions, const std::vector<float>& sizes, float sizeAdjust)
     : positions{ positions }, sizes{ sizes }, sizeAdjust{ sizeAdjust }, numActive{ boost::numeric_cast<int>(positions.size()) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -56,7 +56,7 @@ int Rendering::ParticlesImpl::GetNumParticles() const
     return boost::numeric_cast<int>(positions.size());
 }
 
-Rendering::ParticlesImpl::APoint Rendering::ParticlesImpl::GetParticlesPosition(int index) const
+Mathematics::Vector4F Rendering::ParticlesImpl::GetParticlesPosition(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(positions.size()), "索引越界！");
@@ -72,7 +72,7 @@ float Rendering::ParticlesImpl::GetSize(int index) const
     return sizes.at(index);
 }
 
-void Rendering::ParticlesImpl::SetPosition(int index, const APoint& position)
+void Rendering::ParticlesImpl::SetPosition(int index, const Mathematics::Vector4F& position)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(positions.size()), "索引越界！");

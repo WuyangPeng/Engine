@@ -23,9 +23,11 @@ namespace CoreTools
     {
     public:
         using ClassType = IFStreamManagerImpl;
+
         using String = System::String;
         using OStream = System::OStream;
         using IFileStream = System::IFileStream;
+        using FileContent = std::vector<String>;
 
     public:
         explicit IFStreamManagerImpl(const String& fileName);
@@ -38,6 +40,7 @@ namespace CoreTools
         void SetSimplifiedChinese();
 
         NODISCARD IFileStream& GetFileStream() noexcept;
+        NODISCARD FileContent GetFileContent(System::StringView separate) const;
 
     private:
         NODISCARD String GetBackupName() const;

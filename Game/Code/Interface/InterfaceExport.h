@@ -5,17 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏版本：0.9.0.12 (2023/06/16 16:51)
+///	版本：0.9.1.2 (2023/07/25 15:53)
 
-#ifndef ACTIVITY_EXPORT_H
-#define ACTIVITY_EXPORT_H
+#ifndef INTERFACE_EXPORT_H
+#define INTERFACE_EXPORT_H
 
 #include "Helper/UserMacro.h"
 
-#ifndef BUILDING_ACTIVITY_EXPORT
+#ifndef BUILDING_INTERFACE_EXPORT
 
-    #define BUILDING_ACTIVITY_EXPORT
+    #define BUILDING_INTERFACE_EXPORT
 
-#endif  // BUILDING_ACTIVITY_EXPORT
+#endif  // BUILDING_INTERFACE_EXPORT
 
-#endif  // ACTIVITY_EXPORT_H
+#endif  // INTERFACE_EXPORT_H

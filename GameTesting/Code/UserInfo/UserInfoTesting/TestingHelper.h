@@ -5,19 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎游戏测试版本：0.9.0.12 (2023/06/17 11:29)
+///	版本：0.9.1.2 (2023/07/27 14:14)
 
 #ifndef USER_INFO_TESTING_HELPER_H
 #define USER_INFO_TESTING_HELPER_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 
 namespace UserInfo
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
-    public:
     public:
         using ClassType = TestingHelper;
         using ParentType = CMainFunctionTestingHelper;

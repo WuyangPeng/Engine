@@ -89,6 +89,13 @@ std::string Rendering::NullDevice::GetShaderName(const std::string& name) const
     return name + ".hlsl";
 }
 
+std::string Rendering::NullDevice::GetShaderExtendName() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return ".hlsl";
+}
+
 void Rendering::NullDevice::Resize(int width, int height) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -96,11 +103,11 @@ void Rendering::NullDevice::Resize(int width, int height) noexcept
     System::UnusedFunction(width, height);
 }
 
-int64_t Rendering::NullDevice::DrawPrimitive(const ConstVertexBufferSharedPtr& vertexBuffer, const ConstIndexBufferSharedPtr& indexBuffer, const ConstVisualEffectSharedPtr& effect) noexcept
+int64_t Rendering::NullDevice::DrawPrimitive(RendererObjectBridge& rendererObjectBridge, const VertexBufferSharedPtr& vertexBuffer, const IndexBufferSharedPtr& indexBuffer, const VisualEffectSharedPtr& effect) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    System::UnusedFunction(vertexBuffer, indexBuffer, effect);
+    System::UnusedFunction(rendererObjectBridge, vertexBuffer, indexBuffer, effect);
 
     return 0;
 }

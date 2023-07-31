@@ -315,6 +315,14 @@ DatabaseEntity::CalendarEntity::BasisDatabaseManager DatabaseEntity::CalendarEnt
                                  GetKeyBasisDatabaseContainer(id) };
 }
 
+DatabaseEntity::CalendarEntity::BasisDatabaseManager DatabaseEntity::CalendarEntity::GetSelectAll(WrappersStrategy wrappersStrategy)
+{
+    return BasisDatabaseManager{ wrappersStrategy,
+                                 databaseName,
+                                 Database::ChangeType::Select,
+                                 BasisDatabaseContainer::Create() };
+}
+
 Database::BasisDatabaseContainer DatabaseEntity::CalendarEntity::GetKeyBasisDatabaseContainer(Database::Traits::ParamType::Int32 id)
 {
     BasisDatabaseContainer basisDatabaseContainer{ BasisDatabaseContainer::ObjectContainer{ Database::BasisDatabase{ idDescribe, id } } };

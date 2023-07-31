@@ -79,8 +79,7 @@ namespace Rendering
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
         // 对“this”设置对象，管理控制器。
-        void SetObject(ControllerInterface* object) override;
-        void SetObjectInCopy(ControllerInterface* object) override;
+        void SetControllerObject(const ControllerInterfaceSharedPtr& object) override; 
 
     private:
         PackageType impl;

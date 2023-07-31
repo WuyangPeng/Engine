@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 14:05)
+///	版本：0.9.1.2 (2023/07/24 16:11)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,17 +19,20 @@
 #include "Mathematics/Algebra/AlgebraAggregate.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
+#include "Rendering/RendererEngine/BaseRenderer.h"
+#include "Rendering/Resources/Flags/DataFormatType.h"
 
-Rendering::PointControllerImpl::PointControllerImpl(int numPoints)
+Rendering::PointControllerImpl::PointControllerImpl(const BaseRendererSharedPtr& baseRenderer) noexcept
     : systemLinearSpeed{ 0.0f },
       systemAngularSpeed{ 0.0f },
       systemLinearAxis{ Mathematics::AVectorF::GetUnitZ() },
       systemAngularAxis{ Mathematics::AVectorF::GetUnitZ() },
-      numPoints{ numPoints },
-      pointLinearSpeeds(numPoints),
-      pointAngularSpeeds(numPoints),
-      pointLinearAxes(numPoints),
-      pointAngularAxes(numPoints)
+      numPoints{},
+      pointLinearSpeeds{},
+      pointAngularSpeeds{},
+      pointLinearAxes{},
+      pointAngularAxes{},
+      baseRenderer{ baseRenderer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -43,7 +46,8 @@ Rendering::PointControllerImpl::PointControllerImpl() noexcept
       pointLinearSpeeds{},
       pointAngularSpeeds{},
       pointLinearAxes{},
-      pointAngularAxes{}
+      pointAngularAxes{},
+      baseRenderer{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -239,4 +243,131 @@ int Rendering::PointControllerImpl::GetStreamingSize() const noexcept
     size += numPoints * Mathematics::GetStreamSize(pointAngularAxes.at(0));
 
     return size;
+}
+
+void Rendering::PointControllerImpl::SetControllerObject(Visual& visual)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    pointLinearSpeeds.clear();
+    pointAngularSpeeds.clear();
+    pointLinearAxes.clear();
+    pointAngularAxes.clear();
+
+    const auto indexBuffer = visual.GetIndexBuffer();
+
+    if (const auto primitiveType = indexBuffer->GetPrimitiveType();
+        primitiveType != IndexFormatType::PolyPoint)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("Geometric primitive must be points."))
+    }
+
+    const auto vertexBuffer = visual.GetVertexBuffer();
+    const auto vertexFormat = vertexBuffer->GetFormat();
+    auto index = vertexFormat.GetIndex(VertexFormatFlags::Semantic::Position, 0);
+    if (index < 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("Vertex format does not have VertexFormatFlags::Semantic::Position."))
+    }
+
+    if (const auto type = vertexFormat.GetAttributeType(index);
+        type != DataFormatType::R32G32B32A32Float && type != DataFormatType::R32G32B32Float)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("Invalid position type."))
+    }
+
+    if (const auto offset = vertexFormat.GetOffset(index);
+        offset != 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("Position offset must be 0."))
+    }
+
+    index = vertexFormat.GetIndex(VertexFormatFlags::Semantic::Normal, 0);
+    if (index >= 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("Invalid normal type."))
+    }
+
+    const auto count = vertexBuffer->GetNumElements();
+    pointLinearSpeeds.resize(count);
+    pointAngularSpeeds.resize(count);
+    pointLinearAxes.resize(count);
+    pointAngularAxes.resize(count);
+    for (auto i = 0; i < count; ++i)
+    {
+        pointLinearSpeeds.at(i) = 0.0f;
+        pointAngularSpeeds.at(i) = 0.0f;
+        pointLinearAxes.at(i) = Mathematics::AVector<float>::GetUnitY();
+        pointAngularAxes.at(i) = Mathematics::AVector<float>::GetUnitY();
+    }
+}
+
+void Rendering::PointControllerImpl::UpdateSystemMotion(Visual& visual, float ctrlTime)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto distance = ctrlTime * systemLinearSpeed;
+    const auto currentTrn = visual.GetLocalTransform().GetTranslate();
+    const auto deltaTrn = distance * systemLinearAxis;
+    visual.SetLocalTransformTranslate(currentTrn + deltaTrn);
+
+    const auto angle = ctrlTime * systemAngularSpeed;
+    const auto currentRot = visual.GetLocalTransform().GetRotate();
+    const Mathematics::Matrix deltaRot{ systemAngularAxis, angle };
+    visual.SetLocalTransformRotate(deltaRot * currentRot);
+}
+
+void Rendering::PointControllerImpl::UpdatePointMotion(Visual& visual, float ctrlTime)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto vertexBuffer = visual.GetVertexBuffer();
+    const auto vertexFormat = vertexBuffer->GetFormat();
+    const auto numVertices = vertexBuffer->GetNumElements();
+    auto vertices = vertexBuffer->GetData();
+    const auto vertexSize = vertexFormat.GetStride();
+
+    for (auto i = 0; i < numVertices; ++i)
+    {
+        Mathematics::AVector<float> position{};
+        position.SetX(vertices.Increase<float>());
+        position.SetY(vertices.Increase<float>());
+        position.SetZ(vertices.Increase<float>());
+
+        const auto distance = ctrlTime * pointLinearSpeeds.at(i);
+        const auto deltaTrn = distance * pointLinearAxes.at(i);
+        position += deltaTrn;
+
+        if (vertexSize > CoreTools::GetStreamSize<float>() * 3)
+        {
+            vertices += (vertexSize - CoreTools::GetStreamSize<float>() * 3);
+        }
+    }
+
+    if (const auto index = vertexFormat.GetIndex(VertexFormatFlags::Semantic::Normal, 0);
+        index >= 0)
+    {
+        const auto offset = vertexFormat.GetOffset(index);
+        vertices = vertexBuffer->GetData(offset);
+        for (auto i = 0; i < numVertices; ++i)
+        {
+            Mathematics::AVector<float> normal{};
+            normal.SetX(vertices.Increase<float>());
+            normal.SetY(vertices.Increase<float>());
+            normal.SetZ(vertices.Increase<float>());
+            normal.Normalize();
+
+            const auto angle = ctrlTime * pointAngularSpeeds.at(i);
+            const Mathematics::Matrix deltaRot{ pointAngularAxes.at(i), angle };
+            normal = deltaRot * normal;
+            if (vertexSize > CoreTools::GetStreamSize<float>() * 3)
+            {
+                vertices += (vertexSize - CoreTools::GetStreamSize<float>() * 3);
+            }
+        }
+    }
+
+    visual.UpdateModelBound();
+    visual.UpdateModelNormals();
+    MAYBE_UNUSED const auto result = baseRenderer.lock()->Update(vertexBuffer);
 }

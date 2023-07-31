@@ -9,6 +9,7 @@
 
 #include "Geographic.h"
 #include "GeographicContainerDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/TextParsing/CSV/CSVContent.h"
 #include "CoreTools/TextParsing/CSV/CSVHead.h"
@@ -108,5 +109,12 @@ AncientBooks::GeographicContainer::Container AncientBooks::GeographicContainer::
     USER_CLASS_IS_VALID_CONST_9;
 
     return geographic;
+}
+
+int AncientBooks::GeographicContainer::GetContainerSize() const
+{
+    USER_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(geographic.size());
 }
 

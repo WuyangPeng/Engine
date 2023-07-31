@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	历史的崛起测试版本：0.9.0.12 (2023/06/17 13:00)
+///	版本：0.9.1.2 (2023/07/25 17:12)
 
 #include "RiseOfHistory/Version.h"
 #include "RiseOfHistoryTesting/Version.h"
