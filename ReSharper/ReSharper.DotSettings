@@ -5,6 +5,18 @@
 	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=CppClangTidyClangDiagnosticInvalidUtf8/@EntryIndexedValue">DO_NOT_SHOW</s:String>
 	<s:Boolean x:Key="/Default/CodeStyle/Generate/=CppDefinitions/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/CodeStyle/Generate/=CppDefinitions/Options/=GenerateInlineDefinitions/@EntryIndexedValue">False</s:String>
+	<s:Boolean x:Key="/Default/CodeStyle/Generate/=CppGettersAndSetters/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/CodeStyle/Generate/=CppGettersAndSetters/Options/=AcceptParameterKind/@EntryIndexedValue">Const reference</s:String>
+	<s:String x:Key="/Default/CodeStyle/Generate/=CppGettersAndSetters/Options/=AccessRight/@EntryIndexedValue">public</s:String>
+	<s:String x:Key="/Default/CodeStyle/Generate/=CppGettersAndSetters/Options/=AddPrefixesToGetters/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/CodeStyle/Generate/=CppGettersAndSetters/Options/=AddPrefixesToSetters/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/CodeStyle/Generate/=CppGettersAndSetters/Options/=DeclareGettersNodiscard/@EntryIndexedValue">False</s:String>
+	<s:String x:Key="/Default/CodeStyle/Generate/=CppGettersAndSetters/Options/=GenerateProperties/@EntryIndexedValue">False</s:String>
+	<s:String x:Key="/Default/CodeStyle/Generate/=CppGettersAndSetters/Options/=GetterAndSetterKind/@EntryIndexedValue">Getter</s:String>
+	<s:String x:Key="/Default/CodeStyle/Generate/=CppGettersAndSetters/Options/=InlineDefinition/@EntryIndexedValue">False</s:String>
+	<s:String x:Key="/Default/CodeStyle/Generate/=CppGettersAndSetters/Options/=InsertVirtualSpecifier/@EntryIndexedValue">False</s:String>
+	<s:String x:Key="/Default/CodeStyle/Generate/=CppGettersAndSetters/Options/=ReturnKind/@EntryIndexedValue">Value</s:String>
+	<s:String x:Key="/Default/CodeStyle/Generate/=CppGettersAndSetters/Options/=UseConstParameterTypes/@EntryIndexedValue">True</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CppNaming/Rules/=Class_0020and_0020struct_0020fields/@EntryIndexedValue">&lt;NamingElement Priority="11"&gt;&lt;Descriptor Static="Indeterminate" Constexpr="Indeterminate" Const="Indeterminate" Volatile="Indeterminate" Accessibility="NOT_APPLICABLE"&gt;&lt;type Name="class field" /&gt;&lt;type Name="struct field" /&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;&lt;/NamingElement&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CppNaming/Rules/=Class_0020and_0020struct_0020methods/@EntryIndexedValue">&lt;NamingElement Priority="10"&gt;&lt;Descriptor Static="Indeterminate" Constexpr="Indeterminate" Const="Indeterminate" Volatile="Indeterminate" Accessibility="NOT_APPLICABLE"&gt;&lt;type Name="member function" /&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;&lt;/NamingElement&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CppNaming/Rules/=Class_0020and_0020struct_0020public_0020fields/@EntryIndexedValue">&lt;NamingElement Priority="12"&gt;&lt;Descriptor Static="Indeterminate" Constexpr="Indeterminate" Const="Indeterminate" Volatile="Indeterminate" Accessibility="PUBLIC"&gt;&lt;type Name="class field" /&gt;&lt;type Name="struct field" /&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;&lt;/NamingElement&gt;</s:String>
@@ -24,14 +36,14 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/CppNaming/Rules/=Unions/@EntryIndexedValue">&lt;NamingElement Priority="4"&gt;&lt;Descriptor Static="Indeterminate" Constexpr="Indeterminate" Const="Indeterminate" Volatile="Indeterminate" Accessibility="NOT_APPLICABLE"&gt;&lt;type Name="union" /&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;&lt;/NamingElement&gt;</s:String>
 	<s:Boolean x:Key="/Default/Environment/Feedback/SendActivityLogs/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/Feedback/ShouldPrompt/@EntryValue">False</s:Boolean>
-	<s:Int64 x:Key="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue">503</s:Int64>
+	<s:Int64 x:Key="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue">620</s:Int64>
 	<s:Boolean x:Key="/Default/Environment/OpenDocument/OpenDocumentAfterModification/@EntryValue">True</s:Boolean>
 	
 	<s:Int64 x:Key="/Default/Environment/SearchAndNavigation/DefaultOccurrencesGroupingIndices/=JetBrains_002EPsiFeatures_002EUIInteractive_002ERefactorings_002EControls_002EUsagesDescriptor/@EntryIndexedValue">12</s:Int64>
 	<s:Int64 x:Key="/Default/Environment/SearchAndNavigation/DefaultOccurrencesGroupingIndices/=JetBrains_002EReSharper_002EFeature_002EServices_002ENavigation_002EDescriptors_002ESearchUsagesDescriptor/@EntryIndexedValue">12</s:Int64>
 	<s:Int64 x:Key="/Default/Environment/SearchAndNavigation/DefaultOccurrencesGroupingIndices/=JetBrains_002EReSharper_002EFeature_002EServices_002ERefactorings_002EConflicts_002EOccurrences_002EConflictOccurrencesDescriptor/@EntryIndexedValue">9</s:Int64>
-	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheck/@EntryValue">08/14/2023 10:37:10</s:String>
-	<s:String x:Key="/Default/Housekeeping/DiskCleanup/LastRunTime/@EntryValue">08/14/2023 10:40:57</s:String>
+	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheck/@EntryValue">08/16/2023 10:47:56</s:String>
+	<s:String x:Key="/Default/Housekeeping/DiskCleanup/LastRunTime/@EntryValue">08/16/2023 10:49:16</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=EditorConfigFeatureSuggester/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/Housekeeping/FeedbackReport/SelectedUserIdentificator/@EntryValue">anonymous</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue">True</s:Boolean>
@@ -39,21 +51,25 @@
 	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/OptionsDialogView/Position/@EntryValue">[97,-8](1024,768)</s:String>
 	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/RefactoringWizardWindow/Location/@EntryValue">-187,-87</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/LiveTemplatesHousekeeping/HotspotSessionHintIsShown/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue">FileHeaderTextPage</s:String>
+	<s:String x:Key="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue">CodeInspectionGeneratedSettings</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/UpgradeFromExceptionReport/UpgradePerformed/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Housekeeping/WhatsNewShown/WhatsNewShownIndexedEntry/=RC/@EntryIndexedValue">2023.1</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=3AB47DFD69B2604798ED8CD6EBBABC84/@KeyIndexDefined">True</s:Boolean>
+	
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=3AB47DFD69B2604798ED8CD6EBBABC84/EntryName/@EntryValue">Export Source file</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=3AB47DFD69B2604798ED8CD6EBBABC84/Position/@EntryValue">8</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=3AB47DFD69B2604798ED8CD6EBBABC84/Position/@EntryValue">6</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=56D79E6468CFA34A9D178B860B4FA6C2/@KeyIndexDefined">True</s:Boolean>
+	
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=56D79E6468CFA34A9D178B860B4FA6C2/EntryName/@EntryValue">Impl Header file</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=56D79E6468CFA34A9D178B860B4FA6C2/Position/@EntryValue">5</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=56D79E6468CFA34A9D178B860B4FA6C2/Position/@EntryValue">7</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=7B3A0F7EFC620D49ADFAF22814E6C88A/@KeyIndexDefined">True</s:Boolean>
+	
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=7B3A0F7EFC620D49ADFAF22814E6C88A/EntryName/@EntryValue">Impl Source file</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=7B3A0F7EFC620D49ADFAF22814E6C88A/Position/@EntryValue">6</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=7B3A0F7EFC620D49ADFAF22814E6C88A/Position/@EntryValue">8</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=BA1CB638A7AD224E825C2FE0C973FAC2/@KeyIndexDefined">True</s:Boolean>
+	
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=BA1CB638A7AD224E825C2FE0C973FAC2/EntryName/@EntryValue">Export Header file</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=BA1CB638A7AD224E825C2FE0C973FAC2/Position/@EntryValue">7</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=DC382AF7D0007545BD63EC8B3729639C/Entry/=BA1CB638A7AD224E825C2FE0C973FAC2/Position/@EntryValue">5</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3AB47DFD69B2604798ED8CD6EBBABC84/CustomProperties/=Extension/@EntryIndexedValue">cpp</s:String>
@@ -131,10 +147,10 @@ CLASS_INVARIANT_STUB_DEFINE($Namespace$, $ClassName$) </s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassName/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassName/InitialRange/@EntryValue">-1</s:Int64>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassName/Order/@EntryValue">2</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassNameUppercase/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassNameUppercase/Expression/@EntryValue">getUpperCaseAlphaNumericFileName()</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassNameUppercase/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=ClassNameUppercase/Order/@EntryValue">3</s:Int64>
+	
+	
+	
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=Namespace/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=Namespace/Expression/@EntryValue">getProjectName()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=56D79E6468CFA34A9D178B860B4FA6C2/Field/=Namespace/InitialRange/@EntryValue">-1</s:Int64>
@@ -156,8 +172,8 @@ CLASS_INVARIANT_STUB_DEFINE($Namespace$, $ClassName$) </s:String>
 ///	标准：std:c++20&#xD;
 ///	版本：0.9.1.3 ($TIME$)&#xD;
 &#xD;
-#ifndef $Namespace$_XX_$ClassNameUppercase$&#xD;
-#define $Namespace$_XX_$ClassNameUppercase$&#xD;
+#ifndef $Namespace$_XX_$ClassName$_H&#xD;
+#define $Namespace$_XX_$ClassName$_H&#xD;
 &#xD;
 #include "$Namespace$/$Namespace$Dll.h"&#xD;
 &#xD;
@@ -175,7 +191,7 @@ namespace $Namespace$&#xD;
     };&#xD;
 }&#xD;
 &#xD;
-#endif  // $Namespace$_XX_$ClassNameUppercase$&#xD;
+#endif  // $Namespace$_XX_$ClassName$_H&#xD;
 </s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B3A0F7EFC620D49ADFAF22814E6C88A/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
@@ -228,11 +244,11 @@ CLASS_INVARIANT_STUB_DEFINE($Namespace$, $ClassName$) </s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassName/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassName/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassName/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassName/Order/@EntryValue">3</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassNameUppercase/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassNameUppercase/Expression/@EntryValue">getUpperCaseAlphaNumericFileName()</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassNameUppercase/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassNameUppercase/Order/@EntryValue">2</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=ClassName/Order/@EntryValue">2</s:Int64>
+	
+	
+	
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=Namespace/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=Namespace/Expression/@EntryValue">getProjectName()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA1CB638A7AD224E825C2FE0C973FAC2/Field/=Namespace/InitialRange/@EntryValue">-1</s:Int64>
@@ -254,8 +270,8 @@ CLASS_INVARIANT_STUB_DEFINE($Namespace$, $ClassName$) </s:String>
 ///	标准：std:c++20&#xD;
 ///	版本：0.9.1.3 ($TIME$)&#xD;
 &#xD;
-#ifndef $Namespace$_XX_$ClassNameUppercase$&#xD;
-#define $Namespace$_XX_$ClassNameUppercase$&#xD;
+#ifndef $Namespace$_XX_$ClassName$_H&#xD;
+#define $Namespace$_XX_$ClassName$_H&#xD;
 &#xD;
 #include "$Namespace$/$Namespace$Dll.h"&#xD;
 &#xD;
@@ -281,7 +297,7 @@ namespace $Namespace$&#xD;
     };&#xD;
 }&#xD;
 &#xD;
-#endif  // $Namespace$_XX_$ClassNameUppercase$&#xD;
+#endif  // $Namespace$_XX_$ClassName$_H&#xD;
 </s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Colour/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Displayer/@EntryIndexedValue">True</s:Boolean>
