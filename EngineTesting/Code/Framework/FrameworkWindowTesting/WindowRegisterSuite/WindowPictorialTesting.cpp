@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:07)
+///	版本：0.9.1.3 (2023/08/10 13:59)
 
 #include "WindowPictorialTesting.h"
 #include "resource.h"
@@ -14,16 +14,12 @@
 #include "System/Windows/WindowsRegister.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/TemplateTools/MaxElement.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/WindowRegister/WindowPictorial.h"
 
-namespace Framework
-{
-    using TestingType = WindowPictorial;
-}
-
-Framework::WindowPictorialTesting::WindowPictorialTesting(const OStreamShared& stream, HInstance hInstance)
-    : ParentType{ stream }, instance{ hInstance },
+Framework::WindowPictorialTesting::WindowPictorialTesting(const OStreamShared& stream, WindowsHInstance instance)
+    : ParentType{ stream }, instance{ instance },
       iconContainer{ { 0, System::gApplication },
                      { 32512, System::gApplication },
                      { 32513, System::gIdiHand },
@@ -56,12 +52,8 @@ Framework::WindowPictorialTesting::WindowPictorialTesting(const OStreamShared& s
                       System::WindowsBrushTypes::DarkGrayBrush,
                       System::WindowsBrushTypes::BlackBrush,
                       System::WindowsBrushTypes::NullBrush },
-      testIconContainer{},
-      testCursorContainer{},
-      testBrushContainer{},
-      iconIter{ testIconContainer.cend() },
-      cursorIter{ testCursorContainer.cend() },
-      brushIter{ testBrushContainer.cend() }
+      generator{ GetEngineRandomSeed() },
+      index{ 0 }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -86,168 +78,145 @@ void Framework::WindowPictorialTesting::DoRunUnitTest()
 void Framework::WindowPictorialTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BrushTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(RandomTest);
+
+    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(ExecuteWindowPictorialTest);
 }
 
 void Framework::WindowPictorialTesting::BrushTest()
 {
-    for_each(brushContainer.begin(), brushContainer.end(), [this](const auto& value) {
-        const TestingType pictorial{ value };
+    std::ranges::for_each(brushContainer, [this](const auto& element) {
+        const WindowPictorial pictorial{ element };
 
         ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(nullptr, System::gApplication));
         ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(nullptr, System::gArrow));
-        ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(value));
+        ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(element));
     });
 
-    TestingType nullPictorial{ System::WindowsBrushTypes::Null };
+    const WindowPictorial nullPictorial{ System::WindowsBrushTypes::Null };
 
     ASSERT_EQUAL(nullPictorial.GetHIcon(), System::LoadSystemIcon(nullptr, System::gApplication));
     ASSERT_EQUAL(nullPictorial.GetHCursor(), System::LoadSystemCursor(nullptr, System::gArrow));
     ASSERT_EQUAL(nullPictorial.GetHBrush(), nullptr);
 }
 
-void Framework::WindowPictorialTesting::RandomTest()
+void Framework::WindowPictorialTesting::RandomContainer()
 {
-    std::default_random_engine generator{ GetEngineRandomSeed() };
-    RandomContainer(generator);
-
-    const auto aTestLoopCount = GetTestLoopCount();
-
-    for (auto i = 0; i < aTestLoopCount; ++i)
-    {
-        ASSERT_NOT_THROW_EXCEPTION_0(RandomIconTest);
-        ASSERT_NOT_THROW_EXCEPTION_0(RandomCursorTest);
-        ASSERT_NOT_THROW_EXCEPTION_0(RandomBrushTest);
-        ASSERT_NOT_THROW_EXCEPTION_0(RandomIconAndCursorTest);
-
-        ASSERT_NOT_THROW_EXCEPTION_0(DefaultIconTest);
-        ASSERT_NOT_THROW_EXCEPTION_0(DefaultCursorTest);
-        ASSERT_NOT_THROW_EXCEPTION_0(DefaultIconAndCursorTest);
-        ASSERT_NOT_THROW_EXCEPTION_0(CustomIconAndCursorTest);
-
-        NextIcon(generator);
-        NextCursor(generator);
-        NextBrush(generator);
-    }
+    std::ranges::shuffle(iconContainer, generator);
+    std::ranges::shuffle(cursorContainer, generator);
+    std::ranges::shuffle(brushContainer, generator);
 }
 
-void Framework::WindowPictorialTesting::RandomContainer(std::default_random_engine& generator)
+bool Framework::WindowPictorialTesting::ExecuteWindowPictorialTest()
 {
-    testIconContainer = iconContainer;
-    testCursorContainer = cursorContainer;
-    testBrushContainer = brushContainer;
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomContainer);
 
-    ASSERT_FALSE_FAILURE_THROW(testIconContainer.empty(), "icon容器为空！");
-    ASSERT_FALSE_FAILURE_THROW(testCursorContainer.empty(), "cursor容器为空！");
-    ASSERT_FALSE_FAILURE_THROW(testBrushContainer.empty(), "windowBrush容器为空！");
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomIconTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomCursorTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomBrushTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomIconAndCursorTest);
 
-    shuffle(testIconContainer.begin(), testIconContainer.end(), generator);
-    shuffle(testCursorContainer.begin(), testCursorContainer.end(), generator);
-    shuffle(testBrushContainer.begin(), testBrushContainer.end(), generator);
+    ASSERT_NOT_THROW_EXCEPTION_0(DefaultIconTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(DefaultCursorTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(DefaultIconAndCursorTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CustomIconAndCursorTest);
 
-    iconIter = testIconContainer.cbegin();
-    cursorIter = testCursorContainer.cbegin();
-    brushIter = testBrushContainer.cbegin();
+    ++index;
+
+    return true;
 }
 
 void Framework::WindowPictorialTesting::RandomIconTest()
 {
-    TestingType pictorial{ instance, iconIter->second, IDC_CURSOR1, *brushIter };
+    const auto iconIndex = index % iconContainer.size();
+    const auto brushIndex = index % brushContainer.size();
 
-    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(nullptr, iconIter->second));
+    const WindowPictorial pictorial{ instance, iconContainer.at(iconIndex).second, IDC_CURSOR1, brushContainer.at(brushIndex) };
+
+    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(nullptr, iconContainer.at(iconIndex).second));
     ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
-    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(*brushIter));
+    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }
 
 void Framework::WindowPictorialTesting::RandomCursorTest()
 {
-    TestingType pictorial{ instance, IDI_ICON1, cursorIter->second, *brushIter };
+    const auto cursorIndex = index % cursorContainer.size();
+    const auto brushIndex = index % brushContainer.size();
+
+    const WindowPictorial pictorial{ instance, IDI_ICON1, cursorContainer.at(cursorIndex).second, brushContainer.at(brushIndex) };
 
     ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
-    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(nullptr, cursorIter->second));
-    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(*brushIter));
+    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(nullptr, cursorContainer.at(cursorIndex).second));
+    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }
 
 void Framework::WindowPictorialTesting::RandomBrushTest()
 {
-    TestingType pictorial{ instance, IDI_ICON1, IDC_CURSOR1, *brushIter };
+    const auto brushIndex = index % brushContainer.size();
+
+    const WindowPictorial pictorial{ instance, IDI_ICON1, IDC_CURSOR1, brushContainer.at(brushIndex) };
 
     ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
     ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
-    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(*brushIter));
+    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }
 
 void Framework::WindowPictorialTesting::RandomIconAndCursorTest()
 {
-    TestingType pictorial{ iconIter->second, cursorIter->second, *brushIter };
+    const auto iconIndex = index % iconContainer.size();
+    const auto cursorIndex = index % cursorContainer.size();
+    const auto brushIndex = index % brushContainer.size();
 
-    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(nullptr, iconIter->second));
-    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(nullptr, cursorIter->second));
-    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(*brushIter));
+    const WindowPictorial pictorial{ iconContainer.at(iconIndex).second, cursorContainer.at(cursorIndex).second, brushContainer.at(brushIndex) };
+
+    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(nullptr, iconContainer.at(iconIndex).second));
+    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(nullptr, cursorContainer.at(cursorIndex).second));
+    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }
 
 void Framework::WindowPictorialTesting::DefaultIconTest()
 {
-    TestingType pictorial{ instance, true, iconIter->first, false, IDC_CURSOR1, *brushIter };
+    const auto iconIndex = index % iconContainer.size();
+    const auto brushIndex = index % brushContainer.size();
 
-    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(nullptr, iconIter->second));
+    const WindowPictorial pictorial{ instance, true, iconContainer.at(iconIndex).first, false, IDC_CURSOR1, brushContainer.at(brushIndex) };
+
+    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(nullptr, iconContainer.at(iconIndex).second));
     ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
-    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(*brushIter));
+    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }
 
 void Framework::WindowPictorialTesting::DefaultCursorTest()
 {
-    TestingType pictorial{ instance, false, IDI_ICON1, true, cursorIter->first, *brushIter };
+    const auto cursorIndex = index % cursorContainer.size();
+    const auto brushIndex = index % brushContainer.size();
+
+    const WindowPictorial pictorial{ instance, false, IDI_ICON1, true, cursorContainer.at(cursorIndex).first, brushContainer.at(brushIndex) };
 
     ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
-    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(nullptr, cursorIter->second));
-    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(*brushIter));
+    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(nullptr, cursorContainer.at(cursorIndex).second));
+    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }
 
 void Framework::WindowPictorialTesting::DefaultIconAndCursorTest()
 {
-    TestingType pictorial{ instance, true, iconIter->first, true, cursorIter->first, *brushIter };
+    const auto iconIndex = index % iconContainer.size();
+    const auto cursorIndex = index % cursorContainer.size();
+    const auto brushIndex = index % brushContainer.size();
 
-    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(nullptr, iconIter->second));
-    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(nullptr, cursorIter->second));
-    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(*brushIter));
+    const WindowPictorial pictorial{ instance, true, iconContainer.at(iconIndex).first, true, cursorContainer.at(cursorIndex).first, brushContainer.at(brushIndex) };
+
+    ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(nullptr, iconContainer.at(iconIndex).second));
+    ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(nullptr, cursorContainer.at(cursorIndex).second));
+    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }
 
 void Framework::WindowPictorialTesting::CustomIconAndCursorTest()
 {
-    TestingType pictorial{ instance, false, IDI_ICON1, false, IDC_CURSOR1, *brushIter };
+    const auto brushIndex = index % brushContainer.size();
+
+    const WindowPictorial pictorial{ instance, false, IDI_ICON1, false, IDC_CURSOR1, brushContainer.at(brushIndex) };
 
     ASSERT_EQUAL(pictorial.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
     ASSERT_EQUAL(pictorial.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
-    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(*brushIter));
-}
-
-void Framework::WindowPictorialTesting::NextIcon(std::default_random_engine& generator)
-{
-    ++iconIter;
-    if (iconIter == testIconContainer.cend())
-    {
-        shuffle(testIconContainer.begin(), testIconContainer.end(), generator);
-        iconIter = testIconContainer.cbegin();
-    }
-}
-
-void Framework::WindowPictorialTesting::NextCursor(std::default_random_engine& generator)
-{
-    ++cursorIter;
-    if (cursorIter == testCursorContainer.cend())
-    {
-        shuffle(testCursorContainer.begin(), testCursorContainer.end(), generator);
-        cursorIter = testCursorContainer.cbegin();
-    }
-}
-
-void Framework::WindowPictorialTesting::NextBrush(std::default_random_engine& generator)
-{
-    ++brushIter;
-    if (brushIter == testBrushContainer.cend())
-    {
-        shuffle(testBrushContainer.begin(), testBrushContainer.end(), generator);
-        brushIter = testBrushContainer.cbegin();
-    }
+    ASSERT_EQUAL(pictorial.GetHBrush(), System::GetSystemStockObject(brushContainer.at(brushIndex)));
 }

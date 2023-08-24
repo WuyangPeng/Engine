@@ -1,25 +1,3 @@
 TODO Level 8
  
-0.9.0.9
-
-1.	（SqlServerWrappers）完成SqlServerWrappers模块。
-2.	（SqlServerWrappers）完成SqlServerWrappers模块的数据对象。
-3.	（SqlServerWrappers）完成SqlServerWrappers模块的会话。
-4.	（SqlServerWrappers）完成SqlServerWrappers模块的架构。
-5.	（SqlServerWrappers）完成SqlServerWrappers模块的采集。
-6.	（SqlServerWrappers）完成SqlServerWrappers模块的结果。
-7.	（SqlServerWrappers）完成SqlServerWrappers模块的表。 
-8.	（SQLiteWrappers）完成SQLiteWrappers模块。
-9.	（SQLiteWrappers）完成SQLiteWrappers模块的数据对象。
-10. （SQLiteWrappers）完成SQLiteWrappers模块的会话。
-11. （SQLiteWrappers）完成SQLiteWrappers模块的架构。
-12. （SQLiteWrappers）完成SQLiteWrappers模块的采集。
-13. （SQLiteWrappers）完成SQLiteWrappers模块的结果。
-14. （SQLiteWrappers）完成SQLiteWrappers模块的表。 
-15. （PostgreSQL）完成PostgreSQL模块。
-16. （PostgreSQL）完成PostgreSQL模块的数据对象。
-17. （PostgreSQL）完成PostgreSQL模块的会话。
-18. （PostgreSQL）完成PostgreSQL模块的架构。
-19. （PostgreSQL）完成PostgreSQL模块的采集。
-20. （PostgreSQL）完成PostgreSQL模块的结果。
-21. （PostgreSQL）完成PostgreSQL模块的表。
+0.9.1.3

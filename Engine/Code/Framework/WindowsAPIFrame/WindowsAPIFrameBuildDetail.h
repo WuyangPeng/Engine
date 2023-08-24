@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:00)
+///	版本：0.9.1.3 (2023/08/03 16:30)
 
 #ifndef FRAMEWORK_WINDOWS_API_FRAME_BUILD_DETAIL_H
 #define FRAMEWORK_WINDOWS_API_FRAME_BUILD_DETAIL_H
@@ -58,11 +58,11 @@ bool Framework::WindowsAPIFrameBuild<Process>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Process>
-System::WindowsHWnd Framework::WindowsAPIFrameBuild<Process>::GetHwnd() const noexcept
+System::WindowsHWnd Framework::WindowsAPIFrameBuild<Process>::GetHWnd() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return windowCreate.GetHwnd();
+    return windowCreate.GetHWnd();
 }
 
 template <typename Process>
@@ -81,19 +81,37 @@ int Framework::WindowsAPIFrameBuild<Process>::EnterMessageLoop()
     if (auto process = windowRegister.GetWindowProcess();
         process.Initialize())
     {
-        // 默认PreIdle()清除缓冲区。允许应用程序填充他们的窗口在窗口显示之后和事件循环开始之前。
-        process.PreIdle();
-
-        const auto result = windowMessageLoop.EnterMessageLoop(windowCreate.GetHwnd());
-
-        process.Terminate();
-
-        return boost::numeric_cast<int>(result);
+        return EnterMessageLoop(process);
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("进程初始化失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("进程初始化失败！"s))
     }
+}
+
+template <typename Process>
+int Framework::WindowsAPIFrameBuild<Process>::EnterMessageLoop(Process& process)
+{
+    // 默认PreIdle()清除缓冲区。允许应用程序填充他们的窗口在窗口显示之后和事件循环开始之前。
+    process.PreIdle();
+
+    const auto result = DoEnterMessageLoop();
+
+    process.Terminate();
+
+    return result;
+}
+
+template <typename Process>
+int Framework::WindowsAPIFrameBuild<Process>::DoEnterMessageLoop() noexcept
+{
+    EXCEPTION_TRY
+    {
+        return boost::numeric_cast<int>(windowMessageLoop.EnterMessageLoop(windowCreate.GetHWnd()));
+    }
+    EXCEPTION_ALL_CATCH(Framework)
+
+    return 0;
 }
 
 #endif  // FRAMEWORK_WINDOWS_API_FRAME_BUILD_DETAIL_H

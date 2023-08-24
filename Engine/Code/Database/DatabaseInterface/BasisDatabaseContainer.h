@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.10 (2023/05/25 17:58)
+///	版本：0.9.1.3 (2023/08/14 15:20)
 
 #ifndef DATABASE_DATABASE_INTERFACE_BASIS_DATABASE_CONTAINER_H
 #define DATABASE_DATABASE_INTERFACE_BASIS_DATABASE_CONTAINER_H
@@ -14,7 +14,6 @@
 
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
-#include "Database/Configuration/ConfigurationFwd.h"
 #include "Database/DatabaseInterface/DataTypeTraits.h"
 #include "Database/DatabaseInterface/DatabaseInterfaceFwd.h"
 
@@ -28,6 +27,7 @@ namespace Database
     {
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(BasisDatabaseContainer);
+
         using ObjectContainer = std::vector<BasisDatabase>;
         using ObjectContainerConstIter = ObjectContainer::const_iterator;
 

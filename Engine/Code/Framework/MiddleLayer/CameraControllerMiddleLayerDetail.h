@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:19)
+///	版本：0.9.1.3 (2023/08/08 14:46)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_CAMERA_CONTROLLER_MIDDLE_LAYER_DETAIL_H
 #define FRAMEWORK_MIDDLE_LAYER_CAMERA_CONTROLLER_MIDDLE_LAYER_DETAIL_H
@@ -46,7 +46,7 @@ Framework::CameraControllerMiddleLayer<ApplicationTrait>::CameraControllerMiddle
                           { KeyIdentifiers::keyInsert, &CameraModelMiddleLayer::SetTurnLeft },
                           { KeyIdentifiers::keyDelete, &CameraModelMiddleLayer::SetTurnRight } }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 #include STSTEM_WARNING_POP
@@ -67,15 +67,14 @@ bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::IsValid() const n
 template <typename ApplicationTrait>
 bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::KeyDown(int key, const WindowPoint& point)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     if (ParentType::KeyDown(key, point))
     {
-        const auto iter = changeCameraSpeed.find(key);
-
-        if (iter != changeCameraSpeed.cend())
+        if (const auto iter = changeCameraSpeed.find(key);
+            iter != changeCameraSpeed.cend())
         {
-            auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
+            const auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
 
             // 标准键对应用程序。
             ((*cameraModelMiddleLayer).*(iter->second))();
@@ -92,7 +91,7 @@ bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::KeyDown(int key, 
 template <typename ApplicationTrait>
 bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::SpecialKeyDown(int key, const WindowPoint& point)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     if (ParentType::SpecialKeyDown(key, point))
     {
@@ -106,7 +105,6 @@ bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::SpecialKeyDown(in
     }
 }
 
-// private
 template <typename ApplicationTrait>
 void Framework::CameraControllerMiddleLayer<ApplicationTrait>::SpecialKey(int key, bool pressed)
 {
@@ -120,29 +118,25 @@ void Framework::CameraControllerMiddleLayer<ApplicationTrait>::SpecialKey(int ke
     }
 }
 
-// private
 template <typename ApplicationTrait>
 void Framework::CameraControllerMiddleLayer<ApplicationTrait>::CameraSpecialKey(int key, bool pressed)
 {
-    const auto iter = changeCameraMotion.find(key);
-
-    if (iter != changeCameraMotion.cend())
+    if (const auto iter = changeCameraMotion.find(key);
+        iter != changeCameraMotion.cend())
     {
-        auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
+        const auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
 
         ((*cameraModelMiddleLayer).*(iter->second.first))(pressed ? iter->second.second : Mathematics::NumericalValueSymbol::Zero);
     }
 }
 
-// private
 template <typename ApplicationTrait>
 void Framework::CameraControllerMiddleLayer<ApplicationTrait>::ObjectSpecialKey(int key, bool pressed)
 {
-    const auto iter = changeObjectMotion.find(key);
-
-    if (iter != changeObjectMotion.cend())
+    if (const auto iter = changeObjectMotion.find(key);
+        iter != changeObjectMotion.cend())
     {
-        auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
+        const auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
 
         ((*cameraModelMiddleLayer).*(iter->second))(pressed);
     }
@@ -151,7 +145,7 @@ void Framework::CameraControllerMiddleLayer<ApplicationTrait>::ObjectSpecialKey(
 template <typename ApplicationTrait>
 bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::SpecialKeyUp(int key, const WindowPoint& point)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     if (ParentType::SpecialKeyUp(key, point))
     {
@@ -168,17 +162,17 @@ bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::SpecialKeyUp(int 
 template <typename ApplicationTrait>
 bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     if (ParentType::MouseClick(button, state, point, virtualKeys))
     {
         if (button == MouseButtonsTypes::LeftButton)
         {
-            auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
+            const auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
 
             if (state == MouseStateTypes::MouseDown)
             {
-                auto cameraViewMiddleLayer = GetCameraViewMiddleLayer();
+                const auto cameraViewMiddleLayer = GetCameraViewMiddleLayer();
 
                 cameraModelMiddleLayer->SetBeginTrack(point, *cameraViewMiddleLayer);
             }
@@ -199,15 +193,14 @@ bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::MouseClick(MouseB
 template <typename ApplicationTrait>
 bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     if (ParentType::Motion(point, virtualKeys))
     {
-        auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
-
-        if (virtualKeys.IsLeftMouseDown() && cameraModelMiddleLayer->GetTrackBallDow())
+        if (const auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
+            virtualKeys.IsLeftMouseDown() && cameraModelMiddleLayer->GetTrackBallDow())
         {
-            auto cameraViewMiddleLayer = GetCameraViewMiddleLayer();
+            const auto cameraViewMiddleLayer = GetCameraViewMiddleLayer();
 
             cameraModelMiddleLayer->RotateTrackBall(point, *cameraViewMiddleLayer);
         }

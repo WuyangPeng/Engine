@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:51)
+///	版本：0.9.1.3 (2023/08/09 20:51)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_PROCESS_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_PROCESS_H
@@ -26,6 +26,7 @@ namespace Framework
     public:
         using CallBackType = AndroidCallBack;
         using ClassType = AndroidProcess<CallBackType>;
+
         using AndroidCallBackInterfaceSharedPtr = std::shared_ptr<AndroidCallBackInterface>;
         using AndroidApp = System::AndroidApp;
         using AndroidInputEvent = System::AndroidInputEvent;

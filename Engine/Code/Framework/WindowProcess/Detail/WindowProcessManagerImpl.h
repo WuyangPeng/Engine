@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:02)
+///	版本：0.9.1.3 (2023/08/04 14:01)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_MANAGER_IMPL_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_MANAGER_IMPL_H
@@ -27,12 +27,13 @@ namespace Framework
     {
     public:
         using ClassType = WindowProcessManagerImpl;
+
         using String = System::String;
-        using HWnd = System::WindowsHWnd;
-        using UInt = System::WindowsUInt;
-        using WParam = System::WindowsWParam;
-        using LParam = System::WindowsLParam;
-        using LResult = System::WindowsLResult;
+        using WindowsHWnd = System::WindowsHWnd;
+        using WindowsUInt = System::WindowsUInt;
+        using WindowsWParam = System::WindowsWParam;
+        using WindowsLParam = System::WindowsLParam;
+        using WindowsLResult = System::WindowsLResult;
         using WindowProcess = System::WindowsProcess;
         using WindowMessages = System::WindowsMessages;
         using DisplayFunction = System::DisplayFunction;
@@ -41,7 +42,7 @@ namespace Framework
     public:
         CLASS_INVARIANT_DECLARE;
 
-        WindowProcessManagerImpl() noexcept;
+        WindowProcessManagerImpl() noexcept = default;
 
     public:
         NODISCARD static WindowProcess GetProcess() noexcept;
@@ -59,8 +60,8 @@ namespace Framework
         void PreIdle();
         void Terminate();
 
-        void SetMainWindowHwnd(HWnd hwnd);
-        NODISCARD HWnd GetMainWindowHwnd() const noexcept;
+        void SetMainWindowHWnd(WindowsHWnd hWnd);
+        NODISCARD WindowsHWnd GetMainWindowHWnd() const noexcept;
 
     private:
         using MessageFunctionPointerContainer = std::map<WindowMessages, MessageFunctionPointer>;
@@ -68,12 +69,13 @@ namespace Framework
         using ClassNameContainer = std::set<String>;
         using ClassNameContainerSharedPtr = std::shared_ptr<ClassNameContainer>;
         using WindowMessageInterfaceWeakPtr = std::weak_ptr<WindowMessageInterface>;
-        using WindowMessageContainer = std::map<int, WindowMessageInterfaceWeakPtr, std::greater<int>>;
+        using WindowMessageContainer = std::map<int, WindowMessageInterfaceWeakPtr, std::greater<>>;
         using WindowMessageContainerSharedPtr = std::shared_ptr<WindowMessageContainer>;
 
     private:
-        static LResult SYSTEM_CALL_BACK WindowProc(HWnd hwnd, UInt message, WParam wParam, LParam lParam);
-        static void Display(HWnd hwnd, int64_t timeDelta);
+        static WindowsLResult SYSTEM_CALL_BACK WindowProcessFunction(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam);
+        static WindowsLResult SYSTEM_CALL_BACK DoWindowProcessFunction(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam);
+        static void Display(WindowsHWnd hWnd, int64_t timeDelta);
         NODISCARD static MessageFunctionPointerContainerSharedPtr GetMessageFunctionPointer();
         NODISCARD static ClassNameContainerSharedPtr GetClassNameContainer();
         NODISCARD static WindowMessageContainerSharedPtr GetWindowMessageContainer();

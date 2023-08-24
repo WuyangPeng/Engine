@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:52)
+///	版本：0.9.1.3 (2023/08/10 09:40)
 
 #include "Framework/FrameworkExport.h"
 
@@ -18,8 +18,6 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "Framework/AndroidFrame/AndroidCallBackInterface.h"
-
-using namespace std::literals;
 
 Framework::AndroidProcessManagerImpl::AndroidCallBackInterfaceSharedPtr Framework::AndroidProcessManagerImpl::androidCallBack{};
 
@@ -54,7 +52,7 @@ bool Framework::AndroidProcessManagerImpl::PreCreate()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBack指针为空！"s))
     }
 }
 
@@ -66,7 +64,7 @@ bool Framework::AndroidProcessManagerImpl::Initialize()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBack指针为空！"s))
     }
 }
 
@@ -78,7 +76,7 @@ void Framework::AndroidProcessManagerImpl::PreIdle()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBack指针为空！"s))
     }
 }
 
@@ -90,16 +88,16 @@ void Framework::AndroidProcessManagerImpl::Terminate()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBack指针为空！"s))
     }
 }
 
 int Framework::AndroidProcessManagerImpl::HandleInput(AndroidApp* app, AndroidInputEvent* event)
 {
     System::AndroidInputEventFacade androidInputEvent{ event };
-    const auto eventType = androidInputEvent.GetType();
 
-    switch (eventType)
+    switch (const auto eventType = androidInputEvent.GetType();
+            eventType)
     {
         case System::AndroidInputEventType::Key:
             // 消息来自按键事件
@@ -114,13 +112,17 @@ int Framework::AndroidProcessManagerImpl::HandleInput(AndroidApp* app, AndroidIn
 
 void Framework::AndroidProcessManagerImpl::HandleCmd(AndroidApp* androidApp, int cmd)
 {
-    auto handleCmdFunctionPointer = GetHandleCmdFunctionPointer();
-    const auto iter = handleCmdFunctionPointer->find(System::UnderlyingCastEnum<AppCmd>(cmd));
+    const auto handleCmdFunctionPointer = GetHandleCmdFunctionPointer();
 
-    if (androidCallBack != nullptr && iter != handleCmdFunctionPointer->cend())
+    if (const auto iter = handleCmdFunctionPointer->find(System::UnderlyingCastEnum<AppCmd>(cmd));
+        androidCallBack != nullptr && iter != handleCmdFunctionPointer->cend())
+    {
         return ((*androidCallBack).*(iter->second))(androidApp);
+    }
     else
+    {
         return NotDealMessage(androidApp);
+    }
 }
 
 void Framework::AndroidProcessManagerImpl::Display(AndroidApp* androidApp, int64_t timeDelta)
@@ -131,66 +133,75 @@ void Framework::AndroidProcessManagerImpl::Display(AndroidApp* androidApp, int64
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("AndroidCallBack指针为空！"s))
     }
 }
 
 int Framework::AndroidProcessManagerImpl::HandleKeyInput(AndroidApp* androidApp, AndroidInputEvent* event)
 {
-    auto handleKeyInputFunctionPointer = GetKeyHandleInputFunctionPointer();
+    const auto handleKeyInputFunctionPointer = GetKeyHandleInputFunctionPointer();
     System::AndroidInputEventFacade androidKeyEvent{ event };
     const auto id = androidKeyEvent.GetAction();
 
-    const auto iter = handleKeyInputFunctionPointer->find(id);
-
-    if (androidCallBack != nullptr && iter != handleKeyInputFunctionPointer->cend())
+    if (const auto iter = handleKeyInputFunctionPointer->find(id);
+        androidCallBack != nullptr && iter != handleKeyInputFunctionPointer->cend())
+    {
         return ((*androidCallBack).*(iter->second))(androidApp, event);
+    }
     else
+    {
         return NotDealMessage(androidApp, event);
+    }
 }
 
 int Framework::AndroidProcessManagerImpl::HandleMotionInput(AndroidApp* androidApp, AndroidInputEvent* event)
 {
-    auto handleMotionInputFunctionPointer = GetMotionHandleInputFunctionPointer();
+    const auto handleMotionInputFunctionPointer = GetMotionHandleInputFunctionPointer();
 
     System::AndroidInputMotionEventFacade androidKeyEvent{ event };
     const auto id = androidKeyEvent.GetAction();
 
-    const auto iter = handleMotionInputFunctionPointer->find(id);
-
-    if (androidCallBack != nullptr && iter != handleMotionInputFunctionPointer->cend())
+    if (const auto iter = handleMotionInputFunctionPointer->find(id);
+        androidCallBack != nullptr && iter != handleMotionInputFunctionPointer->cend())
+    {
         return ((*androidCallBack).*(iter->second))(androidApp, event);
+    }
     else
+    {
         return NotDealMessage(androidApp, event);
+    }
 }
 
-void Framework::AndroidProcessManagerImpl::NotDealMessage(MAYBE_UNUSED const AndroidApp* state) noexcept
+void Framework::AndroidProcessManagerImpl::NotDealMessage(const AndroidApp* androidApp) noexcept
 {
+    UnusedFunction(androidApp);
 }
 
-int Framework::AndroidProcessManagerImpl::NotDealMessage(MAYBE_UNUSED const AndroidApp* state, MAYBE_UNUSED const AndroidInputEvent* event) noexcept
+int Framework::AndroidProcessManagerImpl::NotDealMessage(const AndroidApp* androidApp, const AndroidInputEvent* event) noexcept
 {
+    UnusedFunction(androidApp, event);
+
     return 0;
 }
 
 Framework::AndroidProcessManagerImpl::HandleCmdFunctionPointerSharedPtr Framework::AndroidProcessManagerImpl::GetHandleCmdFunctionPointer()
 {
-    static HandleCmdFunctionPointerContainer handleCmdFunctionPointerContainer{ { AppCmd::InputChanged, &AndroidCallBackInterface::NotDealCmdMessage },
-                                                                                { AppCmd::InitWindow, &AndroidCallBackInterface::InitMessage },
-                                                                                { AppCmd::TermWindow, &AndroidCallBackInterface::TermMessage },
-                                                                                { AppCmd::WindowResized, &AndroidCallBackInterface::ResizedMessage },
-                                                                                { AppCmd::WindowRedrawNeeded, &AndroidCallBackInterface::RedrawNeededMessage },
-                                                                                { AppCmd::ContentRectChanged, &AndroidCallBackInterface::RectChanged },
-                                                                                { AppCmd::GainedFocus, &AndroidCallBackInterface::NotDealCmdMessage },
-                                                                                { AppCmd::LostFocus, &AndroidCallBackInterface::NotDealCmdMessage },
-                                                                                { AppCmd::ConfigChanged, &AndroidCallBackInterface::NotDealCmdMessage },
-                                                                                { AppCmd::LowMemory, &AndroidCallBackInterface::NotDealCmdMessage },
-                                                                                { AppCmd::Start, &AndroidCallBackInterface::NotDealCmdMessage },
-                                                                                { AppCmd::Resume, &AndroidCallBackInterface::NotDealCmdMessage },
-                                                                                { AppCmd::SaveState, &AndroidCallBackInterface::NotDealCmdMessage },
-                                                                                { AppCmd::Pause, &AndroidCallBackInterface::NotDealCmdMessage },
-                                                                                { AppCmd::Stop, &AndroidCallBackInterface::NotDealCmdMessage },
-                                                                                { AppCmd::Destory, &AndroidCallBackInterface::NotDealCmdMessage } };
+    static const HandleCmdFunctionPointerContainer handleCmdFunctionPointerContainer{ { AppCmd::InputChanged, &AndroidCallBackInterface::NotDealCmdMessage },
+                                                                                      { AppCmd::InitWindow, &AndroidCallBackInterface::InitMessage },
+                                                                                      { AppCmd::TermWindow, &AndroidCallBackInterface::TermMessage },
+                                                                                      { AppCmd::WindowResized, &AndroidCallBackInterface::ResizedMessage },
+                                                                                      { AppCmd::WindowRedrawNeeded, &AndroidCallBackInterface::RedrawNeededMessage },
+                                                                                      { AppCmd::ContentRectChanged, &AndroidCallBackInterface::RectChanged },
+                                                                                      { AppCmd::GainedFocus, &AndroidCallBackInterface::NotDealCmdMessage },
+                                                                                      { AppCmd::LostFocus, &AndroidCallBackInterface::NotDealCmdMessage },
+                                                                                      { AppCmd::ConfigChanged, &AndroidCallBackInterface::NotDealCmdMessage },
+                                                                                      { AppCmd::LowMemory, &AndroidCallBackInterface::NotDealCmdMessage },
+                                                                                      { AppCmd::Start, &AndroidCallBackInterface::NotDealCmdMessage },
+                                                                                      { AppCmd::Resume, &AndroidCallBackInterface::NotDealCmdMessage },
+                                                                                      { AppCmd::SaveState, &AndroidCallBackInterface::NotDealCmdMessage },
+                                                                                      { AppCmd::Pause, &AndroidCallBackInterface::NotDealCmdMessage },
+                                                                                      { AppCmd::Stop, &AndroidCallBackInterface::NotDealCmdMessage },
+                                                                                      { AppCmd::Destory, &AndroidCallBackInterface::NotDealCmdMessage } };
 
     static HandleCmdFunctionPointerSharedPtr functionPointer = make_shared<HandleCmdFunctionPointerContainer>(handleCmdFunctionPointerContainer);
 
@@ -199,9 +210,9 @@ Framework::AndroidProcessManagerImpl::HandleCmdFunctionPointerSharedPtr Framewor
 
 Framework::AndroidProcessManagerImpl::KeyHandleInputFunctionPointerSharedPtr Framework::AndroidProcessManagerImpl::GetKeyHandleInputFunctionPointer()
 {
-    static KeyHandleInputFunctionPointerContainer keyHandleInputFunctionPointerContainer{ { AndroidKeyEventAction::Down, &AndroidCallBackInterface::KeyDownMessage },
-                                                                                          { AndroidKeyEventAction::Up, &AndroidCallBackInterface::KeyUpMessage },
-                                                                                          { AndroidKeyEventAction::Multiple, &AndroidCallBackInterface::NotDealInputMessage } };
+    static const KeyHandleInputFunctionPointerContainer keyHandleInputFunctionPointerContainer{ { AndroidKeyEventAction::Down, &AndroidCallBackInterface::KeyDownMessage },
+                                                                                                { AndroidKeyEventAction::Up, &AndroidCallBackInterface::KeyUpMessage },
+                                                                                                { AndroidKeyEventAction::Multiple, &AndroidCallBackInterface::NotDealInputMessage } };
 
     static KeyHandleInputFunctionPointerSharedPtr functionPointer = make_shared<KeyHandleInputFunctionPointerContainer>(keyHandleInputFunctionPointerContainer);
 
@@ -210,17 +221,17 @@ Framework::AndroidProcessManagerImpl::KeyHandleInputFunctionPointerSharedPtr Fra
 
 Framework::AndroidProcessManagerImpl::MotionHandleInputFunctionPointerSharedPtr Framework::AndroidProcessManagerImpl::GetMotionHandleInputFunctionPointer()
 {
-    static MotionHandleInputFunctionPointerContainer motionHandleInputFunctionPointerContainer{ { AndroidMotionEventAction::Down, &AndroidCallBackInterface::ActionDownMessage },
-                                                                                                { AndroidMotionEventAction::Up, &AndroidCallBackInterface::ActionUpMessage },
-                                                                                                { AndroidMotionEventAction::Move, &AndroidCallBackInterface::ActionMoveMessage },
-                                                                                                { AndroidMotionEventAction::Cancel, &AndroidCallBackInterface::NotDealInputMessage },
-                                                                                                { AndroidMotionEventAction::Outside, &AndroidCallBackInterface::NotDealInputMessage },
-                                                                                                { AndroidMotionEventAction::PointerDown, &AndroidCallBackInterface::NotDealInputMessage },
-                                                                                                { AndroidMotionEventAction::PointerUp, &AndroidCallBackInterface::NotDealInputMessage },
-                                                                                                { AndroidMotionEventAction::HoverMove, &AndroidCallBackInterface::NotDealInputMessage },
-                                                                                                { AndroidMotionEventAction::Scroll, &AndroidCallBackInterface::NotDealInputMessage },
-                                                                                                { AndroidMotionEventAction::HoverEnter, &AndroidCallBackInterface::NotDealInputMessage },
-                                                                                                { AndroidMotionEventAction::HoverExit, &AndroidCallBackInterface::NotDealInputMessage } };
+    static const MotionHandleInputFunctionPointerContainer motionHandleInputFunctionPointerContainer{ { AndroidMotionEventAction::Down, &AndroidCallBackInterface::ActionDownMessage },
+                                                                                                      { AndroidMotionEventAction::Up, &AndroidCallBackInterface::ActionUpMessage },
+                                                                                                      { AndroidMotionEventAction::Move, &AndroidCallBackInterface::ActionMoveMessage },
+                                                                                                      { AndroidMotionEventAction::Cancel, &AndroidCallBackInterface::NotDealInputMessage },
+                                                                                                      { AndroidMotionEventAction::Outside, &AndroidCallBackInterface::NotDealInputMessage },
+                                                                                                      { AndroidMotionEventAction::PointerDown, &AndroidCallBackInterface::NotDealInputMessage },
+                                                                                                      { AndroidMotionEventAction::PointerUp, &AndroidCallBackInterface::NotDealInputMessage },
+                                                                                                      { AndroidMotionEventAction::HoverMove, &AndroidCallBackInterface::NotDealInputMessage },
+                                                                                                      { AndroidMotionEventAction::Scroll, &AndroidCallBackInterface::NotDealInputMessage },
+                                                                                                      { AndroidMotionEventAction::HoverEnter, &AndroidCallBackInterface::NotDealInputMessage },
+                                                                                                      { AndroidMotionEventAction::HoverExit, &AndroidCallBackInterface::NotDealInputMessage } };
 
     static MotionHandleInputFunctionPointerSharedPtr functionPointer = make_shared<MotionHandleInputFunctionPointerContainer>(motionHandleInputFunctionPointerContainer);
 

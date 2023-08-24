@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:45)
+///	版本：0.9.1.3 (2023/08/09 14:40)
 
 #ifndef FRAMEWORK_APPLICATION_MOUSE_POSITION_H
 #define FRAMEWORK_APPLICATION_MOUSE_POSITION_H
@@ -25,10 +25,11 @@ namespace Framework
     {
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(MousePosition);
+
         using HWnd = System::WindowsHWnd;
 
     public:
-        explicit MousePosition(HWnd hwnd);
+        explicit MousePosition(HWnd hWnd);
 
         CLASS_INVARIANT_DECLARE;
 

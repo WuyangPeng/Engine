@@ -1,0 +1,11 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_$CoreCapital$_HELPER_H
+#define $ModuleUppercase$_$CoreCapital$_HELPER_H
+
+#include "ExportMacro.h"
+#include "$ModuleName$$CoreName$ClassInvariantMacro.h"
+#include "$ModuleName$$CoreName$CustomAssertMacro.h"
+#include "UserMacro.h"
+
+#endif  // $ModuleUppercase$_$CoreCapital$_HELPER_H

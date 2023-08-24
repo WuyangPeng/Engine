@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:43)
+///	版本：0.9.1.3 (2023/08/09 14:47)
 
 #ifndef FRAMEWORK_APPLICATION_MOUSE_BUTTONS_H
 #define FRAMEWORK_APPLICATION_MOUSE_BUTTONS_H
@@ -25,9 +25,9 @@ namespace Framework
 
     struct GlutMouseButtons
     {
-        static constexpr auto mouseLeftButton = System::EnumCastUnderlying(System::GlutModifiersCodes::LeftButton);
-        static constexpr auto mouseMiddleButton = System::EnumCastUnderlying(System::GlutModifiersCodes::MiddleButton);
-        static constexpr auto mouseRightButton = System::EnumCastUnderlying(System::GlutModifiersCodes::RightButton);
+        static constexpr auto mouseLeftButton = EnumCastUnderlying(System::GlutModifiersCodes::LeftButton);
+        static constexpr auto mouseMiddleButton = EnumCastUnderlying(System::GlutModifiersCodes::MiddleButton);
+        static constexpr auto mouseRightButton = EnumCastUnderlying(System::GlutModifiersCodes::RightButton);
     };
 
     struct AndroidMouseButtons

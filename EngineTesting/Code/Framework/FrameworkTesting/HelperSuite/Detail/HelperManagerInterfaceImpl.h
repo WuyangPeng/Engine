@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:17)
+///	版本：0.9.1.3 (2023/08/11 19:20)
 
 #ifndef FRAMEWORK_HELPER_SUITE_HELPER_MANAGER_INTERFACE_IMPL_H
 #define FRAMEWORK_HELPER_SUITE_HELPER_MANAGER_INTERFACE_IMPL_H
@@ -26,11 +26,11 @@ namespace Framework
 
         CLASS_INVARIANT_DECLARE;
 
-        MiddleLayerInterfaceSharedPtr GetMiddleLayerInterface(int index);
-        ConstMiddleLayerInterfaceSharedPtr GetMiddleLayerInterface(int index) const;
+        NODISCARD MiddleLayerInterfaceSharedPtr GetMiddleLayerInterface(int index);
+        NODISCARD ConstMiddleLayerInterfaceSharedPtr GetMiddleLayerInterface(int index) const;
 
         void SetMiddleLayerInterface(int index, const MiddleLayerInterfaceSharedPtr& middleLayer);
-        int GetSize() const;
+        NODISCARD int GetSize() const;
 
     private:
         using WeakPointer = std::weak_ptr<MiddleLayerInterface>;

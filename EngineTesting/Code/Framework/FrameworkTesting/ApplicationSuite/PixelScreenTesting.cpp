@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:26)
+///	版本：0.9.1.3 (2023/08/11 20:44)
 
 #include "PixelScreenTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -45,12 +45,11 @@ void Framework::PixelScreenTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(FillRectangleSolidTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FillRectangleHollowTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FillCircleSolidTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DrawTest);
 }
 
 void Framework::PixelScreenTesting::DefaultColourTest()
 {
-    auto pixelScreen = CreateTestPixelScreen();
+    const auto pixelScreen = CreateTestPixelScreen();
 
     AssertColour(pixelScreen, black);
 }
@@ -61,8 +60,7 @@ void Framework::PixelScreenTesting::ClearScreenTest()
 
     auto pixelScreen = CreateTestPixelScreen();
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -92,8 +90,7 @@ void Framework::PixelScreenTesting::ResizeTest()
 
     auto pixelScreen = CreateTestPixelScreen();
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -132,15 +129,13 @@ void Framework::PixelScreenTesting::SetPixelTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
     auto pixelScreen = CreateTestPixelScreen(width, height);
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -165,13 +160,11 @@ void Framework::PixelScreenTesting::SetThickPixelTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
     const std::uniform_int<> thickRandom{ minThick, maxThick };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -211,13 +204,11 @@ void Framework::PixelScreenTesting::DrawLineTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -233,15 +224,15 @@ void Framework::PixelScreenTesting::DrawLineTest()
         const auto xDifference = boost::numeric_cast<double>(xMin - xMax);
         const auto yDifference = boost::numeric_cast<double>(yMin - yMax);
 
-        auto distanceX = Mathematics::MathD::FAbs(xDifference);
-        auto distanceY = Mathematics::MathD::FAbs(yDifference);
+        const auto distanceX = Mathematics::MathD::FAbs(xDifference);
+        const auto distanceY = Mathematics::MathD::FAbs(yDifference);
 
         if (distanceY < distanceX)
         {
-            auto slope = distanceY / distanceX;
+            const auto slope = distanceY / distanceX;
 
-            auto min = xMin < xMax ? xMin : xMax;
-            auto max = xMin < xMax ? xMax : xMin;
+            const auto min = xMin < xMax ? xMin : xMax;
+            const auto max = xMin < xMax ? xMax : xMin;
 
             AssertColourOnX(pixelScreen, black, 0, min);
             AssertColourOnX(pixelScreen, black, max + 1, pixelScreen.GetScreenWidth());
@@ -275,10 +266,10 @@ void Framework::PixelScreenTesting::DrawLineTest()
         }
         else
         {
-            auto slope = distanceX / distanceY;
+            const auto slope = distanceX / distanceY;
 
-            auto min = yMin < yMax ? yMin : yMax;
-            auto max = yMin < yMax ? yMax : yMin;
+            const auto min = yMin < yMax ? yMin : yMax;
+            const auto max = yMin < yMax ? yMax : yMin;
 
             AssertColourOnY(pixelScreen, black, 0, min);
             AssertColourOnY(pixelScreen, black, max + 1, pixelScreen.GetScreenHeight());
@@ -320,13 +311,11 @@ void Framework::PixelScreenTesting::DrawRectangleSolidTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -376,13 +365,11 @@ void Framework::PixelScreenTesting::DrawRectangleHollowTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         auto xMin = sizeRandom(generator);
         auto yMin = sizeRandom(generator);
@@ -436,13 +423,11 @@ void Framework::PixelScreenTesting::DrawCircleSolidTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
     const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -464,9 +449,9 @@ void Framework::PixelScreenTesting::DrawCircleSolidTest()
                 const auto colour = pixelScreen.GetPixel(widthIndex, heightIndex);
 
                 const Mathematics::Vector2D vector2D{ boost::numeric_cast<double>(widthIndex), boost::numeric_cast<double>(heightIndex) };
-                auto distance = Mathematics::Vector2ToolsD::Distance(center, vector2D);
 
-                if (radius + 0.5 < distance)
+                if (const auto distance = Mathematics::Vector2ToolsD::Distance(center, vector2D);
+                    radius + 0.5 < distance)
                 {
                     ASSERT_EQUAL(colour, black);
                 }
@@ -477,22 +462,21 @@ void Framework::PixelScreenTesting::DrawCircleSolidTest()
                 else
                 {
                     // 检测边界值
-
-                    auto difference = widthIndex - x;
-                    auto didifferenceAbsolute = Mathematics::MathD::FAbs(difference);
+                    const auto difference = widthIndex - x;
+                    const auto differenceAbsolute = Mathematics::MathD::FAbs(difference);
 
                     const auto separateRadius = GetSeparateRadius(radius);
 
                     auto dec = 3 - 2 * radius;
                     auto yStep = radius;
 
-                    if (heightIndex == y && didifferenceAbsolute <= radius)
+                    if (heightIndex == y && differenceAbsolute <= radius)
                     {
                         ASSERT_EQUAL(colour, clearColour);
                     }
-                    else if (didifferenceAbsolute < separateRadius)
+                    else if (differenceAbsolute < separateRadius)
                     {
-                        for (auto xStep = 0; xStep <= yStep && xStep < didifferenceAbsolute; ++xStep)
+                        for (auto xStep = 0; xStep <= yStep && xStep < differenceAbsolute; ++xStep)
                         {
                             if (0 <= dec)
                             {
@@ -514,7 +498,7 @@ void Framework::PixelScreenTesting::DrawCircleSolidTest()
                     else
                     {
                         auto xStep = 0;
-                        for (; xStep <= yStep && didifferenceAbsolute <= yStep; ++xStep)
+                        for (; xStep <= yStep && differenceAbsolute <= yStep; ++xStep)
                         {
                             if (0 <= dec)
                             {
@@ -554,13 +538,11 @@ void Framework::PixelScreenTesting::DrawCircleHollowTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
     const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -582,9 +564,9 @@ void Framework::PixelScreenTesting::DrawCircleHollowTest()
                 const auto colour = pixelScreen.GetPixel(widthIndex, heightIndex);
 
                 const Mathematics::Vector2D vector2D{ boost::numeric_cast<double>(widthIndex), boost::numeric_cast<double>(heightIndex) };
-                auto distance = Mathematics::Vector2ToolsD::Distance(center, vector2D);
 
-                if (Mathematics::MathD::FAbs(radius - distance) <= 0.5)
+                if (const auto distance = Mathematics::Vector2ToolsD::Distance(center, vector2D);
+                    Mathematics::MathD::FAbs(radius - distance) <= 0.5)
                 {
                     bool isClearColour = false;
                     auto dec = 3 - 2 * radius;
@@ -646,13 +628,11 @@ void Framework::PixelScreenTesting::FillThickPixelTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
     const std::uniform_int<> thickRandom{ minThick, maxThick };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -683,13 +663,11 @@ void Framework::PixelScreenTesting::FillRectangleSolidTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -730,13 +708,11 @@ void Framework::PixelScreenTesting::FillRectangleHollowTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -780,13 +756,11 @@ void Framework::PixelScreenTesting::FillCircleSolidTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
     const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -869,9 +843,9 @@ void Framework::PixelScreenTesting::AssertColourOnX(const TestingType& pixelScre
 
 void Framework::PixelScreenTesting::AssertColourOnY(const TestingType& pixelScreen, const Colour& colour, int yBegin, int yEnd)
 {
-    for (int heightIndex = yBegin; heightIndex < yEnd && heightIndex < pixelScreen.GetScreenHeight(); ++heightIndex)
+    for (auto heightIndex = yBegin; heightIndex < yEnd && heightIndex < pixelScreen.GetScreenHeight(); ++heightIndex)
     {
-        for (int widthIndex = 0; widthIndex < pixelScreen.GetScreenWidth(); ++widthIndex)
+        for (auto widthIndex = 0; widthIndex < pixelScreen.GetScreenWidth(); ++widthIndex)
         {
             ASSERT_EQUAL(colour, pixelScreen.GetPixel(widthIndex, heightIndex));
         }
@@ -882,8 +856,8 @@ int Framework::PixelScreenTesting::GetSeparateRadius(int radius) const noexcept
 {
     auto dec = 3 - 2 * radius;
     auto separateRadius = 0;
-    auto yStep = radius;
-    for (; separateRadius <= yStep; ++separateRadius)
+
+    for (auto yStep = radius; separateRadius <= yStep; ++separateRadius)
     {
         if (0 <= dec)
         {
@@ -894,9 +868,4 @@ int Framework::PixelScreenTesting::GetSeparateRadius(int radius) const noexcept
     }
 
     return separateRadius;
-}
-
-void Framework::PixelScreenTesting::DrawTest()
-{
-    MAYBE_UNUSED const auto pixelScreen = CreateTestPixelScreen();
 }

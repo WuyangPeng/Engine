@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/27 14:57)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:43)
 
 #ifndef MAIL_SERVER_MAIL_SERVER_MESSAGE_H
 #define MAIL_SERVER_MAIL_SERVER_MESSAGE_H
 
-#include "MailServer/MailServerMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "MailServer/MailServerMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "MailServer/MailServerMiddleLayer/Audio/AudioManager.h"
 #include "MailServer/MailServerMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "MailServer/MailServerMiddleLayer/Event/EventManager.h"
@@ -24,6 +24,7 @@
 #include "MailServer/MailServerMiddleLayer/Resource/ResourceManager.h"
 #include "MailServer/MailServerMiddleLayer/System/SystemManager.h"
 #include "CoreTools/Console/ConsoleAlloc.h"
+#include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/MiddleLayer/EngineMiddleLayerContainer.h"
 #include "Framework/MiddleLayer/ObjectLogicManager.h"
 #include "Framework/WindowProcess/WindowMessage.h"
@@ -31,7 +32,7 @@
 
 namespace MailServer
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<MailServerMiddleLayer::ObjectLogicManager, MailServerMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<MailServerMiddleLayer::ObjectLogicManager, MailServerMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   MailServerMiddleLayer::InputManager,
                                                                   MailServerMiddleLayer::NetworkManager,
@@ -45,7 +46,6 @@ namespace MailServer
                                                                   MailServerMiddleLayer::CameraSystemsManager,
                                                                   MailServerMiddleLayer::RenderingManager,
                                                                   MailServerMiddleLayer::GUIManager>;
-
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
     class MailServerMessage : public MessageType
@@ -54,13 +54,16 @@ namespace MailServer
         using ClassType = MailServerMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit MailServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        MailServerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using MailServerMessageWindowProcessHandle = Framework::WindowProcessHandle<MailServerMessage>;

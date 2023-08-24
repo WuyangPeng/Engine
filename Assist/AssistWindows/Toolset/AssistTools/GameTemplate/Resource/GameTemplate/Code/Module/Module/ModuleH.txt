@@ -1,0 +1,6 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_H
+#define $ModuleUppercase$_H
+
+#endif  // $ModuleUppercase$_H

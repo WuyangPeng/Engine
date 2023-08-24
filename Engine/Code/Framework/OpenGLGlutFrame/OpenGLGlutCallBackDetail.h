@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:16)
+///	版本：0.9.1.3 (2023/08/05 14:00)
 
-#ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_CALL_BACK_DETAIL_H
-#define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_CALL_BACK_DETAIL_H
+#ifndef FRAMEWORK_OPEN_GL_GLUT_FRAME_OPEN_GL_GLUT_CALL_BACK_DETAIL_H
+#define FRAMEWORK_OPEN_GL_GLUT_FRAME_OPEN_GL_GLUT_CALL_BACK_DETAIL_H
 
 #include "OpenGLGlutCallBack.h"
 #include "System/OpenGL/OpenGLBase.h"
@@ -24,7 +24,7 @@
 template <typename MiddleLayer>
 Framework::OpenGLGlutCallBack<MiddleLayer>::OpenGLGlutCallBack(int64_t delta, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ delta },
-      middleLayer{ MiddleLayerType::CreateMiddleLayer(MiddleLayerPlatform::Windows, environmentDirectory) },
+      middleLayer{ std::make_unique<MiddleLayer>(MiddleLayerPlatform::Windows, environmentDirectory) },
       lastTime{},
       glutModifiers{},
       button{ MouseButtonsTypes::NullButton },
@@ -223,7 +223,7 @@ bool Framework::OpenGLGlutCallBack<MiddleLayer>::MouseClick(int aButton, int sta
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    SetGLUTModifiers(aButton, state);
+    SetGlutModifiers(aButton, state);
 
     const auto buttonType = GetMouseButtonsTypes(aButton);
     const auto stateType = GetMouseStateTypes(state);
@@ -239,9 +239,8 @@ bool Framework::OpenGLGlutCallBack<MiddleLayer>::MouseClick(int aButton, int sta
     return true;
 }
 
-// private
 template <typename MiddleLayer>
-void Framework::OpenGLGlutCallBack<MiddleLayer>::SetGLUTModifiers(int aButton, int state) noexcept
+void Framework::OpenGLGlutCallBack<MiddleLayer>::SetGlutModifiers(int aButton, int state) noexcept
 {
     const auto modifiers = System::GlutGetModifiers();
     glutModifiers.SetModifiers(modifiers);
@@ -277,4 +276,4 @@ void Framework::OpenGLGlutCallBack<MiddleLayer>::DestroyWindow()
     ParentType::DestroyWindow();
 }
 
-#endif  // FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_CALL_BACK_DETAIL_H
+#endif  // FRAMEWORK_OPEN_GL_GLUT_FRAME_OPEN_GL_GLUT_CALL_BACK_DETAIL_H

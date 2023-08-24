@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:41)
+///	版本：0.9.1.3 (2023/08/08 19:54)
 
 #ifndef FRAMEWORK_HELPER_MAIN_FUNCTION_ENTRY_POINT_H
 #define FRAMEWORK_HELPER_MAIN_FUNCTION_ENTRY_POINT_H
@@ -14,7 +14,6 @@
 
 #include "System/Android/Using/AndroidNativeAppGlueUsing.h"
 #include "System/Helper/PragmaWarning.h"
-#include "System/Helper/WindowsMacro.h"
 #include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -28,18 +27,15 @@
 
 namespace Framework
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
     template <typename T>
-    int WinMainEntryPoint(System::WindowsHInstance instance,
-                          char* commandLine,
-                          const System::TChar* engineEnvironment,
-                          const System::TChar* engineDirectory,
-                          const System::TChar* windowName,
-                          int width,
-                          int height,
-                          MAYBE_UNUSED System::WindowsHInstance previousInstance)
+    NODISCARD int WinMainEntryPoint(System::WindowsHInstance instance,
+                                    char* commandLine,
+                                    const System::TChar* engineEnvironment,
+                                    const System::TChar* engineDirectory,
+                                    const System::TChar* windowName,
+                                    int width,
+                                    int height,
+                                    System::WindowsHInstance previousInstance)
     {
         EXCEPTION_TRY
         {
@@ -47,68 +43,60 @@ namespace Framework
             WindowApplicationInformation windowApplicationInformation{ windowName, windowSize };
             EnvironmentDirectory environmentDirectory{ engineEnvironment, engineDirectory };
 
-            auto helper = std::make_shared<T>(instance, commandLine, windowApplicationInformation, environmentDirectory);
+            T helper{ instance, commandLine, windowApplicationInformation, environmentDirectory };
 
-            return helper->Run();
+            return helper.Run();
         }
         EXCEPTION_ENTRY_POINT_CATCH
+
+        System::UnusedFunction(commandLine, previousInstance);
 
         return -1;
     }
 
-#include STSTEM_WARNING_POP
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
     template <typename T>
-    int WinMainEntryPoint(System::WindowsHInstance instance, char* commandLine, const System::TChar* engineEnvironment, const System::TChar* engineDirectory, const System::TChar* renderer, [[maybe_unused]] System::WindowsHInstance previousInstance)
+    NODISCARD int WinMainEntryPoint(System::WindowsHInstance instance, char* commandLine, const System::TChar* engineEnvironment, const System::TChar* engineDirectory, const System::TChar* renderer, System::WindowsHInstance previousInstance)
     {
         EXCEPTION_TRY
         {
             EnvironmentDirectory environmentDirectory{ engineEnvironment, engineDirectory };
-            auto fileName = environmentDirectory.GetDirectory(UpperDirectory::Configuration) + renderer;
+            const auto fileName = environmentDirectory.GetDirectory(UpperDirectory::Configuration) + renderer;
 
-            Rendering::RendererParameter rendererParameter{ CoreTools::StringConversion::StandardConversionMultiByte(fileName) };
+            const Rendering::RendererParameter rendererParameter{ CoreTools::StringConversion::StandardConversionMultiByte(fileName) };
             WindowApplicationInformation windowApplicationInformation{ instance, rendererParameter };
 
-            auto helper = std::make_shared<T>(instance, commandLine, windowApplicationInformation, environmentDirectory);
+            T helper{ instance, commandLine, windowApplicationInformation, environmentDirectory };
 
-            return helper->Run();
+            return helper.Run();
         }
         EXCEPTION_ENTRY_POINT_CATCH
+
+        System::UnusedFunction(commandLine, previousInstance);
 
         return -1;
     }
 
-#include STSTEM_WARNING_POP
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
     template <typename T>
-    int MainEntryPoint(int argc, char** argv, const System::TChar* consoleTitle, const System::TChar* engineEnvironment, const System::TChar* engineDirectory)
+    NODISCARD int MainEntryPoint(int argc, char** argv, const System::TChar* consoleTitle, const System::TChar* engineEnvironment, const System::TChar* engineDirectory)
     {
         EXCEPTION_TRY
         {
             EnvironmentDirectory environmentDirectory{ engineEnvironment, engineDirectory };
 
-            auto helper = std::make_shared<T>(argc, argv, consoleTitle, environmentDirectory);
+            T helper{ argc, argv, consoleTitle, environmentDirectory };
 
-            return helper->Run();
+            return helper.Run();
         }
         EXCEPTION_ENTRY_POINT_CATCH
 
         return -1;
     }
 
-#include STSTEM_WARNING_POP
-
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)
 
     template <typename T>
-    int GlutMainEntryPoint(int argc, char** argv, const System::TChar* engineEnvironment, const System::TChar* engineDirectory, int majorVersion, int minorVersion, FrameParameter frame)
+    NODISCARD int GlutMainEntryPoint(int argc, char** argv, const System::TChar* engineEnvironment, const System::TChar* engineDirectory, int majorVersion, int minorVersion, FrameParameter frame)
     {
         EXCEPTION_TRY
         {
@@ -128,26 +116,22 @@ namespace Framework
 
 #include STSTEM_WARNING_POP
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
     template <typename T>
-    int AndroidMainEntryPoint(System::AndroidApp* androidApp, const System::TChar* engineEnvironment, const System::TChar* engineDirectory)
+    NODISCARD int AndroidMainEntryPoint(System::AndroidApp* androidApp, const System::TChar* engineEnvironment, const System::TChar* engineDirectory)
     {
         EXCEPTION_TRY
         {
             EnvironmentDirectory environmentDirectory{ engineEnvironment, engineDirectory };
 
-            auto helper = std::make_shared<T>(androidApp, environmentDirectory);
+            T helper{ androidApp, environmentDirectory };
 
-            return helper->Run();
+            return helper.Run();
         }
         EXCEPTION_ENTRY_POINT_CATCH
 
         return -1;
     }
 
-#include STSTEM_WARNING_POP
 }
 
 #endif  // FRAMEWORK_HELPER_MAIN_FUNCTION_ENTRY_POINT_H

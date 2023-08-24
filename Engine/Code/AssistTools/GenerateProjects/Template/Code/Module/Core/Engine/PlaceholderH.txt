@@ -1,0 +1,24 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_$CoreCapital$_ENGINE_PLACEHOLDER_H
+#define $ModuleUppercase$_$CoreCapital$_ENGINE_PLACEHOLDER_H
+
+#include "$ModuleName$/$ModuleName$$CoreName$/$ModuleName$$CoreName$Dll.h"
+
+#include "$ModuleName$/$ModuleName$$CoreName$/Helper/ExportMacro.h"
+
+namespace $ModuleName$$CoreName$
+{
+    class $ModuleUppercase$_$CoreCapital$_DEFAULT_DECLARE Placeholder final
+    {
+    public:
+        using ClassType = Placeholder;
+
+    public:
+        Placeholder() noexcept;
+
+        CLASS_INVARIANT_DECLARE;
+    };
+}
+
+#endif  // $ModuleUppercase$_$CoreCapital$_ENGINE_PLACEHOLDER_H

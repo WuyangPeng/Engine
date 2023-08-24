@@ -5,28 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 16:38)
+///	版本：0.9.1.3 (2023/08/02 14:15)
 
 #ifndef PHYSICS_COLLISION_DETECTION_FWD_H
 #define PHYSICS_COLLISION_DETECTION_FWD_H
 
 namespace Physics
 {
-    class BoundTreeProjectionInfo;
 
-    template <typename MeshSharedPointer, typename Bound>
-    class BoundTreeChild;
-
-    class BoundTreeSplitTriangles;
-
-    template <typename MeshSharedPointer, typename Bound>
-    class BoundTree;
-
-    template <typename MeshSharedPointer, typename Bound>
-    class CollisionRecord;
-
-    template <typename MeshSharedPointer, typename Bound>
-    class CollisionGroup;
 }
 
 #endif  // PHYSICS_COLLISION_DETECTION_FWD_H

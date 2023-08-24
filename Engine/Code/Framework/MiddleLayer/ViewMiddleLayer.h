@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:22)
+///	版本：0.9.1.3 (2023/08/08 14:04)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_VIEW_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_VIEW_MIDDLE_LAYER_H
@@ -20,26 +20,22 @@
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(ViewMiddleLayerImpl);
 
+// 视图层类
 namespace Framework
 {
-    // 视图层类
     class FRAMEWORK_DEFAULT_DECLARE ViewMiddleLayer : public ModelViewControllerMiddleLayer
     {
     public:
         NON_COPY_TYPE_DECLARE(ViewMiddleLayer);
         using ParentType = ModelViewControllerMiddleLayer;
+
         using Colour = Rendering::Colour<float>;
-        using Renderer = Rendering::BaseRenderer;
-        using RendererSharedPtr = std::shared_ptr<Rendering::BaseRenderer>;
-        using ConstRendererSharedPtr = std::shared_ptr<const Rendering::BaseRenderer>;
+        using BaseRenderer = Rendering::BaseRenderer;
+        using RendererSharedPtr = std::shared_ptr<BaseRenderer>;
+        using ConstRendererSharedPtr = std::shared_ptr<const BaseRenderer>;
 
     public:
         ViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
-        ~ViewMiddleLayer() noexcept = default;
-        ViewMiddleLayer(const ViewMiddleLayer& rhs) noexcept = delete;
-        ViewMiddleLayer& operator=(const ViewMiddleLayer& rhs) noexcept = delete;
-        ViewMiddleLayer(ViewMiddleLayer&& rhs) noexcept;
-        ViewMiddleLayer& operator=(ViewMiddleLayer&& rhs) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -47,11 +43,6 @@ namespace Framework
         NODISCARD bool Initialize() override;
         NODISCARD bool Paint() override;
         NODISCARD bool Resize(WindowDisplay windowDisplay, const WindowSize& size) override;
-
-        void DrawFrameRate(const WindowPoint& point, const Colour& color);
-
-        NODISCARD Colour GetClearColor() const;
-        void SetClearColor(const Colour& colour);
 
         // 按键消息中间层处理
         NODISCARD bool KeyUp(int key, const WindowPoint& point) final;
@@ -64,6 +55,11 @@ namespace Framework
         NODISCARD bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
+
+        void DrawFrameRate(const WindowPoint& point, const Colour& colour);
+
+        NODISCARD Colour GetClearColour() const;
+        void SetClearColour(const Colour& colour);
 
     protected:
         NODISCARD RendererSharedPtr GetRenderer();

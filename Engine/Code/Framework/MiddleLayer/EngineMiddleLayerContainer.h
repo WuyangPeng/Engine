@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:21)
+///	版本：0.9.1.3 (2023/08/05 16:35)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_CONTAINER_H
 #define FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_CONTAINER_H
@@ -26,11 +26,9 @@
 
 #include <type_traits>
 
+/// 这个游戏系统管理器分为输入管理器、网络管理器、对象逻辑、物理模拟、消息管理器、事件管理器、系统管理器、资源管理器、音频管理器、相机系统、渲染管理器、GUI管理器构成。
 namespace Framework
 {
-    // 这个游戏系统管理器分为输入管理器、网络管理器、对象逻辑、物理模拟、
-    // 消息管理器、事件管理器、系统管理器、资源管理器、
-    // 音频管理器、相机系统、渲染管理器、GUI管理器构成。
     template <typename ApplicationTrait,
               template <typename> class InputManager = InputManager,
               typename NetworkManager = NetworkManagerInterface,
@@ -61,6 +59,7 @@ namespace Framework
                                                      RenderingManager,
                                                      GUIManager>;
         using ParentType = EngineMiddleLayerInterface;
+
         using InputManagerType = InputManager<ApplicationTrait>;
         using NetworkManagerType = NetworkManager;
         using ObjectLogicManagerType = ObjectLogicManager;
@@ -91,13 +90,11 @@ namespace Framework
 
     public:
         EngineMiddleLayerContainer(MiddleLayerPlatform modelViewController, const EnvironmentDirectory& environmentDirectory);
-        ~EngineMiddleLayerContainer() noexcept;
+        ~EngineMiddleLayerContainer() noexcept = default;
         EngineMiddleLayerContainer(const EngineMiddleLayerContainer& rhs) noexcept = delete;
         EngineMiddleLayerContainer& operator=(const EngineMiddleLayerContainer& rhs) noexcept = delete;
         EngineMiddleLayerContainer(EngineMiddleLayerContainer&& rhs) noexcept;
         EngineMiddleLayerContainer& operator=(EngineMiddleLayerContainer&& rhs) noexcept;
-
-        NODISCARD static MiddleLayerSharedPtr CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -161,9 +158,7 @@ namespace Framework
         void ResetRenderingManager();
         void ResetGUIManager();
 
-        bool InitSystemEngineInterface();
-
-        void SetEngineManagerNullptr();
+        NODISCARD bool InitSystemEngineInterface();
 
     private:
         NetworkManagerInterfaceSharedPtr network;

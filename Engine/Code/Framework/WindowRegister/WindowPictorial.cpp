@@ -5,54 +5,70 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:02)
+///	版本：0.9.1.3 (2023/08/03 19:31)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowPictorial.h"
 #include "Detail/WindowPictorialImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Framework/WindowRegister/WindowHBrush.h"
 
-Framework::WindowPictorial::WindowPictorial(WindowsBrushTypes background)
+Framework::WindowPictorial::WindowPictorial(BrushTypes background)
     : impl{ background }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::WindowPictorial::WindowPictorial(const TChar* icon, const TChar* cursor, WindowsBrushTypes background)
+Framework::WindowPictorial::WindowPictorial(const TChar* icon, const TChar* cursor, BrushTypes background)
     : impl{ icon, cursor, background }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::WindowPictorial::WindowPictorial(HInstance instance, int icon, int cursor, WindowsBrushTypes background)
+Framework::WindowPictorial::WindowPictorial(HInstance instance, int icon, int cursor, BrushTypes background)
     : impl{ instance, icon, cursor, background }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::WindowPictorial::WindowPictorial(HInstance instance, int icon, const TChar* cursor, WindowsBrushTypes background)
+Framework::WindowPictorial::WindowPictorial(HInstance instance, int icon, const TChar* cursor, BrushTypes background)
     : impl{ instance, icon, cursor, background }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::WindowPictorial::WindowPictorial(HInstance instance, const TChar* icon, int cursor, WindowsBrushTypes background)
+Framework::WindowPictorial::WindowPictorial(HInstance instance, const TChar* icon, int cursor, BrushTypes background)
     : impl{ instance, icon, cursor, background }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::WindowPictorial::WindowPictorial(HInstance instance, bool isDefaultIcon, int icon, bool isDefaultCursor, int cursor, WindowsBrushTypes background)
+Framework::WindowPictorial::WindowPictorial(HInstance instance, bool isDefaultIcon, int icon, bool isDefaultCursor, int cursor, BrushTypes background)
     : impl{ instance, isDefaultIcon, icon, isDefaultCursor, cursor, background }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowPictorial)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowPictorial, GetHIcon, System::WindowsHIcon)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowPictorial, GetHCursor, System::WindowsHCursor)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowPictorial, GetHBrush, System::WindowsHBrush)
+System::WindowsHIcon Framework::WindowPictorial::GetHIcon() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetHIcon();
+}
+
+System::WindowsHCursor Framework::WindowPictorial::GetHCursor() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetHCursor();
+}
+
+System::WindowsHBrush Framework::WindowPictorial::GetHBrush() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetHBrush();
+}

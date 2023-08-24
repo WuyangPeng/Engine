@@ -1,0 +1,9 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_$CoreCapital$_H
+#define $ModuleUppercase$_$CoreCapital$_H
+
+#include "Engine/Engine.h"
+#include "Helper/Helper.h"
+
+#endif  // $ModuleUppercase$_$CoreCapital$_H

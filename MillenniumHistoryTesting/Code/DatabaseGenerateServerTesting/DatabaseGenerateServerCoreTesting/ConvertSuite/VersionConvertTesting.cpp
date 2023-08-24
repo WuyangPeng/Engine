@@ -5,88 +5,46 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/24 12:17)
+///	版本：0.9.1.3 (2023/08/05 21:16)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/Version.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/VersionContainerDetail.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity/VersionEntity.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerCore/Convert/ConvertEntity.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/Helper/DatabaseGenerateServerCoreClassInvariantMacro.h"
 #include "VersionConvertTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/DatabaseInterface/BasisDatabaseManager.h"
-#include "Database/DatabaseInterface/DatabaseEnvironment.h"
-#include "Database/DatabaseInterface/DatabaseFlush.h"
 
-DatabaseGenerateServerCoreTesting::VersionConvertTesting::VersionConvertTesting(const OStreamShared& stream, const AncientBooksContainer& ancientBooksContainer)
-    : ParentType{ stream }, ancientBooksContainer{ ancientBooksContainer }
+DatabaseGenerateServerCoreTesting::VersionConvertTesting::VersionConvertTesting(const OStreamShared& stream, const VersionContainer& versionContainer)
+    : ParentType{ stream }, versionContainer{ versionContainer }
 {
     DATABASE_GENERATE_SERVER_CORE_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseGenerateServerCoreTesting, VersionConvertTesting)
 
-void DatabaseGenerateServerCoreTesting::VersionConvertTesting::DoRunUnitTest()
+void DatabaseGenerateServerCoreTesting::VersionConvertTesting::ConvertTest(const DatabaseFlushSharedPtr& databaseFlush)
 {
-    Database::DatabaseEnvironment::Create();
+    DatabaseGenerateServerCore::ConvertEntity convertEntity{ databaseFlush };
 
-    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-
-    Database::DatabaseEnvironment::Destroy();
-}
-
-void DatabaseGenerateServerCoreTesting::VersionConvertTesting::MainTest()
-{
-    ASSERT_NOT_THROW_EXCEPTION_0(InitEnvironmentTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DatabaseFlushTest);
-}
-
-void DatabaseGenerateServerCoreTesting::VersionConvertTesting::InitEnvironmentTest()
-{
-    const Database::ConfigurationStrategy configurationStrategy{ Database::WrappersStrategy::Mongo, "127.0.0.1", 3306, "tcretest", "root", "123456" };
-
-    DATABASE_ENVIRONMENT_SINGLETON.InitEnvironment(configurationStrategy);
-}
-
-void DatabaseGenerateServerCoreTesting::VersionConvertTesting::DatabaseFlushTest()
-{
-    const Database::ConfigurationStrategy::FlagsOption flagsOption{};
-    const Database::ConfigurationStrategy::StringOption stringOption{};
-    const Database::ConfigurationStrategy::BooleanOption booleanOption{};
-    const Database::ConfigurationStrategy::IntOption intOption{};
-    const Database::ConfigurationStrategy::SSLOption sslOption{};
-    const Database::ConfigurationStrategy::DBMapping dbMapping{};
-
-    const Database::ConfigurationStrategy configurationStrategy{ Database::WrappersStrategy::Mongo, "43.139.123.106", 27017, "tcretest", "dbOwner", "TCRE", true, 10, 1000, 500, 1, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping };
-
-    Database::DatabaseFlush mysqlConnectorDatabaseFlush{ configurationStrategy };
-
-    const auto versionContainer = ancientBooksContainer.GetVersionContainer();
-
-    for (const auto& version : versionContainer->GetContainer())
+    for (const auto& version : versionContainer.GetContainer())
     {
-        const auto database = mysqlConnectorDatabaseFlush.SelectOne(DatabaseEntity::VersionEntity::GetSelect(Database::WrappersStrategy::Mongo, version->GetId()),
-                                                                    DatabaseEntity::VersionEntity::GetDatabaseFieldContainer());
+        const auto versionEntity = convertEntity.Convert(*version);
 
-        auto versionEntity = DatabaseEntity::VersionEntity::Create(database, Database::WrappersStrategy::Mongo, version->GetId());
-
-        versionEntity.SetBook(version->GetBook());
-        versionEntity.SetSource(version->GetSource());
-        versionEntity.SetSourceName(CoreTools::StringConversion::StandardConversionUtf8(version->GetSourceName()));
-        versionEntity.SetCountry(version->GetCountry());
-        versionEntity.SetReignTitle(version->GetReignTitle());
-        versionEntity.SetYear(version->GetYear());
-        versionEntity.SetVersion(CoreTools::StringConversion::StandardConversionUtf8(version->GetVersion()));
-        versionEntity.SetOtherAuthor(version->GetOtherAuthor());
-
-        Database::Traits::StringArray authorNotes{};
-        for (auto iter = version->GetAuthorNotesBegin(); iter != version->GetAuthorNotesEnd(); ++iter)
-        {
-            authorNotes.emplace_back(CoreTools::StringConversion::StandardConversionUtf8(*iter));
-        }
-        versionEntity.SetAuthorNotes(authorNotes);
-
-        mysqlConnectorDatabaseFlush.ChangeDatabase(0, versionEntity.GetModify());
+        ASSERT_NOT_THROW_EXCEPTION_2(EqualTest, *version, versionEntity);
     }
+}
+
+void DatabaseGenerateServerCoreTesting::VersionConvertTesting::EqualTest(const Version& version, const VersionEntity& versionEntity)
+{
+    ASSERT_EQUAL(versionEntity.GetBook(), version.GetBook());
+    ASSERT_EQUAL(versionEntity.GetSource(), version.GetSource());
+    ASSERT_EQUAL(versionEntity.GetSourceName(), CoreTools::StringConversion::StandardConversionUtf8(version.GetSourceName()));
+    ASSERT_EQUAL(versionEntity.GetCountry(), version.GetCountry());
+    ASSERT_EQUAL(versionEntity.GetReignTitle(), version.GetReignTitle());
+    ASSERT_EQUAL(versionEntity.GetYear(), version.GetYear());
+    ASSERT_EQUAL(versionEntity.GetVersion(), CoreTools::StringConversion::StandardConversionUtf8(version.GetVersion()));
+    ASSERT_EQUAL(versionEntity.GetOtherAuthor(), version.GetOtherAuthor());
+    ASSERT_EQUAL(versionEntity.GetAuthorNotes(), Convert(version.GetAuthorNotesBegin(), version.GetAuthorNotesEnd()));
 }

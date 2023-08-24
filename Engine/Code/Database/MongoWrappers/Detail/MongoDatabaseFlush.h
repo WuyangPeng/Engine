@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/23 13:38)
+///	版本：0.9.1.3 (2023/08/14 15:09)
 
 #ifndef DATABASE_MONGO_WRAPPERS_MONGO_DATABASE_FLUSH_H
 #define DATABASE_MONGO_WRAPPERS_MONGO_DATABASE_FLUSH_H
@@ -15,7 +15,6 @@
 #include "MongoConnection.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
 #include "Database/DatabaseInterface/DatabaseFlush.h"
-#include "Database/DatabaseInterface/DatabaseInterfaceFwd.h"
 #include "Database/DatabaseInterface/Detail/DatabaseFlushImpl.h"
 
 #include <vector>
@@ -41,7 +40,7 @@ namespace Database
 
         NODISCARD BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const override;
         NODISCARD ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const override;
-      
+
         void Wait() override;
 
     private:

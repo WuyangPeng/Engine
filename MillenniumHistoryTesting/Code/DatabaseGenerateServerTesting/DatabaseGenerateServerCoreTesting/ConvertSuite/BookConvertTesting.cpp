@@ -5,105 +5,47 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/26 23:05)
+///	版本：0.9.1.3 (2023/08/02 22:34)
 
 #include "BookConvertTesting.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/Book.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/BookContainerDetail.h"
-#include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity/BookEntity.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerCore/Convert/ConvertEntity.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/Helper/DatabaseGenerateServerCoreClassInvariantMacro.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/DatabaseInterface/BasisDatabaseManager.h"
-#include "Database/DatabaseInterface/DatabaseEnvironment.h"
-#include "Database/DatabaseInterface/DatabaseFlush.h"
 
-DatabaseGenerateServerCoreTesting::BookConvertTesting::BookConvertTesting(const OStreamShared& stream, const AncientBooksContainer& ancientBooksContainer)
-    : ParentType{ stream }, ancientBooksContainer{ ancientBooksContainer }
+DatabaseGenerateServerCoreTesting::BookConvertTesting::BookConvertTesting(const OStreamShared& stream, const BookContainer& bookContainer)
+    : ParentType{ stream }, bookContainer{ bookContainer }
 {
     DATABASE_GENERATE_SERVER_CORE_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseGenerateServerCoreTesting, BookConvertTesting)
 
-void DatabaseGenerateServerCoreTesting::BookConvertTesting::DoRunUnitTest()
+void DatabaseGenerateServerCoreTesting::BookConvertTesting::ConvertTest(const DatabaseFlushSharedPtr& databaseFlush)
 {
-    Database::DatabaseEnvironment::Create();
+    DatabaseGenerateServerCore::ConvertEntity convertEntity{ databaseFlush };
 
-    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-
-    Database::DatabaseEnvironment::Destroy();
-}
-
-void DatabaseGenerateServerCoreTesting::BookConvertTesting::MainTest()
-{
-    ASSERT_NOT_THROW_EXCEPTION_0(InitEnvironmentTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DatabaseFlushTest);
-}
-
-void DatabaseGenerateServerCoreTesting::BookConvertTesting::InitEnvironmentTest()
-{
-    const Database::ConfigurationStrategy configurationStrategy{ Database::WrappersStrategy::Mongo, "127.0.0.1", 3306, "tcretest", "root", "123456" };
-
-    DATABASE_ENVIRONMENT_SINGLETON.InitEnvironment(configurationStrategy);
-}
-
-void DatabaseGenerateServerCoreTesting::BookConvertTesting::DatabaseFlushTest()
-{
-    const Database::ConfigurationStrategy::FlagsOption flagsOption{};
-    const Database::ConfigurationStrategy::StringOption stringOption{};
-    const Database::ConfigurationStrategy::BooleanOption booleanOption{};
-    const Database::ConfigurationStrategy::IntOption intOption{};
-    const Database::ConfigurationStrategy::SSLOption sslOption{};
-    const Database::ConfigurationStrategy::DBMapping dbMapping{};
-
-    const Database::ConfigurationStrategy configurationStrategy{ Database::WrappersStrategy::Mongo, "43.139.123.106", 27017, "tcretest", "dbOwner", "TCRE", true, 10, 1000, 500, 1, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping };
-
-    Database::DatabaseFlush mysqlConnectorDatabaseFlush{ configurationStrategy };
-
-    const auto bookContainer = ancientBooksContainer.GetBookContainer();
-
-    for (const auto& book : bookContainer->GetContainer())
+    for (const auto& book : bookContainer.GetContainer())
     {
-        const auto database = mysqlConnectorDatabaseFlush.SelectOne(DatabaseEntity::BookEntity::GetSelect(Database::WrappersStrategy::Mongo, book->GetId()),
-                                                                    DatabaseEntity::BookEntity::GetDatabaseFieldContainer());
+        const auto bookEntity = convertEntity.Convert(*book);
 
-        auto bookEntity = DatabaseEntity::BookEntity::Create(database, Database::WrappersStrategy::Mongo, book->GetId());
-
-        bookEntity.SetGenus(book->GetGenus());
-        bookEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(book->GetName()));
-        Database::Traits::StringArray alias{};
-        for (auto iter = book->GetAliasBegin(); iter != book->GetAliasEnd(); ++iter)
-        {
-            alias.emplace_back(CoreTools::StringConversion::StandardConversionUtf8(*iter));
-        }
-        bookEntity.SetAlias(alias);
-        bookEntity.SetVolume(book->GetVolume());
-        bookEntity.SetAuthor(book->GetAuthor());
-        Database::Traits::StringArray authorNotes{};
-        for (auto iter = book->GetAuthorNotesBegin(); iter != book->GetAuthorNotesEnd(); ++iter)
-        {
-            authorNotes.emplace_back(CoreTools::StringConversion::StandardConversionUtf8(*iter));
-        }
-        bookEntity.SetAuthorNotes(authorNotes);
-        bookEntity.SetAnnotator(book->GetAnnotator());
-        Database::Traits::StringArray annotateNotes{};
-        for (auto iter = book->GetAnnotateNotesBegin(); iter != book->GetAnnotateNotesEnd(); ++iter)
-        {
-            annotateNotes.emplace_back(CoreTools::StringConversion::StandardConversionUtf8(*iter));
-        }
-        bookEntity.SetAnnotateNotes(annotateNotes);
-        bookEntity.SetCountry(book->GetCountry());
-        bookEntity.SetPerson(book->GetPerson());
-
-        Database::Traits::StringArray unansweredQuestion{};
-        for (auto iter = book->GetUnansweredQuestionBegin(); iter != book->GetUnansweredQuestionEnd(); ++iter)
-        {
-            unansweredQuestion.emplace_back(CoreTools::StringConversion::StandardConversionUtf8(*iter));
-        }
-        bookEntity.SetUnansweredQuestion(unansweredQuestion);
-
-        mysqlConnectorDatabaseFlush.ChangeDatabase(0, bookEntity.GetModify());
+        ASSERT_NOT_THROW_EXCEPTION_2(EqualTest, *book, bookEntity);
     }
+}
+
+void DatabaseGenerateServerCoreTesting::BookConvertTesting::EqualTest(const Book& book, const BookEntity& bookEntity)
+{
+    ASSERT_EQUAL(bookEntity.GetGenus(), book.GetGenus());
+    ASSERT_EQUAL(bookEntity.GetName(), CoreTools::StringConversion::StandardConversionUtf8(book.GetName()));
+    ASSERT_EQUAL(bookEntity.GetAlias(), Convert(book.GetAliasBegin(), book.GetAliasEnd()));
+    ASSERT_EQUAL(bookEntity.GetVolume(), book.GetVolume());
+    ASSERT_EQUAL(bookEntity.GetAuthor(), book.GetAuthor());
+    ASSERT_EQUAL(bookEntity.GetAuthorNotes(), Convert(book.GetAuthorNotesBegin(), book.GetAuthorNotesEnd()));
+    ASSERT_EQUAL(bookEntity.GetAnnotator(), book.GetAnnotator());
+    ASSERT_EQUAL(bookEntity.GetAnnotateNotes(), Convert(book.GetAnnotateNotesBegin(), book.GetAnnotateNotesEnd()));
+    ASSERT_EQUAL(bookEntity.GetCountry(), book.GetCountry());
+    ASSERT_EQUAL(bookEntity.GetPerson(), book.GetPerson());
+    ASSERT_EQUAL(bookEntity.GetUnansweredQuestion(), Convert(book.GetUnansweredQuestionBegin(), book.GetUnansweredQuestionEnd()));
 }

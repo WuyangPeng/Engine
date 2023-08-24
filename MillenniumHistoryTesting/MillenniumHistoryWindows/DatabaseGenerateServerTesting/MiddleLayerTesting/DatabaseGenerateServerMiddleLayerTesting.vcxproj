@@ -523,10 +523,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="Configuration\Database.json" />
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\DatabaseGenerateServerMiddleLayerTesting.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Testing.json" />
+    <None Include="Resource\AncientBooksCsv\Article.csv" />
+    <None Include="Resource\AncientBooksCsv\Book.csv" />
+    <None Include="Resource\AncientBooksCsv\Calendar.csv" />
+    <None Include="Resource\AncientBooksCsv\Category.csv" />
+    <None Include="Resource\AncientBooksCsv\Character.csv" />
+    <None Include="Resource\AncientBooksCsv\Country.csv" />
+    <None Include="Resource\AncientBooksCsv\Day.csv" />
+    <None Include="Resource\AncientBooksCsv\Emperor.csv" />
+    <None Include="Resource\AncientBooksCsv\Gather.csv" />
+    <None Include="Resource\AncientBooksCsv\Genus.csv" />
+    <None Include="Resource\AncientBooksCsv\Geographic.csv" />
+    <None Include="Resource\AncientBooksCsv\Identity.csv" />
+    <None Include="Resource\AncientBooksCsv\ImperialCourt.csv" />
+    <None Include="Resource\AncientBooksCsv\Month.csv" />
+    <None Include="Resource\AncientBooksCsv\ReignTitle.csv" />
+    <None Include="Resource\AncientBooksCsv\SexagenaryCycle.csv" />
+    <None Include="Resource\AncientBooksCsv\Source.csv" />
+    <None Include="Resource\AncientBooksCsv\Version.csv" />
+    <None Include="Resource\AncientBooksCsv\Year.csv" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
@@ -543,24 +563,50 @@
     <Text Include="Resource\Todo\Level 9.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\ArtificialIntelligenceSuite\ArtificialIntelligenceManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\ArtificialIntelligenceSuite\ArtificialIntelligenceSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\AudioSuite\AudioManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\AudioSuite\AudioSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\CameraSystemsSuite\CameraSystemsManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\CameraSystemsSuite\CameraSystemsSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\EventSuite\EventManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\EventSuite\EventSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\GUISuite\GUIManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\GUISuite\GUISuite.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\HelperSuite\HelperSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\InputSuite\InputManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\InputSuite\InputSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\MessageSuite\MessageManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\MessageSuite\MessageSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\NetworkSuite\NetworkManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\NetworkSuite\NetworkSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\ObjectLogicSuite\ObjectLogicManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\ObjectLogicSuite\ObjectLogicSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\PhysicalModellingSuite\PhysicalModellingManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\PhysicalModellingSuite\PhysicalModellingSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\RenderingSuite\RenderingManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\RenderingSuite\RenderingSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\ResourceSuite\ResourceManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\ResourceSuite\ResourceSuite.h" />
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\SystemSuite\SystemManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\SystemSuite\SystemSuite.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\TestingHelper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\ArtificialIntelligenceSuite\ArtificialIntelligenceManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\AudioSuite\AudioManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\CameraSystemsSuite\CameraSystemsManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\EventSuite\EventManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\GUISuite\GUIManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\InputSuite\InputManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\MessageSuite\MessageManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\NetworkSuite\NetworkManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\ObjectLogicSuite\ObjectLogicManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\PhysicalModellingSuite\PhysicalModellingManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\RenderingSuite\RenderingManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\ResourceSuite\ResourceManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\SystemSuite\SystemManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\MiddleLayerTesting\TestingMain.cpp" />

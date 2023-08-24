@@ -1,0 +1,6 @@
+$Copyright$
+
+#include "ThreadingCoreRenderEngine/ThreadingCoreRenderEngineLib.h"
+
+#include "$ModuleName$/$ModuleName$$CoreName$/$ModuleName$$CoreName$Lib.h"
+#include "$ModuleName$/$ModuleName$MiddleLayer/$ModuleName$MiddleLayerLib.h"

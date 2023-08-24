@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:38)
+///	版本：0.9.1.3 (2023/08/08 19:29)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_DIRECTORY_DEFAULT_NAME_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_DIRECTORY_DEFAULT_NAME_H
@@ -21,6 +21,7 @@ namespace Framework
     {
     public:
         using ClassType = DirectoryDefaultName;
+
         using String = System::String;
 
     public:

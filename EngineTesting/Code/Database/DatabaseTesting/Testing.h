@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.10 (2023/05/25 14:04)
+///	版本：0.9.1.3 (2023/08/14 16:26)
 
 #ifndef DATABASE_TESTING_H
 #define DATABASE_TESTING_H
 
 #include "ConfigurationSuite/ConfigurationSuite.h"
 #include "DatabaseEntityCodeGenerationSuite/DatabaseEntityCodeGenerationSuite.h"
-#include "DatabaseGenerateSuite/DatabaseGenerateSuite.h"
 #include "DatabaseInterfaceSuite/DatabaseInterfaceSuite.h"
 #include "FlatFileWrappersSuite/FlatFileWrappersSuite.h"
 #include "HelperSuite/HelperSuite.h"

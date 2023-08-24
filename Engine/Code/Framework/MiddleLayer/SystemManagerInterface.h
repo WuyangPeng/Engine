@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:22)
+///	版本：0.9.1.3 (2023/08/08 14:04)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SYSTEM_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_SYSTEM_MANAGER_INTERFACE_H
@@ -19,9 +19,9 @@
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
+// 任务管理（分配相关任务至多处理器、线程管理等）。
 namespace Framework
 {
-    // 任务管理（分配相关任务至多处理器、线程管理等）。
     class FRAMEWORK_DEFAULT_DECLARE SystemManagerInterface : public EngineMiddleLayerInterface
     {
     public:
@@ -51,15 +51,15 @@ namespace Framework
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
 
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Input);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(ObjectLogic);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Message);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Event);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Resource);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Audio);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(CameraSystems);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Rendering);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Engine);
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Input)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(ObjectLogic)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Message)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Event)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Resource)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Audio)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(CameraSystems)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Rendering)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Engine)
 
     private:
         PackageType impl;

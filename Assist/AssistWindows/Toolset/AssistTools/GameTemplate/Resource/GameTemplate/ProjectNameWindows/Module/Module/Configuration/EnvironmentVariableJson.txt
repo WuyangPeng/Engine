@@ -1,0 +1,4 @@
+{
+  "DefaultEnvironment": "",
+  "Version": "$Version$"
+}

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:48)
+///	版本：0.9.1.3 (2023/08/09 16:36)
 
 #include "Framework/FrameworkExport.h"
 
@@ -61,17 +61,17 @@ void Framework::PixelScreenDrawLine::DrawLineOnX()
     auto y = yMin;
     line.emplace_back(x, y);
 
-    auto decy = twiceDistanceY - distanceX;
+    auto decY = twiceDistanceY - distanceX;
     while (x != xMax)
     {
-        if (0 <= decy)
+        if (0 <= decY)
         {
-            decy -= twiceDistanceX;
+            decY -= twiceDistanceX;
             y += stepY;
         }
 
         x += stepX;
-        decy += twiceDistanceY;
+        decY += twiceDistanceY;
 
         // 处理像素。
         line.emplace_back(x, y);
@@ -86,17 +86,17 @@ void Framework::PixelScreenDrawLine::DrawLineOnY()
     auto y = yMin;
     line.emplace_back(x, y);
 
-    auto decx = twiceDistanceX - distanceY;
+    auto decX = twiceDistanceX - distanceY;
     while (y != yMax)
     {
-        if (0 <= decx)
+        if (0 <= decX)
         {
-            decx -= twiceDistanceY;
+            decX -= twiceDistanceY;
             x += stepX;
         }
 
         y += stepY;
-        decx += twiceDistanceX;
+        decX += twiceDistanceX;
 
         // 处理像素。
         line.emplace_back(x, y);
@@ -118,20 +118,19 @@ bool Framework::PixelScreenDrawLine::IsEndpointCorrect() const
     }
     else
     {
-        const auto iter = line.cbegin();
-        if (iter->GetWindowX() != xMin || iter->GetWindowY() != yMin)
+        if (const auto iter = line.cbegin();
+            iter->GetWindowX() != xMin || iter->GetWindowY() != yMin)
         {
             return false;
         }
 
-        const auto reverseIter = line.crbegin();
-        if (reverseIter->GetWindowX() != xMax || reverseIter->GetWindowY() != yMax)
+        if (const auto reverseIter = line.crbegin();
+            reverseIter->GetWindowX() != xMax || reverseIter->GetWindowY() != yMax)
         {
             return false;
         }
     }
 
-  
     return true;
 }
 #endif  // OPEN_CLASS_INVARIANT

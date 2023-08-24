@@ -1,15 +1,18 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 最后的霸王版本：0.0.0.1 (2019/10/13 18:59)
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
+///
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
+///
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:43)
 
 #ifndef UPDATE_SERVER_MIDDLE_LAYER_EVENT_MIDDLE_LAYER_EVENT_H
 #define UPDATE_SERVER_MIDDLE_LAYER_EVENT_MIDDLE_LAYER_EVENT_H
 
 #include "UpdateServer/UpdateServerMiddleLayer/UpdateServerMiddleLayerDll.h"
 
-#include "UpdateServer/UpdateServerMiddleLayer/Macro/ExportMacro.h"
+#include "UpdateServer/UpdateServerMiddleLayer/Helper/ExportMacro.h"
 #include "Framework/MiddleLayer/EventManagerInterface.h"
 
 namespace UpdateServerMiddleLayer
@@ -18,10 +21,10 @@ namespace UpdateServerMiddleLayer
     {
     public:
         using ClassType = EventManager;
-        using ParentType = Framework::EventManagerInterface;
+        using ParentType = EventManagerInterface;
 
     public:
-        explicit EventManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
+        EventManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

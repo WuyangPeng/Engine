@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:09)
+///	版本：0.9.1.3 (2023/08/10 15:52)
 
 #include "WindowCreateParameterTesting.h"
 #include "CoreTools/Contract/Noexcept.h"
@@ -17,13 +17,8 @@
 
 using namespace std::literals;
 
-namespace Framework
-{
-    using TestingType = WindowCreateParameter;
-}
-
-Framework::WindowCreateParameterTesting::WindowCreateParameterTesting(const OStreamShared& stream, HWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+Framework::WindowCreateParameterTesting::WindowCreateParameterTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream }, hWnd{ hWnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -43,15 +38,15 @@ void Framework::WindowCreateParameterTesting::MainTest()
 void Framework::WindowCreateParameterTesting::ValueTest()
 {
     const auto windowsName = SYSTEM_TEXT("WindowsName"s);
-    const auto style = System::WindowsStyles::OverlappedWindow | System::WindowsStyles::Visible;
-    const WindowPoint leftTopCorner{};
+    constexpr auto style = System::WindowsStyles::OverlappedWindow | System::WindowsStyles::Visible;
+    constexpr WindowPoint leftTopCorner{};
     constexpr auto menu = nullptr;
 
-    TestingType parameter{ windowsName, style, hwnd, menu, leftTopCorner };
+    const WindowCreateParameter parameter{ windowsName, style, hWnd, menu, leftTopCorner };
 
     ASSERT_EQUAL(parameter.GetWindowsName(), windowsName);
     ASSERT_ENUM_EQUAL(parameter.GetStyle(), style);
-    ASSERT_EQUAL(parameter.GetParent(), hwnd);
+    ASSERT_EQUAL(parameter.GetParent(), hWnd);
     ASSERT_EQUAL(parameter.GetMenu(), menu);
     ASSERT_EQUAL(parameter.GetLeftTopCorner(), leftTopCorner);
 }

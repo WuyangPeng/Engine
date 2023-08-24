@@ -5,11 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:09)
+///	版本：0.9.1.3 (2023/08/14 10:45)
 
 #include "ModelMiddleLayerTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Threading/SyncTools.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
@@ -26,11 +25,6 @@
 #include "Framework/WindowCreate/WindowSize.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
-
-namespace Framework
-{
-    using TestingType = ModelMiddleLayer;
-}
 
 Framework::ModelMiddleLayerTesting::ModelMiddleLayerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -55,7 +49,7 @@ void Framework::ModelMiddleLayerTesting::MiddleLayerTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    ModelMiddleLayer middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
     ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
 
@@ -72,7 +66,7 @@ void Framework::ModelMiddleLayerTesting::MiddleLayerTest()
 
     constexpr WindowPoint point{};
     const WindowSize size{};
-    const VirtualKeysTypes virtualKeysTypes{};
+    constexpr VirtualKeysTypes virtualKeysTypes{};
 
     ASSERT_TRUE(middleLayer.Paint());
     ASSERT_TRUE(middleLayer.Move(point));
@@ -94,15 +88,15 @@ void Framework::ModelMiddleLayerTesting::FrameRateTest()
     constexpr auto maxTimer = 30;
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    ModelMiddleLayer middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
     constexpr auto frame = System::gMillisecond / maxTimer;
-    const auto aTestLoopCount = maxTimer * GetTestLoopCount();
+    const auto maxTimerTestLoopCount = maxTimer * GetTestLoopCount();
 
     CoreTools::CustomTime customTime{};
     auto delta = 0;
     auto frameSum = 0;
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < maxTimerTestLoopCount; ++i)
     {
         middleLayer.UpdateFrameCount();
 

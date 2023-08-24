@@ -5,21 +5,19 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:25)
+///	版本：0.9.1.3 (2023/08/08 16:11)
 
 #include "Framework/FrameworkExport.h"
 
 #include "InputManagerInterface.h"
 #include "Flags/InputMiddleLayerFlags.h"
-#include "Flags/MiddleLayerPlatformFlags.h"
 #include "Detail/EngineMiddleLayerInterfaceImpl.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
 
 Framework::InputManagerInterface::InputManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ System::EnumCastUnderlying(InputMiddleLayer::Count) }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, InputManagerInterface)
@@ -31,21 +29,21 @@ ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Input, CameraSystems)
 
 bool Framework::InputManagerInterface::Paint()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return ParentType::Paint();
 }
 
 bool Framework::InputManagerInterface::Move(const WindowPoint& point)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return ParentType::Move(point);
 }
 
 bool Framework::InputManagerInterface::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return ParentType::Resize(windowDisplay, size);
 }

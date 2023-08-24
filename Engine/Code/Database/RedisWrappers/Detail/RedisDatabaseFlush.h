@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/24 21:13)
+///	版本：0.9.1.3 (2023/08/14 15:03)
 
 #ifndef DATABASE_REDIS_WRAPPERS_REDIS_DATABASE_FLUSH_H
 #define DATABASE_REDIS_WRAPPERS_REDIS_DATABASE_FLUSH_H
@@ -13,9 +13,7 @@
 #include "Database/DatabaseDll.h"
 
 #include "RedisConnection.h"
-#include "Database/Configuration/ConfigurationStrategy.h"
 #include "Database/DatabaseInterface/DatabaseFlush.h"
-#include "Database/DatabaseInterface/DatabaseInterfaceFwd.h"
 #include "Database/DatabaseInterface/Detail/DatabaseFlushImpl.h"
 
 #include <vector>
@@ -29,6 +27,7 @@ namespace Database
     public:
         using ClassType = RedisDatabaseFlush;
         using ParentType = DatabaseFlushImpl;
+
         using RedisConnectionSharedPtr = std::shared_ptr<RedisConnection>;
         using Container = std::vector<RedisConnectionSharedPtr>;
 
@@ -41,7 +40,7 @@ namespace Database
 
         NODISCARD BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const override;
         NODISCARD ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer) const override;
-      
+
         void Wait() override;
 
     private:

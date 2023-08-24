@@ -22,6 +22,111 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{91d623fe-1b3a-4f79-8922-cea8b4124741}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\GameTemplate\Generate">
+      <UniqueIdentifier>{814d33bc-e13e-45e8-830b-62580b6f3d98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Generate\Configuration">
+      <UniqueIdentifier>{2ec247d2-ab70-4634-a853-f39a56894447}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Doc">
+      <UniqueIdentifier>{79cc84c3-9ff7-46f1-a74b-3dc89387703f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Bat">
+      <UniqueIdentifier>{9400e68d-9959-43d5-bf8e-18ad8b2ad4b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Code">
+      <UniqueIdentifier>{0f215b4c-47d2-460d-82b2-52af29bb2f3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Code\Project">
+      <UniqueIdentifier>{55ca18d0-b48c-413b-9c4a-b0589f884ae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Code\Project\Helper">
+      <UniqueIdentifier>{3681d48b-4612-400d-b221-b82bcdfb7aa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Code\Module">
+      <UniqueIdentifier>{7469f6fe-a533-4be0-83dd-098934286821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Code\Module\Core">
+      <UniqueIdentifier>{6c162e35-17ff-44a5-b625-94c898e093a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Code\Module\Core\Helper">
+      <UniqueIdentifier>{e22c0de3-8802-417c-b280-838051bc1c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Code\Module\Core\Engine">
+      <UniqueIdentifier>{e77a1281-89d5-4b69-8dec-8d66f31baea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Code\Module\MiddleLayer">
+      <UniqueIdentifier>{46ab937d-d899-47fc-9f8e-b13f6c396c50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Code\Module\MiddleLayer\Helper">
+      <UniqueIdentifier>{ecd2323c-bacc-416f-9c28-c01581719720}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Code\Module\MiddleLayer\Input">
+      <UniqueIdentifier>{7f46abd8-8216-45c8-b873-3034f2184e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Code\Module\MiddleLayer\MiddleLayer">
+      <UniqueIdentifier>{e326aacc-9250-4e36-91c6-8bc21aa0fa02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Code\Module\Module">
+      <UniqueIdentifier>{dde39e3a-6fa7-4d60-9599-5f015e63ffad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Doxygen">
+      <UniqueIdentifier>{67577017-b0ae-4088-b4ff-2037ced555d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\Run">
+      <UniqueIdentifier>{aded4bca-eb82-462f-8e87-3942d65f5503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows">
+      <UniqueIdentifier>{2985f4f4-b590-4e35-98e8-d0ae7ff8f8a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Project">
+      <UniqueIdentifier>{416624c0-8d54-417d-973a-b49b63c77a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Project\Project">
+      <UniqueIdentifier>{c5b39ed0-9253-4672-b4e5-4712878d7db4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Project\Project\Configuration">
+      <UniqueIdentifier>{6c4891a3-cb2d-4c3b-a218-f2c017915ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Project\Project\Resource">
+      <UniqueIdentifier>{188b5665-3e86-4eb6-a4ca-d7932be121f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Project\Project\Resource\Todo">
+      <UniqueIdentifier>{69abb6d1-81fc-40fc-98f7-3193a69ec966}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Module">
+      <UniqueIdentifier>{d289813b-16e4-4407-ac11-5bc17f716c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Module\Module">
+      <UniqueIdentifier>{fcfe0413-122a-4d5d-962c-026252058e8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Module\ModuleCore">
+      <UniqueIdentifier>{984989ed-663b-4d25-86d1-cd2e103952c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer">
+      <UniqueIdentifier>{d1c103ce-f026-4977-b668-f75bddce16ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Module\Module\Resource">
+      <UniqueIdentifier>{62f9810e-775e-44a0-8133-721f1097869b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Module\ModuleCore\Resource">
+      <UniqueIdentifier>{29d496a5-2a9d-480b-aa52-6d6318753182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource">
+      <UniqueIdentifier>{d9f78232-e978-4a81-82b5-2086590d27d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Module\Module\Configuration">
+      <UniqueIdentifier>{06f0be40-a0ff-4c8a-aa20-1bfc84e7227c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Module\Module\Resource\Todo">
+      <UniqueIdentifier>{e3f7cb31-0586-4b44-962f-75ed84d7f094}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Module\ModuleCore\Resource\Todo">
+      <UniqueIdentifier>{a73ac5a1-e5b3-4948-a116-2fc5f423afc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource\Todo">
+      <UniqueIdentifier>{d6d577fa-5b03-4bf6-9bb1-927ecccdfc97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Toolset\AssistTools\GameTemplate\GameTemplateMain.cpp">
@@ -58,16 +163,16 @@
     <None Include="Configuration\Log.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Configuration\StringReplacing.json">
-      <Filter>配置</Filter>
-    </None>
     <None Include="Resource\ReadMe.md">
       <Filter>资源文件</Filter>
     </None>
     <None Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="Resource\GameTemplate\SetEnvironment.bat">
+    <None Include="Configuration\GameTemplate.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\GameTemplate\GenerateProjects.json">
       <Filter>资源文件\GameTemplate</Filter>
     </None>
   </ItemGroup>
@@ -102,143 +207,416 @@
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateDllMainCpp.txt">
+    <Text Include="Resource\GameTemplate\ClangFormat.txt">
       <Filter>资源文件\GameTemplate</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateEngineFwdH.txt">
+    <Text Include="Resource\GameTemplate\Gitignore.txt">
       <Filter>资源文件\GameTemplate</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateEngineH.txt">
+    <Text Include="Resource\GameTemplate\ReadMeMd.txt">
       <Filter>资源文件\GameTemplate</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateEnvironmentVariable.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Generate\Gitignore.txt">
+      <Filter>资源文件\GameTemplate\Generate</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateExportMacroH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Generate\ReadMeMd.txt">
+      <Filter>资源文件\GameTemplate\Generate</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Generate\Configuration\EnvironmentVariableJson.txt">
+      <Filter>资源文件\GameTemplate\Generate\Configuration</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateHelperCpp.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Generate\Configuration\LogJson.txt">
+      <Filter>资源文件\GameTemplate\Generate\Configuration</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateHelperH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Generate\Configuration\ProjectJson.txt">
+      <Filter>资源文件\GameTemplate\Generate\Configuration</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateInputManagerDetailH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Generate\Configuration\ProjectNameJson.txt">
+      <Filter>资源文件\GameTemplate\Generate\Configuration</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateInputManagerEngineFwdH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Generate\Configuration\RendererJson.txt">
+      <Filter>资源文件\GameTemplate\Generate\Configuration</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateInputManagerEngineH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Bat\DelDoxygenFileBat.txt">
+      <Filter>资源文件\GameTemplate\Bat</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateInputManagerH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Gitignore.txt">
+      <Filter>资源文件\GameTemplate\Code</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateLibCpp.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\ReadMeMd.txt">
+      <Filter>资源文件\GameTemplate\Code</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateLog.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\ProjectFwdH.txt">
+      <Filter>资源文件\GameTemplate\Code\Project</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateMacroFwdH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\ProjectH.txt">
+      <Filter>资源文件\GameTemplate\Code\Project</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateMacroH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\ProjectHelperCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Project</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateMainCpp.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\ProjectHelperH.txt">
+      <Filter>资源文件\GameTemplate\Code\Project</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateManagerClassInvariantMacroH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\ProjectLibCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Project</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateManagerCustomAssertMacroH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\ProjectMainCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Project</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateManagerDllH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\ProjectMiddleLayerMessageCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Project</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateManagerExportH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\ProjectMiddleLayerMessageH.txt">
+      <Filter>资源文件\GameTemplate\Code\Project</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateManagerFwdH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\VersionH.txt">
+      <Filter>资源文件\GameTemplate\Code\Project</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateManagerH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\Helper\HelperFwdH.txt">
+      <Filter>资源文件\GameTemplate\Code\Project\Helper</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateManagerImportH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\Helper\HelperH.txt">
+      <Filter>资源文件\GameTemplate\Code\Project\Helper</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateManagerLibH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\Helper\ProjectClassInvariantMacroH.txt">
+      <Filter>资源文件\GameTemplate\Code\Project\Helper</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateManagerMiddleLayerFwdH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\Helper\ProjectCustomAssertMacroH.txt">
+      <Filter>资源文件\GameTemplate\Code\Project\Helper</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateManagerMiddleLayerH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Project\Helper\UserMacroH.txt">
+      <Filter>资源文件\GameTemplate\Code\Project\Helper</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateManagerNoImportH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\DllLibCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateMessageCpp.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\DllLibH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateMessageH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\DllMainCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateMiddleLayerVcxproj.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\ModuleCoreDllH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateMiddleLayerVcxprojFilters.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\ModuleCoreExportH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateModuleVcxproj.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\ModuleCoreFwdH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateModuleVcxprojFilters.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\ModuleCoreH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateOtherManagerCpp.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\ModuleCoreImportH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateOtherManagerH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\ModuleCoreLibH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplatePlaceholderCpp.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\ModuleCoreNoImportH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplatePlaceholderH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\Helper\ExportMacroH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core\Helper</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateUserMacroH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\Helper\HelperFwdH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core\Helper</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateVcxproj.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\Helper\HelperH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core\Helper</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateVcxprojFilters.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\Helper\ModuleCoreClassInvariantMacroH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core\Helper</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplate.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\Helper\ModuleCoreCustomAssertMacroH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core\Helper</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateDllLibCpp.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\Helper\UserMacroH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core\Helper</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateDllLibMiddleLayerCpp.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\Engine\EngineFwdH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core\Engine</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateRenderer.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\Engine\EngineH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core\Engine</Filter>
     </Text>
-    <Text Include="Resource\GameTemplate\GameTemplateDllLibH.txt">
-      <Filter>资源文件\GameTemplate</Filter>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\Engine\PlaceholderCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core\Engine</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\Core\Engine\PlaceholderH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Core\Engine</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\DllLibCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\DllLibH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\DllMainCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\ModuleMiddleLayerDllH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\ModuleMiddleLayerExportH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\ModuleMiddleLayerFwdH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\ModuleMiddleLayerH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\ModuleMiddleLayerImportH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\ModuleMiddleLayerLibH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\ModuleMiddleLayerNoImportH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\Helper\ExportMacroH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\Helper</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\Helper\HelperFwdH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\Helper</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\Helper\HelperH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\Helper</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\Helper\ModuleMiddleLayerClassInvariantMacroH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\Helper</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\Helper\ModuleMiddleLayerCustomAssertMacroH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\Helper</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\Helper\UserMacroH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\Helper</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\Input\InputFwdH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\Input</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\Input\InputH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\Input</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\Input\InputManagerDetailH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\Input</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\Input\InputManagerH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\Input</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\MiddleLayer\MiddleLayerFwdH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\MiddleLayer\MiddleLayerH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\MiddleLayer\MiddleLayerManagerCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\MiddleLayer\MiddleLayer\MiddleLayerManagerH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\MiddleLayer\MiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\Module\ModuleH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Module</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\Module\ModuleHelperCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Module</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\Module\ModuleHelperH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Module</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\Module\ModuleLibCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Module</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\Module\ModuleMainCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Module</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\Module\ModuleMessageCpp.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Module</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Code\Module\Module\ModuleMessageH.txt">
+      <Filter>资源文件\GameTemplate\Code\Module\Module</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Doc\OverviewMd.txt">
+      <Filter>资源文件\GameTemplate\Doc</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Doxygen\Doxyfile.txt">
+      <Filter>资源文件\GameTemplate\Doxygen</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Run\Gitignore.txt">
+      <Filter>资源文件\GameTemplate\Run</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Run\ReadMeMd.txt">
+      <Filter>资源文件\GameTemplate\Run</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Run\RunAllBat.txt">
+      <Filter>资源文件\GameTemplate\Run</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Run\RunAllClientBat.txt">
+      <Filter>资源文件\GameTemplate\Run</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Run\RunAllServerBat.txt">
+      <Filter>资源文件\GameTemplate\Run</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\Run\RunBat.txt">
+      <Filter>资源文件\GameTemplate\Run</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Gitignore.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineDynamicGameStaticWin32DebugLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineDynamicGameStaticWin32ReleaseLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineDynamicGameStaticX64DebugLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineDynamicGameStaticX64ReleaseLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineStaticGameDynamicWin32DebugLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineStaticGameDynamicWin32ReleaseLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineStaticGameDynamicX64DebugLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectEngineStaticGameDynamicX64ReleaseLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectStaticWin32DebugLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectStaticWin32ReleaseLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectStaticX64DebugLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectStaticX64ReleaseLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectWin32DebugLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectWin32ReleaseLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectX64DebugLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ProjectX64ReleaseLibsProps.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\ReadMeMd.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\SetAllEnvironmentBat.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\SetEnvironmentBat.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\ProjectSln.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Project</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\ProjectVcxproj.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Project\Project</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\ProjectVcxprojFilters.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Project\Project</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Configuration\EnvironmentVariableJson.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Project\Project\Configuration</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Configuration\LogJson.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Project\Project\Configuration</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Configuration\ProjectJson.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Project\Project\Configuration</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Configuration\ProjectNameJson.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Project\Project\Configuration</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Configuration\RendererJson.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Project\Project\Configuration</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Resource\ReadMeMd.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Project\Project\Resource</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Resource\ScheduleMd.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Project\Project\Resource</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Project\Project\Resource\Todo\Level.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Project\Project\Resource\Todo</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleSln.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\ModuleVcxproj.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\Module</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\ModuleVcxprojFilters.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\Module</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\Configuration\EnvironmentVariableJson.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\Module\Configuration</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\Configuration\LogJson.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\Module\Configuration</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\Configuration\RendererJson.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\Module\Configuration</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\Resource\ReadMeMd.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\Module\Resource</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\Resource\ScheduleMd.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\Module\Resource</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\Module\Resource\Todo\Level.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\Module\Resource\Todo</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\ModuleCoreVcxprojFilters.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\ModuleCore</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\ModuleCoreVcxproj.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\ModuleCore</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\Resource\ReadMeMd.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\ModuleCore\Resource</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\Resource\ScheduleMd.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\ModuleCore\Resource</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleCore\Resource\Todo\Level.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\ModuleCore\Resource\Todo</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\ModuleMiddleLayerVcxproj.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\ModuleMiddleLayerVcxprojFilters.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource\ReadMeMd.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource\ScheduleMd.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource\Todo\Level.txt">
+      <Filter>资源文件\GameTemplate\ProjectNameWindows\Module\ModuleMiddleLayer\Resource\Todo</Filter>
     </Text>
   </ItemGroup>
 </Project>

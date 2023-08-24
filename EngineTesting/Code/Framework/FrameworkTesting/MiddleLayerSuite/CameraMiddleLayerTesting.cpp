@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:05)
+///	版本：0.9.1.3 (2023/08/12 16:33)
 
 #include "CameraMiddleLayerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -30,27 +30,27 @@ float Framework::CameraMiddleLayerTesting::CalculateMultiplier(const WindowSize&
     const auto width = windowSize.GetWindowWidth();
     const auto height = windowSize.GetWindowHeight();
 
-    const auto minValue = std::min(height, width);
+    const auto minValue = std::min(width, height);
     ASSERT_LESS_EQUAL_FAILURE_THROW(0, minValue, "除零错误。");
 
-    return 1.0f / minValue;
+    return 1.0f / static_cast<float>(minValue);
 }
 
 float Framework::CameraMiddleLayerTesting::GetXTrack(int x, float multiplier, const WindowSize& windowSize) const noexcept
 {
     const auto width = windowSize.GetWindowWidth();
 
-    return (2 * x - width) * multiplier;
+    return static_cast<float>(2 * x - width) * multiplier;
 }
 
 float Framework::CameraMiddleLayerTesting::GetYTrack(int y, float multiplier, const WindowSize& windowSize) const noexcept
 {
     const auto height = windowSize.GetWindowHeight();
 
-    return (2 * (height - 1 - y) - height) * multiplier;
+    return static_cast<float>(2 * (height - 1 - y) - height) * multiplier;
 }
 
-Rendering::TransformF Framework::CameraMiddleLayerTesting::CalculateTransform(const Transform& original, NumericalValueSymbol doValue, float speed, const AVectorf& axis)
+Rendering::TransformF Framework::CameraMiddleLayerTesting::CalculateTransform(const Transform& original, NumericalValueSymbol doValue, float speed, const AVector& axis)
 {
     auto result = original;
     auto rotate = result.GetRotate();
@@ -82,10 +82,10 @@ Mathematics::AVectorF Framework::CameraMiddleLayerTesting::Calculate3DVector(flo
     }
     zTrack *= -1.0f;
 
-    return AVectorf{ zTrack, yTrack, xTrack };
+    return AVector{ zTrack, yTrack, xTrack };
 }
 
-float Framework::CameraMiddleLayerTesting::CalculateAngle(const AVectorf& axis, float dot) noexcept(gAssert < 3 || gMathematicsAssert < 3)
+float Framework::CameraMiddleLayerTesting::CalculateAngle(const AVector& axis, float dot) noexcept(gAssert < 3 || gMathematicsAssert < 3)
 {
     if (!axis.IsZero())
     {
@@ -104,7 +104,7 @@ float Framework::CameraMiddleLayerTesting::CalculateAngle(const AVectorf& axis, 
     }
 }
 
-Mathematics::AVectorF Framework::CameraMiddleLayerTesting::CalculateAxis(const AVectorf& axis, float dot, float xBeginTrack, float yBeginTrack)
+Mathematics::AVectorF Framework::CameraMiddleLayerTesting::CalculateAxis(const AVector& axis, float dot, float xBeginTrack, float yBeginTrack)
 {
     if (!axis.IsZero())
     {
@@ -118,48 +118,48 @@ Mathematics::AVectorF Framework::CameraMiddleLayerTesting::CalculateAxis(const A
         if (dot < 0.0f)
         {
             const auto invLength = Mathematics::MathF::InvSqrt(xBeginTrack * xBeginTrack + yBeginTrack * yBeginTrack);
-            AVectorf result{ yBeginTrack * invLength, -xBeginTrack * invLength, 0.0f };
+            const AVector result{ yBeginTrack * invLength, -xBeginTrack * invLength, 0.0f };
             return result;
         }
         else
         {
-            return AVectorf::GetUnitX();
+            return AVector::GetUnitX();
         }
     }
 }
 
-void Framework::CameraMiddleLayerTesting::APointTest(const APointf& lhs, const APointf& rhs, const std::string& functionName, int index)
+void Framework::CameraMiddleLayerTesting::APointTest(const APoint& lhs, const APoint& rhs, const std::string& functionName, int index)
 {
-    using ApproximateFunction = bool (*)(const APointf& lhs, const APointf& rhs, float epsilon);
+    using ApproximateFunction = bool (*)(const APoint&, const APoint&, float);
     ApproximateFunction approximateFunction{ Mathematics::Approximate<float> };
-    auto message = "函数名为：" + functionName + "，序号：" + std::to_string(index);
+    const auto message = "函数名为：" + functionName + "，序号：" + std::to_string(index);
 
     ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(approximateFunction, lhs, rhs, Mathematics::MathF::GetZeroTolerance(), message);
 }
 
-void Framework::CameraMiddleLayerTesting::AVectorTest(const AVectorf& lhs, const AVectorf& rhs, const std::string& functionName, int index)
+void Framework::CameraMiddleLayerTesting::AVectorTest(const AVector& lhs, const AVector& rhs, const std::string& functionName, int index)
 {
-    using ApproximateFunction = bool (*)(const AVectorf& lhs, const AVectorf& rhs, float epsilon);
+    using ApproximateFunction = bool (*)(const AVector&, const AVector&, float);
     ApproximateFunction approximateFunction{ Mathematics::Approximate<float> };
-    auto message = "函数名为：" + functionName + "，序号：" + std::to_string(index);
+    const auto message = "函数名为：" + functionName + "，序号：" + std::to_string(index);
 
     ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(approximateFunction, lhs, rhs, Mathematics::MathF::GetZeroTolerance(), message);
 }
 
 void Framework::CameraMiddleLayerTesting::TransformTest(const Transform& lhs, const Transform& rhs, const std::string& functionName, int index)
 {
-    using ApproximateFunction = bool (*)(const Transform& lhs, const Transform& rhs, float epsilon);
+    using ApproximateFunction = bool (*)(const Transform&, const Transform&, float);
     ApproximateFunction approximateFunction{ Rendering::Approximate };
-    auto message = "函数名为：" + functionName + "，序号：" + std::to_string(index);
+    const auto message = "函数名为：" + functionName + "，序号：" + std::to_string(index);
 
     ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(approximateFunction, lhs, rhs, Mathematics::MathF::GetZeroTolerance(), message);
 }
 
-void Framework::CameraMiddleLayerTesting::MatrixTest(const Matrixf& lhs, const Matrixf& rhs, const std::string& functionName, int index)
+void Framework::CameraMiddleLayerTesting::MatrixTest(const Matrix& lhs, const Matrix& rhs, const std::string& functionName, int index)
 {
-    using ApproximateFunction = bool (*)(const Matrixf& lhs, const Matrixf& rhs, float epsilon);
+    using ApproximateFunction = bool (*)(const Matrix&, const Matrix&, float);
     ApproximateFunction approximateFunction{ Mathematics::Approximate };
-    auto message = "函数名为：" + functionName + "，序号：" + std::to_string(index);
+    const auto message = "函数名为：" + functionName + "，序号：" + std::to_string(index);
 
     ASSERT_APPROXIMATE_USE_FUNCTION_AND_MESSAGE(approximateFunction, lhs, rhs, Mathematics::MathF::GetZeroTolerance(), message);
 }

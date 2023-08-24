@@ -5,39 +5,41 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/24 12:16)
+///	版本：0.9.1.3 (2023/08/05 21:17)
 
-#ifndef DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_YEAR_CONVERT_TESTING_H
-#define DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_YEAR_CONVERT_TESTING_H
+#ifndef DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_YEAR_CONVERT_TESTING_H
+#define DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_YEAR_CONVERT_TESTING_H
 
-#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/AncientBooksContainer.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "ConvertTesting.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/YearContainer.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity/DatabaseEntityFwd.h"
 
 namespace DatabaseGenerateServerCoreTesting
 {
-    class YearConvertTesting final : public CoreTools::UnitTest
+    class YearConvertTesting final : public ConvertTesting
     {
     public:
         using ClassType = YearConvertTesting;
-        using ParentType = UnitTest;
+        using ParentType = ConvertTesting;
 
-        using AncientBooksContainer = AncientBooks::AncientBooksContainer;
+        using YearContainer = AncientBooks::YearContainer;
 
     public:
-        YearConvertTesting(const OStreamShared& stream, const AncientBooksContainer& ancientBooksContainer);
+        YearConvertTesting(const OStreamShared& stream, const YearContainer& yearContainer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        void MainTest();
-        void DoRunUnitTest() override;
-
-        void InitEnvironmentTest();
-        void DatabaseFlushTest();
+        using Year = AncientBooks::YearBase;
+        using YearEntity = DatabaseEntity::YearEntity;
 
     private:
-        AncientBooksContainer ancientBooksContainer;
+        void ConvertTest(const DatabaseFlushSharedPtr& databaseFlush) override;
+        void EqualTest(const Year& year, const YearEntity& yearEntity);
+
+    private:
+        YearContainer yearContainer;
     };
 }
 
-#endif  // DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_YEAR_CONVERT_TESTING_H
+#endif  // DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_YEAR_CONVERT_TESTING_H

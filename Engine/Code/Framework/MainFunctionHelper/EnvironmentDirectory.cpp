@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:40)
+///	版本：0.9.1.3 (2023/08/08 19:37)
 
 #include "Framework/FrameworkExport.h"
 
 #include "EnvironmentDirectory.h"
 #include "Detail/EnvironmentDirectoryImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Framework::EnvironmentDirectory::EnvironmentDirectory(const String& engineEnvironment, const String& engineDirectory)
     : impl{ engineEnvironment, engineDirectory }
@@ -22,10 +21,33 @@ Framework::EnvironmentDirectory::EnvironmentDirectory(const String& engineEnviro
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, EnvironmentDirectory)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, EnvironmentDirectory, GetEngineEnvironment, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, EnvironmentDirectory, GetEngineDirectory, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, EnvironmentDirectory, GetDirectory, UpperDirectory, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, EnvironmentDirectory, GetPath, RenderingAnalysisDirectory, System::String)
+Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetEngineEnvironment() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetEngineEnvironment();
+}
+
+Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetEngineDirectory() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetEngineDirectory();
+}
+
+Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetDirectory(UpperDirectory analysisDirectory) const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetDirectory(analysisDirectory);
+}
+
+Framework::EnvironmentDirectory::String Framework::EnvironmentDirectory::GetPath(RenderingAnalysisDirectory analysisDirectory) const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetPath(analysisDirectory);
+}
 
 System::String Framework::EnvironmentDirectory::GetPath(RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const
 {

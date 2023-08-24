@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:48)
+///	版本：0.9.1.3 (2023/08/11 20:23)
 
 #include "VirtualKeysTypesTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -15,11 +15,6 @@
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
 
 #include <random>
-
-namespace Framework
-{
-    using TestingType = VirtualKeysTypes;
-}
 
 Framework::VirtualKeysTypesTesting::VirtualKeysTypesTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -51,7 +46,7 @@ void Framework::VirtualKeysTypesTesting::WindowKeysTest()
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
-        TestingType::WParam wParam{};
+        VirtualKeysTypes::WParam wParam{};
 
         const auto isCtrlKeyDown = (random(generator) == 1 ? true : false);
         const auto isLeftMouseDown = (random(generator) == 1 ? true : false);
@@ -65,7 +60,7 @@ void Framework::VirtualKeysTypesTesting::WindowKeysTest()
         wParam = RandomParam(wParam, WindowApplicationTrait::MouseModifiers::modifierRightButton, isRightMouseDown);
         wParam = RandomParam(wParam, WindowApplicationTrait::MouseModifiers::modifierShift, isShiftKeyDown);
 
-        const TestingType virtualKeys{ wParam };
+        const VirtualKeysTypes virtualKeys{ wParam };
 
         ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), isCtrlKeyDown);
         ASSERT_EQUAL(virtualKeys.IsLeftMouseDown(), isLeftMouseDown);
@@ -89,7 +84,7 @@ System::WindowsWParam Framework::VirtualKeysTypesTesting::RandomParam(System::Wi
 
 void Framework::VirtualKeysTypesTesting::GlutKeysTest()
 {
-    const TestingType virtualKeys{};
+    constexpr VirtualKeysTypes virtualKeys{};
 
     ASSERT_FALSE(virtualKeys.IsCtrlKeyDown());
     ASSERT_FALSE(virtualKeys.IsLeftMouseDown());
@@ -108,34 +103,34 @@ void Framework::VirtualKeysTypesTesting::SetModifiersTest()
 
     for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
-        TestingType virtualKeys{};
+        VirtualKeysTypes virtualKeys{};
 
         const auto modifiers = GetModifiers(random(generator));
         const auto button = GetButton(random(generator));
 
         virtualKeys.SetModifiers(modifiers);
 
-        ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierControl));
+        ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(GlutApplicationTrait::MouseModifiers::modifierControl, modifiers));
         ASSERT_FALSE(virtualKeys.IsLeftMouseDown());
         ASSERT_FALSE(virtualKeys.IsMiddleMouseDown());
         ASSERT_FALSE(virtualKeys.IsRightMouseDown());
-        ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierShift));
+        ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(GlutApplicationTrait::MouseModifiers::modifierShift, modifiers));
 
         virtualKeys.SetMouseButtonsTypes(button);
 
-        ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierControl));
+        ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(GlutApplicationTrait::MouseModifiers::modifierControl, modifiers));
         ASSERT_EQUAL(virtualKeys.IsLeftMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierLeftButton));
         ASSERT_EQUAL(virtualKeys.IsMiddleMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierMiddleButton));
         ASSERT_EQUAL(virtualKeys.IsRightMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierRightButton));
-        ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierShift));
+        ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(GlutApplicationTrait::MouseModifiers::modifierShift, modifiers));
 
         virtualKeys.ClearMouseButtonsTypes();
 
-        ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierControl));
+        ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(GlutApplicationTrait::MouseModifiers::modifierControl, modifiers));
         ASSERT_FALSE(virtualKeys.IsLeftMouseDown());
         ASSERT_FALSE(virtualKeys.IsMiddleMouseDown());
         ASSERT_FALSE(virtualKeys.IsRightMouseDown());
-        ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierShift));
+        ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(GlutApplicationTrait::MouseModifiers::modifierShift, modifiers));
 
         virtualKeys.ClearKeyDownTypes();
 
@@ -155,11 +150,11 @@ void Framework::VirtualKeysTypesTesting::SetModifiersTest()
 
         virtualKeys.SetModifiers(modifiers);
 
-        ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierControl));
+        ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(GlutApplicationTrait::MouseModifiers::modifierControl, modifiers));
         ASSERT_EQUAL(virtualKeys.IsLeftMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierLeftButton));
         ASSERT_EQUAL(virtualKeys.IsMiddleMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierMiddleButton));
         ASSERT_EQUAL(virtualKeys.IsRightMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierRightButton));
-        ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierShift));
+        ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(GlutApplicationTrait::MouseModifiers::modifierShift, modifiers));
     }
 }
 

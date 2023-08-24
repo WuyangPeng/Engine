@@ -1,0 +1,31 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_H
+#define $ModuleUppercase$_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_H
+
+#include "$ModuleName$/$ModuleName$MiddleLayer/$ModuleName$MiddleLayerDll.h"
+
+#include "$ModuleName$/$ModuleName$MiddleLayer/Helper/ExportMacro.h"
+#include "Framework/Application/Flags/ApplicationTrait.h"
+#include "Framework/MiddleLayer/InputManager.h"
+
+namespace $ModuleName$MiddleLayer
+{
+    template <typename ApplicationTrait>
+    class InputManager : public Framework::InputManager<ApplicationTrait>
+    {
+    public:
+        using ClassType = InputManager<ApplicationTrait>;
+        using ParentType = Framework::InputManager<ApplicationTrait>;
+
+        using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
+    public:
+        InputManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+    };
+}
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_H

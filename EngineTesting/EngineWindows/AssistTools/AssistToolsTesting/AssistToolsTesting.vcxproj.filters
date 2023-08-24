@@ -57,9 +57,6 @@
     <None Include="Configuration\Testing.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Resource\GenerateProjectsSuite\SetEnvironment.bat">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </None>
     <None Include="Resource\ReadMe.md">
       <Filter>资源文件</Filter>
     </None>
@@ -69,6 +66,9 @@
     <None Include="Configuration\StringReplacing.json">
       <Filter>配置</Filter>
     </None>
+    <None Include="Resource\GenerateProjectsSuite\GenerateProjects.json">
+      <Filter>资源文件\GenerateProjectsSuite</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\Testing.h">
@@ -77,94 +77,7 @@
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\CopyrightDataTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateProjectsSuite.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateCodeDirectoryTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateDllLibTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateDllMainTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateEngineDirectoryTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateEngineTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateHeaderTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateHelperTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateLibTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateLogJsonTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMacroTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMainTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateManagerLibTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateManagerTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMessageTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMiddleLayerVcxprojFiltersTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMiddleLayerVcxprojTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateModuleVcxprojFiltersTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateModuleVcxprojTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateSolutionTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateVcxprojFiltersTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateVcxprojTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateCodeDirectoryTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateEngineDirectoryTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateEngineTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateSolutionTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateVcxprojFiltersTesting.h">
-      <Filter>GenerateProjectsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateVcxprojTesting.h">
       <Filter>GenerateProjectsSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\BmpColorToGraySuite\BmpColorToGraySuite.h">
@@ -193,296 +106,8 @@
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingMain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\CopyrightDataTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateCodeDirectoryTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateDllLibTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateDllMainTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateEngineDirectoryTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateEngineTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateHeaderTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateHelperTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateLibTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateLogJsonTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMacroTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMainTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateManagerLibTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateManagerTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMessageTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMiddleLayerVcxprojFiltersTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMiddleLayerVcxprojTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateModuleVcxprojFiltersTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateModuleVcxprojTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateSolutionTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateVcxprojFiltersTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateVcxprojTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateCodeDirectoryTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateEngineDirectoryTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateEngineTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateSolutionTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateVcxprojFiltersTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateVcxprojTesting.cpp">
-      <Filter>GenerateProjectsSuite 源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllMainCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllMainCppSpecial.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateEngineFwdH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateEngineH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateEnvironmentVariable.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateExportMacroH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateExportMacroHSpecial.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateHelperCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateHelperH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateHelperHSpecial.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateHSpecial.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateInputManagerDetailH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateInputManagerEngineFwdH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateInputManagerEngineH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateInputManagerH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateLibCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateLibCppSpecial.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateLog.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMacroFwdH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMacroH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMainCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMainCppSpecial.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerClassInvariantMacroH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerCustomAssertMacroH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerDllH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerExportH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerFwdH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerHSpecial.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerImportH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerLibH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerLibHSpecial.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerMiddleLayerFwdH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerMiddleLayerH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerNoImportH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMessageCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMessageH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMessageHSpecial.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMiddleLayerVcxproj.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMiddleLayerVcxprojFilters.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateModuleVcxproj.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateModuleVcxprojFilters.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateOtherManagerCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateOtherManagerH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateOtherManagerHSpecial.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplatePlaceholderCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplatePlaceholderH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTesting.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingExeLibCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingHelperCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingHelperH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingHSpecial.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingJson.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingLibCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingMainCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateUserMacroH.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateVcxproj.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateVcxprojFilters.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTestingTemplate.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTestingTemplateVcxproj.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTestingTemplateVcxprojFilters.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplate.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllLibCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllLibCppSpecial.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllLibMiddleLayerCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
     <Text Include="Resource\Todo\Level 0.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
@@ -513,7 +138,13 @@
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateRenderer.txt">
+    <Text Include="Resource\GenerateProjectsSuite\ClangFormat.txt">
+      <Filter>资源文件\GenerateProjectsSuite</Filter>
+    </Text>
+    <Text Include="Resource\GenerateProjectsSuite\Gitignore.txt">
+      <Filter>资源文件\GenerateProjectsSuite</Filter>
+    </Text>
+    <Text Include="Resource\GenerateProjectsSuite\ReadMeMd.txt">
       <Filter>资源文件\GenerateProjectsSuite</Filter>
     </Text>
   </ItemGroup>

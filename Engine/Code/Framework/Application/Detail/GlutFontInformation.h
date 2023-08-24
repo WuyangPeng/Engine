@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:42)
+///	版本：0.9.1.3 (2023/08/09 15:00)
 
 #ifndef FRAMEWORK_APPLICATION_GLUT_FONT_INFORMATION_H
 #define FRAMEWORK_APPLICATION_GLUT_FONT_INFORMATION_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "FontInformationImpl.h"
 
@@ -23,9 +25,9 @@ namespace Framework
     public:
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD int GetStringWidth(const String& text) const final;
-        NODISCARD int GetCharacterWidth(const TChar character) const noexcept final;
-        NODISCARD int GetFontHeight() const noexcept final;
+        NODISCARD int GetStringWidth(const String& text) const override;
+        NODISCARD int GetCharacterWidth(TChar character) const noexcept override;
+        NODISCARD int GetFontHeight() const noexcept override;
     };
 }
 

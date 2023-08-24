@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 19:18)
+///	版本：0.9.1.3 (2023/08/01 20:04)
 
 #ifndef ANIMATION_TESTING_TESTING_HELPER_H
 #define ANIMATION_TESTING_TESTING_HELPER_H
@@ -15,7 +15,7 @@
 
 namespace Animation
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
     public:
         using ClassType = TestingHelper;
@@ -29,9 +29,8 @@ namespace Animation
     private:
         void InitSuite();
 
-        void AddHelperSuite();
-        void AddConsoleGraphSuite();
-        void AddElfAnimationSuite();
+        void AddHelperSuite(); 
+        void AddSpriteAnimationSuite();
         void AddTextureAnimationSuite();
         void AddRigidBodyHierarchyAnimationSuite();
         void AddSkeletonAnimationSuite();

@@ -5,16 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 20:00)
+///	版本：0.9.1.3 (2023/08/12 15:20)
 
-#ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_ARTIFICIAL_INTELLEGENCE_INTERFACE_TESTING_H
-#define FRAMEWORK_MIDDLE_LAYER_SUITE_ARTIFICIAL_INTELLEGENCE_INTERFACE_TESTING_H
+#ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_ARTIFICIAL_INTELLIGENCE_INTERFACE_TESTING_H
+#define FRAMEWORK_MIDDLE_LAYER_SUITE_ARTIFICIAL_INTELLIGENCE_INTERFACE_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Framework
 {
-    class ArtificialIntelligenceInterfaceTesting : public CoreTools::UnitTest
+    class ArtificialIntelligenceInterfaceTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = ArtificialIntelligenceInterfaceTesting;
@@ -26,7 +26,7 @@ namespace Framework
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
         void MainTest();
         void MiddleLayerTest();
@@ -47,4 +47,4 @@ namespace Framework
     };
 }
 
-#endif  // FRAMEWORK_MIDDLE_LAYER_SUITE_ARTIFICIAL_INTELLEGENCE_INTERFACE_TESTING_H
+#endif  // FRAMEWORK_MIDDLE_LAYER_SUITE_ARTIFICIAL_INTELLIGENCE_INTERFACE_TESTING_H

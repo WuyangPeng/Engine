@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:51)
+///	版本：0.9.1.3 (2023/08/09 20:51)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_MESSAGE_LOOP_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_MESSAGE_LOOP_H
@@ -21,6 +21,7 @@ namespace Framework
     {
     public:
         using ClassType = AndroidMessageLoop;
+
         using AndroidApp = System::AndroidApp;
         using DisplayFunction = void (*)(AndroidApp* androidApp, int64_t timeDelta);
         using CustomTime = CoreTools::CustomTime;

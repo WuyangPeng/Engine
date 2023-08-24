@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:22)
+///	版本：0.9.1.3 (2023/08/08 14:02)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_OBJECT_LOGIC_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_OBJECT_LOGIC_MANAGER_INTERFACE_H
@@ -19,12 +19,12 @@
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
+/// 分为两个模块：
+/// 游戏对象逻辑模块（该处理过程定义了游戏的博弈机制）
+/// 人工智能模块（该机制定义了游戏对象逻辑、自适应性以及针对游戏事件或玩家输入状态的预置或动态反馈）
+/// 两个模块执行除相机外的游戏对象逻辑。
 namespace Framework
 {
-    // 分为两个模块：
-    // 游戏对象逻辑模块（该处理过程定义了游戏的博弈机制）
-    // 人工智能模块（该机制定义了游戏对象逻辑、自适应性以及针对游戏事件或玩家输入状态的预置或动态反馈）
-    // 两个模块执行除相机外的游戏对象逻辑。
     class FRAMEWORK_DEFAULT_DECLARE ObjectLogicManagerInterface : public EngineMiddleLayerInterface
     {
     public:
@@ -54,11 +54,11 @@ namespace Framework
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
 
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Input);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Network);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(PhysicalModelling);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Message);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System);
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Input)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Network)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(PhysicalModelling)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Message)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System)
 
     private:
         PackageType impl;

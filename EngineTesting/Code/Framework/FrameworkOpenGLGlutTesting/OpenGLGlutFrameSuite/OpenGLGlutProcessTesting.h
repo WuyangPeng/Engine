@@ -5,29 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:23)
+///	版本：0.9.1.3 (2023/08/11 16:58)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_SUITE_OPENGL_GLUT_PROCESS_TESTING_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_SUITE_OPENGL_GLUT_PROCESS_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
-#include "Framework/OpenGLGlutFrame/OpenGLGlutCallBackInterface.h"
 
 namespace Framework
 {
-    class OpenGLGlutProcessOpenGLGlutCallBack : public OpenGLGlutCallBackInterface
-    {
-    public:
-        using ClassType = OpenGLGlutProcessOpenGLGlutCallBack;
-        using ParentType = OpenGLGlutCallBackInterface;
 
-    public:
-        OpenGLGlutProcessOpenGLGlutCallBack() noexcept;
-
-        CLASS_INVARIANT_OVERRIDE_DECLARE;
-    };
-
-    class OpenGLGlutProcessTesting : public CoreTools::UnitTest
+    class OpenGLGlutProcessTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = OpenGLGlutProcessTesting;
@@ -40,11 +28,11 @@ namespace Framework
 
     private:
         void MainTest();
-        void SetWindowIDSucceedTest();
+        void SetWindowIdSucceedTest();
         void CallbackSucceedTest();
         void SetMillisecondSucceedTest();
 
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
     };
 }
 

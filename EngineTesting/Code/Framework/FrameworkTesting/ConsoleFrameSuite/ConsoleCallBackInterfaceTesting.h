@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:23)
+///	版本：0.9.1.3 (2023/08/14 14:08)
 
 #ifndef FRAMEWORK_HELPER_SUITE_CONSOLE_CALL_BACK_INTERFACE_TESTING_H
 #define FRAMEWORK_HELPER_SUITE_CONSOLE_CALL_BACK_INTERFACE_TESTING_H
@@ -26,7 +26,7 @@ namespace Framework
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
         void MainTest() noexcept;
     };

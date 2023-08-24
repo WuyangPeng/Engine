@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:56)
+///	版本：0.9.1.3 (2023/08/12 15:15)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_MIDDLE_LAYER_INTERFACE_TESTING_BASE_DETAIL_H
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_MIDDLE_LAYER_INTERFACE_TESTING_BASE_DETAIL_H
@@ -18,10 +18,13 @@
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
 template <typename TestingType>
 void Framework::MiddleLayerInterfaceTestingBase::MiddleLayerMemberTest()
 {
-    auto middleLayer = TestingType::CreateMiddleLayer(middleLayerPlatform, environmentDirectory);
+    auto middleLayer = std::make_shared<TestingType>(middleLayerPlatform, environmentDirectory);
 
     ASSERT_ENUM_EQUAL(middleLayer->GetMiddleLayerPlatform(), middleLayerPlatform);
     ASSERT_EQUAL(middleLayer->GetEnvironmentDirectory().GetEngineEnvironment(), environmentDirectory.GetEngineEnvironment());
@@ -31,7 +34,7 @@ void Framework::MiddleLayerInterfaceTestingBase::MiddleLayerMemberTest()
 template <typename TestingType>
 void Framework::MiddleLayerInterfaceTestingBase::MiddleLayerTest()
 {
-    auto middleLayer = TestingType::CreateMiddleLayer(middleLayerPlatform, environmentDirectory);
+    auto middleLayer = std::make_shared<TestingType>(middleLayerPlatform, environmentDirectory);
 
     ASSERT_TRUE(middleLayer->PreCreate());
     ASSERT_TRUE(middleLayer->Create(EnvironmentParameter::Create()));
@@ -61,7 +64,7 @@ void Framework::MiddleLayerInterfaceTestingBase::MiddleLayerTest()
 template <typename TestingType>
 void Framework::MiddleLayerInterfaceTestingBase::KeyUpExceptionTest()
 {
-    auto middleLayer = TestingType::CreateMiddleLayer(middleLayerPlatform, environmentDirectory);
+    auto middleLayer = std::make_shared<TestingType>(middleLayerPlatform, environmentDirectory);
 
     middleLayer->KeyUp(0, point);
 }
@@ -69,7 +72,7 @@ void Framework::MiddleLayerInterfaceTestingBase::KeyUpExceptionTest()
 template <typename TestingType>
 void Framework::MiddleLayerInterfaceTestingBase::KeyDownExceptionTest()
 {
-    auto middleLayer = TestingType::CreateMiddleLayer(middleLayerPlatform, environmentDirectory);
+    auto middleLayer = std::make_shared<TestingType>(middleLayerPlatform, environmentDirectory);
 
     middleLayer->KeyDown(0, point);
 }
@@ -77,7 +80,7 @@ void Framework::MiddleLayerInterfaceTestingBase::KeyDownExceptionTest()
 template <typename TestingType>
 void Framework::MiddleLayerInterfaceTestingBase::SpecialKeyUpExceptionTest()
 {
-    auto middleLayer = TestingType::CreateMiddleLayer(middleLayerPlatform, environmentDirectory);
+    auto middleLayer = std::make_shared<TestingType>(middleLayerPlatform, environmentDirectory);
 
     middleLayer->SpecialKeyUp(0, point);
 }
@@ -85,7 +88,7 @@ void Framework::MiddleLayerInterfaceTestingBase::SpecialKeyUpExceptionTest()
 template <typename TestingType>
 void Framework::MiddleLayerInterfaceTestingBase::SpecialKeyDownExceptionTest()
 {
-    auto middleLayer = TestingType::CreateMiddleLayer(middleLayerPlatform, environmentDirectory);
+    auto middleLayer = std::make_shared<TestingType>(middleLayerPlatform, environmentDirectory);
 
     middleLayer->SpecialKeyDown(0, point);
 }
@@ -93,7 +96,7 @@ void Framework::MiddleLayerInterfaceTestingBase::SpecialKeyDownExceptionTest()
 template <typename TestingType>
 void Framework::MiddleLayerInterfaceTestingBase::PassiveMotionExceptionTest()
 {
-    auto middleLayer = TestingType::CreateMiddleLayer(middleLayerPlatform, environmentDirectory);
+    auto middleLayer = std::make_shared<TestingType>(middleLayerPlatform, environmentDirectory);
 
     middleLayer->PassiveMotion(point);
 }
@@ -101,7 +104,7 @@ void Framework::MiddleLayerInterfaceTestingBase::PassiveMotionExceptionTest()
 template <typename TestingType>
 void Framework::MiddleLayerInterfaceTestingBase::MotionExceptionTest()
 {
-    auto middleLayer = TestingType::CreateMiddleLayer(middleLayerPlatform, environmentDirectory);
+    auto middleLayer = std::make_shared<TestingType>(middleLayerPlatform, environmentDirectory);
 
     middleLayer->Motion(point, virtualKeysTypes);
 }
@@ -109,7 +112,7 @@ void Framework::MiddleLayerInterfaceTestingBase::MotionExceptionTest()
 template <typename TestingType>
 void Framework::MiddleLayerInterfaceTestingBase::MouseWheelExceptionTest()
 {
-    auto middleLayer = TestingType::CreateMiddleLayer(middleLayerPlatform, environmentDirectory);
+    auto middleLayer = std::make_shared<TestingType>(middleLayerPlatform, environmentDirectory);
 
     middleLayer->MouseWheel(0, point, virtualKeysTypes);
 }
@@ -117,7 +120,7 @@ void Framework::MiddleLayerInterfaceTestingBase::MouseWheelExceptionTest()
 template <typename TestingType>
 void Framework::MiddleLayerInterfaceTestingBase::MouseClickExceptionTest()
 {
-    auto middleLayer = TestingType::CreateMiddleLayer(middleLayerPlatform, environmentDirectory);
+    auto middleLayer = std::make_shared<TestingType>(middleLayerPlatform, environmentDirectory);
 
     middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, point, virtualKeysTypes);
 }
@@ -127,9 +130,9 @@ void Framework::MiddleLayerInterfaceTestingBase::SetManagerExceptionTest(SetMana
 {
     if (setManagerFunction != nullptr)
     {
-        auto middleLayer = TestingType::CreateMiddleLayer(middleLayerPlatform, environmentDirectory);
+        auto middleLayer = std::make_shared<TestingType>(middleLayerPlatform, environmentDirectory);
 
-        auto manager = TestingType::CreateMiddleLayer(middleLayerPlatform, environmentDirectory);
+        auto manager = std::make_shared<TestingType>(middleLayerPlatform, environmentDirectory);
 
         ((*middleLayer).*setManagerFunction)(manager);
     }

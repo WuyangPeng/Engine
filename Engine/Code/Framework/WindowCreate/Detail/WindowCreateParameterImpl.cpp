@@ -5,15 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:13)
+///	版本：0.9.1.3 (2023/08/04 15:53)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowCreateParameterImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::WindowCreateParameterImpl::WindowCreateParameterImpl(const String& windowsName, WindowStyles style, WindowsHWnd parent, WindowsHMenu menu, const WindowPoint& leftTopCorner)
-    : windowsName{ windowsName }, style{ style }, leftTopCorner{ leftTopCorner }, parent{ parent }, menu{ menu }
+Framework::WindowCreateParameterImpl::WindowCreateParameterImpl(String windowsName, WindowStyles style, WindowsHWnd parent, WindowsHMenu menu, const WindowPoint& leftTopCorner) noexcept
+    : windowsName{ std::move(windowsName) }, style{ style }, leftTopCorner{ leftTopCorner }, parent{ parent }, menu{ menu }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }

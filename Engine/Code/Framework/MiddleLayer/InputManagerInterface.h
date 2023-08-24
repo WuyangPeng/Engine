@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:21)
+///	版本：0.9.1.3 (2023/08/05 17:42)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_INPUT_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_INPUT_MANAGER_INTERFACE_H
@@ -19,9 +19,9 @@
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
+// 玩家控制，将控制器硬件数据转换为游戏命令。
 namespace Framework
 {
-    // 玩家控制，将控制器硬件数据转换为游戏命令。
     class FRAMEWORK_DEFAULT_DECLARE InputManagerInterface : public EngineMiddleLayerInterface
     {
     public:
@@ -39,10 +39,10 @@ namespace Framework
         NODISCARD bool Move(const WindowPoint& point) final;
         NODISCARD bool Resize(WindowDisplay windowDisplay, const WindowSize& size) final;
 
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Network);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(ObjectLogic);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(CameraSystems);
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Network)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(ObjectLogic)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(CameraSystems)
 
     private:
         PackageType impl;

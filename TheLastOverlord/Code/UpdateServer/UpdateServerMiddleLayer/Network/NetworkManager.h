@@ -1,15 +1,18 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 最后的霸王版本：0.0.0.1 (2019/10/13 19:00)
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
+///
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
+///
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:43)
 
 #ifndef UPDATE_SERVER_MIDDLE_LAYER_NETWORK_MIDDLE_LAYER_NETWORK_H
 #define UPDATE_SERVER_MIDDLE_LAYER_NETWORK_MIDDLE_LAYER_NETWORK_H
 
 #include "UpdateServer/UpdateServerMiddleLayer/UpdateServerMiddleLayerDll.h"
 
-#include "UpdateServer/UpdateServerMiddleLayer/Macro/ExportMacro.h"
+#include "UpdateServer/UpdateServerMiddleLayer/Helper/ExportMacro.h"
 #include "Framework/MiddleLayer/NetworkManagerInterface.h"
 
 namespace UpdateServerMiddleLayer
@@ -18,10 +21,10 @@ namespace UpdateServerMiddleLayer
     {
     public:
         using ClassType = NetworkManager;
-        using ParentType = Framework::NetworkManagerInterface;
+        using ParentType = NetworkManagerInterface;
 
     public:
-        NetworkManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
+        NetworkManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

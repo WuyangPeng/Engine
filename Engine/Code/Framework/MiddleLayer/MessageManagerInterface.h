@@ -5,23 +5,23 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:21)
+///	版本：0.9.1.3 (2023/08/05 17:42)
 
-#ifndef FRAMEWORK_MIDDLE_LAYER_MESSSAGE_MANAGER_INTERFACE_H
-#define FRAMEWORK_MIDDLE_LAYER_MESSSAGE_MANAGER_INTERFACE_H
+#ifndef FRAMEWORK_MIDDLE_LAYER_MESSAGE_MANAGER_INTERFACE_H
+#define FRAMEWORK_MIDDLE_LAYER_MESSAGE_MANAGER_INTERFACE_H
 
 #include "Framework/FrameworkDll.h"
 
 #include "EngineMiddleLayerInterface.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
-#include "CoreTools/Helper/Export/NonCopyMacro.h"
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
+// 消息机制常用于游戏对象以及游戏管理系统之间的通信。
 namespace Framework
 {
-    // 消息机制常用于游戏对象以及游戏管理系统之间的通信。
     class FRAMEWORK_DEFAULT_DECLARE MessageManagerInterface : public EngineMiddleLayerInterface
     {
     public:
@@ -51,8 +51,8 @@ namespace Framework
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
 
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(ObjectLogic);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System);
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(ObjectLogic)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System)
 
     private:
         PackageType impl;
@@ -62,4 +62,4 @@ namespace Framework
     using ConstMessageManagerInterfaceSharedPtr = std::shared_ptr<const MessageManagerInterface>;
 }
 
-#endif  // FRAMEWORK_MIDDLE_LAYER_MESSSAGE_MANAGER_INTERFACE_H
+#endif  // FRAMEWORK_MIDDLE_LAYER_MESSAGE_MANAGER_INTERFACE_H

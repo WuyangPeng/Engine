@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:47)
+///	版本：0.9.1.3 (2023/08/11 20:31)
 
 #include "WindowNameTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,11 +14,6 @@
 #include "Framework/WindowRegister/WindowName.h"
 
 using namespace std::literals;
-
-namespace Framework
-{
-    using TestingType = WindowName;
-}
 
 Framework::WindowNameTesting::WindowNameTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -43,7 +38,7 @@ void Framework::WindowNameTesting::NameTest()
     const auto className = SYSTEM_TEXT("className"s);
     const auto menuName = SYSTEM_TEXT("menuName"s);
 
-    TestingType name{ className, menuName };
+    const WindowName name{ className, menuName };
 
     ASSERT_EQUAL(name.GetWindowClassName(), className);
     ASSERT_EQUAL(name.GetWindowMenuName(), menuName);

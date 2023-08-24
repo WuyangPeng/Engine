@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:19)
+///	版本：0.9.1.3 (2023/08/08 14:46)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_CONTROLLER_MIDDLE_LAYER_DETAIL_H
 #define FRAMEWORK_MIDDLE_LAYER_CONTROLLER_MIDDLE_LAYER_DETAIL_H
@@ -19,7 +19,7 @@ template <typename ApplicationTrait>
 Framework::ControllerMiddleLayer<ApplicationTrait>::ControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -44,7 +44,7 @@ bool Framework::ControllerMiddleLayer<ApplicationTrait>::KeyDown(int key, const 
     {
         if (key == ApplicationTrait::KeyIdentifiers::keyF5)
         {
-            auto modelMiddleLayer = boost::polymorphic_pointer_cast<ModelMiddleLayer>(GetModelMiddleLayer());
+            const auto modelMiddleLayer = boost::polymorphic_pointer_cast<ModelMiddleLayer>(GetModelMiddleLayer());
 
             modelMiddleLayer->ResetTime();
         }

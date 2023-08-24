@@ -46,35 +46,6 @@ void AssistTools::TestingHelper::AddGenerateProjectsSuite()
 {
     auto generateProjectsSuite = GenerateSuite("生成项目");
 
-    ADD_TEST(generateProjectsSuite, GenerateTemplateSolutionTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateVcxprojTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateVcxprojFiltersTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateMiddleLayerVcxprojTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateMiddleLayerVcxprojFiltersTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateModuleVcxprojTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateModuleVcxprojFiltersTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateLogJsonTesting);
-    ADD_TEST(generateProjectsSuite, CopyrightDataTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateHeaderTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateHelperTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateMessageTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateLibTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateMainTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateManagerTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateManagerLibTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateDllMainTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateDllLibTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateMacroTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateEngineTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateEngineDirectoryTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTemplateCodeDirectoryTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTestingTemplateSolutionTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTestingTemplateVcxprojTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTestingTemplateVcxprojFiltersTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTestingTemplateEngineTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTestingTemplateEngineDirectoryTesting);
-    ADD_TEST(generateProjectsSuite, GenerateTestingTemplateCodeDirectoryTesting);
-
     AddSuite(generateProjectsSuite);
 }
 

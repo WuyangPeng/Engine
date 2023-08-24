@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:16)
+///	版本：0.9.1.3 (2023/08/11 19:27)
 
 #include "EnvironmentDirectoryTesting.h"
 #include "Flags/DescriptionFlags.h"
@@ -18,8 +18,8 @@
 using namespace std::literals;
 using System::operator++;
 
-Framework::EnvironmentDirectoryTesting::EnvironmentDirectoryTesting(const OStreamShared& osPtr)
-    : ParentType{ osPtr },
+Framework::EnvironmentDirectoryTesting::EnvironmentDirectoryTesting(const OStreamShared& stream)
+    : ParentType{ stream },
       mDescription{ { Description::Resource, SYSTEM_TEXT("Resource"s) },
                     { Description::Configuration, SYSTEM_TEXT("Configuration"s) },
                     { Description::Directory, SYSTEM_TEXT(""s) },
@@ -56,33 +56,33 @@ System::String Framework::EnvironmentDirectoryTesting::GetDescription(Descriptio
         return GetDescription(Description::Null, false);
     }
 
-    const auto iter = mDescription.find(description);
-    if (iter != mDescription.cend())
+    if (const auto iter = mDescription.find(description);
+        iter != mDescription.cend())
     {
-        auto value = iter->second;
+        auto element = iter->second;
         if (isFile && IsDirectory(description))
         {
-            value = GetDescription(Description::Framework, false) + value;
+            element = GetDescription(Description::Framework, false) + element;
         }
 
-        return value;
+        return element;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("未找到相关描述"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到相关描述"s))
     }
 }
 
 System::String Framework::EnvironmentDirectoryTesting::GetPrefix(Description description) const
 {
-    const auto iter = mDescription.find(description);
-    if (iter != mDescription.cend())
+    if (const auto iter = mDescription.find(description);
+        iter != mDescription.cend())
     {
         return iter->second;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("未找到相关描述"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("未找到相关描述"s))
     }
 }
 
@@ -165,7 +165,7 @@ void Framework::EnvironmentDirectoryTesting::EngineEnvironmentTest(const Testing
 
 void Framework::EnvironmentDirectoryTesting::EngineDirectoryTest(const TestingType& environmentDirectory)
 {
-    auto engineDirectory = environmentDirectory.GetEngineDirectory();
+    const auto engineDirectory = environmentDirectory.GetEngineDirectory();
 
     ASSERT_FALSE(engineDirectory.empty());
 }
@@ -174,10 +174,10 @@ void Framework::EnvironmentDirectoryTesting::DirectoryTest(bool isFile, UpperDir
 {
     const auto& environmentDirectory = isFile ? fileEnvironmentDirectory : defaultEnvironmentDirectory;
 
-    auto directory = environmentDirectory.GetDirectory(upperDirectory);
-    auto description = GetDescription(System::EnumCastUnderlying<Description>(upperDirectory), isFile);
+    const auto directory = environmentDirectory.GetDirectory(upperDirectory);
+    const auto description = GetDescription(System::EnumCastUnderlying<Description>(upperDirectory), isFile);
 
-    auto engineDirectory = environmentDirectory.GetEngineDirectory();
+    const auto engineDirectory = environmentDirectory.GetEngineDirectory();
 
     ASSERT_EQUAL(directory, engineDirectory + description + SYSTEM_TEXT("/"s));
 }
@@ -186,12 +186,12 @@ void Framework::EnvironmentDirectoryTesting::DefaultPathTest(bool isFile, Render
 {
     const auto& environmentDirectory = isFile ? fileEnvironmentDirectory : defaultEnvironmentDirectory;
 
-    auto path1 = environmentDirectory.GetPath(renderingAnalysisDirectory);
-    auto path2 = environmentDirectory.GetPath(RenderingDirectory::Default, renderingAnalysisDirectory);
-    auto path3 = environmentDirectory.GetPath(EndianDirectory::LittleEndian, RenderingDirectory::Default, renderingAnalysisDirectory);
+    const auto path0 = environmentDirectory.GetPath(renderingAnalysisDirectory);
+    const auto path1 = environmentDirectory.GetPath(RenderingDirectory::Default, renderingAnalysisDirectory);
+    const auto path2 = environmentDirectory.GetPath(EndianDirectory::LittleEndian, RenderingDirectory::Default, renderingAnalysisDirectory);
 
+    ASSERT_EQUAL(path0, path1);
     ASSERT_EQUAL(path1, path2);
-    ASSERT_EQUAL(path2, path3);
 }
 
 void Framework::EnvironmentDirectoryTesting::LittleEndianDefaultTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory)
@@ -228,9 +228,9 @@ void Framework::EnvironmentDirectoryTesting::PathTest(bool isFile, RenderingAnal
 {
     const auto& environmentDirectory = isFile ? fileEnvironmentDirectory : defaultEnvironmentDirectory;
 
-    auto path = environmentDirectory.GetPath(endianDirectory, renderingDirectory, renderingAnalysisDirectory);
+    const auto path = environmentDirectory.GetPath(endianDirectory, renderingDirectory, renderingAnalysisDirectory);
 
-    auto directory = environmentDirectory.GetDirectory(UpperDirectory::Resource);
+    const auto directory = environmentDirectory.GetDirectory(UpperDirectory::Resource);
 
     auto renderingDescription = GetDescription(System::EnumCastUnderlying<Description>(renderingDirectory), isFile);
     if (!renderingDescription.empty())

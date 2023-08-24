@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 18:21)
+///	版本：0.9.1.3 (2023/08/11 14:18)
 
 #include "FrameworkTestingAndroidCallBack.h"
 #include "Testing.h"
@@ -13,6 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
+#include "Framework/AndroidFrame/AndroidCallBackUnitTestSuiteDetail.h"
 
 Framework::FrameworkTestingAndroidCallBack::FrameworkTestingAndroidCallBack(int64_t delta)
     : ParentType{ delta, "【框架库】单元测试套件" }

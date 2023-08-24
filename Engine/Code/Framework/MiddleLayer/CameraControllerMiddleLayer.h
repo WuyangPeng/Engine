@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:21)
+///	版本：0.9.1.3 (2023/08/05 16:20)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_CAMERA_CONTROLLER_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_CAMERA_CONTROLLER_MIDDLE_LAYER_H
@@ -26,15 +26,15 @@ namespace Framework
         using ParentType = ControllerMiddleLayer<ApplicationTrait>;
 
     public:
-        explicit CameraControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
+        CameraControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD bool KeyDown(int key, const WindowPoint& point) override;
         NODISCARD bool SpecialKeyDown(int key, const WindowPoint& point) override;
         NODISCARD bool SpecialKeyUp(int key, const WindowPoint& point) override;
-        bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
-        bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
+        NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
+        NODISCARD bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
 
     private:
         NODISCARD CameraModelMiddleLayerSharedPtr GetCameraModelMiddleLayer();

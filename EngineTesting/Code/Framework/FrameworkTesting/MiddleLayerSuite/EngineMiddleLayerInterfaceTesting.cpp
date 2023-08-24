@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:09)
+///	版本：0.9.1.3 (2023/08/12 17:52)
 
 #include "EngineMiddleLayerInterfaceTesting.h"
 #include "MiddleLayerInterfaceTestingBaseDetail.h"
@@ -69,71 +69,71 @@ void Framework::EngineMiddleLayerInterfaceTesting::SetMiddleLayerTest()
 
 void Framework::EngineMiddleLayerInterfaceTesting::GetMiddleLayerTest()
 {
-    using Funtion = MiddleLayerInterfaceSharedPtr (EngineMiddleLayerInterfaceTest::*)();
+    using Function = MiddleLayerInterfaceSharedPtr (EngineMiddleLayerInterfaceTest::*)();
 
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetNetworkManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetNetworkManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetInputManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetInputManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetObjectLogicManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetObjectLogicManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetPhysicalModellingManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetPhysicalModellingManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetMessageManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetMessageManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetEventManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetEventManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetSystemManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetSystemManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetResourceManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetResourceManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetAudioManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetAudioManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetCameraSystemsManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetCameraSystemsManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetRenderingManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetRenderingManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetGUIManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetGUIManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetEngineManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetEngineManager));
 }
 
 void Framework::EngineMiddleLayerInterfaceTesting::GetConstMiddleLayerTest()
 {
-    using Funtion = ConstMiddleLayerInterfaceSharedPtr (EngineMiddleLayerInterfaceTest::*)() const;
+    using Function = ConstMiddleLayerInterfaceSharedPtr (EngineMiddleLayerInterfaceTest::*)() const;
 
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetNetworkManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetNetworkManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetInputManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetInputManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetObjectLogicManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetObjectLogicManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetPhysicalModellingManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetPhysicalModellingManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetMessageManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetMessageManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetEventManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetEventManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetSystemManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetSystemManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetResourceManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetResourceManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetAudioManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetAudioManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetCameraSystemsManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetCameraSystemsManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetRenderingManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetRenderingManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetGUIManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetGUIManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<EngineMiddleLayerInterfaceTest>,
-                             static_cast<Funtion>(&EngineMiddleLayerInterfaceTest::GetEngineManager));
+                             static_cast<Function>(&EngineMiddleLayerInterfaceTest::GetEngineManager));
 }
 
 void Framework::EngineMiddleLayerInterfaceTesting::GetNullMiddleLayerTest()
 {
-    auto middleLayer = EngineMiddleLayerInterfaceNullTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
+    const auto middleLayer = std::make_shared<EngineMiddleLayerInterfaceNullTest>(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
     ASSERT_EQUAL_NULL_PTR(middleLayer->GetNetworkManager());
     ASSERT_EQUAL_NULL_PTR(middleLayer->GetInputManager());
@@ -152,7 +152,7 @@ void Framework::EngineMiddleLayerInterfaceTesting::GetNullMiddleLayerTest()
 
 void Framework::EngineMiddleLayerInterfaceTesting::GetConstNullMiddleLayerTest()
 {
-    ConstEngineMiddleLayerInterfaceNullTestSharedPtr middleLayer{ EngineMiddleLayerInterfaceNullTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory()) };
+    const auto middleLayer = std::make_shared<EngineMiddleLayerInterfaceNullTest>(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
     ASSERT_EQUAL_NULL_PTR(middleLayer->GetNetworkManager());
     ASSERT_EQUAL_NULL_PTR(middleLayer->GetInputManager());

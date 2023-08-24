@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:16)
+///	版本：0.9.1.3 (2023/08/05 13:52)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_MANAGE_IMPL_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_MANAGE_IMPL_H
@@ -23,6 +23,7 @@ namespace Framework
     {
     public:
         using ClassType = OpenGLGlutProcessManagerImpl;
+
         using MainFunctionHelperBaseSharedPtr = std::shared_ptr<MainFunctionHelperBase>;
         using OpenGLGlutCallBackInterfaceSharedPtr = std::shared_ptr<OpenGLGlutCallBackInterface>;
 
@@ -36,8 +37,8 @@ namespace Framework
 
         static void SetOpenGLGlutCallBack(const OpenGLGlutCallBackInterfaceSharedPtr& aOpenGLGlutCallBack) noexcept;
         static void ClearOpenGLGlutCallBack() noexcept;
-        static void SetWindowID(int window);
-        NODISCARD static int GetWindowID();
+        static void SetWindowId(int window);
+        NODISCARD static int GetWindowId();
         static void SetMainFunctionHelper(const MainFunctionHelperBaseSharedPtr& mainFunctionHelperBase) noexcept;
         static void ClearMainFunctionHelper() noexcept;
         NODISCARD static MainFunctionHelperBaseSharedPtr GetMainFunctionHelper();
@@ -65,6 +66,9 @@ namespace Framework
 
     private:
         using MainFunctionHelperBaseWeakPtr = std::weak_ptr<MainFunctionHelperBase>;
+
+    private:
+        static void DoTerminateFunction();
 
     private:
         static OpenGLGlutCallBackInterfaceSharedPtr openGLGlutCallBack;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:24)
+///	版本：0.9.1.3 (2023/08/08 14:52)
 
 #include "Framework/FrameworkExport.h"
 
@@ -97,13 +97,6 @@ void Framework::PixelViewMiddleLayerImpl::Fill(int x, int y, const Colour& foreC
     FRAMEWORK_CLASS_IS_VALID_9;
 
     return pixelScreen.Fill(x, y, foreColour, backColour);
-}
-
-void Framework::PixelViewMiddleLayerImpl::Draw(const RendererSharedPtr& renderer)
-{
-    FRAMEWORK_CLASS_IS_VALID_9;
-
-    return pixelScreen.Draw(renderer);
 }
 
 int Framework::PixelViewMiddleLayerImpl::GetScreenWidth() const noexcept

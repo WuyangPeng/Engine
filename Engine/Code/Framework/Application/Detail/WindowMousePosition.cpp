@@ -5,16 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:49)
+///	版本：0.9.1.3 (2023/08/09 15:27)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowMousePosition.h"
 #include "System/Windows/WindowsProcess.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/LogMacro.h"
 
-Framework::WindowMousePosition::WindowMousePosition(WindowsHWnd hwnd) noexcept
-    : hwnd{ hwnd }
+Framework::WindowMousePosition::WindowMousePosition(WindowsHWnd hWnd) noexcept
+    : hWnd{ hWnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -23,7 +24,7 @@ Framework::WindowMousePosition::WindowMousePosition(WindowsHWnd hwnd) noexcept
 
 bool Framework::WindowMousePosition::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && hwnd != nullptr)
+    if (ParentType::IsValid() && hWnd != nullptr)
         return true;
     else
         return false;
@@ -37,7 +38,10 @@ Framework::WindowPoint Framework::WindowMousePosition::GetMousePosition() const 
 
     System::WindowsPoint point{};
 
-    MAYBE_UNUSED const auto result = System::GetCursorClientPos(hwnd, point);
+    if (!System::GetCursorClientPos(hWnd, point))
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("GetCursorClientPos 失败。"));
+    }
 
     return WindowPoint{ point };
 }
@@ -46,12 +50,15 @@ void Framework::WindowMousePosition::SetMousePosition(const WindowPoint& windowP
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    System::WindowsPoint point{ windowPoint.GetWindowX(), windowPoint.GetWindowY() };
+    const System::WindowsPoint point{ windowPoint.GetWindowX(), windowPoint.GetWindowY() };
 
-    MAYBE_UNUSED const auto result = System::SetCursorClientPos(hwnd, point);
+    if (!System::SetCursorClientPos(hWnd, point))
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("SetCursorClientPos 失败。"));
+    }
 }
 
 Framework::WindowMousePosition::MousePositionImplSharedPtr Framework::WindowMousePosition::Clone() const
 {
-    return std::make_shared<ClassType>(hwnd);
+    return std::make_shared<ClassType>(hWnd);
 }

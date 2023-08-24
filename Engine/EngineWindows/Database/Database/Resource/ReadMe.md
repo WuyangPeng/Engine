@@ -37,21 +37,14 @@
 （6） 存储：各种实现的存储类基类。 
 
 ----------------------------
-4.	DatabaseGenerate（Database代码生成）
-
-封装了数据库代码生成的实现。
-
-（1）代码生成：封装了数据库代码生成的实现。
-
-----------------------------
-5.	Statement（语句）
+4.	Statement（语句）
 
 封装了sql语句的实现。
 
 （1）语句：封装了sql语句的实现。
 
 ----------------------------
-6.	MySqlWrappers（MySQL C API 包装器）
+5.	MySqlWrappers（MySQL C API 包装器）
 
 封装了MySQL C API的实现。
 
@@ -59,7 +52,7 @@
 （2） 存储：MySQL C API的存储类。 
 
 ----------------------------
-7.	MysqlConnectorWrappers（mysql connector c++ 包装器）
+6.	MysqlConnectorWrappers（mysql connector c++ 包装器）
 
 封装了mysql connector c++的实现。它可以让程序连接到Mysql服务器。通过封装使程序更安全、更健壮，更易于使用。
 
@@ -67,7 +60,7 @@
 （2） 存储：mysql connector c++的存储类。 
 
 ----------------------------
-8.	MysqlBoostWrappers（mysql boost 包装器）
+7.	MysqlBoostWrappers（mysql boost 包装器）
 
 封装了mysql boost的实现。 
 
@@ -75,7 +68,7 @@
 （2） 存储：mysql boost的存储类。 
 
 ----------------------------
-9.	SqlServerWrappers（Sql Server 包装器）
+8.	SqlServerWrappers（Sql Server 包装器）
 
 封装了Sql Server的实现。
 
@@ -83,7 +76,7 @@
 （2） 存储：Sql Server的存储类。 
 
 ----------------------------
-10.	SQLiteWrappers（SQLite 包装器）
+9.	SQLiteWrappers（SQLite 包装器）
 
 封装了SQLite的实现。
 
@@ -91,7 +84,7 @@
 （2） 存储：SQLite的存储类。  
 
 ----------------------------
-11.	PostgreSQL（PostgreSQL 包装器）
+10.	PostgreSQL（PostgreSQL 包装器）
 
 封装了PostgreSQL的实现。
 
@@ -99,7 +92,7 @@
 （2） 存储：PostgreSQL的存储类。  
 
 ----------------------------
-12.	Oracle（Oracle 包装器）
+11.	Oracle（Oracle 包装器）
 
 封装了Oracle的实现。
 
@@ -107,7 +100,7 @@
 （2） 存储：Oracle的存储类。 
 
 ----------------------------
-13.	FlatFileWrappers（平面文件包装器）
+12.	FlatFileWrappers（平面文件包装器）
 
 封装了平面文件的实现。
 
@@ -115,7 +108,7 @@
 （2） 存储：平面文件的存储类。  
 
 ----------------------------
-14. mariaDB（mariaDB 包装器）
+13. mariaDB（mariaDB 包装器）
 
 封装了mariaDB的实现。
 
@@ -123,7 +116,7 @@
 （2） 存储：mariaDB的存储类。   
 
 ----------------------------
-15. mongo（mongo 包装器）
+14. mongo（mongo 包装器）
 
 封装了mongo的实现。
 
@@ -131,7 +124,7 @@
 （2） 存储：mongo的存储类。   
 
 ----------------------------
-16. Redis（Redis 包装器）
+15. Redis（Redis 包装器）
 
 封装了Redis的实现。
 
@@ -139,7 +132,7 @@
 （2） 存储：Redis的存储类。  
 
 ----------------------------
-17. DatabaseEntityCodeGeneration（DatabaseEntity代码生成）
+16. DatabaseEntityCodeGeneration（DatabaseEntity代码生成）
 
 实现DatabaseEntity代码的生成。 
 

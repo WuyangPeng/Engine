@@ -29,6 +29,7 @@ namespace Rendering
         using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactory>;
 
     public:
+        GlobalFontImpl() noexcept;
         explicit GlobalFontImpl(FontType fontType, ProgramFactory& factory, const std::string& shaderExtendName, int maxMessageLength);
 
         CLASS_INVARIANT_DECLARE;

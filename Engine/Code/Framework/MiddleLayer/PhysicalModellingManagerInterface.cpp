@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:36)
+///	版本：0.9.1.3 (2023/08/08 16:24)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,7 +13,6 @@
 #include "Flags/PhysicalModellingMiddleLayerFlags.h"
 #include "Detail/EngineMiddleLayerInterfaceImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Framework::PhysicalModellingManagerInterface::PhysicalModellingManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ System::EnumCastUnderlying(PhysicalModellingMiddleLayer::Count) }

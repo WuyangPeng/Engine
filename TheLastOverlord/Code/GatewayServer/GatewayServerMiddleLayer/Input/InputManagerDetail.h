@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/23 13:56)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:42)
 
 #ifndef GATEWAY_SERVER_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_DETAIL_H
 #define GATEWAY_SERVER_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_DETAIL_H
 
-#include "GatewayServer/GatewayServerMiddleLayer/Macro/GatewayServerMiddleLayerClassInvariantMacro.h"
+#include "GatewayServer/GatewayServerMiddleLayer/Helper/GatewayServerMiddleLayerClassInvariantMacro.h"
 #include "InputManager.h"
 #include "Framework/MiddleLayer/InputManagerDetail.h"
 
@@ -18,8 +18,8 @@
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename ApplicationTrait>
-GatewayServerMiddleLayer::InputManager<ApplicationTrait>::InputManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
-    : ParentType{ middleLayerPlatform,environmentDirectory }
+GatewayServerMiddleLayer::InputManager<ApplicationTrait>::InputManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }
 {
     GATEWAY_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }
@@ -39,4 +39,4 @@ bool GatewayServerMiddleLayer::InputManager<ApplicationTrait>::IsValid() const n
 
 #endif  // OPEN_CLASS_INVARIANT
 
-#endif / / GATEWAY_SERVER_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_DETAIL_H
+#endif  // GATEWAY_SERVER_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_DETAIL_H

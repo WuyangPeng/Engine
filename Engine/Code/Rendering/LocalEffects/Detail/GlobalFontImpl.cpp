@@ -15,6 +15,13 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/LocalEffects/Font.h"
 
+Rendering::GlobalFontImpl::GlobalFontImpl() noexcept
+    : defaultFont{},
+      activeFont{}
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
 Rendering::GlobalFontImpl::GlobalFontImpl(FontType fontType, ProgramFactory& factory, const std::string& shaderExtendName, int maxMessageLength)
     : defaultFont{ std::make_shared<Font>(fontType, factory, shaderExtendName, maxMessageLength) },
       activeFont{ defaultFont }
@@ -26,15 +33,7 @@ Rendering::GlobalFontImpl::GlobalFontImpl(FontType fontType, ProgramFactory& fac
 
 bool Rendering::GlobalFontImpl::IsValid() const noexcept
 {
-    if (defaultFont != nullptr &&
-        activeFont != nullptr)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return true;
 }
 
 #endif  // OPEN_CLASS_INVARIANT

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:36)
+///	版本：0.9.1.3 (2023/08/08 16:24)
 
 #include "Framework/FrameworkExport.h"
 
@@ -26,24 +26,7 @@ namespace Framework
 Framework::PixelViewMiddleLayer::PixelViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ defaultWidth, defaultHeight }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Framework::PixelViewMiddleLayer::PixelViewMiddleLayer(PixelViewMiddleLayer&& rhs) noexcept
-    : ParentType{ move(rhs) }, impl{ std::move(rhs.impl) }
-{
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Framework::PixelViewMiddleLayer& Framework::PixelViewMiddleLayer::operator=(PixelViewMiddleLayer&& rhs) noexcept
-{
-    FRAMEWORK_CLASS_IS_VALID_1;
-
-    ParentType::operator=(move(rhs));
-
-    impl = std::move(rhs.impl);
-
-    return *this;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, PixelViewMiddleLayer)
@@ -55,15 +38,15 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelViewMiddleLayer, Ge
 
 bool Framework::PixelViewMiddleLayer::Initialize()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     if (ParentType::Initialize())
     {
-        auto renderer = GetRenderer();
+        const auto renderer = GetRenderer();
 
         const WindowSize windowSize{ renderer->GetWidth(), renderer->GetHeight() };
 
-        impl->Resize(windowSize, GetClearColor());
+        impl->Resize(windowSize, GetClearColour());
 
         return true;
     }
@@ -75,20 +58,15 @@ bool Framework::PixelViewMiddleLayer::Initialize()
 
 bool Framework::PixelViewMiddleLayer::Idle(int64_t timeDelta)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-    auto renderer = GetRenderer();
-
-    if (ParentType::Idle(timeDelta) && renderer)
+    if (const auto renderer = GetRenderer();
+        ParentType::Idle(timeDelta) && renderer != nullptr)
     {
-        //  if (renderer->PreDraw())
-        {
-            renderer->ClearBuffers();
-            impl->Draw(renderer);
-            ScreenOverlay();
-            // renderer->PostDraw();
-            renderer->DisplayColorBuffer(0);
-        }
+        renderer->ClearBuffers(); 
+        ScreenOverlay();
+
+        renderer->DisplayColorBuffer(0);
 
         return true;
     }
@@ -100,19 +78,19 @@ bool Framework::PixelViewMiddleLayer::Idle(int64_t timeDelta)
 
 bool Framework::PixelViewMiddleLayer::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     const auto width = size.GetWindowWidth();
     const auto height = size.GetWindowHeight();
-    auto renderer = GetRenderer();
+    const auto renderer = GetRenderer();
 
     if (ParentType::Resize(windowDisplay, size))
     {
-        if (0 < width * height && renderer)
+        if (0 < width * height && renderer != nullptr)
         {
             renderer->Resize(width, height);
 
-            const auto colour = GetClearColor();
+            const auto colour = GetClearColour();
 
             impl->Resize(size, colour);
         }
@@ -127,7 +105,7 @@ bool Framework::PixelViewMiddleLayer::Resize(WindowDisplay windowDisplay, const 
 
 void Framework::PixelViewMiddleLayer::ScreenOverlay()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     // 存根在派生类。
     CoreTools::DisableNoexcept();
@@ -135,23 +113,23 @@ void Framework::PixelViewMiddleLayer::ScreenOverlay()
 
 void Framework::PixelViewMiddleLayer::ClearScreen()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-    const auto colour = GetClearColor();
+    const auto colour = GetClearColour();
 
     return impl->ClearScreen(colour);
 }
 
 void Framework::PixelViewMiddleLayer::SetPixel(int x, int y, const Colour& colour)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return impl->SetPixel(x, y, colour);
 }
 
 void Framework::PixelViewMiddleLayer::SetThickPixel(int x, int y, int thick, const Colour& colour)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return impl->SetThickPixel(x, y, thick, colour);
 }
@@ -165,28 +143,28 @@ Framework::PixelViewMiddleLayer::Colour Framework::PixelViewMiddleLayer::GetPixe
 
 void Framework::PixelViewMiddleLayer::DrawLine(int xMin, int yMin, int xMax, int yMax, const Colour& colour)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return impl->DrawLine(xMin, yMin, xMax, yMax, colour);
 }
 
 void Framework::PixelViewMiddleLayer::DrawRectangle(int xMin, int yMin, int xMax, int yMax, const Colour& colour, bool solid)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return impl->DrawRectangle(xMin, yMin, xMax, yMax, colour, solid);
 }
 
 void Framework::PixelViewMiddleLayer::DrawCircle(int xCenter, int yCenter, int radius, const Colour& colour, bool solid)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return impl->DrawCircle(xCenter, yCenter, radius, colour, solid);
 }
 
 void Framework::PixelViewMiddleLayer::Fill(int x, int y, const Colour& foreColour, const Colour& backColour)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return impl->Fill(x, y, foreColour, backColour);
 }

@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/22 17:18)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:42)
 
 #ifndef ROBOT_CLIENT_ROBOT_CLIENT_MESSAGE_H
 #define ROBOT_CLIENT_ROBOT_CLIENT_MESSAGE_H
 
-#include "RobotClient/RobotClientMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "RobotClient/RobotClientMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "RobotClient/RobotClientMiddleLayer/Audio/AudioManager.h"
 #include "RobotClient/RobotClientMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "RobotClient/RobotClientMiddleLayer/Event/EventManager.h"
@@ -32,7 +32,7 @@
 
 namespace RobotClient
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<RobotClientMiddleLayer::ObjectLogicManager, RobotClientMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<RobotClientMiddleLayer::ObjectLogicManager, RobotClientMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   RobotClientMiddleLayer::InputManager,
                                                                   RobotClientMiddleLayer::NetworkManager,
@@ -54,13 +54,16 @@ namespace RobotClient
         using ClassType = RobotClientMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit RobotClientMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        RobotClientMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using RobotClientMessageWindowProcessHandle = Framework::WindowProcessHandle<RobotClientMessage>;

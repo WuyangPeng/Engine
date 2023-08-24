@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:21)
+///	版本：0.9.1.3 (2023/08/05 17:43)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_MIDDLE_LAYER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_MIDDLE_LAYER_INTERFACE_H
@@ -17,46 +17,33 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
-#include "Framework/MainFunctionHelper/MainFunctionHelperFwd.h"
 #include "Framework/WindowCreate/WindowCreateFwd.h"
 #include "Framework/WindowProcess/WindowProcessFwd.h"
 
 template class FRAMEWORK_DEFAULT_DECLARE std::weak_ptr<Framework::MiddleLayerInterface>;
 template class FRAMEWORK_DEFAULT_DECLARE std::enable_shared_from_this<Framework::MiddleLayerInterface>;
 
+// 中间层接口类，基类提供虚函数的默认实现。
 namespace Framework
 {
-    // 中间层接口类，基类提供虚函数的默认实现。
     class FRAMEWORK_DEFAULT_DECLARE MiddleLayerInterface : public std::enable_shared_from_this<MiddleLayerInterface>
     {
     public:
         using ClassType = MiddleLayerInterface;
-        using MiddleLayerSharedPtr = std::shared_ptr<ClassType>;
 
         using WindowDisplay = System::WindowsDisplay;
         using EnvironmentParameter = Rendering::EnvironmentParameter;
-
         using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
-    protected:
-        enum class MiddleLayerInterfaceCreate
-        {
-            Init,
-        };
-
-        MiddleLayerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept;
-
     public:
-        MiddleLayerInterface(MiddleLayerInterfaceCreate middleLayerInterfaceCreate, MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept;
+        MiddleLayerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept;
         virtual ~MiddleLayerInterface() noexcept = default;
 
         MiddleLayerInterface(const MiddleLayerInterface& rhs) noexcept = delete;
         MiddleLayerInterface& operator=(const MiddleLayerInterface& rhs) noexcept = delete;
         MiddleLayerInterface(MiddleLayerInterface&& rhs) noexcept;
         MiddleLayerInterface& operator=(MiddleLayerInterface&& rhs) noexcept;
-
-        NODISCARD static MiddleLayerSharedPtr CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
@@ -92,6 +79,10 @@ namespace Framework
 
         NODISCARD MiddleLayerPlatform GetMiddleLayerPlatform() const noexcept;
         NODISCARD EnvironmentDirectory GetEnvironmentDirectory() const noexcept;
+
+    protected:
+        using MiddleLayerSharedPtr = std::shared_ptr<ClassType>;
+        using ConstMiddleLayerSharedPtr = std::shared_ptr<const ClassType>;
 
     private:
         MiddleLayerPlatform middleLayerPlatform;

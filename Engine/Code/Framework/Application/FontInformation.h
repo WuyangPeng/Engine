@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:43)
+///	版本：0.9.1.3 (2023/08/09 14:41)
 
 #ifndef FRAMEWORK_APPLICATION_FONT_INFORMATION_H
 #define FRAMEWORK_APPLICATION_FONT_INFORMATION_H
@@ -27,6 +27,7 @@ namespace Framework
     {
     public:
         PERFORMANCE_UNSHARED_TYPE_DECLARE(FontInformation);
+
         using TChar = System::TChar;
         using String = System::String;
         using WindowsHWnd = System::WindowsHWnd;
@@ -36,13 +37,13 @@ namespace Framework
         explicit FontInformation(PlatformTypes type);
 
         // Window 平台
-        explicit FontInformation(WindowsHWnd hwnd);
+        explicit FontInformation(WindowsHWnd hWnd);
 
         CLASS_INVARIANT_DECLARE;
 
         // 字体信息。这些是特定于平台的。
         NODISCARD int GetStringWidth(const String& text) const;
-        NODISCARD int GetCharacterWidth(const TChar character) const;
+        NODISCARD int GetCharacterWidth(TChar character) const;
         NODISCARD int GetFontHeight() const;
 
     private:

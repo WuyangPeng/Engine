@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:21)
+///	版本：0.9.1.3 (2023/08/05 16:40)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_INTERFACE_H
@@ -17,23 +17,17 @@
 
 #include <memory>
 
+// 引擎中间层接口类，基类提供虚函数抛出异常的实现。
 namespace Framework
 {
-    // 引擎中间层接口类，基类提供虚函数抛出异常的实现。
     class FRAMEWORK_DEFAULT_DECLARE EngineMiddleLayerInterface : public MiddleLayerInterface
     {
     public:
         using ClassType = EngineMiddleLayerInterface;
         using ParentType = MiddleLayerInterface;
-        using MiddleLayerSharedPtr = std::shared_ptr<ClassType>;
-
-    protected:
-        EngineMiddleLayerInterface(MiddleLayerPlatform modelViewController, const EnvironmentDirectory& environmentDirectory) noexcept;
 
     public:
-        EngineMiddleLayerInterface(MiddleLayerInterfaceCreate middleLayerInterfaceCreate, MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept;
-
-        NODISCARD static MiddleLayerSharedPtr CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
+        EngineMiddleLayerInterface(MiddleLayerPlatform modelViewController, const EnvironmentDirectory& environmentDirectory) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

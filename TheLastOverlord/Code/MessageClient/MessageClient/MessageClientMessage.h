@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/22 21:41)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:42)
 
 #ifndef MESSAGE_CLIENT_MESSAGE_CLIENT_MESSAGE_H
 #define MESSAGE_CLIENT_MESSAGE_CLIENT_MESSAGE_H
 
-#include "MessageClient/MessageClientMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "MessageClient/MessageClientMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "MessageClient/MessageClientMiddleLayer/Audio/AudioManager.h"
 #include "MessageClient/MessageClientMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "MessageClient/MessageClientMiddleLayer/Event/EventManager.h"
@@ -32,7 +32,7 @@
 
 namespace MessageClient
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<MessageClientMiddleLayer::ObjectLogicManager, MessageClientMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<MessageClientMiddleLayer::ObjectLogicManager, MessageClientMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   MessageClientMiddleLayer::InputManager,
                                                                   MessageClientMiddleLayer::NetworkManager,
@@ -54,13 +54,16 @@ namespace MessageClient
         using ClassType = MessageClientMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit MessageClientMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        MessageClientMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using MessageClientMessageWindowProcessHandle = Framework::WindowProcessHandle<MessageClientMessage>;

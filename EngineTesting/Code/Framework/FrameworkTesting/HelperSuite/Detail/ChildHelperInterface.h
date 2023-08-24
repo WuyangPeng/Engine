@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:17)
+///	版本：0.9.1.3 (2023/08/11 19:19)
 
 #ifndef FRAMEWORK_HELPER_SUITE_CHILD_HELPER_INTERFACE_H
 #define FRAMEWORK_HELPER_SUITE_CHILD_HELPER_INTERFACE_H
@@ -18,7 +18,7 @@
 
 namespace Framework
 {
-    class ChildHelperInterface : public EngineMiddleLayerInterface
+    class ChildHelperInterface final : public EngineMiddleLayerInterface
     {
     public:
         NON_COPY_TYPE_DECLARE(ChildHelperInterface);
@@ -29,15 +29,15 @@ namespace Framework
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Input);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(ObjectLogic);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Message);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Event);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Resource);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Audio);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(CameraSystems);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Rendering);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Engine);
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Input)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(ObjectLogic)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Message)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Event)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Resource)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Audio)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(CameraSystems)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Rendering)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Engine)
 
     public:
         // 开启protected接口为public，以供测试。

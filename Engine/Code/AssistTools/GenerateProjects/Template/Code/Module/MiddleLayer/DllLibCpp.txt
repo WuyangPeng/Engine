@@ -1,0 +1,6 @@
+$Copyright$
+
+#include "$ModuleName$MiddleLayerExport.h"
+
+#include "DllLib.h"
+#include "$ModuleName$MiddleLayer.h"

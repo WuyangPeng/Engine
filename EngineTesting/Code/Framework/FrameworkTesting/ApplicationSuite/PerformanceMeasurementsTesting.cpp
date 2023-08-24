@@ -5,11 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:26)
+///	版本：0.9.1.3 (2023/08/11 20:44)
 
 #include "PerformanceMeasurementsTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Threading/SyncTools.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -18,11 +17,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Framework/Application/PerformanceMeasurements.h"
-
-namespace Framework
-{
-    using TestingType = PerformanceMeasurements;
-}
 
 Framework::PerformanceMeasurementsTesting::PerformanceMeasurementsTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -46,15 +40,15 @@ void Framework::PerformanceMeasurementsTesting::PerformanceMeasurementsTest()
 {
     constexpr auto maxTimer = 30;
 
-    TestingType performanceMeasurements{ maxTimer };
+    PerformanceMeasurements performanceMeasurements{ maxTimer };
 
     constexpr auto frame = System::gMillisecond / maxTimer;
-    const auto aTestLoopCount = maxTimer * GetTestLoopCount();
+    const auto maxTimerTestLoopCount = maxTimer * GetTestLoopCount();
 
     CoreTools::CustomTime customTime{};
     auto delta = 0;
     auto frameSum = 0;
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < maxTimerTestLoopCount; ++i)
     {
         performanceMeasurements.UpdateFrameCount();
 

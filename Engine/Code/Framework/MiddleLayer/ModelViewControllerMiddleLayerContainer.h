@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:22)
+///	版本：0.9.1.3 (2023/08/07 10:57)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_CONTAINER_H
 #define FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_CONTAINER_H
@@ -23,19 +23,14 @@ namespace Framework
     class ModelViewControllerMiddleLayerContainer final : public MiddleLayerInterface
     {
     public:
+        using ControllerMiddleLayerType = ControllerMiddleLayer<ApplicationTrait>;
+
         static_assert(std::is_base_of_v<ModelViewControllerMiddleLayer, ModelMiddleLayer>);
         static_assert(std::is_base_of_v<ModelViewControllerMiddleLayer, ViewMiddleLayer>);
         static_assert(std::is_base_of_v<ModelViewControllerMiddleLayer, ControllerMiddleLayer<ApplicationTrait>>);
 
-    public:
         using ClassType = ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>;
         using ParentType = MiddleLayerInterface;
-        using ClassShareType = CoreTools::NonCopyClasses;
-        using ModelMiddleLayerType = ModelMiddleLayer;
-        using ViewMiddleLayerType = ViewMiddleLayer;
-        using ControllerMiddleLayerType = ControllerMiddleLayer<ApplicationTrait>;
-        using MiddleLayerSharedPtr = ModelViewControllerMiddleLayerSharedPtr;
-        using MiddleLayerInterfaceSharedPtr = std::unique_ptr<ClassType>;
 
     public:
         ModelViewControllerMiddleLayerContainer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
@@ -45,38 +40,36 @@ namespace Framework
         ModelViewControllerMiddleLayerContainer(ModelViewControllerMiddleLayerContainer&& rhs) noexcept;
         ModelViewControllerMiddleLayerContainer& operator=(ModelViewControllerMiddleLayerContainer&& rhs) noexcept;
 
-        NODISCARD static MiddleLayerInterfaceSharedPtr Create(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
-
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD bool PreCreate() final;
-        NODISCARD bool Create(const EnvironmentParameter& environmentParameter) final;
-        NODISCARD bool Initialize() final;
+        NODISCARD bool PreCreate() override;
+        NODISCARD bool Create(const EnvironmentParameter& environmentParameter) override;
+        NODISCARD bool Initialize() override;
 
-        NODISCARD bool Destroy() final;
-        void Terminate() final;
+        NODISCARD bool Destroy() override;
+        void Terminate() override;
 
-        void PreIdle() final;
-        NODISCARD bool Idle(int64_t timeDelta) final;
+        void PreIdle() override;
+        NODISCARD bool Idle(int64_t timeDelta) override;
 
-        NODISCARD bool Paint() final;
-        NODISCARD bool Move(const WindowPoint& point) final;
-        NODISCARD bool Resize(WindowDisplay windowDisplay, const WindowSize& size) final;
+        NODISCARD bool Paint() override;
+        NODISCARD bool Move(const WindowPoint& point) override;
+        NODISCARD bool Resize(WindowDisplay windowDisplay, const WindowSize& size) override;
 
-        NODISCARD bool KeyUp(int key, const WindowPoint& point) final;
-        NODISCARD bool KeyDown(int key, const WindowPoint& point) final;
-        NODISCARD bool SpecialKeyUp(int key, const WindowPoint& point) final;
-        NODISCARD bool SpecialKeyDown(int key, const WindowPoint& point) final;
+        NODISCARD bool KeyUp(int key, const WindowPoint& point) override;
+        NODISCARD bool KeyDown(int key, const WindowPoint& point) override;
+        NODISCARD bool SpecialKeyUp(int key, const WindowPoint& point) override;
+        NODISCARD bool SpecialKeyDown(int key, const WindowPoint& point) override;
 
-        NODISCARD bool PassiveMotion(const WindowPoint& point) final;
-        NODISCARD bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
-        NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
-        NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
+        NODISCARD bool PassiveMotion(const WindowPoint& point) override;
+        NODISCARD bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
+        NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
+        NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
 
     private:
-        MiddleLayerSharedPtr modelMiddleLayer;
-        MiddleLayerSharedPtr viewMiddleLayer;
-        MiddleLayerSharedPtr controllerMiddleLayer;
+        ModelViewControllerMiddleLayerSharedPtr modelMiddleLayer;
+        ModelViewControllerMiddleLayerSharedPtr viewMiddleLayer;
+        ModelViewControllerMiddleLayerSharedPtr controllerMiddleLayer;
     };
 }
 

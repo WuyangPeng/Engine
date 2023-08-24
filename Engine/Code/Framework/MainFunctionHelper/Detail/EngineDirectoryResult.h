@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:38)
+///	版本：0.9.1.3 (2023/08/08 19:29)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_ENGINE_DIRECTORY_RESULT_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_ENGINE_DIRECTORY_RESULT_H
@@ -23,6 +23,7 @@ namespace Framework
     {
     public:
         using ClassType = EngineDirectoryResult;
+
         using String = System::String;
 
     public:

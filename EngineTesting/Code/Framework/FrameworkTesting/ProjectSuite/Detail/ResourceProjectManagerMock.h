@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/18 22:33)
+///	版本：0.9.1.3 (2023/08/14 14:10)
 
 #ifndef FRAMEWORK_PROJECT_RESOURCE_PROJECT_MANAGER_MOCK_H
 #define FRAMEWORK_PROJECT_RESOURCE_PROJECT_MANAGER_MOCK_H
@@ -19,6 +19,7 @@ namespace Framework
     public:
         using ClassType = ResourceProjectManagerMock;
         using ParentType = ResourceProjectManager;
+
         using ResourceProjectManagerSharedPtr = std::shared_ptr<ClassType>;
 
     public:

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -68,7 +68,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{4FC6C655-54F0-473C-B382-C58016CB7FA1}</ProjectGuid>
+    <ProjectGuid>{92397201-8DF6-4692-BCE0-C7483F9BB402}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>LeaderboardServerMiddleLayer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -315,7 +315,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;LEADERBOARDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;LEADERBOARD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -326,7 +326,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;LEADERBOARDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;LEADERBOARD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -361,7 +361,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;LEADERBOARDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;LEADERBOARD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -376,7 +376,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;LEADERBOARDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;LEADERBOARD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -419,7 +419,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;LEADERBOARDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;LEADERBOARD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -430,7 +430,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;LEADERBOARDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;LEADERBOARD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -465,7 +465,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;LEADERBOARDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;LEADERBOARD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -480,7 +480,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;LEADERBOARDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;LEADERBOARD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -521,7 +521,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceManager.cpp" />
+    <ClCompile Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.cpp" />
     <ClCompile Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Audio\AudioManager.cpp" />
     <ClCompile Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\CameraSystems\CameraSystemsManager.cpp" />
     <ClCompile Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\DllLib.cpp" />
@@ -537,9 +537,9 @@
     <ClCompile Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\System\SystemManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegence.h" />
-    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceFwd.h" />
-    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceManager.h" />
+    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligence.h" />
+    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceFwd.h" />
+    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.h" />
     <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Audio\Audio.h" />
     <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Audio\AudioFwd.h" />
     <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Audio\AudioManager.h" />
@@ -560,16 +560,16 @@
     <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\GUI\GUI.h" />
     <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\GUI\GUIFwd.h" />
     <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\GUI\GUIManager.h" />
+    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Helper\ExportMacro.h" />
+    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Helper\LeaderboardServerMiddleLayerClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Helper\LeaderboardServerMiddleLayerCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Input\Input.h" />
     <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Input\InputFwd.h" />
     <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Input\InputManager.h" />
     <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Input\InputManagerDetail.h" />
-    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Macro\ExportMacro.h" />
-    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Macro\LeaderboardServerMiddleLayerClassInvariantMacro.h" />
-    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Macro\LeaderboardServerMiddleLayerCustomAssertMacro.h" />
-    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Macro\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Message\Message.h" />
     <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Message\MessageFwd.h" />
     <ClInclude Include="..\..\..\Code\LeaderboardServer\LeaderboardServerMiddleLayer\Message\MessageManager.h" />

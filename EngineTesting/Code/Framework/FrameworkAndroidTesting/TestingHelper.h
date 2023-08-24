@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 18:21)
+///	版本：0.9.1.3 (2023/08/11 14:17)
 
 #ifndef FRAMEWORK_TESTING_TESTING_HELPER_H
 #define FRAMEWORK_TESTING_TESTING_HELPER_H
@@ -18,14 +18,14 @@ namespace Framework
 {
     using TestingHelperBase = AndroidMainFunctionHelper<AndroidFrameBuild, AndroidProcessFrameworkTesting>;
 
-    class TestingHelper : public TestingHelperBase
+    class TestingHelper final : public TestingHelperBase
     {
     public:
-        typedef TestingHelper ClassType;
-        typedef TestingHelperBase ParentType;
+        using ClassType = TestingHelper;
+        using ParentType = TestingHelperBase;
 
     public:
-        explicit TestingHelper(AndroidApp* state, const Framework::EnvironmentDirectory& environmentDirectory);
+        TestingHelper(AndroidApp* state, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

@@ -1,0 +1,93 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_$CoreCapital$_HELPER_$ModuleUppercase$_$CoreCapital$_CUSTOM_ASSERT_MACRO_H
+#define $ModuleUppercase$_$CoreCapital$_HELPER_$ModuleUppercase$_$CoreCapital$_CUSTOM_ASSERT_MACRO_H
+
+#include "UserMacro.h"
+#include "$CoreName$Tools/Helper/CustomAssertMacro.h"
+
+#if defined(OPEN_IMPORTANT_EXCEPTION_ASSERT)
+
+    #define $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL 0
+
+#endif  // OPEN_IMPORTANT_EXCEPTION_ASSERT
+
+#if !defined($ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL)
+
+    #define $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL 4
+
+#endif  // $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL
+
+static_assert($ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL <= ASSERT_LEVEL, "Assert level definition error.");
+
+#if 0 <= $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL
+
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_0(condition, format, ...) \
+        ASSERTION_0((condition), (format), __VA_ARGS__)
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition, functionDescribed, format, ...) \
+        ASSERTION_USE_FUNCTION_DESCRIBED_0((condition), (functionDescribed), (format), __VA_ARGS__)
+
+#else  // $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL < 0
+
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_0(condition, format, ...) (static_cast<void>(0))
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_USE_FUNCTION_DESCRIBED_0(condition, functionDescribed, format, ...) (static_cast<void>(0))
+
+#endif  // 0 <= $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL
+
+#if 1 <= $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL
+
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_1(condition, format, ...) \
+        ASSERTION_1((condition), (format), __VA_ARGS__)
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_USE_FUNCTION_DESCRIBED_1(condition, functionDescribed, format, ...) \
+        ASSERTION_USE_FUNCTION_DESCRIBED_1((condition), (functionDescribed), (format), __VA_ARGS__)
+
+#else  // $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL < 1
+
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_1(condition, format, ...) (static_cast<void>(0))
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_USE_FUNCTION_DESCRIBED_1(condition, functionDescribed, format, ...) (static_cast<void>(0))
+
+#endif  // 1 <= $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL
+
+#if 2 <= $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL
+
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_2(condition, format, ...) \
+        ASSERTION_2((condition), (format), __VA_ARGS__)
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_USE_FUNCTION_DESCRIBED_2(condition, functionDescribed, format, ...) \
+        ASSERTION_USE_FUNCTION_DESCRIBED_2((condition), (functionDescribed), (format), __VA_ARGS__)
+
+#else  // $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL < 2
+
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_2(condition, format, ...) (static_cast<void>(0))
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_USE_FUNCTION_DESCRIBED_2(condition, functionDescribed, format, ...) (static_cast<void>(0))
+
+#endif  // 2 <= $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL
+
+#if 3 <= $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL
+
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_3(condition, format, ...) \
+        ASSERTION_3((condition), (format), __VA_ARGS__)
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_USE_FUNCTION_DESCRIBED_3(condition, functionDescribed, format, ...) \
+        ASSERTION_USE_FUNCTION_DESCRIBED_3((condition), (functionDescribed), (format), __VA_ARGS__)
+
+#else  // $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL < 3
+
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_3(condition, format, ...) (static_cast<void>(0))
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_USE_FUNCTION_DESCRIBED_3(condition, functionDescribed, format, ...) (static_cast<void>(0))
+
+#endif  // 3 <= $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL
+
+#if 4 <= $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL
+
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_4(condition, format, ...) \
+        ASSERTION_4((condition), (format), __VA_ARGS__)
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_USE_FUNCTION_DESCRIBED_4(condition, functionDescribed, format, ...) \
+        ASSERTION_USE_FUNCTION_DESCRIBED_4((condition), (functionDescribed), (format), __VA_ARGS__)
+
+#else  // $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL < 4
+
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_4(condition, format, ...) (static_cast<void>(0))
+    #define $ModuleUppercase$_$CoreCapital$_ASSERTION_USE_FUNCTION_DESCRIBED_4(condition, functionDescribed, format, ...) (static_cast<void>(0))
+
+#endif  // 4 <= $ModuleUppercase$_$CoreCapital$_ASSERT_LEVEL
+
+#endif  // $ModuleUppercase$_$CoreCapital$_HELPER_$ModuleUppercase$_$CoreCapital$_CUSTOM_ASSERT_MACRO_H

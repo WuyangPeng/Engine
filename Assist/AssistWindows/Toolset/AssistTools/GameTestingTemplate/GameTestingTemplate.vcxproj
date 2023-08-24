@@ -33,7 +33,7 @@
       <Configuration>StaticRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  </ItemGroup>  
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{B5D502C7-4152-452C-9CD0-10934A65C7A0}</ProjectGuid>
@@ -282,7 +282,7 @@ xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude
       <Command>xcopy "$(ProjectDir)/Configuration/GameTestingParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -343,23 +343,10 @@ xcopy "$(ProjectDir)/Configuration/TestingStringReplacing.json" "$(AssistInclude
     <None Include="Configuration\GameTestingParameter.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\TestingStringReplacing.json" />
-    <None Include="Resource\GameTemplate\SetTemplateEnvironment.bat" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\GameTemplate\GameTemplateEnvironmentVariable.txt" />
-    <Text Include="Resource\GameTemplate\GameTemplateLog.txt" />
-    <Text Include="Resource\GameTemplate\GameTemplateTestingExeLibCpp.txt" />
-    <Text Include="Resource\GameTemplate\GameTemplateTestingH.txt" />
-    <Text Include="Resource\GameTemplate\GameTemplateTestingHelperCpp.txt" />
-    <Text Include="Resource\GameTemplate\GameTemplateTestingHelperH.txt" />
-    <Text Include="Resource\GameTemplate\GameTemplateTestingJson.txt" />
-    <Text Include="Resource\GameTemplate\GameTemplateTestingLibCpp.txt" />
-    <Text Include="Resource\GameTemplate\GameTemplateTestingMainCpp.txt" />
-    <Text Include="Resource\GameTemplate\GameTestingTemplate.txt" />
-    <Text Include="Resource\GameTemplate\GameTestingTemplateVcxproj.txt" />
-    <Text Include="Resource\GameTemplate\GameTestingTemplateVcxprojFilters.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />

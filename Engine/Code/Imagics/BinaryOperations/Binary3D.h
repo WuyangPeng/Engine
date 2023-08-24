@@ -5,20 +5,19 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 17:03)
+///	版本：0.9.1.3 (2023/08/02 11:23)
 
 #ifndef IMAGICS_BINARY_OPERATIONS_BINARY3D_H
 #define IMAGICS_BINARY_OPERATIONS_BINARY3D_H
 
 #include "Imagics/ImagicsDll.h"
 
-#include <vector>
-
 namespace Imagics
 {
     class IMAGICS_DEFAULT_DECLARE Binary3D
     {
     public:
+        using ClassType = Binary3D;
     };
 }
 

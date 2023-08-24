@@ -100,12 +100,6 @@
     <Filter Include="DatabaseInterface 源文件\Detail">
       <UniqueIdentifier>{0e03bfa7-e6e5-4ad0-ad41-1408c4d10bad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DatabaseGenerate 头文件">
-      <UniqueIdentifier>{d84b9fe1-f32c-408e-b9d6-604ef0e93cfa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DatabaseGenerate 源文件">
-      <UniqueIdentifier>{92bc33a7-cea6-4523-ac88-e71341e5ff8a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MysqlBoostWrappers 源文件">
       <UniqueIdentifier>{494ca1b3-2633-4cf7-817e-18f5dad27f05}</UniqueIdentifier>
     </Filter>
@@ -274,18 +268,6 @@
       <Filter>DatabaseEntityCodeGeneration 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntityAnalysis.cpp">
-      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeMappingImpl.cpp">
-      <Filter>DatabaseEntityCodeGeneration 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeMapping.cpp">
-      <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeMappingAnalysisImpl.cpp">
-      <Filter>DatabaseEntityCodeGeneration 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeMappingAnalysis.cpp">
       <Filter>DatabaseEntityCodeGeneration 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeHeaderFileGeneration.cpp">
@@ -482,12 +464,6 @@
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\Entity.h">
       <Filter>DatabaseInterface 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseGenerate\DatabaseGenerate.h">
-      <Filter>DatabaseGenerate 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseGenerate\DatabaseGenerateFwd.h">
-      <Filter>DatabaseGenerate 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\DatabaseInterface\EntityDetail.h">
       <Filter>DatabaseInterface 模板文件</Filter>
     </ClInclude>
@@ -591,18 +567,6 @@
       <Filter>DatabaseEntityCodeGeneration 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeEntityAnalysis.h">
-      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeMappingImpl.h">
-      <Filter>DatabaseEntityCodeGeneration 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeMapping.h">
-      <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\Detail\CodeMappingAnalysisImpl.h">
-      <Filter>DatabaseEntityCodeGeneration 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeMappingAnalysis.h">
       <Filter>DatabaseEntityCodeGeneration 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\DatabaseEntityCodeGeneration\CodeHeaderFileGeneration.h">

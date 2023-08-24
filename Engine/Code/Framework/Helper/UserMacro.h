@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:41)
+///	版本：0.9.1.3 (2023/08/08 19:53)
 
 #ifndef FRAMEWORK_HELPER_USER_MACRO_H
 #define FRAMEWORK_HELPER_USER_MACRO_H
@@ -27,8 +27,13 @@
 #include "UserInterface/Helper/UserMacro.h"
 #include "AssistTools/Helper/UserMacro.h"
 
-#define CLOSE_USE_ANDROID_TEST (0x01)
-#define CLOSE_FRAMEWORK_MAX (((CLOSE_USE_ANDROID_TEST) << 1) - 1)
+#define FRAMEWORK_ClOSE_BEGIN (0x01)
+
+#define CLOSE_USE_ANDROID_TEST (FRAMEWORK_ClOSE_BEGIN)
+
+#define FRAMEWORK_ClOSE_END CLOSE_USE_ANDROID_TEST
+
+#define CLOSE_FRAMEWORK_MAX (((FRAMEWORK_ClOSE_END) << 1) - 1)
 
 // 编译测试（默认为0，最大值为0x01）
 #define COMPILE_FRAMEWORK_CLOSE 0x01
@@ -46,7 +51,6 @@ static_assert(COMPILE_FRAMEWORK_CLOSE <= CLOSE_FRAMEWORK_MAX, "COMPILE_FRAMEWORK
     #endif  // SYSTEM_PLATFORM_ANDROID
 
 #endif  // !defined(COMPILE_FRAMEWORK_CLOSE) || (COMPILE_FRAMEWORK_CLOSE & CLOSE_USE_ANDROID_TEST) != CLOSE_USE_ANDROID_TEST
-
 
 #ifdef BUILDING_STATIC
 

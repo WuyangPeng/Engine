@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:03)
+///	版本：0.9.1.3 (2023/08/04 11:06)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_LOOP_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_LOOP_H
@@ -24,16 +24,17 @@ namespace Framework
     {
     public:
         NON_COPY_TYPE_DECLARE(WindowMessageLoop);
-        using HWnd = System::WindowsHWnd;
-        using WParam = System::WindowsWParam;
-        using Display = System::DisplayFunction;
+
+        using WindowsHWnd = System::WindowsHWnd;
+        using WindowsWParam = System::WindowsWParam;
+        using DisplayFunction = System::DisplayFunction;
 
     public:
-        explicit WindowMessageLoop(Display function);
+        explicit WindowMessageLoop(DisplayFunction function);
 
         CLASS_INVARIANT_DECLARE;
 
-        WParam EnterMessageLoop(HWnd hwnd);
+        NODISCARD WindowsWParam EnterMessageLoop(WindowsHWnd hWnd);
 
     private:
         PackageType impl;

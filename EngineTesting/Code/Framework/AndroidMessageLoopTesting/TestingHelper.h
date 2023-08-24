@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 18:01)
+///	版本：0.9.1.3 (2023/08/10 17:51)
 
 #ifndef ANDROID_MESSAGE_LOOP_TESTING_TESTING_HELPER_H
 #define ANDROID_MESSAGE_LOOP_TESTING_TESTING_HELPER_H
@@ -16,21 +16,23 @@
 
 namespace AndroidMessageLoopTesting
 {
-    class TestingHelper : public Framework::AndroidMainFunctionHelper<Framework::AndroidFrameBuild, Framework::AndroidProcessInterface>
+    class TestingHelper final : public Framework::AndroidMainFunctionHelper<Framework::AndroidFrameBuild, Framework::AndroidProcessInterface>
     {
     public:
         using ClassType = TestingHelper;
         using ParentType = AndroidMainFunctionHelper<Framework::AndroidFrameBuild, Framework::AndroidProcessInterface>;
 
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        TestingHelper(AndroidApp* state, const Framework::EnvironmentDirectory& environmentDirectory);
+        TestingHelper(AndroidApp* state, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
         NODISCARD int RunAndroidMainLoop() override;
 
-        static void DisplayPtr(AndroidApp* state, int64_t timeDelta) noexcept;
+        static void Display(AndroidApp* state, int64_t timeDelta) noexcept;
     };
 }
 

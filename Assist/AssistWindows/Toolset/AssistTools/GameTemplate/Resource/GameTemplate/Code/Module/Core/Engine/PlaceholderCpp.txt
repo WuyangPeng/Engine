@@ -1,0 +1,11 @@
+$Copyright$
+
+#include "$ModuleName$/$ModuleName$$CoreName$/$ModuleName$$CoreName$Export.h"
+
+#include "$ModuleName$/$ModuleName$$CoreName$/Helper/$ModuleName$$CoreName$ClassInvariantMacro.h"
+#include "Placeholder.h"
+
+$ModuleName$$CoreName$::Placeholder::Placeholder() noexcept
+{
+    $ModuleUppercase$_$CoreCapital$_CLASS_IS_VALID_CONST_9;
+}

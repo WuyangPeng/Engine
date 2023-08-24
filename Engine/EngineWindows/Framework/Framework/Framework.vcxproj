@@ -273,6 +273,7 @@
     <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBackDetail.h" />
     <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBackInterface.h" />
     <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBackUnitTestSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBackUnitTestSuiteDetail.h" />
     <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidFrame.h" />
     <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidFrameBuild.h" />
     <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidFrameBuildDetail.h" />
@@ -438,6 +439,7 @@
     <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutCallBackDetail.h" />
     <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutCallBackInterface.h" />
     <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutCallBackUnitTestSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutCallBackUnitTestSuiteDetail.h" />
     <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutFrame.h" />
     <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutFrameBuild.h" />
     <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutFrameBuildDetail.h" />

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 19:17)
+///	版本：0.9.1.3 (2023/08/01 20:04)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -13,7 +13,6 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-// private
 Animation::TestingHelper::TestingHelper(int argc, char** argv)
     : ParentType{ argc, argv, "动画库" }
 {
@@ -24,12 +23,10 @@ Animation::TestingHelper::TestingHelper(int argc, char** argv)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Animation, TestingHelper)
 
-// private
 void Animation::TestingHelper::InitSuite()
 {
     AddHelperSuite();
-    AddConsoleGraphSuite();
-    AddElfAnimationSuite();
+    AddSpriteAnimationSuite();
     AddTextureAnimationSuite();
     AddRigidBodyHierarchyAnimationSuite();
     AddSkeletonAnimationSuite();
@@ -46,18 +43,11 @@ void Animation::TestingHelper::AddHelperSuite()
     AddSuite(helperSuite);
 }
 
-void Animation::TestingHelper::AddConsoleGraphSuite()
+void Animation::TestingHelper::AddSpriteAnimationSuite()
 {
-    auto consoleGraphSuite = GenerateSuite("控制台图形");
+    auto spriteAnimationSuite = GenerateSuite("精灵动画");
 
-    AddSuite(consoleGraphSuite);
-}
-
-void Animation::TestingHelper::AddElfAnimationSuite()
-{
-    auto elfAnimationSuite = GenerateSuite("精灵动画");
-
-    AddSuite(elfAnimationSuite);
+    AddSuite(spriteAnimationSuite);
 }
 
 void Animation::TestingHelper::AddTextureAnimationSuite()

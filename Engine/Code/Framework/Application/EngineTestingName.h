@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:43)
+///	版本：0.9.1.3 (2023/08/09 14:42)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_ENGINE_TESTING_NAME_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_ENGINE_TESTING_NAME_H
@@ -19,8 +19,6 @@
 #include "CoreTools/Helper/UserMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
-#include <vector>
-
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineTestingNameImpl);
 
 namespace Framework
@@ -28,15 +26,17 @@ namespace Framework
     class FRAMEWORK_DEFAULT_DECLARE EngineTestingName
     {
     public:
-        using String = System::String;
         NON_COPY_TYPE_DECLARE(EngineTestingName);
+
+        using String = System::String;
+        using OStreamShared = CoreTools::OStreamShared;
 
     public:
         explicit EngineTestingName(const String& endName);
 
         CLASS_INVARIANT_DECLARE;
 
-        void PrintSelect(CoreTools::OStreamShared stream);
+        void PrintSelect(const OStreamShared& stream);
         NODISCARD bool IsSelectValid(int select) const;
         NODISCARD String GetEngineTestingName(int select) const;
 

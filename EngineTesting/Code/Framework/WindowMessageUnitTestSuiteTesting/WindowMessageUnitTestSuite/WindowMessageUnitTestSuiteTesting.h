@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:35)
+///	版本：0.9.1.3 (2023/08/10 10:50)
 
 #ifndef WINDOW_MESSAGE_UNIT_TEST_SUITE_TESTING_WINDOW_MESSAGE_UNIT_TEST_SUITE_TESTING_H
 #define WINDOW_MESSAGE_UNIT_TEST_SUITE_TESTING_WINDOW_MESSAGE_UNIT_TEST_SUITE_TESTING_H
@@ -20,6 +20,7 @@ namespace Framework
     public:
         using ClassType = WindowMessageUnitTestSuiteTesting;
         using ParentType = UnitTest;
+
         using WindowMessageSharedPtr = std::shared_ptr<SuiteWindowMessage>;
 
     public:
@@ -28,7 +29,7 @@ namespace Framework
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
         void MainTest();
 
@@ -37,7 +38,10 @@ namespace Framework
         void DisplayTest();
 
     private:
-        std::weak_ptr<SuiteWindowMessage> mMessage;
+        using SuiteWindowMessageWeakPtr = std::weak_ptr<SuiteWindowMessage>;
+
+    private:
+        SuiteWindowMessageWeakPtr message;
     };
 }
 

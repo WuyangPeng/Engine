@@ -22,10 +22,10 @@
     <Filter Include="Engine 源文件">
       <UniqueIdentifier>{2512de7f-aa64-4033-8e61-0dadaf3ef7d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
+    <Filter Include="Helper 头文件">
       <UniqueIdentifier>{8dda47bf-8440-43c0-b414-a603bb79858b}</UniqueIdentifier>
     </Filter>
-  </ItemGroup> 
+  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Engine\EngineFwd.h">
       <Filter>Engine 头文件</Filter>
@@ -35,24 +35,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Engine\Engine.h">
       <Filter>Engine 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Macro\UpdateServerCoreCustomAssertMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Macro\ExportMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Macro\UpdateServerCoreClassInvariantMacro.h">
-      <Filter>Macro 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\UpdateServerCoreImport.h">
       <Filter>头文件</Filter>
@@ -77,6 +59,24 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\DllLib.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Helper\ExportMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Helper\UpdateServerCoreClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Helper\UpdateServerCoreCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UpdateServer\UpdateServerCore\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

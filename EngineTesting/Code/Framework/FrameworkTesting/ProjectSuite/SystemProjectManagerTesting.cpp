@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/18 23:14)
+///	版本：0.9.1.3 (2023/08/14 14:12)
 
 #include "SystemProjectManagerTesting.h"
 #include "Detail/ResourceProjectManagerMock.h"

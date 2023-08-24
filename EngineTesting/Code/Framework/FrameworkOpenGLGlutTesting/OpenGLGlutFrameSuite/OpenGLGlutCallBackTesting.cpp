@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:23)
+///	版本：0.9.1.3 (2023/08/11 18:05)
 
 #include "OpenGLGlutCallBackTesting.h"
 #include "System/Helper/Helper.h"
@@ -35,10 +35,10 @@ void Framework::OpenGLGlutCallBackTesting::MainTest()
 
 void Framework::OpenGLGlutCallBackTesting::InterfaceTest()
 {
-    OpenGLGlutCallBack<MiddleLayerInterface> openGLGlutCallBack(9, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    OpenGLGlutCallBack<MiddleLayerInterface> openGLGlutCallBack{ 9, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    openGLGlutCallBack.SetWindowID(10);
-    ASSERT_EQUAL(openGLGlutCallBack.GetWindowID(), 10);
+    openGLGlutCallBack.SetWindowId(10);
+    ASSERT_EQUAL(openGLGlutCallBack.GetWindowId(), 10);
 
     ASSERT_TRUE(openGLGlutCallBack.RenderScene());
     ASSERT_TRUE(openGLGlutCallBack.ChangeSize(0, 0));
@@ -61,8 +61,4 @@ void Framework::OpenGLGlutCallBackTesting::InterfaceTest()
     ASSERT_EQUAL(openGLGlutCallBack.GetMillisecond(), 10);
 
     ASSERT_EQUAL(openGLGlutCallBack.GetTerminateKey(), GlutApplicationTrait::KeyIdentifiers::keyTerminate);
-}
-
-void Framework::OpenGLGlutCallBackTesting::TimerFunction(MAYBE_UNUSED int value) noexcept
-{
 }

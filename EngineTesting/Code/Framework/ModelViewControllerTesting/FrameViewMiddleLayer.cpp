@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:24)
+///	版本：0.9.1.3 (2023/08/10 13:43)
 
 #include "FrameViewMiddleLayer.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
@@ -39,17 +39,15 @@ bool ModelViewController::FrameViewMiddleLayer::Idle(int64_t aTimeDelta)
     }
 }
 
-// private
 void ModelViewController::FrameViewMiddleLayer::PrintFrameRateMessage(int64_t aTimeDelta)
 {
     timeDelta -= aTimeDelta;
     if (timeDelta <= 0)
     {
-        auto modelMiddleLayer = boost::polymorphic_pointer_downcast<Framework::ModelMiddleLayer>(GetModelMiddleLayer());
-
-        if (modelMiddleLayer)
+        if (const auto modelMiddleLayer = boost::polymorphic_pointer_downcast<Framework::ModelMiddleLayer>(GetModelMiddleLayer());
+            modelMiddleLayer != nullptr)
         {
-           std::cout << modelMiddleLayer->GetFrameRateMessage() << '\n';
+            std::cout << modelMiddleLayer->GetFrameRateMessage() << '\n';
         }
 
         timeDelta = timerInterval;

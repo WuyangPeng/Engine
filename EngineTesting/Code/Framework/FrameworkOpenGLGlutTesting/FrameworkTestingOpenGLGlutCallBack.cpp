@@ -5,16 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:24)
+///	版本：0.9.1.3 (2023/08/11 16:52)
 
 #include "FrameworkTestingOpenGLGlutCallBack.h"
 #include "Testing.h"
-#include "System/OpenGL/OpenGLGlut.h"
-#include "System/OpenGL/OpenGLInit.h"
 #include "System/Windows/WindowsCreate.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
+#include "Framework/OpenGLGlutFrame/OpenGLGlutCallBackUnitTestSuiteDetail.h"
 
 Framework::FrameworkTestingOpenGLGlutCallBack::FrameworkTestingOpenGLGlutCallBack(int64_t delta)
     : ParentType(delta, "【框架库】单元测试套件")
@@ -27,11 +26,6 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, FrameworkTestingOpenGLGlutCall
 void Framework::FrameworkTestingOpenGLGlutCallBack::AddSuite()
 {
     AddOpenGLGlutFrameSuite();
-}
-
-std::string Framework::FrameworkTestingOpenGLGlutCallBack::GetSuiteName() const
-{
-    return "【框架库】单元测试套件";
 }
 
 void Framework::FrameworkTestingOpenGLGlutCallBack::AddOpenGLGlutFrameSuite()

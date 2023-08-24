@@ -1,0 +1,8 @@
+$Copyright$
+
+#ifndef $ProjectCapital$_$ProjectCapital$_H
+#define $ProjectCapital$_$ProjectCapital$_H
+
+#include "Helper/Helper.h"
+
+#endif  // $ProjectCapital$_$ProjectCapital$_H

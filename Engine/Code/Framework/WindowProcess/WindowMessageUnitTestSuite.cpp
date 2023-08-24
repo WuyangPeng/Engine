@@ -5,85 +5,88 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:09)
+///	版本：0.9.1.3 (2023/08/04 11:05)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowMessageUnitTestSuite.h"
 #include "Detail/WindowMessageUnitTestSuiteImpl.h"
-#include "Detail/WindowMessageUnitTestSuiteStream.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 #include "CoreTools/UnitTestSuite/Suite.h"
 
 Framework::WindowMessageUnitTestSuite::WindowMessageUnitTestSuite(int64_t delta, const std::string& suiteName)
-    : ParentType{ delta }, stream{ std::make_shared<StreamType>(true) }, impl{ suiteName, stream->GetStreamShared() }
+    : ParentType{ delta }, impl{ suiteName }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Framework::WindowMessageUnitTestSuite::WindowMessageUnitTestSuite(int64_t delta, const std::string& suiteName, const Framework::EnvironmentDirectory& environmentDirectory)
-    : ParentType{ delta, environmentDirectory }, stream{ std::make_shared<StreamType>(true) }, impl{ suiteName, stream->GetStreamShared() }
+    : ParentType{ delta, environmentDirectory }, impl{ suiteName }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-#ifdef OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_STUB_DEFINE(Framework, WindowMessageUnitTestSuite)
 
-bool Framework::WindowMessageUnitTestSuite::IsValid() const noexcept
+int Framework::WindowMessageUnitTestSuite::GetPassedNumber() const noexcept
 {
-    if (ParentType::IsValid() && stream != nullptr)
-        return true;
-    else
-        return false;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetPassedNumber();
 }
 
-#endif  // OPEN_CLASS_INVARIANT
-
-System::WindowsLResult Framework::WindowMessageUnitTestSuite::CreateMessage(HWnd hwnd, WParam wParam, LParam lParam)
+bool Framework::WindowMessageUnitTestSuite::IsPrintRun() const noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    if (GetHwnd() == nullptr)
-        return AddSuiteOnCreateMessage(hwnd, wParam, lParam);
+    return impl->IsPrintRun();
+}
+
+void Framework::WindowMessageUnitTestSuite::AddSuite(const Suite& suite)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->AddSuite(suite);
+}
+
+System::WindowsLResult Framework::WindowMessageUnitTestSuite::CreateMessage(HWnd hWnd, WParam wParam, LParam lParam)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    if (GetHWnd() == nullptr)
+        return AddSuiteOnCreateMessage(hWnd, wParam, lParam);
     else
-        return ParentType::CreateMessage(hwnd, wParam, lParam);
+        return ParentType::CreateMessage(hWnd, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageUnitTestSuite::KeyDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-    auto windowsKeyCodes = boost::numeric_cast<int>(wParam);
+    const auto windowsKeyCodes = boost::numeric_cast<int>(wParam);
 
     impl->KeyDownMessage(System::UnderlyingCastEnum<System::WindowsKeyCodes>(windowsKeyCodes));
 
     return ParentType::KeyDownMessage(hwnd, wParam, lParam);
 }
 
-void Framework::WindowMessageUnitTestSuite::Display(HWnd hwnd, int64_t timeDelta)
+void Framework::WindowMessageUnitTestSuite::Display(HWnd hWnd, int64_t timeDelta)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-    return ParentType::Display(hwnd, timeDelta);
+    return ParentType::Display(hWnd, timeDelta);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowMessageUnitTestSuite, IsPrintRun, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowMessageUnitTestSuite, GetPassedNumber, int)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Framework, WindowMessageUnitTestSuite, AddSuite, Suite, void)
-
-// protected
 CoreTools::OStreamShared Framework::WindowMessageUnitTestSuite::GetStreamShared() noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return stream->GetStreamShared();
+    return impl->GetStreamShared();
 }
 
-// protected
 void Framework::WindowMessageUnitTestSuite::AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
@@ -91,10 +94,9 @@ void Framework::WindowMessageUnitTestSuite::AddTest(const std::string& suiteName
     impl->AddTest(suiteName, suite, testName, unitTest);
 }
 
-// private
-System::WindowsLResult Framework::WindowMessageUnitTestSuite::AddSuiteOnCreateMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowsLResult Framework::WindowMessageUnitTestSuite::AddSuiteOnCreateMessage(HWnd hWnd, WParam wParam, LParam lParam)
 {
-    const auto result = ParentType::CreateMessage(hwnd, wParam, lParam);
+    const auto result = ParentType::CreateMessage(hWnd, wParam, lParam);
 
     InitSuite();
 
@@ -103,7 +105,6 @@ System::WindowsLResult Framework::WindowMessageUnitTestSuite::AddSuiteOnCreateMe
     return result;
 }
 
-// protected
 CoreTools::Suite Framework::WindowMessageUnitTestSuite::GenerateSuite(const std::string& name)
 {
     return Suite{ name, GetStreamShared(), IsPrintRun() };

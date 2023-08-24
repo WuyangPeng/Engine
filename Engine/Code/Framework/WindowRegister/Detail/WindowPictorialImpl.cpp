@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:02)
+///	版本：0.9.1.3 (2023/08/03 20:01)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,37 +13,37 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/WindowRegister/WindowHBrush.h"
 
-Framework::WindowPictorialImpl::WindowPictorialImpl(WindowsBrushTypes background)
+Framework::WindowPictorialImpl::WindowPictorialImpl(BrushTypes background)
     : windowsHIcon{}, windowsHCursor{}, windowsHBrush{ CreateWindowsHBrush(background) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::WindowPictorialImpl::WindowPictorialImpl(const TChar* icon, const TChar* cursor, WindowsBrushTypes background)
+Framework::WindowPictorialImpl::WindowPictorialImpl(const TChar* icon, const TChar* cursor, BrushTypes background)
     : windowsHIcon{ icon }, windowsHCursor{ cursor }, windowsHBrush{ CreateWindowsHBrush(background) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::WindowPictorialImpl::WindowPictorialImpl(HInstance instance, int icon, int cursor, WindowsBrushTypes background)
+Framework::WindowPictorialImpl::WindowPictorialImpl(HInstance instance, int icon, int cursor, BrushTypes background)
     : windowsHIcon{ instance, icon }, windowsHCursor{ instance, cursor }, windowsHBrush{ CreateWindowsHBrush(background) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::WindowPictorialImpl::WindowPictorialImpl(HInstance instance, int icon, const TChar* cursor, WindowsBrushTypes background)
+Framework::WindowPictorialImpl::WindowPictorialImpl(HInstance instance, int icon, const TChar* cursor, BrushTypes background)
     : windowsHIcon{ instance, icon }, windowsHCursor{ cursor }, windowsHBrush{ CreateWindowsHBrush(background) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::WindowPictorialImpl::WindowPictorialImpl(HInstance instance, const TChar* icon, int cursor, WindowsBrushTypes background)
+Framework::WindowPictorialImpl::WindowPictorialImpl(HInstance instance, const TChar* icon, int cursor, BrushTypes background)
     : windowsHIcon{ icon }, windowsHCursor{ instance, cursor }, windowsHBrush{ CreateWindowsHBrush(background) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::WindowPictorialImpl::WindowPictorialImpl(HInstance instance, bool isDefaultIcon, int icon, bool isDefaultCursor, int cursor, WindowsBrushTypes background)
+Framework::WindowPictorialImpl::WindowPictorialImpl(HInstance instance, bool isDefaultIcon, int icon, bool isDefaultCursor, int cursor, BrushTypes background)
     : windowsHIcon{ WindowHIcon::Create(instance, isDefaultIcon, icon) },
       windowsHCursor{ WindowHCursor::Create(instance, isDefaultCursor, cursor) },
       windowsHBrush{ CreateWindowsHBrush(background) }
@@ -51,10 +51,9 @@ Framework::WindowPictorialImpl::WindowPictorialImpl(HInstance instance, bool isD
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-// static
-Framework::WindowPictorialImpl::WindowHBrushUniquePtr Framework::WindowPictorialImpl::CreateWindowsHBrush(WindowsBrushTypes background)
+Framework::WindowPictorialImpl::WindowHBrushUniquePtr Framework::WindowPictorialImpl::CreateWindowsHBrush(BrushTypes background)
 {
-    if (background != WindowsBrushTypes::Null)
+    if (background != BrushTypes::Null)
         return std::make_unique<WindowHBrush>(background);
     else
         return nullptr;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:02)
+///	版本：0.9.1.3 (2023/08/12 15:21)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_CAMERA_CONTROLLER_MIDDLE_LAYER_TESTING_H
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_CAMERA_CONTROLLER_MIDDLE_LAYER_TESTING_H
@@ -13,7 +13,6 @@
 #include "CameraMiddleLayerTesting.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
-#include "Framework/MiddleLayer/CameraControllerMiddleLayer.h"
 
 namespace Framework
 {
@@ -29,14 +28,12 @@ namespace Framework
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
         void MainTest();
 
         void MiddleLayerTest();
         void KeyDownTest();
-        void CameraMotionMoveTest() noexcept;
-        void MoveObjectTest() noexcept;
         void TrackBallDownTest();
         void RotateTrackBallTest();
     };

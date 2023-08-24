@@ -223,6 +223,14 @@ DatabaseEntity::Chapter::BasisDatabaseManager DatabaseEntity::Chapter::GetSelect
                                  GetKeyBasisDatabaseContainer(userId) };
 }
 
+DatabaseEntity::Chapter::BasisDatabaseManager DatabaseEntity::Chapter::GetSelectAll(WrappersStrategy wrappersStrategy)
+{
+    return BasisDatabaseManager{ wrappersStrategy,
+                                 databaseName,
+                                 Database::ChangeType::Select,
+                                 BasisDatabaseContainer::Create() };
+}
+
 Database::BasisDatabaseContainer DatabaseEntity::Chapter::GetKeyBasisDatabaseContainer(Database::Traits::ParamType::Int64 userId)
 {
     BasisDatabaseContainer basisDatabaseContainer{ BasisDatabaseContainer::ObjectContainer{ Database::BasisDatabase{ userIdDescribe, userId } } };

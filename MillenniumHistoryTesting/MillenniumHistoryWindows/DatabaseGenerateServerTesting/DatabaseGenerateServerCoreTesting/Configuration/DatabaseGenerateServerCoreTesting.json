@@ -1,8 +1,4 @@
 {
-  "engineSuite": {
-
-  },
-
   "convertSuite": {
     "ArticleConvertTesting": 1,
     "BookConvertTesting": 1,
@@ -22,6 +18,8 @@
     "SexagenaryCycleConvertTesting": 1,
     "SourceConvertTesting": 1,
     "VersionConvertTesting": 1,
-    "YearConvertTesting": 1
+    "YearConvertTesting": 1,
+    "DeleteInvalidDatabaseTesting": 1,
+    "AncientBooksDatabaseSaveTesting": 1
   }
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 22:19)
+///	版本：0.9.1.3 (2023/07/31 22:02)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -25,40 +25,36 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseGenerateServerCoreTesting, Testin
 
 void DatabaseGenerateServerCoreTesting::TestingHelper::InitSuite()
 {
-    AddEngineSuite();
-    // AddConvertSuite(ancientBooksContainer);
-}
+    const AncientBooksContainer ancientBooksContainer{ SYSTEM_TEXT("Resource/AncientBooksCsv") };
 
-void DatabaseGenerateServerCoreTesting::TestingHelper::AddEngineSuite()
-{
-    auto engineSuite = GenerateSuite("引擎");
-
-    AddSuite(engineSuite);
+    AddConvertSuite(ancientBooksContainer);
 }
 
 void DatabaseGenerateServerCoreTesting::TestingHelper::AddConvertSuite(const AncientBooksContainer& ancientBooksContainer)
 {
     auto convertSuite = GenerateSuite("转换");
 
-    ADD_TEST_USE_PARAMETER_1(convertSuite, ArticleConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, BookConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, CalendarConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, CategoryConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, CharacterConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, CountryConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, DayConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, EmperorConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, GatherConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, GenusConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, GeographicConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, IdentityConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, ImperialCourtConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, MonthConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, ReignTitleConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, SexagenaryCycleConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, SourceConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, VersionConvertTesting, ancientBooksContainer);
-    ADD_TEST_USE_PARAMETER_1(convertSuite, YearConvertTesting, ancientBooksContainer);
+    ADD_TEST_USE_PARAMETER_1(convertSuite, ArticleConvertTesting, *ancientBooksContainer.GetArticleContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, BookConvertTesting, *ancientBooksContainer.GetBookContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, CalendarConvertTesting, *ancientBooksContainer.GetCalendarContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, CategoryConvertTesting, *ancientBooksContainer.GetCategoryContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, CharacterConvertTesting, *ancientBooksContainer.GetCharacterContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, CountryConvertTesting, *ancientBooksContainer.GetCountryContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, DayConvertTesting, *ancientBooksContainer.GetDayContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, EmperorConvertTesting, *ancientBooksContainer.GetEmperorContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, GatherConvertTesting, *ancientBooksContainer.GetGatherContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, GenusConvertTesting, *ancientBooksContainer.GetGenusContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, GeographicConvertTesting, *ancientBooksContainer.GetGeographicContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, IdentityConvertTesting, *ancientBooksContainer.GetIdentityContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, ImperialCourtConvertTesting, *ancientBooksContainer.GetImperialCourtContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, MonthConvertTesting, *ancientBooksContainer.GetMonthContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, ReignTitleConvertTesting, *ancientBooksContainer.GetReignTitleContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, SexagenaryCycleConvertTesting, *ancientBooksContainer.GetSexagenaryCycleContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, SourceConvertTesting, *ancientBooksContainer.GetSourceContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, VersionConvertTesting, *ancientBooksContainer.GetVersionContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, YearConvertTesting, *ancientBooksContainer.GetYearContainer());
+    ADD_TEST_USE_PARAMETER_1(convertSuite, DeleteInvalidDatabaseTesting, ancientBooksContainer);
+    ADD_TEST_USE_PARAMETER_1(convertSuite, AncientBooksDatabaseSaveTesting, ancientBooksContainer);
 
     AddSuite(convertSuite);
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/22 16:25)
+///	版本：0.9.1.3 (2023/08/14 15:54)
 
 #ifndef DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H
 #define DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H
@@ -24,6 +24,7 @@ namespace Database
     {
     public:
         using ClassType = ConfigurationStrategyImpl;
+
         using FlagsOption = std::vector<std::string>;
         using StringOption = std::map<std::string, std::string>;
         using BooleanOption = std::map<std::string, bool>;

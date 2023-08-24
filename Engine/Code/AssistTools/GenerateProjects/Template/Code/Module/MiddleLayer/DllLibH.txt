@@ -1,0 +1,14 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_DLL_LIB_H
+#define $ModuleUppercase$_MIDDLE_LAYER_DLL_LIB_H
+
+#include "Helper/UserMacro.h"
+
+#include "ThreadingCoreRenderEngine/ThreadingCoreRenderEngineLib.h"
+
+#if defined(TCRE_USE_MSVC)
+
+#endif  // TCRE_USE_MSVC
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_DLL_LIB_H

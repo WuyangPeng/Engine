@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:08)
+///	版本：0.9.1.3 (2023/08/12 17:32)
 
 #include "ControllerMiddleLayerTesting.h"
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
@@ -21,11 +21,6 @@
 #include "Framework/WindowCreate/WindowSize.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
-
-namespace Framework
-{
-    using TestingType = ControllerMiddleLayer<WindowApplicationTrait>;
-}
 
 Framework::ControllerMiddleLayerTesting::ControllerMiddleLayerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -49,11 +44,11 @@ void Framework::ControllerMiddleLayerTesting::MiddleLayerTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    ControllerMiddleLayer<WindowApplicationTrait> middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
     ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
 
-    auto modelMiddleLayer = std::make_shared<ModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto modelMiddleLayer = std::make_shared<ModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetModelMiddleLayer(modelMiddleLayer);
 
@@ -70,7 +65,7 @@ void Framework::ControllerMiddleLayerTesting::MiddleLayerTest()
 
     constexpr WindowPoint point{};
     const WindowSize size{};
-    const VirtualKeysTypes virtualKeysTypes{};
+    constexpr VirtualKeysTypes virtualKeysTypes{};
 
     ASSERT_TRUE(middleLayer.Paint());
     ASSERT_TRUE(middleLayer.Move(point));

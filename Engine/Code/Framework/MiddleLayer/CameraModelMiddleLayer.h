@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:21)
+///	版本：0.9.1.3 (2023/08/05 16:20)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_CAMERA_MODEL_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_CAMERA_MODEL_MIDDLE_LAYER_H
@@ -27,18 +27,14 @@ namespace Framework
     public:
         NON_COPY_TYPE_DECLARE(CameraModelMiddleLayer);
         using ParentType = ModelMiddleLayer;
+
         using APoint = Mathematics::APointF;
         using AVector = Mathematics::AVectorF;
         using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
         using Transform = Rendering::TransformF;
 
     public:
-        explicit CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
-        ~CameraModelMiddleLayer() noexcept = default;
-        CameraModelMiddleLayer(const CameraModelMiddleLayer& rhs) noexcept = delete;
-        CameraModelMiddleLayer& operator=(const CameraModelMiddleLayer& rhs) noexcept = delete;
-        CameraModelMiddleLayer(CameraModelMiddleLayer&& rhs) noexcept;
-        CameraModelMiddleLayer& operator=(CameraModelMiddleLayer&& rhs) noexcept;
+        CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -50,7 +46,7 @@ namespace Framework
         NODISCARD Transform GetMotionObjectLocalTransform() const;
 
         // CameraMotion
-        bool MoveCamera();
+        NODISCARD bool MoveCamera();
 
         void SlowerCameraTranslation() noexcept;
         void FasterCameraTranslation() noexcept;
@@ -77,12 +73,12 @@ namespace Framework
         NODISCARD AVector GetCameraRightVector() const;
 
         // ObjectMotion
-        bool MoveObject();
+        NODISCARD bool MoveObject();
 
         void SetBeginTrack(float xTrack, float yTrack) noexcept;
         void SetEndTrack(float xTrack, float yTrack) noexcept;
         void RotateTrackBall();
-        void SetTrackBallDow(bool value) noexcept;
+        void SetTrackBallDow(bool trackBallDow) noexcept;
         void SetSaveRotate() noexcept(gAssert < 2 || gRenderingAssert < 2);
         void SetDoRoll(NumericalValueSymbol doRoll) noexcept;
         void SetDoYaw(NumericalValueSymbol doYaw) noexcept;
@@ -99,7 +95,6 @@ namespace Framework
 
     private:
         PackageType impl;
-        int64_t timeDelta;
     };
 
     using CameraModelMiddleLayerSharedPtr = std::shared_ptr<CameraModelMiddleLayer>;

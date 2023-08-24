@@ -1,0 +1,15 @@
+$Copyright$
+
+#include "$ModuleName$.h"
+#include "$ModuleName$/$ModuleName$$CoreName$/Helper/$ModuleName$$CoreName$ClassInvariantMacro.h"
+#include "$ModuleName$Helper.h" 
+#include "Framework/MainFunctionHelper/WindowMainFunctionHelperDetail.h"
+#include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h"
+
+$ModuleName$::$ModuleName$Helper::$ModuleName$Helper(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ instance, commandLine, information, environmentDirectory }
+{
+    $ModuleUppercase$_$CoreCapital$_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE($ModuleName$, $ModuleName$Helper)

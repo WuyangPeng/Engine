@@ -5,74 +5,38 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/24 12:17)
+///	版本：0.9.1.3 (2023/08/04 21:19)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/Identity.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/IdentityContainerDetail.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity/IdentityEntity.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerCore/Convert/ConvertEntity.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/Helper/DatabaseGenerateServerCoreClassInvariantMacro.h"
 #include "IdentityConvertTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/DatabaseInterface/BasisDatabaseManager.h"
-#include "Database/DatabaseInterface/DatabaseEnvironment.h"
-#include "Database/DatabaseInterface/DatabaseFlush.h"
 
-DatabaseGenerateServerCoreTesting::IdentityConvertTesting::IdentityConvertTesting(const OStreamShared& stream, const AncientBooksContainer& ancientBooksContainer)
-    : ParentType{ stream }, ancientBooksContainer{ ancientBooksContainer }
+DatabaseGenerateServerCoreTesting::IdentityConvertTesting::IdentityConvertTesting(const OStreamShared& stream, const IdentityContainer& identityContainer)
+    : ParentType{ stream }, identityContainer{ identityContainer }
 {
     DATABASE_GENERATE_SERVER_CORE_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseGenerateServerCoreTesting, IdentityConvertTesting)
 
-void DatabaseGenerateServerCoreTesting::IdentityConvertTesting::DoRunUnitTest()
+void DatabaseGenerateServerCoreTesting::IdentityConvertTesting::ConvertTest(const DatabaseFlushSharedPtr& databaseFlush)
 {
-    Database::DatabaseEnvironment::Create();
+    DatabaseGenerateServerCore::ConvertEntity convertEntity{ databaseFlush };
 
-    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-
-    Database::DatabaseEnvironment::Destroy();
-}
-
-void DatabaseGenerateServerCoreTesting::IdentityConvertTesting::MainTest()
-{
-    ASSERT_NOT_THROW_EXCEPTION_0(InitEnvironmentTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DatabaseFlushTest);
-}
-
-void DatabaseGenerateServerCoreTesting::IdentityConvertTesting::InitEnvironmentTest()
-{
-    const Database::ConfigurationStrategy configurationStrategy{ Database::WrappersStrategy::Mongo, "127.0.0.1", 3306, "tcretest", "root", "123456" };
-
-    DATABASE_ENVIRONMENT_SINGLETON.InitEnvironment(configurationStrategy);
-}
-
-void DatabaseGenerateServerCoreTesting::IdentityConvertTesting::DatabaseFlushTest()
-{
-    const Database::ConfigurationStrategy::FlagsOption flagsOption{};
-    const Database::ConfigurationStrategy::StringOption stringOption{};
-    const Database::ConfigurationStrategy::BooleanOption booleanOption{};
-    const Database::ConfigurationStrategy::IntOption intOption{};
-    const Database::ConfigurationStrategy::SSLOption sslOption{};
-    const Database::ConfigurationStrategy::DBMapping dbMapping{};
-
-    const Database::ConfigurationStrategy configurationStrategy{ Database::WrappersStrategy::Mongo, "43.139.123.106", 27017, "tcretest", "dbOwner", "TCRE", true, 10, 1000, 500, 1, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping };
-
-    Database::DatabaseFlush mysqlConnectorDatabaseFlush{ configurationStrategy };
-
-    const auto identityContainer = ancientBooksContainer.GetIdentityContainer();
-
-    for (const auto& identity : identityContainer->GetContainer())
+    for (const auto& identity : identityContainer.GetContainer())
     {
-        const auto database = mysqlConnectorDatabaseFlush.SelectOne(DatabaseEntity::IdentityEntity::GetSelect(Database::WrappersStrategy::Mongo, identity->GetId()),
-                                                                    DatabaseEntity::IdentityEntity::GetDatabaseFieldContainer());
+        const auto identityEntity = convertEntity.Convert(*identity);
 
-        auto identityEntity = DatabaseEntity::IdentityEntity::Create(database, Database::WrappersStrategy::Mongo, identity->GetId());
-
-        identityEntity.SetIdentity(CoreTools::StringConversion::StandardConversionUtf8(identity->GetIdentity()));
-
-        mysqlConnectorDatabaseFlush.ChangeDatabase(0, identityEntity.GetModify());
+        ASSERT_NOT_THROW_EXCEPTION_2(EqualTest, *identity, identityEntity);
     }
+}
+
+void DatabaseGenerateServerCoreTesting::IdentityConvertTesting::EqualTest(const Identity& identity, const IdentityEntity& identityEntity)
+{
+    ASSERT_EQUAL(identityEntity.GetIdentity(), CoreTools::StringConversion::StandardConversionUtf8(identity.GetIdentity()));
 }

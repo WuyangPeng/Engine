@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/23 13:49)
+///	版本：0.9.1.3 (2023/08/14 15:21)
 
 #ifndef DATABASE_DATABASE_INTERFACE_DATABASE_MANAGER_H
 #define DATABASE_DATABASE_INTERFACE_DATABASE_MANAGER_H
@@ -14,7 +14,6 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
-#include "Database/Configuration/ConfigurationFwd.h"
 #include "Database/DatabaseInterface/DataTypeTraits.h"
 #include "Database/DatabaseInterface/DatabaseInterfaceFwd.h"
 
@@ -26,6 +25,7 @@ namespace Database
     {
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(DatabaseManager);
+
         using ResultContainer = std::vector<BasisDatabaseManager>;
         using String = System::String;
         using FieldNameContainer = std::vector<DatabaseField>;

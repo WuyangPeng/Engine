@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:00)
+///	版本：0.9.1.3 (2023/08/03 19:58)
 
-#ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_HCURSOR_H
-#define FRAMEWORK_WINDOW_REGISTER_WINDOW_HCURSOR_H
+#ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_H_CURSOR_H
+#define FRAMEWORK_WINDOW_REGISTER_WINDOW_H_CURSOR_H
 
 #include "Framework/FrameworkDll.h"
 
@@ -22,6 +22,7 @@ namespace Framework
     {
     public:
         using ClassType = WindowHCursor;
+
         using TChar = System::TChar;
         using HCursor = System::WindowsHCursor;
         using HInstance = System::WindowsHInstance;
@@ -44,4 +45,4 @@ namespace Framework
     };
 }
 
-#endif  // FRAMEWORK_WINDOW_REGISTER_WINDOW_HCURSOR_H
+#endif  // FRAMEWORK_WINDOW_REGISTER_WINDOW_H_CURSOR_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:09)
+///	版本：0.9.1.3 (2023/08/10 15:51)
 
 #include "WindowCreateHandleTesting.h"
 #include "System/Windows/WindowsCreate.h"
@@ -20,13 +20,8 @@
 
 using namespace std::literals;
 
-namespace Framework
-{
-    using TestingType = WindowCreateHandle;
-}
-
-Framework::WindowCreateHandleTesting::WindowCreateHandleTesting(const OStreamShared& stream, HInstance instance, HWnd hwnd)
-    : ParentType{ stream }, instance{ instance }, hwnd{ hwnd }
+Framework::WindowCreateHandleTesting::WindowCreateHandleTesting(const OStreamShared& stream, WindowsHInstance instance, WindowsHWnd hWnd)
+    : ParentType{ stream }, instance{ instance }, hWnd{ hWnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -46,21 +41,21 @@ void Framework::WindowCreateHandleTesting::MainTest()
 void Framework::WindowCreateHandleTesting::CreateTest()
 {
     System::String className{};
-    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
-    auto windowName = SYSTEM_TEXT("New Main Window"s);
+    ASSERT_TRUE(System::GetSystemClassName(hWnd, className));
+    const auto windowName = SYSTEM_TEXT("New Main Window"s);
 
     const WindowSize size{ 800, 600 };
-    WindowCreateParameter createParameter{ windowName };
-    WindowInstanceParameter instanceParameter{ instance, className };
+    const WindowCreateParameter createParameter{ windowName };
+    const WindowInstanceParameter instanceParameter{ instance, className };
 
-    auto oldHwnd = WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHwnd();
+    const auto oldHWnd = WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHWnd();
 
-    TestingType create{ instanceParameter, createParameter, size };
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(create.GetHwnd(), "创建窗口失败！");
+    WindowCreateHandle create{ instanceParameter, createParameter, size };
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(create.GetHWnd(), "创建窗口失败！");
 
     create.SetMainWindow();
 
-    ASSERT_EQUAL(WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHwnd(), create.GetHwnd());
+    ASSERT_EQUAL(WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHWnd(), create.GetHWnd());
 
-    WINDOW_PROCESS_MANAGER_SINGLETON.SetMainWindowHwnd(oldHwnd);
+    WINDOW_PROCESS_MANAGER_SINGLETON.SetMainWindowHWnd(oldHWnd);
 }

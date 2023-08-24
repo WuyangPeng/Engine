@@ -11,6 +11,8 @@
 #define CORE_TOOLS_CHARACTER_STRING_H
 
 #include "CaseInsensitiveStringDetail.h"
+#include "CodeMapping.h"
+#include "CodeMappingAnalysis.h"
 #include "FormatErrorMessage.h"
 #include "StringConversion.h"
 #include "StringUtility.h"

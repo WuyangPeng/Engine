@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:45)
+///	版本：0.9.1.3 (2023/08/09 16:45)
 
 #include "Framework/FrameworkExport.h"
 
@@ -22,7 +22,7 @@ int Framework::GlutFontInformation::GetStringWidth(const String& text) const
     return boost::numeric_cast<int>(GetCharacterWidth('0') * text.size());
 }
 
-int Framework::GlutFontInformation::GetCharacterWidth(MAYBE_UNUSED const TChar character) const noexcept
+int Framework::GlutFontInformation::GetCharacterWidth(MAYBE_UNUSED TChar character) const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 

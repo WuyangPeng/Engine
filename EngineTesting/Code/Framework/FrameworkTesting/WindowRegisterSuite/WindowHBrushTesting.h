@@ -5,13 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:46)
+///	版本：0.9.1.3 (2023/08/11 20:29)
 
-#ifndef FRAMEWORK_WINDOW_REGISTER_SUITE_WINDOW_HBRUSH_TESTING_H
-#define FRAMEWORK_WINDOW_REGISTER_SUITE_WINDOW_HBRUSH_TESTING_H
+#ifndef FRAMEWORK_WINDOW_REGISTER_SUITE_WINDOW_H_BRUSH_TESTING_H
+#define FRAMEWORK_WINDOW_REGISTER_SUITE_WINDOW_H_BRUSH_TESTING_H
 
 #include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
+
 #include <vector>
 
 namespace Framework
@@ -28,7 +29,7 @@ namespace Framework
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
         void MainTest();
 
@@ -42,4 +43,4 @@ namespace Framework
     };
 }
 
-#endif  // FRAMEWORK_WINDOW_REGISTER_SUITE_WINDOW_HBRUSH_TESTING_H
+#endif  // FRAMEWORK_WINDOW_REGISTER_SUITE_WINDOW_H_BRUSH_TESTING_H

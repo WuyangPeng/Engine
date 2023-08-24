@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 17:37)
+///	版本：0.9.1.3 (2023/08/01 19:48)
 
 #ifndef ANIMATION_EXPORT_H
 #define ANIMATION_EXPORT_H
@@ -13,7 +13,9 @@
 #include "Helper/UserMacro.h"
 
 #ifndef BUILDING_ANIMATION_EXPORT
+
     #define BUILDING_ANIMATION_EXPORT
+
 #endif  // BUILDING_ANIMATION_EXPORT
 
 #endif  // ANIMATION_EXPORT_H

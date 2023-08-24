@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 17:50)
+///	版本：0.9.1.3 (2023/08/10 16:14)
 
 #ifndef ANDROID_CALL_BACK_UNIT_TEST_SUITE_TESTING_ANDROID_CALL_BACK_UNIT_TEST_SUITE_H
 #define ANDROID_CALL_BACK_UNIT_TEST_SUITE_TESTING_ANDROID_CALL_BACK_UNIT_TEST_SUITE_H
 
-#include "System/Windows/Flags/WindowsFlags.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Framework/AndroidCallBackUnitTestSuiteTesting/AndroidCallBackUnitTestSuiteTestingAndroidCallBack.h"
 
@@ -22,8 +21,10 @@ namespace AndroidCallBackUnitTestSuiteTesting
         using ClassType = AndroidCallBackUnitTestSuiteTesting;
         using ParentType = UnitTest;
 
+        using AndroidCallBackUnitTestSuiteTestingAndroidCallBackWeakPtr = std::weak_ptr<AndroidCallBackUnitTestSuiteTestingAndroidCallBack>;
+
     public:
-        explicit AndroidCallBackUnitTestSuiteTesting(const CoreTools::OStreamShared& stream, AndroidCallBackUnitTestSuiteTestingAndroidCallBack* message);
+        AndroidCallBackUnitTestSuiteTesting(const OStreamShared& stream, const AndroidCallBackUnitTestSuiteTestingAndroidCallBackWeakPtr& message);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -36,7 +37,7 @@ namespace AndroidCallBackUnitTestSuiteTesting
         void DoRunUnitTest() final;
 
     private:
-        AndroidCallBackUnitTestSuiteTestingAndroidCallBack* message;
+        AndroidCallBackUnitTestSuiteTestingAndroidCallBackWeakPtr message;
     };
 }
 

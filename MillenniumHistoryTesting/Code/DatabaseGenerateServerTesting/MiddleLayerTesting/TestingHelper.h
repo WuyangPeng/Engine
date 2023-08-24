@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 22:30)
+///	版本：0.9.1.3 (2023/08/10 22:11)
 
 #ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_TESTING_TESTING_HELPER_H
 #define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_TESTING_TESTING_HELPER_H
 
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 
-namespace DatabaseGenerateServerTesting
+namespace DatabaseGenerateServerMiddleLayerTesting
 {
     class TestingHelper : public CoreTools::CMainFunctionTestingHelper
     {

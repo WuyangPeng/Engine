@@ -5,23 +5,26 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:41)
+///	版本：0.9.1.3 (2023/08/09 09:30)
 
 #ifndef FRAMEWORK_HELPER_MAIN_FUNCTION_MACRO_H
 #define FRAMEWORK_HELPER_MAIN_FUNCTION_MACRO_H
 
 #include "MainFunctionEntryPoint.h"
+#include "System/Helper/Tools.h"
 
-#define WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(namespaceName, helperClassName, windowName, engineEnvironment, engineDirectory, windowSizeWidth, windowSizeHeight)                                            \
-    int SYSTEM_WINAPI WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, [[maybe_unused]] SYSTEM_IN int showCommand) \
-    {                                                                                                                                                                                                        \
-        return Framework::WinMainEntryPoint<namespaceName::helperClassName>(instance, commandLine, engineEnvironment, engineDirectory, windowName, windowSizeWidth, windowSizeHeight, previousInstance);     \
+#define WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(namespaceName, helperClassName, windowName, engineEnvironment, engineDirectory, windowSizeWidth, windowSizeHeight)                                        \
+    int SYSTEM_WINAPI WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand)              \
+    {                                                                                                                                                                                                    \
+        System::UnusedFunction(showCommand);                                                                                                                                                             \
+        return Framework::WinMainEntryPoint<namespaceName::helperClassName>(instance, commandLine, engineEnvironment, engineDirectory, windowName, windowSizeWidth, windowSizeHeight, previousInstance); \
     }
 
-#define WINDOWS_MAIN_FUNCTION_USE_PARAMETER(namespaceName, helperClassName, engineEnvironment, engineDirectory, renderer)                                                                                    \
-    int SYSTEM_WINAPI WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, [[maybe_unused]] SYSTEM_IN int showCommand) \
-    {                                                                                                                                                                                                        \
-        return Framework::WinMainEntryPoint<namespaceName::helperClassName>(instance, commandLine, engineEnvironment, engineDirectory, renderer, previousInstance);                                          \
+#define WINDOWS_MAIN_FUNCTION_USE_PARAMETER(namespaceName, helperClassName, engineEnvironment, engineDirectory, renderer)                                                                   \
+    int SYSTEM_WINAPI WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand) \
+    {                                                                                                                                                                                       \
+        System::UnusedFunction(showCommand);                                                                                                                                                \
+        return Framework::WinMainEntryPoint<namespaceName::helperClassName>(instance, commandLine, engineEnvironment, engineDirectory, renderer, previousInstance);                         \
     }
 
 #define CONSOLE_MAIN_FUNCTION(namespaceName, helperClassName, consoleTitle, engineEnvironment, engineDirectory)                         \

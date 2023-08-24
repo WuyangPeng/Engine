@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:25)
+///	版本：0.9.1.3 (2023/08/11 20:33)
 
 #ifndef FRAMEWORK_APPLICATION_SUITE_MOUSE_POSITION_TESTING_H
 #define FRAMEWORK_APPLICATION_SUITE_MOUSE_POSITION_TESTING_H
@@ -26,7 +26,7 @@ namespace Framework
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
         void MainTest() noexcept;
     };

@@ -5,14 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 16:35)
+///	版本：0.9.1.3 (2023/08/02 14:04)
 
 #ifndef PHYSICS_INTERSECTION_H
 #define PHYSICS_INTERSECTION_H
-
-#include "BoxManagerDetail.h"
-#include "ExtremalQuery3PRJDetail.h"
-#include "IntervalManagerDetail.h"
-#include "RectangleManagerDetail.h"
 
 #endif  // PHYSICS_INTERSECTION_H

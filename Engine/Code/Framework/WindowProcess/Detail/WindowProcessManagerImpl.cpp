@@ -5,11 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:09)
+///	版本：0.9.1.3 (2023/08/04 14:08)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowProcessManagerImpl.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Windows/Flags/WindowsMessagesFlags.h"
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -21,8 +22,6 @@ Framework::WindowMessageInterfaceSharedPtr Framework::WindowProcessManagerImpl::
 
 int Framework::WindowProcessManagerImpl::windowMessageIndex{};
 
-// static
-// private
 Framework::WindowProcessManagerImpl::ClassNameContainerSharedPtr Framework::WindowProcessManagerImpl::GetClassNameContainer()
 {
     static auto classNameContainer = std::make_shared<ClassNameContainer>();
@@ -30,8 +29,6 @@ Framework::WindowProcessManagerImpl::ClassNameContainerSharedPtr Framework::Wind
     return classNameContainer;
 }
 
-// static
-// private
 Framework::WindowProcessManagerImpl::MessageFunctionPointerContainerSharedPtr Framework::WindowProcessManagerImpl::GetMessageFunctionPointer()
 {
     static MessageFunctionPointerContainer messageFunctionPointerContainer{ { System::WindowsMessages::Paint, &WindowMessageInterface::PaintMessage },
@@ -58,8 +55,6 @@ Framework::WindowProcessManagerImpl::MessageFunctionPointerContainerSharedPtr Fr
     return functionPointer;
 }
 
-// static
-// private
 Framework::WindowProcessManagerImpl::WindowMessageContainerSharedPtr Framework::WindowProcessManagerImpl::GetWindowMessageContainer()
 {
     static auto windowMessageContainer = std::make_shared<WindowMessageContainer>();
@@ -69,15 +64,13 @@ Framework::WindowProcessManagerImpl::WindowMessageContainerSharedPtr Framework::
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowProcessManagerImpl)
 
-// static
 Framework::WindowProcessManagerImpl::WindowProcess Framework::WindowProcessManagerImpl::GetProcess() noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return WindowProc;
+    return WindowProcessFunction;
 }
 
-// static
 Framework::WindowProcessManagerImpl::DisplayFunction Framework::WindowProcessManagerImpl::GetFunction() noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
@@ -85,32 +78,32 @@ Framework::WindowProcessManagerImpl::DisplayFunction Framework::WindowProcessMan
     return Display;
 }
 
-// static
 bool Framework::WindowProcessManagerImpl::IsClassNameExist(const String& className)
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    auto classNameContainer = GetClassNameContainer();
+    const auto classNameContainer = GetClassNameContainer();
 
-    const auto iter = classNameContainer->find(className);
-
-    if (iter != classNameContainer->cend())
+    if (const auto iter = classNameContainer->find(className);
+        iter != classNameContainer->cend())
+    {
         return true;
+    }
 
     return false;
 }
 
-// static
 bool Framework::WindowProcessManagerImpl::SetNewClassName(const String& className)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    auto classNameContainer = GetClassNameContainer();
-
-    if (classNameContainer->insert(className).second)
+    if (const auto classNameContainer = GetClassNameContainer();
+        classNameContainer->insert(className).second)
+    {
         return true;
-    else
-        return false;
+    }
+
+    return false;
 }
 
 Framework::ConstWindowMessageInterfaceSharedPtr Framework::WindowProcessManagerImpl::GetWindowMessageInterface() const noexcept
@@ -126,9 +119,9 @@ void Framework::WindowProcessManagerImpl::SetWindowMessage(const WindowMessageIn
 
     if (windowProcessMessage != nullptr)
     {
-        auto windowMessageContainer = GetWindowMessageContainer();
+        const auto windowMessageContainer = GetWindowMessageContainer();
 
-        windowMessageContainer->insert({ windowMessageIndex++, windowProcessMessage });
+        windowMessageContainer->emplace(windowMessageIndex++, windowProcessMessage);
     }
 
     windowProcessMessage = windowMessage;
@@ -152,12 +145,12 @@ void Framework::WindowProcessManagerImpl::ResetMainWindowMessage()
 {
     windowProcessMessage.reset();
 
-    auto windowMessageContainer = GetWindowMessageContainer();
+    const auto windowMessageContainer = GetWindowMessageContainer();
 
     for (auto iter = windowMessageContainer->begin(); iter != windowMessageContainer->end(); ++iter)
     {
-        auto nextWindowMessage = iter->second.lock();
-        if (nextWindowMessage != nullptr)
+        if (auto nextWindowMessage = iter->second.lock();
+            nextWindowMessage != nullptr)
         {
             windowProcessMessage = nextWindowMessage;
             windowMessageContainer->erase(iter);
@@ -168,12 +161,12 @@ void Framework::WindowProcessManagerImpl::ResetMainWindowMessage()
 
 void Framework::WindowProcessManagerImpl::ClearWindowMessageContainer(const WindowMessageInterfaceSharedPtr& windowMessage)
 {
-    auto windowMessageContainer = GetWindowMessageContainer();
+    const auto windowMessageContainer = GetWindowMessageContainer();
 
     for (auto iter = windowMessageContainer->begin(); iter != windowMessageContainer->end();)
     {
-        auto nextWindowMessage = iter->second.lock();
-        if (nextWindowMessage == nullptr || nextWindowMessage == windowMessage)
+        if (auto nextWindowMessage = iter->second.lock();
+            nextWindowMessage == nullptr || nextWindowMessage == windowMessage)
         {
             windowMessageContainer->erase(iter++);
         }
@@ -232,57 +225,53 @@ void Framework::WindowProcessManagerImpl::Terminate()
     }
 }
 
-void Framework::WindowProcessManagerImpl::SetMainWindowHwnd(HWnd hwnd)
+void Framework::WindowProcessManagerImpl::SetMainWindowHWnd(WindowsHWnd hWnd)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     if (windowProcessMessage)
     {
-        windowProcessMessage->SetMainWindow(hwnd);
+        windowProcessMessage->SetMainWindow(hWnd);
     }
 }
 
-Framework::WindowProcessManagerImpl::HWnd Framework::WindowProcessManagerImpl::GetMainWindowHwnd() const noexcept
+Framework::WindowProcessManagerImpl::WindowsHWnd Framework::WindowProcessManagerImpl::GetMainWindowHWnd() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return windowProcessMessage->GetHwnd();
+    return windowProcessMessage->GetHWnd();
 }
 
-// static
-// private
-Framework::WindowProcessManagerImpl::LResult SYSTEM_CALL_BACK Framework::WindowProcessManagerImpl::WindowProc(HWnd hwnd, UInt message, WParam wParam, LParam lParam)
+Framework::WindowProcessManagerImpl::WindowsLResult SYSTEM_CALL_BACK Framework::WindowProcessManagerImpl::WindowProcessFunction(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam)
 {
     EXCEPTION_TRY
     {
-        auto messageFunctionPointer = GetMessageFunctionPointer();
-
-        const auto flag = System::UnderlyingCastEnum<System::WindowsMessages>(message);
-
-        const auto iter = messageFunctionPointer->find(flag);
-
-        if (windowProcessMessage && iter != messageFunctionPointer->cend())
-        {
-            return ((*windowProcessMessage).*(iter->second))(hwnd, wParam, lParam);
-        }
-
-        return System::DefaultSystemWindowProcess(hwnd, flag, wParam, lParam);
+        return DoWindowProcessFunction(hWnd, message, wParam, lParam);
     }
     EXCEPTION_ALL_CATCH(Framework)
 
     return 0;
 }
 
-// static
-// private
-void Framework::WindowProcessManagerImpl::Display(HWnd hwnd, int64_t timeDelta)
+Framework::WindowProcessManagerImpl::WindowsLResult Framework::WindowProcessManagerImpl::DoWindowProcessFunction(WindowsHWnd hWnd, WindowsUInt message, WindowsWParam wParam, WindowsLParam lParam)
+{
+    const auto messageFunctionPointer = GetMessageFunctionPointer();
+
+    const auto flag = System::UnderlyingCastEnum<System::WindowsMessages>(boost::numeric_cast<int>(message));
+
+    if (const auto iter = messageFunctionPointer->find(flag);
+        windowProcessMessage && iter != messageFunctionPointer->cend())
+    {
+        return ((*windowProcessMessage).*(iter->second))(hWnd, wParam, lParam);
+    }
+
+    return DefaultSystemWindowProcess(hWnd, flag, wParam, lParam);
+}
+
+void Framework::WindowProcessManagerImpl::Display(WindowsHWnd hWnd, int64_t timeDelta)
 {
     if (windowProcessMessage)
     {
-        windowProcessMessage->Display(hwnd, timeDelta);
+        windowProcessMessage->Display(hWnd, timeDelta);
     }
-}
-
-Framework::WindowProcessManagerImpl::WindowProcessManagerImpl() noexcept
-{
 }

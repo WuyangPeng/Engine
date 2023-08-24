@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/23 15:34)
+///	版本：0.9.1.3 (2023/08/14 15:09)
 
 #include "Database/DatabaseExport.h"
 
@@ -264,17 +264,17 @@ bsoncxx::builder::basic::document Database::MongoConnection::GetUpdateDocument(c
                 break;
 
             case DataType::StringArray:
-                 document.append(bsoncxx::builder::basic::kvp("$set", bsoncxx::builder::basic::make_document(bsoncxx::builder::basic::kvp(fieldName, value.GetArrayStringValue<DataType::StringArray>()))));
+                document.append(bsoncxx::builder::basic::kvp("$set", bsoncxx::builder::basic::make_document(bsoncxx::builder::basic::kvp(fieldName, value.GetArrayStringValue<DataType::StringArray>()))));
                 break;
 
             case DataType::Int32Array:
                 document.append(bsoncxx::builder::basic::kvp("$set", bsoncxx::builder::basic::make_document(bsoncxx::builder::basic::kvp(fieldName, value.GetArrayStringValue<DataType::Int32Array>()))));
                 break;
-                
+
             case DataType::Int64Array:
                 document.append(bsoncxx::builder::basic::kvp("$set", bsoncxx::builder::basic::make_document(bsoncxx::builder::basic::kvp(fieldName, value.GetArrayStringValue<DataType::Int64Array>()))));
                 break;
-                
+
             case DataType::DoubleArray:
                 document.append(bsoncxx::builder::basic::kvp("$set", bsoncxx::builder::basic::make_document(bsoncxx::builder::basic::kvp(fieldName, value.GetArrayStringValue<DataType::DoubleArray>()))));
                 break;
@@ -407,8 +407,12 @@ Database::BasisDatabase Database::MongoConnection::GetBasisDatabase(const FieldN
         case DataType::StringArray:
         {
             const std::string column{ rowView.get_string().value };
+
             BasisDatabase::StringArray element{};
-            split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+            if (!column.empty())
+            {
+                split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+            }
 
             return BasisDatabase{ iter->GetFieldName(), element };
         }
@@ -417,7 +421,10 @@ Database::BasisDatabase Database::MongoConnection::GetBasisDatabase(const FieldN
         {
             const std::string column{ rowView.get_string().value };
             BasisDatabase::StringArray element{};
-            split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+            if (!column.empty())
+            {
+                split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+            }
 
             BasisDatabase::Int32Array result{};
             for (const auto& value : element)
@@ -435,7 +442,10 @@ Database::BasisDatabase Database::MongoConnection::GetBasisDatabase(const FieldN
         {
             const std::string column{ rowView.get_string().value };
             BasisDatabase::StringArray element{};
-            split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+            if (!column.empty())
+            {
+                split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+            }
 
             BasisDatabase::Int64Array result{};
             for (const auto& value : element)
@@ -453,7 +463,10 @@ Database::BasisDatabase Database::MongoConnection::GetBasisDatabase(const FieldN
         {
             const std::string column{ rowView.get_string().value };
             BasisDatabase::StringArray element{};
-            split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+            if (!column.empty())
+            {
+                split(element, column, boost::is_any_of("|"), boost::token_compress_off);
+            }
 
             BasisDatabase::DoubleArray result{};
             for (const auto& value : element)

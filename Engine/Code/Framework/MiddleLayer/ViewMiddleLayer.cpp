@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:37)
+///	版本：0.9.1.3 (2023/08/08 16:27)
 
 #include "Framework/FrameworkExport.h"
 
@@ -15,8 +15,7 @@
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 #include "Framework/WindowCreate/WindowPoint.h"
@@ -25,40 +24,39 @@
 Framework::ViewMiddleLayer::ViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Framework::ViewMiddleLayer::ViewMiddleLayer(ViewMiddleLayer&& rhs) noexcept
-    : ParentType{ move(rhs) }, impl{ std::move(rhs.impl) }
-{
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Framework::ViewMiddleLayer& Framework::ViewMiddleLayer::operator=(ViewMiddleLayer&& rhs) noexcept
-{
-    FRAMEWORK_CLASS_IS_VALID_1;
-
-    ParentType::operator=(move(rhs));
-
-    impl = std::move(rhs.impl);
-
-    return *this;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, ViewMiddleLayer)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ViewMiddleLayer, GetRenderer, Rendering::BaseRendererSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ViewMiddleLayer, GetRenderer, Rendering::ConstBaseRendererSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ViewMiddleLayer, GetClearColor, Framework::ViewMiddleLayer::Colour);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Framework, ViewMiddleLayer, SetClearColor, Colour, void)
+void Framework::ViewMiddleLayer::SetClearColour(const Colour& colour)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetClearColor(colour);
+}
+
+Framework::ViewMiddleLayer::RendererSharedPtr Framework::ViewMiddleLayer::GetRenderer()
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->GetRenderer();
+}
+
+Framework::ViewMiddleLayer::ConstRendererSharedPtr Framework::ViewMiddleLayer::GetRenderer() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRenderer();
+}
 
 bool Framework::ViewMiddleLayer::Create(const EnvironmentParameter& environmentParameter)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     if (ParentType::Create(environmentParameter))
     {
-        auto rendererFileName = GetEnvironmentDirectory().GetDirectory(UpperDirectory::Configuration) + SYSTEM_TEXT("Renderer.json");
+        const auto rendererFileName = GetEnvironmentDirectory().GetDirectory(UpperDirectory::Configuration) + SYSTEM_TEXT("Renderer.json");
 
         impl->ResetRenderer(CoreTools::StringConversion::StandardConversionMultiByte(rendererFileName), environmentParameter);
 
@@ -72,7 +70,7 @@ bool Framework::ViewMiddleLayer::Create(const EnvironmentParameter& environmentP
 
 bool Framework::ViewMiddleLayer::Initialize()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     if (ParentType::Initialize())
     {
@@ -91,11 +89,11 @@ bool Framework::ViewMiddleLayer::Initialize()
 
 bool Framework::ViewMiddleLayer::Paint()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     if (ParentType::Paint())
     {
-        auto modelMiddleLayer = boost::polymorphic_pointer_cast<ModelMiddleLayer>(GetModelMiddleLayer());
+        const auto modelMiddleLayer = boost::polymorphic_pointer_cast<ModelMiddleLayer>(GetModelMiddleLayer());
 
         modelMiddleLayer->UpdateFrameCount();
 
@@ -109,7 +107,7 @@ bool Framework::ViewMiddleLayer::Paint()
 
 bool Framework::ViewMiddleLayer::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     if (ParentType::Resize(windowDisplay, size))
     {
@@ -123,69 +121,76 @@ bool Framework::ViewMiddleLayer::Resize(WindowDisplay windowDisplay, const Windo
     }
 }
 
-void Framework::ViewMiddleLayer::DrawFrameRate(const WindowPoint& point, const Colour& color)
+void Framework::ViewMiddleLayer::DrawFrameRate(const WindowPoint& point, const Colour& colour)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-    auto modelMiddleLayer = boost::polymorphic_pointer_cast<const ModelMiddleLayer>(GetConstModelMiddleLayer());
+    const auto modelMiddleLayer = boost::polymorphic_pointer_cast<const ModelMiddleLayer>(GetConstModelMiddleLayer());
 
-    auto frameRateMessage = modelMiddleLayer->GetFrameRateMessage();
+    const auto frameRateMessage = modelMiddleLayer->GetFrameRateMessage();
 
-    impl->DrawFrameRate(point.GetWindowX(), point.GetWindowY(), color, frameRateMessage);
+    impl->DrawFrameRate(point.GetWindowX(), point.GetWindowY(), colour, frameRateMessage);
+}
+
+Framework::ViewMiddleLayer::Colour Framework::ViewMiddleLayer::GetClearColour() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetClearColor();
 }
 
 bool Framework::ViewMiddleLayer::KeyUp(int key, const WindowPoint& point)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return ParentType::KeyUp(key, point);
 }
 
 bool Framework::ViewMiddleLayer::KeyDown(int key, const WindowPoint& point)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return ParentType::KeyDown(key, point);
 }
 
 bool Framework::ViewMiddleLayer::SpecialKeyUp(int key, const WindowPoint& point)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return ParentType::SpecialKeyUp(key, point);
 }
 
 bool Framework::ViewMiddleLayer::SpecialKeyDown(int key, const WindowPoint& point)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return ParentType::SpecialKeyDown(key, point);
 }
 
 bool Framework::ViewMiddleLayer::PassiveMotion(const WindowPoint& point)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return ParentType::PassiveMotion(point);
 }
 
 bool Framework::ViewMiddleLayer::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return ParentType::Motion(point, virtualKeys);
 }
 
 bool Framework::ViewMiddleLayer::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return ParentType::MouseWheel(delta, point, virtualKeys);
 }
 
 bool Framework::ViewMiddleLayer::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return ParentType::MouseClick(button, state, point, virtualKeys);
 }

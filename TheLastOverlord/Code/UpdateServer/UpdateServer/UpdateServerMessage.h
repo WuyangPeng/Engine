@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/29 17:24)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:43)
 
 #ifndef UPDATE_SERVER_UPDATE_SERVER_MESSAGE_H
 #define UPDATE_SERVER_UPDATE_SERVER_MESSAGE_H
 
-#include "UpdateServer/UpdateServerMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "UpdateServer/UpdateServerMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "UpdateServer/UpdateServerMiddleLayer/Audio/AudioManager.h"
 #include "UpdateServer/UpdateServerMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "UpdateServer/UpdateServerMiddleLayer/Event/EventManager.h"
@@ -32,7 +32,7 @@
 
 namespace UpdateServer
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<UpdateServerMiddleLayer::ObjectLogicManager, UpdateServerMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<UpdateServerMiddleLayer::ObjectLogicManager, UpdateServerMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   UpdateServerMiddleLayer::InputManager,
                                                                   UpdateServerMiddleLayer::NetworkManager,
@@ -54,13 +54,16 @@ namespace UpdateServer
         using ClassType = UpdateServerMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit UpdateServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        UpdateServerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using UpdateServerMessageWindowProcessHandle = Framework::WindowProcessHandle<UpdateServerMessage>;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:07)
+///	版本：0.9.1.3 (2023/08/10 13:55)
 
 #include "WindowHCursorTesting.h"
 #include "resource.h"
@@ -18,12 +18,7 @@
 
 #include <algorithm>
 
-namespace Framework
-{
-    using TestingType = WindowHCursor;
-}
-
-Framework::WindowHCursorTesting::WindowHCursorTesting(const OStreamShared& stream, HInstance instance)
+Framework::WindowHCursorTesting::WindowHCursorTesting(const OStreamShared& stream, WindowsHInstance instance)
     : ParentType{ stream },
       instance{ instance },
       container{ { 0, System::gArrow },
@@ -60,22 +55,22 @@ void Framework::WindowHCursorTesting::MainTest()
 
 void Framework::WindowHCursorTesting::ConstructorTest()
 {
-    for_each(container.begin(), container.end(), [this](const auto& value) {
-        const TestingType windowHCursor1{ value.second };
-        ASSERT_EQUAL(windowHCursor1.GetHCursor(), System::LoadSystemCursor(nullptr, value.second));
+    std::ranges::for_each(container, [this](const auto& element) {
+        const WindowHCursor windowHCursor{ element.second };
+        ASSERT_EQUAL(windowHCursor.GetHCursor(), System::LoadSystemCursor(nullptr, element.second));
     });
 
-    const TestingType windowHIcon2{ instance, IDC_CURSOR1 };
-    ASSERT_EQUAL(windowHIcon2.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
+    const WindowHCursor windowHIcon{ instance, IDC_CURSOR1 };
+    ASSERT_EQUAL(windowHIcon.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
 }
 
 void Framework::WindowHCursorTesting::CreateTest()
 {
-    for_each(container.begin(), container.end(), [this](const auto& value) {
-        const auto windowHCursor1 = TestingType::Create(instance, true, value.first);
-        ASSERT_EQUAL(windowHCursor1.GetHCursor(), System::LoadSystemCursor(nullptr, value.second));
+    std::ranges::for_each(container, [this](const auto& element) {
+        const auto windowHCursor = WindowHCursor::Create(instance, true, element.first);
+        ASSERT_EQUAL(windowHCursor.GetHCursor(), System::LoadSystemCursor(nullptr, element.second));
     });
 
-    const auto windowHCursor2 = TestingType::Create(instance, false, IDC_CURSOR1);
-    ASSERT_EQUAL(windowHCursor2.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
+    const auto windowHCursor = WindowHCursor::Create(instance, false, IDC_CURSOR1);
+    ASSERT_EQUAL(windowHCursor.GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
 }

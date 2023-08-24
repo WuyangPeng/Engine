@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:53)
+///	版本：0.9.1.3 (2023/08/10 09:46)
 
 #include "Framework/FrameworkExport.h"
 
@@ -17,9 +17,6 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Threading/ScopedMutex.h"
-
-using namespace std::literals;
 
 SINGLETON_GET_PTR_DEFINE(Framework, AndroidProcessManager);
 
@@ -35,10 +32,12 @@ void Framework::AndroidProcessManager::Destroy() noexcept
     androidProcessManager.reset();
 }
 
-Framework::AndroidProcessManager::AndroidProcessManager(MAYBE_UNUSED AndroidProcessManagerCreate androidProcessManagerCreate)
+Framework::AndroidProcessManager::AndroidProcessManager(AndroidProcessManagerCreate androidProcessManagerCreate)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    System::UnusedFunction(androidProcessManagerCreate);
+
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, AndroidProcessManager)

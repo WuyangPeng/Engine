@@ -12,6 +12,7 @@
 #include "System/Helper/Tools.h"
 #include "CoreTools/Base/Flags/UniqueIdSelect.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
+#include "CoreTools/CharacterString/CodeMappingAnalysis.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/FileManager/OFStreamManager.h"
@@ -22,7 +23,6 @@
 #include "Database/DatabaseEntityCodeGeneration/CodeEntityClass.h"
 #include "Database/DatabaseEntityCodeGeneration/CodeFwdHeaderFileGeneration.h"
 #include "Database/DatabaseEntityCodeGeneration/CodeHeaderFileGeneration.h"
-#include "Database/DatabaseEntityCodeGeneration/CodeMappingAnalysis.h"
 #include "Database/DatabaseEntityCodeGeneration/EntityHeaderFileGeneration.h"
 #include "Database/DatabaseEntityCodeGeneration/EntitySourceFileGeneration.h"
 
@@ -78,7 +78,7 @@ void BatchConversion::Helper::Conversion()
     const auto codeOutput = mainTree.get(SYSTEM_TEXT("codeOutput"), System::String{});
 
     Database::CodeEntityAnalysis codeEntityAnalysis{ CoreTools::StringConversion::StandardConversionMultiByte(input) };
-    Database::CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/DatabaseEntity/DatabaseEntity.json") };
+    CoreTools::CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/DatabaseEntity/DatabaseEntity.json") };
 
     {
         Database::CodeFwdHeaderFileGeneration codeFwdHeaderFileGeneration{ SYSTEM_TEXT("Resource/DatabaseEntity/DatabaseEntityFwd.txt"), codeEntityAnalysis, codeMappingAnalysis };

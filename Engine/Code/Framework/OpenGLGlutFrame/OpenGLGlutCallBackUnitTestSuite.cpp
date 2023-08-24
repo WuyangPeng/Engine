@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:17)
+///	版本：0.9.1.3 (2023/08/05 14:49)
 
 #include "Framework/FrameworkExport.h"
 
@@ -18,48 +18,18 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 #include "CoreTools/UnitTestSuite/Suite.h"
-#include "Framework/WindowProcess/Detail/WindowMessageUnitTestSuiteStream.h"
 
 Framework::OpenGLGlutCallBackUnitTestSuite::OpenGLGlutCallBackUnitTestSuite(int64_t delta, const std::string& suiteName)
-    : ParentType{ delta }, stream{ std::make_shared<StreamType>(true) }, impl{ make_shared<ImplType>(suiteName, stream->GetStreamShared()) }, isInit{ false }
+    : ParentType{ delta }, impl{ suiteName }, isInit{ false }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::OpenGLGlutCallBackUnitTestSuite::OpenGLGlutCallBackUnitTestSuite(OpenGLGlutCallBackUnitTestSuite&& rhs) noexcept
-    : ParentType{ std::move(rhs) }, stream{ move(rhs.stream) }, impl{ move(rhs.impl) }, isInit{ rhs.isInit }
-{
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Framework::OpenGLGlutCallBackUnitTestSuite& Framework::OpenGLGlutCallBackUnitTestSuite::operator=(OpenGLGlutCallBackUnitTestSuite&& rhs) noexcept
-{
-    FRAMEWORK_CLASS_IS_VALID_1;
-
-    ParentType::operator=(std::move(rhs));
-
-    stream = move(rhs.stream);
-    impl = move(rhs.impl);
-    isInit = rhs.isInit;
-
-    return *this;
-}
-
-#ifdef OPEN_CLASS_INVARIANT
-
-bool Framework::OpenGLGlutCallBackUnitTestSuite::IsValid() const noexcept
-{
-    if (ParentType::IsValid() && stream != nullptr && impl != nullptr)
-        return true;
-    else
-        return false;
-}
-
-#endif  // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, OpenGLGlutCallBackUnitTestSuite)
 
 bool Framework::OpenGLGlutCallBackUnitTestSuite::Initialize()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     if (!isInit)
     {
@@ -72,7 +42,7 @@ bool Framework::OpenGLGlutCallBackUnitTestSuite::Initialize()
 
 bool Framework::OpenGLGlutCallBackUnitTestSuite::SpecialKeysDown(int key, int xCoordinate, int yCoordinate)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     impl->KeyDownMessage(System::UnderlyingCastEnum<System::WindowsKeyCodes>(key));
 
@@ -81,49 +51,44 @@ bool Framework::OpenGLGlutCallBackUnitTestSuite::SpecialKeysDown(int key, int xC
 
 bool Framework::OpenGLGlutCallBackUnitTestSuite::IdleFunction()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return ParentType::IdleFunction();
 }
 
-// protected
 void Framework::OpenGLGlutCallBackUnitTestSuite::DoAddSuite(const Suite& suite)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return impl->AddSuite(suite);
 }
 
-// protected
 CoreTools::OStreamShared Framework::OpenGLGlutCallBackUnitTestSuite::GetStreamShared() noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-    return stream->GetStreamShared();
+    return impl->GetStreamShared();
 }
 
 int Framework::OpenGLGlutCallBackUnitTestSuite::GetPassedNumber() const noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
     return impl->GetPassedNumber();
 }
 
-// protected
 bool Framework::OpenGLGlutCallBackUnitTestSuite::IsPrintRun() const noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
     return impl->IsPrintRun();
 }
 
-// protected
 void Framework::OpenGLGlutCallBackUnitTestSuite::AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest)
 {
     impl->AddTest(suiteName, suite, testName, unitTest);
 }
 
-// private
 bool Framework::OpenGLGlutCallBackUnitTestSuite::AddSuiteOnInitialize()
 {
     const auto result = ParentType::Initialize();

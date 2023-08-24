@@ -3054,6 +3054,18 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSV\BatchConversionCode.h">
       <Filter>TextParsing 头文件\CSV</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\CodeMappingAnalysisImpl.h">
+      <Filter>CharacterString 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\CodeMappingImpl.h">
+      <Filter>CharacterString 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CodeMapping.h">
+      <Filter>CharacterString 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CodeMappingAnalysis.h">
+      <Filter>CharacterString 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -4483,6 +4495,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSV\BatchConversionCode.cpp">
       <Filter>TextParsing 源文件\CSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\CodeMappingAnalysisImpl.cpp">
+      <Filter>CharacterString 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\CodeMappingImpl.cpp">
+      <Filter>CharacterString 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\CodeMappingAnalysis.cpp">
+      <Filter>CharacterString 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\CodeMapping.cpp">
+      <Filter>CharacterString 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

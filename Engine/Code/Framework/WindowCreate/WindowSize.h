@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:12)
+///	版本：0.9.1.3 (2023/08/04 15:14)
 
 #ifndef FRAMEWORK_WINDOW_CREATE_WINDOW_SIZE_H
 #define FRAMEWORK_WINDOW_CREATE_WINDOW_SIZE_H
@@ -17,19 +17,20 @@
 
 #include <iosfwd>
 
+// 窗口大小类的声明，没有使用Impl模式。只定义了==、!=、<<操作运算符。
 namespace Framework
 {
-    // 窗口大小类的声明，没有使用Impl模式。只定义了==、!=、<<操作运算符。
     class FRAMEWORK_DEFAULT_DECLARE WindowSize : private boost::equality_comparable<WindowSize>
     {
     public:
         using ClassType = WindowSize;
-        using LParam = System::WindowsLParam;
+
+        using WindowsLParam = System::WindowsLParam;
 
     public:
         WindowSize() noexcept;
         WindowSize(int width, int height);
-        explicit WindowSize(LParam lParam);
+        explicit WindowSize(WindowsLParam lParam);
 
         CLASS_INVARIANT_DECLARE;
 

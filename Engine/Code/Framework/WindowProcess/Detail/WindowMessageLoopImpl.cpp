@@ -5,17 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:08)
+///	版本：0.9.1.3 (2023/08/04 15:00)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowMessageLoopImpl.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Windows/Flags/WindowsMessagesFlags.h"
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-
-using namespace std::literals;
 
 Framework::WindowMessageLoopImpl::WindowMessageLoopImpl(DisplayFunction function) noexcept
     : function{ function }, lastTime{}, msg{}
@@ -25,13 +24,13 @@ Framework::WindowMessageLoopImpl::WindowMessageLoopImpl(DisplayFunction function
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowMessageLoopImpl)
 
-System::WindowsWParam Framework::WindowMessageLoopImpl::EnterMessageLoop(WindowsHWnd hwnd)
+System::WindowsWParam Framework::WindowMessageLoopImpl::EnterMessageLoop(WindowsHWnd hWnd)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     if (function != nullptr)
     {
-        return EnterNewMessageLoop(hwnd);
+        return EnterNewMessageLoop(hWnd);
     }
     else
     {
@@ -39,7 +38,6 @@ System::WindowsWParam Framework::WindowMessageLoopImpl::EnterMessageLoop(Windows
     }
 }
 
-// private
 System::WindowsWParam Framework::WindowMessageLoopImpl::EnterOldMessageLoop() noexcept
 {
     while (System::GetSystemMessage(&msg))
@@ -51,8 +49,7 @@ System::WindowsWParam Framework::WindowMessageLoopImpl::EnterOldMessageLoop() no
     return msg.wParam;
 }
 
-// private
-System::WindowsWParam Framework::WindowMessageLoopImpl::EnterNewMessageLoop(WindowsHWnd hwnd)
+System::WindowsWParam Framework::WindowMessageLoopImpl::EnterNewMessageLoop(WindowsHWnd hWnd)
 {
     // 启动消息循环。
     auto applicationRunning = true;
@@ -61,7 +58,7 @@ System::WindowsWParam Framework::WindowMessageLoopImpl::EnterNewMessageLoop(Wind
     {
         if (System::PeekSystemMessage(&msg))
         {
-            if (!ProcessingMessage(hwnd))
+            if (!ProcessingMessage(hWnd))
             {
                 applicationRunning = false;
                 continue;
@@ -69,7 +66,7 @@ System::WindowsWParam Framework::WindowMessageLoopImpl::EnterNewMessageLoop(Wind
         }
         else
         {
-            Idle(hwnd);
+            Idle(hWnd);
         }
 
     } while (applicationRunning);
@@ -77,16 +74,15 @@ System::WindowsWParam Framework::WindowMessageLoopImpl::EnterNewMessageLoop(Wind
     return msg.wParam;
 }
 
-// private
-bool Framework::WindowMessageLoopImpl::ProcessingMessage(WindowsHWnd hwnd) noexcept
+bool Framework::WindowMessageLoopImpl::ProcessingMessage(WindowsHWnd hWnd)
 {
-    if (System::UnderlyingCastEnum<System::WindowsMessages>(msg.message) == System::WindowsMessages::Quit)
+    if (System::UnderlyingCastEnum<System::WindowsMessages>(boost::numeric_cast<int>(msg.message)) == System::WindowsMessages::Quit)
     {
         return false;
     }
 
-    System::WindowsHAccelerator accel{ nullptr };
-    if (!System::SystemTranslateAccelerator(hwnd, accel, &msg))
+    if (System::WindowsHAccelerator accelerator{ nullptr };
+        !System::SystemTranslateAccelerator(hWnd, accelerator, &msg))
     {
         System::TranslateSystemMessage(&msg);
         System::DispatchSystemMessage(&msg);
@@ -95,15 +91,12 @@ bool Framework::WindowMessageLoopImpl::ProcessingMessage(WindowsHWnd hwnd) noexc
     return true;
 }
 
-// private
-void Framework::WindowMessageLoopImpl::Idle(WindowsHWnd hwnd)
+void Framework::WindowMessageLoopImpl::Idle(WindowsHWnd hWnd) noexcept
 {
-    FRAMEWORK_ASSERTION_0(function != nullptr, "空闲函数指针为空！");
-
     if (function != nullptr)
     {
         const auto timeDelta = lastTime.GetThisElapsedMillisecondTime();
 
-        function(hwnd, timeDelta);
+        function(hWnd, timeDelta);
     }
 }

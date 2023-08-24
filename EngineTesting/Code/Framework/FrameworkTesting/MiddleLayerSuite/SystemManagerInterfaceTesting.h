@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:04)
+///	版本：0.9.1.3 (2023/08/12 15:26)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_SYSTEM_MANAGER_INTERFACE_TESTING_H
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_SYSTEM_MANAGER_INTERFACE_TESTING_H
@@ -14,7 +14,7 @@
 
 namespace Framework
 {
-    class SystemManagerInterfaceTesting : public CoreTools::UnitTest
+    class SystemManagerInterfaceTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = SystemManagerInterfaceTesting;
@@ -44,7 +44,7 @@ namespace Framework
         void SetGUIManagerExceptionTest();
         void SetEngineManagerTest();
 
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
     };
 }
 

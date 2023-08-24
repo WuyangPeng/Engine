@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:19)
+///	版本：0.9.1.3 (2023/08/08 14:38)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_CAMERA_MODEL_MIDDLE_LAYER_IMPL_H
 #define FRAMEWORK_MIDDLE_LAYER_CAMERA_MODEL_MIDDLE_LAYER_IMPL_H
@@ -22,6 +22,7 @@ namespace Framework
     {
     public:
         using ClassType = CameraModelMiddleLayerImpl;
+
         using APoint = Mathematics::APointF;
         using AVector = Mathematics::AVectorF;
         using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
@@ -89,6 +90,8 @@ namespace Framework
         void SetDoPitch(NumericalValueSymbol doPitch) noexcept;
         NODISCARD bool GetTrackBallDow() const noexcept;
 
+        NODISCARD bool Idle(int64_t aTimeDelta);
+
     private:
         using CameraMotionSharedPtr = std::shared_ptr<CameraMotion>;
         using ObjectMotionSharedPtr = std::shared_ptr<ObjectMotion>;
@@ -96,6 +99,7 @@ namespace Framework
     private:
         CameraMotionSharedPtr cameraMotion;
         ObjectMotionSharedPtr objectMotion;
+        int64_t timeDelta;
     };
 }
 

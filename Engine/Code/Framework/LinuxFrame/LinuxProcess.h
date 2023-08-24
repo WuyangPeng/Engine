@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:41)
+///	版本：0.9.1.3 (2023/08/08 19:52)
 
 #ifndef FRAMEWORK_LINUX_LINUX_PROCESS_H
 #define FRAMEWORK_LINUX_LINUX_PROCESS_H
@@ -25,6 +25,7 @@ namespace Framework
     public:
         using CallBackType = LinuxCallBack;
         using ClassType = LinuxProcess<CallBackType>;
+
         using LinuxCallBackInterfaceSharedPtr = std::shared_ptr<LinuxCallBackInterface>;
 
     public:

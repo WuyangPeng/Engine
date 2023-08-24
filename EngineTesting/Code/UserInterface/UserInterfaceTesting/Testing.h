@@ -5,17 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 20:06)
+///	版本：0.9.1.3 (2023/08/01 19:18)
 
 #ifndef USER_INTERFACE_TESTING_TESTING_H
 #define USER_INTERFACE_TESTING_TESTING_H
 
 #include "ConfigurationSuite/ConfigurationSuite.h"
+#include "DirectXSuite/DirectXSuite.h"
 #include "FLTKSuite/FLTKSuite.h"
 #include "HelperSuite/HelperSuite.h"
 #include "InterfaceSuite/InterfaceSuite.h"
-#include "TrixulSuite/TrixulSuite.h"
+#include "OpenGLSuite/OpenGLSuite.h"
 #include "WxWidgetsSuite/WxWidgetsSuite.h"
-#include "XFree86Suite/XFree86Suite.h"
 
 #endif  // USER_INTERFACE_TESTING_TESTING_H

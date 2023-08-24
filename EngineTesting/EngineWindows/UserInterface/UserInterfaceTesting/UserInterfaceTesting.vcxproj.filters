@@ -28,17 +28,17 @@
     <Filter Include="InterfaceSuite 头文件">
       <UniqueIdentifier>{0bdefe4d-faa1-4ead-96e0-01654dbb1ca9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="XFree86Suite 头文件">
-      <UniqueIdentifier>{aa915b68-f40c-4028-8eb1-612ce11565e8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="WxWidgetsSuite 头文件">
       <UniqueIdentifier>{1b51e6eb-4eab-4959-bf5f-c70606b44e81}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TrixulSuite 头文件">
-      <UniqueIdentifier>{971c6bb6-99e0-4318-9314-b021323d45a9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HelperSuite 头文件">
       <UniqueIdentifier>{1adc2985-298a-4750-b4ce-490fdf679875}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectXSuite 头文件">
+      <UniqueIdentifier>{971c6bb6-99e0-4318-9314-b021323d45a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 头文件">
+      <UniqueIdentifier>{aa915b68-f40c-4028-8eb1-612ce11565e8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -68,17 +68,17 @@
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\InterfaceSuite\InterfaceSuite.h">
       <Filter>InterfaceSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\TrixulSuite\TrixulSuite.h">
-      <Filter>TrixulSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\WxWidgetsSuite\WxWidgetsSuite.h">
       <Filter>WxWidgetsSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\XFree86Suite\XFree86Suite.h">
-      <Filter>XFree86Suite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\HelperSuite\HelperSuite.h">
       <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\DirectXSuite\DirectXSuite.h">
+      <Filter>DirectXSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\OpenGLSuite\OpenGLSuite.h">
+      <Filter>OpenGLSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

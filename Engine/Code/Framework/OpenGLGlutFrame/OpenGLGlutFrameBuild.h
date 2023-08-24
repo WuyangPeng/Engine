@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:17)
+///	版本：0.9.1.3 (2023/08/05 14:53)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_FRAME_BUILD_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_FRAME_BUILD_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "Rendering/RendererEngine/RendererParameter.h"
 #include "Framework/Application/GLUTApplicationInformation.h"
@@ -20,12 +22,12 @@ namespace Framework
     class OpenGLGlutFrameBuild
     {
     public:
-        using ProcessType = OpenGLGlutProcess;
-        using ClassType = OpenGLGlutFrameBuild<ProcessType>;
+        using ClassType = OpenGLGlutFrameBuild<OpenGLGlutProcess>;
+
         using RendererParameter = Rendering::RendererParameter;
 
     public:
-        OpenGLGlutFrameBuild(const GLUTApplicationInformation& glutInformation, const EnvironmentDirectory& environmentDirectory);
+        OpenGLGlutFrameBuild(GLUTApplicationInformation glutInformation, const EnvironmentDirectory& environmentDirectory);
         virtual ~OpenGLGlutFrameBuild() noexcept = default;
         OpenGLGlutFrameBuild(const OpenGLGlutFrameBuild& rhs) noexcept = default;
         OpenGLGlutFrameBuild& operator=(const OpenGLGlutFrameBuild& rhs) noexcept = default;
@@ -34,17 +36,17 @@ namespace Framework
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual bool InitOpenGLGlutContext(int argc, char** argv);
+        NODISCARD virtual bool InitOpenGLGlutContext(int argc, char** argv);
         virtual void RunOpenGLGlutMainLoop();
 
     private:
-        virtual bool PreCreate();
-        virtual bool InitGlutFunctionLibrary(int argc, char** argv) noexcept;
-        virtual bool CreateGlutWindow();
-        virtual bool SetCallBackFunction() noexcept;
-        virtual bool SetupRenderStatus() noexcept;
-        virtual bool OpenGLInit();
-        virtual bool CreateMenu() noexcept;
+        NODISCARD virtual bool PreCreate();
+        NODISCARD virtual bool InitGlutFunctionLibrary(int argc, char** argv) noexcept;
+        NODISCARD virtual bool CreateGlutWindow();
+        NODISCARD virtual bool SetCallBackFunction() noexcept;
+        NODISCARD virtual bool SetupRenderStatus() noexcept;
+        NODISCARD virtual bool OpenGLInit();
+        NODISCARD virtual bool CreateMenu() noexcept;
 
         NODISCARD static std::string GetRendererParameter(const EnvironmentDirectory& environmentDirectory);
 
@@ -53,8 +55,8 @@ namespace Framework
 
         OpenGLGlutProcess openGLGlutProcess;
         GLUTApplicationInformation glutInformation;
-        int windowID;
-        int menuID;
+        int windowId;
+        int menuId;
         RendererParameter rendererParameter;
     };
 }

@@ -19,6 +19,14 @@
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, GlobalFont)
 
+Rendering::GlobalFont::GlobalFont(FontType fontType)
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+{
+    System::UnusedFunction(fontType);
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
 Rendering::GlobalFont::GlobalFont(FontType fontType, ProgramFactory& factory, const std::string& shaderExtendName, int maxMessageLength)
     : impl{ fontType, factory, shaderExtendName, maxMessageLength }
 {

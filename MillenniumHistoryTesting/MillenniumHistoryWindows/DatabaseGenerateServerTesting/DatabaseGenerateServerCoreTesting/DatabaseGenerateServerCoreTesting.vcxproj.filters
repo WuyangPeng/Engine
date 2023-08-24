@@ -19,14 +19,17 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{68f14701-d87c-4a2f-ac11-7381ed07c781}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EngineSuite 头文件">
-      <UniqueIdentifier>{277d1bc8-ce99-4697-a074-9377d66e3e2c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ConvertSuite 头文件">
       <UniqueIdentifier>{2086c953-f4ac-4083-a128-b8f1dfa67ad5}</UniqueIdentifier>
     </Filter>
     <Filter Include="ConvertSuite 源文件">
       <UniqueIdentifier>{6bf49286-4a48-4df5-aa11-620195633b76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\AncientBooksCsv">
+      <UniqueIdentifier>{fbafc6c2-23c1-429f-a0b7-1c2ddf9b2112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConvertSuite 模板文件">
+      <UniqueIdentifier>{3fa6ec0a-eda8-4b94-acef-f70b271cead9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +51,66 @@
     <None Include="Configuration\Testing.json">
       <Filter>配置</Filter>
     </None>
+    <None Include="Resource\AncientBooksCsv\Article.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Book.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Calendar.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Category.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Character.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Country.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Day.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Emperor.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Gather.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Genus.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Geographic.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Identity.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\ImperialCourt.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Month.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\ReignTitle.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\SexagenaryCycle.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Source.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Version.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Resource\AncientBooksCsv\Year.csv">
+      <Filter>资源文件\AncientBooksCsv</Filter>
+    </None>
+    <None Include="Configuration\Database.json">
+      <Filter>配置</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\Testing.h">
@@ -55,9 +118,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\TestingHelper.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\EngineSuite\EngineSuite.h">
-      <Filter>EngineSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CategoryConvertTesting.h">
       <Filter>ConvertSuite 头文件</Filter>
@@ -118,6 +178,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\CalendarConvertTesting.h">
       <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ConvertTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\DeleteInvalidDatabaseTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\AncientBooksDatabaseSaveTesting.h">
+      <Filter>ConvertSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\DeleteInvalidDatabaseTestingDetail.h">
+      <Filter>ConvertSuite 模板文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +257,15 @@
       <Filter>ConvertSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\GatherConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\ConvertTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\DeleteInvalidDatabaseTesting.cpp">
+      <Filter>ConvertSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\DatabaseGenerateServerTesting\DatabaseGenerateServerCoreTesting\ConvertSuite\AncientBooksDatabaseSaveTesting.cpp">
       <Filter>ConvertSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>

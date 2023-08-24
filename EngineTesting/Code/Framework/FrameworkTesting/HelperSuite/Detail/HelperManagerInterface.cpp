@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:18)
+///	版本：0.9.1.3 (2023/08/11 19:21)
 
 #include "HelperManagerInterface.h"
 #include "HelperManagerInterfaceImpl.h"
 #include "HelperMiddleLayerFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Framework::HelperManagerInterface::HelperManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ System::EnumCastUnderlying(HelperMiddleLayer::Count) }

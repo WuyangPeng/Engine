@@ -1,0 +1,14 @@
+{
+  "FrameworkTesting": 1,
+  "FrameworkAndroidTesting": 0,
+  "FrameworkWindowTesting": 1,
+  "FrameworkOpenGLGlutTesting": 1,
+  "WindowsAPIFrameTesting": 1,
+  "AndroidCallBackUnitTestSuiteTesting": 1,
+  "AndroidFrameBuildTesting": 1,
+  "AndroidMessageLoopTesting": 1,
+  "CameraModelViewControllerTesting": 1,
+  "DefaultEngineMiddleLayerTesting": 1,
+  "EngineMiddleLayerTesting": 1,
+  "ModelViewControllerTesting": 1
+}

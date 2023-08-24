@@ -1,21 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2022/06/27 16:34)
+///	版本：0.9.1.3 (2023/08/10 11:30)
 
 #include "OpenGLGlutCallBackUnitTestSuiteTesting.h"
 #include "System/OpenGL/Flags/GlutKeyCodesFlags.h"
-#include "System/Windows/Flags/WindowsKeyCodesFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "Framework/OpenGLGlutCallBackUnitTestSuiteTesting/OpenGLGlutCallBack.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBackUnitTestSuiteTesting(const OStreamShared& ostream, OpenGLGlutCallBack* message)
-    : ParentType(ostream), m_Message(message)
+#include "Framework/OpenGLGlutCallBackUnitTestSuiteTesting/OpenGLGlutCallBack.h"
+
+OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBackUnitTestSuiteTesting(const OStreamShared& stream, const OpenGLGlutCallBackWeakPtr& message)
+    : ParentType{ stream }, message{ message }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -36,17 +36,17 @@ void OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBackUnitTestSuiteTest
 
 void OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBackUnitTestSuiteTesting::KeyDownMessageTest()
 {
-    ASSERT_TRUE(m_Message->SpecialKeysDown(static_cast<int>(System::GlutKeyCodes::F1), 0, 0));
+    ASSERT_TRUE(message.lock()->SpecialKeysDown(System::EnumCastUnderlying(System::GlutKeyCodes::F1), 0, 0));
 
-    ASSERT_EQUAL(m_Message->GetPassedNumber(), 1);
+    ASSERT_EQUAL(message.lock()->GetPassedNumber(), 1);
 }
 
 void OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBackUnitTestSuiteTesting::CreateMessageTest()
 {
-    ASSERT_TRUE(m_Message->Initialize());
+    ASSERT_TRUE(message.lock()->Initialize());
 }
 
 void OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBackUnitTestSuiteTesting::DisplayTest()
 {
-    ASSERT_TRUE(m_Message->IdleFunction());
+    ASSERT_TRUE(message.lock()->IdleFunction());
 }

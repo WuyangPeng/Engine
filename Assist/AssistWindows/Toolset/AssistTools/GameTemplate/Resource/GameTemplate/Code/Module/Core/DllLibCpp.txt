@@ -1,0 +1,6 @@
+$Copyright$
+
+#include "$ModuleName$$CoreName$Export.h"
+
+#include "DllLib.h"
+#include "$ModuleName$$CoreName$.h"

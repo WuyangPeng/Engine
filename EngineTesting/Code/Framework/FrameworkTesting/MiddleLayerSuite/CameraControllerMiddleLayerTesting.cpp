@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:05)
+///	版本：0.9.1.3 (2023/08/12 16:26)
 
 #include "CameraControllerMiddleLayerTesting.h"
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/DataTypes/TransformMatrixDetail.h"
-#include "Rendering/RendererEngine/EnvironmentParameter.h" 
+#include "Rendering/RendererEngine/EnvironmentParameter.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/CameraControllerMiddleLayerDetail.h"
@@ -27,12 +27,6 @@
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
 
 #include <random>
-
-namespace Framework
-{
-    using TestingType = CameraControllerMiddleLayer<WindowApplicationTrait>;
-    using TestingTypeSharedPtr = std::shared_ptr<TestingType>;
-}
 
 Framework::CameraControllerMiddleLayerTesting::CameraControllerMiddleLayerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -53,8 +47,6 @@ void Framework::CameraControllerMiddleLayerTesting::MainTest()
 
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(KeyDownTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CameraMotionMoveTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MoveObjectTest);
     ASSERT_NOT_THROW_EXCEPTION_0(TrackBallDownTest);
     ASSERT_NOT_THROW_EXCEPTION_0(RotateTrackBallTest);
 
@@ -65,11 +57,11 @@ void Framework::CameraControllerMiddleLayerTesting::MiddleLayerTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    CameraControllerMiddleLayer<WindowApplicationTrait> middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraModelMiddleLayer = std::make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraModelMiddleLayer = std::make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer.SetModelMiddleLayer(cameraModelMiddleLayer);
-    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
     ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
@@ -89,7 +81,7 @@ void Framework::CameraControllerMiddleLayerTesting::MiddleLayerTest()
 
     constexpr WindowPoint point{};
     const WindowSize size{};
-    const VirtualKeysTypes virtualKeysTypes{};
+    constexpr VirtualKeysTypes virtualKeysTypes{};
 
     ASSERT_TRUE(middleLayer.Paint());
     ASSERT_TRUE(middleLayer.Move(point));
@@ -110,11 +102,11 @@ void Framework::CameraControllerMiddleLayerTesting::KeyDownTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    auto middleLayer = std::make_shared<TestingType>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto middleLayer = std::make_shared<CameraControllerMiddleLayer<WindowApplicationTrait>>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    auto cameraModelMiddleLayer = std::make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraModelMiddleLayer = std::make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
-    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
     cameraModelMiddleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
     cameraModelMiddleLayer->SetControllerMiddleLayer(middleLayer);
@@ -167,23 +159,15 @@ void Framework::CameraControllerMiddleLayerTesting::KeyDownTest()
     middleLayer->Terminate();
 }
 
-void Framework::CameraControllerMiddleLayerTesting::CameraMotionMoveTest() noexcept
-{
-}
-
-void Framework::CameraControllerMiddleLayerTesting::MoveObjectTest() noexcept
-{
-}
-
 void Framework::CameraControllerMiddleLayerTesting::TrackBallDownTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    auto middleLayer = std::make_shared<TestingType>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto middleLayer = std::make_shared<CameraControllerMiddleLayer<WindowApplicationTrait>>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    auto cameraModelMiddleLayer = std::make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraModelMiddleLayer = std::make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
-    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
     cameraModelMiddleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
     cameraModelMiddleLayer->SetControllerMiddleLayer(middleLayer);
@@ -207,12 +191,12 @@ void Framework::CameraControllerMiddleLayerTesting::TrackBallDownTest()
     ASSERT_FALSE(cameraModelMiddleLayer->GetTrackBallDow());
 
     constexpr WindowPoint point{};
-    const VirtualKeysTypes virtualKeysTypes{};
+    constexpr VirtualKeysTypes virtualKeysTypes{};
 
-    middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, point, virtualKeysTypes);
+    ASSERT_TRUE(middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, point, virtualKeysTypes));
     ASSERT_TRUE(cameraModelMiddleLayer->GetTrackBallDow());
 
-    middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseUp, point, virtualKeysTypes);
+    ASSERT_TRUE(middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseUp, point, virtualKeysTypes));
     ASSERT_FALSE(cameraModelMiddleLayer->GetTrackBallDow());
 
     ASSERT_TRUE(cameraModelMiddleLayer->Destroy());
@@ -226,11 +210,11 @@ void Framework::CameraControllerMiddleLayerTesting::RotateTrackBallTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    auto middleLayer = std::make_shared<TestingType>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto middleLayer = std::make_shared<CameraControllerMiddleLayer<WindowApplicationTrait>>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    auto cameraModelMiddleLayer = std::make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraModelMiddleLayer = std::make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
-    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
     cameraModelMiddleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
     cameraModelMiddleLayer->SetControllerMiddleLayer(middleLayer);
@@ -238,7 +222,7 @@ void Framework::CameraControllerMiddleLayerTesting::RotateTrackBallTest()
     cameraViewMiddleLayer->SetControllerMiddleLayer(middleLayer);
 
     const WindowSize windowSize{ 1024, 768 };
-    const auto multiplier = 1.0f / windowSize.GetWindowHeight();
+    const auto multiplier = 1.0f / static_cast<float>(windowSize.GetWindowHeight());
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
     ASSERT_TRUE(middleLayer->PreCreate());
@@ -261,13 +245,12 @@ void Framework::CameraControllerMiddleLayerTesting::RotateTrackBallTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> random{ 0, 100 };
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
-        auto xBegin = random(generator);
-        auto yBegin = random(generator);
-        auto xEnd = random(generator);
-        auto yEnd = random(generator);
+        const auto xBegin = random(generator);
+        const auto yBegin = random(generator);
+        const auto xEnd = random(generator);
+        const auto yEnd = random(generator);
 
         const auto xTrackBegin = GetXTrack(xBegin, multiplier, windowSize);
         const auto yTrackBegin = GetYTrack(yBegin, multiplier, windowSize);
@@ -275,9 +258,9 @@ void Framework::CameraControllerMiddleLayerTesting::RotateTrackBallTest()
         const auto yTrackEnd = GetYTrack(yEnd, multiplier, windowSize);
 
         const WindowPoint point{ xBegin, yBegin };
-        const VirtualKeysTypes virtualKeysTypes{};
+        constexpr VirtualKeysTypes virtualKeysTypes{};
 
-        middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, point, virtualKeysTypes);
+        ASSERT_TRUE(middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, point, virtualKeysTypes));
 
         const auto rotate = cameraModelMiddleLayer->GetMotionObjectLocalTransform().GetRotate();
 
@@ -296,7 +279,7 @@ void Framework::CameraControllerMiddleLayerTesting::RotateTrackBallTest()
         {
             if (dot < 0.0f)
             {
-                auto invLength = Mathematics::MathF::InvSqrt(boost::numeric_cast<float>(xBegin * xBegin + yBegin * yBegin));
+                const auto invLength = Mathematics::MathF::InvSqrt(boost::numeric_cast<float>(xBegin * xBegin + yBegin * yBegin));
                 axis[0] = yTrackBegin * invLength;
                 axis[1] = -xTrackBegin * invLength;
                 axis[2] = 0.0f;
@@ -304,20 +287,20 @@ void Framework::CameraControllerMiddleLayerTesting::RotateTrackBallTest()
             }
             else
             {
-                axis = AVectorf::GetUnitX();
+                axis = AVector::GetUnitX();
                 angle = 0.0f;
             }
         }
 
         auto worldAxis = axis[0] * cameraModelMiddleLayer->GetCameraDirectionVector() + axis[1] * cameraModelMiddleLayer->GetCameraUpVector() + axis[2] * cameraModelMiddleLayer->GetCameraRightVector();
 
-        const Matrixf trackRotate{ worldAxis, angle };
+        const Matrix trackRotate{ worldAxis, angle };
 
         auto localRotate = trackRotate * rotate;
 
         localRotate.Orthonormalize();
 
-        middleLayer->Motion(WindowPoint{ xEnd, yEnd }, VirtualKeysTypes{ boost::numeric_cast<System::WindowsWParam>(WindowApplicationTrait::MouseModifiers::modifierLeftButton) });
+        ASSERT_TRUE(middleLayer->Motion(WindowPoint{ xEnd, yEnd }, VirtualKeysTypes{ boost::numeric_cast<System::WindowsWParam>(WindowApplicationTrait::MouseModifiers::modifierLeftButton) }));
 
         MatrixTest(localRotate, cameraModelMiddleLayer->GetMotionObjectLocalTransform().GetRotate(), __func__, i);
     }

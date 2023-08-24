@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:09)
+///	版本：0.9.1.3 (2023/08/10 15:53)
 
 #ifndef FRAMEWORK_WINDOW_TESTING_APPLICATION_SUITE_WINDOW_APPLICATION_INFORMATION_TESTING_H
 #define FRAMEWORK_WINDOW_TESTING_APPLICATION_SUITE_WINDOW_APPLICATION_INFORMATION_TESTING_H
@@ -20,25 +20,25 @@ namespace Framework
     public:
         using ClassType = WindowApplicationInformationTesting;
         using ParentType = UnitTest;
-        using HInstance = System::WindowsHInstance;
+
+        using WindowsHInstance = System::WindowsHInstance;
 
     public:
-        explicit WindowApplicationInformationTesting(const OStreamShared& stream, HInstance instance);
+        WindowApplicationInformationTesting(const OStreamShared& stream, WindowsHInstance instance);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
         void MainTest();
 
         void InformationTest();
         void AllowResizeTest();
         void NotAllowedResizeTest();
-        void RendererParameterTest() noexcept;
 
     private:
-        HInstance instance;
+        WindowsHInstance instance;
     };
 }
 

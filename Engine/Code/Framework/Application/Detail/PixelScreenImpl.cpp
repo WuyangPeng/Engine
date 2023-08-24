@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:48)
+///	版本：0.9.1.3 (2023/08/09 16:26)
 
 #include "Framework/FrameworkExport.h"
 
@@ -59,16 +59,6 @@ void Framework::PixelScreenImpl::Resize(const WindowSize& size, const Colour& co
     }
 
     ClearScreen(color);
-}
-
-void Framework::PixelScreenImpl::Draw(const RendererSharedPtr& renderer) noexcept
-{
-    FRAMEWORK_CLASS_IS_VALID_1;
-
-    if (renderer != nullptr)
-    {
-        // renderer->Draw(screen, doFlip);
-    }
 }
 
 void Framework::PixelScreenImpl::ClearScreen(const Colour& color)
@@ -130,7 +120,7 @@ void Framework::PixelScreenImpl::DrawLine(int xMin, int yMin, int xMax, int yMax
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    PixelScreenDrawLine line{ xMin, yMin, xMax, yMax };
+    const PixelScreenDrawLine line{ xMin, yMin, xMax, yMax };
 
     const auto size = line.GetSize();
 
@@ -209,14 +199,14 @@ void Framework::PixelScreenImpl::DoDrawSolidCircle1(int xCenter, int yCenter, in
     const auto yMin = std::max(yCenter - y, 0);
     const auto yMax = std::min(yCenter + y, screenHeight - 1);
 
-    const auto xCenterPlusX = xCenter + x;
-    if (xCenterPlusX < screenWidth)
+    if (const auto xCenterPlusX = xCenter + x;
+        xCenterPlusX < screenWidth)
     {
         SetLineOnY(xCenterPlusX, yMin, yMax, color);
     }
 
-    const auto xCenterMinusX = xCenter - x;
-    if (0 <= xCenterMinusX)
+    if (const auto xCenterMinusX = xCenter - x;
+        0 <= xCenterMinusX)
     {
         SetLineOnY(xCenterMinusX, yMin, yMax, color);
     }
@@ -227,15 +217,14 @@ void Framework::PixelScreenImpl::DoDrawSolidCircle2(int xCenter, int yCenter, in
     const auto yMin = std::max(yCenter - x, 0);
     const auto yMax = std::min(yCenter + x, screenHeight - 1);
 
-    const auto xCenterPlusY = xCenter + y;
-    if (xCenterPlusY < screenWidth)
+    if (const auto xCenterPlusY = xCenter + y;
+        xCenterPlusY < screenWidth)
     {
         SetLineOnY(xCenterPlusY, yMin, yMax, color);
     }
 
-    const auto xCenterMinusY = xCenter - y;
-
-    if (0 <= xCenterMinusY)
+    if (const auto xCenterMinusY = xCenter - y;
+        0 <= xCenterMinusY)
     {
         SetLineOnY(xCenterMinusY, yMin, yMax, color);
     }
@@ -332,8 +321,8 @@ void Framework::PixelScreenImpl::Fill(int x, int y, const Colour& foreColor, con
         // 填充像素
         SetPixel(x, y, foreColor);
 
-        auto xPlus1 = x + 1;
-        if (xPlus1 < xMax && GetPixel(xPlus1, y) == backColor)
+        if (const auto xPlus1 = x + 1;
+            xPlus1 < xMax && GetPixel(xPlus1, y) == backColor)
         {
             // 推出像素使用背景色。
             ++top;
@@ -342,8 +331,8 @@ void Framework::PixelScreenImpl::Fill(int x, int y, const Colour& foreColor, con
             continue;
         }
 
-        auto xMinus1 = x - 1;
-        if (0 <= xMinus1 && GetPixel(xMinus1, y) == backColor)
+        if (const auto xMinus1 = x - 1;
+            0 <= xMinus1 && GetPixel(xMinus1, y) == backColor)
         {
             // 推出像素使用背景色。
             ++top;
@@ -352,8 +341,8 @@ void Framework::PixelScreenImpl::Fill(int x, int y, const Colour& foreColor, con
             continue;
         }
 
-        auto yPlus1 = y + 1;
-        if (yPlus1 < yMax && GetPixel(x, yPlus1) == backColor)
+        if (const auto yPlus1 = y + 1;
+            yPlus1 < yMax && GetPixel(x, yPlus1) == backColor)
         {
             // 推出像素使用背景色。
             ++top;
@@ -362,8 +351,8 @@ void Framework::PixelScreenImpl::Fill(int x, int y, const Colour& foreColor, con
             continue;
         }
 
-        auto yMinus1 = y - 1;
-        if (0 <= yMinus1 && GetPixel(x, yMinus1) == backColor)
+        if (const auto yMinus1 = y - 1;
+            0 <= yMinus1 && GetPixel(x, yMinus1) == backColor)
         {
             // 推出像素使用背景色。
             ++top;
@@ -377,7 +366,6 @@ void Framework::PixelScreenImpl::Fill(int x, int y, const Colour& foreColor, con
     }
 }
 
-// private
 void Framework::PixelScreenImpl::SetLineOnX(int xMin, int xMax, int y, const Colour& color)
 {
     FRAMEWORK_ASSERTION_1(0 <= xMin && xMin <= xMax && xMax < screenWidth && 0 <= y && y < screenHeight, "数组索引越界！");
@@ -388,7 +376,6 @@ void Framework::PixelScreenImpl::SetLineOnX(int xMin, int xMax, int y, const Col
     }
 }
 
-// private
 void Framework::PixelScreenImpl::SetLineOnY(int x, int yMin, int yMax, const Colour& color)
 {
     FRAMEWORK_ASSERTION_1(0 <= x && x < screenWidth && 0 <= yMin && yMin <= yMax && yMax < screenHeight, "数组索引越界！");

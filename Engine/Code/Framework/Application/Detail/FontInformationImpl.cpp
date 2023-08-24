@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:45)
+///	版本：0.9.1.3 (2023/08/09 16:45)
 
 #include "Framework/FrameworkExport.h"
 
@@ -16,13 +16,11 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Framework/WindowProcess/WindowProcessManager.h"
 
-using namespace std::literals;
-
 CLASS_INVARIANT_STUB_DEFINE(Framework, FontInformationImpl)
 
-Framework::FontInformationImpl::FontInformationImplSharedPtr Framework::FontInformationImpl::Create(WindowsHWnd hwnd)
+Framework::FontInformationImpl::FontInformationImplSharedPtr Framework::FontInformationImpl::Create(WindowsHWnd hWnd)
 {
-    return std::make_shared<WindowFontInformation>(hwnd);
+    return std::make_shared<WindowFontInformation>(hWnd);
 }
 
 Framework::FontInformationImpl::FontInformationImplSharedPtr Framework::FontInformationImpl::Create(PlatformTypes type)
@@ -36,8 +34,8 @@ Framework::FontInformationImpl::FontInformationImplSharedPtr Framework::FontInfo
 
         case PlatformTypes::Window:
         {
-            auto hwnd = WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHwnd();
-            return Create(hwnd);
+            const auto hWnd = WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHWnd();
+            return Create(hWnd);
         }
 
         case PlatformTypes::Android:
@@ -45,7 +43,7 @@ Framework::FontInformationImpl::FontInformationImplSharedPtr Framework::FontInfo
         case PlatformTypes::Macintosh:
         default:
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("无法获取该平台的字体信息！"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("无法获取该平台的字体信息！"s))
         }
     }
 }

@@ -280,6 +280,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutCallBackUnitTestSuiteTesting\OpenGLGlutCallBack.h" />
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutCallBackUnitTestSuiteTesting\OpenGLGlutCallBackUnitTestSuite\OpenGLGlutCallBackUnitTestSuite.h" />
     <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutCallBackUnitTestSuiteTesting\OpenGLGlutCallBackUnitTestSuite\OpenGLGlutCallBackUnitTestSuiteTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutCallBackUnitTestSuiteTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutCallBackUnitTestSuiteTesting\TestingHelper.h" />

@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/29 18:46)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:43)
+
 #ifndef BACKGROUND_SERVER_BACKGROUND_SERVER_MESSAGE_H
 #define BACKGROUND_SERVER_BACKGROUND_SERVER_MESSAGE_H
 
-#include "BackgroundServer/BackgroundServerMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "BackgroundServer/BackgroundServerMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "BackgroundServer/BackgroundServerMiddleLayer/Audio/AudioManager.h"
 #include "BackgroundServer/BackgroundServerMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "BackgroundServer/BackgroundServerMiddleLayer/Event/EventManager.h"
@@ -31,7 +32,7 @@
 
 namespace BackgroundServer
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<BackgroundServerMiddleLayer::ObjectLogicManager, BackgroundServerMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<BackgroundServerMiddleLayer::ObjectLogicManager, BackgroundServerMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   BackgroundServerMiddleLayer::InputManager,
                                                                   BackgroundServerMiddleLayer::NetworkManager,
@@ -53,13 +54,16 @@ namespace BackgroundServer
         using ClassType = BackgroundServerMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit BackgroundServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        BackgroundServerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using BackgroundServerMessageWindowProcessHandle = Framework::WindowProcessHandle<BackgroundServerMessage>;

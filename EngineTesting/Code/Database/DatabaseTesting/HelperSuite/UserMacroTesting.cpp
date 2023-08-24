@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.10 (2023/05/25 14:44)
+///	版本：0.9.1.3 (2023/08/14 16:29)
 
 #include "UserMacroTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -34,7 +34,7 @@ void Database::UserMacroTesting::MainTest()
 
 void Database::UserMacroTesting::CloseDatabaseMaxTest()
 {
-    ASSERT_EQUAL(CLOSE_USE_MYSQL | CLOSE_USE_MYSQL_C_API | CLOSE_USE_MYSQL_CPP_CONNECTOR | CLOSE_USE_SQL_SERVER | CLOSE_USE_SQLITE | CLOSE_USE_POSTGRE | CLOSE_USE_ORACLE | CLOSE_USE_MARIADB | CLOSE_USE_MONGO | CLOSE_USE_REDIS, CLOSE_DATABASE_MAX);
+    ASSERT_EQUAL(CLOSE_USE_MYSQL | CLOSE_USE_MYSQL_C_API | CLOSE_USE_MYSQL_CPP_CONNECTOR | CLOSE_USE_SQL_SERVER | CLOSE_USE_SQLITE | CLOSE_USE_POSTGRE | CLOSE_USE_ORACLE | CLOSE_USE_MARIA_DB | CLOSE_USE_MONGO | CLOSE_USE_REDIS, CLOSE_DATABASE_MAX);
 }
 
 void Database::UserMacroTesting::MacroExistTest() noexcept

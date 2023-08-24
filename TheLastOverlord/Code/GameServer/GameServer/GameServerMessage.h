@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/24 22:11)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:42)
 
 #ifndef GAME_SERVER_GAME_SERVER_MESSAGE_H
 #define GAME_SERVER_GAME_SERVER_MESSAGE_H
 
-#include "GameServer/GameServerMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "GameServer/GameServerMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "GameServer/GameServerMiddleLayer/Audio/AudioManager.h"
 #include "GameServer/GameServerMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "GameServer/GameServerMiddleLayer/Event/EventManager.h"
@@ -32,7 +32,7 @@
 
 namespace GameServer
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<GameServerMiddleLayer::ObjectLogicManager, GameServerMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<GameServerMiddleLayer::ObjectLogicManager, GameServerMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   GameServerMiddleLayer::InputManager,
                                                                   GameServerMiddleLayer::NetworkManager,
@@ -54,13 +54,16 @@ namespace GameServer
         using ClassType = GameServerMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit GameServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        GameServerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using GameServerMessageWindowProcessHandle = Framework::WindowProcessHandle<GameServerMessage>;

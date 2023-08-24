@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:56)
+///	版本：0.9.1.3 (2023/08/12 15:19)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_RENDERING_MIDDLE_LAYER_INTERFACE_TEST_H
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_RENDERING_MIDDLE_LAYER_INTERFACE_TEST_H
@@ -14,15 +14,16 @@
 
 namespace Framework
 {
-    class RenderingManagerInterfaceTest : public RenderingManagerInterface
+    class RenderingManagerInterfaceTest final : public RenderingManagerInterface
     {
     public:
         using ClassType = RenderingManagerInterfaceTest;
         using ParentType = RenderingManagerInterface;
+
         using MiddleLayerSharedPtr = std::shared_ptr<ClassType>;
 
     public:
-        RenderingManagerInterfaceTest(MiddleLayerInterfaceCreate middleLayerInterfaceCreate, MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
+        RenderingManagerInterfaceTest(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         NODISCARD static MiddleLayerSharedPtr CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 

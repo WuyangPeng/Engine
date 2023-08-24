@@ -5,9 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/02 20:52)
+///	版本：0.9.1.3 (2023/08/14 16:31)
 
 #include "CodeFwdHeaderFileGenerationTesting.h"
+#include "CoreTools/CharacterString/CodeMappingAnalysis.h"
 #include "CoreTools/FileManager/OFStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
@@ -15,7 +16,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Database/DatabaseEntityCodeGeneration/CodeEntityAnalysis.h"
 #include "Database/DatabaseEntityCodeGeneration/CodeFwdHeaderFileGeneration.h"
-#include "Database/DatabaseEntityCodeGeneration/CodeMappingAnalysis.h"
 
 Database::CodeFwdHeaderFileGenerationTesting::CodeFwdHeaderFileGenerationTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -37,10 +37,10 @@ void Database::CodeFwdHeaderFileGenerationTesting::MainTest()
 
 void Database::CodeFwdHeaderFileGenerationTesting::CodeFwdHeaderFileGenerationTest()
 {
-    CodeEntityAnalysis codeEntityAnalysis{ "Configuration/DatabaseEntity.json" };
-    CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/DatabaseEntity/DatabaseEntity.json") };
+    const CodeEntityAnalysis codeEntityAnalysis{ "Configuration/DatabaseEntity.json" };
+    const CoreTools::CodeMappingAnalysis codeMappingAnalysis{ SYSTEM_TEXT("Resource/DatabaseEntity/DatabaseEntity.json") };
 
-    CodeFwdHeaderFileGeneration codeFwdHeaderFileGeneration{ SYSTEM_TEXT("Resource/DatabaseEntity/DatabaseEntityFwd.txt"), codeEntityAnalysis, codeMappingAnalysis };
+    const CodeFwdHeaderFileGeneration codeFwdHeaderFileGeneration{ SYSTEM_TEXT("Resource/DatabaseEntity/DatabaseEntityFwd.txt"), codeEntityAnalysis, codeMappingAnalysis };
 
     CoreTools::OFStreamManager streamManager{ SYSTEM_TEXT("Resource/DatabaseEntity/DatabaseEntityFwd.h"), false };
     streamManager.SetSimplifiedChinese();

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:51)
+///	版本：0.9.1.3 (2023/08/10 09:38)
 
 #include "Framework/FrameworkExport.h"
 
@@ -16,9 +16,12 @@
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/UnitTestSuite/UnitTestComposite.h"
+#include "Framework/WindowProcess/Detail/WindowMessageUnitTestSuiteStream.h"
 
-Framework::AndroidCallBackUnitTestSuiteImpl::AndroidCallBackUnitTestSuiteImpl(const std::string& name, const OStreamShared& streamShared)
-    : testingInformationHelper{ CoreTools::TestingInformationHelper::Create() }, suite{ std::make_shared<Suite>(name, streamShared, testingInformationHelper.IsPrintRun()) }
+Framework::AndroidCallBackUnitTestSuiteImpl::AndroidCallBackUnitTestSuiteImpl(const std::string& name)
+    : stream{ std::make_shared<WindowMessageUnitTestSuiteStream>(true) },
+      testingInformationHelper{ CoreTools::TestingInformationHelper::Create() },
+      suite{ std::make_shared<Suite>(name, stream->GetStreamShared(), testingInformationHelper.IsPrintRun()) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -27,7 +30,7 @@ Framework::AndroidCallBackUnitTestSuiteImpl::AndroidCallBackUnitTestSuiteImpl(co
 
 bool Framework::AndroidCallBackUnitTestSuiteImpl::IsValid() const noexcept
 {
-    if (suite != nullptr)
+    if (stream != nullptr && suite != nullptr)
         return true;
     else
         return false;
@@ -72,24 +75,25 @@ int Framework::AndroidCallBackUnitTestSuiteImpl::GetPassedNumber() const noexcep
 
 void Framework::AndroidCallBackUnitTestSuiteImpl::AddTest(const std::string& suiteName, Suite& aSuite, const std::string& testName, const UnitTestSharedPtr& unitTest)
 {
-    try
+    EXCEPTION_TRY
     {
-        const auto testLoopCount = testingInformationHelper.GetLoopCount(suiteName, testName);
-
-        if (0 < testLoopCount)
-        {
-            unitTest->SetTestLoopCount(testLoopCount);
-            unitTest->SetRandomSeed(testingInformationHelper.GetRandomSeed());
-            aSuite.AddTest(unitTest);
-        }
-        else if (testLoopCount < 0)
-        {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("测试"), testName, SYSTEM_TEXT("未配置！在测试套件："), aSuite.GetName(), SYSTEM_TEXT("。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
-        }
+        DoAddTest(suiteName, aSuite, testName, unitTest);
     }
-    catch (const CoreTools::Error& error)
+    EXCEPTION_ENGINE_EXCEPTION_CATCH(Framework)
+}
+
+void Framework::AndroidCallBackUnitTestSuiteImpl::DoAddTest(const std::string& suiteName, Suite& aSuite, const std::string& testName, const UnitTestSharedPtr& unitTest)
+{
+    if (const auto testLoopCount = testingInformationHelper.GetLoopCount(suiteName, testName);
+        0 < testLoopCount)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        unitTest->SetTestLoopCount(testLoopCount);
+        unitTest->SetRandomSeed(testingInformationHelper.GetRandomSeed());
+        aSuite.AddTest(unitTest);
+    }
+    else if (testLoopCount < 0)
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, SYSTEM_TEXT("测试"), testName, SYSTEM_TEXT("未配置！在测试套件："), aSuite.GetName(), SYSTEM_TEXT("。"), CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
@@ -98,4 +102,11 @@ bool Framework::AndroidCallBackUnitTestSuiteImpl::IsPrintRun() const noexcept
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
     return testingInformationHelper.IsPrintRun();
+}
+
+CoreTools::OStreamShared Framework::AndroidCallBackUnitTestSuiteImpl::GetStreamShared() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return stream->GetStreamShared();
 }

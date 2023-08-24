@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:23)
+///	版本：0.9.1.3 (2023/08/10 13:42)
 
 #ifndef MODEL_VIEW_CONTROLLER_TESTING_MODEL_VIEW_CONTROLLER_MESSAGE_H
 #define MODEL_VIEW_CONTROLLER_TESTING_MODEL_VIEW_CONTROLLER_MESSAGE_H
@@ -24,19 +24,24 @@ namespace ModelViewController
     using MiddleLayerType = Framework::ModelViewControllerMiddleLayerContainer<Framework::WindowApplicationTrait, Framework::ModelMiddleLayer, FrameViewMiddleLayer, Framework::ControllerMiddleLayer>;
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
-    class ModelViewControllerMessage : public MessageType
+    class ModelViewControllerMessage final : public MessageType
     {
     public:
         using ClassType = ModelViewControllerMessage;
         using ParentType = MessageType;
 
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        ModelViewControllerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        ModelViewControllerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+
+    private:
+        ConsoleAlloc alloc;
     };
 
     using ModelViewControllerTesting = Framework::WindowProcessHandle<ModelViewControllerMessage>;

@@ -888,6 +888,12 @@
     <ClInclude Include="..\..\..\Code\Framework\Project\Detail\GenerateProjectName.h">
       <Filter>Project 头文件\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\OpenGLGlutFrame\OpenGLGlutCallBackUnitTestSuiteDetail.h">
+      <Filter>OpenGLGlutFrame 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\AndroidFrame\AndroidCallBackUnitTestSuiteDetail.h">
+      <Filter>AndroidFrame 模板文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Framework\DllLib.cpp">

@@ -1,0 +1,11 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_$CoreCapital$_DLL_LIB_H
+#define $ModuleUppercase$_$CoreCapital$_DLL_LIB_H
+
+#include "Helper/UserMacro.h"
+
+#include "ThreadingCoreRenderEngine/ThreadingCoreRenderEngineLib.h"
+#include "ThreadingCoreRenderEngineGame/ThreadingCoreRenderEngineGameLib.h"
+
+#endif  // $ModuleUppercase$_$CoreCapital$_DLL_LIB_H

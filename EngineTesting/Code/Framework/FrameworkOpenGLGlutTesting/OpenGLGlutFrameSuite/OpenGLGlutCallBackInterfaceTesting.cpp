@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:23)
+///	版本：0.9.1.3 (2023/08/11 18:04)
 
 #include "OpenGLGlutCallBackInterfaceTesting.h"
 #include "System/Helper/Helper.h"
@@ -35,10 +35,10 @@ void Framework::OpenGLGlutCallBackInterfaceTesting::MainTest()
 
 void Framework::OpenGLGlutCallBackInterfaceTesting::InterfaceTest()
 {
-    OpenGLGlutCallBackInterface openGLGlutCallBackInterface(9);
+    OpenGLGlutCallBackInterface openGLGlutCallBackInterface{ 9 };
 
-    openGLGlutCallBackInterface.SetWindowID(10);
-    ASSERT_EQUAL(openGLGlutCallBackInterface.GetWindowID(), 10);
+    openGLGlutCallBackInterface.SetWindowId(10);
+    ASSERT_EQUAL(openGLGlutCallBackInterface.GetWindowId(), 10);
 
     ASSERT_TRUE(openGLGlutCallBackInterface.RenderScene());
     ASSERT_TRUE(openGLGlutCallBackInterface.ChangeSize(0, 0));
@@ -62,8 +62,4 @@ void Framework::OpenGLGlutCallBackInterfaceTesting::InterfaceTest()
     ASSERT_EQUAL(openGLGlutCallBackInterface.GetMillisecond(), 10);
 
     ASSERT_EQUAL(openGLGlutCallBackInterface.GetTerminateKey(), GlutApplicationTrait::KeyIdentifiers::keyTerminate);
-}
-
-void Framework::OpenGLGlutCallBackInterfaceTesting::TimerFunction(MAYBE_UNUSED int value) noexcept
-{
 }

@@ -22,10 +22,10 @@
     <Filter Include="Engine 源文件">
       <UniqueIdentifier>{2512de7f-aa64-4033-8e61-0dadaf3ef7d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
+    <Filter Include="Helper 头文件">
       <UniqueIdentifier>{8dda47bf-8440-43c0-b414-a603bb79858b}</UniqueIdentifier>
     </Filter>
-  </ItemGroup> 
+  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Engine\EngineFwd.h">
       <Filter>Engine 头文件</Filter>
@@ -35,24 +35,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Engine\Engine.h">
       <Filter>Engine 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Macro\MailServerCoreCustomAssertMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Macro\ExportMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Macro\MailServerCoreClassInvariantMacro.h">
-      <Filter>Macro 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\MailServerCoreImport.h">
       <Filter>头文件</Filter>
@@ -77,6 +59,24 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\DllLib.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Helper\ExportMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Helper\MailServerCoreClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Helper\MailServerCoreCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerCore\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

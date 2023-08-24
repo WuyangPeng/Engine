@@ -175,7 +175,9 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -193,7 +195,9 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -215,7 +219,9 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -237,7 +243,9 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -255,7 +263,9 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -273,7 +283,9 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -295,7 +307,9 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -317,7 +331,9 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
+      <Command>xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.txt" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(EngineInclude)/AssistTools/GenerateProjects/Template/*.json" "$(ProjectDir)/Resource/GenerateProjectsSuite" /F /Y
+xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
@@ -330,7 +346,7 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\StringReplacing.json" />
     <None Include="Configuration\Testing.json" />
-    <None Include="Resource\GenerateProjectsSuite\SetEnvironment.bat" />
+    <None Include="Resource\GenerateProjectsSuite\GenerateProjects.json" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
@@ -339,143 +355,20 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\BmpToTfSuite\BmpToTfSuite.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\FeaturesImporterSuite\FeaturesImporterSuite.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\FxCompilerSuite\FxCompilerSuite.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\CopyrightDataTesting.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateProjectsSuite.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateCodeDirectoryTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateDllLibTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateDllMainTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateEngineDirectoryTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateEngineTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateHeaderTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateHelperTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateLibTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateLogJsonTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMacroTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMainTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateManagerLibTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateManagerTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMessageTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMiddleLayerVcxprojFiltersTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMiddleLayerVcxprojTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateModuleVcxprojFiltersTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateModuleVcxprojTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateSolutionTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateVcxprojFiltersTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateVcxprojTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateCodeDirectoryTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateEngineDirectoryTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateEngineTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateSolutionTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateVcxprojFiltersTesting.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateVcxprojTesting.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\HelperSuite\HelperSuite.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingHelper.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\CopyrightDataTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateCodeDirectoryTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateDllLibTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateDllMainTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateEngineDirectoryTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateEngineTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateHeaderTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateHelperTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateLibTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateLogJsonTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMacroTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMainTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateManagerLibTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateManagerTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMessageTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMiddleLayerVcxprojFiltersTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateMiddleLayerVcxprojTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateModuleVcxprojFiltersTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateModuleVcxprojTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateSolutionTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateVcxprojFiltersTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTemplateVcxprojTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateCodeDirectoryTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateEngineDirectoryTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateEngineTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateSolutionTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateVcxprojFiltersTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\GenerateProjectsSuite\GenerateTestingTemplateVcxprojTesting.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\AssistToolsTesting\TestingMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplate.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllLibCpp.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllLibCppSpecial.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllLibMiddleLayerCpp.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllMainCpp.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllMainCppSpecial.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateEngineFwdH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateEngineH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateEnvironmentVariable.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateExportMacroH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateExportMacroHSpecial.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateHelperCpp.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateHelperH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateHelperHSpecial.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateHSpecial.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateInputManagerDetailH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateInputManagerEngineFwdH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateInputManagerEngineH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateInputManagerH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateLibCpp.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateLibCppSpecial.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateLog.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMacroFwdH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMacroH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMainCpp.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMainCppSpecial.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerClassInvariantMacroH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerCustomAssertMacroH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerDllH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerExportH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerFwdH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerHSpecial.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerImportH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerLibH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerLibHSpecial.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerMiddleLayerFwdH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerMiddleLayerH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateManagerNoImportH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMessageCpp.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMessageH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMessageHSpecial.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMiddleLayerVcxproj.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateMiddleLayerVcxprojFilters.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateModuleVcxproj.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateModuleVcxprojFilters.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateOtherManagerCpp.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateOtherManagerH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateOtherManagerHSpecial.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplatePlaceholderCpp.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplatePlaceholderH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateRenderer.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTesting.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingExeLibCpp.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingHelperCpp.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingHelperH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingHSpecial.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingJson.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingLibCpp.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingMainCpp.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateUserMacroH.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateVcxproj.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateVcxprojFilters.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTestingTemplate.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTestingTemplateVcxproj.txt" />
-    <Text Include="Resource\GenerateProjectsSuite\GameTestingTemplateVcxprojFilters.txt" />
+    <Text Include="Resource\GenerateProjectsSuite\ClangFormat.txt" />
+    <Text Include="Resource\GenerateProjectsSuite\Gitignore.txt" />
+    <Text Include="Resource\GenerateProjectsSuite\ReadMeMd.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:52)
+///	版本：0.9.1.3 (2023/08/10 09:45)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,41 +13,20 @@
 #include "Detail/AndroidCallBackUnitTestSuiteImpl.h"
 #include "System/Android/AndroidInputEventFacade.h"
 #include "System/Android/Flags/AndroidKeyCodesFlags.h"
-#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 #include "Framework/WindowProcess/Detail/WindowMessageUnitTestSuiteStream.h"
 
 Framework::AndroidCallBackUnitTestSuite::AndroidCallBackUnitTestSuite(int64_t delta, const std::string& suiteName)
-    : ParentType{ delta }, streamType{ std::make_shared<StreamType>(true) }, impl{ suiteName, streamType->GetStreamShared() }, isInit{ false }
+    : ParentType{ delta }, impl{ suiteName }, isInit{ false }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Framework::AndroidCallBackUnitTestSuite::AndroidCallBackUnitTestSuite(AndroidCallBackUnitTestSuite&& rhs) noexcept
-    : ParentType{ std::move(rhs) }, streamType{ move(rhs.streamType) }, impl{ std::move(rhs.impl) }, isInit{ rhs.isInit }
-{
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Framework::AndroidCallBackUnitTestSuite& Framework::AndroidCallBackUnitTestSuite::operator=(AndroidCallBackUnitTestSuite&& rhs) noexcept
-{
-    FRAMEWORK_CLASS_IS_VALID_1;
-
-    ParentType::operator=(std::move(rhs));
-
-    streamType = move(rhs.streamType);
-    impl = std::move(rhs.impl);
-    isInit = rhs.isInit;
-
-    return *this;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 
 bool Framework::AndroidCallBackUnitTestSuite::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && streamType != nullptr)
+    if (ParentType::IsValid())
         return true;
     else
         return false;
@@ -77,9 +56,8 @@ int Framework::AndroidCallBackUnitTestSuite::KeyDownMessage(AndroidApp* androidA
 
     System::AndroidInputEventFacade androidKeyEvent{ androidInputEvent };
 
-    const auto keyCode = androidKeyEvent.GetKeyCode();
-
-    switch (keyCode)
+    switch (const auto keyCode = androidKeyEvent.GetKeyCode();
+            keyCode)
     {
         case System::AndroidKeyCodes::F1:
         {
@@ -118,7 +96,7 @@ CoreTools::OStreamShared Framework::AndroidCallBackUnitTestSuite::GetStreamShare
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return streamType->GetStreamShared();
+    return impl->GetStreamShared();
 }
 
 int Framework::AndroidCallBackUnitTestSuite::GetPassedNumber() const noexcept
@@ -128,7 +106,6 @@ int Framework::AndroidCallBackUnitTestSuite::GetPassedNumber() const noexcept
     return impl->GetPassedNumber();
 }
 
-// private
 bool Framework::AndroidCallBackUnitTestSuite::AddSuiteOnInitialize()
 {
     const auto result = ParentType::Initialize();
@@ -141,14 +118,12 @@ bool Framework::AndroidCallBackUnitTestSuite::AddSuiteOnInitialize()
     return result;
 }
 
-// private
 void Framework::AndroidCallBackUnitTestSuite::ResetTestData()
 {
     impl->ResetTestData();
     GetStreamShared() << "测试数据已清零。\n";
 }
 
-// private
 void Framework::AndroidCallBackUnitTestSuite::RunUnitTest()
 {
     impl->RunUnitTest();

@@ -4,34 +4,7 @@
   },
 
   "generateProjectsSuite": {
-    "GenerateTemplateSolutionTesting": 1,
-    "GenerateTemplateVcxprojTesting": 1,
-    "GenerateTemplateVcxprojFiltersTesting": 1,
-    "GenerateTemplateMiddleLayerVcxprojTesting": 1,
-    "GenerateTemplateMiddleLayerVcxprojFiltersTesting": 1,
-    "GenerateTemplateModuleVcxprojTesting": 1,
-    "GenerateTemplateModuleVcxprojFiltersTesting": 1,
-    "GenerateTemplateLogJsonTesting": 1,
-    "CopyrightDataTesting": 1,
-    "GenerateTemplateHeaderTesting": 1,
-    "GenerateTemplateHelperTesting": 1,
-    "GenerateTemplateMessageTesting": 1,
-    "GenerateTemplateLibTesting": 1,
-    "GenerateTemplateMainTesting": 1,
-    "GenerateTemplateManagerTesting": 1,
-    "GenerateTemplateManagerLibTesting": 1,
-    "GenerateTemplateDllMainTesting": 1,
-    "GenerateTemplateDllLibTesting": 1,
-    "GenerateTemplateMacroTesting": 1,
-    "GenerateTemplateEngineTesting": 1,
-    "GenerateTemplateEngineDirectoryTesting": 1,
-    "GenerateTemplateCodeDirectoryTesting": 1,
-    "GenerateTestingTemplateSolutionTesting": 1,
-    "GenerateTestingTemplateVcxprojTesting": 1,
-    "GenerateTestingTemplateVcxprojFiltersTesting": 1,
-    "GenerateTestingTemplateEngineTesting": 1,
-    "GenerateTestingTemplateEngineDirectoryTesting": 1,
-    "GenerateTestingTemplateCodeDirectoryTesting": 1
+    
   },
 
   "featuresImporterSuite": {

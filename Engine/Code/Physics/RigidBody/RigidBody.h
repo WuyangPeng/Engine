@@ -5,11 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 16:34)
+///	版本：0.9.1.3 (2023/08/02 14:02)
 
 #ifndef PHYSICS_RIGID_BODY_H
 #define PHYSICS_RIGID_BODY_H
-
-#include "RigidBodyManagerDetail.h"
 
 #endif  // PHYSICS_RIGID_BODY_H

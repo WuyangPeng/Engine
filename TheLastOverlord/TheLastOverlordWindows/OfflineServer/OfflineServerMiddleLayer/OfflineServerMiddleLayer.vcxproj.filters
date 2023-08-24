@@ -16,12 +16,6 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{2f17764f-e1cc-4258-ac95-8ef39d4a9e77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ArtificialIntellegence 头文件">
-      <UniqueIdentifier>{f096e9e3-81f1-4e17-b2c3-97d694c49dc6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ArtificialIntellegence 源文件">
-      <UniqueIdentifier>{f61f9586-9699-4ac6-80a9-88f917d2bb81}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Audio 头文件">
       <UniqueIdentifier>{4eda321d-71f9-48bd-802d-f9514ee3e3fd}</UniqueIdentifier>
     </Filter>
@@ -51,9 +45,6 @@
     </Filter>
     <Filter Include="Input 模板文件">
       <UniqueIdentifier>{9be3e5f2-b9ae-4d37-8561-a4f9fd1ef934}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Macro 头文件">
-      <UniqueIdentifier>{0d17664c-7dd2-4dcb-99b2-94d3253c3312}</UniqueIdentifier>
     </Filter>
     <Filter Include="Message 头文件">
       <UniqueIdentifier>{1fdc1822-bfa3-49a8-bfe0-3a928f813eb2}</UniqueIdentifier>
@@ -97,6 +88,15 @@
     <Filter Include="System 源文件">
       <UniqueIdentifier>{7cbb6c5f-3c80-4174-b1b8-f323266e1823}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{0d17664c-7dd2-4dcb-99b2-94d3253c3312}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ArtificialIntelligence 源文件">
+      <UniqueIdentifier>{f61f9586-9699-4ac6-80a9-88f917d2bb81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ArtificialIntelligence 头文件">
+      <UniqueIdentifier>{f096e9e3-81f1-4e17-b2c3-97d694c49dc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\DllMain.cpp">
@@ -104,9 +104,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\DllLib.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceManager.cpp">
-      <Filter>ArtificialIntellegence 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Audio\AudioManager.cpp">
       <Filter>Audio 源文件</Filter>
@@ -141,6 +138,9 @@
     <ClCompile Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\System\SystemManager.cpp">
       <Filter>System 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.cpp">
+      <Filter>ArtificialIntelligence 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\OfflineServerMiddleLayer.h">
@@ -163,15 +163,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\OfflineServerMiddleLayerNoImport.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegence.h">
-      <Filter>ArtificialIntellegence 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceFwd.h">
-      <Filter>ArtificialIntellegence 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceManager.h">
-      <Filter>ArtificialIntellegence 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Audio\Audio.h">
       <Filter>Audio 头文件</Filter>
@@ -220,24 +211,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Input\InputManagerDetail.h">
       <Filter>Input 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Macro\OfflineServerMiddleLayerClassInvariantMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Macro\OfflineServerMiddleLayerCustomAssertMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Macro\ExportMacro.h">
-      <Filter>Macro 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Message\Message.h">
       <Filter>Message 头文件</Filter>
@@ -304,6 +277,33 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\DllLib.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Helper\ExportMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Helper\OfflineServerMiddleLayerClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Helper\OfflineServerMiddleLayerCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligence.h">
+      <Filter>ArtificialIntelligence 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceFwd.h">
+      <Filter>ArtificialIntelligence 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\OfflineServer\OfflineServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.h">
+      <Filter>ArtificialIntelligence 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 17:58)
+///	版本：0.9.1.3 (2023/08/01 19:56)
 
 #ifndef ANIMATION_MACRO_USER_MACRO_H
 #define ANIMATION_MACRO_USER_MACRO_H
@@ -14,8 +14,13 @@
 #include "CoreTools/Helper/UserMacro.h"
 #include "Mathematics/Helper/UserMacro.h"
 
-#define CLOSE_USE_ANIMATION (0x01)
-#define CLOSE_ANIMATION_MAX (((CLOSE_USE_ANIMATION) << 1) - 1)
+#define ANIMATION_ClOSE_BEGIN (0x01)
+
+#define CLOSE_USE_ANIMATION (ANIMATION_ClOSE_BEGIN)
+
+#define ANIMATION_ClOSE_END CLOSE_USE_ANIMATION
+
+#define CLOSE_ANIMATION_MAX (((ANIMATION_ClOSE_END) << 1) - 1)
 
 // 编译测试（默认为0，最大值为0x01）
 #define COMPILE_ANIMATION_CLOSE 0x00

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 18:05)
+///	版本：0.9.1.3 (2023/08/11 09:58)
 
 #include "FrameViewMiddleLayer.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
@@ -15,7 +15,7 @@
 
 #include <iostream>
 
-CameraModelViewController::FrameViewMiddleLayer::FrameViewMiddleLayer(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+CameraModelViewController::FrameViewMiddleLayer::FrameViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }, timeDelta{ timerInterval }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -39,15 +39,13 @@ bool CameraModelViewController::FrameViewMiddleLayer::Idle(int64_t aTimeDelta)
     }
 }
 
-// private
 void CameraModelViewController::FrameViewMiddleLayer::PrintFrameRateMessage(int64_t aTimeDelta)
 {
     timeDelta -= aTimeDelta;
     if (timeDelta <= 0)
     {
-        auto modelMiddleLayer = boost::polymorphic_pointer_downcast<Framework::ModelMiddleLayer>(this->GetModelMiddleLayer());
-
-        if (modelMiddleLayer)
+        if (const auto modelMiddleLayer = boost::polymorphic_pointer_downcast<Framework::ModelMiddleLayer>(this->GetModelMiddleLayer());
+            modelMiddleLayer != nullptr)
         {
             std::cout << modelMiddleLayer->GetFrameRateMessage() << '\n';
         }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 20:27)
+///	版本：0.9.1.3 (2023/08/14 16:55)
 
 #ifndef ASSIST_TOOLS_H
 #define ASSIST_TOOLS_H
@@ -13,7 +13,7 @@
 #include "BmpColorToGray/BmpColorToGray.h"
 #include "BmpToTf/BmpToWmtf.h"
 #include "FeaturesImporter/FeaturesImporter.h"
-#include "FxCompiler/WmfxCompiler.h"
+#include "FxCompiler/FxCompiler.h"
 #include "GenerateProjects/GenerateProjects.h"
 #include "Helper/Helper.h"
 

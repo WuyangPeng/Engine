@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/23 13:38)
+///	版本：0.9.1.3 (2023/08/14 15:09)
 
 #include "Database/DatabaseExport.h"
 
@@ -70,7 +70,7 @@ void Database::MongoDatabaseFlush::Wait()
 {
     DATABASE_CLASS_IS_VALID_9;
 
-    for (auto& element : connection)
+    for (const auto& element : connection)
     {
         element->Wait();
     }

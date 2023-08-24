@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:08)
+///	版本：0.9.1.3 (2023/08/10 14:47)
 
 #ifndef FRAMEWORK_WINDOW_TESTING_WINDOW_PROCESS_SUITE_WINDOW_PROCESS_HANDLE_TESTING_H
 #define FRAMEWORK_WINDOW_TESTING_WINDOW_PROCESS_SUITE_WINDOW_PROCESS_HANDLE_TESTING_H
@@ -20,15 +20,16 @@ namespace Framework
     public:
         using ClassType = WindowProcessHandleTesting;
         using ParentType = UnitTest;
-        using HWnd = System::WindowsHWnd;
+
+        using WindowsHWnd = System::WindowsHWnd;
 
     public:
-        explicit WindowProcessHandleTesting(const OStreamShared& stream, HWnd hwnd);
+        explicit WindowProcessHandleTesting(const OStreamShared& stream, WindowsHWnd hWnd);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
         void MainTest();
 
@@ -37,7 +38,7 @@ namespace Framework
         void HWndTest();
 
     private:
-        HWnd hwnd;
+        WindowsHWnd hWnd;
     };
 }
 

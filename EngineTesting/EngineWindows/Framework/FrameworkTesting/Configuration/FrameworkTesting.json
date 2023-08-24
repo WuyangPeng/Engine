@@ -61,13 +61,13 @@
     "MiddleLayerInterfaceTesting": 1,
     "ModelViewControllerMiddleLayerTesting": 1,
     "ModelViewControllerMiddleLayerContainerTesting": 1,
-    "ModelMiddleLayerTesting": 5,
+    "ModelMiddleLayerTesting": 1,
     "ViewMiddleLayerTesting": 1,
     "ControllerMiddleLayerTesting": 1,
     "PixelViewMiddleLayerTesting": 1,
-    "CameraModelMiddleLayerTesting": 5,
-    "CameraViewMiddleLayerTesting": 100,
-    "CameraControllerMiddleLayerTesting": 40,
+    "CameraModelMiddleLayerTesting": 1,
+    "CameraViewMiddleLayerTesting": 1 ,
+    "CameraControllerMiddleLayerTesting": 1,
     "EngineMiddleLayerInterfaceTesting": 1,
     "NetworkManagerInterfaceTesting": 1,
     "ObjectLogicManagerInterfaceTesting": 1,
@@ -134,6 +134,6 @@
     "GUIProjectManagerTesting": 1,
     "InputProjectManagerTesting": 1,
     "ResourceProjectManagerTesting": 1,
-    "SystemProjectManagerTesting": 1
+    "SystemProjectManagerTesting": 0
   }
 }

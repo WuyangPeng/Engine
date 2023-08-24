@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:00)
+///	版本：0.9.1.3 (2023/08/03 19:59)
 
-#ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_HBRUSH_H
-#define FRAMEWORK_WINDOW_REGISTER_WINDOW_HBRUSH_H
+#ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_H_BRUSH_H
+#define FRAMEWORK_WINDOW_REGISTER_WINDOW_H_BRUSH_H
 
 #include "Framework/FrameworkDll.h"
 
@@ -21,6 +21,7 @@ namespace Framework
     {
     public:
         using ClassType = WindowHBrush;
+
         using HBrush = System::WindowsHBrush;
         using HGdiObj = System::WindowsHGdiObj;
         using WindowsBrushTypes = System::WindowsBrushTypes;
@@ -40,4 +41,4 @@ namespace Framework
     };
 }
 
-#endif  // FRAMEWORK_WINDOW_REGISTER_WINDOW_HBRUSH_H
+#endif  // FRAMEWORK_WINDOW_REGISTER_WINDOW_H_BRUSH_H

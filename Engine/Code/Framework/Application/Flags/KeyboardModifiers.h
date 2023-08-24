@@ -5,30 +5,31 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:43)
+///	版本：0.9.1.3 (2023/08/09 14:45)
 
 #ifndef FRAMEWORK_APPLICATION_KEYBOARD_MODIFIERS_H
 #define FRAMEWORK_APPLICATION_KEYBOARD_MODIFIERS_H
 
+#include "Framework/FrameworkDll.h"
+
 #include "System/Android/Flags/AndroidKeyCodesFlags.h"
 #include "System/OpenGL/Flags/GlutKeyCodesFlags.h"
 #include "System/Windows/Flags/WindowsKeyCodesFlags.h"
-#include "Framework/FrameworkDll.h"
 
 namespace Framework
 {
     struct WindowKeyboardModifiers
     {
-        static constexpr auto keyShift = System::EnumCastUnderlying(System::WindowsKeyCodes::Shift);
-        static constexpr auto keyControl = System::EnumCastUnderlying(System::WindowsKeyCodes::Control);
-        static constexpr auto keyAlt = System::EnumCastUnderlying(System::WindowsKeyCodes::Menu);
+        static constexpr auto keyShift = EnumCastUnderlying(System::WindowsKeyCodes::Shift);
+        static constexpr auto keyControl = EnumCastUnderlying(System::WindowsKeyCodes::Control);
+        static constexpr auto keyAlt = EnumCastUnderlying(System::WindowsKeyCodes::Menu);
     };
 
     struct GlutKeyboardModifiers
     {
-        static constexpr auto keyShift = System::EnumCastUnderlying(System::GlutModifiersCodes::Shift);
-        static constexpr auto keyControl = System::EnumCastUnderlying(System::GlutModifiersCodes::Control);
-        static constexpr auto keyAlt = System::EnumCastUnderlying(System::GlutModifiersCodes::Alt);
+        static constexpr auto keyShift = EnumCastUnderlying(System::GlutModifiersCodes::Shift);
+        static constexpr auto keyControl = EnumCastUnderlying(System::GlutModifiersCodes::Control);
+        static constexpr auto keyAlt = EnumCastUnderlying(System::GlutModifiersCodes::Alt);
     };
 
     struct AndroidKeyboardModifiers

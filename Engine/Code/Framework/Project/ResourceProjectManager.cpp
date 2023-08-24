@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/17 23:44)
+///	版本：0.9.1.3 (2023/08/04 16:11)
 
 #include "Framework/FrameworkExport.h"
 
@@ -18,14 +18,14 @@
 Framework::ResourceProjectManager::ResourceProjectManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ environmentDirectory }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, ResourceProjectManager)
 
 bool Framework::ResourceProjectManager::Create(const EnvironmentParameter& environmentParameter)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     if (ParentType::Create(environmentParameter))
     {
@@ -39,7 +39,7 @@ bool Framework::ResourceProjectManager::Create(const EnvironmentParameter& envir
 
 bool Framework::ResourceProjectManager::Initialize()
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     if (ParentType::Initialize())
     {
@@ -55,21 +55,21 @@ bool Framework::ResourceProjectManager::Initialize()
 
 bool Framework::ResourceProjectManager::IsSelectValid(int select) const
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
     return impl->IsSelectValid(select);
 }
 
 System::String Framework::ResourceProjectManager::GetEngineeringName(int select) const
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
     return impl->GetEngineeringName(select);
 }
 
 void Framework::ResourceProjectManager::PrintEngineering(const String& engineeringName) const
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     const auto gui = GetGUIManager<GUIProjectManager>();
 
@@ -78,7 +78,7 @@ void Framework::ResourceProjectManager::PrintEngineering(const String& engineeri
 
 int Framework::ResourceProjectManager::GetContainerPrintWidth() const
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
     return impl->GetContainerPrintWidth();
 }

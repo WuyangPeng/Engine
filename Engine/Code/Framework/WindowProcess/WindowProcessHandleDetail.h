@@ -5,19 +5,19 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:10)
+///	版本：0.9.1.3 (2023/08/04 09:23)
 
-#ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_DETAIL_H
-#define FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_DETAIL_H
+#ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_HANDLE_DETAIL_H
+#define FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_HANDLE_DETAIL_H
 
 #include "WindowProcessHandle.h"
 #include "WindowProcessManager.h"
-#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename WindowMessage>
 Framework::WindowProcessHandle<WindowMessage>::WindowProcessHandle(int64_t delta, const EnvironmentDirectory& environmentDirectory)
-    : windowMessage{ std::make_shared<MessageType>(delta, environmentDirectory) }
+    : windowMessage{ std::make_shared<WindowMessage>(delta, environmentDirectory) }
 {
     WINDOW_PROCESS_MANAGER_SINGLETON.SetWindowMessage(windowMessage);
 
@@ -29,14 +29,17 @@ Framework::WindowProcessHandle<WindowMessage>::~WindowProcessHandle() noexcept
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 
-    CoreTools::NoexceptNoReturn(*this, &ClassType::ClearWindowMessage);
+    ClearWindowMessage();
 }
 
-// private
 template <typename WindowMessage>
-void Framework::WindowProcessHandle<WindowMessage>::ClearWindowMessage()
+void Framework::WindowProcessHandle<WindowMessage>::ClearWindowMessage() const noexcept
 {
-    WINDOW_PROCESS_MANAGER_SINGLETON.ClearWindowMessage(windowMessage);
+    EXCEPTION_TRY
+    {
+        WINDOW_PROCESS_MANAGER_SINGLETON.ClearWindowMessage(windowMessage);
+    }
+    EXCEPTION_ALL_CATCH(Framework)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -52,39 +55,34 @@ bool Framework::WindowProcessHandle<WindowMessage>::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-// static
 template <typename WindowMessage>
 typename Framework::WindowProcessHandle<WindowMessage>::WindowsProcess Framework::WindowProcessHandle<WindowMessage>::GetProcess() noexcept
 {
     return WINDOW_PROCESS_MANAGER_SINGLETON.GetProcess();
 }
 
-// static
 template <typename WindowMessage>
 typename Framework::WindowProcessHandle<WindowMessage>::DisplayFunction Framework::WindowProcessHandle<WindowMessage>::GetFunction() noexcept
 {
     return WINDOW_PROCESS_MANAGER_SINGLETON.GetFunction();
 }
 
-// static
 template <typename WindowMessage>
 bool Framework::WindowProcessHandle<WindowMessage>::IsClassNameExist(const System::String& className)
 {
     return WINDOW_PROCESS_MANAGER_SINGLETON.IsClassNameExist(className);
 }
 
-// static
 template <typename WindowMessage>
 bool Framework::WindowProcessHandle<WindowMessage>::SetNewClassName(const System::String& className)
 {
     return WINDOW_PROCESS_MANAGER_SINGLETON.SetNewClassName(className);
 }
 
-// static
 template <typename WindowMessage>
-System::WindowsHWnd Framework::WindowProcessHandle<WindowMessage>::GetMainWindowHwnd()
+System::WindowsHWnd Framework::WindowProcessHandle<WindowMessage>::GetMainWindowHWnd()
 {
-    return WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHwnd();
+    return WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHWnd();
 }
 
 template <typename WindowMessage>
@@ -119,4 +117,4 @@ void Framework::WindowProcessHandle<WindowMessage>::Terminate()
     return WINDOW_PROCESS_MANAGER_SINGLETON.Terminate();
 }
 
-#endif  // FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_DETAIL_H
+#endif  // FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_HANDLE_DETAIL_H

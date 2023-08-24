@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:42)
+///	版本：0.9.1.3 (2023/08/08 19:52)
 
 #ifndef FRAMEWORK_CONSOLE_CONSOLE_PROCESS_H
 #define FRAMEWORK_CONSOLE_CONSOLE_PROCESS_H
@@ -26,6 +26,7 @@ namespace Framework
     public:
         using CallBackType = ConsoleCallBack;
         using ClassType = ConsoleProcess<CallBackType>;
+
         using ConsoleCallBackInterfaceSharedPtr = std::shared_ptr<ConsoleCallBackInterface>;
 
     public:

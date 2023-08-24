@@ -5,22 +5,32 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:13)
+///	版本：0.9.1.3 (2023/08/04 15:16)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowInstanceParameter.h"
 #include "Detail/WindowInstanceParameterImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Framework::WindowInstanceParameter::WindowInstanceParameter(WindowsHInstance instance, const String& className)
     : impl{ instance, className }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowInstanceParameter)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowInstanceParameter, GetHInstance, Framework::WindowInstanceParameter::WindowsHInstance)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, WindowInstanceParameter, GetWindowClassName, System::String)
+Framework::WindowInstanceParameter::WindowsHInstance Framework::WindowInstanceParameter::GetHInstance() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetHInstance();
+}
+
+Framework::WindowInstanceParameter::String Framework::WindowInstanceParameter::GetWindowClassName() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWindowClassName();
+}

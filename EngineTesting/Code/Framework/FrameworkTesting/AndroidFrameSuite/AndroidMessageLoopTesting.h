@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:28)
+///	版本：0.9.1.3 (2023/08/14 13:56)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_SUITE_ANDROID_MESSAGE_LOOP_TESTING_H
 #define FRAMEWORK_ANDROID_FRAME_SUITE_ANDROID_MESSAGE_LOOP_TESTING_H
@@ -14,7 +14,7 @@
 
 namespace Framework
 {
-    class AndroidMessageLoopTesting : public CoreTools::UnitTest
+    class AndroidMessageLoopTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = AndroidMessageLoopTesting;
@@ -26,7 +26,7 @@ namespace Framework
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
         void MainTest() noexcept;
     };
 }

@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:43)
+///	版本：0.9.1.3 (2023/08/09 14:55)
 
 #ifndef FRAMEWORK_APPLICATION_PIXEL_SCREEN_IMPL_H
 #define FRAMEWORK_APPLICATION_PIXEL_SCREEN_IMPL_H
 
 #include "Framework/FrameworkDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/DataTypes/Colour.h"
 #include "Rendering/RendererEngine/RendererEngineFwd.h"
 #include "Framework/WindowCreate/WindowSize.h"
@@ -25,9 +24,11 @@ namespace Framework
     {
     public:
         using ClassType = PixelScreenImpl;
+
         using Colour = Rendering::Colour<uint8_t>;
-        using RendererSharedPtr = std::shared_ptr<Rendering::BaseRenderer>;
-        using ConstRendererSharedPtr = std::shared_ptr<const Rendering::BaseRenderer>;
+        using BaseRenderer = Rendering::BaseRenderer;
+        using RendererSharedPtr = std::shared_ptr<BaseRenderer>;
+        using ConstRendererSharedPtr = std::shared_ptr<const BaseRenderer>;
 
     public:
         explicit PixelScreenImpl(const WindowSize& size);
@@ -36,7 +37,7 @@ namespace Framework
 
 #ifdef OPEN_CLASS_INVARIANT
 
-        bool IsScreenSizeValid() const;
+        NODISCARD bool IsScreenSizeValid() const;
 
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -44,8 +45,6 @@ namespace Framework
         NODISCARD int GetScreenHeight() const noexcept;
 
         void Resize(const WindowSize& size, const Colour& color);
-
-        void Draw(const RendererSharedPtr& renderer) noexcept;
 
         void ClearScreen(const Colour& color);
 

@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/22 21:32)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:42)
 
 #ifndef MESSAGE_CLIENT_MIDDLE_LAYER_EVENT_MIDDLE_LAYER_EVENT_H
 #define MESSAGE_CLIENT_MIDDLE_LAYER_EVENT_MIDDLE_LAYER_EVENT_H
 
 #include "MessageClient/MessageClientMiddleLayer/MessageClientMiddleLayerDll.h"
 
-#include "MessageClient/MessageClientMiddleLayer/Macro/ExportMacro.h"
+#include "MessageClient/MessageClientMiddleLayer/Helper/ExportMacro.h"
 #include "Framework/MiddleLayer/EventManagerInterface.h"
 
 namespace MessageClientMiddleLayer
@@ -21,10 +21,10 @@ namespace MessageClientMiddleLayer
     {
     public:
         using ClassType = EventManager;
-        using ParentType = Framework::EventManagerInterface;
+        using ParentType = EventManagerInterface;
 
     public:
-        explicit EventManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
+        EventManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

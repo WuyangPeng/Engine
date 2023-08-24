@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:40)
+///	版本：0.9.1.3 (2023/08/08 19:37)
 
 #include "Framework/FrameworkExport.h"
 
@@ -26,7 +26,6 @@ Framework::ConsoleMainFunctionHelperBase::ConsoleMainFunctionHelperBase(int argc
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 void Framework::ConsoleMainFunctionHelperBase::ConsoleMainFunctionHelperInit(const System::String& consoleTitle)
 {
     EXCEPTION_TRY
@@ -74,4 +73,16 @@ System::String Framework::ConsoleMainFunctionHelperBase::GetApplicationProjectDi
         return DirectoryDefaultName::GetDefaultNullName();
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ConsoleMainFunctionHelperBase, GetCommand, Framework::ConsoleMainFunctionHelperBase::Command)
+Framework::ConsoleMainFunctionHelperBase::Command Framework::ConsoleMainFunctionHelperBase::GetCommand() const  
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    if (impl != nullptr)
+    {
+        return impl->GetCommand();
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("impl 初始化失败。"))
+    }
+}

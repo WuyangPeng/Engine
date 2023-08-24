@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:38)
+///	版本：0.9.1.3 (2023/08/08 19:35)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_ANDROID_MAIN_FUNCTION_HELPER_DETAIL_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_ANDROID_MAIN_FUNCTION_HELPER_DETAIL_H
@@ -15,7 +15,6 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Framework/AndroidFrame/AndroidProcessManager.h"
 
 #include <iostream>
@@ -24,7 +23,7 @@ template <template <typename> class Build, typename Process>
 Framework::AndroidMainFunctionHelper<Build, Process>::AndroidMainFunctionHelper(AndroidApp* androidApp, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ environmentDirectory }, build{}, androidMainFunctionSchedule{ AndroidMainFunctionSchedule::Failure }
 {
-    Initializers(androidApp);
+    Initializer(androidApp);
 
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -56,6 +55,7 @@ Framework::AndroidMainFunctionHelper<Build, Process>::~AndroidMainFunctionHelper
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <template <typename> class Build, typename Process>
 bool Framework::AndroidMainFunctionHelper<Build, Process>::IsValid() const noexcept
 {
@@ -64,6 +64,7 @@ bool Framework::AndroidMainFunctionHelper<Build, Process>::IsValid() const noexc
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <template <typename> class Build, typename Process>
@@ -79,7 +80,6 @@ void Framework::AndroidMainFunctionHelper<Build, Process>::Destroy()
     ParentType::Destroy();
 }
 
-// protected
 template <template <typename> class Build, typename Process>
 System::AndroidApp* Framework::AndroidMainFunctionHelper<Build, Process>::GetAndroidApp()
 {
@@ -95,14 +95,12 @@ System::AndroidApp* Framework::AndroidMainFunctionHelper<Build, Process>::GetAnd
     }
 }
 
-// private
 template <template <typename> class Build, typename CallBack>
 int Framework::AndroidMainFunctionHelper<Build, CallBack>::DoRun()
 {
     return RunAndroidMainLoop();
 }
 
-// private
 template <template <typename> class Build, typename Process>
 int Framework::AndroidMainFunctionHelper<Build, Process>::RunAndroidMainLoop()
 {
@@ -114,19 +112,17 @@ int Framework::AndroidMainFunctionHelper<Build, Process>::RunAndroidMainLoop()
     return 0;
 }
 
-// private
 template <template <typename> class Build, typename Process>
-void Framework::AndroidMainFunctionHelper<Build, Process>::Initializers(AndroidApp* androidApp)
+void Framework::AndroidMainFunctionHelper<Build, Process>::Initializer(AndroidApp* androidApp)
 {
     EXCEPTION_TRY
     {
         InitAndroidProcess();
-        InitImpl(androidApp);
+        InitAndroidImpl(androidApp);
     }
     EXCEPTION_ENTRY_POINT_CATCH
 }
 
-// private
 template <template <typename> class Build, typename Process>
 void Framework::AndroidMainFunctionHelper<Build, Process>::InitAndroidProcess()
 {
@@ -134,29 +130,26 @@ void Framework::AndroidMainFunctionHelper<Build, Process>::InitAndroidProcess()
     androidMainFunctionSchedule = AndroidMainFunctionSchedule::AndroidProcess;
 }
 
-// private
 template <template <typename> class Build, typename Process>
-void Framework::AndroidMainFunctionHelper<Build, Process>::InitImpl(AndroidApp* androidApp)
+void Framework::AndroidMainFunctionHelper<Build, Process>::InitAndroidImpl(AndroidApp* androidApp)
 {
     build = std::make_shared<BuildType>(androidApp);
     androidMainFunctionSchedule = AndroidMainFunctionSchedule::Max;
 }
 
-// private
 template <template <typename> class Build, typename Process>
 void Framework::AndroidMainFunctionHelper<Build, Process>::Terminators()
 {
     EXCEPTION_TRY
     {
-        DestroyImpl();
+        DestroyAndroidImpl();
         DestroyAndroidProcess();
     }
     EXCEPTION_ENTRY_POINT_CATCH
 }
 
-// private
 template <template <typename> class Build, typename Process>
-void Framework::AndroidMainFunctionHelper<Build, Process>::DestroyImpl() noexcept
+void Framework::AndroidMainFunctionHelper<Build, Process>::DestroyAndroidImpl() noexcept
 {
     if (AndroidMainFunctionSchedule::Max <= androidMainFunctionSchedule)
     {
@@ -165,7 +158,6 @@ void Framework::AndroidMainFunctionHelper<Build, Process>::DestroyImpl() noexcep
     }
 }
 
-// private
 template <template <typename> class Build, typename Process>
 void Framework::AndroidMainFunctionHelper<Build, Process>::DestroyAndroidProcess() noexcept
 {

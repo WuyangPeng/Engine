@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/24 13:44)
+///	版本：0.9.1.3 (2023/08/14 15:23)
 
 #include "Database/DatabaseExport.h"
 
@@ -28,11 +28,11 @@ Database::DatabaseManagerImpl::DatabaseManagerImpl(const std::string& fileName)
 void Database::DatabaseManagerImpl::LoadFlush(const std::string& fileName)
 {
     for (const AnalysisDatabaseConfiguration analysisDatabaseConfiguration{ fileName };
-         const auto& value : analysisDatabaseConfiguration)
+         const auto& element : analysisDatabaseConfiguration)
     {
-        databaseFlush.emplace(value.first, std::make_shared<DatabaseFlush>(value.second));
+        databaseFlush.emplace(element.first, std::make_shared<DatabaseFlush>(element.second));
 
-        DATABASE_ENVIRONMENT_SINGLETON.InitEnvironment(value.second);
+        DATABASE_ENVIRONMENT_SINGLETON.InitEnvironment(element.second);
     }
 }
 

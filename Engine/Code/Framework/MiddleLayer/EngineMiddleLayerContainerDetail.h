@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:19)
+///	版本：0.9.1.3 (2023/08/08 14:41)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_CONTAINER_DETAIL_H
 #define FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_CONTAINER_DETAIL_H
@@ -15,6 +15,7 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/LogMacro.h"
 
 template <typename ApplicationTrait,
           template <typename> class InputManager,
@@ -74,50 +75,6 @@ template <typename ApplicationTrait,
           typename CameraSystemsManager,
           typename RenderingManager,
           typename GUIManager>
-Framework::EngineMiddleLayerContainer<ApplicationTrait,
-                                      InputManager,
-                                      NetworkManager,
-                                      ObjectLogicManager,
-                                      PhysicalModellingManager,
-                                      MessageManager,
-                                      EventManager,
-                                      SystemManager,
-                                      ResourceManager,
-                                      AudioManager,
-                                      CameraSystemsManager,
-                                      RenderingManager,
-                                      GUIManager>::MiddleLayerSharedPtr
-    Framework::EngineMiddleLayerContainer<ApplicationTrait,
-                                          InputManager,
-                                          NetworkManager,
-                                          ObjectLogicManager,
-                                          PhysicalModellingManager,
-                                          MessageManager,
-                                          EventManager,
-                                          SystemManager,
-                                          ResourceManager,
-                                          AudioManager,
-                                          CameraSystemsManager,
-                                          RenderingManager,
-                                          GUIManager>::CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
-{
-    return std::make_unique<ClassType>(middleLayerPlatform, environmentDirectory);
-}
-
-// private
-template <typename ApplicationTrait,
-          template <typename> class InputManager,
-          typename NetworkManager,
-          typename ObjectLogicManager,
-          typename PhysicalModellingManager,
-          typename MessageManager,
-          typename EventManager,
-          typename SystemManager,
-          typename ResourceManager,
-          typename AudioManager,
-          typename CameraSystemsManager,
-          typename RenderingManager,
-          typename GUIManager>
 void Framework::EngineMiddleLayerContainer<ApplicationTrait,
                                            InputManager,
                                            NetworkManager,
@@ -146,7 +103,6 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
     InitGUIManager();
 }
 
-// private
 template <typename ApplicationTrait,
           template <typename> class InputManager,
           typename NetworkManager,
@@ -178,7 +134,6 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
     network->SetObjectLogicManager(objectLogic);
 }
 
-// private
 template <typename ApplicationTrait,
           template <typename> class InputManager,
           typename NetworkManager,
@@ -212,7 +167,6 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
     input->SetCameraSystemsManager(cameraSystems);
 }
 
-// private
 template <typename ApplicationTrait,
           template <typename> class InputManager,
           typename NetworkManager,
@@ -247,7 +201,6 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
     objectLogic->SetSystemManager(system);
 }
 
-// private
 template <typename ApplicationTrait,
           template <typename> class InputManager,
           typename NetworkManager,
@@ -278,7 +231,6 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
     physicalModelling->SetObjectLogicManager(objectLogic);
 }
 
-// private
 template <typename ApplicationTrait,
           template <typename> class InputManager,
           typename NetworkManager,
@@ -310,7 +262,6 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
     message->SetSystemManager(system);
 }
 
-// private
 template <typename ApplicationTrait,
           template <typename> class InputManager,
           typename NetworkManager,
@@ -342,7 +293,6 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
     event->SetSystemManager(system);
 }
 
-// private
 template <typename ApplicationTrait,
           template <typename> class InputManager,
           typename NetworkManager,
@@ -380,7 +330,6 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
     system->SetRenderingManager(rendering);
 }
 
-// private
 template <typename ApplicationTrait,
           template <typename> class InputManager,
           typename NetworkManager,
@@ -414,7 +363,6 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
     resource->SetGUIManager(gui);
 }
 
-// private
 template <typename ApplicationTrait,
           template <typename> class InputManager,
           typename NetworkManager,
@@ -446,7 +394,6 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
     audio->SetResourceManager(resource);
 }
 
-// private
 template <typename ApplicationTrait,
           template <typename> class InputManager,
           typename NetworkManager,
@@ -479,7 +426,6 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
     cameraSystems->SetGUIManager(gui);
 }
 
-// private
 template <typename ApplicationTrait,
           template <typename> class InputManager,
           typename NetworkManager,
@@ -510,7 +456,6 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
     rendering->SetSystemManager(system);
 }
 
-// private
 template <typename ApplicationTrait,
           template <typename> class InputManager,
           typename NetworkManager,
@@ -539,69 +484,6 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
                                            GUIManager>::InitGUIManager()
 {
     gui->SetRenderingManager(rendering);
-}
-
-template <typename ApplicationTrait,
-          template <typename> class InputManager,
-          typename NetworkManager,
-          typename ObjectLogicManager,
-          typename PhysicalModellingManager,
-          typename MessageManager,
-          typename EventManager,
-          typename SystemManager,
-          typename ResourceManager,
-          typename AudioManager,
-          typename CameraSystemsManager,
-          typename RenderingManager,
-          typename GUIManager>
-Framework::EngineMiddleLayerContainer<ApplicationTrait,
-                                      InputManager,
-                                      NetworkManager,
-                                      ObjectLogicManager,
-                                      PhysicalModellingManager,
-                                      MessageManager,
-                                      EventManager,
-                                      SystemManager,
-                                      ResourceManager,
-                                      AudioManager,
-                                      CameraSystemsManager,
-                                      RenderingManager,
-                                      GUIManager>::~EngineMiddleLayerContainer() noexcept
-{
-    CoreTools::NoexceptNoReturn(*this, &ClassType::SetEngineManagerNullptr);
-
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-// private
-template <typename ApplicationTrait,
-          template <typename> class InputManager,
-          typename NetworkManager,
-          typename ObjectLogicManager,
-          typename PhysicalModellingManager,
-          typename MessageManager,
-          typename EventManager,
-          typename SystemManager,
-          typename ResourceManager,
-          typename AudioManager,
-          typename CameraSystemsManager,
-          typename RenderingManager,
-          typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait,
-                                           InputManager,
-                                           NetworkManager,
-                                           ObjectLogicManager,
-                                           PhysicalModellingManager,
-                                           MessageManager,
-                                           EventManager,
-                                           SystemManager,
-                                           ResourceManager,
-                                           AudioManager,
-                                           CameraSystemsManager,
-                                           RenderingManager,
-                                           GUIManager>::SetEngineManagerNullptr()
-{
-    system->SetEngineManager(nullptr);
 }
 
 template <typename ApplicationTrait,
@@ -1001,7 +883,12 @@ void Framework::EngineMiddleLayerContainer<ApplicationTrait,
     system = boost::polymorphic_pointer_downcast<SystemManagerInterface>(systemManager);
 
     InitSystemManager();
-    InitSystemEngineInterface();
+
+    if (!InitSystemEngineInterface())
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("InitSystemEngineInterface失败。"));
+    }
+
     ResetSystemManager();
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:26)
+///	版本：0.9.1.3 (2023/08/08 16:11)
 
 #include "Framework/FrameworkExport.h"
 
@@ -14,22 +14,9 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::MiddleLayerInterface::MiddleLayerSharedPtr Framework::MiddleLayerInterface::CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
-{
-    return std::make_shared<ClassType>(MiddleLayerInterfaceCreate::Init, middleLayerPlatform, environmentDirectory);
-}
-
 Framework::MiddleLayerInterface::MiddleLayerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept
     : middleLayerPlatform{ middleLayerPlatform }, environmentDirectory{ environmentDirectory }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_9;
-}
-
-Framework::MiddleLayerInterface::MiddleLayerInterface(MiddleLayerInterfaceCreate middleLayerInterfaceCreate, MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept
-    : MiddleLayerInterface{ middleLayerPlatform, environmentDirectory }
-{
-    System::UnusedFunction(middleLayerInterfaceCreate);
-
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 

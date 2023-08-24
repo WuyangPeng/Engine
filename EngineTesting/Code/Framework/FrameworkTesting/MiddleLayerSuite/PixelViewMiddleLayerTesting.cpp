@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:10)
+///	版本：0.9.1.3 (2023/08/14 11:06)
 
 #include "PixelViewMiddleLayerTesting.h"
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
@@ -60,7 +60,7 @@ void Framework::PixelViewMiddleLayerTesting::MiddleLayerTest()
 
     TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto modelMiddleLayer = std::make_shared<ModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto modelMiddleLayer = std::make_shared<ModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetModelMiddleLayer(modelMiddleLayer);
 
@@ -79,7 +79,7 @@ void Framework::PixelViewMiddleLayerTesting::MiddleLayerTest()
 
     constexpr WindowPoint point{};
     const WindowSize size{};
-    const VirtualKeysTypes virtualKeysTypes{};
+    constexpr VirtualKeysTypes virtualKeysTypes{};
 
     ASSERT_TRUE(middleLayer.Paint());
     ASSERT_TRUE(middleLayer.Move(point));
@@ -98,7 +98,7 @@ void Framework::PixelViewMiddleLayerTesting::MiddleLayerTest()
 
 void Framework::PixelViewMiddleLayerTesting::DefaultColourTest()
 {
-    auto pixelViewMiddleLayer = CreateTestPixelViewMiddleLayer();
+    const auto pixelViewMiddleLayer = CreateTestPixelViewMiddleLayer();
 
     AssertColour(pixelViewMiddleLayer, black);
 }
@@ -109,12 +109,11 @@ void Framework::PixelViewMiddleLayerTesting::ClearScreenTest()
 
     auto pixelViewMiddleLayer = CreateTestPixelViewMiddleLayer();
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
-        pixelViewMiddleLayer.SetClearColor(clearColour);
+        pixelViewMiddleLayer.SetClearColour(clearColour);
         pixelViewMiddleLayer.ClearScreen();
 
         AssertColour(pixelViewMiddleLayer, clearColour);
@@ -159,8 +158,7 @@ void Framework::PixelViewMiddleLayerTesting::SetPixelTest()
 
     auto pixelViewMiddleLayer = CreateTestPixelViewMiddleLayer(width, height);
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -185,13 +183,11 @@ void Framework::PixelViewMiddleLayerTesting::SetThickPixelTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
     const std::uniform_int<> thickRandom{ minThick, maxThick };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -236,8 +232,7 @@ void Framework::PixelViewMiddleLayerTesting::DrawLineTest()
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -253,15 +248,15 @@ void Framework::PixelViewMiddleLayerTesting::DrawLineTest()
         const auto xDifference = boost::numeric_cast<double>(xMin - xMax);
         const auto yDifference = boost::numeric_cast<double>(yMin - yMax);
 
-        auto distanceX = Mathematics::MathD::FAbs(xDifference);
-        auto distanceY = Mathematics::MathD::FAbs(yDifference);
+        const auto distanceX = Mathematics::MathD::FAbs(xDifference);
+        const auto distanceY = Mathematics::MathD::FAbs(yDifference);
 
         if (distanceY < distanceX)
         {
-            auto slope = distanceY / distanceX;
+            const auto slope = distanceY / distanceX;
 
-            auto min = xMin < xMax ? xMin : xMax;
-            auto max = xMin < xMax ? xMax : xMin;
+            const auto min = xMin < xMax ? xMin : xMax;
+            const auto max = xMin < xMax ? xMax : xMin;
 
             AssertColourOnX(pixelViewMiddleLayer, black, 0, min);
             AssertColourOnX(pixelViewMiddleLayer, black, max + 1, width);
@@ -295,10 +290,10 @@ void Framework::PixelViewMiddleLayerTesting::DrawLineTest()
         }
         else
         {
-            auto slope = distanceX / distanceY;
+            const auto slope = distanceX / distanceY;
 
-            auto min = yMin < yMax ? yMin : yMax;
-            auto max = yMin < yMax ? yMax : yMin;
+            const auto min = yMin < yMax ? yMin : yMax;
+            const auto max = yMin < yMax ? yMax : yMin;
 
             AssertColourOnY(pixelViewMiddleLayer, black, 0, min);
             AssertColourOnY(pixelViewMiddleLayer, black, max + 1, height);
@@ -340,13 +335,11 @@ void Framework::PixelViewMiddleLayerTesting::DrawRectangleSolidTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -396,13 +389,11 @@ void Framework::PixelViewMiddleLayerTesting::DrawRectangleHollowTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         auto xMin = sizeRandom(generator);
         auto yMin = sizeRandom(generator);
@@ -456,13 +447,11 @@ void Framework::PixelViewMiddleLayerTesting::DrawCircleSolidTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
     const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -484,9 +473,9 @@ void Framework::PixelViewMiddleLayerTesting::DrawCircleSolidTest()
                 const auto colour = pixelViewMiddleLayer.GetPixel(widthIndex, heightIndex);
 
                 const Mathematics::Vector2D vector2D{ boost::numeric_cast<double>(widthIndex), boost::numeric_cast<double>(heightIndex) };
-                auto distance = Mathematics::Vector2ToolsD::Distance(center, vector2D);
 
-                if (radius + 0.5 < distance)
+                if (const auto distance = Mathematics::Vector2ToolsD::Distance(center, vector2D);
+                    radius + 0.5 < distance)
                 {
                     ASSERT_EQUAL(colour, black);
                 }
@@ -498,21 +487,21 @@ void Framework::PixelViewMiddleLayerTesting::DrawCircleSolidTest()
                 {
                     // 检测边界值
 
-                    auto difference = widthIndex - x;
-                    auto didifferenceAbsolute = Mathematics::MathD::FAbs(difference);
+                    const auto difference = widthIndex - x;
+                    const auto differenceAbsolute = Mathematics::MathD::FAbs(difference);
 
                     const auto separateRadius = GetSeparateRadius(radius);
 
                     auto dec = 3 - 2 * radius;
                     auto yStep = radius;
 
-                    if (heightIndex == y && didifferenceAbsolute <= radius)
+                    if (heightIndex == y && differenceAbsolute <= radius)
                     {
                         ASSERT_EQUAL(colour, clearColour);
                     }
-                    else if (didifferenceAbsolute < separateRadius)
+                    else if (differenceAbsolute < separateRadius)
                     {
-                        for (auto xStep = 0; xStep <= yStep && xStep < didifferenceAbsolute; ++xStep)
+                        for (auto xStep = 0; xStep <= yStep && xStep < differenceAbsolute; ++xStep)
                         {
                             if (0 <= dec)
                             {
@@ -534,7 +523,7 @@ void Framework::PixelViewMiddleLayerTesting::DrawCircleSolidTest()
                     else
                     {
                         auto xStep = 0;
-                        for (; xStep <= yStep && didifferenceAbsolute <= yStep; ++xStep)
+                        for (; xStep <= yStep && differenceAbsolute <= yStep; ++xStep)
                         {
                             if (0 <= dec)
                             {
@@ -574,13 +563,11 @@ void Framework::PixelViewMiddleLayerTesting::DrawCircleHollowTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
     const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -602,9 +589,9 @@ void Framework::PixelViewMiddleLayerTesting::DrawCircleHollowTest()
                 const auto colour = pixelViewMiddleLayer.GetPixel(widthIndex, heightIndex);
 
                 const Mathematics::Vector2D vector2D{ boost::numeric_cast<double>(widthIndex), boost::numeric_cast<double>(heightIndex) };
-                auto distance = Mathematics::Vector2ToolsD::Distance(center, vector2D);
 
-                if (Mathematics::MathD::FAbs(radius - distance) <= 0.5)
+                if (const auto distance = Mathematics::Vector2ToolsD::Distance(center, vector2D);
+                    Mathematics::MathD::FAbs(radius - distance) <= 0.5)
                 {
                     bool isClearColour = false;
                     auto dec = 3 - 2 * radius;
@@ -666,13 +653,11 @@ void Framework::PixelViewMiddleLayerTesting::FillThickPixelTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
     const std::uniform_int<> thickRandom{ minThick, maxThick };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -703,13 +688,11 @@ void Framework::PixelViewMiddleLayerTesting::FillRectangleSolidTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -750,13 +733,11 @@ void Framework::PixelViewMiddleLayerTesting::FillRectangleHollowTest()
 
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -800,13 +781,11 @@ void Framework::PixelViewMiddleLayerTesting::FillCircleSolidTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> sizeRandom{ minSize, maxSize };
     const std::uniform_int<> radiusRandom{ minRadius, maxRadius };
-    const std::uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
     constexpr auto width = maxSize + 1;
     constexpr auto height = maxSize + 1;
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto clearColour = GetRandomColour(generator);
 
@@ -814,8 +793,6 @@ void Framework::PixelViewMiddleLayerTesting::FillCircleSolidTest()
 
         const auto x = sizeRandom(generator);
         const auto y = sizeRandom(generator);
-
-        const Mathematics::Vector2D center{ boost::numeric_cast<double>(x), boost::numeric_cast<double>(y) };
 
         auto pixelViewMiddleLayer = CreateTestPixelViewMiddleLayer(width, height);
 
@@ -871,7 +848,7 @@ Framework::PixelViewMiddleLayer Framework::PixelViewMiddleLayerTesting::CreateTe
 
     TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto modelMiddleLayer = std::make_shared<ModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto modelMiddleLayer = std::make_shared<ModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetModelMiddleLayer(modelMiddleLayer);
 

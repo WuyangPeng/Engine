@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:24)
+///	版本：0.9.1.3 (2023/08/11 14:46)
 
 #ifndef FRAMEWORK_TESTING_TESTING_HELPER_H
 #define FRAMEWORK_TESTING_TESTING_HELPER_H
@@ -16,15 +16,16 @@
 
 namespace Framework
 {
-    class TestingHelper : public OpenGLGlutMainFunctionHelper<OpenGLGlutFrameBuild, OpenGLGlutProcessFrameworkTesting>
+    class TestingHelper final : public OpenGLGlutMainFunctionHelper<OpenGLGlutFrameBuild, OpenGLGlutProcessFrameworkTesting>
     {
     public:
         using ClassType = TestingHelper;
         using ParentType = OpenGLGlutMainFunctionHelper<Framework::OpenGLGlutFrameBuild, OpenGLGlutProcessFrameworkTesting>;
-        using GLUTApplicationInformation = Framework::GLUTApplicationInformation;
+
+        using GLUTApplicationInformation = GLUTApplicationInformation;
 
     public:
-        TestingHelper(int argc, char* argv[], const GLUTApplicationInformation& information, const Framework::EnvironmentDirectory& environmentDirectory);
+        TestingHelper(int argc, char* argv[], const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

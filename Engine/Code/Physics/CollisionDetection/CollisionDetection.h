@@ -5,16 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 16:38)
+///	版本：0.9.1.3 (2023/08/02 14:15)
 
 #ifndef PHYSICS_COLLISION_DETECTION_H
 #define PHYSICS_COLLISION_DETECTION_H
-
-#include "BoundTreeChildDetail.h"
-#include "BoundTreeDetail.h"
-#include "BoundTreeProjectionInfo.h"
-#include "BoundTreeSplitTriangles.h"
-#include "CollisionGroupDetail.h"
-#include "CollisionRecordDetail.h"
 
 #endif  // PHYSICS_COLLISION_DETECTION_H

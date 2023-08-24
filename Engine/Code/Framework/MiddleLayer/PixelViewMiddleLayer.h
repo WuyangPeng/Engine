@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:22)
+///	版本：0.9.1.3 (2023/08/08 14:03)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_PIXEL_VIEW_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_PIXEL_VIEW_MIDDLE_LAYER_H
@@ -24,15 +24,11 @@ namespace Framework
     public:
         NON_COPY_TYPE_DECLARE(PixelViewMiddleLayer);
         using ParentType = ViewMiddleLayer;
+
         using Colour = Rendering::Colour<uint8_t>;
 
     public:
         PixelViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
-        ~PixelViewMiddleLayer() noexcept = default;
-        PixelViewMiddleLayer(const PixelViewMiddleLayer& rhs) noexcept = delete;
-        PixelViewMiddleLayer& operator=(const PixelViewMiddleLayer& rhs) noexcept = delete;
-        PixelViewMiddleLayer(PixelViewMiddleLayer&& rhs) noexcept;
-        PixelViewMiddleLayer& operator=(PixelViewMiddleLayer&& rhs) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -40,7 +36,7 @@ namespace Framework
         NODISCARD bool Idle(int64_t timeDelta) override;
         NODISCARD bool Resize(WindowDisplay windowDisplay, const WindowSize& size) override;
 
-        // 可以让你在渲染屏幕多边形后做更多的渲染。屏幕覆盖应使用渲染器调用，而不是直接访问m_Screen数组。
+        // 可以让你在渲染屏幕多边形后做更多的渲染。屏幕覆盖应使用渲染器调用，而不是直接访问screen数组。
         virtual void ScreenOverlay();
 
         NODISCARD bool IsDoFlip() const noexcept;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/24 14:25)
+///	版本：0.9.1.3 (2023/08/14 15:06)
 
 #include "Database/DatabaseExport.h"
 
@@ -304,7 +304,9 @@ Database::BasisDatabase Database::MysqlConnectorConnection::GetBasisDatabase(con
         }
 
         default:
+        {
             return BasisDatabase{ fieldName.GetFieldName(), ""s };
+        }
     }
 }
 

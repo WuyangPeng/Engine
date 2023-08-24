@@ -5,15 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:08)
+///	版本：0.9.1.3 (2023/08/04 09:20)
 
-#ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_H
-#define FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_H
+#ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_HANDLE_H
+#define FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_HANDLE_H
 
-#include "System/Windows/WindowsProcess.h"
+#include "Framework/FrameworkDll.h"
 
 #include "WindowMessageInterface.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "System/Windows/WindowsProcess.h"
 
 #include <type_traits>
 
@@ -25,40 +26,38 @@ namespace Framework
     public:
         static_assert(std::is_base_of_v<WindowMessageInterface, WindowMessage>);
 
-    public:
-        using MessageType = WindowMessage;
-        using ClassType = WindowProcessHandle<MessageType>;
+        using ClassType = WindowProcessHandle<WindowMessage>;
+
         using String = System::String;
-        using HWnd = System::WindowsHWnd;
+        using WindowsHWnd = System::WindowsHWnd;
         using WindowsProcess = System::WindowsProcess;
         using DisplayFunction = System::DisplayFunction;
 
     public:
         WindowProcessHandle(int64_t delta, const EnvironmentDirectory& environmentDirectory);
         virtual ~WindowProcessHandle() noexcept;
-        WindowProcessHandle(const WindowProcessHandle& rhs) noexcept = default;
-        WindowProcessHandle& operator=(const WindowProcessHandle& rhs) noexcept = default;
+        WindowProcessHandle(const WindowProcessHandle& rhs) = default;
+        WindowProcessHandle& operator=(const WindowProcessHandle& rhs) = default;
         WindowProcessHandle(WindowProcessHandle&& rhs) noexcept = default;
         WindowProcessHandle& operator=(WindowProcessHandle&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-    public:
         NODISCARD static WindowsProcess GetProcess() noexcept;
         NODISCARD static DisplayFunction GetFunction() noexcept;
 
         NODISCARD static bool IsClassNameExist(const String& className);
         NODISCARD static bool SetNewClassName(const String& className);
 
-        NODISCARD static HWnd GetMainWindowHwnd();
+        NODISCARD static WindowsHWnd GetMainWindowHWnd();
 
-        virtual bool PreCreate();
-        virtual bool Initialize();
+        NODISCARD virtual bool PreCreate();
+        NODISCARD virtual bool Initialize();
         virtual void PreIdle();
         virtual void Terminate();
 
     private:
-        void ClearWindowMessage();
+        void ClearWindowMessage() const noexcept;
 
     private:
         WindowMessageInterfaceSharedPtr windowMessage;
@@ -67,4 +66,4 @@ namespace Framework
     using WindowProcessInterface = WindowProcessHandle<WindowMessageInterface>;
 }
 
-#endif  // FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_H
+#endif  // FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_HANDLE_H

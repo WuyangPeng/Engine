@@ -5,16 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 19:28)
+///	版本：0.9.1.3 (2023/08/02 10:27)
 
 #include "ArtificialIntelligence/ArtificialIntelligenceExport.h"
 
 #include "ArtificialIntelligence/ArtificialIntelligence.h"
-
-#include "CoreTools/CoreToolsLib.h"
-#include "Mathematics/MathematicsLib.h"
-#include "Physics/PhysicsLib.h"
-#include "Imagics/ImagicsLib.h"
 
 #ifndef BUILDING_ARTIFICIAL_INTELLIGENCE_STATIC
 

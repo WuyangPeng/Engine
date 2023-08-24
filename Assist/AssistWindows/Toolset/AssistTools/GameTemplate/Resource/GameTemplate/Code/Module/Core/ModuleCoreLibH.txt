@@ -1,0 +1,40 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_$CoreCapital$_LIB_H
+#define $ModuleUppercase$_$CoreCapital$_LIB_H
+
+#include "Helper/UserMacro.h"
+
+#if defined(TCRE_USE_MSVC)
+
+    #ifndef BUILDING_$ModuleUppercase$_CORE_STATIC
+
+        #ifdef _DEBUG
+
+            #pragma comment(lib, "$ModuleName$$CoreName$D.lib")
+
+        #else  // !_DEBUG
+
+            #pragma comment(lib, "$ModuleName$$CoreName$.lib")
+
+        #endif  // _DEBUG
+
+    #else  // !BUILDING_$ModuleUppercase$_CORE_STATIC
+
+        #include "DllLib.h"
+
+        #ifdef _DEBUG
+
+            #pragma comment(lib, "$ModuleName$$CoreName$StaticD.lib")
+
+        #else  // !_DEBUG
+
+            #pragma comment(lib, "$ModuleName$$CoreName$Static.lib")
+
+        #endif  // _DEBUG
+
+    #endif  // BUILDING_$ModuleUppercase$_CORE_STATIC
+
+#endif  // TCRE_USE_MSVC
+
+#endif  // $ModuleUppercase$_$CoreCapital$_LIB_H

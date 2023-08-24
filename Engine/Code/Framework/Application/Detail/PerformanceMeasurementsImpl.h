@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:43)
+///	版本：0.9.1.3 (2023/08/09 14:59)
 
 #ifndef FRAMEWORK_APPLICATION_PERFORMANCE_MEASUREMENTS_IMPL_H
 #define FRAMEWORK_APPLICATION_PERFORMANCE_MEASUREMENTS_IMPL_H
@@ -22,6 +22,7 @@ namespace Framework
     {
     public:
         using ClassType = PerformanceMeasurementsImpl;
+
         using CustomTime = CoreTools::CustomTime;
 
     public:

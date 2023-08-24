@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:23)
+///	版本：0.9.1.3 (2023/08/11 16:53)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_SUITE_OPENGL_GLUT_CALL_BACK_TESTING_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_SUITE_OPENGL_GLUT_CALL_BACK_TESTING_H
@@ -14,7 +14,7 @@
 
 namespace Framework
 {
-    class OpenGLGlutCallBackTesting : public CoreTools::UnitTest
+    class OpenGLGlutCallBackTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = OpenGLGlutCallBackTesting;
@@ -29,9 +29,12 @@ namespace Framework
         void MainTest();
         void InterfaceTest();
 
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
-        static void TimerFunction(int value) noexcept;
+        static constexpr void TimerFunction(int timer) noexcept
+        {
+            System::UnusedFunction(timer);
+        }
     };
 }
 

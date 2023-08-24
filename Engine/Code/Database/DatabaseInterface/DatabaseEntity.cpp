@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/22 17:41)
+///	版本：0.9.1.3 (2023/08/14 15:49)
 
 #include "Database/DatabaseExport.h"
 
 #include "DatabaseEntity.h"
 #include "Detail/DatabaseEntityImpl.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 

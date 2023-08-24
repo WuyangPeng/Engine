@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:43)
+///	版本：0.9.1.3 (2023/08/09 14:53)
 
 #ifndef FRAMEWORK_APPLICATION_WINDOW_FONT_INFORMATION_H
 #define FRAMEWORK_APPLICATION_WINDOW_FONT_INFORMATION_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "FontInformationImpl.h"
 
@@ -21,16 +23,16 @@ namespace Framework
         using ParentType = FontInformationImpl;
 
     public:
-        explicit WindowFontInformation(WindowsHWnd hwnd) noexcept;
+        explicit WindowFontInformation(WindowsHWnd hWnd) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD int GetStringWidth(const String& text) const final;
-        NODISCARD int GetCharacterWidth(const TChar character) const final;
-        NODISCARD int GetFontHeight() const noexcept final;
+        NODISCARD int GetStringWidth(const String& text) const override;
+        NODISCARD int GetCharacterWidth(const TChar character) const override;
+        NODISCARD int GetFontHeight() const noexcept override;
 
     private:
-        WindowsHWnd hwnd;
+        WindowsHWnd hWnd;
     };
 }
 

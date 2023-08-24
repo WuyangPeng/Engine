@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/24 10:30)
+///	版本：0.9.1.3 (2023/08/14 15:01)
 
 #ifndef DATABASE_STATEMENT_SQL_STATEMENT_H
 #define DATABASE_STATEMENT_SQL_STATEMENT_H
@@ -23,6 +23,7 @@ namespace Database
     {
     public:
         using ClassType = SqlStatement;
+
         using FieldNameContainer = std::vector<DatabaseField>;
 
     public:

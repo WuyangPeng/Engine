@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/23 09:25)
+///	版本：0.9.1.3 (2023/08/14 15:22)
 
 #ifndef DATABASE_DATABASE_INTERFACE_ENTITY_H
 #define DATABASE_DATABASE_INTERFACE_ENTITY_H
@@ -26,6 +26,7 @@ namespace Database
     {
     public:
         using ClassType = Entity<FieldName, Type, Index>;
+
         using EntityType = typename DataTypeTraits<Type>::Type;
 
     public:

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/25 09:27)
+///	版本：0.9.1.3 (2023/08/14 15:03)
 
 #include "Database/DatabaseExport.h"
 
@@ -283,8 +283,11 @@ Database::RedisConnection::ResultContainer Database::RedisConnection::SelectAll(
             case REDIS_REPLY_DOUBLE:
             case REDIS_REPLY_BOOL:
             case REDIS_REPLY_STRING:
+            {
                 select.Modify(GetBasisDatabase(fieldNameContainer.at(0), result));
                 break;
+            }
+
             case REDIS_REPLY_ARRAY:
             {
                 for (auto i = 0u; i < result->elements; ++i)

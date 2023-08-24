@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/24 14:19)
+///	版本：0.9.1.3 (2023/08/14 15:05)
 
 #ifndef DATABASE_MYSQL_CONNECTOR_WRAPPERS_MYSQL_CONNECTOR_USING_H
 #define DATABASE_MYSQL_CONNECTOR_WRAPPERS_MYSQL_CONNECTOR_USING_H
@@ -19,7 +19,6 @@
 
 namespace Database
 {
-
     using MysqlxSession = mysqlx::abi2::r0::Session;
     using MysqlxSchema = mysqlx::abi2::r0::Schema;
     using MysqlxCollection = mysqlx::abi2::r0::Collection;

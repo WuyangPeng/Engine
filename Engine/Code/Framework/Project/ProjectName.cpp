@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/18 20:25)
+///	版本：0.9.1.3 (2023/08/04 16:12)
 
 #include "Framework/FrameworkExport.h"
 
@@ -47,4 +47,4 @@ int Framework::ProjectName::GetContainerPrintWidth() const
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
     return impl->GetContainerPrintWidth();
- }
+}

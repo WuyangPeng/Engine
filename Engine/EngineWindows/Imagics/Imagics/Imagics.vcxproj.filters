@@ -58,12 +58,6 @@
     <Filter Include="OpenCV 源文件">
       <UniqueIdentifier>{bc8e20eb-a473-49ea-98e5-a246827ae35a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Filters 模板文件">
-      <UniqueIdentifier>{c8023598-0c99-45ba-b0fa-4447848dcf75}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Images 模板文件">
-      <UniqueIdentifier>{01556103-c28d-40ca-bf19-8fed86d0ab52}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Helper 头文件">
       <UniqueIdentifier>{72372d09-362e-4af2-8044-663f379f95e7}</UniqueIdentifier>
     </Filter>

@@ -1,0 +1,15 @@
+$Copyright$
+
+#include "Helper/$ProjectName$ClassInvariantMacro.h"
+#include "$ProjectName$MiddleLayerMessage.h"
+#include "Framework/MiddleLayer/EngineMiddleLayerContainerDetail.h"
+#include "Framework/MiddleLayer/ObjectLogicManagerDetail.h"
+#include "Framework/WindowProcess/WindowMessageDetail.h"
+
+$ProjectName$::$ProjectName$MiddleLayerMessage::$ProjectName$MiddleLayerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ delta, environmentDirectory }, alloc{ ConsoleAlloc::Create() }
+{
+    $ProjectCapital$_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE($ProjectName$, $ProjectName$MiddleLayerMessage)

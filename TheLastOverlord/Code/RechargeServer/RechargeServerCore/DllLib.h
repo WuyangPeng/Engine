@@ -1,20 +1,18 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 最后的霸王版本：0.0.0.1 (2019/10/12 18:01)
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
+///
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
+///
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:43)
 
 #ifndef RECHARGE_SERVER_CORE_DLL_LIB_H
 #define RECHARGE_SERVER_CORE_DLL_LIB_H
 
-#include "Macro/UserMacro.h"
-#include "System/SystemLib.h"
-#include "CoreTools/CoreToolsLib.h"
-#include "Framework/FrameworkLib.h"
-#if defined(TCRE_USE_MSVC) 
+#include "Helper/UserMacro.h"
 
+#include "ThreadingCoreRenderEngine/ThreadingCoreRenderEngineLib.h"
+#include "ThreadingCoreRenderEngineGame/ThreadingCoreRenderEngineGameLib.h"
 
-	
-#endif // TCRE_USE_MSVC
-
-#endif // RECHARGE_SERVER_CORE_DLL_LIB_H
+#endif  // RECHARGE_SERVER_CORE_DLL_LIB_H

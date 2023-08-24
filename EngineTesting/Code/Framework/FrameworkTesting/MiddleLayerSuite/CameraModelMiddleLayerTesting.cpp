@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:06)
+///	版本：0.9.1.3 (2023/08/12 16:37)
 
 #include "CameraModelMiddleLayerTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -34,11 +34,6 @@
 
 using System::operator*;
 
-namespace Framework
-{
-    using TestingType = CameraModelMiddleLayer;
-}
-
 Framework::CameraModelMiddleLayerTesting::CameraModelMiddleLayerTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -58,7 +53,6 @@ void Framework::CameraModelMiddleLayerTesting::MainTest()
 
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FrameRateTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CameraMotionMoveTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CameraMotionSpeedTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MoveObjectTest);
     ASSERT_NOT_THROW_EXCEPTION_0(TrackBallDownTest);
@@ -71,9 +65,9 @@ void Framework::CameraModelMiddleLayerTesting::MiddleLayerTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    CameraModelMiddleLayer middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
@@ -94,7 +88,7 @@ void Framework::CameraModelMiddleLayerTesting::MiddleLayerTest()
 
     constexpr WindowPoint point{};
     const WindowSize size{};
-    const VirtualKeysTypes virtualKeysTypes{};
+    constexpr VirtualKeysTypes virtualKeysTypes{};
 
     ASSERT_TRUE(middleLayer.Paint());
     ASSERT_TRUE(middleLayer.Move(point));
@@ -116,7 +110,7 @@ void Framework::CameraModelMiddleLayerTesting::FrameRateTest()
     constexpr auto maxTimer = 30;
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    CameraModelMiddleLayer middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
     auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
@@ -130,12 +124,12 @@ void Framework::CameraModelMiddleLayerTesting::FrameRateTest()
     ASSERT_TRUE(middleLayer.Initialize());
 
     constexpr auto frame = System::gMillisecond / maxTimer;
-    const auto aTestLoopCount = maxTimer * GetTestLoopCount();
+    const auto maxTimerTestLoopCount = maxTimer * GetTestLoopCount();
 
     CoreTools::CustomTime customTime{};
     auto delta = 0;
     auto frameSum = 0;
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < maxTimerTestLoopCount; ++i)
     {
         middleLayer.UpdateFrameCount();
 
@@ -174,9 +168,9 @@ void Framework::CameraModelMiddleLayerTesting::CameraMotionSpeedTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    CameraModelMiddleLayer middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
@@ -213,17 +207,13 @@ void Framework::CameraModelMiddleLayerTesting::CameraMotionSpeedTest()
     middleLayer.Terminate();
 }
 
-void Framework::CameraModelMiddleLayerTesting::CameraMotionMoveTest() noexcept
-{
-}
-
 void Framework::CameraModelMiddleLayerTesting::MoveObjectTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    CameraModelMiddleLayer middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
@@ -243,19 +233,18 @@ void Framework::CameraModelMiddleLayerTesting::MoveObjectTest()
 
     middleLayer.Terminate();
 
-    constexpr auto rotationSpeed = 0.01f;
-
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
+        constexpr auto rotationSpeed = 0.01f;
+
         ASSERT_TRUE(middleLayer.Initialize());
 
         const auto select = selectRandom(generator);
 
-        auto value = random(generator);
+        const auto value = random(generator);
         const auto numericalValueSymbol = (value == 0 ? NumericalValueSymbol::Negative : NumericalValueSymbol::Positive);
 
-        AVectorf axis{};
+        AVector axis{};
         switch (select)
         {
             case 0:
@@ -263,7 +252,7 @@ void Framework::CameraModelMiddleLayerTesting::MoveObjectTest()
                 middleLayer.SetDoRoll(numericalValueSymbol);
                 middleLayer.SetDoYaw(NumericalValueSymbol::Zero);
                 middleLayer.SetDoPitch(NumericalValueSymbol::Zero);
-                axis = AVectorf::GetUnitX();
+                axis = AVector::GetUnitX();
             }
             break;
             case 1:
@@ -271,7 +260,7 @@ void Framework::CameraModelMiddleLayerTesting::MoveObjectTest()
                 middleLayer.SetDoRoll(NumericalValueSymbol::Zero);
                 middleLayer.SetDoYaw(numericalValueSymbol);
                 middleLayer.SetDoPitch(NumericalValueSymbol::Zero);
-                axis = AVectorf::GetUnitY();
+                axis = AVector::GetUnitY();
             }
             break;
             case 2:
@@ -279,7 +268,7 @@ void Framework::CameraModelMiddleLayerTesting::MoveObjectTest()
                 middleLayer.SetDoRoll(NumericalValueSymbol::Zero);
                 middleLayer.SetDoYaw(NumericalValueSymbol::Zero);
                 middleLayer.SetDoPitch(numericalValueSymbol);
-                axis = AVectorf::GetUnitZ();
+                axis = AVector::GetUnitZ();
             }
             break;
             default:
@@ -293,8 +282,6 @@ void Framework::CameraModelMiddleLayerTesting::MoveObjectTest()
         rotate = incr * rotate;
         rotate.Orthonormalize();
 
-        ASSERT_TRUE(middleLayer.MoveObject());
-
         middleLayer.Terminate();
     }
 }
@@ -303,9 +290,9 @@ void Framework::CameraModelMiddleLayerTesting::TrackBallDownTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    CameraModelMiddleLayer middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
@@ -331,9 +318,9 @@ void Framework::CameraModelMiddleLayerTesting::RotateTrackBallTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    CameraModelMiddleLayer middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraViewMiddleLayer = std::make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
@@ -347,13 +334,12 @@ void Framework::CameraModelMiddleLayerTesting::RotateTrackBallTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_real<float> random{ 0.0f, 100.0f };
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
-        auto xTrackBegin = random(generator);
-        auto yTrackBegin = random(generator);
-        auto xTrackEnd = random(generator);
-        auto yTrackEnd = random(generator);
+        const auto xTrackBegin = random(generator);
+        const auto yTrackBegin = random(generator);
+        const auto xTrackEnd = random(generator);
+        const auto yTrackEnd = random(generator);
 
         middleLayer.SetBeginTrack(xTrackBegin, yTrackBegin);
         middleLayer.SetEndTrack(xTrackEnd, yTrackEnd);
@@ -376,7 +362,7 @@ void Framework::CameraModelMiddleLayerTesting::RotateTrackBallTest()
         {
             if (dot < 0.0f)
             {
-                auto invLength = Mathematics::MathF::InvSqrt(xTrackBegin * xTrackBegin + yTrackBegin * yTrackBegin);
+                const auto invLength = Mathematics::MathF::InvSqrt(xTrackBegin * xTrackBegin + yTrackBegin * yTrackBegin);
                 axis[0] = yTrackBegin * invLength;
                 axis[1] = -xTrackBegin * invLength;
                 axis[2] = 0.0f;
@@ -384,14 +370,14 @@ void Framework::CameraModelMiddleLayerTesting::RotateTrackBallTest()
             }
             else
             {
-                axis = AVectorf::GetUnitX();
+                axis = AVector::GetUnitX();
                 angle = 0.0f;
             }
         }
 
         auto worldAxis = axis[0] * middleLayer.GetCameraDirectionVector() + axis[1] * middleLayer.GetCameraUpVector() + axis[2] * middleLayer.GetCameraRightVector();
 
-        const Matrixf trackRotate{ worldAxis, angle };
+        const Matrix trackRotate{ worldAxis, angle };
 
         auto localRotate = trackRotate * rotate;
 

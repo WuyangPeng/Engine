@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:43)
+///	版本：0.9.1.3 (2023/08/09 14:48)
 
 #ifndef FRAMEWORK_APPLICATION_MOUSE_STATE_H
 #define FRAMEWORK_APPLICATION_MOUSE_STATE_H
@@ -24,8 +24,8 @@ namespace Framework
 
     struct GlutMouseState
     {
-        static constexpr auto mouseUp = System::EnumCastUnderlying(System::GlutModifiersCodes::Up);
-        static constexpr auto mouseDown = System::EnumCastUnderlying(System::GlutModifiersCodes::Down);
+        static constexpr auto mouseUp = EnumCastUnderlying(System::GlutModifiersCodes::Up);
+        static constexpr auto mouseDown = EnumCastUnderlying(System::GlutModifiersCodes::Down);
     };
 
     struct AndroidMouseState

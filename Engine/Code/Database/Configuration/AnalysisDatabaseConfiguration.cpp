@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/22 16:29)
+///	版本：0.9.1.3 (2023/08/14 15:55)
 
 #include "Database/DatabaseExport.h"
 
@@ -17,12 +17,35 @@
 Database::AnalysisDatabaseConfiguration::AnalysisDatabaseConfiguration(const std::string& fileName)
     : impl{ fileName }
 {
-    DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Database, AnalysisDatabaseConfiguration)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Database, AnalysisDatabaseConfiguration, GetConfigurationStrategy, System::String, Database::ConfigurationStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, AnalysisDatabaseConfiguration, begin, Database::AnalysisDatabaseConfiguration::ContainerConstIter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, AnalysisDatabaseConfiguration, end, Database::AnalysisDatabaseConfiguration::ContainerConstIter)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, AnalysisDatabaseConfiguration, GetSize, int)
+Database::ConfigurationStrategy Database::AnalysisDatabaseConfiguration::GetConfigurationStrategy(const String& name) const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetConfigurationStrategy(name);
+}
+
+Database::AnalysisDatabaseConfiguration::ContainerConstIter Database::AnalysisDatabaseConfiguration::begin() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->begin();
+}
+
+Database::AnalysisDatabaseConfiguration::ContainerConstIter Database::AnalysisDatabaseConfiguration::end() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->end();
+}
+
+int Database::AnalysisDatabaseConfiguration::GetSize() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetSize();
+}

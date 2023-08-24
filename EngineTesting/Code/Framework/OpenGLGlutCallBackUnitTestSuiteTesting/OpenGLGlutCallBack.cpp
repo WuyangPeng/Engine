@@ -13,6 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
+#include "Framework/OpenGLGlutFrame/OpenGLGlutCallBackUnitTestSuiteDetail.h"
 
 OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBack::OpenGLGlutCallBack(int64_t delta)
     : ParentType(delta, "【OpenGL Glut Call Back Unit Test Suite Testing】单元测试套件")
@@ -26,12 +27,7 @@ void OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBack::AddSuite()
 {
     auto openGLGlutFrameSuite = GenerateSuite("OpenGL GLUT 框架创建");
 
-    ADD_TEST_USE_PARAMETER_1(openGLGlutFrameSuite, OpenGLGlutCallBackUnitTestSuiteTesting, this);
+    ADD_TEST_USE_PARAMETER_1(openGLGlutFrameSuite, OpenGLGlutCallBackUnitTestSuiteTesting, shared_from_this());
 
     DoAddSuite(openGLGlutFrameSuite);
-}
-
-std::string OpenGLGlutCallBackUnitTestSuiteTesting::OpenGLGlutCallBack::GetSuiteName() const
-{
-    return "【OpenGL Glut Call Back Unit Test Suite Testing】单元测试套件";
 }

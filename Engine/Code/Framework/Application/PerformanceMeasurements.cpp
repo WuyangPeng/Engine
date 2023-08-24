@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:50)
+///	版本：0.9.1.3 (2023/08/09 15:11)
 
 #include "Framework/FrameworkExport.h"
 
@@ -19,13 +19,42 @@ COPY_UNSHARED_CLONE_SELF_DEFINE(Framework, PerformanceMeasurements)
 Framework::PerformanceMeasurements::PerformanceMeasurements(int maxTimer)
     : impl{ maxTimer }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, PerformanceMeasurements)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, PerformanceMeasurements, GetFrameRate, double);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, PerformanceMeasurements, ResetTime, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, PerformanceMeasurements, MeasureTime, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, PerformanceMeasurements, UpdateFrameCount, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, PerformanceMeasurements, GetFrameRateMessage, std::string)
+double Framework::PerformanceMeasurements::GetFrameRate() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFrameRate();
+}
+
+std::string Framework::PerformanceMeasurements::GetFrameRateMessage() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFrameRateMessage();
+}
+
+void Framework::PerformanceMeasurements::ResetTime()
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->ResetTime();
+}
+
+void Framework::PerformanceMeasurements::MeasureTime()
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->MeasureTime();
+}
+
+void Framework::PerformanceMeasurements::UpdateFrameCount()
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->UpdateFrameCount();
+}

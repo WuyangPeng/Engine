@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:20)
+///	版本：0.9.1.3 (2023/08/05 16:19)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_AUDIO_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_AUDIO_MANAGER_INTERFACE_H
@@ -13,15 +13,15 @@
 #include "Framework/FrameworkDll.h"
 
 #include "EngineMiddleLayerInterface.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
-#include "CoreTools/Helper/Export/NonCopyMacro.h"
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
+// 音频管理（音效处理过程，包括简单的音频回放以及空间定位功能）。
 namespace Framework
 {
-    // 音频管理（音效处理过程，包括简单的音频回放以及空间定位功能）。
     class FRAMEWORK_DEFAULT_DECLARE AudioManagerInterface : public EngineMiddleLayerInterface
     {
     public:
@@ -30,7 +30,7 @@ namespace Framework
         using ParentType = EngineMiddleLayerInterface;
 
     public:
-        explicit AudioManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
+        AudioManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -51,8 +51,8 @@ namespace Framework
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
 
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Resource);
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Resource)
 
     private:
         PackageType impl;

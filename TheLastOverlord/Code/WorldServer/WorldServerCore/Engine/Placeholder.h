@@ -1,22 +1,22 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.9.0.12 (2022/07/25 18:14)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:42)
 
 #ifndef WORLD_SERVER_CORE_ENGINE_PLACEHOLDER_H
 #define WORLD_SERVER_CORE_ENGINE_PLACEHOLDER_H
 
 #include "WorldServer/WorldServerCore/WorldServerCoreDll.h"
 
-#include "WorldServer/WorldServerCore/Macro/ExportMacro.h"
+#include "WorldServer/WorldServerCore/Helper/ExportMacro.h"
 
 namespace WorldServerCore
 {
-    class WORLD_SERVER_CORE_DEFAULT_DECLARE Placeholder
+    class WORLD_SERVER_CORE_DEFAULT_DECLARE Placeholder final
     {
     public:
         using ClassType = Placeholder;

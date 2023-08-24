@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:51)
+///	版本：0.9.1.3 (2023/08/09 20:49)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_INTERFACE_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_INTERFACE_H
@@ -21,6 +21,7 @@ namespace Framework
     {
     public:
         using ClassType = AndroidCallBackInterface;
+
         using AndroidApp = System::AndroidApp;
         using AndroidInputEvent = System::AndroidInputEvent;
         using HandleCmdFunctionPointer = void (ClassType::*)(AndroidApp* androidApp);
@@ -30,9 +31,9 @@ namespace Framework
         explicit AndroidCallBackInterface(int64_t delta) noexcept;
         virtual ~AndroidCallBackInterface() noexcept = default;
         AndroidCallBackInterface(const AndroidCallBackInterface& rhs) noexcept = default;
-        virtual AndroidCallBackInterface& operator=(const AndroidCallBackInterface& rhs) noexcept = default;
+        AndroidCallBackInterface& operator=(const AndroidCallBackInterface& rhs) noexcept = default;
         AndroidCallBackInterface(AndroidCallBackInterface&& rhs) noexcept = default;
-        virtual AndroidCallBackInterface& operator=(AndroidCallBackInterface&& rhs) noexcept = default;
+        AndroidCallBackInterface& operator=(AndroidCallBackInterface&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

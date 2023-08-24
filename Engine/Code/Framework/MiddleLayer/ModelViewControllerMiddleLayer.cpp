@@ -5,49 +5,82 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:26)
+///	版本：0.9.1.3 (2023/08/08 16:21)
 
 #include "Framework/FrameworkExport.h"
 
 #include "ModelViewControllerMiddleLayer.h"
 #include "Detail/ModelViewControllerMiddleLayerImpl.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
 
 Framework::ModelViewControllerMiddleLayer::ModelViewControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Framework::ModelViewControllerMiddleLayer::ModelViewControllerMiddleLayer(ModelViewControllerMiddleLayer&& rhs) noexcept
-    : ParentType{ move(rhs) }, impl{ std::move(rhs.impl) }
-{
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Framework::ModelViewControllerMiddleLayer& Framework::ModelViewControllerMiddleLayer::operator=(ModelViewControllerMiddleLayer&& rhs) noexcept
-{
-    FRAMEWORK_CLASS_IS_VALID_1;
-
-    ParentType::operator=(std::move(rhs));
-
-    impl = std::move(rhs.impl);
-
-    return *this;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, ModelViewControllerMiddleLayer)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, SetModelMiddleLayer, MiddleLayerSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, SetViewMiddleLayer, MiddleLayerSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, SetControllerMiddleLayer, MiddleLayerSharedPtr, void)
+void Framework::ModelViewControllerMiddleLayer::SetModelMiddleLayer(const MiddleLayerSharedPtr& modelMiddleLayer) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, GetModelMiddleLayer, Framework::ModelViewControllerMiddleLayer::MiddleLayerSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, GetViewMiddleLayer, Framework::ModelViewControllerMiddleLayer::MiddleLayerSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, GetControllerMiddleLayer, Framework::ModelViewControllerMiddleLayer::MiddleLayerSharedPtr)
+    return impl->SetModelMiddleLayer(modelMiddleLayer);
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, GetConstModelMiddleLayer, Framework::ModelViewControllerMiddleLayer::ConstMiddleLayerSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, GetConstViewMiddleLayer, Framework::ModelViewControllerMiddleLayer::ConstMiddleLayerSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ModelViewControllerMiddleLayer, GetConstControllerMiddleLayer, Framework::ModelViewControllerMiddleLayer::ConstMiddleLayerSharedPtr)
+void Framework::ModelViewControllerMiddleLayer::SetViewMiddleLayer(const MiddleLayerSharedPtr& viewMiddleLayer) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetViewMiddleLayer(viewMiddleLayer);
+}
+
+void Framework::ModelViewControllerMiddleLayer::SetControllerMiddleLayer(const MiddleLayerSharedPtr& controllerMiddleLayer) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetControllerMiddleLayer(controllerMiddleLayer);
+}
+
+Framework::MiddleLayerInterface::MiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayer::GetModelMiddleLayer() noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->GetModelMiddleLayer();
+}
+
+Framework::MiddleLayerInterface::MiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayer::GetViewMiddleLayer() noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->GetViewMiddleLayer();
+}
+
+Framework::MiddleLayerInterface::MiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayer::GetControllerMiddleLayer() noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->GetControllerMiddleLayer();
+}
+
+Framework::MiddleLayerInterface::ConstMiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayer::GetConstModelMiddleLayer() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetConstModelMiddleLayer();
+}
+
+Framework::MiddleLayerInterface::ConstMiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayer::GetConstViewMiddleLayer() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetConstViewMiddleLayer();
+}
+
+Framework::MiddleLayerInterface::ConstMiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayer::GetConstControllerMiddleLayer() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetConstControllerMiddleLayer();
+}

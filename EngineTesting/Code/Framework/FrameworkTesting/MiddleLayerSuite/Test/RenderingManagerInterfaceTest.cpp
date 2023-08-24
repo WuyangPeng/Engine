@@ -5,20 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:04)
+///	版本：0.9.1.3 (2023/08/12 15:29)
 
 #include "RenderingManagerInterfaceTest.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::RenderingManagerInterfaceTest::RenderingManagerInterfaceTest(MiddleLayerInterfaceCreate middleLayerInterfaceCreate, MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
-    : ParentType{ middleLayerInterfaceCreate, middleLayerPlatform, environmentDirectory }
+Framework::RenderingManagerInterfaceTest::RenderingManagerInterfaceTest(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Framework::RenderingManagerInterfaceTest::MiddleLayerSharedPtr Framework::RenderingManagerInterfaceTest::CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
 {
-    return std::make_shared<ClassType>(MiddleLayerInterfaceCreate::Init, middleLayerPlatform, environmentDirectory);
+    return std::make_shared<ClassType>(middleLayerPlatform, environmentDirectory);
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, RenderingManagerInterfaceTest)

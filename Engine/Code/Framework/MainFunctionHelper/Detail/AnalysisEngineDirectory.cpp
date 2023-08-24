@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:39)
+///	版本：0.9.1.3 (2023/08/08 19:50)
 
 #include "Framework/FrameworkExport.h"
 
@@ -30,7 +30,6 @@ Framework::AnalysisEngineDirectory::AnalysisEngineDirectory(const std::string& j
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 void Framework::AnalysisEngineDirectory::Analysis(const std::string& jsonName)
 {
     EXCEPTION_TRY
@@ -42,7 +41,6 @@ void Framework::AnalysisEngineDirectory::Analysis(const std::string& jsonName)
     EXCEPTION_STD_EXCEPTION_CATCH(Framework)
 }
 
-// private
 void Framework::AnalysisEngineDirectory::AnalysisBase()
 {
     for (auto index = AnalysisDirectory::Resource; index <= AnalysisDirectory::Configuration; ++index)
@@ -51,7 +49,6 @@ void Framework::AnalysisEngineDirectory::AnalysisBase()
     }
 }
 
-// private
 void Framework::AnalysisEngineDirectory::AnalysisRendering()
 {
     for (auto index = RenderingDirectory::Default; index <= RenderingDirectory::DirectX; ++index)
@@ -60,7 +57,6 @@ void Framework::AnalysisEngineDirectory::AnalysisRendering()
     }
 }
 
-// private
 void Framework::AnalysisEngineDirectory::AnalysisRendering(RenderingDirectory renderingDirectory)
 {
     EXCEPTION_TRY
@@ -73,7 +69,6 @@ void Framework::AnalysisEngineDirectory::AnalysisRendering(RenderingDirectory re
     EXCEPTION_STD_EXCEPTION_CATCH(Framework)
 }
 
-// private
 void Framework::AnalysisEngineDirectory::AnalysisRendering(RenderingDirectory renderingDirectory, const BasicTree& renderingTree)
 {
     for (auto index = AnalysisDirectory::LittleEndian; index <= AnalysisDirectory::Image; ++index)
@@ -82,13 +77,11 @@ void Framework::AnalysisEngineDirectory::AnalysisRendering(RenderingDirectory re
     }
 }
 
-// private
 void Framework::AnalysisEngineDirectory::InsertResult(RenderingDirectory renderingDirectory, AnalysisDirectory analysisDirectory)
 {
     InsertResult(renderingDirectory, analysisDirectory, basicTree);
 }
 
-// private
 void Framework::AnalysisEngineDirectory::InsertResult(RenderingDirectory renderingDirectory, AnalysisDirectory analysisDirectory, const BasicTree& renderingTree)
 {
     const auto defaultKey = DirectoryDefaultName::GetDefaultKeyName(analysisDirectory);

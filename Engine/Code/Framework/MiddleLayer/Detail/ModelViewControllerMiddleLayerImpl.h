@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:19)
+///	版本：0.9.1.3 (2023/08/08 14:37)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_IMPL_H
 #define FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_IMPL_H
@@ -20,6 +20,7 @@ namespace Framework
     {
     public:
         using ClassType = ModelViewControllerMiddleLayerImpl;
+
         using MiddleLayerWeakPtr = std::weak_ptr<MiddleLayerInterface>;
         using MiddleLayerSharedPtr = MiddleLayerInterfaceSharedPtr;
         using ConstMiddleLayerSharedPtr = ConstMiddleLayerInterfaceSharedPtr;

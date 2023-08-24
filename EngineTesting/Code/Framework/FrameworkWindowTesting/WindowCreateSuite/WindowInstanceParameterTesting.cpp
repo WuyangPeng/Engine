@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:09)
+///	版本：0.9.1.3 (2023/08/10 15:52)
 
 #include "WindowInstanceParameterTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -15,12 +15,7 @@
 
 using namespace std::literals;
 
-namespace Framework
-{
-    using TestingType = WindowInstanceParameter;
-}
-
-Framework::WindowInstanceParameterTesting::WindowInstanceParameterTesting(const OStreamShared& stream, HInstance instance)
+Framework::WindowInstanceParameterTesting::WindowInstanceParameterTesting(const OStreamShared& stream, WindowsHInstance instance)
     : ParentType{ stream }, instance{ instance }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -42,7 +37,7 @@ void Framework::WindowInstanceParameterTesting::ValueTest()
 {
     const auto className = SYSTEM_TEXT("ClassName"s);
 
-    TestingType parameter{ instance, className };
+    const WindowInstanceParameter parameter{ instance, className };
 
     ASSERT_EQUAL(instance, parameter.GetHInstance());
     ASSERT_EQUAL(className, parameter.GetWindowClassName());

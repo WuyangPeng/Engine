@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/22 16:24)
+///	版本：0.9.1.3 (2023/08/14 15:54)
 
 #ifndef DATABASE_CONFIGURATION_ANALYSIS_DATABASE_CONFIGURATION_H
 #define DATABASE_CONFIGURATION_ANALYSIS_DATABASE_CONFIGURATION_H
@@ -28,6 +28,8 @@ namespace Database
     {
     public:
         PERFORMANCE_UNSHARED_TYPE_DECLARE(AnalysisDatabaseConfiguration);
+
+        using String = System::String;
         using Container = std::map<System::String, ConfigurationStrategy>;
         using ContainerConstIter = Container::const_iterator;
 
@@ -36,7 +38,7 @@ namespace Database
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD ConfigurationStrategy GetConfigurationStrategy(const System::String& name) const;
+        NODISCARD ConfigurationStrategy GetConfigurationStrategy(const String& name) const;
         NODISCARD ContainerConstIter begin() const noexcept;
         NODISCARD ContainerConstIter end() const noexcept;
         NODISCARD int GetSize() const;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:12)
+///	版本：0.9.1.3 (2023/08/14 11:15)
 
 #include "ViewMiddleLayerTesting.h"
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
@@ -21,11 +21,6 @@
 #include "Framework/WindowCreate/WindowSize.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
-
-namespace Framework
-{
-    using TestingType = ViewMiddleLayer;
-}
 
 Framework::ViewMiddleLayerTesting::ViewMiddleLayerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -50,9 +45,9 @@ void Framework::ViewMiddleLayerTesting::MiddleLayerTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    ViewMiddleLayer middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto modelMiddleLayer = std::make_shared<ModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto modelMiddleLayer = std::make_shared<ModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetModelMiddleLayer(modelMiddleLayer);
 
@@ -71,7 +66,7 @@ void Framework::ViewMiddleLayerTesting::MiddleLayerTest()
 
     constexpr WindowPoint point{};
     const WindowSize size{};
-    const VirtualKeysTypes virtualKeysTypes{};
+    constexpr VirtualKeysTypes virtualKeysTypes{};
 
     ASSERT_TRUE(middleLayer.Paint());
     ASSERT_TRUE(middleLayer.Move(point));
@@ -92,9 +87,9 @@ void Framework::ViewMiddleLayerTesting::DrawFrameRateTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    ViewMiddleLayer middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto modelMiddleLayer = std::make_shared<ModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto modelMiddleLayer = std::make_shared<ModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetModelMiddleLayer(modelMiddleLayer);
 
@@ -102,16 +97,15 @@ void Framework::ViewMiddleLayerTesting::DrawFrameRateTest()
     ASSERT_TRUE(middleLayer.Create(Rendering::EnvironmentParameter::Create()));
     ASSERT_TRUE(middleLayer.Initialize());
 
-    auto clearColor = middleLayer.GetClearColor();
-    const decltype(clearColor) blackColour{ 0.0f, 0.0f, 0.0f, 1.0f };
+    auto clearColor = middleLayer.GetClearColour();
+    constexpr decltype(clearColor) blackColour{ 0.0f, 0.0f, 0.0f, 1.0f };
     ASSERT_APPROXIMATE_USE_FUNCTION(Rendering::Approximate<float>, clearColor, blackColour, Mathematics::MathF::epsilon);
 
-    const decltype(clearColor) redColour{ 1.0f, 0.0f, 0.0f, 1.0f };
-    middleLayer.SetClearColor(redColour);
+    constexpr decltype(clearColor) redColour{ 1.0f, 0.0f, 0.0f, 1.0f };
+    middleLayer.SetClearColour(redColour);
 
-    clearColor = middleLayer.GetClearColor();
+    clearColor = middleLayer.GetClearColour();
     ASSERT_APPROXIMATE_USE_FUNCTION(Rendering::Approximate<float>, clearColor, redColour, Mathematics::MathF::epsilon);
 
-    middleLayer.DrawFrameRate(WindowPoint{}, blackColour);
     ASSERT_TRUE(middleLayer.Paint());
 }

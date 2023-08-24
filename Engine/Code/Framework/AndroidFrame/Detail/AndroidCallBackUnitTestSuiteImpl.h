@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:51)
+///	版本：0.9.1.3 (2023/08/09 20:48)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_UNIT_TEST_SUITE_IMPL_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_UNIT_TEST_SUITE_IMPL_H
@@ -14,6 +14,7 @@
 
 #include "CoreTools/MainFunctionHelper/TestingInformationHelper.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
+#include "Framework/WindowProcess/Detail/WindowMessageUnitTestSuiteStream.h"
 
 #include <string>
 
@@ -23,12 +24,14 @@ namespace Framework
     {
     public:
         using ClassType = AndroidCallBackUnitTestSuiteImpl;
+
         using Suite = CoreTools::Suite;
         using OStreamShared = CoreTools::OStreamShared;
-        using UnitTestSharedPtr = std::shared_ptr<CoreTools::UnitTestComposite>;
+        using UnitTestComposite = CoreTools::UnitTestComposite;
+        using UnitTestSharedPtr = std::shared_ptr<UnitTestComposite>;
 
     public:
-        AndroidCallBackUnitTestSuiteImpl(const std::string& name, const OStreamShared& streamShared);
+        explicit AndroidCallBackUnitTestSuiteImpl(const std::string& name);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -42,11 +45,19 @@ namespace Framework
 
         NODISCARD bool IsPrintRun() const noexcept;
 
-    private:
-        using SuiteSharedPtr = std::shared_ptr<Suite>;
+        NODISCARD OStreamShared GetStreamShared() const noexcept;
 
     private:
-        CoreTools::TestingInformationHelper testingInformationHelper;
+        using SuiteSharedPtr = std::shared_ptr<Suite>;
+        using TestingInformationHelper = CoreTools::TestingInformationHelper;
+        using StreamSharedPtr = std::shared_ptr<WindowMessageUnitTestSuiteStream>;
+
+    private:
+        void DoAddTest(const std::string& suiteName, Suite& aSuite, const std::string& testName, const UnitTestSharedPtr& unitTest);
+
+    private:
+        StreamSharedPtr stream;
+        TestingInformationHelper testingInformationHelper;
         SuiteSharedPtr suite;
     };
 }

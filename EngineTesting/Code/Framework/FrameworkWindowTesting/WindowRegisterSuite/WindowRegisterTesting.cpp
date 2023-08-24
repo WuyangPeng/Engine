@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:08)
+///	版本：0.9.1.3 (2023/08/10 14:44)
 
 #include "WindowRegisterTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -16,13 +16,14 @@
 
 using namespace std::literals;
 
-Framework::WindowRegisterTesting::WindowRegisterTesting(const OStreamShared& stream, HInstance instance)
+Framework::WindowRegisterTesting::WindowRegisterTesting(const OStreamShared& stream, WindowsHInstance instance)
     : ParentType{ stream }, instance{ instance }, count{ 0 }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool Framework::WindowRegisterTesting::IsValid() const noexcept
 {
     if (ParentType::IsValid() && instance != nullptr)
@@ -30,6 +31,7 @@ bool Framework::WindowRegisterTesting::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 void Framework::WindowRegisterTesting::DoRunUnitTest()
@@ -47,12 +49,12 @@ void Framework::WindowRegisterTesting::RegisterTest()
     const auto windowClassName = SYSTEM_TEXT("RegisterTestingClassName"s);
     const auto windowMenuName = SYSTEM_TEXT("RegisterTestingMenuName"s);
 
-    auto newWindowClassName = windowClassName + System::ToString(count++);
+    const auto newWindowClassName = windowClassName + System::ToString(count++);
 
-    EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
-    WindowPictorial windowPictorial{ System::WindowsBrushTypes::WhiteBrush };
-    WindowName windowName{ newWindowClassName, windowMenuName };
-    WindowRegisterHandle<WindowProcessInterface> windowRegister{ environmentDirectory, instance, "", windowPictorial, windowName };
+    const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
+    const WindowPictorial windowPictorial{ System::WindowsBrushTypes::WhiteBrush };
+    const WindowName windowName{ newWindowClassName, windowMenuName };
+    const WindowRegisterHandle<WindowProcessInterface> windowRegister{ environmentDirectory, instance, "", windowPictorial, windowName };
 
     ASSERT_EQUAL(windowRegister.GetHInstance(), instance);
     ASSERT_EQUAL(windowRegister.GetWindowClassName(), newWindowClassName);

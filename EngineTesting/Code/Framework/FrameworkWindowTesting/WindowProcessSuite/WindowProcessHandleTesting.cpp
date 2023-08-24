@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:09)
+///	版本：0.9.1.3 (2023/08/10 15:45)
 
 #include "WindowProcessHandleTesting.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
@@ -19,13 +19,8 @@
 
 using namespace std::literals;
 
-namespace Framework
-{
-    using TestingType = WindowProcessInterface;
-}
-
-Framework::WindowProcessHandleTesting::WindowProcessHandleTesting(const OStreamShared& stream, HWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+Framework::WindowProcessHandleTesting::WindowProcessHandleTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream }, hWnd{ hWnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -46,8 +41,8 @@ void Framework::WindowProcessHandleTesting::MainTest()
 
 void Framework::WindowProcessHandleTesting::BaseTest()
 {
-    EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-    TestingType process{ System::gMicroseconds / 60, environmentDirectory };
+    const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
+    WindowProcessInterface process{ System::gMicroseconds / 60, environmentDirectory };
 
     ASSERT_UNEQUAL_NULL_PTR(process.GetFunction());
     ASSERT_UNEQUAL_NULL_PTR(process.GetProcess());
@@ -61,14 +56,14 @@ void Framework::WindowProcessHandleTesting::BaseTest()
 void Framework::WindowProcessHandleTesting::ClassNameTest()
 {
     System::String className{};
-    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
+    ASSERT_TRUE(System::GetSystemClassName(hWnd, className));
 
-    EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-    TestingType process{ System::gMicroseconds / 60, environmentDirectory };
+    const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
+    WindowProcessInterface process{ System::gMicroseconds / 60, environmentDirectory };
 
     ASSERT_TRUE(process.IsClassNameExist(className));
 
-    auto newClassName = SYSTEM_TEXT("New Class 2"s);
+    const auto newClassName = SYSTEM_TEXT("New Class 2"s);
 
     ASSERT_TRUE(process.SetNewClassName(newClassName));
 
@@ -77,8 +72,8 @@ void Framework::WindowProcessHandleTesting::ClassNameTest()
 
 void Framework::WindowProcessHandleTesting::HWndTest()
 {
-    EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-    TestingType process{ System::gMicroseconds / 60, environmentDirectory };
+    const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
+    WindowProcessInterface process{ System::gMicroseconds / 60, environmentDirectory };
 
-    ASSERT_EQUAL_NULL_PTR(process.GetMainWindowHwnd());
+    ASSERT_EQUAL_NULL_PTR(process.GetMainWindowHWnd());
 }

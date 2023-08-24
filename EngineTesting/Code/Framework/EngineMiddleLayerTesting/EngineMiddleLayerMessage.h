@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 18:16)
+///	版本：0.9.1.3 (2023/08/11 14:12)
 
 #ifndef ENGINE_MIDDLE_LAYER_TESTING_ENGINE_MIDDLE_LAYER_MESSAGE_H
 #define ENGINE_MIDDLE_LAYER_TESTING_ENGINE_MIDDLE_LAYER_MESSAGE_H
@@ -37,19 +37,24 @@ namespace EngineMiddleLayer
                                                                   Framework::GUIManagerInterface>;
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
-    class EngineMiddleLayerMessage : public MessageType
+    class EngineMiddleLayerMessage final : public MessageType
     {
     public:
         using ClassType = EngineMiddleLayerMessage;
         using ParentType = MessageType;
 
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        EngineMiddleLayerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        EngineMiddleLayerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+
+    private:
+        ConsoleAlloc alloc;
     };
 
     using EngineMiddleLayerTesting = Framework::WindowProcessHandle<EngineMiddleLayerMessage>;

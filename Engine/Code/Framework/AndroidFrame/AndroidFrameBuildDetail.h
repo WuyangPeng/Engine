@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:51)
+///	版本：0.9.1.3 (2023/08/09 20:47)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_FRAME_BUILD_DETAIL_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_FRAME_BUILD_DETAIL_H
@@ -24,21 +24,17 @@ Framework::AndroidFrameBuild<AndroidProcess>::AndroidFrameBuild(AndroidApp* stat
 
     if (!(androidProcess.PreCreate() && InitApplication()))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("创建窗口失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("创建窗口失败！"s))
     }
 
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 template <typename AndroidProcess>
 bool Framework::AndroidFrameBuild<AndroidProcess>::InitApplication()
 {
-    MAYBE_UNUSED const auto result = System::CreateVirtualWindow(state, SYSTEM_TEXT("Android Virtual Window"), androidProcess.GetAppCmd(), androidProcess.GetInputEvent());
-
-    MAYBE_UNUSED const auto closeButton = System::RemoveConsoleCloseButton();
-
-    return true;
+    return (System::CreateVirtualWindow(state, SYSTEM_TEXT("Android Virtual Window"), androidProcess.GetAppCmd(), androidProcess.GetInputEvent()) != nullptr) &&
+           System::RemoveConsoleCloseButton();
 }
 
 #ifdef OPEN_CLASS_INVARIANT

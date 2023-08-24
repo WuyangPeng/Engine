@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:50)
+///	版本：0.9.1.3 (2023/08/09 15:23)
 
 #include "Framework/FrameworkExport.h"
 
@@ -18,17 +18,34 @@
 Framework::FontInformation::FontInformation(PlatformTypes type)
     : impl{ CoreTools::ImplCreateUseFactory::Default, type }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::FontInformation::FontInformation(WindowsHWnd hwnd)
-    : impl{ CoreTools::ImplCreateUseFactory::Default, hwnd }
+Framework::FontInformation::FontInformation(WindowsHWnd hWnd)
+    : impl{ CoreTools::ImplCreateUseFactory::Default, hWnd }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, FontInformation)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Framework, FontInformation, GetStringWidth, String, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, FontInformation, GetCharacterWidth, const TChar, int);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, FontInformation, GetFontHeight, int);
+int Framework::FontInformation::GetStringWidth(const String& text) const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetStringWidth(text);
+}
+
+int Framework::FontInformation::GetCharacterWidth(TChar character) const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetCharacterWidth(character);
+}
+
+int Framework::FontInformation::GetFontHeight() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFontHeight();
+}

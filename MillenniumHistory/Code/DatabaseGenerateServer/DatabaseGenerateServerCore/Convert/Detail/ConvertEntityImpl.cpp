@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/30 22:03)
+///	版本：0.9.1.3 (2023/07/31 21:57)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/DatabaseGenerateServerCoreExport.h"
 
@@ -157,7 +157,7 @@ DatabaseEntity::CharacterEntity DatabaseGenerateServerCore::ConvertEntityImpl::C
     characterEntity.SetFamily(CoreTools::StringConversion::StandardConversionUtf8(character.GetFamily()));
     characterEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(character.GetName()));
     characterEntity.SetFullName(CoreTools::StringConversion::StandardConversionUtf8(character.GetFullName()));
-    characterEntity.SetAlias(Convert(character.GetAliasBegin(), character.GetAliasBegin()));
+    characterEntity.SetAlias(Convert(character.GetAliasBegin(), character.GetAliasEnd()));
     characterEntity.SetStyleName(CoreTools::StringConversion::StandardConversionUtf8(character.GetStyleName()));
     characterEntity.SetSex(character.GetSex());
     characterEntity.SetFather(character.GetFather());

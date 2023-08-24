@@ -5,15 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:42)
+///	版本：0.9.1.3 (2023/08/09 15:01)
 
 #ifndef FRAMEWORK_APPLICATION_GLUT_WINDOW_APPLICATION_INFORMATION_IMPL_H
 #define FRAMEWORK_APPLICATION_GLUT_WINDOW_APPLICATION_INFORMATION_IMPL_H
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Helper/ExportMacro.h"
 #include "Framework/OpenGLGlutFrame/OpenGLGlutFrameFwd.h"
 
 namespace Framework

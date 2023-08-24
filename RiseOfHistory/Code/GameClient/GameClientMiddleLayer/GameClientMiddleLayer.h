@@ -10,7 +10,6 @@
 #ifndef GAME_CLIENT_MIDDLE_LAYER_H
 #define GAME_CLIENT_MIDDLE_LAYER_H
 
-#include "ArtificialIntelligence/ArtificialIntelligence.h"
 #include "Audio/Audio.h"
 #include "CameraSystems/CameraSystems.h"
 #include "Event/Event.h"
@@ -24,5 +23,6 @@
 #include "System/System.h"
 #include "Network/Network.h"
 #include "Rendering/Rendering.h"
+#include "ArtificialIntelligence/ArtificialIntelligence.h"
 
 #endif  // GAME_CLIENT_MIDDLE_LAYER_H

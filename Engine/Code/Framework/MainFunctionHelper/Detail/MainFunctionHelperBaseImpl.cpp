@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:40)
+///	版本：0.9.1.3 (2023/08/08 19:40)
 
 #include "Framework/FrameworkExport.h"
 
@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
-Framework::MainFunctionHelperBaseImpl::MainFunctionHelperBaseImpl(const EnvironmentDirectory& environmentDirectory) noexcept
-    : environmentDirectory{ environmentDirectory }
+Framework::MainFunctionHelperBaseImpl::MainFunctionHelperBaseImpl(EnvironmentDirectory environmentDirectory) noexcept
+    : environmentDirectory{ std::move(environmentDirectory) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }

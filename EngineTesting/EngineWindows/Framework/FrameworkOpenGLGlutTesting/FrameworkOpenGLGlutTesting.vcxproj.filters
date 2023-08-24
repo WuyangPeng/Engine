@@ -57,6 +57,9 @@
     <ClCompile Include="..\..\..\Code\Framework\FrameworkOpenGLGlutTesting\TestingMain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkOpenGLGlutTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessOpenGLGlutCallBack.cpp">
+      <Filter>OpenGLGlutFrameSuite 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Framework\FrameworkOpenGLGlutTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackTesting.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Framework\FrameworkOpenGLGlutTesting\TestingHelper.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkOpenGLGlutTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessOpenGLGlutCallBack.h">
+      <Filter>OpenGLGlutFrameSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

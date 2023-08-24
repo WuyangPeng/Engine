@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:04)
+///	版本：0.9.1.3 (2023/08/12 15:26)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_RESOURCE_MANAGER_INTERFACE_TESTING_H
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_RESOURCE_MANAGER_INTERFACE_TESTING_H
@@ -14,7 +14,7 @@
 
 namespace Framework
 {
-    class ResourceManagerInterfaceTesting : public MiddleLayerInterfaceTestingBase
+    class ResourceManagerInterfaceTesting final : public MiddleLayerInterfaceTestingBase
     {
     public:
         using ClassType = ResourceManagerInterfaceTesting;
@@ -43,7 +43,7 @@ namespace Framework
         void SetRenderingManagerTest();
         void SetGUIManagerTest();
 
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
     };
 }
 

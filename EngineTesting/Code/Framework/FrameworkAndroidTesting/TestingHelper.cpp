@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 18:21)
+///	版本：0.9.1.3 (2023/08/11 14:18)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -13,7 +13,7 @@
 #include "Framework/AndroidFrame/AndroidProcessDetail.h"
 
 Framework::TestingHelper::TestingHelper(AndroidApp* state, const Framework::EnvironmentDirectory& environmentDirectory)
-    : ParentType(state, environmentDirectory)
+    : ParentType{ state, environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }

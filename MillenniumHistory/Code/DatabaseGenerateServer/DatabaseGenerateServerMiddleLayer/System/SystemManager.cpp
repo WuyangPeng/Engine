@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/18 22:27)
+///	版本：0.9.1.3 (2023/08/09 22:23)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerMiddleLayer/DatabaseGenerateServerMiddleLayerExport.h"
 
@@ -31,9 +31,8 @@ bool DatabaseGenerateServerMiddleLayer::SystemManager::Idle(int64_t timeDelta)
 
     const auto resource = GetResourceManager<ResourceManager>();
 
-    const auto ancientBooksContainer = resource->GetAncientBooksContainer();
-
-    if (ancientBooksContainer != nullptr)
+    if (const auto ancientBooksContainer = resource->GetAncientBooksContainer();
+        ancientBooksContainer != nullptr)
     {
         return impl->Idle(*ancientBooksContainer);
     }

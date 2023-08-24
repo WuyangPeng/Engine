@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:11)
+///	版本：0.9.1.3 (2023/08/04 15:53)
 
 #ifndef FRAMEWORK_WINDOW_CREATE_WINDOW_INSTANCE_PARAMETER_IMPL_H
 #define FRAMEWORK_WINDOW_CREATE_WINDOW_INSTANCE_PARAMETER_IMPL_H
@@ -23,11 +23,12 @@ namespace Framework
     {
     public:
         using ClassType = WindowInstanceParameterImpl;
+
         using String = System::String;
         using WindowsHInstance = System::WindowsHInstance;
 
     public:
-        WindowInstanceParameterImpl(WindowsHInstance instance, const String& className);
+        WindowInstanceParameterImpl(WindowsHInstance instance, String className);
 
         CLASS_INVARIANT_DECLARE;
 

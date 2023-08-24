@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:02)
+///	版本：0.9.1.3 (2023/08/12 15:21)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_CAMERA_MIDDLE_LAYER_TESTING_H
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_CAMERA_MIDDLE_LAYER_TESTING_H
@@ -24,9 +24,10 @@ namespace Framework
     public:
         using ClassType = CameraMiddleLayerTesting;
         using ParentType = UnitTest;
-        using APointf = Mathematics::APointF;
-        using AVectorf = Mathematics::AVectorF;
-        using Matrixf = Mathematics::MatrixF;
+
+        using APoint = Mathematics::APointF;
+        using AVector = Mathematics::AVectorF;
+        using Matrix = Mathematics::MatrixF;
         using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
         using Transform = Rendering::TransformF;
 
@@ -39,15 +40,15 @@ namespace Framework
         NODISCARD float CalculateMultiplier(const WindowSize& windowSize);
         NODISCARD float GetXTrack(int x, float multiplier, const WindowSize& windowSize) const noexcept;
         NODISCARD float GetYTrack(int y, float multiplier, const WindowSize& windowSize) const noexcept;
-        NODISCARD Transform CalculateTransform(const Transform& original, NumericalValueSymbol doValue, float speed, const AVectorf& axis);
-        NODISCARD AVectorf Calculate3DVector(float xTrack, float yTrack) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        NODISCARD float CalculateAngle(const AVectorf& axis, float dot) noexcept(gAssert < 3 || gMathematicsAssert < 3);
-        NODISCARD AVectorf CalculateAxis(const AVectorf& axis, float dot, float xBeginTrack, float yBeginTrack);
+        NODISCARD Transform CalculateTransform(const Transform& original, NumericalValueSymbol doValue, float speed, const AVector& axis);
+        NODISCARD AVector Calculate3DVector(float xTrack, float yTrack) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD float CalculateAngle(const AVector& axis, float dot) noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        NODISCARD AVector CalculateAxis(const AVector& axis, float dot, float xBeginTrack, float yBeginTrack);
 
-        void APointTest(const APointf& lhs, const APointf& rhs, const std::string& functionName, int index);
-        void AVectorTest(const AVectorf& lhs, const AVectorf& rhs, const std::string& functionName, int index);
+        void APointTest(const APoint& lhs, const APoint& rhs, const std::string& functionName, int index);
+        void AVectorTest(const AVector& lhs, const AVector& rhs, const std::string& functionName, int index);
         void TransformTest(const Transform& lhs, const Transform& rhs, const std::string& functionName, int index);
-        void MatrixTest(const Matrixf& lhs, const Matrixf& rhs, const std::string& functionName, int index);
+        void MatrixTest(const Matrix& lhs, const Matrix& rhs, const std::string& functionName, int index);
     };
 }
 

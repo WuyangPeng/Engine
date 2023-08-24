@@ -5,31 +5,28 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:08)
+///	版本：0.9.1.3 (2023/08/04 14:58)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowMessageUnitTestSuiteStream.h"
-#include "System/Helper/PragmaWarning.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Windows/WindowsProcess.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Command/CommandHandle.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::WindowMessageUnitTestSuiteStream::WindowMessageUnitTestSuiteStream(bool usecommand)
-    : oStreamShared{ GenerateStreamShared(usecommand) }
+Framework::WindowMessageUnitTestSuiteStream::WindowMessageUnitTestSuiteStream(bool useCommand)
+    : oStreamShared{ GenerateStreamShared(useCommand) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-// static
-// private
-Framework::WindowMessageUnitTestSuiteStream::CommandSharedPtr Framework::WindowMessageUnitTestSuiteStream::GenerateCommandSharedPtr(bool usecommand)
+Framework::WindowMessageUnitTestSuiteStream::CommandSharedPtr Framework::WindowMessageUnitTestSuiteStream::GenerateCommandSharedPtr(bool useCommand)
 {
-    if (usecommand)
+    if (useCommand)
     {
-        auto commandLine = GetMultiByteCommandLine();
+        const auto commandLine = GetMultiByteCommandLine();
 
         return std::make_shared<Command>(commandLine.c_str());
     }
@@ -39,15 +36,12 @@ Framework::WindowMessageUnitTestSuiteStream::CommandSharedPtr Framework::WindowM
     }
 }
 
-// static
-// private
-Framework::WindowMessageUnitTestSuiteStream::OStreamShared Framework::WindowMessageUnitTestSuiteStream::GenerateStreamShared(bool usecommand)
+Framework::WindowMessageUnitTestSuiteStream::OStreamShared Framework::WindowMessageUnitTestSuiteStream::GenerateStreamShared(bool useCommand)
 {
-    auto command = GenerateCommandSharedPtr(usecommand);
+    const auto command = GenerateCommandSharedPtr(useCommand);
 
-    const auto isFile = (command != nullptr) && (command->GetExcessArgumentsCount() != 0);
-
-    if (isFile)
+    if (const auto isFile = (command != nullptr) && (command->GetExcessArgumentsCount() != 0);
+        isFile)
     {
         return OStreamShared{ command->GetFileName() };
     }
@@ -57,11 +51,10 @@ Framework::WindowMessageUnitTestSuiteStream::OStreamShared Framework::WindowMess
     }
 }
 
-// static
-// private
 std::string Framework::WindowMessageUnitTestSuiteStream::GetMultiByteCommandLine()
 {
-    auto commandLine = System::GetSystemCommandLine();
+    const auto commandLine = System::GetSystemCommandLine();
+
     return CoreTools::StringConversion::StandardConversionMultiByte(commandLine);
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:50)
+///	版本：0.9.1.3 (2023/08/11 19:34)
 
 #include "WindowPointTesting.h"
 #include "System/Windows/Flags/WindowsFlags.h"
@@ -15,13 +15,6 @@
 #include "Framework/WindowCreate/WindowPoint.h"
 
 #include <random>
-
-namespace Framework
-{
-    using TestingType = WindowPoint;
-
-    constexpr System::WindowsWord g_WordShift{ 16 };
-}
 
 Framework::WindowPointTesting::WindowPointTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -46,7 +39,7 @@ void Framework::WindowPointTesting::MainTest()
 
 void Framework::WindowPointTesting::DefaultTest() noexcept
 {
-    constexpr TestingType windowPoint{};
+    constexpr WindowPoint windowPoint{};
 
     static_assert(0 == windowPoint.GetWindowX());
     static_assert(0 == windowPoint.GetWindowY());
@@ -60,29 +53,28 @@ void Framework::WindowPointTesting::RandomTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> random{ minValue, maxValue };
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto x = random(generator);
         const auto y = random(generator);
 
-        const TestingType point1(x, y);
+        const WindowPoint point0{ x, y };
 
-        ASSERT_EQUAL(x, point1.GetWindowX());
-        ASSERT_EQUAL(y, point1.GetWindowY());
+        ASSERT_EQUAL(x, point0.GetWindowX());
+        ASSERT_EQUAL(y, point0.GetWindowY());
 
-        const TestingType::Point point2{ x, y };
+        const WindowPoint::WindowsPoint point1{ x, y };
 
-        const TestingType point3(point2);
+        const WindowPoint point2{ point1 };
 
-        ASSERT_EQUAL(x, point3.GetWindowX());
-        ASSERT_EQUAL(y, point3.GetWindowY());
+        ASSERT_EQUAL(x, point2.GetWindowX());
+        ASSERT_EQUAL(y, point2.GetWindowY());
     }
 }
 
 void Framework::WindowPointTesting::WindowPointUseTest() noexcept
 {
-    constexpr TestingType windowPoint{ System::WindowsPointUse::Default };
+    constexpr WindowPoint windowPoint{ System::WindowsPointUse::Default };
 
     static_assert(System::EnumCastUnderlying(System::WindowsPointUse::Default) == windowPoint.GetWindowX());
     static_assert(System::EnumCastUnderlying(System::WindowsPointUse::Default) == windowPoint.GetWindowY());
@@ -96,15 +88,14 @@ void Framework::WindowPointTesting::LParamTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> random{ minValue, maxValue };
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto x = random(generator);
         const auto y = random(generator);
 
-        const auto lParam = x + (y << Framework::g_WordShift);
+        const auto lParam = x + (y << gWordShift);
 
-        const TestingType windowPoint{ lParam };
+        const WindowPoint windowPoint{ lParam };
 
         ASSERT_EQUAL(x, windowPoint.GetWindowX());
         ASSERT_EQUAL(y, windowPoint.GetWindowY());
@@ -119,14 +110,13 @@ void Framework::WindowPointTesting::EqualTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> random(minValue, maxValue);
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const int x = random(generator);
         const int y = random(generator);
 
-        const TestingType lhsPoint(x, y);
-        TestingType rhsPoint;
+        const WindowPoint lhsPoint{ x, y };
+        WindowPoint rhsPoint{};
 
         ASSERT_UNEQUAL(lhsPoint, rhsPoint);
         ASSERT_EQUAL(lhsPoint, lhsPoint);
@@ -138,7 +128,7 @@ void Framework::WindowPointTesting::EqualTest()
     }
 }
 
-void Framework::WindowPointTesting::OstreamTest()
+void Framework::WindowPointTesting::OStreamTest()
 {
     constexpr auto minValue = 0;
     constexpr auto maxValue = 2048;
@@ -146,13 +136,12 @@ void Framework::WindowPointTesting::OstreamTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> random{ minValue, maxValue };
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const int x = random(generator);
         const int y = random(generator);
 
-        const TestingType point(x, y);
+        const WindowPoint point{ x, y };
 
         GetStream() << point << '\n';
     }
@@ -160,9 +149,9 @@ void Framework::WindowPointTesting::OstreamTest()
 
 namespace Framework
 {
-    constexpr TestingType GetWindowPointSum(const TestingType& lhs, const TestingType& rhs)
+    constexpr WindowPoint GetWindowPointSum(const WindowPoint& lhs, const WindowPoint& rhs)
     {
-        TestingType sum{};
+        WindowPoint sum{};
 
         sum.SetWindowPoint(lhs.GetWindowX() + rhs.GetWindowX(), lhs.GetWindowY() + rhs.GetWindowY());
 
@@ -174,27 +163,27 @@ void Framework::WindowPointTesting::ConstexprTest() noexcept
 {
     constexpr auto x = 1;
     constexpr auto y = 2;
-    constexpr auto lParam = x + (y << Framework::g_WordShift);
+    constexpr auto lParam = x + (y << gWordShift);
 
-    constexpr TestingType windowPoint1{ x, y };
+    constexpr WindowPoint windowPoint0{ x, y };
+
+    static_assert(x == windowPoint0.GetWindowX());
+    static_assert(y == windowPoint0.GetWindowY());
+
+    constexpr WindowPoint windowPoint1{ lParam };
 
     static_assert(x == windowPoint1.GetWindowX());
     static_assert(y == windowPoint1.GetWindowY());
 
-    constexpr TestingType windowPoint2{ lParam };
+    constexpr WindowPoint::WindowsPoint point{ x, y };
+
+    constexpr WindowPoint windowPoint2{ point };
 
     static_assert(x == windowPoint2.GetWindowX());
     static_assert(y == windowPoint2.GetWindowY());
 
-    constexpr TestingType::Point point{ x, y };
+    constexpr auto windowPoint3 = GetWindowPointSum(windowPoint0, windowPoint1);
 
-    constexpr TestingType windowPoint3{ point };
-
-    static_assert(x == windowPoint3.GetWindowX());
-    static_assert(y == windowPoint3.GetWindowY());
-
-    constexpr auto windowPoint4 = GetWindowPointSum(windowPoint1, windowPoint2);
-
-    static_assert(x + x == windowPoint4.GetWindowX());
-    static_assert(y + y == windowPoint4.GetWindowY());
+    static_assert(x + x == windowPoint3.GetWindowX());
+    static_assert(y + y == windowPoint3.GetWindowY());
 }

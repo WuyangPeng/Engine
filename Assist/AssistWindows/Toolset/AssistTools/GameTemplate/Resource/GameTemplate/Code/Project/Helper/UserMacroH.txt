@@ -1,0 +1,32 @@
+$Copyright$
+
+#ifndef $ProjectCapital$_USER_MACRO_H
+#define $ProjectCapital$_USER_MACRO_H
+
+#include "Framework/Helper/UserMacro.h"
+
+#define $ProjectCapital$_ClOSE_BEGIN (0x01)
+
+#define CLOSE_USE_$ProjectCapital$ ($ProjectCapital$_ClOSE_BEGIN)
+
+#define $ProjectCapital$_ClOSE_END CLOSE_USE_$ProjectCapital$
+
+#define CLOSE_$ProjectCapital$_MAX (($ProjectCapital$_ClOSE_END << 1) - 1)
+
+// 编译测试（默认为0，最大值为0x01）
+#define COMPILE_$ProjectCapital$_CLOSE 0x00
+
+static_assert(0 <= COMPILE_$ProjectCapital$_CLOSE, "COMPILE_$ProjectCapital$_CLOSE Must be greater than or equal 0.");
+static_assert(COMPILE_$ProjectCapital$_CLOSE <= CLOSE_$ProjectCapital$_MAX, "COMPILE_$ProjectCapital$_CLOSE Must be less than or equal CLOSE_$ProjectCapital$_MAX.");
+
+#if !defined(COMPILE_$ProjectCapital$_CLOSE) || (COMPILE_$ProjectCapital$_CLOSE & CLOSE_USE_$ProjectCapital$) != CLOSE_USE_$ProjectCapital$
+
+#endif  // !defined(COMPILE_$ProjectCapital$_CLOSE) || (COMPILE_$ProjectCapital$_CLOSE & CLOSE_USE_$ProjectCapital$) != CLOSE_USE_$ProjectCapital$
+
+#ifdef BUILDING_STATIC
+
+    #define BUILDING_$ProjectCapital$_STATIC (static_cast<void>(0))
+
+#endif  // BUILDING_STATIC
+
+#endif  // $ProjectCapital$_USER_MACRO_H

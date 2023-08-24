@@ -1,23 +1,47 @@
 @ingroup group_Documentation
 
-Threading Core Render Engine 0.9.1.3
+Threading Core Render Engine 0.9.1.4
 
 ----------------------------
 更新日志
 ----------------------------
-0.9.1.3（2023/08/01——2023/08/31）
+0.9.1.4（2023/08/25——2023/09/30）
 
 	完成功能： 
-	（引擎）
-	+ CSV代码生成改成文本。@  
-	+ 网络库修改成统一接口。@  
-	+ 生成辅助工程功能修复。@  
+	（引擎）	
+	+ AssistTools代码整理。@	
+	+ 生成辅助测试工程功能修复。@	
+	+ CoreTools代码整理。@
+	+ CSV代码生成改成文本。@ 	
+	+ Network代码整理。@
+	+ 网络库修改成统一接口。@ 
+	+ System代码整理。@	
+	+ Mathematics代码整理。@
+	+ Rendering代码整理。@		
 	+ 引擎正常显示图片。@ 
 	+ 引擎正常显示文字。@  
 	
 	（历史） 
 	+ 历史配置导入数据库。 @	
 	+ http服务器创建。 @
+	
+----------------------------
+0.9.1.3（2023/08/01——2023/08/24）
+
+	完成功能： 
+	（引擎）
+	+ UserInterface代码整理。
+	+ Animation代码整理。
+	+ ArtificialIntelligence代码整理。	
+	+ Imagics代码整理。
+	+ InputOutput代码整理。	
+	+ Physics代码整理。	
+	+ ResourceManager代码整理。 
+	+ Script代码整理。
+	+ SoundEffect代码整理。		
+	+ Framework代码整理。	
+	+ Database代码整理。
+	+ 生成辅助工程功能修复。
 	
 ----------------------------
 0.9.1.2（2023/07/22——2023/07/31）

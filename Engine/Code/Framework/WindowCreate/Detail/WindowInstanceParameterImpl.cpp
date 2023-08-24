@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:13)
+///	版本：0.9.1.3 (2023/08/04 15:54)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,14 +13,12 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using namespace std::literals;
-
-Framework::WindowInstanceParameterImpl::WindowInstanceParameterImpl(WindowsHInstance instance, const String& className)
-    : hInstance{ instance }, className{ className }
+Framework::WindowInstanceParameterImpl::WindowInstanceParameterImpl(WindowsHInstance instance, String className)
+    : hInstance{ instance }, className{ std::move(className) }
 {
     if (instance == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("窗口实例不存在。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("窗口实例不存在。"s))
     }
 
     FRAMEWORK_SELF_CLASS_IS_VALID_1;

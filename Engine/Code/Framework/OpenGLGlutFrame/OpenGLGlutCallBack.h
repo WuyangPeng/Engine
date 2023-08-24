@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:16)
+///	版本：0.9.1.3 (2023/08/05 13:59)
 
-#ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_CALL_BACK_H
-#define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_CALL_BACK_H
+#ifndef FRAMEWORK_OPEN_GL_GLUT_FRAME_OPEN_GL_GLUT_CALL_BACK_H
+#define FRAMEWORK_OPEN_GL_GLUT_FRAME_OPEN_GL_GLUT_CALL_BACK_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "OpenGLGlutCallBackInterface.h"
 #include "CoreTools/Time/CustomTime.h"
@@ -20,9 +22,9 @@ namespace Framework
     class OpenGLGlutCallBack : public OpenGLGlutCallBackInterface
     {
     public:
-        using MiddleLayerType = MiddleLayer;
-        using ClassType = OpenGLGlutCallBack<MiddleLayerType>;
+        using ClassType = OpenGLGlutCallBack<MiddleLayer>;
         using ParentType = OpenGLGlutCallBackInterface;
+
         using CustomTime = CoreTools::CustomTime;
 
     public:
@@ -45,13 +47,13 @@ namespace Framework
         void DestroyWindow() override;
 
     private:
-        using MiddleLayerTypeSharedPtr = std::shared_ptr<MiddleLayerType>;
+        using MiddleLayerTypeUniquePtr = std::unique_ptr<MiddleLayer>;
 
     private:
-        void SetGLUTModifiers(int aButton, int state) noexcept;
+        void SetGlutModifiers(int aButton, int state) noexcept;
 
     private:
-        MiddleLayerTypeSharedPtr middleLayer;
+        MiddleLayerTypeUniquePtr middleLayer;
         CustomTime lastTime;
         VirtualKeysTypes glutModifiers;
         MouseButtonsTypes button;
@@ -59,4 +61,4 @@ namespace Framework
     };
 }
 
-#endif  // FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_CALL_BACK_H
+#endif  // FRAMEWORK_OPEN_GL_GLUT_FRAME_OPEN_GL_GLUT_CALL_BACK_H

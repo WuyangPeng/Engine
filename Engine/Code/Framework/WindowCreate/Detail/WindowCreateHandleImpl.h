@@ -5,34 +5,37 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:11)
+///	版本：0.9.1.3 (2023/08/04 15:50)
 
 #ifndef FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_HANDLE_IMPL_H
 #define FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_HANDLE_IMPL_H
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Windows/Flags/WindowsFlags.h"
 #include "Framework/WindowCreate/WindowCreateParameter.h"
 #include "Framework/WindowCreate/WindowInstanceParameter.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
-#include <boost/noncopyable.hpp>
-
 namespace Framework
 {
-    class FRAMEWORK_HIDDEN_DECLARE WindowCreateHandleImpl : private boost::noncopyable
+    class FRAMEWORK_HIDDEN_DECLARE WindowCreateHandleImpl
     {
     public:
         using ClassType = WindowCreateHandleImpl;
+
         using WindowsHWnd = System::WindowsHWnd;
 
     public:
-        WindowCreateHandleImpl(const WindowInstanceParameter& windowInstanceParameter, const WindowCreateParameter& windowCreateParameter, const WindowSize& size);
+        WindowCreateHandleImpl(WindowInstanceParameter windowInstanceParameter, WindowCreateParameter windowCreateParameter, const WindowSize& size);
+        ~WindowCreateHandleImpl() noexcept = default;
+        WindowCreateHandleImpl(const WindowCreateHandleImpl& rhs) = delete;
+        WindowCreateHandleImpl& operator=(const WindowCreateHandleImpl& rhs) = delete;
+        WindowCreateHandleImpl(WindowCreateHandleImpl&& rhs) noexcept = delete;
+        WindowCreateHandleImpl& operator=(WindowCreateHandleImpl&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD WindowsHWnd GetHwnd() const noexcept;
+        NODISCARD WindowsHWnd GetHWnd() const noexcept;
 
         void SetMainWindow();
 
@@ -43,7 +46,7 @@ namespace Framework
         WindowInstanceParameter windowInstanceParameter;
         WindowCreateParameter windowCreateParameter;
         WindowSize size;
-        WindowsHWnd hwnd;
+        WindowsHWnd hWnd;
     };
 }
 

@@ -5,22 +5,32 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:02)
+///	版本：0.9.1.3 (2023/08/03 19:33)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowName.h"
 #include "Detail/WindowNameImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Framework::WindowName::WindowName(const String& className, const String& menuName)
     : impl{ className, menuName }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowName)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, WindowName, GetWindowClassName, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, WindowName, GetWindowMenuName, System::String)
+System::String Framework::WindowName::GetWindowClassName() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWindowClassName();
+}
+
+System::String Framework::WindowName::GetWindowMenuName() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWindowMenuName();
+}

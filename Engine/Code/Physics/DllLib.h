@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 16:34)
+///	版本：0.9.1.3 (2023/08/02 14:01)
 
 #ifndef PHYSICS_DLL_LIB_H
 #define PHYSICS_DLL_LIB_H
@@ -16,11 +16,11 @@
 #include "CoreTools/CoreToolsLib.h"
 #include "Mathematics/MathematicsLib.h"
 
-#ifdef MATHEMATICS_TEMPLATE_TEST
+#ifdef PHYSICS_TEMPLATE_TEST
 
     #include "Rendering/RenderingLib.h"
 
-#endif  // MATHEMATICS_TEMPLATE_TEST
+#endif  // PHYSICS_TEMPLATE_TEST
 
 #if defined(TCRE_USE_MSVC)
 

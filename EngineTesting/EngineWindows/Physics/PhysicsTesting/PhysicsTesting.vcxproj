@@ -174,9 +174,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/CollisionDetectionSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CollisionDetectionSuite/" /F /Y</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
@@ -188,9 +185,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/CollisionDetectionSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CollisionDetectionSuite/" /F /Y</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -206,9 +200,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/CollisionDetectionSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CollisionDetectionSuite/" /F /Y</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -224,9 +215,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/CollisionDetectionSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CollisionDetectionSuite/" /F /Y</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -238,9 +226,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/CollisionDetectionSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CollisionDetectionSuite/" /F /Y</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
@@ -252,9 +237,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/CollisionDetectionSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CollisionDetectionSuite/" /F /Y</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -270,9 +252,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/CollisionDetectionSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CollisionDetectionSuite/" /F /Y</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -288,9 +267,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/CollisionDetectionSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CollisionDetectionSuite/" /F /Y</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json" />
@@ -298,15 +274,10 @@
     <None Include="Configuration\PhysicsTesting.json" />
     <None Include="Configuration\Renderer.json" />
     <None Include="Configuration\Testing.json" />
-    <None Include="Resource\CollisionDetectionSuite\TrianglesMesh.trv" />
     <None Include="Resource\ReadMe.md" />
     <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeChildTesting.h" />
-    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeProjectionInfoTesting.h" />
-    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeSplitTrianglesTesting.h" />
-    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeTesting.h" />
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\CollisionDetectionSuite.h" />
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\FluidSuite\FluidSuite.h" />
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\HelperSuite\HelperSuite.h" />
@@ -319,10 +290,6 @@
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\TestingHelper.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeChildTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeProjectionInfoTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeSplitTrianglesTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\TestingMain.cpp" />

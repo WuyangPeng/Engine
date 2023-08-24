@@ -3,7 +3,6 @@
   "RobotClient": 1,
   "MessageClient": 1,
   "BackgroundClient": 1,
-
   "GatewayServer": 1,
   "LoginServer": 1,
   "GameServer": 1,
@@ -17,7 +16,7 @@
   "LogServer": 1,
   "GameMasterServer": 1,
   "ServerManager": 1,
-  "BackgroundServer": 1,
   "UpdateServer": 1,
+  "BackgroundServer": 1,
   "DatabaseServer": 1
 }

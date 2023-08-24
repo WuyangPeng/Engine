@@ -1,0 +1,16 @@
+$Copyright$
+
+#include "$ModuleName$$CoreName$Export.h"
+
+#include "$ModuleName$$CoreName$Fwd.h"
+#include "$CoreName$Tools/Helper/MainFunctionMacro.h"
+
+#ifndef BUILDING_$ModuleUppercase$_CORE_STATIC
+
+DLL_MAIN_FUNCTION($ModuleName$$CoreName$);
+
+#else  // !BUILDING_$ModuleUppercase$_CORE_STATIC
+
+CORE_TOOLS_MUTEX_INIT($ModuleName$$CoreName$);
+
+#endif  // BUILDING_$ModuleUppercase$_CORE_STATIC

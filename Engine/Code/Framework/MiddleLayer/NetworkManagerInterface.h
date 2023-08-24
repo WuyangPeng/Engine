@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:22)
+///	版本：0.9.1.3 (2023/08/07 10:57)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_NETWORK_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_NETWORK_MANAGER_INTERFACE_H
@@ -19,19 +19,21 @@
 #include "Network/NetworkMessage/NetworkMessageFwd.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 
-EXPORT_SHARED_PTR(Framework, NetworkManagerImpl, FRAMEWORK_DEFAULT_DECLARE);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(NetworkManagerImpl);
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
+// 网络接口，与外部实体间的通信，其中包括游戏或硬件设备、匹配服务等。
 namespace Framework
 {
-    // 网络接口，与外部实体间的通信，其中包括游戏或硬件设备、匹配服务等。
     class FRAMEWORK_DEFAULT_DECLARE NetworkManagerInterface : public EngineMiddleLayerInterface
     {
     public:
         using NetworkManagerInterfaceImpl = EngineMiddleLayerInterfaceImpl;
         NON_COPY_TYPE_DECLARE(NetworkManagerInterface);
-        using SocketType = Network::SocketType;
         using ParentType = EngineMiddleLayerInterface;
+
+        using SocketData = Network::SocketData;
+        using SocketType = Network::SocketType;
         using MessageEventPriority = Network::MessageEventPriority;
         using MessageInterfaceSharedPtr = Network::MessageInterfaceSharedPtr;
         using NetworkMessageEventSharedPtr = Network::NetworkMessageEventSharedPtr;
@@ -41,11 +43,6 @@ namespace Framework
 
     public:
         NetworkManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
-        ~NetworkManagerInterface() noexcept = default;
-        NetworkManagerInterface(const NetworkManagerInterface& rhs) noexcept = delete;
-        NetworkManagerInterface& operator=(const NetworkManagerInterface& rhs) noexcept = delete;
-        NetworkManagerInterface(NetworkManagerInterface&& rhs) noexcept;
-        NetworkManagerInterface& operator=(NetworkManagerInterface&& rhs) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -53,8 +50,6 @@ namespace Framework
         NODISCARD bool Initialize() override;
         NODISCARD bool Destroy() override;
         NODISCARD bool Idle(int64_t timeDelta) override;
-
-        void Send(const Network::SocketData& socketData, uint64_t socketID, const MessageInterfaceSharedPtr& message);
 
         // 渲染中间层处理
         NODISCARD bool Paint() final;
@@ -73,22 +68,24 @@ namespace Framework
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
 
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Input);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(ObjectLogic);
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Input)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(ObjectLogic)
+
+        void Send(const SocketData& socketData, int64_t socketId, const MessageInterfaceSharedPtr& message);
 
     protected:
         NODISCARD SendSocketManagerSharedPtr GetSendSocketManager();
         NODISCARD ConstSendSocketManagerSharedPtr GetSendSocketManager() const;
 
     private:
-        using NetworkManagerImplPtr = std::shared_ptr<NetworkManagerImpl>;
+        using NetworkManagerPackageType = CoreTools::NonCopyImpl<NetworkManagerImpl>;
 
     private:
         virtual void RegisteredMessages();
 
     private:
         PackageType impl;
-        NetworkManagerImplPtr networkManager;
+        NetworkManagerPackageType networkManager;
     };
 
     using NetworkManagerInterfaceSharedPtr = std::shared_ptr<NetworkManagerInterface>;

@@ -73,9 +73,6 @@
     <Filter Include="MongoWrappersSuite 源文件">
       <UniqueIdentifier>{953d42a6-c18f-45e1-90ac-53d4b8a330a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DatabaseGenerateSuite 头文件">
-      <UniqueIdentifier>{7a51e024-10d5-4bb4-bd95-1bd8d38e8b66}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MysqlBoostWrappersSuite 头文件">
       <UniqueIdentifier>{6562ba92-9e65-4f84-b450-028d8b443183}</UniqueIdentifier>
     </Filter>
@@ -182,9 +179,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\MongoWrappersSuite\MongoWrappersSuite.h">
       <Filter>MongoWrappersSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseGenerateSuite\DatabaseGenerateSuite.h">
-      <Filter>DatabaseGenerateSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\StatementSuite\RedisStatementTesting.h">
       <Filter>StatementSuite 头文件</Filter>

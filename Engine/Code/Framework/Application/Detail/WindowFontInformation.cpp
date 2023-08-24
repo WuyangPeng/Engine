@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:49)
+///	版本：0.9.1.3 (2023/08/09 15:29)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,8 +13,8 @@
 #include "System/Windows/WindowsFontInformation.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::WindowFontInformation::WindowFontInformation(WindowsHWnd hwnd) noexcept
-    : hwnd{ hwnd }
+Framework::WindowFontInformation::WindowFontInformation(WindowsHWnd hWnd) noexcept
+    : hWnd{ hWnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -23,7 +23,7 @@ Framework::WindowFontInformation::WindowFontInformation(WindowsHWnd hwnd) noexce
 
 bool Framework::WindowFontInformation::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && hwnd != nullptr)
+    if (ParentType::IsValid() && hWnd != nullptr)
         return true;
     else
         return false;
@@ -31,23 +31,23 @@ bool Framework::WindowFontInformation::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-int Framework::WindowFontInformation::GetStringWidth(const String& text) const  
+int Framework::WindowFontInformation::GetStringWidth(const String& text) const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return System::GetStringWidth(hwnd, text);
+    return System::GetStringWidth(hWnd, text);
 }
 
 int Framework::WindowFontInformation::GetCharacterWidth(const TChar character) const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return System::GetCharacterWidth(hwnd, character);
+    return System::GetCharacterWidth(hWnd, character);
 }
 
 int Framework::WindowFontInformation::GetFontHeight() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return System::GetFontHeight(hwnd);
+    return System::GetFontHeight(hWnd);
 }

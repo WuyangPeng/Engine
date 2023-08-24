@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:23)
+///	版本：0.9.1.3 (2023/08/08 14:51)
 
 #include "Framework/FrameworkExport.h"
 
@@ -37,7 +37,7 @@ Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterf
 
     if (result == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("返回的middleLayer为空指针。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("返回的middleLayer为空指针。"s))
     }
 
     return result;
@@ -49,7 +49,7 @@ void Framework::EngineMiddleLayerInterfaceImpl::SetMiddleLayerInterface(int inde
 
     if (middleLayer == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("middleLayer为空指针。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("middleLayer为空指针。"s))
     }
 
     container.at(index) = middleLayer;

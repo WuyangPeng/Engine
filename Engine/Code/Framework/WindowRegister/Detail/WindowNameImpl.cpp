@@ -5,20 +5,24 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:02)
+///	版本：0.9.1.3 (2023/08/03 19:59)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowNameImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
-Framework::WindowNameImpl::WindowNameImpl(const String& className, const String& menuName)
-    : className{ className }, menuName{ menuName }
+Framework::WindowNameImpl::WindowNameImpl(String className, String menuName)
+    : className{ std::move(className) }, menuName{ std::move(menuName) }
 {
+    if (!IsValid())
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("className为空。"s))
+    }
+
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
-
-#ifdef OPEN_CLASS_INVARIANT
 
 bool Framework::WindowNameImpl::IsValid() const noexcept
 {
@@ -27,8 +31,6 @@ bool Framework::WindowNameImpl::IsValid() const noexcept
     else
         return false;
 }
-
-#endif  // OPEN_CLASS_INVARIANT
 
 System::String Framework::WindowNameImpl::GetWindowClassName() const
 {

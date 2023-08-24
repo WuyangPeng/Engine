@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:26)
+///	版本：0.9.1.3 (2023/08/11 20:43)
 
 #include "GLUTApplicationInformationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,11 +13,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/Application/GLUTApplicationInformation.h"
 #include "Framework/OpenGLGlutFrame/Flags/FrameParameter.h"
-
-namespace Framework
-{
-    using TestingType = GLUTApplicationInformation;
-}
 
 Framework::GLUTApplicationInformationTesting::GLUTApplicationInformationTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -43,7 +38,7 @@ void Framework::GLUTApplicationInformationTesting::InformationTest()
     constexpr auto minorVersion = 2;
     constexpr auto frame = FrameParameter::SixtyFrame;
 
-    TestingType information{ majorVersion, minorVersion, frame };
+    const GLUTApplicationInformation information{ majorVersion, minorVersion, frame };
 
     ASSERT_EQUAL(information.GetOpenGLMajorVersion(), majorVersion);
     ASSERT_EQUAL(information.GetOpenGLMinorVersion(), minorVersion);

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:22)
+///	版本：0.9.1.3 (2023/08/05 17:44)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_MODEL_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_MODEL_MIDDLE_LAYER_H
@@ -19,9 +19,9 @@
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(ModelMiddleLayerImpl);
 
+// 模型层类
 namespace Framework
 {
-    // 模型层类
     class FRAMEWORK_DEFAULT_DECLARE ModelMiddleLayer : public ModelViewControllerMiddleLayer
     {
     public:
@@ -30,11 +30,6 @@ namespace Framework
 
     public:
         ModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
-        ~ModelMiddleLayer() noexcept = default;
-        ModelMiddleLayer(const ModelMiddleLayer& rhs) noexcept = delete;
-        virtual ModelMiddleLayer& operator=(const ModelMiddleLayer& rhs) noexcept = delete;
-        ModelMiddleLayer(ModelMiddleLayer&& rhs) noexcept;
-        virtual ModelMiddleLayer& operator=(ModelMiddleLayer&& rhs) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

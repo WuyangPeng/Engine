@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.10 (2023/05/25 14:04)
+///	版本：0.9.1.3 (2023/08/14 16:26)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -14,10 +14,8 @@
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-using namespace std::literals;
-
 Database::TestingHelper::TestingHelper(int argc, char** argv)
-    : ParentType{ argc, argv, "数据库"s }
+    : ParentType{ argc, argv, "数据库" }
 {
     InitSuite();
 
@@ -31,7 +29,6 @@ void Database::TestingHelper::InitSuite()
     AddHelperSuite();
     AddConfigurationSuite();
     AddDatabaseInterfaceSuite();
-    AddDatabaseGenerateSuite();
     AddStatementSuite();
     AddMysqlWrappersSuite();
     AddMysqlConnectorWrappersSuite();
@@ -41,7 +38,7 @@ void Database::TestingHelper::InitSuite()
     AddPostgreSQLSuite();
     AddOracleSuite();
     AddFlatFileWrappersSuite();
-    AddMariaDBWrappersSuite();
+    AddMariaDbWrappersSuite();
     AddMongoWrappersSuite();
     AddRedisWrappersSuite();
     AddDatabaseEntityCodeGenerationSuite();
@@ -81,13 +78,6 @@ void Database::TestingHelper::AddDatabaseInterfaceSuite()
     ADD_TEST(databaseInterfaceSuite, DatabaseFlushTesting);
 
     AddSuite(databaseInterfaceSuite);
-}
-
-void Database::TestingHelper::AddDatabaseGenerateSuite()
-{
-    auto databaseGenerateSuite = GenerateSuite("数据库生成");
-
-    AddSuite(databaseGenerateSuite);
 }
 
 void Database::TestingHelper::AddStatementSuite()
@@ -160,7 +150,7 @@ void Database::TestingHelper::AddFlatFileWrappersSuite()
     AddSuite(flatFileWrappersSuite);
 }
 
-void Database::TestingHelper::AddMariaDBWrappersSuite()
+void Database::TestingHelper::AddMariaDbWrappersSuite()
 {
     auto mariaDBWrappersSuite = GenerateSuite("mariaDB 包装器");
 
@@ -194,6 +184,6 @@ void Database::TestingHelper::AddDatabaseEntityCodeGenerationSuite()
     ADD_TEST(databaseEntityCodeGenerationSuite, CodeFwdHeaderFileGenerationTesting);
     ADD_TEST(databaseEntityCodeGenerationSuite, EntityHeaderFileGenerationTesting);
     ADD_TEST(databaseEntityCodeGenerationSuite, EntitySourceFileGenerationTesting);
-    
+
     AddSuite(databaseEntityCodeGenerationSuite);
 }

@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/26 19:28)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:42)
 
 #ifndef OFFLINE_SERVER_OFFLINE_SERVER_MESSAGE_H
 #define OFFLINE_SERVER_OFFLINE_SERVER_MESSAGE_H
 
-#include "OfflineServer/OfflineServerMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "OfflineServer/OfflineServerMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "OfflineServer/OfflineServerMiddleLayer/Audio/AudioManager.h"
 #include "OfflineServer/OfflineServerMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "OfflineServer/OfflineServerMiddleLayer/Event/EventManager.h"
@@ -32,7 +32,7 @@
 
 namespace OfflineServer
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<OfflineServerMiddleLayer::ObjectLogicManager, OfflineServerMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<OfflineServerMiddleLayer::ObjectLogicManager, OfflineServerMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   OfflineServerMiddleLayer::InputManager,
                                                                   OfflineServerMiddleLayer::NetworkManager,
@@ -54,13 +54,16 @@ namespace OfflineServer
         using ClassType = OfflineServerMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit OfflineServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        OfflineServerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using OfflineServerMessageWindowProcessHandle = Framework::WindowProcessHandle<OfflineServerMessage>;

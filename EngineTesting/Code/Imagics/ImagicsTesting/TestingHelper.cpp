@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 17:13)
+///	版本：0.9.1.3 (2023/08/02 11:31)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -23,7 +23,6 @@ Imagics::TestingHelper::TestingHelper(int argc, char** argv)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Imagics, TestingHelper)
 
-// private
 void Imagics::TestingHelper::InitSuite()
 {
     AddHelperSuite();

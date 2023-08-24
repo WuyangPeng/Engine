@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:25)
+///	版本：0.9.1.3 (2023/08/11 16:52)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -14,7 +14,7 @@
 #include "Framework/OpenGLGlutFrame/OpenGLGlutFrameBuildDetail.h"
 #include "Framework/OpenGLGlutFrame/OpenGLGlutProcessDetail.h"
 
-Framework::TestingHelper::TestingHelper(int argc, char** argv, const GLUTApplicationInformation& information, const Framework::EnvironmentDirectory& environmentDirectory)
+Framework::TestingHelper::TestingHelper(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ argc, argv, information, environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;

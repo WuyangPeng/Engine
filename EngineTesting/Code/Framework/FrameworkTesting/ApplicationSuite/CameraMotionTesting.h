@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:25)
+///	版本：0.9.1.3 (2023/08/11 20:33)
 
 #ifndef FRAMEWORK_APPLICATION_SUITE_CAMERA_MOTION_TESTING_H
 #define FRAMEWORK_APPLICATION_SUITE_CAMERA_MOTION_TESTING_H
@@ -20,7 +20,9 @@ namespace Framework
     public:
         using ClassType = CameraMotionTesting;
         using ParentType = UnitTest;
-        using CameraSmartPointer = Rendering::CameraSharedPtr;
+
+        using Camera = Rendering::Camera;
+        using CameraSharedPtr = Rendering::CameraSharedPtr;
 
     public:
         explicit CameraMotionTesting(const OStreamShared& stream);
@@ -28,7 +30,7 @@ namespace Framework
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
         void MainTest();
 
@@ -36,7 +38,7 @@ namespace Framework
         void SpeedTest();
         void MoveTest();
 
-        void AssertCamera(const CameraSmartPointer& lhs, const CameraSmartPointer& rhs);
+        void AssertCamera(const Camera& lhs, const Camera& rhs);
     };
 }
 

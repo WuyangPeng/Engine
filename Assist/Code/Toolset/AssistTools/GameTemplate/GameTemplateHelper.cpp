@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/31 10:35)
+///	版本：0.9.1.3 (2023/08/17 09:23)
 
 #include "GameTemplate.h"
 #include "GameTemplateHelper.h"
@@ -22,7 +22,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(GameTemplate, GameTemplateHelper)
 
 int GameTemplate::GameTemplateHelper::DoRun()
 {
-    GenerateEngine generateEngine{ "Configuration/StringReplacing.json", "Configuration/GameParameter.json" };
+    GenerateEngine generateEngine{ "Configuration/GameTemplate.json" };
 
     return 0;
 }

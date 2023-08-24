@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/22 17:41)
+///	版本：0.9.1.3 (2023/08/14 15:20)
 
 #ifndef DATABASE_DATABASE_INTERFACE_DATABASE_ENTITY_H
 #define DATABASE_DATABASE_INTERFACE_DATABASE_ENTITY_H
@@ -14,8 +14,7 @@
 
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
-#include "Database/Configuration/Flags/ConfigurationStrategyFlags.h"
-#include "Database/DatabaseInterface/DataTypeTraits.h"
+#include "Database/Configuration/Flags/ConfigurationStrategyFlags.h" 
 #include "Database/DatabaseInterface/DatabaseInterfaceFwd.h"
 
 #include <any>
@@ -31,6 +30,7 @@ namespace Database
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(DatabaseEntity);
+
         using ObjectContainer = std::vector<BasisDatabase>;
         using DatabaseFieldContainer = std::vector<DatabaseField>;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:12)
+///	版本：0.9.1.3 (2023/08/04 15:15)
 
 #ifndef FRAMEWORK_WINDOW_CREATE_WINDOW_POINT_H
 #define FRAMEWORK_WINDOW_CREATE_WINDOW_POINT_H
@@ -21,15 +21,16 @@
 #include <gsl/util>
 #include <iosfwd>
 
+// 窗口点类的声明，没有使用Impl模式。只定义了==、!=、<<操作运算符。
 namespace Framework
 {
-    // 窗口点类的声明，没有使用Impl模式。只定义了==、!=、<<操作运算符。
     class FRAMEWORK_DEFAULT_DECLARE WindowPoint : private boost::equality_comparable<WindowPoint>
     {
     public:
         using ClassType = WindowPoint;
-        using Point = System::WindowsPoint;
-        using LParam = System::WindowsLParam;
+
+        using WindowsPoint = System::WindowsPoint;
+        using WindowsLParam = System::WindowsLParam;
         using WindowPointUse = System::WindowsPointUse;
 
     public:
@@ -43,12 +44,12 @@ namespace Framework
         {
         }
 
-        explicit constexpr WindowPoint(LParam lParam) noexcept
+        explicit constexpr WindowPoint(WindowsLParam lParam) noexcept
             : WindowPoint{ System::GetLowWord(lParam), System::GetHighWord(lParam) }
         {
         }
 
-        explicit constexpr WindowPoint(const Point& point)
+        explicit constexpr WindowPoint(const WindowsPoint& point)
             : WindowPoint{ gsl::narrow_cast<int>(point.x), gsl::narrow_cast<int>(point.y) }
         {
         }

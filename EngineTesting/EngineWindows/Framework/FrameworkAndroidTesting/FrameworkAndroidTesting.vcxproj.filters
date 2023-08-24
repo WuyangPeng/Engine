@@ -60,6 +60,9 @@
     <ClInclude Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidProcessManagerTesting.h">
       <Filter>AndroidFrameSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidProcessAndroidCallBackInterface.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidCallBackInterfaceTesting.cpp">
@@ -93,6 +96,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidProcessManagerTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidProcessAndroidCallBackInterface.cpp">
       <Filter>AndroidFrameSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>

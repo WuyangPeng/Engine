@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:38)
+///	版本：0.9.1.3 (2023/08/08 19:33)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_MACINTOSH_MAIN_FUNCTION_HELPER_DETAIL_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_MACINTOSH_MAIN_FUNCTION_HELPER_DETAIL_H
@@ -15,7 +15,6 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include <iostream>
 
@@ -23,7 +22,7 @@ template <template <typename> class Build, typename Process>
 Framework::MacintoshMainFunctionHelper<Build, Process>::MacintoshMainFunctionHelper(const EnvironmentDirectory& environmentDirectory)
     : ParentType{ environmentDirectory }, build{}, macintoshMainFunctionSchedule{ MacintoshMainFunctionSchedule::Failure }
 {
-    Initializers();
+    Initializer();
 
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -80,14 +79,12 @@ void Framework::MacintoshMainFunctionHelper<Build, Process>::Destroy()
     ParentType::Destroy();
 }
 
-// private
 template <template <typename> class Build, typename CallBack>
 int Framework::MacintoshMainFunctionHelper<Build, CallBack>::DoRun() noexcept
 {
     return RunMacintoshMainLoop();
 }
 
-// private
 template <template <typename> class Build, typename Process>
 int Framework::MacintoshMainFunctionHelper<Build, Process>::RunMacintoshMainLoop() noexcept
 {
@@ -99,48 +96,43 @@ int Framework::MacintoshMainFunctionHelper<Build, Process>::RunMacintoshMainLoop
     return 0;
 }
 
-// private
 template <template <typename> class Build, typename Process>
-void Framework::MacintoshMainFunctionHelper<Build, Process>::Initializers()
+void Framework::MacintoshMainFunctionHelper<Build, Process>::Initializer()
 {
     EXCEPTION_TRY
     {
         InitMacintoshProcess();
-        InitImpl();
+        InitMacintoshImpl();
     }
     EXCEPTION_ENTRY_POINT_CATCH
 }
 
-// private
 template <template <typename> class Build, typename Process>
 void Framework::MacintoshMainFunctionHelper<Build, Process>::InitMacintoshProcess() noexcept
 {
     macintoshMainFunctionSchedule = MacintoshMainFunctionSchedule::MacintoshProcess;
 }
 
-// private
 template <template <typename> class Build, typename Process>
-void Framework::MacintoshMainFunctionHelper<Build, Process>::InitImpl()
+void Framework::MacintoshMainFunctionHelper<Build, Process>::InitMacintoshImpl()
 {
     build = std::make_shared<BuildType>();
     macintoshMainFunctionSchedule = MacintoshMainFunctionSchedule::Max;
 }
 
-// private
 template <template <typename> class Build, typename Process>
 void Framework::MacintoshMainFunctionHelper<Build, Process>::Terminators()
 {
     EXCEPTION_TRY
     {
-        DestroyImpl();
+        DestroyMacintoshImpl();
         DestroyMacintoshProcess();
     }
     EXCEPTION_ENTRY_POINT_CATCH
 }
 
-// private
 template <template <typename> class Build, typename Process>
-void Framework::MacintoshMainFunctionHelper<Build, Process>::DestroyImpl() noexcept
+void Framework::MacintoshMainFunctionHelper<Build, Process>::DestroyMacintoshImpl() noexcept
 {
     if (MacintoshMainFunctionSchedule::Max <= macintoshMainFunctionSchedule)
     {
@@ -149,7 +141,6 @@ void Framework::MacintoshMainFunctionHelper<Build, Process>::DestroyImpl() noexc
     }
 }
 
-// private
 template <template <typename> class Build, typename Process>
 void Framework::MacintoshMainFunctionHelper<Build, Process>::DestroyMacintoshProcess() noexcept
 {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:10)
+///	版本：0.9.1.3 (2023/08/10 15:54)
 
 #include "FontInformationTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -16,13 +16,8 @@
 
 using namespace std::literals;
 
-namespace Framework
-{
-    using TestingType = FontInformation;
-}
-
-Framework::FontInformationTesting::FontInformationTesting(const OStreamShared& stream, HWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+Framework::FontInformationTesting::FontInformationTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream }, hWnd{ hWnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -42,33 +37,33 @@ void Framework::FontInformationTesting::MainTest()
 
 void Framework::FontInformationTesting::WindowFontInformationTest()
 {
-    TestingType fontInformation1{ hwnd };
+    const FontInformation fontInformation0{ hWnd };
 
-    auto testText = SYSTEM_TEXT("TestText"s);
+    const auto testText = SYSTEM_TEXT("TestText"s);
     const auto size = boost::numeric_cast<int>(testText.size());
 
+    ASSERT_TRUE(size < fontInformation0.GetStringWidth(testText));
+    ASSERT_TRUE(0 < fontInformation0.GetCharacterWidth(SYSTEM_TEXT('A')));
+    ASSERT_TRUE(fontInformation0.GetCharacterWidth(SYSTEM_TEXT('T')) < fontInformation0.GetStringWidth(testText));
+    ASSERT_TRUE(0 < fontInformation0.GetFontHeight());
+
+    const FontInformation fontInformation1{ PlatformTypes::Window };
+
     ASSERT_TRUE(size < fontInformation1.GetStringWidth(testText));
-    ASSERT_TRUE(0 < fontInformation1.GetCharacterWidth(SYSTEM_TEXT('A')));
+    ASSERT_TRUE(0 < fontInformation1.GetCharacterWidth(SYSTEM_TEXT('B')));
     ASSERT_TRUE(fontInformation1.GetCharacterWidth(SYSTEM_TEXT('T')) < fontInformation1.GetStringWidth(testText));
     ASSERT_TRUE(0 < fontInformation1.GetFontHeight());
 
-    TestingType fontInformation2{ PlatformTypes::Window };
-
-    ASSERT_TRUE(size < fontInformation2.GetStringWidth(testText));
-    ASSERT_TRUE(0 < fontInformation2.GetCharacterWidth(SYSTEM_TEXT('B')));
-    ASSERT_TRUE(fontInformation2.GetCharacterWidth(SYSTEM_TEXT('T')) < fontInformation2.GetStringWidth(testText));
-    ASSERT_TRUE(0 < fontInformation2.GetFontHeight());
-
-    ASSERT_EQUAL(fontInformation1.GetStringWidth(testText), fontInformation2.GetStringWidth(testText));
-    ASSERT_EQUAL(fontInformation1.GetCharacterWidth('C'), fontInformation2.GetCharacterWidth('C'));
-    ASSERT_EQUAL(fontInformation1.GetFontHeight(), fontInformation2.GetFontHeight());
+    ASSERT_EQUAL(fontInformation0.GetStringWidth(testText), fontInformation1.GetStringWidth(testText));
+    ASSERT_EQUAL(fontInformation0.GetCharacterWidth('C'), fontInformation1.GetCharacterWidth('C'));
+    ASSERT_EQUAL(fontInformation0.GetFontHeight(), fontInformation1.GetFontHeight());
 }
 
 void Framework::FontInformationTesting::GlutFontInformationTest()
 {
-    TestingType fontInformation{ PlatformTypes::Glut };
+    const FontInformation fontInformation{ PlatformTypes::Glut };
 
-    auto testText = SYSTEM_TEXT("TestText"s);
+    const auto testText = SYSTEM_TEXT("TestText"s);
     const auto size = boost::numeric_cast<int>(testText.size());
 
     ASSERT_TRUE(size < fontInformation.GetStringWidth(testText));

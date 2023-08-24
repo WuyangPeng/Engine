@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/25 18:52)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:42)
 
 #ifndef WORLD_SERVER_WORLD_SERVER_MESSAGE_H
 #define WORLD_SERVER_WORLD_SERVER_MESSAGE_H
 
-#include "WorldServer/WorldServerMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "WorldServer/WorldServerMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "WorldServer/WorldServerMiddleLayer/Audio/AudioManager.h"
 #include "WorldServer/WorldServerMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "WorldServer/WorldServerMiddleLayer/Event/EventManager.h"
@@ -32,7 +32,7 @@
 
 namespace WorldServer
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<WorldServerMiddleLayer::ObjectLogicManager, WorldServerMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<WorldServerMiddleLayer::ObjectLogicManager, WorldServerMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   WorldServerMiddleLayer::InputManager,
                                                                   WorldServerMiddleLayer::NetworkManager,
@@ -54,13 +54,16 @@ namespace WorldServer
         using ClassType = WorldServerMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit WorldServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        WorldServerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using WorldServerMessageWindowProcessHandle = Framework::WindowProcessHandle<WorldServerMessage>;

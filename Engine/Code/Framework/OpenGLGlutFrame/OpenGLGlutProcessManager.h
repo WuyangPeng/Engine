@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:17)
+///	版本：0.9.1.3 (2023/08/05 15:02)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_MANAGE_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_MANAGE_H
@@ -28,7 +28,7 @@ namespace Framework
     public:
         NON_COPY_TYPE_DECLARE(OpenGLGlutProcessManager);
         using ParentType = Singleton<OpenGLGlutProcessManager>;
-        using OpenGLGlutCallBackInterfaceSharedPtr = std::shared_ptr<OpenGLGlutCallBackInterface>;
+
         using RenderSceneCallback = System::RenderSceneCallback;
         using ChangeSizeCallback = System::ChangeSizeCallback;
         using TimerFunctionCallback = System::TimerFunctionCallback;
@@ -43,6 +43,7 @@ namespace Framework
         using ProcessMenuCallback = System::ProcessMenuCallback;
         using TerminateCallback = System::TerminateCallback;
         using MainFunctionHelperBaseSharedPtr = std::shared_ptr<MainFunctionHelperBase>;
+        using OpenGLGlutCallBackInterfaceSharedPtr = std::shared_ptr<OpenGLGlutCallBackInterface>;
 
     private:
         enum class OpenGLGlutProcessManagerCreate
@@ -79,12 +80,12 @@ namespace Framework
         void SetOpenGLGlutCallBack(const OpenGLGlutCallBackInterfaceSharedPtr& openGLGlutCallBack);
         void ClearOpenGLGlutCallBack();
 
-        void SetWindowID(int window);
-        NODISCARD int GetWindowID() const;
+        void SetWindowId(int window);
+        NODISCARD int GetWindowId() const;
         void SetMillisecond(int millisecond);
-        int GetMillisecond() const;
+        NODISCARD int GetMillisecond() const;
 
-        void SetMainFunctionHelper(const MainFunctionHelperBaseSharedPtr& mainFunctionHelperBase);
+        void SetMainFunctionHelper(const MainFunctionHelperBaseSharedPtr& mainFunctionHelper);
         void ClearMainFunctionHelper();
         NODISCARD MainFunctionHelperBaseSharedPtr GetMainFunctionHelper();
 

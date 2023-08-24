@@ -5,18 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:35)  
+///	版本：0.9.1.3 (2023/08/10 10:51)
 
 #include "WindowMessageUnitTestSuiteTesting.h"
+#include "System/Helper/EnumCast.h"
 #include "System/Windows/Flags/WindowsKeyCodesFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "Framework/WindowMessageUnitTestSuiteTesting/SuiteWindowMessage.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "System/Helper/EnumCast.h"
+#include "Framework/WindowMessageUnitTestSuiteTesting/SuiteWindowMessage.h"
 
 Framework::WindowMessageUnitTestSuiteTesting::WindowMessageUnitTestSuiteTesting(const OStreamShared& stream, const WindowMessageSharedPtr& message)
-    : ParentType{ stream }, mMessage{ message }
+    : ParentType{ stream }, message{ message }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -37,28 +37,28 @@ void Framework::WindowMessageUnitTestSuiteTesting::MainTest()
 
 void Framework::WindowMessageUnitTestSuiteTesting::KeyDownMessageTest()
 {
-    auto message = mMessage.lock();
+    const auto messageSharedPtr = message.lock();
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(message, "消息指针已无效！");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(messageSharedPtr, "消息指针已无效！");
 
-    ASSERT_EQUAL(message->KeyDownMessage(message->GetHwnd(), System::EnumCastUnderlying<System::WindowsWParam>(System::WindowsKeyCodes::F1), 0), 0);
-    ASSERT_EQUAL(message->GetPassedNumber(), 1);
+    ASSERT_EQUAL(messageSharedPtr->KeyDownMessage(messageSharedPtr->GetHWnd(), System::EnumCastUnderlying<System::WindowsWParam>(System::WindowsKeyCodes::F1), 0), 0);
+    ASSERT_EQUAL(messageSharedPtr->GetPassedNumber(), 1);
 }
 
 void Framework::WindowMessageUnitTestSuiteTesting::CreateMessageTest()
 {
-    auto message = mMessage.lock();
+    const auto messageSharedPtr = message.lock();
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(message, "消息指针已无效！");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(messageSharedPtr, "消息指针已无效！");
 
-    ASSERT_EQUAL(message->CreateMessage(message->GetHwnd(), 0, 0), 0);
+    ASSERT_EQUAL(messageSharedPtr->CreateMessage(messageSharedPtr->GetHWnd(), 0, 0), 0);
 }
 
 void Framework::WindowMessageUnitTestSuiteTesting::DisplayTest()
 {
-    auto message = mMessage.lock();
+    const auto messageSharedPtr = message.lock();
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(message, "消息指针已无效！");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(messageSharedPtr, "消息指针已无效！");
 
-    message->Display(message->GetHwnd(), 0);
+    messageSharedPtr->Display(messageSharedPtr->GetHWnd(), 0);
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:48)
+///	版本：0.9.1.3 (2023/08/09 16:45)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,11 +13,9 @@
 #include "WindowMousePosition.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-using std::make_shared;
-
 CLASS_INVARIANT_STUB_DEFINE(Framework, MousePositionImpl)
 
-Framework::MousePositionImpl::MousePositionImplSharedPtr Framework::MousePositionImpl::Create(WindowsHWnd hwnd)
+Framework::MousePositionImpl::MousePositionImplSharedPtr Framework::MousePositionImpl::Create(WindowsHWnd hWnd)
 {
-    return make_shared<WindowMousePosition>(hwnd);
+    return std::make_shared<WindowMousePosition>(hWnd);
 }

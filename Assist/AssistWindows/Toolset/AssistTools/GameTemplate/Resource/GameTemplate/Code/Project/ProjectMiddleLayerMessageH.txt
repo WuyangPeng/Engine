@@ -1,0 +1,59 @@
+$Copyright$
+
+#ifndef $ProjectCapital$_$ProjectCapital$_MIDDLE_LAYER_MESSAGE_H
+#define $ProjectCapital$_$ProjectCapital$_MIDDLE_LAYER_MESSAGE_H
+
+#include "$ProjectName$.h"
+#include "CoreTools/Console/ConsoleAlloc.h"
+#include "Framework/Application/Flags/ApplicationTrait.h"
+#include "Framework/MiddleLayer/ArtificialIntelligenceInterface.h"
+#include "Framework/MiddleLayer/EngineMiddleLayerContainer.h"
+#include "Framework/MiddleLayer/ObjectLogicInterface.h"
+#include "Framework/MiddleLayer/ObjectLogicManager.h"
+#include "Framework/Project/GUIProjectManager.h"
+#include "Framework/Project/InputProjectManagerDetail.h"
+#include "Framework/Project/ResourceProjectManager.h"
+#include "Framework/Project/SystemProjectManager.h"
+#include "Framework/WindowProcess/WindowMessage.h"
+#include "Framework/WindowProcess/WindowProcessHandle.h"
+
+namespace $ProjectName$
+{
+    using ObjectLogicManager = Framework::ObjectLogicManager<Framework::ObjectLogicInterface, Framework::ArtificialIntelligenceInterface>;
+    using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
+                                                                  Framework::InputProjectManager,
+                                                                  Framework::NetworkManagerInterface,
+                                                                  ObjectLogicManager,
+                                                                  Framework::PhysicalModellingManagerInterface,
+                                                                  Framework::MessageManagerInterface,
+                                                                  Framework::EventManagerInterface,
+                                                                  Framework::SystemProjectManager,
+                                                                  Framework::ResourceProjectManager,
+                                                                  Framework::AudioManagerInterface,
+                                                                  Framework::CameraSystemsManagerInterface,
+                                                                  Framework::RenderingManagerInterface,
+                                                                  Framework::GUIProjectManager>;
+    using MessageType = Framework::WindowMessage<MiddleLayerType>;
+
+    class $ProjectName$MiddleLayerMessage final : public MessageType
+    {
+    public:
+        using ClassType = $ProjectName$MiddleLayerMessage;
+        using ParentType = MessageType;
+
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
+    public:
+        $ProjectName$MiddleLayerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
+
+    private:
+        ConsoleAlloc alloc;
+    };
+
+    using $ProjectName$Process = Framework::WindowProcessHandle<$ProjectName$MiddleLayerMessage>;
+}
+
+#endif  // $ProjectCapital$_$ProjectCapital$_MIDDLE_LAYER_MESSAGE_H

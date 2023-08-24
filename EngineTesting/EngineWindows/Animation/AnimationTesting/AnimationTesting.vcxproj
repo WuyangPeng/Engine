@@ -270,14 +270,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\AnimationManagerSuite\AnimationManagerSuite.h" />
-    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\ConsoleGraphSuite\ConsoleGraphSuite.h" />
-    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\ElfAnimationSuite\ElfAnimationSuite.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\GradientAnimationSuite\GradientAnimationSuite.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\HelperSuite\HelperSuite.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\MorphTargetAnimationSuite\MorphTargetAnimationSuite.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\PerVertexAnimationSuite\PerVertexAnimationSuite.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\RigidBodyHierarchyAnimationSuite\RigidBodyHierarchyAnimationSuite.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\SkeletonAnimationSuite\SkeletonAnimationSuite.h" />
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\SpriteAnimationSuite\SpriteAnimationSuite.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\TestingHelper.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\TextureAnimationSuite\TextureAnimationSuite.h" />

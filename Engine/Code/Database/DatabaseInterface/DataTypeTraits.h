@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/22 17:19)
+///	版本：0.9.1.3 (2023/08/14 15:21)
 
 #ifndef DATABASE_DATABASE_INTERFACE_DATA_TYPE_TRAITS_H
 #define DATABASE_DATABASE_INTERFACE_DATA_TYPE_TRAITS_H
@@ -117,31 +117,31 @@ namespace Database
 
     namespace Traits
     {
-        using String = Database::DataTypeTraits<DataType::String>::Type;
-        using StringArray = Database::DataTypeTraits<DataType::StringArray>::Type;
-        using Int32 = Database::DataTypeTraits<DataType::Int32>::Type;
-        using Int32Count = Database::DataTypeTraits<DataType::Int32Count>::Type;
-        using Int32Array = Database::DataTypeTraits<DataType::Int32Array>::Type;
-        using Int64 = Database::DataTypeTraits<DataType::Int64>::Type;
-        using Int64Count = Database::DataTypeTraits<DataType::Int64Count>::Type;
-        using Int64Array = Database::DataTypeTraits<DataType::Int64Array>::Type;
-        using Double = Database::DataTypeTraits<DataType::Double>::Type;
-        using DoubleArray = Database::DataTypeTraits<DataType::DoubleArray>::Type;
-        using Bool = Database::DataTypeTraits<DataType::Bool>::Type;
+        using String = DataTypeTraits<DataType::String>::Type;
+        using StringArray = DataTypeTraits<DataType::StringArray>::Type;
+        using Int32 = DataTypeTraits<DataType::Int32>::Type;
+        using Int32Count = DataTypeTraits<DataType::Int32Count>::Type;
+        using Int32Array = DataTypeTraits<DataType::Int32Array>::Type;
+        using Int64 = DataTypeTraits<DataType::Int64>::Type;
+        using Int64Count = DataTypeTraits<DataType::Int64Count>::Type;
+        using Int64Array = DataTypeTraits<DataType::Int64Array>::Type;
+        using Double = DataTypeTraits<DataType::Double>::Type;
+        using DoubleArray = DataTypeTraits<DataType::DoubleArray>::Type;
+        using Bool = DataTypeTraits<DataType::Bool>::Type;
 
         namespace ParamType
         {
-            using String = boost::call_traits<Traits::String>::param_type;
-            using StringArray = boost::call_traits<Traits::StringArray>::param_type;
-            using Int32 = boost::call_traits<Traits::Int32>::param_type;
-            using Int32Count = boost::call_traits<Traits::Int32Count>::param_type;
-            using Int32Array = boost::call_traits<Traits::Int32Array>::param_type;
-            using Int64 = boost::call_traits<Traits::Int64>::param_type;
-            using Int64Count = boost::call_traits<Traits::Int64Count>::param_type;
-            using Int64Array = boost::call_traits<Traits::Int64Array>::param_type;
-            using Double = boost::call_traits<Traits::Double>::param_type;
-            using DoubleArray = boost::call_traits<Traits::DoubleArray>::param_type;
-            using Bool = boost::call_traits<Traits::Bool>::param_type;
+            using String = boost::call_traits<String>::param_type;
+            using StringArray = boost::call_traits<StringArray>::param_type;
+            using Int32 = boost::call_traits<Int32>::param_type;
+            using Int32Count = boost::call_traits<Int32Count>::param_type;
+            using Int32Array = boost::call_traits<Int32Array>::param_type;
+            using Int64 = boost::call_traits<Int64>::param_type;
+            using Int64Count = boost::call_traits<Int64Count>::param_type;
+            using Int64Array = boost::call_traits<Int64Array>::param_type;
+            using Double = boost::call_traits<Double>::param_type;
+            using DoubleArray = boost::call_traits<DoubleArray>::param_type;
+            using Bool = boost::call_traits<Bool>::param_type;
         }
     }
 }

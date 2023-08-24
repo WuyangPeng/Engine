@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -68,7 +68,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{401A3FE5-BE1A-47D4-A7DF-A754918F3508}</ProjectGuid>
+    <ProjectGuid>{6D68CDBC-6299-4FD4-B225-FFFFE48EC41F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ServerManagerCore</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -315,7 +315,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;SERVERMANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;SERVER_MANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -326,7 +326,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;SERVERMANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;SERVER_MANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -361,7 +361,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;SERVERMANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;SERVER_MANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -376,7 +376,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;SERVERMANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;SERVER_MANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -419,7 +419,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;SERVERMANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;SERVER_MANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -430,7 +430,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;SERVERMANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;SERVER_MANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -465,7 +465,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;SERVERMANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;SERVER_MANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -480,7 +480,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;SERVERMANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;SERVER_MANAGERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -532,12 +532,12 @@
     <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\ServerManagerCoreImport.h" />
     <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\ServerManagerCoreLib.h" />
     <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\ServerManagerCoreNoImport.h" />
-    <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\Macro\ExportMacro.h" />
-    <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\Macro\ServerManagerCoreClassInvariantMacro.h" />
-    <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\Macro\ServerManagerCoreCustomAssertMacro.h" />
-    <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\Helper\ExportMacro.h" />
+    <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\Helper\ServerManagerCoreClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\Helper\ServerManagerCoreCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\ServerManager\ServerManagerCore\Helper\UserMacro.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\ServerManager\ServerManagerCore\DllLib.cpp" />

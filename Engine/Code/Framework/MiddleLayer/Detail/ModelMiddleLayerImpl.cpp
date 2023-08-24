@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:23)
+///	版本：0.9.1.3 (2023/08/08 14:51)
 
 #include "Framework/FrameworkExport.h"
 
 #include "ModelMiddleLayerImpl.h"
-#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 Framework::ModelMiddleLayerImpl::ModelMiddleLayerImpl(int maxTimer)

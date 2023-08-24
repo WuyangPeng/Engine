@@ -43,9 +43,6 @@
     <Filter Include="ParticleSystemSuite 头文件">
       <UniqueIdentifier>{779870a9-ee44-41c3-95ad-e17f2ab94a91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\CollisionDetectionSuite">
-      <UniqueIdentifier>{33679f3d-93b5-441b-910a-2b6f39fc5959}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HelperSuite 头文件">
       <UniqueIdentifier>{a46d1626-fd0b-4922-9062-46f51e20692a}</UniqueIdentifier>
     </Filter>
@@ -66,9 +63,6 @@
     <None Include="Configuration\Testing.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Resource\CollisionDetectionSuite\TrianglesMesh.trv">
-      <Filter>资源文件\CollisionDetectionSuite</Filter>
-    </None>
     <None Include="Resource\ReadMe.md">
       <Filter>资源文件</Filter>
     </None>
@@ -83,19 +77,7 @@
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\TestingHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeProjectionInfoTesting.h">
-      <Filter>CollisionDetectionSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeSplitTrianglesTesting.h">
-      <Filter>CollisionDetectionSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeTesting.h">
-      <Filter>CollisionDetectionSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\CollisionDetectionSuite.h">
-      <Filter>CollisionDetectionSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeChildTesting.h">
       <Filter>CollisionDetectionSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\FluidSuite\FluidSuite.h">
@@ -129,18 +111,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\TestingMain.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeProjectionInfoTesting.cpp">
-      <Filter>CollisionDetectionSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeChildTesting.cpp">
-      <Filter>CollisionDetectionSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeSplitTrianglesTesting.cpp">
-      <Filter>CollisionDetectionSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeTesting.cpp">
-      <Filter>CollisionDetectionSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

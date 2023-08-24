@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -68,7 +68,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{8A43E272-201C-4796-BD37-6F8131C720B6}</ProjectGuid>
+    <ProjectGuid>{92397201-8DF6-4692-BCE0-C7483F9BB402}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MailServerMiddleLayer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -315,7 +315,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;MAILSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;MAIL_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -326,7 +326,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;MAILSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;MAIL_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -361,7 +361,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;MAILSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;MAIL_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -376,7 +376,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;MAILSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;MAIL_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -419,7 +419,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;MAILSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;MAIL_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -430,7 +430,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;MAILSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;MAIL_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -465,7 +465,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;MAILSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;MAIL_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -480,7 +480,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;MAILSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;MAIL_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -521,7 +521,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\MailServer\MailServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceManager.cpp" />
+    <ClCompile Include="..\..\..\Code\MailServer\MailServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.cpp" />
     <ClCompile Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Audio\AudioManager.cpp" />
     <ClCompile Include="..\..\..\Code\MailServer\MailServerMiddleLayer\CameraSystems\CameraSystemsManager.cpp" />
     <ClCompile Include="..\..\..\Code\MailServer\MailServerMiddleLayer\DllLib.cpp" />
@@ -537,9 +537,9 @@
     <ClCompile Include="..\..\..\Code\MailServer\MailServerMiddleLayer\System\SystemManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegence.h" />
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceFwd.h" />
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceManager.h" />
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligence.h" />
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceFwd.h" />
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.h" />
     <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Audio\Audio.h" />
     <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Audio\AudioFwd.h" />
     <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Audio\AudioManager.h" />
@@ -560,16 +560,16 @@
     <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\GUI\GUI.h" />
     <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\GUI\GUIFwd.h" />
     <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\GUI\GUIManager.h" />
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Helper\ExportMacro.h" />
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Helper\MailServerMiddleLayerClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Helper\MailServerMiddleLayerCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Input\Input.h" />
     <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Input\InputFwd.h" />
     <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Input\InputManager.h" />
     <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Input\InputManagerDetail.h" />
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Macro\ExportMacro.h" />
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Macro\MailServerMiddleLayerClassInvariantMacro.h" />
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Macro\MailServerMiddleLayerCustomAssertMacro.h" />
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Macro\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Message\Message.h" />
     <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Message\MessageFwd.h" />
     <ClInclude Include="..\..\..\Code\MailServer\MailServerMiddleLayer\Message\MessageManager.h" />

@@ -5,44 +5,144 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:50)
+///	版本：0.9.1.3 (2023/08/09 15:24)
 
 #include "Framework/FrameworkExport.h"
 
 #include "CameraMotion.h"
 #include "Detail/CameraMotionImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Framework::CameraMotion::CameraMotion(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor)
     : impl{ translationSpeed, rotationSpeed, translationSpeedFactor, rotationSpeedFactor }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, CameraMotion)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraMotion, GetCamera, Framework::CameraMotion::CameraSharedPtr);
+Framework::CameraMotion::CameraSharedPtr Framework::CameraMotion::GetCamera() noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraMotion, MoveCamera, bool);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraMotion, SlowerCameraTranslation, void);
+    return impl->GetCamera();
+}
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraMotion, FasterCameraTranslation, void);
+bool Framework::CameraMotion::MoveCamera()
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraMotion, SlowerCameraRotation, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraMotion, FasterCameraRotation, void);
+    return impl->MoveCamera();
+}
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraMotion, SetMoveForward, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraMotion, SetMoveBackward, bool, void);
+void Framework::CameraMotion::SlowerCameraTranslation() noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraMotion, SetTurnLeft, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraMotion, SetTurnRight, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraMotion, SetLookUp, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraMotion, SetLookDown, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraMotion, SetMoveUp, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraMotion, SetMoveDown, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraMotion, SetMoveRight, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraMotion, SetMoveLeft, bool, void);
+    return impl->SlowerCameraTranslation();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraMotion, GetRotationSpeed, float);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraMotion, GetTranslationSpeed, float);
+void Framework::CameraMotion::FasterCameraTranslation() noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->FasterCameraTranslation();
+}
+
+void Framework::CameraMotion::SlowerCameraRotation() noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SlowerCameraRotation();
+}
+
+void Framework::CameraMotion::FasterCameraRotation() noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->FasterCameraRotation();
+}
+
+void Framework::CameraMotion::SetMoveForward(bool pressed) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetMoveForward(pressed);
+}
+
+void Framework::CameraMotion::SetMoveBackward(bool pressed) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetMoveBackward(pressed);
+}
+
+void Framework::CameraMotion::SetTurnLeft(bool pressed) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetTurnLeft(pressed);
+}
+
+void Framework::CameraMotion::SetTurnRight(bool pressed) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetTurnRight(pressed);
+}
+
+void Framework::CameraMotion::SetLookUp(bool pressed) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetLookUp(pressed);
+}
+
+void Framework::CameraMotion::SetLookDown(bool pressed) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetLookDown(pressed);
+}
+
+void Framework::CameraMotion::SetMoveUp(bool pressed) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetMoveUp(pressed);
+}
+
+void Framework::CameraMotion::SetMoveDown(bool pressed) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetMoveDown(pressed);
+}
+
+void Framework::CameraMotion::SetMoveRight(bool pressed) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetMoveRight(pressed);
+}
+
+void Framework::CameraMotion::SetMoveLeft(bool pressed) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetMoveLeft(pressed);
+}
+
+float Framework::CameraMotion::GetRotationSpeed() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetRotationSpeed();
+}
+
+float Framework::CameraMotion::GetTranslationSpeed() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetTranslationSpeed();
+}

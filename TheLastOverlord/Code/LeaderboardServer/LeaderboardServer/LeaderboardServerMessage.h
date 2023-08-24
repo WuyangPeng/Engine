@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/26 21:28)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:42)
 
 #ifndef LEADERBOARD_SERVER_LEADERBOARD_SERVER_MESSAGE_H
 #define LEADERBOARD_SERVER_LEADERBOARD_SERVER_MESSAGE_H
 
-#include "LeaderboardServer/LeaderboardServerMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "LeaderboardServer/LeaderboardServerMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "LeaderboardServer/LeaderboardServerMiddleLayer/Audio/AudioManager.h"
 #include "LeaderboardServer/LeaderboardServerMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "LeaderboardServer/LeaderboardServerMiddleLayer/Event/EventManager.h"
@@ -32,7 +32,7 @@
 
 namespace LeaderboardServer
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<LeaderboardServerMiddleLayer::ObjectLogicManager, LeaderboardServerMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<LeaderboardServerMiddleLayer::ObjectLogicManager, LeaderboardServerMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   LeaderboardServerMiddleLayer::InputManager,
                                                                   LeaderboardServerMiddleLayer::NetworkManager,
@@ -54,13 +54,16 @@ namespace LeaderboardServer
         using ClassType = LeaderboardServerMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit LeaderboardServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        LeaderboardServerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using LeaderboardServerMessageWindowProcessHandle = Framework::WindowProcessHandle<LeaderboardServerMessage>;

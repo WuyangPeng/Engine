@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:00)
+///	版本：0.9.1.3 (2023/08/03 19:51)
 
-#ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_HICON_H
-#define FRAMEWORK_WINDOW_REGISTER_WINDOW_HICON_H
+#ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_H_ICON_H
+#define FRAMEWORK_WINDOW_REGISTER_WINDOW_H_ICON_H
 
 #include "Framework/FrameworkDll.h"
 
@@ -23,15 +23,16 @@ namespace Framework
     {
     public:
         using ClassType = WindowHIcon;
+
         using TChar = System::TChar;
         using HIcon = System::WindowsHIcon;
         using HInstance = System::WindowsHInstance;
 
     public:
+        NODISCARD static WindowHIcon Create(HInstance instance, bool isDefaultIcon, int icon);
+
         explicit WindowHIcon(const TChar* icon = System::gApplication) noexcept;
         WindowHIcon(HInstance instance, int icon);
-
-        NODISCARD static WindowHIcon Create(HInstance instance, bool isDefaultIcon, int icon);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -45,4 +46,4 @@ namespace Framework
     };
 }
 
-#endif  // FRAMEWORK_WINDOW_REGISTER_WINDOW_HICON_H
+#endif  // FRAMEWORK_WINDOW_REGISTER_WINDOW_H_ICON_H

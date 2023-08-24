@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:48)
+///	版本：0.9.1.3 (2023/08/09 16:39)
 
 #include "Framework/FrameworkExport.h"
 
@@ -19,8 +19,8 @@
 #include "Rendering/DataTypes/Transform.h"
 #include "Rendering/DataTypes/TransformMatrixDetail.h"
 
-Framework::ObjectMotionImpl::ObjectMotionImpl(const SpatialSharedPtr& motionObject) noexcept
-    : motionObject{ motionObject },
+Framework::ObjectMotionImpl::ObjectMotionImpl(SpatialSharedPtr motionObject) noexcept
+    : motionObject{ std::move(motionObject) },
       doRoll{ 0 },
       doYaw{ 0 },
       doPitch{ 0 },
@@ -70,7 +70,7 @@ bool Framework::ObjectMotionImpl::MoveObject(float rotationSpeed)
     }
     else
     {
-        ObjectMotionMove objectMotionMove{ motionObject, doRoll, doYaw, doPitch, rotationSpeed };
+        const ObjectMotionMove objectMotionMove{ motionObject, doRoll, doYaw, doPitch, rotationSpeed };
 
         const auto transform = objectMotionMove.GetIncrement();
         motionObject->SetLocalTransform(transform);
@@ -83,9 +83,10 @@ void Framework::ObjectMotionImpl::RotateTrackBall(const ConstCameraSharedPtr& ca
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    if (beginXTrack != endXTrack || beginYTrack != endYTrack)
+    if (!Mathematics::MathF::Approximate(beginXTrack, endXTrack) ||
+        !Mathematics::MathF::Approximate(beginYTrack, endYTrack))
     {
-        ObjectMotionRotateTrackBall rotateTrackBall{ motionObject, camera, beginXTrack, beginYTrack, endXTrack, endYTrack, saveRotate };
+        const ObjectMotionRotateTrackBall rotateTrackBall{ motionObject, camera, beginXTrack, beginYTrack, endXTrack, endYTrack, saveRotate };
 
         const auto transform = rotateTrackBall.GetTransform();
 
@@ -93,32 +94,32 @@ void Framework::ObjectMotionImpl::RotateTrackBall(const ConstCameraSharedPtr& ca
     }
 }
 
-void Framework::ObjectMotionImpl::SetDoRoll(int value) noexcept
+void Framework::ObjectMotionImpl::SetDoRoll(int aDoRoll) noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    doRoll = value;
+    doRoll = aDoRoll;
 }
 
-void Framework::ObjectMotionImpl::SetDoYaw(int value) noexcept
+void Framework::ObjectMotionImpl::SetDoYaw(int aDoYaw) noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    doYaw = value;
+    doYaw = aDoYaw;
 }
 
-void Framework::ObjectMotionImpl::SetDoPitch(int value) noexcept
+void Framework::ObjectMotionImpl::SetDoPitch(int aDoPitch) noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    doPitch = value;
+    doPitch = aDoPitch;
 }
 
-void Framework::ObjectMotionImpl::SetTrackBallDow(bool value) noexcept
+void Framework::ObjectMotionImpl::SetTrackBallDow(bool aTrackBallDow) noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    trackBallDown = value;
+    trackBallDown = aTrackBallDow;
 }
 
 void Framework::ObjectMotionImpl::SetBeginTrack(float xTrack, float yTrack) noexcept

@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:42)
+///	版本：0.9.1.3 (2023/08/09 14:59)
 
 #ifndef FRAMEWORK_APPLICATION_OBJECT_MOTION_IMPL_H
 #define FRAMEWORK_APPLICATION_OBJECT_MOTION_IMPL_H
 
 #include "Framework/FrameworkDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
 #include "Mathematics/Algebra/Matrix.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Spatial.h"
@@ -23,6 +22,7 @@ namespace Framework
     {
     public:
         using ClassType = ObjectMotionImpl;
+
         using Matrix = Mathematics::MatrixF;
         using AVector = Mathematics::AVectorF;
         using Transform = Rendering::TransformF;
@@ -30,17 +30,17 @@ namespace Framework
         using ConstCameraSharedPtr = Rendering::ConstCameraSharedPtr;
 
     public:
-        explicit ObjectMotionImpl(const SpatialSharedPtr& motionObject) noexcept;
+        explicit ObjectMotionImpl(SpatialSharedPtr motionObject) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD bool MoveObject(float rotationSpeed);
         void RotateTrackBall(const ConstCameraSharedPtr& camera);
 
-        void SetDoRoll(int value) noexcept;
-        void SetDoYaw(int value) noexcept;
-        void SetDoPitch(int value) noexcept;
-        void SetTrackBallDow(bool value) noexcept;
+        void SetDoRoll(int aDoRoll) noexcept;
+        void SetDoYaw(int aDoYaw) noexcept;
+        void SetDoPitch(int aDoPitch) noexcept;
+        void SetTrackBallDow(bool aTrackBallDow) noexcept;
         void SetBeginTrack(float xTrack, float yTrack) noexcept;
         void SetEndTrack(float xTrack, float yTrack) noexcept;
         void SetSaveRotate() noexcept(gAssert < 2 || gRenderingAssert < 2);

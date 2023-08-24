@@ -300,6 +300,10 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CaseInsensitiveStringDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CharacterString.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CharacterStringFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CodeMapping.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\CodeMappingAnalysis.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\CodeMappingAnalysisImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\CodeMappingImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\FormatErrorMessageImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\MultiByteConversionWideChar.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\WideCharConversionMultiByte.h" />
@@ -1155,6 +1159,10 @@
     <ClCompile Include="..\..\..\Code\CoreTools\Base\UniqueIDManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Base\Version.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\CaseInsensitiveString.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\CodeMapping.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\CodeMappingAnalysis.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\CodeMappingAnalysisImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\CodeMappingImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\FormatErrorMessageImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\MultiByteConversionWideChar.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\WideCharConversionMultiByte.cpp" />

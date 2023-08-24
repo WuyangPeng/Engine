@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:16)
+///	版本：0.9.1.3 (2023/08/05 15:01)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_DETAIL_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_DETAIL_H
@@ -155,19 +155,19 @@ typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::TerminateCallback Fra
 }
 
 template <typename OpenGLGlutCallBack>
-void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SetWindowID(int window)
+void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SetWindowId(int window)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetWindowID(window);
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetWindowId(window);
 }
 
 template <typename OpenGLGlutCallBack>
-int Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetWindowID() const
+int Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetWindowId() const
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetWindowID();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetWindowId();
 }
 
 template <typename OpenGLGlutCallBack>

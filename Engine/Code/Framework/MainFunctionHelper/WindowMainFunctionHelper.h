@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:39)
+///	版本：0.9.1.3 (2023/08/08 19:13)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_WINDOW_MAIN_FUNCTION_HELPER_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_WINDOW_MAIN_FUNCTION_HELPER_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "MainFunctionHelperBase.h"
 #include "MainFunctionHelperFwd.h"
@@ -24,6 +26,7 @@ namespace Framework
     public:
         using ClassType = WindowMainFunctionHelper<Build, Process>;
         using ParentType = MainFunctionHelperBase;
+
         using ClassShareType = CoreTools::NonCopyClasses;
         using BuildType = Build<Process>;
         using WindowsHWnd = System::WindowsHWnd;
@@ -46,7 +49,7 @@ namespace Framework
 
     protected:
         NODISCARD virtual int EnterMessageLoop();
-        NODISCARD WindowsHWnd GetHwnd() const noexcept;
+        NODISCARD WindowsHWnd GetHWnd() const noexcept;
 
     private:
         using BuildSharedPtr = std::shared_ptr<BuildType>;
@@ -54,16 +57,14 @@ namespace Framework
     private:
         NODISCARD int DoRun() override;
 
-        void Initializers(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information);
+        void Initializer(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information);
         void Terminators();
 
         void InitWindowProcess();
-        void InitCamera();
-        void InitRendererManager() noexcept;
-        void InitImpl(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information);
+        void InitCamera(); 
+        void InitWindowImpl(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information);
 
-        void DestroyImpl() noexcept;
-        void DestroyRendererManager() noexcept;
+        void DestroyWindowImpl() noexcept; 
         void DestroyCamera() noexcept;
         void DestroyWindowProcess() noexcept;
 

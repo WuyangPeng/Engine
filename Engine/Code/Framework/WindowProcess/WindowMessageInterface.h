@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:03)
+///	版本：0.9.1.3 (2023/08/04 11:09)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_INTERFACE_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_INTERFACE_H
@@ -23,13 +23,16 @@ namespace Framework
     {
     public:
         using ClassType = WindowMessageInterface;
+
         using HWnd = System::WindowsHWnd;
         using WParam = System::WindowsWParam;
         using LParam = System::WindowsLParam;
         using LResult = System::WindowsLResult;
-        using FunctionPointer = LResult (ClassType::*)(HWnd hwnd, WParam wParam, LParam lParam);
+        using FunctionPointer = LResult (ClassType::*)(HWnd hWnd, WParam wParam, LParam lParam);
 
     public:
+        /// WindowMessageInterface未使用EnvironmentDirectory参数，
+        /// 保留这个重载是需要统一WindowMessage的构造函数。
         explicit WindowMessageInterface(int64_t delta) noexcept;
         WindowMessageInterface(int64_t delta, const EnvironmentDirectory& environmentDirectory) noexcept;
         virtual ~WindowMessageInterface() noexcept = default;
@@ -45,39 +48,40 @@ namespace Framework
         virtual void PreIdle();
         virtual void Terminate();
 
-        virtual LResult CreateMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult SizeMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult CloseMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult MoveMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult CharMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult KeyDownMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult KeyUpMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult LeftButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult LeftButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult MiddleButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult MiddleButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult RightButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult RightButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult MouseMoveMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult MouseWheelMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult DestroyMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult PaintMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual LResult EraseBackgroundMessage(HWnd hwnd, WParam wParam, LParam lParam);
-        virtual void Display(HWnd hwnd, int64_t timeDelta);
+        NODISCARD virtual LResult CreateMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult SizeMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult CloseMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult MoveMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult CharMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult KeyDownMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult KeyUpMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult LeftButtonDownMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult LeftButtonUpMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult MiddleButtonDownMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult MiddleButtonUpMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult RightButtonDownMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult RightButtonUpMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult MouseMoveMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult MouseWheelMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult DestroyMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult PaintMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        NODISCARD virtual LResult EraseBackgroundMessage(HWnd hWnd, WParam wParam, LParam lParam);
+        virtual void Display(HWnd hWnd, int64_t timeDelta);
         NODISCARD virtual int GetTerminateKey() const noexcept;
 
-        NODISCARD HWnd GetHwnd() const noexcept;
-        void SetMainWindow(HWnd hwnd);
+        NODISCARD HWnd GetHWnd() const noexcept;
+        void SetMainWindow(HWnd hWnd);
 
         NODISCARD int64_t GetDelta() const noexcept;
 
     private:
-        HWnd windowsHwnd{ nullptr };
-        int64_t delta{ 0 };
+        HWnd windowsHWnd;
+        int64_t delta;
     };
 
     using WindowMessageInterfaceSharedPtr = std::shared_ptr<WindowMessageInterface>;
     using ConstWindowMessageInterfaceSharedPtr = std::shared_ptr<const WindowMessageInterface>;
+
 }
 
 #endif  // FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_INTERFACE_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:42)
+///	版本：0.9.1.3 (2023/08/09 15:02)
 
 #ifndef FRAMEWORK_APPLICATION_CAMERA_MOTION_IMPL_H
 #define FRAMEWORK_APPLICATION_CAMERA_MOTION_IMPL_H
@@ -15,14 +15,13 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/SceneGraph/Camera.h"
 
-#include <array>
-
 namespace Framework
 {
     class FRAMEWORK_HIDDEN_DECLARE CameraMotionImpl
     {
     public:
         using ClassType = CameraMotionImpl;
+
         using Camera = Rendering::Camera;
         using CameraSharedPtr = Rendering::CameraSharedPtr;
 

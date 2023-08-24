@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 15:10)
+///	版本：0.9.1.3 (2023/08/14 14:10)
 
 #ifndef FRAMEWORK_PROJECT_SYSTEM_PROJECT_MANAGER_MOCK_H
 #define FRAMEWORK_PROJECT_SYSTEM_PROJECT_MANAGER_MOCK_H
@@ -19,6 +19,7 @@ namespace Framework
     public:
         using ClassType = SystemProjectManagerMock;
         using ParentType = SystemProjectManager;
+
         using SystemProjectManagerSharedPtr = std::shared_ptr<ClassType>;
 
     public:

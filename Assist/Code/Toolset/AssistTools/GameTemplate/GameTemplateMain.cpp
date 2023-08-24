@@ -12,4 +12,4 @@
 
 #include <vld.h>
 
-CONSOLE_MAIN_FUNCTION(GameTemplate, GameTemplateHelper, SYSTEM_TEXT("GameTemplate"), SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""));
+CONSOLE_MAIN_FUNCTION(GameTemplate, GameTemplateHelper, SYSTEM_TEXT("GameTemplate"), SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""))

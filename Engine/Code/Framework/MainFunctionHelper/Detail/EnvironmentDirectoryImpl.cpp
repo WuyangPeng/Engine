@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:40)
+///	版本：0.9.1.3 (2023/08/08 19:42)
 
 #include "Framework/FrameworkExport.h"
 
@@ -17,46 +17,38 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
-using namespace std::literals;
-
 Framework::EnvironmentDirectoryImpl::EnvironmentDirectoryImpl(const String& engineEnvironment, const String& engineDirectory)
     : engineEnvironment{ engineEnvironment }, engineDirectory{ GenerateEngineDirectory(engineEnvironment) }, engineDirectoryPath{ GetEngineDirectoryPath(engineDirectory) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-// static
-// private
 System::String Framework::EnvironmentDirectoryImpl::GenerateEngineDirectory(const String& engineEnvironment)
 {
-    CoreTools::EnvironmentVariable variable{ engineEnvironment };
+    const CoreTools::EnvironmentVariable variable{ engineEnvironment };
     auto engineInstallationDirectory = variable.GetVariable();
 
     return engineInstallationDirectory;
 }
 
-// static
-// private
 Framework::EngineDirectoryPath Framework::EnvironmentDirectoryImpl::GetEngineDirectoryPath(const String& engineDirectory)
 {
-    auto jsonName = GetJsonName(engineDirectory);
+    const auto jsonName = GetJsonName(engineDirectory);
 
-    AnalysisEngineDirectory analysisEngineDirectory{ jsonName };
+    const AnalysisEngineDirectory analysisEngineDirectory{ jsonName };
 
     return EngineDirectoryPath{ analysisEngineDirectory.GetEngineDirectoryResult() };
 }
 
-// static
-// private
 std::string Framework::EnvironmentDirectoryImpl::GetJsonName(const String& variableName)
 {
-    if (variableName.empty() || variableName == SYSTEM_TEXT("Default"s))
+    if (variableName.empty() || variableName == SYSTEM_TEXT("Default"))
     {
         return "";
     }
     else
     {
-        CoreTools::EnvironmentVariable environmentVariable{ variableName };
+        const CoreTools::EnvironmentVariable environmentVariable{ variableName };
 
         return CoreTools::StringConversion::StandardConversionMultiByte(environmentVariable.GetVariable());
     }

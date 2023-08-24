@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:39)
+///	版本：0.9.1.3 (2023/08/08 19:19)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_MAIN_FUNCTION_HELPER_BASE_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_MAIN_FUNCTION_HELPER_BASE_H
@@ -28,6 +28,7 @@ namespace Framework
     {
     public:
         NON_COPY_TYPE_DECLARE(MainFunctionHelperBase);
+
         using String = System::String;
 
     public:
@@ -55,26 +56,25 @@ namespace Framework
         void DoMainFunctionHelperInit(const EnvironmentDirectory& environmentDirectory);
         void MainFunctionHelperDestroy();
 
-        void InitUniqueIDManager();
+        void InitUniqueIdManager();
         void InitLog(const EnvironmentDirectory& environmentDirectory);
         void InitInitTerm();
         void InitEnvironment();
         void InitImpl(const EnvironmentDirectory& environmentDirectory);
 
-        void DestroyImpl() noexcept; 
+        void DestroyMainImpl() noexcept;
         void DestroyEnvironment() noexcept;
         void DestroyInitTerm();
         void DestroyLog() noexcept;
-        void DestroyUniqueIDManager() noexcept;
+        void DestroyUniqueIdManager() noexcept;
 
         NODISCARD virtual int DoRun() = 0;
 
     private:
-        using MainFunctionHelperBaseImplPtr = std::shared_ptr<ImplType>;
+        using MainFunctionHelperBaseSharedPtr = std::shared_ptr<ImplType>;
 
     private:
-        MainFunctionHelperBaseImplPtr impl;
-
+        MainFunctionHelperBaseSharedPtr impl;
         MainFunctionSchedule mainFunctionSchedule;
     };
 }

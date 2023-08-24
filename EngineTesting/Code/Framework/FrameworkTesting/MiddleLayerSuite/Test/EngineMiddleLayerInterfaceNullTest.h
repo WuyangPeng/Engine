@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:56)
+///	版本：0.9.1.3 (2023/08/12 15:19)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_ENGINE_MIDDLE_LAYER_INTERFACE_NULL_TEST_H
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_ENGINE_MIDDLE_LAYER_INTERFACE_NULL_TEST_H
@@ -14,17 +14,16 @@
 
 namespace Framework
 {
-    class EngineMiddleLayerInterfaceNullTest : public EngineMiddleLayerInterface
+    class EngineMiddleLayerInterfaceNullTest final : public EngineMiddleLayerInterface
     {
     public:
         using ClassType = EngineMiddleLayerInterfaceNullTest;
         using ParentType = EngineMiddleLayerInterface;
+
         using MiddleLayerSharedPtr = std::shared_ptr<ClassType>;
 
     public:
-        EngineMiddleLayerInterfaceNullTest(MiddleLayerInterfaceCreate middleLayerInterfaceCreate, MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept;
-
-        NODISCARD static MiddleLayerSharedPtr CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
+        EngineMiddleLayerInterfaceNullTest(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

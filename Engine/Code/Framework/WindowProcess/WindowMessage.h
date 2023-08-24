@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:03)
+///	版本：0.9.1.3 (2023/08/04 13:39)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "WindowMessageInterface.h"
 #include "Framework/MiddleLayer/MiddleLayerInternalFwd.h"
@@ -20,8 +22,8 @@ namespace Framework
     class WindowMessage : public WindowMessageInterface
     {
     public:
-        using MiddleLayerType = MiddleLayer;
-        using ClassType = WindowMessage<MiddleLayerType>;
+        using ClassType = WindowMessage<MiddleLayer>;
+
         using ParentType = WindowMessageInterface;
         using String = System::String;
 
@@ -35,31 +37,34 @@ namespace Framework
         void PreIdle() override;
         void Terminate() override;
 
-        LResult CreateMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult SizeMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult CloseMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult CharMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult MoveMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult KeyDownMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult KeyUpMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult LeftButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult LeftButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult MiddleButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult MiddleButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult RightButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult RightButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult MouseMoveMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult MouseWheelMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult DestroyMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult PaintMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        LResult EraseBackgroundMessage(HWnd hwnd, WParam wParam, LParam lParam) override;
-        void Display(HWnd hwnd, int64_t timeDelta) override;
+        NODISCARD LResult CreateMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult SizeMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult CloseMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult CharMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult MoveMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult KeyDownMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult KeyUpMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult LeftButtonDownMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult LeftButtonUpMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult MiddleButtonDownMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult MiddleButtonUpMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult RightButtonDownMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult RightButtonUpMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult MouseMoveMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult MouseWheelMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult DestroyMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult PaintMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        NODISCARD LResult EraseBackgroundMessage(HWnd hWnd, WParam wParam, LParam lParam) override;
+        void Display(HWnd hWnd, int64_t timeDelta) override;
 
     private:
-        void DoCloseMessage(HWnd hwnd) const;
-        NODISCARD String GetWindowsClassName(HWnd hwnd) const;
-        NODISCARD WindowPoint GetCursorPosition(HWnd hwnd) const noexcept;
+        void DoCloseMessage(HWnd hWnd) const;
+        NODISCARD String GetWindowsClassName(HWnd hWnd) const;
+        NODISCARD WindowPoint GetCursorPosition(HWnd hWnd) const noexcept;
         NODISCARD bool IsSpecialKey(int virtualKey) const noexcept;
+
+    private:
+        using MiddleLayerInterfaceSharedPtr = std::shared_ptr<MiddleLayerInterface>;
 
     private:
         MiddleLayerInterfaceSharedPtr middleLayer;

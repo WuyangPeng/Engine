@@ -5,20 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/16 15:55)
+///	版本：0.9.1.3 (2023/07/31 21:56)
 
 #ifndef DATABASE_GENERATE_SERVER_CORE_CONVERT_ANCIENT_BOOKS_DATABASE_SAVE_H
 #define DATABASE_GENERATE_SERVER_CORE_CONVERT_ANCIENT_BOOKS_DATABASE_SAVE_H
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/DatabaseGenerateServerCoreDll.h"
 
-#include "ConvertEntity.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/AncientBooks.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity/DatabaseEntity.h"
-#include "Framework/Helper/UserMacro.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerCore/Helper/ExportMacro.h"
 
-EXPORT_SHARED_PTR(DatabaseGenerateServerCore, AncientBooksDatabaseSaveImpl, DATABASE_GENERATE_SERVER_CORE_DEFAULT_DECLARE);
-EXPORT_NON_COPY(DatabaseGenerateServerCore, AncientBooksDatabaseSaveImpl, DATABASE_GENERATE_SERVER_CORE_DEFAULT_DECLARE);
+DATABASE_GENERATE_SERVER_CORE_EXPORT_NON_COPY(AncientBooksDatabaseSaveImpl);
 
 namespace DatabaseGenerateServerCore
 {
@@ -29,6 +27,7 @@ namespace DatabaseGenerateServerCore
 
         using DatabaseFlush = Database::DatabaseFlush;
         using DatabaseFlushSharedPtr = std::shared_ptr<DatabaseFlush>;
+        using AncientBooksContainer = AncientBooks::AncientBooksContainer;
 
     public:
         explicit AncientBooksDatabaseSave(const DatabaseFlushSharedPtr& databaseFlush);

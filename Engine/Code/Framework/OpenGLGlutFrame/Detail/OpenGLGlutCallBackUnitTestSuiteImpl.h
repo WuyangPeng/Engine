@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:16)
+///	版本：0.9.1.3 (2023/08/05 13:41)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_WINDOW_OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_IMPL_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_WINDOW_OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_IMPL_H
@@ -15,6 +15,7 @@
 #include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include "CoreTools/MainFunctionHelper/TestingInformationHelper.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
+#include "Framework/WindowProcess/Detail/WindowMessageUnitTestSuiteStream.h"
 
 #include <map>
 #include <string>
@@ -25,6 +26,7 @@ namespace Framework
     {
     public:
         using ClassType = OpenGLGlutCallBackUnitTestSuiteImpl;
+
         using WindowsKeyCodes = System::WindowsKeyCodes;
         using Suite = CoreTools::Suite;
         using OStreamShared = CoreTools::OStreamShared;
@@ -32,7 +34,7 @@ namespace Framework
         using UnitTestSharedPtr = std::shared_ptr<CoreTools::UnitTestComposite>;
 
     public:
-        OpenGLGlutCallBackUnitTestSuiteImpl(const std::string& name, const OStreamShared& streamShared);
+        explicit OpenGLGlutCallBackUnitTestSuiteImpl(const std::string& name);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -47,19 +49,23 @@ namespace Framework
 
         NODISCARD bool IsPrintRun() const noexcept;
         NODISCARD int GetPassedNumber() const noexcept;
+        NODISCARD OStreamShared GetStreamShared() noexcept;
 
     private:
-        using SuiteSharedPtr = std::shared_ptr<Suite>;
+        using SuiteUniquePtr = std::unique_ptr<Suite>;
         using HandlerFunction = void (ClassType::*)();
-        using Process = std::map<System::WindowsKeyCodes, HandlerFunction>;
+        using Process = std::map<WindowsKeyCodes, HandlerFunction>;
+        using StreamTypeUniquePtr = std::unique_ptr<WindowMessageUnitTestSuiteStream>;
 
     private:
         void RunUnitTestOnMessage();
         void ResetTestDataOnMessage();
+        void DoAddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest);
 
     private:
+        StreamTypeUniquePtr stream;
         TestingInformationHelper testingInformationHelper;
-        SuiteSharedPtr openglSuite;
+        SuiteUniquePtr openglSuite;
         Process process;
     };
 }

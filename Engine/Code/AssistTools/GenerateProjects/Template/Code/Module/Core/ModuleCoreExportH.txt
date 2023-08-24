@@ -1,0 +1,14 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_$CoreCapital$_EXPORT_H
+#define $ModuleUppercase$_$CoreCapital$_EXPORT_H
+
+#include "Helper/UserMacro.h"
+
+#ifndef BUILDING_$ModuleUppercase$_$CoreCapital$_EXPORT
+
+    #define BUILDING_$ModuleUppercase$_$CoreCapital$_EXPORT
+
+#endif  // BUILDING_$ModuleUppercase$_$CoreCapital$_EXPORT
+
+#endif  // $ModuleUppercase$_$CoreCapital$_EXPORT_H

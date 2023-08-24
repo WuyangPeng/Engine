@@ -1,0 +1,14 @@
+$Copyright$
+
+#include "$ModuleName$/$ModuleName$MiddleLayer/$ModuleName$MiddleLayerExport.h"
+
+#include "$ModuleName$/$ModuleName$MiddleLayer/Helper/$ModuleName$MiddleLayerClassInvariantMacro.h"
+#include "$MiddleLayerName$Manager.h"
+
+$ModuleName$MiddleLayer::$MiddleLayerName$Manager::$MiddleLayerName$Manager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }
+{
+    $ModuleUppercase$_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE($ModuleName$MiddleLayer, $MiddleLayerName$Manager)

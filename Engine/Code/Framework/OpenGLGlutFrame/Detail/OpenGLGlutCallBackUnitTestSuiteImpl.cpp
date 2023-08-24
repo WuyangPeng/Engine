@@ -5,22 +5,22 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:17)
+///	版本：0.9.1.3 (2023/08/05 13:48)
 
 #include "Framework/FrameworkExport.h"
 
 #include "OpenGLGlutCallBackUnitTestSuiteImpl.h"
 #include "System/Windows/Flags/WindowsKeyCodesFlags.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/UnitTestSuite/UnitTestComposite.h"
 
-Framework::OpenGLGlutCallBackUnitTestSuiteImpl::OpenGLGlutCallBackUnitTestSuiteImpl(const std::string& name, const OStreamShared& streamShared)
-    : testingInformationHelper{ CoreTools::TestingInformationHelper::Create() },
-      openglSuite{ std::make_shared<Suite>(name, streamShared, testingInformationHelper.IsPrintRun()) },
+Framework::OpenGLGlutCallBackUnitTestSuiteImpl::OpenGLGlutCallBackUnitTestSuiteImpl(const std::string& name)
+    : stream{ std::make_unique<WindowMessageUnitTestSuiteStream>(true) },
+      testingInformationHelper{ TestingInformationHelper::Create() },
+      openglSuite{ std::make_unique<Suite>(name, stream->GetStreamShared(), testingInformationHelper.IsPrintRun()) },
       process{ { System::WindowsKeyCodes::F1, &ClassType::ResetTestDataOnMessage },
                { System::WindowsKeyCodes::F5, &ClassType::RunUnitTestOnMessage } }
 {
@@ -31,7 +31,7 @@ Framework::OpenGLGlutCallBackUnitTestSuiteImpl::OpenGLGlutCallBackUnitTestSuiteI
 
 bool Framework::OpenGLGlutCallBackUnitTestSuiteImpl::IsValid() const noexcept
 {
-    if (openglSuite != nullptr)
+    if (stream != nullptr && openglSuite != nullptr)
         return true;
     else
         return false;
@@ -74,39 +74,48 @@ int Framework::OpenGLGlutCallBackUnitTestSuiteImpl::GetPassedNumber() const noex
     return openglSuite->GetPassedNumber();
 }
 
+Framework::OpenGLGlutCallBackUnitTestSuiteImpl::OStreamShared Framework::OpenGLGlutCallBackUnitTestSuiteImpl::GetStreamShared() noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return stream->GetStreamShared();
+}
+
 void Framework::OpenGLGlutCallBackUnitTestSuiteImpl::AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest)
 {
-    try
+    EXCEPTION_TRY
     {
-        const auto testLoopCount = testingInformationHelper.GetLoopCount(suiteName, testName);
-
-        if (0 < testLoopCount)
-        {
-            unitTest->SetTestLoopCount(testLoopCount);
-            unitTest->SetRandomSeed(testingInformationHelper.GetRandomSeed());
-            suite.AddTest(unitTest);
-        }
-        else if (testLoopCount < 0)
-        {
-            LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools,
-                                          SYSTEM_TEXT("测试"),
-                                          testName,
-                                          SYSTEM_TEXT("未配置！在测试套件："),
-                                          suite.GetName(),
-                                          SYSTEM_TEXT("。"),
-                                          CoreTools::LogAppenderIOManageSign::TriggerAssert);
-        }
+        DoAddTest(suiteName, suite, testName, unitTest);
     }
-    catch (const CoreTools::Error& error)
+    EXCEPTION_ENGINE_EXCEPTION_CATCH(CoreTools)
+}
+
+void Framework::OpenGLGlutCallBackUnitTestSuiteImpl::DoAddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest)
+{
+    if (const auto testLoopCount = testingInformationHelper.GetLoopCount(suiteName, testName);
+        0 < testLoopCount)
     {
-        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools, error, CoreTools::LogAppenderIOManageSign::TriggerAssert);
+        unitTest->SetTestLoopCount(testLoopCount);
+        unitTest->SetRandomSeed(testingInformationHelper.GetRandomSeed());
+
+        suite.AddTest(unitTest);
+    }
+    else if (testLoopCount < 0)
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools,
+                                      SYSTEM_TEXT("测试"),
+                                      testName,
+                                      SYSTEM_TEXT("未配置！在测试套件："),
+                                      suite.GetName(),
+                                      SYSTEM_TEXT("。"),
+                                      CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
 void Framework::OpenGLGlutCallBackUnitTestSuiteImpl::KeyDownMessage(WindowsKeyCodes windowsKeyCodes)
 {
-    const auto iter = process.find(windowsKeyCodes);
-    if (iter != process.cend())
+    if (const auto iter = process.find(windowsKeyCodes);
+        iter != process.cend())
     {
         (this->*(iter->second))();
     }
@@ -119,14 +128,12 @@ bool Framework::OpenGLGlutCallBackUnitTestSuiteImpl::IsPrintRun() const noexcept
     return testingInformationHelper.IsPrintRun();
 }
 
-// private
 void Framework::OpenGLGlutCallBackUnitTestSuiteImpl::RunUnitTestOnMessage()
 {
     RunUnitTest();
     PrintReport();
 }
 
-// private
 void Framework::OpenGLGlutCallBackUnitTestSuiteImpl::ResetTestDataOnMessage()
 {
     ResetTestData();

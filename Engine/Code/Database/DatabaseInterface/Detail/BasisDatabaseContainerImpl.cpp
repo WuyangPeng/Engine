@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/24 13:43)
+///	版本：0.9.1.3 (2023/08/14 15:22)
 
 #include "Database/DatabaseExport.h"
 
@@ -40,8 +40,8 @@ std::any Database::BasisDatabaseContainerImpl::GetAnyValue(const std::string_vie
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    if (const auto result = std::ranges::find_if(container, [&fieldName](const auto& value) {
-            return value.GetFieldName() == fieldName;
+    if (const auto result = std::ranges::find_if(container, [&fieldName](const auto& element) {
+            return element.GetFieldName() == fieldName;
         });
         result != container.cend())
     {
@@ -85,8 +85,8 @@ void Database::BasisDatabaseContainerImpl::Modify(const BasisDatabase& basisData
 {
     DATABASE_CLASS_IS_VALID_9;
 
-    const auto result = std::ranges::remove_if(container, [&basisDatabase](const auto& value) {
-        return value.GetFieldName() == basisDatabase.GetFieldName();
+    const auto result = std::ranges::remove_if(container, [&basisDatabase](const auto& element) {
+        return element.GetFieldName() == basisDatabase.GetFieldName();
     });
 
     container.erase(result.begin(), result.end());

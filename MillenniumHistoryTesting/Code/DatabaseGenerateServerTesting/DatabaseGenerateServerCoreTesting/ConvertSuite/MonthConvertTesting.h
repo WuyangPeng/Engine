@@ -5,39 +5,41 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/24 12:16)
+///	版本：0.9.1.3 (2023/08/05 21:03)
 
-#ifndef DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_MONTH_CONVERT_TESTING_H
-#define DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_MONTH_CONVERT_TESTING_H
+#ifndef DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_MONTH_CONVERT_TESTING_H
+#define DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_MONTH_CONVERT_TESTING_H
 
-#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/AncientBooksContainer.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "ConvertTesting.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/MonthContainer.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity/DatabaseEntityFwd.h"
 
 namespace DatabaseGenerateServerCoreTesting
 {
-    class MonthConvertTesting final : public CoreTools::UnitTest
+    class MonthConvertTesting final : public ConvertTesting
     {
     public:
         using ClassType = MonthConvertTesting;
-        using ParentType = UnitTest;
+        using ParentType = ConvertTesting;
 
-        using AncientBooksContainer = AncientBooks::AncientBooksContainer;
+        using MonthContainer = AncientBooks::MonthContainer;
 
     public:
-        MonthConvertTesting(const OStreamShared& stream, const AncientBooksContainer& ancientBooksContainer);
+        MonthConvertTesting(const OStreamShared& stream, const MonthContainer& monthContainer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        void MainTest();
-        void DoRunUnitTest() override;
-
-        void InitEnvironmentTest();
-        void DatabaseFlushTest();
+        using Month = AncientBooks::MonthBase;
+        using MonthEntity = DatabaseEntity::MonthEntity;
 
     private:
-        AncientBooksContainer ancientBooksContainer;
+        void ConvertTest(const DatabaseFlushSharedPtr& databaseFlush) override;
+        void EqualTest(const Month& month, const MonthEntity& monthEntity);
+
+    private:
+        MonthContainer monthContainer;
     };
 }
 
-#endif  // DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_MONTH_CONVERT_TESTING_H
+#endif  // DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_MONTH_CONVERT_TESTING_H

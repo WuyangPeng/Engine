@@ -1,43 +1,29 @@
 @ingroup group_Documentation
 
 ----------------------------
-æœ€åçš„éœ¸ç‹ä»£ç 
+TheLastOverlord´úÂë
 
 ----------------------------
-GameClientï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
-
-RobotClientï¼šä»£ç åˆ†æï¼ˆæ— æ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
- 
-MessageClientï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
- 
-BackgroundClientï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
- 
-GatewayServerï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
- 
-LoginServerï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
- 
-GameServerï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
- 
-FightingServerï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
- 
-WorldServerï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
- 
-OfflineServerï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
- 
-LeaderboardServerï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
- 
-RechargeServerï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰ 
-
-LogServerï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰ 
- 
-GameMasterServerï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰ 
- 
-ServerManagerï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
-
-BackgroundServerï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
- 
-UpdateServerï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
-
-TheLastOverlordï¼šä»£ç åˆ†æï¼ˆæ‰€æœ‰è§„åˆ™ï¼‰ï¼Œå¹³å°ï¼ˆWindowsï¼‰
+GameClient£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+RobotClient£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+MessageClient£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+BackgroundClient£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+GatewayServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+LoginServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+GameServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+FightingServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+WorldServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+OfflineServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+LeaderboardServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+MailServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+ChatServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+RechargeServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+LogServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+GameMasterServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+ServerManager£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+UpdateServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+BackgroundServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+DatabaseServer£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
+TheLastOverlord£º´úÂë·ÖÎö£¨ËùÓĞ¹æÔò£©£¬Æ½Ì¨£¨Windows£©
 
 ----------------------------

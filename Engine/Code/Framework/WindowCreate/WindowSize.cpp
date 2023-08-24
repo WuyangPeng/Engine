@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:14)
+///	版本：0.9.1.3 (2023/08/04 15:15)
 
 #include "Framework/FrameworkExport.h"
 
@@ -29,13 +29,13 @@ Framework::WindowSize::WindowSize(int width, int height)
 {
     if (windowWidth < 0 || windowHeight < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("WindowSize传入的大小为负数！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("WindowSize传入的大小为负数！"s))
     }
 
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Framework::WindowSize::WindowSize(LParam lParam)
+Framework::WindowSize::WindowSize(WindowsLParam lParam)
     : WindowSize{ System::GetLowWord(lParam), System::GetHighWord(lParam) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -59,7 +59,7 @@ void Framework::WindowSize::SetWindowSize(int width, int height)
 
     if (width < 0 || height < 0)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("设置的新大小为负数！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("设置的新大小为负数！"s))
     }
 
     windowWidth = width;

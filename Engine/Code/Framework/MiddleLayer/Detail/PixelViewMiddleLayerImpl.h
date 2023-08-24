@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:20)
+///	版本：0.9.1.3 (2023/08/08 14:36)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_PIXEL_VIEW_MIDDLE_LAYER_IMPL_H
 #define FRAMEWORK_MIDDLE_LAYER_PIXEL_VIEW_MIDDLE_LAYER_IMPL_H
@@ -23,9 +23,11 @@ namespace Framework
     {
     public:
         using ClassType = PixelViewMiddleLayerImpl;
+
         using Colour = Rendering::Colour<uint8_t>;
-        using RendererSharedPtr = std::shared_ptr<Rendering::BaseRenderer>;
-        using ConstRendererSharedPtr = std::shared_ptr<const Rendering::BaseRenderer>;
+        using BaseRenderer = Rendering::BaseRenderer;
+        using RendererSharedPtr = std::shared_ptr<BaseRenderer>;
+        using ConstRendererSharedPtr = std::shared_ptr<const BaseRenderer>;
 
     public:
         PixelViewMiddleLayerImpl(int width, int height);
@@ -52,8 +54,6 @@ namespace Framework
         void DrawCircle(int xCenter, int yCenter, int radius, const Colour& colour, bool solid = false);
 
         void Fill(int x, int y, const Colour& foreColour, const Colour& backColour);
-
-        void Draw(const RendererSharedPtr& renderer);
 
         NODISCARD int GetScreenWidth() const noexcept;
         NODISCARD int GetScreenHeight() const noexcept;

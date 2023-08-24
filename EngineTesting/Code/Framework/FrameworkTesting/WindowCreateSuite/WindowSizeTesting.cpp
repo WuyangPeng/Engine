@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:50)
+///	版本：0.9.1.3 (2023/08/11 19:34)
 
 #include "WindowSizeTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -15,13 +15,6 @@
 #include "Framework/WindowCreate/WindowSize.h"
 
 #include <random>
-
-namespace Framework
-{
-    using TestingType = WindowSize;
-
-    constexpr System::WindowsWord g_WordShift{ 16 };
-}
 
 Framework::WindowSizeTesting::WindowSizeTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -43,13 +36,13 @@ void Framework::WindowSizeTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(LParamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(EqualTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SetWindowSizeTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(OstreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OStreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(NegativeTest);
 }
 
 void Framework::WindowSizeTesting::DefaultTest()
 {
-    const TestingType size{};
+    const WindowSize size{};
 
     ASSERT_EQUAL(0, size.GetWindowWidth());
     ASSERT_EQUAL(0, size.GetWindowHeight());
@@ -63,13 +56,12 @@ void Framework::WindowSizeTesting::RandomTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> random{ minValue, maxValue };
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto width = random(generator);
         const auto height = random(generator);
 
-        const TestingType size{ width, height };
+        const WindowSize size{ width, height };
 
         ASSERT_EQUAL(width, size.GetWindowWidth());
         ASSERT_EQUAL(height, size.GetWindowHeight());
@@ -84,14 +76,13 @@ void Framework::WindowSizeTesting::LParamTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> random{ minValue, maxValue };
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto width = random(generator);
         const auto height = random(generator);
-        const auto lParam = width + (height << Framework::g_WordShift);
+        const auto lParam = width + (height << gWordShift);
 
-        const TestingType size{ lParam };
+        const WindowSize size{ lParam };
 
         ASSERT_EQUAL(width, size.GetWindowWidth());
         ASSERT_EQUAL(height, size.GetWindowHeight());
@@ -106,21 +97,20 @@ void Framework::WindowSizeTesting::EqualTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> random{ minValue, maxValue };
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto width = random(generator);
         const auto height = random(generator);
-        const auto lParam = width + (height << Framework::g_WordShift);
+        const auto lParam = width + (height << gWordShift);
 
-        const TestingType size1{ lParam };
-        const TestingType size2{ width, height };
+        const WindowSize size0{ lParam };
+        const WindowSize size1{ width, height };
 
-        ASSERT_EQUAL(size1, size2);
+        ASSERT_EQUAL(size0, size1);
 
-        const TestingType size3{ width, height + 1 };
+        const WindowSize size2{ width, height + 1 };
 
-        ASSERT_UNEQUAL(size1, size3);
+        ASSERT_UNEQUAL(size0, size2);
     }
 }
 
@@ -132,8 +122,7 @@ void Framework::WindowSizeTesting::SetWindowSizeTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> random{ minValue, maxValue };
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         auto width = random(generator);
         auto height = random(generator);
@@ -146,12 +135,12 @@ void Framework::WindowSizeTesting::SetWindowSizeTest()
 
 void Framework::WindowSizeTesting::SetWindowSizeExceptionTest(int width, int height)
 {
-    TestingType size{};
+    WindowSize size{};
 
     size.SetWindowSize(width, height);
 }
 
-void Framework::WindowSizeTesting::OstreamTest()
+void Framework::WindowSizeTesting::OStreamTest()
 {
     constexpr auto minValue = 0;
     constexpr auto maxValue = 2048;
@@ -159,13 +148,12 @@ void Framework::WindowSizeTesting::OstreamTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> random{ minValue, maxValue };
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto width = random(generator);
         const auto height = random(generator);
 
-        const TestingType size{ width, height };
+        const WindowSize size{ width, height };
 
         GetStream() << size << '\n';
     }
@@ -179,8 +167,7 @@ void Framework::WindowSizeTesting::NegativeTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> random{ minValue, maxValue };
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         auto width = random(generator);
         auto height = random(generator);
@@ -193,7 +180,7 @@ void Framework::WindowSizeTesting::NegativeTest()
 
 void Framework::WindowSizeTesting::WindowSizeExceptionTest(int width, int height)
 {
-    const TestingType size{ width, height };
+    const WindowSize size{ width, height };
 }
 
 void Framework::WindowSizeTesting::SetNegative(int index, int& width, int& height) noexcept

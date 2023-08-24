@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -68,7 +68,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{40F1C245-16B3-43E6-B910-2F63204D4233}</ProjectGuid>
+    <ProjectGuid>{6D68CDBC-6299-4FD4-B225-FFFFE48EC41F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GameMasterServerCore</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -315,7 +315,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;GAMEMASTERSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;GAME_MASTER_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -326,7 +326,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;GAMEMASTERSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;GAME_MASTER_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -361,7 +361,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;GAMEMASTERSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;GAME_MASTER_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -376,7 +376,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;GAMEMASTERSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;GAME_MASTER_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -419,7 +419,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;GAMEMASTERSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;GAME_MASTER_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -430,7 +430,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;GAMEMASTERSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;GAME_MASTER_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -465,7 +465,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;GAMEMASTERSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;GAME_MASTER_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -480,7 +480,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;GAMEMASTERSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;GAME_MASTER_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -532,12 +532,12 @@
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\GameMasterServerCoreImport.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\GameMasterServerCoreLib.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\GameMasterServerCoreNoImport.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\Macro\ExportMacro.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\Macro\GameMasterServerCoreClassInvariantMacro.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\Macro\GameMasterServerCoreCustomAssertMacro.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\Helper\ExportMacro.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\Helper\GameMasterServerCoreClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\Helper\GameMasterServerCoreCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\Helper\UserMacro.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\GameMasterServer\GameMasterServerCore\DllLib.cpp" />

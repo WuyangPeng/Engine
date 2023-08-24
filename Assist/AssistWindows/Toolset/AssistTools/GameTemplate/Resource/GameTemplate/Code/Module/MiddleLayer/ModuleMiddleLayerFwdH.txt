@@ -1,0 +1,9 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_FWD_H
+#define $ModuleUppercase$_MIDDLE_LAYER_FWD_H
+
+#include "Helper/HelperFwd.h"
+$MiddleLayerFwdInclude$
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_FWD_H

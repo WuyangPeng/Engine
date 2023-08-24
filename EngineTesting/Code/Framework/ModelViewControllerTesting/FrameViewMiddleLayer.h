@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:23)
+///	版本：0.9.1.3 (2023/08/10 13:41)
 
 #ifndef MODEL_VIEW_CONTROLLER_TESTING_FRAME_VIEW_MIDDLE_LAYER_H
 #define MODEL_VIEW_CONTROLLER_TESTING_FRAME_VIEW_MIDDLE_LAYER_H
@@ -15,14 +15,14 @@
 
 namespace ModelViewController
 {
-    class FrameViewMiddleLayer : public Framework::ViewMiddleLayer
+    class FrameViewMiddleLayer final : public Framework::ViewMiddleLayer
     {
     public:
         using ClassType = FrameViewMiddleLayer;
         using ParentType = ViewMiddleLayer;
 
     public:
-        FrameViewMiddleLayer(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
+        FrameViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

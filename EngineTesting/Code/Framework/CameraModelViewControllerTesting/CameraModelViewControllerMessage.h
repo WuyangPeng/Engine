@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 18:03)
+///	版本：0.9.1.3 (2023/08/10 18:01)
 
 #ifndef CAMERA_MODEL_VIEW_CONTROLLER_TESTING_PIXEL_MODEL_VIEW_CONTROLLER_MESSAGE_H
 #define CAMERA_MODEL_VIEW_CONTROLLER_TESTING_PIXEL_MODEL_VIEW_CONTROLLER_MESSAGE_H
@@ -24,19 +24,24 @@ namespace CameraModelViewController
     using MiddleLayerType = Framework::ModelViewControllerMiddleLayerContainer<Framework::WindowApplicationTrait, Framework::CameraModelMiddleLayer, FrameViewMiddleLayer, Framework::CameraControllerMiddleLayer>;
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
-    class CameraModelViewControllerMessage : public MessageType
+    class CameraModelViewControllerMessage final : public MessageType
     {
     public:
         using ClassType = CameraModelViewControllerMessage;
         using ParentType = MessageType;
 
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        CameraModelViewControllerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        CameraModelViewControllerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+
+    private:
+        ConsoleAlloc alloc;
     };
 
     using CameraModelViewControllerTesting = Framework::WindowProcessHandle<CameraModelViewControllerMessage>;

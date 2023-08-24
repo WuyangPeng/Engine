@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:52)
+///	版本：0.9.1.3 (2023/08/10 09:43)
 
 #include "Framework/FrameworkExport.h"
 
 #include "AndroidCallBackInterface.h"
 
+#include "System/Helper/Tools.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
@@ -71,96 +72,120 @@ void Framework::AndroidCallBackInterface::InitMessage(AndroidApp* androidApp)
     state = androidApp;
 }
 
-void Framework::AndroidCallBackInterface::ResizedMessage(MAYBE_UNUSED AndroidApp* androidApp)
+void Framework::AndroidCallBackInterface::ResizedMessage(AndroidApp* androidApp)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(androidApp);
 
     CoreTools::DisableNoexcept();
 }
 
-void Framework::AndroidCallBackInterface::TermMessage(MAYBE_UNUSED AndroidApp* androidApp)
+void Framework::AndroidCallBackInterface::TermMessage(AndroidApp* androidApp)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(androidApp);
 
     CoreTools::DisableNoexcept();
 }
 
-void Framework::AndroidCallBackInterface::RedrawNeededMessage(MAYBE_UNUSED AndroidApp* androidApp)
+void Framework::AndroidCallBackInterface::RedrawNeededMessage(AndroidApp* androidApp)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(androidApp);
 
     CoreTools::DisableNoexcept();
 }
 
-void Framework::AndroidCallBackInterface::Display(MAYBE_UNUSED AndroidApp* androidApp, MAYBE_UNUSED int64_t timeDelta)
+void Framework::AndroidCallBackInterface::Display(AndroidApp* androidApp, int64_t timeDelta)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(androidApp, timeDelta);
 
     CoreTools::DisableNoexcept();
 }
 
-void Framework::AndroidCallBackInterface::NotDealCmdMessage(MAYBE_UNUSED AndroidApp* androidApp)
+void Framework::AndroidCallBackInterface::NotDealCmdMessage(AndroidApp* androidApp)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(androidApp);
 
     CoreTools::DisableNoexcept();
 }
 
-int Framework::AndroidCallBackInterface::NotDealInputMessage(MAYBE_UNUSED AndroidApp* androidApp, MAYBE_UNUSED AndroidInputEvent* androidInputEvent)
+int Framework::AndroidCallBackInterface::NotDealInputMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    CoreTools::DisableNoexcept();
-
-    return 0;
-}
-
-void Framework::AndroidCallBackInterface::RectChanged(MAYBE_UNUSED AndroidApp* androidApp)
-{
-    FRAMEWORK_CLASS_IS_VALID_9;
-
-    CoreTools::DisableNoexcept();
-}
-
-int Framework::AndroidCallBackInterface::KeyDownMessage(MAYBE_UNUSED AndroidApp* androidApp, MAYBE_UNUSED AndroidInputEvent* androidInputEvent)
-{
-    FRAMEWORK_CLASS_IS_VALID_9;
+    System::UnusedFunction(androidApp, androidInputEvent);
 
     CoreTools::DisableNoexcept();
 
     return 0;
 }
 
-int Framework::AndroidCallBackInterface::KeyUpMessage(MAYBE_UNUSED AndroidApp* androidApp, MAYBE_UNUSED AndroidInputEvent* androidInputEvent)
+void Framework::AndroidCallBackInterface::RectChanged(AndroidApp* androidApp)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(androidApp);
+
+    CoreTools::DisableNoexcept();
+}
+
+int Framework::AndroidCallBackInterface::KeyDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(androidApp, androidInputEvent);
 
     CoreTools::DisableNoexcept();
 
     return 0;
 }
 
-int Framework::AndroidCallBackInterface::ActionDownMessage(MAYBE_UNUSED AndroidApp* androidApp, MAYBE_UNUSED AndroidInputEvent* androidInputEvent)
+int Framework::AndroidCallBackInterface::KeyUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(androidApp, androidInputEvent);
 
     CoreTools::DisableNoexcept();
 
     return 0;
 }
 
-int Framework::AndroidCallBackInterface::ActionUpMessage(MAYBE_UNUSED AndroidApp* androidApp, MAYBE_UNUSED AndroidInputEvent* androidInputEvent)
+int Framework::AndroidCallBackInterface::ActionDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(androidApp, androidInputEvent);
 
     CoreTools::DisableNoexcept();
 
     return 0;
 }
 
-int Framework::AndroidCallBackInterface::ActionMoveMessage(MAYBE_UNUSED AndroidApp* androidApp, MAYBE_UNUSED AndroidInputEvent* androidInputEvent)
+int Framework::AndroidCallBackInterface::ActionUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(androidApp, androidInputEvent);
+
+    CoreTools::DisableNoexcept();
+
+    return 0;
+}
+
+int Framework::AndroidCallBackInterface::ActionMoveMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(androidApp, androidInputEvent);
 
     CoreTools::DisableNoexcept();
 

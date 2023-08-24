@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/22 16:23)
+///	版本：0.9.1.3 (2023/08/14 15:55)
 
 #ifndef DATABASE_CONFIGURATION_FWD_H
 #define DATABASE_CONFIGURATION_FWD_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:21)
+///	版本：0.9.1.3 (2023/08/05 16:50)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_EVENT_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_EVENT_MANAGER_INTERFACE_H
@@ -19,9 +19,9 @@
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
+// 游戏事件管理（针对游戏元素中设计者所规定的操作序列进行管理）。
 namespace Framework
 {
-    // 游戏事件管理（针对游戏元素中设计者所规定的操作序列进行管理）。
     class FRAMEWORK_DEFAULT_DECLARE EventManagerInterface : public EngineMiddleLayerInterface
     {
     public:
@@ -30,7 +30,7 @@ namespace Framework
         using ParentType = EngineMiddleLayerInterface;
 
     public:
-        explicit EventManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
+        EventManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -51,8 +51,8 @@ namespace Framework
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
 
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Message);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System);
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Message)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System)
 
     private:
         PackageType impl;

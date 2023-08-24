@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 23:19)
+///	版本：0.9.1.3 (2023/08/10 14:44)
 
 #include "WindowRegisterParameterTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,12 +13,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/WindowRegister/WindowRegisterParameter.h"
 
-namespace Framework
-{
-    using TestingType = WindowRegisterParameter;
-}
-
-Framework::WindowRegisterParameterTesting::WindowRegisterParameterTesting(const OStreamShared& stream, HInstance instance)
+Framework::WindowRegisterParameterTesting::WindowRegisterParameterTesting(const OStreamShared& stream, WindowsHInstance instance)
     : ParentType{ stream }, instance{ instance }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -49,7 +44,7 @@ void Framework::WindowRegisterParameterTesting::MainTest()
 
 void Framework::WindowRegisterParameterTesting::DefaultTest()
 {
-    const TestingType parameter{ instance };
+    const WindowRegisterParameter parameter{ instance };
 
     ASSERT_EQUAL(parameter.GetHInstance(), instance);
     ASSERT_ENUM_EQUAL(parameter.GetStyle(), System::WindowsClassStyle::CommonUse);
@@ -59,11 +54,11 @@ void Framework::WindowRegisterParameterTesting::DefaultTest()
 
 void Framework::WindowRegisterParameterTesting::FullyTest()
 {
-    const auto styles = System::WindowsClassStyle::CommonUse | System::WindowsClassStyle::NoClose;
+    constexpr auto styles = System::WindowsClassStyle::CommonUse | System::WindowsClassStyle::NoClose;
     constexpr auto windowClassExtra = 5;
     constexpr auto windowExtra = 6;
 
-    const TestingType parameter{ instance, styles, windowClassExtra, windowExtra };
+    const WindowRegisterParameter parameter{ instance, styles, windowClassExtra, windowExtra };
 
     ASSERT_EQUAL(parameter.GetHInstance(), instance);
     ASSERT_ENUM_EQUAL(parameter.GetStyle(), styles);

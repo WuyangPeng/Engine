@@ -5,11 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:35)
+///	版本：0.9.1.3 (2023/08/10 10:50)
 
 #ifndef WINDOW_MESSAGE_UNIT_TEST_SUITE_TESTING_H
 #define WINDOW_MESSAGE_UNIT_TEST_SUITE_TESTING_H
 
-#include "WindowMessageUnitTestSuite/WindowMessageUnitTestSuiteTesting.h"
+#include "WindowMessageUnitTestSuite/WindowMessageUnitTestSuite.h"
 
 #endif  // WINDOW_MESSAGE_UNIT_TEST_SUITE_TESTING_H

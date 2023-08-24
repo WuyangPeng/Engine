@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:36)
+///	版本：0.9.1.3 (2023/08/10 09:50)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -13,8 +13,8 @@
 #include "Framework/MainFunctionHelper/WindowMainFunctionHelperDetail.h"
 #include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h"
 
-WindowsAPIFrameTesting::TestingHelper::TestingHelper(WindowsHInstance hInstance, const char* lpCmdLine, const WindowApplicationInformation& information, const Framework::EnvironmentDirectory& environmentDirectory)
-    : ParentType(hInstance, lpCmdLine, information, environmentDirectory)
+WindowsAPIFrameTesting::TestingHelper::TestingHelper(WindowsHInstance hInstance, const char* lpCmdLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ hInstance, lpCmdLine, information, environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }

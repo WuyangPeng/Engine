@@ -4,54 +4,54 @@
   },
 
   "artificialIntelligenceSuite": {
-
+    "ArtificialIntelligenceManagerTesting": 1
   },
 
   "audioSuite": {
-
+    "AudioManagerTesting": 1
   },
 
   "cameraSystemsSuite": {
-
+    "CameraSystemsManagerTesting": 1
   },
 
   "eventSuite": {
-
+    "EventManagerTesting": 1
   },
 
   "guiSuite": {
-
+    "GUIManagerTesting": 1
   },
 
   "inputSuite": {
-
+    "InputManagerTesting": 1
   },
 
   "messageSuite": {
-
+    "MessageManagerTesting": 1
   },
 
   "networkSuite": {
-
+    "NetworkManagerTesting": 1
   },
 
   "objectLogicSuite": {
-
+    "ObjectLogicManagerTesting": 1
   },
 
   "physicalModellingSuite": {
-
+    "PhysicalModellingManagerTesting": 1
   },
 
   "renderingSuite": {
-
+    "RenderingManagerTesting": 1
   },
 
   "resourceSuite": {
-
+    "ResourceManagerTesting": 1
   },
 
   "systemSuit": {
-
+    "SystemManagerTesting": 1
   }
 }

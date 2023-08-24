@@ -5,15 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:10)
+///	版本：0.9.1.3 (2023/08/10 15:55)
 
 #include "WindowApplicationInformationTesting.h"
-#include "resource.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/Flags/WindowsFlags.h"
-#include "System/Windows/Using/WindowsRegistryUsing.h"
-#include "System/Windows/WindowsRegister.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -24,12 +20,7 @@
 
 using namespace std::literals;
 
-namespace Framework
-{
-    using TestingType = WindowApplicationInformation;
-}
-
-Framework::WindowApplicationInformationTesting::WindowApplicationInformationTesting(const OStreamShared& stream, HInstance instance)
+Framework::WindowApplicationInformationTesting::WindowApplicationInformationTesting(const OStreamShared& stream, WindowsHInstance instance)
     : ParentType{ stream }, instance{ instance }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -47,7 +38,6 @@ void Framework::WindowApplicationInformationTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(InformationTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AllowResizeTest);
     ASSERT_NOT_THROW_EXCEPTION_0(NotAllowedResizeTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(RendererParameterTest);
 }
 
 void Framework::WindowApplicationInformationTesting::InformationTest()
@@ -60,12 +50,12 @@ void Framework::WindowApplicationInformationTesting::InformationTest()
     constexpr auto y = 120;
     constexpr WindowPoint point{ x, y };
 
-    auto windowTitle = SYSTEM_TEXT("WindowApplicationInformation"s);
-    auto windowName = SYSTEM_TEXT("Window"s);
+    const auto windowTitle = SYSTEM_TEXT("WindowApplicationInformation"s);
+    const auto windowName = SYSTEM_TEXT("Window"s);
 
-    WindowPictorial windowPictorial{ System::WindowsBrushTypes::WhiteBrush };
+    const WindowPictorial windowPictorial{ System::WindowsBrushTypes::WhiteBrush };
 
-    TestingType information{ windowTitle, size };
+    WindowApplicationInformation information{ windowTitle, size };
 
     ASSERT_EQUAL(information.GetWindowTitle(), windowTitle);
     ASSERT_EQUAL(information.GetWindowTitleWithMultiByte(), "WindowApplicationInformation"s);
@@ -102,12 +92,12 @@ void Framework::WindowApplicationInformationTesting::AllowResizeTest()
     constexpr auto y = 120;
     constexpr WindowPoint point{ x, y };
 
-    auto windowTitle = SYSTEM_TEXT("WindowApplicationInformation"s);
-    auto windowName = SYSTEM_TEXT("Window"s);
+    const auto windowTitle = SYSTEM_TEXT("WindowApplicationInformation"s);
+    const auto windowName = SYSTEM_TEXT("Window"s);
 
-    WindowPictorial windowPictorial{ System::WindowsBrushTypes::WhiteBrush };
+    const WindowPictorial windowPictorial{ System::WindowsBrushTypes::WhiteBrush };
 
-    TestingType information{ windowTitle, size, point, true };
+    const WindowApplicationInformation information{ windowTitle, size, point, true };
 
     ASSERT_EQUAL(information.GetWindowTitle(), windowTitle);
     ASSERT_EQUAL(information.GetWindowTitleWithMultiByte(), "WindowApplicationInformation"s);
@@ -137,12 +127,12 @@ void Framework::WindowApplicationInformationTesting::NotAllowedResizeTest()
     constexpr auto y = 120;
     constexpr WindowPoint point{ x, y };
 
-    auto windowTitle = SYSTEM_TEXT("WindowApplicationInformation"s);
-    auto windowName = SYSTEM_TEXT("Window"s);
+    const auto windowTitle = SYSTEM_TEXT("WindowApplicationInformation"s);
+    const auto windowName = SYSTEM_TEXT("Window"s);
 
-    WindowPictorial windowPictorial{ System::WindowsBrushTypes::WhiteBrush };
+    const WindowPictorial windowPictorial{ System::WindowsBrushTypes::WhiteBrush };
 
-    TestingType information{ windowTitle, size, point, false };
+    const WindowApplicationInformation information{ windowTitle, size, point, false };
 
     ASSERT_EQUAL(information.GetWindowTitle(), windowTitle);
     ASSERT_EQUAL(information.GetWindowTitleWithMultiByte(), "WindowApplicationInformation"s);
@@ -160,9 +150,4 @@ void Framework::WindowApplicationInformationTesting::NotAllowedResizeTest()
     ASSERT_EQUAL(information.GetWindowPictorial().GetHBrush(), windowPictorial.GetHBrush());
     ASSERT_EQUAL(information.GetWindowPictorial().GetHCursor(), windowPictorial.GetHCursor());
     ASSERT_EQUAL(information.GetWindowPictorial().GetHIcon(), windowPictorial.GetHIcon());
-}
-
-void Framework::WindowApplicationInformationTesting::RendererParameterTest() noexcept
-{
-
 }

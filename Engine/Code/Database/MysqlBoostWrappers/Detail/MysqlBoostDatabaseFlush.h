@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/23 13:38)
+///	版本：0.9.1.3 (2023/08/14 15:07)
 
 #ifndef DATABASE_MYSQL_BOOST_WRAPPERS_MYSQL_BOOST_DATABASE_FLUSH_H
 #define DATABASE_MYSQL_BOOST_WRAPPERS_MYSQL_BOOST_DATABASE_FLUSH_H
@@ -14,8 +14,7 @@
 
 #include "MysqlBoostConnection.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/DatabaseInterface/DatabaseFlush.h"
-#include "Database/DatabaseInterface/DatabaseInterfaceFwd.h"
+#include "Database/DatabaseInterface/DatabaseFlush.h" 
 #include "Database/DatabaseInterface/Detail/DatabaseFlushImpl.h"
 
 #include <vector>
@@ -27,6 +26,7 @@ namespace Database
     public:
         using ClassType = MysqlBoostDatabaseFlush;
         using ParentType = DatabaseFlushImpl;
+
         using MysqlBoostConnectionSharedPtr = std::shared_ptr<MysqlBoostConnection>;
         using Container = std::vector<MysqlBoostConnectionSharedPtr>;
 

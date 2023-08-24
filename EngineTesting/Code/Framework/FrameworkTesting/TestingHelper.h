@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:45)
+///	版本：0.9.1.3 (2023/08/11 18:22)
 
 #ifndef FRAMEWORK_TESTING_TESTING_HELPER_H
 #define FRAMEWORK_TESTING_TESTING_HELPER_H
@@ -22,11 +22,6 @@ namespace Framework
 
     public:
         TestingHelper(int argc, char** argv);
-        ~TestingHelper() noexcept;
-        TestingHelper(const TestingHelper& rhs) = delete;
-        TestingHelper& operator=(const TestingHelper& rhs) = delete;
-        TestingHelper(TestingHelper&& rhs) noexcept = delete;
-        TestingHelper& operator=(TestingHelper&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_FINAL_DECLARE;
 

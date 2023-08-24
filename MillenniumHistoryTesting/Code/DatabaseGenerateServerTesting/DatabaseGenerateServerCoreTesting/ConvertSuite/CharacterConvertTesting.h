@@ -5,39 +5,41 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/28 20:16)
+///	版本：0.9.1.3 (2023/08/03 23:10)
 
-#ifndef DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_CHARACTER_CONVERT_TESTING_H
-#define DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_CHARACTER_CONVERT_TESTING_H
+#ifndef DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_CHARACTER_CONVERT_TESTING_H
+#define DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_CHARACTER_CONVERT_TESTING_H
 
-#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/AncientBooksContainer.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "ConvertTesting.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/CharacterContainer.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity/DatabaseEntityFwd.h"
 
 namespace DatabaseGenerateServerCoreTesting
 {
-    class CharacterConvertTesting final : public CoreTools::UnitTest
+    class CharacterConvertTesting final : public ConvertTesting
     {
     public:
         using ClassType = CharacterConvertTesting;
-        using ParentType = UnitTest;
+        using ParentType = ConvertTesting;
 
-        using AncientBooksContainer = AncientBooks::AncientBooksContainer;
+        using CharacterContainer = AncientBooks::CharacterContainer;
 
     public:
-        CharacterConvertTesting(const OStreamShared& stream, const AncientBooksContainer& ancientBooksContainer);
+        CharacterConvertTesting(const OStreamShared& stream, const CharacterContainer& characterContainer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        void MainTest();
-        void DoRunUnitTest() override;
-
-        void InitEnvironmentTest();
-        void DatabaseFlushTest();
+        using Character = AncientBooks::CharacterBase;
+        using CharacterEntity = DatabaseEntity::CharacterEntity;
 
     private:
-        AncientBooksContainer ancientBooksContainer;
+        void ConvertTest(const DatabaseFlushSharedPtr& databaseFlush) override;
+        void EqualTest(const Character& character, const CharacterEntity& characterEntity);
+
+    private:
+        CharacterContainer characterContainer;
     };
 }
 
-#endif  // DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_CHARACTER_CONVERT_TESTING_H
+#endif  // DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_CHARACTER_CONVERT_TESTING_H

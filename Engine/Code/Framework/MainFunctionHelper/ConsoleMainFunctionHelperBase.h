@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:39)
+///	版本：0.9.1.3 (2023/08/08 19:26)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_BASE_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_BASE_H
@@ -26,6 +26,7 @@ namespace Framework
     public:
         NON_COPY_TYPE_DECLARE(ConsoleMainFunctionHelperBase);
         using ParentType = MainFunctionHelperBase;
+
         using String = System::String;
         using Command = CoreTools::CommandHandle;
 
@@ -37,7 +38,7 @@ namespace Framework
         NODISCARD int GetArgc() const noexcept;
         NODISCARD char** GetArgv() const noexcept;
         NODISCARD String GetApplicationProjectDirectory() const;
-        NODISCARD Command GetCommand() const noexcept;
+        NODISCARD Command GetCommand() const;
 
     private:
         void ConsoleMainFunctionHelperInit(const String& consoleTitle);

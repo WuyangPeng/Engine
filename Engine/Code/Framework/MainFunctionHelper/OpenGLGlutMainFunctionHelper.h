@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:39)
+///	版本：0.9.1.3 (2023/08/08 19:17)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_OPENGL_GLUT_MAIN_FUNCTION_HELPER_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_OPENGL_GLUT_MAIN_FUNCTION_HELPER_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "MainFunctionHelperBase.h"
 #include "Framework/Application/ApplicationFwd.h"
@@ -21,6 +23,7 @@ namespace Framework
     public:
         using ClassType = OpenGLGlutMainFunctionHelper<Build, Process>;
         using ParentType = MainFunctionHelperBase;
+
         using ClassShareType = CoreTools::NonCopyClasses;
         using BuildType = Build<Process>;
 
@@ -47,14 +50,14 @@ namespace Framework
         NODISCARD int DoRun() override;
         NODISCARD virtual int RunOpenGLGlutMainLoop();
 
-        void Initializers(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
+        void Initializer(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
         void Terminators();
 
         void InitOpenGLGlutProcess();
         void InitCamera();
-        void InitImpl(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
+        void InitOpenGLImpl(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
 
-        void DestroyImpl() noexcept;
+        void DestroyOpenGLImpl() noexcept;
         void DestroyCamera() noexcept;
         void DestroyOpenGLGlutProcess();
 

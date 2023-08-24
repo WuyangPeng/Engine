@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/24 13:44)
+///	版本：0.9.1.3 (2023/08/14 15:19)
 
 #ifndef DATABASE_DATABASE_INTERFACE_DATABASE_MANAGER_IMPL_H
 #define DATABASE_DATABASE_INTERFACE_DATABASE_MANAGER_IMPL_H
@@ -26,6 +26,7 @@ namespace Database
     {
     public:
         using ClassType = DatabaseManagerImpl;
+
         using String = System::String;
         using ResultContainer = std::vector<BasisDatabaseManager>;
         using FieldNameContainer = std::vector<DatabaseField>;

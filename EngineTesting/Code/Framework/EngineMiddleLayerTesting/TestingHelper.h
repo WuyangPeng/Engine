@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 18:17)
+///	版本：0.9.1.3 (2023/08/11 14:13)
 
 #ifndef ENGINE_MIDDLE_LAYER_TESTING_TESTING_HELPER_H
 #define ENGINE_MIDDLE_LAYER_TESTING_TESTING_HELPER_H
@@ -18,11 +18,12 @@ namespace EngineMiddleLayer
 {
     using TestingHelperBase = Framework::WindowMainFunctionHelper<Framework::WindowsAPIFrameBuild, EngineMiddleLayerTesting>;
 
-    class TestingHelper : public TestingHelperBase
+    class TestingHelper final : public TestingHelperBase
     {
     public:
         using ClassType = TestingHelper;
         using ParentType = TestingHelperBase;
+
         using WindowApplicationInformation = Framework::WindowApplicationInformation;
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:12)
+///	版本：0.9.1.3 (2023/08/14 11:09)
 
 #include "MiddleLayerInterfaceTestingBaseDetail.h"
 #include "RenderingManagerInterfaceTesting.h"
@@ -14,14 +14,10 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/MiddleLayer/RenderingManagerInterface.h"
 #include "Framework/MiddleLayer/SystemManagerInterface.h"
 #include "Framework/WindowCreate/WindowPoint.h"
-#include "Framework/WindowCreate/WindowSize.h"
-#include "Framework/WindowProcess/Flags/MouseTypes.h"
-#include "Framework/WindowProcess/VirtualKeysTypes.h"
 
 Framework::RenderingManagerInterfaceTesting::RenderingManagerInterfaceTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -56,7 +52,7 @@ void Framework::RenderingManagerInterfaceTesting::MainTest()
 
 void Framework::RenderingManagerInterfaceTesting::MiddleLayerTest()
 {
-    auto middleLayer = RenderingManagerInterface::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
+    const auto middleLayer = std::make_shared<RenderingManagerInterface>(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
     ASSERT_TRUE(middleLayer->PreCreate());
     ASSERT_TRUE(middleLayer->Create(Rendering::EnvironmentParameter::Create()));
@@ -105,113 +101,113 @@ void Framework::RenderingManagerInterfaceTesting::SetMiddleLayerTest()
 
 void Framework::RenderingManagerInterfaceTesting::SetSystemManagerTest()
 {
-    auto middleLayer = RenderingManagerInterface::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
+    const auto middleLayer = std::make_shared<RenderingManagerInterface>(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
-    auto systemManager = std::make_shared<SystemManagerInterface>(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
+    const auto systemManager = std::make_shared<SystemManagerInterface>(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
     middleLayer->SetSystemManager(systemManager);
 }
 
 void Framework::RenderingManagerInterfaceTesting::GetMiddleLayerTest()
 {
-    using Funtion = MiddleLayerInterfaceSharedPtr (RenderingManagerInterfaceTest::*)();
+    using Function = MiddleLayerInterfaceSharedPtr (RenderingManagerInterfaceTest::*)();
 
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetNetworkManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetNetworkManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetInputManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetInputManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetObjectLogicManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetObjectLogicManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetPhysicalModellingManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetPhysicalModellingManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetMessageManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetMessageManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetEventManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetEventManager));
 
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetResourceManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetResourceManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetAudioManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetAudioManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetCameraSystemsManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetCameraSystemsManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetRenderingManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetRenderingManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetGUIManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetGUIManager));
     ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetEngineManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetEngineManager));
 }
 
 void Framework::RenderingManagerInterfaceTesting::GetConstMiddleLayerTest()
 {
-    using Funtion = ConstMiddleLayerInterfaceSharedPtr (RenderingManagerInterfaceTest::*)() const;
+    using Function = ConstMiddleLayerInterfaceSharedPtr (RenderingManagerInterfaceTest::*)() const;
 
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetNetworkManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetNetworkManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetInputManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetInputManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetObjectLogicManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetObjectLogicManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetPhysicalModellingManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetPhysicalModellingManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetMessageManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetMessageManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetEventManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetEventManager));
 
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetResourceManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetResourceManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetAudioManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetAudioManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetCameraSystemsManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetCameraSystemsManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetRenderingManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetRenderingManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetGUIManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetGUIManager));
     ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
-                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetEngineManager));
+                             static_cast<Function>(&RenderingManagerInterfaceTest::GetEngineManager));
 }
 
 void Framework::RenderingManagerInterfaceTesting::GetSystemManagerTest()
 {
-    auto middleLayer = RenderingManagerInterfaceTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
+    const auto middleLayer = RenderingManagerInterfaceTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
-    auto systemManager = std::make_shared<SystemManagerInterface>(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
+    const auto systemManager = std::make_shared<SystemManagerInterface>(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
     middleLayer->SetSystemManager(systemManager);
 
     ASSERT_EQUAL(middleLayer->GetSystemManager(), systemManager);
 
-    ConstRenderingManagerInterfaceTestSharedPtr constMiddleLayer = middleLayer;
+    const auto constMiddleLayer = middleLayer;
 
     ASSERT_EQUAL(constMiddleLayer->GetSystemManager(), systemManager);
 }
 
 void Framework::RenderingManagerInterfaceTesting::RendererTest()
 {
-    auto middleLayer = RenderingManagerInterfaceTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
+    const auto middleLayer = RenderingManagerInterfaceTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
     ASSERT_TRUE(middleLayer->Create(Rendering::EnvironmentParameter::Create()));
 
     ASSERT_UNEQUAL_NULL_PTR(middleLayer->GetRendererSharedPtr());
 
-    ConstRenderingManagerInterfaceTestSharedPtr constMiddleLayer = middleLayer;
+    const auto constMiddleLayer = middleLayer;
 
     ASSERT_UNEQUAL_NULL_PTR(constMiddleLayer->GetRendererSharedPtr());
 }
 
 void Framework::RenderingManagerInterfaceTesting::RendererExceptionTest()
 {
-    auto middleLayer = RenderingManagerInterfaceTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
+    const auto middleLayer = RenderingManagerInterfaceTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
     auto renderer = middleLayer->GetRendererSharedPtr();
 }
 
 void Framework::RenderingManagerInterfaceTesting::ConstRendererExceptionTest()
 {
-    ConstRenderingManagerInterfaceTestSharedPtr middleLayer{ RenderingManagerInterfaceTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory()) };
+    const ConstRenderingManagerInterfaceTestSharedPtr middleLayer{ RenderingManagerInterfaceTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory()) };
 
     auto renderer = middleLayer->GetRendererSharedPtr();
 }

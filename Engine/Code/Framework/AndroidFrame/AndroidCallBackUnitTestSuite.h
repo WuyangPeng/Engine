@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:51)
+///	版本：0.9.1.3 (2023/08/09 20:49)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_UNIT_TEST_SUITE_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_UNIT_TEST_SUITE_H
@@ -19,7 +19,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(AndroidCallBackUnitTestSuiteImpl);
-EXPORT_SHARED_PTR(Framework, WindowMessageUnitTestSuiteStream, FRAMEWORK_DEFAULT_DECLARE);
 
 namespace Framework
 {
@@ -28,18 +27,14 @@ namespace Framework
     public:
         NON_COPY_TYPE_DECLARE(AndroidCallBackUnitTestSuite);
         using ParentType = AndroidCallBackInterface;
-        using StreamType = WindowMessageUnitTestSuiteStream;
+
         using Suite = CoreTools::Suite;
         using OStreamShared = CoreTools::OStreamShared;
-        using UnitTestSharedPtr = std::shared_ptr<CoreTools::UnitTestComposite>;
+        using UnitTestComposite = CoreTools::UnitTestComposite;
+        using UnitTestSharedPtr = std::shared_ptr<UnitTestComposite>;
 
     public:
         AndroidCallBackUnitTestSuite(int64_t delta, const std::string& suiteName);
-        ~AndroidCallBackUnitTestSuite() noexcept = default;
-        AndroidCallBackUnitTestSuite(const AndroidCallBackUnitTestSuite& rhs) noexcept = delete;
-        AndroidCallBackUnitTestSuite& operator=(const AndroidCallBackUnitTestSuite& rhs) noexcept = delete;
-        AndroidCallBackUnitTestSuite(AndroidCallBackUnitTestSuite&& rhs) noexcept;
-        AndroidCallBackUnitTestSuite& operator=(AndroidCallBackUnitTestSuite&& rhs) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -52,12 +47,7 @@ namespace Framework
         NODISCARD bool IsPrintRun() const noexcept;
 
         template <typename TestType, typename... Types>
-        void AddTest(Suite& suite, const std::string& suiteName, const std::string& testName, Types&&... args)
-        {
-            auto unitTest = std::make_shared<TestType>(GetStreamShared(), std::forward<Types>(args)...);
-
-            AddTest(suiteName, suite, testName, unitTest);
-        }
+        void AddTest(Suite& suite, const std::string& suiteName, const std::string& testName, Types&&... args);
 
         void AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest);
 
@@ -69,9 +59,6 @@ namespace Framework
         void AddSuite(const Suite& suite);
 
     private:
-        using StreamTypeSharedPtr = std::shared_ptr<StreamType>;
-
-    private:
         virtual void InitSuite() = 0;
 
         NODISCARD bool AddSuiteOnInitialize();
@@ -79,7 +66,6 @@ namespace Framework
         void ResetTestData();
 
     private:
-        StreamTypeSharedPtr streamType;
         PackageType impl;
         bool isInit;
     };

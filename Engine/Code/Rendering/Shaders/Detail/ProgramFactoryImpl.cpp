@@ -9,6 +9,7 @@
 
 #include "Rendering/RenderingExport.h"
 
+#include "NullProgramFactory.h"
 #include "ProgramFactoryImpl.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -152,6 +153,9 @@ Rendering::ProgramFactoryImpl::ProgramFactorySharedPtr Rendering::ProgramFactory
         case RendererTypes::OpenGL:
         case RendererTypes::OpenGLES:
             return GLSLProgramFactory::Create();
+
+        case RendererTypes::Windows:
+            return std::make_shared<NullProgramFactory>(CoreTools::DisableNotThrow::Disable);
 
         default:
             break;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/23 15:34)
+///	版本：0.9.1.3 (2023/08/14 15:08)
 
 #ifndef DATABASE_MONGO_WRAPPERS_MONGO_CONNECTION_H
 #define DATABASE_MONGO_WRAPPERS_MONGO_CONNECTION_H
@@ -27,6 +27,7 @@ namespace Database
     {
     public:
         using ClassType = MongoConnection;
+
         using ResultContainer = std::vector<BasisDatabaseManager>;
         using FieldNameContainer = std::vector<DatabaseField>;
 
@@ -45,7 +46,7 @@ namespace Database
 
         NODISCARD BasisDatabaseManager SelectOne(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
         NODISCARD ResultContainer SelectAll(const BasisDatabaseManager& basisDatabaseContainer, const FieldNameContainer& fieldNameContainer);
-       
+
         void Wait();
 
     private:

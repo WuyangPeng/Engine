@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/28 22:29)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:43)
 
 #ifndef GAME_MASTER_SERVER_GAME_MASTER_SERVER_MESSAGE_H
 #define GAME_MASTER_SERVER_GAME_MASTER_SERVER_MESSAGE_H
 
-#include "GameMasterServer/GameMasterServerMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "GameMasterServer/GameMasterServerMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "GameMasterServer/GameMasterServerMiddleLayer/Audio/AudioManager.h"
 #include "GameMasterServer/GameMasterServerMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "GameMasterServer/GameMasterServerMiddleLayer/Event/EventManager.h"
@@ -32,7 +32,7 @@
 
 namespace GameMasterServer
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<GameMasterServerMiddleLayer::ObjectLogicManager, GameMasterServerMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<GameMasterServerMiddleLayer::ObjectLogicManager, GameMasterServerMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   GameMasterServerMiddleLayer::InputManager,
                                                                   GameMasterServerMiddleLayer::NetworkManager,
@@ -54,13 +54,16 @@ namespace GameMasterServer
         using ClassType = GameMasterServerMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit GameMasterServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        GameMasterServerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using GameMasterServerMessageWindowProcessHandle = Framework::WindowProcessHandle<GameMasterServerMessage>;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:19)
+///	版本：0.9.1.3 (2023/08/11 19:22)
 
 #include "MiddleLayerMacroTesting.h"
 #include "Detail/ChildHelperInterface.h"
@@ -65,31 +65,31 @@ void Framework::MiddleLayerMacroTesting::HelperManagerSuccessTest()
     constexpr auto middleLayerPlatform = MiddleLayerPlatform::Windows;
     HelperManagerInterface helperManagerInterface{ middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto inputManager = std::make_shared<InputManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto inputManager = std::make_shared<InputManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     helperManagerInterface.SetInputManager(inputManager);
 
-    auto objectLogicManager = std::make_shared<ObjectLogicManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto objectLogicManager = std::make_shared<ObjectLogicManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     helperManagerInterface.SetObjectLogicManager(objectLogicManager);
 
-    auto messageManager = std::make_shared<MessageManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto messageManager = std::make_shared<MessageManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     helperManagerInterface.SetMessageManager(messageManager);
 
-    auto eventManager = std::make_shared<EventManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto eventManager = std::make_shared<EventManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     helperManagerInterface.SetEventManager(eventManager);
 
-    auto resourceManager = std::make_shared<ResourceManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto resourceManager = std::make_shared<ResourceManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     helperManagerInterface.SetResourceManager(resourceManager);
 
-    auto audioManager = std::make_shared<AudioManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto audioManager = std::make_shared<AudioManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     helperManagerInterface.SetAudioManager(audioManager);
 
-    auto cameraSystemsManager = std::make_shared<CameraSystemsManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraSystemsManager = std::make_shared<CameraSystemsManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     helperManagerInterface.SetCameraSystemsManager(cameraSystemsManager);
 
-    auto renderingManager = RenderingManagerInterface::CreateMiddleLayer(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto renderingManager = std::make_shared<RenderingManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     helperManagerInterface.SetRenderingManager(renderingManager);
 
-    std::shared_ptr<EngineMiddleLayerInterface> engineMiddleLayer{ EngineMiddleLayerInterface::CreateMiddleLayer(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }) };
+    const auto engineMiddleLayer = std::make_shared<EngineMiddleLayerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     helperManagerInterface.SetEngineManager(engineMiddleLayer);
 
     ASSERT_EQUAL(helperManagerInterface.GetManager(HelperMiddleLayer::Input), inputManager);
@@ -108,31 +108,31 @@ void Framework::MiddleLayerMacroTesting::ChildHelperManagerSuccessTest()
     constexpr auto middleLayerPlatform = MiddleLayerPlatform::Windows;
     ChildHelperInterface childHelperManagerInterface{ middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto inputManager = std::make_shared<InputManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto inputManager = std::make_shared<InputManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     childHelperManagerInterface.SetInputManager(inputManager);
 
-    auto objectLogicManager = std::make_shared<ObjectLogicManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto objectLogicManager = std::make_shared<ObjectLogicManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     childHelperManagerInterface.SetObjectLogicManager(objectLogicManager);
 
-    auto messageManager = std::make_shared<MessageManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto messageManager = std::make_shared<MessageManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     childHelperManagerInterface.SetMessageManager(messageManager);
 
-    auto eventManager = std::make_shared<EventManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto eventManager = std::make_shared<EventManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     childHelperManagerInterface.SetEventManager(eventManager);
 
-    auto resourceManager = std::make_shared<ResourceManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto resourceManager = std::make_shared<ResourceManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     childHelperManagerInterface.SetResourceManager(resourceManager);
 
-    auto audioManager = std::make_shared<AudioManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto audioManager = std::make_shared<AudioManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     childHelperManagerInterface.SetAudioManager(audioManager);
 
-    auto cameraSystemsManager = std::make_shared<CameraSystemsManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraSystemsManager = std::make_shared<CameraSystemsManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     childHelperManagerInterface.SetCameraSystemsManager(cameraSystemsManager);
 
-    auto renderingManager = RenderingManagerInterface::CreateMiddleLayer(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto renderingManager = std::make_shared<RenderingManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     childHelperManagerInterface.SetRenderingManager(renderingManager);
 
-    std::shared_ptr<EngineMiddleLayerInterface> engineMiddleLayer{ EngineMiddleLayerInterface::CreateMiddleLayer(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }) };
+    const auto engineMiddleLayer = std::make_shared<EngineMiddleLayerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     childHelperManagerInterface.SetEngineManager(engineMiddleLayer);
 
     ASSERT_EQUAL(childHelperManagerInterface.GetManager(ChildHelperMiddleLayer::Input), inputManager);
@@ -151,7 +151,7 @@ void Framework::MiddleLayerMacroTesting::HelperManagerNetworkExceptionTest()
     constexpr auto middleLayerPlatform = MiddleLayerPlatform::Windows;
     HelperManagerInterface helperManagerInterface{ middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto networkManager = std::make_shared<NetworkManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto networkManager = std::make_shared<NetworkManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     helperManagerInterface.SetNetworkManager(networkManager);
 }
@@ -161,7 +161,7 @@ void Framework::MiddleLayerMacroTesting::HelperManagerPhysicalModellingException
     constexpr auto middleLayerPlatform = MiddleLayerPlatform::Windows;
     HelperManagerInterface helperManagerInterface{ middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto physicalModellingManager = std::make_shared<PhysicalModellingManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto physicalModellingManager = std::make_shared<PhysicalModellingManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     helperManagerInterface.SetPhysicalModellingManager(physicalModellingManager);
 }
@@ -171,7 +171,7 @@ void Framework::MiddleLayerMacroTesting::HelperManagerSystemExceptionTest()
     constexpr auto middleLayerPlatform = MiddleLayerPlatform::Windows;
     HelperManagerInterface helperManagerInterface{ middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto systemManager = std::make_shared<SystemManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto systemManager = std::make_shared<SystemManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     helperManagerInterface.SetSystemManager(systemManager);
 }
@@ -181,7 +181,7 @@ void Framework::MiddleLayerMacroTesting::HelperManagerGUIExceptionTest()
     constexpr auto middleLayerPlatform = MiddleLayerPlatform::Windows;
     HelperManagerInterface helperManagerInterface{ middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto guiManager = std::make_shared<GUIManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto guiManager = std::make_shared<GUIManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     helperManagerInterface.SetGUIManager(guiManager);
 }
@@ -191,7 +191,7 @@ void Framework::MiddleLayerMacroTesting::ChildHelperManagerNetworkExceptionTest(
     constexpr auto middleLayerPlatform = MiddleLayerPlatform::Windows;
     ChildHelperInterface childHelperManagerInterface{ middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto networkManager = std::make_shared<NetworkManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto networkManager = std::make_shared<NetworkManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     childHelperManagerInterface.SetNetworkManager(networkManager);
 }
@@ -201,7 +201,7 @@ void Framework::MiddleLayerMacroTesting::ChildHelperManagerPhysicalModellingExce
     constexpr auto middleLayerPlatform = MiddleLayerPlatform::Windows;
     ChildHelperInterface childHelperManagerInterface{ middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto physicalModellingManager = std::make_shared<PhysicalModellingManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto physicalModellingManager = std::make_shared<PhysicalModellingManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     childHelperManagerInterface.SetPhysicalModellingManager(physicalModellingManager);
 }
@@ -211,7 +211,7 @@ void Framework::MiddleLayerMacroTesting::ChildHelperManagerSystemExceptionTest()
     constexpr auto middleLayerPlatform = MiddleLayerPlatform::Windows;
     ChildHelperInterface childHelperManagerInterface{ middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto systemManager = std::make_shared<SystemManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto systemManager = std::make_shared<SystemManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     childHelperManagerInterface.SetSystemManager(systemManager);
 }
@@ -221,7 +221,7 @@ void Framework::MiddleLayerMacroTesting::ChildHelperManagerGUIExceptionTest()
     constexpr auto middleLayerPlatform = MiddleLayerPlatform::Windows;
     ChildHelperInterface childHelperManagerInterface{ middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto guiManager = std::make_shared<GUIManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto guiManager = std::make_shared<GUIManagerInterface>(middleLayerPlatform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     childHelperManagerInterface.SetGUIManager(guiManager);
 }

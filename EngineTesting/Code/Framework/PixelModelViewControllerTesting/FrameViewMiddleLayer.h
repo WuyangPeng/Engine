@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:33)
+///	版本：0.9.1.3 (2023/08/10 11:02)
 
 #ifndef PIXEL_MODEL_VIEW_CONTROLLER_TESTING_FRAME_VIEW_MIDDLE_LAYER_H
 #define PIXEL_MODEL_VIEW_CONTROLLER_TESTING_FRAME_VIEW_MIDDLE_LAYER_H
@@ -15,14 +15,14 @@
 
 namespace PixelModelViewController
 {
-    class FrameViewMiddleLayer : public Framework::PixelViewMiddleLayer
+    class FrameViewMiddleLayer final : public Framework::PixelViewMiddleLayer
     {
     public:
         using ClassType = FrameViewMiddleLayer;
         using ParentType = PixelViewMiddleLayer;
 
     public:
-        FrameViewMiddleLayer(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
+        FrameViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

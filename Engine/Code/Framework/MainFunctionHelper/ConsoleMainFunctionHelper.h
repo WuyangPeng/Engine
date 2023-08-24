@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:39)
+///	版本：0.9.1.3 (2023/08/08 19:26)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "ConsoleMainFunctionHelperBase.h"
 
@@ -20,6 +22,7 @@ namespace Framework
     public:
         using ClassType = ConsoleMainFunctionHelper<Build, Process>;
         using ParentType = ConsoleMainFunctionHelperBase;
+
         using ClassShareType = CoreTools::NonCopyClasses;
         using BuildType = Build<Process>;
 
@@ -42,13 +45,13 @@ namespace Framework
         NODISCARD int DoRun() noexcept override;
         NODISCARD virtual int RunConsoleMainLoop() noexcept;
 
-        void Initializers();
+        void Initializer();
         void Terminators();
 
         void InitConsoleProcess() noexcept;
-        void InitImpl();
+        void InitConsoleImpl();
 
-        void DestroyImpl() noexcept;
+        void DestroyConsoleImpl() noexcept;
         void DestroyConsoleProcess() noexcept;
 
     private:

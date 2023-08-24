@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:42)
+///	版本：0.9.1.3 (2023/08/09 15:00)
 
 #ifndef FRAMEWORK_APPLICATION_MOUSE_POSITION_IMPL_H
 #define FRAMEWORK_APPLICATION_MOUSE_POSITION_IMPL_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "System/Windows/Flags/WindowsFlags.h"
 #include "Framework/WindowCreate/WindowPoint.h"
@@ -21,9 +23,10 @@ namespace Framework
     {
     public:
         using ClassType = MousePositionImpl;
-        using MousePositionImplSharedPtr = std::shared_ptr<ClassType>;
-        using WindowsHWnd = System::WindowsHWnd;
         using FactoryType = ClassType;
+
+        using WindowsHWnd = System::WindowsHWnd;
+        using MousePositionImplSharedPtr = std::shared_ptr<ClassType>;
 
     public:
         MousePositionImpl() noexcept = default;
@@ -35,7 +38,7 @@ namespace Framework
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        NODISCARD static MousePositionImplSharedPtr Create(WindowsHWnd hwnd);
+        NODISCARD static MousePositionImplSharedPtr Create(WindowsHWnd hWnd);
 
         // 鼠标位置
         NODISCARD virtual WindowPoint GetMousePosition() const = 0;

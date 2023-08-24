@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/24 0:59)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:42)
 
 #ifndef LOGIN_SERVER_LOGIN_SERVER_MESSAGE_H
 #define LOGIN_SERVER_LOGIN_SERVER_MESSAGE_H
 
-#include "LoginServer/LoginServerMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "LoginServer/LoginServerMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "LoginServer/LoginServerMiddleLayer/Audio/AudioManager.h"
 #include "LoginServer/LoginServerMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "LoginServer/LoginServerMiddleLayer/Event/EventManager.h"
@@ -32,7 +32,7 @@
 
 namespace LoginServer
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<LoginServerMiddleLayer::ObjectLogicManager, LoginServerMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<LoginServerMiddleLayer::ObjectLogicManager, LoginServerMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   LoginServerMiddleLayer::InputManager,
                                                                   LoginServerMiddleLayer::NetworkManager,
@@ -54,13 +54,16 @@ namespace LoginServer
         using ClassType = LoginServerMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit LoginServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        LoginServerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using LoginServerMessageWindowProcessHandle = Framework::WindowProcessHandle<LoginServerMessage>;

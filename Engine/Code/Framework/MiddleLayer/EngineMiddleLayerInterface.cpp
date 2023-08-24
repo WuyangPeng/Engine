@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:25)
+///	版本：0.9.1.3 (2023/08/08 15:11)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,21 +13,10 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-Framework::EngineMiddleLayerInterface::EngineMiddleLayerInterface(MiddleLayerInterfaceCreate middleLayerInterfaceCreate, MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept
-    : ParentType{ middleLayerInterfaceCreate, middleLayerPlatform, environmentDirectory }
-{
-    FRAMEWORK_SELF_CLASS_IS_VALID_9;
-}
-
 Framework::EngineMiddleLayerInterface::EngineMiddleLayerInterface(MiddleLayerPlatform modelViewController, const EnvironmentDirectory& environmentDirectory) noexcept
     : ParentType{ modelViewController, environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
-}
-
-Framework::EngineMiddleLayerInterface::MiddleLayerSharedPtr Framework::EngineMiddleLayerInterface::CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
-{
-    return std::make_shared<ClassType>(MiddleLayerInterfaceCreate::Init, middleLayerPlatform, environmentDirectory);
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, EngineMiddleLayerInterface)
@@ -36,130 +25,117 @@ void Framework::EngineMiddleLayerInterface::SetNetworkManager(const MiddleLayerI
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (networkManager != nullptr)
-    {
-        ThrowException();
-    }
+    System::UnusedFunction(networkManager);
+
+    ThrowException();
 }
 
 void Framework::EngineMiddleLayerInterface::SetInputManager(const MiddleLayerInterfaceSharedPtr& inputManager)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (inputManager != nullptr)
-    {
-        ThrowException();
-    }
+    System::UnusedFunction(inputManager);
+
+    ThrowException();
 }
 
 void Framework::EngineMiddleLayerInterface::SetObjectLogicManager(const MiddleLayerInterfaceSharedPtr& objectLogicManager)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (objectLogicManager != nullptr)
-    {
-        ThrowException();
-    }
+    System::UnusedFunction(objectLogicManager);
+
+    ThrowException();
 }
 
 void Framework::EngineMiddleLayerInterface::SetPhysicalModellingManager(const MiddleLayerInterfaceSharedPtr& physicalModellingManager)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (physicalModellingManager != nullptr)
-    {
-        ThrowException();
-    }
+    System::UnusedFunction(physicalModellingManager);
+
+    ThrowException();
 }
 
 void Framework::EngineMiddleLayerInterface::SetMessageManager(const MiddleLayerInterfaceSharedPtr& messageManager)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (messageManager != nullptr)
-    {
-        ThrowException();
-    }
+    System::UnusedFunction(messageManager);
+
+    ThrowException();
 }
 
 void Framework::EngineMiddleLayerInterface::SetEventManager(const MiddleLayerInterfaceSharedPtr& eventManager)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (eventManager != nullptr)
-    {
-        ThrowException();
-    }
+    System::UnusedFunction(eventManager);
+
+    ThrowException();
 }
 
 void Framework::EngineMiddleLayerInterface::SetSystemManager(const MiddleLayerInterfaceSharedPtr& systemManager)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (systemManager != nullptr)
-    {
-        ThrowException();
-    }
+    System::UnusedFunction(systemManager);
+
+    ThrowException();
 }
 
 void Framework::EngineMiddleLayerInterface::SetResourceManager(const MiddleLayerInterfaceSharedPtr& resourceManager)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (resourceManager != nullptr)
-    {
-        ThrowException();
-    }
+    System::UnusedFunction(resourceManager);
+
+    ThrowException();
 }
 
 void Framework::EngineMiddleLayerInterface::SetAudioManager(const MiddleLayerInterfaceSharedPtr& audioManager)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (audioManager != nullptr)
-    {
-        ThrowException();
-    }
+    System::UnusedFunction(audioManager);
+
+    ThrowException();
 }
 
 void Framework::EngineMiddleLayerInterface::SetCameraSystemsManager(const MiddleLayerInterfaceSharedPtr& cameraSystemsManager)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (cameraSystemsManager != nullptr)
-    {
-        ThrowException();
-    }
+    System::UnusedFunction(cameraSystemsManager);
+
+    ThrowException();
 }
 
 void Framework::EngineMiddleLayerInterface::SetRenderingManager(const MiddleLayerInterfaceSharedPtr& renderingManager)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (renderingManager != nullptr)
-    {
-        ThrowException();
-    }
+    System::UnusedFunction(renderingManager);
+
+    ThrowException();
 }
 
 void Framework::EngineMiddleLayerInterface::SetGUIManager(const MiddleLayerInterfaceSharedPtr& guiManager)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (guiManager != nullptr)
-    {
-        ThrowException();
-    }
+    System::UnusedFunction(guiManager);
+
+    ThrowException();
 }
 
 void Framework::EngineMiddleLayerInterface::SetEngineManager(const MiddleLayerInterfaceSharedPtr& engineManager)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (engineManager != nullptr)
-    {
-        ThrowException();
-    }
+    System::UnusedFunction(engineManager);
+
+    ThrowException();
 }
 
 Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetNetworkManager()
@@ -346,5 +322,5 @@ Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterf
 
 void Framework::EngineMiddleLayerInterface::ThrowException()
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("EngineMiddleLayerInterface 函数被禁止调用。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("EngineMiddleLayerInterface 函数被禁止调用。"s))
 }

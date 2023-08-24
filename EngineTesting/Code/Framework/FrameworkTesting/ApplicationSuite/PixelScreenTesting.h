@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:25)
+///	版本：0.9.1.3 (2023/08/11 20:34)
 
 #ifndef FRAMEWORK_APPLICATION_SUITE_PIXEL_SCREEN_TESTING_H
 #define FRAMEWORK_APPLICATION_SUITE_PIXEL_SCREEN_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
-#include "Rendering/DataTypes/ColourDetail.h"
 #include "Framework/Application/PixelScreen.h"
 
 #include <gsl/util>
@@ -35,7 +34,7 @@ namespace Framework
         using Colour = PixelScreen::Colour;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
         void MainTest();
 
@@ -53,8 +52,7 @@ namespace Framework
         void FillThickPixelTest();
         void FillRectangleSolidTest();
         void FillRectangleHollowTest();
-        void FillCircleSolidTest();
-        void DrawTest();
+        void FillCircleSolidTest(); 
 
         void AssertColour(const TestingType& pixelScreen, const Colour& colour);
         void AssertColour(const TestingType& lhs, const TestingType& rhs);

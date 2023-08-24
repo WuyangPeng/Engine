@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:39)
+///	版本：0.9.1.3 (2023/08/08 19:26)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_ANDROID_MAIN_FUNCTION_HELPER_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_ANDROID_MAIN_FUNCTION_HELPER_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "MainFunctionHelperBase.h"
 #include "System/Android/Using/AndroidNativeAppGlueUsing.h"
@@ -21,6 +23,7 @@ namespace Framework
     public:
         using ClassType = AndroidMainFunctionHelper<Build, Process>;
         using ParentType = MainFunctionHelperBase;
+
         using ClassShareType = CoreTools::NonCopyClasses;
         using BuildType = Build<Process>;
         using AndroidApp = System::AndroidApp;
@@ -47,13 +50,13 @@ namespace Framework
         int DoRun() override;
         NODISCARD virtual int RunAndroidMainLoop();
 
-        void Initializers(AndroidApp* androidApp);
+        void Initializer(AndroidApp* androidApp);
         void Terminators();
 
         void InitAndroidProcess();
-        void InitImpl(AndroidApp* androidApp);
+        void InitAndroidImpl(AndroidApp* androidApp);
 
-        void DestroyImpl() noexcept;
+        void DestroyAndroidImpl() noexcept;
         void DestroyAndroidProcess() noexcept;
 
     private:

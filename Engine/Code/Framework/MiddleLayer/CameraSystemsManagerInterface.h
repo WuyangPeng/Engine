@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:21)
+///	版本：0.9.1.3 (2023/08/05 16:33)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_CAMERA_SYSTEMS_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_CAMERA_SYSTEMS_MANAGER_INTERFACE_H
@@ -50,9 +50,9 @@ namespace Framework
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
 
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Rendering);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(GUI);
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Rendering)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(GUI)
 
     private:
         PackageType impl;

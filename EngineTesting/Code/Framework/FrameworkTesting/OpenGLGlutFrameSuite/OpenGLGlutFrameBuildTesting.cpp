@@ -5,16 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:51)
+///	版本：0.9.1.3 (2023/08/14 13:49)
 
 #include "OpenGLGlutFrameBuildTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Framework/MiddleLayer/MiddleLayerInterface.h"
-#include "Framework/OpenGLGlutFrame/OpenGLGlutCallBackDetail.h"
-#include "Framework/OpenGLGlutFrame/OpenGLGlutFrameBuildDetail.h"
-#include "Framework/OpenGLGlutFrame/OpenGLGlutProcessDetail.h"
 
 Framework::OpenGLGlutFrameBuildTesting::OpenGLGlutFrameBuildTesting(const OStreamShared& stream)
     : ParentType{ stream }

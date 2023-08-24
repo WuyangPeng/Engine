@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/02 20:09)
+///	版本：0.9.1.3 (2023/08/14 15:50)
 
 #ifndef DATABASE_DATABASE_ENTITY_CODE_GENERATION_CODE_HEADER_FILE_GENERATION_IMPL_H
 #define DATABASE_DATABASE_ENTITY_CODE_GENERATION_CODE_HEADER_FILE_GENERATION_IMPL_H
@@ -13,8 +13,8 @@
 #include "Database/DatabaseDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/CharacterString/CodeMappingAnalysis.h"
 #include "Database/DatabaseEntityCodeGeneration/CodeEntityAnalysis.h"
-#include "Database/DatabaseEntityCodeGeneration/CodeMappingAnalysis.h"
 
 namespace Database
 {
@@ -24,6 +24,7 @@ namespace Database
         using ClassType = CodeHeaderFileGenerationImpl;
 
         using String = System::String;
+        using CodeMappingAnalysis = CoreTools::CodeMappingAnalysis;
 
     public:
         CodeHeaderFileGenerationImpl(String fileName, CodeEntityAnalysis codeEntityAnalysis, CodeMappingAnalysis codeMappingAnalysis) noexcept;

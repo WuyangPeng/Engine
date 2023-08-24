@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/10 14:22)
+///	版本：0.9.1.3 (2023/08/02 14:37)
 
 #ifndef RESOURCE_MANAGER_TESTING_TESTING_HELPER_H
 #define RESOURCE_MANAGER_TESTING_TESTING_HELPER_H
@@ -16,7 +16,7 @@
 
 namespace ResourceManager
 {
-    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    class TestingHelper final : public CoreTools::CMainFunctionTestingHelper
     {
     public:
         using ClassType = TestingHelper;

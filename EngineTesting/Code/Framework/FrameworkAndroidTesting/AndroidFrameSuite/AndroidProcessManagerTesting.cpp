@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2022/06/24 13:57)
+///	版本：0.9.1.3 (2023/08/11 14:27)
 
 #include "AndroidProcessManagerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,6 +13,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/AndroidFrame/AndroidCallBackInterface.h"
 #include "Framework/AndroidFrame/AndroidProcessManager.h"
+
 Framework::AndroidProcessManagerTesting::AndroidProcessManagerTesting(const OStreamShared& stream, AndroidApp* androidApp)
     : ParentType{ stream }, androidApp{ androidApp }
 {
@@ -34,38 +35,44 @@ void Framework::AndroidProcessManagerTesting::MainTest()
 
 void Framework::AndroidProcessManagerTesting::AndroidCallBackPtrTest()
 {
-    AndroidProcessManager::AndroidCallBackInterfaceSharedPtr ptr(ANDROID_PROCESS_MANAGE_SINGLETON.GetAndroidCallBackInterface());
+    const auto androidCallBackInterfaceSharedPtr = ANDROID_PROCESS_MANAGE_SINGLETON.GetAndroidCallBackInterface();
 
-    ASSERT_UNEQUAL_NULL_PTR(ptr);
+    ASSERT_UNEQUAL_NULL_PTR(androidCallBackInterfaceSharedPtr);
     ANDROID_PROCESS_MANAGE_SINGLETON.ClearAndroidCallBack();
 
-    ANDROID_PROCESS_MANAGE_SINGLETON.SetAndroidCallBack(ptr);
+    ANDROID_PROCESS_MANAGE_SINGLETON.SetAndroidCallBack(androidCallBackInterfaceSharedPtr);
 
-    ASSERT_EQUAL(ANDROID_PROCESS_MANAGE_SINGLETON.GetAndroidCallBackInterface(), ptr);
+    ASSERT_EQUAL(ANDROID_PROCESS_MANAGE_SINGLETON.GetAndroidCallBackInterface(), androidCallBackInterfaceSharedPtr);
 }
 
 void Framework::AndroidProcessManagerTesting::CallbackSucceedTest()
 {
-    AndroidProcessManager::AppCmd appCmd = ANDROID_PROCESS_MANAGE_SINGLETON.GetAppCmd();
+    const auto appCmd = ANDROID_PROCESS_MANAGE_SINGLETON.GetAppCmd();
 
     ASSERT_UNEQUAL_NULL_PTR(appCmd);
 
     if (appCmd != nullptr)
+    {
         appCmd(androidApp, 0);
+    }
 
-    AndroidProcessManager::InputEvent inputEvent = ANDROID_PROCESS_MANAGE_SINGLETON.GetInputEvent();
+    const auto inputEvent = ANDROID_PROCESS_MANAGE_SINGLETON.GetInputEvent();
 
     ASSERT_UNEQUAL_NULL_PTR(inputEvent);
 
     if (inputEvent != nullptr)
+    {
         inputEvent(androidApp, nullptr);
+    }
 
-    AndroidProcessManager::Display display = ANDROID_PROCESS_MANAGE_SINGLETON.GetDisplay();
+    const auto display = ANDROID_PROCESS_MANAGE_SINGLETON.GetDisplay();
 
     ASSERT_UNEQUAL_NULL_PTR(display);
 
     if (display != nullptr)
+    {
         display(androidApp, 0);
+    }
 
     ASSERT_TRUE(ANDROID_PROCESS_MANAGE_SINGLETON.PreCreate());
     ASSERT_TRUE(ANDROID_PROCESS_MANAGE_SINGLETON.Initialize());

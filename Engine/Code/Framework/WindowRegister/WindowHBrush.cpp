@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:02)
+///	版本：0.9.1.3 (2023/08/03 19:59)
 
 #include "Framework/FrameworkExport.h"
 
@@ -22,7 +22,6 @@ Framework::WindowHBrush::WindowHBrush(WindowsBrushTypes background) noexcept
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 void Framework::WindowHBrush::CheckUpHBrush() noexcept
 {
     if (hBrush == nullptr)

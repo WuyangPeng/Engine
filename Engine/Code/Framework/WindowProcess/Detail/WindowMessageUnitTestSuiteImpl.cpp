@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:08)
+///	版本：0.9.1.3 (2023/08/04 14:59)
 
 #include "Framework/FrameworkExport.h"
 
@@ -17,12 +17,11 @@
 #include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
-using namespace std::literals;
-
-Framework::WindowMessageUnitTestSuiteImpl::WindowMessageUnitTestSuiteImpl(const std::string& name, const OStreamShared& streamShared)
-    : alloc{ ConsoleAlloc::Create() },
-      testingInformationHelper{ CoreTools::TestingInformationHelper::Create() },
-      windowSuite{ make_unique<Suite>(name, streamShared, testingInformationHelper.IsPrintRun()) },
+Framework::WindowMessageUnitTestSuiteImpl::WindowMessageUnitTestSuiteImpl(const std::string& name)
+    : stream{ std::make_unique<WindowMessageUnitTestSuiteStream>(true) },
+      alloc{ ConsoleAlloc::Create() },
+      testingInformationHelper{ TestingInformationHelper::Create() },
+      windowSuite{ make_unique<Suite>(name, stream->GetStreamShared(), testingInformationHelper.IsPrintRun()) },
       process{ { System::WindowsKeyCodes::F1, &ClassType::ResetTestDataOnMessage },
                { System::WindowsKeyCodes::F5, &ClassType::RunUnitTestOnMessage } }
 {
@@ -33,7 +32,7 @@ Framework::WindowMessageUnitTestSuiteImpl::WindowMessageUnitTestSuiteImpl(const 
 
 bool Framework::WindowMessageUnitTestSuiteImpl::IsValid() const noexcept
 {
-    if (windowSuite != nullptr)
+    if (stream != nullptr && windowSuite != nullptr)
         return true;
     else
         return false;
@@ -93,8 +92,8 @@ void Framework::WindowMessageUnitTestSuiteImpl::KeyDownMessage(System::WindowsKe
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    const auto iter = process.find(windowsKeyCodes);
-    if (iter != process.cend())
+    if (const auto iter = process.find(windowsKeyCodes);
+        iter != process.cend())
     {
         (this->*(iter->second))();
     }
@@ -102,30 +101,35 @@ void Framework::WindowMessageUnitTestSuiteImpl::KeyDownMessage(System::WindowsKe
 
 void Framework::WindowMessageUnitTestSuiteImpl::AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest)
 {
-    const auto testLoopCount = testingInformationHelper.GetLoopCount(suiteName, testName);
-
-    if (0 < testLoopCount)
+    if (const auto testLoopCount = testingInformationHelper.GetLoopCount(suiteName, testName);
+        0 < testLoopCount)
     {
         unitTest->SetTestLoopCount(testLoopCount);
         unitTest->SetRandomSeed(testingInformationHelper.GetRandomSeed());
+
         suite.AddTest(unitTest);
     }
     else if (testLoopCount < 0)
     {
         LOG_SINGLETON_ENGINE_APPENDER(Warn,
                                       CoreTools,
-                                      SYSTEM_TEXT("测试"s),
+                                      SYSTEM_TEXT("测试"),
                                       testName,
-                                      SYSTEM_TEXT("未配置！在测试套件："s),
+                                      SYSTEM_TEXT("未配置！在测试套件："),
                                       suite.GetName(),
-                                      SYSTEM_TEXT("。"s),
+                                      SYSTEM_TEXT("。"),
                                       CoreTools::LogAppenderIOManageSign::TriggerAssert);
     }
 }
 
-// private
+Framework::WindowMessageUnitTestSuiteImpl::OStreamShared Framework::WindowMessageUnitTestSuiteImpl::GetStreamShared() noexcept
+{
+    return stream->GetStreamShared();
+}
+
 void Framework::WindowMessageUnitTestSuiteImpl::ResetTestDataOnMessage()
 {
     ResetTestData();
+
     windowSuite->GetStream() << "测试数据已清零。\n";
 }

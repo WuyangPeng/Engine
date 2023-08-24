@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 16:49)
+///	版本：0.9.1.3 (2023/08/02 14:18)
 
 #include "Testing.h"
 #include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariant/PhysicsClassInvariantMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
@@ -24,7 +23,6 @@ Physics::TestingHelper::TestingHelper(int argc, char** argv)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Physics, TestingHelper)
 
-// private
 void Physics::TestingHelper::InitSuite()
 {
     AddHelperSuite();
@@ -47,11 +45,6 @@ void Physics::TestingHelper::AddHelperSuite()
 void Physics::TestingHelper::AddCollisionDetectionSuite()
 {
     auto collisionDetectionSuite = GenerateSuite("碰撞检测");
-
-    ADD_TEST(collisionDetectionSuite, BoundTreeProjectionInfoTesting);
-    ADD_TEST(collisionDetectionSuite, BoundTreeSplitTrianglesTesting);
-    ADD_TEST(collisionDetectionSuite, BoundTreeChildTesting);
-    ADD_TEST(collisionDetectionSuite, BoundTreeTesting);
 
     AddSuite(collisionDetectionSuite);
 }

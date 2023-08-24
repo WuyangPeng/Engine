@@ -1,21 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2022/06/24 14:00)
+///	版本：0.9.1.3 (2023/08/11 14:26)
 
 #include "AndroidCallBackTesting.h"
 #include "System/Android/AndroidInputQueueFacade.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Framework/AndroidFrame/AndroidCallBackDetail.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/MiddleLayer/MiddleLayerInterface.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
 Framework::AndroidCallBackTesting::AndroidCallBackTesting(const OStreamShared& stream, AndroidApp* androidApp)
     : ParentType{ stream }, androidApp{ androidApp }
 {
@@ -36,7 +37,7 @@ void Framework::AndroidCallBackTesting::MainTest()
 
 void Framework::AndroidCallBackTesting::MessageTest()
 {
-    AndroidCallBack<MiddleLayerInterface> androidCallBackInterface(System::gMicroseconds / 60);
+    AndroidCallBack<MiddleLayerInterface> androidCallBackInterface{ System::gMicroseconds / 60 };
 
     androidCallBackInterface.NotDealCmdMessage(androidApp);
     androidCallBackInterface.InitMessage(androidApp);

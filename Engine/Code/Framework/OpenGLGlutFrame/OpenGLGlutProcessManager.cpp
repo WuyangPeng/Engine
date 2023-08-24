@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:18)
+///	版本：0.9.1.3 (2023/08/05 15:03)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,10 +13,7 @@
 #include "Detail/OpenGLGlutProcessManagerImpl.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Threading/ScopedMutex.h"
-
-using namespace std::literals;
 
 SINGLETON_GET_PTR_DEFINE(Framework, OpenGLGlutProcessManager);
 
@@ -32,9 +29,11 @@ void Framework::OpenGLGlutProcessManager::Destroy() noexcept
     openGLGlutProcessManager.reset();
 }
 
-Framework::OpenGLGlutProcessManager::OpenGLGlutProcessManager(MAYBE_UNUSED OpenGLGlutProcessManagerCreate openGLGlutProcessManagerCreate)
+Framework::OpenGLGlutProcessManager::OpenGLGlutProcessManager(OpenGLGlutProcessManagerCreate openGLGlutProcessManagerCreate)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(openGLGlutProcessManagerCreate);
+
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
@@ -132,22 +131,22 @@ void Framework::OpenGLGlutProcessManager::ClearOpenGLGlutCallBack()
     return impl->ClearOpenGLGlutCallBack();
 }
 
-void Framework::OpenGLGlutProcessManager::SetWindowID(int window)
+void Framework::OpenGLGlutProcessManager::SetWindowId(int window)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return impl->SetWindowID(window);
+    return impl->SetWindowId(window);
 }
 
-int Framework::OpenGLGlutProcessManager::GetWindowID() const
+int Framework::OpenGLGlutProcessManager::GetWindowId() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetWindowID();
+    return impl->GetWindowId();
 }
 
 int Framework::OpenGLGlutProcessManager::GetMillisecond() const
@@ -168,13 +167,13 @@ void Framework::OpenGLGlutProcessManager::SetMillisecond(int millisecond)
     return impl->SetMillisecond(millisecond);
 }
 
-void Framework::OpenGLGlutProcessManager::SetMainFunctionHelper(const MainFunctionHelperBaseSharedPtr& mainFunctionHelperBase)
+void Framework::OpenGLGlutProcessManager::SetMainFunctionHelper(const MainFunctionHelperBaseSharedPtr& mainFunctionHelper)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return impl->SetMainFunctionHelper(mainFunctionHelperBase);
+    return impl->SetMainFunctionHelper(mainFunctionHelper);
 }
 
 void Framework::OpenGLGlutProcessManager::ClearMainFunctionHelper()

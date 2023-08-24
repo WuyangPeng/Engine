@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:25)
+///	版本：0.9.1.3 (2023/08/08 15:03)
 
 #include "Framework/FrameworkExport.h"
 
@@ -14,39 +14,20 @@
 #include "Rendering/RendererEngine/BaseRenderer.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
-using namespace std::literals;
-
 Framework::CameraViewMiddleLayer::CameraViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }, multiplier{ 0.0f }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, CameraViewMiddleLayer)
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26418)
-void Framework::CameraViewMiddleLayer::SetCamera(const CameraSmartPointer& camera)
-{
-    FRAMEWORK_CLASS_IS_VALID_1;
-
-    auto renderer = GetRenderer();
-
-    if (renderer)
-    {
-        camera;
-       // renderer->SetCamera(camera);
-    }
-}
-#include STSTEM_WARNING_POP
-
 Framework::WindowSize Framework::CameraViewMiddleLayer::GetWindowSize() const
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    auto renderer = GetRenderer();
-
-    if (renderer)
+    if (const auto renderer = GetRenderer();
+        renderer != nullptr)
     {
         const auto width = renderer->GetWidth();
         const auto height = renderer->GetHeight();
@@ -55,24 +36,23 @@ Framework::WindowSize Framework::CameraViewMiddleLayer::GetWindowSize() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("渲染器不存在！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("渲染器不存在！"s))
     }
 }
 
 bool Framework::CameraViewMiddleLayer::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
     if (ParentType::Resize(windowDisplay, size))
     {
         const auto width = size.GetWindowWidth();
         const auto height = size.GetWindowHeight();
 
-        const auto minValue = std::min(height, width);
-
-        if (0 < minValue)
+        if (const auto minValue = std::min(width, height);
+            0 < minValue)
         {
-            multiplier = 1.0f / minValue;
+            multiplier = 1.0f / static_cast<float>(minValue);
         }
 
         return true;
@@ -85,15 +65,14 @@ bool Framework::CameraViewMiddleLayer::Resize(WindowDisplay windowDisplay, const
 
 float Framework::CameraViewMiddleLayer::GetXTrack(int x) const
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    auto renderer = GetRenderer();
-
-    if (renderer != nullptr)
+    if (const auto renderer = GetRenderer();
+        renderer != nullptr)
     {
         const auto width = renderer->GetWidth();
 
-        return (2 * x - width) * multiplier;
+        return static_cast<float>(2 * x - width) * multiplier;
     }
     else
     {
@@ -103,15 +82,14 @@ float Framework::CameraViewMiddleLayer::GetXTrack(int x) const
 
 float Framework::CameraViewMiddleLayer::GetYTrack(int y) const
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    auto renderer = GetRenderer();
-
-    if (renderer != nullptr)
+    if (const auto renderer = GetRenderer();
+        renderer != nullptr)
     {
         const auto height = renderer->GetHeight();
 
-        return (2 * (height - 1 - y) - height) * multiplier;
+        return static_cast<float>(2 * (height - 1 - y) - height) * multiplier;
     }
     else
     {

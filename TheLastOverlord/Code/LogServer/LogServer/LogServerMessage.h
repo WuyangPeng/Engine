@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/28 21:47)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:43)
 
 #ifndef LOG_SERVER_LOG_SERVER_MESSAGE_H
 #define LOG_SERVER_LOG_SERVER_MESSAGE_H
 
-#include "LogServer/LogServerMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "LogServer/LogServerMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "LogServer/LogServerMiddleLayer/Audio/AudioManager.h"
 #include "LogServer/LogServerMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "LogServer/LogServerMiddleLayer/Event/EventManager.h"
@@ -32,7 +32,7 @@
 
 namespace LogServer
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<LogServerMiddleLayer::ObjectLogicManager, LogServerMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<LogServerMiddleLayer::ObjectLogicManager, LogServerMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   LogServerMiddleLayer::InputManager,
                                                                   LogServerMiddleLayer::NetworkManager,
@@ -54,13 +54,16 @@ namespace LogServer
         using ClassType = LogServerMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit LogServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        LogServerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using LogServerMessageWindowProcessHandle = Framework::WindowProcessHandle<LogServerMessage>;

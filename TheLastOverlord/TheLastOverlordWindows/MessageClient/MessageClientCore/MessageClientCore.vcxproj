@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -68,7 +68,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{C50AB112-95A9-4066-8082-E1DD767A8115}</ProjectGuid>
+    <ProjectGuid>{6D68CDBC-6299-4FD4-B225-FFFFE48EC41F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MessageClientCore</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -315,7 +315,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;MESSAGECLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;MESSAGE_CLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -326,7 +326,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;MESSAGECLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;MESSAGE_CLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -361,7 +361,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;MESSAGECLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;MESSAGE_CLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -376,7 +376,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;MESSAGECLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;MESSAGE_CLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -419,7 +419,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;MESSAGECLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;MESSAGE_CLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -430,7 +430,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;MESSAGECLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;MESSAGE_CLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -465,7 +465,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;MESSAGECLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;MESSAGE_CLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -480,7 +480,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;MESSAGECLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;MESSAGE_CLIENTCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -532,12 +532,12 @@
     <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\MessageClientCoreImport.h" />
     <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\MessageClientCoreLib.h" />
     <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\MessageClientCoreNoImport.h" />
-    <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\Macro\ExportMacro.h" />
-    <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\Macro\MessageClientCoreClassInvariantMacro.h" />
-    <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\Macro\MessageClientCoreCustomAssertMacro.h" />
-    <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\Helper\ExportMacro.h" />
+    <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\Helper\MessageClientCoreClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\Helper\MessageClientCoreCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\MessageClient\MessageClientCore\Helper\UserMacro.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\MessageClient\MessageClientCore\DllLib.cpp" />

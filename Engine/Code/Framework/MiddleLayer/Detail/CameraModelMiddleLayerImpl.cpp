@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 11:05)
+///	版本：0.9.1.3 (2023/08/08 14:49)
 
 #include "Framework/FrameworkExport.h"
 
 #include "CameraModelMiddleLayerImpl.h"
+#include "System/Time/Using/DeltaTimeUsing.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Algebra/APointDetail.h"
@@ -18,16 +19,14 @@
 #include "Framework/Application/CameraMotion.h"
 #include "Framework/Application/ObjectMotion.h"
 
-using namespace std::literals;
-
 Framework::CameraModelMiddleLayerImpl::CameraModelMiddleLayerImpl() noexcept
-    : cameraMotion{}, objectMotion{}
+    : cameraMotion{}, objectMotion{}, timeDelta{ System::gMicroseconds }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Framework::CameraModelMiddleLayerImpl::CameraModelMiddleLayerImpl(CameraModelMiddleLayerImpl&& rhs) noexcept
-    : cameraMotion{ std::move(rhs.cameraMotion) }, objectMotion{ std::move(rhs.objectMotion) }
+    : cameraMotion{ std::move(rhs.cameraMotion) }, objectMotion{ std::move(rhs.objectMotion) }, timeDelta{ rhs.timeDelta }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -38,6 +37,7 @@ Framework::CameraModelMiddleLayerImpl& Framework::CameraModelMiddleLayerImpl::op
 
     cameraMotion = std::move(rhs.cameraMotion);
     objectMotion = std::move(rhs.objectMotion);
+    timeDelta = rhs.timeDelta;
 
     return *this;
 }
@@ -234,7 +234,7 @@ void Framework::CameraModelMiddleLayerImpl::RotateTrackBall()
 
     if (objectMotion != nullptr && cameraMotion != nullptr)
     {
-        auto camera = cameraMotion->GetCamera();
+        const auto camera = cameraMotion->GetCamera();
 
         objectMotion->RotateTrackBall(camera);
     }
@@ -324,6 +324,30 @@ bool Framework::CameraModelMiddleLayerImpl::GetTrackBallDow() const noexcept
     }
 }
 
+bool Framework::CameraModelMiddleLayerImpl::Idle(int64_t aTimeDelta)
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    timeDelta -= aTimeDelta;
+
+    if (timeDelta <= 0)
+    {
+        if (!MoveCamera())
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("MoveCamera 失败。"));
+        }
+
+        if (!MoveObject())
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("MoveObject 失败。"));
+        }
+
+        timeDelta += System::gMicroseconds;
+    }
+
+    return true;
+}
+
 Framework::CameraModelMiddleLayerImpl::CameraSharedPtr Framework::CameraModelMiddleLayerImpl::GetCamera()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
@@ -334,7 +358,7 @@ Framework::CameraModelMiddleLayerImpl::CameraSharedPtr Framework::CameraModelMid
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"s))
     }
 }
 
@@ -348,7 +372,7 @@ Framework::CameraModelMiddleLayerImpl::ConstCameraSharedPtr Framework::CameraMod
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"s))
     }
 }
 
@@ -364,7 +388,7 @@ Framework::CameraModelMiddleLayerImpl::APoint Framework::CameraModelMiddleLayerI
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    auto camera = GetCamera();
+    const auto camera = GetCamera();
 
     return camera->GetPosition();
 }
@@ -373,7 +397,7 @@ Framework::CameraModelMiddleLayerImpl::AVector Framework::CameraModelMiddleLayer
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    auto camera = GetCamera();
+    const auto camera = GetCamera();
 
     return camera->GetDirectionVector();
 }
@@ -382,7 +406,7 @@ Framework::CameraModelMiddleLayerImpl::AVector Framework::CameraModelMiddleLayer
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    auto camera = GetCamera();
+    const auto camera = GetCamera();
 
     return camera->GetUpVector();
 }
@@ -391,7 +415,7 @@ Framework::CameraModelMiddleLayerImpl::AVector Framework::CameraModelMiddleLayer
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    auto camera = GetCamera();
+    const auto camera = GetCamera();
 
     return camera->GetRightVector();
 }
@@ -406,7 +430,7 @@ float Framework::CameraModelMiddleLayerImpl::GetRotationSpeed() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"s))
     }
 }
 
@@ -420,7 +444,7 @@ float Framework::CameraModelMiddleLayerImpl::GetTranslationSpeed() const
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("CameraMotion 未初始化"s))
     }
 }
 
@@ -434,6 +458,6 @@ Framework::CameraModelMiddleLayerImpl::Transform Framework::CameraModelMiddleLay
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("ObjectMotion 未初始化"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("ObjectMotion 未初始化"s))
     }
 }

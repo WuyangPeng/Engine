@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.10 (2023/05/26 09:42)
+///	版本：0.9.1.3 (2023/08/14 15:20)
 
 #ifndef DATABASE_DATABASE_INTERFACE_DATABASE_FIELD_H
 #define DATABASE_DATABASE_INTERFACE_DATABASE_FIELD_H
 
 #include "Database/DatabaseDll.h"
 
-#include "Database/DatabaseInterface/DatabaseInterfaceFwd.h"
 #include "Database/DatabaseInterface/Flags/DataType.h"
 
 #include <string>

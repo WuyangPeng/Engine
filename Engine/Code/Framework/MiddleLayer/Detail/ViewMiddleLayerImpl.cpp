@@ -5,13 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:24)
+///	版本：0.9.1.3 (2023/08/08 14:52)
 
 #include "Framework/FrameworkExport.h"
 
 #include "ViewMiddleLayerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Helper/LogMacro.h"
 #include "Rendering/RendererEngine/BaseRenderer.h"
 
 Framework::ViewMiddleLayerImpl::ViewMiddleLayerImpl() noexcept
@@ -66,15 +66,10 @@ void Framework::ViewMiddleLayerImpl::DrawFrameRate(int x, int y, const Colour& c
 
     if (renderer != nullptr)
     {
-        x;
-        y;
-        color;
-        message;
-        /*  if (renderer->PreDraw())
-          {
-              renderer->Draw(x, y, color, message);
-              renderer->PostDraw();
-          }*/
+        if (!renderer->Draw(x, y, color, message))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework, SYSTEM_TEXT("Draw 失败。"));
+        }
     }
     else
     {
@@ -171,5 +166,5 @@ Framework::ViewMiddleLayerImpl::ConstRendererSharedPtr Framework::ViewMiddleLaye
 
 void Framework::ViewMiddleLayerImpl::ThrowException()
 {
-    THROW_EXCEPTION(SYSTEM_TEXT("渲染器未初始化！请在Create中对渲染器进行初始化。"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("渲染器未初始化！请在Create中对渲染器进行初始化。"s))
 }

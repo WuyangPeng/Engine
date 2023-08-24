@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:27)
+///	版本：0.9.1.3 (2023/08/10 11:28)
 
 #ifndef OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_TESTING_OPENGL_GLUT_CALL_BACK_H
 #define OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_TESTING_OPENGL_GLUT_CALL_BACK_H
@@ -14,20 +14,18 @@
 
 namespace OpenGLGlutCallBackUnitTestSuiteTesting
 {
-    class OpenGLGlutCallBack : public Framework::OpenGLGlutCallBackUnitTestSuite
+    class OpenGLGlutCallBack final : public Framework::OpenGLGlutCallBackUnitTestSuite, public std::enable_shared_from_this<OpenGLGlutCallBack>
     {
     public:
         using ClassType = OpenGLGlutCallBack;
         using ParentType = OpenGLGlutCallBackUnitTestSuite;
 
     public:
-        OpenGLGlutCallBack(int64_t delta);
+        explicit OpenGLGlutCallBack(int64_t delta);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        NODISCARD virtual std::string GetSuiteName() const;
-
         void AddSuite() override;
     };
 

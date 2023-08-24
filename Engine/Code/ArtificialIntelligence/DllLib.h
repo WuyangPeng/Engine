@@ -14,6 +14,9 @@
 
 #include "System/SystemLib.h"
 #include "CoreTools/CoreToolsLib.h"
+#include "Mathematics/MathematicsLib.h"
+#include "Physics/PhysicsLib.h"
+#include "Imagics/ImagicsLib.h"
 
 #if defined(TCRE_USE_MSVC)
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:09)
+///	版本：0.9.1.3 (2023/08/10 15:46)
 
 #include "WindowProcessManagerTesting.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
@@ -22,8 +22,8 @@
 
 using namespace std::literals;
 
-Framework::WindowProcessManagerTesting::WindowProcessManagerTesting(const OStreamShared& stream, HWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+Framework::WindowProcessManagerTesting::WindowProcessManagerTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream }, hWnd{ hWnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -47,16 +47,16 @@ void Framework::WindowProcessManagerTesting::ManagerTest()
     ASSERT_UNEQUAL_NULL_PTR(WINDOW_PROCESS_MANAGER_SINGLETON.GetProcess());
     ASSERT_UNEQUAL_NULL_PTR(WINDOW_PROCESS_MANAGER_SINGLETON.GetFunction());
 
-    auto windowMessage1 = const_pointer_cast<WindowMessageInterface>(WINDOW_PROCESS_MANAGER_SINGLETON.GetWindowMessageInterface());
+    const auto windowMessage0 = const_pointer_cast<WindowMessageInterface>(WINDOW_PROCESS_MANAGER_SINGLETON.GetWindowMessageInterface());
 
-    ASSERT_UNEQUAL_NULL_PTR(windowMessage1);
+    ASSERT_UNEQUAL_NULL_PTR(windowMessage0);
 
-    WINDOW_PROCESS_MANAGER_SINGLETON.ClearWindowMessage(windowMessage1);
-    WINDOW_PROCESS_MANAGER_SINGLETON.SetWindowMessage(windowMessage1);
+    WINDOW_PROCESS_MANAGER_SINGLETON.ClearWindowMessage(windowMessage0);
+    WINDOW_PROCESS_MANAGER_SINGLETON.SetWindowMessage(windowMessage0);
 
-    auto windowMessage2 = WINDOW_PROCESS_MANAGER_SINGLETON.GetWindowMessageInterface();
+    const auto windowMessage1 = WINDOW_PROCESS_MANAGER_SINGLETON.GetWindowMessageInterface();
 
-    ASSERT_EQUAL(windowMessage1, windowMessage2);
+    ASSERT_EQUAL(windowMessage0, windowMessage1);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
     ASSERT_TRUE(WINDOW_PROCESS_MANAGER_SINGLETON.PreCreate());
@@ -69,11 +69,11 @@ void Framework::WindowProcessManagerTesting::ManagerTest()
 void Framework::WindowProcessManagerTesting::ClassNameTest()
 {
     System::String className{};
-    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
+    ASSERT_TRUE(System::GetSystemClassName(hWnd, className));
 
     ASSERT_TRUE(WINDOW_PROCESS_MANAGER_SINGLETON.IsClassNameExist(className));
 
-    System::String newClassName{ SYSTEM_TEXT("New Class"s) };
+    const auto newClassName = SYSTEM_TEXT("New Class"s);
 
     ASSERT_TRUE(WINDOW_PROCESS_MANAGER_SINGLETON.SetNewClassName(newClassName));
 
@@ -83,26 +83,26 @@ void Framework::WindowProcessManagerTesting::ClassNameTest()
 void Framework::WindowProcessManagerTesting::SetMainWindow()
 {
     System::String className{};
-    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
+    ASSERT_TRUE(System::GetSystemClassName(hWnd, className));
 
-    auto instance = System::GetHInstance();
-    auto windowName = SYSTEM_TEXT("Not Displayed Window"s);
+    const auto instance = System::GetHInstance();
+    const auto windowName = SYSTEM_TEXT("Not Displayed Window"s);
 
     const WindowSize size{ 800, 600 };
-    WindowCreateParameter createParameter{ windowName };
-    WindowInstanceParameter instanceParameter{ instance, className };
-    WindowCreateHandle create{ instanceParameter, createParameter, size };
+    const WindowCreateParameter createParameter{ windowName };
+    const WindowInstanceParameter instanceParameter{ instance, className };
+    const WindowCreateHandle create{ instanceParameter, createParameter, size };
 
-    ASSERT_EQUAL(WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHwnd(), hwnd);
+    ASSERT_EQUAL(WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHWnd(), hWnd);
 
-    WINDOW_PROCESS_MANAGER_SINGLETON.SetMainWindowHwnd(create.GetHwnd());
-    ASSERT_EQUAL(WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHwnd(), create.GetHwnd());
+    WINDOW_PROCESS_MANAGER_SINGLETON.SetMainWindowHWnd(create.GetHWnd());
+    ASSERT_EQUAL(WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHWnd(), create.GetHWnd());
 
-    WINDOW_PROCESS_MANAGER_SINGLETON.SetMainWindowHwnd(hwnd);
+    WINDOW_PROCESS_MANAGER_SINGLETON.SetMainWindowHWnd(hWnd);
 
     constexpr auto delta = System::gMicroseconds / 60;
     WindowMessageInterface message{ delta };
 
-    ASSERT_EQUAL(message.CreateMessage(create.GetHwnd(), 0, 0), 0);
-    ASSERT_EQUAL(message.CloseMessage(create.GetHwnd(), 0, 0), 0);
+    ASSERT_EQUAL(message.CreateMessage(create.GetHWnd(), 0, 0), 0);
+    ASSERT_EQUAL(message.CloseMessage(create.GetHWnd(), 0, 0), 0);
 }

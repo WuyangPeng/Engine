@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:08)
+///	版本：0.9.1.3 (2023/08/04 09:17)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_MANAGER_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_MANAGER_H
@@ -28,9 +28,10 @@ namespace Framework
     public:
         NON_COPY_TYPE_DECLARE(WindowProcessManager);
         using ParentType = Singleton<WindowProcessManager>;
+
         using MessageFunctionPointer = WindowMessageInterface::FunctionPointer;
         using String = System::String;
-        using HWnd = System::WindowsHWnd;
+        using WindowsHWnd = System::WindowsHWnd;
         using WindowsProcess = System::WindowsProcess;
         using DisplayFunction = System::DisplayFunction;
 
@@ -66,8 +67,8 @@ namespace Framework
         void PreIdle();
         void Terminate();
 
-        void SetMainWindowHwnd(HWnd hwnd);
-        NODISCARD HWnd GetMainWindowHwnd() const;
+        void SetMainWindowHWnd(WindowsHWnd hWnd);
+        NODISCARD WindowsHWnd GetMainWindowHWnd() const;
 
     private:
         using WindowProcessManagerUniquePtr = std::unique_ptr<WindowProcessManager>;

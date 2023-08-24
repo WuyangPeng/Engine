@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 20:28)
+///	版本：0.9.1.3 (2023/08/14 16:58)
 
 #ifndef ASSIST_TOOLS_BMP_COLOR_TO_GRAY_FWD_H
 #define ASSIST_TOOLS_BMP_COLOR_TO_GRAY_FWD_H
 
 namespace AssistTools
 {
-    class ColorToGray;
+
 }
 
 #endif  // ASSIST_TOOLS_BMP_COLOR_TO_GRAY_FWD_H

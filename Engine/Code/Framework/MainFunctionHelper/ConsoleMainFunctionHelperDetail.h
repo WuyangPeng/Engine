@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:38)
+///	版本：0.9.1.3 (2023/08/08 19:34)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_DETAIL_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_DETAIL_H
@@ -15,7 +15,6 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include <iostream>
 
@@ -23,7 +22,7 @@ template <template <typename> class Build, typename Process>
 Framework::ConsoleMainFunctionHelper<Build, Process>::ConsoleMainFunctionHelper(int argc, char** argv, const String& consoleTitle, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ argc, argv, consoleTitle, environmentDirectory }, build{}, consoleMainFunctionSchedule{ ConsoleMainFunctionSchedule::Failure }
 {
-    Initializers();
+    Initializer();
 
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -80,14 +79,12 @@ void Framework::ConsoleMainFunctionHelper<Build, Process>::Destroy()
     ParentType::Destroy();
 }
 
-// private
 template <template <typename> class Build, typename CallBack>
 int Framework::ConsoleMainFunctionHelper<Build, CallBack>::DoRun() noexcept
 {
     return RunConsoleMainLoop();
 }
 
-// private
 template <template <typename> class Build, typename Process>
 int Framework::ConsoleMainFunctionHelper<Build, Process>::RunConsoleMainLoop() noexcept
 {
@@ -99,48 +96,43 @@ int Framework::ConsoleMainFunctionHelper<Build, Process>::RunConsoleMainLoop() n
     return 0;
 }
 
-// private
 template <template <typename> class Build, typename Process>
-void Framework::ConsoleMainFunctionHelper<Build, Process>::Initializers()
+void Framework::ConsoleMainFunctionHelper<Build, Process>::Initializer()
 {
     EXCEPTION_TRY
     {
         InitConsoleProcess();
-        InitImpl();
+        InitConsoleImpl();
     }
     EXCEPTION_ENTRY_POINT_CATCH
 }
 
-// private
 template <template <typename> class Build, typename Process>
 void Framework::ConsoleMainFunctionHelper<Build, Process>::InitConsoleProcess() noexcept
 {
     consoleMainFunctionSchedule = ConsoleMainFunctionSchedule::ConsoleProcess;
 }
 
-// private
 template <template <typename> class Build, typename Process>
-void Framework::ConsoleMainFunctionHelper<Build, Process>::InitImpl()
+void Framework::ConsoleMainFunctionHelper<Build, Process>::InitConsoleImpl()
 {
     build = std::make_shared<BuildType>();
     consoleMainFunctionSchedule = ConsoleMainFunctionSchedule::Max;
 }
 
-// private
 template <template <typename> class Build, typename Process>
 void Framework::ConsoleMainFunctionHelper<Build, Process>::Terminators()
 {
     EXCEPTION_TRY
     {
-        DestroyImpl();
+        DestroyConsoleImpl();
         DestroyConsoleProcess();
     }
     EXCEPTION_ENTRY_POINT_CATCH
 }
 
-// private
 template <template <typename> class Build, typename Process>
-void Framework::ConsoleMainFunctionHelper<Build, Process>::DestroyImpl() noexcept
+void Framework::ConsoleMainFunctionHelper<Build, Process>::DestroyConsoleImpl() noexcept
 {
     if (ConsoleMainFunctionSchedule::Max <= consoleMainFunctionSchedule)
     {
@@ -149,7 +141,6 @@ void Framework::ConsoleMainFunctionHelper<Build, Process>::DestroyImpl() noexcep
     }
 }
 
-// private
 template <template <typename> class Build, typename Process>
 void Framework::ConsoleMainFunctionHelper<Build, Process>::DestroyConsoleProcess() noexcept
 {

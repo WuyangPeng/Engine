@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:11)
+///	版本：0.9.1.3 (2023/08/04 15:53)
 
 #ifndef FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_PARAMETER_IMPL_H
 #define FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_PARAMETER_IMPL_H
@@ -13,7 +13,6 @@
 #include "Framework/FrameworkDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include "Framework/WindowCreate/WindowPoint.h"
 
 #include <string>
@@ -24,13 +23,14 @@ namespace Framework
     {
     public:
         using ClassType = WindowCreateParameterImpl;
+
         using String = System::String;
         using WindowsHWnd = System::WindowsHWnd;
         using WindowsHMenu = System::WindowsHMenu;
         using WindowStyles = System::WindowsStyles;
 
     public:
-        WindowCreateParameterImpl(const String& windowsName, WindowStyles style, WindowsHWnd parent, WindowsHMenu menu, const WindowPoint& leftTopCorner);
+        WindowCreateParameterImpl(String windowsName, WindowStyles style, WindowsHWnd parent, WindowsHMenu menu, const WindowPoint& leftTopCorner) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

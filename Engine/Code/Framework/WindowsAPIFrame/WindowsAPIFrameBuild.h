@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:00)
+///	版本：0.9.1.3 (2023/08/03 16:30)
 
 #ifndef FRAMEWORK_WINDOWS_API_FRAME_BUILD_H
 #define FRAMEWORK_WINDOWS_API_FRAME_BUILD_H
@@ -23,6 +23,7 @@ namespace Framework
     {
     public:
         using ClassType = WindowsAPIFrameBuild<Process>;
+
         using String = System::String;
         using HWnd = System::WindowsHWnd;
         using HInstance = System::WindowsHInstance;
@@ -40,13 +41,17 @@ namespace Framework
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        NODISCARD HWnd GetHwnd() const noexcept;
+        NODISCARD HWnd GetHWnd() const noexcept;
         NODISCARD HInstance GetHInstance() const noexcept;
 
-        int EnterMessageLoop();
+        NODISCARD int EnterMessageLoop();
 
     private:
         using WindowRegister = WindowRegisterHandle<Process>;
+
+    private:
+        NODISCARD int EnterMessageLoop(Process& process);
+        NODISCARD int DoEnterMessageLoop() noexcept;
 
     private:
         WindowRegister windowRegister;

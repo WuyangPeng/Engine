@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:47)
+///	版本：0.9.1.3 (2023/08/11 20:31)
 
 #include "WindowHBrushTesting.h"
 #include "System/Windows/Flags/WindowsPictorialFlags.h"
@@ -16,11 +16,6 @@
 #include "Framework/WindowRegister/WindowHBrush.h"
 
 #include <algorithm>
-
-namespace Framework
-{
-    using TestingType = WindowHBrush;
-}
 
 Framework::WindowHBrushTesting::WindowHBrushTesting(const OStreamShared& stream)
     : ParentType{ stream },
@@ -48,8 +43,10 @@ void Framework::WindowHBrushTesting::MainTest()
 
 void Framework::WindowHBrushTesting::BrushTest()
 {
-    for_each(container.begin(), container.end(), [this](const auto& value) {
-        const TestingType windowHBrush{ value };
+    std::ranges::for_each(container, [this](const auto& value) {
+
+        const WindowHBrush windowHBrush{ value };
         ASSERT_EQUAL(windowHBrush.GetHBrush(), System::GetSystemStockObject(value));
+
     });
 }

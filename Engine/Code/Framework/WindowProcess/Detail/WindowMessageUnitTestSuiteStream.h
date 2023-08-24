@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:02)
+///	版本：0.9.1.3 (2023/08/04 14:58)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_UNIT_TEST_SUITE_STREAM_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_UNIT_TEST_SUITE_STREAM_H
@@ -21,10 +21,11 @@ namespace Framework
     {
     public:
         using ClassType = WindowMessageUnitTestSuiteStream;
+
         using OStreamShared = CoreTools::OStreamShared;
 
     public:
-        explicit WindowMessageUnitTestSuiteStream(bool usecommand);
+        explicit WindowMessageUnitTestSuiteStream(bool useCommand);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -35,8 +36,8 @@ namespace Framework
         using CommandSharedPtr = std::shared_ptr<Command>;
 
     private:
-        NODISCARD static CommandSharedPtr GenerateCommandSharedPtr(bool usecommand);
-        NODISCARD static OStreamShared GenerateStreamShared(bool usecommand);
+        NODISCARD static CommandSharedPtr GenerateCommandSharedPtr(bool useCommand);
+        NODISCARD static OStreamShared GenerateStreamShared(bool useCommand);
         NODISCARD static std::string GetMultiByteCommandLine();
 
     private:

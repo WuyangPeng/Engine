@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:43)
+///	版本：0.9.1.3 (2023/08/09 14:59)
 
 #ifndef FRAMEWORK_APPLICATION_OBJECT_MOTION_ROTATE_TRACK_BALL_H
 #define FRAMEWORK_APPLICATION_OBJECT_MOTION_ROTATE_TRACK_BALL_H
@@ -24,6 +24,7 @@ namespace Framework
     {
     public:
         using ClassType = ObjectMotionRotateTrackBall;
+
         using Matrix = Mathematics::MatrixF;
         using AVector = Mathematics::AVectorF;
         using Transform = Rendering::TransformF;
@@ -31,8 +32,8 @@ namespace Framework
         using ConstCameraSharedPtr = Rendering::ConstCameraSharedPtr;
 
     public:
-        explicit ObjectMotionRotateTrackBall(const SpatialSharedPtr& motionObject,
-                                             const ConstCameraSharedPtr& camera,
+        explicit ObjectMotionRotateTrackBall(SpatialSharedPtr motionObject,
+                                             ConstCameraSharedPtr camera,
                                              float beginXTrack,
                                              float beginYTrack,
                                              float endXTrack,

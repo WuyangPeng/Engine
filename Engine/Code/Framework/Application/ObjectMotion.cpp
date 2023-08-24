@@ -5,50 +5,95 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:50)
+///	版本：0.9.1.3 (2023/08/09 15:13)
 
 #include "Framework/FrameworkExport.h"
 
 #include "ObjectMotion.h"
 #include "Detail/ObjectMotionImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Framework::ObjectMotion::ObjectMotion(const SpatialSharedPtr& motionObject)
     : impl{ motionObject }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, ObjectMotion)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, ObjectMotion, MoveObject, float, bool);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Framework, ObjectMotion, RotateTrackBall, ConstCameraSharedPtr, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, ObjectMotion, SetDoRoll, int, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, ObjectMotion, SetDoYaw, int, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, ObjectMotion, SetDoPitch, int, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, ObjectMotion, SetTrackBallDow, bool, void);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ObjectMotion, GetTrackBallDow, bool);
+bool Framework::ObjectMotion::MoveObject(float rotationSpeed)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->MoveObject(rotationSpeed);
+}
+
+void Framework::ObjectMotion::RotateTrackBall(const ConstCameraSharedPtr& camera)
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->RotateTrackBall(camera);
+}
+
+void Framework::ObjectMotion::SetDoRoll(int doRoll) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetDoRoll(doRoll);
+}
+
+void Framework::ObjectMotion::SetDoYaw(int doYaw) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetDoYaw(doYaw);
+}
+
+void Framework::ObjectMotion::SetDoPitch(int doPitch) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetDoPitch(doPitch);
+}
+
+void Framework::ObjectMotion::SetTrackBallDow(bool trackBallDow) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return impl->SetTrackBallDow(trackBallDow);
+}
+
+bool Framework::ObjectMotion::GetTrackBallDow() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetTrackBallDow();
+}
 
 void Framework::ObjectMotion::SetBeginTrack(float xTrack, float yTrack) noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return impl->SetBeginTrack(xTrack, yTrack);
 }
 
 void Framework::ObjectMotion::SetEndTrack(float xTrack, float yTrack) noexcept
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return impl->SetEndTrack(xTrack, yTrack);
 }
 
 void Framework::ObjectMotion::SetSaveRotate() noexcept(gAssert < 2 || gRenderingAssert < 2)
 {
-    FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
     return impl->SetSaveRotate();
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ObjectMotion, GetMotionObjectLocalTransform, Framework::ObjectMotion::Transform);
+Framework::ObjectMotion::Transform Framework::ObjectMotion::GetMotionObjectLocalTransform() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetMotionObjectLocalTransform();
+}

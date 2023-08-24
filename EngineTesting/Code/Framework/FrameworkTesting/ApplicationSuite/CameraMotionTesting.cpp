@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:26)
+///	版本：0.9.1.3 (2023/08/11 20:36)
 
 #include "CameraMotionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -19,11 +19,6 @@
 #include "Framework/Application/CameraMotion.h"
 
 #include <random>
-
-namespace Framework
-{
-    using TestingType = CameraMotion;
-}
 
 Framework::CameraMotionTesting::CameraMotionTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -51,7 +46,7 @@ void Framework::CameraMotionTesting::MainTest()
 
 void Framework::CameraMotionTesting::BaseTest()
 {
-    TestingType cameraMotion{ 2.0f, 1.0f };
+    CameraMotion cameraMotion{ 2.0f, 1.0f };
 
     ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), 2.0f, Mathematics::MathF::epsilon);
     ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), 1.0f, Mathematics::MathF::epsilon);
@@ -64,7 +59,7 @@ void Framework::CameraMotionTesting::SpeedTest()
     constexpr auto rotationSpeedFactor = 4.0f;
     constexpr auto translationSpeed = 2.0f;
     constexpr auto rotationSpeed = 1.0f;
-    TestingType cameraMotion{ translationSpeed, rotationSpeed, translationSpeedFactor, rotationSpeedFactor };
+    CameraMotion cameraMotion{ translationSpeed, rotationSpeed, translationSpeedFactor, rotationSpeedFactor };
     ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), translationSpeed, Mathematics::MathF::epsilon);
     ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), rotationSpeed, Mathematics::MathF::epsilon);
 
@@ -90,9 +85,9 @@ void Framework::CameraMotionTesting::MoveTest()
 {
     constexpr auto translationSpeed = 1.0f;
     constexpr auto rotationSpeed = 1.0f;
-    TestingType cameraMotion{ translationSpeed, rotationSpeed };
+    CameraMotion cameraMotion{ translationSpeed, rotationSpeed };
 
-    Rendering::CameraSharedPtr camera = std::make_shared<Rendering::Camera>(false, false);
+    const auto camera = std::make_shared<Rendering::Camera>(false, false);
     auto direction = camera->GetDirectionVector();
     const auto up = camera->GetUpVector();
     auto right = camera->GetRightVector();
@@ -100,8 +95,7 @@ void Framework::CameraMotionTesting::MoveTest()
     std::default_random_engine generator{ GetEngineRandomSeed() };
     const std::uniform_int<> random{ 0, 1 };
 
-    const auto aTestLoopCount = GetTestLoopCount();
-    for (auto i = 0; i < aTestLoopCount; ++i)
+    for (auto i = 0; i < GetTestLoopCount(); ++i)
     {
         const auto moveForward = random(generator) == 1 ? true : false;
 
@@ -230,26 +224,20 @@ void Framework::CameraMotionTesting::MoveTest()
         }
 
         cameraMotion.MoveCamera();
-        AssertCamera(camera, cameraMotion.GetCamera());
+        AssertCamera(*camera, *cameraMotion.GetCamera());
     }
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-
-void Framework::CameraMotionTesting::AssertCamera(const CameraSmartPointer& lhs, const CameraSmartPointer& rhs)
+void Framework::CameraMotionTesting::AssertCamera(const Camera& lhs, const Camera& rhs)
 {
     using APointApproximate = bool (*)(const Mathematics::APointF&, const Mathematics::APointF&, float);
-    APointApproximate aPointApproximate{ Mathematics::Approximate<float> };
+    APointApproximate aPointApproximate{ Mathematics::Approximate };
 
     using AVectorApproximate = bool (*)(const Mathematics::AVectorF&, const Mathematics::AVectorF&, float);
-    AVectorApproximate aVectorApproximate{ Mathematics::Approximate<float> };
+    AVectorApproximate aVectorApproximate{ Mathematics::Approximate };
 
-    ASSERT_APPROXIMATE_USE_FUNCTION(aPointApproximate, lhs->GetPosition(), rhs->GetPosition(), Mathematics::MathF::epsilon);
-    ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs->GetDirectionVector(), rhs->GetDirectionVector(), Mathematics::MathF::epsilon);
-    ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs->GetUpVector(), rhs->GetUpVector(), Mathematics::MathF::epsilon);
-    ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs->GetRightVector(), rhs->GetRightVector(), Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE_USE_FUNCTION(aPointApproximate, lhs.GetPosition(), rhs.GetPosition(), Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs.GetDirectionVector(), rhs.GetDirectionVector(), Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs.GetUpVector(), rhs.GetUpVector(), Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs.GetRightVector(), rhs.GetRightVector(), Mathematics::MathF::epsilon);
 }
-
-#include STSTEM_WARNING_POP

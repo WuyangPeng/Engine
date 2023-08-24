@@ -19,6 +19,9 @@ namespace CoreTools
     class CaseInsensitiveStringTraits;
 
     class StringUtility;
+
+    class CodeMapping;
+    class CodeMappingAnalysis;
 }
 
 #endif  // CORE_TOOLS_CHARACTER_STRING_FWD_H

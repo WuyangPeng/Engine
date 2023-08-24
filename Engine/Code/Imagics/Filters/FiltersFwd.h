@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/12 17:03)
+///	版本：0.9.1.3 (2023/08/02 11:22)
 
 #ifndef IMAGICS_FILTERS_FWD_H
 #define IMAGICS_FILTERS_FWD_H

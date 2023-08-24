@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:02)
+///	版本：0.9.1.3 (2023/08/03 19:24)
 
 #include "Framework/FrameworkExport.h"
 
@@ -18,15 +18,13 @@ using namespace std::literals;
 Framework::WindowRegisterParameter::WindowRegisterParameter(HInstance instance, WindowClassStyle styles, int windowClassExtra, int windowExtra)
     : instance{ instance }, style{ styles }, windowClassExtra{ windowClassExtra }, windowExtra{ windowExtra }
 {
-    if (instance == nullptr)
+    if (!IsValid())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("窗口实例不存在。"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("窗口实例不存在。"s))
     }
 
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
-
-#ifdef OPEN_CLASS_INVARIANT
 
 bool Framework::WindowRegisterParameter::IsValid() const noexcept
 {
@@ -35,8 +33,6 @@ bool Framework::WindowRegisterParameter::IsValid() const noexcept
     else
         return false;
 }
-
-#endif  // OPEN_CLASS_INVARIANT
 
 System::WindowsHInstance Framework::WindowRegisterParameter::GetHInstance() const noexcept
 {

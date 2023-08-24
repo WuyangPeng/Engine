@@ -1,19 +1,21 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/27 22:12)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:43)
 
 #ifndef RECHARGE_SERVER_MIDDLE_LAYER_IMPORT_H
 #define RECHARGE_SERVER_MIDDLE_LAYER_IMPORT_H
 
-#include "Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_RECHARGE_SERVER_MIDDLE_LAYER_IMPORT
+
     #define BUILDING_RECHARGE_SERVER_MIDDLE_LAYER_IMPORT
+
 #endif  // BUILDING_RECHARGE_SERVER_MIDDLE_LAYER_IMPORT
 
 #endif  // RECHARGE_SERVER_MIDDLE_LAYER_IMPORT_H

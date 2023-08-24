@@ -1,0 +1,42 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_$CoreCapital$_DLL_H
+#define $ModuleUppercase$_$CoreCapital$_DLL_H
+
+#include "Helper/UserMacro.h"
+#include "System/Helper/ExportMacro.h"
+
+#if defined(BUILDING_$ModuleUppercase$_$CoreCapital$_NO_IMPORT) || defined(BUILDING_$ModuleUppercase$_$CoreCapital$_STATIC)
+
+    #define $ModuleUppercase$_$CoreCapital$_DEFAULT_DECLARE
+    #define $ModuleUppercase$_$CoreCapital$_VISIBLE
+
+    #if defined(BUILDING_$ModuleUppercase$_$CoreCapital$_EXPORT)
+
+        #define $ModuleUppercase$_$CoreCapital$_HIDDEN_DECLARE
+
+    #else  // !defined(BUILDING_$ModuleUppercase$_$CoreCapital$_EXPORT)
+
+        #define $ModuleUppercase$_$CoreCapital$_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_$ModuleUppercase$_$CoreCapital$_EXPORT
+
+#else  // !defined(BUILDING_$ModuleUppercase$_$CoreCapital$_NO_IMPORT) && !defined(BUILDING_$ModuleUppercase$_$CoreCapital$_STATIC)
+
+    #if defined(BUILDING_$ModuleUppercase$_$CoreCapital$_EXPORT)
+
+        #define $ModuleUppercase$_$CoreCapital$_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define $ModuleUppercase$_$CoreCapital$_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+    #else  // !defined(BUILDING_$ModuleUppercase$_$CoreCapital$_EXPORT)
+
+        #define $ModuleUppercase$_$CoreCapital$_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define $ModuleUppercase$_$CoreCapital$_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_$ModuleUppercase$_$CoreCapital$_EXPORT
+
+    #define $ModuleUppercase$_$CoreCapital$_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif  // defined(BUILDING_$ModuleUppercase$_$CoreCapital$_NO_IMPORT) || defined(BUILDING_$ModuleUppercase$_$CoreCapital$_STATIC)
+
+#endif  // $ModuleUppercase$_$CoreCapital$_DLL_H

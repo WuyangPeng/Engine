@@ -1,26 +1,24 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/29 17:25)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:43)
 
+#include "UpdateServer//UpdateServerCore/Helper/UpdateServerCoreClassInvariantMacro.h"
 #include "UpdateServer/UpdateServerMiddleLayer/Input/InputManagerDetail.h"
 #include "UpdateServerMessage.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Framework/MiddleLayer/EngineMiddleLayerContainerDetail.h"
-#include "Framework/MiddleLayer/InputManagerDetail.h"
 #include "Framework/MiddleLayer/MiddleLayerInterface.h"
 #include "Framework/MiddleLayer/ObjectLogicManagerDetail.h"
 #include "Framework/WindowProcess/WindowMessageDetail.h"
 
-UpdateServer::UpdateServerMessage::UpdateServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory)
-    : ParentType{ delta, environmentDirectory }, alloc{ CoreTools::ConsoleAlloc::Create() }
+UpdateServer::UpdateServerMessage::UpdateServerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ delta, environmentDirectory }, alloc{ ConsoleAlloc::Create() }
 {
-    SELF_CLASS_IS_VALID_1;
+    UPDATE_SERVER_CORE_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(UpdateServer, UpdateServerMessage)

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:38)
+///	版本：0.9.1.3 (2023/08/08 19:32)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_OPENGL_GLUT_MAIN_FUNCTION_HELPER_DETAIL_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_OPENGL_GLUT_MAIN_FUNCTION_HELPER_DETAIL_H
@@ -15,7 +15,6 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Framework/Application/GlutApplicationInformation.h"
 #include "Framework/OpenGLGlutFrame/OpenGLGlutProcessManager.h"
@@ -24,7 +23,7 @@ template <template <typename> class Build, typename Process>
 Framework::OpenGLGlutMainFunctionHelper<Build, Process>::OpenGLGlutMainFunctionHelper(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ environmentDirectory }, build{}, openGLGlutMainFunctionSchedule{ OpenGLGlutMainFunctionSchedule::Failure }
 {
-    Initializers(argc, argv, information, environmentDirectory);
+    Initializer(argc, argv, information, environmentDirectory);
 
     // 构造未完成
 }
@@ -98,14 +97,12 @@ void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::Destroy()
     ParentType::Destroy();
 }
 
-// private
 template <template <typename> class Build, typename Process>
 int Framework::OpenGLGlutMainFunctionHelper<Build, Process>::DoRun()
 {
     return RunOpenGLGlutMainLoop();
 }
 
-// private
 template <template <typename> class Build, typename Process>
 int Framework::OpenGLGlutMainFunctionHelper<Build, Process>::RunOpenGLGlutMainLoop()
 {
@@ -117,15 +114,14 @@ int Framework::OpenGLGlutMainFunctionHelper<Build, Process>::RunOpenGLGlutMainLo
     return 0;
 }
 
-// private
 template <template <typename> class Build, typename Process>
-void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::Initializers(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
+void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::Initializer(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
 {
     EXCEPTION_TRY
     {
         InitOpenGLGlutProcess();
         InitCamera();
-        InitImpl(argc, argv, information, environmentDirectory);
+        InitOpenGLImpl(argc, argv, information, environmentDirectory);
     }
     EXCEPTION_WINDOWS_ENTRY_POINT_CATCH
 }
@@ -145,11 +141,14 @@ void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::InitCamera()
 }
 
 template <template <typename> class Build, typename Process>
-void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::InitImpl(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
+void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::InitOpenGLImpl(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
 {
     build = std::make_shared<BuildType>(information, environmentDirectory);
     openGLGlutMainFunctionSchedule = OpenGLGlutMainFunctionSchedule::Max;
-    build->InitOpenGLGlutContext(argc, argv);
+    if (!build->InitOpenGLGlutContext(argc, argv))
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("InitOpenGLGlutContext失败。"));
+    }
 }
 
 template <template <typename> class Build, typename Process>
@@ -157,7 +156,7 @@ void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::Terminators()
 {
     EXCEPTION_TRY
     {
-        DestroyImpl();
+        DestroyOpenGLImpl();
         DestroyCamera();
         DestroyOpenGLGlutProcess();
     }
@@ -165,7 +164,7 @@ void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::Terminators()
 }
 
 template <template <typename> class Build, typename Process>
-void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::DestroyImpl() noexcept
+void Framework::OpenGLGlutMainFunctionHelper<Build, Process>::DestroyOpenGLImpl() noexcept
 {
     if (OpenGLGlutMainFunctionSchedule::Max <= openGLGlutMainFunctionSchedule)
     {

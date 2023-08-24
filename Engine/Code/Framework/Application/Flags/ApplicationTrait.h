@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:43)
+///	版本：0.9.1.3 (2023/08/09 14:45)
 
 #ifndef FRAMEWORK_APPLICATION_APPLICATION_TRAIT_H
 #define FRAMEWORK_APPLICATION_APPLICATION_TRAIT_H
@@ -27,7 +27,7 @@ namespace Framework
         Macintosh
     };
 
-    template <PlatformTypes types>
+    template <PlatformTypes Types>
     struct ApplicationTrait;
 
     template <>

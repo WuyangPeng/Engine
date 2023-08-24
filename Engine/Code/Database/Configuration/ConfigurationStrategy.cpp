@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/22 16:28)
+///	版本：0.9.1.3 (2023/08/14 15:55)
 
 #include "Database/DatabaseExport.h"
 
@@ -22,7 +22,7 @@ Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappers
                                                        const std::string& password)
     : impl{ wrappersStrategy, ip, port, hostName, userName, password }
 {
-    DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
 Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy,
@@ -44,29 +44,140 @@ Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappers
                                                        const DBMapping& dbMapping)
     : impl{ wrappersStrategy, ip, port, hostName, userName, password, pooling, poolMaxSize, poolQueueTimeout, poolMaxIdleTime, threadCount, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping }
 {
-    DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Database, ConfigurationStrategy)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetWrappersStrategy, Database::WrappersStrategy)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetIp, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPort, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBHostName, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBUserName, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBPassword, std::string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetFlagsOption, Database::ConfigurationStrategy::FlagsOption)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetStringOptions, Database::ConfigurationStrategy::StringOption)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetBooleanOptions, Database::ConfigurationStrategy::BooleanOption)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetIntOptions, Database::ConfigurationStrategy::IntOption)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetSSLOptions, Database::ConfigurationStrategy::SSLOption)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetDBMapping, Database::ConfigurationStrategy::DBMapping)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, IsUseSSL, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ConfigurationStrategy, GetDBName, int, std::string)
+Database::WrappersStrategy Database::ConfigurationStrategy::GetWrappersStrategy() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPooling, bool)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPoolMaxSize, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPoolQueueTimeout, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetPoolMaxIdleTime, int)
+    return impl->GetWrappersStrategy();
+}
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetThreadCount, int)
+std::string Database::ConfigurationStrategy::GetIp() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetIp();
+}
+
+int Database::ConfigurationStrategy::GetPort() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetPort();
+}
+
+std::string Database::ConfigurationStrategy::GetDBHostName() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDBHostName();
+}
+
+std::string Database::ConfigurationStrategy::GetDBUserName() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDBUserName();
+}
+
+std::string Database::ConfigurationStrategy::GetDBPassword() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDBPassword();
+}
+
+Database::ConfigurationStrategy::FlagsOption Database::ConfigurationStrategy::GetFlagsOption() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFlagsOption();
+}
+
+Database::ConfigurationStrategy::StringOption Database::ConfigurationStrategy::GetStringOptions() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetStringOptions();
+}
+
+Database::ConfigurationStrategy::BooleanOption Database::ConfigurationStrategy::GetBooleanOptions() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBooleanOptions();
+}
+
+Database::ConfigurationStrategy::IntOption Database::ConfigurationStrategy::GetIntOptions() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetIntOptions();
+}
+
+Database::ConfigurationStrategy::SSLOption Database::ConfigurationStrategy::GetSSLOptions() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetSSLOptions();
+}
+
+Database::ConfigurationStrategy::DBMapping Database::ConfigurationStrategy::GetDBMapping() const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDBMapping();
+}
+
+bool Database::ConfigurationStrategy::IsUseSSL() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->IsUseSSL();
+}
+
+std::string Database::ConfigurationStrategy::GetDBName(int dbIndex) const
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetDBName(dbIndex);
+}
+
+bool Database::ConfigurationStrategy::GetPooling() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetPooling();
+}
+
+int Database::ConfigurationStrategy::GetPoolMaxSize() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetPoolMaxSize();
+}
+
+int Database::ConfigurationStrategy::GetPoolQueueTimeout() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetPoolQueueTimeout();
+}
+
+int Database::ConfigurationStrategy::GetPoolMaxIdleTime() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetPoolMaxIdleTime();
+}
+
+int Database::ConfigurationStrategy::GetThreadCount() const noexcept
+{
+    DATABASE_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetThreadCount();
+}

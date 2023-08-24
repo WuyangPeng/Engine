@@ -12,7 +12,9 @@
 
 #include <vld.h>
 
-int SYSTEM_WINAPI WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, [[maybe_unused]] SYSTEM_IN int showCommand)
+int SYSTEM_WINAPI WinMain(SYSTEM_IN System::WindowsHInstance instance, SYSTEM_IN_OPT System::WindowsHInstance previousInstance, SYSTEM_IN char* commandLine, SYSTEM_IN int showCommand)
 {
+    System::UnusedFunction(showCommand);
+
     return Framework::WinMainEntryPoint<Framework::WinMainEntryPoint1>(instance, commandLine, SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT(""), SYSTEM_TEXT("WinMainEntryPoint1"), 1024, 768, previousInstance);
 }

@@ -1,0 +1,11 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_$CoreCapital$_HELPER_EXPORT_MACRO_H
+#define $ModuleUppercase$_$CoreCapital$_HELPER_EXPORT_MACRO_H
+
+#include "$CoreName$Tools/Helper/ExportMacro.h"
+
+#define $ModuleUppercase$_$CoreCapital$_EXPORT_SHARED_PTR(implClassName) \
+    EXPORT_SHARED_PTR($ModuleName$$CoreName$, implClassName, $ModuleUppercase$_$CoreCapital$_DEFAULT_DECLARE)
+
+#endif  // $ModuleUppercase$_$CoreCapital$_HELPER_EXPORT_MACRO_H

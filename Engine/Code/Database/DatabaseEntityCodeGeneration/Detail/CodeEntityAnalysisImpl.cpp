@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/02 18:02)
+///	版本：0.9.1.3 (2023/08/14 15:52)
 
 #include "Database/DatabaseExport.h"
 
@@ -29,12 +29,13 @@ Database::CodeEntityAnalysisImpl::CodeEntityAnalysisImpl(const std::string& file
 System::String Database::CodeEntityAnalysisImpl::GetNamespaceName(const std::string& fileName)
 {
     std::vector<std::string> pathComponents{};
-    boost::algorithm::split(pathComponents, fileName, boost::algorithm::is_any_of("/\\"), boost::token_compress_off);
+    split(pathComponents, fileName, boost::algorithm::is_any_of("/\\"), boost::token_compress_off);
     if (!pathComponents.empty())
     {
         const auto backComponent = pathComponents.back();
-        const auto dotPosition = backComponent.find_last_of('.');
-        if (dotPosition != std::string::npos)
+
+        if (const auto dotPosition = backComponent.find_last_of('.');
+            dotPosition != std::string::npos)
         {
             return CoreTools::StringConversion::MultiByteConversionStandard(backComponent.substr(0, dotPosition));
         }

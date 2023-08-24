@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:17)
+///	版本：0.9.1.3 (2023/08/05 14:59)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "OpenGLGlutCallBackInterface.h"
 #include "System/OpenGL/Using/GlutUsing.h"
@@ -25,9 +27,8 @@ namespace Framework
         static_assert(std::is_base_of_v<OpenGLGlutCallBackInterface, OpenGLGlutCallBack>);
 
     public:
-        using CallBackType = OpenGLGlutCallBack;
-        using ClassType = OpenGLGlutProcess<CallBackType>;
-        using OpenGLGlutCallBackInterfaceSharedPtr = std::shared_ptr<OpenGLGlutCallBackInterface>;
+        using ClassType = OpenGLGlutProcess<OpenGLGlutCallBack>;
+
         using RenderSceneCallback = System::RenderSceneCallback;
         using ChangeSizeCallback = System::ChangeSizeCallback;
         using TimerFunctionCallback = System::TimerFunctionCallback;
@@ -66,10 +67,10 @@ namespace Framework
         NODISCARD ProcessMenuCallback GetProcessMenuCallback() const noexcept;
         NODISCARD TerminateCallback GetTerminateCallback() const noexcept;
 
-        void SetWindowID(int window);
+        void SetWindowId(int window);
         void SetMillisecond(int millisecond);
         NODISCARD int GetMillisecond() const;
-        NODISCARD int GetWindowID() const;
+        NODISCARD int GetWindowId() const;
 
         NODISCARD virtual bool PreCreate();
         NODISCARD virtual bool Initialize();

@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/18 23:14)
+///	版本：0.9.1.3 (2023/08/14 14:11)
 
 #ifndef FRAMEWORK_PROJECT_SUITE_SYSTEM_PROJECT_MANAGER_TESTING_H
 #define FRAMEWORK_PROJECT_SUITE_SYSTEM_PROJECT_MANAGER_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
-#include "Detail/ResourceProjectManagerMock.h"
-#include "Framework/Project/ResourceProjectManager.h"
+#include "Detail/ResourceProjectManagerMock.h" 
 #include "Framework/Project/SystemProjectManager.h"
 
 namespace Framework

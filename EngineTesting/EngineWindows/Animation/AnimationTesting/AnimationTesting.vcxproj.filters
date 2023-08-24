@@ -22,12 +22,6 @@
     <Filter Include="AnimationManagerSuite 头文件">
       <UniqueIdentifier>{cda7647c-d325-44c9-bb82-e1899fec1082}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ConsoleGraphSuite 头文件">
-      <UniqueIdentifier>{2648a0b4-6fe3-49a1-bdf8-efac3cebcbed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ElfAnimationSuite 头文件">
-      <UniqueIdentifier>{d8ae345a-3684-406a-bdb6-a4c257ff08da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GradientAnimationSuite 头文件">
       <UniqueIdentifier>{fa1fb850-6e16-4978-accc-c72b600e5750}</UniqueIdentifier>
     </Filter>
@@ -49,6 +43,9 @@
     <Filter Include="HelperSuite 头文件">
       <UniqueIdentifier>{2ad273ef-f38e-4dec-a077-955fe1a6c997}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SpriteAnimationSuite 头文件">
+      <UniqueIdentifier>{d8ae345a-3684-406a-bdb6-a4c257ff08da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\AnimationManagerSuite\AnimationManagerSuite.h">
@@ -59,12 +56,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\TestingHelper.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\ConsoleGraphSuite\ConsoleGraphSuite.h">
-      <Filter>ConsoleGraphSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\ElfAnimationSuite\ElfAnimationSuite.h">
-      <Filter>ElfAnimationSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\GradientAnimationSuite\GradientAnimationSuite.h">
       <Filter>GradientAnimationSuite 头文件</Filter>
@@ -86,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\HelperSuite\HelperSuite.h">
       <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\SpriteAnimationSuite\SpriteAnimationSuite.h">
+      <Filter>SpriteAnimationSuite 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

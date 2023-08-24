@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -68,7 +68,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{A15D7B9A-4EE5-4B47-9425-801994E00183}</ProjectGuid>
+    <ProjectGuid>{6D68CDBC-6299-4FD4-B225-FFFFE48EC41F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>FightingServerCore</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -315,7 +315,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;FIGHTINGSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;FIGHTING_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -326,7 +326,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;FIGHTINGSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;FIGHTING_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -361,7 +361,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;FIGHTINGSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;FIGHTING_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -376,7 +376,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;FIGHTINGSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;FIGHTING_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -419,7 +419,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;FIGHTINGSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;FIGHTING_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -430,7 +430,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;FIGHTINGSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;FIGHTING_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -465,7 +465,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;FIGHTINGSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;FIGHTING_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -480,7 +480,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;FIGHTINGSERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;FIGHTING_SERVERCORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -532,12 +532,12 @@
     <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\FightingServerCoreImport.h" />
     <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\FightingServerCoreLib.h" />
     <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\FightingServerCoreNoImport.h" />
-    <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\Macro\ExportMacro.h" />
-    <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\Macro\FightingServerCoreClassInvariantMacro.h" />
-    <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\Macro\FightingServerCoreCustomAssertMacro.h" />
-    <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\Macro\UserMacro.h" />
+    <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\Helper\ExportMacro.h" />
+    <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\Helper\FightingServerCoreClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\Helper\FightingServerCoreCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\FightingServer\FightingServerCore\Helper\UserMacro.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\FightingServer\FightingServerCore\DllLib.cpp" />

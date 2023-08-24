@@ -122,8 +122,6 @@ void DatabaseGenerateServerBaseTesting::ReignTitleEntityTesting::EqualTest(const
     const auto& reignTitleEntity = result->second;
 
     ASSERT_EQUAL(reignTitleEntity.GetName(), CoreTools::StringConversion::StandardConversionUtf8(reignTitle.GetName()));
-
-    ASSERT_EQUAL(reignTitleEntity.GetName(), CoreTools::StringConversion::StandardConversionUtf8(reignTitle.GetName()));
     ASSERT_EQUAL(reignTitleEntity.GetEmperor(), reignTitle.GetEmperor());
     ASSERT_EQUAL(reignTitleEntity.GetSerial(), reignTitle.GetSerial());
     ASSERT_EQUAL(reignTitleEntity.GetBeginYear(), reignTitle.GetBeginYear());

@@ -1,7 +1,7 @@
 @ingroup group_MessageClientMiddleLayer_Documentation
 
 ----------------------------
-消息客户端管理器
+消息客户端中间层
 
 ---------------------------- 
 MessageClientMiddleLayer
@@ -12,7 +12,7 @@ MessageClientMiddleLayer
 
 ----------------------------
 状态
-	目前版本：0.8.0.12。
+	目前版本：0.9.1.3。
 
 ----------------------------
 实现内容

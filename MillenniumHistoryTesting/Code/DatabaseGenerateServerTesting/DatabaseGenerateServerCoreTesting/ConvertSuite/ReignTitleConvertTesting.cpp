@@ -5,84 +5,48 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/24 12:17)
+///	版本：0.9.1.3 (2023/08/05 21:05)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/ReignTitle.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/ReignTitleContainerDetail.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity/ReignTitleEntity.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerCore/Convert/ConvertEntity.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/Helper/DatabaseGenerateServerCoreClassInvariantMacro.h"
 #include "ReignTitleConvertTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/DatabaseInterface/BasisDatabaseManager.h"
-#include "Database/DatabaseInterface/DatabaseEnvironment.h"
-#include "Database/DatabaseInterface/DatabaseFlush.h"
 
-DatabaseGenerateServerCoreTesting::ReignTitleConvertTesting::ReignTitleConvertTesting(const OStreamShared& stream, const AncientBooksContainer& ancientBooksContainer)
-    : ParentType{ stream }, ancientBooksContainer{ ancientBooksContainer }
+DatabaseGenerateServerCoreTesting::ReignTitleConvertTesting::ReignTitleConvertTesting(const OStreamShared& stream, const ReignTitleContainer& reignTitleContainer)
+    : ParentType{ stream }, reignTitleContainer{ reignTitleContainer }
 {
     DATABASE_GENERATE_SERVER_CORE_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseGenerateServerCoreTesting, ReignTitleConvertTesting)
 
-void DatabaseGenerateServerCoreTesting::ReignTitleConvertTesting::DoRunUnitTest()
+void DatabaseGenerateServerCoreTesting::ReignTitleConvertTesting::ConvertTest(const DatabaseFlushSharedPtr& databaseFlush)
 {
-    Database::DatabaseEnvironment::Create();
+    DatabaseGenerateServerCore::ConvertEntity convertEntity{ databaseFlush };
 
-    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-
-    Database::DatabaseEnvironment::Destroy();
-}
-
-void DatabaseGenerateServerCoreTesting::ReignTitleConvertTesting::MainTest()
-{
-    ASSERT_NOT_THROW_EXCEPTION_0(InitEnvironmentTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DatabaseFlushTest);
-}
-
-void DatabaseGenerateServerCoreTesting::ReignTitleConvertTesting::InitEnvironmentTest()
-{
-    const Database::ConfigurationStrategy configurationStrategy{ Database::WrappersStrategy::Mongo, "127.0.0.1", 3306, "tcretest", "root", "123456" };
-
-    DATABASE_ENVIRONMENT_SINGLETON.InitEnvironment(configurationStrategy);
-}
-
-void DatabaseGenerateServerCoreTesting::ReignTitleConvertTesting::DatabaseFlushTest()
-{
-    const Database::ConfigurationStrategy::FlagsOption flagsOption{};
-    const Database::ConfigurationStrategy::StringOption stringOption{};
-    const Database::ConfigurationStrategy::BooleanOption booleanOption{};
-    const Database::ConfigurationStrategy::IntOption intOption{};
-    const Database::ConfigurationStrategy::SSLOption sslOption{};
-    const Database::ConfigurationStrategy::DBMapping dbMapping{};
-
-    const Database::ConfigurationStrategy configurationStrategy{ Database::WrappersStrategy::Mongo, "43.139.123.106", 27017, "tcretest", "dbOwner", "TCRE", true, 10, 1000, 500, 1, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping };
-
-    Database::DatabaseFlush mysqlConnectorDatabaseFlush{ configurationStrategy };
-
-    const auto reignTitleContainer = ancientBooksContainer.GetReignTitleContainer();
-
-    for (const auto& reignTitle : reignTitleContainer->GetContainer())
+    for (const auto& reignTitle : reignTitleContainer.GetContainer())
     {
-        const auto database = mysqlConnectorDatabaseFlush.SelectOne(DatabaseEntity::ReignTitleEntity::GetSelect(Database::WrappersStrategy::Mongo, reignTitle->GetId()),
-                                                                    DatabaseEntity::ReignTitleEntity::GetDatabaseFieldContainer());
+        const auto reignTitleEntity = convertEntity.Convert(*reignTitle);
 
-        auto reignTitleEntity = DatabaseEntity::ReignTitleEntity::Create(database, Database::WrappersStrategy::Mongo, reignTitle->GetId());
-
-        reignTitleEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(reignTitle->GetName()));
-        reignTitleEntity.SetEmperor(reignTitle->GetEmperor());
-        reignTitleEntity.SetSerial(reignTitle->GetSerial());
-        reignTitleEntity.SetBeginYear(reignTitle->GetBeginYear());
-        reignTitleEntity.SetBeginMonth(reignTitle->GetBeginMonth());
-        reignTitleEntity.SetBeginSexagenaryCycle(reignTitle->GetBeginSexagenaryCycle());
-        reignTitleEntity.SetBeginDay(reignTitle->GetBeginDay());
-        reignTitleEntity.SetEndYear(reignTitle->GetEndYear());
-        reignTitleEntity.SetEndMonth(reignTitle->GetEndMonth());
-        reignTitleEntity.SetEndSexagenaryCycle(reignTitle->GetEndSexagenaryCycle());
-        reignTitleEntity.SetEndDay(reignTitle->GetEndDay());
-
-        mysqlConnectorDatabaseFlush.ChangeDatabase(0, reignTitleEntity.GetModify());
+        ASSERT_NOT_THROW_EXCEPTION_2(EqualTest, *reignTitle, reignTitleEntity);
     }
+}
+
+void DatabaseGenerateServerCoreTesting::ReignTitleConvertTesting::EqualTest(const ReignTitle& reignTitle, const ReignTitleEntity& reignTitleEntity)
+{
+    ASSERT_EQUAL(reignTitleEntity.GetName(), CoreTools::StringConversion::StandardConversionUtf8(reignTitle.GetName()));
+    ASSERT_EQUAL(reignTitleEntity.GetEmperor(), reignTitle.GetEmperor());
+    ASSERT_EQUAL(reignTitleEntity.GetSerial(), reignTitle.GetSerial());
+    ASSERT_EQUAL(reignTitleEntity.GetBeginYear(), reignTitle.GetBeginYear());
+    ASSERT_EQUAL(reignTitleEntity.GetBeginMonth(), reignTitle.GetBeginMonth());
+    ASSERT_EQUAL(reignTitleEntity.GetBeginSexagenaryCycle(), reignTitle.GetBeginSexagenaryCycle());
+    ASSERT_EQUAL(reignTitleEntity.GetBeginDay(), reignTitle.GetBeginDay());
+    ASSERT_EQUAL(reignTitleEntity.GetEndYear(), reignTitle.GetEndYear());
+    ASSERT_EQUAL(reignTitleEntity.GetEndMonth(), reignTitle.GetEndMonth());
+    ASSERT_EQUAL(reignTitleEntity.GetEndSexagenaryCycle(), reignTitle.GetEndSexagenaryCycle());
+    ASSERT_EQUAL(reignTitleEntity.GetEndDay(), reignTitle.GetEndDay());
 }

@@ -22,6 +22,7 @@
 #include "Rendering/LocalEffects/Font.h"
 #include "Rendering/LocalEffects/OverlayEffect.h"
 #include "Rendering/LocalEffects/TextEffect.h"
+#include "Rendering/RendererEngine/Flags/RendererTypes.h"
 #include "Rendering/Resources/Buffers/Buffer.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
@@ -52,6 +53,11 @@ Rendering::BaseRendererImpl::BaseRendererImpl(RendererTypes rendererTypes, const
 Rendering::GlobalFont Rendering::BaseRendererImpl::CreateGlobalFont(RendererTypes rendererTypes, const RendererAdapter& rendererAdapter)
 {
     ProgramFactory programFactory{ rendererTypes };
+
+    if (rendererTypes == RendererTypes::Windows)
+    {
+        return GlobalFont{ FontType::ArialW400H18 };
+    }
 
     return GlobalFont{ FontType::ArialW400H18, programFactory, rendererAdapter.GetShaderExtendName(), 256 };
 }
@@ -495,15 +501,16 @@ int64_t Rendering::BaseRendererImpl::Draw(int x, int y, const Colour& color, con
         const auto viewport = GetViewport();
         const auto activeFont = GetFont();
 
-        activeFont->Typeset(viewport.GetWidth(), viewport.GetHeight(), x, y, color, message);
-        Update(*activeFont);
+        if (activeFont != nullptr)
+        {
+            activeFont->Typeset(viewport.GetWidth(), viewport.GetHeight(), x, y, color, message);
+            Update(*activeFont);
 
-        return SetState(*activeFont);
+            return SetState(*activeFont);
+        }
     }
-    else
-    {
-        return 0;
-    }
+
+    return 0;
 }
 
 int64_t Rendering::BaseRendererImpl::Draw(const OverlayEffectSharedPtr& overlay)

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.9 (2023/05/22 16:23)
+///	版本：0.9.1.3 (2023/08/14 15:54)
 
 #ifndef DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
 #define DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
@@ -25,7 +25,7 @@ namespace Database
         PostgreSQL = 1 << 5,
         Oracle = 1 << 6,
         FlatFile = 1 << 7,
-        MariaDB = 1 << 8,
+        MariaDb = 1 << 8,
         Mongo = 1 << 9,
         Redis = 1 << 10,
     };

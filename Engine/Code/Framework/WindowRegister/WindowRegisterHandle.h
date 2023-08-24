@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:01)
+///	版本：0.9.1.3 (2023/08/03 16:48)
 
 #ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_H
 #define FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_H
@@ -14,35 +14,34 @@
 #include "WindowPictorial.h"
 #include "WindowRegisterParameter.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Windows/WindowsProcess.h"
 #include "CoreTools/Command/CommandFwd.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 
 #include <string>
 
+// 注册窗口类（基类）的声明
 namespace Framework
 {
-    // 注册窗口类（基类）的声明
     template <typename WindowProcessHandle>
     class WindowRegisterHandle
     {
     public:
-        using WindowProcessType = WindowProcessHandle;
-        using ClassType = WindowRegisterHandle<WindowProcessType>;
+        using ClassType = WindowRegisterHandle<WindowProcessHandle>;
+
         using String = System::String;
-        using Atom = System::WindowsAtom;
+        using WindowsAtom = System::WindowsAtom;
         using HInstance = System::WindowsHInstance;
         using DisplayFunction = System::DisplayFunction;
         using WindowsClassStyle = System::WindowsClassStyle;
-        using Command = CoreTools::CommandHandle;
-        using CommandSharedPtr = std::shared_ptr<CoreTools::CommandHandle>;
+        using CommandHandle = CoreTools::CommandHandle;
+        using CommandHandleSharedPtr = std::shared_ptr<CommandHandle>;
 
     public:
         WindowRegisterHandle(const EnvironmentDirectory& environmentDirectory,
                              HInstance instance,
                              const char* commandLine,
-                             const WindowPictorial& pictorial,
-                             const WindowName& name,
+                             WindowPictorial pictorial,
+                             WindowName name,
                              WindowsClassStyle styles = WindowsClassStyle::CommonUse);
         virtual ~WindowRegisterHandle() noexcept = default;
         WindowRegisterHandle(const WindowRegisterHandle& rhs) noexcept = delete;
@@ -56,19 +55,20 @@ namespace Framework
         NODISCARD String GetWindowClassName() const;
         NODISCARD String GetWindowMenuName() const;
         NODISCARD DisplayFunction GetFunction() const noexcept;
-        NODISCARD CommandSharedPtr GetCommand() const noexcept;
+        NODISCARD CommandHandleSharedPtr GetCommand() const noexcept;
         NODISCARD WindowProcessHandle GetWindowProcess() const noexcept;
         NODISCARD EnvironmentDirectory GetEnvironmentDirectory() const noexcept;
 
     private:
-        NODISCARD Atom InitApplication();
+        void Init();
+        NODISCARD WindowsAtom InitApplication();
 
     private:
         static constexpr auto interval = 60;
 
         EnvironmentDirectory environmentDirectory;
         WindowProcessHandle windowProcess;
-        CommandSharedPtr command;
+        CommandHandleSharedPtr command;
         WindowRegisterParameter windowRegisterParameter;
         WindowPictorial windowPictorial;
         WindowName windowName;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:04)
+///	版本：0.9.1.3 (2023/08/12 15:25)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_OBJECT_LOGIC_MANAGER_INTERFACE_TESTING_H
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_OBJECT_LOGIC_MANAGER_INTERFACE_TESTING_H
@@ -14,7 +14,7 @@
 
 namespace Framework
 {
-    class ObjectLogicManagerInterfaceTesting : public CoreTools::UnitTest
+    class ObjectLogicManagerInterfaceTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = ObjectLogicManagerInterfaceTesting;
@@ -43,7 +43,7 @@ namespace Framework
         void SetRenderingManagerExceptionTest();
         void SetGUIManagerExceptionTest();
 
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
     };
 }
 

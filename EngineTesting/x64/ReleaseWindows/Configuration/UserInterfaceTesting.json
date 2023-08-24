@@ -19,11 +19,11 @@
 
   },
 
-  "trixulSuite": {
+  "openGLSuite": {
 
   },
 
-  "xFree86Suite": {
+  "directXSuite": {
 
   }
 }

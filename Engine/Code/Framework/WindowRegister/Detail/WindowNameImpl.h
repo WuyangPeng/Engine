@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:00)
+///	版本：0.9.1.3 (2023/08/03 19:59)
 
 #ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_NAME_IMPL_H
 #define FRAMEWORK_WINDOW_REGISTER_WINDOW_NAME_IMPL_H
@@ -20,12 +20,13 @@ namespace Framework
     {
     public:
         using ClassType = WindowNameImpl;
+
         using String = System::String;
 
     public:
-        explicit WindowNameImpl(const String& className, const String& menuName);
+        explicit WindowNameImpl(String className, String menuName);
 
-        CLASS_INVARIANT_DECLARE;
+        NODISCARD bool IsValid() const noexcept;
 
         NODISCARD String GetWindowClassName() const;
         NODISCARD String GetWindowMenuName() const;

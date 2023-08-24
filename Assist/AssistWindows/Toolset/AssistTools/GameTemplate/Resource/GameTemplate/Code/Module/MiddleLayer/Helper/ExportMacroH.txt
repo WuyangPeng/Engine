@@ -1,0 +1,11 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_HELPER_EXPORT_MACRO_H
+#define $ModuleUppercase$_MIDDLE_LAYER_HELPER_EXPORT_MACRO_H
+
+#include "CoreTools/Helper/ExportMacro.h"
+
+#define $ModuleUppercase$_MIDDLE_LAYER_EXPORT_SHARED_PTR(implClassName) \
+    EXPORT_SHARED_PTR($ModuleName$MiddleLayer, implClassName, $ModuleUppercase$_MIDDLE_LAYER_DEFAULT_DECLARE)
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_HELPER_EXPORT_MACRO_H

@@ -5,15 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:02)
+///	版本：0.9.1.3 (2023/08/04 14:59)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_UNIT_TEST_SUITE_IMPL_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_UNIT_TEST_SUITE_IMPL_H
 
 #include "Framework/FrameworkDll.h"
 
+#include "WindowMessageUnitTestSuiteStream.h"
 #include "System/Windows/Fwd/WindowsFlagsFwd.h"
-#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/Console/ConsoleAlloc.h"
 #include "CoreTools/MainFunctionHelper/TestingInformationHelper.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
@@ -27,28 +27,30 @@ namespace Framework
     {
     public:
         using ClassType = WindowMessageUnitTestSuiteImpl;
+
         using WindowsKeyCodes = System::WindowsKeyCodes;
         using Suite = CoreTools::Suite;
         using OStreamShared = CoreTools::OStreamShared;
-        using UnitTestSharedPtr = std::shared_ptr<CoreTools::UnitTestComposite>;
+        using UnitTestComposite = CoreTools::UnitTestComposite;
+        using UnitTestSharedPtr = std::shared_ptr<UnitTestComposite>;
 
     public:
-        WindowMessageUnitTestSuiteImpl(const std::string& name, const OStreamShared& streamShared);
+        explicit WindowMessageUnitTestSuiteImpl(const std::string& name);
 
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD bool IsPrintRun() const noexcept;
         NODISCARD int GetPassedNumber() const noexcept;
+        NODISCARD OStreamShared GetStreamShared() noexcept;
 
         void RunUnitTest();
         void PrintReport();
         void ResetTestData();
 
         void RunUnitTestOnMessage();
-
-        void AddSuite(const Suite& suite);
         void KeyDownMessage(WindowsKeyCodes windowsKeyCodes);
 
+        void AddSuite(const Suite& suite);
         void AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest);
 
     private:
@@ -56,12 +58,14 @@ namespace Framework
         using ConsoleAlloc = CoreTools::ConsoleAlloc;
         using TestingInformationHelper = CoreTools::TestingInformationHelper;
         using HandlerFunction = void (ClassType::*)();
-        using Process = std::map<System::WindowsKeyCodes, HandlerFunction>;
+        using Process = std::map<WindowsKeyCodes, HandlerFunction>;
+        using StreamUniquePtr = std::unique_ptr<WindowMessageUnitTestSuiteStream>;
 
     private:
         void ResetTestDataOnMessage();
 
     private:
+        StreamUniquePtr stream;
         ConsoleAlloc alloc;
         TestingInformationHelper testingInformationHelper;
         SuiteUniquePtr windowSuite;

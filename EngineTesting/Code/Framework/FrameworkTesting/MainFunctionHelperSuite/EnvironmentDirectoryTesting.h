@@ -5,11 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:14)
+///	版本：0.9.1.3 (2023/08/11 19:26)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_SUITE_ENVIRONMENT_DIRECTORY_TESTING_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_SUITE_ENVIRONMENT_DIRECTORY_TESTING_H
 
+#include "Flags/DescriptionFlags.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 
@@ -17,8 +18,6 @@
 
 namespace Framework
 {
-    enum class Description;
-
     class EnvironmentDirectoryTesting final : public CoreTools::UnitTest
     {
     public:
@@ -33,7 +32,7 @@ namespace Framework
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
         void MainTest();
 

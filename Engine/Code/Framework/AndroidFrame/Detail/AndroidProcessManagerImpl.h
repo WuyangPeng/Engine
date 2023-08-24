@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:51)
+///	版本：0.9.1.3 (2023/08/09 20:48)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_PROCESS_MANAGE_IMPL_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_PROCESS_MANAGE_IMPL_H
@@ -24,6 +24,7 @@ namespace Framework
     {
     public:
         using ClassType = AndroidProcessManagerImpl;
+
         using AndroidCallBackInterfaceSharedPtr = std::shared_ptr<AndroidCallBackInterface>;
         using HandleCmdFunctionPointer = AndroidCallBackInterface::HandleCmdFunctionPointer;
         using HandleInputFunctionPointer = AndroidCallBackInterface::HandleInputFunctionPointer;

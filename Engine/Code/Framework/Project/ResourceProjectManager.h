@@ -5,16 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/19 15:09)
-///
-///	单元测试：Pass
+///	版本：0.9.1.3 (2023/08/04 16:13)
 
 #ifndef FRAMEWORK_PROJECT_RESOURCE_PROJECT_MANAGER_H
 #define FRAMEWORK_PROJECT_RESOURCE_PROJECT_MANAGER_H
 
 #include "Framework/FrameworkDll.h"
 
-#include "ProjectFwd.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "Framework/MiddleLayer/ResourceManagerInterface.h"
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:09)
+///	版本：0.9.1.3 (2023/08/14 10:45)
 
 #include "MiddleLayerInterfaceTesting.h"
 #include "MiddleLayerInterfaceTestingBaseDetail.h"
@@ -29,8 +29,6 @@ void Framework::MiddleLayerInterfaceTesting::DoRunUnitTest()
 
 void Framework::MiddleLayerInterfaceTesting::MainTest()
 {
-    using TestingType = MiddleLayerInterface;
-
-    ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerMemberTest<TestingType>);
-    ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest<TestingType>);
+    ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerMemberTest<MiddleLayerInterface>);
+    ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest<MiddleLayerInterface>);
 }

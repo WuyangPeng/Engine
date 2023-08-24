@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:43)
+///	版本：0.9.1.3 (2023/08/09 14:54)
 
 #ifndef FRAMEWORK_APPLICATION_WINDOW_APPLICATION_INFORMATION_IMPL_H
 #define FRAMEWORK_APPLICATION_WINDOW_APPLICATION_INFORMATION_IMPL_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Windows/Flags/WindowsFlags.h"
@@ -24,13 +26,14 @@ namespace Framework
     {
     public:
         using ClassType = WindowApplicationInformationImpl;
+
         using String = System::String;
         using WindowsStyles = System::WindowsStyles;
         using WindowsHInstance = System::WindowsHInstance;
         using RendererParameter = Rendering::RendererParameter;
 
     public:
-        WindowApplicationInformationImpl(const String& windowTitle, const WindowSize& size, const WindowPoint& point, bool allowResize);
+        WindowApplicationInformationImpl(String windowTitle, const WindowSize& size, const WindowPoint& point, bool allowResize);
         WindowApplicationInformationImpl(const String& windowTitle, const WindowSize& size);
         WindowApplicationInformationImpl(WindowsHInstance instance, const RendererParameter& rendererParameter);
 
@@ -46,7 +49,7 @@ namespace Framework
         NODISCARD float GetAspectRatio() const noexcept;
         NODISCARD WindowsStyles GetStyle() const noexcept;
 
-        void SetWindowSize(const WindowSize& aSize) noexcept;
+        void SetWindowSize(const WindowSize& size) noexcept;
 
         NODISCARD WindowName GetWindowName() const noexcept;
         NODISCARD WindowPictorial GetWindowPictorial() const noexcept;
@@ -57,7 +60,7 @@ namespace Framework
     private:
         // 窗口参数。
         String windowTitle;
-        WindowSize size;
+        WindowSize windowSize;
         WindowPoint position;
         WindowsStyles style;
         WindowName windowName;

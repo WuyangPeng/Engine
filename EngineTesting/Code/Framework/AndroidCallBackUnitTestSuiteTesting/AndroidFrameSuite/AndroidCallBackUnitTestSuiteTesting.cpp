@@ -11,13 +11,12 @@
 #include "System/Android/Flags/AndroidInputFlags.h"
 #include "System/Android/Flags/AndroidKeyCodesFlags.h"
 #include "System/Android/Using/AndroidInputUsing.h"
-#include "System/Windows/Flags/WindowsKeyCodesFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/AndroidCallBackUnitTestSuiteTesting/AndroidCallBackUnitTestSuiteTestingAndroidCallBack.h"
 #include "Framework/WindowProcess/WindowMessageUnitTestSuite.h"
 
-AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting(const CoreTools::OStreamShared& stream, AndroidCallBackUnitTestSuiteTestingAndroidCallBack* message)
+AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting(const OStreamShared& stream, const AndroidCallBackUnitTestSuiteTestingAndroidCallBackWeakPtr& message)
     : ParentType{ stream }, message{ message }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -39,19 +38,19 @@ void AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting::M
 
 void AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting::KeyDownMessageTest()
 {
-    System::AndroidInputEvent event;
+    System::AndroidInputEvent event{};
     event.SetAndroidKeyCodes(System::AndroidKeyCodes::F1);
-    ASSERT_EQUAL(message->KeyDownMessage(message->GetAndroidApp(), &event), 0);
+    ASSERT_EQUAL(message.lock()->KeyDownMessage(message.lock()->GetAndroidApp(), &event), 0);
 
-    ASSERT_EQUAL(message->GetPassedNumber(), 1);
+    ASSERT_EQUAL(message.lock()->GetPassedNumber(), 1);
 }
 
 void AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting::CreateMessageTest()
 {
-    ASSERT_TRUE(message->Initialize());
+    ASSERT_TRUE(message.lock()->Initialize());
 }
 
 void AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting::DisplayTest()
 {
-    message->Display(message->GetAndroidApp(), 0);
+    message.lock()->Display(message.lock()->GetAndroidApp(), 0);
 }

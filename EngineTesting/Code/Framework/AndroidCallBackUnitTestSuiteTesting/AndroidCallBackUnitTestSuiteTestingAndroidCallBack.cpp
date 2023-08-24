@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 17:44)
+///	版本：0.9.1.3 (2023/08/10 16:14)
 
 #include "AndroidCallBackUnitTestSuiteTestingAndroidCallBack.h"
 #include "AndroidFrameSuite/AndroidCallBackUnitTestSuiteTesting.h"
@@ -14,12 +14,11 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
+#include "Framework/AndroidFrame/AndroidCallBackUnitTestSuiteDetail.h"
 
 AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTestingAndroidCallBack::AndroidCallBackUnitTestSuiteTestingAndroidCallBack(int64_t delta)
     : ParentType(delta, "【Android Call Back Unit Test Suite Testing】单元测试套件")
 {
-    InitSuite();
-
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
@@ -29,7 +28,7 @@ void AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTestingAnd
 {
     auto androidFrameSuite = GenerateSuite("安卓框架");
 
-    ADD_TEST_USE_PARAMETER_1(androidFrameSuite, AndroidCallBackUnitTestSuiteTesting, this);
+    ADD_TEST_USE_PARAMETER_1(androidFrameSuite, AndroidCallBackUnitTestSuiteTesting, shared_from_this());
 
     AddSuite(androidFrameSuite);
 }

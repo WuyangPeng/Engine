@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/28 21:33)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:43)
 
 #ifndef LOG_SERVER_MIDDLE_LAYER_SYSTEM_MIDDLE_LAYER_SYSTEM_H
 #define LOG_SERVER_MIDDLE_LAYER_SYSTEM_MIDDLE_LAYER_SYSTEM_H
 
 #include "LogServer/LogServerMiddleLayer/LogServerMiddleLayerDll.h"
 
-#include "LogServer/LogServerMiddleLayer/Macro/ExportMacro.h"
+#include "LogServer/LogServerMiddleLayer/Helper/ExportMacro.h"
 #include "Framework/MiddleLayer/SystemManagerInterface.h"
 
 namespace LogServerMiddleLayer
@@ -21,10 +21,10 @@ namespace LogServerMiddleLayer
     {
     public:
         using ClassType = SystemManager;
-        using ParentType = Framework::SystemManagerInterface;
+        using ParentType = SystemManagerInterface;
 
     public:
-        explicit SystemManager(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
+        SystemManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

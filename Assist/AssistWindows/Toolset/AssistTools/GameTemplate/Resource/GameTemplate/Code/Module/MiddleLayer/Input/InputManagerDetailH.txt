@@ -1,0 +1,35 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_DETAIL_H
+#define $ModuleUppercase$_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_DETAIL_H
+
+#include "$ModuleName$/$ModuleName$MiddleLayer/Helper/$ModuleName$MiddleLayerClassInvariantMacro.h"
+#include "InputManager.h"
+#include "Framework/MiddleLayer/InputManagerDetail.h"
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+
+template <typename ApplicationTrait>
+$ModuleName$MiddleLayer::InputManager<ApplicationTrait>::InputManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }
+{
+    $ModuleUppercase$_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
+}
+
+#include STSTEM_WARNING_POP
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename ApplicationTrait>
+bool $ModuleName$MiddleLayer::InputManager<ApplicationTrait>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_INPUT_ENGINE_MIDDLE_LAYER_INPUT_DETAIL_H

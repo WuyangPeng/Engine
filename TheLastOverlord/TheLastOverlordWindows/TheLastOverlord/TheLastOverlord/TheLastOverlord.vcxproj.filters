@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="源文件">
@@ -19,38 +19,8 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{cf3704dd-48b9-4634-850d-20e0759ec9ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core 头文件">
-      <UniqueIdentifier>{740a1d42-14b0-471c-aa00-b8c9677642ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core 源文件">
-      <UniqueIdentifier>{3417cde2-c47a-4d88-ad98-e6612a54c29a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI 头文件">
-      <UniqueIdentifier>{a1250a0f-edbd-4b3a-80ab-9dd67c694b3b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI 源文件">
-      <UniqueIdentifier>{51872aa5-9268-454c-8336-deda7c98363a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Helper 头文件">
-      <UniqueIdentifier>{7d0045a7-b65b-4dbb-9baf-91cebf449f66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Input 头文件">
-      <UniqueIdentifier>{4498257b-12c2-4cd9-9bd2-9b1a2061662c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Input 模板文件">
-      <UniqueIdentifier>{6af86ec9-7284-4b18-9d6b-431ebfe70620}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource 头文件">
-      <UniqueIdentifier>{46b84f91-ff05-4814-9a83-117f1ac9eff6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource 源文件">
-      <UniqueIdentifier>{b283cc16-3f74-4604-bf5a-da67b3540a57}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="System 头文件">
-      <UniqueIdentifier>{7ab2499e-1696-4b77-991b-906724e3e8e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="System 源文件">
-      <UniqueIdentifier>{67941556-dc84-4910-8468-3aa27c607221}</UniqueIdentifier>
+      <UniqueIdentifier>{e3fa5a78-1e4e-479b-9669-800a0377976d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -121,18 +91,6 @@
     <ClCompile Include="..\..\..\Code\TheLastOverlord\TheLastOverlordMiddleLayerMessage.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\TheLastOverlord\Core\ProjectName.cpp">
-      <Filter>Core 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\TheLastOverlord\GUI\GUIMiddleLayer.cpp">
-      <Filter>GUI 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\TheLastOverlord\Resource\ResourceMiddleLayer.cpp">
-      <Filter>Resource 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\TheLastOverlord\System\SystemMiddleLayer.cpp">
-      <Filter>System 源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\TheLastOverlord\TheLastOverlordHelper.h">
@@ -150,67 +108,19 @@
     <ClInclude Include="..\..\..\Code\TheLastOverlord\TheLastOverlordMiddleLayerMessage.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\Core\Core.h">
-      <Filter>Core 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\Core\CoreFwd.h">
-      <Filter>Core 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\Core\ProjectName.h">
-      <Filter>Core 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\GUI\GUI.h">
-      <Filter>GUI 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\GUI\GUIFwd.h">
-      <Filter>GUI 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\GUI\GUIMiddleLayer.h">
-      <Filter>GUI 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\TheLastOverlord\Helper\Helper.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\TheLastOverlord\Helper\HelperFwd.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\Helper\UserMacro.h">
-      <Filter>Helper 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\Input\Input.h">
-      <Filter>Input 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\Input\InputFwd.h">
-      <Filter>Input 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\Input\InputMiddleLayer.h">
-      <Filter>Input 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\Input\InputMiddleLayerDetail.h">
-      <Filter>Input 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\Resource\Resource.h">
-      <Filter>Resource 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\Resource\ResourceFwd.h">
-      <Filter>Resource 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\Resource\ResourceMiddleLayer.h">
-      <Filter>Resource 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\System\System.h">
-      <Filter>System 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\System\SystemFwd.h">
-      <Filter>System 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\TheLastOverlord\System\SystemMiddleLayer.h">
-      <Filter>System 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\TheLastOverlord\Helper\TheLastOverlordClassInvariantMacro.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\TheLastOverlord\Helper\TheLastOverlordCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\TheLastOverlord\Helper\UserMacro.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>

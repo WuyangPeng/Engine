@@ -1,0 +1,12 @@
+$Copyright$
+
+#include "$ProjectName$Helper.h"
+#include "Framework/Helper/MainFunctionMacro.h"
+
+#include <vld.h>
+
+WINDOWS_MAIN_FUNCTION_USE_PARAMETER($ProjectName$,
+                                    $ProjectName$Helper,
+                                    SYSTEM_TEXT("DefaultEnvironment"),
+                                    SYSTEM_TEXT(""),
+                                    SYSTEM_TEXT("$ProjectName$.json"))

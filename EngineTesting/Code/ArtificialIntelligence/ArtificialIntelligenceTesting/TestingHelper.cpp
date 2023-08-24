@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 19:33)
+///	版本：0.9.1.3 (2023/08/02 10:31)
 
 #include "Testing.h"
 #include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariant/ArtificialIntelligenceClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
-// private
 ArtificialIntelligence::TestingHelper::TestingHelper(int argc, char** argv)
     : ParentType{ argc, argv, "人工智能库" }
 {
@@ -23,7 +22,6 @@ ArtificialIntelligence::TestingHelper::TestingHelper(int argc, char** argv)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(ArtificialIntelligence, TestingHelper)
 
-// private
 void ArtificialIntelligence::TestingHelper::InitSuite()
 {
     AddHelperSuite();

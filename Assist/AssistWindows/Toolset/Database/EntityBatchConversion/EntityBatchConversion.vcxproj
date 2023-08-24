@@ -175,7 +175,7 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/CoreToolsD.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/DatabaseD.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
@@ -212,7 +212,7 @@ xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectD
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/CoreTools.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/Database.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
@@ -249,7 +249,7 @@ xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectD
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/CoreToolsD.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/DatabaseD.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y
@@ -286,7 +286,7 @@ xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectD
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/CoreTools.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/Database.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.json" "$(ProjectDir)/Resource/DatabaseEntity" /F /Y

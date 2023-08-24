@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:48)
+///	版本：0.9.1.3 (2023/08/09 16:37)
 
 #include "Framework/FrameworkExport.h"
 
@@ -15,15 +15,15 @@
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/DataTypes/Transform.h"
 
-Framework::ObjectMotionRotateTrackBall::ObjectMotionRotateTrackBall(const SpatialSharedPtr& motionObject,
-                                                                    const ConstCameraSharedPtr& camera,
+Framework::ObjectMotionRotateTrackBall::ObjectMotionRotateTrackBall(SpatialSharedPtr motionObject,
+                                                                    ConstCameraSharedPtr camera,
                                                                     float beginXTrack,
                                                                     float beginYTrack,
                                                                     float endXTrack,
                                                                     float endYTrack,
                                                                     const Matrix& saveRotate)
-    : motionObject{ motionObject },
-      camera{ camera },
+    : motionObject{ std::move(motionObject) },
+      camera{ std::move(camera) },
       beginXTrack{ beginXTrack },
       beginYTrack{ beginYTrack },
       endXTrack{ endXTrack },
@@ -102,7 +102,7 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
         if (dot < 0.0f)
         {
             // π弧度旋转。
-            auto invLength = Mathematics::MathF::InvSqrt(beginX * beginX + beginY * beginY);
+            const auto invLength = Mathematics::MathF::InvSqrt(beginX * beginX + beginY * beginY);
             axis[0] = beginY * invLength;
             axis[1] = -beginX * invLength;
             axis[2] = 0.0f;
@@ -118,15 +118,15 @@ void Framework::ObjectMotionRotateTrackBall::Calculate()
 
     // 计算世界旋转矩阵隐含运动球轨迹，轴矢量在相机坐标计算。
     // 它必须被转换成世界坐标，再一次,我用相机顺序(D,U,R)。
-    auto worldAxis = axis[0] * camera->GetDirectionVector() + axis[1] * camera->GetUpVector() + axis[2] * camera->GetRightVector();
+    const auto worldAxis = axis[0] * camera->GetDirectionVector() + axis[1] * camera->GetUpVector() + axis[2] * camera->GetRightVector();
 
     const Matrix trackRotate{ worldAxis, angle };
 
     // 计算出新的局部旋转。如果对象是场景的根,
     // 新的旋转是轨迹球应用在对象被旧局部旋转的增量旋转。
     // 如果对象不是场景的根,你要转换的增量式旋转要在改变父坐标空间的基础上。
-    const auto* parent = motionObject->GetParent();
-    if (parent)
+    if (const auto* parent = motionObject->GetParent();
+        parent != nullptr)
     {
         const auto parWorRotate = parent->GetWorldTransform().GetRotate();
         localRotate = TransposeTimes(parWorRotate, trackRotate) * parWorRotate * saveRotate;

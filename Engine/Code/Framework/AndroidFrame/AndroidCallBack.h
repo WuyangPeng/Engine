@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:51)
+///	版本：0.9.1.3 (2023/08/09 20:49)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_H
@@ -20,7 +20,6 @@ namespace Framework
     class AndroidCallBack : public AndroidCallBackInterface
     {
     public:
-        using MiddleLayerType = MiddleLayer;
         using ClassType = AndroidCallBack<MiddleLayer>;
         using ParentType = AndroidCallBackInterface;
 
@@ -42,10 +41,10 @@ namespace Framework
         NODISCARD int ActionMoveMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent) override;
 
     private:
-        using MiddleLayerTypeSharedPtr = std::shared_ptr<MiddleLayerType>;
+        using MiddleLayerSharedPtr = std::shared_ptr<MiddleLayer>;
 
     private:
-        MiddleLayerTypeSharedPtr middleLayer;
+        MiddleLayerSharedPtr middleLayer;
     };
 }
 

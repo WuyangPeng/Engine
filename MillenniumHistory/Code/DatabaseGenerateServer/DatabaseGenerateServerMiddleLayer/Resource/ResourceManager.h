@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.1 (2023/07/18 22:31)
+///	版本：0.9.1.3 (2023/08/09 22:24)
 
 #ifndef DATABASE_GENERATE_SERVER_MIDDLE_LAYER_RESOURCE_RESOURCE_MANAGER_H
 #define DATABASE_GENERATE_SERVER_MIDDLE_LAYER_RESOURCE_RESOURCE_MANAGER_H
@@ -18,8 +18,7 @@
 #include "Framework/MiddleLayer/ResourceManagerInterface.h"
 #include "Framework/MiddleLayer/SystemManagerInterface.h"
 
-EXPORT_SHARED_PTR(DatabaseGenerateServerMiddleLayer, ResourceManagerImpl, DATABASE_GENERATE_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE);
-EXPORT_NON_COPY(DatabaseGenerateServerMiddleLayer, ResourceManagerImpl, DATABASE_GENERATE_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE);
+DATABASE_GENERATE_SERVER_MIDDLE_LAYER_EXPORT_NON_COPY(ResourceManagerImpl);
 
 namespace DatabaseGenerateServerMiddleLayer
 {
@@ -29,6 +28,7 @@ namespace DatabaseGenerateServerMiddleLayer
         NON_COPY_TYPE_DECLARE(ResourceManager);
         using ParentType = Framework::ResourceManagerInterface;
 
+        using AncientBooksContainer = AncientBooks::AncientBooksContainer;
         using ConstAncientBooksContainerSharedPtr = std::shared_ptr<const AncientBooks::AncientBooksContainer>;
 
     public:

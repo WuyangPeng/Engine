@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:01)
+///	版本：0.9.1.3 (2023/08/03 16:48)
 
 #ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_PARAMETER_H
 #define FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_PARAMETER_H
@@ -22,6 +22,7 @@ namespace Framework
     {
     public:
         using ClassType = WindowRegisterParameter;
+
         using HInstance = System::WindowsHInstance;
         using WindowClassStyle = System::WindowsClassStyle;
 
@@ -31,7 +32,7 @@ namespace Framework
                                          int windowClassExtra = 0,
                                          int windowExtra = 0);
 
-        CLASS_INVARIANT_DECLARE;
+        NODISCARD bool IsValid() const noexcept;
 
         NODISCARD HInstance GetHInstance() const noexcept;
         NODISCARD WindowClassStyle GetStyle() const noexcept;

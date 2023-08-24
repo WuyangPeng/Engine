@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:22)
+///	版本：0.9.1.3 (2023/08/08 14:04)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_RESOURCE_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_RESOURCE_MANAGER_INTERFACE_H
@@ -19,9 +19,9 @@
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
+// 资源管理（内存使用、游戏状态的存储与恢复、模型管理、动画管理、纹理管理、关卡数据加载等）。
 namespace Framework
 {
-    // 资源管理（内存使用、游戏状态的存储与恢复、模型管理、动画管理、纹理管理、关卡数据加载等）。
     class FRAMEWORK_DEFAULT_DECLARE ResourceManagerInterface : public EngineMiddleLayerInterface
     {
     public:
@@ -51,10 +51,10 @@ namespace Framework
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
 
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Audio);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Rendering);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(GUI);
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Audio)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Rendering)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(GUI)
 
     private:
         PackageType impl;

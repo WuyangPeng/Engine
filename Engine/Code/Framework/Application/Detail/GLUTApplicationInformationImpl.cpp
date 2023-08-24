@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:45)
+///	版本：0.9.1.3 (2023/08/09 16:45)
 
 #include "Framework/FrameworkExport.h"
 
 #include "GLUTApplicationInformationImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Framework::GLUTApplicationInformationImpl::GLUTApplicationInformationImpl(int majorVersion, int minorVersion, FrameParameter frame) noexcept
     : openGLMajorVersion{ majorVersion }, openGLMinorVersion{ minorVersion }, frame{ frame }

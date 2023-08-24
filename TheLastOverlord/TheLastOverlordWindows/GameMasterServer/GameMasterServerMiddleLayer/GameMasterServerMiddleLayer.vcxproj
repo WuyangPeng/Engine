@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -68,7 +68,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{8311C4B0-39F0-486D-BF85-8AC26A50AA89}</ProjectGuid>
+    <ProjectGuid>{92397201-8DF6-4692-BCE0-C7483F9BB402}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GameMasterServerMiddleLayer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -315,7 +315,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;GAMEMASTERSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;GAME_MASTER_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -326,7 +326,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;GAMEMASTERSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;GAME_MASTER_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -361,7 +361,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;GAMEMASTERSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;GAME_MASTER_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -376,7 +376,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;GAMEMASTERSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;GAME_MASTER_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -419,7 +419,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;GAMEMASTERSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;GAME_MASTER_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -430,7 +430,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;GAMEMASTERSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;GAME_MASTER_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -465,7 +465,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;GAMEMASTERSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;GAME_MASTER_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -480,7 +480,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;GAMEMASTERSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;GAME_MASTER_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -521,7 +521,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceManager.cpp" />
+    <ClCompile Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.cpp" />
     <ClCompile Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Audio\AudioManager.cpp" />
     <ClCompile Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\CameraSystems\CameraSystemsManager.cpp" />
     <ClCompile Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\DllLib.cpp" />
@@ -537,9 +537,9 @@
     <ClCompile Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\System\SystemManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegence.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceFwd.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceManager.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligence.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceFwd.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Audio\Audio.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Audio\AudioFwd.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Audio\AudioManager.h" />
@@ -560,16 +560,16 @@
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\GUI\GUI.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\GUI\GUIFwd.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\GUI\GUIManager.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Helper\ExportMacro.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Helper\GameMasterServerMiddleLayerClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Helper\GameMasterServerMiddleLayerCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Input\Input.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Input\InputFwd.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Input\InputManager.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Input\InputManagerDetail.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Macro\ExportMacro.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Macro\GameMasterServerMiddleLayerClassInvariantMacro.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Macro\GameMasterServerMiddleLayerCustomAssertMacro.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Macro\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Message\Message.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Message\MessageFwd.h" />
     <ClInclude Include="..\..\..\Code\GameMasterServer\GameMasterServerMiddleLayer\Message\MessageManager.h" />

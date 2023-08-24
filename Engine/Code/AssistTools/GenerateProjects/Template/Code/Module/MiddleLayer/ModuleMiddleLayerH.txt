@@ -1,0 +1,9 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_H
+#define $ModuleUppercase$_MIDDLE_LAYER_H
+
+#include "Helper/Helper.h"
+$MiddleLayerInclude$
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_H

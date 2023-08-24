@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:19)
+///	版本：0.9.1.3 (2023/08/08 14:40)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_INPUT_MANAGER_DETAIL_H
 #define FRAMEWORK_MIDDLE_LAYER_INPUT_MANAGER_DETAIL_H
@@ -17,7 +17,7 @@ template <typename ApplicationTrait>
 Framework::InputManager<ApplicationTrait>::InputManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT

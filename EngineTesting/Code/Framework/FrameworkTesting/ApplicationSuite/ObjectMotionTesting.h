@@ -5,14 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:25)
+///	版本：0.9.1.3 (2023/08/11 20:33)
 
 #ifndef FRAMEWORK_APPLICATION_SUITE_OBJECT_MOTION_TESTING_H
 #define FRAMEWORK_APPLICATION_SUITE_OBJECT_MOTION_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
-#include "Mathematics/Algebra/AVector.h"
-#include "Mathematics/Algebra/Matrix.h"
 
 namespace Framework
 {
@@ -21,8 +19,6 @@ namespace Framework
     public:
         using ClassType = ObjectMotionTesting;
         using ParentType = UnitTest;
-        using Matrixf = Mathematics::MatrixF;
-        using AVectorf = Mathematics::AVectorF;
 
     public:
         explicit ObjectMotionTesting(const OStreamShared& stream);
@@ -30,19 +26,9 @@ namespace Framework
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
-        void MainTest();
-
-        void NoParentMoveObjectTest() noexcept;
-        void ParentMoveObjectTest() noexcept;
-        void TrackBallDownTest() noexcept;
-        void NoParentRotateTrackBallTest() noexcept;
-        void ParentRotateTrackBallTest() noexcept;
-
-        void AssertRotate(const Matrixf& lhs, const Matrixf& rhs);
-
-        NODISCARD AVectorf GetSphereVector(float x, float y) const noexcept(gAssert < 3 || gMathematicsAssert < 3);
+        void MainTest() noexcept;
     };
 }
 

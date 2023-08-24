@@ -5,16 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:21)
+///	版本：0.9.1.3 (2023/08/05 16:35)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_CONTROLLER_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_CONTROLLER_MIDDLE_LAYER_H
 
+#include "Framework/FrameworkDll.h"
+
 #include "ModelViewControllerMiddleLayer.h"
 
+// 控制层类的声明
 namespace Framework
 {
-    // 控制层类的声明
     template <typename ApplicationTrait>
     class ControllerMiddleLayer : public ModelViewControllerMiddleLayer
     {
@@ -23,7 +25,7 @@ namespace Framework
         using ParentType = ModelViewControllerMiddleLayer;
 
     public:
-        explicit ControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
+        ControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

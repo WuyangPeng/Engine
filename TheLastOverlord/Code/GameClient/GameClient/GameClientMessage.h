@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/20 17:14)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:42)
 
 #ifndef GAME_CLIENT_GAME_CLIENT_MESSAGE_H
 #define GAME_CLIENT_GAME_CLIENT_MESSAGE_H
 
-#include "GameClient/GameClientMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "GameClient/GameClientMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "GameClient/GameClientMiddleLayer/Audio/AudioManager.h"
 #include "GameClient/GameClientMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "GameClient/GameClientMiddleLayer/Event/EventManager.h"
@@ -32,7 +32,7 @@
 
 namespace GameClient
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<GameClientMiddleLayer::ObjectLogicManager, GameClientMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<GameClientMiddleLayer::ObjectLogicManager, GameClientMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   GameClientMiddleLayer::InputManager,
                                                                   GameClientMiddleLayer::NetworkManager,
@@ -54,13 +54,16 @@ namespace GameClient
         using ClassType = GameClientMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit GameClientMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        GameClientMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using GameClientMessageWindowProcessHandle = Framework::WindowProcessHandle<GameClientMessage>;

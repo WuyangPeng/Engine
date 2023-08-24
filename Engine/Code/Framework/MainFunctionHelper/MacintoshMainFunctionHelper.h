@@ -5,10 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:39)
+///	版本：0.9.1.3 (2023/08/08 19:23)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_MACINTOSH_MAIN_FUNCTION_HELPER_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_MACINTOSH_MAIN_FUNCTION_HELPER_H
+
+#include "Framework/FrameworkDll.h"
 
 #include "MainFunctionHelperBase.h"
 
@@ -20,6 +22,7 @@ namespace Framework
     public:
         using ClassType = MacintoshMainFunctionHelper<Build, Process>;
         using ParentType = MainFunctionHelperBase;
+
         using ClassShareType = CoreTools::NonCopyClasses;
         using BuildType = Build<Process>;
 
@@ -42,13 +45,13 @@ namespace Framework
         int DoRun() noexcept override;
         NODISCARD virtual int RunMacintoshMainLoop() noexcept;
 
-        void Initializers();
+        void Initializer();
         void Terminators();
 
         void InitMacintoshProcess() noexcept;
-        void InitImpl();
+        void InitMacintoshImpl();
 
-        void DestroyImpl() noexcept;
+        void DestroyMacintoshImpl() noexcept;
         void DestroyMacintoshProcess() noexcept;
 
     private:

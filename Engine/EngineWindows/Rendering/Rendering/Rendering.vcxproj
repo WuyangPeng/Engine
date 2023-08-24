@@ -646,6 +646,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ComputeProgramFactory.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ComputeProgramImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\NullComputeProgram.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\NullProgramFactory.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramDefinesImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramFactoryImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramSourcesImpl.cpp" />
@@ -1198,6 +1199,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ComputeProgramFactory.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ComputeProgramImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\NullComputeProgram.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\NullProgramFactory.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramDefinesImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramFactoryImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ProgramSourcesImpl.h" />

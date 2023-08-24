@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:40)
+///	版本：0.9.1.3 (2023/08/08 19:49)
 
 #include "Framework/FrameworkExport.h"
 
@@ -24,7 +24,6 @@ Framework::EngineDirectoryPath::EngineDirectoryPath(const EngineDirectoryResult&
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 void Framework::EngineDirectoryPath::Analysis()
 {
     for (auto index = RenderingDirectory::Default; index <= RenderingDirectory::DirectX; ++index)
@@ -97,8 +96,8 @@ System::String Framework::EngineDirectoryPath::GetPath(EndianDirectory endianDir
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = pathType.find({ endianDirectory, renderingDirectory, analysisDirectory });
-    if (iter != pathType.cend())
+    if (const auto iter = pathType.find({ endianDirectory, renderingDirectory, analysisDirectory });
+        iter != pathType.cend())
     {
         return iter->second;
     }

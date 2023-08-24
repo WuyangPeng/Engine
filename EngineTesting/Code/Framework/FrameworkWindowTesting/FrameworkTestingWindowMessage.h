@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:07)
+///	版本：0.9.1.3 (2023/08/10 13:46)
 
 #ifndef FRAMEWORK_WINDOW_TESTING_FRAMEWORK_TESTING_WINDOW_MESSAGE_H
 #define FRAMEWORK_WINDOW_TESTING_FRAMEWORK_TESTING_WINDOW_MESSAGE_H
@@ -21,12 +21,12 @@ namespace Framework
         using ParentType = WindowMessageUnitTestSuite;
 
     public:
-        FrameworkTestingWindowMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        FrameworkTestingWindowMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void InitSuite() final;
+        void InitSuite() override;
 
         void AddWindowCreateSuite();
         void AddWindowProcessSuite();

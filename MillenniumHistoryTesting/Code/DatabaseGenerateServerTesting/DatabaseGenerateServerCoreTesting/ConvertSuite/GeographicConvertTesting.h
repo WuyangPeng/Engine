@@ -5,39 +5,41 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/24 12:16)
+///	版本：0.9.1.3 (2023/08/04 21:07)
 
-#ifndef DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_GEOGRAPHIC_CONVERT_TESTING_H
-#define DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_GEOGRAPHIC_CONVERT_TESTING_H
+#ifndef DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_GEOGRAPHIC_CONVERT_TESTING_H
+#define DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_GEOGRAPHIC_CONVERT_TESTING_H
 
-#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/AncientBooksContainer.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "ConvertTesting.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/GeographicContainer.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity/DatabaseEntityFwd.h"
 
 namespace DatabaseGenerateServerCoreTesting
 {
-    class GeographicConvertTesting final : public CoreTools::UnitTest
+    class GeographicConvertTesting final : public ConvertTesting
     {
     public:
         using ClassType = GeographicConvertTesting;
-        using ParentType = UnitTest;
+        using ParentType = ConvertTesting;
 
-        using AncientBooksContainer = AncientBooks::AncientBooksContainer;
+        using GeographicContainer = AncientBooks::GeographicContainer;
 
     public:
-        GeographicConvertTesting(const OStreamShared& stream, const AncientBooksContainer& ancientBooksContainer);
+        GeographicConvertTesting(const OStreamShared& stream, const GeographicContainer& geographicContainer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        void MainTest();
-        void DoRunUnitTest() override;
-
-        void InitEnvironmentTest();
-        void DatabaseFlushTest();
+        using Geographic = AncientBooks::GeographicBase;
+        using GeographicEntity = DatabaseEntity::GeographicEntity;
 
     private:
-        AncientBooksContainer ancientBooksContainer;
+        void ConvertTest(const DatabaseFlushSharedPtr& databaseFlush) override;
+        void EqualTest(const Geographic& geographic, const GeographicEntity& geographicEntity);
+
+    private:
+        GeographicContainer geographicContainer;
     };
 }
 
-#endif  // DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_GEOGRAPHIC_CONVERT_TESTING_H
+#endif  // DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_GEOGRAPHIC_CONVERT_TESTING_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:40)
+///	版本：0.9.1.3 (2023/08/08 19:48)
 
 #include "Framework/FrameworkExport.h"
 
@@ -16,7 +16,6 @@
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
 using System::operator++;
-using namespace std::literals;
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, EngineDirectoryResult)
 
@@ -24,8 +23,8 @@ System::String Framework::EngineDirectoryResult::GetDirectory(RenderingDirectory
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = result.find({ renderingDirectory, analysisDirectory });
-    if (iter != result.cend())
+    if (const auto iter = result.find({ renderingDirectory, analysisDirectory });
+        iter != result.cend())
     {
         return iter->second;
     }
@@ -57,7 +56,6 @@ void Framework::EngineDirectoryResult::SetDefaultDirectory()
     SetDefaultRenderingDirectory();
 }
 
-// private
 void Framework::EngineDirectoryResult::SetDefaultBaseDirectory()
 {
     for (auto index = AnalysisDirectory::Resource; index <= AnalysisDirectory::Configuration; ++index)
@@ -69,10 +67,11 @@ void Framework::EngineDirectoryResult::SetDefaultBaseDirectory()
 void Framework::EngineDirectoryResult::SetDefaultBaseDirectory(AnalysisDirectory analysisDirectory)
 {
     const ResultIndex index{ RenderingDirectory::Null, analysisDirectory };
-    const auto iter = result.find(index);
-    if (iter == result.cend())
+
+    if (const auto iter = result.find(index);
+        iter == result.cend())
     {
-        result.insert({ index, DirectoryDefaultName::GetDefaultName(analysisDirectory) });
+        result.emplace(index, DirectoryDefaultName::GetDefaultName(analysisDirectory));
     }
 }
 
@@ -95,9 +94,10 @@ void Framework::EngineDirectoryResult::SetDefaultRenderingDirectory(RenderingDir
 void Framework::EngineDirectoryResult::SetDefaultRenderingDirectory(RenderingDirectory renderingDirectory, AnalysisDirectory analysisDirectory)
 {
     const ResultIndex index{ renderingDirectory, analysisDirectory };
-    const auto iter = result.find(index);
-    if (iter == result.cend())
+
+    if (const auto iter = result.find(index);
+        iter == result.cend())
     {
-        result.insert({ index, DirectoryDefaultName::GetDefaultName(analysisDirectory) });
+        result.emplace(index, DirectoryDefaultName::GetDefaultName(analysisDirectory));
     }
 }

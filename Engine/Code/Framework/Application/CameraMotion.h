@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:43)
+///	版本：0.9.1.3 (2023/08/09 14:44)
 
 #ifndef FRAMEWORK_APPLICATION_CAMERA_MOTION_H
 #define FRAMEWORK_APPLICATION_CAMERA_MOTION_H
@@ -25,6 +25,7 @@ namespace Framework
     {
     public:
         NON_COPY_TYPE_DECLARE(CameraMotion);
+
         using CameraSharedPtr = Rendering::CameraSharedPtr;
         using ConstCameraSharedPtr = Rendering::ConstCameraSharedPtr;
 

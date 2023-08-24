@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:33)
+///	版本：0.9.1.3 (2023/08/10 11:02)
 
 #ifndef PIXEL_MODEL_VIEW_CONTROLLER_TESTING_PIXEL_MODEL_VIEW_CONTROLLER_MESSAGE_H
 #define PIXEL_MODEL_VIEW_CONTROLLER_TESTING_PIXEL_MODEL_VIEW_CONTROLLER_MESSAGE_H
@@ -24,14 +24,16 @@ namespace PixelModelViewController
     using MiddleLayerType = Framework::ModelViewControllerMiddleLayerContainer<Framework::WindowApplicationTrait, Framework::ModelMiddleLayer, FrameViewMiddleLayer, Framework::ControllerMiddleLayer>;
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
-    class PixelModelViewControllerMessage : public MessageType
+    class PixelModelViewControllerMessage final : public MessageType
     {
     public:
         using ClassType = PixelModelViewControllerMessage;
         using ParentType = MessageType;
 
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        PixelModelViewControllerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        PixelModelViewControllerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

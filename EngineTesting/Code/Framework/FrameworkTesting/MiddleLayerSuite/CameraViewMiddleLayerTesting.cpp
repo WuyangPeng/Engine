@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:06)
+///	版本：0.9.1.3 (2023/08/12 17:30)
 
 #include "CameraViewMiddleLayerTesting.h"
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
@@ -24,11 +24,6 @@
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
 
 #include <random>
-
-namespace Framework
-{
-    using TestingType = CameraViewMiddleLayer;
-}
 
 Framework::CameraViewMiddleLayerTesting::CameraViewMiddleLayerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -49,7 +44,6 @@ void Framework::CameraViewMiddleLayerTesting::MainTest()
 
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DrawFrameRateTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(TrackTest);
 
     Rendering::CameraManager::Destroy();
 }
@@ -58,9 +52,9 @@ void Framework::CameraViewMiddleLayerTesting::MiddleLayerTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    CameraViewMiddleLayer middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraModelMiddleLayer = std::make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraModelMiddleLayer = std::make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetModelMiddleLayer(cameraModelMiddleLayer);
 
@@ -80,7 +74,7 @@ void Framework::CameraViewMiddleLayerTesting::MiddleLayerTest()
 
     constexpr WindowPoint point{};
     const WindowSize size{};
-    const VirtualKeysTypes virtualKeysTypes{};
+    constexpr VirtualKeysTypes virtualKeysTypes{};
 
     ASSERT_TRUE(middleLayer.Paint());
     ASSERT_TRUE(middleLayer.Move(point));
@@ -101,9 +95,9 @@ void Framework::CameraViewMiddleLayerTesting::DrawFrameRateTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
+    CameraViewMiddleLayer middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraModelMiddleLayer = std::make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    const auto cameraModelMiddleLayer = std::make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetModelMiddleLayer(cameraModelMiddleLayer);
 
@@ -113,13 +107,8 @@ void Framework::CameraViewMiddleLayerTesting::DrawFrameRateTest()
     ASSERT_TRUE(middleLayer.Create(Rendering::EnvironmentParameter::Create()));
     ASSERT_TRUE(cameraModelMiddleLayer->Create(Rendering::EnvironmentParameter::Create()));
 
-    const auto clearColor = middleLayer.GetClearColor();
-    const decltype(clearColor) blackColour{ 0.0f, 0.0f, 0.0f, 1.0f };
+    const auto clearColor = middleLayer.GetClearColour();
 
     middleLayer.DrawFrameRate(WindowPoint{}, clearColor);
     ASSERT_TRUE(middleLayer.Paint());
-}
-
-void Framework::CameraViewMiddleLayerTesting::TrackTest() noexcept
-{
 }

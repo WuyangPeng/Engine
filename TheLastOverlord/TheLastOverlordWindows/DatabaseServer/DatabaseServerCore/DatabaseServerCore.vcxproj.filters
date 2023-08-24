@@ -22,10 +22,10 @@
     <Filter Include="Engine 源文件">
       <UniqueIdentifier>{2512de7f-aa64-4033-8e61-0dadaf3ef7d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Macro 头文件">
+    <Filter Include="Helper 头文件">
       <UniqueIdentifier>{8dda47bf-8440-43c0-b414-a603bb79858b}</UniqueIdentifier>
     </Filter>
-  </ItemGroup> 
+  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Engine\EngineFwd.h">
       <Filter>Engine 头文件</Filter>
@@ -35,24 +35,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Engine\Engine.h">
       <Filter>Engine 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Macro\DatabaseServerCoreCustomAssertMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Macro\Macro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Macro\MacroFwd.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Macro\UserMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Macro\ExportMacro.h">
-      <Filter>Macro 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Macro\DatabaseServerCoreClassInvariantMacro.h">
-      <Filter>Macro 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\DatabaseServerCoreImport.h">
       <Filter>头文件</Filter>
@@ -77,6 +59,24 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\DllLib.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Helper\ExportMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Helper\DatabaseServerCoreClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Helper\DatabaseServerCoreCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\DatabaseServer\DatabaseServerCore\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

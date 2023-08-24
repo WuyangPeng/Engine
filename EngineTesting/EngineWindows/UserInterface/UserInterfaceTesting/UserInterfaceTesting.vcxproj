@@ -275,14 +275,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\ConfigurationSuite\ConfigurationSuite.h" />
+    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\DirectXSuite\DirectXSuite.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\FLTKSuite\FLTKSuite.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\HelperSuite\HelperSuite.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\InterfaceSuite\InterfaceSuite.h" />
+    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\OpenGLSuite\OpenGLSuite.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\TestingHelper.h" />
-    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\TrixulSuite\TrixulSuite.h" />
     <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\WxWidgetsSuite\WxWidgetsSuite.h" />
-    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\XFree86Suite\XFree86Suite.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json" />

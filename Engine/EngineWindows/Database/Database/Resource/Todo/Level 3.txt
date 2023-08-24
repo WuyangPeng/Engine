@@ -1,12 +1,3 @@
 TODO Level 3
 
-0.9.0.9
-
-1.  （Configuration）完成配置策略。 
-2.  （Configuration）完成配置解析。
-3.  （SqlInterface）完成数据对象的接口。
-4.  （SqlInterface）完成会话的接口。
-5.  （SqlInterface）完成架构的接口。
-6.  （SqlInterface）完成采集的接口。
-7.  （SqlInterface）完成结果的接口。
-8.  （SqlInterface）完成表的接口。
+0.9.1.3

@@ -1740,6 +1740,9 @@
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\VertexColorEffect.cpp">
       <Filter>LocalEffects 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\NullProgramFactory.cpp">
+      <Filter>Shaders 源文件\Detail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingLib.h">
@@ -3499,6 +3502,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\VolumeFogEffect.h">
       <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\NullProgramFactory.h">
+      <Filter>Shaders 头文件\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

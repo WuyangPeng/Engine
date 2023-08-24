@@ -5,14 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.10 (2023/05/25 14:04)
+///	版本：0.9.1.3 (2023/08/14 16:26)
 
 #ifndef DATABASE_TESTING_TESTING_HELPER_H
 #define DATABASE_TESTING_TESTING_HELPER_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
-#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 namespace Database
 {
@@ -33,7 +31,6 @@ namespace Database
         void AddHelperSuite();
         void AddConfigurationSuite();
         void AddDatabaseInterfaceSuite();
-        void AddDatabaseGenerateSuite();
         void AddStatementSuite();
         void AddMysqlWrappersSuite();
         void AddMysqlConnectorWrappersSuite();
@@ -43,7 +40,7 @@ namespace Database
         void AddPostgreSQLSuite();
         void AddOracleSuite();
         void AddFlatFileWrappersSuite();
-        void AddMariaDBWrappersSuite();
+        void AddMariaDbWrappersSuite();
         void AddMongoWrappersSuite();
         void AddRedisWrappersSuite();
         void AddDatabaseEntityCodeGenerationSuite();

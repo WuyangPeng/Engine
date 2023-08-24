@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:17)
+///	版本：0.9.1.3 (2023/08/05 14:02)
 
 #include "Framework/FrameworkExport.h"
 
@@ -17,11 +17,12 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 
 Framework::OpenGLGlutCallBackInterface::OpenGLGlutCallBackInterface(int64_t delta) noexcept
-    : windowID{ 0 }, millisecond{ 0 }, delta{ delta }
+    : windowId{ 0 }, millisecond{ 0 }, delta{ delta }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -30,7 +31,7 @@ Framework::OpenGLGlutCallBackInterface::OpenGLGlutCallBackInterface(int64_t delt
 
 bool Framework::OpenGLGlutCallBackInterface::IsValid() const noexcept
 {
-    if (0 <= windowID)
+    if (0 <= windowId)
         return true;
     else
         return false;
@@ -38,20 +39,28 @@ bool Framework::OpenGLGlutCallBackInterface::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-int Framework::OpenGLGlutCallBackInterface::GetWindowID() const noexcept
+int Framework::OpenGLGlutCallBackInterface::GetWindowId() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return windowID;
+    return windowId;
 }
 
-void Framework::OpenGLGlutCallBackInterface::SetWindowID(int window)
+void Framework::OpenGLGlutCallBackInterface::SetWindowId(int aWindowId)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
-    FRAMEWORK_ASSERTION_0(window != 0, "设置的窗口ID为零！");
-    FRAMEWORK_ASSERTION_2(windowID == 0 || windowID == window, "不允许重复设置窗口ID!");
 
-    windowID = window;
+    if (aWindowId == 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("设置的窗口ID为零！"))
+    }
+
+    if (windowId != 0 && windowId != aWindowId)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("不允许重复设置窗口Id!"))
+    }
+
+    windowId = aWindowId;
 }
 
 void Framework::OpenGLGlutCallBackInterface::SetMillisecond(int aMillisecond) noexcept
@@ -117,7 +126,7 @@ bool Framework::OpenGLGlutCallBackInterface::ChangeSize(int width, int height)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    System::GlutPostWindowRedisplay(windowID);
+    System::GlutPostWindowRedisplay(windowId);
     System::SetGLViewport(0, 0, boost::numeric_cast<System::OpenGLSize>(width), boost::numeric_cast<System::OpenGLSize>(height));
 
     CoreTools::DisableNoexcept();
@@ -129,7 +138,7 @@ bool Framework::OpenGLGlutCallBackInterface::SpecialKeysDown([[maybe_unused]] in
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    System::GlutPostWindowRedisplay(windowID);
+    System::GlutPostWindowRedisplay(windowId);
 
     CoreTools::DisableNoexcept();
 
@@ -140,7 +149,7 @@ bool Framework::OpenGLGlutCallBackInterface::KeyboardDown([[maybe_unused]] int k
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    System::GlutPostWindowRedisplay(windowID);
+    System::GlutPostWindowRedisplay(windowId);
 
     CoreTools::DisableNoexcept();
 
@@ -151,7 +160,7 @@ bool Framework::OpenGLGlutCallBackInterface::SpecialKeysUp([[maybe_unused]] int 
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    System::GlutPostWindowRedisplay(windowID);
+    System::GlutPostWindowRedisplay(windowId);
 
     CoreTools::DisableNoexcept();
 
@@ -162,7 +171,7 @@ bool Framework::OpenGLGlutCallBackInterface::KeyboardUp([[maybe_unused]] int key
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    System::GlutPostWindowRedisplay(windowID);
+    System::GlutPostWindowRedisplay(windowId);
 
     CoreTools::DisableNoexcept();
 
@@ -173,7 +182,7 @@ bool Framework::OpenGLGlutCallBackInterface::PassiveMotion([[maybe_unused]] int 
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    System::GlutPostWindowRedisplay(windowID);
+    System::GlutPostWindowRedisplay(windowId);
 
     CoreTools::DisableNoexcept();
 
@@ -184,7 +193,7 @@ bool Framework::OpenGLGlutCallBackInterface::MouseClick([[maybe_unused]] int but
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    System::GlutPostWindowRedisplay(windowID);
+    System::GlutPostWindowRedisplay(windowId);
 
     CoreTools::DisableNoexcept();
 
@@ -195,7 +204,7 @@ bool Framework::OpenGLGlutCallBackInterface::MotionFunction([[maybe_unused]] int
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    System::GlutPostWindowRedisplay(windowID);
+    System::GlutPostWindowRedisplay(windowId);
 
     CoreTools::DisableNoexcept();
 
@@ -206,7 +215,7 @@ bool Framework::OpenGLGlutCallBackInterface::IdleFunction()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    System::GlutPostWindowRedisplay(windowID);
+    System::GlutPostWindowRedisplay(windowId);
 
     CoreTools::DisableNoexcept();
 
@@ -216,21 +225,27 @@ bool Framework::OpenGLGlutCallBackInterface::IdleFunction()
 bool Framework::OpenGLGlutCallBackInterface::TimerFunction(TimerFunctionCallback callback)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
-    FRAMEWORK_ASSERTION_1(callback != nullptr, "函数指针不能为空！");
 
-    System::GlutPostWindowRedisplay(windowID);
-    System::GlutTimerFunc(GetMillisecond(), callback, 1);
-
-    CoreTools::DisableNoexcept();
+    if (callback != nullptr)
+    {
+        System::GlutPostWindowRedisplay(windowId);
+        System::GlutTimerFunc(GetMillisecond(), callback, 1);
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("函数指针不能为空!"))
+    }
 
     return true;
 }
 
-bool Framework::OpenGLGlutCallBackInterface::ProcessMenu([[maybe_unused]] int menuValue)
+bool Framework::OpenGLGlutCallBackInterface::ProcessMenu(int menuValue)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
     CoreTools::DisableNoexcept();
+
+    System::UnusedFunction(menuValue);
 
     return true;
 }
@@ -238,10 +253,14 @@ bool Framework::OpenGLGlutCallBackInterface::ProcessMenu([[maybe_unused]] int me
 void Framework::OpenGLGlutCallBackInterface::DestroyWindow()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
-    FRAMEWORK_ASSERTION_0(windowID != 0, "窗口ID为零！");
 
-    const auto window = windowID;
-    windowID = 0;
+    if (windowId == 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("窗口Id为零!"))
+    }
+
+    const auto window = windowId;
+    windowId = 0;
 
     System::GlutDestroyWindow(window);
 }
@@ -260,7 +279,6 @@ int Framework::OpenGLGlutCallBackInterface::GetTerminateKey() const noexcept
     return GlutApplicationTrait::KeyIdentifiers::keyTerminate;
 }
 
-// protected
 Framework::MouseButtonsTypes Framework::OpenGLGlutCallBackInterface::GetMouseButtonsTypes(int button) noexcept
 {
     switch (button)
@@ -276,7 +294,6 @@ Framework::MouseButtonsTypes Framework::OpenGLGlutCallBackInterface::GetMouseBut
     }
 }
 
-// protected
 Framework::MouseStateTypes Framework::OpenGLGlutCallBackInterface::GetMouseStateTypes(int state) noexcept
 {
     switch (state)

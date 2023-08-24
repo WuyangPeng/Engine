@@ -1,0 +1,11 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_FWD_H
+#define $ModuleUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_FWD_H
+
+namespace $ModuleName$MiddleLayer
+{
+    class $MiddleLayerName$Manager;
+}
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_FWD_H

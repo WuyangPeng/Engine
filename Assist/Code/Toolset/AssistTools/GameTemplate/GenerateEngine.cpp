@@ -5,18 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.2 (2023/07/31 10:35)
+///	版本：0.9.1.3 (2023/08/17 09:22)
 
 #include "GenerateEngine.h"
 #include "System/Helper/PragmaWarning/LexicalCast.h"
+#include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-#include "AssistTools/GenerateProjects/CopyrightData.h"
-#include "AssistTools/GenerateProjects/GenerateTemplateCodeDirectory.h"
-#include "AssistTools/GenerateProjects/GenerateTemplateEngineDirectory.h"
+#include "AssistTools/GenerateProjects/GenerateEngine.h"
 
-GameTemplate::GenerateEngine ::GenerateEngine(const std::string& configurationFileName, const std::string& parameterFileName)
-    : configurationFileName{ configurationFileName }, parameter{ parameterFileName }
+GameTemplate::GenerateEngine ::GenerateEngine(std::string configurationFileName)
+    : configurationFileName{ std::move(configurationFileName) }
 {
     Generate();
 
@@ -29,25 +28,15 @@ CLASS_INVARIANT_STUB_DEFINE(GameTemplate, GenerateEngine)
 
 void GameTemplate::GenerateEngine ::Generate()
 {
-    const auto newCoreName = parameter.GetReplacing(SYSTEM_TEXT("CoreName"));
-    const auto newIncludeName = parameter.GetReplacing(SYSTEM_TEXT("GameTemplateInclude"));
-    const auto projectName = parameter.GetReplacing(SYSTEM_TEXT("ProjectName"));
-    auto endYear = boost::lexical_cast<int>(parameter.GetReplacing(SYSTEM_TEXT("EndYear")));
-    const auto versions = parameter.GetReplacing(SYSTEM_TEXT("Versions"));
-    const auto projectChineseName = parameter.GetReplacing(SYSTEM_TEXT("ProjectChineseName"));
-    const auto resourceDirectory = parameter.GetReplacing(SYSTEM_TEXT("ResourceDirectory"));
-    const auto exportDirectory = parameter.GetReplacing(SYSTEM_TEXT("ExportDirectory"));
-    const auto solutionName = parameter.GetReplacing(SYSTEM_TEXT("SolutionName"));
-    const auto projectCapitalName = parameter.GetReplacing(SYSTEM_TEXT("ProjectCapital"));
-    const auto coreCapital = parameter.GetReplacing(SYSTEM_TEXT("CoreCapital"));
+    using BasicTree = boost::property_tree::basic_ptree<System::String, System::String>;
 
-    AssistTools::CopyrightData copyrightData{ endYear, versions, projectChineseName };
+    BasicTree mainTree{};
+    read_json(configurationFileName, mainTree);
 
-    AssistTools::GenerateTemplateEngineDirectory generateTemplateEngineDirectory{ resourceDirectory, configurationFileName };
+    const auto input = mainTree.get(SYSTEM_TEXT("input"), System::String{});
+    const auto output = mainTree.get(SYSTEM_TEXT("output"), System::String{});
 
-    generateTemplateEngineDirectory.GenerateTo(exportDirectory, solutionName, newCoreName, newIncludeName);
+    const AssistTools::GenerateEngine generateEngine{ input, output };
 
-    AssistTools::GenerateTemplateCodeDirectory generateTemplateCodeDirectory{ resourceDirectory, configurationFileName };
-
-    generateTemplateCodeDirectory.GenerateTo(exportDirectory, solutionName, copyrightData, projectCapitalName, projectName, newCoreName, coreCapital);
+    generateEngine.Generate();
 }

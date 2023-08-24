@@ -5,29 +5,19 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:19)
+///	版本：0.9.1.3 (2023/08/08 14:39)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_CONTAINER_DETAIL_H
 #define FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_CONTAINER_DETAIL_H
 
 #include "ModelViewControllerMiddleLayerContainer.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-
-template <typename ApplicationTrait,
-          typename ModelMiddleLayer,
-          typename ViewMiddleLayer,
-          template <typename> class ControllerMiddleLayer>
-Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::MiddleLayerInterfaceSharedPtr Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::Create(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
-{
-    return std::make_unique<ClassType>(middleLayerPlatform, environmentDirectory);
-}
 
 template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
 Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::ModelViewControllerMiddleLayerContainer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ middleLayerPlatform, environmentDirectory },
-      modelMiddleLayer{ std::make_shared<ModelMiddleLayerType>(middleLayerPlatform, environmentDirectory) },
-      viewMiddleLayer{ std::make_shared<ViewMiddleLayerType>(middleLayerPlatform, environmentDirectory) },
+      modelMiddleLayer{ std::make_shared<ModelMiddleLayer>(middleLayerPlatform, environmentDirectory) },
+      viewMiddleLayer{ std::make_shared<ViewMiddleLayer>(middleLayerPlatform, environmentDirectory) },
       controllerMiddleLayer{ std::make_shared<ControllerMiddleLayerType>(middleLayerPlatform, environmentDirectory) }
 {
     modelMiddleLayer->SetViewMiddleLayer(viewMiddleLayer);
@@ -71,7 +61,7 @@ Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddle
 template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && modelMiddleLayer && viewMiddleLayer && controllerMiddleLayer)
+    if (ParentType::IsValid() && modelMiddleLayer != nullptr && viewMiddleLayer != nullptr && controllerMiddleLayer != nullptr)
     {
         return true;
     }

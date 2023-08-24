@@ -5,10 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:25)
+///	版本：0.9.1.3 (2023/08/14 14:09)
 
-#include "ConsoleProcessTesting.h"
-#include "CoreTools/Contract/Noexcept.h"
+#include "ConsoleProcessTesting.h" 
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"

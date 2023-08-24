@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -68,7 +68,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{EFB32103-6204-44A8-AAD5-A24F64AE62C4}</ProjectGuid>
+    <ProjectGuid>{92397201-8DF6-4692-BCE0-C7483F9BB402}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>WorldServerMiddleLayer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -315,7 +315,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;WORLDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;WORLD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -326,7 +326,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;WORLDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;WORLD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -361,7 +361,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;WORLDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;WORLD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -376,7 +376,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;WORLDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;WORLD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -419,7 +419,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;WORLDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;WORLD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -430,7 +430,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GameStaticDebug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;WORLDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;WORLD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -465,7 +465,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;WORLDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;WORLD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -480,7 +480,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;WORLDSERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;WORLD_SERVERMIDDLELAYER_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -521,7 +521,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceManager.cpp" />
+    <ClCompile Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.cpp" />
     <ClCompile Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Audio\AudioManager.cpp" />
     <ClCompile Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\CameraSystems\CameraSystemsManager.cpp" />
     <ClCompile Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\DllLib.cpp" />
@@ -537,9 +537,9 @@
     <ClCompile Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\System\SystemManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegence.h" />
-    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceFwd.h" />
-    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\ArtificialIntellegence\ArtificialIntellegenceManager.h" />
+    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligence.h" />
+    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceFwd.h" />
+    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\ArtificialIntelligence\ArtificialIntelligenceManager.h" />
     <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Audio\Audio.h" />
     <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Audio\AudioFwd.h" />
     <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Audio\AudioManager.h" />
@@ -560,16 +560,16 @@
     <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\GUI\GUI.h" />
     <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\GUI\GUIFwd.h" />
     <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\GUI\GUIManager.h" />
+    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Helper\ExportMacro.h" />
+    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Helper\WorldServerMiddleLayerClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Helper\WorldServerMiddleLayerCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Input\Input.h" />
     <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Input\InputFwd.h" />
     <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Input\InputManager.h" />
     <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Input\InputManagerDetail.h" />
-    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Macro\ExportMacro.h" />
-    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Macro\WorldServerMiddleLayerClassInvariantMacro.h" />
-    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Macro\WorldServerMiddleLayerCustomAssertMacro.h" />
-    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Macro\Macro.h" />
-    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Macro\MacroFwd.h" />
-    <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Macro\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Message\Message.h" />
     <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Message\MessageFwd.h" />
     <ClInclude Include="..\..\..\Code\WorldServer\WorldServerMiddleLayer\Message\MessageManager.h" />

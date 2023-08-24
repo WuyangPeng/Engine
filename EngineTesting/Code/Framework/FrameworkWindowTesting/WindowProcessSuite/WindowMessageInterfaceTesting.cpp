@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:08)
+///	版本：0.9.1.3 (2023/08/10 14:51)
 
 #include "WindowMessageInterfaceTesting.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
@@ -23,13 +23,8 @@
 
 using namespace std::literals;
 
-namespace Framework
-{
-    using TestingType = WindowMessageInterface;
-}
-
-Framework::WindowMessageInterfaceTesting::WindowMessageInterfaceTesting(const OStreamShared& stream, HWnd hwnd)
-    : ParentType{ stream }, hwnd{ hwnd }
+Framework::WindowMessageInterfaceTesting::WindowMessageInterfaceTesting(const OStreamShared& stream, WindowsHWnd hWnd)
+    : ParentType{ stream }, hWnd{ hWnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -51,10 +46,10 @@ void Framework::WindowMessageInterfaceTesting::MainTest()
 
 void Framework::WindowMessageInterfaceTesting::MessageTest()
 {
-    const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
+    const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
     constexpr auto delta = System::gMicroseconds / 60;
 
-    TestingType message{ delta, environmentDirectory };
+    WindowMessageInterface message{ delta, environmentDirectory };
     ASSERT_EQUAL(message.GetDelta(), delta);
 
     ASSERT_TRUE(message.PreCreate());
@@ -62,27 +57,27 @@ void Framework::WindowMessageInterfaceTesting::MessageTest()
     message.PreIdle();
     message.Terminate();
 
-    ASSERT_EQUAL(message.CreateMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.CreateMessage(hWnd, 0, 0), 0);
 
-    ASSERT_EQUAL(hwnd, message.GetHwnd());
+    ASSERT_EQUAL(hWnd, message.GetHWnd());
 
-    ASSERT_EQUAL(message.SizeMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.MoveMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.CharMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.KeyDownMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.KeyUpMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.LeftButtonDownMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.LeftButtonUpMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.MiddleButtonDownMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.MiddleButtonUpMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.RightButtonDownMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.RightButtonUpMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.MouseMoveMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.MouseWheelMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.PaintMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.EraseBackgroundMessage(hwnd, 0, 0), 1);
+    ASSERT_EQUAL(message.SizeMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.MoveMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.CharMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.KeyDownMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.KeyUpMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.LeftButtonDownMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.LeftButtonUpMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.MiddleButtonDownMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.MiddleButtonUpMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.RightButtonDownMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.RightButtonUpMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.MouseMoveMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.MouseWheelMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.PaintMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.EraseBackgroundMessage(hWnd, 0, 0), 1);
 
-    message.Display(hwnd, 0);
+    message.Display(hWnd, 0);
 
     ASSERT_EQUAL(message.GetTerminateKey(), WindowApplicationTrait::KeyIdentifiers::keyTerminate);
 }
@@ -90,72 +85,72 @@ void Framework::WindowMessageInterfaceTesting::MessageTest()
 void Framework::WindowMessageInterfaceTesting::CloseMessageTest()
 {
     constexpr auto delta = System::gMicroseconds / 60;
-    TestingType message{ delta };
+    WindowMessageInterface message{ delta };
 
-    auto instance = System::GetHInstance();
+    const auto instance = System::GetHInstance();
 
     System::String className{};
-    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
+    ASSERT_TRUE(System::GetSystemClassName(hWnd, className));
 
-    auto windowName = SYSTEM_TEXT("Not Displayed Window"s);
+    const auto windowName = SYSTEM_TEXT("Not Displayed Window"s);
 
     const WindowSize size{ 800, 600 };
-    WindowCreateParameter createParameter{ windowName };
-    WindowInstanceParameter instanceParameter{ instance, className };
-    WindowCreateHandle create{ instanceParameter, createParameter, size };
+    const WindowCreateParameter createParameter{ windowName };
+    const WindowInstanceParameter instanceParameter{ instance, className };
+    const WindowCreateHandle create{ instanceParameter, createParameter, size };
 
-    ASSERT_EQUAL(message.CreateMessage(create.GetHwnd(), 0, 0), 0);
-    ASSERT_EQUAL(message.CloseMessage(create.GetHwnd(), 0, 0), 0);
+    ASSERT_EQUAL(message.CreateMessage(create.GetHWnd(), 0, 0), 0);
+    ASSERT_EQUAL(message.CloseMessage(create.GetHWnd(), 0, 0), 0);
 }
 
 void Framework::WindowMessageInterfaceTesting::DestroyMessageTest()
 {
     constexpr auto delta = System::gMicroseconds / 60;
-    TestingType message{ delta };
+    WindowMessageInterface message{ delta };
 
-    auto instance = System::GetHInstance();
+    const auto instance = System::GetHInstance();
 
     System::String className{};
-    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
+    MAYBE_UNUSED const auto value = System::GetSystemClassName(hWnd, className);
 
-    auto windowName = SYSTEM_TEXT("Test Destroy Message Window"s);
+    const auto windowName = SYSTEM_TEXT("Test Destroy Message Window"s);
 
     const WindowSize size{ 800, 600 };
-    WindowCreateParameter createParameter{ windowName };
-    WindowInstanceParameter instanceParameter{ instance, className };
-    WindowCreateHandle create{ instanceParameter, createParameter, size };
+    const WindowCreateParameter createParameter{ windowName };
+    const WindowInstanceParameter instanceParameter{ instance, className };
+    const WindowCreateHandle create{ instanceParameter, createParameter, size };
 
-    ASSERT_EQUAL(message.CreateMessage(hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.CloseMessage(create.GetHwnd(), 0, 0), 0);
-    ASSERT_EQUAL(message.DestroyMessage(create.GetHwnd(), 0, 0), 0);
+    ASSERT_EQUAL(message.CreateMessage(hWnd, 0, 0), 0);
+    ASSERT_EQUAL(message.CloseMessage(create.GetHWnd(), 0, 0), 0);
+    ASSERT_EQUAL(message.DestroyMessage(create.GetHWnd(), 0, 0), 0);
 }
 
 void Framework::WindowMessageInterfaceTesting::SetMainWindowTest()
 {
     constexpr auto delta = System::gMicroseconds / 60;
-    TestingType message{ delta };
+    WindowMessageInterface message{ delta };
 
-    auto instance = System::GetHInstance();
+    const auto instance = System::GetHInstance();
 
     System::String className{};
-    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
+    ASSERT_TRUE(System::GetSystemClassName(hWnd, className));
 
-    auto windowName = SYSTEM_TEXT("Not Displayed Window"s);
+    const auto windowName = SYSTEM_TEXT("Not Displayed Window"s);
 
     const WindowSize size{ 800, 600 };
-    WindowCreateParameter createParameter{ windowName };
-    WindowInstanceParameter instanceParameter{ instance, className };
-    WindowCreateHandle create{ instanceParameter, createParameter, size };
+    const WindowCreateParameter createParameter{ windowName };
+    const WindowInstanceParameter instanceParameter{ instance, className };
+    const WindowCreateHandle create{ instanceParameter, createParameter, size };
 
-    ASSERT_EQUAL(message.CreateMessage(create.GetHwnd(), 0, 0), 0);
+    ASSERT_EQUAL(message.CreateMessage(create.GetHWnd(), 0, 0), 0);
 
-    message.SetMainWindow(create.GetHwnd());
+    message.SetMainWindow(create.GetHWnd());
 
-    ASSERT_EQUAL(create.GetHwnd(), message.GetHwnd());
+    ASSERT_EQUAL(create.GetHWnd(), message.GetHWnd());
 
-    message.SetMainWindow(hwnd);
+    message.SetMainWindow(hWnd);
 
-    ASSERT_EQUAL(hwnd, message.GetHwnd());
+    ASSERT_EQUAL(hWnd, message.GetHWnd());
 
-    ASSERT_EQUAL(message.CloseMessage(create.GetHwnd(), 0, 0), 0);
+    ASSERT_EQUAL(message.CloseMessage(create.GetHWnd(), 0, 0), 0);
 }

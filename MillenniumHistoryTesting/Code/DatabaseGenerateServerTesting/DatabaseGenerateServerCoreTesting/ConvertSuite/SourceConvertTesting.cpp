@@ -5,75 +5,39 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/24 12:17)
+///	版本：0.9.1.3 (2023/08/05 21:10)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/Source.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/SourceContainerDetail.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity/SourceEntity.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerCore/Convert/ConvertEntity.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/Helper/DatabaseGenerateServerCoreClassInvariantMacro.h"
 #include "SourceConvertTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/DatabaseInterface/BasisDatabaseManager.h"
-#include "Database/DatabaseInterface/DatabaseEnvironment.h"
-#include "Database/DatabaseInterface/DatabaseFlush.h"
 
-DatabaseGenerateServerCoreTesting::SourceConvertTesting::SourceConvertTesting(const OStreamShared& stream, const AncientBooksContainer& ancientBooksContainer)
-    : ParentType{ stream }, ancientBooksContainer{ ancientBooksContainer }
+DatabaseGenerateServerCoreTesting::SourceConvertTesting::SourceConvertTesting(const OStreamShared& stream, const SourceContainer& sourceContainer)
+    : ParentType{ stream }, sourceContainer{ sourceContainer }
 {
     DATABASE_GENERATE_SERVER_CORE_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseGenerateServerCoreTesting, SourceConvertTesting)
 
-void DatabaseGenerateServerCoreTesting::SourceConvertTesting::DoRunUnitTest()
+void DatabaseGenerateServerCoreTesting::SourceConvertTesting::ConvertTest(const DatabaseFlushSharedPtr& databaseFlush)
 {
-    Database::DatabaseEnvironment::Create();
+    DatabaseGenerateServerCore::ConvertEntity convertEntity{ databaseFlush };
 
-    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-
-    Database::DatabaseEnvironment::Destroy();
-}
-
-void DatabaseGenerateServerCoreTesting::SourceConvertTesting::MainTest()
-{
-    ASSERT_NOT_THROW_EXCEPTION_0(InitEnvironmentTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DatabaseFlushTest);
-}
-
-void DatabaseGenerateServerCoreTesting::SourceConvertTesting::InitEnvironmentTest()
-{
-    const Database::ConfigurationStrategy configurationStrategy{ Database::WrappersStrategy::Mongo, "127.0.0.1", 3306, "tcretest", "root", "123456" };
-
-    DATABASE_ENVIRONMENT_SINGLETON.InitEnvironment(configurationStrategy);
-}
-
-void DatabaseGenerateServerCoreTesting::SourceConvertTesting::DatabaseFlushTest()
-{
-    const Database::ConfigurationStrategy::FlagsOption flagsOption{};
-    const Database::ConfigurationStrategy::StringOption stringOption{};
-    const Database::ConfigurationStrategy::BooleanOption booleanOption{};
-    const Database::ConfigurationStrategy::IntOption intOption{};
-    const Database::ConfigurationStrategy::SSLOption sslOption{};
-    const Database::ConfigurationStrategy::DBMapping dbMapping{};
-
-    const Database::ConfigurationStrategy configurationStrategy{ Database::WrappersStrategy::Mongo, "43.139.123.106", 27017, "tcretest", "dbOwner", "TCRE", true, 10, 1000, 500, 1, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping };
-
-    Database::DatabaseFlush mysqlConnectorDatabaseFlush{ configurationStrategy };
-
-    const auto sourceContainer = ancientBooksContainer.GetSourceContainer();
-
-    for (const auto& source : sourceContainer->GetContainer())
+    for (const auto& source : sourceContainer.GetContainer())
     {
-        const auto database = mysqlConnectorDatabaseFlush.SelectOne(DatabaseEntity::SourceEntity::GetSelect(Database::WrappersStrategy::Mongo, source->GetId()),
-                                                                    DatabaseEntity::SourceEntity::GetDatabaseFieldContainer());
+        const auto sourceEntity = convertEntity.Convert(*source);
 
-        auto sourceEntity = DatabaseEntity::SourceEntity::Create(database, Database::WrappersStrategy::Mongo, source->GetId());
-
-        sourceEntity.SetName(CoreTools::StringConversion::StandardConversionUtf8(source->GetName()));
-        sourceEntity.SetSort(source->GetSort());
-
-        mysqlConnectorDatabaseFlush.ChangeDatabase(0, sourceEntity.GetModify());
+        ASSERT_NOT_THROW_EXCEPTION_2(EqualTest, *source, sourceEntity);
     }
+}
+
+void DatabaseGenerateServerCoreTesting::SourceConvertTesting::EqualTest(const Source& source, const SourceEntity& sourceEntity)
+{
+    ASSERT_EQUAL(sourceEntity.GetName(), CoreTools::StringConversion::StandardConversionUtf8(source.GetName()));
+    ASSERT_EQUAL(sourceEntity.GetSort(), source.GetSort());
 }

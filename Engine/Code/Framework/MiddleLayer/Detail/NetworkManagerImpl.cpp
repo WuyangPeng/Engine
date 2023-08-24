@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:24)
+///	版本：0.9.1.3 (2023/08/08 14:51)
 
 #include "Framework/FrameworkExport.h"
 
@@ -64,12 +64,12 @@ Framework::NetworkManagerImpl::ConstSendSocketManagerSharedPtr Framework::Networ
     return sendSocketManager;
 }
 
-void Framework::NetworkManagerImpl::Send(const Network::SocketData& socketData, uint64_t socketID, const MessageInterfaceSharedPtr& message)
+void Framework::NetworkManagerImpl::Send(const Network::SocketData& socketData, int64_t socketId, const MessageInterfaceSharedPtr& message)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     if (sendSocketManager != nullptr)
     {
-        sendSocketManager->Send(socketData, socketID, message);
+        sendSocketManager->Send(socketData, socketId, message);
     }
 }

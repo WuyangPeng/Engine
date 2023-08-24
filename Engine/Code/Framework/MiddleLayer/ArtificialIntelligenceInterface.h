@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:20)
+///	版本：0.9.1.3 (2023/08/05 16:13)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_ARTIFICIAL_INTELLIGENCE_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_ARTIFICIAL_INTELLIGENCE_INTERFACE_H
@@ -29,15 +29,15 @@ namespace Framework
         using ParentType = EngineMiddleLayerInterface;
 
     public:
-        explicit ArtificialIntelligenceInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
+        ArtificialIntelligenceInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Input);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Network);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(PhysicalModelling);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Message);
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System);
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Input)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Network)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(PhysicalModelling)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Message)
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System)
 
     private:
         PackageType impl;

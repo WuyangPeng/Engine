@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 20:10)
+///	版本：0.9.1.3 (2023/08/14 10:46)
 
 #include "ModelViewControllerMiddleLayerContainerTesting.h"
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
@@ -82,7 +82,7 @@ void Framework::ModelViewControllerMiddleLayerContainerTesting::MiddleLayerTest(
 
     constexpr WindowPoint point{};
     const WindowSize size{};
-    const VirtualKeysTypes virtualKeysTypes{};
+    constexpr VirtualKeysTypes virtualKeysTypes{};
 
     ASSERT_TRUE(middleLayer.Paint());
     ASSERT_TRUE(middleLayer.Move(point));
@@ -120,7 +120,7 @@ void Framework::ModelViewControllerMiddleLayerContainerTesting::PixelMiddleLayer
 
     constexpr WindowPoint point{};
     const WindowSize size{};
-    const VirtualKeysTypes virtualKeysTypes{};
+    constexpr VirtualKeysTypes virtualKeysTypes{};
 
     ASSERT_TRUE(middleLayer.Paint());
     ASSERT_TRUE(middleLayer.Move(point));
@@ -158,7 +158,7 @@ void Framework::ModelViewControllerMiddleLayerContainerTesting::CameraMiddleLaye
 
     constexpr WindowPoint point{};
     const WindowSize size{};
-    const VirtualKeysTypes virtualKeysTypes{};
+    constexpr VirtualKeysTypes virtualKeysTypes{};
 
     ASSERT_TRUE(middleLayer.Paint());
     ASSERT_TRUE(middleLayer.Move(point));

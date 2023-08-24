@@ -5,77 +5,41 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/24 12:17)
+///	版本：0.9.1.3 (2023/08/04 21:20)
 
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/ImperialCourt.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/ImperialCourtContainerDetail.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity/ImperialCourtEntity.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerCore/Convert/ConvertEntity.h"
 #include "DatabaseGenerateServer/DatabaseGenerateServerCore/Helper/DatabaseGenerateServerCoreClassInvariantMacro.h"
 #include "ImperialCourtConvertTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Database/Configuration/ConfigurationStrategy.h"
-#include "Database/DatabaseInterface/BasisDatabaseManager.h"
-#include "Database/DatabaseInterface/DatabaseEnvironment.h"
-#include "Database/DatabaseInterface/DatabaseFlush.h"
 
-DatabaseGenerateServerCoreTesting::ImperialCourtConvertTesting::ImperialCourtConvertTesting(const OStreamShared& stream, const AncientBooksContainer& ancientBooksContainer)
-    : ParentType{ stream }, ancientBooksContainer{ ancientBooksContainer }
+DatabaseGenerateServerCoreTesting::ImperialCourtConvertTesting::ImperialCourtConvertTesting(const OStreamShared& stream, const ImperialCourtContainer& imperialCourtContainer)
+    : ParentType{ stream }, imperialCourtContainer{ imperialCourtContainer }
 {
     DATABASE_GENERATE_SERVER_CORE_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseGenerateServerCoreTesting, ImperialCourtConvertTesting)
 
-void DatabaseGenerateServerCoreTesting::ImperialCourtConvertTesting::DoRunUnitTest()
+void DatabaseGenerateServerCoreTesting::ImperialCourtConvertTesting::ConvertTest(const DatabaseFlushSharedPtr& databaseFlush)
 {
-    Database::DatabaseEnvironment::Create();
+    DatabaseGenerateServerCore::ConvertEntity convertEntity{ databaseFlush };
 
-    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-
-    Database::DatabaseEnvironment::Destroy();
-}
-
-void DatabaseGenerateServerCoreTesting::ImperialCourtConvertTesting::MainTest()
-{
-    ASSERT_NOT_THROW_EXCEPTION_0(InitEnvironmentTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DatabaseFlushTest);
-}
-
-void DatabaseGenerateServerCoreTesting::ImperialCourtConvertTesting::InitEnvironmentTest()
-{
-    const Database::ConfigurationStrategy configurationStrategy{ Database::WrappersStrategy::Mongo, "127.0.0.1", 3306, "tcretest", "root", "123456" };
-
-    DATABASE_ENVIRONMENT_SINGLETON.InitEnvironment(configurationStrategy);
-}
-
-void DatabaseGenerateServerCoreTesting::ImperialCourtConvertTesting::DatabaseFlushTest()
-{
-    const Database::ConfigurationStrategy::FlagsOption flagsOption{};
-    const Database::ConfigurationStrategy::StringOption stringOption{};
-    const Database::ConfigurationStrategy::BooleanOption booleanOption{};
-    const Database::ConfigurationStrategy::IntOption intOption{};
-    const Database::ConfigurationStrategy::SSLOption sslOption{};
-    const Database::ConfigurationStrategy::DBMapping dbMapping{};
-
-    const Database::ConfigurationStrategy configurationStrategy{ Database::WrappersStrategy::Mongo, "43.139.123.106", 27017, "tcretest", "dbOwner", "TCRE", true, 10, 1000, 500, 1, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping };
-
-    Database::DatabaseFlush mysqlConnectorDatabaseFlush{ configurationStrategy };
-
-    const auto imperialCourtContainer = ancientBooksContainer.GetImperialCourtContainer();
-
-    for (const auto& imperialCourt : imperialCourtContainer->GetContainer())
+    for (const auto& imperialCourt : imperialCourtContainer.GetContainer())
     {
-        const auto database = mysqlConnectorDatabaseFlush.SelectOne(DatabaseEntity::ImperialCourtEntity::GetSelect(Database::WrappersStrategy::Mongo, imperialCourt->GetId()),
-                                                                    DatabaseEntity::ImperialCourtEntity::GetDatabaseFieldContainer());
+        const auto imperialCourtEntity = convertEntity.Convert(*imperialCourt);
 
-        auto imperialCourtEntity = DatabaseEntity::ImperialCourtEntity::Create(database, Database::WrappersStrategy::Mongo, imperialCourt->GetId());
-
-        imperialCourtEntity.SetCategory(CoreTools::StringConversion::StandardConversionUtf8(imperialCourt->GetCategory()));
-        imperialCourtEntity.SetBook(CoreTools::StringConversion::StandardConversionUtf8(imperialCourt->GetBook()));
-        imperialCourtEntity.SetBegin(imperialCourt->GetBegin());
-        imperialCourtEntity.SetEnd(imperialCourt->GetEnd());
-
-        mysqlConnectorDatabaseFlush.ChangeDatabase(0, imperialCourtEntity.GetModify());
+        ASSERT_NOT_THROW_EXCEPTION_2(EqualTest, *imperialCourt, imperialCourtEntity);
     }
+}
+
+void DatabaseGenerateServerCoreTesting::ImperialCourtConvertTesting::EqualTest(const ImperialCourt& imperialCourt, const ImperialCourtEntity& imperialCourtEntity)
+{
+    ASSERT_EQUAL(imperialCourtEntity.GetCategory(), CoreTools::StringConversion::StandardConversionUtf8(imperialCourt.GetCategory()));
+    ASSERT_EQUAL(imperialCourtEntity.GetBook(), CoreTools::StringConversion::StandardConversionUtf8(imperialCourt.GetBook()));
+    ASSERT_EQUAL(imperialCourtEntity.GetBegin(), imperialCourt.GetBegin());
+    ASSERT_EQUAL(imperialCourtEntity.GetEnd(), imperialCourt.GetEnd());
 }

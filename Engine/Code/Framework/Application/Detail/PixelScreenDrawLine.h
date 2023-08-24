@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:43)
+///	版本：0.9.1.3 (2023/08/09 14:56)
 
 #ifndef FRAMEWORK_APPLICATION_PIXEL_SCREEN_DRAW_LINE_H
 #define FRAMEWORK_APPLICATION_PIXEL_SCREEN_DRAW_LINE_H
@@ -31,7 +31,7 @@ namespace Framework
 
 #ifdef OPEN_CLASS_INVARIANT
 
-        bool IsEndpointCorrect() const;
+        NODISCARD bool IsEndpointCorrect() const;
 
 #endif  // OPEN_CLASS_INVARIANT
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:22)
+///	版本：0.9.1.3 (2023/08/08 14:02)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_PHYSICAL_MODELLING_MANAGER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_PHYSICAL_MODELLING_MANAGER_INTERFACE_H
@@ -19,9 +19,9 @@
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
+// 物理模拟（作用于游戏对象之上的物理力学及其效果的数学表达方式，如对象的碰撞以及分解）。移动除相机之外的全部游戏对象。
 namespace Framework
 {
-    // 物理模拟（作用于游戏对象之上的物理力学及其效果的数学表达方式，如对象的碰撞以及分解）。移动除相机之外的全部游戏对象。
     class FRAMEWORK_DEFAULT_DECLARE PhysicalModellingManagerInterface : public EngineMiddleLayerInterface
     {
     public:
@@ -51,7 +51,7 @@ namespace Framework
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
         NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
 
-        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(ObjectLogic);
+        ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(ObjectLogic)
 
     private:
         PackageType impl;

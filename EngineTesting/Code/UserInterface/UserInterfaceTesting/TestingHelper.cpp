@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/12 20:05)
+///	版本：0.9.1.3 (2023/08/01 19:20)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -30,8 +30,8 @@ void UserInterface::TestingHelper::InitSuite()
     AddInterfaceSuite();
     AddWxWidgetsSuite();
     AddFLTKSuite();
-    AddTrixulSuite();
-    AddXFree86Suite();
+    AddOpenGLSuite();
+    AddDirectXSuite();
 }
 
 void UserInterface::TestingHelper::AddHelperSuite()
@@ -69,16 +69,16 @@ void UserInterface::TestingHelper::AddFLTKSuite()
     AddSuite(fLTKSuite);
 }
 
-void UserInterface::TestingHelper::AddTrixulSuite()
+void UserInterface::TestingHelper::AddOpenGLSuite()
 {
-    auto trixulSuite = GenerateSuite("Trixul");
+    auto openGLSuite = GenerateSuite("OpenGL");
 
-    AddSuite(trixulSuite);
+    AddSuite(openGLSuite);
 }
 
-void UserInterface::TestingHelper::AddXFree86Suite()
+void UserInterface::TestingHelper::AddDirectXSuite()
 {
-    auto xFree86Suite = GenerateSuite("XFree86");
+    auto directXSuite = GenerateSuite("DirectX");
 
-    AddSuite(xFree86Suite);
+    AddSuite(directXSuite);
 }

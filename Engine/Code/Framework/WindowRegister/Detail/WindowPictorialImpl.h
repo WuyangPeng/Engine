@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:00)
+///	版本：0.9.1.3 (2023/08/03 20:01)
 
 #ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_PICTORIAL_IMPL_H
 #define FRAMEWORK_WINDOW_REGISTER_WINDOW_PICTORIAL_IMPL_H
@@ -25,20 +25,21 @@ namespace Framework
     {
     public:
         using ClassType = WindowPictorialImpl;
+
         using TChar = System::TChar;
         using HIcon = System::WindowsHIcon;
         using HBrush = System::WindowsHBrush;
         using HCursor = System::WindowsHCursor;
         using HInstance = System::WindowsHInstance;
-        using WindowsBrushTypes = System::WindowsBrushTypes;
+        using BrushTypes = System::WindowsBrushTypes;
 
     public:
-        explicit WindowPictorialImpl(WindowsBrushTypes background);
-        WindowPictorialImpl(const TChar* icon, const TChar* cursor, WindowsBrushTypes background);
-        WindowPictorialImpl(HInstance instance, int icon, int cursor, WindowsBrushTypes background);
-        WindowPictorialImpl(HInstance instance, int icon, const TChar* cursor, WindowsBrushTypes background);
-        WindowPictorialImpl(HInstance instance, const TChar* icon, int cursor, WindowsBrushTypes background);
-        WindowPictorialImpl(HInstance instance, bool isDefaultIcon, int icon, bool isDefaultCursor, int cursor, WindowsBrushTypes background);
+        explicit WindowPictorialImpl(BrushTypes background);
+        WindowPictorialImpl(const TChar* icon, const TChar* cursor, BrushTypes background);
+        WindowPictorialImpl(HInstance instance, int icon, int cursor, BrushTypes background);
+        WindowPictorialImpl(HInstance instance, int icon, const TChar* cursor, BrushTypes background);
+        WindowPictorialImpl(HInstance instance, const TChar* icon, int cursor, BrushTypes background);
+        WindowPictorialImpl(HInstance instance, bool isDefaultIcon, int icon, bool isDefaultCursor, int cursor, BrushTypes background);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -50,7 +51,7 @@ namespace Framework
         using WindowHBrushUniquePtr = std::unique_ptr<WindowHBrush>;
 
     private:
-        NODISCARD static WindowHBrushUniquePtr CreateWindowsHBrush(WindowsBrushTypes background);
+        NODISCARD static WindowHBrushUniquePtr CreateWindowsHBrush(BrushTypes background);
 
     private:
         WindowHIcon windowsHIcon;

@@ -5,39 +5,41 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	版本：0.9.1.0 (2023/06/28 19:52)
+///	版本：0.9.1.3 (2023/08/03 23:04)
 
-#ifndef DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_CATEGORY_CONVERT_TESTING_H
-#define DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_CATEGORY_CONVERT_TESTING_H
+#ifndef DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_CATEGORY_CONVERT_TESTING_H
+#define DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_CATEGORY_CONVERT_TESTING_H
 
-#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/AncientBooksContainer.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "ConvertTesting.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/AncientBooks/CategoryContainer.h"
+#include "DatabaseGenerateServer/DatabaseGenerateServerBase/DatabaseEntity/DatabaseEntityFwd.h"
 
 namespace DatabaseGenerateServerCoreTesting
 {
-    class CategoryConvertTesting final : public CoreTools::UnitTest
+    class CategoryConvertTesting final : public ConvertTesting
     {
     public:
         using ClassType = CategoryConvertTesting;
-        using ParentType = UnitTest;
+        using ParentType = ConvertTesting;
 
-        using AncientBooksContainer = AncientBooks::AncientBooksContainer;
+        using CategoryContainer = AncientBooks::CategoryContainer;
 
     public:
-        CategoryConvertTesting(const OStreamShared& stream, const AncientBooksContainer& ancientBooksContainer);
+        CategoryConvertTesting(const OStreamShared& stream, const CategoryContainer& categoryContainer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        void MainTest();
-        void DoRunUnitTest() override;
-
-        void InitEnvironmentTest();
-        void DatabaseFlushTest();
+        using Category = AncientBooks::CategoryBase;
+        using CategoryEntity = DatabaseEntity::CategoryEntity;
 
     private:
-        AncientBooksContainer ancientBooksContainer;
+        void ConvertTest(const DatabaseFlushSharedPtr& databaseFlush) override;
+        void EqualTest(const Category& category, const CategoryEntity& categoryEntity);
+
+    private:
+        CategoryContainer categoryContainer;
     };
 }
 
-#endif  // DATABASE_GENERATE_SERVER_CONFIGURATION_TESTING_DATABASE_ENTITY_SUITE_CATEGORY_CONVERT_TESTING_H
+#endif  // DATABASE_GENERATE_SERVER_CORE_TESTING_DATABASE_ENTITY_SUITE_CATEGORY_CONVERT_TESTING_H

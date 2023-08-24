@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:35)
+///	版本：0.9.1.3 (2023/08/10 10:50)
 
 #ifndef WINDOW_MESSAGE_UNIT_TEST_SUITE_TESTING_SUITE_WINDOW_MESSAGE_H
 #define WINDOW_MESSAGE_UNIT_TEST_SUITE_TESTING_SUITE_WINDOW_MESSAGE_H
@@ -16,22 +16,22 @@
 
 namespace Framework
 {
-    class SuiteWindowMessage final : public Framework::WindowMessageUnitTestSuite, public std::enable_shared_from_this<SuiteWindowMessage>
+    class SuiteWindowMessage final : public WindowMessageUnitTestSuite, public std::enable_shared_from_this<SuiteWindowMessage>
     {
     public:
         using ClassType = SuiteWindowMessage;
         using ParentType = WindowMessageUnitTestSuite;
 
     public:
-        SuiteWindowMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        SuiteWindowMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void InitSuite() final;
+        void InitSuite() override;
     };
 
-    using WindowProcessTesting = Framework::WindowProcessHandle<SuiteWindowMessage>;
+    using WindowProcessTesting = WindowProcessHandle<SuiteWindowMessage>;
 }
 
 #endif  // WINDOW_MESSAGE_UNIT_TEST_SUITE_TESTING_SUITE_WINDOW_MESSAGE_H

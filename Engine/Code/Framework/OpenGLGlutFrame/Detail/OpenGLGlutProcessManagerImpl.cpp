@@ -5,17 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:17)
+///	版本：0.9.1.3 (2023/08/05 13:53)
 
 #include "Framework/FrameworkExport.h"
 
 #include "OpenGLGlutProcessManagerImpl.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/LogMacro.h"
 #include "Framework/MainFunctionHelper/MainFunctionHelperBase.h"
 #include "Framework/OpenGLGlutFrame/OpenGLGlutCallBackInterface.h"
-
-using namespace std::literals;
 
 Framework::OpenGLGlutProcessManagerImpl::OpenGLGlutCallBackInterfaceSharedPtr Framework::OpenGLGlutProcessManagerImpl::openGLGlutCallBack{};
 
@@ -28,53 +28,45 @@ Framework::OpenGLGlutProcessManagerImpl::OpenGLGlutProcessManagerImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, OpenGLGlutProcessManagerImpl)
 
-// static
 Framework::OpenGLGlutProcessManagerImpl::OpenGLGlutCallBackInterfaceSharedPtr Framework::OpenGLGlutProcessManagerImpl::GetOpenGLGlutCallBack() noexcept
 {
     return openGLGlutCallBack;
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::SetOpenGLGlutCallBack(const OpenGLGlutCallBackInterfaceSharedPtr& aOpenGLGlutCallBack) noexcept
 {
     openGLGlutCallBack = aOpenGLGlutCallBack;
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::ClearOpenGLGlutCallBack() noexcept
 {
     openGLGlutCallBack.reset();
 }
 
-// static
-void Framework::OpenGLGlutProcessManagerImpl::SetWindowID(int window)
+void Framework::OpenGLGlutProcessManagerImpl::SetWindowId(int window)
 {
     if (openGLGlutCallBack != nullptr)
     {
-        openGLGlutCallBack->SetWindowID(window);
+        openGLGlutCallBack->SetWindowId(window);
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
-int Framework::OpenGLGlutProcessManagerImpl::GetWindowID()
+int Framework::OpenGLGlutProcessManagerImpl::GetWindowId()
 {
-    FRAMEWORK_CLASS_IS_VALID_CONST_9;
-
     if (openGLGlutCallBack != nullptr)
     {
-        return openGLGlutCallBack->GetWindowID();
+        return openGLGlutCallBack->GetWindowId();
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::SetMillisecond(int millisecond)
 {
     if (openGLGlutCallBack != nullptr)
@@ -83,7 +75,7 @@ void Framework::OpenGLGlutProcessManagerImpl::SetMillisecond(int millisecond)
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
@@ -95,17 +87,15 @@ int Framework::OpenGLGlutProcessManagerImpl::GetMillisecond()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::SetMainFunctionHelper(const MainFunctionHelperBaseSharedPtr& mainFunctionHelperBase) noexcept
 {
     mainFunctionHelper = mainFunctionHelperBase;
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::ClearMainFunctionHelper() noexcept
 {
     mainFunctionHelper.reset();
@@ -113,20 +103,17 @@ void Framework::OpenGLGlutProcessManagerImpl::ClearMainFunctionHelper() noexcept
 
 Framework::OpenGLGlutProcessManagerImpl::MainFunctionHelperBaseSharedPtr Framework::OpenGLGlutProcessManagerImpl::GetMainFunctionHelper()
 {
-    FRAMEWORK_CLASS_IS_VALID_9;
-
-    auto helper = mainFunctionHelper.lock();
-    if (helper != nullptr)
+    if (auto helper = mainFunctionHelper.lock();
+        helper != nullptr)
     {
         return helper;
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("MainFunctionHelper指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("MainFunctionHelper已释放"s))
     }
 }
 
-// static
 bool Framework::OpenGLGlutProcessManagerImpl::PreCreate()
 {
     if (openGLGlutCallBack != nullptr)
@@ -135,11 +122,10 @@ bool Framework::OpenGLGlutProcessManagerImpl::PreCreate()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 bool Framework::OpenGLGlutProcessManagerImpl::Initialize()
 {
     if (openGLGlutCallBack != nullptr)
@@ -148,11 +134,10 @@ bool Framework::OpenGLGlutProcessManagerImpl::Initialize()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::PreIdle()
 {
     if (openGLGlutCallBack != nullptr)
@@ -161,11 +146,10 @@ void Framework::OpenGLGlutProcessManagerImpl::PreIdle()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::Terminate()
 {
     if (openGLGlutCallBack != nullptr)
@@ -174,181 +158,211 @@ void Framework::OpenGLGlutProcessManagerImpl::Terminate()
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::RenderScene()
 {
     if (openGLGlutCallBack != nullptr)
     {
-        openGLGlutCallBack->RenderScene();
+        if (!openGLGlutCallBack->RenderScene())
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("RenderScene出现错误。"));
+        }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::ChangeSize(int width, int height)
 {
     if (openGLGlutCallBack != nullptr)
     {
-        openGLGlutCallBack->ChangeSize(width, height);
+        if (!openGLGlutCallBack->ChangeSize(width, height))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("ChangeSize出现错误。"));
+        }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
-void Framework::OpenGLGlutProcessManagerImpl::TimerFunction([[maybe_unused]] int timer)
+void Framework::OpenGLGlutProcessManagerImpl::TimerFunction(int timer)
 {
+    System::UnusedFunction(timer);
+
     if (openGLGlutCallBack != nullptr)
     {
-        openGLGlutCallBack->TimerFunction(TimerFunction);
+        if (!openGLGlutCallBack->TimerFunction(TimerFunction))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("TimerFunction出现错误。"));
+        }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::SpecialKeysDown(int key, int xCoordinate, int yCoordinate)
 {
     if (openGLGlutCallBack != nullptr)
     {
-        openGLGlutCallBack->SpecialKeysDown(key, xCoordinate, yCoordinate);
+        if (!openGLGlutCallBack->SpecialKeysDown(key, xCoordinate, yCoordinate))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("SpecialKeysDown出现错误。"));
+        }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::KeyboardDown(unsigned char key, int xCoordinate, int yCoordinate)
 {
     if (openGLGlutCallBack != nullptr)
     {
-        openGLGlutCallBack->KeyboardDown(key, xCoordinate, yCoordinate);
+        if (!openGLGlutCallBack->KeyboardDown(key, xCoordinate, yCoordinate))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("KeyboardDown出现错误。"));
+        }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::MouseFunction(int button, int state, int xCoordinate, int yCoordinate)
 {
     if (openGLGlutCallBack != nullptr)
     {
-        openGLGlutCallBack->MouseClick(button, state, xCoordinate, yCoordinate);
+        if (!openGLGlutCallBack->MouseClick(button, state, xCoordinate, yCoordinate))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("MouseClick出现错误。"));
+        }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::MotionFunction(int xCoordinate, int yCoordinate)
 {
     if (openGLGlutCallBack != nullptr)
     {
-        openGLGlutCallBack->MotionFunction(xCoordinate, yCoordinate);
+        if (!openGLGlutCallBack->MotionFunction(xCoordinate, yCoordinate))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("MotionFunction出现错误。"));
+        }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::PassiveMotion(int xCoordinate, int yCoordinate)
 {
     if (openGLGlutCallBack != nullptr)
     {
-        openGLGlutCallBack->PassiveMotion(xCoordinate, yCoordinate);
+        if (!openGLGlutCallBack->PassiveMotion(xCoordinate, yCoordinate))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("PassiveMotion出现错误。"));
+        }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::IdleFunction()
 {
     if (openGLGlutCallBack != nullptr)
     {
-        openGLGlutCallBack->IdleFunction();
+        if (!openGLGlutCallBack->IdleFunction())
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("IdleFunction出现错误。"));
+        }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::ProcessMenu(int menuValue)
 {
     if (openGLGlutCallBack != nullptr)
     {
-        openGLGlutCallBack->ProcessMenu(menuValue);
+        if (!openGLGlutCallBack->ProcessMenu(menuValue))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("ProcessMenu出现错误。"));
+        }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::SpecialKeysUp(int key, int xCoordinate, int yCoordinate)
 {
     if (openGLGlutCallBack != nullptr)
     {
-        openGLGlutCallBack->SpecialKeysUp(key, xCoordinate, yCoordinate);
+        if (!openGLGlutCallBack->SpecialKeysUp(key, xCoordinate, yCoordinate))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("SpecialKeysUp出现错误。"));
+        }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::KeyboardUp(unsigned char key, int xCoordinate, int yCoordinate)
 {
     if (openGLGlutCallBack != nullptr)
     {
-        openGLGlutCallBack->KeyboardUp(key, xCoordinate, yCoordinate);
+        if (!openGLGlutCallBack->KeyboardUp(key, xCoordinate, yCoordinate))
+        {
+            LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("KeyboardUp出现错误。"));
+        }
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack指针为空！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("OpenGLGlutCallBack已释放"s))
     }
 }
 
-// static
 void Framework::OpenGLGlutProcessManagerImpl::TerminateFunction()
 {
     EXCEPTION_TRY
     {
-        Terminate();
-
-        openGLGlutCallBack.reset();
-
-        auto helper = mainFunctionHelper.lock();
-        if (helper != nullptr)
-        {
-            helper->Destroy();
-            helper.reset();
-        }
+        DoTerminateFunction();
     }
     EXCEPTION_ALL_CATCH(Framework)
+}
+
+void Framework::OpenGLGlutProcessManagerImpl::DoTerminateFunction()
+{
+    Terminate();
+
+    openGLGlutCallBack.reset();
+
+    if (auto helper = mainFunctionHelper.lock();
+        helper != nullptr)
+    {
+        helper->Destroy();
+        helper.reset();
+    }
 }

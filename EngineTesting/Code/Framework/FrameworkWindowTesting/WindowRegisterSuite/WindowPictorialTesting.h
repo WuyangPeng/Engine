@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:07)
+///	版本：0.9.1.3 (2023/08/10 13:54)
 
 #ifndef FRAMEWORK_WINDOW_TESTING_WINDOW_REGISTER_SUITE_WINDOW_PICTORIAL_TESTING_H
 #define FRAMEWORK_WINDOW_TESTING_WINDOW_REGISTER_SUITE_WINDOW_PICTORIAL_TESTING_H
@@ -14,7 +14,6 @@
 #include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
-#include <map>
 #include <random>
 
 namespace Framework
@@ -24,11 +23,12 @@ namespace Framework
     public:
         using ClassType = WindowPictorialTesting;
         using ParentType = UnitTest;
+
         using TChar = System::TChar;
-        using HInstance = System::WindowsHInstance;
+        using WindowsHInstance = System::WindowsHInstance;
 
     public:
-        explicit WindowPictorialTesting(const OStreamShared& stream, HInstance instance);
+        explicit WindowPictorialTesting(const OStreamShared& stream, WindowsHInstance instance);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -41,14 +41,13 @@ namespace Framework
         using BrushContainerConstIter = BrushContainer::const_iterator;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
         void MainTest();
 
         void BrushTest();
-        void RandomTest();
 
-        void RandomContainer(std::default_random_engine& generator);
+        void RandomContainer();
 
         void RandomIconTest();
         void RandomCursorTest();
@@ -60,21 +59,15 @@ namespace Framework
         void DefaultIconAndCursorTest();
         void CustomIconAndCursorTest();
 
-        void NextIcon(std::default_random_engine& generator);
-        void NextCursor(std::default_random_engine& generator);
-        void NextBrush(std::default_random_engine& generator);
+        NODISCARD bool ExecuteWindowPictorialTest();
 
     private:
-        HInstance instance;
+        WindowsHInstance instance;
         IconContainer iconContainer;
         CursorContainer cursorContainer;
         BrushContainer brushContainer;
-        IconContainer testIconContainer;
-        CursorContainer testCursorContainer;
-        BrushContainer testBrushContainer;
-        IconContainerConstIter iconIter;
-        CursorContainerConstIter cursorIter;
-        BrushContainerConstIter brushIter;
+        std::default_random_engine generator;
+        int index;
     };
 }
 

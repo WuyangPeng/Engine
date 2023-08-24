@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:13)
+///	版本：0.9.1.3 (2023/08/04 15:17)
 
 #include "Framework/FrameworkExport.h"
 
@@ -17,25 +17,54 @@
 Framework::WindowCreateParameter::WindowCreateParameter(const String& windowsName, WindowStyles style, WindowsHWnd parent, WindowsHMenu menu, const WindowPoint& leftTopCorner)
     : impl{ windowsName, style, parent, menu, leftTopCorner }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Framework::WindowCreateParameter::WindowCreateParameter(const String& windowsName)
     : WindowCreateParameter{ windowsName, WindowStyles::OverlappedWindow | WindowStyles::Visible }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Framework::WindowCreateParameter::WindowCreateParameter(const String& windowsName, WindowStyles style)
     : WindowCreateParameter{ windowsName, style, nullptr, nullptr, WindowPoint{ System::WindowsPointUse::Default } }
 {
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowCreateParameter)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, WindowCreateParameter, GetWindowsName, System::String)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowCreateParameter, GetStyle, System::WindowsStyles)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowCreateParameter, GetLeftTopCorner, Framework::WindowPoint)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowCreateParameter, GetParent, Framework::WindowCreateParameter::WindowsHWnd)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowCreateParameter, GetMenu, Framework::WindowCreateParameter::WindowsHMenu)
+System::String Framework::WindowCreateParameter::GetWindowsName() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetWindowsName();
+}
+
+System::WindowsStyles Framework::WindowCreateParameter::GetStyle() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetStyle();
+}
+
+Framework::WindowPoint Framework::WindowCreateParameter::GetLeftTopCorner() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetLeftTopCorner();
+}
+
+System::WindowsHWnd Framework::WindowCreateParameter::GetParent() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetParent();
+}
+
+System::WindowsHMenu Framework::WindowCreateParameter::GetMenu() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetMenu();
+}

@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:02)
+///	版本：0.9.1.3 (2023/08/04 14:59)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_LOOP_IMPL_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_MESSAGE_LOOP_IMPL_H
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Windows/WindowsCreate.h"
 #include "System/Windows/WindowsProcess.h"
 #include "CoreTools/Time/CustomTime.h"
 
@@ -22,6 +21,7 @@ namespace Framework
     {
     public:
         using ClassType = WindowMessageLoopImpl;
+
         using WindowsHWnd = System::WindowsHWnd;
         using WindowsWParam = System::WindowsWParam;
         using DisplayFunction = System::DisplayFunction;
@@ -31,7 +31,7 @@ namespace Framework
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD WindowsWParam EnterMessageLoop(WindowsHWnd hwnd);
+        NODISCARD WindowsWParam EnterMessageLoop(WindowsHWnd hWnd);
 
     private:
         using WindowsMsg = System::WindowsMessage;
@@ -39,9 +39,9 @@ namespace Framework
 
     private:
         NODISCARD WindowsWParam EnterOldMessageLoop() noexcept;
-        NODISCARD WindowsWParam EnterNewMessageLoop(WindowsHWnd hwnd);
-        NODISCARD bool ProcessingMessage(WindowsHWnd hwnd) noexcept;
-        void Idle(WindowsHWnd hwnd);
+        NODISCARD WindowsWParam EnterNewMessageLoop(WindowsHWnd hWnd);
+        NODISCARD bool ProcessingMessage(WindowsHWnd hWnd);
+        void Idle(WindowsHWnd hWnd) noexcept;
 
     private:
         DisplayFunction function;

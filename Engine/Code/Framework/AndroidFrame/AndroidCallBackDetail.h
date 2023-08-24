@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:50)
+///	版本：0.9.1.3 (2023/08/09 20:45)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_DETAIL_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_DETAIL_H
@@ -28,7 +28,7 @@
 
 template <typename MiddleLayer>
 Framework::AndroidCallBack<MiddleLayer>::AndroidCallBack(int64_t delta)
-    : ParentType{ delta }, middleLayer{ MiddleLayer::CreateMiddleLayer(MiddleLayerPlatform::Android, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }) }
+    : ParentType{ delta }, middleLayer{ std::make_shared<MiddleLayer>(MiddleLayerPlatform::Android, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -71,15 +71,15 @@ void Framework::AndroidCallBack<MiddleLayer>::ResizedMessage(AndroidApp* android
     {
         ParentType::ResizedMessage(androidApp);
 
-        auto nativeWindow = androidApp->GetNativeWindow();
-
-        if (nativeWindow != nullptr)
+        if (const auto nativeWindow = androidApp->GetNativeWindow();
+            nativeWindow != nullptr)
         {
             System::AndroidNativeWindowFacade androidNativeWindow{ nativeWindow };
             const auto width = androidNativeWindow.GetWidth();
             const auto height = androidNativeWindow.GetHeight();
 
-            if (!middleLayer->Resize(System::WindowsDisplay::AndroidUnDefinition, WindowSize{ width, height }))
+            if (const WindowSize windowSize{ width, height };
+                !middleLayer->Resize(System::WindowsDisplay::AndroidUnDefinition, windowSize))
             {
                 androidApp->SetDestroyRequested(1);
             }
@@ -100,7 +100,8 @@ void Framework::AndroidCallBack<MiddleLayer>::RectChanged(AndroidApp* androidApp
         const auto width = abs(contentRect.GetRight() - contentRect.GetLeft());
         const auto height = abs(contentRect.GetTop() - contentRect.GetBottom());
 
-        if (!middleLayer->Resize(System::WindowsDisplay::AndroidUnDefinition, WindowSize{ width, height }))
+        if (const WindowSize windowSize{ width, height };
+            !middleLayer->Resize(System::WindowsDisplay::AndroidUnDefinition, windowSize))
         {
             androidApp->SetDestroyRequested(1);
         }
@@ -225,9 +226,10 @@ int Framework::AndroidCallBack<MiddleLayer>::ActionDownMessage(AndroidApp* andro
         const auto xOffset = boost::numeric_cast<int>(androidKeyEvent.GetXOffset());
         const auto yOffset = boost::numeric_cast<int>(androidKeyEvent.GetYOffset());
 
-        // 可以通过使用AndroidMotionEventGetMetaState和AndroidMotionEventGetButtonState
-        // 获取VirtualKeysTypes的值，但对于Android而言，没有太多实际的意义。
-        if (!middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, WindowPoint{ xOffset, yOffset }, VirtualKeysTypes{}))
+        /// 可以通过使用AndroidMotionEventGetMetaState和AndroidMotionEventGetButtonState
+        /// 获取VirtualKeysTypes的值，但对于Android而言，没有太多实际的意义。
+        if (const WindowPoint windowPoint{ xOffset, yOffset };
+            !middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, windowPoint, VirtualKeysTypes{}))
         {
             androidApp->SetDestroyRequested(1);
         }
@@ -247,7 +249,8 @@ int Framework::AndroidCallBack<MiddleLayer>::ActionUpMessage(AndroidApp* android
         const auto xOffset = boost::numeric_cast<int>(androidKeyEvent.GetXOffset());
         const auto yOffset = boost::numeric_cast<int>(androidKeyEvent.GetYOffset());
 
-        if (!middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseUp, WindowPoint{ xOffset, yOffset }, VirtualKeysTypes{}))
+        if (const WindowPoint windowPoint{ xOffset, yOffset };
+            !middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseUp, windowPoint, VirtualKeysTypes{}))
         {
             androidApp->SetDestroyRequested(1);
         }
@@ -267,7 +270,8 @@ int Framework::AndroidCallBack<MiddleLayer>::ActionMoveMessage(AndroidApp* andro
         const auto xOffset = boost::numeric_cast<int>(androidKeyEvent.GetXOffset());
         const auto yOffset = boost::numeric_cast<int>(androidKeyEvent.GetYOffset());
 
-        if (!middleLayer->Motion(WindowPoint{ xOffset, yOffset }, VirtualKeysTypes{}))
+        if (const WindowPoint windowPoint{ xOffset, yOffset };
+            !middleLayer->Motion(windowPoint, VirtualKeysTypes{}))
         {
             androidApp->SetDestroyRequested(1);
         }

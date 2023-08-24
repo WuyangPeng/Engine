@@ -1,29 +1,30 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.4 (2019/09/17 09:38)
+///	Copyright (c) 2010-2023
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	版本：0.9.1.3 (2023/08/10 11:29)
 
 #ifndef OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_TESTING_OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_TESTING_H
 #define OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_TESTING_OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_TESTING_H
 
-#include "System/Windows/Flags/WindowsFlags.h"
-#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "Framework/OpenGLGlutCallBackUnitTestSuiteTesting/OpenGLGlutCallBack.h"
 
 namespace OpenGLGlutCallBackUnitTestSuiteTesting
 {
-    class OpenGLGlutCallBack;
-
     class OpenGLGlutCallBackUnitTestSuiteTesting : public CoreTools::UnitTest
     {
     public:
         using ClassType = OpenGLGlutCallBackUnitTestSuiteTesting;
         using ParentType = UnitTest;
-        using HWnd = System::WindowsHWnd;
+
+        using OpenGLGlutCallBackWeakPtr = std::weak_ptr<OpenGLGlutCallBack>;
 
     public:
-        explicit OpenGLGlutCallBackUnitTestSuiteTesting(const OStreamShared& ostream, OpenGLGlutCallBack* message);
+        explicit OpenGLGlutCallBackUnitTestSuiteTesting(const OStreamShared& stream, const OpenGLGlutCallBackWeakPtr& message);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -36,7 +37,7 @@ namespace OpenGLGlutCallBackUnitTestSuiteTesting
         void DoRunUnitTest() final;
 
     private:
-        OpenGLGlutCallBack* m_Message;
+        OpenGLGlutCallBackWeakPtr message;
     };
 }
 

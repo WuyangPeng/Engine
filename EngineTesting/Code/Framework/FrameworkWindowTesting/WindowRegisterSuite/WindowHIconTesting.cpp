@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 23:07)
+///	版本：0.9.1.3 (2023/08/10 13:58)
 
 #include "WindowHIconTesting.h"
 #include "resource.h"
@@ -18,12 +18,7 @@
 
 #include <algorithm>
 
-namespace Framework
-{
-    using TestingType = WindowHIcon;
-}
-
-Framework::WindowHIconTesting::WindowHIconTesting(const OStreamShared& stream, HInstance instance)
+Framework::WindowHIconTesting::WindowHIconTesting(const OStreamShared& stream, WindowsHInstance instance)
     : ParentType{ stream },
       instance{ instance },
       container{ { 0, System::gApplication },
@@ -56,22 +51,22 @@ void Framework::WindowHIconTesting::MainTest()
 
 void Framework::WindowHIconTesting::ConstructorTest()
 {
-    for_each(container.begin(), container.end(), [this](const auto& value) {
-        const TestingType windowHIcon1{ value.second };
-        ASSERT_EQUAL(windowHIcon1.GetHIcon(), System::LoadSystemIcon(nullptr, value.second));
+    std::ranges::for_each(container, [this](const auto& element) {
+        const WindowHIcon windowHIcon{ element.second };
+        ASSERT_EQUAL(windowHIcon.GetHIcon(), System::LoadSystemIcon(nullptr, element.second));
     });
 
-    const TestingType windowHIcon2{ instance, IDI_ICON1 };
-    ASSERT_EQUAL(windowHIcon2.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
+    const WindowHIcon windowHIcon{ instance, IDI_ICON1 };
+    ASSERT_EQUAL(windowHIcon.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
 }
 
 void Framework::WindowHIconTesting::CreateTest()
 {
-    for_each(container.begin(), container.end(), [this](const auto& value) {
-        const auto windowHIcon1 = TestingType::Create(instance, true, value.first);
-        ASSERT_EQUAL(windowHIcon1.GetHIcon(), System::LoadSystemIcon(nullptr, value.second));
+    std::ranges::for_each(container, [this](const auto& element) {
+        const auto windowHIcon = WindowHIcon::Create(instance, true, element.first);
+        ASSERT_EQUAL(windowHIcon.GetHIcon(), System::LoadSystemIcon(nullptr, element.second));
     });
 
-    const auto windowHIcon2 = TestingType::Create(instance, false, IDI_ICON1);
-    ASSERT_EQUAL(windowHIcon2.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
+    const auto windowHIcon = WindowHIcon::Create(instance, false, IDI_ICON1);
+    ASSERT_EQUAL(windowHIcon.GetHIcon(), System::LoadSystemIcon(instance, System::MakeIntreSource(IDI_ICON1)));
 }

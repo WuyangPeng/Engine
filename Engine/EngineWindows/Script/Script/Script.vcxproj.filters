@@ -40,14 +40,8 @@
     <Filter Include="Helper 头文件">
       <UniqueIdentifier>{9f67c3b5-d757-46eb-b93f-c432c22a217f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Python 头文件\Detail">
-      <UniqueIdentifier>{275dac2a-42c5-4448-ad0d-d83ed6774d46}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Python 源文件">
       <UniqueIdentifier>{b1b672ae-fe4d-4f16-ba45-19903d424480}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Python 源文件\Detail">
-      <UniqueIdentifier>{362e776b-5444-41ec-abee-6a678b321839}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

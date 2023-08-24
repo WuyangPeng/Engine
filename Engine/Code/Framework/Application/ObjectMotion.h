@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:45)
+///	版本：0.9.1.3 (2023/08/09 14:40)
 
 #ifndef FRAMEWORK_APPLICATION_OBJECT_MOTION_H
 #define FRAMEWORK_APPLICATION_OBJECT_MOTION_H
@@ -26,6 +26,7 @@ namespace Framework
     {
     public:
         NON_COPY_TYPE_DECLARE(ObjectMotion);
+
         using Matrix = Mathematics::MatrixF;
         using AVector = Mathematics::AVectorF;
         using Transform = Rendering::TransformF;
@@ -40,10 +41,10 @@ namespace Framework
         NODISCARD bool MoveObject(float rotationSpeed);
         void RotateTrackBall(const ConstCameraSharedPtr& camera);
 
-        void SetDoRoll(int value) noexcept;
-        void SetDoYaw(int value) noexcept;
-        void SetDoPitch(int value) noexcept;
-        void SetTrackBallDow(bool value) noexcept;
+        void SetDoRoll(int doRoll) noexcept;
+        void SetDoYaw(int doYaw) noexcept;
+        void SetDoPitch(int doPitch) noexcept;
+        void SetTrackBallDow(bool trackBallDow) noexcept;
         NODISCARD bool GetTrackBallDow() const noexcept;
 
         void SetBeginTrack(float xTrack, float yTrack) noexcept;

@@ -1,0 +1,8 @@
+$Copyright$
+
+#ifndef $ModuleUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_H
+#define $ModuleUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_H
+
+#include "$MiddleLayerName$Manager.h"
+
+#endif  // $ModuleUppercase$_MIDDLE_LAYER_$MiddleLayerUppercase$_H

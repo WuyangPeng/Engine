@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:22)
+///	版本：0.9.1.3 (2023/08/05 17:45)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_H
@@ -25,16 +25,9 @@ namespace Framework
     public:
         NON_COPY_TYPE_DECLARE(ModelViewControllerMiddleLayer);
         using ParentType = MiddleLayerInterface;
-        using MiddleLayerSharedPtr = MiddleLayerInterfaceSharedPtr;
-        using ConstMiddleLayerSharedPtr = ConstMiddleLayerInterfaceSharedPtr;
 
     public:
         ModelViewControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
-        ~ModelViewControllerMiddleLayer() noexcept = default;
-        ModelViewControllerMiddleLayer(const ModelViewControllerMiddleLayer& rhs) noexcept = delete;
-        virtual ModelViewControllerMiddleLayer& operator=(const ModelViewControllerMiddleLayer& rhs) noexcept = delete;
-        ModelViewControllerMiddleLayer(ModelViewControllerMiddleLayer&& rhs) noexcept;
-        virtual ModelViewControllerMiddleLayer& operator=(ModelViewControllerMiddleLayer&& rhs) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

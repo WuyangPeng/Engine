@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2022
-///	Threading Core Render Engine
+/// Copyright (c) 2010-2023
+/// Threading Core Render Engine
 ///
-///	作者：彭武阳，彭晔恩，彭晔泽
-///	联系作者：94458936@qq.com
+/// 作者：彭武阳，彭晔恩，彭晔泽
+/// 联系作者：94458936@qq.com
 ///
-///	标准：std:c++20
-///	最后的霸王版本：0.8.0.12 (2022/07/29 21:25)
+/// 标准：std:c++20
+/// 版本：0.9.1.3 (2023/08/21 10:43)
 
 #ifndef DATABASE_SERVER_DATABASE_SERVER_MESSAGE_H
 #define DATABASE_SERVER_DATABASE_SERVER_MESSAGE_H
 
-#include "DatabaseServer/DatabaseServerMiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"
+#include "DatabaseServer/DatabaseServerMiddleLayer/ArtificialIntelligence/ArtificialIntelligenceManager.h"
 #include "DatabaseServer/DatabaseServerMiddleLayer/Audio/AudioManager.h"
 #include "DatabaseServer/DatabaseServerMiddleLayer/CameraSystems/CameraSystemsManager.h"
 #include "DatabaseServer/DatabaseServerMiddleLayer/Event/EventManager.h"
@@ -23,7 +23,8 @@
 #include "DatabaseServer/DatabaseServerMiddleLayer/Rendering/RenderingManager.h"
 #include "DatabaseServer/DatabaseServerMiddleLayer/Resource/ResourceManager.h"
 #include "DatabaseServer/DatabaseServerMiddleLayer/System/SystemManager.h"
-#include "CoreTools/Console/ConsoleAlloc.h" 
+#include "CoreTools/Console/ConsoleAlloc.h"
+#include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/MiddleLayer/EngineMiddleLayerContainer.h"
 #include "Framework/MiddleLayer/ObjectLogicManager.h"
 #include "Framework/WindowProcess/WindowMessage.h"
@@ -31,7 +32,7 @@
 
 namespace DatabaseServer
 {
-    using ObjectLogicManager = Framework::ObjectLogicManager<DatabaseServerMiddleLayer::ObjectLogicManager, DatabaseServerMiddleLayer::ArtificialIntellegenceManager>;
+    using ObjectLogicManager = Framework::ObjectLogicManager<DatabaseServerMiddleLayer::ObjectLogicManager, DatabaseServerMiddleLayer::ArtificialIntelligenceManager>;
     using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
                                                                   DatabaseServerMiddleLayer::InputManager,
                                                                   DatabaseServerMiddleLayer::NetworkManager,
@@ -45,7 +46,6 @@ namespace DatabaseServer
                                                                   DatabaseServerMiddleLayer::CameraSystemsManager,
                                                                   DatabaseServerMiddleLayer::RenderingManager,
                                                                   DatabaseServerMiddleLayer::GUIManager>;
-
     using MessageType = Framework::WindowMessage<MiddleLayerType>;
 
     class DatabaseServerMessage : public MessageType
@@ -54,13 +54,16 @@ namespace DatabaseServer
         using ClassType = DatabaseServerMessage;
         using ParentType = MessageType;
 
+        using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+
     public:
-        explicit DatabaseServerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
+        DatabaseServerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     private:
-        CoreTools::ConsoleAlloc alloc;
+        ConsoleAlloc alloc;
     };
 
     using DatabaseServerMessageWindowProcessHandle = Framework::WindowProcessHandle<DatabaseServerMessage>;

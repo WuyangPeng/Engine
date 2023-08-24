@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:51)
+///	版本：0.9.1.3 (2023/08/14 13:47)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_SUITE_OPENGL_GLUT_FRAME_BUILD_TESTING_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_SUITE_OPENGL_GLUT_FRAME_BUILD_TESTING_H
@@ -14,7 +14,7 @@
 
 namespace Framework
 {
-    class OpenGLGlutFrameBuildTesting : public CoreTools::UnitTest
+    class OpenGLGlutFrameBuildTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = OpenGLGlutFrameBuildTesting;
@@ -26,9 +26,8 @@ namespace Framework
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
-    private:
         void MainTest() noexcept;
     };
 }

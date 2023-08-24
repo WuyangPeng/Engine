@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 18:01)
+///	版本：0.9.1.3 (2023/08/10 17:51)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -16,7 +16,7 @@
 #include "Framework/AndroidFrame/AndroidProcessDetail.h"
 #include "Framework/MainFunctionHelper/AndroidMainFunctionHelperDetail.h"
 
-AndroidMessageLoopTesting::TestingHelper::TestingHelper(AndroidApp* state, const Framework::EnvironmentDirectory& environmentDirectory)
+AndroidMessageLoopTesting::TestingHelper::TestingHelper(AndroidApp* state, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ state, environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
@@ -26,13 +26,14 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AndroidMessageLoopTesting, TestingHelper)
 
 int AndroidMessageLoopTesting::TestingHelper::RunAndroidMainLoop()
 {
-    Framework::AndroidMessageLoop loop(GetAndroidApp(), DisplayPtr);
+    Framework::AndroidMessageLoop loop(GetAndroidApp(), Display);
 
     loop.EnterMessageLoop();
 
     return 0;
 }
 
-void AndroidMessageLoopTesting::TestingHelper::DisplayPtr([[maybe_unused]] AndroidApp* state, [[maybe_unused]] int64_t timeDelta) noexcept
+void AndroidMessageLoopTesting::TestingHelper::Display(AndroidApp* state, int64_t timeDelta) noexcept
 {
+    System::UnusedFunction(state, timeDelta);
 }

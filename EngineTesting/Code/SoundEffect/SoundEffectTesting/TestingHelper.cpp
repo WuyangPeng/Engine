@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/09 19:30)
+///	版本：0.9.1.3 (2023/08/03 14:59)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -25,7 +25,6 @@ SoundEffect::TestingHelper::TestingHelper(int argc, char** argv)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(SoundEffect, TestingHelper)
 
-// private
 void SoundEffect::TestingHelper::InitSuite()
 {
     AddHelperSuite();

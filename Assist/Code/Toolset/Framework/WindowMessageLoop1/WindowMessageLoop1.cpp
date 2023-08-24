@@ -9,6 +9,7 @@
 
 #include "WindowMessageLoop1.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/LogMacro.h"
 #include "Framework/MainFunctionHelper/WindowMainFunctionHelperDetail.h"
 #include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h"
 
@@ -24,10 +25,14 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, WindowMessageLoop1)
 
 int Framework::WindowMessageLoop1::EnterMessageLoop()
 {
-    const auto hWnd = GetHwnd();
+    const auto hWnd = GetHWnd();
 
     System::String className{};
-    MAYBE_UNUSED const auto value = System::GetSystemClassName(hWnd, className);
+
+    if (!System::GetSystemClassName(hWnd, className))
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("GetSystemClassName Ê§°Ü¡£"));
+    }
 
     EnterOldMessageLoop(className);
     EnterNewMessageLoop(className);
@@ -53,7 +58,10 @@ void Framework::WindowMessageLoop1::EnterOldMessageLoop(const String& className)
     const WindowInstanceParameter instanceParameter{ instance, className };
     const WindowCreateHandle create{ instanceParameter, createParameter, size };
 
-    loop.EnterMessageLoop(create.GetHwnd());
+    if (!loop.EnterMessageLoop(create.GetHWnd()))
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("EnterMessageLoop Ê§°Ü¡£"));
+    }
 }
 
 void Framework::WindowMessageLoop1::EnterNewMessageLoop(const String& className)
@@ -69,5 +77,8 @@ void Framework::WindowMessageLoop1::EnterNewMessageLoop(const String& className)
     const WindowInstanceParameter instanceParameter{ instance, className };
     const WindowCreateHandle create{ instanceParameter, createParameter, size };
 
-    loop.EnterMessageLoop(create.GetHwnd());
+    if (!loop.EnterMessageLoop(create.GetHWnd()))
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("EnterMessageLoop Ê§°Ü¡£"));
+    }
 }

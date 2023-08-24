@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:49)
+///	版本：0.9.1.3 (2023/08/09 15:29)
 
 #include "Framework/FrameworkExport.h"
 
@@ -14,13 +14,13 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Rendering/RendererEngine/RendererParameter.h"
 
-Framework::WindowApplicationInformationImpl::WindowApplicationInformationImpl(const String& windowTitle, const WindowSize& size, const WindowPoint& point, bool allowResize)
-    : windowTitle{ windowTitle },
-      size{ size },
+Framework::WindowApplicationInformationImpl::WindowApplicationInformationImpl(String windowTitle, const WindowSize& size, const WindowPoint& point, bool allowResize)
+    : windowTitle{ std::move(windowTitle) },
+      windowSize{ size },
       position{ point },
       style{ allowResize ?
                  WindowsStyles::Default :
-                 // 这里删除 WS_THICKFRAME 和 WS_MAXIMIZEBOX,它们都允许调整窗口的大小
+                 // 这里删除 ThickFrame 和 MaximizeBox，它们都允许调整窗口的大小。
                  WindowsStyles::Overlapped | WindowsStyles::Caption | WindowsStyles::SysMenu | WindowsStyles::MinimizeBox | WindowsStyles::Visible },
       windowName{ SYSTEM_TEXT("Window") },
       windowPictorial{ System::WindowsBrushTypes::WhiteBrush }
@@ -36,11 +36,11 @@ Framework::WindowApplicationInformationImpl::WindowApplicationInformationImpl(co
 
 Framework::WindowApplicationInformationImpl::WindowApplicationInformationImpl(WindowsHInstance instance, const RendererParameter& rendererParameter)
     : windowTitle{ CoreTools::StringConversion::MultiByteConversionStandard(rendererParameter.GetWindowTitle()) },
-      size{ rendererParameter.GetWidth(), rendererParameter.GetHeight() },
+      windowSize{ rendererParameter.GetWidth(), rendererParameter.GetHeight() },
       position{ rendererParameter.GetXPosition(), rendererParameter.GetYPosition() },
       style{ rendererParameter.IsAllowResize() ?
                  WindowsStyles::Default :
-                 // 这里删除 WS_THICKFRAME 和 WS_MAXIMIZEBOX,它们都允许调整窗口的大小
+                 // 这里删除 ThickFrame 和 MaximizeBox，它们都允许调整窗口的大小。
                  WindowsStyles::Overlapped | WindowsStyles::Caption | WindowsStyles::SysMenu | WindowsStyles::MinimizeBox | WindowsStyles::Visible },
       windowName{ rendererParameter.GetWindowClassName(), rendererParameter.GetWindowMenuName() },
       windowPictorial{ GetWindowPictorial(instance, rendererParameter) }
@@ -48,7 +48,6 @@ Framework::WindowApplicationInformationImpl::WindowApplicationInformationImpl(Wi
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-// private
 Framework::WindowPictorial Framework::WindowApplicationInformationImpl::GetWindowPictorial(WindowsHInstance instance, const RendererParameter& rendererParameter)
 {
     const auto icon = rendererParameter.GetIcon();
@@ -87,26 +86,29 @@ int Framework::WindowApplicationInformationImpl::GetWidth() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return size.GetWindowWidth();
+    return windowSize.GetWindowWidth();
 }
 
 int Framework::WindowApplicationInformationImpl::GetHeight() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return size.GetWindowHeight();
+    return windowSize.GetWindowHeight();
 }
 
 float Framework::WindowApplicationInformationImpl::GetAspectRatio() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    const auto height = GetHeight();
-
-    if (height != 0)
-        return GetWidth() / static_cast<float>(height);
+    if (const auto height = GetHeight();
+        height != 0)
+    {
+        return static_cast<float>(GetWidth()) / static_cast<float>(height);
+    }
     else
+    {
         return 0.0f;
+    }
 }
 
 std::string Framework::WindowApplicationInformationImpl::GetWindowTitleWithMultiByte() const
@@ -120,7 +122,7 @@ Framework::WindowSize Framework::WindowApplicationInformationImpl::GetWindowSize
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return size;
+    return windowSize;
 }
 
 System::WindowsStyles Framework::WindowApplicationInformationImpl::GetStyle() const noexcept
@@ -130,11 +132,11 @@ System::WindowsStyles Framework::WindowApplicationInformationImpl::GetStyle() co
     return style;
 }
 
-void Framework::WindowApplicationInformationImpl::SetWindowSize(const WindowSize& aSize) noexcept
+void Framework::WindowApplicationInformationImpl::SetWindowSize(const WindowSize& size) noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    size = aSize;
+    windowSize = size;
 }
 
 Framework::WindowName Framework::WindowApplicationInformationImpl::GetWindowName() const noexcept

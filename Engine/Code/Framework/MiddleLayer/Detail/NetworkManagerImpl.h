@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:19)
+///	版本：0.9.1.3 (2023/08/08 14:37)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_NETWORK_MANAGER_INTERFACE_IMPL_H
 #define FRAMEWORK_MIDDLE_LAYER_NETWORK_MANAGER_INTERFACE_IMPL_H
@@ -23,6 +23,7 @@ namespace Framework
     {
     public:
         using ClassType = NetworkManagerImpl;
+
         using SocketType = Network::SocketType;
         using MessageEventPriority = Network::MessageEventPriority;
         using MessageInterfaceSharedPtr = Network::MessageInterfaceSharedPtr;
@@ -46,7 +47,7 @@ namespace Framework
         NODISCARD SendSocketManagerSharedPtr GetSendSocketManager() noexcept;
         NODISCARD ConstSendSocketManagerSharedPtr GetSendSocketManager() const noexcept;
 
-        void Send(const Network::SocketData& socketData, uint64_t socketID, const MessageInterfaceSharedPtr& message);
+        void Send(const Network::SocketData& socketData, int64_t socketId, const MessageInterfaceSharedPtr& message);
 
     private:
         SendSocketManagerSharedPtr sendSocketManager;

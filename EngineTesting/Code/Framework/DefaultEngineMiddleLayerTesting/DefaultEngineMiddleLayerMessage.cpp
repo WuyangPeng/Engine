@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 18:11)
+///	版本：0.9.1.3 (2023/08/11 13:46)
 
 #include "DefaultEngineMiddleLayerMessage.h"
 #include "Testing.h"
@@ -17,8 +17,8 @@
 #include "Framework/MiddleLayer/MiddleLayerInterface.h"
 #include "Framework/WindowProcess/WindowMessageDetail.h"
 
-DefaultEngineMiddleLayer::DefaultEngineMiddleLayerMessage::DefaultEngineMiddleLayerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory)
-    : ParentType{ delta, environmentDirectory }, alloc{ CoreTools::ConsoleAlloc::Create() }
+DefaultEngineMiddleLayer::DefaultEngineMiddleLayerMessage::DefaultEngineMiddleLayerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ delta, environmentDirectory }, alloc{ ConsoleAlloc::Create() }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

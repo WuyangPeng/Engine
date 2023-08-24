@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.12 (2023/06/13 14:16)
+///	版本：0.9.1.3 (2023/08/05 14:54)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_FRAME_BUILD_DETAIL_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_FRAME_BUILD_DETAIL_H
@@ -19,15 +19,16 @@
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/LogMacro.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
 template <typename OpenGLGlutProcess>
-Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::OpenGLGlutFrameBuild(const GLUTApplicationInformation& glutInformation, const EnvironmentDirectory& environmentDirectory)
+Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::OpenGLGlutFrameBuild(GLUTApplicationInformation glutInformation, const EnvironmentDirectory& environmentDirectory)
     : openGLGlutProcess{ System::gMicroseconds / interval },
-      glutInformation{ glutInformation },
-      windowID{ 0 },
-      menuID{ 0 },
+      glutInformation{ std::move(glutInformation) },
+      windowId{ 0 },
+      menuId{ 0 },
       rendererParameter{ GetRendererParameter(environmentDirectory) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -44,7 +45,7 @@ std::string Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::GetRendererParam
 template <typename OpenGLGlutProcess>
 bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::IsValid() const noexcept
 {
-    if (0 <= windowID && 0 <= menuID)
+    if (0 <= windowId && 0 <= menuId)
         return true;
     else
         return false;
@@ -64,12 +65,13 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::InitOpenGLGlutContext(i
         OpenGLInit() &&
         SetupRenderStatus() &&
         CreateMenu())
+    {
         return true;
+    }
 
     return false;
 }
 
-// private
 template <typename OpenGLGlutProcess>
 bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::PreCreate()
 {
@@ -78,7 +80,6 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::PreCreate()
     return openGLGlutProcess.PreCreate();
 }
 
-// private
 template <typename OpenGLGlutProcess>
 bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::InitGlutFunctionLibrary(int argc, char** argv) noexcept
 {
@@ -90,33 +91,34 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::InitGlutFunctionLibrary
     System::GlutInitWindowSize(rendererParameter.GetWidth(), rendererParameter.GetHeight());
     System::GlutInitContextVersion(glutInformation.GetOpenGLMajorVersion(), glutInformation.GetOpenGLMinorVersion());
 
-    System::GlutSetOption(System::GlutOption::WindowClose, System::EnumCastUnderlying(System::GlutExtension::GlutMainLoopReturns));
+    GlutSetOption(System::GlutOption::WindowClose, System::EnumCastUnderlying(System::GlutExtension::GlutMainLoopReturns));
 
-    MAYBE_UNUSED const auto result = System::RemoveConsoleCloseButton();
+    if (!System::RemoveConsoleCloseButton())
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Info, Framework, SYSTEM_TEXT("RemoveConsoleCloseButton 失败。"));
+    }
 
     return true;
 }
 
-// private
 template <typename OpenGLGlutProcess>
 bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::CreateGlutWindow()
 {
-    windowID = System::GlutCreateWindow(rendererParameter.GetWindowTitle());
+    windowId = System::GlutCreateWindow(rendererParameter.GetWindowTitle());
 
-    if (windowID == 0)
+    if (windowId == 0)
     {
         return false;
     }
     else
     {
-        openGLGlutProcess.SetWindowID(windowID);
+        openGLGlutProcess.SetWindowId(windowId);
         openGLGlutProcess.SetMillisecond(System::EnumCastUnderlying(glutInformation.GetFrame()));
 
         return true;
     }
 }
 
-// private
 template <typename OpenGLGlutProcess>
 bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::SetCallBackFunction() noexcept
 {
@@ -141,7 +143,6 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::SetCallBackFunction() n
     return true;
 }
 
-// private
 template <typename OpenGLGlutProcess>
 bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::SetupRenderStatus() noexcept
 {
@@ -150,20 +151,18 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::SetupRenderStatus() noe
     return true;
 }
 
-// private
 template <typename OpenGLGlutProcess>
 bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::OpenGLInit()
 {
     return System::OpenGLInit();
 }
 
-// private
 template <typename OpenGLGlutProcess>
 bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::CreateMenu() noexcept
 {
-    menuID = System::GlutCreateMenu(openGLGlutProcess.GetProcessMenuCallback());
+    menuId = System::GlutCreateMenu(openGLGlutProcess.GetProcessMenuCallback());
 
-    if (menuID == 0)
+    if (menuId == 0)
         return false;
 
     return true;

@@ -365,7 +365,6 @@ xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectD
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\DatabaseEntityCodeGenerationSuite.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\EntityHeaderFileGenerationTesting.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseEntityCodeGenerationSuite\EntitySourceFileGenerationTesting.h" />
-    <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseGenerateSuite\DatabaseGenerateSuite.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseTesting.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseContainerTesting.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\DatabaseInterfaceSuite\BasisDatabaseManagerTesting.h" />
@@ -399,36 +398,9 @@ xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectD
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\StatementSuite\StatementSuite.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\Database\DatabaseTesting\TestingHelper.h" />
-    <ClInclude Include="Resource\DatabaseEntity\Chapter.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Resource\DatabaseEntity\DatabaseEntity.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Resource\DatabaseEntity\DatabaseEntityFwd.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="Resource\DatabaseEntity\Chapter.h" />
+    <ClInclude Include="Resource\DatabaseEntity\DatabaseEntity.h" />
+    <ClInclude Include="Resource\DatabaseEntity\DatabaseEntityFwd.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\ConfigurationSuite\AnalysisDatabaseConfigurationTesting.cpp" />
@@ -457,16 +429,7 @@ xcopy "$(EngineInclude)/Database/DatabaseEntityCodeGeneration/*.txt" "$(ProjectD
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\Database\DatabaseTesting\TestingMain.cpp" />
-    <ClCompile Include="Resource\DatabaseEntity\Chapter.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Resource\DatabaseEntity\Chapter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\DatabaseEntity.json" />

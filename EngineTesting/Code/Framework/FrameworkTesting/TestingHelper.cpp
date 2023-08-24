@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:28)
+///	版本：0.9.1.3 (2023/08/11 18:22)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -18,17 +18,9 @@
 Framework::TestingHelper::TestingHelper(int argc, char** argv)
     : ParentType{ argc, argv, "框架测试" }
 {
-    CoreTools::ObjectManager::Create();
     InitSuite();
 
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Framework::TestingHelper::~TestingHelper() noexcept
-{
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
-
-    CoreTools::ObjectManager::Destroy();
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, TestingHelper)

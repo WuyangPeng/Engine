@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/09 20:09)
+///	版本：0.9.1.3 (2023/08/02 13:43)
 
 #ifndef INPUT_OUTPUT_TESTING_INPUT_INTERFACE_SUITE_H
 #define INPUT_OUTPUT_TESTING_INPUT_INTERFACE_SUITE_H

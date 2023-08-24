@@ -1,12 +1,3 @@
 TODO Level 4
 
-0.9.0.9
-  
-1.  （Helper）完成帮助模块。
-2.  （MysqlWrappers）完成MysqlWrappers模块。
-3.  （MysqlWrappers）完成MysqlWrappers模块的数据对象。
-4.  （MysqlWrappers）完成MysqlWrappers模块的会话。
-5.  （MysqlWrappers）完成MysqlWrappers模块的架构。
-6.  （MysqlWrappers）完成MysqlWrappers模块的采集。
-7.  （MysqlWrappers）完成MysqlWrappers模块的结果。
-8.  （MysqlWrappers）完成MysqlWrappers模块的表。 
+0.9.1.3

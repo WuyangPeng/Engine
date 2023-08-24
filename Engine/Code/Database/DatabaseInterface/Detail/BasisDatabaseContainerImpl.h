@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.9.0.10 (2023/05/25 16:48)
+///	版本：0.9.1.3 (2023/08/14 15:19)
 
 #ifndef DATABASE_DATABASE_INTERFACE_BASIS_DATABASE_CONTAINER_IMPL_H
 #define DATABASE_DATABASE_INTERFACE_BASIS_DATABASE_CONTAINER_IMPL_H
 
 #include "Database/DatabaseDll.h"
 
-#include "Database/Configuration/ConfigurationFwd.h"
 #include "Database/DatabaseInterface/BasisDatabase.h"
 
 #include <vector>
@@ -23,6 +22,7 @@ namespace Database
     {
     public:
         using ClassType = BasisDatabaseContainerImpl;
+
         using ObjectContainer = std::vector<BasisDatabase>;
         using ObjectContainerConstIter = ObjectContainer::const_iterator;
 

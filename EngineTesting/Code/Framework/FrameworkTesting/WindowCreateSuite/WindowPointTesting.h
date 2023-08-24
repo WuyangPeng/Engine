@@ -5,11 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.12 (2023/06/13 19:49)
+///	版本：0.9.1.3 (2023/08/11 19:32)
 
 #ifndef FRAMEWORK_WINDOW_CREATE_SUITE_WINDOW_POINT_TESTING_H
 #define FRAMEWORK_WINDOW_CREATE_SUITE_WINDOW_POINT_TESTING_H
 
+#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace Framework
@@ -26,7 +27,7 @@ namespace Framework
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
+        void DoRunUnitTest() override;
 
         void MainTest();
 
@@ -35,8 +36,11 @@ namespace Framework
         void WindowPointUseTest() noexcept;
         void LParamTest();
         void EqualTest();
-        void OstreamTest();
+        void OStreamTest();
         void ConstexprTest() noexcept;
+
+    private:
+        static constexpr System::WindowsWord gWordShift{ 16 };
     };
 }
 

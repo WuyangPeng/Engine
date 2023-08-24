@@ -10,7 +10,7 @@
 ----------------------------
 1.	Helper£¨°ïÖú£©
 
-¿ò¼Ü¿â°ïÖúÄ£¿é¡£ÊµÏÖÒÔÏÂ¹¦ÄÜ£º 
+¿ò¼Ü¿â°ïÖúÄ£¿é¡£
 £¨1£©ÓÃ»§ºê£ºÓÃÓÚÅÐ¶ÏÊÇ·ñÊ¹ÓÃ¾²Ì¬¿â¼°ÆäËûÓÃ»§Éè¶¨¡£ 
 £¨2£©Ö÷º¯ÊýºêÈë¿Úµã£º¸÷¸öÏµÍ³µÄmainº¯ÊýµÄÈë¿Úµãº¯ÊýµÄ·â×°¡£
 £¨3£©Ö÷º¯Êýºê£º¸÷¸öÏµÍ³µÄmainº¯Êýµ÷ÓÃµÄºê¶¨Òå¡£
@@ -20,7 +20,7 @@
 2.	MainFunctionHelper£¨Ö÷º¯Êý°ïÖú£©
 
 Ö÷º¯Êý°ïÖúÀà¡£·â×°ÁË¿ØÖÆÌ¨¡¢Windows¡¢OpenGL¡¢Android¡¢MacintoshµÈ²Ù×÷ÏµÍ³µÄÈë¿Úº¯Êý£¬Ê¹µÃ²»Í¬Æ½Ì¨¶¼ÄÜÕý³£ÔËÐÐ¡£
-ÊµÏÖÒÔÏÂ¹¦ÄÜ£º
+
 £¨1£©»·¾³Ä¿Â¼£º»·¾³Ä¿Â¼µÄÉèÖÃºÍ»ñÈ¡£¬¶ÁÈ¡ÎÄ¼þµÄÂ·¾¶Ä¬ÈÏ²»Ôö¼Ó»·¾³Ä¿Â¼£¬ÐèÒªµ÷ÓÃÕßÍ¨¹ý»·¾³Ä¿Â¼ÐÞ¸ÄÎÄ¼þÃû¡£
 £¨2£©Ö÷º¯Êý°ïÖú»ùÀà£ºÍâ²¿Àà¿ØÖÆµ¥ÀýµÄ³õÊ¼»¯ºÍÏú»Ù¡£ÄÚ²¿ÀàÄ¿Ç°Ö»±£´æ»·¾³Ä¿Â¼£¬´ýºóÐø¹¦ÄÜÌí¼Ó¿ò¼ÜËùÐèµÄ°ïÖúÐÅÏ¢¡£
 £¨3£©¿ØÖÆÌ¨Ö÷º¯Êý°ïÖú£º¿ØÖÆÌ¨Ö÷º¯Êý°ïÖúÀà£¬»ñÈ¡ÃüÁîÐÐ²ÎÊý¶ÔÏó£¬ÒÔÊµÏÖ¸÷¸öÆ½Ì¨µÄ¿ØÖÆÌ¨Èë¿Úµã¡£
@@ -33,7 +33,7 @@
 3.	WindowCreate£¨´°¿Ú´´½¨£©
 
 ´°¿Ú´´½¨Ïà¹ØÀà¡£Ö÷ÒªÊµÏÖWindowsÆ½Ì¨µÄ¹¦ÄÜ£¬°üÀ¨´°¿Úµã¡¢´óÐ¡¡¢´´½¨²ÎÊý¡¢ÊµÀý²ÎÊý¡¢¾ä±úµÈ£¬²¢Ê¹ÆäËû²Ù×÷ÏµÍ³Ò²ÄÜÕý³£µ÷ÓÃÕâÐ©½Ó¿Ú¡£
-ÊµÏÖÒÔÏÂ¹¦ÄÜ£º
+
 £¨1£©´°¿Ú´óÐ¡£º´°¿Ú´óÐ¡Àà£¬²¢¶¨ÒåÁËÏà¹Ø²Ù×÷ÔËËã·û¡£
 £¨2£©´°¿Úµã£º´°¿ÚµãÀà£¬²¢¶¨ÒåÁËÏà¹Ø²Ù×÷ÔËËã·û¡£
 £¨3£©´°¿Ú²ÎÊý£º´´½¨´°¿ÚËùÐèÒª²ÎÊýµÄ·â×°£¬ÒÔ¼ò»¯º¯Êý´«µÝ¡£
@@ -43,7 +43,7 @@
 4.	WindowProcess£¨´°¿Ú½ø³Ì£©
 
 Windows´°¿Ú½ø³ÌÏà¹ØÀà¡£Ö÷ÒªÊµÏÖÐéÄâ¼üÀàÐÍ¡¢½ø³Ì¹ÜÀí¡¢½ø³Ì¾ä±ú¡¢ÏûÏ¢Ñ­»·ºÍÏûÏ¢½Ó¿ÚµÄ»ùÀà¡£
-ÊµÏÖÒÔÏÂ¹¦ÄÜ£º
+
 £¨1£©ÐéÄâ¼üÀàÐÍ£ºÖ§³ÖWindowsÆ½Ì¨ºÍGLUTµÄÐéÄâ°´¼ü¡£
 £¨2£©ÏûÏ¢Ñ­»·£ºÏûÏ¢Ñ­»·Àà£¬·â×°WindowsÆ½Ì¨µÄÖ÷ÏûÏ¢Ñ­»·Èë¿Ú¡£
 £¨3£©ÏûÏ¢½Ó¿Ú£ºWindowsÆ½Ì¨ÏûÏ¢½Ó¿ÚµÄ»ùÀàºÍ´øÖÐ¼ä²ã²ÎÊýµÄÏûÏ¢Àà¡£
@@ -55,7 +55,7 @@ Windows´°¿Ú½ø³ÌÏà¹ØÀà¡£Ö÷ÒªÊµÏÖÐéÄâ¼üÀàÐÍ¡¢½ø³Ì¹ÜÀí¡¢½ø³Ì¾ä±ú¡¢ÏûÏ¢Ñ­»·ºÍÏûÏ¢½Ó¿
 5.	WindowRegister£¨´°¿Ú×¢²á£©
 
 WindowsµÄ´°¿Ú×¢²áÏà¹ØÀà¡£°üÀ¨´°¿Ú×¢²áÐèÒªµÄ¸÷ÖÖ²ÎÊý£¬ÒÔ¼°¹â±ê¡¢Í¼±ê¡¢±³¾°Ë¢µÈ¡£
-ÊµÏÖÒÔÏÂ¹¦ÄÜ£º
+
 £¨1£©×¢²á²ÎÊý£ºWindowsÆ½Ì¨×¢²á´°¿ÚËùÐè²ÎÊý¡£
 £¨2£©×¢²áÍ¼±êÀà£ºWindowsÆ½Ì¨×¢²á´°¿ÚËùÐè¹â±ê¡¢Í¼±ê¡¢±³¾°Ë¢µÈ¡£
 £¨3£©×¢²áÃû×Ö£ºWindowsÆ½Ì¨×¢²á´°¿ÚËùÐèÃû×ÖºÍ²Ëµ¥Ãû×Ö¡£
@@ -65,7 +65,7 @@ WindowsµÄ´°¿Ú×¢²áÏà¹ØÀà¡£°üÀ¨´°¿Ú×¢²áÐèÒªµÄ¸÷ÖÖ²ÎÊý£¬ÒÔ¼°¹â±ê¡¢Í¼±ê¡¢±³¾°Ë¢µÈ¡£
 6.	Application£¨Ó¦ÓÃ£©
 
 ·â×°ÁË¸÷¸öÏµÍ³µÄ¼üÅÌºÍÊó±êµÄ¿ØÖÆ£¬¸÷Æ½Ì¨µÄÓ¦ÓÃ»ù´¡ÐÅÏ¢ºÍÏñËØ³¡¾°¡¢ÉãÏñ»úÔË¶¯¡¢¶ÔÏóÔË¶¯µÈÓ¦ÓÃÏà¹ØµÄÀà¡£
-ÊµÏÖÒÔÏÂ¹¦ÄÜ£º
+
 £¨1£©¼üÅÌºÍÊó±êµÄ¿ØÖÆ£º¸÷Æ½Ì¨µÄ¼üÅÌºÍÊó±êµÄ¿ØÖÆµÄ½Ó¿Ú£¬ÓÃÓÚ¼àÌý¼üÅÌºÍÊó±êÏûÏ¢¡£
 £¨2£©×ÖÌåÐÅÏ¢£º¸÷Æ½Ì¨µÄ×ÖÌåÐÅÏ¢£¬ÒÔ»ñµÃ×Ö·û´®µÄ¸ß¶ÈºÍ¿í¶È¡£
 £¨3£©ÐÔÄÜ²âÁ¿£º³ÌÐòµÄÐÔÄÜ²âÁ¿£¬²¢½«ÐÅÏ¢´òÓ¡µ½¿ØÖÆÌ¨¡£
@@ -80,7 +80,7 @@ WindowsµÄ´°¿Ú×¢²áÏà¹ØÀà¡£°üÀ¨´°¿Ú×¢²áÐèÒªµÄ¸÷ÖÖ²ÎÊý£¬ÒÔ¼°¹â±ê¡¢Í¼±ê¡¢±³¾°Ë¢µÈ¡£
 
 ·â×°ÁË¸÷¸öÖÐ¼ä²ãÀà£¬°üÀ¨Ä£ÐÍ¡¢ÊÓÍ¼¡¢¿ØÖÆÆ÷ÏµÍ³¡¢º¬ÏñËØ»æÖÆµÄÖÐ¼ä²ã¡¢ÉãÏñ»úºÍ¶ÔÏóÔË¶¯µÄÖÐ¼ä²ãºÍÒ»¸öÓÎÏ·ÏµÍ³¹ÜÀíÆ÷½á¹¹¡£
 Õâ¸öÓÎÏ·ÏµÍ³¹ÜÀíÆ÷·ÖÎªÊäÈë¹ÜÀíÆ÷¡¢ÍøÂç¹ÜÀíÆ÷¡¢¶ÔÏóÂß¼­¡¢ÎïÀíÄ£Äâ¡¢ÏûÏ¢¹ÜÀíÆ÷¡¢ÊÂ¼þ¹ÜÀíÆ÷¡¢ÏµÍ³¹ÜÀíÆ÷¡¢×ÊÔ´¹ÜÀíÆ÷¡¢ÒôÆµ¹ÜÀíÆ÷¡¢Ïà»úÏµÍ³¡¢äÖÈ¾¹ÜÀíÆ÷¡¢GUI¹ÜÀíÆ÷¹¹³É¡£
-ÊµÏÖÒÔÏÂ¹¦ÄÜ£º
+
 £¨1£©Ä£ÐÍ¡¢ÊÓÍ¼¡¢¿ØÖÆÆ÷ÏµÍ³£ºÊµÏÖÄ£ÐÍ¡¢ÊÓÍ¼¡¢¿ØÖÆÆ÷ÏµÍ³¡£
 £¨2£©ÓÎÏ·ÏµÍ³¹ÜÀíÆ÷ÏµÍ³£ºÊµÏÖÓÎÏ·ÏµÍ³¹ÜÀíÆ÷ÏµÍ³¡£
 
@@ -88,14 +88,14 @@ WindowsµÄ´°¿Ú×¢²áÏà¹ØÀà¡£°üÀ¨´°¿Ú×¢²áÐèÒªµÄ¸÷ÖÖ²ÎÊý£¬ÒÔ¼°¹â±ê¡¢Í¼±ê¡¢±³¾°Ë¢µÈ¡£
 8.	WindowsAPIFrame£¨WindowsAPI¿ò¼Ü£©
 
 ·â×°ÁËWindows API¿ò¼Ü¡£Ê¹µÃÆäËûÏµÍ³Ò²ÄÜÕý³£µ÷ÓÃWindows¿ò¼Ü¡£
-ÊµÏÖÒÔÏÂ¹¦ÄÜ£º
+
 £¨1£©Windows API¿ò¼Ü£ºÊµÏÖWindows API¿ò¼Ü£¬ÊµÏÖ´°¿Ú×¢²á¡¢´°¿Ú½ø³Ì¡¢´°¿Ú´´½¨µÄ¹¦ÄÜ¡£
 
 ----------------------------
 9.	OpenGLGlutFrame£¨GLUT¿ò¼Ü£©
 
 ·â×°ÁËOpenGL GLUT API¿ò¼Ü¡£Ê¹µÃ¸÷ÖÖÏµÍ³ÄÜÕý³£µ÷ÓÃOpenGL API¿ò¼Ü¡£»¹°üÀ¨»Øµ÷¡¢½ø³ÌµÈÏà¹ØÀà¡£
-ÊµÏÖÒÔÏÂ¹¦ÄÜ£º
+
 £¨1£©OpenGL GLUT»Øµ÷£ºÊµÏÖOpenGL GLUT API»Øµ÷ÏûÏ¢½Ó¿ÚÀà£¬½«ÏûÏ¢×ª·¢¸øÍ¨¹ýÏûÏ¢½Ó¿Ú¡£
 £¨2£©OpenGL GLUT½ø³Ì£ºÊµÏÖOpenGL GLUT API½ø³ÌÏà¹ØÀà£¬Á¬½Ó½ø³Ì¹ÜÀíµ¥ÀýºÍ¿ò¼ÜÀàµÄÍ¨ÐÅ£¬½«»Øµ÷º¯Êý×ª·¢¸øÏûÏ¢½Ó¿ÚÀà¡£
 £¨3£©OpenGL GLUT API¿ò¼Ü£ºÊµÏÖOpenGL GLUT API¿ò¼Ü£¬ÊµÏÖ´°¿Ú½ø³ÌµÄ¹¦ÄÜ¡£
@@ -104,7 +104,7 @@ WindowsµÄ´°¿Ú×¢²áÏà¹ØÀà¡£°üÀ¨´°¿Ú×¢²áÐèÒªµÄ¸÷ÖÖ²ÎÊý£¬ÒÔ¼°¹â±ê¡¢Í¼±ê¡¢±³¾°Ë¢µÈ¡£
 10.	AndroidFrame£¨Android¿ò¼Ü£©
 
 ·â×°ÁËAndroid¿ò¼Ü¡£Ê¹µÃÆäËûÏµÍ³Ò²ÄÜÕý³£µ÷ÓÃWindows¿ò¼Ü¡£»¹°üÀ¨»Øµ÷¡¢½ø³ÌµÈÏà¹ØÀà¡£
-ÊµÏÖÒÔÏÂ¹¦ÄÜ£º
+
 £¨1£©Android API½ø³Ì£ºÊµÏÖAndroid API½ø³ÌÏà¹ØÀà£¬Á¬½Ó½ø³Ì¹ÜÀíµ¥ÀýºÍ¿ò¼ÜÀàµÄÍ¨ÐÅ£¬½«»Øµ÷º¯Êý×ª·¢¸øÏûÏ¢½Ó¿ÚÀà¡£
 £¨2£©Android API»Øµ÷£ºÊµÏÖAndroid API»Øµ÷ÏûÏ¢½Ó¿ÚÀà£¬½«ÏûÏ¢×ª·¢¸øÍ¨¹ýÏûÏ¢½Ó¿Ú¡£
 £¨3£©Android APIÏûÏ¢Ñ­»·£ºÊµÏÖAndroid APIÏûÏ¢Ñ­»·£¬·â×°AndroidÆ½Ì¨µÄÖ÷ÏûÏ¢Ñ­»·Èë¿Ú¡£
@@ -114,7 +114,7 @@ WindowsµÄ´°¿Ú×¢²áÏà¹ØÀà¡£°üÀ¨´°¿Ú×¢²áÐèÒªµÄ¸÷ÖÖ²ÎÊý£¬ÒÔ¼°¹â±ê¡¢Í¼±ê¡¢±³¾°Ë¢µÈ¡£
 11. LinuxFrame£¨Linux¿ò¼Ü£©
 
 ·â×°ÁËLinux¿ò¼Ü¡£Ê¹µÃÆäËûÏµÍ³Ò²ÄÜÕý³£µ÷ÓÃLinux¿ò¼Ü¡£
-ÊµÏÖÒÔÏÂ¹¦ÄÜ£º
+
 £¨1£©Linux API»Øµ÷£ºÊµÏÖLinux API»Øµ÷ÏûÏ¢½Ó¿ÚÀà£¬½«ÏûÏ¢×ª·¢¸øÍ¨¹ýÏûÏ¢½Ó¿Ú¡£
 £¨2£©Linux API½ø³Ì£ºÊµÏÖLinux API½ø³ÌÏà¹ØÀà£¬Á¬½Ó½ø³Ì¹ÜÀíµ¥ÀýºÍ¿ò¼ÜÀàµÄÍ¨ÐÅ£¬½«»Øµ÷º¯Êý×ª·¢¸øÏûÏ¢½Ó¿ÚÀà¡£
 £¨3£©Linux API¿ò¼Ü£ºÊµÏÖLinux API¿ò¼Ü£¬ÊµÏÖ´°¿Ú½ø³ÌµÄ¹¦ÄÜ¡£
@@ -123,7 +123,7 @@ WindowsµÄ´°¿Ú×¢²áÏà¹ØÀà¡£°üÀ¨´°¿Ú×¢²áÐèÒªµÄ¸÷ÖÖ²ÎÊý£¬ÒÔ¼°¹â±ê¡¢Í¼±ê¡¢±³¾°Ë¢µÈ¡£
 12. MacintoshFrame£¨Macintosh¿ò¼Ü£©
 
 ·â×°ÁËMacintosh¿ò¼Ü¡£Ê¹µÃÆäËûÏµÍ³Ò²ÄÜÕý³£µ÷ÓÃMacintosh¿ò¼Ü¡£
-ÊµÏÖÒÔÏÂ¹¦ÄÜ£º
+
 £¨1£©Macintosh API»Øµ÷£ºÊµÏÖMacintosh API»Øµ÷ÏûÏ¢½Ó¿ÚÀà£¬½«ÏûÏ¢×ª·¢¸øÍ¨¹ýÏûÏ¢½Ó¿Ú¡£
 £¨2£©Macintosh API½ø³Ì£ºÊµÏÖMacintosh API½ø³ÌÏà¹ØÀà£¬Á¬½Ó½ø³Ì¹ÜÀíµ¥ÀýºÍ¿ò¼ÜÀàµÄÍ¨ÐÅ£¬½«»Øµ÷º¯Êý×ª·¢¸øÏûÏ¢½Ó¿ÚÀà¡£
 £¨3£©Macintosh API¿ò¼Ü£ºÊµÏÖMacintosh API¿ò¼Ü£¬ÊµÏÖ´°¿Ú½ø³ÌµÄ¹¦ÄÜ¡£
@@ -132,7 +132,7 @@ WindowsµÄ´°¿Ú×¢²áÏà¹ØÀà¡£°üÀ¨´°¿Ú×¢²áÐèÒªµÄ¸÷ÖÖ²ÎÊý£¬ÒÔ¼°¹â±ê¡¢Í¼±ê¡¢±³¾°Ë¢µÈ¡£
 13. ConsoleFrame£¨Console¿ò¼Ü£©
 
 ·â×°ÁËConsole¿ò¼Ü¡£Ê¹µÃ¸÷¸öÏµÍ³Ò²ÄÜÕý³£µ÷ÓÃConsole¿ò¼Ü¡£
-ÊµÏÖÒÔÏÂ¹¦ÄÜ£º
+
 £¨1£©Console»Øµ÷£ºÊµÏÖConsole»Øµ÷ÏûÏ¢½Ó¿ÚÀà£¬½«ÏûÏ¢×ª·¢¸øÍ¨¹ýÏûÏ¢½Ó¿Ú¡£
 £¨2£©Console½ø³Ì£ºÊµÏÖConsole½ø³ÌÏà¹ØÀà£¬Á¬½Ó½ø³Ì¹ÜÀíµ¥ÀýºÍ¿ò¼ÜÀàµÄÍ¨ÐÅ£¬½«»Øµ÷º¯Êý×ª·¢¸øÏûÏ¢½Ó¿ÚÀà¡£
 £¨3£©Console¿ò¼Ü£ºÊµÏÖConsole¿ò¼Ü£¬ÊµÏÖ¿ØÖÆÌ¨½ø³ÌµÄ¹¦ÄÜ¡£
